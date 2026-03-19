@@ -9,6 +9,7 @@ elevated:
 
     Para melhor segurança, reinicie-o sem permissões de administrador.
   title: Executando como Administrador
+file_explorer: Explorador de ficheiros
 resource:
   added: Um novo recurso foi adicionado
   download_failed_body: >-

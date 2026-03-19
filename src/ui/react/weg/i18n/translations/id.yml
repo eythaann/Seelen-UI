@@ -23,11 +23,13 @@ start:
   label: Menu Mulai
 taskbar_menu:
   add_file: Pin file khusus
-  add_folder: Pin folder khusus
   desktop: Tambahkan Modul Desktop
   media: Tambahkan modul media
   settings: Pengaturan
   start: Tambahkan modul Mulai
   task_manager: Manajer Tugas
+  trash_bin: Tambahkan Modul Recycle Bin
+trash_bin:
+  empty_bin: Kosongkan Tempat Sampah
 weg:
   empty: Tidak ada item untuk ditampilkan

@@ -23,11 +23,13 @@ start:
   label: સ્ટાર્ટ મેનૂ
 taskbar_menu:
   add_file: પિન કસ્ટમ ફાઇલ
-  add_folder: પિન કસ્ટમ ફોલ્ડર
   desktop: ડેસ્કટોપ મોડ્યુલ ઉમેરો
   media: મીડિયા મોડ્યુલ ઉમેરો
   settings: સેટિંગ્સ
   start: પ્રારંભ મોડ્યુલ ઉમેરો
   task_manager: ટાસ્ક મેનેજર
+  trash_bin: રિસાયકલ બિન મોડ્યુલ ઉમેરો
+trash_bin:
+  empty_bin: ખાલી રિસાયકલ બિન
 weg:
   empty: બતાવવા માટે કોઈ આઇટમ નથી

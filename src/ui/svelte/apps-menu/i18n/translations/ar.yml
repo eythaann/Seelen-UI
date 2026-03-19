@@ -5,6 +5,7 @@ folder: مجلد
 no_matching_items: لم يتم العثور على عناصر مطابقة لبحثك
 open_file_location: فتح موقع الملف
 pin: دبوس
+pin_to_dock: تثبيت على قفص الاتهام
 query:
   all: الجميع
   apps: تطبيقات

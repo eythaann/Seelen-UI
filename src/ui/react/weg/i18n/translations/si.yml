@@ -23,11 +23,13 @@ start:
   label: ආරම්භක මෙනුව
 taskbar_menu:
   add_file: පින් අභිරුචි ගොනුව
-  add_folder: පින් අභිරුචි ෆෝල්ඩරය
   desktop: ඩෙස්ක්ටොප් මොඩියුලය එක් කරන්න
   media: මාධ්ය මොඩියුලය එක් කරන්න
   settings: සැකසීම්
   start: ආරම්භක මොඩියුලය එක් කරන්න
   task_manager: කාර්ය කළමනාකරු
+  trash_bin: Recycle Bin Module එක එකතු කරන්න
+trash_bin:
+  empty_bin: හිස් ප්‍රතිචක්‍රීකරණ බඳුන
 weg:
   empty: පෙන්වීමට අයිතම නැත

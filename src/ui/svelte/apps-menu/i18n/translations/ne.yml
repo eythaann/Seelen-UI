@@ -5,6 +5,7 @@ folder: फोल्डर
 no_matching_items: तपाईको खोजसँग मेल खाने कुनै वस्तुहरू फेला परेनन्
 open_file_location: फाइल स्थान खोल्नुहोस्
 pin: पिन
+pin_to_dock: डकमा पिन गर्नुहोस्
 query:
   all: सबै
   apps: एपहरू

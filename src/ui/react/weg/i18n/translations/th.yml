@@ -23,11 +23,13 @@ start:
   label: เมนูเริ่ม
 taskbar_menu:
   add_file: ไฟล์ที่กำหนดเองพิน
-  add_folder: โฟลเดอร์ที่กำหนดเองพิน
   desktop: เพิ่มโมดูลเดสก์ท็อป
   media: เพิ่มโมดูลสื่อ
   settings: การตั้งค่า
   start: เพิ่มโมดูลเริ่มต้น
   task_manager: ตัวจัดการงาน
+  trash_bin: เพิ่มโมดูลถังรีไซเคิล
+trash_bin:
+  empty_bin: ถังรีไซเคิลว่างเปล่า
 weg:
   empty: ไม่มีรายการที่จะแสดง

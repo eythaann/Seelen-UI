@@ -9,6 +9,7 @@ elevated:
 
     Untuk keamanan yang lebih baik, silakan restart tanpa izin administrator.
   title: Berjalan sebagai Administrator
+file_explorer: Penjelajah Berkas
 resource:
   added: Sumber daya baru telah ditambahkan
   download_failed_body: >-

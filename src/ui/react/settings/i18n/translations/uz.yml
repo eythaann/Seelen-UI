@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Urg'u rangi
   date_format: Sana formati
+  date_format_how_to: Sana formatini qanday yozish kerak?
   hardware_acceleration: Uskuna tezlashuvi
   hardware_acceleration_description: >-
     Uskuna tezlashtirishni o'chirib qo'yish xotiradan foydalanishni kamaytiradi,
@@ -117,6 +118,12 @@ general:
       extreme: Haddan tashqari
       minimal: Minimal
     plugged: Ulangan yoki zaryadlash
+  polling_interval: Tizim so'rovi oralig'i
+  polling_interval_description: >-
+    Seelen UI protsessor, operativ xotira, tarmoq va disk faoliyati kabi tizim
+    resurslarini qanchalik tez-tez tekshiradi (soniyalarda). Kichikroq raqam
+    tez-tez yangilanishlarni anglatadi, lekin biroz yuqoriroq resurslardan
+    foydalanish.
   saturday: shanba
   start_of_week: Hafta boshi
   startup: Ishga tushirishda ishlaydimi?
@@ -333,6 +340,7 @@ weg:
     show_instance_counter: Ochiq Windows hisoblagichini ko'rsatish
     show_window_title: Ochiq deraza nomini ko'rsatish (faqat gorizontal)
     size: Element hajmi
+    split_windows: Windowsni ajratish (har bir oynada bitta element)
     temporal_visibility:
       all: Hammasi
       label: Ochilmagan elementlarning ko'rinishi

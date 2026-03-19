@@ -23,11 +23,13 @@ start:
   label: Старт Мену
 taskbar_menu:
   add_file: ПИН Прилагођена датотека
-  add_folder: ПИН Прилагођена мапа
   desktop: Додајте модул радне површине
   media: Додајте медијски модул
   settings: Подешавања
   start: Додајте почетни модул
   task_manager: Таск Манагер
+  trash_bin: Додајте модул корпе за отпатке
+trash_bin:
+  empty_bin: Празна корпа за отпатке
 weg:
   empty: Нема ставки за приказ

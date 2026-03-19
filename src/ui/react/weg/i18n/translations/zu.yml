@@ -23,11 +23,13 @@ start:
   label: Qala Imenyu
 taskbar_menu:
   add_file: I-PIN ifayela ngokwezifiso
-  add_folder: Ifolda yangokwezifiso
   desktop: Engeza Imojula yedeskithophu
   media: Faka imodyuli yabezindaba
   settings: Izilungiselelo
   start: Faka imodyuli yokuqala
   task_manager: Umphathi Womsebenzi
+  trash_bin: Engeza i-Recycle Bin Module
+trash_bin:
+  empty_bin: I-Recycle Bin engenalutho
 weg:
   empty: Azikho izinto ezizoboniswa

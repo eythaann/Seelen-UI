@@ -5,6 +5,7 @@ folder: საქაღალდე
 no_matching_items: თქვენს ძიების შესატყვისი ელემენტი ვერ მოიძებნა
 open_file_location: გახსენით ფაილის ადგილმდებარეობა
 pin: პინი
+pin_to_dock: ჩამაგრება დოკში
 query:
   all: ყველა
   apps: აპები

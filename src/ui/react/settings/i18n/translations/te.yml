@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: యాస రంగు
   date_format: తేదీ ఆకృతి
+  date_format_how_to: తేదీ ఆకృతిని ఎలా వ్రాయాలి?
   hardware_acceleration: హార్డ్‌వేర్ త్వరణం
   hardware_acceleration_description: >-
     హార్డ్‌వేర్ త్వరణాన్ని నిలిపివేయడం మెమరీ వినియోగాన్ని తగ్గిస్తుంది, కానీ
@@ -115,6 +116,11 @@ general:
       extreme: ఎక్స్‌ట్రీమ్
       minimal: కనిష్ట
     plugged: ప్లగ్డ్ లేదా ఛార్జింగ్
+  polling_interval: సిస్టమ్ పోలింగ్ విరామం
+  polling_interval_description: >-
+    సీలెన్ UI ఎంత తరచుగా (సెకన్లలో) CPU, RAM, నెట్‌వర్క్ మరియు డిస్క్ కార్యాచరణ
+    వంటి సిస్టమ్ వనరులను తనిఖీ చేస్తుంది. చిన్న సంఖ్య అంటే మరింత తరచుగా
+    అప్‌డేట్‌లు, కానీ కొంచెం ఎక్కువ వనరుల వినియోగం.
   saturday: శనివారం
   start_of_week: వారం ప్రారంభం
   startup: స్టార్టప్‌లో అమలు చేయాలా?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: ఓపెన్ విండోస్ కౌంటర్ చూపించు
     show_window_title: ఓపెన్ విండో శీర్షికను చూపించు (క్షితిజ సమాంతర మాత్రమే)
     size: అంశం పరిమాణం
+    split_windows: స్ప్లిట్ విండోస్ (ఒక విండోకు ఒక అంశం)
     temporal_visibility:
       all: అన్నీ
       label: అన్‌పిన్ చేయబడిన అంశాల దృశ్యమానత

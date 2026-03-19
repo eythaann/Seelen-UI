@@ -9,6 +9,7 @@ elevated:
 
     Aus Sicherheitsgründen starten Sie es bitte ohne Administratorrechte neu.
   title: Als Administrator ausführen
+file_explorer: Datei-Explorer
 resource:
   added: Es wurde eine neue Ressource hinzugefügt
   download_failed_body: >-

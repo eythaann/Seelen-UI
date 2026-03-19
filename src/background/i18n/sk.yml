@@ -9,6 +9,7 @@ elevated:
 
     Pre lepšiu bezpečnosť ho reštartujte bez oprávnení správcu.
   title: Beží ako správca
+file_explorer: Prieskumník súborov
 resource:
   added: Bol pridaný nový zdroj
   download_failed_body: >-

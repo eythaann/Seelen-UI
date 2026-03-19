@@ -5,6 +5,7 @@ folder: Mapp
 no_matching_items: Inga objekt hittades som matchar din sökning
 open_file_location: Öppna filplats
 pin: Stift
+pin_to_dock: Fäst till Dock
 query:
   all: Alla
   apps: Appar

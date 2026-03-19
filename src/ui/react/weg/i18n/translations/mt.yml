@@ -23,11 +23,13 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Fajl tad-dwana pin
-  add_folder: Folder Custom Pin
   desktop: Żid il-Modulu tad-Desktop
   media: Żid il-modulu tal-midja
   settings: Settings
   start: Żid il-modulu tal-bidu
   task_manager: Task Manager
+  trash_bin: Żid Recycle Bin Modulu
+trash_bin:
+  empty_bin: Vojta Recycle Bin
 weg:
   empty: Ebda oġġetti li juru

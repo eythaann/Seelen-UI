@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: Nie znaleziono żadnych elementów pasujących do Twojego wyszukiwania
 open_file_location: Otwórz lokalizację pliku
 pin: Szpilka
+pin_to_dock: Przypnij do Docka
 query:
   all: Wszystko
   apps: Aplikacje

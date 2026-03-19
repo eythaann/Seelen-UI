@@ -9,6 +9,7 @@ elevated:
 
     För bättre säkerhet, starta om den utan administratörsbehörighet.
   title: Kör som administratör
+file_explorer: Filutforskaren
 resource:
   added: En ny resurs har lagts till
   download_failed_body: >-

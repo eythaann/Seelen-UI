@@ -23,11 +23,13 @@ start:
   label: Startmenu
 taskbar_menu:
   add_file: Pin aangepaste bestand
-  add_folder: Pin aangepaste map
   desktop: Voeg bureaubladmodule toe
   media: Voeg mediamodule toe
   settings: Instellingen
   start: Startmodule toevoegen
   task_manager: Taakbeheer
+  trash_bin: Voeg Prullenbakmodule toe
+trash_bin:
+  empty_bin: Prullenbak leegmaken
 weg:
   empty: Er zijn geen items om te tonen

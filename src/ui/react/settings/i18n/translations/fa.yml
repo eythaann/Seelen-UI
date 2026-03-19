@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ
+  date_format_how_to: چگونه فرمت تاریخ بنویسیم؟
   hardware_acceleration: شتاب سخت افزاری
   hardware_acceleration_description: >-
     غیرفعال کردن شتاب سخت افزاری مصرف حافظه را کاهش می دهد، اما می تواند باعث
@@ -117,6 +118,11 @@ general:
       extreme: شدید
       minimal: حداقل
     plugged: وصل شده یا شارژ
+  polling_interval: فاصله نظرسنجی سیستم
+  polling_interval_description: >-
+    هر چند وقت یک‌بار (در چند ثانیه) UI Seelen منابع سیستم مانند CPU، RAM، شبکه
+    و فعالیت دیسک را بررسی می‌کند. تعداد کمتر به معنای به‌روزرسانی‌های مکرر است،
+    اما استفاده از منابع کمی بیشتر است.
   saturday: شنبه
   start_of_week: شروع هفته
   startup: در راه اندازی اجرا می شود؟
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: پیشخوان ویندوز باز را نشان دهید
     show_window_title: عنوان پنجره باز (فقط افقی)
     size: اندازه مورد
+    split_windows: تقسیم ویندوز (یک مورد در هر پنجره)
     temporal_visibility:
       all: همه
       label: قابلیت مشاهده موارد پین نشده

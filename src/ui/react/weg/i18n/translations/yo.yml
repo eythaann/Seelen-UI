@@ -23,11 +23,13 @@ start:
   label: Bẹrẹ Akojọ aṣyn
 taskbar_menu:
   add_file: Faili aṣa
-  add_folder: Folda aṣa aṣa
   desktop: Fi Ojú-iṣẹ Module
   media: Ṣafikun module Media
   settings: Eto
   start: Ṣafikun module Bẹrẹ
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
+  trash_bin: Fi Atunlo Bin Module
+trash_bin:
+  empty_bin: Ofo atunlo Bin
 weg:
   empty: Ko si awọn nkan lati ṣafihan

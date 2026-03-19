@@ -10,6 +10,7 @@ elevated:
     Yaxshiroq xavfsizlik uchun administrator ruxsatisiz uni qayta ishga
     tushiring.
   title: Administrator sifatida ishga tushirish
+file_explorer: Fayl Explorer
 resource:
   added: Yangi manba qo'shildi
   download_failed_body: >-

@@ -10,6 +10,7 @@ elevated:
     Parema turvalisuse tagamiseks taaskäivitage see ilma
     administraatoriõigusteta.
   title: Töötab administraatorina
+file_explorer: File Explorer
 resource:
   added: Lisatud on uus ressurss
   download_failed_body: >-

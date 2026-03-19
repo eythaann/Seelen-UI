@@ -92,6 +92,7 @@ extras:
 general:
   accent_color: アクセントカラー
   date_format: 日付形式
+  date_format_how_to: 日付の形式はどうやって書くのでしょうか？
   hardware_acceleration: ハードウェアアクセラレーション
   hardware_acceleration_description: >-
     ハードウェア
@@ -109,6 +110,10 @@ general:
       extreme: 極限
       minimal: 最小限
     plugged: 電源接続時
+  polling_interval: システムのポーリング間隔
+  polling_interval_description: >-
+    Seelen UI が CPU、RAM、ネットワーク、ディスク アクティビティなどのシステム リソースをチェックする頻度 (秒単位)。
+    数値が小さいほど、更新頻度は高くなりますが、リソース使用量がわずかに高くなります。
   saturday: 土曜日
   start_of_week: 週の始まり
   startup: 起動時に実行する
@@ -317,6 +322,7 @@ weg:
     show_instance_counter: 開いているウィンドウのカウンターを表示する
     show_window_title: 開いているウィンドウのタイトルを表示する（水平方向のみ）
     size: アイテムのサイズ
+    split_windows: ウィンドウの分割 (ウィンドウごとに 1 つのアイテム)
     temporal_visibility:
       all: 全て
       label: 固定されていないアイテムの表示設定

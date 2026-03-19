@@ -96,6 +96,7 @@ extras:
 general:
   accent_color: Vurğu
   date_format: Tarix formatı
+  date_format_how_to: Tarix formatını necə yazmaq olar?
   hardware_acceleration: Avadanlıq sürətləndirilməsi
   hardware_acceleration_description: >-
     Aparat sürətləndirilməsinin söndürülməsi yaddaş istifadəsini azaldacaq,
@@ -114,6 +115,11 @@ general:
       extreme: Ekstremal
       minimal: Minimal
     plugged: Qoşuldu və ya şarj
+  polling_interval: Sistem sorğu intervalı
+  polling_interval_description: >-
+    Seelen UI CPU, RAM, şəbəkə və disk fəaliyyəti kimi sistem resurslarını nə
+    qədər tez-tez (saniyələrlə) yoxlayır. Daha kiçik rəqəm daha tez-tez
+    yeniləmələr, lakin bir qədər yüksək resurs istifadəsi deməkdir.
   saturday: şənbə
   start_of_week: Həftənin başlanğıcı
   startup: Başlanğıcda qaçırsınız?
@@ -328,6 +334,7 @@ weg:
     show_instance_counter: Açıq pəncərələrin sayğacını göstərin
     show_window_title: Açıq pəncərə başlığını göstər (yalnız üfüqi)
     size: Maddə ölçüsü
+    split_windows: Pəncərələri bölün (hər pəncərədə bir element)
     temporal_visibility:
       all: Hamısı
       label: Saxlanmamış Elementlərin Görünüşü

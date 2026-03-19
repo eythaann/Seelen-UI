@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data
+  date_format_how_to: Kif tikteb format tad-data?
   hardware_acceleration: Aċċelerazzjoni tal-Hardware
   hardware_acceleration_description: >-
     Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja,
@@ -117,6 +118,11 @@ general:
       extreme: Estrem
       minimal: Minimu
     plugged: Imqabbad jew iċċarġjar
+  polling_interval: Intervall tal-votazzjoni tas-sistema
+  polling_interval_description: >-
+    Kemm-il darba (f'sekondi) Seelen UI tiċċekkja r-riżorsi tas-sistema bħal
+    CPU, RAM, netwerk, u attività tad-disk. Numru iżgħar ifisser aġġornamenti
+    aktar frekwenti, iżda użu tar-riżorsi kemmxejn ogħla.
   saturday: is-Sibt
   start_of_week: Bidu tal-Ġimgħa
   startup: Mexxi fuq l-istartjar?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Uri Open Windows Counter
     show_window_title: Uri t-titlu tat-tieqa miftuħa (orizzontali biss)
     size: Daqs tal-oġġett
+    split_windows: Twieqi maqsuma (oġġett wieħed għal kull tieqa)
     temporal_visibility:
       all: Kollha
       label: Oġġetti Unpinned Viżibilità

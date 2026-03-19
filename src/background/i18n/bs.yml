@@ -9,6 +9,7 @@ elevated:
 
     Radi bolje sigurnosti, ponovo ga pokrenite bez administratorskih dozvola.
   title: Pokreće se kao administrator
+file_explorer: File Explorer
 resource:
   added: Dodan je novi resurs
   download_failed_body: >-

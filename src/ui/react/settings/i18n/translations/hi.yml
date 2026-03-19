@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: स्वरोंका रंग
   date_format: तारिख का प्रारूप
+  date_format_how_to: दिनांक प्रारूप कैसे लिखें?
   hardware_acceleration: हार्डवेयर एक्सिलरेशन
   hardware_acceleration_description: >-
     हार्डवेयर एक्सेलेरेशन को अक्षम करने से मेमोरी का उपयोग कम हो जाएगा, लेकिन
@@ -117,6 +118,11 @@ general:
       extreme: चरम
       minimal: न्यूनतम
     plugged: प्लग या चार्जिंग
+  polling_interval: सिस्टम मतदान अंतराल
+  polling_interval_description: >-
+    सीलेन यूआई कितनी बार (सेकंड में) सीपीयू, रैम, नेटवर्क और डिस्क गतिविधि जैसे
+    सिस्टम संसाधनों की जांच करता है। छोटी संख्या का अर्थ है अधिक लगातार अपडेट,
+    लेकिन थोड़ा अधिक संसाधन उपयोग।
   saturday: शनिवार
   start_of_week: सप्ताह की शुरुआत
   startup: स्टार्टअप पर चलाएं?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: ओपन विंडोज काउंटर दिखाएं
     show_window_title: ओपन विंडो शीर्षक दिखाएं (केवल क्षैतिज)
     size: आइटम आकार
+    split_windows: विभाजित विंडोज़ (प्रति विंडो एक आइटम)
     temporal_visibility:
       all: सभी
       label: अनपिन किए गए आइटम दृश्यता

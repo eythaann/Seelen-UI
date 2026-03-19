@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Accentfarve
   date_format: Datoformat
+  date_format_how_to: Hvordan skriver man et datoformat?
   hardware_acceleration: Hardwareacceleration
   hardware_acceleration_description: >-
     Deaktivering af hardwareacceleration vil reducere hukommelsesforbruget, men
@@ -115,6 +116,11 @@ general:
       extreme: Ekstrem
       minimal: Minimal
     plugged: Tilsluttet eller opladning
+  polling_interval: System polling interval
+  polling_interval_description: >-
+    Hvor ofte (i sekunder) Seelen UI kontrollerer systemressourcer som CPU, RAM,
+    netværk og diskaktivitet. Et mindre antal betyder hyppigere opdateringer,
+    men lidt højere ressourceforbrug.
   saturday: lørdag
   start_of_week: Start på ugen
   startup: Kør ved opstart?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Vis tæller for åbne vinduer
     show_window_title: Vis titel på åbent vindue (kun vandret)
     size: Varestørrelse
+    split_windows: Opdelte vinduer (et element pr. vindue)
     temporal_visibility:
       all: Alle
       label: Synlighed af frigjorte elementer

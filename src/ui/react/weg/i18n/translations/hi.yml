@@ -23,11 +23,13 @@ start:
   label: शुरुआत की सूची
 taskbar_menu:
   add_file: पिन कस्टम फ़ाइल
-  add_folder: पिन कस्टम फ़ोल्डर
   desktop: डेस्कटॉप मॉड्यूल जोड़ें
   media: मीडिया मॉड्यूल जोड़ें
   settings: सेटिंग्स
   start: स्टार्ट मॉड्यूल जोड़ें
   task_manager: कार्य प्रबंधक
+  trash_bin: रीसायकल बिन मॉड्यूल जोड़ें
+trash_bin:
+  empty_bin: खाली रीसायकल बिन
 weg:
   empty: दिखाने के लिए कोई आइटम नहीं

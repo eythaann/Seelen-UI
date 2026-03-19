@@ -23,11 +23,13 @@ start:
   label: Dewislen Cychwyn
 taskbar_menu:
   add_file: Pin ffeil arfer
-  add_folder: Pin ffolder arfer
   desktop: Ychwanegu Modiwl Penbwrdd
   media: Ychwanegu Modiwl Cyfryngau
   settings: Gosodiadau
   start: Ychwanegu Modiwl Start
   task_manager: Rheolwr Tasg
+  trash_bin: Ychwanegu Modiwl Bin Ailgylchu
+trash_bin:
+  empty_bin: Bin Ailgylchu Gwag
 weg:
   empty: Dim eitemau i'w dangos

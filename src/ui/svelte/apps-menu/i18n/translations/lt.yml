@@ -5,6 +5,7 @@ folder: Aplankas
 no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
 open_file_location: Atidarykite failo vietą
 pin: Smeigtukas
+pin_to_dock: Prisegti prie doko
 query:
   all: Visi
   apps: Programėlės

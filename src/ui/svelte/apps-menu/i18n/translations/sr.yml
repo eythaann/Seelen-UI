@@ -5,6 +5,7 @@ folder: Фолдер
 no_matching_items: Нису пронађене ставке које одговарају вашој претрази
 open_file_location: Отворите локацију датотеке
 pin: Пин
+pin_to_dock: Закачите на Доцк
 query:
   all: Све
   apps: Аппс

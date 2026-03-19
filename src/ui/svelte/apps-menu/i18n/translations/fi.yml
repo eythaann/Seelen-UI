@@ -5,6 +5,7 @@ folder: Kansio
 no_matching_items: Hakuasi vastaavia kohteita ei löytynyt
 open_file_location: Avaa Tiedoston sijainti
 pin: Pin
+pin_to_dock: Kiinnitä Dockiin
 query:
   all: Kaikki
   apps: Sovellukset

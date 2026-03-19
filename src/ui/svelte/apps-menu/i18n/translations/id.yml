@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: Tidak ada item yang cocok dengan pencarian Anda
 open_file_location: Buka Lokasi File
 pin: Pin
+pin_to_dock: Sematkan ke Dock
 query:
   all: Semua
   apps: Aplikasi

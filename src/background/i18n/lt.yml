@@ -9,6 +9,7 @@ elevated:
     Norėdami užtikrinti didesnį saugumą, paleiskite jį iš naujo be
     administratoriaus leidimo.
   title: Veikia kaip administratorius
+file_explorer: Failų naršyklė
 resource:
   added: Pridėtas naujas išteklius
   download_failed_body: >-

@@ -98,6 +98,7 @@ extras:
 general:
   accent_color: Color d’accent
   date_format: Format de la data
+  date_format_how_to: Com escriure un format de data?
   hardware_acceleration: Acceleració de maquinari
   hardware_acceleration_description: >-
     Desactivar l'acceleració de maquinari reduirà l'ús de memòria, però pot
@@ -116,6 +117,12 @@ general:
       extreme: Extrem
       minimal: Mínim
     plugged: Tassa o càrrega
+  polling_interval: Interval de sondeig del sistema
+  polling_interval_description: >-
+    Amb quina freqüència (en segons) la interfície d'usuari de Seelen comprova
+    els recursos del sistema com la CPU, la memòria RAM, la xarxa i l'activitat
+    del disc. Un nombre més petit significa actualitzacions més freqüents, però
+    un ús de recursos lleugerament superior.
   saturday: dissabte
   start_of_week: Inici de setmana
   startup: Executeu la posada en marxa?
@@ -330,6 +337,7 @@ weg:
     show_instance_counter: Mostra el comptador de Windows obert
     show_window_title: Mostra el títol de la finestra oberta (només horitzontal)
     size: Mida de l'article
+    split_windows: Dividir finestres (un element per finestra)
     temporal_visibility:
       all: Tots
       label: Visibilitat dels elements sense fixar

@@ -5,6 +5,7 @@ folder: Mappe
 no_matching_items: Der blev ikke fundet nogen varer, der matcher din søgning
 open_file_location: Åbn Filplacering
 pin: Stift
+pin_to_dock: Fastgør til dock
 query:
   all: Alle
   apps: Apps

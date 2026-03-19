@@ -23,11 +23,13 @@ start:
   label: Pêşeka Destpêkê
 taskbar_menu:
   add_file: Pelê Custom Pel
-  add_folder: Peldanka Pêvekirî
   desktop: Modula Sermaseyê zêde bikin
   media: Modela medyayê lê zêde bike
   settings: Settings
   start: Modulê dest pê bikin
   task_manager: Gerînendetiya Peywiran
+  trash_bin: Modula Recycle Bin zêde bikin
+trash_bin:
+  empty_bin: Vala Recycle Bin
 weg:
   empty: Tiştek tune ku nîşan bide

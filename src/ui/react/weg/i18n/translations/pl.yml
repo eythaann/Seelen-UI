@@ -23,11 +23,13 @@ start:
   label: Menu startowe
 taskbar_menu:
   add_file: Dodaj skrót
-  add_folder: Dodaj folder
   desktop: Dodaj moduł pulpitu
   media: Dodaj moduł multimediów
   settings: Ustawienia
   start: Dodaj przycisk Start
   task_manager: Menedżer zadań
+  trash_bin: Dodaj moduł Kosza
+trash_bin:
+  empty_bin: Opróżnij Kosz
 weg:
   empty: Brak elementów do pokazania

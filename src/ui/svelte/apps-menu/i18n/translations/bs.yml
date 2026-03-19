@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: Nema pronađenih artikala koji odgovaraju vašem pretraživanju
 open_file_location: Otvorite lokaciju datoteke
 pin: Pin
+pin_to_dock: Zakačite na Dock
 query:
   all: Sve
   apps: aplikacije

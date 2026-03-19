@@ -23,11 +23,13 @@ start:
   label: د پیل مینو
 taskbar_menu:
   add_file: دود دودیز فایل
-  add_folder: د ګمرکونو فولډر
   desktop: د ډیسټاپ ماډل اضافه کړئ
   media: د میډیا موډول اضافه کړئ
   settings: ترتیبات
   start: د پیل ماډل اضافه کړئ
   task_manager: د دندې مدیر
+  trash_bin: د ریسایکل بن ماډل اضافه کړئ
+trash_bin:
+  empty_bin: د ریسایکل بن خالي کړئ
 weg:
   empty: د ښودلو لپاره هیڅ توکي نشته

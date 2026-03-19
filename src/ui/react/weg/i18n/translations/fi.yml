@@ -23,11 +23,13 @@ start:
   label: Käynnistä-valikko
 taskbar_menu:
   add_file: Pin mukautettu tiedosto
-  add_folder: Pin Custom -kansio
   desktop: Lisää työpöytämoduuli
   media: Lisää mediamoduuli
   settings: Asetukset
   start: Lisää aloitusmoduuli
   task_manager: Tehtävienhallinta
+  trash_bin: Lisää roskakorimoduuli
+trash_bin:
+  empty_bin: Tyhjennä roskakori
 weg:
   empty: Ei näytettäviä kohteita

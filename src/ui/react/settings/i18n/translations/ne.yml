@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: हिम्मता रंग
   date_format: मिति ढाँचा
+  date_format_how_to: मिति ढाँचा कसरी लेख्ने?
   hardware_acceleration: हार्डवेयर एक्सेलेरेशन
   hardware_acceleration_description: >-
     हार्डवेयर एक्सेलेरेशन असक्षम गर्नाले मेमोरीको प्रयोग घटाउनेछ, तर
@@ -115,6 +116,11 @@ general:
       extreme: अत्यधिक
       minimal: न्यूनतम
     plugged: प्लग वा चार्ज गर्दै
+  polling_interval: प्रणाली मतदान अन्तराल
+  polling_interval_description: >-
+    कति पटक (सेकेन्डमा) Seelen UI ले CPU, RAM, नेटवर्क, र डिस्क गतिविधि जस्ता
+    प्रणाली स्रोतहरू जाँच गर्दछ। सानो संख्याको अर्थ धेरै बारम्बार अद्यावधिकहरू,
+    तर थोरै उच्च स्रोत उपयोग।
   saturday: शनिबार
   start_of_week: हप्ताको सुरुवात
   startup: स्टार्टअपमा भाग्नुहोस्?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: खुला विन्डोज काउन्टर देखाउनुहोस्
     show_window_title: खुला विन्डो शीर्षक देखाउनुहोस् (केवल क्षैतिज)
     size: वस्तुको आकार
+    split_windows: विभाजन विन्डोज (प्रति विन्डो एक वस्तु)
     temporal_visibility:
       all: सबै
       label: अनपिन गरिएका वस्तुहरूको दृश्यता

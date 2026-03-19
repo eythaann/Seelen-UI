@@ -100,6 +100,7 @@ extras:
 general:
   accent_color: Midab caqabad
   date_format: Taariikh format
+  date_format_how_to: Sidee loo qoraa qaabka taariikhda?
   hardware_acceleration: Dardargelinta Qalabka
   hardware_acceleration_description: >-
     Deminta dardargelinta qalabku waxay yarayn doontaa isticmaalka xusuusta,
@@ -118,6 +119,12 @@ general:
       extreme: Xad-dhaaf ah
       minimal: Aan yahayeexan
     plugged: Xirxiran ama ku dallac
+  polling_interval: Inta u dhaxaysa nidaamka cod bixinta
+  polling_interval_description: >-
+    Intee jeer (ilbiriqsi gudahood) Seelen UI waxay hubisaa ilaha nidaamka sida
+    CPU, RAM, network, iyo dhaqdhaqaaqa diskka. Nambar ka yar macnaheedu waa
+    cusbooneysiin badan oo soo noqnoqda, laakiin isticmaalka kheyraadka wax yar
+    ka sarreeya.
   saturday: Sabti
   start_of_week: Bilawga Todobaadka
   startup: Ku orod bilowga?
@@ -334,6 +341,7 @@ weg:
     show_instance_counter: Muuji miiska daaqadaha furan
     show_window_title: Muuji cinwaanka daaqadda furan (oo kaliya toosan)
     size: Shayga cabirka
+    split_windows: Kala qaybso Windows (hal shay daaqad kasta)
     temporal_visibility:
       all: Dhammaan
       label: Aragtida Shayada Furan

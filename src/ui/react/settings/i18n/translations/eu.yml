@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Azentu kolorea
   date_format: Data formatua
+  date_format_how_to: Nola idatzi data-formatua?
   hardware_acceleration: Hardwarearen azelerazioa
   hardware_acceleration_description: >-
     Hardwarearen azelerazioa desgaitzeak memoriaren erabilera murriztuko du,
@@ -115,6 +116,12 @@ general:
       extreme: Muturreko
       minimal: Gutxien
     plugged: Entxufatua edo kargatzea
+  polling_interval: Sistemaren galdeketa tartea
+  polling_interval_description: >-
+    Zenbateko maiztasuna (segundotan) Seelen UI-k sistemaren baliabideak
+    egiaztatzen ditu, hala nola CPU, RAM, sarea eta diskoaren jarduera. Kopuru
+    txikiagoak eguneratzeak maizago esan nahi du, baina baliabideen erabilera
+    apur bat handiagoa da.
   saturday: Larunbata
   start_of_week: Astearen hasiera
   startup: Korrika abiaraztean?
@@ -329,6 +336,7 @@ weg:
     show_instance_counter: Erakutsi irekitako leihoen kontagailua
     show_window_title: Erakutsi leiho irekiko titulua (horizontala bakarrik)
     size: Elementuen tamaina
+    split_windows: Zatitu leihoak (elementu bat leiho bakoitzeko)
     temporal_visibility:
       all: Denak
       label: Ainguratu gabeko elementuen ikusgaitasuna

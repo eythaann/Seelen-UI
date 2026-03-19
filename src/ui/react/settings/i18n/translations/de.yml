@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Akzentfarbe
   date_format: Datumsformat
+  date_format_how_to: Wie schreibe ich ein Datumsformat?
   hardware_acceleration: Hardwarebeschleunigung
   hardware_acceleration_description: >-
     Das Deaktivieren der Hardwarebeschleunigung verringert die Speichernutzung,
@@ -117,6 +118,11 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Verstopft oder aufgeladen
+  polling_interval: Systemabfrageintervall
+  polling_interval_description: >-
+    Wie oft (in Sekunden) prüft Seelen UI Systemressourcen wie CPU, RAM,
+    Netzwerk und Festplattenaktivität? Eine kleinere Zahl bedeutet häufigere
+    Updates, aber eine etwas höhere Ressourcennutzung.
   saturday: Samstag
   start_of_week: Wochenbeginn
   startup: Beim Hochfahren ausführen?
@@ -335,6 +341,7 @@ weg:
     show_instance_counter: Zähler für offene Fenster anzeigen
     show_window_title: Titel des geöffneten Fensters anzeigen (nur horizontal)
     size: Elementgröße
+    split_windows: Geteilte Fenster (ein Element pro Fenster)
     temporal_visibility:
       all: Alle
       label: Sichtbarkeit nicht angehefteter Elemente

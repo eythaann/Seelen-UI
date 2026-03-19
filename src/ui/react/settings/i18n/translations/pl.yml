@@ -100,6 +100,7 @@ extras:
 general:
   accent_color: Kolor akcentu
   date_format: Format daty
+  date_format_how_to: Jak napisać format daty?
   hardware_acceleration: Przyspieszenie sprzętowe
   hardware_acceleration_description: >-
     Wyłączenie akceleracji sprzętowej zmniejszy zużycie pamięci, ale może
@@ -118,6 +119,11 @@ general:
       extreme: Skrajny
       minimal: Minimalny
     plugged: Podłączone lub ładowanie
+  polling_interval: Interwał odpytywania systemu
+  polling_interval_description: >-
+    Jak często (w sekundach) interfejs użytkownika Seelen sprawdza zasoby
+    systemowe, takie jak procesor, pamięć RAM, sieć i aktywność dysku. Mniejsza
+    liczba oznacza częstsze aktualizacje, ale nieco większe zużycie zasobów.
   saturday: Sobota
   start_of_week: Początek tygodnia
   startup: Uruchomić przy starcie systemu?
@@ -332,6 +338,7 @@ weg:
     show_instance_counter: Wyświetl liczbę otwartych okien
     show_window_title: Wyświetl tytuł otwartego okna (tylko poziomo)
     size: Rozmiar elementów
+    split_windows: Podziel okna (jeden element na okno)
     temporal_visibility:
       all: Wszystkie ekrany
       label: Widoczność uruchomionych aplikacji

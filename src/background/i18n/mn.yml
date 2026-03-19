@@ -10,6 +10,7 @@ elevated:
     Аюулгүй байдлыг сайжруулахын тулд администраторын зөвшөөрөлгүйгээр дахин
     эхлүүлнэ үү.
   title: Администратороор ажиллаж байна
+file_explorer: File Explorer
 resource:
   added: Шинэ нөөц нэмэгдсэн
   download_failed_body: >-

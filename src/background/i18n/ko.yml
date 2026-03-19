@@ -6,6 +6,7 @@ elevated:
     이는 기능을 추가하거나 개선하지 않으며 보안 위험을 초래할 수 있습니다.
     보안 강화를 위해 관리자 권한 없이 다시 시작하시기 바랍니다.
   title: 관리자로 실행
+file_explorer: 파일 탐색기
 resource:
   added: 새로운 리소스가 추가되었습니다.
   download_failed_body: 리소스를 다운로드하는 동안 문제가 발생했습니다. Seelen 개발자 팀에 신고해 주세요.

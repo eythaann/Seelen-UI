@@ -5,6 +5,7 @@ folder: 폴더
 no_matching_items: 검색어와 일치하는 항목을 찾을 수 없습니다.
 open_file_location: 파일 위치 열기
 pin: 핀
+pin_to_dock: 도킹에 고정
 query:
   all: 모두
   apps: 앱

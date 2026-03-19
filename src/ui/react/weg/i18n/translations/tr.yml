@@ -23,11 +23,13 @@ start:
   label: Başlat Menüsü
 taskbar_menu:
   add_file: Özel Dosya Sabitle
-  add_folder: Özel Klasör Sabitle
   desktop: Masaüstü Modülü Ekle
   media: Medya Modülü Ekle
   settings: Ayarlar
   start: Başlat Modülü Ekle
   task_manager: Görev Yöneticisi
+  trash_bin: Geri Dönüşüm Kutusu Modülü Ekle
+trash_bin:
+  empty_bin: Geri Dönüşüm Kutusunu Boşalt
 weg:
   empty: Gösterilecek öğe yok

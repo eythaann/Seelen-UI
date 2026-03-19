@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Color de acento
   date_format: Formato de fecha
+  date_format_how_to: ¿Cómo escribir un formato de fecha?
   hardware_acceleration: Aceleración de hardware
   hardware_acceleration_description: >-
     Deshabilitar la aceleración de hardware reducirá el uso de memoria, pero
@@ -117,6 +118,12 @@ general:
       extreme: Extremo
       minimal: Mínimo
     plugged: Enchufado o carga
+  polling_interval: Intervalo de sondeo del sistema
+  polling_interval_description: >-
+    Con qué frecuencia (en segundos) Seelen UI verifica los recursos del sistema
+    como la CPU, la RAM, la red y la actividad del disco. Un número menor
+    significa actualizaciones más frecuentes, pero un uso de recursos
+    ligeramente mayor.
   saturday: Sábado
   start_of_week: Inicio de semana
   startup: ¿Se ejecuta al iniciar con Windows?
@@ -331,6 +338,7 @@ weg:
     show_instance_counter: Mostrar contador de ventanas abiertas
     show_window_title: Mostrar el título de la ventana abierta (sólo horizontal)
     size: Tamaño del elemento
+    split_windows: Ventanas divididas (un elemento por ventana)
     temporal_visibility:
       all: Todos
       label: Visibilidad de los elementos no fijados

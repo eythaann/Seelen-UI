@@ -23,11 +23,13 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Pin pasadyang file
-  add_folder: Pin pasadyang folder
   desktop: Magdagdag ng Desktop Module
   media: Magdagdag ng module ng media
   settings: Mga setting
   start: Magdagdag ng Start Module
   task_manager: Task Manager
+  trash_bin: Magdagdag ng Recycle Bin Module
+trash_bin:
+  empty_bin: Walang laman ang Recycle Bin
 weg:
   empty: Walang maipapakitang item

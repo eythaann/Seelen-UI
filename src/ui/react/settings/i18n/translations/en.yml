@@ -101,10 +101,6 @@ general:
   hardware_acceleration_description: >-
     Disabling hardware acceleration will reduce memory usage, but can cause
     performance issues. Is safe to disable if you won't use live wallpapers.
-  polling_interval: System polling interval
-  polling_interval_description: >-
-    How often (in seconds) Seelen UI samples system resources like CPU, RAM,
-    network, and disk activity.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs
@@ -118,6 +114,11 @@ general:
       extreme: Extreme
       minimal: Minimal
     plugged: Plugged or charging
+  polling_interval: System polling interval
+  polling_interval_description: >-
+    How often (in seconds) Seelen UI checks system resources like CPU, RAM,
+    network, and disk activity. A smaller number means more frequent updates,
+    but slightly higher resource usage.
   saturday: Saturday
   start_of_week: Start of week
   startup: Run on startup?
@@ -330,12 +331,12 @@ weg:
     show_instance_counter: Show open windows counter
     show_window_title: Show open window title (only horizontal)
     size: Item Size
+    split_windows: Split Windows (one item per window)
     temporal_visibility:
       all: All
       label: Unpinned Items Visibility
       on_monitor: On Monitor
     visible_separators: Visible Separators
-    split_windows: Split Windows (one item per window)
   label: Dock/Taskbar
   margin: Margin
   mode:

@@ -23,11 +23,13 @@ start:
   label: مینو شروع کریں
 taskbar_menu:
   add_file: کسٹم فائل کو پن کریں
-  add_folder: کسٹم فولڈر کو پن
   desktop: ڈیسک ٹاپ ماڈیول شامل کریں
   media: میڈیا ماڈیول شامل کریں
   settings: ترتیبات
   start: اسٹارٹ ماڈیول شامل کریں
   task_manager: ٹاسک مینیجر
+  trash_bin: ری سائیکل بن ماڈیول شامل کریں۔
+trash_bin:
+  empty_bin: خالی ری سائیکل بن
 weg:
   empty: دکھانے کے لیے کوئی آئٹمز نہیں۔

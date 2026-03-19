@@ -5,6 +5,7 @@ folder: Папка
 no_matching_items: Няма намерени артикули, отговарящи на вашето търсене
 open_file_location: Отворете местоположението на файла
 pin: ПИН
+pin_to_dock: Фиксиране към Dock
 query:
   all: Всички
   apps: Приложения

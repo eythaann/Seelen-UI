@@ -23,11 +23,13 @@ start:
   label: የጀምር ምናሌ
 taskbar_menu:
   add_file: የፒን ብጁ ፋይል
-  add_folder: የፒን ብጁ አቃፊ
   desktop: የዴስክቶፕ ሞጁል አክል
   media: የሚዲያ ሞዱል ያክሉ
   settings: ቅንብሮች
   start: የመነሻ ሞጁል ያክሉ
   task_manager: ተግባር አስተዳዳሪ
+  trash_bin: ሪሳይክል ቢን ሞዱልን አክል
+trash_bin:
+  empty_bin: ባዶ ሪሳይክል ቢን
 weg:
   empty: ምንም የሚታዩ ንጥሎች የሉም

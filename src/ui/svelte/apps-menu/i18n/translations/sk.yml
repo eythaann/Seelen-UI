@@ -5,6 +5,7 @@ folder: Priečinok
 no_matching_items: Nenašli sa žiadne položky zodpovedajúce vášmu vyhľadávaniu
 open_file_location: Otvorte umiestnenie súboru
 pin: Pin
+pin_to_dock: Pripnúť do doku
 query:
   all: Všetky
   apps: Aplikácie

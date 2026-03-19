@@ -5,6 +5,7 @@ folder: Хавтас
 no_matching_items: Таны хайлтад тохирох зүйл олдсонгүй
 open_file_location: Файлын байршлыг нээх
 pin: Pin
+pin_to_dock: Dock руу бэхлэх
 query:
   all: Бүгд
   apps: Програмууд

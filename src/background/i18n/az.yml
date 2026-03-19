@@ -10,6 +10,7 @@ elevated:
     Daha yaxşı təhlükəsizlik üçün administrator icazəsi olmadan onu yenidən
     başladın.
   title: Administrator olaraq çalışır
+file_explorer: Fayl Explorer
 resource:
   added: Yeni bir qaynaq əlavə edildi
   download_failed_body: >-

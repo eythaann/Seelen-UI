@@ -5,6 +5,7 @@ folder: Cartella
 no_matching_items: Nessun articolo trovato corrispondente alla tua ricerca
 open_file_location: Apri Posizione file
 pin: Spillo
+pin_to_dock: Aggiungi al Dock
 query:
   all: Tutto
   apps: App

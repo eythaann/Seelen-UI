@@ -1,14 +1,12 @@
 cancel: Töröl
 done: Kész
 elevated:
-  description: >-
+  description: |-
     A Seelen UI rendszergazdai jogosultságokkal fut.
-
-    Ez nem bővíti vagy javítja a funkciókat, és biztonsági kockázatot
-    jelenthet.
-
+    Ez nem bővíti vagy javítja a funkciókat, és biztonsági kockázatot jelenthet.
     A nagyobb biztonság érdekében indítsa újra rendszergazdai engedélyek nélkül.
   title: Rendszergazdaként fut
+file_explorer: Fájlböngésző
 resource:
   added: Egy új erőforrás került hozzáadásra
   download_failed_body: >-

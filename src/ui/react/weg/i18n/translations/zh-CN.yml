@@ -23,11 +23,13 @@ start:
   label: 开始菜单
 taskbar_menu:
   add_file: 固定自定义文件
-  add_folder: 固定自定义文件夹
   desktop: 添加桌面模块
   media: 添加媒体模块
   settings: 设置
   start: 添加开始菜单模块
   task_manager: 任务管理器
+  trash_bin: 添加回收站模块
+trash_bin:
+  empty_bin: 清空回收站
 weg:
   empty: 暂无内容显示

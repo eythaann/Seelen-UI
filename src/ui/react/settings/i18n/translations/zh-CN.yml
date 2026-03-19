@@ -87,6 +87,7 @@ extras:
 general:
   accent_color: 主色调
   date_format: 日期格式
+  date_format_how_to: 日期格式怎么写？
   hardware_acceleration: 硬件加速
   hardware_acceleration_description: 禁用硬件加速会减少内存使用量，但可能会导致性能问题。 如果您不使用动态壁纸，可以安全禁用。
   icon_pack:
@@ -102,6 +103,8 @@ general:
       extreme: 极致
       minimal: 最小
     plugged: 插电或充电时
+  polling_interval: 系统轮询间隔
+  polling_interval_description: Seelen UI 检查 CPU、RAM、网络和磁盘活动等系统资源的频率（以秒为单位）。 数字越小意味着更新越频繁，但资源使用率会稍高。
   saturday: 周六
   start_of_week: 一周的开始
   startup: 开机自启
@@ -310,6 +313,7 @@ weg:
     show_instance_counter: 显示打开窗口计数
     show_window_title: 显示打开窗口标题（仅水平方向）
     size: 项目大小
+    split_windows: 拆分窗口（每个窗口一项）
     temporal_visibility:
       all: 全部
       label: 未固定项目的可见性

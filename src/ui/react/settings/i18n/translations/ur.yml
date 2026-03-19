@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: رنگ
   date_format: تاریخ کی شکل
+  date_format_how_to: تاریخ کی شکل کیسے لکھیں؟
   hardware_acceleration: ہارڈ ویئر ایکسلریشن
   hardware_acceleration_description: >-
     ہارڈویئر ایکسلریشن کو غیر فعال کرنے سے میموری کا استعمال کم ہو جائے گا، لیکن
@@ -115,6 +116,11 @@ general:
       extreme: انتہائی
       minimal: کم سے کم
     plugged: پلگ ان یا چارجنگ
+  polling_interval: سسٹم پولنگ وقفہ
+  polling_interval_description: >-
+    سیلین UI کتنی بار (سیکنڈوں میں) سسٹم کے وسائل جیسے CPU، RAM، نیٹ ورک، اور
+    ڈسک کی سرگرمی کو چیک کرتا ہے۔ ایک چھوٹی تعداد کا مطلب ہے زیادہ بار بار اپ
+    ڈیٹس، لیکن وسائل کا تھوڑا سا زیادہ استعمال۔
   saturday: ہفتہ
   start_of_week: ہفتے کا آغاز
   startup: اسٹارٹ اپ پر چلائیں؟
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: کھلی ونڈوز کاؤنٹر دکھائیں
     show_window_title: کھلی ونڈو ٹائٹل دکھائیں (صرف افقی)
     size: آئٹم کا سائز
+    split_windows: اسپلٹ ونڈوز (ایک آئٹم فی ونڈو)
     temporal_visibility:
       all: تمام
       label: ان پن کردہ آئٹمز کی مرئیت

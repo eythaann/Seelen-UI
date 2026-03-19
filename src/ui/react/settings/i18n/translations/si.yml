@@ -98,6 +98,7 @@ extras:
 general:
   accent_color: උච්චාරණ වර්ණය
   date_format: දිනය ආකෘතිය
+  date_format_how_to: දින ආකෘතියක් ලියන්නේ කෙසේද?
   hardware_acceleration: දෘඪාංග ත්වරණය
   hardware_acceleration_description: >-
     දෘඪාංග ත්වරණය අක්‍රිය කිරීම මතක භාවිතය අඩු කරයි, නමුත් කාර්ය සාධන ගැටළු ඇති
@@ -115,6 +116,11 @@ general:
       extreme: අන්ත
       minimal: අවම
     plugged: ප්ලග් හෝ ආරෝපණය
+  polling_interval: පද්ධති ඡන්ද පරතරය
+  polling_interval_description: >-
+    සීලෙන් යූඅයි කොපමණ වාරයක් (තත්පර වලින්) CPU, RAM, ජාල, සහ තැටි ක්‍රියාකාරකම්
+    වැනි පද්ධති සම්පත් පරීක්ෂා කරයි. කුඩා සංඛ්‍යාවක් යන්නෙන් අදහස් වන්නේ නිතර
+    යාවත්කාලීන කිරීම්, නමුත් සම්පත් භාවිතය තරමක් ඉහළ ය.
   saturday: සෙනසුරාදා
   start_of_week: සතියේ ආරම්භය
   startup: ආරම්භයේදී ධාවනය කරන්නද?
@@ -327,6 +333,7 @@ weg:
     show_instance_counter: විවෘත වින්ඩෝස් කවුන්ටරය පෙන්වන්න
     show_window_title: විවෘත කවුළු මාතෘකාව පෙන්වන්න (තිරස් පමණක්)
     size: අයිතමයේ ප්රමාණය
+    split_windows: වින්ඩෝස් බෙදන්න (කවුළුවකට එක් අයිතමයක්)
     temporal_visibility:
       all: සියල්ල
       label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව

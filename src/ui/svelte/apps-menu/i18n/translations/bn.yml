@@ -5,6 +5,7 @@ folder: ফোল্ডার
 no_matching_items: আপনার অনুসন্ধানের সাথে মেলে কোনো আইটেম পাওয়া যায়নি
 open_file_location: ফাইলের অবস্থান খুলুন
 pin: পিন
+pin_to_dock: ডকে পিন করুন
 query:
   all: সব
   apps: অ্যাপস

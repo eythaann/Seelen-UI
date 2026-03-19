@@ -10,6 +10,7 @@ elevated:
 
     Para mayor seguridad, reinícielo sin permisos de administrador.
   title: Corriendo como administradora
+file_explorer: Exploradora de archivos
 resource:
   added: Se ha añadido un nuevo recurso
   download_failed_body: >-

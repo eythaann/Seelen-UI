@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Warna aksen
   date_format: Format tarikh
+  date_format_how_to: Bagaimana untuk menulis format tarikh?
   hardware_acceleration: Pecutan Perkakasan
   hardware_acceleration_description: >-
     Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori, tetapi
@@ -115,6 +116,11 @@ general:
       extreme: Melampau
       minimal: Minimum
     plugged: Dipasang atau mengecas
+  polling_interval: Selang pengundian sistem
+  polling_interval_description: >-
+    Berapa kerap (dalam saat) UI Seelen menyemak sumber sistem seperti CPU, RAM,
+    rangkaian dan aktiviti cakera. Bilangan yang lebih kecil bermakna kemas kini
+    yang lebih kerap, tetapi penggunaan sumber yang lebih tinggi sedikit.
   saturday: Sabtu
   start_of_week: Permulaan Minggu
   startup: Jalankan permulaan?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Tunjukkan Kaunter Windows Terbuka
     show_window_title: Tunjukkan tajuk tetingkap terbuka (hanya mendatar)
     size: Saiz item
+    split_windows: Pisahkan Windows (satu item setiap tetingkap)
     temporal_visibility:
       all: Semua
       label: Keterlihatan Item Dinyahsemat

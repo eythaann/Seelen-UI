@@ -23,11 +23,13 @@ start:
   label: Менюи оғоз
 taskbar_menu:
   add_file: Файли фармоишии PIN
-  add_folder: Папкаи фармоишии PIN
   desktop: Иловаи модули мизи корӣ
   media: Иловаи модули ВАО
   settings: Танзимотҳо
   start: Иловаи модули оғоз
   task_manager: Менеҷери вазифа
+  trash_bin: Модули қуттии партовро илова кунед
+trash_bin:
+  empty_bin: Қуттии партови холӣ
 weg:
   empty: Ягон ашё барои нишон додан

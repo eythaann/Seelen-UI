@@ -23,11 +23,13 @@ start:
   label: תפריט התחל
 taskbar_menu:
   add_file: הצמד קובץ מותאם אישית
-  add_folder: הצמד תיקייה בהתאמה אישית
   desktop: הוסף מודול שולחן עבודה
   media: הוסף מודול מדיה
   settings: הגדרות
   start: הוסף מודול התחל
   task_manager: מנהל משימות
+  trash_bin: הוסף מודול סל המיחזור
+trash_bin:
+  empty_bin: ריק סל המיחזור
 weg:
   empty: אין פריטים להצגה

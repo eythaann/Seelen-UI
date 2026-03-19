@@ -11,6 +11,7 @@ elevated:
     Per una maggiore sicurezza, riavvialo senza autorizzazioni di
     amministratore.
   title: In esecuzione come amministratore
+file_explorer: Esplora file
 resource:
   added: È stata aggiunta una nuova risorsa
   download_failed_body: >-

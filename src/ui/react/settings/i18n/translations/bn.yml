@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট
+  date_format_how_to: কিভাবে একটি তারিখ বিন্যাস লিখতে?
   hardware_acceleration: হার্ডওয়্যার ত্বরণ
   hardware_acceleration_description: >-
     হার্ডওয়্যার ত্বরণ নিষ্ক্রিয় করা মেমরি ব্যবহার হ্রাস করবে, কিন্তু
@@ -117,6 +118,11 @@ general:
       extreme: চরম
       minimal: ন্যূনতম
     plugged: প্লাগ বা চার্জিং
+  polling_interval: সিস্টেম পোলিং ব্যবধান
+  polling_interval_description: >-
+    কত ঘন ঘন (সেকেন্ডে) Seelen UI CPU, RAM, নেটওয়ার্ক এবং ডিস্ক কার্যকলাপের মতো
+    সিস্টেম সংস্থানগুলি পরীক্ষা করে। একটি ছোট সংখ্যা মানে আরো ঘন ঘন আপডেট,
+    কিন্তু সামান্য বেশি সম্পদ ব্যবহার।
   saturday: শনিবার
   start_of_week: সপ্তাহের শুরু
   startup: প্রারম্ভকালে চালানো?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: ওপেন উইন্ডোজ কাউন্টার দেখান
     show_window_title: ওপেন উইন্ডো শিরোনাম দেখান (কেবল অনুভূমিক)
     size: আইটেমের আকার
+    split_windows: স্প্লিট উইন্ডোজ (প্রতি উইন্ডোতে একটি আইটেম)
     temporal_visibility:
       all: সব
       label: আনপিন করা আইটেম দৃশ্যমানতা

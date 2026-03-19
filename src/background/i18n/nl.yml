@@ -10,6 +10,7 @@ elevated:
     Voor een betere veiligheid dient u het programma opnieuw op te starten
     zonder beheerdersrechten.
   title: Uitvoeren als beheerder
+file_explorer: Bestandsverkenner
 resource:
   added: Er is een nieuwe bron toegevoegd
   download_failed_body: >-

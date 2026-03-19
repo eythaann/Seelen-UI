@@ -23,11 +23,13 @@ start:
   label: স্টার্ট মেনু
 taskbar_menu:
   add_file: কাস্টম ফাইল পিন করুন
-  add_folder: পিন কাস্টম ফোল্ডার
   desktop: ডেস্কটপ মডিউল যোগ করুন
   media: মিডিয়া মডিউল যুক্ত করুন
   settings: সেটিংস
   start: স্টার্ট মডিউল যুক্ত করুন
   task_manager: টাস্ক ম্যানেজার
+  trash_bin: রিসাইকেল বিন মডিউল যোগ করুন
+trash_bin:
+  empty_bin: খালি রিসাইকেল বিন
 weg:
   empty: দেখানোর জন্য কোনো আইটেম নেই

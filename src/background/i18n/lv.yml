@@ -10,6 +10,7 @@ elevated:
     Lai nodrošinātu labāku drošību, lūdzu, restartējiet to bez administratora
     atļaujām.
   title: Darbojas kā administrators
+file_explorer: Failu pārlūks
 resource:
   added: Ir pievienots jauns resurss
   download_failed_body: >-

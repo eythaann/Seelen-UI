@@ -10,6 +10,7 @@ elevated:
     Dla większego bezpieczeństwa uruchom go ponownie bez uprawnień
     administratora.
   title: Uruchamianie jako Administrator
+file_explorer: Eksplorator plików
 resource:
   added: Dodano nowy zasób
   download_failed_body: >-

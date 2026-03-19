@@ -6,6 +6,7 @@ elevated:
     This does not add or improve any features, and it may pose a security risk.
     For better security, please restart it without administrator permissions.
   title: Running as Administrator
+file_explorer: File Explorer
 resource:
   added: A new resource has been added
   download_failed_body: >-
@@ -60,4 +61,3 @@ widget_permissions:
 
     Do you want to allow this?
   request_title: Widget Permission Request
-file_explorer: File Explorer

@@ -5,6 +5,7 @@ folder: Папка
 no_matching_items: Не знайдено елементів, що відповідають вашому пошуку
 open_file_location: Відкрийте розташування файлу
 pin: Pin
+pin_to_dock: Закріпити на Dock
 query:
   all: все
   apps: програми

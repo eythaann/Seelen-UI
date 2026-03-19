@@ -9,6 +9,7 @@ elevated:
 
     Daha iyi güvenlik için lütfen yönetici izinleri olmadan yeniden başlatın.
   title: Yönetici olarak çalıştırma
+file_explorer: Dosya Gezgini
 resource:
   added: Yeni bir kaynak eklendi
   download_failed_body: >-

@@ -23,11 +23,13 @@ start:
   label: Bilow Menu
 taskbar_menu:
   add_file: Faylka caadada PIN
-  add_folder: Faylkaaga caadada PIN
   desktop: Kudar Module Desktop
   media: Ku dar module warbaahinta
   settings: Dejinta
   start: Ku dar cutubka bilowga
   task_manager: Maareeyaha Hawsha
+  trash_bin: Kudar Dib-u-warshadaynta Bin Module
+trash_bin:
+  empty_bin: Dib u warshadaynta madhan
 weg:
   empty: Ma jiraan waxyaabo la tuso

@@ -23,11 +23,13 @@ start:
   label: Menù di avvio
 taskbar_menu:
   add_file: Aggiungi File Personalizzato
-  add_folder: Aggiungi Cartella Personalizzata
   desktop: Aggiungi modulo desktop
   media: Aggiungi Modulo Media
   settings: Impostazioni
   start: Aggiungi Modulo Start
   task_manager: Gestione Attività
+  trash_bin: Aggiungi il modulo Cestino
+trash_bin:
+  empty_bin: Cestino vuoto
 weg:
   empty: Nessun elemento da mostrare

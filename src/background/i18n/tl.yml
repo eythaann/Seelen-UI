@@ -10,6 +10,7 @@ elevated:
     Para sa mas mahusay na seguridad, mangyaring i-restart ito nang walang mga
     pahintulot ng administrator.
   title: Tumatakbo bilang Administrator
+file_explorer: File Explorer
 resource:
   added: Ang isang bagong mapagkukunan ay naidagdag
   download_failed_body: >-

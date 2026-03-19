@@ -23,11 +23,13 @@ start:
   label: Izbornik Start
 taskbar_menu:
   add_file: PIN prilagođena datoteka
-  add_folder: PIN prilagođena mapa
   desktop: Dodaj Desktop Module
   media: Dodajte medijski modul
   settings: postavke
   start: Dodajte modul za start
   task_manager: Upravitelj zadataka
+  trash_bin: Dodajte modul koša za smeće
+trash_bin:
+  empty_bin: Ispraznite koš za smeće
 weg:
   empty: Nema stavki za prikaz

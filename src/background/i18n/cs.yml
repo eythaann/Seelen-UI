@@ -9,6 +9,7 @@ elevated:
 
     Pro lepší zabezpečení jej restartujte bez oprávnění správce.
   title: Spuštění jako správce
+file_explorer: Průzkumník souborů
 resource:
   added: Byl přidán nový zdroj
   download_failed_body: >-

@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Rengê Accent
   date_format: Formata Date
+  date_format_how_to: Meriv çawa formek tarîxê dinivîse?
   hardware_acceleration: Hardware Acceleration
   hardware_acceleration_description: >-
     Neçalakkirina bilezkirina hardware dê karanîna bîranînê kêm bike, lê dikare
@@ -115,6 +116,11 @@ general:
       extreme: Bêfêhm zêde
       minimal: Minimal
     plugged: Plug kirin an drav kirin
+  polling_interval: Navbera dengdanê ya pergalê
+  polling_interval_description: >-
+    Çi caran (di çirkeyan de) Seelen UI çavkaniyên pergalê yên wekî CPU, RAM,
+    torê, û çalakiya dîskê kontrol dike. Hejmarek piçûktir tê wateya nûvekirinên
+    pir caran, lê karanîna çavkaniyê hinekî bilindtir e.
   saturday: Şemî
   start_of_week: Destpêka Hefteyê
   startup: Li ser destpêka bisekinin?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Counter Windows-ê vekirî nîşan bikin
     show_window_title: Sernavê pencereyê vekirî nîşan bide (tenê horizontî)
     size: Mezinahiya tiştê
+    split_windows: Windows-ê parçe bike (ji her pencereyê yek tişt)
     temporal_visibility:
       all: Gişt
       label: Dîtina Tiştên Nepînekirî

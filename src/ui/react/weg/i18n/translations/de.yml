@@ -23,11 +23,13 @@ start:
   label: Startmenü
 taskbar_menu:
   add_file: PIN benutzerdefinierte Datei
-  add_folder: Pin benutzerdefinierte Ordner
   desktop: Desktop-Modul hinzufügen
   media: Medienmodul hinzufügen
   settings: Einstellungen
   start: Startmodul hinzufügen
   task_manager: Task-Manager
+  trash_bin: Fügen Sie das Papierkorbmodul hinzu
+trash_bin:
+  empty_bin: Leeren Sie den Papierkorb
 weg:
   empty: Keine Artikel zum Anzeigen vorhanden

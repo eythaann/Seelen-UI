@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: Walang nakitang mga item na tumutugma sa iyong paghahanap
 open_file_location: Buksan ang Lokasyon ng File
 pin: Pin
+pin_to_dock: I-pin sa Dock
 query:
   all: Lahat
   apps: Mga app

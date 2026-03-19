@@ -10,6 +10,7 @@ elevated:
     За по-добра сигурност, моля, рестартирайте го без администраторски
     разрешения.
   title: Работи като администратор
+file_explorer: File Explorer
 resource:
   added: Добавен е нов ресурс
   download_failed_body: >-

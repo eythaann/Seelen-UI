@@ -23,11 +23,13 @@ start:
   label: スタートメニュー
 taskbar_menu:
   add_file: ファイルを追加
-  add_folder: フォルダを追加
   desktop: デスクトップモジュールの追加
   media: メディアモジュールを追加
   settings: 設定
   start: スタートメニューの追加
   task_manager: タスクマネージャー
+  trash_bin: ごみ箱モジュールの追加
+trash_bin:
+  empty_bin: ごみ箱を空にする
 weg:
   empty: 表示する項目がありません

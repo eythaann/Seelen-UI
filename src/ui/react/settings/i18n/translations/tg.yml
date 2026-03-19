@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Ранги ҳисоб
   date_format: Шакли сана
+  date_format_how_to: Формати санаро чӣ гуна бояд нависед?
   hardware_acceleration: Шитоби сахтафзор
   hardware_acceleration_description: >-
     Хомӯш кардани суръатбахшии сахтафзор истифодаи хотираро коҳиш медиҳад, аммо
@@ -115,6 +116,11 @@ general:
       extreme: Шадид
       minimal: Ҳадди аққал
     plugged: Васл кардан ё пур кардани барқ
+  polling_interval: Фосилаи овоздиҳии система
+  polling_interval_description: >-
+    Чанд маротиба (дар сонияҳо) Seelen UI захираҳои системаро ба монанди CPU,
+    RAM, шабака ва фаъолияти диск тафтиш мекунад. Шумораи камтар маънои навсозии
+    зуд-зуд дорад, аммо истифодаи каме бештари захираҳо.
   saturday: шанбе
   start_of_week: Оғози ҳафта
   startup: Оғози кор?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Counter Counter Counter
     show_window_title: Сарлавҳаи тирезаро нишон диҳед (танҳо уфуқӣ)
     size: Андозаи ашё
+    split_windows: Windows-ро тақсим кунед (як адад дар як тиреза)
     temporal_visibility:
       all: Ҳама
       label: Намоиши ҷузъҳои ҷудонашуда

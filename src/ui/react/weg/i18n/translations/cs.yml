@@ -23,11 +23,13 @@ start:
   label: Nabídka Start
 taskbar_menu:
   add_file: Připnout vlastní soubor
-  add_folder: Připnout vlastní složku
   desktop: Přidat modul plochy
   media: Přidat mediální modul
   settings: Nastavení
   start: Přidat startovací modul
   task_manager: Správce úloh
+  trash_bin: Přidat modul koše
+trash_bin:
+  empty_bin: Vyprázdněte koš
 weg:
   empty: Žádné položky k zobrazení

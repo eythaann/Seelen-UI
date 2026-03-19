@@ -9,6 +9,7 @@ elevated:
 
     For bedre sikkerhed skal du genstarte den uden administratortilladelser.
   title: Kører som administrator
+file_explorer: Fil Explorer
 resource:
   added: En ny ressource er blevet tilføjet
   download_failed_body: >-

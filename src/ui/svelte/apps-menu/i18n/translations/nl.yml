@@ -5,6 +5,7 @@ folder: Map
 no_matching_items: Er zijn geen items gevonden die overeenkomen met uw zoekopdracht
 open_file_location: Open Bestandslocatie
 pin: Pin
+pin_to_dock: Vastmaken aan dock
 query:
   all: Alle
   apps: Apps

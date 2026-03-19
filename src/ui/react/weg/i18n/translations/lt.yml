@@ -23,11 +23,13 @@ start:
   label: Pradėti meniu
 taskbar_menu:
   add_file: PIN pasirinktinis failas
-  add_folder: PIN pasirinktinis aplankas
   desktop: Pridėti darbalaukio modulį
   media: Pridėkite laikmenos modulį
   settings: Nustatymai
   start: Pridėkite pradžios modulį
   task_manager: Užduočių tvarkyklė
+  trash_bin: Pridėkite šiukšliadėžės modulį
+trash_bin:
+  empty_bin: Ištuštinkite šiukšliadėžę
 weg:
   empty: Nėra elementų, kuriuos būtų galima rodyti

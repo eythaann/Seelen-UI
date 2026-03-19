@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Akzenter Faarf
   date_format: Datum Format
+  date_format_how_to: Wéi schreiwen ech en Datumformat
   hardware_acceleration: Hardware Beschleunegung
   hardware_acceleration_description: >-
     Desaktivéiere vun Hardware Beschleunegung reduzéiert d'Erënnerungsverbrauch,
@@ -115,6 +116,11 @@ general:
       extreme: Extrem
       minimal: Minimal
     plugged: Ugeschloss oder opluede
+  polling_interval: System Ëmfro Intervall
+  polling_interval_description: >-
+    Wéi dacks (a Sekonnen) Seelen UI iwwerpréift Systemressourcen wéi CPU, RAM,
+    Netzwierk an Diskaktivitéit. Eng méi kleng Zuel bedeit méi heefeg Updates,
+    awer e bësse méi héich Ressourceverbrauch.
   saturday: Samschdeg
   start_of_week: Start vun der Woch
   startup: Run op Startup?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Show oppe Windows Konter
     show_window_title: Show Open Fenster Titel (nëmmen horizontal)
     size: Telefonsgrouss
+    split_windows: Split Windows (een Element pro Fënster)
     temporal_visibility:
       all: All
       label: Unpinned Elementer Visibilitéit

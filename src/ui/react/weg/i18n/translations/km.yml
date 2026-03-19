@@ -23,11 +23,13 @@ start:
   label: ម៉ឺនុយចាប់ផ្តើម
 taskbar_menu:
   add_file: លេខកូដសម្ងាត់លេខសម្ងាត់
-  add_folder: ថតម្ជុលផ្ទាល់ខ្លួន
   desktop: បន្ថែមម៉ូឌុលផ្ទៃតុ
   media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
   settings: ការកំណត់
   start: បន្ថែមម៉ូឌុលចាប់ផ្តើម
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
+  trash_bin: បន្ថែមម៉ូឌុល Recycle Bin
+trash_bin:
+  empty_bin: ធុងសំរាមទទេ
 weg:
   empty: មិនមានធាតុដែលត្រូវបង្ហាញទេ។

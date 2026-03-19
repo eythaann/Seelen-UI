@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი
+  date_format_how_to: როგორ დავწეროთ თარიღის ფორმატი?
   hardware_acceleration: აპარატურის აჩქარება
   hardware_acceleration_description: >-
     ტექნიკის აჩქარების გამორთვა შეამცირებს მეხსიერების გამოყენებას, მაგრამ
@@ -115,6 +116,11 @@ general:
       extreme: უკიდურესი
       minimal: მინიმალური
     plugged: ჩართული ან დატენვა
+  polling_interval: სისტემის გამოკითხვის ინტერვალი
+  polling_interval_description: >-
+    რამდენად ხშირად (წამებში) Seelen UI ამოწმებს სისტემის რესურსებს, როგორიცაა
+    CPU, RAM, ქსელი და დისკის აქტივობა. უფრო მცირე რაოდენობა ნიშნავს უფრო ხშირ
+    განახლებებს, მაგრამ ოდნავ უფრო მეტ რესურსს.
   saturday: შაბათი
   start_of_week: კვირის დასაწყისი
   startup: გაშვებით გაშვებით?
@@ -327,6 +333,7 @@ weg:
     show_instance_counter: აჩვენეთ ღია Windows Counter
     show_window_title: აჩვენეთ ღია ფანჯრის სათაური (მხოლოდ ჰორიზონტალური)
     size: ნივთის ზომა
+    split_windows: Windows-ის გაყოფა (თითო ელემენტი თითო ფანჯარაში)
     temporal_visibility:
       all: ყველა
       label: ჩამაგრებული ერთეულების ხილვადობა

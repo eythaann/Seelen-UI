@@ -23,11 +23,13 @@ start:
   label: Meniul Start
 taskbar_menu:
   add_file: Fișier personalizat
-  add_folder: Pin folder personalizat
   desktop: Adăugați modul desktop
   media: Adăugați modul media
   settings: Setări
   start: Adăugați modulul de pornire
   task_manager: Manager de activități
+  trash_bin: Adăugați modulul Coș de reciclare
+trash_bin:
+  empty_bin: Goliți coșul de reciclare
 weg:
   empty: Nu există elemente de afișat

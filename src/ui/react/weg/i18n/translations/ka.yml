@@ -23,11 +23,13 @@ start:
   label: დაწყება მენიუ
 taskbar_menu:
   add_file: Pin Custom File
-  add_folder: Pin Custom Folder
   desktop: დესკტოპის მოდულის დამატება
   media: დაამატეთ მედია მოდული
   settings: პარამეტრები
   start: დაამატეთ დაწყების მოდული
   task_manager: სამუშაო მენეჯერი
+  trash_bin: დაამატეთ Recycle Bin მოდული
+trash_bin:
+  empty_bin: ცარიელი გადასამუშავებელი ურნა
 weg:
   empty: საჩვენებელი ელემენტი არ არის

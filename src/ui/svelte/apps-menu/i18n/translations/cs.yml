@@ -5,6 +5,7 @@ folder: Složka
 no_matching_items: Nebyly nalezeny žádné položky odpovídající vašemu hledání
 open_file_location: Otevřete Umístění souboru
 pin: Kolík
+pin_to_dock: Připnout do doku
 query:
   all: Vše
   apps: Aplikace

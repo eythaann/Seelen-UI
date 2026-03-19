@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Боја на акцент
   date_format: Формат на датум
+  date_format_how_to: Како да напишете формат на датум?
   hardware_acceleration: Хардверско забрзување
   hardware_acceleration_description: >-
     Оневозможувањето на хардверското забрзување ќе ја намали употребата на
@@ -117,6 +118,11 @@ general:
       extreme: Екстремни
       minimal: Минимално
     plugged: Вклучен или полнење
+  polling_interval: Интервал на системски анкети
+  polling_interval_description: >-
+    Колку често (во секунди) Seelen UI ги проверува системските ресурси како
+    процесорот, RAM меморијата, мрежата и активноста на дискот. Помал број значи
+    почести ажурирања, но малку поголема употреба на ресурси.
   saturday: сабота
   start_of_week: Почеток на неделата
   startup: Стартувам на стартување?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Покажете бројач на отворени прозорци
     show_window_title: Покажете го насловот на отворен прозорец (само хоризонтално)
     size: Големина на артикалот
+    split_windows: Сплит Windows (една ставка по прозорец)
     temporal_visibility:
       all: Сите
       label: Видливост на откачени ставки

@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Aksen warna
   date_format: Format tanggal
+  date_format_how_to: Bagaimana cara menulis format tanggal?
   hardware_acceleration: Akselerasi Perangkat Keras
   hardware_acceleration_description: >-
     Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori,
@@ -117,6 +118,12 @@ general:
       extreme: Ekstrim
       minimal: Minimal
     plugged: Terhubung atau pengisian daya
+  polling_interval: Interval pemungutan suara sistem
+  polling_interval_description: >-
+    Seberapa sering (dalam hitungan detik) Seelen UI memeriksa sumber daya
+    sistem seperti CPU, RAM, jaringan, dan aktivitas disk. Angka yang lebih
+    kecil berarti pembaruan yang lebih sering, namun penggunaan sumber daya
+    sedikit lebih tinggi.
   saturday: Sabtu
   start_of_week: Awal Minggu
   startup: Jalankan saat startup?
@@ -331,6 +338,7 @@ weg:
     show_instance_counter: Tampilkan penghitung jendela yang terbuka
     show_window_title: Menampilkan judul jendela yang terbuka (hanya horizontal)
     size: Ukuran item
+    split_windows: Split Windows (satu item per jendela)
     temporal_visibility:
       all: Semua
       label: Visibilitas Item yang Tidak Disematkan

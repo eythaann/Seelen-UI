@@ -5,6 +5,7 @@ folder: 文件夹
 no_matching_items: 未找到与您的搜索相符的商品
 open_file_location: 打开文件位置
 pin: 别针
+pin_to_dock: 固定到底座
 query:
   all: 全部
   apps: 应用程序

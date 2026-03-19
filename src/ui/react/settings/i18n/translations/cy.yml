@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad
+  date_format_how_to: Sut i ysgrifennu fformat dyddiad?
   hardware_acceleration: Cyflymiad Caledwedd
   hardware_acceleration_description: >-
     Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof, ond gall
@@ -115,6 +116,11 @@ general:
       extreme: Eithafol
       minimal: Lleiaf posibl
     plugged: Plygio neu wefru
+  polling_interval: Cyfwng pleidleisio system
+  polling_interval_description: >-
+    Pa mor aml (mewn eiliadau) mae Seelen UI yn gwirio adnoddau system fel CPU,
+    RAM, rhwydwaith, a gweithgaredd disg. Mae nifer llai yn golygu diweddariadau
+    amlach, ond defnydd adnoddau ychydig yn uwch.
   saturday: dydd Sadwrn
   start_of_week: Dechrau'r Wythnos
   startup: Rhedeg ar gychwyn?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Dangos cownter ffenestri agored
     show_window_title: Dangos teitl ffenestr agored (dim ond llorweddol)
     size: Maint eitem
+    split_windows: Hollti Windows (un eitem fesul ffenestr)
     temporal_visibility:
       all: Pawb
       label: Eitemau heb eu Pinio Gwelededd

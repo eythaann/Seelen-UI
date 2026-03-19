@@ -93,6 +93,7 @@ extras:
 general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
+  date_format_how_to: ਇੱਕ ਮਿਤੀ ਫਾਰਮੈਟ ਕਿਵੇਂ ਲਿਖਣਾ ਹੈ?
   hardware_acceleration: ਹਾਰਡਵੇਅਰ ਪ੍ਰਵੇਗ
   hardware_acceleration_description: >-
     ਹਾਰਡਵੇਅਰ ਪ੍ਰਵੇਗ ਨੂੰ ਅਸਮਰੱਥ ਕਰਨ ਨਾਲ ਮੈਮੋਰੀ ਦੀ ਵਰਤੋਂ ਘੱਟ ਜਾਵੇਗੀ, ਪਰ ਪ੍ਰਦਰਸ਼ਨ
@@ -111,6 +112,11 @@ general:
       extreme: ਅੱਤ
       minimal: ਘੱਟੋ ਘੱਟ
     plugged: ਪਲੱਗ ਕੀਤਾ ਜਾਂ ਚਾਰਜ ਕਰਨਾ
+  polling_interval: ਸਿਸਟਮ ਪੋਲਿੰਗ ਅੰਤਰਾਲ
+  polling_interval_description: >-
+    ਕਿੰਨੀ ਵਾਰ (ਸਕਿੰਟਾਂ ਵਿੱਚ) ਸੀਲੇਨ UI CPU, RAM, ਨੈੱਟਵਰਕ, ਅਤੇ ਡਿਸਕ ਗਤੀਵਿਧੀ ਵਰਗੇ
+    ਸਿਸਟਮ ਸਰੋਤਾਂ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ। ਇੱਕ ਛੋਟੀ ਸੰਖਿਆ ਦਾ ਮਤਲਬ ਹੈ ਵਧੇਰੇ ਵਾਰ-ਵਾਰ
+    ਅੱਪਡੇਟ, ਪਰ ਥੋੜਾ ਵੱਧ ਸਰੋਤ ਵਰਤੋਂ।
   saturday: ਸ਼ਨੀਵਾਰ
   start_of_week: ਹਫ਼ਤੇ ਦੀ ਸ਼ੁਰੂਆਤ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
@@ -323,6 +329,7 @@ weg:
     show_instance_counter: ਓਪਨ ਵਿੰਡੋਜ਼ ਕਾਉਂਟਰ ਦਿਖਾਓ
     show_window_title: ਓਪਨ ਵਿੰਡੋ ਦਾ ਸਿਰਲੇਖ ਦਿਖਾਓ (ਸਿਰਫ ਖਿਤਿਜੀ)
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
+    split_windows: ਵਿੰਡੋਜ਼ ਨੂੰ ਸਪਲਿਟ ਕਰੋ (ਪ੍ਰਤੀ ਵਿੰਡੋ ਇੱਕ ਆਈਟਮ)
     temporal_visibility:
       all: ਸਾਰੇ
       label: ਅਨਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ

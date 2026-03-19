@@ -9,6 +9,7 @@ elevated:
 
     For bedre sikkerhet, start den på nytt uten administratortillatelser.
   title: Kjører som administrator
+file_explorer: Filutforsker
 resource:
   added: En ny ressurs er lagt til
   download_failed_body: >-

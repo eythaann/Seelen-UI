@@ -23,11 +23,13 @@ start:
   label: Menu Mula
 taskbar_menu:
   add_file: Fail tersuai pin
-  add_folder: Pin folder adat
   desktop: Tambah Modul Desktop
   media: Tambah Modul Media
   settings: tetapan
   start: Tambah Modul Mula
   task_manager: Pengurus Tugas
+  trash_bin: Tambah Modul Tong Kitar Semula
+trash_bin:
+  empty_bin: Tong Kitar Semula Kosong
 weg:
   empty: Tiada item untuk ditunjukkan

@@ -98,6 +98,7 @@ extras:
 general:
   accent_color: Akcentus szín
   date_format: Dátum formátum
+  date_format_how_to: Hogyan írjunk dátumformátumot?
   hardware_acceleration: Hardveres gyorsítás
   hardware_acceleration_description: >-
     A hardveres gyorsítás letiltása csökkenti a memóriahasználatot, de
@@ -116,6 +117,12 @@ general:
       extreme: Szélső
       minimal: Minimális
     plugged: Bedugva vagy töltés
+  polling_interval: Rendszerlekérdezési intervallum
+  polling_interval_description: >-
+    Milyen gyakran (másodpercben) ellenőrzi a Seelen UI a rendszererőforrásokat,
+    például a CPU-t, a RAM-ot, a hálózatot és a lemeztevékenységet. A kisebb
+    szám gyakoribb frissítéseket jelent, de valamivel nagyobb
+    erőforrás-felhasználást.
   saturday: szombat
   start_of_week: Hét kezdete
   startup: Futtatni indításkor?
@@ -330,6 +337,7 @@ weg:
     show_instance_counter: Megnyílt ablakok számlálójának megjelenítése
     show_window_title: Megnyílt ablak címének megjelenítése (csak vízszintes)
     size: Elemméret
+    split_windows: Osztott ablakok (ablakonként egy elem)
     temporal_visibility:
       all: Minden
       label: Rögzített elemek láthatósága

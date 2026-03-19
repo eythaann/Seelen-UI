@@ -96,6 +96,7 @@ extras:
 general:
   accent_color: Rangi ya lafudhi
   date_format: Muundo wa tarehe
+  date_format_how_to: Jinsi ya kuandika muundo wa tarehe?
   hardware_acceleration: Kuongeza kasi ya vifaa
   hardware_acceleration_description: >-
     Kuzima uongezaji kasi wa maunzi kutapunguza matumizi ya kumbukumbu, lakini
@@ -114,6 +115,11 @@ general:
       extreme: Uliokithiri
       minimal: Ndogo
     plugged: Kuziba au kuchaji
+  polling_interval: Muda wa upigaji kura wa mfumo
+  polling_interval_description: >-
+    Ni mara ngapi (kwa sekunde) Seelen UI hukagua rasilimali za mfumo kama vile
+    CPU, RAM, mtandao na shughuli za diski. Nambari ndogo inamaanisha masasisho
+    ya mara kwa mara, lakini matumizi ya juu kidogo ya rasilimali.
   saturday: Jumamosi
   start_of_week: Mwanzo wa Wiki
   startup: Kuendesha kuanza?
@@ -326,6 +332,7 @@ weg:
     show_instance_counter: Onyesha wazi Windows Counter
     show_window_title: Onyesha kichwa wazi cha windows (usawa tu)
     size: Saizi ya bidhaa
+    split_windows: Gawanya Windows (kipengee kimoja kwa kila dirisha)
     temporal_visibility:
       all: Wote
       label: Mwonekano wa Vipengee Vilivyobanduliwa

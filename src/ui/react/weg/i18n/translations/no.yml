@@ -23,11 +23,13 @@ start:
   label: Start-menyen
 taskbar_menu:
   add_file: Pin tilpasset fil
-  add_folder: Pin tilpasset mappe
   desktop: Legg til skrivebordsmodul
   media: Legg til mediemodul
   settings: Innstillinger
   start: Legg til startmodul
   task_manager: Oppgavebehandling
+  trash_bin: Legg til papirkurvmodul
+trash_bin:
+  empty_bin: Tøm papirkurven
 weg:
   empty: Ingen elementer å vise

@@ -23,11 +23,13 @@ start:
   label: Menu Iniciar
 taskbar_menu:
   add_file: PIN File personalizado
-  add_folder: Pin Pasta Custom
   desktop: Adicionar módulo de área de trabalho
   media: Adicione módulo de mídia
   settings: Configurações
   start: Adicione o módulo inicial
   task_manager: Gerente de tarefas
+  trash_bin: Adicionar módulo de reciclagem
+trash_bin:
+  empty_bin: Esvaziar Lixeira
 weg:
   empty: Sem itens para mostrar

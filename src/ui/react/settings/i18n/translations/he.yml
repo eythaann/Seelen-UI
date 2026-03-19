@@ -94,6 +94,7 @@ extras:
 general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך
+  date_format_how_to: איך כותבים פורמט תאריך?
   hardware_acceleration: האצת חומרה
   hardware_acceleration_description: >-
     השבתת האצת החומרה תפחית את השימוש בזיכרון, אך עלולה לגרום לבעיות ביצועים.
@@ -111,6 +112,11 @@ general:
       extreme: קיצוני
       minimal: מִינִימָלִי
     plugged: מחובר או טעינה
+  polling_interval: מרווח סקרים של המערכת
+  polling_interval_description: >-
+    באיזו תדירות (בשניות) ממשק המשתמש של Seelen בודק משאבי מערכת כמו מעבד,
+    זיכרון RAM, רשת ודיסק פעילות. מספר קטן יותר פירושו עדכונים תכופים יותר, אך
+    שימוש מעט יותר במשאבים.
   saturday: שַׁבָּת
   start_of_week: תחילת השבוע
   startup: לרוץ בהפעלה?
@@ -319,6 +325,7 @@ weg:
     show_instance_counter: הצג דלפק Windows פתוח
     show_window_title: הצג כותרת חלון פתוחה (אופקית בלבד)
     size: גודל פריט
+    split_windows: חלונות מפוצלים (פריט אחד לכל חלון)
     temporal_visibility:
       all: כל
       label: נראות פריטים לא מוצמדים

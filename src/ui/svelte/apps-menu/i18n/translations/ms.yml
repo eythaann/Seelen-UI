@@ -5,6 +5,7 @@ folder: Folder
 no_matching_items: Tiada item ditemui sepadan dengan carian anda
 open_file_location: Buka Lokasi Fail
 pin: Pin
+pin_to_dock: Sematkan pada Dok
 query:
   all: Semua
   apps: Apl

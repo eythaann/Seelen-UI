@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Accent kleur
   date_format: Datumformaat
+  date_format_how_to: Hoe schrijf je een datumformaat?
   hardware_acceleration: Hardwareversnelling
   hardware_acceleration_description: >-
     Het uitschakelen van hardwareversnelling vermindert het geheugengebruik,
@@ -115,6 +116,11 @@ general:
       extreme: Extreem
       minimal: Minimaal
     plugged: Aangesloten of opladen
+  polling_interval: Systeem polling-interval
+  polling_interval_description: >-
+    Hoe vaak (in seconden) Seelen UI systeembronnen zoals CPU, RAM, netwerk en
+    schijfactiviteit controleert. Een kleiner aantal betekent frequentere
+    updates, maar een iets hoger bronnengebruik.
   saturday: Zaterdag
   start_of_week: Begin van de week
   startup: Uitvoeren bij het starten?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Toon open vensters teller
     show_window_title: Titel van geopend venster tonen (alleen horizontaal)
     size: Item grootte
+    split_windows: Vensters splitsen (één item per venster)
     temporal_visibility:
       all: Alle
       label: Zichtbaarheid van losgemaakte items

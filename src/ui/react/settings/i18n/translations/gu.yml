@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: ઉચ્ચારણ રંગ
   date_format: તારીખ ફોર્મેટ
+  date_format_how_to: તારીખ ફોર્મેટ કેવી રીતે લખવું?
   hardware_acceleration: હાર્ડવેર પ્રવેગક
   hardware_acceleration_description: >-
     હાર્ડવેર પ્રવેગકને અક્ષમ કરવાથી મેમરીનો વપરાશ ઘટશે, પરંતુ પ્રદર્શન
@@ -115,6 +116,11 @@ general:
       extreme: આત્યંતિક
       minimal: પ્રમાણસર
     plugged: પ્લગ અથવા ચાર્જિંગ
+  polling_interval: સિસ્ટમ મતદાન અંતરાલ
+  polling_interval_description: >-
+    સીલેન UI કેટલી વાર (સેકન્ડોમાં) સીપીયુ, રેમ, નેટવર્ક અને ડિસ્ક પ્રવૃત્તિ
+    જેવા સિસ્ટમ સંસાધનોની તપાસ કરે છે. નાની સંખ્યાનો અર્થ વધુ વારંવાર અપડેટ્સ,
+    પરંતુ સંસાધનનો થોડો વધારે ઉપયોગ.
   saturday: શનિવાર
   start_of_week: સપ્તાહની શરૂઆત
   startup: સ્ટાર્ટઅપ પર ચલાવો?
@@ -327,6 +333,7 @@ weg:
     show_instance_counter: ખુલ્લા વિંડોઝ કાઉન્ટર બતાવો
     show_window_title: ખુલ્લી વિંડો શીર્ષક બતાવો (ફક્ત આડી)
     size: વસ્તુનું કદ
+    split_windows: વિન્ડોઝ સ્પ્લિટ કરો (વિન્ડો દીઠ એક આઇટમ)
     temporal_visibility:
       all: બધા
       label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા

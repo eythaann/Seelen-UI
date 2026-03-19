@@ -10,6 +10,7 @@ elevated:
     Turvallisuuden parantamiseksi käynnistä se uudelleen ilman
     järjestelmänvalvojan oikeuksia.
   title: Toimii järjestelmänvalvojana
+file_explorer: Tiedostonhallinta
 resource:
   added: Uusi resurssi on lisätty
   download_failed_body: >-

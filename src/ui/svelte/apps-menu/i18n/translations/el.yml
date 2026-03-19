@@ -5,6 +5,7 @@ folder: Φάκελος
 no_matching_items: Δεν βρέθηκαν στοιχεία που να ταιριάζουν με την αναζήτησή σας
 open_file_location: Ανοίξτε την τοποθεσία αρχείου
 pin: Καρφίτσα
+pin_to_dock: Καρφίτσωμα στο Dock
 query:
   all: Ολοι
   apps: Εφαρμογές

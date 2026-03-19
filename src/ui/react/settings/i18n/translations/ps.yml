@@ -96,6 +96,7 @@ extras:
 general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه
+  date_format_how_to: د نیټې بڼه څنګه لیکل کیږي؟
   hardware_acceleration: د هارډویر سرعت
   hardware_acceleration_description: >-
     د هارډویر سرعت غیر فعال کول به د حافظې کارول کم کړي ، مګر د فعالیت مسلو لامل
@@ -113,6 +114,11 @@ general:
       extreme: ډیر
       minimal: لږترلږه
     plugged: فلګ یا چارج کول
+  polling_interval: د رای ورکولو سیسټم وقفه
+  polling_interval_description: >-
+    څو ځله (په ثانیو کې) سیلین UI د سیسټم سرچینې لکه CPU، RAM، شبکه، او ډیسک
+    فعالیت چک کوي. یو کوچنی شمیر د ډیرو پرله پسې تازه معلوماتو معنی لري، مګر د
+    سرچینو کارول یو څه لوړ دي.
   saturday: شنبه
   start_of_week: د اونۍ پیل
   startup: په پیل کې چلول؟
@@ -323,6 +329,7 @@ weg:
     show_instance_counter: د خلاصې وینډوز کاونټر وښایاست
     show_window_title: د خلاص کړکۍ سرلیک وښایاست (یوازې افقی)
     size: د توکي اندازه
+    split_windows: وینډوز تقسیم کړئ (په هره کړکۍ کې یو توکي)
     temporal_visibility:
       all: ټول
       label: د ناپاک شوي توکو لید لید

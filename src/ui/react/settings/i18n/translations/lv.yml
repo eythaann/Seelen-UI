@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Akcents
   date_format: Datuma formāts
+  date_format_how_to: Kā uzrakstīt datuma formātu?
   hardware_acceleration: Aparatūras paātrinājums
   hardware_acceleration_description: >-
     Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu, taču var
@@ -117,6 +118,11 @@ general:
       extreme: Galējs
       minimal: Minimāls
     plugged: Pievienots vai uzlādēts
+  polling_interval: Sistēmas aptaujas intervāls
+  polling_interval_description: >-
+    Cik bieži (sekundēs) Seelen UI pārbauda sistēmas resursus, piemēram, CPU,
+    RAM, tīkla un diska darbību. Mazāks skaitlis nozīmē biežākus atjauninājumus,
+    bet nedaudz lielāku resursu izmantošanu.
   saturday: sestdiena
   start_of_week: Nedēļas sākums
   startup: Skriet startup?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Rādīt atvērto logu skaitītāju
     show_window_title: Rādīt atvērta loga virsrakstu (tikai horizontāli)
     size: Vienuma izmērs
+    split_windows: Sadalīti logi (viens vienums katrā logā)
     temporal_visibility:
       all: Visi
       label: Atsprausto vienumu redzamība

@@ -23,11 +23,13 @@ start:
   label: Sākt izvēlne
 taskbar_menu:
   add_file: Piesprauž pielāgotu failu
-  add_folder: Piespraudiet pielāgoto mapi
   desktop: Pievienojiet darbvirsmas moduli
   media: Pievienojiet multivides moduli
   settings: Iestatījumi
   start: Pievienojiet starta moduli
   task_manager: Uzdevumu pārvaldnieks
+  trash_bin: Pievienojiet atkritnes moduli
+trash_bin:
+  empty_bin: Iztukšojiet atkritni
 weg:
   empty: Nav vienumu, ko parādīt

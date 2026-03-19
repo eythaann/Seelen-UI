@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Prízvuk
   date_format: Formát
+  date_format_how_to: Ako napísať formát dátumu?
   hardware_acceleration: Hardvérová akcelerácia
   hardware_acceleration_description: >-
     Vypnutie hardvérovej akcelerácie zníži využitie pamäte, ale môže spôsobiť
@@ -115,6 +116,11 @@ general:
       extreme: Extrémny
       minimal: Minimálny
     plugged: Zapojené alebo nabíjanie
+  polling_interval: Interval dotazovania systému
+  polling_interval_description: >-
+    Ako často (v sekundách) používateľské rozhranie Seelen kontroluje systémové
+    zdroje, ako je CPU, RAM, sieť a aktivita disku. Menší počet znamená
+    častejšie aktualizácie, ale o niečo vyššie využitie zdrojov.
   saturday: sobota
   start_of_week: Začiatok týždňa
   startup: Spustiť pri štarte?
@@ -333,6 +339,7 @@ weg:
     show_instance_counter: Zobrazenie počítadla otvorených okien
     show_window_title: Zobrazenie názvu otvoreného okna (len horizontálne)
     size: Veľkosť položky
+    split_windows: Rozdeliť okná (jedna položka na okno)
     temporal_visibility:
       all: Všetky
       label: Viditeľnosť nepripnutých položiek

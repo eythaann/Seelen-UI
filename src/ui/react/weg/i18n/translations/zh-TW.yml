@@ -23,11 +23,13 @@ start:
   label: 開始菜單
 taskbar_menu:
   add_file: 引導自定義文件
-  add_folder: 引腳自定義文件夾
   desktop: 添加桌面模塊
   media: 添加媒體模塊
   settings: 設定
   start: 添加開始模塊
   task_manager: 工作管理員
+  trash_bin: 新增回收站模組
+trash_bin:
+  empty_bin: 清空回收站
 weg:
   empty: 沒有顯示的物品

@@ -23,11 +23,13 @@ start:
   label: Menu Iniciar
 taskbar_menu:
   add_file: Fixar arquivo personalizado
-  add_folder: Fixar pasta personalizada
   desktop: Adicionar módulo de área de trabalho
   media: Adicionar módulo de mídia
   settings: Configurações
   start: Adicionar módulo Iniciar
   task_manager: Gerenciador de Tarefas
+  trash_bin: Adicionar módulo de lixeira
+trash_bin:
+  empty_bin: Esvaziar Lixeira
 weg:
   empty: Nenhum item para mostrar

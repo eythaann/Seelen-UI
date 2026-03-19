@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Korostusväri
   date_format: Päiväysmuoto
+  date_format_how_to: Kuinka kirjoittaa päivämäärämuoto?
   hardware_acceleration: Laitteistokiihdytys
   hardware_acceleration_description: >-
     Laitteistokiihdytyksen poistaminen käytöstä vähentää muistin käyttöä, mutta
@@ -117,6 +118,11 @@ general:
       extreme: Äärimmäinen
       minimal: Minimaalinen
     plugged: Kytketty tai lataus
+  polling_interval: Järjestelmän äänestysväli
+  polling_interval_description: >-
+    Kuinka usein (sekunneissa) Seelen UI tarkistaa järjestelmäresurssit, kuten
+    suorittimen, RAM-muistin, verkon ja levytoiminnan. Pienempi luku tarkoittaa
+    useammin päivityksiä, mutta hieman suurempaa resurssien käyttöä.
   saturday: lauantai
   start_of_week: Viikon alku
   startup: Suorittaa käynnistyksen yhteydessä?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Näytä avoimien ikkunoiden laskuri
     show_window_title: Näytä avoimen ikkunan otsikko (vain vaakasuora)
     size: Esineen koko
+    split_windows: Jaetut ikkunat (yksi kohde per ikkuna)
     temporal_visibility:
       all: Kaikki
       label: Irrotettujen kohteiden näkyvyys

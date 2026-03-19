@@ -94,6 +94,7 @@ extras:
 general:
   accent_color: สีเน้น
   date_format: รูปแบบวันที่
+  date_format_how_to: จะเขียนรูปแบบวันที่ได้อย่างไร?
   hardware_acceleration: การเร่งความเร็วด้วยฮาร์ดแวร์
   hardware_acceleration_description: >-
     การปิดใช้งานการเร่งด้วยฮาร์ดแวร์จะลดการใช้หน่วยความจำ
@@ -112,6 +113,11 @@ general:
       extreme: สุดขีด
       minimal: น้อยที่สุด
     plugged: เสียบหรือชาร์จ
+  polling_interval: ช่วงเวลาการสำรวจระบบ
+  polling_interval_description: >-
+    Seelen UI ตรวจสอบทรัพยากรระบบ เช่น CPU, RAM, เครือข่าย
+    และกิจกรรมดิสก์บ่อยแค่ไหน (เป็นวินาที)
+    จำนวนที่น้อยกว่าหมายถึงการอัปเดตบ่อยขึ้น แต่การใช้ทรัพยากรสูงขึ้นเล็กน้อย
   saturday: วันเสาร์
   start_of_week: เริ่มต้นสัปดาห์
   startup: วิ่งเมื่อเริ่มต้น?
@@ -320,6 +326,7 @@ weg:
     show_instance_counter: แสดงตัวนับ Windows Open
     show_window_title: แสดงชื่อเปิดหน้าต่าง (แนวนอนเท่านั้น)
     size: ขนาดรายการ
+    split_windows: แยก Windows (หนึ่งรายการต่อหน้าต่าง)
     temporal_visibility:
       all: ทั้งหมด
       label: การมองเห็นรายการที่เลิกปักหมุด

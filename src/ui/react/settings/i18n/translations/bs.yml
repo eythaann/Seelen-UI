@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Akcentna boja
   date_format: Format datuma
+  date_format_how_to: Kako napisati format datuma?
   hardware_acceleration: Hardversko ubrzanje
   hardware_acceleration_description: >-
     Onemogućavanje hardverskog ubrzanja će smanjiti upotrebu memorije, ali može
@@ -115,6 +116,11 @@ general:
       extreme: Ekstremno
       minimal: Minimalan
     plugged: Uključen ili punjenje
+  polling_interval: Sistemski interval anketiranja
+  polling_interval_description: >-
+    Koliko često (u sekundama) Seelen UI provjerava sistemske resurse kao što su
+    CPU, RAM, mreža i aktivnost diska. Manji broj znači češće ažuriranje, ali
+    nešto veću upotrebu resursa.
   saturday: Subota
   start_of_week: Početak sedmice
   startup: Trčite na pokretanju?
@@ -327,6 +333,7 @@ weg:
     show_instance_counter: Pokaži otvoriti brojač Windows
     show_window_title: Prikaži naziv otvorenog prozora (samo horizontalno)
     size: Veličina predmeta
+    split_windows: Podijeljeni prozori (jedna stavka po prozoru)
     temporal_visibility:
       all: Sve
       label: Vidljivost nezakačenih stavki

@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Barvný nádech
   date_format: Formát datumu
+  date_format_how_to: Jak napsat formát data?
   hardware_acceleration: Hardwarová akcelerace
   hardware_acceleration_description: >-
     Zakázání hardwarové akcelerace sníží využití paměti, ale může způsobit
@@ -115,6 +116,11 @@ general:
       extreme: Extrémní
       minimal: Minimální
     plugged: Připojené nebo nabíjení
+  polling_interval: Interval dotazování systému
+  polling_interval_description: >-
+    Jak často (v sekundách) uživatelské rozhraní Seelen kontroluje systémové
+    prostředky, jako je CPU, RAM, síť a aktivita disku. Menší číslo znamená
+    častější aktualizace, ale o něco vyšší využití zdrojů.
   saturday: sobota
   start_of_week: Začátek týdne
   startup: Spoustit při každém startu?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Zobrazit počítadlo otevřených oken
     show_window_title: Zobrazit název otevřeného okna (pouze horizontálně)
     size: Velikost položky
+    split_windows: Rozdělit okna (jedna položka na okno)
     temporal_visibility:
       all: Vše
       label: Viditelnost nepřipnutých položek

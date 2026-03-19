@@ -23,11 +23,13 @@ start:
   label: ເມນູເລີ່ມຕົ້ນ
 taskbar_menu:
   add_file: PIN File Custom
-  add_folder: PIN Custom FOLLER
   desktop: ເພີ່ມໂມດູນ Desktop
   media: ຕື່ມການໂມດູນສື່
   settings: ການຕັ້ງຄ່າ
   start: ເພີ່ມໂມດູນ Start
   task_manager: Task Manager
+  trash_bin: ເພີ່ມໂມດູນ Recycle Bin
+trash_bin:
+  empty_bin: ຖັງ Recycle ຫວ່າງເປົ່າ
 weg:
   empty: ບໍ່ມີລາຍການໃຫ້ສະແດງ

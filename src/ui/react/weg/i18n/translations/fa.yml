@@ -23,11 +23,13 @@ start:
   label: منوی شروع
 taskbar_menu:
   add_file: پرونده سفارشی
-  add_folder: پوشه سفارشی پین
   desktop: اضافه کردن ماژول دسکتاپ
   media: ماژول رسانه را اضافه کنید
   settings: تنظیمات
   start: ماژول شروع را اضافه کنید
   task_manager: Task Manager
+  trash_bin: اضافه کردن ماژول سطل بازیافت
+trash_bin:
+  empty_bin: سطل بازیافت خالی
 weg:
   empty: هیچ موردی برای نمایش وجود ندارد

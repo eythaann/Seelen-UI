@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Akcento spalva
   date_format: Datos formatas
+  date_format_how_to: Kaip parašyti datos formatą?
   hardware_acceleration: Aparatinės įrangos pagreitis
   hardware_acceleration_description: >-
     Išjungus aparatinės įrangos spartinimą sumažės atminties naudojimas, tačiau
@@ -115,6 +116,11 @@ general:
       extreme: Kraštutinumas
       minimal: Minimalus
     plugged: Prijungtas ar įkrovimas
+  polling_interval: Sistemos apklausos intervalas
+  polling_interval_description: >-
+    Kaip dažnai (sekundėmis) Seelen vartotojo sąsaja tikrina sistemos išteklius,
+    pvz., CPU, RAM, tinklo ir disko veiklą. Mažesnis skaičius reiškia dažnesnius
+    atnaujinimus, bet šiek tiek didesnį išteklių naudojimą.
   saturday: šeštadienis
   start_of_week: Savaitės pradžia
   startup: Paleisti paleidimą?
@@ -327,6 +333,7 @@ weg:
     show_instance_counter: Rodyti atvirų langų skaitiklį
     show_window_title: Rodyti atidaryto lango pavadinimą (tik horizontaliai)
     size: Prekės dydis
+    split_windows: Padalinti langai (viename lange vienas elementas)
     temporal_visibility:
       all: Visi
       label: Atsegtų elementų matomumas

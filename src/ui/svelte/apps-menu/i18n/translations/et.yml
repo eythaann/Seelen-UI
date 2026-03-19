@@ -5,6 +5,7 @@ folder: Kaust
 no_matching_items: Teie otsingule vastavaid üksusi ei leitud
 open_file_location: Avage faili asukoht
 pin: Pin
+pin_to_dock: Kinnita dokki
 query:
   all: Kõik
   apps: Rakendused

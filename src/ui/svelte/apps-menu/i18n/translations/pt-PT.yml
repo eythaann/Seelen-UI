@@ -5,6 +5,7 @@ folder: Pasta
 no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
 open_file_location: Abrir local do arquivo
 pin: Pino
+pin_to_dock: Fixar no Dock
 query:
   all: Tudo
   apps: Aplicativas

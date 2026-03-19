@@ -5,6 +5,7 @@ folder: โฟลเดอร์
 no_matching_items: ไม่พบรายการที่ตรงกับการค้นหาของคุณ
 open_file_location: เปิดตำแหน่งไฟล์
 pin: เข็มหมุด
+pin_to_dock: ปักหมุดไว้ที่ Dock
 query:
   all: ทั้งหมด
   apps: แอพ

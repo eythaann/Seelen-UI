@@ -23,11 +23,13 @@ start:
   label: Μενού Έναρξη
 taskbar_menu:
   add_file: PIN προσαρμοσμένο αρχείο
-  add_folder: Pin προσαρμοσμένος φάκελος
   desktop: Προσθήκη μονάδας επιφάνειας εργασίας
   media: Προσθήκη ενότητας μέσων
   settings: Ρυθμίσεις
   start: Προσθήκη μονάδας εκκίνησης
   task_manager: Task Manager
+  trash_bin: Προσθήκη μονάδας κάδου ανακύκλωσης
+trash_bin:
+  empty_bin: Άδειος Κάδος Ανακύκλωσης
 weg:
   empty: Δεν υπάρχουν στοιχεία για εμφάνιση

@@ -23,11 +23,13 @@ start:
   label: قائمة ابدأ
 taskbar_menu:
   add_file: ثبت الملف
-  add_folder: ثبت المجلد
   desktop: إضافة وحدة سطح المكتب
   media: أضف وحدة الوسائط
   settings: الأعدادات
   start: أضف وحدة البداية
   task_manager: مدير المهام
+  trash_bin: إضافة وحدة سلة المحذوفات
+trash_bin:
+  empty_bin: سلة المحذوفات فارغة
 weg:
   empty: لا توجد عناصر لعرضها

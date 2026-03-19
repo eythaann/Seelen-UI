@@ -89,6 +89,7 @@ extras:
 general:
   accent_color: 口音顏色
   date_format: 日期格式
+  date_format_how_to: 日期格式怎麼寫？
   hardware_acceleration: 硬體加速
   hardware_acceleration_description: 停用硬體加速會減少記憶體使用量，但可能會導致效能問題。 如果您不使用動態壁紙，可以安全地停用。
   icon_pack:
@@ -104,6 +105,8 @@ general:
       extreme: 極端
       minimal: 最小
     plugged: 插入或充電
+  polling_interval: 系統輪詢間隔
+  polling_interval_description: Seelen UI 檢查 CPU、RAM、網路和磁碟活動等系統資源的頻率（以秒為單位）。 數字越小意味著更新越頻繁，但資源使用率會稍高。
   saturday: 週六
   start_of_week: 一周開始
   startup: 在啟動上運行？
@@ -312,6 +315,7 @@ weg:
     show_instance_counter: 顯示打開的Windows計數器
     show_window_title: 顯示打開的窗口標題（僅水平）
     size: 項目大小
+    split_windows: 拆分視窗（每個視窗一項）
     temporal_visibility:
       all: 全部
       label: 未鎖定的物品可見性

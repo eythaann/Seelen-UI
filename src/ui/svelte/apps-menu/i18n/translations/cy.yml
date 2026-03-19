@@ -5,6 +5,7 @@ folder: Ffolder
 no_matching_items: Ni chanfuwyd unrhyw eitemau sy'n cyfateb i'ch chwiliad
 open_file_location: Agor Lleoliad Ffeil
 pin: Pin
+pin_to_dock: Pin i'r Doc
 query:
   all: Pawb
   apps: Apiau

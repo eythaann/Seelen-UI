@@ -23,11 +23,13 @@ start:
   label: Hasi menua
 taskbar_menu:
   add_file: PIN fitxategi pertsonalizatua
-  add_folder: Pin karpeta pertsonalizatua
   desktop: Gehitu mahaigaineko modulua
   media: Gehitu multimedia modulua
   settings: Ezarpenak
   start: Gehitu abiapuntu modulua
   task_manager: Zereginen kudeatzailea
+  trash_bin: Gehitu Zaborrontzia Modulua
+trash_bin:
+  empty_bin: Hustu zakarrontzira
 weg:
   empty: Ez dago erakusteko elementurik

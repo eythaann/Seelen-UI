@@ -23,11 +23,13 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: PIN personaliséiert Datei
-  add_folder: PIN CUTE CUTE FOLDER
   desktop: Dobäizemaachen Desktop Modul
   media: Füügt Media Modul bäi
   settings: Astellungen
   start: Füügt Start Modul
   task_manager: Aufgab Manager
+  trash_bin: Recycle Bin Modul dobäisetzen
+trash_bin:
+  empty_bin: Eidel Recycle Bin
 weg:
   empty: Keng Elementer ze weisen

@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Aksentkleur
   date_format: Datumformaat
+  date_format_how_to: Hoe om 'n datumformaat te skryf?
   hardware_acceleration: Hardeware versnelling
   hardware_acceleration_description: >-
     Deaktiveer hardewareversnelling sal geheuegebruik verminder, maar kan
@@ -115,6 +116,11 @@ general:
       extreme: Uiterste
       minimal: Minimaal
     plugged: Ingeprop of laai
+  polling_interval: Stelselpeilingsinterval
+  polling_interval_description: >-
+    Hoe gereeld (in sekondes) Seelen UI stelselhulpbronne soos SVE, RAM, netwerk
+    en skyfaktiwiteit nagaan. 'n Kleiner getal beteken meer gereelde
+    opdaterings, maar effens hoër hulpbrongebruik.
   saturday: Saterdag
   start_of_week: Begin van week
   startup: Hardloop met opstart?
@@ -329,6 +335,7 @@ weg:
     show_instance_counter: Wys oop Windows -toonbank
     show_window_title: Toon oop venstertitel (slegs horisontaal)
     size: Itemgrootte
+    split_windows: Verdeelde vensters (een item per venster)
     temporal_visibility:
       all: Almal
       label: Sigbaarheid van ontspelde items

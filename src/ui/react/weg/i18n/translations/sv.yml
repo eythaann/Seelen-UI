@@ -23,11 +23,13 @@ start:
   label: Startmenyn
 taskbar_menu:
   add_file: Pin Custom File
-  add_folder: Stift anpassad mapp
   desktop: Lägg till skrivbordsmodul
   media: Lägg till mediemodul
   settings: Inställningar
   start: Lägg till startmodul
   task_manager: Task Manager
+  trash_bin: Lägg till papperskorgsmodul
+trash_bin:
+  empty_bin: Töm papperskorgen
 weg:
   empty: Inga objekt att visa

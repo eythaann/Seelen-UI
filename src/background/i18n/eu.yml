@@ -10,6 +10,7 @@ elevated:
     Segurtasun hobea lortzeko, mesedez berrabiarazi administratzaile baimenik
     gabe.
   title: Administratzaile gisa exekutatzen
+file_explorer: Fitxategien arakatzailea
 resource:
   added: Baliabide berri bat gehitu da
   download_failed_body: >-

@@ -5,6 +5,7 @@ folder: フォルダー
 no_matching_items: 検索に一致するアイテムはありません
 open_file_location: ファイルの場所を開く
 pin: ピン留め
+pin_to_dock: ドックにピン留めする
 query:
   all: 全て
   apps: アプリ

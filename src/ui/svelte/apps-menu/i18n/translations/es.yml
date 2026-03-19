@@ -5,6 +5,7 @@ folder: Carpeta
 no_matching_items: No se encontraron artículos que coincidan con su búsqueda
 open_file_location: Abrir ubicación del archivo
 pin: Alfiler
+pin_to_dock: Anclar al muelle
 query:
   all: Toda
   apps: Aplicaciones

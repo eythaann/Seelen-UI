@@ -23,11 +23,13 @@ start:
   label: Menú Inicio
 taskbar_menu:
   add_file: Pin archivo personalizado
-  add_folder: Carpeta personalizada
   desktop: Agregar módulo de escritorio
   media: Añadir módulo de medios
   settings: Ajustes
   start: Añadir módulo de inicio
   task_manager: Administrador de tareas
+  trash_bin: Agregar módulo de papelera de reciclaje
+trash_bin:
+  empty_bin: Papelera de reciclaje vacía
 weg:
   empty: No hay elementos para mostrar

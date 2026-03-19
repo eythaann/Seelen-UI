@@ -95,6 +95,7 @@ extras:
 general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ
+  date_format_how_to: Bawo ni lati kọ ọna kika ọjọ kan?
   hardware_acceleration: Hardware isare
   hardware_acceleration_description: >-
     Pa ohun elo imudara yoo dinku lilo iranti, ṣugbọn o le fa awọn ọran iṣẹ. Ṣe
@@ -112,6 +113,11 @@ general:
       extreme: Ipẹkun
       minimal: Ayọkuro
     plugged: Pulọọgi tabi gbigba agbara
+  polling_interval: Aarin idibo eto
+  polling_interval_description: >-
+    Igba melo (ni iṣẹju-aaya) Seelen UI ṣe ayẹwo awọn orisun eto bii Sipiyu,
+    Ramu, nẹtiwọọki, ati iṣẹ disk. Nọmba ti o kere julọ tumọ si awọn imudojuiwọn
+    loorekoore, ṣugbọn lilo awọn orisun diẹ ga julọ.
   saturday: Satidee
   start_of_week: Ibẹrẹ Ọsẹ
   startup: Ṣiṣe lori ibẹrẹ?
@@ -322,6 +328,7 @@ weg:
     show_instance_counter: Fihan ṣiṣi Windows
     show_window_title: Ṣe afihan akọle window (petele nikan)
     size: Iwọn nkan
+    split_windows: Pipin Windows (ohun kan fun window)
     temporal_visibility:
       all: Gbogbo
       label: Hihan Awọn nkan ti a ko pin

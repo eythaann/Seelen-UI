@@ -96,6 +96,7 @@ extras:
 general:
   accent_color: Aktsentvärv
   date_format: Kuupäeva vorming
+  date_format_how_to: Kuidas kirjutada kuupäevavormingut?
   hardware_acceleration: Riistvaraline kiirendus
   hardware_acceleration_description: >-
     Riistvaralise kiirenduse keelamine vähendab mälukasutust, kuid võib
@@ -114,6 +115,11 @@ general:
       extreme: Äärmuslik
       minimal: Minimaalne
     plugged: Ühendatud või laadimine
+  polling_interval: Süsteemi küsitlusintervall
+  polling_interval_description: >-
+    Kui sageli (sekundites) Seelen UI kontrollib süsteemiressursse, nagu
+    protsessor, RAM, võrk ja ketta aktiivsus. Väiksem arv tähendab sagedasemaid
+    uuendusi, kuid veidi suuremat ressursikasutust.
   saturday: laupäeval
   start_of_week: Nädala algus
   startup: Kas joosta startup?
@@ -328,6 +334,7 @@ weg:
     show_instance_counter: Näita avatud akende loendurit
     show_window_title: Näita avatud akna pealkirja (ainult horisontaalne)
     size: Üksuse suurus
+    split_windows: Poolitatud aknad (üks üksus akna kohta)
     temporal_visibility:
       all: Kõik
       label: Kinnitamata üksuste nähtavus

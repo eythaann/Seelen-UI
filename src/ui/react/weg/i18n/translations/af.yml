@@ -23,11 +23,13 @@ start:
   label: Begin Kieslys
 taskbar_menu:
   add_file: Pin Custom File
-  add_folder: Pin Custom Folder
   desktop: Voeg lessenaarmodule by
   media: Voeg mediasmodule by
   settings: Instellings
   start: Voeg beginmodule by
   task_manager: Taakbestuurder
+  trash_bin: Voeg asblikmodule by
+trash_bin:
+  empty_bin: Leë asblik
 weg:
   empty: Geen items om te wys nie

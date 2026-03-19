@@ -99,6 +99,7 @@ extras:
 general:
   accent_color: Боја нагласности
   date_format: Формат датума
+  date_format_how_to: Како написати формат датума?
   hardware_acceleration: Хардверско убрзање
   hardware_acceleration_description: >-
     Онемогућавање хардверског убрзања ће смањити употребу меморије, али може
@@ -117,6 +118,11 @@ general:
       extreme: Екстремни
       minimal: Минималан
     plugged: Прикључен или пуњење
+  polling_interval: Интервал анкетирања система
+  polling_interval_description: >-
+    Колико често (у секундама) Сеелен УИ проверава системске ресурсе као што су
+    ЦПУ, РАМ, мрежа и активност диска. Мањи број значи чешће ажурирање, али
+    нешто већу употребу ресурса.
   saturday: Субота
   start_of_week: Почетак недеље
   startup: Ради на покретању?
@@ -331,6 +337,7 @@ weg:
     show_instance_counter: Прикажи отворите прозори
     show_window_title: Прикажи назив отвореног прозора (само хоризонтално)
     size: Величина предмета
+    split_windows: Подели прозоре (једна ставка по прозору)
     temporal_visibility:
       all: Све
       label: Видљивост откачених ставки

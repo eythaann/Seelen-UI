@@ -23,11 +23,13 @@ start:
   label: Başlat Menyu
 taskbar_menu:
   add_file: Xüsusi faylı pin edin
-  add_folder: Xüsusi qovluğu vurun
   desktop: Masaüstü Modulu əlavə edin
   media: Media modulu əlavə edin
   settings: Parametrlər
   start: Başlama modulu əlavə edin
   task_manager: Tapşırıq meneceri
+  trash_bin: Zibil qutusu modulu əlavə edin
+trash_bin:
+  empty_bin: Zibil qutusunu boşaldın
 weg:
   empty: Göstəriləcək element yoxdur

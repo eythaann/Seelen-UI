@@ -5,6 +5,7 @@ folder: Carpeta
 no_matching_items: No s'ha trobat cap element que coincideixi amb la vostra cerca
 open_file_location: Obriu la ubicació del fitxer
 pin: Pin
+pin_to_dock: Fixa al Dock
 query:
   all: Tots
   apps: Aplicacions

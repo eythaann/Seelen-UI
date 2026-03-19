@@ -97,6 +97,7 @@ extras:
 general:
   accent_color: Hreim litur
   date_format: Dagsetningarsnið
+  date_format_how_to: Hvernig á að skrifa dagsetningarsnið?
   hardware_acceleration: Vélbúnaðarhröðun
   hardware_acceleration_description: >-
     Slökkt er á vélbúnaðarhröðun mun draga úr minnisnotkun en getur valdið
@@ -114,6 +115,11 @@ general:
       extreme: Öfgafullt
       minimal: Lágmarks
     plugged: Tengt eða hleðsla
+  polling_interval: Tímabil kerfiskönnunar
+  polling_interval_description: >-
+    Hversu oft (í sekúndum) Seelen UI athugar kerfisauðlindir eins og örgjörva,
+    vinnsluminni, netkerfi og diskvirkni. Minni tala þýðir tíðari uppfærslur, en
+    aðeins meiri auðlindanotkun.
   saturday: laugardag
   start_of_week: Upphaf vikunnar
   startup: Hlaupa í gangsetningu?
@@ -326,6 +332,7 @@ weg:
     show_instance_counter: Sýna opinn Windows teljara
     show_window_title: Sýna opinn glugga titil (aðeins lárétt)
     size: Stærð hlutar
+    split_windows: Skiptir gluggar (einn hlutur í hverjum glugga)
     temporal_visibility:
       all: Allt
       label: Sýnileiki ófestra hluta

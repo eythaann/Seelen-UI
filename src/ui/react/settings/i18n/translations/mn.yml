@@ -98,6 +98,7 @@ extras:
 general:
   accent_color: Эргүүлэг
   date_format: Огноо формат
+  date_format_how_to: Огнооны форматыг хэрхэн бичих вэ?
   hardware_acceleration: Техник хангамжийн хурдатгал
   hardware_acceleration_description: >-
     Техник хангамжийн хурдатгалыг идэвхгүй болгох нь санах ойн хэрэглээг
@@ -116,6 +117,11 @@ general:
       extreme: Түйлын
       minimal: Бага
     plugged: Залгасан эсвэл цэнэглэж байна
+  polling_interval: Системийн санал авах интервал
+  polling_interval_description: >-
+    Seelen UI нь CPU, RAM, сүлжээ, дискний үйл ажиллагаа зэрэг системийн нөөцийг
+    хэр олон удаа (секундэд) шалгадаг. Бага тоо нь илүү олон удаа шинэчлэгдэх
+    боловч бага зэрэг өндөр нөөцийн хэрэглээ гэсэн үг юм.
   saturday: Бямба гариг
   start_of_week: Долоо хоногийн эхлэл
   startup: Эхлэх үед гүйх үү?
@@ -328,6 +334,7 @@ weg:
     show_instance_counter: Нээлттэй Windows тоолуурыг харуул
     show_window_title: Нээлттэй цонхны гарчигыг харуул (зөвхөн хэвтээ)
     size: Зүйлийн хэмжээ
+    split_windows: Windows хуваах (цонх бүрт нэг зүйл)
     temporal_visibility:
       all: Бүгд
       label: Тодруулаагүй зүйлсийн харагдах байдал

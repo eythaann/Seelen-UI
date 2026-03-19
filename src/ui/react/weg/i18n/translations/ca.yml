@@ -23,11 +23,13 @@ start:
   label: Menú d'inici
 taskbar_menu:
   add_file: Pin el fitxer personalitzat
-  add_folder: Pin carpeta personalitzada
   desktop: Afegeix un mòdul d'escriptori
   media: Afegiu el mòdul de suports
   settings: Configuració
   start: Afegiu el mòdul d'inici
   task_manager: Gestor de tasques
+  trash_bin: Afegiu el mòdul de la paperera de reciclatge
+trash_bin:
+  empty_bin: Buida la paperera de reciclatge
 weg:
   empty: No hi ha elements per mostrar

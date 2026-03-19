@@ -94,6 +94,7 @@ extras:
 general:
   accent_color: اللون الثانوي
   date_format: تنسيق التاريخ
+  date_format_how_to: كيفية كتابة تنسيق التاريخ؟
   hardware_acceleration: تسريع الأجهزة
   hardware_acceleration_description: >-
     سيؤدي تعطيل تسريع الأجهزة إلى تقليل استخدام الذاكرة، ولكنه قد يسبب مشكلات في
@@ -111,6 +112,11 @@ general:
       extreme: أقصى
       minimal: الحد الأدنى
     plugged: توصيل أو شحن
+  polling_interval: الفاصل الزمني لاستقصاء النظام
+  polling_interval_description: >-
+    كم مرة (بالثواني) تقوم Seelen UI بفحص موارد النظام مثل وحدة المعالجة
+    المركزية وذاكرة الوصول العشوائي والشبكة ونشاط القرص. الرقم الأصغر يعني
+    تحديثات أكثر تكرارًا، ولكن استخدامًا أعلى قليلاً للموارد.
   saturday: السبت
   start_of_week: بداية الأسبوع
   startup: تفعيل عند تشغيل الكمبيوتر؟
@@ -319,6 +325,7 @@ weg:
     show_instance_counter: إظهار عداد النوافذ المفتوحة
     show_window_title: إظهار عنوان النافذة المفتوحة (أفقيًا فقط)
     size: حجم العنصر
+    split_windows: تقسيم النوافذ (عنصر واحد لكل نافذة)
     temporal_visibility:
       all: الجميع
       label: رؤية العناصر غير المثبتة

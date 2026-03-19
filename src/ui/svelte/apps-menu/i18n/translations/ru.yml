@@ -5,6 +5,7 @@ folder: Папка
 no_matching_items: Не найдено товаров, соответствующих вашему запросу
 open_file_location: Открыть местоположение файла
 pin: Приколоть
+pin_to_dock: Закрепить в Dock
 query:
   all: Все
   apps: Приложения

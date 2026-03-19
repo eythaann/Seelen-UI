@@ -23,11 +23,13 @@ start:
   label: Menüü Start
 taskbar_menu:
   add_file: PIN -i kohandatud fail
-  add_folder: PIN -i kohandatud kaust
   desktop: Lisage töölauamoodul
   media: Lisage meediumimoodul
   settings: Seaded
   start: Lisage käivitusmoodul
   task_manager: Tegumihaldur
+  trash_bin: Lisage prügikasti moodul
+trash_bin:
+  empty_bin: Tühjenda prügikast
 weg:
   empty: Kuvatavaid üksusi pole

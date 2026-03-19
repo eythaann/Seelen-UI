@@ -5,6 +5,7 @@ folder: Karpeta
 no_matching_items: Ez da aurkitu zure bilaketarekin bat datorren elementurik
 open_file_location: Ireki fitxategiaren kokapena
 pin: Pin
+pin_to_dock: Ainguratu Dock-era
 query:
   all: Denak
   apps: Aplikazioak

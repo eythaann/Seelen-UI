@@ -23,11 +23,13 @@ start:
   label: ਸਟਾਰਟ ਮੀਨੂ
 taskbar_menu:
   add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
-  add_folder: ਪਿੰਨ ਕਸਟਮ ਫੋਲਡਰ
   desktop: ਡੈਸਕਟਾਪ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
   media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
   settings: ਸੈਟਿੰਗਾਂ
   start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
+  trash_bin: ਰੀਸਾਈਕਲ ਬਿਨ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
+trash_bin:
+  empty_bin: ਖਾਲੀ ਰੀਸਾਈਕਲ ਬਿਨ
 weg:
   empty: ਦਿਖਾਉਣ ਲਈ ਕੋਈ ਆਈਟਮਾਂ ਨਹੀਂ ਹਨ

@@ -100,6 +100,7 @@ extras:
 general:
   accent_color: Umbala we-Accent
   date_format: Ifomethi yosuku
+  date_format_how_to: Ibhalwa kanjani ifomethi yedethi?
   hardware_acceleration: I-Hardware Acceleration
   hardware_acceleration_description: >-
     Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori,
@@ -118,6 +119,11 @@ general:
       extreme: '-Dlulele'
       minimal: '-Ncilula'
     plugged: Ixhunyiwe noma ishaja
+  polling_interval: Isikhathi sokuvota sesistimu
+  polling_interval_description: >-
+    Kukangaki (ngemizuzwana) i-Seelen UI ihlola izinsiza zesistimu njenge-CPU,
+    i-RAM, inethiwekhi, nomsebenzi wediski. Inombolo encane isho izibuyekezo
+    ezivame kakhulu, kodwa ukusetshenziswa kwensiza ephakeme kancane.
   saturday: NgoMgqibelo
   start_of_week: Ukuqala Kweviki
   startup: Gijima ekuqaleni?
@@ -336,6 +342,7 @@ weg:
     show_instance_counter: Khombisa i-Windows Counter
     show_window_title: Khombisa isihloko esivulekile sewindi (okuvundlile)
     size: Usayizi wento
+    split_windows: Hlukanisa iWindows (into eyodwa ngewindi ngalinye)
     temporal_visibility:
       all: Konke
       label: Ukubonakala Kwezinto Ezingaphiniwe

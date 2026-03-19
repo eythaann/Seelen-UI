@@ -23,11 +23,13 @@ start:
   label: Меню Пуск
 taskbar_menu:
   add_file: Закріпити власний файл
-  add_folder: Закріпити власну папку
   desktop: Додайте модуль робочого столу
   media: Додати медіа модуль
   settings: Налаштування
   start: Додати кнопку Пуск
   task_manager: Диспетчер задач
+  trash_bin: Додайте модуль кошика
+trash_bin:
+  empty_bin: Очистити корзину
 weg:
   empty: Немає елементів для показу

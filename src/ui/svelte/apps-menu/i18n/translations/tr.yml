@@ -5,6 +5,7 @@ folder: Klasör
 no_matching_items: Aramanızla eşleşen öğe bulunamadı
 open_file_location: Dosya Konumunu Aç
 pin: Sabitle
+pin_to_dock: Dock'a sabitle
 query:
   all: Tüm
   apps: Uygulamalar

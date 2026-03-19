@@ -10,6 +10,7 @@ elevated:
     Để bảo mật tốt hơn, vui lòng khởi động lại nó mà không có sự cho phép của
     quản trị viên.
   title: Chạy với tư cách quản trị viên
+file_explorer: Trình khám phá tệp
 resource:
   added: Một tài nguyên mới đã được thêm vào
   download_failed_body: >-

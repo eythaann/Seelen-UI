@@ -94,6 +94,7 @@ extras:
 general:
   accent_color: የዝግጅት ቀለም
   date_format: የቀን ቅርጸት
+  date_format_how_to: የቀን ቅርጸት እንዴት እንደሚፃፍ?
   hardware_acceleration: የሃርድዌር ማጣደፍ
   hardware_acceleration_description: >-
     የሃርድዌር ማጣደፍን ማሰናከል የማህደረ ትውስታ አጠቃቀምን ይቀንሳል፣ ነገር ግን የአፈጻጸም ችግሮችን ሊያስከትል ይችላል።
@@ -111,6 +112,11 @@ general:
       extreme: በጣም
       minimal: አነስተኛ
     plugged: ተሰኪ ወይም መሙላት
+  polling_interval: የስርዓት ምርጫ ክፍተት
+  polling_interval_description: >-
+    Seelen UI እንደ ሲፒዩ፣ RAM፣ አውታረ መረብ እና የዲስክ እንቅስቃሴ ያሉ የስርዓት ሀብቶችን ምን ያህል ጊዜ
+    (በሴኮንዶች ውስጥ) ይፈትሻል። አነስ ያለ ቁጥር ብዙ ተደጋጋሚ ዝመናዎች ማለት ነው፣ ነገር ግን ትንሽ ከፍ ያለ የሃብት
+    አጠቃቀም ማለት ነው።
   saturday: ቅዳሜ
   start_of_week: የሳምንቱ መጀመሪያ
   startup: ጅምር ላይ ይሮጡ?
@@ -319,6 +325,7 @@ weg:
     show_instance_counter: ክፍት የመስኮቶች ቆጣሪ አሳይ
     show_window_title: ክፍት የመስኮት ርዕስ አሳይ (አግድም ብቻ)
     size: የንጥል መጠን
+    split_windows: ዊንዶውስ ክፋይ (በአንድ መስኮት አንድ ንጥል)
     temporal_visibility:
       all: ሁሉም
       label: ያልተሰካ እቃዎች ታይነት
