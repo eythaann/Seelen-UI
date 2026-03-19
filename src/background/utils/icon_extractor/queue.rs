@@ -163,6 +163,12 @@ impl IconExtractor {
         self.failures.push(request);
     }
 
+    pub fn clear_failures(&self) {
+        self.failures.clear();
+        let path = SEELEN_COMMON.app_cache_dir().join("icon_failures2.yml");
+        std::fs::remove_file(path).log_error();
+    }
+
     /// Re-queues all `AppUMID(PropertyStore)` failures so they are retried after the
     /// start menu has been refreshed. The entries are removed from the failures list
     /// first so `is_failed` does not skip them immediately.

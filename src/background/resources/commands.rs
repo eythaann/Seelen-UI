@@ -3,7 +3,9 @@ use seelen_core::{
     state::{IconPack, Plugin, Theme, Wallpaper, Widget},
 };
 
-use crate::{error::Result, log_error, resources::RESOURCES};
+use crate::{
+    error::Result, log_error, resources::RESOURCES, utils::icon_extractor::queue::IconExtractor,
+};
 use std::sync::Arc;
 
 #[tauri::command(async)]
@@ -120,6 +122,7 @@ pub fn state_delete_cached_icons() -> Result<()> {
     if let Some(pack) = RESOURCES.system_icon_pack.lock().take() {
         pack.delete()?;
     }
+    IconExtractor::instance().clear_failures();
     RESOURCES.ensure_system_icon_pack()?;
     RESOURCES.emit_icon_packs()?;
     Ok(())
