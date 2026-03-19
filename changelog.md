@@ -18,6 +18,7 @@
 - power menu and workspace viewer not scaling properly when users set text scale factor.
 - icons not refreshing on new installed apps.
 - not clearing icon extraction failure list on cache clear.
+- toolbar and calendar language not changing.
 
 ## [2.5.6]
 

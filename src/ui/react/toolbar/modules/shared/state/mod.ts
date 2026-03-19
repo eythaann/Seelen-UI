@@ -3,6 +3,7 @@ import { Settings } from "@seelen-ui/lib";
 import { FancyToolbarSide } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
 import { $current_monitor } from "./system";
+import i18n from "../../../i18n";
 
 const initialSettings = await Settings.getAsync();
 export const $settings = signal({
@@ -25,6 +26,8 @@ Settings.onChange((settings) => {
 
 effect(() => {
   const { itemSize, margin, padding } = $settings.value;
+  i18n.changeLanguage($settings.value.language || undefined);
+
   const styles = document.documentElement.style;
   styles.setProperty("--config-item-size", `${itemSize}px`);
   styles.setProperty("--config-margin", `${margin}px`);

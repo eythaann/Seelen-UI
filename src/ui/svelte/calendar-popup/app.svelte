@@ -6,30 +6,49 @@
 
   const today = moment();
 
-  let weekDays = $derived.by(() => {
-    const lang = globalState.date.locale();
-    const weekStart = moment().locale(lang).startOf("week");
-    return Array.from({ length: 7 }, (_, i) =>
-      weekStart.clone().add(i, "days").format("dd")
-    );
+  const lang = $derived(globalState.settings.language || "en");
+  const startOfWeek = $derived.by(() => {
+    const startDayMap: Record<string, number> = {
+      Sunday: 0,
+      Monday: 1,
+      Saturday: 6,
+    };
+    const startDay = startDayMap[globalState.settings.startOfWeek] ?? 0;
+    return startDay;
+  });
+
+  // svelte-ignore state_referenced_locally
+  let date = $state(moment().locale(lang));
+  // svelte-ignore state_referenced_locally
+  let selectedDate = $state(moment().locale(lang));
+  $effect(() => {
+    moment.updateLocale(lang, {
+      week: {
+        dow: startOfWeek,
+      },
+    })
+    date = moment().locale(lang);
+    selectedDate = moment().locale(lang);
+  });
+
+  const weekDays = $derived.by(() => {
+    const weekStart = date.clone().startOf("week");
+    return Array.from({ length: 7 }, (_, i) => weekStart.clone().add(i, "days").format("dd"));
   });
 
   function handlePrevious() {
-    const newDate = globalState.date
-      .clone()
-      .add(-1, globalState.viewMode === "month" ? "months" : "years");
-    globalState.date = newDate;
+    const newDate = date.clone().add(-1, globalState.viewMode === "month" ? "months" : "years");
+    date = newDate;
   }
 
   function handleNext() {
-    const newDate = globalState.date
-      .clone()
-      .add(1, globalState.viewMode === "month" ? "months" : "years");
-    globalState.date = newDate;
+    const newDate = date.clone().add(1, globalState.viewMode === "month" ? "months" : "years");
+    date = newDate;
   }
 
   function handleToday() {
-    globalState.date = moment().locale(globalState.date.locale());
+    date = moment().locale(lang);
+    selectedDate = moment().locale(lang);
   }
 
   function toggleViewMode() {
@@ -37,12 +56,12 @@
   }
 
   function handleDateSelect(day: moment.Moment) {
-    globalState.selectedDate = day;
-    globalState.date = day;
+    selectedDate = day.clone();
+    date = day.clone();
   }
 
   function handleMonthSelect(month: moment.Moment) {
-    globalState.date = month;
+    date = month;
     globalState.viewMode = "month";
   }
 
@@ -51,15 +70,11 @@
     e.stopPropagation();
 
     const isUp = e.deltaY < 0;
-    globalState.date = globalState.date
-      .clone()
-      .add(isUp ? 1 : -1, globalState.viewMode === "month" ? "months" : "years");
+    date = date.clone().add(isUp ? 1 : -1, globalState.viewMode === "month" ? "months" : "years");
   }
 
   // Month view data
   const monthViewData = $derived.by(() => {
-    const date = globalState.date;
-    const selectedDate = globalState.selectedDate;
     const startOfMonth = date.clone().startOf("month");
     const endOfMonth = date.clone().endOf("month");
     const startDate = startOfMonth.clone().startOf("week");
@@ -83,7 +98,6 @@
 
   // Year view data
   const yearViewData = $derived.by(() => {
-    const date = globalState.date;
     const months: moment.Moment[] = [];
 
     for (let i = 0; i < 12; i++) {
@@ -109,9 +123,7 @@
         role="button"
         tabindex="0"
       >
-        {globalState.viewMode === "month"
-          ? globalState.date.format("MMMM YYYY")
-          : globalState.date.format("YYYY")}
+        {globalState.viewMode === "month" ? date.format("MMMM YYYY") : date.format("YYYY")}
       </span>
       <div class="calendar-actions">
         <button class="calendar-navigator" onclick={handlePrevious}>
@@ -134,13 +146,14 @@
             <div class="calendar-weekday">{day}</div>
           {/each}
         </div>
+
         <div class="calendar-days">
           {#each monthViewData as week}
             <div class="calendar-week">
               {#each week as day}
                 {@const isToday = day.isSame(today, "day")}
-                {@const isSelected = day.isSame(globalState.selectedDate, "day")}
-                {@const isOffMonth = day.month() !== globalState.date.month()}
+                {@const isSelected = day.isSame(selectedDate, "day")}
+                {@const isOffMonth = day.month() !== date.month()}
                 <div
                   class="calendar-cell"
                   class:calendar-cell-today={isToday}
