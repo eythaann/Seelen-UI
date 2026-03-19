@@ -52,6 +52,8 @@
     {...imgProps}
     class={["slu-icon-outer", className]}
     data-shape={icon.isAproximatelySquare ? "square" : "unknown"}
+    data-path={path ?? undefined}
+    data-umid={umid ?? undefined}
   >
     <img src={icon.src} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
     {#if icon.mask}

@@ -9,6 +9,7 @@ use slu_utils::{debounce, Debounce};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    modules::start::application::{StartMenuEvent, StartMenuManager},
     utils::{constants::SEELEN_COMMON, lock_free::SyncVec},
     windows_api::types::AppUserModelId,
 };
@@ -83,6 +84,13 @@ impl IconExtractor {
                 m.save_failures.call(());
             }
         });
+
+        StartMenuManager::subscribe(|event| {
+            if matches!(event, StartMenuEvent::ItemsRefreshed) {
+                Self::instance().revalidate_property_store_failures();
+            }
+        });
+
         extractor
     }
 
@@ -155,13 +163,40 @@ impl IconExtractor {
         self.failures.push(request);
     }
 
+    /// Re-queues all `AppUMID(PropertyStore)` failures so they are retried after the
+    /// start menu has been refreshed. The entries are removed from the failures list
+    /// first so `is_failed` does not skip them immediately.
+    fn revalidate_property_store_failures(&self) {
+        let to_retry: Vec<IconExtractorRequest> = self
+            .failures
+            .to_vec()
+            .into_iter()
+            .filter(|r| matches!(r, IconExtractorRequest::AppUMID(id) if id.is_property_store()))
+            .collect();
+
+        if to_retry.is_empty() {
+            return;
+        }
+
+        log::debug!(
+            "Revalidating {} PropertyStore UMID icon failure(s) after start menu refresh",
+            to_retry.len()
+        );
+
+        self.failures.retain(|r| !to_retry.contains(r));
+        self.save_failures.call(());
+        for request in to_retry {
+            Self::send(request);
+        }
+    }
+
     fn process(request: &IconExtractorRequest) -> Result<()> {
         match request {
             IconExtractorRequest::AppUMID(umid) => {
                 _extract_and_save_icon_umid(umid)?;
             }
             IconExtractorRequest::Path(path) => {
-                _extract_and_save_icon_from_file(path, None)?;
+                _extract_and_save_icon_from_file(path)?;
             }
             IconExtractorRequest::Extension(_) => {
                 // Extension entries are failure markers, not actionable requests.

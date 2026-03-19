@@ -409,7 +409,7 @@ fn _extract_and_save_icon_from_module_with_index(
 /// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
 ///
 /// umid on this case only applys to Property Store umid
-fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Result<()> {
+fn _extract_and_save_icon_from_file(origin: &Path) -> Result<()> {
     if !origin.exists() || origin.is_dir() {
         // Handle Windows path,index notation (e.g. "C:\path\app.exe,2" or "file.ico,0")
         if let Some((real_path, index)) = parse_path_with_icon_index(origin) {
@@ -464,11 +464,14 @@ fn _extract_and_save_icon_from_file(origin: &Path, umid: Option<String>) -> Resu
         return Ok(());
     }
 
+    let mut umid = None;
     if is_lnk_file {
+        umid = WindowsApi::get_file_umid(origin).ok();
         let has_custom_icon = WindowsApi::resolve_lnk_custom_icon_path(origin).is_ok();
+
         if !has_custom_icon {
             let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
-            _extract_and_save_icon_from_file(&target, umid.clone())?;
+            _extract_and_save_icon_from_file(&target)?;
             RESOURCES.add_system_icon_redirect(umid, origin, &target);
             return Ok(());
         }
@@ -563,7 +566,7 @@ fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
                 }
             }
 
-            _extract_and_save_icon_from_file(&lnk.path, Some(app_umid.clone()))?;
+            _extract_and_save_icon_from_file(&lnk.path)?;
             Ok(())
         }
     }

@@ -16,7 +16,7 @@ use windows::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     utils::{constants::SEELEN_COMMON, lock_free::SyncVec},
     windows_api::WindowsApi,
 };
@@ -31,8 +31,6 @@ pub struct StartMenuManager {
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum StartMenuEvent {
-    ItemAdded(Arc<StartMenuItem>),
-    ItemRemoved(Arc<StartMenuItem>),
     ItemsRefreshed,
 }
 
@@ -78,17 +76,7 @@ impl StartMenuManager {
                 Ok(_) => {
                     // refresh without blocking
                     std::thread::spawn(|| {
-                        let menu = StartMenuManager::instance();
-                        match Self::load_start_menu_items() {
-                            Ok(items) => {
-                                menu.list.replace(items);
-                                menu.store_cache().log_error();
-                                Self::send(StartMenuEvent::ItemsRefreshed);
-                            }
-                            Err(e) => {
-                                log::error!("Failed to load start menu items: {e}");
-                            }
-                        }
+                        Self::reload().log_error();
                     });
                     // Setup listeners after loading cache
                     self.setup_listeners().log_error();
@@ -174,6 +162,7 @@ impl StartMenuManager {
     }
 
     pub fn load_start_menu_items() -> Result<Vec<Arc<StartMenuItem>>> {
+        log::trace!("Loading start menu items");
         let mut items = Vec::new();
 
         // win32 unpackaged
@@ -213,6 +202,7 @@ impl StartMenuManager {
             }
         }
 
+        log::trace!("Loaded {} start menu items", items.len());
         Ok(items)
     }
 
@@ -228,7 +218,7 @@ impl StartMenuManager {
                         "Start menu file watcher detected changes: {} events",
                         events.len()
                     );
-                    log_error!(Self::on_files_changed(events));
+                    Self::on_files_changed(events).log_error();
                 }
                 Err(errors) => {
                     log::error!("Start menu file watcher error: {errors:?}");
@@ -243,39 +233,17 @@ impl StartMenuManager {
         Ok(Arc::new(debouncer))
     }
 
-    fn on_files_changed(_events: Vec<DebouncedEvent>) -> Result<()> {
+    fn reload() -> Result<()> {
         let manager = Self::instance();
-
-        // Reload all items when file changes are detected
         let new_items = Self::load_start_menu_items()?;
-        let old_items = manager.list.to_vec();
-
-        // Find removed items
-        for old_item in &old_items {
-            if !new_items
-                .iter()
-                .any(|new_item| new_item.path == old_item.path && new_item.umid == old_item.umid)
-            {
-                log::debug!("Start menu item removed: {:?}", old_item.path);
-                Self::send(StartMenuEvent::ItemRemoved(old_item.clone()));
-            }
-        }
-
-        // Find added items
-        for new_item in &new_items {
-            if !old_items
-                .iter()
-                .any(|old_item| new_item.path == old_item.path && new_item.umid == old_item.umid)
-            {
-                log::debug!("Start menu item added: {:?}", new_item.path);
-                Self::send(StartMenuEvent::ItemAdded(new_item.clone()));
-            }
-        }
-
         manager.list.replace(new_items);
         manager.store_cache().log_error();
-
+        Self::send(StartMenuEvent::ItemsRefreshed);
         Ok(())
+    }
+
+    fn on_files_changed(_events: Vec<DebouncedEvent>) -> Result<()> {
+        Self::reload()
     }
 
     fn setup_package_catalog_listener(&mut self) -> Result<()> {
@@ -283,10 +251,9 @@ impl StartMenuManager {
 
         let handler_installing = TypedEventHandler::new(|_catalog, _args| {
             log::debug!("Package installing event detected");
-            // Reload start menu items when package is being installed
             std::thread::spawn(|| {
                 std::thread::sleep(Duration::from_millis(1000));
-                log_error!(Self::on_package_changed());
+                Self::reload().log_error();
             });
             Ok(())
         });
@@ -295,10 +262,9 @@ impl StartMenuManager {
 
         let handler_uninstalling = TypedEventHandler::new(|_catalog, _args| {
             log::debug!("Package uninstalling event detected");
-            // Reload start menu items when package is being uninstalled
             std::thread::spawn(|| {
                 std::thread::sleep(Duration::from_millis(1000));
-                log_error!(Self::on_package_changed());
+                Self::reload().log_error();
             });
             Ok(())
         });
@@ -306,40 +272,6 @@ impl StartMenuManager {
         catalog.PackageUninstalling(&handler_uninstalling)?;
 
         self._package_catalog = Some(catalog);
-
-        Ok(())
-    }
-
-    fn on_package_changed() -> Result<()> {
-        let manager = Self::instance();
-
-        let new_items = Self::load_start_menu_items()?;
-        let old_items = manager.list.to_vec();
-
-        // Find removed items
-        for old_item in &old_items {
-            if !new_items
-                .iter()
-                .any(|new_item| new_item.path == old_item.path && new_item.umid == old_item.umid)
-            {
-                log::debug!("Start menu item removed (package): {:?}", old_item.umid);
-                Self::send(StartMenuEvent::ItemRemoved(old_item.clone()));
-            }
-        }
-
-        // Find added items
-        for new_item in &new_items {
-            if !old_items
-                .iter()
-                .any(|old_item| new_item.path == old_item.path && new_item.umid == old_item.umid)
-            {
-                log::debug!("Start menu item added (package): {:?}", new_item.umid);
-                Self::send(StartMenuEvent::ItemAdded(new_item.clone()));
-            }
-        }
-
-        manager.list.replace(new_items);
-        manager.store_cache().log_error();
 
         Ok(())
     }

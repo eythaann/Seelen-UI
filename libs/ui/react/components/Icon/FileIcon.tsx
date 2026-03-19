@@ -1,10 +1,11 @@
 import { IconPackManager } from "@seelen-ui/lib";
 import type { SeelenCommandGetIconArgs } from "@seelen-ui/lib/types";
 import { cx } from "libs/ui/react/utils/styling.ts";
-import type { UnlistenFn } from "@tauri-apps/api/event";
-import React, { type ImgHTMLAttributes } from "react";
+import { useComputed, useSignal, useSignalEffect } from "@preact/signals";
+import { useEffect, useRef } from "react";
+import type { ImgHTMLAttributes } from "react";
 
-import { iconPackManager } from "./common.ts";
+import { darkMode, iconPackManager } from "./common.ts";
 import { MissingIcon } from "./MissingIcon.tsx";
 import cs from "./index.module.css";
 
@@ -13,105 +14,71 @@ interface FileIconProps extends SeelenCommandGetIconArgs, Omit<ImgHTMLAttributes
   noFallback?: boolean;
 }
 
-interface FileIconState {
-  src: string | null;
-  mask: string | null;
-  isAproximatelySquare: boolean;
-}
+export function FileIcon({ path, umid, noFallback, ...imgProps }: FileIconProps) {
+  const $path = useSignal(path);
+  const $umid = useSignal(umid);
+  $path.value = path;
+  $umid.value = umid;
 
-const darkModeQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
-function getIcon(args: SeelenCommandGetIconArgs): FileIconState {
-  const icon = iconPackManager.getIcon(args);
-  if (icon) {
-    return {
-      src: (darkModeQuery.matches ? icon.dark : icon.light) || icon.base,
-      mask: icon.mask,
-      isAproximatelySquare: icon.isAproximatelySquare,
-    };
-  }
-  return { src: null, mask: null, isAproximatelySquare: false };
-}
-export class FileIcon extends React.Component<FileIconProps, FileIconState> {
-  unlistener: UnlistenFn | null = null;
-
-  constructor(props: FileIconProps) {
-    super(props);
-    this.updateSrc = this.updateSrc.bind(this);
-
-    this.state = getIcon({ path: this.props.path, umid: this.props.umid });
-
-    darkModeQuery.addEventListener("change", this.updateSrc);
-    iconPackManager.onChange(this.updateSrc).then((unlistener) => {
-      this.unlistener = unlistener;
-      // initial extranction request if no icon found
-      if (!this.state.src) {
-        this.requestIconExtraction();
-      }
-    });
-  }
-
-  componentWillUnmount(): void {
-    this.unlistener?.();
-    this.unlistener = null;
-    darkModeQuery.removeEventListener("change", this.updateSrc);
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<FileIconProps>,
-    prevState: Readonly<FileIconState>,
-  ): void {
-    if (
-      this.props.path !== prevProps.path || this.props.umid !== prevProps.umid
-    ) {
-      this.updateSrc();
+  const icon = useComputed(() => {
+    const found = iconPackManager.value.value.getIcon({ path: $path.value, umid: $umid.value });
+    if (found) {
+      return {
+        src: (darkMode.value ? found.dark : found.light) || found.base,
+        mask: found.mask,
+        isAproximatelySquare: found.isAproximatelySquare,
+      };
     }
+    return { src: null as string | null, mask: null as string | null, isAproximatelySquare: false };
+  });
 
-    if (prevState.src && !this.state.src) {
-      this.requestIconExtraction();
+  const prevSrcRef = useRef<string | null>(null);
+
+  // On mount: always request icon extraction
+  useEffect(() => {
+    IconPackManager.requestIconExtraction({ path, umid });
+  }, []);
+
+  // When icon changes: if src went from non-null to null, re-request extraction
+  useSignalEffect(() => {
+    const src = icon.value.src;
+    if (prevSrcRef.current !== null && src === null) {
+      IconPackManager.requestIconExtraction({ path, umid });
     }
+    prevSrcRef.current = src;
+  });
+
+  const { src, mask, isAproximatelySquare } = icon.value;
+
+  const { ref: _ref, ...figureProps } = imgProps;
+  const dataProps = Object.entries(figureProps as Record<string, unknown>)
+    .filter(([k]) => k.startsWith("data-"))
+    .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {} as Record<string, unknown>);
+
+  if (src) {
+    return (
+      <figure
+        {...figureProps}
+        className={cx(cs.outer, imgProps.className)}
+        data-shape={isAproximatelySquare ? "square" : "unknown"}
+        data-path={path ?? undefined}
+        data-umid={umid ?? undefined}
+      >
+        <img {...dataProps} src={src} />
+        {mask && (
+          <div
+            {...dataProps}
+            className={cs.mask}
+            style={{ maskImage: `url('${mask}')` }}
+          />
+        )}
+      </figure>
+    );
   }
 
-  requestIconExtraction(): void {
-    IconPackManager.requestIconExtraction({
-      path: this.props.path,
-      umid: this.props.umid,
-    });
+  if (noFallback) {
+    return null;
   }
 
-  updateSrc(): void {
-    this.setState(getIcon({ path: this.props.path, umid: this.props.umid }));
-  }
-
-  render(): React.ReactNode {
-    const { path: _path, umid: _umid, noFallback, ...imgProps } = this.props;
-
-    const dataProps = Object.entries(imgProps)
-      .filter(([k]) => k.startsWith("data-"))
-      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
-
-    if (this.state.src) {
-      return (
-        <figure
-          {...imgProps}
-          className={cx(cs.outer, imgProps.className)}
-          data-shape={this.state.isAproximatelySquare ? "square" : "unknown"}
-        >
-          <img {...dataProps} src={this.state.src} />
-          {this.state.mask && (
-            <div
-              {...dataProps}
-              className={cs.mask}
-              style={{ maskImage: `url('${this.state.mask}')` }}
-            />
-          )}
-        </figure>
-      );
-    }
-
-    if (noFallback) {
-      return null;
-    }
-
-    return <MissingIcon {...imgProps} />;
-  }
+  return <MissingIcon {...figureProps} />;
 }
