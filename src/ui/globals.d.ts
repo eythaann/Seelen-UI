@@ -31,3 +31,5 @@ interface Window {
   };
   __SLU_WIDGET: import("@seelen-ui/lib/types").Widget;
 }
+
+type anyObject = Record<PropertyKey, any>;

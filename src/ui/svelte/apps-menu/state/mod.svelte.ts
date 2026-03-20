@@ -2,7 +2,6 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { StartMenuItem, StartMenuLayoutItem } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
 import { StartDisplayMode, StartView } from "../constants";
-import type { unionToIntersection } from "readable-types";
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
 subscribe(SeelenEvent.UserChanged, user.setByPayload);
@@ -31,13 +30,11 @@ export interface FavAppItem {
 export type FavPinnedItem = FavAppItem | FavFolderItem;
 
 const initialState: FavPinnedItem[] = [];
-type JoinStartMenuLayoutItem = unionToIntersection<StartMenuLayoutItem>;
 
 try {
   const layout = await invoke(SeelenCommand.GetNativeStartMenu);
   for (const _item of layout.pinnedList) {
-    let item = _item as JoinStartMenuLayoutItem;
-
+    const item = _item as StartMenuLayoutItem as any;
     if (item.desktopAppLink) {
       let path = item.desktopAppLink.toLowerCase();
       const found = startMenuItems.value.find((i) => i.path.toLowerCase() === path);

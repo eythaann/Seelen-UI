@@ -3,7 +3,7 @@
   "specifiers": {
     "jsr:@david/code-block-writer@^13.0.3": "13.0.3",
     "jsr:@deno/dnt@0.42.3": "0.42.3",
-    "jsr:@std/assert@^1.0.18": "1.0.18",
+    "jsr:@std/assert@^1.0.19": "1.0.19",
     "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@1": "1.0.8",
     "jsr:@std/fs@1": "1.0.20",
@@ -32,8 +32,8 @@
         "jsr:@ts-morph/bootstrap"
       ]
     },
-    "@std/assert@1.0.18": {
-      "integrity": "270245e9c2c13b446286de475131dc688ca9abcd94fc5db41d43a219b34d1c78",
+    "@std/assert@1.0.19": {
+      "integrity": "eaada96ee120cb980bc47e040f82814d786fe8162ecc53c91d8df60b8755991e",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -112,7 +112,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/dnt@0.42.3",
-      "jsr:@std/assert@^1.0.18",
+      "jsr:@std/assert@^1.0.19",
       "jsr:@std/encoding@^1.0.10",
       "npm:@tauri-apps/api@^2.10.1",
       "npm:@tauri-apps/plugin-dialog@^2.6.0",

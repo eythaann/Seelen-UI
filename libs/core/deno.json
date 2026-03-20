@@ -21,7 +21,7 @@
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@0.42.3",
     "@seelen-ui/types": "./gen/types/mod.ts",
-    "@std/assert": "jsr:@std/assert@^1.0.18",
+    "@std/assert": "jsr:@std/assert@^1.0.19",
     "@std/encoding": "jsr:@std/encoding@^1.0.10",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.10.1",
     "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.6.0",

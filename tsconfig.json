@@ -22,7 +22,6 @@
     "jsxImportSource": "preact",
     "types": [
       "react",
-      "readable-types",
       "node"
     ],
     "skipLibCheck": true,

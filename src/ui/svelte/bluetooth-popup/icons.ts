@@ -14,11 +14,10 @@ import type {
   BluetoothWearableMinor,
 } from "@seelen-ui/lib/types";
 import { BluetoothImagingMinor } from "@seelen-ui/lib/types";
-import type { prettify, unionToIntersection } from "readable-types";
 
 const UNKNOWN_ICON = "TbDeviceUnknown";
 
-type IconsDict<T> = prettify<Record<Extract<T, string>, string>>;
+type IconsDict<T> = Record<Extract<T, string>, string>;
 
 const COMPUTER_ICONS: IconsDict<BluetoothComputerMinor> = {
   Uncategorized: "IoDesktopOutline",
@@ -127,35 +126,30 @@ const HEALTH_ICONS: IconsDict<BluetoothHealthMinor> = {
   PersonalMobilityDevice: "FaWheelchair",
 };
 
-type AllMinors = unionToIntersection<BluetoothMinorClass>;
-type FuncByMajor = {
-  [key in keyof AllMinors]: (minor: AllMinors[key]) => string;
-};
-
-const FUNC_BY_MAJOR: FuncByMajor = {
+const FUNC_BY_MAJOR = {
   Miscellaneous: () => UNKNOWN_ICON,
-  Computer: (minor) => {
+  Computer: (minor: BluetoothComputerMinor) => {
     if (typeof minor !== "string") return COMPUTER_ICONS.Uncategorized;
     return COMPUTER_ICONS[minor];
   },
-  Phone: (minor) => {
+  Phone: (minor: BluetoothPhoneMinor) => {
     if (typeof minor !== "string") return PHONE_ICONS.Uncategorized;
     return PHONE_ICONS[minor];
   },
-  NetworkAccessPoint: ([minor, _subminor]) => {
+  NetworkAccessPoint: ([minor, _subminor]: [BluetoothNetworkMinor, string]) => {
     return NETWORK_ICONS[minor];
   },
-  AudioVideo: (minor) => {
+  AudioVideo: (minor: BluetoothAudioVideoMinor) => {
     if (typeof minor !== "string") return AUDIO_VIDEO_ICONS.Uncategorized;
     return AUDIO_VIDEO_ICONS[minor];
   },
-  Peripheral: ([minor, subminor]) => {
+  Peripheral: ([minor, subminor]: [BluetoothPeripheralMinor, BluetoothPeripheralSubMinor]) => {
     if (typeof subminor === "string" && subminor !== "Uncategorized") {
       return PERIPHERAL_SUBMINOR_ICONS[subminor];
     }
     return PERIPHERAL_MINOR_ICONS[minor];
   },
-  Imaging: ([minors, _subminor]) => {
+  Imaging: ([minors, _subminor]: [BluetoothImagingMinor[], string]) => {
     if (minors.includes(BluetoothImagingMinor.Display)) return "BsDisplay";
     if (
       minors.includes(BluetoothImagingMinor.Scanner) ||
@@ -166,15 +160,15 @@ const FUNC_BY_MAJOR: FuncByMajor = {
     if (minors.includes(BluetoothImagingMinor.Camera)) return "IoCameraOutline";
     return "IoImagesOutline";
   },
-  Wearable: (minor) => {
+  Wearable: (minor: BluetoothWearableMinor) => {
     if (typeof minor !== "string") return WEARABLE_ICONS.Wristwatch;
     return WEARABLE_ICONS[minor];
   },
-  Toy: (minor) => {
+  Toy: (minor: BluetoothToyMinor) => {
     if (typeof minor !== "string") return "LuToyBrick";
     return TOY_ICONS[minor];
   },
-  Health: (minor) => {
+  Health: (minor: BluetoothHealthMinor) => {
     if (typeof minor !== "string") return HEALTH_ICONS.Undefined;
     return HEALTH_ICONS[minor];
   },
@@ -277,14 +271,14 @@ export function getIconForBTDevice(device: BluetoothDevice): string {
     return getIconByAppearance(device.appearance);
   }
 
-  const Minor = device.minorClass as unionToIntersection<BluetoothMinorClass>;
+  const Minor = device.minorClass as any;
   const Major = Object.keys(Minor)[0]!;
-  const func = FUNC_BY_MAJOR[Major];
-  return func(Minor[Major] as any);
+  const func = (FUNC_BY_MAJOR as any)[Major];
+  return func(Minor[Major]);
 }
 
 export function getMinorAsString(minor: BluetoothMinorClass): string {
-  const MinorObj = minor as unionToIntersection<BluetoothMinorClass>;
+  const MinorObj = minor as any;
   const Major = Object.keys(MinorObj)[0]!;
   const Minor = MinorObj[Major];
   if (typeof Minor === "string") {
