@@ -5,7 +5,6 @@ import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let widget = Widget.getCurrent();
-let webview = widget.webview;
 
 let settings = writable(await Settings.getAsync());
 Settings.onChange((s) => settings.set(s));
@@ -17,9 +16,9 @@ let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 await notifications.init();
 
-webview.onFocusChanged((e) => {
+widget.window.onFocusChanged((e) => {
   if (!e.payload) {
-    webview.hide();
+    widget.hide();
   }
 });
 

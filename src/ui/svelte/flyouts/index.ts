@@ -10,7 +10,7 @@ const root = document.getElementById("root")!;
 await Widget.self.init({
   autoSizeByContent: root,
 });
-await Widget.self.webview.setFocusable(false);
+await Widget.self.window.setFocusable(false);
 
 mount(App, {
   target: root,

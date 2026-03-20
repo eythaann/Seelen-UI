@@ -13,24 +13,25 @@ import { globalState } from "./state/mod.svelte.ts";
 await loadTranslations();
 
 const widget = Widget.getCurrent();
-const { webview } = widget;
+const { window } = widget;
 
 await widget.init();
 
 await Promise.all([
-  webview.setDecorations(false),
-  webview.setMinimizable(false),
-  webview.setClosable(false),
-  webview.setSkipTaskbar(true),
-  webview.setAlwaysOnTop(true),
-  webview.setResizable(false),
+  window.setDecorations(false),
+  window.setMinimizable(false),
+  window.setMaximizable(false),
+  window.setClosable(false),
+  window.setSkipTaskbar(true),
+  window.setAlwaysOnTop(true),
+  window.setResizable(false),
 ]);
 
 const hideDelayed = debounce(() => {
   globalState.showing = false;
 }, 100);
 
-widget.webview.onFocusChanged((e) => {
+widget.window.onFocusChanged((e) => {
   if (e.payload) {
     hideDelayed.cancel();
   } else {
@@ -39,7 +40,7 @@ widget.webview.onFocusChanged((e) => {
 });
 
 widget.onTrigger(async (args) => {
-  const visible = await widget.webview.isVisible();
+  const visible = await widget.window.isVisible();
   if (visible) {
     globalState.showing = false;
   } else {

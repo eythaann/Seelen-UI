@@ -7,7 +7,7 @@ import "@shared/styles/colors.css";
 import "@shared/styles/reset.css";
 
 await Widget.getCurrent().init();
-Widget.self.webview.setFocusable(false);
+Widget.self.window.setFocusable(false);
 
 await loadTranslations();
 

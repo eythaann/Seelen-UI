@@ -66,7 +66,7 @@ const setToolbarAsNotHidden = computed(() => {
 });
 
 effect(() => {
-  Widget.self.webview.setIgnoreCursorEvents($hidden_by_autohide.value);
+  Widget.self.window.setIgnoreCursorEvents($hidden_by_autohide.value);
 });
 
 effect(() => {

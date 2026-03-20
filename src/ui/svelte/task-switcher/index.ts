@@ -9,7 +9,7 @@ const root = document.getElementById("root")!;
 
 const widget = Widget.getCurrent();
 await widget.init();
-await widget.webview.setResizable(false);
+await widget.window.setResizable(false);
 
 mount(App, {
   target: root,

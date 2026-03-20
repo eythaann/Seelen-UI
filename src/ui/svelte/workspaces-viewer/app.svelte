@@ -4,11 +4,11 @@
   import { Widget } from "@seelen-ui/lib";
 
   $effect(() => {
-    Widget.getCurrent().ready();
+    Widget.self.ready();
   });
 
   function onCancel() {
-    Widget.getCurrent().webview.hide();
+    Widget.self.hide();
   }
 </script>
 

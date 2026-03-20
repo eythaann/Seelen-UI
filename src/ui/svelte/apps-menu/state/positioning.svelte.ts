@@ -1,4 +1,3 @@
-import { PhysicalPosition, PhysicalSize } from "@tauri-apps/api/dpi";
 import { Widget } from "@seelen-ui/lib";
 import type { PhysicalMonitor } from "@seelen-ui/lib/types";
 import { globalState } from "./mod.svelte";
@@ -41,9 +40,13 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
     y = Math.round(monitorCenterY - height / 2);
   }
 
-  await widget.webview.setShadow(globalState.displayMode === StartDisplayMode.Normal);
-  await widget.webview.setPosition(new PhysicalPosition(x, y));
-  await widget.webview.setSize(new PhysicalSize({ width, height }));
+  await widget.window.setShadow(globalState.displayMode === StartDisplayMode.Normal);
+  await widget.setPosition({
+    left: x,
+    top: y,
+    right: x + width,
+    bottom: y + height,
+  });
 
   if (globalState.showing) {
     await widget.show();

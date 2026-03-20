@@ -1,12 +1,12 @@
-import { UIColors } from "@seelen-ui/lib";
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import { UIColors, Widget } from "@seelen-ui/lib";
 import { lazySignal } from "./LazySignal";
 
-const webview = getCurrentWindow();
-export const $is_this_webview_focused = lazySignal(() => webview.isFocused());
-await webview.onFocusChanged(async () => {
+const window = Widget.self.window;
+
+export const $is_this_webview_focused = lazySignal(() => window.isFocused());
+await window.onFocusChanged(async () => {
   // the payload value is not used, cuz on startup it gives wrong value.
-  $is_this_webview_focused.value = await webview.isFocused();
+  $is_this_webview_focused.value = await window.isFocused();
 });
 await $is_this_webview_focused.init();
 

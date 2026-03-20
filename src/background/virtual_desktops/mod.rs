@@ -514,9 +514,11 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             }
 
             if is_minimized {
+                // Push before show_window to avoid a race where SystemMinimizeEnd
+                // fires on the hook thread before this thread reaches the push.
+                RESTORED_EVENT_QUEUE.push(*addr);
                 // use normal show instead async cuz it will keep the order of restoring
                 log_error!(window.show_window(SW_RESTORE));
-                RESTORED_EVENT_QUEUE.push(*addr);
             }
             MINIMIZED_BY_WORKSPACES.remove(addr);
 

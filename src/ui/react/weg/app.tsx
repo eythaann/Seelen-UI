@@ -1,14 +1,12 @@
 import { $system_colors } from "libs/ui/react/utils/signals.ts";
 import { useDarkMode } from "libs/ui/react/utils/styling.ts";
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { ConfigProvider, theme } from "antd";
 
 import { ErrorBoundary } from "./components/Error/index.tsx";
 import { SeelenWeg } from "./modules/bar/index.tsx";
 import { useSignalEffect } from "@preact/signals";
 import { $lastFocusedOnMonitor } from "./modules/shared/state/windows.ts";
-
-const webview = getCurrentWebviewWindow();
+import { Widget } from "@seelen-ui/lib";
 
 export function App() {
   const isDarkMode = useDarkMode();
@@ -16,9 +14,9 @@ export function App() {
   useSignalEffect(() => {
     const fullscreened = !!$lastFocusedOnMonitor.value?.isFullscreened;
     if (fullscreened) {
-      webview.hide();
+      Widget.self.hide();
     } else {
-      webview.show();
+      Widget.self.show();
     }
   });
 

@@ -130,7 +130,7 @@
 
   $effect(() => {
     const effects = ConfigState.config.acrylic ? [Effect.Acrylic] : [];
-    Widget.self.webview.setEffects({ effects });
+    Widget.self.window.setEffects({ effects });
   });
 
   function openUserMenu() {

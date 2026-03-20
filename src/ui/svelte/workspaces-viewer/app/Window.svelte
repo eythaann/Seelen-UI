@@ -23,7 +23,7 @@
   onclick={(e) => {
     e.stopPropagation();
     invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
-    Widget.getCurrent().webview.hide();
+    Widget.self.hide();
   }}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {

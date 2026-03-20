@@ -18,7 +18,7 @@ export class WidgetAutoSizer {
 
   private setup(): () => void {
     // Disable resizing by the user
-    this.widget.webview.setResizable(false);
+    this.widget.window.setResizable(false);
 
     const observer = new ResizeObserver(this.execute);
     observer.observe(this.element, {
@@ -64,7 +64,7 @@ export class WidgetAutoSizer {
 
     // only update size no position on this case
     if (frame.x === x && frame.y === y) {
-      await this.widget.webview.setSize(new PhysicalSize(frame.width, frame.height));
+      await this.widget.window.setSize(new PhysicalSize(frame.width, frame.height));
       return;
     }
 

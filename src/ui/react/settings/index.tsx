@@ -15,22 +15,22 @@ import "@shared/styles/reset.css";
 import "./styles/global.css";
 import "@shared/styles/RichText.css";
 
-const { webview } = Widget.self;
+const { window } = Widget.self;
 
 await Promise.all([
-  webview.setDecorations(false),
-  webview.setSizeConstraints({ minWidth: 600, minHeight: 400 }),
-  webview.setSize(new LogicalSize(800, 500)),
+  window.setDecorations(false),
+  window.setSizeConstraints({ minWidth: 600, minHeight: 400 }),
+  window.setSize(new LogicalSize(800, 500)),
 ]);
-await webview.center();
+await window.center();
 
 await Widget.self.init();
 await Widget.self.show();
 await Widget.self.focus();
 
 Widget.self.onTrigger(() => {
-  webview.unminimize();
-  webview.setFocus();
+  window.unminimize();
+  window.setFocus();
 });
 
 await loadTranslations();

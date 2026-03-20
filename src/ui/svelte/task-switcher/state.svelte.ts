@@ -125,7 +125,7 @@ widget.onTrigger((payload) => {
   }
 });
 
-widget.webview.onFocusChanged(({ payload }) => {
+widget.window.onFocusChanged(({ payload }) => {
   if (payload) {
     invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
       if (!isPressing) {

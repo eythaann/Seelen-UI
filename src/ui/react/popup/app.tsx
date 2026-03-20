@@ -17,7 +17,7 @@ invoke(SeelenCommand.GetPopupConfig, {
 })
   .then(async (data) => {
     state.value = data;
-    currentWidget.webview.setTitle(getOnlyText(data.title));
+    currentWidget.window.setTitle(getOnlyText(data.title));
     await currentWidget.show();
     await currentWidget.focus();
   })
@@ -28,7 +28,7 @@ invoke(SeelenCommand.GetPopupConfig, {
 
 subscribe(SeelenEvent.PopupContentChanged, (e) => {
   state.value = e.payload;
-  currentWidget.webview.setTitle(getOnlyText(e.payload.title));
+  currentWidget.window.setTitle(getOnlyText(e.payload.title));
 });
 
 function closePopup() {

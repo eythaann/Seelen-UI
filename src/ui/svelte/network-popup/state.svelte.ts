@@ -5,7 +5,6 @@ import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let widget = Widget.getCurrent();
-let webview = widget.webview;
 
 let settings = writable(await Settings.getAsync());
 Settings.onChange((s) => settings.set(s));
@@ -25,7 +24,7 @@ await radios.init();
 let isScanning = $state(false);
 let selectedSsid = $state<string | null>(null);
 
-webview.onFocusChanged(async (e) => {
+widget.window.onFocusChanged(async (e) => {
   if (e.payload) {
     await invoke(SeelenCommand.WlanStartScanning);
     isScanning = true;

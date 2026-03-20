@@ -24,7 +24,7 @@
   async function switchWorkspace() {
     if (active) return;
     // hide first to allow show the change animation to the user
-    await Widget.getCurrent().webview.hide();
+    await Widget.self.hide();
     await invoke(SeelenCommand.SwitchWorkspace, {
       workspaceId: workspace.id,
     });

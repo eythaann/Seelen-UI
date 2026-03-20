@@ -11,7 +11,6 @@ import {
   type WidgetTriggerPayload,
 } from "@seelen-ui/types";
 import { invoke, SeelenCommand, SeelenEvent } from "../../handlers/mod.ts";
-import { getCurrentWebviewWindow, type WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { decodeBase64Url } from "@std/encoding";
 import { debounce } from "../../utils/async.ts";
 import { WidgetAutoSizer } from "./sizing.ts";
@@ -19,7 +18,8 @@ import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from "./interfaces.ts";
 import { disableAnimationsOnPerformanceMode } from "./performance.ts";
-import { getCurrentWebview } from "@tauri-apps/api/webview";
+import { getCurrentWebview, type Webview } from "@tauri-apps/api/webview";
+import { getCurrentWindow, type Window } from "@tauri-apps/api/window";
 
 interface WidgetInternalState {
   hwnd: number;
@@ -65,8 +65,10 @@ export class Widget {
   public readonly def: IWidget;
   /** decoded widget instance information */
   public readonly decoded: WidgetInformation;
-  /** current webview window */
-  public readonly webview: WebviewWindow;
+  /** current webview where the widget is running */
+  public readonly webview: Webview;
+  /** current window where the widget is running */
+  public readonly window: Window;
 
   private autoSizer?: WidgetAutoSizer;
 
@@ -87,7 +89,8 @@ export class Widget {
 
   private constructor(widget: IWidget) {
     this.def = widget;
-    this.webview = getCurrentWebviewWindow();
+    this.webview = getCurrentWebview();
+    this.window = getCurrentWindow();
 
     const [id, query] = getDecodedWebviewLabel();
     const params = new URLSearchParams(query);
@@ -128,46 +131,46 @@ export class Widget {
 
   private applyInvisiblePreset(): Array<Promise<void>> {
     return [
-      this.webview.setDecorations(false), // no title bar
-      this.webview.setShadow(false), // no shadows
+      this.window.setDecorations(false), // no title bar
+      this.window.setShadow(false), // no shadows
       // hide from native shell
-      this.webview.setSkipTaskbar(true),
+      this.window.setSkipTaskbar(true),
       // as a (desktop/overlay) widget we don't wanna allow nothing of these
-      this.webview.setMinimizable(false),
-      this.webview.setMaximizable(false),
-      this.webview.setClosable(false),
+      this.window.setMinimizable(false),
+      this.window.setMaximizable(false),
+      this.window.setClosable(false),
     ];
   }
 
   /** Will apply the recommended settings for a desktop widget */
   private async applyDesktopPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnBottom(true)]);
+    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnBottom(true)]);
   }
 
   /** Will apply the recommended settings for an overlay widget */
   private async applyOverlayPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnTop(true)]);
+    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnTop(true)]);
   }
 
   /** Will apply the recommended settings for a popup widget */
   private async applyPopupPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.webview.setAlwaysOnTop(true)]);
+    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnTop(true)]);
 
-    const hideWebview = debounce(() => {
+    const hideWidget = debounce(() => {
       this.hide(true);
     }, 100);
 
-    this.webview.onFocusChanged(({ payload: focused }) => {
+    this.window.onFocusChanged(({ payload: focused }) => {
       if (focused) {
-        hideWebview.cancel();
+        hideWidget.cancel();
       } else {
-        hideWebview();
+        hideWidget();
       }
     });
 
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
       // avoid flickering when clicking a button that triggers the widget
-      hideWebview.cancel();
+      hideWidget.cancel();
 
       if (this.autoSizer && alignX && alignY) {
         this.autoSizer.originX = alignX;
@@ -224,7 +227,7 @@ export class Widget {
       });
     }
 
-    this.webview.onMoved(
+    this.window.onMoved(
       debounce((e) => {
         const { x, y } = e.payload;
         storage.setItem(`x`, x.toString());
@@ -233,7 +236,7 @@ export class Widget {
       }, 500),
     );
 
-    this.webview.onResized(
+    this.window.onResized(
       debounce((e) => {
         const { width, height } = e.payload;
         storage.setItem(`width`, width.toString());
@@ -287,15 +290,15 @@ export class Widget {
     }
 
     // state initialization
-    this.runtimeState.size = await this.webview.outerSize();
-    this.runtimeState.position = await this.webview.outerPosition();
+    this.runtimeState.size = await this.window.outerSize();
+    this.runtimeState.position = await this.window.outerPosition();
 
-    this.webview.onResized((e) => {
+    this.window.onResized((e) => {
       this.runtimeState.size.width = e.payload.width;
       this.runtimeState.size.height = e.payload.height;
     });
 
-    this.webview.onMoved((e) => {
+    this.window.onMoved((e) => {
       this.runtimeState.position.x = e.payload.x;
       this.runtimeState.position.y = e.payload.y;
     });
@@ -322,7 +325,7 @@ export class Widget {
     this.runtimeState.ready = true;
     await this.autoSizer?.execute();
 
-    if (show && !(await this.webview.isVisible())) {
+    if (show && !(await this.window.isVisible())) {
       await this.show();
       await this.focus();
     }
@@ -356,7 +359,7 @@ export class Widget {
 
   public async show(): Promise<void> {
     debouncedClose.cancel();
-    await this.webview.show();
+    await this.window.show();
   }
 
   /** Will force foreground the widget */
@@ -371,7 +374,7 @@ export class Widget {
   }
 
   public hide(closeAfterInactivity?: boolean): void {
-    Widget.self.webview.hide();
+    this.window.hide();
     if (closeAfterInactivity) {
       debouncedClose();
     }
@@ -379,7 +382,7 @@ export class Widget {
 }
 
 const debouncedClose = debounce(() => {
-  Widget.self.webview.close();
+  Widget.self.window.close();
 }, 30_000);
 
 type ExtendedGlobalThis = typeof globalThis & {
@@ -395,7 +398,7 @@ export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as
 export const SeelenWallWidgetId: WidgetId = "@seelen/wallpaper-manager" as WidgetId;
 
 function getDecodedWebviewLabel(): [WidgetId, string | undefined] {
-  const encondedLabel = getCurrentWebviewWindow().label;
+  const encondedLabel = getCurrentWebview().label;
   const decodedLabel = new TextDecoder().decode(decodeBase64Url(encondedLabel));
   const [id, query] = decodedLabel.split("?");
   if (!id) {

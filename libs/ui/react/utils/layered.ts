@@ -21,35 +21,35 @@ class LayeredHitbox {
 export async function declareDocumentAsLayeredHitbox(
   shouldAllowMouseEvent: (element: Element) => boolean = (element) => element != document.body,
 ): Promise<void> {
-  const webview = TauriWindow.getCurrentWindow();
+  const window = TauriWindow.getCurrentWindow();
 
   const webviewRect = { x: 0, y: 0, width: 0, height: 0 };
 
-  await webview.setIgnoreCursorEvents(true);
+  await window.setIgnoreCursorEvents(true);
   const data = new LayeredHitbox();
 
-  webview.onMoved((e) => {
+  window.onMoved((e) => {
     webviewRect.x = e.payload.x;
     webviewRect.y = e.payload.y;
   });
 
-  webview.onResized((e) => {
+  window.onResized((e) => {
     webviewRect.width = e.payload.width;
     webviewRect.height = e.payload.height;
   });
 
-  const { x, y } = await webview.outerPosition();
+  const { x, y } = await window.outerPosition();
   webviewRect.x = x;
   webviewRect.y = y;
-  const { width, height } = await webview.outerSize();
+  const { width, height } = await window.outerSize();
   webviewRect.width = width;
   webviewRect.height = height;
 
-  webview.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
+  window.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
     data.isLayeredEnabled = event.payload;
   });
 
-  webview.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
+  window.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
     if (!data.isLayeredEnabled) {
       return;
     }
@@ -78,7 +78,7 @@ export async function declareDocumentAsLayeredHitbox(
     const shouldAllow = shouldAllowMouseEvent(elementAtPoint);
     if (shouldAllow == data.isIgnoringCursorEvents) {
       data.isIgnoringCursorEvents = !shouldAllow;
-      webview.setIgnoreCursorEvents(!shouldAllow);
+      window.setIgnoreCursorEvents(!shouldAllow);
     }
   });
 
@@ -86,23 +86,7 @@ export async function declareDocumentAsLayeredHitbox(
     const shouldAllow = shouldAllowMouseEvent(e.target as Element);
     if (shouldAllow == data.isIgnoringCursorEvents) {
       data.isIgnoringCursorEvents = !shouldAllow;
-      webview.setIgnoreCursorEvents(!shouldAllow);
+      window.setIgnoreCursorEvents(!shouldAllow);
     }
   });
-
-  // the purpose of this is avoid #662 and #138
-  /* const fastToggleIgnoreCursor = debounce(() => {
-    webview.setIgnoreCursorEvents(true);
-    setTimeout(() => {
-      webview.setIgnoreCursorEvents(data.isIgnoringCursorEvents);
-    }, 100);
-  }, 100);
-
-  globalThis.addEventListener(
-    'mouseup',
-    () => {
-      fastToggleIgnoreCursor();
-    },
-    true,
-  ); */
 }

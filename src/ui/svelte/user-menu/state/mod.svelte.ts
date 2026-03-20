@@ -5,7 +5,6 @@ import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 const widget = Widget.getCurrent();
-const webview = widget.webview;
 
 const settings = writable(await Settings.getAsync());
 Settings.onChange((s) => settings.set(s));
@@ -18,7 +17,7 @@ subscribe(SeelenEvent.UserChanged, user.setByPayload);
 await user.init();
 
 let openCategory = $state<FolderType | null>(null);
-webview.onFocusChanged((e) => {
+widget.window.onFocusChanged((e) => {
   if (!e.payload) {
     openCategory = null;
   }

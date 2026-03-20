@@ -11,7 +11,7 @@ await widget.init();
 // play with zoom level to reset device pixel ratio to 1:1
 let lastDPR = window.devicePixelRatio;
 await widget.webview.setZoom(1 / lastDPR);
-widget.webview.onScaleChanged(() => {
+widget.window.onScaleChanged(() => {
   if (window.devicePixelRatio !== lastDPR) {
     // when zoom was set dpr changed, so in case of change this is accomulative unit
     lastDPR = lastDPR * window.devicePixelRatio;
@@ -19,9 +19,9 @@ widget.webview.onScaleChanged(() => {
   }
 });
 
-widget.webview.setResizable(false);
+widget.window.setResizable(false);
 widget.onTrigger(async () => {
-  if (await widget.webview.isVisible()) {
+  if (await widget.window.isVisible()) {
     widget.hide(true);
   } else {
     await widget.show();

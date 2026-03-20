@@ -6,7 +6,6 @@ import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 import { path } from "@tauri-apps/api";
 
 let widget = Widget.getCurrent();
-let webview = widget.webview;
 
 let settings = writable(await Settings.getAsync());
 Settings.onChange((s) => settings.set(s));
@@ -25,12 +24,12 @@ await Promise.all([mediaDevices.init(), mediaSessions.init()]);
 let currentView = $state<"main" | "mixer">("main");
 let selectedDeviceId = $state<string | null>(null);
 
-webview.onFocusChanged((e) => {
+widget.window.onFocusChanged((e) => {
   if (!e.payload) {
     // Reset state when popup loses focus
     currentView = "main";
     selectedDeviceId = null;
-    webview.hide();
+    widget.hide();
   }
 });
 

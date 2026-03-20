@@ -8,8 +8,8 @@ let showing = $state(false);
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
-const widgetSize = lazyRune(() => Widget.self.webview.outerSize());
-await Widget.self.webview.onResized(widgetSize.setByPayload);
+const widgetSize = lazyRune(() => Widget.self.window.outerSize());
+await Widget.self.window.onResized(widgetSize.setByPayload);
 
 await Promise.all([monitors.init(), widgetSize.init()]);
 
@@ -62,16 +62,20 @@ $effect.root(() => {
       y = monitor.rect.bottom - height - padding;
     }
 
-    Widget.self.webview.setPosition(new PhysicalPosition(Math.round(x), Math.round(y)));
+    Widget.self.window.setPosition(new PhysicalPosition(Math.round(x), Math.round(y)));
   });
 });
 
-export function setShowing(value: boolean) {
-  showing = value;
-  Widget.self.webview.setIgnoreCursorEvents(!value);
-  if (value) {
-    invoke(SeelenCommand.BringSelfToTop);
+export function setShowing(show: boolean) {
+  if (showing != show) {
+    Widget.self.window.setIgnoreCursorEvents(!show);
+
+    if (show) {
+      invoke(SeelenCommand.BringSelfToTop);
+    }
   }
+
+  showing = show;
 }
 
 export const RendererState = {

@@ -13,7 +13,7 @@
   });
 
   function onCancel() {
-    Widget.getCurrent().webview.hide();
+    Widget.self.hide();
   }
 
   const menu = $derived.by(() => {
