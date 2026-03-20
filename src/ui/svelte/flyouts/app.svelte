@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { Widget } from "@seelen-ui/lib";
   import { state as gState } from "./state/mod.svelte";
-  import { Icon, SpecificIcon } from "libs/ui/svelte/components/Icon";
-  import { Monitors, setShowing } from "./state/placement.svelte";
-  import { brightnessIcon, nanosecondsToPlayingTime, outputVolumeIcon } from "libs/ui/utils";
-  import { convertFileSrc } from "@tauri-apps/api/core";
-  import { debounce, throttle } from "lodash";
+  import { RendererState, setShowing } from "./state/placement.svelte";
   import { ConfigState } from "./state/config.svelte";
+  import { debounce } from "lodash";
   import Notification from "../notifications/components/Notification.svelte";
+  import Workspace from "./app/Workspace.svelte";
+  import MediaDevices from "./app/MediaDevices.svelte";
+  import MediaPlaying from "./app/MediaPlaying.svelte";
+  import Brightness from "./app/Brightness.svelte";
 
   $effect(() => {
-    Widget.getCurrent().ready({ show: false });
+    Widget.getCurrent().ready();
   });
 
   let lastChanged = $state<string | null>(null);
@@ -22,13 +23,13 @@
     return gState.mediaOutputs.find((o) => o.isDefaultMultimedia);
   });
 
-  let playing = $derived.by(() => {
+  let recomendedPlayer = $derived.by(() => {
     return gState.mediaPlaying.find((p) => p.default);
   });
 
   let vd = $derived.by(() => {
-    if (Monitors.primary) {
-      return gState.workspaces.monitors[Monitors.primary.id] || null;
+    if (RendererState.primary) {
+      return gState.workspaces.monitors[RendererState.primary.id] || null;
     }
     return null;
   });
@@ -39,13 +40,14 @@
       .find((workspace) => workspace.id == vd.active_workspace);
   });
 
-  let notification = $derived.by(() =>
-    gState.notifications.toSorted((a, b) => Number(b.date - a.date)).pop(),
+  // Use [0] (newest) instead of .pop() (oldest) on a descending-sorted array.
+  let notification = $derived.by(
+    () => gState.notifications.toSorted((a, b) => Number(b.date - a.date))[0],
   );
 
   let notificationId = $derived(notification?.id);
   let volume = $derived(output?.volume || 0);
-  let playingTitle = $derived(playing?.title);
+  let playingTitle = $derived(recomendedPlayer?.title);
   let brightnessLevel = $derived(gState.brightness?.currentBrightness);
   let activeWorkspace = $derived(vd?.active_workspace);
 
@@ -67,27 +69,52 @@
   $effect(() => {
     let somethingChanged = false;
 
-    if (ConfigState.config.showVolumeChange && prev.volume.toFixed(2) !== volume.toFixed(2)) {
+    // Guard with `output` so we never show an empty flyout when the device is removed.
+    if (
+      ConfigState.config.showVolumeChange &&
+      prev.volume.toFixed(2) !== volume.toFixed(2) &&
+      output
+    ) {
       lastChanged = "mediaDevices";
       somethingChanged = true;
     }
 
-    if (ConfigState.config.showMediaPlayerChange && prev.playingTitle !== playingTitle) {
+    // Guard with `playing` so we never show an empty flyout when the player is closed.
+    if (
+      ConfigState.config.showMediaPlayerChange &&
+      prev.playingTitle !== playingTitle &&
+      recomendedPlayer
+    ) {
       lastChanged = "mediaPlaying";
       somethingChanged = true;
     }
 
-    if (ConfigState.config.showBrightnessChange && prev.brightnessLevel !== brightnessLevel) {
+    // Guard with `gState.brightness` so we never show an empty flyout when brightness is unavailable.
+    if (
+      ConfigState.config.showBrightnessChange &&
+      prev.brightnessLevel !== brightnessLevel &&
+      gState.brightness
+    ) {
       lastChanged = "brightness";
       somethingChanged = true;
     }
 
-    if (ConfigState.config.showWorkspaceChange && prev.activeWorkspace !== activeWorkspace) {
+    // Guard with `activeWorkspaceData` so we never show an empty flyout on workspace edge cases.
+    if (
+      ConfigState.config.showWorkspaceChange &&
+      prev.activeWorkspace !== activeWorkspace &&
+      activeWorkspaceData
+    ) {
       lastChanged = "workspace";
       somethingChanged = true;
     }
 
-    if (ConfigState.config.showNotifications && prev.notificationId !== notificationId) {
+    // Guard with `notification` so we never show an empty flyout when the list becomes empty.
+    if (
+      ConfigState.config.showNotifications &&
+      prev.notificationId !== notificationId &&
+      notification
+    ) {
       lastChanged = "notification";
       somethingChanged = true;
     }
@@ -97,132 +124,52 @@
       hideWithDelay();
     }
 
+    // Hide immediately when the currently displayed flyout loses its data source.
+    if (
+      (lastChanged === "mediaPlaying" && !recomendedPlayer) ||
+      (lastChanged === "notification" && !notification)
+    ) {
+      hideWithDelay.cancel();
+      setShowing(false);
+      lastChanged = null;
+    }
+
     prev.volume = volume;
     prev.playingTitle = playingTitle;
     prev.brightnessLevel = brightnessLevel;
     prev.activeWorkspace = activeWorkspace;
     prev.notificationId = notificationId;
   });
-
-  const setBrightnessThrottled = throttle((name: string, level: number) => {
-    invoke(SeelenCommand.SetMonitorBrightness, { instanceName: name, level });
-  }, 100);
-
-  const setVolumeThrottled = throttle((deviceId: string, level: number) => {
-    invoke(SeelenCommand.SetVolumeLevel, {
-      deviceId,
-      sessionId: null,
-      level,
-    });
-  }, 100);
-
-  function toggleMute(deviceId: string) {
-    invoke(SeelenCommand.MediaToggleMute, { deviceId, sessionId: null });
-  }
 </script>
 
-<div class="flyout" data-placement={ConfigState.config.placement}>
+<div
+  class="flyout"
+  data-placement={ConfigState.config.placement}
+  data-showing={RendererState.showing}
+>
   {#if lastChanged === "notification" && notification}
     <Notification {notification} />
   {/if}
 
   {#if lastChanged === "workspace" && activeWorkspaceData}
-    <div class="workspace">
-      <span class="workspace-name">
-        {activeWorkspaceData.name || `Workspace ${activeWorkspaceData.idx + 1}`}
-      </span>
-      <Icon iconName={(activeWorkspaceData.icon as any) || "PiMonitorBold"} />
-    </div>
+    <Workspace workspace={activeWorkspaceData} />
   {/if}
 
   {#if lastChanged === "mediaDevices" && output}
-    <div class="volume">
-      <Icon
-        iconName={outputVolumeIcon(output.muted, output.volume)}
-        onclick={() => toggleMute(output.id)}
-      />
-      <input
-        type="range"
-        data-skin="flat"
-        data-orientation={orientation}
-        value={output.volume}
-        oninput={(e) => {
-          setVolumeThrottled(output.id, Number(e.currentTarget.value));
-        }}
-        min={0}
-        max={1}
-        step={0.01}
-      />
-    </div>
+    <MediaDevices {output} {orientation} />
   {/if}
 
   {#if lastChanged === "brightness" && gState.brightness}
-    <div class="brightness">
-      <Icon iconName={brightnessIcon(gState.brightness.currentBrightness)} />
-      <input
-        type="range"
-        data-skin="flat"
-        data-orientation={orientation}
-        value={gState.brightness.currentBrightness}
-        oninput={(e) => {
-          setBrightnessThrottled(gState.brightness!.instanceName, Number(e.currentTarget.value));
-        }}
-        min={gState.brightness.availableLevels[0]}
-        max={gState.brightness.availableLevels[gState.brightness.levels]}
-      />
-    </div>
+    <Brightness brightness={gState.brightness} {orientation} />
   {/if}
 
-  {#if lastChanged === "mediaPlaying" && playing}
-    <div class="player">
-      <div class="player-thumbnail-container">
-        {#if playing.thumbnail}
-          <img src={convertFileSrc(playing.thumbnail)} alt="" />
-        {:else}
-          <SpecificIcon name="defaultPlayerThumbnail" />
-        {/if}
-      </div>
-
-      <div class="player-info">
-        <div class="player-title">{playing.title}</div>
-        <div class="player-author">{playing.author}</div>
-        <div class="player-timeline">
-          <span>{nanosecondsToPlayingTime(playing.timeline.position as any)}</span>
-          <span>/</span>
-          <span>{nanosecondsToPlayingTime(playing.timeline.end as any)}</span>
-        </div>
-      </div>
-
-      <div class="player-controls">
-        <button
-          data-skin="transparent"
-          onclick={() => invoke(SeelenCommand.MediaPrev, { id: playing.umid })}
-        >
-          <Icon iconName="IoPlaySkipBack" />
-        </button>
-        <button
-          data-skin="transparent"
-          onclick={() => invoke(SeelenCommand.MediaTogglePlayPause, { id: playing.umid })}
-        >
-          <Icon iconName={playing.playing ? "IoPause" : "IoPlay"} />
-        </button>
-        <button
-          data-skin="transparent"
-          onclick={() => invoke(SeelenCommand.MediaNext, { id: playing.umid })}
-        >
-          <Icon iconName="IoPlaySkipForward" />
-        </button>
-      </div>
-
-      <progress
-        class="player-progress"
-        value={playing.timeline.position as any}
-        max={playing.timeline.end as any}
-      >
-        <span>{nanosecondsToPlayingTime(playing.timeline.position as any)}</span>
-        <span>/</span>
-        <span>{nanosecondsToPlayingTime(playing.timeline.end as any)}</span>
-      </progress>
-    </div>
+  {#if lastChanged === "mediaPlaying" && recomendedPlayer}
+    <MediaPlaying playing={recomendedPlayer} />
   {/if}
 </div>
+
+<style>
+  .flyout[data-showing="false"] {
+    opacity: 0;
+  }
+</style>

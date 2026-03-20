@@ -178,6 +178,7 @@ slu_commands_declaration! {
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),
+    BringSelfToTop = bring_self_to_top(),
     WriteFile = write_data_file(filename: String, content: String),
     ReadFile = read_data_file(filename: String) -> String,
 

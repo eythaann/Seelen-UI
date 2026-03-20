@@ -368,7 +368,6 @@ impl WindowsApi {
         Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
-    #[allow(dead_code)]
     pub fn bring_to_top(hwnd: HWND) -> Result<()> {
         unsafe { BringWindowToTop(hwnd)? };
         Ok(())

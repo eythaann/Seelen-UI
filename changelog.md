@@ -19,6 +19,7 @@
 - icons not refreshing on new installed apps.
 - not clearing icon extraction failure list on cache clear.
 - toolbar and calendar language not changing.
+- flyout widget being shown on media player close as a dot in the screen.
 
 ## [2.5.6]
 

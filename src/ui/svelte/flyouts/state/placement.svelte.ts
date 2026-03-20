@@ -20,8 +20,7 @@ const primaryMonitor = $derived.by(() => {
 $effect.root(() => {
   $effect(() => {
     const monitor = primaryMonitor;
-
-    if (!monitor || !showing) {
+    if (!monitor) {
       return;
     }
 
@@ -63,25 +62,26 @@ $effect.root(() => {
       y = monitor.rect.bottom - height - padding;
     }
 
-    Widget.self.webview
-      .setPosition(new PhysicalPosition(Math.round(x), Math.round(y)))
-      .then(() => Widget.self.show());
+    Widget.self.webview.setPosition(new PhysicalPosition(Math.round(x), Math.round(y)));
   });
 });
 
 export function setShowing(value: boolean) {
   showing = value;
-
-  if (!value) {
-    Widget.self.hide();
+  Widget.self.webview.setIgnoreCursorEvents(!value);
+  if (value) {
+    invoke(SeelenCommand.BringSelfToTop);
   }
 }
 
-export const Monitors = {
+export const RendererState = {
   get all() {
     return monitors.value;
   },
   get primary() {
     return primaryMonitor;
+  },
+  get showing() {
+    return showing;
   },
 };

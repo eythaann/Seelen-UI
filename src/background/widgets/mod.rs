@@ -167,6 +167,13 @@ pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()
     Ok(())
 }
 
+#[tauri::command(async)]
+pub fn bring_self_to_top(webview: tauri::WebviewWindow) -> Result<()> {
+    use windows::Win32::Foundation::HWND;
+    let hwnd = HWND(webview.hwnd()?.0);
+    WindowsApi::bring_to_top(hwnd)
+}
+
 pub fn show_settings() -> Result<()> {
     trigger_widget(WidgetTriggerPayload::new("@seelen/settings".into()))
 }
