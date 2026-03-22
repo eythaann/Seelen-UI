@@ -121,6 +121,20 @@ pub enum ResourceAttribute {
 
 // =============================================================================
 
+/// Represents a pending update submitted by the creator of a Published resource.
+/// The live resource remains unchanged until the update is approved or rejected.
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct ResourcePendingUpdate {
+    /// Proposed new metadata (applied to the resource on approve)
+    pub metadata: ResourceMetadata,
+    /// ID of the pending resource data document in the type-specific collection
+    pub data_id: Uuid,
+    /// When the pending update was submitted
+    pub updated_at: DateTime<Utc>,
+}
+
 /// Represents a resource in the cloud, uploaded by a user
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(rename_all = "camelCase")]
@@ -161,6 +175,10 @@ pub struct Resource {
     pub stars: u32,
     /// number of downloads
     pub downloads: u32,
+    /// Pending update waiting for reviewer approval (only present on Published resources)
+    pub pending_update: Option<ResourcePendingUpdate>,
+    /// Reason a pending update was rejected (visible to creator after rejection)
+    pub rejected_pending_reason: Option<String>,
 }
 
 impl Resource {
