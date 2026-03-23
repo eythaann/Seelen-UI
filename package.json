@@ -65,7 +65,7 @@
     "antd": "^6.3.3",
     "esbuild": "^0.27.4",
     "esbuild-css-modules-plugin": "^3.1.4",
-    "express": "^4.21.2",
+    "express": "^5.2.1",
     "framer-motion": "^12.37.0",
     "i18next": "^25.8.18",
     "js-yaml": "^4.1.0",
