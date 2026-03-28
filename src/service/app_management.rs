@@ -1,50 +1,76 @@
+use std::time::{Duration, Instant};
+
 use slu_ipc::{AppIpc, IPC};
 use sysinfo::ProcessesToUpdate;
 
 use crate::{enviroment::was_installed_using_msix, error::Result, exit};
 
-/// Starts monitoring the Seelen UI app for the current session
-/// Restarts it if it crashes unexpectedly
-pub fn start_app_monitoring() {
+/// How long to wait for the app to establish its IPC connection after each launch attempt.
+const STARTUP_TIMEOUT: Duration = Duration::from_secs(2);
+
+/// Max consecutive failures before giving up and stopping the service.
+/// In debug builds we stop immediately after the first failure.
+const MAX_CRASHES: u32 = if cfg!(debug_assertions) { 0 } else { 5 };
+
+/// Starts monitoring the Seelen UI app for the current session and restarts it automatically
+/// when it crashes or fails to start.
+///
+/// `app_just_launched` should be `true` when the caller already launched the app so that the
+/// monitor gives it a startup grace window before counting a failure.
+pub fn start_app_monitoring(app_just_launched: bool) {
     std::thread::spawn(move || {
-        let mut crash_counter = 0;
-        let max_tries = if cfg!(debug_assertions) { 0 } else { 5 };
-        let mut app_was_connected = false;
+        let mut crash_count = 0u32;
+        let mut app_was_connected = true;
+        // Track when we last launched the app so we can detect startup timeouts.
+        let mut launch_time: Option<Instant> = app_just_launched.then(Instant::now);
 
         loop {
-            std::thread::sleep(std::time::Duration::from_secs(1));
+            std::thread::sleep(Duration::from_secs(1));
 
             if crate::EXITING.load(std::sync::atomic::Ordering::SeqCst) {
                 return;
             }
 
             if AppIpc::can_stablish_connection() {
-                // Reset counter once the app is confirmed running after a restart
-                if crash_counter > 0 && !app_was_connected {
+                if !app_was_connected {
                     log::info!("Seelen UI reconnected successfully, resetting crash counter.");
-                    crash_counter = 0;
+                    crash_count = 0;
+                    launch_time = None;
                 }
                 app_was_connected = true;
                 continue;
             }
 
-            // Only count as a crash if we had a confirmed connection before
-            if !app_was_connected {
+            // ── App is not reachable via IPC ──────────────────────────────────────────
+
+            // If we recently launched the app, give it time to establish its IPC connection
+            // before counting the absence as a failure.
+            if matches!(launch_time, Some(lt) if lt.elapsed() < STARTUP_TIMEOUT) {
                 continue;
             }
 
+            // Failure: either the app was connected and just disappeared (runtime crash),
+            // or a launch attempt's grace window expired without establishing IPC.
             app_was_connected = false;
-            log::info!("Seelen UI was closed unexpectedly.");
-            crash_counter += 1;
-            if crash_counter > max_tries {
+            crash_count += 1;
+            log::warn!("Seelen UI is not running (failure #{crash_count}/{MAX_CRASHES}).");
+
+            if crash_count > MAX_CRASHES {
+                log::error!("Seelen UI failed {crash_count} times in a row, stopping service.");
                 break;
             }
 
+            crate::log_error!(kill_all_seelen_ui_processes());
+
+            // Linear back-off: 500 ms, 1000 ms, 1500 ms, …
+            let backoff = Duration::from_millis(500 * crash_count as u64);
+            log::info!("Restarting Seelen UI in {}ms…", backoff.as_millis());
+            std::thread::sleep(backoff);
             crate::log_error!(launch_seelen_ui());
-            std::thread::sleep(std::time::Duration::from_secs(3));
+            launch_time = Some(Instant::now());
         }
 
-        log::error!("Seelen UI crashed {crash_counter} times in a row, stopping service.");
+        log::error!("Seelen UI monitoring stopped after repeated failures.");
         exit(1);
     });
 }
@@ -69,13 +95,28 @@ pub fn launch_seelen_ui() -> Result<()> {
 }
 
 pub fn kill_all_seelen_ui_processes() -> Result<()> {
-    log::info!("Killing all Seelen UI processes");
+    log::info!("Killing all Seelen UI processes in current session");
+    let current_session = crate::windows_api::WindowsApi::current_session_id();
+
     let mut sys = sysinfo::System::new();
     sys.refresh_processes(ProcessesToUpdate::All, true);
     let instances: Vec<_> = sys
         .processes()
         .values()
-        .filter(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
+        .filter(|p| {
+            if !p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")) {
+                return false;
+            }
+            let mut session_id = 0u32;
+            let in_session = unsafe {
+                windows::Win32::System::RemoteDesktop::ProcessIdToSessionId(
+                    p.pid().as_u32(),
+                    &mut session_id,
+                )
+                .is_ok()
+            };
+            in_session && session_id == current_session
+        })
         .collect();
     for instance in instances {
         instance.kill();

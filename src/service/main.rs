@@ -78,13 +78,15 @@ pub fn setup() -> Result<()> {
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
     ServiceIpc::start(crate::cli::processing::process_action)?;
 
-    if !AppIpc::can_stablish_connection() {
+    let app_just_launched = if !AppIpc::can_stablish_connection() {
         WindowsApi::wait_for_native_shell();
         log_error!(launch_seelen_ui());
-    }
+        true
+    } else {
+        false
+    };
 
-    std::thread::sleep(std::time::Duration::from_secs(2));
-    crate::app_management::start_app_monitoring();
+    crate::app_management::start_app_monitoring(app_just_launched);
     Ok(())
 }
 
