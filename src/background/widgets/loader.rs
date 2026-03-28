@@ -16,6 +16,7 @@ use crate::{
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
+    windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
 const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(5);
@@ -153,6 +154,10 @@ impl WidgetInstance {
 
             loop {
                 tokio::time::sleep(LIVENESS_PROVE_INTERVAL).await;
+                if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                    continue;
+                }
+
                 let _ = app.emit_to(&label.raw, "internal::liveness-ping", ());
 
                 tokio::select! {

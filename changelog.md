@@ -2,6 +2,11 @@
 
 ## [2.5.8-dev]
 
+### fix
+
+- emitting liveness prover events while session suspended.
+- service not restarting the app on crash.
+
 ## [2.5.7]
 
 ### features
