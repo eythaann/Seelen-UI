@@ -21,12 +21,3 @@
     <DeviceView onBack={handleBack} />
   {/if}
 </div>
-
-<style>
-  .media-popup {
-    background: var(--config-background-color, var(--color-gray-100));
-    color: var(--config-foreground-color, var(--color-gray-900));
-    border-radius: 8px;
-    overflow: hidden;
-  }
-</style>
