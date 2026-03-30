@@ -11,6 +11,7 @@ import { getDrpc, getUpdaterSettings, patchUpdaterSettings, setDrpc } from "./ap
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { UpdateChannel } from "@seelen-ui/lib/types";
+import { SessionView } from "./session/infra.tsx";
 
 const [isDevMode, isMsixBuild, isFixed] = await Promise.all([
   invoke(SeelenCommand.IsDevMode),
@@ -34,10 +35,9 @@ export function Information() {
 
   return (
     <div className={cs.info}>
-      <figure className={cs.logo}>
-        <img src="./company_logo.svg" alt="Seelen Corp." />
-        <figcaption>Seelen Corp.</figcaption>
-      </figure>
+      <div className={cs.sessionContainer}>
+        <SessionView />
+      </div>
 
       <SettingsGroup>
         <SettingsSubGroup label="Seelen UI">

@@ -47,4 +47,5 @@ export enum SeelenEvent {
   StartMenuItemsChanged = "start-menu::items-changed",
   WegAddItem = "weg::add-item",
   TrashBinChanged = "trash-bin::changed",
+  SeelenSessionChanged = "session::changed",
 }

@@ -117,4 +117,7 @@ slu_events_declaration! {
 
     // Trash Bin
     TrashBinChanged(TrashBinInfo) as "trash-bin::changed",
+
+    // Seelen Session
+    SeelenSessionChanged(Option<SeelenSession>) as "session::changed",
 }

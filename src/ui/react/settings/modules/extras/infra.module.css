@@ -6,24 +6,11 @@
     }
   }
 
-  .logo {
+  .sessionContainer {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-l);
-    padding: 4rem 0;
-
-    > img {
-      object-fit: contain;
-      width: 150px;
-      aspect-ratio: 1/1;
-    }
-
-    figcaption {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--color-black);
-    }
+    justify-content: center;
+    margin-bottom: var(--spacing-s);
   }
 
   .version {

@@ -10,7 +10,7 @@ import { cx } from "../../modules/shared/utils/app.ts";
 
 import { RouteIcons, RoutePath } from "./routes.tsx";
 import cs from "./index.module.css";
-import { settings, themes, widgets } from "../../state/mod.ts";
+import { session, settings, themes, widgets } from "../../state/mod.ts";
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
@@ -56,14 +56,10 @@ export const Navigation = memo(() => {
         [cs.collapsed!]: collapsed,
       })}
     >
-      <div className={cs.header}>
-        <img src="./logo.svg" onClick={() => setCollapsed(!collapsed)} loading="lazy" />
+      <div className={cs.header} onClick={() => setCollapsed(!collapsed)}>
+        <img src="./logo.svg" />
         <h1>Seelen UI</h1>
-        <Icon
-          className={cs.chevron}
-          iconName="FaChevronLeft"
-          onClick={() => setCollapsed(!collapsed)}
-        />
+        <Icon className={cs.chevron} iconName="FaChevronLeft" />
       </div>
 
       <div className={cs.body}>
@@ -130,7 +126,9 @@ export const Navigation = memo(() => {
         <div className={cs.group}>{devGroup.map(Mapper)}</div>
       </div>
 
-      <div className={cs.footer}>{[RoutePath.Extras].map(Mapper)}</div>
+      <div className={cs.footer}>
+        <SessionAvatar collapsed={collapsed} isActive={location.pathname === RoutePath.Extras} />
+      </div>
     </div>
   );
 });
@@ -154,6 +152,57 @@ const Item = ({ route, icon, label, isActive, collapsed }: ItemProps) => {
       >
         {icon}
         <span className={cs.label}>{label}</span>
+      </NavLink>
+    </Tooltip>
+  );
+};
+
+interface SessionAvatarProps {
+  collapsed: boolean;
+  isActive: boolean;
+}
+
+const SessionAvatar = ({ collapsed, isActive }: SessionAvatarProps) => {
+  const { t } = useTranslation();
+  const currentSession = session.value;
+
+  const displayName = currentSession?.displayName || currentSession?.username;
+  const avatarLetter = displayName?.[0]?.toUpperCase();
+
+  const icon = (
+    <div className={cs.sessionAvatar}>
+      {currentSession?.avatar ? <img src={currentSession.avatar} alt="avatar" /> : (
+        avatarLetter || <Icon iconName="LuUserRound" />
+      )}
+    </div>
+  );
+
+  return (
+    <Tooltip
+      placement="right"
+      title={collapsed ? `${t("header.labels.session")} & ${t("header.labels.extras")}` : null}
+    >
+      <NavLink
+        to={RoutePath.Extras}
+        className={cx(cs.sessionItem, {
+          [cs.active!]: isActive,
+        })}
+      >
+        {icon}
+
+        {currentSession
+          ? (
+            <div className={cs.sessionInfo}>
+              <span className={cs.label}>{displayName}</span>
+              <span className={cs.email}>{currentSession.email}</span>
+            </div>
+          )
+          : (
+            <div className={cs.sessionInfo}>
+              <span className={cs.label}>{t("header.labels.session")}</span>
+              <span className={cs.email}>& {t("header.labels.extras")}</span>
+            </div>
+          )}
       </NavLink>
     </Tooltip>
   );

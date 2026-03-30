@@ -12,6 +12,7 @@ mod logger;
 mod migrations;
 mod modules;
 mod resources;
+mod session;
 mod state;
 mod tauri_context;
 mod tauri_plugins;

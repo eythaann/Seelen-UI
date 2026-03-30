@@ -35,6 +35,7 @@ export async function saveSettings() {
 }
 
 export * from "./resources";
+export * from "./session";
 export * from "./system";
 
 const defaultMonitorConfig = await invoke(SeelenCommand.StateGetDefaultMonitorSettings);

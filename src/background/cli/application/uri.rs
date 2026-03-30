@@ -14,6 +14,7 @@ use uuid::Uuid;
 use crate::{
     error::Result,
     get_tokio_handle, log_error,
+    session::application::SessionManager,
     state::application::{download_remote_icons, FULL_STATE},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     widgets::popups::POPUPS_MANAGER,
@@ -38,6 +39,28 @@ pub fn process_uri(uri: &str) -> Result<()> {
     }
 
     let path = uri.trim_start_matches(URI).trim_start_matches("/");
+
+    // auth/callback?code=<token>&state=<state>
+    if path.starts_with("auth/callback") {
+        let query = path.split_once('?').map(|x| x.1).unwrap_or("");
+        let params: std::collections::HashMap<_, _> = url::form_urlencoded::parse(query.as_bytes())
+            .into_owned()
+            .collect();
+        let code = params
+            .get("code")
+            .ok_or("Auth callback missing 'code' parameter")?
+            .clone();
+        let state = params
+            .get("state")
+            .ok_or("Auth callback missing 'state' parameter")?
+            .clone();
+
+        get_tokio_handle().spawn(async move {
+            log_error!(SessionManager::handle_auth_callback(code, state).await);
+        });
+        return Ok(());
+    }
+
     let parts = path.split("/").map(|s| s.to_string()).collect_vec();
 
     if parts.len() != 3 {

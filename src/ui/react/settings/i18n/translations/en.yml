@@ -133,6 +133,7 @@ header:
     extras: Extras
     general: General
     home: Home
+    session: Account
     icon_pack_editor: Cached Icons
     iconpack: Icon Packs
     monitors: Monitors
@@ -147,6 +148,11 @@ header:
     widget: Widgets
 home:
   new_resources: New Resources
+session:
+  logout: Sign Out
+  plan: Plan
+  sign_in: Sign In
+  sign_in_hint: Your browser will open so you can sign in securely.
 inherit: Inherit
 inProgress: In Progress...
 insert: Insert

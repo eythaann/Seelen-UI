@@ -284,4 +284,9 @@ slu_commands_declaration! {
     // Trash Bin
     GetTrashBinInfo = get_trash_bin_info() -> TrashBinInfo,
     TrashBinEmpty = trash_bin_empty(),
+
+    // Seelen Session
+    GetSeelenSession = get_seelen_session() -> Option<SeelenSession>,
+    SeelenLogin = seelen_login(),
+    SeelenLogout = seelen_logout(),
 }

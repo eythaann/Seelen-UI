@@ -128,4 +128,7 @@ export enum SeelenCommand {
   GetNativeStartMenu = "get_native_start_menu",
   GetTrashBinInfo = "get_trash_bin_info",
   TrashBinEmpty = "trash_bin_empty",
+  GetSeelenSession = "get_seelen_session",
+  SeelenLogin = "seelen_login",
+  SeelenLogout = "seelen_logout",
 }

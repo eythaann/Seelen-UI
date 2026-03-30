@@ -1,28 +1,33 @@
 .navigation {
   grid-row: 1/3;
-  background-color: var(--color-fixed-gray-900);
-  color: var(--color-fixed-gray-50);
-  width: 180px;
-  transition: width 300ms ease, padding 300ms ease;
 
   display: grid;
   grid-template-rows: 50px 1fr min-content;
   grid-template-columns: 1fr;
 
+  width: 12rem;
+  overflow: hidden;
+  transition: width 300ms ease;
+  background-color: var(--color-fixed-gray-900);
+  color: var(--color-fixed-gray-50);
+
   &.collapsed {
-    width: 50px;
+    width: 44px;
   }
 
   .header {
-    margin: 0 var(--spacing-s);
     height: 100%;
+    padding: 0 var(--spacing-xs);
+
     display: flex;
+    gap: var(--spacing-xs);
     align-items: center;
-    gap: var(--spacing-s);
+
     border-bottom: 1px solid var(--color-fixed-gray-700);
 
     > img {
-      width: 24px;
+      width: min(28px, 100%);
+      aspect-ratio: 1/1;
       transition: width 100ms linear;
     }
 
@@ -31,56 +36,36 @@
       font-weight: 600;
       flex: 1;
       text-wrap: nowrap;
+
+      .collapsed & {
+        display: none;
+      }
     }
 
     .chevron {
-      height: 20px;
-      width: 20px;
-      padding: var(--spacing-2xs);
-      transition: transform 300ms linear;
-    }
-
-    .collapsed & {
-      gap: 0;
-      justify-content: space-between;
-
-      > h1 {
+      .collapsed & {
         display: none;
-      }
-
-      > img {
-        width: 20px;
-      }
-
-      .chevron {
-        width: 10px;
-        padding: var(--spacing-2xs) 0;
-        transform: rotate(180deg);
       }
     }
   }
 
   .body {
     width: 100%;
-    overflow: hidden;
+    padding: var(--spacing-s) var(--spacing-xs);
+    padding-left: calc(var(--spacing-xs) - 3px);
+
     display: flex;
     flex-direction: column;
     gap: var(--spacing-s);
+
     overflow-x: hidden;
     overflow-y: scroll;
     direction: rtl;
-    padding: var(--spacing-xs);
-    margin-left: var(--spacing-2xs);
+    scrollbar-gutter: stable;
 
     &::-webkit-scrollbar {
-      width: 2px;
+      width: 3px;
     }
-  }
-
-  .footer {
-    margin: 0 var(--spacing-s);
-    padding: var(--spacing-s) 0;
-    border-top: 1px solid var(--color-fixed-gray-700);
   }
 
   .group {
@@ -97,41 +82,113 @@
     background-color: var(--color-fixed-gray-700);
   }
 
-  .item {
-    height: 30px;
-    width: 100%;
+  .footer {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    gap: var(--spacing-s);
+
+    padding: var(--spacing-xs);
+    border-top: 1px solid var(--color-fixed-gray-700);
+  }
+}
+
+.item {
+  height: 30px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--spacing-2xs);
+
+  overflow: hidden;
+  padding: 0 var(--spacing-2xs);
+  border-radius: 0.5rem;
+  transition: background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: var(--system-accent-dark-color);
+  }
+
+  &.active {
+    background-color: var(--system-accent-color);
+  }
+
+  :global(.slu-icon) {
+    width: 20px;
+    min-width: 20px;
+  }
+
+  .label {
+    text-wrap: nowrap;
+    font-size: 0.8rem;
+    font-weight: 600;
     overflow: hidden;
-    padding: 0 var(--spacing-2xs);
-    border-radius: var(--config-border-radius);
-    transition: background-color 200ms ease-out;
+    text-overflow: ellipsis;
 
-    &:hover {
-      background-color: var(--system-accent-light-color);
+    .collapsed & {
+      display: none;
+    }
+  }
+}
+
+.sessionItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--spacing-xs);
+
+  padding: var(--spacing-2xs);
+  border-radius: 0.5rem;
+  transition: background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: var(--system-accent-dark-color);
+  }
+
+  &.active {
+    background-color: var(--system-accent-color);
+  }
+
+  .sessionInfo {
+    display: flex;
+    flex-direction: column;
+
+    .collapsed & {
+      display: none;
     }
 
-    &.active {
-      background-color: var(--system-accent-color);
-    }
-
-    :global(.slu-icon) {
-      width: 20px;
-      min-width: 20px;
+    .label,
+    .email {
+      overflow: hidden;
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
     }
 
     .label {
-      margin-left: var(--spacing-2xs);
-      text-wrap: nowrap;
       font-size: 0.8rem;
+      line-height: 1em;
       font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      .collapsed & {
-        display: none;
-      }
     }
+
+    .email {
+      font-size: 0.7rem;
+      line-height: 1em;
+      color: var(--color-gray-200);
+    }
+  }
+
+  .sessionAvatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    width: min(28px, 100%);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+
+    background: var(--system-accent-lightest-color);
+    color: var(--system-accent-dark-color);
   }
 }
