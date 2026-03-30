@@ -128,7 +128,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
         ServicePipe::start_service().await?;
     }
 
-    utils::integrity::check_for_webview_optimal_state(app_handle)?;
+    utils::integrity::check_for_webview_optimal_state().await?;
 
     trace_lock!(SEELEN).start()?;
     trace_lock!(PERFORMANCE_HELPER).end("setup");
