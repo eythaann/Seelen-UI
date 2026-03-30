@@ -20,10 +20,6 @@ pub struct JwtPayload {
 }
 
 impl JwtPayload {
-    pub fn is_expired(&self) -> bool {
-        self.secs_until_expiry() == 0
-    }
-
     pub fn secs_until_expiry(&self) -> u64 {
         let now = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)

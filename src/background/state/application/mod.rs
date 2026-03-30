@@ -130,38 +130,38 @@ impl FullState {
             }
         }
 
-        if themes_changed {
-            log::info!("Theme changed");
-            RESOURCES.load_all_of_type(ResourceKind::Theme)?;
-            RESOURCES.emit_themes()?;
-        }
-
-        if icons_changed {
-            log::info!("Icon Packs changed");
-            RESOURCES.load_all_of_type(ResourceKind::IconPack)?;
-            RESOURCES.emit_icon_packs()?;
-        }
-
-        if plugins_changed {
-            log::info!("Plugins changed");
-            RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
-            RESOURCES.emit_plugins()?;
-        }
-
         if widgets_changed {
             log::info!("Widgets changed");
             RESOURCES.load_all_of_type(ResourceKind::Widget)?;
             RESOURCES.emit_widgets()?;
         }
 
+        if themes_changed {
+            log::info!("Theme changed");
+            RESOURCES.load_all_of_type(ResourceKind::Theme)?;
+            RESOURCES.emit_themes();
+        }
+
+        if plugins_changed {
+            log::info!("Plugins changed");
+            RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
+            RESOURCES.emit_plugins();
+        }
+
         if wallpapers_changed {
             log::info!("Wallpapers changed");
             RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
-            RESOURCES.emit_wallpapers()?;
+            RESOURCES.emit_wallpapers();
 
             if self.sanitize_wallpaper_collections() {
                 self.emit_settings()?;
             }
+        }
+
+        if icons_changed {
+            log::info!("Icon Packs changed");
+            RESOURCES.load_all_of_type(ResourceKind::IconPack)?;
+            RESOURCES.emit_icon_packs();
         }
 
         // important: settings changed should be the last one to avoid use unexisting state

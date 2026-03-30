@@ -187,7 +187,7 @@ impl ResourceManager {
             }));
         });
         self.request_save_system_icon_pack();
-        self.emit_icon_packs().log_error();
+        self.emit_icon_packs();
     }
 
     pub fn add_system_icon_redirect(&self, umid: Option<String>, origin: &Path, redirect: &Path) {
@@ -202,7 +202,7 @@ impl ResourceManager {
             }));
         });
         self.request_save_system_icon_pack();
-        self.emit_icon_packs().log_error();
+        self.emit_icon_packs();
     }
 
     pub fn add_system_file_icon(&self, origin_extension: &str, icon: Icon) {
@@ -213,7 +213,7 @@ impl ResourceManager {
             }));
         });
         self.request_save_system_icon_pack();
-        self.emit_icon_packs().log_error();
+        self.emit_icon_packs();
     }
 
     fn icon_exists(icon: &Icon) -> bool {

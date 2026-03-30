@@ -9,6 +9,31 @@ use crate::{
 use std::sync::Arc;
 
 #[tauri::command(async)]
+pub fn state_get_widgets() -> Vec<Arc<Widget>> {
+    RESOURCES.widgets()
+}
+
+#[tauri::command(async)]
+pub fn state_get_themes() -> Vec<Arc<Theme>> {
+    RESOURCES.themes()
+}
+
+#[tauri::command(async)]
+pub fn state_get_plugins() -> Vec<Arc<Plugin>> {
+    RESOURCES.plugins()
+}
+
+#[tauri::command(async)]
+pub fn state_get_wallpapers() -> Vec<Arc<Wallpaper>> {
+    RESOURCES.wallpapers()
+}
+
+#[tauri::command(async)]
+pub fn state_get_icon_packs() -> Vec<Arc<IconPack>> {
+    RESOURCES.icon_packs()
+}
+
+#[tauri::command(async)]
 pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
     match kind {
         ResourceKind::Theme => {
@@ -65,65 +90,12 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_themes() -> Vec<Arc<Theme>> {
-    let mut themes = Vec::new();
-    RESOURCES.themes.scan(|_, v| {
-        themes.push(v.clone());
-    });
-    themes
-}
-
-#[tauri::command(async)]
-pub fn state_get_plugins() -> Vec<Arc<Plugin>> {
-    let mut plugins = Vec::new();
-    RESOURCES.plugins.scan(|_, v| {
-        plugins.push(v.clone());
-    });
-    plugins
-}
-
-#[tauri::command(async)]
-pub fn state_get_widgets() -> Vec<Arc<Widget>> {
-    let mut widgets = Vec::new();
-    RESOURCES.widgets.scan(|_, v| {
-        widgets.push(v.clone());
-    });
-    widgets
-}
-
-#[tauri::command(async)]
-pub fn state_get_wallpapers() -> Vec<Arc<Wallpaper>> {
-    let mut wallpapers = Vec::new();
-    RESOURCES.wallpapers.scan(|_, v| {
-        wallpapers.push(v.clone());
-    });
-    wallpapers
-}
-
-#[tauri::command(async)]
-pub fn state_get_icon_packs() -> Vec<Arc<IconPack>> {
-    let mut icon_packs = Vec::new();
-
-    // Add system icon pack if it exists
-    if let Some(system_pack) = RESOURCES.system_icon_pack.lock().as_ref() {
-        icon_packs.push(Arc::new(system_pack.clone()));
-    }
-
-    // Add user icon packs
-    RESOURCES.icon_packs.scan(|_, v| {
-        icon_packs.push(v.clone());
-    });
-
-    icon_packs
-}
-
-#[tauri::command(async)]
 pub fn state_delete_cached_icons() -> Result<()> {
     if let Some(pack) = RESOURCES.system_icon_pack.lock().take() {
         pack.delete()?;
     }
     IconExtractor::instance().clear_failures();
     RESOURCES.ensure_system_icon_pack()?;
-    RESOURCES.emit_icon_packs()?;
+    RESOURCES.emit_icon_packs();
     Ok(())
 }

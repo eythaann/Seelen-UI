@@ -27,6 +27,8 @@ pub struct ResourceMetadata {
     /// Developers are responsible to update the resource so when resource does not
     /// match the current app version, the resource will be shown with a warning message
     pub app_target_version: Option<(u32, u32, u32)>,
+    /// Whether the resource is premium content that requires active subscription to access.
+    pub premium: bool,
     /// Extra metadata for the resource
     pub extras: HashMap<String, String>,
     #[serde(flatten, skip_deserializing)]
@@ -71,6 +73,7 @@ impl Default for ResourceMetadata {
             tags: Vec::new(),
             extras: HashMap::new(),
             app_target_version: None,
+            premium: false,
             internal: InternalResourceMetadata::default(),
         }
     }

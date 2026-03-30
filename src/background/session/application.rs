@@ -69,9 +69,9 @@ impl SessionManager {
         &INSTANCE
     }
 
-    /// Synchronous init: reads persisted tokens and restores the session if
-    /// the access token is still valid. If expired, a background refresh is
-    /// attempted via the stored refresh token.
+    /// Synchronous init: reads persisted tokens and restores the session.
+    /// If the token is expired, `schedule_refresh` fires immediately (sleep = 0)
+    /// so the cached session is still available for offline use in the meantime.
     fn load() -> Self {
         match Self::read_stored_session() {
             Ok((session, payload)) => {
@@ -82,7 +82,7 @@ impl SessionManager {
                 }
             }
             Err(_) => {
-                // Try a silent refresh in the background.
+                // No stored token at all; try a silent refresh.
                 tokio::spawn(async {
                     match SessionManager::refresh_tokens().await {
                         Ok(session) => {
@@ -102,13 +102,20 @@ impl SessionManager {
         }
     }
 
-    /// Reads and validates the stored access token, returning the decoded session.
+    pub fn has_premium_access(&self) -> bool {
+        self.session
+            .as_ref()
+            .map(|s| s.permissions.contains(&"resource-premium".to_string()))
+            .unwrap_or(false)
+    }
+
+    /// Reads the stored access token and returns the decoded session.
+    /// Returns the session even if the token is expired so the app can operate
+    /// offline with cached user data; the caller is responsible for scheduling
+    /// a background refresh.
     fn read_stored_session() -> Result<(SeelenSession, JwtPayload)> {
         let token = Self::read_credential(ACCESS_TOKEN_KEY)?;
         let payload = decode_jwt_payload(&token)?;
-        if payload.is_expired() {
-            return Err("Stored access token is expired".into());
-        }
         let session = payload.into_session();
         // Re-decode to keep both the session and the payload (needed for exp).
         let payload2 = decode_jwt_payload(&token)?;

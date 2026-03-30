@@ -2,7 +2,11 @@ use std::sync::Once;
 
 use seelen_core::{handlers::SeelenEvent, system_state::SeelenSession};
 
-use crate::{app::emit_to_webviews, error::Result};
+use crate::{
+    app::emit_to_webviews,
+    error::{Result, ResultLogExt},
+    resources::RESOURCES,
+};
 
 use super::application::{SessionManager, SessionManagerEvent};
 
@@ -12,6 +16,9 @@ fn get_session_manager() -> &'static parking_lot::Mutex<SessionManager> {
         SessionManager::subscribe(|event| {
             let SessionManagerEvent::Changed(session) = event;
             emit_to_webviews(SeelenEvent::SeelenSessionChanged, &session);
+            // Emitters will check permissions and only return premium resources if the session has access,
+            // so we can emit all resources on any session change to ensure the UI is always up to date.
+            RESOURCES.emit_all().log_error();
         });
     });
     SessionManager::instance()
