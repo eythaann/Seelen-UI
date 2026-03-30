@@ -16,6 +16,8 @@ function StringifyParams(params: any[]): string {
   }, "");
 }
 
+const FILTERED = ["[Ant Design CSS-in-JS]", "locize.com"];
+
 function forwardConsole(
   fnName: "log" | "trace" | "debug" | "info" | "warn" | "error",
   logger: (message: string) => Promise<void>,
@@ -25,10 +27,11 @@ function forwardConsole(
     original(...params);
 
     let message = StringifyParams(params);
-    /// ignore Ant Design Warnings
-    if (message.includes("[Ant Design CSS-in-JS]")) {
+
+    if (FILTERED.some((filter) => message.includes(filter))) {
       return;
     }
+
     logger(message);
   };
 }

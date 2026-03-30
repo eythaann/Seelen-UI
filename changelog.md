@@ -2,6 +2,10 @@
 
 ## [2.5.8-dev]
 
+### enh
+
+- remove redundant logs.
+
 ### fix
 
 - emitting liveness prover events while session suspended.

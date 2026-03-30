@@ -52,7 +52,15 @@ pub enum IconExtractorRequest {
     Extension(String),
 }
 
-event_manager!(IconExtractor, IconExtractorRequest);
+#[derive(Debug, Clone)]
+pub struct IconExtractorTask {
+    request: IconExtractorRequest,
+    /// When `true` this is a revalidation attempt; extraction errors are silently ignored
+    /// (they are already known failures and will be re-recorded if they still fail).
+    revalidating: bool,
+}
+
+event_manager!(IconExtractor, IconExtractorTask);
 
 impl IconExtractor {
     fn create() -> Self {
@@ -72,15 +80,17 @@ impl IconExtractor {
 
         extractor.init().log_error();
 
-        Self::subscribe(|request| {
+        Self::subscribe(|task| {
             let m = Self::instance();
-            if m.is_failed(&request) {
+            if m.is_failed(&task.request) {
                 return;
             }
 
-            if let Err(err) = Self::process(&request) {
-                log::error!("Failed to extract icon: {err}");
-                m.record_failure(request);
+            if let Err(err) = Self::process(&task.request) {
+                if !task.revalidating {
+                    log::error!("Failed to extract icon: {err}");
+                }
+                m.record_failure(task.request);
                 m.save_failures.call(());
             }
         });
@@ -110,7 +120,10 @@ impl IconExtractor {
     }
 
     pub fn request(&self, request: IconExtractorRequest) {
-        Self::send(request);
+        Self::send(IconExtractorTask {
+            request,
+            revalidating: false,
+        });
     }
 
     /// Returns true if this request is already known to fail and should be skipped.
@@ -192,7 +205,10 @@ impl IconExtractor {
         self.failures.retain(|r| !to_retry.contains(r));
         self.save_failures.call(());
         for request in to_retry {
-            Self::send(request);
+            Self::send(IconExtractorTask {
+                request,
+                revalidating: true,
+            });
         }
     }
 
