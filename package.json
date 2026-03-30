@@ -41,7 +41,7 @@
     "esbuild-svelte": "^0.9.3",
     "object-inspect": "^1.13.4",
     "preact": "^10.29.0",
-    "preact-render-to-string": "^6.6.6",
+    "preact-render-to-string": "^6.6.7",
     "react-router": "^7.13.2",
     "rehype-stringify": "^10.0.1",
     "remark-gfm": "^4.0.1",
