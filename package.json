@@ -33,7 +33,7 @@
     "@dnd-kit/react": "^0.3.2",
     "@dnd-kit/svelte": "^0.3.2",
     "@m31coding/fuzzy-search": "^2.0.0",
-    "@preact/compat": "^18.3.1",
+    "@preact/compat": "^18.3.2",
     "@preact/signals": "^2.8.2",
     "@tauri-apps/api": "^2.10.1",
     "@tauri-apps/cli": "^2.10.1",
