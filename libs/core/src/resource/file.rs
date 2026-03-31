@@ -67,7 +67,8 @@ impl SluResourceFile {
 
     pub fn load(path: &Path) -> Result<Self> {
         let file = File::open(path)?;
-        let decoded = Self::decode(&file)?;
+        let mut decoded = Self::decode(&file)?;
+        decoded.resource.sanitize();
         decoded.resource.verify()?;
         Ok(decoded)
     }

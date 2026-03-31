@@ -10,6 +10,8 @@ pub use metadata::*;
 pub use resource_id::*;
 pub use yaml_ext::*;
 
+pub use crate::utils::Slug;
+
 use std::{
     collections::{HashMap, HashSet},
     hash::Hash,
@@ -146,10 +148,10 @@ pub struct Resource {
     pub data_id: Uuid,
     /// user id who created the resource
     pub creator_id: Uuid,
-    /// Visual id composed of creator username and resource name.\
-    /// Warning: as username and resource name could be changed, this id is not stable.\
-    /// Use it for display purposes only
-    pub friendly_id: ResourceId,
+
+    /// slug to shown in the url, could be changed.
+    #[serde(default)]
+    pub slug: Slug,
     pub kind: ResourceKind,
     pub metadata: ResourceMetadata,
     pub created_at: DateTime<Utc>,
@@ -179,10 +181,31 @@ pub struct Resource {
     pub pending_update: Option<ResourcePendingUpdate>,
     /// Reason a pending update was rejected (visible to creator after rejection)
     pub rejected_pending_reason: Option<String>,
+
+    /// @deprecated - used for migrations only
+    #[ts(skip)]
+    #[serde(alias = "friendlyId")]
+    pub deprecated_id: Option<ResourceId>,
 }
 
 impl Resource {
+    /// Fills in missing fields from available data. Call before `verify`.
+    /// Currently: derives `slug` from `friendly_id` when `slug` is empty.
+    pub fn sanitize(&mut self) {
+        if self.slug.is_empty() {
+            if let Some(id) = &self.deprecated_id {
+                if let Some(name) = id.resource_name() {
+                    self.slug = Slug::from_lossy(&name);
+                }
+            }
+        }
+    }
+
     pub fn verify(&self) -> Result<()> {
+        if self.slug.is_empty() {
+            return Err("missing slug".into());
+        }
+
         if let ResourceText::Localized(map) = &self.metadata.display_name {
             if map.get("en").is_none() {
                 return Err("missing mandatory english display name".into());

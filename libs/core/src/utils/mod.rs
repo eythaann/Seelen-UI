@@ -1,3 +1,6 @@
+mod slug;
+pub use slug::*;
+
 use std::path::{Path, PathBuf};
 
 use schemars::JsonSchema;

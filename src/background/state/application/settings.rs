@@ -36,7 +36,11 @@ impl FullState {
                 return;
             };
 
-            let old_id = remote.friendly_id.clone().into();
+            let Some(old_id) = remote.deprecated_id.clone() else {
+                return;
+            };
+            let old_id = old_id.into();
+
             if let Some(config) = self.settings.by_theme.remove(&old_id) {
                 self.settings.by_theme.insert(new_id.clone(), config);
             };
@@ -53,7 +57,11 @@ impl FullState {
                 return;
             };
 
-            let old_id = remote.friendly_id.clone().into();
+            let Some(old_id) = remote.deprecated_id.clone() else {
+                return;
+            };
+            let old_id = old_id.into();
+
             if let Some(config) = self.settings.by_wallpaper.remove(&old_id) {
                 self.settings.by_wallpaper.insert(new_id.clone(), config);
             };
@@ -72,7 +80,11 @@ impl FullState {
                 return;
             };
 
-            let old_id = remote.friendly_id.clone().into();
+            let Some(old_id) = remote.deprecated_id.clone() else {
+                return;
+            };
+            let old_id = old_id.into();
+
             if let Some(config) = self.settings.by_widget.others.remove(&old_id) {
                 self.settings.by_widget.others.insert(k.clone(), config);
             };
