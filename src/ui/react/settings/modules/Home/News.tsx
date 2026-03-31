@@ -54,14 +54,22 @@ async function getPromotedNews(): Promise<New[]> {
 }
 
 export function NoticeSlider() {
-  const [news, setNews] = useState<New[]>([]);
+  const { t } = useTranslation();
+
+  const discordBanner: New = {
+    title: t("discord_banner.title"),
+    message: t("discord_banner.message"),
+    url: "https://discord.gg/ABfASx5ZAJ",
+    image: "discord.webp",
+  };
+
+  const [news, setNews] = useState<New[]>([discordBanner]);
   const [currentIdx, setCurrentIdx] = useState<number>(0);
 
   const [scope, animate] = useAnimate<HTMLDivElement>();
-  const { t } = useTranslation();
 
   useEffect(() => {
-    getPromotedNews().then(setNews);
+    getPromotedNews().then((promoted) => setNews([discordBanner, ...promoted]));
   }, []);
 
   useInterval(
@@ -91,7 +99,7 @@ export function NoticeSlider() {
                 <p className={cs.message}>{current.message}</p>
                 <div className={cs.linkButton}>
                   <Button href={current.url} target="_blank" type="primary">
-                    {t("see_more")}
+                    {currentIdx === 0 ? t("join_us") : t("see_more")}
                   </Button>
                 </div>
               </div>

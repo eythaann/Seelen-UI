@@ -86,7 +86,6 @@ extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
   exit: Quit/Exit
-  links: Official Links
   relaunch: Relaunch
   streaming_mode: Streaming Mode
   streaming_mode_description: Replaces sensitive information (e.g. emails) with placeholders to protect privacy during recordings or screenshots.
@@ -189,6 +188,10 @@ review_request:
 save: Save
 save_and_restart: Save & Restart
 search: Search
+discord_banner:
+  title: Join our Community
+  message: Connect with other Seelen UI users, get help, share themes, and stay up to date with the latest news.
+join_us: Join us!
 see_more: See More
 shortcuts:
   duplicate_error: This shortcut is duplicated

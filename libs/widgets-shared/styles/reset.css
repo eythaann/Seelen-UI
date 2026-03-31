@@ -9,6 +9,8 @@
     -webkit-overflow-scrolling: touch;
 
     font-size: 100%; /* determines the size of the rem unit */
+    line-height: 1.4;
+
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -78,6 +80,7 @@
   em,
   pre {
     font-size: 1em;
+    line-height: inherit;
     font-weight: inherit;
     font-style: inherit;
     text-decoration: none;
@@ -111,8 +114,6 @@
   }
 
   body {
-    font-size: 1em;
-    line-height: 1.4em;
     font-family: system-ui;
     color: var(--color-gray-900);
     background-color: var(--color-gray-50);

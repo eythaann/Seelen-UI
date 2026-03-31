@@ -80,23 +80,6 @@ export function Information() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t("extras.links")}>
-          <SettingsOption>
-            <span>Github:</span>
-            <a href="https://github.com/eythaann/seelen-ui" target="_blank">
-              github.com/eythaann/seelen-ui
-            </a>
-          </SettingsOption>
-          <SettingsOption>
-            <span>Discord:</span>
-            <a href="https://discord.gg/ABfASx5ZAJ" target="_blank">
-              discord.gg/ABfASx5ZAJ
-            </a>
-          </SettingsOption>
-        </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
         <SettingsOption>
           <b>Discord RPC</b>
           <Switch value={drpc} onChange={onToggleDrpc} />
