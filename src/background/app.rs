@@ -19,7 +19,9 @@ use crate::{
     modules::{
         monitors::{MonitorManager, MonitorManagerEvent},
         system_settings::application::{SystemSettings, SystemSettingsEvent},
+        user::infrastructure::reemit_user,
     },
+    session::infrastructure::reemit_session,
     state::application::{FullState, FULL_STATE},
     trace_lock,
     utils::discord::start_discord_rpc,
@@ -114,6 +116,11 @@ impl Seelen {
         }
 
         self.refresh_windows_positions()?;
+
+        // Re-emit user and session so streaming mode redaction takes effect immediately.
+        reemit_user();
+        reemit_session();
+
         Ok(())
     }
 

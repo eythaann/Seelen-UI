@@ -2,6 +2,10 @@
 
 ## [2.5.8-dev]
 
+### features
+
+- streaming mode to hide sensitive information to widgets.
+
 ### enh
 
 - remove redundant logs.

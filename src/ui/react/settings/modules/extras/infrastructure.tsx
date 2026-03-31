@@ -7,7 +7,14 @@ import { useTranslation } from "react-i18next";
 import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 
-import { getDrpc, getUpdaterSettings, patchUpdaterSettings, setDrpc } from "./application.ts";
+import {
+  getDrpc,
+  getStreamingMode,
+  getUpdaterSettings,
+  patchUpdaterSettings,
+  setDrpc,
+  setStreamingMode,
+} from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { UpdateChannel } from "@seelen-ui/lib/types";
@@ -21,12 +28,17 @@ const [isDevMode, isMsixBuild, isFixed] = await Promise.all([
 
 export function Information() {
   const drpc = getDrpc();
+  const streamingMode = getStreamingMode();
   const updaterSettings = getUpdaterSettings();
 
   const { t } = useTranslation();
 
   function onToggleDrpc(value: boolean) {
     setDrpc(value);
+  }
+
+  function onToggleStreamingMode(value: boolean) {
+    setStreamingMode(value);
   }
 
   function onChangeUpdateChannel(channel: UpdateChannel) {
@@ -89,6 +101,11 @@ export function Information() {
           <b>Discord RPC</b>
           <Switch value={drpc} onChange={onToggleDrpc} />
         </SettingsOption>
+        <SettingsOption
+          label={t("extras.streaming_mode")}
+          description={t("extras.streaming_mode_description")}
+          action={<Switch value={streamingMode} onChange={onToggleStreamingMode} />}
+        />
       </SettingsGroup>
 
       <SettingsGroup>

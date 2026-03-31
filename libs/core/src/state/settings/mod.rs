@@ -446,6 +446,9 @@ pub struct Settings {
     pub hardware_acceleration: bool,
     /// interval to poll for system resources like cpu, memory, network usage, etc, in seconds.
     pub polling_interval: u64,
+    /// Streaming mode: replaces sensitive information (e.g. emails) with placeholders
+    /// to avoid exposing personal data in recordings or screenshots.
+    pub streaming_mode: bool,
 }
 
 impl Default for Settings {
@@ -470,6 +473,7 @@ impl Default for Settings {
             wallpaper_collections: Vec::new(),
             hardware_acceleration: true,
             polling_interval: 3,
+            streaming_mode: false,
         }
     }
 }

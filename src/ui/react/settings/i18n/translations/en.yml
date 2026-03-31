@@ -88,6 +88,8 @@ extras:
   exit: Quit/Exit
   links: Official Links
   relaunch: Relaunch
+  streaming_mode: Streaming Mode
+  streaming_mode_description: Replaces sensitive information (e.g. emails) with placeholders to protect privacy during recordings or screenshots.
   version: Version
   version_fixed: >-
     The application and WebView2 Runtime versions are fixed. This means that the

@@ -9,9 +9,16 @@ use seelen_core::{
     system_state::{FolderChangedArgs, FolderType, User},
 };
 
-use crate::{app::emit_to_webviews, trace_lock};
+use crate::{app::emit_to_webviews, state::application::FULL_STATE, trace_lock};
 
 use super::application::{UserManager, UserManagerEvent};
+
+fn maybe_redact_user(mut user: User) -> User {
+    if FULL_STATE.load().settings.streaming_mode {
+        user.email = Some("***@seelen.io".to_string());
+    }
+    user
+}
 
 fn get_user_manager() -> &'static Arc<Mutex<UserManager>> {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
@@ -19,7 +26,10 @@ fn get_user_manager() -> &'static Arc<Mutex<UserManager>> {
         UserManager::subscribe(|event| match event {
             UserManagerEvent::UserUpdated => {
                 let guard = trace_lock!(UserManager::instance());
-                emit_to_webviews(SeelenEvent::UserChanged, &guard.user);
+                emit_to_webviews(
+                    SeelenEvent::UserChanged,
+                    maybe_redact_user(guard.user.clone()),
+                );
             }
             UserManagerEvent::FolderChanged(folder) => {
                 emit_to_webviews(
@@ -35,9 +45,14 @@ fn get_user_manager() -> &'static Arc<Mutex<UserManager>> {
     UserManager::instance()
 }
 
+pub fn reemit_user() {
+    let user = trace_lock!(get_user_manager()).user.clone();
+    emit_to_webviews(SeelenEvent::UserChanged, maybe_redact_user(user));
+}
+
 #[tauri::command(async)]
 pub fn get_user() -> User {
-    trace_lock!(get_user_manager()).user.clone()
+    maybe_redact_user(trace_lock!(get_user_manager()).user.clone())
 }
 
 #[tauri::command(async)]

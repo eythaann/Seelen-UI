@@ -9,6 +9,23 @@ export function getDrpc(): boolean {
 }
 
 /**
+ * Gets the streaming mode setting
+ */
+export function getStreamingMode(): boolean {
+  return settings.value.streamingMode;
+}
+
+/**
+ * Sets the streaming mode setting
+ */
+export function setStreamingMode(streamingMode: boolean) {
+  settings.value = {
+    ...settings.value,
+    streamingMode,
+  };
+}
+
+/**
  * Sets the Discord RPC setting
  */
 export function setDrpc(drpc: boolean) {
