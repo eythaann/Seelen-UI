@@ -184,7 +184,7 @@ pub struct Resource {
 
     /// @deprecated - used for migrations only
     #[ts(skip)]
-    #[serde(alias = "friendlyId")]
+    #[serde(rename = "friendlyId")]
     pub deprecated_id: Option<ResourceId>,
 }
 

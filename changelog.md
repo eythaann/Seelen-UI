@@ -4,6 +4,7 @@
 
 ### features
 
+- allows login with Seelen account from settings.
 - streaming mode to hide sensitive information to widgets.
 
 ### enh
