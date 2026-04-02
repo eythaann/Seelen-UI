@@ -4,12 +4,18 @@ use serde::{de::Visitor, Deserialize, Deserializer, Serialize};
 
 use crate::error::Result;
 
-/// For local resources this will be an visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
-/// For downloaded resources this will be an UUID.
+/// Identifies a resource across its lifecycle.
+///
+/// - [`ResourceId::Local`] — used during development and for bundled resources.
+///   Human-readable `@creator/name` format; never assigned a UUID until published.
+/// - [`ResourceId::Remote`] — assigned by the marketplace when a resource is published.
+///   All downloaded resources are identified by UUID, not by their original local ID.
 #[derive(Debug, Clone, PartialEq, Eq, Hash, JsonSchema, TS)]
 #[ts(type = "string & { __brand: 'ResourceId' }")]
 pub enum ResourceId {
+    /// Development / bundled resource. Format: `@creator/name`.
     Local(String),
+    /// Published / downloaded resource. Assigned by the marketplace on publication.
     Remote(uuid::Uuid),
 }
 
