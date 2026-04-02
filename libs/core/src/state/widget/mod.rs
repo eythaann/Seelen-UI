@@ -1,7 +1,7 @@
 pub mod context_menu;
 pub mod declaration;
 
-use std::{collections::HashMap, path::Path};
+use std::collections::HashMap;
 
 use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
@@ -13,7 +13,7 @@ use crate::{
     resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
     state::Plugin,
     system_state::MonitorId,
-    utils::{search_resource_entrypoint, TsUnknown},
+    utils::TsUnknown,
     Point,
 };
 
@@ -69,34 +69,6 @@ impl SluResource for Widget {
 
     fn metadata_mut(&mut self) -> &mut ResourceMetadata {
         &mut self.metadata
-    }
-
-    fn load_from_folder(path: &Path) -> Result<Widget> {
-        let file = search_resource_entrypoint(path).ok_or("No metadata file found")?;
-        let mut widget = Self::load_from_file(&file)?;
-
-        for stem in ["index.js", "main.js", "mod.js"] {
-            if path.join(stem).exists() {
-                widget.js = Some(std::fs::read_to_string(path.join(stem))?);
-                break;
-            }
-        }
-
-        for stem in ["index.css", "main.css", "mod.css"] {
-            if path.join(stem).exists() {
-                widget.css = Some(std::fs::read_to_string(path.join(stem))?);
-                break;
-            }
-        }
-
-        for stem in ["index.html", "main.html", "mod.html"] {
-            if path.join(stem).exists() {
-                widget.html = Some(std::fs::read_to_string(path.join(stem))?);
-                break;
-            }
-        }
-
-        Ok(widget)
     }
 
     fn validate(&self) -> Result<()> {

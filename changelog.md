@@ -11,6 +11,10 @@
 
 - remove redundant logs.
 
+### refactor
+
+- remove deprecated theme and widget folder loader.
+
 ### fix
 
 - emitting liveness prover events while session suspended.
