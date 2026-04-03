@@ -20,6 +20,7 @@
 
 - emitting liveness prover events while session suspended.
 - service not restarting the app on crash.
+- shortcuts stoping working as expected.
 
 ## [2.5.7]
 

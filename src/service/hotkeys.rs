@@ -16,7 +16,7 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
         }
     };
 
-    let mut manager = HotkeyManager::current();
+    let manager = HotkeyManager::current();
     manager.unregister_all()?; // delete previously registered shortcuts
 
     'registration: for slu_hotkey in &settings.shortcuts.app_commands {
