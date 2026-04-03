@@ -4,7 +4,7 @@
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import { DragDropProvider } from "@dnd-kit/svelte";
-  import AppItem from "./AppItem.svelte";
+  import SortableAppItem from "./SortableAppItem.svelte";
   import { arrayMove } from "../utils";
 
   interface Props {
@@ -116,7 +116,7 @@
 
         <div class="folder-modal-items">
           {#each expandedItems as { id, item }, idx (id)}
-            <AppItem {item} {idx} isInsideFolder={true} {onContextMenu} />
+            <SortableAppItem {item} {idx} isInsideFolder={true} {onContextMenu} />
           {/each}
         </div>
       </div>

@@ -10,6 +10,7 @@
 ### enh
 
 - remove redundant logs.
+- improvements on apps menu performance and behaviors.
 
 ### refactor
 

@@ -263,7 +263,6 @@ class State {
   showing = $state(false);
 
   view = $state(StartView.Favorites);
-  searchQuery = $state("");
   preselectedItem = $state<string | null>(null);
 
   get user() {

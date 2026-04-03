@@ -1,7 +1,7 @@
 <script lang="ts">
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
-  import AppItem from "./AppItem.svelte";
+  import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
@@ -132,7 +132,7 @@
         {#if pinnedItem.type === "app"}
           {@const item = globalState.getMenuItem(pinnedItem.itemId)}
           {#if item}
-            <AppItem
+            <SortableAppItem
               {item}
               {idx}
               {onContextMenu}

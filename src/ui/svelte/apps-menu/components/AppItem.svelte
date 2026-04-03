@@ -3,26 +3,25 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
-  import { createSortable } from "@dnd-kit/svelte/sortable";
+  import { searchState } from "../state/search.svelte";
+  import type { createSortable } from "@dnd-kit/svelte/sortable";
 
   interface Props {
     item: StartMenuItem;
     idx: number;
     onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
-    draggable?: boolean;
     isActiveDropzone?: boolean;
-    isInsideFolder?: boolean;
     lazy?: boolean;
+    sortable?: ReturnType<typeof createSortable> | null;
   }
 
   let {
     item,
     idx,
     onContextMenu,
-    draggable: isDraggable = true,
     isActiveDropzone = false,
-    isInsideFolder = false,
     lazy = false,
+    sortable = null,
   }: Props = $props();
 
   const itemId = $derived(item.umid || item.path.toLowerCase());
@@ -30,26 +29,10 @@
     globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
   );
 
-  const sortable = createSortable({
-    get id() {
-      return itemId;
-    },
-    get disabled() {
-      return !isDraggable;
-    },
-    get index() {
-      return idx;
-    },
-    get type() {
-      return isInsideFolder ? "grouped-app" : "app";
-    },
-    get accept() {
-      return isInsideFolder ? "grouped-app" : ["folder", "app"];
-    },
-  });
+  const noopAttach = () => {};
 
-  function handleClick(event: MouseEvent) {
-    globalState.showing = false; // inmediate close
+  function handleClick() {
+    globalState.showing = false;
     let program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
     invoke(SeelenCommand.OpenFile, { path: program });
   }
@@ -57,17 +40,15 @@
   function handleContextMenu(event: MouseEvent) {
     onContextMenu(event, item);
   }
-
-  // class:is-dragging={sortableData.isDragging.current}
 </script>
 
 <button
-  {@attach sortable.attach}
+  {@attach sortable?.attach ?? noopAttach}
   data-item-id={itemId}
   class="app"
-  class:preselected={isPreselected && globalState.searchQuery}
-  class:is-dragging={sortable.isDragging}
-  class:is-dropping={sortable.isDropping}
+  class:preselected={isPreselected && searchState.searchQuery}
+  class:is-dragging={sortable?.isDragging}
+  class:is-dropping={sortable?.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}

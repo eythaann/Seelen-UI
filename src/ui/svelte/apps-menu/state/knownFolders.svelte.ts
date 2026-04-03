@@ -66,6 +66,23 @@ const _foldersAsStartMenuItems = $derived.by(() => {
   ].flat();
 });
 
+function logInitialInfo() {
+  const seen = new Set<string>();
+  const extensions: string[] = [];
+
+  for (const item of _foldersAsStartMenuItems) {
+    const extension = item.path.split(".").pop();
+    if (extension && !seen.has(extension)) {
+      extensions.push(extension);
+      seen.add(extension);
+    }
+  }
+
+  console.debug("[Init] Total user files to be indexed:", _foldersAsStartMenuItems.length);
+  console.debug("[Init] File extensions found:", extensions);
+}
+logInitialInfo();
+
 export const foldersAsStartMenuItems = {
   get value() {
     return _foldersAsStartMenuItems;

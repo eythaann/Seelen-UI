@@ -2,6 +2,7 @@
   import type { FavFolderItem } from "../state/mod.svelte";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
+  import { searchState } from "../state/search.svelte";
   import { t } from "../i18n";
   import { createSortable } from "@dnd-kit/svelte/sortable";
   import FolderModal from "./FolderModal.svelte";
@@ -58,7 +59,7 @@
   {@attach sortable.attach}
   data-item-id={folder.itemId}
   class="folder"
-  class:preselected={isPreselected && globalState.searchQuery}
+  class:preselected={isPreselected && searchState.searchQuery}
   class:is-dragging={sortable.isDragging}
   class:is-dropping={sortable.isDropping}
   class:is-drop-target={isActiveDropzone}

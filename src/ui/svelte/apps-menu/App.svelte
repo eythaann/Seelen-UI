@@ -4,6 +4,7 @@
   import type { WidgetId } from "@seelen-ui/lib/types";
   import StartMenuBody from "./components/StartMenuBody.svelte";
   import { globalState } from "./state/mod.svelte";
+  import { searchState } from "./state/search.svelte";
   import { StartDisplayMode, StartView } from "./constants";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { navigateInDirection } from "./keyboard-navigation";
@@ -15,20 +16,20 @@
 
   // Detect and manage query prefix
   const queryPrefix = $derived.by(() => {
-    const query = globalState.searchQuery.trim();
+    const query = searchState.searchQuery.trim();
     const match = query.match(/^(apps|files|web):/i);
     return match ? match[1]?.toLowerCase() || "" : "";
   });
 
   function handlePrefixChange(newPrefix: string) {
-    const query = globalState.searchQuery.trim();
+    const query = searchState.searchQuery.trim();
     const match = query.match(/^(apps|files|web):/i);
     const search = match ? query.slice(match[0].length).trim() : query;
 
     if (newPrefix) {
-      globalState.searchQuery = `${newPrefix}:${search ? " " + search : ""}`;
+      searchState.searchQuery = `${newPrefix}:${search ? " " + search : ""}`;
     } else {
-      globalState.searchQuery = search;
+      searchState.searchQuery = search;
     }
 
     inputElement?.focus();
@@ -67,7 +68,7 @@
         event.preventDefault();
 
         // Check for web: prefix
-        const query = globalState.searchQuery.trim();
+        const query = searchState.searchQuery.trim();
         const webPrefixMatch = query.match(/^web:/i);
 
         if (webPrefixMatch) {
@@ -110,7 +111,7 @@
   // reset state when menu is shown
   $effect(() => {
     if (globalState.showing) {
-      globalState.searchQuery = "";
+      searchState.searchQuery = "";
       globalState.preselectedItem = null;
       inputElement?.focus();
     }
@@ -118,7 +119,7 @@
 
   // Reset preselected item when search query changes
   $effect(() => {
-    if (globalState.searchQuery) {
+    if (searchState.searchQuery) {
       globalState.view = StartView.All;
     }
     globalState.preselectedItem = null;
@@ -161,14 +162,14 @@
   <div class="apps-menu-header">
     <input
       bind:this={inputElement}
-      bind:value={globalState.searchQuery}
+      bind:value={searchState.searchQuery}
       type="search"
       data-skin="transparent"
       placeholder="Applications"
       onkeydown={handleInputKeyDown}
     />
 
-    {#if globalState.searchQuery}
+    {#if searchState.searchQuery}
       <select
         data-skin="default"
         value={queryPrefix}
@@ -186,7 +187,7 @@
       onclick={() => {
         globalState.view =
           globalState.view === StartView.Favorites ? StartView.All : StartView.Favorites;
-        globalState.searchQuery = "";
+        searchState.searchQuery = "";
       }}
     >
       {#if globalState.view === StartView.Favorites}
