@@ -157,7 +157,7 @@ async fn download_resource(url: &str) -> Result<()> {
 }
 
 async fn _download_resource(url: &str) -> Result<SluResourceFile> {
-    let res = reqwest::get(url).await?;
+    let res = SessionManager::authed_get(url).send().await?;
     let file = res.json::<SluResourceFile>().await?;
     let saved_path = store_file_on_respective_user_folder(&file)?;
 
@@ -399,7 +399,7 @@ async fn download_remote_asset(url: &url::Url, folder_to_store: &Path) -> Result
         return Err("Could not determine file extension from URL".into());
     };
 
-    let res = reqwest::get(url.as_str()).await?;
+    let res = SessionManager::authed_get(url.as_str()).send().await?;
     let bytes = res.bytes().await?;
 
     let filename = format!("{}.{}", date_based_hex_id(), extension);

@@ -37,12 +37,18 @@ const WEBSITE_BASE_URL: &str = "https://local.seelen.io";
 const WEBSITE_BASE_URL: &str = "https://seelen.io";
 
 /// Credential Manager resource identifier used for all Seelen auth tokens.
+/// Dev and production builds use different keys so their sessions don't collide.
+#[cfg(dev)]
+const CREDENTIAL_RESOURCE: &str = "SeelenUI:auth:dev";
+#[cfg(not(dev))]
 const CREDENTIAL_RESOURCE: &str = "SeelenUI:auth";
 const ACCESS_TOKEN_KEY: &str = "access_token";
 const REFRESH_TOKEN_KEY: &str = "refresh_token";
 
 /// Start refreshing 2 minutes before the access token expires.
 const REFRESH_BUFFER_SECS: u64 = 120;
+/// Delays between retry attempts after a transient refresh failure (network errors, etc.).
+const REFRESH_RETRY_DELAYS_SECS: &[u64] = &[30, 120, 300];
 
 // ─── Events ───────────────────────────────────────────────────────────────────
 
@@ -70,8 +76,9 @@ impl SessionManager {
     }
 
     /// Synchronous init: reads persisted tokens and restores the session.
-    /// If the token is expired, `schedule_refresh` fires immediately (sleep = 0)
-    /// so the cached session is still available for offline use in the meantime.
+    /// If the token is expired (or missing), `schedule_refresh(0)` fires
+    /// immediately so a refresh is attempted in the background right away;
+    /// any cached session data remains available for offline use in the meantime.
     fn load() -> Self {
         match Self::read_stored_session() {
             Ok((session, payload)) => {
@@ -82,18 +89,7 @@ impl SessionManager {
                 }
             }
             Err(_) => {
-                // No stored token at all; try a silent refresh.
-                tokio::spawn(async {
-                    match SessionManager::refresh_tokens().await {
-                        Ok(session) => {
-                            SessionManager::instance().lock().session = Some(session.clone());
-                            SessionManager::send(SessionManagerEvent::Changed(Some(session)));
-                        }
-                        Err(e) => {
-                            log::debug!("Initial session refresh failed: {e:?}");
-                        }
-                    }
-                });
+                // No stored tokens — user must log in explicitly.
                 SessionManager {
                     session: None,
                     pending_state: None,
@@ -163,30 +159,69 @@ impl SessionManager {
     // ─── Token refresh ────────────────────────────────────────────────────────
 
     /// Spawns a Tokio task that sleeps until `secs_until_expiry - REFRESH_BUFFER_SECS`
-    /// and then silently refreshes the access token.
+    /// and then delegates to `run_refresh_cycle`.
     fn schedule_refresh(secs_until_expiry: u64) {
         let sleep_secs = secs_until_expiry.saturating_sub(REFRESH_BUFFER_SECS);
         tokio::spawn(async move {
             tokio::time::sleep(tokio::time::Duration::from_secs(sleep_secs)).await;
-            match SessionManager::refresh_tokens().await {
-                Ok(session) => {
-                    SessionManager::instance().lock().session = Some(session.clone());
-                    SessionManager::send(SessionManagerEvent::Changed(Some(session)));
+            SessionManager::run_refresh_cycle().await;
+        });
+    }
+
+    /// Retry loop: attempts `refresh_tokens`, handles transient vs hard failures,
+    /// updates manager state, emits events, and reschedules on success.
+    ///
+    /// Only a clear server-side rejection (non-2xx) triggers an immediate logout;
+    /// connectivity problems alone never clear the session.
+    async fn run_refresh_cycle() {
+        let attempts = REFRESH_RETRY_DELAYS_SECS
+            .iter()
+            .copied()
+            .chain(std::iter::once(0u64));
+
+        for (attempt, delay) in attempts.enumerate() {
+            match Self::refresh_tokens().await {
+                Ok((session, secs)) => {
+                    Self::instance().lock().session = Some(session.clone());
+                    Self::send(SessionManagerEvent::Changed(Some(session)));
+                    Self::schedule_refresh(secs);
+                    return;
+                }
+                // Credentials deleted inside `refresh_tokens` on server rejection — log out.
+                Err(ref e) if e.to_string().contains("Token refresh rejected") => {
+                    log::warn!("Session refresh rejected by server, logging out: {e:?}");
+                    Self::instance().lock().session = None;
+                    Self::send(SessionManagerEvent::Changed(None));
+                    return;
                 }
                 Err(e) => {
-                    log::warn!("Session auto-refresh failed: {e:?}");
-                    SessionManager::instance().lock().session = None;
-                    Self::delete_all_credentials();
-                    SessionManager::send(SessionManagerEvent::Changed(None));
+                    let remaining = REFRESH_RETRY_DELAYS_SECS.len().saturating_sub(attempt);
+                    if remaining == 0 {
+                        // All retries exhausted — keep credentials so the next launch retries.
+                        log::warn!(
+                            "Session auto-refresh failed after all retries, will retry on next launch: {e:?}"
+                        );
+                        return;
+                    }
+                    log::warn!(
+                        "Session auto-refresh failed (attempt {}/{}, retrying in {delay}s): {e:?}",
+                        attempt + 1,
+                        REFRESH_RETRY_DELAYS_SECS.len(),
+                    );
+                    tokio::time::sleep(tokio::time::Duration::from_secs(delay)).await;
                 }
             }
-        });
+        }
     }
 
     /// Calls the auth service refresh endpoint using the stored refresh token
     /// (sent as a manually constructed Cookie header, since there is no browser
     /// cookie jar in a desktop context).
-    pub async fn refresh_tokens() -> Result<SeelenSession> {
+    ///
+    /// Pure HTTP operation: reads credentials, calls the endpoint, stores the new
+    /// tokens, and returns the resulting session and its expiry. Does not touch
+    /// manager state or schedule anything.
+    async fn refresh_tokens() -> Result<(SeelenSession, u64)> {
         let refresh_token = Self::read_credential(REFRESH_TOKEN_KEY)
             .map_err(|_| "No stored refresh token — user must log in again")?;
 
@@ -211,8 +246,7 @@ impl SessionManager {
         let payload = decode_jwt_payload(&access_token)?;
         let secs = payload.secs_until_expiry();
         let session = payload.into_session();
-        Self::schedule_refresh(secs);
-        Ok(session)
+        Ok((session, secs))
     }
 
     // ─── Public API ───────────────────────────────────────────────────────────
@@ -295,9 +329,18 @@ impl SessionManager {
     }
 
     /// Returns the stored access token. Intended exclusively for internal background use.
-    #[allow(dead_code)]
     pub fn get_access_token() -> Result<String> {
         Self::read_credential(ACCESS_TOKEN_KEY)
+    }
+
+    /// Returns a GET request builder with `Authorization: Bearer <token>` set if a
+    /// session is active. Use this for all authenticated background HTTP requests.
+    pub fn authed_get(url: &str) -> reqwest::RequestBuilder {
+        let mut req = HTTP_CLIENT.get(url);
+        if let Ok(token) = Self::get_access_token() {
+            req = req.header("Authorization", format!("Bearer {token}"));
+        }
+        req
     }
 }
 
