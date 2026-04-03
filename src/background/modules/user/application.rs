@@ -6,7 +6,7 @@ use notify_debouncer_full::{
 use parking_lot::Mutex;
 use seelen_core::system_state::{FolderType, User};
 use std::{
-    collections::HashMap,
+    collections::{HashMap, HashSet},
     path::PathBuf,
     sync::{Arc, LazyLock},
     time::Duration,
@@ -239,81 +239,141 @@ impl UserManager {
 /// Returns true if the entry should be excluded from the file list.
 /// When applied via `filter_entry`, returning true for a directory prunes its entire subtree.
 fn is_ignored_entry(path: &std::path::Path) -> bool {
-    let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
-        return false;
-    };
-
-    matches!(
-        name,
-        // Dev artifact directories
-        "node_modules"
-            | "target"
-            | "dist"
-            | "build"
-            | "out"
-            | "__pycache__"
-            | "venv"
-            | ".venv"
-            | "env"
-            | "vendor"
+    static IGNORED: LazyLock<HashSet<&'static str>> = LazyLock::new(|| {
+        HashSet::from([
+            // Dev artifact directories
+            "node_modules",
+            "target",
+            "dist",
+            "build",
+            "out",
+            "__pycache__",
+            "venv",
+            ".venv",
+            "env",
+            "vendor",
             // VCS
-            | ".git"
-            | ".svn"
-            | ".hg"
+            ".git",
+            ".svn",
+            ".hg",
             // IDE/editor
-            | ".idea"
-            | ".vscode"
-            | ".next"
+            ".idea",
+            ".vscode",
+            ".next",
             // Cache
-            | ".cache"
-            | "cache"
-            | "Cache"
+            ".cache",
+            "cache",
+            "Cache",
             // Windows system
-            | "$RECYCLE.BIN"
-            | "System Volume Information"
-            | "WindowsApps"
-            | "MicrosoftEdgeBackups"
-    )
+            "$RECYCLE.BIN",
+            "System Volume Information",
+            "WindowsApps",
+            "MicrosoftEdgeBackups",
+        ])
+    });
+
+    path.file_name()
+        .and_then(|n| n.to_str())
+        .is_some_and(|name| IGNORED.contains(name))
 }
 
 fn is_ignored_file(path: &std::path::Path) -> bool {
+    static IGNORED: LazyLock<HashSet<&'static str>> = LazyLock::new(|| {
+        HashSet::from([
+            // Temp / backup
+            "ini",
+            "dat",
+            "bak",
+            "tmp",
+            "temp",
+            "old",
+            "swp",
+            "save",
+            // Crash / memory dumps
+            "dmp",
+            "blk",
+            // In-progress downloads
+            "download",
+            "crdownload",
+            "part",
+            // Lock / pid files
+            "lock",
+            "pid",
+            // Log files
+            "log",
+            // Database / cache files
+            "db",
+            "sqlite",
+            "sqlite3",
+            "ldb",
+            // Build artifacts
+            "obj",
+            "pdb",
+            "ilk",
+            "exp",
+            "iobj",
+            "ipdb",
+            // Windows shortcut noise (internet shortcuts, not file shortcuts)
+            "url",
+            // System / driver files
+            "dll",
+            "sys",
+            "lib",
+            "cat",
+            "inf",
+            "winmd",
+            // Certificates & keys
+            "pfx",
+            "pem",
+            "crl",
+            "p7b",
+            // Checksums
+            "sha512",
+            "sha256",
+            "sha1",
+            "md5",
+            // Game / engine packages
+            "pak",
+            "pck",
+            "vdf",
+            // iTunes library metadata
+            "itdb",
+            "itl",
+            // Compiled shader cache
+            "fxo",
+            // Numbered / no-semantic extension (autotools, Python dist)
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            // Obscure image formats (raw scientific / legacy)
+            "pbm",
+            "pgm",
+            "ppm",
+            "ras",
+            "sgi",
+            "xbm",
+            "xpm",
+            // Obscure / legacy audio formats
+            "8svx",
+            "hcom",
+            "sndt",
+            "voc",
+            "spx",
+            "aifc",
+        ])
+    });
+
     let Some(extension) = path.extension() else {
         return true; // filter files without extension
     };
 
     let ext = extension.to_string_lossy().to_lowercase();
-    [
-        // Temp / backup
-        "ini",
-        "dat",
-        "bak",
-        "tmp",
-        "temp",
-        "old",
-        "swp",
-        // In-progress downloads
-        "download",
-        "crdownload",
-        "part",
-        // Lock / pid files
-        "lock",
-        "pid",
-        // Log files
-        "log",
-        // Database / cache files
-        "db",
-        "sqlite",
-        "sqlite3",
-        "ldb",
-        // Build artifacts
-        "obj",
-        "pdb",
-        "ilk",
-        "exp",
-        "iobj",
-        "ipdb",
-        // Windows shortcut noise (internet shortcuts, not file shortcuts)
-        "url",
-    ]
-    .contains(&ext.as_str())
+    IGNORED.contains(ext.as_str())
 }
