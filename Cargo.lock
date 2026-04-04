@@ -6867,7 +6867,7 @@ checksum = "72069c3113ab32ab29e5584db3c6ec55d416895e60715417b5b883a357c3e471"
 [[package]]
 name = "win-hotkeys"
 version = "0.5.1"
-source = "git+https://github.com/Seelen-Inc/windows-keyboard-hook.git#7b236ac816b5926dc9cfcab91670ea36d5da4573"
+source = "git+https://github.com/Seelen-Inc/windows-keyboard-hook.git#8338030d9d55751cbfbd678afff717090d2b6124"
 dependencies = [
  "arc-swap",
  "crossbeam-channel",

@@ -30,10 +30,12 @@
 
   const folderName = $derived(folder.name || $t("folder"));
   const expandedItems = $derived(
-    folder.itemIds.map((id) => ({
-      id,
-      item: globalState.getMenuItem(id)!,
-    })),
+    folder.itemIds
+      .map((id) => ({
+        id,
+        item: globalState.getMenuItem(id)!,
+      }))
+      .filter((app) => !!app.item),
   );
 
   const sortable = createSortable({
