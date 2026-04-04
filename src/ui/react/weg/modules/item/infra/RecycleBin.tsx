@@ -3,8 +3,6 @@ import { SpecificIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
-
 import type { TrashBinItem } from "../../shared/types.ts";
 
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
@@ -38,7 +36,6 @@ export const TrashBin = memo(({ item }: Props) => {
       }}
       onContextMenu={onContextMenu}
     >
-      <BackgroundByLayersV2 />
       <SpecificIcon
         className="weg-item-icon"
         name={$trash_bin_info.value.itemCount > 0 ? "bin::full" : "bin::empty"}

@@ -3,8 +3,6 @@ import { SpecificIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
-
 import type { ShowDesktopWegItem } from "../../shared/types.ts";
 
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
@@ -37,7 +35,6 @@ export const ShowDesktopModule = memo(({ item }: Props) => {
       }}
       onContextMenu={onContextMenu}
     >
-      <BackgroundByLayersV2 />
       <SpecificIcon className="weg-item-icon" name="@seelen/weg::show-desktop" />
     </div>
   );

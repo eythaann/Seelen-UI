@@ -27,7 +27,7 @@
   }
 </script>
 
-<div class="slu-standard-popover notifications-popup">
+<div class="slu-std-popover notifications-popup">
   <div class="notifications-popup-header">
     <span>{$t("title")}</span>
     <button data-skin="default" onclick={handleClearAll}>

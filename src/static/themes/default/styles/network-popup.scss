@@ -81,15 +81,15 @@
         flex-direction: column;
         padding: 10px 8px;
         border-radius: 8px;
-        transition: background-color 0.2s;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           outline: none;
-          background-color: var(--color-gray-200);
+          background-color: var(--slu-std-ui-hover-overlay);
         }
 
         &.wlan-entry-selected {
-          background-color: #{"rgb(from var(--system-accent-color) r g b / 0.2)"};
+          background-color: var(--slu-std-ui-pressed-overlay);
         }
 
         .wlan-entry-info {

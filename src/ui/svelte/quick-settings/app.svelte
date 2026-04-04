@@ -23,7 +23,7 @@
   });
 </script>
 
-<div class={["slu-standard-popover", "quick-settings"]}>
+<div class={["slu-std-popover", "quick-settings"]}>
   <RadioButtons />
   <BrightnessControl />
   <MediaDevices />

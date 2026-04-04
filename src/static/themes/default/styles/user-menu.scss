@@ -103,22 +103,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-
-      .user-profile-action-button {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 10px;
-        background-color: var(--color-gray-100);
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 0.85rem;
-        color: var(--color-gray-700);
-
-        &:hover {
-          background-color: var(--color-gray-200);
-        }
-      }
     }
   }
 
@@ -139,7 +123,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--color-gray-200);
+        background-color: var(--slu-std-ui-hover-overlay);
       }
 
       .slu-icon {
@@ -169,7 +153,7 @@
     font-weight: 500;
 
     &:hover {
-      background-color: var(--color-gray-200);
+      background-color: var(--slu-std-ui-hover-overlay);
     }
 
     .user-directory-icon {
@@ -208,7 +192,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: var(--color-gray-200);
+        background-color: var(--slu-std-ui-hover-overlay);
       }
 
       .user-file-icon {
@@ -244,7 +228,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #{"rgb(from var(--system-accent-color) r g b / 0.1)"};
+        background-color: var(--slu-std-ui-hover-overlay);
       }
     }
   }

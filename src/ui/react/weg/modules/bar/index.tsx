@@ -37,7 +37,7 @@ export function SeelenWeg() {
       })}
       onContextMenu={onContextMenu}
     >
-      <BackgroundByLayersV2 prefix="taskbar" />
+      <BackgroundByLayersV2 />
       <div className="weg-items-container">
         <DockItems />
       </div>

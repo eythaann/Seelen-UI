@@ -112,7 +112,7 @@
   });
 </script>
 
-<div class="slu-standard-popover calendar-popup">
+<div class="slu-std-popover calendar-popup">
   <div class="calendar" onwheel={handleWheel}>
     <!-- Calendar Header -->
     <div class="calendar-header">

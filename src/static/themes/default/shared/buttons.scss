@@ -29,28 +29,31 @@ button[data-skin="transparent"] {
   border: 1px solid transparent;
 
   &:hover {
-    background-color: oklch(from var(--system-accent-color) l c h / 0.2);
+    background-color: var(--slu-std-ui-hover-overlay);
+  }
+
+  &:active {
+    background-color: var(--slu-std-ui-pressed-overlay);
   }
 }
 
 button[data-skin="solid"] {
   @extend %common;
-  background-color: var(--ui-color);
-  border: 1px solid var(--ui-color);
+  background-color: var(--slu-std-ui-color);
+  border: 1px solid var(--slu-std-ui-color);
   color: var(--color-gray-100);
 
   &:hover {
-    background-color: var(--ui-hover-color);
-    border: 1px solid var(--ui-hover-color);
+    background-color: var(--slu-std-ui-hover-color);
+    border: 1px solid var(--slu-std-ui-hover-color);
   }
 }
 
 button[data-skin="default"] {
   @extend %common;
-  background-color: var(--color-gray-50);
   border: 1px solid var(--color-gray-300);
 
   &:hover {
-    border: 1px solid var(--ui-hover-color);
+    border: 1px solid var(--slu-std-ui-hover-color);
   }
 }

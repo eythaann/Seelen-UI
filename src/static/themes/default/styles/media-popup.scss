@@ -45,12 +45,6 @@
     align-items: center;
     gap: 8px;
     padding: 4px;
-    border-radius: 6px;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: var(--color-gray-100);
-    }
 
     .media-device-name {
       flex: 1;

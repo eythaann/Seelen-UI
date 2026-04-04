@@ -21,7 +21,7 @@
   }
 </script>
 
-<div class="slu-standard-popover user-popup">
+<div class="slu-std-popover user-popup">
   <UserProfile user={globalState.user} />
 
   <hr />

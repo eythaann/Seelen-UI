@@ -103,10 +103,10 @@ attributes in shared styles:
 ```css
 /* OK — targets only elements that explicitly opt in */
 button[data-skin="solid"] {
-  background: var(--ui-color);
+  background: var(--slu-std-ui-color);
 }
 button[data-skin="default"] {
-  border: 1px solid var(--ui-color);
+  border: 1px solid var(--slu-std-ui-color);
 }
 button[data-skin="transparent"] {
   background: transparent;
@@ -123,7 +123,7 @@ select[data-skin="default"] {
 }
 
 /* OK — targets a specific component class */
-.slu-standard-popover {
+.slu-std-popover {
   background: var(--color-gray-50);
 }
 

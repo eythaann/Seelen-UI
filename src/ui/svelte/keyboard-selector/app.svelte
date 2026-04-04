@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class={["slu-standard-popover", "keyboard-selector"]}>
+<div class={["slu-std-popover", "keyboard-selector"]}>
   <div class="keyboard-selector-header">{$t("title")}</div>
   <div class="keyboard-selector-body">
     {#each state.langs as lang}

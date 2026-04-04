@@ -68,7 +68,7 @@
   });
 </script>
 
-<div class="slu-standard-popover network-popup">
+<div class="slu-std-popover network-popup">
   {#if !wifiRadio}
     <div class="network-no-adapter">
       {$t("no_adapter")}

@@ -62,7 +62,7 @@
   });
 </script>
 
-<div class="slu-standard-popover bluetooth-popup">
+<div class="slu-std-popover bluetooth-popup">
   {#if !bluetoothRadio}
     <div class="bluetooth-no-adapter">
       {$t("no_adapter")}

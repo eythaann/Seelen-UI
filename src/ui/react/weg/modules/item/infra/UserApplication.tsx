@@ -7,8 +7,6 @@ import moment from "moment";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
-
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import {
@@ -104,7 +102,6 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
       }}
       onContextMenu={onContextMenu}
     >
-      <BackgroundByLayersV2 prefix="item" />
       <FileIcon
         className="weg-item-icon"
         path={item.relaunch?.icon || item.path}
@@ -141,7 +138,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
       trigger="hover"
       arrow={false}
       content={
-        <BackgroundByLayersV2
+        <div
           className={cx("weg-item-preview-container", $settings.value.position.toLowerCase())}
           onMouseMoveCapture={(e) => e.stopPropagation()}
           onContextMenu={(e) => {
@@ -156,7 +153,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
             ))}
             {windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
           </div>
-        </BackgroundByLayersV2>
+        </div>
       }
     >
       {itemNode}

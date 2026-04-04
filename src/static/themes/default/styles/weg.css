@@ -27,13 +27,9 @@
 }
 
 .taskbar {
-  > .bg-layers {
-    > .bg-layer-2 {
-      opacity: 0.8;
-      background-color: var(--color-gray-100);
-      border-radius: 15px;
-    }
-  }
+  background-color: oklch(from var(--color-gray-100) l c h / 0.8);
+  border-radius: 15px;
+  overflow: hidden;
 
   > .weg-items-container {
     border-radius: 15px;
@@ -102,24 +98,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   gap: var(--inner-spacing);
   padding: var(--inner-spacing);
   min-width: var(--config-item-size);
   max-width: var(--max-item-size);
   height: var(--config-item-size);
+
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
   border-radius: var(--border-radius);
 
-  > .bg-layers {
-    > .bg-layer-1 {
-      background-color: var(--color-gray-100);
-      border-radius: var(--border-radius);
-    }
+  background-color: var(--color-gray-50);
+  transition: background-color 0.2s ease-out;
 
-    > .bg-layer-2 {
-      border-radius: var(--border-radius);
-      transition: background-color 0.2s ease-out;
-    }
+  &:hover {
+    background-color: var(--color-gray-100);
   }
 
   &.media-session-container {
@@ -139,25 +132,13 @@
     }
   }
 
-  &:hover > .bg-layers > .bg-layer-2 {
-    background-color: var(--dock-item-hover-color);
-  }
-
   &:active {
-    > .bg-layers > .bg-layer-1 {
-      filter: brightness(0.8);
-    }
-
     .weg-item-icon {
       transform: scale(0.8);
     }
   }
 
   &:not(:active) {
-    > .bg-layers > .bg-layer-1 {
-      transition: filter 0.2s linear;
-    }
-
     .weg-item-icon {
       transition: transform 0.2s linear;
     }
@@ -279,35 +260,10 @@
   }
 }
 
-.weg-context-menu-container {
-  padding: 3px;
-
-  > .bg-layers {
-    > .bg-layer-1 {
-      background-color: var(--color-gray-100);
-      border-radius: 10px;
-    }
-  }
-
-  .weg-context-menu {
-    --empty-rule: "delete me on use";
-  }
-
-  .weg-context-menu-item-icon {
-    width: 1em;
-  }
-}
-
 .weg-item-preview-container {
   padding: 10px;
   border-radius: 10px;
-
-  > .bg-layers {
-    > .bg-layer-1 {
-      background-color: var(--color-gray-100);
-      border-radius: 10px;
-    }
-  }
+  background-color: var(--color-gray-100);
 
   .weg-item-display-name {
     white-space: nowrap;

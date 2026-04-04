@@ -44,11 +44,7 @@
         <Icon iconName="PiFolderUser" />
       </div>
     {/if}
-    <button
-      class="user-profile-lock-button"
-      onclick={logOut}
-      title={$t("profile.log_out")}
-    >
+    <button class="user-profile-lock-button" onclick={logOut} title={$t("profile.log_out")}>
       <Icon iconName="BiLogOut" />
     </button>
     <button
@@ -64,7 +60,7 @@
     <div class="user-profile-name">
       <span>{user.name}</span>
       <button
-        class="user-profile-action-button"
+        data-skin="transparent"
         onclick={openUserFolder}
         title={$t("profile.open_user_folder")}
       >
@@ -77,11 +73,7 @@
     {/if}
 
     {#if user.oneDrivePath}
-      <button
-        class="user-profile-action-button"
-        onclick={openOneDrive}
-        title={$t("profile.open_onedrive")}
-      >
+      <button data-skin="transparent" onclick={openOneDrive} title={$t("profile.open_onedrive")}>
         <Icon iconName="ImOnedrive" />
         <span>OneDrive</span>
       </button>

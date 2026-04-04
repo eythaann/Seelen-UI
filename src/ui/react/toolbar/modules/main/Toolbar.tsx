@@ -46,7 +46,7 @@ export function FancyToolbar() {
       onContextMenu={onContextMenu}
     >
       <ShowDesktopButton />
-      <BackgroundByLayersV2 prefix="ft-bar" />
+      <BackgroundByLayersV2 />
 
       <DragDropProvider
         onDragStart={() => {

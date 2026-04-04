@@ -5,16 +5,7 @@
 
 .ft-bar {
   color: var(--color-fixed-gray-100);
-  transition: color 0.2s linear;
-
-  > .bg-layers {
-    // we skip the first layer, to avoid break user themes, as before v2.2 the first layer was a noise layer
-    > .bg-layer-2 {
-      background-color: var(--color-fixed-gray-900);
-      transition: background-color 0.2s linear;
-      will-change: background-color;
-    }
-  }
+  background-color: var(--color-fixed-gray-900);
 
   &[data-has-margin="true"] {
     border-radius: calc(var(--config-height) / 3);
@@ -30,7 +21,11 @@
     border-radius: 6px;
 
     &:hover {
-      backdrop-filter: brightness(3);
+      background-color: oklch(from var(--system-accent-color) l c h / 0.2);
+    }
+
+    &:active {
+      background-color: oklch(from var(--system-accent-color) l c h / 0.3);
     }
   }
 }
@@ -59,28 +54,12 @@
   }
 }
 
-// Notifications popup styles moved to notifications-popup.scss
-
-@keyframes text-highlight {
-  0% {
-    color: var(--color-gray-600);
-  }
-  66% {
-    color: var(--system-accent-color);
-  }
-  100% {
-    color: var(--color-gray-600);
-  }
-}
-
 .ft-corner-button {
-  transition: backdrop-filter 0.2s ease;
-
   &:hover {
-    backdrop-filter: invert(0.2);
+    background-color: var(--slu-std-ui-hover-overlay);
   }
 
   &:active {
-    backdrop-filter: invert(0.3);
+    background-color: var(--slu-std-ui-pressed-overlay);
   }
 }

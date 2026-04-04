@@ -9,7 +9,7 @@
   });
 </script>
 
-<div class="slu-standard-popover context-menu">
+<div class="slu-std-popover context-menu">
   {#each state.data?.items || [] as item}
     {#if item.type === "Separator"}
       <hr />

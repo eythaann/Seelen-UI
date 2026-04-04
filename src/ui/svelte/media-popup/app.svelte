@@ -14,7 +14,7 @@
   });
 </script>
 
-<div class="slu-standard-popover media-popup">
+<div class="slu-std-popover media-popup">
   {#if globalState.view === "main"}
     <MainView />
   {:else}
