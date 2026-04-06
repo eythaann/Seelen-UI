@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/config-conventional": "^20.5.0",
     "@nyariv/sandboxjs": "^0.8.36",
     "@seelen-ui/lib": "file:./libs/core/npm",
     "@seelen/translation-toolkit": "^1.1.10",
