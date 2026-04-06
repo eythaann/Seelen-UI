@@ -7,18 +7,24 @@ import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types";
 
 // on change of this function update src\background\widgets\weg\cli.rs too.
+//
+// Grouping rules:
+//   1. Window has a umid  → matched only by exact umid equality. Path is not used.
+//      If no item has that umid, a new item will be created for it.
+//   2. Window has no umid → matched by exact path (item.relaunch.command or item.path).
 export function getWindowsForItem(
   item: AppOrFileWegItem,
   interactables: UserAppWindow[],
 ): UserAppWindow[] {
-  if (item.umid) {
-    return interactables.filter((w) => w.umid && w.umid === item.umid);
-  }
-
   const itemCommand = item.relaunch?.command.toLowerCase();
   const itemPath = item.path.toLowerCase();
 
   return interactables.filter((w) => {
+    if (w.umid) {
+      // Rule 1: window carries a umid — only an item with the exact same umid may claim it.
+      return item.umid === w.umid;
+    }
+    // Rule 2: window has no umid — match by path.
     const winPath = w.process.path?.toLowerCase() ?? "";
     return winPath !== "" && (itemCommand === winPath || itemPath === winPath);
   });

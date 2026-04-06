@@ -55,7 +55,7 @@ macro_rules! identifier_impl {
     };
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(type = "unknown")]
 pub struct TsUnknown(pub serde_json::Value);
 

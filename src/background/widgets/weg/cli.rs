@@ -14,29 +14,28 @@ use crate::{
 
 /// Mirrors `getWindowsForItem` from the frontend (`windows.ts`).
 ///
-/// Returns all interactable windows that belong to `item`, matching by:
-/// 1. UMID – when both the item and the window carry a non-empty UMID.
-/// 2. Path  – `item.relaunch.command` **or** `item.path` equals `w.process.path`
-///    (case-insensitive, both are checked independently).
+/// Grouping rules:
+///   1. Window has a umid  → matched only by exact umid equality. Path is not used.
+///      If no item has that umid, a new item will be created for it.
+///   2. Window has no umid → matched by exact path (item.relaunch.command or item.path).
 ///
 /// note: on update of this function check src\ui\react\weg\modules\shared\state\windows.ts both should work the same
 fn get_windows_for_item<'a>(
     item: &WegItemData,
     interactables: &'a [UserAppWindow],
 ) -> Vec<&'a UserAppWindow> {
-    if item.umid.is_some() {
-        return interactables
-            .iter()
-            .filter(|w| w.umid.is_some() && item.umid == w.umid)
-            .collect();
-    }
-
     let item_command = item.relaunch.as_ref().map(|r| r.command.to_lowercase());
     let item_path = item.path.to_string_lossy().to_lowercase();
 
     interactables
         .iter()
         .filter(|w| {
+            if w.umid.is_some() {
+                // Rule 1: window carries a umid — only an item with the exact same umid may claim it.
+                return item.umid == w.umid;
+            }
+
+            // Rule 2: window has no umid — match by path.
             let win_path = w
                 .process
                 .path
