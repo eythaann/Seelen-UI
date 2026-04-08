@@ -11,20 +11,16 @@ export const $open_popups = signal<Record<string, boolean>>({});
 export const $there_are_open_popups = computed(() => Object.values($open_popups.value).some((v) => v));
 
 export const $dock_should_be_hidden = signal(false);
-const setDockAsHidden = computed(() => {
-  return debounce(() => ($dock_should_be_hidden.value = true), $settings.value.delayToHide);
-});
-const setDockAsNotHidden = computed(() => {
-  return debounce(() => ($dock_should_be_hidden.value = false), $settings.value.delayToShow);
-});
 
 effect(() => {
+  const { delayToHide, delayToShow, hideMode, position } = $settings.value;
+
   let hidden = false;
   let flush = false;
 
-  let isMouseOverEdge = $mouse_at_edge.value === $settings.value.position;
+  const isMouseOverEdge = $mouse_at_edge.value === position;
 
-  switch ($settings.value.hideMode) {
+  switch (hideMode) {
     case HideMode.Never:
       hidden = false;
       flush = true;
@@ -40,15 +36,18 @@ effect(() => {
       break;
   }
 
+  const doHide = debounce(() => ($dock_should_be_hidden.value = true), delayToHide);
+  const doShow = debounce(() => ($dock_should_be_hidden.value = false), delayToShow);
+
   if (hidden) {
-    setDockAsNotHidden.peek().cancel();
-    setDockAsHidden.peek()();
-    return;
+    doHide();
+  } else {
+    doShow();
+    if (flush) doShow.flush();
   }
 
-  setDockAsHidden.peek().cancel();
-  setDockAsNotHidden.peek()();
-  if (flush) {
-    setDockAsNotHidden.peek().flush();
-  }
+  return () => {
+    doHide.cancel();
+    doShow.cancel();
+  };
 });

@@ -58,24 +58,20 @@ export const $is_tb_overlapped = computed(() => {
 });
 
 export const $hidden_by_autohide = signal(false);
-const setToolbarAsHidden = computed(() => {
-  return debounce(() => ($hidden_by_autohide.value = true), $settings.value.delayToHide);
-});
-const setToolbarAsNotHidden = computed(() => {
-  return debounce(() => ($hidden_by_autohide.value = false), $settings.value.delayToShow);
-});
 
 effect(() => {
   Widget.self.window.setIgnoreCursorEvents($hidden_by_autohide.value);
 });
 
 effect(() => {
+  const { delayToHide, delayToShow, hideMode, position } = $settings.value;
+
   let hidden = false;
   let flush = false;
 
-  let isMouseOverEdge = $mouse_at_edge.value === $settings.value.position;
+  const isMouseOverEdge = $mouse_at_edge.value === position;
 
-  switch ($settings.value.hideMode) {
+  switch (hideMode) {
     case HideMode.Never:
       hidden = false;
       flush = true;
@@ -90,15 +86,18 @@ effect(() => {
       break;
   }
 
+  const doHide = debounce(() => ($hidden_by_autohide.value = true), delayToHide);
+  const doShow = debounce(() => ($hidden_by_autohide.value = false), delayToShow);
+
   if (hidden) {
-    setToolbarAsNotHidden.peek().cancel();
-    setToolbarAsHidden.peek()();
-    return;
+    doHide();
+  } else {
+    doShow();
+    if (flush) doShow.flush();
   }
 
-  setToolbarAsHidden.peek().cancel();
-  setToolbarAsNotHidden.peek()();
-  if (flush) {
-    setToolbarAsNotHidden.peek().flush();
-  }
+  return () => {
+    doHide.cancel();
+    doShow.cancel();
+  };
 });

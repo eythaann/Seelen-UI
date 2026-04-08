@@ -21,6 +21,7 @@
 - emitting liveness prover events while session suspended.
 - service not restarting the app on crash.
 - shortcuts stoping working as expected.
+- dock and toolbar not hidding after change settings.
 
 ## [2.5.7]
 
