@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Gwrthodwyd caniatâd
     trigger: Efelychu
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Cysylltwch â defnyddwyr Seelen UI eraill, cael help, rhannu themâu, a chael
+    y newyddion diweddaraf.
+  title: Ymunwch â'n Cymuned
 extras:
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
   exit: Rhoi'r gorau iddi/allanfa
-  links: Dolenni Swyddogol
   relaunch: Hail -deirion
+  streaming_mode: Modd Ffrydio
+  streaming_mode_description: >-
+    Yn disodli gwybodaeth sensitif (e.e. e-byst) gyda dalfannau i ddiogelu
+    preifatrwydd yn ystod recordiadau neu sgrinluniau.
   version: Fersiwn
   version_fixed: >-
     Mae'r cymhwysiad a fersiynau WebView2 Runtime yn sefydlog. Mae hyn yn golygu
@@ -140,6 +148,7 @@ header:
     monitors: Monitorau
     plugin: Ategion
     resources: Adnoddau
+    session: Cyfrif
     shortcuts: Llwybrau byr
     soundpack: Pecynnau sain
     specific_apps: Gosodiadau yn ôl cais
@@ -152,6 +161,7 @@ home:
 inherit: Hetifedd
 inProgress: Ar y gweill...
 insert: Mewnosodem
+join_us: Ymunwch â ni!
 loading: Llwytho ...
 miscellaneous: Hamddenol
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 search: Chwiliwch
 see_more: Gweld mwy
+session:
+  logout: Arwyddo Allan
+  plan: Cynllun
+  sign_in: Mewngofnodwch
+  sign_in_hint: Bydd eich porwr yn agor er mwyn i chi allu mewngofnodi'n ddiogel.
 shortcuts:
   duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu
   enable: Galluogi system llwybrau byr adeiledig

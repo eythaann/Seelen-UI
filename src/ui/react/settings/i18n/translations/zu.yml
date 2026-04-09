@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Imvume inqatshiwe
     trigger: Lingisa
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Xhumana nabanye abasebenzisi be-Seelen UI, thola usizo, yabelana
+    ngezindikimba, futhi uhlale unolwazi lwakamuva ngezindaba zakamuva.
+  title: Joyina umphakathi wethu
 extras:
   clear_icons: Sula i-Cold yesistimu ye-System
   clear_icons_tooltip: >-
     Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke
     amawijethi
   exit: Quit / Phuma
-  links: Izixhumanisi ezisemthethweni
   relaunch: Qondisa amandla ehlehliseyo
+  streaming_mode: Imodi yokusakaza
+  streaming_mode_description: >-
+    Ishintsha ulwazi olubucayi (isb. ama-imeyili) ngezibambi-ndawo ukuze
+    kuvikelwe ubumfihlo ngesikhathi sokurekhoda noma izithombe-skrini.
   version: Ukuhumushela
   version_fixed: >-
     Uhlelo lokusebenza kanye nezinguqulo ze-WebView2 Runtime zilungisiwe. Lokhu
@@ -143,6 +151,7 @@ header:
     monitors: Ukuqapha
     plugin: Amaplithi
     resources: Izinsizakusebenza
+    session: I-akhawunti
     shortcuts: Amashoshothi
     soundpack: Amaphakethe omsindo
     specific_apps: Izilungiselelo ngesicelo
@@ -155,6 +164,7 @@ home:
 inherit: Dla ifa
 inProgress: Kuyaqhubeka...
 insert: Faka
+join_us: Sijoyine!
 loading: Iyalayisha ...
 miscellaneous: '-Nhlobonhlobo'
 monitors_configurations:
@@ -189,6 +199,11 @@ save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
 search: Sesha
 see_more: Buka Okuningi
+session:
+  logout: Phuma ngemvume
+  plan: Hlela
+  sign_in: Ngena ngemvume
+  sign_in_hint: Isiphequluli sakho sizovuleka ukuze ungene ngemvume ngokuphephile.
 shortcuts:
   duplicate_error: Lesi sinqamuleli siyimpinda
   enable: Nika amandla uhlelo lwezinqamuleli ezakhelwe ngaphakathi

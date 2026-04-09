@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Թույլտվությունը մերժված է
     trigger: Մոդելավորել
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Կապվեք Seelen UI-ի այլ օգտատերերի հետ, ստացեք օգնություն, կիսվեք թեմաներով և
+    տեղեկացեք վերջին նորություններին:
+  title: Միացե՛ք մեր համայնքին
 extras:
   clear_icons: Մաքրել համակարգի սրբապատկերների քեշը
   clear_icons_tooltip: >-
     Վերագործարկումը կարող է պահանջվել բոլոր վիդջեթների վրա լիարժեք ուժի մեջ
     մտնելու համար
   exit: Հանգստացեք / Ելք
-  links: Պաշտոնական հղումներ
   relaunch: Վերակառուցվել
+  streaming_mode: Հոսքային ռեժիմ
+  streaming_mode_description: >-
+    Փոխարինում է զգայուն տեղեկատվությունը (օրինակ՝ էլ. նամակները) տեղապահներով՝
+    ձայնագրությունների կամ սքրինշոթների ժամանակ գաղտնիությունը պաշտպանելու
+    համար:
   version: Տարբերակ
   version_fixed: >-
     Հավելվածը և WebView2 Runtime տարբերակները ամրագրված են: Սա նշանակում է, որ
@@ -143,6 +152,7 @@ header:
     monitors: Մոնիտորներ
     plugin: Plugins
     resources: Ռեսուրսներ
+    session: Հաշիվ
     shortcuts: Դյուրանցումներ
     soundpack: Ձայնային փաթեթներ
     specific_apps: Կարգավորումներ ըստ դիմումի
@@ -155,6 +165,7 @@ home:
 inherit: Ժառանգել
 inProgress: Ընթացքի մեջ է...
 insert: Տեղադրել
+join_us: 'Միացե՛ք մեզ:'
 loading: Բեռնում ...
 miscellaneous: Զանազան
 monitors_configurations:
@@ -187,6 +198,11 @@ save: Խնայել
 save_and_restart: Պահել եւ վերագործարկել
 search: Որոնում
 see_more: Տեսնել ավելին
+session:
+  logout: Դուրս գալ
+  plan: Պլանավորել
+  sign_in: Մուտք գործեք
+  sign_in_hint: 'Ձեր դիտարկիչը կբացվի, որպեսզի կարողանաք ապահով մուտք գործել:'
 shortcuts:
   duplicate_error: Այս դյուրանցումը կրկնօրինակված է
   enable: Միացնել ներկառուցված դյուրանցումների համակարգը

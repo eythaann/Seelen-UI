@@ -83,12 +83,21 @@ devtools:
     result_denied: ✗ Toestemming geweigerd
     trigger: Simuleren
     widget_id_placeholder: '@auteur/widgetnaam'
+discord_banner:
+  message: >-
+    Maak contact met andere Seelen UI-gebruikers, krijg hulp, deel thema's en
+    blijf op de hoogte van het laatste nieuws.
+  title: Word lid van onze gemeenschap
 extras:
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
   exit: Stop/exit
-  links: Officiële links
   relaunch: Opnieuw starten
+  streaming_mode: Streaming-modus
+  streaming_mode_description: >-
+    Vervangt gevoelige informatie (bijvoorbeeld e-mails) door tijdelijke
+    aanduidingen om de privacy te beschermen tijdens opnames of
+    schermafbeeldingen.
   version: Versie
   version_fixed: >-
     De applicatie- en WebView2 Runtime-versies staan ​​vast. Dit betekent dat de
@@ -140,6 +149,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Bronnen
+    session: Rekening
     shortcuts: Snelkoppelingen
     soundpack: Geluidspakketten
     specific_apps: Instellingen per toepassing
@@ -152,6 +162,7 @@ home:
 inherit: Erven
 inProgress: Bezig...
 insert: Invoegen
+join_us: Sluit je bij ons aan!
 loading: Bezig met laden...
 miscellaneous: Gemengd
 monitors_configurations:
@@ -184,6 +195,11 @@ save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 search: Zoekopdracht
 see_more: Meer zien
+session:
+  logout: Uitloggen
+  plan: Plan
+  sign_in: Inloggen
+  sign_in_hint: Uw browser wordt geopend zodat u veilig kunt inloggen.
 shortcuts:
   duplicate_error: Deze snelkoppeling is gedupliceerd
   enable: Schakel ingebouwd snelkoppelsysteem in

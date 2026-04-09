@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ У дозволі відмовлено
     trigger: Симулювати
     widget_id_placeholder: '@author/назва-віджета'
+discord_banner:
+  message: >-
+    Спілкуйтеся з іншими користувачами Seelen UI, отримуйте допомогу, діліться
+    темами та будьте в курсі останніх новин.
+  title: Приєднуйтесь до нашої спільноти
 extras:
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
   exit: Закрити програму
-  links: Офіційні посилання
   relaunch: Перезапустити
+  streaming_mode: Потоковий режим
+  streaming_mode_description: >-
+    Замінює конфіденційну інформацію (наприклад, електронні листи) заповнювачами
+    для захисту конфіденційності під час записів або знімків екрана.
   version: Версія
   version_fixed: >-
     Виправлено версії програми та WebView2 Runtime. Це означає, що програма не
@@ -140,6 +148,7 @@ header:
     monitors: Монітори
     plugin: Плагіни
     resources: Ресурси
+    session: Обліковий запис
     shortcuts: Сполучення клавіш
     soundpack: Звукові пакети
     specific_apps: Налаштування за додатками
@@ -152,6 +161,7 @@ home:
 inherit: Успадкувати
 inProgress: В процесі...
 insert: Вставити
+join_us: Приєднуйтесь до нас!
 loading: Завантаження...
 miscellaneous: Різне
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Зберегти
 save_and_restart: Зберегти та перезапустити
 search: Пошук
 see_more: Побачити більше
+session:
+  logout: Вийти
+  plan: План
+  sign_in: Увійти
+  sign_in_hint: Ваш браузер відкриється, щоб ви могли безпечно ввійти.
 shortcuts:
   duplicate_error: Цей ярлик дублюється
   enable: Увімкнути вбудовану систему ярликів

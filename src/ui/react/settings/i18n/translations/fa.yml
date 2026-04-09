@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ اجازه داده نشد
     trigger: شبیه سازی کنید
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    با سایر کاربران رابط کاربری Seelen ارتباط برقرار کنید، راهنمایی دریافت کنید،
+    تم ها را به اشتراک بگذارید و از آخرین اخبار به روز بمانید.
+  title: به انجمن ما بپیوندید
 extras:
   clear_icons: حافظه نهان سیستم را پاک کنید
   clear_icons_tooltip: >-
     یک راه اندازی مجدد می تواند مورد نیاز باشد تا به طور کامل در همه ویجت ها
     تأثیر بگذارد
   exit: ترک/خروج
-  links: پیوندهای رسمی
   relaunch: مجدداً
+  streaming_mode: حالت جریان
+  streaming_mode_description: >-
+    برای محافظت از حریم خصوصی در هنگام ضبط یا اسکرین شات، اطلاعات حساس (مانند
+    ایمیل ها) را با متغیرهایی جایگزین می کند.
   version: نسخه
   version_fixed: >-
     نسخه برنامه و WebView2 Runtime رفع شده است. این بدان معنی است که برنامه به
@@ -142,6 +150,7 @@ header:
     monitors: مانیتور
     plugin: پلاگین
     resources: منابع
+    session: حساب
     shortcuts: میانبرها
     soundpack: بسته های صدا
     specific_apps: تنظیمات توسط برنامه
@@ -154,6 +163,7 @@ home:
 inherit: ارث
 inProgress: در حال پیش رفت...
 insert: درج کردن
+join_us: به ما بپیوندید
 loading: بارگذاری...
 miscellaneous: متفاوتی
 monitors_configurations:
@@ -186,6 +196,11 @@ save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 search: جستجو کنید
 see_more: بیشتر ببینید
+session:
+  logout: از سیستم خارج شوید
+  plan: برنامه ریزی کنید
+  sign_in: وارد شوید
+  sign_in_hint: مرورگر شما باز می شود تا بتوانید به صورت ایمن وارد سیستم شوید.
 shortcuts:
   duplicate_error: این میانبر تکراری است
   enable: سیستم میانبر داخلی را فعال کنید

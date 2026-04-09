@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Povolenie zamietnuté
     trigger: Simulovať
     widget_id_placeholder: '@autor/názov-widgetu'
+discord_banner:
+  message: >-
+    Spojte sa s ostatnými používateľmi používateľského rozhrania Seelen,
+    získajte pomoc, zdieľajte témy a buďte informovaní o najnovších správach.
+  title: Pripojte sa k našej komunite
 extras:
   clear_icons: Vymazanie vyrovnávacej pamäte systémových ikon
   clear_icons_tooltip: Aby sa všetky widgety plne prejavili, môže byť potrebný reštart.
   exit: Prestať
-  links: Oficiálne odkazy
   relaunch: Reštart
+  streaming_mode: Režim streamovania
+  streaming_mode_description: >-
+    Nahrádza citlivé informácie (napr. e-maily) zástupnými symbolmi na ochranu
+    súkromia počas nahrávok alebo snímok obrazovky.
   version: Verzia
   version_fixed: >-
     Verzie aplikácie a WebView2 Runtime sú opravené. To znamená, že aplikácia
@@ -140,6 +148,7 @@ header:
     monitors: Monitorovať
     plugin: Zásuvné moduly
     resources: Zdroje
+    session: účtu
     shortcuts: Skratky
     soundpack: Zvukové balíky
     specific_apps: Nastavenia podľa aplikácie
@@ -152,6 +161,7 @@ home:
 inherit: Zdediť
 inProgress: Prebieha ...
 insert: Vložiť
+join_us: Pridajte sa k nám!
 loading: Načítava...
 miscellaneous: Rôznorodý
 monitors_configurations:
@@ -188,6 +198,11 @@ save: Uložiť
 save_and_restart: Uložiť a reštartovať
 search: Hľadať
 see_more: Pozri viac
+session:
+  logout: Odhlásiť sa
+  plan: Plán
+  sign_in: Prihlásiť sa
+  sign_in_hint: Otvorí sa váš prehliadač, aby ste sa mohli bezpečne prihlásiť.
 shortcuts:
   duplicate_error: Táto skratka je duplikovaná
   enable: Povoliť vstavaný systém skratiek

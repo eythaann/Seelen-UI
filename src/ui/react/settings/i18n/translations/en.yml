@@ -82,13 +82,20 @@ devtools:
     result_denied: ✗ Permission denied
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Connect with other Seelen UI users, get help, share themes, and stay up to
+    date with the latest news.
+  title: Join our Community
 extras:
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
   exit: Quit/Exit
   relaunch: Relaunch
   streaming_mode: Streaming Mode
-  streaming_mode_description: Replaces sensitive information (e.g. emails) with placeholders to protect privacy during recordings or screenshots.
+  streaming_mode_description: >-
+    Replaces sensitive information (e.g. emails) with placeholders to protect
+    privacy during recordings or screenshots.
   version: Version
   version_fixed: >-
     The application and WebView2 Runtime versions are fixed. This means that the
@@ -134,12 +141,12 @@ header:
     extras: Extras
     general: General
     home: Home
-    session: Account
     icon_pack_editor: Cached Icons
     iconpack: Icon Packs
     monitors: Monitors
     plugin: Plugins
     resources: Resources
+    session: Account
     shortcuts: Shortcuts
     soundpack: Sound Packs
     specific_apps: Settings by Application
@@ -149,14 +156,10 @@ header:
     widget: Widgets
 home:
   new_resources: New Resources
-session:
-  logout: Sign Out
-  plan: Plan
-  sign_in: Sign In
-  sign_in_hint: Your browser will open so you can sign in securely.
 inherit: Inherit
 inProgress: In Progress...
 insert: Insert
+join_us: Join us!
 loading: Loading...
 miscellaneous: Miscellaneous
 monitors_configurations:
@@ -188,11 +191,12 @@ review_request:
 save: Save
 save_and_restart: Save & Restart
 search: Search
-discord_banner:
-  title: Join our Community
-  message: Connect with other Seelen UI users, get help, share themes, and stay up to date with the latest news.
-join_us: Join us!
 see_more: See More
+session:
+  logout: Sign Out
+  plan: Plan
+  sign_in: Sign In
+  sign_in_hint: Your browser will open so you can sign in securely.
 shortcuts:
   duplicate_error: This shortcut is duplicated
   enable: Enable built-in shortcuts system

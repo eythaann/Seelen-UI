@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Permess miċħud
     trigger: Issimula
     widget_id_placeholder: '@ awtur/widget-isem'
+discord_banner:
+  message: >-
+    Ikkonnettja ma' utenti oħra ta' Seelen UI, ikseb għajnuna, taqsam it-temi, u
+    żomm ruħek aġġornat bl-aħħar aħbarijiet.
+  title: Ingħaqad fil-Komunità tagħna
 extras:
   clear_icons: Ikoni tas-sistema ċara cache
   clear_icons_tooltip: >-
     Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
     il-widgets kollha
   exit: Nieqaf / ħruġ
-  links: Rabtiet uffiċjali
   relaunch: Tnedija mill-ġdid
+  streaming_mode: Modalità Streaming
+  streaming_mode_description: >-
+    Tissostitwixxi informazzjoni sensittiva (eż. emails) b'placeholders biex
+    tipproteġi l-privatezza waqt reġistrazzjonijiet jew screenshots.
   version: Verżjoni
   version_fixed: >-
     L-applikazzjoni u l-verżjonijiet tal-WebView2 Runtime huma ffissati. Dan
@@ -142,6 +150,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Riżorsi
+    session: Kont
     shortcuts: Shortcuts
     soundpack: Pakketti tal-ħoss
     specific_apps: Settings skont l-applikazzjoni
@@ -154,6 +163,7 @@ home:
 inherit: Jirtu
 inProgress: Fil-progress...
 insert: Daħħal
+join_us: Ingħaqad magħna!
 loading: Tagħbija...
 miscellaneous: Varji
 monitors_configurations:
@@ -188,6 +198,11 @@ save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 search: Fittex
 see_more: Ara aktar
+session:
+  logout: Sign Out
+  plan: Pjan
+  sign_in: Idħol
+  sign_in_hint: Il-browser tiegħek se jiftaħ sabiex tkun tista' tidħol b'mod sigur.
 shortcuts:
   duplicate_error: Din is-shortcut hija duplikata
   enable: Ippermetti s-sistema shortcuts inkorporati

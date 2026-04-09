@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ İzin reddedildi
     trigger: Benzetmek
     widget_id_placeholder: '@yazar/widget-adı'
+discord_banner:
+  message: >-
+    Diğer Seelen UI kullanıcılarıyla bağlantı kurun, yardım alın, temaları
+    paylaşın ve en son haberlerle güncel kalın.
+  title: Topluluğumuza katılın
 extras:
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
   exit: Çık
-  links: Resmi Bağlantılar
   relaunch: Yeniden Başlat
+  streaming_mode: Akış Modu
+  streaming_mode_description: >-
+    Kayıtlar veya ekran görüntüleri sırasında gizliliği korumak için hassas
+    bilgileri (ör. e-postalar) yer tutucularla değiştirir.
   version: Sürüm
   version_fixed: >-
     Uygulama ve WebView2 Çalışma Zamanı sürümleri düzeltildi. Bu, uygulamanın
@@ -140,6 +148,7 @@ header:
     monitors: Monitörler
     plugin: Eklentiler
     resources: Kaynaklar
+    session: Hesap
     shortcuts: Kısayollar
     soundpack: Ses Paketleri
     specific_apps: Uygulamaya Göre Ayarlar
@@ -152,6 +161,7 @@ home:
 inherit: Devral
 inProgress: Devam Ediyor...
 insert: Ekle
+join_us: Bize katılın!
 loading: Yükleniyor...
 miscellaneous: Çeşitli
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 search: Aramak
 see_more: Daha Fazla Gör
+session:
+  logout: Oturumu Kapat
+  plan: Planı
+  sign_in: Oturum aç
+  sign_in_hint: Güvenli bir şekilde oturum açabilmeniz için tarayıcınız açılacaktır.
 shortcuts:
   duplicate_error: Bu kısayol kopyalandı
   enable: Dahili kısayol sistemini etkinleştirin

@@ -1,73 +1,73 @@
-mk: Стандардно
-tr: Varsayılan
-he: בְּרִירַת מֶחדָל
-so: Fulin la'aan
-el: Προεπιλογή
-it: Predefinito
-zh-TW: 預設
-sv: Standard
-en: Default
-ur: پہلے سے طے شدہ
-nl: Standaard
-gu: ચૂક
-da: Standard
-bs: Podrazumevano
 fr: Défaut
-te: డిఫాల్ట్
-cs: Výchozí
-hi: गलती करना
-si: පෙරනිමි
-lt: Numatytoji
-km: ការមិនកោរបតាមសន្យា
-ro: Implicit
-af: Versuim
-uz: Bajarilish
-tl: Default
-et: Vaikimisi
-pa: ਮੂਲ
-lv: Noklusējuma
+mk: Стандардно
 zh: 默认值
-zu: Phutha
-fa: پیش فرض
-hy: Թերություն
-ms: Lalai
-am: ነባሪ
-cy: Diofyn
-es: Por defecto
-hr: Zadano
-tg: Иьро накардани ӯҳдадорӣ
-is: Sjálfgefið
-uk: За замовчуванням
-sw: Chaguo -msingi
-hu: Alapértelmezett
-fi: Oletusarvo
-zh-CN: 默认
-pt-PT: Predefinição
-ko: 기본값
-az: Defolt
-lo: ໃນຕອນຕົ້ນ
-eu: Ez ordaindu
-pt-BR: Default
-sr: Подразумевано
-sk: Predvolené nastavenie
-pl: Domyślne
-bg: По подразбиране
-ca: No pagar
-bn: ডিফল্ট
-yo: Aiyipada
 ta: இயல்புநிலை
-ja: デフォルト
-ka: ვალდებულების შეუსრულებლობა
-ru: По умолчанию
-ps: ډیفالټ
-no: Misligholde
-mt: Default
-vi: Mặc định
-lb: Asofbild
+tg: Иьро накардани ӯҳдадорӣ
+el: Προεπιλογή
+zu: Phutha
+bg: По подразбиране
+bn: ডিফল্ট
+en: Default
+tl: Default
+zh-CN: 默认
+uk: За замовчуванням
 mn: Үл хүрэлцэх
-ne: पुरा नगर्नु
-de: Standard
-th: ค่าเริ่มต้น
+tr: Varsayılan
+yo: Aiyipada
+uz: Bajarilish
+ca: No pagar
+eu: Ez ordaindu
+nl: Standaard
+lv: Noklusējuma
 id: Default
+pt-BR: Default
+ms: Lalai
+th: ค่าเริ่มต้น
+hr: Zadano
+pt-PT: Predefinição
+pa: ਮੂਲ
+ur: پہلے سے طے شدہ
+sw: Chaguo -msingi
 ar: افتراضي
+sr: Подразумевано
+so: Fulin la'aan
+es: Por defecto
+gu: ચૂક
+no: Misligholde
+lt: Numatytoji
+zh-TW: 預設
+ro: Implicit
+cy: Diofyn
+hi: गलती करना
+km: ការមិនកោរបតាមសន្យា
+de: Standard
+pl: Domyślne
 ku: Destçûnî
+lb: Asofbild
+te: డిఫాల్ట్
+ps: ډیفالټ
+is: Sjálfgefið
+ko: 기본값
+cs: Výchozí
+he: בְּרִירַת מֶחדָל
+et: Vaikimisi
+hu: Alapértelmezett
+mt: Default
+sk: Predvolené nastavenie
+am: ነባሪ
+fi: Oletusarvo
+af: Versuim
+fa: پیش فرض
+ru: По умолчанию
+az: Defolt
+si: පෙරනිමි
+hy: Թերություն
+ka: ვალდებულების შეუსრულებლობა
+ne: पुरा नगर्नु
+sv: Standard
+it: Predefinito
+bs: Podrazumevano
+ja: デフォルト
+lo: ໃນຕອນຕົ້ນ
+da: Standard
+vi: Mặc định

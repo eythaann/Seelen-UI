@@ -82,14 +82,22 @@ devtools:
     result_denied: ✗ Quyền bị từ chối
     trigger: mô phỏng
     widget_id_placeholder: '@tác giả/tên widget'
+discord_banner:
+  message: >-
+    Kết nối với những người dùng Seelen UI khác, nhận trợ giúp, chia sẻ chủ đề
+    và cập nhật những tin tức mới nhất.
+  title: Tham gia cộng đồng của chúng tôi
 extras:
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
     Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
     tiện ích
   exit: Thoát/Thoát
-  links: Liên kết chính thức
   relaunch: Khởi động lại
+  streaming_mode: Chế độ phát trực tuyến
+  streaming_mode_description: >-
+    Thay thế thông tin nhạy cảm (ví dụ: email) bằng phần giữ chỗ để bảo vệ quyền
+    riêng tư trong quá trình ghi hoặc chụp ảnh màn hình.
   version: Phiên bản
   version_fixed: >-
     Ứng dụng và phiên bản WebView2 Runtime đã được sửa. Điều này có nghĩa là ứng
@@ -141,6 +149,7 @@ header:
     monitors: Màn hình
     plugin: Plugin
     resources: Tài nguyên
+    session: Tài khoản
     shortcuts: Phím tắt
     soundpack: Gói âm thanh
     specific_apps: Cài đặt theo ứng dụng
@@ -153,6 +162,7 @@ home:
 inherit: Kế thừa
 inProgress: Trong tiến trình...
 insert: Chèn
+join_us: Tham gia cùng chúng tôi!
 loading: Đang tải...
 miscellaneous: Linh tinh
 monitors_configurations:
@@ -187,6 +197,11 @@ save: Cứu
 save_and_restart: Lưu & Khởi động lại
 search: Tìm kiếm
 see_more: Xem thêm
+session:
+  logout: Đăng xuất
+  plan: Kế hoạch
+  sign_in: Đăng nhập
+  sign_in_hint: Trình duyệt của bạn sẽ mở để bạn có thể đăng nhập an toàn.
 shortcuts:
   duplicate_error: Phím tắt này bị trùng lặp
   enable: Bật hệ thống phím tắt tích hợp

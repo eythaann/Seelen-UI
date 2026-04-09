@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Разрешението е отказано
     trigger: Симулирайте
     widget_id_placeholder: '@автор/име-на-притурка'
+discord_banner:
+  message: >-
+    Свържете се с други потребители на Seelen UI, получете помощ, споделяйте
+    теми и бъдете в течение с последните новини.
+  title: Присъединете се към нашата общност
 extras:
   clear_icons: Изчистване на кеша на системните икони
   clear_icons_tooltip: >-
     Може да се наложи рестартиране, за да се прояви напълно ефектът върху всички
     джаджи.
   exit: QUIT/EXIT
-  links: Официални връзки
   relaunch: Рестартиране
+  streaming_mode: Режим на поточно предаване
+  streaming_mode_description: >-
+    Заменя поверителна информация (напр. имейли) с контейнери, за да защити
+    поверителността по време на записи или екранни снимки.
   version: Версия
   version_fixed: >-
     Версиите на приложението и WebView2 Runtime са коригирани. Това означава, че
@@ -142,6 +150,7 @@ header:
     monitors: Монитори
     plugin: Плъгини
     resources: Ресурси
+    session: акаунт
     shortcuts: Преки пътища
     soundpack: Звукови пакети
     specific_apps: Настройки по приложение
@@ -154,6 +163,7 @@ home:
 inherit: Наследяване
 inProgress: В ход ...
 insert: Вмъкнете
+join_us: Присъединете се към нас!
 loading: Зареждане...
 miscellaneous: Разни
 monitors_configurations:
@@ -188,6 +198,11 @@ save: Запазете
 save_and_restart: Запазване и рестартиране
 search: Търсене
 see_more: Вижте повече
+session:
+  logout: Излезте
+  plan: Планирайте
+  sign_in: Вход
+  sign_in_hint: Вашият браузър ще се отвори, за да можете да влезете безопасно.
 shortcuts:
   duplicate_error: Този пряк път е дублиран
   enable: Активирайте вградената система за преки пътища

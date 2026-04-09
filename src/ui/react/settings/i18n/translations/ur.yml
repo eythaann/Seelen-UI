@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ اجازت مسترد کر دی گئی۔
     trigger: نقل کرنا
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    دوسرے Seelen UI صارفین کے ساتھ جڑیں، مدد حاصل کریں، تھیمز کا اشتراک کریں،
+    اور تازہ ترین خبروں سے باخبر رہیں۔
+  title: ہماری کمیونٹی میں شامل ہوں۔
 extras:
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
   exit: چھوڑ دیں/باہر نکلیں
-  links: لنکس
   relaunch: دوبارہ لانچ
+  streaming_mode: اسٹریمنگ موڈ
+  streaming_mode_description: >-
+    ریکارڈنگ یا اسکرین شاٹس کے دوران رازداری کی حفاظت کے لیے حساس معلومات (جیسے
+    ای میلز) کو پلیس ہولڈرز سے بدل دیتا ہے۔
   version: ورژن
   version_fixed: >-
     ایپلی کیشن اور ویب ویو 2 رن ٹائم ورژن طے شدہ ہیں۔ اس کا مطلب یہ ہے کہ ایپلی
@@ -140,6 +148,7 @@ header:
     monitors: مانیٹر
     plugin: پلگ ان
     resources: وسائل
+    session: اکاؤنٹ
     shortcuts: شارٹ کٹ
     soundpack: ساؤنڈ پیک
     specific_apps: درخواست کے ذریعہ ترتیبات
@@ -152,6 +161,7 @@ home:
 inherit: وراثت
 inProgress: کام جاری ہے...
 insert: داخل کریں
+join_us: ہمارے ساتھ شامل ہوں!
 loading: لوڈنگ ...
 miscellaneous: متفرق
 monitors_configurations:
@@ -186,6 +196,11 @@ save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 search: تلاش کریں۔
 see_more: مزید دیکھیں
+session:
+  logout: سائن آؤٹ کریں۔
+  plan: منصوبہ
+  sign_in: سائن ان کریں۔
+  sign_in_hint: آپ کا براؤزر کھل جائے گا تاکہ آپ محفوظ طریقے سے سائن ان کر سکیں۔
 shortcuts:
   duplicate_error: اس شارٹ کٹ کو نقل کیا گیا ہے
   enable: بلٹ ان شارٹ کٹ سسٹم کو فعال کریں

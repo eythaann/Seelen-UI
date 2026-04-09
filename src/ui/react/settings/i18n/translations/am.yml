@@ -81,12 +81,20 @@ devtools:
     result_denied: ✗ ፍቃድ ተከልክሏል።
     trigger: አስመስለው
     widget_id_placeholder: '@ደራሲ/መግብር-ስም'
+discord_banner:
+  message: >-
+    ከሌሎች የSeelen UI ተጠቃሚዎች ጋር ይገናኙ፣ እገዛ ያግኙ፣ ገጽታዎችን ያጋሩ እና በቅርብ ዜናዎች እንደተዘመኑ
+    ይቆዩ።
+  title: ማህበረሰባችንን ይቀላቀሉ
 extras:
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
   exit: ማቆም / መውጣት
-  links: ኦፊሴላዊ አገናኞች
   relaunch: እንደገና መነገር
+  streaming_mode: የዥረት ሁነታ
+  streaming_mode_description: >-
+    ሚስጥራዊነት ያለው መረጃ (ለምሳሌ ኢሜይሎች) በሚቀረጹበት ጊዜ ወይም ቅጽበታዊ ገጽ እይታዎች ግላዊነትን ለመጠበቅ በቦታ
+    ያዢዎች ይተካል።
   version: ስሪት
   version_fixed: >-
     አፕሊኬሽኑ እና WebView2 Runtime ስሪቶች ተስተካክለዋል። ይህ ማለት አፕሊኬሽኑ ዝመናዎችን አይቀበልም እና የዌብ
@@ -136,6 +144,7 @@ header:
     monitors: ተቆጣጣሪዎች
     plugin: ተሰኪዎች
     resources: ሀብቶች
+    session: መለያ
     shortcuts: አቋራጮች
     soundpack: የድምፅ ማካካሻዎች
     specific_apps: በቅንብሮች በትግበራ
@@ -148,6 +157,7 @@ home:
 inherit: ውርስ
 inProgress: በሂደት ላይ...
 insert: ያስገቡ
+join_us: ይቀላቀሉን!
 loading: በመጫን ላይ ...
 miscellaneous: ልዩነቶች
 monitors_configurations:
@@ -178,6 +188,11 @@ save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 search: ፈልግ
 see_more: ተጨማሪ ይመልከቱ
+session:
+  logout: ዘግተህ ውጣ
+  plan: እቅድ
+  sign_in: ይግቡ
+  sign_in_hint: ደህንነቱ በተጠበቀ ሁኔታ መግባት እንድትችል አሳሽህ ይከፈታል።
 shortcuts:
   duplicate_error: ይህ አቋራጭ የተባዛ ነው።
   enable: አብሮገነብ አቋራጭ አቋራጭ ስርዓት

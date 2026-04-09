@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Lupa evätty
     trigger: Simuloida
     widget_id_placeholder: '@author/widgetin nimi'
+discord_banner:
+  message: >-
+    Ota yhteyttä muihin Seelen-käyttöliittymän käyttäjiin, hanki apua, jaa
+    teemoja ja pysy ajan tasalla viimeisimmistä uutisista.
+  title: Liity yhteisöömme
 extras:
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
   clear_icons_tooltip: >-
     Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
     täysin voimaan.
   exit: Lopettaa/poistua
-  links: Viralliset linkit
   relaunch: Käynnistää uudelleen
+  streaming_mode: Suoratoistotila
+  streaming_mode_description: >-
+    Korvaa arkaluontoiset tiedot (esim. sähköpostit) paikkamerkeillä
+    yksityisyyden suojaamiseksi tallennuksen tai kuvakaappauksen aikana.
   version: Versio
   version_fixed: >-
     Sovellus ja WebView2 Runtime -versiot ovat kiinteät. Tämä tarkoittaa, että
@@ -142,6 +150,7 @@ header:
     monitors: Näytöt
     plugin: Liitännäiset
     resources: Resurssit
+    session: Tili
     shortcuts: Pikakuvakkeet
     soundpack: Sound Packit
     specific_apps: Asetukset sovelluksen mukaan
@@ -154,6 +163,7 @@ home:
 inherit: Periä
 inProgress: Käynnissä...
 insert: Lisätä
+join_us: Liity meihin!
 loading: Ladataan...
 miscellaneous: Sekalainen
 monitors_configurations:
@@ -188,6 +198,11 @@ save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 search: Haku
 see_more: Katso lisää
+session:
+  logout: Kirjaudu ulos
+  plan: Suunnitelma
+  sign_in: Kirjaudu sisään
+  sign_in_hint: Selaimesi avautuu, jotta voit kirjautua sisään turvallisesti.
 shortcuts:
   duplicate_error: Tämä pikanäppäin on kopioitu
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä

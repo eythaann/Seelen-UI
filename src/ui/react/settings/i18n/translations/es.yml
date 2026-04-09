@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Permiso denegado
     trigger: Simular
     widget_id_placeholder: '@autor/nombre-widget'
+discord_banner:
+  message: >-
+    Conéctese con otros usuarios de Seelen UI, obtenga ayuda, comparta temas y
+    manténgase actualizado con las últimas noticias.
+  title: Únase a nuestra comunidad
 extras:
   clear_icons: Borrar caché de iconos del sistema
   clear_icons_tooltip: >-
     Podría ser necesario reiniciar el sistema para que surta efecto en todos los
     widgets.
   exit: Salir
-  links: Enlaces oficiales
   relaunch: Relanzamiento
+  streaming_mode: Modo de transmisión
+  streaming_mode_description: >-
+    Reemplaza información confidencial (por ejemplo, correos electrónicos) con
+    marcadores de posición para proteger la privacidad durante las grabaciones o
+    capturas de pantalla.
   version: Versión
   version_fixed: >-
     Las versiones de la aplicación y WebView2 Runtime son fijas. Esto significa
@@ -143,6 +152,7 @@ header:
     monitors: Monitores
     plugin: Plugins
     resources: Recursos
+    session: Cuenta
     shortcuts: Atajos
     soundpack: Paquetes de sonido
     specific_apps: Ajustes por aplicación
@@ -155,6 +165,7 @@ home:
 inherit: Heredar
 inProgress: En curso...
 insert: Inserte
+join_us: ¡Únase a nosotros!
 loading: Cargando...
 miscellaneous: Varios
 monitors_configurations:
@@ -189,6 +200,11 @@ save: Guardar
 save_and_restart: Guardar y reiniciar
 search: Buscar
 see_more: Ver más
+session:
+  logout: Desconectar
+  plan: Plan
+  sign_in: Iniciar sesión
+  sign_in_hint: Su navegador se abrirá para que pueda iniciar sesión de forma segura.
 shortcuts:
   duplicate_error: Este atajo está duplicado.
   enable: Habilitar el sistema de accesos directos integrados

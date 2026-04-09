@@ -83,12 +83,21 @@ devtools:
     result_denied: ✗ Permís denegat
     trigger: Simular
     widget_id_placeholder: '@autor/nom-widget'
+discord_banner:
+  message: >-
+    Connecteu-vos amb altres usuaris de la interfície d'usuari de Seelen,
+    obteniu ajuda, compartiu temes i estigueu al dia de les últimes notícies.
+  title: Uneix-te a la nostra comunitat
 extras:
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
   exit: Deixar/sortir
-  links: Enllaços oficials
   relaunch: Rellançar
+  streaming_mode: Mode de streaming
+  streaming_mode_description: >-
+    Substitueix la informació sensible (per exemple, els correus electrònics)
+    per marcadors de posició per protegir la privadesa durant les gravacions o
+    les captures de pantalla.
   version: Versió
   version_fixed: >-
     Les versions de l'aplicació i WebView2 Runtime estan arreglades. Això vol
@@ -142,6 +151,7 @@ header:
     monitors: Monitors
     plugin: Tapins
     resources: Recursos
+    session: Compte
     shortcuts: Dreceres
     soundpack: Paquets de son
     specific_apps: Configuració per aplicació
@@ -154,6 +164,7 @@ home:
 inherit: Heretar
 inProgress: En progrés...
 insert: Inserir
+join_us: Uneix-te a nosaltres!
 loading: Carregant ...
 miscellaneous: Divers
 monitors_configurations:
@@ -188,6 +199,13 @@ save: Estalviar
 save_and_restart: Desar i reiniciar
 search: Cerca
 see_more: Veure més
+session:
+  logout: Tanca la sessió
+  plan: Pla
+  sign_in: Inicieu la sessió
+  sign_in_hint: >-
+    El vostre navegador s'obrirà perquè pugueu iniciar la sessió de manera
+    segura.
 shortcuts:
   duplicate_error: Aquesta drecera està duplicada
   enable: Activa el sistema integrat de dreceres

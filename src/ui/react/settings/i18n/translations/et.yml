@@ -82,12 +82,20 @@ devtools:
     result_denied: ✗ Luba ei antud
     trigger: Simuleerida
     widget_id_placeholder: '@autor/vidina nimi'
+discord_banner:
+  message: >-
+    Võtke ühendust teiste Seeleni kasutajaliidese kasutajatega, hankige abi,
+    jagage teemasid ja olge kursis viimaste uudistega.
+  title: Liituge meie kogukonnaga
 extras:
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
   exit: Lõpeta/väljumine
-  links: Ametlikud lingid
   relaunch: Taaskäivitama
+  streaming_mode: Voogesitusrežiim
+  streaming_mode_description: >-
+    Asendab tundliku teabe (nt meilid) kohahoidjatega, et kaitsta privaatsust
+    salvestamise või ekraanipiltide ajal.
   version: Versioon
   version_fixed: >-
     Rakenduse ja WebView2 Runtime versioonid on fikseeritud. See tähendab, et
@@ -139,6 +147,7 @@ header:
     monitors: Monitorid
     plugin: Plugins
     resources: Ressursid
+    session: konto
     shortcuts: Otseteed
     soundpack: Helipaketid
     specific_apps: Seadistused rakenduse järgi
@@ -151,6 +160,7 @@ home:
 inherit: Pärima
 inProgress: Pooleli ...
 insert: Sisestama
+join_us: Liituge meiega!
 loading: Laadimine ...
 miscellaneous: Mitmesuguseid
 monitors_configurations:
@@ -185,6 +195,11 @@ save: Kokkuhoid
 save_and_restart: Salvesta ja taaskäivitage
 search: Otsi
 see_more: Vaata lähemalt
+session:
+  logout: Logi välja
+  plan: Plaan
+  sign_in: Logi sisse
+  sign_in_hint: Teie brauser avaneb, et saaksite turvaliselt sisse logida.
 shortcuts:
   duplicate_error: See otsetee on dubleeritud
   enable: Luba sisseehitatud otseteede süsteem

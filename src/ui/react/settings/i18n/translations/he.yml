@@ -81,12 +81,20 @@ devtools:
     result_denied: ✗ הרשאה נדחתה
     trigger: לְחַקוֹת
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    התחבר עם משתמשי ממשק משתמש אחרים של Seelen, קבל עזרה, שתף ערכות נושא והישאר
+    מעודכן בחדשות האחרונות.
+  title: הצטרף לקהילה שלנו
 extras:
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
   exit: צא
-  links: קישורים רשמיים
   relaunch: השקה מחדש
+  streaming_mode: מצב סטרימינג
+  streaming_mode_description: >-
+    מחליף מידע רגיש (למשל מיילים) במצייני מיקום כדי להגן על הפרטיות במהלך הקלטות
+    או צילומי מסך.
   version: גרסה
   version_fixed: >-
     גרסאות היישום ו-WebView2 Runtime קבועות. המשמעות היא שהאפליקציה לא תקבל
@@ -136,6 +144,7 @@ header:
     monitors: צגים
     plugin: תוספים
     resources: אֶמְצָעִי
+    session: חֶשְׁבּוֹן
     shortcuts: קיצורי דרך
     soundpack: חבילות סאונד
     specific_apps: הגדרות לפי יישום
@@ -148,6 +157,7 @@ home:
 inherit: ירושה
 inProgress: בתהליך...
 insert: הכנס
+join_us: הצטרפו אלינו!
 loading: טוען...
 miscellaneous: שונות
 monitors_configurations:
@@ -178,6 +188,11 @@ save: להציל
 save_and_restart: שמור והפעלה מחדש
 search: לְחַפֵּשׂ
 see_more: ראה עוד
+session:
+  logout: צא
+  plan: לְתַכְנֵן
+  sign_in: היכנס
+  sign_in_hint: הדפדפן שלך ייפתח כדי שתוכל להיכנס בצורה מאובטחת.
 shortcuts:
   duplicate_error: קיצור זה משוכפל
   enable: אפשר מערכת קיצורי דרך מובנים

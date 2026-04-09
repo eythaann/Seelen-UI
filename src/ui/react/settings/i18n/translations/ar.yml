@@ -81,12 +81,20 @@ devtools:
     result_denied: ✗ تم رفض الإذن
     trigger: محاكاة
     widget_id_placeholder: '@author/اسم القطعة'
+discord_banner:
+  message: >-
+    تواصل مع مستخدمي Seelen UI الآخرين، واحصل على المساعدة، وشارك السمات، وابق
+    على اطلاع على آخر الأخبار.
+  title: انضم إلى مجتمعنا
 extras:
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
   exit: إنهاء/خروج
-  links: الروابط الرسمية
   relaunch: إعادة التشغيل
+  streaming_mode: وضع الدفق
+  streaming_mode_description: >-
+    يستبدل المعلومات الحساسة (مثل رسائل البريد الإلكتروني) بعناصر نائبة لحماية
+    الخصوصية أثناء التسجيلات أو لقطات الشاشة.
   version: الإصدار
   version_fixed: >-
     تم إصلاح إصدارات التطبيق وWebView2 Runtime. وهذا يعني أن التطبيق لن يتلقى
@@ -136,6 +144,7 @@ header:
     monitors: الشاشات
     plugin: المكونات الإضافية
     resources: الموارد
+    session: حساب
     shortcuts: الاختصارات
     soundpack: حزم الصوت
     specific_apps: الإعدادات حسب التطبيق
@@ -148,6 +157,7 @@ home:
 inherit: ورث
 inProgress: قيد التنفيذ...
 insert: أدخل
+join_us: انضم إلينا!
 loading: جاري التحميل...
 miscellaneous: متنوع
 monitors_configurations:
@@ -178,6 +188,11 @@ save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 search: يبحث
 see_more: شاهد المزيد
+session:
+  logout: تسجيل الخروج
+  plan: يخطط
+  sign_in: تسجيل الدخول
+  sign_in_hint: سيتم فتح المتصفح الخاص بك حتى تتمكن من تسجيل الدخول بشكل آمن.
 shortcuts:
   duplicate_error: هذا الاختصار مكرر
   enable: تمكين نظام الاختصارات المدمجة

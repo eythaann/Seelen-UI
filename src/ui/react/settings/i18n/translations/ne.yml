@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ अनुमति अस्वीकार गरियो
     trigger: अनुकरण गर्नुहोस्
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    अन्य Seelen UI प्रयोगकर्ताहरूसँग जडान गर्नुहोस्, मद्दत प्राप्त गर्नुहोस्,
+    विषयवस्तुहरू साझा गर्नुहोस्, र नवीनतम समाचारहरूको साथ अद्यावधिक रहनुहोस्।
+  title: हाम्रो समुदायमा सामेल हुनुहोस्
 extras:
   clear_icons: स्पष्ट प्रणाली आइकनहरू क्यास
   clear_icons_tooltip: 'सबै विजेटहरूमा पूर्ण रूपमा प्रभाव लिनको लागि एक पुन: सुरू गर्न आवश्यक पर्दछ'
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
-  links: आधिकारिक लिंकहरू
   relaunch: पुनःस्था
+  streaming_mode: स्ट्रिमिङ मोड
+  streaming_mode_description: >-
+    रेकर्डिङ वा स्क्रिनसटको समयमा गोपनीयता सुरक्षित गर्न प्लेसहोल्डरहरूसँग
+    संवेदनशील जानकारी (जस्तै इमेलहरू) प्रतिस्थापन गर्दछ।
   version: रुपान्तर
   version_fixed: >-
     अनुप्रयोग र WebView2 रनटाइम संस्करणहरू निश्चित छन्। यसको मतलब यो हो कि
@@ -140,6 +148,7 @@ header:
     monitors: मोनिटरहरू
     plugin: निशम्न
     resources: वस्तुजार
+    session: खाता
     shortcuts: सर्टकटहरू
     soundpack: ध्वनि प्याक
     specific_apps: अनुप्रयोग द्वारा सेटिंग्स
@@ -152,6 +161,7 @@ home:
 inherit: बाबु बाजेबाट पाउनु
 inProgress: प्रगति हुदैछ...
 insert: घुसाउनु
+join_us: हामीसँग सामेल हुनुहोस्!
 loading: लोड गर्दै ...
 miscellaneous: विविघ
 monitors_configurations:
@@ -186,6 +196,11 @@ save: बचाउनु
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
 search: खोज्नुहोस्
 see_more: अझ हेर्नुहोस्
+session:
+  logout: साइन आउट गर्नुहोस्
+  plan: योजना
+  sign_in: साइन इन गर्नुहोस्
+  sign_in_hint: तपाईंको ब्राउजर खुल्नेछ ताकि तपाईं सुरक्षित रूपमा साइन इन गर्न सक्नुहुन्छ।
 shortcuts:
   duplicate_error: यो सर्टकट दोहोरिएको छ
   enable: निर्मित सर्टकट प्रणाली सक्षम गर्नुहोस्

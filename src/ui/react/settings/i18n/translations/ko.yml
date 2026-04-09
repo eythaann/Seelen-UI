@@ -80,12 +80,16 @@ devtools:
     result_denied: ✗ 권한이 거부되었습니다
     trigger: 시뮬레이션
     widget_id_placeholder: '@작성자/위젯 이름'
+discord_banner:
+  message: 다른 Seelen UI 사용자와 연결하고, 도움을 받고, 테마를 공유하고, 최신 뉴스를 받아보세요.
+  title: 우리 커뮤니티에 가입하세요
 extras:
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
   exit: 종료/나가기
-  links: 공식 링크
   relaunch: 다시 시작
+  streaming_mode: 스트리밍 모드
+  streaming_mode_description: '녹화 또는 스크린샷 중에 개인 정보를 보호하기 위해 중요한 정보(예: 이메일)를 자리 표시자로 대체합니다.'
   version: 버전
   version_fixed: >-
     애플리케이션 및 WebView2 런타임 버전이 수정되었습니다. 이는 애플리케이션이 업데이트를 받지 않고 WebView2 Runtime이
@@ -134,6 +138,7 @@ header:
     monitors: 모니터
     plugin: 플러그인
     resources: 리소스
+    session: 계정
     shortcuts: 단축키
     soundpack: 사운드 팩
     specific_apps: 애플리케이션별 설정
@@ -146,6 +151,7 @@ home:
 inherit: 상속
 inProgress: 진행 중...
 insert: 추가
+join_us: 우리와 함께하세요!
 loading: 로딩 중...
 miscellaneous: 기타
 monitors_configurations:
@@ -176,6 +182,11 @@ save: 저장
 save_and_restart: 저장 및 재시작
 search: 찾다
 see_more: 자세히 보기
+session:
+  logout: 로그아웃
+  plan: 계획
+  sign_in: 로그인
+  sign_in_hint: 안전하게 로그인할 수 있도록 브라우저가 열립니다.
 shortcuts:
   duplicate_error: 이 바로가기가 중복되었습니다.
   enable: 내장 단축키 시스템을 활성화하십시오

@@ -82,12 +82,20 @@ devtools:
     result_denied: ✗ İcazə rədd edildi
     trigger: Simulyasiya edin
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Digər Seelen UI istifadəçiləri ilə əlaqə saxlayın, kömək alın, mövzuları
+    paylaşın və ən son xəbərlərdən xəbərdar olun.
+  title: İcmamıza qoşulun
 extras:
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
   exit: Çıxmaq / çıxmaq
-  links: Rəsmi bağlantılar
   relaunch: Başsız
+  streaming_mode: Yayım rejimi
+  streaming_mode_description: >-
+    Qeydlər və ya skrinşotlar zamanı məxfiliyi qorumaq üçün həssas məlumatları
+    (məsələn, e-poçtlar) yer tutucularla əvəz edir.
   version: Versiya
   version_fixed: >-
     Proqram və WebView2 Runtime versiyaları sabitdir. Bu o deməkdir ki, proqram
@@ -139,6 +147,7 @@ header:
     monitors: Monitorlar
     plugin: Plaginlər
     resources: Resurslar
+    session: Hesab
     shortcuts: Qısaylıq
     soundpack: Səs paketləri
     specific_apps: Tətbiq tərəfindən parametrlər
@@ -151,6 +160,7 @@ home:
 inherit: Varis olmaq
 inProgress: Davam edir ...
 insert: Daxil etmək
+join_us: Bizə qoşulun!
 loading: Yükləmə ...
 miscellaneous: Müxtəlif
 monitors_configurations:
@@ -185,6 +195,11 @@ save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 search: Axtar
 see_more: Daha çoxuna baxın
+session:
+  logout: Çıxış
+  plan: Plan
+  sign_in: Daxil ol
+  sign_in_hint: Brauzeriniz açılacaq ki, təhlükəsiz daxil ola biləsiniz.
 shortcuts:
   duplicate_error: Bu qısayol dublikatdır
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin

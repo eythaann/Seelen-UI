@@ -82,12 +82,20 @@ devtools:
     result_denied: ✗ اجازه رد شوه
     trigger: سمول
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    د نورو Seelen UI کاروونکو سره اړیکه ونیسئ، مرسته ترلاسه کړئ، موضوعات شریک
+    کړئ، او د وروستي خبرونو سره تازه اوسئ.
+  title: زموږ په ټولنه کې ګډون وکړئ
 extras:
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
   exit: پریښودل / وتل
-  links: رسمي اړیکې
   relaunch: بیا پیل کول
+  streaming_mode: د جریان حالت
+  streaming_mode_description: >-
+    حساس معلومات (د بیلګې په توګه بریښنالیکونه) د ځای لرونکي سره بدلوي ترڅو د
+    ثبت یا سکرین شاټونو په جریان کې د محرمیت ساتنه وکړي.
   version: نسخه
   version_fixed: >-
     د غوښتنلیک او WebView2 د چلولو نسخه ثابته شوې. دا پدې مانا ده چې غوښتنلیک به
@@ -138,6 +146,7 @@ header:
     monitors: څارونکي
     plugin: فلګونه
     resources: سرچینې
+    session: حساب
     shortcuts: لنډوکونه
     soundpack: غږ کڅوړه
     specific_apps: د غوښتنلیک له مخې تنظیمات
@@ -150,6 +159,7 @@ home:
 inherit: میراث
 inProgress: د پرمختګ په حال کې...
 insert: دننه کړئ
+join_us: له موږ سره یوځای شئ!
 loading: بارول ...
 miscellaneous: متفرقه
 monitors_configurations:
@@ -180,6 +190,11 @@ save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 search: لټون
 see_more: نور وګوره
+session:
+  logout: لاسلیک کول
+  plan: پلان
+  sign_in: ننوتل
+  sign_in_hint: ستاسو براوزر به خلاص شي نو تاسو په خوندي ډول لاسلیک کولی شئ.
 shortcuts:
   duplicate_error: دا شارټ کټ نقل شوی دی
   enable: د جوړ شوي لنډیز سیسټم فعال کړئ

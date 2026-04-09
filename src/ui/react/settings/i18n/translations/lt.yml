@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Leidimas atmestas
     trigger: Imituoti
     widget_id_placeholder: '@autorius/valdiklio pavadinimas'
+discord_banner:
+  message: >-
+    Susisiekite su kitais Seelen UI naudotojais, gaukite pagalbos, bendrinkite
+    temas ir gaukite naujausias naujienas.
+  title: Prisijunkite prie mūsų bendruomenės
 extras:
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
   exit: Mesti/išeiti
-  links: Oficialios nuorodos
   relaunch: Atsikrauti
+  streaming_mode: Srautinio perdavimo režimas
+  streaming_mode_description: >-
+    Pakeičia neskelbtiną informaciją (pvz., el. laiškus) vietos rezervavimo
+    ženklais, kad apsaugotų privatumą įrašant ar ekrano kopijų metu.
   version: Versija
   version_fixed: >-
     Programos ir „WebView2 Runtime“ versijos yra fiksuotos. Tai reiškia, kad
@@ -140,6 +148,7 @@ header:
     monitors: Monitoriai
     plugin: Įskiepiai
     resources: Ištekliai
+    session: sąskaita
     shortcuts: Nuorodos
     soundpack: Garso paketai
     specific_apps: Nustatymai pagal programą
@@ -152,6 +161,7 @@ home:
 inherit: Paveldėti
 inProgress: Vyksta ...
 insert: Įterpti
+join_us: Prisijunk prie mūsų!
 loading: Pakrovimas ...
 miscellaneous: Įvairūs
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 search: Ieškoti
 see_more: Žiūrėti daugiau
+session:
+  logout: Atsijungti
+  plan: Planuoti
+  sign_in: Prisijunkite
+  sign_in_hint: Atsidarys jūsų naršyklė, kad galėtumėte saugiai prisijungti.
 shortcuts:
   duplicate_error: Šis spartusis klavišas pasikartoja
   enable: Įgalinti įmontuotą nuorodų sistemą

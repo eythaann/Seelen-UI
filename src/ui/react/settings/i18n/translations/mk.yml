@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Дозволата е одбиена
     trigger: Симулирајте
     widget_id_placeholder: '@author/виџет-име'
+discord_banner:
+  message: >-
+    Поврзете се со други корисници на Seelen UI, добијте помош, споделувајте
+    теми и бидете во тек со најновите вести.
+  title: Придружете се на нашата заедница
 extras:
   clear_icons: Јасна кеш за икони на системот
   clear_icons_tooltip: >-
     Може да се бара рестартирање за целосно да се стапат на сила на сите
     додатоци
   exit: Откажете/излез
-  links: Официјални врски
   relaunch: Повторно започнување
+  streaming_mode: Режим на стриминг
+  streaming_mode_description: >-
+    Ги заменува чувствителните информации (на пр. е-пораки) со поставки за да ја
+    заштити приватноста за време на снимките или сликите од екранот.
   version: Верзија
   version_fixed: >-
     Апликацијата и верзиите WebView2 Runtime се поправени. Ова значи дека
@@ -142,6 +150,7 @@ header:
     monitors: Монитори
     plugin: Приклучоци
     resources: Ресурси
+    session: Сметка
     shortcuts: Кратенки
     soundpack: Звучни пакувања
     specific_apps: Поставки по апликација
@@ -154,6 +163,7 @@ home:
 inherit: Наследник
 inProgress: Во тек...
 insert: Вметнете
+join_us: Придружете ни се!
 loading: Вчитување ...
 miscellaneous: Различни
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Зачувај
 save_and_restart: Зачувај и рестартирај
 search: Пребарување
 see_more: Погледнете повеќе
+session:
+  logout: Одјавете се
+  plan: Планирајте
+  sign_in: Пријавете се
+  sign_in_hint: Вашиот прелистувач ќе се отвори за да можете безбедно да се најавите.
 shortcuts:
   duplicate_error: Оваа кратенка е дупликат
   enable: Овозможете вграден систем за кратенки

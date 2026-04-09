@@ -82,14 +82,22 @@ devtools:
     result_denied: ✗ Engedély megtagadva
     trigger: Szimulál
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Lépjen kapcsolatba más Seelen UI-felhasználókkal, kérjen segítséget, osszon
+    meg témákat, és maradjon naprakész a legfrissebb hírekről.
+  title: Csatlakozz közösségünkhöz
 extras:
   clear_icons: Rendszerikonok gyorsítótárának törlése
   clear_icons_tooltip: >-
     Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben
     érvénybe lépjen.
   exit: Kilépés/kilépés
-  links: Hivatalos linkek
   relaunch: Újraindít
+  streaming_mode: Streaming mód
+  streaming_mode_description: >-
+    Helyőrzőkkel helyettesíti az érzékeny információkat (pl. e-maileket), hogy
+    megvédje a magánéletet a felvételek vagy képernyőképek közben.
   version: Változat
   version_fixed: >-
     Az alkalmazás és a WebView2 Runtime verziója rögzített. Ez azt jelenti, hogy
@@ -142,6 +150,7 @@ header:
     monitors: Monitorok
     plugin: Plugins
     resources: Források
+    session: fiók
     shortcuts: Parancsikonok
     soundpack: Hang csomagok
     specific_apps: Alkalmazásonkénti beállítások
@@ -154,6 +163,7 @@ home:
 inherit: Örököl
 inProgress: Folyamatban...
 insert: Beilleszt
+join_us: Csatlakozz hozzánk!
 loading: Betöltés...
 miscellaneous: Különféle
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Megment
 save_and_restart: Mentés és újraindítás
 search: Keresés
 see_more: Lásd még
+session:
+  logout: Jelentkezzen ki
+  plan: Terv
+  sign_in: Jelentkezzen be
+  sign_in_hint: Megnyílik a böngészője, így biztonságosan bejelentkezhet.
 shortcuts:
   duplicate_error: Ez a parancsikon megkettőződik
   enable: Engedélyezze a beépített parancsikonok rendszerét

@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Ruxsat rad etildi
     trigger: Simulyatsiya qilish
     widget_id_placeholder: '@muallif/vidjet nomi'
+discord_banner:
+  message: >-
+    Boshqa Seelen UI foydalanuvchilari bilan bog'laning, yordam oling,
+    mavzularni baham ko'ring va so'nggi yangiliklardan xabardor bo'ling.
+  title: Hamjamiyatimizga qo'shiling
 extras:
   clear_icons: Tozalash tizimi piktogrammalari kesh
   clear_icons_tooltip: >-
     Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
     mumkin
   exit: Chiqish / chiqish
-  links: Rasmiy havolalar
   relaunch: Qolma
+  streaming_mode: Oqim rejimi
+  streaming_mode_description: >-
+    Yozuvlar yoki skrinshotlar paytida maxfiylikni himoya qilish uchun maxfiy
+    ma'lumotlarni (masalan, elektron pochta xabarlarini) joy egalari bilan
+    almashtiradi.
   version: Versiya
   version_fixed: >-
     Ilova va WebView2 Runtime versiyalari aniqlangan. Bu shuni anglatadiki,
@@ -143,6 +152,7 @@ header:
     monitors: Monitorlar
     plugin: Plaginlar
     resources: Resurslar
+    session: Hisob
     shortcuts: Yorliqlar
     soundpack: Ovozli paketlar
     specific_apps: Ilova orqali sozlash
@@ -155,6 +165,7 @@ home:
 inherit: Meros qilib olmoq
 inProgress: Jarayonda...
 insert: Qo'shmoq
+join_us: Bizga qo'shiling!
 loading: Yuklash ...
 miscellaneous: Har xil
 monitors_configurations:
@@ -189,6 +200,11 @@ save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 search: Qidiruv
 see_more: Ko'proq ko'rish
+session:
+  logout: Tizimdan chiqish
+  plan: Reja
+  sign_in: Tizimga kirish
+  sign_in_hint: Xavfsiz tizimga kirishingiz uchun brauzeringiz ochiladi.
 shortcuts:
   duplicate_error: Bu yorliq takrorlanadi
   enable: Ichki yorliqlar tizimini yoqing

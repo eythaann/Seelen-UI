@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ अनुमति अस्वीकृत
     trigger: अनुकरण
     widget_id_placeholder: '@लेखक/विजेट-नाम'
+discord_banner:
+  message: >-
+    अन्य सीलेन यूआई उपयोगकर्ताओं से जुड़ें, सहायता प्राप्त करें, थीम साझा करें
+    और नवीनतम समाचारों से अपडेट रहें।
+  title: हमारे समुदाय में शामिल हों
 extras:
   clear_icons: स्पष्ट प्रणाली आइकन कैश
   clear_icons_tooltip: >-
     सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
     है
   exit: छोड़ देना/बाहर निकलना
-  links: आधिकारिक संबंध
   relaunch: 'पुन: लॉन्च'
+  streaming_mode: स्ट्रीमिंग मोड
+  streaming_mode_description: >-
+    रिकॉर्डिंग या स्क्रीनशॉट के दौरान गोपनीयता की सुरक्षा के लिए संवेदनशील
+    जानकारी (जैसे ईमेल) को प्लेसहोल्डर से बदल देता है।
   version: संस्करण
   version_fixed: >-
     एप्लिकेशन और WebView2 रनटाइम संस्करण ठीक हो गए हैं। इसका मतलब यह है कि
@@ -142,6 +150,7 @@ header:
     monitors: पर नज़र रखता है
     plugin: प्लग-इन
     resources: संसाधन
+    session: खाता
     shortcuts: शॉर्टकट
     soundpack: साउंड पैक
     specific_apps: आवेदन द्वारा सेटिंग्स
@@ -154,6 +163,7 @@ home:
 inherit: इनहेरिट
 inProgress: प्रगति पर है...
 insert: डालना
+join_us: हमसे जुड़ें!
 loading: लोड हो रहा है...
 miscellaneous: मिश्रित
 monitors_configurations:
@@ -188,6 +198,11 @@ save: बचाना
 save_and_restart: सहेजें और पुनरारंभ करें
 search: खोज
 see_more: और देखें
+session:
+  logout: साइन आउट
+  plan: योजना
+  sign_in: दाखिल करना
+  sign_in_hint: आपका ब्राउज़र खुल जाएगा ताकि आप सुरक्षित रूप से साइन इन कर सकें।
 shortcuts:
   duplicate_error: यह शॉर्टकट डुप्लिकेट है
   enable: अंतर्निहित शॉर्टकट सिस्टम सक्षम करें

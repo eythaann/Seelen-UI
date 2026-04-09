@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Tilladelse nægtet
     trigger: Simuler
     widget_id_placeholder: '@forfatter/widget-navn'
+discord_banner:
+  message: >-
+    Få forbindelse til andre Seelen UI-brugere, få hjælp, del temaer, og hold
+    dig opdateret med de seneste nyheder.
+  title: Tilmeld dig vores fællesskab
 extras:
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
   exit: Afslut/exit
-  links: Officielle links
   relaunch: Relancering
+  streaming_mode: Streaming tilstand
+  streaming_mode_description: >-
+    Erstatter følsomme oplysninger (f.eks. e-mails) med pladsholdere for at
+    beskytte privatlivets fred under optagelser eller skærmbilleder.
   version: Version
   version_fixed: >-
     Applikationen og WebView2 Runtime-versionerne er faste. Det betyder, at
@@ -140,6 +148,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Ressourcer
+    session: Konto
     shortcuts: Genveje
     soundpack: Lydpakker
     specific_apps: Indstillinger efter applikation
@@ -152,6 +161,7 @@ home:
 inherit: Arve
 inProgress: I gang...
 insert: Indsæt
+join_us: Slut dig til os!
 loading: Indlæser...
 miscellaneous: Diverse
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Gemme
 save_and_restart: Gem & genstart
 search: Søge
 see_more: Se mere
+session:
+  logout: Log ud
+  plan: Plan
+  sign_in: Log ind
+  sign_in_hint: Din browser åbnes, så du kan logge på sikkert.
 shortcuts:
   duplicate_error: Denne genvej er duplikeret
   enable: Aktivér det indbyggede genvejssystem

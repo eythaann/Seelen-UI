@@ -79,12 +79,16 @@ devtools:
     result_denied: ✗ 許可が拒否されました
     trigger: シミュレートする
     widget_id_placeholder: '@作成者/ウィジェット名'
+discord_banner:
+  message: 他の Seelen UI ユーザーとつながり、ヘルプを得たり、テーマを共有したり、最新ニュースを入手したりできます。
+  title: コミュニティに参加してください
 extras:
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
   exit: SeelenUIを終了
-  links: リンク
   relaunch: SeelenUIを再起動
+  streaming_mode: ストリーミングモード
+  streaming_mode_description: 機密情報 (電子メールなど) をプレースホルダーに置き換えて、録画またはスクリーンショット中のプライバシーを保護します。
   version: バージョン
   version_fixed: >-
     アプリケーションとWebView2 Runtimeのバージョンは固定されています。これは、アプリケーションが更新を受信せず、WebView2
@@ -133,6 +137,7 @@ header:
     monitors: モニター
     plugin: プラグイン
     resources: リソース
+    session: アカウント
     shortcuts: ショートカットキー
     soundpack: サウンドパック
     specific_apps: アプリケーション別設定
@@ -145,6 +150,7 @@ home:
 inherit: 継承
 inProgress: 近日実装予定...
 insert: 挿入
+join_us: 参加しませんか！
 loading: 読み込み中...
 miscellaneous: その他
 monitors_configurations:
@@ -175,6 +181,11 @@ save: 保存
 save_and_restart: 保存して再起動
 search: 検索
 see_more: もっと見る
+session:
+  logout: サインアウト
+  plan: プラン
+  sign_in: サインイン
+  sign_in_hint: ブラウザが開くので、安全にサインインできます。
 shortcuts:
   duplicate_error: このショートカットは重複しています
   enable: ビルトインショートカットシステムを有効にします

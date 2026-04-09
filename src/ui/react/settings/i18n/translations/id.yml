@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Izin ditolak
     trigger: Simulasikan
     widget_id_placeholder: '@penulis/nama-widget'
+discord_banner:
+  message: >-
+    Terhubung dengan pengguna Seelen UI lainnya, dapatkan bantuan, berbagi tema,
+    dan ikuti terus berita terkini.
+  title: Bergabunglah dengan Komunitas kami
 extras:
   clear_icons: Menghapus Cache Ikon Sistem
   clear_icons_tooltip: >-
     Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada
     semua widget
   exit: Berhenti/keluar
-  links: Tautan resmi
   relaunch: Peluncuran kembali
+  streaming_mode: Modus Streaming
+  streaming_mode_description: >-
+    Menggantikan informasi sensitif (misalnya email) dengan placeholder untuk
+    melindungi privasi selama perekaman atau tangkapan layar.
   version: 'Versi: kapan'
   version_fixed: >-
     Versi aplikasi dan WebView2 Runtime telah diperbaiki. Artinya aplikasi tidak
@@ -143,6 +151,7 @@ header:
     monitors: Monitor
     plugin: Plugin
     resources: Sumber daya
+    session: Akun
     shortcuts: Pintasan
     soundpack: Paket Suara
     specific_apps: Pengaturan berdasarkan Aplikasi
@@ -155,6 +164,7 @@ home:
 inherit: Mewarisi
 inProgress: Sedang berlangsung...
 insert: Menyisipkan
+join_us: Bergabunglah dengan kami!
 loading: Memuat...
 miscellaneous: Aneka ragam
 monitors_configurations:
@@ -189,6 +199,11 @@ save: Menyimpan
 save_and_restart: Simpan & restart
 search: Mencari
 see_more: Lihat Lebih Lanjut
+session:
+  logout: Keluar
+  plan: Rencana
+  sign_in: Masuk
+  sign_in_hint: Browser Anda akan terbuka sehingga Anda dapat masuk dengan aman.
 shortcuts:
   duplicate_error: Pintasan ini diduplikasi
   enable: Aktifkan sistem pintasan bawaan

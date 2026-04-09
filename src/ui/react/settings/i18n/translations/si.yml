@@ -82,14 +82,22 @@ devtools:
     result_denied: ✗ අවසරය ප්‍රතික්ෂේප විය
     trigger: අනුකරණය කරන්න
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    අනෙකුත් Seelen UI පරිශීලකයන් සමඟ සම්බන්ධ වන්න, උදවු ලබා ගන්න, තේමා බෙදාගන්න,
+    සහ නවතම පුවත් සමඟ යාවත්කාලීනව සිටින්න.
+  title: අපගේ ප්‍රජාවට එක්වන්න
 extras:
   clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
   clear_icons_tooltip: >-
     සියලුම විජට් සඳහා සම්පූර්ණයෙන්ම බලාත්මක වීමට නැවත ආරම්භ කිරීම අවශ්ය විය
     හැකිය
   exit: පිටවීම/පිටවීම
-  links: නිල සබැඳි
   relaunch: නැවත දියත් කරන්න
+  streaming_mode: ප්‍රවාහ ප්‍රකාරය
+  streaming_mode_description: >-
+    පටිගත කිරීම් හෝ තිරපිටපත් අතරතුර පුද්ගලිකත්වය ආරක්ෂා කිරීම සඳහා සංවේදී
+    තොරතුරු (උදා. ඊමේල්) ස්ථාන දරන්නන් සමඟ ප්‍රතිස්ථාපනය කරයි.
   version: පිටපත
   version_fixed: >-
     යෙදුම සහ WebView2 ධාවන කාල අනුවාද සවි කර ඇත. මෙයින් අදහස් වන්නේ යෙදුමට
@@ -140,6 +148,7 @@ header:
     monitors: නිරීක්ෂකයින්
     plugin: ප්ලගීන
     resources: සම්පත්
+    session: ගිණුම
     shortcuts: කෙටිමං
     soundpack: ශබ්ද ඇසුරුම්
     specific_apps: අයදුම්පත අනුව සැකසුම්
@@ -152,6 +161,7 @@ home:
 inherit: උරුම වේ
 inProgress: ප්රගතියේ...
 insert: ඇතුළු කරන්න
+join_us: අප හා එක් වන්න!
 loading: පූරණය වෙමින්...
 miscellaneous: විවිධ
 monitors_configurations:
@@ -184,6 +194,11 @@ save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 search: සොයන්න
 see_more: තවත් බලන්න
+session:
+  logout: වරන්න
+  plan: සැලසුම් කරන්න
+  sign_in: පුරන්න
+  sign_in_hint: ඔබට ආරක්ෂිතව පුරනය වීමට හැකි වන පරිදි ඔබගේ බ්‍රවුසරය විවෘත වනු ඇත.
 shortcuts:
   duplicate_error: මෙම කෙටි මග අනුපිටපත් කර ඇත
   enable: සාදන ලද කෙටිමං පද්ධතියක් සක්රීය කරන්න

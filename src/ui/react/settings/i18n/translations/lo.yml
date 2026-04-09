@@ -81,12 +81,20 @@ devtools:
     result_denied: ✗ ການ​ອະ​ນຸ​ຍາດ​ຖືກ​ປະ​ຕິ​ເສດ​
     trigger: ຈຳລອງ
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    ເຊື່ອມ​ຕໍ່​ກັບ​ຜູ້​ໃຊ້ Seelen UI ຄົນ​ອື່ນ, ຂໍ​ຄວາມ​ຊ່ວຍ​ເຫຼືອ,
+    ແບ່ງ​ປັນ​ຮູບ​ແບບ, ແລະ​ຕິດ​ຕໍ່​ກັບ​ຂ່າວ​ຫລ້າ​ສຸດ.
+  title: ເຂົ້າຮ່ວມຊຸມຊົນຂອງພວກເຮົາ
 extras:
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
   exit: ອອກ/ອອກ
-  links: ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ
   relaunch: ເປີດຄືນໃໝ່
+  streaming_mode: ໂໝດສະຕຣີມ
+  streaming_mode_description: >-
+    ແທນທີ່ຂໍ້ມູນລະອຽດອ່ອນ (ເຊັ່ນ: ອີເມວ)
+    ດ້ວຍຕົວຍຶດບ່ອນເພື່ອປົກປ້ອງຄວາມເປັນສ່ວນຕົວໃນລະຫວ່າງການບັນທຶກ ຫຼືພາບໜ້າຈໍ.
   version: ຮຸ່ນ
   version_fixed: >-
     ແອັບພລິເຄຊັນ ແລະ WebView2 Runtime ເວີຊັ່ນຖືກແກ້ໄຂແລ້ວ.
@@ -138,6 +146,7 @@ header:
     monitors: ຈໍພາບ
     plugin: Plugins
     resources: ຊັບພະຍາກອນ
+    session: ບັນຊີ
     shortcuts: ທາງລັດ
     soundpack: ຊອງສຽງ
     specific_apps: ການຕັ້ງຄ່າໂດຍການສະຫມັກ
@@ -150,6 +159,7 @@ home:
 inherit: ມູນມໍລະດົກ
 inProgress: ຢູ່ໃນຄວາມຄືບໜ້າ...
 insert: ຊອນເຂົ້າ
+join_us: ເຂົ້າຮ່ວມກັບພວກເຮົາ!
 loading: ກຳລັງໂຫລດ...
 miscellaneous: ຫຼາຢ
 monitors_configurations:
@@ -182,6 +192,11 @@ save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 search: ຊອກຫາ
 see_more: ເບິ່ງເພີ່ມເຕີມ
+session:
+  logout: ອອກຈາກລະບົບ
+  plan: ແຜນການ
+  sign_in: ເຂົ້າສູ່ລະບົບ
+  sign_in_hint: ຕົວທ່ອງເວັບຂອງທ່ານຈະເປີດຂຶ້ນເພື່ອໃຫ້ທ່ານສາມາດເຂົ້າສູ່ລະບົບໄດ້ຢ່າງປອດໄພ.
 shortcuts:
   duplicate_error: ທາງລັດນີ້ຊໍ້າກັນ
   enable: ເປີດໃຊ້ລະບົບທາງລັດທີ່ມີຢູ່

@@ -84,14 +84,22 @@ devtools:
     result_denied: Ogolaanshaha waa la diiday
     trigger: Isku day
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Ku xidh isticmaalayaasha kale ee Seelen UI, hel caawimo, wadaag mawduucyada,
+    oo la soco wararkii ugu dambeeyay
+  title: Ku Soo Biir Bulshadeena
 extras:
   clear_icons: Calaamadaha Calaamadaha Camis Cast
   clear_icons_tooltip: >-
     Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo
     dhammaan waxyaabaha widgets
   exit: Jooji / bixitaan
-  links: Xiriirinta rasmiga ah
   relaunch: Dib u beer
+  streaming_mode: Habka socodka
+  streaming_mode_description: >-
+    Waxay ku badashaa macluumaadka xasaasiga ah (tusaale iimaylada)
+    meeleeyayaasha si loo ilaaliyo sirta inta lagu jiro duubista ama shaashadaha
   version: Werin
   version_fixed: >-
     Codsiga iyo nooca Runtime WebView2 waa go'an. Tani waxay ka dhigan tahay in
@@ -144,6 +152,7 @@ header:
     monitors: Kormeerayaasha
     plugin: Pluins
     resources: Kheyraadka
+    session: Xisaab
     shortcuts: Gaaban
     soundpack: Xirmooyinka dhawaaqa
     specific_apps: Dejinta Codsi
@@ -156,6 +165,7 @@ home:
 inherit: Dhaxlid
 inProgress: Horusocod ...
 insert: Gelin
+join_us: nagu soo biir!
 loading: Loading ...
 miscellaneous: Kala duduwan
 monitors_configurations:
@@ -192,6 +202,11 @@ save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 search: Raadi
 see_more: Arag in dheeraad ah
+session:
+  logout: Saxiix
+  plan: Qorshe
+  sign_in: Soo gal
+  sign_in_hint: Barrawsarkaaga ayaa furmi doona si aad si badbaado leh ugu soo gasho
 shortcuts:
   duplicate_error: Jidka gaaban waa la koobiyay
   enable: U fududee nidaamka qaab dhismeedka gaagaaban

@@ -80,12 +80,20 @@ devtools:
     result_denied: ✗ การอนุญาตถูกปฏิเสธ
     trigger: จำลอง
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    เชื่อมต่อกับผู้ใช้ Seelen UI คนอื่นๆ รับความช่วยเหลือ แบ่งปันธีม
+    และติดตามข่าวสารล่าสุด
+  title: เข้าร่วมชุมชนของเรา
 extras:
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
   exit: ออก/ออก
-  links: ลิงค์อย่างเป็นทางการ
   relaunch: เปิดใหม่
+  streaming_mode: โหมดสตรีมมิ่ง
+  streaming_mode_description: >-
+    แทนที่ข้อมูลที่ละเอียดอ่อน (เช่น อีเมล)
+    ด้วยตัวยึดตำแหน่งเพื่อปกป้องความเป็นส่วนตัวระหว่างการบันทึกหรือภาพหน้าจอ
   version: รุ่น
   version_fixed: >-
     เวอร์ชันของแอปพลิเคชันและ WebView2 Runtime ได้รับการแก้ไขแล้ว
@@ -137,6 +145,7 @@ header:
     monitors: จอภาพ
     plugin: ปลั๊กอิน
     resources: ทรัพยากร
+    session: บัญชี
     shortcuts: ทางลัด
     soundpack: ชุดเสียง
     specific_apps: การตั้งค่าโดยแอปพลิเคชัน
@@ -149,6 +158,7 @@ home:
 inherit: สืบทอด
 inProgress: กำลังดำเนินการ...
 insert: แทรก
+join_us: เข้าร่วมกับเรา!
 loading: กำลังโหลด ...
 miscellaneous: เบ็ดเตล็ด
 monitors_configurations:
@@ -179,6 +189,11 @@ save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
 search: ค้นหา
 see_more: ดูเพิ่มเติม
+session:
+  logout: ออกจากระบบ
+  plan: วางแผน
+  sign_in: เข้าสู่ระบบ
+  sign_in_hint: เบราว์เซอร์ของคุณจะเปิดขึ้นเพื่อให้คุณสามารถลงชื่อเข้าใช้ได้อย่างปลอดภัย
 shortcuts:
   duplicate_error: ทางลัดนี้ซ้ำกัน
   enable: เปิดใช้งานระบบทางลัดในตัว

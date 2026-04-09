@@ -1,72 +1,72 @@
-id: Baki Sistem
+ur: سسٹم ٹرے
+sr: Системска трака
+it: Vassoio di sistema
+sv: Systemfältet
+ta: கணினி தட்டு
+pa: ਸਿਸਟਮ ਟਰੇ
+fa: سینی سیستم
+cy: Hambwrdd System
 sk: Systémová lišta
 lt: Sistemos dėklas
-ca: Safata del sistema
-tr: Sistem Tepsisi
-pa: ਸਿਸਟਮ ਟਰੇ
-ku: System Tray
-ps: د سیسټم ټری
-ar: علبة النظام
-hr: Sustavna traka
-ja: システムトレイ
-af: System Tray
-hi: सिस्टम ट्रे
-hu: Rendszertálca
-sr: Системска трака
-ta: கணினி தட்டு
-ur: سسٹم ٹرے
-uk: Системний трей
-ko: 시스템 트레이
-lo: ຖາດລະບົບ
-lb: System Schacht
-eu: Sistemaren erretilua
-bg: Системна област
-pl: Taca systemowa
-es: Bandeja del sistema
-bn: সিস্টেম ট্রে
-ka: სისტემის უჯრა
-sw: Tray ya mfumo
-pt-BR: System Tray
-th: ถาดระบบ
-te: సిస్టమ్ ట్రే
-ne: प्रणाली ट्रे
-ms: Dulang sistem
-de: Systemablage
-mn: Нь хуваалтын үнэгүйз
-ru: Системный трей
-vi: Khay hệ thống
-pt-PT: Bandeja do sistema
-zu: Ugqoko wesistimu
-lv: Sistēmas tekne
-bs: Sistemska traka
-zh-CN: 系统托盘
-yo: Atẹ eto
-mk: Системска фиока
-no: System Tray
-si: පද්ධති තැටිය
-cy: Hambwrdd System
-nl: Systeemvak
 gu: સિસ્ટમ ટ્રે
-tg: Санки система
-fa: سینی سیستم
-so: Nidaamka Tray
-fi: Järjestelmälokero
-ro: Tava de sistem
-km: ថាសប្រព័ន្ធ
 en: System Tray
-tl: System tray
-sv: Systemfältet
-da: Systembakke
-et: Süsteemi salv
-zh-TW: 系統托盤
+hr: Sustavna traka
 fr: Barre d'état système
-el: Δίσκος συστήματος
-is: Kerfisbakki
-az: Sistem tepsisi
-cs: Systémová lišta
-am: የስርዓት ትሪ
-it: Vassoio di sistema
+si: පද්ධති තැටිය
+lb: System Schacht
 he: מגש מערכת
-uz: Tizim patnis
-mt: Trej tas-Sistema
+tr: Sistem Tepsisi
+ms: Dulang sistem
+zh-CN: 系统托盘
+tg: Санки система
+ps: د سیسټم ټری
+de: Systemablage
+is: Kerfisbakki
+ja: システムトレイ
+ku: System Tray
 hy: Համակարգի սկուտեղ
+az: Sistem tepsisi
+uk: Системний трей
+vi: Khay hệ thống
+mk: Системска фиока
+km: ថាសប្រព័ន្ធ
+tl: System tray
+am: የስርዓት ትሪ
+zu: Ugqoko wesistimu
+nl: Systeemvak
+hu: Rendszertálca
+hi: सिस्टम ट्रे
+lo: ຖາດລະບົບ
+lv: Sistēmas tekne
+el: Δίσκος συστήματος
+bs: Sistemska traka
+eu: Sistemaren erretilua
+ne: प्रणाली ट्रे
+mn: Нь хуваалтын үнэгүйз
+yo: Atẹ eto
+pt-BR: System Tray
+bn: সিস্টেম ট্রে
+ca: Safata del sistema
+no: System Tray
+pl: Taca systemowa
+so: Nidaamka Tray
+da: Systembakke
+ru: Системный трей
+bg: Системна област
+et: Süsteemi salv
+ko: 시스템 트레이
+es: Bandeja del sistema
+af: System Tray
+cs: Systémová lišta
+uz: Tizim patnis
+ka: სისტემის უჯრა
+ar: علبة النظام
+th: ถาดระบบ
+id: Baki Sistem
+sw: Tray ya mfumo
+mt: Trej tas-Sistema
+ro: Tava de sistem
+fi: Järjestelmälokero
+zh-TW: 系統托盤
+pt-PT: Bandeja do sistema
+te: సిస్టమ్ ట్రే

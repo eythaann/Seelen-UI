@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Иҷозат рад карда шуд
     trigger: Тақлид кардан
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Бо дигар корбарони Seelen UI пайваст шавед, ёрӣ гиред, мавзӯъҳоро мубодила
+    кунед ва аз хабарҳои охирин огоҳ бошед.
+  title: Ба ҷомеаи мо ҳамроҳ шавед
 extras:
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
   exit: Курат / баромадан
-  links: Истеҳсоли расмӣ
   relaunch: Радкунӣ
+  streaming_mode: Ҳолати ҷараён
+  streaming_mode_description: >-
+    Маълумоти ҳассосро (масалан, почтаи электронӣ) бо ҷойнишинҳо иваз мекунад,
+    то махфият ҳангоми сабт ё скриншотҳоро муҳофизат кунад.
   version: Версия
   version_fixed: >-
     Версияҳои барнома ва WebView2 Runtime собит шудаанд. Ин маънои онро дорад,
@@ -140,6 +148,7 @@ header:
     monitors: Мониторҳо
     plugin: Плагинҳо
     resources: Захираҳо
+    session: Ҳисоб
     shortcuts: Миёнбурҳо
     soundpack: Пойафзолҳои садо
     specific_apps: Танзимот тавассути барнома
@@ -152,6 +161,7 @@ home:
 inherit: Мерос гирифтан
 inProgress: Дар ҷараён...
 insert: Илова кардан
+join_us: Бо мо ҳамроҳ шудан!
 loading: Боркунӣ ...
 miscellaneous: Дигар
 monitors_configurations:
@@ -184,6 +194,11 @@ save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
 search: Ҷустуҷӯ
 see_more: Бештар нигаред
+session:
+  logout: Баромадан
+  plan: План
+  sign_in: Даромад
+  sign_in_hint: Браузери шумо кушода мешавад, то шумо метавонед бехатар ворид шавед.
 shortcuts:
   duplicate_error: Ин миёнабур такрор карда шудааст
   enable: Системаи миёнабурҳои обиро фаъол созед

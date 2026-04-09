@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ ნებართვა უარყოფილია
     trigger: სიმულაცია
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    დაუკავშირდით Seelen UI-ის სხვა მომხმარებლებს, მიიღეთ დახმარება, გააზიარეთ
+    თემები და იყავით განახლებული უახლესი ამბების შესახებ.
+  title: შემოუერთდით ჩვენს საზოგადოებას
 extras:
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
   exit: დატოვება/გასვლა
-  links: ოფიციალური ბმულები
   relaunch: გაუქმება
+  streaming_mode: სტრიმინგის რეჟიმი
+  streaming_mode_description: >-
+    ჩაწერის ან ეკრანის ანაბეჭდების დროს კონფიდენციალურობის დასაცავად სენსიტიურ
+    ინფორმაციას (მაგ. ელფოსტას) ანაცვლებს.
   version: ვერსია
   version_fixed: >-
     აპლიკაციისა და WebView2 Runtime ვერსიები დაფიქსირდა. ეს ნიშნავს, რომ
@@ -140,6 +148,7 @@ header:
     monitors: მონიტორები
     plugin: ამხებო
     resources: რესურსები
+    session: ანგარიში
     shortcuts: მალსახმობები
     soundpack: ხმის პაკეტები
     specific_apps: პარამეტრები აპლიკაციით
@@ -152,6 +161,7 @@ home:
 inherit: მემკვიდრეობით მიღება
 inProgress: Პროგრესირებს...
 insert: ჩასმა
+join_us: შემოგვიერთდით!
 loading: Ჩატვირთვა...
 miscellaneous: შერეული
 monitors_configurations:
@@ -184,6 +194,11 @@ save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 search: ძიება
 see_more: იხილეთ მეტი
+session:
+  logout: გასვლა
+  plan: გეგმავენ
+  sign_in: შესვლა
+  sign_in_hint: თქვენი ბრაუზერი გაიხსნება, რათა უსაფრთხოდ შეხვიდეთ სისტემაში.
 shortcuts:
   duplicate_error: ეს მალსახმობი დუბლირებულია
   enable: ჩართეთ ჩამონტაჟებული მალსახმობების სისტემა

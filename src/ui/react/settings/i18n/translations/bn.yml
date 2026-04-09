@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ অনুমতি অস্বীকৃত
     trigger: অনুকরণ
     widget_id_placeholder: '@লেখক/উইজেট-নাম'
+discord_banner:
+  message: >-
+    অন্যান্য Seelen UI ব্যবহারকারীদের সাথে সংযোগ করুন, সাহায্য পান, থিমগুলি ভাগ
+    করুন এবং সর্বশেষ খবরের সাথে আপ টু ডেট থাকুন৷
+  title: আমাদের সম্প্রদায়ে যোগদান করুন
 extras:
   clear_icons: ক্লিয়ার সিস্টেম আইকন ক্যাশে
   clear_icons_tooltip: >-
     সমস্ত উইজেটগুলিতে পুরোপুরি কার্যকর করার জন্য একটি পুনঃসূচনা প্রয়োজন হতে
     পারে
   exit: প্রস্থান/প্রস্থান
-  links: অফিসিয়াল লিঙ্ক
   relaunch: পুনরায় চালু
+  streaming_mode: স্ট্রিমিং মোড
+  streaming_mode_description: >-
+    রেকর্ডিং বা স্ক্রিনশটের সময় গোপনীয়তা রক্ষা করতে স্থানধারকদের সাথে
+    সংবেদনশীল তথ্য (যেমন ইমেল) প্রতিস্থাপন করে।
   version: সংস্করণ
   version_fixed: >-
     অ্যাপ্লিকেশন এবং WebView2 রানটাইম সংস্করণ স্থির করা হয়েছে। এর মানে হল যে
@@ -142,6 +150,7 @@ header:
     monitors: মনিটর
     plugin: প্লাগইন
     resources: সংস্থান
+    session: হিসাব
     shortcuts: শর্টকাটস
     soundpack: সাউন্ড প্যাকস
     specific_apps: আবেদন দ্বারা সেটিংস
@@ -154,6 +163,7 @@ home:
 inherit: উত্তরাধিকারী
 inProgress: চলমান...
 insert: .োকান
+join_us: আমাদের সাথে যোগ দিন!
 loading: লোড হচ্ছে ...
 miscellaneous: বিবিধ
 monitors_configurations:
@@ -188,6 +198,11 @@ save: সংরক্ষণ
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
 search: অনুসন্ধান করুন
 see_more: আরও দেখুন
+session:
+  logout: সাইন আউট
+  plan: পরিকল্পনা
+  sign_in: সাইন ইন করুন
+  sign_in_hint: আপনার ব্রাউজার খুলবে যাতে আপনি নিরাপদে সাইন ইন করতে পারেন।
 shortcuts:
   duplicate_error: এই শর্টকাট ডুপ্লিকেট করা হয়
   enable: অন্তর্নির্মিত শর্টকাট সিস্টেম সক্ষম করুন

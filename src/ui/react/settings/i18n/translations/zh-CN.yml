@@ -76,12 +76,16 @@ devtools:
     result_denied: ✗ 权限被拒绝
     trigger: 模拟
     widget_id_placeholder: '@作者/小部件名称'
+discord_banner:
+  message: 与其他 Seelen UI 用户联系、获取帮助、分享主题并了解最新消息。
+  title: 加入我们的社区
 extras:
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
   exit: 退出
-  links: 官方链接
   relaunch: 重启应用
+  streaming_mode: 串流模式
+  streaming_mode_description: 用占位符替换敏感信息（例如电子邮件），以在录制或屏幕截图期间保护隐私。
   version: 版本
   version_fixed: 应用程序和 WebView2 运行时版本已修复。这意味着应用程序将不会接收更新，并且 WebView2 运行时也不会随 Windows 更新自动更新。
 general:
@@ -124,6 +128,7 @@ header:
     monitors: 显示器
     plugin: 插件
     resources: 资源
+    session: 帐户
     shortcuts: 快捷键
     soundpack: 音效包
     specific_apps: 按应用设置
@@ -136,6 +141,7 @@ home:
 inherit: 继承
 inProgress: 进行中...
 insert: 插入
+join_us: 加入我们！
 loading: 加载中...
 miscellaneous: 杂项
 monitors_configurations:
@@ -166,6 +172,11 @@ save: 保存
 save_and_restart: 保存并重启
 search: 搜索
 see_more: 查看更多
+session:
+  logout: 登出
+  plan: 计划
+  sign_in: 登入
+  sign_in_hint: 您的浏览器将打开，以便您可以安全登录。
 shortcuts:
   duplicate_error: 该快捷键重复
   enable: 启用内置快捷键系统

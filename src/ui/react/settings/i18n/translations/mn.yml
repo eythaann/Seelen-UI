@@ -82,14 +82,22 @@ devtools:
     result_denied: ✗ Зөвшөөрөл татгалзсан
     trigger: Дуурайх
     widget_id_placeholder: '@зохиогч/виджетийн нэр'
+discord_banner:
+  message: >-
+    Seelen UI-ийн бусад хэрэглэгчидтэй холбогдож, тусламж авч, сэдвүүдийг
+    хуваалцаж, хамгийн сүүлийн үеийн мэдээг авч байгаарай.
+  title: Манай нийгэмлэгт нэгдээрэй
 extras:
   clear_icons: Системийн дүрсийг цэвэрлэх
   clear_icons_tooltip: >-
     Бүх виджет дээр хүчин төгөлдөр болохын тулд дахин эхлүүлэх шаардлагатай байж
     болно
   exit: Гарах / гарах
-  links: Албан ёсны холбоос
   relaunch: OradAUN
+  streaming_mode: Дамжуулах горим
+  streaming_mode_description: >-
+    Бичлэг хийх эсвэл дэлгэцийн агшинг авах үед нууцлалыг хамгаалах үүднээс нууц
+    мэдээллийг (жишээ нь, имэйл) орлуулагчаар солино.
   version: Таамаглал
   version_fixed: >-
     Аппликешн болон WebView2 Runtime хувилбаруудыг зассан. Энэ нь програм нь
@@ -141,6 +149,7 @@ header:
     monitors: Хэлэлт авагч
     plugin: Гарын үсэг
     resources: Ажил
+    session: Данс
     shortcuts: Хэв хаягдал
     soundpack: Дууны багц
     specific_apps: Програмын тохиргоо
@@ -153,6 +162,7 @@ home:
 inherit: Удамших
 inProgress: Явагдаж байна ...
 insert: Оруулах
+join_us: Бидэнтэй нэгдээрэй!
 loading: Ачаалах ...
 miscellaneous: Олон төрлийн
 monitors_configurations:
@@ -185,6 +195,11 @@ save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 search: Хайх
 see_more: Дэлгэрэнгүйг үзэх
+session:
+  logout: Гарах
+  plan: Төлөвлөгөө
+  sign_in: Нэвтрэх
+  sign_in_hint: Таны хөтөч нээгдэх тул та аюулгүйгээр нэвтэрч болно.
 shortcuts:
   duplicate_error: Энэ товчлол нь давхардсан байна
   enable: Баригдсан товчлол системийг идэвхжүүлэх

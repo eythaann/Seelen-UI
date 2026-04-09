@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Tillatelse nektet
     trigger: Simuler
     widget_id_placeholder: '@forfatter/widgetnavn'
+discord_banner:
+  message: >-
+    Koble til andre Seelen UI-brukere, få hjelp, del temaer og hold deg
+    oppdatert med de siste nyhetene.
+  title: Bli med i fellesskapet vårt
 extras:
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
   exit: Avslutt/avslutte
-  links: Offisielle lenker
   relaunch: Relanseres
+  streaming_mode: Strømmemodus
+  streaming_mode_description: >-
+    Erstatter sensitiv informasjon (f.eks. e-poster) med plassholdere for å
+    beskytte personvernet under opptak eller skjermbilder.
   version: Versjon
   version_fixed: >-
     Applikasjonen og WebView2 Runtime-versjonene er fikset. Dette betyr at
@@ -140,6 +148,7 @@ header:
     monitors: Skjermer
     plugin: Plugins
     resources: Ressurser
+    session: Konto
     shortcuts: Snarveier
     soundpack: Lydpakker
     specific_apps: Innstillinger etter søknad
@@ -152,6 +161,7 @@ home:
 inherit: Arve
 inProgress: I prosess...
 insert: Sett inn
+join_us: Bli med oss!
 loading: Laster ...
 miscellaneous: Diverse
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Lagre
 save_and_restart: Lagre og start på nytt
 search: Søk
 see_more: Se mer
+session:
+  logout: Logg ut
+  plan: Plan
+  sign_in: Logg på
+  sign_in_hint: Nettleseren din åpnes slik at du kan logge på sikkert.
 shortcuts:
   duplicate_error: Denne snarveien er duplisert
   enable: Aktiver innebygd snarveisystem

@@ -79,12 +79,20 @@ devtools:
     result_denied: ✗ ਇਜਾਜ਼ਤ ਅਸਵੀਕਾਰ ਕੀਤੀ ਗਈ
     trigger: ਸਿਮੂਲੇਟ
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    ਹੋਰ ਸੀਲੇਨ UI ਉਪਭੋਗਤਾਵਾਂ ਨਾਲ ਜੁੜੋ, ਮਦਦ ਪ੍ਰਾਪਤ ਕਰੋ, ਥੀਮ ਸਾਂਝੇ ਕਰੋ, ਅਤੇ ਨਵੀਨਤਮ
+    ਖਬਰਾਂ ਨਾਲ ਅੱਪ ਟੂ ਡੇਟ ਰਹੋ।
+  title: ਸਾਡੇ ਭਾਈਚਾਰੇ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ
 extras:
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
-  links: ਅਧਿਕਾਰਤ ਲਿੰਕ
   relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
+  streaming_mode: ਸਟ੍ਰੀਮਿੰਗ ਮੋਡ
+  streaming_mode_description: >-
+    ਰਿਕਾਰਡਿੰਗਾਂ ਜਾਂ ਸਕ੍ਰੀਨਸ਼ੌਟਸ ਦੌਰਾਨ ਗੋਪਨੀਯਤਾ ਦੀ ਰੱਖਿਆ ਕਰਨ ਲਈ ਪਲੇਸਹੋਲਡਰਾਂ ਨਾਲ
+    ਸੰਵੇਦਨਸ਼ੀਲ ਜਾਣਕਾਰੀ (ਉਦਾਹਰਨ ਲਈ ਈਮੇਲਾਂ) ਨੂੰ ਬਦਲਦਾ ਹੈ।
   version: ਸੰਸਕਰਣ
   version_fixed: >-
     ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ WebView2 ਰਨਟਾਈਮ ਸੰਸਕਰਣ ਸਥਿਰ ਹਨ। ਇਸਦਾ ਮਤਲਬ ਹੈ ਕਿ ਐਪਲੀਕੇਸ਼ਨ
@@ -136,6 +144,7 @@ header:
     monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
     plugin: ਪਲੱਗਇਨ
     resources: ਸਰੋਤ
+    session: ਖਾਤਾ
     shortcuts: ਸ਼ਾਰਟਕੱਟ
     soundpack: ਧੁਨੀ ਪੈਕ
     specific_apps: ਐਪਲੀਕੇਸ਼ਨ ਦੁਆਰਾ ਸੈਟਿੰਗਾਂ
@@ -148,6 +157,7 @@ home:
 inherit: ਵਿਰਾਸਤ
 inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
 insert: ਸੰਮਿਲਿਤ ਕਰੋ
+join_us: ਸਾਡੇ ਨਾਲ ਸ਼ਾਮਲ!
 loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 miscellaneous: ਫੁਟਕਲ
 monitors_configurations:
@@ -180,6 +190,11 @@ save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 search: ਖੋਜ
 see_more: ਹੋਰ ਦੇਖੋ
+session:
+  logout: ਸਾਇਨ ਆਉਟ
+  plan: ਯੋਜਨਾ
+  sign_in: ਸਾਈਨ - ਇਨ
+  sign_in_hint: ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਤਾਂ ਜੋ ਤੁਸੀਂ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰ ਸਕੋ।
 shortcuts:
   duplicate_error: ਇਹ ਸ਼ਾਰਟਕੱਟ ਡੁਪਲੀਕੇਟ ਹੈ
   enable: ਬਿਲਟ-ਇਨ ਸ਼ਾਰਟਕੱਟ ਸਿਸਟਮ ਨੂੰ ਸਮਰੱਥ ਕਰੋ

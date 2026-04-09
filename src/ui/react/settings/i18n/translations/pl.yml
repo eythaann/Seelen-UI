@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Odmowa pozwolenia
     trigger: Symulować
     widget_id_placeholder: '@autor/nazwa-widgetu'
+discord_banner:
+  message: >-
+    Połącz się z innymi użytkownikami interfejsu Seelen, uzyskaj pomoc,
+    udostępniaj motywy i bądź na bieżąco z najnowszymi wiadomościami.
+  title: Dołącz do naszej społeczności
 extras:
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
   clear_icons_tooltip: >-
     Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
     uruchomienie systemu
   exit: Wyjdź
-  links: Oficjalne linki
   relaunch: Wznów
+  streaming_mode: Tryb przesyłania strumieniowego
+  streaming_mode_description: >-
+    Zastępuje poufne informacje (np. e-maile) symbolami zastępczymi, aby chronić
+    prywatność podczas nagrań lub zrzutów ekranu.
   version: Wersja
   version_fixed: >-
     Wersje aplikacji i środowiska wykonawczego WebView2 zostały naprawione.
@@ -143,6 +151,7 @@ header:
     monitors: Ekrany
     plugin: Wtyczki
     resources: Zasoby
+    session: Konto
     shortcuts: Skróty klawiszowe
     soundpack: Pakiety dźwiękowe
     specific_apps: Ustawienia według aplikacji
@@ -155,6 +164,7 @@ home:
 inherit: Dziedziczyć
 inProgress: W trakcie...
 insert: Wstawić
+join_us: Dołącz do nas!
 loading: Ładowanie...
 miscellaneous: Różnorodny
 monitors_configurations:
@@ -189,6 +199,11 @@ save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 search: Szukaj
 see_more: Zobacz więcej
+session:
+  logout: Wyloguj się
+  plan: Plan
+  sign_in: Zalogować się
+  sign_in_hint: Twoja przeglądarka otworzy się, abyś mógł bezpiecznie się zalogować.
 shortcuts:
   duplicate_error: Ten skrót jest zduplikowany
   enable: Włącz wbudowany system skrótów

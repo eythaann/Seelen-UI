@@ -1,72 +1,72 @@
-sk: Prepínač úloh
-tg: Гузаргоҳи вазифа
-lv: Uzdevumu pārslēdzējs
-mn: Даалгаврын шилжүүлэгч
-uk: Перемикач завдань
-km: អ្នកប្តូរភារកិច្ច
-tr: Görev Değiştirici
-ko: 작업 전환기
-az: Tapşırıq dəyişdiricisi
-he: מחליף משימות
-lo: ເຄື່ອງສໍາຕັ້ງ
-sv: Uppgiftsväxlare
-si: කාර්ය මාරු කරන්නා
-sr: Таск Свитцхер
-zu: Shintshana
-zh-CN: 任务切换器
-no: Oppgavebytter
-am: የተግባር ስዊክ
-sw: Swichi ya kazi
-ka: ამოცანების გადამრთველი
-hu: Feladatváltó
+ar: مبدل المهام
 mt: Task Switcher
-da: Opgaveskifter
-tl: Task switch
-bs: Task Switcher
-ku: Task Switcher
-ur: ٹاسک سوئچر
+bn: টাস্ক সুইচার
+gu: ટાસ્ક સ્વિચર
 id: Pengalih Tugas
-en: Task Switcher
-fi: Task Switcher
 lb: Aufgab Switcher
-ca: Canviador de tasques
-pt-PT: Alternador de tarefas
+sw: Swichi ya kazi
+ps: ټاسک سویچر
+yo: Yipada yipada
+et: Ülesande vahetaja
+bg: Превключвател на задачи
+ne: टास्क स्विचर
+lt: Užduočių perjungiklis
 eu: Zereginen aldatzailea
+sk: Prepínač úloh
+az: Tapşırıq dəyişdiricisi
+el: Εναλλαγή εργασιών
+da: Opgaveskifter
+fr: Sélecteur de tâches
+ru: Переключатель задач
+nl: Taakwisselaar
+es: Cambiador de tareas
+ja: タスクスイッチャー
+sr: Таск Свитцхер
+cs: Přepínač úloh
+he: מחליף משימות
+uz: Vazifa almashtirish
+sv: Uppgiftsväxlare
+de: Aufgabenumschalter
+no: Oppgavebytter
+ro: Comutator de sarcini
+is: Verkefnaskipti
+pl: Przełącznik zadań
+pa: ਟਾਸਕ ਸਵਿੱਚਰ
+ur: ٹاسک سوئچر
+vi: Trình chuyển đổi tác vụ
+lo: ເຄື່ອງສໍາຕັ້ງ
+th: ตัวสลับงาน
+te: టాస్క్ స్విచ్చర్
+ka: ამოცანების გადამრთველი
+fi: Task Switcher
+zh-TW: 任務切換器
+tl: Task switch
+en: Task Switcher
+bs: Task Switcher
+it: Commutatore di attività
 hr: Izmjenjivač zadataka
+tg: Гузаргоҳи вазифа
+pt-BR: Task Switcher
+km: អ្នកប្តូរភារកិច្ច
+zh-CN: 任务切换器
+hi: कार्य स्विचर
+cy: Newidiwr Tasg
+hu: Feladatváltó
+ko: 작업 전환기
+pt-PT: Alternador de tarefas
+si: කාර්ය මාරු කරන්නා
+ta: பணி மாற்றி
+ku: Task Switcher
+af: Taakwisselaar
+mn: Даалгаврын шилжүүлэгч
+so: Wareegtada Wareegtada
+am: የተግባር ስዊክ
 fa: Task Switcher
 mk: Преминувач на задачи
-te: టాస్క్ స్విచ్చర్
-vi: Trình chuyển đổi tác vụ
-es: Cambiador de tareas
-hi: कार्य स्विचर
-th: ตัวสลับงาน
-de: Aufgabenumschalter
-bg: Превключвател на задачи
-ja: タスクスイッチャー
-ta: பணி மாற்றி
-uz: Vazifa almashtirish
-yo: Yipada yipada
-bn: টাস্ক সুইচার
-pa: ਟਾਸਕ ਸਵਿੱਚਰ
-el: Εναλλαγή εργασιών
-cs: Přepínač úloh
-pt-BR: Task Switcher
-nl: Taakwisselaar
-ps: ټاسک سویچر
-cy: Newidiwr Tasg
-ne: टास्क स्विचर
-so: Wareegtada Wareegtada
-is: Verkefnaskipti
-hy: Առաջադրանքների փոխարկիչ
-fr: Sélecteur de tâches
-gu: ટાસ્ક સ્વિચર
-lt: Užduočių perjungiklis
-ru: Переключатель задач
-it: Commutatore di attività
-af: Taakwisselaar
-ro: Comutator de sarcini
-et: Ülesande vahetaja
-ar: مبدل المهام
-zh-TW: 任務切換器
-pl: Przełącznik zadań
+ca: Canviador de tasques
+uk: Перемикач завдань
 ms: Penukar tugas
+zu: Shintshana
+tr: Görev Değiştirici
+lv: Uzdevumu pārslēdzējs
+hy: Առաջադրանքների փոխարկիչ

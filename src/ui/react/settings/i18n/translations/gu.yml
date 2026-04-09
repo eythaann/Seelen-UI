@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ પરવાનગી નકારી
     trigger: અનુકરણ કરો
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    અન્ય Seelen UI વપરાશકર્તાઓ સાથે કનેક્ટ થાઓ, મદદ મેળવો, થીમ્સ શેર કરો અને
+    નવીનતમ સમાચાર સાથે અદ્યતન રહો.
+  title: અમારા સમુદાયમાં જોડાઓ
 extras:
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
   exit: છોડો/બહાર નીકળો
-  links: સત્તાવાર લિંક્સ
   relaunch: ફરીથી લોંચ કરો
+  streaming_mode: સ્ટ્રીમિંગ મોડ
+  streaming_mode_description: >-
+    રેકોર્ડિંગ અથવા સ્ક્રીનશોટ દરમિયાન ગોપનીયતાને સુરક્ષિત રાખવા માટે
+    પ્લેસહોલ્ડર્સ સાથે સંવેદનશીલ માહિતી (દા.ત. ઇમેઇલ્સ) ને બદલે છે.
   version: સંસ્કરણ
   version_fixed: >-
     એપ્લિકેશન અને WebView2 રનટાઇમ સંસ્કરણો નિશ્ચિત છે. આનો અર્થ એ છે કે
@@ -140,6 +148,7 @@ header:
     monitors: મોનિટર
     plugin: તૃણ
     resources: સાધનો
+    session: એકાઉન્ટ
     shortcuts: શૉર્ટકટ્સ
     soundpack: સાચા પેક
     specific_apps: અરજી દ્વારા સેટિંગ્સ
@@ -152,6 +161,7 @@ home:
 inherit: વારસો મેળવવો
 inProgress: ચાલુ છે...
 insert: દાખલ કરવું
+join_us: અમારી સાથે જોડાઓ!
 loading: લોડ કરી રહ્યું છે...
 miscellaneous: પરચુરણ
 monitors_configurations:
@@ -184,6 +194,11 @@ save: સાચવો
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 search: શોધો
 see_more: વધુ જુઓ
+session:
+  logout: સાઇન આઉટ કરો
+  plan: યોજના
+  sign_in: સાઇન ઇન કરો
+  sign_in_hint: તમારું બ્રાઉઝર ખુલશે જેથી તમે સુરક્ષિત રીતે સાઇન ઇન કરી શકો.
 shortcuts:
   duplicate_error: આ શોર્ટકટ ડુપ્લિકેટ છે
   enable: બિલ્ટ-ઇન શ shortc ર્ટકટ્સ સિસ્ટમને સક્ષમ કરો

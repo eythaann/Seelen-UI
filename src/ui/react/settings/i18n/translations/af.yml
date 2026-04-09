@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Toestemming geweier
     trigger: Simuleer
     widget_id_placeholder: '@outeur/legstuknaam'
+discord_banner:
+  message: >-
+    Maak kontak met ander Seelen UI-gebruikers, kry hulp, deel temas en bly op
+    hoogte van die jongste nuus.
+  title: Sluit aan by ons gemeenskap
 extras:
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
   exit: Hou op/uitgang
-  links: Amptelike skakels
   relaunch: Herlaai
+  streaming_mode: Stroommodus
+  streaming_mode_description: >-
+    Vervang sensitiewe inligting (bv. e-posse) met plekhouers om privaatheid
+    tydens opnames of skermkiekies te beskerm.
   version: Weergawe
   version_fixed: >-
     Die toepassing en WebView2 Runtime-weergawes is reggestel. Dit beteken dat
@@ -140,6 +148,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Hulpbronne
+    session: Rekening
     shortcuts: Kortpaaie
     soundpack: Klankpakkies
     specific_apps: Instellings volgens aansoek
@@ -152,6 +161,7 @@ home:
 inherit: Erf
 inProgress: Aan die gang ...
 insert: Invoeg
+join_us: Sluit by ons aan!
 loading: Laai ...
 miscellaneous: Verskillend
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Red
 save_and_restart: Stoor en herbegin
 search: Soek
 see_more: Sien meer
+session:
+  logout: Teken uit
+  plan: Beplan
+  sign_in: Meld aan
+  sign_in_hint: Jou blaaier sal oopmaak sodat jy veilig kan aanmeld.
 shortcuts:
   duplicate_error: Hierdie kortpad is gedupliseer
   enable: Aktiveer ingeboude kortpadstelsel

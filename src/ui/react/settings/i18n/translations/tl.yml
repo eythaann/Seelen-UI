@@ -85,14 +85,22 @@ devtools:
     result_denied: ✗ Tinanggihan ang pahintulot
     trigger: Gayahin
     widget_id_placeholder: '@author/widget-name'
+discord_banner:
+  message: >-
+    Kumonekta sa iba pang user ng Seelen UI, humingi ng tulong, magbahagi ng mga
+    tema, at manatiling napapanahon sa pinakabagong balita.
+  title: Sumali sa aming Komunidad
 extras:
   clear_icons: I -clear ang Mga Icon ng System Cache
   clear_icons_tooltip: >-
     Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
     ang lahat ng mga widget
   exit: Huminto/exit
-  links: Opisyal na mga link
   relaunch: Muling pagsasaayos
+  streaming_mode: Streaming Mode
+  streaming_mode_description: >-
+    Pinapalitan ang sensitibong impormasyon (hal. mga email) ng mga placeholder
+    upang protektahan ang privacy habang nagre-record o mga screenshot.
   version: Bersyon
   version_fixed: >-
     Ang mga bersyon ng application at WebView2 Runtime ay naayos na.
@@ -145,6 +153,7 @@ header:
     monitors: Monitor
     plugin: Plugins
     resources: Mga mapagkukunan
+    session: Account
     shortcuts: Mga shortcut
     soundpack: Mga tunog pack
     specific_apps: Mga setting sa pamamagitan ng application
@@ -157,6 +166,7 @@ home:
 inherit: Magmana
 inProgress: Sa pag -unlad ...
 insert: Ipasok
+join_us: Samahan mo kami!
 loading: Naglo -load ...
 miscellaneous: Miscellaneous
 monitors_configurations:
@@ -193,6 +203,11 @@ save: I -save
 save_and_restart: I -save at i -restart
 search: Maghanap
 see_more: Makita pa
+session:
+  logout: Mag-sign Out
+  plan: Plano
+  sign_in: Mag-sign In
+  sign_in_hint: Magbubukas ang iyong browser upang ligtas kang makapag-sign in.
 shortcuts:
   duplicate_error: Ang shortcut na ito ay nadoble
   enable: Paganahin ang built-in na mga shortcut system

@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Baimena ukatuta
     trigger: Simulatu
     widget_id_placeholder: '@egilea/widget-izena'
+discord_banner:
+  message: >-
+    Konektatu Seelen UI erabiltzaileekin, lortu laguntza, partekatu gaiak eta
+    egon azken berrien berri.
+  title: Sartu gure komunitatean
 extras:
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
   exit: Irten / irten
-  links: Lotura Ofizialak
   relaunch: Errorefrika
+  streaming_mode: Streaming modua
+  streaming_mode_description: >-
+    Informazio sentikorra (adibidez, mezu elektronikoak) leku-markekin
+    ordezkatzen du pribatutasuna babesteko grabaketan edo pantaila-argazkietan.
   version: Bertsio
   version_fixed: >-
     Aplikazioa eta WebView2 Runtime bertsioak konpondu dira. Horrek esan nahi du
@@ -141,6 +149,7 @@ header:
     monitors: Monitore
     plugin: Plakins
     resources: Baliabide
+    session: Kontua
     shortcuts: Lasterbideak
     soundpack: Soinu paketeak
     specific_apps: Ezarpenak aplikazioaren arabera
@@ -153,6 +162,7 @@ home:
 inherit: Jarauntsi
 inProgress: Abian ...
 insert: Txertatu
+join_us: Bat egin gurekin!
 loading: Kargatzen ...
 miscellaneous: Heterogeneo
 monitors_configurations:
@@ -187,6 +197,11 @@ save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 search: Bilatu
 see_more: Ikusi gehiago
+session:
+  logout: Amaitu saioa
+  plan: Plana
+  sign_in: Hasi saioa
+  sign_in_hint: Zure arakatzailea irekiko da, modu seguruan saioa hasteko.
 shortcuts:
   duplicate_error: Lasterbide hau bikoiztuta dago
   enable: Gaitu zuzeneko lasterbideen sistema

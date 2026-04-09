@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Permisiune refuzată
     trigger: Simula
     widget_id_placeholder: '@autor/nume-widget'
+discord_banner:
+  message: >-
+    Conectați-vă cu alți utilizatori Seelen UI, obțineți ajutor, partajați teme
+    și fiți la curent cu cele mai recente știri.
+  title: Alăturați-vă comunității noastre
 extras:
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
   clear_icons_tooltip: >-
     Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
     vigoare
   exit: Renunță/ieșire
-  links: Link -uri oficiale
   relaunch: Relansare
+  streaming_mode: Modul de streaming
+  streaming_mode_description: >-
+    Înlocuiește informațiile sensibile (de exemplu, e-mailurile) cu substituenți
+    pentru a proteja confidențialitatea în timpul înregistrărilor sau capturilor
+    de ecran.
   version: Versiune
   version_fixed: >-
     Aplicația și versiunile WebView2 Runtime sunt remediate. Aceasta înseamnă că
@@ -142,6 +151,7 @@ header:
     monitors: Monitoare
     plugin: Plugin-uri
     resources: Resurse
+    session: Cont
     shortcuts: Comitete rapide
     soundpack: Pachete de sunet
     specific_apps: Setări în funcție de aplicație
@@ -154,6 +164,7 @@ home:
 inherit: Moşteni
 inProgress: În curs...
 insert: Introduce
+join_us: Alăturaţi-ne!
 loading: Se încarcă...
 miscellaneous: Diverse
 monitors_configurations:
@@ -188,6 +199,11 @@ save: Salvați
 save_and_restart: Salvați și reporniți
 search: Căutare
 see_more: A se vedea mai mult
+session:
+  logout: Sign out
+  plan: Plan
+  sign_in: Conectare
+  sign_in_hint: Browserul se va deschide astfel încât să vă puteți conecta în siguranță.
 shortcuts:
   duplicate_error: Această comandă rapidă este duplicată
   enable: Activați sistemul de comenzi rapide încorporate

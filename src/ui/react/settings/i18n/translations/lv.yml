@@ -83,14 +83,22 @@ devtools:
     result_denied: ✗ Atļauja liegta
     trigger: Simulēt
     widget_id_placeholder: '@autors/logrīka nosaukums'
+discord_banner:
+  message: >-
+    Sazinieties ar citiem Seelen UI lietotājiem, saņemiet palīdzību, kopīgojiet
+    motīvus un esiet informēts par jaunākajām ziņām.
+  title: Pievienojieties mūsu kopienai
 extras:
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
   clear_icons_tooltip: >-
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
     logrīkos.
   exit: Atmest/iziet
-  links: Oficiālas saites
   relaunch: Atsākšana
+  streaming_mode: Straumēšanas režīms
+  streaming_mode_description: >-
+    Aizstāj sensitīvu informāciju (piem., e-pastus) ar vietturiem, lai
+    aizsargātu privātumu ierakstu vai ekrānuzņēmumu laikā.
   version: Versija
   version_fixed: >-
     Lietojumprogramma un WebView2 Runtime versijas ir fiksētas. Tas nozīmē, ka
@@ -142,6 +150,7 @@ header:
     monitors: Monitori
     plugin: Spraudņi
     resources: Resursi
+    session: Konts
     shortcuts: Saīsnes
     soundpack: Skaņu paketes
     specific_apps: Iestatījumi pēc lietojumprogrammas
@@ -154,6 +163,7 @@ home:
 inherit: Mantot
 inProgress: Notiek ...
 insert: Ievietot
+join_us: Pievienojies mums!
 loading: Iekraušana ...
 miscellaneous: Dažāds
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 search: Meklēt
 see_more: Skatīt vairāk
+session:
+  logout: Izrakstīties
+  plan: Plāns
+  sign_in: Pierakstīties
+  sign_in_hint: Tiks atvērta jūsu pārlūkprogramma, lai jūs varētu droši pierakstīties.
 shortcuts:
   duplicate_error: Šī saīsne ir dublēta
   enable: Iespējot iebūvēto saīsņu sistēmu

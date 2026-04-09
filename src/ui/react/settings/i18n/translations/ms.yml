@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Kebenaran ditolak
     trigger: Simulasikan
     widget_id_placeholder: '@nama pengarang/widget'
+discord_banner:
+  message: >-
+    Berhubung dengan pengguna UI Seelen yang lain, dapatkan bantuan, kongsi tema
+    dan kekalkan perkembangan terkini dengan berita terkini.
+  title: Sertai Komuniti kami
 extras:
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
   exit: Berhenti/keluar
-  links: Pautan Rasmi
   relaunch: Pelancaran semula
+  streaming_mode: Mod Penstriman
+  streaming_mode_description: >-
+    Menggantikan maklumat sensitif (cth. e-mel) dengan ruang letak untuk
+    melindungi privasi semasa rakaman atau tangkapan skrin.
   version: Versi
   version_fixed: >-
     Aplikasi dan versi WebView2 Runtime telah ditetapkan. Ini bermakna bahawa
@@ -140,6 +148,7 @@ header:
     monitors: Monitor
     plugin: Plugin
     resources: Sumber
+    session: Akaun
     shortcuts: Pintasan
     soundpack: Pek bunyi
     specific_apps: Tetapan dengan permohonan
@@ -152,6 +161,7 @@ home:
 inherit: Mewarisi
 inProgress: Dalam proses ...
 insert: Masukkan
+join_us: Sertai kami!
 loading: Memuatkan ...
 miscellaneous: Pelbagai
 monitors_configurations:
@@ -186,6 +196,11 @@ save: Simpan
 save_and_restart: Jimat & mulakan semula
 search: Cari
 see_more: Lihat lagi
+session:
+  logout: Log Keluar
+  plan: Rancang
+  sign_in: Log Masuk
+  sign_in_hint: Penyemak imbas anda akan dibuka supaya anda boleh log masuk dengan selamat.
 shortcuts:
   duplicate_error: Pintasan ini diduplikasi
   enable: Dayakan sistem pintasan terbina dalam

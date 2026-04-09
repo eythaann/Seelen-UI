@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Autorizzazione negata
     trigger: Simulare
     widget_id_placeholder: '@autore/nome-widget'
+discord_banner:
+  message: >-
+    Connettiti con altri utenti dell'interfaccia utente Seelen, ottieni
+    assistenza, condividi temi e rimani aggiornato con le ultime notizie.
+  title: Unisciti alla nostra comunità
 extras:
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
   exit: Esci
-  links: Link Ufficiali
   relaunch: Riavvia
+  streaming_mode: Modalità streaming
+  streaming_mode_description: >-
+    Sostituisce le informazioni sensibili (ad esempio e-mail) con segnaposto per
+    proteggere la privacy durante le registrazioni o gli screenshot.
   version: Versione
   version_fixed: >-
     Le versioni dell'applicazione e del runtime WebView2 sono fisse. Ciò
@@ -142,6 +150,7 @@ header:
     monitors: Monitor
     plugin: Plugin
     resources: Risorse
+    session: Account
     shortcuts: Scorciatoie
     soundpack: Pacchetti di suoni
     specific_apps: Impostazioni per applicazione
@@ -154,6 +163,7 @@ home:
 inherit: Eredita
 inProgress: In corso...
 insert: Inserisci
+join_us: Unisciti a noi!
 loading: Caricamento...
 miscellaneous: Varie
 monitors_configurations:
@@ -190,6 +200,11 @@ save: Salva
 save_and_restart: Salva e Riavvia
 search: Ricerca
 see_more: Per saperne di più
+session:
+  logout: Disconnessione
+  plan: Piano
+  sign_in: Registrazione
+  sign_in_hint: Il tuo browser si aprirà per consentirti di accedere in modo sicuro.
 shortcuts:
   duplicate_error: Questa scorciatoia è duplicata
   enable: Abilita le scorciatoie integrate

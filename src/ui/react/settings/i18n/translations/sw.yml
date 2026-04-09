@@ -82,12 +82,20 @@ devtools:
     result_denied: ✗ Ruhusa imekataliwa
     trigger: Iga
     widget_id_placeholder: '@mwandishi/wijeti-jina'
+discord_banner:
+  message: >-
+    Ungana na watumiaji wengine wa Seelen UI, pata usaidizi, shiriki mandhari na
+    usasishe habari za hivi punde.
+  title: Jiunge na Jumuiya yetu
 extras:
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
   exit: Acha/exit
-  links: Viungo rasmi
   relaunch: Kuzindua tena
+  streaming_mode: Hali ya Kutiririsha
+  streaming_mode_description: >-
+    Hubadilisha maelezo nyeti (k.m. barua pepe) na vishikilia nafasi ili kulinda
+    faragha wakati wa kurekodi au kupiga picha za skrini.
   version: Toleo
   version_fixed: >-
     Programu na matoleo ya WebView2 Runtime yamerekebishwa. Hii ina maana kwamba
@@ -139,6 +147,7 @@ header:
     monitors: Wachunguzi
     plugin: Programu -jalizi
     resources: Rasilimali
+    session: Akaunti
     shortcuts: Njia za mkato
     soundpack: Pakiti za sauti
     specific_apps: Mipangilio na Maombi
@@ -151,6 +160,7 @@ home:
 inherit: Urithi
 inProgress: Inaendelea...
 insert: Ingiza
+join_us: Jiunge nasi!
 loading: Inapakia ...
 miscellaneous: Miscellaneous
 monitors_configurations:
@@ -183,6 +193,11 @@ save: Kuokoa
 save_and_restart: Okoa na uanze tena
 search: Tafuta
 see_more: Tazama zaidi
+session:
+  logout: Ondoka
+  plan: Mpango
+  sign_in: Ingia
+  sign_in_hint: Kivinjari chako kitafunguka ili uweze kuingia kwa usalama.
 shortcuts:
   duplicate_error: Njia hii ya mkato imerudiwa
   enable: Wezesha mfumo wa mkato uliojengwa ndani

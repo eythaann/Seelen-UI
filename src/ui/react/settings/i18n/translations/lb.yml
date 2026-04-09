@@ -83,12 +83,20 @@ devtools:
     result_denied: ✗ Erlaabnis refuséiert
     trigger: Simuléieren
     widget_id_placeholder: '@auteur/widget-name'
+discord_banner:
+  message: >-
+    Connectéiert mat anere Seelen UI Benotzer, kritt Hëllef, deelt Themen a
+    bleift um neisten Neiegkeeten.
+  title: Maacht mat bei eiser Gemeinschaft
 extras:
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
   exit: Ophalen / erausfannen
-  links: Offiziell Linken
   relaunch: Relatioun
+  streaming_mode: Streaming Modus
+  streaming_mode_description: >-
+    Ersetzt sensibel Informatioun (zB E-Mailen) mat Plazhalter fir Privatsphär
+    während Opzeechnungen oder Screenshots ze schützen.
   version: Erëm
   version_fixed: >-
     D'Applikatioun an d'WebView2 Runtime Versioune si fixéiert. Dëst bedeit datt
@@ -140,6 +148,7 @@ header:
     monitors: Iwwerschwannegkeeten
     plugin: Plugins
     resources: Ressourcen
+    session: Kont
     shortcuts: Ofkierpsen
     soundpack: Tounpacken
     specific_apps: Astellunge per Uwendung
@@ -152,6 +161,7 @@ home:
 inherit: Ontherrit
 inProgress: A Beaarbechtung...
 insert: INor andafen
+join_us: Maacht mat!
 loading: Lueden ...
 miscellaneous: Erleeën
 monitors_configurations:
@@ -184,6 +194,11 @@ save: Spuerwäit
 save_and_restart: Spuert & nei starten
 search: Sichen
 see_more: Méi gesinn
+session:
+  logout: Zeechen Aus
+  plan: Plang
+  sign_in: Umellen
+  sign_in_hint: Äre Browser wäert opmaachen fir datt Dir Iech sécher aloggen kënnt.
 shortcuts:
   duplicate_error: Dës Ofkiirzung gëtt duplizéiert
   enable: Aktivéiert agebaut-in Shortcuts System

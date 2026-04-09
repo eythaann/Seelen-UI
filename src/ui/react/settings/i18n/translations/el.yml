@@ -84,12 +84,20 @@ devtools:
     result_denied: ✗ Δεν επιτρέπεται η άδεια
     trigger: Προσποιούμαι
     widget_id_placeholder: '@συγγραφέας/όνομα γραφικού στοιχείου'
+discord_banner:
+  message: >-
+    Συνδεθείτε με άλλους χρήστες του Seelen UI, λάβετε βοήθεια, μοιραστείτε
+    θέματα και μείνετε ενημερωμένοι με τα τελευταία νέα.
+  title: Εγγραφείτε στην Κοινότητά μας
 extras:
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
   exit: Εγκατάλειψη/έξοδο
-  links: Επίσημοι σύνδεσμοι
   relaunch: Ξεκίνησα ξανά
+  streaming_mode: Λειτουργία ροής
+  streaming_mode_description: >-
+    Αντικαθιστά ευαίσθητες πληροφορίες (π.χ. email) με σύμβολα κράτησης θέσης
+    για την προστασία του απορρήτου κατά τις εγγραφές ή τα στιγμιότυπα οθόνης.
   version: Εκδοχή
   version_fixed: >-
     Η εφαρμογή και η έκδοση WebView2 Runtime έχουν επιδιορθωθεί. Αυτό σημαίνει
@@ -141,6 +149,7 @@ header:
     monitors: Παρακολουθεί
     plugin: Plugins
     resources: Πόροι
+    session: Λογαριασμός
     shortcuts: Συντομεύσεις
     soundpack: Πακέτα ήχου
     specific_apps: Ρυθμίσεις ανά εφαρμογή
@@ -153,6 +162,7 @@ home:
 inherit: Κληρονομώ
 inProgress: Σε εξέλιξη...
 insert: Εισάγω
+join_us: Ελάτε μαζί μας!
 loading: Φόρτωση...
 miscellaneous: Ανάμικτος
 monitors_configurations:
@@ -189,6 +199,13 @@ save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
 search: Ερευνα
 see_more: Δείτε περισσότερα
+session:
+  logout: Αποσύνδεση
+  plan: Σχέδιο
+  sign_in: Είσοδος
+  sign_in_hint: >-
+    Το πρόγραμμα περιήγησής σας θα ανοίξει για να μπορείτε να συνδεθείτε με
+    ασφάλεια.
 shortcuts:
   duplicate_error: Αυτή η συντόμευση είναι διπλότυπη
   enable: Ενεργοποίηση ενσωματωμένου συστήματος συντομεύσεων

@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Autorisation refusée
     trigger: Simuler
     widget_id_placeholder: '@auteur/nom-widget'
+discord_banner:
+  message: >-
+    Connectez-vous avec d'autres utilisateurs de Seelen UI, obtenez de l'aide,
+    partagez des thèmes et restez informé des dernières nouvelles.
+  title: Rejoignez notre communauté
 extras:
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
     Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
     widgets
   exit: Quitter
-  links: Liens officiels
   relaunch: Redémarrer Seelen UI
+  streaming_mode: Mode diffusion
+  streaming_mode_description: >-
+    Remplace les informations sensibles (par exemple les e-mails) par des
+    espaces réservés pour protéger la confidentialité lors des enregistrements
+    ou des captures d'écran.
   version: Version
   version_fixed: >-
     Les versions de l'application et de WebView2 Runtime sont corrigées. Cela
@@ -144,6 +153,7 @@ header:
     monitors: Moniteurs
     plugin: Plugins
     resources: Ressources
+    session: Compte
     shortcuts: Raccourcis
     soundpack: Paquets de sons
     specific_apps: Paramètres par application
@@ -156,6 +166,7 @@ home:
 inherit: Hériter
 inProgress: En cours...
 insert: Insérer
+join_us: Rejoignez-nous !
 loading: Chargement...
 miscellaneous: Divers
 monitors_configurations:
@@ -190,6 +201,13 @@ save: Enregistrer
 save_and_restart: Enregistrer et redémarrer
 search: Recherche
 see_more: Voir plus
+session:
+  logout: Se déconnecter
+  plan: Plan
+  sign_in: Se connecter
+  sign_in_hint: >-
+    Votre navigateur s'ouvrira pour que vous puissiez vous connecter en toute
+    sécurité.
 shortcuts:
   duplicate_error: Ce raccourci est dupliqué
   enable: Activer le système de raccourcis intégrés

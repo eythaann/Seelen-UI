@@ -83,14 +83,23 @@ devtools:
     result_denied: ✗ Erlaubnis verweigert
     trigger: Simulieren
     widget_id_placeholder: '@Autor/Widget-Name'
+discord_banner:
+  message: >-
+    Vernetzen Sie sich mit anderen Benutzern der Seelen-Benutzeroberfläche,
+    erhalten Sie Hilfe, tauschen Sie Themen aus und bleiben Sie über die
+    neuesten Nachrichten auf dem Laufenden.
+  title: Treten Sie unserer Community bei
 extras:
   clear_icons: System-Symbol-Cache löschen
   clear_icons_tooltip: >-
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
     aktivieren.
   exit: Beenden
-  links: Offizielle Links
   relaunch: Neu starten
+  streaming_mode: Streaming-Modus
+  streaming_mode_description: >-
+    Ersetzt sensible Informationen (z. B. E-Mails) durch Platzhalter, um die
+    Privatsphäre bei Aufzeichnungen oder Screenshots zu schützen.
   version: Version
   version_fixed: >-
     Die Anwendungs- und WebView2-Runtime-Versionen sind behoben. Dies bedeutet,
@@ -142,6 +151,7 @@ header:
     monitors: Monitore
     plugin: Plugins
     resources: Ressourcen
+    session: Konto
     shortcuts: Kurzbefehle
     soundpack: Sound Packs
     specific_apps: Einstellungen nach Anwendung
@@ -154,6 +164,7 @@ home:
 inherit: Erben
 inProgress: In Bearbeitung...
 insert: Einfügen
+join_us: Begleiten Sie uns!
 loading: Am Laden...
 miscellaneous: Verschiedenes
 monitors_configurations:
@@ -190,6 +201,11 @@ save: Speichern
 save_and_restart: Speichern & neu starten
 search: Suchen
 see_more: Mehr sehen
+session:
+  logout: Abmelden
+  plan: Planen
+  sign_in: Anmelden
+  sign_in_hint: Ihr Browser wird geöffnet, sodass Sie sich sicher anmelden können.
 shortcuts:
   duplicate_error: Diese Verknüpfung ist dupliziert
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem

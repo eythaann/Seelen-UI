@@ -81,12 +81,20 @@ devtools:
     result_denied: ✗ Ti kọ igbanilaaye
     trigger: Ṣe afarawe
     widget_id_placeholder: '@author / ailorukọ-orukọ'
+discord_banner:
+  message: >-
+    Sopọ pẹlu awọn olumulo Seelen UI miiran, gba iranlọwọ, pin awọn akori, ki o
+    duro titi di oni pẹlu awọn iroyin tuntun.
+  title: Darapọ mọ Agbegbe wa
 extras:
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
   exit: Duro / Jade
-  links: Awọn ọna asopọ osise
   relaunch: Ṣadi
+  streaming_mode: Ipo ṣiṣanwọle
+  streaming_mode_description: >-
+    Rọpo alaye ifarabalẹ (fun apẹẹrẹ awọn imeeli) pẹlu awọn oniduro lati daabobo
+    ikọkọ lakoko awọn gbigbasilẹ tabi awọn sikirinisoti.
   version: Ẹya
   version_fixed: >-
     Ohun elo naa ati awọn ẹya asiko ṣiṣe WebView2 jẹ ti o wa titi. Eyi tumọ si
@@ -137,6 +145,7 @@ header:
     monitors: Awọn diirarito
     plugin: Afikun
     resources: Awọn orisun
+    session: Iroyin
     shortcuts: Awọn ọna abuja
     soundpack: Awọn akopọ ohun
     specific_apps: Eto nipasẹ ohun elo
@@ -149,6 +158,7 @@ home:
 inherit: Jogun
 inProgress: Ni ilọsiwaju ...
 insert: Fisi
+join_us: Darapo mo wa!
 loading: Loading ...
 miscellaneous: Oriṣiriṣi
 monitors_configurations:
@@ -181,6 +191,11 @@ save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 search: Wa
 see_more: Wo diẹ sii
+session:
+  logout: Ifowosi jada
+  plan: Ètò
+  sign_in: Wọle
+  sign_in_hint: Aṣàwákiri rẹ yoo ṣii ki o le wọle ni aabo.
 shortcuts:
   duplicate_error: Ọna abuja yii jẹ pidánpidán
   enable: Mu ṣiṣẹ eto awọn ọna abuja
