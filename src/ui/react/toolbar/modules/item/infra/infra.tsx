@@ -115,6 +115,10 @@ function SortableInnerItem({ module, index, extraVars }: SortableInnerItemProps)
     modifiers: [RestrictToHorizontalAxis],
   });
 
+  if (module.id.startsWith("hardcoded-separator")) {
+    return <div ref={ref} className="ft-bar-separator" />;
+  }
+
   return (
     <InnerItem
       module={module}

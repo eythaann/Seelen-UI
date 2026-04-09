@@ -18,5 +18,6 @@ return Group({
   style: {
     display: "flex",
     gap: "0.75rem",
+    padding: "0 var(--item-padding)",
   },
 });

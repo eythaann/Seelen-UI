@@ -23,14 +23,14 @@ export const HARDCODED_SEPARATOR_LEFT: ToolbarItem = {
   ...baseItem,
   id: "hardcoded-separator-1",
   template: 'return " "',
-  style: { flexShrink: 0 },
+  style: { flexShrink: 0, opacity: 0 },
 };
 
 export const HARDCODED_SEPARATOR_RIGHT: ToolbarItem = {
   ...baseItem,
   id: "hardcoded-separator-2",
   template: 'return " "',
-  style: { flexShrink: 0 },
+  style: { flexShrink: 0, opacity: 0 },
 };
 
 function splitItems(items: ToolbarItem2[]) {
