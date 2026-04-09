@@ -24,6 +24,7 @@
 - shortcuts stoping working as expected.
 - dock and toolbar not hidding after change settings.
 - popups and overlays rarely not being always on top.
+- popups overflowing monitor on auto resize.
 
 ## [2.5.7]
 

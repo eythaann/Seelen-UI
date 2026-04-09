@@ -19,6 +19,12 @@ export interface InitWidgetOptions {
    */
   autoSizeByContent?: HTMLElement | null;
   /**
+   * If autoSizeByContent is set, and this is true, will auto size the widget and
+   * adjusts the position to fit on screen
+   * @default true
+   */
+  autoSizeFitOnScreen?: boolean;
+  /**
    * Will save the position and size of the widget on change.
    * This is intedeed to be used when the size and position of the widget is
    * allowed to be changed by the user, Normally used on desktop widgets.

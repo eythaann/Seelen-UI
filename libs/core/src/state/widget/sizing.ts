@@ -1,6 +1,7 @@
 import type { Widget } from "./mod.ts";
 import { Alignment } from "@seelen-ui/types";
 import { Mutex } from "../../utils/async.ts";
+import { fitIntoMonitor } from "./positioning.ts";
 
 class OptimisiticFrame {
   x: number = 0;
@@ -44,6 +45,7 @@ export class WidgetAutoSizer {
   constructor(
     private widget: Widget,
     private element: HTMLElement,
+    private fitOnScreen: boolean,
   ) {
     this.execute = this.execute.bind(this);
     this.setup();
@@ -74,7 +76,7 @@ export class WidgetAutoSizer {
     const guard = await OPTIMISTIC_FRAME.acquire();
     const { x, y, width, height } = guard.value;
 
-    const frame = {
+    let frame = {
       x,
       y,
       width: Math.ceil(this.element.scrollWidth * globalThis.window.devicePixelRatio),
@@ -104,6 +106,10 @@ export class WidgetAutoSizer {
       frame.y -= heightDiff / 2;
     } else if (this.originY === Alignment.End) {
       frame.y -= heightDiff;
+    }
+
+    if (this.fitOnScreen) {
+      frame = fitIntoMonitor(frame);
     }
 
     try {

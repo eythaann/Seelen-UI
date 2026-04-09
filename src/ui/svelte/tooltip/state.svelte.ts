@@ -12,9 +12,9 @@ Widget.self.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) =>
 
   if (desiredPosition) {
     await Widget.self.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
+    invoke(SeelenCommand.BringSelfToTop);
   }
 
-  invoke(SeelenCommand.BringSelfToTop);
   text = String(customArgs?.text ?? "") || null;
   showing = true;
 });

@@ -105,13 +105,13 @@ export class Widget {
   }
 
   /** Will apply the recommended settings for a desktop widget */
-  private applyDesktopPreset() {}
+  private applyDesktopPreset(): void {}
 
   /** Will apply the recommended settings for an overlay widget */
-  private applyOverlayPreset() {}
+  private applyOverlayPreset(): void {}
 
   /** Will apply the recommended settings for a popup widget */
-  private applyPopupPreset() {
+  private applyPopupPreset(): void {
     const hideWidget = debounce(() => {
       this.hide(true);
     }, 100);
@@ -196,7 +196,11 @@ export class Widget {
     this.runtimeState.initialized = true;
 
     if (options.autoSizeByContent) {
-      this.autoSizer = new WidgetAutoSizer(this, options.autoSizeByContent);
+      this.autoSizer = new WidgetAutoSizer(
+        this,
+        options.autoSizeByContent,
+        options.autoSizeFitOnScreen ?? true,
+      );
     } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
       await this.persistPositionAndSize();
     }
