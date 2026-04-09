@@ -6,6 +6,7 @@
 
 - allows login with Seelen account from settings.
 - streaming mode to hide sensitive information to widgets.
+- reusable tooltip widget.
 
 ### enh
 
@@ -22,6 +23,7 @@
 - service not restarting the app on crash.
 - shortcuts stoping working as expected.
 - dock and toolbar not hidding after change settings.
+- popups and overlays rarely not being always on top.
 
 ## [2.5.7]
 

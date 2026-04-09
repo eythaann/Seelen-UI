@@ -26,7 +26,7 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
     }
   }
 
-  function onClose(e: TargetedMouseEvent<HTMLDivElement>) {
+  function onClose(e: TargetedMouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     invoke(SeelenCommand.WegCloseApp, { hwnd });
   }
@@ -35,9 +35,9 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
     <div className="weg-item-preview" onClick={onClick} onAuxClick={onAuxClick}>
       <div className="weg-item-preview-topbar">
         <div className="weg-item-preview-title">{title}</div>
-        <div className="weg-item-preview-close" onClick={onClose}>
+        <button data-skin="transparent" onClick={onClose}>
           <Icon iconName="IoClose" />
-        </div>
+        </button>
       </div>
       <div className="weg-item-preview-image-container">
         {preview

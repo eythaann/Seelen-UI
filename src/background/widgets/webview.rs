@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use base64::Engine;
 use seelen_core::{
     resource::WidgetId,
-    state::{Widget, WidgetLoader},
+    state::{Widget, WidgetLoader, WidgetPreset},
 };
 
 use crate::{
@@ -43,14 +43,38 @@ impl WidgetWebview {
             }
         };
 
-        let window: tauri::WebviewWindow =
-            tauri::WebviewWindowBuilder::new(get_app_handle(), &label.raw, url)
-                .title(title)
-                .transparent(true)
-                .visible(false)
-                .data_directory(args.data_directory())
-                .additional_browser_args(&args.to_string())
-                .build()?;
+        let mut builder = tauri::WebviewWindowBuilder::new(get_app_handle(), &label.raw, url)
+            .title(title)
+            .transparent(true)
+            .visible(false);
+
+        if matches!(
+            widget.preset,
+            WidgetPreset::Desktop | WidgetPreset::Overlay | WidgetPreset::Popup
+        ) {
+            builder = builder
+                .decorations(false)
+                .shadow(false)
+                .skip_taskbar(true)
+                .minimizable(false)
+                .maximizable(false)
+                .closable(false)
+        }
+
+        match widget.preset {
+            WidgetPreset::Desktop => {
+                builder = builder.always_on_bottom(true);
+            }
+            WidgetPreset::Overlay | WidgetPreset::Popup => {
+                builder = builder.always_on_top(true);
+            }
+            _ => {}
+        }
+
+        let window = builder
+            .data_directory(args.data_directory())
+            .additional_browser_args(&args.to_string())
+            .build()?;
 
         Ok(Self(window))
     }

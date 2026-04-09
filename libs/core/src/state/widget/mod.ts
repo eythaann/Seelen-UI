@@ -1,4 +1,5 @@
 import {
+  type Alignment,
   type Frame,
   type Rect,
   type ThirdPartyWidgetSettings,
@@ -13,7 +14,7 @@ import {
 import { invoke, SeelenCommand, SeelenEvent } from "../../handlers/mod.ts";
 import { decodeBase64Url } from "@std/encoding";
 import { debounce } from "../../utils/async.ts";
-import { WidgetAutoSizer } from "./sizing.ts";
+import { OPTIMISTIC_FRAME, WidgetAutoSizer } from "./sizing.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
 import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from "./interfaces.ts";
@@ -25,14 +26,6 @@ interface WidgetInternalState {
   hwnd: number;
   initialized: boolean;
   ready: boolean;
-  position: {
-    x: number;
-    y: number;
-  };
-  size: {
-    width: number;
-    height: number;
-  };
   firstFocus: boolean;
 }
 
@@ -76,14 +69,6 @@ export class Widget {
     hwnd: 0,
     initialized: false,
     ready: false,
-    position: {
-      x: 0,
-      y: 0,
-    },
-    size: {
-      width: 0,
-      height: 0,
-    },
     firstFocus: true,
   };
 
@@ -110,16 +95,6 @@ export class Widget {
     return this.runtimeState.hwnd;
   }
 
-  /** Returns the current position and size of the widget */
-  get frame(): Frame {
-    return {
-      x: this.runtimeState.position.x,
-      y: this.runtimeState.position.y,
-      width: this.runtimeState.size.width,
-      height: this.runtimeState.size.height,
-    };
-  }
-
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
@@ -129,33 +104,14 @@ export class Widget {
     return config;
   }
 
-  private applyInvisiblePreset(): Array<Promise<void>> {
-    return [
-      this.window.setDecorations(false), // no title bar
-      this.window.setShadow(false), // no shadows
-      // hide from native shell
-      this.window.setSkipTaskbar(true),
-      // as a (desktop/overlay) widget we don't wanna allow nothing of these
-      this.window.setMinimizable(false),
-      this.window.setMaximizable(false),
-      this.window.setClosable(false),
-    ];
-  }
-
   /** Will apply the recommended settings for a desktop widget */
-  private async applyDesktopPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnBottom(true)]);
-  }
+  private applyDesktopPreset() {}
 
   /** Will apply the recommended settings for an overlay widget */
-  private async applyOverlayPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnTop(true)]);
-  }
+  private applyOverlayPreset() {}
 
   /** Will apply the recommended settings for a popup widget */
-  private async applyPopupPreset(): Promise<void> {
-    await Promise.all([...this.applyInvisiblePreset(), this.window.setAlwaysOnTop(true)]);
-
+  private applyPopupPreset() {
     const hideWidget = debounce(() => {
       this.hide(true);
     }, 100);
@@ -172,29 +128,8 @@ export class Widget {
       // avoid flickering when clicking a button that triggers the widget
       hideWidget.cancel();
 
-      if (this.autoSizer && alignX && alignY) {
-        this.autoSizer.originX = alignX;
-        this.autoSizer.originY = alignY;
-      }
-
       if (desiredPosition) {
-        const adjusted = adjustPositionByPlacement({
-          frame: {
-            x: desiredPosition.x,
-            y: desiredPosition.y,
-            width: this.runtimeState.size.width,
-            height: this.runtimeState.size.height,
-          },
-          originX: alignX,
-          originY: alignY,
-        });
-
-        await this.setPosition({
-          left: adjusted.x,
-          top: adjusted.y,
-          right: adjusted.x + adjusted.width,
-          bottom: adjusted.y + adjusted.height,
-        });
+        await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
 
       await this.show();
@@ -270,13 +205,13 @@ export class Widget {
       case WidgetPreset.None:
         break;
       case WidgetPreset.Desktop:
-        await this.applyDesktopPreset();
+        this.applyDesktopPreset();
         break;
       case WidgetPreset.Overlay:
-        await this.applyOverlayPreset();
+        this.applyOverlayPreset();
         break;
       case WidgetPreset.Popup:
-        await this.applyPopupPreset();
+        this.applyPopupPreset();
         break;
     }
 
@@ -289,18 +224,8 @@ export class Widget {
       console.trace("Animations won't be disabled because widget configuration");
     }
 
-    // state initialization
-    this.runtimeState.size = await this.window.outerSize();
-    this.runtimeState.position = await this.window.outerPosition();
-
-    this.window.onResized((e) => {
-      this.runtimeState.size.width = e.payload.width;
-      this.runtimeState.size.height = e.payload.height;
-    });
-
-    this.window.onMoved((e) => {
-      this.runtimeState.position.x = e.payload.x;
-      this.runtimeState.position.y = e.payload.y;
+    await OPTIMISTIC_FRAME.runExclusive(async (state) => {
+      await state.init(this);
     });
   }
 
@@ -340,20 +265,60 @@ export class Widget {
     });
   }
 
-  /** If animations are enabled this will animate the movement of the widget */
-  public setPosition(rect: Rect): Promise<void> {
-    this.runtimeState.position.x = rect.left;
-    this.runtimeState.position.y = rect.top;
-    this.runtimeState.size.width = rect.right - rect.left;
-    this.runtimeState.size.height = rect.bottom - rect.top;
-
-    return invoke(SeelenCommand.SetSelfPosition, {
+  public async __unsafe_setPosition(rect: Rect, ref: Frame): Promise<void> {
+    await invoke(SeelenCommand.SetSelfPosition, {
       rect: {
         left: Math.round(rect.left),
         top: Math.round(rect.top),
         right: Math.round(rect.right),
         bottom: Math.round(rect.bottom),
       },
+    });
+
+    // optimistically update state, as arrived event after change is async
+    ref.x = rect.left;
+    ref.y = rect.top;
+    ref.width = rect.right - rect.left;
+    ref.height = rect.bottom - rect.top;
+  }
+
+  /**
+   * This will adjust the position of the widget based on the current placement and alignX/alignY arguments.
+   * This makes the widget fit into the monitor where it was placed, avoiding monitor overflow.
+   */
+  public async adjustAndSetPosition(
+    x: number,
+    y: number,
+    alignX?: Alignment | null,
+    alignY?: Alignment | null,
+  ): Promise<void> {
+    await OPTIMISTIC_FRAME.runExclusive(async (ref) => {
+      const adjusted = adjustPositionByPlacement({
+        frame: {
+          x,
+          y,
+          width: ref.width,
+          height: ref.height,
+        },
+        originX: alignX,
+        originY: alignY,
+      });
+
+      await Widget.self.__unsafe_setPosition(
+        {
+          left: adjusted.x,
+          top: adjusted.y,
+          right: adjusted.x + adjusted.width,
+          bottom: adjusted.y + adjusted.height,
+        },
+        ref,
+      );
+    });
+  }
+
+  public async setPosition(rect: Rect): Promise<void> {
+    await OPTIMISTIC_FRAME.runExclusive(async (frame) => {
+      await this.__unsafe_setPosition(rect, frame);
     });
   }
 

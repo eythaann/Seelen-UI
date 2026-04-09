@@ -1,0 +1,21 @@
+body {
+  background-color: transparent;
+  overflow: hidden;
+
+  > #root,
+  > #app {
+    width: min-content;
+    height: min-content;
+    padding: 8px;
+  }
+}
+
+.tooltip {
+  max-width: 500px;
+  padding: 8px;
+
+  border-radius: 10px;
+
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+  font-size: 0.8rem;
+}

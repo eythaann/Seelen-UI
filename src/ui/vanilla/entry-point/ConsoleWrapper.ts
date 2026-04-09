@@ -18,13 +18,20 @@ function StringifyParams(params: any[]): string {
 
 const FILTERED = ["[Ant Design CSS-in-JS]", "locize.com"];
 
+const originalConsole = {
+  trace: console.trace.bind(console),
+  debug: console.debug.bind(console),
+  info: console.info.bind(console),
+  warn: console.warn.bind(console),
+  error: console.error.bind(console),
+} as const;
+
 function forwardConsole(
-  fnName: "log" | "trace" | "debug" | "info" | "warn" | "error",
+  fnName: "trace" | "debug" | "info" | "warn" | "error",
   logger: (message: string) => Promise<void>,
 ) {
-  const original = console[fnName];
   console[fnName] = (...params: any[]) => {
-    original(...params);
+    originalConsole[fnName](...params);
 
     let message = StringifyParams(params);
 

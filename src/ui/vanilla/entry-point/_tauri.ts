@@ -2,7 +2,7 @@
 // this file can't use dependencies
 import type { InvokeArgs, InvokeOptions } from "@tauri-apps/api/core";
 
-export class WebviewInformation {
+class WebviewInformation {
   _label: string | null = null;
 
   get rawLabel() {
@@ -38,6 +38,8 @@ function decodeUrlSafeBase64(base64Str: string) {
   standardBase64 += "=".repeat(padLength);
   return atob(standardBase64);
 }
+
+export const webviewInfo = new WebviewInformation();
 
 export function _invoke<T>(cmd: string, args?: InvokeArgs, options?: InvokeOptions): Promise<T> {
   return window.__TAURI_INTERNALS__!.invoke(cmd, args, options);

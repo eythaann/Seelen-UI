@@ -69,7 +69,7 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
     opacity: isDragging ? 0.3 : 1,
   };
 
-  const itemTitle = useMemo(
+  const itemTooltip = useMemo(
     () => (tooltip ? StringFromEvaluated({ content: tooltip }) : undefined),
     [tooltip],
   );
@@ -83,7 +83,7 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
       id={id}
       ref={nodeRef}
       data-dragging={isDragging}
-      title={itemTitle}
+      data-tooltip={itemTooltip}
       style={itemStyle}
       className={cx("ft-bar-item", {
         "ft-bar-item-clickable": onClick,

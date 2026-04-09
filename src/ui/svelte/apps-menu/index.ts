@@ -13,19 +13,9 @@ import { globalState } from "./state/mod.svelte.ts";
 await loadTranslations();
 
 const widget = Widget.getCurrent();
-const { window } = widget;
 
+await widget.window.setResizable(false);
 await widget.init();
-
-await Promise.all([
-  window.setDecorations(false),
-  window.setMinimizable(false),
-  window.setMaximizable(false),
-  window.setClosable(false),
-  window.setSkipTaskbar(true),
-  window.setAlwaysOnTop(true),
-  window.setResizable(false),
-]);
 
 const hideDelayed = debounce(() => {
   globalState.showing = false;

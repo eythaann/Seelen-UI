@@ -29,7 +29,6 @@
 .taskbar {
   background-color: oklch(from var(--color-gray-100) l c h / 0.8);
   border-radius: 15px;
-  overflow: hidden;
 
   > .weg-items-container {
     border-radius: 15px;
@@ -191,20 +190,23 @@
   }
 
   .weg-item-instance-counter-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: absolute;
     bottom: 0;
     right: 0;
-    transform: translate(25%, 25%);
-    background-color: var(--color-gray-400);
-    color: var(--color-gray-100);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     height: 16px;
     min-width: 16px;
+    transform: translate(25%, 25%);
+    border-radius: 8px;
+
+    background-color: var(--color-gray-400);
+    color: var(--color-gray-100);
     font-size: 10px;
     font-weight: 600;
-    border-radius: 8px;
   }
 
   .weg-item-open-sign {
@@ -283,10 +285,6 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--color-gray-900);
-}
-
-.weg-item-preview-close {
-  --empty-rule: "delete me on use";
 }
 
 .weg-item-preview-image-container {

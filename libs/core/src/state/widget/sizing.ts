@@ -1,12 +1,45 @@
-import { PhysicalSize } from "@tauri-apps/api/dpi";
 import type { Widget } from "./mod.ts";
 import { Alignment } from "@seelen-ui/types";
+import { Mutex } from "../../utils/async.ts";
+
+class OptimisiticFrame {
+  x: number = 0;
+  y: number = 0;
+  width: number = 0;
+  height: number = 0;
+
+  async init(widget: Widget): Promise<void> {
+    const { width, height } = await widget.window.outerSize();
+    const { x, y } = await widget.window.outerPosition();
+
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+
+    widget.window.onResized((e) => {
+      OPTIMISTIC_FRAME.runExclusive((ref) => {
+        ref.width = e.payload.width;
+        ref.height = e.payload.height;
+      });
+    });
+
+    widget.window.onMoved((e) => {
+      OPTIMISTIC_FRAME.runExclusive((ref) => {
+        ref.x = e.payload.x;
+        ref.y = e.payload.y;
+      });
+    });
+  }
+}
+
+export const OPTIMISTIC_FRAME = new Mutex(new OptimisiticFrame());
 
 export class WidgetAutoSizer {
   /** From which side the widget will grow */
-  originX: Alignment = Alignment.Start;
+  originX?: Alignment | null;
   /** From which side the widget will grow */
-  originY: Alignment = Alignment.Start;
+  originY?: Alignment | null;
 
   constructor(
     private widget: Widget,
@@ -20,6 +53,13 @@ export class WidgetAutoSizer {
     // Disable resizing by the user
     this.widget.window.setResizable(false);
 
+    this.widget.onTrigger(({ alignX, alignY }) => {
+      OPTIMISTIC_FRAME.runExclusive(() => {
+        this.originX = alignX;
+        this.originY = alignY;
+      });
+    });
+
     const observer = new ResizeObserver(this.execute);
     observer.observe(this.element, {
       box: "border-box",
@@ -31,7 +71,8 @@ export class WidgetAutoSizer {
   }
 
   async execute(): Promise<void> {
-    const { x, y, width, height } = this.widget.frame;
+    const guard = await OPTIMISTIC_FRAME.acquire();
+    const { x, y, width, height } = guard.value;
 
     const frame = {
       x,
@@ -45,10 +86,13 @@ export class WidgetAutoSizer {
 
     // Only update if the difference is more than 1px (avoid infinite loops from decimal differences)
     if (widthDiff === 0 && heightDiff === 0) {
+      guard.release();
       return;
     }
 
-    console.trace(`Auto resize from ${width}x${height} to ${frame.width}x${frame.height}`);
+    /* console.debug(
+      `Auto resizing from ${width}x${height} to ${frame.width}x${frame.height} using ${this.originX}/${this.originY} origin`,
+    ); */
 
     if (this.originX === Alignment.Center) {
       frame.x -= widthDiff / 2;
@@ -62,17 +106,15 @@ export class WidgetAutoSizer {
       frame.y -= heightDiff;
     }
 
-    // only update size no position on this case
-    if (frame.x === x && frame.y === y) {
-      await this.widget.window.setSize(new PhysicalSize(frame.width, frame.height));
-      return;
+    try {
+      await this.widget.__unsafe_setPosition({
+        left: frame.x,
+        top: frame.y,
+        right: frame.x + frame.width,
+        bottom: frame.y + frame.height,
+      }, guard.value);
+    } finally {
+      guard.release();
     }
-
-    await this.widget.setPosition({
-      left: frame.x,
-      top: frame.y,
-      right: frame.x + frame.width,
-      bottom: frame.y + frame.height,
-    });
   }
 }
