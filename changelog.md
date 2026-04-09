@@ -25,6 +25,8 @@
 - dock and toolbar not hidding after change settings.
 - popups and overlays rarely not being always on top.
 - popups overflowing monitor on auto resize.
+- can't drop toolbar items into the center when the container is empty.
+- can't drag items with inner buttons on toolbar widget.
 
 ## [2.5.7]
 

@@ -1,7 +1,7 @@
 import { type PluginId, type ToolbarItem, ToolbarJsScope } from "@seelen-ui/lib/types";
-import { $toolbar_state } from "./items";
+import { $toolbar_state, getStateFromStored } from "./items";
 
-const baseItem: ToolbarItem = {
+export const baseItem: ToolbarItem = {
   id: "-",
   scopes: [],
   template: 'return ""',
@@ -14,7 +14,7 @@ const baseItem: ToolbarItem = {
 
 export function restoreStateToDefault() {
   // based on src\background\state\application\toolbar_items.rs
-  $toolbar_state.value = {
+  $toolbar_state.value = getStateFromStored({
     isReorderDisabled: false,
     left: [
       "@seelen/tb-user-menu" as PluginId,
@@ -43,5 +43,5 @@ export function restoreStateToDefault() {
       "@seelen/tb-notifications" as PluginId,
       "@seelen/tb-quick-settings" as PluginId,
     ],
-  };
+  });
 }

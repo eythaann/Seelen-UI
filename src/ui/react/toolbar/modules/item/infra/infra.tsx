@@ -18,7 +18,6 @@ import { $settings } from "../../shared/state/mod.ts";
 export interface ItemProps {
   module: ToolbarItem;
   index: number;
-  group: string;
 }
 
 interface InnerItemProps {
@@ -108,13 +107,10 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
   );
 }
 
-function SortableInnerItem({ module, index, group, extraVars }: SortableInnerItemProps) {
+function SortableInnerItem({ module, index, extraVars }: SortableInnerItemProps) {
   const { ref, isDragging } = useSortable({
     id: module.id,
     index,
-    type: "item",
-    accept: "item",
-    group,
     disabled: isReorderDisabled.value,
     modifiers: [RestrictToHorizontalAxis],
   });
@@ -129,12 +125,12 @@ function SortableInnerItem({ module, index, group, extraVars }: SortableInnerIte
   );
 }
 
-export function SortableItem({ module, index, group }: ItemProps) {
+export function SortableItem({ module, index }: ItemProps) {
   const { fetching, data: extraVars } = useItemScope(module.scopes);
   if (fetching) {
     return null;
   }
-  return <SortableInnerItem module={module} index={index} group={group} extraVars={extraVars} />;
+  return <SortableInnerItem module={module} index={index} extraVars={extraVars} />;
 }
 
 export function Item({ module }: ItemProps) {

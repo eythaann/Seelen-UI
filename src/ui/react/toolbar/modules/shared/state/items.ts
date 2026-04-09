@@ -1,85 +1,149 @@
 import { effect, signal } from "@preact/signals";
 import { invoke, PluginList, SeelenCommand } from "@seelen-ui/lib";
-import type { PluginId, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
+import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
 
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
-import { restoreStateToDefault } from "./default.ts";
+import { baseItem, restoreStateToDefault } from "./default.ts";
 
-/** True while a drag operation is in progress. Prevents emit/save feedback loop during onDragOver. */
-export const $isDragging = signal(false);
-export const $toolbar_state = signal(await invoke(SeelenCommand.StateGetToolbarItems));
+export interface OptimisticToolbarState {
+  isReorderDisabled: boolean;
+  items: ToolbarItem2[];
+}
+
+interface SyncPayload {
+  source: string;
+  state: OptimisticToolbarState;
+}
+
+const CLIENT_ID = crypto.randomUUID();
+
+export const HARDCODED_SEPARATOR_LEFT: ToolbarItem = {
+  ...baseItem,
+  id: "hardcoded-separator-1",
+  template: 'return " "',
+  style: { flexShrink: 0 },
+};
+
+export const HARDCODED_SEPARATOR_RIGHT: ToolbarItem = {
+  ...baseItem,
+  id: "hardcoded-separator-2",
+  template: 'return " "',
+  style: { flexShrink: 0 },
+};
+
+function splitItems(items: ToolbarItem2[]) {
+  const idx1 = items.findIndex(
+    (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id,
+  );
+  const idx2 = items.findIndex(
+    (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id,
+  );
+  return {
+    left: items.slice(0, idx1),
+    center: items.slice(idx1 + 1, idx2),
+    right: items.slice(idx2 + 1),
+  };
+}
+
+export function getStateFromStored(state: ToolbarState): OptimisticToolbarState {
+  return {
+    isReorderDisabled: state.isReorderDisabled,
+    items: [
+      ...state.left,
+      HARDCODED_SEPARATOR_LEFT,
+      ...state.center,
+      HARDCODED_SEPARATOR_RIGHT,
+      ...state.right,
+    ],
+  };
+}
+
+export const $toolbar_state = signal(
+  getStateFromStored(await invoke(SeelenCommand.StateGetToolbarItems)),
+);
 
 export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
 await PluginList.onChange((list) => {
   $plugins.value = list.forCurrentWidget();
 });
 
-listen("hidden::sync-toolbar-items", ({ payload }) => {
-  // avoid infinite loop
-  if (!$isDragging.value && JSON.stringify(payload) !== JSON.stringify($toolbar_state.value)) {
-    $toolbar_state.value = payload as ToolbarState;
+let isRemoteUpdate = false;
+listen<SyncPayload>("hidden::sync-toolbar-items", ({ payload }) => {
+  if (payload.source === CLIENT_ID) return;
+
+  if (JSON.stringify(payload.state) !== JSON.stringify($toolbar_state.value)) {
+    isRemoteUpdate = true;
+    $toolbar_state.value = payload.state;
   }
 });
 
-const emitSyncEvent = debounce((items: ToolbarState) => {
-  emit("hidden::sync-toolbar-items", items);
+const emitSyncEvent = debounce((state: OptimisticToolbarState) => {
+  emit<SyncPayload>("hidden::sync-toolbar-items", {
+    source: CLIENT_ID,
+    state,
+  });
 }, 300);
 
-const saveTbState = debounce(async (items: ToolbarState) => {
+const saveTbState = debounce(async (state: OptimisticToolbarState) => {
   console.trace("Saving toolbar state");
-  await invoke(SeelenCommand.StateWriteToolbarItems, { items });
+  const { left, center, right } = splitItems(state.items);
+  await invoke(SeelenCommand.StateWriteToolbarItems, {
+    items: { isReorderDisabled: state.isReorderDisabled, left, center, right },
+  });
 }, 1000);
 
-// TODO: do the same sync method as was done for the dock widget
+let mounted = false;
 effect(() => {
-  // Skip emit/save while dragging; onDragEnd will flip $isDragging back to false,
-  // which re-triggers this effect once with the final committed order.
-  if ($isDragging.value) return;
+  const state = $toolbar_state.value;
 
-  if (
-    $toolbar_state.value.left.length === 0 &&
-    $toolbar_state.value.center.length === 0 &&
-    $toolbar_state.value.right.length === 0
-  ) {
+  // avoid writing on start of the widget
+  if (!mounted) {
+    mounted = true;
+    return;
+  }
+
+  if (isRemoteUpdate) {
+    isRemoteUpdate = false;
+    return;
+  }
+
+  const { left, center, right } = splitItems(state.items);
+  if (left.length === 0 && center.length === 0 && right.length === 0) {
     restoreStateToDefault();
     return;
   }
 
-  emitSyncEvent($toolbar_state.value);
-  saveTbState($toolbar_state.value);
+  emitSyncEvent(state);
+  saveTbState(state);
 });
 
 export const $actions = {
   addTextItem(text: string) {
     const cleaned = text.trim().replace(/"/g, '\\"');
-    const newRight = [...$toolbar_state.value.right];
-    newRight.push({
-      id: globalThis.crypto.randomUUID(),
-      type: "text",
-      template: `return "${cleaned}"`,
-    } as any);
-    $toolbar_state.value = { ...$toolbar_state.value, right: newRight };
+    $toolbar_state.value = {
+      ...$toolbar_state.value,
+      items: [
+        ...$toolbar_state.value.items,
+        {
+          id: globalThis.crypto.randomUUID(),
+          type: "text",
+          template: `return "${cleaned}"`,
+        } as any,
+      ],
+    };
   },
   addItem(id: PluginId) {
-    const { left, center, right } = $toolbar_state.value;
-    const alreadyExists = left.includes(id) || right.includes(id) || center.includes(id);
-    if (!alreadyExists) {
-      $toolbar_state.value = {
-        ...$toolbar_state.value,
-        right: [...right, id],
-      };
-    }
+    $toolbar_state.value = {
+      ...$toolbar_state.value,
+      items: [...$toolbar_state.value.items, id],
+    };
   },
   removeItem(id: string) {
-    let filter = (d: ToolbarItem2) => !matchIds(d, id);
-    const { left, center, right, ...rest } = $toolbar_state.value;
     $toolbar_state.value = {
-      ...rest,
-      left: left.filter(filter),
-      center: center.filter(filter),
-      right: right.filter(filter),
+      ...$toolbar_state.value,
+      items: $toolbar_state.value.items.filter((item) => !matchIds(item, id)),
     };
   },
 };

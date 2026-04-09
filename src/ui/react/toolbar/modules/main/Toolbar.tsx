@@ -1,13 +1,18 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
+import { KeyboardSensor, PointerSensor } from "@dnd-kit/dom";
 import { move } from "@dnd-kit/helpers";
-import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { useCallback } from "preact/compat";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
-import { $isDragging, $plugins, $toolbar_state } from "../shared/state/items.ts";
+import {
+  $plugins,
+  $toolbar_state,
+  HARDCODED_SEPARATOR_LEFT,
+  HARDCODED_SEPARATOR_RIGHT,
+} from "../shared/state/items.ts";
 import { $settings } from "../shared/state/mod.ts";
 import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
 import { Group } from "./ItemsContainer.tsx";
@@ -16,13 +21,32 @@ import { $hidden_by_autohide, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } fro
 import { ShowDesktopButton } from "./CornerAction.tsx";
 import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";
+import { useComputed } from "@preact/signals";
+
+// Allow dragging from buttons and other interactive elements inside items.
+// The distance activation constraint (5px) still prevents unintentional drags on click.
+const dndSensors = [
+  PointerSensor.configure({ preventActivation: () => false }),
+  KeyboardSensor,
+];
 
 export function FancyToolbar() {
-  const $containers = useComputed(() => ({
-    left: $toolbar_state.value.left,
-    center: $toolbar_state.value.center,
-    right: $toolbar_state.value.right,
-  }));
+  const splittedItems = useComputed(() => {
+    const items = $toolbar_state.value.items;
+    const idx1 = items.findIndex(
+      (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id,
+    );
+    const idx2 = items.findIndex(
+      (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id,
+    );
+
+    // center includes the separator items
+    return {
+      left: items.slice(0, idx1),
+      center: items.slice(idx1, idx2 + 1),
+      right: items.slice(idx2 + 1),
+    };
+  });
 
   const contextMenuDef = useMainContextMenu();
 
@@ -49,44 +73,32 @@ export function FancyToolbar() {
       <BackgroundByLayersV2 />
 
       <DragDropProvider
-        onDragStart={() => {
-          $isDragging.value = true;
-        }}
-        onDragEnd={() => {
-          $isDragging.value = false;
-        }}
+        sensors={dndSensors}
         onDragOver={(event) => {
-          let temp = {
-            left: $containers.value.left.map((item) => (typeof item === "string" ? item : item.id)),
-            center: $containers.value.center.map((item) => typeof item === "string" ? item : item.id),
-            right: $containers.value.right.map((item) => typeof item === "string" ? item : item.id),
-          };
-
-          let moved = move(temp, event);
-          const allItems = [
-            ...$toolbar_state.value.left,
-            ...$toolbar_state.value.center,
-            ...$toolbar_state.value.right,
-          ];
+          const temp = $toolbar_state.value.items.map((item) => typeof item === "string" ? item : item.id);
+          const newItems = move(temp, event);
 
           $toolbar_state.value = {
-            ...$toolbar_state.value,
-            left: moved.left.map((id) => allItems.find((i) => matchIds(i, id))!),
-            center: moved.center.map((id) => allItems.find((i) => matchIds(i, id))!),
-            right: moved.right.map((id) => allItems.find((i) => matchIds(i, id))!),
+            isReorderDisabled: $toolbar_state.value.isReorderDisabled,
+            items: newItems.map((id) => $toolbar_state.value.items.find((i) => matchIds(i, id))!),
           };
         }}
       >
-        {Object.entries($containers.value).map(([id, items]) => <Group key={id} id={id} items={items} />)}
+        <Group id="left" items={splittedItems.value.left} startIndex={0} />
+        <Group
+          id="center"
+          items={splittedItems.value.center}
+          startIndex={splittedItems.value.left.length}
+        />
+        <Group
+          id="right"
+          items={splittedItems.value.right}
+          startIndex={splittedItems.value.left.length + splittedItems.value.center.length}
+        />
 
         <DragOverlay>
           {(source) => {
-            const allItems = [
-              ...$toolbar_state.value.left,
-              ...$toolbar_state.value.center,
-              ...$toolbar_state.value.right,
-            ];
-
+            const allItems = $toolbar_state.value.items;
             const entry = allItems.find((i) => matchIds(i, source.id as string));
             if (!entry) return null;
 
@@ -94,10 +106,10 @@ export function FancyToolbar() {
               const plugin = $plugins.value.find((p) => p.id === entry);
               if (!plugin) return null;
               const module = { ...(plugin.plugin as any), id: entry };
-              return <Item module={module} index={0} group="" />;
+              return <Item module={module} index={0} />;
             }
 
-            return <Item module={entry} index={0} group="" />;
+            return <Item module={entry} index={0} />;
           }}
         </DragOverlay>
       </DragDropProvider>

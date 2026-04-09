@@ -55,14 +55,8 @@ export function useMainContextMenu(): ContextMenu {
 
   // Memoize context menu to prevent reconstruction on every render
   return useMemo(() => {
-    const allItems = [
-      ...$toolbar_state.value.left,
-      ...$toolbar_state.value.center,
-      ...$toolbar_state.value.right,
-    ];
-
     function isAlreadyAdded(id: PluginId): boolean {
-      return allItems.some((item) => item === id);
+      return $toolbar_state.value.items.some((item) => item === id);
     }
 
     return {

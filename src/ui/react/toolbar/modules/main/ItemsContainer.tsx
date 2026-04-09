@@ -1,4 +1,3 @@
-import { useDroppable } from "@dnd-kit/react";
 import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
 import { memo } from "preact/compat";
 import { computed } from "@preact/signals";
@@ -6,7 +5,6 @@ import { computed } from "@preact/signals";
 import { $plugins } from "../shared/state/items.ts";
 import { SortableItem } from "../item/infra/infra.tsx";
 import { isEqual } from "lodash";
-import { CollisionPriority } from "@dnd-kit/abstract";
 
 const plugins = computed(() => {
   const dict: Record<string, ToolbarItem> = {};
@@ -19,18 +17,14 @@ const plugins = computed(() => {
 interface Props {
   id: string;
   items: ToolbarItem2[];
+  startIndex: number;
 }
 
-function GroupComponent({ id, items }: Props) {
-  const droppable = useDroppable({
-    id,
-    type: "container",
-    accept: "item",
-    collisionPriority: CollisionPriority.Low,
-  });
-
+function GroupComponent({ id, items, startIndex }: Props) {
   return (
-    <div ref={droppable.ref} className={`ft-bar-container ft-bar-${id}`} data-drop-target={droppable.isDropTarget}>
+    <div
+      className={`ft-bar-container ft-bar-${id}`}
+    >
       {items.map((entry, index) => {
         let module: ToolbarItem | undefined;
 
@@ -45,7 +39,7 @@ function GroupComponent({ id, items }: Props) {
           module = entry;
         }
 
-        return <SortableItem key={module.id} module={module} index={index} group={id} />;
+        return <SortableItem key={module.id} module={module} index={startIndex + index} />;
       })}
     </div>
   );
