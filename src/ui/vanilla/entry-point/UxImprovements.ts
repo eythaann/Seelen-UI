@@ -1,20 +1,21 @@
 import { _invoke } from "./_tauri";
-import type { Alignment, WidgetId, WidgetTriggerPayload } from "@seelen-ui/lib/types";
+import { Alignment, type WidgetId, type WidgetTriggerPayload } from "@seelen-ui/lib/types";
+
+function alignment(value: any): Alignment {
+  return Object.values(Alignment).includes(value) ? value : Alignment.Start;
+}
 
 let timeoutRef: ReturnType<typeof setTimeout> | null = null;
-function showTooltip(text: string | undefined) {
+function showTooltip(text: string, alignX: Alignment, alignY: Alignment) {
   if (timeoutRef) {
     clearTimeout(timeoutRef);
-  }
-
-  if (!text) {
-    return;
   }
 
   timeoutRef = setTimeout(() => {
     const payload: WidgetTriggerPayload = {
       id: "@seelen/tooltip" as WidgetId,
-      alignX: "Center" as Alignment,
+      alignX,
+      alignY,
       customArgs: { text, show: true },
     };
     _invoke("trigger_widget", { payload });
@@ -37,13 +38,27 @@ let lastShownOn: any = null;
 document.addEventListener(
   "pointerenter",
   (e) => {
-    const tooltip = (e.target as HTMLElement | null)?.dataset?.tooltip;
+    const target = e.target;
+    if (!target || !(target instanceof HTMLElement)) {
+      return;
+    }
+
+    const tooltip = target.dataset.tooltip || target.title || target.getAttribute("aria-label");
     if (!tooltip) {
       return;
     }
 
+    if (target.title) {
+      target.removeAttribute("title");
+      target.dataset["tooltip"] = tooltip;
+    }
+
     lastShownOn = e.target;
-    showTooltip(tooltip);
+    showTooltip(
+      tooltip,
+      alignment(target.dataset.tooltipAlignX),
+      alignment(target.dataset.tooltipAlignY),
+    );
   },
   true,
 );

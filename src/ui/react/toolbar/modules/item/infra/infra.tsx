@@ -1,6 +1,6 @@
 import { useSortable } from "@dnd-kit/react/sortable";
 import { computed } from "@preact/signals";
-import type { ToolbarItem } from "@seelen-ui/lib/types";
+import { Alignment, FancyToolbarSide, type ToolbarItem } from "@seelen-ui/lib/types";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { useCallback, useMemo } from "preact/compat";
 import type { Ref } from "preact";
@@ -13,6 +13,7 @@ import { useRemoteData } from "../app/hooks/useRemoteData.ts";
 import { useFullItemScope } from "../app/hooks/useItemScope.ts";
 import { useItemScope } from "../app/hooks/scope.ts";
 import { RestrictToHorizontalAxis } from "@dnd-kit/abstract/modifiers";
+import { $settings } from "../../shared/state/mod.ts";
 
 export interface ItemProps {
   module: ToolbarItem;
@@ -36,6 +37,8 @@ const isReorderDisabled = computed(() => $toolbar_state.value.isReorderDisabled)
 
 function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItemProps) {
   const { id, onClick, style, remoteData = {} } = module;
+
+  const alignY = $settings.value.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
 
   const fetchedData = useRemoteData(remoteData);
   const { onContextMenu } = useItemContextMenu(id);
@@ -84,6 +87,8 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
       ref={nodeRef}
       data-dragging={isDragging}
       data-tooltip={itemTooltip}
+      data-tooltip-align-x="Center"
+      data-tooltip-align-y={alignY}
       style={itemStyle}
       className={cx("ft-bar-item", {
         "ft-bar-item-clickable": onClick,

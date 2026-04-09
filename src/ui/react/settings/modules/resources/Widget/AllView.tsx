@@ -12,7 +12,7 @@ import { getWidgetConfig, patchWidgetConfig } from "./application.ts";
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 
-const SYSTEM_WIDGET_IDS = ["@seelen/settings", "@seelen/popup", "@seelen/context-menu"];
+const SYSTEM_WIDGET_IDS = ["@seelen/settings", "@seelen/popup", "@seelen/context-menu", "@seelen/tooltip"];
 
 function WidgetItem({ widget }: { widget: Widget }) {
   const rootConfig = getWidgetConfig(widget.id);

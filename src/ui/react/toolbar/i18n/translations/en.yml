@@ -1,3 +1,4 @@
+show_desktop: Show Desktop
 battery:
   remaining: '{{0}}% Remaining'
   smart_charge: Smart Charge
