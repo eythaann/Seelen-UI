@@ -6,13 +6,13 @@ body {
   > #app {
     width: min-content;
     height: min-content;
-    padding: 8px;
+    padding: 12px; // acts as margin from pointer and content
   }
 }
 
 .tooltip {
   max-width: 500px;
-  padding: 8px;
+  padding: 6px 8px;
 
   border-radius: 10px;
 

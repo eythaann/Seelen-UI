@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
 media:
+  label: Media Player
   not_playing: Nothing is playing
 show_desktop:
   label: Show Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Add Recycle Bin Module
 trash_bin:
   empty_bin: Empty Recycle Bin
+  label: Recycle Bin
 weg:
   empty: No items to show

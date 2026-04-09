@@ -129,7 +129,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
 
   return (
     <Popover
-      open={openPreview}
+      open={openPreview && !!windows.length}
       placement={calculatePlacement($settings.value.position)}
       onOpenChange={(open) => {
         setOpenPreview(open && moment(new Date()) > blockUntil);
@@ -151,7 +151,6 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
             {windows.map((window) => (
               <UserApplicationPreview key={window.hwnd} title={window.title} hwnd={window.hwnd} />
             ))}
-            {windows.length === 0 && <div className="weg-item-display-name">{item.displayName}</div>}
           </div>
         </div>
       }
