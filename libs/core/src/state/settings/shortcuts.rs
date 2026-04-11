@@ -64,6 +64,8 @@ pub enum SluHotkeyAction {
     CreateNewWorkspace,
     DestroyCurrentWorkspace,
     // ==========================
+    ToggleClipboard,
+    // ==========================
     CycleWallpaperNext,
     CycleWallpaperPrev,
     // ==========================
@@ -214,6 +216,9 @@ impl SluShortcutsSettings {
             SluHotkey::new(ToggleAppsMenu, ["Win"])
                 .system()
                 .attached_to("@seelen/apps-menu"),
+            SluHotkey::new(ToggleClipboard, ["Win", "V"])
+                .system()
+                .attached_to("@seelen/clipboard"),
             // Task switching and viewer
             SluHotkey::new(
                 TaskNext {

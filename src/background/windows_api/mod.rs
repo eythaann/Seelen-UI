@@ -919,7 +919,7 @@ impl WindowsApi {
         data_reader.LoadAsync(size as u32)?.join()?;
         data_reader.ReadBytes(&mut buffer)?;
 
-        let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
+        let image = image::load_from_memory(&buffer)?;
         Ok(image)
     }
 
@@ -934,6 +934,21 @@ impl WindowsApi {
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
         Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.join()?)
+    }
+
+    pub fn dynamic_image_to_webp_base64(image: image::DynamicImage) -> Result<String> {
+        use base64::{engine::general_purpose::STANDARD, Engine};
+        let mut buf = Vec::new();
+        image.write_to(
+            &mut std::io::Cursor::new(&mut buf),
+            image::ImageFormat::WebP,
+        )?;
+        Ok(STANDARD.encode(&buf))
+    }
+
+    pub fn stream_ref_to_webp_base64(stream: IRandomAccessStreamReference) -> Result<String> {
+        let image = Self::stream_to_dynamic_image(stream.OpenReadAsync()?.join()?)?;
+        Self::dynamic_image_to_webp_base64(image)
     }
 
     pub fn lock_machine() -> Result<()> {

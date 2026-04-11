@@ -25,6 +25,11 @@ export interface InitWidgetOptions {
    */
   autoSizeFitOnScreen?: boolean;
   /**
+   * Will normalize the device pixel ratio to 1:1
+   * @default false
+   */
+  normalizeDevicePixelRatio?: boolean;
+  /**
    * Will save the position and size of the widget on change.
    * This is intedeed to be used when the size and position of the widget is
    * allowed to be changed by the user, Normally used on desktop widgets.

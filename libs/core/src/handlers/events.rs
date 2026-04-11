@@ -120,4 +120,7 @@ slu_events_declaration! {
 
     // Seelen Session
     SeelenSessionChanged(Option<SeelenSession>) as "session::changed",
+
+    // Clipboard
+    ClipboardDataChanged(ClipboardData) as "clipboard::data-changed",
 }

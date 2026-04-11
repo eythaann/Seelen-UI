@@ -184,6 +184,8 @@ fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> 
         ToggleWorkspacesView => cmd!["vd", "toggle-workspaces-view"],
         // apps menu
         ToggleAppsMenu => cmd!["widget", "trigger", "@seelen/apps-menu"],
+        // clipboard
+        ToggleClipboard => cmd!["widget", "trigger", "@seelen/clipboard"],
         // wallpaper manager
         CycleWallpaperNext => cmd!["wallpaper", "next"],
         CycleWallpaperPrev => cmd!["wallpaper", "prev"],

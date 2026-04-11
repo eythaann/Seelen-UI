@@ -113,12 +113,15 @@ export class WidgetAutoSizer {
     }
 
     try {
-      await this.widget.__unsafe_setPosition({
-        left: frame.x,
-        top: frame.y,
-        right: frame.x + frame.width,
-        bottom: frame.y + frame.height,
-      }, guard.value);
+      await this.widget.__unsafe_setPosition(
+        {
+          left: frame.x,
+          top: frame.y,
+          right: frame.x + frame.width,
+          bottom: frame.y + frame.height,
+        },
+        guard.value,
+      );
     } finally {
       guard.release();
     }

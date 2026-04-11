@@ -1,4 +1,5 @@
 pub mod apps;
+pub mod clipboard;
 pub mod media;
 pub mod monitors;
 pub mod network;

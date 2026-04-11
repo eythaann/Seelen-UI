@@ -48,4 +48,5 @@ export enum SeelenEvent {
   WegAddItem = "weg::add-item",
   TrashBinChanged = "trash-bin::changed",
   SeelenSessionChanged = "session::changed",
+  ClipboardDataChanged = "clipboard::data-changed",
 }

@@ -1,4 +1,5 @@
 mod bluetooth;
+mod clipboard;
 mod components;
 mod language;
 mod media;
@@ -16,6 +17,7 @@ mod user_apps;
 mod win_explorer;
 
 pub use bluetooth::*;
+pub use clipboard::*;
 pub use components::*;
 pub use language::*;
 pub use media::*;

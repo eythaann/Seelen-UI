@@ -80,6 +80,7 @@ windows = { workspace = true, features = [
     "ApplicationModel",
     "ApplicationModel_Core",
     "ApplicationModel_Background",
+    "ApplicationModel_DataTransfer",
     "Foundation_Collections",
     "Foundation_Numerics",
     "Management_Deployment",

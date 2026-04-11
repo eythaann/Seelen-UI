@@ -289,4 +289,11 @@ slu_commands_declaration! {
     GetSeelenSession = get_seelen_session() -> Option<SeelenSession>,
     SeelenLogin = seelen_login(),
     SeelenLogout = seelen_logout(),
+
+    // Clipboard
+    ClipboardGetData = clipboard_get_data() -> ClipboardData,
+    ClipboardDeleteEntry = clipboard_delete_entry(id: String),
+    ClipboardClearHistory = clipboard_clear_history(),
+    ClipboardSetContent = clipboard_set_content(id: String),
+    ClipboardPaste = clipboard_paste(id: String),
 }

@@ -141,7 +141,7 @@ export class Widget {
    * Will restore the saved position and size of the widget on start,
    * after that will store the position and size of the widget on change.
    */
-  public async persistPositionAndSize(): Promise<void> {
+  private async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
 
     const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${k}`));
@@ -181,6 +181,19 @@ export class Widget {
     );
   }
 
+  private async normalizeDevicePixelRatio() {
+    // play with zoom level to reset device pixel ratio to 1:1
+    let oldDPR = window.devicePixelRatio;
+    await this.webview.setZoom(1 / oldDPR);
+    this.window.onScaleChanged(() => {
+      if (window.devicePixelRatio !== oldDPR) {
+        // when zoom was set dpr changed, so in case of change this is accomulative unit
+        oldDPR = oldDPR * window.devicePixelRatio;
+        this.webview.setZoom(1 / (oldDPR * window.devicePixelRatio));
+      }
+    });
+  }
+
   /**
    * Will initialize the widget based on the preset and mark it as `pending`, this function won't show the widget.
    * This should be called before any other action on the widget. After this you should call
@@ -194,6 +207,10 @@ export class Widget {
 
     this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
     this.runtimeState.initialized = true;
+
+    if (options.normalizeDevicePixelRatio) {
+      await this.normalizeDevicePixelRatio();
+    }
 
     if (options.autoSizeByContent) {
       this.autoSizer = new WidgetAutoSizer(
