@@ -4,6 +4,7 @@
   import { RendererState, setShowing } from "./state/placement.svelte";
   import { ConfigState } from "./state/config.svelte";
   import { debounce } from "lodash";
+  import { WindowsDateFileTimeToDate } from "libs/ui/svelte/utils";
   import Notification from "../notifications/components/Notification.svelte";
   import Workspace from "./app/Workspace.svelte";
   import MediaDevices from "./app/MediaDevices.svelte";
@@ -42,7 +43,13 @@
 
   // Use [0] (newest) instead of .pop() (oldest) on a descending-sorted array.
   let notification = $derived.by(
-    () => gState.notifications.toSorted((a, b) => Number(b.date - a.date))[0],
+    () => {
+      const top = gState.notifications.toSorted((a, b) => Number(b.date - a.date))[0];
+      // Also filter out stale notifications (older than 10 s) to avoid showing them as new
+      // when a previously dismissed notification causes the top item to change.
+      const isRecent = !!top && Date.now() - WindowsDateFileTimeToDate(top.date).getTime() < 10_000;
+      return isRecent ? top : null;
+    },
   );
 
   let notificationId = $derived(notification?.id);

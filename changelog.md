@@ -27,6 +27,7 @@
 - popups overflowing monitor on auto resize.
 - can't drop toolbar items into the center when the container is empty.
 - can't drag items with inner buttons on toolbar widget.
+- flyouts widget showing old notifications when new one dismissed.
 
 ## [2.5.7]
 
