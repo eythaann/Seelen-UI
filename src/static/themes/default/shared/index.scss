@@ -70,6 +70,11 @@ body:has(.slu-std-popover) {
   color: var(--color-gray-900);
 }
 
+.slu-std-surface-elevated {
+  background-color: var(--color-gray-75);
+  color: var(--color-gray-900);
+}
+
 .slu-std-popover {
   width: 300px;
   max-height: 700px;

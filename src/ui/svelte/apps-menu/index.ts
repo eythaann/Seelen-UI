@@ -5,8 +5,7 @@ import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
 import { onTriggered } from "./state/positioning.svelte.ts";
 
-import "@shared/styles/reset.css";
-import "@shared/styles/colors.css";
+import "@seelen-ui/lib/styles/reset.css";
 import { debounce } from "lodash";
 import { globalState } from "./state/mod.svelte.ts";
 

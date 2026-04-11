@@ -33,9 +33,6 @@
       "@shared": [
         "libs/ui/react/utils/index.ts"
       ],
-      "@shared/*": [
-        "libs/widgets-shared/*"
-      ],
       "react": [
         "./node_modules/preact/compat/"
       ],

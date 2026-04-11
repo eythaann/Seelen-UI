@@ -1,4 +1,3 @@
-import "@shared/styles/colors.css";
 import "./reset.css";
 
 const { js, css, html } = window.__SLU_WIDGET;

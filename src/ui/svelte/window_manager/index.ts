@@ -5,8 +5,7 @@ import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
 
 import App from "./App.svelte";
 
-import "@shared/styles/colors.css";
-import "@shared/styles/reset.css";
+import "@seelen-ui/lib/styles/reset.css";
 import "./styles/global.css";
 
 const widget = Widget.getCurrent();

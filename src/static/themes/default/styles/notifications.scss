@@ -19,7 +19,7 @@
   .notifications-popup-body {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px 10px;
@@ -44,7 +44,8 @@
 
 .notification {
   border-radius: 12px;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-gray-75);
+  box-shadow: #32325d40 0px 2px 5px -1px, #0000004d 0px 1px 3px -1px;
   padding: 10px;
   transition: scale 0.1s ease-in-out;
 

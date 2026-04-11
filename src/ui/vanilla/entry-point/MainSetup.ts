@@ -17,6 +17,12 @@ if (!window.__SLU_WIDGET) {
 // hook local storage, to avoid collition of keys
 hookLocalStorage(currentWidgetId);
 
+// add base css
+const link = document.createElement("link");
+link.rel = "stylesheet";
+link.href = "/vanilla/entry-point/index.css";
+document.head.appendChild(link);
+
 // load index.js
 const script = document.createElement("script");
 script.type = "module";

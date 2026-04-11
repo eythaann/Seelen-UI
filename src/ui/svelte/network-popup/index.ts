@@ -3,8 +3,7 @@ import App from "./app.svelte";
 import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
 
-import "@shared/styles/reset.css";
-import "@shared/styles/colors.css";
+import "@seelen-ui/lib/styles/reset.css";
 
 const root = document.getElementById("root")!;
 

@@ -1,6 +1,6 @@
 import { Alignment, type Frame, type PhysicalMonitor } from "@seelen-ui/types";
 import { invoke, subscribe } from "../../handlers/mod.ts";
-import { SeelenCommand } from "@seelen-ui/lib";
+import { SeelenCommand } from "../../handlers/commands.ts";
 import { SeelenEvent } from "../../handlers/events.ts";
 
 interface args {

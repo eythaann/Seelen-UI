@@ -10,9 +10,8 @@ import { App } from "./app.tsx";
 
 import i18n, { loadTranslations } from "./i18n/index.ts";
 
-import "@shared/styles/colors.css";
 import "./styles/variables.css";
-import "@shared/styles/reset.css";
+import "@seelen-ui/lib/styles/reset.css";
 import "./styles/global.css";
 
 await declareDocumentAsLayeredHitbox();

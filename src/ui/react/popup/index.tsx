@@ -4,8 +4,7 @@ import { createRoot } from "react-dom/client";
 
 import { App } from "./app.tsx";
 
-import "@shared/styles/reset.css";
-import "@shared/styles/colors.css";
+import "@seelen-ui/lib/styles/reset.css";
 import "./global.css";
 
 await Widget.getCurrent().init();

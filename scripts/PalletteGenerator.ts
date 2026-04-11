@@ -94,7 +94,9 @@ function _maxChromaSRGB(L: number, H: number) {
 }
 
 const LIGHT_STEPS = {
-  50: 95,
+  25: 99,
+  50: 96,
+  75: 93,
   100: 90,
   200: 81,
   300: 72,
@@ -107,7 +109,9 @@ const LIGHT_STEPS = {
 };
 
 const DARK_STEPS = {
-  50: 10,
+  25: 9,
+  50: 12,
+  75: 15,
   100: 18,
   200: 27,
   300: 36,
@@ -120,6 +124,7 @@ const DARK_STEPS = {
 };
 
 const COLOR_LIST = {
+  gray: 0,
   red: 30,
   orange: 50,
   yellow: 100,
@@ -139,7 +144,7 @@ function generateScale(name: string, hue: number, steps: Record<number, number>)
   for (const [step, lightness] of Object.entries(steps)) {
     const L = lightness / 100;
 
-    const C = maxChromaP3(L, hue) * 0.8;
+    const C = hue === 0 ? 0 : maxChromaP3(L, hue) * 0.8;
 
     const truncatedC = truncate(C, 3).toString().padEnd(5, "0");
 

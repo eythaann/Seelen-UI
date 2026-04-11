@@ -6,7 +6,8 @@
   "exports": {
     ".": "./src/lib.ts",
     "./types": "./gen/types/mod.ts",
-    "./tauri": "./src/re-exports/tauri.ts"
+    "./tauri": "./src/re-exports/tauri.ts",
+    "./styles/": "./styles/"
   },
   "tasks": {
     "build:npm": "deno run -A ./scripts/build_npm.ts",
@@ -53,6 +54,7 @@
     "include": [
       "src",
       "gen",
+      "styles",
       "readme.md"
     ],
     "exclude": [

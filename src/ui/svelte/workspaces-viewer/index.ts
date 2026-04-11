@@ -2,8 +2,7 @@ import { mount } from "svelte";
 import App from "./app.svelte";
 import { Widget } from "@seelen-ui/lib";
 
-import "@shared/styles/reset.css";
-import "@shared/styles/colors.css";
+import "@seelen-ui/lib/styles/reset.css";
 
 const widget = Widget.getCurrent();
 await widget.init();
