@@ -3,6 +3,11 @@ name: "Publish Core Library"
 on:
   workflow_call:
   workflow_dispatch:
+    inputs:
+      next:
+        description: "Publish as next pre-release (uses date-based version with tag next)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -29,6 +34,25 @@ jobs:
       - name: Setup Rust
         run: rustup --version
 
+      - name: Set next version
+        if: ${{ inputs.next }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'libs/core/deno.json';
+
+            const denoJson = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const currentVersion = denoJson.version;
+
+            const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(2, 12);
+            const nextVersion = `${currentVersion}-next.${timestamp}`;
+
+            denoJson.version = nextVersion;
+            fs.writeFileSync(path, JSON.stringify(denoJson, null, 2) + '\n');
+
+            core.info(`Version set to ${nextVersion}`);
+
       - name: Build Rust Bindings (ts-rs)
         run: deno task build:rs
 
@@ -41,4 +65,4 @@ jobs:
       - name: Publish to NPM
         run: |
           cd ./npm
-          npm --verbose publish --tag latest
+          npm --verbose publish --tag ${{ inputs.next && 'next' || 'latest' }}
