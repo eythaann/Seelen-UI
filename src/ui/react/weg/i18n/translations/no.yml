@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lås oppgavelinje
   reorder_enable: Lås opp oppgavelinje
 media:
+  label: Mediespiller
   not_playing: Ingenting spiller
 show_desktop:
   label: Vis skrivebord
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Legg til papirkurvmodul
 trash_bin:
   empty_bin: Tøm papirkurven
+  label: Papirkurv
 weg:
   empty: Ingen elementer å vise

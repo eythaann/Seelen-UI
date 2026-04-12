@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ລັອກ task task
   reorder_enable: ປົດລ taskbar taskbar
 media:
+  label: Media Player
   not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
 show_desktop:
   label: ສະແດງ Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: ເພີ່ມໂມດູນ Recycle Bin
 trash_bin:
   empty_bin: ຖັງ Recycle ຫວ່າງເປົ່າ
+  label: ຖັງ Recycle
 weg:
   empty: ບໍ່ມີລາຍການໃຫ້ສະແດງ

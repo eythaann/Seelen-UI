@@ -194,50 +194,20 @@ session:
   sign_in: تسجيل الدخول
   sign_in_hint: سيتم فتح المتصفح الخاص بك حتى تتمكن من تسجيل الدخول بشكل آمن.
 shortcuts:
+  disabled_tooltip: تم تعطيل الأداة واختصاراتها
   duplicate_error: هذا الاختصار مكرر
   enable: تمكين نظام الاختصارات المدمجة
   enable_tooltip: تعطيل إذا كنت ستنفذ نظام الاختصارات الخاص بك باستخدام عميل Seelen UI
   labels:
     create_new_workspace: إنشاء مساحة عمل جديدة
-    cycle_stack_next: كومة الدراجة التالية
-    cycle_stack_prev: كومة الدراجة السابقة
-    cycle_wallpaper_next: التغيير إلى خلفية القادمة
-    cycle_wallpaper_prev: تغيير إلى خلفية سابقة
-    decrease_height: انخفاض الارتفاع
-    decrease_width: انخفاض العرض
     destroy_current_workspace: تدمير مساحة العمل الحالية
-    focus_bottom: التركيز القاع
-    focus_latest: التركيز الأخير
-    focus_left: التركيز اليسار
-    focus_right: التركيز بشكل صحيح
-    focus_top: التركيز أعلى
-    increase_height: زيادة الارتفاع
-    increase_width: زيادة العرض
     misc_force_quit: استقال
     misc_force_restart: فرض إعادة التشغيل
-    misc_open_settings: فتح الإعدادات
-    misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
-    misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
     move_to_workspace: انتقل إلى مساحة العمل {{0}}
-    move_window_down: نقل النافذة إلى أسفل
-    move_window_left: تحرك النافذة إلى اليسار
-    move_window_right: نقل النافذة إلى اليمين
-    move_window_up: نقل النافذة إلى الأعلى
-    pause_tiling: وقفة مدير نافذة الإبلاغ
-    reserve_bottom: قاع الاحتياطي
-    reserve_float: تعويم الاحتياطي
-    reserve_left: الاحتياطي اليسار
-    reserve_right: حجز الحق
-    reserve_stack: كومة الاحتياطي
-    reserve_top: قمة الاحتياط
-    restore_sizes: استعادة الأحجام
     send_to_workspace: أرسل إلى مساحة العمل {{0}}
-    start_weg_app: التركيز أو بدء التطبيق {{0}}
     switch_to_next_workspace: التبديل إلى مساحة العمل التالية
     switch_to_previous_workspace: التبديل إلى مساحة العمل السابقة
     switch_workspace: التبديل إلى مساحة العمل {{0}}
-    toggle_float: تبديل النافذة وضع تعويم
-    toggle_monocle: تبديل وضع مساحة العمل monocle
   readonly_tooltip: هذا اختصار للقراءة فقط
   reset: إعادة ضبط على الافتراضات
 sides:

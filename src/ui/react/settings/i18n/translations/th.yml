@@ -195,50 +195,20 @@ session:
   sign_in: เข้าสู่ระบบ
   sign_in_hint: เบราว์เซอร์ของคุณจะเปิดขึ้นเพื่อให้คุณสามารถลงชื่อเข้าใช้ได้อย่างปลอดภัย
 shortcuts:
+  disabled_tooltip: วิดเจ็ตและทางลัดถูกปิดใช้งาน
   duplicate_error: ทางลัดนี้ซ้ำกัน
   enable: เปิดใช้งานระบบทางลัดในตัว
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ระบบทางลัดของคุณเองโดยใช้ไคลเอนต์ SEELEN UI
   labels:
     create_new_workspace: สร้างพื้นที่ทำงานใหม่
-    cycle_stack_next: วงจรสแต็คถัดไป
-    cycle_stack_prev: Cycle Stack ก่อนหน้านี้
-    cycle_wallpaper_next: เปลี่ยนเป็นวอลล์เปเปอร์ถัดไป
-    cycle_wallpaper_prev: เปลี่ยนเป็นวอลล์เปเปอร์ก่อนหน้า
-    decrease_height: ลดความสูง
-    decrease_width: ลดความกว้าง
     destroy_current_workspace: ทำลายพื้นที่ทำงานปัจจุบัน
-    focus_bottom: โฟกัสด้านล่าง
-    focus_latest: โฟกัสล่าสุด
-    focus_left: โฟกัสซ้าย
-    focus_right: โฟกัสขวา
-    focus_top: โฟกัสด้านบน
-    increase_height: เพิ่มความสูง
-    increase_width: เพิ่มความกว้าง
     misc_force_quit: บังคับให้เลิก
     misc_force_restart: บังคับให้รีสตาร์ท
-    misc_open_settings: เปิดการตั้งค่า
-    misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
-    misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
     move_to_workspace: ย้ายไปที่ WorksPace {{0}}
-    move_window_down: ย้ายหน้าต่างไปด้านล่าง
-    move_window_left: ย้ายหน้าต่างไปทางซ้าย
-    move_window_right: ย้ายหน้าต่างไปทางขวา
-    move_window_up: ย้ายหน้าต่างไปด้านบน
-    pause_tiling: หยุดชั่วคราวตัวจัดการหน้าต่างปูกระเบื้อง
-    reserve_bottom: สำรองด้านล่าง
-    reserve_float: สำรองลอย
-    reserve_left: สำรองซ้าย
-    reserve_right: สำรองสิทธิ
-    reserve_stack: กองสำรอง
-    reserve_top: สำรองด้านบน
-    restore_sizes: คืนค่าขนาด
     send_to_workspace: ส่งไปยัง WorksPace {{0}}
-    start_weg_app: โฟกัสหรือเริ่มแอปพลิเคชัน {{0}}
     switch_to_next_workspace: เปลี่ยนเป็นพื้นที่ทำงานถัดไป
     switch_to_previous_workspace: เปลี่ยนไปใช้พื้นที่ทำงานก่อนหน้า
     switch_workspace: สลับไปที่ WorksPace {{0}}
-    toggle_float: สลับโหมดลอยหน้าต่าง
-    toggle_monocle: สลับโหมดเวิร์กสเปซ Monocle
   readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
   reset: รีเซ็ตเป็นค่าเริ่มต้น
 sides:

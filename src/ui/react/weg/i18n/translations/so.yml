@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Qufulka Qufulka
   reorder_enable: Unlock Taskbarbar
 media:
+  label: Ciyaartoyga Warbaahinta
   not_playing: Ma jiraan wax ciyaaraya
 show_desktop:
   label: Muuji Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Kudar Dib-u-warshadaynta Bin Module
 trash_bin:
   empty_bin: Dib u warshadaynta madhan
+  label: Dib u warshadaynta bin
 weg:
   empty: Ma jiraan waxyaabo la tuso

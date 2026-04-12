@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Blokeatu ataza barra
   reorder_enable: Desblokeatu ataza barra
 media:
+  label: Multimedia erreproduzitzailea
   not_playing: Ez da ezer jolasten
 show_desktop:
   label: Erakutsi mahaigaina
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Gehitu Zaborrontzia Modulua
 trash_bin:
   empty_bin: Hustu zakarrontzira
+  label: Birziklatzeko paperontzia
 weg:
   empty: Ez dago erakusteko elementurik

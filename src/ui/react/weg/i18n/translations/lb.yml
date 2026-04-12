@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lock Taskbar
   reorder_enable: Spär Taskbar
 media:
+  label: Media Player
   not_playing: Näischt spillt
 show_desktop:
   label: Show Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Recycle Bin Modul dobäisetzen
 trash_bin:
   empty_bin: Eidel Recycle Bin
+  label: Recycle Bin
 weg:
   empty: Keng Elementer ze weisen

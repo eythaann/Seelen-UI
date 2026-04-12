@@ -1,4 +1,3 @@
-show_desktop: Show Desktop
 battery:
   remaining: '{{0}}% Remaining'
   smart_charge: Smart Charge
@@ -57,3 +56,4 @@ settings:
   power: Power
   restart: Restart
   title: Settings
+show_desktop: Show Desktop

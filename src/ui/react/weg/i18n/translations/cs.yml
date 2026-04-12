@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Uzamčení hlavního panelu
   reorder_enable: Odemknutí hlavního panelu
 media:
+  label: Přehrávač médií
   not_playing: Nic nehraje
 show_desktop:
   label: Zobrazit plochu
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Přidat modul koše
 trash_bin:
   empty_bin: Vyprázdněte koš
+  label: Koš
 weg:
   empty: Žádné položky k zobrazení

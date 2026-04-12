@@ -203,6 +203,7 @@ session:
   sign_in: Войти
   sign_in_hint: Ваш браузер откроется, и вы сможете безопасно войти в систему.
 shortcuts:
+  disabled_tooltip: Виджет и его ярлыки отключены.
   duplicate_error: Этот ярлык дублируется
   enable: Включить встроенную систему ярлыков
   enable_tooltip: >-
@@ -210,45 +211,14 @@ shortcuts:
     используя клиент UI SEELEN
   labels:
     create_new_workspace: Создайте новое рабочее пространство
-    cycle_stack_next: Велосипедный стек следующий
-    cycle_stack_prev: Велосипедный стек предыдущий
-    cycle_wallpaper_next: Переодеться в следующие обои
-    cycle_wallpaper_prev: Переход на предыдущие обои
-    decrease_height: Уменьшить высоту
-    decrease_width: Уменьшить ширину
     destroy_current_workspace: Уничтожить текущее рабочее пространство
-    focus_bottom: Фокус снизу
-    focus_latest: Сосредоточиться на последнем
-    focus_left: Фокус остался
-    focus_right: Фокус правильно
-    focus_top: Фокус Топ
-    increase_height: Увеличить высоту
-    increase_width: Увеличить ширину
     misc_force_quit: Сила ухода
     misc_force_restart: Принудительный перезапуск
-    misc_open_settings: Откройте настройки
-    misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
-    misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
     move_to_workspace: Перейти в рабочую пространство {{0}}
-    move_window_down: Переместить окно внизу
-    move_window_left: Переместить окно налево
-    move_window_right: Переместить окно вправо
-    move_window_up: Переместить окно вверх
-    pause_tiling: Пауза менеджер по плиточному окнам
-    reserve_bottom: Резерв дно
-    reserve_float: Резервировать поплавок
-    reserve_left: Резерв остался
-    reserve_right: Резервировать справа
-    reserve_stack: Резервный стек
-    reserve_top: Резерв вершина
-    restore_sizes: Восстановить размеры
     send_to_workspace: Отправить в рабочее пространство {{0}}
-    start_weg_app: Focus или Start Application {{0}}
     switch_to_next_workspace: Переключиться на следующее рабочее пространство
     switch_to_previous_workspace: Переключиться на предыдущее рабочее пространство
     switch_workspace: Переключить на рабочее пространство {{0}}
-    toggle_float: Переключать режим плавания окна
-    toggle_monocle: Toggle Workspace Monocle режим
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
 sides:

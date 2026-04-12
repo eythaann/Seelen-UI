@@ -207,6 +207,7 @@ session:
     El vostre navegador s'obrirà perquè pugueu iniciar la sessió de manera
     segura.
 shortcuts:
+  disabled_tooltip: El giny i les seves dreceres estan desactivats
   duplicate_error: Aquesta drecera està duplicada
   enable: Activa el sistema integrat de dreceres
   enable_tooltip: >-
@@ -214,45 +215,14 @@ shortcuts:
     el client de la interfície d'usuari de Seelen
   labels:
     create_new_workspace: Creeu un espai de treball nou
-    cycle_stack_next: Stack Cycle Següent
-    cycle_stack_prev: Pila de cicles anterior
-    cycle_wallpaper_next: Canvieu al fons de pantalla següent
-    cycle_wallpaper_prev: Canvieu a fons de pantalla anterior
-    decrease_height: Disminuir l'alçada
-    decrease_width: Disminuir l'amplada
     destroy_current_workspace: Destrueix l'espai de treball actual
-    focus_bottom: Focus Bottom
-    focus_latest: Focus més recent
-    focus_left: Focus deixat
-    focus_right: Centra't a la dreta
-    focus_top: Focus Top
-    increase_height: Augmentar l'alçada
-    increase_width: Augment d'amplada
     misc_force_quit: Força deixar de fumar
     misc_force_restart: Reinici de la força
-    misc_open_settings: Configuració oberta
-    misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
-    misc_toggle_win_event_tracing: Toggle Win Traça (registres)
     move_to_workspace: Desplaceu -vos a l'espai de treball {{0}}
-    move_window_down: Moveu la finestra a baix
-    move_window_left: Moveu la finestra a l'esquerra
-    move_window_right: Moveu la finestra a la dreta
-    move_window_up: Moveu la finestra a la part superior
-    pause_tiling: Pausa Gestor de finestres de rajoles
-    reserve_bottom: Reserva de fons
-    reserve_float: Reserva flotant
-    reserve_left: Reserva a l'esquerra
-    reserve_right: Reserva a la dreta
-    reserve_stack: Pila de reserva
-    reserve_top: Reserva superior
-    restore_sizes: Restaurar les mides
     send_to_workspace: Enviar a l'espai de treball {{0}}
-    start_weg_app: Aplicació Focus o Inici {{0}}
     switch_to_next_workspace: Canvieu al següent espai de treball
     switch_to_previous_workspace: Canvieu a l'espai de treball anterior
     switch_workspace: Switch a Workspace {{0}}
-    toggle_float: Mode de flotació de la finestra de commutació
-    toggle_monocle: Mode Monocle de l'espai de treball
   readonly_tooltip: Aquesta és una drecera de només lectura
   reset: Restableix als valors predeterminats
 sides:

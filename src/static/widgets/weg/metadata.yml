@@ -7,51 +7,51 @@ loader: Legacy
 shortcuts:
   - id: weg-launch-0
     command: ["weg", "foreground-or-run-app", "0"]
-    label: Launch/Focus Dock App 1
+    label: !extend i18n/shortcuts/weg-launch-0.yml
     defaultKeys: ["Win", "1"]
     readonly: true
   - id: weg-launch-1
     command: ["weg", "foreground-or-run-app", "1"]
-    label: Launch/Focus Dock App 2
+    label: !extend i18n/shortcuts/weg-launch-1.yml
     defaultKeys: ["Win", "2"]
     readonly: true
   - id: weg-launch-2
     command: ["weg", "foreground-or-run-app", "2"]
-    label: Launch/Focus Dock App 3
+    label: !extend i18n/shortcuts/weg-launch-2.yml
     defaultKeys: ["Win", "3"]
     readonly: true
   - id: weg-launch-3
     command: ["weg", "foreground-or-run-app", "3"]
-    label: Launch/Focus Dock App 4
+    label: !extend i18n/shortcuts/weg-launch-3.yml
     defaultKeys: ["Win", "4"]
     readonly: true
   - id: weg-launch-4
     command: ["weg", "foreground-or-run-app", "4"]
-    label: Launch/Focus Dock App 5
+    label: !extend i18n/shortcuts/weg-launch-4.yml
     defaultKeys: ["Win", "5"]
     readonly: true
   - id: weg-launch-5
     command: ["weg", "foreground-or-run-app", "5"]
-    label: Launch/Focus Dock App 6
+    label: !extend i18n/shortcuts/weg-launch-5.yml
     defaultKeys: ["Win", "6"]
     readonly: true
   - id: weg-launch-6
     command: ["weg", "foreground-or-run-app", "6"]
-    label: Launch/Focus Dock App 7
+    label: !extend i18n/shortcuts/weg-launch-6.yml
     defaultKeys: ["Win", "7"]
     readonly: true
   - id: weg-launch-7
     command: ["weg", "foreground-or-run-app", "7"]
-    label: Launch/Focus Dock App 8
+    label: !extend i18n/shortcuts/weg-launch-7.yml
     defaultKeys: ["Win", "8"]
     readonly: true
   - id: weg-launch-8
     command: ["weg", "foreground-or-run-app", "8"]
-    label: Launch/Focus Dock App 9
+    label: !extend i18n/shortcuts/weg-launch-8.yml
     defaultKeys: ["Win", "9"]
     readonly: true
   - id: weg-launch-9
     command: ["weg", "foreground-or-run-app", "9"]
-    label: Launch/Focus Dock App 10
+    label: !extend i18n/shortcuts/weg-launch-9.yml
     defaultKeys: ["Win", "0"]
     readonly: true

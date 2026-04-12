@@ -1,72 +1,72 @@
-te: నెట్‌వర్క్ కనెక్షన్ మేనేజర్ మరియు Wi-Fi సెలెక్టర్
-cy: Rheolwr cysylltiad rhwydwaith a dewisydd Wi-Fi
-no: Nettverkstilkoblingsbehandling og Wi-Fi-velger
-de: Netzwerkverbindungsmanager und WLAN-Auswahl
-yo: Oluṣakoso asopọ nẹtiwọki ati oluyan Wi-Fi
-sk: Správca sieťového pripojenia a volič Wi-Fi
-uz: Tarmoq ulanishi menejeri va Wi-Fi selektori
-nl: Netwerkverbindingsmanager en Wi-Fi-selector
-he: מנהל חיבורי רשת ובורר Wi-Fi
-mn: Сүлжээний холболтын менежер ба Wi-Fi сонгогч
-cs: Správce síťových připojení a volič Wi-Fi
-sw: Meneja wa uunganisho wa mtandao na kichaguzi cha Wi-Fi
-zh-TW: 網絡連接管理器和 Wi-Fi 選擇器
-zh-CN: 网络连接管理器和 Wi-Fi 选择器
-ps: د شبکې اتصال مدیر او وائی فای انتخاب کونکی
-so: Maareeyaha isku xirka shabakada iyo xulashada Wi-Fi
-mt: Maniġer tal-konnessjoni tan-netwerk u selettur tal-Wi-Fi
-sv: Nätverksanslutningshanterare och Wi-Fi-väljare
-sr: Менаџер мрежних веза и Ви-Фи бирач
-pt-PT: Gerenciador de conexão de rede e seletor de Wi-Fi
-bg: Мениджър на мрежови връзки и Wi-Fi селектор
-mk: Управувач со мрежна конекција и избирач на Wi-Fi
-en: Network connection manager and Wi-Fi selector
-hr: Upravitelj mrežne veze i Wi-Fi birač
-pl: Menedżer połączeń sieciowych i selektor Wi-Fi
-lb: Netzwierkverbindungsmanager a Wi-Fi Wieler
-ms: Pengurus sambungan rangkaian dan pemilih Wi-Fi
-si: ජාල සම්බන්ධතා කළමනාකරු සහ Wi-Fi තේරීම
-ro: Manager de conexiune la rețea și selector Wi-Fi
-tl: Network connection manager at Wi-Fi selector
-zu: Umphathi woxhumano lwenethiwekhi nesikhethi se-Wi-Fi
-lo: ຕົວຈັດການການເຊື່ອມຕໍ່ເຄືອຂ່າຍ ແລະຕົວເລືອກ Wi-Fi
-uk: Менеджер підключення до мережі та селектор Wi-Fi
-km: កម្មវិធីគ្រប់គ្រងការតភ្ជាប់បណ្តាញ និងឧបករណ៍ជ្រើសរើស Wi-Fi
-tg: Менеҷери пайвасти шабака ва интихоби Wi-Fi
-fr: Gestionnaire de connexion réseau et sélecteur Wi-Fi
-el: Διαχείριση σύνδεσης δικτύου και επιλογέας Wi-Fi
-lt: Tinklo ryšio tvarkyklė ir „Wi-Fi“ parinkiklis
-ku: Rêvebirê pêwendiya torê û hilbijêra Wi-Fi
-id: Manajer koneksi jaringan dan pemilih Wi-Fi
-am: የአውታረ መረብ ግንኙነት አስተዳዳሪ እና Wi-Fi መራጭ
-it: Gestione connessione di rete e selettore Wi-Fi
-eu: Sare-konexioen kudeatzailea eta Wi-Fi hautatzailea
-pa: ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ ਮੈਨੇਜਰ ਅਤੇ Wi-Fi ਚੋਣਕਾਰ
-hi: नेटवर्क कनेक्शन प्रबंधक और वाई-फाई चयनकर्ता
-hu: Hálózati kapcsolatkezelő és Wi-Fi választó
-ar: مدير اتصال الشبكة ومحدد Wi-Fi
-tr: Ağ bağlantı yöneticisi ve Wi-Fi seçici
-ru: Менеджер сетевых подключений и переключатель Wi-Fi
-bn: নেটওয়ার্ক সংযোগ ব্যবস্থাপক এবং Wi-Fi নির্বাচক
-th: ตัวจัดการการเชื่อมต่อเครือข่ายและตัวเลือก Wi-Fi
-ka: ქსელის კავშირის მენეჯერი და Wi-Fi ამომრჩეველი
-ca: Gestor de connexió de xarxa i selector de Wi-Fi
-et: Võrguühenduse haldur ja Wi-Fi valija
-hy: Ցանցային կապի կառավարիչ և Wi-Fi ընտրիչ
-gu: નેટવર્ક કનેક્શન મેનેજર અને Wi-Fi પસંદગીકાર
-ne: नेटवर्क जडान प्रबन्धक र Wi-Fi चयनकर्ता
-vi: Trình quản lý kết nối mạng và bộ chọn Wi-Fi
-lv: Tīkla savienojuma pārvaldnieks un Wi-Fi atlasītājs
-da: Netværksforbindelsesadministrator og Wi-Fi-vælger
-az: Şəbəkə bağlantısı meneceri və Wi-Fi seçicisi
-ur: نیٹ ورک کنکشن منیجر اور وائی فائی سلیکٹر
-fi: Verkkoyhteyden hallinta ja Wi-Fi-valitsin
-pt-BR: Network connection manager and Wi-Fi selector
-ta: பிணைய இணைப்பு மேலாளர் மற்றும் Wi-Fi தேர்வி
-fa: مدیر اتصال شبکه و انتخابگر Wi-Fi
-bs: Menadžer mrežnih veza i Wi-Fi birač
-ko: 네트워크 연결 관리자 및 Wi-Fi 선택기
-es: Administrador de conexión de red y selector de Wi-Fi
 af: Netwerkverbindingbestuurder en Wi-Fi-kieser
+am: የአውታረ መረብ ግንኙነት አስተዳዳሪ እና Wi-Fi መራጭ
+ar: مدير اتصال الشبكة ومحدد Wi-Fi
+az: Şəbəkə bağlantısı meneceri və Wi-Fi seçicisi
+bg: Мениджър на мрежови връзки и Wi-Fi селектор
+bn: নেটওয়ার্ক সংযোগ ব্যবস্থাপক এবং Wi-Fi নির্বাচক
+bs: Menadžer mrežnih veza i Wi-Fi birač
+ca: Gestor de connexió de xarxa i selector de Wi-Fi
+cs: Správce síťových připojení a volič Wi-Fi
+cy: Rheolwr cysylltiad rhwydwaith a dewisydd Wi-Fi
+da: Netværksforbindelsesadministrator og Wi-Fi-vælger
+de: Netzwerkverbindungsmanager und WLAN-Auswahl
+el: Διαχείριση σύνδεσης δικτύου και επιλογέας Wi-Fi
+en: Network connection manager and Wi-Fi selector
+es: Administrador de conexión de red y selector de Wi-Fi
+et: Võrguühenduse haldur ja Wi-Fi valija
+eu: Sare-konexioen kudeatzailea eta Wi-Fi hautatzailea
+fa: مدیر اتصال شبکه و انتخابگر Wi-Fi
+fi: Verkkoyhteyden hallinta ja Wi-Fi-valitsin
+fr: Gestionnaire de connexion réseau et sélecteur Wi-Fi
+gu: નેટવર્ક કનેક્શન મેનેજર અને Wi-Fi પસંદગીકાર
+he: מנהל חיבורי רשת ובורר Wi-Fi
+hi: नेटवर्क कनेक्शन प्रबंधक और वाई-फाई चयनकर्ता
+hr: Upravitelj mrežne veze i Wi-Fi birač
+hu: Hálózati kapcsolatkezelő és Wi-Fi választó
+hy: Ցանցային կապի կառավարիչ և Wi-Fi ընտրիչ
+id: Manajer koneksi jaringan dan pemilih Wi-Fi
 is: Nettengingarstjóri og Wi-Fi val
+it: Gestione connessione di rete e selettore Wi-Fi
 ja: ネットワーク接続マネージャーと Wi-Fi セレクター
+ka: ქსელის კავშირის მენეჯერი და Wi-Fi ამომრჩეველი
+km: កម្មវិធីគ្រប់គ្រងការតភ្ជាប់បណ្តាញ និងឧបករណ៍ជ្រើសរើស Wi-Fi
+ko: 네트워크 연결 관리자 및 Wi-Fi 선택기
+ku: Rêvebirê pêwendiya torê û hilbijêra Wi-Fi
+lb: Netzwierkverbindungsmanager a Wi-Fi Wieler
+lo: ຕົວຈັດການການເຊື່ອມຕໍ່ເຄືອຂ່າຍ ແລະຕົວເລືອກ Wi-Fi
+lt: Tinklo ryšio tvarkyklė ir „Wi-Fi“ parinkiklis
+lv: Tīkla savienojuma pārvaldnieks un Wi-Fi atlasītājs
+mk: Управувач со мрежна конекција и избирач на Wi-Fi
+mn: Сүлжээний холболтын менежер ба Wi-Fi сонгогч
+ms: Pengurus sambungan rangkaian dan pemilih Wi-Fi
+mt: Maniġer tal-konnessjoni tan-netwerk u selettur tal-Wi-Fi
+ne: नेटवर्क जडान प्रबन्धक र Wi-Fi चयनकर्ता
+nl: Netwerkverbindingsmanager en Wi-Fi-selector
+no: Nettverkstilkoblingsbehandling og Wi-Fi-velger
+pa: ਨੈੱਟਵਰਕ ਕਨੈਕਸ਼ਨ ਮੈਨੇਜਰ ਅਤੇ Wi-Fi ਚੋਣਕਾਰ
+pl: Menedżer połączeń sieciowych i selektor Wi-Fi
+ps: د شبکې اتصال مدیر او وائی فای انتخاب کونکی
+pt-BR: Network connection manager and Wi-Fi selector
+pt-PT: Gerenciador de conexão de rede e seletor de Wi-Fi
+ro: Manager de conexiune la rețea și selector Wi-Fi
+ru: Менеджер сетевых подключений и переключатель Wi-Fi
+si: ජාල සම්බන්ධතා කළමනාකරු සහ Wi-Fi තේරීම
+sk: Správca sieťového pripojenia a volič Wi-Fi
+so: Maareeyaha isku xirka shabakada iyo xulashada Wi-Fi
+sr: Менаџер мрежних веза и Ви-Фи бирач
+sv: Nätverksanslutningshanterare och Wi-Fi-väljare
+sw: Meneja wa uunganisho wa mtandao na kichaguzi cha Wi-Fi
+ta: பிணைய இணைப்பு மேலாளர் மற்றும் Wi-Fi தேர்வி
+te: నెట్‌వర్క్ కనెక్షన్ మేనేజర్ మరియు Wi-Fi సెలెక్టర్
+tg: Менеҷери пайвасти шабака ва интихоби Wi-Fi
+th: ตัวจัดการการเชื่อมต่อเครือข่ายและตัวเลือก Wi-Fi
+tl: Network connection manager at Wi-Fi selector
+tr: Ağ bağlantı yöneticisi ve Wi-Fi seçici
+uk: Менеджер підключення до мережі та селектор Wi-Fi
+ur: نیٹ ورک کنکشن منیجر اور وائی فائی سلیکٹر
+uz: Tarmoq ulanishi menejeri va Wi-Fi selektori
+vi: Trình quản lý kết nối mạng và bộ chọn Wi-Fi
+yo: Oluṣakoso asopọ nẹtiwọki ati oluyan Wi-Fi
+zh-CN: 网络连接管理器和 Wi-Fi 选择器
+zh-TW: 網絡連接管理器和 Wi-Fi 選擇器
+zu: Umphathi woxhumano lwenethiwekhi nesikhethi se-Wi-Fi

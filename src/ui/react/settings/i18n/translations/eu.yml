@@ -203,6 +203,7 @@ session:
   sign_in: Hasi saioa
   sign_in_hint: Zure arakatzailea irekiko da, modu seguruan saioa hasteko.
 shortcuts:
+  disabled_tooltip: Widgeta eta haren lasterbideak desgaituta daude
   duplicate_error: Lasterbide hau bikoiztuta dago
   enable: Gaitu zuzeneko lasterbideen sistema
   enable_tooltip: >-
@@ -210,45 +211,14 @@ shortcuts:
     baduzu
   labels:
     create_new_workspace: Sortu laneko espazioa berria
-    cycle_stack_next: Ziklo pila hurrengoa
-    cycle_stack_prev: Ziklo pila Aurrekoa
-    cycle_wallpaper_next: Aldatu hurrengo horma-irudira
-    cycle_wallpaper_prev: Aldatu aurreko horma-irudira
-    decrease_height: Altuera gutxitu
-    decrease_width: Murriztu zabalera
     destroy_current_workspace: Destroy uneko lan-eremua
-    focus_bottom: Fokua Behean
-    focus_latest: Fokua azkena
-    focus_left: Focus ezkerrera
-    focus_right: Argindu eskubidea
-    focus_top: Focus Top
-    increase_height: Altuera handitzea
-    increase_width: Zabalera handitzea
     misc_force_quit: Behartu irten
     misc_force_restart: Indarra berrabiarazi
-    misc_open_settings: Ezarpenak irekitzea
-    misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
-    misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
     move_to_workspace: Mugitu lan-eremura {{0}}
-    move_window_down: Mugitu leihoa beherantz
-    move_window_left: Mugitu leihoa ezkerrera
-    move_window_right: Mugitu leihoa eskuinera
-    move_window_up: Mugitu leihoa goitik
-    pause_tiling: Pausatu fitxa leiho kudeatzailea
-    reserve_bottom: Erreserbatu behealdea
-    reserve_float: Erreserba karroza
-    reserve_left: Erreserba ezkerrera
-    reserve_right: Erreserbatu eskubidea
-    reserve_stack: Erreserba pila
-    reserve_top: Erreserba Top
-    restore_sizes: Neurriak leheneratu
     send_to_workspace: Bidali lantokiari {{0}}
-    start_weg_app: Fokatu edo abiarazi aplikazioa {{0}}
     switch_to_next_workspace: Aldatu hurrengo lantokira
     switch_to_previous_workspace: Aldatu aurreko lan-eremura
     switch_workspace: Aldatu lan-eremura {{0}}
-    toggle_float: Txandakatu leiho karroza modua
-    toggle_monocle: Txandakatu Workspace Monocle modua
   readonly_tooltip: Hau irakurtzeko lasterbidea da
   reset: Berrezarri lehenetsitakoak
 sides:

@@ -1,74 +1,74 @@
-sv: Fönsterhanterare
-en: Window Manager
-ne: वान प्रबन्धक
-zh-TW: 窗口管理器
-ur: ونڈو مینیجر
-tl: Window Manager
-cy: Rheolwr Ffenestr
-eu: Leiho kudeatzailea
+af: Vensterbestuurder
 am: የመስኮት አቀናባሪ
-tg: Менеҷери тиреза
-pl: Menedżer okien
-th: ผู้จัดการหน้าต่าง
-es: Gestor de ventanas
-fa: مدیر پنجره
-gu: બારી
 ar: مدير النافذة
-is: Gluggastjóri
 az: Pəncərə meneceri
-km: កម្មវិធីគ្រប់គ្រងបង្អួច
-hu: Ablakkezelő
-lt: Langų tvarkyklė
-sr: Менаџер прозора
-ko: 창 관리자
-it: Gestore della finestra
-he: מנהל חלונות
-lv: Logu pārvaldnieks
-cs: Správce oken
-tr: Pencere Yöneticisi
-hi: विंडो मैनेजर
-zu: Imenenja yewindows
-mn: Цонхны менежер
-bs: Upravitelj prozora
-pt-PT: Gerenciador de janelas
+bg: Мениджър на прозорци
 bn: উইন্ডো ম্যানেজার
-hr: Upravitelj prozora
-no: Vindusleder
-et: Window Manager
-uk: Диспетчер вікон
-mt: Window Manager
-so: Maamulaha daaqada
-ps: د کړکۍ مدیر
-zh: 窗口管理器
-da: Vindueshåndtering
-mk: Менаџер на прозорци
-nl: Venster Manager
-hy: Պատուհանների կառավարիչ
+bs: Upravitelj prozora
 ca: Gestor de finestres
-id: Manajer Jendela
-zh-CN: 窗口管理器
-uz: Oyna menejeri
+cs: Správce oken
+cy: Rheolwr Ffenestr
+da: Vindueshåndtering
+de: Fenster-Manager
+el: Διαχειριστής παραθύρων
+en: Window Manager
+es: Gestor de ventanas
+et: Window Manager
+eu: Leiho kudeatzailea
+fa: مدیر پنجره
 fi: Ikkunanhallinta
-sk: Správca okien
 fr: Gestionnaire de fenêtres
+gu: બારી
+he: מנהל חלונות
+hi: विंडो मैनेजर
+hr: Upravitelj prozora
+hu: Ablakkezelő
+hy: Պատուհանների կառավարիչ
+id: Manajer Jendela
+is: Gluggastjóri
+it: Gestore della finestra
 ja: ウィンドウ・マネージャー
-te: విండో మేనేజర్
+ka: ფანჯრის მენეჯერი
+km: កម្មវិធីគ្រប់គ្រងបង្អួច
+ko: 창 관리자
+ku: Rêvebirê pencereyê
+lb: Fënter Manager
+lo: ຜູ້ຈັດການ Window
+lt: Langų tvarkyklė
+lv: Logu pārvaldnieks
+mk: Менаџер на прозорци
+mn: Цонхны менежер
+ms: Pengurus tetingkap
+mt: Window Manager
+ne: वान प्रबन्धक
+nl: Venster Manager
+no: Vindusleder
+pa: ਵਿੰਡੋ ਮੈਨੇਜਰ
+pl: Menedżer okien
+ps: د کړکۍ مدیر
+pt: Gerenciador de janelas
+pt-BR: Window Manager
+pt-PT: Gerenciador de janelas
+ro: Manager de ferestre
+ru: Менеджер окон
+si: කවුළු කළමනාකරු
+sk: Správca okien
+so: Maamulaha daaqada
+sr: Менаџер прозора
+sv: Fönsterhanterare
 sw: Meneja wa Window
 ta: விண்டர் மேலாளர்
-de: Fenster-Manager
+te: విండో మేనేజర్
+tg: Менеҷери тиреза
+th: ผู้จัดการหน้าต่าง
+tl: Window Manager
+tr: Pencere Yöneticisi
+uk: Диспетчер вікон
+ur: ونڈو مینیجر
+uz: Oyna menejeri
 vi: Quản lý cửa sổ
-lb: Fënter Manager
-af: Vensterbestuurder
-bg: Мениджър на прозорци
-ro: Manager de ferestre
-lo: ຜູ້ຈັດການ Window
-ru: Менеджер окон
-ms: Pengurus tetingkap
 yo: Oluṣakoso window
-pt: Gerenciador de janelas
-ku: Rêvebirê pencereyê
-pa: ਵਿੰਡੋ ਮੈਨੇਜਰ
-el: Διαχειριστής παραθύρων
-ka: ფანჯრის მენეჯერი
-si: කවුළු කළමනාකරු
-pt-BR: Window Manager
+zh: 窗口管理器
+zh-CN: 窗口管理器
+zh-TW: 窗口管理器
+zu: Imenenja yewindows

@@ -202,6 +202,7 @@ session:
   sign_in: साइन इन गर्नुहोस्
   sign_in_hint: तपाईंको ब्राउजर खुल्नेछ ताकि तपाईं सुरक्षित रूपमा साइन इन गर्न सक्नुहुन्छ।
 shortcuts:
+  disabled_tooltip: विजेट र यसको सर्टकटहरू असक्षम छन्
   duplicate_error: यो सर्टकट दोहोरिएको छ
   enable: निर्मित सर्टकट प्रणाली सक्षम गर्नुहोस्
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     गर्नुहुन्छ भने असक्षम गर्नुहोस्
   labels:
     create_new_workspace: नयाँ कार्यस्थान सिर्जना गर्नुहोस्
-    cycle_stack_next: साइकल स्ट्याक अर्को
-    cycle_stack_prev: चक्र स्ट्याक अघिल्लो
-    cycle_wallpaper_next: अर्को वालपेपरमा परिवर्तन गर्नुहोस्
-    cycle_wallpaper_prev: अघिल्लो वालपेपरमा परिवर्तन गर्नुहोस्
-    decrease_height: उचाई घटाउनुहोस्
-    decrease_width: चौडाई कम
     destroy_current_workspace: वर्तमान कार्यक्षेत्र नष्ट गर्नुहोस्
-    focus_bottom: फोकस तल
-    focus_latest: पछिल्लो ध्यान दिनुहोस्
-    focus_left: फर्काउनुहोस्
-    focus_right: ध्यान केन्द्रित गर्नुहोस्
-    focus_top: फोकस शीर्ष
-    increase_height: उचाइ बढाउनुहोस्
-    increase_width: चौडाई बढाउनुहोस्
     misc_force_quit: बल छोडियो
     misc_force_restart: साउसाट
-    misc_open_settings: खुला सेटिंग्स
-    misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
-    misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
     move_to_workspace: कार्यक्षेत्रमा जानुहोस् {0}}
-    move_window_down: विन्डो तल सार्नुहोस्
-    move_window_left: बाँयामा विन्डो सार्नुहोस्
-    move_window_right: विन्डोलाई दायाँ सार्नुहोस्
-    move_window_up: विन्डो शीर्षमा सार्नुहोस्
-    pause_tiling: टेल टेल विन्डो प्रबन्धक रोक्नुहोस्
-    reserve_bottom: रिजर्व तल
-    reserve_float: रिजर्भ फ्लोट
-    reserve_left: त्यागी बायाँ
-    reserve_right: रिजर्व सहि
-    reserve_stack: रिजर्व स्ट्याक
-    reserve_top: रिजर्व शीर्ष
-    restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
     send_to_workspace: कार्यक्षेत्रमा पठाउनुहोस् {0}}}
-    start_weg_app: फोकस वा सुरू गर्नुहोस् {0} 0}}
     switch_to_next_workspace: अर्को कार्यक्षेत्रमा स्विच गर्नुहोस्
     switch_to_previous_workspace: अघिल्लो कार्यक्षेत्रमा स्विच गर्नुहोस्
     switch_workspace: कार्यक्षेत्रमा स्विच {0}}
-    toggle_float: टगलल विन्डो फ्लोट मोड
-    toggle_monocle: टगलस्प्लिप मोयर्सिल मोनोकल मोड
   readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
   reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
 sides:

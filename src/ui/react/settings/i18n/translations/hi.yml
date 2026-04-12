@@ -204,6 +204,7 @@ session:
   sign_in: दाखिल करना
   sign_in_hint: आपका ब्राउज़र खुल जाएगा ताकि आप सुरक्षित रूप से साइन इन कर सकें।
 shortcuts:
+  disabled_tooltip: विजेट और उसके शॉर्टकट अक्षम हैं
   duplicate_error: यह शॉर्टकट डुप्लिकेट है
   enable: अंतर्निहित शॉर्टकट सिस्टम सक्षम करें
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     सिस्टम को लागू करेंगे
   labels:
     create_new_workspace: नया कार्यक्षेत्र बनाएं
-    cycle_stack_next: साइकिल ढेर अगला
-    cycle_stack_prev: चक्र ढेर पिछला
-    cycle_wallpaper_next: अगले वॉलपेपर में बदलें
-    cycle_wallpaper_prev: पिछले वॉलपेपर में बदलें
-    decrease_height: ऊंचाई में कमी
-    decrease_width: चौड़ाई में कमी
     destroy_current_workspace: वर्तमान कार्यक्षेत्र को नष्ट करें
-    focus_bottom: फोकस बॉटम
-    focus_latest: नवीनतम ध्यान केंद्रित करें
-    focus_left: फोकस लेफ्ट
-    focus_right: ध्यान केंद्रित करना
-    focus_top: फोकस टॉप
-    increase_height: ऊंचाई बढ़ाना
-    increase_width: चौड़ाई में वृद्धि
     misc_force_quit: जबरन छोड़ना
     misc_force_restart: बल फिर से शुरू करना
-    misc_open_settings: खुली सेटिंग
-    misc_toggle_lock_tracing: टॉगल लॉक ट्रेसिंग (लॉग)
-    misc_toggle_win_event_tracing: टॉगल जीत इवेंट ट्रेसिंग (लॉग)
     move_to_workspace: कार्यक्षेत्र {{0}} पर जाएं
-    move_window_down: खिड़की को नीचे तक ले जाएं
-    move_window_left: खिड़की को बाईं ओर ले जाएं
-    move_window_right: खिड़की को दाईं ओर ले जाएं
-    move_window_up: खिड़की को शीर्ष पर ले जाएं
-    pause_tiling: टाइलिंग विंडो मैनेजर को रोकें
-    reserve_bottom: रिजर्व
-    reserve_float: रिजर्व फ्लोट
-    reserve_left: आरक्षित आरक्षित
-    reserve_right: आरक्षित अधिकार
-    reserve_stack: आरक्षित स्टैक
-    reserve_top: आरक्षित शीर्ष
-    restore_sizes: आकारों को बहाल करें
     send_to_workspace: कार्यक्षेत्र {{0}} को भेजें
-    start_weg_app: फोकस करें या आवेदन शुरू करें {{0}}
     switch_to_next_workspace: अगले कार्यक्षेत्र पर स्विच करें
     switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें
     switch_workspace: कार्यक्षेत्र {{0}} पर स्विच करें
-    toggle_float: टॉगल विंडो फ्लोट मोड
-    toggle_monocle: टॉगल वर्कस्पेस मोनोकल मोड
   readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
   reset: डिफ़ॉल्ट पर पुनः सेट करें
 sides:

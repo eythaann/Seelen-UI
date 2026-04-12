@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
 media:
+  label: Lecteur multimédia
   not_playing: Vide
 show_desktop:
   label: Afficher le bureau
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Ajouter un module de corbeille
 trash_bin:
   empty_bin: Corbeille vide
+  label: Corbeille
 weg:
   empty: Aucun élément à afficher

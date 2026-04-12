@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lås proceslinjen
   reorder_enable: Lås proceslinjen op
 media:
+  label: Medieafspiller
   not_playing: Intet spiller
 show_desktop:
   label: Vis skrivebord
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Tilføj papirkurvsmodul
 trash_bin:
   empty_bin: Tøm papirkurven
+  label: Papirkurv
 weg:
   empty: Ingen elementer at vise

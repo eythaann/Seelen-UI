@@ -11,11 +11,11 @@ lazy: true
 settings:
   - type: select
     key: displayNameSource
-    label: Display Name
+    label: !extend i18n/settings/display-name-source.yml
     options:
-      - label: Profile Name
+      - label: !extend i18n/settings/display-name-source-profile-name.yml
         value: profileName
-      - label: Xbox Gamertag
+      - label: !extend i18n/settings/display-name-source-xbox-gamertag.yml
         value: xboxGamertag
     defaultValue: profileName
 plugins:

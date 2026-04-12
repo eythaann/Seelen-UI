@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ჩაკეტეთ დავალების პანელი
   reorder_enable: განბლოკეთ დავალების ზოლი
 media:
+  label: მედია ფლეერი
   not_playing: არაფერი თამაშობს
 show_desktop:
   label: დესკტოპის ჩვენება
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: დაამატეთ Recycle Bin მოდული
 trash_bin:
   empty_bin: ცარიელი გადასამუშავებელი ურნა
+  label: Recycle Bin
 weg:
   empty: საჩვენებელი ელემენტი არ არის

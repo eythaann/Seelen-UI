@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Блокування панелі завдань
   reorder_enable: Розблокувати панель завдань
 media:
+  label: Медіаплеєр
   not_playing: Аудіо не відтворюється
 show_desktop:
   label: Показати робочий стіл
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Додайте модуль кошика
 trash_bin:
   empty_bin: Очистити корзину
+  label: Кошик
 weg:
   empty: Немає елементів для показу

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: লক টাস্কবার
   reorder_enable: টাস্কবার আনলক করুন
 media:
+  label: মিডিয়া প্লেয়ার
   not_playing: কিছুই খেলছে না
 show_desktop:
   label: ডেস্কটপ দেখান
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: রিসাইকেল বিন মডিউল যোগ করুন
 trash_bin:
   empty_bin: খালি রিসাইকেল বিন
+  label: রিসাইকেল বিন
 weg:
   empty: দেখানোর জন্য কোনো আইটেম নেই

@@ -202,6 +202,7 @@ session:
   sign_in: Log ind
   sign_in_hint: Din browser åbnes, så du kan logge på sikkert.
 shortcuts:
+  disabled_tooltip: Widgetten og dens genveje er deaktiveret
   duplicate_error: Denne genvej er duplikeret
   enable: Aktivér det indbyggede genvejssystem
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     Seelen UI Client
   labels:
     create_new_workspace: Opret et nyt arbejdsområde
-    cycle_stack_next: Cyklus-stak Næste
-    cycle_stack_prev: Cyklus-stak Tidligere
-    cycle_wallpaper_next: Skift til næste baggrund
-    cycle_wallpaper_prev: Skift til forrige baggrund
-    decrease_height: Reducer højden
-    decrease_width: Reducer bredden
     destroy_current_workspace: Ødelæg det nuværende arbejdsområde
-    focus_bottom: Fokus på bunden
-    focus_latest: Fokus på det seneste
-    focus_left: Fokus til venstre
-    focus_right: Fokuser rigtigt
-    focus_top: Fokus på toppen
-    increase_height: Forøg højden
-    increase_width: Øg bredden
     misc_force_quit: Force stopper
     misc_force_restart: Fremtving genstart
-    misc_open_settings: Åbn indstillinger
-    misc_toggle_lock_tracing: Skift låsesporing (logfiler)
-    misc_toggle_win_event_tracing: Slå Win Event Tracing til (logfiler)
     move_to_workspace: Flyt til arbejdsområde {{0}}
-    move_window_down: Flyt vinduet til bunden
-    move_window_left: Flyt vinduet til venstre
-    move_window_right: Flyt vinduet til højre
-    move_window_up: Flyt vinduet til toppen
-    pause_tiling: Sæt Tiling Window Manager på pause
-    reserve_bottom: Reserve bund
-    reserve_float: Reserve Float
-    reserve_left: Reserve til venstre
-    reserve_right: Reserver ret
-    reserve_stack: Reserve-stak
-    reserve_top: Reserver top
-    restore_sizes: Gendan størrelser
     send_to_workspace: Send til arbejdsområde {{0}}
-    start_weg_app: Fokuser eller start programmet {{0}}
     switch_to_next_workspace: Skift til næste arbejdsområde
     switch_to_previous_workspace: Skift til forrige arbejdsområde
     switch_workspace: Skift til arbejdsområde {{0}}
-    toggle_float: Skift mellem vinduets flydende tilstand
-    toggle_monocle: Skift arbejdsområdets Monocle-tilstand
   readonly_tooltip: Dette er en skrivebeskyttet genvej
   reset: Nulstil til standardindstillinger
 sides:

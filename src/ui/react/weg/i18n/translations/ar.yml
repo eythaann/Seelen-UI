@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: قفل شريط المهام
   reorder_enable: فتح شريط المهام
 media:
+  label: مشغل الوسائط
   not_playing: لا توجد ملفات
 show_desktop:
   label: إظهار سطح المكتب
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: إضافة وحدة سلة المحذوفات
 trash_bin:
   empty_bin: سلة المحذوفات فارغة
+  label: سلة المحذوفات
 weg:
   empty: لا توجد عناصر لعرضها

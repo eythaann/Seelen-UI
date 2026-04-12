@@ -198,6 +198,7 @@ session:
   sign_in: Sign In
   sign_in_hint: Your browser will open so you can sign in securely.
 shortcuts:
+  disabled_tooltip: The widget and its shortcuts are disabled
   duplicate_error: This shortcut is duplicated
   enable: Enable built-in shortcuts system
   enable_tooltip: >-
@@ -205,46 +206,14 @@ shortcuts:
     Client
   labels:
     create_new_workspace: Create new Workspace
-    cycle_stack_next: Cycle Stack Next
-    cycle_stack_prev: Cycle Stack Previous
-    cycle_wallpaper_next: Change to Next Wallpaper
-    cycle_wallpaper_prev: Change to Previous Wallpaper
-    decrease_height: Decrease Height
-    decrease_width: Decrease Width
     destroy_current_workspace: Destroy Current Workspace
-    focus_bottom: Focus Bottom
-    focus_latest: Focus Latest
-    focus_left: Focus Left
-    focus_right: Focus Right
-    focus_top: Focus Top
-    increase_height: Increase Height
-    increase_width: Increase Width
     misc_force_quit: Force Quit
     misc_force_restart: Force Restart
-    misc_open_settings: Open Settings
-    misc_toggle_lock_tracing: Toggle Lock Tracing (logs)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
     move_to_workspace: Move to Workspace {{0}}
-    move_window_down: Move Window to Bottom
-    move_window_left: Move Window to Left
-    move_window_right: Move Window to Right
-    move_window_up: Move Window to Top
-    pause_tiling: Pause Tiling Window Manager
-    reserve_bottom: Reserve Bottom
-    reserve_float: Reserve Float
-    reserve_left: Reserve Left
-    reserve_right: Reserve Right
-    reserve_stack: Reserve Stack
-    reserve_top: Reserve Top
-    restore_sizes: Restore Sizes
     send_to_workspace: Send to Workspace {{0}}
-    start_weg_app: Focus or Start Application {{0}}
     switch_to_next_workspace: Switch to Next Workspace
     switch_to_previous_workspace: Switch to Previous Workspace
     switch_workspace: Switch to Workspace {{0}}
-    toggle_float: Toggle Window Float Mode
-    toggle_monocle: Toggle Workspace Monocle Mode
-  disabled_tooltip: The widget and its shortcuts are disabled
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults
 sides:

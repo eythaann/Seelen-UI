@@ -206,6 +206,7 @@ session:
   sign_in: Registrazione
   sign_in_hint: Il tuo browser si aprirà per consentirti di accedere in modo sicuro.
 shortcuts:
+  disabled_tooltip: Il widget e i suoi collegamenti sono disabilitati
   duplicate_error: Questa scorciatoia è duplicata
   enable: Abilita le scorciatoie integrate
   enable_tooltip: >-
@@ -213,45 +214,14 @@ shortcuts:
     client UI Seelen
   labels:
     create_new_workspace: Crea nuovo spazio di lavoro
-    cycle_stack_next: Cycle Stack Next
-    cycle_stack_prev: Cycle Stack precedente
-    cycle_wallpaper_next: Cambia allo sfondo successivo
-    cycle_wallpaper_prev: Passa allo sfondo precedente
-    decrease_height: Diminuire l'altezza
-    decrease_width: Diminuire la larghezza
     destroy_current_workspace: Distruggi l'attuale spazio di lavoro
-    focus_bottom: Focus Bottom
-    focus_latest: Focus Ultime
-    focus_left: Focus a sinistra
-    focus_right: Concentrati bene
-    focus_top: Focus top
-    increase_height: Aumenta l'altezza
-    increase_width: Aumentare la larghezza
     misc_force_quit: Force smettila
     misc_force_restart: Riavvio forzato
-    misc_open_settings: Impostazioni aperte
-    misc_toggle_lock_tracing: Attiva il tracciamento del blocco (tronchi)
-    misc_toggle_win_event_tracing: Taggle Win Event Tracing (Logs)
     move_to_workspace: Passa su Workspace {{0}}
-    move_window_down: Sposta la finestra sul fondo
-    move_window_left: Sposta la finestra a sinistra
-    move_window_right: Sposta la finestra a destra
-    move_window_up: Sposta la finestra in alto
-    pause_tiling: Pausa pausa manager delle finestre
-    reserve_bottom: Riserva Bottom
-    reserve_float: Float di riserva
-    reserve_left: Riserva a sinistra
-    reserve_right: Riserva a destra
-    reserve_stack: Stack di riserva
-    reserve_top: Riserva Top
-    restore_sizes: Ripristinare le dimensioni
     send_to_workspace: Invia a Workspace {{0}}
-    start_weg_app: Focus o Start Application {{0}}
     switch_to_next_workspace: Passa all'area di lavoro successiva
     switch_to_previous_workspace: Passa all'area di lavoro precedente
     switch_workspace: Passa a Workspace {{0}}
-    toggle_float: Attiva la modalità galleggiante della finestra
-    toggle_monocle: Attivare la modalità monoclo dell'area di lavoro
   readonly_tooltip: Questo è un collegamento di sola lettura
   reset: Ripristina le impostazioni predefinite
 sides:

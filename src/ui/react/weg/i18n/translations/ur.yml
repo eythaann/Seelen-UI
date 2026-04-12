@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: لاک ٹاسک بار
   reorder_enable: ٹاسک بار کو غیر مقفل کریں
 media:
+  label: میڈیا پلیئر
   not_playing: کچھ نہیں کھیل رہا ہے
 show_desktop:
   label: ڈیسک ٹاپ دکھائیں
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: ری سائیکل بن ماڈیول شامل کریں۔
 trash_bin:
   empty_bin: خالی ری سائیکل بن
+  label: ری سائیکل بن
 weg:
   empty: دکھانے کے لیے کوئی آئٹمز نہیں۔

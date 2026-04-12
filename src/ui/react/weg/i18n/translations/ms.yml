@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Kunci bar tugas
   reorder_enable: Buka kunci bar tugas
 media:
+  label: Pemain Media
   not_playing: Tidak ada yang bermain
 show_desktop:
   label: Tunjukkan Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Tambah Modul Tong Kitar Semula
 trash_bin:
   empty_bin: Tong Kitar Semula Kosong
+  label: Tong Kitar Semula
 weg:
   empty: Tiada item untuk ditunjukkan

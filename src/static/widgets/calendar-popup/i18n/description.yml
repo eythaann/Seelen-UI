@@ -1,72 +1,72 @@
-tg: Ҳангоми клик кардани сана, поп-ап тақвимро нишон диҳед
-mn: Огноог дарах үед календарийн цонх гарч ирнэ
-th: แสดงป๊อปอัปปฏิทินเมื่อคลิกวันที่
-fr: Afficher une fenêtre contextuelle de calendrier lorsque vous cliquez sur la date
-lv: Parādiet kalendāra uznirstošo logu, noklikšķinot uz datuma
-ku: Dema ku li ser tarîxê bikirtînin, vebijarkek salnameyê nîşan bidin
-si: දිනය ක්ලික් කරන විට දින දර්ශන උත්පතනයක් සංදර්ශන කරන්න
-ps: کله چې په نیټه کلیک وکړئ د کیلنڈر پاپ اپ ښکاره کړئ
+af: Vertoon 'n kalenderopspringer wanneer u op die datum klik
+am: ቀኑን ጠቅ ሲያደርጉ የቀን መቁጠሪያ ብቅ ባይ ያሳዩ
+ar: عرض نافذة منبثقة للتقويم عند النقر فوق التاريخ
+az: Tarixə kliklədikdə təqvim popupunu göstərin
+bg: Показване на изскачащ прозорец на календара, когато щракнете върху датата
+bn: তারিখে ক্লিক করার সময় একটি ক্যালেন্ডার পপআপ প্রদর্শন করুন
+bs: Prikažite iskačući prozor kalendara kada kliknete na datum
+ca: Mostra una finestra emergent de calendari en fer clic a la data
+cs: Po kliknutí na datum zobrazit vyskakovací okno kalendáře
+cy: Arddangos ffenestr naid calendr wrth glicio ar y dyddiad
+da: Vis en kalender-popup, når du klikker på datoen
+de: Beim Klicken auf das Datum wird ein Kalender-Popup angezeigt
+el: Εμφανίστε ένα αναδυόμενο ημερολόγιο όταν κάνετε κλικ στην ημερομηνία
+en: Display a calendar popup when clicking the date
+es: Mostrar una ventana emergente de calendario al hacer clic en la fecha
+et: Kuupäeva klõpsamisel kuvatakse kalendri hüpikaken
+eu: Erakutsi egutegi-leiho bat data sakatzean
 fa: هنگام کلیک کردن روی تاریخ، یک پنجره بازشو تقویم نمایش داده شود
 fi: Näytä kalenterin ponnahdusikkuna, kun napsautat päivämäärää
-pt-PT: Exibir um pop-up de calendário ao clicar na data
-nl: Geef een kalenderpop-up weer wanneer u op de datum klikt
+fr: Afficher une fenêtre contextuelle de calendrier lorsque vous cliquez sur la date
+gu: તારીખ પર ક્લિક કરતી વખતે કૅલેન્ડર પૉપઅપ પ્રદર્શિત કરો
+he: הצג חלון קופץ של לוח שנה בעת לחיצה על התאריך
+hi: दिनांक पर क्लिक करते समय एक कैलेंडर पॉपअप प्रदर्शित करें
+hr: Prikažite skočni prozor kalendara kada kliknete na datum
+hu: A dátumra kattintva megjelenik egy felugró naptár
+hy: Ցուցադրել օրացույցի ելնող պատուհան՝ սեղմելով ամսաթիվը
+id: Menampilkan popup kalender saat mengklik tanggal
+is: Birtu sprettiglugga fyrir dagatal þegar þú smellir á dagsetninguna
+it: Visualizza un popup del calendario quando si fa clic sulla data
+ja: 日付をクリックするとカレンダーのポップアップが表示されます
+ka: აჩვენეთ კალენდრის ამომხტარი ფანჯარა თარიღზე დაწკაპუნებისას
+km: បង្ហាញ​ប្រតិទិន​លេចឡើង​ពេល​ចុច​កាលបរិច្ឆេទ
+ko: 날짜 클릭 시 달력 팝업 표시
+ku: Dema ku li ser tarîxê bikirtînin, vebijarkek salnameyê nîşan bidin
+lb: Weist e Kalenner Popup wann Dir op den Datum klickt
+lo: ສະແດງປັອບອັບປະຕິທິນເມື່ອຄລິກວັນທີ
+lt: Spustelėjus datą, rodomas iššokantis kalendoriaus langas
+lv: Parādiet kalendāra uznirstošo logu, noklikšķinot uz datuma
+mk: Прикажи скокачки прозорец од календарот кога ќе се кликне на датумот
+mn: Огноог дарах үед календарийн цонх гарч ирнэ
 ms: Paparkan pop timbul kalendar apabila mengklik tarikh
 mt: Uri popup tal-kalendarju meta tikklikkja d-data
-da: Vis en kalender-popup, når du klikker på datoen
-pt-BR: Display a calendar popup when clicking the date
-gu: તારીખ પર ક્લિક કરતી વખતે કૅલેન્ડર પૉપઅપ પ્રદર્શિત કરો
-ja: 日付をクリックするとカレンダーのポップアップが表示されます
-lt: Spustelėjus datą, rodomas iššokantis kalendoriaus langas
-hr: Prikažite skočni prozor kalendara kada kliknete na datum
-bg: Показване на изскачащ прозорец на календара, когато щракнете върху датата
-mk: Прикажи скокачки прозорец од календарот кога ќе се кликне на датумот
-te: తేదీని క్లిక్ చేసినప్పుడు క్యాలెండర్ పాప్‌అప్‌ని ప్రదర్శించండి
-zh-CN: 单击日期时显示日历弹出窗口
-de: Beim Klicken auf das Datum wird ein Kalender-Popup angezeigt
-uk: Відображати спливаюче вікно календаря при натисканні дати
-sv: Visa en kalenderpopup när du klickar på datumet
-tr: Tarihe tıklandığında bir takvim açılır penceresi görüntüle
-az: Tarixə kliklədikdə təqvim popupunu göstərin
-sw: Onyesha dirisha ibukizi la kalenda unapobofya tarehe
-pl: Wyświetl wyskakujące okienko kalendarza po kliknięciu daty
-ro: Afișați o fereastră de tip pop-up de calendar când faceți clic pe dată
-en: Display a calendar popup when clicking the date
-lo: ສະແດງປັອບອັບປະຕິທິນເມື່ອຄລິກວັນທີ
-ar: عرض نافذة منبثقة للتقويم عند النقر فوق التاريخ
-es: Mostrar una ventana emergente de calendario al hacer clic en la fecha
-hi: दिनांक पर क्लिक करते समय एक कैलेंडर पॉपअप प्रदर्शित करें
-bs: Prikažite iskačući prozor kalendara kada kliknete na datum
-ta: தேதியைக் கிளிக் செய்யும் போது ஒரு காலண்டர் பாப்அப்பைக் காண்பிக்கவும்
-eu: Erakutsi egutegi-leiho bat data sakatzean
-sk: Po kliknutí na dátum sa zobrazí kontextové okno kalendára
-cs: Po kliknutí na datum zobrazit vyskakovací okno kalendáře
-zu: Bonisa iphophaphu yekhalenda lapho uchofoza idethi
-no: Vis en kalender-popup når du klikker på datoen
-zh-TW: 單擊日期時顯示日曆彈出窗口
-ru: Отображать всплывающее окно календаря при нажатии на дату
-af: Vertoon 'n kalenderopspringer wanneer u op die datum klik
-hy: Ցուցադրել օրացույցի ելնող պատուհան՝ սեղմելով ամսաթիվը
-pa: ਮਿਤੀ 'ਤੇ ਕਲਿੱਕ ਕਰਨ ਵੇਲੇ ਇੱਕ ਕੈਲੰਡਰ ਪੌਪਅੱਪ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰੋ
-el: Εμφανίστε ένα αναδυόμενο ημερολόγιο όταν κάνετε κλικ στην ημερομηνία
-sr: Прикажите искачући прозор календара када кликнете на датум
-yo: Ṣe afihan igarun kalẹnda nigbati o ba tẹ ọjọ naa
-cy: Arddangos ffenestr naid calendr wrth glicio ar y dyddiad
-ca: Mostra una finestra emergent de calendari en fer clic a la data
-hu: A dátumra kattintva megjelenik egy felugró naptár
-tl: Magpakita ng popup ng kalendaryo kapag nag-click sa petsa
-am: ቀኑን ጠቅ ሲያደርጉ የቀን መቁጠሪያ ብቅ ባይ ያሳዩ
-vi: Hiển thị cửa sổ bật lên lịch khi nhấp vào ngày
-et: Kuupäeva klõpsamisel kuvatakse kalendri hüpikaken
-it: Visualizza un popup del calendario quando si fa clic sulla data
-uz: Sanani bosganingizda taqvim qalqib chiquvchi oynasini ko'rsating
-id: Menampilkan popup kalender saat mengklik tanggal
-ko: 날짜 클릭 시 달력 팝업 표시
 ne: मिति क्लिक गर्दा क्यालेन्डर पपअप प्रदर्शन गर्नुहोस्
-km: បង្ហាញ​ប្រតិទិន​លេចឡើង​ពេល​ចុច​កាលបរិច្ឆេទ
-lb: Weist e Kalenner Popup wann Dir op den Datum klickt
-he: הצג חלון קופץ של לוח שנה בעת לחיצה על התאריך
-ur: تاریخ پر کلک کرتے وقت کیلنڈر پاپ اپ ڈسپلے کریں
-ka: აჩვენეთ კალენდრის ამომხტარი ფანჯარა თარიღზე დაწკაპუნებისას
-bn: তারিখে ক্লিক করার সময় একটি ক্যালেন্ডার পপআপ প্রদর্শন করুন
-is: Birtu sprettiglugga fyrir dagatal þegar þú smellir á dagsetninguna
+nl: Geef een kalenderpop-up weer wanneer u op de datum klikt
+no: Vis en kalender-popup når du klikker på datoen
+pa: ਮਿਤੀ 'ਤੇ ਕਲਿੱਕ ਕਰਨ ਵੇਲੇ ਇੱਕ ਕੈਲੰਡਰ ਪੌਪਅੱਪ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰੋ
+pl: Wyświetl wyskakujące okienko kalendarza po kliknięciu daty
+ps: کله چې په نیټه کلیک وکړئ د کیلنڈر پاپ اپ ښکاره کړئ
+pt-BR: Display a calendar popup when clicking the date
+pt-PT: Exibir um pop-up de calendário ao clicar na data
+ro: Afișați o fereastră de tip pop-up de calendar când faceți clic pe dată
+ru: Отображать всплывающее окно календаря при нажатии на дату
+si: දිනය ක්ලික් කරන විට දින දර්ශන උත්පතනයක් සංදර්ශන කරන්න
+sk: Po kliknutí na dátum sa zobrazí kontextové okno kalendára
 so: Muuji popup kalandarka markaad gujinayso taariikhda
+sr: Прикажите искачући прозор календара када кликнете на датум
+sv: Visa en kalenderpopup när du klickar på datumet
+sw: Onyesha dirisha ibukizi la kalenda unapobofya tarehe
+ta: தேதியைக் கிளிக் செய்யும் போது ஒரு காலண்டர் பாப்அப்பைக் காண்பிக்கவும்
+te: తేదీని క్లిక్ చేసినప్పుడు క్యాలెండర్ పాప్‌అప్‌ని ప్రదర్శించండి
+tg: Ҳангоми клик кардани сана, поп-ап тақвимро нишон диҳед
+th: แสดงป๊อปอัปปฏิทินเมื่อคลิกวันที่
+tl: Magpakita ng popup ng kalendaryo kapag nag-click sa petsa
+tr: Tarihe tıklandığında bir takvim açılır penceresi görüntüle
+uk: Відображати спливаюче вікно календаря при натисканні дати
+ur: تاریخ پر کلک کرتے وقت کیلنڈر پاپ اپ ڈسپلے کریں
+uz: Sanani bosganingizda taqvim qalqib chiquvchi oynasini ko'rsating
+vi: Hiển thị cửa sổ bật lên lịch khi nhấp vào ngày
+yo: Ṣe afihan igarun kalẹnda nigbati o ba tẹ ọjọ naa
+zh-CN: 单击日期时显示日历弹出窗口
+zh-TW: 單擊日期時顯示日曆彈出窗口
+zu: Bonisa iphophaphu yekhalenda lapho uchofoza idethi

@@ -208,6 +208,7 @@ session:
   sign_in: Soo gal
   sign_in_hint: Barrawsarkaaga ayaa furmi doona si aad si badbaado leh ugu soo gasho
 shortcuts:
+  disabled_tooltip: Qalabka widget-ka iyo jid-gooyooyinkiisu waa naafo
   duplicate_error: Jidka gaaban waa la koobiyay
   enable: U fududee nidaamka qaab dhismeedka gaagaaban
   enable_tooltip: >-
@@ -215,45 +216,14 @@ shortcuts:
     leedahay adiga oo adeegsanaya macmiilka SELEN UI
   labels:
     create_new_workspace: Abuuro shaqooyin cusub
-    cycle_stack_next: Wareegga xidhmada
-    cycle_stack_prev: Wareegga hore
-    cycle_wallpaper_next: U beddelo warqadaha xiga
-    cycle_wallpaper_prev: U beddelo xaashiyaha hore
-    decrease_height: Hoos u dhig dhererka
-    decrease_width: Ballaadhinta ballac
     destroy_current_workspace: Burburinta goobta shaqada ee hadda jirta
-    focus_bottom: Hoos udhaca hoose
-    focus_latest: Diirad saar
-    focus_left: Ahrive bidix
-    focus_right: Diiradda saara
-    focus_top: Xoogga saar dusha sare
-    increase_height: Kordhi dhererka
-    increase_width: Kordhi ballaadhan
     misc_force_quit: Xoog ku jooji
     misc_force_restart: Xoogga dib u bilow
-    misc_open_settings: Meel furan
-    misc_toggle_lock_tracing: Ku wareeji raadinta qufulka (logs)
-    misc_toggle_win_event_tracing: Ku guuleysta raadinta dhacdada dhacdada (logs)
     move_to_workspace: U dhaqaaq goobta shaqada {0}}
-    move_window_down: Daaqadda u dhaqaaq ilaa hoose
-    move_window_left: Daaqadda u dhaqaaq ilaa bidix
-    move_window_right: Daaqadda u dhaqaaq dhanka midig
-    move_window_up: Daaqadda u dhaqaaq ilaa sare
-    pause_tiling: Jooji Maareeyaha Daaqadda Daaqadda
-    reserve_bottom: Kaydsanaanta hoose
-    reserve_float: Keydka sabuuradda
-    reserve_left: Kaydsanaanta bidix
-    reserve_right: Xaq u dhig
-    reserve_stack: Reebs Rap
-    reserve_top: Keydka sare
-    restore_sizes: Soo celinta cabirka
     send_to_workspace: U dir goobta shaqada {{0}}
-    start_weg_app: Diiradda ama Bilaabashada Arjiga Codsiga {0-}}
     switch_to_next_workspace: U beddelo goobta shaqada ee xiga
     switch_to_previous_workspace: U beddelo shaqooyin hore
     switch_workspace: U beddelo goobta shaqada {{0}}
-    toggle_float: Ku wareeji xarkaha suuqa
-    toggle_monocle: TOGGLE MODOCLE MoCOCLE Mode
   readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
   reset: Dib u dejiso defafyada
 sides:

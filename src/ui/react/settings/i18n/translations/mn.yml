@@ -201,6 +201,7 @@ session:
   sign_in: Нэвтрэх
   sign_in_hint: Таны хөтөч нээгдэх тул та аюулгүйгээр нэвтэрч болно.
 shortcuts:
+  disabled_tooltip: Виджет болон түүний товчлолыг идэвхгүй болгосон
   duplicate_error: Энэ товчлол нь давхардсан байна
   enable: Баригдсан товчлол системийг идэвхжүүлэх
   enable_tooltip: >-
@@ -208,45 +209,14 @@ shortcuts:
     хэрэгжүүлэхийг идэвхгүй болго
   labels:
     create_new_workspace: Шинэ ажлын талбар үүсгэх
-    cycle_stack_next: Циклийн овоолго
-    cycle_stack_prev: Циклийн овоолго өмнөх
-    cycle_wallpaper_next: Дараагийн ханын зураг руу шилжих
-    cycle_wallpaper_prev: Өмнөх ханын зураг руу шилжих
-    decrease_height: Өндөр хэмжээг
-    decrease_width: Гарын хойш хөгжих
     destroy_current_workspace: Одоогийн ажлын талбарыг устгах
-    focus_bottom: Дээр төвлөрүү
-    focus_latest: Фандик хамгийн сүүлийн үеийн
-    focus_left: Зүүн талд байна
-    focus_right: Домог
-    focus_top: Додуулах нь эсрэг
-    increase_height: Дээд хэмжээг нэмэгдүүлэх
-    increase_width: Өргөнийг нэмэгдүүлэх
     misc_force_quit: Хүчний гарах
     misc_force_restart: Хүчийг дахин эхлүүлэх
-    misc_open_settings: АВир танилцуулга
-    misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
-    misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
     move_to_workspace: Ажлын талбар руу шилжих {{0}}
-    move_window_down: Цонхыг доош нь шилжүүлэх
-    move_window_left: Цонхыг зүүн тийш шилжүүлэх
-    move_window_right: Цонхыг баруун тийш нь шилжүүлэх
-    move_window_up: Цонхыг дээд руу шилжүүлэх
-    pause_tiling: Цонхны менежерийг түр зогсоох
-    reserve_bottom: Нөөцийг нөөцлөх
-    reserve_float: Нөөцийн хөвөх
-    reserve_left: Зуух Зүүн
-    reserve_right: Нөөцийг зөв дарна уу
-    reserve_stack: Дурсамж авах
-    reserve_top: Нэр гаргах
-    restore_sizes: Хэмжээг сэргээх
     send_to_workspace: Ажлын талбар руу илгээх {{0}}
-    start_weg_app: Фокус эсвэл програмыг эхлүүлэх {{0}}
     switch_to_next_workspace: Дараагийн ажлын талбар руу шилжих
     switch_to_previous_workspace: Өмнөх ажлын талбар руу шилжих
     switch_workspace: Ажлын талбар руу шилжих {{0}}
-    toggle_float: Windows Hoad Mode-ийг сэлгэх
-    toggle_monocle: Ажлын талбар монокле горимыг сэлгэх
   readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
   reset: Үндсэндээ тохируулах
 sides:

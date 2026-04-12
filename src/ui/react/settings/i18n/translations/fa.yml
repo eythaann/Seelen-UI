@@ -202,6 +202,7 @@ session:
   sign_in: وارد شوید
   sign_in_hint: مرورگر شما باز می شود تا بتوانید به صورت ایمن وارد سیستم شوید.
 shortcuts:
+  disabled_tooltip: ویجت و میانبرهای آن غیرفعال هستند
   duplicate_error: این میانبر تکراری است
   enable: سیستم میانبر داخلی را فعال کنید
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     ، غیرفعال کنید
   labels:
     create_new_workspace: فضای کاری جدید ایجاد کنید
-    cycle_stack_next: پشته چرخه بعدی
-    cycle_stack_prev: چرخه قبلی
-    cycle_wallpaper_next: تغییر به تصویر زمینه بعدی
-    cycle_wallpaper_prev: تغییر به تصویر زمینه قبلی
-    decrease_height: کاهش قد
-    decrease_width: کاهش عرض
     destroy_current_workspace: فضای کاری فعلی را نابود کنید
-    focus_bottom: پایین تمرکز
-    focus_latest: آخرین تمرکز
-    focus_left: تمرکز سمت چپ
-    focus_right: راست تمرکز کنید
-    focus_top: تمرکز بالا
-    increase_height: افزایش ارتفاع
-    increase_width: عرض را افزایش دهید
     misc_force_quit: نیرو ترک
     misc_force_restart: مجدداً نیرو
-    misc_open_settings: تنظیمات باز
-    misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
-    misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
     move_to_workspace: حرکت به فضای کاری {{0}}
-    move_window_down: پنجره را به پایین منتقل کنید
-    move_window_left: پنجره را به سمت چپ حرکت دهید
-    move_window_right: پنجره را به سمت راست حرکت دهید
-    move_window_up: پنجره را به بالا منتقل کنید
-    pause_tiling: مکث مدیر پنجره کاشی کاری
-    reserve_bottom: قسمت پایین ذخیره
-    reserve_float: شناور رزرو
-    reserve_left: رزرو سمت چپ
-    reserve_right: حق رزرو
-    reserve_stack: پشته ذخیره
-    reserve_top: بالای ذخیره
-    restore_sizes: اندازه ها را بازیابی کنید
     send_to_workspace: ارسال به فضای کاری {{0}}
-    start_weg_app: تمرکز یا شروع برنامه {{0}}
     switch_to_next_workspace: به فضای کاری بعدی بروید
     switch_to_previous_workspace: به فضای کاری قبلی بروید
     switch_workspace: تغییر به فضای کاری {{0}}
-    toggle_float: حالت شناور پنجره
-    toggle_monocle: حالت مونوکلر فضای کاری را تغییر دهید
   readonly_tooltip: این یک میانبر فقط خواندنی است
   reset: تنظیم مجدد به پیش فرض
 sides:

@@ -203,6 +203,7 @@ session:
   sign_in: உள்நுழையவும்
   sign_in_hint: உங்கள் உலாவி திறக்கும், எனவே நீங்கள் பாதுகாப்பாக உள்நுழைய முடியும்.
 shortcuts:
+  disabled_tooltip: விட்ஜெட் மற்றும் அதன் குறுக்குவழிகள் முடக்கப்பட்டுள்ளன
   duplicate_error: இந்த குறுக்குவழி நகலெடுக்கப்பட்டது
   enable: உள்ளமைக்கப்பட்ட குறுக்குவழிகள் அமைப்பை இயக்கவும்
   enable_tooltip: >-
@@ -210,45 +211,14 @@ shortcuts:
     செயல்படுத்தினால் முடக்கு
   labels:
     create_new_workspace: புதிய பணியிடத்தை உருவாக்கவும்
-    cycle_stack_next: அடுத்த சுழற்சி அடுக்கு
-    cycle_stack_prev: முந்தைய சுழற்சி அடுக்கு
-    cycle_wallpaper_next: அடுத்த வால்பேப்பருக்கு மாற்றவும்
-    cycle_wallpaper_prev: முந்தைய வால்பேப்பருக்கு மாற்றவும்
-    decrease_height: உயரத்தைக் குறைக்கவும்
-    decrease_width: அகலத்தைக் குறைக்கவும்
     destroy_current_workspace: தற்போதைய பணியிடத்தை அழிக்கவும்
-    focus_bottom: கீழே கவனம் செலுத்துங்கள்
-    focus_latest: சமீபத்திய கவனம்
-    focus_left: மீதமுள்ள கவனம்
-    focus_right: சரியாக கவனம் செலுத்துங்கள்
-    focus_top: மேலே கவனம் செலுத்துங்கள்
-    increase_height: உயரத்தை அதிகரிக்கவும்
-    increase_width: அகலத்தை அதிகரிக்கவும்
     misc_force_quit: படை வெளியேறுதல்
     misc_force_restart: படை மறுதொடக்கம்
-    misc_open_settings: திறந்த அமைப்புகள்
-    misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
-    misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
     move_to_workspace: பணியிடத்திற்கு நகர்த்தவும் {{0}}
-    move_window_down: சாளரத்தை கீழே நகர்த்தவும்
-    move_window_left: சாளரத்தை இடதுபுறமாக நகர்த்தவும்
-    move_window_right: சாளரத்தை வலதுபுறமாக நகர்த்தவும்
-    move_window_up: சாளரத்தை மேலே நகர்த்தவும்
-    pause_tiling: இடைநிறுத்த டைலிங் சாளர மேலாளர்
-    reserve_bottom: முன்பதிவு கீழே
-    reserve_float: ரிசர்வ் மிதவை
-    reserve_left: ரிசர்வ் இடது
-    reserve_right: சரியான உரிமை
-    reserve_stack: ரிசர்வ் ஸ்டேக்
-    reserve_top: ரிசர்வ் டாப்
-    restore_sizes: அளவுகளை மீட்டமை
     send_to_workspace: பணியிடத்திற்கு அனுப்பவும் {{0}}
-    start_weg_app: பயன்பாட்டை கவனம் செலுத்துங்கள் அல்லது தொடங்கவும் {{0}}
     switch_to_next_workspace: அடுத்த பணியிடத்திற்கு மாறவும்
     switch_to_previous_workspace: முந்தைய பணியிடத்திற்கு மாறவும்
     switch_workspace: பணியிடத்திற்கு மாறவும் {{0}}
-    toggle_float: சாளர மிதவை பயன்முறையை மாற்றவும்
-    toggle_monocle: பணியிட மோனோக்கிள் பயன்முறையை மாற்றவும்
   readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
   reset: இயல்புநிலைகளுக்கு மீட்டமைக்கவும்
 sides:

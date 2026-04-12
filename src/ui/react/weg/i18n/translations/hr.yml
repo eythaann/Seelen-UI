@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Zaključajte zadaću
   reorder_enable: Otključajte zadaću
 media:
+  label: Media Player
   not_playing: Ništa se ne igra
 show_desktop:
   label: Prikaži radnu površinu
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Dodajte modul koša za smeće
 trash_bin:
   empty_bin: Ispraznite koš za smeće
+  label: Koš za smeće
 weg:
   empty: Nema stavki za prikaz

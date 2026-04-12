@@ -200,6 +200,7 @@ session:
   sign_in: Prijavite se
   sign_in_hint: Vaš pretraživač će se otvoriti tako da se možete bezbedno prijaviti.
 shortcuts:
+  disabled_tooltip: Vidžet i njegove prečice su onemogućeni
   duplicate_error: Ova prečica je duplirana
   enable: Omogući ugrađene sistem prečaca
   enable_tooltip: >-
@@ -207,45 +208,14 @@ shortcuts:
     SEELEN UI
   labels:
     create_new_workspace: Kreirajte novi radni prostor
-    cycle_stack_next: Sljedeći ciklus stack
-    cycle_stack_prev: Ciklus Stack Prethodni
-    cycle_wallpaper_next: Promjena u sljedeću pozadinu
-    cycle_wallpaper_prev: Promjena u prethodnu pozadinu
-    decrease_height: Smanjenje visine
-    decrease_width: Smanjenje širine
     destroy_current_workspace: Uništite trenutni radni prostor
-    focus_bottom: Fokus dno
-    focus_latest: Fokus najnovije
-    focus_left: Fokus ostavljen
-    focus_right: Fokusirajte se
-    focus_top: Focus Top
-    increase_height: Povećati visinu
-    increase_width: Povećati širinu
     misc_force_quit: Prisiliti
     misc_force_restart: Restart sile
-    misc_open_settings: Otvorite postavke
-    misc_toggle_lock_tracing: Prebacivanje zaključavanja (trupci)
-    misc_toggle_win_event_tracing: Toggle win za praćenje događaja (trupci)
     move_to_workspace: Pređite na radni prostor {{0}}
-    move_window_down: Pomičite prozor na dno
-    move_window_left: Pomičite prozor ulijevo
-    move_window_right: Pomičite prozor udesno
-    move_window_up: Pomičite prozor na vrh
-    pause_tiling: Pauzirajte menadžer za polaganje prozora
-    reserve_bottom: Rezervno dno
-    reserve_float: Rezervni plutajući
-    reserve_left: Rezerva
-    reserve_right: Rezervirajte pravo
-    reserve_stack: Rezervat
-    reserve_top: Rezervat
-    restore_sizes: Vrati veličine
     send_to_workspace: Pošaljite u radni prostor {{0}}
-    start_weg_app: Fokus ili pokretanje aplikacije {{0}}
     switch_to_next_workspace: Prebacite se na sljedeći radni prostor
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor
     switch_workspace: Prebacite se na radni prostor {{0}}
-    toggle_float: Preklopni režim plovka prozora
-    toggle_monocle: Toggle Workspace Monocle mod
   readonly_tooltip: Ovo je prečica za čitanje
   reset: Resetiranje na zadane vrijednosti
 sides:

@@ -188,50 +188,20 @@ session:
   sign_in: 로그인
   sign_in_hint: 안전하게 로그인할 수 있도록 브라우저가 열립니다.
 shortcuts:
+  disabled_tooltip: 위젯과 해당 바로가기가 비활성화되었습니다.
   duplicate_error: 이 바로가기가 중복되었습니다.
   enable: 내장 단축키 시스템을 활성화하십시오
   enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:
     create_new_workspace: 새 작업 공간을 만듭니다
-    cycle_stack_next: 다음에 사이클 스택
-    cycle_stack_prev: 사이클 스택 이전
-    cycle_wallpaper_next: 다음 벽지로 변경하십시오
-    cycle_wallpaper_prev: 이전 벽지로 변경하십시오
-    decrease_height: 높이를 줄입니다
-    decrease_width: 너비를 줄입니다
     destroy_current_workspace: 현재 작업 공간을 파괴하십시오
-    focus_bottom: 초점 바닥
-    focus_latest: 초점 최신
-    focus_left: 초점이 남았습니다
-    focus_right: 집중적으로
-    focus_top: 포커스 탑
-    increase_height: 높이를 늘리십시오
-    increase_width: 폭을 늘리십시오
     misc_force_quit: 힘을 끊으십시오
     misc_force_restart: 강제 재시작
-    misc_open_settings: 열기 설정
-    misc_toggle_lock_tracing: 토글 잠금 추적 (로그)
-    misc_toggle_win_event_tracing: 토글 윈 이벤트 추적 (로그)
     move_to_workspace: 작업 공간으로 이동 {{0}}
-    move_window_down: 창문을 바닥으로 이동하십시오
-    move_window_left: 왼쪽으로 창을 이동하십시오
-    move_window_right: 창을 오른쪽으로 이동하십시오
-    move_window_up: 창을 맨 위로 이동하십시오
-    pause_tiling: 타일링 윈도우 관리자를 일시 중지합니다
-    reserve_bottom: 바닥을 예약하십시오
-    reserve_float: 플로트 예비
-    reserve_left: 왼쪽 예비
-    reserve_right: 오른쪽을 예약하십시오
-    reserve_stack: 예비 스택
-    reserve_top: 탑을 예약하십시오
-    restore_sizes: 크기를 복원하십시오
     send_to_workspace: 작업 공간으로 보내 {{0}}
-    start_weg_app: 초점 또는 시작 응용 프로그램 {{0}}
     switch_to_next_workspace: 다음 작업 공간으로 전환하십시오
     switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
     switch_workspace: 작업 공간으로 전환 {{0}}
-    toggle_float: 토글 윈도우 플로트 모드
-    toggle_monocle: 작업 공간 모노클 모드 토글
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
   reset: 기본값으로 재설정하십시오
 sides:

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: 锁定任务栏
   reorder_enable: 解锁任务栏
 media:
+  label: 媒体播放器
   not_playing: 当前无播放内容
 show_desktop:
   label: 显示桌面
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: 添加回收站模块
 trash_bin:
   empty_bin: 清空回收站
+  label: 回收站
 weg:
   empty: 暂无内容显示

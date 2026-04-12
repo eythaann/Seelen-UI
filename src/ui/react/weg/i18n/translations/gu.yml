@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ટાસ્કબાર
   reorder_enable: ટાસ્કબારને અનલ lock ક કરો
 media:
+  label: મીડિયા પ્લેયર
   not_playing: કંઈ રમી રહ્યું નથી
 show_desktop:
   label: ડેસ્કટોપ બતાવો
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: રિસાયકલ બિન મોડ્યુલ ઉમેરો
 trash_bin:
   empty_bin: ખાલી રિસાયકલ બિન
+  label: રિસાયકલ બિન
 weg:
   empty: બતાવવા માટે કોઈ આઇટમ નથી

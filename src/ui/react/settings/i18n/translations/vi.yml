@@ -203,6 +203,7 @@ session:
   sign_in: Đăng nhập
   sign_in_hint: Trình duyệt của bạn sẽ mở để bạn có thể đăng nhập an toàn.
 shortcuts:
+  disabled_tooltip: Tiện ích và các phím tắt của nó đã bị tắt
   duplicate_error: Phím tắt này bị trùng lặp
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
@@ -210,45 +211,14 @@ shortcuts:
     ứng dụng UI Seelen
   labels:
     create_new_workspace: Tạo không gian làm việc mới
-    cycle_stack_next: Chu kỳ ngăn xếp tiếp theo
-    cycle_stack_prev: Chu kỳ ngăn xếp trước
-    cycle_wallpaper_next: Thay đổi hình nền tiếp theo
-    cycle_wallpaper_prev: Thay đổi thành hình nền trước
-    decrease_height: Giảm chiều cao
-    decrease_width: Giảm chiều rộng
     destroy_current_workspace: Phá hủy không gian làm việc hiện tại
-    focus_bottom: Focus bottom
-    focus_latest: Tập trung mới nhất
-    focus_left: Tập trung trái
-    focus_right: Tập trung đúng
-    focus_top: Tập trung hàng đầu
-    increase_height: Tăng chiều cao
-    increase_width: Tăng chiều rộng
     misc_force_quit: BẮT ĐẦU
     misc_force_restart: Bắt đầu lại
-    misc_open_settings: Mở cài đặt
-    misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
-    misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
     move_to_workspace: Di chuyển đến không gian làm việc {{0}}
-    move_window_down: Di chuyển cửa sổ xuống dưới
-    move_window_left: Di chuyển cửa sổ sang trái
-    move_window_right: Di chuyển cửa sổ sang phải
-    move_window_up: Chuyển cửa sổ sang đầu
-    pause_tiling: Tạm dừng Trình quản lý cửa sổ ốp lát
-    reserve_bottom: Dự trữ đáy
-    reserve_float: Dự trữ nổi
-    reserve_left: Dự trữ trái
-    reserve_right: Đặt trước đúng
-    reserve_stack: Ngân hàng dự trữ
-    reserve_top: Dự trữ hàng đầu
-    restore_sizes: Khôi phục kích thước
     send_to_workspace: Gửi đến không gian làm việc {{0}}
-    start_weg_app: Ứng dụng tập trung hoặc bắt đầu {{0}}
     switch_to_next_workspace: Chuyển sang không gian làm việc tiếp theo
     switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
     switch_workspace: Chuyển sang không gian làm việc {{0}}
-    toggle_float: Chuyển đổi chế độ nổi của cửa sổ
-    toggle_monocle: Chuyển đổi chế độ Monocle không gian làm việc
   readonly_tooltip: Đây là một lối tắt chỉ đọc
   reset: Đặt lại về mặc định
 sides:

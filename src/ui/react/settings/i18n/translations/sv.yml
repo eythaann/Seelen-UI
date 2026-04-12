@@ -202,6 +202,7 @@ session:
   sign_in: Logga in
   sign_in_hint: Din webbläsare öppnas så att du kan logga in säkert.
 shortcuts:
+  disabled_tooltip: Widgeten och dess genvägar är inaktiverade
   duplicate_error: Den här genvägen är duplicerad
   enable: Aktivera inbyggda genvägssystem
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     UI -klienten
   labels:
     create_new_workspace: Skapa en ny arbetsyta
-    cycle_stack_next: Cykelstack nästa
-    cycle_stack_prev: Cykelstack föregående
-    cycle_wallpaper_next: Byt till nästa tapet
-    cycle_wallpaper_prev: Ändra till tidigare tapeter
-    decrease_height: Minskande höjd
-    decrease_width: Minskande bredd
     destroy_current_workspace: Förstör den aktuella arbetsytan
-    focus_bottom: Fokusera botten
-    focus_latest: Fokus senaste
-    focus_left: Fokus vänster
-    focus_right: Fokusera rätt
-    focus_top: Focus topp
-    increase_height: Öka höjden
-    increase_width: Öka bredd
     misc_force_quit: Straffa
     misc_force_restart: Tvinga omstart
-    misc_open_settings: Öppna inställningar
-    misc_toggle_lock_tracing: TOGGLE LOCK TRACING (loggar)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (loggar)
     move_to_workspace: Flytta till Workspace {{0}}
-    move_window_down: Flytta fönster till botten
-    move_window_left: Flytta fönstret till vänster
-    move_window_right: Flytta fönstret till höger
-    move_window_up: Flytta fönstret till toppen
-    pause_tiling: Pausskakelfönsterhanterare
-    reserve_bottom: Reserv botten
-    reserve_float: Reservflott
-    reserve_left: Reservera vänster
-    reserve_right: Reservera höger
-    reserve_stack: Reservstack
-    reserve_top: Reservtopp
-    restore_sizes: Återställ storleken
     send_to_workspace: Skicka till Workspace {{0}}
-    start_weg_app: Fokus eller starta applikationen {{0}}
     switch_to_next_workspace: Byt till nästa arbetsyta
     switch_to_previous_workspace: Byt till tidigare arbetsyta
     switch_workspace: Byt till Workspace {{0}}
-    toggle_float: Växla fönsterflödesläge
-    toggle_monocle: Växla arbetsyta Monocle -läge
   readonly_tooltip: Detta är en skrivskyddad genväg
   reset: Återställas till standardvärden
 sides:

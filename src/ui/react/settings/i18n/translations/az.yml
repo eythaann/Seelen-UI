@@ -201,6 +201,7 @@ session:
   sign_in: Daxil ol
   sign_in_hint: Brauzeriniz açılacaq ki, təhlükəsiz daxil ola biləsiniz.
 shortcuts:
+  disabled_tooltip: Vidcet və onun qısa yolları deaktiv edilib
   duplicate_error: Bu qısayol dublikatdır
   enable: Quraşdırılmış qısa yol sistemini aktivləşdirin
   enable_tooltip: >-
@@ -208,45 +209,14 @@ shortcuts:
     keçirəcəksənsə deaktiv edin
   labels:
     create_new_workspace: Yeni iş sahəsi yaradın
-    cycle_stack_next: Növbəti dövr yığını
-    cycle_stack_prev: Əvvəlki dövr yığını
-    cycle_wallpaper_next: Növbəti divar kağızı dəyişdirin
-    cycle_wallpaper_prev: Əvvəlki divar kağızı dəyişdirin
-    decrease_height: Hündürlük azalmaq
-    decrease_width: Enini azaltmaq
     destroy_current_workspace: Cari iş sahəsini məhv edin
-    focus_bottom: Fokuslanmaq
-    focus_latest: Ən son fokus
-    focus_left: Fokus sol
-    focus_right: Fokuslanmaq
-    focus_top: Fokuslanmaq
-    increase_height: Boylanmaq
-    increase_width: Enini artırmaq
     misc_force_quit: Çıxmaq
     misc_force_restart: Güc yenidən başladın
-    misc_open_settings: Parametrləri açın
-    misc_toggle_lock_tracing: Kilid izləmə (qeydlər)
-    misc_toggle_win_event_tracing: TOXGE WIN TƏDBİRLƏRİ İSTƏYİR (LOGS)
     move_to_workspace: İş sahəsinə keçin {{0}}
-    move_window_down: Pəncərəni altına köçürün
-    move_window_left: Pəncərəni sola köçürün
-    move_window_right: Pəncərəni sağa köçürün
-    move_window_up: Pəncərəni yuxarıya köçürün
-    pause_tiling: Pəncərə meneceri
-    reserve_bottom: Ehtiyat
-    reserve_float: Ehtiyat float
-    reserve_left: Qoruğu
-    reserve_right: Ehtiyat ehtiyat
-    reserve_stack: Ehtiyat yığını
-    reserve_top: Bron etmək
-    restore_sizes: Ölçüləri bərpa etmək
     send_to_workspace: İş sahəsinə göndərin {{0}}
-    start_weg_app: Fokus və ya başlama tətbiqinə {{0}}
     switch_to_next_workspace: Növbəti iş sahəsinə keçin
     switch_to_previous_workspace: Əvvəlki iş sahəsinə keçin
     switch_workspace: İş sahəsinə keçin {{0}}
-    toggle_float: Pəncərənin üzmə rejimini dəyişdirin
-    toggle_monocle: İş sahəsi Monocle rejimi keçid
   readonly_tooltip: Bu yalnız bir oxu qısa yoldur
   reset: Defoltlara yenidən qurun
 sides:

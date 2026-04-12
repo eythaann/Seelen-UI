@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Түгжих ажлын самбар
   reorder_enable: Taskbar түгжээг тайл
 media:
+  label: Медиа тоглуулагч
   not_playing: Юу ч тоглоогүй байна
 show_desktop:
   label: Ширээний компьютерийг харуулах
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Хогийн савны модулийг нэмнэ үү
 trash_bin:
   empty_bin: Хогийн савыг хоосон
+  label: Хогийн сав
 weg:
   empty: Үзүүлэх зүйл алга

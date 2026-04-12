@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Bloquear barra de tarefas
   reorder_enable: Desbloqueie a barra de tarefas
 media:
+  label: Reprodutor de multimédia
   not_playing: Nada está tocando
 show_desktop:
   label: Mostrar área de trabalho
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Adicionar módulo de reciclagem
 trash_bin:
   empty_bin: Esvaziar Lixeira
+  label: Lixeira
 weg:
   empty: Sem itens para mostrar

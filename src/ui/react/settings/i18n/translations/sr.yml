@@ -202,6 +202,7 @@ session:
   sign_in: Пријавите се
   sign_in_hint: Ваш претраживач ће се отворити да бисте се могли безбедно пријавити.
 shortcuts:
+  disabled_tooltip: Виџет и његове пречице су онемогућени
   duplicate_error: Ова пречица је дуплирана
   enable: Омогућите уграђене системе пречаца
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     УИ клијента
   labels:
     create_new_workspace: Креирајте нови радни простор
-    cycle_stack_next: Следећи положај циклуса
-    cycle_stack_prev: Цицле Стацк Претходно
-    cycle_wallpaper_next: Промените се на следећу позадину
-    cycle_wallpaper_prev: Промена у претходне позадине
-    decrease_height: Смањите висину
-    decrease_width: Смањите ширину
     destroy_current_workspace: Уништите тренутни радни простор
-    focus_bottom: На дно фокуса
-    focus_latest: Фокусирати најновије
-    focus_left: Фокус је остављен
-    focus_right: Фокусирати право
-    focus_top: Фокусирати врх
-    increase_height: Повећати висину
-    increase_width: Повећати ширину
     misc_force_quit: Престанак
     misc_force_restart: Поново покренути
-    misc_open_settings: Отвори подешавања
-    misc_toggle_lock_tracing: Укључите тражење закључавања (трупци)
-    misc_toggle_win_event_tracing: Пребацивање тражења догађаја Вин (Дневци)
     move_to_workspace: Пређите на радни простор {{0}}
-    move_window_down: Померите прозор до дна
-    move_window_left: Померите прозор на лево
-    move_window_right: Померите прозор удесно
-    move_window_up: Померите прозор на врх
-    pause_tiling: Паузирајте менаџер прозора
-    reserve_bottom: Резервисати дно
-    reserve_float: Резерват
-    reserve_left: Резерват лево
-    reserve_right: Резервисати право
-    reserve_stack: Резервни сноп
-    reserve_top: Резервисати врх
-    restore_sizes: Вратите величине
     send_to_workspace: Пошаљи на радни простор {{0}}
-    start_weg_app: Фокусирајте или започните апликацију {{0}}
     switch_to_next_workspace: Пређите на следећи радни простор
     switch_to_previous_workspace: Пређите на претходни радни простор
     switch_workspace: Пређите на радни простор {{0}}
-    toggle_float: Укључивање прозора Флоат режим
-    toggle_monocle: Укључите режим Монокла Моноцле Воркспаце
   readonly_tooltip: Ово је пречица само за читање
   reset: Ресетујте на подразумеване вредности
 sides:

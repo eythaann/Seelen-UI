@@ -197,50 +197,20 @@ session:
   sign_in: Wọle
   sign_in_hint: Aṣàwákiri rẹ yoo ṣii ki o le wọle ni aabo.
 shortcuts:
+  disabled_tooltip: Ẹrọ ailorukọ ati awọn ọna abuja rẹ jẹ alaabo
   duplicate_error: Ọna abuja yii jẹ pidánpidán
   enable: Mu ṣiṣẹ eto awọn ọna abuja
   enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:
     create_new_workspace: Ṣẹda ibi-iṣẹ tuntun
-    cycle_stack_next: Awọn akopọ iyipo atẹle
-    cycle_stack_prev: Awọn akopọ ọmọ ni iṣaaju
-    cycle_wallpaper_next: Yipada si iṣẹṣọ ogiri atẹle
-    cycle_wallpaper_prev: Yipada si iṣẹṣọ ogiri iṣaaju
-    decrease_height: Dinku iga
-    decrease_width: DIVEELE WA
     destroy_current_workspace: Pa ip [lọwọlọwọ run
-    focus_bottom: Idojukọ Idojukọ
-    focus_latest: Idojukọ
-    focus_left: Idojukọ osi
-    focus_right: Dojukọ ọtun
-    focus_top: Dojukọ oke
-    increase_height: Igasoke giga
-    increase_width: Gbooro
     misc_force_quit: Fi agbara mu
     misc_force_restart: Fi ipa mu
-    misc_open_settings: Ṣi Eto
-    misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
-    misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
     move_to_workspace: Gbe lọ si ibi-iṣẹ {{0}
-    move_window_down: Gbe window si isalẹ
-    move_window_left: Gbe window si osi
-    move_window_right: Gbe window si ọtun
-    move_window_up: Gbe window si oke
-    pause_tiling: Sinmi Took Window Manace
-    reserve_bottom: Isalẹ ifipamọ
-    reserve_float: Dase leefofo loju omi
-    reserve_left: Reserve osi
-    reserve_right: Reserve ọtun
-    reserve_stack: Ipilẹ akopọ
-    reserve_top: Reserve oke
-    restore_sizes: Pada awọn titobi
     send_to_workspace: Firanṣẹ si Accepace {{0}
-    start_weg_app: Idojukọ tabi bẹrẹ ohun elo {0}}
     switch_to_next_workspace: Yipada si ibi-iṣẹ t'okan
     switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju
     switch_workspace: Yipada si ibi-iṣẹ {0}
-    toggle_float: Oniropin window leefofo loju omi
-    toggle_monocle: Toggle Servicepace Ipo Monocle
   readonly_tooltip: Eyi jẹ ọna abuja-kika
   reset: Tun si awọn aseku
 sides:

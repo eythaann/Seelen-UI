@@ -198,50 +198,20 @@ session:
   sign_in: ເຂົ້າສູ່ລະບົບ
   sign_in_hint: ຕົວທ່ອງເວັບຂອງທ່ານຈະເປີດຂຶ້ນເພື່ອໃຫ້ທ່ານສາມາດເຂົ້າສູ່ລະບົບໄດ້ຢ່າງປອດໄພ.
 shortcuts:
+  disabled_tooltip: ວິດເຈັດ ແລະທາງລັດຂອງມັນຖືກປິດໃຊ້ງານ
   duplicate_error: ທາງລັດນີ້ຊໍ້າກັນ
   enable: ເປີດໃຊ້ລະບົບທາງລັດທີ່ມີຢູ່
   enable_tooltip: ປິດການໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດລະບົບທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ລູກຄ້າ Setelen Ui
   labels:
     create_new_workspace: ສ້າງພື້ນທີ່ເຮັດວຽກໃຫມ່
-    cycle_stack_next: stack ຮອບວຽນຕໍ່ໄປ
-    cycle_stack_prev: stack ຮອບວຽນທີ່ຜ່ານມາ
-    cycle_wallpaper_next: ປ່ຽນເປັນຮູບວໍເປເປີຕໍ່ໄປ
-    cycle_wallpaper_prev: ປ່ຽນເປັນຮູບວໍເປເປີທີ່ຜ່ານມາ
-    decrease_height: ຫຼຸດລົງຄວາມສູງ
-    decrease_width: ຫຼຸດຜ່ອນຄວາມກວ້າງ
     destroy_current_workspace: ທໍາລາຍພື້ນທີ່ເຮັດວຽກໃນປະຈຸບັນ
-    focus_bottom: ສຸມໃສ່ດ້ານລຸ່ມ
-    focus_latest: ສຸມສຸດທ້າຍ
-    focus_left: ສຸມໃສ່ຊ້າຍ
-    focus_right: ສຸມໃສ່ສິດ
-    focus_top: ສຸມໃສ່ດ້ານເທິງ
-    increase_height: ເພີ່ມຄວາມສູງ
-    increase_width: ເພີ່ມຄວາມກວ້າງ
     misc_force_quit: ບັງຄັບໃຫ້ເຊົາ
     misc_force_restart: ບັງຄັບໃຫ້ Restart
-    misc_open_settings: ເປີດການຕັ້ງຄ່າ
-    misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)
-    misc_toggle_win_event_tracing: Toggle WIN ການແຂ່ງຂັນເຫດການ (ບັນທຶກ)
     move_to_workspace: ຍ້າຍໄປເຮັດວຽກ {{0}}
-    move_window_down: ຍ້າຍປ່ອງຢ້ຽມໄປທາງລຸ່ມ
-    move_window_left: ຍ້າຍປ່ອງຢ້ຽມໄປທາງຊ້າຍ
-    move_window_right: ຍ້າຍປ່ອງຢ້ຽມໄປທາງຂວາ
-    move_window_up: ຍ້າຍປ່ອງຢ້ຽມໄປທາງເທີງ
-    pause_tiling: ຢຸດຊົ່ວຄາວຜູ້ຈັດການປ່ອງຢ້ຽມ
-    reserve_bottom: ສໍາຮອງລຸ່ມ
-    reserve_float: ເລື່ອນລອຍ
-    reserve_left: ສະຫງວນໄວ້
-    reserve_right: ສະຫງວນສິດ
-    reserve_stack: ສະຫງວນ
-    reserve_top: ສໍາຮອງສໍາລັບການ
-    restore_sizes: ຟື້ນຟູຂະຫນາດ
     send_to_workspace: ສົ່ງໄປທີ່ Workspace {{0}}
-    start_weg_app: ຈຸດສຸມຫຼືການສະຫມັກສະຫມັກ {{0}}
     switch_to_next_workspace: ປ່ຽນໄປເຮັດວຽກຢູ່ຫນ້າທໍາອິດ
     switch_to_previous_workspace: ປ່ຽນເປັນບ່ອນເຮັດວຽກທີ່ຜ່ານມາ
     switch_workspace: ປ່ຽນໄປເຮັດວຽກຢູ່ Workspace {{0}}
-    toggle_float: ຮູບແບບການເລື່ອນຂອງປ່ອງຢ້ຽມ
-    toggle_monocle: ຮູບແບບ Monecle Workspace
   readonly_tooltip: ນີ້ແມ່ນທາງລັດທີ່ອ່ານເທົ່ານັ້ນ
   reset: ຕັ້ງຄ່າຄືນໃຫມ່
 sides:

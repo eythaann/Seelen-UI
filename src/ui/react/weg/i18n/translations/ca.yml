@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Barra de tasques de bloqueig
   reorder_enable: Desbloqueja la barra de tasques
 media:
+  label: Reproductor multimèdia
   not_playing: Res està jugant
 show_desktop:
   label: Mostra l'escriptori
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Afegiu el mòdul de la paperera de reciclatge
 trash_bin:
   empty_bin: Buida la paperera de reciclatge
+  label: Paperera de reciclatge
 weg:
   empty: No hi ha elements per mostrar

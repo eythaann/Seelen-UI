@@ -200,6 +200,7 @@ session:
   sign_in: સાઇન ઇન કરો
   sign_in_hint: તમારું બ્રાઉઝર ખુલશે જેથી તમે સુરક્ષિત રીતે સાઇન ઇન કરી શકો.
 shortcuts:
+  disabled_tooltip: વિજેટ અને તેના શોર્ટકટ્સ અક્ષમ છે
   duplicate_error: આ શોર્ટકટ ડુપ્લિકેટ છે
   enable: બિલ્ટ-ઇન શ shortc ર્ટકટ્સ સિસ્ટમને સક્ષમ કરો
   enable_tooltip: >-
@@ -207,45 +208,14 @@ shortcuts:
     લાગુ કરશો તો અક્ષમ કરો
   labels:
     create_new_workspace: નવી વર્કસ્પેસ બનાવો
-    cycle_stack_next: ચક્ર સ્ટેક આગળ
-    cycle_stack_prev: સાયકલ સ્ટેક અગાઉ
-    cycle_wallpaper_next: આગલા વ wallp લપેપરમાં બદલો
-    cycle_wallpaper_prev: પાછલા વ wallp લપેપરમાં બદલો
-    decrease_height: ઘટાડો
-    decrease_width: પહોળાઈ ઘટાડવી
     destroy_current_workspace: વર્તમાન વર્કસ્પેસનો નાશ કરો
-    focus_bottom: ફોકસ
-    focus_latest: ફોકસ ફોકસ
-    focus_left: ફોકસ
-    focus_right: ધ્યાન કેન્દ્રિત કરવું
-    focus_top: ફોકસ
-    increase_height: .ંચાઇમાં વધારો
-    increase_width: પહોળાઈમાં વધારો
     misc_force_quit: છોડી દેવું
     misc_force_restart: બળનો ફરીથી પ્રારંભ કરવો
-    misc_open_settings: ખુલ્લી સેટિંગ્સ
-    misc_toggle_lock_tracing: ટ g ગલ લ lock ક ટ્રેસિંગ (લોગ)
-    misc_toggle_win_event_tracing: ટ g ગલ વિન ઇવેન્ટ ટ્રેસિંગ (લોગ)
     move_to_workspace: વર્કસ્પેસ {{0}} પર ખસેડો
-    move_window_down: વિંડોને નીચે ખસેડો
-    move_window_left: ડાબી બાજુ વિંડો ખસેડો
-    move_window_right: વિંડોને જમણે ખસેડો
-    move_window_up: વિંડોને ટોચ પર ખસેડો
-    pause_tiling: ટાઈલિંગ વિંડો મેનેજર થોભો
-    reserve_bottom: અનામત તળિયા
-    reserve_float: અનામત ફ્લોટ
-    reserve_left: અનામત બાકી
-    reserve_right: અનામત હક
-    reserve_stack: અનામત સ્ટેક
-    reserve_top: અનામત અનામત
-    restore_sizes: કદ પુન restore સ્થાપિત કરવું
     send_to_workspace: વર્કસ્પેસ {{0}} પર મોકલો
-    start_weg_app: ધ્યાન કેન્દ્રિત કરો અથવા એપ્લિકેશન પ્રારંભ કરો {{0}}
     switch_to_next_workspace: આગળના કાર્યસ્થળ પર સ્વિચ કરો
     switch_to_previous_workspace: પાછલા વર્કસ્પેસ પર સ્વિચ કરો
     switch_workspace: વર્કસ્પેસ પર સ્વિચ કરો {{0}}
-    toggle_float: ટ g ગલ વિંડો ફ્લોટ મોડ
-    toggle_monocle: ટ g ગલ વર્કસ્પેસ મોનોક્લ મોડ
   readonly_tooltip: આ ફક્ત એક વાંચવા માટે શોર્ટકટ છે
   reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
 sides:

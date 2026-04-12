@@ -204,6 +204,7 @@ session:
   sign_in: Idħol
   sign_in_hint: Il-browser tiegħek se jiftaħ sabiex tkun tista' tidħol b'mod sigur.
 shortcuts:
+  disabled_tooltip: Il-widget u s-shortcuts tiegħu huma diżattivati
   duplicate_error: Din is-shortcut hija duplikata
   enable: Ippermetti s-sistema shortcuts inkorporati
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     l-klijent Seelen UI
   labels:
     create_new_workspace: Oħloq spazju ta 'xogħol ġdid
-    cycle_stack_next: Stack Cycle li jmiss
-    cycle_stack_prev: Munzell taċ-ċiklu preċedenti
-    cycle_wallpaper_next: Ibdel għall-Wallpaper li jmiss
-    cycle_wallpaper_prev: Bidla għal wallpaper preċedenti
-    decrease_height: Tnaqqas l-għoli
-    decrease_width: Tnaqqis il-wisa '
     destroy_current_workspace: Jeqirdu l-ispazju ta 'xogħol attwali
-    focus_bottom: Fokus tal-qiegħ
-    focus_latest: Iffoka l-aħħar
-    focus_left: Fokus xellug
-    focus_right: Iffoka t-tajjeb
-    focus_top: Focus top
-    increase_height: Iżid l-għoli
-    increase_width: Iżżid il-wisa '
     misc_force_quit: Forza nieqaf
     misc_force_restart: Startjar mill-ġdid tal-forza
-    misc_open_settings: Settings miftuħa
-    misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
-    misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
     move_to_workspace: Mexxi għal Workspace {{0}}
-    move_window_down: Mexxi tieqa għal isfel
-    move_window_left: Mexxi t-tieqa għax-xellug
-    move_window_right: Mexxi tieqa għal-lemin
-    move_window_up: Mexxi t-tieqa għal fuq
-    pause_tiling: Pawsa Maniġer tat-Tieqa tal-Madum
-    reserve_bottom: Riserva tal-qiegħ
-    reserve_float: Riżerva float
-    reserve_left: Riserva xellug
-    reserve_right: Riserva dritt
-    reserve_stack: Riżerva munzell
-    reserve_top: Riserva ta 'fuq
-    restore_sizes: Irrestawra d-daqsijiet
     send_to_workspace: Ibgħat lil Workspace {{0}}
-    start_weg_app: Focus jew Ibda Applikazzjoni {{0}}
     switch_to_next_workspace: Aqleb għall-Ispazju tax-Xogħol li jmiss
     switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti
     switch_workspace: Aqleb għal Workspace {{0}}
-    toggle_float: Toggle Window Float Mode
-    toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Din hija shortcut li jinqara biss
   reset: Irrisettja għal nuqqasijiet
 sides:

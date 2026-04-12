@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lås aktivitetsfältet
   reorder_enable: Lås upp aktivitetsfältet
 media:
+  label: Mediaspelare
   not_playing: Ingenting spelar
 show_desktop:
   label: Visa skrivbordet
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Lägg till papperskorgsmodul
 trash_bin:
   empty_bin: Töm papperskorgen
+  label: Papperskorgen
 weg:
   empty: Inga objekt att visa

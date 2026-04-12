@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Uzdevumjoslas bloķēšana
   reorder_enable: Uzdevumjoslas atbloķēšana
 media:
+  label: Multivides atskaņotājs
   not_playing: Nekas nespēlē
 show_desktop:
   label: Rādīt darbvirsmu
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Pievienojiet atkritnes moduli
 trash_bin:
   empty_bin: Iztukšojiet atkritni
+  label: Atkritne
 weg:
   empty: Nav vienumu, ko parādīt

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Ülesanderiba lukustamine
   reorder_enable: Avage tegumiriba avamine
 media:
+  label: Meediumipleier
   not_playing: Miski ei mängi
 show_desktop:
   label: Kuva töölaud
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Lisage prügikasti moodul
 trash_bin:
   empty_bin: Tühjenda prügikast
+  label: Prügikast
 weg:
   empty: Kuvatavaid üksusi pole

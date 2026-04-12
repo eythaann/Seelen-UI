@@ -1,72 +1,72 @@
-km: បង្ហាញម៉ឺនុយសម្រាប់ជ្រើសរើសប្លង់ក្តារចុច។
-is: Sýnir valmynd til að velja lyklaborðsuppsetningu.
-he: מציג תפריט לבחירת פריסת מקלדת.
-pt-BR: Shows a menu to select keyboard layout.
-vi: Hiển thị menu để chọn bố cục bàn phím.
-am: የቁልፍ ሰሌዳ አቀማመጥ ለመምረጥ ምናሌ ያሳያል።
-pl: Wyświetla menu do wyboru układu klawiatury.
-pa: ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣਨ ਲਈ ਮੇਨੂ ਦਿਖਾਉਂਦਾ ਹੈ।
-lb: Weist e Menü fir d'Tastaturlayout ze wielen.
-si: යතුරු පුවරු සැකැස්ම තෝරා ගැනීමට මෙනුවක් පෙන්වයි.
-zu: Ibonisa imenyu yokukheta uhlelokwakhiwe lwekhibhodi.
-mt: Juri menu biex tagħżel it-tqassim tat-tastiera.
-nl: Toont een menu om toetsenbordindeling te selecteren.
-fa: منویی را برای انتخاب چیدمان صفحه کلید نشان می دهد.
-th: แสดงเมนูเพื่อเลือกเค้าโครงแป้นพิมพ์
-zh-TW: 顯示用於選擇鍵盤佈局的菜單。
 af: Wys 'n spyskaart om sleutelborduitleg te kies.
+am: የቁልፍ ሰሌዳ አቀማመጥ ለመምረጥ ምናሌ ያሳያል።
 ar: يعرض قائمة لتحديد تخطيط لوحة المفاتيح.
-bn: কীবোর্ড লেআউট নির্বাচন করার জন্য একটি মেনু দেখায়।
-hr: Prikazuje izbornik za odabir rasporeda tipkovnice.
-uk: Показує меню для вибору розкладки клавіатури.
-eu: Teklatu diseinua hautatzeko menu bat erakusten du.
-ta: விசைப்பலகை அமைப்பைத் தேர்ந்தெடுக்க மெனுவைக் காட்டுகிறது.
-cs: Zobrazí nabídku pro výběr rozložení klávesnice.
-ne: किबोर्ड लेआउट चयन गर्न मेनु देखाउँछ।
-el: Εμφανίζει ένα μενού για επιλογή διάταξης πληκτρολογίου.
-mn: Гарын схемийг сонгох цэсийг харуулж байна.
-sk: Zobrazuje ponuku na výber rozloženia klávesnice.
-ms: Menunjukkan menu untuk memilih susun atur papan kekunci.
-ka: აჩვენებს მენიუს კლავიატურის განლაგების ასარჩევად.
-mk: Прикажува мени за избор на распоред на тастатурата.
-te: కీబోర్డ్ లేఅవుట్‌ను ఎంచుకోవడానికి మెనుని చూపుతుంది.
-sv: Visar en meny för att välja tangentbordslayout.
-en: Shows a menu to select keyboard layout.
-da: Viser en menu til valg af tastaturlayout.
-hi: कीबोर्ड लेआउट चुनने के लिए एक मेनू दिखाता है।
-so: Wuxuu muujiyaa liistada si aad u doorato qaab-dhismeedka keyboard.
-id: Menampilkan menu untuk memilih tata letak keyboard.
-fi: Näyttää valikon näppäimistön asettelun valitsemiseksi.
-sw: Inaonyesha menyu ya kuchagua mpangilio wa kibodi.
-it: Mostra un menu per selezionare il layout della tastiera.
-tg: Менюро барои интихоби тарҳи клавиатура нишон медиҳад.
-ca: Mostra un menú per seleccionar la distribució del teclat.
-ku: Pêşekek nîşan dide ji bo hilbijartina sêwirana klavyeyê.
-bs: Prikazuje meni za odabir rasporeda tastature.
-cy: Yn dangos dewislen i ddewis cynllun bysellfwrdd.
-ja: キーボード レイアウトを選択するメニューを表示します。
-fr: Affiche un menu pour sélectionner la disposition du clavier.
-ur: کیبورڈ لے آؤٹ منتخب کرنے کے لیے مینو دکھاتا ہے۔
-uz: Klaviatura tartibini tanlash uchun menyuni ko'rsatadi.
 az: Klaviatura düzənini seçmək üçün menyu göstərir.
-ro: Afișează un meniu pentru selectarea configurației tastaturii.
-yo: Fifihan akojọ aṣayan lati yan eto kiiboodu.
+bg: Показва меню за избор на клавиатурна подредба.
+bn: কীবোর্ড লেআউট নির্বাচন করার জন্য একটি মেনু দেখায়।
+bs: Prikazuje meni za odabir rasporeda tastature.
+ca: Mostra un menú per seleccionar la distribució del teclat.
+cs: Zobrazí nabídku pro výběr rozložení klávesnice.
+cy: Yn dangos dewislen i ddewis cynllun bysellfwrdd.
+da: Viser en menu til valg af tastaturlayout.
 de: Zeigt ein Menü zur Auswahl des Tastaturlayouts an.
+el: Εμφανίζει ένα μενού για επιλογή διάταξης πληκτρολογίου.
+en: Shows a menu to select keyboard layout.
 es: Muestra un menú para seleccionar la distribución del teclado.
 et: Kuvab menüü klaviatuuri paigutuse valimiseks.
-bg: Показва меню за избор на клавиатурна подредба.
-sr: Приказује мени за избор распореда тастатуре.
-lv: Parāda izvēlni klaviatūras izkārtojuma izvēlei.
+eu: Teklatu diseinua hautatzeko menu bat erakusten du.
+fa: منویی را برای انتخاب چیدمان صفحه کلید نشان می دهد.
+fi: Näyttää valikon näppäimistön asettelun valitsemiseksi.
+fr: Affiche un menu pour sélectionner la disposition du clavier.
 gu: કીબોર્ડ લેઆઉટ પસંદ કરવા માટે મેનુ બતાવે છે.
-hy: Ցուցադրում է մենյու՝ ստեղնաշարի դասավորությունը ընտրելու համար։
-ru: Показывает меню для выбора раскладки клавиатуры.
-ko: 키보드 레이아웃을 선택하는 메뉴를 표시합니다.
+he: מציג תפריט לבחירת פריסת מקלדת.
+hi: कीबोर्ड लेआउट चुनने के लिए एक मेनू दिखाता है।
+hr: Prikazuje izbornik za odabir rasporeda tipkovnice.
 hu: Megjelenít egy menüt a billentyűzetkiosztás kiválasztásához.
-pt-PT: Mostra um menu para selecionar o layout do teclado.
-ps: د کیبورډ ترتیب غوره کولو لپاره مینو ښیې.
-lt: Rodo meniu klaviatūros išdėstymo pasirinkimui.
-no: Viser en meny for å velge tastaturoppsett.
-zh-CN: 显示用于选择键盘布局的菜单。
-tr: Klavye düzenini seçmek için bir menü gösterir.
-tl: Nagpapakita ng isang menu upang pumili ng layout ng keyboard.
+hy: Ցուցադրում է մենյու՝ ստեղնաշարի դասավորությունը ընտրելու համար։
+id: Menampilkan menu untuk memilih tata letak keyboard.
+is: Sýnir valmynd til að velja lyklaborðsuppsetningu.
+it: Mostra un menu per selezionare il layout della tastiera.
+ja: キーボード レイアウトを選択するメニューを表示します。
+ka: აჩვენებს მენიუს კლავიატურის განლაგების ასარჩევად.
+km: បង្ហាញម៉ឺនុយសម្រាប់ជ្រើសរើសប្លង់ក្តារចុច។
+ko: 키보드 레이아웃을 선택하는 메뉴를 표시합니다.
+ku: Pêşekek nîşan dide ji bo hilbijartina sêwirana klavyeyê.
+lb: Weist e Menü fir d'Tastaturlayout ze wielen.
 lo: ສະແດງເມນູເພື່ອເລືອກຮູບແບບແປ້ນພິມ.
+lt: Rodo meniu klaviatūros išdėstymo pasirinkimui.
+lv: Parāda izvēlni klaviatūras izkārtojuma izvēlei.
+mk: Прикажува мени за избор на распоред на тастатурата.
+mn: Гарын схемийг сонгох цэсийг харуулж байна.
+ms: Menunjukkan menu untuk memilih susun atur papan kekunci.
+mt: Juri menu biex tagħżel it-tqassim tat-tastiera.
+ne: किबोर्ड लेआउट चयन गर्न मेनु देखाउँछ।
+nl: Toont een menu om toetsenbordindeling te selecteren.
+no: Viser en meny for å velge tastaturoppsett.
+pa: ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣਨ ਲਈ ਮੇਨੂ ਦਿਖਾਉਂਦਾ ਹੈ।
+pl: Wyświetla menu do wyboru układu klawiatury.
+ps: د کیبورډ ترتیب غوره کولو لپاره مینو ښیې.
+pt-BR: Shows a menu to select keyboard layout.
+pt-PT: Mostra um menu para selecionar o layout do teclado.
+ro: Afișează un meniu pentru selectarea configurației tastaturii.
+ru: Показывает меню для выбора раскладки клавиатуры.
+si: යතුරු පුවරු සැකැස්ම තෝරා ගැනීමට මෙනුවක් පෙන්වයි.
+sk: Zobrazuje ponuku na výber rozloženia klávesnice.
+so: Wuxuu muujiyaa liistada si aad u doorato qaab-dhismeedka keyboard.
+sr: Приказује мени за избор распореда тастатуре.
+sv: Visar en meny för att välja tangentbordslayout.
+sw: Inaonyesha menyu ya kuchagua mpangilio wa kibodi.
+ta: விசைப்பலகை அமைப்பைத் தேர்ந்தெடுக்க மெனுவைக் காட்டுகிறது.
+te: కీబోర్డ్ లేఅవుట్‌ను ఎంచుకోవడానికి మెనుని చూపుతుంది.
+tg: Менюро барои интихоби тарҳи клавиатура нишон медиҳад.
+th: แสดงเมนูเพื่อเลือกเค้าโครงแป้นพิมพ์
+tl: Nagpapakita ng isang menu upang pumili ng layout ng keyboard.
+tr: Klavye düzenini seçmek için bir menü gösterir.
+uk: Показує меню для вибору розкладки клавіатури.
+ur: کیبورڈ لے آؤٹ منتخب کرنے کے لیے مینو دکھاتا ہے۔
+uz: Klaviatura tartibini tanlash uchun menyuni ko'rsatadi.
+vi: Hiển thị menu để chọn bố cục bàn phím.
+yo: Fifihan akojọ aṣayan lati yan eto kiiboodu.
+zh-CN: 显示用于选择键盘布局的菜单。
+zh-TW: 顯示用於選擇鍵盤佈局的菜單。
+zu: Ibonisa imenyu yokukheta uhlelokwakhiwe lwekhibhodi.

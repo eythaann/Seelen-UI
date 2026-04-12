@@ -9,25 +9,25 @@ hidden: true
 shortcuts:
   - id: task-switcher-next-auto
     command: ["task-switcher", "select-next-task", "--auto-confirm"]
-    label: Next Task (auto-confirm on release)
+    label: !extend i18n/shortcuts/task-switcher-next-auto.yml
     defaultKeys: ["Alt", "Tab"]
     readonly: true
     system: true
   - id: task-switcher-prev-auto
     command: ["task-switcher", "select-previous-task", "--auto-confirm"]
-    label: Previous Task (auto-confirm on release)
+    label: !extend i18n/shortcuts/task-switcher-prev-auto.yml
     defaultKeys: ["Alt", "Shift", "Tab"]
     readonly: true
     system: true
   - id: task-switcher-next
     command: ["task-switcher", "select-next-task"]
-    label: Next Task (manual confirm)
+    label: !extend i18n/shortcuts/task-switcher-next.yml
     defaultKeys: ["Alt", "Ctrl", "Tab"]
     readonly: true
     system: true
   - id: task-switcher-prev
     command: ["task-switcher", "select-previous-task"]
-    label: Previous Task (manual confirm)
+    label: !extend i18n/shortcuts/task-switcher-prev.yml
     defaultKeys: ["Alt", "Ctrl", "Shift", "Tab"]
     readonly: true
     system: true

@@ -204,6 +204,7 @@ session:
   sign_in: Մուտք գործեք
   sign_in_hint: 'Ձեր դիտարկիչը կբացվի, որպեսզի կարողանաք ապահով մուտք գործել:'
 shortcuts:
+  disabled_tooltip: Վիջեթը և դրա դյուրանցումները անջատված են
   duplicate_error: Այս դյուրանցումը կրկնօրինակված է
   enable: Միացնել ներկառուցված դյուրանցումների համակարգը
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     `օգտագործելով Seelen UI հաճախորդը
   labels:
     create_new_workspace: Ստեղծեք նոր աշխատանքային տարածք
-    cycle_stack_next: Ցիկլի կեռը հաջորդը
-    cycle_stack_prev: Cycle Stack Նախորդ
-    cycle_wallpaper_next: Փոխեք հաջորդ պաստառին
-    cycle_wallpaper_prev: Փոխեք նախորդ պաստառին
-    decrease_height: Նվազեցնել բարձրությունը
-    decrease_width: Լայնության նվազում
     destroy_current_workspace: Քանդել ընթացիկ աշխատանքային տարածքը
-    focus_bottom: Կենտրոնացեք ներքեւից
-    focus_latest: Կենտրոնացեք վերջին
-    focus_left: Կենտրոնանալ ձախ
-    focus_right: Կենտրոնանալ ճիշտ
-    focus_top: Կենտրոնանալ գագաթին
-    increase_height: Բարձրացնել բարձրությունը
-    increase_width: Բարձրացնել լայնությունը
     misc_force_quit: Ուժը թողնել
     misc_force_restart: FORCE REARTART
-    misc_open_settings: Բաց պարամետրեր
-    misc_toggle_lock_tracing: Փոփոխեք կողպեքի հետեւում (տեղեկամատյաններ)
-    misc_toggle_win_event_tracing: Անջատեք շահեք իրադարձության հետագծումը (տեղեկամատյաններ)
     move_to_workspace: Տեղափոխվել դեպի Workspace {0}
-    move_window_down: Տեղափոխեք պատուհանը դեպի ներքեւ
-    move_window_left: Տեղափոխեք պատուհանը ձախից
-    move_window_right: Տեղափոխեք պատուհանը աջից
-    move_window_up: Տեղափոխեք պատուհանը վերեւում
-    pause_tiling: Դադարեք սալիկապատման պատուհանի կառավարիչը
-    reserve_bottom: Ամրագրեք հատակը
-    reserve_float: Ամրագրեք բոց
-    reserve_left: Պահուստը մնացել է
-    reserve_right: Ամրագրեք աջ
-    reserve_stack: Պահեստավորված նյութեր
-    reserve_top: Ամրագրեք վերեւ
-    restore_sizes: Վերականգնել չափերը
     send_to_workspace: Ուղարկել Workspace- ին {0}
-    start_weg_app: Կենտրոնանալ կամ սկսել դիմումը {{0}
     switch_to_next_workspace: Անցեք հաջորդ աշխատանքային տարածքին
     switch_to_previous_workspace: Անցեք նախորդ աշխատանքային տարածքին
     switch_workspace: Անցեք Workspace- ին {{0}}
-    toggle_float: Անջատեք պատուհանի լողացող ռեժիմը
-    toggle_monocle: Փոփոխեք Workspace Monocle ռեժիմը
   readonly_tooltip: Սա ընթերցված դյուրանցում է
   reset: Վերականգնել կանխադրված
 sides:

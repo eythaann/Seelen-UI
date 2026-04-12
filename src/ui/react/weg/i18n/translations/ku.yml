@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Taskbar Lock
   reorder_enable: Taskbar Unlock
 media:
+  label: Media Player
   not_playing: Tiştek nayê lîstin
 show_desktop:
   label: Sermaseyê nîşan bide
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Modula Recycle Bin zêde bikin
 trash_bin:
   empty_bin: Vala Recycle Bin
+  label: Recycle Bin
 weg:
   empty: Tiştek tune ku nîşan bide

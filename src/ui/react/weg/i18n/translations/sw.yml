@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lock Taskbar
   reorder_enable: Fungua Taskbar
 media:
+  label: Kicheza media
   not_playing: Hakuna kinachocheza
 show_desktop:
   label: Onyesha Eneo-kazi
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Ongeza moduli ya Recycle Bin
 trash_bin:
   empty_bin: Bin Tupu ya Kusaga
+  label: Recycle Bin
 weg:
   empty: Hakuna vipengee vya kuonyesha

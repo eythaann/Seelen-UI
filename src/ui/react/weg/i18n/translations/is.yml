@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Læstu verkstiku
   reorder_enable: Opnaðu verkefnastiku
 media:
+  label: Fjölmiðlaspilari
   not_playing: Ekkert er að spila
 show_desktop:
   label: Sýna skjáborð
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Bæta við ruslatunnueiningu
 trash_bin:
   empty_bin: Tóm ruslatunnu
+  label: Ruslatunna
 weg:
   empty: Engin atriði til að sýna

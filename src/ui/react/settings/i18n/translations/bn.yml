@@ -204,6 +204,7 @@ session:
   sign_in: সাইন ইন করুন
   sign_in_hint: আপনার ব্রাউজার খুলবে যাতে আপনি নিরাপদে সাইন ইন করতে পারেন।
 shortcuts:
+  disabled_tooltip: উইজেট এবং এর শর্টকাটগুলি অক্ষম করা হয়েছে৷
   duplicate_error: এই শর্টকাট ডুপ্লিকেট করা হয়
   enable: অন্তর্নির্মিত শর্টকাট সিস্টেম সক্ষম করুন
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     করেন তবে অক্ষম করুন
   labels:
     create_new_workspace: নতুন কর্মক্ষেত্র তৈরি করুন
-    cycle_stack_next: সাইকেল স্ট্যাক পরবর্তী
-    cycle_stack_prev: চক্র স্ট্যাক পূর্ববর্তী
-    cycle_wallpaper_next: পরবর্তী ওয়ালপেপারে পরিবর্তন করুন
-    cycle_wallpaper_prev: পূর্ববর্তী ওয়ালপেপারে পরিবর্তন করুন
-    decrease_height: উচ্চতা হ্রাস
-    decrease_width: প্রস্থ হ্রাস
     destroy_current_workspace: বর্তমান কর্মক্ষেত্র ধ্বংস করুন
-    focus_bottom: ফোকাস নীচে
-    focus_latest: সর্বশেষ ফোকাস
-    focus_left: ফোকাস বাম
-    focus_right: ডান ফোকাস
-    focus_top: ফোকাস শীর্ষ
-    increase_height: উচ্চতা বৃদ্ধি
-    increase_width: প্রস্থ বৃদ্ধি
     misc_force_quit: ফোর্স প্রস্থান
     misc_force_restart: জোর পুনরায় চালু করুন
-    misc_open_settings: ওপেন সেটিংস
-    misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
-    misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
     move_to_workspace: ওয়ার্কস্পেসে যান {{0}}
-    move_window_down: নীচে উইন্ডো সরান
-    move_window_left: বাম দিকে উইন্ডো সরান
-    move_window_right: উইন্ডোটি ডানদিকে সরান
-    move_window_up: শীর্ষে উইন্ডো সরান
-    pause_tiling: টাইলিং উইন্ডো ম্যানেজার বিরতি দিন
-    reserve_bottom: রিজার্ভ নীচে
-    reserve_float: রিজার্ভ ফ্লোট
-    reserve_left: রিজার্ভ বাম
-    reserve_right: রিজার্ভ রিজার
-    reserve_stack: রিজার্ভ স্ট্যাক
-    reserve_top: রিজার্ভ শীর্ষ
-    restore_sizes: আকার পুনরুদ্ধার
     send_to_workspace: ওয়ার্কস্পেসে প্রেরণ করুন {{0}}
-    start_weg_app: ফোকাস বা শুরু করুন অ্যাপ্লিকেশন {{0}}
     switch_to_next_workspace: পরবর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_workspace: ওয়ার্কস্পেসে স্যুইচ করুন {{0}}
-    toggle_float: টগল উইন্ডো ফ্লোট মোড
-    toggle_monocle: টগল ওয়ার্কস্পেস মনোকল মোড
   readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
   reset: ডিফল্ট পুনরায় সেট করুন
 sides:

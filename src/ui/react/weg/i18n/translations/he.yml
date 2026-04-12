@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: נעל את שורת המשימות
   reorder_enable: ביטול נעילת שורת המשימות
 media:
+  label: נגן מדיה
   not_playing: שום דבר לא משחק
 show_desktop:
   label: הצג את שולחן העבודה
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: הוסף מודול סל המיחזור
 trash_bin:
   empty_bin: ריק סל המיחזור
+  label: סל המיחזור
 weg:
   empty: אין פריטים להצגה

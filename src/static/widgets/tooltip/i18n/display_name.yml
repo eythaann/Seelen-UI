@@ -1,72 +1,72 @@
-tg: Маслиҳат
-fr: Info-bulle
+af: Nutswenk
+am: ጠቃሚ ምክር
 ar: تلميح الأداة
-ka: მინიშნება
-km: ព័ត៌មានជំនួយ
-hr: Opis alata
 az: İpucu
 bg: Подсказка
-so: Tilmaamaha Qalabka
-af: Nutswenk
-vi: Chú giải công cụ
-ko: 툴팁
-de: Tooltip
 bn: টুলটিপ
-da: Værktøjstip
-si: මෙවලම් ඉඟිය
-lt: Patarimas
-pt-PT: Dica
-sv: Verktygstips
-eu: Tresna-informazioa
-lo: ຄຳແນະນຳ
-cy: Cyngor offer
-pa: ਟੂਲਟਿਪ
-uk: Підказка
-sk: Popis
-ur: ٹول ٹِپ
-ca: Informació sobre eines
-el: Επεξήγηση εργαλείου
-pl: Etykietka
-en: Tooltip
-lb: Tooltip
-no: Verktøytips
-ru: Подсказка
-zu: Ithulithiphu
-et: Tööriistavihje
-zh-CN: 工具提示
-hi: टूलटिप
-fi: Työkaluvinkki
-lv: Rīka padoms
-mn: Зөвлөмж
-ps: وسیلې
-gu: ટૂલટીપ
-te: ఉపకరణ చిట్కా
-am: ጠቃሚ ምክር
-it: Descrizione comando
-hy: Գործիքների հուշում
-ro: Indicator
-tr: İpucu
-nl: Tooltip
-th: เคล็ดลับเครื่องมือ
-sw: Kidokezo cha zana
-ne: टूलटिप
-ja: ツールチップ
-ku: Tooltip
-fa: راهنمای ابزار
-zh-TW: 工具提示
 bs: Tooltip
+ca: Informació sobre eines
 cs: Popisek
+cy: Cyngor offer
+da: Værktøjstip
+de: Tooltip
+el: Επεξήγηση εργαλείου
+en: Tooltip
+es: Información sobre herramientas
+et: Tööriistavihje
+eu: Tresna-informazioa
+fa: راهنمای ابزار
+fi: Työkaluvinkki
+fr: Info-bulle
+gu: ટૂલટીપ
+he: טיפים לכלי עבודה
+hi: टूलटिप
+hr: Opis alata
+hu: Eszköztipp
+hy: Գործիքների հուշում
+id: Keterangan alat
+is: Verkfæraráð
+it: Descrizione comando
+ja: ツールチップ
+ka: მინიშნება
+km: ព័ត៌មានជំនួយ
+ko: 툴팁
+ku: Tooltip
+lb: Tooltip
+lo: ຄຳແນະນຳ
+lt: Patarimas
+lv: Rīka padoms
+mk: Совет за алатка
+mn: Зөвлөмж
 ms: Petua alat
 mt: Tooltip
+ne: टूलटिप
+nl: Tooltip
+no: Verktøytips
+pa: ਟੂਲਟਿਪ
+pl: Etykietka
+ps: وسیلې
 pt-BR: Tooltip
-yo: Ohun elo irinṣẹ
-hu: Eszköztipp
-id: Keterangan alat
-tl: Tooltip
-he: טיפים לכלי עבודה
-uz: Maslahat
-mk: Совет за алатка
+pt-PT: Dica
+ro: Indicator
+ru: Подсказка
+si: මෙවලම් ඉඟිය
+sk: Popis
+so: Tilmaamaha Qalabka
 sr: Тоолтип
+sv: Verktygstips
+sw: Kidokezo cha zana
 ta: உதவிக்குறிப்பு
-is: Verkfæraráð
-es: Información sobre herramientas
+te: ఉపకరణ చిట్కా
+tg: Маслиҳат
+th: เคล็ดลับเครื่องมือ
+tl: Tooltip
+tr: İpucu
+uk: Підказка
+ur: ٹول ٹِپ
+uz: Maslahat
+vi: Chú giải công cụ
+yo: Ohun elo irinṣẹ
+zh-CN: 工具提示
+zh-TW: 工具提示
+zu: Ithulithiphu

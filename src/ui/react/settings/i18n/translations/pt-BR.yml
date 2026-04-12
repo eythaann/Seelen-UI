@@ -203,6 +203,7 @@ session:
   sign_in: Entrar
   sign_in_hint: Seu navegador será aberto para que você possa fazer login com segurança.
 shortcuts:
+  disabled_tooltip: O widget e seus atalhos estão desativados
   duplicate_error: Este atalho está duplicado
   enable: Habilitar o sistema de atalhos embutidos
   enable_tooltip: >-
@@ -210,45 +211,14 @@ shortcuts:
     UI Client
   labels:
     create_new_workspace: Crie um novo espaço de trabalho
-    cycle_stack_next: Pilha de ciclo a seguir
-    cycle_stack_prev: Pilha de ciclo anterior
-    cycle_wallpaper_next: Mudar para o próximo papel de parede
-    cycle_wallpaper_prev: Mudar para papel de parede anterior
-    decrease_height: Diminuir a altura
-    decrease_width: Diminuir a largura
     destroy_current_workspace: Destrua o espaço de trabalho atual
-    focus_bottom: Foco no fundo
-    focus_latest: Foco mais recente
-    focus_left: Foco restante
-    focus_right: Foco certo
-    focus_top: Focus Top
-    increase_height: Aumentar a altura
-    increase_width: Aumentar a largura
     misc_force_quit: Force parou
     misc_force_restart: Forçar reinicialização
-    misc_open_settings: Abra as configurações
-    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
-    misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
     move_to_workspace: Mova para o espaço de trabalho {{0}}
-    move_window_down: Mova a janela para o fundo
-    move_window_left: Mova a janela para a esquerda
-    move_window_right: Mova a janela para a direita
-    move_window_up: Mova a janela para o topo
-    pause_tiling: PAUSA PAUSE JANEGENTE DE JANDA TILING
-    reserve_bottom: Fundo de reserva
-    reserve_float: Reserve flutuar
-    reserve_left: Reserve à esquerda
-    reserve_right: Reserve certo
-    reserve_stack: Pilha de reserva
-    reserve_top: Reserve Top
-    restore_sizes: Restaurar tamanhos
     send_to_workspace: Enviar para o espaço de trabalho {{0}}
-    start_weg_app: Concentre ou inicie o aplicativo {{0}}
     switch_to_next_workspace: Mude para o próximo espaço de trabalho
     switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
     switch_workspace: Mudar para o espaço de trabalho {{0}}
-    toggle_float: Alterne o modo de flutuação da janela
-    toggle_monocle: Alternar o modo de monocle na área de trabalho
   readonly_tooltip: Este é um atalho somente leitura
   reset: Redefinir para padrões
 sides:

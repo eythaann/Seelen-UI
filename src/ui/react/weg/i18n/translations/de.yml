@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Taskleiste sperren
   reorder_enable: Taskleiste entsperren
 media:
+  label: Mediaplayer
   not_playing: Nichts spielt
 show_desktop:
   label: Desktop anzeigen
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Fügen Sie das Papierkorbmodul hinzu
 trash_bin:
   empty_bin: Leeren Sie den Papierkorb
+  label: Papierkorb
 weg:
   empty: Keine Artikel zum Anzeigen vorhanden

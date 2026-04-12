@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ਟਾਸਕਬਾਰ ਨੂੰ ਲਾਕ ਕਰੋ
   reorder_enable: ਟਾਸਕਬਾਰ ਨੂੰ ਅਨਲੌਕ ਕਰੋ
 media:
+  label: ਮੀਡੀਆ ਪਲੇਅਰ
   not_playing: ਕੁਝ ਨਹੀਂ ਖੇਡ ਰਿਹਾ
 show_desktop:
   label: ਡੈਸਕਟਾਪ ਦਿਖਾਓ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: ਰੀਸਾਈਕਲ ਬਿਨ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
 trash_bin:
   empty_bin: ਖਾਲੀ ਰੀਸਾਈਕਲ ਬਿਨ
+  label: ਰੀਸਾਈਕਲ ਬਿਨ
 weg:
   empty: ਦਿਖਾਉਣ ਲਈ ਕੋਈ ਆਈਟਮਾਂ ਨਹੀਂ ਹਨ

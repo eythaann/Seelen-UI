@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Sluit taakbalk
   reorder_enable: Ontsluit taakbalk
 media:
+  label: Mediaspeler
   not_playing: Niks speel nie
 show_desktop:
   label: Wys lessenaar
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Voeg asblikmodule by
 trash_bin:
   empty_bin: Leë asblik
+  label: Asblik
 weg:
   empty: Geen items om te wys nie

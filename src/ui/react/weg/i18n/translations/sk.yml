@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Uzamknutie panela úloh
   reorder_enable: Odomknutie panela úloh
 media:
+  label: Prehrávač médií
   not_playing: Nič nehrá
 show_desktop:
   label: Zobraziť pracovnú plochu
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Pridať modul koša
 trash_bin:
   empty_bin: Vyprázdniť kôš
+  label: Kôš
 weg:
   empty: Žiadne položky na zobrazenie

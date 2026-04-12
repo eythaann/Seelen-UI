@@ -8,78 +8,78 @@ preset: Overlay
 settings:
   - type: select
     key: placement
-    label: Placement
+    label: !extend i18n/settings/placement.yml
     options:
-      - label: Top Left
+      - label: !extend i18n/settings/placement-top-left.yml
         value: top-left
         icon: TbBoxAlignTopLeft
 
-      - label: Top
+      - label: !extend i18n/settings/placement-top.yml
         value: top
         icon: TbBoxAlignTop
 
-      - label: Top Right
+      - label: !extend i18n/settings/placement-top-right.yml
         value: top-right
         icon: TbBoxAlignTopRight
 
-      - label: Left
+      - label: !extend i18n/settings/placement-left.yml
         value: left
         icon: TbBoxAlignLeft
 
-      - label: Right
+      - label: !extend i18n/settings/placement-right.yml
         value: right
         icon: TbBoxAlignRight
 
-      - label: Bottom Left
+      - label: !extend i18n/settings/placement-bottom-left.yml
         value: bottom-left
         icon: TbBoxAlignBottomLeft
 
-      - label: Bottom
+      - label: !extend i18n/settings/placement-bottom.yml
         value: bottom
         icon: TbBoxAlignBottom
 
-      - label: Bottom Right
+      - label: !extend i18n/settings/placement-bottom-right.yml
         value: bottom-right
         icon: TbBoxAlignBottomRight
     defaultValue: top
 
   - type: number
     key: margin
-    label: Side Margin
+    label: !extend i18n/settings/margin.yml
     min: 0
     defaultValue: 30
 
   - type: number
     key: timeToShow
-    label: Time to show (seconds)
+    label: !extend i18n/settings/time-to-show.yml
     min: 1
     max: 10
     defaultValue: 4
 
   - group:
-      label: "Show on:"
+      label: !extend i18n/settings/show-on.yml
       items:
         - type: switch
           key: showBrightnessChange
-          label: Brightness change
+          label: !extend i18n/settings/show-brightness-change.yml
           defaultValue: true
 
         - type: switch
           key: showVolumeChange
-          label: Volume change
+          label: !extend i18n/settings/show-volume-change.yml
           defaultValue: true
 
         - type: switch
           key: showMediaPlayerChange
-          label: Media player change
+          label: !extend i18n/settings/show-media-player-change.yml
           defaultValue: true
 
         - type: switch
           key: showWorkspaceChange
-          label: Workspace change
+          label: !extend i18n/settings/show-workspace-change.yml
           defaultValue: true
 
         - type: switch
           key: showNotifications
-          label: Arrival notification
+          label: !extend i18n/settings/show-notifications.yml
           defaultValue: true

@@ -16,13 +16,21 @@ interface Props {
 
 export function ResourceText({ text, className }: Props) {
   const {
+    t,
     i18n: { language },
   } = useTranslation();
 
   if (!text) {
     return null;
   }
+
   if (typeof text === "string") {
+    if (text.startsWith("t:")) {
+      const [_t, key, ...vars] = text.split(":");
+      if (key) {
+        return <span className={className}>{t(key, { ...vars })}</span>;
+      }
+    }
     return <span className={className}>{text}</span>;
   }
 

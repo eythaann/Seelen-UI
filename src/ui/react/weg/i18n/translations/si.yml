@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: අගුළු කාර්ය තීරුව
   reorder_enable: කාර්ය තීරු අගුළු ඇරීම
 media:
+  label: මාධ්ය වාදකය
   not_playing: කිසිවක් සෙල්ලම් කරන්නේ නැත
 show_desktop:
   label: ඩෙස්ක්ටොප් පෙන්වන්න
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Recycle Bin Module එක එකතු කරන්න
 trash_bin:
   empty_bin: හිස් ප්‍රතිචක්‍රීකරණ බඳුන
+  label: ප්‍රතිචක්‍රීකරණ බඳුන
 weg:
   empty: පෙන්වීමට අයිතම නැත

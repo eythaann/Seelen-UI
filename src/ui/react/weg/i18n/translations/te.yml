@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: టాస్క్‌బార్ లాక్
   reorder_enable: టాస్క్‌బార్‌ను అన్‌లాక్ చేయండి
 media:
+  label: మీడియా ప్లేయర్
   not_playing: ఏమీ ఆడటం లేదు
 show_desktop:
   label: డెస్క్‌టాప్‌ని చూపించు
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: రీసైకిల్ బిన్ మాడ్యూల్ జోడించండి
 trash_bin:
   empty_bin: ఖాళీ రీసైకిల్ బిన్
+  label: రీసైకిల్ బిన్
 weg:
   empty: చూపడానికి అంశాలు లేవు

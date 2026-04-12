@@ -1,72 +1,72 @@
-vi: Sử dụng CPU
-it: Utilizzo della CPU
-bs: Upotreba CPU-a
-sk: Využitie CPU
-th: การใช้งานซีพียู
-ko: CPU 사용량
-sw: Matumizi ya CPU
-tg: Истифодаи CPU
-ka: CPU გამოყენება
-lb: CPU Benotzung
-es: Uso de CPU
-hy: CPU-ի օգտագործումը
-mt: Użu tas-CPU
-ro: Utilizarea CPU
-el: Χρήση CPU
-he: שימוש במעבד
 af: SVE Gebruik
-ku: Bikaranîna CPU
-ta: CPU பயன்பாடு
-az: CPU İstifadəsi
-ar: استخدام وحدة المعالجة المركزية
-pa: CPU ਵਰਤੋਂ
-da: CPU-brug
-mk: Употреба на процесорот
-uk: Використання ЦП
-lv: CPU lietojums
-so: Isticmaalka CPU
-si: CPU භාවිතය
-no: CPU-bruk
-mn: CPU-ийн хэрэглээ
-ne: CPU उपयोग
-zh-CN: 中央处理器使用率
-tr: CPU Kullanımı
-de: CPU-Auslastung
-hr: Upotreba CPU-a
-sv: CPU-användning
-km: ការប្រើប្រាស់ស៊ីភីយូ
-id: Penggunaan CPU
-ps: د CPU کارول
-cy: Defnydd CPU
-ru: Использование ЦП
-ur: سی پی یو کا استعمال
-gu: CPU વપરાશ
-ca: Ús de la CPU
-hi: सीपीयू उपयोग
-cs: Využití CPU
 am: የሲፒዩ አጠቃቀም
-pt-BR: CPU Usage
-uz: CPU foydalanish
-pt-PT: Uso da CPU
-tl: Paggamit ng CPU
-fa: استفاده از CPU
-ja: CPU使用率
-te: CPU వినియోగం
-ms: Penggunaan CPU
-fr: Utilisation du processeur
-lo: ການນຳໃຊ້ CPU
-fi: CPU:n käyttö
-lt: CPU naudojimas
-nl: CPU-gebruik
-et: CPU kasutamine
-yo: Sipiyu Lilo
-is: CPU notkun
-pl: Użycie procesora
-sr: ЦПУ Усаге
-en: CPU Usage
-zu: Ukusetshenziswa kwe-CPU
-bn: CPU ব্যবহার
+ar: استخدام وحدة المعالجة المركزية
+az: CPU İstifadəsi
 bg: Използване на процесора
-zh-TW: 中央處理器使用率
-hu: CPU használat
+bn: CPU ব্যবহার
+bs: Upotreba CPU-a
+ca: Ús de la CPU
+cs: Využití CPU
+cy: Defnydd CPU
+da: CPU-brug
+de: CPU-Auslastung
+el: Χρήση CPU
+en: CPU Usage
+es: Uso de CPU
+et: CPU kasutamine
 eu: CPU erabilera
+fa: استفاده از CPU
+fi: CPU:n käyttö
+fr: Utilisation du processeur
+gu: CPU વપરાશ
+he: שימוש במעבד
+hi: सीपीयू उपयोग
+hr: Upotreba CPU-a
+hu: CPU használat
+hy: CPU-ի օգտագործումը
+id: Penggunaan CPU
+is: CPU notkun
+it: Utilizzo della CPU
+ja: CPU使用率
+ka: CPU გამოყენება
+km: ការប្រើប្រាស់ស៊ីភីយូ
+ko: CPU 사용량
+ku: Bikaranîna CPU
+lb: CPU Benotzung
+lo: ການນຳໃຊ້ CPU
+lt: CPU naudojimas
+lv: CPU lietojums
+mk: Употреба на процесорот
+mn: CPU-ийн хэрэглээ
+ms: Penggunaan CPU
+mt: Użu tas-CPU
+ne: CPU उपयोग
+nl: CPU-gebruik
+no: CPU-bruk
+pa: CPU ਵਰਤੋਂ
+pl: Użycie procesora
+ps: د CPU کارول
+pt-BR: CPU Usage
+pt-PT: Uso da CPU
+ro: Utilizarea CPU
+ru: Использование ЦП
+si: CPU භාවිතය
+sk: Využitie CPU
+so: Isticmaalka CPU
+sr: ЦПУ Усаге
+sv: CPU-användning
+sw: Matumizi ya CPU
+ta: CPU பயன்பாடு
+te: CPU వినియోగం
+tg: Истифодаи CPU
+th: การใช้งานซีพียู
+tl: Paggamit ng CPU
+tr: CPU Kullanımı
+uk: Використання ЦП
+ur: سی پی یو کا استعمال
+uz: CPU foydalanish
+vi: Sử dụng CPU
+yo: Sipiyu Lilo
+zh-CN: 中央处理器使用率
+zh-TW: 中央處理器使用率
+zu: Ukusetshenziswa kwe-CPU

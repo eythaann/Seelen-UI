@@ -207,6 +207,7 @@ session:
   sign_in: Anmelden
   sign_in_hint: Ihr Browser wird geöffnet, sodass Sie sich sicher anmelden können.
 shortcuts:
+  disabled_tooltip: Das Widget und seine Verknüpfungen sind deaktiviert
   duplicate_error: Diese Verknüpfung ist dupliziert
   enable: Aktivieren Sie ein integriertes Verknüpfungssystem
   enable_tooltip: >-
@@ -214,45 +215,14 @@ shortcuts:
     -Client implementieren
   labels:
     create_new_workspace: Erstellen Sie einen neuen Arbeitsbereich
-    cycle_stack_next: Fahrradstapel als nächstes
-    cycle_stack_prev: Zyklusstapel vorher
-    cycle_wallpaper_next: Wechseln Sie zum nächsten Tapeten
-    cycle_wallpaper_prev: Wechseln Sie in die vorherige Tapete
-    decrease_height: Abnahme der Höhe
-    decrease_width: Verringerung der Breite
     destroy_current_workspace: Zerstören Sie den aktuellen Arbeitsbereich
-    focus_bottom: Fokus auf den Boden
-    focus_latest: Fokus neuest
-    focus_left: Fokus links
-    focus_right: Fokus rechts
-    focus_top: Fokus auf die Spitze
-    increase_height: Erhöhen Sie die Größe
-    increase_width: Breite erhöhen
     misc_force_quit: Kraft verlassen
     misc_force_restart: Neustart erzwingen
-    misc_open_settings: Einstellungen geöffnet
-    misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)
-    misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
     move_to_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
-    move_window_down: Fenster nach unten bewegen
-    move_window_left: Fenster nach links bewegen
-    move_window_right: Fenster nach rechts bewegen
-    move_window_up: Fenster nach oben bewegen
-    pause_tiling: Pause von Fliesenfenstermanager innehalten
-    reserve_bottom: Reservenboden
-    reserve_float: Reserve Float
-    reserve_left: Reserve links
-    reserve_right: Rechts reservieren
-    reserve_stack: Reservestapel
-    reserve_top: Reserve Top
-    restore_sizes: Größen wiederherstellen
     send_to_workspace: An den Arbeitsbereich senden {{0}}
-    start_weg_app: Fokus oder Start Application {{0}}
     switch_to_next_workspace: Wechseln Sie zum nächsten Arbeitsbereich
     switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich
     switch_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
-    toggle_float: Wechselfensterfloatmodus umschalten
-    toggle_monocle: Umschalten des Arbeitsbereichs Monocle -Modus
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
   reset: Auf Standards zurücksetzen
 sides:

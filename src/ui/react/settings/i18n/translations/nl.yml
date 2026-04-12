@@ -201,6 +201,7 @@ session:
   sign_in: Inloggen
   sign_in_hint: Uw browser wordt geopend zodat u veilig kunt inloggen.
 shortcuts:
+  disabled_tooltip: De widget en de snelkoppelingen zijn uitgeschakeld
   duplicate_error: Deze snelkoppeling is gedupliceerd
   enable: Schakel ingebouwd snelkoppelsysteem in
   enable_tooltip: >-
@@ -208,45 +209,14 @@ shortcuts:
     Selen UI -client
   labels:
     create_new_workspace: Maak een nieuwe werkruimte
-    cycle_stack_next: Cycle Stack Volgende
-    cycle_stack_prev: Cyclusstapel vorige
-    cycle_wallpaper_next: Verander naar het volgende behang
-    cycle_wallpaper_prev: Verander naar het vorige achtergrond
-    decrease_height: De hoogte verminderen
-    decrease_width: Breedte afnemen
     destroy_current_workspace: Vernietig de huidige werkruimte
-    focus_bottom: Focusbodem
-    focus_latest: Focus nieuwste
-    focus_left: Focus links
-    focus_right: Focus goed
-    focus_top: Focus Top
-    increase_height: Verhoog de hoogte
-    increase_width: Verhoog de breedte
     misc_force_quit: Force stoppen
     misc_force_restart: Opnieuw opstarten forceren
-    misc_open_settings: Open instellingen
-    misc_toggle_lock_tracing: Schakelvergrendeling traceren (logboeken)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
     move_to_workspace: Ga naar de werkruimte {{0}}
-    move_window_down: Verplaats venster naar beneden
-    move_window_left: Verplaats het venster naar links
-    move_window_right: Verplaats venster naar rechts
-    move_window_up: Verplaats het venster naar boven
-    pause_tiling: Pauzeer Tiling Window Manager
-    reserve_bottom: Reserve bodem
-    reserve_float: Reserve Float
-    reserve_left: Reserveer links
-    reserve_right: Reserve recht
-    reserve_stack: Reservetapel
-    reserve_top: Reserveer top
-    restore_sizes: Herstel de maten
     send_to_workspace: Verzenden naar werkruimte {{0}}
-    start_weg_app: Focus of start applicatie {{0}}
     switch_to_next_workspace: Schakel over naar de volgende werkruimte
     switch_to_previous_workspace: Schakel over naar vorige werkruimte
     switch_workspace: Schakel over naar werkruimte {{0}}
-    toggle_float: Schakelvenster Float -modus
-    toggle_monocle: Schakel de werkruimte Monocle -modus
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
   reset: Reset naar standaardwaarden
 sides:

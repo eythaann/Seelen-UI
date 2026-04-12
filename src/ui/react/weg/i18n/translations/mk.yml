@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Заклучете ја лентата со задачи
   reorder_enable: Отклучете ја лентата со задачи
 media:
+  label: Медиа плеер
   not_playing: Ништо не игра
 show_desktop:
   label: Прикажи работна површина
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Додадете модул за корпа за отпадоци
 trash_bin:
   empty_bin: Празна корпа за отпадоци
+  label: Корпа за рециклирање
 weg:
   empty: Нема ставки за прикажување

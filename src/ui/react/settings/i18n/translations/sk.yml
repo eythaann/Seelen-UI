@@ -204,6 +204,7 @@ session:
   sign_in: Prihlásiť sa
   sign_in_hint: Otvorí sa váš prehliadač, aby ste sa mohli bezpečne prihlásiť.
 shortcuts:
+  disabled_tooltip: Miniaplikácia a jej skratky sú vypnuté
   duplicate_error: Táto skratka je duplikovaná
   enable: Povoliť vstavaný systém skratiek
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     klienta Seelen UI klienta
   labels:
     create_new_workspace: Vytvorte nový pracovný priestor
-    cycle_stack_next: Stack Cycle Ďalej
-    cycle_stack_prev: Cyklus predchádzajúci
-    cycle_wallpaper_next: Zmena na ďalšiu tapetu
-    cycle_wallpaper_prev: Zmena na predchádzajúcu tapetu
-    decrease_height: Zníženie výšky
-    decrease_width: Znížiť šírku
     destroy_current_workspace: Zničiť súčasný pracovný priestor
-    focus_bottom: Zaostrenie
-    focus_latest: Najnovší
-    focus_left: Vľavo
-    focus_right: Zamerať sa
-    focus_top: Zaostrenie
-    increase_height: Výška
-    increase_width: Zväčšenie
     misc_force_quit: Vynútiť prestať
     misc_force_restart: Vynútiť reštart
-    misc_open_settings: Otvorené nastavenia
-    misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
-    misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
     move_to_workspace: Presunúť do pracovného priestoru {{0}}
-    move_window_down: Presuňte okno dole
-    move_window_left: Presuňte okno doľava
-    move_window_right: Presuňte okno doprava
-    move_window_up: Presuňte okno na vrchol
-    pause_tiling: Pauza obkladací správca okien
-    reserve_bottom: Dno
-    reserve_float: Plavák
-    reserve_left: Vľavo
-    reserve_right: Oprávnenie
-    reserve_stack: Zásobník
-    reserve_top: Horná časť
-    restore_sizes: Obnoviť veľkosti
     send_to_workspace: Odoslať do Workspace {{0}}
-    start_weg_app: Zamerajte alebo spustiť aplikáciu {{0}}
     switch_to_next_workspace: Prepnite na ďalší pracovný priestor
     switch_to_previous_workspace: Prepnite na predchádzajúci pracovný priestor
     switch_workspace: Prepnite na pracovný priestor {{0}}
-    toggle_float: Prepínanie plavákového režimu okna
-    toggle_monocle: Prepnite režim Monocle Workspace
   readonly_tooltip: Toto je skratka iba na čítanie
   reset: Reset na predvolené hodnoty
 sides:

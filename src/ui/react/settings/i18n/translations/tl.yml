@@ -209,6 +209,7 @@ session:
   sign_in: Mag-sign In
   sign_in_hint: Magbubukas ang iyong browser upang ligtas kang makapag-sign in.
 shortcuts:
+  disabled_tooltip: Ang widget at ang mga shortcut nito ay hindi pinagana
   duplicate_error: Ang shortcut na ito ay nadoble
   enable: Paganahin ang built-in na mga shortcut system
   enable_tooltip: >-
@@ -216,45 +217,14 @@ shortcuts:
     shortcut gamit ang Seelen UI Client
   labels:
     create_new_workspace: Lumikha ng bagong workspace
-    cycle_stack_next: Susunod na Stack Stack
-    cycle_stack_prev: Cycle Stack Nakaraan
-    cycle_wallpaper_next: Baguhin sa susunod na wallpaper
-    cycle_wallpaper_prev: Baguhin sa nakaraang wallpaper
-    decrease_height: Bawasan ang taas
-    decrease_width: Bawasan ang lapad
     destroy_current_workspace: Wasakin ang kasalukuyang workspace
-    focus_bottom: Pokus sa ilalim
-    focus_latest: Pinakabagong ituon
-    focus_left: Kaliwa ng Focus
-    focus_right: Tama ang ituon
-    focus_top: Tumuon sa itaas
-    increase_height: Dagdagan ang taas
-    increase_width: Dagdagan ang lapad
     misc_force_quit: Puwersa na huminto
     misc_force_restart: Force restart
-    misc_open_settings: Buksan ang mga setting
-    misc_toggle_lock_tracing: Toggle lock tracing (log)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
     move_to_workspace: Lumipat sa workspace {{0}}
-    move_window_down: Ilipat ang window sa ibaba
-    move_window_left: Ilipat ang window sa kaliwa
-    move_window_right: Ilipat ang window sa kanan
-    move_window_up: Ilipat ang window sa itaas
-    pause_tiling: I -pause ang manager ng window window
-    reserve_bottom: Reserve Bottom
-    reserve_float: Reserve float
-    reserve_left: Reserve Kaliwa
-    reserve_right: Tama ang reserba
-    reserve_stack: Reserve stack
-    reserve_top: Reserve top
-    restore_sizes: Ibalik ang mga sukat
     send_to_workspace: Ipadala sa Workspace {{0}}
-    start_weg_app: Ituon o simulan ang application {{0}}
     switch_to_next_workspace: Lumipat sa Susunod na Workspace
     switch_to_previous_workspace: Lumipat sa nakaraang workspace
     switch_workspace: Lumipat sa workspace {{0}}
-    toggle_float: Toggle window float mode
-    toggle_monocle: Toggle workspace monocle mode
   readonly_tooltip: Ito ay isang shortcut na basahin lamang
   reset: I -reset sa mga default
 sides:

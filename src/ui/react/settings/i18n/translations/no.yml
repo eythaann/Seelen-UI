@@ -202,6 +202,7 @@ session:
   sign_in: Logg på
   sign_in_hint: Nettleseren din åpnes slik at du kan logge på sikkert.
 shortcuts:
+  disabled_tooltip: Widgeten og dens snarveier er deaktivert
   duplicate_error: Denne snarveien er duplisert
   enable: Aktiver innebygd snarveisystem
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     -klienten
   labels:
     create_new_workspace: Lag nytt arbeidsområde
-    cycle_stack_next: Syklusstabel neste
-    cycle_stack_prev: Syklusstabel tidligere
-    cycle_wallpaper_next: Bytt til neste bakgrunn
-    cycle_wallpaper_prev: Endre til tidligere bakgrunn
-    decrease_height: Reduser høyden
-    decrease_width: Redusere bredden
     destroy_current_workspace: Ødelegg gjeldende arbeidsområde
-    focus_bottom: Fokus bunnen
-    focus_latest: Fokusere siste
-    focus_left: Fokus igjen
-    focus_right: Fokuser riktig
-    focus_top: Fokus topp
-    increase_height: Øk høyden
-    increase_width: Øke bredden
     misc_force_quit: Force slutter
     misc_force_restart: Force omstart på nytt
-    misc_open_settings: Åpne innstillinger
-    misc_toggle_lock_tracing: Toggle Lock Tracing (logger)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logger)
     move_to_workspace: Flytt til arbeidsområdet {{0}}
-    move_window_down: Flytt vinduet til bunnen
-    move_window_left: Flytt vinduet til venstre
-    move_window_right: Flytt vinduet til høyre
-    move_window_up: Flytt vinduet til toppen
-    pause_tiling: Pause flislegging av vindusbehandler
-    reserve_bottom: Reserve bunn
-    reserve_float: Reserve flyter
-    reserve_left: Reserve igjen
-    reserve_right: Reservere riktig
-    reserve_stack: Reserve stack
-    reserve_top: Reserve top
-    restore_sizes: Gjenopprett størrelser
     send_to_workspace: Send til arbeidsområdet {{0}}
-    start_weg_app: Fokus eller start applikasjon {{0}}
     switch_to_next_workspace: Bytt til neste arbeidsområde
     switch_to_previous_workspace: Bytt til tidligere arbeidsområde
     switch_workspace: Bytt til arbeidsområdet {{0}}
-    toggle_float: Veksle vindu float -modus
-    toggle_monocle: Veksle arbeidsområde monokelmodus
   readonly_tooltip: Dette er en leselinje-snarvei
   reset: Tilbakestill til standardverdier
 sides:

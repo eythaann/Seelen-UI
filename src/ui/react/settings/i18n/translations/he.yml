@@ -194,50 +194,20 @@ session:
   sign_in: היכנס
   sign_in_hint: הדפדפן שלך ייפתח כדי שתוכל להיכנס בצורה מאובטחת.
 shortcuts:
+  disabled_tooltip: הווידג'ט וקיצורי הדרך שלו מושבתים
   duplicate_error: קיצור זה משוכפל
   enable: אפשר מערכת קיצורי דרך מובנים
   enable_tooltip: השבת אם תיישם מערכת קיצורי דרך משלך באמצעות לקוח ממשק המשתמש של Seelen
   labels:
     create_new_workspace: צור סביבת עבודה חדשה
-    cycle_stack_next: מחזור מחזור הבא
-    cycle_stack_prev: מחזור מחזור קודם
-    cycle_wallpaper_next: שנה לטפט הבא
-    cycle_wallpaper_prev: שנה לטפט הקודם
-    decrease_height: ירידה בגובה
-    decrease_width: ירידה ברוחב
     destroy_current_workspace: להרוס את סביבת העבודה הנוכחית
-    focus_bottom: מיקוד תחתון
-    focus_latest: התמקד האחרון
-    focus_left: פוקוס שמאלה
-    focus_right: להתמקד נכון
-    focus_top: מיקוד למעלה
-    increase_height: הגדל את הגובה
-    increase_width: הגדל את הרוחב
     misc_force_quit: כוח התפטר
     misc_force_restart: הכוח להפעיל מחדש
-    misc_open_settings: פתח הגדרות
-    misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
-    misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
     move_to_workspace: עברו לסביבת עבודה {{0}}
-    move_window_down: העבירו את החלון לתחתית
-    move_window_left: העבר חלון שמאלה
-    move_window_right: העבירו את החלון לימין
-    move_window_up: העבר חלון למעלה
-    pause_tiling: השהה את מנהל החלונות
-    reserve_bottom: שמורה בתחתית
-    reserve_float: שמורה לצוף
-    reserve_left: רזרבה שמאלה
-    reserve_right: שמור ימינה
-    reserve_stack: ערימת מילואים
-    reserve_top: עליון מילואים
-    restore_sizes: שחזור גדלים
     send_to_workspace: שלח לסביבת עבודה {{0}}
-    start_weg_app: מיקוד או התחל יישום {{0}}
     switch_to_next_workspace: עבור לסביבת העבודה הבאה
     switch_to_previous_workspace: עבור לסביבת העבודה הקודמת
     switch_workspace: עברו לסביבת עבודה {{0}}
-    toggle_float: החלף מצב צף חלון
-    toggle_monocle: החלף את מצב המונוקל של סביבת העבודה
   readonly_tooltip: זהו קיצור דרך לקריאה בלבד
   reset: אפס לברירות מחדל
 sides:

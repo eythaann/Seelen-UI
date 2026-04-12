@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: 鎖任務欄
   reorder_enable: 解鎖任務欄
 media:
+  label: 媒體播放器
   not_playing: 什麼都沒有玩
 show_desktop:
   label: 顯示桌面
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: 新增回收站模組
 trash_bin:
   empty_bin: 清空回收站
+  label: 回收站
 weg:
   empty: 沒有顯示的物品

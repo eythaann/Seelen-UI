@@ -206,6 +206,7 @@ session:
   sign_in: Iniciar sesión
   sign_in_hint: Su navegador se abrirá para que pueda iniciar sesión de forma segura.
 shortcuts:
+  disabled_tooltip: El widget y sus atajos están deshabilitados.
   duplicate_error: Este atajo está duplicado.
   enable: Habilitar el sistema de accesos directos integrados
   enable_tooltip: >-
@@ -213,45 +214,14 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Crea un nuevo espacio de trabajo
-    cycle_stack_next: Pila de ciclo a continuación
-    cycle_stack_prev: Pila de ciclo anterior
-    cycle_wallpaper_next: Cambiar al siguiente fondo de pantalla
-    cycle_wallpaper_prev: Cambio a papel tapiz anterior
-    decrease_height: Disminuir la altura
-    decrease_width: Disminuir el ancho
     destroy_current_workspace: Destruir el espacio de trabajo actual
-    focus_bottom: Fondo de enfoque
-    focus_latest: Focus Último
-    focus_left: Se enfoca a la izquierda
-    focus_right: Concentrarse correctamente
-    focus_top: Top de enfoque
-    increase_height: Aumentar la altura
-    increase_width: Aumento de ancho
     misc_force_quit: Fuerza deja de salir
     misc_force_restart: Forzar reinicio
-    misc_open_settings: Abrir configuración
-    misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
-    misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
     move_to_workspace: Mover al espacio de trabajo {{0}}
-    move_window_down: Mueva la ventana a la parte inferior
-    move_window_left: Mover la ventana a la izquierda
-    move_window_right: Mover la ventana a la derecha
-    move_window_up: Mover la ventana hacia arriba
-    pause_tiling: PAUSE Manager de ventana de mosaico
-    reserve_bottom: Parte inferior de reserva
-    reserve_float: Reservar flotar
-    reserve_left: Reserva a la izquierda
-    reserve_right: Reservar a la derecha
-    reserve_stack: Reserva
-    reserve_top: Top de reserva
-    restore_sizes: Tamaños de restauración
     send_to_workspace: Enviar al espacio de trabajo {{0}}
-    start_weg_app: Aplicación de enfoque o inicio {{0}}
     switch_to_next_workspace: Cambiar al siguiente espacio de trabajo
     switch_to_previous_workspace: Cambiar al espacio de trabajo anterior
     switch_workspace: Cambiar al espacio de trabajo {{0}}
-    toggle_float: Modo de flotación de la ventana de alternativa
-    toggle_monocle: Modo de monocle del espacio de trabajo de al revés
   readonly_tooltip: Este es un atajo de solo lectura
   reset: Reiniciar a los valores predeterminados
 sides:

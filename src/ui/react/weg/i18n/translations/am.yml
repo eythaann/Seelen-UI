@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: የተግባር አሞሌ
   reorder_enable: የተካሄደውን ሥራ ይክፈቱ
 media:
+  label: የሚዲያ ማጫወቻ
   not_playing: ምንም የሚጫወት የለም
 show_desktop:
   label: ዴስክቶፕን አሳይ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: ሪሳይክል ቢን ሞዱልን አክል
 trash_bin:
   empty_bin: ባዶ ሪሳይክል ቢን
+  label: ሪሳይክል ቢን
 weg:
   empty: ምንም የሚታዩ ንጥሎች የሉም

@@ -204,6 +204,7 @@ session:
   sign_in: Вход
   sign_in_hint: Вашият браузър ще се отвори, за да можете да влезете безопасно.
 shortcuts:
+  disabled_tooltip: Уиджетът и неговите преки пътища са деактивирани
   duplicate_error: Този пряк път е дублиран
   enable: Активирайте вградената система за преки пътища
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     на клиента на Seelen UI
   labels:
     create_new_workspace: Създайте ново работно пространство
-    cycle_stack_next: Стека на цикъл Напред
-    cycle_stack_prev: Цикъл стек предишен
-    cycle_wallpaper_next: Променете в следващия тапет
-    cycle_wallpaper_prev: Промяна в предишния тапет
-    decrease_height: Намаляване на височината
-    decrease_width: Намалете ширината
     destroy_current_workspace: Унищожете текущото работно пространство
-    focus_bottom: Фокусирайте дъното
-    focus_latest: Фокусирайте последното
-    focus_left: Фокусирайте вляво
-    focus_right: Фокусирайте се вдясно
-    focus_top: Фокус отгоре
-    increase_height: Увеличете височината
-    increase_width: Увеличете ширината
     misc_force_quit: Силата напусна
     misc_force_restart: Принудително рестартиране
-    misc_open_settings: Отворени настройки
-    misc_toggle_lock_tracing: Toggle Lock Tracing (Logs)
-    misc_toggle_win_event_tracing: Превключване на победа проследяване на събитията (logs)
     move_to_workspace: Преместете се в работно пространство {{0}}
-    move_window_down: Преместете прозореца до дъното
-    move_window_left: Преместете прозореца вляво
-    move_window_right: Преместете прозореца надясно
-    move_window_up: Преместете прозореца отгоре
-    pause_tiling: Направете пауза за облицовка на прозорци
-    reserve_bottom: Резервно дъно
-    reserve_float: Резервен поплавък
-    reserve_left: Резервирайте вляво
-    reserve_right: Резервирайте правилно
-    reserve_stack: Резервен стек
-    reserve_top: Резервен връх
-    restore_sizes: Възстановяване на размерите
     send_to_workspace: Изпратете в Workspace {{0}}
-    start_weg_app: Фокусирайте или стартирайте приложение {{0}}
     switch_to_next_workspace: Превключете към следващото работно пространство
     switch_to_previous_workspace: Превключете към предишното работно пространство
     switch_workspace: Превключете в работно пространство {{0}}
-    toggle_float: Toggle Window Float Mode
-    toggle_monocle: Toggle Workspace Monocle Mode
   readonly_tooltip: Това е пряк път само за четене
   reset: Нулирайте по подразбиране
 sides:

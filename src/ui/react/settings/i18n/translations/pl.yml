@@ -205,6 +205,7 @@ session:
   sign_in: Zalogować się
   sign_in_hint: Twoja przeglądarka otworzy się, abyś mógł bezpiecznie się zalogować.
 shortcuts:
+  disabled_tooltip: Widżet i jego skróty są wyłączone
   duplicate_error: Ten skrót jest zduplikowany
   enable: Włącz wbudowany system skrótów
   enable_tooltip: >-
@@ -212,45 +213,14 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Utwórz nowy obszar roboczy
-    cycle_stack_next: Następnie stos cyklowy
-    cycle_stack_prev: Stos cyklu poprzedni
-    cycle_wallpaper_next: Zmień na następną tapetę
-    cycle_wallpaper_prev: Zmień na poprzednią tapetę
-    decrease_height: Zmniejszyć wysokość
-    decrease_width: Zmniejszyć szerokość
     destroy_current_workspace: Zniszcz obecny obszar roboczy
-    focus_bottom: Focus Dim
-    focus_latest: Focus najnowszy
-    focus_left: Skup się na lewej
-    focus_right: Skup się dobrze
-    focus_top: Focus Top
-    increase_height: Zwiększyć wysokość
-    increase_width: Zwiększyć szerokość
     misc_force_quit: Force zrezygnować
     misc_force_restart: Wymuś restart
-    misc_open_settings: Otwórz ustawienia
-    misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
-    misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
     move_to_workspace: Przenieś się do przestrzeni roboczej {{0}}
-    move_window_down: Przenieś okno na dolny
-    move_window_left: Przesuń okno po lewej
-    move_window_right: Przenieś okno po prawej stronie
-    move_window_up: Przesuń okno na górę
-    pause_tiling: Zatrzymaj menedżer okien kafelków
-    reserve_bottom: Rezerwować dno
-    reserve_float: Rezerwować pływak
-    reserve_left: Rezerwa w lewo
-    reserve_right: Rezerwuj prawnie
-    reserve_stack: Stos rezerwowy
-    reserve_top: Rezerwuj top
-    restore_sizes: Przywróć rozmiary
     send_to_workspace: Wyślij do przestrzeni roboczej {{0}}
-    start_weg_app: Focus lub uruchom aplikację {{0}}
     switch_to_next_workspace: Przejdź na następny obszar roboczy
     switch_to_previous_workspace: Przejdź na poprzedni obszar roboczy
     switch_workspace: Przełącz na przestrzeń roboczą {{0}}
-    toggle_float: Tryb przełączania okna pływaka
-    toggle_monocle: Przełącz tryb monocle przestrzeni roboczej
   readonly_tooltip: To jest skrót tylko do odczytu
   reset: Zresetuj do domyślnych
 sides:

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Feladatsáv zárolása
   reorder_enable: Feloldja a tálcát
 media:
+  label: Médialejátszó
   not_playing: Semmi sem játszik
 show_desktop:
   label: Asztal megjelenítése
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Adja hozzá a Lomtár modult
 trash_bin:
   empty_bin: Ürítse ki a Lomtárat
+  label: Lomtár
 weg:
   empty: Nincs megjeleníthető elem

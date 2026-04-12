@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: タスクバーをロック
   reorder_enable: タスクバーのロック解除
 media:
+  label: メディアプレーヤー
   not_playing: 何も再生されていません
 show_desktop:
   label: デスクトップを表示
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: ごみ箱モジュールの追加
 trash_bin:
   empty_bin: ごみ箱を空にする
+  label: ごみ箱
 weg:
   empty: 表示する項目がありません

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Tapşırıq çubuğunu kilidləyin
   reorder_enable: Tapşırıq çubuğunu açın
 media:
+  label: Media pleyer
   not_playing: Heç nə oynamır
 show_desktop:
   label: Masaüstünü göstər
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Zibil qutusu modulu əlavə edin
 trash_bin:
   empty_bin: Zibil qutusunu boşaldın
+  label: Zibil qutusu
 weg:
   empty: Göstəriləcək element yoxdur

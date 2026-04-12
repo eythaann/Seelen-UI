@@ -8,9 +8,9 @@ noMemoryLeakWorkaround: true
 shortcuts:
   - id: wallpaper-next
     command: ["wallpaper", "next"]
-    label: Next Wallpaper
+    label: !extend i18n/shortcuts/wallpaper-next.yml
     defaultKeys: ["Ctrl", "Win", "Up"]
   - id: wallpaper-prev
     command: ["wallpaper", "prev"]
-    label: Previous Wallpaper
+    label: !extend i18n/shortcuts/wallpaper-prev.yml
     defaultKeys: ["Ctrl", "Win", "Down"]

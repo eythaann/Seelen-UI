@@ -200,6 +200,7 @@ session:
   sign_in: Umellen
   sign_in_hint: Äre Browser wäert opmaachen fir datt Dir Iech sécher aloggen kënnt.
 shortcuts:
+  disabled_tooltip: De Widget a seng Ofkiirzungen sinn behënnert
   duplicate_error: Dës Ofkiirzung gëtt duplizéiert
   enable: Aktivéiert agebaut-in Shortcuts System
   enable_tooltip: >-
@@ -207,45 +208,14 @@ shortcuts:
     Segen UI Client
   labels:
     create_new_workspace: Neie Aarbechtsberäich erstellen
-    cycle_stack_next: Zyklus Stack nieft
-    cycle_stack_prev: Cycle Stack virdrun
-    cycle_wallpaper_next: Ännerung op den nächsten Tapeten
-    cycle_wallpaper_prev: Ännerung op déi virdrun Tapeten
-    decrease_height: Reduzéiert Héicht
-    decrease_width: Reduzéiert Breet
     destroy_current_workspace: Zerstéiert aktuell Aarbechtsberäich
-    focus_bottom: Fokus ënnen
-    focus_latest: Fokusséieren dat lescht
-    focus_left: Fokusséiert lénks
-    focus_right: Fokusséiert richteg
-    focus_top: Fokusséieren Top
-    increase_height: Erhéijen Héicht
-    increase_width: Erhéijung vun der Breet
     misc_force_quit: Kraaft opzehalen
     misc_force_restart: Kraaft Restart
-    misc_open_settings: Oppen Astellungen
-    misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
-    misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
     move_to_workspace: Plënnert op Aarbechtsberäich {{0}}
-    move_window_down: Géifen Fënster op ënnen
-    move_window_left: Giddfen Fënster op lénks
-    move_window_right: Réckelt Fënster op riets
-    move_window_up: Réckelt Fënster op Top
-    pause_tiling: Pause filt Fenstermanager
-    reserve_bottom: Reservéiert ënnen
-    reserve_float: Reservéiert Float
-    reserve_left: Reserve lénks
-    reserve_right: Reservéiert richteg
-    reserve_stack: Reserve Stack
-    reserve_top: Reserve Top
-    restore_sizes: Restauréiert Gréissten
     send_to_workspace: Schéckt op Aarbechtsberäich {{0}}
-    start_weg_app: Fokusséieren oder ufänken Applikatioun {{0}}
     switch_to_next_workspace: Wiesselt op d'nächst Aarbechtsberäich
     switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich
     switch_workspace: Schalt op Aarbechtsberäich {{0}}
-    toggle_float: Toggle Fenster Float Modus
-    toggle_monocle: Toggle Workspace Monocle Modus
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
   reset: Reset op Defaults
 sides:

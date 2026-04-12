@@ -202,6 +202,7 @@ session:
   sign_in: Oturum aç
   sign_in_hint: Güvenli bir şekilde oturum açabilmeniz için tarayıcınız açılacaktır.
 shortcuts:
+  disabled_tooltip: Widget ve kısayolları devre dışı bırakıldı
   duplicate_error: Bu kısayol kopyalandı
   enable: Dahili kısayol sistemini etkinleştirin
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     devre dışı bırakın
   labels:
     create_new_workspace: Yeni çalışma alanı oluşturun
-    cycle_stack_next: Bisiklet yığını sonraki
-    cycle_stack_prev: Önceki bisiklet yığını
-    cycle_wallpaper_next: Sonraki Duvar Kağıdına Değiştir
-    cycle_wallpaper_prev: Önceki duvar kağıdına geç
-    decrease_height: Yüksekliği Azalt
-    decrease_width: Genişliği Azalt
     destroy_current_workspace: Mevcut çalışma alanını yok et
-    focus_bottom: Dip
-    focus_latest: En son odak
-    focus_left: Sola odaklanmak
-    focus_right: Doğru odaklanmak
-    focus_top: Focus tepe
-    increase_height: Yüksekliği arttırmak
-    increase_width: Genişliği Artırın
     misc_force_quit: Çıkarma
     misc_force_restart: Yeniden Başlatmaya Zorla
-    misc_open_settings: Ayarlar Aç
-    misc_toggle_lock_tracing: Kilit izleme (kütükler)
-    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
     move_to_workspace: Çalışma Alanına Taşın {{0}}
-    move_window_down: Pencereyi dibe taşıyın
-    move_window_left: Pencereyi sola taşıyın
-    move_window_right: Pencereyi sağa taşıyın
-    move_window_up: Pencereyi üstüne taşıyın
-    pause_tiling: Duraklatma döşeme pencere yöneticisi
-    reserve_bottom: Dip
-    reserve_float: Yüzmek
-    reserve_left: Sola gitme
-    reserve_right: Doğru ayırtmak
-    reserve_stack: Yedek yığın
-    reserve_top: Üst kısım
-    restore_sizes: Boyutları Geri Yükle
     send_to_workspace: Çalışma Alanına Gönder {{0}}
-    start_weg_app: Odak veya Başlat Uygulaması {{0}}
     switch_to_next_workspace: Sonraki çalışma alanına geçin
     switch_to_previous_workspace: Önceki çalışma alanına geçin
     switch_workspace: Çalışma alanına geç {{0}}
-    toggle_float: Pencere şamandıra modunu geçiş
-    toggle_monocle: Çalışma Alanı Monokle Modunu Değiştirin
   readonly_tooltip: Bu salt okunur bir kısayol
   reset: Varsayılanlara sıfırlayın
 sides:

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Заключване на лентата на задачите
   reorder_enable: Отключване на лентата на задачите
 media:
+  label: Медиен плейър
   not_playing: Нищо не играе
 show_desktop:
   label: Показване на работния плот
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Добавяне на модул за кошче
 trash_bin:
   empty_bin: Изпразване на кошчето
+  label: Кошче
 weg:
   empty: Няма елементи за показване

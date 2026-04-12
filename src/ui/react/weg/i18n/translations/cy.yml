@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Bar tasgau clo
   reorder_enable: Datgloi Bar Tasg
 media:
+  label: Chwaraewr Cyfryngau
   not_playing: Nid oes dim yn chwarae
 show_desktop:
   label: Dangos Penbwrdd
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Ychwanegu Modiwl Bin Ailgylchu
 trash_bin:
   empty_bin: Bin Ailgylchu Gwag
+  label: Bin Ailgylchu
 weg:
   empty: Dim eitemau i'w dangos

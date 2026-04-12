@@ -200,6 +200,7 @@ session:
   sign_in: Даромад
   sign_in_hint: Браузери шумо кушода мешавад, то шумо метавонед бехатар ворид шавед.
 shortcuts:
+  disabled_tooltip: Виҷет ва миёнабурҳои он ғайрифаъол шудаанд
   duplicate_error: Ин миёнабур такрор карда шудааст
   enable: Системаи миёнабурҳои обиро фаъол созед
   enable_tooltip: >-
@@ -207,45 +208,14 @@ shortcuts:
     баред
   labels:
     create_new_workspace: Эҷоди фазои нав
-    cycle_stack_next: Стрипка дар паҳлӯи он
-    cycle_stack_prev: Стритинг қаблан
-    cycle_wallpaper_next: Тағирот ба обои нав
-    cycle_wallpaper_prev: Тағирот ба обои қаблӣ
-    decrease_height: Баландиро кам мекунад
-    decrease_width: Пойафзол коҳиш диҳед
     destroy_current_workspace: Ҷоизаҳои ҷориро нест кунед
-    focus_bottom: Фаъолахш
-    focus_latest: Тамаркуз охирин
-    focus_left: Тамаркуз ба чап
-    focus_right: Фокус ба
-    focus_top: Фокус ба боло
-    increase_height: Баланд бардоштани баландӣ
-    increase_width: Паҳнои васеъ
     misc_force_quit: Қувваи корӣ
     misc_force_restart: Бастори қувват
-    misc_open_settings: Танзимоти кушода
-    misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
-    misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
     move_to_workspace: Ба кории {{0}} гузаред
-    move_window_down: Тирезаро ба поён ҳаракат кунед
-    move_window_left: Тиреза ба чап
-    move_window_right: Тирезаро ба рост ҳаракат кунед
-    move_window_up: Тиреза ба боло
-    pause_tiling: Менеҷери тирезаи Temple
-    reserve_bottom: Поёни захиравӣ
-    reserve_float: Шино мекунанд
-    reserve_left: Захира
-    reserve_right: Зарф аз тарафи
-    reserve_stack: Стекер захира
-    reserve_top: Болои боло
-    restore_sizes: Барқарор кардан
     send_to_workspace: Ба кории rowspace {{0}}
-    start_weg_app: Тамаркуз ё оғози дархост {{0}}
     switch_to_next_workspace: Гузариш ба фазои оянда
     switch_to_previous_workspace: Ба фазои пешина гузаред
     switch_workspace: Гузаштан ба роҳҳои корӣ {{0}}
-    toggle_float: Ҳолати шинокунандаи шино
-    toggle_monocle: Реҷаи монокзори роҳ
   readonly_tooltip: Ин як миёнабурҳои ягона аст
   reset: Аз нав танзимкунии пешфарз
 sides:

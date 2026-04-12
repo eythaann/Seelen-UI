@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Blocco della barra delle applicazioni
   reorder_enable: Sbloccare la barra delle applicazioni
 media:
+  label: Lettore multimediale
   not_playing: Nulla in riproduzione
 show_desktop:
   label: Mostra scrivania
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Aggiungi il modulo Cestino
 trash_bin:
   empty_bin: Cestino vuoto
+  label: Cestino
 weg:
   empty: Nessun elemento da mostrare

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: लक टकबार लक
   reorder_enable: टास्कबार अनलक गर्नुहोस्
 media:
+  label: मिडिया प्लेयर
   not_playing: केहि खेल्दैन
 show_desktop:
   label: डेस्कटप देखाउनुहोस्
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: रिसायकल बिन मोड्युल थप्नुहोस्
 trash_bin:
   empty_bin: रिसायकल बिन खाली गर्नुहोस्
+  label: रिसायकल बिन
 weg:
   empty: देखाउनका लागि कुनै वस्तुहरू छैनन्

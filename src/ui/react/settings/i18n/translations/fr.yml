@@ -209,6 +209,7 @@ session:
     Votre navigateur s'ouvrira pour que vous puissiez vous connecter en toute
     sécurité.
 shortcuts:
+  disabled_tooltip: Le widget et ses raccourcis sont désactivés
   duplicate_error: Ce raccourci est dupliqué
   enable: Activer le système de raccourcis intégrés
   enable_tooltip: >-
@@ -216,45 +217,14 @@ shortcuts:
     du client de l'interface utilisateur Seelen
   labels:
     create_new_workspace: Créer un nouvel espace de travail
-    cycle_stack_next: Pile de cycle Suivant
-    cycle_stack_prev: Pile de cycle Précédent
-    cycle_wallpaper_next: Passer au fond d'écran suivant
-    cycle_wallpaper_prev: Passer au fond d'écran précédent
-    decrease_height: Diminuer la hauteur
-    decrease_width: Diminuer la largeur
     destroy_current_workspace: Détruire l'espace de travail actuel
-    focus_bottom: Focus Bottom
-    focus_latest: Focus plus tard
-    focus_left: Focus à gauche
-    focus_right: Focus à droite
-    focus_top: Focus top
-    increase_height: Augmenter la hauteur
-    increase_width: Augmenter la largeur
     misc_force_quit: Force quitter
     misc_force_restart: Forcer le redémarrage
-    misc_open_settings: Paramètres ouvrir
-    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
-    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
     move_to_workspace: Déplacer dans l'espace de travail {{0}}
-    move_window_down: Déplacer la fenêtre en bas
-    move_window_left: Déplacer la fenêtre à gauche
-    move_window_right: Déplacer la fenêtre à droite
-    move_window_up: Déplacer la fenêtre en haut
-    pause_tiling: Gestionnaire de fenêtres en carrelage en pause
-    reserve_bottom: Bottom
-    reserve_float: Réserver flotter
-    reserve_left: Réserve à gauche
-    reserve_right: Réserver à droite
-    reserve_stack: Pile de réserve
-    reserve_top: Réserve de réserve
-    restore_sizes: Restaurer les tailles
     send_to_workspace: Envoyer à Workspace {{0}}
-    start_weg_app: Focus ou démarrer l'application {{0}}
     switch_to_next_workspace: Passez à l'espace de travail suivant
     switch_to_previous_workspace: Passez à l'espace de travail précédent
     switch_workspace: Passez à Workspace {{0}}
-    toggle_float: Mode de flotteur de fenêtre à bascule
-    toggle_monocle: Mode monocle d'espace de travail à bascule
   readonly_tooltip: Ceci est un raccourci en lecture seule
   reset: Réinitialiser les valeurs par défaut
 sides:

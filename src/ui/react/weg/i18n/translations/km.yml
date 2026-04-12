@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ចាក់សោរបារភារកិច្ច
   reorder_enable: ដោះសោរបារភារកិច្ច
 media:
+  label: កម្មវិធីចាក់មេឌៀ
   not_playing: គ្មានអ្វីកំពុងលេងទេ
 show_desktop:
   label: បង្ហាញផ្ទៃតុ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: បន្ថែមម៉ូឌុល Recycle Bin
 trash_bin:
   empty_bin: ធុងសំរាមទទេ
+  label: ធុងសំរាម
 weg:
   empty: មិនមានធាតុដែលត្រូវបង្ហាញទេ។

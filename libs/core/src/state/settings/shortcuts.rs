@@ -94,31 +94,31 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
     // ---- Virtual Desktop system overrides (readonly) ----
     let mut decls = vec![
         decl!(
-            "vd-switch-next",
-            "Switch to Next Workspace",
-            cmd!["vd", "switch-next"],
-            cmd!["Ctrl", "Win", "Right"],
-            readonly
-        ),
-        decl!(
-            "vd-switch-prev",
-            "Switch to Previous Workspace",
-            cmd!["vd", "switch-prev"],
-            cmd!["Ctrl", "Win", "Left"],
-            readonly
-        ),
-        decl!(
             "vd-create-workspace",
-            "Create New Workspace",
+            "t:shortcuts.labels.create_new_workspace",
             cmd!["vd", "create-new-workspace"],
             cmd!["Ctrl", "Win", "D"],
             readonly
         ),
         decl!(
             "vd-destroy-workspace",
-            "Destroy Current Workspace",
+            "t:shortcuts.labels.destroy_current_workspace",
             cmd!["vd", "destroy-current-workspace"],
             cmd!["Ctrl", "Win", "F4"],
+            readonly
+        ),
+        decl!(
+            "vd-switch-next",
+            "t:shortcuts.labels.switch_to_next_workspace",
+            cmd!["vd", "switch-next"],
+            cmd!["Ctrl", "Win", "Right"],
+            readonly
+        ),
+        decl!(
+            "vd-switch-prev",
+            "t:shortcuts.labels.switch_to_previous_workspace",
+            cmd!["vd", "switch-prev"],
+            cmd!["Ctrl", "Win", "Left"],
             readonly
         ),
     ];
@@ -132,21 +132,21 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
         };
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-switch-to-{}", index),
-            label: format!("Switch to Workspace {}", index + 1),
+            label: format!("t:shortcuts.labels.switch_workspace:{}", index + 1),
             command: cmd!["vd", "switch-workspace", index],
             default_keys: vec!["Alt".to_string(), digit.clone()],
             readonly: false,
         });
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-move-to-{}", index),
-            label: format!("Move Window to Workspace {}", index + 1),
+            label: format!("t:shortcuts.labels.move_to_workspace:{}", index + 1),
             command: cmd!["vd", "move-to-workspace", index],
             default_keys: vec!["Alt".to_string(), "Shift".to_string(), digit.clone()],
             readonly: false,
         });
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-send-to-{}", index),
-            label: format!("Send Window to Workspace {}", index + 1),
+            label: format!("t:shortcuts.labels.send_to_workspace:{}", index + 1),
             command: cmd!["vd", "send-to-workspace", index],
             default_keys: vec!["Win".to_string(), "Shift".to_string(), digit],
             readonly: false,
@@ -156,14 +156,14 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
     // ---- Misc (readonly) ----
     decls.push(decl!(
         "service-force-restart",
-        "Force Restart Seelen UI",
+        "t:shortcuts.labels.misc_force_restart",
         cmd!["service", "force-restart"],
         cmd!["Ctrl", "Win", "Alt", "R"],
         readonly
     ));
     decls.push(decl!(
         "service-force-quit",
-        "Force Quit Seelen UI",
+        "t:shortcuts.labels.misc_force_quit",
         cmd!["service", "force-quit"],
         cmd!["Ctrl", "Win", "Alt", "K"],
         readonly

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ล็อคแถบงาน
   reorder_enable: ปลดล็อกแถบงาน
 media:
+  label: เครื่องเล่นมีเดีย
   not_playing: ไม่มีอะไรเล่น
 show_desktop:
   label: แสดงเดสก์ท็อป
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: เพิ่มโมดูลถังรีไซเคิล
 trash_bin:
   empty_bin: ถังรีไซเคิลว่างเปล่า
+  label: ถังขยะรีไซเคิล
 weg:
   empty: ไม่มีรายการที่จะแสดง

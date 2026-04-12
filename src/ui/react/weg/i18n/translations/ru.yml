@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Заблокировать панель
   reorder_enable: Разблокировать панель
 media:
+  label: Медиаплеер
   not_playing: Ничего не играет
 show_desktop:
   label: Показать рабочий стол
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Добавить модуль корзины
 trash_bin:
   empty_bin: Пустая корзина
+  label: Корзина
 weg:
   empty: Нет элементов для отображения

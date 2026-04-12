@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: பணிப்பட்டியைப் பூட்டவும்
   reorder_enable: பணிப்பட்டியைத் திறக்கவும்
 media:
+  label: மீடியா பிளேயர்
   not_playing: எதுவும் விளையாடுவதில்லை
 show_desktop:
   label: டெஸ்க்டாப்பைக் காட்டு
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: மறுசுழற்சி தொட்டி தொகுதியைச் சேர்க்கவும்
 trash_bin:
   empty_bin: காலி மறுசுழற்சி தொட்டி
+  label: மறுசுழற்சி தொட்டி
 weg:
   empty: காட்ட உருப்படிகள் இல்லை

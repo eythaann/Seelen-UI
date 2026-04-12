@@ -205,6 +205,7 @@ session:
   sign_in: Ngena ngemvume
   sign_in_hint: Isiphequluli sakho sizovuleka ukuze ungene ngemvume ngokuphephile.
 shortcuts:
+  disabled_tooltip: Iwijethi kanye nezinqamuleli zayo kukhutshaziwe
   duplicate_error: Lesi sinqamuleli siyimpinda
   enable: Nika amandla uhlelo lwezinqamuleli ezakhelwe ngaphakathi
   enable_tooltip: >-
@@ -212,45 +213,14 @@ shortcuts:
     le-Seelen UI
   labels:
     create_new_workspace: Dala indawo yokusebenza entsha
-    cycle_stack_next: Umjikelezo isitaki olandelayo
-    cycle_stack_prev: Umjikelezo ubona okwedlule
-    cycle_wallpaper_next: Shintshela ekhasini elilandelayo
-    cycle_wallpaper_prev: Shintshela ku-Wallpaper eyedlule
-    decrease_height: Yehlisa ukuphakama
-    decrease_width: Yehlisa Ububanzi
     destroy_current_workspace: Ukubhubhisa indawo yokusebenza yamanje
-    focus_bottom: Gxila phansi
-    focus_latest: Gxila kwakamuva
-    focus_left: Gxila kwesokunxele
-    focus_right: Gxila kwesokudla
-    focus_top: Gxila phezulu
-    increase_height: Khuphula ukuphakama
-    increase_width: Khulisa Ububanzi
     misc_force_quit: Amandla ayeke
     misc_force_restart: Force Qala kabusha
-    misc_open_settings: Vula izilungiselelo
-    misc_toggle_lock_tracing: Guqula ukukhiya ukulandelela (izingodo)
-    misc_toggle_win_event_tracing: Guqula u-Win Traceng (izingodo)
     move_to_workspace: Hambisa ku-Workpace {{0}}
-    move_window_down: Hambisa iwindi phansi
-    move_window_left: Hambisa iwindi ukushiya kwesokunxele
-    move_window_right: Hambisa iwindi ukuze kwesokudla
-    move_window_up: Hambisa iwindi phezulu
-    pause_tiling: Misa okwesikhashana Imenenja yewindows
-    reserve_bottom: Ukubhuka phansi
-    reserve_float: Indawo yokuntanta
-    reserve_left: Indawo esele
-    reserve_right: Ukubhuka kwesokudla
-    reserve_stack: Isitaki
-    reserve_top: Beka phezulu
-    restore_sizes: Buyisela osayizi
     send_to_workspace: Thumela kwi-Workpace {{0}}
-    start_weg_app: Gxila noma qala uhlelo lokusebenza {{0}}
     switch_to_next_workspace: Shintshela endaweni yokusebenzela elandelayo
     switch_to_previous_workspace: Shintshela endaweni yokusebenza edlule
     switch_workspace: Shintshela endaweni yokusebenza {{0}}
-    toggle_float: Imodi yewindows Float Float
-    toggle_monocle: Guqula imodi ye-monocle ye-workspace
   readonly_tooltip: Lesi isinqamuleli esifundwayo kuphela
   reset: Setha kabusha okuzenzakalelayo
 sides:

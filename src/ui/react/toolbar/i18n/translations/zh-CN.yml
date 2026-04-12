@@ -56,3 +56,4 @@ settings:
   power: 电源
   restart: 重启
   title: 设置
+show_desktop: 显示桌面

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Zablokuj pasek zadań
   reorder_enable: Odblokuj pasek zadań
 media:
+  label: Odtwarzacz multimediów
   not_playing: Nic nie gra
 show_desktop:
   label: Pokaż pulpit
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Dodaj moduł Kosza
 trash_bin:
   empty_bin: Opróżnij Kosz
+  label: Kosz
 weg:
   empty: Brak elementów do pokazania

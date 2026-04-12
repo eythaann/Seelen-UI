@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Khóa thanh tác vụ
   reorder_enable: Mở khóa Thanh nhiệm vụ
 media:
+  label: Trình phát đa phương tiện
   not_playing: Không có gì đang chơi
 show_desktop:
   label: Hiển thị màn hình
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Thêm mô-đun thùng rác
 trash_bin:
   empty_bin: Thùng rác trống
+  label: Thùng rác
 weg:
   empty: Không có mục nào để hiển thị

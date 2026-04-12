@@ -16,7 +16,7 @@ $i18nFolders | ForEach-Object {
     $i18nPath = $i18nFolder.FullName
 
     # Get all files inside the i18n folder
-    Get-ChildItem -Path $i18nPath -File | ForEach-Object {
+    Get-ChildItem -Path $i18nPath -File -Recurse | ForEach-Object {
         $allPaths += $_.FullName
     }
 }

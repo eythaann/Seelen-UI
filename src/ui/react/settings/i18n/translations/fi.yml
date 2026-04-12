@@ -204,6 +204,7 @@ session:
   sign_in: Kirjaudu sisään
   sign_in_hint: Selaimesi avautuu, jotta voit kirjautua sisään turvallisesti.
 shortcuts:
+  disabled_tooltip: Widget ja sen pikakuvakkeet on poistettu käytöstä
   duplicate_error: Tämä pikanäppäin on kopioitu
   enable: Ota sisäänrakennettu pikakuvausjärjestelmä
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     -asiakkaan avulla
   labels:
     create_new_workspace: Luo uusi työtila
-    cycle_stack_next: Sykli pino seuraavaksi
-    cycle_stack_prev: Pyöräpino edellinen
-    cycle_wallpaper_next: Vaihda seuraavaan taustakuvaksi
-    cycle_wallpaper_prev: Vaihda edelliseen taustakuvaan
-    decrease_height: Pienenee
-    decrease_width: Vähentynyt leveys
     destroy_current_workspace: Tuhoa nykyinen työtila
-    focus_bottom: Tarkennuspohja
-    focus_latest: Focus -viimeisin
-    focus_left: Focus jäljellä
-    focus_right: Keskittyä oikein
-    focus_top: Keskittyä
-    increase_height: Lisätä korkeutta
-    increase_width: Lisätä leveyttä
     misc_force_quit: Pakottaa
     misc_force_restart: Pakota uudelleenkäynnistys
-    misc_open_settings: Avaa asetukset
-    misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
-    misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
     move_to_workspace: Siirry työtilaan {{0}}
-    move_window_down: Siirrä ikkuna pohjaan
-    move_window_left: Siirrä ikkuna vasemmalle
-    move_window_right: Siirrä ikkuna oikealle
-    move_window_up: Siirrä ikkuna yläosaan
-    pause_tiling: Tauko laatoitus ikkunanhallinta
-    reserve_bottom: Varata pohja
-    reserve_float: Varaa kelluva
-    reserve_left: Varaa jäljellä
-    reserve_right: Varaa oikea
-    reserve_stack: Varantopino
-    reserve_top: Varaa
-    restore_sizes: Palauttaa koot
     send_to_workspace: Lähetä työtilaan {{0}}
-    start_weg_app: Keskittyä tai käynnistä sovellus {{0}}
     switch_to_next_workspace: Vaihda seuraavaan työtilaan
     switch_to_previous_workspace: Vaihda edelliseen työtilaan
     switch_workspace: Vaihda työtilaan {{0}}
-    toggle_float: Vaihda ikkunan kelluva tila
-    toggle_monocle: Vaihda työtilan monokle -tila
   readonly_tooltip: Tämä on vain luku-pikakuvake
   reset: Palauta laiminlyöntiin
 sides:

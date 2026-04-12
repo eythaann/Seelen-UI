@@ -1,4 +1,7 @@
-use std::{collections::HashMap, path::PathBuf};
+use std::{
+    collections::{BTreeMap, HashMap},
+    path::PathBuf,
+};
 
 use chrono::{DateTime, Utc};
 use url::Url;
@@ -65,8 +68,8 @@ pub struct InternalResourceMetadata {
 impl Default for ResourceMetadata {
     fn default() -> Self {
         Self {
-            display_name: ResourceText::Localized(HashMap::new()),
-            description: ResourceText::Localized(HashMap::new()),
+            display_name: ResourceText::Localized(BTreeMap::new()),
+            description: ResourceText::Localized(BTreeMap::new()),
             portrait: None,
             banner: None,
             screenshots: Vec::new(),

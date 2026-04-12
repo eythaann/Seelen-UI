@@ -13,7 +13,7 @@ pub use yaml_ext::*;
 pub use crate::utils::Slug;
 
 use std::{
-    collections::{HashMap, HashSet},
+    collections::{BTreeMap, HashSet},
     hash::Hash,
 };
 
@@ -32,7 +32,7 @@ use crate::error::Result;
 /// Map of language code as key an translated values. Could be a string, mapped to `en`.
 pub enum ResourceText {
     En(String),
-    Localized(HashMap<String, String>),
+    Localized(BTreeMap<String, String>),
 }
 
 impl Default for ResourceText {
@@ -69,7 +69,7 @@ impl ResourceText {
 
     pub fn set(&mut self, lang: impl Into<String>, value: impl Into<String>) {
         if let ResourceText::En(v) = self {
-            let mut dict = HashMap::new();
+            let mut dict = BTreeMap::new();
             dict.insert("en".to_string(), v.to_string());
             *self = ResourceText::Localized(dict);
         }

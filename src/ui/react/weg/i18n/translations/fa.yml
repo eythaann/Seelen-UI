@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: نوار وظیفه قفل
   reorder_enable: نوار کار را باز کنید
 media:
+  label: مدیا پلیر
   not_playing: هیچ چیز بازی نمی کند
 show_desktop:
   label: نمایش دسکتاپ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: اضافه کردن ماژول سطل بازیافت
 trash_bin:
   empty_bin: سطل بازیافت خالی
+  label: سطل بازیافت
 weg:
   empty: هیچ موردی برای نمایش وجود ندارد

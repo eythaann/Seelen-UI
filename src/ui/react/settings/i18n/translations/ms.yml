@@ -202,6 +202,7 @@ session:
   sign_in: Log Masuk
   sign_in_hint: Penyemak imbas anda akan dibuka supaya anda boleh log masuk dengan selamat.
 shortcuts:
+  disabled_tooltip: Widget dan pintasannya dilumpuhkan
   duplicate_error: Pintasan ini diduplikasi
   enable: Dayakan sistem pintasan terbina dalam
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     menggunakan pelanggan Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
-    cycle_stack_next: Stack kitaran seterusnya
-    cycle_stack_prev: Tumpukan kitaran sebelumnya
-    cycle_wallpaper_next: Tukar ke kertas dinding seterusnya
-    cycle_wallpaper_prev: Tukar ke kertas dinding sebelumnya
-    decrease_height: Mengurangkan ketinggian
-    decrease_width: Mengurangkan lebar
     destroy_current_workspace: Memusnahkan ruang kerja semasa
-    focus_bottom: Fokus bawah
-    focus_latest: Fokus terkini
-    focus_left: Fokus kiri
-    focus_right: Fokus betul
-    focus_top: Fokus atas
-    increase_height: Meningkatkan ketinggian
-    increase_width: Meningkatkan lebar
     misc_force_quit: Memaksa berhenti
     misc_force_restart: Memaksa memulakan semula
-    misc_open_settings: Buka Tetapan
-    misc_toggle_lock_tracing: Togol mengesan kunci (log)
-    misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
     move_to_workspace: Pindah ke ruang kerja {{0}}
-    move_window_down: Pindahkan tetingkap ke bawah
-    move_window_left: Pindahkan tingkap ke kiri
-    move_window_right: Pindahkan tetingkap ke kanan
-    move_window_up: Pindahkan tetingkap ke bahagian atas
-    pause_tiling: Jeda Jeda Pengurus Tetingkap
-    reserve_bottom: Bawah simpanan
-    reserve_float: Rizab terapung
-    reserve_left: Rizab kiri
-    reserve_right: Rizab betul
-    reserve_stack: Timbunan simpanan
-    reserve_top: Rizab atas
-    restore_sizes: Pulihkan saiz
     send_to_workspace: Hantar ke Workspace {{0}}
-    start_weg_app: Fokus atau mulakan aplikasi {{0}}
     switch_to_next_workspace: Beralih ke ruang kerja seterusnya
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Tukar ke ruang kerja {{0}}
-    toggle_float: Mod Terapung Togel Togel
-    toggle_monocle: Mod Monocle Workspace Togol
   readonly_tooltip: Ini adalah jalan pintas baca sahaja
   reset: Tetapkan semula ke lalai
 sides:

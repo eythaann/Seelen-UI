@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Khiya i-taskbar
   reorder_enable: Vula i-Taskbar
 media:
+  label: Isidlali Semidiya
   not_playing: Akukho okudlalayo
 show_desktop:
   label: Bonisa Ideskithophu
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Engeza i-Recycle Bin Module
 trash_bin:
   empty_bin: I-Recycle Bin engenalutho
+  label: Ubhini wokulahla udoti
 weg:
   empty: Azikho izinto ezizoboniswa

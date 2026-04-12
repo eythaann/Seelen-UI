@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Užrakinti užduočių juostą
   reorder_enable: Užduočių juostos atrakinimas
 media:
+  label: Media Player
   not_playing: Niekas nežaidžia
 show_desktop:
   label: Rodyti darbalaukį
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Pridėkite šiukšliadėžės modulį
 trash_bin:
   empty_bin: Ištuštinkite šiukšliadėžę
+  label: Šiukšliadėžė
 weg:
   empty: Nėra elementų, kuriuos būtų galima rodyti

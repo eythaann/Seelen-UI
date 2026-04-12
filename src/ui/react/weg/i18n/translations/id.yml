@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Mengunci bilah tugas
   reorder_enable: Buka kunci bilah tugas
 media:
+  label: Pemutar Media
   not_playing: Tidak ada yang bermain
 show_desktop:
   label: Tampilkan Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Tambahkan Modul Recycle Bin
 trash_bin:
   empty_bin: Kosongkan Tempat Sampah
+  label: Tempat Sampah
 weg:
   empty: Tidak ada item untuk ditampilkan

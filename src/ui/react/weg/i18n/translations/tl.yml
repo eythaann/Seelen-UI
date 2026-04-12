@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: I -lock ang taskbar
   reorder_enable: I -unlock ang taskbar
 media:
+  label: Media Player
   not_playing: Walang naglalaro
 show_desktop:
   label: Ipakita ang Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Magdagdag ng Recycle Bin Module
 trash_bin:
   empty_bin: Walang laman ang Recycle Bin
+  label: Recycle Bin
 weg:
   empty: Walang maipapakitang item

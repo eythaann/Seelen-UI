@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Կողպեք առաջադրանքներիբար
   reorder_enable: Բացել աշխատանքային գիծը
 media:
+  label: Մեդիա նվագարկիչ
   not_playing: Ոչինչ չի խաղում
 show_desktop:
   label: Ցուցադրել աշխատասեղան
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Ավելացնել թափոնարկղ մոդուլ
 trash_bin:
   empty_bin: Դատարկ թափոնարկղ
+  label: Վերամշակման աղբարկղ
 weg:
   empty: Ցուցադրելու տարրեր չկան

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Görev çubuğunu kilitle
   reorder_enable: Görev çubuğunun kilidini aç
 media:
+  label: Medya Oynatıcı
   not_playing: Medya oynatılmıyor
 show_desktop:
   label: Masaüstünü Göster
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Geri Dönüşüm Kutusu Modülü Ekle
 trash_bin:
   empty_bin: Geri Dönüşüm Kutusunu Boşalt
+  label: Geri Dönüşüm Kutusu
 weg:
   empty: Gösterilecek öğe yok

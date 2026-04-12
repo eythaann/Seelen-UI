@@ -202,6 +202,7 @@ session:
   sign_in: Jelentkezzen be
   sign_in_hint: Megnyílik a böngészője, így biztonságosan bejelentkezhet.
 shortcuts:
+  disabled_tooltip: A widget és parancsikonjai le vannak tiltva
   duplicate_error: Ez a parancsikon megkettőződik
   enable: Engedélyezze a beépített parancsikonok rendszerét
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     parancsikonjait
   labels:
     create_new_workspace: Hozzon létre új munkaterületet
-    cycle_stack_next: Cycle Stack Next
-    cycle_stack_prev: Cycle Stack előző
-    cycle_wallpaper_next: Váltson a következő háttérképre
-    cycle_wallpaper_prev: Váltás az előző háttérképre
-    decrease_height: Csökkenési magasság
-    decrease_width: Csökken a szélesség
     destroy_current_workspace: Pusztítsd el az aktuális munkaterületet
-    focus_bottom: Fókusz alsó
-    focus_latest: Fókuszban a legújabb
-    focus_left: Fókusz balra
-    focus_right: Fókuszál
-    focus_top: Fókusz teteje
-    increase_height: Növelje a magasságot
-    increase_width: Növelje a szélességet
     misc_force_quit: Erőt hagy
     misc_force_restart: Újraindítás kikényszerítése
-    misc_open_settings: Nyissa meg a beállításokat
-    misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
-    misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
     move_to_workspace: Költözni a munkaterületre {{0}}
-    move_window_down: Mozgassa az ablakot az aljára
-    move_window_left: Mozgassa az ablakot balra
-    move_window_right: Mozgassa az ablakot jobbra
-    move_window_up: Mozgassa az ablakot a tetejére
-    pause_tiling: Szünet a burkolólap ablakkezelőnek
-    reserve_bottom: Tartalék alsó rész
-    reserve_float: Tartalék úszó
-    reserve_left: Tartalék balra
-    reserve_right: Tartalékolási jog
-    reserve_stack: Tartalékköteg
-    reserve_top: Tartalék
-    restore_sizes: Visszaállítani a méreteket
     send_to_workspace: Küldje el a munkaterületre {{0}}
-    start_weg_app: Fókusz vagy indítási alkalmazás {{0}}
     switch_to_next_workspace: Váltás a következő munkaterületre
     switch_to_previous_workspace: Váltás az előző munkaterületre
     switch_workspace: Váltás a munkaterületre {{0}}
-    toggle_float: Windows úszó mód váltása
-    toggle_monocle: Váltás a munkaterület monokle módja
   readonly_tooltip: Ez egy csak olvasható parancsikon
   reset: Alapértelmezés visszaállítása az alapértelmezésekre
 sides:

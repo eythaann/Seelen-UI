@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Қулфи супоришҳо
   reorder_enable: Қулфи панел
 media:
+  label: Плеери медиа
   not_playing: Ҳеҷ чиз бозӣ намекунад
 show_desktop:
   label: Мизи кориро нишон диҳед
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Модули қуттии партовро илова кунед
 trash_bin:
   empty_bin: Қуттии партови холӣ
+  label: Қуттии партов
 weg:
   empty: Ягон ашё барои нишон додан

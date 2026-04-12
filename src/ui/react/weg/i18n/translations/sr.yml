@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Закључајте траку задатака
   reorder_enable: Откључајте траку задатака
 media:
+  label: Медиа Плаиер
   not_playing: Ништа се не игра
 show_desktop:
   label: Прикажи радну површину
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Додајте модул корпе за отпатке
 trash_bin:
   empty_bin: Празна корпа за отпатке
+  label: Рецицле Бин
 weg:
   empty: Нема ставки за приказ

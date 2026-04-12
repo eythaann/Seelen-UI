@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: लॉक टास्कबार
   reorder_enable: टास्कबार अनलॉक करें
 media:
+  label: मीडिया प्लेयर
   not_playing: कुछ भी नहीं खेल रहा है
 show_desktop:
   label: डेक्सटोप दिखाओ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: रीसायकल बिन मॉड्यूल जोड़ें
 trash_bin:
   empty_bin: खाली रीसायकल बिन
+  label: रीसायकल बिन
 weg:
   empty: दिखाने के लिए कोई आइटम नहीं

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Κλείδωμα γραμμής εργασιών
   reorder_enable: Ξεκλείδωμα της γραμμής εργασιών
 media:
+  label: Media Player
   not_playing: Τίποτα δεν παίζει
 show_desktop:
   label: Εμφάνιση επιφάνειας εργασίας
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Προσθήκη μονάδας κάδου ανακύκλωσης
 trash_bin:
   empty_bin: Άδειος Κάδος Ανακύκλωσης
+  label: Κάδος Ανακύκλωσης
 weg:
   empty: Δεν υπάρχουν στοιχεία για εμφάνιση

@@ -187,50 +187,20 @@ session:
   sign_in: サインイン
   sign_in_hint: ブラウザが開くので、安全にサインインできます。
 shortcuts:
+  disabled_tooltip: ウィジェットとそのショートカットが無効になっています
   duplicate_error: このショートカットは重複しています
   enable: ビルトインショートカットシステムを有効にします
   enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
     create_new_workspace: 新しいワークスペースを作成
-    cycle_stack_next: 次のサイクルスタックに進む
-    cycle_stack_prev: 前のサイクルスタックに戻る
-    cycle_wallpaper_next: 次の壁紙に変更
-    cycle_wallpaper_prev: 前の壁紙に変更
-    decrease_height: 高さを減らす
-    decrease_width: 幅を減らす
     destroy_current_workspace: 現在のワークスペースを破棄
-    focus_bottom: 下にフォーカス
-    focus_latest: 最新のウィンドウにフォーカス
-    focus_left: 左にフォーカス
-    focus_right: 右にフォーカス
-    focus_top: 上にフォーカス
-    increase_height: 高さを増やす
-    increase_width: 幅を増やす
     misc_force_quit: 強制終了する
     misc_force_restart: 強制再起動する
-    misc_open_settings: 設定を開く
-    misc_toggle_lock_tracing: ロックトレース（ログ）の切り替え
-    misc_toggle_win_event_tracing: ウィンイベントトレース（ログ）の切り替え
     move_to_workspace: ワークスペースに移動{{0}}
-    move_window_down: ウィンドウを下に移動する
-    move_window_left: ウィンドウを左に移動する
-    move_window_right: ウィンドウを右に移動する
-    move_window_up: ウィンドウを上に移動する
-    pause_tiling: タイル張りウィンドウマネージャーを一時停止する
-    reserve_bottom: 下を予約する
-    reserve_float: フローティングを予約する
-    reserve_left: 左を予約する
-    reserve_right: 右を予約する
-    reserve_stack: スタックを予約する
-    reserve_top: 上を予約する
-    restore_sizes: サイズを復元する
     send_to_workspace: ワークスペース {{0}} に送信
-    start_weg_app: アプリケーション {{0}} にフォーカスまたは開始
     switch_to_next_workspace: 次のワークスペースに切り替え
     switch_to_previous_workspace: 前のワークスペースに切り替え
     switch_workspace: ワークスペースに切り替え{{0}}
-    toggle_float: ウィンドウフロートモードを切り替え
-    toggle_monocle: ワークスペースモノクルモードの切り替え
   readonly_tooltip: 読み取り専用
   reset: デフォルトにリセット
 sides:

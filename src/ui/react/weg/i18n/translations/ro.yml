@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Blocarea barei de activități
   reorder_enable: Deblocați bara de activități
 media:
+  label: Media Player
   not_playing: Nimic nu se joacă
 show_desktop:
   label: Arată Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Adăugați modulul Coș de reciclare
 trash_bin:
   empty_bin: Goliți coșul de reciclare
+  label: Coșul de reciclare
 weg:
   empty: Nu există elemente de afișat

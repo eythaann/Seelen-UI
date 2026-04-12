@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Taakbalk vergrendelen
   reorder_enable: Taakbalk ontgrendelen
 media:
+  label: Mediaspeler
   not_playing: Niets speelt
 show_desktop:
   label: Bureaublad weergeven
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Voeg Prullenbakmodule toe
 trash_bin:
   empty_bin: Prullenbak leegmaken
+  label: Prullenbak
 weg:
   empty: Er zijn geen items om te tonen

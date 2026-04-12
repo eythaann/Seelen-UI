@@ -8,130 +8,130 @@ shortcuts:
   # =========== MODES ===========
   - id: wm-toggle
     command: ["wm", "toggle"]
-    label: Pause/Resume Tiling
+    label: !extend i18n/shortcuts/wm-toggle.yml
     defaultKeys: ["Win", "P"]
 
   - id: wm-toggle-float
     command: ["wm", "toggle-float"]
-    label: Toggle Float
+    label: !extend i18n/shortcuts/wm-toggle-float.yml
     defaultKeys: ["Win", "F"]
 
   - id: wm-toggle-monocle
     command: ["wm", "toggle-monocle"]
-    label: Toggle Monocle
+    label: !extend i18n/shortcuts/wm-toggle-monocle.yml
     defaultKeys: ["Win", "M"]
 
   # =========== STACK ===========
 
   - id: wm-cycle-stack-next
     command: ["wm", "cycle-stack", "next"]
-    label: Cycle Stack Next
+    label: !extend i18n/shortcuts/wm-cycle-stack-next.yml
     defaultKeys: ["Win", "Q"]
 
   - id: wm-cycle-stack-prev
     command: ["wm", "cycle-stack", "prev"]
-    label: Cycle Stack Previous
+    label: !extend i18n/shortcuts/wm-cycle-stack-prev.yml
     defaultKeys: ["Win", "Shift", "Q"]
 
   # =========== LAYOUT RESERVATION ===========
 
   - id: wm-reserve-top
     command: ["wm", "reserve", "top"]
-    label: Reserve Top
+    label: !extend i18n/shortcuts/wm-reserve-top.yml
     defaultKeys: ["Win", "Shift", "I"]
 
   - id: wm-reserve-bottom
     command: ["wm", "reserve", "bottom"]
-    label: Reserve Bottom
+    label: !extend i18n/shortcuts/wm-reserve-bottom.yml
     defaultKeys: ["Win", "Shift", "K"]
 
   - id: wm-reserve-left
     command: ["wm", "reserve", "left"]
-    label: Reserve Left
+    label: !extend i18n/shortcuts/wm-reserve-left.yml
     defaultKeys: ["Win", "Shift", "J"]
 
   - id: wm-reserve-right
     command: ["wm", "reserve", "right"]
-    label: Reserve Right
+    label: !extend i18n/shortcuts/wm-reserve-right.yml
     defaultKeys: ["Win", "Shift", "L"]
 
   - id: wm-reserve-float
     command: ["wm", "reserve", "float"]
-    label: Reserve Float
+    label: !extend i18n/shortcuts/wm-reserve-float.yml
     defaultKeys: ["Win", "Shift", "U"]
 
   - id: wm-reserve-stack
     command: ["wm", "reserve", "stack"]
-    label: Reserve Stack
+    label: !extend i18n/shortcuts/wm-reserve-stack.yml
     defaultKeys: ["Win", "Shift", "O"]
 
   # =========== FOCUS MOVEMENT ===========
 
   - id: wm-focus-up
     command: ["wm", "focus", "up"]
-    label: Focus Window Up
+    label: !extend i18n/shortcuts/wm-focus-up.yml
     defaultKeys: ["Alt", "I"]
 
   - id: wm-focus-down
     command: ["wm", "focus", "down"]
-    label: Focus Window Down
+    label: !extend i18n/shortcuts/wm-focus-down.yml
     defaultKeys: ["Alt", "K"]
 
   - id: wm-focus-left
     command: ["wm", "focus", "left"]
-    label: Focus Window Left
+    label: !extend i18n/shortcuts/wm-focus-left.yml
     defaultKeys: ["Alt", "J"]
 
   - id: wm-focus-right
     command: ["wm", "focus", "right"]
-    label: Focus Window Right
+    label: !extend i18n/shortcuts/wm-focus-right.yml
     defaultKeys: ["Alt", "L"]
 
   # =========== WINDOW SIZING ===========
 
   - id: wm-increase-width
     command: ["wm", "width", "increase"]
-    label: Increase Width
+    label: !extend i18n/shortcuts/wm-increase-width.yml
     defaultKeys: ["Win", "Alt", "="]
 
   - id: wm-decrease-width
     command: ["wm", "width", "decrease"]
-    label: Decrease Width
+    label: !extend i18n/shortcuts/wm-decrease-width.yml
     defaultKeys: ["Win", "Alt", "-"]
 
   - id: wm-increase-height
     command: ["wm", "height", "increase"]
-    label: Increase Height
+    label: !extend i18n/shortcuts/wm-increase-height.yml
     defaultKeys: ["Win", "Ctrl", "="]
 
   - id: wm-decrease-height
     command: ["wm", "height", "decrease"]
-    label: Decrease Height
+    label: !extend i18n/shortcuts/wm-decrease-height.yml
     defaultKeys: ["Win", "Ctrl", "-"]
 
   - id: wm-restore-sizes
     command: ["wm", "reset-workspace-size"]
-    label: Restore Sizes
+    label: !extend i18n/shortcuts/wm-restore-sizes.yml
     defaultKeys: ["Win", "Alt", "0"]
 
   # =========== WINDOW MOVEMENT ===========
 
   - id: wm-move-up
     command: ["wm", "move", "up"]
-    label: Move Window Up
+    label: !extend i18n/shortcuts/wm-move-up.yml
     defaultKeys: ["Shift", "Alt", "I"]
 
   - id: wm-move-down
     command: ["wm", "move", "down"]
-    label: Move Window Down
+    label: !extend i18n/shortcuts/wm-move-down.yml
     defaultKeys: ["Shift", "Alt", "K"]
 
   - id: wm-move-left
     command: ["wm", "move", "left"]
-    label: Move Window Left
+    label: !extend i18n/shortcuts/wm-move-left.yml
     defaultKeys: ["Shift", "Alt", "J"]
 
   - id: wm-move-right
     command: ["wm", "move", "right"]
-    label: Move Window Right
+    label: !extend i18n/shortcuts/wm-move-right.yml
     defaultKeys: ["Shift", "Alt", "L"]

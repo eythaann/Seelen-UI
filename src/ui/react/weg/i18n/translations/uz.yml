@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Qulf vazifasi paneli
   reorder_enable: Vazifalar panelini oching
 media:
+  label: Media pleer
   not_playing: Hech narsa o'ynamaydi
 show_desktop:
   label: Ish stolini ko'rsatish
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Chiqindi qutisi modulini qo'shing
 trash_bin:
   empty_bin: Chiqindi qutisini bo'sh
+  label: Chiqindi qutisi
 weg:
   empty: Ko‘rsatiladigan elementlar yo‘q

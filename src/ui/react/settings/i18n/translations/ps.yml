@@ -196,6 +196,7 @@ session:
   sign_in: ننوتل
   sign_in_hint: ستاسو براوزر به خلاص شي نو تاسو په خوندي ډول لاسلیک کولی شئ.
 shortcuts:
+  disabled_tooltip: ویجټ او د هغې شارټ کټونه غیر فعال دي
   duplicate_error: دا شارټ کټ نقل شوی دی
   enable: د جوړ شوي لنډیز سیسټم فعال کړئ
   enable_tooltip: >-
@@ -203,45 +204,14 @@ shortcuts:
     کړئ
   labels:
     create_new_workspace: نوی کارځای جوړ کړئ
-    cycle_stack_next: د دوران سټیک
-    cycle_stack_prev: دور مخکینی
-    cycle_wallpaper_next: راتلونکي وال پیپر ته بدل کړئ
-    cycle_wallpaper_prev: پخواني وال پیپر ته بدل کړئ
-    decrease_height: لوړوالی کمول
-    decrease_width: د سوری کمول
     destroy_current_workspace: اوسني کاري ځای ویجاړ کړئ
-    focus_bottom: ښکته
-    focus_latest: وروستی تمرکز وکړئ
-    focus_left: کي left ه تمرکز
-    focus_right: سم تمرکز
-    focus_top: فوکس سر
-    increase_height: قد زیاتول
-    increase_width: پلنوالی زیات کړئ
     misc_force_quit: ځواک پرېښودل
     misc_force_restart: ځواک بیاچالانول
-    misc_open_settings: خلاص امستنې
-    misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
-    misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
     move_to_workspace: د کارځای ته لاړ شئ {0 0}}
-    move_window_down: د کړکۍ لاندې ته واړوئ
-    move_window_left: د کی left اړخ ته لاړشئ
-    move_window_right: د کړکۍ سمې ته لاړشئ
-    move_window_up: کړکۍ سر ته واړوئ
-    pause_tiling: د وقفې ټیینګ کړکۍ مدیر
-    reserve_bottom: د
-    reserve_float: ریزرو فلوټ
-    reserve_left: ساتل شوی
-    reserve_right: سم ساتل
-    reserve_stack: ریزرو سټیک
-    reserve_top: خوندي پټی
-    restore_sizes: اندازونه بحال کړئ
     send_to_workspace: کارځای ته واستوئ {{0}}
-    start_weg_app: فوکس یا د تطبیق غوښتنلیک {{0}}
     switch_to_next_workspace: راتلونکی کاري ځای ته لاړشئ
     switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ
     switch_workspace: د کارځای ته لاړشئ {0 0}}
-    toggle_float: د کړکۍ د فلوټ حالت
-    toggle_monocle: د رواپیز دستیس مونو سپیکشن حالت
   readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
   reset: د افلاسیون لپاره بیا تنظیمول
 sides:

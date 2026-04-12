@@ -202,6 +202,7 @@ session:
   sign_in: Увійти
   sign_in_hint: Ваш браузер відкриється, щоб ви могли безпечно ввійти.
 shortcuts:
+  disabled_tooltip: Віджет і його ярлики вимкнено
   duplicate_error: Цей ярлик дублюється
   enable: Увімкнути вбудовану систему ярликів
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     інтерфейсу SEELEN
   labels:
     create_new_workspace: Створіть нову робочу область
-    cycle_stack_next: Цикл стек далі
-    cycle_stack_prev: Стек циклу попереднього
-    cycle_wallpaper_next: Зміна на наступні шпалери
-    cycle_wallpaper_prev: Зміна на попередні шпалери
-    decrease_height: Зниження висоти
-    decrease_width: Зменшення ширини
     destroy_current_workspace: Знищити поточну робочу область
-    focus_bottom: Фокус дно
-    focus_latest: Фокус найновіший
-    focus_left: Фокус ліворуч
-    focus_right: Фокус правильно
-    focus_top: Фокус
-    increase_height: Збільшити висоту
-    increase_width: Збільшити ширину
     misc_force_quit: Сила кинути
     misc_force_restart: Примусовий перезапуск
-    misc_open_settings: Відкриті налаштування
-    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
-    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
     move_to_workspace: Перемістіть до робочої області {{0}}
-    move_window_down: Перемістіть вікно до знизу
-    move_window_left: Перемістіть вікно вліво
-    move_window_right: Перемістіть вікно вправо
-    move_window_up: Перемістіть вікно вгорі
-    pause_tiling: Пауза плитка Менеджер вікон
-    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
-    reserve_float: Резервне плавання
-    reserve_left: Резерв зліва
-    reserve_right: Резервуйте праворуч
-    reserve_stack: Резерв
-    reserve_top: Резервувати топ
-    restore_sizes: Відновити розміри
     send_to_workspace: Надіслати на робочу область {{0}}
-    start_weg_app: Фокус або запуск програми {{0}}
     switch_to_next_workspace: Перейдіть на наступну робочу область
     switch_to_previous_workspace: Перехід на попередню робочу область
     switch_workspace: Переключення на робочу область {{0}}
-    toggle_float: Перемикайте режим віконного поплавця
-    toggle_monocle: Перемикайте режим монокльної роботи робочої області
   readonly_tooltip: Це ярлик лише для читання
   reset: Скидання за замовчуванням
 sides:

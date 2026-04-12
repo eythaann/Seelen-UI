@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lukitse tehtäväpalkki
   reorder_enable: Tehtäväpalkin lukituksen avaaminen
 media:
+  label: Mediasoitin
   not_playing: Mikään ei pelaa
 show_desktop:
   label: Näytä työpöytä
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Lisää roskakorimoduuli
 trash_bin:
   empty_bin: Tyhjennä roskakori
+  label: Roskakori
 weg:
   empty: Ei näytettäviä kohteita

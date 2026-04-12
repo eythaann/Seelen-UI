@@ -1,10 +1,8 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { getResourceText } from "libs/ui/react/utils/index.ts";
 import { Button, Input, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import i18n from "../../i18n";
 
 import {
   getShortcutGroups,
@@ -112,8 +110,6 @@ function Shortcut({ entry, onChanged }: ShortcutProps) {
   const { t } = useTranslation();
   const hasError = shortcutsError.value.has(id);
 
-  const resolvedLabel = typeof label === "string" ? label : getResourceText(label, i18n.language);
-
   function onEdit() {
     if (readonly) return;
 
@@ -134,7 +130,7 @@ function Shortcut({ entry, onChanged }: ShortcutProps) {
 
   return (
     <SettingsOption
-      label={resolvedLabel}
+      label={<ResourceText text={label} />}
       action={
         <Compact>
           <Tooltip title={inputTooltip} placement="left">

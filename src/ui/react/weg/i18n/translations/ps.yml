@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: ټاسک بار
   reorder_enable: د ټاسلف بار
 media:
+  label: د رسنیو پلیر
   not_playing: هیڅ شی نه لوبیږی
 show_desktop:
   label: ډیسټاپ وښایاست
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: د ریسایکل بن ماډل اضافه کړئ
 trash_bin:
   empty_bin: د ریسایکل بن خالي کړئ
+  label: د ریسایکل بن
 weg:
   empty: د ښودلو لپاره هیڅ توکي نشته

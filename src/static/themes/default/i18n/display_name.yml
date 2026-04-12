@@ -1,73 +1,73 @@
-fr: Défaut
-mk: Стандардно
-zh: 默认值
-ta: இயல்புநிலை
-tg: Иьро накардани ӯҳдадорӣ
-el: Προεπιλογή
-zu: Phutha
+af: Versuim
+am: ነባሪ
+ar: افتراضي
+az: Defolt
 bg: По подразбиране
 bn: ডিফল্ট
-en: Default
-tl: Default
-zh-CN: 默认
-uk: За замовчуванням
-mn: Үл хүрэлцэх
-tr: Varsayılan
-yo: Aiyipada
-uz: Bajarilish
+bs: Podrazumevano
 ca: No pagar
-eu: Ez ordaindu
-nl: Standaard
-lv: Noklusējuma
-id: Default
-pt-BR: Default
-ms: Lalai
-th: ค่าเริ่มต้น
-hr: Zadano
-pt-PT: Predefinição
-pa: ਮੂਲ
-ur: پہلے سے طے شدہ
-sw: Chaguo -msingi
-ar: افتراضي
-sr: Подразумевано
-so: Fulin la'aan
-es: Por defecto
-gu: ચૂક
-no: Misligholde
-lt: Numatytoji
-zh-TW: 預設
-ro: Implicit
+cs: Výchozí
 cy: Diofyn
-hi: गलती करना
-km: ការមិនកោរបតាមសន្យា
+da: Standard
 de: Standard
-pl: Domyślne
+el: Προεπιλογή
+en: Default
+es: Por defecto
+et: Vaikimisi
+eu: Ez ordaindu
+fa: پیش فرض
+fi: Oletusarvo
+fr: Défaut
+gu: ચૂક
+he: בְּרִירַת מֶחדָל
+hi: गलती करना
+hr: Zadano
+hu: Alapértelmezett
+hy: Թերություն
+id: Default
+is: Sjálfgefið
+it: Predefinito
+ja: デフォルト
+ka: ვალდებულების შეუსრულებლობა
+km: ការមិនកោរបតាមសន្យា
+ko: 기본값
 ku: Destçûnî
 lb: Asofbild
-te: డిఫాల్ట్
-ps: ډیفالټ
-is: Sjálfgefið
-ko: 기본값
-cs: Výchozí
-he: בְּרִירַת מֶחדָל
-et: Vaikimisi
-hu: Alapértelmezett
-mt: Default
-sk: Predvolené nastavenie
-am: ነባሪ
-fi: Oletusarvo
-af: Versuim
-fa: پیش فرض
-ru: По умолчанию
-az: Defolt
-si: පෙරනිමි
-hy: Թերություն
-ka: ვალდებულების შეუსრულებლობა
-ne: पुरा नगर्नु
-sv: Standard
-it: Predefinito
-bs: Podrazumevano
-ja: デフォルト
 lo: ໃນຕອນຕົ້ນ
-da: Standard
+lt: Numatytoji
+lv: Noklusējuma
+mk: Стандардно
+mn: Үл хүрэлцэх
+ms: Lalai
+mt: Default
+ne: पुरा नगर्नु
+nl: Standaard
+no: Misligholde
+pa: ਮੂਲ
+pl: Domyślne
+ps: ډیفالټ
+pt-BR: Default
+pt-PT: Predefinição
+ro: Implicit
+ru: По умолчанию
+si: පෙරනිමි
+sk: Predvolené nastavenie
+so: Fulin la'aan
+sr: Подразумевано
+sv: Standard
+sw: Chaguo -msingi
+ta: இயல்புநிலை
+te: డిఫాల్ట్
+tg: Иьро накардани ӯҳдадорӣ
+th: ค่าเริ่มต้น
+tl: Default
+tr: Varsayılan
+uk: За замовчуванням
+ur: پہلے سے طے شدہ
+uz: Bajarilish
 vi: Mặc định
+yo: Aiyipada
+zh: 默认值
+zh-CN: 默认
+zh-TW: 預設
+zu: Phutha

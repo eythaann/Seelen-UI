@@ -205,6 +205,7 @@ session:
   sign_in: Masuk
   sign_in_hint: Browser Anda akan terbuka sehingga Anda dapat masuk dengan aman.
 shortcuts:
+  disabled_tooltip: Widget dan pintasannya dinonaktifkan
   duplicate_error: Pintasan ini diduplikasi
   enable: Aktifkan sistem pintasan bawaan
   enable_tooltip: >-
@@ -212,45 +213,14 @@ shortcuts:
     menggunakan klien Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
-    cycle_stack_next: Tumpukan Siklus Berikutnya
-    cycle_stack_prev: Tumpukan Siklus Sebelumnya
-    cycle_wallpaper_next: Ubah ke wallpaper berikutnya
-    cycle_wallpaper_prev: Ubah ke wallpaper sebelumnya
-    decrease_height: Tinggi penurunan
-    decrease_width: Penurunan lebar
     destroy_current_workspace: Hancurkan ruang kerja saat ini
-    focus_bottom: Fokus dasar
-    focus_latest: Fokus Terbaru
-    focus_left: Fokus kiri
-    focus_right: Fokus benar
-    focus_top: Fokus atas
-    increase_height: Tingkatkan tinggi
-    increase_width: Meningkatkan lebar
     misc_force_quit: Force berhenti
     misc_force_restart: Memaksa Mulai Ulang
-    misc_open_settings: Buka Pengaturan
-    misc_toggle_lock_tracing: Toggle Lock Tracing (Log)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
     move_to_workspace: Pindah ke Workspace {{0}}
-    move_window_down: Pindahkan jendela ke bawah
-    move_window_left: Pindahkan jendela ke kiri
-    move_window_right: Pindahkan jendela ke kanan
-    move_window_up: Pindahkan jendela ke atas
-    pause_tiling: Jeda Manajer Jendela Ubin
-    reserve_bottom: Cadangan Bawah
-    reserve_float: Cadangan float
-    reserve_left: Cadangan kiri
-    reserve_right: Cadangan hak
-    reserve_stack: Tumpukan Cadangan
-    reserve_top: Cadangan atasan
-    restore_sizes: Kembalikan ukuran
     send_to_workspace: Kirim ke Workspace {{0}}
-    start_weg_app: Fokus atau Mulai Aplikasi {{0}}
     switch_to_next_workspace: Beralih ke ruang kerja berikutnya
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
     switch_workspace: Beralih ke Workspace {{0}}
-    toggle_float: Toggle Window Float Mode
-    toggle_monocle: Sakelar Mode Monokel Workspace
   readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
   reset: Reset ke default
 sides:

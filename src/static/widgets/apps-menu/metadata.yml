@@ -10,12 +10,12 @@ hidden: true
 settings:
   - type: switch
     key: acrylic
-    label: Acrylic Effect
+    label: !extend i18n/settings/acrylic.yml
     defaultValue: false
 shortcuts:
   - id: apps-menu-toggle
     command: ["widget", "trigger", "@seelen/apps-menu"]
-    label: Toggle Apps Menu
+    label: !extend i18n/shortcuts/apps-menu-toggle.yml
     defaultKeys: ["Win"]
     readonly: true
     system: true

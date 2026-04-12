@@ -202,6 +202,7 @@ session:
   sign_in: سائن ان کریں۔
   sign_in_hint: آپ کا براؤزر کھل جائے گا تاکہ آپ محفوظ طریقے سے سائن ان کر سکیں۔
 shortcuts:
+  disabled_tooltip: ویجیٹ اور اس کے شارٹ کٹس غیر فعال ہیں۔
   duplicate_error: اس شارٹ کٹ کو نقل کیا گیا ہے
   enable: بلٹ ان شارٹ کٹ سسٹم کو فعال کریں
   enable_tooltip: >-
@@ -209,45 +210,14 @@ shortcuts:
     گے تو غیر فعال کریں
   labels:
     create_new_workspace: نیا ورک اسپیس بنائیں
-    cycle_stack_next: سائیکل اسٹیک اگلا
-    cycle_stack_prev: سائیکل اسٹیک پچھلا
-    cycle_wallpaper_next: اگلے وال پیپر میں تبدیل کریں
-    cycle_wallpaper_prev: پچھلے وال پیپر میں تبدیل کریں
-    decrease_height: اونچائی میں کمی
-    decrease_width: چوڑائی کو کم کرنا
     destroy_current_workspace: موجودہ ورک اسپیس کو ختم کریں
-    focus_bottom: فوکس نیچے
-    focus_latest: تازہ ترین توجہ مرکوز کریں
-    focus_left: فوکس بائیں
-    focus_right: صحیح توجہ مرکوز کریں
-    focus_top: فوکس ٹاپ
-    increase_height: اونچائی میں اضافہ
-    increase_width: چوڑائی میں اضافہ
     misc_force_quit: فورس چھوڑ دیں
     misc_force_restart: زبردستی دوبارہ شروع کریں
-    misc_open_settings: کھلی ترتیبات
-    misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
-    misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
     move_to_workspace: ورک اسپیس {{0}} میں منتقل کریں
-    move_window_down: ونڈو کو نیچے منتقل کریں
-    move_window_left: ونڈو کو بائیں طرف منتقل کریں
-    move_window_right: ونڈو کو دائیں طرف منتقل کریں
-    move_window_up: ونڈو کو اوپر منتقل کریں
-    pause_tiling: ٹائلنگ ونڈو مینیجر کو روکیں
-    reserve_bottom: ریزرو نیچے
-    reserve_float: ریزرو فلوٹ
-    reserve_left: ریزرو بائیں
-    reserve_right: ٹھیک ہے
-    reserve_stack: ریزرو اسٹیک
-    reserve_top: ریزرو ٹاپ
-    restore_sizes: سائز کو بحال کریں
     send_to_workspace: ورک اسپیس کو بھیجیں {{0}}
-    start_weg_app: توجہ مرکوز کریں یا درخواست شروع کریں {{0}}
     switch_to_next_workspace: اگلی ورک اسپیس پر سوئچ کریں
     switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں
     switch_workspace: ورک اسپیس {{0}} پر سوئچ کریں
-    toggle_float: ٹوگل ونڈو فلوٹ موڈ
-    toggle_monocle: ٹوگل ورک اسپیس مونوکل وضع
   readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
 sides:

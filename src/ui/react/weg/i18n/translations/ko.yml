@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: 작업 표시줄 잠금
   reorder_enable: 작업 표시줄 잠금 해제
 media:
+  label: 미디어 플레이어
   not_playing: 재생 중인 항목 없음
 show_desktop:
   label: 데스크탑 표시
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: 휴지통 모듈 추가
 trash_bin:
   empty_bin: 휴지통 비우기
+  label: 휴지통
 weg:
   empty: 표시할 항목이 없습니다.

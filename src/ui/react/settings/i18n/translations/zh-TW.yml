@@ -180,50 +180,20 @@ session:
   sign_in: 登入
   sign_in_hint: 您的瀏覽器將會打開，以便您可以安全登入。
 shortcuts:
+  disabled_tooltip: 小部件及其快捷方式已停用
   duplicate_error: 該快捷方式重複
   enable: 啟用內置捷徑系統
   enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:
     create_new_workspace: 創建新工作區
-    cycle_stack_next: 循環堆棧接下來
-    cycle_stack_prev: 循環堆棧以前
-    cycle_wallpaper_next: 更改為下一個牆紙
-    cycle_wallpaper_prev: 更改為以前的牆紙
-    decrease_height: 降低高度
-    decrease_width: 減小寬度
     destroy_current_workspace: 破壞當前工作區
-    focus_bottom: 聚焦底部
-    focus_latest: 重點最新
-    focus_left: 焦點左
-    focus_right: 重點正確
-    focus_top: 聚焦頂部
-    increase_height: 增加身高
-    increase_width: 增加寬度
     misc_force_quit: 武力退出
     misc_force_restart: 強制重新啟動
-    misc_open_settings: 打開設置
-    misc_toggle_lock_tracing: 切換鎖定跟踪（日誌）
-    misc_toggle_win_event_tracing: 切換Win事件跟踪（日誌）
     move_to_workspace: 移至工作區{{0}}
-    move_window_down: 將窗口移至底部
-    move_window_left: 向左移動窗口
-    move_window_right: 向右移動窗口
-    move_window_up: 將窗口移至頂部
-    pause_tiling: 暫停瓷磚窗口管理器
-    reserve_bottom: 儲備底部
-    reserve_float: 儲備浮子
-    reserve_left: 保留剩下
-    reserve_right: 保留權
-    reserve_stack: 儲備堆
-    reserve_top: 儲備頂
-    restore_sizes: 還原尺寸
     send_to_workspace: 發送到工作區{{0}}
-    start_weg_app: 聚焦或啟動應用程序{{0}}
     switch_to_next_workspace: 切換到下一個工作區
     switch_to_previous_workspace: 切換到以前的工作區
     switch_workspace: 切換到工作區{{0}}
-    toggle_float: 切換窗口浮點模式
-    toggle_monocle: 切換工作區單片模式
   readonly_tooltip: 這是只讀的捷徑
   reset: 重置為默認值
 sides:

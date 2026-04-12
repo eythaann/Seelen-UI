@@ -204,6 +204,7 @@ session:
   sign_in: Přihlaste se
   sign_in_hint: Otevře se váš prohlížeč, abyste se mohli bezpečně přihlásit.
 shortcuts:
+  disabled_tooltip: Widget a jeho zkratky jsou zakázány
   duplicate_error: Tato zkratka je duplicitní
   enable: Povolení vestavěného systému zkratek
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     Seelen UI.
   labels:
     create_new_workspace: Vytvoření nového pracovního prostoru
-    cycle_stack_next: Cyklus Stack Další
-    cycle_stack_prev: Cyklus Stack Předchozí
-    cycle_wallpaper_next: Změna na další tapetu
-    cycle_wallpaper_prev: Změna na předchozí tapetu
-    decrease_height: Snížení výšky
-    decrease_width: Snížení šířky
     destroy_current_workspace: Zničit aktuální pracovní prostor
-    focus_bottom: Zaměření Dno
-    focus_latest: Zaměřte se na nejnovější
-    focus_left: Zaostřeno vlevo
-    focus_right: Zaměřit se na pravou stranu
-    focus_top: Zaměření Top
-    increase_height: Zvýšení výšky
-    increase_width: Zvětšení šířky
     misc_force_quit: Síla přestat
     misc_force_restart: Vynutit restart
-    misc_open_settings: Otevřít nastavení
-    misc_toggle_lock_tracing: Přepínání sledování zámků (protokoly)
-    misc_toggle_win_event_tracing: Přepnutí sledování událostí Win (protokoly)
     move_to_workspace: Přesun do pracovního prostoru {{0}}
-    move_window_down: Přesunutí okna do spodní části
-    move_window_left: Přesunutí okna doleva
-    move_window_right: Přesunutí okna doprava
-    move_window_up: Přesunutí okna na začátek
-    pause_tiling: Pozastavení Správce dlaždicového okna
-    reserve_bottom: Rezerva Dno
-    reserve_float: Rezervní plovák
-    reserve_left: Rezerva vlevo
-    reserve_right: Právo na rezervaci
-    reserve_stack: Zásobník rezerv
-    reserve_top: Reserve Top
-    restore_sizes: Obnovení velikostí
     send_to_workspace: Odeslat do pracovního prostoru {{0}}
-    start_weg_app: Zaměření nebo spuštění aplikace {{0}}
     switch_to_next_workspace: Přepnutí na další pracovní plochu
     switch_to_previous_workspace: Přepnutí na předchozí pracovní plochu
     switch_workspace: Přepnutí na pracovní plochu {{0}}
-    toggle_float: Přepínání režimu plovoucího okna
-    toggle_monocle: Přepínání režimu Monokl na pracovní ploše
   readonly_tooltip: Toto je zkratka pouze pro čtení
   reset: Obnovení výchozího nastavení
 sides:

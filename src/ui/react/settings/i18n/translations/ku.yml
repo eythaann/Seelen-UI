@@ -204,6 +204,7 @@ session:
   sign_in: Têketin
   sign_in_hint: Geroka we dê vebe da ku hûn bi ewlehî têkevinê.
 shortcuts:
+  disabled_tooltip: Widget û kurtebirên wê neçalak in
   duplicate_error: Ev kurtebir hatiye dubarekirin
   enable: Pergala kurtefîlmên çêkirî çalak bikin
   enable_tooltip: >-
@@ -211,45 +212,14 @@ shortcuts:
     bicîh bikin
   labels:
     create_new_workspace: Karê nû nû çêbikin
-    cycle_stack_next: Cycle stack next
-    cycle_stack_prev: Stacka Cycle ya berê
-    cycle_wallpaper_next: Guhertina Wallpaper-ê din
-    cycle_wallpaper_prev: Guhertina Wallpaper ya berê
-    decrease_height: Dirêjbûn
-    decrease_width: Width kêm bikin
     destroy_current_workspace: Qada xebata heyî hilweşînin
-    focus_bottom: Focus Bottom
-    focus_latest: FOCUS Latest
-    focus_left: Focus çep
-    focus_right: Focus rast
-    focus_top: Focus Top
-    increase_height: Bilindbûnê zêde bikin
-    increase_width: Berfireh zêde bikin
     misc_force_quit: Hêza Qedexe
     misc_force_restart: Hêza Destpêkirin
-    misc_open_settings: Mîhengên vekirî
-    misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
     move_to_workspace: Move to Workspace {{0}}
-    move_window_down: Pencereyê berbi jêr ve biçin
-    move_window_left: Pencereya çepê hilkişînin
-    move_window_right: Pencereya rastê hilkişînin
-    move_window_up: Pencereyê berbi jor ve biçin
-    pause_tiling: Rêvebirê pencereya tiliyê rawestînin
-    reserve_bottom: Binê binê
-    reserve_float: Float rezervan
-    reserve_left: Rezertê çepê
-    reserve_right: Rasterast rast bikin
-    reserve_stack: Stack Reserve
-    reserve_top: Top hilînin
-    restore_sizes: Mezinan sererast bikin
     send_to_workspace: Ji bo Workspace {{0} bişînin.
-    start_weg_app: FOCUS an Destpêkirina Serîlêdanê {{0}}
     switch_to_next_workspace: Veguherînin qada xebata next
     switch_to_previous_workspace: Vegere qada xebata berê
     switch_workspace: Switch to Workspace {{0}}
-    toggle_float: Mode Float Float Toggle
-    toggle_monocle: Mode Mode Monocle Workspace Toggle
   readonly_tooltip: Ev kurteyek xwendinê ye
   reset: Reset to Default
 sides:

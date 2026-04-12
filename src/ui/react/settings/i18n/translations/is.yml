@@ -199,6 +199,7 @@ session:
   sign_in: Skráðu þig inn
   sign_in_hint: Vafrinn þinn opnast svo þú getir skráð þig inn á öruggan hátt.
 shortcuts:
+  disabled_tooltip: Græjan og flýtivísar hennar eru óvirk
   duplicate_error: Þessi flýtileið er afrituð
   enable: Virkja innbyggt flýtileiðkerfi
   enable_tooltip: >-
@@ -206,45 +207,14 @@ shortcuts:
     viðskiptavininum
   labels:
     create_new_workspace: Búðu til nýja vinnusvæði
-    cycle_stack_next: Hringrás stafla næst
-    cycle_stack_prev: Hringrás stafla fyrri
-    cycle_wallpaper_next: Breyttu í næsta veggfóður
-    cycle_wallpaper_prev: Breytast í fyrra veggfóður
-    decrease_height: Minnka hæð
-    decrease_width: Minnka breidd
     destroy_current_workspace: Eyðileggja núverandi vinnusvæði
-    focus_bottom: Fókus botn
-    focus_latest: Fókus síðast
-    focus_left: Einbeittu til vinstri
-    focus_right: Einbeittu þér rétt
-    focus_top: Fókus toppur
-    increase_height: Auka hæð
-    increase_width: Auka breidd
     misc_force_quit: Force hætti
     misc_force_restart: Force endurræsing
-    misc_open_settings: Opnar stillingar
-    misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
-    misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
     move_to_workspace: Fara í vinnusvæði {{0}}
-    move_window_down: Færðu glugga til botns
-    move_window_left: Færðu glugga til vinstri
-    move_window_right: Færðu glugga til hægri
-    move_window_up: Færðu glugga efst
-    pause_tiling: Hlé flísar gluggastjóri
-    reserve_bottom: Panta botn
-    reserve_float: Varasjóður flot
-    reserve_left: Pantaðu til vinstri
-    reserve_right: Pantaðu rétt
-    reserve_stack: Panta stafla
-    reserve_top: Panta topp
-    restore_sizes: Endurheimta stærðir
     send_to_workspace: Sendu á Workspace {{0}}
-    start_weg_app: Einbeittu eða byrjaðu forrit {{0}}
     switch_to_next_workspace: Skiptu yfir í næsta vinnusvæði
     switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði
     switch_workspace: Skiptu yfir í vinnusvæði {{0}}
-    toggle_float: Skiptu um glugga flotastillingu
-    toggle_monocle: Skiptu um vinnusvæði Monocle Mode
   readonly_tooltip: Þetta er aðeins skrifvarinn
   reset: Endurstilla í vanskil
 sides:

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Lock Taskbar
   reorder_enable: Nisfruttaw taskbar
 media:
+  label: Media Player
   not_playing: Xejn ma jilgħab
 show_desktop:
   label: Uri Desktop
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Żid Recycle Bin Modulu
 trash_bin:
   empty_bin: Vojta Recycle Bin
+  label: Recycle Bin
 weg:
   empty: Ebda oġġetti li juru

@@ -16,6 +16,7 @@ context_menu:
   reorder_disable: Nutbar tiipa
   reorder_enable: Ṣii ṣiṣẹ Iṣẹ-ṣiṣe Ṣii silẹ
 media:
+  label: Media Player
   not_playing: Ko si ohun ti ndun
 show_desktop:
   label: Ṣe afihan Ojú-iṣẹ
@@ -31,5 +32,6 @@ taskbar_menu:
   trash_bin: Fi Atunlo Bin Module
 trash_bin:
   empty_bin: Ofo atunlo Bin
+  label: Atunlo Bin
 weg:
   empty: Ko si awọn nkan lati ṣafihan

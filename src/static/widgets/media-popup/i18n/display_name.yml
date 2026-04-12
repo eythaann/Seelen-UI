@@ -1,72 +1,72 @@
-mk: Медиумски скокачки прозорец
-zh-TW: 媒體彈出窗口
-si: මාධ්‍ය උත්පතනය
-ka: მედია ამომხტარი
-yo: Agbejade Media
-zu: I-Popup yemidiya
-es: Ventana emergente multimedia
-fr: Pop-up multimédia
-so: Baahinta Warbaahinta
-te: మీడియా పాప్అప్
-tl: Media Popup
-ca: Popup de mitjans
-he: פופאפ מדיה
-th: สื่อป๊อปอัป
-az: Media Popup
-sv: Media popup
-sr: Медијски искачући прозор
-lb: Media Popup
-ta: மீடியா பாப்அப்
-is: Fjölmiðlasprettigluggi
-ku: Media Popup
-ar: الوسائط المنبثقة
-id: Munculan Media
-sk: Vyskakovacie okno médií
-en: Media Popup
-lt: Iššokantis medijos langas
-fa: بازشو رسانه
-ne: मिडिया पपअप
-lv: Multivides uznirstošais logs
-no: Media Popup
-cy: Naid Cyfryngau
-ru: Медиа-всплывающее окно
-vi: Cửa sổ bật lên phương tiện
-ms: Pop Timbul Media
-pt-BR: Media Popup
-ur: میڈیا پاپ اپ
-mt: Popup tal-Midja
-de: Medien-Popup
-bn: মিডিয়া পপআপ
-tr: Medya Açılır Penceresi
+af: Media-opspringer
 am: የሚዲያ ብቅ-ባይ
-hy: Մեդիա թռուցիկ
-pl: Wyskakujące okienko multimediów
-ja: メディアポップアップ
-hi: मीडिया पॉपअप
-eu: Media Popup
-nl: Mediapop-up
-ps: د رسنیو پاپ اپ
-km: ប្រព័ន្ធផ្សព្វផ្សាយលេចឡើង
-cs: Vyskakovací okno médií
+ar: الوسائط المنبثقة
+az: Media Popup
+bg: Мултимедиен изскачащ прозорец
+bn: মিডিয়া পপআপ
 bs: Media Popup
+ca: Popup de mitjans
+cs: Vyskakovací okno médií
+cy: Naid Cyfryngau
+da: Medie popup
+de: Medien-Popup
+el: Αναδυόμενο παράθυρο πολυμέσων
+en: Media Popup
+es: Ventana emergente multimedia
+et: Meedia hüpikaken
+eu: Media Popup
+fa: بازشو رسانه
+fi: Median ponnahdusikkuna
+fr: Pop-up multimédia
+gu: મીડિયા પોપઅપ
+he: פופאפ מדיה
+hi: मीडिया पॉपअप
 hr: Medijski skočni prozor
 hu: Média előugró ablak
-lo: ສື່ປັອບອັບ
-el: Αναδυόμενο παράθυρο πολυμέσων
-zh-CN: 媒体弹出窗口
-mn: Хэвлэл мэдээллийн цонх
-af: Media-opspringer
-ko: 미디어 팝업
-da: Medie popup
-tg: Поп-апаи медиа
-ro: Popup media
-gu: મીડિયા પોપઅપ
-pa: ਮੀਡੀਆ ਪੌਪਅੱਪ
-bg: Мултимедиен изскачащ прозорец
-uz: Media qalqib chiquvchi oyna
-sw: Ibukizi ya Media
-uk: Медіа спливаюче вікно
-et: Meedia hüpikaken
+hy: Մեդիա թռուցիկ
+id: Munculan Media
+is: Fjölmiðlasprettigluggi
 it: Popup multimediale
+ja: メディアポップアップ
+ka: მედია ამომხტარი
+km: ប្រព័ន្ធផ្សព្វផ្សាយលេចឡើង
+ko: 미디어 팝업
+ku: Media Popup
+lb: Media Popup
+lo: ສື່ປັອບອັບ
+lt: Iššokantis medijos langas
+lv: Multivides uznirstošais logs
+mk: Медиумски скокачки прозорец
+mn: Хэвлэл мэдээллийн цонх
+ms: Pop Timbul Media
+mt: Popup tal-Midja
+ne: मिडिया पपअप
+nl: Mediapop-up
+no: Media Popup
+pa: ਮੀਡੀਆ ਪੌਪਅੱਪ
+pl: Wyskakujące okienko multimediów
+ps: د رسنیو پاپ اپ
+pt-BR: Media Popup
 pt-PT: Pop-up de mídia
-fi: Median ponnahdusikkuna
+ro: Popup media
+ru: Медиа-всплывающее окно
+si: මාධ්‍ය උත්පතනය
+sk: Vyskakovacie okno médií
+so: Baahinta Warbaahinta
+sr: Медијски искачући прозор
+sv: Media popup
+sw: Ibukizi ya Media
+ta: மீடியா பாப்அப்
+te: మీడియా పాప్అప్
+tg: Поп-апаи медиа
+th: สื่อป๊อปอัป
+tl: Media Popup
+tr: Medya Açılır Penceresi
+uk: Медіа спливаюче вікно
+ur: میڈیا پاپ اپ
+uz: Media qalqib chiquvchi oyna
+vi: Cửa sổ bật lên phương tiện
+yo: Agbejade Media
+zh-CN: 媒体弹出窗口
+zh-TW: 媒體彈出窗口
+zu: I-Popup yemidiya

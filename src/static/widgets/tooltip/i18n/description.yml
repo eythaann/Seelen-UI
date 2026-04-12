@@ -1,72 +1,72 @@
-bn: একটি হালকা পপআপ যা একটি সাধারণ পাঠ্য বার্তা প্রদর্শন করে।
-fr: Une fenêtre contextuelle légère qui affiche un message en texte brut.
-cs: Jednoduché vyskakovací okno, které zobrazuje textovou zprávu.
-hi: एक हल्का पॉपअप जो एक सादा पाठ संदेश प्रदर्शित करता है।
-ku: Vebijêrkek sivik a ku peyamek nivîsê ya sade nîşan dide.
-sv: En lätt popup som visar ett vanligt textmeddelande.
-sw: Dirisha ibukizi nyepesi ambalo linaonyesha ujumbe wa maandishi wazi.
-yo: Agbejade iwuwo fẹẹrẹ ti o ṣafihan ifọrọranṣẹ itele kan.
-en: A lightweight popup that displays a plain text message.
-it: Un popup leggero che visualizza un messaggio di testo semplice.
-fi: Kevyt ponnahdusikkuna, jossa näkyy pelkkä tekstiviesti.
-nl: Een lichtgewicht pop-up die een tekstbericht weergeeft.
-uk: Легке спливаюче вікно, яке відображає звичайне текстове повідомлення.
-tr: Düz metin mesajı görüntüleyen hafif bir açılır pencere.
-ur: ایک ہلکا پھلکا پاپ اپ جو سادہ ٹیکسٹ میسج دکھاتا ہے۔
-mn: Энгийн текст мессежийг харуулдаг хөнгөн попап.
-zh-CN: 显示纯文本消息的轻量级弹出窗口。
-pl: Lekkie wyskakujące okienko wyświetlające zwykłą wiadomość tekstową.
-tl: Isang magaan na popup na nagpapakita ng isang simpleng text message.
-lo: ປັອບອັບທີ່ມີນ້ຳໜັກເບົາທີ່ສະແດງຂໍ້ຄວາມທຳມະດາ.
-tg: Поп-папи сабуке, ки паёми матнии оддиро нишон медиҳад.
-hy: "Թեթև թռուցիկ, որը ցուցադրում է պարզ տեքստային հաղորդագրություն:"
+af: '''n Liggewig pop-up wat ''n gewone teksboodskap vertoon.'
+am: ቀላል የጽሑፍ መልእክት የሚያሳይ ብቅ ባይ።
+ar: نافذة منبثقة خفيفة الوزن تعرض رسالة نصية عادية.
+az: Düz mətn mesajı göstərən yüngül pop-up.
 bg: Лек изскачащ прозорец, който показва обикновено текстово съобщение.
+bn: একটি হালকা পপআপ যা একটি সাধারণ পাঠ্য বার্তা প্রদর্শন করে।
 bs: Lagani iskačući prozor koji prikazuje običnu tekstualnu poruku.
+ca: Una finestra emergent lleugera que mostra un missatge de text senzill.
+cs: Jednoduché vyskakovací okno, které zobrazuje textovou zprávu.
+cy: Naidlen ysgafn sy'n dangos neges destun plaen.
+da: En let pop-up, der viser en almindelig tekstbesked.
+de: Ein kompaktes Popup, das eine reine Textnachricht anzeigt.
+el: Ένα ελαφρύ αναδυόμενο παράθυρο που εμφανίζει ένα απλό μήνυμα κειμένου.
+en: A lightweight popup that displays a plain text message.
+es: Una ventana emergente liviana que muestra un mensaje de texto sin formato.
+et: Kerge hüpikaken, mis kuvab lihtteksti.
+eu: Testu-mezu arrunta bistaratzen duen popup arina.
+fa: یک پنجره بازشو سبک وزن که یک پیام متنی ساده را نمایش می دهد.
+fi: Kevyt ponnahdusikkuna, jossa näkyy pelkkä tekstiviesti.
+fr: Une fenêtre contextuelle légère qui affiche un message en texte brut.
+gu: હળવા વજનનું પોપઅપ જે સાદો ટેક્સ્ટ સંદેશ દર્શાવે છે.
+he: חלון קופץ קל שמציג הודעת טקסט רגילה.
+hi: एक हल्का पॉपअप जो एक सादा पाठ संदेश प्रदर्शित करता है।
+hr: Lagani skočni prozor koji prikazuje običnu tekstualnu poruku.
+hu: Könnyű felugró ablak, amely egyszerű szöveges üzenetet jelenít meg.
+hy: "Թեթև թռուցիկ, որը ցուցադրում է պարզ տեքստային հաղորդագրություն:"
+id: Popup ringan yang menampilkan pesan teks biasa.
+is: Léttur sprettigluggi sem sýnir látlaus textaskilaboð.
+it: Un popup leggero che visualizza un messaggio di testo semplice.
+ja: プレーンテキストメッセージを表示する軽量のポップアップ。
+ka: მსუბუქი ამომხტარი ფანჯარა, რომელიც აჩვენებს უბრალო ტექსტურ შეტყობინებას.
+km: ការលេចឡើងស្រាលដែលបង្ហាញសារជាអក្សរធម្មតា។
+ko: 일반 텍스트 메시지를 표시하는 간단한 팝업입니다.
+ku: Vebijêrkek sivik a ku peyamek nivîsê ya sade nîşan dide.
+lb: E liichte Popup deen e Einfache Textmeldung weist.
+lo: ປັອບອັບທີ່ມີນ້ຳໜັກເບົາທີ່ສະແດງຂໍ້ຄວາມທຳມະດາ.
+lt: Lengvas iššokantis langas, kuriame rodomas paprastas tekstinis pranešimas.
+lv: Viegls uznirstošais logs, kas parāda vienkāršu īsziņu.
+mk: Лесен скокачки прозорец што прикажува обична текстуална порака.
+mn: Энгийн текст мессежийг харуулдаг хөнгөн попап.
+ms: Pop timbul ringan yang memaparkan mesej teks biasa.
+mt: Popup ħafif li juri messaġġ sempliċi.
+ne: एउटा हल्का पपअप जसले सादा पाठ सन्देश देखाउँछ।
+nl: Een lichtgewicht pop-up die een tekstbericht weergeeft.
 no: En lett popup som viser en ren tekstmelding.
 pa: ਇੱਕ ਹਲਕਾ ਪੌਪਅੱਪ ਜੋ ਇੱਕ ਸਧਾਰਨ ਟੈਕਸਟ ਸੁਨੇਹਾ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰਦਾ ਹੈ।
-gu: હળવા વજનનું પોપઅપ જે સાદો ટેક્સ્ટ સંદેશ દર્શાવે છે.
-lv: Viegls uznirstošais logs, kas parāda vienkāršu īsziņu.
-vi: Một cửa sổ bật lên nhẹ hiển thị một tin nhắn văn bản đơn giản.
-sk: Jednoduché kontextové okno, ktoré zobrazuje obyčajnú textovú správu.
-sr: Лагани искачући прозор који приказује обичну текстуалну поруку.
-th: ป๊อปอัปน้ำหนักเบาที่แสดงข้อความธรรมดา
-is: Léttur sprettigluggi sem sýnir látlaus textaskilaboð.
-et: Kerge hüpikaken, mis kuvab lihtteksti.
-ko: 일반 텍스트 메시지를 표시하는 간단한 팝업입니다.
-ja: プレーンテキストメッセージを表示する軽量のポップアップ。
-am: ቀላል የጽሑፍ መልእክት የሚያሳይ ብቅ ባይ።
-de: Ein kompaktes Popup, das eine reine Textnachricht anzeigt.
-mk: Лесен скокачки прозорец што прикажува обична текстуална порака.
-so: Soo-bax fudud oo muujinaya fariin qoraal ah oo cad.
-ru: Легкое всплывающее окно, отображающее простое текстовое сообщение.
-mt: Popup ħafif li juri messaġġ sempliċi.
-cy: Naidlen ysgafn sy'n dangos neges destun plaen.
-ar: نافذة منبثقة خفيفة الوزن تعرض رسالة نصية عادية.
-eu: Testu-mezu arrunta bistaratzen duen popup arina.
-ka: მსუბუქი ამომხტარი ფანჯარა, რომელიც აჩვენებს უბრალო ტექსტურ შეტყობინებას.
-ne: एउटा हल्का पपअप जसले सादा पाठ सन्देश देखाउँछ।
-lt: Lengvas iššokantis langas, kuriame rodomas paprastas tekstinis pranešimas.
-zh-TW: 顯示純文字訊息的輕量級彈出視窗。
-pt-BR: A lightweight popup that displays a plain text message.
-si: සරල කෙටි පණිවිඩයක් පෙන්වන සැහැල්ලු උත්පතනයක්.
-af: '''n Liggewig pop-up wat ''n gewone teksboodskap vertoon.'
-id: Popup ringan yang menampilkan pesan teks biasa.
+pl: Lekkie wyskakujące okienko wyświetlające zwykłą wiadomość tekstową.
 ps: یو لږ وزن لرونکي پاپ اپ چې یو ساده متن پیغام ښیې.
+pt-BR: A lightweight popup that displays a plain text message.
 pt-PT: Um pop-up leve que exibe uma mensagem de texto simples.
-es: Una ventana emergente liviana que muestra un mensaje de texto sin formato.
-hr: Lagani skočni prozor koji prikazuje običnu tekstualnu poruku.
-az: Düz mətn mesajı göstərən yüngül pop-up.
-hu: Könnyű felugró ablak, amely egyszerű szöveges üzenetet jelenít meg.
 ro: O fereastră pop-up ușoară care afișează un mesaj text simplu.
-fa: یک پنجره بازشو سبک وزن که یک پیام متنی ساده را نمایش می دهد.
-el: Ένα ελαφρύ αναδυόμενο παράθυρο που εμφανίζει ένα απλό μήνυμα κειμένου.
-he: חלון קופץ קל שמציג הודעת טקסט רגילה.
-lb: E liichte Popup deen e Einfache Textmeldung weist.
-uz: Oddiy matnli xabarni ko'rsatadigan engil qalqib chiquvchi oyna.
-zu: I-popup engasindi ebonisa umlayezo wombhalo ongenalutho.
-te: సాదా వచన సందేశాన్ని ప్రదర్శించే తేలికపాటి పాప్అప్.
+ru: Легкое всплывающее окно, отображающее простое текстовое сообщение.
+si: සරල කෙටි පණිවිඩයක් පෙන්වන සැහැල්ලු උත්පතනයක්.
+sk: Jednoduché kontextové okno, ktoré zobrazuje obyčajnú textovú správu.
+so: Soo-bax fudud oo muujinaya fariin qoraal ah oo cad.
+sr: Лагани искачући прозор који приказује обичну текстуалну поруку.
+sv: En lätt popup som visar ett vanligt textmeddelande.
+sw: Dirisha ibukizi nyepesi ambalo linaonyesha ujumbe wa maandishi wazi.
 ta: எளிய உரைச் செய்தியைக் காட்டும் இலகுரக பாப்அப்.
-km: ការលេចឡើងស្រាលដែលបង្ហាញសារជាអក្សរធម្មតា។
-da: En let pop-up, der viser en almindelig tekstbesked.
-ca: Una finestra emergent lleugera que mostra un missatge de text senzill.
-ms: Pop timbul ringan yang memaparkan mesej teks biasa.
+te: సాదా వచన సందేశాన్ని ప్రదర్శించే తేలికపాటి పాప్అప్.
+tg: Поп-папи сабуке, ки паёми матнии оддиро нишон медиҳад.
+th: ป๊อปอัปน้ำหนักเบาที่แสดงข้อความธรรมดา
+tl: Isang magaan na popup na nagpapakita ng isang simpleng text message.
+tr: Düz metin mesajı görüntüleyen hafif bir açılır pencere.
+uk: Легке спливаюче вікно, яке відображає звичайне текстове повідомлення.
+ur: ایک ہلکا پھلکا پاپ اپ جو سادہ ٹیکسٹ میسج دکھاتا ہے۔
+uz: Oddiy matnli xabarni ko'rsatadigan engil qalqib chiquvchi oyna.
+vi: Một cửa sổ bật lên nhẹ hiển thị một tin nhắn văn bản đơn giản.
+yo: Agbejade iwuwo fẹẹrẹ ti o ṣafihan ifọrọranṣẹ itele kan.
+zh-CN: 显示纯文本消息的轻量级弹出窗口。
+zh-TW: 顯示純文字訊息的輕量級彈出視窗。
+zu: I-popup engasindi ebonisa umlayezo wombhalo ongenalutho.
