@@ -1,10 +1,6 @@
-use seelen_core::state::WidgetTriggerPayload;
 use serde::{Deserialize, Serialize};
 
-use crate::{
-    error::Result, virtual_desktops::SluWorkspacesManager2, widgets::trigger_widget,
-    windows_api::window::Window,
-};
+use crate::{error::Result, virtual_desktops::SluWorkspacesManager2, windows_api::window::Window};
 
 /// Manage the Seelen Window Manager.
 #[derive(Debug, Serialize, Deserialize, clap::Args)]
@@ -39,8 +35,6 @@ pub enum VdCommand {
     CreateNewWorkspace,
     /// Destroy the current workspace (will do nothing if there's only one workspace)
     DestroyCurrentWorkspace,
-    /// Toggle the workspace view
-    ToggleWorkspacesView,
 }
 
 impl VirtualDesktopCli {
@@ -117,11 +111,6 @@ impl VdCommand {
                     .get(&monitor_id, |monitor| monitor.active_workspace_id().clone())
                     .ok_or("Monitor not found")?;
                 vd.destroy_desktop(&monitor_id, &workspace_id)?;
-            }
-            VdCommand::ToggleWorkspacesView => {
-                trigger_widget(WidgetTriggerPayload::new(
-                    "@seelen/workspaces-viewer".into(),
-                ))?;
             }
         }
         Ok(())

@@ -4,3 +4,134 @@ metadata:
   displayName: !extend i18n/display_name.yml
 loader: Legacy
 instances: ReplicaByMonitor
+shortcuts:
+  # =========== MODES ===========
+  - id: wm-toggle
+    command: ["wm", "toggle"]
+    label: Pause/Resume Tiling
+    defaultKeys: ["Win", "P"]
+
+  - id: wm-toggle-float
+    command: ["wm", "toggle-float"]
+    label: Toggle Float
+    defaultKeys: ["Win", "F"]
+
+  - id: wm-toggle-monocle
+    command: ["wm", "toggle-monocle"]
+    label: Toggle Monocle
+    defaultKeys: ["Win", "M"]
+
+  # =========== STACK ===========
+
+  - id: wm-cycle-stack-next
+    command: ["wm", "cycle-stack", "next"]
+    label: Cycle Stack Next
+    defaultKeys: ["Win", "Q"]
+
+  - id: wm-cycle-stack-prev
+    command: ["wm", "cycle-stack", "prev"]
+    label: Cycle Stack Previous
+    defaultKeys: ["Win", "Shift", "Q"]
+
+  # =========== LAYOUT RESERVATION ===========
+
+  - id: wm-reserve-top
+    command: ["wm", "reserve", "top"]
+    label: Reserve Top
+    defaultKeys: ["Win", "Shift", "I"]
+
+  - id: wm-reserve-bottom
+    command: ["wm", "reserve", "bottom"]
+    label: Reserve Bottom
+    defaultKeys: ["Win", "Shift", "K"]
+
+  - id: wm-reserve-left
+    command: ["wm", "reserve", "left"]
+    label: Reserve Left
+    defaultKeys: ["Win", "Shift", "J"]
+
+  - id: wm-reserve-right
+    command: ["wm", "reserve", "right"]
+    label: Reserve Right
+    defaultKeys: ["Win", "Shift", "L"]
+
+  - id: wm-reserve-float
+    command: ["wm", "reserve", "float"]
+    label: Reserve Float
+    defaultKeys: ["Win", "Shift", "U"]
+
+  - id: wm-reserve-stack
+    command: ["wm", "reserve", "stack"]
+    label: Reserve Stack
+    defaultKeys: ["Win", "Shift", "O"]
+
+  # =========== FOCUS MOVEMENT ===========
+
+  - id: wm-focus-up
+    command: ["wm", "focus", "up"]
+    label: Focus Window Up
+    defaultKeys: ["Alt", "I"]
+
+  - id: wm-focus-down
+    command: ["wm", "focus", "down"]
+    label: Focus Window Down
+    defaultKeys: ["Alt", "K"]
+
+  - id: wm-focus-left
+    command: ["wm", "focus", "left"]
+    label: Focus Window Left
+    defaultKeys: ["Alt", "J"]
+
+  - id: wm-focus-right
+    command: ["wm", "focus", "right"]
+    label: Focus Window Right
+    defaultKeys: ["Alt", "L"]
+
+  # =========== WINDOW SIZING ===========
+
+  - id: wm-increase-width
+    command: ["wm", "width", "increase"]
+    label: Increase Width
+    defaultKeys: ["Win", "Alt", "="]
+
+  - id: wm-decrease-width
+    command: ["wm", "width", "decrease"]
+    label: Decrease Width
+    defaultKeys: ["Win", "Alt", "-"]
+
+  - id: wm-increase-height
+    command: ["wm", "height", "increase"]
+    label: Increase Height
+    defaultKeys: ["Win", "Ctrl", "="]
+
+  - id: wm-decrease-height
+    command: ["wm", "height", "decrease"]
+    label: Decrease Height
+    defaultKeys: ["Win", "Ctrl", "-"]
+
+  - id: wm-restore-sizes
+    command: ["wm", "reset-workspace-size"]
+    label: Restore Sizes
+    defaultKeys: ["Win", "Alt", "0"]
+
+  # =========== WINDOW MOVEMENT ===========
+
+  - id: wm-move-up
+    command: ["wm", "move", "up"]
+    label: Move Window Up
+    defaultKeys: ["Shift", "Alt", "I"]
+
+  - id: wm-move-down
+    command: ["wm", "move", "down"]
+    label: Move Window Down
+    defaultKeys: ["Shift", "Alt", "K"]
+
+  - id: wm-move-left
+    command: ["wm", "move", "left"]
+    label: Move Window Left
+    defaultKeys: ["Shift", "Alt", "J"]
+
+  - id: wm-move-right
+    command: ["wm", "move", "right"]
+    label: Move Window Right
+    defaultKeys: ["Shift", "Alt", "L"]

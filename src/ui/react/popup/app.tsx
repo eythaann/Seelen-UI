@@ -32,7 +32,7 @@ subscribe(SeelenEvent.PopupContentChanged, (e) => {
 });
 
 function closePopup() {
-  currentWidget.webview.close();
+  currentWidget.window.close();
 }
 
 export function App() {

@@ -9,6 +9,8 @@ use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
 use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
+use seelen_core::state::shortcuts::resolve_shortcuts;
+
 use crate::{
     app_instance::LegacyWidgetMonitorContainer,
     cli::ServicePipe,
@@ -21,6 +23,7 @@ use crate::{
         system_settings::application::{SystemSettings, SystemSettingsEvent},
         user::infrastructure::reemit_user,
     },
+    resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{FullState, FULL_STATE},
     trace_lock,
@@ -98,7 +101,10 @@ impl Seelen {
 
     pub fn on_settings_change(&mut self, state: &FullState) -> Result<()> {
         rust_i18n::set_locale(state.locale());
-        ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
+        let widgets = RESOURCES.widgets();
+        let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
+        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_native_taskbar();
@@ -168,7 +174,10 @@ impl Seelen {
         SystemSettings::subscribe(Self::on_system_settings_change);
 
         start_discord_rpc()?;
-        ServicePipe::request(SvcAction::SetSettings(Box::new(state.settings.clone())))?;
+        let widgets = RESOURCES.widgets();
+        let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
+        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }

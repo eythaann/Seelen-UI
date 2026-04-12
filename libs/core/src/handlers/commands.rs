@@ -1,8 +1,8 @@
 #[cfg(test)]
 use crate::{
     rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
-    state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*, state::*,
-    system_state::*,
+    state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*,
+    state::settings::shortcuts::SystemShortcutDeclaration, state::*, system_state::*,
 };
 #[cfg(test)]
 use std::{collections::HashMap, path::PathBuf};
@@ -165,6 +165,7 @@ slu_commands_declaration! {
     StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,
     StateGetPlugins = state_get_plugins() -> Vec<Plugin>,
     StateGetWidgets = state_get_widgets() -> Vec<Widget>,
+    StateGetSystemShortcuts = state_get_system_shortcuts() -> Vec<SystemShortcutDeclaration>,
     StateGetIconPacks = state_get_icon_packs() -> Vec<IconPack>,
     StateGetWallpapers = state_get_wallpapers() -> Vec<Wallpaper>,
     StateSetCustomIconPack = state_add_icon_to_custom_icon_pack(icon: IconPackEntry),

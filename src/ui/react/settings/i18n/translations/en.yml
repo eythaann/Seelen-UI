@@ -244,6 +244,7 @@ shortcuts:
     switch_workspace: Switch to Workspace {{0}}
     toggle_float: Toggle Window Float Mode
     toggle_monocle: Toggle Workspace Monocle Mode
+  disabled_tooltip: The widget and its shortcuts are disabled
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults
 sides:

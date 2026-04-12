@@ -64,11 +64,15 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             )?;
         }
         SvcAction::SetForeground(hwnd) => WindowsApi::set_foreground(hwnd)?,
-        SvcAction::SetSettings(settings) => {
-            if settings.shortcuts.enabled {
-                crate::hotkeys::start_app_shortcuts(&settings)?;
-            } else {
+        SvcAction::SetSettings(_settings) => {
+            // Full settings are no longer used by the service for shortcut registration.
+            // The background sends a pre-resolved SetShortcuts action instead.
+        }
+        SvcAction::SetShortcuts(shortcuts) => {
+            if shortcuts.is_empty() {
                 crate::hotkeys::stop_app_shortcuts();
+            } else {
+                crate::hotkeys::apply_shortcuts(shortcuts)?;
             }
         }
         SvcAction::StartShortcutRegistration => {

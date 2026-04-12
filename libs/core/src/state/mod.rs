@@ -2,7 +2,7 @@ mod icon_pack;
 mod placeholder;
 mod plugin;
 mod popups;
-mod settings;
+pub mod settings;
 mod theme;
 mod wallpaper;
 mod weg_items;

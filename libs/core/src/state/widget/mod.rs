@@ -10,12 +10,32 @@ use ts_rs::TS;
 
 use crate::{
     error::Result,
-    resource::{ResourceKind, ResourceMetadata, SluResource, WidgetId},
+    resource::{ResourceKind, ResourceMetadata, ResourceText, SluResource, WidgetId},
     state::Plugin,
     system_state::MonitorId,
     utils::TsUnknown,
     Point,
 };
+
+/// Declares a shortcut that belongs to this widget.
+/// The user can override the keys via the widget's `$shortcuts` setting entry.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(default, rename_all = "camelCase")]
+pub struct WidgetShortcutDeclaration {
+    /// Stable identifier for this shortcut (e.g. `"wm-focus-up"`).
+    /// Used as the key for user overrides in `$shortcuts`.
+    pub id: String,
+    /// CLI command to execute when the shortcut is triggered (e.g. `["wm", "focus", "up"]`).
+    pub command: Vec<String>,
+    /// Human-readable label shown in the shortcuts settings UI.
+    pub label: ResourceText,
+    /// Optional longer description shown in the settings UI.
+    pub description: Option<ResourceText>,
+    /// Default key combination (can be overridden by the user unless `readonly` is true).
+    pub default_keys: Vec<String>,
+    /// If true, the user cannot change the key combination for this shortcut.
+    pub readonly: bool,
+}
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
 #[serde(default, rename_all = "camelCase")]
@@ -58,6 +78,10 @@ pub struct Widget {
     /// Use this if your widget needs interaction with other widgets like
     /// adding a context menu item that shows this widget.
     pub plugins: Vec<Plugin>,
+    /// Shortcut declarations for this widget.
+    /// These define the default shortcuts that the user can override via `$shortcuts` in
+    /// the widget's settings entry.
+    pub shortcuts: Vec<WidgetShortcutDeclaration>,
 }
 
 impl SluResource for Widget {

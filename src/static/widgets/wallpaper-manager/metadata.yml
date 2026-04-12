@@ -5,3 +5,12 @@ metadata:
 loader: Legacy
 instances: Single
 noMemoryLeakWorkaround: true
+shortcuts:
+  - id: wallpaper-next
+    command: ["wallpaper", "next"]
+    label: Next Wallpaper
+    defaultKeys: ["Ctrl", "Win", "Up"]
+  - id: wallpaper-prev
+    command: ["wallpaper", "prev"]
+    label: Previous Wallpaper
+    defaultKeys: ["Ctrl", "Win", "Down"]

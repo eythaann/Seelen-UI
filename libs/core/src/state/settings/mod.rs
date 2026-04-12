@@ -40,6 +40,9 @@ use crate::{
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
     pub enabled: bool,
+    /// Key overrides for widget-declared shortcuts (`shortcut_id -> keys`).
+    #[serde(rename = "$shortcuts")]
+    pub shortcuts: Option<std::collections::HashMap<String, Vec<String>>>,
     /// item size in px
     pub item_size: u32,
     /// Toolbar margin in px
@@ -60,6 +63,7 @@ impl Default for FancyToolbarSettings {
     fn default() -> Self {
         Self {
             enabled: true,
+            shortcuts: None,
             item_size: 16,
             padding: 8,
             margin: 0,
@@ -137,6 +141,9 @@ pub enum SeelenWegSide {
 pub struct SeelenWegSettings {
     /// enable or disable the seelenweg
     pub enabled: bool,
+    /// Key overrides for widget-declared shortcuts (`shortcut_id -> keys`).
+    #[serde(rename = "$shortcuts")]
+    pub shortcuts: Option<std::collections::HashMap<String, Vec<String>>>,
     /// Dock/Taskbar mode
     pub mode: SeelenWegMode,
     /// When to hide the dock
@@ -177,6 +184,7 @@ impl Default for SeelenWegSettings {
     fn default() -> Self {
         Self {
             enabled: true,
+            shortcuts: None,
             mode: SeelenWegMode::MinContent,
             hide_mode: HideMode::OnOverlap,
             position: SeelenWegSide::Bottom,
@@ -213,6 +221,9 @@ impl SeelenWegSettings {
 pub struct WindowManagerSettings {
     /// enable or disable the tiling window manager
     pub enabled: bool,
+    /// Key overrides for widget-declared shortcuts (`shortcut_id -> keys`).
+    #[serde(rename = "$shortcuts")]
+    pub shortcuts: Option<std::collections::HashMap<String, Vec<String>>>,
     /// enable or disable auto stacking by category
     pub auto_stacking_by_category: bool,
     /// window manager border
@@ -302,6 +313,7 @@ impl Default for WindowManagerSettings {
     fn default() -> Self {
         Self {
             enabled: false,
+            shortcuts: None,
             auto_stacking_by_category: true,
             border: Border::default(),
             resize_delta: 10.0,
@@ -331,6 +343,9 @@ pub enum MultimonitorBehaviour {
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
     pub enabled: bool,
+    /// Key overrides for widget-declared shortcuts (`shortcut_id -> keys`).
+    #[serde(rename = "$shortcuts")]
+    pub shortcuts: Option<std::collections::HashMap<String, Vec<String>>>,
     /// update interval in seconds
     pub interval: u32,
     /// randomize order
@@ -348,6 +363,7 @@ impl Default for SeelenWallSettings {
     fn default() -> Self {
         Self {
             enabled: true,
+            shortcuts: None,
             interval: 300, // 5min
             randomize: false,
             default_collection: None,
@@ -534,7 +550,6 @@ impl Settings {
         self.active_icon_packs.insert(0, "@system/icon-pack".into());
         self.dedup_icon_packs();
 
-        self.shortcuts.sanitize();
         self.by_app.prepare();
 
         self.polling_interval = self.polling_interval.max(1);

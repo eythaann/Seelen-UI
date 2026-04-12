@@ -1,4 +1,4 @@
-use seelen_core::state::{shortcuts::SluHotkeyAction, Settings};
+use seelen_core::state::shortcuts::ResolvedShortcut;
 use slu_ipc::{messages::AppMessage, AppIpc};
 use win_hotkeys::{
     error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, TriggerTiming, VKey,
@@ -8,7 +8,7 @@ use crate::{
     app_management::kill_all_seelen_ui_processes, error::Result, exit, get_async_handler, log_error,
 };
 
-pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
+pub fn apply_shortcuts(shortcuts: Vec<ResolvedShortcut>) -> Result<()> {
     if let Err(err) = HotkeyManager::start_keyboard_capturing() {
         match err {
             WHKError::AlreadyStarted => {}
@@ -17,50 +17,47 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
     };
 
     let manager = HotkeyManager::current();
-    manager.unregister_all()?; // delete previously registered shortcuts
+    manager.unregister_all()?;
 
-    'registration: for slu_hotkey in &settings.shortcuts.app_commands {
-        if let Some(attached) = &slu_hotkey.attached_to {
-            if !settings.is_widget_enabled(attached) {
-                continue 'registration;
-            }
-        }
+    if shortcuts.is_empty() {
+        return Ok(());
+    }
 
-        if slu_hotkey.keys.is_empty() {
+    'registration: for s in shortcuts {
+        if s.keys.is_empty() {
             continue 'registration;
         }
 
         let mut vkeys = Vec::new();
-        for key in &slu_hotkey.keys {
+        for key in &s.keys {
             let vkey = match VKey::from_keyname(key) {
                 Ok(vkey) => vkey,
                 Err(e) => {
-                    log::warn!("Failed to parse shortcut {:?} error: {e}", slu_hotkey.keys);
+                    log::warn!("Failed to parse shortcut {:?} error: {e}", s.keys);
                     continue 'registration;
                 }
             };
             vkeys.push(vkey);
         }
 
-        let action = slu_hotkey.action;
+        let command = s.command.clone();
         let mut hotkey = Hotkey::from_keys(&vkeys).action(move || {
-            log::trace!("Hotkey triggered: {action:?}");
-            match action {
-                SluHotkeyAction::MiscForceRestart => {
+            log::trace!("Hotkey triggered: {command:?}");
+            match command.as_slice() {
+                [a, b] if a == "service" && b == "force-restart" => {
                     log_error!(kill_all_seelen_ui_processes());
                 }
-                SluHotkeyAction::MiscForceQuit => {
+                [a, b] if a == "service" && b == "force-quit" => {
                     crate::EXITING.store(true, std::sync::atomic::Ordering::SeqCst);
                     log_error!(kill_all_seelen_ui_processes());
                     exit(0);
                 }
-                _ => {}
-            }
-
-            if let Some(command) = hotkey_action_to_cli_command(action) {
-                get_async_handler().spawn(async move {
-                    log_error!(AppIpc::send(AppMessage::Cli(command)).await);
-                });
+                _ => {
+                    let cmd = command.clone();
+                    get_async_handler().spawn(async move {
+                        log_error!(AppIpc::send(AppMessage::Cli(cmd)).await);
+                    });
+                }
             }
         });
 
@@ -69,7 +66,7 @@ pub fn start_app_shortcuts(settings: &Settings) -> Result<()> {
             hotkey.strict_sequence = true;
         }
 
-        log_error!(manager.register_hotkey(hotkey), slu_hotkey);
+        log_error!(manager.register_hotkey(hotkey));
     }
     Ok(())
 }
@@ -124,109 +121,4 @@ async fn send_registering_to_app(hotkey: Option<Vec<String>>) -> Result<()> {
     ]))
     .await?;
     Ok(())
-}
-
-/// Helper macro to create a command vector with optional conditional flags
-///
-/// Usage:
-/// - Simple command: `cmd!["wm", "focus", "up"]`
-/// - With variables: `cmd!["vd", "switch", index]`
-/// - With conditional flags: `cmd!["task", "run"; verbose => "--verbose", debug => "--debug"]`
-/// - Mixed: `cmd!["app", value; flag1 => "--flag1", cond2 => format!("--opt={}", val)]`
-///
-/// Examples:
-/// ```
-/// cmd!["settings"]
-/// cmd!["vd", "switch-workspace", 3]
-/// cmd!["task-switcher", "select-next"; select_on_key_up => "--auto-confirm"]
-/// cmd!["wm", "run"; verbose => "--verbose", debug => "--debug", force => "--force"]
-/// ```
-macro_rules! cmd {
-    // Simple case: just arguments, no conditional flags
-    ($($arg:expr),+ $(,)?) => {
-        vec![$($arg.to_string()),+]
-    };
-    // With conditional flags
-    ($($base:expr),+ ; $($cond:expr => $flag:expr),+ $(,)?) => {
-        {
-            let mut v = vec![$($base.to_string()),+];
-            $(
-                if $cond {
-                    v.push($flag.to_string());
-                }
-            )+
-            v
-        }
-    };
-}
-
-fn hotkey_action_to_cli_command(action: SluHotkeyAction) -> Option<Vec<String>> {
-    use SluHotkeyAction::*;
-
-    let command = match action {
-        // task switcher
-        TaskNext { select_on_key_up } => {
-            // todo: change for "widget", "trigger",
-            cmd!["task-switcher", "select-next-task"; select_on_key_up => "--auto-confirm"]
-        }
-        TaskPrev { select_on_key_up } => {
-            // todo: change for "widget", "trigger",
-            cmd!["task-switcher", "select-previous-task"; select_on_key_up => "--auto-confirm"]
-        }
-        // Virtual Desktop
-        SwitchToNextWorkspace => cmd!["vd", "switch-next"],
-        SwitchToPreviousWorkspace => cmd!["vd", "switch-prev"],
-        SwitchWorkspace { index } => cmd!["vd", "switch-workspace", index],
-        MoveToWorkspace { index } => cmd!["vd", "move-to-workspace", index],
-        SendToWorkspace { index } => cmd!["vd", "send-to-workspace", index],
-        CreateNewWorkspace => cmd!["vd", "create-new-workspace"],
-        DestroyCurrentWorkspace => cmd!["vd", "destroy-current-workspace"],
-        ToggleWorkspacesView => cmd!["vd", "toggle-workspaces-view"],
-        // apps menu
-        ToggleAppsMenu => cmd!["widget", "trigger", "@seelen/apps-menu"],
-        // clipboard
-        ToggleClipboard => cmd!["widget", "trigger", "@seelen/clipboard"],
-        // wallpaper manager
-        CycleWallpaperNext => cmd!["wallpaper", "next"],
-        CycleWallpaperPrev => cmd!["wallpaper", "prev"],
-        // Weg
-        StartWegApp { index } => cmd!["weg", "foreground-or-run-app", index],
-        // Window Manager
-        IncreaseWidth => cmd!["wm", "width", "increase"],
-        DecreaseWidth => cmd!["wm", "width", "decrease"],
-        IncreaseHeight => cmd!["wm", "height", "increase"],
-        DecreaseHeight => cmd!["wm", "height", "decrease"],
-        RestoreSizes => cmd!["wm", "reset-workspace-size"],
-        // Window Manger focused window sizing
-        FocusTop => cmd!["wm", "focus", "up"],
-        FocusBottom => cmd!["wm", "focus", "down"],
-        FocusLeft => cmd!["wm", "focus", "left"],
-        FocusRight => cmd!["wm", "focus", "right"],
-        // Window Manager focused window positioning
-        MoveWindowUp => cmd!["wm", "move", "up"],
-        MoveWindowDown => cmd!["wm", "move", "down"],
-        MoveWindowLeft => cmd!["wm", "move", "left"],
-        MoveWindowRight => cmd!["wm", "move", "right"],
-        // Tiling window manager reservation
-        ReserveTop => cmd!["wm", "reserve", "top"],
-        ReserveBottom => cmd!["wm", "reserve", "bottom"],
-        ReserveLeft => cmd!["wm", "reserve", "left"],
-        ReserveRight => cmd!["wm", "reserve", "right"],
-        ReserveFloat => cmd!["wm", "reserve", "float"],
-        ReserveStack => cmd!["wm", "reserve", "stack"],
-        // Tiling window manager state
-        PauseTiling => cmd!["wm", "toggle"],
-        ToggleMonocle => cmd!["wm", "toggle-monocle"],
-        ToggleFloat => cmd!["wm", "toggle-float"],
-        CycleStackNext => cmd!["wm", "cycle-stack", "next"],
-        CycleStackPrev => cmd!["wm", "cycle-stack", "prev"],
-        // others
-        MiscOpenSettings => cmd!["settings"],
-        MiscToggleLockTracing => cmd!["debug", "toggle-trace-lock"],
-        MiscToggleWinEventTracing => cmd!["debug", "toggle-win-events"],
-        // no command needed
-        _ => return None,
-    };
-
-    Some(command)
 }

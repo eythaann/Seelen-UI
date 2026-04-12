@@ -16,6 +16,7 @@
 ### refactor
 
 - remove deprecated theme and widget folder loader.
+- shortcuts definition system and settings.
 
 ### fix
 

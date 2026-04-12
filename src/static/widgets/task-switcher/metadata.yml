@@ -6,3 +6,28 @@ instances: Single
 loader: Internal
 preset: Overlay
 hidden: true
+shortcuts:
+  - id: task-switcher-next-auto
+    command: ["task-switcher", "select-next-task", "--auto-confirm"]
+    label: Next Task (auto-confirm on release)
+    defaultKeys: ["Alt", "Tab"]
+    readonly: true
+    system: true
+  - id: task-switcher-prev-auto
+    command: ["task-switcher", "select-previous-task", "--auto-confirm"]
+    label: Previous Task (auto-confirm on release)
+    defaultKeys: ["Alt", "Shift", "Tab"]
+    readonly: true
+    system: true
+  - id: task-switcher-next
+    command: ["task-switcher", "select-next-task"]
+    label: Next Task (manual confirm)
+    defaultKeys: ["Alt", "Ctrl", "Tab"]
+    readonly: true
+    system: true
+  - id: task-switcher-prev
+    command: ["task-switcher", "select-previous-task"]
+    label: Previous Task (manual confirm)
+    defaultKeys: ["Alt", "Ctrl", "Shift", "Tab"]
+    readonly: true
+    system: true

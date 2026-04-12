@@ -47,6 +47,7 @@ export enum SeelenCommand {
   StateGetSettingsByApp = "state_get_settings_by_app",
   StateGetPlugins = "state_get_plugins",
   StateGetWidgets = "state_get_widgets",
+  StateGetSystemShortcuts = "state_get_system_shortcuts",
   StateGetIconPacks = "state_get_icon_packs",
   StateGetWallpapers = "state_get_wallpapers",
   StateSetCustomIconPack = "state_add_icon_to_custom_icon_pack",

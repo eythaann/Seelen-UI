@@ -75,9 +75,7 @@
 
   .subgroup {
     .subtitle {
-      margin-bottom: var(--spacing-xs);
-      font-size: 1rem;
-      line-height: 1.4em;
+      margin-bottom: var(--spacing-s);
       font-weight: 600;
     }
 
@@ -86,6 +84,7 @@
       border-left: 1.5px solid light-dark(#0002, #fff2);
 
       .label {
+        font-size: 0.9rem;
         font-weight: normal;
       }
     }

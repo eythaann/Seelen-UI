@@ -1,4 +1,4 @@
-import { settings } from "../../../state/mod";
+import { settings, widgets } from "../../../state/mod";
 import type { WidgetId } from "@seelen-ui/lib/types";
 
 /**
@@ -6,6 +6,15 @@ import type { WidgetId } from "@seelen-ui/lib/types";
  */
 export function getWidgetConfig(widgetId: WidgetId) {
   return settings.value.byWidget[widgetId];
+}
+
+export function isWidgetEnabled(widgetId: WidgetId) {
+  const widget = widgets.value.find((t) => t.id === widgetId);
+  const config = settings.value.byWidget[widgetId];
+  if (config) {
+    return config.enabled;
+  }
+  return widget?.loader !== "Legacy" && !!widget?.metadata.bundled;
 }
 
 /**

@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 
-use seelen_core::{rect::Rect, state::Settings};
+use seelen_core::{
+    rect::Rect,
+    state::{Settings, shortcuts::ResolvedShortcut},
+};
 use serde::{Deserialize, Serialize};
 
 use crate::error::{Error, Result};
@@ -60,6 +63,9 @@ pub enum SvcAction {
     Stop,
     SetStartup(bool),
     SetSettings(Box<Settings>),
+    /// Sends the resolved shortcuts list to the service for hotkey registration.
+    /// Pass an empty `Vec` to unregister all hotkeys (e.g. when shortcuts are disabled).
+    SetShortcuts(Vec<ResolvedShortcut>),
     ShowWindow {
         hwnd: isize,
         command: i32,

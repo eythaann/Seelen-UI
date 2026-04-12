@@ -12,3 +12,10 @@ settings:
     key: acrylic
     label: Acrylic Effect
     defaultValue: false
+shortcuts:
+  - id: apps-menu-toggle
+    command: ["widget", "trigger", "@seelen/apps-menu"]
+    label: Toggle Apps Menu
+    defaultKeys: ["Win"]
+    readonly: true
+    system: true

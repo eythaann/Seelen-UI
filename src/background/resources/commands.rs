@@ -1,6 +1,8 @@
 use seelen_core::{
     resource::{ResourceId, ResourceKind, SluResource},
-    state::{IconPack, Plugin, Theme, Wallpaper, Widget},
+    state::{
+        settings::shortcuts::SystemShortcutDeclaration, IconPack, Plugin, Theme, Wallpaper, Widget,
+    },
 };
 
 use crate::{
@@ -11,6 +13,11 @@ use std::sync::Arc;
 #[tauri::command(async)]
 pub fn state_get_widgets() -> Vec<Arc<Widget>> {
     RESOURCES.widgets()
+}
+
+#[tauri::command(async)]
+pub fn state_get_system_shortcuts() -> Vec<SystemShortcutDeclaration> {
+    seelen_core::state::settings::shortcuts::system_shortcut_declarations()
 }
 
 #[tauri::command(async)]

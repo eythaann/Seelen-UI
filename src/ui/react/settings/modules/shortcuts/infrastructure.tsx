@@ -1,55 +1,44 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { SluHotkey } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { getResourceText } from "libs/ui/react/utils/index.ts";
 import { Button, Input, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
+import i18n from "../../i18n";
 
 import {
-  getHotkeysGroups,
+  getShortcutGroups,
   getShortcutsConfig,
-  isWidgetEnabled,
   resetShortcuts,
   setShortcutsEnabled,
+  type ShortcutEntry,
   shortcutsError,
   updateShortcut,
   validateShortcuts,
 } from "./application.ts";
 
-import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import { isWidgetEnabled } from "../resources/Widget/application.ts";
+import Compact from "antd/es/space/Compact";
 
 export function Shortcuts() {
-  const shortcutsConfig = getShortcutsConfig();
-  const { enabled, appCommands } = shortcutsConfig;
+  const { enabled } = getShortcutsConfig();
+  const groups = getShortcutGroups();
 
   const { t } = useTranslation();
 
+  const allEntries = [
+    ...Array.from(groups.byWidget.values()).flatMap((g) => g.entries),
+    ...Object.values(groups.system).flat(),
+  ];
+
   useEffect(() => {
-    validateShortcuts(appCommands);
-  }, [appCommands]);
+    validateShortcuts(allEntries);
+  }, [JSON.stringify(allEntries.map((e) => e.keys))]);
 
-  function onToogleShortcuts(enabled: boolean) {
-    setShortcutsEnabled(enabled);
-  }
-
-  function onShortcutChanged(id: string, keys: string[]) {
-    updateShortcut(id, keys);
-  }
-
-  function onReset() {
-    resetShortcuts();
-  }
-
-  const groups = getHotkeysGroups(appCommands);
-
-  function mapHokey(hotkey: SluHotkey) {
-    return (
-      <Shortcut
-        key={hotkey.id}
-        hotkey={hotkey}
-        onChanged={(keys) => onShortcutChanged(hotkey.id, keys)}
-      />
-    );
+  function mapEntry(entry: ShortcutEntry) {
+    return <Shortcut key={entry.id} entry={entry} onChanged={(keys) => updateShortcut(entry, keys)} />;
   }
 
   return (
@@ -58,102 +47,111 @@ export function Shortcuts() {
         <SettingsOption
           label={t("shortcuts.enable")}
           tip={t("shortcuts.enable_tooltip")}
-          action={<Switch value={enabled} onChange={onToogleShortcuts} />}
+          action={<Switch value={enabled} onChange={setShortcutsEnabled} />}
         />
-
         <SettingsOption
           label={t("shortcuts.reset")}
           action={
-            <Button onClick={onReset}>
+            <Button onClick={resetShortcuts}>
               <Icon iconName="RiResetLeftLine" />
             </Button>
           }
         />
       </SettingsGroup>
 
-      <SettingsGroup>{groups.virtualDesktop.main.map(mapHokey)}</SettingsGroup>
+      {/* Virtual Desktop */}
+      <SettingsGroup>
+        <SettingsSubGroup label={t("header.labels.virtual_desk")}>
+          {groups.system.vdMain.map(mapEntry)}
+        </SettingsSubGroup>
+      </SettingsGroup>
 
-      <SettingsGroup>{groups.virtualDesktop.switch.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        <SettingsSubGroup label={t("header.labels.virtual_desk")}>
+          {groups.system.vdSwitch.map(mapEntry)}
+        </SettingsSubGroup>
+      </SettingsGroup>
 
-      <SettingsGroup>{groups.virtualDesktop.move.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        <SettingsSubGroup label={t("header.labels.virtual_desk")}>
+          {groups.system.vdMove.map(mapEntry)}
+        </SettingsSubGroup>
+      </SettingsGroup>
 
-      <SettingsGroup>{groups.virtualDesktop.send.map(mapHokey)}</SettingsGroup>
+      <SettingsGroup>
+        <SettingsSubGroup label={t("header.labels.virtual_desk")}>
+          {groups.system.vdSend.map(mapEntry)}
+        </SettingsSubGroup>
+      </SettingsGroup>
 
-      <SettingsGroup>{groups.windowManager.state.map(mapHokey)}</SettingsGroup>
+      {/* Widget groups */}
+      {Array.from(groups.byWidget.values()).map(({ widget, entries }) => (
+        <SettingsGroup key={widget.id}>
+          <SettingsSubGroup label={<ResourceText text={widget.metadata.displayName} />}>
+            {entries.map(mapEntry)}
+          </SettingsSubGroup>
+        </SettingsGroup>
+      ))}
 
-      <SettingsGroup>{groups.windowManager.sizing.map(mapHokey)}</SettingsGroup>
-
-      <SettingsGroup>{groups.windowManager.positioning.map(mapHokey)}</SettingsGroup>
-
-      <SettingsGroup>{groups.windowManager.tilingFocus.map(mapHokey)}</SettingsGroup>
-
-      {/* TODO implement live layout modification */}
-      {/* <SettingsGroup>{groups.windowManager.tilingLayout.map(mapHokey)}</SettingsGroup> */}
-
-      <SettingsGroup>{groups.weg.map(mapHokey)}</SettingsGroup>
-
-      {/* TODO implement wallpaper change shortcut */}
-      {/* <SettingsGroup>{groups.wallpaperManager.map(mapHokey)}</SettingsGroup> */}
-
-      <SettingsGroup>{groups.misc.map(mapHokey)}</SettingsGroup>
+      {/* Misc */}
+      <SettingsGroup>{groups.system.misc.map(mapEntry)}</SettingsGroup>
     </>
   );
 }
 
 interface ShortcutProps {
-  hotkey: SluHotkey;
+  entry: ShortcutEntry;
   onChanged: (keys: string[]) => void;
 }
 
-function Shortcut({
-  hotkey: { id, action, keys, readonly, system, attached_to },
-  onChanged,
-}: ShortcutProps) {
+function Shortcut({ entry, onChanged }: ShortcutProps) {
+  const { id, label, keys, readonly } = entry;
+
+  const isAttachedWidgetEnabled = entry.widgetId ? isWidgetEnabled(entry.widgetId) : true;
+
   const { t } = useTranslation();
-
-  const isEnabled = !attached_to || isWidgetEnabled(attached_to);
-
-  const args: Record<string, number | string> = "index" in action ? { 0: action.index } : {};
   const hasError = shortcutsError.value.has(id);
 
+  const resolvedLabel = typeof label === "string" ? label : getResourceText(label, i18n.language);
+
   function onEdit() {
-    if (readonly || system || !isEnabled) {
-      return;
-    }
+    if (readonly) return;
 
-    invoke(SeelenCommand.RequestToUserInputShortcut, {
-      callbackEvent: "finished",
-    });
-
+    invoke(SeelenCommand.RequestToUserInputShortcut, { callbackEvent: "finished" });
     Widget.getCurrent().webview.once<null | string[]>("finished", (e) => {
-      // Cancel if user didn't input at least 2 keys
       if (e.payload && e.payload.length >= 2) {
         onChanged(e.payload);
       }
     });
   }
 
-  let tooltipTitle: string | undefined;
-  if (readonly || system) {
-    tooltipTitle = t("shortcuts.readonly_tooltip");
-  } else if (hasError) {
-    tooltipTitle = t("shortcuts.duplicate_error");
+  let inputTooltip: string | undefined = undefined;
+  if (hasError) {
+    inputTooltip = t("shortcuts.duplicate_error");
+  } else if (!isAttachedWidgetEnabled) {
+    inputTooltip = t("shortcuts.disabled_tooltip");
   }
 
   return (
     <SettingsOption
-      disabled={!isEnabled}
-      label={t(`shortcuts.labels.${action.name}`, args)}
+      label={resolvedLabel}
       action={
-        <Tooltip title={tooltipTitle} placement="left">
-          <Input
-            value={keys.join(" + ")}
-            onClick={onEdit}
-            status={hasError ? "error" : undefined}
-            readOnly
-            disabled={!isEnabled}
-          />
-        </Tooltip>
+        <Compact>
+          <Tooltip title={inputTooltip} placement="left">
+            <Input
+              value={keys.join(" + ")}
+              status={hasError ? "error" : undefined}
+              readOnly
+              disabled={!isAttachedWidgetEnabled}
+            />
+          </Tooltip>
+
+          <Tooltip title={readonly ? t("shortcuts.readonly_tooltip") : undefined}>
+            <Button type="primary" disabled={readonly} onClick={onEdit}>
+              <Icon iconName="IoPencilOutline" />
+            </Button>
+          </Tooltip>
+        </Compact>
       }
     />
   );

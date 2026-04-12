@@ -6,3 +6,10 @@ loader: Internal
 preset: Overlay
 hidden: true
 lazy: true
+shortcuts:
+  - id: vd-toggle-view
+    command: ["widget", "trigger", "@seelen/workspaces-viewer"]
+    label: Toggle Workspaces View
+    defaultKeys: ["Win", "Tab"]
+    readonly: true
+    system: true
