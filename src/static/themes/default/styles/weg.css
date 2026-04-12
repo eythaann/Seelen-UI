@@ -1,10 +1,10 @@
 :root {
-  --dock-item-hover-color: rgb(from var(--system-accent-light-color) r g b / 0.2);
+  --dock-item-hover-color: oklch(from var(--system-accent-lightest-color) l 0.05 h);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dock-item-hover-color: rgb(from var(--system-accent-color) r g b / 0.2);
+    --dock-item-hover-color: oklch(from var(--system-accent-darkest-color) l 0.05 h);
   }
 }
 
@@ -27,7 +27,7 @@
 }
 
 .taskbar {
-  background-color: oklch(from var(--color-gray-100) l c h / 0.8);
+  background-color: oklch(from var(--color-gray-50) l c h / 0.6);
   border-radius: 15px;
 
   > .weg-items-container {
@@ -107,11 +107,11 @@
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
   border-radius: var(--border-radius);
 
-  background-color: var(--color-gray-50);
+  background-color: var(--color-gray-75);
   transition: background-color 0.2s ease-out;
 
   &:hover {
-    background-color: var(--color-gray-100);
+    background-color: var(--dock-item-hover-color);
   }
 
   &.media-session-container {
