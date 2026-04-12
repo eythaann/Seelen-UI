@@ -14,10 +14,10 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  background-color: light-dark(#f4f4f4d0, #272727d0);
+  background-color: oklch(from var(--color-gray-50) l c h / 0.9);
 
   &[data-acrylic="true"] {
-    background-color: light-dark(#fff8, #0008);
+    background-color: light-dark(#fff8, #000c);
   }
 
   .apps-menu-header {
@@ -27,7 +27,6 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    border-bottom: 1px solid var(--color-gray-300);
 
     button {
       flex-shrink: 0;
@@ -52,7 +51,6 @@ body {
   .apps-menu-footer {
     width: 100%;
     padding: 10px;
-    border-top: 1px solid var(--color-gray-300);
 
     display: flex;
     align-items: center;
@@ -316,9 +314,9 @@ body {
   margin: auto;
   z-index: 100;
 
-  background-color: RGB(from var(--color-gray-100) r g b / 0.95);
+  background-color: oklch(from var(--color-gray-75) l c h / 0.9);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 
   &::backdrop {
