@@ -11,6 +11,7 @@ pub struct AppNotification {
     pub app_umid: String,
     pub app_name: String,
     pub app_description: String,
+    /// Unix epoch milliseconds (ms since 1970-01-01).
     pub date: i64,
     pub content: Toast,
 }

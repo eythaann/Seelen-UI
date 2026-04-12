@@ -32,7 +32,7 @@ pub struct ClipboardEntryContent {
 pub struct ClipboardEntry {
     /// Unique identifier assigned by Windows.
     pub id: String,
-    /// Windows FILETIME (100-ns ticks since 1601-01-01).
+    /// Unix epoch milliseconds (ms since 1970-01-01).
     pub timestamp: i64,
     /// Display name of the application that placed the entry on the clipboard.
     pub source_app_name: Option<String>,

@@ -7,7 +7,6 @@
     ToastBindingChild,
     ToastImage,
   } from "@seelen-ui/lib/types";
-  import { WindowsDateFileTimeToDate } from "libs/ui/svelte/utils";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import FileIcon from "libs/ui/svelte/components/Icon/FileIcon.svelte";
   import moment from "moment";
@@ -113,7 +112,7 @@
       <div>{notification.appName}</div>
       <span>-</span>
       <div>
-        {moment(WindowsDateFileTimeToDate(notification.date)).fromNow()}
+        {moment(notification.date).fromNow()}
       </div>
     </div>
     <button data-skin="transparent" onclick={handleClose}>

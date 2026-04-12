@@ -2,15 +2,6 @@ export * from "./LazyRune.svelte";
 export * from "./PersistentRune.svelte";
 export * from "./i18n";
 
-// Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
-const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
-
-/** Convert Windows FileTime to Js Unix Date */
-export function WindowsDateFileTimeToDate(fileTime: bigint | number): Date {
-  if (typeof fileTime === "number") fileTime = BigInt(fileTime);
-  return new Date(Number(fileTime / 10000n - EPOCH_DIFF_MILLISECONDS));
-}
-
 /** Get relative time string from a date (e.g., "2 hours ago", "3 days ago") */
 export function relativeTimeFromNow(date: Date): string {
   const now = new Date();

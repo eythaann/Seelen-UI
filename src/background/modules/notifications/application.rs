@@ -34,7 +34,11 @@ use crate::{
         convert_file_to_src, icon_extractor::request_icon_extraction_from_umid,
         lock_free::SyncHashMap, spawn_named_thread,
     },
-    windows_api::{event_window::IS_INTERACTIVE_SESSION, types::AppUserModelId, WindowsApi},
+    windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
+        types::{AppUserModelId, DateTimeExt},
+        WindowsApi,
+    },
 };
 
 static LOADED_NOTIFICATIONS: LazyLock<ParkingLotMutex<HashSet<u32>>> =
@@ -388,7 +392,7 @@ impl NotificationManager {
                 app_umid: app_umid.to_string(),
                 app_name: display_info.DisplayName()?.to_string(),
                 app_description: display_info.Description()?.to_string(),
-                date: u_notification.CreationTime()?.UniversalTime,
+                date: u_notification.CreationTime()?.to_unix_ms(),
                 content: notification_content,
             },
         );

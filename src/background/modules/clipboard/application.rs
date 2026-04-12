@@ -23,7 +23,7 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::lock_free::SyncHashMap,
-    windows_api::WindowsApi,
+    windows_api::{types::DateTimeExt, WindowsApi},
 };
 
 /// Runs `f` on a fresh STA thread and returns its result.
@@ -173,7 +173,7 @@ impl ClipboardManager {
     /// Must be called from an STA-initialised thread.
     fn process_item(item: &ClipboardHistoryItem) -> Result<ClipboardEntry> {
         let id = item.Id()?.to_string();
-        let timestamp = item.Timestamp()?.UniversalTime;
+        let timestamp = item.Timestamp()?.to_unix_ms();
         let content_view = item.Content()?;
 
         let props = content_view.Properties()?;
