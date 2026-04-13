@@ -201,6 +201,7 @@ session:
   plan: Planera
   sign_in: Logga in
   sign_in_hint: Din webbläsare öppnas så att du kan logga in säkert.
+  upgrade_to: Uppgradera till
 shortcuts:
   disabled_tooltip: Widgeten och dess genvägar är inaktiverade
   duplicate_error: Den här genvägen är duplicerad

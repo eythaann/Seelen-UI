@@ -205,6 +205,7 @@ session:
   plan: Plan
   sign_in: Iniciar sesión
   sign_in_hint: Su navegador se abrirá para que pueda iniciar sesión de forma segura.
+  upgrade_to: Actualizar a
 shortcuts:
   disabled_tooltip: El widget y sus atajos están deshabilitados.
   duplicate_error: Este atajo está duplicado.

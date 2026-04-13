@@ -195,6 +195,7 @@ session:
   plan: ਯੋਜਨਾ
   sign_in: ਸਾਈਨ - ਇਨ
   sign_in_hint: ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਖੁੱਲ੍ਹ ਜਾਵੇਗਾ ਤਾਂ ਜੋ ਤੁਸੀਂ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰ ਸਕੋ।
+  upgrade_to: ਤੱਕ ਅੱਪਗਰੇਡ ਕਰੋ
 shortcuts:
   disabled_tooltip: ਵਿਜੇਟ ਅਤੇ ਇਸਦੇ ਸ਼ਾਰਟਕੱਟ ਅਯੋਗ ਹਨ
   duplicate_error: ਇਹ ਸ਼ਾਰਟਕੱਟ ਡੁਪਲੀਕੇਟ ਹੈ

@@ -201,6 +201,7 @@ session:
   plan: Plāns
   sign_in: Pierakstīties
   sign_in_hint: Tiks atvērta jūsu pārlūkprogramma, lai jūs varētu droši pierakstīties.
+  upgrade_to: Jaunināt uz
 shortcuts:
   disabled_tooltip: Logrīks un tā īsceļi ir atspējoti
   duplicate_error: Šī saīsne ir dublēta

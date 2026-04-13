@@ -201,6 +201,7 @@ session:
   plan: Plan
   sign_in: Log ind
   sign_in_hint: Din browser åbnes, så du kan logge på sikkert.
+  upgrade_to: Opgrader til
 shortcuts:
   disabled_tooltip: Widgetten og dens genveje er deaktiveret
   duplicate_error: Denne genvej er duplikeret

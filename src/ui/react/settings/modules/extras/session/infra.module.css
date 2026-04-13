@@ -14,13 +14,13 @@
 
 .logo {
   object-fit: contain;
-  width: 100px;
+  width: 80px;
   aspect-ratio: 1/1;
 }
 
 .loginTitle {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
   color: var(--color-black);
@@ -37,19 +37,20 @@
   border-radius: var(--config-border-radius);
 }
 
-.loginBtn, .logoutBtn {
+.loginBtn {
   width: 100%;
-  max-width: 120px;
+  max-width: 140px;
 }
 
 /* ── Profile ── */
 
 .profileCard {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-l);
-  padding: var(--spacing-l);
+  gap: var(--spacing-m);
+  padding: var(--spacing-m) var(--spacing-l);
   background-color: var(--color-gray-50);
   border: 1px solid var(--color-gray-200);
   border-radius: var(--config-border-radius);
@@ -71,28 +72,68 @@
   flex-direction: column;
   gap: var(--spacing-2xs);
   min-width: 0;
+
+  .displayName {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .username,
+  .email {
+    font-size: 0.8rem;
+    color: var(--color-gray-400);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .planTag {
+    display: inline-block;
+    padding: 2px 6px;
+    align-self: flex-start;
+    text-transform: capitalize;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-600);
+
+    &.skyPlanTag {
+      background: linear-gradient(135deg, #7b5fff 0%, #5090ff 100%) !important;
+      border-color: rgba(123, 95, 255, 0.4) !important;
+      color: #fff !important;
+    }
+  }
 }
 
-.displayName {
-  margin: 0;
-  font-size: 1rem;
+.upgradeBtn {
+  position: absolute;
+  top: var(--spacing-m);
+  right: var(--spacing-l);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7b5fff 0%, #5090ff 100%);
+  color: #fff !important;
   font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  box-shadow: 0 0 0 1px rgba(123, 95, 255, 0.4), 0 4px 14px rgba(123, 95, 255, 0.3), 0 1px 4px rgba(0, 0, 0, 0.15);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 
-.email {
-  font-size: 0.8125rem;
-  color: var(--color-gray-400);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 1px rgba(123, 95, 255, 0.65), 0 6px 20px rgba(123, 95, 255, 0.4), 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
 
-.plan {
-  font-size: 0.8125rem;
-  color: var(--color-gray-400);
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .profileActions {
@@ -100,4 +141,8 @@
   justify-content: flex-end;
   padding-top: var(--spacing-xs);
   border-top: 1px solid var(--color-gray-200);
+}
+
+.logoutBtn {
+  min-width: 90px;
 }

@@ -201,6 +201,7 @@ session:
   plan: منصوبہ
   sign_in: سائن ان کریں۔
   sign_in_hint: آپ کا براؤزر کھل جائے گا تاکہ آپ محفوظ طریقے سے سائن ان کر سکیں۔
+  upgrade_to: میں اپ گریڈ کریں۔
 shortcuts:
   disabled_tooltip: ویجیٹ اور اس کے شارٹ کٹس غیر فعال ہیں۔
   duplicate_error: اس شارٹ کٹ کو نقل کیا گیا ہے

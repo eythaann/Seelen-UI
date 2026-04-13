@@ -200,6 +200,7 @@ session:
   plan: Plaan
   sign_in: Logi sisse
   sign_in_hint: Teie brauser avaneb, et saaksite turvaliselt sisse logida.
+  upgrade_to: Uuenda versioonile
 shortcuts:
   disabled_tooltip: Vidin ja selle otseteed on keelatud
   duplicate_error: See otsetee on dubleeritud

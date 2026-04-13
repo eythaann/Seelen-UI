@@ -193,6 +193,7 @@ session:
   plan: እቅድ
   sign_in: ይግቡ
   sign_in_hint: ደህንነቱ በተጠበቀ ሁኔታ መግባት እንድትችል አሳሽህ ይከፈታል።
+  upgrade_to: አሻሽል ወደ
 shortcuts:
   disabled_tooltip: መግብር እና አቋራጮቹ ተሰናክለዋል።
   duplicate_error: ይህ አቋራጭ የተባዛ ነው።

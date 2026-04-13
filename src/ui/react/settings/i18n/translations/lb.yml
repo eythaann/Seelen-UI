@@ -199,6 +199,7 @@ session:
   plan: Plang
   sign_in: Umellen
   sign_in_hint: Äre Browser wäert opmaachen fir datt Dir Iech sécher aloggen kënnt.
+  upgrade_to: Upgrade op
 shortcuts:
   disabled_tooltip: De Widget a seng Ofkiirzungen sinn behënnert
   duplicate_error: Dës Ofkiirzung gëtt duplizéiert

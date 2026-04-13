@@ -202,6 +202,7 @@ session:
   plan: Kế hoạch
   sign_in: Đăng nhập
   sign_in_hint: Trình duyệt của bạn sẽ mở để bạn có thể đăng nhập an toàn.
+  upgrade_to: Nâng cấp lên
 shortcuts:
   disabled_tooltip: Tiện ích và các phím tắt của nó đã bị tắt
   duplicate_error: Phím tắt này bị trùng lặp

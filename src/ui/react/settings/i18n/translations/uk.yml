@@ -201,6 +201,7 @@ session:
   plan: План
   sign_in: Увійти
   sign_in_hint: Ваш браузер відкриється, щоб ви могли безпечно ввійти.
+  upgrade_to: Оновити до
 shortcuts:
   disabled_tooltip: Віджет і його ярлики вимкнено
   duplicate_error: Цей ярлик дублюється

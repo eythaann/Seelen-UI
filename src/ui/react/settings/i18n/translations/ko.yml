@@ -187,6 +187,7 @@ session:
   plan: 계획
   sign_in: 로그인
   sign_in_hint: 안전하게 로그인할 수 있도록 브라우저가 열립니다.
+  upgrade_to: 업그레이드
 shortcuts:
   disabled_tooltip: 위젯과 해당 바로가기가 비활성화되었습니다.
   duplicate_error: 이 바로가기가 중복되었습니다.

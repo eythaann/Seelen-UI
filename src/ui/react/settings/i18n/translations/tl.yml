@@ -208,6 +208,7 @@ session:
   plan: Plano
   sign_in: Mag-sign In
   sign_in_hint: Magbubukas ang iyong browser upang ligtas kang makapag-sign in.
+  upgrade_to: Mag-upgrade sa
 shortcuts:
   disabled_tooltip: Ang widget at ang mga shortcut nito ay hindi pinagana
   duplicate_error: Ang shortcut na ito ay nadoble

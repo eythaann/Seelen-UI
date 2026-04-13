@@ -203,6 +203,7 @@ session:
   plan: Plán
   sign_in: Přihlaste se
   sign_in_hint: Otevře se váš prohlížeč, abyste se mohli bezpečně přihlásit.
+  upgrade_to: Upgradovat na
 shortcuts:
   disabled_tooltip: Widget a jeho zkratky jsou zakázány
   duplicate_error: Tato zkratka je duplicitní

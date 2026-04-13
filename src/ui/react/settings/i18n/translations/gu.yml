@@ -199,6 +199,7 @@ session:
   plan: યોજના
   sign_in: સાઇન ઇન કરો
   sign_in_hint: તમારું બ્રાઉઝર ખુલશે જેથી તમે સુરક્ષિત રીતે સાઇન ઇન કરી શકો.
+  upgrade_to: પર અપગ્રેડ કરો
 shortcuts:
   disabled_tooltip: વિજેટ અને તેના શોર્ટકટ્સ અક્ષમ છે
   duplicate_error: આ શોર્ટકટ ડુપ્લિકેટ છે

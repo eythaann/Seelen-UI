@@ -193,6 +193,7 @@ session:
   plan: לְתַכְנֵן
   sign_in: היכנס
   sign_in_hint: הדפדפן שלך ייפתח כדי שתוכל להיכנס בצורה מאובטחת.
+  upgrade_to: שדרג ל
 shortcuts:
   disabled_tooltip: הווידג'ט וקיצורי הדרך שלו מושבתים
   duplicate_error: קיצור זה משוכפל

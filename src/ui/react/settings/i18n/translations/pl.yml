@@ -204,6 +204,7 @@ session:
   plan: Plan
   sign_in: Zalogować się
   sign_in_hint: Twoja przeglądarka otworzy się, abyś mógł bezpiecznie się zalogować.
+  upgrade_to: Uaktualnij do
 shortcuts:
   disabled_tooltip: Widżet i jego skróty są wyłączone
   duplicate_error: Ten skrót jest zduplikowany

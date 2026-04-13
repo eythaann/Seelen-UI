@@ -196,6 +196,7 @@ session:
   plan: Ètò
   sign_in: Wọle
   sign_in_hint: Aṣàwákiri rẹ yoo ṣii ki o le wọle ni aabo.
+  upgrade_to: Igbesoke si
 shortcuts:
   disabled_tooltip: Ẹrọ ailorukọ ati awọn ọna abuja rẹ jẹ alaabo
   duplicate_error: Ọna abuja yii jẹ pidánpidán

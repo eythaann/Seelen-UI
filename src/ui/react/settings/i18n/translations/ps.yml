@@ -195,6 +195,7 @@ session:
   plan: پلان
   sign_in: ننوتل
   sign_in_hint: ستاسو براوزر به خلاص شي نو تاسو په خوندي ډول لاسلیک کولی شئ.
+  upgrade_to: ته لوړ کړئ
 shortcuts:
   disabled_tooltip: ویجټ او د هغې شارټ کټونه غیر فعال دي
   duplicate_error: دا شارټ کټ نقل شوی دی

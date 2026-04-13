@@ -193,6 +193,7 @@ session:
   plan: يخطط
   sign_in: تسجيل الدخول
   sign_in_hint: سيتم فتح المتصفح الخاص بك حتى تتمكن من تسجيل الدخول بشكل آمن.
+  upgrade_to: الترقية إلى
 shortcuts:
   disabled_tooltip: تم تعطيل الأداة واختصاراتها
   duplicate_error: هذا الاختصار مكرر

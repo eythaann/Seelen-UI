@@ -198,6 +198,7 @@ session:
   plan: Áætlun
   sign_in: Skráðu þig inn
   sign_in_hint: Vafrinn þinn opnast svo þú getir skráð þig inn á öruggan hátt.
+  upgrade_to: Uppfærðu í
 shortcuts:
   disabled_tooltip: Græjan og flýtivísar hennar eru óvirk
   duplicate_error: Þessi flýtileið er afrituð

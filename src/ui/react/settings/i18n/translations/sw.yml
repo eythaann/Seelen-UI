@@ -198,6 +198,7 @@ session:
   plan: Mpango
   sign_in: Ingia
   sign_in_hint: Kivinjari chako kitafunguka ili uweze kuingia kwa usalama.
+  upgrade_to: Boresha hadi
 shortcuts:
   disabled_tooltip: Wijeti na njia zake za mkato zimezimwa
   duplicate_error: Njia hii ya mkato imerudiwa

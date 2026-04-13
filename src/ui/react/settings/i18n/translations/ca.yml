@@ -206,6 +206,7 @@ session:
   sign_in_hint: >-
     El vostre navegador s'obrirà perquè pugueu iniciar la sessió de manera
     segura.
+  upgrade_to: Actualitza a
 shortcuts:
   disabled_tooltip: El giny i les seves dreceres estan desactivats
   duplicate_error: Aquesta drecera està duplicada

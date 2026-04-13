@@ -205,6 +205,7 @@ session:
   plan: Piano
   sign_in: Registrazione
   sign_in_hint: Il tuo browser si aprirà per consentirti di accedere in modo sicuro.
+  upgrade_to: Aggiorna a
 shortcuts:
   disabled_tooltip: Il widget e i suoi collegamenti sono disabilitati
   duplicate_error: Questa scorciatoia è duplicata

@@ -199,6 +199,7 @@ session:
   plan: Plan
   sign_in: Prijavite se
   sign_in_hint: Vaš pretraživač će se otvoriti tako da se možete bezbedno prijaviti.
+  upgrade_to: Nadogradite na
 shortcuts:
   disabled_tooltip: Vidžet i njegove prečice su onemogućeni
   duplicate_error: Ova prečica je duplirana

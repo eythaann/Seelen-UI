@@ -201,6 +201,7 @@ session:
   plan: Cynllun
   sign_in: Mewngofnodwch
   sign_in_hint: Bydd eich porwr yn agor er mwyn i chi allu mewngofnodi'n ddiogel.
+  upgrade_to: Uwchraddio i
 shortcuts:
   disabled_tooltip: Mae'r teclyn a'i lwybrau byr wedi'u hanalluogi
   duplicate_error: Mae'r llwybr byr hwn yn cael ei ddyblygu

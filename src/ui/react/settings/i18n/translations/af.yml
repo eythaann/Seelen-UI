@@ -201,6 +201,7 @@ session:
   plan: Beplan
   sign_in: Meld aan
   sign_in_hint: Jou blaaier sal oopmaak sodat jy veilig kan aanmeld.
+  upgrade_to: Gradeer op na
 shortcuts:
   disabled_tooltip: Die legstuk en sy kortpaaie is gedeaktiveer
   duplicate_error: Hierdie kortpad is gedupliseer

@@ -199,6 +199,7 @@ session:
   plan: გეგმავენ
   sign_in: შესვლა
   sign_in_hint: თქვენი ბრაუზერი გაიხსნება, რათა უსაფრთხოდ შეხვიდეთ სისტემაში.
+  upgrade_to: განაახლეთ
 shortcuts:
   disabled_tooltip: ვიჯეტი და მისი მალსახმობები გამორთულია
   duplicate_error: ეს მალსახმობი დუბლირებულია

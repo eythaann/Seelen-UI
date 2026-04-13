@@ -204,6 +204,7 @@ session:
   plan: Hlela
   sign_in: Ngena ngemvume
   sign_in_hint: Isiphequluli sakho sizovuleka ukuze ungene ngemvume ngokuphephile.
+  upgrade_to: Thuthukela ku
 shortcuts:
   disabled_tooltip: Iwijethi kanye nezinqamuleli zayo kukhutshaziwe
   duplicate_error: Lesi sinqamuleli siyimpinda

@@ -203,6 +203,7 @@ session:
   plan: Plán
   sign_in: Prihlásiť sa
   sign_in_hint: Otvorí sa váš prehliadač, aby ste sa mohli bezpečne prihlásiť.
+  upgrade_to: Inovovať na
 shortcuts:
   disabled_tooltip: Miniaplikácia a jej skratky sú vypnuté
   duplicate_error: Táto skratka je duplikovaná

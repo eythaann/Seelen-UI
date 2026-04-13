@@ -200,6 +200,7 @@ session:
   plan: Plan
   sign_in: Daxil ol
   sign_in_hint: Brauzeriniz açılacaq ki, təhlükəsiz daxil ola biləsiniz.
+  upgrade_to: '-ə yüksəldin'
 shortcuts:
   disabled_tooltip: Vidcet və onun qısa yolları deaktiv edilib
   duplicate_error: Bu qısayol dublikatdır

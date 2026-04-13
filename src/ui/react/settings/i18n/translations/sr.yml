@@ -201,6 +201,7 @@ session:
   plan: План
   sign_in: Пријавите се
   sign_in_hint: Ваш претраживач ће се отворити да бисте се могли безбедно пријавити.
+  upgrade_to: Надоградите на
 shortcuts:
   disabled_tooltip: Виџет и његове пречице су онемогућени
   duplicate_error: Ова пречица је дуплирана

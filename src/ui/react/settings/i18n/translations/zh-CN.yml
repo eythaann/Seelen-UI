@@ -177,6 +177,7 @@ session:
   plan: 计划
   sign_in: 登入
   sign_in_hint: 您的浏览器将打开，以便您可以安全登录。
+  upgrade_to: 升级至
 shortcuts:
   disabled_tooltip: 小部件及其快捷方式被禁用
   duplicate_error: 该快捷键重复

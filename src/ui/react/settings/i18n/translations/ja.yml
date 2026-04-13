@@ -186,6 +186,7 @@ session:
   plan: プラン
   sign_in: サインイン
   sign_in_hint: ブラウザが開くので、安全にサインインできます。
+  upgrade_to: にアップグレード
 shortcuts:
   disabled_tooltip: ウィジェットとそのショートカットが無効になっています
   duplicate_error: このショートカットは重複しています

@@ -208,6 +208,7 @@ session:
   sign_in_hint: >-
     Votre navigateur s'ouvrira pour que vous puissiez vous connecter en toute
     sécurité.
+  upgrade_to: Mettre à niveau vers
 shortcuts:
   disabled_tooltip: Le widget et ses raccourcis sont désactivés
   duplicate_error: Ce raccourci est dupliqué

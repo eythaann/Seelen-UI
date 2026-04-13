@@ -201,6 +201,7 @@ session:
   plan: Planı
   sign_in: Oturum aç
   sign_in_hint: Güvenli bir şekilde oturum açabilmeniz için tarayıcınız açılacaktır.
+  upgrade_to: 'Şuna yükselt:'
 shortcuts:
   disabled_tooltip: Widget ve kısayolları devre dışı bırakıldı
   duplicate_error: Bu kısayol kopyalandı

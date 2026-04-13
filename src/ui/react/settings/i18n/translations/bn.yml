@@ -203,6 +203,7 @@ session:
   plan: পরিকল্পনা
   sign_in: সাইন ইন করুন
   sign_in_hint: আপনার ব্রাউজার খুলবে যাতে আপনি নিরাপদে সাইন ইন করতে পারেন।
+  upgrade_to: আপগ্রেড করুন
 shortcuts:
   disabled_tooltip: উইজেট এবং এর শর্টকাটগুলি অক্ষম করা হয়েছে৷
   duplicate_error: এই শর্টকাট ডুপ্লিকেট করা হয়

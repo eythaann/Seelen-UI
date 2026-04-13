@@ -204,6 +204,7 @@ session:
   plan: Plan
   sign_in: Conectare
   sign_in_hint: Browserul se va deschide astfel încât să vă puteți conecta în siguranță.
+  upgrade_to: Upgrade la
 shortcuts:
   disabled_tooltip: Widgetul și comenzile rapide ale acestuia sunt dezactivate
   duplicate_error: Această comandă rapidă este duplicată

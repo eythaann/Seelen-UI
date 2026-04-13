@@ -203,6 +203,7 @@ session:
   plan: Plan
   sign_in: Prijavite se
   sign_in_hint: Otvorit će se vaš preglednik kako biste se mogli sigurno prijaviti.
+  upgrade_to: Nadogradite na
 shortcuts:
   disabled_tooltip: Widget i njegovi prečaci su onemogućeni
   duplicate_error: Ovaj prečac je dupliciran

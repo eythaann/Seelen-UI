@@ -203,6 +203,7 @@ session:
   plan: Pjan
   sign_in: Idħol
   sign_in_hint: Il-browser tiegħek se jiftaħ sabiex tkun tista' tidħol b'mod sigur.
+  upgrade_to: Taġġorna għal
 shortcuts:
   disabled_tooltip: Il-widget u s-shortcuts tiegħu huma diżattivati
   duplicate_error: Din is-shortcut hija duplikata

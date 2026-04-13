@@ -206,6 +206,7 @@ session:
   plan: Planen
   sign_in: Anmelden
   sign_in_hint: Ihr Browser wird geöffnet, sodass Sie sich sicher anmelden können.
+  upgrade_to: Upgrade auf
 shortcuts:
   disabled_tooltip: Das Widget und seine Verknüpfungen sind deaktiviert
   duplicate_error: Diese Verknüpfung ist dupliziert

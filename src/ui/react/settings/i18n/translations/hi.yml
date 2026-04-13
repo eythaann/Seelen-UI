@@ -203,6 +203,7 @@ session:
   plan: योजना
   sign_in: दाखिल करना
   sign_in_hint: आपका ब्राउज़र खुल जाएगा ताकि आप सुरक्षित रूप से साइन इन कर सकें।
+  upgrade_to: में अपग्रेड
 shortcuts:
   disabled_tooltip: विजेट और उसके शॉर्टकट अक्षम हैं
   duplicate_error: यह शॉर्टकट डुप्लिकेट है

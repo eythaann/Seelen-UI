@@ -179,6 +179,7 @@ session:
   plan: 計劃
   sign_in: 登入
   sign_in_hint: 您的瀏覽器將會打開，以便您可以安全登入。
+  upgrade_to: 升級至
 shortcuts:
   disabled_tooltip: 小部件及其快捷方式已停用
   duplicate_error: 該快捷方式重複

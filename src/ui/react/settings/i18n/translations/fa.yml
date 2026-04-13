@@ -201,6 +201,7 @@ session:
   plan: برنامه ریزی کنید
   sign_in: وارد شوید
   sign_in_hint: مرورگر شما باز می شود تا بتوانید به صورت ایمن وارد سیستم شوید.
+  upgrade_to: ارتقاء به
 shortcuts:
   disabled_tooltip: ویجت و میانبرهای آن غیرفعال هستند
   duplicate_error: این میانبر تکراری است

@@ -201,6 +201,7 @@ session:
   plan: Terv
   sign_in: Jelentkezzen be
   sign_in_hint: Megnyílik a böngészője, így biztonságosan bejelentkezhet.
+  upgrade_to: Frissítés erre
 shortcuts:
   disabled_tooltip: A widget és parancsikonjai le vannak tiltva
   duplicate_error: Ez a parancsikon megkettőződik

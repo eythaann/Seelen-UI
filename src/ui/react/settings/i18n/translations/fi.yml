@@ -203,6 +203,7 @@ session:
   plan: Suunnitelma
   sign_in: Kirjaudu sisään
   sign_in_hint: Selaimesi avautuu, jotta voit kirjautua sisään turvallisesti.
+  upgrade_to: Päivitä
 shortcuts:
   disabled_tooltip: Widget ja sen pikakuvakkeet on poistettu käytöstä
   duplicate_error: Tämä pikanäppäin on kopioitu

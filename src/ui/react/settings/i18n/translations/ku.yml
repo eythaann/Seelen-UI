@@ -203,6 +203,7 @@ session:
   plan: Pîlan
   sign_in: Têketin
   sign_in_hint: Geroka we dê vebe da ku hûn bi ewlehî têkevinê.
+  upgrade_to: Upgrade to
 shortcuts:
   disabled_tooltip: Widget û kurtebirên wê neçalak in
   duplicate_error: Ev kurtebir hatiye dubarekirin

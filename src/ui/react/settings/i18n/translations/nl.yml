@@ -200,6 +200,7 @@ session:
   plan: Plan
   sign_in: Inloggen
   sign_in_hint: Uw browser wordt geopend zodat u veilig kunt inloggen.
+  upgrade_to: Upgrade naar
 shortcuts:
   disabled_tooltip: De widget en de snelkoppelingen zijn uitgeschakeld
   duplicate_error: Deze snelkoppeling is gedupliceerd

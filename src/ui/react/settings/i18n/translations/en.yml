@@ -197,6 +197,7 @@ session:
   plan: Plan
   sign_in: Sign In
   sign_in_hint: Your browser will open so you can sign in securely.
+  upgrade_to: Upgrade to
 shortcuts:
   disabled_tooltip: The widget and its shortcuts are disabled
   duplicate_error: This shortcut is duplicated

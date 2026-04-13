@@ -204,6 +204,7 @@ session:
   plan: Rencana
   sign_in: Masuk
   sign_in_hint: Browser Anda akan terbuka sehingga Anda dapat masuk dengan aman.
+  upgrade_to: Tingkatkan ke
 shortcuts:
   disabled_tooltip: Widget dan pintasannya dinonaktifkan
   duplicate_error: Pintasan ini diduplikasi

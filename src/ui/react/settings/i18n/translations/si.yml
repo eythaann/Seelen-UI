@@ -199,6 +199,7 @@ session:
   plan: සැලසුම් කරන්න
   sign_in: පුරන්න
   sign_in_hint: ඔබට ආරක්ෂිතව පුරනය වීමට හැකි වන පරිදි ඔබගේ බ්‍රවුසරය විවෘත වනු ඇත.
+  upgrade_to: දක්වා උත්ශ්‍රේණි කරන්න
 shortcuts:
   disabled_tooltip: විජට් සහ එහි කෙටිමං අබල කර ඇත
   duplicate_error: මෙම කෙටි මග අනුපිටපත් කර ඇත

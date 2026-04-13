@@ -201,6 +201,7 @@ session:
   plan: Rancang
   sign_in: Log Masuk
   sign_in_hint: Penyemak imbas anda akan dibuka supaya anda boleh log masuk dengan selamat.
+  upgrade_to: Naik taraf kepada
 shortcuts:
   disabled_tooltip: Widget dan pintasannya dilumpuhkan
   duplicate_error: Pintasan ini diduplikasi

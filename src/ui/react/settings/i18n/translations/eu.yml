@@ -202,6 +202,7 @@ session:
   plan: Plana
   sign_in: Hasi saioa
   sign_in_hint: Zure arakatzailea irekiko da, modu seguruan saioa hasteko.
+  upgrade_to: Berritu hona
 shortcuts:
   disabled_tooltip: Widgeta eta haren lasterbideak desgaituta daude
   duplicate_error: Lasterbide hau bikoiztuta dago

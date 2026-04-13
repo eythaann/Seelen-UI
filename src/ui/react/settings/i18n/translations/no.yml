@@ -201,6 +201,7 @@ session:
   plan: Plan
   sign_in: Logg på
   sign_in_hint: Nettleseren din åpnes slik at du kan logge på sikkert.
+  upgrade_to: Oppgrader til
 shortcuts:
   disabled_tooltip: Widgeten og dens snarveier er deaktivert
   duplicate_error: Denne snarveien er duplisert

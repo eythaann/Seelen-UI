@@ -207,6 +207,7 @@ session:
   plan: Qorshe
   sign_in: Soo gal
   sign_in_hint: Barrawsarkaaga ayaa furmi doona si aad si badbaado leh ugu soo gasho
+  upgrade_to: U cusboonaysii
 shortcuts:
   disabled_tooltip: Qalabka widget-ka iyo jid-gooyooyinkiisu waa naafo
   duplicate_error: Jidka gaaban waa la koobiyay

@@ -5,6 +5,9 @@ import { useTranslation } from "react-i18next";
 
 import { session } from "../../../state/session.ts";
 import cs from "./infra.module.css";
+import { cx } from "libs/ui/react/utils/styling.ts";
+
+const SKY_UPGRADE_URL = "https://seelen.io/sky";
 
 export function SessionView() {
   const currentSession = session.value;
@@ -17,8 +20,9 @@ export function SessionView() {
 }
 
 function SessionProfile() {
-  const { t } = useTranslation();
   const currentSession = session.value!;
+
+  const { t } = useTranslation();
   const [loggingOut, setLoggingOut] = useState(false);
 
   async function handleLogout() {
@@ -32,24 +36,42 @@ function SessionProfile() {
 
   const displayName = currentSession.displayName || currentSession.username;
   const avatarLetter = displayName[0]?.toUpperCase() ?? "?";
+  const isFree = currentSession.plan === "Free";
 
   return (
     <div className={cs.profileCard}>
       <div className={cs.profileHeader}>
-        <Avatar className={cs.avatar} size={72} src={currentSession.avatar || undefined}>
+        <Avatar className={cs.avatar} size={64} src={currentSession.avatar || undefined}>
           {!currentSession.avatar && avatarLetter}
         </Avatar>
+
         <div className={cs.profileInfo}>
-          <h4 className={cs.displayName}>{displayName}</h4>
-          {currentSession.email && <span className={cs.email}>{currentSession.email}</span>}
-          <span className={cs.plan}>
-            {t("session.plan")}: <strong>{currentSession.plan}</strong>
+          <span className={cs.displayName}>
+            {displayName}{" "}
+            <div className={cx(cs.planTag, { [cs.skyPlanTag]: !isFree })}>
+              {currentSession.plan}
+            </div>
           </span>
+
+          <span className={cs.username}>@{currentSession.username}</span>
+          {currentSession.email && <span className={cs.email}>{currentSession.email}</span>}
         </div>
       </div>
 
+      {isFree && (
+        <a className={cs.upgradeBtn} href={SKY_UPGRADE_URL} target="_blank">
+          {t("session.upgrade_to")} Sky
+        </a>
+      )}
+
       <div className={cs.profileActions}>
-        <Button className={cs.logoutBtn} danger loading={loggingOut} onClick={handleLogout}>
+        <Button
+          className={cs.logoutBtn}
+          type="text"
+          danger
+          loading={loggingOut}
+          onClick={handleLogout}
+        >
           {t("session.logout")}
         </Button>
       </div>
