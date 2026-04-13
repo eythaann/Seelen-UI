@@ -28,7 +28,7 @@
     "url": "https://github.com/eythaann/seelen-ui.git"
   },
   "dependencies": {
-    "@dnd-kit/abstract": "^0.3.2",
+    "@dnd-kit/abstract": "^0.4.0",
     "@dnd-kit/helpers": "^0.4.0",
     "@dnd-kit/react": "^0.3.2",
     "@dnd-kit/svelte": "^0.4.0",
