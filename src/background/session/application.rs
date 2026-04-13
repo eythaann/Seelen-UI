@@ -27,12 +27,12 @@ static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 #[cfg(dev)]
-const AUTH_BASE_URL: &str = "https://auth.local.seelen.io";
+const AUTH_BASE_URL: &str = "https://auth.staging.seelen.io";
 #[cfg(not(dev))]
 const AUTH_BASE_URL: &str = "https://auth.seelen.io";
 
 #[cfg(dev)]
-const WEBSITE_BASE_URL: &str = "https://local.seelen.io";
+const WEBSITE_BASE_URL: &str = "https://staging.seelen.io";
 #[cfg(not(dev))]
 const WEBSITE_BASE_URL: &str = "https://seelen.io";
 
@@ -102,6 +102,13 @@ impl SessionManager {
         self.session
             .as_ref()
             .map(|s| s.permissions.contains(&"resource-premium".to_string()))
+            .unwrap_or(false)
+    }
+
+    pub fn has_cloud_backup_access(&self) -> bool {
+        self.session
+            .as_ref()
+            .map(|s| s.permissions.contains(&"cloud-backup".to_string()))
             .unwrap_or(false)
     }
 
@@ -337,6 +344,16 @@ impl SessionManager {
     /// session is active. Use this for all authenticated background HTTP requests.
     pub fn authed_get(url: &str) -> reqwest::RequestBuilder {
         let mut req = HTTP_CLIENT.get(url);
+        if let Ok(token) = Self::get_access_token() {
+            req = req.header("Authorization", format!("Bearer {token}"));
+        }
+        req
+    }
+
+    /// Returns a POST request builder with `Authorization: Bearer <token>` set if a
+    /// session is active.
+    pub fn authed_post(url: &str) -> reqwest::RequestBuilder {
+        let mut req = HTTP_CLIENT.post(url);
         if let Ok(token) = Self::get_access_token() {
             req = req.header("Authorization", format!("Bearer {token}"));
         }

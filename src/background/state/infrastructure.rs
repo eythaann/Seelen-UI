@@ -87,7 +87,9 @@ pub fn state_write_settings(mut settings: Settings) -> Result<()> {
         state.settings = settings.clone();
         state
     });
-    FULL_STATE.load().write_settings()
+    FULL_STATE.load().write_settings()?;
+    crate::backups::application::on_settings_saved();
+    Ok(())
 }
 
 #[tauri::command(async)]

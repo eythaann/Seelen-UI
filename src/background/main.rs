@@ -4,6 +4,7 @@
 
 mod app;
 mod app_instance;
+mod backups;
 mod cli;
 mod error;
 mod exposed;
@@ -134,6 +135,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     trace_lock!(PERFORMANCE_HELPER).end("setup");
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();
+    backups::infrastructure::start_backup_sync();
     Ok(())
 }
 
