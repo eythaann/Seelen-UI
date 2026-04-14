@@ -88,6 +88,11 @@ discord_banner:
     paylaşın və ən son xəbərlərdən xəbərdar olun.
   title: İcmamıza qoşulun
 extras:
+  backup_group: Bulud Yedəkləmə
+  backup_last_sync: Son sinxronizasiya
+  backup_never_synced: Heç vaxt sinxronlaşdırılmayıb
+  backup_sync: Parametrləri buludla sinxronlaşdırın
+  backup_sync_description: Bulud vasitəsilə parametrlərinizi avtomatik olaraq yedəkləyin və bərpa edin.
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
   exit: Çıxmaq / çıxmaq

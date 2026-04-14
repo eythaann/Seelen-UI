@@ -83,6 +83,11 @@ discord_banner:
   message: 他の Seelen UI ユーザーとつながり、ヘルプを得たり、テーマを共有したり、最新ニュースを入手したりできます。
   title: コミュニティに参加してください
 extras:
+  backup_group: クラウドバックアップ
+  backup_last_sync: 最終同期
+  backup_never_synced: 決して同期しない
+  backup_sync: 設定をクラウドに同期する
+  backup_sync_description: クラウド経由で設定を自動的にバックアップおよび復元します。
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
   exit: SeelenUIを終了

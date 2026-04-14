@@ -280,6 +280,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::widgets::window_manager::handler::*;
     use crate::widgets::*;
 
+    use crate::backups::infrastructure::*;
     use crate::modules::apps::infrastructure::*;
     use crate::modules::clipboard::infrastructure::*;
     use crate::modules::media::devices::infrastructure::*;

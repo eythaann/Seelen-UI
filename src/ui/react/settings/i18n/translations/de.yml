@@ -90,6 +90,13 @@ discord_banner:
     neuesten Nachrichten auf dem Laufenden.
   title: Treten Sie unserer Community bei
 extras:
+  backup_group: Cloud-Backup
+  backup_last_sync: Letzte Synchronisierung
+  backup_never_synced: Nie synchronisiert
+  backup_sync: Synchronisieren Sie die Einstellungen mit der Cloud
+  backup_sync_description: >-
+    Sichern Sie Ihre Einstellungen automatisch über die Cloud und stellen Sie
+    sie wieder her.
   clear_icons: System-Symbol-Cache löschen
   clear_icons_tooltip: >-
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu

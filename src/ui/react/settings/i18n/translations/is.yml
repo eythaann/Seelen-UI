@@ -89,6 +89,11 @@ discord_banner:
     nýjustu fréttum.
   title: Skráðu þig í samfélag okkar
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Síðasta samstilling
+  backup_never_synced: Aldrei samstillt
+  backup_sync: Samstilla stillingar við ský
+  backup_sync_description: Afritaðu sjálfkrafa og endurheimtu stillingarnar þínar í gegnum skýið.
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
   exit: Hætta/hætta

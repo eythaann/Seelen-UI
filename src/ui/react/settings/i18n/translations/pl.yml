@@ -89,6 +89,13 @@ discord_banner:
     udostępniaj motywy i bądź na bieżąco z najnowszymi wiadomościami.
   title: Dołącz do naszej społeczności
 extras:
+  backup_group: Kopia zapasowa w chmurze
+  backup_last_sync: Ostatnia synchronizacja
+  backup_never_synced: Nigdy nie synchronizowane
+  backup_sync: Synchronizuj ustawienia z chmurą
+  backup_sync_description: >-
+    Automatycznie twórz kopie zapasowe i przywracaj ustawienia za pośrednictwem
+    chmury.
   clear_icons: Wyczyść pamięć podręczną ikon systemowych
   clear_icons_tooltip: >-
     Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne

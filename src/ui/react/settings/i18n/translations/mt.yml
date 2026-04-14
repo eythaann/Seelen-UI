@@ -89,6 +89,13 @@ discord_banner:
     żomm ruħek aġġornat bl-aħħar aħbarijiet.
   title: Ingħaqad fil-Komunità tagħna
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: L-aħħar sinkronizzazzjoni
+  backup_never_synced: Qatt issinkronizzat
+  backup_sync: Issinkronizza s-settings mal-cloud
+  backup_sync_description: >-
+    Awtomatikament tagħmel backup u restawra s-settings tiegħek permezz
+    tas-sħab.
   clear_icons: Ikoni tas-sistema ċara cache
   clear_icons_tooltip: >-
     Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq

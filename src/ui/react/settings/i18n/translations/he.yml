@@ -87,6 +87,11 @@ discord_banner:
     מעודכן בחדשות האחרונות.
   title: הצטרף לקהילה שלנו
 extras:
+  backup_group: גיבוי בענן
+  backup_last_sync: סנכרון אחרון
+  backup_never_synced: מעולם לא סונכרן
+  backup_sync: סנכרון הגדרות לענן
+  backup_sync_description: גבה ושחזר את ההגדרות שלך באופן אוטומטי דרך הענן.
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
   exit: צא

@@ -89,6 +89,11 @@ discord_banner:
     y newyddion diweddaraf.
   title: Ymunwch â'n Cymuned
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Cysoni diwethaf
+  backup_never_synced: Erioed wedi synced
+  backup_sync: Cysoni gosodiadau i'r cwmwl
+  backup_sync_description: Gwneud copi wrth gefn yn awtomatig ac adfer eich gosodiadau trwy'r cwmwl.
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
   exit: Rhoi'r gorau iddi/allanfa

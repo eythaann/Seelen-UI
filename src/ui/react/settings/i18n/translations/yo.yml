@@ -87,6 +87,11 @@ discord_banner:
     duro titi di oni pẹlu awọn iroyin tuntun.
   title: Darapọ mọ Agbegbe wa
 extras:
+  backup_group: Awọsanma Afẹyinti
+  backup_last_sync: Imuṣiṣẹpọ kẹhin
+  backup_never_synced: Ma ṣe muṣiṣẹpọ
+  backup_sync: Awọn eto amuṣiṣẹpọ si awọsanma
+  backup_sync_description: Ṣe afẹyinti laifọwọyi ati mu awọn eto rẹ pada nipasẹ awọsanma.
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
   exit: Duro / Jade

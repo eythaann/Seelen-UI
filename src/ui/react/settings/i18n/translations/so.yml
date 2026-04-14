@@ -90,6 +90,11 @@ discord_banner:
     oo la soco wararkii ugu dambeeyay
   title: Ku Soo Biir Bulshadeena
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Isku xidhkii u dambeeyay
+  backup_never_synced: Waligaa lama isku dhejin
+  backup_sync: Isku hagaaji dejinta daruuraha
+  backup_sync_description: Si toos ah u soo celi oo u soo celi dejimahaaga daruuraha.
   clear_icons: Calaamadaha Calaamadaha Camis Cast
   clear_icons_tooltip: >-
     Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo

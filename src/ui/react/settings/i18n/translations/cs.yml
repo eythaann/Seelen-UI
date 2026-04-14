@@ -89,6 +89,11 @@ discord_banner:
     nápovědu, sdílejte témata a buďte informováni o nejnovějších zprávách.
   title: Připojte se k naší komunitě
 extras:
+  backup_group: Cloudové zálohování
+  backup_last_sync: Poslední synchronizace
+  backup_never_synced: Nikdy nesynchronizováno
+  backup_sync: Synchronizujte nastavení do cloudu
+  backup_sync_description: Automaticky zálohujte a obnovujte svá nastavení prostřednictvím cloudu.
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
   exit: Ukončit

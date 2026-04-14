@@ -87,6 +87,11 @@ discord_banner:
     ይቆዩ።
   title: ማህበረሰባችንን ይቀላቀሉ
 extras:
+  backup_group: የደመና ምትኬ
+  backup_last_sync: የመጨረሻው ማመሳሰል
+  backup_never_synced: በጭራሽ አልተሰመረም።
+  backup_sync: ቅንብሮችን ከደመና ጋር አስምር
+  backup_sync_description: በራስ-ሰር ምትኬ ያስቀምጡ እና ቅንብሮችዎን በደመና በኩል ወደነበሩበት ይመልሱ።
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
   exit: ማቆም / መውጣት

@@ -89,6 +89,11 @@ discord_banner:
     bleift um neisten Neiegkeeten.
   title: Maacht mat bei eiser Gemeinschaft
 extras:
+  backup_group: Cloud Backupsatellit
+  backup_last_sync: Läscht Synchronisatioun
+  backup_never_synced: Ni synchroniséiert
+  backup_sync: Synchroniséiert Astellunge mat Wollek
+  backup_sync_description: Automatesch Backup a restauréiert Är Astellungen iwwer d'Wollek.
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
   exit: Ophalen / erausfannen

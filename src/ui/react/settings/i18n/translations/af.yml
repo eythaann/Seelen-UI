@@ -89,6 +89,11 @@ discord_banner:
     hoogte van die jongste nuus.
   title: Sluit aan by ons gemeenskap
 extras:
+  backup_group: Wolk-rugsteun
+  backup_last_sync: Laaste sinkronisering
+  backup_never_synced: Nooit gesinkroniseer nie
+  backup_sync: Sinkroniseer instellings met wolk
+  backup_sync_description: Rugsteun outomaties en herstel jou instellings via die wolk.
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
   exit: Hou op/uitgang

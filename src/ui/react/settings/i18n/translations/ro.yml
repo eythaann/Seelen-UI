@@ -89,6 +89,11 @@ discord_banner:
     și fiți la curent cu cele mai recente știri.
   title: Alăturați-vă comunității noastre
 extras:
+  backup_group: Backup în cloud
+  backup_last_sync: Ultima sincronizare
+  backup_never_synced: Nu s-a sincronizat niciodată
+  backup_sync: Sincronizați setările cu cloud
+  backup_sync_description: Faceți backup și restaurați automat setările prin cloud.
   clear_icons: Ștergeți memoria cache a pictogramelor de sistem
   clear_icons_tooltip: >-
     Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în

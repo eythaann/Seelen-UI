@@ -89,6 +89,11 @@ discord_banner:
     ngezindikimba, futhi uhlale unolwazi lwakamuva ngezindaba zakamuva.
   title: Joyina umphakathi wethu
 extras:
+  backup_group: I-Cloud Backup
+  backup_last_sync: Ukuvumelanisa kokugcina
+  backup_never_synced: Ayikaze ivumelaniswe
+  backup_sync: Vumelanisa izilungiselelo kumafu
+  backup_sync_description: Yenza isipele ngokuzenzakalelayo futhi ubuyisele izilungiselelo zakho ngefu.
   clear_icons: Sula i-Cold yesistimu ye-System
   clear_icons_tooltip: >-
     Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke

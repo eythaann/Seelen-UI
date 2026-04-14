@@ -87,6 +87,11 @@ discord_banner:
     mijaran parve bikin û bi nûçeyên herî dawî re bimînin.
   title: Tevlî Civata me bibin
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Hevdemkirina dawîn
+  backup_never_synced: Qet nehat senkronîzekirin
+  backup_sync: Mîhengên bi ewr re hevdeng bikin
+  backup_sync_description: Bi navgîniya ewr ve mîhengên xwe bixweber hilînin û sererast bikin.
   clear_icons: Îkonên pergala zelal cache
   clear_icons_tooltip: >-
     Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî

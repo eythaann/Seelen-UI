@@ -89,6 +89,11 @@ discord_banner:
     paylaşın ve en son haberlerle güncel kalın.
   title: Topluluğumuza katılın
 extras:
+  backup_group: Bulut Yedekleme
+  backup_last_sync: Son senkronizasyon
+  backup_never_synced: Hiçbir zaman senkronize edilmedi
+  backup_sync: Ayarları buluta senkronize edin
+  backup_sync_description: Ayarlarınızı bulut aracılığıyla otomatik olarak yedekleyin ve geri yükleyin.
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
   exit: Çık

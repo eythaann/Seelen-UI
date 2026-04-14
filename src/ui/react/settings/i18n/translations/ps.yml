@@ -88,6 +88,11 @@ discord_banner:
     کړئ، او د وروستي خبرونو سره تازه اوسئ.
   title: زموږ په ټولنه کې ګډون وکړئ
 extras:
+  backup_group: د کلاوډ بیک اپ
+  backup_last_sync: وروستی ترکیب
+  backup_never_synced: هیڅکله همغږي نه ده
+  backup_sync: په کلاوډ کې تنظیمات همغږي کړئ
+  backup_sync_description: په اوتومات ډول د بادل له لارې خپل تنظیمات بیک اپ او بحال کړئ.
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
   exit: پریښودل / وتل

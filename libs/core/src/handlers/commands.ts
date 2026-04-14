@@ -132,6 +132,7 @@ export enum SeelenCommand {
   GetSeelenSession = "get_seelen_session",
   SeelenLogin = "seelen_login",
   SeelenLogout = "seelen_logout",
+  GetBackupStatus = "get_backup_status",
   ClipboardGetData = "clipboard_get_data",
   ClipboardDeleteEntry = "clipboard_delete_entry",
   ClipboardClearHistory = "clipboard_clear_history",

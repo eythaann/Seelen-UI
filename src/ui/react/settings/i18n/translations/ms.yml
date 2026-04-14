@@ -89,6 +89,11 @@ discord_banner:
     dan kekalkan perkembangan terkini dengan berita terkini.
   title: Sertai Komuniti kami
 extras:
+  backup_group: Sandaran Awan
+  backup_last_sync: Penyegerakan terakhir
+  backup_never_synced: Tidak pernah disegerakkan
+  backup_sync: Segerakkan tetapan ke awan
+  backup_sync_description: Sandarkan dan pulihkan tetapan anda secara automatik melalui awan.
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
   exit: Berhenti/keluar

@@ -84,6 +84,11 @@ discord_banner:
   message: 다른 Seelen UI 사용자와 연결하고, 도움을 받고, 테마를 공유하고, 최신 뉴스를 받아보세요.
   title: 우리 커뮤니티에 가입하세요
 extras:
+  backup_group: 클라우드 백업
+  backup_last_sync: 마지막 동기화
+  backup_never_synced: 동기화되지 않음
+  backup_sync: 클라우드에 설정 동기화
+  backup_sync_description: 클라우드를 통해 설정을 자동으로 백업하고 복원합니다.
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
   exit: 종료/나가기

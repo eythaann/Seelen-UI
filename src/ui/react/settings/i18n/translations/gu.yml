@@ -89,6 +89,11 @@ discord_banner:
     નવીનતમ સમાચાર સાથે અદ્યતન રહો.
   title: અમારા સમુદાયમાં જોડાઓ
 extras:
+  backup_group: મેઘ બેકઅપ
+  backup_last_sync: છેલ્લું સમન્વયન
+  backup_never_synced: ક્યારેય સમન્વયિત નથી
+  backup_sync: મેઘ પર સુમેળ સેટિંગ્સ
+  backup_sync_description: ક્લાઉડ દ્વારા આપમેળે બેકઅપ લો અને તમારી સેટિંગ્સ પુનઃસ્થાપિત કરો.
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
   exit: છોડો/બહાર નીકળો

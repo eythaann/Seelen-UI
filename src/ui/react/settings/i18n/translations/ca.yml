@@ -89,6 +89,13 @@ discord_banner:
     obteniu ajuda, compartiu temes i estigueu al dia de les últimes notícies.
   title: Uneix-te a la nostra comunitat
 extras:
+  backup_group: Còpia de seguretat al núvol
+  backup_last_sync: Última sincronització
+  backup_never_synced: Mai sincronitzat
+  backup_sync: Sincronitza la configuració amb el núvol
+  backup_sync_description: >-
+    Feu una còpia de seguretat i restaurau automàticament la vostra configuració
+    mitjançant el núvol.
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
   exit: Deixar/sortir

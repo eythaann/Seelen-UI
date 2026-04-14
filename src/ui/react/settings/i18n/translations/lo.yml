@@ -87,6 +87,11 @@ discord_banner:
     ແບ່ງ​ປັນ​ຮູບ​ແບບ, ແລະ​ຕິດ​ຕໍ່​ກັບ​ຂ່າວ​ຫລ້າ​ສຸດ.
   title: ເຂົ້າຮ່ວມຊຸມຊົນຂອງພວກເຮົາ
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: ຊິງຄ໌ຄັ້ງສຸດທ້າຍ
+  backup_never_synced: ບໍ່ເຄີຍຊິ້ງ
+  backup_sync: ຕັ້ງຄ່າການຊິງຄ໌ກັບຄລາວ
+  backup_sync_description: ສຳຮອງຂໍ້ມູນອັດຕະໂນມັດ ແລະຟື້ນຟູການຕັ້ງຄ່າຂອງທ່ານຜ່ານຄລາວ.
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
   exit: ອອກ/ອອກ

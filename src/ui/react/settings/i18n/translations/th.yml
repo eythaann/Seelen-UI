@@ -86,6 +86,11 @@ discord_banner:
     และติดตามข่าวสารล่าสุด
   title: เข้าร่วมชุมชนของเรา
 extras:
+  backup_group: การสำรองข้อมูลบนคลาวด์
+  backup_last_sync: การซิงค์ครั้งล่าสุด
+  backup_never_synced: ไม่เคยซิงค์
+  backup_sync: ซิงค์การตั้งค่ากับคลาวด์
+  backup_sync_description: สำรองและกู้คืนการตั้งค่าของคุณโดยอัตโนมัติผ่านระบบคลาวด์
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
   exit: ออก/ออก

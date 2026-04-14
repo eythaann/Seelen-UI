@@ -89,6 +89,11 @@ discord_banner:
     dig opdateret med de seneste nyheder.
   title: Tilmeld dig vores fællesskab
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Sidste synkronisering
+  backup_never_synced: Aldrig synkroniseret
+  backup_sync: Synkroniser indstillinger til skyen
+  backup_sync_description: Sikkerhedskopier og gendan automatisk dine indstillinger via skyen.
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
   exit: Afslut/exit

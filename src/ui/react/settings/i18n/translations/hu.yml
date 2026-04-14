@@ -88,6 +88,13 @@ discord_banner:
     meg témákat, és maradjon naprakész a legfrissebb hírekről.
   title: Csatlakozz közösségünkhöz
 extras:
+  backup_group: Biztonsági mentés a felhőből
+  backup_last_sync: Utolsó szinkronizálás
+  backup_never_synced: Soha nem szinkronizált
+  backup_sync: Szinkronizálja a beállításokat a felhőbe
+  backup_sync_description: >-
+    A beállítások automatikus biztonsági mentése és visszaállítása a felhőn
+    keresztül.
   clear_icons: Rendszerikonok gyorsítótárának törlése
   clear_icons_tooltip: >-
     Újraindítás szükséges lehet ahhoz, hogy az összes widget teljes mértékben

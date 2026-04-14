@@ -291,6 +291,9 @@ slu_commands_declaration! {
     SeelenLogin = seelen_login(),
     SeelenLogout = seelen_logout(),
 
+    // Cloud Backup
+    GetBackupStatus = get_backup_status() -> BackupStatus,
+
     // Clipboard
     ClipboardGetData = clipboard_get_data() -> ClipboardData,
     ClipboardDeleteEntry = clipboard_delete_entry(id: String),

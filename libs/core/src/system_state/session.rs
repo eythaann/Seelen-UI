@@ -13,3 +13,12 @@ pub struct SeelenSession {
     pub permissions: Vec<String>,
     pub roles: Vec<String>,
 }
+
+/// Status of the cloud backup sync, exposed to the UI.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+pub struct BackupStatus {
+    /// RFC-3339 timestamp of the last successful sync, or `None` if never synced.
+    pub last_sync: Option<String>,
+}

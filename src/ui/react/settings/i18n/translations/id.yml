@@ -89,6 +89,11 @@ discord_banner:
     dan ikuti terus berita terkini.
   title: Bergabunglah dengan Komunitas kami
 extras:
+  backup_group: Cadangan Awan
+  backup_last_sync: Sinkronisasi terakhir
+  backup_never_synced: Tidak pernah disinkronkan
+  backup_sync: Sinkronkan pengaturan ke cloud
+  backup_sync_description: Cadangkan dan pulihkan pengaturan Anda secara otomatis melalui cloud.
   clear_icons: Menghapus Cache Ikon Sistem
   clear_icons_tooltip: >-
     Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada

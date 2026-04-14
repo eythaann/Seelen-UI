@@ -89,6 +89,13 @@ discord_banner:
     temas ir gaukite naujausias naujienas.
   title: Prisijunkite prie mūsų bendruomenės
 extras:
+  backup_group: Atsarginė kopija debesyje
+  backup_last_sync: Paskutinis sinchronizavimas
+  backup_never_synced: Niekada nesinchronizuotas
+  backup_sync: Sinchronizuoti nustatymus su debesimi
+  backup_sync_description: >-
+    Automatiškai kurkite atsargines kopijas ir atkurkite nustatymus naudodami
+    debesį.
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
   exit: Mesti/išeiti

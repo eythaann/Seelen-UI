@@ -1,5 +1,7 @@
 use std::sync::Once;
 
+use seelen_core::system_state::BackupStatus;
+
 use crate::session::application::{SessionManager, SessionManagerEvent};
 
 use super::application::run_cloud_sync;
@@ -25,4 +27,9 @@ pub fn start_backup_sync() {
     crate::get_tokio_handle().spawn(async {
         run_cloud_sync().await;
     });
+}
+
+#[tauri::command(async)]
+pub fn get_backup_status() -> BackupStatus {
+    super::application::get_backup_status()
 }

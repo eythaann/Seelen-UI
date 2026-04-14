@@ -89,6 +89,11 @@ discord_banner:
     partagez des thèmes et restez informé des dernières nouvelles.
   title: Rejoignez notre communauté
 extras:
+  backup_group: Sauvegarde dans le cloud
+  backup_last_sync: Dernière synchronisation
+  backup_never_synced: Jamais synchronisé
+  backup_sync: Synchroniser les paramètres avec le cloud
+  backup_sync_description: Sauvegardez et restaurez automatiquement vos paramètres via le cloud.
   clear_icons: Effacer le cache des icônes du système
   clear_icons_tooltip: >-
     Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les

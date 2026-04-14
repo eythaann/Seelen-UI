@@ -121,6 +121,9 @@ slu_events_declaration! {
     // Seelen Session
     SeelenSessionChanged(Option<SeelenSession>) as "session::changed",
 
+    // Cloud Backup
+    SeelenBackupStatusChanged(BackupStatus) as "backup::status-changed",
+
     // Clipboard
     ClipboardDataChanged(ClipboardData) as "clipboard::data-changed",
 }

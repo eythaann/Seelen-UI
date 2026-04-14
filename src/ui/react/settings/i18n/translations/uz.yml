@@ -89,6 +89,11 @@ discord_banner:
     mavzularni baham ko'ring va so'nggi yangiliklardan xabardor bo'ling.
   title: Hamjamiyatimizga qo'shiling
 extras:
+  backup_group: Bulutli zaxira
+  backup_last_sync: Oxirgi sinxronlash
+  backup_never_synced: Hech qachon sinxronlanmagan
+  backup_sync: Sozlamalarni bulut bilan sinxronlashtiring
+  backup_sync_description: Sozlamalaringizni bulut orqali avtomatik ravishda zaxiralang va tiklang.
   clear_icons: Tozalash tizimi piktogrammalari kesh
   clear_icons_tooltip: >-
     Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi

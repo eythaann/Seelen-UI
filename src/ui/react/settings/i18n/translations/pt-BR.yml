@@ -89,6 +89,11 @@ discord_banner:
     temas e mantenha-se atualizado com as últimas notícias.
   title: Junte-se à nossa comunidade
 extras:
+  backup_group: Backup na nuvem
+  backup_last_sync: Última sincronização
+  backup_never_synced: Nunca sincronizado
+  backup_sync: Sincronizar configurações com a nuvem
+  backup_sync_description: Faça backup e restaure automaticamente suas configurações por meio da nuvem.
   clear_icons: Limpar cache de ícones do sistema
   clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
   exit: Sair

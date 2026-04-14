@@ -89,6 +89,13 @@ discord_banner:
     manténgase actualizado con las últimas noticias.
   title: Únase a nuestra comunidad
 extras:
+  backup_group: Copia de seguridad en la nube
+  backup_last_sync: Última sincronización
+  backup_never_synced: Nunca sincronizado
+  backup_sync: Sincronizar la configuración con la nube
+  backup_sync_description: >-
+    Realice una copia de seguridad y restaure automáticamente su configuración a
+    través de la nube.
   clear_icons: Borrar caché de iconos del sistema
   clear_icons_tooltip: >-
     Podría ser necesario reiniciar el sistema para que surta efecto en todos los

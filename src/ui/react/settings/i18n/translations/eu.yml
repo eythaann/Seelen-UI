@@ -89,6 +89,11 @@ discord_banner:
     egon azken berrien berri.
   title: Sartu gure komunitatean
 extras:
+  backup_group: Hodeiko babeskopia
+  backup_last_sync: Azken sinkronizazioa
+  backup_never_synced: Inoiz sinkronizatuta
+  backup_sync: Sinkronizatu ezarpenak hodeiarekin
+  backup_sync_description: Egin automatikoki babeskopiak eta leheneratu ezarpenak hodeiaren bidez.
   clear_icons: Garbitu sistemaren ikonoak cachea
   clear_icons_tooltip: Berrabiarazi behar da widget guztietan erabat indarrean egon dadin
   exit: Irten / irten

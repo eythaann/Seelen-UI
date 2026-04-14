@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 
+use seelen_core::system_state::BackupStatus;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -31,6 +32,10 @@ fn pending_flag_path() -> PathBuf {
     SEELEN_COMMON.app_data_dir().join(".backup_pending")
 }
 
+fn last_sync_path() -> PathBuf {
+    SEELEN_COMMON.app_data_dir().join(".backup_last_sync")
+}
+
 fn mark_sync_pending() {
     let _ = std::fs::write(pending_flag_path(), b"");
 }
@@ -43,11 +48,45 @@ fn is_sync_pending() -> bool {
     pending_flag_path().exists()
 }
 
+fn write_last_sync_now() {
+    use time::{format_description::well_known::Rfc3339, OffsetDateTime};
+    let now = OffsetDateTime::now_utc()
+        .format(&Rfc3339)
+        .unwrap_or_default();
+    let _ = std::fs::write(last_sync_path(), now.as_bytes());
+}
+
+pub fn read_last_sync() -> Option<String> {
+    std::fs::read_to_string(last_sync_path()).ok()
+}
+
+fn emit_status_changed() {
+    use crate::app::emit_to_webviews;
+    use seelen_core::handlers::SeelenEvent;
+    let status = BackupStatus {
+        last_sync: read_last_sync(),
+    };
+    emit_to_webviews(SeelenEvent::SeelenBackupStatusChanged, status);
+}
+
+pub fn get_backup_status() -> BackupStatus {
+    BackupStatus {
+        last_sync: read_last_sync(),
+    }
+}
+
 // ─── Public entry points ──────────────────────────────────────────────────────
+
+fn is_backup_sync_enabled() -> bool {
+    FULL_STATE.load().settings.backup_sync_enabled
+}
 
 /// Fire-and-forget upload triggered after every local settings save.
 pub fn on_settings_saved() {
     crate::get_tokio_handle().spawn(async {
+        if !is_backup_sync_enabled() {
+            return;
+        }
         if !SessionManager::instance().lock().has_cloud_backup_access() {
             return;
         }
@@ -56,6 +95,8 @@ pub fn on_settings_saved() {
             mark_sync_pending();
         } else {
             clear_sync_pending();
+            write_last_sync_now();
+            emit_status_changed();
         }
     });
 }
@@ -63,6 +104,9 @@ pub fn on_settings_saved() {
 /// Called at startup and on session-change. Reconciles local settings with the
 /// cloud backup and either uploads or downloads depending on which is newer.
 pub async fn run_cloud_sync() {
+    if !is_backup_sync_enabled() {
+        return;
+    }
     if !SessionManager::instance().lock().has_cloud_backup_access() {
         return;
     }
@@ -119,6 +163,8 @@ async fn reconcile() -> crate::error::Result<()> {
         log::info!("No cloud backup exists yet; uploading local settings");
         upload_settings().await?;
         clear_sync_pending();
+        write_last_sync_now();
+        emit_status_changed();
         return Ok(());
     }
     if !resp.status().is_success() {
@@ -137,6 +183,8 @@ async fn reconcile() -> crate::error::Result<()> {
         log::info!("Cloud backup is newer; downloading and applying");
         download_and_apply(doc.data)?;
     }
+    write_last_sync_now();
+    emit_status_changed();
     Ok(())
 }
 

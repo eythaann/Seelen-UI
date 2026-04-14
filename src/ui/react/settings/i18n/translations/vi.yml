@@ -88,6 +88,11 @@ discord_banner:
     và cập nhật những tin tức mới nhất.
   title: Tham gia cộng đồng của chúng tôi
 extras:
+  backup_group: Sao lưu đám mây
+  backup_last_sync: Đồng bộ hóa lần cuối
+  backup_never_synced: Chưa bao giờ được đồng bộ hóa
+  backup_sync: Đồng bộ hóa cài đặt với đám mây
+  backup_sync_description: Tự động sao lưu và khôi phục cài đặt của bạn qua đám mây.
   clear_icons: Xóa bộ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
     Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các

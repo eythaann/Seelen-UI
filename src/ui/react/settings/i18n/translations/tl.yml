@@ -91,6 +91,13 @@ discord_banner:
     tema, at manatiling napapanahon sa pinakabagong balita.
   title: Sumali sa aming Komunidad
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Huling pag-sync
+  backup_never_synced: Hindi kailanman naka-sync
+  backup_sync: I-sync ang mga setting sa cloud
+  backup_sync_description: >-
+    Awtomatikong i-back up at i-restore ang iyong mga setting sa pamamagitan ng
+    cloud.
   clear_icons: I -clear ang Mga Icon ng System Cache
   clear_icons_tooltip: >-
     Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan

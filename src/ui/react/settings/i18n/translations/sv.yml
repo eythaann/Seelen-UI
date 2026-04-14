@@ -89,6 +89,11 @@ discord_banner:
     uppdaterad med de senaste nyheterna.
   title: Gå med i vår community
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Senaste synkronisering
+  backup_never_synced: Aldrig synkat
+  backup_sync: Synkronisera inställningar till molnet
+  backup_sync_description: Säkerhetskopiera och återställ dina inställningar automatiskt via molnet.
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
   exit: Sluta/avsluta

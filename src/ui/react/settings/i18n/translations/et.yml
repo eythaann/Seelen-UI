@@ -88,6 +88,11 @@ discord_banner:
     jagage teemasid ja olge kursis viimaste uudistega.
   title: Liituge meie kogukonnaga
 extras:
+  backup_group: Pilvevarundamine
+  backup_last_sync: Viimane sünkroonimine
+  backup_never_synced: Pole kunagi sünkroonitud
+  backup_sync: Sünkrooni seaded pilvega
+  backup_sync_description: Varundage ja taastage seaded automaatselt pilve kaudu.
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
   exit: Lõpeta/väljumine

@@ -88,6 +88,11 @@ discord_banner:
     සහ නවතම පුවත් සමඟ යාවත්කාලීනව සිටින්න.
   title: අපගේ ප්‍රජාවට එක්වන්න
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: අවසාන සමමුහුර්ත කිරීම
+  backup_never_synced: කිසිදා සමමුහුර්ත කර නැත
+  backup_sync: වලාකුළු වෙත සැකසුම් සමමුහුර්ත කරන්න
+  backup_sync_description: වලාකුළ හරහා ඔබගේ සැකසුම් ස්වයංක්‍රීයව උපස්ථ කර ප්‍රතිසාධනය කරන්න.
   clear_icons: පැහැදිලි පද්ධති අයිකන හැඹිලිය
   clear_icons_tooltip: >-
     සියලුම විජට් සඳහා සම්පූර්ණයෙන්ම බලාත්මක වීමට නැවත ආරම්භ කිරීම අවශ්ය විය

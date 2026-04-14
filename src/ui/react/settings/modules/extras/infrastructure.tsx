@@ -8,10 +8,13 @@ import { EnvConfig } from "../shared/config/infra.ts";
 import cs from "./infra.module.css";
 
 import {
+  $backupStatus,
+  getBackupSyncEnabled,
   getDrpc,
   getStreamingMode,
   getUpdaterSettings,
   patchUpdaterSettings,
+  setBackupSyncEnabled,
   setDrpc,
   setStreamingMode,
 } from "./application.ts";
@@ -19,6 +22,7 @@ import {
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { UpdateChannel } from "@seelen-ui/lib/types";
 import { SessionView } from "./session/infra.tsx";
+import { session } from "../../state/session.ts";
 
 const [isDevMode, isMsixBuild, isFixed] = await Promise.all([
   invoke(SeelenCommand.IsDevMode),
@@ -30,6 +34,8 @@ export function Information() {
   const drpc = getDrpc();
   const streamingMode = getStreamingMode();
   const updaterSettings = getUpdaterSettings();
+  const backupSyncEnabled = getBackupSyncEnabled();
+  const backupStatus = $backupStatus.value;
 
   const { t } = useTranslation();
 
@@ -44,6 +50,14 @@ export function Information() {
   function onChangeUpdateChannel(channel: UpdateChannel) {
     patchUpdaterSettings({ channel });
   }
+
+  function onToggleBackupSync(value: boolean) {
+    setBackupSyncEnabled(value);
+  }
+
+  const lastSyncLabel = backupStatus.lastSync
+    ? new Date(backupStatus.lastSync).toLocaleString()
+    : t("extras.backup_never_synced");
 
   return (
     <div className={cs.info}>
@@ -78,6 +92,25 @@ export function Information() {
           />
         </SettingsSubGroup>
       </SettingsGroup>
+
+      {session.value && (
+        <SettingsGroup>
+          <SettingsSubGroup
+            label={
+              <SettingsOption
+                label={t("extras.backup_group")}
+                action={<span className={cs.version}>{lastSyncLabel}</span>}
+              />
+            }
+          >
+            <SettingsOption
+              label={t("extras.backup_sync")}
+              description={t("extras.backup_sync_description")}
+              action={<Switch value={backupSyncEnabled} onChange={onToggleBackupSync} />}
+            />
+          </SettingsSubGroup>
+        </SettingsGroup>
+      )}
 
       <SettingsGroup>
         <SettingsOption>

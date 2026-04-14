@@ -88,6 +88,11 @@ discord_banner:
     usasishe habari za hivi punde.
   title: Jiunge na Jumuiya yetu
 extras:
+  backup_group: Hifadhi Nakala ya Wingu
+  backup_last_sync: Usawazishaji wa mwisho
+  backup_never_synced: Haijasawazishwa kamwe
+  backup_sync: Sawazisha mipangilio kwenye wingu
+  backup_sync_description: Hifadhi nakala kiotomatiki na urejeshe mipangilio yako kupitia wingu.
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
   exit: Acha/exit

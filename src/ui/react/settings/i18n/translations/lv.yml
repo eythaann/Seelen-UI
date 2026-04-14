@@ -89,6 +89,11 @@ discord_banner:
     motīvus un esiet informēts par jaunākajām ziņām.
   title: Pievienojieties mūsu kopienai
 extras:
+  backup_group: Mākoņa dublēšana
+  backup_last_sync: Pēdējā sinhronizācija
+  backup_never_synced: Nekad nav sinhronizēts
+  backup_sync: Sinhronizējiet iestatījumus ar mākoni
+  backup_sync_description: Automātiski dublējiet un atjaunojiet iestatījumus, izmantojot mākoni.
   clear_icons: Iztīrīt sistēmas ikonu kešatmiņu
   clear_icons_tooltip: >-
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos

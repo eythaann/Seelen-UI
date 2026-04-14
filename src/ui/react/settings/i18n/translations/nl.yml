@@ -89,6 +89,11 @@ discord_banner:
     blijf op de hoogte van het laatste nieuws.
   title: Word lid van onze gemeenschap
 extras:
+  backup_group: Cloud-back-up
+  backup_last_sync: Laatste synchronisatie
+  backup_never_synced: Nooit gesynchroniseerd
+  backup_sync: Synchroniseer instellingen naar de cloud
+  backup_sync_description: Maak automatisch een back-up van uw instellingen en herstel ze via de cloud.
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
   exit: Stop/exit

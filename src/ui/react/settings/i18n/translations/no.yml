@@ -89,6 +89,11 @@ discord_banner:
     oppdatert med de siste nyhetene.
   title: Bli med i fellesskapet vårt
 extras:
+  backup_group: Cloud Backup
+  backup_last_sync: Siste synkronisering
+  backup_never_synced: Aldri synkronisert
+  backup_sync: Synkroniser innstillinger til skyen
+  backup_sync_description: Sikkerhetskopier og gjenopprett innstillingene dine automatisk via skyen.
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
   exit: Avslutt/avslutte

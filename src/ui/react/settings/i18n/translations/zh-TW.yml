@@ -82,6 +82,11 @@ discord_banner:
   message: 與其他 Seelen UI 用戶聯繫、獲取協助、分享主題並了解最新消息。
   title: 加入我們的社區
 extras:
+  backup_group: 雲端備份
+  backup_last_sync: 上次同步
+  backup_never_synced: 從未同步過
+  backup_sync: 將設定同步到雲端
+  backup_sync_description: 透過雲端自動備份和還原您的設定。
   clear_icons: 清除系統圖標緩存
   clear_icons_tooltip: 可能需要重新啟動才能完全生效所有小部件
   exit: 退出/退出

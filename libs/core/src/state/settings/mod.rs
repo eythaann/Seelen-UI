@@ -465,6 +465,8 @@ pub struct Settings {
     /// Streaming mode: replaces sensitive information (e.g. emails) with placeholders
     /// to avoid exposing personal data in recordings or screenshots.
     pub streaming_mode: bool,
+    /// Enable or disable automatic cloud backup sync.
+    pub backup_sync_enabled: bool,
 }
 
 impl Default for Settings {
@@ -490,6 +492,7 @@ impl Default for Settings {
             hardware_acceleration: true,
             polling_interval: 3,
             streaming_mode: false,
+            backup_sync_enabled: true,
         }
     }
 }

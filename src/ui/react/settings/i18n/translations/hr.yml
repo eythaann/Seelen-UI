@@ -89,6 +89,13 @@ discord_banner:
     ostanite u tijeku s najnovijim vijestima.
   title: Pridružite se našoj zajednici
 extras:
+  backup_group: Sigurnosna kopija u oblaku
+  backup_last_sync: Zadnja sinkronizacija
+  backup_never_synced: Nikad sinkronizirano
+  backup_sync: Sinkronizirajte postavke s oblakom
+  backup_sync_description: >-
+    Automatski napravite sigurnosnu kopiju i vratite svoje postavke putem
+    oblaka.
   clear_icons: Očistite predmemoriju ikona sustava
   clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
   exit: Prestati/izaći

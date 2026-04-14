@@ -89,6 +89,11 @@ discord_banner:
     teemoja ja pysy ajan tasalla viimeisimmistä uutisista.
   title: Liity yhteisöömme
 extras:
+  backup_group: Pilvivarmuuskopio
+  backup_last_sync: Viimeisin synkronointi
+  backup_never_synced: Ei koskaan synkronoitu
+  backup_sync: Synkronoi asetukset pilveen
+  backup_sync_description: Varmuuskopioi ja palauta asetuksesi automaattisesti pilven kautta.
   clear_icons: Tyhjennä järjestelmän kuvakkeiden välimuisti
   clear_icons_tooltip: >-
     Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
