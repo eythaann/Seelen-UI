@@ -3,12 +3,13 @@ use std::sync::Arc;
 use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceKind,
-    state::{Theme, Widget},
+    state::{settings::shortcuts::resolve_shortcuts, Theme, Widget},
 };
+use slu_ipc::messages::SvcAction;
 
 use crate::{
-    app::emit_to_webviews, error::Result, session::application::SessionManager,
-    widgets::manager::WIDGET_MANAGER,
+    app::emit_to_webviews, cli::ServicePipe, error::Result, session::application::SessionManager,
+    state::application::FULL_STATE, widgets::manager::WIDGET_MANAGER,
 };
 
 use super::ResourceManager;
@@ -83,8 +84,15 @@ impl ResourceManager {
 
 impl ResourceManager {
     pub fn emit_widgets(&self) -> Result<()> {
-        emit_to_webviews(SeelenEvent::StateWidgetsChanged, self.widgets());
+        let widgets = self.widgets();
+        emit_to_webviews(SeelenEvent::StateWidgetsChanged, widgets.clone());
+
         WIDGET_MANAGER.refresh()?;
+
+        let state = FULL_STATE.load();
+        let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
+        let resolved = resolve_shortcuts(&state.settings, &widget_refs);
+        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
         Ok(())
     }
 
