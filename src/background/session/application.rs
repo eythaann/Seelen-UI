@@ -76,13 +76,13 @@ impl SessionManager {
     }
 
     /// Synchronous init: reads persisted tokens and restores the session.
-    /// If the token is expired (or missing), `schedule_refresh(0)` fires
-    /// immediately so a refresh is attempted in the background right away;
-    /// any cached session data remains available for offline use in the meantime.
+    /// A refresh is always scheduled immediately on startup so that users who
+    /// upgraded their plan see the new permissions as soon as the app restarts.
+    /// Any cached session data remains available for offline use in the meantime.
     fn load() -> Self {
         match Self::read_stored_session() {
-            Ok((session, payload)) => {
-                Self::schedule_refresh(payload.secs_until_expiry());
+            Ok((session, _payload)) => {
+                Self::schedule_refresh(0);
                 SessionManager {
                     session: Some(session),
                     pending_state: None,
