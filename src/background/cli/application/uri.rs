@@ -158,6 +158,12 @@ async fn download_resource(url: &str) -> Result<()> {
 
 async fn _download_resource(url: &str) -> Result<SluResourceFile> {
     let res = SessionManager::authed_get(url).send().await?;
+    if !res.status().is_success() {
+        let status = res.status();
+        let body = res.text().await.unwrap_or_default();
+        return Err(format!("{status} - {body}").into());
+    }
+
     let file = res.json::<SluResourceFile>().await?;
     let saved_path = store_file_on_respective_user_folder(&file)?;
 
