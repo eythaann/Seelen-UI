@@ -29,6 +29,7 @@
 - can't drop toolbar items into the center when the container is empty.
 - can't drag items with inner buttons on toolbar widget.
 - flyouts widget showing old notifications when new one dismissed.
+- no updating memory after file resource deletion.
 
 ## [2.5.7]
 

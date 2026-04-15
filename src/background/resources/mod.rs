@@ -160,19 +160,19 @@ impl ResourceManager {
         match kind {
             ResourceKind::Theme => self
                 .themes
-                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::Plugin => self
                 .plugins
-                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::Widget => self
                 .widgets
-                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::IconPack => self
                 .icon_packs
-                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::Wallpaper => self
                 .wallpapers
-                .retain(|_, v| !self.manual.contains(&v.metadata.internal.path)),
+                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
             ResourceKind::SoundPack => {
                 // feature not implemented
             }

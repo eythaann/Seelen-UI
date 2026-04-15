@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use seelen_core::{state::SettingsBackup, system_state::BackupStatus};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::{
     session::application::SessionManager, state::application::FULL_STATE,
@@ -21,24 +21,43 @@ struct BackupPayload {
     data: serde_json::Value,
 }
 
-fn pending_flag_path() -> PathBuf {
-    SEELEN_COMMON.app_data_dir().join(".backup_pending")
+#[derive(Default, Serialize, Deserialize)]
+struct BackupState {
+    pending: bool,
+    last_sync: Option<String>,
 }
 
-fn last_sync_path() -> PathBuf {
-    SEELEN_COMMON.app_data_dir().join(".backup_last_sync")
+fn backup_state_path() -> PathBuf {
+    SEELEN_COMMON.app_data_dir().join(".backup")
+}
+
+fn read_backup_state() -> BackupState {
+    std::fs::read_to_string(backup_state_path())
+        .ok()
+        .and_then(|s| serde_json::from_str(&s).ok())
+        .unwrap_or_default()
+}
+
+fn write_backup_state(state: &BackupState) {
+    if let Ok(json) = serde_json::to_string(state) {
+        let _ = std::fs::write(backup_state_path(), json.as_bytes());
+    }
 }
 
 fn mark_sync_pending() {
-    let _ = std::fs::write(pending_flag_path(), b"");
+    let mut state = read_backup_state();
+    state.pending = true;
+    write_backup_state(&state);
 }
 
 fn clear_sync_pending() {
-    let _ = std::fs::remove_file(pending_flag_path());
+    let mut state = read_backup_state();
+    state.pending = false;
+    write_backup_state(&state);
 }
 
 fn is_sync_pending() -> bool {
-    pending_flag_path().exists()
+    read_backup_state().pending
 }
 
 fn write_last_sync_now() {
@@ -46,11 +65,13 @@ fn write_last_sync_now() {
     let now = OffsetDateTime::now_utc()
         .format(&Rfc3339)
         .unwrap_or_default();
-    let _ = std::fs::write(last_sync_path(), now.as_bytes());
+    let mut state = read_backup_state();
+    state.last_sync = Some(now);
+    write_backup_state(&state);
 }
 
 pub fn read_last_sync() -> Option<String> {
-    std::fs::read_to_string(last_sync_path()).ok()
+    read_backup_state().last_sync
 }
 
 fn emit_status_changed() {
@@ -164,6 +185,7 @@ async fn reconcile() -> crate::error::Result<()> {
         emit_status_changed();
         return Ok(());
     }
+
     if !resp.status().is_success() {
         return Err(format!("backup fetch failed with status {}", resp.status()).into());
     }
@@ -195,5 +217,5 @@ fn local_settings_mtime_secs() -> DateTime<Utc> {
         .metadata()
         .and_then(|m| m.modified())
         .map(|t| t.into())
-        .unwrap_or_else(|_| DateTime::from_timestamp_nanos(i64::MAX))
+        .unwrap_or(DateTime::UNIX_EPOCH)
 }

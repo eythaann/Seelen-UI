@@ -23,9 +23,10 @@ impl FullState {
             self.settings = Settings::load(path)?;
             self.migration_v2_5_0()?;
             self.sanitize_wallpaper_collections();
-        } else {
-            self.write_settings()?; // create initial settings file
         }
+        // If the file doesn't exist yet, keep the in-memory defaults.
+        // Writing defaults at startup would give the file a fresh mtime and
+        // cause cloud-backup reconciliation to upload defaults over a real backup.
         Ok(())
     }
 

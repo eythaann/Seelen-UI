@@ -137,7 +137,7 @@ impl FullState {
         }
 
         if themes_changed {
-            log::info!("Theme changed");
+            log::info!("Themes changed");
             RESOURCES.load_all_of_type(ResourceKind::Theme)?;
             RESOURCES.emit_themes();
         }
@@ -196,19 +196,9 @@ impl FullState {
             },
         )?;
 
-        let paths: Vec<&Path> = vec![
-            SEELEN_COMMON.settings_path(),
-            SEELEN_COMMON.user_icons_path(),
-            SEELEN_COMMON.user_themes_path(),
-            SEELEN_COMMON.user_plugins_path(),
-            SEELEN_COMMON.user_widgets_path(),
-            SEELEN_COMMON.user_wallpapers_path(),
-        ];
-
-        for path in paths {
-            debouncer.watcher().watch(path, RecursiveMode::Recursive)?;
-        }
-
+        debouncer
+            .watcher()
+            .watch(SEELEN_COMMON.app_data_dir(), RecursiveMode::Recursive)?;
         self.watcher = Arc::new(Some(debouncer));
         Ok(())
     }
