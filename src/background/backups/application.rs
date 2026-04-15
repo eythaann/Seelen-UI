@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
-use seelen_core::system_state::BackupStatus;
-use serde::{Deserialize, Serialize};
+use seelen_core::{state::SettingsBackup, system_state::BackupStatus};
+use serde::Serialize;
 
 use crate::{
     session::application::SessionManager, state::application::FULL_STATE,
@@ -19,13 +19,6 @@ const BACKUP_NAME: &str = "seelen-ui-settings";
 struct BackupPayload {
     name: &'static str,
     data: serde_json::Value,
-}
-
-#[derive(Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct BackupDocument {
-    data: serde_json::Value,
-    updated_at: String,
 }
 
 fn pending_flag_path() -> PathBuf {
@@ -91,7 +84,7 @@ pub fn on_settings_saved() {
             return;
         }
         if let Err(e) = upload_settings().await {
-            log::warn!("Cloud backup upload failed (will retry on next startup): {e:?}");
+            log::error!("Cloud backup upload failed (will retry on next startup): {e:?}");
             mark_sync_pending();
         } else {
             clear_sync_pending();
@@ -111,7 +104,7 @@ pub async fn run_cloud_sync() {
         return;
     }
     if let Err(e) = reconcile().await {
-        log::warn!("Cloud backup sync failed: {e:?}");
+        log::error!("Cloud backup sync failed: {e:?}");
     }
 }
 
@@ -123,17 +116,21 @@ async fn upload_settings() -> crate::error::Result<()> {
         let state = FULL_STATE.load();
         serde_json::to_value(&state.settings)?
     };
-    let url = format!("{PRODUCT_BASE_URL}/backup/");
-    let resp = SessionManager::authed_post(&url)
+    let url = format!("{PRODUCT_BASE_URL}/backup");
+    let res = SessionManager::authed_post(&url)
         .json(&BackupPayload {
             name: BACKUP_NAME,
             data,
         })
         .send()
         .await?;
-    if !resp.status().is_success() {
-        return Err(format!("backup upload failed with status {}", resp.status()).into());
+
+    if !res.status().is_success() {
+        let status = res.status();
+        let body = res.text().await.unwrap_or_default();
+        return Err(format!("backup upload failed: {status} - {body}").into());
     }
+
     log::debug!("Cloud backup uploaded successfully");
     Ok(())
 }
@@ -171,8 +168,8 @@ async fn reconcile() -> crate::error::Result<()> {
         return Err(format!("backup fetch failed with status {}", resp.status()).into());
     }
 
-    let doc: BackupDocument = resp.json().await?;
-    let cloud_secs = parse_rfc3339_secs(&doc.updated_at);
+    let doc: SettingsBackup = resp.json().await?;
+    let cloud_secs = doc.updated_at;
     let local_secs = local_settings_mtime_secs();
 
     if is_sync_pending() || local_secs > cloud_secs {
@@ -190,22 +187,13 @@ async fn reconcile() -> crate::error::Result<()> {
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-fn parse_rfc3339_secs(ts: &str) -> u64 {
-    use time::{format_description::well_known::Rfc3339, OffsetDateTime};
-    OffsetDateTime::parse(ts, &Rfc3339)
-        .map(|dt| dt.unix_timestamp() as u64)
-        .unwrap_or(0)
-}
+use seelen_core::chrono::{DateTime, Utc};
 
-fn local_settings_mtime_secs() -> u64 {
+fn local_settings_mtime_secs() -> DateTime<Utc> {
     SEELEN_COMMON
         .settings_path()
         .metadata()
         .and_then(|m| m.modified())
-        .map(|t| {
-            t.duration_since(std::time::UNIX_EPOCH)
-                .unwrap_or_default()
-                .as_secs()
-        })
-        .unwrap_or(u64::MAX)
+        .map(|t| t.into())
+        .unwrap_or_else(|_| DateTime::from_timestamp_nanos(i64::MAX))
 }

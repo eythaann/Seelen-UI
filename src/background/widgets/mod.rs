@@ -98,7 +98,7 @@ pub fn trigger_widget(mut payload: WidgetTriggerPayload) -> Result<()> {
     }
 
     if !WIDGET_MANAGER.is_ready(&label) {
-        log::warn!("Trigger postponed, because widget instance is not ready: {label}");
+        log::trace!("Trigger postponed, because widget instance is not ready: {label}");
         PENDING_TRIGGERS.upsert(label.clone(), payload);
 
         WIDGET_MANAGER.groups.get(&label.widget_id, |c| {

@@ -11,7 +11,7 @@ const REGISTRY_SUBKEY: &str = "Software\\Seelen UI\\Analytics";
 const INSTALL_ID_VALUE: &str = "InstallId";
 
 #[cfg(dev)]
-const TELEMETRY_ENDPOINT: &str = "https://telemetry.local.seelen.io/events";
+const TELEMETRY_ENDPOINT: &str = "https://telemetry.staging.seelen.io/events";
 #[cfg(not(dev))]
 const TELEMETRY_ENDPOINT: &str = "https://telemetry.seelen.io/events";
 
