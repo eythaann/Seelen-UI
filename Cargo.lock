@@ -4839,7 +4839,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-core"
-version = "2.5.8"
+version = "2.5.9"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -4860,7 +4860,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "2.5.8"
+version = "2.5.9"
 dependencies = [
  "arc-swap",
  "backtrace",
