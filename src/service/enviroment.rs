@@ -1,6 +1,6 @@
 use winreg::{
-    enums::{HKEY_LOCAL_MACHINE, KEY_ALL_ACCESS},
-    RegKey,
+    enums::{HKEY_LOCAL_MACHINE, KEY_ALL_ACCESS, REG_EXPAND_SZ},
+    RegKey, RegValue,
 };
 
 use crate::error::Result;
@@ -19,6 +19,25 @@ pub fn open_machine_enviroment() -> Result<RegKey> {
         KEY_ALL_ACCESS,
     )?;
     Ok(enviroment)
+}
+
+// set_value() always writes REG_SZ, which prevents Windows from expanding
+// %SystemRoot%\system32 and other variable-based entries, corrupting the PATH.
+// The system PATH must be REG_EXPAND_SZ so Windows expands variables correctly.
+fn set_path_value(enviroment: &RegKey, value: String) -> Result<()> {
+    let bytes = value
+        .encode_utf16()
+        .chain(std::iter::once(0u16))
+        .flat_map(|c| c.to_le_bytes())
+        .collect();
+    enviroment.set_raw_value(
+        "Path",
+        &RegValue {
+            bytes,
+            vtype: REG_EXPAND_SZ,
+        },
+    )?;
+    Ok(())
 }
 
 /// add the installation directory to the PATH environment variable
@@ -40,7 +59,7 @@ pub fn add_installation_dir_to_path() -> Result<()> {
     if !paths.contains(&install_folder) {
         log::trace!("Adding installation directory to PATH environment variable");
         paths.push(install_folder);
-        enviroment.set_value("Path", &paths.join(";"))?;
+        set_path_value(&enviroment, paths.join(";"))?;
     }
     Ok(())
 }
@@ -64,7 +83,7 @@ pub fn remove_installation_dir_from_path() -> Result<()> {
     if paths.contains(&install_folder) {
         log::trace!("Removing installation directory from PATH environment variable");
         paths.retain(|p| p != &install_folder);
-        enviroment.set_value("Path", &paths.join(";"))?;
+        set_path_value(&enviroment, paths.join(";"))?;
     }
     Ok(())
 }

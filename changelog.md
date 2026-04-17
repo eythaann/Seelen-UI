@@ -19,6 +19,7 @@
 - no player thumbnail on song change.
 - settings window stealing focus on reload.
 - connect/disconnect buttons on bluetooth module not working.
+- broken PATH env after installing or uninstalling the app via exe setup.
 
 ## [2.5.8]
 
