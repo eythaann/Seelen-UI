@@ -28,6 +28,8 @@ const REMOVAL_GRACE_MS: u128 = 1500;
 /// Delay (ms) before sending CleanRequested after marking a player for removal.
 /// Must be strictly greater than REMOVAL_GRACE_MS so elapsed > threshold when processed.
 const REMOVAL_SCHEDULE_MS: u64 = 2000;
+/// Delay (ms) before retrying thumbnail fetch after a missing thumbnail.
+const THUMBNAIL_RETRY_DELAY_MS: u64 = 300;
 
 fn timeline_from_raw(
     raw: GlobalSystemMediaTransportControlsSessionTimelineProperties,
@@ -61,6 +63,9 @@ pub enum PlayersEvent {
     TimelineChanged {
         id: String,
         timeline: MediaPlayerTimeline,
+    },
+    ThumbnailRetry {
+        id: String,
     },
 }
 
@@ -198,6 +203,14 @@ impl PlayersManager {
                     player.base.author = author.clone();
                     player.base.thumbnail = thumbnail.clone();
                 });
+
+                if thumbnail.is_none() {
+                    let id = id.clone();
+                    std::thread::spawn(move || {
+                        std::thread::sleep(Duration::from_millis(THUMBNAIL_RETRY_DELAY_MS));
+                        PlayersManager::send(PlayersEvent::ThumbnailRetry { id });
+                    });
+                }
             }
             PlayersEvent::PlaybackStatusChanged { id, playing } => {
                 self.playing.get(id, |player| {
@@ -208,6 +221,32 @@ impl PlayersManager {
                 self.playing.get(id, |player| {
                     player.base.timeline = timeline.clone();
                 });
+            }
+            PlayersEvent::ThumbnailRetry { id } => {
+                let still_missing = self
+                    .playing
+                    .get(id, |p| p.base.thumbnail.is_none())
+                    .unwrap_or(false);
+
+                if !still_missing {
+                    return Ok(());
+                }
+
+                // Clone the session out before awaiting to avoid holding the map lock.
+                let session = self.sessions.get(id, |s| s.session.clone());
+                if let Some(session) = session {
+                    let thumbnail = session
+                        .TryGetMediaPropertiesAsync()
+                        .ok()
+                        .and_then(|a| a.join().ok())
+                        .and_then(|props| props.Thumbnail().ok())
+                        .and_then(|s| WindowsApi::extract_thumbnail_from_ref(s).ok());
+                    if let Some(thumb) = thumbnail {
+                        self.playing.get(id, |player| {
+                            player.base.thumbnail = Some(thumb.clone());
+                        });
+                    }
+                }
             }
         }
         Ok(())

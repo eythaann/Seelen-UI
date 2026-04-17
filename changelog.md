@@ -11,6 +11,7 @@
 
 - multiple instance widgets not having default instance.
 - some audio devices not being loaded correctly.
+- no player thumbnail on song change.
 
 ## [2.5.8]
 
