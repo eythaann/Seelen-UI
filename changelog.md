@@ -7,11 +7,16 @@
 - font selector for widgets and themes.
 - reset configurations button on widgets.
 
+### enhancements
+
+- show percentage on volume and brightness flyouts.
+
 ### fix
 
 - multiple instance widgets not having default instance.
 - some audio devices not being loaded correctly.
 - no player thumbnail on song change.
+- settings window stealing focus on reload.
 
 ## [2.5.8]
 

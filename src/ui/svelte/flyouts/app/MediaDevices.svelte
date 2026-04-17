@@ -12,6 +12,14 @@
 
   let { output, orientation }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
+  let currentVolume = $state(output.volume);
+  let isDragging = $state(false);
+
+  $effect(() => {
+    if (!isDragging) currentVolume = output.volume;
+  });
+
   const setVolumeThrottled = throttle((deviceId: string, level: number) => {
     invoke(SeelenCommand.SetVolumeLevel, { deviceId, sessionId: null, level });
   }, 100);
@@ -30,12 +38,16 @@
     type="range"
     data-skin="flat"
     data-orientation={orientation}
-    value={output.volume}
+    value={currentVolume}
+    onpointerdown={() => (isDragging = true)}
+    onpointerup={() => (isDragging = false)}
     oninput={(e) => {
-      setVolumeThrottled(output.id, Number(e.currentTarget.value));
+      currentVolume = Number(e.currentTarget.value);
+      setVolumeThrottled(output.id, currentVolume);
     }}
     min={0}
     max={1}
     step={0.01}
   />
+  <span class="flyout-value-label">{Math.round(currentVolume * 100)}%</span>
 </div>

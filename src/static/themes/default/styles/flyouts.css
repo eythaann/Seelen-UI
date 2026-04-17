@@ -26,6 +26,13 @@ body,
     gap: 8px;
   }
 
+  .flyout-value-label {
+    font-size: 0.75rem;
+    width: 2.5em;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
   .workspace-name {
     font-weight: 600;
   }
@@ -87,6 +94,10 @@ body,
 
   .player-controls {
     flex-direction: column;
+  }
+
+  .flyout-value-label {
+    text-align: center;
   }
 }
 
