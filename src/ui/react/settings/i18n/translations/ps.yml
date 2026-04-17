@@ -175,6 +175,7 @@ open: خلاص
 quit: پرېښودل
 remove: لرې کول
 reset_all_to_default: ټول ډیفالټ ارزښتونو ته تنظیم کړئ
+reset_configurations: تشکیلات بیا تنظیم کړئ
 reset_to_default: د ډیفالټ ارزښت ته بیا تنظیمول
 resources:
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.

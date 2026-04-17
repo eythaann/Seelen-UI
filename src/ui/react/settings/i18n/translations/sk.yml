@@ -177,6 +177,7 @@ open: OTVORENÉ
 quit: Prestať
 remove: Odložiť
 reset_all_to_default: Obnovenie všetkých predvolených hodnôt
+reset_configurations: Obnoviť konfigurácie
 reset_to_default: Obnovenie predvolenej hodnoty
 resources:
   app_outdated: >-

@@ -10,9 +10,12 @@ import {
   patchWidgetConfig as patchWidget,
   patchWidgetInstanceConfig as patchInstance,
   patchWidgetMonitorConfig as patchMonitor,
+  resetWidgetConfig,
 } from "./application.ts";
 import { widgets } from "../../../state/resources.ts";
 import { getDevTools } from "../../developer/application.ts";
+
+import { Button } from "antd";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { ResourceDescription } from "../ResourceCard.tsx";
@@ -22,6 +25,7 @@ import { SeelenWegSettings } from "../../seelenweg/infra.tsx";
 import { WindowManagerSettings } from "../../WindowManager/main/infra/index.tsx";
 import { FancyToolbarSettings } from "../../fancyToolbar/infra.tsx";
 import { WallSettings } from "../../Wall/infra.tsx";
+import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 
 export function WidgetConfiguration({
   widgetId,
@@ -91,6 +95,12 @@ export function WidgetConfiguration({
                 onConfigChange("enabled", value);
               }}
             />
+          </SettingsOption>
+          <SettingsOption>
+            <b>{t("reset_configurations")}</b>
+            <Button onClick={() => resetWidgetConfig(widgetId)}>
+              <Icon iconName="RiResetLeftLine" />
+            </Button>
           </SettingsOption>
         </SettingsGroup>
       )}

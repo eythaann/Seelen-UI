@@ -177,6 +177,7 @@ open: Oopmaak
 quit: Laat vaar
 remove: Verwyder
 reset_all_to_default: Stel alles terug na standaardwaardes
+reset_configurations: Stel konfigurasies terug
 reset_to_default: Stel weer in standaardwaarde
 resources:
   app_outdated: >-

@@ -180,6 +180,7 @@ open: Ανοιξε
 quit: Εγκαταλείπω
 remove: Αφαιρώ
 reset_all_to_default: Επαναφορά όλων στις προεπιλεγμένες τιμές
+reset_configurations: Επαναφορά διαμορφώσεων
 reset_to_default: Επαναφορά στην προεπιλεγμένη τιμή
 resources:
   app_outdated: >-

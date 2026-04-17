@@ -181,6 +181,7 @@ open: খোলা
 quit: প্রস্থান
 remove: সরান
 reset_all_to_default: সমস্ত ডিফল্ট মানগুলিতে পুনরায় সেট করুন
+reset_configurations: কনফিগারেশন রিসেট করুন
 reset_to_default: ডিফল্ট মান পুনরায় সেট করুন
 resources:
   app_outdated: >-

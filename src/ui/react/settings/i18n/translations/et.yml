@@ -176,6 +176,7 @@ open: Avatud
 quit: Loobuma
 remove: Eemaldama
 reset_all_to_default: Nullida kõik vaikeväärtused
+reset_configurations: Lähtestage konfiguratsioonid
 reset_to_default: Nullida vaikimisi väärtus
 resources:
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.

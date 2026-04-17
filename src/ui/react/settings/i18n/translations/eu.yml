@@ -178,6 +178,7 @@ open: Ireki
 quit: Laga
 remove: Atera
 reset_all_to_default: Berrezarri guztiak balio lehenetsiak
+reset_configurations: Berrezarri konfigurazioak
 reset_to_default: Berrezarri lehenetsitako balioa
 resources:
   app_outdated: >-

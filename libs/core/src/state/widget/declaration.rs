@@ -87,22 +87,18 @@ impl<'de> Deserialize<'de> for WidgetConfigDefinition {
     where
         D: Deserializer<'de>,
     {
-        #[derive(Deserialize)]
-        struct GroupVariant {
-            group: WidgetConfigGroup,
+        let mut map = serde_json::Map::<String, serde_json::Value>::deserialize(deserializer)
+            .map_err(serde::de::Error::custom)?;
+
+        if let Some(group_value) = map.remove("group") {
+            let group: WidgetConfigGroup =
+                serde_path_to_error::deserialize(group_value).map_err(serde::de::Error::custom)?;
+            return Ok(WidgetConfigDefinition::Group(group));
         }
 
-        let value =
-            serde_json::Value::deserialize(deserializer).map_err(serde::de::Error::custom)?;
-
-        // Try to deserialize as a group first
-        if let Ok(parsed) = GroupVariant::deserialize(value.clone()) {
-            return Ok(WidgetConfigDefinition::Group(parsed.group));
-        }
-
-        // Otherwise deserialize as an item
         Ok(WidgetConfigDefinition::Item(Box::new(
-            serde_json::from_value(value).map_err(serde::de::Error::custom)?,
+            serde_path_to_error::deserialize(serde_json::Value::Object(map))
+                .map_err(serde::de::Error::custom)?,
         )))
     }
 }
@@ -140,6 +136,11 @@ pub enum WidgetSettingItem {
     /// Allows users to select colors with optional alpha/transparency support.
     #[serde(alias = "color")]
     Color(WidgetSettingColor),
+
+    /// Font family selector.\
+    /// Allows users to pick a font from the fonts installed on the system.
+    #[serde(alias = "font")]
+    Font(WidgetSettingFont),
 }
 
 impl WidgetSettingItem {
@@ -152,14 +153,17 @@ impl WidgetSettingItem {
             WidgetSettingItem::InputNumber(item) => &item.base.key,
             WidgetSettingItem::Range(item) => &item.base.key,
             WidgetSettingItem::Color(item) => &item.base.key,
+            WidgetSettingItem::Font(item) => &item.base.key,
         }
     }
 }
 
 /// Common fields shared across all widget setting items
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
-pub struct WidgetSettingBase {
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+#[schemars(bound = "T: JsonSchema + Default")]
+#[ts(bound = "T: TS")]
+pub struct WidgetSettingBase<T = ()> {
     /// Unique key for this setting, used to identify it in the configuration.\
     /// Must be unique within the widget. Duplicates will be ignored.
     pub key: String,
@@ -174,43 +178,46 @@ pub struct WidgetSettingBase {
     pub tip: Option<ResourceText>,
 
     /// Whether this setting can be configured per monitor in monitor-specific settings
+    #[serde(default)]
     pub allow_set_by_monitor: bool,
 
     /// Keys of settings that must be enabled for this item to be active.\
     /// Uses JavaScript truthy logic (!!value) to determine if dependency is met.
+    #[serde(default)]
     pub dependencies: Vec<String>,
+
+    /// Default value for this setting
+    #[serde(default)]
+    pub default_value: T,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingSwitch {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default value for this switch
-    pub default_value: bool,
+    pub base: WidgetSettingBase<bool>,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingSelect {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default selected value (must match one of the option values)
-    pub default_value: String,
+    pub base: WidgetSettingBase<String>,
     /// List of available options
+    #[serde(default)]
     pub options: Vec<WidgetSelectOption>,
     /// How to render the select options
+    #[serde(default)]
     pub subtype: WidgetSelectSubtype,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingInputText {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default text value
-    pub default_value: String,
+    pub base: WidgetSettingBase<String>,
     /// Whether to render as a multiline textarea
+    #[serde(default)]
     pub multiline: bool,
     /// Minimum text length validation
     pub min_length: Option<u32>,
@@ -218,13 +225,11 @@ pub struct WidgetSettingInputText {
     pub max_length: Option<u32>,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingInputNumber {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default numeric value
-    pub default_value: f64,
+    pub base: WidgetSettingBase<f64>,
     /// Minimum allowed value
     pub min: Option<f64>,
     /// Maximum allowed value
@@ -233,13 +238,11 @@ pub struct WidgetSettingInputNumber {
     pub step: Option<f64>,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingRange {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default value for the range slider
-    pub default_value: f64,
+    pub base: WidgetSettingBase<f64>,
     /// Minimum value of the range
     pub min: Option<f64>,
     /// Maximum value of the range
@@ -248,15 +251,21 @@ pub struct WidgetSettingRange {
     pub step: Option<f64>,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(default, rename_all = "camelCase")]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
 pub struct WidgetSettingColor {
     #[serde(flatten)]
-    pub base: WidgetSettingBase,
-    /// Default color value (hex format: #RRGGBB or #RRGGBBAA)
-    pub default_value: String,
+    pub base: WidgetSettingBase<String>,
     /// Whether to allow alpha/transparency channel
+    #[serde(default)]
     pub allow_alpha: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct WidgetSettingFont {
+    #[serde(flatten)]
+    pub base: WidgetSettingBase<String>,
 }
 
 /// An option in a select widget setting
@@ -266,7 +275,7 @@ pub struct WidgetSelectOption {
     /// Optional React icon name to display with this option
     pub icon: Option<String>,
     /// Label to display for this option (can use `t::` prefix)
-    pub label: ResourceText,
+    pub label: Option<ResourceText>,
     /// Value to store when this option is selected (must be unique)
     pub value: String,
 }

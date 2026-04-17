@@ -179,6 +179,7 @@ open: Atviras
 quit: Mesti
 remove: Pašalinti
 reset_all_to_default: Iš naujo nustatyti visas numatytąsias vertes
+reset_configurations: Iš naujo nustatyti konfigūracijas
 reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.

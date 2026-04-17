@@ -177,6 +177,7 @@ open: Відкрити
 quit: Вийти
 remove: Видалити
 reset_all_to_default: Скинути все до значень за замовчуванням
+reset_configurations: Скидання конфігурацій
 reset_to_default: Скидання до значення за замовчуванням
 resources:
   app_outdated: Для коректної роботи цього ресурсу потрібна новіша версія інтерфейсу Seelen.

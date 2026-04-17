@@ -166,6 +166,7 @@ open: 開く
 quit: 終了
 remove: 取り除く
 reset_all_to_default: すべての設定をデフォルトに戻す
+reset_configurations: 設定のリセット
 reset_to_default: デフォルトに戻す
 resources:
   app_outdated: このリソースが正しく動作するためには、新しいバージョンのSeelen UIが必要です。

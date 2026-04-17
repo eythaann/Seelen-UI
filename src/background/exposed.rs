@@ -283,6 +283,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::backups::infrastructure::*;
     use crate::modules::apps::infrastructure::*;
     use crate::modules::clipboard::infrastructure::*;
+    use crate::modules::fonts::infrastructure::*;
     use crate::modules::media::devices::infrastructure::*;
     use crate::modules::media::players::infrastructure::*;
     use crate::modules::monitors::brightness::infrastructure::*;

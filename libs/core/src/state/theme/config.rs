@@ -99,6 +99,14 @@ pub enum ThemeVariableDefinition {
     /// Initial value will be ignored.
     #[serde(rename = "<url>")]
     Url(ThemeVariable<String>),
+    /// This will allow to the user pick a font family from the fonts installed on the system.\
+    /// Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/font-family \
+    /// ### example:
+    /// ```css
+    /// --var-name: Segoe UI
+    /// ```
+    #[serde(rename = "<family-name>")]
+    FamilyName(ThemeVariable<String>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]

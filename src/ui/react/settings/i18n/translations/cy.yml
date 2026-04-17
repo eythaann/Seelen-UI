@@ -177,6 +177,7 @@ open: Ymagorant
 quit: Gadawen
 remove: Godon
 reset_all_to_default: Ailosod popeth i werthoedd diofyn
+reset_configurations: Ailosod ffurfweddau
 reset_to_default: Ailosod i werth diofyn
 resources:
   app_outdated: >-

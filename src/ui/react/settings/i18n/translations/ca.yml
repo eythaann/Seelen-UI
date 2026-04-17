@@ -182,6 +182,7 @@ open: Obrir
 quit: Abandonar
 remove: Treure
 reset_all_to_default: Restableix tot als valors predeterminats
+reset_configurations: Restablir configuracions
 reset_to_default: Restableix al valor predeterminat
 resources:
   app_outdated: >-

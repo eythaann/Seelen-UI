@@ -181,6 +181,7 @@ open: Aberto
 quit: Despedir-se
 remove: Remover
 reset_all_to_default: Redefina tudo para valores padrão
+reset_configurations: Redefinir as configurações
 reset_to_default: Redefinir para o valor padrão
 resources:
   app_outdated: >-

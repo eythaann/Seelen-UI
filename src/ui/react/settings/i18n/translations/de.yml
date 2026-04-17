@@ -182,6 +182,7 @@ open: Öffnen
 quit: Beenden
 remove: Entfernen
 reset_all_to_default: Alles auf Standardwerte zurücksetzen
+reset_configurations: Konfigurationen zurücksetzen
 reset_to_default: Zurücksetzen auf den Standardwert
 resources:
   app_outdated: >-

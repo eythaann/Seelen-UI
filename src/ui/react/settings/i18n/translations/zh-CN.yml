@@ -157,6 +157,7 @@ open: 打开
 quit: 退出
 remove: 移除
 reset_all_to_default: 重置所有为默认值
+reset_configurations: 重置配置
 reset_to_default: 重置为默认值
 resources:
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。

@@ -180,6 +180,7 @@ open: Deschis
 quit: Părăsi
 remove: Elimina
 reset_all_to_default: Resetați toate la valorile implicite
+reset_configurations: Resetați configurațiile
 reset_to_default: Resetare la valoarea implicită
 resources:
   app_outdated: >-

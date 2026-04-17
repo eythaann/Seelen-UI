@@ -177,6 +177,7 @@ open: Buka
 quit: Berhenti
 remove: Keluarkan
 reset_all_to_default: Tetapkan semula semua ke nilai lalai
+reset_configurations: Tetapkan semula konfigurasi
 reset_to_default: Tetapkan semula ke nilai lalai
 resources:
   app_outdated: >-

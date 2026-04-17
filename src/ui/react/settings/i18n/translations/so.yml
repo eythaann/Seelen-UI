@@ -181,6 +181,7 @@ open: Furid
 quit: Joojin
 remove: Ka qaadid
 reset_all_to_default: Dib u dejiso dhammaan qiimayaasha caadiga ah
+reset_configurations: Dib u dajin qaabaynta
 reset_to_default: Dib u dejiso qiimaha caadiga ah
 resources:
   app_outdated: >-

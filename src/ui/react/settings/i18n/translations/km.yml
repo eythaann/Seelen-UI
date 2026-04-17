@@ -177,6 +177,7 @@ open: បើក
 quit: ឈប់
 remove: រមកមិ avad ចេញ
 reset_all_to_default: កំណត់ឡើងវិញទាំងអស់ទៅតម្លៃលំនាំដើម
+reset_configurations: កំណត់រចនាសម្ព័ន្ធឡើងវិញ
 reset_to_default: កំណត់ឡើងវិញទៅតម្លៃលំនាំដើម
 resources:
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។

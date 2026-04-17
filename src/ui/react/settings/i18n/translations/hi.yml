@@ -181,6 +181,7 @@ open: खुला
 quit: छोड़ना
 remove: निकालना
 reset_all_to_default: सभी को डिफ़ॉल्ट मानों पर रीसेट करें
+reset_configurations: कॉन्फ़िगरेशन रीसेट करें
 reset_to_default: डिफ़ॉल्ट मान पर रीसेट करें
 resources:
   app_outdated: >-

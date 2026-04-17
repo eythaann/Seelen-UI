@@ -2,6 +2,7 @@
 
 use std::{fs::File, path::Path};
 
+use serde_path_to_error;
 use serde_yaml::{Mapping, Value};
 
 use crate::error::Result;
@@ -9,7 +10,7 @@ use crate::error::Result;
 /// Will deserialize a YAML file and parse the custom extended syntax
 pub fn deserialize_extended_yaml<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T> {
     let value = read_and_parse_yml(path)?;
-    Ok(serde_yaml::from_value(value)?)
+    serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
 }
 
 fn read_and_parse_yml(path: &Path) -> Result<Value> {

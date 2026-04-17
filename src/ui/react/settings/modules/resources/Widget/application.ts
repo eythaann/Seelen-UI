@@ -101,6 +101,25 @@ export function removeWidgetInstance(widgetId: WidgetId, instanceId: string) {
 }
 
 /**
+ * Resets all user-set config values for a widget, preserving only `enabled` and `$instances`.
+ */
+export function resetWidgetConfig(widgetId: WidgetId) {
+  const currentWidget = settings.value.byWidget[widgetId];
+  if (!currentWidget) {
+    return;
+  }
+  settings.value = {
+    ...settings.value,
+    byWidget: {
+      ...settings.value.byWidget,
+      [widgetId]: {
+        enabled: currentWidget.enabled,
+      },
+    },
+  };
+}
+
+/**
  * Gets the monitor-specific configuration for a widget
  */
 export function getMonitorWidgetConfig(monitorId: string, widgetId: WidgetId) {

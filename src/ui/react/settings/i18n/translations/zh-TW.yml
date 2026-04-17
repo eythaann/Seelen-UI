@@ -159,6 +159,7 @@ open: 打開
 quit: 辭職
 remove: 消除
 reset_all_to_default: 重置全部默認值
+reset_configurations: 重置配置
 reset_to_default: 重置為默認值
 resources:
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。

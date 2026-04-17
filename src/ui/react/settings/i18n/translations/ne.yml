@@ -179,6 +179,7 @@ open: खोल्नु
 quit: छोड्नु
 remove: हटाउनु
 reset_all_to_default: सबै पूर्वनिर्धारित मानहरूमा रिसेट गर्नुहोस्
+reset_configurations: कन्फिगरेसनहरू रिसेट गर्नुहोस्
 reset_to_default: पूर्वनिर्धारित मानमा रिसेट गर्नुहोस्
 resources:
   app_outdated: >-

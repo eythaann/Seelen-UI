@@ -182,6 +182,7 @@ open: otwarty
 quit: Zrezygnować
 remove: Usunąć
 reset_all_to_default: Przywróć wartości domyślne
+reset_configurations: Zresetuj konfiguracje
 reset_to_default: Przywróć wartość domyślną
 resources:
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.

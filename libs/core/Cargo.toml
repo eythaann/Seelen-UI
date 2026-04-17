@@ -10,6 +10,7 @@ workspace = true
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
+serde_path_to_error = { workspace = true }
 serde_yaml = { workspace = true }
 serde_alias = "0.0.2"
 schemars = { version = "1.2.1", features = ["url2", "uuid1", "chrono04"] }

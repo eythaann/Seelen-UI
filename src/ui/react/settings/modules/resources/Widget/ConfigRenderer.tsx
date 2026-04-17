@@ -5,11 +5,12 @@ import {
   type WidgetSettingsDeclarationList,
 } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
-import { Button, ColorPicker, Flex, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
+import { Button, ColorPicker, ConfigProvider, Flex, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import { FontSelect } from "../../../components/FontSelect/index.tsx";
 import Compact from "antd/es/space/Compact";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 
@@ -24,7 +25,25 @@ interface Props {
   isByMonitor?: boolean;
 }
 
+/** Recursively collects { key: defaultValue } from all items in the definition tree. */
+function collectDefaultValues(definitions: WidgetSettingsDeclarationList): Record<string, any> {
+  const map: Record<string, any> = {};
+
+  function walk(def: WidgetConfigDefinition) {
+    if ("group" in def) {
+      def.group.items.forEach(walk);
+    } else {
+      map[def.key] = def.defaultValue;
+    }
+  }
+
+  definitions.forEach(walk);
+  return map;
+}
+
 export function RenderBySettingsDeclaration({ definitions, values, onConfigChange }: Props) {
+  const defaultValues = useMemo(() => collectDefaultValues(definitions), [definitions]);
+
   return (
     <>
       {definitions.map((definition, idx) => (
@@ -32,6 +51,7 @@ export function RenderBySettingsDeclaration({ definitions, values, onConfigChang
           key={idx}
           definition={definition}
           values={values}
+          defaultValues={defaultValues}
           onConfigChange={onConfigChange}
           nestLevel={0}
         />
@@ -45,6 +65,7 @@ export function RenderBySettingsDeclaration({ definitions, values, onConfigChang
 interface WidgetConfigDefinitionProps {
   definition: WidgetConfigDefinition;
   values: Record<string, any>;
+  defaultValues: Record<string, any>;
   onConfigChange: (key: string, value: any) => void;
   nestLevel: number;
 }
@@ -52,10 +73,11 @@ interface WidgetConfigDefinitionProps {
 function WidgetConfigDefinition({
   definition,
   values,
+  defaultValues,
   onConfigChange,
   nestLevel,
 }: WidgetConfigDefinitionProps) {
-  const content = renderContent(definition, values, onConfigChange, nestLevel);
+  const content = renderContent(definition, values, defaultValues, onConfigChange, nestLevel);
 
   return nestLevel === 0 ? <SettingsGroup>{content}</SettingsGroup> : content;
 }
@@ -63,6 +85,7 @@ function WidgetConfigDefinition({
 function renderContent(
   definition: WidgetConfigDefinition,
   values: Record<string, any>,
+  defaultValues: Record<string, any>,
   onConfigChange: (key: string, value: any) => void,
   nestLevel: number,
 ): ReactNode {
@@ -75,6 +98,7 @@ function renderContent(
             key={idx}
             definition={item}
             values={values}
+            defaultValues={defaultValues}
             onConfigChange={onConfigChange}
             nestLevel={nestLevel + 1}
           />
@@ -84,7 +108,14 @@ function renderContent(
   }
 
   // It's a setting item
-  return <WidgetSettingItemRenderer def={definition} values={values} onConfigChange={onConfigChange} />;
+  return (
+    <WidgetSettingItemRenderer
+      def={definition}
+      values={values}
+      defaultValues={defaultValues}
+      onConfigChange={onConfigChange}
+    />
+  );
 }
 
 // ================================================
@@ -92,43 +123,43 @@ function renderContent(
 interface WidgetSettingItemRendererProps {
   def: WidgetSettingItem;
   values: Record<string, any>;
+  defaultValues: Record<string, any>;
   onConfigChange: (key: string, value: any) => void;
 }
 
 function WidgetSettingItemRenderer({
   def,
   values,
+  defaultValues,
   onConfigChange,
 }: WidgetSettingItemRendererProps) {
-  // Check if all dependencies are met
+  // Check if all dependencies are met, falling back to defaultValue when the user hasn't set it yet
   const isDependencyMet = useMemo(() => {
     if (!def.dependencies || def.dependencies.length === 0) {
       return true;
     }
-    return def.dependencies.every((depKey) => !!values[depKey]);
-  }, [def.dependencies, values]);
-
-  if (!isDependencyMet) {
-    return null;
-  }
-
-  const action = renderInput(def, values, onConfigChange);
+    return def.dependencies.every((depKey) => !!(values[depKey] ?? defaultValues[depKey]));
+  }, [def.dependencies, values, defaultValues]);
 
   return (
-    <SettingsOption
-      label={<ResourceText text={def.label} />}
-      tip={def.tip ? <ResourceText text={def.tip} /> : undefined}
-      description={def.description ? <ResourceText text={def.description} /> : undefined}
-      action={action}
-    />
+    <ConfigProvider componentDisabled={!isDependencyMet}>
+      <SettingsOption
+        label={<ResourceText text={def.label} />}
+        tip={def.tip ? <ResourceText text={def.tip} /> : undefined}
+        description={def.description ? <ResourceText text={def.description} /> : undefined}
+        action={<InputRenderer def={def} values={values} onConfigChange={onConfigChange} />}
+      />
+    </ConfigProvider>
   );
 }
 
-function renderInput(
-  def: WidgetSettingItem,
-  values: Record<string, any>,
-  onConfigChange: (key: string, value: any) => void,
-): ReactNode {
+interface InputRenderer {
+  def: WidgetSettingItem;
+  values: Record<string, any>;
+  onConfigChange: (key: string, value: any) => void;
+}
+
+function InputRenderer({ def, values, onConfigChange }: InputRenderer): ReactNode {
   const commonProps = {
     value: values[def.key] ?? def.defaultValue,
     onChange: (value: any) => onConfigChange(def.key, value),
@@ -144,11 +175,12 @@ function renderInput(
         return (
           <Compact>
             {def.options.map(({ value, label, icon }) => (
-              <Tooltip key={value} title={<ResourceText text={label} />}>
+              <Tooltip key={value} title={label ? <ResourceText text={label} /> : value}>
                 <Button
                   key={value}
                   type={value === (values[def.key] ?? def.defaultValue) ? "primary" : "default"}
-                  onClick={() => onConfigChange(def.key, value)}
+                  onClick={() =>
+                    onConfigChange(def.key, value)}
                 >
                   {icon ? <Icon iconName={icon as any} /> : value}
                 </Button>
@@ -163,7 +195,7 @@ function renderInput(
         label: (
           <Flex gap={8} align="center">
             {opt.icon && <Icon iconName={opt.icon as any} />}
-            <ResourceText text={opt.label} />
+            {opt.label ? <ResourceText text={opt.label} /> : <span>{opt.value}</span>}
           </Flex>
         ),
         value: opt.value,
@@ -220,6 +252,16 @@ function renderInput(
           onChangeComplete={(v) => {
             onConfigChange(def.key, v.toHexString());
           }}
+        />
+      );
+    }
+
+    case "Font": {
+      return (
+        <FontSelect
+          value={values[def.key]}
+          defaultValue={def.defaultValue || undefined}
+          onChange={(v) => onConfigChange(def.key, v)}
         />
       );
     }

@@ -183,6 +183,7 @@ open: Abrir
 quit: Deje de
 remove: Eliminar
 reset_all_to_default: Restablecer todos los valores por defecto
+reset_configurations: Restablecer configuraciones
 reset_to_default: Restablecer valor por defecto
 resources:
   app_outdated: >-

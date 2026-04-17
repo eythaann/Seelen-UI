@@ -177,6 +177,7 @@ open: کھلا
 quit: چھوڑ دیں
 remove: ہٹا دیں
 reset_all_to_default: سب کو پہلے سے طے شدہ اقدار پر دوبارہ ترتیب دیں
+reset_configurations: کنفیگریشنز کو ری سیٹ کریں۔
 reset_to_default: ڈیفالٹ ویلیو پر دوبارہ سیٹ کریں
 resources:
   app_outdated: >-

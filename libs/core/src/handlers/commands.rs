@@ -300,4 +300,7 @@ slu_commands_declaration! {
     ClipboardClearHistory = clipboard_clear_history(),
     ClipboardSetContent = clipboard_set_content(id: String),
     ClipboardPaste = clipboard_paste(id: String),
+
+    // Fonts
+    GetFonts = get_fonts() -> Vec<SeelenFont>,
 }

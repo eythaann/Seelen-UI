@@ -2,6 +2,11 @@
 
 ## [2.5.9-dev]
 
+### features
+
+- font selector for widgets and themes.
+- reset configurations button on widgets.
+
 ## [2.5.8]
 
 ### features

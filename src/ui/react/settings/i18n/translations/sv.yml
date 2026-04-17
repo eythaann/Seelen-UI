@@ -177,6 +177,7 @@ open: Öppen
 quit: Sluta
 remove: Ta bort
 reset_all_to_default: Återställ alla till standardvärden
+reset_configurations: Återställ konfigurationer
 reset_to_default: Återställ till standardvärde
 resources:
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.

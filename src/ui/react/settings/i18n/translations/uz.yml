@@ -181,6 +181,7 @@ open: Ochiq
 quit: Ketmoq
 remove: Olib tashlamoq
 reset_all_to_default: Barcha standart qiymatlarni qayta o'rnating
+reset_configurations: Konfiguratsiyalarni tiklash
 reset_to_default: Standart qiymatni qayta o'rnating
 resources:
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.

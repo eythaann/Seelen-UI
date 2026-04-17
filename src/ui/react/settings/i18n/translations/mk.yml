@@ -181,6 +181,7 @@ open: Отворено
 quit: Откажете се
 remove: Отстранете
 reset_all_to_default: Ресетирајте ги сите на стандардните вредности
+reset_configurations: Ресетирајте ги конфигурациите
 reset_to_default: Ресетирање на стандардна вредност
 resources:
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.

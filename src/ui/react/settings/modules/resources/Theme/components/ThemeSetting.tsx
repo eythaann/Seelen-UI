@@ -8,6 +8,7 @@ import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SettingsOption } from "../../../../components/SettingsBox/index.tsx";
+import { FontSelect } from "../../../../components/FontSelect/index.tsx";
 import { CSS_UNITS } from "../constants.ts";
 import { useThemeVariable } from "../hooks/useThemeVariable.ts";
 
@@ -174,6 +175,11 @@ function renderInput(
           maxLength={max || undefined}
         />
       );
+    }
+
+    case "<family-name>": {
+      const value = userStoredValue ?? definition.initialValue;
+      return <FontSelect value={value} onChange={onChange} />;
     }
 
     default: {

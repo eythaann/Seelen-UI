@@ -178,6 +178,7 @@ open: Нээлттэй
 quit: Орхих
 remove: Зөөх
 reset_all_to_default: Бүгдийг нь анхдагч утгыг дахин тохируулна уу
+reset_configurations: Тохиргоог дахин тохируулах
 reset_to_default: Үндсэн утга руу дахин тохируулна уу
 resources:
   app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.

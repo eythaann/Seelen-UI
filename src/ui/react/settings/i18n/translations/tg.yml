@@ -179,6 +179,7 @@ open: Кушодан
 quit: Баромадан
 remove: Дур кардан
 reset_all_to_default: Ҳама ба арзишҳои пешфарз
+reset_configurations: Аз нав танзимкунии конфигуратсияҳо
 reset_to_default: Аз нав танзимкунии арзиши пешфарз
 resources:
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.

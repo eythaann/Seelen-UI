@@ -180,6 +180,7 @@ open: Membuka
 quit: Berhenti
 remove: Menghapus
 reset_all_to_default: Atur ulang semua ke nilai default
+reset_configurations: Setel ulang konfigurasi
 reset_to_default: Atur ulang ke nilai default
 resources:
   app_outdated: >-

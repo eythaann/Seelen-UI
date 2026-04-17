@@ -177,6 +177,7 @@ open: Aç
 quit: Çıkış
 remove: Kaldır
 reset_all_to_default: Tümünü varsayılan değerlere sıfırla
+reset_configurations: Yapılandırmaları sıfırla
 reset_to_default: Varsayılan değere sıfırla
 resources:
   app_outdated: >-
