@@ -358,8 +358,12 @@ welcome:
     îmbunătățească.
   title: Bun venit la Seelen UI!
 widget:
+  default_instance: Instanță implicită
+  default_instance_hint: Întotdeauna activ, folosește configurația widget rădăcină
   enable: Activați acest widget
   enable_for_monitor: Activați pe acest monitor
+  extra_instances: Instanțe suplimentare
+  instance: Exemplu
   instances: Instanțe
 wm:
   animations:

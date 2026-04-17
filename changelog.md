@@ -7,6 +7,10 @@
 - font selector for widgets and themes.
 - reset configurations button on widgets.
 
+### fix
+
+- multiple instance widgets not having default instance.
+
 ## [2.5.8]
 
 ### features

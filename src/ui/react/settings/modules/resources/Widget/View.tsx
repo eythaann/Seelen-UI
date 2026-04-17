@@ -66,7 +66,7 @@ export function WidgetConfiguration({
   };
 
   const instances = Object.keys(rootConfig.$instances || {}).map((instanceId) => ({
-    label: `Instance ${instanceId.slice(0, 6)}`,
+    label: `${t("widget.instance")} ${instanceId.slice(0, 6)}`,
     value: instanceId,
   }));
 
@@ -108,7 +108,11 @@ export function WidgetConfiguration({
       {widget.instances === "Multiple" && (
         <SettingsGroup>
           <SettingsOption>
-            <b>{t("widget.instances")}</b>
+            <b>{t("widget.default_instance")}</b>
+            <span style={{ color: "var(--color-text-3)" }}>{t("widget.default_instance_hint")}</span>
+          </SettingsOption>
+          <SettingsOption>
+            <b>{t("widget.extra_instances")}</b>
             <WidgetInstanceSelector
               widgetId={widgetId}
               options={instances}

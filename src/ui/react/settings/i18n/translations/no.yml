@@ -355,8 +355,12 @@ welcome:
     seg.
   title: Velkommen til Seelen UI!
 widget:
+  default_instance: Standardforekomst
+  default_instance_hint: Alltid aktiv, bruker root-widget-konfigurasjonen
   enable: Aktiver denne widgeten
   enable_for_monitor: Aktiver på denne skjermen
+  extra_instances: Ekstra forekomster
+  instance: Forekomst
   instances: Forekomster
 wm:
   animations:

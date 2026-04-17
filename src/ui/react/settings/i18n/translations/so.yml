@@ -361,8 +361,12 @@ welcome:
     oo horumaro.
   title: Ku soo dhawoow Seelen UI!
 widget:
+  default_instance: Tusaale ahaan
+  default_instance_hint: Had iyo jeer fir fircoon, isticmaal nidaamka xididka widget-ka
   enable: U oggolow widget-kaan
   enable_for_monitor: U oggolow kormeerkan
+  extra_instances: Tusaalooyinka Dheeraadka ah
+  instance: Tusaale
   instances: Tusaca
 wm:
   animations:

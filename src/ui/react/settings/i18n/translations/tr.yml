@@ -357,8 +357,12 @@ welcome:
     gelişmesine yardımcı olur.
   title: Seelen kullanıcı arayüzüne hoş geldiniz!
 widget:
+  default_instance: Varsayılan Örnek
+  default_instance_hint: Her zaman etkindir, kök widget yapılandırmasını kullanır
   enable: Bu widget'ı etkinleştir
   enable_for_monitor: Bu monitörde etkinleştir
+  extra_instances: Ekstra Örnekler
+  instance: Misal
   instances: Örnekler
 wm:
   animations:

@@ -353,8 +353,12 @@ welcome:
     بگذارید - بازخورد شما به رشد و بهبود پروژه کمک می کند.
   title: به UI Seelen خوش آمدید!
 widget:
+  default_instance: نمونه پیش فرض
+  default_instance_hint: همیشه فعال است، از پیکربندی ویجت ریشه استفاده می کند
   enable: این ویجت را فعال کنید
   enable_for_monitor: این مانیتور را فعال کنید
+  extra_instances: موارد اضافی
+  instance: نمونه
   instances: نمونه
 wm:
   animations:

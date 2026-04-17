@@ -364,8 +364,12 @@ welcome:
     lumago at umunlad.
   title: Maligayang pagdating sa Seelen UI!
 widget:
+  default_instance: Default na Instance
+  default_instance_hint: Palaging aktibo, gumagamit ng root widget config
   enable: Paganahin ang widget na ito
   enable_for_monitor: Paganahin sa monitor na ito
+  extra_instances: Mga Dagdag na Instance
+  instance: Halimbawa
   instances: Mga pagkakataon
 wm:
   animations:

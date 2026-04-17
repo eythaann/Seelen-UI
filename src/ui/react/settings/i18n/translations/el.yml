@@ -364,8 +364,12 @@ welcome:
     βελτιωθεί.
   title: Καλώς ήρθατε στο Seelen UI!
 widget:
+  default_instance: Προεπιλεγμένη περίπτωση
+  default_instance_hint: Πάντα ενεργό, χρησιμοποιεί τη διαμόρφωση του γραφικού στοιχείου ρίζας
   enable: Ενεργοποιήστε αυτό το widget
   enable_for_monitor: Ενεργοποίηση σε αυτή την οθόνη
+  extra_instances: Επιπλέον περιπτώσεις
+  instance: Παράδειγμα
   instances: Περιπτώσεις
 wm:
   animations:

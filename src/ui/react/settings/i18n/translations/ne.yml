@@ -359,8 +359,12 @@ welcome:
     मद्दत गर्दछ।
   title: Seelen UI मा स्वागत छ!
 widget:
+  default_instance: पूर्वनिर्धारित उदाहरण
+  default_instance_hint: सँधै सक्रिय, रूट विजेट कन्फिगरेसन प्रयोग गर्दछ
   enable: यो विजेट सक्षम गर्नुहोस्
   enable_for_monitor: यस मोनिटरमा सक्षम गर्नुहोस्
+  extra_instances: अतिरिक्त उदाहरणहरू
+  instance: उदाहरण
   instances: संकेतहरू
 wm:
   animations:

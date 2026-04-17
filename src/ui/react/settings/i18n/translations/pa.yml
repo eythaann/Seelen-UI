@@ -348,8 +348,12 @@ welcome:
     ਕਰਦਾ ਹੈ।
   title: Seelen UI ਵਿੱਚ ਸੁਆਗਤ ਹੈ!
 widget:
+  default_instance: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਉਦਾਹਰਨ
+  default_instance_hint: ਹਮੇਸ਼ਾ ਕਿਰਿਆਸ਼ੀਲ, ਰੂਟ ਵਿਜੇਟ ਸੰਰਚਨਾ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ
   enable: ਇਸ ਵਿਦਜਿਟ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   enable_for_monitor: ਇਸ ਮਾਨੀਟਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  extra_instances: ਵਾਧੂ ਉਦਾਹਰਨਾਂ
+  instance: ਉਦਾਹਰਨ
   instances: ਉਦਾਹਰਣ
 wm:
   animations:

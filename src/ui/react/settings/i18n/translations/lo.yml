@@ -348,8 +348,12 @@ welcome:
     ຄໍາຄິດເຫັນຂອງທ່ານຊ່ວຍໃຫ້ໂຄງການຂະຫຍາຍຕົວແລະປັບປຸງ.
   title: ຍິນດີຕ້ອນຮັບສູ່ Seelen UI!
 widget:
+  default_instance: ຕົວຢ່າງເລີ່ມຕົ້ນ
+  default_instance_hint: ເຄື່ອນໄຫວຢູ່ສະເໝີ, ໃຊ້ການຕັ້ງຄ່າ widget ຮາກ
   enable: ເປີດໃຊ້ widget ນີ້
   enable_for_monitor: ເປີດໃຊ້ງານຕິດຕາມກວດການີ້
+  extra_instances: ກໍລະນີພິເສດ
+  instance: ຕົວຢ່າງ
   instances: ຖານະ
 wm:
   animations:

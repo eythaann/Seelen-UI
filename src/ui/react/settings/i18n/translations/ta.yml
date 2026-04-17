@@ -360,8 +360,12 @@ welcome:
     உதவுகிறது.
   title: Seelen UIக்கு வரவேற்கிறோம்!
 widget:
+  default_instance: இயல்புநிலை நிகழ்வு
+  default_instance_hint: எப்போதும் செயலில், ரூட் விட்ஜெட் கட்டமைப்பைப் பயன்படுத்துகிறது
   enable: இந்த விட்ஜெட்டை இயக்கவும்
   enable_for_monitor: இந்த மானிட்டரில் இயக்கவும்
+  extra_instances: கூடுதல் நிகழ்வுகள்
+  instance: உதாரணம்
   instances: நிகழ்வுகள்
 wm:
   animations:

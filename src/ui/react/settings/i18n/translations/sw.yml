@@ -351,8 +351,12 @@ welcome:
     maoni yako husaidia mradi kukua na kuboreka.
   title: Karibu kwenye Seelen UI!
 widget:
+  default_instance: Tukio Chaguomsingi
+  default_instance_hint: Inatumika kila wakati, hutumia usanidi wa wijeti ya mizizi
   enable: Wezesha widget hii
   enable_for_monitor: Wezesha kwenye mfuatiliaji huu
+  extra_instances: Matukio ya Ziada
+  instance: Mfano
   instances: Matukio
 wm:
   animations:

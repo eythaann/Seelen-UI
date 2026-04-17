@@ -343,8 +343,12 @@ welcome:
     تساعد المشروع على النمو والتحسن.
   title: مرحبًا بك في واجهة مستخدم Seelen!
 widget:
+  default_instance: المثيل الافتراضي
+  default_instance_hint: نشط دائمًا، ويستخدم تكوين عنصر واجهة المستخدم الجذر
   enable: تمكين هذه الأداة
   enable_for_monitor: التمكين على هذه الشاشة
+  extra_instances: مثيلات إضافية
+  instance: مثال
   instances: المثيلات
 wm:
   animations:

@@ -355,8 +355,12 @@ welcome:
     отзыв поможет проекту расти и совершенствоваться.
   title: Добро пожаловать в интерфейс Seelen!
 widget:
+  default_instance: Экземпляр по умолчанию
+  default_instance_hint: Всегда активен, использует конфигурацию корневого виджета
   enable: Включите этот виджет
   enable_for_monitor: Включить на этом мониторе
+  extra_instances: Дополнительные экземпляры
+  instance: Пример
   instances: Экземпляры
 wm:
   animations:

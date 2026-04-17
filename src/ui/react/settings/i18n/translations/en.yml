@@ -349,8 +349,12 @@ welcome:
     feedback helps the project grow and improve.
   title: Welcome to Seelen UI!
 widget:
+  default_instance: Default Instance
+  default_instance_hint: Always active, uses the root widget config
   enable: Enable this widget
   enable_for_monitor: Enable on this monitor
+  extra_instances: Extra Instances
+  instance: Instance
   instances: Instances
 wm:
   animations:

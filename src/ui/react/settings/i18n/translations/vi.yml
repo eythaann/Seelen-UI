@@ -355,8 +355,12 @@ welcome:
     - phản hồi của bạn sẽ giúp dự án phát triển và cải thiện.
   title: Chào mừng bạn đến với giao diện người dùng Seelen!
 widget:
+  default_instance: Phiên bản mặc định
+  default_instance_hint: Luôn hoạt động, sử dụng cấu hình widget gốc
   enable: Kích hoạt tiện ích này
   enable_for_monitor: Bật trên màn hình này
+  extra_instances: Phiên bản bổ sung
+  instance: Ví dụ
   instances: Trường hợp
 wm:
   animations:

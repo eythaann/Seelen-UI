@@ -352,8 +352,12 @@ welcome:
     વિચારો — તમારો પ્રતિસાદ પ્રોજેક્ટને વધવા અને સુધારવામાં મદદ કરે છે.
   title: Seelen UI માં આપનું સ્વાગત છે!
 widget:
+  default_instance: ડિફૉલ્ટ ઇન્સ્ટન્સ
+  default_instance_hint: હંમેશા સક્રિય, રૂટ વિજેટ રૂપરેખાનો ઉપયોગ કરે છે
   enable: આ વિજેટને સક્ષમ કરો
   enable_for_monitor: આ મોનિટર પર સક્ષમ કરો
+  extra_instances: વધારાના દાખલાઓ
+  instance: દાખલો
   instances: દાખલા
 wm:
   animations:

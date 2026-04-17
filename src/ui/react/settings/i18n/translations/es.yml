@@ -360,8 +360,12 @@ welcome:
     comentarios ayudan a que el proyecto crezca y mejore.
   title: ¡Bienvenido a la interfaz de usuario de Seelen!
 widget:
+  default_instance: Instancia predeterminada
+  default_instance_hint: Siempre activo, utiliza la configuración del widget raíz
   enable: Activar este widget
   enable_for_monitor: Activar en este monitor
+  extra_instances: Instancias adicionales
+  instance: Instancia
   instances: Instancias
 wm:
   animations:

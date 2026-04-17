@@ -46,14 +46,21 @@ impl WidgetContainer {
                 instances.upsert(instance.label.clone(), instance);
             }
             WidgetInstanceMode::Multiple => {
+                let nil_id = Uuid::nil();
+                let default_instance =
+                    WidgetInstance::create(&widget, None, Some(&nil_id), InstanceType::Static);
+                instances.upsert(default_instance.label.clone(), default_instance);
+
                 for replica_id in FULL_STATE.load().get_widget_instances_ids(&widget.id) {
-                    let instance = WidgetInstance::create(
-                        &widget,
-                        None,
-                        Some(&replica_id),
-                        InstanceType::Static,
-                    );
-                    instances.upsert(instance.label.clone(), instance);
+                    if replica_id != nil_id {
+                        let instance = WidgetInstance::create(
+                            &widget,
+                            None,
+                            Some(&replica_id),
+                            InstanceType::Static,
+                        );
+                        instances.upsert(instance.label.clone(), instance);
+                    }
                 }
             }
             WidgetInstanceMode::ReplicaByMonitor => {}

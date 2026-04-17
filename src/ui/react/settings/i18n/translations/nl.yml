@@ -357,8 +357,12 @@ welcome:
     verbeteren.
   title: Welkom bij de Seelen-gebruikersinterface!
 widget:
+  default_instance: Standaardinstantie
+  default_instance_hint: Altijd actief, gebruikt de rootwidgetconfiguratie
   enable: Deze widget inschakelen
   enable_for_monitor: Inschakelen op deze monitor
+  extra_instances: Extra exemplaren
+  instance: Aanleg
   instances: Instanties
 wm:
   animations:

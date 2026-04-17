@@ -351,8 +351,12 @@ welcome:
     umsögn um verslunina - athugasemdir þínar hjálpa verkefninu að vaxa og bæta.
   title: Velkomin í Seelen HÍ!
 widget:
+  default_instance: Sjálfgefið tilvik
+  default_instance_hint: Alltaf virk, notar stillingar rótgræjunnar
   enable: Virkja þennan búnað
   enable_for_monitor: Virkja á þessum skjá
+  extra_instances: Aukatilvik
+  instance: Dæmi
   instances: Dæmi
 wm:
   animations:

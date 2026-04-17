@@ -361,8 +361,12 @@ welcome:
     crescere e migliorare.
   title: Benvenuti nell'interfaccia utente di Seelen!
 widget:
+  default_instance: Istanza predefinita
+  default_instance_hint: Sempre attivo, utilizza la configurazione del widget root
   enable: Abilitare questo widget
   enable_for_monitor: Abilita su questo monitor
+  extra_instances: Istanze aggiuntive
+  instance: Esempio
   instances: Istanze
 wm:
   animations:

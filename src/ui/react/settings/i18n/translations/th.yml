@@ -344,8 +344,12 @@ welcome:
     ความคิดเห็นของคุณจะช่วยให้โปรเจ็กต์เติบโตและปรับปรุงได้
   title: ยินดีต้อนรับสู่ Seelen UI!
 widget:
+  default_instance: อินสแตนซ์เริ่มต้น
+  default_instance_hint: ใช้งานอยู่เสมอ ใช้การกำหนดค่าวิดเจ็ตรูท
   enable: เปิดใช้งานวิดเจ็ตนี้
   enable_for_monitor: เปิดใช้งานบนจอภาพนี้
+  extra_instances: อินสแตนซ์พิเศษ
+  instance: ตัวอย่าง
   instances: อินสแตนซ์
 wm:
   animations:

@@ -361,8 +361,12 @@ welcome:
     els vostres comentaris ajuden el projecte a créixer i millorar.
   title: Benvingut a Seelen UI!
 widget:
+  default_instance: Instància per defecte
+  default_instance_hint: Sempre actiu, utilitza la configuració del widget arrel
   enable: Activa aquest widget
   enable_for_monitor: Activa en aquest monitor
+  extra_instances: Instàncies addicionals
+  instance: Instància
   instances: Instàncies
 wm:
   animations:

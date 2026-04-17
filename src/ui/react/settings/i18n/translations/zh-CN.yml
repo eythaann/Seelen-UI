@@ -324,8 +324,12 @@ welcome:
   review: 如果您喜欢使用 Seelen UI，请考虑在商店中留下评论 - 您的反馈有助于项目的成长和改进。
   title: 欢迎来到Seelen UI！
 widget:
+  default_instance: 默认实例
+  default_instance_hint: 始终处于活动状态，使用根小部件配置
   enable: 启用此小部件
   enable_for_monitor: 在此显示器上启用
+  extra_instances: 额外实例
+  instance: 实例
   instances: 实例
 wm:
   animations:

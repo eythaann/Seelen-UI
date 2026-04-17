@@ -356,8 +356,12 @@ welcome:
     zpětná vazba pomáhá projektu růst a zlepšovat se.
   title: Vítejte v uživatelském rozhraní Seelen!
 widget:
+  default_instance: Výchozí instance
+  default_instance_hint: Vždy aktivní, používá kořenovou konfiguraci widgetu
   enable: Povolení tohoto widgetu
   enable_for_monitor: Povolit na tomto monitoru
+  extra_instances: Extra instance
+  instance: Instance
   instances: Instance
 wm:
   animations:

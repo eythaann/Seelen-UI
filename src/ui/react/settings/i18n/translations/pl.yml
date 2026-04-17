@@ -358,8 +358,12 @@ welcome:
     recenzji w sklepie — Twoja opinia pomoże rozwijać i ulepszać projekt.
   title: Witamy w interfejsie Seelen!
 widget:
+  default_instance: Domyślna instancja
+  default_instance_hint: Zawsze aktywny, korzysta z konfiguracji widgetu głównego
   enable: Włącz ten widżet
   enable_for_monitor: Włącz na tym monitorze
+  extra_instances: Dodatkowe instancje
+  instance: Przykład
   instances: Wystąpienia
 wm:
   animations:

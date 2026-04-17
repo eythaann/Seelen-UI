@@ -354,8 +354,12 @@ welcome:
     siop - mae eich adborth yn helpu'r prosiect i dyfu a gwella.
   title: Croeso i UI Seelen!
 widget:
+  default_instance: Enghraifft ddiofyn
+  default_instance_hint: Bob amser yn weithredol, yn defnyddio'r config widget gwraidd
   enable: Galluogi'r teclyn hwn
   enable_for_monitor: Galluogi ar y monitor hwn
+  extra_instances: Enghreifftiau Ychwanegol
+  instance: Er enghraifft
   instances: Achosion
 wm:
   animations:

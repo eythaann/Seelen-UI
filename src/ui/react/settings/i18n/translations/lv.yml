@@ -354,8 +354,12 @@ welcome:
   review: "Ja jums patīk izmantot Seelen UI, apsveriet iespēju atstāt atsauksmi par veikalu\_— jūsu atsauksmes palīdz projektam augt un uzlaboties."
   title: Laipni lūdzam Seelen lietotāja saskarnē!
 widget:
+  default_instance: Noklusējuma instance
+  default_instance_hint: Vienmēr aktīvs, izmanto saknes logrīka konfigurāciju
   enable: Ieslēgt šo logrīku
   enable_for_monitor: Ieslēgt šajā monitorā
+  extra_instances: Papildu gadījumi
+  instance: Piemērs
   instances: Instances
 wm:
   animations:

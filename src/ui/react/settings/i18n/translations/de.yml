@@ -363,8 +363,12 @@ welcome:
     bei, dass das Projekt wächst und sich verbessert.
   title: Willkommen bei Seelen UI!
 widget:
+  default_instance: Standardinstanz
+  default_instance_hint: Immer aktiv, verwendet die Root-Widget-Konfiguration
   enable: Aktivieren Sie dieses Widget
   enable_for_monitor: Auf diesem Monitor aktivieren
+  extra_instances: Zusätzliche Instanzen
+  instance: Beispiel
   instances: Instanzen
 wm:
   animations:

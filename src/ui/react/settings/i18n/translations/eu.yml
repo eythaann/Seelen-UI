@@ -355,8 +355,12 @@ welcome:
     uztea; zure iritziak proiektua hazten eta hobetzen laguntzen du.
   title: Ongi etorri Seelen UI-ra!
 widget:
+  default_instance: Instantzia lehenetsia
+  default_instance_hint: Beti aktibo, root widget-aren konfigurazioa erabiltzen du
   enable: Gaitu widget hau
   enable_for_monitor: Gaitu monitore honetan
+  extra_instances: Instantzia gehigarriak
+  instance: Instantzia
   instances: Makineria
 wm:
   animations:

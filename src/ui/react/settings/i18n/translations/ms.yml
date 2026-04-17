@@ -355,8 +355,12 @@ welcome:
     baik.
   title: Selamat datang ke UI Seelen!
 widget:
+  default_instance: Contoh Lalai
+  default_instance_hint: Sentiasa aktif, menggunakan konfigurasi widget akar
   enable: Dayakan widget ini
   enable_for_monitor: Dayakan di monitor ini
+  extra_instances: Contoh Tambahan
+  instance: Contoh
   instances: Contoh
 wm:
   animations:

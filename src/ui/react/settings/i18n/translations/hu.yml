@@ -358,8 +358,12 @@ welcome:
     áruházban – visszajelzése segíti a projekt növekedését és fejlődését.
   title: Üdvözöljük a Seelen UI-n!
 widget:
+  default_instance: Alapértelmezett példány
+  default_instance_hint: Mindig aktív, a root widget konfigurációját használja
   enable: Engedélyezze ezt a widgetet
   enable_for_monitor: Engedélyezés ezen a monitoron
+  extra_instances: Extra példányok
+  instance: Példa
   instances: Instances
 wm:
   animations:

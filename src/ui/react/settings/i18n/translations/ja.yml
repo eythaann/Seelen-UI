@@ -335,8 +335,12 @@ welcome:
     の使用を楽しんでいる場合は、ストアにレビューを残すことを検討してください。あなたのフィードバックはプロジェクトの成長と改善に役立ちます。
   title: Seelen UI へようこそ!
 widget:
+  default_instance: デフォルトのインスタンス
+  default_instance_hint: 常にアクティブで、ルート ウィジェット構成を使用します
   enable: このウィジェットを有効にする
   enable_for_monitor: このモニターで有効にする
+  extra_instances: 追加のインスタンス
+  instance: 実例
   instances: インスタンス
 wm:
   animations:

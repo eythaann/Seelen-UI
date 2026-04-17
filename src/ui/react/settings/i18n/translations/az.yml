@@ -352,8 +352,12 @@ welcome:
     düşünün – rəyiniz layihənin böyüməsinə və təkmilləşdirilməsinə kömək edir.
   title: Seelen UI-ə xoş gəlmisiniz!
 widget:
+  default_instance: Defolt Nümunə
+  default_instance_hint: Həmişə aktivdir, kök vidcet konfiqurasiyasından istifadə edir
   enable: Bu widgetı aktivləşdirin
   enable_for_monitor: Bu monitorda aktivləşdirin
+  extra_instances: Əlavə Nümunələr
+  instance: Nümunə
   instances: Hal
 wm:
   animations:

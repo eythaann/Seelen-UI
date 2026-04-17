@@ -358,8 +358,12 @@ welcome:
     il-maħżen — ir-rispons tiegħek jgħin lill-proġett jikber u jitjieb.
   title: Merħba għal Seelen UI!
 widget:
+  default_instance: Istanza Default
+  default_instance_hint: Dejjem attiv, juża l-konfigurazzjoni tal-widget tal-għeruq
   enable: Ippermetti dan il-widget
   enable_for_monitor: Jippermetti fuq dan il-monitor
+  extra_instances: Każijiet Extra
+  instance: Istanza
   instances: Każijiet
 wm:
   animations:

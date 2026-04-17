@@ -353,8 +353,12 @@ welcome:
     winkel te gee - jou terugvoer help die projek om te groei en te verbeter.
   title: Welkom by Seelen UI!
 widget:
+  default_instance: Verstek instansie
+  default_instance_hint: Altyd aktief, gebruik die wortellegstukopstelling
   enable: Aktiveer hierdie widget
   enable_for_monitor: Aktiveer op hierdie monitor
+  extra_instances: Ekstra gevalle
+  instance: Geval
   instances: Instansies
 wm:
   animations:

@@ -357,8 +357,12 @@ welcome:
     мекунанд.
   title: Хуш омадед ба Seelen UI!
 widget:
+  default_instance: Намунаи пешфарз
+  default_instance_hint: Ҳамеша фаъол, конфигуратсияи виҷети решаро истифода мебарад
   enable: Ин виджетро фаъол кунед
   enable_for_monitor: Дар ин монитор фаъол кунед
+  extra_instances: Ҳолатҳои иловагӣ
+  instance: Мисол
   instances: Ҳолатҳо
 wm:
   animations:

@@ -334,8 +334,12 @@ welcome:
   review: Seelen UI를 즐겨 사용하신다면 스토어에 리뷰를 남겨보세요. 여러분의 피드백은 프로젝트 성장과 개선에 도움이 됩니다.
   title: Seelen UI에 오신 것을 환영합니다!
 widget:
+  default_instance: 기본 인스턴스
+  default_instance_hint: 항상 활성 상태이며 루트 위젯 구성을 사용합니다.
   enable: 이 위젯 활성화
   enable_for_monitor: 이 모니터에서 활성화
+  extra_instances: 추가 인스턴스
+  instance: 사례
   instances: 인스턴스
 wm:
   animations:

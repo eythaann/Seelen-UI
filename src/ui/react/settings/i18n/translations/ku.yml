@@ -357,8 +357,12 @@ welcome:
     pêşve bibe.
   title: Hûn bi xêr hatin Seelen UI!
 widget:
+  default_instance: Mînaka Bingehîn
+  default_instance_hint: Her gav çalak e, veavakirina widgeta root bikar tîne
   enable: Vê widgetê çalak bikin
   enable_for_monitor: Li ser vê çavdêriyê çalak bikin
+  extra_instances: Mînakên Zêdeyî
+  instance: Mînak
   instances: Mînak
 wm:
   animations:

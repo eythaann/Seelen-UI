@@ -354,8 +354,12 @@ welcome:
     غور کریں - آپ کی رائے منصوبے کو بڑھنے اور بہتر بنانے میں مدد دیتی ہے۔
   title: سیلین UI میں خوش آمدید!
 widget:
+  default_instance: پہلے سے طے شدہ مثال
+  default_instance_hint: ہمیشہ فعال، روٹ ویجیٹ کی تشکیل کا استعمال کرتا ہے۔
   enable: اس ویجیٹ کو فعال کریں
   enable_for_monitor: اس مانیٹر کو قابل بنائیں
+  extra_instances: اضافی مثالیں۔
+  instance: مثال
   instances: مثال کے طور پر
 wm:
   animations:

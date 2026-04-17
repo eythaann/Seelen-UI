@@ -354,8 +354,12 @@ welcome:
     verbesseren.
   title: Wëllkomm op Seelen UI!
 widget:
+  default_instance: Standard Instanz
+  default_instance_hint: Ëmmer aktiv, benotzt d'Root Widget Configuratioun
   enable: Aktivéiert dëse Widget
   enable_for_monitor: Aktivéiert op dësem Monitor
+  extra_instances: Extra Instanzen
+  instance: Instanz
   instances: Instanzen
 wm:
   animations:

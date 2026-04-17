@@ -353,8 +353,12 @@ welcome:
     санал хүсэлт төслийг хөгжүүлэх, сайжруулахад тусална.
   title: Seelen UI-д тавтай морил!
 widget:
+  default_instance: Өгөгдмөл жишээ
+  default_instance_hint: Үргэлж идэвхтэй, үндсэн виджетийн тохиргоог ашигладаг
   enable: Энэ виджетийг идэвхжүүлэх
   enable_for_monitor: Энэ монитор дээр идэвхжүүлэх
+  extra_instances: Нэмэлт тохиолдлууд
+  instance: Жишээ
   instances: Саналууд
 wm:
   animations:

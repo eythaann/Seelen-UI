@@ -356,8 +356,12 @@ welcome:
     kauppaan – palautteesi auttaa projektia kasvamaan ja kehittymään.
   title: Tervetuloa Seelen-käyttöliittymään!
 widget:
+  default_instance: Oletusinstanssi
+  default_instance_hint: Aina aktiivinen, käyttää juuriwidgetin konfiguraatiota
   enable: Ota tämä widget käyttöön
   enable_for_monitor: Ota käyttöön tällä näytöllä
+  extra_instances: Ylimääräiset esiintymät
+  instance: Esimerkki
   instances: Instanssit
 wm:
   animations:

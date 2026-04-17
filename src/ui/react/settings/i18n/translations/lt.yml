@@ -354,8 +354,12 @@ welcome:
     ir tobulėti.
   title: Sveiki atvykę į Seelen vartotojo sąsają!
 widget:
+  default_instance: Numatytasis egzempliorius
+  default_instance_hint: Visada aktyvus, naudoja šakninio valdiklio konfigūraciją
   enable: Įjungti šį valdiklį
   enable_for_monitor: Įjungti šiame monitoriuje
+  extra_instances: Papildomi atvejai
+  instance: Pavyzdys
   instances: Atvejai
 wm:
   animations:

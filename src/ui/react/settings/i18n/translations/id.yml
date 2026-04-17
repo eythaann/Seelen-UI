@@ -357,8 +357,12 @@ welcome:
     ulasan di toko — masukan Anda membantu proyek tumbuh dan meningkat.
   title: Selamat datang di Seelen UI!
 widget:
+  default_instance: Mesin Virtual Bawaan
+  default_instance_hint: Selalu aktif, menggunakan konfigurasi widget root
   enable: Aktifkan widget ini
   enable_for_monitor: Aktifkan pada monitor ini
+  extra_instances: Instans Ekstra
+  instance: Contoh
   instances: Contoh
 wm:
   animations:

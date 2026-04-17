@@ -356,8 +356,12 @@ welcome:
     թողնելու մասին. ձեր կարծիքն օգնում է նախագծի զարգացմանն ու կատարելագործմանը:
   title: 'Բարի գալուստ Seelen UI:'
 widget:
+  default_instance: Կանխադրված օրինակ
+  default_instance_hint: Միշտ ակտիվ է, օգտագործում է արմատային վիջեթի կազմաձևը
   enable: Միացրեք այս հարմարանքը
   enable_for_monitor: Միացնել այս մոնիտորի վրա
+  extra_instances: Լրացուցիչ դեպքեր
+  instance: Օրինակ
   instances: Դեպքեր
 wm:
   animations:

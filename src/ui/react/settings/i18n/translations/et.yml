@@ -353,8 +353,12 @@ welcome:
     jätmist – teie tagasiside aitab projektil kasvada ja täiustada.
   title: Tere tulemast Seeleni kasutajaliidese!
 widget:
+  default_instance: Vaikimisi eksemplar
+  default_instance_hint: Alati aktiivne, kasutab juurvidina konfiguratsiooni
   enable: Võta see vidin kasutusele
   enable_for_monitor: Lubatud sellel monitoril
+  extra_instances: Lisajuhtumid
+  instance: Näide
   instances: Instants
 wm:
   animations:

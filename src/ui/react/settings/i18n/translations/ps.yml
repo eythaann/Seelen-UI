@@ -347,8 +347,12 @@ welcome:
     ستاسو نظر د پروژې وده او وده کې مرسته کوي.
   title: Seelen UI ته ښه راغلاست!
 widget:
+  default_instance: ډیفالټ مثال
+  default_instance_hint: تل فعال، د روټ ویجټ ترتیب کاروي
   enable: دې ویجیټ وړ کړئ
   enable_for_monitor: پدې څارنه کې وړ کړئ
+  extra_instances: اضافي مثالونه
+  instance: مثال
   instances: مثالونه
 wm:
   animations:

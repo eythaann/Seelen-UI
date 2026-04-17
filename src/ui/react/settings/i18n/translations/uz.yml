@@ -361,8 +361,12 @@ welcome:
     beradi.
   title: Seelen UI-ga xush kelibsiz!
 widget:
+  default_instance: Standart misol
+  default_instance_hint: Har doim faol, ildiz vidjet konfiguratsiyasidan foydalanadi
   enable: Bu vidjetni yoqing
   enable_for_monitor: Ushbu monitorga yoqish
+  extra_instances: Qo'shimcha holatlar
+  instance: Misol
   instances: Mustaqil holatlar
 wm:
   animations:

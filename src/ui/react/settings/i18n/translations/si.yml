@@ -352,8 +352,12 @@ welcome:
     ඔබේ ප්‍රතිපෝෂණය ව්‍යාපෘතිය වර්ධනය වීමට සහ වැඩිදියුණු කිරීමට උපකාරී වේ.
   title: Seelen UI වෙත සාදරයෙන් පිළිගනිමු!
 widget:
+  default_instance: පෙරනිමි අවස්ථාව
+  default_instance_hint: සැමවිටම සක්‍රියයි, root widget config භාවිතා කරයි
   enable: මෙම විජට් සක්රීය කරන්න
   enable_for_monitor: මෙම මොනිටරය මත සක්රීය කරන්න
+  extra_instances: අමතර අවස්ථා
+  instance: උදාහරණය
   instances: අවස්ථා
 wm:
   animations:

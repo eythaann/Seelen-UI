@@ -353,8 +353,12 @@ welcome:
     projekt razvija i poboljšava.
   title: Dobrodošli u Seelen UI!
 widget:
+  default_instance: Zadana instanca
+  default_instance_hint: Uvijek aktivan, koristi konfiguraciju root widgeta
   enable: Omogući ovaj widget
   enable_for_monitor: Omogući na ovom monitoru
+  extra_instances: Extra Instances
+  instance: Instance
   instances: Slučajevi
 wm:
   animations:

@@ -359,8 +359,12 @@ welcome:
     మరియు మెరుగుపరచడంలో సహాయపడుతుంది.
   title: Seelen UIకి స్వాగతం!
 widget:
+  default_instance: డిఫాల్ట్ ఉదాహరణ
+  default_instance_hint: ఎల్లప్పుడూ సక్రియంగా ఉంటుంది, రూట్ విడ్జెట్ కాన్ఫిగర్‌ని ఉపయోగిస్తుంది
   enable: ఈ విడ్జెట్‌ను ప్రారంభించండి
   enable_for_monitor: ఈ మానిటర్‌లో ప్రారంభించండి
+  extra_instances: అదనపు సందర్భాలు
+  instance: ఉదాహరణ
   instances: ఉదాహరణలు
 wm:
   animations:

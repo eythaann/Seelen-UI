@@ -343,8 +343,12 @@ welcome:
     እና እንዲሻሻል ይረዳል።
   title: ወደ Seelen UI እንኳን በደህና መጡ!
 widget:
+  default_instance: ነባሪ ምሳሌ
+  default_instance_hint: ሁልጊዜ ንቁ፣ የስር መግብር አወቃቀሩን ይጠቀማል
   enable: ይህን ንዑስ ፕሮግራም ያንቁ
   enable_for_monitor: በዚህ መቆጣጠሪያ ላይ ያንቁ
+  extra_instances: ተጨማሪ ምሳሌዎች
+  instance: ምሳሌ
   instances: ሁኔታዎች
 wm:
   animations:

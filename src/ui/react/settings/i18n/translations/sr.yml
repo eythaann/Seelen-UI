@@ -357,8 +357,12 @@ welcome:
     пројекат расте и унапређује се.
   title: Добродошли у Сеелен УИ!
 widget:
+  default_instance: Подразумевана инстанца
+  default_instance_hint: Увек активан, користи конфигурацију основног виџета
   enable: Омогућите овај виџет
   enable_for_monitor: Омогући на овом монитору
+  extra_instances: Ектра Инстанцес
+  instance: Инстанце
   instances: Случајеви
 wm:
   animations:

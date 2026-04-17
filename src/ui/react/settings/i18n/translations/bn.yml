@@ -359,8 +359,12 @@ welcome:
     করে।
   title: Seelen UI তে স্বাগতম!
 widget:
+  default_instance: ডিফল্ট উদাহরণ
+  default_instance_hint: সর্বদা সক্রিয়, রুট উইজেট কনফিগারেশন ব্যবহার করে
   enable: এই উইজেট সক্ষম করুন
   enable_for_monitor: এই মনিটরে সক্ষম করুন
+  extra_instances: অতিরিক্ত উদাহরণ
+  instance: দৃষ্টান্ত
   instances: উদাহরণ
 wm:
   animations:

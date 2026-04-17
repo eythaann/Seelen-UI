@@ -359,8 +359,12 @@ welcome:
     करती है।
   title: सीलेन यूआई में आपका स्वागत है!
 widget:
+  default_instance: डिफ़ॉल्ट उदाहरण
+  default_instance_hint: हमेशा सक्रिय, रूट विजेट कॉन्फ़िगरेशन का उपयोग करता है
   enable: इस विजेट को सक्षम करें
   enable_for_monitor: इस मॉनिटर पर सक्षम करें
+  extra_instances: अतिरिक्त उदाहरण
+  instance: उदाहरण
   instances: उदाहरण
 wm:
   animations:

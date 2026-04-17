@@ -355,8 +355,12 @@ welcome:
     вдосконалюватися.
   title: Ласкаво просимо до Seelen UI!
 widget:
+  default_instance: Примірник за замовчуванням
+  default_instance_hint: Завжди активний, використовує конфігурацію кореневого віджета
   enable: Увімкніть цей віджет
   enable_for_monitor: Увімкнути на цьому моніторі
+  extra_instances: Додаткові екземпляри
+  instance: Екземпляр
   instances: Екземпляри
 wm:
   animations:

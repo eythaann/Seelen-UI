@@ -361,8 +361,12 @@ welcome:
     impendulo yakho isiza iphrojekthi ukuthi ikhule futhi ithuthuke.
   title: Siyakwamukela ku-Seelen UI!
 widget:
+  default_instance: Isimo Esizenzakalelayo
+  default_instance_hint: Ihlala isebenza, isebenzisa ukulungiselelwa kwewijethi yempande
   enable: Nika amandla lewijethi
   enable_for_monitor: Nika amandla kulo mqaphi
+  extra_instances: Izimo Ezengeziwe
+  instance: Isibonelo
   instances: Izimo
 wm:
   animations:

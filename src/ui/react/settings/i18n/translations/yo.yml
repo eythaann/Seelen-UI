@@ -346,8 +346,12 @@ welcome:
     rẹ ṣe iranlọwọ fun iṣẹ akanṣe lati dagba ati ilọsiwaju.
   title: Kaabọ si Seelen UI!
 widget:
+  default_instance: Apeere aiyipada
+  default_instance_hint: Ṣiṣẹ nigbagbogbo, nlo atunto ẹrọ ailorukọ root
   enable: Mu ẹrọ ailorukọ yii ṣiṣẹ
   enable_for_monitor: Mu ṣiṣẹ lori atẹle yii
+  extra_instances: Awọn apẹẹrẹ afikun
+  instance: Apeere
   instances: Awọn iṣẹlẹ
 wm:
   animations:

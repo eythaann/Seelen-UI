@@ -357,8 +357,12 @@ welcome:
     подобри.
   title: Добредојдовте во Seelen UI!
 widget:
+  default_instance: Стандардна инстанца
+  default_instance_hint: Секогаш активен, ја користи конфигурацијата на root-виџетот
   enable: Овозможете го овој додаток
   enable_for_monitor: Овозможете на овој монитор
+  extra_instances: Дополнителни случаи
+  instance: Пример
   instances: Примери
 wm:
   animations:

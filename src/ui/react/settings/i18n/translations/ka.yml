@@ -354,8 +354,12 @@ welcome:
     თქვენი გამოხმაურება ეხმარება პროექტს ზრდასა და გაუმჯობესებაში.
   title: კეთილი იყოს თქვენი მობრძანება Seelen UI-ში!
 widget:
+  default_instance: ნაგულისხმევი ინსტანცია
+  default_instance_hint: ყოველთვის აქტიური, იყენებს root ვიჯეტის კონფიგურაციას
   enable: ჩართეთ ეს ვიჯეტი
   enable_for_monitor: ჩართეთ ამ მონიტორზე
+  extra_instances: დამატებითი შემთხვევები
+  instance: მაგალითად
   instances: შემთხვევები
 wm:
   animations:

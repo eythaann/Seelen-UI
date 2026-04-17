@@ -14,9 +14,12 @@ interface InstanceSelectorProps {
   }[];
 }
 
-export function WidgetInstanceSelector(
-  { widgetId, options, selected, onSelect }: InstanceSelectorProps,
-) {
+export function WidgetInstanceSelector({
+  widgetId,
+  options,
+  selected,
+  onSelect,
+}: InstanceSelectorProps) {
   const onInstanceCreated = () => {
     const instanceId = crypto.randomUUID();
     patchWidgetInstanceConfig(widgetId, instanceId, {});
@@ -35,19 +38,18 @@ export function WidgetInstanceSelector(
   return (
     <Space.Compact>
       <Select
-        style={{ width: 300 }}
+        style={{ width: 200 }}
         value={selected}
         onSelect={onSelect}
         options={options}
         allowClear
         onClear={() => onSelect(null)}
-        placeholder="-"
       />
-      <Button onClick={onInstanceCreated}>
-        <Icon iconName="FaPlus" />
-      </Button>
-      <Button onClick={onInstanceDeleted}>
+      <Button danger disabled={!selected} onClick={onInstanceDeleted}>
         <Icon iconName="IoTrash" />
+      </Button>
+      <Button type="primary" onClick={onInstanceCreated}>
+        <Icon iconName="FaPlus" />
       </Button>
     </Space.Compact>
   );

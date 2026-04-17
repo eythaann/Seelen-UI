@@ -343,8 +343,12 @@ welcome:
     שלך עוזר לפרויקט לצמוח ולהשתפר.
   title: ברוכים הבאים לממשק המשתמש של Seelen!
 widget:
+  default_instance: מופע ברירת מחדל
+  default_instance_hint: פעיל תמיד, משתמש בתצורת ה-Widget השורש
   enable: אפשר יישומון זה
   enable_for_monitor: אפשר בצג זה
+  extra_instances: מופעים נוספים
+  instance: דוּגמָה
   instances: מקרים
 wm:
   animations:

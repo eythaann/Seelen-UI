@@ -355,8 +355,12 @@ welcome:
     seu feedback ajuda o projeto a crescer e melhorar.
   title: Bem-vindo à UI da Seelen!
 widget:
+  default_instance: Instância padrão
+  default_instance_hint: Sempre ativo, usa a configuração do widget raiz
   enable: Ativar esse widget
   enable_for_monitor: Ativar neste monitor
+  extra_instances: Instâncias extras
+  instance: Exemplo
   instances: Instâncias
 wm:
   animations:
