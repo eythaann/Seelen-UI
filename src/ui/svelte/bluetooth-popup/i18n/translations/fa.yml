@@ -3,8 +3,11 @@ cancel: لغو کنید
 confirm: تایید کنید
 confirm_only: جفت شدن را تایید کنید
 confirm_pin: تأیید کنید که پین ​​مطابقت دارد
+connect: اتصال
 connected: متصل شد
+connecting: در حال اتصال...
 disconnect: قطع کن
+disconnecting: در حال قطع شدن...
 display_pin: این پین را در دستگاه وارد کنید
 lowenergy: کم انرژی
 more: تنظیمات بلوتوث بیشتر
@@ -21,4 +24,5 @@ provide_pin: پین را وارد کنید
 scanning: در حال اسکن دستگاه ها...
 unpair: لغو جفت کردن
 unpair_failed: لغو مرتبط‌سازی انجام نشد
+unpairing: لغو جفت شدن...
 username: نام کاربری

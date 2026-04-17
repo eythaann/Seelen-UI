@@ -3,8 +3,11 @@ cancel: Չեղարկել
 confirm: Հաստատել
 confirm_only: Հաստատեք զուգավորումը
 confirm_pin: Հաստատեք, որ PIN-ը համընկնում է
+connect: Միացնել
 connected: Միացված է
+connecting: Միացում...
 disconnect: Անջատել
+disconnecting: Անջատվում է...
 display_pin: Մուտքագրեք այս PIN կոդը սարքի վրա
 lowenergy: Ցածր էներգիա
 more: Ավելի շատ Bluetooth կարգավորումներ
@@ -21,4 +24,5 @@ provide_pin: Մուտքագրեք PIN կոդը
 scanning: Սարքերի սկանավորում...
 unpair: Ապազույգացնել
 unpair_failed: Չհաջողվեց չեղարկել զուգակցումը
+unpairing: Զուգավորումը չեղարկվում է...
 username: Օգտվողի անունը

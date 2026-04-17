@@ -4,19 +4,16 @@
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { t } from "../i18n";
   import { getIconForBTDevice, getMinorAsString } from "../icons";
-  import { globalState } from "../state.svelte";
-  import { useTransition } from "libs/ui/svelte/utils/hooks.svelte";
+  import { BluetoothOperation, globalState } from "../state.svelte";
 
   interface Props {
     device: BluetoothDevice;
   }
   let { device }: Props = $props();
 
-  const transition = useTransition();
-
   let selected = $derived(globalState.selectedDeviceId === device.id);
-  let loading = $derived(transition.loading);
-  let error = $derived(transition.error);
+  let loading = $derived(globalState.loadingDeviceId === device.id);
+  let error = $state<unknown>(null);
 
   let pairingAction = $state<DevicePairingNeededAction | null>(null);
 
@@ -24,29 +21,51 @@
   let usernameInput = $state("");
   let passwordInput = $state("");
 
-  // Watch for selection changes to reset state
   $effect(() => {
     if (!selected) {
       handleCancelPair();
-      transition.clearError();
+      error = null;
     }
   });
 
+  async function withLoading(operation: BluetoothOperation, fn: () => Promise<void>) {
+    globalState.loadingDeviceId = device.id;
+    globalState.loadingOperation = operation;
+    error = null;
+    try {
+      await fn();
+    } catch (e) {
+      console.error(e);
+      error = e;
+    } finally {
+      if (globalState.loadingDeviceId === device.id) {
+        globalState.loadingDeviceId = null;
+        globalState.loadingOperation = null;
+      }
+    }
+  }
+
+  async function handleConnect() {
+    await withLoading(BluetoothOperation.Connecting, async () => {
+      await invoke(SeelenCommand.ConnectBluetoothDevice, { id: device.id });
+    });
+  }
+
   async function handleDisconnect() {
-    transition.start(async () => {
+    await withLoading(BluetoothOperation.Disconnecting, async () => {
       await invoke(SeelenCommand.DisconnectBluetoothDevice, { id: device.id });
     });
   }
 
   async function handleForget() {
-    transition.start(async () => {
+    await withLoading(BluetoothOperation.Unpairing, async () => {
       await invoke(SeelenCommand.ForgetBluetoothDevice, { id: device.id });
     });
   }
 
   async function handleTriggerPair() {
     if (pairingAction) {
-      transition.start(async () => {
+      await withLoading(BluetoothOperation.Pairing, async () => {
         await invoke(SeelenCommand.ConfirmBluetoothDevicePairing, {
           id: device.id,
           answer: {
@@ -60,7 +79,7 @@
         pairingAction = null;
       });
     } else {
-      transition.start(async () => {
+      await withLoading(BluetoothOperation.Pairing, async () => {
         pairingAction = await invoke(SeelenCommand.RequestPairBluetoothDevice, {
           id: device.id,
         });
@@ -161,8 +180,8 @@
   </div>
 
   {#if selected}
-    {#if loading && !device.paired}
-      <div class="bt-device-loading">{$t("pairing")}</div>
+    {#if loading}
+      <div class="bt-device-loading">{$t(globalState.loadingOperation ?? "pairing")}</div>
     {/if}
 
     {#if showPairingFields()}
@@ -209,11 +228,18 @@
     {#if !loading}
       <div class="bt-device-actions">
         {#if device.paired}
+          {#if device.canConnect}
+            <button data-skin="solid" onclick={handleConnect} disabled={loading}>
+              {$t("connect")}
+            </button>
+          {/if}
+
           {#if device.canDisconnect}
             <button data-skin="default" onclick={handleDisconnect} disabled={loading}>
               {$t("disconnect")}
             </button>
           {/if}
+          
           <button data-skin="default" onclick={handleForget} disabled={loading}>
             {$t("unpair")}
           </button>

@@ -3,8 +3,11 @@ cancel: Zrušiť
 confirm: Potvrďte
 confirm_only: Potvrďte spárovanie
 confirm_pin: Potvrďte, že sa PIN zhoduje
+connect: Pripojte sa
 connected: Pripojené
+connecting: Pripája sa...
 disconnect: Odpojiť
+disconnecting: Odpája sa...
 display_pin: Zadajte tento PIN na zariadení
 lowenergy: Nízka energia
 more: Ďalšie nastavenia Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Zadajte PIN
 scanning: Hľadajú sa zariadenia...
 unpair: Zrušiť párovanie
 unpair_failed: Zrušenie párovania zlyhalo
+unpairing: Ruší sa párovanie...
 username: Používateľské meno

@@ -3,8 +3,11 @@ cancel: Annuleren
 confirm: Bevestigen
 confirm_only: Bevestig het koppelen
 confirm_pin: Controleer of de pincode overeenkomt
+connect: Verbinden
 connected: Aangesloten
+connecting: Verbinden...
 disconnect: Verbreek de verbinding
+disconnecting: Verbinding verbreken...
 display_pin: Voer deze pincode in op het apparaat
 lowenergy: Lage energie
 more: Meer Bluetooth-instellingen
@@ -21,4 +24,5 @@ provide_pin: Voer pincode in
 scanning: Scannen naar apparaten...
 unpair: Ontkoppelen
 unpair_failed: Ontkoppelen is mislukt
+unpairing: Ontkoppelen...
 username: Gebruikersnaam

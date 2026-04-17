@@ -3,8 +3,11 @@ cancel: Fagilee
 confirm: Jẹrisi
 confirm_only: Jẹrisi pọpọ
 confirm_pin: Jẹrisi pe awọn ere idaraya PIN
+connect: Sopọ
 connected: Sopọ
+connecting: Nsopọ...
 disconnect: Ge kuro
+disconnecting: Npa asopọ...
 display_pin: Tẹ PIN sii lori ẹrọ naa
 lowenergy: Agbara kekere
 more: Awọn eto Bluetooth diẹ sii
@@ -21,4 +24,5 @@ provide_pin: Tẹ PIN
 scanning: Simuniṣini fun awọn ẹrọ ...
 unpair: Alaiyẹ
 unpair_failed: Unpairating kuna
+unpairing: Ti ko so pọ...
 username: Orukọ olumulo

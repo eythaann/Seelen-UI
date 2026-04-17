@@ -3,8 +3,11 @@ cancel: Скасувати
 confirm: Підтвердити
 confirm_only: Підтвердьте створення пари
 confirm_pin: Переконайтеся, що PIN-код збігається
+connect: Підключитися
 connected: Підключено
+connecting: Підключення...
 disconnect: Відключити
+disconnecting: Відключення...
 display_pin: Введіть цей PIN-код на пристрої
 lowenergy: Низька енергія
 more: Більше налаштувань Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Введіть PIN-код
 scanning: Пошук пристроїв...
 unpair: Розірвати пару
 unpair_failed: Помилка роз’єднання
+unpairing: Скасування пари...
 username: Ім'я користувача

@@ -82,13 +82,11 @@
         padding: 10px 8px;
         border-radius: 8px;
 
-        &:hover,
-        &:focus {
-          outline: none;
+        &:hover {
           background-color: var(--slu-std-ui-hover-overlay);
         }
 
-        &.wlan-entry-selected {
+        &.bt-device-selected {
           background-color: var(--slu-std-ui-pressed-overlay);
         }
 

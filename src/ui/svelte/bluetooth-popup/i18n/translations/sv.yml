@@ -3,8 +3,11 @@ cancel: Avboka
 confirm: Bekräfta
 confirm_only: Bekräfta ihopparningen
 confirm_pin: Bekräfta att PIN-koden matchar
+connect: Ansluta
 connected: Ansluten
+connecting: Ansluter...
 disconnect: Koppla från
+disconnecting: Kopplar från...
 display_pin: Ange denna PIN-kod på enheten
 lowenergy: Låg energi
 more: Fler Bluetooth-inställningar
@@ -21,4 +24,5 @@ provide_pin: Ange PIN-kod
 scanning: Söker efter enheter...
 unpair: Ta bort paret
 unpair_failed: Det gick inte att ta bort parkopplingen
+unpairing: Tar bort parkoppling...
 username: Användarnamn

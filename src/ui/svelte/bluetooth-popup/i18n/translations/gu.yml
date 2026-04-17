@@ -3,8 +3,11 @@ cancel: રદ કરો
 confirm: પુષ્ટિ કરો
 confirm_only: જોડી બનાવવાની પુષ્ટિ કરો
 confirm_pin: પુષ્ટિ કરો કે PIN મેળ ખાય છે
+connect: કનેક્ટ કરો
 connected: કનેક્ટેડ
+connecting: કનેક્ટ કરી રહ્યું છે...
 disconnect: ડિસ્કનેક્ટ કરો
+disconnecting: ડિસ્કનેક્ટ કરી રહ્યું છે...
 display_pin: ઉપકરણ પર આ PIN દાખલ કરો
 lowenergy: ઓછી ઉર્જા
 more: વધુ બ્લૂટૂથ સેટિંગ્સ
@@ -21,4 +24,5 @@ provide_pin: PIN દાખલ કરો
 scanning: ઉપકરણો માટે સ્કેન કરી રહ્યું છે...
 unpair: અનપેયર કરો
 unpair_failed: અનપેયરિંગ નિષ્ફળ થયું
+unpairing: અનપેયરિંગ...
 username: વપરાશકર્તા નામ

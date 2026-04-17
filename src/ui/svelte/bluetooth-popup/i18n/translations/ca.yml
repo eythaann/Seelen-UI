@@ -3,8 +3,11 @@ cancel: Cancel·la
 confirm: Confirmeu
 confirm_only: Confirmeu l'aparellament
 confirm_pin: Confirmeu que el PIN coincideixi
+connect: Connecta't
 connected: Connectat
+connecting: S'està connectant...
 disconnect: Desconnecta
+disconnecting: S'està desconnectant...
 display_pin: Introduïu aquest PIN al dispositiu
 lowenergy: Baixa energia
 more: Més configuració de Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Introduïu el PIN
 scanning: S'estan buscant dispositius...
 unpair: Desvincular
 unpair_failed: S'ha produït un error en desvincular
+unpairing: S'està desvinculant...
 username: Nom d'usuari

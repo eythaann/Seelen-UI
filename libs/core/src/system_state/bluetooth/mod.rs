@@ -23,6 +23,7 @@ pub struct BluetoothDevice {
     pub paired: bool,
     pub can_pair: bool,
     pub can_disconnect: bool,
+    pub can_connect: bool,
     pub is_low_energy: bool,
 }
 

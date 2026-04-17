@@ -3,8 +3,11 @@ cancel: لغوه کړئ
 confirm: تایید کړه
 confirm_only: جوړه کول تایید کړئ
 confirm_pin: تایید کړئ چې PIN سره سمون لري
+connect: نښلول
 connected: نښلول شوی
+connecting: نښلول...
 disconnect: منحل کول
+disconnecting: قطع کول...
 display_pin: دا PIN په وسیله کې دننه کړئ
 lowenergy: کمه انرژي
 more: د بلوتوټ نور ترتیبات
@@ -21,4 +24,5 @@ provide_pin: PIN داخل کړئ
 scanning: د وسایلو سکین کول...
 unpair: بې جوړې
 unpair_failed: یوځای کول ناکام شول
+unpairing: جوړه کول...
 username: کارن نوم

@@ -3,8 +3,11 @@ cancel: Ματαίωση
 confirm: Επιβεβαιώνω
 confirm_only: Επιβεβαιώστε τη σύζευξη
 confirm_pin: Επιβεβαιώστε ότι το PIN ταιριάζει
+connect: Συνδέω
 connected: Συνδεδεμένος
+connecting: Συνδετικός...
 disconnect: Αποσυνδέω
+disconnecting: Αποσύνδεση...
 display_pin: Εισαγάγετε αυτό το PIN στη συσκευή
 lowenergy: Χαμηλής Ενέργειας
 more: Περισσότερες ρυθμίσεις Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Εισαγάγετε το PIN
 scanning: Σάρωση για συσκευές...
 unpair: Κατάργηση ζεύξης
 unpair_failed: Η κατάργηση σύζευξης απέτυχε
+unpairing: Κατάργηση σύζευξης...
 username: Όνομα χρήστη

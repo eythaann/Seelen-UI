@@ -20,8 +20,17 @@ subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
 
 await Promise.all([devices.init(), radios.init()]);
 
+export enum BluetoothOperation {
+  Connecting = "connecting",
+  Disconnecting = "disconnecting",
+  Pairing = "pairing",
+  Unpairing = "unpairing",
+}
+
 let isScanning = $state(false);
 let selectedDeviceId = $state<string | null>(null);
+let loadingDeviceId = $state<string | null>(null);
+let loadingOperation = $state<BluetoothOperation | null>(null);
 
 widget.window.onFocusChanged(async (e) => {
   if (!e.payload) {
@@ -55,6 +64,20 @@ class State {
   }
   set selectedDeviceId(value: string | null) {
     selectedDeviceId = value;
+  }
+
+  get loadingDeviceId() {
+    return loadingDeviceId;
+  }
+  set loadingDeviceId(value: string | null) {
+    loadingDeviceId = value;
+  }
+
+  get loadingOperation() {
+    return loadingOperation;
+  }
+  set loadingOperation(value: BluetoothOperation | null) {
+    loadingOperation = value;
   }
 }
 

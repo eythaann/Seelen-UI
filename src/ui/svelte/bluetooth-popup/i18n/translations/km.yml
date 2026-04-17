@@ -3,8 +3,11 @@ cancel: លប់ចោល
 confirm: បហ្ជាក់
 confirm_only: បញ្ជាក់គូ
 confirm_pin: បញ្ជាក់ថាម្ជុលផ្គូផ្គង
+connect: ភ្ជាប់
 connected: ខាងចមដេល
+connecting: កំពុងភ្ជាប់...
 disconnect: ផ្ដាច់
+disconnecting: កំពុងផ្តាច់...
 display_pin: បញ្ចូលលេខសម្ងាត់នេះនៅលើឧបករណ៍
 lowenergy: ថាមពលទាប
 more: ការកំណត់ប៊្លូធូសច្រើនទៀត
@@ -21,4 +24,5 @@ provide_pin: បញ្ចូលលេខសម្ងាត់
 scanning: ស្កេនរកឧបករណ៍ ...
 unpair: ដេលរសករ
 unpair_failed: ការដាក់មិនបានបរាជ័យ
+unpairing: កំពុង​ផ្ដាច់...
 username: ឈ្មោះអ្នក

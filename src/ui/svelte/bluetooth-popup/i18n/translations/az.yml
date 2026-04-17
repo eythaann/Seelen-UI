@@ -3,8 +3,11 @@ cancel: Ləğv etmək
 confirm: Təsdiq etmək
 confirm_only: Cütləşmə təsdiqləyin
 confirm_pin: PİN uyğun olduğunu təsdiqləyin
+connect: Qoşun
 connected: Bağlı
+connecting: Qoşulur...
 disconnect: Ayırd etmək
+disconnecting: Bağlantı kəsilir...
 display_pin: Cihazdakı bu pini daxil edin
 lowenergy: Aşağı enerji
 more: Daha çox bluetooth parametrləri
@@ -21,4 +24,5 @@ provide_pin: Pin daxil etmək
 scanning: Cihazlar üçün tarama ...
 unpair: Çəpər
 unpair_failed: Uğursuzluq uğursuz oldu
+unpairing: Qoşulmaz...
 username: İstifadəçi adı

@@ -3,8 +3,11 @@ cancel: Bekor qilmoq
 confirm: Tasdiqlamoq
 confirm_only: Juftlashtirishni tasdiqlang
 confirm_pin: Pin o'yinlarini tasdiqlang
+connect: Ulanish
 connected: Ulangan
+connecting: Ulanmoqda...
 disconnect: Ajratmoq
+disconnecting: Aloqa uzilmoqda...
 display_pin: Qurilmada ushbu PIN kodini kiriting
 lowenergy: Kam energiya
 more: Bluetooth sozlamalari
@@ -21,4 +24,5 @@ provide_pin: PIN kodini kiriting
 scanning: Qurilmalar uchun skanerlash ...
 unpair: Yechmoq
 unpair_failed: Biror ishlamay qolmadi
+unpairing: Ulanish uzilmoqda...
 username: Foydalanuvchi nomi

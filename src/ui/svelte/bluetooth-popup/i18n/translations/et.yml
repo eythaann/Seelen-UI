@@ -3,8 +3,11 @@ cancel: Tühista
 confirm: Kinnita
 confirm_only: Kinnitage sidumine
 confirm_pin: Veenduge, et PIN-kood ühtib
+connect: Ühendage
 connected: Ühendatud
+connecting: Ühendamine...
 disconnect: Katkesta ühendus
+disconnecting: Ühenduse katkestamine...
 display_pin: Sisestage see PIN-kood seadmesse
 lowenergy: Madal energia
 more: Rohkem Bluetoothi ​​seadeid
@@ -21,4 +24,5 @@ provide_pin: Sisestage PIN-kood
 scanning: Seadmete otsimine...
 unpair: Katkestage sidumine
 unpair_failed: Sidumine ebaõnnestus
+unpairing: Sidumise katkestamine...
 username: Kasutajanimi

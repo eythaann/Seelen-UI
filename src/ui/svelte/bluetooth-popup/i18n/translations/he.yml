@@ -3,8 +3,11 @@ cancel: לְבַטֵל
 confirm: לְאַשֵׁר
 confirm_only: אשר את ההתאמה
 confirm_pin: אשר שה-PIN תואם
+connect: לְחַבֵּר
 connected: מְחוּבָּר
+connecting: מְקַשֵׁר...
 disconnect: לְנַתֵק
+disconnecting: מתנתק...
 display_pin: הזן PIN זה במכשיר
 lowenergy: אנרגיה נמוכה
 more: הגדרות Bluetooth נוספות
@@ -21,4 +24,5 @@ provide_pin: הזן PIN
 scanning: סורק לאיתור מכשירים...
 unpair: בטל התאמה
 unpair_failed: ביטול ההתאמה נכשל
+unpairing: מבטל התאמה...
 username: שם משתמש

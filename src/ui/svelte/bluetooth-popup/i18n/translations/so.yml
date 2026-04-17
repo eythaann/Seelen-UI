@@ -3,8 +3,11 @@ cancel: Burin
 confirm: Xaqiijin
 confirm_only: Xaqiiji lammaanaha
 confirm_pin: Xaqiiji in PIN-ka PIN
+connect: Ku xidhnow
 connected: Ku xiran
+connecting: Isku xidhka...
 disconnect: Ka furid
+disconnecting: Goynta
 display_pin: Gali PIN-kan aaladda
 lowenergy: Tamar hooseeya
 more: Meelo badan oo Bluetooth ah
@@ -21,4 +24,5 @@ provide_pin: Gali PIN
 scanning: Iskaanka aaladda ...
 unpair: Aan dawlo lahayn
 unpair_failed: Iskaashadda oo aan fiicnayn
+unpairing: Lamaanaha isma lahayn...
 username: Isticmaale

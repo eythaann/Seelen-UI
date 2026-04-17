@@ -3,8 +3,11 @@ cancel: Kanselahin
 confirm: Kumpirmahin
 confirm_only: Kumpirmahin ang pagpapares
 confirm_pin: Kumpirma na ang mga tugma ng PIN
+connect: Kumonekta
 connected: Konektado
+connecting: Kumokonekta...
 disconnect: Idiskonekta
+disconnecting: Dinidiskonekta...
 display_pin: Ipasok ang pin na ito sa aparato
 lowenergy: Mababang enerhiya
 more: Marami pang mga setting ng Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Ipasok ang pin
 scanning: Pag -scan para sa mga aparato ...
 unpair: Walang bayad
 unpair_failed: Nabigo ang walang bayad
+unpairing: Hindi pinapares...
 username: Username

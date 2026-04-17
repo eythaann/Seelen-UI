@@ -3,8 +3,11 @@ cancel: Cancelar
 confirm: Confirmar
 confirm_only: Confirmar emparejamiento
 confirm_pin: Confirma que el PIN coincide
+connect: Conectar
 connected: Conectado
+connecting: Conectando...
 disconnect: Desconectar
+disconnecting: Desconectando...
 display_pin: Ingrese este PIN en el dispositivo
 lowenergy: Energía baja
 more: Más configuraciones de Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Introducir PIN
 scanning: Buscando dispositivos...
 unpair: Desemparejar
 unpair_failed: Error al desemparejar
+unpairing: Desemparejando...
 username: Nombre de usuario

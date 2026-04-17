@@ -3,8 +3,11 @@ cancel: Манъ кардан
 confirm: Тасдищ кардан
 confirm_only: Тасдиқро тасдиқ кунед
 confirm_pin: Тасдиқ кунед, ки мувофиқати PIN
+connect: Пайваст кунед
 connected: Пайваст
+connecting: Пайвастшавӣ...
 disconnect: Ьудо кардан
+disconnecting: Хомӯш карда мешавад...
 display_pin: Инро дар дастгоҳ ворид кунед
 lowenergy: Энергияи паст
 more: Танзимоти бештар Bluetooth
@@ -21,4 +24,5 @@ provide_pin: PIN ворид кунед
 scanning: Ҷустуҷӯи дастгоҳҳо ...
 unpair: Возеҳ
 unpair_failed: Unprair ноком шуд
+unpairing: Ҷуфт нест...
 username: Номи корбар

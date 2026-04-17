@@ -3,8 +3,11 @@ cancel: रद्द गर्नुहोस्
 confirm: पुष्टि गर्नुहोस्
 confirm_only: जोडी पुष्टि गर्नुहोस्
 confirm_pin: पुष्टि गर्नुहोस् कि PIN मेल खान्छ
+connect: जडान गर्नुहोस्
 connected: जडान भयो
+connecting: जडान गर्दै...
 disconnect: जडान विच्छेद गर्नुहोस्
+disconnecting: जडान विच्छेद गर्दै...
 display_pin: यन्त्रमा यो PIN प्रविष्ट गर्नुहोस्
 lowenergy: कम ऊर्जा
 more: थप ब्लुटुथ सेटिङहरू
@@ -21,4 +24,5 @@ provide_pin: PIN प्रविष्ट गर्नुहोस्
 scanning: यन्त्रहरू स्क्यान गर्दै...
 unpair: जोडा हटाउनुहोस्
 unpair_failed: जोडा हटाउन असफल भयो
+unpairing: जोडा हटाउँदै...
 username: प्रयोगकर्ता नाम

@@ -3,8 +3,11 @@ cancel: Ghairi
 confirm: Thibitisha
 confirm_only: Thibitisha pairing
 confirm_pin: Thibitisha kuwa pini inalingana
+connect: Unganisha
 connected: Imeunganishwa
+connecting: Inaunganisha...
 disconnect: Kukatwa
+disconnecting: Inatenganisha...
 display_pin: Ingiza pini hii kwenye kifaa
 lowenergy: Nishati ya chini
 more: Mipangilio zaidi ya Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Ingiza pini
 scanning: Skanning kwa vifaa ...
 unpair: Unpair
 unpair_failed: Unpairing ilishindwa
+unpairing: Inabatilisha uoanishaji...
 username: Jina la mtumiaji

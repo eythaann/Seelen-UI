@@ -3,8 +3,11 @@ cancel: キャンセル
 confirm: 確認する
 confirm_only: ペアリングを確認する
 confirm_pin: PIN が一致することを確認します
+connect: 接続する
 connected: 接続済み
+connecting: 接続中...
 disconnect: 切断する
+disconnecting: 切断中...
 display_pin: デバイスにこの PIN を入力してください
 lowenergy: 低エネルギー
 more: その他の Bluetooth 設定
@@ -21,4 +24,5 @@ provide_pin: PINを入力してください
 scanning: デバイスをスキャンしています...
 unpair: ペアリングを解除する
 unpair_failed: ペアリングの解除に失敗しました
+unpairing: ペアリングを解除しています...
 username: ユーザー名

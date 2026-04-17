@@ -3,8 +3,11 @@ cancel: Utzi
 confirm: Berretsi
 confirm_only: Berretsi parekatzea
 confirm_pin: Ziurtatu PINa bat datorrela
+connect: Konektatu
 connected: Konektatuta
+connecting: Konektatzen...
 disconnect: Deskonektatu
+disconnecting: Deskonektatzen...
 display_pin: Sartu PIN hau gailuan
 lowenergy: Energia baxua
 more: Bluetooth ezarpen gehiago
@@ -21,4 +24,5 @@ provide_pin: Sartu PINa
 scanning: Gailuak bilatzen...
 unpair: Desparekatu
 unpair_failed: Ezin izan da desparekatzean
+unpairing: Desparekatzen...
 username: Erabiltzaile izena

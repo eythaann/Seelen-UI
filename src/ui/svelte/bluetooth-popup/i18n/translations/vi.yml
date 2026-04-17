@@ -3,8 +3,11 @@ cancel: Hủy bỏ
 confirm: Xác nhận
 confirm_only: Xác nhận ghép nối
 confirm_pin: Xác nhận rằng mã PIN khớp
+connect: Kết nối
 connected: Đã kết nối
+connecting: Đang kết nối...
 disconnect: Ngắt kết nối
+disconnecting: Đang ngắt kết nối...
 display_pin: Nhập mã PIN này vào thiết bị
 lowenergy: Năng lượng thấp
 more: Thêm cài đặt Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Nhập mã PIN
 scanning: Đang quét tìm thiết bị...
 unpair: Hủy ghép nối
 unpair_failed: Hủy ghép nối không thành công
+unpairing: Đang hủy ghép nối...
 username: Tên người dùng

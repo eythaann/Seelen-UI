@@ -3,8 +3,11 @@ cancel: Otkaži
 confirm: Potvrdi
 confirm_only: Potvrdite uparivanje
 confirm_pin: Potvrdite da se PIN podudara
+connect: Povežite se
 connected: Povezano
+connecting: Povezivanje...
 disconnect: Prekini vezu
+disconnecting: Prekidanje veze...
 display_pin: Unesite ovaj PIN na uređaju
 lowenergy: Niska energija
 more: Više Bluetooth postavki
@@ -21,4 +24,5 @@ provide_pin: Unesite PIN
 scanning: Skeniranje uređaja...
 unpair: Unpair
 unpair_failed: Prekid uparivanja nije uspio
+unpairing: Prekidanje uparivanja...
 username: Korisničko ime

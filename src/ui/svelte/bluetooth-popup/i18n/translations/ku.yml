@@ -3,8 +3,11 @@ cancel: Bişûndekirin
 confirm: Tesdîqkirin
 confirm_only: Pejirandinê piştrast bikin
 confirm_pin: Piştrast bikin ku PIN lihevhatî ye
+connect: Bihevgirêdan
 connected: Girêdayî
+connecting: Têkilî...
 disconnect: Hevqetandin
+disconnecting: Veqetandin...
 display_pin: Vê PIN-ê li ser cîhazê binivîse
 lowenergy: Enerjiya kêm
 more: More Settings Bluetooth
@@ -21,4 +24,5 @@ provide_pin: PIN binivîse
 scanning: Lêgerîna cîhazan...
 unpair: Pair
 unpair_failed: Rakirin bi ser neket
+unpairing: Bêhevkirin...
 username: Navê bikarhêner

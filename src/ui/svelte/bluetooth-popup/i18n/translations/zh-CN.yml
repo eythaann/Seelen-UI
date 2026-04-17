@@ -3,8 +3,11 @@ cancel: 取消
 confirm: 确认
 confirm_only: 确认配对
 confirm_pin: 确认 PIN 码匹配
+connect: 连接
 connected: 已连接
+connecting: 正在连接...
 disconnect: 断开
+disconnecting: 正在断开连接...
 display_pin: 在设备上输入此 PIN 码
 lowenergy: 低能量
 more: 更多蓝牙设置
@@ -21,4 +24,5 @@ provide_pin: 输入密码
 scanning: 正在扫描设备...
 unpair: 取消配对
 unpair_failed: 取消配对失败
+unpairing: 正在取消配对...
 username: 用户名

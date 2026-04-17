@@ -276,6 +276,7 @@ slu_commands_declaration! {
     RequestPairBluetoothDevice = request_pair_bluetooth_device(id: String) -> DevicePairingNeededAction,
     ConfirmBluetoothDevicePairing = confirm_bluetooth_device_pairing(id: String, answer: DevicePairingAnswer),
     DisconnectBluetoothDevice = disconnect_bluetooth_device(id: String),
+    ConnectBluetoothDevice = connect_bluetooth_device(id: String),
     ForgetBluetoothDevice = forget_bluetooth_device(id: String),
 
     // Start Menu

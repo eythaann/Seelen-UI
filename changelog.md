@@ -18,6 +18,7 @@
 - some audio devices not being loaded correctly.
 - no player thumbnail on song change.
 - settings window stealing focus on reload.
+- connect/disconnect buttons on bluetooth module not working.
 
 ## [2.5.8]
 

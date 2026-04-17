@@ -124,6 +124,7 @@ export enum SeelenCommand {
   RequestPairBluetoothDevice = "request_pair_bluetooth_device",
   ConfirmBluetoothDevicePairing = "confirm_bluetooth_device_pairing",
   DisconnectBluetoothDevice = "disconnect_bluetooth_device",
+  ConnectBluetoothDevice = "connect_bluetooth_device",
   ForgetBluetoothDevice = "forget_bluetooth_device",
   GetStartMenuItems = "get_start_menu_items",
   GetNativeStartMenu = "get_native_start_menu",

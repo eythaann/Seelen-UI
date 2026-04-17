@@ -3,8 +3,11 @@ cancel: Membatalkan
 confirm: Mengonfirmasi
 confirm_only: Konfirmasikan penyandingan
 confirm_pin: Konfirmasikan bahwa PIN cocok
+connect: Menghubungkan
 connected: Terhubung
+connecting: Menghubungkan...
 disconnect: Memutuskan
+disconnecting: Memutuskan sambungan...
 display_pin: Masukkan PIN ini pada perangkat
 lowenergy: Energi Rendah
 more: Pengaturan Bluetooth Lainnya
@@ -21,4 +24,5 @@ provide_pin: Masukkan PIN
 scanning: Memindai perangkat...
 unpair: Putuskan pasangan
 unpair_failed: Gagal melepas pasangan
+unpairing: Memutuskan sambungan...
 username: Nama belakang

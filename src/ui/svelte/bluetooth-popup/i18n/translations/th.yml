@@ -3,8 +3,11 @@ cancel: ยกเลิก
 confirm: ยืนยัน
 confirm_only: ยืนยันการจับคู่
 confirm_pin: ยืนยันว่า PIN ตรงกัน
+connect: เชื่อมต่อ
 connected: เชื่อมต่อแล้ว
+connecting: กำลังเชื่อมต่อ...
 disconnect: ตัดการเชื่อมต่อ
+disconnecting: กำลังยกเลิกการเชื่อมต่อ...
 display_pin: ป้อน PIN นี้บนอุปกรณ์
 lowenergy: พลังงานต่ำ
 more: การตั้งค่าบลูทูธเพิ่มเติม
@@ -21,4 +24,5 @@ provide_pin: ป้อนรหัส PIN
 scanning: กำลังสแกนหาอุปกรณ์...
 unpair: เลิกจับคู่
 unpair_failed: การเลิกจับคู่ล้มเหลว
+unpairing: กำลังเลิกจับคู่...
 username: ชื่อผู้ใช้

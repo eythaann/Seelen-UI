@@ -3,8 +3,11 @@ cancel: ይቅር
 confirm: አረጋግጥ
 confirm_only: ማሰራጫ ያረጋግጡ
 confirm_pin: ፒን ይዛመዳል ያረጋግጡ
+connect: ተገናኝ
 connected: ተገናኝቷል
+connecting: በመገናኘት ላይ...
 disconnect: ያላቅቁ
+disconnecting: ግንኙነት በማቋረጥ ላይ...
 display_pin: በመሣሪያው ላይ ይህንን ፒን ያስገቡ
 lowenergy: ዝቅተኛ ኃይል
 more: ተጨማሪ የብሉቱዝ ቅንብሮች
@@ -21,4 +24,5 @@ provide_pin: ፒን ያስገቡ
 scanning: ለመሳሪያዎች መቃኘት ...
 unpair: ያልተነከረ
 unpair_failed: ያልተሳካ አልተሳካም
+unpairing: በማጣመር ላይ...
 username: የተጠቃሚ ስም

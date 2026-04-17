@@ -3,8 +3,11 @@ cancel: Atcelt
 confirm: Apstiprināt
 confirm_only: Apstipriniet savienošanu pārī
 confirm_pin: Apstipriniet, ka PIN atbilst
+connect: Savienot
 connected: Savienots
+connecting: Notiek savienojuma izveide...
 disconnect: Atvienot
+disconnecting: Notiek atvienošana...
 display_pin: Ievadiet šo PIN ierīcē
 lowenergy: Zema enerģija
 more: Vairāk Bluetooth iestatījumu
@@ -21,4 +24,5 @@ provide_pin: Ievadiet PIN
 scanning: Notiek ierīču meklēšana...
 unpair: Atvienot pārī
 unpair_failed: Atvienošana pārī neizdevās
+unpairing: Notiek atvienošana pārī...
 username: Lietotājvārds

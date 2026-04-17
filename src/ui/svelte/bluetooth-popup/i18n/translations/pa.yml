@@ -3,8 +3,11 @@ cancel: ਰੱਦ ਕਰੋ
 confirm: ਪੁਸ਼ਟੀ ਕਰੋ
 confirm_only: ਜੋੜਾ ਬਣਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
 confirm_pin: ਪੁਸ਼ਟੀ ਕਰੋ ਕਿ ਪਿੰਨ ਮੇਲ ਖਾਂਦਾ ਹੈ
+connect: ਜੁੜੋ
 connected: ਜੁੜਿਆ
+connecting: ਕਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 disconnect: ਡਿਸਕਨੈਕਟ ਕਰੋ
+disconnecting: ਡਿਸਕਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 display_pin: ਡਿਵਾਈਸ 'ਤੇ ਇਹ ਪਿੰਨ ਦਾਖਲ ਕਰੋ
 lowenergy: ਘੱਟ ਊਰਜਾ
 more: ਹੋਰ ਬਲੂਟੁੱਥ ਸੈਟਿੰਗਾਂ
@@ -21,4 +24,5 @@ provide_pin: ਪਿੰਨ ਦਾਖਲ ਕਰੋ
 scanning: ਡਿਵਾਈਸਾਂ ਲਈ ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 unpair: ਅਨਪੇਅਰ ਕਰੋ
 unpair_failed: ਅਨਪੇਅਰ ਕਰਨਾ ਅਸਫਲ ਰਿਹਾ
+unpairing: ਅਨਪੇਅਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 username: ਯੂਜ਼ਰਨੇਮ

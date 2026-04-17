@@ -71,6 +71,12 @@ pub fn disconnect_bluetooth_device(id: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
+pub fn connect_bluetooth_device(id: String) -> Result<()> {
+    let manager = get_bluetooth_manager();
+    manager.connect_device(&id)
+}
+
+#[tauri::command(async)]
 pub async fn forget_bluetooth_device(id: String) -> Result<()> {
     let manager = get_bluetooth_manager();
     let device = if let Some(classic) = manager.devices.get(&id, |d| d.raw.clone()) {

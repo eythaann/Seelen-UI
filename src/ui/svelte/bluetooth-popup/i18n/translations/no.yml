@@ -3,8 +3,11 @@ cancel: Kansellere
 confirm: Bekrefte
 confirm_only: Bekreft sammenkobling
 confirm_pin: Bekreft at PIN-koden stemmer overens
+connect: Koble til
 connected: Tilkoblet
+connecting: Kobler til...
 disconnect: Frakople
+disconnecting: Kobler fra ...
 display_pin: Skriv inn denne PIN-koden på enheten
 lowenergy: Lavenergi
 more: Flere Bluetooth-innstillinger
@@ -21,4 +24,5 @@ provide_pin: Skriv inn PIN
 scanning: Skanner etter enheter...
 unpair: Fjern paring
 unpair_failed: Oppheving av paring mislyktes
+unpairing: Opphever sammenkoblingen...
 username: Brukernavn

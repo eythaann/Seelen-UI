@@ -3,8 +3,11 @@ cancel: Откажи
 confirm: Потврди
 confirm_only: Потврдете го спарувањето
 confirm_pin: Потврдете дека PIN-кодот се совпаѓа
+connect: Поврзете се
 connected: Поврзан
+connecting: Се поврзува...
 disconnect: Исклучете се
+disconnecting: Се исклучува...
 display_pin: Внесете го овој PIN на уредот
 lowenergy: Ниска енергија
 more: Повеќе поставки за Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Внесете PIN
 scanning: Скенирање уреди...
 unpair: Откажи го
 unpair_failed: Откажувањето на спарувањето не успеа
+unpairing: Се распарува...
 username: Корисничко име

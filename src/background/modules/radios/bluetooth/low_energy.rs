@@ -1,5 +1,8 @@
 use seelen_core::system_state::BluetoothDevice as SerializableBluetoothDevice;
-use windows::{Devices::Bluetooth::BluetoothLEDevice, Foundation::TypedEventHandler};
+use windows::{
+    Devices::Bluetooth::{BluetoothLEDevice, GenericAttributeProfile::GattSession},
+    Foundation::TypedEventHandler,
+};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -12,6 +15,8 @@ pub struct BluetoothLEDeviceWrapper {
     pub(super) id: String,
     pub(super) raw: BluetoothLEDevice,
     pub(super) state: SerializableBluetoothDevice,
+    /// Held to keep the BLE connection alive; None when disconnected.
+    connection_session: Option<GattSession>,
 
     name_changed_token: i64,
     connection_status_changed_token: i64,
@@ -45,6 +50,7 @@ impl BluetoothLEDeviceWrapper {
             id: device_id.to_string(),
             state: Self::to_serializable(device_id, &device)?,
             raw: device,
+            connection_session: None,
             name_changed_token,
             connection_status_changed_token,
         })
@@ -55,23 +61,22 @@ impl BluetoothLEDeviceWrapper {
         Ok(())
     }
 
-    pub fn close(self) -> Result<()> {
-        self.raw.RemoveNameChanged(self.name_changed_token)?;
-        self.raw
-            .RemoveConnectionStatusChanged(self.connection_status_changed_token)?;
+    /// Connects by creating a GattSession with MaintainConnection=true.
+    /// Windows keeps the BLE radio link alive as long as this session is held.
+    pub fn connect(&mut self) -> Result<()> {
+        let bt_id = self.raw.BluetoothDeviceId()?;
+        let session = GattSession::FromDeviceIdAsync(&bt_id)?.join()?;
+        session.SetMaintainConnection(true)?;
+        self.connection_session = Some(session);
+        Ok(())
+    }
 
-        // For BLE devices, we need to close all GATT sessions first, then services
-        // According to Microsoft docs, closing sessions is what actually triggers disconnect
-        let services = self.raw.GetGattServicesAsync()?.join()?.Services()?;
-        for service in services {
-            if let Ok(session) = service.Session() {
-                session.Close()?;
-            }
-            service.Close()?;
+    /// Disconnects by releasing the GattSession, allowing the OS to drop the link.
+    pub fn disconnect(&mut self) -> Result<()> {
+        if let Some(session) = self.connection_session.take() {
+            session.SetMaintainConnection(false).log_error();
+            session.Close().log_error();
         }
-
-        // Finally close the device object itself
-        self.raw.Close()?;
         Ok(())
     }
 
@@ -84,8 +89,8 @@ impl BluetoothLEDeviceWrapper {
 
         let pairing_state = device.DeviceInformation()?.Pairing()?;
 
-        let is_connected = device.ConnectionStatus()? == BluetoothConnectionStatus::Connected;
         let is_paired = pairing_state.IsPaired()?;
+        let is_connected = device.ConnectionStatus()? == BluetoothConnectionStatus::Connected;
 
         Ok(SerializableBluetoothDevice {
             id: id.to_owned(),
@@ -98,7 +103,8 @@ impl BluetoothLEDeviceWrapper {
             connected: is_connected,
             paired: is_paired,
             can_pair: pairing_state.CanPair()?,
-            can_disconnect: false, // TODO: this will be false until get a way to realize the disconnection without unpairing.
+            can_disconnect: false,
+            can_connect: is_paired && !is_connected,
             is_low_energy: true,
         })
     }
@@ -106,11 +112,19 @@ impl BluetoothLEDeviceWrapper {
 
 impl Drop for BluetoothLEDeviceWrapper {
     fn drop(&mut self) {
-        self.raw
-            .RemoveNameChanged(self.name_changed_token)
-            .log_error();
-        self.raw
-            .RemoveConnectionStatusChanged(self.connection_status_changed_token)
-            .log_error();
+        if let Some(session) = self.connection_session.take() {
+            session.SetMaintainConnection(false).log_error();
+            session.Close().log_error();
+        }
+        if self.name_changed_token != 0 {
+            self.raw
+                .RemoveNameChanged(self.name_changed_token)
+                .log_error();
+        }
+        if self.connection_status_changed_token != 0 {
+            self.raw
+                .RemoveConnectionStatusChanged(self.connection_status_changed_token)
+                .log_error();
+        }
     }
 }

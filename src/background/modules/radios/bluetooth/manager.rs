@@ -503,21 +503,51 @@ impl BluetoothManager {
     }
 
     /// Disconnects a paired device without unpairing it.
-    ///
-    /// Todo: this is not working.
     pub fn disconnect_device(&self, device_id: &str) -> Result<()> {
+        // BLE: release GattSession — lock is held only briefly to take the session
         if self
-            .devices
-            .get(device_id, |device| {
-                device.disconnect().log_error();
-            })
+            .le_devices
+            .get(device_id, |device| device.disconnect().log_error())
             .is_some()
         {
             return Ok(());
         }
 
-        if let Some(device) = self.le_devices.remove(device_id) {
-            device.close()?;
+        // Classic BT: extract address first (releases lock), then send IOCTL outside the lock
+        // to prevent deadlock if ConnectionStatusChanged fires while we hold the mutex
+        if let Some(address) = self
+            .devices
+            .get(device_id, |d| d.raw.BluetoothAddress().ok())
+        {
+            let address = address.ok_or("Failed to get device address")?;
+            super::classic::disconnect_via_ioctl(address)?;
+            match BluetoothDeviceWrapper::create(device_id) {
+                Ok(new_wrapper) => {
+                    self.devices.upsert(device_id.to_string(), new_wrapper);
+                }
+                Err(e) => log::warn!("Failed to recreate BT classic device after disconnect: {e}"),
+            }
+            return Ok(());
+        }
+
+        Err(format!("Device not found: {}", device_id).into())
+    }
+
+    /// Reconnects a paired but disconnected device.
+    pub fn connect_device(&self, device_id: &str) -> Result<()> {
+        // BLE: create a GattSession with MaintainConnection=true — lock is held only briefly
+        if self
+            .le_devices
+            .get(device_id, |device| device.connect().log_error())
+            .is_some()
+        {
+            return Ok(());
+        }
+
+        // Classic BT: extract address first (releases lock), then call BluetoothSetServiceState
+        // outside the lock to prevent deadlock from the synchronous ConnectionStatusChanged event
+        if let Some(address) = self.devices.get(device_id, |d| d.state.address) {
+            super::classic::connect_via_service_state(address)?;
             return Ok(());
         }
 

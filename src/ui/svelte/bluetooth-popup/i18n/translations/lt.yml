@@ -3,8 +3,11 @@ cancel: Atšaukti
 confirm: Patvirtinti
 confirm_only: Patvirtinkite susiejimą
 confirm_pin: Patvirtinkite, kad PIN kodas sutampa
+connect: Prisijunkite
 connected: Prisijungta
+connecting: Jungiamasi...
 disconnect: Atsijungti
+disconnecting: Atsijungiama...
 display_pin: Įrenginyje įveskite šį PIN kodą
 lowenergy: Maža energija
 more: Daugiau Bluetooth nustatymų
@@ -21,4 +24,5 @@ provide_pin: Įveskite PIN kodą
 scanning: Nuskaitoma įrenginių...
 unpair: Atsieti
 unpair_failed: Atsieti nepavyko
+unpairing: Atsiejama...
 username: Vartotojo vardas

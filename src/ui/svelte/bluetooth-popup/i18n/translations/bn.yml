@@ -3,8 +3,11 @@ cancel: বাতিল করুন
 confirm: নিশ্চিত করুন
 confirm_only: পেয়ারিং নিশ্চিত করুন
 confirm_pin: নিশ্চিত করুন যে পিন মিলছে
+connect: সংযোগ করুন
 connected: সংযুক্ত
+connecting: সংযোগ করা হচ্ছে...
 disconnect: সংযোগ বিচ্ছিন্ন করুন
+disconnecting: সংযোগ বিচ্ছিন্ন হচ্ছে...
 display_pin: ডিভাইসে এই পিনটি লিখুন
 lowenergy: কম শক্তি
 more: আরও ব্লুটুথ সেটিংস
@@ -21,4 +24,5 @@ provide_pin: পিন লিখুন
 scanning: ডিভাইসের জন্য স্ক্যান করা হচ্ছে...
 unpair: আনপেয়ার করুন
 unpair_failed: যুক্ত করা ব্যর্থ হয়েছে৷
+unpairing: যুক্ত করা হচ্ছে...
 username: ব্যবহারকারীর নাম

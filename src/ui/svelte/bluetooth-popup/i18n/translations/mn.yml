@@ -3,8 +3,11 @@ cancel: Цуаах
 confirm: Батлах
 confirm_only: Баталж баталгаажуулах
 confirm_pin: ПИН-ийн тоглолтыг баталгаажуулна уу
+connect: Холбох
 connected: Холбоотой
+connecting: Холбож байна...
 disconnect: Тусгаарлах
+disconnecting: Салж байна...
 display_pin: Энэ PIN-г төхөөрөмж дээр оруулна уу
 lowenergy: Бага эрчим хүч
 more: Илүү их Bluetooth Settings
@@ -21,4 +24,5 @@ provide_pin: PIN кодыг оруулна уу
 scanning: Төхөөрөмжийг скан хийх ...
 unpair: Суллал
 unpair_failed: Унтарч ажил амжилтгүй боллоо
+unpairing: Хосыг салгаж байна...
 username: Хэрэглэгчийн

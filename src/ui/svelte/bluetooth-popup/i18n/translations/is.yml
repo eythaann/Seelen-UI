@@ -3,8 +3,11 @@ cancel: Hætta við
 confirm: Staðfesta
 confirm_only: Staðfestu pörun
 confirm_pin: Staðfestu að PIN-númerið passi
+connect: Tengdu
 connected: Tengdur
+connecting: Tengist...
 disconnect: Aftengdu
+disconnecting: Aftengist...
 display_pin: Sláðu inn þetta PIN-númer á tækinu
 lowenergy: Lág orku
 more: Fleiri Bluetooth stillingar
@@ -21,4 +24,5 @@ provide_pin: Sláðu inn PIN-númer
 scanning: Leitar að tækjum...
 unpair: Afpörun
 unpair_failed: Afpörun mistókst
+unpairing: Afpörun...
 username: Notandanafn

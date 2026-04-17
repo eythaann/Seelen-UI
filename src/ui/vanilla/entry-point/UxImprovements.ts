@@ -79,6 +79,7 @@ globalThis.addEventListener("blur", () => {
   lastShownOn = null;
 });
 
+/*
 // UX for buttons
 document.addEventListener("keydown", (e: KeyboardEvent) => {
   if (e.defaultPrevented) return;
@@ -105,3 +106,4 @@ document.addEventListener("keyup", (e: KeyboardEvent) => {
     }
   }
 });
+*/

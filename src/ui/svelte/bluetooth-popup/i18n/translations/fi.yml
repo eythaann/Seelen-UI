@@ -3,8 +3,11 @@ cancel: Peruuttaa
 confirm: Vahvistaa
 confirm_only: Vahvista pariliitos
 confirm_pin: Varmista, että PIN-koodi vastaa
+connect: Yhdistä
 connected: Yhdistetty
+connecting: Yhdistetään...
 disconnect: Katkaise yhteys
+disconnecting: Katkaistaan...
 display_pin: Syötä tämä PIN-koodi laitteeseen
 lowenergy: Matala energia
 more: Lisää Bluetooth-asetuksia
@@ -21,4 +24,5 @@ provide_pin: Anna PIN-koodi
 scanning: Haetaan laitteita...
 unpair: Poista pariliitos
 unpair_failed: Pariliitoksen purkaminen epäonnistui
+unpairing: Puretaan laiteparia...
 username: Käyttäjätunnus

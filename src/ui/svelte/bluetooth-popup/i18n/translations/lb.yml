@@ -3,8 +3,11 @@ cancel: Ofbriechen
 confirm: Confirméieren
 confirm_only: Confirméieren Koppelen
 confirm_pin: Bestätegt datt de PIN entsprécht
+connect: Connect
 connected: Ugeschloss
+connecting: Connectéiert ...
 disconnect: Trennen
+disconnecting: Deconnectéiert ...
 display_pin: Gitt dës PIN um Apparat
 lowenergy: Niddereg Energie
 more: Méi Bluetooth Astellungen
@@ -21,4 +24,5 @@ provide_pin: Gitt PIN
 scanning: Scannen no Geräter ...
 unpair: Unpairen
 unpair_failed: Auspairen ass gescheitert
+unpairing: Unpairen ...
 username: Benotzernumm

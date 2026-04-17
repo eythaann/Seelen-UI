@@ -3,8 +3,11 @@ cancel: Ikkanċella
 confirm: Ikkonferma
 confirm_only: Ikkonferma t-tqabbil
 confirm_pin: Ikkonferma li l-PIN jaqbel
+connect: Qabbad
 connected: Konnessi
+connecting: Konnessjoni...
 disconnect: Skonnettja
+disconnecting: Skonnettjar...
 display_pin: Daħħal dan il-PIN fuq l-apparat
 lowenergy: Enerġija Baxxa
 more: Aktar Settings tal-Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Daħħal il-PIN
 scanning: Skannjar għal apparati...
 unpair: Unpair
 unpair_failed: L-unpairing falla
+unpairing: Tneħħi l-irbit...
 username: Isem tal-utent

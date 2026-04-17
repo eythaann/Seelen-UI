@@ -3,8 +3,11 @@ cancel: Anula
 confirm: Confirma
 confirm_only: Confirmați asocierea
 confirm_pin: Confirmați că PIN-ul se potrivește
+connect: Conectați-vă
 connected: Conectat
+connecting: Se conectează...
 disconnect: Deconecta
+disconnecting: Se deconectează...
 display_pin: Introduceți acest PIN pe dispozitiv
 lowenergy: Energie scăzută
 more: Mai multe setări Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Introduceți codul PIN
 scanning: Se scanează pentru dispozitive...
 unpair: Deconectați
 unpair_failed: Deconectarea nu a reușit
+unpairing: Se anulează împerecherea...
 username: Nume de utilizator

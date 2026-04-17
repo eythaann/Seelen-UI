@@ -3,8 +3,11 @@ cancel: Ophæve
 confirm: Bekræfte
 confirm_only: Bekræft parring
 confirm_pin: Bekræft, at PIN-koden stemmer overens
+connect: Forbinde
 connected: Forbundet
+connecting: Opretter forbindelse...
 disconnect: Afbryde
+disconnecting: Afbryder forbindelsen...
 display_pin: Indtast denne PIN-kode på enheden
 lowenergy: Lav energi
 more: Flere Bluetooth-indstillinger
@@ -21,4 +24,5 @@ provide_pin: Indtast PIN-kode
 scanning: Scanner efter enheder...
 unpair: Fjern parring
 unpair_failed: Ophævelse af parring mislykkedes
+unpairing: Ophæver parring...
 username: Brugernavn

@@ -3,8 +3,11 @@ cancel: Hlikihla
 confirm: Gcizelela
 confirm_only: Qinisekisa ukubhanqa
 confirm_pin: Qinisekisa ukuthi i-PIN Matches
+connect: Xhuma
 connected: Ixhunyiwe
+connecting: Iyaxhuma...
 disconnect: Thukulula
+disconnecting: Inqamula...
 display_pin: Faka le PIN kudivayisi
 lowenergy: Amandla aphansi
 more: Izilungiselelo eziningi ze-Bluetooth
@@ -21,4 +24,5 @@ provide_pin: Faka iPin
 scanning: Ukuskena amadivayisi ...
 unpair: Uphuphuthekile
 unpair_failed: Ukungahambi kahle kwehlulekile
+unpairing: Isusa ukubhanqa...
 username: Igama lomsebenzisi

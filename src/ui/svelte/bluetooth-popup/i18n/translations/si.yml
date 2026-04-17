@@ -3,8 +3,11 @@ cancel: අවලංගු කරන්න
 confirm: තහවුරු කරන්න
 confirm_only: යුගල කිරීම තහවුරු කරන්න
 confirm_pin: PIN එක ගැළපෙන බව තහවුරු කරන්න
+connect: සම්බන්ධ කරන්න
 connected: සම්බන්ධයි
+connecting: සම්බන්ධ වෙමින්...
 disconnect: විසන්ධි කරන්න
+disconnecting: විසන්ධි කරමින්...
 display_pin: උපාංගයේ මෙම PIN ඇතුලත් කරන්න
 lowenergy: අඩු ශක්තිය
 more: තවත් බ්ලූටූත් සැකසුම්
@@ -21,4 +24,5 @@ provide_pin: PIN ඇතුලත් කරන්න
 scanning: උපාංග සඳහා පරිලෝකනය කරමින්...
 unpair: යුගල ඉවත් කරන්න
 unpair_failed: යුගල ඉවත් කිරීම අසාර්ථක විය
+unpairing: යුගල ඉවත් කරමින්...
 username: පරිශීලක නාමය

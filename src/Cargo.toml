@@ -148,6 +148,7 @@ windows = { workspace = true, features = [
     "Media_Control",
     "Storage",
     "Storage_Streams",
+    "Win32_Devices_Bluetooth",
     "Win32_Devices_Display",
     "Win32_Devices_DeviceAndDriverInstallation",
     "Win32_Devices_FunctionDiscovery",

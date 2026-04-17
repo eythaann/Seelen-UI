@@ -3,8 +3,11 @@ cancel: გაუქმება
 confirm: დაადასტურეთ
 confirm_only: დაადასტურეთ დაწყვილება
 confirm_pin: დაადასტურეთ, რომ PIN ემთხვევა
+connect: დაკავშირება
 connected: დაკავშირებულია
+connecting: მიმდინარეობს დაკავშირება...
 disconnect: გათიშვა
+disconnecting: მიმდინარეობს გათიშვა...
 display_pin: შეიყვანეთ ეს PIN მოწყობილობაზე
 lowenergy: დაბალი ენერგია
 more: მეტი Bluetooth პარამეტრები
@@ -21,4 +24,5 @@ provide_pin: შეიყვანეთ PIN
 scanning: მიმდინარეობს მოწყობილობების სკანირება...
 unpair: გაუქმება
 unpair_failed: დაწყვილების გაუქმება ვერ მოხერხდა
+unpairing: დაწყვილების გაუქმება...
 username: მომხმარებლის სახელი

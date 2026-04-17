@@ -3,8 +3,11 @@ cancel: منسوخ کریں
 confirm: تصدیق کریں
 confirm_only: جوڑی کی تصدیق کریں
 confirm_pin: تصدیق کریں کہ پن میچ کرتا ہے
+connect: جڑیں۔
 connected: منسلک
+connecting: منسلک ہو رہا ہے...
 disconnect: منقطع
+disconnecting: منقطع ہو رہا ہے...
 display_pin: اس پن کو ڈیوائس پر درج کریں
 lowenergy: کم توانائی
 more: مزید بلوٹوتھ کی ترتیبات
@@ -21,4 +24,5 @@ provide_pin: پن درج کریں
 scanning: آلات کے لئے اسکیننگ ...
 unpair: انپر
 unpair_failed: انپیرنگ ناکام ہوگئی
+unpairing: جوڑا ختم کیا جا رہا ہے...
 username: صارف نام

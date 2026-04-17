@@ -3,8 +3,11 @@ cancel: Kanselleer
 confirm: Bevestig
 confirm_only: Bevestig saambinding
 confirm_pin: Bevestig dat die PIN ooreenstem
+connect: Koppel
 connected: Gekoppel
+connecting: Koppel tans …
 disconnect: Ontkoppel
+disconnecting: Ontkoppel tans …
 display_pin: Voer hierdie PIN op die toestel in
 lowenergy: Lae energie
 more: Meer Bluetooth-instellings
@@ -21,4 +24,5 @@ provide_pin: Voer PIN in
 scanning: Skandeer tans vir toestelle …
 unpair: Ontkoppel
 unpair_failed: Ontbinding het misluk
+unpairing: Ontbind tans …
 username: Gebruikersnaam

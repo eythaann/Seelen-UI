@@ -3,8 +3,11 @@ cancel: يلغي
 confirm: يتأكد
 confirm_only: تأكيد الاقتران
 confirm_pin: تأكد من تطابق رقم التعريف الشخصي
+connect: يتصل
 connected: متصل
+connecting: جارٍ الاتصال...
 disconnect: قطع الاتصال
+disconnecting: جارٍ قطع الاتصال...
 display_pin: أدخل رقم التعريف الشخصي هذا على الجهاز
 lowenergy: طاقة منخفضة
 more: المزيد من إعدادات البلوتوث
@@ -21,4 +24,5 @@ provide_pin: أدخل رقم التعريف الشخصي
 scanning: جارٍ البحث عن الأجهزة...
 unpair: إلغاء الاقتران
 unpair_failed: فشل إلغاء الاقتران
+unpairing: إلغاء الاقتران...
 username: اسم المستخدم
