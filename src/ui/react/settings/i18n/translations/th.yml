@@ -311,6 +311,10 @@ weg:
   items:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ
+    middle_click_action:
+      close_app: ปิดแอป
+      label: การดำเนินการคลิกกลาง
+      open_new_instance: เปิดอินสแตนซ์ใหม่
     pinned_visibility:
       always: เสมอ
       label: การมองเห็นรายการที่ปักหมุด

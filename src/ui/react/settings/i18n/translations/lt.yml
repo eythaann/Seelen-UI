@@ -320,6 +320,10 @@ weg:
   items:
     gap: Tarpas tarp daiktų
     label: Daiktai
+    middle_click_action:
+      close_app: Uždaryti programą
+      label: Vidutinio paspaudimo veiksmas
+      open_new_instance: Atidarykite naują egzempliorių
     pinned_visibility:
       always: Visada
       label: Prisegtų elementų matomumas

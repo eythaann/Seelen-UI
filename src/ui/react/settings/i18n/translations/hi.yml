@@ -324,6 +324,10 @@ weg:
   items:
     gap: वस्तुओं के बीच का स्थान
     label: सामान
+    middle_click_action:
+      close_app: ऐप बंद करें
+      label: मध्य क्लिक क्रिया
+      open_new_instance: नया उदाहरण खोलें
     pinned_visibility:
       always: हमेशा
       label: पिन किए गए आइटम दृश्यता

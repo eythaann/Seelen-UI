@@ -322,6 +322,10 @@ weg:
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
+    middle_click_action:
+      close_app: Փակել հավելվածը
+      label: Միջին սեղմման գործողություն
+      open_new_instance: Բացեք նոր օրինակ
     pinned_visibility:
       always: Միշտ
       label: Ամրացված տարրերի տեսանելիություն

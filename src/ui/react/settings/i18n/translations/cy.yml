@@ -320,6 +320,10 @@ weg:
   items:
     gap: Lle rhwng eitemau
     label: Eitemau
+    middle_click_action:
+      close_app: Cau Ap
+      label: Gweithred Clic Canol
+      open_new_instance: Agor Enghraifft Newydd
     pinned_visibility:
       always: Bob amser
       label: Eitemau wedi'u Pinio Gwelededd

@@ -294,6 +294,10 @@ weg:
   items:
     gap: 项目间间距
     label: 项目
+    middle_click_action:
+      close_app: 关闭应用程序
+      label: 中键单击操作
+      open_new_instance: 打开新实例
     pinned_visibility:
       always: 总是
       label: 固定项目可见性

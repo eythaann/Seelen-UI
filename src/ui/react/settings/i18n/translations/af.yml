@@ -320,6 +320,10 @@ weg:
   items:
     gap: Ruimte tussen items
     label: Voorwerpe
+    middle_click_action:
+      close_app: Maak App toe
+      label: Middelklik-aksie
+      open_new_instance: Maak nuwe instansie oop
     pinned_visibility:
       always: Altyd
       label: Vasgespelde items sigbaarheid

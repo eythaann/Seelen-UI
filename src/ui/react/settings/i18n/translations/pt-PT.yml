@@ -324,6 +324,10 @@ weg:
   items:
     gap: Espaço entre itens
     label: Artigos
+    middle_click_action:
+      close_app: Fechar aplicação
+      label: Ação do clique do meio
+      open_new_instance: Abrir nova instância
     pinned_visibility:
       always: Sempre
       label: Visibilidade dos itens fixados

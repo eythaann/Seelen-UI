@@ -320,6 +320,10 @@ weg:
   items:
     gap: Plass mellom varene
     label: Gjenstander
+    middle_click_action:
+      close_app: Lukk appen
+      label: Midtklikk handling
+      open_new_instance: Åpne ny forekomst
     pinned_visibility:
       always: Alltid
       label: Festede elementers synlighet

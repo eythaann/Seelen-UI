@@ -317,6 +317,10 @@ weg:
   items:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
+    middle_click_action:
+      close_app: បិទកម្មវិធី
+      label: សកម្មភាពចុចកណ្តាល
+      open_new_instance: បើកកម្មវិធីថ្មី។
     pinned_visibility:
       always: ជានិច្ច
       label: ភាពមើលឃើញធាតុដែលបានខ្ទាស់

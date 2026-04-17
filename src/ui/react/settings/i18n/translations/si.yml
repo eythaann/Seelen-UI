@@ -318,6 +318,10 @@ weg:
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
+    middle_click_action:
+      close_app: යෙදුම වසන්න
+      label: මැද ක්ලික් ක්‍රියාව
+      open_new_instance: නව අවස්ථාවක් විවෘත කරන්න
     pinned_visibility:
       always: සෑම විටම
       label: අමුණන ලද අයිතම දෘශ්‍යතාව

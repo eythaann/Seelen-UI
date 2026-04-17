@@ -324,6 +324,10 @@ weg:
   items:
     gap: Priestor medzi položkami
     label: Predmety
+    middle_click_action:
+      close_app: Zavrieť aplikáciu
+      label: Akcia stredného kliknutia
+      open_new_instance: Otvorte novú inštanciu
     pinned_visibility:
       always: Vždy
       label: Viditeľnosť pripnutých položiek

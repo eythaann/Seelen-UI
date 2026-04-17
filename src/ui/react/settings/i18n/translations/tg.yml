@@ -322,6 +322,10 @@ weg:
   items:
     gap: Фосила байни ашё
     label: Ашё
+    middle_click_action:
+      close_app: Барномаро пӯшед
+      label: Амали клики миёна
+      open_new_instance: Нусхаи навро кушоед
     pinned_visibility:
       always: Ҳамеша
       label: Намоиши ашёҳои маҳкамшуда

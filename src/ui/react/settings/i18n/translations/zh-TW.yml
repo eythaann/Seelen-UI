@@ -296,6 +296,10 @@ weg:
   items:
     gap: 項目之間的空間
     label: 專案
+    middle_click_action:
+      close_app: 關閉應用程式
+      label: 中鍵單擊操作
+      open_new_instance: 開啟新實例
     pinned_visibility:
       always: 總是
       label: 固定物品可見性

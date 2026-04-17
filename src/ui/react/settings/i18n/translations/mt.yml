@@ -324,6 +324,10 @@ weg:
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
+    middle_click_action:
+      close_app: Agħlaq l-App
+      label: Azzjoni Ikklikkja Nofsani
+      open_new_instance: Iftaħ Istanza Ġdida
     pinned_visibility:
       always: Dejjem
       label: Oġġetti Pinnjati Viżibilità

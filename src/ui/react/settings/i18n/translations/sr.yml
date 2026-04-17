@@ -322,6 +322,10 @@ weg:
   items:
     gap: Простор између предмета
     label: Предмети
+    middle_click_action:
+      close_app: Затворите апликацију
+      label: Акција средњег клика
+      open_new_instance: Отворите нову инстанцу
     pinned_visibility:
       always: Увек
       label: Видљивост закачених ставки

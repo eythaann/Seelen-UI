@@ -324,6 +324,10 @@ weg:
   items:
     gap: Hely az elemek között
     label: Tárgyak
+    middle_click_action:
+      close_app: Zárja be az alkalmazást
+      label: Középső kattintás művelet
+      open_new_instance: Nyissa meg az Új példányt
     pinned_visibility:
       always: Mindig
       label: Rögzített elemek láthatósága

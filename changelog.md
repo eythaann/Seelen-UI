@@ -6,6 +6,7 @@
 
 - font selector for widgets and themes.
 - reset configurations button on widgets.
+- allow customize middle click action on dock app items.
 
 ### enhancements
 

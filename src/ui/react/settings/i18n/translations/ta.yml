@@ -325,6 +325,10 @@ weg:
   items:
     gap: பொருட்களுக்கு இடையே உள்ள இடம்
     label: பொருட்களை
+    middle_click_action:
+      close_app: பயன்பாட்டை மூடு
+      label: மிடில் கிளிக் செயல்
+      open_new_instance: புதிய நிகழ்வைத் திறக்கவும்
     pinned_visibility:
       always: எப்போதும்
       label: பின் செய்யப்பட்ட பொருட்களின் தெரிவுநிலை

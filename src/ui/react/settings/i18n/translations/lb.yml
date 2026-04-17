@@ -320,6 +320,10 @@ weg:
   items:
     gap: Raum tëscht Artikelen
     label: Artikelen
+    middle_click_action:
+      close_app: App zoumaachen
+      label: Mëtt Klick Aktioun
+      open_new_instance: Nei Instanz opmaachen
     pinned_visibility:
       always: Ëmmer
       label: Pinned Elementer Visibilitéit

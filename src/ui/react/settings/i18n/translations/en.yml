@@ -316,6 +316,10 @@ weg:
   items:
     gap: Space Between Items
     label: Items
+    middle_click_action:
+      close_app: Close App
+      label: Middle Click Action
+      open_new_instance: Open New Instance
     pinned_visibility:
       always: Always
       label: Pinned Items Visibility

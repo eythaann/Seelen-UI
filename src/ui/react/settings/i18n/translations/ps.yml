@@ -314,6 +314,10 @@ weg:
   items:
     gap: د توکو تر مینځ فضا
     label: توکي
+    middle_click_action:
+      close_app: اپلیکیشن بند کړئ
+      label: د منځنی کلک عمل
+      open_new_instance: نوی مثال خلاص کړئ
     pinned_visibility:
       always: تل
       label: د پینډ شوي توکو لید

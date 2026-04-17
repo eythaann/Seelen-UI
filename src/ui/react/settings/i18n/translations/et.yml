@@ -319,6 +319,10 @@ weg:
   items:
     gap: Esemete vaheline ruum
     label: Esemed
+    middle_click_action:
+      close_app: Sulgege rakendus
+      label: Keskmise klõpsuga toiming
+      open_new_instance: Avage uus eksemplar
     pinned_visibility:
       always: Alati
       label: Kinnitatud üksuste nähtavus

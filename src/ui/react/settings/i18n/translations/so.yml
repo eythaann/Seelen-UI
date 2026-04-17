@@ -326,6 +326,10 @@ weg:
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
+    middle_click_action:
+      close_app: Xidh Appka
+      label: Tallaabada Dhexe Click
+      open_new_instance: Fur tusaale cusub
     pinned_visibility:
       always: Had iyo jeer
       label: Shayga Ku dheggan Muuqaal

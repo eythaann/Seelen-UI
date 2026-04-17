@@ -314,6 +314,10 @@ weg:
   items:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ
+    middle_click_action:
+      close_app: ਐਪ ਬੰਦ ਕਰੋ
+      label: ਮਿਡਲ ਕਲਿਕ ਐਕਸ਼ਨ
+      open_new_instance: ਨਵੀਂ ਉਦਾਹਰਣ ਖੋਲ੍ਹੋ
     pinned_visibility:
       always: ਹਮੇਸ਼ਾ
       label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ

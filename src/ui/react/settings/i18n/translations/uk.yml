@@ -320,6 +320,10 @@ weg:
   items:
     gap: Проміжок між піктограмами
     label: Піктограми
+    middle_click_action:
+      close_app: Закрити додаток
+      label: Дія середнього клацання
+      open_new_instance: Відкрийте новий екземпляр
     pinned_visibility:
       always: Завжди
       label: Видимість закріплених елементів

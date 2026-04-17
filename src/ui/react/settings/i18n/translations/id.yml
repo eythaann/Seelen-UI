@@ -323,6 +323,10 @@ weg:
   items:
     gap: Ruang antar item
     label: Item
+    middle_click_action:
+      close_app: Tutup Aplikasi
+      label: Aksi Klik Tengah
+      open_new_instance: Buka Instans Baru
     pinned_visibility:
       always: Selalu
       label: Visibilitas Item yang Disematkan

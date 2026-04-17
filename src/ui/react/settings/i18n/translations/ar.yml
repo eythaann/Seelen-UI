@@ -310,6 +310,10 @@ weg:
   items:
     gap: الفراغ بين العناصر
     label: العناصر
+    middle_click_action:
+      close_app: إغلاق التطبيق
+      label: إجراء النقر الأوسط
+      open_new_instance: افتح مثيلًا جديدًا
     pinned_visibility:
       always: دائماً
       label: رؤية العناصر المثبتة

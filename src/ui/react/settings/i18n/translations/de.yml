@@ -329,6 +329,10 @@ weg:
   items:
     gap: Abstand zwischen Elementen
     label: Elemente
+    middle_click_action:
+      close_app: App schließen
+      label: Aktion mit mittlerem Klick
+      open_new_instance: Neue Instanz öffnen
     pinned_visibility:
       always: Stets
       label: Sichtbarkeit angehefteter Elemente

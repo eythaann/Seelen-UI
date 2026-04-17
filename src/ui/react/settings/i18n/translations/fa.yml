@@ -320,6 +320,10 @@ weg:
   items:
     gap: فضای بین موارد
     label: موارد
+    middle_click_action:
+      close_app: برنامه را ببندید
+      label: اقدام کلیک میانی
+      open_new_instance: نمونه جدید را باز کنید
     pinned_visibility:
       always: همیشه
       label: قابلیت مشاهده موارد پین شده

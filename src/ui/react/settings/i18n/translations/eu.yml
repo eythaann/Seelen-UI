@@ -321,6 +321,10 @@ weg:
   items:
     gap: Elementuen arteko espazioa
     label: Manatu
+    middle_click_action:
+      close_app: Itxi aplikazioa
+      label: Erdiko klik ekintza
+      open_new_instance: Ireki Instantzia Berria
     pinned_visibility:
       always: Beti
       label: Ainguratutako elementuen ikusgaitasuna

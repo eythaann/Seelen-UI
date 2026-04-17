@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { SeelenWegSide, type UserAppWindow } from "@seelen-ui/lib/types";
+import { SeelenWegSide, type UserAppWindow, WegMiddleClickAction } from "@seelen-ui/lib/types";
 import { FileIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { useWindowFocusChange } from "libs/ui/react/utils/hooks.ts";
 import { cx } from "libs/ui/react/utils/styling.ts";
@@ -95,9 +95,14 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
         }
       }}
       onAuxClick={(e) => {
-        const window = windows[0];
-        if (e.button === 1 && window) {
-          invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+        if (e.button !== 1) return;
+        if ($settings.value.middleClickAction === WegMiddleClickAction.OpenNewInstance) {
+          launchItem(item, false);
+        } else {
+          const window = windows[0];
+          if (window) {
+            invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+          }
         }
       }}
       onContextMenu={onContextMenu}

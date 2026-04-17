@@ -319,6 +319,10 @@ weg:
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr
+    middle_click_action:
+      close_app: Proqramı bağlayın
+      label: Orta Klik Fəaliyyəti
+      open_new_instance: Yeni Nümunəni açın
     pinned_visibility:
       always: Həmişə
       label: Saxlanmış Elementlərin Görünüşü

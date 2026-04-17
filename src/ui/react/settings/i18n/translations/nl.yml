@@ -323,6 +323,10 @@ weg:
   items:
     gap: Ruimte tussen items
     label: Items
+    middle_click_action:
+      close_app: App sluiten
+      label: Middelste klikactie
+      open_new_instance: Open een nieuw exemplaar
     pinned_visibility:
       always: Altijd
       label: Zichtbaarheid van vastgezette items

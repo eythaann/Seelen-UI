@@ -314,6 +314,10 @@ weg:
   items:
     gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
     label: ລາຍການ
+    middle_click_action:
+      close_app: ປິດແອັບ
+      label: ການປະຕິບັດການຄລິກກາງ
+      open_new_instance: ເປີດຕົວຢ່າງໃໝ່
     pinned_visibility:
       always: ສະເໝີ
       label: ການເບິ່ງເຫັນລາຍການທີ່ປັກໝຸດໄວ້

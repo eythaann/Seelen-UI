@@ -321,6 +321,10 @@ weg:
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
+    middle_click_action:
+      close_app: Đóng ứng dụng
+      label: Hành động nhấp chuột giữa
+      open_new_instance: Mở phiên bản mới
     pinned_visibility:
       always: Luôn luôn
       label: Hiển thị các mục được ghim

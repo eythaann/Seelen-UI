@@ -325,6 +325,10 @@ weg:
   items:
     gap: Przerwa między elementami
     label: Elementy
+    middle_click_action:
+      close_app: Zamknij aplikację
+      label: Akcja środkowego kliknięcia
+      open_new_instance: Otwórz nową instancję
     pinned_visibility:
       always: Zawsze
       label: Widoczność przypiętych elementów

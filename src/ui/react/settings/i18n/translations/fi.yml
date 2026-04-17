@@ -322,6 +322,10 @@ weg:
   items:
     gap: Tilaa esineiden välillä
     label: Kohteet
+    middle_click_action:
+      close_app: Sulje sovellus
+      label: Keskimmäinen napsautustoiminto
+      open_new_instance: Avaa Uusi ilmentymä
     pinned_visibility:
       always: Aina
       label: Kiinnitettyjen kohteiden näkyvyys

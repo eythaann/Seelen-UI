@@ -324,6 +324,10 @@ weg:
   items:
     gap: Пространство между артикулите
     label: Елементи
+    middle_click_action:
+      close_app: Затваряне на приложението
+      label: Действие при средно щракване
+      open_new_instance: Отворете нов екземпляр
     pinned_visibility:
       always: Винаги
       label: Видимост на фиксираните елементи

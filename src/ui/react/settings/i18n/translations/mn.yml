@@ -319,6 +319,10 @@ weg:
   items:
     gap: Зүйлийн хоорондох зай
     label: Зүйл
+    middle_click_action:
+      close_app: Програмыг хаах
+      label: Дунд товшилтын үйлдэл
+      open_new_instance: Шинэ жишээ нээх
     pinned_visibility:
       always: Үргэлж
       label: Тогтсон зүйлсийн харагдах байдал

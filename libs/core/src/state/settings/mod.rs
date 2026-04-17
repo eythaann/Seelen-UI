@@ -128,6 +128,15 @@ pub enum HideMode {
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
 #[ts(repr(enum = name))]
+pub enum WegMiddleClickAction {
+    /// Close the focused window of the app (default)
+    CloseApp,
+    /// Open a new instance of the app
+    OpenNewInstance,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
 pub enum SeelenWegSide {
     Left,
     Right,
@@ -178,6 +187,8 @@ pub struct SeelenWegSettings {
     pub delay_to_hide: u32,
     /// show end task button on context menu (needs developer mode enabled)
     pub show_end_task: bool,
+    /// Action to perform when middle-clicking a dock item
+    pub middle_click_action: WegMiddleClickAction,
 }
 
 impl Default for SeelenWegSettings {
@@ -202,6 +213,7 @@ impl Default for SeelenWegSettings {
             delay_to_hide: 800,
             show_end_task: false,
             split_windows: false,
+            middle_click_action: WegMiddleClickAction::OpenNewInstance,
         }
     }
 }

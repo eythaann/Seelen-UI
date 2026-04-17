@@ -329,6 +329,10 @@ weg:
   items:
     gap: Χώρος μεταξύ αντικειμένων
     label: Αντικείμενα
+    middle_click_action:
+      close_app: Κλείσιμο εφαρμογής
+      label: Ενέργεια μεσαίου κλικ
+      open_new_instance: Ανοίξτε το νέο παράδειγμα
     pinned_visibility:
       always: Πάντοτε
       label: Ορατότητα καρφιτσωμένων αντικειμένων

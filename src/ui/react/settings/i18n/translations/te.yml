@@ -324,6 +324,10 @@ weg:
   items:
     gap: వస్తువుల మధ్య ఖాళీ
     label: వస్తువులు
+    middle_click_action:
+      close_app: యాప్‌ను మూసివేయండి
+      label: మిడిల్ క్లిక్ యాక్షన్
+      open_new_instance: కొత్త ఉదాహరణను తెరవండి
     pinned_visibility:
       always: ఎల్లప్పుడూ
       label: పిన్ చేయబడిన అంశాల దృశ్యమానత

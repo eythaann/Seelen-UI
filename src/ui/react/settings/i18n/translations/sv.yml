@@ -320,6 +320,10 @@ weg:
   items:
     gap: Utrymme mellan föremål
     label: Föremål
+    middle_click_action:
+      close_app: Stäng appen
+      label: Mellanklickåtgärd
+      open_new_instance: Öppna Ny instans
     pinned_visibility:
       always: Alltid
       label: Synlighet för fästa objekt

@@ -320,6 +320,10 @@ weg:
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
+    middle_click_action:
+      close_app: აპის დახურვა
+      label: შუა დაწკაპუნების მოქმედება
+      open_new_instance: გახსენით ახალი ინსტანცია
     pinned_visibility:
       always: ყოველთვის
       label: ჩამაგრებული ელემენტების ხილვადობა

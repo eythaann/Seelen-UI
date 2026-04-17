@@ -327,6 +327,10 @@ weg:
   items:
     gap: Isikhala phakathi kwezinto
     label: Into
+    middle_click_action:
+      close_app: Vala Uhlelo Lokusebenza
+      label: Isenzo Sokuchofoza Phakathi
+      open_new_instance: Vula Isimo Esisha
     pinned_visibility:
       always: Njalo
       label: Ukubonakala Kwezinto Eziphiniwe

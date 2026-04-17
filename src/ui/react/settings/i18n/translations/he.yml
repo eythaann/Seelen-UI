@@ -310,6 +310,10 @@ weg:
   items:
     gap: רווח בין פריטים
     label: פריטים
+    middle_click_action:
+      close_app: סגור את האפליקציה
+      label: פעולת קליק אמצעי
+      open_new_instance: פתח מופע חדש
     pinned_visibility:
       always: תמיד
       label: נראות פריטים מוצמדים

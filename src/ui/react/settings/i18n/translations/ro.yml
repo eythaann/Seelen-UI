@@ -323,6 +323,10 @@ weg:
   items:
     gap: Spațiu între articole
     label: Articole
+    middle_click_action:
+      close_app: Închideți aplicația
+      label: Acțiune de clic din mijloc
+      open_new_instance: Deschideți o nouă instanță
     pinned_visibility:
       always: Întotdeauna
       label: Vizibilitatea elementelor fixate

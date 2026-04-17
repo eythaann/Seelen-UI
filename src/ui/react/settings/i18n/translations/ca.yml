@@ -327,6 +327,10 @@ weg:
   items:
     gap: Espai entre articles
     label: Plantes
+    middle_click_action:
+      close_app: Tanca l'aplicació
+      label: Acció de clic al mig
+      open_new_instance: Obriu una nova instància
     pinned_visibility:
       always: Sempre
       label: Visibilitat dels elements fixats

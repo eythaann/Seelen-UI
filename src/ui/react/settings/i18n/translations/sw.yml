@@ -317,6 +317,10 @@ weg:
   items:
     gap: Nafasi kati ya vitu
     label: Vitu
+    middle_click_action:
+      close_app: Funga Programu
+      label: Kitendo cha Bonyeza Kati
+      open_new_instance: Fungua Mfano Mpya
     pinned_visibility:
       always: Daima
       label: Mwonekano wa Vipengee Vilivyobandikwa

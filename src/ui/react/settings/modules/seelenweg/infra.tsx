@@ -1,4 +1,4 @@
-import { HideMode, SeelenWegMode, SeelenWegSide } from "@seelen-ui/lib/types";
+import { HideMode, SeelenWegMode, SeelenWegSide, WegMiddleClickAction } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
@@ -189,6 +189,29 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
         </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
+          label={t("weg.items.middle_click_action.label")}
+          action={
+            <Select
+              style={{ width: "160px" }}
+              value={settings.middleClickAction}
+              options={[
+                {
+                  value: WegMiddleClickAction.CloseApp,
+                  label: t("weg.items.middle_click_action.close_app"),
+                },
+                {
+                  value: WegMiddleClickAction.OpenNewInstance,
+                  label: t("weg.items.middle_click_action.open_new_instance"),
+                },
+              ]}
+              onChange={(value) => patchWegConfig({ middleClickAction: value })}
+            />
+          }
+        />
       </SettingsGroup>
     </>
   );

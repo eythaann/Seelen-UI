@@ -320,6 +320,10 @@ weg:
   items:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء
+    middle_click_action:
+      close_app: ایپ بند کریں۔
+      label: مڈل کلک ایکشن
+      open_new_instance: نئی مثال کھولیں۔
     pinned_visibility:
       always: ہمیشہ
       label: پن کی ہوئی اشیاء کی مرئیت

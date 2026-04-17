@@ -320,6 +320,10 @@ weg:
   items:
     gap: Ruang antara item
     label: Item
+    middle_click_action:
+      close_app: Tutup Apl
+      label: Tindakan Klik Tengah
+      open_new_instance: Buka Contoh Baharu
     pinned_visibility:
       always: Sentiasa
       label: Keterlihatan Item Disemat

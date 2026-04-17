@@ -329,6 +329,10 @@ weg:
   items:
     gap: Puwang sa pagitan ng mga item
     label: Mga item
+    middle_click_action:
+      close_app: Isara ang App
+      label: Gitnang Pag-click na Aksyon
+      open_new_instance: Buksan ang Bagong Instance
     pinned_visibility:
       always: Laging
       label: Visibility ng Mga Naka-pin na Item

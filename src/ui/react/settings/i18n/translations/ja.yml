@@ -303,6 +303,10 @@ weg:
   items:
     gap: アイテム間のスペース
     label: ドック上のアイテム
+    middle_click_action:
+      close_app: アプリを閉じる
+      label: 中クリックアクション
+      open_new_instance: 新しいインスタンスを開く
     pinned_visibility:
       always: 常に
       label: ピン留めされたアイテムの表示設定

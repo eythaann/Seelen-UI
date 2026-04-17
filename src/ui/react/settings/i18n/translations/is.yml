@@ -317,6 +317,10 @@ weg:
   items:
     gap: Rými milli atriða
     label: Hlutir
+    middle_click_action:
+      close_app: Lokaðu appi
+      label: Miðsmellaaðgerð
+      open_new_instance: Opnaðu nýtt tilvik
     pinned_visibility:
       always: Alltaf
       label: Sýnileiki festra hluta

@@ -322,6 +322,10 @@ weg:
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
+    middle_click_action:
+      close_app: Aizveriet lietotni
+      label: Vidējā klikšķa darbība
+      open_new_instance: Atveriet jaunu instanci
     pinned_visibility:
       always: Vienmēr
       label: Piesprausto vienumu redzamība

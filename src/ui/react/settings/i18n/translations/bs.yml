@@ -318,6 +318,10 @@ weg:
   items:
     gap: Prostor između predmeta
     label: Predmeti
+    middle_click_action:
+      close_app: Zatvorite aplikaciju
+      label: Akcija srednjeg klika
+      open_new_instance: Otvorite novu instancu
     pinned_visibility:
       always: Uvijek
       label: Vidljivost zakačenih stavki

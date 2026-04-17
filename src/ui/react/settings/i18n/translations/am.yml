@@ -310,6 +310,10 @@ weg:
   items:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች
+    middle_click_action:
+      close_app: መተግበሪያን ዝጋ
+      label: የመሃል ጠቅታ እርምጃ
+      open_new_instance: አዲስ ምሳሌ ክፈት
     pinned_visibility:
       always: ሁሌም
       label: የተሰኩ ዕቃዎች ታይነት

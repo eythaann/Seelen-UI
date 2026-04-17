@@ -326,6 +326,10 @@ weg:
   items:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar
+    middle_click_action:
+      close_app: Ilovani yopish
+      label: O'rta bosish harakati
+      open_new_instance: Yangi misolni oching
     pinned_visibility:
       always: Har doim
       label: Belgilangan elementlarning ko'rinishi

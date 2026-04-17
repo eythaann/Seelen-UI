@@ -322,6 +322,10 @@ weg:
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên
+    middle_click_action:
+      close_app: App Close
+      label: Çalakiya Bitikîne Navîn
+      open_new_instance: Mînaka Nû vekin
     pinned_visibility:
       always: Herdem
       label: Dîtina Tiştên Pînekirî

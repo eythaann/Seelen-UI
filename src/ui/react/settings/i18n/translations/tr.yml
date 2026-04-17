@@ -322,6 +322,10 @@ weg:
   items:
     gap: Öğeler Arası Boşluk
     label: Öğeler
+    middle_click_action:
+      close_app: Uygulamayı Kapat
+      label: Orta Tıklama Eylemi
+      open_new_instance: Yeni Örnek Aç
     pinned_visibility:
       always: Her zaman
       label: Sabitlenmiş Öğelerin Görünürlüğü

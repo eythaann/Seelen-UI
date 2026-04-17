@@ -313,6 +313,10 @@ weg:
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
+    middle_click_action:
+      close_app: Pa App
+      label: Arin Tẹ Action
+      open_new_instance: Ṣii Apeere Tuntun
     pinned_visibility:
       always: Nigbagbogbo
       label: Pini Awọn nkan Hihan

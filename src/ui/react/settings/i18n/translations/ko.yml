@@ -304,6 +304,10 @@ weg:
   items:
     gap: 항목 간 간격
     label: 항목
+    middle_click_action:
+      close_app: 앱 닫기
+      label: 중간 클릭 동작
+      open_new_instance: 새 인스턴스 열기
     pinned_visibility:
       always: 항상
       label: 고정된 항목 가시성
