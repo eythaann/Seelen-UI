@@ -306,21 +306,18 @@ impl DevicesManager {
     }
 }
 
+type SessionManagerData = (
+    Vec<MediaDeviceSession>,
+    Option<IAudioSessionManager2>,
+    Option<IAudioSessionNotification>,
+);
+
 impl MediaDevice {
     pub unsafe fn load(raw_device: &IMMDevice) -> Result<Self> {
         let device_id = raw_device.GetId()?.to_string()?;
         let volume_endpoint: IAudioEndpointVolume = raw_device.Activate(CLSCTX_ALL, None)?;
-        let session_manager: IAudioSessionManager2 = raw_device.Activate(CLSCTX_ALL, None)?;
-
-        let mut sessions = Vec::new();
-        let enumerator = session_manager.GetSessionEnumerator()?;
-        for session_idx in 0..enumerator.GetCount()? {
-            let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
-            match MediaDeviceSession::load(session, &device_id) {
-                Ok(session) => sessions.push(session),
-                Err(e) => log::error!("Failed to load session: {e:?}"),
-            }
-        }
+        let (sessions, session_manager, session_created_callback) =
+            Self::load_sessions(raw_device, &device_id);
 
         let properties = raw_device.OpenPropertyStore(STGM_READ)?;
         let data_flow = if raw_device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture {
@@ -330,10 +327,6 @@ impl MediaDevice {
         };
 
         let volume_callback = IAudioEndpointVolumeCallback::from(MediaDeviceEventHandler {
-            device_id: device_id.clone(),
-        });
-
-        let session_created_callback = IAudioSessionNotification::from(MediaDeviceEventHandler {
             device_id: device_id.clone(),
         });
 
@@ -355,10 +348,42 @@ impl MediaDevice {
         device
             .volume_endpoint
             .RegisterControlChangeNotify(&device.volume_callback)?;
-        device
-            .session_manager
-            .RegisterSessionNotification(&device.session_created_callback)?;
         Ok(device)
+    }
+
+    // Session manager activation may fail for some devices (HDMI without display,
+    // Bluetooth, virtual devices). Returns empty sessions so the device still appears.
+    unsafe fn load_sessions(raw_device: &IMMDevice, device_id: &str) -> SessionManagerData {
+        match Self::try_load_sessions(raw_device, device_id) {
+            Ok(data) => data,
+            Err(e) => {
+                log::warn!(
+                    "Session manager unavailable for device {device_id}, sessions will not be tracked: {e:?}"
+                );
+                (Vec::new(), None, None)
+            }
+        }
+    }
+
+    unsafe fn try_load_sessions(
+        raw_device: &IMMDevice,
+        device_id: &str,
+    ) -> Result<SessionManagerData> {
+        let sm: IAudioSessionManager2 = raw_device.Activate(CLSCTX_ALL, None)?;
+        let mut sessions = Vec::new();
+        let enumerator = sm.GetSessionEnumerator()?;
+        for session_idx in 0..enumerator.GetCount()? {
+            let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
+            match MediaDeviceSession::load(session, device_id) {
+                Ok(s) => sessions.push(s),
+                Err(e) => log::error!("Failed to load session: {e:?}"),
+            }
+        }
+        let cb = IAudioSessionNotification::from(MediaDeviceEventHandler {
+            device_id: device_id.to_owned(),
+        });
+        sm.RegisterSessionNotification(&cb)?;
+        Ok((sessions, Some(sm), Some(cb)))
     }
 }
 

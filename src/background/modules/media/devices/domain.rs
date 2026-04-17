@@ -39,9 +39,9 @@ pub struct MediaDevice {
     #[serde(skip)]
     pub volume_callback: IAudioEndpointVolumeCallback,
     #[serde(skip)]
-    pub session_manager: IAudioSessionManager2,
+    pub session_manager: Option<IAudioSessionManager2>,
     #[serde(skip)]
-    pub session_created_callback: IAudioSessionNotification,
+    pub session_created_callback: Option<IAudioSessionNotification>,
     // ---
     pub id: String,
     pub name: String,
@@ -78,9 +78,9 @@ impl MediaDevice {
             self.volume_endpoint
                 .UnregisterControlChangeNotify(&self.volume_callback)
                 .log_error();
-            self.session_manager
-                .UnregisterSessionNotification(&self.session_created_callback)
-                .log_error();
+            if let (Some(sm), Some(cb)) = (&self.session_manager, &self.session_created_callback) {
+                sm.UnregisterSessionNotification(cb).log_error();
+            }
         };
     }
 }

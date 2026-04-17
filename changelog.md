@@ -10,6 +10,7 @@
 ### fix
 
 - multiple instance widgets not having default instance.
+- some audio devices not being loaded correctly.
 
 ## [2.5.8]
 
