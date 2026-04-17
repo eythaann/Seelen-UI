@@ -117,6 +117,7 @@ impl WegCli {
                 } else if let Some(w) = windows.first() {
                     let window = Window::from(w.hwnd);
                     if window.is_window() {
+                        window.unminimize()?;
                         window.focus()?;
                     }
                 }

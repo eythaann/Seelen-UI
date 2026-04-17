@@ -392,16 +392,17 @@ impl Window {
         }
     }
 
-    pub fn focus(&self) -> Result<()> {
+    pub fn unminimize(&self) -> Result<()> {
         if self.is_minimized() {
             self.show_window(SW_RESTORE)?;
         }
+        Ok(())
+    }
 
-        /* if self.process().open_handle().is_ok() {
-            WindowsApi::set_foreground(self.hwnd())
-        } else {
-            ServicePipe::request(SvcAction::SetForeground(self.address()))
-        } */
+    pub fn focus(&self) -> Result<()> {
+        if self.is_minimized() {
+            return Ok(());
+        }
         WindowsApi::set_foreground(self.hwnd())
     }
 

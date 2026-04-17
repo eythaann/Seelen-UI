@@ -38,6 +38,7 @@ pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
         // activation here will make this assigned to an app, which is not properly focused, just activated.
         window.show_window_async(SW_SHOWMINNOACTIVE)?;
     } else {
+        window.unminimize()?;
         window.focus()?;
     }
     Ok(())

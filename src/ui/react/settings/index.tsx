@@ -25,7 +25,6 @@ await window.center();
 
 await Widget.self.init();
 await Widget.self.show();
-await Widget.self.focus();
 
 Widget.self.onTrigger(() => {
   window.unminimize();
