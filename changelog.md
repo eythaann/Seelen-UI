@@ -22,6 +22,7 @@
 - connect/disconnect buttons on bluetooth module not working.
 - broken PATH env after installing or uninstalling the app via exe setup.
 - connect wifi not working on all networks.
+- backup loop on app starts.
 
 ## [2.5.8]
 

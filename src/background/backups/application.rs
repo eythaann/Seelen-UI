@@ -152,7 +152,7 @@ async fn upload_settings() -> crate::error::Result<()> {
         return Err(format!("backup upload failed: {status} - {body}").into());
     }
 
-    log::debug!("Cloud backup uploaded successfully");
+    log::info!("Cloud backup uploaded successfully");
     Ok(())
 }
 
@@ -162,6 +162,17 @@ fn download_and_apply(data: serde_json::Value) -> crate::error::Result<()> {
     use seelen_core::state::Settings;
     let mut settings: Settings = serde_json::from_value(data)?;
     settings.sanitize()?;
+
+    // Skip writing if the downloaded settings match what's already on disk.
+    // Otherwise the write bumps local mtime, making the next reconcile think
+    // local is newer and triggering an upload → download loop.
+    let current = serde_json::to_value(&FULL_STATE.load().settings).ok();
+    let incoming = serde_json::to_value(&settings).ok();
+    if current.is_some() && current == incoming {
+        log::trace!("Cloud backup matches local settings; skipping write.");
+        return Ok(());
+    }
+
     // Saving to disk triggers the existing file-watcher →
     // FULL_STATE reload → StateSettingsChanged emitted to frontend.
     settings.save(SEELEN_COMMON.settings_path())?;
@@ -195,11 +206,9 @@ async fn reconcile() -> crate::error::Result<()> {
     let local_secs = local_settings_mtime_secs();
 
     if is_sync_pending() || local_secs > cloud_secs {
-        log::info!("Local settings are newer (or upload was pending); uploading to cloud");
         upload_settings().await?;
         clear_sync_pending();
     } else if cloud_secs > local_secs {
-        log::info!("Cloud backup is newer; downloading and applying");
         download_and_apply(doc.data)?;
     }
     write_last_sync_now();
