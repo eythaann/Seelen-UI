@@ -1,7 +1,9 @@
 available: Käytettävissä olevat verkot
 connect: Yhdistä
 connected: 'Yhdistetty:'
+connecting: Yhdistetään...
 disconnect: Katkaise yhteys
+forget: Unohtaa
 hidden: Piilotettu verkko
 more: Lisää verkkoasetuksia
 no_adapter: Wi-Fi-sovitinta ei löydy

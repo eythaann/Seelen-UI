@@ -1,7 +1,9 @@
 available: Tilgængelige netværk
 connect: Forbinde
 connected: Forbundet til
+connecting: Opretter forbindelse...
 disconnect: Afbryde
+forget: Glemme
 hidden: Skjult netværk
 more: Flere netværksindstillinger
 no_adapter: Ingen Wi-Fi-adapter fundet

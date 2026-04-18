@@ -1,7 +1,9 @@
 available: 利用可能なネットワーク
 connect: 接続
 connected: 接続済み
+connecting: 接続中...
 disconnect: 切断
+forget: 忘れる
 hidden: 隠れたネットワーク
 more: その他のネットワーク設定
 no_adapter: Wi-Fiアダプターが見つかりません

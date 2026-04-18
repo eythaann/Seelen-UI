@@ -1,289 +1,173 @@
-pub mod scanner;
 pub mod v2;
 
 use std::{
-    env::temp_dir,
     net::{IpAddr, UdpSocket},
-    sync::{atomic::Ordering, LazyLock},
+    sync::LazyLock,
 };
 
-use seelen_core::system_state::{NetworkAdapter, WlanProfile};
-use tauri_plugin_shell::ShellExt;
-use windows::Win32::{
-    NetworkManagement::{
-        IpHelper::{
-            GetAdaptersAddresses, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
-            IP_ADAPTER_ADDRESSES_LH,
+use seelen_core::system_state::NetworkAdapter as SluNetAdapter;
+use windows::{
+    Networking::Connectivity::{NetworkInformation, NetworkStatusChangedEventHandler},
+    Win32::{
+        Foundation::{HANDLE, NO_ERROR},
+        NetworkManagement::IpHelper::{
+            CancelMibChangeNotify2, GetAdaptersAddresses, NotifyIpInterfaceChange,
+            GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX, IP_ADAPTER_ADDRESSES_LH,
+            MIB_IPINTERFACE_ROW, MIB_NOTIFICATION_TYPE,
         },
-        WiFi::WlanDisconnect,
-    },
-    Networking::{
-        NetworkListManager::{
-            INetworkListManager, NetworkListManager, NLM_CONNECTIVITY,
-            NLM_CONNECTIVITY_IPV4_INTERNET, NLM_CONNECTIVITY_IPV6_INTERNET,
+        Networking::{
+            NetworkListManager::{INetworkListManager, NetworkListManager, NLM_CONNECTIVITY},
+            WinSock::AF_UNSPEC,
         },
-        WinSock::AF_UNSPEC,
     },
 };
 
 use crate::{
-    app::get_app_handle,
-    error::Result,
+    error::{Result, ResultLogExt},
     event_manager,
-    utils::{pwsh::PwshScript, spawn_named_thread},
-    windows_api::{event_window::IS_INTERACTIVE_SESSION, Com},
+    windows_api::Com,
 };
 
 use super::domain::adapter_to_slu_net_adapter;
 
+pub struct NetworkManager {
+    status_changed_token: Option<i64>,
+    ip_interface_change_handle: Option<HANDLE>,
+}
+
 #[derive(Debug, Clone)]
 pub enum NetworkManagerEvent {
+    AdaptersChanged,
     ConnectivityChanged {
         connectivity: NLM_CONNECTIVITY,
         ip: String,
     },
 }
 
+unsafe impl Send for NetworkManager {}
+unsafe impl Sync for NetworkManager {}
+
 event_manager!(NetworkManager, NetworkManagerEvent);
-
-trait IterFromRaw {
-    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<NetworkAdapter>>;
-}
-
-impl IterFromRaw for NetworkAdapter {
-    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<NetworkAdapter>> {
-        let mut adapters = Vec::new();
-
-        let mut raw_adapter = raw;
-        while !raw_adapter.is_null() {
-            let adapter = &*raw_adapter;
-            adapters.push(adapter_to_slu_net_adapter(adapter)?);
-            raw_adapter = adapter.Next;
-        }
-
-        Ok(adapters)
-    }
-}
-
-pub struct NetworkManager {}
 
 impl NetworkManager {
     pub fn instance() -> &'static Self {
         static NETWORK_MANAGER: LazyLock<NetworkManager> = LazyLock::new(|| {
-            let manager = NetworkManager {};
-            NetworkManager::start_monitoring();
-            manager
+            let mut m = NetworkManager::new();
+            m.init().log_error();
+            m
         });
         &NETWORK_MANAGER
     }
 
-    /* fn dot11_ssid_from_string(ssid: &str) -> Result<DOT11_SSID> {
-        if ssid.len() > 32 {
-            return Err("SSID too long (max 32 bytes)".into());
+    fn new() -> Self {
+        Self {
+            status_changed_token: None,
+            ip_interface_change_handle: None,
         }
-        // Convert the &str to a byte array
-        let mut ssid_bytes = [0u8; 32];
-        let ssid_slice = ssid.as_bytes();
-        let len = ssid_slice.len();
-        ssid_bytes[..len].copy_from_slice(ssid_slice);
-        Ok(DOT11_SSID {
-            uSSIDLength: len as u32,
-            ucSSID: ssid_bytes,
-        })
-    } */
+    }
 
-    /* pub fn connect(entry: &WlanBssEntry) -> Result<()> {
-        let profile = WindowsString::from(entry.ssid.unwrap_or_default());
-        let mut ssid = Self::dot11_ssid_from_string(&entry.ssid.unwrap_or_default())?;
+    fn init(&mut self) -> Result<()> {
+        self.status_changed_token = Some(NetworkInformation::NetworkStatusChanged(
+            &NetworkStatusChangedEventHandler::new(|_| {
+                Self::emit_connectivity_state().log_error();
+                Ok(())
+            }),
+        )?);
 
-        let client_handle = Self::open_wlan()?;
-
-        let attributes = WLAN_CONNECTION_PARAMETERS {
-            wlanConnectionMode: wlan_connection_mode_auto,
-            strProfile: profile.as_pcwstr(),
-            pDot11Ssid: &mut ssid,
-
-            ..Default::default()
+        let mut handle = HANDLE::default();
+        let err = unsafe {
+            NotifyIpInterfaceChange(
+                AF_UNSPEC,
+                Some(on_ip_interface_change),
+                None,
+                false,
+                &mut handle,
+            )
         };
-
-        for interface in Self::get_wlan_interfaces(client_handle)? {
-            unsafe {
-                let result =
-                    WlanConnect(client_handle, &interface.InterfaceGuid, &attributes, None);
-                if result == 0 {
-                    break;
-                }
-            }
-        }
-
-        Ok(())
-    } */
-
-    pub fn disconnect_all() -> Result<()> {
-        let client_handle = Self::open_wlan()?;
-        for interface in Self::get_wlan_interfaces(*client_handle)? {
-            unsafe {
-                WlanDisconnect(*client_handle, &interface.InterfaceGuid, None);
-            }
+        if err == NO_ERROR {
+            self.ip_interface_change_handle = Some(handle);
+        } else {
+            return Err(format!("NotifyIpInterfaceChange failed: {}", err.0).into());
         }
         Ok(())
     }
 
-    pub fn get_adapters() -> Result<Vec<NetworkAdapter>> {
+    fn emit_connectivity_state() -> Result<()> {
+        let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
+        let connectivity = unsafe { list_manager.GetConnectivity()? };
+        let ip = get_local_ip_address_base()?;
+        NetworkManager::send(NetworkManagerEvent::ConnectivityChanged {
+            connectivity,
+            ip: ip.to_string(),
+        });
+        Ok(())
+    }
+
+    pub fn get_adapters() -> Result<Vec<SluNetAdapter>> {
         let adapters = unsafe {
             let family = AF_UNSPEC.0 as u32;
             let flags = GAA_FLAG_INCLUDE_PREFIX | GAA_FLAG_INCLUDE_GATEWAYS;
             let mut buffer_length = 0_u32;
-
-            // first call to get the buffer size
             GetAdaptersAddresses(family, flags, None, None, &mut buffer_length);
-
-            let mut adapters_addresses: Vec<u8> = vec![0; buffer_length as usize];
+            let mut buffer: Vec<u8> = vec![0; buffer_length as usize];
             GetAdaptersAddresses(
                 family,
                 flags,
                 None,
-                Some(adapters_addresses.as_mut_ptr() as *mut IP_ADAPTER_ADDRESSES_LH),
+                Some(buffer.as_mut_ptr() as *mut IP_ADAPTER_ADDRESSES_LH),
                 &mut buffer_length,
             );
-
-            let raw_adapter = adapters_addresses.as_ptr() as *const IP_ADAPTER_ADDRESSES_LH;
-            NetworkAdapter::iter_from_raw(raw_adapter)?
+            SluNetAdapter::iter_from_raw(buffer.as_ptr() as *const IP_ADAPTER_ADDRESSES_LH)?
         };
-
         Ok(adapters)
     }
+}
 
-    /// emit connectivity changes, always will emit the current state on registration
-    fn start_monitoring() {
-        spawn_named_thread("Network Manager", move || {
-            let result: Result<()> = Com::run_with_context(|| {
-                let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
-                let mut last_state = None;
-                let mut last_ip = None;
-
-                loop {
-                    std::thread::sleep(std::time::Duration::from_millis(5000));
-
-                    // Pause when session is not interactive to reduce CPU usage
-                    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
-                        continue;
-                    }
-
-                    let current_state = unsafe { list_manager.GetConnectivity() }.ok();
-                    if let (Some(current_state), Some(last_state)) = (current_state, last_state) {
-                        if current_state != last_state {
-                            if let Ok(ip) = get_local_ip_address_base() {
-                                last_ip = Some(ip);
-                                NetworkManager::send(NetworkManagerEvent::ConnectivityChanged {
-                                    connectivity: current_state,
-                                    ip: ip.to_string(),
-                                });
-                            }
-                        } else if current_state.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
-                            == NLM_CONNECTIVITY_IPV4_INTERNET.0
-                            || current_state.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
-                                == NLM_CONNECTIVITY_IPV6_INTERNET.0
-                        {
-                            let current_ip = get_local_ip_address_base().ok();
-                            if let (Some(current_ip), Some(last_ip)) = (current_ip, last_ip) {
-                                if current_ip != last_ip {
-                                    NetworkManager::send(
-                                        NetworkManagerEvent::ConnectivityChanged {
-                                            connectivity: current_state,
-                                            ip: current_ip.to_string(),
-                                        },
-                                    );
-                                }
-                            }
-
-                            last_ip = current_ip;
-                        }
-                    }
-                    last_state = current_state;
-                }
-            });
-
-            log::warn!("Network loop finished: {result:?}");
-        });
-    }
-
-    pub async fn get_wifi_profiles() -> Result<Vec<WlanProfile>> {
-        let path = PwshScript::new(include_str!("profiles.ps1"))
-            .execute()
-            .await?;
-        let contents = std::fs::read_to_string(path)?;
-        let profiles: Vec<WlanProfile> = serde_json::from_str(&contents)?;
-        Ok(profiles)
-    }
-
-    pub async fn add_profile(ssid: &str, password: &str, hidden: bool) -> Result<()> {
-        log::trace!("Adding profile {ssid}");
-        let profile_xml = if password.is_empty() {
-            // Be sure that xml is using tabs instead of spaces for indentation
-            include_str!("passwordless_profile.template.xml")
-                .replace("{ssid}", ssid)
-                .replace("{hidden}", if hidden { "true" } else { "false" })
-        } else {
-            // Be sure that xml is using tabs instead of spaces for indentation
-            include_str!("profile.template.xml")
-                .replace("{ssid}", ssid)
-                .replace("{password}", password)
-                .replace("{hidden}", if hidden { "true" } else { "false" })
-        };
-
-        let profile_path = temp_dir().join(format!("slu-{ssid}-profile.xml"));
-
-        std::fs::write(&profile_path, profile_xml)?;
-
-        let handle = get_app_handle();
-        let output = handle
-            .shell()
-            .command("netsh")
-            .args([
-                "wlan",
-                "add",
-                "profile",
-                &format!("filename={}", &profile_path.to_string_lossy()),
-            ])
-            .output()
-            .await?;
-
-        let result = if output.status.success() {
-            Ok(())
-        } else {
-            Err(output.into())
-        };
-
-        std::fs::remove_file(&profile_path)?;
-        result
-    }
-
-    pub async fn remove_profile(ssid: &str) -> Result<()> {
-        log::trace!("Removing profile {ssid}");
-
-        let handle = get_app_handle();
-        let output = handle
-            .shell()
-            .command("netsh")
-            .args(["wlan", "delete", "profile", &format!("name={ssid}")])
-            .output()
-            .await?;
-
-        if output.status.success() {
-            Ok(())
-        } else {
-            Err(output.into())
+impl Drop for NetworkManager {
+    fn drop(&mut self) {
+        if let Some(token) = self.status_changed_token.take() {
+            NetworkInformation::RemoveNetworkStatusChanged(token).log_error();
         }
+
+        if let Some(handle) = self.ip_interface_change_handle.take() {
+            if let Err(err) = unsafe { CancelMibChangeNotify2(handle).ok() } {
+                log::error!("CancelMibChangeNotify2 failed: {err}");
+            }
+        }
+    }
+}
+
+unsafe extern "system" fn on_ip_interface_change(
+    _caller_context: *const std::ffi::c_void,
+    _row: *const MIB_IPINTERFACE_ROW,
+    _notification_type: MIB_NOTIFICATION_TYPE,
+) {
+    NetworkManager::send(NetworkManagerEvent::AdaptersChanged);
+}
+
+trait IterFromRaw {
+    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<SluNetAdapter>>;
+}
+
+impl IterFromRaw for SluNetAdapter {
+    unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<SluNetAdapter>> {
+        let mut adapters = Vec::new();
+        let mut ptr = raw;
+        while !ptr.is_null() {
+            let adapter = &*ptr;
+            adapters.push(adapter_to_slu_net_adapter(adapter)?);
+            ptr = adapter.Next;
+        }
+        Ok(adapters)
     }
 }
 
 pub fn get_local_ip_address() -> Result<String> {
     Ok(get_local_ip_address_base()?.to_string())
 }
+
 fn get_local_ip_address_base() -> Result<IpAddr> {
     let socket = UdpSocket::bind("0.0.0.0:0")?;
     socket.connect("8.8.8.8:80")?;
-    let local_addr = socket.local_addr()?;
-    Ok(local_addr.ip())
+    Ok(socket.local_addr()?.ip())
 }

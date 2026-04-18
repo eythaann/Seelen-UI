@@ -1,7 +1,9 @@
 available: ເຄືອຂ່າຍທີ່ມີຢູ່
 connect: ເຊື່ອມຕໍ່
 connected: ເຊື່ອມຕໍ່ກັບ
+connecting: ກຳລັງເຊື່ອມຕໍ່...
 disconnect: ຕັດການເຊື່ອມຕໍ່
+forget: ລືມ
 hidden: ເຄືອຂ່າຍທີ່ເຊື່ອງໄວ້
 more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
 no_adapter: ບໍ່ພົບອະແດັບເຕີ Wi-Fi

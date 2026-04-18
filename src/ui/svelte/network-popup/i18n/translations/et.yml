@@ -1,7 +1,9 @@
 available: Saadaolevad võrgud
 connect: Ühendage
 connected: 'Ühendatud:'
+connecting: Ühendamine...
 disconnect: Katkesta ühendus
+forget: Unusta
 hidden: Varjatud võrk
 more: Rohkem võrgusätteid
 no_adapter: Wi-Fi-adapterit ei leitud

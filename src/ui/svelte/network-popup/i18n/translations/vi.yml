@@ -1,7 +1,9 @@
 available: Mạng có sẵn
 connect: Kết nối
 connected: Đã kết nối với
+connecting: Đang kết nối...
 disconnect: Ngắt kết nối
+forget: Quên
 hidden: Mạng ẩn
 more: Thêm cài đặt mạng
 no_adapter: Không tìm thấy bộ chuyển đổi Wi-Fi

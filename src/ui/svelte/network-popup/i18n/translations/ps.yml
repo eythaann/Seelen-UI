@@ -1,7 +1,9 @@
 available: شته شبکې
 connect: نښلول
 connected: سره نښلول شوی
+connecting: نښلول...
 disconnect: منحل کول
+forget: هېرول
 hidden: پټه شبکه
 more: نور د شبکې ترتیبات
 no_adapter: هیڅ Wi-Fi اډاپټر ونه موندل شو

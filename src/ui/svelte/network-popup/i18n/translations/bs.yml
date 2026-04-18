@@ -1,7 +1,9 @@
 available: Dostupne mreže
 connect: Povežite se
 connected: Povezano na
+connecting: Povezivanje...
 disconnect: Prekini vezu
+forget: Zaboravi
 hidden: Skrivena mreža
 more: Više mrežnih postavki
 no_adapter: Nije pronađen Wi-Fi adapter

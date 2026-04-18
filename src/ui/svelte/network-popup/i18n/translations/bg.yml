@@ -1,7 +1,9 @@
 available: Налични мрежи
 connect: Свържете се
 connected: Свързан с
+connecting: Свързване...
 disconnect: Прекъснете връзката
+forget: Забравете
 hidden: Скрита мрежа
 more: Още мрежови настройки
 no_adapter: Не е намерен Wi-Fi адаптер

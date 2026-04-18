@@ -1,7 +1,9 @@
 available: Eskuragarri dauden sareak
 connect: Konektatu
 connected: Honekin konektatuta
+connecting: Konektatzen...
 disconnect: Deskonektatu
+forget: Ahaztu
 hidden: Ezkutuko Sarea
 more: Sare ezarpen gehiago
 no_adapter: Ez da WiFi egokitzailerik aurkitu

@@ -23,16 +23,30 @@ await radios.init();
 
 let isScanning = $state(false);
 let selectedSsid = $state<string | null>(null);
+let scanInterval: ReturnType<typeof setInterval> | null = null;
 
-widget.window.onFocusChanged(async (e) => {
+widget.window.onFocusChanged((e) => {
   if (e.payload) {
-    await invoke(SeelenCommand.WlanStartScanning);
     isScanning = true;
   } else {
-    await invoke(SeelenCommand.WlanStopScanning);
     isScanning = false;
     selectedSsid = null;
   }
+});
+
+$effect.root(() => {
+  $effect(() => {
+    if (isScanning) {
+      invoke(SeelenCommand.WlanScan);
+      scanInterval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
+      return;
+    }
+
+    if (scanInterval !== null) {
+      clearInterval(scanInterval);
+      scanInterval = null;
+    }
+  });
 });
 
 class State {
@@ -47,6 +61,7 @@ class State {
   get isScanning() {
     return isScanning;
   }
+
   set isScanning(value: boolean) {
     isScanning = value;
   }
@@ -54,6 +69,7 @@ class State {
   get selectedSsid() {
     return selectedSsid;
   }
+
   set selectedSsid(value: string | null) {
     selectedSsid = value;
   }

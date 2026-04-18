@@ -1,7 +1,9 @@
 available: Доступные сети
 connect: Соединять
 connected: Подключено к
+connecting: Подключение...
 disconnect: Отключить
+forget: Забывать
 hidden: Скрытая сеть
 more: Дополнительные настройки сети
 no_adapter: Адаптер Wi-Fi не найден

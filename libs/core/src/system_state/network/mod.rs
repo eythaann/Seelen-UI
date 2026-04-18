@@ -1,32 +1,21 @@
-use serde_alias::serde_alias;
-
-#[serde_alias(PascalCase)] // used by pwsh scripts
-#[derive(Debug, Serialize, Deserialize, TS)]
-#[serde(rename_all = "camelCase")]
-pub struct WlanProfile {
-    pub profile_name: String,
-    #[serde(alias = "SSID")]
-    pub ssid: String,
-    pub authentication: String,
-    pub encryption: String,
-    pub password: Option<String>,
-}
-
 #[derive(Debug, Serialize, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct WlanBssEntry {
+    /// None for hidden networks (SSID not broadcast)
     pub ssid: Option<String>,
     pub bssid: String,
+    /// Channel center frequency in kHz
     pub channel_frequency: u32,
+    /// Signal strength 0–100 (derived from WinRT SignalBars × 20)
     pub signal: u32,
-    /// true if the network is a saved profile
+    /// true if Windows has a saved profile for this network
     pub known: bool,
-    /// true if the network is encrypted like WEP, WPA, or WPA2
+    /// true if the network requires authentication (WEP/WPA/WPA2/WPA3)
     pub secured: bool,
-    /// true if the interface is connected to this network
+    /// Human-readable authentication type, e.g. "WPA2-Personal", "Open"
+    pub auth: String,
+    /// true if currently connected to this network
     pub connected: bool,
-    /// true if the interface is connected to this network and is using this channel frequency
-    pub connected_channel: bool,
 }
 
 #[derive(Debug, Clone, Serialize, TS)]

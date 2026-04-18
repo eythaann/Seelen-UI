@@ -1,7 +1,9 @@
 available: Dostupné sítě
 connect: Připojit
 connected: Připojeno k
+connecting: Spojovací...
 disconnect: Odpojit
+forget: Zapomenout
 hidden: Skrytá síť
 more: Další nastavení sítě
 no_adapter: Nebyl nalezen žádný adaptér Wi-Fi

@@ -1,7 +1,9 @@
 available: Mevcut ağlar
 connect: Bağlamak
 connected: 'Şuraya bağlanıldı:'
+connecting: Bağlanıyor...
 disconnect: Bağlantıyı kes
+forget: Unutmak
 hidden: Gizli Ağ
 more: Diğer Ağ Ayarları
 no_adapter: Wi-Fi bağdaştırıcısı bulunamadı

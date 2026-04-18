@@ -35,6 +35,13 @@ input[type="range"][data-skin="flat"] {
 
 input[type="text"][data-skin="default"],
 input[type="search"][data-skin="default"],
+input[type="password"][data-skin="default"],
+input[type="email"][data-skin="default"],
+input[type="number"][data-skin="default"],
+input[type="tel"][data-skin="default"],
+input[type="url"][data-skin="default"],
+input[type="color"][data-skin="default"],
+input[type="file"][data-skin="default"],
 select[data-skin="default"] {
   width: 100%;
   padding: 0.25em 0.5em;
@@ -68,6 +75,13 @@ select[data-skin="default"] {
 
 input[type="text"][data-skin="transparent"],
 input[type="search"][data-skin="transparent"],
+input[type="password"][data-skin="transparent"],
+input[type="email"][data-skin="transparent"],
+input[type="number"][data-skin="transparent"],
+input[type="tel"][data-skin="transparent"],
+input[type="url"][data-skin="transparent"],
+input[type="color"][data-skin="transparent"],
+input[type="file"][data-skin="transparent"],
 select[data-skin="transparent"] {
   width: 100%;
   padding: 4px 8px;

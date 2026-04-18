@@ -1,7 +1,9 @@
 available: Tiltæk netkerfi
 connect: Tengdu
 connected: Tengdur við
+connecting: Tengist...
 disconnect: Aftengdu
+forget: Gleymdu
 hidden: Falið net
 more: Fleiri netstillingar
 no_adapter: Enginn Wi-Fi millistykki fannst

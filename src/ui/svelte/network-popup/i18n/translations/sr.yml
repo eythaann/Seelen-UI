@@ -1,7 +1,9 @@
 available: Доступне мреже
 connect: Повежите се
 connected: Повезано са
+connecting: Повезивање...
 disconnect: Прекини везу
+forget: Заборави
 hidden: Скривена мрежа
 more: Више мрежних подешавања
 no_adapter: Није пронађен Ви-Фи адаптер

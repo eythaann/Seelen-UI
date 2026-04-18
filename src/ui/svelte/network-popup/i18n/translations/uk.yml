@@ -1,7 +1,9 @@
 available: Доступні мережі
 connect: Підключитися
 connected: Підключено до
+connecting: Підключення...
 disconnect: Відключити
+forget: Забути
 hidden: Прихована мережа
 more: Більше налаштувань мережі
 no_adapter: Адаптер Wi-Fi не знайдено

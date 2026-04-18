@@ -1,7 +1,9 @@
 available: Mavjud tarmoqlar
 connect: Ulanish
 connected: ga ulangan
+connecting: Ulanmoqda...
 disconnect: Ulanishni uzing
+forget: Unut
 hidden: Yashirin tarmoq
 more: Qo'shimcha tarmoq sozlamalari
 no_adapter: Hech qanday Wi-Fi adapteri topilmadi

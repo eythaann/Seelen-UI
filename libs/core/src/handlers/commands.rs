@@ -236,11 +236,10 @@ slu_commands_declaration! {
     GetPopupConfig = get_popup_config(instance_id: uuid::Uuid) -> SluPopupConfig,
 
     // Network
-    WlanGetProfiles = wlan_get_profiles() -> Vec<WlanProfile>,
-    WlanStartScanning = wlan_start_scanning(),
-    WlanStopScanning = wlan_stop_scanning(),
+    WlanScan = wlan_scan(),
     WlanConnect = wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> bool,
     WlanDisconnect = wlan_disconnect(),
+    WlanForget = wlan_forget(ssid: String),
     GetNetworkDefaultLocalIp = get_network_default_local_ip() -> String,
     GetNetworkAdapters = get_network_adapters() -> Vec<NetworkAdapter>,
     GetNetworkInternetConnection = get_network_internet_connection() -> bool,

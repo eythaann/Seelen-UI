@@ -1,7 +1,9 @@
 available: Jaringan yang tersedia
 connect: Menghubungkan
 connected: Terhubung ke
+connecting: Menghubungkan...
 disconnect: Memutuskan
+forget: Lupa
 hidden: Jaringan Tersembunyi
 more: Pengaturan Jaringan Lainnya
 no_adapter: Tidak ditemukan adaptor Wi-Fi

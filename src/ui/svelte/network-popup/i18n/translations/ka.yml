@@ -1,7 +1,9 @@
 available: ხელმისაწვდომი ქსელები
 connect: დაკავშირება
 connected: დაკავშირებულია
+connecting: მიმდინარეობს დაკავშირება...
 disconnect: გათიშვა
+forget: დაივიწყე
 hidden: დამალული ქსელი
 more: მეტი ქსელის პარამეტრები
 no_adapter: Wi-Fi ადაპტერი ვერ მოიძებნა

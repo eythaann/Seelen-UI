@@ -1,7 +1,9 @@
 available: Elérhető hálózatok
 connect: Csatlakozás
 connected: Csatlakozva a következőhöz
+connecting: Csatlakozás...
 disconnect: Leválasztás
+forget: Felejtsd el
 hidden: Rejtett hálózat
 more: További hálózati beállítások
 no_adapter: Nem található Wi-Fi adapter

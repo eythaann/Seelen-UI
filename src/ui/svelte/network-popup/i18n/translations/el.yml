@@ -1,7 +1,9 @@
 available: Διαθέσιμα δίκτυα
 connect: Συνδέω
 connected: Συνδεδεμένο με
+connecting: Συνδετικός...
 disconnect: Αποσυνδέω
+forget: Ξεχνώ
 hidden: Κρυφό Δίκτυο
 more: Περισσότερες ρυθμίσεις δικτύου
 no_adapter: Δεν βρέθηκε προσαρμογέας Wi-Fi

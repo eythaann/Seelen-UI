@@ -1,7 +1,9 @@
 available: شبکه های موجود
 connect: اتصال
 connected: متصل به
+connecting: در حال اتصال...
 disconnect: قطع کن
+forget: فراموش کن
 hidden: شبکه پنهان
 more: تنظیمات شبکه بیشتر
 no_adapter: هیچ آداپتور Wi-Fi پیدا نشد

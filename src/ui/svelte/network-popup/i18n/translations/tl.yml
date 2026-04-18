@@ -1,7 +1,9 @@
 available: Magagamit na mga network
 connect: Kumonekta
 connected: Nakakonekta sa
+connecting: Kumokonekta...
 disconnect: Idiskonekta
+forget: Kalimutan
 hidden: Nakatagong Network
 more: Higit pang Mga Setting ng Network
 no_adapter: Walang nakitang Wi-Fi adapter

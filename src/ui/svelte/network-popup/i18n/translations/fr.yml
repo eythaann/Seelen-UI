@@ -1,7 +1,9 @@
 available: Réseaux disponibles
 connect: Connecter
 connected: Connecté à
+connecting: De liaison...
 disconnect: Déconnecter
+forget: Oublier
 hidden: Réseau caché
 more: Plus de paramètres réseau
 no_adapter: Aucun adaptateur Wi-Fi trouvé

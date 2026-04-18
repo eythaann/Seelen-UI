@@ -1,7 +1,9 @@
 available: Available networks
 connect: Connect
 connected: Connected to
+connecting: Connecting...
 disconnect: Disconnect
+forget: Forget
 hidden: Hidden Network
 more: More Network Settings
 no_adapter: No Wi-Fi adapter found

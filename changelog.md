@@ -11,6 +11,7 @@
 ### enhancements
 
 - show percentage on volume and brightness flyouts.
+- add forget network button on wlan network module.
 
 ### fix
 
@@ -20,6 +21,7 @@
 - settings window stealing focus on reload.
 - connect/disconnect buttons on bluetooth module not working.
 - broken PATH env after installing or uninstalling the app via exe setup.
+- connect wifi not working on all networks.
 
 ## [2.5.8]
 

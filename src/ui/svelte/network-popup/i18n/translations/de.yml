@@ -1,7 +1,9 @@
 available: Verfügbare Netzwerke
 connect: Verbinden
 connected: Verbunden mit
+connecting: Verbinden...
 disconnect: Trennen
+forget: Vergessen
 hidden: Verstecktes Netzwerk
 more: Weitere Netzwerkeinstellungen
 no_adapter: Kein WLAN-Adapter gefunden

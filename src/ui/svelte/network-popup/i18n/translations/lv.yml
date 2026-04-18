@@ -1,7 +1,9 @@
 available: Pieejamie tīkli
 connect: Savienot
 connected: Savienots ar
+connecting: Notiek savienojuma izveide...
 disconnect: Atvienot
+forget: Aizmirsti
 hidden: Slēpts tīkls
 more: Vairāk tīkla iestatījumu
 no_adapter: Wi-Fi adapteris netika atrasts

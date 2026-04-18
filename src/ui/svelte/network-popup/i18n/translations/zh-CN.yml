@@ -1,7 +1,9 @@
 available: 可用网络
 connect: 连接
 connected: 连接到
+connecting: 正在连接...
 disconnect: 断开
+forget: 忘记
 hidden: 隐藏网络
 more: 更多网络设置
 no_adapter: 找不到 Wi-Fi 适配器

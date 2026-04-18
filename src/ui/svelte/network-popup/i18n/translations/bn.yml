@@ -1,7 +1,9 @@
 available: উপলব্ধ নেটওয়ার্ক
 connect: সংযোগ করুন
 connected: সাথে সংযুক্ত
+connecting: সংযোগ করা হচ্ছে...
 disconnect: সংযোগ বিচ্ছিন্ন করুন
+forget: ভুলে যাও
 hidden: লুকানো নেটওয়ার্ক
 more: আরও নেটওয়ার্ক সেটিংস
 no_adapter: কোনো Wi-Fi অ্যাডাপ্টার পাওয়া যায়নি৷

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { WlanBssEntry } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { untrack } from "svelte";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import type { IconName } from "libs/ui/icons";
   import { t } from "../i18n";
@@ -20,39 +21,42 @@
   let selected = $derived(
     globalState.selectedSsid !== null &&
       (globalState.selectedSsid === entry.ssid ||
-        (isHiddenGroup && globalState.selectedSsid === "__HIDDEN_SSID__"))
+        (isHiddenGroup && globalState.selectedSsid === "__HIDDEN_SSID__")),
   );
 
   let loading = $derived(transition.loading);
   let error = $derived(transition.error);
 
-  let showFields = $state(false);
+  let forceShowFields = $state(false);
   let ssid = $state("");
   let password = $state("");
   let ssidInputRef: HTMLInputElement | undefined = $state();
   let passwordInputRef: HTMLInputElement | undefined = $state();
 
-  // Reset state when selection changes
+  // Show fields when selected AND the network is unknown/hidden, is secured
+  // without a saved profile, or a prior connection attempt failed.
+  let showFields = $derived(
+    selected && (forceShowFields || !entry.ssid || (!entry.known && entry.secured)),
+  );
+
+  // Reset transient input state when selection toggles; tracks only `selected`.
   $effect(() => {
-    if (!selected) {
-      showFields = false;
-      ssid = entry.ssid || "";
+    const isSelected = selected;
+    untrack(() => {
+      forceShowFields = false;
       password = "";
-      transition.clearError();
-    } else {
-      showFields = !entry.known && (!entry.ssid || entry.secured);
       ssid = entry.ssid || "";
-      // Focus inputs when shown
-      if (showFields) {
-        setTimeout(() => {
-          if (!entry.ssid && ssidInputRef) {
-            ssidInputRef.focus();
-          } else if (passwordInputRef) {
-            passwordInputRef.focus();
-          }
-        }, 0);
-      }
-    }
+      if (!isSelected) transition.clearError();
+    });
+  });
+
+  // Focus the relevant input whenever the fields become visible.
+  $effect(() => {
+    if (!showFields) return;
+    setTimeout(() => {
+      if (ssidInputRef && !ssidInputRef.value) ssidInputRef.focus();
+      else passwordInputRef?.focus();
+    }, 0);
   });
 
   async function onConnection() {
@@ -62,41 +66,37 @@
         return;
       }
 
-      if (showFields) {
+      // Known networks: try with saved credentials first; on failure ask for password
+      if (!showFields && entry.known && entry.ssid) {
         const success = await invoke(SeelenCommand.WlanConnect, {
-          ssid,
-          password,
-          hidden: !entry.ssid,
+          ssid: entry.ssid,
+          password: null,
+          hidden: false,
         });
-        if (!success) {
-          throw new Error("Connection failed");
-        }
+        forceShowFields = !success;
         return;
       }
 
-      const profiles = await invoke(SeelenCommand.WlanGetProfiles);
-      const profile = profiles.find((p) => p.ssid === entry.ssid);
-
-      if (!profile) {
-        showFields = true;
-        return;
-      }
-
+      // Unknown / secured networks: user must provide credentials
       const success = await invoke(SeelenCommand.WlanConnect, {
-        ssid: profile.ssid,
-        password: profile.password,
+        ssid,
+        password: password || null,
         hidden: !entry.ssid,
       });
-      if (!success) {
-        throw new Error("Connection failed");
-      }
+      if (!success) throw new Error("Connection failed");
     });
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.key === "Enter") {
-      onConnection();
-    }
+    if (e.key === "Enter") onConnection();
+  }
+
+  async function onForget() {
+    if (!entry.ssid) return;
+    const ssid = entry.ssid;
+    transition.start(async () => {
+      await invoke(SeelenCommand.WlanForget, { ssid });
+    });
   }
 
   const signalIcon = $derived.by((): IconName => {
@@ -112,17 +112,16 @@
       { name: "5G", min: 5_000_000, max: 5_850_000 },
       { name: "6G", min: 5_925_000, max: 7_125_000 },
     ];
-
-    const detectedBands = new Set<string>();
+    const detected = new Set<string>();
     for (const e of group) {
       for (const band of FREQUENCY_BANDS) {
         if (e.channelFrequency >= band.min && e.channelFrequency <= band.max) {
-          detectedBands.add(band.name);
+          detected.add(band.name);
           break;
         }
       }
     }
-    return Array.from(detectedBands);
+    return Array.from(detected);
   });
 </script>
 
@@ -151,7 +150,7 @@
       <div class="wlan-entry-band">{frequencies.join("/")}</div>
     {/if}
     {#if !isHiddenGroup && entry.secured}
-      <Icon iconName="PiPasswordFill" title={$t("secured")} />
+      <Icon iconName="PiPasswordFill" title={entry.auth} />
     {/if}
   </div>
 
@@ -168,6 +167,7 @@
             placeholder="SSID"
           />
         {/if}
+
         <input
           type="password"
           data-skin="default"
@@ -180,15 +180,18 @@
       </div>
     {/if}
 
-    {#if !loading}
+    {#if loading}
+      <div class="wlan-entry-connecting">{$t("connecting")}</div>
+    {:else}
       <div class="wlan-entry-actions">
-        <button
-          data-skin={entry.connected ? "default" : "solid"}
-          onclick={onConnection}
-          disabled={loading}
-        >
+        <button data-skin={entry.connected ? "default" : "solid"} onclick={onConnection}>
           {entry.connected ? $t("disconnect") : $t("connect")}
         </button>
+        {#if entry.known && entry.ssid}
+          <button data-skin="default" onclick={onForget}>
+            {$t("forget")}
+          </button>
+        {/if}
       </div>
     {/if}
   {/if}

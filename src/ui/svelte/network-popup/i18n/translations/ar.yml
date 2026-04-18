@@ -1,7 +1,9 @@
 available: الشبكات المتاحة
 connect: يتصل
 connected: متصل ب
+connecting: جارٍ الاتصال...
 disconnect: قطع الاتصال
+forget: ينسى
 hidden: الشبكة المخفية
 more: المزيد من إعدادات الشبكة
 no_adapter: لم يتم العثور على محول Wi-Fi

@@ -1,7 +1,9 @@
 available: Xarxes disponibles
 connect: Connecta't
 connected: Connectat a
+connecting: S'està connectant...
 disconnect: Desconnecta
+forget: Oblida't
 hidden: Xarxa oculta
 more: Més configuració de xarxa
 no_adapter: No s'ha trobat cap adaptador Wi-Fi
