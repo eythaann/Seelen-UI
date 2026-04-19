@@ -12,6 +12,8 @@
 
 - show percentage on volume and brightness flyouts.
 - add forget network button on wlan network module.
+- show dnd button on notifications center module.
+- when do not disturb is enabled, disable flyout notifications.
 
 ### fix
 

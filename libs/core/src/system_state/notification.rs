@@ -336,3 +336,11 @@ pub enum ToastActionPlacement {
     #[serde(other)]
     Unknown,
 }
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
+pub enum NotificationsMode {
+    All,
+    PriorityOnly,
+    AlarmsOnly,
+}

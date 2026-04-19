@@ -1,5 +1,7 @@
 <script lang="ts">
   import { Widget } from "@seelen-ui/lib";
+  import { NotificationsMode } from "@seelen-ui/lib/types";
+
   import { state as gState } from "./state/mod.svelte";
   import { RendererState, setShowing } from "./state/placement.svelte";
   import { ConfigState } from "./state/config.svelte";
@@ -52,6 +54,7 @@
   );
 
   let notificationId = $derived(notification?.id);
+  let isDnd = $derived(gState.notificationsMode !== NotificationsMode.All);
   let volume = $derived(output?.volume || 0);
   let playingTitle = $derived(recomendedPlayer?.title);
   let brightnessLevel = $derived(gState.brightness?.currentBrightness);
@@ -89,7 +92,8 @@
     if (
       ConfigState.config.showMediaPlayerChange &&
       prev.playingTitle !== playingTitle &&
-      recomendedPlayer
+      recomendedPlayer &&
+      !isDnd
     ) {
       lastChanged = "mediaPlaying";
       somethingChanged = true;
@@ -119,7 +123,8 @@
     if (
       ConfigState.config.showNotifications &&
       prev.notificationId !== notificationId &&
-      notification
+      notification &&
+      !isDnd
     ) {
       lastChanged = "notification";
       somethingChanged = true;

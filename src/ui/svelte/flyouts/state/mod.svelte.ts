@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import type { NotificationsMode } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 
 let mediaDevices = lazyRune(() => invoke(SeelenCommand.GetMediaDevices));
@@ -16,12 +17,16 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 
+let notificationsMode = lazyRune(() => invoke(SeelenCommand.GetNotificationsMode));
+subscribe(SeelenEvent.NotificationsModeChanged, notificationsMode.setByPayload);
+
 await Promise.all([
   mediaDevices.init(),
   mediaPlaying.init(),
   brightness.init(),
   workspaces.init(),
   notifications.init(),
+  notificationsMode.init(),
 ]);
 
 export const state = {
@@ -42,5 +47,8 @@ export const state = {
   },
   get notifications() {
     return notifications.value;
+  },
+  get notificationsMode(): NotificationsMode {
+    return notificationsMode.value;
   },
 };

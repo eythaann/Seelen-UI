@@ -153,6 +153,7 @@ windows = { workspace = true, features = [
     "Win32_Devices_DeviceAndDriverInstallation",
     "Win32_Devices_FunctionDiscovery",
     "UI_Core",
+    "UI_Shell",
     "UI_Notifications_Management",
     "UI_ViewManagement",
     "UI_StartScreen",

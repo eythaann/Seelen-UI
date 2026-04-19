@@ -305,4 +305,10 @@ slu_commands_declaration! {
 
     // Fonts
     GetFonts = get_fonts() -> Vec<SeelenFont>,
+
+    // Focus Assist / DND
+    GetFocusAssist = get_focus_assist() -> bool,
+    SetFocusAssist = set_focus_assist(enabled: bool),
+    GetNotificationsMode = get_notifications_mode() -> NotificationsMode,
+    SetNotificationsMode = set_notifications_mode(mode: NotificationsMode),
 }

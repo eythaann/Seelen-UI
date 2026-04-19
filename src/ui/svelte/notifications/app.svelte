@@ -1,8 +1,10 @@
 <script lang="ts">
   import { globalState } from "./state.svelte";
   import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { NotificationsMode } from "@seelen-ui/lib/types";
   import { t } from "./i18n/index.ts";
   import Notification from "./components/Notification.svelte";
+  import { Icon } from "libs/ui/svelte/components/Icon";
 
   $effect(() => {
     Widget.getCurrent().ready();
@@ -14,6 +16,13 @@
     } catch (error) {
       console.error("Failed to clear notifications:", error);
     }
+  }
+
+  const isDndActive = $derived(globalState.focusAssistMode !== NotificationsMode.All);
+  async function toggleDnd() {
+    await invoke(SeelenCommand.SetNotificationsMode, {
+      mode: isDndActive ? NotificationsMode.All : NotificationsMode.AlarmsOnly,
+    });
   }
 
   async function handleOpenSettings() {
@@ -30,6 +39,13 @@
 <div class="slu-std-popover notifications-popup">
   <div class="notifications-popup-header">
     <span>{$t("title")}</span>
+    <button
+      data-skin={isDndActive ? "solid" : "default"}
+      onclick={toggleDnd}
+      aria-label={$t("dnd")}
+    >
+      <Icon iconName={isDndActive ? "IoMoon" : "IoMoonOutline"} />
+    </button>
     <button data-skin="default" onclick={handleClearAll}>
       {$t("clear")}
     </button>

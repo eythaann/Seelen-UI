@@ -69,8 +69,6 @@ slu_events_declaration! {
     NetworkInternetConnection(bool) as "network-internet-connection",
     NetworkWlanScanned(Vec<WlanBssEntry>) as "wlan-scanned",
 
-    Notifications(Vec<AppNotification>) as "notifications",
-
     PowerStatus(PowerStatus) as "power-status",
     PowerMode(PowerMode) as "power-mode",
     BatteriesStatus(Vec<Battery>) as "batteries-status",
@@ -127,4 +125,9 @@ slu_events_declaration! {
 
     // Clipboard
     ClipboardDataChanged(ClipboardData) as "clipboard::data-changed",
+
+    // Notifications
+    FocusAssistChanged(bool) as "focus-assist::changed",
+    NotificationsModeChanged(NotificationsMode) as "notifications::mode-changed",
+    Notifications(Vec<AppNotification>) as "notifications",
 }

@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
-import type { AppNotification } from "@seelen-ui/lib/types";
+import type { AppNotification, NotificationsMode } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
@@ -16,9 +16,14 @@ let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 await notifications.init();
 
+let notificationsMode = lazyRune(() => invoke(SeelenCommand.GetNotificationsMode));
+subscribe(SeelenEvent.NotificationsModeChanged, notificationsMode.setByPayload);
+await notificationsMode.init();
+
 $effect.root(() => {
   $effect(() => {
     console.log("notifications: ", notifications.value);
+    console.log("notificationsMode: ", notificationsMode.value);
   });
 });
 
@@ -31,6 +36,10 @@ widget.window.onFocusChanged((e) => {
 class State {
   get notifications(): AppNotification[] {
     return notifications.value;
+  }
+
+  get focusAssistMode(): NotificationsMode {
+    return notificationsMode.value;
   }
 }
 

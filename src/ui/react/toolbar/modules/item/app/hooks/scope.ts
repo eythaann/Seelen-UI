@@ -1,6 +1,6 @@
 import { useComputed } from "@preact/signals";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { ToolbarJsScope } from "@seelen-ui/lib/types";
+import { NotificationsMode, ToolbarJsScope } from "@seelen-ui/lib/types";
 import type { WidgetId } from "@seelen-ui/lib/types";
 import { useSyncClockInterval, useThrottle } from "libs/ui/react/utils/hooks";
 import moment from "moment";
@@ -22,6 +22,7 @@ import {
   useLazyNetworkLocalIp,
   useLazyNetworkStatistics,
   useLazyNotifications,
+  useLazyNotificationsMode,
   useLazyOnline,
   useLazyPowerMode,
   useLazyPowerStatus,
@@ -155,14 +156,18 @@ function useDateScope() {
 
 function useNotificationsScope() {
   const { fetching, data: notifications } = useLazyNotifications();
+  const { fetching: fetchingNotificationsMode, data: notificationsMode } = useLazyNotificationsMode();
 
-  if (fetching) {
+  if (fetching || fetchingNotificationsMode) {
     return { fetching: true, data: null };
   }
 
   return {
     fetching: false,
-    data: { count: notifications?.length || 0 },
+    data: {
+      count: notifications?.length || 0,
+      dndActive: notificationsMode !== NotificationsMode.All,
+    },
   };
 }
 

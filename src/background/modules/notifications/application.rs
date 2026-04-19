@@ -1,6 +1,7 @@
 use parking_lot::Mutex as ParkingLotMutex;
 use seelen_core::system_state::{
-    AppNotification, Toast, ToastActionActivationType, ToastBindingChild, ToastText,
+    AppNotification, NotificationsMode, Toast, ToastActionActivationType, ToastBindingChild,
+    ToastText,
 };
 use std::{
     collections::HashSet,
@@ -18,7 +19,8 @@ use windows::{
         KnownNotificationBindings,
         Management::{UserNotificationListener, UserNotificationListenerAccessStatus},
         NotificationKinds, ToastNotificationManager, ToastNotificationManagerForUser,
-        UserNotification, UserNotificationChangedEventArgs, UserNotificationChangedKind,
+        ToastNotificationMode, UserNotification, UserNotificationChangedEventArgs,
+        UserNotificationChangedKind,
     },
 };
 
@@ -50,6 +52,7 @@ pub enum NotificationEvent {
     Added(u32),
     Removed(u32),
     Cleared,
+    ModeChanged(NotificationsMode),
 }
 
 pub struct NotificationManager {
@@ -57,6 +60,7 @@ pub struct NotificationManager {
     manager: ToastNotificationManagerForUser,
     listener: UserNotificationListener,
     event_token: Option<i64>,
+    mode_changed_token: Option<i64>,
 }
 
 unsafe impl Send for NotificationManager {}
@@ -71,6 +75,7 @@ impl NotificationManager {
             manager: ToastNotificationManager::GetDefault()?,
             listener: UserNotificationListener::Current()?,
             event_token: None,
+            mode_changed_token: None,
         })
     }
 
@@ -147,8 +152,32 @@ impl NotificationManager {
             }
         }
 
+        self.mode_changed_token = Some(
+            self.manager
+                .NotificationModeChanged(&TypedEventHandler::new(Self::on_mode_change))?,
+        );
+
         let eid = Self::subscribe(|e| log_error!(Self::process_event(e)));
         Self::set_event_handler_priority(&eid, 1);
+        Ok(())
+    }
+
+    fn on_mode_change(
+        sender: windows_core::Ref<ToastNotificationManagerForUser>,
+        _args: windows_core::Ref<windows_core::IInspectable>,
+    ) -> windows_core::Result<()> {
+        let Some(sender) = sender.as_ref() else {
+            return Ok(());
+        };
+
+        let mode = sender.NotificationMode()?;
+        let mode = match mode {
+            ToastNotificationMode::Unrestricted => NotificationsMode::All,
+            ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,
+            ToastNotificationMode::PriorityOnly => NotificationsMode::PriorityOnly,
+            _ => NotificationsMode::All,
+        };
+        Self::send(NotificationEvent::ModeChanged(mode));
         Ok(())
     }
 
@@ -211,6 +240,7 @@ impl NotificationManager {
                 manager.notifications.clear();
                 LOADED_NOTIFICATIONS.lock().clear();
             }
+            NotificationEvent::ModeChanged(_) => {}
         }
         Ok(())
     }
@@ -396,6 +426,25 @@ impl NotificationManager {
                 content: notification_content,
             },
         );
+        Ok(())
+    }
+
+    pub fn get_notifications_mode(&self) -> Result<NotificationsMode> {
+        let mode = self.manager.NotificationMode()?;
+        let mode = match mode {
+            ToastNotificationMode::Unrestricted => NotificationsMode::All,
+            ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,
+            ToastNotificationMode::PriorityOnly => NotificationsMode::PriorityOnly,
+            _ => NotificationsMode::All,
+        };
+        Ok(mode)
+    }
+
+    pub fn set_mode(_mode: NotificationsMode) -> Result<()> {
+        // just there's no way to change this with official apis
+        std::process::Command::new("explorer.exe")
+            .arg("ms-settings:notifications")
+            .spawn()?;
         Ok(())
     }
 }

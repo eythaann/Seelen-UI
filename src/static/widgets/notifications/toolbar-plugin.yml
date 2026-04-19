@@ -8,8 +8,10 @@ plugin:
   scopes:
     - Notifications
   template: >-
-    return count > 0 ? icon("MdNotificationsActive") :
-    icon("MdOutlineNotifications")
+    return [
+      dndActive ? icon("TbZzz") : null,
+      count > 0 ? icon("MdNotificationsActive") : icon("MdOutlineNotifications"),
+    ]
   badge: "return count > 0 ? count : null"
   tooltip: 'return [t("placeholder.notifications"), ": ", count]'
   onClickV2: |-

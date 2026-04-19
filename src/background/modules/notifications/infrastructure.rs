@@ -2,7 +2,7 @@ use std::{collections::HashMap, sync::Once};
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{AppNotification, ToastActionActivationType},
+    system_state::{AppNotification, NotificationsMode, ToastActionActivationType},
 };
 use windows::{
     core::GUID,
@@ -15,18 +15,25 @@ use windows::{
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    modules::notifications::application::{get_toast_activator_clsid, NotificationManager},
+    modules::notifications::application::{
+        get_toast_activator_clsid, NotificationEvent, NotificationManager,
+    },
     windows_api::{string_utils::WindowsString, types::AppUserModelId, Com},
 };
 
 fn get_notification_manager() -> &'static NotificationManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
-        NotificationManager::subscribe(|_event| {
-            emit_to_webviews(
-                SeelenEvent::Notifications,
-                NotificationManager::instance().notifications(),
-            );
+        NotificationManager::subscribe(|event| match event {
+            NotificationEvent::ModeChanged(mode) => {
+                emit_to_webviews(SeelenEvent::NotificationsModeChanged, mode);
+            }
+            _ => {
+                emit_to_webviews(
+                    SeelenEvent::Notifications,
+                    NotificationManager::instance().notifications(),
+                );
+            }
         });
     });
     NotificationManager::instance()
@@ -166,4 +173,14 @@ pub fn notifications_close(id: u32) -> Result<()> {
 #[tauri::command(async)]
 pub fn notifications_close_all() -> Result<()> {
     get_notification_manager().clear_notifications()
+}
+
+#[tauri::command(async)]
+pub fn get_notifications_mode() -> Result<NotificationsMode> {
+    get_notification_manager().get_notifications_mode()
+}
+
+#[tauri::command(async)]
+pub fn set_notifications_mode(mode: NotificationsMode) -> Result<()> {
+    NotificationManager::set_mode(mode)
 }

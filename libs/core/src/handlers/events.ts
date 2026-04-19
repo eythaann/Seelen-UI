@@ -19,7 +19,6 @@ export enum SeelenEvent {
   NetworkAdapters = "network-adapters",
   NetworkInternetConnection = "network-internet-connection",
   NetworkWlanScanned = "wlan-scanned",
-  Notifications = "notifications",
   PowerStatus = "power-status",
   PowerMode = "power-mode",
   BatteriesStatus = "batteries-status",
@@ -51,4 +50,7 @@ export enum SeelenEvent {
   SeelenSessionChanged = "session::changed",
   SeelenBackupStatusChanged = "backup::status-changed",
   ClipboardDataChanged = "clipboard::data-changed",
+  FocusAssistChanged = "focus-assist::changed",
+  NotificationsModeChanged = "notifications::mode-changed",
+  Notifications = "notifications",
 }

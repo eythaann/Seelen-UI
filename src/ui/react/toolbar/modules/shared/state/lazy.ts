@@ -154,6 +154,13 @@ export function useLazyNotifications() {
   });
 }
 
+export function useLazyNotificationsMode() {
+  return useLazyState({
+    command: SeelenCommand.GetNotificationsMode,
+    event: SeelenEvent.NotificationsModeChanged,
+  });
+}
+
 export function useLazyDisks() {
   return useLazyState({
     command: SeelenCommand.GetSystemDisks,
