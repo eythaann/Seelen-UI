@@ -99,7 +99,7 @@ impl MsixAppsManager {
 }
 
 impl PackageManifest {
-    fn try_read_for(package: &Package) -> Result<Self> {
+    pub fn try_read_for(package: &Package) -> Result<Self> {
         let package_path = PathBuf::from(package.InstalledPath()?.to_os_string());
         let manifest_path = package_path.join("AppxManifest.xml");
 

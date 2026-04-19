@@ -53,6 +53,33 @@ pub struct ManifestApplication {
     #[serde(rename = "@Executable")]
     pub executable: Option<String>,
     pub visual_elements: ManifestApplicationVisualElements,
+    pub extensions: Option<ManifestApplicationExtensions>,
+}
+
+/// Container for `<Application><Extensions>...</Extensions></Application>`.
+/// Children can appear under multiple namespace prefixes (`uap3:Extension`,
+/// `desktop:Extension`, ...). Using `$value` collects every child element into
+/// `extension` regardless of prefix / local name.
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+pub struct ManifestApplicationExtensions {
+    #[serde(rename = "$value", default)]
+    pub extension: Vec<ManifestExtension>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct ManifestExtension {
+    #[serde(rename = "@Category")]
+    pub category: String,
+    /// Present only when `Category == "windows.toastNotificationActivation"`.
+    #[serde(default)]
+    pub toast_notification_activation: Option<ToastNotificationActivation>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ToastNotificationActivation {
+    #[serde(rename = "@ToastActivatorCLSID")]
+    pub toast_activator_clsid: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

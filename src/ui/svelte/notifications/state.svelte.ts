@@ -16,6 +16,12 @@ let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 await notifications.init();
 
+$effect.root(() => {
+  $effect(() => {
+    console.log("notifications: ", notifications.value);
+  });
+});
+
 widget.window.onFocusChanged((e) => {
   if (!e.payload) {
     widget.hide();

@@ -429,9 +429,51 @@ pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
                 return Ok(clsid);
             }
         }
-        _ => {
-            // todo search for the clsid in the AppManifest
+        AppUserModelId::Appx(umid) => {
+            return get_appx_toast_activator_clsid(umid);
         }
     };
     Err(format!("Unable to get toast activator clsid for: {app_umid:?}").into())
+}
+
+/// Reads the package's `AppxManifest.xml` (via the shared `PackageManifest`
+/// deserializer) and returns the `ToastActivatorCLSID` declared by the
+/// `windows.toastNotificationActivation` extension for the given AppId.
+/// This is what enables MSIX/APPX apps (WhatsApp, Telegram, Teams, etc.)
+/// to handle toast action activation.
+fn get_appx_toast_activator_clsid(app_umid: &str) -> Result<String> {
+    let (_family, app_id) = app_umid
+        .split_once('!')
+        .ok_or("Invalid Appx AUMID (missing '!')")?;
+
+    let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
+    let package = app_info.Package()?;
+    let manifest =
+        crate::modules::apps::application::msix_manifest::PackageManifest::try_read_for(&package)?;
+
+    let app = manifest
+        .get_app(app_id)
+        .ok_or_else(|| format!("AppId {app_id} not found in manifest"))?;
+
+    let extensions = app
+        .extensions
+        .as_ref()
+        .ok_or("Application has no <Extensions> block")?;
+
+    for extension in &extensions.extension {
+        if extension.category != "windows.toastNotificationActivation" {
+            continue;
+        }
+        if let Some(activation) = &extension.toast_notification_activation {
+            let clsid = activation
+                .toast_activator_clsid
+                .trim()
+                .trim_start_matches('{')
+                .trim_end_matches('}')
+                .to_string();
+            return Ok(clsid);
+        }
+    }
+
+    Err(format!("ToastActivatorCLSID not found in manifest for {app_umid}").into())
 }

@@ -253,8 +253,10 @@ slu_commands_declaration! {
     NotificationsClose = notifications_close(id: u32),
     NotificationsCloseAll = notifications_close_all(),
     ActivateNotification = activate_notification(
+        id: u32,
         umid: String,
         args: String,
+        activation_type: ToastActionActivationType,
         input_data: HashMap<String, String>,
     ),
 

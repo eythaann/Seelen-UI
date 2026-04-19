@@ -23,6 +23,7 @@
 - broken PATH env after installing or uninstalling the app via exe setup.
 - connect wifi not working on all networks.
 - backup loop on app starts.
+- notification trigger not working for uwp apps.
 
 ## [2.5.8]
 

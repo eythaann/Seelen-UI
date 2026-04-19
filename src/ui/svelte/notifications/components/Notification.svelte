@@ -32,17 +32,13 @@
 
   async function handleAction(args: string, method: ToastActionActivationType) {
     try {
-      switch (method) {
-        case "Protocol":
-          await invoke(SeelenCommand.OpenFile, { path: args });
-          break;
-        default:
-          await invoke(SeelenCommand.ActivateNotification, {
-            umid: notification.appUmid,
-            args,
-            inputData,
-          });
-      }
+      await invoke(SeelenCommand.ActivateNotification, {
+        id: notification.id,
+        umid: notification.appUmid,
+        args,
+        activationType: method,
+        inputData,
+      });
     } catch (error) {
       console.error("Failed to handle notification action:", error);
     }
