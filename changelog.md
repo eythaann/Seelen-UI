@@ -27,6 +27,7 @@
 - backup loop on app starts.
 - notification trigger not working for uwp apps.
 - bundle resources serializer.
+- not removing win32 notifications on clear all.
 
 ## [2.5.8]
 
