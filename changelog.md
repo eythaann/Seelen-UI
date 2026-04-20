@@ -26,6 +26,7 @@
 - connect wifi not working on all networks.
 - backup loop on app starts.
 - notification trigger not working for uwp apps.
+- bundle resources serializer.
 
 ## [2.5.8]
 

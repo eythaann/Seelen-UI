@@ -40,7 +40,7 @@ impl WidgetSettingsDeclarationList {
     ) -> bool {
         match definition {
             WidgetConfigDefinition::Group(group) => {
-                for item in &group.items {
+                for item in &group.group.items {
                     if Self::collect_keys_recursive(item, seen) {
                         return true;
                     }
@@ -60,14 +60,19 @@ impl WidgetSettingsDeclarationList {
 
 /// A widget configuration definition that can be either a group container or a settings item
 #[derive(Debug, Clone, Serialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[serde(untagged, rename_all = "camelCase")]
 pub enum WidgetConfigDefinition {
     /// A group that contains nested configuration items.
     /// Groups are used to organize related settings with headers.
-    Group(WidgetConfigGroup),
+    Group(WidgetConfigGroupVariant),
     /// A direct configuration item (untagged variant for simpler JSON structure)
-    #[serde(untagged)]
     Item(Box<WidgetSettingItem>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct WidgetConfigGroupVariant {
+    group: WidgetConfigGroup,
 }
 
 /// A group of widget configuration items with a label
@@ -93,7 +98,9 @@ impl<'de> Deserialize<'de> for WidgetConfigDefinition {
         if let Some(group_value) = map.remove("group") {
             let group: WidgetConfigGroup =
                 serde_path_to_error::deserialize(group_value).map_err(serde::de::Error::custom)?;
-            return Ok(WidgetConfigDefinition::Group(group));
+            return Ok(WidgetConfigDefinition::Group(WidgetConfigGroupVariant {
+                group,
+            }));
         }
 
         Ok(WidgetConfigDefinition::Item(Box::new(

@@ -9,11 +9,16 @@ use crate::{error::Result, resource::ResourceText};
 pub struct ThemeSettingsDefinition(Vec<ThemeConfigDefinition>);
 
 #[derive(Debug, Clone, Serialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[serde(untagged, rename_all = "camelCase")]
 pub enum ThemeConfigDefinition {
-    Group(ThemeConfigGroup),
-    #[serde(untagged)]
+    Group(ThemeConfigGroupVariant),
     Item(Box<ThemeVariableDefinition>),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[serde(rename_all = "camelCase")]
+pub struct ThemeConfigGroupVariant {
+    group: ThemeConfigGroup,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
@@ -28,19 +33,20 @@ impl<'de> Deserialize<'de> for ThemeConfigDefinition {
     where
         D: Deserializer<'de>,
     {
-        #[derive(Deserialize)]
-        struct GroupVariant {
-            group: ThemeConfigGroup,
-        }
+        let mut map = serde_json::Map::<String, serde_json::Value>::deserialize(deserializer)
+            .map_err(serde::de::Error::custom)?;
 
-        let value =
-            serde_json::Value::deserialize(deserializer).map_err(serde::de::Error::custom)?;
-        if let Ok(parsed) = GroupVariant::deserialize(value.clone()) {
-            return Ok(ThemeConfigDefinition::Group(parsed.group));
+        if let Some(group_value) = map.remove("group") {
+            let group: ThemeConfigGroup =
+                serde_path_to_error::deserialize(group_value).map_err(serde::de::Error::custom)?;
+            return Ok(ThemeConfigDefinition::Group(ThemeConfigGroupVariant {
+                group,
+            }));
         }
 
         Ok(ThemeConfigDefinition::Item(Box::new(
-            serde_json::from_value(value).map_err(serde::de::Error::custom)?,
+            serde_path_to_error::deserialize(serde_json::Value::Object(map))
+                .map_err(serde::de::Error::custom)?,
         )))
     }
 }
