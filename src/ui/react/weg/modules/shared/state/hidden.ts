@@ -1,7 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
 import { HideMode } from "@seelen-ui/lib/types";
 import { $is_this_webview_focused } from "libs/ui/react/utils/signals.ts";
-import { debounce } from "lodash";
 
 import { $mouse_at_edge } from "./system.ts";
 import { $settings } from "./settings.ts";
@@ -36,18 +35,20 @@ effect(() => {
       break;
   }
 
-  const doHide = debounce(() => ($dock_should_be_hidden.value = true), delayToHide);
-  const doShow = debounce(() => ($dock_should_be_hidden.value = false), delayToShow);
-
+  let timeout: ReturnType<typeof setTimeout> | null = null;
   if (hidden) {
-    doHide();
+    timeout = setTimeout(() => ($dock_should_be_hidden.value = true), delayToHide);
   } else {
-    doShow();
-    if (flush) doShow.flush();
+    if (flush) {
+      $dock_should_be_hidden.value = false;
+    } else {
+      timeout = setTimeout(() => ($dock_should_be_hidden.value = false), delayToShow);
+    }
   }
 
   return () => {
-    doHide.cancel();
-    doShow.cancel();
+    if (timeout) {
+      clearTimeout(timeout);
+    }
   };
 });

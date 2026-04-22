@@ -1,7 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { type FocusedApp, HideMode } from "@seelen-ui/lib/types";
-import { debounce } from "lodash";
 import { $settings, $widget_rect } from "./mod";
 import { $mouse_at_edge } from "./system";
 import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
@@ -80,24 +79,24 @@ effect(() => {
       hidden = !$is_this_webview_focused.value && !isMouseOverEdge;
       break;
     case HideMode.OnOverlap:
-      hidden = $is_tb_overlapped.value &&
-        !$is_this_webview_focused.value &&
-        !isMouseOverEdge;
+      hidden = $is_tb_overlapped.value && !$is_this_webview_focused.value && !isMouseOverEdge;
       break;
   }
 
-  const doHide = debounce(() => ($hidden_by_autohide.value = true), delayToHide);
-  const doShow = debounce(() => ($hidden_by_autohide.value = false), delayToShow);
-
+  let timeout: ReturnType<typeof setTimeout> | null = null;
   if (hidden) {
-    doHide();
+    timeout = setTimeout(() => ($hidden_by_autohide.value = true), delayToHide);
   } else {
-    doShow();
-    if (flush) doShow.flush();
+    if (flush) {
+      $hidden_by_autohide.value = false;
+    } else {
+      timeout = setTimeout(() => ($hidden_by_autohide.value = false), delayToShow);
+    }
   }
 
   return () => {
-    doHide.cancel();
-    doShow.cancel();
+    if (timeout) {
+      clearTimeout(timeout);
+    }
   };
 });
