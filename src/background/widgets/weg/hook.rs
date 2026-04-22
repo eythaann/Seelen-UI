@@ -8,20 +8,12 @@ use windows::Win32::{
 use crate::{
     error::Result,
     pcstr,
-    windows_api::window::event::WinEvent,
     windows_api::{window::Window, WindowsApi},
 };
 
 use super::{SeelenWeg, TASKBAR_CLASS};
 
 impl SeelenWeg {
-    pub fn process_individual_win_event(&mut self, event: WinEvent, origin: &Window) -> Result<()> {
-        if event == WinEvent::ObjectLocationChange && origin.hwnd() == self.hwnd()? {
-            self.reposition_if_needed()?;
-        }
-        Ok(())
-    }
-
     // move this to independent function as this should work independently if dock is enabled or not
     pub fn process_raw_win_event(event: u32, origin_hwnd: HWND) -> Result<()> {
         let origin = Window::from(origin_hwnd);

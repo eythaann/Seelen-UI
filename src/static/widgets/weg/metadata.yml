@@ -3,7 +3,8 @@ icon: BiDockBottom
 metadata:
   displayName: !extend i18n/display_name.yml
 instances: ReplicaByMonitor
-loader: Legacy
+loader: InternalReact
+preset: Overlay
 shortcuts:
   - id: weg-launch-0
     command: ["weg", "foreground-or-run-app", "0"]

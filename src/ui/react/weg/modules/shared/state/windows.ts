@@ -83,7 +83,7 @@ export const $is_dock_overlapped = computed(() => {
     return false;
   }
 
-  const a = $widget_rect.value;
+  const a = $widget_rect.value.hitboxRect;
   const b = by.rect;
 
   // The edge pixel overlapping do not matters. This resolves the shared pixel in between the monitors,

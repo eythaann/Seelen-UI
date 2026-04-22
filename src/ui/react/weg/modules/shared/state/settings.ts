@@ -1,28 +1,16 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
-import { Settings } from "@seelen-ui/lib";
-import { Alignment } from "@seelen-ui/lib/types";
+import { invoke, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
+import { Alignment, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { computed, effect } from "@preact/signals";
 import i18n from "../../../i18n";
 import { $current_monitor } from "./system";
-import { toPhysicalPixels } from "libs/ui/react/utils";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
 
-export const $settings = lazySignal(async () => {
-  const settings = await Settings.getAsync();
-  return {
-    ...settings.byWidget["@seelen/weg"],
-    language: settings.language,
-    devTools: settings.devTools,
-  };
-});
-Settings.onChange((settings) => {
-  $settings.value = {
-    ...settings.byWidget["@seelen/weg"],
-    language: settings.language,
-    devTools: settings.devTools,
-  };
-});
-await $settings.init();
+export const $full_settings = lazySignal(async () => await Settings.getAsync());
+Settings.onChange((s) => ($full_settings.value = s));
+await $full_settings.init();
+
+export const $settings = computed(() => $full_settings.value.byWidget["@seelen/weg"]);
 
 export const isHorizontalDock = computed(
   () =>
@@ -31,8 +19,11 @@ export const isHorizontalDock = computed(
 );
 
 effect(() => {
+  i18n.changeLanguage($full_settings.value.language || "en");
+});
+
+effect(() => {
   const settings = $settings.value;
-  i18n.changeLanguage(settings.language || undefined);
 
   // @deprecated on future a utility function to parse widget settings as variables will be used.
   const styles = document.documentElement.style;
@@ -45,7 +36,10 @@ effect(() => {
   styles.setProperty("--config-space-between-items", `${settings.spaceBetweenItems}px`);
 });
 
-export function getDockContextMenuAlignment(position: SeelenWegSide): { alignX: Alignment; alignY: Alignment } {
+export function getDockContextMenuAlignment(position: SeelenWegSide): {
+  alignX: Alignment;
+  alignY: Alignment;
+} {
   switch (position) {
     case SeelenWegSide.Bottom:
       return { alignX: Alignment.Center, alignY: Alignment.End };
@@ -58,26 +52,78 @@ export function getDockContextMenuAlignment(position: SeelenWegSide): { alignX: 
   }
 }
 
+const $work_area = computed(() => {
+  const workArea = $current_monitor.value.rect;
+  const tbConfig = $full_settings.value.byWidget["@seelen/fancy-toolbar"];
+  const tbMonitorConfig = $full_settings.value.monitorsV3[$current_monitor.value.id]?.byWidget?.[
+    "@seelen/fancy-toolbar" as any
+  ] || { enabled: true };
+
+  if (!tbConfig.enabled || !tbMonitorConfig.enabled) {
+    return workArea;
+  }
+
+  const tbSize = (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) *
+    $current_monitor.value.scaleFactor;
+
+  switch (tbConfig.position) {
+    case FancyToolbarSide.Top:
+      return {
+        ...workArea,
+        top: workArea.top + tbSize,
+      };
+    case FancyToolbarSide.Bottom:
+      return {
+        ...workArea,
+        bottom: workArea.bottom - tbSize,
+      };
+  }
+
+  return workArea;
+});
+
 export const $widget_rect = computed(() => {
-  const rect = { ...$current_monitor.value.rect };
-  const size = toPhysicalPixels(
-    $settings.value.size + $settings.value.padding * 2 + $settings.value.margin * 2,
-  );
+  const workArea = { ...$work_area.value };
+
+  const hitboxRect = { ...$work_area.value };
+  const webviewRect = { ...$work_area.value };
+
+  const size = ($settings.value.size + $settings.value.padding * 2 + $settings.value.margin * 2) *
+    $current_monitor.value.scaleFactor;
 
   switch ($settings.value.position) {
     case SeelenWegSide.Left:
-      rect.right = rect.left + size;
+      hitboxRect.right = hitboxRect.left + size;
+      webviewRect.right = workArea.right - (workArea.right - workArea.left) / 2;
       break;
     case SeelenWegSide.Right:
-      rect.left = rect.right - size;
+      hitboxRect.left = hitboxRect.right - size;
+      webviewRect.left = workArea.left + (workArea.right - workArea.left) / 2;
       break;
     case SeelenWegSide.Top:
-      rect.bottom = rect.top + size;
+      hitboxRect.bottom = hitboxRect.top + size;
+      webviewRect.bottom = workArea.top + (workArea.bottom - workArea.top) / 2;
       break;
     case SeelenWegSide.Bottom:
-      rect.top = rect.bottom - size;
+      hitboxRect.top = hitboxRect.bottom - size;
+      webviewRect.top = workArea.bottom - (workArea.bottom - workArea.top) / 2;
       break;
   }
 
-  return rect;
+  return { hitboxRect, webviewRect };
+});
+
+effect(() => {
+  const { hitboxRect, webviewRect } = $widget_rect.value;
+
+  Widget.self.setPosition(webviewRect);
+
+  if ($settings.value.hideMode === HideMode.Never) {
+    invoke(SeelenCommand.RegisterAppBar, {
+      rect: hitboxRect,
+      edge: $settings.value.position as any,
+    });
+  } else {
+    invoke(SeelenCommand.UnregisterAppBar);
+  }
 });

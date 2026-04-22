@@ -175,13 +175,6 @@ impl HookManager {
                 log_error!(wall.process_win_event(event, &origin), event);
             }
         };
-
-        let mut seelen = trace_lock!(SEELEN);
-        for instance in seelen.instances_mut() {
-            if let Some(weg) = &mut instance.weg {
-                log_error!(weg.process_individual_win_event(event, &origin), event);
-            }
-        }
     }
 }
 

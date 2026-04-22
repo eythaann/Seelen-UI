@@ -69,10 +69,6 @@ pub struct Seelen {
 
 /* ============== Getters ============== */
 impl Seelen {
-    pub fn instances_mut(&mut self) -> &mut Vec<LegacyWidgetMonitorContainer> {
-        &mut self.widgets_per_display
-    }
-
     pub fn is_running() -> bool {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Acquire)
     }
@@ -156,6 +152,10 @@ impl Seelen {
 
         let state = FULL_STATE.load();
         rust_i18n::set_locale(state.locale());
+
+        if state.is_weg_enabled() {
+            SeelenWeg::hide_native_taskbar();
+        }
 
         if state.is_wall_enabled() {
             self.add_wall()?;

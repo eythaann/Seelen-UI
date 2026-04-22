@@ -138,7 +138,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
       placement={calculatePlacement($settings.value.position)}
       onOpenChange={(open) => {
         setOpenPreview(open && moment(new Date()) > blockUntil);
-        $open_popups.value[item.id] = open;
+        $open_popups.value = { ...$open_popups.value, [item.id]: open };
       }}
       trigger="hover"
       arrow={false}

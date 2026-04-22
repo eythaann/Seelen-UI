@@ -5,7 +5,7 @@ import type { TFunction } from "i18next";
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
-import { $settings } from "../../shared/state/settings.ts";
+import { $full_settings, $settings } from "../../shared/state/settings.ts";
 
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
@@ -102,7 +102,7 @@ export function getUserApplicationContextMenu(
   );
 
   if (windows.length) {
-    if ($settings.value.devTools) {
+    if ($full_settings.value.devTools) {
       items.push({
         type: "Item",
         key: "copy_hwnd",
