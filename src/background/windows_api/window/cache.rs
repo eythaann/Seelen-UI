@@ -66,7 +66,6 @@ impl Window {
             umid: self.app_user_model_id().map(|umid| umid.to_string()),
             is_maximized: self.is_maximized(),
             is_fullscreened: self.is_fullscreen(),
-            is_seelen_overlay: self.is_seelen_overlay(),
             rect: self.inner_rect().ok(),
         }
     }

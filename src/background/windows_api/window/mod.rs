@@ -29,10 +29,6 @@ use crate::{
     error::Result,
     modules::{apps::application::is_interactable_window, start::application::StartMenuManager},
     utils::lock_free::TracedMutex,
-    widgets::{
-        toolbar::FancyToolbar, wallpaper_manager::SeelenWall, weg::instance::SeelenWeg,
-        window_manager::instance::WindowManagerV2,
-    },
 };
 
 use super::{
@@ -332,18 +328,6 @@ impl Window {
                             .any(|child| child.class() == "SHELLDLL_DefView")
                     })
             }
-        }
-    }
-
-    pub fn is_seelen_overlay(&self) -> bool {
-        self.process().is_seelen() && {
-            [
-                FancyToolbar::TITLE,
-                WindowManagerV2::TITLE,
-                SeelenWeg::TITLE,
-                SeelenWall::TITLE,
-            ]
-            .contains(&self.title().as_str())
         }
     }
 

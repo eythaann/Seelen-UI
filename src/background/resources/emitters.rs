@@ -87,7 +87,7 @@ impl ResourceManager {
         let widgets = self.widgets();
         emit_to_webviews(SeelenEvent::StateWidgetsChanged, widgets.clone());
 
-        WIDGET_MANAGER.refresh()?;
+        WIDGET_MANAGER.reconcile()?;
 
         let state = FULL_STATE.load();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();

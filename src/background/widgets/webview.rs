@@ -4,10 +4,13 @@ use base64::Engine;
 use seelen_core::{
     resource::WidgetId,
     state::{Widget, WidgetLoader, WidgetPreset},
+    system_state::MonitorId,
 };
 
 use crate::{
-    app::get_app_handle, error::Result, state::application::FULL_STATE,
+    app::get_app_handle,
+    error::{Result, ResultLogExt},
+    state::application::FULL_STATE,
     utils::constants::SEELEN_COMMON,
 };
 
@@ -66,7 +69,7 @@ impl WidgetWebview {
                 builder = builder.always_on_bottom(true);
             }
             WidgetPreset::Overlay | WidgetPreset::Popup => {
-                builder = builder.always_on_top(true);
+                builder = builder.always_on_top(true).resizable(false);
             }
             _ => {}
         }
@@ -77,6 +80,10 @@ impl WidgetWebview {
             .build()?;
 
         Ok(Self(window))
+    }
+
+    pub fn reload(&self) {
+        self.0.reload().log_error();
     }
 }
 
@@ -96,6 +103,8 @@ pub struct WidgetWebviewLabel {
     pub decoded: String,
     /// widget id from this label was created
     pub widget_id: WidgetId,
+    pub monitor_id: Option<MonitorId>,
+    pub instance_id: Option<uuid::Uuid>,
 }
 
 impl WidgetWebviewLabel {
@@ -129,18 +138,38 @@ impl WidgetWebviewLabel {
             raw: base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label),
             decoded: label,
             widget_id: widget_id.clone(),
+            monitor_id: monitor_id.map(MonitorId::from),
+            instance_id: instance_id.cloned(),
         }
     }
 
     pub fn try_from_raw(raw: &str) -> Result<Self> {
         let decoded = base64::engine::general_purpose::URL_SAFE_NO_PAD.decode(raw)?;
         let decoded = String::from_utf8(decoded)?;
-        let widget_id = WidgetId::from(decoded.split('?').next().expect("Invalid label"));
+
+        let mut parts = decoded.splitn(2, '?');
+        let widget_id = WidgetId::from(parts.next().expect("Invalid label"));
+
+        let mut monitor_id = None;
+        let mut instance_id = None;
+        if let Some(query) = parts.next() {
+            for param in query.split('&') {
+                if let Some(value) = param.strip_prefix("monitorId=") {
+                    let decoded_value = urlencoding::decode(value).unwrap_or_default();
+                    monitor_id = Some(MonitorId::from(decoded_value.as_ref()));
+                } else if let Some(value) = param.strip_prefix("instanceId=") {
+                    let decoded_value = urlencoding::decode(value).unwrap_or_default();
+                    instance_id = decoded_value.parse::<uuid::Uuid>().ok();
+                }
+            }
+        }
 
         Ok(Self {
             raw: raw.to_string(),
             decoded,
             widget_id,
+            monitor_id,
+            instance_id,
         })
     }
 }

@@ -3,4 +3,5 @@ icon: BiSolidDockTop
 metadata:
   displayName: !extend i18n/display_name.yml
 instances: ReplicaByMonitor
-loader: Legacy
+loader: InternalReact
+preset: Overlay

@@ -31,6 +31,8 @@ export enum SeelenCommand {
   SystemGetColors = "get_system_colors",
   SystemGetLanguages = "get_system_languages",
   SystemSetKeyboardLayout = "set_system_keyboard_layout",
+  RegisterAppBar = "register_app_bar",
+  UnregisterAppBar = "unregister_app_bar",
   StateGetDefaultSettings = "state_get_default_settings",
   StateGetDefaultMonitorSettings = "state_get_default_monitor_settings",
   StateGetDefaultWallpaperSettings = "state_get_default_wallpaper_settings",

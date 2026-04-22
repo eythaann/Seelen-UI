@@ -10,8 +10,8 @@ use uuid::Uuid;
 
 use crate::{
     app::get_app_handle,
-    error::ResultLogExt,
     get_tokio_handle,
+    modules::monitors::MonitorManager,
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
@@ -20,106 +20,126 @@ use crate::{
 };
 
 const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(5);
-const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(2);
+const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(3);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum InstanceType {
-    /// Instances defined in user settings
-    Static,
-    /// Instances created dynamically during runtime
-    Runtime,
-}
-
-pub struct WidgetContainer {
+pub struct WidgetDeployment {
     pub definition: Arc<Widget>,
-    pub instances: SyncHashMap<WidgetWebviewLabel, WidgetInstance>,
+    pub pods: SyncHashMap<WidgetWebviewLabel, WidgetPod>,
 }
 
-impl WidgetContainer {
-    pub fn create(widget: Arc<Widget>) -> Self {
-        let instances = SyncHashMap::new();
+impl WidgetDeployment {
+    pub fn new(definition: Arc<Widget>) -> Self {
+        Self {
+            definition,
+            pods: SyncHashMap::new(),
+        }
+    }
 
-        match widget.instances {
+    /// Will revaluate all widget instances and remove or add them based on current user settings
+    pub fn reconcile(&self) {
+        match self.definition.instances {
             WidgetInstanceMode::Single => {
-                let instance = WidgetInstance::create(&widget, None, None, InstanceType::Static);
-                instances.upsert(instance.label.clone(), instance);
+                if self.pods.is_empty() {
+                    let instance = WidgetPod::create(&self.definition, None, None);
+                    self.pods.upsert(instance.label.clone(), instance);
+                }
             }
             WidgetInstanceMode::Multiple => {
                 let nil_id = Uuid::nil();
-                let default_instance =
-                    WidgetInstance::create(&widget, None, Some(&nil_id), InstanceType::Static);
-                instances.upsert(default_instance.label.clone(), default_instance);
+                if self.pods.is_empty() {
+                    let instance = WidgetPod::create(&self.definition, None, Some(&nil_id));
+                    self.pods.upsert(instance.label.clone(), instance);
+                }
 
-                for replica_id in FULL_STATE.load().get_widget_instances_ids(&widget.id) {
-                    if replica_id != nil_id {
-                        let instance = WidgetInstance::create(
-                            &widget,
-                            None,
-                            Some(&replica_id),
-                            InstanceType::Static,
-                        );
-                        instances.upsert(instance.label.clone(), instance);
+                let replicas_ids = FULL_STATE
+                    .load()
+                    .get_widget_instances_ids(&self.definition.id);
+
+                // Remove deleted instances
+                self.pods.retain(|(label, _)| {
+                    let instance_id = label.instance_id.expect("Missing instance id");
+                    instance_id == nil_id || replicas_ids.contains(&instance_id)
+                });
+
+                // Add new instances
+                for replica_id in replicas_ids {
+                    if !self
+                        .pods
+                        .any(|(label, _)| label.instance_id == Some(replica_id))
+                    {
+                        let instance = WidgetPod::create(&self.definition, None, Some(&replica_id));
+                        self.pods.upsert(instance.label.clone(), instance);
                     }
                 }
             }
-            WidgetInstanceMode::ReplicaByMonitor => {}
-        }
+            WidgetInstanceMode::ReplicaByMonitor => {
+                let configs = FULL_STATE.load();
 
-        Self {
-            definition: widget,
-            instances,
+                // Remove disabled instances
+                self.pods.retain(|(label, _)| {
+                    let monitor_id = label.monitor_id.as_ref().expect("Missing monitor id");
+                    configs.is_widget_enable_on_monitor(&self.definition.id, monitor_id)
+                });
+
+                // Add new/enabled instances
+                for monitor_id in MonitorManager::instance().get_cached_ids() {
+                    if self
+                        .pods
+                        .any(|(label, _)| label.monitor_id.as_ref() == Some(&monitor_id))
+                    {
+                        continue;
+                    }
+                    let instance = WidgetPod::create(&self.definition, Some(&monitor_id), None);
+                    self.pods.upsert(instance.label.clone(), instance);
+                }
+            }
         }
     }
 
     pub fn start_all_webviews(&self) {
-        self.instances.for_each(|(_k, v)| {
-            v.start_webview(&self.definition);
+        self.pods.for_each(|(_k, pod)| {
+            pod.run(&self.definition);
         });
     }
 
     pub fn start_webview(&self, label: &WidgetWebviewLabel) {
-        self.instances.get(label, |instance| {
-            instance.start_webview(&self.definition);
+        self.pods.get(label, |pod| {
+            pod.run(&self.definition);
         });
     }
 
     pub fn create_runtime_instance(&self, instance_id: &Uuid) {
-        let instance = WidgetInstance::create(
-            &self.definition,
-            None,
-            Some(instance_id),
-            InstanceType::Runtime,
-        );
-        self.instances.upsert(instance.label.clone(), instance);
+        let instance = WidgetPod::create(&self.definition, None, Some(instance_id));
+        self.pods.upsert(instance.label.clone(), instance);
+    }
+
+    pub fn kill_pod(&self, label: &WidgetWebviewLabel) {
+        self.pods.remove(label);
     }
 }
 
-pub struct WidgetInstance {
+pub struct WidgetPod {
     pub label: WidgetWebviewLabel,
-    pub instance_type: InstanceType,
+
     window: Option<WidgetWebview>,
     _status: WidgetStatus,
 
     live: Arc<tokio::sync::Notify>,
+    liveness_prove_handle: Option<tokio::task::JoinHandle<()>>,
     retries: Arc<AtomicU8>,
 }
 
-impl WidgetInstance {
-    fn create(
-        widget: &Widget,
-        monitor_id: Option<&str>,
-        instance_id: Option<&Uuid>,
-        instance_type: InstanceType,
-    ) -> Self {
+impl WidgetPod {
+    fn create(widget: &Widget, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
         let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
-        log::info!("Starting widget instance: {label}");
+        log::info!("Creating widget pod: {label}");
         Self {
             label,
-            instance_type,
             window: None,
             _status: WidgetStatus::Pending,
             live: Arc::new(tokio::sync::Notify::new()),
+            liveness_prove_handle: None,
             retries: Arc::new(AtomicU8::new(0)),
         }
     }
@@ -137,7 +157,14 @@ impl WidgetInstance {
         self.window.is_some() && self.status() == &WidgetStatus::Ready
     }
 
-    fn start_webview(&mut self, definition: &Widget) {
+    fn soft_restart(&mut self) {
+        self.set_status(WidgetStatus::Restarting);
+        if let Some(window) = &self.window {
+            window.reload();
+        }
+    }
+
+    fn run(&mut self, definition: &Widget) {
         if self.status() != &WidgetStatus::Pending {
             return;
         }
@@ -153,10 +180,33 @@ impl WidgetInstance {
         };
         self.set_status(WidgetStatus::Mounting);
 
+        let label = self.label.clone();
+        window.0.on_window_event(move |event| {
+            if let tauri::WindowEvent::Destroyed = event {
+                WIDGET_MANAGER.groups.get(&label.widget_id, |deploy| {
+                    deploy.kill_pod(&label);
+                    deploy.reconcile();
+                });
+            }
+        });
+
+        self.window = Some(window);
+        self.start_liveness_prove();
+    }
+
+    fn start_liveness_prove(&mut self) {
+        if let Some(window) = &self.window {
+            let live = self.live.clone();
+            window.0.listen("internal::liveness-pong", move |_event| {
+                live.notify_waiters();
+            });
+        }
+
         let live = self.live.clone();
         let label = self.label.clone();
         let retries = self.retries.clone();
-        let liveness_prove = get_tokio_handle().spawn(async move {
+
+        let handle = get_tokio_handle().spawn(async move {
             let app = get_app_handle();
 
             loop {
@@ -176,12 +226,9 @@ impl WidgetInstance {
 
                         let attempt = retries.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
                         if attempt < LIVENESS_PROVE_MAX_RETRIES {
-                            WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
-                                c.instances.get(&label, |w| {
-                                    w.set_status(WidgetStatus::Pending);
-                                    if let Some(window) = &w.window {
-                                        window.0.reload().log_error();
-                                    }
+                            WIDGET_MANAGER.groups.get(&label.widget_id, |deployment| {
+                                deployment.pods.get(&label, |pod| {
+                                    pod.soft_restart();
                                 });
                             });
                         } else {
@@ -204,41 +251,15 @@ impl WidgetInstance {
             }
         });
 
-        let label = self.label.clone();
-        let instance_type = self.instance_type;
-        window.0.on_window_event(move |event| {
-            if let tauri::WindowEvent::Destroyed = event {
-                liveness_prove.abort();
-                WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
-                    match instance_type {
-                        // Remove runtime instances on destroy
-                        InstanceType::Runtime => {
-                            c.instances.remove(&label);
-                        }
-                        // Reset static instances to pending state
-                        InstanceType::Static => {
-                            c.instances.get(&label, |w| {
-                                w.window = None;
-                                w.retries.store(0, std::sync::atomic::Ordering::SeqCst);
-                                w.set_status(WidgetStatus::Pending);
-                            });
-                        }
-                    }
-                });
-            }
-        });
-
-        let live = self.live.clone();
-        window.0.listen("internal::liveness-pong", move |_event| {
-            live.notify_waiters();
-        });
-
-        self.window = Some(window);
+        self.liveness_prove_handle = Some(handle);
     }
 }
 
-impl Drop for WidgetInstance {
+impl Drop for WidgetPod {
     fn drop(&mut self) {
-        log::info!("Dropping {}", self.label);
+        log::trace!("Dropping widget pod: {}", self.label);
+        if let Some(handle) = self.liveness_prove_handle.take() {
+            handle.abort();
+        }
     }
 }

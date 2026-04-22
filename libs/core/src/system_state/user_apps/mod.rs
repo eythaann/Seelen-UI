@@ -14,7 +14,6 @@ pub struct FocusedApp {
     pub umid: Option<String>,
     pub is_maximized: bool,
     pub is_fullscreened: bool,
-    pub is_seelen_overlay: bool,
     /// this is the rect of the window, without the shadow.
     pub rect: Option<Rect>,
 }

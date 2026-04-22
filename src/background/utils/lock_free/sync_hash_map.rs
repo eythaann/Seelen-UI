@@ -80,11 +80,11 @@ where
         self.0.lock().iter_mut().for_each(f);
     }
 
-    pub fn retain<F>(&self, f: F)
+    pub fn retain<F>(&self, mut f: F)
     where
-        F: FnMut(&K, &mut V) -> bool,
+        F: FnMut((&K, &mut V)) -> bool,
     {
-        self.0.lock().retain(f);
+        self.0.lock().retain(|k, v| f((k, v)));
     }
 
     pub fn clear(&self) {

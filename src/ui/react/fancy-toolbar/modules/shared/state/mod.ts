@@ -1,6 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
-import { Settings } from "@seelen-ui/lib";
-import { FancyToolbarSide } from "@seelen-ui/lib/types";
+import { invoke, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
+import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
 import { $current_monitor } from "./system";
 import i18n from "../../../i18n";
@@ -47,4 +47,17 @@ export const $widget_rect = computed(() => {
   }
 
   return rect;
+});
+
+effect(() => {
+  Widget.self.setPosition($widget_rect.value);
+
+  if ($settings.value.hideMode === HideMode.Never) {
+    invoke(SeelenCommand.RegisterAppBar, {
+      rect: $widget_rect.value,
+      edge: $settings.value.position as unknown as AppBarEdge,
+    });
+  } else {
+    invoke(SeelenCommand.UnregisterAppBar);
+  }
 });

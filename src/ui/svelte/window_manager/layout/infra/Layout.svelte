@@ -23,10 +23,7 @@
       return false;
     }
 
-    if (
-      state.focusedApp.isSeelenOverlay ||
-      ["Progman", "SysListView32"].includes(state.focusedApp.class)
-    ) {
+    if (["Progman", "SysListView32"].includes(state.focusedApp.class)) {
       return true;
     }
 

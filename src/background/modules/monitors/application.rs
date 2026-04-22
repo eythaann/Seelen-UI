@@ -215,6 +215,10 @@ impl MonitorManager {
         Err("Can not find display view for target".into())
     }
 
+    pub fn get_cached_ids(&self) -> Vec<MonitorId> {
+        self.state_views.keys()
+    }
+
     pub fn read_all_views(&self) -> Result<Vec<DisplayView>> {
         let state = self.display_manager.TryReadCurrentStateForAllTargets()?;
         let state = state.State()?;

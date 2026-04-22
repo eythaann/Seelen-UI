@@ -37,3 +37,12 @@ impl Default for MonitorId {
         Self("null".to_string())
     }
 }
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
+#[ts(repr(enum = name))]
+pub enum AppBarEdge {
+    Top,
+    Left,
+    Bottom,
+    Right,
+}

@@ -232,4 +232,6 @@ pub enum WidgetStatus {
     Ready,
     /// Webview window failed to be created.
     CrashedOnCreation,
+    /// Webview window is being restarted
+    Restarting,
 }

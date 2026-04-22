@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{FancyToolbarSide, SeelenWegSide};
+use seelen_core::system_state::AppBarEdge;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
@@ -13,34 +13,6 @@ use crate::trace_lock;
 
 lazy_static! {
     pub static ref RegisteredBars: Mutex<Vec<isize>> = Mutex::new(Vec::new());
-}
-
-#[allow(dead_code)]
-pub enum AppBarDataEdge {
-    Left = ABE_LEFT as isize,
-    Top = ABE_TOP as isize,
-    Right = ABE_RIGHT as isize,
-    Bottom = ABE_BOTTOM as isize,
-}
-
-impl From<SeelenWegSide> for AppBarDataEdge {
-    fn from(val: SeelenWegSide) -> Self {
-        match val {
-            SeelenWegSide::Left => AppBarDataEdge::Left,
-            SeelenWegSide::Top => AppBarDataEdge::Top,
-            SeelenWegSide::Right => AppBarDataEdge::Right,
-            SeelenWegSide::Bottom => AppBarDataEdge::Bottom,
-        }
-    }
-}
-
-impl From<FancyToolbarSide> for AppBarDataEdge {
-    fn from(val: FancyToolbarSide) -> Self {
-        match val {
-            FancyToolbarSide::Top => AppBarDataEdge::Top,
-            FancyToolbarSide::Bottom => AppBarDataEdge::Bottom,
-        }
-    }
 }
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
@@ -88,8 +60,13 @@ impl AppBarData {
         unsafe { SHAppBarMessage(ABM_SETSTATE, &mut data) };
     }
 
-    pub fn set_edge(&mut self, edge: AppBarDataEdge) {
-        self.0.uEdge = edge as u32;
+    pub fn set_edge(&mut self, edge: AppBarEdge) {
+        self.0.uEdge = match edge {
+            AppBarEdge::Left => ABE_LEFT,
+            AppBarEdge::Top => ABE_TOP,
+            AppBarEdge::Right => ABE_RIGHT,
+            AppBarEdge::Bottom => ABE_BOTTOM,
+        };
     }
 
     pub fn set_rect(&mut self, rect: RECT) {

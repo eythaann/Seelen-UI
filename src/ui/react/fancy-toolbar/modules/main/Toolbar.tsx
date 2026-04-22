@@ -66,7 +66,6 @@ export function FancyToolbar() {
       data-has-margin={!!$settings.value.margin}
       data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
       data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
-      data-focused-is-overlay={!!$lastFocusedOnMonitor.value?.isSeelenOverlay}
       onContextMenu={onContextMenu}
     >
       <ShowDesktopButton />

@@ -48,6 +48,7 @@ pub fn set_current_widget_status(
     WIDGET_MANAGER.set_status(&label, status);
 
     if let Some(pending) = PENDING_TRIGGERS.remove(&label) {
+        log::info!("Emitting pending trigger for {label}");
         get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
     }
     Ok(())
@@ -86,7 +87,7 @@ pub fn trigger_widget(mut payload: WidgetTriggerPayload) -> Result<()> {
             };
 
             WIDGET_MANAGER.groups.get(&payload.id, |container| {
-                if !container.instances.contains_key(&label) {
+                if !container.pods.contains_key(&label) {
                     container.create_runtime_instance(instance_id);
                 }
             });

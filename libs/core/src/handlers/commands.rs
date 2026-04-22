@@ -145,6 +145,8 @@ slu_commands_declaration! {
     SystemGetColors = get_system_colors() -> UIColors,
     SystemGetLanguages = get_system_languages() -> Vec<SystemLanguage>,
     SystemSetKeyboardLayout = set_system_keyboard_layout(id: String, handle: String),
+    RegisterAppBar = register_app_bar(rect: Rect, edge: AppBarEdge),
+    UnregisterAppBar = unregister_app_bar(),
 
     // Seelen Settings
     StateGetDefaultSettings = state_get_default_settings() -> Settings,

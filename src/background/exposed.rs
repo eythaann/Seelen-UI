@@ -5,13 +5,17 @@ use seelen_core::{
     command_handler_list,
     constants::SUPPORTED_LANGUAGES,
     resource::ResourceText,
-    system_state::{Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
+    system_state::{AppBarEdge, Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
+    Rect,
 };
 
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use translators::Translator;
-use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
+use windows::Win32::{
+    Foundation::{HWND, RECT},
+    System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW},
+};
 
 use crate::{
     app::{get_app_handle, Seelen},
@@ -23,7 +27,9 @@ use crate::{
         pwsh::PwshScript,
     },
     widgets::permissions::{request_widget_permission, WidgetPerm},
-    windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
+    windows_api::{
+        hdc::DeviceContext, string_utils::WindowsString, window::Window, AppBarData, WindowsApi,
+    },
 };
 
 #[tauri::command(async)]
@@ -268,6 +274,31 @@ async fn get_native_start_menu() -> Result<StartMenuLayout> {
     }
 
     Ok(layout)
+}
+
+#[tauri::command(async)]
+fn register_app_bar(webview: tauri::WebviewWindow, rect: Rect, edge: AppBarEdge) -> Result<()> {
+    let hwnd = HWND(webview.hwnd()?.0);
+    let rect = RECT {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+    };
+
+    let mut app_bar = AppBarData::from_handle(hwnd);
+    app_bar.set_rect(rect);
+    app_bar.set_edge(edge);
+    app_bar.register_as_new_bar();
+    Ok(())
+}
+
+#[tauri::command(async)]
+fn unregister_app_bar(webview: tauri::WebviewWindow) -> Result<()> {
+    let hwnd = HWND(webview.hwnd()?.0);
+    let mut app_bar = AppBarData::from_handle(hwnd);
+    app_bar.unregister_bar();
+    Ok(())
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {

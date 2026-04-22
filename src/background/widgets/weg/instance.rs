@@ -140,7 +140,7 @@ impl SeelenWeg {
         let mut abd = AppBarData::from_handle(hwnd);
         match settings.hide_mode {
             HideMode::Never => {
-                abd.set_edge(settings.position.into());
+                // abd.set_edge(settings.position.into());
                 abd.set_rect(self.theoretical_rect);
                 abd.register_as_new_bar();
             }

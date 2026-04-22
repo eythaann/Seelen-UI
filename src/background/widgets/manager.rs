@@ -10,14 +10,14 @@ use crate::{
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
-    widgets::{loader::WidgetContainer, WidgetWebviewLabel},
+    widgets::{loader::WidgetDeployment, WidgetWebviewLabel},
 };
 
 pub static WIDGET_MANAGER: LazyLock<WidgetManager> = LazyLock::new(WidgetManager::create);
 
 pub struct WidgetManager {
     /// group of widgets instances by widget resource id
-    pub groups: SyncHashMap<WidgetId, WidgetContainer>,
+    pub groups: SyncHashMap<WidgetId, WidgetDeployment>,
 }
 
 impl WidgetManager {
@@ -30,22 +30,23 @@ impl WidgetManager {
     pub fn is_ready(&self, label: &WidgetWebviewLabel) -> bool {
         self.groups
             .get(&label.widget_id, |c| {
-                c.instances.any(|(k, i)| k == label && i.is_ready())
+                c.pods.any(|(k, i)| k == label && i.is_ready())
             })
             .unwrap_or(false)
     }
 
     pub fn set_status(&self, label: &WidgetWebviewLabel, status: WidgetStatus) {
         self.groups.get(&label.widget_id, |c| {
-            c.instances.get(label, |instance| {
+            c.pods.get(label, |instance| {
                 instance.set_status(status);
             });
         });
     }
 
-    pub fn refresh(&self) -> Result<()> {
+    pub fn reconcile(&self) -> Result<()> {
         // remove deleted resources
-        self.groups.retain(|key, _| RESOURCES.widgets.contains(key));
+        self.groups
+            .retain(|(key, _)| RESOURCES.widgets.contains(key));
 
         let mut filtered = Vec::new();
         RESOURCES.widgets.scan(|k, w| {
@@ -63,15 +64,17 @@ impl WidgetManager {
 
             if !self.groups.contains_key(&id) {
                 self.groups
-                    .upsert(id.clone(), WidgetContainer::create(widget));
+                    .upsert(id.clone(), WidgetDeployment::new(widget));
             }
         }
 
         // lazy creation of webviews to reduce startup time
         std::thread::spawn(|| {
-            WIDGET_MANAGER.groups.for_each(|(_, container)| {
-                if !container.definition.lazy {
-                    container.start_all_webviews();
+            WIDGET_MANAGER.groups.for_each(|(_, deployment)| {
+                deployment.reconcile();
+
+                if !deployment.definition.lazy {
+                    deployment.start_all_webviews();
                 }
             });
         });
