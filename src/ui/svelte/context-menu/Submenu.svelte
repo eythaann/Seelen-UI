@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import type { ContextMenuItem } from "@seelen-ui/lib/types";
+  import { type ContextMenuItem, Alignment } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "./state.svelte";
 
@@ -15,7 +15,7 @@
       menu: {
         identifier: item.identifier,
         items: item.items,
-        alignX: state.data?.alignX,
+        alignX: Alignment.Start,
         alignY: state.data?.alignY,
       },
       forwardTo: state.forwardTo || state.owner,

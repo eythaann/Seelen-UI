@@ -9,31 +9,34 @@ export const CONTEXT_MENU_CALLBACK_EVENT = "apps_menu::context_menu_action";
 export const FOLDER_CONTEXT_MENU_ID = crypto.randomUUID();
 const FOLDER_CONTEXT_MENU_CALLBACK_EVENT = "apps_menu::folder_context_menu_action";
 
-Widget.self.webview.listen<ContextMenuCallbackPayload>("item::context-menu", ({ payload }) => {
-  const { key, meta } = payload;
-  const item = (meta as any).item as StartMenuItem;
+Widget.self.webview.listen<ContextMenuCallbackPayload>(
+  CONTEXT_MENU_CALLBACK_EVENT,
+  ({ payload }) => {
+    const { key, meta } = payload;
+    const item = (meta as any).item as StartMenuItem;
 
-  if (key === "pin") {
-    globalState.togglePin(item);
-  } else if (key === "open_file_location") {
-    Widget.self.hide();
-    invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
-  } else if (key === "pin_to_dock") {
-    emit(SeelenEvent.WegAddItem, {
-      id: crypto.randomUUID(),
-      displayName: item.display_name,
-      umid: item.umid,
-      path: item.path,
-      pinned: true,
-      preventPinning: false,
-      relaunch: null,
-    });
-  } else if (key === "run_as_admin") {
-    Widget.self.hide();
-    const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
-    invoke(SeelenCommand.Run, { program, args: null, workingDir: null, elevated: true });
-  }
-});
+    if (key === "pin") {
+      globalState.togglePin(item);
+    } else if (key === "open_file_location") {
+      Widget.self.hide();
+      invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
+    } else if (key === "pin_to_dock") {
+      emit(SeelenEvent.WegAddItem, {
+        id: crypto.randomUUID(),
+        displayName: item.display_name,
+        umid: item.umid,
+        path: item.path,
+        pinned: true,
+        preventPinning: false,
+        relaunch: null,
+      });
+    } else if (key === "run_as_admin") {
+      Widget.self.hide();
+      const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
+      invoke(SeelenCommand.Run, { program, args: null, workingDir: null, elevated: true });
+    }
+  },
+);
 
 Widget.self.webview.listen<ContextMenuCallbackPayload>(
   FOLDER_CONTEXT_MENU_CALLBACK_EVENT,

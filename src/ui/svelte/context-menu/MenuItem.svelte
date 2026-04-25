@@ -20,7 +20,13 @@
 
   function handleClick() {
     let target = gState.forwardTo || gState.owner;
-    if (item.disabled || !target) {
+
+    if (!target) {
+      console.warn("Context menu has no target to emit to");
+      return;
+    }
+
+    if (item.disabled) {
       return;
     }
 
@@ -33,9 +39,10 @@
       key: item.key,
       value: item.value,
       checked: item.checked !== null ? internalChecked : null,
+      meta: gState.data?.meta,
     });
 
-    if (item.checked !== null) {
+    if (item.checked === null) {
       Widget.self.hide();
     }
   }
