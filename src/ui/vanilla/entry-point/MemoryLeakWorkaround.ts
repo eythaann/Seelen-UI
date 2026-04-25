@@ -3,9 +3,9 @@ import type { FocusedApp } from "@seelen-ui/lib/types";
 import { emitTo, listen } from "@tauri-apps/api/event";
 
 // trigger garbage collection
-setInterval(() => {
+/* setInterval(() => {
   window.gc?.();
-}, 5000);
+}, 5000); */
 
 if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   // workaround for tauri/webview2 memory leak

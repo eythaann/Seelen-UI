@@ -8,13 +8,21 @@ import { useTranslation } from "react-i18next";
 import { resolveDataPath } from "../shared/config/infra.ts";
 
 import { getWegConfig, patchWegConfig } from "../seelenweg/application.ts";
-import { getDevTools, LoadCustomConfigFile, setDevTools, simulatePerm } from "./application.ts";
+import {
+  getDevTools,
+  getUnstableOptimizations,
+  LoadCustomConfigFile,
+  setDevTools,
+  setUnstableOptimizations,
+  simulatePerm,
+} from "./application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 
 export function DeveloperTools() {
   const devTools = getDevTools();
   const showEndTask = getWegConfig().showEndTask;
+  const unstableOptimizations = getUnstableOptimizations();
 
   const [simWidgetId, setSimWidgetId] = useState("");
   const [simPerm, setSimPerm] = useState<string>("run");
@@ -57,6 +65,19 @@ export function DeveloperTools() {
           <b>{t("devtools.enable")}</b>
           <Switch value={devTools} onChange={onToggleDevTools} />
         </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
+          label={t("devtools.unstable_optimizations")}
+          description={t("devtools.unstable_optimizations_description")}
+          action={
+            <Switch
+              value={unstableOptimizations}
+              onChange={setUnstableOptimizations}
+            />
+          }
+        />
       </SettingsGroup>
 
       <SettingsGroup>

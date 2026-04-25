@@ -195,61 +195,61 @@ impl std::fmt::Display for WidgetWebviewLabel {
 // =============================================================================
 
 pub struct WebviewArgs {
-    common_args: Vec<String>,
-    extra_args: Vec<String>,
+    args: Vec<String>,
 }
 
 impl WebviewArgs {
     const BASE_ARGS: &[&str] = &[
-        "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer",
+        "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer,BackForwardCache,InterestCohort,SharedArrayBuffer,CalculateNativeWinOcclusion,OptimizationHints,AutofillServerCommunication",
         "--no-first-run",
         "--disable-site-isolation-trials",
-        /* "--disable-breakpad",
-        "--disable-component-update",
-        "--disable-default-apps",
-        "--disable-background-timer-throttling",
-        "--disable-background-networking", */
+        "--disk-cache-size=0",
+        "--media-cache-size=0",
+        "--disable-background-networking",
+        "--disable-sync",
+        "--disable-breakpad",
+        "--disable-component-extensions-with-background-pages",
+        "--no-pings",
+        "--aggressive-cache-discard",
     ];
 
     const PERFORMANCE_ARGS: &[&str] = &[
-        // "--enable-low-end-device-mode",
-        // "--in-process-gpu",
+        // "--enable-low-end-device-mode", // unstable flag that causes more issues than it solves
+        // "--in-process-gpu", // unstable flag
         "--disable-gpu",
-        "--disable-software-rasterizer",
+        // "--disable-software-rasterizer",
+    ];
+
+    const UNSTABLE_OPTIMIZATIONS: &[&str] = &[
+        // this reduces ram usage but if a widget crashes it will crash
+        // all widgets with the same loader, so it's not worth it
+        "--process-per-site",
     ];
 
     pub fn data_directory(&self) -> PathBuf {
-        if self.extra_args.is_empty() {
-            SEELEN_COMMON.app_cache_dir().to_path_buf()
-        } else {
-            SEELEN_COMMON
-                .app_cache_dir()
-                .join(self.extra_args.join("").replace('-', ""))
-        }
+        SEELEN_COMMON.app_cache_dir().to_path_buf()
     }
 }
 
 impl Default for WebviewArgs {
     fn default() -> Self {
-        let common_args = if FULL_STATE.load().settings.hardware_acceleration {
-            Self::BASE_ARGS.iter().map(|s| s.to_string()).collect()
-        } else {
-            Self::BASE_ARGS
-                .iter()
-                .chain(Self::PERFORMANCE_ARGS)
-                .map(|s| s.to_string())
-                .collect()
+        let state = FULL_STATE.load();
+        let mut args: Vec<String> = Self::BASE_ARGS.iter().map(|s| s.to_string()).collect();
+
+        if !state.settings.hardware_acceleration {
+            args.extend(Self::PERFORMANCE_ARGS.iter().map(|s| s.to_string()));
         };
 
-        Self {
-            common_args,
-            extra_args: Vec::new(),
+        if state.settings.unstable_optimizations {
+            args.extend(Self::UNSTABLE_OPTIMIZATIONS.iter().map(|s| s.to_string()));
         }
+
+        Self { args }
     }
 }
 
 impl std::fmt::Display for WebviewArgs {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.common_args.join(" "))
+        write!(f, "{}", self.args.join(" "))
     }
 }

@@ -472,6 +472,8 @@ pub struct Settings {
     pub performance_mode: PerformanceModeSettings,
     /// enable or disable hardware acceleration
     pub hardware_acceleration: bool,
+    /// Enable unstable chromium optimizations (e.g. process-per-site). May improve RAM usage but can cause crashes.
+    pub unstable_optimizations: bool,
     /// interval to poll for system resources like cpu, memory, network usage, etc, in seconds.
     pub polling_interval: u64,
     /// Streaming mode: replaces sensitive information (e.g. emails) with placeholders
@@ -503,7 +505,8 @@ impl Default for Settings {
             by_theme: HashMap::new(),
             by_wallpaper: HashMap::new(),
             wallpaper_collections: Vec::new(),
-            hardware_acceleration: false,
+            hardware_acceleration: true,
+            unstable_optimizations: false,
             polling_interval: 3,
             streaming_mode: false,
             backup_sync_enabled: true,

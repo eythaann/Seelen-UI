@@ -76,6 +76,10 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
+  unstable_optimizations: Unstable Optimizations
+  unstable_optimizations_description: |-
+    Enable experimental Chromium flags that reduce RAM usage.
+    Warning: if a widget crashes, all widgets sharing the same loader will crash together.
   simulate_perm:
     label: Simulate Widget Permission Request
     result_allowed: ✓ Permission granted
@@ -117,7 +121,8 @@ general:
   suspend_on_game_mode: Suspend widgets on Game Mode
   suspend_on_game_mode_description: >-
     When Windows Game Mode is active, all widget webviews are destroyed to free
-    CPU and memory for the game. Widgets are automatically restored when Game Mode ends.
+    CPU and memory for the game. Widgets are automatically restored when Game
+    Mode ends.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs

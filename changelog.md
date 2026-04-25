@@ -6,6 +6,7 @@
 
 - Support for game mode.
 - Close webviews while in game mode.
+- Add new unstable optimizations flag under 'for developers' tab.
 
 ### enhancements
 
