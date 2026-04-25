@@ -44,6 +44,14 @@ export interface InitWidgetOptions {
    */
   hideOnFocusLoss?: boolean;
   /**
+   * Will close the widget when it is hidden after a certain amount of time, instead of just hiding it.
+   * This is useful for popup widgets that are not used frequently, as it will free up system resources.
+   * The widget will be recreated when it is triggered again.
+   *
+   * @default widget.lazy === true
+   */
+  closeOnHide?: boolean;
+  /**
    * Will disable the css animations on the widget when performace mode is set to Extreme
    *
    * @default true

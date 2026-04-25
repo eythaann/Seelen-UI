@@ -36,7 +36,7 @@
     });
 
     if (item.checked !== null) {
-      Widget.self.hide(true);
+      Widget.self.hide();
     }
   }
 </script>

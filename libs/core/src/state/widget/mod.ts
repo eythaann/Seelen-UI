@@ -65,7 +65,7 @@ export class Widget {
   public readonly window: Window;
 
   private autoSizer?: WidgetAutoSizer;
-
+  private destroyOnHide = false;
   private runtimeState: WidgetInternalState = {
     hwnd: 0,
     initialized: false,
@@ -123,16 +123,23 @@ export class Widget {
   }
 
   private hideOnFocusLoss(): void {
+    let wasFocused = false;
+
     const hideDelayed = debounce(() => {
       this.hide();
     }, 100);
 
     subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: focused }) => {
       if (focused.hwnd !== this.runtimeState.hwnd && focused.ownerHwnd !== this.runtimeState.hwnd) {
-        hideDelayed();
-      } else {
-        hideDelayed.cancel();
+        if (wasFocused) {
+          hideDelayed();
+        }
+        wasFocused = false;
+        return;
       }
+
+      wasFocused = true;
+      hideDelayed.cancel();
     });
   }
 
@@ -206,6 +213,7 @@ export class Widget {
 
     this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
     this.runtimeState.initialized = true;
+    this.destroyOnHide = options.closeOnHide ?? this.def.lazy;
 
     if (options.normalizeDevicePixelRatio) {
       await this.normalizeDevicePixelRatio();
@@ -364,9 +372,9 @@ export class Widget {
     });
   }
 
-  public hide(closeAfterInactivity?: boolean): void {
+  public hide(): void {
     this.window.hide();
-    if (closeAfterInactivity) {
+    if (this.destroyOnHide) {
       debouncedClose();
     }
   }
