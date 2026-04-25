@@ -61,3 +61,10 @@ effect(() => {
     invoke(SeelenCommand.UnregisterAppBar);
   }
 });
+
+// setting an app bar, can cause move of the widget, this is to ensure correct position after such move
+Widget.self.window.onMoved(({ payload }) => {
+  if (payload.x !== $widget_rect.value.left || payload.y !== $widget_rect.value.top) {
+    Widget.self.setPosition($widget_rect.value);
+  }
+});
