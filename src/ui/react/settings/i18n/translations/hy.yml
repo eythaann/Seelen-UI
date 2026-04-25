@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Թույլտվությունը մերժված է
     trigger: Մոդելավորել
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Անկայուն օպտիմիզացումներ
+  unstable_optimizations_description: >-
+    Միացնել փորձնական Chromium դրոշները, որոնք նվազեցնում են RAM-ի օգտագործումը:
+
+    Զգուշացում. եթե վիջեթը խափանվի, բոլոր վիջեթները, որոնք կիսում են նույն
+    բեռնիչը, միասին կխափանվեն:
 discord_banner:
   message: >-
     Կապվեք Seelen UI-ի այլ օգտատերերի հետ, ստացեք օգնություն, կիսվեք թեմաներով և
@@ -142,6 +148,11 @@ general:
   start_of_week: Շաբաթվա սկիզբ
   startup: 'Գործարկման վրա գործարկեք:'
   sunday: Կիրակի
+  suspend_on_game_mode: Կասեցրեք վիջեթները Խաղի ռեժիմում
+  suspend_on_game_mode_description: >-
+    Երբ Windows Game Mode-ն ակտիվ է, բոլոր վիջեթների վեբ դիտումները ոչնչացվում
+    են՝ խաղի համար CPU-ն և հիշողությունը ազատելու համար: Վիջեթներն ավտոմատ
+    կերպով վերականգնվում են, երբ ավարտվում է Խաղի ռեժիմը:
   theme:
     available: Հասանելի թեմաներ
     selected: Ակտիվ թեմաներ

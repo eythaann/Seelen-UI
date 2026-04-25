@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Permís denegat
     trigger: Simular
     widget_id_placeholder: '@autor/nom-widget'
+  unstable_optimizations: Optimitzacions inestables
+  unstable_optimizations_description: >-
+    Activa les marques experimentals de Chromium que redueixen l'ús de RAM.
+
+    Avís: si un giny es bloqueja, tots els ginys que comparteixin el mateix
+    carregador es bloquejaran junts.
 discord_banner:
   message: >-
     Connecteu-vos amb altres usuaris de la interfície d'usuari de Seelen,
@@ -143,6 +149,11 @@ general:
   start_of_week: Inici de setmana
   startup: Executeu la posada en marxa?
   sunday: diumenge
+  suspend_on_game_mode: Suspensió dels ginys al mode de joc
+  suspend_on_game_mode_description: >-
+    Quan el mode de joc de Windows està actiu, totes les vistes web del widget
+    es destrueixen per alliberar CPU i memòria per al joc. Els widgets es
+    restauren automàticament quan finalitza el mode de joc.
   theme:
     available: Temes disponibles
     selected: Temes actius

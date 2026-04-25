@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Povolenie zamietnuté
     trigger: Simulovať
     widget_id_placeholder: '@autor/názov-widgetu'
+  unstable_optimizations: Nestabilné optimalizácie
+  unstable_optimizations_description: >-
+    Povoliť experimentálne príznaky prehliadača Chromium, ktoré znižujú využitie
+    pamäte RAM.
+
+    Upozornenie: Ak miniaplikácia zlyhá, všetky miniaplikácie, ktoré zdieľajú
+    rovnaký načítač, zlyhajú spoločne.
 discord_banner:
   message: >-
     Spojte sa s ostatnými používateľmi používateľského rozhrania Seelen,
@@ -138,6 +145,11 @@ general:
   start_of_week: Začiatok týždňa
   startup: Spustiť pri štarte?
   sunday: nedeľa
+  suspend_on_game_mode: Pozastavte miniaplikácie v hernom režime
+  suspend_on_game_mode_description: >-
+    Keď je aktívny herný režim Windows, všetky webové zobrazenia miniaplikácií
+    sa zničia, aby sa uvoľnil procesor a pamäť pre hru. Widgety sa automaticky
+    obnovia po skončení herného režimu.
   theme:
     available: Dostupné témy
     selected: Aktívne témy

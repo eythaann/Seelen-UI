@@ -81,6 +81,12 @@ devtools:
     result_denied: ✗ تم رفض الإذن
     trigger: محاكاة
     widget_id_placeholder: '@author/اسم القطعة'
+  unstable_optimizations: تحسينات غير مستقرة
+  unstable_optimizations_description: >-
+    تمكين علامات Chromium التجريبية التي تقلل من استخدام ذاكرة الوصول العشوائي.
+
+    تحذير: إذا تعطلت إحدى الأدوات، فسوف تتعطل جميع الأدوات التي تشترك في نفس
+    المُحمل معًا.
 discord_banner:
   message: >-
     تواصل مع مستخدمي Seelen UI الآخرين، واحصل على المساعدة، وشارك السمات، وابق
@@ -134,6 +140,11 @@ general:
   start_of_week: بداية الأسبوع
   startup: تفعيل عند تشغيل الكمبيوتر؟
   sunday: الأحد
+  suspend_on_game_mode: تعليق الأدوات في وضع اللعبة
+  suspend_on_game_mode_description: >-
+    عندما يكون Windows Game Mode نشطًا، يتم تدمير جميع عروض الويب لعناصر واجهة
+    المستخدم لتحرير وحدة المعالجة المركزية والذاكرة للعبة. تتم استعادة الأدوات
+    تلقائيًا عند انتهاء وضع اللعبة.
   theme:
     available: السمات المتاحة
     selected: المواضيع النشطة

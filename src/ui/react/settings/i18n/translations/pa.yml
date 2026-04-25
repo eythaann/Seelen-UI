@@ -79,6 +79,12 @@ devtools:
     result_denied: ✗ ਇਜਾਜ਼ਤ ਅਸਵੀਕਾਰ ਕੀਤੀ ਗਈ
     trigger: ਸਿਮੂਲੇਟ
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: ਅਸਥਿਰ ਓਪਟੀਮਾਈਜੇਸ਼ਨ
+  unstable_optimizations_description: >-
+    ਪ੍ਰਯੋਗਾਤਮਕ Chromium ਫਲੈਗ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ ਜੋ RAM ਦੀ ਵਰਤੋਂ ਨੂੰ ਘਟਾਉਂਦੇ ਹਨ।
+
+    ਚੇਤਾਵਨੀ: ਜੇਕਰ ਕੋਈ ਵਿਜੇਟ ਕ੍ਰੈਸ਼ ਹੋ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਇੱਕੋ ਲੋਡਰ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਵਾਲੇ
+    ਸਾਰੇ ਵਿਜੇਟ ਇਕੱਠੇ ਕਰੈਸ਼ ਹੋ ਜਾਣਗੇ।
 discord_banner:
   message: >-
     ਹੋਰ ਸੀਲੇਨ UI ਉਪਭੋਗਤਾਵਾਂ ਨਾਲ ਜੁੜੋ, ਮਦਦ ਪ੍ਰਾਪਤ ਕਰੋ, ਥੀਮ ਸਾਂਝੇ ਕਰੋ, ਅਤੇ ਨਵੀਨਤਮ
@@ -134,6 +140,11 @@ general:
   start_of_week: ਹਫ਼ਤੇ ਦੀ ਸ਼ੁਰੂਆਤ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
   sunday: ਐਤਵਾਰ
+  suspend_on_game_mode: ਗੇਮ ਮੋਡ 'ਤੇ ਵਿਜੇਟਸ ਨੂੰ ਮੁਅੱਤਲ ਕਰੋ
+  suspend_on_game_mode_description: >-
+    ਜਦੋਂ ਵਿੰਡੋਜ਼ ਗੇਮ ਮੋਡ ਕਿਰਿਆਸ਼ੀਲ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਗੇਮ ਲਈ CPU ਅਤੇ ਮੈਮੋਰੀ ਨੂੰ ਖਾਲੀ
+    ਕਰਨ ਲਈ ਸਾਰੇ ਵਿਜੇਟ ਵੈਬਵਿਊਜ਼ ਨਸ਼ਟ ਹੋ ਜਾਂਦੇ ਹਨ। ਗੇਮ ਮੋਡ ਖਤਮ ਹੋਣ 'ਤੇ ਵਿਜੇਟਸ
+    ਆਟੋਮੈਟਿਕਲੀ ਰੀਸਟੋਰ ਹੋ ਜਾਂਦੇ ਹਨ।
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ

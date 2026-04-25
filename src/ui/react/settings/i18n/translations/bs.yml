@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Dozvola odbijena
     trigger: Simuliraj
     widget_id_placeholder: '@autor/ime-widgeta'
+  unstable_optimizations: Nestabilne optimizacije
+  unstable_optimizations_description: >-
+    Omogućite eksperimentalne Chromium zastavice koje smanjuju korištenje RAM-a.
+
+    Upozorenje: ako se widget sruši, svi widgeti koji dijele isti loader će se
+    zajedno srušiti.
 discord_banner:
   message: >-
     Povežite se s drugim Seelen UI korisnicima, dobijte pomoć, dijelite teme i
@@ -138,6 +144,11 @@ general:
   start_of_week: Početak sedmice
   startup: Trčite na pokretanju?
   sunday: Nedjelja
+  suspend_on_game_mode: Obustavite widgete u načinu igre
+  suspend_on_game_mode_description: >-
+    Kada je Windows Game Mode aktivan, svi web prikazi widgeta se uništavaju
+    kako bi se oslobodili CPU i memorija za igru. Widgeti se automatski vraćaju
+    kada se Game Mode završi.
   theme:
     available: Dostupne teme
     selected: Aktivne teme

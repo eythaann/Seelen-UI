@@ -82,6 +82,13 @@ devtools:
     result_denied: ✗ Engedély megtagadva
     trigger: Szimulál
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Instabil optimalizálás
+  unstable_optimizations_description: >-
+    Engedélyezze a kísérleti Chromium-jelzőket, amelyek csökkentik a
+    RAM-használatot.
+
+    Figyelmeztetés: ha egy widget összeomlik, az ugyanazt a betöltőt használó
+    összes widget együtt fog összeomlani.
 discord_banner:
   message: >-
     Lépjen kapcsolatba más Seelen UI-felhasználókkal, kérjen segítséget, osszon
@@ -142,6 +149,11 @@ general:
   start_of_week: Hét kezdete
   startup: Futtatni indításkor?
   sunday: vasárnap
+  suspend_on_game_mode: A widgetek felfüggesztése Játék módban
+  suspend_on_game_mode_description: >-
+    Ha a Windows játékmód aktív, az összes widget webnézet megsemmisül, hogy
+    felszabadítsa a CPU-t és a memóriát a játék számára. A widgetek
+    automatikusan visszaállnak, amikor a Játék mód véget ér.
   theme:
     available: Elérhető témák
     selected: Aktív témák

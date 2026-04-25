@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Иҷозат рад карда шуд
     trigger: Тақлид кардан
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Оптимизатсияи ноустувор
+  unstable_optimizations_description: >-
+    Парчамҳои таҷрибавии Chromium-ро фаъол созед, ки истифодаи RAM-ро кам
+    мекунанд. 
+
+    Огоҳӣ: агар виджет вайрон шавад, ҳамаи виджетҳое, ки як боркунаки якхеларо
+    мубодила мекунанд, якҷоя кор мекунанд.
 discord_banner:
   message: >-
     Бо дигар корбарони Seelen UI пайваст шавед, ёрӣ гиред, мавзӯъҳоро мубодила
@@ -140,6 +147,11 @@ general:
   start_of_week: Оғози ҳафта
   startup: Оғози кор?
   sunday: Якшанбе
+  suspend_on_game_mode: Дар ҳолати бозӣ виджетҳоро боздоред
+  suspend_on_game_mode_description: >-
+    Вақте ки Ҳолати Game Windows фаъол аст, ҳама намуди веб-виджетҳо барои озод
+    кардани CPU ва хотираи бозӣ нобуд карда мешаванд. Вақте ки Реҷаи бозӣ ба
+    охир мерасад, виджетҳо ба таври худкор барқарор карда мешаванд.
   theme:
     available: Мавзӯъҳои дастрас
     selected: Мавзӯъҳои фаъол

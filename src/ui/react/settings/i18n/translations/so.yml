@@ -84,6 +84,12 @@ devtools:
     result_denied: Ogolaanshaha waa la diiday
     trigger: Isku day
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Hagaajinta Aan degganayn
+  unstable_optimizations_description: >-
+    Daar calaamadaha Chromium ee tijaabada ah ee dhimaya isticmaalka RAM.
+
+    Digniin: haddii widget-ku xumaado, dhammaan widget-yada wadaagga isku midka
+    ah way wada shilmi doonaan.
 discord_banner:
   message: >-
     Ku xidh isticmaalayaasha kale ee Seelen UI, hel caawimo, wadaag mawduucyada,
@@ -142,6 +148,12 @@ general:
   start_of_week: Bilawga Todobaadka
   startup: Ku orod bilowga?
   sunday: Axad
+  suspend_on_game_mode: Hakin widgets habka ciyaarta
+  suspend_on_game_mode_description: >-
+    Marka Habka Ciyaarta Windows uu firfircoon yahay, dhammaan muuqaallada
+    shabakadeed ee widget-ka waa la burburiyaa si ay u xoreeyaan CPU iyo
+    xusuusta ciyaarta. Widgets si toos ah ayaa loo soo celiyaa marka Habka
+    Ciyaartu dhammaato.
   theme:
     available: Mawduucyada la heli karo
     selected: Mawduucyada Firfircoon

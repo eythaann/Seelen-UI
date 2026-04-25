@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Atļauja liegta
     trigger: Simulēt
     widget_id_placeholder: '@autors/logrīka nosaukums'
+  unstable_optimizations: Nestabila optimizācija
+  unstable_optimizations_description: >-
+    Iespējojiet eksperimentālos Chromium karogus, kas samazina RAM lietojumu.
+
+    Brīdinājums: ja logrīks avarē, visi logrīki, kuriem ir viens un tas pats
+    ielādētājs, avarēs kopā.
 discord_banner:
   message: >-
     Sazinieties ar citiem Seelen UI lietotājiem, saņemiet palīdzību, kopīgojiet
@@ -140,6 +146,11 @@ general:
   start_of_week: Nedēļas sākums
   startup: Skriet startup?
   sunday: svētdiena
+  suspend_on_game_mode: Apturēt logrīkus spēles režīmā
+  suspend_on_game_mode_description: >-
+    Kad Windows spēļu režīms ir aktīvs, visi logrīku tīmekļa skati tiek
+    iznīcināti, lai spēlei atbrīvotu CPU un atmiņu. Logrīki tiek automātiski
+    atjaunoti, kad spēles režīms beidzas.
   theme:
     available: Pieejamie motīvi
     selected: Aktīvās tēmas

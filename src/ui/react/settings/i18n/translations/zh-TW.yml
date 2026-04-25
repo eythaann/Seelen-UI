@@ -78,6 +78,10 @@ devtools:
     result_denied: ✗ 權限被拒絕
     trigger: 模擬
     widget_id_placeholder: '@作者/小部件名稱'
+  unstable_optimizations: 不穩定的最佳化
+  unstable_optimizations_description: |-
+    啟用可減少 RAM 使用的實驗性 Chromium 標誌。 
+    警告：如果一個小部件崩潰，共享相同載入器的所有小部件將一起崩潰。
 discord_banner:
   message: 與其他 Seelen UI 用戶聯繫、獲取協助、分享主題並了解最新消息。
   title: 加入我們的社區
@@ -120,6 +124,8 @@ general:
   start_of_week: 一周開始
   startup: 在啟動上運行？
   sunday: 星期日
+  suspend_on_game_mode: 在遊戲模式下暫停小部件
+  suspend_on_game_mode_description: 當 Windows 遊戲模式處於活動狀態時，所有小工具 Web 視圖都會被銷毀，以釋放遊戲的 CPU 和記憶體。 遊戲模式結束時小工具會自動恢復。
   theme:
     available: 可用的主題
     selected: 主題主題

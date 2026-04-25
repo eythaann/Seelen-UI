@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ اجازت مسترد کر دی گئی۔
     trigger: نقل کرنا
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: غیر مستحکم اصلاح
+  unstable_optimizations_description: >-
+    تجرباتی Chromium جھنڈوں کو فعال کریں جو RAM کے استعمال کو کم کرتے ہیں۔ 
+
+    انتباہ: اگر کوئی ویجیٹ کریش ہو جاتا ہے تو ایک ہی لوڈر کو شیئر کرنے والے تمام
+    ویجٹ ایک ساتھ کریش ہو جائیں گے۔
 discord_banner:
   message: >-
     دوسرے Seelen UI صارفین کے ساتھ جڑیں، مدد حاصل کریں، تھیمز کا اشتراک کریں،
@@ -138,6 +144,11 @@ general:
   start_of_week: ہفتے کا آغاز
   startup: اسٹارٹ اپ پر چلائیں؟
   sunday: اتوار
+  suspend_on_game_mode: گیم موڈ پر وجیٹس کو معطل کریں۔
+  suspend_on_game_mode_description: >-
+    جب Windows گیم موڈ فعال ہوتا ہے تو، تمام ویجیٹ ویب ویوز کو مفت CPU اور گیم
+    کے لیے میموری کے لیے تباہ کر دیا جاتا ہے۔ گیم موڈ ختم ہونے پر وجیٹس خود بخود
+    بحال ہو جاتے ہیں۔
   theme:
     available: دستیاب تھیمز
     selected: ایکٹو تھیمز

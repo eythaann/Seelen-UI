@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ اجازه داده نشد
     trigger: شبیه سازی کنید
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: بهینه سازی های ناپایدار
+  unstable_optimizations_description: >-
+    پرچم‌های آزمایشی Chromium را فعال کنید که مصرف RAM را کاهش می‌دهد.
+
+    هشدار: اگر یک ویجت از کار بیفتد، همه ویجت‌هایی که لودر یکسانی دارند با هم
+    خراب می‌شوند.
 discord_banner:
   message: >-
     با سایر کاربران رابط کاربری Seelen ارتباط برقرار کنید، راهنمایی دریافت کنید،
@@ -140,6 +146,11 @@ general:
   start_of_week: شروع هفته
   startup: در راه اندازی اجرا می شود؟
   sunday: یکشنبه
+  suspend_on_game_mode: ویجت ها را در حالت بازی به حالت تعلیق درآورید
+  suspend_on_game_mode_description: >-
+    وقتی حالت بازی ویندوز فعال است، تمام نمایش های وب ویجت از بین می روند تا CPU
+    و حافظه بازی آزاد شود. هنگامی که حالت بازی به پایان می رسد، ابزارک ها به طور
+    خودکار بازیابی می شوند.
   theme:
     available: تم های موجود
     selected: تم های فعال

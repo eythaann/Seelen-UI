@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Erlaubnis verweigert
     trigger: Simulieren
     widget_id_placeholder: '@Autor/Widget-Name'
+  unstable_optimizations: Instabile Optimierungen
+  unstable_optimizations_description: >-
+    Aktivieren Sie experimentelle Chromium-Flags, die die RAM-Nutzung
+    reduzieren.
+
+    Warnung: Wenn ein Widget abstürzt, stürzen alle Widgets, die denselben
+    Loader nutzen, gleichzeitig ab.
 discord_banner:
   message: >-
     Vernetzen Sie sich mit anderen Benutzern der Seelen-Benutzeroberfläche,
@@ -143,6 +150,11 @@ general:
   start_of_week: Wochenbeginn
   startup: Beim Hochfahren ausführen?
   sunday: Sonntag
+  suspend_on_game_mode: Widgets im Spielemodus anhalten
+  suspend_on_game_mode_description: >-
+    Wenn der Windows-Spielemodus aktiv ist, werden alle Widget-Webansichten
+    zerstört, um CPU und Speicher für das Spiel freizugeben. Widgets werden
+    automatisch wiederhergestellt, wenn der Spielemodus endet.
   theme:
     available: Verfügbare Themen
     selected: Aktive Themen

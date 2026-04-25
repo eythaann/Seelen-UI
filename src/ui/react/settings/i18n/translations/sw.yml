@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ Ruhusa imekataliwa
     trigger: Iga
     widget_id_placeholder: '@mwandishi/wijeti-jina'
+  unstable_optimizations: Uboreshaji Usio thabiti
+  unstable_optimizations_description: >-
+    Washa alama za majaribio za Chromium ambazo hupunguza matumizi ya RAM. 
+
+    Onyo: wijeti ikiacha kufanya kazi, wijeti zote zinazoshiriki kipakiaji sawa
+    zitaanguka pamoja.
 discord_banner:
   message: >-
     Ungana na watumiaji wengine wa Seelen UI, pata usaidizi, shiriki mandhari na
@@ -137,6 +143,11 @@ general:
   start_of_week: Mwanzo wa Wiki
   startup: Kuendesha kuanza?
   sunday: Jumapili
+  suspend_on_game_mode: Sitisha wijeti kwenye Modi ya Mchezo
+  suspend_on_game_mode_description: >-
+    Wakati Windows Game Mode inatumika, mionekano yote ya wavuti kwenye wijeti
+    inaharibiwa ili bure CPU na kumbukumbu ya mchezo. Wijeti hurejeshwa
+    kiotomatiki Modi ya Mchezo inapoisha.
   theme:
     available: Mandhari Zinazopatikana
     selected: Mandhari Inayotumika

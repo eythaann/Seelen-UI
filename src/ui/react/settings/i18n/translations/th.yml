@@ -80,6 +80,12 @@ devtools:
     result_denied: ✗ การอนุญาตถูกปฏิเสธ
     trigger: จำลอง
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: การเพิ่มประสิทธิภาพที่ไม่เสถียร
+  unstable_optimizations_description: >-
+    เปิดใช้งานการตั้งค่าสถานะ Chromium รุ่นทดลองที่ลดการใช้ RAM 
+
+    คำเตือน: หากวิดเจ็ตขัดข้อง
+    วิดเจ็ตทั้งหมดที่แชร์ตัวโหลดเดียวกันจะขัดข้องพร้อมกัน
 discord_banner:
   message: >-
     เชื่อมต่อกับผู้ใช้ Seelen UI คนอื่นๆ รับความช่วยเหลือ แบ่งปันธีม
@@ -135,6 +141,11 @@ general:
   start_of_week: เริ่มต้นสัปดาห์
   startup: วิ่งเมื่อเริ่มต้น?
   sunday: วันอาทิตย์
+  suspend_on_game_mode: ระงับวิดเจ็ตในโหมดเกม
+  suspend_on_game_mode_description: >-
+    เมื่อ Windows Game Mode ทำงาน Webviews ของวิดเจ็ตทั้งหมดจะถูกทำลายเพื่อให้
+    CPU และหน่วยความจำว่างสำหรับเกม
+    วิดเจ็ตจะถูกกู้คืนโดยอัตโนมัติเมื่อโหมดเกมสิ้นสุดลง
   theme:
     available: ธีมที่มีจำหน่าย
     selected: ธีมที่ใช้งานอยู่

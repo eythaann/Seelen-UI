@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Toestemming geweigerd
     trigger: Simuleren
     widget_id_placeholder: '@auteur/widgetnaam'
+  unstable_optimizations: Onstabiele optimalisaties
+  unstable_optimizations_description: >-
+    Schakel experimentele Chromium-vlaggen in die het RAM-gebruik verminderen.
+
+    Waarschuwing: als een widget crasht, zullen alle widgets die dezelfde lader
+    delen samen crashen.
 discord_banner:
   message: >-
     Maak contact met andere Seelen UI-gebruikers, krijg hulp, deel thema's en
@@ -139,6 +145,11 @@ general:
   start_of_week: Begin van de week
   startup: Uitvoeren bij het starten?
   sunday: Zondag
+  suspend_on_game_mode: Widgets onderbreken in de Spelmodus
+  suspend_on_game_mode_description: >-
+    Wanneer de Windows Game-modus actief is, worden alle widgetwebweergaven
+    vernietigd om CPU en geheugen vrij te maken voor de game. Widgets worden
+    automatisch hersteld wanneer de Spelmodus eindigt.
   theme:
     available: Beschikbare thema's
     selected: Actieve thema's

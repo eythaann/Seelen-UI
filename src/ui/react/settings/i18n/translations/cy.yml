@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Gwrthodwyd caniatâd
     trigger: Efelychu
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Optimizations Ansefydlog
+  unstable_optimizations_description: >-
+    Galluogi fflagiau Chromium arbrofol sy'n lleihau'r defnydd o RAM.
+
+    Rhybudd: os bydd teclyn yn chwalu, bydd pob teclyn sy'n rhannu'r un llwythwr
+    yn chwalu gyda'i gilydd.
 discord_banner:
   message: >-
     Cysylltwch â defnyddwyr Seelen UI eraill, cael help, rhannu themâu, a chael
@@ -138,6 +144,11 @@ general:
   start_of_week: Dechrau'r Wythnos
   startup: Rhedeg ar gychwyn?
   sunday: Sul
+  suspend_on_game_mode: Atal teclynnau ar Modd Gêm
+  suspend_on_game_mode_description: >-
+    Pan fydd Windows Game Mode yn weithredol, mae holl weviews teclyn yn cael eu
+    dinistrio i CPU rhad ac am ddim a chof ar gyfer y gêm. Mae teclynnau'n cael
+    eu hadfer yn awtomatig pan ddaw Modd Gêm i ben.
   theme:
     available: Themâu sydd ar Gael
     selected: Themâu Gweithredol

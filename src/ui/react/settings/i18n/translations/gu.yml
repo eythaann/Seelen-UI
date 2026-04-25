@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ પરવાનગી નકારી
     trigger: અનુકરણ કરો
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: અસ્થિર ઑપ્ટિમાઇઝેશન
+  unstable_optimizations_description: >-
+    પ્રાયોગિક Chromium ફ્લેગ્સ સક્ષમ કરો જે RAM નો ઉપયોગ ઘટાડે છે.
+
+    ચેતવણી: જો વિજેટ ક્રેશ થાય છે, તો સમાન લોડરને શેર કરતા તમામ વિજેટો એકસાથે
+    ક્રેશ થશે.
 discord_banner:
   message: >-
     અન્ય Seelen UI વપરાશકર્તાઓ સાથે કનેક્ટ થાઓ, મદદ મેળવો, થીમ્સ શેર કરો અને
@@ -138,6 +144,11 @@ general:
   start_of_week: સપ્તાહની શરૂઆત
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   sunday: રવિવાર
+  suspend_on_game_mode: ગેમ મોડ પર વિજેટ્સને સસ્પેન્ડ કરો
+  suspend_on_game_mode_description: >-
+    જ્યારે વિન્ડોઝ ગેમ મોડ સક્રિય હોય છે, ત્યારે તમામ વિજેટ વેબવ્યુઝ ગેમ માટે
+    CPU અને મેમરીને મુક્ત કરવા માટે નાશ પામે છે. જ્યારે ગેમ મોડ સમાપ્ત થાય છે
+    ત્યારે વિજેટ્સ આપમેળે પુનઃસ્થાપિત થાય છે.
   theme:
     available: ઉપલબ્ધ થીમ્સ
     selected: સક્રિય થીમ્સ

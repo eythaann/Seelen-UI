@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ اجازه رد شوه
     trigger: سمول
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: بې ثباته اصلاح کول
+  unstable_optimizations_description: >-
+    تجربوي کرومیم بیرغونه فعال کړئ چې د RAM کارول کموي.
+
+    خبرداری: که یو ویجټ خراب شي، ټول ویجټونه چې ورته لوډر شریکوي یوځای به ټکر
+    شي.
 discord_banner:
   message: >-
     د نورو Seelen UI کاروونکو سره اړیکه ونیسئ، مرسته ترلاسه کړئ، موضوعات شریک
@@ -136,6 +142,11 @@ general:
   start_of_week: د اونۍ پیل
   startup: په پیل کې چلول؟
   sunday: یک شنبه
+  suspend_on_game_mode: د لوبې حالت کې ویجټونه وځنډول
+  suspend_on_game_mode_description: >-
+    کله چې د وینډوز لوبې حالت فعال وي، ټول ویجټ ویب لیدونه د لوبې لپاره وړیا CPU
+    او حافظې ته ویجاړ شوي. ویجټونه په اوتومات ډول بحال کیږي کله چې د لوبې حالت
+    پای ته ورسیږي.
   theme:
     available: شته موضوعات
     selected: فعال موضوعات

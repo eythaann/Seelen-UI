@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Permissão negada
     trigger: Simular
     widget_id_placeholder: '@autor/nome do widget'
+  unstable_optimizations: Otimizações instáveis
+  unstable_optimizations_description: >-
+    Ative os sinalizadores experimentais do Chromium que reduzem a utilização de
+    RAM.
+
+    Aviso: se um widget falhar, todos os widgets que partilham o mesmo
+    carregador irão falhar em conjunto.
 discord_banner:
   message: >-
     Estabeleça ligação com outros utilizadores da Seelen UI, obtenha ajuda,
@@ -142,6 +149,11 @@ general:
   start_of_week: Início da semana
   startup: Correr na inicialização?
   sunday: Domingo
+  suspend_on_game_mode: Suspender widgets no modo de jogo
+  suspend_on_game_mode_description: >-
+    Quando o Modo de Jogo do Windows está ativo, todas as visualizações web do
+    widget são destruídas para libertar CPU e memória para o jogo. Os widgets
+    são restaurados automaticamente quando o Modo de Jogo termina.
   theme:
     available: Temas disponíveis
     selected: Temas ativos

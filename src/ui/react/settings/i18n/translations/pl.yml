@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Odmowa pozwolenia
     trigger: Symulować
     widget_id_placeholder: '@autor/nazwa-widgetu'
+  unstable_optimizations: Niestabilne optymalizacje
+  unstable_optimizations_description: >-
+    Włącz eksperymentalne flagi Chromium, które zmniejszają użycie pamięci RAM.
+
+    Ostrzeżenie: jeśli widżet ulegnie awarii, wszystkie widżety korzystające z
+    tego samego modułu ładującego ulegną awarii razem.
 discord_banner:
   message: >-
     Połącz się z innymi użytkownikami interfejsu Seelen, uzyskaj pomoc,
@@ -143,6 +149,11 @@ general:
   start_of_week: Początek tygodnia
   startup: Uruchomić przy starcie systemu?
   sunday: Niedziela
+  suspend_on_game_mode: Zawieszanie widżetów w trybie gry
+  suspend_on_game_mode_description: >-
+    Gdy tryb gry systemu Windows jest aktywny, wszystkie wyświetlenia widżetów
+    są niszczone, aby zwolnić procesor i pamięć dla gry. Widżety są
+    automatycznie przywracane po zakończeniu trybu gry.
   theme:
     available: Dostępne motywy
     selected: Aktywne motywy

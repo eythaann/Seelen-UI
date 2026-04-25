@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Permess miċħud
     trigger: Issimula
     widget_id_placeholder: '@ awtur/widget-isem'
+  unstable_optimizations: Ottimizzazzjonijiet instabbli
+  unstable_optimizations_description: >-
+    Ippermetti bnadar sperimentali tal-Kromju li jnaqqsu l-użu tar-RAM.
+
+    Twissija: jekk widget jiġġarraf, il-widgets kollha li jaqsmu l-istess loader
+    jiġġarraf flimkien.
 discord_banner:
   message: >-
     Ikkonnettja ma' utenti oħra ta' Seelen UI, ikseb għajnuna, taqsam it-temi, u
@@ -142,6 +148,11 @@ general:
   start_of_week: Bidu tal-Ġimgħa
   startup: Mexxi fuq l-istartjar?
   sunday: il-Ħadd
+  suspend_on_game_mode: Issospendi l-widgets fuq il-Modalità tal-Logħba
+  suspend_on_game_mode_description: >-
+    Meta l-Modalità tal-Logħba tal-Windows tkun attiva, il-webviews kollha
+    tal-widget jinqerdu biex jinħelsu CPU u memorja għal-logħba. Widgets jiġu
+    restawrati awtomatikament meta jintemm il-Modalità tal-Logħba.
   theme:
     available: Temi Disponibbli
     selected: Temi Attivi

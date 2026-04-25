@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ Quyền bị từ chối
     trigger: mô phỏng
     widget_id_placeholder: '@tác giả/tên widget'
+  unstable_optimizations: Tối ưu hóa không ổn định
+  unstable_optimizations_description: >-
+    Bật cờ Chrome thử nghiệm để giảm mức sử dụng RAM. 
+
+    Cảnh báo: nếu một tiện ích gặp sự cố, tất cả các tiện ích chia sẻ cùng một
+    trình tải sẽ bị lỗi cùng nhau.
 discord_banner:
   message: >-
     Kết nối với những người dùng Seelen UI khác, nhận trợ giúp, chia sẻ chủ đề
@@ -139,6 +145,11 @@ general:
   start_of_week: Đầu tuần
   startup: Chạy khi khởi động?
   sunday: Chủ nhật
+  suspend_on_game_mode: Tạm dừng các widget trên Chế độ trò chơi
+  suspend_on_game_mode_description: >-
+    Khi Chế độ trò chơi của Windows được kích hoạt, tất cả các lượt xem web của
+    tiện ích sẽ bị hủy để giải phóng CPU và bộ nhớ cho trò chơi. Các widget được
+    tự động khôi phục khi Chế độ trò chơi kết thúc.
   theme:
     available: Chủ đề có sẵn
     selected: Chủ đề đang hoạt động

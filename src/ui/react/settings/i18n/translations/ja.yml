@@ -79,6 +79,10 @@ devtools:
     result_denied: ✗ 許可が拒否されました
     trigger: シミュレートする
     widget_id_placeholder: '@作成者/ウィジェット名'
+  unstable_optimizations: 不安定な最適化
+  unstable_optimizations_description: |-
+    RAM の使用量を削減する実験的な Chromium フラグを有効にします。
+    警告: ウィジェットがクラッシュすると、同じローダーを共有するすべてのウィジェットが一緒にクラッシュします。
 discord_banner:
   message: 他の Seelen UI ユーザーとつながり、ヘルプを得たり、テーマを共有したり、最新ニュースを入手したりできます。
   title: コミュニティに参加してください
@@ -127,6 +131,10 @@ general:
   start_of_week: 週の始まり
   startup: 起動時に実行する
   sunday: 日曜日
+  suspend_on_game_mode: ゲームモードでウィジェットを一時停止する
+  suspend_on_game_mode_description: >-
+    Windows ゲーム モードがアクティブな場合、ゲーム用に CPU とメモリを解放するためにすべてのウィジェット Web
+    ビューが破棄されます。ゲームモードが終了すると、ウィジェットは自動的に復元されます。
   theme:
     available: 利用可能なテーマ
     selected: アクティブなテーマ

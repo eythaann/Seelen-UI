@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Ruxsat rad etildi
     trigger: Simulyatsiya qilish
     widget_id_placeholder: '@muallif/vidjet nomi'
+  unstable_optimizations: Barqaror optimallashtirish
+  unstable_optimizations_description: >-
+    RAM sarfini kamaytiradigan eksperimental Chromium bayroqlarini yoqing. 
+
+    Ogohlantirish: agar vidjet ishlamay qolsa, bir xil yuklagichga ega boʻlgan
+    barcha vidjetlar birgalikda buziladi.
 discord_banner:
   message: >-
     Boshqa Seelen UI foydalanuvchilari bilan bog'laning, yordam oling,
@@ -142,6 +148,11 @@ general:
   start_of_week: Hafta boshi
   startup: Ishga tushirishda ishlaydimi?
   sunday: yakshanba
+  suspend_on_game_mode: O'yin rejimida vidjetlarni to'xtatib turing
+  suspend_on_game_mode_description: >-
+    Windows o'yin rejimi faol bo'lsa, o'yin uchun protsessor va xotirani
+    bo'shatish uchun barcha vidjet veb-ko'rinishlari yo'q qilinadi. O'yin rejimi
+    tugashi bilan vidjetlar avtomatik ravishda tiklanadi.
   theme:
     available: Mavjud mavzular
     selected: Faol mavzular

@@ -81,6 +81,12 @@ devtools:
     result_denied: ✗ Destûr red kirin
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Optimîzasyonên nestable
+  unstable_optimizations_description: >-
+    Alên Chromium-ê yên ceribandinê yên ku karanîna RAM-ê kêm dikin çalak bike.
+
+    Hişyarî: heke widgetek têk bibe, dê hemî widgetên ku heman barkerê parve
+    dikin bi hev re têk biçin.
 discord_banner:
   message: >-
     Bi bikarhênerên din ên Seelen UI re têkilî daynin, alîkariyê bistînin,
@@ -138,6 +144,11 @@ general:
   start_of_week: Destpêka Hefteyê
   startup: Li ser destpêka bisekinin?
   sunday: Yekşem
+  suspend_on_game_mode: Widgetan li ser Moda Lîstikê rawestînin
+  suspend_on_game_mode_description: >-
+    Dema ku Moda Lîstikê ya Windows-ê çalak e, hemî dîmenên webê yên widgetê
+    têne hilweşandin da ku CPU û bîranîna lîstikê azad bikin. Dema ku Moda
+    Lîstikê biqede, widgetan bixweber têne sererast kirin.
   theme:
     available: Mijarên Berdest
     selected: Mijarên Çalak

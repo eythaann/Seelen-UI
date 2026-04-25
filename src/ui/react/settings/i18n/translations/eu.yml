@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Baimena ukatuta
     trigger: Simulatu
     widget_id_placeholder: '@egilea/widget-izena'
+  unstable_optimizations: Optimizazio ezegonkorrak
+  unstable_optimizations_description: >-
+    Gaitu RAM erabilera murrizten duten Chromium bandera esperimentalak.
+
+    Abisua: widget bat huts egiten bada, kargatzaile bera partekatzen duten
+    widget guztiak batera eroriko dira.
 discord_banner:
   message: >-
     Konektatu Seelen UI erabiltzaileekin, lortu laguntza, partekatu gaiak eta
@@ -139,6 +145,11 @@ general:
   start_of_week: Astearen hasiera
   startup: Korrika abiaraztean?
   sunday: Igandea
+  suspend_on_game_mode: Eten widget-ak Joko moduan
+  suspend_on_game_mode_description: >-
+    Windows Joko modua aktibatuta dagoenean, widget-en web-ikuspegi guztiak
+    suntsitzen dira jokorako CPU eta memoria askatzeko. Widgetak automatikoki
+    berrezartzen dira Joko modua amaitzen denean.
   theme:
     available: Eskuragarri dauden gaiak
     selected: Gai aktiboak

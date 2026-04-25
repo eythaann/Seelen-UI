@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Erlaabnis refuséiert
     trigger: Simuléieren
     widget_id_placeholder: '@auteur/widget-name'
+  unstable_optimizations: Onbestänneg Optimisatiounen
+  unstable_optimizations_description: >-
+    Aktivéiert experimentell Chromium Fändelen déi d'RAM Benotzung reduzéieren.
+
+    Opgepasst: wann e Widget Crash, all Widgets, déi deeselwechte Loader deelen,
+    falen zesummen.
 discord_banner:
   message: >-
     Connectéiert mat anere Seelen UI Benotzer, kritt Hëllef, deelt Themen a
@@ -138,6 +144,11 @@ general:
   start_of_week: Start vun der Woch
   startup: Run op Startup?
   sunday: Sonndeg
+  suspend_on_game_mode: Suspend Widgets am Spillmodus
+  suspend_on_game_mode_description: >-
+    Wann de Windows Spillmodus aktiv ass, ginn all Widget Webviews zerstéiert
+    fir CPU an Erënnerung fir d'Spill ze befreien. Widgets ginn automatesch
+    restauréiert wann de Spillmodus eriwwer ass.
   theme:
     available: Verfügbar Themen
     selected: Aktiv Themen

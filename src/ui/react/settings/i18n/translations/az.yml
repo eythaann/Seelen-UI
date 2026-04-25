@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ İcazə rədd edildi
     trigger: Simulyasiya edin
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Qeyri-sabit optimallaşdırmalar
+  unstable_optimizations_description: >-
+    RAM istifadəsini azaldan eksperimental Chromium bayraqlarını aktiv edin.
+
+    Xəbərdarlıq: əgər vidcet qəzaya uğrayarsa, eyni yükləyicini paylaşan bütün
+    vidjetlər birlikdə çökəcək.
 discord_banner:
   message: >-
     Digər Seelen UI istifadəçiləri ilə əlaqə saxlayın, kömək alın, mövzuları
@@ -137,6 +143,11 @@ general:
   start_of_week: Həftənin başlanğıcı
   startup: Başlanğıcda qaçırsınız?
   sunday: bazar günü
+  suspend_on_game_mode: Oyun rejimində vidjetləri dayandırın
+  suspend_on_game_mode_description: >-
+    Windows Oyun Rejimi aktiv olduqda, oyun üçün CPU və yaddaşı boşaltmaq üçün
+    bütün vidjet veb görünüşləri məhv edilir. Oyun Rejimi bitdikdə vidjetlər
+    avtomatik bərpa olunur.
   theme:
     available: Mövcud Mövzular
     selected: Aktiv Mövzular

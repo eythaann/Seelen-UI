@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Imvume inqatshiwe
     trigger: Lingisa
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Ukulungiselelwa Okungazinzile
+  unstable_optimizations_description: >-
+    Nika amandla amafulegi e-Chromium okuhlola anciphisa ukusetshenziswa
+    kwe-RAM. 
+
+    Isexwayiso: uma iwijethi iphahlazeka, wonke amawijethi abelana ngesilayishi
+    esifanayo azophahlazeka ndawonye.
 discord_banner:
   message: >-
     Xhumana nabanye abasebenzisi be-Seelen UI, thola usizo, yabelana
@@ -141,6 +148,11 @@ general:
   start_of_week: Ukuqala Kweviki
   startup: Gijima ekuqaleni?
   sunday: NgeSonto
+  suspend_on_game_mode: Misa amawijethi kumodi yegeyimu
+  suspend_on_game_mode_description: >-
+    Uma i-Windows Game Mode isebenza, wonke ama-webview ewijethi ayachithwa
+    ukuze akhulule i-CPU nenkumbulo yomdlalo. Amawijethi abuyiselwa
+    ngokuzenzakalela uma i-Game Mode iphela.
   theme:
     available: Izingqikithi Ezitholakalayo
     selected: Izindikimba ezisebenzayo

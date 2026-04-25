@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Autorizzazione negata
     trigger: Simulare
     widget_id_placeholder: '@autore/nome-widget'
+  unstable_optimizations: Ottimizzazioni instabili
+  unstable_optimizations_description: >-
+    Abilita i flag sperimentali di Chromium che riducono l'utilizzo della RAM.
+
+    Attenzione: se un widget si blocca, tutti i widget che condividono lo stesso
+    caricatore si bloccheranno insieme.
 discord_banner:
   message: >-
     Connettiti con altri utenti dell'interfaccia utente Seelen, ottieni
@@ -142,6 +148,12 @@ general:
   start_of_week: Inizio settimana
   startup: Eseguire all'avvio?
   sunday: Domenica
+  suspend_on_game_mode: Sospendi i widget in modalità Gioco
+  suspend_on_game_mode_description: >-
+    Quando la modalità gioco di Windows è attiva, tutte le visualizzazioni web
+    dei widget vengono distrutte per liberare CPU e memoria per il gioco. I
+    widget vengono ripristinati automaticamente al termine della modalità di
+    gioco.
   theme:
     available: Temi disponibili
     selected: Temi attivi

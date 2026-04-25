@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Lupa evätty
     trigger: Simuloida
     widget_id_placeholder: '@author/widgetin nimi'
+  unstable_optimizations: Epävakaat optimoinnit
+  unstable_optimizations_description: >-
+    Ota käyttöön kokeelliset Chromium-merkit, jotka vähentävät RAM-muistin
+    käyttöä.
+
+    Varoitus: jos widget kaatuu, kaikki saman latausohjelman jakavat widgetit
+    kaatuvat yhdessä.
 discord_banner:
   message: >-
     Ota yhteyttä muihin Seelen-käyttöliittymän käyttäjiin, hanki apua, jaa
@@ -140,6 +147,11 @@ general:
   start_of_week: Viikon alku
   startup: Suorittaa käynnistyksen yhteydessä?
   sunday: sunnuntai
+  suspend_on_game_mode: Keskeytä widgetit pelitilassa
+  suspend_on_game_mode_description: >-
+    Kun Windows Game Mode on aktiivinen, kaikki widget-verkkonäkymät tuhotaan,
+    jotta pelille vapautuu suoritinta ja muistia. Widgetit palautetaan
+    automaattisesti, kun pelitila päättyy.
   theme:
     available: Käytettävissä olevat teemat
     selected: Aktiiviset teemat

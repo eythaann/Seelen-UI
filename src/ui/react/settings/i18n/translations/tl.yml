@@ -85,6 +85,13 @@ devtools:
     result_denied: ✗ Tinanggihan ang pahintulot
     trigger: Gayahin
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Mga Hindi Matatag na Optimization
+  unstable_optimizations_description: >-
+    I-enable ang pang-eksperimentong mga flag ng Chromium na nagpapababa sa
+    paggamit ng RAM. 
+
+    Babala: kung ang isang widget ay nag-crash, ang lahat ng mga widget na
+    nagbabahagi ng parehong loader ay magkaka-crash.
 discord_banner:
   message: >-
     Kumonekta sa iba pang user ng Seelen UI, humingi ng tulong, magbahagi ng mga
@@ -145,6 +152,11 @@ general:
   start_of_week: Simula ng Linggo
   startup: Patakbuhin sa Startup?
   sunday: Linggo
+  suspend_on_game_mode: Suspindihin ang mga widget sa Game Mode
+  suspend_on_game_mode_description: >-
+    Kapag aktibo ang Windows Game Mode, sisirain ang lahat ng widget sa webview
+    para mabakante ang CPU at memorya para sa laro. Awtomatikong nare-restore
+    ang mga widget kapag natapos na ang Game Mode.
   theme:
     available: Magagamit na Mga Tema
     selected: Mga Aktibong Tema

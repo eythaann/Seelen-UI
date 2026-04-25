@@ -80,6 +80,10 @@ devtools:
     result_denied: ✗ 권한이 거부되었습니다
     trigger: 시뮬레이션
     widget_id_placeholder: '@작성자/위젯 이름'
+  unstable_optimizations: 불안정한 최적화
+  unstable_optimizations_description: |-
+    RAM 사용량을 줄이는 실험적인 Chromium 플래그를 활성화합니다.
+    경고: 위젯이 충돌하면 동일한 로더를 공유하는 모든 위젯이 함께 충돌합니다.
 discord_banner:
   message: 다른 Seelen UI 사용자와 연결하고, 도움을 받고, 테마를 공유하고, 최신 뉴스를 받아보세요.
   title: 우리 커뮤니티에 가입하세요
@@ -128,6 +132,10 @@ general:
   start_of_week: 주의 시작
   startup: 시작 시 실행
   sunday: 일요일
+  suspend_on_game_mode: 게임 모드에서 위젯 일시 중지
+  suspend_on_game_mode_description: >-
+    Windows 게임 모드가 활성화되면 게임에 대한 CPU 및 메모리를 확보하기 위해 모든 위젯 웹뷰가 삭제됩니다. 게임 모드가 종료되면
+    위젯이 자동으로 복원됩니다.
   theme:
     available: 사용 가능한 테마
     selected: 현재 테마

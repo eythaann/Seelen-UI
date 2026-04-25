@@ -83,6 +83,13 @@ devtools:
     result_denied: ✗ Povolení odepřeno
     trigger: Simulovat
     widget_id_placeholder: '@autor/název-widgetu'
+  unstable_optimizations: Nestabilní optimalizace
+  unstable_optimizations_description: >-
+    Povolit experimentální příznaky prohlížeče Chromium, které snižují využití
+    paměti RAM.
+
+    Upozornění: Pokud dojde k selhání widgetu, zhroutí se všechny widgety
+    sdílející stejný zavaděč.
 discord_banner:
   message: >-
     Spojte se s ostatními uživateli uživatelského rozhraní Seelen, získejte
@@ -138,6 +145,11 @@ general:
   start_of_week: Začátek týdne
   startup: Spoustit při každém startu?
   sunday: neděle
+  suspend_on_game_mode: Pozastavit widgety v herním režimu
+  suspend_on_game_mode_description: >-
+    Když je aktivní režim Windows Game Mode, všechna zobrazení widgetu jsou
+    zničena, aby se uvolnil procesor a paměť pro hru. Widgety se po skončení
+    herního režimu automaticky obnoví.
   theme:
     available: Dostupné motivy
     selected: Aktivní motivy

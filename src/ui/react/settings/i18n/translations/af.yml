@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Toestemming geweier
     trigger: Simuleer
     widget_id_placeholder: '@outeur/legstuknaam'
+  unstable_optimizations: Onstabiele optimalisering
+  unstable_optimizations_description: >-
+    Aktiveer eksperimentele Chromium-vlae wat RAM-gebruik verminder.
+
+    Waarskuwing: as 'n legstuk ineenstort, sal alle legstukke wat dieselfde
+    laaier deel saam neerstort.
 discord_banner:
   message: >-
     Maak kontak met ander Seelen UI-gebruikers, kry hulp, deel temas en bly op
@@ -138,6 +144,11 @@ general:
   start_of_week: Begin van week
   startup: Hardloop met opstart?
   sunday: Sondag
+  suspend_on_game_mode: Skors widgets op Game Mode
+  suspend_on_game_mode_description: >-
+    Wanneer Windows-speletjiemodus aktief is, word alle widget-webaansigte
+    vernietig om SVE en geheue vir die speletjie vry te maak. Legstukke word
+    outomaties herstel wanneer Spelmodus eindig.
   theme:
     available: Beskikbare temas
     selected: Aktiewe temas

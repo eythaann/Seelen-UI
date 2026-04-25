@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Kebenaran ditolak
     trigger: Simulasikan
     widget_id_placeholder: '@nama pengarang/widget'
+  unstable_optimizations: Pengoptimuman Tidak Stabil
+  unstable_optimizations_description: >-
+    Dayakan bendera Chromium percubaan yang mengurangkan penggunaan RAM.
+
+    Amaran: jika widget ranap, semua widget yang berkongsi pemuat yang sama akan
+    ranap bersama-sama.
 discord_banner:
   message: >-
     Berhubung dengan pengguna UI Seelen yang lain, dapatkan bantuan, kongsi tema
@@ -138,6 +144,11 @@ general:
   start_of_week: Permulaan Minggu
   startup: Jalankan permulaan?
   sunday: Ahad
+  suspend_on_game_mode: Gantungkan widget pada Mod Permainan
+  suspend_on_game_mode_description: >-
+    Apabila Mod Permainan Windows aktif, semua paparan web widget dimusnahkan
+    untuk membebaskan CPU dan memori untuk permainan. Widget dipulihkan secara
+    automatik apabila Mod Permainan tamat.
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif

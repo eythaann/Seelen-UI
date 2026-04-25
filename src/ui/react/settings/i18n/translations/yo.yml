@@ -81,6 +81,12 @@ devtools:
     result_denied: ✗ Ti kọ igbanilaaye
     trigger: Ṣe afarawe
     widget_id_placeholder: '@author / ailorukọ-orukọ'
+  unstable_optimizations: Awọn iṣapeye ti ko duro
+  unstable_optimizations_description: >-
+    Mu awọn asia Chromium adanwo ṣiṣẹ ti o dinku lilo Ramu. 
+
+    Ikilọ: ti ẹrọ ailorukọ kan ba kọlu, gbogbo awọn ẹrọ ailorukọ ti o pin agberu
+    kanna yoo jamba papọ.
 discord_banner:
   message: >-
     Sopọ pẹlu awọn olumulo Seelen UI miiran, gba iranlọwọ, pin awọn akori, ki o
@@ -135,6 +141,11 @@ general:
   start_of_week: Ibẹrẹ Ọsẹ
   startup: Ṣiṣe lori ibẹrẹ?
   sunday: Sunday
+  suspend_on_game_mode: Daduro awọn ẹrọ ailorukọ lori Ipo Ere
+  suspend_on_game_mode_description: >-
+    Nigbati Ipo Ere Windows nṣiṣẹ, gbogbo awọn iwo oju opo wẹẹbu ẹrọ ailorukọ ti
+    parun si Sipiyu ọfẹ ati iranti fun ere naa. Awọn ẹrọ ailorukọ yoo mu pada
+    laifọwọyi nigbati Ipo Ere ba pari.
   theme:
     available: Awọn akori to wa
     selected: Awọn akori ti nṣiṣe lọwọ

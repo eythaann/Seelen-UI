@@ -81,6 +81,10 @@ devtools:
     result_denied: ✗ ፍቃድ ተከልክሏል።
     trigger: አስመስለው
     widget_id_placeholder: '@ደራሲ/መግብር-ስም'
+  unstable_optimizations: ያልተረጋጉ ማሻሻያዎች
+  unstable_optimizations_description: |-
+    የ RAM አጠቃቀምን የሚቀንሱ የሙከራ Chromium ባንዲራዎችን ያንቁ።
+    ማስጠንቀቂያ፡ መግብር ከተበላሸ ሁሉም ተመሳሳይ ጫኚ የሚጋሩ መግብሮች አንድ ላይ ይወድቃሉ።
 discord_banner:
   message: >-
     ከሌሎች የSeelen UI ተጠቃሚዎች ጋር ይገናኙ፣ እገዛ ያግኙ፣ ገጽታዎችን ያጋሩ እና በቅርብ ዜናዎች እንደተዘመኑ
@@ -134,6 +138,10 @@ general:
   start_of_week: የሳምንቱ መጀመሪያ
   startup: ጅምር ላይ ይሮጡ?
   sunday: እሁድ
+  suspend_on_game_mode: በጨዋታ ሁነታ ላይ መግብሮችን አግድ
+  suspend_on_game_mode_description: >-
+    የዊንዶውስ ጨዋታ ሁነታ ገባሪ ሲሆን ሁሉም የመግብር ዌብ እይታዎች ለጨዋታው ነፃ ሲፒዩ እና ማህደረ ትውስታ ይወድማሉ።
+    የጨዋታ ሁነታ ሲያልቅ መግብሮች በራስ-ሰር ወደነበሩበት ይመለሳሉ።
   theme:
     available: የሚገኙ ገጽታዎች
     selected: ንቁ ገጽታዎች

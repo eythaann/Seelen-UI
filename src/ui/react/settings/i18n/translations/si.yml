@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ අවසරය ප්‍රතික්ෂේප විය
     trigger: අනුකරණය කරන්න
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: අස්ථායී ප්‍රශස්තකරණය
+  unstable_optimizations_description: >-
+    RAM භාවිතය අඩු කරන පර්යේෂණාත්මක Chromium ධජ සබල කරන්න.
+
+    අවවාදයයි: විජට් එකක් කඩා වැටුනහොත්, එකම ලෝඩරය බෙදා ගන්නා සියලුම විජට් එකට
+    කඩා වැටෙනු ඇත.
 discord_banner:
   message: >-
     අනෙකුත් Seelen UI පරිශීලකයන් සමඟ සම්බන්ධ වන්න, උදවු ලබා ගන්න, තේමා බෙදාගන්න,
@@ -138,6 +144,11 @@ general:
   start_of_week: සතියේ ආරම්භය
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   sunday: ඉරිදා
+  suspend_on_game_mode: ක්‍රීඩා මාදිලියේ විජට් අත්හිටුවන්න
+  suspend_on_game_mode_description: >-
+    වින්ඩෝස් ක්‍රීඩා ප්‍රකාරය සක්‍රිය වූ විට, සියලුම විජට් වෙබ් දසුන් ක්‍රීඩාව
+    සඳහා නිදහස් CPU සහ මතකයට විනාශ වේ. ක්‍රීඩා ප්‍රකාරය අවසන් වූ විට විජට්
+    ස්වයංක්‍රීයව ප්‍රතිසාධනය වේ.
   theme:
     available: පවතින තේමා
     selected: ක්රියාකාරී තේමාවන්

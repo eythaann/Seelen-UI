@@ -82,6 +82,12 @@ devtools:
     result_denied: ✗ Luba ei antud
     trigger: Simuleerida
     widget_id_placeholder: '@autor/vidina nimi'
+  unstable_optimizations: Ebastabiilsed optimeerimised
+  unstable_optimizations_description: >-
+    Lubage eksperimentaalsed Chromiumi lipud, mis vähendavad RAM-i kasutamist.
+
+    Hoiatus: kui mõni vidin jookseb kokku, jooksevad kokku kõik sama laadijat
+    jagavad vidinad.
 discord_banner:
   message: >-
     Võtke ühendust teiste Seeleni kasutajaliidese kasutajatega, hankige abi,
@@ -137,6 +143,11 @@ general:
   start_of_week: Nädala algus
   startup: Kas joosta startup?
   sunday: pühapäev
+  suspend_on_game_mode: Peatage vidinad mängurežiimis
+  suspend_on_game_mode_description: >-
+    Kui Windowsi mängurežiim on aktiivne, hävitatakse kõik vidinate veebivaated,
+    et vabastada mängu jaoks protsessor ja mälu. Vidinad taastatakse
+    automaatselt, kui mängurežiim lõpeb.
   theme:
     available: Saadaolevad teemad
     selected: Aktiivsed teemad

@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Tilladelse nægtet
     trigger: Simuler
     widget_id_placeholder: '@forfatter/widget-navn'
+  unstable_optimizations: Ustabile optimeringer
+  unstable_optimizations_description: >-
+    Aktiver eksperimentelle Chromium-flag, der reducerer RAM-forbrug.
+
+    Advarsel: Hvis en widget går ned, vil alle widgets, der deler den samme
+    loader, gå ned sammen.
 discord_banner:
   message: >-
     Få forbindelse til andre Seelen UI-brugere, få hjælp, del temaer, og hold
@@ -138,6 +144,11 @@ general:
   start_of_week: Start på ugen
   startup: Kør ved opstart?
   sunday: søndag
+  suspend_on_game_mode: Suspender widgets i spiltilstand
+  suspend_on_game_mode_description: >-
+    Når Windows Game Mode er aktiv, ødelægges alle widget-webvisninger for at
+    frigøre CPU og hukommelse til spillet. Widgets gendannes automatisk, når
+    Game Mode slutter.
   theme:
     available: Tilgængelige temaer
     selected: Aktive temaer

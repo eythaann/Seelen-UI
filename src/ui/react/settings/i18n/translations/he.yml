@@ -81,6 +81,10 @@ devtools:
     result_denied: ✗ הרשאה נדחתה
     trigger: לְחַקוֹת
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: אופטימיזציות לא יציבות
+  unstable_optimizations_description: |-
+    הפעל דגלי Chromium ניסיוניים המפחיתים את השימוש ב-RAM.
+    אזהרה: אם יישומון קורס, כל הווידג'טים החולקים את אותו מטעין יקרסו יחד.
 discord_banner:
   message: >-
     התחבר עם משתמשי ממשק משתמש אחרים של Seelen, קבל עזרה, שתף ערכות נושא והישאר
@@ -134,6 +138,10 @@ general:
   start_of_week: תחילת השבוע
   startup: לרוץ בהפעלה?
   sunday: יוֹם רִאשׁוֹן
+  suspend_on_game_mode: השעיית ווידג'טים במצב משחק
+  suspend_on_game_mode_description: >-
+    כאשר מצב המשחק של Windows פעיל, כל תצוגות האינטרנט של הווידג'ט מושמדות כדי
+    לפנות מעבד וזיכרון למשחק. ווידג'טים משוחזרים אוטומטית כאשר מצב משחק מסתיים.
   theme:
     available: ערכות נושא זמינות
     selected: ערכות נושא פעילות

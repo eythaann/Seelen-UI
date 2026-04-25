@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Leyfi hafnað
     trigger: Herma eftir
     widget_id_placeholder: '@höfundur/nafn búnaðar'
+  unstable_optimizations: Óstöðugar hagræðingar
+  unstable_optimizations_description: >-
+    Virkjaðu tilrauna Chromium fána sem draga úr vinnsluminni notkun.
+
+    Viðvörun: Ef græja hrynur munu allar græjur sem deila sama hleðslutæki
+    hrynja saman.
 discord_banner:
   message: >-
     Tengstu öðrum notendum Seelen UI, fáðu hjálp, deildu þemum og fylgstu með
@@ -137,6 +143,11 @@ general:
   start_of_week: Upphaf vikunnar
   startup: Hlaupa í gangsetningu?
   sunday: sunnudag
+  suspend_on_game_mode: Fresta græjum í leikjastillingu
+  suspend_on_game_mode_description: >-
+    Þegar Windows Game Mode er virkt er öllum vefsýnum græju eytt til að losa
+    örgjörva og minni fyrir leikinn. Græjur eru sjálfkrafa endurheimtar þegar
+    leikjastillingu lýkur.
   theme:
     available: Þemu í boði
     selected: Virk þemu

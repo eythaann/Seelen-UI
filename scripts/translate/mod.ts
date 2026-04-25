@@ -44,7 +44,7 @@ async function completeTranslationsFor(localesDir: string) {
   }
 }
 
-await completeTranslationsFor("src/ui/react/toolbar/i18n/translations");
+await completeTranslationsFor("src/ui/react/fancy-toolbar/i18n/translations");
 await completeTranslationsFor("src/ui/react/weg/i18n/translations");
 await completeTranslationsFor("src/ui/react/settings/i18n/translations");
 

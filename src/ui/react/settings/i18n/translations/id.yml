@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Izin ditolak
     trigger: Simulasikan
     widget_id_placeholder: '@penulis/nama-widget'
+  unstable_optimizations: Optimasi Tidak Stabil
+  unstable_optimizations_description: >-
+    Aktifkan tanda Chromium eksperimental yang mengurangi penggunaan RAM.
+
+    Peringatan: jika widget mogok, semua widget yang berbagi pemuat yang sama
+    akan mogok secara bersamaan.
 discord_banner:
   message: >-
     Terhubung dengan pengguna Seelen UI lainnya, dapatkan bantuan, berbagi tema,
@@ -141,6 +147,11 @@ general:
   start_of_week: Awal Minggu
   startup: Jalankan saat startup?
   sunday: Minggu
+  suspend_on_game_mode: Tangguhkan widget pada Mode Game
+  suspend_on_game_mode_description: >-
+    Saat Mode Game Windows aktif, semua tampilan web widget dimusnahkan untuk
+    mengosongkan CPU dan memori game. Widget secara otomatis dipulihkan ketika
+    Mode Game berakhir.
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif

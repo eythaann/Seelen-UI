@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Leidimas atmestas
     trigger: Imituoti
     widget_id_placeholder: '@autorius/valdiklio pavadinimas'
+  unstable_optimizations: Nestabilios optimizacijos
+  unstable_optimizations_description: >-
+    Įgalinkite eksperimentines „Chromium“ žymas, kurios sumažina RAM naudojimą.
+
+    Įspėjimas: jei valdiklis sugenda, visi valdikliai, turintys tą patį
+    įkroviklį, sugenda kartu.
 discord_banner:
   message: >-
     Susisiekite su kitais Seelen UI naudotojais, gaukite pagalbos, bendrinkite
@@ -140,6 +146,11 @@ general:
   start_of_week: Savaitės pradžia
   startup: Paleisti paleidimą?
   sunday: sekmadienis
+  suspend_on_game_mode: Sustabdykite valdiklius žaidimo režimu
+  suspend_on_game_mode_description: >-
+    Kai aktyvus „Windows“ žaidimo režimas, visi valdiklių žiniatinklio rodiniai
+    sunaikinami, kad būtų atlaisvintas žaidimo procesorius ir atmintis.
+    Valdikliai automatiškai atkuriami, kai baigiasi žaidimo režimas.
   theme:
     available: Galimos temos
     selected: Aktyvios temos

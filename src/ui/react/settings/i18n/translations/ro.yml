@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ Permisiune refuzată
     trigger: Simula
     widget_id_placeholder: '@autor/nume-widget'
+  unstable_optimizations: Optimizări instabile
+  unstable_optimizations_description: >-
+    Activați semnalizatoarele Chromium experimentale care reduc utilizarea RAM.
+
+    Avertisment: dacă un widget se blochează, toate widget-urile care partajează
+    același încărcător se vor bloca împreună.
 discord_banner:
   message: >-
     Conectați-vă cu alți utilizatori Seelen UI, obțineți ajutor, partajați teme
@@ -141,6 +147,11 @@ general:
   start_of_week: Începutul săptămânii
   startup: Rulați la pornire?
   sunday: duminică
+  suspend_on_game_mode: Suspendați widget-urile în modul Joc
+  suspend_on_game_mode_description: >-
+    Când Windows Game Mode este activ, toate vizualizările web widget sunt
+    distruse pentru a elibera CPU și memorie pentru joc. Widgeturile sunt
+    restaurate automat când se încheie Modul Joc.
   theme:
     available: Teme disponibile
     selected: Teme active

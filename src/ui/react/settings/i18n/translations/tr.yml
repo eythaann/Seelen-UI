@@ -83,6 +83,12 @@ devtools:
     result_denied: ✗ İzin reddedildi
     trigger: Benzetmek
     widget_id_placeholder: '@yazar/widget-adı'
+  unstable_optimizations: Kararsız Optimizasyonlar
+  unstable_optimizations_description: >-
+    RAM kullanımını azaltan deneysel Chromium işaretlerini etkinleştirin. 
+
+    Uyarı: Bir widget çökerse, aynı yükleyiciyi paylaşan tüm widget'lar birlikte
+    çökecektir.
 discord_banner:
   message: >-
     Diğer Seelen UI kullanıcılarıyla bağlantı kurun, yardım alın, temaları
@@ -138,6 +144,11 @@ general:
   start_of_week: Hafta Başı
   startup: Başlangıçta çalıştır
   sunday: Pazar
+  suspend_on_game_mode: Widget'ları Oyun Modunda askıya alın
+  suspend_on_game_mode_description: >-
+    Windows Oyun Modu etkinken, oyun için CPU ve bellek boşaltmak amacıyla tüm
+    widget web görünümleri yok edilir. Oyun Modu sona erdiğinde widget'lar
+    otomatik olarak geri yüklenir.
   theme:
     available: Mevcut Temalar
     selected: Aktif Temalar

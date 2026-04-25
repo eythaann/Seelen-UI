@@ -76,16 +76,18 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
-  unstable_optimizations: Unstable Optimizations
-  unstable_optimizations_description: |-
-    Enable experimental Chromium flags that reduce RAM usage.
-    Warning: if a widget crashes, all widgets sharing the same loader will crash together.
   simulate_perm:
     label: Simulate Widget Permission Request
     result_allowed: ✓ Permission granted
     result_denied: ✗ Permission denied
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: Unstable Optimizations
+  unstable_optimizations_description: >-
+    Enable experimental Chromium flags that reduce RAM usage.
+
+    Warning: if a widget crashes, all widgets sharing the same loader will crash
+    together.
 discord_banner:
   message: >-
     Connect with other Seelen UI users, get help, share themes, and stay up to
@@ -118,11 +120,6 @@ general:
   hardware_acceleration_description: >-
     Disabling hardware acceleration will reduce memory usage, but can cause
     performance issues. Is safe to disable if you won't use live wallpapers.
-  suspend_on_game_mode: Suspend widgets on Game Mode
-  suspend_on_game_mode_description: >-
-    When Windows Game Mode is active, all widget webviews are destroyed to free
-    CPU and memory for the game. Widgets are automatically restored when Game
-    Mode ends.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs
@@ -145,6 +142,11 @@ general:
   start_of_week: Start of week
   startup: Run on startup?
   sunday: Sunday
+  suspend_on_game_mode: Suspend widgets on Game Mode
+  suspend_on_game_mode_description: >-
+    When Windows Game Mode is active, all widget webviews are destroyed to free
+    CPU and memory for the game. Widgets are automatically restored when Game
+    Mode ends.
   theme:
     available: Available Themes
     selected: Active Themes

@@ -81,6 +81,12 @@ devtools:
     result_denied: ✗ ການ​ອະ​ນຸ​ຍາດ​ຖືກ​ປະ​ຕິ​ເສດ​
     trigger: ຈຳລອງ
     widget_id_placeholder: '@author/widget-name'
+  unstable_optimizations: ການເພີ່ມປະສິດທິພາບທີ່ບໍ່ສະຖຽນ
+  unstable_optimizations_description: >-
+    ເປີດໃຊ້ທຸງ Chromium ທົດລອງທີ່ຫຼຸດການໃຊ້ RAM.
+
+    ຄໍາເຕືອນ: ຖ້າ widget ຂັດຂ້ອງ, widget ທັງຫມົດທີ່ແບ່ງປັນ loader ດຽວກັນຈະ crash
+    ຮ່ວມກັນ.
 discord_banner:
   message: >-
     ເຊື່ອມ​ຕໍ່​ກັບ​ຜູ້​ໃຊ້ Seelen UI ຄົນ​ອື່ນ, ຂໍ​ຄວາມ​ຊ່ວຍ​ເຫຼືອ,
@@ -136,6 +142,11 @@ general:
   start_of_week: ເລີ່ມຕົ້ນອາທິດ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
   sunday: ວັນອາທິດ
+  suspend_on_game_mode: ໂຈະວິດເຈັດຢູ່ໃນໂໝດເກມ
+  suspend_on_game_mode_description: >-
+    ເມື່ອໂຫມດເກມ Windows ເຮັດວຽກ, widget webviews ທັງໝົດຈະຖືກທໍາລາຍ CPU
+    ແລະຫນ່ວຍຄວາມຈໍາຟຣີສໍາລັບເກມ.
+    ວິດເຈັດຈະຖືກຟື້ນຟູໂດຍອັດຕະໂນມັດເມື່ອໂໝດເກມສິ້ນສຸດ.
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
     selected: ຮູບແບບການເຄື່ອນໄຫວ
