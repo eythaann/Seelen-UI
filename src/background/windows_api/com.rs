@@ -4,15 +4,15 @@ use windows::{
     Win32::{
         Foundation::RPC_E_CHANGED_MODE,
         System::Com::{
-            CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_MULTITHREADED,
+            CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
         },
     },
 };
 
 pub struct Com {}
 impl Com {
-    fn initialize() -> Result<ComGuard> {
-        let hresult = unsafe { CoInitializeEx(None, COINIT_MULTITHREADED) };
+    fn initialize(flags: windows::Win32::System::Com::COINIT) -> Result<ComGuard> {
+        let hresult = unsafe { CoInitializeEx(None, flags) };
         if hresult.is_err() {
             if hresult == RPC_E_CHANGED_MODE {
                 ComGuard { initialized: false };
@@ -34,7 +34,7 @@ impl Com {
     where
         F: FnOnce() -> Result<T>,
     {
-        let _guard = Self::initialize()?;
+        let _guard = Self::initialize(COINIT_APARTMENTTHREADED)?;
         f()
     }
 }

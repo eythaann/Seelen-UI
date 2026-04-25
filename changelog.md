@@ -15,6 +15,7 @@
 ### fix
 
 - multiline tooltips.
+- show desktop not working.
 
 ## [2.5.9]
 
