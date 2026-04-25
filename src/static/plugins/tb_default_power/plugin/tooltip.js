@@ -2,7 +2,7 @@ if (!batteries.length) {
   return t("plugged");
 }
 
-return batteries
+const batteriesText = batteries
   .map((battery, index) => {
     let content = "";
 
@@ -16,3 +16,5 @@ return batteries
     return content;
   })
   .join("\n");
+
+return batteriesText + "\n\nPower mode: " + powerMode;

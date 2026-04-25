@@ -13,20 +13,24 @@ const isSmartChargeActive = batteries.some((battery) => battery.smartCharging);
 let group = [];
 
 if (isCharging) {
-  group.push(icon("BsFillLightningChargeFill", 12));
+  group.push(icon("BsLightningChargeFill"));
+  if (isSmartChargeActive) {
+    group.push(icon("IoHeart"));
+  }
   group.push(" ");
 }
 
 if (powerMode === "BetterBattery" || powerMode === "BatterySaver") {
-  group.push(icon("FaLeaf", 12));
+  group.push(icon("IoLeaf"));
   group.push(" ");
 } else if (powerMode === "HighPerformance" || powerMode === "MaxPerformance") {
-  group.push(icon("IoSpeedometer", 12));
+  group.push(icon("IoSpeedometer"));
   group.push(" ");
-}
-
-if (isSmartChargeActive) {
-  group.push(icon("FaHeart", 12));
+} else if (powerMode === "GameMode") {
+  group.push(icon("IoGameController"));
+  group.push(" ");
+} else if (powerMode === "MixedReality") {
+  group.push(icon("TbCardboardsFilled"));
   group.push(" ");
 }
 

@@ -5,16 +5,28 @@
   $effect(() => {
     Widget.getCurrent().ready({ show: true });
   });
+
+  const lines = $derived((state.text ?? "").split("\n"));
 </script>
 
 <div class={["slu-std-surface", "tooltip"]} data-showing={state.showing}>
-  <span>{state.text ?? ""}</span>
+  {#each lines as line}
+    <p>{line}</p>
+  {/each}
 </div>
 
 <style>
   .tooltip {
     width: max-content;
     opacity: 0;
+
+    p {
+      margin-bottom: 0.8em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .tooltip[data-showing="true"] {

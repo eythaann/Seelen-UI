@@ -6,6 +6,10 @@
 
 - refactor apps menu to use standard context menu widget.
 
+### fix
+
+- multiline tooltips.
+
 ## [2.5.9]
 
 ### features
