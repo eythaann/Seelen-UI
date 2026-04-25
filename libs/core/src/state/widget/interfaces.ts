@@ -11,48 +11,70 @@ export interface WidgetInformation {
 
 export interface InitWidgetOptions {
   /**
-   * Will auto size the widget to the content size of the element
+   * Automatically resizes the widget to match the content size of a given element.
+   *
    * @example
-   *  autoSizeByContent: document.body,
-   *  autoSizeByContent: document.getElementById("root"),
+   *  autoSizeByContent: document.body
+   *  autoSizeByContent: document.getElementById("root")
+   *
    * @default undefined
    */
   autoSizeByContent?: HTMLElement | null;
+
   /**
-   * If autoSizeByContent is set, and this is true, will auto size the widget and
-   * adjusts the position to fit on screen
+   * When `autoSizeByContent` is enabled, ensures the widget stays fully visible
+   * by adjusting its position to fit within the screen bounds.
+   *
    * @default true
    */
   autoSizeFitOnScreen?: boolean;
+
   /**
-   * Will normalize the device pixel ratio to 1:1
+   * Forces the WebView to use a 1:1 device pixel ratio (disables DPI scaling).
+   *
+   * ⚠️ Not intended for typical widgets. Use only when exact pixel alignment
+   * with the physical display is required (e.g. multi-monitor widgets like
+   * power menu, workspace viewer, wallpaper manager).
+   *
+   * Widgets using this must handle per-monitor DPI scaling manually.
+   *
    * @default false
    */
   normalizeDevicePixelRatio?: boolean;
+
   /**
-   * Will save the position and size of the widget on change.
-   * This is intedeed to be used when the size and position of the widget is
-   * allowed to be changed by the user, Normally used on desktop widgets.
+   * Persists and restores the widget's last known position and size.
+   *
+   * Intended for widgets that users can move or resize (e.g. desktop widgets).
    *
    * @default widget.preset === "Desktop"
    */
   saveAndRestoreLastRect?: boolean;
+
   /**
-   * Will hide the widget when the focus is lost.
+   * Hides the widget when it loses focus.
+   *
+   * Commonly used for popup-style widgets.
    *
    * @default widget.preset === "Popup"
    */
   hideOnFocusLoss?: boolean;
+
   /**
-   * Will close the widget when it is hidden after a certain amount of time, instead of just hiding it.
-   * This is useful for popup widgets that are not used frequently, as it will free up system resources.
-   * The widget will be recreated when it is triggered again.
+   * Closes the widget after being hidden for a period of time,
+   * instead of keeping it in memory.
+   *
+   * Useful for infrequently used popup widgets to reduce resource usage.
+   * The widget will be recreated when opened again.
    *
    * @default widget.lazy === true
    */
   closeOnHide?: boolean;
+
   /**
-   * Will disable the css animations on the widget when performace mode is set to Extreme
+   * Disables CSS animations when performance mode is set to "Extreme".
+   *
+   * Helps reduce rendering overhead on low-end systems or heavy workloads.
    *
    * @default true
    */
