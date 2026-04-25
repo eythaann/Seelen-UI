@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Widget } from "@seelen-ui/lib";
-  import type { ContextMenuItem } from "@seelen-ui/lib/types";
+  import type { ContextMenuItem, ContextMenuCallbackPayload } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { emitTo } from "@tauri-apps/api/event";
   import { state as gState } from "./state.svelte";
@@ -27,10 +27,15 @@
     if (item.checked !== null) {
       // Toggle optimistic state
       internalChecked = !internalChecked;
-      // Emit with the new checked value
-      emitTo(target, item.callbackEvent, { key: item.key, checked: internalChecked });
-    } else {
-      emitTo(target, item.callbackEvent, { key: item.key });
+    }
+
+    emitTo<ContextMenuCallbackPayload>(target, item.callbackEvent, {
+      key: item.key,
+      value: item.value,
+      checked: item.checked !== null ? internalChecked : null,
+    });
+
+    if (item.checked !== null) {
       Widget.self.hide(true);
     }
   }

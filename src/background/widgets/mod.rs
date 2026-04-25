@@ -55,7 +55,14 @@ pub fn set_current_widget_status(
 }
 
 #[tauri::command(async)]
-pub fn trigger_widget(mut payload: WidgetTriggerPayload) -> Result<()> {
+pub fn trigger_widget(payload: WidgetTriggerPayload) -> Result<()> {
+    trigger_widget_inner(payload, None)
+}
+
+fn trigger_widget_inner(
+    mut payload: WidgetTriggerPayload,
+    owner_hwnd: Option<isize>,
+) -> Result<()> {
     let state = FULL_STATE.load();
     if !state.is_widget_enabled(&payload.id) {
         return Err("Can't trigger a disabled widget".into());
@@ -88,7 +95,7 @@ pub fn trigger_widget(mut payload: WidgetTriggerPayload) -> Result<()> {
 
             WIDGET_MANAGER.groups.get(&payload.id, |container| {
                 if !container.pods.contains_key(&label) {
-                    container.create_runtime_instance(instance_id);
+                    container.create_runtime_instance(instance_id, owner_hwnd);
                 }
             });
         }
@@ -119,6 +126,7 @@ pub fn trigger_context_menu(
     forward_to: Option<String>,
 ) -> Result<()> {
     let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    let owner_hwnd = webview.hwnd()?.0 as isize;
 
     let mut payload = WidgetTriggerPayload::new("@seelen/context-menu".into());
     payload.instance_id = Some(menu.identifier);
@@ -131,7 +139,7 @@ pub fn trigger_context_menu(
         "forwardTo",
         serde_json::to_value(forward_to.unwrap_or(owner.raw))?,
     );
-    trigger_widget(payload)
+    trigger_widget_inner(payload, Some(owner_hwnd))
 }
 
 #[tauri::command(async)]

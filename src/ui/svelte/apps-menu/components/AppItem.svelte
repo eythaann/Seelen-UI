@@ -1,44 +1,42 @@
 <script lang="ts">
   import type { StartMenuItem } from "@seelen-ui/lib/types";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { globalState } from "../state/mod.svelte";
   import { searchState } from "../state/search.svelte";
+  import { t } from "../i18n";
   import type { createSortable } from "@dnd-kit/svelte/sortable";
+  import { getItemContextMenu } from "./context-menu.svelte";
 
   interface Props {
     item: StartMenuItem;
     idx: number;
-    onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
     isActiveDropzone?: boolean;
     lazy?: boolean;
     sortable?: ReturnType<typeof createSortable> | null;
   }
 
-  let {
-    item,
-    idx,
-    onContextMenu,
-    isActiveDropzone = false,
-    lazy = false,
-    sortable = null,
-  }: Props = $props();
+  let { item, idx, isActiveDropzone = false, lazy = false, sortable = null }: Props = $props();
 
   const itemId = $derived(item.umid || item.path.toLowerCase());
   const isPreselected = $derived(
     globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
   );
 
+  const menu = $derived(getItemContextMenu(item, $t));
   const noopAttach = () => {};
 
   function handleClick() {
-    globalState.showing = false;
-    let program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
+    Widget.self.hide();
+    const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
     invoke(SeelenCommand.OpenFile, { path: program });
   }
 
-  function handleContextMenu(event: MouseEvent) {
-    onContextMenu(event, item);
+  function handleContextMenu() {
+    invoke(SeelenCommand.TriggerContextMenu, {
+      menu,
+      forwardTo: null,
+    });
   }
 </script>
 

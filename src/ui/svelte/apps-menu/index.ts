@@ -6,32 +6,17 @@ import { Widget } from "@seelen-ui/lib";
 import { onTriggered } from "./state/positioning.svelte.ts";
 
 import "@seelen-ui/lib/styles/reset.css";
-import { debounce } from "lodash";
-import { globalState } from "./state/mod.svelte.ts";
 
 await loadTranslations();
 
 const widget = Widget.getCurrent();
 
-await widget.window.setResizable(false);
-await widget.init();
-
-const hideDelayed = debounce(() => {
-  globalState.showing = false;
-}, 100);
-
-widget.window.onFocusChanged((e) => {
-  if (e.payload) {
-    hideDelayed.cancel();
-  } else {
-    hideDelayed();
-  }
-});
+await widget.init({ hideOnFocusLoss: true });
 
 widget.onTrigger(async (args) => {
   const visible = await widget.window.isVisible();
   if (visible) {
-    globalState.showing = false;
+    widget.hide();
   } else {
     onTriggered(args.monitorId);
   }

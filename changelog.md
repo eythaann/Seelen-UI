@@ -2,6 +2,10 @@
 
 ## [2.6.0-dev]
 
+### enhancements
+
+- refactor apps menu to use standard context menu widget.
+
 ## [2.5.9]
 
 ### features

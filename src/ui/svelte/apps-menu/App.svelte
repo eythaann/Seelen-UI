@@ -39,7 +39,7 @@
     switch (event.key) {
       case "Escape":
         event.preventDefault();
-        globalState.showing = false;
+        Widget.self.hide();
         break;
       case "ArrowUp":
         event.preventDefault();
@@ -72,8 +72,8 @@
         const webPrefixMatch = query.match(/^web:/i);
 
         if (webPrefixMatch) {
+          Widget.self.hide();
           const searchQuery = query.slice(4).trim();
-          globalState.showing = false;
           const encodedQuery = encodeURIComponent(searchQuery);
           invoke(SeelenCommand.OpenFile, {
             path: `https://www.google.com/search?q=${encodedQuery}`,
@@ -110,7 +110,7 @@
 
   // reset state when menu is shown
   $effect(() => {
-    if (globalState.showing) {
+    if (globalState.version) {
       searchState.searchQuery = "";
       globalState.preselectedItem = null;
       inputElement?.focus();

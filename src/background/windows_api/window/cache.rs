@@ -56,6 +56,7 @@ impl Window {
 
         FocusedApp {
             hwnd: self.address(),
+            owner_hwnd: self.owner().map(|w| w.address()).unwrap_or(0),
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             class: self.class(),

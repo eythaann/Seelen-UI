@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { StartMenuItem } from "@seelen-ui/lib/types";
   import type { FavFolderItem } from "../state/mod.svelte";
   import { globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
@@ -10,10 +9,9 @@
   interface Props {
     folder: FavFolderItem;
     onClose: () => void;
-    onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
   }
 
-  let { folder, onClose, onContextMenu }: Props = $props();
+  let { folder, onClose }: Props = $props();
 
   const folderName = $derived(folder.name || $t("folder"));
   const expandedItems = $derived(
@@ -116,7 +114,7 @@
 
         <div class="folder-modal-items">
           {#each expandedItems as { id, item }, idx (id)}
-            <SortableAppItem {item} {idx} isInsideFolder={true} {onContextMenu} />
+            <SortableAppItem {item} {idx} isInsideFolder={true} />
           {/each}
         </div>
       </div>

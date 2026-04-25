@@ -6,6 +6,7 @@ use crate::{rect::Rect, system_state::MonitorId};
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
     pub hwnd: isize,
+    pub owner_hwnd: isize,
     pub monitor: MonitorId,
     pub title: String,
     pub class: String,

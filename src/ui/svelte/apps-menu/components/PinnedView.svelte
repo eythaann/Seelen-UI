@@ -7,16 +7,7 @@
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
 
-  import type { StartMenuItem } from "@seelen-ui/lib/types";
-  import type { FavFolderItem } from "../state/mod.svelte";
-
   type UniqueIdentifier = string | number;
-
-  interface Props {
-    onContextMenu: (event: MouseEvent, item: StartMenuItem | FavFolderItem) => void;
-  }
-
-  let { onContextMenu }: Props = $props();
 
   // Position-based sorting threshold (20% of item width)
   const POSITION_THRESHOLD = 0.2;
@@ -135,7 +126,6 @@
             <SortableAppItem
               {item}
               {idx}
-              {onContextMenu}
               isActiveDropzone={activeDropzoneId === pinnedItem.itemId}
             />
           {/if}
@@ -144,7 +134,6 @@
           <FolderItem
             {folder}
             {idx}
-            {onContextMenu}
             isActiveDropzone={activeDropzoneId === pinnedItem.itemId}
           />
         {/if}

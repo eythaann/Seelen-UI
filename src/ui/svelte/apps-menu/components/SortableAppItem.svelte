@@ -6,7 +6,6 @@
   interface Props {
     item: StartMenuItem;
     idx: number;
-    onContextMenu: (event: MouseEvent, item: StartMenuItem) => void;
     isActiveDropzone?: boolean;
     isInsideFolder?: boolean;
   }
@@ -14,7 +13,6 @@
   let {
     item,
     idx,
-    onContextMenu,
     isActiveDropzone = false,
     isInsideFolder = false,
   }: Props = $props();
@@ -37,4 +35,4 @@
   });
 </script>
 
-<AppItem {item} {idx} {onContextMenu} {isActiveDropzone} {sortable} />
+<AppItem {item} {idx} {isActiveDropzone} {sortable} />

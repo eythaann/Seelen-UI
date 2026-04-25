@@ -21,6 +21,7 @@ import type { InitWidgetOptions, ReadyWidgetOptions, WidgetInformation } from ".
 import { disableAnimationsOnPerformanceMode } from "./performance.ts";
 import { getCurrentWebview, type Webview } from "@tauri-apps/api/webview";
 import { getCurrentWindow, type Window } from "@tauri-apps/api/window";
+import { subscribe } from "../../../mod.ts";
 
 interface WidgetInternalState {
   hwnd: number;
@@ -112,28 +113,26 @@ export class Widget {
 
   /** Will apply the recommended settings for a popup widget */
   private applyPopupPreset(): void {
-    const hideWidget = debounce(() => {
-      this.hide(true);
-    }, 100);
-
-    this.window.onFocusChanged(({ payload: focused }) => {
-      if (focused) {
-        hideWidget.cancel();
-      } else {
-        hideWidget();
-      }
-    });
-
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
-      // avoid flickering when clicking a button that triggers the widget
-      hideWidget.cancel();
-
       if (desiredPosition) {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
-
       await this.show();
       await this.focus();
+    });
+  }
+
+  private hideOnFocusLoss(): void {
+    const hideDelayed = debounce(() => {
+      this.hide();
+    }, 100);
+
+    subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: focused }) => {
+      if (focused.hwnd !== this.runtimeState.hwnd && focused.ownerHwnd !== this.runtimeState.hwnd) {
+        hideDelayed();
+      } else {
+        hideDelayed.cancel();
+      }
     });
   }
 
@@ -181,15 +180,15 @@ export class Widget {
     );
   }
 
-  private async normalizeDevicePixelRatio() {
+  private async normalizeDevicePixelRatio(): Promise<void> {
     // play with zoom level to reset device pixel ratio to 1:1
-    let oldDPR = window.devicePixelRatio;
+    let oldDPR = globalThis.devicePixelRatio;
     await this.webview.setZoom(1 / oldDPR);
     this.window.onScaleChanged(() => {
-      if (window.devicePixelRatio !== oldDPR) {
+      if (globalThis.devicePixelRatio !== oldDPR) {
         // when zoom was set dpr changed, so in case of change this is accomulative unit
-        oldDPR = oldDPR * window.devicePixelRatio;
-        this.webview.setZoom(1 / (oldDPR * window.devicePixelRatio));
+        oldDPR = oldDPR * globalThis.devicePixelRatio;
+        this.webview.setZoom(1 / (oldDPR * globalThis.devicePixelRatio));
       }
     });
   }
@@ -218,8 +217,14 @@ export class Widget {
         options.autoSizeByContent,
         options.autoSizeFitOnScreen ?? true,
       );
-    } else if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
+    }
+
+    if (options.saveAndRestoreLastRect ?? this.def.preset === WidgetPreset.Desktop) {
       await this.persistPositionAndSize();
+    }
+
+    if (options.hideOnFocusLoss ?? this.def.preset === WidgetPreset.Popup) {
+      this.hideOnFocusLoss();
     }
 
     switch (this.def.preset) {

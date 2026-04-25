@@ -4,24 +4,32 @@
   import { globalState } from "../state/mod.svelte";
   import { searchState } from "../state/search.svelte";
   import { t } from "../i18n";
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { createSortable } from "@dnd-kit/svelte/sortable";
   import FolderModal from "./FolderModal.svelte";
-  import type { StartMenuItem } from "@seelen-ui/lib/types";
+  import { getFolderContextMenu } from "./context-menu.svelte";
 
   interface Props {
     folder: FavFolderItem;
     idx: number;
-    onContextMenu: (event: MouseEvent, folder: FavFolderItem | StartMenuItem) => void;
     isActiveDropzone?: boolean;
   }
 
-  let { folder, idx, onContextMenu, isActiveDropzone = false }: Props = $props();
+  let { folder, idx, isActiveDropzone = false }: Props = $props();
+
+  const menu = $derived(getFolderContextMenu(folder, $t));
+
+  function handleFolderContextMenu() {
+    invoke(SeelenCommand.TriggerContextMenu, {
+      menu,
+      forwardTo: null,
+    });
+  }
 
   let isModalOpen = $state(false);
   $effect(() => {
-    if (!globalState.showing) {
-      isModalOpen = false;
-    }
+    globalState.version; // re-run when version changes to reset modal state
+    isModalOpen = false;
   });
 
   const isPreselected = $derived(
@@ -66,9 +74,7 @@
   class:is-dropping={sortable.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={openModal}
-  oncontextmenu={(event) => {
-    onContextMenu(event, folder);
-  }}
+  oncontextmenu={handleFolderContextMenu}
   onfocus={() => {
     globalState.preselectedItem = folder.itemId;
   }}
@@ -86,5 +92,5 @@
 </button>
 
 {#if isModalOpen}
-  <FolderModal {folder} onClose={closeModal} {onContextMenu} />
+  <FolderModal {folder} onClose={closeModal} />
 {/if}

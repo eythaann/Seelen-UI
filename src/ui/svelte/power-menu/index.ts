@@ -5,7 +5,6 @@ import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
 
 import "@seelen-ui/lib/styles/reset.css";
-import { debounce } from "lodash";
 
 await loadTranslations();
 
@@ -15,19 +14,7 @@ widget.onTrigger(async () => {
   await widget.focus();
 });
 
-const hide = debounce(() => {
-  widget.hide(true);
-}, 100);
-
-widget.window.onFocusChanged(({ payload: focused }) => {
-  if (focused) {
-    hide.cancel();
-  } else {
-    hide();
-  }
-});
-
-await widget.init({ normalizeDevicePixelRatio: true });
+await widget.init({ normalizeDevicePixelRatio: true, hideOnFocusLoss: true });
 await widget.window.setResizable(false);
 
 mount(App, {

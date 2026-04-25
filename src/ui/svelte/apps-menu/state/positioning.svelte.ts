@@ -47,30 +47,22 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
     right: x + width,
     bottom: y + height,
   });
-
-  if (globalState.showing) {
-    await widget.show();
-    await widget.focus();
-  }
 }
 
 $effect.root(() => {
   $effect(() => {
     globalState.displayMode;
-    if (monitorToShow && globalState.showing) {
+    if (monitorToShow) {
       placeCenteredToMonitor(monitorToShow);
-    }
-  });
-
-  $effect(() => {
-    if (!globalState.showing) {
-      Widget.self.hide();
     }
   });
 });
 
-export function onTriggered(monitorId?: string | null) {
+export async function onTriggered(monitorId?: string | null) {
   globalState.view = StartView.Favorites;
   globalState.desiredMonitorId = monitorId || null;
-  globalState.showing = true;
+  globalState.version++; // trigger reactive updates
+
+  await Widget.self.show();
+  await Widget.self.focus();
 }

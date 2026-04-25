@@ -17,7 +17,11 @@ use crate::{
 pub struct WidgetWebview(pub tauri::WebviewWindow);
 
 impl WidgetWebview {
-    pub fn create(widget: &Widget, label: &WidgetWebviewLabel) -> Result<Self> {
+    pub fn create(
+        widget: &Widget,
+        label: &WidgetWebviewLabel,
+        owner_hwnd: Option<isize>,
+    ) -> Result<Self> {
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());
 
@@ -72,6 +76,14 @@ impl WidgetWebview {
                 builder = builder.always_on_top(true).resizable(false);
             }
             _ => {}
+        }
+
+        if let Some(owner) = owner_hwnd {
+            // SAFETY: HWND in windows 0.61 (tauri) and 0.62 (ours) share the same memory layout
+            #[allow(clippy::missing_transmute_annotations)]
+            {
+                builder = builder.owner_raw(unsafe { std::mem::transmute(owner) });
+            }
         }
 
         let window = builder

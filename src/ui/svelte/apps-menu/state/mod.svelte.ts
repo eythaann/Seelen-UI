@@ -260,10 +260,11 @@ class State {
   disbandFolder = disbandFolder;
 
   desiredMonitorId = $state<string | null>(null);
-  showing = $state(false);
 
   view = $state(StartView.Favorites);
   preselectedItem = $state<string | null>(null);
+
+  version = $state<number>(0);
 
   get user() {
     return user.value;

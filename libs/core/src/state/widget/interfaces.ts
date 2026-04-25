@@ -38,6 +38,12 @@ export interface InitWidgetOptions {
    */
   saveAndRestoreLastRect?: boolean;
   /**
+   * Will hide the widget when the focus is lost.
+   *
+   * @default widget.preset === "Popup"
+   */
+  hideOnFocusLoss?: boolean;
+  /**
    * Will disable the css animations on the widget when performace mode is set to Extreme
    *
    * @default true

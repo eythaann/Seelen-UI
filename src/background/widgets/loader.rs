@@ -41,14 +41,14 @@ impl WidgetDeployment {
         match self.definition.instances {
             WidgetInstanceMode::Single => {
                 if self.pods.is_empty() {
-                    let instance = WidgetPod::create(&self.definition, None, None);
+                    let instance = WidgetPod::create(&self.definition, None, None, None);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
             }
             WidgetInstanceMode::Multiple => {
                 let nil_id = Uuid::nil();
                 if self.pods.is_empty() {
-                    let instance = WidgetPod::create(&self.definition, None, Some(&nil_id));
+                    let instance = WidgetPod::create(&self.definition, None, Some(&nil_id), None);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
 
@@ -68,7 +68,8 @@ impl WidgetDeployment {
                         .pods
                         .any(|(label, _)| label.instance_id == Some(replica_id))
                     {
-                        let instance = WidgetPod::create(&self.definition, None, Some(&replica_id));
+                        let instance =
+                            WidgetPod::create(&self.definition, None, Some(&replica_id), None);
                         self.pods.upsert(instance.label.clone(), instance);
                     }
                 }
@@ -90,7 +91,8 @@ impl WidgetDeployment {
                     {
                         continue;
                     }
-                    let instance = WidgetPod::create(&self.definition, Some(&monitor_id), None);
+                    let instance =
+                        WidgetPod::create(&self.definition, Some(&monitor_id), None, None);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
             }
@@ -109,8 +111,8 @@ impl WidgetDeployment {
         });
     }
 
-    pub fn create_runtime_instance(&self, instance_id: &Uuid) {
-        let instance = WidgetPod::create(&self.definition, None, Some(instance_id));
+    pub fn create_runtime_instance(&self, instance_id: &Uuid, owner_hwnd: Option<isize>) {
+        let instance = WidgetPod::create(&self.definition, None, Some(instance_id), owner_hwnd);
         self.pods.upsert(instance.label.clone(), instance);
     }
 
@@ -124,6 +126,7 @@ pub struct WidgetPod {
 
     window: Option<WidgetWebview>,
     _status: WidgetStatus,
+    owner_hwnd: Option<isize>,
 
     live: Arc<tokio::sync::Notify>,
     liveness_prove_handle: Option<tokio::task::JoinHandle<()>>,
@@ -131,13 +134,19 @@ pub struct WidgetPod {
 }
 
 impl WidgetPod {
-    fn create(widget: &Widget, monitor_id: Option<&str>, instance_id: Option<&Uuid>) -> Self {
+    fn create(
+        widget: &Widget,
+        monitor_id: Option<&str>,
+        instance_id: Option<&Uuid>,
+        owner_hwnd: Option<isize>,
+    ) -> Self {
         let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
         log::info!("Creating widget pod: {label}");
         Self {
             label,
             window: None,
             _status: WidgetStatus::Pending,
+            owner_hwnd,
             live: Arc::new(tokio::sync::Notify::new()),
             liveness_prove_handle: None,
             retries: Arc::new(AtomicU8::new(0)),
@@ -170,7 +179,7 @@ impl WidgetPod {
         }
 
         self.set_status(WidgetStatus::Creating);
-        let window = match WidgetWebview::create(definition, &self.label) {
+        let window = match WidgetWebview::create(definition, &self.label, self.owner_hwnd) {
             Ok(window) => window,
             Err(err) => {
                 log::error!("Failed to create webview: {}", err);

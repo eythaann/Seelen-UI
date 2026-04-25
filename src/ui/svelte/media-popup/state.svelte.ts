@@ -29,7 +29,6 @@ widget.window.onFocusChanged((e) => {
     // Reset state when popup loses focus
     currentView = "main";
     selectedDeviceId = null;
-    widget.hide();
   }
 });
 
