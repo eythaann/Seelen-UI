@@ -91,6 +91,11 @@ impl WidgetDeployment {
                     {
                         continue;
                     }
+
+                    if !configs.is_widget_enable_on_monitor(&self.definition.id, &monitor_id) {
+                        continue;
+                    }
+
                     let instance =
                         WidgetPod::create(&self.definition, Some(&monitor_id), None, None);
                     self.pods.upsert(instance.label.clone(), instance);

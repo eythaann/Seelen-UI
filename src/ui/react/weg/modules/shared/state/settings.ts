@@ -113,25 +113,31 @@ export const $widget_rect = computed(() => {
   return { hitboxRect, webviewRect };
 });
 
-effect(() => {
+async function updateWidgetPosition() {
   const { hitboxRect, webviewRect } = $widget_rect.value;
+  const hideMode = $settings.value.hideMode;
+  const position = $settings.value.position;
 
-  Widget.self.setPosition(webviewRect);
-
-  if ($settings.value.hideMode === HideMode.Never) {
-    invoke(SeelenCommand.RegisterAppBar, {
+  if (hideMode === HideMode.Never) {
+    await invoke(SeelenCommand.RegisterAppBar, {
       rect: hitboxRect,
-      edge: $settings.value.position as any,
+      edge: position as any,
     });
   } else {
-    invoke(SeelenCommand.UnregisterAppBar);
+    await invoke(SeelenCommand.UnregisterAppBar);
   }
-});
+
+  await Widget.self.setPosition(webviewRect);
+}
 
 // setting an app bar, can cause move of the widget, this is to ensure correct position after such move
 Widget.self.window.onMoved(({ payload }) => {
   const rect = $widget_rect.value.webviewRect;
   if (payload.x !== rect.left || payload.y !== rect.top) {
-    Widget.self.setPosition(rect);
+    updateWidgetPosition();
   }
+});
+
+effect(() => {
+  updateWidgetPosition();
 });

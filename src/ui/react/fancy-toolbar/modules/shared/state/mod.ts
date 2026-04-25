@@ -1,7 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
 import { invoke, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
-import { toPhysicalPixels } from "libs/ui/react/utils";
 import { $current_monitor } from "./system";
 import i18n from "../../../i18n";
 
@@ -37,7 +36,7 @@ effect(() => {
 
 export const $widget_rect = computed(() => {
   const { itemSize, margin, padding } = $settings.value;
-  const height = toPhysicalPixels(itemSize + padding * 2 + margin * 2);
+  const height = (itemSize + padding * 2 + margin * 2) * $current_monitor.value.scaleFactor;
   const rect = { ...$current_monitor.value.rect };
 
   if ($settings.value.position === FancyToolbarSide.Top) {
@@ -49,22 +48,30 @@ export const $widget_rect = computed(() => {
   return rect;
 });
 
-effect(() => {
-  Widget.self.setPosition($widget_rect.value);
+async function updateWidgetPosition() {
+  const rect = $widget_rect.value;
+  const hideMode = $settings.value.hideMode;
+  const position = $settings.value.position;
 
-  if ($settings.value.hideMode === HideMode.Never) {
-    invoke(SeelenCommand.RegisterAppBar, {
-      rect: $widget_rect.value,
-      edge: $settings.value.position as unknown as AppBarEdge,
+  if (hideMode === HideMode.Never) {
+    await invoke(SeelenCommand.RegisterAppBar, {
+      rect,
+      edge: position as unknown as AppBarEdge,
     });
   } else {
-    invoke(SeelenCommand.UnregisterAppBar);
+    await invoke(SeelenCommand.UnregisterAppBar);
   }
-});
+
+  await Widget.self.setPosition(rect);
+}
 
 // setting an app bar, can cause move of the widget, this is to ensure correct position after such move
 Widget.self.window.onMoved(({ payload }) => {
   if (payload.x !== $widget_rect.value.left || payload.y !== $widget_rect.value.top) {
-    Widget.self.setPosition($widget_rect.value);
+    updateWidgetPosition();
   }
+});
+
+effect(() => {
+  updateWidgetPosition();
 });
