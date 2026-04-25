@@ -114,6 +114,10 @@ general:
   hardware_acceleration_description: >-
     Disabling hardware acceleration will reduce memory usage, but can cause
     performance issues. Is safe to disable if you won't use live wallpapers.
+  suspend_on_game_mode: Suspend widgets on Game Mode
+  suspend_on_game_mode_description: >-
+    When Windows Game Mode is active, all widget webviews are destroyed to free
+    CPU and memory for the game. Widgets are automatically restored when Game Mode ends.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs

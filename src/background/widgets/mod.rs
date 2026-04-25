@@ -93,7 +93,7 @@ fn trigger_widget_inner(
                 return Err("Instance id is required for multiple instance widgets".into());
             };
 
-            WIDGET_MANAGER.groups.get(&payload.id, |container| {
+            WIDGET_MANAGER.deployments.get(&payload.id, |container| {
                 if !container.pods.contains_key(&label) {
                     container.create_runtime_instance(instance_id, owner_hwnd);
                 }
@@ -109,7 +109,7 @@ fn trigger_widget_inner(
         log::trace!("Trigger postponed, because widget instance is not ready: {label}");
         PENDING_TRIGGERS.upsert(label.clone(), payload);
 
-        WIDGET_MANAGER.groups.get(&label.widget_id, |c| {
+        WIDGET_MANAGER.deployments.get(&label.widget_id, |c| {
             c.start_webview(&label);
         });
         return Ok(());

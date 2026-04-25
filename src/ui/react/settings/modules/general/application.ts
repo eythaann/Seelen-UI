@@ -105,6 +105,23 @@ export function setHardwareAcceleration(hardwareAcceleration: boolean) {
 }
 
 /**
+ * Gets the suspend on game mode setting
+ */
+export function getSuspendOnGameMode(): boolean {
+  return settings.value.suspendOnGameMode;
+}
+
+/**
+ * Sets the suspend on game mode setting
+ */
+export function setSuspendOnGameMode(suspendOnGameMode: boolean) {
+  settings.value = {
+    ...settings.value,
+    suspendOnGameMode,
+  };
+}
+
+/**
  * Patches the performance mode settings with partial updates
  */
 export function patchPerformanceMode(patch: Partial<PerformanceModeSettings>) {

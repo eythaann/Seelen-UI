@@ -11,11 +11,13 @@ import {
   getLanguage,
   getPollingInterval,
   getStartOfWeek,
+  getSuspendOnGameMode,
   setDateFormat,
   setHardwareAcceleration,
   setLanguage,
   setPollingInterval,
   setStartOfWeek,
+  setSuspendOnGameMode,
 } from "../application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
@@ -30,6 +32,7 @@ export function General() {
   const startOfWeek = getStartOfWeek();
   const hardwareAcceleration = getHardwareAcceleration();
   const pollingInterval = getPollingInterval();
+  const suspendOnGameMode = getSuspendOnGameMode();
 
   const { t } = useTranslation();
 
@@ -127,6 +130,12 @@ export function General() {
           label={t("general.hardware_acceleration")}
           description={t("general.hardware_acceleration_description")}
           action={<Switch onChange={setHardwareAcceleration} checked={hardwareAcceleration} />}
+        />
+
+        <SettingsOption
+          label={t("general.suspend_on_game_mode")}
+          description={t("general.suspend_on_game_mode_description")}
+          action={<Switch onChange={setSuspendOnGameMode} checked={suspendOnGameMode} />}
         />
 
         <SettingsOption

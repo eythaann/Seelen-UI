@@ -11,7 +11,9 @@ use crate::{
     error::Result,
     log_error,
     modules::power::application::{PowerManager, PowerManagerEvent},
+    state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
+    widgets::manager::WIDGET_MANAGER,
     windows_api::WindowsApi,
 };
 
@@ -28,6 +30,12 @@ fn get_power_manager() -> &'static TracedMutex<PowerManager> {
                 emit_to_webviews(SeelenEvent::BatteriesStatus, batteries);
             }
             PowerManagerEvent::PowerModeChanged(mode) => {
+                if FULL_STATE.load().settings.suspend_on_game_mode {
+                    match mode {
+                        PowerMode::GameMode => WIDGET_MANAGER.suspend_all(),
+                        _ => log_error!(WIDGET_MANAGER.resume_all()),
+                    }
+                }
                 emit_to_webviews(SeelenEvent::PowerMode, mode);
             }
         });

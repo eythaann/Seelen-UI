@@ -43,11 +43,18 @@ fn get_perf_mode() -> PerformanceMode {
         return PerformanceMode::Extreme;
     }
 
+    let power_mode = get_power_mode();
+    if matches!(power_mode, PowerMode::GameMode | PowerMode::MixedReality) {
+        return PerformanceMode::Extreme;
+    }
+
     let guard = FULL_STATE.load();
     let config = &guard.settings.performance_mode;
 
-    let power_mode = get_power_mode();
-    if power_mode == PowerMode::BatterySaver {
+    if matches!(
+        power_mode,
+        PowerMode::BatterySaver | PowerMode::BetterBattery
+    ) {
         return config.on_energy_saver;
     }
 

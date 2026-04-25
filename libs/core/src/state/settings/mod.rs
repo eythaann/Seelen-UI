@@ -479,6 +479,8 @@ pub struct Settings {
     pub streaming_mode: bool,
     /// Enable or disable automatic cloud backup sync.
     pub backup_sync_enabled: bool,
+    /// Suspend all webviews when Windows GameMode is active to free resources for the game.
+    pub suspend_on_game_mode: bool,
 }
 
 impl Default for Settings {
@@ -501,10 +503,11 @@ impl Default for Settings {
             by_theme: HashMap::new(),
             by_wallpaper: HashMap::new(),
             wallpaper_collections: Vec::new(),
-            hardware_acceleration: true,
+            hardware_acceleration: false,
             polling_interval: 3,
             streaming_mode: false,
             backup_sync_enabled: true,
+            suspend_on_game_mode: true,
         }
     }
 }

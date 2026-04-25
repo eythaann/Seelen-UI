@@ -192,7 +192,7 @@ impl WidgetPod {
         let label = self.label.clone();
         window.0.on_window_event(move |event| {
             if let tauri::WindowEvent::Destroyed = event {
-                WIDGET_MANAGER.groups.get(&label.widget_id, |deploy| {
+                WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
                     deploy.kill_pod(&label);
                     deploy.reconcile();
                 });
@@ -235,7 +235,7 @@ impl WidgetPod {
 
                         let attempt = retries.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
                         if attempt < LIVENESS_PROVE_MAX_RETRIES {
-                            WIDGET_MANAGER.groups.get(&label.widget_id, |deployment| {
+                            WIDGET_MANAGER.deployments.get(&label.widget_id, |deployment| {
                                 deployment.pods.get(&label, |pod| {
                                     pod.soft_restart();
                                 });

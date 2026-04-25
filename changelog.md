@@ -2,6 +2,11 @@
 
 ## [2.6.0-dev]
 
+### features
+
+- Support for game mode.
+- Close webviews while in game mode.
+
 ### enhancements
 
 - refactor apps menu to use standard context menu widget.
