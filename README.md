@@ -53,47 +53,155 @@
   </tr>
 </table>
 
-## Overview
+---
 
-[Seelen UI](https://seelen.io/apps/seelen-ui) is a tool designed to enhance your Windows desktop experience with a focus
-on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you
-to personalize your desktop and optimize your workflow.
+## What is Seelen UI?
 
-- **Be Creative**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets,
-  icons, and other elements to create a personalized and visually appealing desktop environment.
+[Seelen UI](https://seelen.io/apps/seelen-ui) is a full desktop environment replacement for Windows — not a theme pack,
+not a skin, but a complete rethink of how your desktop looks and works. Every element you interact with daily — the
+taskbar, the dock, the app launcher, the window manager, the notification flyouts, the virtual desktops — can be
+replaced, restyled, and extended to exactly match your vision and workflow.
 
-  ![Seelen UI Custom Theme](./documentation/images/theme_preview.png)
+Whether you want a minimal, distraction-free setup or a feature-rich power-user environment, Seelen UI gives you the
+primitives to build it. With a CSS/JSON-based theming engine, a plugin widget system, and deep Windows integration, the
+only limit is your imagination.
 
-<br/>
+---
 
-- **Enhance Your Productivity**: Seelen UI helps you organize your desktop efficiently. With a Tiling Windows Manager,
-  windows automatically arrange themselves to support multitasking, making your work more streamlined.
+## Feature Showcase
 
-  ![Seelen UI Tiling Window Manager](./documentation/images/twm_preview.png)
+### Themes & Visual Identity
 
-<br/>
+Make Windows look the way you always wanted. Seelen UI ships with a powerful theming engine that lets you craft or
+install community themes covering every surface of the shell — colors, fonts, borders, animations, and more.
 
-- **Enjoy your music**: With an integrated media module that's compatible with most music players, Seelen UI allows you
-  to enjoy your music seamlessly. You can pause, resume, and skip tracks at any time without the need to open additional
-  windows.
-
-  ![Seelen UI Media Module](./documentation/images/media_module_preview.png)
+![Seelen UI Custom Theme](./documentation/images/theme_preview.png)
 
 <br/>
 
-- **Be faster!**: With an app launcher inspired by Rofi, Seelen UI provides a simple and intuitive way to quickly access
-  your applications and execute commands.
+### Dynamic Accent Color
 
-  ![Seelen UI App Launcher](./documentation/images/app_launcher_preview.png)
+Set your accent color once and forget it. Seelen UI analyzes your wallpaper in real time and automatically derives a
+harmonious accent color, keeping every shell element visually in sync with your background — no manual tweaking needed.
+
+<table>
+  <tr>
+    <td><img src="./documentation/images/dynamic_accent_1.png" alt="Dynamic accent example 1"/></td>
+    <td><img src="./documentation/images/dynamic_accent_2.png" alt="Dynamic accent example 2"/></td>
+  </tr>
+  <tr>
+    <td><img src="./documentation/images/dynamic_accent_3.png" alt="Dynamic accent example 3"/></td>
+    <td><img src="./documentation/images/dynamic_accent_4.png" alt="Dynamic accent example 4"/></td>
+  </tr>
+</table>
 
 <br/>
 
-- **User-Friendly Configuration**: Seelen UI offers an intuitive interface for easy customization. Adjust settings such
-  as themes, taskbar layouts, icons, etc. With just a few clicks.
+### Tiling Window Manager
 
-  ![Seelen UI Settings](./documentation/images/settings_preview.png)
+Stop dragging windows. Seelen UI's tiling window manager automatically arranges your open applications into efficient,
+gap-controlled layouts. Resize, swap, and navigate entirely from the keyboard — your hands never leave the keys.
+
+![Seelen UI Tiling Window Manager](./documentation/images/twm_preview.png)
 
 <br/>
+
+### Desktop Widgets
+
+Bring information to your desktop without opening apps. Place clocks, system monitors, media controls, weather panels,
+and any custom widget directly on your wallpaper layer — fully theme-aware and always within sight.
+
+![Seelen UI Desktop Widgets](./documentation/images/desktop_widgets.png)
+
+<br/>
+
+### App Launcher
+
+Launch anything instantly with a keyboard-driven launcher inspired by [Rofi](https://github.com/davatorium/rofi). Apps,
+files, shell commands, custom scripts — surfaced with fuzzy search in milliseconds.
+
+![Seelen UI App Launcher](./documentation/images/app_launcher_preview.png)
+
+<br/>
+
+### Media Controls
+
+Control your music without switching windows. The integrated media module works with virtually every player and lets you
+play, pause, skip, and scrub from any context, always accessible in the toolbar or as a dedicated widget.
+
+![Seelen UI Media Module](./documentation/images/media_module_preview.png)
+
+<br/>
+
+### Settings
+
+One unified place to configure everything. Themes, layouts, keybindings, widget positions, workspace rules, per-app
+overrides — all accessible through a clean, searchable settings interface with live preview.
+
+![Seelen UI Settings](./documentation/images/settings_preview.png)
+
+---
+
+## Complete Feature List
+
+### Shell & Desktop
+
+| Feature                    | Description                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Custom Toolbar**         | A fully themeable, widget-powered taskbar that replaces the Windows taskbar                       |
+| **Custom Dock**            | macOS-style application dock with launch, focus, and badge support                                |
+| **Desktop Widgets**        | Interactive widgets rendered directly on the desktop layer                                        |
+| **Custom Flyouts**         | Replace Windows' built-in volume, brightness, and system flyouts with themed, customizable panels |
+| **Start Menu Replacement** | Quick-access launcher replacing the native Start menu                                             |
+
+### Window Management
+
+| Feature                   | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| **Tiling Window Manager** | Automatic tiling layouts: BSP, columns, stacks, and more        |
+| **Custom Alt + Tab**      | A fully skinnable task switcher with richer window previews     |
+| **Per-App Rules**         | Define layout, workspace, and floating behavior per application |
+| **Floating Mode**         | Opt any window out of tiling while keeping the rest managed     |
+| **Gaps & Padding**        | Configurable inner and outer gaps for any layout                |
+
+### Workspaces
+
+| Feature                     | Description                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------- |
+| **Custom Virtual Desktops** | Full virtual desktop implementation with smooth animated transitions          |
+| **Workspaces Viewer**       | A visual overview panel showing all workspaces and their content at a glance  |
+| **Wallpaper per Workspace** | Assign a unique wallpaper to each workspace — changes automatically on switch |
+| **Workspace Rules**         | Pin apps or app groups to specific workspaces on launch                       |
+| **Named Workspaces**        | Give each workspace a custom name and icon                                    |
+
+### Theming & Appearance
+
+| Feature                     | Description                                                         |
+| --------------------------- | ------------------------------------------------------------------- |
+| **CSS/JSON Theming Engine** | Style every shell element with scoped CSS and JSON configuration    |
+| **Dynamic Accent Color**    | Auto-extract accent color from the current wallpaper                |
+| **Community Themes**        | Install and share themes from the community                         |
+| **Per-Widget Theming**      | Each widget can carry its own independent style                     |
+| **Dark / Light Mode**       | Full support for Windows dark and light mode, themeable per-variant |
+
+### Productivity
+
+| Feature                   | Description                                                 |
+| ------------------------- | ----------------------------------------------------------- |
+| **Keyboard-First Design** | Every feature reachable without touching the mouse          |
+| **App Launcher**          | Fuzzy-search launcher for apps, files, and commands         |
+| **Media Module**          | Universal media controls compatible with all major players  |
+| **Multi-Monitor Support** | Independent configuration and layouts per connected display |
+| **i18n — 70+ Languages**  | Fully localized interface covering major world languages    |
+
+### Developer & Power User
+
+| Feature             | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| **Widget SDK**      | Build custom widgets with Svelte, TypeScript, and full IPC access to system state |
+| **Portable Config** | All configuration lives in plain files — version-control and sync friendly        |
+
+---
 
 ## Installation
 
@@ -107,81 +215,39 @@ to personalize your desktop and optimize your workflow.
 > On fresh installations of Windows, the app might show a white or dark screen. You only need to update your Windows
 > through Windows Update and restart your PC.
 
-You can choose from different installation options based on your preference:
+All distribution channels ship **signed** packages — pick whichever fits your workflow best.
 
-### Microsoft Store <em>(recommended)</em>
+### Microsoft Store
 
-Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page.
-This is the recommended option because you will receive updates and a secure version of the program.
-
-_**Note**_: It may take around 1 to 3 business days for changes to be reflected in the Microsoft Store, as updates are
-approved by real people in the store.
+Download from the [Microsoft Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) for automatic
+updates managed by Windows. Updates go through Store review, so they may take 1–3 business days to appear after a
+release.
 
 ### Winget
-
-Install the latest version using:
 
 ```pwsh
 winget install --id Seelen.SeelenUI
 ```
 
-This option also uses the signed `.msix` package and ensures you have the latest secure version. Similar to the
-Microsoft Store, it may take around 1 to 3 business days for changes to be reflected in Winget, as updates are approved
-by real people in the `winget-pkg` project.
+Same signed `.msix` as the Store, installable from the terminal. Updates follow the same 1–3 business day review window
+via the `winget-pkgs` project.
 
-### .msix Installer
+### GitHub Releases (.msix / .exe)
 
-Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is
-signed, ensuring a secure installation. This is the same option as the Microsoft Store but is a portable installer.
+Download the latest installer directly from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. Both
+the `.msix` and `.exe` packages are signed. GitHub releases land immediately after a new version ships, ahead of Store
+and Winget. The `.exe` installer also delivers in-app update notifications.
 
-### .exe Installer
+---
 
-Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the
-`setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged
-as a potential threat by some antivirus programs. The `setup.exe` is updated more quickly than the Microsoft Store or
-Winget versions and also it receives notifications updates on new release.
+## Getting Started
 
-## Usage
+Once installed, open Seelen UI and the settings interface will guide you through the initial setup. Enable the
+components you want — toolbar, dock, tiling manager, widgets — and start customizing from there. The
+[official documentation](https://seelen.io/apps/seelen-ui) and the [Discord community](https://discord.gg/ABfASx5ZAJ)
+are the best places to go deeper.
 
-Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the
-configuration process. Customize your desktop environment effortlessly.
-
-## Upcoming Features
-
-I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
-
-### ~~App Launcher~~ ✅
-
-I’m planning to develop an app launcher inspired by [Rofi](https://github.com/davatorium/rofi) on Linux. This feature
-will provide a sleek and highly customizable way to quickly access your applications.
-
-![App Launcher Preview](https://raw.githubusercontent.com/adi1090x/files/master/rofi/previews/colorful/main.gif) _Image
-courtesy of [rofi-themes](https://github.com/dctxmei/rofi-themes)_
-
-### Customizable Popup Widgets
-
-I aim to introduce a set of fully customizable popup widgets, similar to the features available in
-[EWW](https://github.com/elkowar/eww). These widgets will be highly configurable and adaptable to your needs, providing
-an enhanced and interactive way to manage your desktop environment.
-
-![Customizable Widgets Preview](https://raw.githubusercontent.com/adi1090x/widgets/main/previews/dashboard.png) _Image
-courtesy of [adi1090x](https://github.com/adi1090x/widgets)_
-
-### Custom Alt + Tab (Task Switching)
-
-An upgraded Alt + Tab system for task switching is on the horizon. This will offer a more visually appealing and
-functional experience, allowing for smoother transitions between open applications and windows.
-
-### Custom Virtual Desktops Viewer and Animations
-
-I’m also working on a custom virtual desktops viewer and dynamic animations to improve navigation between different
-workspaces. This will provide a more intuitive and immersive multitasking experience.
-
-Stay tuned for more updates as I develop these features. I appreciate your support and enthusiasm!
-
-Happy customizing!
-
-The Seelen UI Team
+---
 
 ## Contributing
 
@@ -195,7 +261,7 @@ See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
+For inquiries and support, join us on [Discord](https://discord.gg/ABfASx5ZAJ).
 
 ## Sponsors
 
@@ -206,7 +272,7 @@ We're grateful for the support of our sponsors who help make Seelen UI possible.
 | [![DigitalOcean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=955c7335abf5&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge) | **DigitalOcean** provides cloud infrastructure services that power our development and testing environments. |
 |                                                                [![SignPath](https://avatars.githubusercontent.com/u/34448643?s=60)](https://signpath.io/)                                                                | **SignPath** provides free code signing certificates, ensuring secure and trusted releases for our users.    |
 
-## See you later
+---
 
 ```
                  .      .&     _,x&"``
@@ -236,8 +302,6 @@ We're grateful for the support of our sponsors who help make Seelen UI possible.
                0&&&&&&&&&&&&&&&&&&&0         Seelen
                     0&&&&&&&&&0
 ```
-
----
 
 📌 **Official Website**: [https://seelen.io](https://seelen.io)
 
