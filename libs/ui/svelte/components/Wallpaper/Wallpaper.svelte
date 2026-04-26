@@ -20,6 +20,16 @@
 
   let loaded = $state(false);
 
+  // svelte-ignore state_referenced_locally
+  let prevDefId: string | undefined = definition?.id;
+  $effect.pre(() => {
+    const id = definition?.id;
+    if (id !== prevDefId) {
+      prevDefId = id;
+      loaded = false;
+    }
+  });
+
   function handleLoad() {
     loaded = true;
     onLoad?.();

@@ -206,6 +206,7 @@
   class="wallpaper"
   style={getWallpaperStyles(config)}
   src={videoSrc}
+  crossOrigin="anonymous"
   controls={false}
   muted={muted || config.muted}
   autoplay={!paused}

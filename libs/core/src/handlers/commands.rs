@@ -143,6 +143,7 @@ slu_commands_declaration! {
     SystemGetForegroundWindowColor = get_foreground_window_color() -> Color,
     SystemGetMonitors = get_connected_monitors() -> Vec<PhysicalMonitor>,
     SystemGetColors = get_system_colors() -> UIColors,
+    SystemSetAccentColor = set_system_accent_color(color: Color),
     SystemGetLanguages = get_system_languages() -> Vec<SystemLanguage>,
     SystemSetKeyboardLayout = set_system_keyboard_layout(id: String, handle: String),
     RegisterAppBar = register_app_bar(rect: Rect, edge: AppBarEdge),

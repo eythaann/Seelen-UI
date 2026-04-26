@@ -22,6 +22,7 @@
   class="wallpaper"
   style={getWallpaperStyles(config)}
   src={imageSrc}
+  crossOrigin="anonymous"
   onload={onLoad}
   onerror={handleError}
   decoding="async"

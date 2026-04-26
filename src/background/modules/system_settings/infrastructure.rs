@@ -1,6 +1,9 @@
 use std::sync::Once;
 
-use seelen_core::{handlers::SeelenEvent, system_state::UIColors};
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{Color, UIColors},
+};
 
 use crate::{
     app::emit_to_webviews,
@@ -27,4 +30,9 @@ fn get_system_settings() -> &'static SystemSettings {
 #[tauri::command(async)]
 pub fn get_system_colors() -> Result<UIColors> {
     get_system_settings().get_colors()
+}
+
+#[tauri::command(async)]
+pub fn set_system_accent_color(color: Color) -> Result<()> {
+    SystemSettings::set_accent_color(color)
 }
