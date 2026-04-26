@@ -1,5 +1,14 @@
 <script lang="ts">
-  let props = $props();
+  import type { ClassValue } from "svelte/elements";
+
+  interface Props {
+    id: string;
+    class: ClassValue;
+    style?: string;
+    children?: any;
+  }
+
+  const props: Props = $props();
 </script>
 
 <div {...props} class={["bg-container", props.class]}>

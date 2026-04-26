@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
+import type { Wallpaper } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 import { locale } from "./i18n/index.ts";
 import { debounce } from "lodash";
@@ -33,18 +34,25 @@ subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
 const performanceMode = lazyRune(() => invoke(SeelenCommand.StateGetPerformanceMode));
 subscribe(SeelenEvent.StatePerformanceModeChanged, performanceMode.setByPayload);
 
+const players = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
+subscribe(SeelenEvent.MediaSessions, players.setByPayload);
+
 await Promise.all([
   focused.init(),
   monitors.init(),
   virtualDesktops.init(),
   wallpapers.init(),
   performanceMode.init(),
+  players.init(),
 ]);
 
 let idle = $state(false);
-const setAsIdle = debounce(() => {
-  idle = true;
-}, 1000 * 60 * 3); // 3 min
+const setAsIdle = debounce(
+  () => {
+    idle = true;
+  },
+  1000 * 60 * 3,
+); // 3 min
 subscribe(SeelenEvent.GlobalMouseMove, () => {
   if (idle) idle = false;
   setAsIdle();
@@ -54,8 +62,7 @@ const muted = $derived(!["Progman", "SysListView32"].includes(focused.value.clas
 
 const paused = $derived(
   idle ||
-    (focused.value.isFullscreened &&
-      !focused.value.exe?.toLowerCase().endsWith("explorer.exe")) ||
+    (focused.value.isFullscreened && !focused.value.exe?.toLowerCase().endsWith("explorer.exe")) ||
     performanceMode.value !== "Disabled",
 );
 
@@ -108,8 +115,11 @@ class State {
   get paused() {
     return paused;
   }
+  get players() {
+    return players.value;
+  }
 
-  findWallpaper(wallpaperId: string | null | undefined) {
+  findWallpaper(wallpaperId: string | null | undefined): Wallpaper | undefined {
     if (!wallpaperId) return undefined;
     return this.wallpapers.find((w) => w.id === wallpaperId);
   }

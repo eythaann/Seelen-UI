@@ -37,20 +37,22 @@
 </script>
 
 <div class="wallpaper-container" class:rendering={loaded} class:will-unrender={out}>
-  {#if definition?.type === WallpaperKind.Image}
-    <ImageWallpaper {definition} {config} onLoad={handleLoad} />
-  {:else if definition?.type === WallpaperKind.Video}
-    {#if staticProp && definition.thumbnailFilename}
-      <ImageWallpaper
-        definition={{ ...definition, filename: definition.thumbnailFilename }}
-        {config}
-        onLoad={handleLoad}
-      />
-    {:else}
-      <VideoWallpaper {definition} {config} {muted} {paused} onLoad={handleLoad} />
+  {#if definition}
+    {#if definition.type === WallpaperKind.Image}
+      <ImageWallpaper {definition} {config} onLoad={handleLoad} />
+    {:else if definition.type === WallpaperKind.Video}
+      {#if staticProp && definition.thumbnailFilename}
+        <ImageWallpaper
+          definition={{ ...definition, filename: definition.thumbnailFilename }}
+          {config}
+          onLoad={handleLoad}
+        />
+      {:else}
+        <VideoWallpaper {definition} {config} {muted} {paused} onLoad={handleLoad} />
+      {/if}
+    {:else if definition.type === WallpaperKind.Layered || definition.type === WallpaperKind.MediaPlayer}
+      <ThemedWallpaper {definition} {config} onLoad={handleLoad} />
     {/if}
-  {:else if definition?.type === WallpaperKind.Layered}
-    <ThemedWallpaper {definition} {config} onLoad={handleLoad} />
   {:else}
     <ThemedWallpaper onLoad={handleLoad} />
   {/if}

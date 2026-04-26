@@ -26,7 +26,7 @@ pub struct Wallpaper {
     #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
 
-    /// Only used if the wallpaper type is `Layered`.\
+    /// Only used if the wallpaper type is `Layered` or `MediaPlayer`.\
     /// Custom css that will be applied only on this wallpaper.
     pub css: Option<String>,
 }
@@ -40,6 +40,9 @@ pub enum WallpaperKind {
     Video,
     #[serde(alias = "layered")]
     Layered,
+    /// Similar to `Layered` but will use the default wallpaper if not media player thumbnail is available.
+    #[serde(alias = "media-player")]
+    MediaPlayer,
     /// used for wallpapers created before v2.4.9, will be changed on sanitization
     #[default]
     Unsupported,

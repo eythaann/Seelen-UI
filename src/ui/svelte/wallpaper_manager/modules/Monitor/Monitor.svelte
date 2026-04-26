@@ -1,15 +1,17 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import type { PhysicalMonitor } from "@seelen-ui/lib/types";
+  import { WallpaperKind, type PhysicalMonitor } from "@seelen-ui/lib/types";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { gState } from "../../state.svelte.ts";
   import { t } from "../../i18n/index.ts";
-  import { extractAccentColor } from "../accentExtractor.ts";
+  import { extractAccentColorFromElement, extractAccentColorFromSrc } from "../accentExtractor.ts";
+  import { convertFileSrc } from "@tauri-apps/api/core";
 
   let { monitor, extended = false }: { monitor: PhysicalMonitor; extended?: boolean } = $props();
 
-  let monitorEl = $state<HTMLDivElement | null>(null);
   let currentWasLoaded = $state(false);
+
+  const player = $derived(gState.players.find((p) => p.default));
 
   const wallpaperId = $derived.by(() => {
     const monitorData = gState.virtualDesktops.monitors[monitor.id];
@@ -37,6 +39,9 @@
   let slotBOut = $state(false);
   let slotAMounted = $state(true);
   let slotBMounted = $state(false);
+
+  const slotAWallpaper = $derived(gState.findWallpaper(slotAWallpaperId));
+  const slotBWallpaper = $derived(gState.findWallpaper(slotBWallpaperId));
 
   // svelte-ignore state_referenced_locally
   let lastActiveRef: { value: string | null } = { value: wallpaperId };
@@ -75,26 +80,40 @@
   });
 
   // Extract accent color from primary monitor wallpaper after each load.
-  // Debounced 400ms to let transition animations finish before sampling the frame.
   $effect(() => {
-    if (!monitor.isPrimary || !currentWasLoaded || !monitorEl) return;
+    if (!monitor.isPrimary) return;
 
-    const el = monitorEl;
-    const timer = setTimeout(() => {
-      // Exclude .will-unrender containers (old wallpaper fading out) so we always
-      // sample the incoming wallpaper. Themed wallpapers have no img/video — intentionally skipped.
-      const mediaEl = el.querySelector<HTMLImageElement | HTMLVideoElement>(
-        ".wallpaper-container:not(.will-unrender) :is(img, video).wallpaper",
-      );
-      if (!mediaEl) return;
+    const wallpaper = activeSlot === "a" ? slotAWallpaper : slotBWallpaper;
+    if (!wallpaper) return;
 
-      const color = extractAccentColor(mediaEl);
-      if (color) {
-        invoke(SeelenCommand.SystemSetAccentColor, { color });
+    if (wallpaper.type === WallpaperKind.MediaPlayer) {
+      if (!player?.thumbnail) {
+        return;
       }
-    }, 1000);
 
-    return () => clearTimeout(timer);
+      extractAccentColorFromSrc(convertFileSrc(player.thumbnail)).then((color) => {
+        if (color) {
+          invoke(SeelenCommand.SystemSetAccentColor, { color });
+        }
+      });
+      return;
+    }
+
+    if (wallpaper.type === WallpaperKind.Image || wallpaper.type === WallpaperKind.Video) {
+      const filename =
+        wallpaper.type === WallpaperKind.Video ? wallpaper.thumbnailFilename : wallpaper.filename;
+      if (!filename) {
+        return;
+      }
+
+      const source = convertFileSrc(wallpaper.metadata.path + "\\" + filename);
+      extractAccentColorFromSrc(source).then((color) => {
+        if (color) {
+          invoke(SeelenCommand.SystemSetAccentColor, { color });
+        }
+      });
+      return;
+    }
   });
 
   const left = $derived(extended ? "0" : `${monitor.rect.left / globalThis.devicePixelRatio}px`);
@@ -109,20 +128,9 @@
       ? "100%"
       : `${(monitor.rect.bottom - monitor.rect.top) / globalThis.devicePixelRatio}px`,
   );
-
-  const slotAWallpaper = $derived(gState.findWallpaper(slotAWallpaperId));
-  const slotBWallpaper = $derived(gState.findWallpaper(slotBWallpaperId));
 </script>
 
-<div
-  bind:this={monitorEl}
-  class="monitor"
-  style:position="fixed"
-  style:left
-  style:top
-  style:width
-  style:height
->
+<div class="monitor" style:position="fixed" style:left style:top style:width style:height>
   {#if slotAMounted}
     <div class="slot" style:z-index={activeSlot === "a" ? 2 : 1}>
       <Wallpaper

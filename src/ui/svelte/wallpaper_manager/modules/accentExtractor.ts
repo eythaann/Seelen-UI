@@ -1,204 +1,307 @@
 import type { Color } from "@seelen-ui/lib/types";
 
 const CANVAS_SIZE = 64;
-const K = 6;
-const ITERATIONS = 20;
-// Only sample the center region to avoid irrelevant sky/floor bands
-const CENTER_RATIO = 0.6;
+const CLUSTER_COUNT = 6;
+const KMEANS_ITERATIONS = 20;
 
-type HSV = [number, number, number]; // h ∈ [0,1), s ∈ [0,1], v ∈ [0,1]
+// Only sample the center region to avoid sky/floor bias
+const CENTER_SAMPLE_RATIO = 0.6;
 
-function rgbToHsv(r: number, g: number, b: number): HSV {
-  const rn = r / 255,
-    gn = g / 255,
-    bn = b / 255;
-  const max = Math.max(rn, gn, bn),
-    min = Math.min(rn, gn, bn),
-    d = max - min;
-  let h = 0;
-  const s = max === 0 ? 0 : d / max;
-  const v = max;
-  if (d !== 0) {
-    if (max === rn) h = ((gn - bn) / d + (gn < bn ? 6 : 0)) / 6;
-    else if (max === gn) h = ((bn - rn) / d + 2) / 6;
-    else h = ((rn - gn) / d + 4) / 6;
+// Filtering thresholds (tuned for UI accent extraction)
+const MIN_SATURATION = 0.25;
+const MIN_BRIGHTNESS = 0.25;
+
+type HSVColor = [number, number, number]; // [hue, saturation, value]
+
+// ----------------------
+// Color space conversion
+// ----------------------
+
+function convertRgbToHsv(red: number, green: number, blue: number): HSVColor {
+  const redNorm = red / 255;
+  const greenNorm = green / 255;
+  const blueNorm = blue / 255;
+
+  const maxChannel = Math.max(redNorm, greenNorm, blueNorm);
+  const minChannel = Math.min(redNorm, greenNorm, blueNorm);
+  const delta = maxChannel - minChannel;
+
+  let hue = 0;
+  const saturation = maxChannel === 0 ? 0 : delta / maxChannel;
+  const value = maxChannel;
+
+  if (delta !== 0) {
+    if (maxChannel === redNorm) {
+      hue = ((greenNorm - blueNorm) / delta + (greenNorm < blueNorm ? 6 : 0)) / 6;
+    } else if (maxChannel === greenNorm) {
+      hue = ((blueNorm - redNorm) / delta + 2) / 6;
+    } else {
+      hue = ((redNorm - greenNorm) / delta + 4) / 6;
+    }
   }
-  return [h, s, v];
+
+  return [hue, saturation, value];
 }
 
-function hsvToRgb(h: number, s: number, v: number): [number, number, number] {
-  const i = Math.floor(h * 6);
-  const f = h * 6 - i;
-  const p = v * (1 - s),
-    q = v * (1 - f * s),
-    t = v * (1 - (1 - f) * s);
-  let r = 0,
-    g = 0,
-    b = 0;
-  switch (i % 6) {
+function convertHsvToRgb(hue: number, saturation: number, value: number): [number, number, number] {
+  const sector = Math.floor(hue * 6);
+  const fraction = hue * 6 - sector;
+
+  const p = value * (1 - saturation);
+  const q = value * (1 - fraction * saturation);
+  const t = value * (1 - (1 - fraction) * saturation);
+
+  let red = 0;
+  let green = 0;
+  let blue = 0;
+
+  switch (sector % 6) {
     case 0:
-      [r, g, b] = [v, t, p];
+      [red, green, blue] = [value, t, p];
       break;
     case 1:
-      [r, g, b] = [q, v, p];
+      [red, green, blue] = [q, value, p];
       break;
     case 2:
-      [r, g, b] = [p, v, t];
+      [red, green, blue] = [p, value, t];
       break;
     case 3:
-      [r, g, b] = [p, q, v];
+      [red, green, blue] = [p, q, value];
       break;
     case 4:
-      [r, g, b] = [t, p, v];
+      [red, green, blue] = [t, p, value];
       break;
     case 5:
-      [r, g, b] = [v, p, q];
+      [red, green, blue] = [value, p, q];
       break;
   }
-  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+
+  return [Math.round(red * 255), Math.round(green * 255), Math.round(blue * 255)];
 }
 
-// Euclidean distance in HSV with circular hue
-function hsvDistance(a: HSV, b: HSV): number {
-  const dh = Math.min(Math.abs(a[0] - b[0]), 1 - Math.abs(a[0] - b[0])) * 2;
-  const ds = a[1] - b[1];
-  const dv = a[2] - b[2];
-  return dh * dh + ds * ds + dv * dv;
+// --------------------------------------
+// HSV distance (with circular hue logic)
+// --------------------------------------
+
+function computeHsvDistance(colorA: HSVColor, colorB: HSVColor): number {
+  const hueDistance = Math.min(Math.abs(colorA[0] - colorB[0]), 1 - Math.abs(colorA[0] - colorB[0])) * 2;
+
+  const saturationDistance = colorA[1] - colorB[1];
+  const valueDistance = colorA[2] - colorB[2];
+
+  return (
+    hueDistance * hueDistance +
+    saturationDistance * saturationDistance +
+    valueDistance * valueDistance
+  );
 }
 
-function kMeans(pixels: HSV[], k: number, iterations: number): HSV[] {
+// ----------------------
+// Pixel sampling (clean)
+// ----------------------
+
+function sampleRelevantPixels(imageData: ImageData): HSVColor[] {
+  const { data, width, height } = imageData;
+
+  const margin = Math.floor(((1 - CENTER_SAMPLE_RATIO) / 2) * Math.min(width, height));
+
+  const sampledPixels: HSVColor[] = [];
+
+  for (let y = margin; y < height - margin; y++) {
+    for (let x = margin; x < width - margin; x++) {
+      const pixelIndex = (y * width + x) * 4;
+
+      const alpha = data[pixelIndex + 3] || 0;
+      if (alpha < 128) continue;
+
+      const red = data[pixelIndex] || 0;
+      const green = data[pixelIndex + 1] || 0;
+      const blue = data[pixelIndex + 2] || 0;
+
+      const hsvColor = convertRgbToHsv(red, green, blue);
+
+      // 🔥 Important: remove low-saturation (gray) and dark pixels early
+      if (hsvColor[1] < MIN_SATURATION) continue;
+      if (hsvColor[2] < MIN_BRIGHTNESS) continue;
+
+      sampledPixels.push(hsvColor);
+    }
+  }
+
+  return sampledPixels.length >= CLUSTER_COUNT ? sampledPixels : [];
+}
+
+// ----------------------
+// K-means clustering
+// ----------------------
+
+function performKMeansClustering(
+  pixels: HSVColor[],
+  clusterCount: number,
+  iterations: number,
+): HSVColor[] {
   if (pixels.length === 0) return [];
 
-  // K-means++ initialization for better coverage
-  const centroids: HSV[] = [pixels[Math.floor(Math.random() * pixels.length)]!];
-  while (centroids.length < k) {
-    const weights = pixels.map((p) => Math.min(...centroids.map((c) => hsvDistance(p, c))));
-    const total = weights.reduce((s, w) => s + w, 0);
-    let r = Math.random() * total;
-    let pushed = false;
+  // --- K-means++ initialization ---
+  const centroids: HSVColor[] = [pixels[Math.floor(Math.random() * pixels.length)]!];
+
+  while (centroids.length < clusterCount) {
+    const distances = pixels.map((pixel) =>
+      Math.min(...centroids.map((centroid) => computeHsvDistance(pixel, centroid)))
+    );
+
+    const totalDistance = distances.reduce((sum, value) => sum + value, 0);
+    let randomValue = Math.random() * totalDistance;
+
     for (let i = 0; i < pixels.length; i++) {
-      r -= weights[i]!;
-      if (r <= 0) {
+      randomValue -= distances[i]!;
+      if (randomValue <= 0) {
         centroids.push(pixels[i]!);
-        pushed = true;
         break;
       }
     }
-    if (!pushed) centroids.push(pixels[pixels.length - 1]!);
   }
 
-  for (let iter = 0; iter < iterations; iter++) {
-    const clusters: HSV[][] = Array.from({ length: k }, () => []);
+  // --- Iterative refinement ---
+  for (let iteration = 0; iteration < iterations; iteration++) {
+    const clusters: HSVColor[][] = Array.from({ length: clusterCount }, () => []);
+
+    // Assign pixels to closest centroid
     for (const pixel of pixels) {
-      let minDist = Infinity,
-        best = 0;
-      for (let i = 0; i < k; i++) {
-        const d = hsvDistance(pixel, centroids[i]!);
-        if (d < minDist) {
-          minDist = d;
-          best = i;
+      let closestIndex = 0;
+      let smallestDistance = Infinity;
+
+      for (let i = 0; i < centroids.length; i++) {
+        const distance = computeHsvDistance(pixel, centroids[i]!);
+        if (distance < smallestDistance) {
+          smallestDistance = distance;
+          closestIndex = i;
         }
       }
-      clusters[best]!.push(pixel);
+
+      clusters[closestIndex]!.push(pixel);
     }
-    for (let i = 0; i < k; i++) {
+
+    // Recompute centroids
+    for (let i = 0; i < clusterCount; i++) {
       const cluster = clusters[i]!;
       if (cluster.length === 0) continue;
-      // Circular mean for hue, arithmetic for s and v
-      let sinSum = 0,
-        cosSum = 0,
-        sSum = 0,
-        vSum = 0,
-        wSum = 0;
-      for (const [h, s, v] of cluster) {
-        const w = s * s;
-        sinSum += Math.sin(h * 2 * Math.PI) * w;
-        cosSum += Math.cos(h * 2 * Math.PI) * w;
-        sSum += s * w;
-        vSum += v * w;
-        wSum += w;
+
+      let sineSum = 0;
+      let cosineSum = 0;
+      let saturationSum = 0;
+      let weightSum = 0;
+
+      const valueSamples: number[] = [];
+
+      for (const [hue, saturation, value] of cluster) {
+        const weight = saturation * saturation;
+
+        sineSum += Math.sin(hue * 2 * Math.PI) * weight;
+        cosineSum += Math.cos(hue * 2 * Math.PI) * weight;
+
+        saturationSum += saturation * weight;
+        weightSum += weight;
+
+        valueSamples.push(value);
       }
-      const n = wSum > 0 ? wSum : cluster.length;
-      const fallback = wSum === 0;
-      if (fallback) {
-        for (const [h, s, v] of cluster) {
-          sinSum += Math.sin(h * 2 * Math.PI);
-          cosSum += Math.cos(h * 2 * Math.PI);
-          sSum += s;
-          vSum += v;
-        }
-      }
-      centroids[i] = [
-        (Math.atan2(sinSum / n, cosSum / n) / (2 * Math.PI) + 1) % 1,
-        sSum / n,
-        vSum / n,
-      ];
+
+      const normalizedWeight = weightSum > 0 ? weightSum : cluster.length;
+
+      // Circular mean for hue
+      const averagedHue = (Math.atan2(sineSum / normalizedWeight, cosineSum / normalizedWeight) / (2 * Math.PI) + 1) %
+        1;
+
+      const averagedSaturation = saturationSum / normalizedWeight;
+
+      // 🔥 Key improvement:
+      // Use a high percentile instead of average to preserve brightness
+      valueSamples.sort((a, b) => a - b);
+      const percentileIndex = Math.floor(valueSamples.length * 0.8);
+      const representativeValue = valueSamples[percentileIndex]!;
+
+      centroids[i] = [averagedHue, averagedSaturation, representativeValue];
     }
   }
 
   return centroids;
 }
 
-const MIN_SATURATION = 0.2;
-// Minimum fraction of pixels that must be chromatic before using the filtered set
-const MIN_CHROMATIC_RATIO = 0.05;
+// ----------------------
+// Accent selection logic
+// ----------------------
 
-function samplePixels(imageData: ImageData): HSV[] {
-  const { data, width, height } = imageData;
-  const margin = Math.floor(((1 - CENTER_RATIO) / 2) * Math.min(width, height));
-  const all: HSV[] = [];
-  const chromatic: HSV[] = [];
+function selectBestAccentColor(centroids: HSVColor[]): Color {
+  const filteredCentroids = centroids.filter(
+    ([, saturation, value]) => saturation >= 0.25 && value >= 0.3,
+  );
 
-  for (let y = margin; y < height - margin; y++) {
-    for (let x = margin; x < width - margin; x++) {
-      const i = (y * width + x) * 4;
-      if (data[i + 3]! < 128) continue;
-      const hsv = rgbToHsv(data[i]!, data[i + 1]!, data[i + 2]!);
-      all.push(hsv);
-      // Exclude grays and near-black pixels so they don't pull vivid cluster centroids toward gray
-      if (hsv[1] >= MIN_SATURATION && hsv[2] >= 0.1) chromatic.push(hsv);
-    }
-  }
+  const candidateCentroids = filteredCentroids.length > 0 ? filteredCentroids : centroids;
 
-  // Use the chromatic-only set when it's representative enough
-  return chromatic.length >= all.length * MIN_CHROMATIC_RATIO && chromatic.length >= K ? chromatic : all;
-}
+  const scoredCentroids = candidateCentroids.map((hsvColor) => {
+    const [, saturation, value] = hsvColor;
 
-function pickBestColor(centroids: HSV[]): Color {
-  // Discard near-black, near-white, and unsaturated centroids
-  const filtered = centroids.filter(([, s, v]) => v >= 0.2 && v <= 0.92 && s >= 0.2);
-  const candidates = filtered.length > 0 ? filtered : [...centroids].sort((a, b) => b[1] - a[1]);
+    // 🔥 Favor vivid + bright colors
+    const score = saturation * Math.pow(value, 1.2);
 
-  // Prefer vivid colors: high saturation + brightness close to 0.65 (sweet spot)
-  const scored = candidates.map((hsv) => {
-    const [, s, v] = hsv;
-    const vibrance = s * (1 - Math.abs(v - 0.65) * 0.8);
-    return { hsv, score: vibrance };
+    return { hsvColor, score };
   });
-  scored.sort((a, b) => b.score - a.score);
 
-  const [h, s, v] = scored[0]!.hsv;
-  const [r, g, b] = hsvToRgb(h, s, v);
-  return { r, g, b, a: 255 };
+  scoredCentroids.sort((a, b) => b.score - a.score);
+
+  let [hue, saturation, value] = scoredCentroids[0]!.hsvColor;
+
+  // ✨ Small boost to make UI accents feel more alive
+  saturation = Math.min(1, saturation * 1.1);
+  value = Math.min(1, value * 1.1);
+
+  const [red, green, blue] = convertHsvToRgb(hue, saturation, value);
+
+  return { r: red, g: green, b: blue, a: 255 };
 }
 
-export function extractAccentColor(
+// ----------------------
+// Public API
+// ----------------------
+
+export function extractAccentColorFromElement(
   element: HTMLImageElement | HTMLVideoElement,
 ): Color | null {
   const canvas = document.createElement("canvas");
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  if (!ctx) return null;
 
-  // Nearest-neighbor prevents bilinear blending from dulling vivid colors
-  // (e.g. red pixels adjacent to black would average to dark red with smoothing on)
-  ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(element, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  const imageData = ctx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  const pixels = samplePixels(imageData);
-  if (pixels.length === 0) return null;
-  const centroids = kMeans(pixels, K, ITERATIONS);
+  const context = canvas.getContext("2d", {
+    willReadFrequently: true,
+  });
+
+  if (!context) return null;
+
+  // Disable smoothing to avoid blending colors (important!)
+  context.imageSmoothingEnabled = false;
+
+  context.drawImage(element, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+  const imageData = context.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+  const sampledPixels = sampleRelevantPixels(imageData);
+  if (sampledPixels.length === 0) return null;
+
+  const centroids = performKMeansClustering(sampledPixels, CLUSTER_COUNT, KMEANS_ITERATIONS);
+
   if (centroids.length === 0) return null;
-  return pickBestColor(centroids);
+
+  return selectBestAccentColor(centroids);
+}
+
+export function extractAccentColorFromSrc(source: string): Promise<Color | null> {
+  return new Promise((resolve) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.onload = () => {
+      resolve(extractAccentColorFromElement(image));
+    };
+    image.onerror = () => resolve(null);
+    image.src = source;
+  });
 }

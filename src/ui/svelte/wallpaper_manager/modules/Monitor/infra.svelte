@@ -10,9 +10,11 @@
   const primaryMonitor = $derived(
     gState.monitors.find((m) => m.isPrimary) ?? gState.monitors[0],
   );
+
+  const player = $derived(gState.players.find((p) => p.default));
 </script>
 
-{#if isExtendMode}
+{#if isExtendMode || player}
   {#if primaryMonitor}
     <Monitor monitor={primaryMonitor} extended />
   {/if}

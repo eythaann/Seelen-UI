@@ -8,6 +8,7 @@
 - Close webviews while in game mode.
 - Add new unstable optimizations flag under 'for developers' tab.
 - dynamic accent color by wallpaper.
+- expose media player to wallpapers.
 
 ### enhancements
 

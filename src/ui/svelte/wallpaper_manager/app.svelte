@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { Widget } from "@seelen-ui/lib";
   import MonitorContainers from "./modules/Monitor/infra.svelte";
 
-  onMount(() => {
+  $effect(() => {
     // Manually show the widget to avoid the focus call on ready,
     // as this unfocusable widget causes the wallpaper to not be correctly
     // positioned under the desktop.
