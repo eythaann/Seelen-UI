@@ -292,6 +292,7 @@ wall:
   select_collection: コレクションの選択
   thumbnail_generation_complete: サムネイルの生成が完了しました
   thumbnail_generation_finished: サムネイルの生成が正常に終了しました
+  use_accent_color: 壁紙のアクセントカラーを使用する
   wallpaper_collection: 壁紙コレクション
   wallpaper_settings: 壁紙の設定
   withOverlay: オーバーレイ付き

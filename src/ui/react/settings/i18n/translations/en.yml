@@ -308,6 +308,7 @@ wall:
   select_collection: Select Collection
   thumbnail_generation_complete: Thumbnail Generation Complete
   thumbnail_generation_finished: Thumbnail generation has finished successfully
+  use_accent_color: Use wallpaper accent color
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
   withOverlay: With Overlay

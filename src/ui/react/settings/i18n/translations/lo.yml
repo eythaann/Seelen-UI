@@ -306,6 +306,7 @@ wall:
   select_collection: ເລືອກຄໍເລັກຊັນ
   thumbnail_generation_complete: ການສ້າງຮູບຕົວຢ່າງສໍາເລັດ
   thumbnail_generation_finished: ການສ້າງຮູບຕົວຢ່າງສຳເລັດແລ້ວ
+  use_accent_color: ໃຊ້ສີທີ່ເນັ້ນໃສ່ຮູບພື້ນຫຼັງ
   wallpaper_collection: ການເກັບພາບພື້ນຫຼັງ
   wallpaper_settings: ການຕັ້ງຄ່າຮູບວໍເປເປີ
   withOverlay: ດ້ວຍການຊ້ອນກັນ

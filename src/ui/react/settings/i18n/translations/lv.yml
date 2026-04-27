@@ -314,6 +314,7 @@ wall:
   select_collection: Atlasiet Kolekcija
   thumbnail_generation_complete: Sīktēlu ģenerēšana ir pabeigta
   thumbnail_generation_finished: Sīktēlu ģenerēšana ir veiksmīgi pabeigta
+  use_accent_color: Izmantojiet tapetes akcenta krāsu
   wallpaper_collection: Tapešu kolekcija
   wallpaper_settings: Tapetes iestatījumi
   withOverlay: Ar pārklājumu

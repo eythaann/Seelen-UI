@@ -311,6 +311,7 @@ wall:
   select_collection: Kolleksiya seçin
   thumbnail_generation_complete: Miniatürlərin yaradılması tamamlandı
   thumbnail_generation_finished: Miniatür yaradılması uğurla tamamlandı
+  use_accent_color: Divar kağızı vurğu rəngindən istifadə edin
   wallpaper_collection: Divar kağızı Kolleksiyası
   wallpaper_settings: Divar kağızı Parametrləri
   withOverlay: Örtülü ilə

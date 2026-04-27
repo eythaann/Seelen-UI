@@ -313,6 +313,7 @@ wall:
   select_collection: Chọn Bộ sưu tập
   thumbnail_generation_complete: Hoàn tất việc tạo hình thu nhỏ
   thumbnail_generation_finished: Việc tạo hình thu nhỏ đã kết thúc thành công
+  use_accent_color: Sử dụng màu nhấn của giấy dán tường
   wallpaper_collection: Bộ sưu tập hình nền
   wallpaper_settings: Cài đặt hình nền
   withOverlay: Với lớp phủ

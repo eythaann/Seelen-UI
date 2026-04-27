@@ -311,6 +311,7 @@ wall:
   select_collection: Цуглуулга сонгоно уу
   thumbnail_generation_complete: Өнгөц зураг үүсгэж дууслаа
   thumbnail_generation_finished: Өнгөц зураг үүсгэх ажиллагаа амжилттай дууслаа
+  use_accent_color: Ханын цаасны өргөлтийн өнгийг ашигла
   wallpaper_collection: Дэлгэцийн зургийн цуглуулга
   wallpaper_settings: Дэлгэцийн зурагны тохиргоо
   withOverlay: Давхцаж байна

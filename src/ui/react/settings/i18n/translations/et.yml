@@ -311,6 +311,7 @@ wall:
   select_collection: Valige Kogu
   thumbnail_generation_complete: Pisipiltide genereerimine on lõpetatud
   thumbnail_generation_finished: Pisipiltide genereerimine on edukalt lõppenud
+  use_accent_color: Kasutage tapeedi aktsentvärvi
   wallpaper_collection: Tapeedikogu
   wallpaper_settings: Taustapildi seaded
   withOverlay: Koos kattekihiga

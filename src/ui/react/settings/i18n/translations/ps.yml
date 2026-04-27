@@ -306,6 +306,7 @@ wall:
   select_collection: ټولګه وټاکئ
   thumbnail_generation_complete: د تمبیل تولید بشپړ شو
   thumbnail_generation_finished: د تمبیل تولید په بریالیتوب سره پای ته ورسید
+  use_accent_color: د وال پیپر تلفظ رنګ وکاروئ
   wallpaper_collection: د وال پیپر ټولګه
   wallpaper_settings: د وال پیپر ترتیبات
   withOverlay: د

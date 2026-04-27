@@ -314,6 +314,7 @@ wall:
   select_collection: Выбрать коллекцию
   thumbnail_generation_complete: Создание миниатюр завершено
   thumbnail_generation_finished: Создание миниатюр успешно завершено
+  use_accent_color: Используйте акцентный цвет обоев
   wallpaper_collection: Коллекция обоев
   wallpaper_settings: Настройки обоев
   withOverlay: С накладкой

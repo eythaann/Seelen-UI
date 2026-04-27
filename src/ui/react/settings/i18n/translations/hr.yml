@@ -316,6 +316,7 @@ wall:
   select_collection: Odaberite Zbirka
   thumbnail_generation_complete: Generiranje sličica dovršeno
   thumbnail_generation_finished: Generiranje sličica je uspješno završeno
+  use_accent_color: Koristite boju tapeta
   wallpaper_collection: Zbirka tapeta
   wallpaper_settings: Postavke pozadine
   withOverlay: S prekrivanjem

@@ -317,6 +317,7 @@ wall:
   select_collection: Válassza a Gyűjtemény lehetőséget
   thumbnail_generation_complete: A miniatűrök generálása kész
   thumbnail_generation_finished: A miniatűrök generálása sikeresen befejeződött
+  use_accent_color: Használjon tapéta kiemelő színt
   wallpaper_collection: Háttérkép gyűjtemény
   wallpaper_settings: Háttérkép beállításai
   withOverlay: Overlay-vel

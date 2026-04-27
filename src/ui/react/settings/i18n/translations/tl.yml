@@ -322,6 +322,7 @@ wall:
   select_collection: Piliin ang Koleksyon
   thumbnail_generation_complete: Kumpleto na ang Pagbuo ng Thumbnail
   thumbnail_generation_finished: Matagumpay na natapos ang pagbuo ng thumbnail
+  use_accent_color: Gumamit ng kulay ng accent ng wallpaper
   wallpaper_collection: Koleksyon ng Wallpaper
   wallpaper_settings: Mga Setting ng Wallpaper
   withOverlay: Na may overlay

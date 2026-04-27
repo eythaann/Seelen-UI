@@ -313,6 +313,7 @@ wall:
   select_collection: Виберіть Колекція
   thumbnail_generation_complete: Генерація ескізів завершена
   thumbnail_generation_finished: Створення мініатюри успішно завершено
+  use_accent_color: Використовуйте акцентний колір шпалер
   wallpaper_collection: Колекція шпалер
   wallpaper_settings: Налаштування шпалер
   withOverlay: З накладанням

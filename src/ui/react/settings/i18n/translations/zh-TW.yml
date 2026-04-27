@@ -283,6 +283,7 @@ wall:
   select_collection: 選擇系列
   thumbnail_generation_complete: 縮略圖生成完成
   thumbnail_generation_finished: 縮略圖生成已成功完成
+  use_accent_color: 使用壁紙強調色
   wallpaper_collection: 壁紙合集
   wallpaper_settings: 壁紙設置
   withOverlay: 使用覆蓋

@@ -315,6 +315,7 @@ wall:
   select_collection: Pilih Koleksi
   thumbnail_generation_complete: Pembuatan Gambar Kecil Selesai
   thumbnail_generation_finished: Pembuatan thumbnail telah selesai dengan sukses
+  use_accent_color: Gunakan warna aksen wallpaper
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Pengaturan Wallpaper
   withOverlay: Dengan Overlay

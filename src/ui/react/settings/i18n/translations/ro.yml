@@ -315,6 +315,7 @@ wall:
   select_collection: Selectați Colecție
   thumbnail_generation_complete: Generarea miniaturii finalizată
   thumbnail_generation_finished: Generarea miniaturilor s-a încheiat cu succes
+  use_accent_color: Utilizați culoarea de accent pentru tapet
   wallpaper_collection: Colecția de imagini de fundal
   wallpaper_settings: Setări de fundal
   withOverlay: Cu suprapunere

@@ -293,6 +293,7 @@ wall:
   select_collection: 컬렉션 선택
   thumbnail_generation_complete: 썸네일 생성 완료
   thumbnail_generation_finished: 썸네일 생성이 성공적으로 완료되었습니다.
+  use_accent_color: 벽지 강조 색상 사용
   wallpaper_collection: 배경화면 모음
   wallpaper_settings: 배경화면 설정
   withOverlay: 오버레이 사용

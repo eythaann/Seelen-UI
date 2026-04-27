@@ -315,6 +315,7 @@ wall:
   select_collection: Selecteer Verzameling
   thumbnail_generation_complete: Het genereren van miniaturen is voltooid
   thumbnail_generation_finished: Het genereren van miniaturen is met succes voltooid
+  use_accent_color: Gebruik de accentkleur van het behang
   wallpaper_collection: Behangcollectie
   wallpaper_settings: Achtergrondinstellingen
   withOverlay: Met overlay

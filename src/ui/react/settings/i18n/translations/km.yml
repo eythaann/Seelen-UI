@@ -310,6 +310,7 @@ wall:
   select_collection: ជ្រើសរើសបណ្តុំ
   thumbnail_generation_complete: ការបង្កើតរូបភាពតូចបានបញ្ចប់
   thumbnail_generation_finished: ការបង្កើតរូបភាពតូចបានបញ្ចប់ដោយជោគជ័យ
+  use_accent_color: ប្រើពណ៌សង្កត់សំឡេងផ្ទាំងរូបភាព
   wallpaper_collection: ការប្រមូលផ្ទាំងរូបភាព
   wallpaper_settings: ការកំណត់ផ្ទាំងរូបភាព
   withOverlay: ជាមួយនឹងការត្រួតលើគ្នា

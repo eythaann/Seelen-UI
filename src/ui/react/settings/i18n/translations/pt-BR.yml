@@ -313,6 +313,7 @@ wall:
   select_collection: Selecione a coleção
   thumbnail_generation_complete: Geração de miniaturas concluída
   thumbnail_generation_finished: A geração da miniatura foi concluída com sucesso
+  use_accent_color: Use a cor de destaque do papel de parede
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
   withOverlay: Com sobreposição

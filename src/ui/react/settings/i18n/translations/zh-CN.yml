@@ -281,6 +281,7 @@ wall:
   select_collection: 选择集合
   thumbnail_generation_complete: 缩略图生成完成
   thumbnail_generation_finished: 缩略图生成已成功完成
+  use_accent_color: 使用壁纸强调色
   wallpaper_collection: 壁纸集合
   wallpaper_settings: 壁纸设置
   withOverlay: 启用叠加层

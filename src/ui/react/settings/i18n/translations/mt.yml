@@ -316,6 +316,7 @@ wall:
   select_collection: Agħżel Ġbir
   thumbnail_generation_complete: Ġenerazzjoni Thumbnail Tlesti
   thumbnail_generation_finished: Il-ġenerazzjoni ta' miniatures spiċċat b'suċċess
+  use_accent_color: Uża l-kulur tal-aċċent tal-wallpaper
   wallpaper_collection: Ġbir tal-wallpaper
   wallpaper_settings: Settings tal-wallpaper
   withOverlay: Bil-overlay

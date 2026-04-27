@@ -302,6 +302,7 @@ wall:
   select_collection: حدد المجموعة
   thumbnail_generation_complete: اكتمل إنشاء الصورة المصغرة
   thumbnail_generation_finished: تم الانتهاء من إنشاء الصور المصغرة بنجاح
+  use_accent_color: استخدام لون لهجة ورق الحائط
   wallpaper_collection: مجموعة خلفيات
   wallpaper_settings: إعدادات ورق الحائط
   withOverlay: مع تراكب

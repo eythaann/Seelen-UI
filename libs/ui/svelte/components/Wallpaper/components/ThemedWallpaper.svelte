@@ -2,36 +2,25 @@
   import BackgroundByLayers from "../../BackgroundByLayers/BackgroundByLayers.svelte";
   import type { BaseProps } from "../types";
   import { getWallpaperStyles } from "../utils";
-  import { players } from "../state.svelte";
-  import { convertFileSrc } from "@tauri-apps/api/core";
+  import wallState from "../state.svelte";
 
   let { definition, config, onLoad }: Pick<BaseProps, "definition" | "config" | "onLoad"> =
     $props();
 
-  const player = $derived(players.value.find((p) => p.default));
-  const thumbnailSrc = $derived(player?.thumbnail ? convertFileSrc(player.thumbnail) : null);
-
+  let onLoadCalled = false;
   $effect(() => {
-    if (onLoad) {
-      if (!definition || definition.type !== "MediaPlayer" || !thumbnailSrc) {
-        onLoad();
-      } else {
-        fetch(thumbnailSrc).finally(() => onLoad());
-      }
-    }
-  });
-
-  $effect(() => {
-    if (thumbnailSrc) {
-      document.documentElement.style.setProperty(
-        "--media-player-thumbnail",
-        `url('${thumbnailSrc}')`,
-      );
+    if (!onLoad || onLoadCalled) return;
+    if (!definition || definition.type !== "MediaPlayer" || !wallState.player?.thumbnail) {
+      onLoadCalled = true;
+      onLoad();
+    } else if (!wallState.fetchingThumbnail) {
+      onLoadCalled = true;
+      onLoad();
     }
   });
 </script>
 
-{#if !definition || (definition.type === "MediaPlayer" && !player)}
+{#if !definition || (definition.type === "MediaPlayer" && !wallState.player)}
   <BackgroundByLayers id="@default/wallpaper" class={["wallpaper", "default-wallpaper"]} />
 {:else}
   <BackgroundByLayers

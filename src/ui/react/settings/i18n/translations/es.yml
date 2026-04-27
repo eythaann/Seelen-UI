@@ -318,6 +318,7 @@ wall:
   select_collection: Seleccionar colección
   thumbnail_generation_complete: Generación de miniaturas completa
   thumbnail_generation_finished: La generación de miniaturas ha finalizado correctamente.
+  use_accent_color: Utilice un color de acento en el papel tapiz
   wallpaper_collection: Colección de papel tapiz
   wallpaper_settings: Configuración del fondo de pantalla
   withOverlay: Con superposición

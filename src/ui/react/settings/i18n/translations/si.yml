@@ -310,6 +310,7 @@ wall:
   select_collection: එකතුව තෝරන්න
   thumbnail_generation_complete: සිඟිති රූ උත්පාදනය සම්පූර්ණයි
   thumbnail_generation_finished: සිඟිති රූ උත්පාදනය සාර්ථකව නිම කර ඇත
+  use_accent_color: බිතුපත් උච්චාරණ වර්ණය භාවිතා කරන්න
   wallpaper_collection: බිතුපත් එකතුව
   wallpaper_settings: බිතුපත් සැකසීම්
   withOverlay: ආවරණය සමඟ

@@ -299,6 +299,7 @@ wall:
   select_collection: בחר אוסף
   thumbnail_generation_complete: יצירת תמונות ממוזערות הושלמה
   thumbnail_generation_finished: יצירת התמונות הממוזערות הסתיים בהצלחה
+  use_accent_color: השתמש בצבע מבטא טפט
   wallpaper_collection: אוסף טפטים
   wallpaper_settings: הגדרות טפט
   withOverlay: עם שכבת -על

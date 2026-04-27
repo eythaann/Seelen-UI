@@ -319,6 +319,7 @@ wall:
   select_collection: Seleccioneu Col·lecció
   thumbnail_generation_complete: S'ha completat la generació de miniatures
   thumbnail_generation_finished: La generació de miniatures ha finalitzat correctament
+  use_accent_color: Utilitzeu el color d'accent del fons de pantalla
   wallpaper_collection: Col·lecció de fons de pantalla
   wallpaper_settings: Configuració del fons de pantalla
   withOverlay: Amb superposició

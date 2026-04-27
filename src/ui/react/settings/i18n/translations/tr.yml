@@ -314,6 +314,7 @@ wall:
   select_collection: Koleksiyon Seç
   thumbnail_generation_complete: Küçük Resim Oluşturma Tamamlandı
   thumbnail_generation_finished: Küçük resim oluşturma başarıyla tamamlandı
+  use_accent_color: Duvar kağıdı vurgu rengini kullan
   wallpaper_collection: Duvar Kağıdı Koleksiyonu
   wallpaper_settings: Duvar Kağıdı Ayarları
   withOverlay: Kaplama ile

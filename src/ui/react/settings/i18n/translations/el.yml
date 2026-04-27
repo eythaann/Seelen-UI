@@ -322,6 +322,7 @@ wall:
   select_collection: Επιλέξτε Συλλογή
   thumbnail_generation_complete: Ολοκληρώθηκε η δημιουργία μικρογραφιών
   thumbnail_generation_finished: Η δημιουργία μικρογραφιών ολοκληρώθηκε με επιτυχία
+  use_accent_color: Χρησιμοποιήστε χρώμα έμφασης ταπετσαρίας
   wallpaper_collection: Συλλογή ταπετσαριών
   wallpaper_settings: Ρυθμίσεις ταπετσαρίας
   withOverlay: Με επικάλυψη

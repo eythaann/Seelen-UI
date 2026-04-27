@@ -303,6 +303,7 @@ wall:
   select_collection: เลือกคอลเลกชัน
   thumbnail_generation_complete: การสร้างภาพขนาดย่อเสร็จสมบูรณ์
   thumbnail_generation_finished: การสร้างภาพขนาดย่อเสร็จสิ้นเรียบร้อยแล้ว
+  use_accent_color: ใช้สีเน้นวอลเปเปอร์
   wallpaper_collection: คอลเลกชันวอลล์เปเปอร์
   wallpaper_settings: การตั้งค่าวอลเปเปอร์
   withOverlay: ด้วยการซ้อนทับ

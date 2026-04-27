@@ -318,6 +318,7 @@ wall:
   select_collection: To'plamni tanlang
   thumbnail_generation_complete: Eskiz yaratish tugallandi
   thumbnail_generation_finished: Eskiz yaratish muvaffaqiyatli yakunlandi
+  use_accent_color: Fon rasmi aksent rangidan foydalaning
   wallpaper_collection: Fon rasmi to'plami
   wallpaper_settings: Fon rasmi sozlamalari
   withOverlay: Qopqoq bilan

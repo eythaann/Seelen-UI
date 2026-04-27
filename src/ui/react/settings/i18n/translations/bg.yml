@@ -317,6 +317,7 @@ wall:
   select_collection: Изберете Колекция
   thumbnail_generation_complete: Генерирането на миниатюри е завършено
   thumbnail_generation_finished: Генерирането на миниатюри завърши успешно
+  use_accent_color: Използвайте акцентен цвят на тапета
   wallpaper_collection: Колекция тапети
   wallpaper_settings: Настройки на тапета
   withOverlay: С наслагване

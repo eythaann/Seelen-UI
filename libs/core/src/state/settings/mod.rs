@@ -366,6 +366,8 @@ pub struct SeelenWallSettings {
     pub default_collection: Option<uuid::Uuid>,
     /// multimonitor behaviour
     pub multimonitor_behaviour: MultimonitorBehaviour,
+    /// whether to extract and apply accent color from wallpaper
+    pub use_accent_color: bool,
     /// deprecated, this field will be removed on v3
     #[serde(alias = "backgroundsV2")]
     pub deprecated_bgs: Option<Vec<WallpaperId>>,
@@ -380,6 +382,7 @@ impl Default for SeelenWallSettings {
             randomize: false,
             default_collection: None,
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
+            use_accent_color: true,
             deprecated_bgs: None,
         }
     }

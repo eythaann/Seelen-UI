@@ -122,6 +122,15 @@ export function WallSettings() {
 
       <SettingsGroup>
         <SettingsOption
+          label={<b>{t("wall.use_accent_color")}</b>}
+          action={
+            <Switch
+              value={wall.useAccentColor}
+              onChange={(useAccentColor) => patchWallConfig({ useAccentColor })}
+            />
+          }
+        />
+        <SettingsOption
           label={<b>{t("wall.multimonitor_behaviour")}</b>}
           action={
             <Select

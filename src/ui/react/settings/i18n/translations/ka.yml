@@ -313,6 +313,7 @@ wall:
   select_collection: აირჩიეთ კოლექცია
   thumbnail_generation_complete: მინიატურების გენერაცია დასრულებულია
   thumbnail_generation_finished: ესკიზების შექმნა წარმატებით დასრულდა
+  use_accent_color: გამოიყენეთ ფონის აქცენტის ფერი
   wallpaper_collection: ფონების კოლექცია
   wallpaper_settings: ფონი პარამეტრები
   withOverlay: გადახურვით

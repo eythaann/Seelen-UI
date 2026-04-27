@@ -319,6 +319,7 @@ wall:
   select_collection: Seleziona Raccolta
   thumbnail_generation_complete: Generazione delle miniature completata
   thumbnail_generation_finished: La generazione delle miniature è stata completata correttamente
+  use_accent_color: Usa il colore in risalto della carta da parati
   wallpaper_collection: Collezione di sfondi
   wallpaper_settings: Impostazioni dello sfondo
   withOverlay: Con sovrapposizione

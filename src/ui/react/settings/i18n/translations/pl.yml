@@ -317,6 +317,7 @@ wall:
   select_collection: Wybierz opcję Kolekcja
   thumbnail_generation_complete: Generowanie miniatur zostało ukończone
   thumbnail_generation_finished: Generowanie miniatury zakończyło się pomyślnie
+  use_accent_color: Użyj koloru akcentującego tapetę
   wallpaper_collection: Kolekcja tapet
   wallpaper_settings: Ustawienia tapety
   withOverlay: Z nakładką

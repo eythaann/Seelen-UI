@@ -315,6 +315,7 @@ wall:
   select_collection: Изберете Колекција
   thumbnail_generation_complete: Генерирањето сликички е завршено
   thumbnail_generation_finished: Генерирањето сликички заврши успешно
+  use_accent_color: Користете боја на акцент на позадина
   wallpaper_collection: Колекција на тапети
   wallpaper_settings: Поставки за позадина
   withOverlay: Со преклоп

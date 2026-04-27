@@ -317,6 +317,7 @@ wall:
   select_collection: Sélectionnez une collection
   thumbnail_generation_complete: Génération de vignettes terminée
   thumbnail_generation_finished: La génération des vignettes s'est terminée avec succès
+  use_accent_color: Utiliser la couleur d’accent du papier peint
   wallpaper_collection: Collection de papiers peints
   wallpaper_settings: Paramètres du papier peint
   withOverlay: Avec recouvrement

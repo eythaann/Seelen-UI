@@ -315,6 +315,7 @@ wall:
   select_collection: Valitse Kokoelma
   thumbnail_generation_complete: Pikkukuvien luominen valmis
   thumbnail_generation_finished: Pikkukuvien luominen on päättynyt onnistuneesti
+  use_accent_color: Käytä taustakuvan korostusväriä
   wallpaper_collection: Taustakuva kokoelma
   wallpaper_settings: Taustakuvan asetukset
   withOverlay: Päällysteen kanssa

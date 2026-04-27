@@ -317,6 +317,7 @@ wall:
   select_collection: Vyberte položku Zbierka
   thumbnail_generation_complete: Generovanie miniatúr je dokončené
   thumbnail_generation_finished: Generovanie miniatúr bolo úspešne ukončené
+  use_accent_color: Použite akcentovú farbu tapety
   wallpaper_collection: Kolekcia tapiet
   wallpaper_settings: Nastavenia tapety
   withOverlay: S prekrytím

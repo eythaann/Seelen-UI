@@ -312,6 +312,7 @@ wall:
   select_collection: مجموعه را انتخاب کنید
   thumbnail_generation_complete: تولید ریز عکسها کامل شد
   thumbnail_generation_finished: تولید تصویر بند انگشتی با موفقیت به پایان رسید
+  use_accent_color: از رنگ تاکیدی کاغذ دیواری استفاده کنید
   wallpaper_collection: مجموعه کاغذ دیواری
   wallpaper_settings: تنظیمات کاغذ دیواری
   withOverlay: با روکش

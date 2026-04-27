@@ -312,6 +312,7 @@ wall:
   select_collection: Velg Samling
   thumbnail_generation_complete: Generering av miniatyrbilder er fullført
   thumbnail_generation_finished: Generering av miniatyrbilder er fullført
+  use_accent_color: Bruk bakgrunnsfarge
   wallpaper_collection: Tapet samling
   wallpaper_settings: Bakgrunnsinnstillinger
   withOverlay: Med overlegg

@@ -79,41 +79,32 @@
     return () => clearTimeout(timeoutId);
   });
 
-  // Extract accent color from primary monitor wallpaper after each load.
-  $effect(() => {
-    if (!monitor.isPrimary) return;
-
+  const accentFilename = $derived.by(() => {
     const wallpaper = activeSlot === "a" ? slotAWallpaper : slotBWallpaper;
-    if (!wallpaper) return;
+    if (!wallpaper) return null;
 
     if (wallpaper.type === WallpaperKind.MediaPlayer) {
-      if (!player?.thumbnail) {
-        return;
-      }
-
-      extractAccentColorFromSrc(convertFileSrc(player.thumbnail)).then((color) => {
-        if (color) {
-          invoke(SeelenCommand.SystemSetAccentColor, { color });
-        }
-      });
-      return;
+      return player?.thumbnail;
     }
 
-    if (wallpaper.type === WallpaperKind.Image || wallpaper.type === WallpaperKind.Video) {
-      const filename =
-        wallpaper.type === WallpaperKind.Video ? wallpaper.thumbnailFilename : wallpaper.filename;
-      if (!filename) {
-        return;
-      }
-
-      const source = convertFileSrc(wallpaper.metadata.path + "\\" + filename);
-      extractAccentColorFromSrc(source).then((color) => {
-        if (color) {
-          invoke(SeelenCommand.SystemSetAccentColor, { color });
-        }
-      });
-      return;
+    if (wallpaper.type === WallpaperKind.Video && wallpaper.thumbnailFilename) {
+      return wallpaper.metadata.path + "\\" + wallpaper.thumbnailFilename;
     }
+
+    if (wallpaper.type === WallpaperKind.Image && wallpaper.filename) {
+      return wallpaper.metadata.path + "\\" + wallpaper.filename;
+    }
+
+    return null;
+  });
+
+  $effect(() => {
+    if (!monitor.isPrimary || !accentFilename || !gState.settings.useAccentColor) return;
+    extractAccentColorFromSrc(convertFileSrc(accentFilename)).then((color) => {
+      if (color) {
+        invoke(SeelenCommand.SystemSetAccentColor, { color });
+      }
+    });
   });
 
   const left = $derived(extended ? "0" : `${monitor.rect.left / globalThis.devicePixelRatio}px`);

@@ -322,6 +322,7 @@ wall:
   select_collection: Wählen Sie Sammlung
   thumbnail_generation_complete: Miniaturbild-Erstellung abgeschlossen
   thumbnail_generation_finished: Die Miniaturbildgenerierung wurde erfolgreich abgeschlossen
+  use_accent_color: Verwenden Sie eine Akzentfarbe für die Tapete
   wallpaper_collection: Tapetensammlung
   wallpaper_settings: Hintergrundeinstellungen
   withOverlay: Mit Overlay
