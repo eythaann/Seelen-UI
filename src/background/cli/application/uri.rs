@@ -5,15 +5,20 @@ use std::{
 
 use itertools::Itertools;
 use seelen_core::{
-    resource::{Resource, ResourceId, ResourceKind, SluResource, SluResourceFile},
+    handlers::SeelenEvent,
+    resource::{
+        PluginId, Resource, ResourceId, ResourceKind, SluResource, SluResourceFile, WidgetId,
+    },
     state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent, Wallpaper, WallpaperCollection},
 };
 use tauri::Listener;
 use uuid::Uuid;
 
 use crate::{
+    app::emit_to_webviews,
     error::Result,
     get_tokio_handle, log_error,
+    resources::RESOURCES,
     session::application::SessionManager,
     state::application::{download_remote_icons, FULL_STATE},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
@@ -206,6 +211,19 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
 
     let token = webview.once(event, move |_e| {
         std::thread::spawn(move || {
+            let plugin_events: Vec<PluginId> = match &kind {
+                ResourceKind::Plugin => vec![PluginId::from(used_id.clone())],
+                ResourceKind::Widget => {
+                    let widget_id = WidgetId::from(used_id.clone());
+                    RESOURCES
+                        .widgets
+                        .get(&widget_id)
+                        .map(|w| w.plugins.iter().map(|p| p.id.clone()).collect())
+                        .unwrap_or_default()
+                }
+                _ => vec![],
+            };
+
             FULL_STATE.rcu(move |state| {
                 let mut state = state.cloned();
                 match kind {
@@ -236,6 +254,10 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
                 }
                 state
             });
+
+            for id in plugin_events {
+                emit_to_webviews(SeelenEvent::PluginEnabled, id);
+            }
 
             log_error!(FULL_STATE.load().write_settings());
             log_error!(POPUPS_MANAGER.lock().close_popup(&popup_id));

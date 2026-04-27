@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+use crate::resource::PluginId;
 use crate::state::*;
 use crate::system_state::*;
 
@@ -130,4 +131,7 @@ slu_events_declaration! {
     FocusAssistChanged(bool) as "focus-assist::changed",
     NotificationsModeChanged(NotificationsMode) as "notifications::mode-changed",
     Notifications(Vec<AppNotification>) as "notifications",
+
+    // Plugins
+    PluginEnabled(PluginId) as "plugin::enabled",
 }

@@ -31,7 +31,7 @@ export function PerformanceSettings() {
 
   return (
     <SettingsGroup>
-      <SettingsSubGroup label="Performance Mode">
+      <SettingsSubGroup label={t("general.performance_mode.label")}>
         <SettingsOption
           label={t("general.performance_mode.plugged")}
           action={

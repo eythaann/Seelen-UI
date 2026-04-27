@@ -78,16 +78,12 @@ export const Navigation = memo(() => {
         <div className={cs.group}>
           {widgets.value
             .filter((widget) => !widget.hidden)
-            .toSorted((a, b) => {
-              const aName = getResourceText(a.metadata.displayName, i18n.language);
-              const bName = getResourceText(b.metadata.displayName, i18n.language);
-              return aName.localeCompare(bName, i18n.language);
-            })
             .map((widget) => (
               <Item
                 key={widget.id}
                 route={`/widget?${new URLSearchParams({ id: widget.id })}`}
-                isActive={location.pathname === `/widget?${new URLSearchParams({ id: widget.id })}`}
+                isActive={location.pathname === "/widget" &&
+                  new URLSearchParams(location.search).get("id") === widget.id}
                 collapsed={collapsed}
                 label={<ResourceText text={widget.metadata.displayName} />}
                 icon={<Icon iconName={(widget.icon as any) || "BiSolidWidget"} />}
@@ -109,7 +105,8 @@ export const Navigation = memo(() => {
                   <Item
                     key={theme.id}
                     route={`/theme?${new URLSearchParams({ id: theme.id })}`}
-                    isActive={location.pathname === `/theme?${new URLSearchParams({ id: theme.id })}`}
+                    isActive={location.pathname === "/theme" &&
+                      new URLSearchParams(location.search).get("id") === theme.id}
                     collapsed={collapsed}
                     label={<ResourceText text={theme.metadata.displayName} />}
                     icon={<Icon iconName="BiSolidPalette" />}

@@ -14,6 +14,8 @@ subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
   initialSettings.value = JSON.stringify(payload);
 });
 
+export const language = computed(() => settings.value.language || "en");
+
 export const hasChanges = computed(() => initialSettings.value !== JSON.stringify(settings.value));
 export const needRestart = signal(false);
 
@@ -53,7 +55,7 @@ effect(() => {
 });
 
 effect(() => {
-  i18n.changeLanguage(settings.value.language || "en");
+  i18n.changeLanguage(language.value);
 });
 
 /// ===============================================================

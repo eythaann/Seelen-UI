@@ -21,6 +21,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  .entryActions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-2xs);
+  }
 }
 
 .preview {

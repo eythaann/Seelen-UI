@@ -14,6 +14,8 @@ import {
 } from "./application.ts";
 import { widgets } from "../../../state/resources.ts";
 import { getDevTools } from "../../developer/application.ts";
+import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
+import cs from "../infra.module.css";
 
 import { Button } from "antd";
 
@@ -79,11 +81,27 @@ export function WidgetConfiguration({
 
   const showToggleEnabled = !monitorId || widget.instances === "ReplicaByMonitor";
 
+  const widgetPlugins = widget.plugins;
+
   return (
     <>
       <SettingsGroup>
         <ResourceDescription text={widget.metadata.description} />
       </SettingsGroup>
+
+      {widgetPlugins.length > 0 && (
+        <SettingsGroup>
+          <SettingsSubGroup label={t("resources.included_plugins")}>
+            <div className={cs.tags}>
+              {widgetPlugins.map((plugin) => (
+                <div key={plugin.id} className={cs.tag}>
+                  <ResourceText text={plugin.metadata.displayName} />
+                </div>
+              ))}
+            </div>
+          </SettingsSubGroup>
+        </SettingsGroup>
+      )}
 
       {showToggleEnabled && (
         <SettingsGroup>
@@ -109,7 +127,9 @@ export function WidgetConfiguration({
         <SettingsGroup>
           <SettingsOption>
             <b>{t("widget.default_instance")}</b>
-            <span style={{ color: "var(--color-text-3)" }}>{t("widget.default_instance_hint")}</span>
+            <span style={{ color: "var(--color-text-3)" }}>
+              {t("widget.default_instance_hint")}
+            </span>
           </SettingsOption>
           <SettingsOption>
             <b>{t("widget.extra_instances")}</b>

@@ -1,5 +1,5 @@
 import { effect, signal } from "@preact/signals";
-import { invoke, PluginList, SeelenCommand } from "@seelen-ui/lib";
+import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
 
 import { matchIds } from "../utils.ts";
@@ -117,6 +117,12 @@ effect(() => {
 
   emitSyncEvent(state);
   saveTbState(state);
+});
+
+subscribe(SeelenEvent.PluginEnabled, (e) => {
+  if ($plugins.value.some((p) => p.id === e.payload)) {
+    $actions.addItem(e.payload);
+  }
 });
 
 export const $actions = {

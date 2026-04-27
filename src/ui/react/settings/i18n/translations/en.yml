@@ -126,6 +126,7 @@ general:
   language: Language
   monday: Monday
   performance_mode:
+    label: Optimizations
     on_battery: On battery
     on_energy_saver: On energy saver
     options:
@@ -200,6 +201,8 @@ resources:
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
     work properly.
+  affected_widgets: Affected Widgets
+  included_plugins: Included Plugins
   see_on_website: See on website
 review_request:
   not_now: Not now
@@ -259,7 +262,7 @@ update:
   channel: Update Channel
   downloading: Downloading...
 wall:
-  backgrounds: Wallpapers
+  wallpapers_and_collections: Wallpapers & Collections
   blur: Blur
   cancel: Cancel
   close: Close

@@ -5,6 +5,7 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { VerticalSortableSelect } from "src/ui/react/settings/components/SortableSelector/index.tsx";
 import { Wallpaper } from "libs/ui/react/components/Wallpaper/index.tsx";
 import { Button, Modal } from "antd";
+import { Link } from "react-router";
 
 import { getWallpaperCollections, updateWallpaperCollection } from "./application.ts";
 import { wallpapers } from "../../state/resources.ts";
@@ -48,9 +49,17 @@ export function WallpaperList({ collectionId }: Props) {
             <div className={cs.entryLabel}>
               <ResourcePortrait resource={w} kind={ResourceKind.Wallpaper} />
               <ResourceText className={cs.entryName} text={w.metadata.displayName} />
-              <Button type="text" size="small" onClick={() => ($toPreview.value = w.id)}>
-                <Icon iconName="FaEye" />
-              </Button>
+
+              <div className={cs.entryActions}>
+                <Link to={`/wallpaper?${new URLSearchParams({ id: w.id })}`}>
+                  <Button type="text" size="small">
+                    <Icon iconName="RiSettings4Fill" />
+                  </Button>
+                </Link>
+                <Button type="text" size="small" onClick={() => ($toPreview.value = w.id)}>
+                  <Icon iconName="FaEye" />
+                </Button>
+              </div>
             </div>
           ),
         }))}

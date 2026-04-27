@@ -53,4 +53,5 @@ export enum SeelenEvent {
   FocusAssistChanged = "focus-assist::changed",
   NotificationsModeChanged = "notifications::mode-changed",
   Notifications = "notifications",
+  PluginEnabled = "plugin::enabled",
 }

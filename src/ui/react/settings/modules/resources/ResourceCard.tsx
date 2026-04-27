@@ -237,27 +237,25 @@ export function ResourceListHeader({
 }: ResourceListHeaderProps) {
   const { t } = useTranslation();
   return (
-    <>
-      <SettingsGroup>
-        <Flex gap={10}>
-          <b>{t("search")}:</b>
-          <Input
-            type="search"
-            value={search}
-            onChange={(e) => onSearch((e.target as HTMLInputElement).value)}
-            style={{ width: "100%" }}
-          />
-        </Flex>
+    <SettingsGroup>
+      <Flex gap={10}>
+        <b>{t("search")}:</b>
+        <Input
+          type="search"
+          value={search}
+          onChange={(e) => onSearch((e.target as HTMLInputElement).value)}
+          style={{ width: "100%" }}
+        />
+      </Flex>
 
-        <SettingsOption>
-          <span>{t("resources.discover")}:</span>
-          <Button href={discoverUrl} target="_blank" type="link">
-            {discoverUrl}
-          </Button>
-        </SettingsOption>
-        {children}
-      </SettingsGroup>
-    </>
+      <SettingsOption>
+        <span>{t("resources.discover")}:</span>
+        <Button href={discoverUrl} target="_blank" type="link">
+          {discoverUrl}
+        </Button>
+      </SettingsOption>
+      {children}
+    </SettingsGroup>
   );
 }
 
