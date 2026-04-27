@@ -21,11 +21,6 @@ if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   }, 60_000 * 10); // every 10 minutes
 }
 
-listen("internal::session_resumed", () => {
-  console.trace("Reloading widget.");
-  location.search = `r=${Date.now()}`; // add a query hash to force be a new page
-});
-
 // important in case of unexpected crash like Out of Memory
 listen<string>(
   "internal::liveness-ping",

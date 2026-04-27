@@ -21,10 +21,10 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::emit_to_webviews,
     error::{Result, WindowsResultExt},
     event_manager, log_error,
     utils::spawn_named_thread,
+    widgets::manager::WIDGET_MANAGER,
 };
 
 use super::{string_utils::WindowsString, WindowsApi};
@@ -140,7 +140,15 @@ impl BgWindowProc {
                 WTS_SESSION_UNLOCK | WTS_SESSION_LOGON => {
                     log::info!("Session unlocked/logged on - resuming background event processing");
                     IS_INTERACTIVE_SESSION.store(true, Ordering::Release);
-                    emit_to_webviews("internal::session_resumed", ());
+
+                    // reload all pods webviews
+                    std::thread::spawn(move || {
+                        WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+                            deployment.pods.for_each(|(_, pod)| {
+                                pod.soft_restart();
+                            });
+                        });
+                    });
                 }
                 _ => {}
             }

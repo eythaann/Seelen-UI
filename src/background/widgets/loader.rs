@@ -171,7 +171,7 @@ impl WidgetPod {
         self.window.is_some() && self.status() == &WidgetStatus::Ready
     }
 
-    fn soft_restart(&mut self) {
+    pub fn soft_restart(&mut self) {
         self.set_status(WidgetStatus::Restarting);
         if let Some(window) = &self.window {
             window.reload();
