@@ -115,7 +115,10 @@ impl ResourceManager {
     pub fn emit_kind_changed(&self, kind: &ResourceKind) -> Result<()> {
         match kind {
             ResourceKind::Theme => self.emit_themes(),
-            ResourceKind::Widget => self.emit_widgets()?,
+            ResourceKind::Widget => {
+                self.emit_plugins();
+                self.emit_widgets()?;
+            }
             ResourceKind::Plugin => self.emit_plugins(),
             ResourceKind::IconPack => self.emit_icon_packs(),
             ResourceKind::Wallpaper => self.emit_wallpapers(),

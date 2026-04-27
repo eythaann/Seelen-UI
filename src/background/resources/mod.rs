@@ -137,6 +137,7 @@ impl ResourceManager {
                 self.themes.retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Widget => {
+                self.plugins.retain(|_, v| v.metadata.internal.path != path);
                 self.widgets.retain(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Plugin => {
