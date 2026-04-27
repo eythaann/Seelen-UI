@@ -251,13 +251,20 @@ pub fn init_zombie_window_killer() {
                 continue;
             }
 
-            let guard = existing_windows.write();
-            for addr in guard.iter() {
-                let window = Window::from(*addr);
-                if !window.is_window() {
-                    log::trace!("Reaping window: {:0x}", window.address());
-                    HookManager::send((WinEvent::ObjectDestroy, window));
-                }
+            let dead: Vec<isize> = {
+                let guard = existing_windows.read();
+                guard
+                    .iter()
+                    .copied()
+                    .filter(|&addr| !Window::from(addr).is_window())
+                    .collect()
+            };
+
+            for addr in dead {
+                existing_windows.write().remove(&addr);
+                let window = Window::from(addr);
+                log::trace!("Reaping window: {:0x}", window.address());
+                HookManager::send((WinEvent::ObjectDestroy, window));
             }
         }
     });
