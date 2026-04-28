@@ -1,5 +1,7 @@
 # Changelog
 
+## [2.6.1-dev]
+
 ## [2.6.0]
 
 ### features
