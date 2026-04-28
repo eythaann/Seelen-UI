@@ -131,6 +131,7 @@ general:
   language: Լեզու
   monday: Երկուշաբթի
   performance_mode:
+    label: Օպտիմալացումներ
     on_battery: Մարտկոցի վրա
     on_energy_saver: Էներգախնայողաբար
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: Վերագործարկեք բոլորին լռելյայն
 reset_configurations: Վերականգնել կոնֆիգուրացիաները
 reset_to_default: Վերագործարկեք կանխադրված արժեքը
 resources:
+  affected_widgets: Ազդեցված վիդջեթներ
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
   corrupted_wallpaper: Չհաջողվեց հանել մանրապատկերը՝ վնասված կամ չաջակցվող տեսանյութի ձևաչափ
   delete: Delete նջել ռեսուրսը
@@ -202,11 +204,15 @@ resources:
   has_update: Թարմացումն առկա է
   high_impact: Բարձր ազդեցություն կատարման վրա
   import_wallpapers: Ներմուծեք տեղական պաստառներ
+  included_plugins: Ներառված պլագիններ
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
     Այս ռեսուրսը նախատեսված էր Seelen UI- ի ավելի հին տարբերակի համար եւ կարող է
     պատշաճ կերպով չաշխատել:
   see_on_website: Տես կայքում
+  update_now: Թարմացնել
+  updates_available: Թարմացումները մատչելի են
+  updates_available_description: 'Հետևյալ ռեսուրսներն ունեն թարմացումներ:'
 review_request:
   not_now: Ոչ հիմա
   sure: Իհարկե!
@@ -265,7 +271,6 @@ update:
   channel: Թարմացրեք ալիքը
   downloading: Ներբեռնում ...
 wall:
-  backgrounds: Պաստառներ
   blur: Բութ
   cancel: Չեղարկել
   close: Փակել
@@ -317,6 +322,7 @@ wall:
   use_accent_color: Օգտագործեք պաստառի շեշտադրման գույնը
   wallpaper_collection: Պաստառների հավաքածու
   wallpaper_settings: Պաստառի կարգավորումներ
+  wallpapers_and_collections: Պաստառներ և հավաքածուներ
   withOverlay: Ծածկով
   workspace_collections: Աշխատանքային տարածքների հավաքածուներ
 weg:

@@ -131,6 +131,7 @@ general:
   language: Забон
   monday: Душанбе
   performance_mode:
+    label: Оптимизатсияҳо
     on_battery: Аз рӯи батарея
     on_energy_saver: Оид ба сарфкунандаи энергия
     options:
@@ -194,6 +195,7 @@ reset_all_to_default: Ҳама ба арзишҳои пешфарз
 reset_configurations: Аз нав танзимкунии конфигуратсияҳо
 reset_to_default: Аз нав танзимкунии арзиши пешфарз
 resources:
+  affected_widgets: Виҷетҳои зарардида
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
   corrupted_wallpaper: Истихроҷи ангораи видео - формати вайроншуда ё дастгирӣнашаванда
   delete: Манбаъро нест мекунад
@@ -201,11 +203,15 @@ resources:
   has_update: Навсозӣ дастрас аст
   high_impact: Таъсири баланд ба иҷроиш
   import_wallpapers: Объекти маҳаллӣ
+  included_plugins: Плагинҳои дохилшуда
   open_folder: Папкаи захираҳо
   outdated: >-
     Ин манбаъ барои нусхаи кӯҳна аз YELEINS тарҳрезӣ шудааст ва метавонад дуруст
     кор кунад.
   see_on_website: Дар вебсайт нигаред
+  update_now: Навсозӣ
+  updates_available: Навсозиҳо дастрас
+  updates_available_description: Захираҳои зерин навсозиҳо доранд.
 review_request:
   not_now: Ҳозир не
   sure: Албатта!
@@ -264,7 +270,6 @@ update:
   channel: Навсозӣ канал
   downloading: Зеркашӣ кунед ...
 wall:
-  backgrounds: Обои обу
   blur: Гул
   cancel: Бекор кардан
   close: Пӯшед
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Ранги аксенти деворро истифода баред
   wallpaper_collection: Маҷмӯаи обои
   wallpaper_settings: Танзимоти обои
+  wallpapers_and_collections: Обои ва коллексияҳо
   withOverlay: Бо overlay
   workspace_collections: Коллексияҳои фазои корӣ
 weg:

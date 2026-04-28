@@ -134,6 +134,7 @@ general:
   language: Sprache
   monday: Montag
   performance_mode:
+    label: Optimierungen
     on_battery: Batterie
     on_energy_saver: Auf Energiesparer
     options:
@@ -197,6 +198,7 @@ reset_all_to_default: Alles auf Standardwerte zurücksetzen
 reset_configurations: Konfigurationen zurücksetzen
 reset_to_default: Zurücksetzen auf den Standardwert
 resources:
+  affected_widgets: Betroffene Widgets
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
@@ -208,11 +210,15 @@ resources:
   has_update: Ein Update ist verfügbar
   high_impact: Hoher Einfluss auf die Leistung
   import_wallpapers: Lokale Hintergrundbilder importieren
+  included_plugins: Enthaltene Plugins
   open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und
     funktioniert möglicherweise nicht richtig.
   see_on_website: Siehe auf der Website
+  update_now: Aktualisieren
+  updates_available: Updates verfügbar
+  updates_available_description: Für die folgenden Ressourcen sind Updates verfügbar.
 review_request:
   not_now: Nicht jetzt
   sure: Sicher!
@@ -271,7 +277,6 @@ update:
   channel: Update-Kanal
   downloading: Am Herunterladen ...
 wall:
-  backgrounds: Hintergrundbilder
   blur: Unschärfe
   cancel: Stornieren
   close: Schließen
@@ -325,6 +330,7 @@ wall:
   use_accent_color: Verwenden Sie eine Akzentfarbe für die Tapete
   wallpaper_collection: Tapetensammlung
   wallpaper_settings: Hintergrundeinstellungen
+  wallpapers_and_collections: Hintergrundbilder und Sammlungen
   withOverlay: Mit Overlay
   workspace_collections: Arbeitsbereichssammlungen
 weg:

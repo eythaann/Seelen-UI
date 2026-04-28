@@ -128,6 +128,7 @@ general:
   language: Sprog
   monday: mandag
   performance_mode:
+    label: Optimeringer
     on_battery: På batteri
     on_energy_saver: På energibesparende
     options:
@@ -191,6 +192,7 @@ reset_all_to_default: Nulstil alt til standardværdier
 reset_configurations: Nulstil konfigurationer
 reset_to_default: Nulstil til standardværdi
 resources:
+  affected_widgets: Berørte widgets
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
   corrupted_wallpaper: >-
     Kunne ikke udtrække miniaturebilledet - beskadiget eller ikke-understøttet
@@ -200,11 +202,15 @@ resources:
   has_update: En opdatering er tilgængelig
   high_impact: Stor indflydelse på ydeevnen
   import_wallpapers: Importer lokale baggrunde
+  included_plugins: Inkluderede plugins
   open_folder: Åbn ressourcemappen
   outdated: >-
     Denne ressource er designet til en ældre version af Seelen UI og fungerer
     muligvis ikke korrekt.
   see_on_website: Se på hjemmesiden
+  update_now: Opdatering
+  updates_available: Opdateringer tilgængelige
+  updates_available_description: Følgende ressourcer har tilgængelige opdateringer.
 review_request:
   not_now: Ikke nu
   sure: Sikker!
@@ -263,7 +269,6 @@ update:
   channel: Opdateringskanal
   downloading: Download ...
 wall:
-  backgrounds: Baggrunde
   blur: Sløring
   cancel: Ophæve
   close: Tæt
@@ -315,6 +320,7 @@ wall:
   use_accent_color: Brug tapet accentfarve
   wallpaper_collection: Tapet samling
   wallpaper_settings: Baggrundsindstillinger
+  wallpapers_and_collections: Baggrunde og samlinger
   withOverlay: Med overlay
   workspace_collections: Arbejdsrumssamlinger
 weg:

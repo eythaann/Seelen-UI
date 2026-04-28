@@ -135,6 +135,7 @@ general:
   language: Wika
   monday: Lunes
   performance_mode:
+    label: Mga pag-optimize
     on_battery: Sa baterya
     on_energy_saver: Sa enerhiya saver
     options:
@@ -199,6 +200,7 @@ reset_all_to_default: I -reset ang lahat sa mga default na halaga
 reset_configurations: I-reset ang mga configuration
 reset_to_default: I -reset sa default na halaga
 resources:
+  affected_widgets: Mga Apektadong Widget
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
@@ -210,11 +212,15 @@ resources:
   has_update: Magagamit ang isang pag -update
   high_impact: Mataas na epekto sa pagganap
   import_wallpapers: Mag -import ng mga lokal na wallpaper
+  included_plugins: Kasamang Mga Plugin
   open_folder: Buksan ang folder ng mapagkukunan
   outdated: >-
     Ang mapagkukunang ito ay dinisenyo para sa isang mas lumang bersyon ng
     Seelen UI at maaaring hindi gumana nang maayos.
   see_on_website: Tingnan sa website
+  update_now: Update
+  updates_available: Magagamit ang mga Update
+  updates_available_description: Ang mga sumusunod na mapagkukunan ay may magagamit na mga update.
 review_request:
   not_now: Hindi ngayon
   sure: Oo naman!
@@ -273,7 +279,6 @@ update:
   channel: I -update ang channel
   downloading: Pag -download ...
 wall:
-  backgrounds: Wallpaper
   blur: Malabo
   cancel: Kanselahin
   close: Isara
@@ -325,6 +330,7 @@ wall:
   use_accent_color: Gumamit ng kulay ng accent ng wallpaper
   wallpaper_collection: Koleksyon ng Wallpaper
   wallpaper_settings: Mga Setting ng Wallpaper
+  wallpapers_and_collections: Mga Wallpaper at Koleksyon
   withOverlay: Na may overlay
   workspace_collections: Mga Koleksyon ng Workspace
 weg:

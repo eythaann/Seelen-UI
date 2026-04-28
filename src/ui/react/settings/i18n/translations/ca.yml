@@ -132,6 +132,7 @@ general:
   language: Llenguatge
   monday: dilluns
   performance_mode:
+    label: Optimitzacions
     on_battery: A la bateria
     on_energy_saver: A l'estalvi d'energia
     options:
@@ -196,6 +197,7 @@ reset_all_to_default: Restableix tot als valors predeterminats
 reset_configurations: Restablir configuracions
 reset_to_default: Restableix al valor predeterminat
 resources:
+  affected_widgets: Ginys afectats
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
@@ -205,11 +207,15 @@ resources:
   has_update: Hi ha disponible una actualització
   high_impact: Alt impacte en el rendiment
   import_wallpapers: Importa fons de pantalla locals
+  included_plugins: Connectors inclosos
   open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
     d'usuari de Seelen i pot no funcionar correctament.
   see_on_website: Veure al lloc web
+  update_now: Actualització
+  updates_available: Actualitzacions disponibles
+  updates_available_description: Els recursos següents tenen actualitzacions disponibles.
 review_request:
   not_now: Ara no
   sure: Segur!
@@ -270,7 +276,6 @@ update:
   channel: Canal d'actualització
   downloading: Descarregant ...
 wall:
-  backgrounds: Fons de pantalla
   blur: Borrosa
   cancel: Cancel·la
   close: Tancar
@@ -322,6 +327,7 @@ wall:
   use_accent_color: Utilitzeu el color d'accent del fons de pantalla
   wallpaper_collection: Col·lecció de fons de pantalla
   wallpaper_settings: Configuració del fons de pantalla
+  wallpapers_and_collections: Fons de pantalla i col·leccions
   withOverlay: Amb superposició
   workspace_collections: Col·leccions d'espais de treball
 weg:

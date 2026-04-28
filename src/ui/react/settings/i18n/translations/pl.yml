@@ -133,6 +133,7 @@ general:
   language: Język
   monday: Poniedziałek
   performance_mode:
+    label: Optymalizacje
     on_battery: Na baterii
     on_energy_saver: Na oszczędności energii
     options:
@@ -196,6 +197,7 @@ reset_all_to_default: Przywróć wartości domyślne
 reset_configurations: Zresetuj konfiguracje
 reset_to_default: Przywróć wartość domyślną
 resources:
+  affected_widgets: Dotknięte widżety
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
   corrupted_wallpaper: >-
     Nie udało się wyodrębnić miniatury — uszkodzony lub nieobsługiwany format
@@ -205,11 +207,15 @@ resources:
   has_update: Aktualizacja jest dostępna
   high_impact: Duży wpływ na wydajność
   import_wallpapers: Import lokalnych tapet
+  included_plugins: Dołączone wtyczki
   open_folder: Otwórz folder zasobów
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
     działać poprawnie.
   see_on_website: Zobacz na stronie internetowej
+  update_now: Aktualizacja
+  updates_available: Dostępne aktualizacje
+  updates_available_description: W poniższych zasobach dostępne są aktualizacje.
 review_request:
   not_now: Nie teraz
   sure: Jasne!
@@ -268,7 +274,6 @@ update:
   channel: Kanał aktualizacji
   downloading: Pobieranie...
 wall:
-  backgrounds: Tapety
   blur: Rozmycie
   cancel: Anulować
   close: Zamknąć
@@ -320,6 +325,7 @@ wall:
   use_accent_color: Użyj koloru akcentującego tapetę
   wallpaper_collection: Kolekcja tapet
   wallpaper_settings: Ustawienia tapety
+  wallpapers_and_collections: Tapety i kolekcje
   withOverlay: Z nakładką
   workspace_collections: Kolekcje obszaru roboczego
 weg:

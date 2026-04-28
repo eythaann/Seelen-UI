@@ -133,6 +133,7 @@ general:
   language: Јазик
   monday: понеделник
   performance_mode:
+    label: Оптимизации
     on_battery: На батеријата
     on_energy_saver: На заштеда на енергија
     options:
@@ -196,6 +197,7 @@ reset_all_to_default: Ресетирајте ги сите на стандард
 reset_configurations: Ресетирајте ги конфигурациите
 reset_to_default: Ресетирање на стандардна вредност
 resources:
+  affected_widgets: Погодени виџети
   app_outdated: Овој ресурс бара понова верзија на Seelen UI да работи правилно.
   corrupted_wallpaper: Не успеа да се извлече сликичка - оштетен или неподдржан видео формат
   delete: Избришете ресурс
@@ -203,11 +205,15 @@ resources:
   has_update: Достапно е ажурирање
   high_impact: Високо влијание врз перформансите
   import_wallpapers: Увезете локални позадини
+  included_plugins: Вклучени приклучоци
   open_folder: Отворена папка со ресурси
   outdated: >-
     Овој ресурс беше дизајниран за постара верзија на Seelen UI и можеби нема да
     работи правилно.
   see_on_website: Видете на веб-страницата
+  update_now: Ажурирање
+  updates_available: Достапни се ажурирања
+  updates_available_description: Следниве ресурси имаат достапни ажурирања.
 review_request:
   not_now: Не сега
   sure: Секако!
@@ -266,7 +272,6 @@ update:
   channel: Ажурирање на каналот
   downloading: Преземање ...
 wall:
-  backgrounds: Позадини
   blur: Замаглување
   cancel: Откажи
   close: Затвори
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Користете боја на акцент на позадина
   wallpaper_collection: Колекција на тапети
   wallpaper_settings: Поставки за позадина
+  wallpapers_and_collections: Позадини и колекции
   withOverlay: Со преклоп
   workspace_collections: Колекции на работниот простор
 weg:

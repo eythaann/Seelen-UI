@@ -132,6 +132,7 @@ general:
   language: Lingwa
   monday: it-Tnejn
   performance_mode:
+    label: Ottimizzazzjonijiet
     on_battery: Fuq batterija
     on_energy_saver: Fuq l-enerġija li tiffranka
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: Irrisettja l-valuri kollha tal-inadempjenza
 reset_configurations: Irrisettja l-konfigurazzjonijiet
 reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
+  affected_widgets: Widgets Affettwati
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
   corrupted_wallpaper: >-
     Naqas milli jiġi estratt thumbnail - format tal-vidjo korrotta jew mhux
@@ -204,11 +206,15 @@ resources:
   has_update: Aġġornament huwa disponibbli
   high_impact: Impatt għoli fuq il-prestazzjoni
   import_wallpapers: Importa wallpapers lokali
+  included_plugins: Plugins Inklużi
   open_folder: Folder tar-Riżorsi Miftuħa
   outdated: >-
     Din ir-riżorsa kienet iddisinjata għal verżjoni aktar antika ta 'Seelen UI u
     tista' ma taħdimx sew.
   see_on_website: Ara fuq il-websajt
+  update_now: Aġġornament
+  updates_available: Aġġornamenti Disponibbli
+  updates_available_description: Ir-riżorsi li ġejjin għandhom aġġornamenti disponibbli.
 review_request:
   not_now: Mhux issa
   sure: Żgur!
@@ -267,7 +273,6 @@ update:
   channel: Aġġorna l-kanal
   downloading: Tniżżil ...
 wall:
-  backgrounds: Wallpapers
   blur: Ċċajpar
   cancel: Ikkanċella
   close: Agħlaq
@@ -319,6 +324,7 @@ wall:
   use_accent_color: Uża l-kulur tal-aċċent tal-wallpaper
   wallpaper_collection: Ġbir tal-wallpaper
   wallpaper_settings: Settings tal-wallpaper
+  wallpapers_and_collections: Wallpapers u Kollezzjonijiet
   withOverlay: Bil-overlay
   workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:

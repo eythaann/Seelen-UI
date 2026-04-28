@@ -129,6 +129,7 @@ general:
   language: Idioma
   monday: Segunda-feira
   performance_mode:
+    label: Otimizações
     on_battery: Na bateria
     on_energy_saver: Em economia de energia
     options:
@@ -192,6 +193,7 @@ reset_all_to_default: Redefinir tudo para os valores padrão
 reset_configurations: Redefinir configurações
 reset_to_default: Redefinir para o valor padrão
 resources:
+  affected_widgets: Widgets afetados
   app_outdated: >-
     Esse recurso requer uma versão mais recente da interface do usuário da
     Seelen para funcionar corretamente.
@@ -201,11 +203,15 @@ resources:
   has_update: Uma atualização está disponível
   high_impact: Alto impacto no desempenho
   import_wallpapers: Importar papéis de parede locais
+  included_plugins: Plug-ins incluídos
   open_folder: Abrir a pasta de recursos
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da interface do
     usuário da Seelen e pode não funcionar corretamente.
   see_on_website: Veja no site
+  update_now: Atualizar
+  updates_available: Atualizações disponíveis
+  updates_available_description: Os recursos a seguir têm atualizações disponíveis.
 review_request:
   not_now: Agora não
   sure: Clara!
@@ -264,7 +270,6 @@ update:
   channel: Atualizar canal
   downloading: Download ...
 wall:
-  backgrounds: Papéis de parede
   blur: Desfoque
   cancel: Cancelar
   close: Fechar
@@ -316,6 +321,7 @@ wall:
   use_accent_color: Use a cor de destaque do papel de parede
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
+  wallpapers_and_collections: Papéis de parede e coleções
   withOverlay: Com sobreposição
   workspace_collections: Coleções de espaço de trabalho
 weg:

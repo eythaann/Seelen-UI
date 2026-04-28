@@ -131,6 +131,7 @@ general:
   language: Kieli
   monday: maanantai
   performance_mode:
+    label: Optimoinnit
     on_battery: Akun päällä
     on_energy_saver: Energiansäästäjällä
     options:
@@ -194,6 +195,7 @@ reset_all_to_default: Nollaa kaikki oletusarvot
 reset_configurations: Palauta asetukset
 reset_to_default: Nollaa oletusarvoon
 resources:
+  affected_widgets: Asianomaiset widgetit
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
   corrupted_wallpaper: >-
     Pikkukuvan purkaminen epäonnistui – videomuoto on vioittunut tai sitä ei
@@ -203,11 +205,15 @@ resources:
   has_update: Päivitys on käytettävissä
   high_impact: Suuri vaikutus suorituskykyyn
   import_wallpapers: Tuo paikallisia taustakuvia
+  included_plugins: Mukana lisäosat
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
     välttämättä toimi oikein.
   see_on_website: Katso nettisivuilta
+  update_now: Päivittää
+  updates_available: Päivityksiä saatavilla
+  updates_available_description: Seuraaviin resursseihin on saatavilla päivityksiä.
 review_request:
   not_now: Ei nyt
   sure: Varma!
@@ -266,7 +272,6 @@ update:
   channel: Päivityskanava
   downloading: Lataaminen ...
 wall:
-  backgrounds: Taustakuvat
   blur: Sumeus
   cancel: Peruuttaa
   close: Lähellä
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Käytä taustakuvan korostusväriä
   wallpaper_collection: Taustakuva kokoelma
   wallpaper_settings: Taustakuvan asetukset
+  wallpapers_and_collections: Taustakuvat & Kokoelmat
   withOverlay: Päällysteen kanssa
   workspace_collections: Työtilakokoelmat
 weg:

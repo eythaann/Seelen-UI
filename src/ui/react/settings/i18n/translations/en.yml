@@ -190,23 +190,23 @@ reset_all_to_default: Reset all to default values
 reset_configurations: Reset configurations
 reset_to_default: Reset to default value
 resources:
+  affected_widgets: Affected Widgets
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
   corrupted_wallpaper: Failed to extract thumbnail - corrupted or unsupported video format
   delete: Delete Resource
   discover: Discover more resources
   has_update: An update is available
-  update_now: Update
-  updates_available: Updates Available
-  updates_available_description: The following resources have updates available.
   high_impact: High impact on performance
   import_wallpapers: Import local wallpapers
+  included_plugins: Included Plugins
   open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not
     work properly.
-  affected_widgets: Affected Widgets
-  included_plugins: Included Plugins
   see_on_website: See on website
+  update_now: Update
+  updates_available: Updates Available
+  updates_available_description: The following resources have updates available.
 review_request:
   not_now: Not now
   sure: Sure!
@@ -265,7 +265,6 @@ update:
   channel: Update Channel
   downloading: Downloading...
 wall:
-  wallpapers_and_collections: Wallpapers & Collections
   blur: Blur
   cancel: Cancel
   close: Close
@@ -317,6 +316,7 @@ wall:
   use_accent_color: Use wallpaper accent color
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
+  wallpapers_and_collections: Wallpapers & Collections
   withOverlay: With Overlay
   workspace_collections: Workspace Collections
 weg:

@@ -131,6 +131,7 @@ general:
   language: Limba
   monday: luni
   performance_mode:
+    label: Optimizări
     on_battery: Pe baterie
     on_energy_saver: Pe economia de energie
     options:
@@ -194,6 +195,7 @@ reset_all_to_default: Resetați toate la valorile implicite
 reset_configurations: Resetați configurațiile
 reset_to_default: Resetare la valoarea implicită
 resources:
+  affected_widgets: Widgeturi afectate
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
@@ -203,11 +205,15 @@ resources:
   has_update: O actualizare este disponibilă
   high_impact: Impact mare asupra performanței
   import_wallpapers: Importați imagini de fundal locale
+  included_plugins: Pluginuri incluse
   open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și
     este posibil să nu funcționeze corect.
   see_on_website: Vezi pe site
+  update_now: Actualizare
+  updates_available: Actualizări disponibile
+  updates_available_description: Următoarele resurse au actualizări disponibile.
 review_request:
   not_now: Nu acum
   sure: Sigur!
@@ -266,7 +272,6 @@ update:
   channel: Actualizare canal
   downloading: Descărcare ...
 wall:
-  backgrounds: Imagini de fundal
   blur: Ceață
   cancel: Anula
   close: Aproape
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Utilizați culoarea de accent pentru tapet
   wallpaper_collection: Colecția de imagini de fundal
   wallpaper_settings: Setări de fundal
+  wallpapers_and_collections: Imagini de fundal și colecții
   withOverlay: Cu suprapunere
   workspace_collections: Colecții de spațiu de lucru
 weg:

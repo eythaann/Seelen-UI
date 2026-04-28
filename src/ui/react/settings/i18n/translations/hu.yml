@@ -132,6 +132,7 @@ general:
   language: Nyelv
   monday: hétfő
   performance_mode:
+    label: Optimalizálások
     on_battery: Akkumulátorra
     on_energy_saver: Az energiatakarékosról
     options:
@@ -196,6 +197,7 @@ reset_all_to_default: Mindent visszaállít az alapértelmezett értékekre
 reset_configurations: Állítsa vissza a konfigurációkat
 reset_to_default: Alapértelmezett értékre visszaállítása
 resources:
+  affected_widgets: Érintett widgetek
   app_outdated: Ez az erőforrás a Seelen UI újabb verzióját igényli a megfelelő működéshez.
   corrupted_wallpaper: Nem sikerült a miniatűr kibontása – sérült vagy nem támogatott videóformátum
   delete: Az erőforrás törlése
@@ -203,11 +205,15 @@ resources:
   has_update: Frissítés érhető el
   high_impact: Nagy hatás a teljesítményre
   import_wallpapers: Helyi háttérképek importálása
+  included_plugins: Tartalmazott bővítmények
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
     hogy nem működik megfelelően.
   see_on_website: Lásd a weboldalon
+  update_now: Frissítés
+  updates_available: Frissítések érhetők el
+  updates_available_description: A következő forrásokhoz érhetők el frissítések.
 review_request:
   not_now: Most nem
   sure: Persze!
@@ -266,7 +272,6 @@ update:
   channel: Frissítési csatorna
   downloading: Letöltés ...
 wall:
-  backgrounds: Háttérképek
   blur: Elmosódás
   cancel: Mégsem
   close: Közeli
@@ -320,6 +325,7 @@ wall:
   use_accent_color: Használjon tapéta kiemelő színt
   wallpaper_collection: Háttérkép gyűjtemény
   wallpaper_settings: Háttérkép beállításai
+  wallpapers_and_collections: Háttérképek és gyűjtemények
   withOverlay: Overlay-vel
   workspace_collections: Munkaterület-gyűjtemények
 weg:

@@ -117,6 +117,7 @@ general:
   language: 언어
   monday: 월요일
   performance_mode:
+    label: 최적화
     on_battery: 배터리에
     on_energy_saver: 에너지 세이버에서
     options:
@@ -178,6 +179,7 @@ reset_all_to_default: 모두 기본값으로 초기화
 reset_configurations: 구성 재설정
 reset_to_default: 기본값으로 재설정
 resources:
+  affected_widgets: 영향을 받는 위젯
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
   corrupted_wallpaper: 썸네일 추출 실패 - 손상되었거나 지원되지 않는 비디오 형식
   delete: 리소스 삭제
@@ -185,9 +187,13 @@ resources:
   has_update: 업데이트를 사용할 수 있습니다
   high_impact: 성능에 큰 영향
   import_wallpapers: 로컬 배경화면 가져오기
+  included_plugins: 포함된 플러그인
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
   see_on_website: 웹사이트에서 확인하세요
+  update_now: 업데이트
+  updates_available: 업데이트 가능
+  updates_available_description: 다음 리소스에는 사용 가능한 업데이트가 있습니다.
 review_request:
   not_now: 지금은 아님
   sure: 확신하는!
@@ -244,7 +250,6 @@ update:
   channel: 업데이트 채널
   downloading: 다운로드 중...
 wall:
-  backgrounds: 배경화면
   blur: 블러
   cancel: 취소
   close: 닫다
@@ -296,6 +301,7 @@ wall:
   use_accent_color: 벽지 강조 색상 사용
   wallpaper_collection: 배경화면 모음
   wallpaper_settings: 배경화면 설정
+  wallpapers_and_collections: 배경화면 및 컬렉션
   withOverlay: 오버레이 사용
   workspace_collections: 작업공간 컬렉션
 weg:

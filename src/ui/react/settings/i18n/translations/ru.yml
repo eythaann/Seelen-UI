@@ -132,6 +132,7 @@ general:
   language: Язык
   monday: Понедельник
   performance_mode:
+    label: Оптимизации
     on_battery: На батареи
     on_energy_saver: На энергетическую экономию
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: Сброс всех значений по умолчани
 reset_configurations: Сброс настроек
 reset_to_default: Сброс на значение по умолчанию
 resources:
+  affected_widgets: Затронутые виджеты
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
   corrupted_wallpaper: 'Не удалось извлечь миниатюру: формат видео поврежден или не поддерживается.'
   delete: Удалить ресурс
@@ -202,11 +204,15 @@ resources:
   has_update: Доступно обновление
   high_impact: Высокое влияние на производительность
   import_wallpapers: Импорт местных обоев
+  included_plugins: Включенные плагины
   open_folder: Откройте папку с ресурсами
   outdated: >-
     Этот ресурс был разработан для старой версии Seelen UI и может работать
     некорректно.
   see_on_website: Смотрите на сайте
+  update_now: Обновлять
+  updates_available: Доступны обновления
+  updates_available_description: Следующие ресурсы имеют доступные обновления.
 review_request:
   not_now: Не сейчас
   sure: Конечно!
@@ -265,7 +271,6 @@ update:
   channel: Обновить канал
   downloading: Загрузка ...
 wall:
-  backgrounds: Обои
   blur: Пятно
   cancel: Отмена
   close: Закрывать
@@ -317,6 +322,7 @@ wall:
   use_accent_color: Используйте акцентный цвет обоев
   wallpaper_collection: Коллекция обоев
   wallpaper_settings: Настройки обоев
+  wallpapers_and_collections: Обои и коллекции
   withOverlay: С накладкой
   workspace_collections: Коллекции рабочих областей
 weg:

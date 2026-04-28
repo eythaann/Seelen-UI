@@ -130,6 +130,7 @@ general:
   language: Jezik
   monday: ponedjeljak
   performance_mode:
+    label: Optimizacije
     on_battery: Na bateriji
     on_energy_saver: Na uštedu energije
     options:
@@ -193,6 +194,7 @@ reset_all_to_default: Resetirajte sve na zadane vrijednosti
 reset_configurations: Ponovno postavljanje konfiguracija
 reset_to_default: Poništite na zadanu vrijednost
 resources:
+  affected_widgets: Zahvaćeni widgeti
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
@@ -204,11 +206,15 @@ resources:
   has_update: Dostupno je ažuriranje
   high_impact: Veliki utjecaj na performanse
   import_wallpapers: Uvoz lokalnih pozadina
+  included_plugins: Uključeni dodaci
   open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i
     možda neće raditi ispravno.
   see_on_website: Vidi na web stranici
+  update_now: Ažurirati
+  updates_available: Ažuriranja dostupna
+  updates_available_description: Sljedeći resursi imaju dostupna ažuriranja.
 review_request:
   not_now: Ne sad
   sure: Naravno!
@@ -267,7 +273,6 @@ update:
   channel: Kanal za ažuriranje
   downloading: Preuzimanje ...
 wall:
-  backgrounds: Pozadine
   blur: Zamutiti
   cancel: Otkazati
   close: Zatvoriti
@@ -319,6 +324,7 @@ wall:
   use_accent_color: Koristite boju tapeta
   wallpaper_collection: Zbirka tapeta
   wallpaper_settings: Postavke pozadine
+  wallpapers_and_collections: Pozadine i kolekcije
   withOverlay: S prekrivanjem
   workspace_collections: Zbirke radnog prostora
 weg:

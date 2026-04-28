@@ -130,6 +130,7 @@ general:
   language: Bahasa
   monday: Senin
   performance_mode:
+    label: Pengoptimalan
     on_battery: Pada baterai
     on_energy_saver: Tentang Penghemat Energi
     options:
@@ -194,6 +195,7 @@ reset_all_to_default: Atur ulang semua ke nilai default
 reset_configurations: Setel ulang konfigurasi
 reset_to_default: Atur ulang ke nilai default
 resources:
+  affected_widgets: Widget yang Terkena Dampak
   app_outdated: >-
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
     berfungsi dengan baik.
@@ -203,11 +205,15 @@ resources:
   has_update: Pembaruan tersedia
   high_impact: Dampak tinggi pada kinerja
   import_wallpapers: Impor wallpaper lokal
+  included_plugins: Termasuk Plugin
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
     berfungsi dengan baik.
   see_on_website: Lihat di situs web
+  update_now: Memperbarui
+  updates_available: Pembaruan Tersedia
+  updates_available_description: Sumber daya berikut memiliki pembaruan yang tersedia.
 review_request:
   not_now: Tidak sekarang
   sure: Tentu!
@@ -266,7 +272,6 @@ update:
   channel: Perbarui saluran
   downloading: Mengunduh ...
 wall:
-  backgrounds: Wallpaper
   blur: Blur
   cancel: Membatalkan
   close: Menutup
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Gunakan warna aksen wallpaper
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Pengaturan Wallpaper
+  wallpapers_and_collections: Wallpaper & Koleksi
   withOverlay: Dengan Overlay
   workspace_collections: Koleksi Ruang Kerja
 weg:

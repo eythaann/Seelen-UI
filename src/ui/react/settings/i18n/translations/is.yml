@@ -127,6 +127,7 @@ general:
   language: Tungumál
   monday: mánudag
   performance_mode:
+    label: Hagræðingar
     on_battery: Á rafhlöðu
     on_energy_saver: Á orkusparnað
     options:
@@ -190,6 +191,7 @@ reset_all_to_default: Endurstilla allt í sjálfgefin gildi
 reset_configurations: Endurstilla stillingar
 reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
+  affected_widgets: Græjur sem hafa áhrif
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
   corrupted_wallpaper: Mistókst að draga út smámynd - skemmd eða óstudd myndbandssnið
   delete: Eyða auðlindinni
@@ -197,11 +199,15 @@ resources:
   has_update: Uppfærsla er í boði
   high_impact: Mikil áhrif á frammistöðu
   import_wallpapers: Flytja inn staðbundið veggfóður
+  included_plugins: Innifalið viðbætur
   open_folder: Opin auðlindamappa
   outdated: >-
     Þessi úrræði var hönnuð fyrir eldri útgáfu af Seelen HÍ og gæti ekki virkað
     rétt.
   see_on_website: Sjá á heimasíðu
+  update_now: Uppfærsla
+  updates_available: Uppfærslur í boði
+  updates_available_description: Eftirfarandi úrræði eru með uppfærslur í boði.
 review_request:
   not_now: Ekki núna
   sure: Jú!
@@ -260,7 +266,6 @@ update:
   channel: Uppfæra rás
   downloading: Niðurhal ...
 wall:
-  backgrounds: Veggfóður
   blur: Þoka
   cancel: Hætta við
   close: Loka
@@ -312,6 +317,7 @@ wall:
   use_accent_color: Notaðu veggfóður hreim lit
   wallpaper_collection: Veggfóður safn
   wallpaper_settings: Veggfóðurstillingar
+  wallpapers_and_collections: Veggfóður og söfn
   withOverlay: Með yfirlagi
   workspace_collections: Vinnusöfn
 weg:

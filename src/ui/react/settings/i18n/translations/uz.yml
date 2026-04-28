@@ -131,6 +131,7 @@ general:
   language: Til
   monday: dushanba
   performance_mode:
+    label: Optimallashtirish
     on_battery: Batareyada
     on_energy_saver: Energiya tejash bo'yicha
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: Barcha standart qiymatlarni qayta o'rnating
 reset_configurations: Konfiguratsiyalarni tiklash
 reset_to_default: Standart qiymatni qayta o'rnating
 resources:
+  affected_widgets: Ta'sir qilingan vidjetlar
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
   corrupted_wallpaper: >-
     Eskizni chiqarib boʻlmadi - buzilgan yoki qoʻllab-quvvatlanmaydigan video
@@ -204,11 +206,15 @@ resources:
   has_update: Yangilanish mavjud
   high_impact: Ishlashning yuqori ta'siri
   import_wallpapers: Mahalliy fon rasmlarini import qilish
+  included_plugins: Kiritilgan plaginlar
   open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
     ishlamasligi mumkin.
   see_on_website: Veb-saytda ko'ring
+  update_now: Yangilash
+  updates_available: Yangilanishlar mavjud
+  updates_available_description: Quyidagi manbalarda yangilanishlar mavjud.
 review_request:
   not_now: Hozir emas
   sure: Albatta!
@@ -267,7 +273,6 @@ update:
   channel: Kanalni yangilash
   downloading: Yuklab olish ...
 wall:
-  backgrounds: Fon rasmlari
   blur: Puflamoq
   cancel: Bekor qilish
   close: Yopish
@@ -321,6 +326,7 @@ wall:
   use_accent_color: Fon rasmi aksent rangidan foydalaning
   wallpaper_collection: Fon rasmi to'plami
   wallpaper_settings: Fon rasmi sozlamalari
+  wallpapers_and_collections: Fon rasmi va kollektsiyalar
   withOverlay: Qopqoq bilan
   workspace_collections: Ish maydoni to'plamlari
 weg:

@@ -129,6 +129,7 @@ general:
   language: Taal
   monday: Maandag
   performance_mode:
+    label: Optimalisaties
     on_battery: Op de batterij
     on_energy_saver: Op energiebespaarder
     options:
@@ -192,6 +193,7 @@ reset_all_to_default: Alles resetten naar standaardwaarden
 reset_configurations: Configuraties resetten
 reset_to_default: Terugzetten naar standaardwaarde
 resources:
+  affected_widgets: Betrokken widgets
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
   corrupted_wallpaper: Kan miniatuur niet extraheren - beschadigd of niet-ondersteund videoformaat
   delete: Verwijder resource
@@ -199,11 +201,15 @@ resources:
   has_update: Er is een update beschikbaar
   high_impact: Grote impact op de prestaties
   import_wallpapers: Lokale achtergronden importeren
+  included_plugins: Inclusief plug-ins
   open_folder: Map met bronnen openen
   outdated: >-
     Deze bron is ontworpen voor een oudere versie van Seelen UI en werkt
     mogelijk niet goed.
   see_on_website: Zie op website
+  update_now: Update
+  updates_available: Updates beschikbaar
+  updates_available_description: Voor de volgende bronnen zijn updates beschikbaar.
 review_request:
   not_now: Niet nu
   sure: Zeker!
@@ -262,7 +268,6 @@ update:
   channel: Updatekanaal
   downloading: Downloaden ...
 wall:
-  backgrounds: Achtergronden
   blur: Vervagen
   cancel: Annuleren
   close: Dichtbij
@@ -318,6 +323,7 @@ wall:
   use_accent_color: Gebruik de accentkleur van het behang
   wallpaper_collection: Behangcollectie
   wallpaper_settings: Achtergrondinstellingen
+  wallpapers_and_collections: Achtergronden en collecties
   withOverlay: Met overlay
   workspace_collections: Werkruimtecollecties
 weg:

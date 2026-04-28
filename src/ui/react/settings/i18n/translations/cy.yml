@@ -128,6 +128,7 @@ general:
   language: Iaith
   monday: Dydd Llun
   performance_mode:
+    label: Optimeiddiadau
     on_battery: Ar fatri
     on_energy_saver: Ar arbed ynni
     options:
@@ -191,6 +192,7 @@ reset_all_to_default: Ailosod popeth i werthoedd diofyn
 reset_configurations: Ailosod ffurfweddau
 reset_to_default: Ailosod i werth diofyn
 resources:
+  affected_widgets: Widgets yr Effeithir arnynt
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
@@ -200,11 +202,15 @@ resources:
   has_update: Mae diweddariad ar gael
   high_impact: Effaith uchel ar berfformiad
   import_wallpapers: Mewnforio papurau wal lleol
+  included_plugins: Ategion yn gynwysedig
   open_folder: Ffolder Adnoddau Agored
   outdated: >-
     Dyluniwyd yr adnodd hwn ar gyfer fersiwn hŷn o Seelen UI ac efallai na
     fyddai'n gweithio'n iawn.
   see_on_website: Gweler ar y wefan
+  update_now: Diweddariad
+  updates_available: Diweddariadau ar Gael
+  updates_available_description: Mae diweddariadau ar gael yn yr adnoddau canlynol.
 review_request:
   not_now: Ddim nawr
   sure: Cadarn!
@@ -263,7 +269,6 @@ update:
   channel: Diweddaru Sianel
   downloading: Lawrlwytho ...
 wall:
-  backgrounds: Papurau Wal
   blur: Aneglur
   cancel: Canslo
   close: Cau
@@ -315,6 +320,7 @@ wall:
   use_accent_color: Defnyddiwch liw acen papur wal
   wallpaper_collection: Casgliad Papur Wal
   wallpaper_settings: Gosodiadau Papur Wal
+  wallpapers_and_collections: Papur Wal a Chasgliadau
   withOverlay: Gyda throshaen
   workspace_collections: Casgliadau Gweithle
 weg:

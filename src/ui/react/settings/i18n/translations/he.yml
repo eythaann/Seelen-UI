@@ -122,6 +122,7 @@ general:
   language: שפה
   monday: יוֹם שֵׁנִי
   performance_mode:
+    label: אופטימיזציות
     on_battery: על סוללה
     on_energy_saver: על חוסך אנרגיה
     options:
@@ -184,6 +185,7 @@ reset_all_to_default: אפס את כל ערכי ברירת המחדל
 reset_configurations: אפס תצורות
 reset_to_default: אפס לערך ברירת המחדל
 resources:
+  affected_widgets: ווידג'טים מושפעים
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
   corrupted_wallpaper: חילוץ התמונה הממוזערת נכשל - פורמט וידאו פגום או לא נתמך
   delete: מחק משאב
@@ -191,9 +193,13 @@ resources:
   has_update: ניתן לקבל עדכון
   high_impact: השפעה רבה על הביצועים
   import_wallpapers: ייבא טפטים מקומיים
+  included_plugins: תוספים כלולים
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
   see_on_website: ראה באתר
+  update_now: לְעַדְכֵּן
+  updates_available: עדכונים זמינים
+  updates_available_description: למשאבים הבאים יש עדכונים זמינים.
 review_request:
   not_now: לא עכשיו
   sure: בַּטוּחַ!
@@ -250,7 +256,6 @@ update:
   channel: ערוץ עדכונים
   downloading: מוריד ...
 wall:
-  backgrounds: טפטים
   blur: לְטַשׁטֵשׁ
   cancel: לְבַטֵל
   close: לִסְגוֹר
@@ -302,6 +307,7 @@ wall:
   use_accent_color: השתמש בצבע מבטא טפט
   wallpaper_collection: אוסף טפטים
   wallpaper_settings: הגדרות טפט
+  wallpapers_and_collections: טפטים ואוספים
   withOverlay: עם שכבת -על
   workspace_collections: אוספי סביבת עבודה
 weg:

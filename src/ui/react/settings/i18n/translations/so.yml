@@ -131,6 +131,7 @@ general:
   language: Af
   monday: Isniin
   performance_mode:
+    label: Hagaajinta
     on_battery: Batteriga
     on_energy_saver: Ku Saabsan Tamarta Saver
     options:
@@ -196,6 +197,7 @@ reset_all_to_default: Dib u dejiso dhammaan qiimayaasha caadiga ah
 reset_configurations: Dib u dajin qaabaynta
 reset_to_default: Dib u dejiso qiimaha caadiga ah
 resources:
+  affected_widgets: Widgets saameeyay
   app_outdated: >-
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
     u shaqeynaya.
@@ -207,11 +209,15 @@ resources:
   has_update: Cusboonaysiin ayaa la heli karaa
   high_impact: Saamaynta sare ee waxqabadka
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
+  included_plugins: Ku Jira Plugins
   open_folder: Fur faylka furan
   outdated: >-
     Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
     yaabo inuu si sax ah u shaqeyn.
   see_on_website: Ka eeg bogga internetka
+  update_now: Cusbooneysii
+  updates_available: Cusbooneysii waa la heli karaa
+  updates_available_description: Ilaha soo socdaa waxa ay hayaan warar cusub
 review_request:
   not_now: Hadda maaha
   sure: Hubaal!
@@ -270,7 +276,6 @@ update:
   channel: Cusboonaysiinta Kanaalka
   downloading: Soo dejinta ...
 wall:
-  backgrounds: Darf-biyoodka
   blur: Jilicsan
   cancel: Jooji
   close: Xir
@@ -322,6 +327,7 @@ wall:
   use_accent_color: Isticmaal midabka lahjadda gidaarka
   wallpaper_collection: Ururinta Warqadaha
   wallpaper_settings: Dejinta Warqadaha
+  wallpapers_and_collections: Warqadaha & Ururinta
   withOverlay: Iyadoo lagu daboolay
   workspace_collections: Ururinta Goobta Shaqada
 weg:

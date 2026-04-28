@@ -116,6 +116,7 @@ general:
   language: 言語
   monday: 月曜日
   performance_mode:
+    label: 最適化
     on_battery: バッテリー駆動時
     on_energy_saver: 省電力モード時
     options:
@@ -177,6 +178,7 @@ reset_all_to_default: すべての設定をデフォルトに戻す
 reset_configurations: 設定のリセット
 reset_to_default: デフォルトに戻す
 resources:
+  affected_widgets: 影響を受けるウィジェット
   app_outdated: このリソースが正しく動作するためには、新しいバージョンのSeelen UIが必要です。
   corrupted_wallpaper: サムネイルの抽出に失敗しました - 破損したビデオ形式またはサポートされていないビデオ形式です
   delete: リソースを削除します
@@ -184,9 +186,13 @@ resources:
   has_update: アップデートが利用可能です
   high_impact: パフォーマンスへの大きな影響
   import_wallpapers: ローカル壁紙のインポート
+  included_plugins: 付属のプラグイン
   open_folder: リソースフォルダを開く
   outdated: このリソースは古いバージョンのSeelen UI用に設計されており、正しく動作しない可能性があります。
   see_on_website: ウェブサイトで見る
+  update_now: アップデート
+  updates_available: 利用可能なアップデート
+  updates_available_description: 次のリソースには利用可能な更新があります。
 review_request:
   not_now: また今度
   sure: もちろん！
@@ -243,7 +249,6 @@ update:
   channel: 更新チャンネル
   downloading: ダウンロード中...
 wall:
-  backgrounds: 壁紙
   blur: ブラー
   cancel: キャンセル
   close: 閉じる
@@ -295,6 +300,7 @@ wall:
   use_accent_color: 壁紙のアクセントカラーを使用する
   wallpaper_collection: 壁紙コレクション
   wallpaper_settings: 壁紙の設定
+  wallpapers_and_collections: 壁紙とコレクション
   withOverlay: オーバーレイ付き
   workspace_collections: ワークスペースコレクション
 weg:

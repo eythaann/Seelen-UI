@@ -133,6 +133,7 @@ general:
   language: Idioma
   monday: Lunes
   performance_mode:
+    label: Optimizaciones
     on_battery: Con batería
     on_energy_saver: Save de energía
     options:
@@ -197,6 +198,7 @@ reset_all_to_default: Restablecer todos los valores por defecto
 reset_configurations: Restablecer configuraciones
 reset_to_default: Restablecer valor por defecto
 resources:
+  affected_widgets: Widgets afectados
   app_outdated: >-
     Este recurso requiere una versión más reciente de Seelen UI para funcionar
     correctamente.
@@ -206,11 +208,15 @@ resources:
   has_update: Una actualización está disponible
   high_impact: Alto impacto en el rendimiento
   import_wallpapers: Importar fondos de pantalla locales
+  included_plugins: Complementos incluidos
   open_folder: Abrir carpeta de recursos
   outdated: >-
     Este recurso fue diseñado para una versión anterior de Seelen UI y podría no
     funcionar correctamente.
   see_on_website: Ver en el sitio web
+  update_now: Actualizar
+  updates_available: Actualizaciones disponibles
+  updates_available_description: Los siguientes recursos tienen actualizaciones disponibles.
 review_request:
   not_now: Ahora no
   sure: ¡Seguro!
@@ -269,7 +275,6 @@ update:
   channel: Canal de actualización
   downloading: Descargando...
 wall:
-  backgrounds: Fondos de pantalla
   blur: Desenfoque
   cancel: Cancelar
   close: Cerca
@@ -321,6 +326,7 @@ wall:
   use_accent_color: Utilice un color de acento en el papel tapiz
   wallpaper_collection: Colección de papel tapiz
   wallpaper_settings: Configuración del fondo de pantalla
+  wallpapers_and_collections: Fondos de pantalla y colecciones
   withOverlay: Con superposición
   workspace_collections: Colecciones de espacios de trabajo
 weg:

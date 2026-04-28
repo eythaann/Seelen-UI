@@ -131,6 +131,7 @@ general:
   language: மொழி
   monday: திங்கட்கிழமை
   performance_mode:
+    label: மேம்படுத்தல்கள்
     on_battery: பேட்டரியில்
     on_energy_saver: ஆற்றல் சேமிப்பாளரில்
     options:
@@ -194,6 +195,7 @@ reset_all_to_default: இயல்புநிலை மதிப்புகள
 reset_configurations: அமைப்புகளை மீட்டமைக்கவும்
 reset_to_default: இயல்புநிலை மதிப்புக்கு மீட்டமைக்கவும்
 resources:
+  affected_widgets: பாதிக்கப்பட்ட விட்ஜெட்டுகள்
   app_outdated: இந்த வளத்திற்கு சரியாக வேலை செய்ய சீலன் UI இன் புதிய பதிப்பு தேவைப்படுகிறது.
   corrupted_wallpaper: >-
     சிறுபடத்தைப் பிரித்தெடுப்பதில் தோல்வி - சிதைந்த அல்லது ஆதரிக்கப்படாத வீடியோ
@@ -203,11 +205,15 @@ resources:
   has_update: புதுப்பிப்பு கிடைக்கிறது
   high_impact: செயல்திறனில் அதிக தாக்கம்
   import_wallpapers: உள்ளூர் வால்பேப்பர்களை இறக்குமதி செய்யுங்கள்
+  included_plugins: செருகுநிரல்கள் சேர்க்கப்பட்டுள்ளன
   open_folder: திறந்த வள கோப்புறை
   outdated: >-
     இந்த ஆதாரம் சீலன் UI இன் பழைய பதிப்பிற்காக வடிவமைக்கப்பட்டுள்ளது, மேலும்
     சரியாக வேலை செய்யாது.
   see_on_website: இணையதளத்தில் பார்க்கவும்
+  update_now: புதுப்பிக்கவும்
+  updates_available: புதுப்பிப்புகள் உள்ளன
+  updates_available_description: பின்வரும் ஆதாரங்களில் புதுப்பிப்புகள் உள்ளன.
 review_request:
   not_now: இப்போது இல்லை
   sure: நிச்சயமாக!
@@ -266,7 +272,6 @@ update:
   channel: சேனலைப் புதுப்பிக்கவும்
   downloading: பதிவிறக்கம் ...
 wall:
-  backgrounds: வால்பேப்பர்கள்
   blur: மங்கலானது
   cancel: ரத்து செய்
   close: மூடு
@@ -320,6 +325,7 @@ wall:
   use_accent_color: வால்பேப்பர் உச்சரிப்பு வண்ணத்தைப் பயன்படுத்தவும்
   wallpaper_collection: வால்பேப்பர் சேகரிப்பு
   wallpaper_settings: வால்பேப்பர் அமைப்புகள்
+  wallpapers_and_collections: வால்பேப்பர்கள் & தொகுப்புகள்
   withOverlay: மேலடுக்கு
   workspace_collections: பணியிட தொகுப்புகள்
 weg:

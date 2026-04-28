@@ -132,6 +132,7 @@ general:
   language: Ulimi
   monday: UMsombuluko
   performance_mode:
+    label: Ukuthuthukisa
     on_battery: Ebhethri
     on_energy_saver: Ku-Sergy Saver
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: Setha kabusha konke kumanani azenzakalelayo
 reset_configurations: Setha kabusha ukucupha
 reset_to_default: Setha kabusha ngenani elizenzakalelayo
 resources:
+  affected_widgets: Amawijethi Athintekile
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
   corrupted_wallpaper: >-
     Yehlulekile ukukhipha isithonjana - ifomethi yevidiyo eyonakele noma
@@ -204,11 +206,15 @@ resources:
   has_update: Isibuyekezo siyatholakala
   high_impact: Umthelela ophezulu ekusebenzeni
   import_wallpapers: Ngenisa amaphephadonga endawo
+  included_plugins: Kufakwe ama-plugin
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
     kahle.
   see_on_website: Bona kuwebhusayithi
+  update_now: Buyekeza
+  updates_available: Izibuyekezo Ziyatholakala
+  updates_available_description: Izinsiza ezilandelayo zinezibuyekezo ezitholakalayo.
 review_request:
   not_now: Hhayi manje
   sure: Impela!
@@ -267,7 +273,6 @@ update:
   channel: Isiteshi sokuvuselela
   downloading: Ukulanda ...
 wall:
-  backgrounds: Ama-Wallpaper
   blur: Impumpula
   cancel: Khansela
   close: Vala
@@ -323,6 +328,7 @@ wall:
   use_accent_color: Sebenzisa umbala wokugcizelela isithombe sangemuva
   wallpaper_collection: Ukuqoqwa kwamaphephadonga
   wallpaper_settings: Izilungiselelo zangemuva
+  wallpapers_and_collections: Izithombe zangemuva namaqoqo
   withOverlay: Ngokumbondelana
   workspace_collections: Amaqoqo wendawo yokusebenza
 weg:

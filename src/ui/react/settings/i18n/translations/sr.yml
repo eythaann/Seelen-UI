@@ -130,6 +130,7 @@ general:
   language: Језик
   monday: понедељак
   performance_mode:
+    label: Оптимизације
     on_battery: На батерији
     on_energy_saver: На уштеду енергије
     options:
@@ -193,6 +194,7 @@ reset_all_to_default: Ресетујте све за подразумеване 
 reset_configurations: Ресетујте конфигурације
 reset_to_default: Ресетујте на подразумевану вредност
 resources:
+  affected_widgets: Погођени виџети
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
   corrupted_wallpaper: Екстраховање сличице није успело – оштећен или неподржан видео формат
   delete: Избриши ресурс
@@ -200,11 +202,15 @@ resources:
   has_update: Доступно је ажурирање
   high_impact: Велики утицај на перформансе
   import_wallpapers: Увоз локалне позадине
+  included_plugins: Укључени додаци
   open_folder: Отворите мапу ресурса
   outdated: >-
     Овај ресурс је дизајниран за старију верзију СЕЕЛЕН УИ и можда неће радити
     исправно.
   see_on_website: Погледајте на веб страници
+  update_now: Ажурирај
+  updates_available: Доступна ажурирања
+  updates_available_description: Следећи ресурси имају доступна ажурирања.
 review_request:
   not_now: Не сада
   sure: Наравно!
@@ -263,7 +269,6 @@ update:
   channel: Ажурирај канал
   downloading: Преузимање ...
 wall:
-  backgrounds: Позадине
   blur: Замутити
   cancel: Откажи
   close: Затвори
@@ -317,6 +322,7 @@ wall:
   use_accent_color: Користите акцентну боју позадине
   wallpaper_collection: Колекција тапета
   wallpaper_settings: Подешавања позадине
+  wallpapers_and_collections: Позадине и колекције
   withOverlay: Са прекривањем
   workspace_collections: Збирке радног простора
 weg:

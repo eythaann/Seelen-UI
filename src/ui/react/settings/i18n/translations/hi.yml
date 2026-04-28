@@ -132,6 +132,7 @@ general:
   language: भाषा
   monday: सोमवार
   performance_mode:
+    label: अनुकूलन
     on_battery: बैटरी पर
     on_energy_saver: ऊर्जा सेवर पर
     options:
@@ -195,6 +196,7 @@ reset_all_to_default: सभी को डिफ़ॉल्ट मानों 
 reset_configurations: कॉन्फ़िगरेशन रीसेट करें
 reset_to_default: डिफ़ॉल्ट मान पर रीसेट करें
 resources:
+  affected_widgets: प्रभावित विजेट
   app_outdated: >-
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
@@ -204,11 +206,15 @@ resources:
   has_update: एक अपडेट उपलब्ध है
   high_impact: प्रदर्शन पर उच्च प्रभाव
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
+  included_plugins: प्लगइन्स शामिल हैं
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
     यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से
     काम नहीं कर सकता है।
   see_on_website: वेबसाइट पर देखें
+  update_now: अद्यतन
+  updates_available: अद्यतन उपलब्ध
+  updates_available_description: निम्नलिखित संसाधनों में अपडेट उपलब्ध हैं।
 review_request:
   not_now: अभी नहीं
   sure: ज़रूर!
@@ -267,7 +273,6 @@ update:
   channel: अद्यतन चैनल
   downloading: डाउनलोड करना ...
 wall:
-  backgrounds: वॉलपेपर
   blur: कलंक
   cancel: रद्द करना
   close: बंद करना
@@ -319,6 +324,7 @@ wall:
   use_accent_color: वॉलपेपर एक्सेंट रंग का प्रयोग करें
   wallpaper_collection: वॉलपेपर संग्रह
   wallpaper_settings: वॉलपेपर सेटिंग्स
+  wallpapers_and_collections: वॉलपेपर और संग्रह
   withOverlay: ओवरले के साथ
   workspace_collections: कार्यक्षेत्र संग्रह
 weg:

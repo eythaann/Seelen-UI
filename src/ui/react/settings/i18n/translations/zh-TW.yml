@@ -111,6 +111,7 @@ general:
   language: 語言
   monday: 週一
   performance_mode:
+    label: 最佳化
     on_battery: 在電池上
     on_energy_saver: 在能量儲蓄方面
     options:
@@ -168,6 +169,7 @@ reset_all_to_default: 重置全部默認值
 reset_configurations: 重置配置
 reset_to_default: 重置為默認值
 resources:
+  affected_widgets: 受影響的小部件
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
   corrupted_wallpaper: 無法提取縮略圖 - 視頻格式已損壞或不受支持
   delete: 刪除資源
@@ -175,9 +177,13 @@ resources:
   has_update: 有更新可用
   high_impact: 對性能影響很大
   import_wallpapers: 導入本地壁紙
+  included_plugins: 包含的插件
   open_folder: 打開資源文件夾
   outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
   see_on_website: 見網站
+  update_now: 更新
+  updates_available: 可用更新
+  updates_available_description: 以下資源有可用更新。
 review_request:
   not_now: 現在不要
   sure: 當然！
@@ -234,7 +240,6 @@ update:
   channel: 更新頻道
   downloading: 下載...
 wall:
-  backgrounds: 壁紙
   blur: 模糊
   cancel: 取消
   close: 關閉
@@ -286,6 +291,7 @@ wall:
   use_accent_color: 使用壁紙強調色
   wallpaper_collection: 壁紙合集
   wallpaper_settings: 壁紙設置
+  wallpapers_and_collections: 壁紙和收藏
   withOverlay: 使用覆蓋
   workspace_collections: 工作區集合
 weg:

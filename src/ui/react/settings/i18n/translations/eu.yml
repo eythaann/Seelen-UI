@@ -128,6 +128,7 @@ general:
   language: Mintzaira
   monday: astelehena
   performance_mode:
+    label: Optimizazioak
     on_battery: Bateria gainean
     on_energy_saver: Energia aurrezteari buruz
     options:
@@ -192,6 +193,7 @@ reset_all_to_default: Berrezarri guztiak balio lehenetsiak
 reset_configurations: Berrezarri konfigurazioak
 reset_to_default: Berrezarri lehenetsitako balioa
 resources:
+  affected_widgets: Eragindako widgetak
   app_outdated: >-
     Baliabide honek Seelen UI bertsio berriagoa behar du behar bezala funtziona
     dezan.
@@ -201,11 +203,15 @@ resources:
   has_update: Eguneratze bat eskuragarri dago
   high_impact: Errendimenduan eragin handia
   import_wallpapers: Inportatu tokiko horma-irudiak
+  included_plugins: Sartutako pluginak
   open_folder: Baliabide irekiko karpeta
   outdated: >-
     Baliabide hau Seelen UI bertsio zaharragoa da eta agian ez du behar bezala
     funtzionatuko.
   see_on_website: Ikus webgunean
+  update_now: Eguneratu
+  updates_available: Eguneraketak eskuragarri
+  updates_available_description: Baliabide hauek eguneraketak eskuragarri dituzte.
 review_request:
   not_now: Orain ez
   sure: Noski!
@@ -264,7 +270,6 @@ update:
   channel: Eguneratu kanala
   downloading: Deskargatzen ...
 wall:
-  backgrounds: Horma-irudiak
   blur: Lau lauak
   cancel: Utzi
   close: Itxi
@@ -316,6 +321,7 @@ wall:
   use_accent_color: Erabili horma-paperaren azentu kolorea
   wallpaper_collection: Horma-irudi bilduma
   wallpaper_settings: Horma-paperaren ezarpenak
+  wallpapers_and_collections: Horma-irudiak eta bildumak
   withOverlay: Gainjartzearekin
   workspace_collections: Lan-esparruko bildumak
 weg:

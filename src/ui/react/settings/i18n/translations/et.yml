@@ -127,6 +127,7 @@ general:
   language: Keel
   monday: esmaspäev
   performance_mode:
+    label: Optimeerimised
     on_battery: Akul
     on_energy_saver: Energiasäästjal
     options:
@@ -190,6 +191,7 @@ reset_all_to_default: Nullida kõik vaikeväärtused
 reset_configurations: Lähtestage konfiguratsioonid
 reset_to_default: Nullida vaikimisi väärtus
 resources:
+  affected_widgets: Mõjutatud vidinad
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
   corrupted_wallpaper: >-
     Pisipildi ekstraktimine ebaõnnestus – videovorming on rikutud või seda ei
@@ -199,11 +201,15 @@ resources:
   has_update: Värskendus on saadaval
   high_impact: Suur mõju jõudlusele
   import_wallpapers: Kohalike taustapiltide importimine
+  included_plugins: Kaasasolevad pistikprogrammid
   open_folder: Avage ressursside kaust
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi
     korralikult töötada.
   see_on_website: Vaata kodulehelt
+  update_now: Värskenda
+  updates_available: Uuendused on saadaval
+  updates_available_description: Järgmistes ressurssides on saadaval värskendused.
 review_request:
   not_now: Mitte praegu
   sure: Muidugi!
@@ -262,7 +268,6 @@ update:
   channel: Värskenduskanal
   downloading: Allalaadimine ...
 wall:
-  backgrounds: Taustapildid
   blur: Blur
   cancel: Tühista
   close: Sule
@@ -314,6 +319,7 @@ wall:
   use_accent_color: Kasutage tapeedi aktsentvärvi
   wallpaper_collection: Tapeedikogu
   wallpaper_settings: Taustapildi seaded
+  wallpapers_and_collections: Taustapildid ja kollektsioonid
   withOverlay: Koos kattekihiga
   workspace_collections: Tööruumi kogud
 weg:

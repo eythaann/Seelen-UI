@@ -127,6 +127,7 @@ general:
   language: Dil
   monday: bazar ertəsi
   performance_mode:
+    label: Optimallaşdırmalar
     on_battery: Batareyada
     on_energy_saver: Enerji qənaətçisi haqqında
     options:
@@ -190,6 +191,7 @@ reset_all_to_default: Hamısını standart dəyərlərə yenidən qurun
 reset_configurations: Konfiqurasiyaları sıfırlayın
 reset_to_default: Defolt dəyərinə yenidən qurun
 resources:
+  affected_widgets: Təsirə məruz qalan vidjetlər
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
@@ -199,11 +201,15 @@ resources:
   has_update: Bir yeniləmə mövcuddur
   high_impact: Performansa yüksək təsir
   import_wallpapers: Yerli divar kağızları idxal edin
+  included_plugins: Daxil Pluginlər
   open_folder: Açıq Resurs qovluğu
   outdated: >-
     Bu qaynaq Seelen UI-nin köhnə bir versiyası üçün hazırlanmış və düzgün
     işləməyə bilər.
   see_on_website: Veb saytında baxın
+  update_now: Yeniləyin
+  updates_available: Yeniləmələr mövcuddur
+  updates_available_description: Aşağıdakı resurslarda yeniləmələr mövcuddur.
 review_request:
   not_now: İndi yox
   sure: Əlbəttə!
@@ -262,7 +268,6 @@ update:
   channel: Kanal yeniləmə
   downloading: Yükləmə ...
 wall:
-  backgrounds: Divar kağızları
   blur: Sönük
   cancel: Ləğv et
   close: Bağlayın
@@ -314,6 +319,7 @@ wall:
   use_accent_color: Divar kağızı vurğu rəngindən istifadə edin
   wallpaper_collection: Divar kağızı Kolleksiyası
   wallpaper_settings: Divar kağızı Parametrləri
+  wallpapers_and_collections: Divar kağızları və kolleksiyalar
   withOverlay: Örtülü ilə
   workspace_collections: İş sahəsi kolleksiyaları
 weg:

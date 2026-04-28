@@ -125,6 +125,7 @@ general:
   language: Ede
   monday: Monday
   performance_mode:
+    label: Awọn iṣapeye
     on_battery: Lori batiri
     on_energy_saver: Lori Ipamọ Agbara
     options:
@@ -188,6 +189,7 @@ reset_all_to_default: Tun gbogbo rẹ si awọn iye aifọwọyi
 reset_configurations: Tun awọn atunto
 reset_to_default: Tunto si iye aiyipada
 resources:
+  affected_widgets: Awọn ẹrọ ailorukọ ti o kan
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
   corrupted_wallpaper: >-
     Kuna lati jade eekanna atanpako - ibajẹ tabi ọna kika fidio ti ko ṣe
@@ -197,9 +199,13 @@ resources:
   has_update: Imudojuiwọn wa
   high_impact: Ipa giga lori iṣẹ ṣiṣe
   import_wallpapers: Gbe awọn iṣẹṣọ ogiri agbegbe wọle
+  included_plugins: Awọn afikun to wa
   open_folder: Ṣii folda Ipilẹṣẹ
   outdated: A ṣe orisun yii fun ẹya atijọ ti Silen Ui ati pe ko le ma ṣiṣẹ daradara.
   see_on_website: Wo lori aaye ayelujara
+  update_now: Imudojuiwọn
+  updates_available: Awọn imudojuiwọn Wa
+  updates_available_description: Awọn orisun atẹle ni awọn imudojuiwọn wa.
 review_request:
   not_now: Ko bayi
   sure: Daju!
@@ -256,7 +262,6 @@ update:
   channel: Ohun elo imudojuiwọn
   downloading: Gbigba lati ayelujara ...
 wall:
-  backgrounds: Ogiri ogiri
   blur: Abẹ
   cancel: Fagilee
   close: Sunmọ
@@ -308,6 +313,7 @@ wall:
   use_accent_color: Lo awọ asẹnti iṣẹṣọ ogiri
   wallpaper_collection: Gbigba ogiri
   wallpaper_settings: Eto Iṣẹṣọ ogiri
+  wallpapers_and_collections: Iṣẹṣọ ogiri & Awọn akojọpọ
   withOverlay: Pẹlu apọju
   workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:

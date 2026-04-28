@@ -129,6 +129,7 @@ general:
   language: Jazyk
   monday: pondelok
   performance_mode:
+    label: Optimalizácie
     on_battery: Batéria
     on_energy_saver: Na šetrič energie
     options:
@@ -192,6 +193,7 @@ reset_all_to_default: Obnovenie všetkých predvolených hodnôt
 reset_configurations: Obnoviť konfigurácie
 reset_to_default: Obnovenie predvolenej hodnoty
 resources:
+  affected_widgets: Ovplyvnené widgety
   app_outdated: >-
     Tento zdroj si na správne fungovanie vyžaduje novšiu verziu používateľského
     rozhrania Seelen.
@@ -203,11 +205,15 @@ resources:
   has_update: K dispozícii je aktualizácia
   high_impact: Vysoký vplyv na výkon
   import_wallpapers: Import miestnych tapiet
+  included_plugins: Zahrnuté pluginy
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
     Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania
     Seelen a nemusí fungovať správne.
   see_on_website: Pozri na webovej stránke
+  update_now: Aktualizovať
+  updates_available: Dostupné aktualizácie
+  updates_available_description: Nasledujúce zdroje majú k dispozícii aktualizácie.
 review_request:
   not_now: Teraz nie
   sure: Jasné!
@@ -266,7 +272,6 @@ update:
   channel: Kanál
   downloading: Sťahovanie ...
 wall:
-  backgrounds: Tapety
   blur: Rozmazanie
   cancel: Zrušiť
   close: Zavrieť
@@ -320,6 +325,7 @@ wall:
   use_accent_color: Použite akcentovú farbu tapety
   wallpaper_collection: Kolekcia tapiet
   wallpaper_settings: Nastavenia tapety
+  wallpapers_and_collections: Tapety a kolekcie
   withOverlay: S prekrytím
   workspace_collections: Kolekcie pracovného priestoru
 weg:

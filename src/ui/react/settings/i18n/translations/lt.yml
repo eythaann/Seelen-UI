@@ -130,6 +130,7 @@ general:
   language: Kalba
   monday: Pirmadienis
   performance_mode:
+    label: Optimizavimas
     on_battery: Ant akumuliatoriaus
     on_energy_saver: Dėl energijos taupymo
     options:
@@ -193,6 +194,7 @@ reset_all_to_default: Iš naujo nustatyti visas numatytąsias vertes
 reset_configurations: Iš naujo nustatyti konfigūracijas
 reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
+  affected_widgets: Paveikti valdikliai
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
   corrupted_wallpaper: >-
     Nepavyko išskleisti miniatiūros – sugadintas arba nepalaikomas vaizdo įrašo
@@ -202,11 +204,15 @@ resources:
   has_update: Galimas atnaujinimas
   high_impact: Didelis poveikis našumui
   import_wallpapers: Importuoti vietinius ekrano užsklandas
+  included_plugins: Įtraukti papildiniai
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
     tinkamai.
   see_on_website: Žiūrėti svetainėje
+  update_now: Atnaujinti
+  updates_available: Galimi atnaujinimai
+  updates_available_description: Šiuose šaltiniuose yra atnaujinimų.
 review_request:
   not_now: Ne dabar
   sure: Žinoma!
@@ -263,7 +269,6 @@ update:
   channel: Atnaujinkite kanalą
   downloading: Atsisiuntimas ...
 wall:
-  backgrounds: Tapetai
   blur: Neryškumas
   cancel: Atšaukti
   close: Uždaryti
@@ -315,6 +320,7 @@ wall:
   use_accent_color: Naudokite tapetų akcento spalvą
   wallpaper_collection: Tapetų kolekcija
   wallpaper_settings: Fono nustatymai
+  wallpapers_and_collections: Užsklandos ir kolekcijos
   withOverlay: Su perdanga
   workspace_collections: Darbo vietos kolekcijos
 weg:
