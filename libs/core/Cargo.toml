@@ -27,7 +27,7 @@ ts-rs = { version = "12.0.0", features = [
 base64 = { workspace = true }
 url = { workspace = true, features = ["serde"] }
 grass = { version = "0.13.4", default-features = false, features = ['random'] }
-num_enum = "0.7.5"
+num_enum = "0.7.6"
 chrono = { version = "0.4.43", features = ["serde"] }
 paste = "1.0.15"
 
