@@ -8,8 +8,18 @@ import { NavLink } from "react-router";
 
 import cs from "../infra.module.css";
 
-import { setActiveThemes, settings } from "../../../state/mod.ts";
+import { settings } from "../../../state/mod.ts";
 import { themes, widgets } from "../../../state/resources.ts";
+
+function setActiveThemes(payload: ThemeId[]) {
+  const active = new Set(payload);
+  for (const id of payload) {
+    if (!themes.value.some((x) => x.id === id)) {
+      active.delete(id);
+    }
+  }
+  settings.value = { ...settings.value, activeThemes: Array.from(active) };
+}
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";

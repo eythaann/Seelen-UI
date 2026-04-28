@@ -10,6 +10,7 @@ import { PluginsView } from "./Plugins.tsx";
 import { ResourceIcon } from "./ResourceCard.tsx";
 import { SoundPacksView } from "./SoundPacks.tsx";
 import { ThemesView } from "./Theme/AllView.tsx";
+import { ResourceUpdatesModal } from "./UpdatesModal.tsx";
 import { AllWallpapersView } from "./Wallpapers/AllView.tsx";
 import { WidgetsView } from "./Widget/AllView.tsx";
 
@@ -18,15 +19,18 @@ const DISABLED_KINDS: ResourceKind[] = [ResourceKind.SoundPack];
 
 export function ResourcesView() {
   return (
-    <Routes>
-      <Route index Component={KindSelector} />
-      <Route path="theme" Component={ThemesView} />
-      <Route path="plugin" Component={PluginsView} />
-      <Route path="widget" Component={WidgetsView} />
-      <Route path="wallpaper" Component={AllWallpapersView} />
-      <Route path="iconpack" Component={IconPacksView} />
-      <Route path="soundpack" Component={SoundPacksView} />
-    </Routes>
+    <>
+      <ResourceUpdatesModal />
+      <Routes>
+        <Route index Component={KindSelector} />
+        <Route path="theme" Component={ThemesView} />
+        <Route path="plugin" Component={PluginsView} />
+        <Route path="widget" Component={WidgetsView} />
+        <Route path="wallpaper" Component={AllWallpapersView} />
+        <Route path="iconpack" Component={IconPacksView} />
+        <Route path="soundpack" Component={SoundPacksView} />
+      </Routes>
+    </>
   );
 }
 

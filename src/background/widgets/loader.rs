@@ -204,6 +204,10 @@ impl WidgetPod {
             }
         });
 
+        if definition.debug {
+            window.0.open_devtools();
+        }
+
         self.window = Some(window);
         self.start_liveness_prove();
     }

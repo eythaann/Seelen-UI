@@ -84,7 +84,6 @@ slu_events_declaration! {
     PopupContentChanged(SluPopupConfig) as "popup-content-changed",
 
     StateSettingsChanged(Settings) as "settings-changed",
-    StateSettingsByAppChanged(Vec<AppConfig>) as "settings-by-app",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",

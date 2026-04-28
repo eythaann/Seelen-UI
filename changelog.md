@@ -13,6 +13,7 @@
 ### enhancements
 
 - refactor apps menu to use standard context menu widget.
+- settings > resources views.
 
 ### fix
 

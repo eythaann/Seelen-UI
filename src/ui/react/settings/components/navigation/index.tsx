@@ -10,7 +10,9 @@ import { cx } from "../../modules/shared/utils/app.ts";
 
 import { RouteIcons, RoutePath } from "./routes.tsx";
 import cs from "./index.module.css";
-import { session, settings, themes, widgets } from "../../state/mod.ts";
+import { resourcesWithUpdate, themes, widgets } from "../../state/resources.ts";
+import { settings } from "../../state/mod.ts";
+import { session } from "../../state/session.ts";
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);
@@ -20,6 +22,8 @@ export const Navigation = memo(() => {
 
   const { t, i18n } = useTranslation();
   const location = useLocation();
+
+  const hasResourceUpdates = resourcesWithUpdate.value.length > 0;
 
   const Mapper = (route: RoutePath | null) => {
     if (!route) return null;
@@ -31,6 +35,7 @@ export const Navigation = memo(() => {
         collapsed={collapsed}
         label={t(`header.labels.${route.replace("/", "")}`)}
         icon={RouteIcons[route]}
+        badge={route === RoutePath.Resource ? hasResourceUpdates : false}
       />
     );
   };
@@ -136,9 +141,10 @@ interface ItemProps {
   collapsed: boolean;
   icon?: React.ReactNode;
   label: React.ReactNode;
+  badge?: boolean;
 }
 
-const Item = ({ route, icon, label, isActive, collapsed }: ItemProps) => {
+const Item = ({ route, icon, label, isActive, collapsed, badge }: ItemProps) => {
   return (
     <Tooltip placement="right" title={collapsed ? label : null}>
       <NavLink
@@ -147,7 +153,10 @@ const Item = ({ route, icon, label, isActive, collapsed }: ItemProps) => {
           [cs.active!]: isActive,
         })}
       >
-        {icon}
+        <div className={cs.iconWrapper}>
+          {icon}
+          {badge && <span className={cs.badge} />}
+        </div>
         <span className={cs.label}>{label}</span>
       </NavLink>
     </Tooltip>

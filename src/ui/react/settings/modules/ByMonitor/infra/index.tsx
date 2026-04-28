@@ -3,13 +3,14 @@ import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { useTranslation } from "react-i18next";
 
 import { widgets } from "../../../state/resources.ts";
-import { monitors, settings } from "../../../state/mod.ts";
+import { settings } from "../../../state/mod.ts";
 
 import { Monitor } from "../../../components/monitor/index.tsx";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 import { WidgetSettingsModal } from "./WidgetSettingsModal.tsx";
 import { WallpaperSettingsModal } from "./WallpaperSettingsModal.tsx";
 import cs from "./index.module.css";
+import { monitors } from "../../../state/system.ts";
 
 interface MonitorConfigProps {
   device: PhysicalMonitor;

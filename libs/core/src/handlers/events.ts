@@ -29,7 +29,6 @@ export enum SeelenEvent {
   WMTreeChanged = "wm::tree-changed",
   PopupContentChanged = "popup-content-changed",
   StateSettingsChanged = "settings-changed",
-  StateSettingsByAppChanged = "settings-by-app",
   StateThemesChanged = "themes",
   StateIconPacksChanged = "icon-packs",
   StatePluginsChanged = "plugins-changed",

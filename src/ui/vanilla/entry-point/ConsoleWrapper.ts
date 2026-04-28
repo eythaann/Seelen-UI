@@ -56,9 +56,15 @@ globalThis.addEventListener("unhandledrejection", (event) => {
 globalThis.addEventListener(
   "error",
   (event) => {
-    // could be undefined on fetch errors
-    if (event.error || event.message) {
-      console.error("Uncaught Error", event.error || event.message);
+    if (event.error instanceof Error) {
+      console.error("Uncaught Error:", event.error);
+    } else {
+      console.error("Uncaught Error:", {
+        message: event.message,
+        file: event.filename,
+        line: event.lineno,
+        column: event.colno,
+      });
     }
   },
   true,

@@ -195,6 +195,9 @@ resources:
   delete: Delete Resource
   discover: Discover more resources
   has_update: An update is available
+  update_now: Update
+  updates_available: Updates Available
+  updates_available_description: The following resources have updates available.
   high_impact: High impact on performance
   import_wallpapers: Import local wallpapers
   open_folder: Open resource folder

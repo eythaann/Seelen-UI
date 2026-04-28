@@ -1,5 +1,6 @@
-import { settings, widgets } from "../../../state/mod";
+import { settings } from "../../../state/mod";
 import type { WidgetId } from "@seelen-ui/lib/types";
+import { widgets } from "../../../state/resources";
 
 /**
  * Gets the configuration for a specific widget

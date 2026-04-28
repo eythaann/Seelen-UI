@@ -64,6 +64,8 @@ pub struct Widget {
     /// If true, the memory leak of webview2 (https://github.com/tauri-apps/tauri/issues/4026)
     /// workaround, will be no applied for instances of this widget.
     pub no_memory_leak_workaround: bool,
+    /// will open dev tools inmediately when webview is created
+    pub debug: bool,
 
     /// Way to load the widget
     pub loader: WidgetLoader,

@@ -1,0 +1,9 @@
+.list {
+  margin-top: var(--spacing-s);
+}
+
+.item {
+  padding: var(--spacing-xs) var(--spacing-s);
+  border-radius: 8px;
+  background-color: var(--color-gray-50);
+}

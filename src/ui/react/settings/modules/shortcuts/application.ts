@@ -1,10 +1,11 @@
 import type { ResourceText, SluShortcutsSettings, Widget, WidgetShortcutDeclaration } from "@seelen-ui/lib/types";
 import { signal } from "@preact/signals";
-import { settings, widgets } from "../../state/mod";
+import { settings } from "../../state/mod";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { WidgetId } from "@seelen-ui/lib/types";
 import { cloneDeep } from "lodash";
+import { widgets } from "../../state/resources";
 
 export const shortcutsError = signal<Set<string>>(new Set());
 export const systemShortcuts = lazySignal(() => invoke(SeelenCommand.StateGetSystemShortcuts));

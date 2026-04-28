@@ -101,6 +101,7 @@
   justify-content: flex-start;
   gap: var(--spacing-2xs);
 
+  position: relative;
   overflow: hidden;
   padding: 0 var(--spacing-2xs);
   border-radius: 0.5rem;
@@ -130,6 +131,23 @@
       display: none;
     }
   }
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #f5a623;
 }
 
 .sessionItem {

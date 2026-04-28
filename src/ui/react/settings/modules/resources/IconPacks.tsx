@@ -6,8 +6,18 @@ import { useState } from "preact/hooks";
 
 import cs from "./infra.module.css";
 
-import { setActiveIconPacks, settings } from "../../state/mod.ts";
+import { settings } from "../../state/mod.ts";
 import { iconPacks as allIconPacks } from "../../state/resources.ts";
+
+function setActiveIconPacks(payload: IconPackId[]) {
+  const active = new Set(payload);
+  for (const id of payload) {
+    if (!allIconPacks.value.some((x) => x.id === id)) {
+      active.delete(id);
+    }
+  }
+  settings.value = { ...settings.value, activeIconPacks: Array.from(active) };
+}
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "./ResourceCard.tsx";
 

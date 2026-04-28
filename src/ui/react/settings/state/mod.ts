@@ -1,11 +1,9 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import type { IconPackId, ThemeId } from "@seelen-ui/lib/types";
 import { batch, computed, effect, signal } from "@preact/signals";
 import { Modal } from "antd";
 import { monitors } from "./system";
 import { cloneDeep } from "lodash";
 import i18n from "../i18n";
-import { bundledAppConfigs, iconPacks, themes } from "./resources";
 
 export const settings = signal(await invoke(SeelenCommand.StateGetSettings, { path: null }));
 const initialSettings = signal(JSON.stringify(settings.value));
@@ -19,7 +17,8 @@ export const language = computed(() => settings.value.language || "en");
 export const hasChanges = computed(() => initialSettings.value !== JSON.stringify(settings.value));
 export const needRestart = signal(false);
 
-export const appsConfig = computed(() => [...bundledAppConfigs.value, ...settings.value.byApp]);
+const bundledAppConfigs = await invoke(SeelenCommand.StateGetSettingsByApp);
+export const appsConfig = computed(() => [...bundledAppConfigs, ...settings.value.byApp]);
 
 export async function saveSettings() {
   try {
@@ -35,10 +34,6 @@ export async function saveSettings() {
     });
   }
 }
-
-export * from "./resources";
-export * from "./session";
-export * from "./system";
 
 const defaultMonitorConfig = await invoke(SeelenCommand.StateGetDefaultMonitorSettings);
 effect(() => {
@@ -58,40 +53,6 @@ effect(() => {
   i18n.changeLanguage(language.value);
 });
 
-/// ===============================================================
-/// ==========================ACTIONS==============================
-/// ===============================================================
-
 export function restoreToLastSaved() {
   settings.value = JSON.parse(initialSettings.value);
-}
-
-export function setActiveIconPacks(payload: IconPackId[]) {
-  let active = new Set(payload);
-
-  for (const id of payload) {
-    if (!iconPacks.value.some((x) => x.id === id)) {
-      active.delete(id);
-    }
-  }
-
-  settings.value = {
-    ...settings.value,
-    activeIconPacks: Array.from(active),
-  };
-}
-
-export function setActiveThemes(payload: ThemeId[]) {
-  let active = new Set(payload);
-
-  for (const id of payload) {
-    if (!themes.value.some((x) => x.id === id)) {
-      active.delete(id);
-    }
-  }
-
-  settings.value = {
-    ...settings.value,
-    activeThemes: Array.from(active),
-  };
 }
