@@ -20,6 +20,7 @@
 - multiline tooltips.
 - show desktop not working.
 - flicker on wallpapers on change.
+- settings download update icon.
 
 ## [2.5.9]
 

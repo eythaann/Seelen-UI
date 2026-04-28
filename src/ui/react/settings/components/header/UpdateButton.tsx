@@ -21,9 +21,7 @@ export function UpdateButton() {
   }
 
   return (
-    <Tooltip
-      title={downloading ? t("update.downloading") : t("update.available")}
-    >
+    <Tooltip title={downloading ? t("update.downloading") : t("update.available")}>
       <Button
         type="text"
         loading={downloading}
