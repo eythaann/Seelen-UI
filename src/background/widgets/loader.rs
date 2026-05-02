@@ -4,6 +4,7 @@ use std::{
 };
 
 use seelen_core::state::{Widget, WidgetInstanceMode, WidgetStatus};
+use std::sync::atomic::Ordering;
 use tauri::{Emitter, Listener};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use uuid::Uuid;
@@ -15,7 +16,10 @@ use crate::{
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
-    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
+    widgets::{
+        manager::GAME_MODE_ACTIVE, manager::WIDGET_MANAGER, webview::WidgetWebview,
+        WidgetWebviewLabel,
+    },
     windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
@@ -201,6 +205,11 @@ impl WidgetPod {
         let label = self.label.clone();
         window.0.on_window_event(move |event| {
             if let tauri::WindowEvent::Destroyed = event {
+                if GAME_MODE_ACTIVE.load(Ordering::Acquire) {
+                    log::warn!("Ignoring destroyed event during GameMode for {:?}", label);
+                    return;
+                }
+
                 WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
                     deploy.kill_pod(&label);
                     deploy.reconcile();
