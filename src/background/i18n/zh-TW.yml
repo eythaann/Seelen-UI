@@ -14,12 +14,12 @@ resource:
   added: 添加了一個新資源
   download_failed_body: 下載資源時出現問題，請向Seelen開發人員團隊報告。
   download_failed_title: 資源下載失敗
-  downloading: 下載資產...
-  downloading_body: 這可能需要幾秒鐘，請不要關閉窗口。
-  enable: 使能夠
+  downloading: 下載資源中...
+  downloading_body: 這可能需要幾秒鐘，請不要關閉視窗。
+  enable: 啟用
 runtime:
-  corrupted_data: 損壞的數據
-  corrupted_file: 使用默認值改為損壞配置文件。
+  corrupted_data: 數據損壞
+  corrupted_file: 設定文件已損壞，正在使用默認設定。
   corrupted_file_path: 損壞的文件路徑
   download: 轉到下載頁面
   files_integrity: |-
@@ -28,29 +28,29 @@ runtime:
     出於安全原因，Seelen UI 無法繼續。
     請從官方網站重新安裝。
   files_integrity_title: 安全警報 - 文件完整性檢查失敗
-  not_found: WebView2運行時找不到
-  not_found_description: Seelen UI需要WebView2運行時。 請安裝。
-  outdated: WebView2運行時過時
-  outdated_description: Seelen UI需要WebView2運行時％{min_version}或更高。 請更新。
+  not_found: 找不到 WebView2 runtime
+  not_found_description: Seelen UI 需要 WebView2 runtime。 請安裝。
+  outdated: WebView2 runtime 版本過舊
+  outdated_description: Seelen UI 需要 WebView2 runtime ％{min_version} 或更高的版本。 請更新。
 service:
-  not_running: Seelen UI服務不運行
-  not_running_description: SEELEN UI服務（SLU服務）是該應用程序正常工作的依賴性/助手。
+  not_running: 服務尚未執行
+  not_running_description: SEELEN UI服務（SLU服務）是該是應用程式正常運作所需的必要元件。
   not_running_ok: 開始服務
 shortcut:
   register:
-    placeholder: 按任何鍵組合
-    title: 註冊新快捷方式
+    placeholder: 按下任意快捷鍵組合
+    title: 註冊新的快捷鍵
 widget_liveness:
   failed_description: |-
-    小元件「%{widget_name}」停止回應的次數過多。
+    小工具「%{widget_name}」停止回應的次數過多。
 
     您可以嘗試重新啟動應用程式。
-  failed_title: 小部件錯誤
+  failed_title: 小工具錯誤
 widget_permissions:
   perm_open_file: 開啟文件
   perm_run: 運行程式
   request_description: |-
-    小元件「%{widget_name}」正在請求 %{command} 的權限。
+    小工具「%{widget_name}」正在請求 %{command} 的權限。
 
     您想允許這樣做嗎？
-  request_title: 小部件權限請求
+  request_title: 小工具權限請求
