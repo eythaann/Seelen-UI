@@ -2,26 +2,26 @@ app_menu:
   close: 關閉
   close_multiple: 關閉全部
   copy_handles: 複製把手
-  kill: 殺死過程
-  kill_multiple: 殺死所有過程
+  kill: 結束進程
+  kill_multiple: 結束所有進程
   open_file_location: 打開文件位置
-  pin: 別針
-  pin_to_center: 引腳到中心
-  pin_to_left: 引腳向左
-  pin_to_right: 銷釘向右
-  run_as: 作為管理員運行
-  unpin: Uncin
+  pin: 固定
+  pin_to_center: 固定到中心
+  pin_to_left: 固定到左邊
+  pin_to_right: 固定到右邊
+  run_as: 以管理員身份運行
+  unpin: 取消固定
 context_menu:
   remove_module: 移除模塊
   reorder_disable: 鎖任務欄
   reorder_enable: 解鎖任務欄
 media:
   label: 媒體播放器
-  not_playing: 什麼都沒有玩
+  not_playing: 當前無播放內容
 show_desktop:
   label: 顯示桌面
 start:
-  label: 開始菜單
+  label: 開始選單
 taskbar_menu:
   add_file: 引導自定義文件
   desktop: 添加桌面模塊

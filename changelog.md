@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.6.4-dev]
+## [2.6.4]
 
 ### enhancements
 

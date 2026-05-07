@@ -1,8 +1,8 @@
 goodbye: 再見{{0}}
 hibernate: 休眠
-lock: 鎖定會話
-log_out: 退出
+lock: 鎖定
+log_out: 登出
 reboot: 重新啟動
-shutdown: 關閉電源
-suspend: 暫停
-uptime: 正常運行時間
+shutdown: 關機
+suspend: 睡眠
+uptime: 系統運行時間

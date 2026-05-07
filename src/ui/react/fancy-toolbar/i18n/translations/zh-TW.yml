@@ -1,59 +1,59 @@
 battery:
   remaining: 剩餘 {{0}}%
-  smart_charge: 智能充電
+  smart_charge: 智慧充電
 bluetooth:
   available: 可用設備（未配對）
   cancel: 取消
   connected: 連接的設備
-  forget: 忘記
-  lowenergy: 低能量
-  more: 更多藍牙設置
+  forget: 忘記設備
+  lowenergy: 低電量
+  more: 更多藍牙設定
   not_found: 找不到藍牙設備
-  pair: 一對
-  paired: 保存的設備
+  pair: 配對
+  paired: 已配對的設備
   placeholder:
     passphrase: 密碼，代碼或PIN
   scanning: 掃描設備
 context_menu:
   add_custom_text: 添加自定義文本項目
-  modules: 模塊
-  remove: 刪除模塊
-  reorder_disable: 鎖工具欄
+  modules: 模組
+  remove: 刪除模組
+  reorder_disable: 鎖定工具欄
   reorder_enable: 解鎖工具欄
-  restore: 還原為默認
+  restore: 還原為預設
   settings: 設定
   task_manager: 工作管理員
 media:
-  default_multimedia_volume: 多媒體體積
+  default_multimedia_volume: 預設音量
   device:
     channel:
-      system: 系統聲音
+      system: 系統音量
     comunications: 通訊
     missing: 缺少設備
-    mixer: 音量混合器
+    mixer: 音量混音程式
     multimedia: 多媒體
-    settings: 更多設備設置
+    settings: 更多設備設定
     volume: 設備音量
   input_devices: 輸入設備
   output_devices: 輸出設備
-  players: 媒體播放器
+  players: 多媒體播放器
 notifications:
   clear: 清除全部
   empty: 沒有通知
-  settings: 更多的通知設置
+  settings: 更多的通知設定
   title: 通知
 placeholder:
   bluetooth_devices: 藍牙和設備
-  ethernet_connected: 互聯網訪問
-  ethernet_disconnected: 沒有互聯網訪問
+  ethernet_connected: 已連接的網路
+  ethernet_disconnected: 沒有網路連接
   notifications: 通知
-  settings: 快速設置
-  volume: 體積
+  settings: 快速設定
+  volume: 音量
 plugged: 堵塞
 settings:
-  app_settings: 應用設置
+  app_settings: 應用程式設定
   brightness: 亮度
-  power: 力量
+  power: 電源
   restart: 重新啟動
   title: 設定
 show_desktop: 顯示桌面

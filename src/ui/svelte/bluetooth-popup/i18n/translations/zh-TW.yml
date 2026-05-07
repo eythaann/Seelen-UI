@@ -6,16 +6,16 @@ confirm_pin: 確認 PIN 碼匹配
 connect: 連接
 connected: 已連接
 connecting: 正在連接...
-disconnect: 斷開
+disconnect: 斷開連接
 disconnecting: 正在斷開連接...
 display_pin: 在設備上輸入此 PIN 碼
-lowenergy: 低能量
-more: 更多藍牙設置
+lowenergy: 低電量
+more: 更多藍牙設定
 no_adapter: 未找到藍牙適配器
 not_found: 未找到設備
-pair: 一對
-paired: 配對
-pairing: 配對...
+pair: 配對
+paired: 已配對
+pairing: 配對中...
 pairing_failed: 配對失敗
 password: 密碼
 provide_address: 輸入地址
