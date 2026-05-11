@@ -123,8 +123,9 @@ general:
   hardware_acceleration: Accelerazione hardware
   hardware_acceleration_description: >-
     La disabilitazione dell'accelerazione hardware ridurrà l'utilizzo della
-    memoria, ma può causare problemi di prestazioni. È sicuro disabilitarlo se
-    non utilizzerai sfondi live.
+    memoria. È sicuro disabilitarlo se non stai utilizzando animazioni pesanti,
+    anche se i singoli widget potrebbero comunque forzare l'utilizzo della GPU
+    indipendentemente da questa impostazione.
   icon_pack:
     available: Pacchetti di icone disponibili
     selected: Pacchetti di icone attivi
@@ -283,6 +284,7 @@ wall:
   collections: Collezioni
   contrast: Contrasto
   corrupted_wallpapers_message: 'Sfondi danneggiati, valuta la possibilità di eliminarli:'
+  coverage_pause_threshold: Soglia di pausa (copertura finestra)
   create: Creare
   create_collection: Crea raccolta
   default_collection: Raccolta predefinita
@@ -397,6 +399,7 @@ wm:
     ease_function: Funzione di allentamento dell'animazione
     enable: Abilita le animazioni di Window
   author: Autore
+  auto_stack: Stack automatico per categoria di app
   border:
     enable: Abilita Bordo delle Finestre
     offset: Offset Bordo

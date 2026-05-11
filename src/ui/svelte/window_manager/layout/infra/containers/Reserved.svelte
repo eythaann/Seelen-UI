@@ -1,19 +1,22 @@
 <script lang="ts">
-  import { Reservation } from "../../domain.ts";
+  import { TwmReservation } from "@seelen-ui/lib/types";
   import { state } from "../../../state.svelte.ts";
+  import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
+  import { ReservationIcon } from "../../domain.ts";
 
   interface Props {
-    reservation: Reservation;
+    reservation: TwmReservation;
   }
 
   let { reservation }: Props = $props();
 
-  // Svelte 5 runes: $derived for computed values
   let floating = $derived(state.settings.floating);
 </script>
 
 <div
   class={["wm-container", "wm-reserved", `wm-reserved-${reservation.toLowerCase()}`]}
-  style:width={reservation === Reservation.Float ? floating.width : undefined}
-  style:height={reservation === Reservation.Float ? floating.height : undefined}
-></div>
+  style:width={reservation === TwmReservation.Float ? `${floating.width}px` : undefined}
+  style:height={reservation === TwmReservation.Float ? `${floating.height}px` : undefined}
+>
+  <Icon iconName={ReservationIcon[reservation]!} />
+</div>

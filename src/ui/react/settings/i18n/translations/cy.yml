@@ -119,9 +119,9 @@ general:
   date_format_how_to: Sut i ysgrifennu fformat dyddiad?
   hardware_acceleration: Cyflymiad Caledwedd
   hardware_acceleration_description: >-
-    Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof, ond gall
-    achosi problemau perfformiad. Yn ddiogel i'w analluogi os na fyddwch yn
-    defnyddio papurau wal byw.
+    Bydd analluogi cyflymiad caledwedd yn lleihau'r defnydd o gof. Mae'n ddiogel
+    analluogi os nad ydych chi'n defnyddio animeiddiadau trwm, er y gall
+    teclynnau unigol orfodi defnydd GPU o hyd waeth beth fo'r gosodiad hwn.
   icon_pack:
     available: Pecynnau Eicon Ar Gael
     selected: Pecynnau Eicon Actif
@@ -276,6 +276,7 @@ wall:
   collections: Casgliadau
   contrast: Gyferbynnwch
   corrupted_wallpapers_message: 'Papurau wal llygredig, ystyriwch ddileu''r rhain:'
+  coverage_pause_threshold: Trothwy seibio (gorchudd ffenestr)
   create: Creu
   create_collection: Creu Casgliad
   default_collection: Casgliad Diofyn
@@ -389,6 +390,7 @@ wm:
     ease_function: Swyddogaeth lleddfu animeiddiad
     enable: Galluogi animeiddiadau ffenestr
   author: Awduron
+  auto_stack: Pentwr awtomatig yn ôl categori ap
   border:
     enable: Galluogi ffin ffenestr
     offset: Gwrthbwyso ar y ffin

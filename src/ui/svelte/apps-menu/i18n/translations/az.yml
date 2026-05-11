@@ -1,4 +1,6 @@
 all: Bütün Proqramlar
+app_settings: Tətbiq Parametrləri
+applications: Tətbiqlər
 back: Geri
 disband: Qovluğu ləğv edin
 folder: Qovluq
@@ -6,6 +8,7 @@ no_matching_items: Axtarışınıza uyğun heç bir element tapılmadı
 open_file_location: Fayl yerini açın
 pin: Pin
 pin_to_dock: Dock-a sancın
+power_menu: Güc Menyu
 query:
   all: Hamısı
   apps: Proqramlar

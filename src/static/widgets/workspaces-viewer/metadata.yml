@@ -8,7 +8,7 @@ hidden: true
 lazy: true
 shortcuts:
   - id: vd-toggle-view
-    command: ["widget", "trigger", "@seelen/workspaces-viewer"]
+    command: ["widget", "trigger", "${self.id}"]
     label: !extend i18n/shortcuts/vd-toggle-view.yml
     defaultKeys: ["Win", "Tab"]
     readonly: true

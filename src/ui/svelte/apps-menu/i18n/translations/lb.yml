@@ -1,4 +1,6 @@
 all: All Apps
+app_settings: App Astellunge
+applications: Uwendungen
 back: Zréck
 disband: Opléisen Dossier
 folder: Dossier
@@ -6,6 +8,7 @@ no_matching_items: Keng Artikele fonnt déi mat Ärer Sich passen
 open_file_location: Open Datei Location
 pin: Pin
 pin_to_dock: Pin an Dock
+power_menu: Power Menu
 query:
   all: All
   apps: Apps

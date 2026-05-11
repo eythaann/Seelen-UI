@@ -12,6 +12,7 @@ use std::io::BufRead;
 use std::path::{Path, PathBuf};
 
 use image::{GenericImageView, ImageBuffer, RgbaImage};
+
 use queue::{IconExtractor, IconExtractorRequest};
 use windows::Win32::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES;
 use windows::Win32::UI::Controls::{IImageList, ILD_TRANSPARENT};
@@ -382,7 +383,11 @@ fn _extract_and_save_icon_from_module_with_index(
     }
 
     let filestem = path.file_stem().ok_or("Failed to get file stem")?;
-    let gen_icon_filename = format!("{}_{}.png", filestem.to_string_lossy(), date_based_hex_id());
+    let gen_icon_filename = format!(
+        "{}_{}.webp",
+        filestem.to_string_lossy(),
+        date_based_hex_id()
+    );
 
     log::trace!("Extracting icon (index {index}) for {:?}", path.file_name());
 
@@ -395,8 +400,9 @@ fn _extract_and_save_icon_from_module_with_index(
         ..Default::default()
     };
 
-    image.save(
-        SEELEN_COMMON
+    save_as_webp(
+        &image,
+        &SEELEN_COMMON
             .system_icon_pack_path()
             .join(&gen_icon_filename),
     )?;
@@ -444,7 +450,11 @@ fn _extract_and_save_icon_from_file(origin: &Path) -> Result<()> {
     let file_name = origin.file_name().ok_or("Failed to get file name")?;
     let filestem = origin.file_stem().ok_or("Failed to get file stem")?;
 
-    let gen_icon_filename = format!("{}_{}.png", filestem.to_string_lossy(), date_based_hex_id());
+    let gen_icon_filename = format!(
+        "{}_{}.webp",
+        filestem.to_string_lossy(),
+        date_based_hex_id()
+    );
     let mut gen_icon = Icon {
         base: Some(gen_icon_filename.clone()),
         ..Default::default()
@@ -455,8 +465,9 @@ fn _extract_and_save_icon_from_file(origin: &Path) -> Result<()> {
     if origin_ext == "url" {
         let image = get_icon_from_url_file(origin)?;
         gen_icon.is_aproximately_square = is_aproximately_a_square(&image);
-        image.save(
-            SEELEN_COMMON
+        save_as_webp(
+            &image,
+            &SEELEN_COMMON
                 .system_icon_pack_path()
                 .join(&gen_icon_filename),
         )?;
@@ -482,16 +493,18 @@ fn _extract_and_save_icon_from_file(origin: &Path) -> Result<()> {
     gen_icon.is_aproximately_square = is_aproximately_a_square(&icon);
 
     if is_exe_file || is_lnk_file {
-        icon.save(
-            SEELEN_COMMON
+        save_as_webp(
+            &icon,
+            &SEELEN_COMMON
                 .system_icon_pack_path()
                 .join(&gen_icon_filename),
         )?;
         RESOURCES.add_system_app_icon(umid.as_deref(), Some(origin), gen_icon);
     } else {
-        let gen_icon_filename = format!("{}_{}.png", origin_ext, date_based_hex_id());
-        icon.save(
-            SEELEN_COMMON
+        let gen_icon_filename = format!("{}_{}.webp", origin_ext, date_based_hex_id());
+        save_as_webp(
+            &icon,
+            &SEELEN_COMMON
                 .system_icon_pack_path()
                 .join(&gen_icon_filename),
         )?;
@@ -527,26 +540,29 @@ fn _extract_and_save_icon_umid(aumid: &AppUserModelId) -> Result<()> {
                 let dark_rgba = image::open(&dark_path)?.to_rgba8();
                 let dark_rgba = crop_transparent_borders(&dark_rgba);
 
-                light_rgba.save(
-                    SEELEN_COMMON
+                save_as_webp(
+                    &light_rgba,
+                    &SEELEN_COMMON
                         .system_icon_pack_path()
-                        .join(format!("{name}_light.png")),
+                        .join(format!("{name}_light.webp")),
                 )?;
-                dark_rgba.save(
-                    SEELEN_COMMON
+                save_as_webp(
+                    &dark_rgba,
+                    &SEELEN_COMMON
                         .system_icon_pack_path()
-                        .join(format!("{name}_dark.png")),
+                        .join(format!("{name}_dark.webp")),
                 )?;
 
-                gen_icon.light = Some(format!("{name}_light.png"));
-                gen_icon.dark = Some(format!("{name}_dark.png"));
+                gen_icon.light = Some(format!("{name}_light.webp"));
+                gen_icon.dark = Some(format!("{name}_dark.webp"));
             } else {
-                light_rgba.save(
-                    SEELEN_COMMON
+                save_as_webp(
+                    &light_rgba,
+                    &SEELEN_COMMON
                         .system_icon_pack_path()
-                        .join(format!("{name}.png")),
+                        .join(format!("{name}.webp")),
                 )?;
-                gen_icon.base = Some(format!("{name}.png"));
+                gen_icon.base = Some(format!("{name}.webp"));
             }
 
             gen_icon.is_aproximately_square = is_aproximately_a_square(&light_rgba);
@@ -619,4 +635,11 @@ pub fn is_aproximately_a_square(rgba_image: &RgbaImage) -> bool {
     }
 
     true
+}
+
+fn save_as_webp(image: &RgbaImage, path: &std::path::Path) -> Result<()> {
+    let webp_bytes =
+        webp::Encoder::from_rgba(image.as_raw(), image.width(), image.height()).encode_lossless();
+    std::fs::write(path, &*webp_bytes)?;
+    Ok(())
 }

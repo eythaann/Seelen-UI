@@ -123,9 +123,10 @@ general:
   date_format_how_to: Hogyan írjunk dátumformátumot?
   hardware_acceleration: Hardveres gyorsítás
   hardware_acceleration_description: >-
-    A hardveres gyorsítás letiltása csökkenti a memóriahasználatot, de
-    teljesítménybeli problémákat okozhat. Biztonságosan letiltható, ha nem
-    használ élő háttérképeket.
+    A hardveres gyorsítás letiltása csökkenti a memóriahasználatot. Ha nem
+    használ nehéz animációkat, biztonságos a letiltása, bár az egyes widgetek
+    ettől a beállítástól függetlenül továbbra is kényszeríthetik a
+    GPU-használatot.
   icon_pack:
     available: Elérhető ikoncsomagok
     selected: Aktív ikoncsomagok
@@ -279,6 +280,7 @@ wall:
   collections: Gyűjtemények
   contrast: Kontraszt
   corrupted_wallpapers_message: 'Sérült háttérképek, fontolja meg ezek törlését:'
+  coverage_pause_threshold: Szünet küszöbértéke (ablak lefedettsége)
   create: Teremt
   create_collection: Gyűjtemény létrehozása
   default_collection: Alapértelmezett gyűjtemény
@@ -394,6 +396,7 @@ wm:
     ease_function: Animáció enyhítő funkciója
     enable: Engedélyezze az ablak animációit
   author: Szerző
+  auto_stack: Automatikus halmozás alkalmazáskategória szerint
   border:
     enable: Engedélyezze az ablak szegélyét
     offset: Határ eltolás

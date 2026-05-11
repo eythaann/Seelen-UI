@@ -1,6 +1,6 @@
 {
   "name": "seelen-ui",
-  "version": "2.6.4",
+  "version": "2.6.5",
   "description": "Seelen UI Project",
   "type": "module",
   "license": "AGPL-3.0-or-later",
@@ -55,7 +55,7 @@
     "@commitlint/config-conventional": "^20.5.0",
     "@nyariv/sandboxjs": "^0.9.4",
     "@seelen-ui/lib": "file:./libs/core/npm",
-    "@seelen/translation-toolkit": "^1.1.10",
+    "@seelen/translation-toolkit": "^1.2.4",
     "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.24",

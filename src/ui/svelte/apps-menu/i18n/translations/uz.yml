@@ -1,4 +1,6 @@
 all: Barcha ilovalar
+app_settings: Ilova sozlamalari
+applications: Ilovalar
 back: Orqaga
 disband: Jildni tarqatish
 folder: Papka
@@ -6,6 +8,7 @@ no_matching_items: Qidiruvingizga mos narsa topilmadi
 open_file_location: Fayl joylashuvini oching
 pin: Pin
 pin_to_dock: Dockga mahkamlang
+power_menu: Quvvat menyusi
 query:
   all: Hammasi
   apps: Ilovalar

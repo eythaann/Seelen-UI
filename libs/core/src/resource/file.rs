@@ -10,6 +10,8 @@ use ts_rs::TS;
 
 use crate::{error::Result, utils::TsUnknown};
 
+use super::yaml_ext;
+
 use super::Resource;
 
 /// A container for Seelen UI resources.
@@ -51,7 +53,10 @@ impl SluResourceFile {
         let mut buffer = Vec::new();
         reader.read_to_end(&mut buffer)?;
         let decoded = base64::engine::general_purpose::STANDARD.decode(&buffer)?;
-        Ok(serde_yaml::from_slice(&decoded)?)
+        let value: serde_yaml::Value = serde_yaml::from_slice(&decoded)?;
+        let vars = yaml_ext::extract_vars_slu(&value);
+        let value = yaml_ext::resolve_vars_yaml(value, &vars);
+        Ok(serde_yaml::from_value(value)?)
     }
 
     pub fn encode<W: Write>(&self, mut writer: W) -> Result<()> {

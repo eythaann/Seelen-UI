@@ -1,4 +1,6 @@
 all: Gbogbo Apps
+app_settings: App Eto
+applications: Awọn ohun elo
 back: Pada
 disband: Tu Folda
 folder: Foda
@@ -6,6 +8,7 @@ no_matching_items: Ko si ohun kan ti o baamu wiwa rẹ
 open_file_location: Ṣii Ibi Faili
 pin: Pin
 pin_to_dock: Pin si Dock
+power_menu: Akojọ agbara
 query:
   all: Gbogbo
   apps: Awọn ohun elo

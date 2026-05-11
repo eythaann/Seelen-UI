@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { WmNode } from "@seelen-ui/lib/types";
+  import type { TwmRuntimeNode } from "@seelen-ui/lib/types";
   import { state } from "../../../state.svelte.ts";
   import Leaf from "./Leaf.svelte";
   import FileIcon from "libs/ui/svelte/components/Icon/FileIcon.svelte";
 
   interface Props {
-    node: WmNode;
+    node: TwmRuntimeNode;
     overlayVisible: boolean;
   }
 
@@ -21,7 +21,7 @@
           class={[
             "wm-stack-bar-item",
             {
-              "wm-stack-bar-item-active": winId === node.active,
+              "wm-stack-bar-item-active": winId === node.activeWindow,
             },
           ]}
           data-allow-mouse-events={overlayVisible}
@@ -39,7 +39,7 @@
       {/each}
     </div>
   {/if}
-  {#if node.active}
-    <Leaf hwnd={node.active} />
+  {#if node.activeWindow !== null}
+    <Leaf hwnd={node.activeWindow} />
   {/if}
 </div>

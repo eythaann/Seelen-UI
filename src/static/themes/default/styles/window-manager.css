@@ -52,5 +52,21 @@
 }
 
 .wm-reserved {
-  background-color: var(--color-accent-lighter-color);
+  background-color: var(--system-accent-lighter-color);
+  border-radius: 8px;
+  opacity: 0.8;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--system-accent-darkest-color);
+
+  transition-property: width, height, left, top;
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+
+  .slu-icon {
+    height: 3rem !important;
+  }
 }

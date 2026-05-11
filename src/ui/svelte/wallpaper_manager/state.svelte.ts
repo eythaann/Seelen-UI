@@ -3,6 +3,7 @@ import type { Wallpaper } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 import { locale } from "./i18n/index.ts";
 import { debounce } from "lodash";
+import { calculateMonitorCoverage } from "./utils/monitorCoverage.ts";
 
 let _settings = $state(await Settings.getAsync());
 Settings.onChange((s) => (_settings = s));
@@ -22,6 +23,9 @@ $effect.root(() => {
 const focused = lazyRune(() => invoke(SeelenCommand.GetFocusedApp));
 subscribe(SeelenEvent.GlobalFocusChanged, focused.setByPayload);
 
+const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
+subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
+
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
@@ -39,6 +43,7 @@ subscribe(SeelenEvent.MediaSessions, players.setByPayload);
 
 await Promise.all([
   focused.init(),
+  interactables.init(),
   monitors.init(),
   virtualDesktops.init(),
   wallpapers.init(),
@@ -60,11 +65,21 @@ subscribe(SeelenEvent.GlobalMouseMove, () => {
 
 const muted = $derived(!["Progman", "SysListView32"].includes(focused.value.class));
 
-const paused = $derived(
-  idle ||
-    (focused.value.isFullscreened && !focused.value.exe?.toLowerCase().endsWith("explorer.exe")) ||
-    performanceMode.value !== "Disabled",
-);
+const pausedMonitors = $derived.by(() => {
+  if (performanceMode.value !== "Disabled" || idle) {
+    return new Set(monitors.value.map((m) => m.id));
+  }
+
+  const paused = new Set<string>();
+  const visibleWindows = interactables.value.filter((w) => !w.isIconic && w.rect != null);
+  for (const monitor of monitors.value) {
+    const windowRects = visibleWindows.filter((w) => w.monitor === monitor.id).map((w) => w.rect!);
+    if (calculateMonitorCoverage(monitor.rect, windowRects) > settings.coveragePauseThreshold) {
+      paused.add(monitor.id);
+    }
+  }
+  return paused;
+});
 
 const desktopRect = $derived.by(() => {
   let rect = { top: 0, left: 0, right: 0, bottom: 0 };
@@ -112,8 +127,8 @@ class State {
   get muted() {
     return muted;
   }
-  get paused() {
-    return paused;
+  isPaused(monitorId: string): boolean {
+    return pausedMonitors.has(monitorId);
   }
   get players() {
     return players.value;

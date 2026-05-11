@@ -29,9 +29,7 @@ fn get_session_manager() -> &'static parking_lot::Mutex<SessionManager> {
                 SeelenEvent::SeelenSessionChanged,
                 maybe_redact_session(session),
             );
-            // Emitters will check permissions and only return premium resources if the session has access,
-            // so we can emit all resources on any session change to ensure the UI is always up to date.
-            RESOURCES.emit_all().log_error();
+            RESOURCES.emit_on_session_changed().log_error();
         });
     });
     SessionManager::instance()

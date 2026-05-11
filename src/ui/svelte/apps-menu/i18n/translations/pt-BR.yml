@@ -1,4 +1,6 @@
 all: Todos os aplicativos
+app_settings: Configurações do aplicativo
+applications: Aplicativos
 back: Voltar
 disband: Dissolver pasta
 folder: Pasta
@@ -6,6 +8,7 @@ no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
 open_file_location: Abrir local do arquivo
 pin: Alfinete
 pin_to_dock: Fixar no Dock
+power_menu: Menu de energia
 query:
   all: Todos
   apps: Aplicativas

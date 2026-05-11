@@ -123,9 +123,10 @@ general:
   date_format_how_to: Com escriure un format de data?
   hardware_acceleration: Acceleració de maquinari
   hardware_acceleration_description: >-
-    Desactivar l'acceleració de maquinari reduirà l'ús de memòria, però pot
-    provocar problemes de rendiment. És segur desactivar-lo si no feu servir
-    fons de pantalla en viu.
+    Desactivar l'acceleració de maquinari reduirà l'ús de memòria. És segur
+    desactivar-lo si no feu servir animacions pesades, tot i que els ginys
+    individuals encara poden forçar l'ús de la GPU independentment d'aquesta
+    configuració.
   icon_pack:
     available: Paquets d'icones disponibles
     selected: Paquets d'icones actius
@@ -283,6 +284,7 @@ wall:
   collections: Col·leccions
   contrast: Contrast
   corrupted_wallpapers_message: 'Fons de pantalla danyats, penseu a suprimir-los:'
+  coverage_pause_threshold: Llindar de pausa (cobertura de la finestra)
   create: Crear
   create_collection: Crea col·lecció
   default_collection: Col·lecció per defecte
@@ -396,6 +398,7 @@ wm:
     ease_function: Funció d'alleujament d'animació
     enable: Activa les animacions de la finestra
   author: Autora
+  auto_stack: Apilament automàtic per categoria d'aplicació
   border:
     enable: Activa la vora de la finestra
     offset: Compensació fronterera

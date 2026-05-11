@@ -123,9 +123,10 @@ general:
   date_format_how_to: Kif tikteb format tad-data?
   hardware_acceleration: Aċċelerazzjoni tal-Hardware
   hardware_acceleration_description: >-
-    Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja,
-    iżda tista 'tikkawża problemi ta' prestazzjoni. Huwa sikur li tiddiżattiva
-    jekk mhux se tuża wallpapers ħajjin.
+    Id-diżattivazzjoni tal-aċċelerazzjoni tal-ħardwer tnaqqas l-użu tal-memorja.
+    Huwa sikur li tiddiżattiva jekk ma tkunx qed tuża animazzjonijiet tqal,
+    għalkemm widgets individwali xorta jistgħu jġiegħlu l-użu tal-GPU
+    irrispettivament minn dan is-setting.
   icon_pack:
     available: Pakketti ta' Ikoni Disponibbli
     selected: Pakketti tal-Ikoni Attivi
@@ -280,6 +281,7 @@ wall:
   collections: Kollezzjonijiet
   contrast: Kuntrast
   corrupted_wallpapers_message: 'Wallpapers korrotta, ikkunsidra li tħassar dawn:'
+  coverage_pause_threshold: Pawża limitu (kopertura tat-tieqa)
   create: Oħloq
   create_collection: Oħloq Ġbir
   default_collection: Ġbir Default
@@ -393,6 +395,7 @@ wm:
     ease_function: Funzjoni li tittaffa l-animazzjoni
     enable: Ippermetti l-animazzjonijiet tat-tieqa
   author: Awtur
+  auto_stack: Munzell awtomatiku skont il-kategorija tal-app
   border:
     enable: Ippermetti l-fruntiera tat-tieqa
     offset: Offset tal-fruntiera

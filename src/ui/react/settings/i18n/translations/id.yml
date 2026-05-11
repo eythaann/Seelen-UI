@@ -121,9 +121,10 @@ general:
   date_format_how_to: Bagaimana cara menulis format tanggal?
   hardware_acceleration: Akselerasi Perangkat Keras
   hardware_acceleration_description: >-
-    Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori,
-    namun dapat menyebabkan masalah kinerja. Aman untuk dinonaktifkan jika Anda
-    tidak akan menggunakan wallpaper hidup.
+    Menonaktifkan akselerasi perangkat keras akan mengurangi penggunaan memori.
+    Aman untuk menonaktifkannya jika Anda tidak menggunakan animasi berat,
+    meskipun masing-masing widget mungkin masih memaksa penggunaan GPU terlepas
+    dari pengaturan ini.
   icon_pack:
     available: Paket Ikon yang Tersedia
     selected: Paket Ikon Aktif
@@ -279,6 +280,7 @@ wall:
   collections: Koleksi
   contrast: Kontras
   corrupted_wallpapers_message: 'Wallpaper rusak, pertimbangkan untuk menghapus ini:'
+  coverage_pause_threshold: Ambang batas jeda (cakupan jendela)
   create: Membuat
   create_collection: Buat Koleksi
   default_collection: Koleksi Bawaan
@@ -392,6 +394,7 @@ wm:
     ease_function: Fungsi pelonggaran animasi
     enable: Aktifkan animasi Window
   author: Pengarang
+  auto_stack: Tumpukan otomatis berdasarkan kategori aplikasi
   border:
     enable: Aktifkan Perbatasan Jendela
     offset: Offset perbatasan

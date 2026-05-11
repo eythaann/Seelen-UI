@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { setContext } from "svelte";
   import { requestPositioningOfLeaves } from "../application.ts";
   import { state } from "../../state.svelte.ts";
   import Container from "./Container.svelte";
   import { NodeUtils } from "../../utils.ts";
+  import { TREE_CONTEXT_KEY } from "../domain.ts";
 
   interface Props {
     monitorId: string;
@@ -11,6 +13,12 @@
   let { monitorId }: Props = $props();
 
   let layout = $derived(state.getLayout(monitorId));
+
+  setContext(TREE_CONTEXT_KEY, {
+    get tree() {
+      return layout;
+    },
+  });
 
   let someIsMaximizedOnBg = $derived.by(() => {
     return state.interactables.some(
@@ -27,7 +35,7 @@
       return true;
     }
 
-    if (!NodeUtils.contains(layout.structure, state.focusedApp.hwnd)) {
+    if (!NodeUtils.contains(layout, layout.root, state.focusedApp.hwnd)) {
       return false;
     }
 
@@ -50,7 +58,7 @@
 </script>
 
 {#if layout}
-  <Container node={layout.structure} {overlayVisible} />
+  <Container nodeId={layout.root} {overlayVisible} />
 {/if}
 
 <style>

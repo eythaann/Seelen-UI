@@ -1,4 +1,6 @@
 all: すべてのアプリ
+app_settings: アプリの設定
+applications: アプリケーション
 back: 戻る
 disband: フォルダの登録解除
 folder: フォルダー
@@ -6,6 +8,7 @@ no_matching_items: 検索に一致するアイテムはありません
 open_file_location: ファイルの場所を開く
 pin: ピン留め
 pin_to_dock: ドックにピン留めする
+power_menu: パワーメニュー
 query:
   all: 全て
   apps: アプリ

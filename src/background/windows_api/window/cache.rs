@@ -48,6 +48,7 @@ impl Window {
             process: self.process().to_serializable(),
             prevent_pinning,
             relaunch,
+            rect: self.inner_rect().ok(),
         }
     }
 

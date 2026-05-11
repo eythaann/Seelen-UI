@@ -4,7 +4,7 @@
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { gState } from "../../state.svelte.ts";
   import { t } from "../../i18n/index.ts";
-  import { extractAccentColorFromElement, extractAccentColorFromSrc } from "../accentExtractor.ts";
+  import { extractAccentColorFromSrc } from "../accentExtractor.ts";
   import { convertFileSrc } from "@tauri-apps/api/core";
 
   let { monitor, extended = false }: { monitor: PhysicalMonitor; extended?: boolean } = $props();
@@ -128,7 +128,7 @@
         definition={slotAWallpaper}
         config={slotAWallpaper ? gState.settings.byWallpaper[slotAWallpaper.id] : undefined}
         onLoad={activeSlot === "a" ? () => (currentWasLoaded = true) : undefined}
-        paused={slotAOut || gState.paused}
+        paused={slotAOut || gState.isPaused(monitor.id)}
         muted={slotAOut || gState.muted || !monitor.isPrimary}
         out={slotAOut}
         pausedMessage={activeSlot === "a" && gState.performanceMode !== "Disabled"
@@ -144,7 +144,7 @@
         definition={slotBWallpaper}
         config={slotBWallpaper ? gState.settings.byWallpaper[slotBWallpaper.id] : undefined}
         onLoad={activeSlot === "b" ? () => (currentWasLoaded = true) : undefined}
-        paused={slotBOut || gState.paused}
+        paused={slotBOut || gState.isPaused(monitor.id)}
         muted={slotBOut || gState.muted || !monitor.isPrimary}
         out={slotBOut}
         pausedMessage={activeSlot === "b" && gState.performanceMode !== "Disabled"

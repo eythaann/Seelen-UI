@@ -228,7 +228,7 @@ slu_commands_declaration! {
     WegPinItem = weg_pin_item(path: PathBuf),
 
     // Windows Manager
-    WmGetRenderTree = wm_get_render_tree() -> WmRenderTree,
+    WmGetRenderTree = wm_get_render_tree() -> TwmGlobalRuntimeTree,
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
 

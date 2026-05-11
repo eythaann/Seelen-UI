@@ -1,13 +1,21 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
-import type { FocusedApp, WindowManagerSettings } from "@seelen-ui/lib/types";
+import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
 subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
 
+let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
+
 let interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
+
+let reservation = $state<TwmReservation | null>(null);
+subscribe(SeelenEvent.WMSetReservation, (e) => {
+  reservation = e.payload;
+});
 
 let forceRepositioning = $state(0);
 subscribe(SeelenEvent.WMForceRetiling, () => {
@@ -18,6 +26,7 @@ const [focusedAppInit, settingsInit] = await Promise.all([
   invoke(SeelenCommand.GetFocusedApp),
   Settings.getAsync(),
   layouts.init(),
+  workspaces.init(),
   interactables.init(),
 ]);
 
@@ -56,8 +65,10 @@ $effect.root(() => {
 
 export type State = _State;
 class _State {
-  getLayout(monitorId: string) {
-    return layouts.value[monitorId] || null;
+  getLayout(monitorId: string): TwmRuntimeTree | null {
+    const activeWsId = workspaces.value?.monitors?.[monitorId]?.active_workspace;
+    if (!activeWsId) return null;
+    return layouts.value?.workspaces?.[activeWsId] ?? null;
   }
   get forceRepositioning() {
     return forceRepositioning;
@@ -70,6 +81,9 @@ class _State {
   }
   get settings() {
     return settings;
+  }
+  get reservation() {
+    return reservation;
   }
 }
 

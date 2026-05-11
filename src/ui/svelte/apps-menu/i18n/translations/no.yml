@@ -1,4 +1,6 @@
 all: Alle apper
+app_settings: Appinnstillinger
+applications: Søknader
 back: Tilbake
 disband: Oppløs mappe
 folder: Mappe
@@ -6,6 +8,7 @@ no_matching_items: Ingen elementer funnet som samsvarer med søket ditt
 open_file_location: Åpne filplassering
 pin: Pin
 pin_to_dock: Fest til dock
+power_menu: Strømmeny
 query:
   all: Alle
   apps: Apper

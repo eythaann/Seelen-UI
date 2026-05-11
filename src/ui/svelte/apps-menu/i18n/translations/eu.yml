@@ -1,4 +1,6 @@
 all: Aplikazio guztiak
+app_settings: Aplikazioaren ezarpenak
+applications: Aplikazioak
 back: Itzuli
 disband: Desegin karpeta
 folder: Karpeta
@@ -6,6 +8,7 @@ no_matching_items: Ez da aurkitu zure bilaketarekin bat datorren elementurik
 open_file_location: Ireki fitxategiaren kokapena
 pin: Pin
 pin_to_dock: Ainguratu Dock-era
+power_menu: Power Menua
 query:
   all: Denak
   apps: Aplikazioak

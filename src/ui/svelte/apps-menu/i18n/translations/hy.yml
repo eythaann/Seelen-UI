@@ -1,4 +1,6 @@
 all: Բոլոր հավելվածները
+app_settings: Հավելվածի կարգավորումներ
+applications: Դիմումներ
 back: Ետ
 disband: Քանդել թղթապանակը
 folder: Պանակ
@@ -6,6 +8,7 @@ no_matching_items: Ձեր որոնմանը համապատասխանող տարր
 open_file_location: Բացեք Ֆայլի գտնվելու վայրը
 pin: Փին
 pin_to_dock: Ամրացրեք նավահանգիստին
+power_menu: Power Menu
 query:
   all: Բոլորը
   apps: Հավելվածներ

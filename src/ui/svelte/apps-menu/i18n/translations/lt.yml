@@ -1,4 +1,6 @@
 all: Visos programos
+app_settings: Programos nustatymai
+applications: Programos
 back: Atgal
 disband: Išskleisti aplanką
 folder: Aplankas
@@ -6,6 +8,7 @@ no_matching_items: Nerasta prekių, atitinkančių jūsų paiešką
 open_file_location: Atidarykite failo vietą
 pin: Smeigtukas
 pin_to_dock: Prisegti prie doko
+power_menu: Maitinimo meniu
 query:
   all: Visi
   apps: Programėlės

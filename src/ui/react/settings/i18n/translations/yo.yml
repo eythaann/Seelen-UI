@@ -117,8 +117,9 @@ general:
   date_format_how_to: Bawo ni lati kọ ọna kika ọjọ kan?
   hardware_acceleration: Hardware isare
   hardware_acceleration_description: >-
-    Pa ohun elo imudara yoo dinku lilo iranti, ṣugbọn o le fa awọn ọran iṣẹ. Ṣe
-    ailewu lati mu ṣiṣẹ ti o ko ba lo iṣẹṣọ ogiri laaye.
+    Pa ohun elo imudara yoo dinku lilo iranti. O jẹ ailewu lati mu ti o ko ba lo
+    awọn ohun idanilaraya wuwo, botilẹjẹpe awọn ẹrọ ailorukọ kọọkan le tun fi
+    agbara mu lilo GPU laibikita eto yii.
   icon_pack:
     available: Awọn akopọ Aami ti o wa
     selected: Awọn akopọ Aami ti nṣiṣe lọwọ
@@ -269,6 +270,7 @@ wall:
   collections: Awọn akojọpọ
   contrast: Ifiwera
   corrupted_wallpapers_message: 'Awọn iṣẹṣọ ogiri ti bajẹ, ronu piparẹ awọn wọnyi:'
+  coverage_pause_threshold: Duro ẹnu-ọna (agbegbe ferese)
   create: Ṣẹda
   create_collection: Ṣẹda Gbigba
   default_collection: Gbigba aiyipada
@@ -381,6 +383,7 @@ wm:
     ease_function: Iṣẹ to dara pupọ
     enable: Jeki awọn ohun idanilaraya window
   author: Onkọwe ọkunrin
+  auto_stack: Iṣakojọpọ aifọwọyi nipasẹ ẹka app
   border:
     enable: Jeki aala window
     offset: Iparun aala

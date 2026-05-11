@@ -129,12 +129,43 @@ impl ResourceManager {
         Ok(())
     }
 
-    pub fn emit_all(&self) -> Result<()> {
-        self.emit_themes();
-        self.emit_plugins();
-        self.emit_widgets()?;
-        self.emit_icon_packs();
-        self.emit_wallpapers();
+    /// Emits change events only for resource types that contain at least one
+    /// premium item, since those are the only lists whose contents change when
+    /// premium access is gained or lost.
+    pub fn emit_on_session_changed(&self) -> Result<()> {
+        let mut has_premium = false;
+
+        self.themes.scan(|_, v| has_premium |= v.metadata.premium);
+        if has_premium {
+            self.emit_themes();
+            has_premium = false;
+        }
+
+        self.plugins.scan(|_, v| has_premium |= v.metadata.premium);
+        if has_premium {
+            self.emit_plugins();
+            has_premium = false;
+        }
+
+        self.widgets.scan(|_, v| has_premium |= v.metadata.premium);
+        if has_premium {
+            self.emit_widgets()?;
+            has_premium = false;
+        }
+
+        self.icon_packs
+            .scan(|_, v| has_premium |= v.metadata.premium);
+        if has_premium {
+            self.emit_icon_packs();
+            has_premium = false;
+        }
+
+        self.wallpapers
+            .scan(|_, v| has_premium |= v.metadata.premium);
+        if has_premium {
+            self.emit_wallpapers();
+        }
+
         Ok(())
     }
 }

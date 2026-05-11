@@ -6,7 +6,10 @@ use seelen_core::{
 };
 use serde::{Deserialize, Serialize};
 
-use crate::error::{Error, Result};
+use crate::{
+    commands::AppCommand,
+    error::{Error, Result},
+};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum IpcResponse {
@@ -33,11 +36,13 @@ impl IpcResponse {
 
 // ==============================================
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum AppMessage {
-    /// Command-line messages
+    /// Raw command line messages
     Cli(Vec<String>),
+    Command(AppCommand),
+    /// Open a URI or file path in the main instance
+    OpenUri(String),
     /// System tray change event
     TrayChanged(Win32TrayEvent),
     /// Debug message for logging and diagnostics

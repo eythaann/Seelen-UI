@@ -54,7 +54,7 @@ impl SeelenWall {
     fn create_window() -> Result<WebviewWindow> {
         let handle = get_app_handle();
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
-        let args = WebviewArgs::default();
+        let args = WebviewArgs::create(true, false);
 
         let builder = tauri::WebviewWindowBuilder::new(
             handle,
@@ -65,6 +65,7 @@ impl SeelenWall {
         .minimizable(false)
         .maximizable(false)
         .closable(false)
+        .focusable(false)
         .resizable(false)
         .decorations(false)
         .shadow(false)

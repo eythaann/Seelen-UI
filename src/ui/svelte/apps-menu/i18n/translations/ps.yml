@@ -1,4 +1,6 @@
 all: ټول اطلاقات
+app_settings: د اپلیکیشن تنظیمات
+applications: غوښتنلیکونه
 back: شاته
 disband: فولډر منحل کړئ
 folder: پوښۍ
@@ -6,6 +8,7 @@ no_matching_items: ستاسو د لټون سره سمون خوري هیڅ توک
 open_file_location: د فایل ځای خلاص کړئ
 pin: پن
 pin_to_dock: ډاک ته پین ​​کړئ
+power_menu: د بریښنا مینو
 query:
   all: ټول
   apps: ایپس

@@ -121,9 +121,9 @@ general:
   date_format_how_to: Kako napisati format datuma?
   hardware_acceleration: Hardversko ubrzanje
   hardware_acceleration_description: >-
-    Onemogućavanje hardverskog ubrzanja smanjit će upotrebu memorije, ali može
-    uzrokovati probleme s performansama. Sigurno je onemogućiti ako ne želite
-    koristiti žive pozadine.
+    Onemogućavanje hardverskog ubrzanja smanjit će upotrebu memorije. Sigurno je
+    onemogućiti ako ne koristite teške animacije, iako pojedinačni widgeti mogu
+    i dalje prisiljavati upotrebu GPU-a bez obzira na ovu postavku.
   icon_pack:
     available: Dostupni paketi ikona
     selected: Aktivni paketi ikona
@@ -280,6 +280,7 @@ wall:
   collections: Zbirke
   contrast: Kontrast
   corrupted_wallpapers_message: 'Oštećene pozadine, razmislite o brisanju ovih:'
+  coverage_pause_threshold: Prag pauze (pokrivenost prozora)
   create: Stvoriti
   create_collection: Stvori zbirku
   default_collection: Zadana zbirka
@@ -393,6 +394,7 @@ wm:
     ease_function: Funkcija ublažavanja animacije
     enable: Omogući animacije prozora
   author: Autor
+  auto_stack: Automatsko slaganje prema kategoriji aplikacije
   border:
     enable: Omogućite obrub prozora
     offset: Offset

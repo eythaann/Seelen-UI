@@ -4,7 +4,6 @@
   import { globalState } from "../state.svelte";
   import { FileIcon, Icon } from "libs/ui/svelte/components/Icon";
   import MissingIcon from "libs/ui/svelte/components/Icon/MissingIcon.svelte";
-  import { convertFileSrc } from "@tauri-apps/api/core";
 
   interface Props {
     task: UserAppWindow;
@@ -107,7 +106,7 @@
   </div>
   <div class="task-preview-container">
     {#if preview}
-      <img class="task-preview" src={convertFileSrc(preview.path) + "?v=" + preview.hash} alt="" />
+      <img class="task-preview" src={`data:image/webp;base64,${preview.data}`} alt="" />
     {:else}
       <MissingIcon class="task-no-preview" />
     {/if}

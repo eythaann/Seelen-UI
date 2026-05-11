@@ -124,9 +124,10 @@ general:
   date_format_how_to: Jak napisać format daty?
   hardware_acceleration: Przyspieszenie sprzętowe
   hardware_acceleration_description: >-
-    Wyłączenie akceleracji sprzętowej zmniejszy zużycie pamięci, ale może
-    spowodować problemy z wydajnością. Można bezpiecznie wyłączyć, jeśli nie
-    będziesz używać animowanych tapet.
+    Wyłączenie przyspieszania sprzętowego zmniejszy zużycie pamięci. Można
+    bezpiecznie wyłączyć tę funkcję, jeśli nie używasz ciężkich animacji,
+    chociaż poszczególne widżety mogą nadal wymuszać użycie procesora
+    graficznego niezależnie od tego ustawienia.
   icon_pack:
     available: Dostępne pakiety ikon
     selected: Aktywne pakiety ikon
@@ -281,6 +282,7 @@ wall:
   collections: Kolekcje
   contrast: Kontrast
   corrupted_wallpapers_message: 'Uszkodzone tapety. Rozważ ich usunięcie:'
+  coverage_pause_threshold: Próg pauzy (zasłonięcie okna)
   create: Tworzyć
   create_collection: Utwórz kolekcję
   default_collection: Kolekcja domyślna
@@ -393,6 +395,7 @@ wm:
     ease_function: Funkcja łagodzenia animacji
     enable: Włącz animacje okna
   author: Autor
+  auto_stack: Automatyczne układanie według kategorii aplikacji
   border:
     enable: Włącz granicę okna
     offset: Przesunięcie granic

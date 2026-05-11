@@ -1,4 +1,6 @@
 all: Všechny aplikace
+app_settings: Nastavení aplikace
+applications: Aplikace
 back: Zadní
 disband: Rozpustit složku
 folder: Složka
@@ -6,6 +8,7 @@ no_matching_items: Nebyly nalezeny žádné položky odpovídající vašemu hle
 open_file_location: Otevřete Umístění souboru
 pin: Kolík
 pin_to_dock: Připnout do doku
+power_menu: Nabídka napájení
 query:
   all: Vše
   apps: Aplikace

@@ -926,9 +926,11 @@ impl WindowsApi {
     pub fn extract_thumbnail_from_stream(
         stream: IRandomAccessStreamWithContentType,
     ) -> Result<PathBuf> {
-        let image = Self::stream_to_dynamic_image(stream)?;
-        let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
-        image.save(&image_path)?;
+        let image = Self::stream_to_dynamic_image(stream)?.to_rgba8();
+        let webp_bytes =
+            webp::Encoder::from_rgba(image.as_raw(), image.width(), image.height()).encode(90.0);
+        let image_path = std::env::temp_dir().join(format!("{}.webp", uuid::Uuid::new_v4()));
+        std::fs::write(&image_path, &*webp_bytes)?;
         Ok(image_path)
     }
 

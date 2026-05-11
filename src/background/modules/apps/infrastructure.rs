@@ -28,7 +28,7 @@ fn get_apps_manager() -> &'static UserAppsManager {
         WinPreviewManager::subscribe(|_| {
             emit_to_webviews(
                 SeelenEvent::UserAppWindowsPreviewsChanged,
-                WinPreviewManager::instance().previews.to_hash_map(),
+                WinPreviewManager::instance().get_previews(),
             );
         });
     });
@@ -68,7 +68,7 @@ pub fn get_user_app_windows() -> Vec<UserAppWindow> {
 #[tauri::command(async)]
 pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
     get_apps_manager();
-    WinPreviewManager::instance().previews.to_hash_map()
+    WinPreviewManager::instance().get_previews()
 }
 
 /// This function is called show_desktop but acts more like minimize_all

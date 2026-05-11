@@ -122,9 +122,10 @@ general:
   date_format_how_to: Sana formatini qanday yozish kerak?
   hardware_acceleration: Uskuna tezlashuvi
   hardware_acceleration_description: >-
-    Uskuna tezlashtirishni o'chirib qo'yish xotiradan foydalanishni kamaytiradi,
-    lekin ishlash bilan bog'liq muammolarga olib kelishi mumkin. Jonli fon
-    rasmlarini ishlatmasangiz, o'chirib qo'yish xavfsiz.
+    Uskuna tezlashtirishni o'chirib qo'yish xotiradan foydalanishni kamaytiradi.
+    Agar siz og'ir animatsiyalardan foydalanmasangiz, uni o'chirib qo'yish
+    xavfsizdir, lekin individual vidjetlar ushbu sozlamadan qat'iy nazar GPUdan
+    foydalanishga majbur qilishi mumkin.
   icon_pack:
     available: Mavjud piktogramma to'plamlari
     selected: Faol piktogramma to'plamlari
@@ -280,6 +281,7 @@ wall:
   collections: To'plamlar
   contrast: Qarama-qarshilik
   corrupted_wallpapers_message: 'Buzilgan fon rasmlari, ularni o''chirishni o''ylab ko''ring:'
+  coverage_pause_threshold: Pauza chegarasi (deraza qoplami)
   create: Yaratish
   create_collection: To'plam yaratish
   default_collection: Birlamchi toʻplam
@@ -396,6 +398,7 @@ wm:
     ease_function: Animatsiya engillashtirish funktsiyasi
     enable: Oyna animatsiyalarini yoqing
   author: Muallif
+  auto_stack: Ilovalar toifasi boʻyicha avtomatik toʻplam
   border:
     enable: Oynaning chegarasini yoqing
     offset: Chegara ofset

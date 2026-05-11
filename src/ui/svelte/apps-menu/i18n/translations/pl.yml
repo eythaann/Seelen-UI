@@ -1,4 +1,6 @@
 all: Wszystkie aplikacje
+app_settings: Ustawienia aplikacji
+applications: Aplikacje
 back: Z powrotem
 disband: Rozwiąż folder
 folder: Folder
@@ -6,6 +8,7 @@ no_matching_items: Nie znaleziono żadnych elementów pasujących do Twojego wys
 open_file_location: Otwórz lokalizację pliku
 pin: Szpilka
 pin_to_dock: Przypnij do Docka
+power_menu: Menu zasilania
 query:
   all: Wszystko
   apps: Aplikacje

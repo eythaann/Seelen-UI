@@ -104,7 +104,7 @@ general:
   date_format: 日期格式
   date_format_how_to: 日期格式怎麼寫？
   hardware_acceleration: 硬體加速
-  hardware_acceleration_description: 停用硬體加速會減少記憶體使用量，但可能會導致效能問題。 如果您不使用動態桌布，可以安全地停用。
+  hardware_acceleration_description: 停用硬體加速將減少記憶體使用。 如果您不使用大量動畫，則停用它是安全的，但無論此設定如何，單一小工具仍可能強制使用 GPU。
   icon_pack:
     available: 可用的icon包
     selected: 使用中的icon包
@@ -247,6 +247,7 @@ wall:
   collections: 收藏
   contrast: 對比
   corrupted_wallpapers_message: 損壞的桌布，請考慮刪除這些：
+  coverage_pause_threshold: 暫停閾值（視窗覆蓋率）
   create: 創建
   create_collection: 創建收藏
   default_collection: 默認集合
@@ -356,6 +357,7 @@ wm:
     ease_function: 動畫種類
     enable: 啟用視窗動畫
   author: 作者
+  auto_stack: 按應用程式類別自動堆疊
   border:
     enable: 啟用視窗邊框
     offset: 邊界偏移

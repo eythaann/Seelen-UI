@@ -2,7 +2,7 @@ pub mod cli;
 pub mod handler;
 pub mod hook;
 pub mod instance;
-pub mod state;
+pub mod state_v2;
 
 use instance::WindowManagerV2;
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};

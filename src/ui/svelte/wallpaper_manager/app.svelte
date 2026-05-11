@@ -3,12 +3,7 @@
   import MonitorContainers from "./modules/Monitor/infra.svelte";
 
   $effect(() => {
-    // Manually show the widget to avoid the focus call on ready,
-    // as this unfocusable widget causes the wallpaper to not be correctly
-    // positioned under the desktop.
-    Widget.self.ready({ show: false }).then(() => {
-      Widget.self.show();
-    });
+    Widget.self.ready();
   });
 </script>
 

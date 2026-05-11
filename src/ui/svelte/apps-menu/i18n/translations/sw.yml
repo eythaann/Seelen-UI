@@ -1,4 +1,6 @@
 all: Programu Zote
+app_settings: Mipangilio ya Programu
+applications: Maombi
 back: Nyuma
 disband: Ondoa Folda
 folder: Folda
@@ -6,6 +8,7 @@ no_matching_items: Hakuna vipengee vilivyopatikana vinavyolingana na utafutaji w
 open_file_location: Fungua Mahali pa Faili
 pin: Bandika
 pin_to_dock: Bandika kwenye Gati
+power_menu: Menyu ya Nguvu
 query:
   all: Wote
   apps: Programu

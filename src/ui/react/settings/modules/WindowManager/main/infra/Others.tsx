@@ -1,7 +1,7 @@
-import { InputNumber, Select } from "antd";
+import { InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { getWmConfig, setWmDragBehavior, setWmResizeDelta } from "../../application.ts";
+import { getWmConfig, patchWmConfig, setWmDragBehavior, setWmResizeDelta } from "../../application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
 import { WmDragBehavior } from "@seelen-ui/lib/types";
@@ -19,6 +19,10 @@ export const OthersConfigs = () => {
 
   const onChangeDragBehavior = (value: WmDragBehavior) => {
     setWmDragBehavior(value);
+  };
+
+  const setWmAutoStack = (value: boolean) => {
+    patchWmConfig({ autoStackingByCategory: value });
   };
 
   return (
@@ -45,6 +49,11 @@ export const OthersConfigs = () => {
       </SettingsGroup>
 
       <SettingsGroup>
+        <SettingsOption>
+          <b>{t("wm.auto_stack")}</b>
+          <Switch checked={wmConfig.autoStackingByCategory} onChange={setWmAutoStack} />
+        </SettingsOption>
+
         <SettingsOption>
           <b>{t("wm.resize_delta")}</b>
           <InputNumber value={resizeDelta} onChange={onChangeResizeDelta} min={1} max={40} />

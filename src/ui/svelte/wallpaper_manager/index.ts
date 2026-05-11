@@ -6,8 +6,6 @@ import { loadTranslations } from "./i18n/index.ts";
 import "@seelen-ui/lib/styles/reset.css";
 
 await Widget.getCurrent().init();
-Widget.self.window.setFocusable(false);
-
 await loadTranslations();
 
 const root = document.getElementById("root")!;

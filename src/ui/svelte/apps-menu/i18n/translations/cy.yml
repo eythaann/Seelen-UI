@@ -1,4 +1,6 @@
 all: Pob Ap
+app_settings: Gosodiadau Ap
+applications: Ceisiadau
 back: Yn ol
 disband: Ffolder Diddymu
 folder: Ffolder
@@ -6,6 +8,7 @@ no_matching_items: Ni chanfuwyd unrhyw eitemau sy'n cyfateb i'ch chwiliad
 open_file_location: Agor Lleoliad Ffeil
 pin: Pin
 pin_to_dock: Pin i'r Doc
+power_menu: Dewislen Pwer
 query:
   all: Pawb
   apps: Apiau

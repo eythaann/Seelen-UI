@@ -120,9 +120,10 @@ general:
   date_format_how_to: Hoe schrijf je een datumformaat?
   hardware_acceleration: Hardwareversnelling
   hardware_acceleration_description: >-
-    Het uitschakelen van hardwareversnelling vermindert het geheugengebruik,
-    maar kan prestatieproblemen veroorzaken. Is veilig uit te schakelen als u
-    geen live achtergronden gebruikt.
+    Als u hardwareversnelling uitschakelt, wordt het geheugengebruik verminderd.
+    Het is veilig om dit uit te schakelen als u geen zware animaties gebruikt,
+    hoewel individuele widgets ongeacht deze instelling nog steeds GPU-gebruik
+    kunnen afdwingen.
   icon_pack:
     available: Beschikbare pictogrampakketten
     selected: Actieve pictogrampakketten
@@ -275,6 +276,7 @@ wall:
   collections: Collecties
   contrast: Contrast
   corrupted_wallpapers_message: 'Beschadigde achtergronden, overweeg deze te verwijderen:'
+  coverage_pause_threshold: Pauzedrempel (vensterdekking)
   create: Creëren
   create_collection: Verzameling maken
   default_collection: Standaardcollectie
@@ -392,6 +394,7 @@ wm:
     ease_function: Animatie -versoepelingsfunctie
     enable: Schakel Window's animaties in
   author: Auteur
+  auto_stack: Automatische stapeling per app-categorie
   border:
     enable: Schakel Window's Border in
     offset: Grens offset

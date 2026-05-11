@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.6.5-dev]
+
+### features
+
+- twm auto stack by application categories.
+- twm node splitting implementation.
+- pause wallpaper by monitor overlap threshold.
+
+### enhancements
+
+- use webp for system extracted icons and media player thumbnails.
+- twm reset of workspaces on reset size shortcut.
+- twm focus side monitor when theres no more nodes at the specified side in the current workspace.
+- twm allow move windows between monitors via shortcuts.
+- add variables system on extended yaml syntax.
+
+### refactor
+
+- tiling window manager.
+- capture window system.
+- GUI and CLI splited into different executables.
+
+### fix
+
+- stealing focus on widgets reload.
+
 ## [2.6.4]
 
 ### enhancements

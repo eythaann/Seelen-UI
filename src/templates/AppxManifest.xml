@@ -78,12 +78,6 @@
       </uap3:VisualElements>
 
       <Extensions>
-        <uap5:Extension Category="windows.appExecutionAlias">
-          <uap5:AppExecutionAlias>
-            <uap5:ExecutionAlias Alias="seelen-ui.exe" />
-          </uap5:AppExecutionAlias>
-        </uap5:Extension>
-
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="seelen-ui.file">
             <uap:Logo>static\icons\128x128.png</uap:Logo>
@@ -104,13 +98,13 @@
     </Application>
 
     <Application
-      Id="Service"
-      Executable="slu-service.exe"
+      Id="CLI"
+      Executable="slu.exe"
       EntryPoint="Windows.FullTrustApplication"
     >
       <uap3:VisualElements
-        DisplayName="SLU Service"
-        Description="Service Helper for Seelen UI"
+        DisplayName="SLU Terminal Tools"
+        Description="Command-line client for Seelen UI"
         Square150x150Logo="static\icons\128x128.png"
         Square44x44Logo="static\icons\48x48.png"
         BackgroundColor="transparent"
@@ -122,16 +116,9 @@
       <Extensions>
         <uap5:Extension Category="windows.appExecutionAlias">
           <uap5:AppExecutionAlias>
-            <uap5:ExecutionAlias Alias="slu-service.exe" />
+            <uap5:ExecutionAlias Alias="slu.exe" />
           </uap5:AppExecutionAlias>
         </uap5:Extension>
-
-        <uap10:Extension Category="windows.protocol">
-          <uap10:Protocol Name="slu-service.uri">
-            <uap10:Logo>static\icons\128x128.png</uap10:Logo>
-            <uap10:DisplayName>Seelen UI Service</uap10:DisplayName>
-          </uap10:Protocol>
-        </uap10:Extension>
       </Extensions>
     </Application>
   </Applications>

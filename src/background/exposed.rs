@@ -1,17 +1,13 @@
 use std::{collections::HashMap, os::windows::process::CommandExt, path::PathBuf};
 
-use owo_colors::OwoColorize;
 use seelen_core::{
     command_handler_list,
-    constants::SUPPORTED_LANGUAGES,
-    resource::ResourceText,
     system_state::{AppBarEdge, Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
     Rect,
 };
 
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
-use translators::Translator;
 use windows::Win32::{
     Foundation::{HWND, RECT},
     System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW},
@@ -162,95 +158,6 @@ async fn install_last_available_update() -> Result<()> {
     get_app_handle().restart();
     #[allow(unreachable_code)]
     Ok(())
-}
-
-pub async fn translate_file(path: PathBuf, source_lang: Option<String>) -> Result<()> {
-    let file = std::fs::File::open(&path)?;
-    let mut texts: ResourceText = serde_yaml::from_reader(file)?;
-
-    let code = match source_lang {
-        Some(source_lang) => source_lang,
-        None => "en".to_string(),
-    };
-
-    if !texts.has(&code) {
-        return Err(format!("Source Language ({code}) not found.").into());
-    }
-
-    let source = texts.get(&code).to_owned();
-    let total = SUPPORTED_LANGUAGES.len();
-
-    let longest_lang = SUPPORTED_LANGUAGES
-        .iter()
-        .map(|lang| lang.en_label.len())
-        .max()
-        .unwrap_or(0);
-
-    for (idx, lang) in SUPPORTED_LANGUAGES.iter().enumerate() {
-        let step = if idx < 9 {
-            format!("0{}", idx + 1)
-        } else {
-            (idx + 1).to_string()
-        };
-
-        // fill with spaces to fit max length
-        let label = format!(
-            "{}{}",
-            lang.en_label,
-            " ".repeat(longest_lang - lang.en_label.len())
-        );
-
-        if texts.has(lang.value) {
-            println!(
-                "[{step}/{total}] {} => {}",
-                label.bright_black(),
-                "Skipped".bright_black()
-            );
-            continue;
-        }
-
-        match _translate_text(&source, &code, lang.value).await {
-            Ok(value) => {
-                println!(
-                    "[{step}/{total}] {} => \"{}\"",
-                    label.bold().bright_green(),
-                    value
-                );
-                texts.set(lang.value.to_string(), value);
-            }
-            Err(err) => {
-                eprintln!(
-                    "[{step}/{total}] {} => Error translating to {} ({}): {}",
-                    label.bold().bright_red(),
-                    lang.en_label,
-                    lang.value,
-                    err
-                );
-            }
-        }
-    }
-
-    let file = std::fs::File::create(&path)?;
-    serde_yaml::to_writer(file, &texts)?;
-    Ok(())
-}
-
-async fn _translate_text(source: &str, source_lang: &str, mut target_lang: &str) -> Result<String> {
-    use translators::GoogleTranslator;
-    let translator = GoogleTranslator::default();
-
-    if target_lang == "zh" {
-        target_lang = "zh-CN";
-    }
-
-    if target_lang == "pt" {
-        target_lang = "pt-BR";
-    }
-
-    let translated = translator
-        .translate_async(source, source_lang, target_lang)
-        .await?;
-    Ok(translated)
 }
 
 #[tauri::command(async)]

@@ -127,8 +127,9 @@ general:
   hardware_acceleration: Pagpapabilis ng Hardware
   hardware_acceleration_description: >-
     Ang hindi pagpapagana ng hardware acceleration ay makakabawas sa paggamit ng
-    memory, ngunit maaaring magdulot ng mga isyu sa performance. Ligtas na hindi
-    paganahin kung hindi ka gagamit ng mga live na wallpaper.
+    memorya. Ligtas itong i-disable kung hindi ka gumagamit ng mabibigat na
+    animation, kahit na ang mga indibidwal na widget ay maaari pa ring pilitin
+    ang paggamit ng GPU anuman ang setting na ito.
   icon_pack:
     available: Magagamit na Mga Icon Pack
     selected: Mga Aktibong Icon Pack
@@ -286,6 +287,7 @@ wall:
   collections: Mga koleksyon
   contrast: Kaibahan
   corrupted_wallpapers_message: 'Mga sirang wallpaper, isaalang-alang ang pagtanggal ng mga ito:'
+  coverage_pause_threshold: I-pause ang threshold (saklaw sa bintana)
   create: Lumikha
   create_collection: Lumikha ng Koleksyon
   default_collection: Default na Koleksyon
@@ -400,6 +402,7 @@ wm:
     ease_function: Pag -andar ng pag -easing ng animation
     enable: Paganahin ang mga animation ng window
   author: May -akda
+  auto_stack: Auto stack ayon sa kategorya ng app
   border:
     enable: Paganahin ang hangganan ng window
     offset: Border Offset

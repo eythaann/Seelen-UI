@@ -1,6 +1,6 @@
 [package]
 name = "seelen-ui"
-version = "2.6.4"
+version = "2.6.5"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "AGPL-3.0-or-later"
@@ -12,6 +12,10 @@ rust-version = "1.89"
 [[bin]]
 name = "seelen-ui"
 path = "background/main.rs"
+
+[[bin]]
+name = "slu"
+path = "slu/main.rs"
 
 [[bin]]
 name = "slu-service"
@@ -55,6 +59,7 @@ windows-core = { workspace = true } # windows-rs already depends and reexports t
 windows-future = { workspace = true }
 win-screenshot = { workspace = true }
 base64 = { workspace = true }
+webp = { workspace = true }
 arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }

@@ -123,9 +123,10 @@ general:
   date_format_how_to: Ibhalwa kanjani ifomethi yedethi?
   hardware_acceleration: I-Hardware Acceleration
   hardware_acceleration_description: >-
-    Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori,
-    kodwa kungabangela izinkinga zokusebenza. Kuphephile ukukhubaza uma ungeke
-    usebenzise amaphephadonga abukhoma.
+    Ukukhubaza ukusheshisa kwehadiwe kuzonciphisa ukusetshenziswa kwememori.
+    Kuphephile ukukhubaza uma ungasebenzisi ukugqwayiza okusindayo, noma
+    amawijethi angawodwana asengaphoqa ukusetshenziswa kwe-GPU ngaphandle
+    kwalokhu kulungiselelwa.
   icon_pack:
     available: Amaphekhi esithonjana atholakalayo
     selected: Amaphekhi Wesithonjana Asebenzayo
@@ -280,6 +281,7 @@ wall:
   collections: Amaqoqo
   contrast: Ukuqhathanisa
   corrupted_wallpapers_message: 'Izithombe zangemuva ezonakele, cabanga ukususa lezi:'
+  coverage_pause_threshold: Misa isikhashana umkhawulo (ukufakwa kwewindi)
   create: Dala
   create_collection: Dala Iqoqo
   default_collection: Iqoqo elizenzakalelayo
@@ -397,6 +399,7 @@ wm:
     ease_function: Ukugqwayiza kwe-animation function
     enable: Nika amandla izithombe zewindi
   author: Umlobi
+  auto_stack: Isitaki esizenzakalelayo ngesigaba sohlelo lokusebenza
   border:
     enable: Nika amandla umngcele wewindi
     offset: Umngcele we-Offset

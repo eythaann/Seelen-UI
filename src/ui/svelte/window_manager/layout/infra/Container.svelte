@@ -1,31 +1,37 @@
 <script lang="ts">
-  import { WmNodeKind } from "@seelen-ui/lib/types";
-  import type { Node } from "../domain.ts";
+  import { getContext } from "svelte";
+  import type { TwmRuntimeTree } from "@seelen-ui/lib/types";
+  import { TwmNodeKind } from "@seelen-ui/lib/types";
   import { NodeUtils } from "../../utils.ts";
+  import { TREE_CONTEXT_KEY } from "../domain.ts";
   import Leaf from "./containers/Leaf.svelte";
   import Stack from "./containers/Stack.svelte";
   import Container from "./Container.svelte";
 
   interface Props {
-    node: Node;
+    nodeId: number;
     overlayVisible: boolean;
   }
 
-  let { node, overlayVisible }: Props = $props();
+  let { nodeId, overlayVisible }: Props = $props();
+
+  const ctx = getContext<{ tree: TwmRuntimeTree | null }>(TREE_CONTEXT_KEY);
+  let tree = $derived(ctx.tree);
+  let node = $derived(tree?.nodes[nodeId]);
 </script>
 
-{#if !NodeUtils.isEmpty(node)}
-  {#if node.type === WmNodeKind.Stack}
+{#if node && tree && !NodeUtils.isEmpty(tree, nodeId)}
+  {#if node.kind === TwmNodeKind.Stack}
     <Stack {node} {overlayVisible} />
-  {:else if node.type === WmNodeKind.Leaf && node.active}
-    <Leaf hwnd={node.active} growFactor={node.growFactor} />
-  {:else if node.type === WmNodeKind.Horizontal || node.type === WmNodeKind.Vertical}
+  {:else if node.kind === TwmNodeKind.Leaf && node.activeWindow !== null}
+    <Leaf hwnd={node.activeWindow} growFactor={node.growFactor} />
+  {:else if node.kind === TwmNodeKind.Horizontal || node.kind === TwmNodeKind.Vertical}
     <div
       style:flex-grow={node.growFactor}
-      class={["wm-container", `wm-${node.type.toLowerCase()}`]}
+      class={["wm-container", `wm-${node.kind.toLowerCase()}`]}
     >
-      {#each node.children as child, idx (idx)}
-        <Container node={child} {overlayVisible}/>
+      {#each node.children as childId (childId)}
+        <Container nodeId={childId} {overlayVisible} />
       {/each}
     </div>
   {/if}

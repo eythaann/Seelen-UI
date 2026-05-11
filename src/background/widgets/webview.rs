@@ -27,7 +27,10 @@ impl WidgetWebview {
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());
 
-        let args = WebviewArgs::default();
+        let args = WebviewArgs::create(
+            state.settings.hardware_acceleration || widget.id == WidgetId::known_wall(),
+            state.settings.unstable_optimizations,
+        );
 
         let url = match widget.loader {
             WidgetLoader::Legacy => {
@@ -68,6 +71,7 @@ impl WidgetWebview {
                 .minimizable(false)
                 .maximizable(false)
                 .closable(false)
+                .focusable(false);
         }
 
         match widget.preset {
@@ -205,6 +209,8 @@ impl std::fmt::Display for WidgetWebviewLabel {
 
 pub struct WebviewArgs {
     args: Vec<String>,
+    with_gpu: bool,
+    unstable: bool,
 }
 
 impl WebviewArgs {
@@ -215,18 +221,34 @@ impl WebviewArgs {
         "--disk-cache-size=0",
         "--media-cache-size=0",
         "--disable-background-networking",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-renderer-backgrounding",
         "--disable-sync",
         "--disable-breakpad",
         "--disable-component-extensions-with-background-pages",
         "--no-pings",
-        "--aggressive-cache-discard",
+        // "--aggressive-cache-discard", // maybe causes more resources than it reduces
+    ];
+
+    const GPU_ARGS: &[&str] = &[
+        "--enable-gpu",
+        "--enable-accelerated-video-decode",
+        "--enable-gpu-rasterization",
+        "--enable-zero-copy",
+        "--enable-native-gpu-memory-buffers",
+        "--enable-oop-rasterization",
+        "--use-angle=d3d11", // Media Foundation + DXVA + D3D11 in windows is the most optimized
     ];
 
     const PERFORMANCE_ARGS: &[&str] = &[
         // "--enable-low-end-device-mode", // unstable flag that causes more issues than it solves
         // "--in-process-gpu", // unstable flag
         "--disable-gpu",
-        // "--disable-software-rasterizer",
+        "--disable-accelerated-video-decode",
+        "--disable-accelerated-video-encode",
+        "--disable-gpu-rasterization",
+        "--disable-software-rasterizer",
     ];
 
     const UNSTABLE_OPTIMIZATIONS: &[&str] = &[
@@ -235,25 +257,45 @@ impl WebviewArgs {
         "--process-per-site",
     ];
 
+    pub fn create(with_gpu: bool, unstable_optimizations: bool) -> Self {
+        let mut args: Vec<String> = Self::BASE_ARGS.iter().map(|s| s.to_string()).collect();
+
+        if with_gpu {
+            args.extend(Self::GPU_ARGS.iter().map(|s| s.to_string()));
+        } else {
+            args.extend(Self::PERFORMANCE_ARGS.iter().map(|s| s.to_string()));
+        };
+
+        if unstable_optimizations {
+            args.extend(Self::UNSTABLE_OPTIMIZATIONS.iter().map(|s| s.to_string()));
+        }
+
+        Self {
+            args,
+            with_gpu,
+            unstable: unstable_optimizations,
+        }
+    }
+
     pub fn data_directory(&self) -> PathBuf {
-        SEELEN_COMMON.app_cache_dir().to_path_buf()
+        let foldername = match (self.with_gpu, self.unstable) {
+            (true, true) => "gpu-unstable",
+            (true, false) => "gpu",
+            (false, true) => "no-gpu-unstable",
+            (false, false) => "no-gpu",
+        };
+
+        SEELEN_COMMON.app_cache_dir().join(foldername)
     }
 }
 
 impl Default for WebviewArgs {
     fn default() -> Self {
         let state = FULL_STATE.load();
-        let mut args: Vec<String> = Self::BASE_ARGS.iter().map(|s| s.to_string()).collect();
-
-        if !state.settings.hardware_acceleration {
-            args.extend(Self::PERFORMANCE_ARGS.iter().map(|s| s.to_string()));
-        };
-
-        if state.settings.unstable_optimizations {
-            args.extend(Self::UNSTABLE_OPTIMIZATIONS.iter().map(|s| s.to_string()));
-        }
-
-        Self { args }
+        Self::create(
+            state.settings.hardware_acceleration,
+            state.settings.unstable_optimizations,
+        )
     }
 }
 

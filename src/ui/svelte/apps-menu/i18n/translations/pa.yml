@@ -1,4 +1,6 @@
 all: ਸਾਰੀਆਂ ਐਪਾਂ
+app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
+applications: ਐਪਲੀਕੇਸ਼ਨਾਂ
 back: ਪਿੱਛੇ
 disband: ਫੋਲਡਰ ਨੂੰ ਡਿਸਬੈਂਡ ਕਰੋ
 folder: ਫੋਲਡਰ
@@ -6,6 +8,7 @@ no_matching_items: ਤੁਹਾਡੀ ਖੋਜ ਨਾਲ ਮੇਲ ਖਾਂਦ
 open_file_location: ਫਾਈਲ ਟਿਕਾਣਾ ਖੋਲ੍ਹੋ
 pin: ਪਿੰਨ
 pin_to_dock: ਡੌਕ 'ਤੇ ਪਿੰਨ ਕਰੋ
+power_menu: ਪਾਵਰ ਮੀਨੂ
 query:
   all: ਸਾਰੇ
   apps: ਐਪਸ

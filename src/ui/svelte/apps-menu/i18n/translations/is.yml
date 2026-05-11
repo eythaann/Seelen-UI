@@ -1,4 +1,6 @@
 all: Öll forrit
+app_settings: Stillingar forrita
+applications: Umsóknir
 back: Til baka
 disband: Slepptu möppu
 folder: Mappa
@@ -6,6 +8,7 @@ no_matching_items: Engin atriði fundust sem passa við leitina þína
 open_file_location: Opnaðu skráarstaðsetningu
 pin: Pinna
 pin_to_dock: Festu við Dock
+power_menu: Power Valmynd
 query:
   all: Allt
   apps: Forrit

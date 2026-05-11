@@ -119,9 +119,10 @@ general:
   date_format_how_to: Hur skriver man ett datumformat?
   hardware_acceleration: Hårdvaruacceleration
   hardware_acceleration_description: >-
-    Om du inaktiverar hårdvaruacceleration minskar minnesanvändningen, men kan
-    orsaka prestandaproblem. Är säkert att inaktivera om du inte använder
-    levande bakgrundsbilder.
+    Om du inaktiverar hårdvaruacceleration minskar minnesanvändningen. Det är
+    säkert att inaktivera om du inte använder tunga animationer, även om
+    individuella widgets fortfarande kan tvinga GPU-användning oavsett denna
+    inställning.
   icon_pack:
     available: Tillgängliga ikonpaket
     selected: Aktiva ikonpaket
@@ -276,6 +277,7 @@ wall:
   collections: Samlingar
   contrast: Kontrast
   corrupted_wallpapers_message: 'Skadade bakgrundsbilder, överväg att ta bort dessa:'
+  coverage_pause_threshold: Pausgräns (fönstertäckning)
   create: Skapa
   create_collection: Skapa samling
   default_collection: Standardsamling
@@ -388,6 +390,7 @@ wm:
     ease_function: Animationslättningsfunktion
     enable: Aktivera Windows animationer
   author: Författare
+  auto_stack: Autostack efter appkategori
   border:
     enable: Aktivera fönstergränsen
     offset: Gränsförskjutning

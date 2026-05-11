@@ -1,4 +1,6 @@
 all: Alle toepassings
+app_settings: Programinstellings
+applications: Aansoeke
 back: Terug
 disband: Ontbind gids
 folder: Vouer
@@ -6,6 +8,7 @@ no_matching_items: Geen items gevind wat by jou soektog pas nie
 open_file_location: Maak lêerligging oop
 pin: Speld vas
 pin_to_dock: Speld aan Dock vas
+power_menu: Power Menu
 query:
   all: Almal
   apps: Toepassings

@@ -165,7 +165,7 @@
       bind:value={searchState.searchQuery}
       type="search"
       data-skin="transparent"
-      placeholder="Applications"
+      placeholder={$t("applications")}
       onkeydown={handleInputKeyDown}
     />
 
@@ -218,11 +218,11 @@
     </div>
 
     <div class="apps-menu-footer-right">
-      <button data-skin="transparent" onclick={openAppSettings} title="App Settings">
+      <button data-skin="transparent" onclick={openAppSettings} title={$t("app_settings")}>
         <Icon iconName="RiSettings4Fill" />
       </button>
 
-      <button data-skin="transparent" onclick={openPowerMenu} title="Power Menu">
+      <button data-skin="transparent" onclick={openPowerMenu} title={$t("power_menu")}>
         <Icon iconName="IoPower" />
       </button>
 

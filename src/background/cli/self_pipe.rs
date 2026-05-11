@@ -1,25 +1,39 @@
 use clap::Parser;
 use slu_ipc::{
+    commands::AppCommand,
     messages::{AppMessage, IpcResponse},
     AppIpc,
 };
 
-use crate::{cli::application::AppCli, error::Result, modules::system_tray::SystemTrayManager};
+use crate::{
+    cli::application::{self, uri::process_uri, AppCli},
+    error::{Result, ResultLogExt},
+    modules::system_tray::SystemTrayManager,
+};
 
 pub struct SelfPipe;
 impl SelfPipe {
-    fn _handle_cli_message(mut argv: Vec<String>) -> Result<()> {
+    fn handle_raw_cli_message(argv: Vec<String>) -> Result<()> {
         if argv.is_empty() {
             return Ok(());
         }
 
-        let first = argv.first().unwrap();
-        if !first.contains("seelen-ui") {
-            argv.insert(0, "seelen-ui.exe".to_string());
-        }
+        // Normalize argv: always use a fixed program name as argv[0] for clap.
+        // The first element may be an executable path (seelen-ui.exe, slu.exe, etc.)
+        // or already a subcommand when called internally.
+        let normalized: Vec<String> =
+            if argv[0].ends_with(".exe") || argv[0].contains('\\') || argv[0].contains('/') {
+                std::iter::once("seelen-ui.exe".to_string())
+                    .chain(argv.into_iter().skip(1))
+                    .collect()
+            } else {
+                std::iter::once("seelen-ui.exe".to_string())
+                    .chain(argv)
+                    .collect()
+            };
 
-        if let Ok(cli) = AppCli::try_parse_from(argv) {
-            if let Err(err) = cli.process() {
+        if let Ok(cli) = AppCli::try_parse_from(normalized) {
+            if let Err(err) = application::process_command(cli.command) {
                 log::error!("Failed to process command: {err}");
                 return Err(err);
             }
@@ -30,15 +44,27 @@ impl SelfPipe {
     fn handle_message(message: AppMessage) -> IpcResponse {
         match message {
             AppMessage::Cli(argv) => {
-                if let Err(err) = Self::_handle_cli_message(argv) {
+                if let Err(err) = Self::handle_raw_cli_message(argv) {
                     return IpcResponse::Err(err.to_string());
                 }
+            }
+            AppMessage::Command(cmd) => {
+                if let Err(err) = application::process_command(cmd) {
+                    log::error!("Failed to process command: {err}");
+                    return IpcResponse::Err(err.to_string());
+                }
+            }
+            AppMessage::OpenUri(uri) => {
+                std::thread::spawn(move || {
+                    process_uri(&uri).log_error();
+                });
             }
             AppMessage::TrayChanged(event) => {
                 SystemTrayManager::handle_tray_event(event);
             }
             AppMessage::Debug(_msg) => {}
         }
+
         IpcResponse::Success
     }
 
@@ -48,7 +74,7 @@ impl SelfPipe {
     }
 
     pub async fn request_open_settings() -> Result<()> {
-        AppIpc::send(AppMessage::Cli(vec!["settings".to_owned()])).await?;
+        AppIpc::send(AppMessage::Command(AppCommand::Settings)).await?;
         Ok(())
     }
 }

@@ -1,4 +1,6 @@
 all: Усі додатки
+app_settings: Налаштування програми
+applications: Додатки
 back: Назад
 disband: Розформувати папку
 folder: Папка
@@ -6,6 +8,7 @@ no_matching_items: Не знайдено елементів, що відпові
 open_file_location: Відкрийте розташування файлу
 pin: Pin
 pin_to_dock: Закріпити на Dock
+power_menu: Меню живлення
 query:
   all: все
   apps: програми

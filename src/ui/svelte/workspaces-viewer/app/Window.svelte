@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { UserAppWindow } from "@seelen-ui/lib/types";
   import { state } from "../state.svelte";
-  import { convertFileSrc } from "@tauri-apps/api/core";
+
   import { Icon, MissingIcon, FileIcon } from "libs/ui/svelte/components/Icon";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 
@@ -50,7 +50,7 @@
     {#if preview}
       <img
         class="window-preview"
-        src={convertFileSrc(preview.path) + "?v=" + preview.hash}
+        src={`data:image/webp;base64,${preview.data}`}
         alt=""
       />
     {:else}

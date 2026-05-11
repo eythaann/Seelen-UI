@@ -122,9 +122,10 @@ general:
   date_format_how_to: Cum se scrie un format de dată?
   hardware_acceleration: Accelerație hardware
   hardware_acceleration_description: >-
-    Dezactivarea accelerației hardware va reduce utilizarea memoriei, dar poate
-    cauza probleme de performanță. Este sigur de dezactivat dacă nu folosiți
-    imagini de fundal live.
+    Dezactivarea accelerației hardware va reduce utilizarea memoriei. Este sigur
+    să dezactivați dacă nu utilizați animații grele, deși widgeturile
+    individuale pot forța în continuare utilizarea GPU-ului, indiferent de
+    această setare.
   icon_pack:
     available: Pachete de pictograme disponibile
     selected: Pachete de pictograme active
@@ -279,6 +280,7 @@ wall:
   collections: Colecții
   contrast: Contrast
   corrupted_wallpapers_message: 'Imagini de fundal corupte, luați în considerare ștergerea acestora:'
+  coverage_pause_threshold: Pragul de pauză (acoperire fereastră)
   create: Crea
   create_collection: Creați o colecție
   default_collection: Colecție implicită
@@ -393,6 +395,7 @@ wm:
     ease_function: Funcția de ușurare a animației
     enable: Activați animațiile Window
   author: Autor
+  auto_stack: Stack automat în funcție de categoria de aplicație
   border:
     enable: Activați granița ferestrei
     offset: Offset de frontieră

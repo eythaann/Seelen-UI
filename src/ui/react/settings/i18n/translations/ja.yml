@@ -108,8 +108,9 @@ general:
   date_format_how_to: 日付の形式はどうやって書くのでしょうか？
   hardware_acceleration: ハードウェアアクセラレーション
   hardware_acceleration_description: >-
-    ハードウェア
-    アクセラレーションを無効にするとメモリの使用量は減りますが、パフォーマンスの問題が発生する可能性があります。ライブ壁紙を使用しない場合は無効にしても安全です。
+    ハードウェア アクセラレーションを無効にすると、メモリの使用量が削減されます。
+    負荷の高いアニメーションを使用していない場合は無効にしても安全ですが、この設定に関係なく、個々のウィジェットによって GPU
+    の使用が強制される可能性があります。
   icon_pack:
     available: 利用可能なアイコンパック
     selected: アクティブなアイコンパック
@@ -256,6 +257,7 @@ wall:
   collections: コレクション
   contrast: コントラスト
   corrupted_wallpapers_message: 壁紙が破損している場合は、削除することを検討してください。
+  coverage_pause_threshold: 一時停止しきい値 (ウィンドウ カバレッジ)
   create: 作成する
   create_collection: コレクションを作成
   default_collection: デフォルトのコレクション
@@ -367,6 +369,7 @@ wm:
     ease_function: アニメーション緩和機能
     enable: ウィンドウのアニメーションを有効にします
   author: 製作者
+  auto_stack: アプリカテゴリごとの自動スタック
   border:
     enable: ウィンドウの境界線を描画する
     offset: 境界線の余白

@@ -1,22 +1,9 @@
-use serde::{Deserialize, Serialize};
+use slu_ipc::commands::{ArtCli, ArtVariant};
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, clap::ValueEnum)]
-pub enum ArtVariant {
-    SeelenLogo,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, clap::Args)]
-pub struct ArtCli {
-    variant: ArtVariant,
-}
-
-impl ArtCli {
-    pub fn process_direct(self) {
-        match self.variant {
-            ArtVariant::SeelenLogo => {
-                println!("{SEELEN_LOGO_ASCII}");
-            }
-        }
+pub fn process(cmd: ArtCli) {
+    match cmd.variant {
+        ArtVariant::SeelenLogo => println!("{SEELEN_LOGO_ASCII}"),
+        ArtVariant::SeelenLogoSmall => println!("{SEELEN_LOGO_ASCII_SMALL}"),
     }
 }
 
@@ -30,7 +17,7 @@ static SEELEN_LOGO_ASCII: &str = r#"
      0&    .     &&&&&&&&""
     &&   .0     &&&&&&&
    0&& .&'     &&&&&&
-  :&&&&&    . &&&&& 
+  :&&&&&    . &&&&&
   0&&&&    & &&&&&
   &&&&'   &&&&&&&               .&&&x&
   &&&&   :&&&&&0.&'        , .&&&&&&&&&&;.
@@ -47,4 +34,25 @@ static SEELEN_LOGO_ASCII: &str = r#"
               0&&&&&&&&&&&&&&&&&&&&&&&&&0
                  0&&&&&&&&&&&&&&&&&&&0
                       0&&&&&&&&&0         Seelen Corp
+"#;
+
+static SEELEN_LOGO_ASCII_SMALL: &str = r#"
+           xx x                    
+           xxxxxx xxxxxxxX         
+    xx  xx xxxxxxxxxxxxx           
+   xx    xxxxxxxxxx                
+  xx  x   xxxxxxx  xxx             
+ xxxxx  xxxxxxx                    
+xxxx  xxxxxxX                      
+xxx  xxxxxx          xxxx          
+xxx  xxxxxx       xxxxxxxxxxx     x
+xxxxxxxxxx     xxxxxxxxxx         x
+xxxxxxxxxx    xxxxxxxxx        x xx
+ xxxxxxxxx  xxxxxxxxxxx       xxxxx
+ xxxxxxxxx xxxxxxxxxxx       xxxxx 
+  xxxxxxxx xxxxxxxxxx       xxxxx  
+   xxxxxxxxxxxxxxxxx      xxxxxx   
+    Xxxxxxxxxxx  xxxxxxxxxxxxx     
+        xxxxxxxxxxxxxxxxxxxx       
+          xxxxxxxxxxxxxxx          
 "#;

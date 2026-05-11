@@ -2678,6 +2678,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "libwebp-sys"
+version = "0.9.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "54cd30df7c7165ce74a456e4ca9732c603e8dc5e60784558c1c6dc047f876733"
+dependencies = [
+ "cc",
+ "glob",
+]
+
+[[package]]
 name = "linux-raw-sys"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4839,7 +4849,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-core"
-version = "2.6.4"
+version = "2.6.5"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -4861,7 +4871,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "2.6.4"
+version = "2.6.5"
 dependencies = [
  "arc-swap",
  "backtrace",
@@ -4914,6 +4924,7 @@ dependencies = [
  "urlencoding",
  "uuid 1.20.0",
  "walkdir",
+ "webp",
  "widestring",
  "win-hotkeys",
  "win-screenshot",
@@ -5255,6 +5266,7 @@ checksum = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
 name = "slu-ipc"
 version = "0.1.0"
 dependencies = [
+ "clap",
  "interprocess",
  "log",
  "seelen-core",
@@ -6808,6 +6820,16 @@ dependencies = [
  "pkg-config",
  "soup3-sys",
  "system-deps",
+]
+
+[[package]]
+name = "webp"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c071456adef4aca59bf6a583c46b90ff5eb0b4f758fc347cea81290288f37ce1"
+dependencies = [
+ "image",
+ "libwebp-sys",
 ]
 
 [[package]]

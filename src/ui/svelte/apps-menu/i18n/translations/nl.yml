@@ -1,4 +1,6 @@
 all: Alle apps
+app_settings: App-instellingen
+applications: Toepassingen
 back: Rug
 disband: Map ontbinden
 folder: Map
@@ -6,6 +8,7 @@ no_matching_items: Er zijn geen items gevonden die overeenkomen met uw zoekopdra
 open_file_location: Open Bestandslocatie
 pin: Pin
 pin_to_dock: Vastmaken aan dock
+power_menu: Vermogensmenu
 query:
   all: Alle
   apps: Apps

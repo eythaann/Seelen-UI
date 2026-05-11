@@ -1,4 +1,6 @@
 all: 所有應用程式
+app_settings: 應用程式設定
+applications: 應用領域
 back: 返回
 disband: 解散文件夾
 folder: 資料夾
@@ -6,6 +8,7 @@ no_matching_items: 未找到與您的搜索相符的商品
 open_file_location: 打開文件位置
 pin: 固定
 pin_to_dock: 固定到Dock
+power_menu: 電源選單
 query:
   all: 全部
   apps: 應用程式

@@ -1,4 +1,6 @@
 all: Сите апликации
+app_settings: Поставки за апликација
+applications: Апликации
 back: Назад
 disband: Растворете ја папката
 folder: Папка
@@ -6,6 +8,7 @@ no_matching_items: Не се најдени ставки што одговара
 open_file_location: Отворете ја локацијата на датотеката
 pin: Пин
 pin_to_dock: Закачете на приклучокот
+power_menu: Мени за напојување
 query:
   all: Сите
   apps: Апликации

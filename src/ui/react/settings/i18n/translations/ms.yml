@@ -119,9 +119,10 @@ general:
   date_format_how_to: Bagaimana untuk menulis format tarikh?
   hardware_acceleration: Pecutan Perkakasan
   hardware_acceleration_description: >-
-    Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori, tetapi
-    boleh menyebabkan masalah prestasi. Selamat untuk dilumpuhkan jika anda
-    tidak akan menggunakan kertas dinding langsung.
+    Melumpuhkan pecutan perkakasan akan mengurangkan penggunaan memori. Ia
+    selamat untuk dilumpuhkan jika anda tidak menggunakan animasi berat,
+    walaupun widget individu masih boleh memaksa penggunaan GPU tanpa mengira
+    tetapan ini.
   icon_pack:
     available: Pek Ikon Tersedia
     selected: Pek Ikon Aktif
@@ -276,6 +277,7 @@ wall:
   collections: Koleksi
   contrast: Kontras
   corrupted_wallpapers_message: 'Kertas dinding rosak, pertimbangkan untuk memadam ini:'
+  coverage_pause_threshold: Jeda ambang (liputan tetingkap)
   create: Buat
   create_collection: Buat Koleksi
   default_collection: Koleksi Lalai
@@ -390,6 +392,7 @@ wm:
     ease_function: Fungsi pelonggaran animasi
     enable: Dayakan animasi tetingkap
   author: Pengarang
+  auto_stack: Auto tindanan mengikut kategori apl
   border:
     enable: Dayakan sempadan tetingkap
     offset: Mengimbangi sempadan

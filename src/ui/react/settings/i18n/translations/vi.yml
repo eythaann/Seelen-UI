@@ -120,9 +120,9 @@ general:
   date_format_how_to: Làm thế nào để viết một định dạng ngày?
   hardware_acceleration: Tăng tốc phần cứng
   hardware_acceleration_description: >-
-    Việc tắt tính năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ nhưng có
-    thể gây ra các vấn đề về hiệu suất. Có thể tắt an toàn nếu bạn không sử dụng
-    hình nền động.
+    Vô hiệu hóa khả năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ. Việc tắt
+    tính năng này là an toàn nếu bạn không sử dụng các hình ảnh động nặng, mặc
+    dù các tiện ích riêng lẻ vẫn có thể buộc sử dụng GPU bất kể cài đặt này.
   icon_pack:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng hoạt động
@@ -277,6 +277,7 @@ wall:
   collections: Bộ sưu tập
   contrast: Sự tương phản
   corrupted_wallpapers_message: 'Hình nền bị hỏng, hãy cân nhắc việc xóa những hình nền này:'
+  coverage_pause_threshold: Ngưỡng tạm dừng (phạm vi bao phủ cửa sổ)
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
   default_collection: Bộ sưu tập mặc định
@@ -390,6 +391,7 @@ wm:
     ease_function: Hoạt hình nới lỏng chức năng
     enable: Bật hình ảnh động của Window
   author: Tác giả
+  auto_stack: Tự động xếp chồng theo danh mục ứng dụng
   border:
     enable: Bật biên giới của cửa sổ
     offset: Biên giới bù đắp

@@ -120,9 +120,9 @@ general:
   date_format_how_to: Jak napsat formát data?
   hardware_acceleration: Hardwarová akcelerace
   hardware_acceleration_description: >-
-    Zakázání hardwarové akcelerace sníží využití paměti, ale může způsobit
-    problémy s výkonem. Je bezpečné zakázat, pokud nebudete používat živé
-    tapety.
+    Vypnutí hardwarové akcelerace sníží využití paměti. Pokud nepoužíváte těžké
+    animace, je bezpečné zakázat, i když jednotlivé widgety mohou stále vynutit
+    použití GPU bez ohledu na toto nastavení.
   icon_pack:
     available: Dostupné balíčky ikon
     selected: Aktivní balíčky ikon
@@ -279,6 +279,7 @@ wall:
   collections: Sbírky
   contrast: Kontrast
   corrupted_wallpapers_message: 'Poškozené tapety, zvažte smazání těchto:'
+  coverage_pause_threshold: Práh pauzy (pokrytí okna)
   create: Vytvořit
   create_collection: Vytvořit sbírku
   default_collection: Výchozí kolekce
@@ -392,6 +393,7 @@ wm:
     ease_function: Funkce uvolňování animace
     enable: Povolit animace okna
   author: Autor
+  auto_stack: Automatické skládání podle kategorie aplikací
   border:
     enable: Povolte hranici okna
     offset: Posun hranice

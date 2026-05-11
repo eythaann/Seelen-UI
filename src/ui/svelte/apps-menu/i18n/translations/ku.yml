@@ -1,4 +1,6 @@
 all: Hemû Apps
+app_settings: Settings App
+applications: Applications
 back: Paş
 disband: Peldanka hilweşînin
 folder: Peldank
@@ -6,6 +8,7 @@ no_matching_items: Tiştek li gorî lêgerîna we nehat dîtin
 open_file_location: Cihê Pelê vekin
 pin: Derzî
 pin_to_dock: Pin to Dock
+power_menu: Menu Power
 query:
   all: Gişt
   apps: Apps

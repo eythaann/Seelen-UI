@@ -1,4 +1,6 @@
 all: Všetky aplikácie
+app_settings: Nastavenia aplikácie
+applications: Aplikácie
 back: Späť
 disband: Rozpustiť priečinok
 folder: Priečinok
@@ -6,6 +8,7 @@ no_matching_items: Nenašli sa žiadne položky zodpovedajúce vášmu vyhľadá
 open_file_location: Otvorte umiestnenie súboru
 pin: Pin
 pin_to_dock: Pripnúť do doku
+power_menu: Ponuka napájania
 query:
   all: Všetky
   apps: Aplikácie

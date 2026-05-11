@@ -1,4 +1,6 @@
 all: Zonke Izinhlelo zokusebenza
+app_settings: Izilungiselelo zohlelo lokusebenza
+applications: Izinhlelo zokusebenza
 back: Emuva
 disband: Khipha Ifolda
 folder: Ifolda
@@ -6,6 +8,7 @@ no_matching_items: Azikho izinto ezitholakele ezifana nosesho lwakho
 open_file_location: Vula Indawo Yefayela
 pin: Phina
 pin_to_dock: Phina kuDokhi
+power_menu: Imenyu yamandla
 query:
   all: Konke
   apps: Izinhlelo zokusebenza

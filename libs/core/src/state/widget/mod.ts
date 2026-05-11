@@ -286,7 +286,7 @@ export class Widget {
 
     if (show && !(await this.window.isVisible())) {
       await this.show();
-      await this.focus();
+      // await this.focus();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists
@@ -367,9 +367,7 @@ export class Widget {
       await getCurrentWebview().setFocus();
       this.runtimeState.firstFocus = false;
     }
-    await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {
-      console.warn(`Failed to focus widget: ${this.decoded.label}`);
-    });
+    await invoke(SeelenCommand.RequestFocus, { hwnd: this.runtimeState.hwnd }).catch(() => {});
   }
 
   public hide(): void {

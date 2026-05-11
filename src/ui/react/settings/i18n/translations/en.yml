@@ -118,8 +118,9 @@ general:
   date_format_how_to: How to write a date format?
   hardware_acceleration: Hardware acceleration
   hardware_acceleration_description: >-
-    Disabling hardware acceleration will reduce memory usage, but can cause
-    performance issues. Is safe to disable if you won't use live wallpapers.
+    Disabling hardware acceleration will reduce memory usage. It is safe to
+    disable if you are not using heavy animations, though individual widgets may
+    still force GPU usage regardless of this setting.
   icon_pack:
     available: Available Icon Packs
     selected: Active Icon Packs
@@ -272,6 +273,7 @@ wall:
   collections: Collections
   contrast: Contrast
   corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
+  coverage_pause_threshold: Pause threshold (window coverage)
   create: Create
   create_collection: Create Collection
   default_collection: Default Collection
@@ -384,6 +386,7 @@ wm:
     ease_function: Animation Easing Function
     enable: Enable Window's Animations
   author: Author
+  auto_stack: Auto stack by app category
   border:
     enable: Enable Window's Border
     offset: Border Offset

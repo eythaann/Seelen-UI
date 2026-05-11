@@ -8,6 +8,6 @@ hidden: true
 lazy: true
 shortcuts:
   - id: settings-open
-    command: ["widget", "trigger", "@seelen/settings"]
+    command: ["widget", "trigger", "${self.id}"]
     label: !extend i18n/shortcuts/settings-open.yml
     defaultKeys: ["Win", "K"]

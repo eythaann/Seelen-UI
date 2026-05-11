@@ -119,9 +119,10 @@ general:
   date_format_how_to: Nola idatzi data-formatua?
   hardware_acceleration: Hardwarearen azelerazioa
   hardware_acceleration_description: >-
-    Hardwarearen azelerazioa desgaitzeak memoriaren erabilera murriztuko du,
-    baina errendimendu arazoak sor ditzake. Zuzeneko horma-irudiak erabiltzen ez
-    badituzu desgaitzea segurua da.
+    Hardwarearen azelerazioa desgaituz gero, memoriaren erabilera murriztuko da.
+    Seguru desgaitzea da animazio astunak erabiltzen ari ez bazara, nahiz eta
+    widget indibidualek GPU erabilera behartu dezaketen ezarpen hau edozein dela
+    ere.
   icon_pack:
     available: Eskuragarri dauden ikono paketeak
     selected: Ikono pakete aktiboak
@@ -277,6 +278,7 @@ wall:
   collections: Bildumak
   contrast: Kontraste
   corrupted_wallpapers_message: 'Hondatutako horma-paperak, kontuan hartu hauek ezabatzea:'
+  coverage_pause_threshold: Pausatu atalasea (leihoaren estaldura)
   create: Sortu
   create_collection: Sortu bilduma
   default_collection: Bilduma lehenetsia
@@ -390,6 +392,7 @@ wm:
     ease_function: Animazioaren arakuntzaren funtzioa
     enable: Gaitu leihoen animazioak
   author: Idazle
+  auto_stack: Aplikazio kategoriaren arabera pilatu automatikoki
   border:
     enable: Gaitu leihoen ertza
     offset: Ertzaren desplazamendua

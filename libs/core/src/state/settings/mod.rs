@@ -368,6 +368,8 @@ pub struct SeelenWallSettings {
     pub multimonitor_behaviour: MultimonitorBehaviour,
     /// whether to extract and apply accent color from wallpaper
     pub use_accent_color: bool,
+    /// fraction of monitor area that must be covered by windows before pausing wallpaper (0.5–1.0)
+    pub coverage_pause_threshold: f64,
     /// deprecated, this field will be removed on v3
     #[serde(alias = "backgroundsV2")]
     pub deprecated_bgs: Option<Vec<WallpaperId>>,
@@ -383,6 +385,7 @@ impl Default for SeelenWallSettings {
             default_collection: None,
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
             use_accent_color: false,
+            coverage_pause_threshold: 0.8,
             deprecated_bgs: None,
         }
     }

@@ -1,4 +1,6 @@
 all: Kõik rakendused
+app_settings: Rakenduse seaded
+applications: Rakendused
 back: Tagasi
 disband: Laiali kaust
 folder: Kaust
@@ -6,6 +8,7 @@ no_matching_items: Teie otsingule vastavaid üksusi ei leitud
 open_file_location: Avage faili asukoht
 pin: Pin
 pin_to_dock: Kinnita dokki
+power_menu: Toitemenüü
 query:
   all: Kõik
   apps: Rakendused

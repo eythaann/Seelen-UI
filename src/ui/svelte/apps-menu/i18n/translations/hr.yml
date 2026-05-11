@@ -1,4 +1,6 @@
 all: Sve aplikacije
+app_settings: Postavke aplikacije
+applications: Prijave
 back: Nazad
 disband: Raspusti mapu
 folder: Mapa
@@ -6,6 +8,7 @@ no_matching_items: Nema pronađenih stavki koje odgovaraju vašem pretraživanju
 open_file_location: Otvorite lokaciju datoteke
 pin: Pin
 pin_to_dock: Prikvači na Dock
+power_menu: Izbornik napajanja
 query:
   all: Sve
   apps: aplikacije

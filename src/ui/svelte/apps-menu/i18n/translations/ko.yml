@@ -1,4 +1,6 @@
 all: 모든 앱
+app_settings: 앱 설정
+applications: 응용
 back: 뒤쪽에
 disband: 폴더 해체
 folder: 폴더
@@ -6,6 +8,7 @@ no_matching_items: 검색어와 일치하는 항목을 찾을 수 없습니다.
 open_file_location: 파일 위치 열기
 pin: 핀
 pin_to_dock: 도킹에 고정
+power_menu: 전원 메뉴
 query:
   all: 모두
   apps: 앱

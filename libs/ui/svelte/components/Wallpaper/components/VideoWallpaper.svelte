@@ -195,9 +195,9 @@
 
   $effect(() => {
     if (videoElement) {
-      videoElement.playbackRate = getPlaybackRate(config.playbackSpeed)
+      videoElement.playbackRate = getPlaybackRate(config.playbackSpeed);
     }
-  })
+  });
 </script>
 
 <video
@@ -213,6 +213,7 @@
   loop
   playsinline
   disableRemotePlayback
+  disablepictureinpicture
   preload="auto"
   onloadedmetadata={handleLoadedMetadata}
   onwaiting={handleWaiting}
@@ -227,5 +228,11 @@
   :global(.wallpaper) {
     width: 100%;
     height: 100%;
+  }
+
+  video {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
   }
 </style>

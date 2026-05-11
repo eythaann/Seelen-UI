@@ -203,12 +203,20 @@ impl WidgetPod {
         let label = self.label.clone();
         window.0.on_window_event(move |event| {
             if let tauri::WindowEvent::Destroyed = event {
-                WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
-                    deploy.kill_pod(&label);
-                    deploy.reconcile();
-                    if !deploy.definition.lazy {
-                        deploy.start_all_webviews();
-                    }
+                // Defer window creation off the UI message-loop thread.
+                // Calling start_all_webviews() (→ WidgetWebview::create → builder.build)
+                // synchronously here triggers a re-entrant ZwUserDestroyWindow while the
+                // message pump is still inside the destruction handler, which causes the
+                // APPLICATION_HANG_ENDTASK_HungThreadIsIdle crash.
+                let label = label.clone();
+                std::thread::spawn(move || {
+                    WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
+                        deploy.kill_pod(&label);
+                        deploy.reconcile();
+                        if !deploy.definition.lazy {
+                            deploy.start_all_webviews();
+                        }
+                    });
                 });
             }
         });

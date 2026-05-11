@@ -11,7 +11,6 @@ await Widget.self.init({
 });
 
 await Widget.self.window.setIgnoreCursorEvents(true);
-await Widget.self.window.setFocusable(false);
 
 mount(App, {
   target: root,

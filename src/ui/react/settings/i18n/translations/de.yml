@@ -125,9 +125,10 @@ general:
   date_format_how_to: Wie schreibe ich ein Datumsformat?
   hardware_acceleration: Hardwarebeschleunigung
   hardware_acceleration_description: >-
-    Das Deaktivieren der Hardwarebeschleunigung verringert die Speichernutzung,
-    kann jedoch zu Leistungsproblemen führen. Kann sicher deaktiviert werden,
-    wenn Sie keine Live-Hintergründe verwenden.
+    Durch Deaktivieren der Hardwarebeschleunigung wird die Speichernutzung
+    reduziert. Es ist sicher, die Funktion zu deaktivieren, wenn Sie keine
+    umfangreichen Animationen verwenden, obwohl einzelne Widgets unabhängig von
+    dieser Einstellung möglicherweise immer noch die GPU-Nutzung erzwingen.
   icon_pack:
     available: Verfügbare Icon-Pakete
     selected: Aktive Icon-Pakete
@@ -284,6 +285,7 @@ wall:
   collections: Sammlungen
   contrast: Kontrast
   corrupted_wallpapers_message: 'Beschädigte Hintergrundbilder. Löschen Sie diese:'
+  coverage_pause_threshold: Pausenschwelle (Fensterabdeckung)
   create: Erstellen
   create_collection: Sammlung erstellen
   default_collection: Standardsammlung
@@ -399,6 +401,7 @@ wm:
     ease_function: Animation Lockering -Funktion
     enable: Aktivieren Sie die Animationen von Windows
   author: Autor
+  auto_stack: Automatisches Stapeln nach App-Kategorie
   border:
     enable: Fensterrand aktivieren
     offset: Randversatz

@@ -1,4 +1,6 @@
 all: Alla appar
+app_settings: Appinställningar
+applications: Ansökningar
 back: Tillbaka
 disband: Upplös mapp
 folder: Mapp
@@ -6,6 +8,7 @@ no_matching_items: Inga objekt hittades som matchar din sökning
 open_file_location: Öppna filplats
 pin: Stift
 pin_to_dock: Fäst till Dock
+power_menu: Strömmeny
 query:
   all: Alla
   apps: Appar

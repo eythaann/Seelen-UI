@@ -1,4 +1,6 @@
 all: Όλες οι εφαρμογές
+app_settings: Ρυθμίσεις εφαρμογής
+applications: Εφαρμογές
 back: Πίσω
 disband: Διάλυση φακέλου
 folder: Φάκελος
@@ -6,6 +8,7 @@ no_matching_items: Δεν βρέθηκαν στοιχεία που να ταιρ
 open_file_location: Ανοίξτε την τοποθεσία αρχείου
 pin: Καρφίτσα
 pin_to_dock: Καρφίτσωμα στο Dock
+power_menu: Μενού Power
 query:
   all: Ολοι
   apps: Εφαρμογές

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { state } from "../../../state.svelte.ts";
-  // import { ReservedContainer } from './reserved';
+  import ReservedContainer from './Reserved.svelte';
 
   interface Props {
     hwnd: number;
@@ -9,7 +9,6 @@
 
   let { hwnd, growFactor }: Props = $props();
 
-  // Svelte 5 runes: $derived for computed values
   let isFocused = $derived(state.focusedApp.hwnd === hwnd);
 </script>
 
@@ -20,7 +19,7 @@
   class:wm-leaf-focused={isFocused}
   class:wm-leaf-with-borders={state.settings.border.enabled}
 >
-  <!-- {#if reservation && isFocused}
-    <ReservedContainer {reservation} />
-  {/if} -->
+  {#if state.reservation && isFocused}
+    <ReservedContainer reservation={state.reservation} />
+  {/if}
 </div>

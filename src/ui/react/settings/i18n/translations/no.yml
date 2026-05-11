@@ -119,9 +119,10 @@ general:
   date_format_how_to: Hvordan skrive et datoformat?
   hardware_acceleration: Maskinvareakselerasjon
   hardware_acceleration_description: >-
-    Deaktivering av maskinvareakselerasjon vil redusere minnebruken, men kan
-    forårsake ytelsesproblemer. Er trygt å deaktivere hvis du ikke vil bruke
-    levende bakgrunnsbilder.
+    Deaktivering av maskinvareakselerasjon vil redusere minnebruken. Det er
+    trygt å deaktivere hvis du ikke bruker tunge animasjoner, selv om
+    individuelle widgets fortsatt kan tvinge GPU-bruk uavhengig av denne
+    innstillingen.
   icon_pack:
     available: Tilgjengelige ikonpakker
     selected: Aktive ikonpakker
@@ -276,6 +277,7 @@ wall:
   collections: Samlinger
   contrast: Kontrast
   corrupted_wallpapers_message: 'Ødelagte bakgrunnsbilder, vurder å slette disse:'
+  coverage_pause_threshold: Pauseterskel (vindusdekning)
   create: Skape
   create_collection: Opprett samling
   default_collection: Standard samling
@@ -390,6 +392,7 @@ wm:
     ease_function: Animasjon lettelsesfunksjon
     enable: Aktiver vinduets animasjoner
   author: Forfatter
+  auto_stack: Automatisk stabel etter appkategori
   border:
     enable: Aktiver vinduets grense
     offset: Grenseforskyvning

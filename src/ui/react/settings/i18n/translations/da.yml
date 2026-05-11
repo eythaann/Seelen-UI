@@ -119,9 +119,9 @@ general:
   date_format_how_to: Hvordan skriver man et datoformat?
   hardware_acceleration: Hardwareacceleration
   hardware_acceleration_description: >-
-    Deaktivering af hardwareacceleration vil reducere hukommelsesforbruget, men
-    kan forårsage ydeevneproblemer. Er sikkert at deaktivere, hvis du ikke vil
-    bruge levende tapeter.
+    Deaktivering af hardwareacceleration vil reducere hukommelsesforbruget. Det
+    er sikkert at deaktivere, hvis du ikke bruger tunge animationer, selvom
+    individuelle widgets stadig kan tvinge GPU-brug uanset denne indstilling.
   icon_pack:
     available: Tilgængelige ikonpakker
     selected: Aktive ikonpakker
@@ -276,6 +276,7 @@ wall:
   collections: Samlinger
   contrast: Kontrast
   corrupted_wallpapers_message: 'Ødelagte tapeter, overvej at slette disse:'
+  coverage_pause_threshold: Pausegrænse (vinduesdækning)
   create: Skabe
   create_collection: Opret samling
   default_collection: Standard samling
@@ -388,6 +389,7 @@ wm:
     ease_function: Animationsaflastningsfunktion
     enable: Aktivér vindues animationer
   author: Forfatter
+  auto_stack: Automatisk stak efter appkategori
   border:
     enable: Aktivér vindues grænse
     offset: Border Offset

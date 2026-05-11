@@ -1,4 +1,6 @@
 all: כל האפליקציות
+app_settings: הגדרות אפליקציה
+applications: יישומים
 back: בְּחֲזָרָה
 disband: תיקיית פירוק
 folder: תיקייה
@@ -6,6 +8,7 @@ no_matching_items: לא נמצאו פריטים התואמים לחיפוש של
 open_file_location: פתח את מיקום הקובץ
 pin: פִּין
 pin_to_dock: הצמד למעגן
+power_menu: תפריט כוח
 query:
   all: כֹּל
   apps: אפליקציות

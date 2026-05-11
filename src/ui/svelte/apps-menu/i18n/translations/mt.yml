@@ -1,4 +1,6 @@
 all: L-Apps kollha
+app_settings: App Settings
+applications: Applikazzjonijiet
 back: Lura
 disband: Xolja Folder
 folder: Folder
@@ -6,6 +8,7 @@ no_matching_items: Ma nstab l-ebda oġġett li jaqbel mat-tfittxija tiegħek
 open_file_location: Open File Location
 pin: Pin
 pin_to_dock: Pin għall-Dock
+power_menu: Power Menu
 query:
   all: Kollha
   apps: Apps

@@ -23,6 +23,7 @@ use windows::{
     },
 };
 
+use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::{
     cli::ServicePipe,
@@ -232,6 +233,14 @@ impl Window {
         self.monitor()
             .stable_id()
             .unwrap_or_else(|_| MonitorId("null".to_string()))
+    }
+
+    pub fn slu_category(&self) -> Option<String> {
+        FULL_STATE
+            .load()
+            .get_app_config_by_window(self.hwnd())
+            .ok()?
+            .and_then(|config| config.category.clone())
     }
 
     pub fn workspace_id(&self) -> Result<WorkspaceId> {

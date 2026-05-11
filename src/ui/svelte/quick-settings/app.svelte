@@ -5,6 +5,7 @@
   import BrightnessControl from "./components/BrightnessControl.svelte";
   import MediaDevices from "./components/MediaDevices.svelte";
   import RadioButtons from "./components/RadioButtons.svelte";
+  import { t } from "./i18n";
 
   function openAppSettings() {
     invoke(SeelenCommand.TriggerWidget, {
@@ -29,11 +30,11 @@
   <MediaDevices />
 
   <div class="quick-settings-footer">
-    <button data-skin="transparent" onclick={openAppSettings} title="App Settings">
+    <button data-skin="transparent" onclick={openAppSettings} title={$t("app_settings")}>
       <Icon iconName="RiSettings4Fill" />
     </button>
 
-    <button data-skin="transparent" onclick={openPowerMenu} title="Power">
+    <button data-skin="transparent" onclick={openPowerMenu} title={$t("power")}>
       <Icon iconName="IoPower" />
     </button>
   </div>

@@ -69,6 +69,8 @@ impl ResourceManager {
 
                 for mut plugin in widget.plugins.clone() {
                     plugin.metadata.internal = widget.metadata.internal.clone();
+                    // plugins inherit the parent widget's premium flag
+                    plugin.metadata.premium |= widget.metadata.premium;
                     self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
                 }
 

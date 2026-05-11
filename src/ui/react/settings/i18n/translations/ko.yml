@@ -109,8 +109,8 @@ general:
   date_format_how_to: 날짜 형식을 작성하는 방법은 무엇입니까?
   hardware_acceleration: 하드웨어 가속
   hardware_acceleration_description: >-
-    하드웨어 가속을 비활성화하면 메모리 사용량이 줄어들지만 성능 문제가 발생할 수 있습니다. 라이브 배경화면을 사용하지 않을 경우
-    비활성화하는 것이 안전합니다.
+    하드웨어 가속을 비활성화하면 메모리 사용량이 줄어듭니다. 무거운 애니메이션을 사용하지 않는 경우 비활성화하는 것이 안전하지만, 개별
+    위젯은 이 설정에 관계없이 여전히 GPU 사용을 강제할 수 있습니다.
   icon_pack:
     available: 사용 가능한 아이콘 팩
     selected: 현재 아이콘 팩
@@ -257,6 +257,7 @@ wall:
   collections: 컬렉션
   contrast: 대비
   corrupted_wallpapers_message: '손상된 배경화면은 삭제하는 것이 좋습니다:'
+  coverage_pause_threshold: 일시중지 임계값(창 적용 범위)
   create: 만들다
   create_collection: 컬렉션 만들기
   default_collection: 기본 컬렉션
@@ -366,6 +367,7 @@ wm:
     ease_function: 애니메이션 완화 기능
     enable: 창의 애니메이션을 활성화합니다
   author: 작성자
+  auto_stack: 앱 카테고리별 자동 스택
   border:
     enable: 창 테두리 활성화
     offset: 테두리 여백

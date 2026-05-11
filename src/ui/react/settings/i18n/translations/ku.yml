@@ -119,9 +119,9 @@ general:
   date_format_how_to: Meriv çawa formek tarîxê dinivîse?
   hardware_acceleration: Hardware Acceleration
   hardware_acceleration_description: >-
-    Neçalakkirina bilezkirina hardware dê karanîna bîranînê kêm bike, lê dikare
-    bibe sedema pirsgirêkên performansê. Ger hûn dîwarên zindî bikar neynin
-    neçalakkirina ewledar e.
+    Neçalakkirina bilezkirina hardware dê karanîna bîranînê kêm bike. Heke hûn
+    anîmasyonên giran bikar neynin, neçalakkirina ewledar e, her çend widgetên
+    kesane hîn jî bêyî vê mîhengê zorê li karanîna GPU bikin.
   icon_pack:
     available: Pakêtên îkonê yên berdest
     selected: Pakêtên Îkonên Çalak
@@ -278,6 +278,7 @@ wall:
   collections: Collections
   contrast: Dijîtî
   corrupted_wallpapers_message: 'Dîwarên xerabûyî, bifikire ku van jêbirin:'
+  coverage_pause_threshold: Bendavê rawestanê (vegirtina pencereyê)
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
   default_collection: Berhevoka Bingehîn
@@ -392,6 +393,7 @@ wm:
     ease_function: Fonksiyona hêsankirina anîmasyonê
     enable: Animasyonên Pencereyê çalak bikin
   author: Nivîskar
+  auto_stack: Li gorî kategoriya sepanê stûna otomatîkî
   border:
     enable: Sînorê pencereyê çalak bike
     offset: Berdewamiya sînor

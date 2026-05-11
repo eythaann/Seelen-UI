@@ -6,8 +6,9 @@ use application::FullState;
 use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
+        twm::TwmPlugin,
         value::{KnownPlugin, PluginValue},
-        WindowManagerLayout, WorkspaceId,
+        WorkspaceId,
     },
     system_state::MonitorId,
 };
@@ -69,8 +70,8 @@ impl FullState {
         self.is_widget_enabled(&WidgetId::known_wall())
     }
 
-    pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> WindowManagerLayout {
-        let base = WindowManagerLayout::default();
+    pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> TwmPlugin {
+        let base = TwmPlugin::default();
 
         let layout_id = self.get_wm_layout_id(workspace_id);
 

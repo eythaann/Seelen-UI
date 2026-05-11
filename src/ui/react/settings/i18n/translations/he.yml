@@ -114,8 +114,9 @@ general:
   date_format_how_to: איך כותבים פורמט תאריך?
   hardware_acceleration: האצת חומרה
   hardware_acceleration_description: >-
-    השבתת האצת החומרה תפחית את השימוש בזיכרון, אך עלולה לגרום לבעיות ביצועים.
-    בטוח להשבית אם לא תשתמש בטפטים חיים.
+    השבתת האצת החומרה תפחית את השימוש בזיכרון. זה בטוח להשבית אם אינך משתמש
+    בהנפשות כבדות, אם כי ווידג'טים בודדים עדיין עשויים לאלץ שימוש ב-GPU ללא קשר
+    להגדרה זו.
   icon_pack:
     available: חבילות אייקונים זמינות
     selected: ערכות אייקונים פעילות
@@ -263,6 +264,7 @@ wall:
   collections: אוספים
   contrast: לְהַשְׁווֹת
   corrupted_wallpapers_message: 'רקעים פגומים, שקול למחוק את אלה:'
+  coverage_pause_threshold: סף השהייה (כיסוי חלון)
   create: לִיצוֹר
   create_collection: צור אוסף
   default_collection: אוסף ברירת מחדל
@@ -375,6 +377,7 @@ wm:
     ease_function: הפונקציה הקלת האנימציה
     enable: אפשר אנימציות של חלון
   author: מחבר
+  auto_stack: ערימה אוטומטית לפי קטגוריית אפליקציה
   border:
     enable: אפשר את גבול החלון
     offset: קיזוז גבול

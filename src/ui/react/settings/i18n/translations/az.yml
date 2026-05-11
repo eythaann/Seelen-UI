@@ -118,9 +118,10 @@ general:
   date_format_how_to: Tarix formatını necə yazmaq olar?
   hardware_acceleration: Avadanlıq sürətləndirilməsi
   hardware_acceleration_description: >-
-    Aparat sürətləndirilməsinin söndürülməsi yaddaş istifadəsini azaldacaq,
-    lakin performans problemlərinə səbəb ola bilər. Canlı divar kağızlarından
-    istifadə etməyəcəksinizsə, onu söndürmək təhlükəsizdir.
+    Aparat sürətləndirilməsinin söndürülməsi yaddaş istifadəsini azaldacaq. Ağır
+    animasiyalardan istifadə etmirsinizsə, onu söndürmək təhlükəsizdir,
+    baxmayaraq ki, fərdi vidjetlər bu parametrdən asılı olmayaraq GPU
+    istifadəsini hələ də məcbur edə bilər.
   icon_pack:
     available: Mövcud İkon Paketləri
     selected: Aktiv İkon Paketləri
@@ -275,6 +276,7 @@ wall:
   collections: Kolleksiyalar
   contrast: Əksinə
   corrupted_wallpapers_message: 'Zədələnmiş divar kağızları, bunları silməyi düşünün:'
+  coverage_pause_threshold: Pauza həddi (pəncərə əhatəsi)
   create: Yaradın
   create_collection: Kolleksiya yaradın
   default_collection: Defolt Kolleksiya
@@ -387,6 +389,7 @@ wm:
     ease_function: Animasiya asanlaşdırma funksiyası
     enable: Pəncərənin animasiyalarını aktivləşdirin
   author: Müəllif
+  auto_stack: Proqram kateqoriyasına görə avtomatik yığın
   border:
     enable: Pəncərənin sərhədini aktivləşdirin
     offset: Sərhəd əvəzinə

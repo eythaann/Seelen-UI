@@ -114,8 +114,9 @@ general:
   date_format_how_to: የቀን ቅርጸት እንዴት እንደሚፃፍ?
   hardware_acceleration: የሃርድዌር ማጣደፍ
   hardware_acceleration_description: >-
-    የሃርድዌር ማጣደፍን ማሰናከል የማህደረ ትውስታ አጠቃቀምን ይቀንሳል፣ ነገር ግን የአፈጻጸም ችግሮችን ሊያስከትል ይችላል።
-    የቀጥታ የግድግዳ ወረቀቶችን የማይጠቀሙ ከሆነ ለማሰናከል ደህንነቱ የተጠበቀ ነው።
+    የሃርድዌር ማጣደፍን ማሰናከል የማህደረ ትውስታ አጠቃቀምን ይቀንሳል። ከባድ እነማዎችን እየተጠቀሙ ካልሆኑ ማሰናከል ምንም
+    ችግር የለውም፣ ምንም እንኳን ይህ ቅንብር ምንም ይሁን ምን ነጠላ መግብሮች አሁንም የጂፒዩ አጠቃቀምን ሊያስገድዱ
+    ይችላሉ።
   icon_pack:
     available: የሚገኙ የአዶ ጥቅሎች
     selected: ንቁ አዶ ጥቅሎች
@@ -263,6 +264,7 @@ wall:
   collections: ስብስቦች
   contrast: ንፅፅር
   corrupted_wallpapers_message: የተበላሹ የግድግዳ ወረቀቶች፣ እነዚህን መሰረዝ ያስቡበት፡-
+  coverage_pause_threshold: ገደብ ባለበት አቁም (የመስኮት ሽፋን)
   create: ፍጠር
   create_collection: ስብስብ ይፍጠሩ
   default_collection: ነባሪ ስብስብ
@@ -375,6 +377,7 @@ wm:
     ease_function: አኒሜሽን ኢኮኖሚ ተግባር
     enable: የመስኮት እነማዎችን አንቃ
   author: ደራሲ ደራሲ
+  auto_stack: በመተግበሪያ ምድብ በራስ-ሰር ቁልል
   border:
     enable: የመስኮት ድንበር አንቃ
     offset: ድንበር ማካካሻ

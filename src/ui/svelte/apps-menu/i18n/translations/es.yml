@@ -1,4 +1,6 @@
 all: Todas las aplicaciones
+app_settings: Configuración de la aplicación
+applications: Aplicaciones
 back: Atrás
 disband: Disolver carpeta
 folder: Carpeta
@@ -6,6 +8,7 @@ no_matching_items: No se encontraron artículos que coincidan con su búsqueda
 open_file_location: Abrir ubicación del archivo
 pin: Alfiler
 pin_to_dock: Anclar al muelle
+power_menu: Menú de energía
 query:
   all: Toda
   apps: Aplicaciones

@@ -14,7 +14,7 @@ settings:
     defaultValue: false
 shortcuts:
   - id: apps-menu-toggle
-    command: ["widget", "trigger", "@seelen/apps-menu"]
+    command: ["widget", "trigger", "${self.id}"]
     label: !extend i18n/shortcuts/apps-menu-toggle.yml
     defaultKeys: ["Win"]
     readonly: true

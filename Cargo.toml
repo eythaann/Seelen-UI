@@ -4,7 +4,7 @@ cargo-features = ["profile-rustflags", "codegen-backend"]
 debug = "full"
 strip = false
 opt-level = 0
-incremental = true
+incremental = false
 rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [profile.rust-analyzer]
@@ -51,6 +51,7 @@ evalexpr = "11.3.1"
 fern = "0.7.1"
 futures = "0.3.31"
 image = "0.25.9"
+webp = "0.3"
 interprocess = "2.3.1"
 itertools = "0.14.0"
 lazy_static = "1.5.0"

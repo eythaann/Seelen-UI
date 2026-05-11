@@ -119,9 +119,9 @@ general:
   date_format_how_to: Hoe om 'n datumformaat te skryf?
   hardware_acceleration: Hardeware versnelling
   hardware_acceleration_description: >-
-    Deaktiveer hardewareversnelling sal geheuegebruik verminder, maar kan
-    prestasieprobleme veroorsaak. Is veilig om te deaktiveer as jy nie lewendige
-    agtergronde sal gebruik nie.
+    Deaktiveer hardewareversnelling sal geheuegebruik verminder. Dit is veilig
+    om te deaktiveer as jy nie swaar animasies gebruik nie, alhoewel individuele
+    legstukke steeds GPU-gebruik kan afdwing, ongeag hierdie instelling.
   icon_pack:
     available: Beskikbare ikoonpakkette
     selected: Aktiewe ikoonpakkette
@@ -276,6 +276,7 @@ wall:
   collections: Versamelings
   contrast: Kontras
   corrupted_wallpapers_message: 'Korrupte agtergronde, oorweeg dit om hierdie uit te vee:'
+  coverage_pause_threshold: Pouse drempel (venster dekking)
   create: Skep
   create_collection: Skep versameling
   default_collection: Verstekversameling
@@ -388,6 +389,7 @@ wm:
     ease_function: Animasie -verligingsfunksie
     enable: Aktiveer venster se animasies
   author: Outeur
+  auto_stack: Outomatiese stapel volgens toepassingkategorie
   border:
     enable: Aktiveer venster se grens
     offset: Grens offset

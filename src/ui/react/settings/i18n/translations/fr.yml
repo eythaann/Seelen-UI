@@ -120,8 +120,9 @@ general:
   hardware_acceleration: Accélération matérielle
   hardware_acceleration_description: >-
     La désactivation de l'accélération matérielle réduira l'utilisation de la
-    mémoire, mais peut entraîner des problèmes de performances. Peut être
-    désactivé en toute sécurité si vous n'utilisez pas de fonds d'écran animés.
+    mémoire. Vous pouvez le désactiver en toute sécurité si vous n'utilisez pas
+    d'animations lourdes, bien que des widgets individuels puissent toujours
+    forcer l'utilisation du GPU quel que soit ce paramètre.
   icon_pack:
     available: Packs d'icônes disponibles
     selected: Packs d'icônes actifs
@@ -279,6 +280,7 @@ wall:
   collections: Collections
   contrast: Contraste
   corrupted_wallpapers_message: "Fonds d'écran corrompus, pensez à les supprimer\_:"
+  coverage_pause_threshold: Seuil de pause (couverture de la fenêtre)
   create: Créer
   create_collection: Créer une collection
   default_collection: Collection par défaut
@@ -394,6 +396,7 @@ wm:
     ease_function: Fonction d'assouplissement de l'animation
     enable: Activer les animations de Window
   author: Auteur
+  auto_stack: Pile automatique par catégorie d'application
   border:
     enable: Activer la bordure de fenêtre
     offset: Décalage de bordure

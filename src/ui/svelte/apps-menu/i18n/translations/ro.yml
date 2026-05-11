@@ -1,4 +1,6 @@
 all: Toate aplicațiile
+app_settings: Setările aplicației
+applications: Aplicații
 back: Spate
 disband: Desfaceți folderul
 folder: Dosar
@@ -6,6 +8,7 @@ no_matching_items: Nu s-au găsit articole care să corespundă căutării dvs
 open_file_location: Deschideți locația fișierului
 pin: Pin
 pin_to_dock: Fixați pe andocare
+power_menu: Meniul Power
 query:
   all: Toate
   apps: Aplicații

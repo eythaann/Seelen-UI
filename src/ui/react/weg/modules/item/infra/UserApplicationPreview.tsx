@@ -1,6 +1,6 @@
 import { SeelenCommand } from "@seelen-ui/lib";
 import { Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
-import { convertFileSrc, invoke } from "@tauri-apps/api/core";
+import { invoke } from "@tauri-apps/api/core";
 
 import { $delayedFocused, $previews } from "../../shared/state/mod.ts";
 import type { TargetedMouseEvent } from "preact";
@@ -44,7 +44,7 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
           ? (
             <img
               className="weg-item-preview-image"
-              src={convertFileSrc(preview.path) + "?v=" + preview.hash}
+              src={`data:image/webp;base64,${preview.data}`}
             />
           )
           : <MissingIcon className="weg-item-no-preview" />}

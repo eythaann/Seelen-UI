@@ -17,6 +17,7 @@ UI.
    - [!extend — embed a YAML file](#extend--embed-a-yaml-file)
 7. [Folder Structure](#7-folder-structure)
 8. [Loading and Unloading Resources](#8-loading-and-unloading-resources)
+9. [Bundling for Publication](#9-bundling-for-publication)
 
 ---
 
@@ -144,11 +145,11 @@ map, you must always include `en`.**
 
 Use whatever languages you are comfortable with. The more the better, but English alone is perfectly fine.
 
-> **Automatic translation:** Seelen UI ships a CLI command that fills in all the supported languages in a single
+> **Automatic translation:** Seelen UI ships a `slu` CLI command that fills in all the supported languages in a single
 > translation file. Write your source language entry first, then run:
 >
 > ```bash
-> seelen-ui resource translate <path/to/file.yml>
+> slu resource translate <path/to/file.yml>
 > ```
 >
 > For example, given `i18n/display_name.yml` with only:
@@ -161,7 +162,7 @@ Use whatever languages you are comfortable with. The more the better, but Englis
 > not in English, pass the language code explicitly:
 >
 > ```bash
-> seelen-ui resource translate i18n/display_name.yml es
+> slu resource translate i18n/display_name.yml es
 > ```
 >
 > Run the command once per translation file. Always review the results — machine translations can be inaccurate.
@@ -264,12 +265,12 @@ though following a consistent layout (like the one above) makes maintenance easi
 ## 8. Loading and Unloading Resources
 
 While developing a resource you can load it into a running Seelen UI instance directly from any folder on your machine
-using the CLI — no need to copy files anywhere.
+using the `slu` CLI — no need to copy files anywhere.
 
 ### Load
 
 ```bash
-seelen-ui resource load <kind> <path>
+slu resource load <kind> <path>
 ```
 
 - `<kind>` — one of: `theme`, `widget`, `plugin`, `icon-pack`, `wallpaper`
@@ -278,9 +279,9 @@ seelen-ui resource load <kind> <path>
 Examples:
 
 ```bash
-seelen-ui resource load theme ./my-dark-theme
-seelen-ui resource load widget C:\Users\me\projects\my-clock
-seelen-ui resource load plugin ./my-plugin/mod.yml
+slu resource load theme ./my-dark-theme
+slu resource load widget C:\Users\me\projects\my-clock
+slu resource load plugin ./my-plugin/mod.yml
 ```
 
 The resource is registered immediately and available in Seelen UI settings without restarting the app. **Seelen UI must
@@ -289,14 +290,44 @@ be running** for this command to work.
 ### Unload
 
 ```bash
-seelen-ui resource unload <kind> <path>
+slu resource unload <kind> <path>
 ```
 
 Removes the resource from the registry using the same path you used to load it.
 
 ```bash
-seelen-ui resource unload theme ./my-dark-theme
+slu resource unload theme ./my-dark-theme
 ```
 
 > Loaded resources are registered for the current session. After restarting Seelen UI you will need to load them again,
 > or install them permanently through the settings panel.
+
+---
+
+## 9. Bundling for Publication
+
+If you plan to share your resource on the Seelen marketplace, you need to bundle it into a single distributable file
+first. Bundling resolves all `!include` and `!extend` references, compiles SCSS, and produces a self-contained `.yaml`
+file ready to upload to the website.
+
+If your resource is for personal use only, bundling is not required — the `load` / `unload` workflow is enough.
+
+### Bundle
+
+```bash
+slu resource bundle <kind> <path>
+```
+
+- `<kind>` — one of: `theme`, `widget`, `plugin`, `icon-pack`, `wallpaper`
+- `<path>` — absolute or relative path to the resource file or folder
+
+Examples:
+
+```bash
+slu resource bundle theme ./my-dark-theme
+slu resource bundle widget C:\Users\me\projects\my-clock
+slu resource bundle plugin ./my-plugin/mod.yml
+```
+
+The output file is written next to the resource folder (or file) with the `.yaml` extension. Upload that file through
+the Seelen website to publish or update your resource in the marketplace.

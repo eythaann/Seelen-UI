@@ -1,4 +1,6 @@
 all: 所有应用程序
+app_settings: 应用程序设置
+applications: 应用领域
 back: 后退
 disband: 解散文件夹
 folder: 文件夹
@@ -6,6 +8,7 @@ no_matching_items: 未找到与您的搜索相符的商品
 open_file_location: 打开文件位置
 pin: 别针
 pin_to_dock: 固定到底座
+power_menu: 电源菜单
 query:
   all: 全部
   apps: 应用程序

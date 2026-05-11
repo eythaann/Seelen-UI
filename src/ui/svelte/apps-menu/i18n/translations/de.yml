@@ -1,4 +1,6 @@
 all: Alle Apps
+app_settings: App-Einstellungen
+applications: Anwendungen
 back: Zurück
 disband: Ordner auflösen
 folder: Ordner
@@ -6,6 +8,7 @@ no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
 open_file_location: Öffnen Sie den Dateispeicherort
 pin: Stift
 pin_to_dock: An Dock anheften
+power_menu: Power-Menü
 query:
   all: Alle
   apps: Apps

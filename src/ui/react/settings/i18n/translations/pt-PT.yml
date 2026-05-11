@@ -123,9 +123,10 @@ general:
   date_format_how_to: Como escrever um formato de data?
   hardware_acceleration: Aceleração de Hardware
   hardware_acceleration_description: >-
-    Desativar a aceleração de hardware reduzirá a utilização de memória, mas
-    poderá causar problemas de desempenho. É seguro desativar se não utilizar
-    papéis de parede animados.
+    Desativar a aceleração de hardware reduzirá a utilização de memória. É
+    seguro desativar se não estiver a utilizar animações pesadas, embora os
+    widgets individuais ainda possam forçar o uso da GPU, independentemente
+    desta configuração.
   icon_pack:
     available: Pacotes de ícones disponíveis
     selected: Pacotes de ícones ativos
@@ -281,6 +282,7 @@ wall:
   collections: Coleções
   contrast: Contraste
   corrupted_wallpapers_message: 'Papéis de parede corrompidos, considere excluí-los:'
+  coverage_pause_threshold: Limite de pausa (cobertura da janela)
   create: Criar
   create_collection: Criar coleção
   default_collection: Coleção padrão
@@ -394,6 +396,7 @@ wm:
     ease_function: Função de flexibilização da animação
     enable: Ativar animações da Window
   author: Autora
+  auto_stack: Pilha automática por categoria de aplicação
   border:
     enable: Ativar a fronteira da janela
     offset: Offset de borda

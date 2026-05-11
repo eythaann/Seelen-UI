@@ -1,4 +1,6 @@
 all: Tutte le app
+app_settings: Impostazioni dell'app
+applications: Applicazioni
 back: Indietro
 disband: Sciogli cartella
 folder: Cartella
@@ -6,6 +8,7 @@ no_matching_items: Nessun articolo trovato corrispondente alla tua ricerca
 open_file_location: Apri Posizione file
 pin: Spillo
 pin_to_dock: Aggiungi al Dock
+power_menu: Menù di accensione
 query:
   all: Tutto
   apps: App

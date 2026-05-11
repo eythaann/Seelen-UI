@@ -1,4 +1,6 @@
 all: Toutes les applications
+app_settings: Paramètres de l'application
+applications: Applications
 back: Dos
 disband: Supprimer le dossier
 folder: Dossier
@@ -6,6 +8,7 @@ no_matching_items: Aucun article trouvé correspondant à votre recherche
 open_file_location: Emplacement du fichier ouvert
 pin: Épingle
 pin_to_dock: Épingler au Dock
+power_menu: Menu d'alimentation
 query:
   all: Toute
   apps: Applications

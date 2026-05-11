@@ -1,4 +1,6 @@
 all: सबै एपहरू
+app_settings: एप सेटिङहरू
+applications: अनुप्रयोगहरू
 back: पछाडि
 disband: फोल्डर भत्काउनुहोस्
 folder: फोल्डर
@@ -6,6 +8,7 @@ no_matching_items: तपाईको खोजसँग मेल खाने 
 open_file_location: फाइल स्थान खोल्नुहोस्
 pin: पिन
 pin_to_dock: डकमा पिन गर्नुहोस्
+power_menu: पावर मेनु
 query:
   all: सबै
   apps: एपहरू

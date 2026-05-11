@@ -122,9 +122,10 @@ general:
   date_format_how_to: Kuinka kirjoittaa päivämäärämuoto?
   hardware_acceleration: Laitteistokiihdytys
   hardware_acceleration_description: >-
-    Laitteistokiihdytyksen poistaminen käytöstä vähentää muistin käyttöä, mutta
-    voi aiheuttaa suorituskykyongelmia. On turvallista poistaa käytöstä, jos et
-    käytä live-taustakuvia.
+    Laitteistokiihdytyksen poistaminen käytöstä vähentää muistin käyttöä. Se on
+    turvallista poistaa käytöstä, jos et käytä raskaita animaatioita, vaikka
+    yksittäiset widgetit voivat silti pakottaa GPU:n käyttöön tästä asetuksesta
+    huolimatta.
   icon_pack:
     available: Saatavilla kuvakepaketit
     selected: Aktiiviset kuvakepaketit
@@ -279,6 +280,7 @@ wall:
   collections: Kokoelmat
   contrast: Kontrasti
   corrupted_wallpapers_message: 'Vioittuneet taustakuvat, harkitse näiden poistamista:'
+  coverage_pause_threshold: Taukokynnys (ikkunan peitto)
   create: Luoda
   create_collection: Luo kokoelma
   default_collection: Oletuskokoelma
@@ -392,6 +394,7 @@ wm:
     ease_function: Animaation helpotustoiminto
     enable: Ota ikkunan animaatiot käyttöön
   author: Kirjoittaja
+  auto_stack: Automaattinen pinoaminen sovellusluokan mukaan
   border:
     enable: Ota ikkunan reuna käyttöön
     offset: Rajan siirtyminen

@@ -1,4 +1,6 @@
 all: Tüm Uygulamalar
+app_settings: Uygulama Ayarları
+applications: Uygulamalar
 back: Geri
 disband: Klasörü Dağıt
 folder: Klasör
@@ -6,6 +8,7 @@ no_matching_items: Aramanızla eşleşen öğe bulunamadı
 open_file_location: Dosya Konumunu Aç
 pin: Sabitle
 pin_to_dock: Dock'a sabitle
+power_menu: Güç Menüsü
 query:
   all: Tüm
   apps: Uygulamalar

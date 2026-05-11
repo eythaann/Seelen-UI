@@ -118,9 +118,9 @@ general:
   date_format_how_to: Kuidas kirjutada kuupäevavormingut?
   hardware_acceleration: Riistvaraline kiirendus
   hardware_acceleration_description: >-
-    Riistvaralise kiirenduse keelamine vähendab mälukasutust, kuid võib
-    põhjustada jõudlusprobleeme. Seda on ohutu keelata, kui te ei kasuta
-    reaalajas taustapilte.
+    Riistvaralise kiirenduse keelamine vähendab mälukasutust. Kui te ei kasuta
+    raskeid animatsioone, on selle keelamine ohutu, kuigi üksikud vidinad võivad
+    GPU kasutamist siiski sundida sõltumata sellest sättest.
   icon_pack:
     available: Saadaval ikoonipaketid
     selected: Aktiivsed ikoonipaketid
@@ -275,6 +275,7 @@ wall:
   collections: Kollektsioonid
   contrast: Kontrast
   corrupted_wallpapers_message: 'Rikutud taustapildid, kaaluge nende kustutamist:'
+  coverage_pause_threshold: Peatamise lävi (akna katvus)
   create: Loo
   create_collection: Loo kollektsioon
   default_collection: Vaikekogu
@@ -388,6 +389,7 @@ wm:
     ease_function: Animatsiooni leevendusfunktsioon
     enable: Luba akna animatsioonid
   author: Autor
+  auto_stack: Automaatne virnastamine rakenduse kategooria järgi
   border:
     enable: Luba akna piir
     offset: Piiride nihke

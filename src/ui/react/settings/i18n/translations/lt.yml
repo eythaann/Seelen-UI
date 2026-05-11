@@ -121,9 +121,9 @@ general:
   date_format_how_to: Kaip parašyti datos formatą?
   hardware_acceleration: Aparatinės įrangos pagreitis
   hardware_acceleration_description: >-
-    Išjungus aparatinės įrangos spartinimą sumažės atminties naudojimas, tačiau
-    gali kilti našumo problemų. Saugu išjungti, jei nenaudosite tiesioginių
-    tapetų.
+    Išjungus aparatinės įrangos spartinimą sumažės atminties naudojimas. Saugu
+    išjungti, jei nenaudojate sunkios animacijos, nors atskiri valdikliai vis
+    tiek gali priversti naudoti GPU, nepaisant šio nustatymo.
   icon_pack:
     available: Galimi piktogramų paketai
     selected: Aktyvūs piktogramų paketai
@@ -276,6 +276,7 @@ wall:
   collections: Kolekcijos
   contrast: Kontrastas
   corrupted_wallpapers_message: 'Sugadinti fono paveikslėliai, apsvarstykite galimybę ištrinti šiuos:'
+  coverage_pause_threshold: Pristabdymo slenkstis (lango aprėptis)
   create: Sukurti
   create_collection: Sukurti kolekciją
   default_collection: Numatytoji kolekcija
@@ -389,6 +390,7 @@ wm:
     ease_function: Animacijos palengvinimo funkcija
     enable: Įgalinkite lango animacijas
   author: Autorius
+  auto_stack: Automatinis kaupimas pagal programos kategoriją
   border:
     enable: Įgalinti lango sieną
     offset: Sienos poslinkis

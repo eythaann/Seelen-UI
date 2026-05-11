@@ -4,7 +4,9 @@ use serde::{de::DeserializeOwned, Serialize};
 
 use crate::{
     error::Result,
-    resource::{deserialize_extended_yaml, ResourceKind, SluResourceFile},
+    resource::{
+        deserialize_extended_yaml, deserialize_extended_yaml_no_vars, ResourceKind, SluResourceFile,
+    },
     utils::search_resource_entrypoint,
 };
 
@@ -16,16 +18,20 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
     fn metadata(&self) -> &ResourceMetadata;
     fn metadata_mut(&mut self) -> &mut ResourceMetadata;
 
-    /// Try to load the resource from a file.\
-    /// This won't run post loading processing, please use `load` instead.
-    fn load_from_file(path: &Path) -> Result<Self> {
+    fn load_from_file(path: &Path, resolve_self_vars: bool) -> Result<Self> {
         let ext = path
             .extension()
             .ok_or("Invalid file extension")?
             .to_ascii_lowercase();
 
         let resource: Self = match ext.to_string_lossy().as_ref() {
-            "yml" | "yaml" => deserialize_extended_yaml(path)?,
+            "yml" | "yaml" => {
+                if resolve_self_vars {
+                    deserialize_extended_yaml(path)?
+                } else {
+                    deserialize_extended_yaml_no_vars(path)?
+                }
+            }
             "json" | "jsonc" => {
                 let file = File::open(path)?;
                 file.lock_shared()?;
@@ -52,21 +58,16 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
         Ok(resource)
     }
 
-    /// Try to load the resource from a folder.\
-    /// This won't run post loading processing, please use `load` instead.
-    fn load_from_folder(path: &Path) -> Result<Self> {
+    fn load_from_folder(path: &Path, resolve_self_vars: bool) -> Result<Self> {
         let file = search_resource_entrypoint(path).ok_or("No metadata file found")?;
-        Self::load_from_file(&file)
+        Self::load_from_file(&file, resolve_self_vars)
     }
 
-    /// Try to load the resource from a file or directory.\
-    /// After deserialization, this will run post loading processing like `sanitize` and `validate`,
-    /// Also will set the internal metadata needed to handle the resource
-    fn load(path: &Path) -> Result<Self> {
+    fn load_ext(path: &Path, resolve_self_vars: bool) -> Result<Self> {
         let mut resource = if path.is_dir() {
-            Self::load_from_folder(path)?
+            Self::load_from_folder(path, resolve_self_vars)?
         } else {
-            Self::load_from_file(path)?
+            Self::load_from_file(path, resolve_self_vars)?
         };
 
         let meta = resource.metadata_mut();
@@ -81,6 +82,10 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
         resource.sanitize();
         resource.validate()?;
         Ok(resource)
+    }
+
+    fn load(path: &Path) -> Result<Self> {
+        Self::load_ext(path, true)
     }
 
     /// Sanitize the resource data

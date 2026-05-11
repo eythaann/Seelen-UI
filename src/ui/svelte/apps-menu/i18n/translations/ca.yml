@@ -1,4 +1,6 @@
 all: Totes les aplicacions
+app_settings: Configuració de l'aplicació
+applications: Aplicacions
 back: Enrere
 disband: Dissoldre la carpeta
 folder: Carpeta
@@ -6,6 +8,7 @@ no_matching_items: No s'ha trobat cap element que coincideixi amb la vostra cerc
 open_file_location: Obriu la ubicació del fitxer
 pin: Pin
 pin_to_dock: Fixa al Dock
+power_menu: Menú d'alimentació
 query:
   all: Tots
   apps: Aplicacions

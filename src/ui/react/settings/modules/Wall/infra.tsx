@@ -78,6 +78,25 @@ export function WallSettings() {
           }
         />
         <SettingsOption
+          label={<b>{t("wall.coverage_pause_threshold")}</b>}
+          action={
+            <InputNumber
+              value={wall.coveragePauseThreshold}
+              formatter={(v) => `${(v || 0) * 100}%`}
+              parser={(v) => Number(v?.replace("%", "") || 0) / 100}
+              onChange={(value) => {
+                if (value === null) return;
+                patchWallConfig({ coveragePauseThreshold: Math.min(1.0, Math.max(0.5, value)) });
+              }}
+              min={0.5}
+              max={1.0}
+              step={0.05}
+              precision={2}
+              style={{ width: 80 }}
+            />
+          }
+        />
+        <SettingsOption
           label={<b>{t("wall.multimonitor_behaviour")}</b>}
           action={
             <Select

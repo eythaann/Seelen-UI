@@ -119,8 +119,9 @@ general:
   date_format_how_to: Hvernig á að skrifa dagsetningarsnið?
   hardware_acceleration: Vélbúnaðarhröðun
   hardware_acceleration_description: >-
-    Slökkt er á vélbúnaðarhröðun mun draga úr minnisnotkun en getur valdið
-    afköstum. Er óhætt að slökkva á því ef þú notar ekki lifandi veggfóður.
+    Að slökkva á vélbúnaðarhröðun mun draga úr minnisnotkun. Það er óhætt að
+    slökkva á því ef þú ert ekki að nota þungar hreyfimyndir, þó að einstakar
+    græjur gætu samt þvingað GPU-notkun óháð þessari stillingu.
   icon_pack:
     available: Lausir táknpakkar
     selected: Virkir táknpakkar
@@ -273,6 +274,7 @@ wall:
   collections: Söfn
   contrast: Andstæður
   corrupted_wallpapers_message: 'Skemmt veggfóður, íhugaðu að eyða þessum:'
+  coverage_pause_threshold: Þröskuldur fyrir hlé (gluggaþekju)
   create: Búa til
   create_collection: Búðu til safn
   default_collection: Sjálfgefið safn
@@ -386,6 +388,7 @@ wm:
     ease_function: Leiðandi aðgerð
     enable: Virkja teiknimyndir Window
   author: Höfundur
+  auto_stack: Sjálfvirk stafla eftir forritaflokki
   border:
     enable: Virkja landamæri glugga
     offset: Landamæri offset

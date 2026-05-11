@@ -3,33 +3,27 @@ import { SupportedLanguages } from "@seelen-ui/lib";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import yaml from "js-yaml";
 
-const translator = new GoogleTranslator({ source: "en" });
-
 const targetLanguages = SupportedLanguages.filter((lang) => lang.value !== "en");
 
-function deepSortObject<T>(obj: T): T {
-  if (Array.isArray(obj)) {
-    // if it's an array, recursively sort its elements
-    return obj.map(deepSortObject) as unknown as T;
-  } else if (obj !== null && typeof obj === "object") {
-    // if it's an object, sort its entries
-    const sortedEntries = Object.entries(obj)
-      .sort(([keyA], [keyB]) => keyA.localeCompare(keyB)) // Sort keys
-      .map(([key, value]) => [key, deepSortObject(value)]); // Recursively sort values
-
-    return Object.fromEntries(sortedEntries) as T;
-  }
-  // if it's not an array or object, return it as is
-  return obj;
-}
-
 async function completeTranslationsFor(localesDir: string) {
-  const enPath = `${localesDir}/en.yml`;
-  const strYaml = readFileSync(enPath, "utf8");
-  const en = deepSortObject(yaml.load(strYaml) as object);
-  writeFileSync(enPath, yaml.dump(en)); // overwrite sorted
+  const translator = new GoogleTranslator({ source: "en" });
 
-  const yamlTranslator = new ObjectTranslator(en, translator);
+  const enPath = `${localesDir}/en.yml`;
+  const enHashesPath = `${localesDir}/hash.yml`;
+
+  let cachedHashTable: any = undefined;
+  if (existsSync(enHashesPath)) {
+    cachedHashTable = new Map(
+      Object.entries(yaml.load(readFileSync(enHashesPath, "utf8")) as object),
+    );
+  }
+
+  const strYaml = readFileSync(enPath, "utf8");
+  const fileTranslator = new ObjectTranslator(
+    yaml.load(strYaml) as any,
+    translator,
+    cachedHashTable,
+  );
 
   for (const targetLang of targetLanguages) {
     const filePath = `${localesDir}/${targetLang.value}.yml`;
@@ -39,9 +33,14 @@ async function completeTranslationsFor(localesDir: string) {
       translation = yaml.load(readFileSync(filePath, "utf8"));
     }
 
-    const translated = await yamlTranslator.translate_to(targetLang.value, translation);
-    writeFileSync(filePath, yaml.dump(deepSortObject(translated)));
+    const translated = await fileTranslator.translate_to(targetLang.value, translation);
+    writeFileSync(filePath, yaml.dump(translated));
   }
+
+  const { obj, hashTable } = fileTranslator.source();
+
+  writeFileSync(enPath, yaml.dump(obj)); // overwrite sorted
+  writeFileSync(`${localesDir}/hash.yml`, yaml.dump(Object.fromEntries(hashTable)));
 }
 
 await completeTranslationsFor("src/ui/react/fancy-toolbar/i18n/translations");
@@ -53,6 +52,7 @@ await completeTranslationsFor("src/ui/svelte/power-menu/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/bluetooth-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/network-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/apps-menu/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/quick-settings/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/keyboard-selector/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/user-menu/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/calendar-popup/i18n/translations");

@@ -1,8 +1,10 @@
+pub use slu_ipc::commands::WegCli;
+use slu_ipc::commands::WegCommand;
+
 use seelen_core::{
     state::{WegItem, WegItemData},
     system_state::UserAppWindow,
 };
-use serde::{Deserialize, Serialize};
 use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
 use crate::{
@@ -31,11 +33,9 @@ fn get_windows_for_item<'a>(
         .iter()
         .filter(|w| {
             if w.umid.is_some() {
-                // Rule 1: window carries a umid — only an item with the exact same umid may claim it.
                 return item.umid == w.umid;
             }
 
-            // Rule 2: window has no umid — match by path.
             let win_path = w
                 .process
                 .path
@@ -52,77 +52,59 @@ fn get_windows_for_item<'a>(
         .collect()
 }
 
-/// Seelen's dock commands
-#[derive(Debug, Serialize, Deserialize, clap::Args)]
-pub struct WegCli {
-    #[command(subcommand)]
-    pub subcommand: WegCommand,
-}
+pub fn process(cmd: WegCli) -> Result<()> {
+    #[allow(irrefutable_let_patterns)]
+    if let WegCommand::ForegroundOrRunApp { index } = cmd.subcommand {
+        let state = FULL_STATE.load();
+        let weg_items = &state.weg_items;
 
-#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
-pub enum WegCommand {
-    /// Set foreground to the application which is idx-nth on the weg. If it is not started, then starts it.
-    ForegroundOrRunApp {
-        /// Which index should be started on weg.
-        index: usize,
-    },
-}
+        let all_items: Vec<&WegItem> = weg_items
+            .left
+            .iter()
+            .chain(weg_items.center.iter())
+            .chain(weg_items.right.iter())
+            .filter(|item| matches!(item, WegItem::AppOrFile(_)))
+            .collect();
 
-impl WegCli {
-    pub fn process(self) -> Result<()> {
-        #[allow(irrefutable_let_patterns)]
-        if let WegCommand::ForegroundOrRunApp { index } = self.subcommand {
-            let state = FULL_STATE.load();
-            let weg_items = &state.weg_items;
+        if all_items.len() <= index {
+            return Ok(());
+        }
 
-            let all_items: Vec<&WegItem> = weg_items
-                .left
-                .iter()
-                .chain(weg_items.center.iter())
-                .chain(weg_items.right.iter())
-                .filter(|item| matches!(item, WegItem::AppOrFile(_)))
-                .collect();
+        let WegItem::AppOrFile(inner_data) = all_items[index] else {
+            return Ok(());
+        };
 
-            if all_items.len() <= index {
-                return Ok(());
-            }
+        let interactables = USER_APPS_MANAGER.interactable_windows.to_vec();
+        let windows = get_windows_for_item(inner_data, &interactables);
 
-            let WegItem::AppOrFile(inner_data) = all_items[index] else {
-                return Ok(());
-            };
-
-            let interactables = USER_APPS_MANAGER.interactable_windows.to_vec();
-            let windows = get_windows_for_item(inner_data, &interactables);
-
-            if windows.is_empty() {
-                let command = inner_data
-                    .relaunch
-                    .as_ref()
-                    .map(|r| r.command.clone())
-                    .unwrap_or_else(|| inner_data.path.to_string_lossy().to_string());
-                let args = inner_data
-                    .relaunch
-                    .as_ref()
-                    .and_then(|r| r.args.as_ref())
-                    .map(|a| a.to_string());
-                let working_dir = inner_data
-                    .relaunch
-                    .as_ref()
-                    .and_then(|r| r.working_dir.clone());
-                WindowsApi::execute(command, args, working_dir, false)?;
-            } else {
-                let focused = windows.iter().find(|w| Window::from(w.hwnd).is_focused());
-                if let Some(w) = focused {
-                    Window::from(w.hwnd).show_window_async(SW_MINIMIZE)?;
-                } else if let Some(w) = windows.first() {
-                    let window = Window::from(w.hwnd);
-                    if window.is_window() {
-                        window.unminimize()?;
-                        window.focus()?;
-                    }
+        if windows.is_empty() {
+            let command = inner_data
+                .relaunch
+                .as_ref()
+                .map(|r| r.command.clone())
+                .unwrap_or_else(|| inner_data.path.to_string_lossy().to_string());
+            let args = inner_data
+                .relaunch
+                .as_ref()
+                .and_then(|r| r.args.as_ref())
+                .map(|a| a.to_string());
+            let working_dir = inner_data
+                .relaunch
+                .as_ref()
+                .and_then(|r| r.working_dir.clone());
+            WindowsApi::execute(command, args, working_dir, false)?;
+        } else {
+            let focused = windows.iter().find(|w| Window::from(w.hwnd).is_focused());
+            if let Some(w) = focused {
+                Window::from(w.hwnd).show_window_async(SW_MINIMIZE)?;
+            } else if let Some(w) = windows.first() {
+                let window = Window::from(w.hwnd);
+                if window.is_window() {
+                    window.unminimize()?;
+                    window.focus()?;
                 }
             }
         }
-        Ok(())
     }
+    Ok(())
 }

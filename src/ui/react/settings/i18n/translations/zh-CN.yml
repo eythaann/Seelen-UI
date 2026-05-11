@@ -102,7 +102,7 @@ general:
   date_format: 日期格式
   date_format_how_to: 日期格式怎么写？
   hardware_acceleration: 硬件加速
-  hardware_acceleration_description: 禁用硬件加速会减少内存使用量，但可能会导致性能问题。 如果您不使用动态壁纸，可以安全禁用。
+  hardware_acceleration_description: 禁用硬件加速将减少内存使用。 如果您不使用大量动画，则禁用它是安全的，但无论此设置如何，单个小部件仍可能强制使用 GPU。
   icon_pack:
     available: 可用图标包
     selected: 当前图标包
@@ -245,6 +245,7 @@ wall:
   collections: 收藏
   contrast: 对比度
   corrupted_wallpapers_message: 已损坏的壁纸，请考虑删除这些：
+  coverage_pause_threshold: 暂停阈值（窗口覆盖率）
   create: 创建
   create_collection: 创建集合
   default_collection: 默认集合
@@ -354,6 +355,7 @@ wm:
     ease_function: 动画缓动函数
     enable: 启用窗口动画
   author: 作者
+  auto_stack: 按应用类别自动堆叠
   border:
     enable: 启用窗口边框
     offset: 边框偏移

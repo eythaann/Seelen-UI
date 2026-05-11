@@ -121,9 +121,9 @@ general:
   date_format_how_to: Kā uzrakstīt datuma formātu?
   hardware_acceleration: Aparatūras paātrinājums
   hardware_acceleration_description: >-
-    Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu, taču var
-    izraisīt veiktspējas problēmas. To ir droši atspējot, ja neizmantojat dzīvās
-    tapetes.
+    Aparatūras paātrinājuma atspējošana samazinās atmiņas lietojumu. To var
+    droši atspējot, ja neizmantojat smagas animācijas, lai gan atsevišķi logrīki
+    joprojām var piespiest GPU izmantošanu neatkarīgi no šī iestatījuma.
   icon_pack:
     available: Pieejamie ikonu komplekti
     selected: Aktīvās ikonu pakotnes
@@ -276,6 +276,7 @@ wall:
   collections: Kolekcijas
   contrast: Kontrasts
   corrupted_wallpapers_message: 'Bojātas tapetes, apsveriet iespēju dzēst šīs tapetes:'
+  coverage_pause_threshold: Pauzes slieksnis (loga pārklājums)
   create: Izveidot
   create_collection: Izveidot kolekciju
   default_collection: Noklusējuma kolekcija
@@ -389,6 +390,7 @@ wm:
     ease_function: Animācijas atvieglošanas funkcija
     enable: Iespējot loga animācijas
   author: Autors
+  auto_stack: Automātiska sakraušana pēc lietotņu kategorijas
   border:
     enable: Iespējot loga robežu
     offset: Robežas kompensācija

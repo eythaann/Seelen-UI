@@ -119,9 +119,10 @@ general:
   date_format_how_to: Wéi schreiwen ech en Datumformat
   hardware_acceleration: Hardware Beschleunegung
   hardware_acceleration_description: >-
-    Desaktivéiere vun Hardware Beschleunegung reduzéiert d'Erënnerungsverbrauch,
-    awer kann Performanceprobleemer verursaachen. Ass sécher ze deaktivéieren
-    wann Dir keng Live Wallpaper benotzt.
+    Hardware Beschleunegung auszeschalten wäert d'Erënnerungsverbrauch
+    reduzéieren. Et ass sécher auszeschalten wann Dir keng schwéier Animatiounen
+    benotzt, obwuel eenzel Widgets nach ëmmer d'GPU Benotzung forcéieren
+    onofhängeg vun dëser Astellung.
   icon_pack:
     available: Verfügbar Ikon Packs
     selected: Aktiv Ikon Packs
@@ -274,6 +275,7 @@ wall:
   collections: Kollektiounen
   contrast: Kontrad
   corrupted_wallpapers_message: 'Korrupt Tapeten, betruecht dës ze läschen:'
+  coverage_pause_threshold: Pause-Schwell (Fënsterofdeckung)
   create: Schafen
   create_collection: Schafen Kollektioun
   default_collection: Standard Kollektioun
@@ -389,6 +391,7 @@ wm:
     ease_function: Animatioun ausserhalb Funktioun
     enable: Aktivéiert Fenster Animatiounen
   author: Auteur
+  auto_stack: Auto Stack no App Kategorie
   border:
     enable: Aktivéiert Fenster Grenz
     offset: Grenz Offäll

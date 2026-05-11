@@ -119,9 +119,10 @@ general:
   date_format_how_to: Tarih formatı nasıl yazılır?
   hardware_acceleration: Donanım Hızlandırma
   hardware_acceleration_description: >-
-    Donanım hızlandırmayı devre dışı bırakmak bellek kullanımını azaltır ancak
-    performans sorunlarına neden olabilir. Canlı duvar kağıtları
-    kullanmayacaksanız devre dışı bırakmak güvenlidir.
+    Donanım hızlandırmayı devre dışı bırakmak bellek kullanımını azaltacaktır.
+    Ağır animasyonlar kullanmıyorsanız devre dışı bırakmak güvenlidir, ancak
+    bireysel widget'lar bu ayardan bağımsız olarak yine de GPU kullanımını
+    zorlayabilir.
   icon_pack:
     available: Mevcut Simge Paketleri
     selected: Aktif Simge Paketleri
@@ -276,6 +277,7 @@ wall:
   collections: Koleksiyonlar
   contrast: Kontrast
   corrupted_wallpapers_message: 'Bozuk duvar kağıtları, şunları silmeyi düşünün:'
+  coverage_pause_threshold: Duraklatma eşiği (pencere kapsamı)
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
   default_collection: Varsayılan Koleksiyon
@@ -392,6 +394,7 @@ wm:
     ease_function: Animasyon kolaylaştırma işlevi
     enable: Pencerenin animasyonlarını etkinleştirin
   author: Yazar
+  auto_stack: Uygulama kategorisine göre otomatik yığın
   border:
     enable: Pencere Kenarlığını Etkinleştir
     offset: Kenar Ofseti

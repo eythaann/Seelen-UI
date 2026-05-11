@@ -4,6 +4,7 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
   import type { IconName } from "libs/ui/icons";
+  import { t } from "../i18n";
 
   function getRadioIcon(kind: RadioDeviceKind): IconName {
     switch (kind) {
@@ -51,7 +52,7 @@
         class:radio-button-enabled={radio.is_enabled}
         class:radio-button-disabled={!radio.is_enabled}
         onclick={() => toggleRadio(radio)}
-        title={`${radio.name} - ${radio.is_enabled ? "Enabled" : "Disabled"}`}
+        title={`${radio.name} - ${radio.is_enabled ? $t("enabled") : $t("disabled")}`}
       >
         <Icon iconName={getRadioIcon(radio.kind)} size="2rem" />
         <span class="radio-button-label">{getRadioLabel(radio.kind)}</span>
