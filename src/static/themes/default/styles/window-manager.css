@@ -22,7 +22,7 @@
     padding: var(--spacing-2xs);
     border-radius: 6px;
 
-    background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+    background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
     box-shadow: var(--shadow-m);
 
     .wm-stack-bar-item {

@@ -30,6 +30,7 @@
 
       &.radio-button-enabled {
         background-color: var(--slu-std-ui-color);
+        color: var(--color-gray-100);
 
         &:hover {
           background-color: var(--slu-std-ui-hover-color);

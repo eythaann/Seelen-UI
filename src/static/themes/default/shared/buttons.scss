@@ -6,7 +6,7 @@
   gap: 0.5em;
 
   &:active {
-    transform: translateY(2px);
+    transform: translateY(1px) scale(0.98);
   }
 }
 
@@ -60,6 +60,6 @@ button[data-skin="default"] {
   box-shadow: var(--shadow-s);
 
   &:hover {
-    background-color: var(--slu-std-bg-color);
+    filter: brightness(1.15);
   }
 }

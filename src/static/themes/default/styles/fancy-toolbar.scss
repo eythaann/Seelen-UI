@@ -4,10 +4,10 @@
 }
 
 .ft-bar {
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
 
   &[data-has-margin="true"] {
-    border-radius: calc(var(--config-height) / 3);
+    border-radius: calc((var(--config-item-size) + var(--config-padding) * 2) * 0.3);
   }
 
   // &[data-there-is-maximized-on-background="true"] {} (this attribute exist but is unused)
@@ -16,7 +16,7 @@
 
 .ft-bar-item {
   &.ft-bar-item-clickable {
-    border-radius: 6px;
+    border-radius: calc(var(--config-item-size) * 0.3);
 
     &:hover {
       background-color: oklch(from var(--system-accent-color) l c h / 0.2);
