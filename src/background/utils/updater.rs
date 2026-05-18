@@ -1,10 +1,9 @@
 use seelen_core::state::UpdateChannel;
-use slu_ipc::messages::SvcAction;
+use slu_ipc::{messages::SvcAction, ServiceIpc, IPC};
 use tauri_plugin_updater::{Update, UpdaterExt};
 
 use crate::{
-    app::get_app_handle, cli::ServicePipe, error::Result, state::application::FULL_STATE,
-    utils::has_fixed_runtime,
+    app::get_app_handle, error::Result, state::application::FULL_STATE, utils::has_fixed_runtime,
 };
 
 use super::is_running_as_appx;
@@ -58,7 +57,23 @@ pub async fn trace_update_intallation(update: Update) -> Result<()> {
             || log::trace!("Update: download finished"),
         )
         .await?;
-    ServicePipe::request(SvcAction::Stop)?;
+
+    // Send Stop synchronously and wait for the service to actually exit before
+    // handing off to the NSIS installer. Using fire-and-forget here means the
+    // Tokio runtime can shut down before the IPC message is delivered, leaving
+    // the service's app-monitoring loop alive to fight the installer.
+    if let Err(err) = ServiceIpc::send(SvcAction::Stop).await {
+        log::warn!("Failed to send stop to service before update: {err}");
+    } else {
+        // Poll until the service IPC is no longer reachable (process exited)
+        // or we time out after ~2 s and let the NSIS PREINSTALL handle it.
+        let mut waited_ms = 0u32;
+        while ServiceIpc::can_stablish_connection() && waited_ms < 2000 {
+            tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+            waited_ms += 100;
+        }
+    }
+
     update.install(bytes)?;
     log::trace!("Update: intallation finished");
     Ok(())
