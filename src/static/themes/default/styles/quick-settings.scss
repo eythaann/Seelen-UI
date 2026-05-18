@@ -15,8 +15,7 @@
       justify-content: center;
       gap: 8px;
 
-      background-color: var(--color-gray-100);
-      color: var(--color-gray-900);
+      background-color: var(--slu-std-bg-light-color);
       box-shadow: var(--shadow-s);
       padding: 12px 8px;
       border-radius: 10px;
@@ -30,11 +29,10 @@
       }
 
       &.radio-button-enabled {
-        background-color: var(--system-accent-dark-color);
-        color: var(--color-gray-50);
+        background-color: var(--slu-std-ui-color);
 
         &:hover {
-          background-color: var(--system-accent-darker-color);
+          background-color: var(--slu-std-ui-hover-color);
         }
       }
 

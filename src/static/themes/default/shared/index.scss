@@ -71,12 +71,10 @@ body:has(> div > .slu-std-popover) {
 
 .slu-std-surface {
   background-color: var(--slu-std-bg-color);
-  color: var(--color-gray-900);
 }
 
 .slu-std-surface-elevated {
   background-color: var(--slu-std-bg-light-color);
-  color: var(--color-gray-900);
   box-shadow: var(--shadow-s);
 }
 
@@ -88,7 +86,7 @@ body:has(> div > .slu-std-popover) {
   padding: 10px;
   margin: 10px; // this margin will allow the box-shadow to be visible
 
-  background-color: var(--color-gray-50);
+  background-color: var(--slu-std-bg-color);
   color: var(--color-gray-900);
   border-radius: 10px;
 
