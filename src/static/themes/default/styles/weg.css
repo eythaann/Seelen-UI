@@ -27,7 +27,7 @@
 }
 
 .taskbar {
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.6);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
   border-radius: 15px;
 
   > .weg-items-container {

@@ -4,8 +4,7 @@
 }
 
 .ft-bar {
-  color: var(--color-fixed-gray-100);
-  background-color: var(--color-fixed-gray-900);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
 
   &[data-has-margin="true"] {
     border-radius: calc(var(--config-height) / 3);
