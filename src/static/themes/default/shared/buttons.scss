@@ -12,6 +12,12 @@
 
 div[data-behavior="group"] {
   display: flex;
+  border-radius: 6px;
+  box-shadow: var(--shadow-s);
+
+  > button {
+    box-shadow: none;
+  }
 
   > button:not(:first-child) {
     border-top-left-radius: 0;
@@ -40,23 +46,20 @@ button[data-skin="transparent"] {
 button[data-skin="solid"] {
   @extend %common;
   background-color: var(--slu-std-ui-color);
-  border: 1px solid var(--slu-std-ui-color);
   color: var(--color-gray-100);
+  box-shadow: var(--shadow-s);
 
   &:hover {
     background-color: var(--slu-std-ui-hover-color);
-    border: 1px solid var(--slu-std-ui-hover-color);
   }
 }
 
 button[data-skin="default"] {
   @extend %common;
-  background-color: var(--color-gray-50);
-  border: 1px solid var(--color-gray-100);
-  color: var(--color-gray-900);
+  background-color: var(--slu-std-bg-light-color);
+  box-shadow: var(--shadow-s);
 
   &:hover {
-    background-color: var(--color-gray-50);
-    border: 1px solid var(--color-gray-200);
+    background-color: var(--slu-std-bg-color);
   }
 }

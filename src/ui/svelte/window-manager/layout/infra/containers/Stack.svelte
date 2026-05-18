@@ -17,13 +17,9 @@
     <div class="wm-stack-bar" data-allow-mouse-events={overlayVisible}>
       {#each node.windows as winId (winId)}
         {@const info = state.interactables.find((app) => app.hwnd === winId)}
-        <div
-          class={[
-            "wm-stack-bar-item",
-            {
-              "wm-stack-bar-item-active": winId === node.activeWindow,
-            },
-          ]}
+        <button
+          class="wm-stack-bar-item"
+          data-skin={winId === node.activeWindow ? "solid" : "default"}
           data-allow-mouse-events={overlayVisible}
         >
           <FileIcon
@@ -35,7 +31,7 @@
           <span class="wm-stack-bar-item-title" data-allow-mouse-events={overlayVisible}>
             {info?.title || `0x${winId.toString(16)}`}
           </span>
-        </div>
+        </button>
       {/each}
     </div>
   {/if}

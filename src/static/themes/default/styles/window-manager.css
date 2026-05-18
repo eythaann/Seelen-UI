@@ -2,10 +2,10 @@
   &.wm-leaf-with-borders {
     border-style: solid;
     border-width: var(--config-border-width);
-    border-color: var(--system-accent-light-color);
+    border-color: var(--system-accent-dark-color);
 
     &.wm-leaf-focused {
-      border-color: var(--system-accent-lighter-color);
+      border-color: var(--system-accent-light-color);
     }
   }
 }
@@ -17,19 +17,18 @@
   .wm-stack-bar {
     display: flex;
     align-items: center;
-    height: 30px;
-    padding: 0 10px;
-    gap: var(--config-containers-gap);
-    border-radius: 10px;
-    background-color: var(--color-fixed-gray-900);
-    color: #fefefe;
-    font-size: 0.85rem;
+
+    gap: var(--spacing-2xs);
+    padding: var(--spacing-2xs);
+    border-radius: 6px;
+
+    background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+    box-shadow: var(--shadow-m);
 
     .wm-stack-bar-item {
+      flex: 0 1 120px;
+      max-width: 120px;
       min-width: 0;
-      display: flex;
-      align-items: center;
-      gap: 5px;
 
       .wm-stack-bar-item-icon {
         width: 1rem;
@@ -38,14 +37,15 @@
       }
 
       .wm-stack-bar-item-title {
+        flex: 1;
+        min-width: 0;
+
+        font-size: 0.8rem;
+        font-weight: 600;
+
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        max-width: 100px;
-      }
-
-      &.wm-stack-bar-item-active {
-        color: var(--system-accent-lighter-color);
       }
     }
   }
