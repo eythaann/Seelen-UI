@@ -2,6 +2,10 @@
 
 ## [2.6.7-dev]
 
+### fix
+
+- deadlock when native shell explorer not responding.
+
 ## [2.6.6]
 
 ### features

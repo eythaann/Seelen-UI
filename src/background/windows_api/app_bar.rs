@@ -11,7 +11,7 @@ use windows::Win32::{
 
 use crate::trace_lock;
 
-pub static REGISTERED_BARS: LazyLock<Mutex<Vec<isize>>> = LazyLock::new(|| Mutex::new(Vec::new()));
+static REGISTERED_BARS: LazyLock<Mutex<Vec<isize>>> = LazyLock::new(|| Mutex::new(Vec::new()));
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
 #[derive(Debug, Clone, Copy)]
@@ -73,10 +73,17 @@ impl AppBarData {
 
     pub fn register_as_new_bar(&mut self) {
         let mut data = self.0;
-        let mut registered = trace_lock!(REGISTERED_BARS);
         let addr = data.hWnd.0 as isize;
-        if !registered.contains(&addr) {
-            registered.push(addr);
+        let is_new = {
+            let mut registered = trace_lock!(REGISTERED_BARS);
+            if !registered.contains(&addr) {
+                registered.push(addr);
+                true
+            } else {
+                false
+            }
+        };
+        if is_new {
             unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
         }
         unsafe { SHAppBarMessage(ABM_SETPOS, &mut data) };
