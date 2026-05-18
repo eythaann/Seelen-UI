@@ -18,6 +18,7 @@ pub fn set_as_wallpaper(webview: tauri::WebviewWindow) -> Result<()> {
                 right: rect.right - rect.left,
                 bottom: rect.bottom - rect.top,
             };
+            webview.set_always_on_bottom(false)?;
             WindowsApi::move_window(hwnd, &relative_rect)?;
             WindowsApi::set_position(hwnd, None, &relative_rect, SWP_ASYNCWINDOWPOS)?;
         }
@@ -26,6 +27,7 @@ pub fn set_as_wallpaper(webview: tauri::WebviewWindow) -> Result<()> {
                 "Failed to attach to desktop hierarchy: {}, using absolute positioning",
                 e
             );
+            webview.set_always_on_bottom(true)?;
             WindowsApi::move_window(hwnd, &rect)?;
             WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
         }

@@ -5,6 +5,7 @@
 ### fix
 
 - deadlock when native shell explorer not responding.
+- wallpaper manager not working on MSIX (raised desktop layout).
 
 ## [2.6.6]
 
