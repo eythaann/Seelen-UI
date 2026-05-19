@@ -98,6 +98,16 @@ devtools:
 
     Ostrzeżenie: jeśli widżet ulegnie awarii, wszystkie widżety korzystające z
     tego samego modułu ładującego ulegną awarii razem.
+  widgets_debug:
+    actions: Działania
+    empty: Nie załadowano żadnych widżetów. Kliknij Odśwież.
+    instance_id: Identyfikator instancji
+    monitor_id: Identyfikator monitora
+    open_devtools: Narzędzia deweloperskie
+    refresh: Odświeżać
+    status: Status
+    tab: Widżety
+    widget_id: Identyfikator widgetu
 discord_banner:
   message: >-
     Połącz się z innymi użytkownikami interfejsu Seelen, uzyskaj pomoc,

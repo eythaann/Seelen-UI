@@ -98,6 +98,16 @@ devtools:
 
     Զգուշացում. եթե վիջեթը խափանվի, բոլոր վիջեթները, որոնք կիսում են նույն
     բեռնիչը, միասին կխափանվեն:
+  widgets_debug:
+    actions: Գործողություններ
+    empty: 'Չկան բեռնված վիդջեթներ: Սեղմեք Թարմացնել:'
+    instance_id: Օրինակի ID
+    monitor_id: Մոնիտորի ID
+    open_devtools: DevTools
+    refresh: Թարմացնել
+    status: Կարգավիճակ
+    tab: Վիդջեթներ
+    widget_id: Վիջեթի ID
 discord_banner:
   message: >-
     Կապվեք Seelen UI-ի այլ օգտատերերի հետ, ստացեք օգնություն, կիսվեք թեմաներով և

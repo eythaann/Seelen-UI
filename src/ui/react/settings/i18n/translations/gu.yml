@@ -97,6 +97,16 @@ devtools:
 
     ચેતવણી: જો વિજેટ ક્રેશ થાય છે, તો સમાન લોડરને શેર કરતા તમામ વિજેટો એકસાથે
     ક્રેશ થશે.
+  widgets_debug:
+    actions: ક્રિયાઓ
+    empty: કોઈ વિજેટ્સ લોડ થયા નથી. રિફ્રેશ પર ક્લિક કરો.
+    instance_id: ઇન્સ્ટન્સ ID
+    monitor_id: મોનિટર ID
+    open_devtools: DevTools
+    refresh: તાજું કરો
+    status: સ્થિતિ
+    tab: વિજેટ્સ
+    widget_id: વિજેટ ID
 discord_banner:
   message: >-
     અન્ય Seelen UI વપરાશકર્તાઓ સાથે કનેક્ટ થાઓ, મદદ મેળવો, થીમ્સ શેર કરો અને

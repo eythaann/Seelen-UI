@@ -74,6 +74,15 @@ devtools.simulate_perm.widget_id_placeholder: dc3e33d8
 devtools.tools: 7328aa8
 devtools.unstable_optimizations: e3aaebf4
 devtools.unstable_optimizations_description: 32ee923c
+devtools.widgets_debug.actions: d932aecc
+devtools.widgets_debug.empty: 1b91d698
+devtools.widgets_debug.instance_id: 591ff689
+devtools.widgets_debug.monitor_id: df055f78
+devtools.widgets_debug.open_devtools: 3b6295c9
+devtools.widgets_debug.refresh: d7a89070
+devtools.widgets_debug.status: '63379045'
+devtools.widgets_debug.tab: 9cfe3028
+devtools.widgets_debug.widget_id: 2c6fa7f8
 discord_banner.message: 3a18aeea
 discord_banner.title: 2fd73cdc
 extras.backup_group: 65b4d760

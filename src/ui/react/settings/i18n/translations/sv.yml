@@ -97,6 +97,16 @@ devtools:
 
     Varning: om en widget kraschar kommer alla widgets som delar samma laddare
     att krascha tillsammans.
+  widgets_debug:
+    actions: Åtgärder
+    empty: Inga widgetar laddade. Klicka på Uppdatera.
+    instance_id: Förekomst-ID
+    monitor_id: Monitor-ID
+    open_devtools: DevTools
+    refresh: Uppdatera
+    status: Status
+    tab: Widgets
+    widget_id: Widget-ID
 discord_banner:
   message: >-
     Få kontakt med andra Seelen UI-användare, få hjälp, dela teman och håll dig

@@ -99,6 +99,16 @@ devtools:
 
     Upozornenie: Ak miniaplikácia zlyhá, všetky miniaplikácie, ktoré zdieľajú
     rovnaký načítač, zlyhajú spoločne.
+  widgets_debug:
+    actions: Akcie
+    empty: Žiadne načítané widgety. Kliknite na položku Obnoviť.
+    instance_id: ID inštancie
+    monitor_id: ID monitora
+    open_devtools: DevTools
+    refresh: Obnoviť
+    status: Stav
+    tab: Widgety
+    widget_id: ID miniaplikácie
 discord_banner:
   message: >-
     Spojte sa s ostatnými používateľmi používateľského rozhrania Seelen,

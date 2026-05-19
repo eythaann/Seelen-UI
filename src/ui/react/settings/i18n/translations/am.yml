@@ -92,6 +92,16 @@ devtools:
   unstable_optimizations_description: |-
     የ RAM አጠቃቀምን የሚቀንሱ የሙከራ Chromium ባንዲራዎችን ያንቁ።
     ማስጠንቀቂያ፡ መግብር ከተበላሸ ሁሉም ተመሳሳይ ጫኚ የሚጋሩ መግብሮች አንድ ላይ ይወድቃሉ።
+  widgets_debug:
+    actions: ድርጊቶች
+    empty: ምንም መግብሮች አልተጫኑም። አድስ የሚለውን ጠቅ ያድርጉ።
+    instance_id: የምሳሌ መታወቂያ
+    monitor_id: የክትትል መታወቂያ
+    open_devtools: DevTools
+    refresh: አድስ
+    status: ሁኔታ
+    tab: መግብሮች
+    widget_id: መግብር መታወቂያ
 discord_banner:
   message: >-
     ከሌሎች የSeelen UI ተጠቃሚዎች ጋር ይገናኙ፣ እገዛ ያግኙ፣ ገጽታዎችን ያጋሩ እና በቅርብ ዜናዎች እንደተዘመኑ

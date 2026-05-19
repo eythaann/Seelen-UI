@@ -97,6 +97,16 @@ devtools:
 
     Abisua: widget bat huts egiten bada, kargatzaile bera partekatzen duten
     widget guztiak batera eroriko dira.
+  widgets_debug:
+    actions: Ekintzak
+    empty: Ez dago widgetik kargatu. Sakatu Freskatu.
+    instance_id: Instantziaren IDa
+    monitor_id: Monitorearen IDa
+    open_devtools: DevTools
+    refresh: Freskatu
+    status: Egoera
+    tab: Widget-ak
+    widget_id: Widgetaren IDa
 discord_banner:
   message: >-
     Konektatu Seelen UI erabiltzaileekin, lortu laguntza, partekatu gaiak eta

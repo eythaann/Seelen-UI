@@ -96,6 +96,16 @@ devtools:
 
     Cảnh báo: nếu một tiện ích gặp sự cố, tất cả các tiện ích chia sẻ cùng một
     trình tải sẽ bị lỗi cùng nhau.
+  widgets_debug:
+    actions: hành động
+    empty: Không có vật dụng nào được tải. Nhấp vào Làm mới.
+    instance_id: ID phiên bản
+    monitor_id: ID giám sát
+    open_devtools: Công cụ dành cho nhà phát triển
+    refresh: Làm cho khỏe lại
+    status: Trạng thái
+    tab: Widget
+    widget_id: ID tiện ích
 discord_banner:
   message: >-
     Kết nối với những người dùng Seelen UI khác, nhận trợ giúp, chia sẻ chủ đề

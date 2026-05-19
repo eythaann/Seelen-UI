@@ -98,6 +98,16 @@ devtools:
 
     Attenzione: se un widget si blocca, tutti i widget che condividono lo stesso
     caricatore si bloccheranno insieme.
+  widgets_debug:
+    actions: Azioni
+    empty: Nessun widget caricato. Fare clic su Aggiorna.
+    instance_id: ID istanza
+    monitor_id: Monitorare l'identità
+    open_devtools: Strumenti di sviluppo
+    refresh: Aggiorna
+    status: Stato
+    tab: Widget
+    widget_id: ID del widget
 discord_banner:
   message: >-
     Connettiti con altri utenti dell'interfaccia utente Seelen, ottieni

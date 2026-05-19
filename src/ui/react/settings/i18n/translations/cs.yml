@@ -98,6 +98,16 @@ devtools:
 
     Upozornění: Pokud dojde k selhání widgetu, zhroutí se všechny widgety
     sdílející stejný zavaděč.
+  widgets_debug:
+    actions: Akce
+    empty: Nejsou načteny žádné widgety. Klepněte na tlačítko Obnovit.
+    instance_id: ID instance
+    monitor_id: ID monitoru
+    open_devtools: DevTools
+    refresh: Obnovit
+    status: Postavení
+    tab: Widgety
+    widget_id: ID widgetu
 discord_banner:
   message: >-
     Spojte se s ostatními uživateli uživatelského rozhraní Seelen, získejte

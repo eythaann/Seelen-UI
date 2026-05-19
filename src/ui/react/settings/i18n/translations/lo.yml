@@ -95,6 +95,16 @@ devtools:
 
     ຄໍາເຕືອນ: ຖ້າ widget ຂັດຂ້ອງ, widget ທັງຫມົດທີ່ແບ່ງປັນ loader ດຽວກັນຈະ crash
     ຮ່ວມກັນ.
+  widgets_debug:
+    actions: ການກະທໍາ
+    empty: ບໍ່ມີວິດເຈັດທີ່ໂຫລດ. ຄລິກ ໂຫຼດຫນ້າຈໍຄືນ.
+    instance_id: ID ຕົວຢ່າງ
+    monitor_id: ID ຈໍພາບ
+    open_devtools: DevTools
+    refresh: ໂຫຼດຂໍ້ມູນຄືນໃໝ່
+    status: ສະຖານະ
+    tab: ວິດເຈັດ
+    widget_id: ໄອດີວິດເຈັດ
 discord_banner:
   message: >-
     ເຊື່ອມ​ຕໍ່​ກັບ​ຜູ້​ໃຊ້ Seelen UI ຄົນ​ອື່ນ, ຂໍ​ຄວາມ​ຊ່ວຍ​ເຫຼືອ,

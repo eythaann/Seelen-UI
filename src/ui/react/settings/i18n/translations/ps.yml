@@ -96,6 +96,16 @@ devtools:
 
     خبرداری: که یو ویجټ خراب شي، ټول ویجټونه چې ورته لوډر شریکوي یوځای به ټکر
     شي.
+  widgets_debug:
+    actions: کړنې
+    empty: هیڅ ویجټونه ندي پورته شوي. په ریفریش کلیک وکړئ.
+    instance_id: د مثال ID
+    monitor_id: د څار ID
+    open_devtools: DevTools
+    refresh: تازه کړئ
+    status: حالت
+    tab: ویجټونه
+    widget_id: د ویجټ ID
 discord_banner:
   message: >-
     د نورو Seelen UI کاروونکو سره اړیکه ونیسئ، مرسته ترلاسه کړئ، موضوعات شریک

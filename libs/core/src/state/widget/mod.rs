@@ -221,6 +221,17 @@ pub enum Alignment {
     End,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[cfg_attr(feature = "gen-binds", ts(export))]
+#[serde(rename_all = "camelCase")]
+pub struct WidgetDebugInfo {
+    pub label: String,
+    pub widget_id: String,
+    pub monitor_id: Option<String>,
+    pub instance_id: Option<String>,
+    pub status: WidgetStatus,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
 #[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum WidgetStatus {

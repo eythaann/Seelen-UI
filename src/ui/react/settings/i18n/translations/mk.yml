@@ -99,6 +99,16 @@ devtools:
 
     Предупредување: ако виџетот падне, сите додатоци што го споделуваат истиот
     вчитувач ќе се срушат заедно.
+  widgets_debug:
+    actions: Акции
+    empty: Не се вчитани виџети. Кликнете Освежи.
+    instance_id: ИД на пример
+    monitor_id: ID на монитор
+    open_devtools: DevTools
+    refresh: Освежи
+    status: Статус
+    tab: Додатоци
+    widget_id: ID на графичка контрола
 discord_banner:
   message: >-
     Поврзете се со други корисници на Seelen UI, добијте помош, споделувајте

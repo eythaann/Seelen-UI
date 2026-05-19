@@ -97,6 +97,16 @@ devtools:
 
     Rhybudd: os bydd teclyn yn chwalu, bydd pob teclyn sy'n rhannu'r un llwythwr
     yn chwalu gyda'i gilydd.
+  widgets_debug:
+    actions: Gweithredoedd
+    empty: Dim teclynnau wedi'u llwytho. Cliciwch ar Adnewyddu.
+    instance_id: ID Enghreifftiol
+    monitor_id: Monitro ID
+    open_devtools: DevTools
+    refresh: Adnewyddu
+    status: Statws
+    tab: Teclynnau
+    widget_id: ID teclyn
 discord_banner:
   message: >-
     Cysylltwch â defnyddwyr Seelen UI eraill, cael help, rhannu themâu, a chael

@@ -97,6 +97,16 @@ devtools:
 
     Avís: si un giny es bloqueja, tots els ginys que comparteixin el mateix
     carregador es bloquejaran junts.
+  widgets_debug:
+    actions: Accions
+    empty: No s'han carregat widgets. Feu clic a Actualitza.
+    instance_id: ID de la instància
+    monitor_id: ID del monitor
+    open_devtools: DevTools
+    refresh: Actualitza
+    status: Estat
+    tab: Ginys
+    widget_id: ID del widget
 discord_banner:
   message: >-
     Connecteu-vos amb altres usuaris de la interfície d'usuari de Seelen,

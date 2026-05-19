@@ -97,6 +97,16 @@ devtools:
 
     Advarsel: hvis en widget krasjer, vil alle widgeter som deler samme laster
     krasje sammen.
+  widgets_debug:
+    actions: Handlinger
+    empty: Ingen widgets er lastet inn. Klikk på Oppdater.
+    instance_id: Forekomst-ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Forfriske
+    status: Status
+    tab: Widgets
+    widget_id: Widget-ID
 discord_banner:
   message: >-
     Koble til andre Seelen UI-brukere, få hjelp, del temaer og hold deg

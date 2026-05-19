@@ -96,6 +96,16 @@ devtools:
 
     අවවාදයයි: විජට් එකක් කඩා වැටුනහොත්, එකම ලෝඩරය බෙදා ගන්නා සියලුම විජට් එකට
     කඩා වැටෙනු ඇත.
+  widgets_debug:
+    actions: ක්රියාවන්
+    empty: විජට් කිසිවක් පූරණය කර නැත. Refresh ක්ලික් කරන්න.
+    instance_id: උදාහරණ ID
+    monitor_id: නිරීක්ෂණ හැඳුනුම්පත
+    open_devtools: DevTools
+    refresh: නැවුම් කරන්න
+    status: තත්ත්වය
+    tab: විජට්
+    widget_id: විජට් හැඳුනුම්පත
 discord_banner:
   message: >-
     අනෙකුත් Seelen UI පරිශීලකයන් සමඟ සම්බන්ධ වන්න, උදවු ලබා ගන්න, තේමා බෙදාගන්න,

@@ -18,10 +18,13 @@ use std::{
 use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceId,
-    state::{context_menu::ContextMenu, WidgetInstanceMode, WidgetStatus, WidgetTriggerPayload},
+    state::{
+        context_menu::ContextMenu, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus,
+        WidgetTriggerPayload,
+    },
     Rect,
 };
-use tauri::Emitter;
+use tauri::{Emitter, Manager};
 
 use crate::{
     app::get_app_handle,
@@ -235,6 +238,32 @@ fn widget_data_dir(webview: &tauri::WebviewWindow) -> Result<PathBuf> {
     let path = data_dir.join(folder);
     std::fs::create_dir_all(&path)?;
     Ok(path)
+}
+
+#[tauri::command(async)]
+pub fn debug_get_widgets_statuses() -> Vec<WidgetDebugInfo> {
+    let mut result = Vec::new();
+    WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+        deployment.pods.for_each(|(_, pod)| {
+            result.push(WidgetDebugInfo {
+                label: pod.label.raw.clone(),
+                widget_id: pod.label.widget_id.to_string(),
+                monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
+                instance_id: pod.label.instance_id.map(|id| id.to_string()),
+                status: *pod.status(),
+            });
+        });
+    });
+    result
+}
+
+#[tauri::command(async)]
+pub fn debug_open_dev_tools(label: String) -> Result<()> {
+    let window = get_app_handle()
+        .get_webview_window(&label)
+        .ok_or("Widget window not found")?;
+    window.open_devtools();
+    Ok(())
 }
 
 fn resolve_safe_path(base: &Path, filename: &str) -> Result<PathBuf> {

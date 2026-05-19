@@ -97,6 +97,16 @@ devtools:
 
     Twissija: jekk widget jiġġarraf, il-widgets kollha li jaqsmu l-istess loader
     jiġġarraf flimkien.
+  widgets_debug:
+    actions: Azzjonijiet
+    empty: Ebda widgets mgħobbija. Ikklikkja Aġġorna.
+    instance_id: ID tal-istanza
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Aġġorna
+    status: Status
+    tab: Widgets
+    widget_id: ID tal-widget
 discord_banner:
   message: >-
     Ikkonnettja ma' utenti oħra ta' Seelen UI, ikseb għajnuna, taqsam it-temi, u

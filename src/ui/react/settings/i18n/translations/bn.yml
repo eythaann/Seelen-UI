@@ -97,6 +97,16 @@ devtools:
 
     সতর্কতা: যদি একটি উইজেট ক্র্যাশ হয়, একই লোডার ভাগ করে নেওয়া সমস্ত উইজেট
     একসাথে ক্র্যাশ হবে৷
+  widgets_debug:
+    actions: কর্ম
+    empty: কোনো উইজেট লোড হয়নি। রিফ্রেশ ক্লিক করুন.
+    instance_id: ইনস্ট্যান্স আইডি
+    monitor_id: মনিটর আইডি
+    open_devtools: DevTools
+    refresh: রিফ্রেশ
+    status: স্ট্যাটাস
+    tab: উইজেট
+    widget_id: উইজেট আইডি
 discord_banner:
   message: >-
     অন্যান্য Seelen UI ব্যবহারকারীদের সাথে সংযোগ করুন, সাহায্য পান, থিমগুলি ভাগ

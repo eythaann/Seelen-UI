@@ -97,6 +97,16 @@ devtools:
 
     Aviso: se um widget travar, todos os widgets que compartilham o mesmo
     carregador irão travar juntos.
+  widgets_debug:
+    actions: Ações
+    empty: Nenhum widget carregado. Clique em Atualizar.
+    instance_id: ID da instância
+    monitor_id: ID do monitor
+    open_devtools: Ferramentas de desenvolvimento
+    refresh: Atualizar
+    status: Status
+    tab: Widgets
+    widget_id: ID do widget
 discord_banner:
   message: >-
     Conecte-se com outros usuários da Seelen UI, obtenha ajuda, compartilhe

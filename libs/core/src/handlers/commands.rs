@@ -179,6 +179,8 @@ slu_commands_declaration! {
     StateGetPerformanceMode = state_get_performance_mode() -> PerformanceMode,
 
     // Widgets
+    DebugGetWidgetsStatuses = debug_get_widgets_statuses() -> Vec<WidgetDebugInfo>,
+    DebugOpenDevTools = debug_open_dev_tools(label: String),
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
     TriggerContextMenu = trigger_context_menu(menu: ContextMenu, forward_to: Option<String>),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),

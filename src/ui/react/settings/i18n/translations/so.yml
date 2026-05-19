@@ -99,6 +99,16 @@ devtools:
 
     Digniin: haddii widget-ku xumaado, dhammaan widget-yada wadaagga isku midka
     ah way wada shilmi doonaan.
+  widgets_debug:
+    actions: Ficilada
+    empty: Ma jiro widgets raran Guji Cusbooneysii
+    instance_id: Aqoonsiga Tusaalaha
+    monitor_id: Aqoonsiga la socodka
+    open_devtools: DevTools
+    refresh: Dib u cusboonaysii
+    status: Xaalada
+    tab: Widgets
+    widget_id: Aqoonsiga widget
 discord_banner:
   message: >-
     Ku xidh isticmaalayaasha kale ee Seelen UI, hel caawimo, wadaag mawduucyada,

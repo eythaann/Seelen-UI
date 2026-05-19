@@ -97,6 +97,16 @@ devtools:
 
     Advarsel: Hvis en widget går ned, vil alle widgets, der deler den samme
     loader, gå ned sammen.
+  widgets_debug:
+    actions: Handlinger
+    empty: Ingen widgets indlæst. Klik på Opdater.
+    instance_id: Forekomst-id
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Opfriske
+    status: Status
+    tab: Widgets
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Få forbindelse til andre Seelen UI-brugere, få hjælp, del temaer, og hold

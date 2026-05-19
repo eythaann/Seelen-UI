@@ -98,6 +98,16 @@ devtools:
 
     Waarschuwing: als een widget crasht, zullen alle widgets die dezelfde lader
     delen samen crashen.
+  widgets_debug:
+    actions: Acties
+    empty: Geen widgets geladen. Klik op Vernieuwen.
+    instance_id: Instantie-ID
+    monitor_id: Monitor-ID
+    open_devtools: Ontwikkelaars
+    refresh: Vernieuwen
+    status: Status
+    tab: Widgets
+    widget_id: Widget-ID
 discord_banner:
   message: >-
     Maak contact met andere Seelen UI-gebruikers, krijg hulp, deel thema's en

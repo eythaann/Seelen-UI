@@ -99,6 +99,16 @@ devtools:
 
     Огоҳӣ: агар виджет вайрон шавад, ҳамаи виджетҳое, ки як боркунаки якхеларо
     мубодила мекунанд, якҷоя кор мекунанд.
+  widgets_debug:
+    actions: Амалҳо
+    empty: Ягон виджет бор карда нашудааст. Навсозӣ клик кунед.
+    instance_id: ID мисол
+    monitor_id: Монитор ID
+    open_devtools: DevTools
+    refresh: Навсозӣ
+    status: Статус
+    tab: Виҷетҳо
+    widget_id: ID виджет
 discord_banner:
   message: >-
     Бо дигар корбарони Seelen UI пайваст шавед, ёрӣ гиред, мавзӯъҳоро мубодила

@@ -85,6 +85,16 @@ devtools:
   unstable_optimizations_description: |-
     启用可减少 RAM 使用的实验性 Chromium 标志。 
     警告：如果一个小部件崩溃，共享同一加载器的所有小部件将一起崩溃。
+  widgets_debug:
+    actions: 行动
+    empty: 没有加载小部件。 单击刷新。
+    instance_id: 实例ID
+    monitor_id: 显示器ID
+    open_devtools: 开发工具
+    refresh: 刷新
+    status: 地位
+    tab: 小部件
+    widget_id: 小部件 ID
 discord_banner:
   message: 与其他 Seelen UI 用户联系、获取帮助、分享主题并了解最新消息。
   title: 加入我们的社区

@@ -101,6 +101,16 @@ devtools:
 
     Babala: kung ang isang widget ay nag-crash, ang lahat ng mga widget na
     nagbabahagi ng parehong loader ay magkaka-crash.
+  widgets_debug:
+    actions: Mga aksyon
+    empty: Walang na-load na mga widget. I-click ang I-refresh.
+    instance_id: Instance ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: I-refresh
+    status: Katayuan
+    tab: Mga Widget
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Kumonekta sa iba pang user ng Seelen UI, humingi ng tulong, magbahagi ng mga

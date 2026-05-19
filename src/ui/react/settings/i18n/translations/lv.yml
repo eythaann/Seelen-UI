@@ -97,6 +97,16 @@ devtools:
 
     Brīdinājums: ja logrīks avarē, visi logrīki, kuriem ir viens un tas pats
     ielādētājs, avarēs kopā.
+  widgets_debug:
+    actions: Darbības
+    empty: Nav ielādēts neviens logrīks. Noklikšķiniet uz Atsvaidzināt.
+    instance_id: "Gadījuma\_ID"
+    monitor_id: Monitora ID
+    open_devtools: DevTools
+    refresh: Atsvaidzināt
+    status: Statuss
+    tab: Logrīki
+    widget_id: "Logrīka\_ID"
 discord_banner:
   message: >-
     Sazinieties ar citiem Seelen UI lietotājiem, saņemiet palīdzību, kopīgojiet

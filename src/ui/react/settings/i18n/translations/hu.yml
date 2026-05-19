@@ -98,6 +98,16 @@ devtools:
 
     Figyelmeztetés: ha egy widget összeomlik, az ugyanazt a betöltőt használó
     összes widget együtt fog összeomlani.
+  widgets_debug:
+    actions: Akciók
+    empty: Nincsenek widgetek betöltve. Kattintson a Frissítés gombra.
+    instance_id: Példányazonosító
+    monitor_id: Monitor azonosító
+    open_devtools: DevTools
+    refresh: Frissítés
+    status: Állapot
+    tab: Widgetek
+    widget_id: Widget azonosító
 discord_banner:
   message: >-
     Lépjen kapcsolatba más Seelen UI-felhasználókkal, kérjen segítséget, osszon

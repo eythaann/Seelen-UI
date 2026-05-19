@@ -97,6 +97,16 @@ devtools:
 
     Viðvörun: Ef græja hrynur munu allar græjur sem deila sama hleðslutæki
     hrynja saman.
+  widgets_debug:
+    actions: Aðgerðir
+    empty: Engar græjur hlaðnar. Smelltu á Refresh.
+    instance_id: Auðkenni tilviks
+    monitor_id: Skjár auðkenni
+    open_devtools: DevTools
+    refresh: Endurnýja
+    status: Staða
+    tab: Græjur
+    widget_id: Græjuauðkenni
 discord_banner:
   message: >-
     Tengstu öðrum notendum Seelen UI, fáðu hjálp, deildu þemum og fylgstu með

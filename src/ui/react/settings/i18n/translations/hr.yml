@@ -98,6 +98,16 @@ devtools:
 
     Upozorenje: ako se widget sruši, svi widgeti koji dijele isti učitavač će se
     srušiti zajedno.
+  widgets_debug:
+    actions: Radnje
+    empty: Nema učitanih widgeta. Pritisnite Osvježi.
+    instance_id: ID instance
+    monitor_id: ID monitora
+    open_devtools: DevTools
+    refresh: Osvježiti
+    status: Status
+    tab: Widgeti
+    widget_id: ID widgeta
 discord_banner:
   message: >-
     Povežite se s drugim korisnicima Seelen UI, potražite pomoć, dijelite teme i

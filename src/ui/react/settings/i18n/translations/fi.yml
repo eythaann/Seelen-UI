@@ -98,6 +98,16 @@ devtools:
 
     Varoitus: jos widget kaatuu, kaikki saman latausohjelman jakavat widgetit
     kaatuvat yhdessä.
+  widgets_debug:
+    actions: Toiminnot
+    empty: Ei widgetejä ladattu. Napsauta Päivitä.
+    instance_id: Ilmentymän tunnus
+    monitor_id: Näytön tunnus
+    open_devtools: DevTools
+    refresh: Päivitä
+    status: Status
+    tab: Widgetit
+    widget_id: Widgetin tunnus
 discord_banner:
   message: >-
     Ota yhteyttä muihin Seelen-käyttöliittymän käyttäjiin, hanki apua, jaa

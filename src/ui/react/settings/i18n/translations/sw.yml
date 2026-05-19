@@ -97,6 +97,16 @@ devtools:
 
     Onyo: wijeti ikiacha kufanya kazi, wijeti zote zinazoshiriki kipakiaji sawa
     zitaanguka pamoja.
+  widgets_debug:
+    actions: Vitendo
+    empty: Hakuna wijeti zilizopakiwa. Bofya Onyesha upya.
+    instance_id: Kitambulisho cha Mfano
+    monitor_id: Kitambulisho cha kufuatilia
+    open_devtools: DevTools
+    refresh: Onyesha upya
+    status: Hali
+    tab: Wijeti
+    widget_id: Kitambulisho cha Wijeti
 discord_banner:
   message: >-
     Ungana na watumiaji wengine wa Seelen UI, pata usaidizi, shiriki mandhari na

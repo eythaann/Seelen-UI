@@ -97,6 +97,16 @@ devtools:
 
     Анхааруулга: Хэрэв виджет гацвал нэг ачаалагчийг хуваалцаж байгаа бүх
     виджетүүд хамтдаа эвдрэх болно.
+  widgets_debug:
+    actions: Үйлдлүүд
+    empty: Ямар ч виджет ачаалагдсангүй. Refresh дээр дарна уу.
+    instance_id: Жишээ ID
+    monitor_id: Монитор ID
+    open_devtools: DevTools
+    refresh: Сэргээх
+    status: Статус
+    tab: Виджетүүд
+    widget_id: Виджет ID
 discord_banner:
   message: >-
     Seelen UI-ийн бусад хэрэглэгчидтэй холбогдож, тусламж авч, сэдвүүдийг

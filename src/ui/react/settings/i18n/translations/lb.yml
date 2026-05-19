@@ -98,6 +98,16 @@ devtools:
 
     Opgepasst: wann e Widget Crash, all Widgets, déi deeselwechte Loader deelen,
     falen zesummen.
+  widgets_debug:
+    actions: Aktiounen
+    empty: Keng Widgets gelueden. Klickt op Erfrëschen.
+    instance_id: Instanz ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Erfrëschen
+    status: Status
+    tab: Widgets
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Connectéiert mat anere Seelen UI Benotzer, kritt Hëllef, deelt Themen a

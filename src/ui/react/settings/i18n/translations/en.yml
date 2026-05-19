@@ -96,6 +96,16 @@ devtools:
 
     Warning: if a widget crashes, all widgets sharing the same loader will crash
     together.
+  widgets_debug:
+    actions: Actions
+    empty: No widgets loaded. Click Refresh.
+    instance_id: Instance ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Refresh
+    status: Status
+    tab: Widgets
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Connect with other Seelen UI users, get help, share themes, and stay up to

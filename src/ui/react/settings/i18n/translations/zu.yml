@@ -99,6 +99,16 @@ devtools:
 
     Isexwayiso: uma iwijethi iphahlazeka, wonke amawijethi abelana ngesilayishi
     esifanayo azophahlazeka ndawonye.
+  widgets_debug:
+    actions: Izenzo
+    empty: Awekho amawijethi alayishiwe. Chofoza okuthi Vuselela.
+    instance_id: I-ID yesimo
+    monitor_id: I-ID yokuqapha
+    open_devtools: I-DevTools
+    refresh: Vuselela
+    status: Isimo
+    tab: Amawijethi
+    widget_id: I-ID Yewijethi
 discord_banner:
   message: >-
     Xhumana nabanye abasebenzisi be-Seelen UI, thola usizo, yabelana

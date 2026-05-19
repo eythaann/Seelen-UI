@@ -98,6 +98,16 @@ devtools:
 
     Įspėjimas: jei valdiklis sugenda, visi valdikliai, turintys tą patį
     įkroviklį, sugenda kartu.
+  widgets_debug:
+    actions: Veiksmai
+    empty: Jokių valdiklių neįkelta. Spustelėkite Atnaujinti.
+    instance_id: Atvejo ID
+    monitor_id: Monitoriaus ID
+    open_devtools: DevTools
+    refresh: Atnaujinti
+    status: Būsena
+    tab: Valdikliai
+    widget_id: Valdiklio ID
 discord_banner:
   message: >-
     Susisiekite su kitais Seelen UI naudotojais, gaukite pagalbos, bendrinkite

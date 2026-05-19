@@ -93,6 +93,16 @@ devtools:
   unstable_optimizations_description: |-
     הפעל דגלי Chromium ניסיוניים המפחיתים את השימוש ב-RAM.
     אזהרה: אם יישומון קורס, כל הווידג'טים החולקים את אותו מטעין יקרסו יחד.
+  widgets_debug:
+    actions: פעולות
+    empty: לא נטענו ווידג'טים. לחץ על רענן.
+    instance_id: מזהה מופע
+    monitor_id: מזהה צג
+    open_devtools: DevTools
+    refresh: לְרַעֲנֵן
+    status: סטָטוּס
+    tab: ווידג'טים
+    widget_id: מזהה יישומון
 discord_banner:
   message: >-
     התחבר עם משתמשי ממשק משתמש אחרים של Seelen, קבל עזרה, שתף ערכות נושא והישאר

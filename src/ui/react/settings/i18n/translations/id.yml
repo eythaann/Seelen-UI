@@ -98,6 +98,16 @@ devtools:
 
     Peringatan: jika widget mogok, semua widget yang berbagi pemuat yang sama
     akan mogok secara bersamaan.
+  widgets_debug:
+    actions: Tindakan
+    empty: Tidak ada widget yang dimuat. Klik Segarkan.
+    instance_id: ID Contoh
+    monitor_id: ID pemantauan
+    open_devtools: Alat Pengembang
+    refresh: Menyegarkan
+    status: Status
+    tab: Widget
+    widget_id: ID Widget
 discord_banner:
   message: >-
     Terhubung dengan pengguna Seelen UI lainnya, dapatkan bantuan, berbagi tema,

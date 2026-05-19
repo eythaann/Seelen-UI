@@ -98,6 +98,16 @@ devtools:
 
     Avertisment: dacă un widget se blochează, toate widget-urile care partajează
     același încărcător se vor bloca împreună.
+  widgets_debug:
+    actions: Acțiuni
+    empty: Niciun widget încărcat. Faceți clic pe Reîmprospătare.
+    instance_id: ID de instanță
+    monitor_id: ID monitor
+    open_devtools: DevTools
+    refresh: Reîmprospăta
+    status: Stare
+    tab: Widgeturi
+    widget_id: ID widget
 discord_banner:
   message: >-
     Conectați-vă cu alți utilizatori Seelen UI, obțineți ajutor, partajați teme

@@ -96,6 +96,16 @@ devtools:
 
     Hoiatus: kui mõni vidin jookseb kokku, jooksevad kokku kõik sama laadijat
     jagavad vidinad.
+  widgets_debug:
+    actions: Tegevused
+    empty: Ühtegi vidinat pole laaditud. Klõpsake Värskenda.
+    instance_id: Eksemplari ID
+    monitor_id: Monitori ID
+    open_devtools: DevTools
+    refresh: Värskenda
+    status: Olek
+    tab: Vidinad
+    widget_id: Vidina ID
 discord_banner:
   message: >-
     Võtke ühendust teiste Seeleni kasutajaliidese kasutajatega, hankige abi,

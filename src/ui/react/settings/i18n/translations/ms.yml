@@ -98,6 +98,16 @@ devtools:
 
     Amaran: jika widget ranap, semua widget yang berkongsi pemuat yang sama akan
     ranap bersama-sama.
+  widgets_debug:
+    actions: Tindakan
+    empty: Tiada widget dimuatkan. Klik Muat Semula.
+    instance_id: ID Contoh
+    monitor_id: ID Pantau
+    open_devtools: DevTools
+    refresh: Segarkan semula
+    status: Status
+    tab: Widget
+    widget_id: ID Widget
 discord_banner:
   message: >-
     Berhubung dengan pengguna UI Seelen yang lain, dapatkan bantuan, kongsi tema

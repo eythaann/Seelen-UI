@@ -97,6 +97,16 @@ devtools:
 
     هشدار: اگر یک ویجت از کار بیفتد، همه ویجت‌هایی که لودر یکسانی دارند با هم
     خراب می‌شوند.
+  widgets_debug:
+    actions: اقدامات
+    empty: هیچ ویجتی بارگیری نشده است. روی Refresh کلیک کنید.
+    instance_id: شناسه نمونه
+    monitor_id: شناسه مانیتور
+    open_devtools: DevTools
+    refresh: تازه کردن
+    status: وضعیت
+    tab: ابزارک ها
+    widget_id: شناسه ویجت
 discord_banner:
   message: >-
     با سایر کاربران رابط کاربری Seelen ارتباط برقرار کنید، راهنمایی دریافت کنید،

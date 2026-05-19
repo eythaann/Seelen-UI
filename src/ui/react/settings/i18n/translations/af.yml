@@ -98,6 +98,16 @@ devtools:
 
     Waarskuwing: as 'n legstuk ineenstort, sal alle legstukke wat dieselfde
     laaier deel saam neerstort.
+  widgets_debug:
+    actions: Aksies
+    empty: Geen legstukke gelaai nie. Klik op Verfris.
+    instance_id: Geval ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Verfris
+    status: Status
+    tab: Widgets
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Maak kontak met ander Seelen UI-gebruikers, kry hulp, deel temas en bly op

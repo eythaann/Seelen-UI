@@ -98,6 +98,16 @@ devtools:
 
     Advertencia: si un widget falla, todos los widgets que compartan el mismo
     cargador fallarán juntos.
+  widgets_debug:
+    actions: Comportamiento
+    empty: No hay widgets cargados. Haga clic en Actualizar.
+    instance_id: ID de instancia
+    monitor_id: Identificador del monitor
+    open_devtools: Herramientas de desarrollo
+    refresh: Refrescar
+    status: Estado
+    tab: widgets
+    widget_id: ID del widget
 discord_banner:
   message: >-
     Conéctese con otros usuarios de Seelen UI, obtenga ayuda, comparta temas y

@@ -8,6 +8,7 @@ import { ColorPalette } from "./ColorPalette.tsx";
 import { DevToolsSettings } from "./DevToolsSettings.tsx";
 import { SystemIconPackView } from "./CachedIcons.tsx";
 import { SharedComponents } from "./SharedComponents.tsx";
+import { WidgetsDebug } from "./WidgetsDebug.tsx";
 import { getWegConfig, patchWegConfig } from "../seelenweg/application.ts";
 
 export function DeveloperTools() {
@@ -66,6 +67,11 @@ export function DeveloperTools() {
               key: "icon_pack",
               label: t("devtools.icons"),
               children: <SystemIconPackView />,
+            },
+            {
+              key: "widgets_debug",
+              label: t("devtools.widgets_debug.tab"),
+              children: <WidgetsDebug />,
             },
           ]}
         />

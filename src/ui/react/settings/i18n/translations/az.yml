@@ -96,6 +96,16 @@ devtools:
 
     Xəbərdarlıq: əgər vidcet qəzaya uğrayarsa, eyni yükləyicini paylaşan bütün
     vidjetlər birlikdə çökəcək.
+  widgets_debug:
+    actions: Fəaliyyətlər
+    empty: Heç bir vidcet yüklənməmişdir. Yenilə klikləyin.
+    instance_id: Nümunə ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Yeniləyin
+    status: Vəziyyət
+    tab: Vidjetlər
+    widget_id: Widget ID
 discord_banner:
   message: >-
     Digər Seelen UI istifadəçiləri ilə əlaqə saxlayın, kömək alın, mövzuları

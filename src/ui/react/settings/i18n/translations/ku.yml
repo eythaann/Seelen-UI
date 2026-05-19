@@ -95,6 +95,16 @@ devtools:
 
     Hişyarî: heke widgetek têk bibe, dê hemî widgetên ku heman barkerê parve
     dikin bi hev re têk biçin.
+  widgets_debug:
+    actions: Actions
+    empty: Ne widgets barkirin. Refresh bikirtînin.
+    instance_id: Nimûne ID
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Hênikkirin
+    status: Cî
+    tab: Widgets
+    widget_id: ID widget
 discord_banner:
   message: >-
     Bi bikarhênerên din ên Seelen UI re têkilî daynin, alîkariyê bistînin,

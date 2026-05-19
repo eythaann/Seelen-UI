@@ -94,6 +94,16 @@ devtools:
   tools: Outils
   unstable_optimizations: Optimisations instables
   unstable_optimizations_description: "Activez les indicateurs Chromium expérimentaux qui réduisent l’utilisation de la RAM.\nAttention\_: si un widget plante, tous les widgets partageant le même chargeur planteront ensemble."
+  widgets_debug:
+    actions: Actes
+    empty: Aucun widget chargé. Cliquez sur Actualiser.
+    instance_id: ID d'instance
+    monitor_id: ID du moniteur
+    open_devtools: Outils de développement
+    refresh: Rafraîchir
+    status: Statut
+    tab: Widgets
+    widget_id: Identifiant du widget
 discord_banner:
   message: >-
     Connectez-vous avec d'autres utilisateurs de Seelen UI, obtenez de l'aide,

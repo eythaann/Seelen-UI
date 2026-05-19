@@ -99,6 +99,16 @@ devtools:
 
     Aviso: se um widget falhar, todos os widgets que partilham o mesmo
     carregador irão falhar em conjunto.
+  widgets_debug:
+    actions: Ações
+    empty: Nenhum widget carregado. Clique em Atualizar.
+    instance_id: ID da instância
+    monitor_id: ID do monitor
+    open_devtools: Ferramentas de desenvolvimento
+    refresh: Atualizar
+    status: Estatuto
+    tab: Widgets
+    widget_id: ID do widget
 discord_banner:
   message: >-
     Estabeleça ligação com outros utilizadores da Seelen UI, obtenha ajuda,

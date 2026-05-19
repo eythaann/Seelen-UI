@@ -89,6 +89,16 @@ devtools:
   unstable_optimizations_description: |-
     RAM の使用量を削減する実験的な Chromium フラグを有効にします。
     警告: ウィジェットがクラッシュすると、同じローダーを共有するすべてのウィジェットが一緒にクラッシュします。
+  widgets_debug:
+    actions: アクション
+    empty: ウィジェットがロードされていません。 「更新」をクリックします。
+    instance_id: インスタンスID
+    monitor_id: モニターID
+    open_devtools: 開発ツール
+    refresh: リフレッシュ
+    status: 状態
+    tab: ウィジェット
+    widget_id: ウィジェットID
 discord_banner:
   message: 他の Seelen UI ユーザーとつながり、ヘルプを得たり、テーマを共有したり、最新ニュースを入手したりできます。
   title: コミュニティに参加してください

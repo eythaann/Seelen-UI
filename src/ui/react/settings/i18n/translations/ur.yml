@@ -97,6 +97,16 @@ devtools:
 
     انتباہ: اگر کوئی ویجیٹ کریش ہو جاتا ہے تو ایک ہی لوڈر کو شیئر کرنے والے تمام
     ویجٹ ایک ساتھ کریش ہو جائیں گے۔
+  widgets_debug:
+    actions: اعمال
+    empty: کوئی ویجٹ لوڈ نہیں ہوا۔ ریفریش پر کلک کریں۔
+    instance_id: مثال کی شناخت
+    monitor_id: مانیٹر ID
+    open_devtools: ڈیو ٹولز
+    refresh: ریفریش کریں۔
+    status: حیثیت
+    tab: وجیٹس
+    widget_id: ویجیٹ ID
 discord_banner:
   message: >-
     دوسرے Seelen UI صارفین کے ساتھ جڑیں، مدد حاصل کریں، تھیمز کا اشتراک کریں،

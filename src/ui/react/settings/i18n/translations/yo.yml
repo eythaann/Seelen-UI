@@ -95,6 +95,16 @@ devtools:
 
     Ikilọ: ti ẹrọ ailorukọ kan ba kọlu, gbogbo awọn ẹrọ ailorukọ ti o pin agberu
     kanna yoo jamba papọ.
+  widgets_debug:
+    actions: Awọn iṣe
+    empty: Ko si awọn ẹrọ ailorukọ ti kojọpọ. Tẹ Sọtun.
+    instance_id: ID apẹẹrẹ
+    monitor_id: Abojuto ID
+    open_devtools: Awọn irinṣẹ DevTools
+    refresh: Tuntun
+    status: Ipo
+    tab: Awọn ẹrọ ailorukọ
+    widget_id: ID ailorukọ
 discord_banner:
   message: >-
     Sopọ pẹlu awọn olumulo Seelen UI miiran, gba iranlọwọ, pin awọn akori, ki o

@@ -98,6 +98,16 @@ devtools:
 
     Ogohlantirish: agar vidjet ishlamay qolsa, bir xil yuklagichga ega boʻlgan
     barcha vidjetlar birgalikda buziladi.
+  widgets_debug:
+    actions: Harakatlar
+    empty: Hech qanday vidjet yuklanmagan. Yangilash-ni bosing.
+    instance_id: Namuna identifikatori
+    monitor_id: Monitor ID
+    open_devtools: DevTools
+    refresh: Yangilash
+    status: Status
+    tab: Vidjetlar
+    widget_id: Vidjet identifikatori
 discord_banner:
   message: >-
     Boshqa Seelen UI foydalanuvchilari bilan bog'laning, yordam oling,

@@ -97,6 +97,16 @@ devtools:
 
     Uyarı: Bir widget çökerse, aynı yükleyiciyi paylaşan tüm widget'lar birlikte
     çökecektir.
+  widgets_debug:
+    actions: Eylemler
+    empty: Hiçbir widget yüklenmedi. Yenile'yi tıklayın.
+    instance_id: Örnek kimliği
+    monitor_id: Monitör Kimliği
+    open_devtools: Geliştirici Araçları
+    refresh: Yenile
+    status: Durum
+    tab: Widget'lar
+    widget_id: Widget kimliği
 discord_banner:
   message: >-
     Diğer Seelen UI kullanıcılarıyla bağlantı kurun, yardım alın, temaları

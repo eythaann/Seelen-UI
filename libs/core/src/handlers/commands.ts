@@ -59,6 +59,8 @@ export enum SeelenCommand {
   StateDeleteCachedIcons = "state_delete_cached_icons",
   StateRequestWallpaperAddition = "state_request_wallpaper_addition",
   StateGetPerformanceMode = "state_get_performance_mode",
+  DebugGetWidgetsStatuses = "debug_get_widgets_statuses",
+  DebugOpenDevTools = "debug_open_dev_tools",
   TriggerWidget = "trigger_widget",
   TriggerContextMenu = "trigger_context_menu",
   SetCurrentWidgetStatus = "set_current_widget_status",

@@ -99,6 +99,16 @@ devtools:
 
     Warnung: Wenn ein Widget abstürzt, stürzen alle Widgets, die denselben
     Loader nutzen, gleichzeitig ab.
+  widgets_debug:
+    actions: Aktionen
+    empty: Keine Widgets geladen. Klicken Sie auf Aktualisieren.
+    instance_id: Instanz-ID
+    monitor_id: Monitor-ID
+    open_devtools: DevTools
+    refresh: Aktualisieren
+    status: Status
+    tab: Widgets
+    widget_id: Widget-ID
 discord_banner:
   message: >-
     Vernetzen Sie sich mit anderen Benutzern der Seelen-Benutzeroberfläche,

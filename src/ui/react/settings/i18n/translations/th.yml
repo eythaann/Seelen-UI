@@ -94,6 +94,16 @@ devtools:
 
     คำเตือน: หากวิดเจ็ตขัดข้อง
     วิดเจ็ตทั้งหมดที่แชร์ตัวโหลดเดียวกันจะขัดข้องพร้อมกัน
+  widgets_debug:
+    actions: การดำเนินการ
+    empty: ไม่มีการโหลดวิดเจ็ต คลิกรีเฟรช
+    instance_id: รหัสอินสแตนซ์
+    monitor_id: รหัสมอนิเตอร์
+    open_devtools: DevTools
+    refresh: รีเฟรช
+    status: สถานะ
+    tab: วิดเจ็ต
+    widget_id: รหัสวิดเจ็ต
 discord_banner:
   message: >-
     เชื่อมต่อกับผู้ใช้ Seelen UI คนอื่นๆ รับความช่วยเหลือ แบ่งปันธีม
