@@ -82,7 +82,12 @@ async fn download_remote_icon_and_validate_it(
         return Err("Folder to store is not a directory".into());
     }
 
-    let res = SessionManager::authed_get(url).send().await?;
+    let res = SessionManager::plain_get(url).send().await?;
+    if !res.status().is_success() {
+        let status = res.status();
+        let body = res.text().await.unwrap_or_default();
+        return Err(format!("Failed to download icon: {status} - {body}").into());
+    }
     let bytes = res.bytes().await?;
 
     let format = image::guess_format(&bytes)?;

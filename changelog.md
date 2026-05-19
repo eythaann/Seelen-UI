@@ -2,6 +2,10 @@
 
 ## [2.6.8-dev]
 
+### fix
+
+- resource assets download silently failing.
+
 ## [2.6.7]
 
 ### fix

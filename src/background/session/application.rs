@@ -351,6 +351,12 @@ impl SessionManager {
         Self::read_credential(ACCESS_TOKEN_KEY)
     }
 
+    /// Returns a GET request builder without any auth headers.
+    /// Use this for direct CDN/S3 asset URLs that do not accept the Bearer scheme.
+    pub fn plain_get(url: &str) -> reqwest::RequestBuilder {
+        HTTP_CLIENT.get(url)
+    }
+
     /// Returns a GET request builder with `Authorization: Bearer <token>` set if a
     /// session is active. Use this for all authenticated background HTTP requests.
     pub fn authed_get(url: &str) -> reqwest::RequestBuilder {

@@ -474,7 +474,12 @@ async fn download_remote_asset(url: &url::Url, folder_to_store: &Path) -> Result
         return Err("Could not determine file extension from URL".into());
     };
 
-    let res = SessionManager::authed_get(url.as_str()).send().await?;
+    let res = SessionManager::plain_get(url.as_str()).send().await?;
+    if !res.status().is_success() {
+        let status = res.status();
+        let body = res.text().await.unwrap_or_default();
+        return Err(format!("Failed to download asset: {status} - {body}").into());
+    }
     let bytes = res.bytes().await?;
 
     let filename = format!("{}.{}", date_based_hex_id(), extension);
