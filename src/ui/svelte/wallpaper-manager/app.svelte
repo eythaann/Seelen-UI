@@ -9,6 +9,9 @@
     Widget.self.ready().then(() => {
       isReady = true;
     });
+    setInterval(() => {
+      invoke(SeelenCommand.SetAsWallpaper);
+    }, 1000);
   });
 
   // Re-apply positioning when monitors change (only after window is visible).
