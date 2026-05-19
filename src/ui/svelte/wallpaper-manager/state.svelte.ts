@@ -140,12 +140,4 @@ class State {
   }
 }
 
-$effect.root(() => {
-  $effect(() => {
-    monitors.value;
-    invoke(SeelenCommand.SetAsWallpaper);
-  });
-});
-
-await invoke(SeelenCommand.SetAsWallpaper).catch(console.error);
 export const gState = new State();

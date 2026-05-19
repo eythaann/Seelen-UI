@@ -1,9 +1,22 @@
 <script lang="ts">
-  import { Widget } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+  import { gState } from "./state.svelte.ts";
   import MonitorContainers from "./modules/Monitor/infra.svelte";
 
+  let isReady = $state(false);
+
   $effect(() => {
-    Widget.self.ready();
+    Widget.self.ready().then(() => {
+      isReady = true;
+    });
+  });
+
+  // Re-apply positioning when monitors change (only after window is visible).
+  $effect(() => {
+    gState.monitors;
+    if (isReady) {
+      invoke(SeelenCommand.SetAsWallpaper).catch(console.error);
+    }
   });
 </script>
 

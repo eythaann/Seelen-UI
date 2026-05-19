@@ -100,6 +100,19 @@ impl SeelenWall {
 
         unsafe {
             if GetParent(hwnd).ok() != Some(worker_w) {
+                // Apply same style cleanup as raised desktop — tao adds WS_EX_WINDOWEDGE to
+                // all windows; leaving it on causes the window to disappear after SetParent
+                // to WorkerW on some configurations (MSIX in particular). See tao#1153.
+                let mut style = WindowsApi::get_styles(hwnd);
+                style |= WS_CHILDWINDOW;
+                SetWindowLongPtrW(hwnd, GWL_STYLE, style.0 as isize);
+
+                let mut ex_style = WindowsApi::get_ex_styles(hwnd);
+                ex_style &= !WS_EX_ACCEPTFILES;
+                ex_style &= !WS_EX_APPWINDOW;
+                ex_style &= !WS_EX_WINDOWEDGE;
+                SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style.0 as isize);
+
                 SetParent(hwnd, Some(worker_w))?;
             }
 
