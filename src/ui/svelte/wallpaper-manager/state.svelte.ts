@@ -140,4 +140,14 @@ class State {
   }
 }
 
+$effect.root(() => {
+  $effect(() => {
+    monitors.value;
+    // wait to desktop to be ready after monitor change
+    setTimeout(() => {
+      invoke(SeelenCommand.SetAsWallpaper);
+    }, 2000);
+  });
+});
+
 export const gState = new State();
