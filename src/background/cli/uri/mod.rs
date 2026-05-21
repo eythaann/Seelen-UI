@@ -2,7 +2,9 @@ mod icons_downloader;
 
 use std::{
     ffi::OsStr,
+    io::Write,
     path::{Path, PathBuf},
+    time::Duration,
 };
 
 use itertools::Itertools;
@@ -474,17 +476,28 @@ async fn download_remote_asset(url: &url::Url, folder_to_store: &Path) -> Result
         return Err("Could not determine file extension from URL".into());
     };
 
-    let res = SessionManager::plain_get(url.as_str()).send().await?;
+    // Use a long timeout for large assets (videos can be hundreds of MB; the
+    // global 15 s client timeout is too short on slow / CDN-throttled connections).
+    let res = SessionManager::plain_get(url.as_str())
+        .timeout(Duration::from_secs(3600))
+        .send()
+        .await?;
     if !res.status().is_success() {
         let status = res.status();
         let body = res.text().await.unwrap_or_default();
         return Err(format!("Failed to download asset: {status} - {body}").into());
     }
-    let bytes = res.bytes().await?;
 
     let filename = format!("{}.{}", date_based_hex_id(), extension);
     let file_path = folder_to_store.join(&filename);
 
-    std::fs::write(&file_path, &bytes)?;
+    // Stream chunks to disk to avoid buffering the whole file in memory.
+    let mut file = std::fs::File::create(&file_path)?;
+    let mut stream = res;
+    while let Some(chunk) = stream.chunk().await? {
+        file.write_all(&chunk)?;
+    }
+    file.flush()?;
+
     Ok(filename)
 }
