@@ -55,6 +55,9 @@ pub enum SluPopupContent {
         items: Vec<SluPopupContent>,
         styles: Option<CssStyles>,
     },
+    Loader {
+        styles: Option<CssStyles>,
+    },
 }
 
 impl SluPopupContent {
@@ -65,6 +68,7 @@ impl SluPopupContent {
             SluPopupContent::Image { styles, .. } => *styles = Some(new_styles),
             SluPopupContent::Button { styles, .. } => *styles = Some(new_styles),
             SluPopupContent::Group { styles, .. } => *styles = Some(new_styles),
+            SluPopupContent::Loader { styles, .. } => *styles = Some(new_styles),
         }
     }
 }

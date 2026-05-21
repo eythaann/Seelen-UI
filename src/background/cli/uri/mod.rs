@@ -151,10 +151,15 @@ async fn download_resource(url: &str) -> Result<()> {
                 ],
                 styles: Some(CssStyles::new().add("alignItems", "center")),
             }],
-            content: vec![SluPopupContent::Text {
-                value: t!("resource.downloading_body").to_string(),
-                styles: None,
-            }],
+            content: vec![
+                SluPopupContent::Text {
+                    value: t!("resource.downloading_body").to_string(),
+                    styles: None,
+                },
+                SluPopupContent::Loader {
+                    styles: Some(CssStyles::new().add("marginTop", "12px")),
+                },
+            ],
             ..Default::default()
         })?
     };

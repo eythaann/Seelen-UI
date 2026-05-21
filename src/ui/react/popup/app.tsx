@@ -108,6 +108,8 @@ function SluPopupContent({ entry }: { entry: ISluPopupContent }) {
           {entry.items.map((subEntry, idx) => <SluPopupContent key={idx} entry={subEntry} />)}
         </div>
       );
+    case "loader":
+      return <div className="loader" style={entry.styles || {}} />;
     default:
       return null;
   }

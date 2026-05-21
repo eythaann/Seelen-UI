@@ -3,6 +3,15 @@ body {
   overflow: hidden;
 }
 
+@keyframes loader-slide {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(450%);
+  }
+}
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -67,6 +76,23 @@ body {
   .group {
     display: flex;
     gap: 10px;
+  }
+
+  .loader {
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-gray-200);
+    overflow: hidden;
+    border-radius: 2px;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--system-accent-color), transparent);
+      animation: loader-slide 1.5s ease-in-out infinite;
+    }
   }
 
   .button {
