@@ -9,15 +9,17 @@ import { useEffect } from "preact/hooks";
 
 export function App() {
   useEffect(() => {
-    Widget.self.ready({ show: false });
+    Widget.self.ready();
   }, []);
 
   useSignalEffect(() => {
     const fullscreened = !!$lastFocusedOnMonitor.value?.isFullscreened;
     if (fullscreened) {
-      Widget.self.hide();
+      Widget.self.window.setAlwaysOnTop(false);
+      Widget.self.window.setAlwaysOnBottom(true);
     } else if ($initialPositionSet.value) {
-      Widget.self.show();
+      Widget.self.window.setAlwaysOnBottom(false);
+      Widget.self.window.setAlwaysOnTop(true);
     }
   });
 
