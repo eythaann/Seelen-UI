@@ -237,6 +237,7 @@ slu_commands_declaration! {
     WmGetRenderTree = wm_get_render_tree() -> TwmGlobalRuntimeTree,
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
+    WmSetStackActiveWindow = wm_set_stack_active_window(hwnd: isize),
 
     // Slu Popups
     CreatePopup = create_popup(config: SluPopupConfig) -> uuid::Uuid,

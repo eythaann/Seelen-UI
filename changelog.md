@@ -10,6 +10,7 @@
 
 - dark border on app windows preview.
 - twm move/focus via keyboard.
+- twm stack nodes not working as expected.
 
 ## [2.6.8]
 

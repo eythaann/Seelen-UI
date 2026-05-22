@@ -30,6 +30,8 @@ use crate::{
     windows_api::{monitor::Monitor, window::Window},
 };
 
+pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
+
 pub static WM_STATE: LazyLock<Arc<TracedMutex<TwmState>>> = LazyLock::new(|| {
     Arc::new(TracedMutex::new({
         let mut state = TwmState::default();
@@ -672,16 +674,37 @@ impl TwmState {
                 }
 
                 if let Some(active) = node.active_window {
+                    MINIMIZED_BY_STACK.remove(&active);
                     Window::from(active).unminimize().log_error();
 
                     for w in &node.windows {
                         if *w != active {
+                            let _ = MINIMIZED_BY_STACK.insert(*w);
                             Window::from(*w).show_window(SW_FORCEMINIMIZE).log_error();
                         }
                     }
                 }
             }
         }
+    }
+
+    pub fn set_stack_active_window(&mut self, window: &Window) -> Result<()> {
+        let window_id = window.address();
+        let Some((_ws_id, tree)) = self.get_tree_for_window_mut(window) else {
+            return Ok(());
+        };
+        let Some(node_id) = tree.node_of_window(&window_id) else {
+            return Ok(());
+        };
+        let node = tree.nodes.get_mut(&node_id).ok_or("Node not found")?;
+
+        if node.kind != TwmNodeKind::Stack {
+            return Ok(());
+        }
+
+        node.active_window = Some(window_id);
+        Self::send(TwmStateEvent::Changed);
+        Ok(())
     }
 
     pub fn cycle_stack(&mut self, window: &Window, way: StepWay) -> Result<()> {

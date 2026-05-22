@@ -103,6 +103,7 @@ export enum SeelenCommand {
   WmGetRenderTree = "wm_get_render_tree",
   SetAppWindowsPositions = "set_app_windows_positions",
   RequestFocus = "request_focus",
+  WmSetStackActiveWindow = "wm_set_stack_active_window",
   CreatePopup = "create_popup",
   UpdatePopup = "update_popup",
   ClosePopup = "close_popup",

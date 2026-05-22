@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { TwmRuntimeNode } from "@seelen-ui/lib/types";
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { state } from "../../../state.svelte.ts";
   import Leaf from "./Leaf.svelte";
   import FileIcon from "libs/ui/svelte/components/Icon/FileIcon.svelte";
@@ -10,6 +11,10 @@
   }
 
   let { node, overlayVisible }: Props = $props();
+
+  function onTabClick(winId: number) {
+    invoke(SeelenCommand.WmSetStackActiveWindow, { hwnd: winId });
+  }
 </script>
 
 <div style:flex-grow={node.growFactor} class={["wm-container", "wm-stack"]}>
@@ -21,6 +26,7 @@
           class="wm-stack-bar-item"
           data-skin={winId === node.activeWindow ? "solid" : "default"}
           data-allow-mouse-events={overlayVisible}
+          onclick={() => onTabClick(winId)}
         >
           <FileIcon
             path={info?.relaunch?.icon || info?.process?.path}

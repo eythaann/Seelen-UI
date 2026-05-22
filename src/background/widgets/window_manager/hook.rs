@@ -4,7 +4,7 @@ use crate::{
     error::Result,
     state::application::FULL_STATE,
     virtual_desktops::MINIMIZED_BY_WORKSPACES,
-    widgets::window_manager::state_v2::{TwmState, TwmStateEvent, WM_STATE},
+    widgets::window_manager::state_v2::{TwmState, TwmStateEvent, MINIMIZED_BY_STACK, WM_STATE},
     windows_api::window::{event::WinEvent, Window},
 };
 
@@ -108,21 +108,22 @@ impl WindowManagerV2 {
                 if MINIMIZED_BY_WORKSPACES.contains(&window.address()) {
                     return Ok(());
                 }
-                let should_remove = {
-                    let mut state = WM_STATE.lock();
-                    state
-                        .get_tree_for_window_mut(&window)
-                        .map(|(_, tree)| !tree.node_is_stack(&window.address()))
-                        .unwrap_or(false)
-                };
-                if should_remove {
+
+                if MINIMIZED_BY_STACK.contains(&window.address()) {
+                    return Ok(());
+                }
+
+                if WM_STATE.lock().is_managed(&window) {
                     WM_STATE.lock().remove(&window);
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }
             WinEvent::SystemMinimizeEnd => {
                 let mut state = WM_STATE.lock();
-                if !state.is_managed(&window) && Self::should_be_managed(window.hwnd()) {
+                if state.is_managed(&window) {
+                    state.set_stack_active_window(&window)?;
+                    return Ok(());
+                } else if Self::should_be_managed(window.hwnd()) {
                     state.add_to_layout(&window, &window.workspace_id()?);
                     TwmState::send(TwmStateEvent::Changed);
                 }

@@ -103,6 +103,16 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     Ok(())
 }
 
+#[tauri::command(async)]
+pub fn wm_set_stack_active_window(hwnd: isize) -> Result<()> {
+    let window = Window::from(hwnd);
+    if !window.is_window() {
+        return Ok(());
+    }
+    WM_STATE.lock().set_stack_active_window(&window)?;
+    Ok(())
+}
+
 /// TODO delete this is used only by webview, but this should use self_focus command.
 #[tauri::command(async)]
 pub fn request_focus(hwnd: isize) -> Result<()> {
