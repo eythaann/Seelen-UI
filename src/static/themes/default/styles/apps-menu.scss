@@ -14,10 +14,10 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  background-color: oklch(from var(--color-gray-50) l c h / 0.9);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
 
   &[data-acrylic="true"] {
-    background-color: light-dark(#fff8, #000c);
+    background-color: oklch(from var(--slu-std-bg-color) l c h / 0.6);
   }
 
   .apps-menu-header {
@@ -162,16 +162,20 @@ body {
   .app-icon {
     width: 60%;
     aspect-ratio: 1/1;
-    border-radius: 16%;
+    border-radius: 18%;
     box-shadow: var(--shadow-s);
 
     img {
-      border-radius: 16%;
+      border-radius: 18%;
     }
 
     &:not([data-shape="square"]) {
       padding: 8%;
-      background-color: var(--color-gray-100);
+      background-color: var(--slu-std-bg-light-color);
+
+      img {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+      }
     }
   }
 
@@ -240,7 +244,7 @@ body {
     padding: 8%;
     box-shadow: var(--shadow-s);
 
-    background-color: RGB(from var(--color-gray-100) r g b / 0.6);
+    background-color: RGB(from var(--slu-std-bg-light-color) r g b / 0.6);
     border-radius: 16%;
 
     .folder-preview {
@@ -258,7 +262,7 @@ body {
 
         &:not([data-shape="square"]) {
           padding: 8%;
-          background-color: var(--color-gray-100);
+          background-color: var(--slu-std-bg-light-color);
         }
       }
     }
@@ -287,15 +291,10 @@ body {
   margin: auto;
   z-index: 100;
 
-  background-color: oklch(from var(--color-gray-75) l c h / 0.9);
+  background-color: var(--slu-std-bg-color);
   border-radius: 16px;
   box-shadow: var(--shadow-l);
   overflow: hidden;
-
-  &::backdrop {
-    background: RGB(from var(--color-gray-100) r g b / 0.3);
-    backdrop-filter: blur(4px);
-  }
 
   .folder-modal-content {
     padding: 2rem;

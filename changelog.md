@@ -2,6 +2,10 @@
 
 ## [2.6.9-dev]
 
+### enhancements
+
+- apps menu search.
+
 ## [2.6.8]
 
 ### fix

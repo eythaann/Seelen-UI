@@ -2,11 +2,31 @@
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
   import { searchState, getItemKey } from "../state/search.svelte";
+  import type { StartMenuItem } from "@seelen-ui/lib/types";
+
+  let visibleItems: StartMenuItem[] = $state([]);
+
+  $effect(() => {
+    visibleItems = [];
+
+    let i = 0;
+    const chunk = 15;
+
+    function process() {
+      visibleItems = searchState.searchedItems.slice(0, (i += chunk));
+
+      if (i < searchState.searchedItems.length) {
+        requestIdleCallback(process);
+      }
+    }
+
+    process();
+  });
 </script>
 
 <div class="all-apps-view">
   <div class="all-apps-view-list">
-    {#each searchState.searchedItems as item, idx (getItemKey(item))}
+    {#each visibleItems as item, idx (getItemKey(item))}
       <AppItem {item} {idx} lazy />
     {/each}
   </div>
