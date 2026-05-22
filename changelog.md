@@ -6,6 +6,10 @@
 
 - apps menu search.
 
+### fix
+
+- dark border on app windows preview.
+
 ## [2.6.8]
 
 ### fix

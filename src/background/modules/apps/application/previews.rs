@@ -2,7 +2,7 @@ use std::{collections::HashMap, sync::LazyLock, time::Duration};
 
 use base64::{engine::general_purpose::STANDARD, Engine as _};
 use image::{DynamicImage, RgbaImage};
-use seelen_core::system_state::UserAppWindowPreview;
+use seelen_core::system_state::{Color, UserAppWindowColors, UserAppWindowPreview};
 use slu_utils::{debounce, Debounce};
 use win_screenshot::prelude::capture_window;
 
@@ -19,6 +19,9 @@ use crate::{
 };
 
 const CAPTURE_WINDOW_INTERVAL: Duration = Duration::from_millis(200);
+/// Number of pixel samples taken evenly across the top and bottom edges of a window.
+const SAMPLING: usize = 7;
+
 static WINDOWS_PREVIEWS: LazyLock<WinPreviewManager> = LazyLock::new(WinPreviewManager::create);
 
 /// One-by-one capture queue: sender side, receiver processes in a dedicated thread.
@@ -38,6 +41,7 @@ static CAPTURE_TX: LazyLock<crossbeam_channel::Sender<isize>> = LazyLock::new(||
 
 struct UserAppWindowPreviewWrap {
     preview: Option<UserAppWindowPreview>,
+    colors: Option<UserAppWindowColors>,
     capture: Debounce<()>,
 }
 
@@ -49,6 +53,7 @@ pub struct WinPreviewManager {
 #[allow(dead_code)]
 pub enum WinPreviewEvent {
     Captured(isize),
+    ColorsUpdated(isize),
     Cleaned(isize),
 }
 
@@ -126,6 +131,7 @@ impl WinPreviewManager {
             addr,
             UserAppWindowPreviewWrap {
                 preview: None,
+                colors: None,
                 capture,
             },
         );
@@ -155,10 +161,10 @@ impl WinPreviewManager {
         let crop_y = shadow.top.unsigned_abs();
         let crop_w = buf
             .width
-            .saturating_sub((shadow.left + shadow.right).unsigned_abs());
+            .saturating_sub(shadow.left.unsigned_abs() + shadow.right.unsigned_abs());
         let crop_h = buf
             .height
-            .saturating_sub((shadow.top + shadow.bottom).unsigned_abs());
+            .saturating_sub(shadow.top.unsigned_abs() + shadow.bottom.unsigned_abs());
 
         let cropped: RgbaImage =
             image::imageops::crop_imm(&raw, crop_x, crop_y, crop_w, crop_h).to_image();
@@ -167,6 +173,8 @@ impl WinPreviewManager {
         } else {
             cropped
         };
+
+        let colors = sample_edge_colors(&image);
 
         let image_hash = image_to_hash(&image);
 
@@ -178,25 +186,30 @@ impl WinPreviewManager {
                 .map(|p| p.hash == image_hash)
                 .unwrap_or(false);
         });
-        if unchanged {
-            return Ok(());
+
+        if !unchanged {
+            let dynamic = DynamicImage::ImageRgba8(image);
+            let webp_bytes = webp::Encoder::from_image(&dynamic)
+                .map_err(|e| e.to_string())?
+                .encode(75.0);
+            let data = STANDARD.encode(&*webp_bytes);
+
+            self.previews.get(&addr, |wrap| {
+                wrap.preview = Some(UserAppWindowPreview {
+                    hash: image_hash,
+                    data,
+                    width: dynamic.width(),
+                    height: dynamic.height(),
+                });
+            });
+            Self::send(WinPreviewEvent::Captured(addr));
         }
 
-        let dynamic = DynamicImage::ImageRgba8(image);
-        let webp_bytes = webp::Encoder::from_image(&dynamic)
-            .map_err(|e| e.to_string())?
-            .encode(75.0);
-        let data = STANDARD.encode(&*webp_bytes);
-
         self.previews.get(&addr, |wrap| {
-            wrap.preview = Some(UserAppWindowPreview {
-                hash: image_hash,
-                data,
-                width: dynamic.width(),
-                height: dynamic.height(),
-            });
+            wrap.colors = Some(colors);
         });
-        Self::send(WinPreviewEvent::Captured(addr));
+        Self::send(WinPreviewEvent::ColorsUpdated(addr));
+
         Ok(())
     }
 
@@ -209,6 +222,48 @@ impl WinPreviewManager {
         });
         map
     }
+
+    pub fn get_colors(&self) -> HashMap<isize, UserAppWindowColors> {
+        let mut map = HashMap::new();
+        self.previews.for_each(|(k, v)| {
+            if let Some(colors) = &v.colors {
+                map.insert(*k, colors.clone());
+            }
+        });
+        map
+    }
+}
+
+/// Samples SAMPLING pixels evenly spaced from left to right along the top and bottom rows.
+fn sample_edge_colors(image: &RgbaImage) -> UserAppWindowColors {
+    let w = image.width();
+    let h = image.height();
+
+    let sample_x = |i: usize| -> u32 {
+        if SAMPLING <= 1 {
+            return 0;
+        }
+        ((i as u64 * (w as u64 - 1)) / (SAMPLING as u64 - 1)) as u32
+    };
+
+    let pixel_to_color = |x: u32, y: u32| -> Color {
+        let p = image.get_pixel(x, y);
+        Color {
+            r: p[0],
+            g: p[1],
+            b: p[2],
+            a: p[3],
+        }
+    };
+
+    let top = (0..SAMPLING)
+        .map(|i| pixel_to_color(sample_x(i), 0))
+        .collect();
+    let bottom = (0..SAMPLING)
+        .map(|i| pixel_to_color(sample_x(i), h.saturating_sub(1)))
+        .collect();
+
+    UserAppWindowColors { top, bottom }
 }
 
 fn image_to_hash(icon_image: &image::RgbaImage) -> String {

@@ -25,6 +25,10 @@ impl<T> SyncVec<T> {
         self.0.lock().push(item);
     }
 
+    pub fn insert(&self, index: usize, item: T) {
+        self.0.lock().insert(index, item);
+    }
+
     pub fn any(&self, f: impl FnMut(&T) -> bool) -> bool {
         self.0.lock().iter().any(f)
     }

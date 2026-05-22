@@ -11,6 +11,7 @@ export enum SeelenEvent {
   UserFolderChanged = "user::known-folder-changed",
   UserAppWindowsChanged = "user::windows-changed",
   UserAppWindowsPreviewsChanged = "user::windows-previews-changed",
+  UserAppWindowsColorsChanged = "user::windows-colors-changed",
   MediaSessions = "media-sessions",
   MediaDevices = "media::devices",
   MediaInputs = "media-inputs",

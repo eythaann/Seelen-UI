@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 
+use super::Color;
 use crate::{rect::Rect, system_state::MonitorId};
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -54,6 +55,12 @@ pub struct UserAppWindowPreview {
     pub data: String,
     pub width: u32,
     pub height: u32,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+pub struct UserAppWindowColors {
+    pub top: Vec<Color>,
+    pub bottom: Vec<Color>,
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]

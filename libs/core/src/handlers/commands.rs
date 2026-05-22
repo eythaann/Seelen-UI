@@ -199,6 +199,7 @@ slu_commands_declaration! {
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<std::path::PathBuf>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview>,
+    GetUserAppWindowsColors = get_user_app_windows_colors() -> HashMap<isize, UserAppWindowColors>,
 
     // Media
     GetMediaDevices = get_media_devices() -> [Vec<MediaDevice>; 2],
