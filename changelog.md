@@ -9,6 +9,7 @@
 ### fix
 
 - dark border on app windows preview.
+- twm move/focus via keyboard.
 
 ## [2.6.8]
 

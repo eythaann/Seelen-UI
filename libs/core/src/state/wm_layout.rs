@@ -468,54 +468,6 @@ impl TwmRuntimeTree {
             .map(|(id, _)| id)
     }
 
-    pub fn siblings_at_side(
-        &self,
-        window_id: &WindowId,
-        match_horizontal: bool,
-        want_before: bool,
-    ) -> Vec<NodeId> {
-        let Some(mut current_id) = self.node_of_window(window_id) else {
-            return vec![];
-        };
-        let wanted_kind = if match_horizontal {
-            TwmNodeKind::Horizontal
-        } else {
-            TwmNodeKind::Vertical
-        };
-
-        loop {
-            let Some(parent_id) = self.nodes[&current_id].parent else {
-                return vec![];
-            };
-            let parent = &self.nodes[&parent_id];
-            if parent.kind == wanted_kind {
-                let child_idx = parent
-                    .children
-                    .iter()
-                    .position(|&c| c == current_id)
-                    .unwrap();
-                let siblings: Vec<NodeId> = parent
-                    .children
-                    .iter()
-                    .enumerate()
-                    .filter(|(idx, &c)| {
-                        let correct_side = if want_before {
-                            *idx < child_idx
-                        } else {
-                            *idx > child_idx
-                        };
-                        *idx != child_idx && correct_side && self.has_any_windows(c)
-                    })
-                    .map(|(_, &c)| c)
-                    .collect();
-                if !siblings.is_empty() {
-                    return siblings;
-                }
-            }
-            current_id = parent_id;
-        }
-    }
-
     /// Splits `node_id` by inserting a new intermediate Horizontal (Left/Right)
     /// or Vertical (Top/Bottom) container, then places `new_window` in a freshly
     /// created sibling Leaf on the requested side.
@@ -708,6 +660,7 @@ pub struct TwmRuntimeNode {
     pub grow_factor: f32,
     pub windows: Vec<WindowId>,
     pub active_window: Option<WindowId>,
+    /// Inner rect (DWM visible bounds, no shadow). Must match `Window::inner_rect()` at all callsites.
     pub rect: Option<Rect>,
 }
 

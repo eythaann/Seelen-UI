@@ -107,18 +107,17 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
         }
         WmCommand::Focus { side } | WmCommand::Move { side } => {
             let window_id = foreground.address();
+            let fg_rect = foreground.inner_rect()?;
 
             let mut guard = WM_STATE.lock();
-            let Some((_ws_id, tree)) = guard.get_tree_for_window_mut(&foreground) else {
+            let Some((ws_id, _)) = guard.get_tree_for_window_mut(&foreground) else {
                 return Ok(());
             };
 
-            let (match_h, want_before) = side_to_flags(&side);
-            let siblings = tree.siblings_at_side(&window_id, match_h, want_before);
-
-            let Some(direct_sibling) = siblings.first().and_then(|&nid| tree.face_of_node(nid))
+            let Some(target_id) =
+                guard.get_nearest_tiled_window_at_side(window_id, &fg_rect, &ws_id, side)
             else {
-                log::warn!("There is no direct node at {side:?}");
+                log::warn!("There is no tiled window at {side:?}");
                 drop(guard);
                 if is_moving {
                     process_move_to_monitor(&foreground, side)?;
@@ -129,10 +128,12 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             };
 
             if is_moving {
-                tree.swap_nodes_by_windows(window_id, direct_sibling);
-                TwmState::send(TwmStateEvent::Changed);
+                if let Some((_, tree)) = guard.get_tree_for_window_mut(&foreground) {
+                    tree.swap_nodes_by_windows(window_id, target_id);
+                    TwmState::send(TwmStateEvent::Changed);
+                }
             } else {
-                Window::from(direct_sibling).focus()?;
+                Window::from(target_id).focus()?;
             }
         }
         WmCommand::MoveToMonitor { side } => {
@@ -194,15 +195,6 @@ fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result
         TwmState::send(TwmStateEvent::Changed);
     }
     Ok(())
-}
-
-fn side_to_flags(side: &NodeSiblingSide) -> (bool, bool) {
-    match side {
-        NodeSiblingSide::Left => (true, true),
-        NodeSiblingSide::Right => (true, false),
-        NodeSiblingSide::Up => (false, true),
-        NodeSiblingSide::Down => (false, false),
-    }
 }
 
 pub fn get_neartest_monitor_at_side(

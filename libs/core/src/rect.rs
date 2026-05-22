@@ -40,6 +40,10 @@ impl Rect {
         self.bottom - self.top
     }
 
+    pub fn position(&self) -> Point {
+        Point::new(self.left, self.top)
+    }
+
     pub fn center(&self) -> Point {
         Point::new(self.left + self.width() / 2, self.top + self.height() / 2)
     }

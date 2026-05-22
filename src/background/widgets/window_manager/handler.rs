@@ -44,6 +44,7 @@ pub fn schedule_window_position(window: isize, rect: Rect) {
 #[tauri::command(async)]
 pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
     let mut list = HashMap::new();
+    let mut inner: HashMap<isize, Rect> = HashMap::new();
 
     // map and filter step
     for (hwnd, rect) in positions {
@@ -68,6 +69,7 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
             right: rect.right + shadow.right,
             bottom: rect.bottom + shadow.bottom,
         };
+        inner.insert(hwnd, rect);
         list.insert(hwnd, desired_rect);
     }
 
@@ -84,10 +86,10 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     let place_animated =
         state.settings.by_widget.wm.animations.enabled && perf_mode == PerformanceMode::Disabled;
 
-    // Update node.rect for tiled windows based on the computed layout positions.
+    // Store inner (pre-shadow) rects — must match Window::inner_rect() used in comparisons.
     {
         let mut state = WM_STATE.lock();
-        for (hwnd, rect) in &list {
+        for (hwnd, rect) in &inner {
             state.set_cached_node_rect(*hwnd, rect.clone());
         }
     }

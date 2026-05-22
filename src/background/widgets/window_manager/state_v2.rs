@@ -23,7 +23,7 @@ use crate::{
     utils::lock_free::TracedMutex,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
     widgets::window_manager::{
-        cli::{Axis, StepWay},
+        cli::{Axis, NodeSiblingSide, StepWay},
         handler::{schedule_window_position, set_app_windows_positions},
         WindowManagerV2,
     },
@@ -543,6 +543,114 @@ impl TwmState {
         let tree = self.state.workspaces.get(workspace_id)?;
         let node_id = tree.get_nearest_leaf_to_rect(rect)?;
         tree.face_of_node(node_id)
+    }
+
+    pub fn get_nearest_tiled_window_at_side(
+        &self,
+        source_id: isize,
+        source_rect: &Rect,
+        workspace_id: &WorkspaceId,
+        side: NodeSiblingSide,
+    ) -> Option<isize> {
+        fn horizontal_overlap(a: &Rect, b: &Rect) -> i32 {
+            let left = a.left.max(b.left);
+            let right = a.right.min(b.right);
+
+            (right - left).max(0)
+        }
+
+        fn vertical_overlap(a: &Rect, b: &Rect) -> i32 {
+            let top = a.top.max(b.top);
+            let bottom = a.bottom.min(b.bottom);
+
+            (bottom - top).max(0)
+        }
+
+        fn perpendicular_x_distance(a: &Rect, b: &Rect) -> i32 {
+            if a.right < b.left {
+                b.left - a.right
+            } else if b.right < a.left {
+                a.left - b.right
+            } else {
+                0
+            }
+        }
+
+        fn perpendicular_y_distance(a: &Rect, b: &Rect) -> i32 {
+            if a.bottom < b.top {
+                b.top - a.bottom
+            } else if b.bottom < a.top {
+                a.top - b.bottom
+            } else {
+                0
+            }
+        }
+
+        let tree = self.state.workspaces.get(workspace_id)?;
+        tree.iter()
+            .filter(|n| matches!(n.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack))
+            .filter_map(|n| {
+                let rect = n.rect.as_ref()?;
+
+                let (primary_distance, perpendicular_distance, overlap) = match side {
+                    NodeSiblingSide::Right => {
+                        if rect.left < source_rect.right {
+                            return None;
+                        }
+
+                        (
+                            rect.left - source_rect.right,
+                            perpendicular_y_distance(source_rect, rect),
+                            vertical_overlap(source_rect, rect),
+                        )
+                    }
+
+                    NodeSiblingSide::Left => {
+                        if rect.right > source_rect.left {
+                            return None;
+                        }
+
+                        (
+                            source_rect.left - rect.right,
+                            perpendicular_y_distance(source_rect, rect),
+                            vertical_overlap(source_rect, rect),
+                        )
+                    }
+
+                    NodeSiblingSide::Down => {
+                        if rect.top < source_rect.bottom {
+                            return None;
+                        }
+
+                        (
+                            rect.top - source_rect.bottom,
+                            perpendicular_x_distance(source_rect, rect),
+                            horizontal_overlap(source_rect, rect),
+                        )
+                    }
+
+                    NodeSiblingSide::Up => {
+                        if rect.bottom > source_rect.top {
+                            return None;
+                        }
+
+                        (
+                            source_rect.top - rect.bottom,
+                            perpendicular_x_distance(source_rect, rect),
+                            horizontal_overlap(source_rect, rect),
+                        )
+                    }
+                };
+
+                let perpendicular_penalty = perpendicular_distance * perpendicular_distance;
+                let overlap_bonus = overlap * 100;
+                let score = primary_distance * 1000 + perpendicular_penalty - overlap_bonus;
+
+                Some((n.id, score))
+            })
+            .min_by_key(|&(_, score)| score)
+            .and_then(|(node_id, _)| tree.face_of_node(node_id))
+            .filter(|&face_id| face_id != source_id)
     }
 
     pub fn restore_stacks(&self) {
