@@ -1,3 +1,4 @@
+import { listen } from "@tauri-apps/api/event";
 import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
 import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
@@ -25,6 +26,11 @@ subscribe(SeelenEvent.WMSetReservation, (e) => {
 let forceRepositioning = $state(0);
 subscribe(SeelenEvent.WMForceRetiling, () => {
   forceRepositioning++;
+});
+
+let paused = $state(false);
+listen("internal:twm-toggle-pause", () => {
+  paused = !paused;
 });
 
 const [focusedAppInit, settingsInit] = await Promise.all([
@@ -152,6 +158,9 @@ class _State {
   }
   get reservation() {
     return reservation;
+  }
+  get paused() {
+    return paused;
   }
 }
 

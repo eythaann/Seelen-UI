@@ -322,8 +322,6 @@ pub struct WindowManagerCli {
 
 #[derive(Debug, Clone, Serialize, Deserialize, clap::Subcommand)]
 pub enum WmCommand {
-    /// Open Dev Tools (only works if the app is running in dev mode)
-    Debug,
     /// Toggles the Seelen Window Manager.
     Toggle,
     /// Reserve space for a incoming window.

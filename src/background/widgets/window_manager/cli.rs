@@ -3,6 +3,7 @@ pub use slu_ipc::commands::{Axis, NodeSiblingSide, Sizing, StepWay, WindowManage
 
 use seelen_core::state::twm::TwmReservation;
 
+use crate::app::emit_to_webviews;
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::SluWorkspacesManager2;
@@ -34,15 +35,8 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
 
     match cmd {
         WmCommand::Toggle => {
-            FULL_STATE.rcu(move |state| {
-                let mut state = state.cloned();
-                state.settings.by_widget.wm.enabled = !state.settings.by_widget.wm.enabled;
-                state
-            });
-            FULL_STATE.load().write_settings()?;
+            emit_to_webviews("internal:twm-toggle-pause", ());
         }
-        WmCommand::Debug => {}
-
         WmCommand::Width { action } => {
             let percentage = match action {
                 Sizing::Increase => FULL_STATE.load().settings.by_widget.wm.resize_delta,

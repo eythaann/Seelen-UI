@@ -22,12 +22,12 @@
 
   let someIsMaximizedOnBg = $derived.by(() => {
     return state.interactables.some(
-      (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen),
+      (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen) && !app.isIconic,
     );
   });
 
   let overlayVisible = $derived.by(() => {
-    if (!layout || someIsMaximizedOnBg) {
+    if (!layout || someIsMaximizedOnBg || state.paused) {
       return false;
     }
 
@@ -46,7 +46,7 @@
   $effect(() => {
     layout;
     state.forceRepositioning;
-    if (!someIsMaximizedOnBg) {
+    if (!someIsMaximizedOnBg && !state.paused) {
       requestPositioningOfLeaves(state);
     }
   });
