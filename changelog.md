@@ -8,6 +8,7 @@
 
 ### fix
 
+- service exiting after suspend/resume if enough time passed.
 - dark border on app windows preview.
 - twm move/focus via keyboard.
 - twm stack nodes not working as expected.

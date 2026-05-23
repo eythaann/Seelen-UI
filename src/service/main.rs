@@ -7,6 +7,7 @@ mod enviroment;
 mod error;
 mod hotkeys;
 mod logger;
+mod power;
 mod shutdown;
 mod string_utils;
 mod task_scheduler;
@@ -86,6 +87,7 @@ pub fn setup() -> Result<()> {
         false
     };
 
+    crate::power::start_power_monitoring();
     crate::app_management::start_app_monitoring(app_just_launched);
     Ok(())
 }

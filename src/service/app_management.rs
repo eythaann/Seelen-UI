@@ -1,3 +1,4 @@
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::{Duration, Instant};
 
 use slu_ipc::{AppIpc, IPC};
@@ -8,9 +9,27 @@ use crate::{enviroment::was_installed_using_msix, error::Result, exit};
 /// How long to wait for the app to establish its IPC connection after each launch attempt.
 const STARTUP_TIMEOUT: Duration = Duration::from_secs(2);
 
+/// How long to wait for the app to restore its IPC pipe after a system resume.
+/// Tauri's async runtime can take several seconds to fully re-initialize.
+const RESUME_GRACE: Duration = Duration::from_secs(10);
+
 /// Max consecutive failures before giving up and stopping the service.
 /// In debug builds we stop immediately after the first failure.
 const MAX_CRASHES: u32 = if cfg!(debug_assertions) { 0 } else { 5 };
+
+/// Set to `true` while the system is suspended; cleared on resume.
+/// Written by the power monitor thread, read by the app monitoring thread.
+pub static SYSTEM_SUSPENDED: AtomicBool = AtomicBool::new(false);
+
+pub fn on_system_suspend() {
+    log::info!("System suspending — pausing app health checks.");
+    SYSTEM_SUSPENDED.store(true, Ordering::SeqCst);
+}
+
+pub fn on_system_resume() {
+    log::info!("System resuming — will restore app health checks after grace window.");
+    SYSTEM_SUSPENDED.store(false, Ordering::SeqCst);
+}
 
 /// Starts monitoring the Seelen UI app for the current session and restarts it automatically
 /// when it crashes or fails to start.
@@ -21,21 +40,46 @@ pub fn start_app_monitoring(app_just_launched: bool) {
     std::thread::spawn(move || {
         let mut crash_count = 0u32;
         let mut app_was_connected = true;
-        // Track when we last launched the app so we can detect startup timeouts.
-        let mut launch_time: Option<Instant> = app_just_launched.then(Instant::now);
+        // Absolute deadline until which IPC failures are ignored (startup / resume grace).
+        let mut grace_until: Option<Instant> =
+            app_just_launched.then(|| Instant::now() + STARTUP_TIMEOUT);
+        let mut was_suspended = false;
 
         loop {
             std::thread::sleep(Duration::from_secs(1));
 
-            if crate::EXITING.load(std::sync::atomic::Ordering::SeqCst) {
+            if crate::EXITING.load(Ordering::SeqCst) {
                 return;
             }
+
+            // ── Suspend / resume handling ─────────────────────────────────────────────
+
+            if SYSTEM_SUSPENDED.load(Ordering::SeqCst) {
+                was_suspended = true;
+                continue;
+            }
+
+            if was_suspended {
+                // First iteration after waking up: reset failure state and grant a generous
+                // grace window so the app has time to restore its IPC pipe.
+                was_suspended = false;
+                crash_count = 0;
+                app_was_connected = true;
+                grace_until = Some(Instant::now() + RESUME_GRACE);
+                log::info!(
+                    "Resumed from sleep — crash counter reset, granting {}s grace window.",
+                    RESUME_GRACE.as_secs()
+                );
+                continue;
+            }
+
+            // ── Normal health check ───────────────────────────────────────────────────
 
             if AppIpc::can_stablish_connection() {
                 if !app_was_connected {
                     log::info!("Seelen UI reconnected successfully, resetting crash counter.");
                     crash_count = 0;
-                    launch_time = None;
+                    grace_until = None;
                 }
                 app_was_connected = true;
                 continue;
@@ -43,14 +87,14 @@ pub fn start_app_monitoring(app_just_launched: bool) {
 
             // ── App is not reachable via IPC ──────────────────────────────────────────
 
-            // If we recently launched the app, give it time to establish its IPC connection
-            // before counting the absence as a failure.
-            if matches!(launch_time, Some(lt) if lt.elapsed() < STARTUP_TIMEOUT) {
+            // If we are still within a grace window (post-launch or post-resume), do not
+            // count the absence as a failure yet.
+            if matches!(grace_until, Some(deadline) if Instant::now() < deadline) {
                 continue;
             }
 
             // Failure: either the app was connected and just disappeared (runtime crash),
-            // or a launch attempt's grace window expired without establishing IPC.
+            // or a grace window expired without the app establishing IPC.
             app_was_connected = false;
             crash_count += 1;
             log::warn!("Seelen UI is not running (failure #{crash_count}/{MAX_CRASHES}).");
@@ -67,7 +111,7 @@ pub fn start_app_monitoring(app_just_launched: bool) {
             log::info!("Restarting Seelen UI in {}ms…", backoff.as_millis());
             std::thread::sleep(backoff);
             crate::log_error!(launch_seelen_ui());
-            launch_time = Some(Instant::now());
+            grace_until = Some(Instant::now() + STARTUP_TIMEOUT);
         }
 
         log::error!("Seelen UI monitoring stopped after repeated failures.");
