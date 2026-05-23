@@ -67,7 +67,7 @@ export class Mutex<T> {
   } | null = null;
 
   async acquire(): Promise<Guard<T>> {
-    if (this.lock) {
+    while (this.lock) {
       await this.lock.__promise;
     }
 

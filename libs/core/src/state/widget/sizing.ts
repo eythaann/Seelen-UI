@@ -92,10 +92,6 @@ export class WidgetAutoSizer {
       return;
     }
 
-    /* console.debug(
-      `Auto resizing from ${width}x${height} to ${frame.width}x${frame.height} using ${this.originX}/${this.originY} origin`,
-    ); */
-
     if (this.originX === Alignment.Center) {
       frame.x -= widthDiff / 2;
     } else if (this.originX === Alignment.End) {

@@ -119,6 +119,13 @@ export class Widget {
       }
       await this.show();
       await this.focus();
+      // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
+      // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
+      // can arrive before the trigger fires and roll back the optimistic size to an intermediate
+      // value. If the trigger then repositions with that stale size its SetSelfPosition call
+      // lands in the Win32 queue after the correct resize, overwriting it. Running execute()
+      // here detects the remaining diff and issues a corrective resize + position adjustment.
+      await this.autoSizer?.execute();
     });
   }
 
