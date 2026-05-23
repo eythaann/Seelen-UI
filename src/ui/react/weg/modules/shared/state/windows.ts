@@ -42,10 +42,6 @@ subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
 /** Used to check which window was last focused on interactions with the current window */
 export const $delayedFocused = signal<FocusedApp | null>(null);
 export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
-export const $lastFocusedOnMonitor = lazySignal<FocusedApp | null>(async () => {
-  const focused = await invoke(SeelenCommand.GetFocusedApp);
-  return focused.monitor === widget.decoded.monitorId ? focused : null;
-});
 
 const setDelayedFocused = debounce((v: FocusedApp) => {
   $delayedFocused.value = v;
@@ -53,10 +49,6 @@ const setDelayedFocused = debounce((v: FocusedApp) => {
 
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   $focused.value = e.payload;
-
-  if (e.payload.monitor === widget.decoded.monitorId) {
-    $lastFocusedOnMonitor.value = e.payload;
-  }
 
   setDelayedFocused(e.payload);
   if (e.payload.hwnd !== selfWinId) {
@@ -68,11 +60,17 @@ await Promise.all([
   $interactables.init(),
   $previews.init(),
   $focused.init(),
-  $lastFocusedOnMonitor.init(),
 ]);
 
+export const $isSomeFullscreenOnMonitor = computed(() => {
+  return $interactables.value.some(
+    (w) => !w.isIconic && w.isFullscreen && w.monitor === widget.decoded.monitorId,
+  );
+});
+
 export const $is_dock_overlapped = computed(() => {
-  const by = $lastFocusedOnMonitor.value;
+  const focused = $focused.value;
+  const by = focused?.monitor === widget.decoded.monitorId ? focused : null;
   const interactables = $interactables.value;
 
   if (!by || !by.rect) {

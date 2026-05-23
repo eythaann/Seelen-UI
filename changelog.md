@@ -13,6 +13,7 @@
 - twm stack nodes not working as expected.
 - apps menu and task switcher not working when used on fullscreen apps.
 - dock touch support.
+- toolbar and dock showing while fullscreen on multimonitor setups.
 
 ## [2.6.8]
 

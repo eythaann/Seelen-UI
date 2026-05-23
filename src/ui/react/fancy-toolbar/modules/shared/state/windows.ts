@@ -1,6 +1,6 @@
 import { computed, effect, signal } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import { FancyToolbarSide, type FocusedApp, HideMode, type UserAppWindowColors } from "@seelen-ui/lib/types";
+import { FancyToolbarSide, HideMode, type UserAppWindowColors } from "@seelen-ui/lib/types";
 import { $settings, $widget_rect } from "./mod";
 import { $mouse_at_edge } from "./system";
 import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
@@ -15,6 +15,12 @@ await $interactables.init();
 export const $thereIsMaximizedOnBg = computed(() => {
   return $interactables.value.some(
     (w) => !w.isIconic && w.isZoomed && w.monitor === widget.decoded.monitorId,
+  );
+});
+
+export const $isSomeFullscreenOnMonitor = computed(() => {
+  return $interactables.value.some(
+    (w) => !w.isIconic && w.isFullscreen && w.monitor === widget.decoded.monitorId,
   );
 });
 
@@ -34,21 +40,12 @@ export const $currentMonitorMaximizedColors = computed<UserAppWindowColors | nul
 });
 
 export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
-export const $lastFocusedOnMonitor = lazySignal<FocusedApp | null>(async () => {
-  const focused = await invoke(SeelenCommand.GetFocusedApp);
-  return focused.monitor === widget.decoded.monitorId ? focused : null;
-});
-subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
-  $focused.value = e.payload;
-  if (e.payload.monitor === widget.decoded.monitorId) {
-    $lastFocusedOnMonitor.value = e.payload;
-  }
-});
+subscribe(SeelenEvent.GlobalFocusChanged, $focused.setByPayload);
 await $focused.init();
-await $lastFocusedOnMonitor.init();
 
 export const $is_tb_overlapped = computed(() => {
-  const by = $lastFocusedOnMonitor.value;
+  const focused = $focused.value;
+  const by = focused?.monitor === widget.decoded.monitorId ? focused : null;
   const interactables = $interactables.value;
 
   if (!by || !by.rect) {

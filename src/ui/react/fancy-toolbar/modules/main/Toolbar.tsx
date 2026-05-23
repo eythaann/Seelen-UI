@@ -17,7 +17,7 @@ import { $settings } from "../shared/state/mod.ts";
 import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
 import { Group } from "./ItemsContainer.tsx";
 import { Item } from "../item/infra/infra.tsx";
-import { $hidden_by_autohide, $lastFocusedOnMonitor, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $hidden_by_autohide, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
 import { ShowDesktopButton } from "./CornerAction.tsx";
 import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";
@@ -65,7 +65,6 @@ export function FancyToolbar() {
       })}
       data-has-margin={!!$settings.value.margin}
       data-there-is-maximized-on-background={$thereIsMaximizedOnBg.value}
-      data-focused-is-maximized={!!$lastFocusedOnMonitor.value?.isMaximized}
       onContextMenu={onContextMenu}
     >
       <ShowDesktopButton />
