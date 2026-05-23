@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
-import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { $isTouchPrimary, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
@@ -108,7 +108,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
     </div>
   );
 
-  if (isOverlay || windows.length === 0) {
+  if (isOverlay || windows.length === 0 || $isTouchPrimary.value) {
     return itemNode;
   }
 

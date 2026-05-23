@@ -1,4 +1,5 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { Alignment, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { computed, effect, signal } from "@preact/signals";
@@ -82,6 +83,24 @@ const $work_area = computed(() => {
   return workArea;
 });
 
+const _pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+export const $isTouchPrimary = signal(!_pointerQuery.matches);
+_pointerQuery.addEventListener("change", (e) => {
+  $isTouchPrimary.value = !e.matches;
+});
+
+effect(() => {
+  if ($isTouchPrimary.value) {
+    Widget.self.window.setIgnoreCursorEvents(false);
+    return;
+  }
+  let unlisten: (() => void) | null = null;
+  declareDocumentAsLayeredHitbox().then((fn) => {
+    unlisten = fn;
+  });
+  return () => unlisten?.();
+});
+
 export const $widget_rect = computed(() => {
   const workArea = { ...$work_area.value };
 
@@ -96,19 +115,27 @@ export const $widget_rect = computed(() => {
   switch ($settings.value.position) {
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = workArea.right - Math.round((workArea.right - workArea.left) / 2);
+      webviewRect.right = $isTouchPrimary.value
+        ? hitboxRect.right
+        : workArea.right - Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = workArea.left + Math.round((workArea.right - workArea.left) / 2);
+      webviewRect.left = $isTouchPrimary.value
+        ? hitboxRect.left
+        : workArea.left + Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = workArea.top + Math.round((workArea.bottom - workArea.top) / 2);
+      webviewRect.bottom = $isTouchPrimary.value
+        ? hitboxRect.bottom
+        : workArea.top + Math.round((workArea.bottom - workArea.top) / 2);
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = workArea.bottom - Math.round((workArea.bottom - workArea.top) / 2);
+      webviewRect.top = $isTouchPrimary.value
+        ? hitboxRect.top
+        : workArea.bottom - Math.round((workArea.bottom - workArea.top) / 2);
       break;
   }
 

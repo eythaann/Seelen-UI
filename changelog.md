@@ -12,6 +12,7 @@
 - twm move/focus via keyboard.
 - twm stack nodes not working as expected.
 - apps menu and task switcher not working when used on fullscreen apps.
+- dock touch support.
 
 ## [2.6.8]
 

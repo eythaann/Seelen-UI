@@ -1,8 +1,6 @@
 import { SeelenCommand, Widget } from "@seelen-ui/lib";
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
-import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 
@@ -14,7 +12,6 @@ import "./styles/variables.css";
 import "@seelen-ui/lib/styles/reset.css";
 import "./styles/global.css";
 
-await declareDocumentAsLayeredHitbox();
 await loadTranslations();
 await Widget.getCurrent().init();
 
@@ -25,7 +22,7 @@ createRoot(container).render(
   </I18nextProvider>,
 );
 
-getCurrentWebviewWindow().onDragDropEvent(async (e) => {
+Widget.self.window.onDragDropEvent(async (e) => {
   if (e.payload.type === "drop") {
     for (const path of e.payload.paths) {
       await invoke(SeelenCommand.WegPinItem, { path });

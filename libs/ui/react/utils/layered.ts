@@ -20,7 +20,7 @@ class LayeredHitbox {
 
 export async function declareDocumentAsLayeredHitbox(
   shouldAllowMouseEvent: (element: Element) => boolean = (element) => element != document.body,
-): Promise<void> {
+): Promise<() => void> {
   const window = TauriWindow.getCurrentWindow();
 
   const webviewRect = { x: 0, y: 0, width: 0, height: 0 };
@@ -28,12 +28,12 @@ export async function declareDocumentAsLayeredHitbox(
   await window.setIgnoreCursorEvents(true);
   const data = new LayeredHitbox();
 
-  window.onMoved((e) => {
+  const unlistenMoved = await window.onMoved((e) => {
     webviewRect.x = e.payload.x;
     webviewRect.y = e.payload.y;
   });
 
-  window.onResized((e) => {
+  const unlistenResized = await window.onResized((e) => {
     webviewRect.width = e.payload.width;
     webviewRect.height = e.payload.height;
   });
@@ -45,11 +45,11 @@ export async function declareDocumentAsLayeredHitbox(
   webviewRect.width = width;
   webviewRect.height = height;
 
-  window.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
+  const unlistenLayered = await window.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
     data.isLayeredEnabled = event.payload;
   });
 
-  window.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
+  const unlistenMouseMove = await window.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
     if (!data.isLayeredEnabled) {
       return;
     }
@@ -57,7 +57,6 @@ export async function declareDocumentAsLayeredHitbox(
     const [mouseX, mouseY] = event.payload;
     const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
 
-    // check if the mouse is inside the window
     const isHoverWindow = mouseX >= windowX &&
       mouseX <= windowX + windowWidth &&
       mouseY >= windowY &&
@@ -82,11 +81,21 @@ export async function declareDocumentAsLayeredHitbox(
     }
   });
 
-  globalThis.addEventListener("touchstart", (e) => {
+  const onTouchStart = (e: TouchEvent) => {
     const shouldAllow = shouldAllowMouseEvent(e.target as Element);
     if (shouldAllow == data.isIgnoringCursorEvents) {
       data.isIgnoringCursorEvents = !shouldAllow;
       window.setIgnoreCursorEvents(!shouldAllow);
     }
-  });
+  };
+  globalThis.addEventListener("touchstart", onTouchStart);
+
+  return () => {
+    unlistenMoved();
+    unlistenResized();
+    unlistenLayered();
+    unlistenMouseMove();
+    globalThis.removeEventListener("touchstart", onTouchStart);
+    window.setIgnoreCursorEvents(false);
+  };
 }
