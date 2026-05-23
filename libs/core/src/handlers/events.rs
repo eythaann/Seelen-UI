@@ -133,4 +133,7 @@ slu_events_declaration! {
 
     // Plugins
     PluginEnabled(PluginId) as "plugin::enabled",
+
+    // Shortcuts
+    ShortcutsPaused(bool) as "shortcuts::paused",
 }

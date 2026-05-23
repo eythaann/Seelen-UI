@@ -226,6 +226,7 @@ shortcuts:
     misc_force_quit: 強制退出seelen
     misc_force_restart: 強制重新啟動seelen
     move_to_workspace: 移至工作區{{0}}
+    pause_toggle: 暫停/恢復快捷方式
     send_to_workspace: 發送到工作區{{0}}
     switch_to_next_workspace: 切換到下一個工作區
     switch_to_previous_workspace: 切換到前一個的工作區

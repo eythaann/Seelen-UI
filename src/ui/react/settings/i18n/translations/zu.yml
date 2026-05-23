@@ -265,6 +265,7 @@ shortcuts:
     misc_force_quit: Amandla ayeke
     misc_force_restart: Force Qala kabusha
     move_to_workspace: Hambisa ku-Workpace {{0}}
+    pause_toggle: Misa isikhashana/Qalisa kabusha Izinqamuleli
     send_to_workspace: Thumela kwi-Workpace {{0}}
     switch_to_next_workspace: Shintshela endaweni yokusebenzela elandelayo
     switch_to_previous_workspace: Shintshela endaweni yokusebenza edlule

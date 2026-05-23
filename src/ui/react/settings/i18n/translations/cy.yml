@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: Rhoi'r gorau iddi
     misc_force_restart: Ailgychwyn grym
     move_to_workspace: Symud i Workpace {{0}}
+    pause_toggle: Saib/Ail-ddechrau Llwybrau Byr
     send_to_workspace: Anfonwch i Workpace {{0}}
     switch_to_next_workspace: Newid i ofod gwaith nesaf
     switch_to_previous_workspace: Newid i Workpace Blaenorol

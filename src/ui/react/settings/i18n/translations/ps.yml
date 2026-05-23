@@ -253,6 +253,7 @@ shortcuts:
     misc_force_quit: ځواک پرېښودل
     misc_force_restart: ځواک بیاچالانول
     move_to_workspace: د کارځای ته لاړ شئ {0 0}}
+    pause_toggle: شارټ کټونه ودرول/بیا پیل کړئ
     send_to_workspace: کارځای ته واستوئ {{0}}
     switch_to_next_workspace: راتلونکی کاري ځای ته لاړشئ
     switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ

@@ -261,6 +261,7 @@ shortcuts:
     misc_force_quit: Síla přestat
     misc_force_restart: Vynutit restart
     move_to_workspace: Přesun do pracovního prostoru {{0}}
+    pause_toggle: Zkratky pro pozastavení/obnovení
     send_to_workspace: Odeslat do pracovního prostoru {{0}}
     switch_to_next_workspace: Přepnutí na další pracovní plochu
     switch_to_previous_workspace: Přepnutí na předchozí pracovní plochu

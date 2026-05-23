@@ -249,6 +249,7 @@ shortcuts:
     misc_force_quit: บังคับให้เลิก
     misc_force_restart: บังคับให้รีสตาร์ท
     move_to_workspace: ย้ายไปที่ WorksPace {{0}}
+    pause_toggle: ทางลัดหยุดชั่วคราว / ดำเนินการต่อ
     send_to_workspace: ส่งไปยัง WorksPace {{0}}
     switch_to_next_workspace: เปลี่ยนเป็นพื้นที่ทำงานถัดไป
     switch_to_previous_workspace: เปลี่ยนไปใช้พื้นที่ทำงานก่อนหน้า

@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: Хүчний гарах
     misc_force_restart: Хүчийг дахин эхлүүлэх
     move_to_workspace: Ажлын талбар руу шилжих {{0}}
+    pause_toggle: Түр зогсоох/Үргэлжлүүлэх товчлол
     send_to_workspace: Ажлын талбар руу илгээх {{0}}
     switch_to_next_workspace: Дараагийн ажлын талбар руу шилжих
     switch_to_previous_workspace: Өмнөх ажлын талбар руу шилжих

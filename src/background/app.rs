@@ -90,7 +90,9 @@ impl SeelenUI {
         let widgets = RESOURCES.widgets();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
         let (resolved, _) = resolve_shortcuts(&state.settings, &widget_refs);
-        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        if !crate::cli::shortcuts::SHORTCUTS_PAUSED.load(std::sync::atomic::Ordering::Acquire) {
+            ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        }
         Ok(())
     }
 
@@ -103,7 +105,9 @@ impl SeelenUI {
         if has_conflicts {
             show_shortcut_conflict_popup().log_error();
         }
-        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        if !crate::cli::shortcuts::SHORTCUTS_PAUSED.load(std::sync::atomic::Ordering::Acquire) {
+            ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        }
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_native_taskbar();

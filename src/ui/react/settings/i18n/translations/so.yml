@@ -268,6 +268,7 @@ shortcuts:
     misc_force_quit: Xoog ku jooji
     misc_force_restart: Xoogga dib u bilow
     move_to_workspace: U dhaqaaq goobta shaqada {0}}
+    pause_toggle: Hakis/Bilow Wadooyinka Gaaban
     send_to_workspace: U dir goobta shaqada {{0}}
     switch_to_next_workspace: U beddelo goobta shaqada ee xiga
     switch_to_previous_workspace: U beddelo shaqooyin hore

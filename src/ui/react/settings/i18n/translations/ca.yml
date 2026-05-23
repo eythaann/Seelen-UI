@@ -266,6 +266,7 @@ shortcuts:
     misc_force_quit: Força deixar de fumar
     misc_force_restart: Reinici de la força
     move_to_workspace: Desplaceu -vos a l'espai de treball {{0}}
+    pause_toggle: Pausa/reprèn les dreceres
     send_to_workspace: Enviar a l'espai de treball {{0}}
     switch_to_next_workspace: Canvieu al següent espai de treball
     switch_to_previous_workspace: Canvieu a l'espai de treball anterior

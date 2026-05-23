@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: Force berhenti
     misc_force_restart: Memaksa Mulai Ulang
     move_to_workspace: Pindah ke Workspace {{0}}
+    pause_toggle: Jeda/Lanjutkan Pintasan
     send_to_workspace: Kirim ke Workspace {{0}}
     switch_to_next_workspace: Beralih ke ruang kerja berikutnya
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya

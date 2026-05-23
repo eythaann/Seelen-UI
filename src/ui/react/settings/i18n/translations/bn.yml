@@ -262,6 +262,7 @@ shortcuts:
     misc_force_quit: ফোর্স প্রস্থান
     misc_force_restart: জোর পুনরায় চালু করুন
     move_to_workspace: ওয়ার্কস্পেসে যান {{0}}
+    pause_toggle: শর্টকাট বিরতি/পুনরায় শুরু করুন
     send_to_workspace: ওয়ার্কস্পেসে প্রেরণ করুন {{0}}
     switch_to_next_workspace: পরবর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন

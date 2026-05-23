@@ -257,6 +257,7 @@ shortcuts:
     misc_force_quit: છોડી દેવું
     misc_force_restart: બળનો ફરીથી પ્રારંભ કરવો
     move_to_workspace: વર્કસ્પેસ {{0}} પર ખસેડો
+    pause_toggle: શૉર્ટકટ્સ થોભાવો/ફરીથી શરૂ કરો
     send_to_workspace: વર્કસ્પેસ {{0}} પર મોકલો
     switch_to_next_workspace: આગળના કાર્યસ્થળ પર સ્વિચ કરો
     switch_to_previous_workspace: પાછલા વર્કસ્પેસ પર સ્વિચ કરો

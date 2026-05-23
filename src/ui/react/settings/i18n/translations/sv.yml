@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: Straffa
     misc_force_restart: Tvinga omstart
     move_to_workspace: Flytta till Workspace {{0}}
+    pause_toggle: Pausa/Fortsätt genvägar
     send_to_workspace: Skicka till Workspace {{0}}
     switch_to_next_workspace: Byt till nästa arbetsyta
     switch_to_previous_workspace: Byt till tidigare arbetsyta

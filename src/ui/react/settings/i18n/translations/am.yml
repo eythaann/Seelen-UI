@@ -245,6 +245,7 @@ shortcuts:
     misc_force_quit: ኃይል አቁሟል
     misc_force_restart: አስገባ
     move_to_workspace: ወደ የሥራ ቦታ ይሂዱ {{0}}}
+    pause_toggle: አቋራጮችን ለአፍታ አቁም/ከቆመበት ቀጥል
     send_to_workspace: ወደ የሥራ ቦታ {{0}}}}
     switch_to_next_workspace: ወደ ቀጣዩ የስራ ቦታ ይቀይሩ
     switch_to_previous_workspace: ወደ ቀዳሚው የስራ ቦታ ይቀይሩ

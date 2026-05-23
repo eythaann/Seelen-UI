@@ -236,6 +236,7 @@ shortcuts:
     misc_force_quit: 힘을 끊으십시오
     misc_force_restart: 강제 재시작
     move_to_workspace: 작업 공간으로 이동 {{0}}
+    pause_toggle: 일시중지/재개 바로가기
     send_to_workspace: 작업 공간으로 보내 {{0}}
     switch_to_next_workspace: 다음 작업 공간으로 전환하십시오
     switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오

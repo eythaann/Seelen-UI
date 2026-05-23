@@ -1,5 +1,6 @@
 mod debugger;
 mod self_pipe;
+pub mod shortcuts;
 mod svc_pipe;
 mod uri;
 
@@ -95,6 +96,9 @@ pub fn process_app_command(cmd: AppCommand) -> Result<()> {
         }
         AppCommand::Wallpaper(command) => {
             wallpaper_cli::process(command)?;
+        }
+        AppCommand::ToggleShortcutsPause => {
+            shortcuts::toggle_pause()?;
         }
         _ => {
             return Err("Command does not support instance execution".into());

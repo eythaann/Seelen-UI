@@ -54,4 +54,5 @@ export enum SeelenEvent {
   NotificationsModeChanged = "notifications::mode-changed",
   Notifications = "notifications",
   PluginEnabled = "plugin::enabled",
+  ShortcutsPaused = "shortcuts::paused",
 }

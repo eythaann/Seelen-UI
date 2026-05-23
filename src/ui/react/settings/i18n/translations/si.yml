@@ -257,6 +257,7 @@ shortcuts:
     misc_force_quit: බලය ඉවත්වීම
     misc_force_restart: බලය නැවත ආරම්භ කරන්න
     move_to_workspace: වැඩපොළ වෙත යන්න {{0}}
+    pause_toggle: කෙටිමං විරාම/නැවත ආරම්භ කරන්න
     send_to_workspace: වැඩපොළ වෙත යවන්න {{0}}
     switch_to_next_workspace: ඊළඟ වැඩබිම වෙත මාරු වන්න
     switch_to_previous_workspace: පෙර වැඩබිම වෙත මාරු වන්න

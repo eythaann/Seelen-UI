@@ -2,6 +2,10 @@
 
 ## [2.6.9-dev]
 
+### feature
+
+- command for temporarily pause shoutcuts.
+
 ### enhancements
 
 - apps menu search.

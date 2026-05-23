@@ -44,6 +44,8 @@ pub enum AppCommand {
     Art(ArtCli),
     TaskSwitcher(TaskSwitcherClient),
     Wallpaper(WallpaperCli),
+    /// Toggle the global shortcuts pause state
+    ToggleShortcutsPause,
 }
 
 impl SluCliCommand for AppCommand {

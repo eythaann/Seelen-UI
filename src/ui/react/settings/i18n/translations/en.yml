@@ -255,6 +255,7 @@ shortcuts:
     misc_force_quit: Force Quit
     misc_force_restart: Force Restart
     move_to_workspace: Move to Workspace {{0}}
+    pause_toggle: Pause/Resume Shortcuts
     send_to_workspace: Send to Workspace {{0}}
     switch_to_next_workspace: Switch to Next Workspace
     switch_to_previous_workspace: Switch to Previous Workspace

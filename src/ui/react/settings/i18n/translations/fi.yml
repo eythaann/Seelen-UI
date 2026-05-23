@@ -263,6 +263,7 @@ shortcuts:
     misc_force_quit: Pakottaa
     misc_force_restart: Pakota uudelleenkäynnistys
     move_to_workspace: Siirry työtilaan {{0}}
+    pause_toggle: Keskeytä/Jatka pikanäppäimet
     send_to_workspace: Lähetä työtilaan {{0}}
     switch_to_next_workspace: Vaihda seuraavaan työtilaan
     switch_to_previous_workspace: Vaihda edelliseen työtilaan

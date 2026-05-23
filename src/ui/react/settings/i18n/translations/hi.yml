@@ -265,6 +265,7 @@ shortcuts:
     misc_force_quit: जबरन छोड़ना
     misc_force_restart: बल फिर से शुरू करना
     move_to_workspace: कार्यक्षेत्र {{0}} पर जाएं
+    pause_toggle: शॉर्टकट रोकें/फिर से शुरू करें
     send_to_workspace: कार्यक्षेत्र {{0}} को भेजें
     switch_to_next_workspace: अगले कार्यक्षेत्र पर स्विच करें
     switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें

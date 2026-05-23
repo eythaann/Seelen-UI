@@ -249,6 +249,7 @@ shortcuts:
     misc_force_quit: استقال
     misc_force_restart: فرض إعادة التشغيل
     move_to_workspace: انتقل إلى مساحة العمل {{0}}
+    pause_toggle: إيقاف مؤقت/استئناف الاختصارات
     send_to_workspace: أرسل إلى مساحة العمل {{0}}
     switch_to_next_workspace: التبديل إلى مساحة العمل التالية
     switch_to_previous_workspace: التبديل إلى مساحة العمل السابقة

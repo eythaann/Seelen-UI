@@ -262,6 +262,7 @@ shortcuts:
     misc_force_quit: Ուժը թողնել
     misc_force_restart: FORCE REARTART
     move_to_workspace: Տեղափոխվել դեպի Workspace {0}
+    pause_toggle: Դադարեցնել/Վերսկսել դյուրանցումներ
     send_to_workspace: Ուղարկել Workspace- ին {0}
     switch_to_next_workspace: Անցեք հաջորդ աշխատանքային տարածքին
     switch_to_previous_workspace: Անցեք նախորդ աշխատանքային տարածքին

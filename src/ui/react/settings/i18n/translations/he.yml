@@ -246,6 +246,7 @@ shortcuts:
     misc_force_quit: כוח התפטר
     misc_force_restart: הכוח להפעיל מחדש
     move_to_workspace: עברו לסביבת עבודה {{0}}
+    pause_toggle: השהה/המשך קיצורי דרך
     send_to_workspace: שלח לסביבת עבודה {{0}}
     switch_to_next_workspace: עבור לסביבת העבודה הבאה
     switch_to_previous_workspace: עבור לסביבת העבודה הקודמת

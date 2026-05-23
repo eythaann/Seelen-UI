@@ -222,6 +222,7 @@ shortcuts:
     misc_force_quit: 强制退出
     misc_force_restart: 强制重启
     move_to_workspace: 移动到工作区 {{0}}
+    pause_toggle: 暂停/恢复快捷方式
     send_to_workspace: 发送到工作区 {{0}}
     switch_to_next_workspace: 切换到下一个工作区
     switch_to_previous_workspace: 切换到先前的工作区

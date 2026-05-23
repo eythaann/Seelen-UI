@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: Spēks atmest
     misc_force_restart: Piespiedu restartēšana
     move_to_workspace: Pārvietojieties uz darbvietu {{0}}
+    pause_toggle: Pārtraukt/Atsākt saīsnes
     send_to_workspace: Nosūtīt uz darbvietu {{0}}
     switch_to_next_workspace: Pārslēdzieties uz nākamo darbvietu
     switch_to_previous_workspace: Pārslēdzieties uz iepriekšējo darbvietu

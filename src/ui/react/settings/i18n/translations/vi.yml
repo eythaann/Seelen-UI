@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: BẮT ĐẦU
     misc_force_restart: Bắt đầu lại
     move_to_workspace: Di chuyển đến không gian làm việc {{0}}
+    pause_toggle: Phím tắt tạm dừng/tiếp tục
     send_to_workspace: Gửi đến không gian làm việc {{0}}
     switch_to_next_workspace: Chuyển sang không gian làm việc tiếp theo
     switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó

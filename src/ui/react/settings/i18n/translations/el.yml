@@ -269,6 +269,7 @@ shortcuts:
     misc_force_quit: Φρικιασμένη δύναμη
     misc_force_restart: Αναγκαστική επανεκκίνηση
     move_to_workspace: Μετακίνηση στο χώρο εργασίας {{0}}
+    pause_toggle: Συντομεύσεις παύσης/συνέχισης
     send_to_workspace: Αποστολή στο χώρο εργασίας {{0}}
     switch_to_next_workspace: Μεταβείτε στον επόμενο χώρο εργασίας
     switch_to_previous_workspace: Μεταβείτε σε προηγούμενο χώρο εργασίας

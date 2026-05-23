@@ -254,6 +254,7 @@ shortcuts:
     misc_force_quit: ਰੱਦ
     misc_force_restart: ਫੋਰਸ ਚਾਲੂ
     move_to_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਜਾਓ {{0}}}
+    pause_toggle: ਸ਼ਾਰਟਕੱਟ ਰੋਕੋ/ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ
     send_to_workspace: ਵਰਕਸਪੇਸ ਨੂੰ ਭੇਜੋ {{0}}
     switch_to_next_workspace: ਅਗਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
     switch_to_previous_workspace: ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ

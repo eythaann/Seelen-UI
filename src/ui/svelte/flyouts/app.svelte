@@ -11,6 +11,7 @@
   import MediaDevices from "./app/MediaDevices.svelte";
   import MediaPlaying from "./app/MediaPlaying.svelte";
   import Brightness from "./app/Brightness.svelte";
+  import ShortcutsState from "./app/ShortcutsState.svelte";
 
   $effect(() => {
     Widget.getCurrent().ready();
@@ -59,6 +60,7 @@
   let playingTitle = $derived(recomendedPlayer?.title);
   let brightnessLevel = $derived(gState.brightness?.currentBrightness);
   let activeWorkspace = $derived(vd?.active_workspace);
+  let shortcutsPaused = $derived(gState.shortcutsPaused);
 
   // svelte-ignore state_referenced_locally
   const prev = {
@@ -67,6 +69,7 @@
     brightnessLevel,
     activeWorkspace,
     notificationId,
+    shortcutsPaused,
   };
 
   const hideWithDelay = $derived(
@@ -130,6 +133,11 @@
       somethingChanged = true;
     }
 
+    if (prev.shortcutsPaused !== shortcutsPaused && shortcutsPaused !== null) {
+      lastChanged = "shortcuts";
+      somethingChanged = true;
+    }
+
     if (somethingChanged) {
       setShowing(true);
       hideWithDelay();
@@ -150,6 +158,7 @@
     prev.brightnessLevel = brightnessLevel;
     prev.activeWorkspace = activeWorkspace;
     prev.notificationId = notificationId;
+    prev.shortcutsPaused = shortcutsPaused;
   });
 </script>
 
@@ -176,6 +185,10 @@
 
   {#if lastChanged === "mediaPlaying" && recomendedPlayer}
     <MediaPlaying playing={recomendedPlayer} />
+  {/if}
+
+  {#if lastChanged === "shortcuts" && shortcutsPaused !== null}
+    <ShortcutsState paused={shortcutsPaused} />
   {/if}
 </div>
 

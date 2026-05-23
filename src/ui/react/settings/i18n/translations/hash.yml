@@ -194,6 +194,7 @@ shortcuts.labels.destroy_current_workspace: 8be90e38
 shortcuts.labels.misc_force_quit: c3599260
 shortcuts.labels.misc_force_restart: d878f10
 shortcuts.labels.move_to_workspace: d9975d16
+shortcuts.labels.pause_toggle: 9078ba2c
 shortcuts.labels.send_to_workspace: 3fe8e220
 shortcuts.labels.switch_to_next_workspace: a9086b78
 shortcuts.labels.switch_to_previous_workspace: e80357cb

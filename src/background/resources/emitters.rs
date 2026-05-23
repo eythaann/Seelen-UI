@@ -100,7 +100,9 @@ impl ResourceManager {
         if has_conflicts {
             show_shortcut_conflict_popup().log_error();
         }
-        ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        if !crate::cli::shortcuts::SHORTCUTS_PAUSED.load(std::sync::atomic::Ordering::Acquire) {
+            ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
+        }
         Ok(())
     }
 

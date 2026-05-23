@@ -258,6 +258,7 @@ shortcuts:
     misc_force_quit: បង្ខំឱ្យឈប់
     misc_force_restart: បង្ខំឱ្យចាប់ផ្តើមឡើងវិញ
     move_to_workspace: ផ្លាស់ទីទៅកន្លែងធ្វើការ {{0}}
+    pause_toggle: ផ្អាក/បន្តផ្លូវកាត់
     send_to_workspace: ផ្ញើទៅកន្លែងធ្វើការ {{0}}
     switch_to_next_workspace: ប្តូរទៅកន្លែងធ្វើការបន្ទាប់
     switch_to_previous_workspace: ប្តូរទៅកន្លែងធ្វើការមុន

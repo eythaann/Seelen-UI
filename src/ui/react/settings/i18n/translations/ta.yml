@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: படை வெளியேறுதல்
     misc_force_restart: படை மறுதொடக்கம்
     move_to_workspace: பணியிடத்திற்கு நகர்த்தவும் {{0}}
+    pause_toggle: குறுக்குவழிகளை இடைநிறுத்தவும்/மீண்டும் தொடங்கவும்
     send_to_workspace: பணியிடத்திற்கு அனுப்பவும் {{0}}
     switch_to_next_workspace: அடுத்த பணியிடத்திற்கு மாறவும்
     switch_to_previous_workspace: முந்தைய பணியிடத்திற்கு மாறவும்

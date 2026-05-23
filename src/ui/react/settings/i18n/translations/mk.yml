@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: Сила откажана
     misc_force_restart: Рестартирање на силата
     move_to_workspace: Преместете се на работниот простор {{0}}
+    pause_toggle: Кратенки за пауза/продолжување
     send_to_workspace: Испрати на работниот простор {{0}}
     switch_to_next_workspace: Префрлете се на следниот работен простор
     switch_to_previous_workspace: Префрлете се на претходниот работен простор

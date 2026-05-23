@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: Forza nieqaf
     misc_force_restart: Startjar mill-ġdid tal-forza
     move_to_workspace: Mexxi għal Workspace {{0}}
+    pause_toggle: Waqfa/Ibda Shortcuts
     send_to_workspace: Ibgħat lil Workspace {{0}}
     switch_to_next_workspace: Aqleb għall-Ispazju tax-Xogħol li jmiss
     switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti

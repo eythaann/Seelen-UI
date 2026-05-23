@@ -267,6 +267,7 @@ shortcuts:
     misc_force_quit: Force smettila
     misc_force_restart: Riavvio forzato
     move_to_workspace: Passa su Workspace {{0}}
+    pause_toggle: Pausa/Riprendi scorciatoie
     send_to_workspace: Invia a Workspace {{0}}
     switch_to_next_workspace: Passa all'area di lavoro successiva
     switch_to_previous_workspace: Passa all'area di lavoro precedente

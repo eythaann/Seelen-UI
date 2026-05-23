@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: Çıxmaq
     misc_force_restart: Güc yenidən başladın
     move_to_workspace: İş sahəsinə keçin {{0}}
+    pause_toggle: Qısayolları dayandırın/davam edin
     send_to_workspace: İş sahəsinə göndərin {{0}}
     switch_to_next_workspace: Növbəti iş sahəsinə keçin
     switch_to_previous_workspace: Əvvəlki iş sahəsinə keçin

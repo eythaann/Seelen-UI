@@ -252,6 +252,7 @@ shortcuts:
     misc_force_quit: Fi agbara mu
     misc_force_restart: Fi ipa mu
     move_to_workspace: Gbe lọ si ibi-iṣẹ {{0}
+    pause_toggle: Daduro/Tẹsiwaju Awọn ọna abuja
     send_to_workspace: Firanṣẹ si Accepace {{0}
     switch_to_next_workspace: Yipada si ibi-iṣẹ t'okan
     switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju

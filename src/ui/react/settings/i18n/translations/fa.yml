@@ -258,6 +258,7 @@ shortcuts:
     misc_force_quit: نیرو ترک
     misc_force_restart: مجدداً نیرو
     move_to_workspace: حرکت به فضای کاری {{0}}
+    pause_toggle: میانبرهای مکث/ازسرگیری
     send_to_workspace: ارسال به فضای کاری {{0}}
     switch_to_next_workspace: به فضای کاری بعدی بروید
     switch_to_previous_workspace: به فضای کاری قبلی بروید

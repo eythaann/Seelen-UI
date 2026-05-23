@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: Jėga mesti
     misc_force_restart: Priverstinis paleidimas iš naujo
     move_to_workspace: Pereikite į darbo vietą {{0}}
+    pause_toggle: Pristabdyti / tęsti sparčiuosius klavišus
     send_to_workspace: Siųsti į darbo vietą {{0}}
     switch_to_next_workspace: Perjunkite į kitą darbo vietą
     switch_to_previous_workspace: Perjunkite į ankstesnę darbo vietą

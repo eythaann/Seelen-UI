@@ -256,6 +256,7 @@ shortcuts:
     misc_force_quit: Nguvu kuacha
     misc_force_restart: Nguvu Anzisha tena
     move_to_workspace: Hoja kwa nafasi ya kazi {{0}}
+    pause_toggle: Sitisha/Rejesha Njia za mkato
     send_to_workspace: Tuma kwa nafasi ya kazi {{0}}
     switch_to_next_workspace: Badilisha kwenye nafasi ya kazi inayofuata
     switch_to_previous_workspace: Badilisha kwenye nafasi ya kazi ya hapo awali

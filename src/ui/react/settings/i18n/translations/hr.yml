@@ -263,6 +263,7 @@ shortcuts:
     misc_force_quit: Sila je odustala
     misc_force_restart: Ponovno pokrenite
     move_to_workspace: Pomaknite se na radni prostor {{0}}
+    pause_toggle: Pauziraj/nastavi prečace
     send_to_workspace: Pošaljite u radni prostor {{0}}
     switch_to_next_workspace: Prebacite se na sljedeći radni prostor
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor

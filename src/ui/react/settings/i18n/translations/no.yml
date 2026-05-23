@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: Force slutter
     misc_force_restart: Force omstart på nytt
     move_to_workspace: Flytt til arbeidsområdet {{0}}
+    pause_toggle: Pause/Fortsett snarveier
     send_to_workspace: Send til arbeidsområdet {{0}}
     switch_to_next_workspace: Bytt til neste arbeidsområde
     switch_to_previous_workspace: Bytt til tidligere arbeidsområde

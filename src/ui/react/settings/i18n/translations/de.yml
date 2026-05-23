@@ -269,6 +269,7 @@ shortcuts:
     misc_force_quit: Kraft verlassen
     misc_force_restart: Neustart erzwingen
     move_to_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
+    pause_toggle: Verknüpfungen zum Anhalten/Fortsetzen
     send_to_workspace: An den Arbeitsbereich senden {{0}}
     switch_to_next_workspace: Wechseln Sie zum nächsten Arbeitsbereich
     switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich

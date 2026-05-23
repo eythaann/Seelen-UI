@@ -257,6 +257,7 @@ shortcuts:
     misc_force_quit: Sund lõpetama
     misc_force_restart: Taaskäivituse sundimine
     move_to_workspace: Liikuge tööruumi {{0}} saidile
+    pause_toggle: Peata/jätka otseteed
     send_to_workspace: Saada tööruumi {{0}}
     switch_to_next_workspace: Lülitage järgmisele tööalale
     switch_to_previous_workspace: Lülitage eelmisele tööalale

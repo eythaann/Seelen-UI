@@ -261,6 +261,7 @@ shortcuts:
     misc_force_quit: ఫోర్స్ క్విట్
     misc_force_restart: ఫోర్స్ పున art ప్రారంభం
     move_to_workspace: వర్క్‌స్పేస్‌కు తరలించండి {{0}}
+    pause_toggle: సత్వరమార్గాలను పాజ్/రెస్యూమ్ చేయండి
     send_to_workspace: వర్క్‌స్పేస్‌కు పంపండి {{0}}
     switch_to_next_workspace: తదుపరి వర్క్‌స్పేస్‌కు మారండి
     switch_to_previous_workspace: మునుపటి వర్క్‌స్పేస్‌కు మారండి

@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: Force parou
     misc_force_restart: Forçar reinicialização
     move_to_workspace: Mova para o espaço de trabalho {{0}}
+    pause_toggle: Pausar/retomar atalhos
     send_to_workspace: Enviar para o espaço de trabalho {{0}}
     switch_to_next_workspace: Mude para o próximo espaço de trabalho
     switch_to_previous_workspace: Mudar para o espaço de trabalho anterior

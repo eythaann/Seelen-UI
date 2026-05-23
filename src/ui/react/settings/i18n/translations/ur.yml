@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: فورس چھوڑ دیں
     misc_force_restart: زبردستی دوبارہ شروع کریں
     move_to_workspace: ورک اسپیس {{0}} میں منتقل کریں
+    pause_toggle: شارٹ کٹس کو موقوف/دوبارہ شروع کریں۔
     send_to_workspace: ورک اسپیس کو بھیجیں {{0}}
     switch_to_next_workspace: اگلی ورک اسپیس پر سوئچ کریں
     switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں

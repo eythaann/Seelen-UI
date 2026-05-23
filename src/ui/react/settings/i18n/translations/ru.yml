@@ -263,6 +263,7 @@ shortcuts:
     misc_force_quit: Сила ухода
     misc_force_restart: Принудительный перезапуск
     move_to_workspace: Перейти в рабочую пространство {{0}}
+    pause_toggle: Ярлыки паузы/возобновления
     send_to_workspace: Отправить в рабочее пространство {{0}}
     switch_to_next_workspace: Переключиться на следующее рабочее пространство
     switch_to_previous_workspace: Переключиться на предыдущее рабочее пространство

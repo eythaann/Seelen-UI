@@ -263,6 +263,7 @@ shortcuts:
     misc_force_quit: बल छोडियो
     misc_force_restart: साउसाट
     move_to_workspace: कार्यक्षेत्रमा जानुहोस् {0}}
+    pause_toggle: सर्टकटहरू पज/सुरु गर्नुहोस्
     send_to_workspace: कार्यक्षेत्रमा पठाउनुहोस् {0}}}
     switch_to_next_workspace: अर्को कार्यक्षेत्रमा स्विच गर्नुहोस्
     switch_to_previous_workspace: अघिल्लो कार्यक्षेत्रमा स्विच गर्नुहोस्

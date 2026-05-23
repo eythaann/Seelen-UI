@@ -262,6 +262,7 @@ shortcuts:
     misc_force_quit: Қувваи корӣ
     misc_force_restart: Бастори қувват
     move_to_workspace: Ба кории {{0}} гузаред
+    pause_toggle: Миёнбурҳои таваққуф/идома
     send_to_workspace: Ба кории rowspace {{0}}
     switch_to_next_workspace: Гузариш ба фазои оянда
     switch_to_previous_workspace: Ба фазои пешина гузаред

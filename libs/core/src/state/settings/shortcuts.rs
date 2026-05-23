@@ -168,6 +168,12 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
         cmd!["Ctrl", "Win", "Alt", "K"],
         readonly
     ));
+    decls.push(decl!(
+        "shortcuts-pause-toggle",
+        "t:shortcuts.labels.pause_toggle",
+        cmd!["toggle-shortcuts-pause"],
+        cmd!["Ctrl", "Win", "Alt", "P"]
+    ));
 
     decls
 }

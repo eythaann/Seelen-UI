@@ -261,6 +261,7 @@ shortcuts:
     misc_force_quit: Behartu irten
     misc_force_restart: Indarra berrabiarazi
     move_to_workspace: Mugitu lan-eremura {{0}}
+    pause_toggle: Pausatu/Berrekin lasterbideak
     send_to_workspace: Bidali lantokiari {{0}}
     switch_to_next_workspace: Aldatu hurrengo lantokira
     switch_to_previous_workspace: Aldatu aurreko lan-eremura

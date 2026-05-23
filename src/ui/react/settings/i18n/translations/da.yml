@@ -258,6 +258,7 @@ shortcuts:
     misc_force_quit: Force stopper
     misc_force_restart: Fremtving genstart
     move_to_workspace: Flyt til arbejdsområde {{0}}
+    pause_toggle: Pause/Genoptag genveje
     send_to_workspace: Send til arbejdsområde {{0}}
     switch_to_next_workspace: Skift til næste arbejdsområde
     switch_to_previous_workspace: Skift til forrige arbejdsområde

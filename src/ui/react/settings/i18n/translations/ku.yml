@@ -261,6 +261,7 @@ shortcuts:
     misc_force_quit: Hêza Qedexe
     misc_force_restart: Hêza Destpêkirin
     move_to_workspace: Move to Workspace {{0}}
+    pause_toggle: Rawestandin/Destpêkirina Kurtebiran
     send_to_workspace: Ji bo Workspace {{0} bişînin.
     switch_to_next_workspace: Veguherînin qada xebata next
     switch_to_previous_workspace: Vegere qada xebata berê

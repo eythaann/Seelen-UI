@@ -271,6 +271,7 @@ shortcuts:
     misc_force_quit: Puwersa na huminto
     misc_force_restart: Force restart
     move_to_workspace: Lumipat sa workspace {{0}}
+    pause_toggle: I-pause/Ipagpatuloy ang Mga Shortcut
     send_to_workspace: Ipadala sa Workspace {{0}}
     switch_to_next_workspace: Lumipat sa Susunod na Workspace
     switch_to_previous_workspace: Lumipat sa nakaraang workspace

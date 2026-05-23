@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: Erőt hagy
     misc_force_restart: Újraindítás kikényszerítése
     move_to_workspace: Költözni a munkaterületre {{0}}
+    pause_toggle: Parancsikonok szüneteltetése/folytatása
     send_to_workspace: Küldje el a munkaterületre {{0}}
     switch_to_next_workspace: Váltás a következő munkaterületre
     switch_to_previous_workspace: Váltás az előző munkaterületre

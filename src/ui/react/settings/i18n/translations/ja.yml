@@ -237,6 +237,7 @@ shortcuts:
     misc_force_quit: 強制終了する
     misc_force_restart: 強制再起動する
     move_to_workspace: ワークスペースに移動{{0}}
+    pause_toggle: 一時停止/再開のショートカット
     send_to_workspace: ワークスペース {{0}} に送信
     switch_to_next_workspace: 次のワークスペースに切り替え
     switch_to_previous_workspace: 前のワークスペースに切り替え

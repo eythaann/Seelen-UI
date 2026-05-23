@@ -264,6 +264,7 @@ shortcuts:
     misc_force_quit: Forța a renunțat
     misc_force_restart: Forțați repornirea
     move_to_workspace: Treceți la Workspace {{0}}
+    pause_toggle: Întrerupeți/Reluați comenzile rapide
     send_to_workspace: Trimiteți la Workspace {{0}}
     switch_to_next_workspace: Treceți la următorul spațiu de lucru
     switch_to_previous_workspace: Treceți la spațiul de lucru anterior

@@ -2,6 +2,11 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { NotificationsMode } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 
+let shortcutsPaused = $state<boolean | null>(null);
+subscribe(SeelenEvent.ShortcutsPaused, (e) => {
+  shortcutsPaused = e.payload;
+});
+
 let mediaDevices = lazyRune(() => invoke(SeelenCommand.GetMediaDevices));
 subscribe(SeelenEvent.MediaDevices, mediaDevices.setByPayload);
 
@@ -50,5 +55,8 @@ export const state = {
   },
   get notificationsMode(): NotificationsMode {
     return notificationsMode.value;
+  },
+  get shortcutsPaused() {
+    return shortcutsPaused;
   },
 };

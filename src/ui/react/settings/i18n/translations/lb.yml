@@ -259,6 +259,7 @@ shortcuts:
     misc_force_quit: Kraaft opzehalen
     misc_force_restart: Kraaft Restart
     move_to_workspace: Plënnert op Aarbechtsberäich {{0}}
+    pause_toggle: Pause / Resume Ofkiirzungen
     send_to_workspace: Schéckt op Aarbechtsberäich {{0}}
     switch_to_next_workspace: Wiesselt op d'nächst Aarbechtsberäich
     switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich

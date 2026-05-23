@@ -256,6 +256,7 @@ shortcuts:
     misc_force_quit: Force hætti
     misc_force_restart: Force endurræsing
     move_to_workspace: Fara í vinnusvæði {{0}}
+    pause_toggle: Gera hlé / halda áfram flýtileiðum
     send_to_workspace: Sendu á Workspace {{0}}
     switch_to_next_workspace: Skiptu yfir í næsta vinnusvæði
     switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði

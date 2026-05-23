@@ -265,6 +265,7 @@ shortcuts:
     misc_force_quit: Kuch berish
     misc_force_restart: Kuchni qayta boshlang
     move_to_workspace: Ish maydoni uchun {{0}}
+    pause_toggle: Qisqa klavishlarni to'xtatib turish/davom etish
     send_to_workspace: Ish maydoni uchun {{0}}
     switch_to_next_workspace: Keyingi ish joyiga o'tish
     switch_to_previous_workspace: Oldingi ish joyiga o'tish

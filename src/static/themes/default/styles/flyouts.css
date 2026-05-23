@@ -15,7 +15,8 @@ body,
   .workspace,
   .volume,
   .brightness,
-  .player {
+  .player,
+  .shortcuts-state {
     height: 1.5rem;
     width: 16rem;
     overflow: hidden;
@@ -33,8 +34,12 @@ body,
     flex-shrink: 0;
   }
 
-  .workspace-name {
+  .workspace-name,
+  .shortcuts-state-label {
     font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .player {

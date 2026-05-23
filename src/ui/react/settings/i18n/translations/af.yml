@@ -260,6 +260,7 @@ shortcuts:
     misc_force_quit: Force Quit
     misc_force_restart: Force herbegin
     move_to_workspace: Beweeg na WorkSpace {{0}}
+    pause_toggle: Onderbreek/Hervat kortpaaie
     send_to_workspace: Stuur na WorkSpace {{0}}
     switch_to_next_workspace: Skakel oor na die volgende werkruimte
     switch_to_previous_workspace: Skakel oor na vorige werkruimte
