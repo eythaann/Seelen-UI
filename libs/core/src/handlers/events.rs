@@ -49,8 +49,6 @@ slu_events_declaration! {
     GlobalFocusChanged(FocusedApp) as "global-focus-changed",
     GlobalMouseMove([i32; 2]) as "global-mouse-move",
 
-    HandleLayeredHitboxes(bool) as "handle-layered",
-
     SystemMonitorsChanged(Vec<PhysicalMonitor>) as "system::monitors-changed",
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
     SystemMonitorsBrightnessChanged(Vec<MonitorBrightness>) as "system::monitors-brightness-changed",

@@ -3,7 +3,6 @@ export enum SeelenEvent {
   VirtualDesktopsChanged = "virtual-desktops::changed",
   GlobalFocusChanged = "global-focus-changed",
   GlobalMouseMove = "global-mouse-move",
-  HandleLayeredHitboxes = "handle-layered",
   SystemMonitorsChanged = "system::monitors-changed",
   SystemLanguagesChanged = "system::languages-changed",
   SystemMonitorsBrightnessChanged = "system::monitors-brightness-changed",

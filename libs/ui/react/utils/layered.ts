@@ -4,7 +4,6 @@ import { window as TauriWindow } from "@seelen-ui/lib/tauri";
 class LayeredHitbox {
   private _isIgnoringCursorEvents: boolean = true;
   public firstClick: boolean = true;
-  public isLayeredEnabled: boolean = true;
 
   get isIgnoringCursorEvents(): boolean {
     return this._isIgnoringCursorEvents;
@@ -45,15 +44,7 @@ export async function declareDocumentAsLayeredHitbox(
   webviewRect.width = width;
   webviewRect.height = height;
 
-  const unlistenLayered = await window.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
-    data.isLayeredEnabled = event.payload;
-  });
-
   const unlistenMouseMove = await window.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
-    if (!data.isLayeredEnabled) {
-      return;
-    }
-
     const [mouseX, mouseY] = event.payload;
     const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
 
@@ -93,7 +84,6 @@ export async function declareDocumentAsLayeredHitbox(
   return () => {
     unlistenMoved();
     unlistenResized();
-    unlistenLayered();
     unlistenMouseMove();
     globalThis.removeEventListener("touchstart", onTouchStart);
     window.setIgnoreCursorEvents(false);
