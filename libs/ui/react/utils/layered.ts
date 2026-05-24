@@ -17,36 +17,56 @@ class LayeredHitbox {
   }
 }
 
+export interface LayeredHitboxRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+/**
+ * @param shouldAllowMouseEvent - returns true if mouse events should be allowed for the element
+ * @param getPhysicalRect - optional getter for the expected physical window rect (physical pixels).
+ *   When provided, this is used instead of tracking via onMoved/onResized events, which prevents
+ *   stale coordinates during brief position corrections (e.g. AppBar registration adjustments).
+ */
 export async function declareDocumentAsLayeredHitbox(
   shouldAllowMouseEvent: (element: Element) => boolean = (element) => element != document.body,
+  getPhysicalRect?: () => LayeredHitboxRect,
 ): Promise<() => void> {
   const window = TauriWindow.getCurrentWindow();
-
-  const webviewRect = { x: 0, y: 0, width: 0, height: 0 };
 
   await window.setIgnoreCursorEvents(true);
   const data = new LayeredHitbox();
 
-  const unlistenMoved = await window.onMoved((e) => {
-    webviewRect.x = e.payload.x;
-    webviewRect.y = e.payload.y;
-  });
+  let unlistenMoved: (() => void) | undefined;
+  let unlistenResized: (() => void) | undefined;
+  const trackedRect: LayeredHitboxRect = { x: 0, y: 0, width: 0, height: 0 };
 
-  const unlistenResized = await window.onResized((e) => {
-    webviewRect.width = e.payload.width;
-    webviewRect.height = e.payload.height;
-  });
+  if (!getPhysicalRect) {
+    unlistenMoved = await window.onMoved((e) => {
+      trackedRect.x = e.payload.x;
+      trackedRect.y = e.payload.y;
+    });
 
-  const { x, y } = await window.outerPosition();
-  webviewRect.x = x;
-  webviewRect.y = y;
-  const { width, height } = await window.outerSize();
-  webviewRect.width = width;
-  webviewRect.height = height;
+    unlistenResized = await window.onResized((e) => {
+      trackedRect.width = e.payload.width;
+      trackedRect.height = e.payload.height;
+    });
+
+    const { x, y } = await window.outerPosition();
+    trackedRect.x = x;
+    trackedRect.y = y;
+    const { width, height } = await window.outerSize();
+    trackedRect.width = width;
+    trackedRect.height = height;
+  }
 
   const unlistenMouseMove = await window.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
     const [mouseX, mouseY] = event.payload;
-    const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
+    const { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = getPhysicalRect
+      ? getPhysicalRect()
+      : trackedRect;
 
     const isHoverWindow = mouseX >= windowX &&
       mouseX <= windowX + windowWidth &&
@@ -82,8 +102,8 @@ export async function declareDocumentAsLayeredHitbox(
   globalThis.addEventListener("touchstart", onTouchStart);
 
   return () => {
-    unlistenMoved();
-    unlistenResized();
+    unlistenMoved?.();
+    unlistenResized?.();
     unlistenMouseMove();
     globalThis.removeEventListener("touchstart", onTouchStart);
     window.setIgnoreCursorEvents(false);

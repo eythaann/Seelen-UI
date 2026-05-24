@@ -95,7 +95,11 @@ effect(() => {
     return;
   }
   let unlisten: (() => void) | null = null;
-  declareDocumentAsLayeredHitbox().then((fn) => {
+  const getPhysicalRect = () => {
+    const r = $widget_rect.value.webviewRect;
+    return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
+  };
+  declareDocumentAsLayeredHitbox(undefined, getPhysicalRect).then((fn) => {
     unlisten = fn;
   });
   return () => unlisten?.();
