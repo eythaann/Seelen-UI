@@ -1,13 +1,3 @@
-:root {
-  --dock-item-hover-color: oklch(from var(--system-accent-lightest-color) l 0.05 h);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --dock-item-hover-color: oklch(from var(--system-accent-darkest-color) l 0.05 h);
-  }
-}
-
 @keyframes shadow-on-horizontal-scroll {
   from {
     box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
@@ -108,10 +98,8 @@
   box-shadow: var(--shadow-s);
   border-radius: var(--border-radius);
 
-  transition: background-color 0.2s ease-out;
-
   &:hover {
-    background-color: var(--dock-item-hover-color);
+    background-color: var(--slu-std-bg-dark-color);
   }
 
   &.media-session-container {

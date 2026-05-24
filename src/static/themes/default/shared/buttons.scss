@@ -60,6 +60,6 @@ button[data-skin="default"] {
   box-shadow: var(--shadow-s);
 
   &:hover {
-    filter: brightness(1.15);
+    color: var(--slu-std-ui-hover-color);
   }
 }
