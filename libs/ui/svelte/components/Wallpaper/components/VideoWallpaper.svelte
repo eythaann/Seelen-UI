@@ -1,6 +1,6 @@
 <script lang="ts">
   import { convertFileSrc } from "@tauri-apps/api/core";
-  import { onMount, onDestroy } from "svelte";
+  import { onDestroy } from "svelte";
   import type { DefinedWallProps } from "../types";
   import { getPlaybackRate, getWallpaperStyles } from "../utils";
 
@@ -9,47 +9,69 @@
   const MAX_RETRIES = 3;
   const WAITING_TIMEOUT_MS = 3000;
   const STALL_CHECK_INTERVAL_MS = 5000;
+  const RETRY_RESET_MS = 15000;
 
   let videoElement: HTMLVideoElement | undefined = $state();
   let waitingTimeout: ReturnType<typeof setTimeout> | undefined;
+  let retryResetTimeout: ReturnType<typeof setTimeout> | undefined;
+  let stallCheckInterval: ReturnType<typeof setInterval> | undefined;
+
   let retryCount = 0;
   let lastTimeUpdate = 0;
   let isLoaded = false;
-  let stallCheckInterval: ReturnType<typeof setInterval> | undefined;
+  // Guards against overlapping doReload() calls from waiting/stalled/stallCheck firing in parallel.
+  let isReloading = false;
+  // Carry the playback position across a load() call; restored in handleCanPlay.
+  let pendingSeekTime: number | null = null;
 
   const videoSrc = $derived(convertFileSrc(definition.metadata.path + "\\" + definition.filename!));
 
-  // Monitor for stalls by checking timeupdate
-  function startStallCheck() {
-    if (stallCheckInterval) {
-      clearInterval(stallCheckInterval);
+  // Single reload path. play() is NOT called here — handleCanPlay does it once
+  // the browser has buffered enough, avoiding DOMException from play()-on-resetting-element.
+  function doReload() {
+    if (!videoElement || isReloading) return;
+    isReloading = true;
+    pendingSeekTime = videoElement.currentTime > 0 ? videoElement.currentTime : null;
+    videoElement.load();
+  }
+
+  // Single recovery path shared by all stall detectors.
+  function tryRecover(source: string) {
+    if (retryCount < MAX_RETRIES) {
+      console.debug(`Video recovery [${source}], attempt ${retryCount + 1}/${MAX_RETRIES}`);
+      retryCount++;
+      doReload();
+    } else {
+      scheduleRetryReset();
     }
+  }
 
+  // After exhausting retries, reset after a delay so the video can recover
+  // rather than staying black forever.
+  function scheduleRetryReset() {
+    if (retryResetTimeout) return;
+    retryResetTimeout = setTimeout(() => {
+      retryResetTimeout = undefined;
+      retryCount = 0;
+      if (!paused) doReload();
+    }, RETRY_RESET_MS);
+  }
+
+  function startStallCheck() {
+    if (stallCheckInterval) clearInterval(stallCheckInterval);
     stallCheckInterval = setInterval(() => {
-      if (videoElement && !paused && isLoaded) {
-        const currentTime = videoElement.currentTime;
-
-        // If time hasn't changed and video should be playing, it's stalled
-        if (
-          currentTime === lastTimeUpdate &&
-          videoElement.readyState < HTMLMediaElement.HAVE_FUTURE_DATA &&
-          retryCount < MAX_RETRIES
-        ) {
-          console.debug("Video appears stalled, attempting recovery");
-          retryCount++;
-          videoElement.load();
-          videoElement.currentTime = currentTime;
-          videoElement.play().catch((err) => {
-            console.error("Failed to resume video after stall:", err);
-          });
-        }
-
-        lastTimeUpdate = currentTime;
+      if (!videoElement || paused || !isLoaded || isReloading) return;
+      const currentTime = videoElement.currentTime;
+      if (
+        Math.abs(currentTime - lastTimeUpdate) < 0.01 &&
+        videoElement.readyState < HTMLMediaElement.HAVE_FUTURE_DATA
+      ) {
+        tryRecover("stall-check");
       }
+      lastTimeUpdate = currentTime;
     }, STALL_CHECK_INTERVAL_MS);
   }
 
-  // Handle pause/play state changes
   $effect(() => {
     if (videoElement && paused !== undefined) {
       if (paused) {
@@ -63,66 +85,41 @@
   });
 
   function handleWaiting() {
-    // Clear any existing timeout
-    if (waitingTimeout) {
-      clearTimeout(waitingTimeout);
-    }
-
-    // Set a timeout to detect if truly stuck
+    if (waitingTimeout) clearTimeout(waitingTimeout);
     waitingTimeout = setTimeout(() => {
-      if (videoElement && retryCount < MAX_RETRIES) {
-        console.debug(`Video stuck in waiting state, retry ${retryCount + 1}/${MAX_RETRIES}`);
-        retryCount++;
-
-        const currentTime = videoElement.currentTime;
-
-        // Full reload to recover from stuck state
-        videoElement.load();
-
-        // Restore position if it wasn't at the beginning
-        if (currentTime > 0) {
-          videoElement.currentTime = currentTime;
-        }
-
-        if (!paused) {
-          videoElement.play().catch((err) => {
-            console.error("Failed to resume video after waiting timeout:", err);
-          });
-        }
-      }
+      waitingTimeout = undefined;
+      tryRecover("waiting");
     }, WAITING_TIMEOUT_MS);
   }
 
   function handlePlaying() {
-    // Clear timeout when playing successfully
     if (waitingTimeout) {
       clearTimeout(waitingTimeout);
       waitingTimeout = undefined;
     }
-    // Reset retry count on successful playback
+    if (retryResetTimeout) {
+      clearTimeout(retryResetTimeout);
+      retryResetTimeout = undefined;
+    }
     retryCount = 0;
+    isReloading = false;
   }
 
   function handleStalled() {
-    // Stalled = browser thinks it can play but isn't fetching data
-    if (videoElement && retryCount < MAX_RETRIES) {
-      console.debug("Video network stalled, forcing reload");
-      retryCount++;
-
-      const currentTime = videoElement.currentTime;
-      videoElement.load();
-      videoElement.currentTime = currentTime;
-
-      if (!paused) {
-        videoElement.play().catch((err) => {
-          console.error("Failed to resume video after stall:", err);
-        });
-      }
-    }
+    if (!videoElement) return;
+    // stalled fires when the buffer is full too; only intervene if readyState is also low.
+    if (videoElement.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) return;
+    tryRecover("stalled");
   }
 
   function handleCanPlay() {
-    if (videoElement && !paused) {
+    isReloading = false;
+    if (!videoElement) return;
+    if (pendingSeekTime !== null) {
+      videoElement.currentTime = pendingSeekTime;
+      pendingSeekTime = null;
+    }
+    if (!paused) {
       videoElement.play().catch((err) => {
         console.error("Failed to play video on canplay:", err);
       });
@@ -135,41 +132,39 @@
   }
 
   function handleError(e: Event) {
+    isReloading = false;
     const target = e.target as HTMLVideoElement;
     const error = target.error;
-
     if (error) {
-      console.error("Video error:", {
-        code: error.code,
-        message: error.message,
-        src: videoSrc,
-      });
-
-      // Attempt recovery on certain errors
-      if (error.code === MediaError.MEDIA_ERR_NETWORK && retryCount < MAX_RETRIES) {
-        console.debug("Network error, attempting recovery");
-        retryCount++;
-        setTimeout(() => {
-          if (videoElement) {
-            videoElement.load();
-            if (!paused) {
-              videoElement.play().catch((err) => {
-                console.error("Failed to recover from network error:", err);
-              });
-            }
-          }
-        }, 1000);
+      console.error("Video error:", { code: error.code, message: error.message, src: videoSrc });
+      if (error.code === MediaError.MEDIA_ERR_NETWORK) {
+        setTimeout(() => tryRecover("network-error"), 1000);
+      } else {
+        scheduleRetryReset();
       }
     }
   }
 
   function handleTimeUpdate() {
-    if (videoElement) {
-      lastTimeUpdate = videoElement.currentTime;
-    }
+    if (videoElement) lastTimeUpdate = videoElement.currentTime;
   }
 
-  onMount(() => {
+  // Reset all recovery state when the video source changes.
+  $effect(() => {
+    videoSrc; // tracked dependency
+    if (waitingTimeout) {
+      clearTimeout(waitingTimeout);
+      waitingTimeout = undefined;
+    }
+    if (retryResetTimeout) {
+      clearTimeout(retryResetTimeout);
+      retryResetTimeout = undefined;
+    }
+    retryCount = 0;
+    lastTimeUpdate = 0;
+    isLoaded = false;
+    isReloading = false;
+    pendingSeekTime = null;
     startStallCheck();
   });
 
@@ -177,19 +172,14 @@
     // Cleanup on unmount to prevent memory leaks
     // https://github.com/facebook/react/issues/15583
     // this is a workaround for a bug in js that causes memory leak on video elements
-    if (waitingTimeout) {
-      clearTimeout(waitingTimeout);
-    }
-    if (stallCheckInterval) {
-      clearInterval(stallCheckInterval);
-    }
+    if (waitingTimeout) clearTimeout(waitingTimeout);
+    if (retryResetTimeout) clearTimeout(retryResetTimeout);
+    if (stallCheckInterval) clearInterval(stallCheckInterval);
     if (videoElement) {
       videoElement.pause();
       videoElement.removeAttribute("src");
       videoElement.load();
-      if (globalThis.gc) {
-        setTimeout(() => globalThis.gc?.(), 100);
-      }
+      if (globalThis.gc) setTimeout(() => globalThis.gc?.(), 100);
     }
   });
 
