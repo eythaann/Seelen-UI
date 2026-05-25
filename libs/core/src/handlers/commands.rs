@@ -257,6 +257,8 @@ slu_commands_declaration! {
     // system tray
     GetSystemTrayIcons = get_system_tray_icons() -> Vec<SysTrayIcon>,
     SendSystemTrayIconAction = send_system_tray_icon_action(id: SysTrayIconId, action: SystrayIconAction),
+    GetPinnedTrayIcons = get_pinned_tray_icons() -> Vec<serde_json::Value>,
+    SetPinnedTrayIcons = set_pinned_tray_icons(pinned_icons: Vec<serde_json::Value>),
 
     // Notifications
     GetNotifications = get_notifications() -> Vec<AppNotification>,

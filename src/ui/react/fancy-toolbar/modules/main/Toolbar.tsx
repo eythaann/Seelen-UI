@@ -50,7 +50,14 @@ export function FancyToolbar() {
 
   const contextMenuDef = useMainContextMenu();
 
-  const onContextMenu = useCallback(() => {
+  const onContextMenu = useCallback((event: MouseEvent) => {
+    const target = event.target as HTMLElement | null;
+    if (target?.closest(".ft-bar-pinned-tray-item")) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
     const alignY = $settings.value.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: { ...contextMenuDef, alignX: Alignment.Center, alignY },

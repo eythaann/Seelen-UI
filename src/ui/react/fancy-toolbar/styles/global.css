@@ -124,6 +124,25 @@ body {
   }
 }
 
+.ft-bar-pinned-tray-item {
+  width: calc(var(--config-item-size) + var(--item-padding) * 2);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--item-padding);
+  border: 0;
+  background: transparent;
+}
+
+.ft-bar-pinned-tray-missing-icon {
+  width: var(--config-item-size);
+  height: var(--config-item-size);
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+}
+
 .ft-corner-button {
   position: absolute;
   z-index: 1;
