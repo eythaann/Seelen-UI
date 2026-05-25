@@ -60,10 +60,16 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
 
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
+      e.preventDefault();
       e.stopPropagation();
-      onContextMenu();
+      const customContextMenu = (module as any).onContextMenu;
+      if (customContextMenu) {
+        EvaluateAction(customContextMenu, scope);
+      } else {
+        onContextMenu();
+      }
     },
-    [onContextMenu],
+    [module, onContextMenu, scope],
   );
 
   const handleWheel = useCallback(
@@ -101,6 +107,7 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
       style={itemStyle}
       className={cx("ft-bar-item", {
         "ft-bar-item-clickable": onClick,
+        "ft-bar-pinned-tray-item": id.startsWith("pinned-tray::"),
       })}
       onClick={handleClick}
       onWheel={onWheelUp || onWheelDown ? handleWheel : undefined}

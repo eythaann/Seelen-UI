@@ -1,10 +1,12 @@
 import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
+import { Fragment } from "preact";
 import { memo } from "preact/compat";
 import { computed } from "@preact/signals";
 
 import { $plugins } from "../shared/state/items.ts";
 import { SortableItem } from "../item/infra/infra.tsx";
 import { isEqual } from "lodash";
+import { PinnedTrayIcons } from "./PinnedTrayIcons.tsx";
 
 const plugins = computed(() => {
   const dict: Record<string, ToolbarItem> = {};
@@ -39,7 +41,12 @@ function GroupComponent({ id, items, startIndex }: Props) {
           module = entry;
         }
 
-        return <SortableItem key={module.id} module={module} index={startIndex + index} />;
+        return (
+          <Fragment key={module.id}>
+            {module.id === "@seelen/tb-system-tray" && <PinnedTrayIcons />}
+            <SortableItem module={module} index={startIndex + index} />
+          </Fragment>
+        );
       })}
     </div>
   );

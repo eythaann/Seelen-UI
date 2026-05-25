@@ -43,21 +43,26 @@ document.addEventListener(
       return;
     }
 
-    const tooltip = target.dataset.tooltip || target.title || target.getAttribute("aria-label");
+    const tooltipTarget = target.closest<HTMLElement>("[data-tooltip], [title], [aria-label]");
+    if (!tooltipTarget) {
+      return;
+    }
+
+    const tooltip = tooltipTarget.dataset.tooltip || tooltipTarget.title || tooltipTarget.getAttribute("aria-label");
     if (!tooltip) {
       return;
     }
 
-    if (target.title) {
-      target.removeAttribute("title");
-      target.dataset["tooltip"] = tooltip;
+    if (tooltipTarget.title) {
+      tooltipTarget.removeAttribute("title");
+      tooltipTarget.dataset["tooltip"] = tooltip;
     }
 
-    lastShownOn = e.target;
+    lastShownOn = tooltipTarget;
     showTooltip(
       tooltip,
-      alignment(target.dataset.tooltipAlignX),
-      alignment(target.dataset.tooltipAlignY),
+      alignment(tooltipTarget.dataset.tooltipAlignX),
+      alignment(tooltipTarget.dataset.tooltipAlignY),
     );
   },
   true,
