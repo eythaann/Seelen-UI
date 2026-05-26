@@ -6,29 +6,15 @@
 
   const today = moment();
 
-  const lang = $derived(globalState.settings.language || "en");
-  const startOfWeek = $derived.by(() => {
-    const startDayMap: Record<string, number> = {
-      Sunday: 0,
-      Monday: 1,
-      Saturday: 6,
-    };
-    const startDay = startDayMap[globalState.settings.startOfWeek] ?? 0;
-    return startDay;
-  });
+  const momentLang = $derived(globalState.momentLang);
 
   // svelte-ignore state_referenced_locally
-  let date = $state(moment().locale(lang));
+  let date = $state(moment().locale(momentLang));
   // svelte-ignore state_referenced_locally
-  let selectedDate = $state(moment().locale(lang));
+  let selectedDate = $state(moment().locale(momentLang));
   $effect(() => {
-    moment.updateLocale(lang, {
-      week: {
-        dow: startOfWeek,
-      },
-    })
-    date = moment().locale(lang);
-    selectedDate = moment().locale(lang);
+    date = moment().locale(momentLang);
+    selectedDate = moment().locale(momentLang);
   });
 
   const weekDays = $derived.by(() => {
@@ -47,8 +33,8 @@
   }
 
   function handleToday() {
-    date = moment().locale(lang);
-    selectedDate = moment().locale(lang);
+    date = moment().locale(momentLang);
+    selectedDate = moment().locale(momentLang);
   }
 
   function toggleViewMode() {

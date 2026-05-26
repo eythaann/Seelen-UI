@@ -2,6 +2,10 @@
 
 ## [2.6.10-dev]
 
+### fix
+
+- some widgets not applying user configured language.
+
 ## [2.6.9]
 
 ### feature

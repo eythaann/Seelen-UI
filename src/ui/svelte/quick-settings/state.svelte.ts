@@ -1,6 +1,17 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { MediaDevice, RadioDevice } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
+import { locale } from "./i18n/index.ts";
+
+const settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
+await settings.init();
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
+});
 
 // Initialize lazy signals
 const brightness = lazyRune(() => invoke(SeelenCommand.GetAllMonitorsBrightness));
