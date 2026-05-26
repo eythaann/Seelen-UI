@@ -31,7 +31,10 @@ $effect.root(() => {
     const momentLang = toMomentLang(lang);
     const startDay = startDayMap[settings.startOfWeek] ?? 0;
 
-    moment.updateLocale(momentLang, { week: { dow: startDay } });
+    moment.updateLocale(momentLang, {
+      week: { dow: startDay },
+      postformat: (str: string) => str,
+    });
   });
 });
 

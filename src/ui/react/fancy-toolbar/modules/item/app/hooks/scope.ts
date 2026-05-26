@@ -123,7 +123,6 @@ export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
 function useDateScope() {
   const momentJsLangMap: { [key: string]: string } = {
     no: "nb",
-    zh: "zh-cn",
   };
 
   const $date_format = useComputed(() => $settings.value.dateFormat);
@@ -131,12 +130,14 @@ function useDateScope() {
   const {
     i18n: { language: lang },
   } = useTranslation();
-  let language = momentJsLangMap[lang] || lang;
+
+  let language = momentJsLangMap[lang] || lang.toLowerCase();
 
   const [date, setDate] = useState(moment().locale(language).format($date_format.value));
 
   // inmediately update the date, like interval is reseted on deps change
   useEffect(() => {
+    moment.updateLocale(language, { postformat: (str: string) => str });
     setDate(moment().locale(language).format($date_format.value));
   }, [$date_format.value, language]);
 
