@@ -24,6 +24,7 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Pin Custom File
+  add_group: New Group
   desktop: Add Desktop Module
   media: Add Media Module
   settings: Settings

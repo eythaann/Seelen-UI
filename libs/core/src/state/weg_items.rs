@@ -7,6 +7,15 @@ use crate::system_state::{Relaunch, RelaunchArguments};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
+pub struct WegFolderItemData {
+    pub id: uuid::Uuid,
+    pub display_name: String,
+    pub color: Option<String>,
+    pub items: Vec<WegItemData>,
+}
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[serde(default, rename_all = "camelCase")]
 pub struct WegItemData {
     /// internal UUID to differentiate items
     pub id: uuid::Uuid,
@@ -30,6 +39,7 @@ pub enum WegItem {
     #[serde(alias = "PinnedApp", alias = "Pinned")]
     DeprecatedOldPinned(OldWegItemData),
     AppOrFile(WegItemData),
+    Folder(WegFolderItemData),
     Separator {
         id: uuid::Uuid,
     },
@@ -51,6 +61,7 @@ pub enum WegItem {
 #[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
 pub enum WegItemType {
     AppOrFile,
+    Folder,
     Separator,
     Media,
     StartMenu,
@@ -63,6 +74,7 @@ impl WegItem {
         match self {
             WegItem::DeprecatedOldPinned(data) => &data.id,
             WegItem::AppOrFile(data) => &data.id,
+            WegItem::Folder(data) => &data.id,
             WegItem::Separator { id } => id,
             WegItem::Media { id } => id,
             WegItem::StartMenu { id } => id,
@@ -75,6 +87,7 @@ impl WegItem {
         match self {
             WegItem::DeprecatedOldPinned(data) => data.id = identifier,
             WegItem::AppOrFile(data) => data.id = identifier,
+            WegItem::Folder(data) => data.id = identifier,
             WegItem::Separator { id } => *id = identifier,
             WegItem::Media { id } => *id = identifier,
             WegItem::StartMenu { id } => *id = identifier,

@@ -10,6 +10,11 @@ await Widget.self.init({
   autoSizeByContent: root,
 });
 
+// Listen for close requests from parent menu
+Widget.self.webview.listen("contextmenu:close", () => {
+  Widget.self.hide();
+});
+
 mount(App, {
   target: root,
 });

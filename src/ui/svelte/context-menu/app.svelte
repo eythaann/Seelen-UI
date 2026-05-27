@@ -7,9 +7,16 @@
   $effect(() => {
     Widget.getCurrent().ready();
   });
+
+  function onMouseLeave() {
+    // Submenus close themselves when the mouse leaves their window
+    if (state.isSubmenu) {
+      Widget.self.hide();
+    }
+  }
 </script>
 
-<div class="slu-std-popover context-menu">
+<div class="slu-std-popover context-menu" onmouseleave={onMouseLeave}>
   {#each state.data?.items || [] as item}
     {#if item.type === "Separator"}
       <hr />

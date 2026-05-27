@@ -1,4 +1,4 @@
-use crate::{resource::ResourceText, state::Alignment, utils::TsUnknown};
+use crate::{resource::ResourceText, state::Alignment, utils::TsUnknown, Point};
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
@@ -13,6 +13,8 @@ pub struct ContextMenu {
     pub align_x: Option<Alignment>,
     /// Alignment of the context menu on the Y axis relative to the trigger point.
     pub align_y: Option<Alignment>,
+    /// Optional desired position in screen coordinates. If set, overrides mouse cursor position.
+    pub desired_position: Option<Point>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
@@ -24,6 +26,8 @@ pub enum ContextMenuItem {
         key: String,
         value: Option<TsUnknown>,
         icon: Option<String>,
+        /// Optional color for the icon (e.g. "#ff0000" or CSS color)
+        icon_color: Option<String>,
         label: String,
         /// event name to be emitted on click, `key` will be sent as payload
         callback_event: String,

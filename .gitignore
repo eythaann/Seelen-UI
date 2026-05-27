@@ -17,3 +17,8 @@ rustc-ice-*.txt
 CLAUDE.md
 GEMINI.md
 .claude
+
+# Dev artifacts
+.codex-run/
+dev.stdout.log
+dev.stderr.log
