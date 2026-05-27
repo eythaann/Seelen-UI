@@ -1,5 +1,5 @@
 import { Settings } from "@seelen-ui/lib";
-import type { Settings as SettingsType } from "@seelen-ui/lib/types";
+import type { Settings as SettingsType, StartOfWeek } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import moment from "moment";
 
@@ -11,7 +11,16 @@ let viewMode = $state<"month" | "year">("month");
 
 const momentJsLangMap: { [key: string]: string } = {
   no: "nb",
-  zh: "zh-cn",
+};
+
+function toMomentLang(lang: string): string {
+  return momentJsLangMap[lang] || lang.toLowerCase();
+}
+
+const startDayMap: Record<StartOfWeek, number> = {
+  Sunday: 0,
+  Monday: 1,
+  Saturday: 6,
 };
 
 $effect.root(() => {
@@ -19,20 +28,12 @@ $effect.root(() => {
     const lang = settings.language || "en";
     locale.set(lang);
 
-    const language = momentJsLangMap[lang] || lang;
-
-    // Update the start of week based on settings
-    const startDayMap: Record<string, number> = {
-      Sunday: 0,
-      Monday: 1,
-      Saturday: 6,
-    };
+    const momentLang = toMomentLang(lang);
     const startDay = startDayMap[settings.startOfWeek] ?? 0;
 
-    moment.updateLocale(language, {
-      week: {
-        dow: startDay,
-      },
+    moment.updateLocale(momentLang, {
+      week: { dow: startDay },
+      postformat: (str: string) => str,
     });
   });
 });
@@ -46,6 +47,9 @@ class State {
   }
   get settings() {
     return settings;
+  }
+  get momentLang() {
+    return toMomentLang(settings.language || "en");
   }
 }
 

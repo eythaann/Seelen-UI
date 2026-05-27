@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.10]
+
+### fix
+
+- some widgets not applying user configured language.
+
 ## [2.6.9]
 
 ### feature

@@ -1,15 +1,18 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import type { FolderType, User } from "@seelen-ui/lib/types";
 import { locale } from "../i18n/index.ts";
-import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
 const widget = Widget.getCurrent();
 
-const settings = writable(await Settings.getAsync());
-Settings.onChange((s) => settings.set(s));
-settings.subscribe((settings) => {
-  locale.set(settings.language || "en");
+const settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
+await settings.init();
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
 });
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));

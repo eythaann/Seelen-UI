@@ -1,13 +1,16 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { AppNotification, NotificationsMode } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
-import { writable } from "svelte/store";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
-let settings = writable(await Settings.getAsync());
-Settings.onChange((s) => settings.set(s));
-settings.subscribe((settings) => {
-  locale.set(settings.language || "en");
+const settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
+await settings.init();
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
 });
 
 let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
