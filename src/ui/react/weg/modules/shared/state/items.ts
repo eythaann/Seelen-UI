@@ -177,4 +177,34 @@ export const $dock_state_actions = {
       $dock_state.value = { ...$dock_state.value, items: newItems };
     }
   },
+  changeFolderColor(id: string, color: string | null) {
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: $dock_state.value.items.map((item) => {
+        if (item.id === id && item.type === WegItemType.Folder) {
+          return { ...item, color };
+        }
+        return item;
+      }),
+    };
+  },
+  createFolder() {
+    const newFolder: WegItem = {
+      id: crypto.randomUUID(),
+      type: WegItemType.Folder,
+      displayName: "New Group",
+      color: null,
+      items: [],
+    };
+    const items = [...$dock_state.value.items];
+    const separatorIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+    items.splice(separatorIdx, 0, newFolder);
+    $dock_state.value = { ...$dock_state.value, items };
+  },
+  deleteFolder(id: string) {
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: $dock_state.value.items.filter((item) => item.id !== id),
+    };
+  },
 };

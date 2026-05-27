@@ -3,6 +3,7 @@ import { move } from "@dnd-kit/helpers";
 import { WegItemType, WegPinnedItemsVisibility, WegTemporalItemsVisibility } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 
+import { FolderItem } from "../item/infra/FolderItem.tsx";
 import { MediaSession } from "../item/infra/MediaSession.tsx";
 import { Separator } from "../item/infra/Separator.tsx";
 import { StartMenu } from "../item/infra/StartMenu.tsx";
@@ -33,6 +34,10 @@ const visibleItems = computed(() => {
     : $interactables.value;
 
   return $dock_state.value.items.filter((item) => {
+    if (item.type === "Folder") {
+      return showPinned;
+    }
+
     if (item.type !== "AppOrFile") {
       return showPinned;
     }
@@ -82,6 +87,10 @@ export function DockItems() {
 function ItemByType(item: SwItem, isOverlay: boolean) {
   if (item.type === WegItemType.AppOrFile) {
     return <UserApplication key={item.id} item={item} isOverlay={isOverlay} />;
+  }
+
+  if (item.type === WegItemType.Folder) {
+    return <FolderItem key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.StartMenu) {

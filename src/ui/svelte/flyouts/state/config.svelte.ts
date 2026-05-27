@@ -1,10 +1,17 @@
 import { Settings, Widget } from "@seelen-ui/lib";
 import { lazyRune } from "libs/ui/svelte/utils";
+import { locale } from "../i18n/index.ts";
 import z from "zod";
 
 let settings = lazyRune(() => Settings.getAsync());
 await Settings.onChange((s) => (settings.value = s));
 await settings.init();
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
+});
 
 const WidgetConfigSchema = z.object({
   placement: z.string(),

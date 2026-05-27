@@ -18,6 +18,7 @@ type BarMenuKey =
   | "add-media-module"
   | "add-trash-bin-module"
   | "add-item"
+  | "add-group"
   | "reorder"
   | "task_manager"
   | "settings";
@@ -38,6 +39,10 @@ async function handleBarMenuClick(key: BarMenuKey) {
 
     case "add-trash-bin-module":
       $dock_state_actions.addTrashBinModule();
+      break;
+
+    case "add-group":
+      $dock_state_actions.createFolder();
       break;
 
     case "reorder":
@@ -114,12 +119,19 @@ export function getSeelenWegMenu(t: TFunction): ContextMenu {
         callbackEvent: onBarMenuClick,
       },
       { type: "Separator" },
-      // --- File pinning ---
+      // --- File pinning & groups ---
       {
         type: "Item",
         key: "add-item",
         icon: "RiFileAddLine",
         label: t("taskbar_menu.add_file"),
+        callbackEvent: onBarMenuClick,
+      },
+      {
+        type: "Item",
+        key: "add-group",
+        icon: "MdCreateNewFolder",
+        label: t("taskbar_menu.add_group"),
         callbackEvent: onBarMenuClick,
       },
       { type: "Separator" },
