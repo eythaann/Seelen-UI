@@ -16,6 +16,8 @@ use crate::{
 use super::spawn_named_thread;
 
 static DISCORD_IPC_CONNECTED: AtomicBool = AtomicBool::new(false);
+static DISCORD_ENABLED: AtomicBool = AtomicBool::new(false);
+static DISCORD_THREAD_RUNNING: AtomicBool = AtomicBool::new(false);
 static START_TIME: LazyLock<i64> = LazyLock::new(|| now_timestamp_as_millis() as i64);
 
 static DETAILS: [&str; 22] = [
@@ -67,27 +69,47 @@ static STATUSES: [&str; 20] = [
 ];
 
 pub fn start_discord_rpc() -> Result<()> {
-    if !FULL_STATE.load().settings.drpc {
+    update_discord_rpc(FULL_STATE.load().settings.drpc)
+}
+
+pub fn update_discord_rpc(enabled: bool) -> Result<()> {
+    DISCORD_ENABLED.store(enabled, Ordering::SeqCst);
+
+    if !enabled {
+        // Signal the inner loop to disconnect; the thread will see DISCORD_ENABLED=false
+        // at the next outer-loop iteration and exit cleanly.
+        DISCORD_IPC_CONNECTED.store(false, Ordering::SeqCst);
         return Ok(());
     }
 
+    // Avoid spawning a second thread if one is already running.
+    if DISCORD_THREAD_RUNNING.load(Ordering::SeqCst) {
+        return Ok(());
+    }
+
+    DISCORD_THREAD_RUNNING.store(true, Ordering::SeqCst);
     spawn_named_thread("Discord IPC", || {
-        let retry_conection_time = if is_local_dev() {
+        let retry_connection_time = if is_local_dev() {
             std::time::Duration::from_secs(5)
         } else {
             std::time::Duration::from_secs(5 * 60) // 5 minutes
         };
 
         loop {
+            if !DISCORD_ENABLED.load(Ordering::SeqCst) {
+                log::info!("Discord RPC disabled, stopping thread");
+                break;
+            }
+
             log::trace!("Trying to connect to Discord IPC");
             let mut client = DiscordIpcClient::new("1384275226652704928").unwrap(); // never fails
 
             if client.connect().is_err() {
                 log::trace!(
                     "Discord RPC not connected, retrying in {} seconds",
-                    retry_conection_time.as_secs()
+                    retry_connection_time.as_secs()
                 );
-                std::thread::sleep(retry_conection_time);
+                std::thread::sleep(retry_connection_time);
                 continue;
             }
 
@@ -115,8 +137,13 @@ pub fn start_discord_rpc() -> Result<()> {
             }
 
             log::info!("Discord IPC disconnected");
-            std::thread::sleep(retry_conection_time);
+            if !DISCORD_ENABLED.load(Ordering::SeqCst) {
+                break;
+            }
+            std::thread::sleep(retry_connection_time);
         }
+
+        DISCORD_THREAD_RUNNING.store(false, Ordering::SeqCst);
     });
     Ok(())
 }

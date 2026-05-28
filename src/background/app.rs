@@ -15,7 +15,10 @@ use crate::{
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{initialize_user_resources_watcher, AppSettings, FULL_STATE},
-    utils::{discord::start_discord_rpc, CRONOMETER},
+    utils::{
+        discord::{start_discord_rpc, update_discord_rpc},
+        CRONOMETER,
+    },
     widgets::{
         manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,
         weg::SeelenWeg,
@@ -97,6 +100,7 @@ impl SeelenUI {
     }
 
     pub fn on_settings_change(state: &AppSettings) -> Result<()> {
+        update_discord_rpc(state.settings.drpc).log_error();
         rust_i18n::set_locale(state.locale());
 
         let widgets = RESOURCES.widgets();
