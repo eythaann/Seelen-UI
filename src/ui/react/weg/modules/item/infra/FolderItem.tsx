@@ -194,7 +194,6 @@ export const FolderItem = memo(({ item }: Props) => {
                   path={entry.relaunch?.icon || entry.path}
                   umid={entry.umid}
                 />
-                <span className="weg-folder-popover-label">{entry.displayName}</span>
                 <button
                   type="button"
                   className="weg-folder-popover-remove"
