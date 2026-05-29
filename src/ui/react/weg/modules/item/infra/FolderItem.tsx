@@ -32,15 +32,15 @@ let pendingFolderId: string | null = null;
 Widget.self.webview.listen(onFolderMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
   if (!pendingFolderId) return;
+  const id = pendingFolderId;
+  pendingFolderId = null;
 
   if (key === "delete_folder") {
-    $dock_state_actions.deleteFolder(pendingFolderId);
+    $dock_state_actions.deleteFolder(id);
   } else if (key.startsWith("color::")) {
     const color = key.slice(7) || null;
-    $dock_state_actions.changeFolderColor(pendingFolderId, color);
+    $dock_state_actions.changeFolderColor(id, color);
   }
-
-  pendingFolderId = null;
 });
 
 export const FolderItem = memo(({ item }: Props) => {
@@ -53,11 +53,35 @@ export const FolderItem = memo(({ item }: Props) => {
       e.stopPropagation();
       pendingFolderId = item.id;
       const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
+
+      // Compute a fixed position relative to the icon element (not the mouse cursor)
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      const dpr = window.devicePixelRatio;
+      const sx = window.screenX;
+      const sy = window.screenY;
+      const position = $settings.value.position;
+      let desiredX: number;
+      let desiredY: number;
+      if (position === "Bottom") {
+        desiredX = (sx + rect.left + rect.width / 2) * dpr; // horizontal center of icon
+        desiredY = (sy + rect.top) * dpr; // top edge of icon (menu opens above)
+      } else if (position === "Top") {
+        desiredX = (sx + rect.left + rect.width / 2) * dpr;
+        desiredY = (sy + rect.bottom) * dpr; // bottom edge (menu opens below)
+      } else if (position === "Left") {
+        desiredX = (sx + rect.right) * dpr; // right edge (menu opens to the right)
+        desiredY = (sy + rect.top + rect.height / 2) * dpr; // vertical center of icon
+      } else {
+        desiredX = (sx + rect.left) * dpr; // left edge (menu opens to the left)
+        desiredY = (sy + rect.top + rect.height / 2) * dpr;
+      }
+
       invoke(SeelenCommand.TriggerContextMenu, {
         menu: {
           identifier,
           alignX,
           alignY,
+          desiredPosition: { x: Math.round(desiredX), y: Math.round(desiredY) },
           items: [
             {
               type: "Submenu",
