@@ -1,6 +1,6 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { dialog } from "@seelen-ui/lib/tauri";
-import type { ContextMenu } from "@seelen-ui/lib/types";
+import { type ContextMenu, WegItemType } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
 import type { WidgetId } from "@seelen-ui/lib/types";
@@ -17,6 +17,10 @@ type BarMenuKey =
   | "add-toggle-desktop-module"
   | "add-media-module"
   | "add-trash-bin-module"
+  | "remove-start-module"
+  | "remove-toggle-desktop-module"
+  | "remove-media-module"
+  | "remove-trash-bin-module"
   | "add-item"
   | "add-group"
   | "reorder"
@@ -39,6 +43,22 @@ async function handleBarMenuClick(key: BarMenuKey) {
 
     case "add-trash-bin-module":
       $dock_state_actions.addTrashBinModule();
+      break;
+
+    case "remove-start-module":
+      $dock_state_actions.removeModuleByType(WegItemType.StartMenu);
+      break;
+
+    case "remove-toggle-desktop-module":
+      $dock_state_actions.removeModuleByType(WegItemType.ShowDesktop);
+      break;
+
+    case "remove-media-module":
+      $dock_state_actions.removeModuleByType(WegItemType.Media);
+      break;
+
+    case "remove-trash-bin-module":
+      $dock_state_actions.removeModuleByType(WegItemType.TrashBin);
       break;
 
     case "add-group":
@@ -84,38 +104,45 @@ Widget.self.webview.listen(onBarMenuClick, ({ payload }) => {
 });
 
 export function getSeelenWegMenu(t: TFunction): ContextMenu {
-  const { isReorderDisabled } = $dock_state.value;
+  const { isReorderDisabled, items } = $dock_state.value;
+
+  const hasStart = items.some((i) => i.type === WegItemType.StartMenu);
+  const hasDesktop = items.some((i) => i.type === WegItemType.ShowDesktop);
+  const hasMedia = items.some((i) => i.type === WegItemType.Media);
+  const hasTrashBin = items.some((i) => i.type === WegItemType.TrashBin);
 
   return {
     identifier,
     items: [
-      // --- Add modules ---
+      // --- Add/Remove modules (toggles based on current state) ---
       {
         type: "Item",
-        key: "add-start-module",
+        key: hasStart ? "remove-start-module" : "add-start-module",
         icon: "BsWindows",
-        label: t("taskbar_menu.start"),
+        label: hasStart ? t("taskbar_menu.remove_start", "Remove Start Module") : t("taskbar_menu.start"),
         callbackEvent: onBarMenuClick,
       },
       {
         type: "Item",
-        key: "add-toggle-desktop-module",
+        key: hasDesktop ? "remove-toggle-desktop-module" : "add-toggle-desktop-module",
         icon: "IoDesktop",
-        label: t("taskbar_menu.desktop"),
+        label: hasDesktop ? t("taskbar_menu.remove_desktop", "Remove Desktop Module") : t("taskbar_menu.desktop"),
         callbackEvent: onBarMenuClick,
       },
       {
         type: "Item",
-        key: "add-media-module",
+        key: hasMedia ? "remove-media-module" : "add-media-module",
         icon: "PiMusicNotesPlusFill",
-        label: t("taskbar_menu.media"),
+        label: hasMedia ? t("taskbar_menu.remove_media", "Remove Media Module") : t("taskbar_menu.media"),
         callbackEvent: onBarMenuClick,
       },
       {
         type: "Item",
-        key: "add-trash-bin-module",
+        key: hasTrashBin ? "remove-trash-bin-module" : "add-trash-bin-module",
         icon: "FaTrashAlt",
-        label: t("taskbar_menu.trash_bin"),
+        label: hasTrashBin
+          ? t("taskbar_menu.remove_trash_bin", "Remove Recycle Bin Module")
+          : t("taskbar_menu.trash_bin"),
         callbackEvent: onBarMenuClick,
       },
       { type: "Separator" },

@@ -35,13 +35,19 @@ pub fn atomic_write_file(path: &Path, content: &[u8]) -> Result<()> {
     let dir = path.parent().ok_or("Path has no parent directory")?;
     create_dir_all(dir)?;
 
-    let tmp_path = path.with_extension("tmp");
+    // Use a unique temp file name so concurrent writes to the same target
+    // (e.g. two monitor instances saving at once) don't share a temp file and
+    // race on the final rename (which would fail with NotFound).
+    let tmp_path = path.with_extension(format!("{}.tmp", uuid::Uuid::new_v4()));
     let mut file = File::create(&tmp_path)?;
     file.write_all(content)?;
     file.flush()?;
     file.sync_all()?;
     drop(file); // must close before rename on Windows
-    std::fs::rename(&tmp_path, path)?;
+    if let Err(err) = std::fs::rename(&tmp_path, path) {
+        let _ = std::fs::remove_file(&tmp_path); // best-effort cleanup
+        return Err(err.into());
+    }
     Ok(())
 }
 

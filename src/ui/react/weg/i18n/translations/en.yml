@@ -9,12 +9,19 @@ app_menu:
   pin_to_center: Pin to Center
   pin_to_left: Pin to Left
   pin_to_right: Pin to Right
+  remove_from_taskbar: Remove from taskbar
   run_as: Run as Administrator
   unpin: Unpin
 context_menu:
   remove_module: Remove Module
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
+folder_item:
+  change_color: Change Color
+  change_icon: Change Icon
+  delete_group: Delete Group
+  remove_from_group: Remove from group
+  reset_icon: Reset Icon
 media:
   label: Media Player
   not_playing: Nothing is playing
@@ -27,6 +34,10 @@ taskbar_menu:
   add_group: New Group
   desktop: Add Desktop Module
   media: Add Media Module
+  remove_desktop: Remove Desktop Module
+  remove_media: Remove Media Module
+  remove_start: Remove Start Module
+  remove_trash_bin: Remove Recycle Bin Module
   settings: Settings
   start: Add Start Module
   task_manager: Task Manager

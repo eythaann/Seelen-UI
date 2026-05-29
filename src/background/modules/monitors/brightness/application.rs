@@ -44,7 +44,16 @@ impl BrightnessManager {
 
         std::thread::spawn(move || {
             let wmi = WMIConnection::with_namespace_path("ROOT\\WMI")?;
-            for event in wmi.notification::<WmiMonitorBrightnessEvent>()? {
+            // Most desktop/external monitors don't expose the WMI brightness class;
+            // bail out quietly instead of logging an error when listening is unsupported.
+            let notifications = match wmi.notification::<WmiMonitorBrightnessEvent>() {
+                Ok(notifications) => notifications,
+                Err(err) => {
+                    log::debug!("Monitor brightness events are not available: {err:?}");
+                    return Result::Ok(());
+                }
+            };
+            for event in notifications {
                 let Ok(_event) = event else {
                     continue;
                 };
@@ -58,7 +67,13 @@ impl BrightnessManager {
             Result::Ok(())
         });
 
-        self.brightness = wmi.query::<WmiMonitorBrightness>()?.into();
+        // A display that doesn't support WMI brightness control (common on
+        // desktops and external monitors) is treated as "no controllable
+        // monitors" rather than an error, to avoid noisy error logs.
+        match wmi.query::<WmiMonitorBrightness>() {
+            Ok(list) => self.brightness = list.into(),
+            Err(err) => log::debug!("Monitor brightness is not available: {err:?}"),
+        }
         Ok(())
     }
 

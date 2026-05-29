@@ -152,7 +152,16 @@ impl WinPreviewManager {
         let addr = window.address();
         log::trace!("capturing window ({addr:x})");
 
-        let buf = capture_window(window.address()).map_err(|_| "Failed to capture window")?;
+        // Some windows can't be captured via BitBlt (protected/hardware-accelerated
+        // content, or a window that isn't ready/just closed). Skip quietly and let the
+        // next capture event retry, instead of logging a noisy error.
+        let buf = match capture_window(window.address()) {
+            Ok(buf) => buf,
+            Err(_) => {
+                log::debug!("Failed to capture window ({addr:x})");
+                return Ok(());
+            }
+        };
         let raw = RgbaImage::from_raw(buf.width, buf.height, buf.pixels)
             .ok_or("Failed to create image")?;
 

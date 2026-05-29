@@ -202,3 +202,131 @@ body {
   padding: 0 !important;
   background-color: transparent !important;
 }
+
+/** Folder / group item */
+.weg-item-folder {
+  position: relative;
+
+  /* Render the folder icon slightly larger than regular dock items. */
+  .weg-item-folder-icon {
+    transform: scale(1.4);
+    transform-origin: center;
+  }
+
+  .weg-item-folder-custom-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &.weg-item-folder-drop-target {
+    filter: brightness(1.2);
+    outline: 2px dashed var(--system-accent-color, #4a9eff);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  .weg-item-folder-count {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 7px;
+    font-size: 9px;
+    line-height: 14px;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(0 0 0 / 60%);
+    pointer-events: none;
+  }
+}
+
+/** Folder hover popover (items aligned vertically) */
+.weg-folder-popover {
+  display: flex;
+  flex-direction: column;
+  gap: var(--config-space-between-items);
+  max-height: 80vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .weg-folder-popover-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      backdrop-filter: brightness(0.92);
+
+      .weg-folder-popover-remove {
+        opacity: 1;
+      }
+    }
+
+    .weg-item-icon {
+      width: var(--config-item-size);
+      height: var(--config-item-size);
+      flex-shrink: 0;
+      /* Wave magnification: grow the actual icon size so the column reflows
+         and neighbours are pushed away (mirrors the dock-wave-animation theme,
+         applied to the vertical folder list). */
+      transition: width 200ms cubic-bezier(0.25, 1, 0.5, 1), height 200ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .weg-folder-popover-remove {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: none;
+      border-radius: 50%;
+      background-color: rgb(0 0 0 / 60%);
+      color: #fff;
+      font-size: 10px;
+      cursor: pointer;
+      opacity: 0;
+
+      &:hover {
+        background-color: rgb(220 50 50 / 90%);
+      }
+    }
+  }
+
+  /* --- Wave magnification (vertical) --- */
+  --wave-1: 1.18; /* hovered item */
+  --wave-2: 1.09; /* immediate neighbours */
+  --wave-3: 1.03; /* second neighbours */
+
+  /* hovered */
+  .weg-folder-popover-item:hover .weg-item-icon {
+    width: calc(var(--config-item-size) * var(--wave-1));
+    height: calc(var(--config-item-size) * var(--wave-1));
+  }
+
+  /* immediate neighbours (next + previous) */
+  .weg-folder-popover-item:hover + .weg-folder-popover-item .weg-item-icon,
+  .weg-folder-popover-item:has(+ .weg-folder-popover-item:hover) .weg-item-icon {
+    width: calc(var(--config-item-size) * var(--wave-2));
+    height: calc(var(--config-item-size) * var(--wave-2));
+  }
+
+  /* second neighbours */
+  .weg-folder-popover-item:hover + .weg-folder-popover-item + .weg-folder-popover-item .weg-item-icon,
+  .weg-folder-popover-item:has(+ .weg-folder-popover-item + .weg-folder-popover-item:hover) .weg-item-icon {
+    width: calc(var(--config-item-size) * var(--wave-3));
+    height: calc(var(--config-item-size) * var(--wave-3));
+  }
+}

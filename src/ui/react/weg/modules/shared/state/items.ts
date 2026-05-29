@@ -115,6 +115,12 @@ export const $dock_state_actions = {
       items: $dock_state.value.items.filter((item) => item.id !== idToRemove),
     };
   },
+  removeModuleByType(type: WegItemType) {
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: $dock_state.value.items.filter((item) => item.type !== type),
+    };
+  },
   pinApp(id: string) {
     $dock_state.value = {
       ...$dock_state.value,
@@ -176,6 +182,53 @@ export const $dock_state_actions = {
       });
       $dock_state.value = { ...$dock_state.value, items: newItems };
     }
+  },
+  moveItemToFolder(itemId: string, folderId: string) {
+    const items = $dock_state.value.items;
+    const moving = items.find(
+      (i) => i.id === itemId && i.type === WegItemType.AppOrFile,
+    );
+    if (!moving || itemId === folderId) return;
+
+    const { type: _type, ...data } = moving as Extract<WegItem, { type: "AppOrFile" }>;
+
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: items
+        .filter((i) => i.id !== itemId)
+        .map((i) => {
+          if (i.id === folderId && i.type === WegItemType.Folder) {
+            if (i.items.some((it) => it.id === data.id)) return i;
+            return { ...i, items: [...i.items, data] };
+          }
+          return i;
+        }),
+    };
+  },
+  removeItemFromFolder(folderId: string, itemId: string) {
+    const items = [...$dock_state.value.items];
+    const folder = items.find(
+      (i): i is Extract<WegItem, { type: "Folder" }> => i.id === folderId && i.type === WegItemType.Folder,
+    );
+    if (!folder) return;
+    const data = folder.items.find((it) => it.id === itemId);
+    if (!data) return;
+
+    const next = items.map((i) => {
+      if (i.id === folderId && i.type === WegItemType.Folder) {
+        return { ...i, items: i.items.filter((it) => it.id !== itemId) };
+      }
+      return i;
+    });
+
+    const restored: WegItem = { type: WegItemType.AppOrFile, ...data };
+    const separatorIdx = next.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+    if (separatorIdx === -1) {
+      next.push(restored);
+    } else {
+      next.splice(separatorIdx, 0, restored);
+    }
+    $dock_state.value = { ...$dock_state.value, items: next };
   },
   changeFolderColor(id: string, color: string | null) {
     $dock_state.value = {

@@ -1,12 +1,50 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { dialog } from "@seelen-ui/lib/tauri";
+import { SeelenWegSide, WegItemType } from "@seelen-ui/lib/types";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { CollisionPriority } from "@dnd-kit/abstract";
+import { useDroppable } from "@dnd-kit/react";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
+import { Popover } from "antd";
 import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { FolderWegItem } from "../../shared/types.ts";
+import type { AppOrFileWegItem, FolderWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
+import { $folder_icon_actions, $folder_icons } from "../../shared/state/folderIcons.ts";
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { launchItem } from "./UserApplicationContextMenu.tsx";
+
+/** Read a local image into a base64 data URL so it can be stored independently of its path. */
+async function importImageAsDataUrl(path: string): Promise<string> {
+  const response = await fetch(convertFileSrc(path));
+  const blob = await response.blob();
+  return await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function pickAndImportFolderIcon(folderId: string) {
+  const selected = await dialog.open({
+    title: "Select an icon",
+    multiple: false,
+    directory: false,
+    filters: [{ name: "Image", extensions: ["png", "jpg", "jpeg", "webp", "gif", "svg", "ico"] }],
+  });
+  const path = Array.isArray(selected) ? selected[0] : selected;
+  if (!path) return;
+  try {
+    const dataUrl = await importImageAsDataUrl(path);
+    $folder_icon_actions.set(folderId, dataUrl);
+  } catch {
+    // ignore import failures (unreadable/invalid image)
+  }
+}
 
 interface Props {
   item: FolderWegItem;
@@ -32,32 +70,84 @@ let pendingFolderId: string | null = null;
 Widget.self.webview.listen(onFolderMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
   if (!pendingFolderId) return;
+  const id = pendingFolderId;
+  pendingFolderId = null;
 
   if (key === "delete_folder") {
-    $dock_state_actions.deleteFolder(pendingFolderId);
+    $dock_state_actions.deleteFolder(id);
+    $folder_icon_actions.remove(id);
+  } else if (key === "change_icon") {
+    pickAndImportFolderIcon(id);
+  } else if (key === "reset_icon") {
+    $folder_icon_actions.remove(id);
   } else if (key.startsWith("color::")) {
     const color = key.slice(7) || null;
-    $dock_state_actions.changeFolderColor(pendingFolderId, color);
+    $dock_state_actions.changeFolderColor(id, color);
   }
-
-  pendingFolderId = null;
 });
+
+function getPopoverPlacement(position: SeelenWegSide) {
+  switch (position) {
+    case SeelenWegSide.Bottom:
+      return "top";
+    case SeelenWegSide.Top:
+      return "bottom";
+    case SeelenWegSide.Left:
+      return "right";
+    case SeelenWegSide.Right:
+      return "left";
+    default:
+      return "top";
+  }
+}
 
 export const FolderItem = memo(({ item }: Props) => {
   const { t } = useTranslation();
 
   const iconColor = item.color ?? "var(--system-accent-color)";
 
+  const { ref: dropRef, isDropTarget } = useDroppable({
+    id: `folder-drop:${item.id}`,
+    type: "folder-drop",
+    accept: WegItemType.AppOrFile,
+    data: { folderId: item.id },
+    collisionPriority: CollisionPriority.Highest,
+  });
+
   const onContextMenu = useCallback(
     (e: MouseEvent) => {
       e.stopPropagation();
       pendingFolderId = item.id;
       const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
+
+      // Compute a fixed position relative to the icon element (not the mouse cursor)
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      const dpr = window.devicePixelRatio;
+      const sx = window.screenX;
+      const sy = window.screenY;
+      const position = $settings.value.position;
+      let desiredX: number;
+      let desiredY: number;
+      if (position === "Bottom") {
+        desiredX = (sx + rect.left + rect.width / 2) * dpr; // horizontal center of icon
+        desiredY = (sy + rect.top) * dpr; // top edge of icon (menu opens above)
+      } else if (position === "Top") {
+        desiredX = (sx + rect.left + rect.width / 2) * dpr;
+        desiredY = (sy + rect.bottom) * dpr; // bottom edge (menu opens below)
+      } else if (position === "Left") {
+        desiredX = (sx + rect.right) * dpr; // right edge (menu opens to the right)
+        desiredY = (sy + rect.top + rect.height / 2) * dpr; // vertical center of icon
+      } else {
+        desiredX = (sx + rect.left) * dpr; // left edge (menu opens to the left)
+        desiredY = (sy + rect.top + rect.height / 2) * dpr;
+      }
+
       invoke(SeelenCommand.TriggerContextMenu, {
         menu: {
           identifier,
           alignX,
           alignY,
+          desiredPosition: { x: Math.round(desiredX), y: Math.round(desiredY) },
           items: [
             {
               type: "Submenu",
@@ -73,6 +163,22 @@ export const FolderItem = memo(({ item }: Props) => {
                 callbackEvent: onFolderMenuClick,
               })),
             },
+            {
+              type: "Item",
+              key: "change_icon",
+              icon: "LuImagePlus",
+              label: t("folder_item.change_icon", "Change Icon"),
+              callbackEvent: onFolderMenuClick,
+            },
+            ...($folder_icons.value[item.id]
+              ? [{
+                type: "Item" as const,
+                key: "reset_icon",
+                icon: "LuImageOff",
+                label: t("folder_item.reset_icon", "Reset Icon"),
+                callbackEvent: onFolderMenuClick,
+              }]
+              : []),
             { type: "Separator" },
             {
               type: "Item",
@@ -89,17 +195,88 @@ export const FolderItem = memo(({ item }: Props) => {
     [item, t],
   );
 
-  return (
+  const customIcon = $folder_icons.value[item.id];
+
+  const folderNode = (
     <div
-      className="weg-item weg-item-folder"
+      ref={dropRef}
+      className={cx("weg-item weg-item-folder", {
+        "weg-item-folder-drop-target": isDropTarget,
+      })}
       onContextMenu={onContextMenu}
     >
-      <Icon
-        className="weg-item-icon weg-item-folder-icon"
-        iconName="BsFolderFill"
-        size="100%"
-        style={{ color: iconColor }}
-      />
+      {customIcon
+        ? (
+          <img
+            className="weg-item-icon weg-item-folder-icon weg-item-folder-custom-icon"
+            src={customIcon}
+            alt={item.displayName}
+          />
+        )
+        : (
+          <Icon
+            className="weg-item-icon weg-item-folder-icon"
+            iconName="BsFolderFill"
+            size="100%"
+            style={{ color: iconColor }}
+          />
+        )}
+      {item.items.length > 0 && <div className="weg-item-folder-count">{item.items.length}</div>}
     </div>
+  );
+
+  // No popover to show when the folder is empty.
+  if (item.items.length === 0) {
+    return folderNode;
+  }
+
+  return (
+    <Popover
+      placement={getPopoverPlacement($settings.value.position)}
+      trigger="hover"
+      arrow={false}
+      getPopupContainer={() => document.getElementById("root") ?? document.body}
+      content={
+        <div
+          className={cx("weg-folder-popover", $settings.value.position.toLowerCase())}
+          onMouseMoveCapture={(e) => e.stopPropagation()}
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
+          {item.items.map((entry) => {
+            const appItem = { type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem;
+            return (
+              <div
+                key={entry.id}
+                className="weg-folder-popover-item"
+                title={entry.displayName}
+                onClick={() => launchItem(appItem, false)}
+              >
+                <FileIcon
+                  className="weg-item-icon"
+                  path={entry.relaunch?.icon || entry.path}
+                  umid={entry.umid}
+                />
+                <button
+                  type="button"
+                  className="weg-folder-popover-remove"
+                  title={t("folder_item.remove_from_group", "Remove from group")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    $dock_state_actions.removeItemFromFolder(item.id, entry.id);
+                  }}
+                >
+                  <Icon iconName="IoClose" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      }
+    >
+      {folderNode}
+    </Popover>
   );
 });
