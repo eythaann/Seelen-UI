@@ -207,6 +207,12 @@ body {
 .weg-item-folder {
   position: relative;
 
+  /* Render the folder icon slightly larger than regular dock items. */
+  .weg-item-folder-icon {
+    transform: scale(1.4);
+    transform-origin: center;
+  }
+
   .weg-item-folder-custom-icon {
     width: 100%;
     height: 100%;
