@@ -11,9 +11,11 @@ const identifier = crypto.randomUUID();
 export function useItemContextMenu(itemId: string) {
   const { t } = useTranslation();
 
-  // Memoize callbackEvent since it only depends on itemId
+  // Memoize callbackEvent since it only depends on itemId.
+  // Tauri event names only allow alphanumeric characters and `-` `/` `:` `_`,
+  // so any other character in the item id is replaced to keep the name valid.
   const callbackEvent = useMemo(
-    () => `context-menu::${itemId.replace("@", "")}`,
+    () => `context-menu::${itemId.replace(/[^a-zA-Z0-9\-/:_]/g, "_")}`,
     [itemId],
   );
 
