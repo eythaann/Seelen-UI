@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.7.0-dev]
+
+### fix
+
+- discord rich presence not inmediately updated after settings change.
+
 ## [2.6.10]
 
 ### fix

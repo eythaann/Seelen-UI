@@ -2493,9 +2493,9 @@ dependencies = [
 
 [[package]]
 name = "interprocess"
-version = "2.3.1"
+version = "2.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53bf2b0e0785c5394a7392f66d7c4fb9c653633c29b27a932280da3cb344c66a"
+checksum = "069323743400cb7ab06a8fe5c1ed911d36b6919ec531661d034c89083629595b"
 dependencies = [
  "doctest-file",
  "futures-core",
@@ -2503,7 +2503,7 @@ dependencies = [
  "recvmsg",
  "tokio",
  "widestring",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -5106,7 +5106,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-core"
-version = "2.6.10"
+version = "2.7.0"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -5128,7 +5128,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "2.6.10"
+version = "2.7.0"
 dependencies = [
  "arc-swap",
  "backtrace",
@@ -5307,9 +5307,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.149"
+version = "1.0.150"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "83fc039473c5595ace860d8c4fafa220ff474b3fc6bfdb4293327f1a37e94d86"
+checksum = "e8014e44b4736ed0538adeecded0fce2a272f22dc9578a7eb6b2d9993c74cfb9"
 dependencies = [
  "itoa",
  "memchr",
