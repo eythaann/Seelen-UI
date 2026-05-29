@@ -25,6 +25,8 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
     } else {
       $dock_state_actions.remove(item.id);
     }
+  } else if (key === "delete") {
+    $dock_state_actions.remove(item.id);
   } else if (key === "pin") {
     $dock_state_actions.pinApp(item.id);
   } else if (key === "run") {
@@ -74,6 +76,13 @@ export function getUserApplicationContextMenu(
         callbackEvent: onAppMenuClick,
       });
     }
+    items.push({
+      type: "Item",
+      key: "delete",
+      icon: "RiDeleteBin6Line",
+      label: t("app_menu.remove_from_taskbar"),
+      callbackEvent: onAppMenuClick,
+    });
     items.push({ type: "Separator" });
   }
 
