@@ -1,5 +1,7 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { dialog } from "@seelen-ui/lib/tauri";
 import { SeelenWegSide, WegItemType } from "@seelen-ui/lib/types";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { useDroppable } from "@dnd-kit/react";
 import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
@@ -11,8 +13,38 @@ import { useTranslation } from "react-i18next";
 import type { AppOrFileWegItem, FolderWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
+import { $folder_icon_actions, $folder_icons } from "../../shared/state/folderIcons.ts";
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { launchItem } from "./UserApplicationContextMenu.tsx";
+
+/** Read a local image into a base64 data URL so it can be stored independently of its path. */
+async function importImageAsDataUrl(path: string): Promise<string> {
+  const response = await fetch(convertFileSrc(path));
+  const blob = await response.blob();
+  return await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function pickAndImportFolderIcon(folderId: string) {
+  const selected = await dialog.open({
+    title: "Select an icon",
+    multiple: false,
+    directory: false,
+    filters: [{ name: "Image", extensions: ["png", "jpg", "jpeg", "webp", "gif", "svg", "ico"] }],
+  });
+  const path = Array.isArray(selected) ? selected[0] : selected;
+  if (!path) return;
+  try {
+    const dataUrl = await importImageAsDataUrl(path);
+    $folder_icon_actions.set(folderId, dataUrl);
+  } catch {
+    // ignore import failures (unreadable/invalid image)
+  }
+}
 
 interface Props {
   item: FolderWegItem;
@@ -43,6 +75,11 @@ Widget.self.webview.listen(onFolderMenuClick, ({ payload }) => {
 
   if (key === "delete_folder") {
     $dock_state_actions.deleteFolder(id);
+    $folder_icon_actions.remove(id);
+  } else if (key === "change_icon") {
+    pickAndImportFolderIcon(id);
+  } else if (key === "reset_icon") {
+    $folder_icon_actions.remove(id);
   } else if (key.startsWith("color::")) {
     const color = key.slice(7) || null;
     $dock_state_actions.changeFolderColor(id, color);
@@ -126,6 +163,22 @@ export const FolderItem = memo(({ item }: Props) => {
                 callbackEvent: onFolderMenuClick,
               })),
             },
+            {
+              type: "Item",
+              key: "change_icon",
+              icon: "LuImagePlus",
+              label: t("folder_item.change_icon", "Change Icon"),
+              callbackEvent: onFolderMenuClick,
+            },
+            ...($folder_icons.value[item.id]
+              ? [{
+                type: "Item" as const,
+                key: "reset_icon",
+                icon: "LuImageOff",
+                label: t("folder_item.reset_icon", "Reset Icon"),
+                callbackEvent: onFolderMenuClick,
+              }]
+              : []),
             { type: "Separator" },
             {
               type: "Item",
@@ -142,6 +195,8 @@ export const FolderItem = memo(({ item }: Props) => {
     [item, t],
   );
 
+  const customIcon = $folder_icons.value[item.id];
+
   const folderNode = (
     <div
       ref={dropRef}
@@ -150,12 +205,22 @@ export const FolderItem = memo(({ item }: Props) => {
       })}
       onContextMenu={onContextMenu}
     >
-      <Icon
-        className="weg-item-icon weg-item-folder-icon"
-        iconName="BsFolderFill"
-        size="100%"
-        style={{ color: iconColor }}
-      />
+      {customIcon
+        ? (
+          <img
+            className="weg-item-icon weg-item-folder-icon weg-item-folder-custom-icon"
+            src={customIcon}
+            alt={item.displayName}
+          />
+        )
+        : (
+          <Icon
+            className="weg-item-icon weg-item-folder-icon"
+            iconName="BsFolderFill"
+            size="100%"
+            style={{ color: iconColor }}
+          />
+        )}
       {item.items.length > 0 && <div className="weg-item-folder-count">{item.items.length}</div>}
     </div>
   );

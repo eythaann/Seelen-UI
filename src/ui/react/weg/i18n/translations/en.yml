@@ -18,8 +18,10 @@ context_menu:
   reorder_enable: Unlock taskbar
 folder_item:
   change_color: Change Color
+  change_icon: Change Icon
   delete_group: Delete Group
   remove_from_group: Remove from group
+  reset_icon: Reset Icon
 media:
   label: Media Player
   not_playing: Nothing is playing

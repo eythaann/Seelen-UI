@@ -207,6 +207,12 @@ body {
 .weg-item-folder {
   position: relative;
 
+  .weg-item-folder-custom-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
   &.weg-item-folder-drop-target {
     filter: brightness(1.2);
     outline: 2px dashed var(--system-accent-color, #4a9eff);
