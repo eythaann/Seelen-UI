@@ -202,3 +202,94 @@ body {
   padding: 0 !important;
   background-color: transparent !important;
 }
+
+/** Folder / group item */
+.weg-item-folder {
+  position: relative;
+
+  &.weg-item-folder-drop-target {
+    filter: brightness(1.2);
+    outline: 2px dashed var(--system-accent-color, #4a9eff);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  .weg-item-folder-count {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    border-radius: 7px;
+    font-size: 9px;
+    line-height: 14px;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(0 0 0 / 60%);
+    pointer-events: none;
+  }
+}
+
+/** Folder hover popover (items aligned vertically) */
+.weg-folder-popover {
+  display: flex;
+  flex-direction: column;
+  gap: var(--config-space-between-items);
+  max-height: 80vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .weg-folder-popover-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      backdrop-filter: brightness(0.92);
+
+      .weg-folder-popover-remove {
+        opacity: 1;
+      }
+    }
+
+    .weg-item-icon {
+      width: var(--config-item-size);
+      height: var(--config-item-size);
+      flex-shrink: 0;
+    }
+
+    .weg-folder-popover-label {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 200px;
+    }
+
+    .weg-folder-popover-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      opacity: 0;
+
+      &:hover {
+        background-color: rgb(255 255 255 / 15%);
+      }
+    }
+  }
+}

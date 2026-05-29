@@ -15,6 +15,10 @@ context_menu:
   remove_module: Remove Module
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
+folder_item:
+  change_color: Change Color
+  delete_group: Delete Group
+  remove_from_group: Remove from group
 media:
   label: Media Player
   not_playing: Nothing is playing

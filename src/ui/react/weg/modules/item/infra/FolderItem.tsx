@@ -1,12 +1,18 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { SeelenWegSide, WegItemType } from "@seelen-ui/lib/types";
+import { CollisionPriority } from "@dnd-kit/abstract";
+import { useDroppable } from "@dnd-kit/react";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { cx } from "libs/ui/react/utils/styling.ts";
+import { Popover } from "antd";
 import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { FolderWegItem } from "../../shared/types.ts";
+import type { AppOrFileWegItem, FolderWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { launchItem } from "./UserApplicationContextMenu.tsx";
 
 interface Props {
   item: FolderWegItem;
@@ -43,10 +49,33 @@ Widget.self.webview.listen(onFolderMenuClick, ({ payload }) => {
   }
 });
 
+function getPopoverPlacement(position: SeelenWegSide) {
+  switch (position) {
+    case SeelenWegSide.Bottom:
+      return "top";
+    case SeelenWegSide.Top:
+      return "bottom";
+    case SeelenWegSide.Left:
+      return "right";
+    case SeelenWegSide.Right:
+      return "left";
+    default:
+      return "top";
+  }
+}
+
 export const FolderItem = memo(({ item }: Props) => {
   const { t } = useTranslation();
 
   const iconColor = item.color ?? "var(--system-accent-color)";
+
+  const { ref: dropRef, isDropTarget } = useDroppable({
+    id: `folder-drop:${item.id}`,
+    type: "folder-drop",
+    accept: WegItemType.AppOrFile,
+    data: { folderId: item.id },
+    collisionPriority: CollisionPriority.Highest,
+  });
 
   const onContextMenu = useCallback(
     (e: MouseEvent) => {
@@ -113,9 +142,12 @@ export const FolderItem = memo(({ item }: Props) => {
     [item, t],
   );
 
-  return (
+  const folderNode = (
     <div
-      className="weg-item weg-item-folder"
+      ref={dropRef}
+      className={cx("weg-item weg-item-folder", {
+        "weg-item-folder-drop-target": isDropTarget,
+      })}
       onContextMenu={onContextMenu}
     >
       <Icon
@@ -124,6 +156,63 @@ export const FolderItem = memo(({ item }: Props) => {
         size="100%"
         style={{ color: iconColor }}
       />
+      {item.items.length > 0 && <div className="weg-item-folder-count">{item.items.length}</div>}
     </div>
+  );
+
+  // No popover to show when the folder is empty.
+  if (item.items.length === 0) {
+    return folderNode;
+  }
+
+  return (
+    <Popover
+      placement={getPopoverPlacement($settings.value.position)}
+      trigger="hover"
+      arrow={false}
+      getPopupContainer={() => document.getElementById("root") ?? document.body}
+      content={
+        <div
+          className={cx("weg-folder-popover", $settings.value.position.toLowerCase())}
+          onMouseMoveCapture={(e) => e.stopPropagation()}
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
+          {item.items.map((entry) => {
+            const appItem = { type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem;
+            return (
+              <div
+                key={entry.id}
+                className="weg-folder-popover-item"
+                title={entry.displayName}
+                onClick={() => launchItem(appItem, false)}
+              >
+                <FileIcon
+                  className="weg-item-icon"
+                  path={entry.relaunch?.icon || entry.path}
+                  umid={entry.umid}
+                />
+                <span className="weg-folder-popover-label">{entry.displayName}</span>
+                <button
+                  type="button"
+                  className="weg-folder-popover-remove"
+                  title={t("folder_item.remove_from_group", "Remove from group")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    $dock_state_actions.removeItemFromFolder(item.id, entry.id);
+                  }}
+                >
+                  <Icon iconName="IoClose" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      }
+    >
+      {folderNode}
+    </Popover>
   );
 });

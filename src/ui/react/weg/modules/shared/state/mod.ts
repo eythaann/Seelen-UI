@@ -2,7 +2,7 @@ import { $interactables, getWindowsForItem } from "./windows.ts";
 import { $dock_state, HARDCODED_SEPARATOR_RIGHT } from "./items.ts";
 import { effect } from "@preact/signals";
 import { WegItemType } from "@seelen-ui/lib/types";
-import type { AppOrFileWegItem } from "../types.ts";
+import type { AppOrFileWegItem, FolderWegItem } from "../types.ts";
 
 effect(() => {
   const interactables = $interactables.value;
@@ -19,10 +19,17 @@ effect(() => {
       .map((item) => item.id),
   );
 
-  // Find windows not covered by any remaining item
+  // Apps living inside folders also "cover" their windows, so we don't recreate
+  // a top-level temporal item for an app that the user moved into a folder.
+  const folderApps = state.items
+    .filter((item): item is FolderWegItem => item.type === WegItemType.Folder)
+    .flatMap((folder) => folder.items.map((entry) => ({ type: WegItemType.AppOrFile, ...entry }) as AppOrFileWegItem));
+
+  // Find windows not covered by any remaining top-level item nor any folder item
   const remainingItems = appOrFileItems.filter((item) => !itemsToRemove.has(item.id));
+  const coveringItems = [...remainingItems, ...folderApps];
   const uncoveredWindows = interactables.filter(
-    (w) => !remainingItems.some((item) => getWindowsForItem(item, [w]).length > 0),
+    (w) => !coveringItems.some((item) => getWindowsForItem(item, [w]).length > 0),
   );
 
   // Group by umid or process path to avoid duplicate items for the same app

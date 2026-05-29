@@ -19,6 +19,7 @@ export function DraggableItem({ children, item, index, ghost }: Props) {
   const sortable = useSortable({
     id: item.id,
     index,
+    type: item.type,
     modifiers: [isHorizontalDock.value ? RestrictToHorizontalAxis : RestrictToVerticalAxis],
   });
 

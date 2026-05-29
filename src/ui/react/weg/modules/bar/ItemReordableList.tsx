@@ -1,5 +1,6 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import { move } from "@dnd-kit/helpers";
+import type { Droppable } from "@dnd-kit/abstract";
 import { WegItemType, WegPinnedItemsVisibility, WegTemporalItemsVisibility } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +12,7 @@ import { UserApplication } from "../item/infra/UserApplication.tsx";
 
 import type { SwItem } from "../shared/types.ts";
 
-import { $dock_state } from "../shared/state/items.ts";
+import { $dock_state, $dock_state_actions } from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";
 import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
 import { $settings } from "../shared/state/settings.ts";
@@ -50,6 +51,21 @@ const visibleItems = computed(() => {
   });
 });
 
+/**
+ * Resolves the folder id for a drop target. A folder exposes two overlapping
+ * droppables: a dedicated "folder-drop" zone and its own sortable droppable
+ * (whose id equals the folder item id). Either may win collision detection,
+ * so we accept both as "drop into folder".
+ */
+function resolveFolderId(target: Droppable | null | undefined): string | undefined {
+  if (!target) return undefined;
+  if (target.type === "folder-drop") {
+    return (target.data as { folderId?: string } | undefined)?.folderId;
+  }
+  const item = $dock_state.value.items.find((i) => i.id === String(target.id));
+  return item?.type === WegItemType.Folder ? item.id : undefined;
+}
+
 export function DockItems() {
   const { t } = useTranslation();
 
@@ -58,8 +74,21 @@ export function DockItems() {
   return (
     <DragDropProvider
       onDragOver={(event) => {
+        const { source, target } = event.operation;
+        // While dragging an app over a folder, don't reorder; let it nest on drop.
+        if (source?.type === WegItemType.AppOrFile && resolveFolderId(target)) {
+          return;
+        }
         const newItems = move($dock_state.value.items, event);
         $dock_state.value = { ...$dock_state.value, items: newItems };
+      }}
+      onDragEnd={(event) => {
+        const { source, target } = event.operation;
+        if (source?.type !== WegItemType.AppOrFile) return;
+        const folderId = resolveFolderId(target);
+        if (folderId && folderId !== String(source.id)) {
+          $dock_state_actions.moveItemToFolder(String(source.id), folderId);
+        }
       }}
     >
       <div className="weg-items">
