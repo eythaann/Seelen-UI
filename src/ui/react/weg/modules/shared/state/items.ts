@@ -115,6 +115,12 @@ export const $dock_state_actions = {
       items: $dock_state.value.items.filter((item) => item.id !== idToRemove),
     };
   },
+  removeModuleByType(type: WegItemType) {
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: $dock_state.value.items.filter((item) => item.type !== type),
+    };
+  },
   pinApp(id: string) {
     $dock_state.value = {
       ...$dock_state.value,

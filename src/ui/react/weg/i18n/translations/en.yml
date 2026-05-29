@@ -27,6 +27,10 @@ taskbar_menu:
   add_group: New Group
   desktop: Add Desktop Module
   media: Add Media Module
+  remove_desktop: Remove Desktop Module
+  remove_media: Remove Media Module
+  remove_start: Remove Start Module
+  remove_trash_bin: Remove Recycle Bin Module
   settings: Settings
   start: Add Start Module
   task_manager: Task Manager
