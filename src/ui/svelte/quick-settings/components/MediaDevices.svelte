@@ -27,10 +27,7 @@
 {#if defaultOutput}
   <div class="quick-settings-item">
     <button data-skin="transparent" onclick={() => toggleMute(defaultOutput!.id)}>
-      <Icon
-        iconName={defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"}
-        size={20}
-      />
+      <Icon iconName={defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"} />
     </button>
     <input
       type="range"
@@ -52,7 +49,7 @@
 {#if defaultInput}
   <div class="quick-settings-item">
     <button data-skin="transparent" onclick={() => toggleMute(defaultInput!.id)}>
-      <Icon iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"} size={20} />
+      <Icon iconName={defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"} />
     </button>
     <input
       type="range"

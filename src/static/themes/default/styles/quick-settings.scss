@@ -15,27 +15,11 @@
       justify-content: center;
       gap: 8px;
 
-      background-color: var(--slu-std-bg-light-color);
-      box-shadow: var(--shadow-s);
       padding: 12px 8px;
       border-radius: 10px;
 
-      cursor: pointer;
       transition: all 0.2s ease;
       min-height: 80px;
-
-      &:hover {
-        background: var(--color-gray-200);
-      }
-
-      &.radio-button-enabled {
-        background-color: var(--slu-std-ui-color);
-        color: var(--color-gray-100);
-
-        &:hover {
-          background-color: var(--slu-std-ui-hover-color);
-        }
-      }
 
       .radio-button-label {
         font-size: 12px;

@@ -14,6 +14,7 @@ src/runtime
 # rust-analyzer
 rustc-ice-*.txt
 
+.codegraph
 CLAUDE.md
 GEMINI.md
 .claude
