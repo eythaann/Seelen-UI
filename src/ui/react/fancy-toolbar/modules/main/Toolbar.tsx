@@ -9,6 +9,7 @@ import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayer
 
 import {
   $plugins,
+  $toolbar_dragging,
   $toolbar_state,
   HARDCODED_SEPARATOR_LEFT,
   HARDCODED_SEPARATOR_RIGHT,
@@ -79,6 +80,12 @@ export function FancyToolbar() {
 
       <DragDropProvider
         sensors={dndSensors}
+        onDragStart={() => {
+          $toolbar_dragging.value = true;
+        }}
+        onDragEnd={() => {
+          $toolbar_dragging.value = false;
+        }}
         onDragOver={(event) => {
           const temp = $toolbar_state.value.items.map((item) => typeof item === "string" ? item : item.id);
           const newItems = move(temp, event);
