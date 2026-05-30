@@ -1,10 +1,12 @@
 import Sandbox from "@nyariv/sandboxjs";
-import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { FileIcon, Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc } from "@tauri-apps/api/core";
+import { useComputed } from "@preact/signals";
 import { memo, useCallback, useMemo } from "preact/compat";
 import { z } from "zod";
 
 import { EvaluateAction } from "../app/actionEvaluator.ts";
+import { $tray_icons } from "../../shared/state/systemTray.ts";
 
 interface SanboxedComponentProps {
   code: string;
@@ -15,6 +17,7 @@ enum ObjectComponentKind {
   Icon = "Icon",
   AppIcon = "AppIcon",
   Image = "Image",
+  TrayIcon = "TrayIcon",
   Button = "Button",
   Group = "Group",
 }
@@ -29,6 +32,7 @@ const ComponentCreatorScope = {
   Icon: (arg: unknown) => EvaluatedReactIconPropsSchema.parse(arg),
   AppIcon: (arg: unknown) => EvaluatedAppIconPropsSchema.parse(arg),
   Image: (arg: unknown) => EvaluatedImagePropsSchema.parse(arg),
+  TrayIcon: (arg: unknown) => EvaluatedTrayIconPropsSchema.parse(arg),
   Button: (arg: unknown) => EvaluatedButtonPropsSchema.parse(arg),
   Group: (arg: unknown) => EvaluatedGroupPropsSchema.parse(arg),
 };
@@ -150,6 +154,8 @@ export const ElementsFromEvaluated = memo(function ElementsFromEvaluated({
               return <EvaluatedAppIcon {...EvaluatedAppIconPropsSchema.parse(content)} />;
             case ObjectComponentKind.Image:
               return <EvaluatedImage {...EvaluatedImagePropsSchema.parse(content)} />;
+            case ObjectComponentKind.TrayIcon:
+              return <EvaluatedTrayIcon {...EvaluatedTrayIconPropsSchema.parse(content)} />;
             case ObjectComponentKind.Button:
               return <EvaluatedButton {...EvaluatedButtonPropsSchema.parse(content)} />;
             case ObjectComponentKind.Group:
@@ -211,6 +217,29 @@ const EvaluatedImagePropsSchema = z.object({
 const EvaluatedImage = memo(function EvaluatedImage({ url, path }: EvaluatedImageProps) {
   const imageSrc = useMemo(() => (path ? convertFileSrc(path) : url || ""), [path, url]);
   return <img src={imageSrc} />;
+});
+
+type EvaluatedTrayIconProps = z.infer<typeof EvaluatedTrayIconPropsSchema>;
+const EvaluatedTrayIconPropsSchema = z.object({
+  "@component": z.literal(ObjectComponentKind.TrayIcon).default(ObjectComponentKind.TrayIcon),
+  // Serialized SysTrayIconId (JSON.stringify of the icon's stable id).
+  id: z.string(),
+});
+const EvaluatedTrayIcon = memo(function EvaluatedTrayIcon({ id }: EvaluatedTrayIconProps) {
+  // Resolve the icon live from the shared tray state so it updates without
+  // rewriting the (persisted) toolbar item.
+  const resolved = useComputed(() => {
+    const item = $tray_icons.value.find((it) => JSON.stringify(it.stable_id) === id);
+    if (!item?.icon_path) return null;
+    // Cache-bust with the image hash so the icon refreshes when its content changes.
+    return convertFileSrc(item.icon_path) + `?hash=${item.icon_image_hash || "null"}`;
+  });
+
+  const src = resolved.value;
+  if (!src) {
+    return <MissingIcon className="ft-bar-pinned-tray-missing-icon" />;
+  }
+  return <img src={src} />;
 });
 
 type EvaluatedAppIconProps = z.infer<typeof EvaluatedAppIconPropsSchema>;

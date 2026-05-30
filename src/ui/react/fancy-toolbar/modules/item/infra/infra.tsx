@@ -58,6 +58,13 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
     }
   }, [onClick, scope]);
 
+  const handleDoubleClick = useCallback(() => {
+    const onDoubleClick = (module as any).onDoubleClick;
+    if (onDoubleClick) {
+      EvaluateAction(onDoubleClick, scope);
+    }
+  }, [module, scope]);
+
   const handleContextMenu = useCallback(
     (e: MouseEvent) => {
       e.preventDefault();
@@ -110,6 +117,7 @@ function InnerItem({ module, extraVars, nodeRef, isDragging = false }: InnerItem
         "ft-bar-pinned-tray-item": id.startsWith("pinned-tray::"),
       })}
       onClick={handleClick}
+      onDblClick={(module as any).onDoubleClick ? handleDoubleClick : undefined}
       onWheel={onWheelUp || onWheelDown ? handleWheel : undefined}
       onContextMenu={handleContextMenu}
     >

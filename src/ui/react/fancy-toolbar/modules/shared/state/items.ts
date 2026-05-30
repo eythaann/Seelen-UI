@@ -19,6 +19,10 @@ interface SyncPayload {
 
 const CLIENT_ID = crypto.randomUUID();
 
+/** True while the user is dragging a toolbar item, so background reconcilers
+ * (e.g. pinned tray icons) can pause and avoid fighting the live reorder. */
+export const $toolbar_dragging = signal(false);
+
 export const HARDCODED_SEPARATOR_LEFT: ToolbarItem = {
   ...baseItem,
   id: "hardcoded-separator-1",
@@ -72,6 +76,10 @@ await PluginList.onChange((list) => {
 let isRemoteUpdate = false;
 listen<SyncPayload>("hidden::sync-toolbar-items", ({ payload }) => {
   if (payload.source === CLIENT_ID) return;
+
+  // Don't let a sync from another monitor overwrite the items while the user is
+  // dragging here — that would snap the dragged item to the remote order.
+  if ($toolbar_dragging.value) return;
 
   if (JSON.stringify(payload.state) !== JSON.stringify($toolbar_state.value)) {
     isRemoteUpdate = true;
