@@ -15,7 +15,21 @@ import type { AppOrFileWegItem, FolderWegItem } from "../../shared/types.ts";
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $folder_icon_actions, $folder_icons } from "../../shared/state/folderIcons.ts";
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { $focused, $interactables, getWindowsForItem } from "../../shared/state/windows.ts";
 import { launchItem } from "./UserApplicationContextMenu.tsx";
+
+/** Renders the same "open sign" (line when focused / dot when running) used by app items. */
+function OpenSign({ windows }: { windows: { hwnd: number }[] }) {
+  if ($settings.value.showWindowTitle) return null;
+  return (
+    <div
+      className={cx("weg-item-open-sign", {
+        "weg-item-open-sign-active": windows.length > 0,
+        "weg-item-open-sign-focused": windows.some((w) => w.hwnd === $focused.value.hwnd),
+      })}
+    />
+  );
+}
 
 /** Read a local image into a base64 data URL so it can be stored independently of its path. */
 async function importImageAsDataUrl(path: string): Promise<string> {
@@ -197,6 +211,11 @@ export const FolderItem = memo(({ item }: Props) => {
 
   const customIcon = $folder_icons.value[item.id];
 
+  // Aggregate window state across all apps inside the folder.
+  const folderWindows = item.items.flatMap((entry) =>
+    getWindowsForItem({ type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem, $interactables.value)
+  );
+
   const folderNode = (
     <div
       ref={dropRef}
@@ -222,6 +241,7 @@ export const FolderItem = memo(({ item }: Props) => {
           />
         )}
       {item.items.length > 0 && <div className="weg-item-folder-count">{item.items.length}</div>}
+      <OpenSign windows={folderWindows} />
     </div>
   );
 
@@ -247,6 +267,7 @@ export const FolderItem = memo(({ item }: Props) => {
         >
           {item.items.map((entry) => {
             const appItem = { type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem;
+            const entryWindows = getWindowsForItem(appItem, $interactables.value);
             return (
               <div
                 key={entry.id}
@@ -259,6 +280,7 @@ export const FolderItem = memo(({ item }: Props) => {
                   path={entry.relaunch?.icon || entry.path}
                   umid={entry.umid}
                 />
+                <OpenSign windows={entryWindows} />
                 <button
                   type="button"
                   className="weg-folder-popover-remove"

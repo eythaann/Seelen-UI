@@ -245,11 +245,41 @@ body {
 
 /** Folder hover popover (items aligned vertically) */
 .weg-folder-popover {
+  /* Match the taskbar background (theme-defined). */
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+  border-radius: 15px;
+  padding: var(--config-padding);
   display: flex;
   flex-direction: column;
   gap: var(--config-space-between-items);
   max-height: 80vh;
   overflow-y: auto;
+
+  /* Self-contained "open sign" for the vertical popover. The theme scopes its
+     own open-sign under `.weg-item`, which the popover items are not, so we
+     define the full indicator here (dot when running, line on the left edge
+     when focused) using the global color tokens. */
+  .weg-folder-popover-item .weg-item-open-sign {
+    position: absolute;
+    inset: auto auto 0 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 6px;
+    background-color: var(--color-gray-600, rgb(150 150 150));
+    opacity: 0;
+    transition: width 0.2s, height 0.2s, opacity 0.2s, background-color 0.2s;
+  }
+
+  .weg-folder-popover-item .weg-item-open-sign-active {
+    opacity: 1;
+  }
+
+  .weg-folder-popover-item .weg-item-open-sign-focused {
+    width: 50%;
+    height: 3px;
+    background-color: var(--system-accent-color);
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -260,7 +290,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    /* extra bottom padding leaves room for the open-sign below the icon */
+    padding: 4px 4px 8px;
     border-radius: 6px;
     cursor: pointer;
 
