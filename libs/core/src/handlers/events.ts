@@ -5,6 +5,7 @@ export enum SeelenEvent {
   GlobalMouseMove = "global-mouse-move",
   SystemMonitorsChanged = "system::monitors-changed",
   SystemLanguagesChanged = "system::languages-changed",
+  SystemImeStateChanged = "system::ime-state-changed",
   SystemMonitorsBrightnessChanged = "system::monitors-brightness-changed",
   UserChanged = "user-changed",
   UserFolderChanged = "user::known-folder-changed",

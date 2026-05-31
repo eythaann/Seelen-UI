@@ -148,6 +148,7 @@ slu_commands_declaration! {
     SystemSetAccentColor = set_system_accent_color(color: Color),
     SystemGetLanguages = get_system_languages() -> Vec<SystemLanguage>,
     SystemSetKeyboardLayout = set_system_keyboard_layout(id: String, handle: String),
+    SystemGetImeState = get_ime_state() -> ImeState,
     RegisterAppBar = register_app_bar(rect: Rect, edge: AppBarEdge),
     UnregisterAppBar = unregister_app_bar(),
 

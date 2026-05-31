@@ -84,6 +84,13 @@ export function useLazyLanguages() {
   });
 }
 
+export function useLazyImeState() {
+  return useLazyState({
+    command: SeelenCommand.SystemGetImeState,
+    event: SeelenEvent.SystemImeStateChanged,
+  });
+}
+
 export function useLazyPowerStatus() {
   return useLazyState({
     command: SeelenCommand.GetPowerStatus,

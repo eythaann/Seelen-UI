@@ -49,8 +49,7 @@
     {#each state.radios as radio (radio.id)}
       <button
         class="radio-button"
-        class:radio-button-enabled={radio.is_enabled}
-        class:radio-button-disabled={!radio.is_enabled}
+        data-skin={radio.is_enabled ? "solid" : "default"}
         onclick={() => toggleRadio(radio)}
         title={`${radio.name} - ${radio.is_enabled ? $t("enabled") : $t("disabled")}`}
       >

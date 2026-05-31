@@ -103,6 +103,7 @@
   }
 
   &.media-session-container {
+    overflow: hidden;
     padding: 0;
 
     &.media-session-container-horizontal {
@@ -114,7 +115,6 @@
     }
 
     .media-session {
-      border-radius: var(--border-radius);
       overflow: hidden;
     }
   }

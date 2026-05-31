@@ -2,9 +2,14 @@
 
 ## [2.7.0-dev]
 
+### enhancements
+
+- keyboard/language selector fixes and improvements (now shows active IME).
+
 ### fix
 
 - discord rich presence not inmediately updated after settings change.
+- inconsistency on styles of dock and quick settings widgets.
 
 ## [2.6.10]
 
