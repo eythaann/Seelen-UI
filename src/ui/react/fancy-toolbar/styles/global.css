@@ -133,14 +133,13 @@ body {
   padding: var(--item-padding);
   border: 0;
   background: transparent;
-}
 
-.ft-bar-pinned-tray-missing-icon {
-  width: var(--config-item-size);
-  height: var(--config-item-size);
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.35;
+  /* When the pinned app isn't running there is no icon to render; collapse the
+     slot entirely (the toolbar item stays in place so it returns to the same
+     spot once the app is running again). */
+  &:not(:has(img)) {
+    display: none;
+  }
 }
 
 .ft-corner-button {
