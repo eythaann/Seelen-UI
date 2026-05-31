@@ -1,5 +1,5 @@
 import Sandbox from "@nyariv/sandboxjs";
-import { FileIcon, Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
+import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { useComputed } from "@preact/signals";
 import { memo, useCallback, useMemo } from "preact/compat";
@@ -236,8 +236,11 @@ const EvaluatedTrayIcon = memo(function EvaluatedTrayIcon({ id }: EvaluatedTrayI
   });
 
   const src = resolved.value;
+  // No live tray icon (app closed / not running yet): render nothing so the
+  // slot collapses (see CSS). The toolbar item itself stays in place, so the
+  // icon reappears in the same spot once the app is running again.
   if (!src) {
-    return <MissingIcon className="ft-bar-pinned-tray-missing-icon" />;
+    return null;
   }
   return <img src={src} />;
 });
