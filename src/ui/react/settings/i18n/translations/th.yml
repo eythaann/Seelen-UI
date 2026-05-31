@@ -291,7 +291,7 @@ wall:
   coverage_pause_threshold: เกณฑ์การหยุดชั่วคราว (ความครอบคลุมของกรอบเวลา)
   create: สร้าง
   create_collection: สร้างคอลเลกชัน
-  default_collection: คอลเลกชันเริ่มต้น
+  default_collection: วอลล์เปเปอร์หรือคอลเลกชันเริ่มต้น
   delete_collection: ลบคอลเลกชั่น
   edit_collection: แก้ไขคอลเลกชัน
   enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
@@ -333,6 +333,7 @@ wall:
   use_accent_color: ใช้สีเน้นวอลเปเปอร์
   wallpaper_collection: คอลเลกชันวอลล์เปเปอร์
   wallpaper_settings: การตั้งค่าวอลเปเปอร์
+  wallpapers: วอลเปเปอร์
   wallpapers_and_collections: วอลเปเปอร์และคอลเลกชัน
   withOverlay: ด้วยการซ้อนทับ
   workspace_collections: คอลเลกชันพื้นที่ทำงาน

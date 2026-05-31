@@ -21,10 +21,28 @@ const bundledAppConfigs = await invoke(SeelenCommand.StateGetSettingsByApp);
 export const appsConfig = computed(() => [...bundledAppConfigs, ...settings.value.byApp]);
 
 export async function saveSettings() {
+  const s = settings.value;
+
+  const referenced = new Set<string>();
+  const wallConfig = s.byWidget["@seelen/wallpaper-manager"];
+  if (wallConfig?.defaultCollection) referenced.add(wallConfig.defaultCollection);
+  Object.values(s.monitorsV3).forEach((m) => {
+    if (m.wallpaperCollection) referenced.add(m.wallpaperCollection);
+    Object.values(m.byWorkspace ?? {}).forEach((ws) => {
+      if (ws.wallpaperCollection) referenced.add(ws.wallpaperCollection);
+    });
+  });
+
+  const cleaned = {
+    ...s,
+    wallpaperCollections: s.wallpaperCollections.filter((c) => !c.hidden || referenced.has(c.id)),
+  };
+
   try {
-    initialSettings.value = JSON.stringify(settings.value);
+    initialSettings.value = JSON.stringify(cleaned);
+    settings.value = cleaned;
     await invoke(SeelenCommand.StateWriteSettings, {
-      settings: settings.value,
+      settings: cleaned,
     });
   } catch (error) {
     Modal.error({

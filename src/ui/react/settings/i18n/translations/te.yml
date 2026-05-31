@@ -303,7 +303,7 @@ wall:
   coverage_pause_threshold: పాజ్ థ్రెషోల్డ్ (విండో కవరేజ్)
   create: సృష్టించు
   create_collection: సేకరణను సృష్టించండి
-  default_collection: డిఫాల్ట్ సేకరణ
+  default_collection: డిఫాల్ట్ వాల్‌పేపర్ లేదా సేకరణ
   delete_collection: సేకరణను తొలగించండి
   edit_collection: సేకరణను సవరించండి
   enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
@@ -347,6 +347,7 @@ wall:
   use_accent_color: వాల్‌పేపర్ యాస రంగును ఉపయోగించండి
   wallpaper_collection: వాల్‌పేపర్ కలెక్షన్
   wallpaper_settings: వాల్‌పేపర్ సెట్టింగ్‌లు
+  wallpapers: వాల్‌పేపర్‌లు
   wallpapers_and_collections: వాల్‌పేపర్‌లు & సేకరణలు
   withOverlay: అతివ్యాప్తితో
   workspace_collections: కార్యస్థల సేకరణలు

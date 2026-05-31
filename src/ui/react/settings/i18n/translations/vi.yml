@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Ngưỡng tạm dừng (phạm vi bao phủ cửa sổ)
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
-  default_collection: Bộ sưu tập mặc định
+  default_collection: Hình nền hoặc bộ sưu tập mặc định
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
   enable: Bật trình quản lý hình nền
@@ -343,6 +343,7 @@ wall:
   use_accent_color: Sử dụng màu nhấn của giấy dán tường
   wallpaper_collection: Bộ sưu tập hình nền
   wallpaper_settings: Cài đặt hình nền
+  wallpapers: Hình nền
   wallpapers_and_collections: Hình nền & Bộ sưu tập
   withOverlay: Với lớp phủ
   workspace_collections: Bộ sưu tập không gian làm việc

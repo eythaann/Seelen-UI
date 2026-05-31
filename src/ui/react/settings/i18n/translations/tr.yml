@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Duraklatma eşiği (pencere kapsamı)
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
-  default_collection: Varsayılan Koleksiyon
+  default_collection: Varsayılan duvar kağıdı veya koleksiyon
   delete_collection: Koleksiyonu Sil
   edit_collection: Koleksiyonu Düzenle
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
@@ -346,6 +346,7 @@ wall:
   use_accent_color: Duvar kağıdı vurgu rengini kullan
   wallpaper_collection: Duvar Kağıdı Koleksiyonu
   wallpaper_settings: Duvar Kağıdı Ayarları
+  wallpapers: Duvar Kağıtları
   wallpapers_and_collections: Duvar Kağıtları ve Koleksiyonlar
   withOverlay: Kaplama ile
   workspace_collections: Çalışma Alanı Koleksiyonları

@@ -307,7 +307,7 @@ wall:
   coverage_pause_threshold: Limite de pausa (cobertura da janela)
   create: Criar
   create_collection: Criar coleção
-  default_collection: Coleção padrão
+  default_collection: Papel de parede ou coleção padrão
   delete_collection: Excluir coleção
   edit_collection: Editar coleção
   enable: Ativar gerente de papel de parede
@@ -349,6 +349,7 @@ wall:
   use_accent_color: Utilize a cor de destaque do papel de parede
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
+  wallpapers: Papéis de parede
   wallpapers_and_collections: Papéis de parede e coleções
   withOverlay: Com sobreposição
   workspace_collections: Coleções de espaço de trabalho

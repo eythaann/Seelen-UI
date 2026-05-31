@@ -305,7 +305,7 @@ wall:
   coverage_pause_threshold: Hranica pozastavenia (pokrytie okna)
   create: Vytvorte
   create_collection: Vytvoriť zbierku
-  default_collection: Predvolená kolekcia
+  default_collection: Predvolená tapeta alebo kolekcia
   delete_collection: Odstrániť zbierku
   edit_collection: Upraviť kolekciu
   enable: Povoliť manažéra tapiet
@@ -349,6 +349,7 @@ wall:
   use_accent_color: Použite akcentovú farbu tapety
   wallpaper_collection: Kolekcia tapiet
   wallpaper_settings: Nastavenia tapety
+  wallpapers: Tapety
   wallpapers_and_collections: Tapety a kolekcie
   withOverlay: S prekrytím
   workspace_collections: Kolekcie pracovného priestoru

@@ -278,7 +278,7 @@ wall:
   coverage_pause_threshold: 일시중지 임계값(창 적용 범위)
   create: 만들다
   create_collection: 컬렉션 만들기
-  default_collection: 기본 컬렉션
+  default_collection: 기본 배경화면 또는 컬렉션
   delete_collection: 컬렉션 삭제
   edit_collection: 컬렉션 편집
   enable: 배경화면 관리자 활성화
@@ -320,6 +320,7 @@ wall:
   use_accent_color: 벽지 강조 색상 사용
   wallpaper_collection: 배경화면 모음
   wallpaper_settings: 배경화면 설정
+  wallpapers: 배경화면
   wallpapers_and_collections: 배경화면 및 컬렉션
   withOverlay: 오버레이 사용
   workspace_collections: 작업공간 컬렉션

@@ -300,7 +300,7 @@ wall:
   coverage_pause_threshold: ផ្អាកកម្រិតកំណត់ (ការគ្របដណ្តប់បង្អួច)
   create: បង្កើត
   create_collection: បង្កើតបណ្តុំ
-  default_collection: ការប្រមូលលំនាំដើម
+  default_collection: ផ្ទាំងរូបភាពឬបណ្តុំលំនាំដើម
   delete_collection: លុបបណ្តុំ
   edit_collection: កែសម្រួលបណ្តុំ
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
@@ -342,6 +342,7 @@ wall:
   use_accent_color: ប្រើពណ៌សង្កត់សំឡេងផ្ទាំងរូបភាព
   wallpaper_collection: ការប្រមូលផ្ទាំងរូបភាព
   wallpaper_settings: ការកំណត់ផ្ទាំងរូបភាព
+  wallpapers: ផ្ទាំងរូបភាព
   wallpapers_and_collections: ផ្ទាំងរូបភាព និងបណ្តុំ
   withOverlay: ជាមួយនឹងការត្រួតលើគ្នា
   workspace_collections: ការប្រមូលកន្លែងធ្វើការ

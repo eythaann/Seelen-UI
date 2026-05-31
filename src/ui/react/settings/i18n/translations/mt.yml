@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Pawża limitu (kopertura tat-tieqa)
   create: Oħloq
   create_collection: Oħloq Ġbir
-  default_collection: Ġbir Default
+  default_collection: Wallpaper default jew ġbir
   delete_collection: Ħassar Ġbir
   edit_collection: Edit Ġbir
   enable: Enable Wallpaper Manager
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Uża l-kulur tal-aċċent tal-wallpaper
   wallpaper_collection: Ġbir tal-wallpaper
   wallpaper_settings: Settings tal-wallpaper
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpapers u Kollezzjonijiet
   withOverlay: Bil-overlay
   workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol

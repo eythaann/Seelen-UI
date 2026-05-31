@@ -268,7 +268,7 @@ wall:
   coverage_pause_threshold: 暫停閾值（視窗覆蓋率）
   create: 創建
   create_collection: 創建收藏
-  default_collection: 默認集合
+  default_collection: 預設壁紙或集合
   delete_collection: 刪除集合
   edit_collection: 編輯收藏
   enable: 啟用桌布管理器
@@ -310,6 +310,7 @@ wall:
   use_accent_color: 使用桌布強調色
   wallpaper_collection: 桌布合集
   wallpaper_settings: 桌布設定
+  wallpapers: 壁紙
   wallpapers_and_collections: 桌布和收藏
   withOverlay: 啟用疊加層
   workspace_collections: 工作區集合

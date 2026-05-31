@@ -303,7 +303,7 @@ wall:
   coverage_pause_threshold: Pausatu atalasea (leihoaren estaldura)
   create: Sortu
   create_collection: Sortu bilduma
-  default_collection: Bilduma lehenetsia
+  default_collection: Horma-paper edo bilduma lehenetsia
   delete_collection: Ezabatu bilduma
   edit_collection: Editatu bilduma
   enable: Gaitu horma-kudeatzailea
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Erabili horma-paperaren azentu kolorea
   wallpaper_collection: Horma-irudi bilduma
   wallpaper_settings: Horma-paperaren ezarpenak
+  wallpapers: Horma-irudiak
   wallpapers_and_collections: Horma-irudiak eta bildumak
   withOverlay: Gainjartzearekin
   workspace_collections: Lan-esparruko bildumak

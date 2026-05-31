@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Pristabdymo slenkstis (lango aprėptis)
   create: Sukurti
   create_collection: Sukurti kolekciją
-  default_collection: Numatytoji kolekcija
+  default_collection: Numatytasis ekrano užsklanda arba kolekcija
   delete_collection: Ištrinti kolekciją
   edit_collection: Redaguoti kolekciją
   enable: Įgalinkite tapetų tvarkytuvę
@@ -344,6 +344,7 @@ wall:
   use_accent_color: Naudokite tapetų akcento spalvą
   wallpaper_collection: Tapetų kolekcija
   wallpaper_settings: Fono nustatymai
+  wallpapers: Užsklandos
   wallpapers_and_collections: Užsklandos ir kolekcijos
   withOverlay: Su perdanga
   workspace_collections: Darbo vietos kolekcijos

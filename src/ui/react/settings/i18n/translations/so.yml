@@ -310,7 +310,7 @@ wall:
   coverage_pause_threshold: Jooji xadka (daaqadda daboolida)
   create: Abuur
   create_collection: Abuur Ururinta
-  default_collection: Ururinta asalka ah
+  default_collection: Warqadda gidaarka ah ama ururinta asalka ah
   delete_collection: Tirtir Ururinta
   edit_collection: Wax ka beddel Ururinta
   enable: Awood u yeelo maamulaha derbiga
@@ -352,6 +352,7 @@ wall:
   use_accent_color: Isticmaal midabka lahjadda gidaarka
   wallpaper_collection: Ururinta Warqadaha
   wallpaper_settings: Dejinta Warqadaha
+  wallpapers: Wallpapers
   wallpapers_and_collections: Warqadaha & Ururinta
   withOverlay: Iyadoo lagu daboolay
   workspace_collections: Ururinta Goobta Shaqada

@@ -299,7 +299,7 @@ wall:
   coverage_pause_threshold: થોભો થ્રેશોલ્ડ (વિન્ડો કવરેજ)
   create: બનાવો
   create_collection: સંગ્રહ બનાવો
-  default_collection: ડિફૉલ્ટ કલેક્શન
+  default_collection: ડિફૉલ્ટ વૉલપેપર અથવા સંગ્રહ
   delete_collection: સંગ્રહ કાઢી નાખો
   edit_collection: સંગ્રહ સંપાદિત કરો
   enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
@@ -341,6 +341,7 @@ wall:
   use_accent_color: વૉલપેપર ઉચ્ચાર રંગનો ઉપયોગ કરો
   wallpaper_collection: વૉલપેપર કલેક્શન
   wallpaper_settings: વૉલપેપર સેટિંગ્સ
+  wallpapers: વૉલપેપર્સ
   wallpapers_and_collections: વૉલપેપર્સ અને સંગ્રહો
   withOverlay: ઓવરલે સાથે
   workspace_collections: વર્કસ્પેસ સંગ્રહો

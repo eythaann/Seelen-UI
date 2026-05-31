@@ -4,19 +4,14 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
-import {
-  getWallConfig,
-  getWallpaperCollections,
-  patchWallConfig,
-  setDefaultWallpaperCollection,
-} from "./application.ts";
+import { getWallConfig, patchWallConfig, setDefaultWallpaperCollection } from "./application.ts";
+import { WallpaperCollectionSelector } from "./WallpaperCollectionSelector.tsx";
 
 import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 
 export function WallSettings() {
   const wall = getWallConfig();
-  const wallpaperCollections = getWallpaperCollections();
   const { enabled, interval } = wall;
 
   const [time, setTime] = useState({
@@ -60,9 +55,20 @@ export function WallSettings() {
           action={
             <Link to="/resources/wallpaper">
               <Button type="primary">
-                <Icon iconName="IoImages" />
+                <Icon iconName="IoArrowForward" />
               </Button>
             </Link>
+          }
+        />
+        <SettingsOption
+          label={t("wall.default_collection")}
+          action={
+            <WallpaperCollectionSelector
+              style={{ width: 200 }}
+              value={wall.defaultCollection}
+              onChange={(value) => setDefaultWallpaperCollection(value)}
+              placeholder="-"
+            />
           }
         />
       </SettingsGroup>
@@ -153,27 +159,6 @@ export function WallSettings() {
             }
           />
         </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption
-          label={t("wall.default_collection")}
-          action={
-            <Select
-              style={{ width: 200 }}
-              value={wall.defaultCollection ?? undefined}
-              onChange={(value) => setDefaultWallpaperCollection(value || null)}
-              placeholder={t("wall.select_collection")}
-              allowClear
-            >
-              {wallpaperCollections.map((collection) => (
-                <Select.Option key={collection.id} value={collection.id}>
-                  {collection.name}
-                </Select.Option>
-              ))}
-            </Select>
-          }
-        />
       </SettingsGroup>
     </>
   );

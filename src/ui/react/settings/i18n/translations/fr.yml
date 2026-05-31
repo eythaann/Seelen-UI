@@ -305,7 +305,7 @@ wall:
   coverage_pause_threshold: Seuil de pause (couverture de la fenêtre)
   create: Créer
   create_collection: Créer une collection
-  default_collection: Collection par défaut
+  default_collection: Fond d'écran ou collection par défaut
   delete_collection: Supprimer la collection
   edit_collection: Modifier la collection
   enable: Activer le gestionnaire de fonds d'écran
@@ -349,6 +349,7 @@ wall:
   use_accent_color: Utiliser la couleur d’accent du papier peint
   wallpaper_collection: Collection de papiers peints
   wallpaper_settings: Paramètres du papier peint
+  wallpapers: Fonds d'écran
   wallpapers_and_collections: Fonds d'écran et collections
   withOverlay: Avec recouvrement
   workspace_collections: Collections d'espaces de travail

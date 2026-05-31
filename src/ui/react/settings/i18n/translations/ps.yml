@@ -295,7 +295,7 @@ wall:
   coverage_pause_threshold: د وقفې حد (د کړکۍ پوښښ)
   create: جوړ کړئ
   create_collection: ټولګه جوړه کړئ
-  default_collection: ډیفالټ ټولګه
+  default_collection: ډیفالټ وال پیپر یا ټولګه
   delete_collection: ټولګه ړنګه کړئ
   edit_collection: ټولګه ترمیم کړئ
   enable: د وال پیپر مدیر فعال کړئ
@@ -337,6 +337,7 @@ wall:
   use_accent_color: د وال پیپر تلفظ رنګ وکاروئ
   wallpaper_collection: د وال پیپر ټولګه
   wallpaper_settings: د وال پیپر ترتیبات
+  wallpapers: وال پیپرونه
   wallpapers_and_collections: وال پیپرونه او ټولګه
   withOverlay: د
   workspace_collections: د کار ځای ټولګه

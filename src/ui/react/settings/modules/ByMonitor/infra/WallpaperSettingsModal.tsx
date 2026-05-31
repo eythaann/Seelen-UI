@@ -1,11 +1,12 @@
 import { useComputed } from "@preact/signals";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { Button, Modal, Select } from "antd";
+import { Button, Modal } from "antd";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { $virtual_desktops } from "../../shared/signals";
 import { setMonitorWallpaperCollection, setWorkspaceWallpaperCollection } from "../../Wall/application.ts";
+import { WallpaperCollectionSelector } from "../../Wall/WallpaperCollectionSelector.tsx";
 import { settings } from "../../../state/mod.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
@@ -16,7 +17,6 @@ interface Props {
 
 export function WallpaperSettingsModal({ monitorId, title }: Props) {
   const [open, setOpen] = useState(false);
-  const wallpaperCollections = settings.value.wallpaperCollections;
   const monitorsV3 = settings.value.monitorsV3;
   const { t } = useTranslation();
 
@@ -41,19 +41,12 @@ export function WallpaperSettingsModal({ monitorId, title }: Props) {
         <SettingsGroup>
           <SettingsOption>
             <b>{t("wall.monitor_collection")}</b>
-            <Select
+            <WallpaperCollectionSelector
               style={{ width: 300 }}
-              value={selectedCollection ?? undefined}
-              onChange={(value) => setMonitorWallpaperCollection(monitorId, value || null)}
+              value={selectedCollection}
+              onChange={(value) => setMonitorWallpaperCollection(monitorId, value)}
               placeholder={t("inherit")}
-              allowClear
-            >
-              {wallpaperCollections.map((collection) => (
-                <Select.Option key={collection.id} value={collection.id}>
-                  {collection.name}
-                </Select.Option>
-              ))}
-            </Select>
+            />
           </SettingsOption>
         </SettingsGroup>
 
@@ -69,19 +62,12 @@ export function WallpaperSettingsModal({ monitorId, title }: Props) {
               return (
                 <SettingsOption key={workspace.id}>
                   <span>{workspace.name || `Workspace ${idx + 1}`}</span>
-                  <Select
+                  <WallpaperCollectionSelector
                     style={{ width: 300 }}
-                    value={workspaceCollection ?? undefined}
-                    onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value || null)}
+                    value={workspaceCollection}
+                    onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value)}
                     placeholder={t("inherit")}
-                    allowClear
-                  >
-                    {wallpaperCollections.map((collection) => (
-                      <Select.Option key={collection.id} value={collection.id}>
-                        {collection.name}
-                      </Select.Option>
-                    ))}
-                  </Select>
+                  />
                 </SettingsOption>
               );
             })}

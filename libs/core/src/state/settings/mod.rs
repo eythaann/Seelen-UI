@@ -541,6 +541,7 @@ impl Settings {
                     id: uuid::Uuid::new_v4(),
                     name: "Migrated".to_string(),
                     wallpapers: backgrounds,
+                    hidden: false,
                 };
 
                 // Set as default collection if no default is set

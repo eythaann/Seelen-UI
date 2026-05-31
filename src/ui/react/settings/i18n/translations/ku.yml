@@ -303,7 +303,7 @@ wall:
   coverage_pause_threshold: Bendavê rawestanê (vegirtina pencereyê)
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
-  default_collection: Berhevoka Bingehîn
+  default_collection: Dîwar an berhevoka xwerû
   delete_collection: Koleksiyonê jêbirin
   edit_collection: Edit Collection
   enable: Gerînendeyê Wallpaper çalak bike
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Rengê devoka dîwarê dîwar bikar bînin
   wallpaper_collection: Collection Wallpaper
   wallpaper_settings: Mîhengên Wallpaper
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpaper & Collections
   withOverlay: Bi sernav
   workspace_collections: Koleksiyonên Cihê Xebatê

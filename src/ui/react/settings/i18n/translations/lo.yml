@@ -294,7 +294,7 @@ wall:
   coverage_pause_threshold: ຢຸດເກນຊົ່ວຄາວ (ການປົກຫຸ້ມຂອງປ່ອງຢ້ຽມ)
   create: ສ້າງ
   create_collection: ສ້າງຄໍເລັກຊັນ
-  default_collection: ການເກັບຄ່າເລີ່ມຕົ້ນ
+  default_collection: ຮູບພື້ນຫຼັງ ຫຼືຄໍເລັກຊັນເລີ່ມຕົ້ນ
   delete_collection: ລຶບຄໍເລັກຊັນ
   edit_collection: ແກ້ໄຂຄໍເລັກຊັນ
   enable: ເປີດໃຊ້ Wallpaper Manager
@@ -336,6 +336,7 @@ wall:
   use_accent_color: ໃຊ້ສີທີ່ເນັ້ນໃສ່ຮູບພື້ນຫຼັງ
   wallpaper_collection: ການເກັບພາບພື້ນຫຼັງ
   wallpaper_settings: ການຕັ້ງຄ່າຮູບວໍເປເປີ
+  wallpapers: ພາບພື້ນຫຼັງ
   wallpapers_and_collections: ພາບພື້ນຫຼັງ & ຄໍເລັກຊັນ
   withOverlay: ດ້ວຍການຊ້ອນກັນ
   workspace_collections: ການເກັບພື້ນທີ່ເຮັດວຽກ

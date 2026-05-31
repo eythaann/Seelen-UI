@@ -309,7 +309,7 @@ wall:
   coverage_pause_threshold: Soglia di pausa (copertura finestra)
   create: Creare
   create_collection: Crea raccolta
-  default_collection: Raccolta predefinita
+  default_collection: Sfondo o raccolta predefinita
   delete_collection: Elimina raccolta
   edit_collection: Modifica raccolta
   enable: Abilita Gestore degli Sfondi
@@ -351,6 +351,7 @@ wall:
   use_accent_color: Usa il colore in risalto della carta da parati
   wallpaper_collection: Collezione di sfondi
   wallpaper_settings: Impostazioni dello sfondo
+  wallpapers: Sfondi
   wallpapers_and_collections: Sfondi e collezioni
   withOverlay: Con sovrapposizione
   workspace_collections: Raccolte di aree di lavoro

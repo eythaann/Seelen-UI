@@ -308,7 +308,7 @@ wall:
   coverage_pause_threshold: Próg pauzy (zasłonięcie okna)
   create: Tworzyć
   create_collection: Utwórz kolekcję
-  default_collection: Kolekcja domyślna
+  default_collection: Domyślna tapeta lub kolekcja
   delete_collection: Usuń kolekcję
   edit_collection: Edytuj kolekcję
   enable: Włącz menedżer tapet
@@ -350,6 +350,7 @@ wall:
   use_accent_color: Użyj koloru akcentującego tapetę
   wallpaper_collection: Kolekcja tapet
   wallpaper_settings: Ustawienia tapety
+  wallpapers: Tapety
   wallpapers_and_collections: Tapety i kolekcje
   withOverlay: Z nakładką
   workspace_collections: Kolekcje obszaru roboczego

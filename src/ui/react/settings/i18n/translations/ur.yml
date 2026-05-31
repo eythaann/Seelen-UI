@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: توقف کی حد (ونڈو کوریج)
   create: تخلیق کریں
   create_collection: مجموعہ بنائیں
-  default_collection: پہلے سے طے شدہ مجموعہ
+  default_collection: پہلے سے طے شدہ وال پیپر یا مجموعہ
   delete_collection: مجموعہ حذف کریں
   edit_collection: مجموعہ میں ترمیم کریں
   enable: وال پیپر مینیجر کو فعال کریں
@@ -344,6 +344,7 @@ wall:
   use_accent_color: وال پیپر کے لہجے کا رنگ استعمال کریں۔
   wallpaper_collection: وال پیپر مجموعہ
   wallpaper_settings: وال پیپر کی ترتیبات
+  wallpapers: وال پیپرز
   wallpapers_and_collections: وال پیپرز اور کلیکشنز
   withOverlay: اوورلے کے ساتھ
   workspace_collections: ورک اسپیس کلیکشن

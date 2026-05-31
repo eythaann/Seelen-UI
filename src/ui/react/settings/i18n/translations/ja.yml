@@ -279,7 +279,7 @@ wall:
   coverage_pause_threshold: 一時停止しきい値 (ウィンドウ カバレッジ)
   create: 作成する
   create_collection: コレクションを作成
-  default_collection: デフォルトのコレクション
+  default_collection: デフォルトの壁紙またはコレクション
   delete_collection: コレクションの削除
   edit_collection: コレクションの編集
   enable: 壁紙マネージャーを有効にする
@@ -321,6 +321,7 @@ wall:
   use_accent_color: 壁紙のアクセントカラーを使用する
   wallpaper_collection: 壁紙コレクション
   wallpaper_settings: 壁紙の設定
+  wallpapers: 壁紙
   wallpapers_and_collections: 壁紙とコレクション
   withOverlay: オーバーレイ付き
   workspace_collections: ワークスペースコレクション

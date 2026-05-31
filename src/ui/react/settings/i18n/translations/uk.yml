@@ -303,7 +303,7 @@ wall:
   coverage_pause_threshold: Поріг паузи (покриття вікна)
   create: Створити
   create_collection: Створити колекцію
-  default_collection: Колекція за замовчуванням
+  default_collection: Шпалери або колекція за умовчанням
   delete_collection: Видалити колекцію
   edit_collection: Редагувати колекцію
   enable: Увімкнути менеджер шпалер
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Використовуйте акцентний колір шпалер
   wallpaper_collection: Колекція шпалер
   wallpaper_settings: Налаштування шпалер
+  wallpapers: Шпалери
   wallpapers_and_collections: Шпалери та колекції
   withOverlay: З накладанням
   workspace_collections: Колекції робочої області

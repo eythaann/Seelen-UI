@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Pragul de pauză (acoperire fereastră)
   create: Crea
   create_collection: Creați o colecție
-  default_collection: Colecție implicită
+  default_collection: Tapet sau colecție implicită
   delete_collection: Șterge colecția
   edit_collection: Editați colecția
   enable: Activați manager de tapet
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Utilizați culoarea de accent pentru tapet
   wallpaper_collection: Colecția de imagini de fundal
   wallpaper_settings: Setări de fundal
+  wallpapers: Imagini de fundal
   wallpapers_and_collections: Imagini de fundal și colecții
   withOverlay: Cu suprapunere
   workspace_collections: Colecții de spațiu de lucru

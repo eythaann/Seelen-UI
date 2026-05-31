@@ -291,7 +291,7 @@ wall:
   coverage_pause_threshold: عتبة الإيقاف المؤقت (تغطية النافذة)
   create: يخلق
   create_collection: إنشاء مجموعة
-  default_collection: المجموعة الافتراضية
+  default_collection: الخلفية الافتراضية أو المجموعة
   delete_collection: حذف المجموعة
   edit_collection: تحرير المجموعة
   enable: تمكين مدير الخلفيات
@@ -333,6 +333,7 @@ wall:
   use_accent_color: استخدام لون لهجة ورق الحائط
   wallpaper_collection: مجموعة خلفيات
   wallpaper_settings: إعدادات ورق الحائط
+  wallpapers: خلفيات
   wallpapers_and_collections: خلفيات ومجموعات
   withOverlay: مع تراكب
   workspace_collections: مجموعات مساحة العمل

@@ -304,7 +304,7 @@ wall:
   coverage_pause_threshold: Դադարի շեմ (պատուհանի ծածկույթ)
   create: Ստեղծել
   create_collection: Ստեղծել Հավաքածու
-  default_collection: Կանխադրված հավաքածու
+  default_collection: Կանխադրված պաստառ կամ հավաքածու
   delete_collection: Ջնջել հավաքածուն
   edit_collection: Խմբագրել հավաքածուն
   enable: Միացրեք Պաստառների կառավարիչը
@@ -346,6 +346,7 @@ wall:
   use_accent_color: Օգտագործեք պաստառի շեշտադրման գույնը
   wallpaper_collection: Պաստառների հավաքածու
   wallpaper_settings: Պաստառի կարգավորումներ
+  wallpapers: Պաստառներ
   wallpapers_and_collections: Պաստառներ և հավաքածուներ
   withOverlay: Ծածկով
   workspace_collections: Աշխատանքային տարածքների հավաքածուներ

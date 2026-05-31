@@ -39,7 +39,7 @@ export function MonitorConfig({ device }: MonitorConfigProps) {
               </div>
             </SettingsOption>
             <SettingsOption>
-              <b>{t("wall.wallpaper_collection")}</b>
+              <b>{t("wall.wallpaper_settings")}</b>
               <WallpaperSettingsModal
                 monitorId={device.id}
                 title={

@@ -305,7 +305,7 @@ wall:
   coverage_pause_threshold: पज थ्रेसहोल्ड (विन्डो कभरेज)
   create: सिर्जना गर्नुहोस्
   create_collection: संग्रह सिर्जना गर्नुहोस्
-  default_collection: पूर्वनिर्धारित संग्रह
+  default_collection: पूर्वनिर्धारित वालपेपर वा संग्रह
   delete_collection: संग्रह मेटाउनुहोस्
   edit_collection: सङ्ग्रह सम्पादन गर्नुहोस्
   enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
@@ -349,6 +349,7 @@ wall:
   use_accent_color: वालपेपर उच्चारण रंग प्रयोग गर्नुहोस्
   wallpaper_collection: वालपेपर संग्रह
   wallpaper_settings: वालपेपर सेटिङहरू
+  wallpapers: वालपेपर
   wallpapers_and_collections: वालपेपर र संग्रह
   withOverlay: ओभरले साथ
   workspace_collections: कार्यक्षेत्र संग्रहहरू

@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Pausgräns (fönstertäckning)
   create: Skapa
   create_collection: Skapa samling
-  default_collection: Standardsamling
+  default_collection: Standard tapet eller samling
   delete_collection: Ta bort samling
   edit_collection: Redigera samling
   enable: Aktivera tapetchef
@@ -343,6 +343,7 @@ wall:
   use_accent_color: Använd tapetaccentfärg
   wallpaper_collection: Tapetsamling
   wallpaper_settings: Bakgrundsinställningar
+  wallpapers: Bakgrundsbilder
   wallpapers_and_collections: Tapeter och samlingar
   withOverlay: Med överlägg
   workspace_collections: Arbetsyta samlingar

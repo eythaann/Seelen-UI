@@ -299,7 +299,7 @@ wall:
   coverage_pause_threshold: විරාම එළිපත්ත (කවුළු ආවරණය)
   create: නිර්මාණය කරන්න
   create_collection: එකතුවක් සාදන්න
-  default_collection: පෙරනිමි එකතුව
+  default_collection: පෙරනිමි බිතුපත හෝ එකතුව
   delete_collection: එකතුව මකන්න
   edit_collection: එකතුව සංස්කරණය කරන්න
   enable: බිතුපත් කළමනාකරු සක්රීය කරන්න
@@ -341,6 +341,7 @@ wall:
   use_accent_color: බිතුපත් උච්චාරණ වර්ණය භාවිතා කරන්න
   wallpaper_collection: බිතුපත් එකතුව
   wallpaper_settings: බිතුපත් සැකසීම්
+  wallpapers: Wallpapers
   wallpapers_and_collections: බිතුපත් සහ එකතු කිරීම්
   withOverlay: ආවරණය සමඟ
   workspace_collections: වැඩ ඉඩ එකතු කිරීම්

@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Pauza həddi (pəncərə əhatəsi)
   create: Yaradın
   create_collection: Kolleksiya yaradın
-  default_collection: Defolt Kolleksiya
+  default_collection: Defolt divar kağızı və ya kolleksiya
   delete_collection: Kolleksiyanı silin
   edit_collection: Kolleksiyaya düzəliş edin
   enable: Divar kağızı menecerini aktivləşdirin
@@ -343,6 +343,7 @@ wall:
   use_accent_color: Divar kağızı vurğu rəngindən istifadə edin
   wallpaper_collection: Divar kağızı Kolleksiyası
   wallpaper_settings: Divar kağızı Parametrləri
+  wallpapers: Divar kağızları
   wallpapers_and_collections: Divar kağızları və kolleksiyalar
   withOverlay: Örtülü ilə
   workspace_collections: İş sahəsi kolleksiyaları

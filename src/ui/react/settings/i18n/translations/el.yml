@@ -311,7 +311,7 @@ wall:
   coverage_pause_threshold: Όριο παύσης (κάλυψη παραθύρου)
   create: Δημιουργώ
   create_collection: Δημιουργία συλλογής
-  default_collection: Προεπιλεγμένη συλλογή
+  default_collection: Προεπιλεγμένη ταπετσαρία ή συλλογή
   delete_collection: Διαγραφή συλλογής
   edit_collection: Επεξεργασία συλλογής
   enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
@@ -355,6 +355,7 @@ wall:
   use_accent_color: Χρησιμοποιήστε χρώμα έμφασης ταπετσαρίας
   wallpaper_collection: Συλλογή ταπετσαριών
   wallpaper_settings: Ρυθμίσεις ταπετσαρίας
+  wallpapers: Ταπετσαρίες
   wallpapers_and_collections: Ταπετσαρίες & Συλλογές
   withOverlay: Με επικάλυψη
   workspace_collections: Συλλογές χώρου εργασίας

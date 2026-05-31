@@ -297,7 +297,7 @@ wall:
   coverage_pause_threshold: Pause threshold (window coverage)
   create: Create
   create_collection: Create Collection
-  default_collection: Default Collection
+  default_collection: Default wallpaper or collection
   delete_collection: Delete Collection
   edit_collection: Edit Collection
   enable: Enable Wallpaper Manager
@@ -339,6 +339,7 @@ wall:
   use_accent_color: Use wallpaper accent color
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpapers & Collections
   withOverlay: With Overlay
   workspace_collections: Workspace Collections

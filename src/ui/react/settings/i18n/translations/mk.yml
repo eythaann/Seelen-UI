@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Праг на пауза (покриеност на прозорецот)
   create: Креирај
   create_collection: Креирај колекција
-  default_collection: Стандардна колекција
+  default_collection: Стандардна позадина или колекција
   delete_collection: Избришете ја колекцијата
   edit_collection: Уреди колекција
   enable: Овозможете менаџер на тапети
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Користете боја на акцент на позадина
   wallpaper_collection: Колекција на тапети
   wallpaper_settings: Поставки за позадина
+  wallpapers: Позадини
   wallpapers_and_collections: Позадини и колекции
   withOverlay: Со преклоп
   workspace_collections: Колекции на работниот простор

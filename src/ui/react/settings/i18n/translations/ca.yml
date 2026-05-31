@@ -308,7 +308,7 @@ wall:
   coverage_pause_threshold: Llindar de pausa (cobertura de la finestra)
   create: Crear
   create_collection: Crea col·lecció
-  default_collection: Col·lecció per defecte
+  default_collection: Fons de pantalla o col·lecció per defecte
   delete_collection: Suprimeix la col·lecció
   edit_collection: Edita la col·lecció
   enable: Activa el gestor de fons de pantalla
@@ -350,6 +350,7 @@ wall:
   use_accent_color: Utilitzeu el color d'accent del fons de pantalla
   wallpaper_collection: Col·lecció de fons de pantalla
   wallpaper_settings: Configuració del fons de pantalla
+  wallpapers: Fons de pantalla
   wallpapers_and_collections: Fons de pantalla i col·leccions
   withOverlay: Amb superposició
   workspace_collections: Col·leccions d'espais de treball

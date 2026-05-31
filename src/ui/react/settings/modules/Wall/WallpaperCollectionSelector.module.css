@@ -1,0 +1,13 @@
+.entry {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 30px 1fr;
+  padding: var(--spacing-xs) 0;
+  gap: var(--spacing-xs);
+
+  .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

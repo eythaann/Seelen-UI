@@ -299,7 +299,7 @@ wall:
   coverage_pause_threshold: Peatamise lävi (akna katvus)
   create: Loo
   create_collection: Loo kollektsioon
-  default_collection: Vaikekogu
+  default_collection: Vaike taustpilt või kogu
   delete_collection: Kustuta kogu
   edit_collection: Redigeeri kogu
   enable: Luba tapeedihaldur
@@ -341,6 +341,7 @@ wall:
   use_accent_color: Kasutage tapeedi aktsentvärvi
   wallpaper_collection: Tapeedikogu
   wallpaper_settings: Taustapildi seaded
+  wallpapers: Taustapildid
   wallpapers_and_collections: Taustapildid ja kollektsioonid
   withOverlay: Koos kattekihiga
   workspace_collections: Tööruumi kogud

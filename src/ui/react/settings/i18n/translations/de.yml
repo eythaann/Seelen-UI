@@ -311,7 +311,7 @@ wall:
   coverage_pause_threshold: Pausenschwelle (Fensterabdeckung)
   create: Erstellen
   create_collection: Sammlung erstellen
-  default_collection: Standardsammlung
+  default_collection: Standardhintergrund oder -sammlung
   delete_collection: Sammlung löschen
   edit_collection: Sammlung bearbeiten
   enable: Tapetenmanager aktivieren
@@ -355,6 +355,7 @@ wall:
   use_accent_color: Verwenden Sie eine Akzentfarbe für die Tapete
   wallpaper_collection: Tapetensammlung
   wallpaper_settings: Hintergrundeinstellungen
+  wallpapers: Hintergrundbilder
   wallpapers_and_collections: Hintergrundbilder und Sammlungen
   withOverlay: Mit Overlay
   workspace_collections: Arbeitsbereichssammlungen

@@ -287,7 +287,7 @@ wall:
   coverage_pause_threshold: ገደብ ባለበት አቁም (የመስኮት ሽፋን)
   create: ፍጠር
   create_collection: ስብስብ ይፍጠሩ
-  default_collection: ነባሪ ስብስብ
+  default_collection: ነባሪ ልጣፍ ወይም ስብስብ
   delete_collection: ስብስብን ሰርዝ
   edit_collection: ስብስብ አርትዕ
   enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
@@ -329,6 +329,7 @@ wall:
   use_accent_color: የግድግዳ ወረቀት የአነጋገር ቀለም ይጠቀሙ
   wallpaper_collection: የግድግዳ ወረቀት ስብስብ
   wallpaper_settings: የግድግዳ ወረቀት ቅንጅቶች
+  wallpapers: የግድግዳ ወረቀቶች
   wallpapers_and_collections: የግድግዳ ወረቀቶች እና ስብስቦች
   withOverlay: በተደራቢ
   workspace_collections: የስራ ቦታ ስብስቦች

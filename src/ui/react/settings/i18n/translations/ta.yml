@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: இடைநிறுத்த வாசல் (சாளர கவரேஜ்)
   create: உருவாக்கு
   create_collection: சேகரிப்பை உருவாக்கவும்
-  default_collection: இயல்புநிலை சேகரிப்பு
+  default_collection: இயல்புநிலை வால்பேப்பர் அல்லது சேகரிப்பு
   delete_collection: சேகரிப்பை நீக்கு
   edit_collection: தொகுப்பைத் திருத்து
   enable: வால்பேப்பர் மேலாளரை இயக்கவும்
@@ -350,6 +350,7 @@ wall:
   use_accent_color: வால்பேப்பர் உச்சரிப்பு வண்ணத்தைப் பயன்படுத்தவும்
   wallpaper_collection: வால்பேப்பர் சேகரிப்பு
   wallpaper_settings: வால்பேப்பர் அமைப்புகள்
+  wallpapers: வால்பேப்பர்கள்
   wallpapers_and_collections: வால்பேப்பர்கள் & தொகுப்புகள்
   withOverlay: மேலடுக்கு
   workspace_collections: பணியிட தொகுப்புகள்

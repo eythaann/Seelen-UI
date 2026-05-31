@@ -307,7 +307,7 @@ wall:
   coverage_pause_threshold: सीमा रोकें (विंडो कवरेज)
   create: बनाएं
   create_collection: संग्रह बनाएँ
-  default_collection: डिफ़ॉल्ट संग्रह
+  default_collection: डिफ़ॉल्ट वॉलपेपर या संग्रह
   delete_collection: संग्रह हटाएँ
   edit_collection: संग्रह संपादित करें
   enable: वॉलपेपर प्रबंधक सक्षम करें
@@ -349,6 +349,7 @@ wall:
   use_accent_color: वॉलपेपर एक्सेंट रंग का प्रयोग करें
   wallpaper_collection: वॉलपेपर संग्रह
   wallpaper_settings: वॉलपेपर सेटिंग्स
+  wallpapers: वॉलपेपर
   wallpapers_and_collections: वॉलपेपर और संग्रह
   withOverlay: ओवरले के साथ
   workspace_collections: कार्यक्षेत्र संग्रह

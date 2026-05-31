@@ -303,7 +303,7 @@ wall:
   coverage_pause_threshold: Jeda ambang (liputan tetingkap)
   create: Buat
   create_collection: Buat Koleksi
-  default_collection: Koleksi Lalai
+  default_collection: Kertas dinding atau koleksi lalai
   delete_collection: Padamkan Koleksi
   edit_collection: Edit Koleksi
   enable: Dayakan Pengurus Wallpaper
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Gunakan warna aksen kertas dinding
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Tetapan Kertas Dinding
+  wallpapers: Kertas dinding
   wallpapers_and_collections: Kertas dinding & Koleksi
   withOverlay: Dengan overlay
   workspace_collections: Koleksi Ruang Kerja

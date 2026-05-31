@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Pauzedrempel (vensterdekking)
   create: Creëren
   create_collection: Verzameling maken
-  default_collection: Standaardcollectie
+  default_collection: Standaard wallpaper of collectie
   delete_collection: Verzameling verwijderen
   edit_collection: Verzameling bewerken
   enable: Schakel wallpaper manager in
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Gebruik de accentkleur van het behang
   wallpaper_collection: Behangcollectie
   wallpaper_settings: Achtergrondinstellingen
+  wallpapers: Achtergronden
   wallpapers_and_collections: Achtergronden en collecties
   withOverlay: Met overlay
   workspace_collections: Werkruimtecollecties

@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Ambang batas jeda (cakupan jendela)
   create: Membuat
   create_collection: Buat Koleksi
-  default_collection: Koleksi Bawaan
+  default_collection: Wallpaper atau koleksi default
   delete_collection: Hapus Koleksi
   edit_collection: Sunting Koleksi
   enable: Aktifkan Manajer Wallpaper
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Gunakan warna aksen wallpaper
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Pengaturan Wallpaper
+  wallpapers: Wallpaper
   wallpapers_and_collections: Wallpaper & Koleksi
   withOverlay: Dengan Overlay
   workspace_collections: Koleksi Ruang Kerja

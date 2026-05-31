@@ -23,7 +23,7 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../compon
 export function AllWallpapersView() {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState("");
-  const wallpaperCollections = getWallpaperCollections();
+  const wallpaperCollections = getWallpaperCollections().filter((c) => !c.hidden);
 
   const [editingCollectionId, setEditingCollectionId] = useState<string | null>(null);
   const [editingCollectionName, setEditingCollectionName] = useState("");
@@ -57,6 +57,7 @@ export function AllWallpapersView() {
       id: crypto.randomUUID(),
       name: newCollectionName.trim(),
       wallpapers: [],
+      hidden: false,
     });
     setIsCreatingCollection(false);
     setNewCollectionName("");

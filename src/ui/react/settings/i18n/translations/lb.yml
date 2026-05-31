@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Pause-Schwell (Fënsterofdeckung)
   create: Schafen
   create_collection: Schafen Kollektioun
-  default_collection: Standard Kollektioun
+  default_collection: Standard Tapeten oder Sammlung
   delete_collection: Läschen Kollektioun
   edit_collection: Kollektioun änneren
   enable: Aktivéiert Wallpaper Manager
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Benotzt Tapeten Akzentfaarf
   wallpaper_collection: Wallpaper Kollektioun
   wallpaper_settings: Wallpaper Astellunge
+  wallpapers: Tapeten
   wallpapers_and_collections: Tapeten & Sammlungen
   withOverlay: Mat Overlay
   workspace_collections: Aarbechtsberäich Kollektiounen

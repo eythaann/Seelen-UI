@@ -300,7 +300,7 @@ wall:
   coverage_pause_threshold: Pausegrænse (vinduesdækning)
   create: Skabe
   create_collection: Opret samling
-  default_collection: Standard samling
+  default_collection: Standard tapet eller samling
   delete_collection: Slet samling
   edit_collection: Rediger samling
   enable: Aktivér tapet manager
@@ -342,6 +342,7 @@ wall:
   use_accent_color: Brug tapet accentfarve
   wallpaper_collection: Tapet samling
   wallpaper_settings: Baggrundsindstillinger
+  wallpapers: Baggrunde
   wallpapers_and_collections: Baggrunde og samlinger
   withOverlay: Med overlay
   workspace_collections: Arbejdsrumssamlinger

@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Pauseterskel (vindusdekning)
   create: Skape
   create_collection: Opprett samling
-  default_collection: Standard samling
+  default_collection: Standard tapet eller samling
   delete_collection: Slett samling
   edit_collection: Rediger samling
   enable: Aktiver bakgrunnssjef
@@ -344,6 +344,7 @@ wall:
   use_accent_color: Bruk bakgrunnsfarge
   wallpaper_collection: Tapet samling
   wallpaper_settings: Bakgrunnsinnstillinger
+  wallpapers: Bakgrunnsbilder
   wallpapers_and_collections: Bakgrunnsbilder og samlinger
   withOverlay: Med overlegg
   workspace_collections: Arbeidsområdesamlinger

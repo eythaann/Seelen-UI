@@ -230,7 +230,7 @@ wall.corrupted_wallpapers_message: ff8a246
 wall.coverage_pause_threshold: 6f256adc
 wall.create: e2112a8
 wall.create_collection: 656a66f0
-wall.default_collection: 22a069d0
+wall.default_collection: 16b8e576
 wall.delete_collection: ee564982
 wall.edit_collection: 9854bd88
 wall.enable: 1658ea1e
@@ -270,6 +270,7 @@ wall.thumbnail_generation_finished: c0572627
 wall.use_accent_color: 97fa88a8
 wall.wallpaper_collection: 276aadb8
 wall.wallpaper_settings: ef077e2d
+wall.wallpapers: '60830054'
 wall.wallpapers_and_collections: aaceb628
 wall.withOverlay: e6e749f8
 wall.workspace_collections: cd1ad7b4

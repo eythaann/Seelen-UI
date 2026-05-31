@@ -163,9 +163,10 @@ impl Wallpaper {
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
-#[serde(rename_all = "camelCase")]
+#[serde(default, rename_all = "camelCase")]
 pub struct WallpaperCollection {
     pub id: Uuid,
     pub name: String,
     pub wallpapers: Vec<WallpaperId>,
+    pub hidden: bool,
 }

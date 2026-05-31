@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: პაუზის ზღვარი (ფანჯრის დაფარვა)
   create: შექმნა
   create_collection: შექმენით კოლექცია
-  default_collection: ნაგულისხმევი კოლექცია
+  default_collection: ნაგულისხმევი ფონი ან კოლექცია
   delete_collection: კოლექციის წაშლა
   edit_collection: კოლექციის რედაქტირება
   enable: ჩართეთ ფონი მენეჯერი
@@ -344,6 +344,7 @@ wall:
   use_accent_color: გამოიყენეთ ფონის აქცენტის ფერი
   wallpaper_collection: ფონების კოლექცია
   wallpaper_settings: ფონი პარამეტრები
+  wallpapers: ფონები
   wallpapers_and_collections: ფონები და კოლექციები
   withOverlay: გადახურვით
   workspace_collections: სამუშაო სივრცის კოლექციები

@@ -298,7 +298,7 @@ wall:
   coverage_pause_threshold: Sitisha kiwango cha juu (ufunikaji wa dirisha)
   create: Unda
   create_collection: Unda Mkusanyiko
-  default_collection: Mkusanyiko Chaguomsingi
+  default_collection: Mandhari chaguomsingi au mkusanyiko
   delete_collection: Futa Mkusanyiko
   edit_collection: Hariri Mkusanyiko
   enable: Washa Meneja wa Ukuta
@@ -340,6 +340,7 @@ wall:
   use_accent_color: Tumia rangi ya lafudhi ya mandhari
   wallpaper_collection: Ukusanyaji wa Mandhari
   wallpaper_settings: Mipangilio ya Mandhari
+  wallpapers: Mandhari
   wallpapers_and_collections: Mandhari na Mikusanyiko
   withOverlay: Na overlay
   workspace_collections: Mikusanyiko ya Nafasi ya Kazi

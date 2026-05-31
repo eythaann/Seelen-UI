@@ -294,7 +294,7 @@ wall:
   coverage_pause_threshold: Duro ẹnu-ọna (agbegbe ferese)
   create: Ṣẹda
   create_collection: Ṣẹda Gbigba
-  default_collection: Gbigba aiyipada
+  default_collection: Iṣẹṣọ ogiri aiyipada tabi gbigba
   delete_collection: Pa Gbigba
   edit_collection: Ṣatunkọ Gbigba
   enable: Mu oluṣakoso ogiri ṣiṣẹ
@@ -336,6 +336,7 @@ wall:
   use_accent_color: Lo awọ asẹnti iṣẹṣọ ogiri
   wallpaper_collection: Gbigba ogiri
   wallpaper_settings: Eto Iṣẹṣọ ogiri
+  wallpapers: Iṣẹṣọ ogiri
   wallpapers_and_collections: Iṣẹṣọ ogiri & Awọn akojọpọ
   withOverlay: Pẹlu apọju
   workspace_collections: Awọn akojọpọ aaye iṣẹ

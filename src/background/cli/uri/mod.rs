@@ -263,6 +263,7 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
                             id: Uuid::new_v4(),
                             name: display_name.clone(),
                             wallpapers: vec![used_id.clone().into()],
+                            hidden: true,
                         };
                         state.settings.by_widget.wall.default_collection = Some(collection.id);
                         state.settings.wallpaper_collections.push(collection);

@@ -300,7 +300,7 @@ wall:
   coverage_pause_threshold: آستانه مکث (پوشش پنجره)
   create: ایجاد کنید
   create_collection: ایجاد مجموعه
-  default_collection: مجموعه پیش‌فرض
+  default_collection: تصویر زمینه یا مجموعه پیش فرض
   delete_collection: حذف مجموعه
   edit_collection: ویرایش مجموعه
   enable: مدیر تصویر زمینه را فعال کنید
@@ -342,6 +342,7 @@ wall:
   use_accent_color: از رنگ تاکیدی کاغذ دیواری استفاده کنید
   wallpaper_collection: مجموعه کاغذ دیواری
   wallpaper_settings: تنظیمات کاغذ دیواری
+  wallpapers: تصاویر پس زمینه
   wallpapers_and_collections: تصاویر پس زمینه و مجموعه ها
   withOverlay: با روکش
   workspace_collections: مجموعه های فضای کاری

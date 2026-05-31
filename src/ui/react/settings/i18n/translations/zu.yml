@@ -307,7 +307,7 @@ wall:
   coverage_pause_threshold: Misa isikhashana umkhawulo (ukufakwa kwewindi)
   create: Dala
   create_collection: Dala Iqoqo
-  default_collection: Iqoqo elizenzakalelayo
+  default_collection: Iphephadonga elizenzakalelayo noma iqoqo
   delete_collection: Susa Iqoqo
   edit_collection: Hlela Iqoqo
   enable: Nika amandla umphathi wangemuva
@@ -353,6 +353,7 @@ wall:
   use_accent_color: Sebenzisa umbala wokugcizelela isithombe sangemuva
   wallpaper_collection: Ukuqoqwa kwamaphephadonga
   wallpaper_settings: Izilungiselelo zangemuva
+  wallpapers: Izithombe zangemuva
   wallpapers_and_collections: Izithombe zangemuva namaqoqo
   withOverlay: Ngokumbondelana
   workspace_collections: Amaqoqo wendawo yokusebenza

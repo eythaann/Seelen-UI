@@ -304,7 +304,7 @@ wall:
   coverage_pause_threshold: Ҳадди таваққуф (фарогирии тиреза)
   create: Эҷод кунед
   create_collection: Маҷмӯа эҷод кунед
-  default_collection: Коллексияи пешфарз
+  default_collection: Обои пешфарз ё коллексия
   delete_collection: Маҷмӯаро нест кунед
   edit_collection: Маҷмӯаро таҳрир кунед
   enable: Фаъолсозии менеҷери обои
@@ -348,6 +348,7 @@ wall:
   use_accent_color: Ранги аксенти деворро истифода баред
   wallpaper_collection: Маҷмӯаи обои
   wallpaper_settings: Танзимоти обои
+  wallpapers: Обои обои
   wallpapers_and_collections: Обои ва коллексияҳо
   withOverlay: Бо overlay
   workspace_collections: Коллексияҳои фазои корӣ

@@ -313,7 +313,7 @@ wall:
   coverage_pause_threshold: I-pause ang threshold (saklaw sa bintana)
   create: Lumikha
   create_collection: Lumikha ng Koleksyon
-  default_collection: Default na Koleksyon
+  default_collection: Default na wallpaper o koleksyon
   delete_collection: Tanggalin ang Koleksyon
   edit_collection: I-edit ang Koleksyon
   enable: Paganahin ang manager ng wallpaper
@@ -355,6 +355,7 @@ wall:
   use_accent_color: Gumamit ng kulay ng accent ng wallpaper
   wallpaper_collection: Koleksyon ng Wallpaper
   wallpaper_settings: Mga Setting ng Wallpaper
+  wallpapers: Mga Wallpaper
   wallpapers_and_collections: Mga Wallpaper at Koleksyon
   withOverlay: Na may overlay
   workspace_collections: Mga Koleksyon ng Workspace

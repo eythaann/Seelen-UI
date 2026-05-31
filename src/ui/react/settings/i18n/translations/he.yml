@@ -288,7 +288,7 @@ wall:
   coverage_pause_threshold: סף השהייה (כיסוי חלון)
   create: לִיצוֹר
   create_collection: צור אוסף
-  default_collection: אוסף ברירת מחדל
+  default_collection: טפט או אוסף ברירת מחדל
   delete_collection: מחק אוסף
   edit_collection: ערוך אוסף
   enable: אפשר מנהל טפטים
@@ -330,6 +330,7 @@ wall:
   use_accent_color: השתמש בצבע מבטא טפט
   wallpaper_collection: אוסף טפטים
   wallpaper_settings: הגדרות טפט
+  wallpapers: טפטים
   wallpapers_and_collections: טפטים ואוספים
   withOverlay: עם שכבת -על
   workspace_collections: אוספי סביבת עבודה

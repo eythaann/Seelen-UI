@@ -309,7 +309,7 @@ wall:
   coverage_pause_threshold: Umbral de pausa (cobertura de ventana)
   create: Crear
   create_collection: Crear colección
-  default_collection: Colección predeterminada
+  default_collection: Fondo de pantalla o colección predeterminados
   delete_collection: Eliminar colección
   edit_collection: Editar colección
   enable: Activar el gestor de fondos de pantalla
@@ -351,6 +351,7 @@ wall:
   use_accent_color: Utilice un color de acento en el papel tapiz
   wallpaper_collection: Colección de papel tapiz
   wallpaper_settings: Configuración del fondo de pantalla
+  wallpapers: Fondos de pantalla
   wallpapers_and_collections: Fondos de pantalla y colecciones
   withOverlay: Con superposición
   workspace_collections: Colecciones de espacios de trabajo

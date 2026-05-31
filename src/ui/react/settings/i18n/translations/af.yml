@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Pouse drempel (venster dekking)
   create: Skep
   create_collection: Skep versameling
-  default_collection: Verstekversameling
+  default_collection: Standaard plakpapier of versameling
   delete_collection: Vee versameling uit
   edit_collection: Wysig versameling
   enable: Aktiveer agtergrondbestuurder
@@ -344,6 +344,7 @@ wall:
   use_accent_color: Gebruik plakpapier aksentkleur
   wallpaper_collection: Muurpapierversameling
   wallpaper_settings: Muurpapier instellings
+  wallpapers: Wallpapers
   wallpapers_and_collections: Agtergronde en versamelings
   withOverlay: Met oorleg
   workspace_collections: Werkspasie Versamelings

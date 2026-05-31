@@ -305,7 +305,7 @@ wall:
   coverage_pause_threshold: Порог паузы (охват окна)
   create: Создавать
   create_collection: Создать коллекцию
-  default_collection: Коллекция по умолчанию
+  default_collection: Обои или коллекция по умолчанию
   delete_collection: Удалить коллекцию
   edit_collection: Редактировать коллекцию
   enable: Включить менеджер обоев
@@ -347,6 +347,7 @@ wall:
   use_accent_color: Используйте акцентный цвет обоев
   wallpaper_collection: Коллекция обоев
   wallpaper_settings: Настройки обоев
+  wallpapers: Обои
   wallpapers_and_collections: Обои и коллекции
   withOverlay: С накладкой
   workspace_collections: Коллекции рабочих областей

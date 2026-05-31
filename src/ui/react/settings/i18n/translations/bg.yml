@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Праг на пауза (покритие на прозорец)
   create: Създавайте
   create_collection: Създаване на колекция
-  default_collection: Колекция по подразбиране
+  default_collection: Тапет или колекция по подразбиране
   delete_collection: Изтриване на колекция
   edit_collection: Редактиране на колекция
   enable: Активирайте мениджъра на тапети
@@ -350,6 +350,7 @@ wall:
   use_accent_color: Използвайте акцентен цвят на тапета
   wallpaper_collection: Колекция тапети
   wallpaper_settings: Настройки на тапета
+  wallpapers: Тапети
   wallpapers_and_collections: Тапети и колекции
   withOverlay: С наслагване
   workspace_collections: Колекции на работното пространство

@@ -307,7 +307,7 @@ wall:
   coverage_pause_threshold: Pauza chegarasi (deraza qoplami)
   create: Yaratish
   create_collection: To'plam yaratish
-  default_collection: Birlamchi toʻplam
+  default_collection: Birlamchi fon rasmi yoki kolleksiyasi
   delete_collection: To'plamni o'chirish
   edit_collection: To'plamni tahrirlash
   enable: Fon rasmi menejerini yoqing
@@ -351,6 +351,7 @@ wall:
   use_accent_color: Fon rasmi aksent rangidan foydalaning
   wallpaper_collection: Fon rasmi to'plami
   wallpaper_settings: Fon rasmi sozlamalari
+  wallpapers: Fon rasmi
   wallpapers_and_collections: Fon rasmi va kollektsiyalar
   withOverlay: Qopqoq bilan
   workspace_collections: Ish maydoni to'plamlari

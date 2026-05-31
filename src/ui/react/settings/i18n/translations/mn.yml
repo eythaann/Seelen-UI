@@ -302,7 +302,7 @@ wall:
   coverage_pause_threshold: Түр зогсоох босго (цонхны хамрах хүрээ)
   create: Үүсгэх
   create_collection: Цуглуулга үүсгэх
-  default_collection: Өгөгдмөл цуглуулга
+  default_collection: Өгөгдмөл ханын цаас эсвэл цуглуулга
   delete_collection: Цуглуулгыг устгах
   edit_collection: Цуглуулга засварлах
   enable: Wallpaper менежерийг идэвхжүүлэх
@@ -344,6 +344,7 @@ wall:
   use_accent_color: Ханын цаасны өргөлтийн өнгийг ашигла
   wallpaper_collection: Дэлгэцийн зургийн цуглуулга
   wallpaper_settings: Дэлгэцийн зурагны тохиргоо
+  wallpapers: Дэлгэцийн зураг
   wallpapers_and_collections: Дэлгэцийн зураг ба цуглуулга
   withOverlay: Давхцаж байна
   workspace_collections: Ажлын талбарын цуглуулга

@@ -305,7 +305,7 @@ wall:
   coverage_pause_threshold: Prag pauze (pokrivenost prozora)
   create: Stvoriti
   create_collection: Stvori zbirku
-  default_collection: Zadana zbirka
+  default_collection: Zadana pozadina ili zbirka
   delete_collection: Izbriši zbirku
   edit_collection: Uredi zbirku
   enable: Omogući upravitelja pozadina
@@ -347,6 +347,7 @@ wall:
   use_accent_color: Koristite boju tapeta
   wallpaper_collection: Zbirka tapeta
   wallpaper_settings: Postavke pozadine
+  wallpapers: Pozadine
   wallpapers_and_collections: Pozadine i kolekcije
   withOverlay: S prekrivanjem
   workspace_collections: Zbirke radnog prostora

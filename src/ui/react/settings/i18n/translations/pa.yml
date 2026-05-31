@@ -296,7 +296,7 @@ wall:
   coverage_pause_threshold: ਥ੍ਰੈਸ਼ਹੋਲਡ ਨੂੰ ਰੋਕੋ (ਵਿੰਡੋ ਕਵਰੇਜ)
   create: ਬਣਾਓ
   create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
-  default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ
+  default_collection: ਡਿਫੌਲਟ ਵਾਲਪੇਪਰ ਜਾਂ ਸੰਗ੍ਰਹਿ
   delete_collection: ਸੰਗ੍ਰਹਿ ਮਿਟਾਓ
   edit_collection: ਸੰਗ੍ਰਹਿ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
@@ -338,6 +338,7 @@ wall:
   use_accent_color: ਵਾਲਪੇਪਰ ਲਹਿਜ਼ੇ ਦੇ ਰੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ
   wallpaper_collection: ਵਾਲਪੇਪਰ ਸੰਗ੍ਰਹਿ
   wallpaper_settings: ਵਾਲਪੇਪਰ ਸੈਟਿੰਗਾਂ
+  wallpapers: ਵਾਲਪੇਪਰ
   wallpapers_and_collections: ਵਾਲਪੇਪਰ ਅਤੇ ਸੰਗ੍ਰਹਿ
   withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ
   workspace_collections: ਵਰਕਸਪੇਸ ਸੰਗ੍ਰਹਿ

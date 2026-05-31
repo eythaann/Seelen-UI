@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Pauzes slieksnis (loga pārklājums)
   create: Izveidot
   create_collection: Izveidot kolekciju
-  default_collection: Noklusējuma kolekcija
+  default_collection: Noklusējuma fona tapete vai kolekcija
   delete_collection: Dzēst kolekciju
   edit_collection: Rediģēt kolekciju
   enable: Iespējot fona attēlu pārvaldnieku
@@ -345,6 +345,7 @@ wall:
   use_accent_color: Izmantojiet tapetes akcenta krāsu
   wallpaper_collection: Tapešu kolekcija
   wallpaper_settings: Tapetes iestatījumi
+  wallpapers: Tapetes
   wallpapers_and_collections: Tapetes un kolekcijas
   withOverlay: Ar pārklājumu
   workspace_collections: Darbvietu kolekcijas

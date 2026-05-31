@@ -174,6 +174,24 @@ export function patchWallpaperSettings(id: WallpaperId, patch: Partial<Wallpaper
 }
 
 /**
+ * Returns the ID of an existing hidden collection for a single wallpaper, or creates one.
+ */
+export function getOrCreateHiddenCollection(wallpaperId: WallpaperId, name: string): string {
+  const existing = settings.value.wallpaperCollections.find(
+    (c) => c.hidden && c.wallpapers.length === 1 && c.wallpapers[0] === wallpaperId,
+  );
+  if (existing) return existing.id;
+  const newCollection: WallpaperCollection = {
+    id: crypto.randomUUID(),
+    name,
+    wallpapers: [wallpaperId],
+    hidden: true,
+  };
+  addWallpaperCollection(newCollection);
+  return newCollection.id;
+}
+
+/**
  * Resets settings for a specific wallpaper instance
  */
 export function resetWallpaperSettings(id: WallpaperId) {

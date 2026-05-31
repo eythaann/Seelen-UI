@@ -306,7 +306,7 @@ wall:
   coverage_pause_threshold: Szünet küszöbértéke (ablak lefedettsége)
   create: Teremt
   create_collection: Gyűjtemény létrehozása
-  default_collection: Alapértelmezett gyűjtemény
+  default_collection: Alapértelmezett háttérkép vagy gyűjtemény
   delete_collection: Gyűjtemény törlése
   edit_collection: Gyűjtemény szerkesztése
   enable: Engedélyezze a háttérképkezelőt
@@ -350,6 +350,7 @@ wall:
   use_accent_color: Használjon tapéta kiemelő színt
   wallpaper_collection: Háttérkép gyűjtemény
   wallpaper_settings: Háttérkép beállításai
+  wallpapers: Háttérképek
   wallpapers_and_collections: Háttérképek és gyűjtemények
   withOverlay: Overlay-vel
   workspace_collections: Munkaterület-gyűjtemények

@@ -298,7 +298,7 @@ wall:
   coverage_pause_threshold: Þröskuldur fyrir hlé (gluggaþekju)
   create: Búa til
   create_collection: Búðu til safn
-  default_collection: Sjálfgefið safn
+  default_collection: Sjálfgefið veggfóður eða safn
   delete_collection: Eyða safni
   edit_collection: Breyta safni
   enable: Virkja veggfóðursstjóra
@@ -340,6 +340,7 @@ wall:
   use_accent_color: Notaðu veggfóður hreim lit
   wallpaper_collection: Veggfóður safn
   wallpaper_settings: Veggfóðurstillingar
+  wallpapers: Veggfóður
   wallpapers_and_collections: Veggfóður og söfn
   withOverlay: Með yfirlagi
   workspace_collections: Vinnusöfn

@@ -5,6 +5,7 @@
 ### enhancements
 
 - keyboard/language selector fixes and improvements (now shows active IME).
+- wallpaper selector allow select single wallpapers.
 
 ### fix
 

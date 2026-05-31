@@ -304,7 +304,7 @@ wall:
   coverage_pause_threshold: পজ থ্রেশহোল্ড (উইন্ডো কভারেজ)
   create: তৈরি করুন
   create_collection: সংগ্রহ তৈরি করুন
-  default_collection: ডিফল্ট সংগ্রহ
+  default_collection: ডিফল্ট ওয়ালপেপার বা সংগ্রহ
   delete_collection: সংগ্রহ মুছুন
   edit_collection: সংগ্রহ সম্পাদনা করুন
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
@@ -346,6 +346,7 @@ wall:
   use_accent_color: ওয়ালপেপার অ্যাকসেন্ট রঙ ব্যবহার করুন
   wallpaper_collection: ওয়ালপেপার সংগ্রহ
   wallpaper_settings: ওয়ালপেপার সেটিংস
+  wallpapers: ওয়ালপেপার
   wallpapers_and_collections: ওয়ালপেপার এবং সংগ্রহ
   withOverlay: ওভারলে সহ
   workspace_collections: ওয়ার্কস্পেস সংগ্রহ

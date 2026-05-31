@@ -301,7 +301,7 @@ wall:
   coverage_pause_threshold: Trothwy seibio (gorchudd ffenestr)
   create: Creu
   create_collection: Creu Casgliad
-  default_collection: Casgliad Diofyn
+  default_collection: Papur wal neu gasgliad diofyn
   delete_collection: Dileu Casgliad
   edit_collection: Casgliad Golygu
   enable: Galluogi Rheolwr Papur Wal
@@ -343,6 +343,7 @@ wall:
   use_accent_color: Defnyddiwch liw acen papur wal
   wallpaper_collection: Casgliad Papur Wal
   wallpaper_settings: Gosodiadau Papur Wal
+  wallpapers: Papur wal
   wallpapers_and_collections: Papur Wal a Chasgliadau
   withOverlay: Gyda throshaen
   workspace_collections: Casgliadau Gweithle
