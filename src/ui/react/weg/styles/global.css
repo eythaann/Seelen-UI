@@ -159,6 +159,14 @@ body {
   }
 }
 
+/* Square (full-bleed) icons fill the whole box while round icons have
+   transparent margins baked into their image, making spacing look uneven.
+   Scale square icons down a touch so every icon has consistent breathing room. */
+.weg-item-icon[data-shape="square"] {
+  transform: scale(0.82);
+  transform-origin: center;
+}
+
 /* Deprecated move to separated widget */
 .weg-item-preview-container {
   position: relative;
