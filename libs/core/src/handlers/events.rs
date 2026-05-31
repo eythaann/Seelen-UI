@@ -51,6 +51,7 @@ slu_events_declaration! {
 
     SystemMonitorsChanged(Vec<PhysicalMonitor>) as "system::monitors-changed",
     SystemLanguagesChanged(Vec<SystemLanguage>) as "system::languages-changed",
+    SystemImeStateChanged(ImeState) as "system::ime-state-changed",
     SystemMonitorsBrightnessChanged(Vec<MonitorBrightness>) as "system::monitors-brightness-changed",
 
     UserChanged(User) as "user-changed",

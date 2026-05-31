@@ -1,26 +1,30 @@
-use std::{
-    collections::{hash_map::Entry, HashMap},
-    sync::{atomic::Ordering, LazyLock},
-};
+use std::sync::LazyLock;
 
-use itertools::Itertools;
-use seelen_core::system_state::{ImeStatus, KeyboardLayout, SystemLanguage};
-use windows::Win32::{
-    Globalization::{
-        GetLocaleInfoEx, LCIDToLocaleName, LOCALE_SLOCALIZEDDISPLAYNAME, LOCALE_SNATIVELANGUAGENAME,
-    },
-    UI::{
-        Input::{
-            Ime::{
-                ImmGetContext, ImmGetConversionStatus, ImmGetDefaultIMEWnd, ImmGetDescriptionW,
-                IME_CONVERSION_MODE, IME_SENTENCE_MODE,
-            },
-            KeyboardAndMouse::{
-                ActivateKeyboardLayout, GetKeyboardLayout, GetKeyboardLayoutList,
-                LoadKeyboardLayoutW, HKL, KLF_SETFORPROCESS,
-            },
+use seelen_core::system_state::{ImeState, KeyboardLayout, SystemLanguage};
+use windows::{
+    core::GUID,
+    Win32::{
+        Globalization::{
+            GetLocaleInfoEx, LCIDToLocaleName, LOCALE_SLOCALIZEDDISPLAYNAME,
+            LOCALE_SNATIVELANGUAGENAME,
         },
-        WindowsAndMessaging::WM_INPUTLANGCHANGEREQUEST,
+        UI::{
+            Input::{
+                Ime::{
+                    ImmGetDefaultIMEWnd, IME_CMODE_FULLSHAPE, IME_CMODE_HANJACONVERT,
+                    IME_CMODE_KATAKANA, IME_CMODE_NATIVE, IME_CMODE_ROMAN, IME_CONVERSION_MODE,
+                    IME_SENTENCE_MODE,
+                },
+                KeyboardAndMouse::{GetKeyboardLayout, HKL},
+            },
+            TextServices::{
+                CLSID_TF_InputProcessorProfiles, ITfInputProcessorProfileMgr,
+                ITfInputProcessorProfiles, GUID_TFCAT_TIP_KEYBOARD, TF_IPPMF_FORPROCESS,
+                TF_IPPMF_FORSESSION, TF_IPP_FLAG_ACTIVE, TF_IPP_FLAG_ENABLED,
+                TF_PROFILETYPE_INPUTPROCESSOR, TF_PROFILETYPE_KEYBOARDLAYOUT,
+            },
+            WindowsAndMessaging::WM_IME_CONTROL,
+        },
     },
 };
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
@@ -29,8 +33,19 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::{lock_free::SyncVec, spawn_named_thread},
-    windows_api::{event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString, WindowsApi},
+    windows_api::{
+        event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString, Com, WindowsApi,
+    },
 };
+
+#[allow(clippy::upper_case_acronyms)]
+type LANGID = u16;
+pub const IMC_GETCONVERSIONMODE: u32 = 0x0001;
+// pub const IMC_SETCONVERSIONMODE: u32 = 0x0002;
+pub const IMC_GETSENTENCEMODE: u32 = 0x0003;
+// pub const IMC_SETSENTENCEMODE: u32 = 0x0004;
+pub const IMC_GETOPENSTATUS: u32 = 0x0005;
+// pub const IMC_SETOPENSTATUS: u32 = 0x0006;
 
 static LANGUAGE_MANAGER: LazyLock<LanguageManager> = LazyLock::new(|| {
     let mut manager = LanguageManager::new();
@@ -41,10 +56,9 @@ static LANGUAGE_MANAGER: LazyLock<LanguageManager> = LazyLock::new(|| {
 event_manager!(LanguageManager, LanguageEvent);
 
 #[derive(Debug, Clone)]
-#[allow(dead_code)]
 pub enum LanguageEvent {
-    KeyboardLayoutChanged(u32),
-    IMEStatusChanged(ImeStatus),
+    LayoutChanged,
+    ImeChanged,
 }
 
 #[derive(Debug)]
@@ -66,57 +80,53 @@ impl LanguageManager {
     fn init(&mut self) -> Result<()> {
         self.languages.replace(Self::enum_langs()?);
 
-        let eid = Self::subscribe(|event| {
-            match event {
-                LanguageEvent::IMEStatusChanged(status) => {
-                    log::info!("IME status changed: {status:?}");
-                }
-                LanguageEvent::KeyboardLayoutChanged(hkl) => {
-                    log::info!("Keyboard layout changed: {hkl:08X?}");
-                }
-            }
-
+        let eid = Self::subscribe(|_event| {
             if let Ok(langs) = Self::enum_langs() {
                 Self::instance().languages.replace(langs);
             }
         });
         Self::set_event_handler_priority(&eid, 1);
 
-        spawn_named_thread("Keyboard Layout Monitor", || {
+        spawn_named_thread("Input Profile Monitor", || {
             let mut hkl = Self::get_active_hkl();
-            // let mut ime = Self::get_active_ime();
+            let mut active_tip = Self::get_active_tip().unwrap_or_default();
+            let mut ime = Self::get_ime_state().unwrap_or_default();
 
             loop {
                 std::thread::sleep(std::time::Duration::from_secs(1));
-
-                // Pause when session is not interactive to reduce CPU usage
-                if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
                     continue;
                 }
 
-                let current = Self::get_active_hkl();
-                if hkl != current {
-                    hkl = current;
-                    Self::send(LanguageEvent::KeyboardLayoutChanged(current.0 as _));
+                let current_tip = Self::get_active_tip().unwrap_or_default();
+                let current_hkl = Self::get_active_hkl();
+                if hkl != current_hkl || active_tip != current_tip {
+                    log::debug!("Language changed: {hkl:?} -> {current_hkl:?} | {active_tip} -> {current_tip}");
+                    active_tip = current_tip;
+                    hkl = current_hkl;
+                    Self::send(LanguageEvent::LayoutChanged);
                 }
 
-                /* let current = Self::get_active_ime();
-                if ime != current {
-                    ime = current;
-                    Self::send(LanguageEvent::IMEStatusChanged(current));
-                } */
+                let current_ime = Self::get_ime_state().unwrap_or_default();
+                if ime != current_ime {
+                    log::debug!("IME status changed: {ime:?} -> {current_ime:?}");
+                    ime = current_ime;
+                    Self::send(LanguageEvent::ImeChanged);
+                }
             }
         });
+
         Ok(())
     }
 
-    fn get_input_locale_list() -> Vec<HKL> {
-        unsafe {
-            let len = GetKeyboardLayoutList(None) as usize;
-            let mut list = vec![HKL::default(); len];
-            GetKeyboardLayoutList(Some(&mut list));
-            list
-        }
+    // ── TSF helpers ──────────────────────────────────────────────────────────
+
+    fn tsf_profiles() -> Result<ITfInputProcessorProfiles> {
+        Com::create_instance(&CLSID_TF_InputProcessorProfiles)
+    }
+
+    fn tsf_profile_mgr() -> Result<ITfInputProcessorProfileMgr> {
+        Com::create_instance(&CLSID_TF_InputProcessorProfiles)
     }
 
     // active keyboard layout is set per thread, so we show the active layout for the foregrounded one.
@@ -126,48 +136,178 @@ impl LanguageManager {
         unsafe { GetKeyboardLayout(focused_thread) }
     }
 
-    // same as keyboard layout, IME status is set per process.
-    #[allow(dead_code)]
-    fn get_active_ime() -> ImeStatus {
+    fn _get_active_tip() -> Result<String> {
+        Com::run_with_context(|| {
+            let manager = Self::tsf_profile_mgr()?;
+
+            let mut profile = Default::default();
+            unsafe { manager.GetActiveProfile(&GUID_TFCAT_TIP_KEYBOARD, &mut profile)? };
+
+            let tip = if profile.dwProfileType == TF_PROFILETYPE_KEYBOARDLAYOUT {
+                let klid = Self::hkl_to_klid(profile.hkl.0 as _)?;
+                format!("{:04X}:{klid}", profile.langid)
+            } else {
+                format!(
+                    "{:04X}:{{{:?}}}{{{:?}}}",
+                    profile.langid, profile.clsid, profile.guidProfile
+                )
+            };
+            Ok(tip)
+        })
+    }
+
+    fn get_active_tip() -> Result<String> {
+        let (tx, rx) = crossbeam_channel::bounded(1);
+        std::thread::spawn(move || {
+            let tip = Self::_get_active_tip().unwrap_or_default();
+            let _ = tx.send(tip);
+        })
+        .join()
+        .ok();
+        Ok(rx.recv()?)
+    }
+
+    // ── Language enumeration ─────────────────────────────────────────────────
+
+    fn enum_langs() -> Result<Vec<SystemLanguage>> {
+        let (tx, rx) = crossbeam_channel::bounded(1);
+        std::thread::spawn(move || {
+            let _ = tx.send(Self::_enum_langs());
+        })
+        .join()
+        .ok();
+
+        rx.recv()?
+    }
+
+    pub fn get_ime_state() -> Result<ImeState> {
         unsafe {
-            let hime = ImmGetDefaultIMEWnd(WindowsApi::get_foreground_window());
-            let himc = ImmGetContext(hime);
-
-            let mut conversion_mode = IME_CONVERSION_MODE::default();
-            let mut sentence_mode = IME_SENTENCE_MODE::default();
-            let _ = ImmGetConversionStatus(
-                himc,
-                Some(&mut conversion_mode as _),
-                Some(&mut sentence_mode as _),
-            );
-
-            ImeStatus {
-                conversion_mode: conversion_mode.0,
-                sentence_mode: sentence_mode.0,
+            let ime_hwnd = ImmGetDefaultIMEWnd(WindowsApi::get_foreground_window());
+            if ime_hwnd.is_invalid() {
+                return Err("failed to get default IME window".into());
             }
+
+            let open =
+                WindowsApi::send_message(ime_hwnd, WM_IME_CONTROL, IMC_GETOPENSTATUS as _, 0)?;
+            let conversion =
+                WindowsApi::send_message(ime_hwnd, WM_IME_CONTROL, IMC_GETCONVERSIONMODE as _, 0)?;
+            let sentence =
+                WindowsApi::send_message(ime_hwnd, WM_IME_CONTROL, IMC_GETSENTENCEMODE as _, 0)?;
+
+            let open = open != 0;
+            let conversion = IME_CONVERSION_MODE(conversion as _);
+            let _sentence = IME_SENTENCE_MODE(sentence as _);
+
+            let ime_status = ImeState {
+                native: conversion.contains(IME_CMODE_NATIVE),
+                full_shape: conversion.contains(IME_CMODE_FULLSHAPE),
+                katakana: conversion.contains(IME_CMODE_KATAKANA),
+                roman: conversion.contains(IME_CMODE_ROMAN),
+                hanja: conversion.contains(IME_CMODE_HANJACONVERT),
+                open,
+            };
+            Ok(ime_status)
         }
     }
 
-    fn enum_langs() -> Result<Vec<SystemLanguage>> {
-        let mut languages: HashMap<u32, SystemLanguage> = HashMap::new();
-        let active_hkl = Self::get_active_hkl();
+    /// Enumerates installed input profiles via TSF's `ITfInputProcessorProfileMgr::EnumProfiles`.
+    ///
+    /// The user language list still comes from the registry — it is the authoritative
+    /// source written by Windows language settings. Per-language profile details
+    /// (display names, types, active state) are resolved through TSF directly.
+    fn _enum_langs() -> Result<Vec<SystemLanguage>> {
+        Com::run_with_context(|| unsafe {
+            let mut languages = Vec::new();
 
-        for hkl in Self::get_input_locale_list() {
-            let lang_id = hkl.0 as u32 & 0xFFFF; // low word
+            let profiles = Self::tsf_profiles()?;
+            let manager = Self::tsf_profile_mgr()?;
 
-            let lang = match languages.entry(lang_id) {
-                Entry::Occupied(entry) => entry.into_mut(),
-                Entry::Vacant(entry) => {
-                    let lang = Self::get_language(lang_id)?;
-                    entry.insert(lang)
+            let mut lang_ids = std::ptr::null_mut::<LANGID>();
+            let mut count = 0u32;
+            profiles.GetLanguageList(&mut lang_ids, &mut count)?;
+
+            let slice = std::slice::from_raw_parts(lang_ids, count as usize);
+
+            for lang_id in slice {
+                let mut language = Self::get_language(*lang_id as u32)?;
+                let list = manager.EnumProfiles(*lang_id)?;
+
+                loop {
+                    let mut items = [Default::default(); 1];
+                    let mut fetched = 0u32;
+
+                    list.Next(&mut items, &mut fetched)?;
+                    if fetched == 0 {
+                        break;
+                    }
+
+                    let item = &items[0];
+                    if item.dwFlags & TF_IPP_FLAG_ENABLED == 0 {
+                        continue;
+                    }
+
+                    let is_active_profile = item.dwFlags & TF_IPP_FLAG_ACTIVE != 0;
+
+                    let input_method = if item.dwProfileType == TF_PROFILETYPE_KEYBOARDLAYOUT {
+                        let klid = Self::hkl_to_klid(item.hkl.0 as _)?;
+                        let display_name = Self::get_klid_display_name(&klid)
+                            .unwrap_or_else(|_| format!("Keyboard ({klid})"));
+
+                        KeyboardLayout {
+                            id: format!("{:08X}", item.hkl.0 as usize),
+                            handle: format!("{lang_id:04X}:{klid}"),
+                            display_name,
+                            active: is_active_profile,
+                        }
+                    } else if item.catid == GUID_TFCAT_TIP_KEYBOARD {
+                        let tip = format!(
+                            "{:04X}:{{{:?}}}{{{:?}}}",
+                            item.langid, item.clsid, item.guidProfile
+                        );
+
+                        let display_name = profiles
+                            .GetLanguageProfileDescription(
+                                &item.clsid,
+                                *lang_id,
+                                &item.guidProfile,
+                            )?
+                            .to_string();
+
+                        KeyboardLayout {
+                            id: tip.clone(),
+                            handle: tip,
+                            display_name,
+                            active: is_active_profile,
+                        }
+                    } else {
+                        continue;
+                    };
+
+                    language.keyboard_layouts.push(input_method);
                 }
+
+                languages.push(language);
+            }
+
+            Com::task_mem_free(lang_ids as _);
+            // log::debug!("{:#?}", languages);
+            Ok(languages)
+        })
+    }
+
+    fn get_klid_display_name(klid: &str) -> Result<String> {
+        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+        let reg_layouts = hklm.open_subkey(r"SYSTEM\CurrentControlSet\Control\Keyboard Layouts")?;
+        let reg_layout = reg_layouts.open_subkey(klid)?;
+        let display_name =
+            if let Ok(path) = reg_layout.get_value::<String, _>("Layout Display Name") {
+                WindowsApi::resolve_indirect_string(&path)?
+            } else {
+                reg_layout
+                    .get_value("Layout Text")
+                    .unwrap_or_else(|_| String::from("Unknown"))
             };
-
-            let layout: KeyboardLayout = Self::get_keyboard_layout(hkl, hkl == active_hkl)?;
-            lang.keyboard_layouts.push(layout);
-        }
-
-        Ok(languages.into_values().collect())
+        Ok(display_name)
     }
 
     fn get_language(lang_id: u32) -> Result<SystemLanguage> {
@@ -198,101 +338,137 @@ impl LanguageManager {
         })
     }
 
-    fn get_keyboard_layout(hkl: HKL, active: bool) -> Result<KeyboardLayout> {
-        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let reg_layouts = hklm.open_subkey(r"SYSTEM\CurrentControlSet\Control\Keyboard Layouts")?;
+    // ── Layout activation ────────────────────────────────────────────────────
 
-        let layout_id = Self::get_reg_layout_id(hkl.0 as _)?;
+    pub fn set_keyboard_layout(id: &str, handle: &str) -> Result<()> {
+        Com::run_with_context(|| unsafe {
+            let colon = handle.find(':').ok_or("invalid TSF tip: missing colon")?;
+            let lang_id = u16::from_str_radix(&handle[..colon], 16)?;
+            let rest = &handle[colon + 1..];
 
-        let reg_layout = reg_layouts.open_subkey(&layout_id)?;
-        let display_name =
-            if let Ok(path) = reg_layout.get_value::<String, _>("Layout Display Name") {
-                WindowsApi::resolve_indirect_string(&path)?
+            let (profile_type, hkl, clsid, profile_guid) = if handle.contains('{') {
+                if rest.len() < 76 {
+                    return Err(format!("TSF tip too short: {handle:?}").into());
+                }
+
+                let clsid = parse_guid(&rest[..38]).ok_or("invalid CLSID in TSF tip")?;
+                let profile_guid =
+                    parse_guid(&rest[38..76]).ok_or("invalid ProfileGUID in TSF tip")?;
+
+                (
+                    TF_PROFILETYPE_INPUTPROCESSOR,
+                    Default::default(),
+                    clsid,
+                    profile_guid,
+                )
             } else {
-                reg_layout
-                    .get_value("Layout Text")
-                    .unwrap_or_else(|_| String::from("Unknown"))
+                let hkl = usize::from_str_radix(id, 16)?;
+                (
+                    TF_PROFILETYPE_KEYBOARDLAYOUT,
+                    HKL(hkl as _),
+                    Default::default(),
+                    Default::default(),
+                )
             };
 
-        Self::get_ime_family(hkl).log_error();
+            /* if profile_type == TF_PROFILETYPE_KEYBOARDLAYOUT {
+                let klid = WindowsString::from_str(rest);
+                let hkl = usize::from_str_radix(id, 16)?;
 
-        Ok(KeyboardLayout {
-            id: layout_id,
-            handle: format!("{:08X}", hkl.0 as usize),
-            display_name,
-            active,
-        })
-    }
+                LoadKeyboardLayoutW(klid.as_pcwstr(), Default::default())?;
 
-    fn get_ime_family(hkl: HKL) -> Result<()> {
-        unsafe {
-            let len = ImmGetDescriptionW(hkl, None);
-            let mut description = WindowsString::new_to_fill((len + 1) as usize);
-            ImmGetDescriptionW(hkl, Some(description.as_mut_slice()));
+                let foreground = WindowsApi::get_foreground_window();
+                WindowsApi::post_message(foreground, WM_INPUTLANGCHANGEREQUEST, 0, hkl as _)?;
 
-            // log::debug!("({:?}) IME description: {}", hkl, description.to_string());
-        }
+                ActivateKeyboardLayout(HKL(hkl as _), KLF_SETFORPROCESS)?;
+            } else {
+                Self::tsf_profiles()?.ChangeCurrentLanguage(lang_id)?;
+                Self::tsf_profile_mgr()?.ActivateProfile(
+                    profile_type,
+                    lang_id,
+                    &clsid,
+                    &profile_guid,
+                    hkl,
+                    TF_IPPMF_FORPROCESS | TF_IPPMF_FORSESSION,
+                )?;
+            } */
+
+            Self::tsf_profiles()?.ChangeCurrentLanguage(lang_id)?;
+            Self::tsf_profile_mgr()?.ActivateProfile(
+                profile_type,
+                lang_id,
+                &clsid,
+                &profile_guid,
+                hkl,
+                TF_IPPMF_FORPROCESS | TF_IPPMF_FORSESSION,
+            )?;
+
+            Ok(())
+        })?;
+
+        Self::send(LanguageEvent::LayoutChanged);
         Ok(())
     }
 
-    /// this function is used to get the real layout id.
-    /// Examples:
-    /// - 0409080A = spanish lang english keyboard => layout id is 0409
-    /// - F0020409 = english lang dvorak keyboard => layout id is 0002 but mapped to 00010409
-    fn get_reg_layout_id(hkl: u32) -> Result<String> {
-        // https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-language-pack-default-values
-        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let reg_layouts = hklm.open_subkey(r"SYSTEM\CurrentControlSet\Control\Keyboard Layouts")?;
-        let available_klids = reg_layouts.enum_keys().flatten().collect_vec();
+    // ── Legacy HKL → KLID (active-profile detection for non-TSF layouts) ────
 
-        // https://learn.microsoft.com/en-us/windows/win32/intl/locale-identifiers
-        // https://learn.microsoft.com/en-us/windows/win32/intl/language-identifiers
-        let language_id = hkl & 0xFFFF; // low word
-        let mut device_id = hkl >> 16; // high word
+    fn hkl_to_klid(hkl: u32) -> Result<String> {
+        let language_id = hkl & 0xFFFF;
+        let mut device_id = hkl >> 16;
 
-        // `Device Handle` contains `Layout ID`
         if device_id & 0xF000 == 0xF000 {
+            let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+            let reg_layouts =
+                hklm.open_subkey(r"SYSTEM\CurrentControlSet\Control\Keyboard Layouts")?;
             let layout_id_to_search = format!("{:04X}", device_id & 0x0FFF);
 
-            for current_klid in &available_klids {
-                let reg_layout = reg_layouts.open_subkey(current_klid)?;
-                if let Ok(layout_id) = reg_layout.get_value::<String, _>("Layout Id") {
-                    // Layout Id stored using case insensitive
-                    if layout_id_to_search == layout_id.to_uppercase() {
-                        return Ok(current_klid.clone());
+            for klid in reg_layouts.enum_keys().flatten() {
+                let entry = reg_layouts.open_subkey(&klid)?;
+                if let Ok(id) = entry.get_value::<String, _>("Layout Id") {
+                    if layout_id_to_search == id.to_uppercase() {
+                        return Ok(klid);
                     }
                 }
             }
+            Err(format!("KLID not found for HKL {hkl:08X}").into())
         } else {
-            // Use language id only if keyboard layout language is not available. This
-            // is crucial in cases when keyboard is installed more than once or under
-            // different languages. For example when French keyboard is installed under US
-            // input language we need to return French keyboard identifier.
             if device_id == 0 {
                 device_id = language_id;
             }
-            return Ok(format!("{device_id:08X}"));
+            Ok(format!("{device_id:08X}"))
         }
-
-        Err(format!("klid not found for {hkl:?}").into())
     }
 
-    pub fn set_keyboard_layout(klid: &str, hkl: &str) -> Result<()> {
-        let klid = WindowsString::from_str(klid);
-        let hkl = usize::from_str_radix(hkl, 16)?;
-
-        unsafe { LoadKeyboardLayoutW(klid.as_pcwstr(), Default::default())? };
-
-        let foreground = WindowsApi::get_foreground_window();
-        WindowsApi::post_message(foreground, WM_INPUTLANGCHANGEREQUEST, 0, hkl as _)?;
-
-        unsafe { ActivateKeyboardLayout(HKL(hkl as _), KLF_SETFORPROCESS)? };
-
-        Self::send(LanguageEvent::KeyboardLayoutChanged(hkl as u32));
-        Ok(())
-    }
+    // ── Public API ───────────────────────────────────────────────────────────
 
     pub fn get_languages(&self) -> Vec<SystemLanguage> {
         self.languages.to_vec()
     }
+}
+
+// ── GUID utilities ───────────────────────────────────────────────────────────
+
+fn parse_guid(s: &str) -> Option<GUID> {
+    let s = s.trim_matches(|c: char| c == '{' || c == '}');
+    let parts: Vec<&str> = s.split('-').collect();
+    if parts.len() != 5 {
+        return None;
+    }
+    let data1 = u32::from_str_radix(parts[0], 16).ok()?;
+    let data2 = u16::from_str_radix(parts[1], 16).ok()?;
+    let data3 = u16::from_str_radix(parts[2], 16).ok()?;
+    if parts[3].len() != 4 || parts[4].len() != 12 {
+        return None;
+    }
+    let tail = format!("{}{}", parts[3], parts[4]);
+    let mut data4 = [0u8; 8];
+    for (i, byte) in data4.iter_mut().enumerate() {
+        *byte = u8::from_str_radix(&tail[i * 2..i * 2 + 2], 16).ok()?;
+    }
+    Some(GUID {
+        data1,
+        data2,
+        data3,
+        data4,
+    })
 }

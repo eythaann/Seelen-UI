@@ -1,21 +1,29 @@
 use std::sync::Once;
 
-use seelen_core::{handlers::SeelenEvent, system_state::SystemLanguage};
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{ImeState, SystemLanguage},
+};
 
 use crate::{app::emit_to_webviews, error::Result};
 
-use super::application::LanguageManager;
+use super::application::{LanguageEvent, LanguageManager};
 
-/// Lazy initialization wrapper that registers Tauri events on first access
-/// This keeps Tauri logic separate from system logic while ensuring lazy initialization
 fn get_language_manager() -> &'static LanguageManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
-        LanguageManager::subscribe(|_event| {
-            emit_to_webviews(
-                SeelenEvent::SystemLanguagesChanged,
-                &LanguageManager::instance().get_languages(),
-            );
+        LanguageManager::subscribe(|event| match event {
+            LanguageEvent::LayoutChanged => {
+                emit_to_webviews(
+                    SeelenEvent::SystemLanguagesChanged,
+                    &LanguageManager::instance().get_languages(),
+                );
+            }
+            LanguageEvent::ImeChanged => {
+                if let Ok(state) = LanguageManager::get_ime_state() {
+                    emit_to_webviews(SeelenEvent::SystemImeStateChanged, &state);
+                }
+            }
         });
     });
     LanguageManager::instance()
@@ -24,6 +32,12 @@ fn get_language_manager() -> &'static LanguageManager {
 #[tauri::command(async)]
 pub fn get_system_languages() -> Vec<SystemLanguage> {
     get_language_manager().get_languages()
+}
+
+#[tauri::command(async)]
+pub fn get_ime_state() -> Result<ImeState> {
+    get_language_manager();
+    LanguageManager::get_ime_state()
 }
 
 #[tauri::command(async)]

@@ -23,8 +23,8 @@
 <div class={["slu-std-popover", "keyboard-selector"]}>
   <div class="keyboard-selector-header">{$t("title")}</div>
   <div class="keyboard-selector-body">
-    {#each state.langs as lang}
-      {#each lang.keyboardLayouts as keyboard (keyboard.handle)}
+    {#each state.langs as lang, li}
+      {#each lang.keyboardLayouts as keyboard, ki (`${li}-${keyboard.handle}-${ki}`)}
         <button
           class="layout"
           class:layout-active={keyboard.active}

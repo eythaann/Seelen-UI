@@ -103,9 +103,9 @@ use windows::{
                 BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
                 GetForegroundWindow, GetParent, GetSystemMetrics, GetWindow, GetWindowLongW,
                 GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, PostMessageW, SetForegroundWindow, SetWindowPos,
-                ShowWindow, ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE,
-                GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                IsWindowVisible, IsZoomed, PostMessageW, SendMessageW, SetForegroundWindow,
+                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE,
+                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
                 SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
                 SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
                 SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
@@ -162,6 +162,12 @@ impl WindowsApi {
                 .filter_fake_error()?;
         }
         Ok(())
+    }
+
+    pub fn send_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<isize> {
+        let result =
+            unsafe { SendMessageW(hwnd, message, Some(WPARAM(wparam)), Some(LPARAM(lparam))) };
+        Ok(result.0)
     }
 
     pub fn post_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<()> {

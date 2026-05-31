@@ -7,14 +7,8 @@ target: "@seelen/fancy-toolbar"
 plugin:
   scopes:
     - Keyboard
-  tooltip: return [activeLang.name, " - ", activeKeyboard.displayName]
-  template: |-
-    const inputsLenght = activeLang.keyboardLayouts.length;
-    return [
-      activeLangPrefix,
-      inputsLenght > 1 ? " - " : "",
-      inputsLenght > 1 ? activeKeyboardPrefix : ""
-    ]
+  tooltip: return [activeLang?.name || "!?", " - ", activeKeyboard?.displayName || "!?"]
+  template: !include plugin/template.js
   style:
     flexShrink: 0
     width: min-content

@@ -14,6 +14,7 @@ import {
   useLazyBluetoothDevices,
   useLazyCores,
   useLazyDisks,
+  useLazyImeState,
   useLazyLanguages,
   useLazyMediaDevices,
   useLazyMediaSessions,
@@ -229,8 +230,9 @@ function useNetworkScope() {
 
 function useKeyboardScope() {
   const { fetching, data: languages } = useLazyLanguages();
+  const { fetching: fetchingIme, data: imeState } = useLazyImeState();
 
-  if (fetching) {
+  if (fetching || fetchingIme) {
     return { fetching: true, data: null };
   }
 
@@ -260,6 +262,7 @@ function useKeyboardScope() {
       activeLangPrefix,
       activeKeyboardPrefix,
       languages,
+      imeState,
     },
   };
 }

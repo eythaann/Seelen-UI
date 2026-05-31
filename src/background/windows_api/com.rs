@@ -4,7 +4,8 @@ use windows::{
     Win32::{
         Foundation::RPC_E_CHANGED_MODE,
         System::Com::{
-            CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
+            CoCreateInstance, CoInitializeEx, CoTaskMemFree, CoUninitialize, CLSCTX_ALL,
+            COINIT_APARTMENTTHREADED,
         },
     },
 };
@@ -36,6 +37,10 @@ impl Com {
     {
         let _guard = Self::initialize(COINIT_APARTMENTTHREADED)?;
         f()
+    }
+
+    pub fn task_mem_free(ptr: *mut core::ffi::c_void) {
+        unsafe { CoTaskMemFree(Some(ptr)) }
     }
 }
 
