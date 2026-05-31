@@ -1,5 +1,5 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
-import { KeyboardSensor, PointerSensor } from "@dnd-kit/dom";
+import { KeyboardSensor, PointerActivationConstraints, PointerSensor } from "@dnd-kit/dom";
 import { move } from "@dnd-kit/helpers";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { cx } from "libs/ui/react/utils/styling.ts";
@@ -23,12 +23,19 @@ import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";
 import { useComputed } from "@preact/signals";
 
-// Allow dragging from buttons and other interactive elements inside items.
-// The distance activation constraint (5px) still prevents unintentional drags on click.
 const dndSensors = [
-  PointerSensor.configure({ preventActivation: () => false }),
+  PointerSensor.configure({
+    preventActivation: () => false,
+    activationConstraints: [
+      new PointerActivationConstraints.Distance({ value: 24 }),
+    ],
+  }),
   KeyboardSensor,
 ];
+
+function hasSameOrder(a: string[], b: string[]) {
+  return a.length === b.length && a.every((id, index) => id === b[index]);
+}
 
 export function FancyToolbar() {
   const splittedItems = useComputed(() => {
@@ -76,10 +83,12 @@ export function FancyToolbar() {
           const temp = $toolbar_state.value.items.map((item) => typeof item === "string" ? item : item.id);
           const newItems = move(temp, event);
 
-          $toolbar_state.value = {
-            isReorderDisabled: $toolbar_state.value.isReorderDisabled,
-            items: newItems.map((id) => $toolbar_state.value.items.find((i) => matchIds(i, id))!),
-          };
+          if (!hasSameOrder(temp, newItems)) {
+            $toolbar_state.value = {
+              isReorderDisabled: $toolbar_state.value.isReorderDisabled,
+              items: newItems.map((id) => $toolbar_state.value.items.find((i) => matchIds(i, id))!),
+            };
+          }
         }}
       >
         <Group id="left" items={splittedItems.value.left} startIndex={0} />

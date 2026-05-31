@@ -35,7 +35,10 @@ export const StartMenu = memo(({ item }: Props) => {
   return (
     <div
       className="weg-item weg-item-start"
-      onClick={() => {
+      onPointerDown={(event) => {
+        if (event.button !== 0) {
+          return;
+        }
         if (!isStartMenuOpen) {
           invoke(SeelenCommand.ShowStartMenu);
         }

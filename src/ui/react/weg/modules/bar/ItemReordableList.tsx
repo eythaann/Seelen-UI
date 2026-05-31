@@ -1,4 +1,5 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
+import { KeyboardSensor, PointerActivationConstraints, PointerSensor } from "@dnd-kit/dom";
 import { move } from "@dnd-kit/helpers";
 import { WegItemType, WegPinnedItemsVisibility, WegTemporalItemsVisibility } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
@@ -45,6 +46,20 @@ const visibleItems = computed(() => {
   });
 });
 
+const dndSensors = [
+  PointerSensor.configure({
+    preventActivation: () => false,
+    activationConstraints: [
+      new PointerActivationConstraints.Distance({ value: 24 }),
+    ],
+  }),
+  KeyboardSensor,
+];
+
+function hasSameOrder(a: SwItem[], b: SwItem[]) {
+  return a.length === b.length && a.every((item, index) => item.id === b[index]?.id);
+}
+
 export function DockItems() {
   const { t } = useTranslation();
 
@@ -52,9 +67,13 @@ export function DockItems() {
 
   return (
     <DragDropProvider
+      sensors={dndSensors}
       onDragOver={(event) => {
-        const newItems = move($dock_state.value.items, event);
-        $dock_state.value = { ...$dock_state.value, items: newItems };
+        const currentItems = $dock_state.value.items;
+        const newItems = move(currentItems, event);
+        if (!hasSameOrder(currentItems, newItems)) {
+          $dock_state.value = { ...$dock_state.value, items: newItems };
+        }
       }}
     >
       <div className="weg-items">
