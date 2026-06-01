@@ -276,6 +276,7 @@ sides:
   top: Боло
 toolbar:
   auto_hide: Худкор Пинҳон кардани
+  auto_hide_touch_disabled: Пинҳонкунии худкор дар дастгоҳҳои экрани сенсорӣ мавҷуд нест
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Коллексияҳои фазои корӣ
 weg:
   auto_hide: Худкор Пинҳон кардани
+  auto_hide_touch_disabled: Пинҳонкунии худкор дар дастгоҳҳои экрани сенсорӣ мавҷуд нест
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият

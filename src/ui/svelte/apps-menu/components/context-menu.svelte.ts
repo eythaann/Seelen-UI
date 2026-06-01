@@ -1,7 +1,8 @@
 import { invoke, SeelenCommand, SeelenEvent, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuCallbackPayload, StartMenuItem } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuCallbackPayload, StartMenuItem, WidgetId } from "@seelen-ui/lib/types";
 import { type FavFolderItem, globalState } from "../state/mod.svelte";
 import { emit } from "@tauri-apps/api/event";
+import { iconPackManager } from "libs/ui/svelte/components/Icon/common.svelte";
 
 export const CONTEXT_MENU_ID = crypto.randomUUID();
 export const CONTEXT_MENU_CALLBACK_EVENT = "apps_menu::context_menu_action";
@@ -34,6 +35,14 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(
       Widget.self.hide();
       const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
       invoke(SeelenCommand.Run, { program, args: null, workingDir: null, elevated: true });
+    } else if (key === "edit_icon") {
+      const entry = iconPackManager.value.getIconEntry({ path: item.path, umid: item.umid ?? null });
+      invoke(SeelenCommand.TriggerWidget, {
+        payload: {
+          id: "@seelen/custom-icon-editor" as WidgetId,
+          customArgs: { entry },
+        },
+      });
     }
   },
 );
@@ -112,6 +121,13 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
           },
         ]
         : []),
+      {
+        type: "Item",
+        key: "edit_icon",
+        label: t("edit_icon"),
+        icon: "RiEditBoxLine",
+        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+      },
     ],
   };
 }

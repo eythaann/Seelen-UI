@@ -2,6 +2,7 @@ app_menu:
   close: Sulge
   close_multiple: Sulgege kõik
   copy_handles: Koopiakäepidemed
+  edit_app_icon: Rakenduse ikooni muutmine
   kill: Tapmisprotsess
   kill_multiple: Tapke kõik protsessid
   open_file_location: Ava faili asukoht

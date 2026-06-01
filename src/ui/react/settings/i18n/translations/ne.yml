@@ -277,6 +277,7 @@ sides:
   top: टुप्पो
 toolbar:
   auto_hide: 'स्वत: लुकाउने'
+  auto_hide_touch_disabled: टच स्क्रिन उपकरणहरूमा स्वतः लुकाउने सुविधा उपलब्ध छैन
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
@@ -355,6 +356,7 @@ wall:
   workspace_collections: कार्यक्षेत्र संग्रहहरू
 weg:
   auto_hide: 'स्वत: लुकाउने'
+  auto_hide_touch_disabled: टच स्क्रिन उपकरणहरूमा स्वतः लुकाउने सुविधा उपलब्ध छैन
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति

@@ -3,6 +3,7 @@ app_settings: การตั้งค่าแอพ
 applications: การใช้งาน
 back: กลับ
 disband: ยุบโฟลเดอร์
+edit_icon: แก้ไขไอคอน
 folder: โฟลเดอร์
 no_matching_items: ไม่พบรายการที่ตรงกับการค้นหาของคุณ
 open_file_location: เปิดตำแหน่งไฟล์

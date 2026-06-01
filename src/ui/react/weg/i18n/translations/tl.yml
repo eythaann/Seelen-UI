@@ -2,6 +2,7 @@ app_menu:
   close: Malapit
   close_multiple: Isara ang lahat
   copy_handles: Kopyahin ang mga hawakan
+  edit_app_icon: I-edit ang Icon ng App
   kill: Proseso ng Patayin
   kill_multiple: Patayin ang Lahat ng Proseso
   open_file_location: Buksan ang lokasyon ng file

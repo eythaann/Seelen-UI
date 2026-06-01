@@ -2,6 +2,7 @@ app_menu:
   close: Tuvs
   close_multiple: Aizvērt visu
   copy_handles: Kopēt rokturus
+  edit_app_icon: Rediģēt lietotnes ikonu
   kill: Nogalināšanas process
   kill_multiple: Nogalināt visus procesus
   open_file_location: Atveriet faila atrašanās vietu

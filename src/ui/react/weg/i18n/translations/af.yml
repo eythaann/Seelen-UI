@@ -2,6 +2,7 @@ app_menu:
   close: Naby
   close_multiple: Sluit alles
   copy_handles: Kopiehandvatsels
+  edit_app_icon: Wysig App-ikoon
   kill: Doodproses
   kill_multiple: Maak alle prosesse dood
   open_file_location: Oop lêlokasie

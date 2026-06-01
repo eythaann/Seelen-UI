@@ -275,6 +275,7 @@ sides:
   top: Svršek
 toolbar:
   auto_hide: Automaticky skrýt
+  auto_hide_touch_disabled: Automatické skrytí není k dispozici na zařízeních s dotykovou obrazovkou
   delay_to_hide: Zpoždění schování
   delay_to_show: Zpoždění zobrazení
   dock_side: Pozice
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Kolekce pracovního prostoru
 weg:
   auto_hide: Automatické skrytí
+  auto_hide_touch_disabled: Automatické skrytí není k dispozici na zařízeních s dotykovou obrazovkou
   delay_to_hide: Zpoždění schování
   delay_to_show: Zpoždění zobrazení
   dock_side: Pozice

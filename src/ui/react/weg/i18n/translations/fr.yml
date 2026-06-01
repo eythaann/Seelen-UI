@@ -2,6 +2,7 @@ app_menu:
   close: Fermer
   close_multiple: Tout fermer
   copy_handles: Copier l'ID du processus
+  edit_app_icon: Modifier l'icône de l'application
   kill: Terminer le processus
   kill_multiple: Terminer tous les processus
   open_file_location: Ouvrir l'emplacement du fichier

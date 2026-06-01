@@ -2,8 +2,8 @@ import type {
   Icon as IIcon,
   IconPack,
   IconPack as IIconPack,
+  IconPackEntry,
   SeelenCommandGetIconArgs,
-  UniqueIconPackEntry,
 } from "@seelen-ui/types";
 import { List } from "../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../utils/State.ts";
@@ -156,35 +156,12 @@ export class IconPackManager {
     };
   }
 
-  /**
-   * Returns the icon path for an app or file. If no icon is available, returns `null`.
-   *
-   * The search for icons follows this priority order:
-   * 1. UMID (App User Model Id)
-   * 2. Full path
-   * 3. Filename (this is only used to match executable files like .exe)
-   * 4. Extension
-   *
-   * @param {Object} args - Arguments for retrieving the icon path.
-   * @param {string} [args.path] - The full path to the app or file.
-   * @param {string} [args.umid] - The UMID of the app.
-   * @returns {string | null} - The path to the icon, or `null` if no icon is found.
-   *
-   * @example
-   * // Example 1: Get icon by full path
-   * const iconPath = instance.getIconPath({
-   *   path: "C:\\Program Files\\Steam\\steam.exe"
-   * });
-   *
-   * // Example 2: Get icon by UMID
-   * const iconPath = instance.getIconPath({
-   *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
-   * });
-   */
-  public getIconPath(args: SeelenCommandGetIconArgs): IIcon | null {
-    const { path, umid, __seen = new Set<string>() } = args as
-      & SeelenCommandGetIconArgs
-      & { __seen?: Set<string> };
+  public getIconEntry(args: SeelenCommandGetIconArgs): IconPackEntry | null {
+    const {
+      path,
+      umid,
+      __seen = new Set<string>(),
+    } = args as SeelenCommandGetIconArgs & { __seen?: Set<string> };
 
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
@@ -197,7 +174,7 @@ export class IconPackManager {
     // to avoid treating directory names without dots as extensions.
     const lastDot = lowerPath?.lastIndexOf(".");
     const lastSlash = lowerPath?.lastIndexOf("\\") ?? -1;
-    const extension = (lastDot !== undefined && lastDot > lastSlash) ? lowerPath!.slice(lastDot + 1) : undefined;
+    const extension = lastDot !== undefined && lastDot > lastSlash ? lowerPath!.slice(lastDot + 1) : undefined;
 
     // Add the starting path to __seen so that direct A→B→A cycles are caught in 2 hops.
     if (lowerPath) {
@@ -205,10 +182,12 @@ export class IconPackManager {
     }
 
     for (const pack of this.activeIconPacks) {
-      let entry: UniqueIconPackEntry | undefined;
+      let entry: Extract<IconPackEntry, { type: "unique" }> | undefined;
 
       if (umid) {
-        entry = pack.entries.find((e) => e.type === "unique" && !!e.umid && e.umid === umid) as UniqueIconPackEntry;
+        entry = pack.entries.find(
+          (e) => e.type === "unique" && !!e.umid && e.umid === umid,
+        ) as Extract<IconPackEntry, { type: "unique" }>;
       }
 
       if (!entry && lowerPath) {
@@ -230,7 +209,7 @@ export class IconPackManager {
             }
           }
           return false;
-        }) as UniqueIconPackEntry;
+        }) as Extract<IconPackEntry, { type: "unique" }>;
       }
 
       if (entry) {
@@ -240,13 +219,11 @@ export class IconPackManager {
             return null;
           }
           __seen.add(entry.redirect);
-          return this.getIconPath(
-            { path: entry.redirect, __seen } as SeelenCommandGetIconArgs,
-          );
+          return this.getIconEntry({ path: entry.redirect, __seen } as SeelenCommandGetIconArgs);
         }
 
         if (entry.icon) {
-          return entry.icon;
+          return entry;
         }
       }
     }
@@ -257,17 +234,22 @@ export class IconPackManager {
     }
 
     for (const pack of this.activeIconPacks) {
-      const icon = pack.entries.find((e) => {
+      const entry = pack.entries.find((e) => {
         return e.type === "shared" && e.extension === extension;
       });
 
-      if (icon) {
-        return icon.icon;
+      if (entry) {
+        return entry;
       }
     }
 
     // If no icon is found in any icon pack, return null
     return null;
+  }
+
+  public getIconPath(args: SeelenCommandGetIconArgs): IIcon | null {
+    const entry = this.getIconEntry(args);
+    return entry?.icon || null;
   }
 
   public getIcon({ path, umid }: SeelenCommandGetIconArgs): IIcon | null {
@@ -333,9 +315,7 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public static requestIconExtraction(
-    obj: SeelenCommandGetIconArgs,
-  ): Promise<void> {
+  public static requestIconExtraction(obj: SeelenCommandGetIconArgs): Promise<void> {
     return invoke(SeelenCommand.GetIcon, obj);
   }
 

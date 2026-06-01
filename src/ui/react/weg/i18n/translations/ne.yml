@@ -2,6 +2,7 @@ app_menu:
   close: घनिष्ट
   close_multiple: चौमा
   copy_handles: मुख्य ह्यान्डल
+  edit_app_icon: एप आइकन सम्पादन गर्नुहोस्
   kill: प्रक्रिया मार्नुहोस्
   kill_multiple: सबै प्रक्रियाहरू मार्नुहोस्
   open_file_location: फाइल स्थान खोल्नुहोस्

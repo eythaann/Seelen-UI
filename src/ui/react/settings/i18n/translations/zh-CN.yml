@@ -236,6 +236,7 @@ sides:
   top: 顶部
 toolbar:
   auto_hide: 自动隐藏
+  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
   dock_side: 职位
@@ -312,6 +313,7 @@ wall:
   workspace_collections: 工作区集合
 weg:
   auto_hide: 自动隐藏
+  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置

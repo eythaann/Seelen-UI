@@ -2,6 +2,7 @@ app_menu:
   close: Lukk
   close_multiple: Lukk alle
   copy_handles: Kopier håndtak
+  edit_app_icon: Rediger appikon
   kill: Drep prosessen
   kill_multiple: Drep alle prosesser
   open_file_location: Åpne fil plassering

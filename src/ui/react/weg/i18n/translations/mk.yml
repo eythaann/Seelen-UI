@@ -2,6 +2,7 @@ app_menu:
   close: Затвори
   close_multiple: Затворете ги сите
   copy_handles: Копирање рачки
+  edit_app_icon: Уредете ја иконата на апликацијата
   kill: Процес на убивање
   kill_multiple: Убиј ги сите процеси
   open_file_location: Отворете ја локацијата на датотеката

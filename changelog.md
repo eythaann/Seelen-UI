@@ -2,6 +2,10 @@
 
 ## [2.7.0-dev]
 
+### feature
+
+- Allow users easily create icon packs via an Icon Editor widget.
+
 ### enhancements
 
 - keyboard/language selector fixes and improvements (now shows active IME).

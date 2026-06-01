@@ -3,6 +3,7 @@ app_settings: App Settings
 applications: Applications
 back: Back
 disband: Disband Folder
+edit_icon: Edit Icon
 folder: Folder
 no_matching_items: No items found matching your search
 open_file_location: Open File Location

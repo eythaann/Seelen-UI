@@ -2,6 +2,7 @@ app_menu:
   close: 關閉
   close_multiple: 關閉全部
   copy_handles: 複製把手
+  edit_app_icon: 編輯應用程式圖標
   kill: 結束進程
   kill_multiple: 結束所有進程
   open_file_location: 打開文件位置

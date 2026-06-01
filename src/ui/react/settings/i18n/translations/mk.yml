@@ -278,6 +278,7 @@ sides:
   top: Врв
 toolbar:
   auto_hide: Автоматско скриј
+  auto_hide_touch_disabled: Автоматското криење не е достапно на уредите со екран на допир
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
   dock_side: Позиција
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Колекции на работниот простор
 weg:
   auto_hide: Автоматско скриј
+  auto_hide_touch_disabled: Автоматското криење не е достапно на уредите со екран на допир
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
   dock_side: Позиција

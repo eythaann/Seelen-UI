@@ -2,6 +2,7 @@ app_menu:
   close: Закрити
   close_multiple: Закрити все
   copy_handles: Копіювати ідентифікатор
+  edit_app_icon: Змінити значок програми
   kill: Зупинити процес
   kill_multiple: Зупинити всі процеси
   open_file_location: Розташування відкритого файлу

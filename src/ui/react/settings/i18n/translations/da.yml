@@ -272,6 +272,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Auto skjul
+  auto_hide_touch_disabled: Automatisk skjul er ikke tilgængelig på enheder med berøringsskærm
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
@@ -348,6 +349,7 @@ wall:
   workspace_collections: Arbejdsrumssamlinger
 weg:
   auto_hide: Auto skjul
+  auto_hide_touch_disabled: Automatisk skjul er ikke tilgængelig på enheder med berøringsskærm
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position

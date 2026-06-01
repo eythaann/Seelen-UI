@@ -274,6 +274,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Outomatiese vel
+  auto_hide_touch_disabled: Outo-versteek is nie op raakskermtoestelle beskikbaar nie
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
@@ -350,6 +351,7 @@ wall:
   workspace_collections: Werkspasie Versamelings
 weg:
   auto_hide: Outo -vel
+  auto_hide_touch_disabled: Outo-versteek is nie op raakskermtoestelle beskikbaar nie
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
   dock_side: Posisie

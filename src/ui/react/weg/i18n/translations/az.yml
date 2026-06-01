@@ -2,6 +2,7 @@ app_menu:
   close: Yaxın
   close_multiple: Hamısını bağlayın
   copy_handles: Copular
+  edit_app_icon: Tətbiq İkonunu redaktə edin
   kill: Öldürmə prosesi
   kill_multiple: Bütün prosesləri öldürün
   open_file_location: Fayl yeri açın

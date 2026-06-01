@@ -3,6 +3,7 @@ app_settings: App-indstillinger
 applications: Ansøgninger
 back: Tilbage
 disband: Opløs mappe
+edit_icon: Rediger ikon
 folder: Mappe
 no_matching_items: Der blev ikke fundet nogen varer, der matcher din søgning
 open_file_location: Åbn Filplacering

@@ -2,6 +2,7 @@ app_menu:
   close: Chaewch
   close_multiple: Cau popeth
   copy_handles: Dolenni copi
+  edit_app_icon: Golygu Eicon App
   kill: Proses Lladd
   kill_multiple: Lladd Pob Proses
   open_file_location: Lleoliad Ffeil Agored

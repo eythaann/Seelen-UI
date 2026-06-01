@@ -275,6 +275,7 @@ sides:
   top: Tontor
 toolbar:
   auto_hide: Ezkutatu automatikoa
+  auto_hide_touch_disabled: Ezkutatze automatikoa ez dago erabilgarri ukipen-pantailako gailuetan
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Lan-esparruko bildumak
 weg:
   auto_hide: Ezkutatu automatikoa
+  auto_hide_touch_disabled: Ezkutatze automatikoa ez dago erabilgarri ukipen-pantailako gailuetan
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku

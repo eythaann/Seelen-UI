@@ -278,6 +278,7 @@ sides:
   top: Quċċata
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide mhix disponibbli fuq apparati touch screen
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide mhix disponibbli fuq apparati touch screen
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni

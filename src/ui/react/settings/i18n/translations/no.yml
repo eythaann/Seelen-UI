@@ -274,6 +274,7 @@ sides:
   top: Topp
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Skjul automatisk er ikke tilgjengelig på enheter med berøringsskjerm
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
@@ -350,6 +351,7 @@ wall:
   workspace_collections: Arbeidsområdesamlinger
 weg:
   auto_hide: Skjul automatisk
+  auto_hide_touch_disabled: Skjul automatisk er ikke tilgjengelig på enheter med berøringsskjerm
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling

@@ -283,6 +283,7 @@ sides:
   top: Oben
 toolbar:
   auto_hide: Automatisch ausblenden
+  auto_hide_touch_disabled: Das automatische Ausblenden ist auf Touchscreen-Geräten nicht verfügbar
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
@@ -361,6 +362,7 @@ wall:
   workspace_collections: Arbeitsbereichssammlungen
 weg:
   auto_hide: Automatisch ausblenden
+  auto_hide_touch_disabled: Das automatische Ausblenden ist auf Touchscreen-Geräten nicht verfügbar
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position

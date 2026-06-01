@@ -2,6 +2,7 @@ app_menu:
   close: បិត
   close_multiple: បិទទាំងអស់
   copy_handles: ចម្លងចំណុចទាញ
+  edit_app_icon: កែសម្រួលរូបតំណាងកម្មវិធី
   kill: ដំណើរការសម្លាប់
   kill_multiple: សម្លាប់ដំណើរការទាំងអស់។
   open_file_location: បើកទីតាំងឯកសារ

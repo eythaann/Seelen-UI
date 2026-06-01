@@ -263,6 +263,7 @@ sides:
   top: สูงสุด
 toolbar:
   auto_hide: ซ่อนอัตโนมัติ
+  auto_hide_touch_disabled: การซ่อนอัตโนมัติไม่พร้อมใช้งานบนอุปกรณ์หน้าจอสัมผัส
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
@@ -339,6 +340,7 @@ wall:
   workspace_collections: คอลเลกชันพื้นที่ทำงาน
 weg:
   auto_hide: ซ่อนอัตโนมัติ
+  auto_hide_touch_disabled: การซ่อนอัตโนมัติไม่พร้อมใช้งานบนอุปกรณ์หน้าจอสัมผัส
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง

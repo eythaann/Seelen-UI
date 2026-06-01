@@ -267,6 +267,7 @@ sides:
   top: سر
 toolbar:
   auto_hide: آٹو پټول
+  auto_hide_touch_disabled: د ټچ سکرین وسیلو کې اتومات پټول شتون نلري
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
@@ -343,6 +344,7 @@ wall:
   workspace_collections: د کار ځای ټولګه
 weg:
   auto_hide: آٹو پټول
+  auto_hide_touch_disabled: د ټچ سکرین وسیلو کې اتومات پټول شتون نلري
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت

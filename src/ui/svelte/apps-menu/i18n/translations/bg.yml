@@ -3,6 +3,7 @@ app_settings: Настройки на приложението
 applications: Приложения
 back: Назад
 disband: Разпуснете папката
+edit_icon: Икона за редактиране
 folder: Папка
 no_matching_items: Няма намерени артикули, отговарящи на вашето търсене
 open_file_location: Отворете местоположението на файла

@@ -275,6 +275,7 @@ sides:
   top: Kop
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Veşartina otomatîkî li ser cîhazên ekrana destikê peyda nabe
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Koleksiyonên Cihê Xebatê
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Veşartina otomatîkî li ser cîhazên ekrana destikê peyda nabe
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş

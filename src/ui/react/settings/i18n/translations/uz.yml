@@ -279,6 +279,7 @@ sides:
   top: Eng yuqori
 toolbar:
   auto_hide: Avtomatik yashirish
+  auto_hide_touch_disabled: Avtomatik yashirish sensorli ekranli qurilmalarda mavjud emas
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
@@ -357,6 +358,7 @@ wall:
   workspace_collections: Ish maydoni to'plamlari
 weg:
   auto_hide: Avtomatik yashirish
+  auto_hide_touch_disabled: Avtomatik yashirish sensorli ekranli qurilmalarda mavjud emas
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya

@@ -274,6 +274,7 @@ sides:
   top: თავი
 toolbar:
   auto_hide: ავტო დამალვა
+  auto_hide_touch_disabled: ავტომატური დამალვა მიუწვდომელია სენსორული ეკრანის მოწყობილობებზე
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
@@ -350,6 +351,7 @@ wall:
   workspace_collections: სამუშაო სივრცის კოლექციები
 weg:
   auto_hide: Ავტომატური დამალვა
+  auto_hide_touch_disabled: ავტომატური დამალვა მიუწვდომელია სენსორული ეკრანის მოწყობილობებზე
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია

@@ -271,6 +271,7 @@ sides:
   top: ඉහල
 toolbar:
   auto_hide: ස්වයංක්රීය සැඟවීම
+  auto_hide_touch_disabled: ස්වයංක්‍රීය සැඟවීම ස්පර්ශ තිර උපාංගවල නොමැත
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර
@@ -347,6 +348,7 @@ wall:
   workspace_collections: වැඩ ඉඩ එකතු කිරීම්
 weg:
   auto_hide: ස්වයංක්‍රීය සඟවන්න
+  auto_hide_touch_disabled: ස්වයංක්‍රීය සැඟවීම ස්පර්ශ තිර උපාංගවල නොමැත
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර

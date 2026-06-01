@@ -240,6 +240,7 @@ sides:
   top: 頂部
 toolbar:
   auto_hide: 自動隱藏
+  auto_hide_touch_disabled: 自動隱藏在觸控螢幕裝置上不可用
   delay_to_hide: 延遲隱藏
   delay_to_show: 延遲顯示
   dock_side: 位置
@@ -316,6 +317,7 @@ wall:
   workspace_collections: 工作區集合
 weg:
   auto_hide: 自動隱藏
+  auto_hide_touch_disabled: 自動隱藏在觸控螢幕裝置上不可用
   delay_to_hide: 延遲隱藏
   delay_to_show: 延遲顯示
   dock_side: 位置

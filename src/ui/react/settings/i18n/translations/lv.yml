@@ -273,6 +273,7 @@ sides:
   top: Tops
 toolbar:
   auto_hide: Auto paslēpt
+  auto_hide_touch_disabled: Automātiskā slēpšana nav pieejama skārienekrāna ierīcēs
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Darbvietu kolekcijas
 weg:
   auto_hide: Auto paslēpt
+  auto_hide_touch_disabled: Automātiskā slēpšana nav pieejama skārienekrāna ierīcēs
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija

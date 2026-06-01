@@ -271,6 +271,7 @@ sides:
   top: Tipus
 toolbar:
   auto_hide: Automaatne peida
+  auto_hide_touch_disabled: Automaatne peitmine pole puuteekraaniga seadmetes saadaval
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
@@ -347,6 +348,7 @@ wall:
   workspace_collections: Tööruumi kogud
 weg:
   auto_hide: Automaatne peida
+  auto_hide_touch_disabled: Automaatne peitmine pole puuteekraaniga seadmetes saadaval
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon

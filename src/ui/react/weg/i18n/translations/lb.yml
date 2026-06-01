@@ -2,6 +2,7 @@ app_menu:
   close: Zoumaachen
   close_multiple: Alles dobäi
   copy_handles: Kopie Handelen
+  edit_app_icon: Ännerung App Ikon
   kill: Kill Prozess
   kill_multiple: Kill All Prozesser
   open_file_location: Open Dateiplaz

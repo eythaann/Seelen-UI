@@ -277,6 +277,9 @@ sides:
   top: Haut
 toolbar:
   auto_hide: Masquer automatiquement
+  auto_hide_touch_disabled: >-
+    Le masquage automatique n'est pas disponible sur les appareils à écran
+    tactile
   delay_to_hide: Délai avant de masquer
   delay_to_show: Délai avant d'afficher
   dock_side: Position
@@ -355,6 +358,9 @@ wall:
   workspace_collections: Collections d'espaces de travail
 weg:
   auto_hide: Masquage automatique
+  auto_hide_touch_disabled: >-
+    Le masquage automatique n'est pas disponible sur les appareils à écran
+    tactile
   delay_to_hide: Délai avant masquage
   delay_to_show: Délai avant affichage
   dock_side: Position

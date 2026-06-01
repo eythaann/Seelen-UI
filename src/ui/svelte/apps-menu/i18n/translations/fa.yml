@@ -3,6 +3,7 @@ app_settings: تنظیمات برنامه
 applications: برنامه های کاربردی
 back: برگشت
 disband: پوشه را از بین ببرید
+edit_icon: ویرایش نماد
 folder: پوشه
 no_matching_items: هیچ موردی مطابق با جستجوی شما یافت نشد
 open_file_location: مکان فایل را باز کنید

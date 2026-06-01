@@ -274,6 +274,7 @@ sides:
   top: Таг
 toolbar:
   auto_hide: Авто гүнд
+  auto_hide_touch_disabled: Мэдрэгч дэлгэцтэй төхөөрөмжүүд дээр автоматаар нуух боломжгүй
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
@@ -350,6 +351,7 @@ wall:
   workspace_collections: Ажлын талбарын цуглуулга
 weg:
   auto_hide: Авто гүнд
+  auto_hide_touch_disabled: Мэдрэгч дэлгэцтэй төхөөрөмжүүд дээр автоматаар нуух боломжгүй
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал

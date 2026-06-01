@@ -2,6 +2,7 @@ app_menu:
   close: වසන්න
   close_multiple: සියල්ල වසා දමන්න
   copy_handles: හසුරුමය
+  edit_app_icon: යෙදුම් නිරූපකය සංස්කරණය කරන්න
   kill: කිල් ක්‍රියාවලිය
   kill_multiple: සියලුම ක්‍රියාවලීන් මරා දමන්න
   open_file_location: ගොනුව විවෘත ස්ථානය

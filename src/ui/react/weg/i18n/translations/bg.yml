@@ -2,6 +2,7 @@ app_menu:
   close: Близо
   close_multiple: Затвори всички
   copy_handles: Копиращи дръжки
+  edit_app_icon: Редактиране на иконата на приложението
   kill: Процес на унищожаване
   kill_multiple: Убийте всички процеси
   open_file_location: Отворете местоположението на файла

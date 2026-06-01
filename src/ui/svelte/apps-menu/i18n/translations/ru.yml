@@ -3,6 +3,7 @@ app_settings: Настройки приложения
 applications: Приложения
 back: Назад
 disband: Расформировать папку
+edit_icon: Значок редактирования
 folder: Папка
 no_matching_items: Не найдено товаров, соответствующих вашему запросу
 open_file_location: Открыть местоположение файла

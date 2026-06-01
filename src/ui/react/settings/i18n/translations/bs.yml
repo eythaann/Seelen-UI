@@ -272,6 +272,9 @@ sides:
   top: Vrh
 toolbar:
   auto_hide: Auto se sakrio
+  auto_hide_touch_disabled: >-
+    Automatsko skrivanje nije dostupno na uređajima sa ekranom osjetljivim na
+    dodir
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
@@ -348,6 +351,9 @@ wall:
   workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto se sakrio
+  auto_hide_touch_disabled: >-
+    Automatsko skrivanje nije dostupno na uređajima sa ekranom osjetljivim na
+    dodir
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj

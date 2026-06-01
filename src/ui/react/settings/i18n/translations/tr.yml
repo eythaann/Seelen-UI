@@ -274,6 +274,7 @@ sides:
   top: Üst
 toolbar:
   auto_hide: Otomatik Gizle
+  auto_hide_touch_disabled: Otomatik gizleme dokunmatik ekranlı cihazlarda kullanılamaz
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Pozisyon
@@ -352,6 +353,7 @@ wall:
   workspace_collections: Çalışma Alanı Koleksiyonları
 weg:
   auto_hide: Otomatik Gizle
+  auto_hide_touch_disabled: Otomatik gizleme dokunmatik ekranlı cihazlarda kullanılamaz
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum

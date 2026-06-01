@@ -276,6 +276,7 @@ sides:
   top: শীর্ষ
 toolbar:
   auto_hide: অটো আড়াল
+  auto_hide_touch_disabled: টাচ স্ক্রীন ডিভাইসে স্বয়ংক্রিয় লুকান উপলব্ধ নয়
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
@@ -352,6 +353,7 @@ wall:
   workspace_collections: ওয়ার্কস্পেস সংগ্রহ
 weg:
   auto_hide: স্বয়ং চামড়া
+  auto_hide_touch_disabled: টাচ স্ক্রীন ডিভাইসে স্বয়ংক্রিয় লুকান উপলব্ধ নয়
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান

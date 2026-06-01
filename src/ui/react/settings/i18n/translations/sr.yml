@@ -273,6 +273,9 @@ sides:
   top: На врху
 toolbar:
   auto_hide: Аутоматска кожа
+  auto_hide_touch_disabled: >-
+    Аутоматско сакривање није доступно на уређајима са екраном осетљивим на
+    додир
   delay_to_hide: Одложите да се сакријете
   delay_to_show: Одлагање приказивања
   dock_side: Положај
@@ -351,6 +354,9 @@ wall:
   workspace_collections: Збирке радног простора
 weg:
   auto_hide: Аутоматска кожа
+  auto_hide_touch_disabled: >-
+    Аутоматско сакривање није доступно на уређајима са екраном осетљивим на
+    додир
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
   dock_side: Положај

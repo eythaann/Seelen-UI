@@ -3,6 +3,7 @@ app_settings: Rakenduse seaded
 applications: Rakendused
 back: Tagasi
 disband: Laiali kaust
+edit_icon: Redigeerimise ikoon
 folder: Kaust
 no_matching_items: Teie otsingule vastavaid üksusi ei leitud
 open_file_location: Avage faili asukoht

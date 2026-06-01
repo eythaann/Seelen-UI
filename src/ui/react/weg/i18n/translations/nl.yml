@@ -2,6 +2,7 @@ app_menu:
   close: Sluiten
   close_multiple: Sluit alles
   copy_handles: Kopieer handgrepen
+  edit_app_icon: App-pictogram bewerken
   kill: Dood proces
   kill_multiple: Dood alle processen
   open_file_location: Open de bestandslocatie

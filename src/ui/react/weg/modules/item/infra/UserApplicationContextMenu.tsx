@@ -1,11 +1,12 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuItem, UserAppWindow } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuItem, UserAppWindow, WidgetId } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $full_settings, $settings } from "../../shared/state/settings.ts";
+import { iconPackManager } from "libs/ui/react/components/Icon/common.ts";
 
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
@@ -42,6 +43,16 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   } else if (key === "kill") {
     windows.forEach((w) => {
       invoke(SeelenCommand.WegKillApp, { hwnd: w.hwnd });
+    });
+  } else if (key === "edit_app_icon") {
+    let entry = iconPackManager.value.value.getIconEntry({ path: item.path, umid: item.umid });
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: {
+        id: "@seelen/custom-icon-editor" as WidgetId,
+        customArgs: {
+          entry,
+        },
+      },
     });
   }
 });
@@ -99,9 +110,18 @@ export function getUserApplicationContextMenu(
       label: t("app_menu.run_as"),
       callbackEvent: onAppMenuClick,
     },
+    {
+      type: "Item",
+      key: "edit_app_icon",
+      icon: "RiEditBoxLine",
+      label: t("app_menu.edit_app_icon"),
+      callbackEvent: onAppMenuClick,
+    },
   );
 
   if (windows.length) {
+    items.push({ type: "Separator" });
+
     if ($full_settings.value.devTools) {
       items.push({
         type: "Item",

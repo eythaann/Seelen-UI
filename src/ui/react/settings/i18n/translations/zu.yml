@@ -279,6 +279,7 @@ sides:
   top: Isihloko
 toolbar:
   auto_hide: Fihla okuzenzakalelayo
+  auto_hide_touch_disabled: Ukufihla ngokuzenzakalela akutholakali kumadivayisi wesikrini esithintwayo
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
@@ -359,6 +360,7 @@ wall:
   workspace_collections: Amaqoqo wendawo yokusebenza
 weg:
   auto_hide: Fihla okuzenzakalelayo
+  auto_hide_touch_disabled: Ukufihla ngokuzenzakalela akutholakali kumadivayisi wesikrini esithintwayo
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma

@@ -251,6 +251,7 @@ sides:
   top: 上
 toolbar:
   auto_hide: 自動的に隠す
+  auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: ポジション
@@ -327,6 +328,7 @@ wall:
   workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
+  auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: 位置

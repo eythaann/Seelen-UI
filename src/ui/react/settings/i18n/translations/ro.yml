@@ -278,6 +278,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Ascunde auto
+  auto_hide_touch_disabled: Ascunderea automată nu este disponibilă pe dispozitivele cu ecran tactil
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziția
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Colecții de spațiu de lucru
 weg:
   auto_hide: Ascundere automată
+  auto_hide_touch_disabled: Ascunderea automată nu este disponibilă pe dispozitivele cu ecran tactil
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziţie

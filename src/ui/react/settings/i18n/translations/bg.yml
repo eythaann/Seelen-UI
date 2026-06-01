@@ -278,6 +278,7 @@ sides:
   top: Връх
 toolbar:
   auto_hide: Автоматично скриване
+  auto_hide_touch_disabled: Автоматичното скриване не е налично на устройства със сензорен екран
   delay_to_hide: Забавяне, за да се скрие
   delay_to_show: Забавяне за показване
   dock_side: Позиция
@@ -356,6 +357,7 @@ wall:
   workspace_collections: Колекции на работното пространство
 weg:
   auto_hide: Автоматично скриване
+  auto_hide_touch_disabled: Автоматичното скриване не е налично на устройства със сензорен екран
   delay_to_hide: Забавяне, за да се скрие
   delay_to_show: Забавяне за показване
   dock_side: Позиция

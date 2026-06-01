@@ -2,6 +2,7 @@ app_menu:
   close: Lokaðu
   close_multiple: Lokaðu öllu
   copy_handles: Afrit handföng
+  edit_app_icon: Breyta forritatákni
   kill: Kill Process
   kill_multiple: Drepa alla ferla
   open_file_location: Opnaðu staðsetningu skráar

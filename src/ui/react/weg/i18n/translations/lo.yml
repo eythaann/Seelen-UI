@@ -2,6 +2,7 @@ app_menu:
   close: ປິດ
   close_multiple: ປິດທັງຫມົດ
   copy_handles: ຄັດລອກ
+  edit_app_icon: ແກ້ໄຂໄອຄອນແອັບ
   kill: ຂະບວນການຂ້າ
   kill_multiple: ຂ້າຂະບວນການທັງຫມົດ
   open_file_location: ເປີດສະຖານທີ່ເອກະສານ

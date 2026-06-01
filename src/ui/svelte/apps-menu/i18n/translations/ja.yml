@@ -3,6 +3,7 @@ app_settings: アプリの設定
 applications: アプリケーション
 back: 戻る
 disband: フォルダの登録解除
+edit_icon: 編集アイコン
 folder: フォルダー
 no_matching_items: 検索に一致するアイテムはありません
 open_file_location: ファイルの場所を開く

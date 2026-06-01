@@ -2,6 +2,7 @@ app_menu:
   close: બંધ
   close_multiple: બંધ કરવું
   copy_handles: નકલ
+  edit_app_icon: એપ્લિકેશન આયકન સંપાદિત કરો
   kill: કીલ પ્રોસેસ
   kill_multiple: બધી પ્રક્રિયાઓને મારી નાખો
   open_file_location: ફાઇલ સ્થાન ખોલો

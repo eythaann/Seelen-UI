@@ -274,6 +274,7 @@ sides:
   top: Bovenkant
 toolbar:
   auto_hide: Automatisch verbergen
+  auto_hide_touch_disabled: Automatisch verbergen is niet beschikbaar op apparaten met aanraakscherm
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Werkruimtecollecties
 weg:
   auto_hide: Automatisch Verbergen
+  auto_hide_touch_disabled: Automatisch verbergen is niet beschikbaar op apparaten met aanraakscherm
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie

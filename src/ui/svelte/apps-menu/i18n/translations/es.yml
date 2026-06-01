@@ -3,6 +3,7 @@ app_settings: Configuración de la aplicación
 applications: Aplicaciones
 back: Atrás
 disband: Disolver carpeta
+edit_icon: Editar icono
 folder: Carpeta
 no_matching_items: No se encontraron artículos que coincidan con su búsqueda
 open_file_location: Abrir ubicación del archivo

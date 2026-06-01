@@ -2,6 +2,7 @@ app_menu:
   close: بندول
   close_multiple: ټول وتړئ
   copy_handles: لاسوندونه کاپي کوي
+  edit_app_icon: د اپلیکیشن آیکون ایډیټ کړئ
   kill: د وژلو پروسه
   kill_multiple: ټولې پروسې وژني
   open_file_location: د فایل ځای خلاص کړئ

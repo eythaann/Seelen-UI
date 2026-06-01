@@ -2,6 +2,7 @@ app_menu:
   close: Tanca
   close_multiple: Tanca tot
   copy_handles: Manelles de còpia
+  edit_app_icon: Edita la icona de l'aplicació
   kill: Procés de matança
   kill_multiple: Mata tots els processos
   open_file_location: Obriu la ubicació del fitxer

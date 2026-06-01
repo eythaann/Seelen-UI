@@ -2,6 +2,7 @@ app_menu:
   close: Închide
   close_multiple: Inchide tot
   copy_handles: Copiați mânerele
+  edit_app_icon: Editați pictograma aplicației
   kill: Procesul de ucidere
   kill_multiple: Omoara toate procesele
   open_file_location: Deschide locația fișierului

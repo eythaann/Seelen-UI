@@ -275,6 +275,7 @@ sides:
   top: టాప్
 toolbar:
   auto_hide: ఆటో దాచు
+  auto_hide_touch_disabled: టచ్ స్క్రీన్ పరికరాలలో స్వీయ దాచు అందుబాటులో లేదు
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
@@ -353,6 +354,7 @@ wall:
   workspace_collections: కార్యస్థల సేకరణలు
 weg:
   auto_hide: ఆటో దాచు
+  auto_hide_touch_disabled: టచ్ స్క్రీన్ పరికరాలలో స్వీయ దాచు అందుబాటులో లేదు
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం

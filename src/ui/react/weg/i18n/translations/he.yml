@@ -2,6 +2,7 @@ app_menu:
   close: סגור
   close_multiple: סגור הכל
   copy_handles: העתק ידיות
+  edit_app_icon: ערוך את סמל האפליקציה
   kill: הרוג תהליך
   kill_multiple: הרוג את כל התהליכים
   open_file_location: פתח את מיקום הקובץ

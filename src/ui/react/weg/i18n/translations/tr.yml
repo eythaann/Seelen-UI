@@ -2,6 +2,7 @@ app_menu:
   close: Kapat
   close_multiple: Tümünü Kapat
   copy_handles: Tanıtıcıları Kopyala
+  edit_app_icon: Uygulama Simgesini Düzenle
   kill: Görevi Sonlandır
   kill_multiple: Tüm Görevleri Sonlandır
   open_file_location: Dosya Konumunu Aç

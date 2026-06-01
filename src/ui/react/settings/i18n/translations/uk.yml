@@ -275,6 +275,9 @@ sides:
   top: Верх
 toolbar:
   auto_hide: Автоматично приховувати
+  auto_hide_touch_disabled: >-
+    Функція автоматичного приховування недоступна на пристроях із сенсорним
+    екраном
   delay_to_hide: Затримка приховання
   delay_to_show: Затримка показу
   dock_side: Посада
@@ -351,6 +354,9 @@ wall:
   workspace_collections: Колекції робочої області
 weg:
   auto_hide: Автоматично приховувати
+  auto_hide_touch_disabled: >-
+    Функція автоматичного приховування недоступна на пристроях із сенсорним
+    екраном
   delay_to_hide: Затримка приховання
   delay_to_show: Затримка показу
   dock_side: Позиція панелі

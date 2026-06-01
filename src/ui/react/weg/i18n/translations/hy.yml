@@ -2,6 +2,7 @@ app_menu:
   close: փակել
   close_multiple: Փակել բոլորը
   copy_handles: Պատճենել բռնակներ
+  edit_app_icon: Խմբագրել հավելվածի պատկերակը
   kill: Սպանության գործընթաց
   kill_multiple: Սպանել բոլոր գործընթացները
   open_file_location: Բաց ֆայլի գտնվելու վայրը

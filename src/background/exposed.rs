@@ -262,6 +262,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::modules::system_tray::infrastructure::*;
     use crate::modules::trash_bin::infrastructure::*;
     use crate::modules::user::infrastructure::*;
+    use crate::modules::user_icon_pack::infrastructure::*;
 
     app_builder.invoke_handler(command_handler_list!())
 }

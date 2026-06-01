@@ -250,6 +250,7 @@ sides:
   top: 위
 toolbar:
   auto_hide: 자동 숨기기
+  auto_hide_touch_disabled: 터치 스크린 장치에서는 자동 숨기기를 사용할 수 없습니다.
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치
@@ -326,6 +327,7 @@ wall:
   workspace_collections: 작업공간 컬렉션
 weg:
   auto_hide: 자동 숨기기
+  auto_hide_touch_disabled: 터치 스크린 장치에서는 자동 숨기기를 사용할 수 없습니다.
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치

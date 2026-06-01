@@ -2,6 +2,7 @@ app_menu:
   close: اغلق
   close_multiple: اغلق الكل
   copy_handles: انسخ الرمز
+  edit_app_icon: تحرير أيقونة التطبيق
   kill: قتل العملية
   kill_multiple: اقتل جميع العمليات
   open_file_location: افتح مكان الملف

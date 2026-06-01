@@ -2,6 +2,7 @@ app_menu:
   close: Viċin
   close_multiple: Agħlaq ilkoll
   copy_handles: Kopja pumi
+  edit_app_icon: Editja l-Ikona tal-App
   kill: Qtil Proċess
   kill_multiple: Oqtol il-Proċessi Kollha
   open_file_location: Post tal-fajl miftuħ

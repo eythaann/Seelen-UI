@@ -273,6 +273,7 @@ sides:
   top: Üst
 toolbar:
   auto_hide: Avtomatik gizlətmək
+  auto_hide_touch_disabled: Avtomatik gizlətmə sensor ekranlı cihazlarda mövcud deyil
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
@@ -349,6 +350,7 @@ wall:
   workspace_collections: İş sahəsi kolleksiyaları
 weg:
   auto_hide: Avtomatik gizlətmək
+  auto_hide_touch_disabled: Avtomatik gizlətmə sensor ekranlı cihazlarda mövcud deyil
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe

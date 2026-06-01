@@ -281,6 +281,9 @@ sides:
   top: Alto
 toolbar:
   auto_hide: Nascondi automaticamente
+  auto_hide_touch_disabled: >-
+    La funzione Nascondi automaticamente non è disponibile sui dispositivi touch
+    screen
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
@@ -357,6 +360,9 @@ wall:
   workspace_collections: Raccolte di aree di lavoro
 weg:
   auto_hide: Nascondi automaticamente
+  auto_hide_touch_disabled: >-
+    La funzione Nascondi automaticamente non è disponibile sui dispositivi touch
+    screen
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione

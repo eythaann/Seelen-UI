@@ -270,6 +270,7 @@ sides:
   top: Juu
 toolbar:
   auto_hide: Kujificha kiotomatiki
+  auto_hide_touch_disabled: Ficha otomatiki haipatikani kwenye vifaa vya skrini ya kugusa
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
@@ -346,6 +347,7 @@ wall:
   workspace_collections: Mikusanyiko ya Nafasi ya Kazi
 weg:
   auto_hide: Kujificha kiotomatiki
+  auto_hide_touch_disabled: Ficha otomatiki haipatikani kwenye vifaa vya skrini ya kugusa
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo

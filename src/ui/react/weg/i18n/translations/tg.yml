@@ -2,6 +2,7 @@ app_menu:
   close: Наздик
   close_multiple: Ҳамаашро пӯшед
   copy_handles: Дасткор
+  edit_app_icon: Тасвири барномаро таҳрир кунед
   kill: Раванди куштан
   kill_multiple: Ҳама равандҳоро кушед
   open_file_location: Кушодани макони кушод

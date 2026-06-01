@@ -3,6 +3,7 @@ app_settings: Paramètres de l'application
 applications: Applications
 back: Dos
 disband: Supprimer le dossier
+edit_icon: Modifier l'icône
 folder: Dossier
 no_matching_items: Aucun article trouvé correspondant à votre recherche
 open_file_location: Emplacement du fichier ouvert

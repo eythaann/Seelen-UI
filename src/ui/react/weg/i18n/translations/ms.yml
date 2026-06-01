@@ -2,6 +2,7 @@ app_menu:
   close: Tutup
   close_multiple: Tutup semua
   copy_handles: Salin pemegang
+  edit_app_icon: Edit Ikon Apl
   kill: Proses Bunuh
   kill_multiple: Bunuh Semua Proses
   open_file_location: Buka lokasi fail

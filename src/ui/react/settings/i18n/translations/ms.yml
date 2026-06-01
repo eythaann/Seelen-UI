@@ -275,6 +275,7 @@ sides:
   top: Atas
 toolbar:
   auto_hide: Menyembunyikan auto
+  auto_hide_touch_disabled: Auto sorok tidak tersedia pada peranti skrin sentuh
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Menyembunyikan auto
+  auto_hide_touch_disabled: Auto sorok tidak tersedia pada peranti skrin sentuh
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan

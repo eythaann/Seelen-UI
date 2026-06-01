@@ -3,6 +3,7 @@ app_settings: Aplikazioaren ezarpenak
 applications: Aplikazioak
 back: Itzuli
 disband: Desegin karpeta
+edit_icon: Editatu ikonoa
 folder: Karpeta
 no_matching_items: Ez da aurkitu zure bilaketarekin bat datorren elementurik
 open_file_location: Ireki fitxategiaren kokapena

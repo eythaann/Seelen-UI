@@ -276,6 +276,7 @@ sides:
   top: Գագաթ
 toolbar:
   auto_hide: Ավտոմատ թաքցնել
+  auto_hide_touch_disabled: Ավտոմատ թաքցնելը հասանելի չէ սենսորային էկրանով սարքերում
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
@@ -352,6 +353,7 @@ wall:
   workspace_collections: Աշխատանքային տարածքների հավաքածուներ
 weg:
   auto_hide: Ավտոմատ թաքցնել
+  auto_hide_touch_disabled: Ավտոմատ թաքցնելը հասանելի չէ սենսորային էկրանով սարքերում
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք

@@ -260,6 +260,7 @@ sides:
   top: למעלה
 toolbar:
   auto_hide: הסתר אוטומטי
+  auto_hide_touch_disabled: הסתרה אוטומטית אינה זמינה במכשירי מסך מגע
   delay_to_hide: השהה הסתרה
   delay_to_show: השהה הצגה
   dock_side: מצב
@@ -336,6 +337,7 @@ wall:
   workspace_collections: אוספי סביבת עבודה
 weg:
   auto_hide: הסתר אוטומטי
+  auto_hide_touch_disabled: הסתרה אוטומטית אינה זמינה במכשירי מסך מגע
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב

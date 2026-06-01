@@ -279,6 +279,7 @@ sides:
   top: शीर्ष
 toolbar:
   auto_hide: खुद से छिपना
+  auto_hide_touch_disabled: टच स्क्रीन डिवाइस पर ऑटो हाइड उपलब्ध नहीं है
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद
@@ -355,6 +356,7 @@ wall:
   workspace_collections: कार्यक्षेत्र संग्रह
 weg:
   auto_hide: खुद से छिपना
+  auto_hide_touch_disabled: टच स्क्रीन डिवाइस पर ऑटो हाइड उपलब्ध नहीं है
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद

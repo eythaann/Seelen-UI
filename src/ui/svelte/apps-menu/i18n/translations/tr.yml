@@ -3,6 +3,7 @@ app_settings: Uygulama Ayarları
 applications: Uygulamalar
 back: Geri
 disband: Klasörü Dağıt
+edit_icon: Simgeyi Düzenle
 folder: Klasör
 no_matching_items: Aramanızla eşleşen öğe bulunamadı
 open_file_location: Dosya Konumunu Aç

@@ -116,6 +116,49 @@ select[data-skin="transparent"] {
   }
 }
 
+input[type="radio"][data-skin="default"] {
+  $size: 16px;
+
+  appearance: none;
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: 2px solid var(--color-gray-400);
+  background-color: transparent;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background-color: var(--color-gray-50);
+    transform: scale(0);
+    transition: transform 0.2s ease;
+  }
+
+  &:checked {
+    border-color: var(--slu-std-ui-color);
+    background-color: var(--slu-std-ui-color);
+
+    &::before {
+      transform: scale(1);
+    }
+  }
+
+  &:hover:not(:checked) {
+    border-color: var(--slu-std-ui-hover-color);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
 input[type="checkbox"][data-skin="switch"] {
   $width: 36px;
   $height: 18px;

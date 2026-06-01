@@ -274,6 +274,7 @@ sides:
   top: Viršus
 toolbar:
   auto_hide: Automatinis slėptuvė
+  auto_hide_touch_disabled: Automatinis slėpimas negalimas įrenginiuose su jutikliniu ekranu
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
@@ -350,6 +351,7 @@ wall:
   workspace_collections: Darbo vietos kolekcijos
 weg:
   auto_hide: Automatinis slėptuvė
+  auto_hide_touch_disabled: Automatinis slėpimas negalimas įrenginiuose su jutikliniu ekranu
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija

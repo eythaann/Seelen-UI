@@ -263,6 +263,7 @@ sides:
   top: فوق
 toolbar:
   auto_hide: الأخفاء التلقائي
+  auto_hide_touch_disabled: الإخفاء التلقائي غير متاح على الأجهزة التي تعمل باللمس
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المنصب
@@ -339,6 +340,7 @@ wall:
   workspace_collections: مجموعات مساحة العمل
 weg:
   auto_hide: الأخفاء التلقائي
+  auto_hide_touch_disabled: الإخفاء التلقائي غير متاح على الأجهزة التي تعمل باللمس
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المكان

@@ -2,6 +2,7 @@ app_menu:
   close: நெருக்கமான
   close_multiple: அனைத்தையும் மூடு
   copy_handles: நகல் கைப்பிடிகள்
+  edit_app_icon: பயன்பாட்டு ஐகானைத் திருத்து
   kill: கொலை செயல்முறை
   kill_multiple: அனைத்து செயல்முறைகளையும் கொல்லுங்கள்
   open_file_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்

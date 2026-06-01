@@ -279,6 +279,7 @@ sides:
   top: Topo
 toolbar:
   auto_hide: Esconda automática
+  auto_hide_touch_disabled: A ocultação automática não está disponível em dispositivos com ecrã táctil
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição
@@ -355,6 +356,7 @@ wall:
   workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Esconda automática
+  auto_hide_touch_disabled: A ocultação automática não está disponível em dispositivos com ecrã táctil
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição

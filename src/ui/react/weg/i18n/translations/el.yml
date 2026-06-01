@@ -2,6 +2,7 @@ app_menu:
   close: Κλείσε
   close_multiple: Κλείσ'τα όλα
   copy_handles: Λαβές αντιγράφων
+  edit_app_icon: Επεξεργασία εικονιδίου εφαρμογής
   kill: Διαδικασία θανάτωσης
   kill_multiple: Σκοτώστε όλες τις διαδικασίες
   open_file_location: Ανοίξτε την τοποθεσία αρχείου

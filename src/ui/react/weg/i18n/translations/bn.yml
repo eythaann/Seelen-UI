@@ -2,6 +2,7 @@ app_menu:
   close: বন্ধ
   close_multiple: সব বন্ধ করা
   copy_handles: হ্যান্ডলগুলি অনুলিপি
+  edit_app_icon: অ্যাপ আইকন সম্পাদনা করুন
   kill: কিল প্রসেস
   kill_multiple: সমস্ত প্রক্রিয়া হত্যা
   open_file_location: নথির অবস্থান বের করা

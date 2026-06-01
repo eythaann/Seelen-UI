@@ -273,6 +273,7 @@ sides:
   top: Topp
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Automatisk döljning är inte tillgängligt på enheter med pekskärm
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Position
@@ -349,6 +350,7 @@ wall:
   workspace_collections: Arbetsyta samlingar
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Automatisk döljning är inte tillgängligt på enheter med pekskärm
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Placera

@@ -282,6 +282,7 @@ sides:
   top: Dusha kore
 toolbar:
   auto_hide: Auto qaraha
+  auto_hide_touch_disabled: Qarinta tooska ah lagama heli karo aaladaha shaashadda taabashada
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
@@ -358,6 +359,7 @@ wall:
   workspace_collections: Ururinta Goobta Shaqada
 weg:
   auto_hide: Auto qaraha
+  auto_hide_touch_disabled: Qarinta tooska ah lagama heli karo aaladaha shaashadda taabashada
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel

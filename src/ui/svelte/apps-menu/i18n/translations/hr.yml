@@ -3,6 +3,7 @@ app_settings: Postavke aplikacije
 applications: Prijave
 back: Nazad
 disband: Raspusti mapu
+edit_icon: Ikona za uređivanje
 folder: Mapa
 no_matching_items: Nema pronađenih stavki koje odgovaraju vašem pretraživanju
 open_file_location: Otvorite lokaciju datoteke

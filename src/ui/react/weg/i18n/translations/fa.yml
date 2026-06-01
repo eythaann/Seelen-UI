@@ -2,6 +2,7 @@ app_menu:
   close: بستن
   close_multiple: همه را ببندید
   copy_handles: دسته کپی کردن
+  edit_app_icon: ویرایش نماد برنامه
   kill: فرآیند کشتن
   kill_multiple: کشتن تمام فرآیندها
   open_file_location: مکان فایل را باز کنید

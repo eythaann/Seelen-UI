@@ -278,6 +278,7 @@ sides:
   top: Felső
 toolbar:
   auto_hide: Autóbizalom
+  auto_hide_touch_disabled: Az automatikus elrejtés nem érhető el érintőképernyős eszközökön
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
@@ -356,6 +357,7 @@ wall:
   workspace_collections: Munkaterület-gyűjtemények
 weg:
   auto_hide: Automatikus elrejtés
+  auto_hide_touch_disabled: Az automatikus elrejtés nem érhető el érintőképernyős eszközökön
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció

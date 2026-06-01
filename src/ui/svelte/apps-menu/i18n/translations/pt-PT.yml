@@ -3,6 +3,7 @@ app_settings: Configurações do aplicativo
 applications: Aplicativos
 back: Costas
 disband: Dissolver pasta
+edit_icon: Editar ícone
 folder: Pasta
 no_matching_items: Nenhum item encontrado que corresponda à sua pesquisa
 open_file_location: Abrir local do arquivo

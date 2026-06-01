@@ -3,6 +3,7 @@ app_settings: 应用程序设置
 applications: 应用领域
 back: 后退
 disband: 解散文件夹
+edit_icon: 编辑图标
 folder: 文件夹
 no_matching_items: 未找到与您的搜索相符的商品
 open_file_location: 打开文件位置

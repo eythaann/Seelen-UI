@@ -2,6 +2,7 @@ app_menu:
   close: Bezárás
   close_multiple: Zárja be az összeset
   copy_handles: Másolás fogantyúk
+  edit_app_icon: Alkalmazásikon szerkesztése
   kill: Kill Process
   kill_multiple: Öld meg az összes folyamatot
   open_file_location: Nyissa meg a fájl helyét

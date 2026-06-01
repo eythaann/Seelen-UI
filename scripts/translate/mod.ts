@@ -59,5 +59,6 @@ await completeTranslationsFor("src/ui/svelte/calendar-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/media-popup/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/notifications/i18n/translations");
 await completeTranslationsFor("src/ui/svelte/flyouts/i18n/translations");
+await completeTranslationsFor("src/ui/svelte/icon-editor/i18n/translations");
 
 await completeTranslationsFor("src/background/i18n");

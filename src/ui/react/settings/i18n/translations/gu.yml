@@ -271,6 +271,7 @@ sides:
   top: ટોચ
 toolbar:
   auto_hide: સ્વત hideપ
+  auto_hide_touch_disabled: ટચ સ્ક્રીન ઉપકરણો પર સ્વતઃ છુપાવો ઉપલબ્ધ નથી
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
@@ -347,6 +348,7 @@ wall:
   workspace_collections: વર્કસ્પેસ સંગ્રહો
 weg:
   auto_hide: સ્વતઃ છુપાવો
+  auto_hide_touch_disabled: ટચ સ્ક્રીન ઉપકરણો પર સ્વતઃ છુપાવો ઉપલબ્ધ નથી
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ

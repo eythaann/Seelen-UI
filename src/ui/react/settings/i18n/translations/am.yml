@@ -259,6 +259,7 @@ sides:
   top: ከላይ
 toolbar:
   auto_hide: ራስ-ሰር መደበቅ
+  auto_hide_touch_disabled: ራስ-ደብቅ በንክኪ ስክሪን መሳሪያዎች ላይ አይገኝም
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
@@ -335,6 +336,7 @@ wall:
   workspace_collections: የስራ ቦታ ስብስቦች
 weg:
   auto_hide: ራስ-ሰር መደበቅ
+  auto_hide_touch_disabled: ራስ-ደብቅ በንክኪ ስክሪን መሳሪያዎች ላይ አይገኝም
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ

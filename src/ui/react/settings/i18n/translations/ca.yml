@@ -280,6 +280,7 @@ sides:
   top: Superior
 toolbar:
   auto_hide: Auto amaga
+  auto_hide_touch_disabled: L'ocultació automàtica no està disponible als dispositius de pantalla tàctil
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
   dock_side: Posició
@@ -356,6 +357,7 @@ wall:
   workspace_collections: Col·leccions d'espais de treball
 weg:
   auto_hide: Amaga automàtic
+  auto_hide_touch_disabled: L'ocultació automàtica no està disponible als dispositius de pantalla tàctil
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
   dock_side: Posició

@@ -2,6 +2,7 @@ app_menu:
   close: Zamknij
   close_multiple: Zamknij wszystko
   copy_handles: Kopiuj
+  edit_app_icon: Edytuj ikonę aplikacji
   kill: Wymuś zamknięcie
   kill_multiple: Wymuś zamknięcie wszystkich procesów
   open_file_location: Otwórz lokalizację pliku

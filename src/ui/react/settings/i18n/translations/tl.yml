@@ -285,6 +285,7 @@ sides:
   top: Tuktok
 toolbar:
   auto_hide: Auto itago
+  auto_hide_touch_disabled: Hindi available ang auto hide sa mga touch screen device
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
@@ -361,6 +362,7 @@ wall:
   workspace_collections: Mga Koleksyon ng Workspace
 weg:
   auto_hide: Auto itago
+  auto_hide_touch_disabled: Hindi available ang auto hide sa mga touch screen device
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon

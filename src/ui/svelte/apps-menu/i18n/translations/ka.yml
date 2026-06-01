@@ -3,6 +3,7 @@ app_settings: აპის პარამეტრები
 applications: აპლიკაციები
 back: უკან
 disband: საქაღალდის დაშლა
+edit_icon: რედაქტირების ხატულა
 folder: საქაღალდე
 no_matching_items: თქვენს ძიების შესატყვისი ელემენტი ვერ მოიძებნა
 open_file_location: გახსენით ფაილის ადგილმდებარეობა

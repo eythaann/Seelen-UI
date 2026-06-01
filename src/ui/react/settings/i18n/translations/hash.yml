@@ -206,6 +206,7 @@ sides.left: 6f4fbe5c
 sides.right: '7e763538'
 sides.top: 2992a40
 toolbar.auto_hide: 976be4fc
+toolbar.auto_hide_touch_disabled: fe4479c4
 toolbar.delay_to_hide: 5cd7cf8c
 toolbar.delay_to_show: 3931b6bc
 toolbar.dock_side: d0fb99
@@ -275,6 +276,7 @@ wall.wallpapers_and_collections: aaceb628
 wall.withOverlay: e6e749f8
 wall.workspace_collections: cd1ad7b4
 weg.auto_hide: 976be4fc
+weg.auto_hide_touch_disabled: fe4479c4
 weg.delay_to_hide: 5cd7cf8c
 weg.delay_to_show: 3931b6bc
 weg.dock_side: d0fb99

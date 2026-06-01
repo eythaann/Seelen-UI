@@ -3,6 +3,7 @@ app_settings: App-Einstellungen
 applications: Anwendungen
 back: Zurück
 disband: Ordner auflösen
+edit_icon: Symbol bearbeiten
 folder: Ordner
 no_matching_items: Es wurden keine Artikel gefunden, die Ihrer Suche entsprechen
 open_file_location: Öffnen Sie den Dateispeicherort

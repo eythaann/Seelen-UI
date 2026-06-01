@@ -2,6 +2,7 @@ app_menu:
   close: Yaqin
   close_multiple: Hammasini yaqin
   copy_handles: Nusxalash vositasi
+  edit_app_icon: Ilova belgisini tahrirlash
   kill: O'ldirish jarayoni
   kill_multiple: Barcha jarayonlarni o'ldiring
   open_file_location: Fayl joylashuvi

@@ -280,6 +280,9 @@ sides:
   top: Góra
 toolbar:
   auto_hide: Automatyczne ukrywanie
+  auto_hide_touch_disabled: >-
+    Funkcja automatycznego ukrywania nie jest dostępna na urządzeniach z ekranem
+    dotykowym
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
@@ -356,6 +359,9 @@ wall:
   workspace_collections: Kolekcje obszaru roboczego
 weg:
   auto_hide: Automatyczne ukrywanie
+  auto_hide_touch_disabled: >-
+    Funkcja automatycznego ukrywania nie jest dostępna na urządzeniach z ekranem
+    dotykowym
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja

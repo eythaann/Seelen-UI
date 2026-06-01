@@ -272,6 +272,7 @@ sides:
   top: بالا
 toolbar:
   auto_hide: پنهان خودکار
+  auto_hide_touch_disabled: پنهان کردن خودکار در دستگاه های صفحه لمسی در دسترس نیست
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
@@ -348,6 +349,7 @@ wall:
   workspace_collections: مجموعه های فضای کاری
 weg:
   auto_hide: پنهان خودکار
+  auto_hide_touch_disabled: پنهان کردن خودکار در دستگاه های صفحه لمسی در دسترس نیست
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت

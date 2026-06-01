@@ -2,6 +2,7 @@ app_menu:
   close: Tæt
   close_multiple: Luk alt
   copy_handles: Kopier håndtag
+  edit_app_icon: Rediger app-ikon
   kill: Aflivningsproces
   kill_multiple: Dræb alle processer
   open_file_location: Åbn filplacering

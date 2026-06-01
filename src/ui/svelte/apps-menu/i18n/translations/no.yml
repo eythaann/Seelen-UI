@@ -3,6 +3,7 @@ app_settings: Appinnstillinger
 applications: Søknader
 back: Tilbake
 disband: Oppløs mappe
+edit_icon: Rediger ikon
 folder: Mappe
 no_matching_items: Ingen elementer funnet som samsvarer med søket ditt
 open_file_location: Åpne filplassering

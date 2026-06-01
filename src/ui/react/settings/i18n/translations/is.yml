@@ -270,6 +270,7 @@ sides:
   top: Efst
 toolbar:
   auto_hide: Sjálfvirk fela
+  auto_hide_touch_disabled: Sjálfvirk fela er ekki í boði á snertiskjátækjum
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
@@ -346,6 +347,7 @@ wall:
   workspace_collections: Vinnusöfn
 weg:
   auto_hide: Sjálfvirk fela
+  auto_hide_touch_disabled: Sjálfvirk fela er ekki í boði á snertiskjátækjum
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða

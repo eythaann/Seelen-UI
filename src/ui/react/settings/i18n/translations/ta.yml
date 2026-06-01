@@ -278,6 +278,7 @@ sides:
   top: மேல்
 toolbar:
   auto_hide: ஆட்டோ மறை
+  auto_hide_touch_disabled: தொடுதிரை சாதனங்களில் தானியங்கு மறை கிடைக்காது
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
@@ -356,6 +357,7 @@ wall:
   workspace_collections: பணியிட தொகுப்புகள்
 weg:
   auto_hide: தானாக மறை
+  auto_hide_touch_disabled: தொடுதிரை சாதனங்களில் தானியங்கு மறை கிடைக்காது
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை

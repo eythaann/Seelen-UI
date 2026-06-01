@@ -2,6 +2,7 @@ app_menu:
   close: Hurbileko
   close_multiple: Itxi guztiak
   copy_handles: Kopiatu heldulekuak
+  edit_app_icon: Editatu aplikazioaren ikonoa
   kill: Hiltzeko prozesua
   kill_multiple: Kill Prozesu guztiak
   open_file_location: Ireki fitxategiaren kokapena

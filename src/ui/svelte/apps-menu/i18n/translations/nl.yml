@@ -3,6 +3,7 @@ app_settings: App-instellingen
 applications: Toepassingen
 back: Rug
 disband: Map ontbinden
+edit_icon: Pictogram bewerken
 folder: Map
 no_matching_items: Er zijn geen items gevonden die overeenkomen met uw zoekopdracht
 open_file_location: Open Bestandslocatie

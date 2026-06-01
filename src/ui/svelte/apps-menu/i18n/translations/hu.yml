@@ -3,6 +3,7 @@ app_settings: Alkalmazásbeállítások
 applications: Alkalmazások
 back: Vissza
 disband: Mappa feloldása
+edit_icon: Szerkesztés ikon
 folder: Mappa
 no_matching_items: Nem található a keresésnek megfelelő elem
 open_file_location: Nyissa meg a Fájl helye lehetőséget

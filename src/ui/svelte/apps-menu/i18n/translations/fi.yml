@@ -3,6 +3,7 @@ app_settings: Sovellusasetukset
 applications: Sovellukset
 back: Takaisin
 disband: Pura kansio
+edit_icon: Muokkaa kuvaketta
 folder: Kansio
 no_matching_items: Hakuasi vastaavia kohteita ei löytynyt
 open_file_location: Avaa Tiedoston sijainti

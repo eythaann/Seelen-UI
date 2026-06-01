@@ -266,6 +266,7 @@ sides:
   top: Oke
 toolbar:
   auto_hide: Ibi ipamọ aifọwọyi
+  auto_hide_touch_disabled: Ipamọ aifọwọyi ko si lori awọn ẹrọ iboju ifọwọkan
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
@@ -342,6 +343,7 @@ wall:
   workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
+  auto_hide_touch_disabled: Ipamọ aifọwọyi ko si lori awọn ẹrọ iboju ifọwọkan
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo

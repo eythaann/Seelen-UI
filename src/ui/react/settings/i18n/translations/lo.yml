@@ -266,6 +266,7 @@ sides:
   top: ເທິງ
 toolbar:
   auto_hide: ຊ່ອນອັດຕະໂນມັດ
+  auto_hide_touch_disabled: ການເຊື່ອງອັດຕະໂນມັດບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນໜ້າຈໍສໍາຜັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
@@ -342,6 +343,7 @@ wall:
   workspace_collections: ການເກັບພື້ນທີ່ເຮັດວຽກ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
+  auto_hide_touch_disabled: ການເຊື່ອງອັດຕະໂນມັດບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນໜ້າຈໍສໍາຜັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ

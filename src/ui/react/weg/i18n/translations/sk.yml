@@ -2,6 +2,7 @@ app_menu:
   close: Zavrieť
   close_multiple: Zavrieť
   copy_handles: Kopírovanie rukovätí
+  edit_app_icon: Upraviť ikonu aplikácie
   kill: Proces zabíjania
   kill_multiple: Zabi všetky procesy
   open_file_location: Otvorte umiestnenie súboru

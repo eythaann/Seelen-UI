@@ -176,6 +176,7 @@ slu_commands_declaration! {
     StateGetWallpapers = state_get_wallpapers() -> Vec<Wallpaper>,
     StateSetCustomIconPack = state_add_icon_to_custom_icon_pack(icon: IconPackEntry),
     StateDeleteCachedIcons = state_delete_cached_icons(),
+    RegisterUserCustomAppIcon = register_user_custom_app_icon(icon_base64: String, entry: IconPackEntry),
     StateRequestWallpaperAddition = state_request_wallpaper_addition(),
     StateGetPerformanceMode = state_get_performance_mode() -> PerformanceMode,
 

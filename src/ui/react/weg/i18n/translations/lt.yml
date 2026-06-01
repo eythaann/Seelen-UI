@@ -2,6 +2,7 @@ app_menu:
   close: Uždaryti
   close_multiple: Uždaryk viską
   copy_handles: Kopijavimo rankenos
+  edit_app_icon: Redaguoti programos piktogramą
   kill: Nužudymo procesas
   kill_multiple: Nužudyti visus procesus
   open_file_location: Atidarykite failo vietą

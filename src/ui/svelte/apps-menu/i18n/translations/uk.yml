@@ -3,6 +3,7 @@ app_settings: Налаштування програми
 applications: Додатки
 back: Назад
 disband: Розформувати папку
+edit_icon: Значок редагування
 folder: Папка
 no_matching_items: Не знайдено елементів, що відповідають вашому пошуку
 open_file_location: Відкрийте розташування файлу

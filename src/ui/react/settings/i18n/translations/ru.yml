@@ -277,6 +277,7 @@ sides:
   top: Сверху
 toolbar:
   auto_hide: Автоскрытие
+  auto_hide_touch_disabled: Автоматическое скрытие недоступно на устройствах с сенсорным экраном.
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
   dock_side: Позиция
@@ -353,6 +354,7 @@ wall:
   workspace_collections: Коллекции рабочих областей
 weg:
   auto_hide: Автоскрытие
+  auto_hide_touch_disabled: Автоматическое скрытие недоступно на устройствах с сенсорным экраном.
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
   dock_side: Расположение

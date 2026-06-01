@@ -278,6 +278,7 @@ sides:
   top: Atas
 toolbar:
   auto_hide: Persembunyian otomatis
+  auto_hide_touch_disabled: Sembunyikan otomatis tidak tersedia pada perangkat layar sentuh
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
@@ -354,6 +355,7 @@ wall:
   workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Sembunyi otomatis
+  auto_hide_touch_disabled: Sembunyikan otomatis tidak tersedia pada perangkat layar sentuh
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi

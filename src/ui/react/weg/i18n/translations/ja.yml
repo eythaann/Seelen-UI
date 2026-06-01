@@ -2,6 +2,7 @@ app_menu:
   close: 閉じる
   close_multiple: すべて閉じる
   copy_handles: ハンドルをコピー
+  edit_app_icon: アプリアイコンの編集
   kill: プロセスを強制終了
   kill_multiple: すべてのプロセスを強制終了
   open_file_location: ファイルの場所を開く

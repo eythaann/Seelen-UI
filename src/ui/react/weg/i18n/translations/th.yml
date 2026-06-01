@@ -2,6 +2,7 @@ app_menu:
   close: ปิด
   close_multiple: ปิดทั้งหมด
   copy_handles: สำเนามือจับ
+  edit_app_icon: แก้ไขไอคอนแอป
   kill: ฆ่ากระบวนการ
   kill_multiple: ฆ่ากระบวนการทั้งหมด
   open_file_location: เปิดตำแหน่งไฟล์

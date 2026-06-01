@@ -2,6 +2,7 @@ app_menu:
   close: ახლო
   close_multiple: Დახურე ყველა
   copy_handles: ასლის სახელურები
+  edit_app_icon: აპის ხატულის რედაქტირება
   kill: მოკვლის პროცესი
   kill_multiple: მოკალი ყველა პროცესი
   open_file_location: გახსენით ფაილის ადგილმდებარეობა

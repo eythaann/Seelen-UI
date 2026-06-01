@@ -2,6 +2,7 @@ app_menu:
   close: ገጠመ
   close_multiple: ሁሉንም ዝጋ
   copy_handles: መያዣዎች
+  edit_app_icon: የመተግበሪያ አዶን ያርትዑ
   kill: የመግደል ሂደት
   kill_multiple: ሁሉንም ሂደቶች ይገድሉ
   open_file_location: የፋይል ቦታ ይክፈቱ

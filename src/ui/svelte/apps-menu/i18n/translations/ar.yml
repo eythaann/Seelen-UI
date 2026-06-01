@@ -3,6 +3,7 @@ app_settings: إعدادات التطبيق
 applications: التطبيقات
 back: خلف
 disband: حل المجلد
+edit_icon: تحرير أيقونة
 folder: مجلد
 no_matching_items: لم يتم العثور على عناصر مطابقة لبحثك
 open_file_location: فتح موقع الملف

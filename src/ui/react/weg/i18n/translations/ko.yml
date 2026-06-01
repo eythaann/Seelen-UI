@@ -2,6 +2,7 @@ app_menu:
   close: 닫기
   close_multiple: 모두 닫기
   copy_handles: 핸들 복사
+  edit_app_icon: 앱 아이콘 편집
   kill: 프로세스 종료
   kill_multiple: 모든 프로세스 종료
   open_file_location: 파일 위치 열기

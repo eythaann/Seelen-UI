@@ -273,6 +273,7 @@ sides:
   top: Uewen
 toolbar:
   auto_hide: Automatesch
+  auto_hide_touch_disabled: Auto verstoppen ass net op Touchscreen Geräter verfügbar
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
@@ -351,6 +352,7 @@ wall:
   workspace_collections: Aarbechtsberäich Kollektiounen
 weg:
   auto_hide: Automatesch
+  auto_hide_touch_disabled: Auto verstoppen ass net op Touchscreen Geräter verfügbar
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un

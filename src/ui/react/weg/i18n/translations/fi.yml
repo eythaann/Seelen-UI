@@ -2,6 +2,7 @@ app_menu:
   close: kiinni
   close_multiple: Sulje kaikki
   copy_handles: Kopiokahvat
+  edit_app_icon: Muokkaa sovelluskuvaketta
   kill: Tappoprosessi
   kill_multiple: Tapa kaikki prosessit
   open_file_location: Avaa tiedoston sijainti

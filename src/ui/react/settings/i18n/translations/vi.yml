@@ -273,6 +273,7 @@ sides:
   top: Đứng đầu
 toolbar:
   auto_hide: Tự động ẩn
+  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
@@ -349,6 +350,7 @@ wall:
   workspace_collections: Bộ sưu tập không gian làm việc
 weg:
   auto_hide: Tự động ẩn
+  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ

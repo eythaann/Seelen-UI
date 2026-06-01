@@ -277,6 +277,7 @@ sides:
   top: Ylhäältä
 toolbar:
   auto_hide: Automaattinen piilo
+  auto_hide_touch_disabled: Automaattinen piilotus ei ole käytettävissä kosketusnäytöllisissä laitteissa
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Asema
@@ -353,6 +354,7 @@ wall:
   workspace_collections: Työtilakokoelmat
 weg:
   auto_hide: Automaattinen piilo
+  auto_hide_touch_disabled: Automaattinen piilotus ei ole käytettävissä kosketusnäytöllisissä laitteissa
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Sijainti

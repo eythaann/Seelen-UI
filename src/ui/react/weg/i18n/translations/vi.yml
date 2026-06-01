@@ -2,6 +2,7 @@ app_menu:
   close: Đóng
   close_multiple: Đóng tất cả
   copy_handles: Sao chép tay cầm
+  edit_app_icon: Chỉnh sửa biểu tượng ứng dụng
   kill: Quá trình tiêu diệt
   kill_multiple: Giết tất cả các tiến trình
   open_file_location: Mở vị trí file

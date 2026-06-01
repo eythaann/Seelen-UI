@@ -268,6 +268,7 @@ sides:
   top: ਸਿਖਰ
 toolbar:
   auto_hide: ਆਟੋ ਓਹਲੇ
+  auto_hide_touch_disabled: ਟੱਚ ਸਕ੍ਰੀਨ ਡਿਵਾਈਸਾਂ 'ਤੇ ਆਟੋ ਹਾਈਡ ਉਪਲਬਧ ਨਹੀਂ ਹੈ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
@@ -344,6 +345,7 @@ wall:
   workspace_collections: ਵਰਕਸਪੇਸ ਸੰਗ੍ਰਹਿ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
+  auto_hide_touch_disabled: ਟੱਚ ਸਕ੍ਰੀਨ ਡਿਵਾਈਸਾਂ 'ਤੇ ਆਟੋ ਹਾਈਡ ਉਪਲਬਧ ਨਹੀਂ ਹੈ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
