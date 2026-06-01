@@ -1,6 +1,7 @@
 import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { Button, InputNumber, Select, Switch } from "antd";
+import { $is_touch_primary } from "libs/ui/react/utils/signals";
+import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { OptionsFromEnum } from "../shared/utils/app.ts";
@@ -23,6 +24,7 @@ export function FancyToolbarSettings() {
   const settings = getToolbarConfig();
   const delayToShow = settings.delayToShow;
   const delayToHide = settings.delayToHide;
+  const isTouchPrimary = $is_touch_primary.value;
 
   const { t } = useTranslation();
 
@@ -98,12 +100,16 @@ export function FancyToolbarSettings() {
           label={
             <SettingsOption>
               <b>{t("toolbar.auto_hide")}</b>
-              <Select
-                style={{ width: "120px" }}
-                value={settings.hideMode}
-                options={OptionsFromEnum(t, HideMode, "toolbar.hide_mode")}
-                onChange={(value) => setToolbarHideMode(value)}
-              />
+              {/* disabled on touch devices: autohide requires hover/pointer events that touchscreens don't fire */}
+              <Tooltip title={isTouchPrimary ? t("toolbar.auto_hide_touch_disabled") : undefined}>
+                <Select
+                  style={{ width: "120px" }}
+                  value={settings.hideMode}
+                  options={OptionsFromEnum(t, HideMode, "toolbar.hide_mode")}
+                  onChange={(value) => setToolbarHideMode(value)}
+                  disabled={isTouchPrimary}
+                />
+              </Tooltip>
             </SettingsOption>
           }
         >
@@ -112,7 +118,7 @@ export function FancyToolbarSettings() {
             <InputNumber
               value={delayToShow}
               min={0}
-              disabled={settings.hideMode === HideMode.Never}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => setToolbarDelayToShow(value || 0)}
             />
           </SettingsOption>
@@ -121,7 +127,7 @@ export function FancyToolbarSettings() {
             <InputNumber
               value={delayToHide}
               min={0}
-              disabled={settings.hideMode === HideMode.Never}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => setToolbarDelayToHide(value || 0)}
             />
           </SettingsOption>

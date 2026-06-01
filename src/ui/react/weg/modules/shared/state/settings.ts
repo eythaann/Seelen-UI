@@ -6,6 +6,7 @@ import { computed, effect, signal } from "@preact/signals";
 import i18n from "../../../i18n";
 import { $current_monitor } from "./system";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
+import { $is_touch_primary } from "libs/ui/react/utils/signals";
 
 export const $full_settings = lazySignal(async () => await Settings.getAsync());
 Settings.onChange((s) => ($full_settings.value = s));
@@ -83,26 +84,23 @@ const $work_area = computed(() => {
   return workArea;
 });
 
-const _pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-export const $isTouchPrimary = signal(!_pointerQuery.matches);
-_pointerQuery.addEventListener("change", (e) => {
-  $isTouchPrimary.value = !e.matches;
-});
-
 effect(() => {
-  if ($isTouchPrimary.value) {
-    Widget.self.window.setIgnoreCursorEvents(false);
-    return;
-  }
   let unlisten: (() => void) | null = null;
-  const getPhysicalRect = () => {
-    const r = $widget_rect.value.webviewRect;
-    return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
+
+  if (!$is_touch_primary.value) {
+    declareDocumentAsLayeredHitbox({
+      getPhysicalRect: () => {
+        const r = $widget_rect.value.webviewRect;
+        return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
+      },
+    }).then((unlistenFn) => {
+      unlisten = unlistenFn;
+    });
+  }
+
+  return () => {
+    unlisten?.();
   };
-  declareDocumentAsLayeredHitbox(undefined, getPhysicalRect).then((fn) => {
-    unlisten = fn;
-  });
-  return () => unlisten?.();
 });
 
 export const $widget_rect = computed(() => {
@@ -119,25 +117,25 @@ export const $widget_rect = computed(() => {
   switch ($settings.value.position) {
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = $isTouchPrimary.value
+      webviewRect.right = $is_touch_primary.value
         ? hitboxRect.right
         : workArea.right - Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = $isTouchPrimary.value
+      webviewRect.left = $is_touch_primary.value
         ? hitboxRect.left
         : workArea.left + Math.round((workArea.right - workArea.left) / 2);
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = $isTouchPrimary.value
+      webviewRect.bottom = $is_touch_primary.value
         ? hitboxRect.bottom
         : workArea.top + Math.round((workArea.bottom - workArea.top) / 2);
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = $isTouchPrimary.value
+      webviewRect.top = $is_touch_primary.value
         ? hitboxRect.top
         : workArea.bottom - Math.round((workArea.bottom - workArea.top) / 2);
       break;
@@ -154,7 +152,7 @@ async function updateWidgetPosition() {
 
   await Widget.self.setPosition(webviewRect);
 
-  if (hideMode === HideMode.Never) {
+  if (hideMode === HideMode.Never || $is_touch_primary.value) {
     await invoke(SeelenCommand.RegisterAppBar, {
       rect: hitboxRect,
       edge: position as any,

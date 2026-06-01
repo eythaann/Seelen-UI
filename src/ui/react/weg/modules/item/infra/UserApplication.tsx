@@ -8,11 +8,12 @@ import { useTranslation } from "react-i18next";
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
-import { $isTouchPrimary, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { Flex, Popover } from "antd";
+import { $is_touch_primary } from "libs/ui/react/utils/signals.ts";
 
 interface Props {
   item: AppOrFileWegItem;
@@ -108,7 +109,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
     </div>
   );
 
-  if (isOverlay || windows.length === 0 || $isTouchPrimary.value) {
+  if (isOverlay || windows.length === 0 || $is_touch_primary.value) {
     return itemNode;
   }
 

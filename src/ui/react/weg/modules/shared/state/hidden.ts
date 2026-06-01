@@ -1,6 +1,6 @@
 import { effect, signal } from "@preact/signals";
 import { HideMode } from "@seelen-ui/lib/types";
-import { $is_this_webview_focused } from "libs/ui/react/utils/signals.ts";
+import { $is_this_webview_focused, $is_touch_primary } from "libs/ui/react/utils/signals.ts";
 
 import { $mouse_at_edge } from "./system.ts";
 import { $settings } from "./settings.ts";
@@ -22,10 +22,15 @@ effect(() => {
       flush = true;
       break;
     case HideMode.Always:
-      hidden = !$is_this_webview_focused.value && !isMouseOverEdge;
+      hidden = !$is_touch_primary.value && !$is_this_webview_focused.value && !isMouseOverEdge;
+      flush = flush = $is_touch_primary.value;
       break;
     case HideMode.OnOverlap:
-      hidden = $is_dock_overlapped.value && !$is_this_webview_focused.value && !isMouseOverEdge;
+      hidden = !$is_touch_primary.value &&
+        $is_dock_overlapped.value &&
+        !$is_this_webview_focused.value &&
+        !isMouseOverEdge;
+      flush = $is_touch_primary.value;
       break;
   }
 

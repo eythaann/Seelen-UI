@@ -269,6 +269,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide is not available on touch screen devices
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
@@ -345,6 +346,7 @@ wall:
   workspace_collections: Workspace Collections
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide is not available on touch screen devices
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position

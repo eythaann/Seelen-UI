@@ -3,7 +3,7 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-u
 import { FancyToolbarSide, HideMode, type UserAppWindowColors } from "@seelen-ui/lib/types";
 import { $settings, $widget_rect } from "./mod";
 import { $mouse_at_edge } from "./system";
-import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
+import { $is_this_webview_focused, $is_touch_primary } from "libs/ui/react/utils/signals";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const widget = Widget.getCurrent();
@@ -71,10 +71,6 @@ export const $is_tb_overlapped = computed(() => {
 export const $hidden_by_autohide = signal(false);
 
 effect(() => {
-  Widget.self.window.setIgnoreCursorEvents($hidden_by_autohide.value);
-});
-
-effect(() => {
   const { delayToHide, delayToShow, hideMode, position } = $settings.value;
 
   let hidden = false;
@@ -88,10 +84,15 @@ effect(() => {
       flush = true;
       break;
     case HideMode.Always:
-      hidden = !$is_this_webview_focused.value && !isMouseOverEdge;
+      hidden = !$is_touch_primary.value && !$is_this_webview_focused.value && !isMouseOverEdge;
+      flush = $is_touch_primary.value;
       break;
     case HideMode.OnOverlap:
-      hidden = $is_tb_overlapped.value && !$is_this_webview_focused.value && !isMouseOverEdge;
+      hidden = !$is_touch_primary.value &&
+        $is_tb_overlapped.value &&
+        !$is_this_webview_focused.value &&
+        !isMouseOverEdge;
+      flush = $is_touch_primary.value;
       break;
   }
 

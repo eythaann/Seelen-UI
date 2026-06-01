@@ -1,6 +1,7 @@
 import { HideMode, SeelenWegMode, SeelenWegSide, WegMiddleClickAction } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
-import { Button, InputNumber, Select, Switch } from "antd";
+import { $is_touch_primary } from "libs/ui/react/utils/signals";
+import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { OptionsFromEnum } from "../shared/utils/app.ts";
@@ -11,6 +12,7 @@ import Compact from "antd/es/space/Compact";
 
 export const SeelenWegSettings = () => {
   const settings = getWegConfig();
+  const isTouchPrimary = $is_touch_primary.value;
 
   const { t } = useTranslation();
 
@@ -76,12 +78,16 @@ export const SeelenWegSettings = () => {
           label={
             <SettingsOption>
               <b>{t("weg.auto_hide")}</b>
-              <Select
-                style={{ width: "120px" }}
-                value={settings.hideMode}
-                options={OptionsFromEnum(t, HideMode, "weg.hide_mode")}
-                onChange={(value) => patchWegConfig({ hideMode: value })}
-              />
+              {/* disabled on touch devices: autohide requires hover/pointer events that touchscreens don't fire */}
+              <Tooltip title={isTouchPrimary ? t("weg.auto_hide_touch_disabled") : undefined}>
+                <Select
+                  style={{ width: "120px" }}
+                  value={settings.hideMode}
+                  options={OptionsFromEnum(t, HideMode, "weg.hide_mode")}
+                  onChange={(value) => patchWegConfig({ hideMode: value })}
+                  disabled={isTouchPrimary}
+                />
+              </Tooltip>
             </SettingsOption>
           }
         >
@@ -90,7 +96,7 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.delayToShow}
               min={0}
-              disabled={settings.hideMode === HideMode.Never}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => patchWegConfig({ delayToShow: value || 0 })}
             />
           </SettingsOption>
@@ -99,7 +105,7 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.delayToHide}
               min={0}
-              disabled={settings.hideMode === HideMode.Never}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => patchWegConfig({ delayToHide: value || 0 })}
             />
           </SettingsOption>

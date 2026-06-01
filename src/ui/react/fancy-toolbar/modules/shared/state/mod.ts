@@ -3,6 +3,8 @@ import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@see
 import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { $current_monitor } from "./system";
 import i18n from "../../../i18n";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
+import { $is_touch_primary } from "libs/ui/react/utils/signals";
 
 const initialSettings = await Settings.getAsync();
 export const $settings = signal({
@@ -37,7 +39,9 @@ effect(() => {
 
 export const $widget_rect = computed(() => {
   const { itemSize, margin, padding } = $settings.value;
-  const height = Math.round((itemSize + padding * 2 + margin * 2) * $current_monitor.value.scaleFactor);
+  const height = Math.round(
+    (itemSize + padding * 2 + margin * 2) * $current_monitor.value.scaleFactor,
+  );
   const rect = { ...$current_monitor.value.rect };
 
   if ($settings.value.position === FancyToolbarSide.Top) {
@@ -58,7 +62,7 @@ async function updateWidgetPosition() {
 
   await Widget.self.setPosition(rect);
 
-  if (hideMode === HideMode.Never) {
+  if (hideMode === HideMode.Never || $is_touch_primary.value) {
     await invoke(SeelenCommand.RegisterAppBar, {
       rect,
       edge: position as unknown as AppBarEdge,
@@ -79,4 +83,23 @@ Widget.self.window.onMoved(({ payload }) => {
 
 effect(() => {
   updateWidgetPosition();
+});
+
+effect(() => {
+  let unlisten: (() => void) | null = null;
+
+  if (!$is_touch_primary.value) {
+    declareDocumentAsLayeredHitbox({
+      getPhysicalRect: () => {
+        const r = $widget_rect.value;
+        return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
+      },
+    }).then((unlistenFn) => {
+      unlisten = unlistenFn;
+    });
+  }
+
+  return () => {
+    unlisten?.();
+  };
 });

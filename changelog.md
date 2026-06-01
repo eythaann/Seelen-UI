@@ -6,11 +6,14 @@
 
 - keyboard/language selector fixes and improvements (now shows active IME).
 - wallpaper selector allow select single wallpapers.
+- disable autohide of dock and toolbar on touch screen devices.
 
 ### fix
 
 - discord rich presence not inmediately updated after settings change.
 - inconsistency on styles of dock and quick settings widgets.
+- toolbar and dock autohide weird behaviour on hitboxes.
+- twm not reflecting changes inmediately on settings change.
 
 ## [2.6.10]
 

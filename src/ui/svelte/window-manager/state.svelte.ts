@@ -1,10 +1,17 @@
 import { listen } from "@tauri-apps/api/event";
 import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
+import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
 import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
 import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+
+const _pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+let isTouchPrimary = $state(!_pointerQuery.matches);
+_pointerQuery.addEventListener("change", (e) => {
+  isTouchPrimary = !e.matches;
+});
 
 let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
 subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
@@ -79,58 +86,82 @@ $effect.root(() => {
 
 const monitorId = Widget.getCurrent().decoded.monitorId;
 
+const widgetRect = $derived.by(() => {
+  const monitor = monitors.value.find((m) => m.id === monitorId);
+  if (!monitor) return { left: 0, top: 0, right: 0, bottom: 0 };
+
+  const rect = { ...monitor.rect };
+  const tbConfig = fullSettings.byWidget["@seelen/fancy-toolbar"];
+  const tbMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.[
+    "@seelen/fancy-toolbar"
+  ] ?? {
+    enabled: true,
+  };
+
+  if (
+    tbConfig.enabled &&
+    tbMonitorConfig.enabled &&
+    (tbConfig.hideMode === HideMode.Never || isTouchPrimary)
+  ) {
+    const tbSize = Math.round(
+      (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) * monitor.scaleFactor,
+    );
+    switch (tbConfig.position) {
+      case FancyToolbarSide.Top:
+        rect.top += tbSize;
+        break;
+      case FancyToolbarSide.Bottom:
+        rect.bottom -= tbSize;
+        break;
+    }
+  }
+
+  const wegConfig = fullSettings.byWidget["@seelen/weg"];
+  const wegMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.[
+    "@seelen/weg"
+  ] ?? {
+    enabled: true,
+  };
+
+  if (
+    wegConfig.enabled &&
+    wegMonitorConfig.enabled &&
+    (wegConfig.hideMode === HideMode.Never || isTouchPrimary)
+  ) {
+    const wegSize = Math.round(
+      (wegConfig.size + wegConfig.padding * 2 + wegConfig.margin * 2) * monitor.scaleFactor,
+    );
+    switch (wegConfig.position) {
+      case SeelenWegSide.Top:
+        rect.top += wegSize;
+        break;
+      case SeelenWegSide.Bottom:
+        rect.bottom -= wegSize;
+        break;
+      case SeelenWegSide.Left:
+        rect.left += wegSize;
+        break;
+      case SeelenWegSide.Right:
+        rect.right -= wegSize;
+        break;
+    }
+  }
+
+  return rect;
+});
+
 $effect.root(() => {
   $effect(() => {
-    const monitor = monitors.value.find((m) => m.id === monitorId);
-    if (!monitor) return;
-
-    const rect = { ...monitor.rect };
-    const tbConfig = fullSettings.byWidget["@seelen/fancy-toolbar"];
-    const tbMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.["@seelen/fancy-toolbar"] ?? {
-      enabled: true,
-    };
-
-    if (tbConfig.enabled && tbMonitorConfig.enabled && tbConfig.hideMode === HideMode.Never) {
-      const tbSize = Math.round(
-        (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) * monitor.scaleFactor,
-      );
-      switch (tbConfig.position) {
-        case FancyToolbarSide.Top:
-          rect.top += tbSize;
-          break;
-        case FancyToolbarSide.Bottom:
-          rect.bottom -= tbSize;
-          break;
-      }
-    }
-
-    const wegConfig = fullSettings.byWidget["@seelen/weg"];
-    const wegMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.["@seelen/weg"] ?? {
-      enabled: true,
-    };
-
-    if (wegConfig.enabled && wegMonitorConfig.enabled && wegConfig.hideMode === HideMode.Never) {
-      const wegSize = Math.round(
-        (wegConfig.size + wegConfig.padding * 2 + wegConfig.margin * 2) * monitor.scaleFactor,
-      );
-      switch (wegConfig.position) {
-        case SeelenWegSide.Top:
-          rect.top += wegSize;
-          break;
-        case SeelenWegSide.Bottom:
-          rect.bottom -= wegSize;
-          break;
-        case SeelenWegSide.Left:
-          rect.left += wegSize;
-          break;
-        case SeelenWegSide.Right:
-          rect.right -= wegSize;
-          break;
-      }
-    }
-
-    Widget.getCurrent().setPosition(rect);
+    Widget.getCurrent().setPosition(widgetRect);
   });
+});
+
+await declareDocumentAsLayeredHitbox({
+  getPhysicalRect: () => {
+    const r = widgetRect;
+    return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
+  },
+  shouldAllowMouseEvent: (e) => e.getAttribute("data-allow-mouse-events") === "true",
 });
 
 // =================================================
