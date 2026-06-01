@@ -48,7 +48,7 @@
   }
 </script>
 
-<button class="menu-item" disabled={item.disabled} data-skin="transparent" onclick={handleClick}>
+<button class="menu-item" class:danger={item.danger} disabled={item.disabled} data-skin="transparent" onclick={handleClick}>
   {#if item.checked !== null}
     <input type="checkbox" checked={internalChecked} />
   {/if}

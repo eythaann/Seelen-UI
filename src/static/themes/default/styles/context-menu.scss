@@ -11,6 +11,10 @@
     gap: 8px;
     padding: 8px;
 
+    &.danger {
+      color: red;
+    }
+
     .menu-item-label {
       flex: 1;
       overflow: hidden;

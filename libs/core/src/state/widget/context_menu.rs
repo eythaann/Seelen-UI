@@ -31,6 +31,7 @@ pub enum ContextMenuItem {
         /// `checked` field will be send as payload.
         checked: Option<bool>,
         disabled: Option<bool>,
+        danger: Option<bool>,
     },
     Submenu {
         identifier: uuid::Uuid,

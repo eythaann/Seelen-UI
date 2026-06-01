@@ -118,6 +118,7 @@ export function getUserApplicationContextMenu(
       icon: "BiWindowClose",
       label: windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
       callbackEvent: onAppMenuClick,
+      danger: true,
     });
 
     if ($settings.value.showEndTask) {
@@ -127,6 +128,7 @@ export function getUserApplicationContextMenu(
         icon: "MdOutlineDangerous",
         label: windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
         callbackEvent: onAppMenuClick,
+        danger: true,
       });
     }
   }
