@@ -23,11 +23,13 @@ import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";
 import { useComputed } from "@preact/signals";
 
+const DND_ACTIVATION_DISTANCE = 24;
+
 const dndSensors = [
   PointerSensor.configure({
     preventActivation: () => false,
     activationConstraints: [
-      new PointerActivationConstraints.Distance({ value: 24 }),
+      new PointerActivationConstraints.Distance({ value: DND_ACTIVATION_DISTANCE }),
     ],
   }),
   KeyboardSensor,

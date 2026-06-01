@@ -61,6 +61,15 @@ export interface InitWidgetOptions {
   hideOnFocusLoss?: boolean;
 
   /**
+   * Hides the widget when it is triggered while already visible.
+   *
+   * Intended for toolbar popups whose button should behave as an open/close toggle.
+   *
+   * @default false
+   */
+  toggleOnTrigger?: boolean;
+
+  /**
    * Closes the widget after being hidden for a period of time,
    * instead of keeping it in memory.
    *

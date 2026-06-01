@@ -13,9 +13,17 @@ const widget = Widget.getCurrent();
 
 await widget.init({ hideOnFocusLoss: true });
 
+let lastFocusLossAt = 0;
+widget.window.onFocusChanged(({ payload: focused }) => {
+  if (!focused) {
+    lastFocusLossAt = Date.now();
+  }
+});
+
 widget.onTrigger(async (args) => {
   const visible = await widget.window.isVisible();
-  if (visible) {
+  const recentlyHiddenByFocusLoss = Date.now() - lastFocusLossAt < 300;
+  if (visible || recentlyHiddenByFocusLoss) {
     widget.hide();
   } else {
     onTriggered(args.monitorId);

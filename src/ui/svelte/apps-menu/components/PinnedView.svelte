@@ -6,6 +6,7 @@
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
+  import { startMenuDndSensors } from "./dnd";
 
   type UniqueIdentifier = string | number;
 
@@ -28,6 +29,7 @@
 <div class="pinned-view">
   <div class="pinned-view-list">
     <DragDropProvider
+      sensors={startMenuDndSensors}
       onDragMove={(event) => {
         const { source, target } = event.operation;
 

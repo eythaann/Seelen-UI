@@ -28,6 +28,7 @@ interface WidgetInternalState {
   initialized: boolean;
   ready: boolean;
   firstFocus: boolean;
+  lastFocusLossHideAt: number;
 }
 
 /**
@@ -71,6 +72,7 @@ export class Widget {
     initialized: false,
     ready: false,
     firstFocus: true,
+    lastFocusLossHideAt: 0,
   };
 
   private constructor(widget: IWidget) {
@@ -112,8 +114,16 @@ export class Widget {
   private applyOverlayPreset(): void {}
 
   /** Will apply the recommended settings for a popup widget */
-  private applyPopupPreset(): void {
+  private applyPopupPreset(toggleOnTrigger: boolean): void {
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
+      if (toggleOnTrigger) {
+        const recentlyHiddenByFocusLoss = Date.now() - this.runtimeState.lastFocusLossHideAt < 300;
+        if ((await this.window.isVisible()) || recentlyHiddenByFocusLoss) {
+          this.hide();
+          return;
+        }
+      }
+
       if (desiredPosition) {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
@@ -133,6 +143,7 @@ export class Widget {
     let wasFocused = false;
 
     const hideDelayed = debounce(() => {
+      this.runtimeState.lastFocusLossHideAt = Date.now();
       this.hide();
     }, 100);
 
@@ -252,7 +263,7 @@ export class Widget {
         this.applyOverlayPreset();
         break;
       case WidgetPreset.Popup:
-        this.applyPopupPreset();
+        this.applyPopupPreset(options.toggleOnTrigger ?? false);
         break;
     }
 

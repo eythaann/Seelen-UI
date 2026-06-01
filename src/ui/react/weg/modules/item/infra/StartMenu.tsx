@@ -7,18 +7,13 @@ import type { StartMenuWegItem } from "../../shared/types.ts";
 
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getMenuForItem } from "./GeneralMenu.tsx";
-import { $delayedFocused } from "../../shared/state/windows.ts";
 
 interface Props {
   item: StartMenuWegItem;
 }
 
-const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
-
 export const StartMenu = memo(({ item }: Props) => {
   const { t } = useTranslation();
-
-  const isStartMenuOpen = startMenuExes.some((program) => ($delayedFocused.value?.exe || "").endsWith(program));
 
   const onContextMenu = useCallback(
     (e: MouseEvent) => {
@@ -39,9 +34,8 @@ export const StartMenu = memo(({ item }: Props) => {
         if (event.button !== 0) {
           return;
         }
-        if (!isStartMenuOpen) {
-          invoke(SeelenCommand.ShowStartMenu);
-        }
+
+        invoke(SeelenCommand.ShowStartMenu);
       }}
       onContextMenu={onContextMenu}
     >

@@ -46,11 +46,13 @@ const visibleItems = computed(() => {
   });
 });
 
+const DND_ACTIVATION_DISTANCE = 24;
+
 const dndSensors = [
   PointerSensor.configure({
     preventActivation: () => false,
     activationConstraints: [
-      new PointerActivationConstraints.Distance({ value: 24 }),
+      new PointerActivationConstraints.Distance({ value: DND_ACTIVATION_DISTANCE }),
     ],
   }),
   KeyboardSensor,

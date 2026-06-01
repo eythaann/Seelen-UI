@@ -11,6 +11,7 @@ const root = document.getElementById("root")!;
 const widget = Widget.getCurrent();
 await widget.init({
   autoSizeByContent: root,
+  toggleOnTrigger: true,
 });
 
 await loadTranslations();

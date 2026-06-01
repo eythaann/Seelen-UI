@@ -5,6 +5,7 @@
   import { DragDropProvider } from "@dnd-kit/svelte";
   import SortableAppItem from "./SortableAppItem.svelte";
   import { arrayMove } from "../utils";
+  import { startMenuDndSensors } from "./dnd";
 
   interface Props {
     folder: FavFolderItem;
@@ -35,6 +36,7 @@
   onclose={onClose}
 >
   <DragDropProvider
+    sensors={startMenuDndSensors}
     onDragOver={(event) => {
       const { source, target } = event.operation;
       if (!source || !target || source.id === target.id) {

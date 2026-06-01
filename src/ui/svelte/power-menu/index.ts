@@ -9,7 +9,20 @@ import "@seelen-ui/lib/styles/reset.css";
 await loadTranslations();
 
 const widget = Widget.getCurrent();
+let lastFocusLossAt = 0;
+widget.window.onFocusChanged(({ payload: focused }) => {
+  if (!focused) {
+    lastFocusLossAt = Date.now();
+  }
+});
+
 widget.onTrigger(async () => {
+  const recentlyHiddenByFocusLoss = Date.now() - lastFocusLossAt < 300;
+  if ((await widget.window.isVisible()) || recentlyHiddenByFocusLoss) {
+    widget.hide();
+    return;
+  }
+
   await widget.show();
   await widget.focus();
 });
