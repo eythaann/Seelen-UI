@@ -82,83 +82,8 @@
   --border-radius: calc(var(--config-item-size) * 0.25);
 }
 
-.weg-item {
+.weg-item-overlay {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  gap: var(--inner-spacing);
-  padding: var(--inner-spacing);
-  min-width: var(--config-item-size);
-  max-width: var(--max-item-size);
-  height: var(--config-item-size);
-
-  background-color: var(--slu-std-bg-light-color);
-  box-shadow: var(--shadow-s);
-  border-radius: var(--border-radius);
-
-  &:hover {
-    background-color: var(--slu-std-bg-dark-color);
-  }
-
-  &.media-session-container {
-    overflow: hidden;
-    padding: 0;
-
-    &.media-session-container-horizontal {
-      width: var(--max-item-size);
-    }
-
-    &.media-session-container-vertical {
-      height: var(--max-item-size);
-    }
-
-    .media-session {
-      overflow: hidden;
-    }
-  }
-
-  &:active {
-    .weg-item-icon {
-      transform: scale(0.8);
-    }
-  }
-
-  &:not(:active) {
-    .weg-item-icon {
-      transition: transform 0.2s linear;
-    }
-  }
-
-  .weg-item-icon {
-    height: 100%;
-    width: unset;
-    aspect-ratio: 1/1;
-    filter: drop-shadow(0px 0px 1px #0000009a);
-    object-fit: contain;
-
-    /* &[data-shape="square"] {} (this attribute exists but is not used on default theme) */
-
-    &.weg-item-start-icon,
-    &.weg-item-folder-icon {
-      filter: none;
-    }
-  }
-
-  .weg-item-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 1;
-    font-size: max(calc(var(--config-item-size) / 3), 12px);
-    font-weight: 600;
-    z-index: 1;
-
-    .vertical & {
-      display: none;
-    }
-  }
 
   .weg-item-notification-badge {
     display: flex;
@@ -204,32 +129,33 @@
     border-radius: 6px;
     background-color: var(--color-gray-600);
     opacity: 0;
-    transition-property: width, height, transform, opacity, background-color, border-radius;
+
+    transition-property: width, height, opacity, background-color, border-radius;
     transition-duration: 0.2s;
     transition-timing-function: linear;
 
-    .vertical & {
-      transform: translateX(-50%);
-    }
-
-    .horizontal & {
-      transform: translateY(-50%);
-    }
-
     .top & {
-      bottom: calc(100% + var(--config-padding) / 2);
+      left: 50%;
+      top: calc(var(--config-padding) / 2 * -1);
+      transform: translate(-50%, -50%);
     }
 
     .bottom & {
-      top: calc(100% + var(--config-padding) / 2);
+      left: 50%;
+      bottom: calc(var(--config-padding) / 2 * -1);
+      transform: translate(-50%, 50%);
     }
 
     .left & {
-      right: calc(100% + var(--config-padding) / 2);
+      top: 50%;
+      left: calc(var(--config-padding) / 2 * -1);
+      transform: translate(-50%, -50%);
     }
 
     .right & {
-      left: calc(100% + var(--config-padding) / 2);
+      top: 50%;
+      right: calc(var(--config-padding) / 2 * -1);
+      transform: translate(50%, -50%);
     }
 
     &.weg-item-open-sign-active {
@@ -247,6 +173,94 @@
         width: 50%;
       }
     }
+  }
+}
+
+.weg-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  gap: var(--inner-spacing);
+  padding: var(--inner-spacing);
+  min-width: var(--config-item-size);
+  max-width: var(--max-item-size);
+  height: var(--config-item-size);
+
+  background-color: var(--slu-std-bg-light-color);
+  box-shadow: var(--shadow-s);
+  border-radius: var(--border-radius);
+
+  &:hover {
+    background-color: var(--slu-std-bg-dark-color);
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  &:not(:active) {
+    transition: transform 0.2s linear;
+  }
+
+  /* &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow:
+      inset -5px -5px 20px -15px rgba(0, 0, 0, 0.3),
+      inset 8px 8px 7px -6px rgba(255, 255, 255, 0.3);
+  } */
+
+  &:has(.weg-item-icon[data-shape="square"]) {
+    padding: 0;
+  }
+
+  .weg-item-icon {
+    height: 100%;
+    width: unset;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+
+  &:hover {
+    .weg-item-icon {
+      filter: brightness(1.05) saturate(1.1);
+    }
+  }
+
+  .weg-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    font-size: max(calc(var(--config-item-size) / 3), 12px);
+    font-weight: 600;
+    z-index: 1;
+
+    .vertical & {
+      display: none;
+    }
+  }
+}
+
+.weg-item.media-session-container {
+  overflow: hidden;
+  padding: 0;
+
+  &.media-session-container-horizontal {
+    width: var(--max-item-size);
+  }
+
+  &.media-session-container-vertical {
+    height: var(--max-item-size);
+  }
+
+  .media-session {
+    overflow: hidden;
   }
 }
 

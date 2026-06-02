@@ -7,8 +7,10 @@ use seelen_core::{
 };
 
 use crate::{
-    error::Result, resources::RESOURCES, state::application::FULL_STATE,
-    utils::constants::SEELEN_COMMON,
+    error::Result,
+    resources::RESOURCES,
+    state::application::FULL_STATE,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
 };
 
 const USER_PACK_ID: &str = "@user/custom-icons";
@@ -16,37 +18,6 @@ const USER_PACK_FOLDER: &str = "__user_custom_icons";
 
 fn pack_dir() -> PathBuf {
     SEELEN_COMMON.user_icons_path().join(USER_PACK_FOLDER)
-}
-
-fn sanitize_slug(s: &str) -> String {
-    s.chars()
-        .map(|c| {
-            if c.is_alphanumeric() || c == '-' || c == '.' {
-                c
-            } else {
-                '_'
-            }
-        })
-        .collect()
-}
-
-fn slug_from_entry(entry: &IconPackEntry) -> String {
-    match entry {
-        IconPackEntry::Unique(u) => {
-            if let Some(umid) = &u.umid {
-                sanitize_slug(umid)
-            } else if let Some(path) = &u.path {
-                path.file_stem()
-                    .and_then(|s| s.to_str())
-                    .map(sanitize_slug)
-                    .unwrap_or_else(|| "unknown".to_string())
-            } else {
-                "unknown".to_string()
-            }
-        }
-        IconPackEntry::Shared(s) => format!("ext_{}", s.extension),
-        IconPackEntry::Custom(c) => sanitize_slug(&c.key),
-    }
 }
 
 fn with_icon(entry: IconPackEntry, icon_rel_path: String) -> IconPackEntry {
@@ -106,12 +77,24 @@ pub fn register_user_custom_app_icon(icon_base64: String, entry: IconPackEntry) 
     let icon_dir = dir.join("icons");
     std::fs::create_dir_all(&icon_dir)?;
 
-    let slug = slug_from_entry(&entry);
-    let filename = format!("{slug}.png");
+    let mut pack = load_or_create_pack(&dir);
+
+    // Delete the old icon file on disk when replacing an existing entry
+    let old_rel = pack
+        .find_similar(&entry)
+        .and_then(|existing| match existing {
+            IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
+            IconPackEntry::Shared(s) => s.icon.base.clone(),
+            IconPackEntry::Custom(c) => c.icon.base.clone(),
+        });
+    if let Some(rel) = old_rel {
+        let _ = std::fs::remove_file(dir.join(rel));
+    }
+
+    let filename = format!("{}.png", date_based_hex_id());
     let bytes = STANDARD.decode(&icon_base64)?;
     std::fs::write(icon_dir.join(&filename), bytes)?;
 
-    let mut pack = load_or_create_pack(&dir);
     pack.add_entry(with_icon(entry, format!("icons/{filename}")));
     pack.save()?;
 

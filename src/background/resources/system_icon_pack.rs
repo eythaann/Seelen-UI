@@ -112,6 +112,7 @@ impl ResourceManager {
             key: "@seelen/weg::show-desktop".to_owned(),
             icon: Icon {
                 base: Some("desktop.svg".to_owned()),
+                is_aproximately_square: true,
                 ..Default::default()
             },
         }));
@@ -120,6 +121,7 @@ impl ResourceManager {
             key: "defaultPlayerThumbnail".to_owned(),
             icon: Icon {
                 base: Some("music_thumbnail.jpg".to_owned()),
+                is_aproximately_square: true,
                 ..Default::default()
             },
         }));

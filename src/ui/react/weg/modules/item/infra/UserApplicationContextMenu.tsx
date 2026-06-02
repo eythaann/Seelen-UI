@@ -48,7 +48,7 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
     let entry = iconPackManager.value.value.getIconEntry({ path: item.path, umid: item.umid });
     invoke(SeelenCommand.TriggerWidget, {
       payload: {
-        id: "@seelen/custom-icon-editor" as WidgetId,
+        id: "@seelen/icon-editor" as WidgetId,
         customArgs: {
           entry,
         },

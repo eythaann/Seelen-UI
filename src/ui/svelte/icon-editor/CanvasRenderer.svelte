@@ -36,8 +36,10 @@
     if (editorState.overlayImage) {
       const img = editorState.overlayImage;
 
-      const w = CANVAS_SIZE * editorState.overlayScale;
-      const h = CANVAS_SIZE * editorState.overlayScale;
+      const boxSize = CANVAS_SIZE * editorState.overlayScale;
+      const aspectRatio = img.naturalWidth / img.naturalHeight;
+      const w = aspectRatio >= 1 ? boxSize : boxSize * aspectRatio;
+      const h = aspectRatio >= 1 ? boxSize / aspectRatio : boxSize;
 
       // overlayX/Y is the center of the icon; compute top-left for drawImage
       const drawX = editorState.overlayX + CANVAS_HALF_SIZE - w / 2;
@@ -62,7 +64,6 @@
 
 <style>
   .editor-canvas {
-    image-rendering: pixelated;
     display: block;
     width: 256px;
     height: 256px;

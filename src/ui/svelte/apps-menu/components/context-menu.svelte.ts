@@ -39,7 +39,7 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(
       const entry = iconPackManager.value.getIconEntry({ path: item.path, umid: item.umid ?? null });
       invoke(SeelenCommand.TriggerWidget, {
         payload: {
-          id: "@seelen/custom-icon-editor" as WidgetId,
+          id: "@seelen/icon-editor" as WidgetId,
           customArgs: { entry },
         },
       });

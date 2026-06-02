@@ -62,42 +62,47 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
   const itemLabel = $settings.value.showWindowTitle && windows.length ? windows[0]!.title : null;
 
   const itemNode = (
-    <div
-      className="weg-item"
-      onClick={() => {
-        const window = windows[0];
-        if (!window) {
-          launchItem(item, false);
-        } else {
-          invoke(SeelenCommand.WegToggleWindowState, {
-            hwnd: window.hwnd,
-            wasFocused: $delayedFocused.value?.hwnd === window.hwnd,
-          });
-        }
-      }}
-      onAuxClick={(e) => {
-        if (e.button !== 1) return;
-        if ($settings.value.middleClickAction === WegMiddleClickAction.OpenNewInstance) {
-          launchItem(item, false);
-        } else {
+    <div className="weg-item-overlay">
+      <div
+        className="weg-item"
+        onClick={() => {
           const window = windows[0];
-          if (window) {
-            invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+          if (!window) {
+            launchItem(item, false);
+          } else {
+            invoke(SeelenCommand.WegToggleWindowState, {
+              hwnd: window.hwnd,
+              wasFocused: $delayedFocused.value?.hwnd === window.hwnd,
+            });
           }
-        }
-      }}
-      onContextMenu={onContextMenu}
-    >
-      <FileIcon
-        className="weg-item-icon"
-        path={item.relaunch?.icon || item.path}
-        umid={item.umid}
-      />
-      {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
+        }}
+        onAuxClick={(e) => {
+          if (e.button !== 1) return;
+          if ($settings.value.middleClickAction === WegMiddleClickAction.OpenNewInstance) {
+            launchItem(item, false);
+          } else {
+            const window = windows[0];
+            if (window) {
+              invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+            }
+          }
+        }}
+        onContextMenu={onContextMenu}
+      >
+        <FileIcon
+          className="weg-item-icon"
+          path={item.relaunch?.icon || item.path}
+          umid={item.umid}
+        />
+        {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
+      </div>
+
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
+
       {$settings.value.showInstanceCounter && windows.length > 1 && (
         <div className="weg-item-instance-counter-badge">{windows.length}</div>
       )}
+
       {!$settings.value.showWindowTitle && (
         <div
           className={cx("weg-item-open-sign", {
