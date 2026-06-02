@@ -13,6 +13,7 @@ app_menu:
   run_as: Kör som administratör
   unpin: Lutande
 context_menu:
+  edit_icon: Redigera ikon
   remove_module: Ta bort modulen
   reorder_disable: Lås aktivitetsfältet
   reorder_enable: Lås upp aktivitetsfältet
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Lägg till papperskorgsmodul
 trash_bin:
+  edit_icon_empty: Redigera ikon (tom)
+  edit_icon_full: Redigera ikon (fullständig)
   empty_bin: Töm papperskorgen
   label: Papperskorgen
 weg:

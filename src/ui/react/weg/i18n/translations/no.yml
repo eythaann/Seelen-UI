@@ -13,6 +13,7 @@ app_menu:
   run_as: Kjør som administrator
   unpin: Upinn
 context_menu:
+  edit_icon: Rediger ikon
   remove_module: Fjern modulen
   reorder_disable: Lås oppgavelinje
   reorder_enable: Lås opp oppgavelinje
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Oppgavebehandling
   trash_bin: Legg til papirkurvmodul
 trash_bin:
+  edit_icon_empty: Rediger ikon (tomt)
+  edit_icon_full: Rediger ikon (fullstendig)
   empty_bin: Tøm papirkurven
   label: Papirkurv
 weg:

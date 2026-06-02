@@ -13,6 +13,7 @@ app_menu:
   run_as: Als Administrator ausführen
   unpin: Lösen
 context_menu:
+  edit_icon: Symbol bearbeiten
   remove_module: Modul entfernen
   reorder_disable: Taskleiste sperren
   reorder_enable: Taskleiste entsperren
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task-Manager
   trash_bin: Fügen Sie das Papierkorbmodul hinzu
 trash_bin:
+  edit_icon_empty: Symbol „Bearbeiten“ (leer)
+  edit_icon_full: Symbol bearbeiten (vollständig)
   empty_bin: Leeren Sie den Papierkorb
   label: Papierkorb
 weg:

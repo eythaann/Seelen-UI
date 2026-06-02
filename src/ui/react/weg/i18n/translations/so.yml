@@ -13,6 +13,7 @@ app_menu:
   run_as: U ordo sidii maamule
   unpin: Aan qarin
 context_menu:
+  edit_icon: Wax ka beddel astaanta
   remove_module: Ka saar Module
   reorder_disable: Qufulka Qufulka
   reorder_enable: Unlock Taskbarbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Maareeyaha Hawsha
   trash_bin: Kudar Dib-u-warshadaynta Bin Module
 trash_bin:
+  edit_icon_empty: Wax ka beddel astaanta (madhan)
+  edit_icon_full: Wax ka beddel astaanta (Full)
   empty_bin: Dib u warshadaynta madhan
   label: Dib u warshadaynta bin
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Exécuter en tant qu'administrateur
   unpin: Détacher
 context_menu:
+  edit_icon: Modifier l'icône
   remove_module: Supprimer le module
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Gestionnaire des tâches
   trash_bin: Ajouter un module de corbeille
 trash_bin:
+  edit_icon_empty: Icône Modifier (vide)
+  edit_icon_full: Icône Modifier (complète)
   empty_bin: Corbeille vide
   label: Corbeille
 weg:

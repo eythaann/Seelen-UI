@@ -13,6 +13,7 @@ app_menu:
   run_as: Hardloop as administrateur
   unpin: Unpin
 context_menu:
+  edit_icon: Wysig ikoon
   remove_module: Verwyder module
   reorder_disable: Sluit taakbalk
   reorder_enable: Ontsluit taakbalk
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Taakbestuurder
   trash_bin: Voeg asblikmodule by
 trash_bin:
+  edit_icon_empty: Wysig-ikoon (leeg)
+  edit_icon_full: Wysig-ikoon (Vol)
   empty_bin: Leë asblik
   label: Asblik
 weg:

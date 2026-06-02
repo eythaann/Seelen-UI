@@ -13,6 +13,7 @@ app_menu:
   run_as: Jalankan sebagai pentadbir
   unpin: Unpin
 context_menu:
+  edit_icon: Edit Ikon
   remove_module: Keluarkan Modul
   reorder_disable: Kunci bar tugas
   reorder_enable: Buka kunci bar tugas
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Pengurus Tugas
   trash_bin: Tambah Modul Tong Kitar Semula
 trash_bin:
+  edit_icon_empty: Edit Ikon (Kosong)
+  edit_icon_full: Ikon Edit (Penuh)
   empty_bin: Tong Kitar Semula Kosong
   label: Tong Kitar Semula
 weg:

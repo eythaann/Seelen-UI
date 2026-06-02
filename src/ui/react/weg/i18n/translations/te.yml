@@ -13,6 +13,7 @@ app_menu:
   run_as: నిర్వాహకుడిగా అమలు చేయండి
   unpin: అన్పిన్
 context_menu:
+  edit_icon: సవరణ చిహ్నం
   remove_module: మాడ్యూల్‌ని తీసివేయండి
   reorder_disable: టాస్క్‌బార్ లాక్
   reorder_enable: టాస్క్‌బార్‌ను అన్‌లాక్ చేయండి
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: టాస్క్ మేనేజర్
   trash_bin: రీసైకిల్ బిన్ మాడ్యూల్ జోడించండి
 trash_bin:
+  edit_icon_empty: సవరణ చిహ్నం (ఖాళీ)
+  edit_icon_full: సవరణ చిహ్నం (పూర్తి)
   empty_bin: ఖాళీ రీసైకిల్ బిన్
   label: రీసైకిల్ బిన్
 weg:

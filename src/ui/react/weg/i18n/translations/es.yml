@@ -13,6 +13,7 @@ app_menu:
   run_as: Ejecutar como administrador
   unpin: Desanclar
 context_menu:
+  edit_icon: Editar icono
   remove_module: Quitar módulo
   reorder_disable: Bloquear la barra de tareas
   reorder_enable: Desbloquear la barra de tareas
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Administrador de tareas
   trash_bin: Agregar módulo de papelera de reciclaje
 trash_bin:
+  edit_icon_empty: Editar icono (vacía)
+  edit_icon_full: Editar icono (completa)
   empty_bin: Papelera de reciclaje vacía
   label: Papelera de reciclaje
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Run as Administrator
   unpin: Unpin
 context_menu:
+  edit_icon: Edit Icon
   remove_module: Remove Module
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Add Recycle Bin Module
 trash_bin:
+  edit_icon_empty: Edit Icon (Empty)
+  edit_icon_full: Edit Icon (Full)
   empty_bin: Empty Recycle Bin
   label: Recycle Bin
 weg:

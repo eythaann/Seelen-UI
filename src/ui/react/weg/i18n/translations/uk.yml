@@ -13,6 +13,7 @@ app_menu:
   run_as: Запустити від імені адміністратора
   unpin: Відкріпити
 context_menu:
+  edit_icon: Значок редагування
   remove_module: Видалити модуль
   reorder_disable: Блокування панелі завдань
   reorder_enable: Розблокувати панель завдань
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Диспетчер задач
   trash_bin: Додайте модуль кошика
 trash_bin:
+  edit_icon_empty: Значок редагування (порожній)
+  edit_icon_full: Значок редагування (повний)
   empty_bin: Очистити корзину
   label: Кошик
 weg:

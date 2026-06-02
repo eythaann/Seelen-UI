@@ -13,6 +13,7 @@ app_menu:
   run_as: Executa com administrador
   unpin: Desfeta
 context_menu:
+  edit_icon: Icona d'edició
   remove_module: Elimina el mòdul
   reorder_disable: Barra de tasques de bloqueig
   reorder_enable: Desbloqueja la barra de tasques
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Gestor de tasques
   trash_bin: Afegiu el mòdul de la paperera de reciclatge
 trash_bin:
+  edit_icon_empty: Icona d'edició (buida)
+  edit_icon_full: Icona d'edició (completa)
   empty_bin: Buida la paperera de reciclatge
   label: Paperera de reciclatge
 weg:

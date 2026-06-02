@@ -13,6 +13,7 @@ app_menu:
   run_as: Yönetici Olarak Çalıştır
   unpin: Sabitlenmeyi Kaldır
 context_menu:
+  edit_icon: Simgeyi Düzenle
   remove_module: Modülü Kaldır
   reorder_disable: Görev çubuğunu kilitle
   reorder_enable: Görev çubuğunun kilidini aç
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Görev Yöneticisi
   trash_bin: Geri Dönüşüm Kutusu Modülü Ekle
 trash_bin:
+  edit_icon_empty: Simgeyi Düzenle (Boş)
+  edit_icon_full: Simgeyi Düzenle (Tam)
   empty_bin: Geri Dönüşüm Kutusunu Boşalt
   label: Geri Dönüşüm Kutusu
 weg:

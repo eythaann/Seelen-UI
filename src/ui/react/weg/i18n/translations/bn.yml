@@ -13,6 +13,7 @@ app_menu:
   run_as: প্রশাসক হিসাবে চালান
   unpin: আনপিন
 context_menu:
+  edit_icon: আইকন সম্পাদনা করুন
   remove_module: মডিউল সরান
   reorder_disable: লক টাস্কবার
   reorder_enable: টাস্কবার আনলক করুন
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: টাস্ক ম্যানেজার
   trash_bin: রিসাইকেল বিন মডিউল যোগ করুন
 trash_bin:
+  edit_icon_empty: আইকন সম্পাদনা করুন (খালি)
+  edit_icon_full: আইকন সম্পাদনা করুন (সম্পূর্ণ)
   empty_bin: খালি রিসাইকেল বিন
   label: রিসাইকেল বিন
 weg:

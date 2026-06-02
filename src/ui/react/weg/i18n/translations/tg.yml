@@ -13,6 +13,7 @@ app_menu:
   run_as: Ҳамчун мудир кор кунед
   unpin: Ватанӣ
 context_menu:
+  edit_icon: Таҳрири Нишона
   remove_module: Модулро хориҷ кунед
   reorder_disable: Қулфи супоришҳо
   reorder_enable: Қулфи панел
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Менеҷери вазифа
   trash_bin: Модули қуттии партовро илова кунед
 trash_bin:
+  edit_icon_empty: Тасвири таҳрир (холӣ)
+  edit_icon_full: Тасвири таҳрир (Пурра)
   empty_bin: Қуттии партови холӣ
   label: Қуттии партов
 weg:

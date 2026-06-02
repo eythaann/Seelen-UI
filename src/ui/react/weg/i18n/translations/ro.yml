@@ -13,6 +13,7 @@ app_menu:
   run_as: Rulat ca administrator
   unpin: Unpin
 context_menu:
+  edit_icon: Editare pictogramă
   remove_module: Eliminați modulul
   reorder_disable: Blocarea barei de activități
   reorder_enable: Deblocați bara de activități
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Manager de activități
   trash_bin: Adăugați modulul Coș de reciclare
 trash_bin:
+  edit_icon_empty: Pictograma Editați (goală)
+  edit_icon_full: Pictograma Editați (complet)
   empty_bin: Goliți coșul de reciclare
   label: Coșul de reciclare
 weg:

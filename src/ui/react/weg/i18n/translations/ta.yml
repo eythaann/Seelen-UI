@@ -13,6 +13,7 @@ app_menu:
   run_as: நிர்வாகியாக செயல்படுங்கள்
   unpin: Unpin
 context_menu:
+  edit_icon: திருத்து ஐகான்
   remove_module: தொகுதியை அகற்று
   reorder_disable: பணிப்பட்டியைப் பூட்டவும்
   reorder_enable: பணிப்பட்டியைத் திறக்கவும்
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: பணி மேலாளர்
   trash_bin: மறுசுழற்சி தொட்டி தொகுதியைச் சேர்க்கவும்
 trash_bin:
+  edit_icon_empty: திருத்து ஐகான் (காலி)
+  edit_icon_full: திருத்து ஐகான் (முழு)
   empty_bin: காலி மறுசுழற்சி தொட்டி
   label: மறுசுழற்சி தொட்டி
 weg:

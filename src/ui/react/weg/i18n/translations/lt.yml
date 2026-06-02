@@ -13,6 +13,7 @@ app_menu:
   run_as: Vykdykite kaip administratorius
   unpin: Unpin
 context_menu:
+  edit_icon: Redagavimo piktograma
   remove_module: Pašalinti modulį
   reorder_disable: Užrakinti užduočių juostą
   reorder_enable: Užduočių juostos atrakinimas
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Užduočių tvarkyklė
   trash_bin: Pridėkite šiukšliadėžės modulį
 trash_bin:
+  edit_icon_empty: Redagavimo piktograma (tuščia)
+  edit_icon_full: Redagavimo piktograma (visa)
   empty_bin: Ištuštinkite šiukšliadėžę
   label: Šiukšliadėžė
 weg:

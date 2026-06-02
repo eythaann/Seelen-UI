@@ -13,6 +13,7 @@ app_menu:
   run_as: Администратороор ажиллуулах
   unpin: Нууц
 context_menu:
+  edit_icon: Засварлах дүрс
   remove_module: Модуль устгах
   reorder_disable: Түгжих ажлын самбар
   reorder_enable: Taskbar түгжээг тайл
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Ажлын менежер
   trash_bin: Хогийн савны модулийг нэмнэ үү
 trash_bin:
+  edit_icon_empty: Засварлах дүрс (хоосон)
+  edit_icon_full: Засварлах дүрс (бүтэн)
   empty_bin: Хогийн савыг хоосон
   label: Хогийн сав
 weg:

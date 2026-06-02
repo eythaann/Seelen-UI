@@ -13,6 +13,7 @@ app_menu:
   run_as: Wek Rêvebir bisekinin
   unpin: Unpin
 context_menu:
+  edit_icon: Biguherîne Icon
   remove_module: Modulê jêbirin
   reorder_disable: Taskbar Lock
   reorder_enable: Taskbar Unlock
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Gerînendetiya Peywiran
   trash_bin: Modula Recycle Bin zêde bikin
 trash_bin:
+  edit_icon_empty: Îkona biguherîne (vala)
+  edit_icon_full: Îkona biguherîne (Tijî)
   empty_bin: Vala Recycle Bin
   label: Recycle Bin
 weg:

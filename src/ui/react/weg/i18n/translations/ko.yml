@@ -13,6 +13,7 @@ app_menu:
   run_as: 관리자 권한으로 실행
   unpin: 고정 해제
 context_menu:
+  edit_icon: 아이콘 편집
   remove_module: 모듈 제거
   reorder_disable: 작업 표시줄 잠금
   reorder_enable: 작업 표시줄 잠금 해제
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: 작업 관리자
   trash_bin: 휴지통 모듈 추가
 trash_bin:
+  edit_icon_empty: 편집 아이콘(비어 있음)
+  edit_icon_full: 아이콘 편집(전체)
   empty_bin: 휴지통 비우기
   label: 휴지통
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Գործարկել որպես ադմինիստրատոր
   unpin: Անապաղում
 context_menu:
+  edit_icon: Խմբագրել պատկերակը
   remove_module: Հեռացնել մոդուլը
   reorder_disable: Կողպեք առաջադրանքներիբար
   reorder_enable: Բացել աշխատանքային գիծը
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Առաջադրանքների կառավարիչ
   trash_bin: Ավելացնել թափոնարկղ մոդուլ
 trash_bin:
+  edit_icon_empty: Խմբագրել պատկերակը (դատարկ)
+  edit_icon_full: Խմբագրել պատկերակը (ամբողջական)
   empty_bin: Դատարկ թափոնարկղ
   label: Վերամշակման աղբարկղ
 weg:

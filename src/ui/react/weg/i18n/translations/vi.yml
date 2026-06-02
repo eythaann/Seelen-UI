@@ -13,6 +13,7 @@ app_menu:
   run_as: Chạy như quản trị viên
   unpin: Giải nén
 context_menu:
+  edit_icon: Chỉnh sửa biểu tượng
   remove_module: Xóa mô-đun
   reorder_disable: Khóa thanh tác vụ
   reorder_enable: Mở khóa Thanh nhiệm vụ
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Trình quản lý tác vụ
   trash_bin: Thêm mô-đun thùng rác
 trash_bin:
+  edit_icon_empty: Biểu tượng chỉnh sửa (Trống)
+  edit_icon_full: Biểu tượng chỉnh sửa (Đầy đủ)
   empty_bin: Thùng rác trống
   label: Thùng rác
 weg:

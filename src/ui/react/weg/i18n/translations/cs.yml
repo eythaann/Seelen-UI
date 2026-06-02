@@ -13,6 +13,7 @@ app_menu:
   run_as: Spustit jako administrátor
   unpin: Odepnout
 context_menu:
+  edit_icon: Upravit ikonu
   remove_module: Odebrat modul
   reorder_disable: Uzamčení hlavního panelu
   reorder_enable: Odemknutí hlavního panelu
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Správce úloh
   trash_bin: Přidat modul koše
 trash_bin:
+  edit_icon_empty: Ikona úprav (prázdná)
+  edit_icon_full: Ikona úprav (úplná)
   empty_bin: Vyprázdněte koš
   label: Koš
 weg:

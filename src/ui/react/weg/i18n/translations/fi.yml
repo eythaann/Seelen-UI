@@ -13,6 +13,7 @@ app_menu:
   run_as: Suorita järjestelmänvalvojana
   unpin: Purkaa
 context_menu:
+  edit_icon: Muokkaa kuvaketta
   remove_module: Poista moduuli
   reorder_disable: Lukitse tehtäväpalkki
   reorder_enable: Tehtäväpalkin lukituksen avaaminen
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Tehtävienhallinta
   trash_bin: Lisää roskakorimoduuli
 trash_bin:
+  edit_icon_empty: Muokkauskuvake (tyhjä)
+  edit_icon_full: Muokkauskuvake (täysi)
   empty_bin: Tyhjennä roskakori
   label: Roskakori
 weg:

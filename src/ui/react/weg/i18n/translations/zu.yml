@@ -13,6 +13,7 @@ app_menu:
   run_as: Gijima njengomlawuli
   unpin: Unpin
 context_menu:
+  edit_icon: Hlela Isithonjana
   remove_module: Susa Imojuli
   reorder_disable: Khiya i-taskbar
   reorder_enable: Vula i-Taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Umphathi Womsebenzi
   trash_bin: Engeza i-Recycle Bin Module
 trash_bin:
+  edit_icon_empty: Hlela Isithonjana (Akunalutho)
+  edit_icon_full: Hlela Isithonjana (Sigcwele)
   empty_bin: I-Recycle Bin engenalutho
   label: Ubhini wokulahla udoti
 weg:

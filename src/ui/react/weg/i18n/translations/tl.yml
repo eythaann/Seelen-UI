@@ -13,6 +13,7 @@ app_menu:
   run_as: Tumakbo bilang Administrator
   unpin: Unpin
 context_menu:
+  edit_icon: I-edit ang Icon
   remove_module: Alisin ang Module
   reorder_disable: I -lock ang taskbar
   reorder_enable: I -unlock ang taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Magdagdag ng Recycle Bin Module
 trash_bin:
+  edit_icon_empty: I-edit ang Icon (Walang laman)
+  edit_icon_full: I-edit ang Icon (Buo)
   empty_bin: Walang laman ang Recycle Bin
   label: Recycle Bin
 weg:

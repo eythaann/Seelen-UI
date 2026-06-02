@@ -13,6 +13,7 @@ app_menu:
   run_as: ਪ੍ਰਬੰਧਕ ਦੇ ਤੌਰ ਤੇ ਚਲਾਓ
   unpin: Unpin
 context_menu:
+  edit_icon: ਆਈਕਨ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   remove_module: ਮੋਡੀਊਲ ਹਟਾਓ
   reorder_disable: ਟਾਸਕਬਾਰ ਨੂੰ ਲਾਕ ਕਰੋ
   reorder_enable: ਟਾਸਕਬਾਰ ਨੂੰ ਅਨਲੌਕ ਕਰੋ
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
   trash_bin: ਰੀਸਾਈਕਲ ਬਿਨ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
 trash_bin:
+  edit_icon_empty: ਸੰਪਾਦਨ ਪ੍ਰਤੀਕ (ਖਾਲੀ)
+  edit_icon_full: ਸੰਪਾਦਨ ਪ੍ਰਤੀਕ (ਪੂਰਾ)
   empty_bin: ਖਾਲੀ ਰੀਸਾਈਕਲ ਬਿਨ
   label: ਰੀਸਾਈਕਲ ਬਿਨ
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: 以管理员身份运行
   unpin: 取消固定
 context_menu:
+  edit_icon: 编辑图标
   remove_module: 移除模块
   reorder_disable: 锁定任务栏
   reorder_enable: 解锁任务栏
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: 任务管理器
   trash_bin: 添加回收站模块
 trash_bin:
+  edit_icon_empty: 编辑图标（空）
+  edit_icon_full: 编辑图标（完整）
   empty_bin: 清空回收站
   label: 回收站
 weg:

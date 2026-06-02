@@ -13,6 +13,7 @@ app_menu:
   run_as: Pokreni kao administrator
   unpin: Raskoš
 context_menu:
+  edit_icon: Ikona za uređivanje
   remove_module: Ukloni modul
   reorder_disable: Zaključajte zadaću
   reorder_enable: Otključajte zadaću
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Upravitelj zadataka
   trash_bin: Dodajte modul koša za smeće
 trash_bin:
+  edit_icon_empty: Ikona za uređivanje (prazno)
+  edit_icon_full: Ikona za uređivanje (cijela)
   empty_bin: Ispraznite koš za smeće
   label: Koš za smeće
 weg:

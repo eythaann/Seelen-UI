@@ -13,6 +13,7 @@ app_menu:
   run_as: Запустить от администратора
   unpin: Открепить
 context_menu:
+  edit_icon: Значок редактирования
   remove_module: Удалить модуль
   reorder_disable: Заблокировать панель
   reorder_enable: Разблокировать панель
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Диспетчер задач
   trash_bin: Добавить модуль корзины
 trash_bin:
+  edit_icon_empty: Значок редактирования (пустой)
+  edit_icon_full: Значок редактирования (полный)
   empty_bin: Пустая корзина
   label: Корзина
 weg:

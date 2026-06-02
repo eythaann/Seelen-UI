@@ -13,6 +13,7 @@ app_menu:
   run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
   unpin: unppin
 context_menu:
+  edit_icon: ແກ້ໄຂໄອຄອນ
   remove_module: ເອົາໂມດູນອອກ
   reorder_disable: ລັອກ task task
   reorder_enable: ປົດລ taskbar taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: ເພີ່ມໂມດູນ Recycle Bin
 trash_bin:
+  edit_icon_empty: ແກ້ໄຂໄອຄອນ (ຫວ່າງເປົ່າ)
+  edit_icon_full: ແກ້ໄຂໄອຄອນ (ເຕັມ)
   empty_bin: ຖັງ Recycle ຫວ່າງເປົ່າ
   label: ຖັງ Recycle
 weg:

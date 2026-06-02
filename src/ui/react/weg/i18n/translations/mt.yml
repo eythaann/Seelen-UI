@@ -13,6 +13,7 @@ app_menu:
   run_as: Mexxi bħala amministratur
   unpin: Unpin
 context_menu:
+  edit_icon: Editja Ikona
   remove_module: Neħħi Modulu
   reorder_disable: Lock Taskbar
   reorder_enable: Nisfruttaw taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Żid Recycle Bin Modulu
 trash_bin:
+  edit_icon_empty: Editja Ikona (Vojta)
+  edit_icon_full: Editja Ikona (Sħiħa)
   empty_bin: Vojta Recycle Bin
   label: Recycle Bin
 weg:

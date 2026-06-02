@@ -13,6 +13,7 @@ app_menu:
   run_as: Executar como administrador
   unpin: Desafixar
 context_menu:
+  edit_icon: Editar ícone
   remove_module: Remover Módulo
   reorder_disable: Bloquear barra de tarefas
   reorder_enable: Desbloquear barra de tarefas
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Gerenciador de Tarefas
   trash_bin: Adicionar módulo de lixeira
 trash_bin:
+  edit_icon_empty: Editar ícone (vazio)
+  edit_icon_full: Editar ícone (completo)
   empty_bin: Esvaziar Lixeira
   label: Lixeira
 weg:

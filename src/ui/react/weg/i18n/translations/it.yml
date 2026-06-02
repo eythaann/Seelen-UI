@@ -13,6 +13,7 @@ app_menu:
   run_as: Esegui come Amministratore
   unpin: Rimuovi
 context_menu:
+  edit_icon: Modifica icona
   remove_module: Rimuovi modulo
   reorder_disable: Blocco della barra delle applicazioni
   reorder_enable: Sbloccare la barra delle applicazioni
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Gestione Attività
   trash_bin: Aggiungi il modulo Cestino
 trash_bin:
+  edit_icon_empty: Modifica icona (vuota)
+  edit_icon_full: Modifica icona (completa)
   empty_bin: Cestino vuoto
   label: Cestino
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Administrator sifatida yugurish
   unpin: Chetlashmoq
 context_menu:
+  edit_icon: Tahrirlash belgisi
   remove_module: Modulni olib tashlash
   reorder_disable: Qulf vazifasi paneli
   reorder_enable: Vazifalar panelini oching
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Vazifa menejeri
   trash_bin: Chiqindi qutisi modulini qo'shing
 trash_bin:
+  edit_icon_empty: Tahrirlash belgisi (boʻsh)
+  edit_icon_full: Tahrirlash belgisi (toʻliq)
   empty_bin: Chiqindi qutisini bo'sh
   label: Chiqindi qutisi
 weg:

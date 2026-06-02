@@ -280,17 +280,26 @@ export class IconPackManager {
   }
 
   /**
+   * Will return the specific icon entry from the highest priority icon pack.
+   * If no icon pack haves the searched icon, will return null.
+   */
+  public getCustomIconEntry(name: string): IconPackEntry | null {
+    for (const pack of this.activeIconPacks) {
+      const entry = pack.entries.find((e) => e.type === "custom" && e.key === name);
+      if (entry) {
+        return entry;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Will return the specific icon path from the highest priority icon pack.
    * If no icon pack haves the searched icon, will return null.
    */
   public getCustomIconPath(name: string): IIcon | null {
-    for (const pack of this.activeIconPacks) {
-      const entry = pack.entries.find((e) => e.type === "custom" && e.key === name);
-      if (entry) {
-        return entry.icon;
-      }
-    }
-    return null;
+    const entry = this.getCustomIconEntry(name);
+    return entry?.icon || null;
   }
 
   /**

@@ -13,6 +13,7 @@ app_menu:
   run_as: Spustiť ako správca
   unpin: Zaniknúť
 context_menu:
+  edit_icon: Ikona Upraviť
   remove_module: Odstráňte modul
   reorder_disable: Uzamknutie panela úloh
   reorder_enable: Odomknutie panela úloh
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Správca úloh
   trash_bin: Pridať modul koša
 trash_bin:
+  edit_icon_empty: Ikona úprav (prázdna)
+  edit_icon_full: Ikona úprav (úplná)
   empty_bin: Vyprázdniť kôš
   label: Kôš
 weg:

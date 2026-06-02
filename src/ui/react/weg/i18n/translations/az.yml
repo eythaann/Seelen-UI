@@ -13,6 +13,7 @@ app_menu:
   run_as: İdarəçi kimi qaçmaq
   unpin: Qeyri-pəncələmək
 context_menu:
+  edit_icon: Redaktə Nişanı
   remove_module: Modulu çıxarın
   reorder_disable: Tapşırıq çubuğunu kilidləyin
   reorder_enable: Tapşırıq çubuğunu açın
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Tapşırıq meneceri
   trash_bin: Zibil qutusu modulu əlavə edin
 trash_bin:
+  edit_icon_empty: Redaktə Nişanı (Boş)
+  edit_icon_full: Redaktə Nişanı (Tam)
   empty_bin: Zibil qutusunu boşaldın
   label: Zibil qutusu
 weg:

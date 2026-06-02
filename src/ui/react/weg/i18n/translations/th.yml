@@ -13,6 +13,7 @@ app_menu:
   run_as: เรียกใช้เป็นผู้ดูแลระบบ
   unpin: คลาย
 context_menu:
+  edit_icon: แก้ไขไอคอน
   remove_module: ถอดโมดูลออก
   reorder_disable: ล็อคแถบงาน
   reorder_enable: ปลดล็อกแถบงาน
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: ตัวจัดการงาน
   trash_bin: เพิ่มโมดูลถังรีไซเคิล
 trash_bin:
+  edit_icon_empty: แก้ไขไอคอน (ว่าง)
+  edit_icon_full: แก้ไขไอคอน (เต็ม)
   empty_bin: ถังรีไซเคิลว่างเปล่า
   label: ถังขยะรีไซเคิล
 weg:

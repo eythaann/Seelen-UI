@@ -13,6 +13,7 @@ app_menu:
   run_as: እንደ አስተዳዳሪ ይሮጡ
   unpin: እየቀነሰ ይሄዳል
 context_menu:
+  edit_icon: አዶ አርትዕ
   remove_module: ሞጁሉን አስወግድ
   reorder_disable: የተግባር አሞሌ
   reorder_enable: የተካሄደውን ሥራ ይክፈቱ
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: ተግባር አስተዳዳሪ
   trash_bin: ሪሳይክል ቢን ሞዱልን አክል
 trash_bin:
+  edit_icon_empty: አዶ አርትዕ (ባዶ)
+  edit_icon_full: አዶ አርትዕ (ሙሉ)
   empty_bin: ባዶ ሪሳይክል ቢን
   label: ሪሳይክል ቢን
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: انتظامیہ کے طورپر چلانا
   unpin: انپن
 context_menu:
+  edit_icon: آئیکن میں ترمیم کریں۔
   remove_module: ماڈیول کو ہٹا دیں
   reorder_disable: لاک ٹاسک بار
   reorder_enable: ٹاسک بار کو غیر مقفل کریں
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: ٹاسک مینیجر
   trash_bin: ری سائیکل بن ماڈیول شامل کریں۔
 trash_bin:
+  edit_icon_empty: آئیکن میں ترمیم کریں (خالی)
+  edit_icon_full: آئیکن میں ترمیم کریں (مکمل)
   empty_bin: خالی ری سائیکل بن
   label: ری سائیکل بن
 weg:

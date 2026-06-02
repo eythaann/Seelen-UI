@@ -13,6 +13,7 @@ app_menu:
   run_as: Run bi alakoso
   unpin: Ainidi
 context_menu:
+  edit_icon: Ṣatunkọ Aami
   remove_module: Yọ Module kuro
   reorder_disable: Nutbar tiipa
   reorder_enable: Ṣii ṣiṣẹ Iṣẹ-ṣiṣe Ṣii silẹ
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
   trash_bin: Fi Atunlo Bin Module
 trash_bin:
+  edit_icon_empty: Ṣatunkọ Aami (Ofo)
+  edit_icon_full: Aami Ṣatunkọ (Kikun)
   empty_bin: Ofo atunlo Bin
   label: Atunlo Bin
 weg:

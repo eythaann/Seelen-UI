@@ -13,6 +13,7 @@ app_menu:
   run_as: 管理者として実行
   unpin: ピン留めを解除
 context_menu:
+  edit_icon: 編集アイコン
   remove_module: モジュールの削除
   reorder_disable: タスクバーをロック
   reorder_enable: タスクバーのロック解除
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: タスクマネージャー
   trash_bin: ごみ箱モジュールの追加
 trash_bin:
+  edit_icon_empty: 編集アイコン (空)
+  edit_icon_full: 編集アイコン (フル)
   empty_bin: ごみ箱を空にする
   label: ごみ箱
 weg:

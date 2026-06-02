@@ -13,6 +13,7 @@ app_menu:
   run_as: Изпълни като администратор
   unpin: Unpin
 context_menu:
+  edit_icon: Икона за редактиране
   remove_module: Премахване на модула
   reorder_disable: Заключване на лентата на задачите
   reorder_enable: Отключване на лентата на задачите
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Диспечер на задачите
   trash_bin: Добавяне на модул за кошче
 trash_bin:
+  edit_icon_empty: Икона за редактиране (празна)
+  edit_icon_full: Икона за редактиране (пълна)
   empty_bin: Изпразване на кошчето
   label: Кошче
 weg:

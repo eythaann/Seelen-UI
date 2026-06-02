@@ -13,6 +13,7 @@ app_menu:
   run_as: प्रशासक रूपमा चलाउन
   unpin: चुस्नु
 context_menu:
+  edit_icon: सम्पादन आइकन
   remove_module: मोड्युल हटाउनुहोस्
   reorder_disable: लक टकबार लक
   reorder_enable: टास्कबार अनलक गर्नुहोस्
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: कार्य प्रबन्धक
   trash_bin: रिसायकल बिन मोड्युल थप्नुहोस्
 trash_bin:
+  edit_icon_empty: सम्पादन आइकन (खाली)
+  edit_icon_full: सम्पादन आइकन (पूर्ण)
   empty_bin: रिसायकल बिन खाली गर्नुहोस्
   label: रिसायकल बिन
 weg:

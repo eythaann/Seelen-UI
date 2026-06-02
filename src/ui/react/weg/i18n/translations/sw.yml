@@ -13,6 +13,7 @@ app_menu:
   run_as: Kukimbia kama msimamizi
   unpin: Unpin
 context_menu:
+  edit_icon: Hariri Ikoni
   remove_module: Ondoa Moduli
   reorder_disable: Lock Taskbar
   reorder_enable: Fungua Taskbar
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Meneja wa Kazi
   trash_bin: Ongeza moduli ya Recycle Bin
 trash_bin:
+  edit_icon_empty: Hariri Ikoni (Tupu)
+  edit_icon_full: Hariri Ikoni (Imejaa)
   empty_bin: Bin Tupu ya Kusaga
   label: Recycle Bin
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Ადმინისტრატორის სახელით გაშვება
   unpin: გაუქმება
 context_menu:
+  edit_icon: რედაქტირების ხატულა
   remove_module: მოდულის ამოღება
   reorder_disable: ჩაკეტეთ დავალების პანელი
   reorder_enable: განბლოკეთ დავალების ზოლი
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: სამუშაო მენეჯერი
   trash_bin: დაამატეთ Recycle Bin მოდული
 trash_bin:
+  edit_icon_empty: რედაქტირების ხატულა (ცარიელი)
+  edit_icon_full: რედაქტირების ხატულა (სრული)
   empty_bin: ცარიელი გადასამუშავებელი ურნა
   label: Recycle Bin
 weg:

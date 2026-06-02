@@ -13,6 +13,7 @@ app_menu:
   run_as: הפעל כמנהל
   unpin: בטל הצמדה
 context_menu:
+  edit_icon: ערוך סמל
   remove_module: הסר מודול
   reorder_disable: נעל את שורת המשימות
   reorder_enable: ביטול נעילת שורת המשימות
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: מנהל משימות
   trash_bin: הוסף מודול סל המיחזור
 trash_bin:
+  edit_icon_empty: ערוך סמל (ריק)
+  edit_icon_full: ערוך סמל (מלא)
   empty_bin: ריק סל המיחזור
   label: סל המיחזור
 weg:

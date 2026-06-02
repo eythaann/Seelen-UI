@@ -13,6 +13,7 @@ app_menu:
   run_as: به عنوان مدیر اجرا کنید
   unpin: باز کردن
 context_menu:
+  edit_icon: ویرایش نماد
   remove_module: حذف ماژول
   reorder_disable: نوار وظیفه قفل
   reorder_enable: نوار کار را باز کنید
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: اضافه کردن ماژول سطل بازیافت
 trash_bin:
+  edit_icon_empty: نماد ویرایش (خالی)
+  edit_icon_full: نماد ویرایش (کامل)
   empty_bin: سطل بازیافت خالی
   label: سطل بازیافت
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Joosta administraatorina
   unpin: Lahti keelama
 context_menu:
+  edit_icon: Redigeerimise ikoon
   remove_module: Eemalda moodul
   reorder_disable: Ülesanderiba lukustamine
   reorder_enable: Avage tegumiriba avamine
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Tegumihaldur
   trash_bin: Lisage prügikasti moodul
 trash_bin:
+  edit_icon_empty: Redigeerimise ikoon (tühi)
+  edit_icon_full: Redigeerimise ikoon (täielik)
   empty_bin: Tühjenda prügikast
   label: Prügikast
 weg:

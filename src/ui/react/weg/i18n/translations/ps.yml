@@ -13,6 +13,7 @@ app_menu:
   run_as: د مدیر په توګه چلول
   unpin: غیر رنګ
 context_menu:
+  edit_icon: اډیټ آیکون
   remove_module: موډل لرې کړئ
   reorder_disable: ټاسک بار
   reorder_enable: د ټاسلف بار
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: د دندې مدیر
   trash_bin: د ریسایکل بن ماډل اضافه کړئ
 trash_bin:
+  edit_icon_empty: د سمون نښه (خالي)
+  edit_icon_full: اډیټ آیکون (بشپړ)
   empty_bin: د ریسایکل بن خالي کړئ
   label: د ریسایکل بن
 weg:

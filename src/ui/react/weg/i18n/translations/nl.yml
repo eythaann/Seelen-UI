@@ -13,6 +13,7 @@ app_menu:
   run_as: Als administrator uitvoeren
   unpin: Losmaken
 context_menu:
+  edit_icon: Pictogram bewerken
   remove_module: Module verwijderen
   reorder_disable: Taakbalk vergrendelen
   reorder_enable: Taakbalk ontgrendelen
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Taakbeheer
   trash_bin: Voeg Prullenbakmodule toe
 trash_bin:
+  edit_icon_empty: Bewerkingspictogram (leeg)
+  edit_icon_full: Pictogram Bewerken (Volledig)
   empty_bin: Prullenbak leegmaken
   label: Prullenbak
 weg:

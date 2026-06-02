@@ -13,6 +13,7 @@ app_menu:
   run_as: تشغيل كمسؤول
   unpin: إزالة التثبيت
 context_menu:
+  edit_icon: تحرير أيقونة
   remove_module: إزالة الوحدة النمطية
   reorder_disable: قفل شريط المهام
   reorder_enable: فتح شريط المهام
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: مدير المهام
   trash_bin: إضافة وحدة سلة المحذوفات
 trash_bin:
+  edit_icon_empty: أيقونة التحرير (فارغة)
+  edit_icon_full: أيقونة التحرير (كاملة)
   empty_bin: سلة المحذوفات فارغة
   label: سلة المحذوفات
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: व्यवस्थापक के रूप में चलाएं
   unpin: अनपिन
 context_menu:
+  edit_icon: चिह्न संपादित करें
   remove_module: मॉड्यूल निकालें
   reorder_disable: लॉक टास्कबार
   reorder_enable: टास्कबार अनलॉक करें
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: कार्य प्रबंधक
   trash_bin: रीसायकल बिन मॉड्यूल जोड़ें
 trash_bin:
+  edit_icon_empty: संपादित करें चिह्न (खाली)
+  edit_icon_full: संपादित करें चिह्न (पूर्ण)
   empty_bin: खाली रीसायकल बिन
   label: रीसायकल बिन
 weg:

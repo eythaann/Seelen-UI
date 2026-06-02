@@ -13,6 +13,7 @@ app_menu:
   run_as: Hlaupa sem stjórnandi
   unpin: Taka úr
 context_menu:
+  edit_icon: Breyta táknmynd
   remove_module: Fjarlægðu einingu
   reorder_disable: Læstu verkstiku
   reorder_enable: Opnaðu verkefnastiku
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Verkefnastjóri
   trash_bin: Bæta við ruslatunnueiningu
 trash_bin:
+  edit_icon_empty: Breyta táknmynd (tómt)
+  edit_icon_full: Breyta táknmynd (fullt)
   empty_bin: Tóm ruslatunnu
   label: Ruslatunna
 weg:

@@ -13,6 +13,7 @@ app_menu:
   run_as: Rhedeg fel Gweinyddwr
   unpin: Dadleuon
 context_menu:
+  edit_icon: Eicon Golygu
   remove_module: Dileu Modiwl
   reorder_disable: Bar tasgau clo
   reorder_enable: Datgloi Bar Tasg
@@ -32,6 +33,8 @@ taskbar_menu:
   task_manager: Rheolwr Tasg
   trash_bin: Ychwanegu Modiwl Bin Ailgylchu
 trash_bin:
+  edit_icon_empty: Eicon Golygu (Gwag)
+  edit_icon_full: Eicon Golygu (Llawn)
   empty_bin: Bin Ailgylchu Gwag
   label: Bin Ailgylchu
 weg:
