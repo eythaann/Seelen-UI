@@ -39,6 +39,10 @@ export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
 subscribe(SeelenEvent.GlobalFocusChanged, $focused.setByPayload);
 await $focused.init();
 
+export const $widget_statuses = lazySignal(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
+subscribe(SeelenEvent.WidgetDebugInfoChanged, $widget_statuses.setByPayload);
+await $widget_statuses.init();
+
 export const $is_tb_overlapped = computed(() => {
   const focused = $focused.value;
   const by = focused?.monitor === widget.decoded.monitorId ? focused : null;

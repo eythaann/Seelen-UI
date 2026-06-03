@@ -137,4 +137,7 @@ slu_events_declaration! {
 
     // Shortcuts
     ShortcutsPaused(bool) as "shortcuts::paused",
+
+    // Widget debug info
+    WidgetDebugInfoChanged(Vec<WidgetDebugInfo>) as "widget::debug-info-changed",
 }

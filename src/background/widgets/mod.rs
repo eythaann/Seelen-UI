@@ -27,7 +27,7 @@ use seelen_core::{
 use tauri::{Emitter, Manager};
 
 use crate::{
-    app::get_app_handle,
+    app::{emit_to_webviews, get_app_handle},
     error::Result,
     resources::RESOURCES,
     state::application::FULL_STATE,
@@ -240,6 +240,25 @@ fn widget_data_dir(webview: &tauri::WebviewWindow) -> Result<PathBuf> {
     Ok(path)
 }
 
+pub fn notify_widget_statuses_change() {
+    std::thread::spawn(|| {
+        let mut result = Vec::new();
+        WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+            deployment.pods.for_each(|(_, pod)| {
+                result.push(WidgetDebugInfo {
+                    label: pod.label.raw.clone(),
+                    widget_id: pod.label.widget_id.to_string(),
+                    monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
+                    instance_id: pod.label.instance_id.map(|id| id.to_string()),
+                    status: *pod.status(),
+                    webview_window_id: pod.hwnd(),
+                });
+            });
+        });
+        emit_to_webviews(SeelenEvent::WidgetDebugInfoChanged, result);
+    });
+}
+
 #[tauri::command(async)]
 pub fn debug_get_widgets_statuses() -> Vec<WidgetDebugInfo> {
     let mut result = Vec::new();
@@ -251,6 +270,7 @@ pub fn debug_get_widgets_statuses() -> Vec<WidgetDebugInfo> {
                 monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
                 instance_id: pod.label.instance_id.map(|id| id.to_string()),
                 status: *pod.status(),
+                webview_window_id: pod.hwnd(),
             });
         });
     });

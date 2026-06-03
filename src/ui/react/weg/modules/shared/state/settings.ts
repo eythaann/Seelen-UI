@@ -2,7 +2,7 @@ import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { Alignment, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
-import { computed, effect, signal } from "@preact/signals";
+import { computed, effect } from "@preact/signals";
 import i18n from "../../../i18n";
 import { $current_monitor } from "./system";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
@@ -144,7 +144,6 @@ export const $widget_rect = computed(() => {
   return { hitboxRect, webviewRect };
 });
 
-export const $initialPositionSet = signal(false);
 async function updateWidgetPosition() {
   const { hitboxRect, webviewRect } = $widget_rect.value;
   const hideMode = $settings.value.hideMode;
@@ -160,8 +159,6 @@ async function updateWidgetPosition() {
   } else {
     await invoke(SeelenCommand.UnregisterAppBar);
   }
-
-  $initialPositionSet.value = true;
 }
 
 // setting an app bar, can cause move of the widget, this is to ensure correct position after such move

@@ -15,7 +15,10 @@ use crate::{
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
-    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebview, WidgetWebviewLabel},
+    widgets::{
+        manager::WIDGET_MANAGER, notify_widget_statuses_change, webview::WidgetWebview,
+        WidgetWebviewLabel,
+    },
     windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
@@ -164,9 +167,14 @@ impl WidgetPod {
         &self._status
     }
 
+    pub fn hwnd(&self) -> Option<isize> {
+        self.window.as_ref()?.0.hwnd().ok().map(|h| h.0 as isize)
+    }
+
     pub fn set_status(&mut self, status: WidgetStatus) {
         log::trace!("{} status changed to: {:?}", self.label, status);
         self._status = status;
+        notify_widget_statuses_change();
     }
 
     pub fn is_ready(&self) -> bool {
@@ -226,6 +234,7 @@ impl WidgetPod {
         }
 
         self.window = Some(window);
+        notify_widget_statuses_change();
         self.start_liveness_prove();
     }
 

@@ -53,8 +53,6 @@ export const $widget_rect = computed(() => {
   return rect;
 });
 
-export const $initialPositionSet = signal(false);
-
 async function updateWidgetPosition() {
   const rect = $widget_rect.value;
   const hideMode = $settings.value.hideMode;
@@ -70,8 +68,6 @@ async function updateWidgetPosition() {
   } else {
     await invoke(SeelenCommand.UnregisterAppBar);
   }
-
-  $initialPositionSet.value = true;
 }
 
 // setting an app bar, can cause move of the widget, this is to ensure correct position after such move
