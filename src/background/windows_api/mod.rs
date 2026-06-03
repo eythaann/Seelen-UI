@@ -278,10 +278,13 @@ impl WindowsApi {
 
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
         let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
-        Ok(window_rect.left <= rc_monitor.left
-            && window_rect.top <= rc_monitor.top
-            && window_rect.right >= rc_monitor.right
-            && window_rect.bottom >= rc_monitor.bottom)
+        // Allow 1px tolerance: Electron/Chromium apps adjust their rect by 1px on focus loss
+        // (borderless-maximized mode), which would otherwise break fullscreen detection.
+        const TOLERANCE: i32 = 1;
+        Ok(window_rect.left <= rc_monitor.left + TOLERANCE
+            && window_rect.top <= rc_monitor.top + TOLERANCE
+            && window_rect.right >= rc_monitor.right - TOLERANCE
+            && window_rect.bottom >= rc_monitor.bottom - TOLERANCE)
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {

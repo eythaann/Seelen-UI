@@ -1,11 +1,24 @@
 import { effect, signal } from "@preact/signals";
 import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
+import { ToolbarJsScope } from "@seelen-ui/lib/types";
 
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
-import { baseItem, restoreStateToDefault } from "./default.ts";
+
+export const baseItem: ToolbarItem = {
+  id: "-",
+  scopes: [],
+  template: 'return ""',
+  tooltip: null,
+  badge: null,
+  remoteData: {},
+  style: {},
+  onClick: null,
+  onWheelUp: null,
+  onWheelDown: null,
+};
 
 export interface OptimisticToolbarState {
   isReorderDisabled: boolean;
@@ -63,6 +76,40 @@ export function getStateFromStored(state: ToolbarState): OptimisticToolbarState 
 export const $toolbar_state = signal(
   getStateFromStored(await invoke(SeelenCommand.StateGetToolbarItems)),
 );
+
+export function restoreStateToDefault() {
+  // based on src\background\state\application\toolbar_items.rs
+  $toolbar_state.value = getStateFromStored({
+    isReorderDisabled: false,
+    left: [
+      "@seelen/tb-user-menu" as PluginId,
+      {
+        ...baseItem,
+        id: crypto.randomUUID() as string,
+        template: 'return "|"',
+      },
+      "@default/focused-app" as PluginId,
+      {
+        ...baseItem,
+        id: crypto.randomUUID() as string,
+        scopes: [ToolbarJsScope.FocusedApp],
+        template: 'return focusedApp.title ? "-" : ""',
+      },
+      "@default/focused-app-title" as PluginId,
+    ],
+    center: ["@seelen/tb-calendar-popup" as PluginId],
+    right: [
+      "@seelen/tb-system-tray" as PluginId,
+      "@seelen/tb-keyboard-selector" as PluginId,
+      "@seelen/tb-bluetooth-popup" as PluginId,
+      "@seelen/tb-network-popup" as PluginId,
+      "@seelen/tb-media-popup" as PluginId,
+      "@default/power" as PluginId,
+      "@seelen/tb-notifications" as PluginId,
+      "@seelen/tb-quick-settings" as PluginId,
+    ],
+  });
+}
 
 export const $plugins = signal((await PluginList.getAsync()).forCurrentWidget());
 await PluginList.onChange((list) => {

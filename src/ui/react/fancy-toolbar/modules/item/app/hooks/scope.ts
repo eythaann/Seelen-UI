@@ -6,7 +6,7 @@ import { useSyncClockInterval, useThrottle } from "libs/ui/react/utils/hooks";
 import moment from "moment";
 import { useEffect, useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
-import { $allByWidget, $settings } from "../../../shared/state/mod";
+import { $allByWidget, $settings } from "../../../shared/state/settings";
 import { $virtual_desktop } from "../../../shared/state/system";
 import { $focused } from "../../../shared/state/windows";
 import {
@@ -28,7 +28,7 @@ import {
   useLazyPowerMode,
   useLazyPowerStatus,
   useLazyUser,
-} from "../../../shared/state/lazy";
+} from "../../../shared/state/hooks";
 
 export function useItemScope(scopes: Readonly<ToolbarJsScope[]>) {
   let fetching = false;

@@ -2,7 +2,7 @@ import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { $settings } from "../../../shared/state/mod.ts";
+import { $settings } from "../../../shared/state/settings.ts";
 
 /**
  * Triggers a widget at a calculated position relative to the toolbar item.

@@ -13,11 +13,12 @@ import {
   HARDCODED_SEPARATOR_LEFT,
   HARDCODED_SEPARATOR_RIGHT,
 } from "../shared/state/items.ts";
-import { $settings } from "../shared/state/mod.ts";
+import { $settings } from "../shared/state/settings.ts";
 import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
 import { Group } from "./ItemsContainer.tsx";
 import { Item } from "../item/infra/infra.tsx";
-import { $hidden_by_autohide, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $hidden_by_autohide } from "../shared/state/hidden.ts";
 import { ShowDesktopButton } from "./CornerAction.tsx";
 import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";

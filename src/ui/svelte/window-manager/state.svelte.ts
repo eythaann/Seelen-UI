@@ -193,6 +193,9 @@ class _State {
   get paused() {
     return paused;
   }
+  get widgetRect() {
+    return widgetRect;
+  }
 }
 
 export const state = new _State();

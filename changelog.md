@@ -18,6 +18,7 @@
 - inconsistency on styles of dock and quick settings widgets.
 - toolbar and dock autohide weird behaviour on hitboxes.
 - twm not reflecting changes inmediately on settings change.
+- dock/toolbar/twm behaviours while using fullscreen apps.
 
 ## [2.6.10]
 

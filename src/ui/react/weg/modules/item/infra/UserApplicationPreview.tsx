@@ -2,7 +2,7 @@ import { SeelenCommand } from "@seelen-ui/lib";
 import { Icon, MissingIcon } from "libs/ui/react/components/Icon/index.tsx";
 import { invoke } from "@tauri-apps/api/core";
 
-import { $delayedFocused, $previews } from "../../shared/state/mod.ts";
+import { $delayedFocused, $previews } from "../../shared/state/windows.ts";
 import type { TargetedMouseEvent } from "preact";
 
 interface PreviewProps {

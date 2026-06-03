@@ -3,7 +3,7 @@ import { cx } from "libs/ui/react/utils/styling.ts";
 import type { SeparatorWegItem } from "../../shared/types.ts";
 
 import { HARDCODED_SEPARATOR_LEFT, HARDCODED_SEPARATOR_RIGHT } from "../../shared/state/items.ts";
-import { $settings } from "../../shared/state/mod.ts";
+import { $settings } from "../../shared/state/settings.ts";
 
 export function Separator({ item }: { item: SeparatorWegItem }) {
   return (

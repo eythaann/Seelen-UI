@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
 
-import { $dock_should_be_hidden, $settings } from "../shared/state/mod.ts";
+import { $dock_should_be_hidden, $settings } from "../shared/state/index.ts";
 import { getDockContextMenuAlignment } from "../shared/state/settings.ts";
 import { DockItems } from "./ItemReordableList.tsx";
 import { getSeelenWegMenu } from "./DockMenu.tsx";

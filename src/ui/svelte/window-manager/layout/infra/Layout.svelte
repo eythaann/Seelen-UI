@@ -42,7 +42,7 @@
     return true;
   });
 
-  $effect(() => {
+  /* $effect(() => {
     const observer = new ResizeObserver(() => {
       requestPositioningOfLeaves(state);
     });
@@ -53,17 +53,13 @@
     return () => {
       observer.disconnect();
     };
-  });
+  }); */
 
   // Retrigger repositioning when dependencies change
   $effect(() => {
     layout;
     state.forceRepositioning;
-    state.settings;
-
-    if (!someIsMaximizedOnBg && !state.paused) {
-      requestPositioningOfLeaves(state);
-    }
+    requestPositioningOfLeaves(state);
   });
 
   // Update body opacity based on overlay visibility

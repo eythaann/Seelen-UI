@@ -3,8 +3,8 @@ import { ErrorBoundary } from "../weg/components/Error/index.tsx";
 import { ErrorFallback } from "./components/Error/index.tsx";
 import { FancyToolbar } from "./modules/main/Toolbar.tsx";
 import { useSignalEffect } from "@preact/signals";
-import { $isSomeFullscreenOnMonitor } from "./modules/shared/state/windows.ts";
-import { $initialPositionSet } from "./modules/shared/state/mod.ts";
+import { $top_interactable_window } from "./modules/shared/state/windows.ts";
+import { $initialPositionSet } from "./modules/shared/state/settings.ts";
 import { useEffect } from "preact/hooks";
 
 export function App() {
@@ -13,7 +13,7 @@ export function App() {
   }, []);
 
   useSignalEffect(() => {
-    const fullscreened = $isSomeFullscreenOnMonitor.value;
+    const fullscreened = $top_interactable_window.value?.isFullscreen;
     if (fullscreened) {
       Widget.self.window.setAlwaysOnTop(false);
       Widget.self.window.setAlwaysOnBottom(true);

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
-import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
+import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/index.ts";
 import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";

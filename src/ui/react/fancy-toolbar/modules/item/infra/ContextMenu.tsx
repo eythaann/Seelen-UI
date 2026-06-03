@@ -2,7 +2,7 @@ import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { Alignment, type ContextMenu, FancyToolbarSide } from "@seelen-ui/lib/types";
 
 import { $actions } from "../../shared/state/items.ts";
-import { $settings } from "../../shared/state/mod.ts";
+import { $settings } from "../../shared/state/settings.ts";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo } from "preact/hooks";
 

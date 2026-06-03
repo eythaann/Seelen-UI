@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { $actions, $plugins, $toolbar_state } from "../shared/state/items.ts";
 import { getResourceText } from "@shared";
-import { restoreStateToDefault } from "../shared/state/default.ts";
+import { restoreStateToDefault } from "../shared/state/items.ts";
 
 const identifier = crypto.randomUUID();
 const modulesIdentifier = crypto.randomUUID();

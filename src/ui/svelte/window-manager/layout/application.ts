@@ -1,11 +1,20 @@
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { Rect } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import type { State } from "../state.svelte";
 
-export async function requestPositioningOfLeaves(state: State) {
-  const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
+const monitorId = Widget.self.decoded.monitorId!;
+
+export function requestPositioningOfLeaves(state: State) {
+  const someIsMaximizedOnBg = state.interactables.some(
+    (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen) && !app.isIconic,
+  );
+
+  if (someIsMaximizedOnBg || state.paused) {
+    return;
+  }
+
+  const { left: windowX, top: windowY } = state.widgetRect;
 
   let elements = document.querySelectorAll("[data-hwnd]");
   let positions: Record<string, Rect> = {};
@@ -28,5 +37,5 @@ export async function requestPositioningOfLeaves(state: State) {
     };
   });
 
-  await invoke(SeelenCommand.SetAppWindowsPositions, { positions });
+  invoke(SeelenCommand.SetAppWindowsPositions, { positions });
 }

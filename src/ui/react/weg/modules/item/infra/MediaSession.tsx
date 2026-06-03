@@ -13,7 +13,7 @@ import { calcLuminance } from "../application.ts";
 
 import type { MediaWegItem } from "../../shared/types.ts";
 
-import { $players, $settings } from "../../shared/state/mod.ts";
+import { $players, $settings } from "../../shared/state/index.ts";
 import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getMenuForItem } from "./GeneralMenu.tsx";
 

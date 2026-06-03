@@ -13,7 +13,7 @@ import { useRemoteData } from "../app/hooks/useRemoteData.ts";
 import { useFullItemScope } from "../app/hooks/useItemScope.ts";
 import { useItemScope } from "../app/hooks/scope.ts";
 import { RestrictToHorizontalAxis } from "@dnd-kit/abstract/modifiers";
-import { $settings } from "../../shared/state/mod.ts";
+import { $settings } from "../../shared/state/settings.ts";
 
 export interface ItemProps {
   module: ToolbarItem;
