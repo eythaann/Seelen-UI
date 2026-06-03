@@ -7,6 +7,7 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
+  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd";
 
   const { monitor } = $props<{ monitor: PhysicalMonitor }>();
 
@@ -37,6 +38,8 @@
 </script>
 
 <DragDropProvider
+  plugins={DND_PLUGINS}
+  sensors={DND_SENSORS}
   onDragEnd={(event) => {
     const { source, target } = event.operation;
     if (!source || !target) return;

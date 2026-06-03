@@ -20,6 +20,7 @@
 - twm not reflecting changes inmediately on settings change.
 - dock/toolbar/twm behaviours while using fullscreen apps.
 - not showing toolbar and dock when Apps Menu open.
+- drag being triggered on touchpads with electrical noise or touchpad sensitivity issues.
 
 ## [2.6.10]
 

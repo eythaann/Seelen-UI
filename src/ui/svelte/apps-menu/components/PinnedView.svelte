@@ -6,6 +6,7 @@
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
+  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd";
 
   type UniqueIdentifier = string | number;
 
@@ -28,6 +29,8 @@
 <div class="pinned-view">
   <div class="pinned-view-list">
     <DragDropProvider
+      plugins={DND_PLUGINS}
+      sensors={DND_SENSORS}
       onDragMove={(event) => {
         const { source, target } = event.operation;
 
@@ -131,11 +134,7 @@
           {/if}
         {:else if pinnedItem.type === "folder"}
           {@const folder = pinnedItem}
-          <FolderItem
-            {folder}
-            {idx}
-            isActiveDropzone={activeDropzoneId === pinnedItem.itemId}
-          />
+          <FolderItem {folder} {idx} isActiveDropzone={activeDropzoneId === pinnedItem.itemId} />
         {/if}
       {/each}
     </DragDropProvider>

@@ -18,6 +18,7 @@ import { $current_monitor } from "../shared/state/system.ts";
 import { computed } from "@preact/signals";
 import { $interactables, getWindowsForItem } from "../shared/state/windows.ts";
 import { TrashBin } from "../item/infra/RecycleBin.tsx";
+import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
 
 const visibleItems = computed(() => {
   const { pinnedItemsVisibility, temporalItemsVisibility } = $settings.value;
@@ -52,6 +53,8 @@ export function DockItems() {
 
   return (
     <DragDropProvider
+      plugins={DND_PLUGINS}
+      sensors={DND_SENSORS}
       onDragOver={(event) => {
         const newItems = move($dock_state.value.items, event);
         $dock_state.value = { ...$dock_state.value, items: newItems };

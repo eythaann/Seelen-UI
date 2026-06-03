@@ -7,6 +7,7 @@ import { useMemo } from "preact/hooks";
 import { genericHandleDragOver } from "../../../../../../libs/ui/react/utils/DndKit/utils.ts";
 
 import cs from "./index.module.css";
+import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
 
 interface Props<T> {
   disabled?: boolean;
@@ -56,10 +57,7 @@ export function VerticalSortableSelect<T extends string>({
   }
 
   return (
-    <DragDropProvider
-      onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-    >
+    <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
       <div className={cs.container}>
         {containers.map(({ id, items }) => (
           <div className={cs.box}>
@@ -75,7 +73,9 @@ export function VerticalSortableSelect<T extends string>({
         ))}
         <DragOverlay>
           {(source) => {
-            const opt = options.find(({ value }) => value === source.id);
+            const opt = options.find(({ value }) =>
+              value === source.id
+            );
             return opt ? <div className={cs.item}>{opt.label}</div> : null;
           }}
         </DragOverlay>

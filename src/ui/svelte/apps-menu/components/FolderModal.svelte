@@ -5,6 +5,7 @@
   import { DragDropProvider } from "@dnd-kit/svelte";
   import SortableAppItem from "./SortableAppItem.svelte";
   import { arrayMove } from "../utils";
+  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd";
 
   interface Props {
     folder: FavFolderItem;
@@ -18,7 +19,7 @@
     folder.itemIds.map((id) => ({
       id,
       item: globalState.getMenuItem(id)!,
-    }))
+    })),
   );
 
   let dialog = $state<HTMLDialogElement>();
@@ -35,6 +36,8 @@
   onclose={onClose}
 >
   <DragDropProvider
+    plugins={DND_PLUGINS}
+    sensors={DND_SENSORS}
     onDragOver={(event) => {
       const { source, target } = event.operation;
       if (!source || !target || source.id === target.id) {
@@ -87,7 +90,7 @@
       // Folder is empty, just remove it
       else {
         globalState.pinnedItems = globalState.pinnedItems.filter(
-          (item) => !(item.type === "folder" && item.itemId === folder.itemId)
+          (item) => !(item.type === "folder" && item.itemId === folder.itemId),
         );
       }
 
