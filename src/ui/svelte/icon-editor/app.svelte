@@ -5,7 +5,8 @@
   import { editorState, resetState } from "./state.svelte";
   import CanvasRenderer from "./CanvasRenderer.svelte";
 
-  const CANVAS_SIZE = 256;
+  const CANVAS_SIZE = 512;
+
   let bgCanvas = $state<HTMLCanvasElement>();
   let imageCanvas = $state<HTMLCanvasElement>();
   let drawCanvas = $state<HTMLCanvasElement>();
