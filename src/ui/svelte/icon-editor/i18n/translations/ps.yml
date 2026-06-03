@@ -1,6 +1,12 @@
 angle: زاویه
 approximately_square: تقریبا مربع
 background: پس منظر
+brush_size: د برش اندازه
+clear_draw: پاکه نقشه
+delete: دودیز آئیکون حذف کړئ
+draw_color: رنګ رسم کړئ
+draw_mode_off: رسم
+draw_mode_on: نقاشي
 gradient: تدریجي
 none: هیڅ نه (شفاف)
 pick_image: انځور غوره کړئ

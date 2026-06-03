@@ -1,6 +1,12 @@
 angle: አንግል
 approximately_square: በግምት ካሬ
 background: ዳራ
+brush_size: ብሩሽ መጠን
+clear_draw: ግልጽ ስዕል
+delete: ብጁ አዶን ሰርዝ
+draw_color: ቀለም ይሳሉ
+draw_mode_off: ይሳሉ
+draw_mode_on: መሳል
 gradient: ግራዲየንት
 none: ምንም (ግልጽ)
 pick_image: ምስል ይምረጡ

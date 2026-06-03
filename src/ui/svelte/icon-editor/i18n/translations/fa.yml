@@ -1,6 +1,12 @@
 angle: زاویه
 approximately_square: تقریبا مربع
 background: پس زمینه
+brush_size: اندازه برس
+clear_draw: پاک کردن نقاشی
+delete: حذف نماد سفارشی
+draw_color: رنگ بکش
+draw_mode_off: قرعه کشی کنید
+draw_mode_on: طراحی
 gradient: گرادیان
 none: هیچ (شفاف)
 pick_image: تصویر را انتخاب کنید

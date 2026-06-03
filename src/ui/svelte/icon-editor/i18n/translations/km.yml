@@ -1,6 +1,12 @@
 angle: មុំ
 approximately_square: ប្រហែលការ៉េ
 background: ផ្ទៃខាងក្រោយ
+brush_size: ទំហំជក់
+clear_draw: ជម្រះគំនូរ
+delete: លុបរូបតំណាងផ្ទាល់ខ្លួន
+draw_color: គូរពណ៌
+draw_mode_off: គូរ
+draw_mode_on: គំនូរ
 gradient: ជម្រាល
 none: គ្មាន (តម្លាភាព)
 pick_image: ជ្រើសរើសរូបភាព

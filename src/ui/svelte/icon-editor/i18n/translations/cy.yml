@@ -1,6 +1,12 @@
 angle: Ongl
 approximately_square: Tua sgwâr
 background: Cefndir
+brush_size: Maint brwsh
+clear_draw: Lluniadu clir
+delete: Dileu eicon personol
+draw_color: Tynnwch liw
+draw_mode_off: Tynnu llun
+draw_mode_on: Arlunio
 gradient: graddiant
 none: Dim (tryloyw)
 pick_image: Dewiswch ddelwedd

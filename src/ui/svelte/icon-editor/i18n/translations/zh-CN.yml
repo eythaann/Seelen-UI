@@ -1,6 +1,12 @@
 angle: 角度
 approximately_square: 大约正方形
 background: 背景
+brush_size: 刷子尺寸
+clear_draw: 清晰的绘图
+delete: 删除自定义图标
+draw_color: 绘制颜色
+draw_mode_off: 画
+draw_mode_on: 绘画
 gradient: 坡度
 none: 无（透明）
 pick_image: 选择图片

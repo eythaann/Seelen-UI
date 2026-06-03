@@ -1,6 +1,12 @@
 angle: Γωνία
 approximately_square: Περίπου τετράγωνο
 background: Φόντο
+brush_size: Μέγεθος βούρτσας
+clear_draw: Καθαρό σχέδιο
+delete: Διαγραφή προσαρμοσμένου εικονιδίου
+draw_color: Σχεδιάστε χρώμα
+draw_mode_off: Ισοπαλία
+draw_mode_on: Σχέδιο
 gradient: Κλίση
 none: Κανένα (διαφανές)
 pick_image: Επιλέξτε εικόνα

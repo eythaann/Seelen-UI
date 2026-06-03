@@ -1,6 +1,12 @@
 angle: Кут
 approximately_square: Приблизно квадратний
 background: Фон
+brush_size: Розмір кисті
+clear_draw: Чіткий малюнок
+delete: Видалити спеціальний значок
+draw_color: Намалюй колір
+draw_mode_off: малювати
+draw_mode_on: Малювання
 gradient: градієнт
 none: Немає (прозорий)
 pick_image: Виберіть зображення

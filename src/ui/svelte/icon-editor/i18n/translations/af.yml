@@ -1,6 +1,12 @@
 angle: Hoek
 approximately_square: Ongeveer vierkantig
 background: Agtergrond
+brush_size: Borsel grootte
+clear_draw: Duidelike tekening
+delete: Vee pasgemaakte ikoon uit
+draw_color: Teken kleur
+draw_mode_off: Teken
+draw_mode_on: Tekening
 gradient: Gradiënt
 none: Geen (deursigtig)
 pick_image: Kies prent

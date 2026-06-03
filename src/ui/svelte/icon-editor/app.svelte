@@ -6,7 +6,9 @@
   import CanvasRenderer from "./CanvasRenderer.svelte";
 
   const CANVAS_SIZE = 256;
-  let canvas = $state<HTMLCanvasElement>();
+  let bgCanvas = $state<HTMLCanvasElement>();
+  let imageCanvas = $state<HTMLCanvasElement>();
+  let drawCanvas = $state<HTMLCanvasElement>();
   let fileInput: HTMLInputElement;
 
   $effect(() => {
@@ -20,6 +22,34 @@
       editorState.overlayImage = img;
     };
     img.src = url;
+  }
+
+  function clearDraw() {
+    if (!drawCanvas) return;
+    drawCanvas.getContext("2d")!.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  }
+
+  $effect(() => {
+    editorState.entry;
+    clearDraw();
+  });
+
+  function handleReset() {
+    resetState();
+    clearDraw();
+    const entry = editorState.entry;
+    if (!entry?.icon) return;
+    const path = entry.icon.base ?? entry.icon.light ?? entry.icon.dark;
+    if (!path) return;
+    fetch(convertFileSrc(path))
+      .then((r) => r.blob())
+      .then((blob) => {
+        const img = new Image();
+        img.onload = () => {
+          editorState.overlayImage = img;
+        };
+        img.src = URL.createObjectURL(blob);
+      });
   }
 
   $effect(() => {
@@ -48,11 +78,31 @@
     loadImageFromUrl(URL.createObjectURL(file));
   }
 
-  async function save() {
-    if (!canvas || !editorState.entry || editorState.saving) return;
+  async function deleteCustomIcon() {
+    if (!editorState.entry || editorState.saving) return;
     editorState.saving = true;
     try {
-      const dataUrl = canvas.toDataURL("image/png");
+      await invoke(SeelenCommand.DeleteUserCustomAppIcon, { entry: editorState.entry });
+      Widget.getCurrent().hide();
+    } finally {
+      editorState.saving = false;
+    }
+  }
+
+  async function save() {
+    if (!bgCanvas || !imageCanvas || !drawCanvas || !editorState.entry || editorState.saving)
+      return;
+    editorState.saving = true;
+    try {
+      const temp = document.createElement("canvas");
+      temp.width = CANVAS_SIZE;
+      temp.height = CANVAS_SIZE;
+      const ctx = temp.getContext("2d")!;
+      ctx.drawImage(bgCanvas, 0, 0);
+      ctx.drawImage(imageCanvas, 0, 0);
+      ctx.drawImage(drawCanvas, 0, 0);
+
+      const dataUrl = temp.toDataURL("image/png");
       const iconBase64 = dataUrl.split(",")[1]!;
 
       await invoke(SeelenCommand.RegisterUserCustomAppIcon, {
@@ -69,7 +119,43 @@
 
 <div class="icon-editor">
   <div class="editor-main">
-    <CanvasRenderer bind:canvas ondrop={onDrop} />
+    <div class="canvas-column">
+      <CanvasRenderer bind:bgCanvas bind:imageCanvas bind:drawCanvas ondrop={onDrop} />
+
+      <div class="draw-toolbar">
+        <button
+          data-skin="default"
+          class:draw-active={editorState.drawMode}
+          onclick={() => (editorState.drawMode = !editorState.drawMode)}
+        >
+          {editorState.drawMode ? $t("draw_mode_on") : $t("draw_mode_off")}
+        </button>
+
+        {#if editorState.drawMode}
+          <input
+            data-skin="default"
+            type="color"
+            bind:value={editorState.drawColor}
+            title={$t("draw_color")}
+          />
+
+          <label class="brush-label">
+            <span class="section-label">{$t("brush_size")}: {editorState.brushSize}px</span>
+            <input
+              data-skin="flat"
+              type="range"
+              min="1"
+              max="50"
+              bind:value={editorState.brushSize}
+            />
+          </label>
+
+          <button data-skin="default" onclick={clearDraw}>
+            {$t("clear_draw")}
+          </button>
+        {/if}
+      </div>
+    </div>
 
     <div class="controls">
       <section class="control-section">
@@ -178,31 +264,41 @@
           {$t("approximately_square")}
         </label>
       </section>
-
-      <div class="action-buttons">
-        <button data-skin="default" onclick={resetState}>{$t("reset")}</button>
-        <button
-          data-skin="solid"
-          onclick={save}
-          disabled={!editorState.entry || editorState.saving}
-        >
-          {editorState.saving ? $t("saving") : $t("save")}
-        </button>
-      </div>
     </div>
+  </div>
+
+  <div class="action-buttons">
+    <button
+      data-skin="default"
+      onclick={deleteCustomIcon}
+      disabled={!editorState.entry || editorState.saving}
+    >
+      {$t("delete")}
+    </button>
+    <button data-skin="default" onclick={handleReset}>{$t("reset")}</button>
+    <button data-skin="solid" onclick={save} disabled={!editorState.entry || editorState.saving}>
+      {editorState.saving ? $t("saving") : $t("save")}
+    </button>
   </div>
 </div>
 
 <style>
+  :global(body) {
+    overflow: hidden;
+    background: var(--slu-std-bg-color);
+  }
+
   .icon-editor {
+    width: 100vw;
+    height: 100vh;
+
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: auto;
+    justify-content: space-between;
+    gap: var(--spacing-m);
+    padding: var(--spacing-m);
+
+    overflow: hidden;
   }
 
   .editor-main {
@@ -212,6 +308,34 @@
     flex: 1;
     min-height: 0;
     align-items: flex-start;
+    overflow: auto;
+  }
+
+  .canvas-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+    flex-shrink: 0;
+  }
+
+  .draw-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-s);
+    width: 256px;
+  }
+
+  .brush-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .draw-active {
+    outline: 2px solid var(--slu-accent-color, #5588ff);
   }
 
   .controls {
@@ -220,6 +344,9 @@
     gap: var(--spacing-s);
     flex: 1;
     min-width: 200px;
+    min-height: 0;
+    align-self: stretch;
+    overflow: auto;
   }
 
   .control-section {
@@ -257,8 +384,9 @@
 
   .action-buttons {
     display: flex;
+    flex-shrink: 0;
+    align-items: center;
     justify-content: flex-end;
     gap: var(--spacing-s);
-    margin-top: auto;
   }
 </style>

@@ -1,6 +1,12 @@
 angle: Angolu
 approximately_square: Bejn wieħed u ieħor kwadru
 background: Sfond
+brush_size: Daqs tal-pinzell
+clear_draw: Tpinġija ċara
+delete: Ħassar ikona tad-dwana
+draw_color: Iġbed kulur
+draw_mode_off: Iġbed
+draw_mode_on: Tpinġija
 gradient: Gradjent
 none: Xejn (trasparenti)
 pick_image: Agħżel immaġni

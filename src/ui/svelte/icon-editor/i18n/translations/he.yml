@@ -1,6 +1,12 @@
 angle: זָוִית
 approximately_square: מרובע בערך
 background: רֶקַע
+brush_size: גודל מברשת
+clear_draw: ציור ברור
+delete: מחק סמל מותאם אישית
+draw_color: צייר צבע
+draw_mode_off: לִמְשׁוֹך
+draw_mode_on: צִיוּר
 gradient: מִדרוֹן
 none: אין (שקוף)
 pick_image: בחר תמונה

@@ -1,6 +1,12 @@
 angle: anggulo
 approximately_square: Tinatayang parisukat
 background: Background
+brush_size: Laki ng brush
+clear_draw: Malinaw na pagguhit
+delete: Tanggalin ang custom na icon
+draw_color: Gumuhit ng kulay
+draw_mode_off: Gumuhit
+draw_mode_on: Pagguhit
 gradient: Gradient
 none: Wala (transparent)
 pick_image: Pumili ng larawan

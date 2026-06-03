@@ -1,6 +1,12 @@
 angle: Kulma
 approximately_square: Suunnilleen neliön muotoinen
 background: Tausta
+brush_size: Harjan koko
+clear_draw: Selkeä piirustus
+delete: Poista mukautettu kuvake
+draw_color: Piirrä väri
+draw_mode_off: Piirrä
+draw_mode_on: Piirustus
 gradient: Kaltevuus
 none: Ei mitään (läpinäkyvä)
 pick_image: Valitse kuva

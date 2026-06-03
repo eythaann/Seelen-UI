@@ -1,6 +1,12 @@
 angle: કોણ
 approximately_square: લગભગ ચોરસ
 background: પૃષ્ઠભૂમિ
+brush_size: બ્રશનું કદ
+clear_draw: રેખાંકન સાફ કરો
+delete: કસ્ટમ આઇકન કાઢી નાખો
+draw_color: રંગ દોરો
+draw_mode_off: દોરો
+draw_mode_on: રેખાંકન
 gradient: ઢાળ
 none: કોઈ નહીં (પારદર્શક)
 pick_image: છબી ચૂંટો

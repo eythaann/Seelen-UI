@@ -1,6 +1,12 @@
 angle: Pembe
 approximately_square: Takriban mraba
 background: Usuli
+brush_size: Ukubwa wa brashi
+clear_draw: Mchoro wazi
+delete: Futa ikoni maalum
+draw_color: Chora rangi
+draw_mode_off: Chora
+draw_mode_on: Kuchora
 gradient: Gradient
 none: Hakuna (uwazi)
 pick_image: Chagua picha

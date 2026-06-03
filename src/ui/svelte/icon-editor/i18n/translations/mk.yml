@@ -1,6 +1,12 @@
 angle: Агол
 approximately_square: Приближно квадрат
 background: Позадина
+brush_size: Големина на четката
+clear_draw: Јасен цртеж
+delete: Избришете ја прилагодената икона
+draw_color: Нацртајте боја
+draw_mode_off: Нацртај
+draw_mode_on: Цртеж
 gradient: Градиент
 none: Никој (транспарентен)
 pick_image: Изберете слика

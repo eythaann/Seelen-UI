@@ -13,6 +13,9 @@ let overlayX = $state(0);
 let overlayY = $state(0);
 let overlayScale = $state(1.0);
 let saving = $state(false);
+let drawMode = $state(false);
+let drawColor = $state("#ff0000");
+let brushSize = $state(10);
 
 export function resetState() {
   bgType = "none";
@@ -25,6 +28,9 @@ export function resetState() {
   overlayY = 0;
   overlayScale = 1.0;
   saving = false;
+  drawMode = false;
+  drawColor = "#ff0000";
+  brushSize = 10;
 }
 
 Widget.self.onTrigger(({ customArgs }) => {
@@ -116,6 +122,24 @@ class EditorState {
   }
   set saving(v: boolean) {
     saving = v;
+  }
+  get drawMode() {
+    return drawMode;
+  }
+  set drawMode(v: boolean) {
+    drawMode = v;
+  }
+  get drawColor() {
+    return drawColor;
+  }
+  set drawColor(v: string) {
+    drawColor = v;
+  }
+  get brushSize() {
+    return brushSize;
+  }
+  set brushSize(v: number) {
+    brushSize = v;
   }
 }
 

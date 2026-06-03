@@ -1,6 +1,12 @@
 angle: Кунҷ
 approximately_square: Тақрибан мураббаъ
 background: Замина
+brush_size: Андозаи хасу
+clear_draw: Расми равшан
+delete: Нишонаи фармоиширо нест кунед
+draw_color: Ранг кашед
+draw_mode_off: кашидан
+draw_mode_on: Расмкашӣ
 gradient: Градиент
 none: Ҳеҷ (шаффоф)
 pick_image: Тасвирро интихоб кунед

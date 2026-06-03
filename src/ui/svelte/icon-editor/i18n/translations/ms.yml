@@ -1,6 +1,12 @@
 angle: sudut
 approximately_square: Kira-kira persegi
 background: Latar belakang
+brush_size: Saiz berus
+clear_draw: Lukisan yang jelas
+delete: Padam ikon tersuai
+draw_color: Lukis warna
+draw_mode_off: Lukis
+draw_mode_on: Melukis
 gradient: Kecerunan
 none: Tiada (telus)
 pick_image: Pilih imej

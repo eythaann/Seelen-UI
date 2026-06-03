@@ -1,6 +1,12 @@
 angle: Burchak
 approximately_square: Taxminan kvadrat
 background: Fon
+brush_size: Cho'tkaning o'lchami
+clear_draw: Aniq chizish
+delete: Maxsus belgini o'chirish
+draw_color: Rang chizish
+draw_mode_off: Chizish
+draw_mode_on: Chizma
 gradient: Gradient
 none: Yo'q (shaffof)
 pick_image: Rasmni tanlang

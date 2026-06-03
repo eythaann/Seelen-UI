@@ -1,6 +1,12 @@
 angle: Kampas
 approximately_square: Maždaug kvadratinis
 background: Fonas
+brush_size: Šepetėlio dydis
+clear_draw: Aiškus piešinys
+delete: Ištrinti pasirinktinę piktogramą
+draw_color: Pieškite spalvą
+draw_mode_off: Lygiosios
+draw_mode_on: Piešimas
 gradient: Gradientas
 none: Nėra (skaidrus)
 pick_image: Pasirinkite vaizdą

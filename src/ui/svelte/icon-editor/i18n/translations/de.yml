@@ -1,6 +1,12 @@
 angle: Winkel
 approximately_square: Ungefähr quadratisch
 background: Hintergrund
+brush_size: Pinselgröße
+clear_draw: Klare Zeichnung
+delete: Benutzerdefiniertes Symbol löschen
+draw_color: Farbe zeichnen
+draw_mode_off: Ziehen
+draw_mode_on: Zeichnung
 gradient: Gradient
 none: Keine (transparent)
 pick_image: Bild auswählen

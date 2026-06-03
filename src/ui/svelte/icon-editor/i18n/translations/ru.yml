@@ -1,6 +1,12 @@
 angle: Угол
 approximately_square: Примерно квадратный
 background: Фон
+brush_size: Размер кисти
+clear_draw: Четкий рисунок
+delete: Удалить собственный значок
+draw_color: Цвет рисования
+draw_mode_off: Рисовать
+draw_mode_on: Рисунок
 gradient: Градиент
 none: Нет (прозрачный)
 pick_image: Выберите изображение

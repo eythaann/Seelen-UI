@@ -1,6 +1,12 @@
 angle: Wénkel
 approximately_square: Ongeféier Quadrat
 background: Hannergrond
+brush_size: Pinsel Gréisst
+clear_draw: Kloer Zeechnen
+delete: Benotzerdefinéiert Ikon läschen
+draw_color: Zeechnen Faarf
+draw_mode_off: Zeechnen
+draw_mode_on: Zeechnen
 gradient: Gradient
 none: Keen (transparent)
 pick_image: Wielt Bild

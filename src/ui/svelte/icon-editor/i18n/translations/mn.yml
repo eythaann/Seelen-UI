@@ -1,6 +1,12 @@
 angle: Өнцөг
 approximately_square: Ойролцоогоор дөрвөлжин
 background: Суурь
+brush_size: Сойзны хэмжээ
+clear_draw: Тодорхой зураг
+delete: Захиалгат дүрсийг устгах
+draw_color: Өнгө зурах
+draw_mode_off: Зурах
+draw_mode_on: Зурах
 gradient: Градиент
 none: Байхгүй (ил тод)
 pick_image: Зураг сонгох

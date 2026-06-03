@@ -1,6 +1,12 @@
 angle: ມຸມ
 approximately_square: ປະມານສີ່ຫຼ່ຽມ
 background: ຄວາມເປັນມາ
+brush_size: ຂະໜາດແປງ
+clear_draw: ລຶບລ້າງການແຕ້ມ
+delete: ລຶບໄອຄອນແບບກຳນົດເອງ
+draw_color: ແຕ້ມສີ
+draw_mode_off: ແຕ້ມ
+draw_mode_on: ການແຕ້ມຮູບ
 gradient: Gradient
 none: ບໍ່ມີ (ໂປ່ງໃສ)
 pick_image: ເລືອກຮູບ

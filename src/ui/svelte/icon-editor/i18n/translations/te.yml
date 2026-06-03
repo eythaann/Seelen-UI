@@ -1,6 +1,12 @@
 angle: కోణం
 approximately_square: ఇంచుమించు చతురస్రం
 background: నేపథ్యం
+brush_size: బ్రష్ పరిమాణం
+clear_draw: క్లియర్ డ్రాయింగ్
+delete: అనుకూల చిహ్నాన్ని తొలగించండి
+draw_color: రంగును గీయండి
+draw_mode_off: గీయండి
+draw_mode_on: డ్రాయింగ్
 gradient: ప్రవణత
 none: ఏదీ లేదు (పారదర్శకంగా)
 pick_image: చిత్రాన్ని ఎంచుకోండి

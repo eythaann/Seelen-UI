@@ -1,6 +1,12 @@
 angle: कोण
 approximately_square: लगभग वर्ग
 background: पृष्ठभूमि
+brush_size: ब्रश आकार
+clear_draw: रेखाचित्र खाली गर्नुहोस्
+delete: अनुकूलन प्रतिमा मेटाउनुहोस्
+draw_color: रंग कोर्नुहोस्
+draw_mode_off: कोर्नुहोस्
+draw_mode_on: रेखाचित्र
 gradient: ग्रेडियन्ट
 none: कुनै पनि (पारदर्शी)
 pick_image: छवि छान्नुहोस्

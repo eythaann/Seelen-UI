@@ -1,6 +1,12 @@
 angle: কোণ
 approximately_square: প্রায় বর্গক্ষেত্র
 background: পটভূমি
+brush_size: ব্রাশের আকার
+clear_draw: পরিষ্কার অঙ্কন
+delete: কাস্টম আইকন মুছুন
+draw_color: রঙ আঁকুন
+draw_mode_off: আঁকা
+draw_mode_on: অঙ্কন
 gradient: গ্রেডিয়েন্ট
 none: কোনটিই নয় (স্বচ্ছ)
 pick_image: ছবি বাছাই করুন

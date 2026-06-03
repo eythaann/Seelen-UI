@@ -1,6 +1,12 @@
 angle: Angle
 approximately_square: Aproximadament quadrat
 background: Fons
+brush_size: Mida del pinzell
+clear_draw: Dibuix clar
+delete: Suprimeix la icona personalitzada
+draw_color: Dibuixa el color
+draw_mode_off: Dibuixa
+draw_mode_on: Dibuix
 gradient: Gradient
 none: Cap (transparent)
 pick_image: Tria la imatge

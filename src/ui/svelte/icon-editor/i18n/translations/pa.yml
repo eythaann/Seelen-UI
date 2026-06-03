@@ -1,6 +1,12 @@
 angle: ਕੋਣ
 approximately_square: ਲਗਭਗ ਵਰਗ
 background: ਪਿਛੋਕੜ
+brush_size: ਬੁਰਸ਼ ਦਾ ਆਕਾਰ
+clear_draw: ਡਰਾਇੰਗ ਸਾਫ਼ ਕਰੋ
+delete: ਕਸਟਮ ਆਈਕਨ ਮਿਟਾਓ
+draw_color: ਰੰਗ ਖਿੱਚੋ
+draw_mode_off: ਡਰਾਅ
+draw_mode_on: ਡਰਾਇੰਗ
 gradient: ਗਰੇਡੀਐਂਟ
 none: ਕੋਈ ਨਹੀਂ (ਪਾਰਦਰਸ਼ੀ)
 pick_image: ਚਿੱਤਰ ਚੁਣੋ

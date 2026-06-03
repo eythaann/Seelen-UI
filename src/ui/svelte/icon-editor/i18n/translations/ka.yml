@@ -1,6 +1,12 @@
 angle: კუთხე
 approximately_square: დაახლოებით კვადრატული
 background: ფონი
+brush_size: ფუნჯის ზომა
+clear_draw: წმინდა ნახაზი
+delete: მორგებული ხატის წაშლა
+draw_color: დახატე ფერი
+draw_mode_off: დახატე
+draw_mode_on: ნახატი
 gradient: გრადიენტი
 none: არცერთი (გამჭვირვალე)
 pick_image: აირჩიე სურათი

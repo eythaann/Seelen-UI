@@ -1,6 +1,12 @@
 angle: Ângulo
 approximately_square: Aproximadamente quadrado
 background: Fundo
+brush_size: Tamanho do pincel
+clear_draw: Desenho claro
+delete: Apagar ícone personalizado
+draw_color: Desenhar cor
+draw_mode_off: Desenhar
+draw_mode_on: Desenho
 gradient: Gradiente
 none: Nenhum (transparente)
 pick_image: Escolha a imagem

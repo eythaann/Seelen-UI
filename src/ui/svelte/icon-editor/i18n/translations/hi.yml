@@ -1,6 +1,12 @@
 angle: कोण
 approximately_square: लगभग चौकोर
 background: पृष्ठभूमि
+brush_size: ब्रश का आकार
+clear_draw: स्पष्ट रेखांकन
+delete: कस्टम आइकन हटाएं
+draw_color: रंग बनाएं
+draw_mode_off: खींचना
+draw_mode_on: चित्रकला
 gradient: ढाल
 none: कोई नहीं (पारदर्शी)
 pick_image: छवि चुनें

@@ -1,6 +1,12 @@
 angle: Vinkel
 approximately_square: Cirka kvadratisk
 background: Baggrund
+brush_size: Børste størrelse
+clear_draw: Tydelig tegning
+delete: Slet brugerdefineret ikon
+draw_color: Tegn farve
+draw_mode_off: Tegne
+draw_mode_on: Tegning
 gradient: Gradient
 none: Ingen (gennemsigtig)
 pick_image: Vælg billede

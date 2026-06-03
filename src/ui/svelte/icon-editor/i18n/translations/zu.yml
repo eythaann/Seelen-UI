@@ -1,6 +1,12 @@
 angle: I-engeli
 approximately_square: Cishe isikwele
 background: Ingemuva
+brush_size: Usayizi webhulashi
+clear_draw: Sula umdwebo
+delete: Susa isithonjana sangokwezifiso
+draw_color: Dweba umbala
+draw_mode_off: Dweba
+draw_mode_on: Umdwebo
 gradient: I-Gradient
 none: Lutho (transparent)
 pick_image: Khetha isithombe

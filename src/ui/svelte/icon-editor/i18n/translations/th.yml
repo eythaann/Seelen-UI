@@ -1,6 +1,12 @@
 angle: มุม
 approximately_square: ประมาณสี่เหลี่ยมจัตุรัส
 background: พื้นหลัง
+brush_size: ขนาดแปรง
+clear_draw: ภาพวาดที่ชัดเจน
+delete: ลบไอคอนที่กำหนดเอง
+draw_color: วาดสี
+draw_mode_off: วาด
+draw_mode_on: การวาดภาพ
 gradient: การไล่ระดับสี
 none: ไม่มี (โปร่งใส)
 pick_image: เลือกรูปภาพ

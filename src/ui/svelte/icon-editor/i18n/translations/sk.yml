@@ -1,6 +1,12 @@
 angle: Uhol
 approximately_square: Približne štvorcový
 background: Pozadie
+brush_size: Veľkosť štetca
+clear_draw: Jasná kresba
+delete: Odstrániť vlastnú ikonu
+draw_color: Nakreslite farbu
+draw_mode_off: Kresliť
+draw_mode_on: Kreslenie
 gradient: Gradient
 none: Žiadne (priehľadné)
 pick_image: Vyberte obrázok

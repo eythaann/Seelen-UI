@@ -1,6 +1,12 @@
 angle: Angelua
 approximately_square: Gutxi gorabehera karratua
 background: Aurrekariak
+brush_size: Eskuila tamaina
+clear_draw: Marrazki garbia
+delete: Ezabatu ikono pertsonalizatua
+draw_color: Marraztu kolorea
+draw_mode_off: Marraztu
+draw_mode_on: Marrazkia
 gradient: Gradientea
 none: Bat ere ez (gardena)
 pick_image: Aukeratu irudia

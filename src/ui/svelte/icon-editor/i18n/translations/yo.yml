@@ -1,6 +1,12 @@
 angle: Igun
 approximately_square: Isunmọ onigun mẹrin
 background: abẹlẹ
+brush_size: Iwọn fẹlẹ
+clear_draw: Iyaworan kuro
+delete: Pa aami aṣa rẹ kuro
+draw_color: Fa awọ
+draw_mode_off: Yiya
+draw_mode_on: Iyaworan
 gradient: Ilọsiwaju
 none: Ko si (sihin)
 pick_image: Yan aworan

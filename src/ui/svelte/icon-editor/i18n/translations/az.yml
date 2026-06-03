@@ -1,6 +1,12 @@
 angle: Bucaq
 approximately_square: Təxminən kvadrat
 background: Fon
+brush_size: Fırça ölçüsü
+clear_draw: Təmiz rəsm
+delete: Fərdi simvolu silin
+draw_color: Rəng çəkmək
+draw_mode_off: çəkmək
+draw_mode_on: Rəsm
 gradient: Qradient
 none: Yoxdur (şəffaf)
 pick_image: Şəkil seçin

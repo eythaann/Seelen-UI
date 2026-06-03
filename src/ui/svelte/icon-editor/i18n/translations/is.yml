@@ -1,6 +1,12 @@
 angle: Horn
 approximately_square: Um það bil ferningur
 background: Bakgrunnur
+brush_size: Stærð bursta
+clear_draw: Skýr teikning
+delete: Eyða sérsniðnu tákni
+draw_color: Teiknaðu lit
+draw_mode_off: Jafntefli
+draw_mode_on: Teikning
 gradient: Halli
 none: Engin (gagnsæ)
 pick_image: Veldu mynd

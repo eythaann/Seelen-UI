@@ -1,6 +1,12 @@
 angle: Nurk
 approximately_square: Ligikaudu ruudukujuline
 background: Taust
+brush_size: Pintsli suurus
+clear_draw: Selge joonistus
+delete: Kustuta kohandatud ikoon
+draw_color: Joonista värv
+draw_mode_off: Joonista
+draw_mode_on: Joonistamine
 gradient: Gradient
 none: Puudub (läbipaistev)
 pick_image: Valige pilt

@@ -1,6 +1,12 @@
 angle: Kut
 approximately_square: Otprilike četvrtast
 background: Pozadina
+brush_size: Veličina četke
+clear_draw: Jasan crtež
+delete: Izbriši prilagođenu ikonu
+draw_color: Nacrtajte boju
+draw_mode_off: Crtajte
+draw_mode_on: Izvlačenje
 gradient: Gradijent
 none: Ništa (prozirno)
 pick_image: Odaberite sliku

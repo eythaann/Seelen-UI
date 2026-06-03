@@ -1,6 +1,12 @@
 angle: கோணம்
 approximately_square: தோராயமாக சதுரம்
 background: பின்னணி
+brush_size: தூரிகை அளவு
+clear_draw: தெளிவான வரைதல்
+delete: தனிப்பயன் ஐகானை நீக்கு
+draw_color: வண்ணத்தை வரையவும்
+draw_mode_off: வரையவும்
+draw_mode_on: வரைதல்
 gradient: சாய்வு
 none: எதுவுமில்லை (வெளிப்படையானது)
 pick_image: படத்தை தேர்ந்தெடு

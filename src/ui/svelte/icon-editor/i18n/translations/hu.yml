@@ -1,6 +1,12 @@
 angle: Szög
 approximately_square: Körülbelül négyzet alakú
 background: Háttér
+brush_size: Ecset mérete
+clear_draw: Tiszta rajz
+delete: Egyéni ikon törlése
+draw_color: Rajzolj színt
+draw_mode_off: Rajzolj
+draw_mode_on: Rajz
 gradient: Gradiens
 none: Nincs (átlátszó)
 pick_image: Kép kiválasztása

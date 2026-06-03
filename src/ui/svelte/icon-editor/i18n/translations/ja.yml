@@ -1,6 +1,12 @@
 angle: 角度
 approximately_square: ほぼ正方形
 background: 背景
+brush_size: ブラシサイズ
+clear_draw: 鮮明な描画
+delete: カスタムアイコンの削除
+draw_color: 色を描く
+draw_mode_off: 描く
+draw_mode_on: 描画
 gradient: 勾配
 none: なし（透明）
 pick_image: 画像を選択してください

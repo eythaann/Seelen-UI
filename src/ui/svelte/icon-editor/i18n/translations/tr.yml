@@ -1,6 +1,12 @@
 angle: Açı
 approximately_square: Yaklaşık kare
 background: Arka plan
+brush_size: Fırça boyutu
+clear_draw: Çizimi temizle
+delete: Özel simgeyi sil
+draw_color: Renk çiz
+draw_mode_off: Çizmek
+draw_mode_on: Çizim
 gradient: Gradyan
 none: Yok (şeffaf)
 pick_image: Resim seç

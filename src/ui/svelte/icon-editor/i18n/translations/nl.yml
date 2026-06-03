@@ -1,6 +1,12 @@
 angle: Hoek
 approximately_square: Ongeveer vierkant
 background: Achtergrond
+brush_size: Penseelgrootte
+clear_draw: Duidelijke tekening
+delete: Aangepast pictogram verwijderen
+draw_color: Teken kleur
+draw_mode_off: Tekenen
+draw_mode_on: Tekening
 gradient: Verloop
 none: Geen (transparant)
 pick_image: Kies afbeelding

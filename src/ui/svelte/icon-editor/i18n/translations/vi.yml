@@ -1,6 +1,12 @@
 angle: Góc
 approximately_square: Khoảng vuông
 background: Lý lịch
+brush_size: Kích thước cọ
+clear_draw: Bản vẽ rõ ràng
+delete: Xóa biểu tượng tùy chỉnh
+draw_color: Vẽ màu
+draw_mode_off: Vẽ tranh
+draw_mode_on: Vẽ
 gradient: Độ dốc
 none: Không có (minh bạch)
 pick_image: Chọn hình ảnh

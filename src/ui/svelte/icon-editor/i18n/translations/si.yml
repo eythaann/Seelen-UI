@@ -1,6 +1,12 @@
 angle: කෝණය
 approximately_square: ආසන්න වශයෙන් හතරැස්
 background: පසුබිම
+brush_size: බුරුසු ප්රමාණය
+clear_draw: පැහැදිලි ඇඳීම
+delete: අභිරුචි නිරූපකය මකන්න
+draw_color: වර්ණ අඳින්න
+draw_mode_off: අඳින්න
+draw_mode_on: ඇඳීම
 gradient: Gradient
 none: කිසිවක් නැත (විනිවිද පෙනෙන)
 pick_image: රූපය තෝරන්න

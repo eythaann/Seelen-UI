@@ -1,6 +1,12 @@
 angle: Kąt
 approximately_square: Mniej więcej kwadratowy
 background: Tło
+brush_size: Rozmiar pędzla
+clear_draw: Wyraźny rysunek
+delete: Usuń niestandardową ikonę
+draw_color: Narysuj kolor
+draw_mode_off: Rysować
+draw_mode_on: Rysunek
 gradient: Gradient
 none: Brak (przezroczysty)
 pick_image: Wybierz obraz

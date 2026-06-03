@@ -112,3 +112,31 @@ pub fn register_user_custom_app_icon(icon_base64: String, entry: IconPackEntry) 
     RESOURCES.emit_icon_packs();
     Ok(())
 }
+
+#[tauri::command(async)]
+pub fn delete_user_custom_app_icon(entry: IconPackEntry) -> Result<()> {
+    let dir = pack_dir();
+    if !dir.exists() {
+        return Ok(());
+    }
+
+    let mut pack = load_or_create_pack(&dir);
+
+    let old_rel = pack
+        .find_similar(&entry)
+        .and_then(|existing| match existing {
+            IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
+            IconPackEntry::Shared(s) => s.icon.base.clone(),
+            IconPackEntry::Custom(c) => c.icon.base.clone(),
+        });
+    if let Some(rel) = old_rel {
+        let _ = std::fs::remove_file(dir.join(rel));
+    }
+
+    pack.entries.retain(|e| !e.matches(&entry));
+    pack.save()?;
+
+    RESOURCES.load(&ResourceKind::IconPack, &dir)?;
+    RESOURCES.emit_icon_packs();
+    Ok(())
+}

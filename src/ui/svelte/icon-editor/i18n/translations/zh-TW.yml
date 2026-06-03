@@ -1,6 +1,12 @@
 angle: 角度
 approximately_square: 大約正方形
 background: 背景
+brush_size: 刷子尺寸
+clear_draw: 清晰的繪圖
+delete: 刪除自訂圖標
+draw_color: 繪製顏色
+draw_mode_off: 畫
+draw_mode_on: 繪畫
 gradient: 坡度
 none: 無（透明）
 pick_image: 選擇圖片

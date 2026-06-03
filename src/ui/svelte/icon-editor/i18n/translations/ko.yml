@@ -1,6 +1,12 @@
 angle: 각도
 approximately_square: 대략 정사각형
 background: 배경
+brush_size: 브러시 크기
+clear_draw: 도면 지우기
+delete: 맞춤 아이콘 삭제
+draw_color: 색상 그리기
+draw_mode_off: 그리다
+draw_mode_on: 그림
 gradient: 구배
 none: 없음(투명)
 pick_image: 이미지 선택

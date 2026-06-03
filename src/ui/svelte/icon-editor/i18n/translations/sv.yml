@@ -1,6 +1,12 @@
 angle: Vinkel
 approximately_square: Ungefär kvadratiskt
 background: Bakgrund
+brush_size: Borststorlek
+clear_draw: Tydlig ritning
+delete: Ta bort anpassad ikon
+draw_color: Rita färg
+draw_mode_off: Dra
+draw_mode_on: Ritning
 gradient: Lutning
 none: Ingen (transparent)
 pick_image: Välj bild

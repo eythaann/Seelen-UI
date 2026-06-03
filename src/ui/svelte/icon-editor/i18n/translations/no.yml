@@ -1,6 +1,12 @@
 angle: Vinkel
 approximately_square: Omtrent firkantet
 background: Bakgrunn
+brush_size: Børstestørrelse
+clear_draw: Tydelig tegning
+delete: Slett egendefinert ikon
+draw_color: Tegn farge
+draw_mode_off: Tegne
+draw_mode_on: Tegning
 gradient: Gradient
 none: Ingen (gjennomsiktig)
 pick_image: Velg bilde

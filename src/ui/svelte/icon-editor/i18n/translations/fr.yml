@@ -1,6 +1,12 @@
 angle: Angle
 approximately_square: Environ carré
 background: Arrière-plan
+brush_size: Taille du pinceau
+clear_draw: Dessin clair
+delete: Supprimer l'icône personnalisée
+draw_color: Dessiner la couleur
+draw_mode_off: Dessiner
+draw_mode_on: Dessin
 gradient: Pente
 none: Aucun (transparent)
 pick_image: Choisir une image

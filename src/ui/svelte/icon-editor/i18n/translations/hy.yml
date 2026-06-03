@@ -1,6 +1,12 @@
 angle: Անկյուն
 approximately_square: Մոտավորապես քառակուսի
 background: Նախապատմություն
+brush_size: Խոզանակի չափը
+clear_draw: Մաքուր նկարչություն
+delete: Ջնջել հատուկ պատկերակը
+draw_color: Գույն նկարել
+draw_mode_off: Ոչ ոքի
+draw_mode_on: Նկարչություն
 gradient: Գրադիենտ
 none: Ոչ մեկը (թափանցիկ)
 pick_image: Ընտրեք պատկեր
