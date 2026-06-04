@@ -85,8 +85,8 @@ use windows::{
             Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
             Threading::{
-                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
-                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
+                OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
                 PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
@@ -243,17 +243,6 @@ impl WindowsApi {
         session_id
     }
 
-    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
-    pub fn get_foreground_window() -> HWND {
-        let mut hwnd = unsafe { GetForegroundWindow() };
-        // based on windows doc, get foreground can return null while window is losing activation
-        // so we wait until we get a valid window
-        while hwnd.is_invalid() {
-            hwnd = unsafe { GetForegroundWindow() };
-        }
-        hwnd
-    }
-
     pub fn is_window(hwnd: HWND) -> bool {
         unsafe { IsWindow(Some(hwnd)) }.into()
     }
@@ -377,25 +366,34 @@ impl WindowsApi {
         Ok(())
     }
 
-    #[allow(dead_code)]
-    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
-        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
-        Ok(())
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
+    /// If not interactive session will always return null (lock screen) or while changing active window.
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
     }
 
-    pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        let window = Window::from(hwnd);
+    pub fn set_foreground(target_hwnd: HWND) -> Result<()> {
+        let window = Window::from(target_hwnd);
 
-        if !unsafe { SetForegroundWindow(hwnd).as_bool() } {
+        if !unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
             // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
             let keyboard = Keyboard::new();
             keyboard.send_keys("{alt}")?;
             // this can fail but still be successful.
-            let _ = unsafe { SetForegroundWindow(hwnd) };
+            let _ = unsafe { SetForegroundWindow(target_hwnd) };
         }
 
-        // extra validation
-        if Window::get_foregrounded() != window {
+        // based on windows doc, get foreground can return null while window is losing activation
+        // so we wait until we get a valid window.
+        let mut focus_hwnd = Self::get_foreground_window();
+        let mut retries = 0;
+        while focus_hwnd != target_hwnd && retries < 10 {
+            std::thread::sleep(std::time::Duration::from_millis(1));
+            focus_hwnd = Self::get_foreground_window();
+            retries += 1;
+        }
+
+        if focus_hwnd != target_hwnd {
             return Err("Failed to set foreground window".into());
         }
 
