@@ -80,7 +80,18 @@ impl HookManager {
     }
 
     fn start() {
+        // The check for IS_INTERACTIVE_SESSION here is not redundant with the one in
+        // raw_win_event_hook_recv. On a session switch, Windows fires events for ALL
+        // session windows simultaneously, flooding the unbounded channel before
+        // WM_WTSSESSION_CHANGE can be delivered to BgWindowProc (which runs on a
+        // separate thread). The dispatcher thread then drains that backlog calling
+        // expensive Win32 APIs (as_focused_app_information, etc.) for every queued
+        // event even though IS_INTERACTIVE_SESSION is already false. This check makes
+        // each backlogged event a cheap no-op (atomic load + branch) instead.
         let eid = Self::subscribe(|(event, mut origin)| {
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                return;
+            }
             if event == WinEvent::SystemForeground {
                 origin = Window::get_foregrounded(); // sometimes this event is emited with the wrong origin
             }
@@ -89,6 +100,12 @@ impl HookManager {
         Self::set_event_handler_priority(&eid, 1);
 
         BgWindowProc::subscribe(|(msg, wparam, lparam)| {
+            // Same burst-drain guard: shell hook messages can still arrive while the
+            // channel backlog is being processed after a session switch.
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                return;
+            }
+
             if msg == WM_SHELLHOOKMESSAGE.load(Ordering::Acquire) {
                 // println!("WM_SHELLHOOKMESSAGE: {msg} {wparam} {lparam}");
                 match wparam as u32 {

@@ -63,7 +63,8 @@ impl SeelenLogger {
             fern::Dispatch::new()
                 .format(|out, message, record| {
                     out.finish(format_args!(
-                        "[{}][{}] {}",
+                        "{}[{}][{}] {}",
+                        format_now(),
                         match record.level() {
                             log::Level::Error => "ERROR".red().to_string(),
                             log::Level::Warn => "WARN~".yellow().to_string(),

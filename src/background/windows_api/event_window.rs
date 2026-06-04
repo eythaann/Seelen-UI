@@ -3,7 +3,7 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     System::{
         Power::RegisterSuspendResumeNotification,
-        RemoteDesktop::{WTSRegisterSessionNotification, NOTIFY_FOR_THIS_SESSION},
+        RemoteDesktop::{WTSRegisterSessionNotification, NOTIFY_FOR_ALL_SESSIONS},
     },
     UI::{
         Shell::{
@@ -14,8 +14,7 @@ use windows::Win32::{
             CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
             RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
             DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_DESTROY,
-            WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_LOGOFF,
-            WTS_SESSION_LOGON, WTS_SESSION_UNLOCK,
+            WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_UNLOCK,
         },
     },
 };
@@ -48,6 +47,7 @@ const SHCNE_ALL_EVENTS: i32 = 0x7FFFFFFF_u32 as i32;
 /// Global flag to track if the current session is interactive (not locked/switched).
 /// Used to pause background threads and event processing when the session is not interactive.
 pub static IS_INTERACTIVE_SESSION: AtomicBool = AtomicBool::new(true);
+pub static IS_LOCKED: AtomicBool = AtomicBool::new(false);
 
 pub struct BgWindowProc {}
 
@@ -101,7 +101,7 @@ impl BgWindowProc {
 
         // Register for session change notifications (lock/unlock, user switch, etc.)
         // This is critical for pausing background threads when session is not interactive
-        WTSRegisterSessionNotification(hwnd, NOTIFY_FOR_THIS_SESSION)?;
+        WTSRegisterSessionNotification(hwnd, NOTIFY_FOR_ALL_SESSIONS)?;
 
         // Register for shell change notifications so that WM_TRASH_BIN_NOTIFY is sent
         // to the background window whenever the recycle bin contents change.
@@ -118,6 +118,36 @@ impl BgWindowProc {
         Ok(())
     }
 
+    fn refresh_interactive_state() {
+        let Some(active_session) = slu_ipc::app::current_interactive_session_id() else {
+            // no active session, assume lock screen
+            IS_INTERACTIVE_SESSION.store(false, Ordering::Release);
+            return;
+        };
+
+        let my_session = slu_ipc::app::current_session_id().unwrap_or(u32::MAX);
+        let is_interactive = active_session == my_session && !IS_LOCKED.load(Ordering::Acquire);
+
+        log::info!(
+            "Active session: {}, my session: {}, is interactive: {}",
+            active_session,
+            my_session,
+            is_interactive
+        );
+
+        let previous = IS_INTERACTIVE_SESSION.swap(is_interactive, Ordering::AcqRel);
+        if !previous && is_interactive {
+            // reload all pods webviews on session resume
+            std::thread::spawn(move || {
+                WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+                    deployment.pods.for_each(|(_, pod)| {
+                        pod.soft_restart();
+                    });
+                });
+            });
+        }
+    }
+
     unsafe extern "system" fn window_proc(
         hwnd: HWND,
         msg: u32,
@@ -132,26 +162,29 @@ impl BgWindowProc {
         // Handle session change notifications to pause background processing
         // when the session is locked or user switches
         if msg == WM_WTSSESSION_CHANGE {
-            match w_param.0 as u32 {
-                WTS_SESSION_LOCK | WTS_SESSION_LOGOFF => {
-                    log::info!("Session locked/logged off - pausing background event processing");
-                    IS_INTERACTIVE_SESSION.store(false, Ordering::Release);
-                }
-                WTS_SESSION_UNLOCK | WTS_SESSION_LOGON => {
-                    log::info!("Session unlocked/logged on - resuming background event processing");
-                    IS_INTERACTIVE_SESSION.store(true, Ordering::Release);
+            log::trace!(
+                "Session change event received: w_param={}, l_param={}",
+                w_param.0,
+                l_param.0
+            );
 
-                    // reload all pods webviews
-                    std::thread::spawn(move || {
-                        WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
-                            deployment.pods.for_each(|(_, pod)| {
-                                pod.soft_restart();
-                            });
-                        });
-                    });
+            match w_param.0 as u32 {
+                WTS_SESSION_LOCK => {
+                    if l_param.0 as u32 == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) {
+                        IS_LOCKED.store(true, Ordering::Release);
+                        log::info!("Session locked");
+                    }
+                }
+                WTS_SESSION_UNLOCK => {
+                    if l_param.0 as u32 == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) {
+                        IS_LOCKED.store(false, Ordering::Release);
+                        log::info!("Session unlocked");
+                    }
                 }
                 _ => {}
             }
+
+            Self::refresh_interactive_state();
         }
 
         Self::send((msg, w_param.0, l_param.0));
