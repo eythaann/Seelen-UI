@@ -10,7 +10,7 @@ use windows::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager,
+    event_manager, get_tokio_handle,
 };
 
 use super::domain::{decode_jwt_payload, JwtPayload};
@@ -180,7 +180,7 @@ impl SessionManager {
     /// and then delegates to `run_refresh_cycle`.
     fn schedule_refresh(secs_until_expiry: u64) {
         let sleep_secs = secs_until_expiry.saturating_sub(REFRESH_BUFFER_SECS);
-        tokio::spawn(async move {
+        get_tokio_handle().spawn(async move {
             tokio::time::sleep(tokio::time::Duration::from_secs(sleep_secs)).await;
             SessionManager::run_refresh_cycle().await;
         });

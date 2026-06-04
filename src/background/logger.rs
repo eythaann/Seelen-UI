@@ -50,11 +50,12 @@ impl SeelenLogger {
 
         let dispatch = fern::Dispatch::new()
             .level(log::LevelFilter::Trace)
-            .level_for("tao", log::LevelFilter::Off)
-            .level_for("os_info", log::LevelFilter::Off)
-            .level_for("notify", log::LevelFilter::Off)
-            .level_for("notify_debouncer_full", log::LevelFilter::Off)
-            .level_for("discord_presence", log::LevelFilter::Off)
+            .level_for("tao", log::LevelFilter::Error)
+            .level_for("os_info", log::LevelFilter::Error)
+            .level_for("notify", log::LevelFilter::Error)
+            .level_for("notify_debouncer_full", log::LevelFilter::Error)
+            .level_for("discord_presence", log::LevelFilter::Error)
+            .level_for("wmi", log::LevelFilter::Error)
             .chain(file_dispatch);
 
         #[cfg(dev)]

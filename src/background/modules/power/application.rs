@@ -21,7 +21,7 @@ use windows_core::Owned;
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager,
+    event_manager, get_tokio_handle,
     modules::power::domain::power_mode_to_serializable,
     utils::lock_free::TracedMutex,
     windows_api::{event_window::subscribe_to_background_window, WindowsApi},
@@ -172,7 +172,7 @@ impl PowerManager {
                 log::trace!("System resuming from sleep, scheduling state refresh in 2 seconds");
                 // Spawn a task to refresh state after 2 seconds
                 // This is necessary because the power state may be stale immediately after wake up
-                tokio::spawn(async {
+                get_tokio_handle().spawn(async {
                     tokio::time::sleep(std::time::Duration::from_secs(2)).await;
 
                     log::trace!("Refreshing power state after wake up");

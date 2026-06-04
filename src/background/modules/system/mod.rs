@@ -1,6 +1,6 @@
 pub mod tauri;
 
-use std::sync::LazyLock;
+use std::sync::{atomic::Ordering, LazyLock};
 
 use seelen_core::system_state::{Core, Disk, Memory, NetworkStatistics};
 
@@ -9,6 +9,7 @@ use crate::{
     event_manager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
+    windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
 pub struct SystemInfo {
@@ -65,6 +66,11 @@ impl SystemInfo {
 
         // Spawn monitoring thread
         std::thread::spawn(|| loop {
+            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                std::thread::sleep(std::time::Duration::from_secs(5));
+                continue;
+            }
+
             let interval = FULL_STATE.load().settings.polling_interval;
             std::thread::sleep(std::time::Duration::from_secs(interval));
             SystemInfo::instance().check_and_emit_changes();

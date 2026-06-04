@@ -1,4 +1,4 @@
-use std::time::Duration;
+use std::{sync::atomic::Ordering, time::Duration};
 
 use serde::Serialize;
 use uuid::Uuid;
@@ -6,6 +6,8 @@ use winreg::{
     enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS, KEY_READ},
     RegKey,
 };
+
+use crate::get_tokio_handle;
 
 const REGISTRY_SUBKEY: &str = "Software\\Seelen UI\\Analytics";
 const INSTALL_ID_VALUE: &str = "InstallId";
@@ -106,11 +108,14 @@ pub fn start_telemetry() {
         }
     };
 
-    tokio::spawn(async move {
+    get_tokio_handle().spawn(async move {
+        use crate::windows_api::event_window::IS_INTERACTIVE_SESSION;
         let mut interval = tokio::time::interval(Duration::from_secs(10 * 60));
         loop {
             interval.tick().await; // first tick fires immediately
-            send_event(install_id).await;
+            if IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                send_event(install_id).await;
+            }
         }
     });
 }

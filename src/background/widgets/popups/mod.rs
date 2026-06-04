@@ -18,6 +18,7 @@ use crate::{
     error::Result,
     state::application::FULL_STATE,
     widgets::{webview::WebviewArgs, WidgetWebviewLabel},
+    windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
 pub static POPUPS_MANAGER: LazyLock<Mutex<PopupsManager>> = LazyLock::new(|| {
@@ -99,6 +100,10 @@ impl PopupsManager {
 
     pub fn update(&mut self, id: &Uuid, config: SluPopupConfig) -> Result<()> {
         if let Some(webview) = self.webviews.get(id) {
+            if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                self.configs.insert(*id, config);
+                return Ok(());
+            }
             webview.emit(SeelenEvent::PopupContentChanged, &config)?;
             webview.set_size(LogicalSize::new(config.width, config.height))?;
             webview.center()?;

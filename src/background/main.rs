@@ -62,27 +62,27 @@ pub fn get_tokio_handle() -> &'static tokio::runtime::Handle {
 }
 
 #[tokio::main]
-async fn main() {
+async fn main() -> std::process::ExitCode {
     if let Err(err) = SeelenLogger::init() {
         let fallback = std::env::temp_dir().join("seelen-ui-logger-error.log");
         let _ = std::fs::write(&fallback, format!("Failed to initialize logger: {err:?}"));
-        std::process::exit(1);
+        return std::process::ExitCode::from(1);
     }
 
     if let Err(err) = handle_console_client().await {
         log::error!("Failed to execute command: {err:?}");
-        std::process::exit(1);
+        return std::process::ExitCode::from(1);
     };
 
     if is_already_running() {
         SelfPipe::request_open_settings().await.log_error();
-        return;
+        return std::process::ExitCode::from(0);
     }
 
     if was_installed_using_msix() && !is_running_as_appx() {
         log::info!("GUI was installed using MSIX, restarting as appx...");
         restart_as_appx().log_error();
-        return;
+        return std::process::ExitCode::from(0);
     }
 
     TOKIO_RUNTIME_HANDLE
@@ -119,7 +119,9 @@ async fn main() {
 
     // share the current runtime with Tauri
     tauri::async_runtime::set(tokio::runtime::Handle::current());
-    app.run(app_callback);
+
+    let exit_code = app.run_return(app_callback);
+    std::process::ExitCode::from(exit_code as u8)
 }
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
