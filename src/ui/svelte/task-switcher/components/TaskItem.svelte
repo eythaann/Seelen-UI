@@ -50,8 +50,6 @@
       hwnd: task.hwnd,
       wasFocused: false,
     });
-    // Optimistically reorder UI before backend updates
-    globalState.moveSelectedToFront(task.hwnd);
   }
 
   function handleFocus() {
