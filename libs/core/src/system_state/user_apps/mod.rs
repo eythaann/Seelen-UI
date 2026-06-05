@@ -3,6 +3,15 @@ use std::path::PathBuf;
 use super::Color;
 use crate::{rect::Rect, system_state::MonitorId};
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[ts(repr(enum = name))]
+pub enum ZOrder {
+    TopMost,
+    NoTopMost,
+    Top,
+    Bottom,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {

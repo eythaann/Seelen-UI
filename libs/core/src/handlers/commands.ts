@@ -69,7 +69,7 @@ export enum SeelenCommand {
   SetCurrentWidgetStatus = "set_current_widget_status",
   GetSelfWindowId = "get_self_window_handle",
   SetSelfPosition = "set_self_position",
-  BringSelfToTop = "bring_self_to_top",
+  SetSelfZOrder = "set_self_z_order",
   WriteFile = "write_data_file",
   ReadFile = "read_data_file",
   GetNativeShellWallpaper = "get_native_shell_wallpaper",

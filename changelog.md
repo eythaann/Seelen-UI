@@ -21,6 +21,7 @@
 - dock/toolbar/twm behaviours while using fullscreen apps.
 - not showing toolbar and dock when Apps Menu open.
 - drag being triggered on touchpads with electrical noise or touchpad sensitivity issues.
+- dock and toolbar not being always on top, after exiting from fullscreen app.
 
 ## [2.6.10]
 

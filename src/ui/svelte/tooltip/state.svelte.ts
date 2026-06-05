@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { ZOrder } from "@seelen-ui/lib/types";
 
 let showing = $state<boolean>(false);
 let text = $state<string | null>(null);
@@ -12,7 +13,7 @@ Widget.self.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) =>
 
   if (desiredPosition) {
     await Widget.self.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
-    invoke(SeelenCommand.BringSelfToTop);
+    invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Top });
   }
 
   text = String(customArgs?.text ?? "") || null;

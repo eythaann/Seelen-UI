@@ -22,6 +22,7 @@ use seelen_core::{
         context_menu::ContextMenu, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus,
         WidgetTriggerPayload,
     },
+    system_state::ZOrder,
     Rect,
 };
 use tauri::{Emitter, Manager};
@@ -180,10 +181,24 @@ pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()
 }
 
 #[tauri::command(async)]
-pub fn bring_self_to_top(webview: tauri::WebviewWindow) -> Result<()> {
+pub fn set_self_z_order(webview: tauri::WebviewWindow, z_order: ZOrder) -> Result<()> {
     use windows::Win32::Foundation::HWND;
+    use windows::Win32::UI::WindowsAndMessaging::{
+        HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST,
+    };
     let hwnd = HWND(webview.hwnd()?.0);
-    WindowsApi::bring_to_top(hwnd)
+
+    WindowsApi::set_z_order(
+        hwnd,
+        match z_order {
+            ZOrder::TopMost => HWND_TOPMOST,
+            ZOrder::NoTopMost => HWND_NOTOPMOST,
+            ZOrder::Top => HWND_TOP,
+            ZOrder::Bottom => HWND_BOTTOM,
+        },
+    )?;
+
+    Ok(())
 }
 
 pub fn show_settings() -> Result<()> {

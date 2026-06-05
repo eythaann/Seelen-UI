@@ -100,15 +100,15 @@ use windows::{
                 KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindow, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, PostMessageW, SendMessageW, SetForegroundWindow,
-                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
+                FindWindowExW, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
+                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
+                PostMessageW, SendMessageW, SetForegroundWindow, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, GW_OWNER,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
+                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
                 WS_THICKFRAME,
             },
@@ -361,9 +361,13 @@ impl WindowsApi {
         Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
-    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
-        unsafe { BringWindowToTop(hwnd)? };
-        Ok(())
+    pub fn set_z_order(hwnd: HWND, order: HWND) -> Result<()> {
+        Self::set_position(
+            hwnd,
+            Some(order),
+            &RECT::default(),
+            SWP_NOMOVE | SWP_NOSIZE | SWP_ASYNCWINDOWPOS,
+        )
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
