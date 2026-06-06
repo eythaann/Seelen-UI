@@ -8,11 +8,15 @@ import { $focused, $top_interactable_window, $widget_statuses } from "./modules/
 
 import { useEffect } from "preact/hooks";
 
+const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
+
 const topWindowIsFullscreen = computed(() => $top_interactable_window.value?.isFullscreen);
-const focusedIsAppsMenu = computed(() =>
-  $widget_statuses.value.some(
-    (w) => w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === $focused.value.hwnd,
-  )
+const focusedIsAppsMenu = computed(
+  () =>
+    startMenuExes.some((program) => ($focused.value.exe || "").endsWith(program)) ||
+    $widget_statuses.value.some(
+      (w) => w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === $focused.value.hwnd,
+    ),
 );
 const alwaysOnTop = computed(() => !topWindowIsFullscreen.value || focusedIsAppsMenu.value);
 

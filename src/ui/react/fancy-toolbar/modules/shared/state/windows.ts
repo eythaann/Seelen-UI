@@ -11,7 +11,9 @@ subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
 await $interactables.init();
 
 export const $top_interactable_window = computed(() =>
-  $interactables.value.find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic)
+  $interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic)
 );
 
 export const $thereIsMaximizedOnBg = computed(() => {
