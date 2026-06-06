@@ -6,7 +6,7 @@ import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $full_settings, $settings } from "../../shared/state/settings.ts";
-import { iconPackManager } from "libs/ui/react/components/Icon/common.ts";
+import { darkMode, iconPackManager } from "libs/ui/react/components/Icon/common.ts";
 
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
@@ -88,11 +88,14 @@ export function getUserApplicationContextMenu(
     items.push({ type: "Separator" });
   }
 
+  const foundIcon = iconPackManager.value.value.getIcon({ path: item.path, umid: item.umid });
+  const iconSrc = (darkMode.value ? foundIcon?.dark : foundIcon?.light) || foundIcon?.base;
+
   items.push(
     {
       type: "Item",
       key: "run",
-      icon: "IoOpenOutline",
+      icon: iconSrc ?? "IoOpenOutline",
       label: item.displayName,
       callbackEvent: onAppMenuClick,
     },

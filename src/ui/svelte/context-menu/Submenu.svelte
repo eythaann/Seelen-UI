@@ -24,7 +24,11 @@
 </script>
 
 <button class="menu-item" data-skin="transparent" onclick={handleClick}>
-  <Icon iconName={item.icon as any} />
+  {#if item.icon?.startsWith("http://asset.localhost")}
+    <img class="menu-item-img-icon" src={item.icon} alt="" />
+  {:else}
+    <Icon iconName={item.icon as any} />
+  {/if}
   <span class="menu-item-label">{item.label}</span>
   <Icon class="menu-item-chevron" iconName="FaChevronRight" />
 </button>

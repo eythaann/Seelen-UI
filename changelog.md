@@ -10,7 +10,8 @@
 
 - keyboard/language selector fixes and improvements (now shows active IME).
 - wallpaper selector allow select single wallpapers.
-- disable autohide of dock and toolbar on touch screen devices.
+- disable autohide of dock and toolbar on touch screen devices.\
+- show apps icon on dock item's context menu.
 
 ### fix
 

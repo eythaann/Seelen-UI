@@ -52,6 +52,10 @@
   {#if item.checked !== null}
     <input type="checkbox" checked={internalChecked} />
   {/if}
-  <Icon iconName={item.icon as any} />
+  {#if item.icon?.startsWith("http://asset.localhost")}
+    <img class="menu-item-img-icon" src={item.icon} alt="" />
+  {:else}
+    <Icon iconName={item.icon as any} />
+  {/if}
   <span class="menu-item-label">{item.label}</span>
 </button>
