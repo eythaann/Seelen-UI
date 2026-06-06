@@ -49,6 +49,7 @@ impl Window {
             prevent_pinning,
             relaunch,
             rect: self.inner_rect().ok(),
+            last_foreground_at: 0,
         }
     }
 

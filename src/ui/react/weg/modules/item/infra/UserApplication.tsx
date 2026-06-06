@@ -151,7 +151,9 @@ export function UserApplication({ item, isOverlay }: Props) {
   const windows = getWindowsForItem(item, $interactables.value);
 
   const { splitWindows, spaceBetweenItems } = $settings.value;
-  if (splitWindows && windows.length > 1) {
+
+  const showAsSeparatedItems = splitWindows || $is_touch_primary.value;
+  if (showAsSeparatedItems && windows.length > 1) {
     return (
       <Flex align="center" gap={spaceBetweenItems}>
         {windows.map((window) => (

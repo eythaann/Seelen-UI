@@ -39,7 +39,12 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
 export const $widget_statuses = lazySignal(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
 subscribe(SeelenEvent.WidgetDebugInfoChanged, $widget_statuses.setByPayload);
 
-await Promise.all([$interactables.init(), $previews.init(), $focused.init(), $widget_statuses.init()]);
+await Promise.all([
+  $interactables.init(),
+  $previews.init(),
+  $focused.init(),
+  $widget_statuses.init(),
+]);
 
 export const $is_dock_overlapped = computed(() => {
   const focused = $focused.value;

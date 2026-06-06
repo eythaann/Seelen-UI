@@ -45,12 +45,11 @@ impl UserAppsManager {
 
     fn add_win(&self, window: &Window) {
         log::trace!("Adding: {window}");
+        let mut serialized = window.to_serializable();
         if window.is_focused() {
-            self.interactable_windows
-                .insert(0, window.to_serializable());
-        } else {
-            self.interactable_windows.push(window.to_serializable());
+            serialized.last_foreground_at = windows::now_millis();
         }
+        self.interactable_windows.push(serialized);
     }
 
     fn remove_win(&self, window: &Window) {

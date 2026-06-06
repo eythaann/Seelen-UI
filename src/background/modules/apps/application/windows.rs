@@ -1,4 +1,7 @@
-use std::sync::atomic::Ordering;
+use std::{
+    sync::atomic::Ordering,
+    time::{SystemTime, UNIX_EPOCH},
+};
 
 use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
 use windows::Win32::UI::WindowsAndMessaging::{
@@ -16,6 +19,13 @@ use crate::{
     },
 };
 
+pub(super) fn now_millis() -> i64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_millis() as i64)
+        .unwrap_or(0)
+}
+
 impl UserAppsManager {
     pub(super) fn init_listing_app_windows() -> Vec<UserAppWindow> {
         let mut initial = Vec::new();
@@ -24,6 +34,15 @@ impl UserAppsManager {
                 initial.push(window.to_serializable());
             }
         });
+
+        // The enumerator yields windows in z-order (top-most first). Stamp
+        // last_foreground_at so that clients sorting by that field preserve
+        // z-order on first load. Each item gets now - index, keeping relative
+        // ordering without blocking any future foreground update.
+        let now = now_millis();
+        for (i, w) in initial.iter_mut().enumerate() {
+            w.last_foreground_at = now - i as i64;
+        }
 
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
 
@@ -65,13 +84,10 @@ impl UserAppsManager {
             WinEvent::SystemForeground => {
                 if is_interactable {
                     let hwnd = window.address();
-                    USER_APPS_MANAGER.interactable_windows.sort_by(|a, b| {
-                        if a.hwnd == hwnd {
-                            std::cmp::Ordering::Less
-                        } else if b.hwnd == hwnd {
-                            std::cmp::Ordering::Greater
-                        } else {
-                            std::cmp::Ordering::Equal
+                    let now = now_millis();
+                    USER_APPS_MANAGER.interactable_windows.for_each(|w| {
+                        if w.hwnd == hwnd {
+                            w.last_foreground_at = now;
                         }
                     });
                     Self::send(UserAppWinEvent::Updated(window.address()));

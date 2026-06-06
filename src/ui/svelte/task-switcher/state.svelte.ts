@@ -8,8 +8,14 @@ const widget = Widget.getCurrent();
 let showing = $state(false);
 let autoConfirm = $state(false);
 
-let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
+let windows = lazyRune(async () =>
+  (await invoke(SeelenCommand.GetUserAppWindows)).toSorted(
+    (a, b) => b.lastForegroundAt - a.lastForegroundAt,
+  )
+);
+subscribe(SeelenEvent.UserAppWindowsChanged, ({ payload }) => {
+  windows.value = payload.toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt);
+});
 
 let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);

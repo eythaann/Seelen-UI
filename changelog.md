@@ -23,6 +23,7 @@
 - drag being triggered on touchpads with electrical noise or touchpad sensitivity issues.
 - dock and toolbar not being always on top, after exiting from fullscreen app.
 - task switcher not exiting on escape key.
+- inconsistent windows order on dock.
 
 ## [2.6.10]
 

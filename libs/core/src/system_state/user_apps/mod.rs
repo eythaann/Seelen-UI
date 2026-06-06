@@ -49,6 +49,10 @@ pub struct UserAppWindow {
     pub relaunch: Option<Relaunch>,
     /// rect of the window without shadow, in screen coordinates
     pub rect: Option<Rect>,
+    /// unix timestamp (ms) of the last time this window was brought to the foreground;
+    /// 0 means it has never been focused since tracking started.
+    /// clients that want z-order-like sorting should sort descending by this field.
+    pub last_foreground_at: i64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
