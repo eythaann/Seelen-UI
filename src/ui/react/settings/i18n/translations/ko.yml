@@ -80,6 +80,9 @@ devtools:
   load: 로드
   settings_file: 설정 파일
   shared_components: SLU 표준 구성요소
+  simulate_dialog:
+    label: 대화 상자 시뮬레이션
+    trigger: 방아쇠
   simulate_perm:
     label: 위젯 권한 요청 시뮬레이션
     result_allowed: ✓ 권한이 부여되었습니다

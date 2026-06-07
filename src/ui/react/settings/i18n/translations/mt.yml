@@ -84,6 +84,9 @@ devtools:
   load: Tagħbija
   settings_file: Settings Fajl
   shared_components: Komponenti Standard SLU
+  simulate_dialog:
+    label: Issimula Djalogu
+    trigger: Trigger
   simulate_perm:
     label: Issimula Talba ta' Permess għal Widget
     result_allowed: ✓ Permess mogħti

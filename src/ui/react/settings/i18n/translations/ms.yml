@@ -85,6 +85,9 @@ devtools:
   load: Beban
   settings_file: Fail tetapan
   shared_components: Komponen Standard SLU
+  simulate_dialog:
+    label: Simulasi Dialog
+    trigger: Pencetus
   simulate_perm:
     label: Simulasikan Permintaan Kebenaran Widget
     result_allowed: ✓ Kebenaran diberikan

@@ -152,7 +152,7 @@ pub fn trigger_dialog(dialog: Dialog, webview: tauri::WebviewWindow) -> Result<(
     let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
     let owner_hwnd = webview.hwnd()?.0 as isize;
 
-    let mut payload = WidgetTriggerPayload::new("@seelen/dialogg".into());
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialog".into());
     payload.instance_id = Some(dialog.identifier);
 
     payload.add_custom_arg("dialog", serde_json::to_value(&dialog)?);
@@ -163,7 +163,7 @@ pub fn trigger_dialog(dialog: Dialog, webview: tauri::WebviewWindow) -> Result<(
 
 /// Trigger a dialog from backend code (no owner webview; button events are emitted globally).
 pub fn trigger_dialog_backend(dialog: Dialog) -> Result<()> {
-    let mut payload = WidgetTriggerPayload::new("@seelen/dialogg".into());
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialog".into());
     payload.instance_id = Some(dialog.identifier);
     payload.align_x = Some(Alignment::Center);
     payload.align_y = Some(Alignment::Center);

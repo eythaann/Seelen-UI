@@ -83,6 +83,9 @@ devtools:
   load: Laadima
   settings_file: Seadete fail
   shared_components: SLU standardkomponendid
+  simulate_dialog:
+    label: Simuleeri dialoogi
+    trigger: Päästik
   simulate_perm:
     label: Simuleeri vidina loa taotlust
     result_allowed: ✓ Luba antud

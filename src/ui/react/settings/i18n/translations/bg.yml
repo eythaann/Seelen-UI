@@ -85,6 +85,9 @@ devtools:
   load: Зареждане
   settings_file: Файл за настройки
   shared_components: SLU Стандартни компоненти
+  simulate_dialog:
+    label: Симулиране на диалог
+    trigger: Тригер
   simulate_perm:
     label: Искане за разрешение за симулиране на Widget
     result_allowed: ✓ Предоставено разрешение

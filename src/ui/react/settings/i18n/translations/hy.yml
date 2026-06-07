@@ -85,6 +85,9 @@ devtools:
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
   shared_components: SLU ստանդարտ բաղադրիչներ
+  simulate_dialog:
+    label: Երկխոսության մոդելավորում
+    trigger: ձգան
   simulate_perm:
     label: Վիդջեթի թույլտվության հայտի նմանակում
     result_allowed: ✓ Տրված է թույլտվություն

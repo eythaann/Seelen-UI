@@ -85,6 +85,9 @@ devtools:
   load: Obciążenie
   settings_file: Plik ustawień
   shared_components: Standardowe komponenty SLU
+  simulate_dialog:
+    label: Symuluj okno dialogowe
+    trigger: Spust
   simulate_perm:
     label: Symuluj żądanie pozwolenia na widget
     result_allowed: ✓ Zezwolenie udzielone

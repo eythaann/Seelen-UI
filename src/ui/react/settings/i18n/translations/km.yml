@@ -83,6 +83,9 @@ devtools:
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
   shared_components: សមាសធាតុស្តង់ដារ SLU
+  simulate_dialog:
+    label: ក្លែងធ្វើប្រអប់
+    trigger: កេះ
   simulate_perm:
     label: ក្លែងធ្វើសំណើការអនុញ្ញាតធាតុក្រាហ្វិក
     result_allowed: ✓មានការអនុញ្ញាត

@@ -309,8 +309,8 @@ fn resource_to_dialog(id: Uuid, resource: &Resource) -> Result<Dialog> {
 
     Ok(Dialog {
         identifier: id,
-        width: 480.0,
-        height: 260.0,
+        width: 500.0,
+        height: 280.0,
         title: vec![DialogContent::Group {
             items: vec![
                 DialogContent::Icon {

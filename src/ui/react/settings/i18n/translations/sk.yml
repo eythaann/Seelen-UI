@@ -85,6 +85,9 @@ devtools:
   load: Naložiť
   settings_file: Nastavovací súbor
   shared_components: Štandardné komponenty SLU
+  simulate_dialog:
+    label: Simulovať dialóg
+    trigger: Spúšťač
   simulate_perm:
     label: Simulovať žiadosť o povolenie miniaplikácie
     result_allowed: ✓ Povolenie udelené

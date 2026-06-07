@@ -85,6 +85,9 @@ devtools:
   load: Memuat
   settings_file: File Pengaturan
   shared_components: Komponen Standar SLU
+  simulate_dialog:
+    label: Simulasikan Dialog
+    trigger: Pemicu
   simulate_perm:
     label: Simulasikan Permintaan Izin Widget
     result_allowed: ✓ Izin diberikan

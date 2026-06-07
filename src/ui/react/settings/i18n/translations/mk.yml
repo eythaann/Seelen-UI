@@ -85,6 +85,9 @@ devtools:
   load: Оптоварување
   settings_file: Датотека за поставки
   shared_components: Стандардни компоненти на SLU
+  simulate_dialog:
+    label: Симулирај дијалог
+    trigger: Активирање
   simulate_perm:
     label: Симулирајте барање за дозвола за виџети
     result_allowed: ✓ Дадена е дозвола

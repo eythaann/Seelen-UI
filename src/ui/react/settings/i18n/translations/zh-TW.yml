@@ -76,6 +76,9 @@ devtools:
   load: 載入
   settings_file: 設定文件
   shared_components: SLU 標準元件
+  simulate_dialog:
+    label: 模擬對話
+    trigger: 扳機
   simulate_perm:
     label: 模擬Widget權限請求
     result_allowed: ✓ 已取得許可

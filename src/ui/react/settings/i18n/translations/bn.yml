@@ -84,6 +84,9 @@ devtools:
   load: বোঝা
   settings_file: সেটিংস ফাইল
   shared_components: SLU স্ট্যান্ডার্ড উপাদান
+  simulate_dialog:
+    label: ডায়ালগ অনুকরণ করুন
+    trigger: ট্রিগার
   simulate_perm:
     label: উইজেট অনুমতি অনুরোধ অনুকরণ
     result_allowed: ✓ অনুমতি দেওয়া হয়েছে

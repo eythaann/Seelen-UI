@@ -85,6 +85,9 @@ devtools:
   load: Įkelti
   settings_file: Nustatymų failas
   shared_components: SLU standartiniai komponentai
+  simulate_dialog:
+    label: Imituoti dialogą
+    trigger: Trigeris
   simulate_perm:
     label: Imituoti valdiklio leidimo užklausą
     result_allowed: ✓ Leidimas suteiktas

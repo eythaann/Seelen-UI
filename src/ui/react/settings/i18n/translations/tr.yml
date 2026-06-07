@@ -84,6 +84,9 @@ devtools:
   load: Yükle
   settings_file: Ayarlar Dosyası
   shared_components: SLU Standart Bileşenleri
+  simulate_dialog:
+    label: Diyalog Simülasyonu
+    trigger: Tetiklemek
   simulate_perm:
     label: Widget İzin İsteğini Simüle Et
     result_allowed: ✓ İzin verildi

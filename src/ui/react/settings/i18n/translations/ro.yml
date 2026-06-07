@@ -85,6 +85,9 @@ devtools:
   load: Sarcină
   settings_file: Fișier de setări
   shared_components: Componente standard SLU
+  simulate_dialog:
+    label: Dialog Simulare
+    trigger: Trigger
   simulate_perm:
     label: Simulați cererea de permisiune pentru widget
     result_allowed: ✓ Permisiune acordată

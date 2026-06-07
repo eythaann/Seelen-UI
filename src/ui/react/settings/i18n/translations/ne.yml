@@ -85,6 +85,9 @@ devtools:
   load: बोभ्क
   settings_file: सेटिंग्स फाइल
   shared_components: SLU मानक कम्पोनेन्टहरू
+  simulate_dialog:
+    label: संवाद सिमुलेट गर्नुहोस्
+    trigger: ट्रिगर
   simulate_perm:
     label: विजेट अनुमति अनुरोध सिमुलेट
     result_allowed: ✓ अनुमति दिइएको छ

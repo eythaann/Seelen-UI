@@ -85,6 +85,9 @@ devtools:
   load: Opteretiti
   settings_file: Datoteka postavki
   shared_components: SLU standardne komponente
+  simulate_dialog:
+    label: Simuliraj dijalog
+    trigger: Trigger
   simulate_perm:
     label: Simulirajte zahtjev za dozvolu za widget
     result_allowed: ✓ Dozvola data

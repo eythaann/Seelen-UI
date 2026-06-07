@@ -84,6 +84,9 @@ devtools:
   load: Ladata
   settings_file: Asetustiedosto
   shared_components: SLU:n vakiokomponentit
+  simulate_dialog:
+    label: Simuloi valintaikkuna
+    trigger: Laukaista
   simulate_perm:
     label: Simuloi widgetin lupapyyntö
     result_allowed: ✓ Lupa myönnetty

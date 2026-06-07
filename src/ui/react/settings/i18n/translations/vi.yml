@@ -83,6 +83,9 @@ devtools:
   load: Trọng tải
   settings_file: Cài đặt tập tin
   shared_components: Thành phần tiêu chuẩn SLU
+  simulate_dialog:
+    label: Hộp thoại mô phỏng
+    trigger: Cò súng
   simulate_perm:
     label: Mô phỏng yêu cầu cấp phép widget
     result_allowed: ✓ Đã được cấp phép

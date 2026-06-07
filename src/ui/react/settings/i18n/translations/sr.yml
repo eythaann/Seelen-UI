@@ -84,6 +84,9 @@ devtools:
   load: Оптеретити
   settings_file: Подешавања
   shared_components: СЛУ стандардне компоненте
+  simulate_dialog:
+    label: Симулирај дијалог
+    trigger: Триггер
   simulate_perm:
     label: Симулирајте захтев за дозволу за виџет
     result_allowed: ✓ Дозвола је дата

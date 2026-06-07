@@ -82,6 +82,9 @@ devtools:
   load: Dawetkirin
   settings_file: Pelê Mîhengan
   shared_components: Pêkhateyên Standard SLU
+  simulate_dialog:
+    label: Simulate Dialog
+    trigger: Kişok
   simulate_perm:
     label: Daxwaza Destûra Widgetê simule bikin
     result_allowed: ✓ Destûr hat dayîn

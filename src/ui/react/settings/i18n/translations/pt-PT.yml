@@ -85,6 +85,9 @@ devtools:
   load: Carga
   settings_file: Arquivo de configurações
   shared_components: Componentes standard SLU
+  simulate_dialog:
+    label: Simular caixa de diálogo
+    trigger: Gatilho
   simulate_perm:
     label: Simular pedido de permissão de widget
     result_allowed: ✓ Permissão concedida

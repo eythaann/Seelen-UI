@@ -85,6 +85,9 @@ devtools:
   load: Laden
   settings_file: Instellingenbestand
   shared_components: SLU-standaardcomponenten
+  simulate_dialog:
+    label: Simuleer dialoog
+    trigger: Trekker
   simulate_perm:
     label: Simuleer het verzoek om widgettoestemming
     result_allowed: ✓ Toestemming verleend

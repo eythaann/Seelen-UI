@@ -84,6 +84,9 @@ devtools:
   load: Lwythet
   settings_file: Ffeil Gosodiadau
   shared_components: Cydrannau Safonol SLU
+  simulate_dialog:
+    label: Efelychu Dialog
+    trigger: Sbardun
   simulate_perm:
     label: Efelychu Cais Caniatâd Widget
     result_allowed: ✓ Rhoddwyd caniatâd

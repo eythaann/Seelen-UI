@@ -66,6 +66,8 @@ devtools.install_folder: 5e374a60
 devtools.load: 2e9dda8
 devtools.settings_file: fc5b0750
 devtools.shared_components: a0dabb6c
+devtools.simulate_dialog.label: 4f1ad940
+devtools.simulate_dialog.trigger: ff8dbe0e
 devtools.simulate_perm.label: d666e044
 devtools.simulate_perm.result_allowed: 67a2d9d8
 devtools.simulate_perm.result_denied: 6dab574d

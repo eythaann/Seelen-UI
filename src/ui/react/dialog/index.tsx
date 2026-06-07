@@ -7,7 +7,7 @@ import { App } from "./app.tsx";
 import "@seelen-ui/lib/styles/reset.css";
 import "./global.css";
 
-await Widget.getCurrent().init();
+await Widget.self.init();
 
 const container = getRootContainer();
 createRoot(container).render(<App />);

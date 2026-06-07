@@ -82,6 +82,9 @@ devtools:
   load: טען
   settings_file: קובץ הגדרות
   shared_components: רכיבים סטנדרטיים של SLU
+  simulate_dialog:
+    label: הדמיית דיאלוג
+    trigger: לְהַפְעִיל
   simulate_perm:
     label: הדמיית בקשת הרשאת יישומון
     result_allowed: ✓ הרשאה ניתנה

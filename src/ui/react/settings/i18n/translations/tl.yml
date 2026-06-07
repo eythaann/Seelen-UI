@@ -87,6 +87,9 @@ devtools:
   load: Mag -load
   settings_file: File ng mga setting
   shared_components: Mga Pamantayang Bahagi ng SLU
+  simulate_dialog:
+    label: Gayahin ang Dialog
+    trigger: Trigger
   simulate_perm:
     label: Gayahin ang Kahilingan ng Pahintulot sa Widget
     result_allowed: ✓ Ipinagkaloob ang pahintulot

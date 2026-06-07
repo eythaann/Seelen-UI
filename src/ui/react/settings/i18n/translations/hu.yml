@@ -84,6 +84,9 @@ devtools:
   load: Betöltés
   settings_file: Beállítási fájl
   shared_components: SLU szabványos komponensek
+  simulate_dialog:
+    label: Szimulációs párbeszédpanel
+    trigger: Kioldó
   simulate_perm:
     label: Szimulálja a Widget engedélykérését
     result_allowed: ✓ Engedély megadva

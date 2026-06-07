@@ -1,24 +1,27 @@
 import type { Dialog } from "@seelen-ui/lib/types";
 
 export function createSampleDialog(): Dialog {
+  const identifier = crypto.randomUUID();
   return {
-    identifier: crypto.randomUUID(),
-    width: 400,
+    identifier,
+    width: 500,
     height: 200,
-    title: [{ type: "text", value: "Test Dialog", styles: null }],
+    title: [{ type: "text", value: "Test Dialog" }],
     content: [
       {
         type: "text",
         value: "This is a test dialog triggered from DevTools.",
-        styles: null,
+      },
+      {
+        type: "text",
+        value: `Identifier: ${identifier}`,
       },
     ],
     footer: [
       {
         type: "button",
-        inner: [{ type: "text", value: "Close", styles: null }],
+        inner: [{ type: "text", value: "Close" }],
         onClick: "exit",
-        styles: null,
       },
     ],
   };

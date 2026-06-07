@@ -85,6 +85,9 @@ devtools:
   load: Carga
   settings_file: Archivo de configuración
   shared_components: Componentes estándar de SLU
+  simulate_dialog:
+    label: Simular diálogo
+    trigger: Desencadenar
   simulate_perm:
     label: Simular solicitud de permiso de widget
     result_allowed: ✓ Permiso concedido

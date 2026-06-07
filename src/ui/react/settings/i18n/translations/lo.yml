@@ -82,6 +82,9 @@ devtools:
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
   shared_components: ອົງປະກອບມາດຕະຖານ SLU
+  simulate_dialog:
+    label: ຈຳລອງກ່ອງໂຕ້ຕອບ
+    trigger: ກະຕຸ້ນ
   simulate_perm:
     label: ຈໍາລອງການຮ້ອງຂໍການອະນຸຍາດ Widget
     result_allowed: ✓​ການ​ອະ​ນຸ​ຍາດ​ໃຫ້​

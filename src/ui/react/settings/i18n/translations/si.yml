@@ -83,6 +83,9 @@ devtools:
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
   shared_components: SLU සම්මත සංරචක
+  simulate_dialog:
+    label: ඩයලොග් අනුකරණය කරන්න
+    trigger: අවුලුවාලීම
   simulate_perm:
     label: විජට් අවසර ඉල්ලීම අනුකරණය කරන්න
     result_allowed: ✓ අවසරය ලබා දී ඇත

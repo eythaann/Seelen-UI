@@ -86,6 +86,9 @@ devtools:
   load: ஏற்றவும்
   settings_file: அமைப்புகள் கோப்பு
   shared_components: SLU நிலையான கூறுகள்
+  simulate_dialog:
+    label: உரையாடலை உருவகப்படுத்து
+    trigger: தூண்டுதல்
   simulate_perm:
     label: விட்ஜெட் அனுமதி கோரிக்கையை உருவகப்படுத்தவும்
     result_allowed: ✓ அனுமதி வழங்கப்பட்டது

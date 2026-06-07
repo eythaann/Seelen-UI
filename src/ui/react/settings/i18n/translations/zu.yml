@@ -85,6 +85,9 @@ devtools:
   load: Thwala
   settings_file: Ifayela lezilungiselelo
   shared_components: Izingxenye Ezijwayelekile ze-SLU
+  simulate_dialog:
+    label: Lingisa Ibhokisi
+    trigger: Qalisa
   simulate_perm:
     label: Lingisa Isicelo Semvume Yewijethi
     result_allowed: ✓ Imvume inikiwe

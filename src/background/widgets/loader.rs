@@ -22,6 +22,11 @@ use crate::{
     windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
+pub enum PodSource {
+    Static,
+    Runtime,
+}
+
 const LIVENESS_PROVE_INTERVAL: Duration = Duration::from_secs(5);
 const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(3);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
@@ -35,6 +40,7 @@ pub struct WidgetDeployment {
 
 impl WidgetDeployment {
     pub fn new(definition: Arc<Widget>) -> Self {
+        log::trace!("Registering widget: {}", definition.id);
         Self {
             definition,
             pods: SyncHashMap::new(),
@@ -46,14 +52,16 @@ impl WidgetDeployment {
         match self.definition.instances {
             WidgetInstanceMode::Single => {
                 if self.pods.is_empty() {
-                    let instance = WidgetPod::create(&self.definition, None, None, None);
+                    let label = WidgetWebviewLabel::new(&self.definition.id, None, None);
+                    let instance = WidgetPod::create(label, None, PodSource::Static);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
             }
             WidgetInstanceMode::Multiple => {
                 let nil_id = Uuid::nil();
-                if self.pods.is_empty() {
-                    let instance = WidgetPod::create(&self.definition, None, Some(&nil_id), None);
+                if !self.definition.lazy && self.pods.is_empty() {
+                    let label = WidgetWebviewLabel::new(&self.definition.id, None, Some(&nil_id));
+                    let instance = WidgetPod::create(label, None, PodSource::Static);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
 
@@ -61,8 +69,11 @@ impl WidgetDeployment {
                     .load()
                     .get_widget_instances_ids(&self.definition.id);
 
-                // Remove deleted instances
-                self.pods.retain(|(label, _)| {
+                // Remove deleted static instances; runtime pods are never evicted by reconcile.
+                self.pods.retain(|(label, pod)| {
+                    if matches!(pod.source, PodSource::Runtime) {
+                        return true;
+                    }
                     let instance_id = label.instance_id.expect("Missing instance id");
                     instance_id == nil_id || replicas_ids.contains(&instance_id)
                 });
@@ -73,8 +84,9 @@ impl WidgetDeployment {
                         .pods
                         .any(|(label, _)| label.instance_id == Some(replica_id))
                     {
-                        let instance =
-                            WidgetPod::create(&self.definition, None, Some(&replica_id), None);
+                        let label =
+                            WidgetWebviewLabel::new(&self.definition.id, None, Some(&replica_id));
+                        let instance = WidgetPod::create(label, None, PodSource::Static);
                         self.pods.upsert(instance.label.clone(), instance);
                     }
                 }
@@ -101,8 +113,9 @@ impl WidgetDeployment {
                         continue;
                     }
 
-                    let instance =
-                        WidgetPod::create(&self.definition, Some(&monitor_id), None, None);
+                    let label =
+                        WidgetWebviewLabel::new(&self.definition.id, Some(&monitor_id), None);
+                    let instance = WidgetPod::create(label, None, PodSource::Static);
                     self.pods.upsert(instance.label.clone(), instance);
                 }
             }
@@ -122,7 +135,8 @@ impl WidgetDeployment {
     }
 
     pub fn create_runtime_instance(&self, instance_id: &Uuid, owner_hwnd: Option<isize>) {
-        let instance = WidgetPod::create(&self.definition, None, Some(instance_id), owner_hwnd);
+        let label = WidgetWebviewLabel::new(&self.definition.id, None, Some(instance_id));
+        let instance = WidgetPod::create(label, owner_hwnd, PodSource::Runtime);
         self.pods.upsert(instance.label.clone(), instance);
     }
 
@@ -133,6 +147,7 @@ impl WidgetDeployment {
 
 pub struct WidgetPod {
     pub label: WidgetWebviewLabel,
+    pub source: PodSource,
 
     window: Option<WidgetWebview>,
     _status: WidgetStatus,
@@ -144,16 +159,10 @@ pub struct WidgetPod {
 }
 
 impl WidgetPod {
-    fn create(
-        widget: &Widget,
-        monitor_id: Option<&str>,
-        instance_id: Option<&Uuid>,
-        owner_hwnd: Option<isize>,
-    ) -> Self {
-        let label = WidgetWebviewLabel::new(&widget.id, monitor_id, instance_id);
-        log::info!("Creating widget pod: {label}");
+    fn create(label: WidgetWebviewLabel, owner_hwnd: Option<isize>, source: PodSource) -> Self {
         Self {
             label,
+            source,
             window: None,
             _status: WidgetStatus::Pending,
             owner_hwnd,
@@ -172,7 +181,7 @@ impl WidgetPod {
     }
 
     pub fn set_status(&mut self, status: WidgetStatus) {
-        log::trace!("{} status changed to: {:?}", self.label, status);
+        log::trace!(target: &self.label.decoded, "status changed to: {status:?}");
         self._status = status;
         notify_widget_statuses_change();
     }
@@ -312,7 +321,7 @@ impl WidgetPod {
 
 impl Drop for WidgetPod {
     fn drop(&mut self) {
-        log::trace!("Dropping widget pod: {}", self.label);
+        log::trace!(target: &self.label.decoded, "dropped");
         if let Some(handle) = self.liveness_prove_handle.take() {
             handle.abort();
         }

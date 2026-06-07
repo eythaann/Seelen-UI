@@ -85,6 +85,9 @@ devtools:
   load: भार
   settings_file: सेटिंग संचिका
   shared_components: एसएलयू मानक घटक
+  simulate_dialog:
+    label: संवाद का अनुकरण करें
+    trigger: चालू कर देना
   simulate_perm:
     label: विजेट अनुमति अनुरोध का अनुकरण करें
     result_allowed: ✓ अनुमति दी गई

@@ -84,6 +84,9 @@ devtools:
   load: Mzigo
   settings_file: Faili ya mipangilio
   shared_components: Vipengele vya kawaida vya SLU
+  simulate_dialog:
+    label: Maongezi ya Kuiga
+    trigger: Anzisha
   simulate_perm:
     label: Iga Ombi la Ruhusa ya Wijeti
     result_allowed: ✓ Ruhusa imetolewa

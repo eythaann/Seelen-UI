@@ -84,6 +84,9 @@ devtools:
   load: Carregar
   settings_file: Arxiu de configuració
   shared_components: Components estàndard de la SLU
+  simulate_dialog:
+    label: Diàleg de simulació
+    trigger: Disparador
   simulate_perm:
     label: Simula la sol·licitud de permís de widget
     result_allowed: ✓ Autorització concedida

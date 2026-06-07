@@ -85,6 +85,9 @@ devtools:
   load: Yuklamoq
   settings_file: Sozlamalar fayli
   shared_components: SLU standart komponentlari
+  simulate_dialog:
+    label: Simulyatsiya dialogi
+    trigger: Trigger
   simulate_perm:
     label: Vidjetga ruxsat so‘rovini simulyatsiya qilish
     result_allowed: ✓ Ruxsat berilgan

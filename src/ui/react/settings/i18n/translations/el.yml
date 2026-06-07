@@ -86,6 +86,9 @@ devtools:
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
   shared_components: Πρότυπα εξαρτήματα SLU
+  simulate_dialog:
+    label: Προσομοίωση διαλόγου
+    trigger: Σκανδάλη
   simulate_perm:
     label: Προσομοίωση αιτήματος άδειας γραφικού στοιχείου
     result_allowed: ✓ Χορηγήθηκε άδεια

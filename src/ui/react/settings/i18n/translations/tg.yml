@@ -85,6 +85,9 @@ devtools:
   load: Сарборӣ
   settings_file: Файлҳои танзимот
   shared_components: Унсурҳои стандартии SLU
+  simulate_dialog:
+    label: Муколамаи симулятсия
+    trigger: Триггер
   simulate_perm:
     label: Дархости иҷозати виджетро тақлид кунед
     result_allowed: ✓ Иҷозат дода шудааст

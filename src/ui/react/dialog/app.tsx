@@ -1,6 +1,7 @@
 import { signal } from "@preact/signals";
 import { Widget } from "@seelen-ui/lib";
 import type { Dialog, DialogContent as IDialogContent } from "@seelen-ui/lib/types";
+import { LogicalSize } from "@tauri-apps/api/window";
 import { Icon } from "libs/ui/react/components/Icon";
 import { useEffect } from "preact/hooks";
 
@@ -18,12 +19,7 @@ currentWidget.onTrigger(async ({ customArgs }) => {
   }
 
   Widget.self.window.setTitle(getOnlyText(state.value.title));
-  await Widget.self.setPosition({
-    left: 0,
-    top: 0,
-    right: state.value.width,
-    bottom: state.value.height,
-  });
+  await Widget.self.window.setSize(new LogicalSize(state.value.width, state.value.height));
   await Widget.self.window.center();
   await Widget.self.show();
   await Widget.self.focus();
@@ -38,12 +34,12 @@ export function App() {
   if (!dialog) return null;
 
   return (
-    <div className="popup">
+    <div className="dialog">
       <header data-tauri-drag-region className="header">
         <div className="header-content">
           {dialog.title.map((entry, idx) => <SluPopupContent key={idx} entry={entry} />)}
         </div>
-        <button className="header-close" onClick={() => currentWidget.hide()}>
+        <button className="header-close" onClick={() => currentWidget.window.close()}>
           <Icon iconName="CgClose" />
         </button>
       </header>
@@ -96,7 +92,7 @@ function SluPopupContent({ entry }: { entry: IDialogContent }) {
 
 function handleButtonClick(onClick: string) {
   if (onClick === "exit") {
-    currentWidget.hide();
+    Widget.self.window.close();
     return;
   }
 

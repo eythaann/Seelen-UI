@@ -82,6 +82,9 @@ devtools:
   load: Ẹru
   settings_file: Faili eto
   shared_components: SLU Standard irinše
+  simulate_dialog:
+    label: Afarawe ajọṣọ
+    trigger: Nfa
   simulate_perm:
     label: Ṣe afiwe Ibeere Gbigbanilaaye ẹrọ ailorukọ
     result_allowed: ✓ Gbigbanilaaye

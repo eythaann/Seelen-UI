@@ -85,6 +85,9 @@ devtools:
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
   shared_components: SLU სტანდარტული კომპონენტები
+  simulate_dialog:
+    label: დიალოგის სიმულაცია
+    trigger: გამომწვევი
   simulate_perm:
     label: ვიჯეტის ნებართვის მოთხოვნის სიმულაცია
     result_allowed: ✓ გაცემულია ნებართვა

@@ -85,6 +85,9 @@ devtools:
   load: Lueden
   settings_file: Settytout-Datei
   shared_components: SLU Standard Komponente
+  simulate_dialog:
+    label: Simuléieren Dialog
+    trigger: Ausléiser
   simulate_perm:
     label: Simulatioun Widget Erlaabnis Ufro
     result_allowed: ✓ Erlaabnis gëtt

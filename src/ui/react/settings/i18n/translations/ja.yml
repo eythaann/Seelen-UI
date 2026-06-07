@@ -78,6 +78,9 @@ devtools:
   load: ロード
   settings_file: 設定ファイル
   shared_components: SLU標準コンポーネント
+  simulate_dialog:
+    label: シミュレーションダイアログ
+    trigger: トリガー
   simulate_perm:
     label: ウィジェットの許可リクエストをシミュレートする
     result_allowed: ✓ 許可の付与

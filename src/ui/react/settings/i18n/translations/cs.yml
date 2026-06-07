@@ -84,6 +84,9 @@ devtools:
   load: Načíst
   settings_file: Nastavení souboru
   shared_components: Standardní komponenty SLU
+  simulate_dialog:
+    label: Simulovat dialog
+    trigger: Spoušť
   simulate_perm:
     label: Simulovat žádost o povolení widgetu
     result_allowed: ✓ Povolení uděleno

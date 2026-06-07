@@ -84,6 +84,9 @@ devtools:
   load: Ачих
   settings_file: Тохиргооын нэр
   shared_components: SLU стандарт бүрэлдэхүүн хэсгүүд
+  simulate_dialog:
+    label: Дууриамал харилцах цонх
+    trigger: Триггер
   simulate_perm:
     label: Виджетийн зөвшөөрлийн хүсэлтийг дуурайлган хийх
     result_allowed: ✓ Зөвшөөрөл олгосон

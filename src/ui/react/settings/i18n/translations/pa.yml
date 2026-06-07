@@ -80,6 +80,9 @@ devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
   shared_components: SLU ਸਟੈਂਡਰਡ ਕੰਪੋਨੈਂਟਸ
+  simulate_dialog:
+    label: ਸਿਮੂਲੇਟ ਡਾਇਲਾਗ
+    trigger: ਟਰਿੱਗਰ
   simulate_perm:
     label: ਵਿਜੇਟ ਅਨੁਮਤੀ ਬੇਨਤੀ ਦੀ ਨਕਲ ਕਰੋ
     result_allowed: ✓ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ

@@ -84,6 +84,9 @@ devtools:
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
   shared_components: SLU પ્રમાણભૂત ઘટકો
+  simulate_dialog:
+    label: ડાયલોગનું અનુકરણ કરો
+    trigger: ટ્રિગર
   simulate_perm:
     label: વિજેટ પરવાનગી વિનંતીનું અનુકરણ કરો
     result_allowed: ✓ પરવાનગી આપવામાં આવી

@@ -84,6 +84,9 @@ devtools:
   load: بار
   settings_file: پرونده تنظیمات
   shared_components: اجزای استاندارد SLU
+  simulate_dialog:
+    label: شبیه سازی دیالوگ
+    trigger: ماشه
   simulate_perm:
     label: درخواست مجوز ویجت را شبیه سازی کنید
     result_allowed: ✓ مجوز داده شده است

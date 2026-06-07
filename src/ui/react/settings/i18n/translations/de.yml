@@ -85,6 +85,9 @@ devtools:
   load: Laden
   settings_file: Einstellungsdatei
   shared_components: SLU-Standardkomponenten
+  simulate_dialog:
+    label: Dialog simulieren
+    trigger: Auslösen
   simulate_perm:
     label: Widget-Berechtigungsanfrage simulieren
     result_allowed: ✓ Erlaubnis erteilt

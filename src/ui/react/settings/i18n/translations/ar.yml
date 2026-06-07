@@ -82,6 +82,9 @@ devtools:
   load: تحميل
   settings_file: ملف الإعدادات
   shared_components: المكونات القياسية SLU
+  simulate_dialog:
+    label: محاكاة الحوار
+    trigger: مشغل
   simulate_perm:
     label: محاكاة طلب إذن القطعة
     result_allowed: ✓ تم منح الإذن

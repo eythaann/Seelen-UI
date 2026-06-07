@@ -81,6 +81,9 @@ devtools:
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
   shared_components: SLU መደበኛ ክፍሎች
+  simulate_dialog:
+    label: መገናኛን አስመስለው
+    trigger: ቀስቅሴ
   simulate_perm:
     label: የመግብር ፍቃድ ጥያቄን አስመስለው
     result_allowed: ✓ ፍቃድ ተሰጥቷል።

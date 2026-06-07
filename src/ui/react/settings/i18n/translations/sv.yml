@@ -84,6 +84,9 @@ devtools:
   load: Ladda
   settings_file: Inställningsfil
   shared_components: SLU Standardkomponenter
+  simulate_dialog:
+    label: Simulera dialog
+    trigger: Utlösare
   simulate_perm:
     label: Simulera widgettillståndsbegäran
     result_allowed: ✓ Tillstånd beviljat

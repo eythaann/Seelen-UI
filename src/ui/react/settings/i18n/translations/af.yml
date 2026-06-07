@@ -85,6 +85,9 @@ devtools:
   load: Vrag
   settings_file: Instellingslêer
   shared_components: SLU Standaardkomponente
+  simulate_dialog:
+    label: Simuleer dialoog
+    trigger: Sneller
   simulate_perm:
     label: Simuleer Widget Toestemming Versoek
     result_allowed: ✓ Toestemming verleen

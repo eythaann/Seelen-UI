@@ -85,6 +85,9 @@ devtools:
   load: Відкрити
   settings_file: Файл налаштувань
   shared_components: Стандартні компоненти SLU
+  simulate_dialog:
+    label: Імітація діалогу
+    trigger: Тригер
   simulate_perm:
     label: Симуляція запиту на дозвіл віджета
     result_allowed: ✓ Дозвіл надано

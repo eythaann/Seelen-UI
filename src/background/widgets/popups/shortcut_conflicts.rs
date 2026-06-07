@@ -22,8 +22,8 @@ pub fn show_shortcut_conflict_popup() -> Result<()> {
 
 fn get_dialog() -> Dialog {
     Dialog {
-        width: 380.0,
-        height: 160.0,
+        width: 500.0,
+        height: 200.0,
         title: vec![DialogContent::Text {
             value: t!("shortcut.conflicts.title").to_string(),
             styles: None,

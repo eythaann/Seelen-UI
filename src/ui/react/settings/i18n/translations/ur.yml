@@ -84,6 +84,9 @@ devtools:
   load: لوڈ
   settings_file: سیٹنگ فاعل
   shared_components: SLU معیاری اجزاء
+  simulate_dialog:
+    label: ڈائیلاگ کی تقلید کریں۔
+    trigger: محرک
   simulate_perm:
     label: ویجیٹ کی اجازت کی درخواست کی تقلید کریں۔
     result_allowed: ✓ اجازت دی گئی۔

@@ -81,6 +81,9 @@ devtools:
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
   shared_components: ส่วนประกอบมาตรฐาน SLU
+  simulate_dialog:
+    label: จำลองกล่องโต้ตอบ
+    trigger: สิ่งกระตุ้น
   simulate_perm:
     label: จำลองคำขออนุญาตวิดเจ็ต
     result_allowed: ✓ ได้รับอนุญาตแล้ว

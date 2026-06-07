@@ -84,6 +84,9 @@ devtools:
   load: Hlaða
   settings_file: Stillingarskrá
   shared_components: SLU staðalbúnaður
+  simulate_dialog:
+    label: Herma Dialog
+    trigger: Kveikja
   simulate_perm:
     label: Líktu eftir beiðni um leyfi fyrir græju
     result_allowed: ✓ Leyfi veitt

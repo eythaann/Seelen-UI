@@ -83,6 +83,9 @@ devtools:
   load: Yükləmək
   settings_file: Parametrlər faylı
   shared_components: SLU Standart Komponentləri
+  simulate_dialog:
+    label: Dialoqu Simulyasiya edin
+    trigger: Tətik
   simulate_perm:
     label: Widget İcazə Sorğunu simulyasiya edin
     result_allowed: ✓ İcazə verildi

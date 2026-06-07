@@ -84,6 +84,9 @@ devtools:
   load: Zamatu
   settings_file: Ezarpenak fitxategia
   shared_components: SLUren osagai estandarrak
+  simulate_dialog:
+    label: Simulatu elkarrizketa
+    trigger: Trigger
   simulate_perm:
     label: Simulatu widget-aren baimen-eskaera
     result_allowed: ✓ Emandako baimena

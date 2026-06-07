@@ -86,6 +86,9 @@ devtools:
   load: Xammuul
   settings_file: Faylka Dejinta
   shared_components: Qaybaha caadiga ah ee SLU
+  simulate_dialog:
+    label: Isku day wada hadal
+    trigger: Kicin
   simulate_perm:
     label: Isku day Codsiga Ogolaanshaha Widget
     result_allowed: Ogolaanshaha waa la bixiyay

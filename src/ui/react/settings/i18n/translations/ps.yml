@@ -83,6 +83,9 @@ devtools:
   load: بار
   settings_file: د امستنې دوتنه
   shared_components: د SLU معیاري اجزا
+  simulate_dialog:
+    label: سمولیټ ډیالوګ
+    trigger: محرک
   simulate_perm:
     label: د ویجټ اجازې غوښتنه سمول
     result_allowed: ✓ اجازه ورکړل شوه

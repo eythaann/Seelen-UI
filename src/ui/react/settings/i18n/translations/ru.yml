@@ -85,6 +85,9 @@ devtools:
   load: Загрузить
   settings_file: Файл настроек
   shared_components: Стандартные компоненты SLU
+  simulate_dialog:
+    label: Имитировать диалог
+    trigger: Курок
   simulate_perm:
     label: Имитировать запрос разрешения виджета
     result_allowed: ✓ Разрешение получено

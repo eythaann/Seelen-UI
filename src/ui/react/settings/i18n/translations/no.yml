@@ -84,6 +84,9 @@ devtools:
   load: Laste
   settings_file: Innstillingsfilen
   shared_components: SLU standardkomponenter
+  simulate_dialog:
+    label: Simuler dialog
+    trigger: Avtrekker
   simulate_perm:
     label: Simuler forespørsel om widgettillatelse
     result_allowed: ✓ Tillatelse gitt
