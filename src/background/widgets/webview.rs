@@ -74,6 +74,10 @@ impl WidgetWebview {
                 .focusable(false);
         }
 
+        if matches!(widget.preset, WidgetPreset::Desktop | WidgetPreset::Overlay) {
+            builder = builder.focusable(false);
+        }
+
         match widget.preset {
             WidgetPreset::Desktop => {
                 builder = builder.always_on_bottom(true);

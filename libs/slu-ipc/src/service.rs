@@ -1,14 +1,15 @@
 use std::{future::Future, sync::Arc};
 
 use interprocess::os::windows::named_pipe::{
-    PipeListenerOptions, pipe_mode::Bytes, tokio::DuplexPipeStream as AsyncDuplexPipeStream,
+    DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
+    tokio::DuplexPipeStream as AsyncDuplexPipeStream,
 };
 
 use crate::{
     app::current_session_id,
     common::{
-        IPC, create_security_descriptor, read_from_ipc_stream, send_to_ipc_stream, send_with_retry,
-        write_to_ipc_stream,
+        IPC, create_security_descriptor, read_from_ipc_stream, send_to_ipc_stream,
+        send_to_ipc_stream_blocking, send_with_retry, write_to_ipc_stream,
     },
     error::Result,
     messages::{IpcResponse, SvcAction, SvcMessage},
@@ -108,6 +109,17 @@ impl ServiceIpc {
         .to_bytes()?;
 
         send_with_retry(|| Self::try_send(&data)).await
+    }
+
+    pub fn send_blocking(message: SvcAction) -> Result<IpcResponse> {
+        let data = SvcMessage {
+            token: SvcMessage::signature().to_string(),
+            action: message,
+        }
+        .to_bytes()?;
+
+        let stream = DuplexPipeStream::connect_by_path(Self::path())?;
+        send_to_ipc_stream_blocking(&stream, &data)
     }
 
     async fn try_send(data: &[u8]) -> Result<IpcResponse> {

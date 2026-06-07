@@ -25,6 +25,7 @@
 - dock and toolbar not being always on top, after exiting from fullscreen app.
 - task switcher not exiting on escape key.
 - inconsistent windows order on dock.
+- errors on elevated windows.
 
 ## [2.6.10]
 

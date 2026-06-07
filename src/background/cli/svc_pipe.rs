@@ -29,6 +29,11 @@ impl ServicePipe {
         Ok(())
     }
 
+    pub fn request_sync(message: SvcAction) -> Result<()> {
+        ServiceIpc::send_blocking(message.clone())?.ok()?;
+        Ok(())
+    }
+
     pub fn is_running() -> bool {
         ServiceIpc::can_stablish_connection()
     }

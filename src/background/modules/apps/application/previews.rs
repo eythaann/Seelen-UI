@@ -35,8 +35,11 @@ static CAPTURE_TX: LazyLock<crossbeam_channel::Sender<isize>> = LazyLock::new(||
                 if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
                     continue;
                 }
+
                 let window = Window::from(addr);
-                WINDOWS_PREVIEWS.do_capture(&window).log_error();
+                if window.is_manageable_from_unelevated() {
+                    WINDOWS_PREVIEWS.do_capture(&window).log_error();
+                }
             }
         })
         .log_error();

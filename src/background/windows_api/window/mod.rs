@@ -23,7 +23,9 @@ use windows::{
     },
 };
 
+use crate::hook::HookManager;
 use crate::virtual_desktops::SluWorkspacesManager2;
+use crate::windows_api::window::event::WinEvent;
 use crate::{
     cli::ServicePipe,
     error::Result,
@@ -342,8 +344,13 @@ impl Window {
         is_interactable_window(self)
     }
 
+    /// windows created on elevated process like task manager are not manageable from a non elevated process
+    pub fn is_manageable_from_unelevated(&self) -> bool {
+        self.process().open_handle().is_ok()
+    }
+
     pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
-        if self.process().open_handle().is_ok() {
+        if self.is_manageable_from_unelevated() {
             WindowsApi::show_window(self.hwnd(), command)
         } else {
             ServicePipe::request(SvcAction::ShowWindow {
@@ -354,7 +361,7 @@ impl Window {
     }
 
     pub fn show_window_async(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
-        if self.process().open_handle().is_ok() {
+        if self.is_manageable_from_unelevated() {
             WindowsApi::show_window_async(self.hwnd(), command)
         } else {
             ServicePipe::request(SvcAction::ShowWindowAsync {
@@ -366,7 +373,7 @@ impl Window {
 
     #[allow(dead_code)]
     pub fn set_position(&self, rect: &RECT, flags: SET_WINDOW_POS_FLAGS) -> Result<()> {
-        if self.process().open_handle().is_ok() {
+        if self.is_manageable_from_unelevated() {
             WindowsApi::set_position(self.hwnd(), None, rect, flags)
         } else {
             ServicePipe::request(SvcAction::SetWindowPosition {
@@ -393,7 +400,17 @@ impl Window {
         if self.is_minimized() {
             return Ok(());
         }
-        WindowsApi::set_foreground(self.hwnd())
+        if Window::get_foregrounded().is_manageable_from_unelevated() {
+            WindowsApi::set_foreground(self.hwnd())
+        } else {
+            ServicePipe::request_sync(SvcAction::SetForeground(self.address()))?;
+            if WindowsApi::get_foreground_window() == self.hwnd() {
+                HookManager::send((WinEvent::SystemForeground, *self));
+                Ok(())
+            } else {
+                Err("Failed to set foreground window".into())
+            }
+        }
     }
 
     pub fn is_dragging(&self) -> bool {

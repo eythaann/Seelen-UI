@@ -13,18 +13,16 @@ use windows::Win32::{
     System::{
         Console::GetConsoleWindow,
         RemoteDesktop::ProcessIdToSessionId,
-        Threading::{
-            AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
-            OpenProcessToken,
-        },
+        Threading::{GetCurrentProcess, GetCurrentProcessId, OpenProcessToken},
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
+        Input::KeyboardAndMouse::{keybd_event, KEYEVENTF_EXTENDEDKEY, KEYEVENTF_KEYUP, VK_MENU},
         Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            BringWindowToTop, FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW,
-            GetWindowThreadProcessId, IsIconic, SetWindowPos, ShowWindow, ShowWindowAsync,
-            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
+            FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW, SetForegroundWindow,
+            SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+            SWP_NOACTIVATE, SWP_NOZORDER,
         },
     },
 };
@@ -38,16 +36,6 @@ use crate::{
 pub struct WindowsApi;
 
 impl WindowsApi {
-    /// Behaviour is undefined if an invalid HWND is given
-    /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
-    pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
-        let mut process_id: u32 = 0;
-        let thread_id = unsafe {
-            GetWindowThreadProcessId(hwnd, Option::from(std::ptr::addr_of_mut!(process_id)))
-        };
-        (process_id, thread_id)
-    }
-
     pub fn show_window(addr: isize, command: i32) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -66,42 +54,39 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
-        unsafe { BringWindowToTop(hwnd)? };
-        Ok(())
-    }
-
-    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
-        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
-        Ok(())
-    }
-
-    pub fn is_iconic(hwnd: HWND) -> bool {
-        unsafe { IsIconic(hwnd).as_bool() }
-    }
-
     pub fn get_foreground_window() -> HWND {
         unsafe { GetForegroundWindow() }
     }
 
     pub fn set_foreground(addr: isize) -> Result<()> {
-        let hwnd = HWND(addr as _);
-        if Self::is_iconic(hwnd) {
-            Self::show_window(addr, SW_RESTORE.0)?;
+        let target_hwnd = HWND(addr as _);
+        if !unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
+            // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
+            unsafe {
+                keybd_event(VK_MENU.0 as u8, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
+                keybd_event(
+                    VK_MENU.0 as u8,
+                    0x45,
+                    KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP,
+                    0,
+                );
+            }
+            // this can fail but still be successful.
+            let _ = unsafe { SetForegroundWindow(target_hwnd) };
         }
 
-        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
-        let app_thread = Self::current_thread_id();
-
-        let mut attached = false;
-        if focused_thread != app_thread {
-            attached = Self::attach_thread_input(focused_thread, app_thread, true).is_ok();
+        // based on windows doc, get foreground can return null while window is losing activation
+        // so we wait until we get a valid window.
+        let mut focus_hwnd = Self::get_foreground_window();
+        let mut retries = 0;
+        while focus_hwnd != target_hwnd && retries < 10 {
+            std::thread::sleep(std::time::Duration::from_millis(1));
+            focus_hwnd = Self::get_foreground_window();
+            retries += 1;
         }
 
-        Self::bring_to_top(hwnd)?;
-
-        if attached {
-            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        if focus_hwnd != target_hwnd {
+            return Err("Failed to set foreground window".into());
         }
         Ok(())
     }
@@ -144,10 +129,6 @@ impl WindowsApi {
 
     pub fn current_process_id() -> u32 {
         unsafe { GetCurrentProcessId() }
-    }
-
-    pub fn current_thread_id() -> u32 {
-        unsafe { GetCurrentThreadId() }
     }
 
     pub fn current_session_id() -> u32 {
