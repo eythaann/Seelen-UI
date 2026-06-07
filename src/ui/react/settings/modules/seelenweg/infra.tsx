@@ -61,6 +61,8 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.margin}
               onChange={(value) => patchWegConfig({ margin: value || 0 })}
+              min={0}
+              max={40}
             />
           </SettingsOption>
           <SettingsOption>
@@ -68,6 +70,8 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.padding}
               onChange={(value) => patchWegConfig({ padding: value || 0 })}
+              min={0}
+              max={40}
             />
           </SettingsOption>
         </SettingsSubGroup>
@@ -96,6 +100,7 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.delayToShow}
               min={0}
+              max={10000}
               disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => patchWegConfig({ delayToShow: value || 0 })}
             />
@@ -105,6 +110,7 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.delayToHide}
               min={0}
+              max={10000}
               disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => patchWegConfig({ delayToHide: value || 0 })}
             />
@@ -157,6 +163,8 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.size}
               onChange={(value) => patchWegConfig({ size: value || 0 })}
+              min={16}
+              max={128}
             />
           </SettingsOption>
           <SettingsOption>
@@ -164,6 +172,8 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.spaceBetweenItems}
               onChange={(value) => patchWegConfig({ spaceBetweenItems: value || 0 })}
+              min={0}
+              max={40}
             />
           </SettingsOption>
           <SettingsOption>

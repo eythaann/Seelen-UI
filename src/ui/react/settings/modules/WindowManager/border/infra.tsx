@@ -37,11 +37,11 @@ export const BorderSettings = () => {
       >
         <SettingsOption>
           <span>{t("wm.border.offset")}</span>
-          <InputNumber value={offset} onChange={updateOffset} />
+          <InputNumber value={offset} onChange={updateOffset} min={-20} max={20} />
         </SettingsOption>
         <SettingsOption>
           <span>{t("wm.border.width")}</span>
-          <InputNumber value={width} onChange={updateWidth} />
+          <InputNumber value={width} onChange={updateWidth} min={1} max={20} />
         </SettingsOption>
       </SettingsSubGroup>
     </SettingsGroup>

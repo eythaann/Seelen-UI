@@ -8,6 +8,8 @@
 
 ### enhancements
 
+- add min/max limits to all number inputs in Settings GUI to prevent users from entering values that break the desktop
+  layout.
 - keyboard/language selector fixes and improvements (now shows active IME).
 - wallpaper selector allow select single wallpapers.
 - disable autohide of dock and toolbar on touch screen devices.\

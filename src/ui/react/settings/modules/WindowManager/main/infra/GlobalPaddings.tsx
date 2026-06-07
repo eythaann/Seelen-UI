@@ -81,6 +81,7 @@ export function WindowManagerSpacingSettings(
           value={gap}
           onChange={onChangeGap}
           min={0}
+          max={100}
           placeholder={t("inherit")}
         />
       </SettingsOption>
@@ -90,6 +91,7 @@ export function WindowManagerSpacingSettings(
           value={padding}
           onChange={onChangePadding}
           min={0}
+          max={100}
           placeholder={t("inherit")}
         />
       </SettingsOption>
@@ -100,6 +102,7 @@ export function WindowManagerSpacingSettings(
             value={margins?.left}
             onChange={onChangeMargins.bind(null, "left")}
             min={0}
+            max={300}
             placeholder={t("inherit")}
           />
         </SettingsOption>
@@ -109,6 +112,7 @@ export function WindowManagerSpacingSettings(
             value={margins?.top}
             onChange={onChangeMargins.bind(null, "top")}
             min={0}
+            max={300}
             placeholder={t("inherit")}
           />
         </SettingsOption>
@@ -118,6 +122,7 @@ export function WindowManagerSpacingSettings(
             value={margins?.right}
             onChange={onChangeMargins.bind(null, "right")}
             min={0}
+            max={300}
             placeholder={t("inherit")}
           />
         </SettingsOption>
@@ -127,6 +132,7 @@ export function WindowManagerSpacingSettings(
             value={margins?.bottom}
             onChange={onChangeMargins.bind(null, "bottom")}
             min={0}
+            max={300}
             placeholder={t("inherit")}
           />
         </SettingsOption>

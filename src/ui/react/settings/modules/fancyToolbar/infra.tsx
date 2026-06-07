@@ -49,7 +49,8 @@ export function FancyToolbarSettings() {
               <InputNumber
                 value={settings.itemSize}
                 onChange={(value) => setToolbarItemSize(value || 0)}
-                min={0}
+                min={4}
+                max={100}
               />
             }
           />
@@ -61,6 +62,7 @@ export function FancyToolbarSettings() {
                 value={settings.padding}
                 onChange={(value) => setToolbarPadding(value || 0)}
                 min={0}
+                max={40}
               />
             }
           />
@@ -72,6 +74,7 @@ export function FancyToolbarSettings() {
                 value={settings.margin}
                 onChange={(value) => setToolbarMargin(value || 0)}
                 min={0}
+                max={40}
               />
             }
           />
@@ -118,6 +121,7 @@ export function FancyToolbarSettings() {
             <InputNumber
               value={delayToShow}
               min={0}
+              max={10000}
               disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => setToolbarDelayToShow(value || 0)}
             />
@@ -127,6 +131,7 @@ export function FancyToolbarSettings() {
             <InputNumber
               value={delayToHide}
               min={0}
+              max={10000}
               disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => setToolbarDelayToHide(value || 0)}
             />

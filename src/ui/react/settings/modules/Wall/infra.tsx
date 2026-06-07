@@ -143,6 +143,7 @@ export function WallSettings() {
                 value={time.hours}
                 onChange={(value) => updateTime("hours", value)}
                 min={0}
+                max={168}
                 style={{ width: 50 }}
               />
             }
@@ -154,6 +155,7 @@ export function WallSettings() {
                 value={time.minutes}
                 onChange={(value) => updateTime("minutes", value)}
                 min={0}
+                max={59}
                 style={{ width: 50 }}
               />
             }
