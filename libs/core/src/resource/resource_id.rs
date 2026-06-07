@@ -227,6 +227,6 @@ impl WidgetId {
         "@seelen/wallpaper-manager".into()
     }
     pub fn known_popup() -> Self {
-        "@seelen/popup".into()
+        "@seelen/dialog".into()
     }
 }

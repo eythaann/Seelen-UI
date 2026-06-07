@@ -1,8 +1,10 @@
-id: "@seelen/popup"
+id: "@seelen/dialog"
 icon: FaRegWindowRestore
 metadata:
   displayName: !extend i18n/display_name.yml
   description: !extend i18n/description.yml
 instances: Multiple
-loader: Legacy
+loader: InternalReact
+preset: Overlay
+lazy: true
 hidden: true

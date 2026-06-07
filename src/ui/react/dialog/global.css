@@ -20,6 +20,8 @@ body {
 .popup {
   width: 100%;
   height: 100%;
+
+  background-color: var(--slu-std-bg-color);
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   overflow-wrap: anywhere;
@@ -29,8 +31,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #fff9;
-    padding: 6px 6px 6px 10px;
+    background-color: var(--slu-std-bg-light-color);
+
+    padding: var(--spacing-xs) var(--spacing-s);
     font-weight: 600;
     app-region: drag;
 
@@ -41,18 +44,15 @@ body {
     .header-content {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: var(--spacing-2xs);
     }
 
     .header-close {
-      padding: 4px;
+      padding: var(--spacing-2xs);
       border-radius: 4px;
-      transition-property: background-color, color;
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
 
       &:hover {
-        background-color: var(--color-red-900);
+        background-color: var(--color-red-400);
         color: var(--color-gray-200);
       }
     }
@@ -60,7 +60,7 @@ body {
 
   .content {
     width: 100%;
-    padding: 12px 16px;
+    padding: var(--spacing-s) var(--spacing-m);
     overflow: auto;
   }
 
@@ -69,13 +69,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 10px;
-    gap: 8px;
+    padding: var(--spacing-s);
+    gap: var(--spacing-s);
   }
 
   .group {
     display: flex;
-    gap: 10px;
+    gap: var(--spacing-s);
   }
 
   .loader {
@@ -83,7 +83,7 @@ body {
     height: 3px;
     background-color: var(--color-gray-200);
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 4px;
 
     &::after {
       content: "";
@@ -92,27 +92,6 @@ body {
       height: 100%;
       background: linear-gradient(90deg, transparent, var(--system-accent-color), transparent);
       animation: loader-slide 1.5s ease-in-out infinite;
-    }
-  }
-
-  .button {
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 0 8px;
-
-    border-radius: 6px;
-    transition: background-color 0.2s ease-in-out;
-    font-size: 0.9rem;
-    line-height: 1.2em;
-
-    background-color: var(--slu-std-ui-color);
-    color: var(--color-gray-900);
-
-    &:hover {
-      background-color: var(--slu-std-ui-hover-color);
     }
   }
 }

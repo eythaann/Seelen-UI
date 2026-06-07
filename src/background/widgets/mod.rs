@@ -19,8 +19,8 @@ use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceId,
     state::{
-        context_menu::ContextMenu, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus,
-        WidgetTriggerPayload,
+        context_menu::ContextMenu, dialog::Dialog, Alignment, WidgetDebugInfo, WidgetInstanceMode,
+        WidgetStatus, WidgetTriggerPayload,
     },
     system_state::ZOrder,
     Rect,
@@ -144,6 +144,33 @@ pub fn trigger_context_menu(
         serde_json::to_value(forward_to.unwrap_or(owner.raw))?,
     );
     trigger_widget_inner(payload, Some(owner_hwnd))
+}
+
+/// Trigger a dialog from within a widget (the owner webview is used for event routing).
+#[tauri::command(async)]
+pub fn trigger_dialog(dialog: Dialog, webview: tauri::WebviewWindow) -> Result<()> {
+    let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    let owner_hwnd = webview.hwnd()?.0 as isize;
+
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialogg".into());
+    payload.instance_id = Some(dialog.identifier);
+
+    payload.add_custom_arg("dialog", serde_json::to_value(&dialog)?);
+    payload.add_custom_arg("owner", serde_json::to_value(&owner.raw)?);
+
+    trigger_widget_inner(payload, Some(owner_hwnd))
+}
+
+/// Trigger a dialog from backend code (no owner webview; button events are emitted globally).
+pub fn trigger_dialog_backend(dialog: Dialog) -> Result<()> {
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialogg".into());
+    payload.instance_id = Some(dialog.identifier);
+    payload.align_x = Some(Alignment::Center);
+    payload.align_y = Some(Alignment::Center);
+
+    payload.add_custom_arg("dialog", serde_json::to_value(&dialog)?);
+
+    trigger_widget_inner(payload, None)
 }
 
 #[tauri::command(async)]

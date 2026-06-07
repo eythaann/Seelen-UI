@@ -13,13 +13,13 @@ use seelen_core::{
     resource::{
         PluginId, Resource, ResourceId, ResourceKind, SluResource, SluResourceFile, WidgetId,
     },
-    state::{CssStyles, IconPack, SluPopupConfig, SluPopupContent, Wallpaper, WallpaperCollection},
+    state::{CssStyles, Dialog, DialogContent, IconPack, Wallpaper, WallpaperCollection},
 };
 use tauri::Listener;
 use uuid::Uuid;
 
 use crate::{
-    app::emit_to_webviews,
+    app::{emit_to_webviews, get_app_handle},
     cli::uri::icons_downloader::download_remote_icons,
     error::Result,
     get_tokio_handle, log_error,
@@ -27,7 +27,7 @@ use crate::{
     session::application::SessionManager,
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
-    widgets::popups::POPUPS_MANAGER,
+    widgets::trigger_dialog_backend,
 };
 
 pub const URI: &str = "seelen-ui.uri:";
@@ -43,8 +43,12 @@ pub fn process_uri(uri: &str) -> Result<()> {
 
         let file = SluResourceFile::load(&path)?;
         store_file_on_respective_user_folder(&file)?;
-        let id = POPUPS_MANAGER.lock().create(SluPopupConfig::default())?;
-        update_popup_to_added_resource(&id, &file.resource)?;
+        let dialog_id = Uuid::new_v4();
+        trigger_dialog_backend(Dialog {
+            identifier: dialog_id,
+            ..Default::default()
+        })?;
+        update_dialog_to_added_resource(dialog_id, &file.resource)?;
         return Ok(());
     }
 
@@ -68,11 +72,9 @@ pub fn process_uri(uri: &str) -> Result<()> {
         get_tokio_handle().spawn(async move {
             if let Err(err) = SessionManager::handle_auth_callback(code, state).await {
                 log::error!("Auth callback failed: {err:?}");
-                if let Ok(id) = POPUPS_MANAGER.lock().create(SluPopupConfig::default()) {
-                    log_error!(POPUPS_MANAGER
-                        .lock()
-                        .update(&id, auth_error_popup_config(&format!("{err:?}"))));
-                }
+                log_error!(trigger_dialog_backend(auth_error_dialog(&format!(
+                    "{err:?}"
+                ))));
             }
         });
         return Ok(());
@@ -132,49 +134,51 @@ fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<PathBu
 }
 
 async fn download_resource(url: &str) -> Result<()> {
-    let popup_id = {
-        POPUPS_MANAGER.lock().create(SluPopupConfig {
-            title: vec![SluPopupContent::Group {
-                items: vec![
-                    SluPopupContent::Icon {
-                        name: "TbCloudDownload".to_string(),
-                        styles: Some(
-                            CssStyles::new()
-                                .add("color", "var(--color-blue-800)")
-                                .add("height", "1.2rem"),
-                        ),
-                    },
-                    SluPopupContent::Text {
-                        value: t!("resource.downloading").to_string(),
-                        styles: None,
-                    },
-                ],
-                styles: Some(CssStyles::new().add("alignItems", "center")),
-            }],
-            content: vec![
-                SluPopupContent::Text {
-                    value: t!("resource.downloading_body").to_string(),
+    let dialog_id = Uuid::new_v4();
+
+    trigger_dialog_backend(Dialog {
+        identifier: dialog_id,
+        title: vec![DialogContent::Group {
+            items: vec![
+                DialogContent::Icon {
+                    name: "TbCloudDownload".to_string(),
+                    styles: Some(
+                        CssStyles::new()
+                            .add("color", "var(--color-blue-800)")
+                            .add("height", "1.2rem"),
+                    ),
+                },
+                DialogContent::Text {
+                    value: t!("resource.downloading").to_string(),
                     styles: None,
                 },
-                SluPopupContent::Loader {
-                    styles: Some(CssStyles::new().add("marginTop", "12px")),
-                },
             ],
-            ..Default::default()
-        })?
-    };
+            styles: Some(CssStyles::new().add("alignItems", "center")),
+        }],
+        content: vec![
+            DialogContent::Text {
+                value: t!("resource.downloading_body").to_string(),
+                styles: None,
+            },
+            DialogContent::Loader {
+                styles: Some(CssStyles::new().add("marginTop", "12px")),
+            },
+        ],
+        ..Default::default()
+    })?;
 
     let file = match _download_resource(url).await {
         Ok(file) => file,
         Err(err) => {
-            POPUPS_MANAGER
-                .lock()
-                .update(&popup_id, error_popup_config(format!("{err:?}").as_str()))?;
+            log_error!(trigger_dialog_backend(error_dialog(
+                dialog_id,
+                format!("{err:?}").as_str()
+            )));
             return Err(err);
         }
     };
 
-    update_popup_to_added_resource(&popup_id, &file.resource)?;
+    update_dialog_to_added_resource(dialog_id, &file.resource)?;
     Ok(())
 }
 
@@ -202,16 +206,13 @@ async fn _download_resource(url: &str) -> Result<SluResourceFile> {
     Ok(file)
 }
 
-fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Result<()> {
-    let mut pupups_manager = POPUPS_MANAGER.lock();
-
-    let config = resource_to_popup_config(resource)?;
-    pupups_manager.update(popup_id, config)?;
+fn update_dialog_to_added_resource(dialog_id: Uuid, resource: &Resource) -> Result<()> {
+    let config = resource_to_dialog(dialog_id, resource)?;
+    trigger_dialog_backend(config)?;
 
     let used_id = ResourceId::Remote(resource.id);
     let kind = resource.kind;
 
-    let popup_id = *popup_id;
     let display_name = {
         let state = FULL_STATE.load();
         resource
@@ -221,12 +222,8 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
             .to_owned()
     };
 
-    let webview = pupups_manager
-        .get_window_handle(&popup_id)
-        .ok_or("Popup not found")?;
     let event = format!("resource::{}::enable", resource.id);
-
-    let token = webview.once(event, move |_e| {
+    get_app_handle().once(event, move |_| {
         std::thread::spawn(move || {
             let plugin_events: Vec<PluginId> = match &kind {
                 ResourceKind::Plugin => vec![PluginId::from(used_id.clone())],
@@ -278,43 +275,13 @@ fn update_popup_to_added_resource(popup_id: &Uuid, resource: &Resource) -> Resul
             }
 
             log_error!(FULL_STATE.load().write_settings());
-            log_error!(POPUPS_MANAGER.lock().close_popup(&popup_id));
         });
     });
 
-    pupups_manager
-        .listeners
-        .entry(resource.id)
-        .or_default()
-        .push(token);
     Ok(())
 }
 
-fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
-    let mut popup = SluPopupConfig {
-        width: 480.0,
-        height: 260.0,
-        ..Default::default()
-    };
-
-    popup.title.push(SluPopupContent::Group {
-        items: vec![
-            SluPopupContent::Icon {
-                name: "GrCircleInformation".to_string(),
-                styles: Some(
-                    CssStyles::new()
-                        .add("color", "var(--color-blue-900)")
-                        .add("height", "1.2rem"),
-                ),
-            },
-            SluPopupContent::Text {
-                value: t!("resource.added").to_string(),
-                styles: None,
-            },
-        ],
-        styles: Some(CssStyles::new().add("alignItems", "center")),
-    });
-
+fn resource_to_dialog(id: Uuid, resource: &Resource) -> Result<Dialog> {
     let image_styles = CssStyles::new()
         .add("width", "90px")
         .add("minWidth", "90px")
@@ -326,12 +293,12 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
         .add("justifyContent", "center");
 
     let image = if let Some(url) = &resource.metadata.portrait {
-        SluPopupContent::Image {
+        DialogContent::Image {
             href: url.clone(),
             styles: Some(image_styles),
         }
     } else {
-        SluPopupContent::Icon {
+        DialogContent::Icon {
             name: "GrStatusUnknown".to_string(),
             styles: Some(image_styles),
         }
@@ -339,48 +306,69 @@ fn resource_to_popup_config(resource: &Resource) -> Result<SluPopupConfig> {
 
     let state = FULL_STATE.load();
     let locale = state.locale();
-    popup.content = vec![SluPopupContent::Group {
-        items: vec![
-            image,
-            SluPopupContent::Group {
-                items: vec![
-                    SluPopupContent::Text {
-                        value: resource.metadata.display_name.get(locale).to_owned(),
-                        styles: Some(
-                            CssStyles::new()
-                                .add("fontWeight", "bold")
-                                .add("fontSize", "2rem")
-                                .add("lineHeight", "1.2em"),
-                        ),
-                    },
-                    SluPopupContent::Text {
-                        value: resource.metadata.description.get(locale).to_owned(),
-                        styles: None,
-                    },
-                ],
-                styles: Some(CssStyles::new().add("flexDirection", "column")),
-            },
-        ],
-        styles: None,
-    }];
 
-    popup.footer = vec![SluPopupContent::Button {
-        inner: vec![SluPopupContent::Text {
-            value: t!("resource.enable").to_string(),
+    Ok(Dialog {
+        identifier: id,
+        width: 480.0,
+        height: 260.0,
+        title: vec![DialogContent::Group {
+            items: vec![
+                DialogContent::Icon {
+                    name: "GrCircleInformation".to_string(),
+                    styles: Some(
+                        CssStyles::new()
+                            .add("color", "var(--color-blue-900)")
+                            .add("height", "1.2rem"),
+                    ),
+                },
+                DialogContent::Text {
+                    value: t!("resource.added").to_string(),
+                    styles: None,
+                },
+            ],
+            styles: Some(CssStyles::new().add("alignItems", "center")),
+        }],
+        content: vec![DialogContent::Group {
+            items: vec![
+                image,
+                DialogContent::Group {
+                    items: vec![
+                        DialogContent::Text {
+                            value: resource.metadata.display_name.get(locale).to_owned(),
+                            styles: Some(
+                                CssStyles::new()
+                                    .add("fontWeight", "bold")
+                                    .add("fontSize", "2rem")
+                                    .add("lineHeight", "1.2em"),
+                            ),
+                        },
+                        DialogContent::Text {
+                            value: resource.metadata.description.get(locale).to_owned(),
+                            styles: None,
+                        },
+                    ],
+                    styles: Some(CssStyles::new().add("flexDirection", "column")),
+                },
+            ],
             styles: None,
         }],
-        on_click: format!("resource::{}::enable", resource.id),
-        styles: None,
-    }];
-
-    Ok(popup)
+        footer: vec![DialogContent::Button {
+            skin: Some("solid".to_string()),
+            inner: vec![DialogContent::Text {
+                value: t!("resource.enable").to_string(),
+                styles: None,
+            }],
+            on_click: format!("resource::{}::enable", resource.id),
+            styles: None,
+        }],
+    })
 }
 
-fn auth_error_popup_config(err: &str) -> SluPopupConfig {
-    SluPopupConfig {
-        title: vec![SluPopupContent::Group {
+fn auth_error_dialog(err: &str) -> Dialog {
+    Dialog {
+        title: vec![DialogContent::Group {
             items: vec![
-                SluPopupContent::Icon {
+                DialogContent::Icon {
                     name: "BiSolidError".to_string(),
                     styles: Some(
                         CssStyles::new()
@@ -388,7 +376,7 @@ fn auth_error_popup_config(err: &str) -> SluPopupConfig {
                             .add("height", "1.2rem"),
                     ),
                 },
-                SluPopupContent::Text {
+                DialogContent::Text {
                     value: t!("auth.login_failed_title").to_string(),
                     styles: None,
                 },
@@ -396,15 +384,15 @@ fn auth_error_popup_config(err: &str) -> SluPopupConfig {
             styles: Some(CssStyles::new().add("alignItems", "center")),
         }],
         content: vec![
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: t!("auth.login_failed_body").to_string(),
                 styles: None,
             },
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=".to_string(),
                 styles: Some(CssStyles::new().add("color", "var(--color-gray-400)")),
             },
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: format!("Error: {err}"),
                 styles: None,
             },
@@ -413,11 +401,12 @@ fn auth_error_popup_config(err: &str) -> SluPopupConfig {
     }
 }
 
-fn error_popup_config(err: &str) -> SluPopupConfig {
-    SluPopupConfig {
-        title: vec![SluPopupContent::Group {
+fn error_dialog(id: Uuid, err: &str) -> Dialog {
+    Dialog {
+        identifier: id,
+        title: vec![DialogContent::Group {
             items: vec![
-                SluPopupContent::Icon {
+                DialogContent::Icon {
                     name: "BiSolidError".to_string(),
                     styles: Some(
                         CssStyles::new()
@@ -425,7 +414,7 @@ fn error_popup_config(err: &str) -> SluPopupConfig {
                             .add("height", "1.2rem"),
                     ),
                 },
-                SluPopupContent::Text {
+                DialogContent::Text {
                     value: t!("resource.download_failed_title").to_string(),
                     styles: None,
                 },
@@ -433,15 +422,15 @@ fn error_popup_config(err: &str) -> SluPopupConfig {
             styles: Some(CssStyles::new().add("alignItems", "center")),
         }],
         content: vec![
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: t!("resource.download_failed_body").to_string(),
                 styles: None,
             },
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=".to_string(),
                 styles: Some(CssStyles::new().add("color", "var(--color-gray-400)")),
             },
-            SluPopupContent::Text {
+            DialogContent::Text {
                 value: format!("Error: {err}"),
                 styles: None,
             },

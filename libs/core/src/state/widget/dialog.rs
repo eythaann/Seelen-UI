@@ -5,17 +5,19 @@ use url::Url;
 #[derive(Debug, Clone, Serialize, Deserialize, TS)]
 #[serde(default, rename_all = "camelCase")]
 #[cfg_attr(feature = "gen-binds", ts(export))]
-pub struct SluPopupConfig {
+pub struct Dialog {
+    pub identifier: uuid::Uuid,
     pub width: f64,
     pub height: f64,
-    pub title: Vec<SluPopupContent>,
-    pub content: Vec<SluPopupContent>,
-    pub footer: Vec<SluPopupContent>,
+    pub title: Vec<DialogContent>,
+    pub content: Vec<DialogContent>,
+    pub footer: Vec<DialogContent>,
 }
 
-impl Default for SluPopupConfig {
+impl Default for Dialog {
     fn default() -> Self {
         Self {
+            identifier: uuid::Uuid::new_v4(),
             width: 400.0,
             height: 200.0,
             title: vec![],
@@ -31,7 +33,8 @@ impl Default for SluPopupConfig {
     rename_all = "camelCase",
     rename_all_fields = "camelCase"
 )]
-pub enum SluPopupContent {
+#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+pub enum DialogContent {
     Text {
         value: String,
         styles: Option<CssStyles>,
@@ -46,13 +49,14 @@ pub enum SluPopupContent {
         styles: Option<CssStyles>,
     },
     Button {
-        inner: Vec<SluPopupContent>,
+        skin: Option<String>,
+        inner: Vec<DialogContent>,
         styles: Option<CssStyles>,
         /// event name to be emitted on click ex: `test::clicked`
         on_click: String,
     },
     Group {
-        items: Vec<SluPopupContent>,
+        items: Vec<DialogContent>,
         styles: Option<CssStyles>,
     },
     Loader {
@@ -60,15 +64,15 @@ pub enum SluPopupContent {
     },
 }
 
-impl SluPopupContent {
+impl DialogContent {
     pub fn set_styles(&mut self, new_styles: CssStyles) {
         match self {
-            SluPopupContent::Text { styles, .. } => *styles = Some(new_styles),
-            SluPopupContent::Icon { styles, .. } => *styles = Some(new_styles),
-            SluPopupContent::Image { styles, .. } => *styles = Some(new_styles),
-            SluPopupContent::Button { styles, .. } => *styles = Some(new_styles),
-            SluPopupContent::Group { styles, .. } => *styles = Some(new_styles),
-            SluPopupContent::Loader { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Text { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Icon { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Image { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Button { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Group { styles, .. } => *styles = Some(new_styles),
+            DialogContent::Loader { styles, .. } => *styles = Some(new_styles),
         }
     }
 }

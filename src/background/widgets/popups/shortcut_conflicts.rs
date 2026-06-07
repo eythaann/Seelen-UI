@@ -1,49 +1,50 @@
-use seelen_core::state::{CssStyles, SluPopupConfig, SluPopupContent};
+use seelen_core::state::{CssStyles, Dialog, DialogContent};
+
 use tauri::Listener;
 
 use crate::{
+    app::get_app_handle,
     error::Result,
     log_error,
-    widgets::{popups::POPUPS_MANAGER, show_settings_at},
+    widgets::{show_settings_at, trigger_dialog_backend},
 };
 
 pub fn show_shortcut_conflict_popup() -> Result<()> {
-    let mut popup_manager = POPUPS_MANAGER.lock();
-    let popup_id = popup_manager.create(get_popup_config())?;
+    let dialog = get_dialog();
+    let event = "open_settings_shortcuts";
 
-    let handle = popup_manager.get_window_handle(&popup_id).unwrap().clone();
-
-    handle.once("open_settings_shortcuts", move |_| {
+    get_app_handle().once(event, move |_| {
         log_error!(show_settings_at("/shortcuts"));
-        log_error!(POPUPS_MANAGER.lock().close_popup(&popup_id));
     });
 
-    Ok(())
+    trigger_dialog_backend(dialog)
 }
 
-fn get_popup_config() -> SluPopupConfig {
-    SluPopupConfig {
+fn get_dialog() -> Dialog {
+    Dialog {
         width: 380.0,
         height: 160.0,
-        title: vec![SluPopupContent::Text {
+        title: vec![DialogContent::Text {
             value: t!("shortcut.conflicts.title").to_string(),
             styles: None,
         }],
-        content: vec![SluPopupContent::Text {
+        content: vec![DialogContent::Text {
             value: t!("shortcut.conflicts.body").to_string(),
             styles: Some(CssStyles::new().add("textAlign", "center")),
         }],
         footer: vec![
-            SluPopupContent::Button {
-                inner: vec![SluPopupContent::Text {
+            DialogContent::Button {
+                skin: Some("default".to_string()),
+                inner: vec![DialogContent::Text {
                     value: t!("shortcut.conflicts.dismiss").to_string(),
                     styles: None,
                 }],
                 on_click: "exit".to_string(),
                 styles: None,
             },
-            SluPopupContent::Button {
-                inner: vec![SluPopupContent::Text {
+            DialogContent::Button {
+                skin: Some("solid".to_string()),
+                inner: vec![DialogContent::Text {
                     value: t!("shortcut.conflicts.review").to_string(),
                     styles: None,
                 }],
@@ -51,5 +52,6 @@ fn get_popup_config() -> SluPopupConfig {
                 styles: None,
             },
         ],
+        ..Default::default()
     }
 }

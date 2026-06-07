@@ -395,7 +395,7 @@ type ExtendedGlobalThis = typeof globalThis & {
 };
 
 export const SeelenSettingsWidgetId: WidgetId = "@seelen/settings" as WidgetId;
-export const SeelenPopupWidgetId: WidgetId = "@seelen/popup" as WidgetId;
+export const SeelenPopupWidgetId: WidgetId = "@seelen/dialog" as WidgetId;
 export const SeelenWegWidgetId: WidgetId = "@seelen/weg" as WidgetId;
 export const SeelenToolbarWidgetId: WidgetId = "@seelen/fancy-toolbar" as WidgetId;
 export const SeelenWindowManagerWidgetId: WidgetId = "@seelen/window-manager" as WidgetId;

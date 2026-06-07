@@ -664,7 +664,7 @@ These shortcuts are available even when the widget is not open:
 
 ## Popup Widget
 
-ID: `@seelen/popup`\
+ID: `@seelen/dialog`\
 Preset: `Popup`\
 Hidden: `true` (not shown in Settings navigation)\
 Instances: `Multiple`

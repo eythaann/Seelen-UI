@@ -83,6 +83,9 @@ devtools:
   load: Load
   settings_file: Settings File
   shared_components: SLU Standard Components
+  simulate_dialog:
+    label: Simulate Dialog
+    trigger: Trigger
   simulate_perm:
     label: Simulate Widget Permission Request
     result_allowed: ✓ Permission granted

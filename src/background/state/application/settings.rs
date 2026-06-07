@@ -2,7 +2,7 @@ use std::path::Path;
 
 use seelen_core::{
     handlers::SeelenEvent,
-    state::{CssStyles, Settings, SluPopupConfig, SluPopupContent},
+    state::{CssStyles, Dialog, DialogContent, Settings},
 };
 
 use crate::{
@@ -11,7 +11,7 @@ use crate::{
     resources::ResourceManager,
     utils::constants::SEELEN_COMMON,
     widgets::{
-        manager::WIDGET_MANAGER, popups::POPUPS_MANAGER, window_manager::state_v2::WM_STATE,
+        manager::WIDGET_MANAGER, trigger_dialog_backend, window_manager::state_v2::WM_STATE,
     },
 };
 
@@ -135,11 +135,10 @@ impl AppSettings {
 fn show_corrupted_state_to_user(path: &Path) {
     let path = path.to_path_buf();
     std::thread::spawn(move || {
-        let mut manager = POPUPS_MANAGER.lock();
-        let config = SluPopupConfig {
-            title: vec![SluPopupContent::Group {
+        let dialog = Dialog {
+            title: vec![DialogContent::Group {
                 items: vec![
-                    SluPopupContent::Icon {
+                    DialogContent::Icon {
                         name: "BiSolidError".to_string(),
                         styles: Some(
                             CssStyles::new()
@@ -147,7 +146,7 @@ fn show_corrupted_state_to_user(path: &Path) {
                                 .add("height", "1.2rem"),
                         ),
                     },
-                    SluPopupContent::Text {
+                    DialogContent::Text {
                         value: t!("runtime.corrupted_data").to_string(),
                         styles: None,
                     },
@@ -155,11 +154,11 @@ fn show_corrupted_state_to_user(path: &Path) {
                 styles: Some(CssStyles::new().add("alignItems", "center")),
             }],
             content: vec![
-                SluPopupContent::Text {
+                DialogContent::Text {
                     value: t!("runtime.corrupted_file").to_string(),
                     styles: None,
                 },
-                SluPopupContent::Text {
+                DialogContent::Text {
                     value: format!("{}: {:?}", t!("runtime.corrupted_file_path"), path),
                     styles: None,
                 },
@@ -167,6 +166,6 @@ fn show_corrupted_state_to_user(path: &Path) {
             ..Default::default()
         };
 
-        manager.create(config).log_error();
+        trigger_dialog_backend(dialog).log_error();
     });
 }

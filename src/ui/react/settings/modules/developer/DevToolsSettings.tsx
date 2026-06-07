@@ -1,6 +1,5 @@
-import { SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { path } from "@tauri-apps/api";
-import { invoke } from "@tauri-apps/api/core";
 import { Button, Input, Select } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { resolveDataPath } from "../shared/config/infra.ts";
 
 import { LoadCustomConfigFile, simulatePerm } from "./application.ts";
+import { createSampleDialog } from "./simulateDialogConfig.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 
@@ -42,6 +42,10 @@ export function DevToolsSettings() {
     }
   }
 
+  async function onSimulateDialog() {
+    await invoke(SeelenCommand.TriggerDialog, { dialog: createSampleDialog() });
+  }
+
   return (
     <>
       <SettingsGroup>
@@ -65,6 +69,13 @@ export function DevToolsSettings() {
         <SettingsOption>
           <span>{t("devtools.custom_config_file")}:</span>
           <Button onClick={LoadCustomConfigFile}>{t("devtools.load")}</Button>
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <span>{t("devtools.simulate_dialog.label")}</span>
+          <Button onClick={onSimulateDialog}>{t("devtools.simulate_dialog.trigger")}</Button>
         </SettingsOption>
       </SettingsGroup>
 

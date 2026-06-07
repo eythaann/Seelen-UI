@@ -230,7 +230,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::virtual_desktops::handlers::*;
 
     use crate::widgets::permissions::*;
-    use crate::widgets::popups::handlers::*;
     use crate::widgets::wallpaper_manager::handlers::*;
     use crate::widgets::weg::handler::*;
     use crate::widgets::window_manager::handler::*;

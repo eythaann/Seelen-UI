@@ -82,8 +82,6 @@ slu_events_declaration! {
     WMForceRetiling as "wm::force-retiling",
     WMTreeChanged(TwmGlobalRuntimeTree) as "wm::tree-changed",
 
-    PopupContentChanged(SluPopupConfig) as "popup-content-changed",
-
     StateSettingsChanged(Settings) as "settings-changed",
     StateThemesChanged(Vec<Theme>) as "themes",
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",

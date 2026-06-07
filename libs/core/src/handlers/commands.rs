@@ -186,6 +186,7 @@ slu_commands_declaration! {
     DebugOpenDevTools = debug_open_dev_tools(label: String),
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
     TriggerContextMenu = trigger_context_menu(menu: ContextMenu, forward_to: Option<String>),
+    TriggerDialog = trigger_dialog(dialog: Dialog),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),
@@ -241,12 +242,6 @@ slu_commands_declaration! {
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
     WmSetStackActiveWindow = wm_set_stack_active_window(hwnd: isize),
-
-    // Slu Popups
-    CreatePopup = create_popup(config: SluPopupConfig) -> uuid::Uuid,
-    UpdatePopup = update_popup(instance_id: uuid::Uuid, config: SluPopupConfig),
-    ClosePopup = close_popup(instance_id: uuid::Uuid),
-    GetPopupConfig = get_popup_config(instance_id: uuid::Uuid) -> SluPopupConfig,
 
     // Network
     WlanScan = wlan_scan(),

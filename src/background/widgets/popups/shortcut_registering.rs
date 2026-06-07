@@ -1,14 +1,15 @@
 use std::sync::LazyLock;
 
 use parking_lot::Mutex;
-use seelen_core::state::{CssStyles, SluPopupConfig, SluPopupContent};
+use seelen_core::state::{CssStyles, Dialog, DialogContent};
 use slu_ipc::messages::SvcAction;
-use tauri::{Emitter, Listener, WindowEvent};
 use uuid::Uuid;
+
+use tauri::{Emitter, Listener};
 
 use crate::{
     app::get_app_handle, cli::ServicePipe, error::Result, log_error,
-    widgets::popups::POPUPS_MANAGER,
+    widgets::trigger_dialog_backend,
 };
 
 pub static REG_SHORTCUT_DATA: LazyLock<Mutex<RegShortcutData>> =
@@ -16,7 +17,7 @@ pub static REG_SHORTCUT_DATA: LazyLock<Mutex<RegShortcutData>> =
 
 #[derive(Default)]
 pub struct RegShortcutData {
-    pub popup_id: Uuid,
+    pub dialog_id: Uuid,
     pub shortcut: Option<Vec<String>>,
     pub response_view_label: Option<String>,
     pub response_event: Option<String>,
@@ -30,10 +31,6 @@ impl RegShortcutData {
     }
 
     fn cancel_shortcut_registering(&mut self) {
-        if !self.popup_id.is_nil() {
-            // could fail if was already closed
-            let _ = POPUPS_MANAGER.lock().close_popup(&self.popup_id);
-        }
         *self = Default::default();
     }
 }
@@ -64,36 +61,33 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
         }
     }
 
-    let popup_config = get_popup_config(&shortcut);
+    let is_first_trigger = reg.dialog_id.is_nil();
+    if is_first_trigger {
+        reg.dialog_id = Uuid::new_v4();
 
-    if !reg.popup_id.is_nil() {
-        POPUPS_MANAGER.lock().update(&reg.popup_id, popup_config)?;
-        return Ok(());
+        // listen once for each button action; re-registers after cancel/accept
+        let dialog_id = reg.dialog_id;
+        get_app_handle().once("user_shortcut_accepted", move |_| {
+            log_error!(ServicePipe::request(SvcAction::StopShortcutRegistration));
+            let mut reg = REG_SHORTCUT_DATA.lock();
+            reg.emit_state_to_requester();
+            reg.cancel_shortcut_registering();
+        });
+        get_app_handle().once("shortcut_register_cancelled", move |_| {
+            log_error!(ServicePipe::request(SvcAction::StopShortcutRegistration));
+            let mut reg = REG_SHORTCUT_DATA.lock();
+            if reg.dialog_id == dialog_id {
+                reg.cancel_shortcut_registering();
+            }
+        });
     }
 
-    let mut popup_manager = POPUPS_MANAGER.lock();
-    reg.popup_id = popup_manager.create(popup_config)?;
-
-    let handle = popup_manager.get_window_handle(&reg.popup_id).unwrap();
-
-    // stop on close of the popup
-    handle.on_window_event(|e| {
-        if let WindowEvent::Destroyed = e {
-            log_error!(ServicePipe::request(SvcAction::StopShortcutRegistration));
-        }
-    });
-
-    handle.once("user_shortcut_accepted", |_| {
-        let mut reg = REG_SHORTCUT_DATA.lock();
-        reg.emit_state_to_requester();
-        reg.cancel_shortcut_registering();
-    });
-    Ok(())
+    trigger_dialog_backend(get_dialog(reg.dialog_id, &shortcut))
 }
 
-fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
+fn get_dialog(id: Uuid, shortcut: &[String]) -> Dialog {
     let items = if shortcut.is_empty() {
-        vec![SluPopupContent::Text {
+        vec![DialogContent::Text {
             value: t!("shortcut.register.placeholder").to_string(),
             styles: Some(
                 CssStyles::new()
@@ -105,7 +99,7 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
     } else {
         shortcut
             .iter()
-            .map(|s| SluPopupContent::Text {
+            .map(|s| DialogContent::Text {
                 value: s.to_string(),
                 styles: Some(
                     CssStyles::new()
@@ -117,7 +111,7 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
             .collect()
     };
 
-    let keys_box = SluPopupContent::Group {
+    let keys_box = DialogContent::Group {
         items,
         styles: Some(
             CssStyles::new()
@@ -136,16 +130,18 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
         Vec::new()
     } else {
         vec![
-            SluPopupContent::Button {
-                inner: vec![SluPopupContent::Text {
+            DialogContent::Button {
+                skin: Some("default".to_string()),
+                inner: vec![DialogContent::Text {
                     value: t!("cancel").to_string(),
                     styles: None,
                 }],
-                on_click: "exit".to_string(),
+                on_click: "shortcut_register_cancelled".to_string(),
                 styles: None,
             },
-            SluPopupContent::Button {
-                inner: vec![SluPopupContent::Text {
+            DialogContent::Button {
+                skin: Some("solid".to_string()),
+                inner: vec![DialogContent::Text {
                     value: t!("done").to_string(),
                     styles: None,
                 }],
@@ -155,10 +151,11 @@ fn get_popup_config(shortcut: &[String]) -> SluPopupConfig {
         ]
     };
 
-    SluPopupConfig {
+    Dialog {
+        identifier: id,
         width: 360.0,
         height: 180.0,
-        title: vec![SluPopupContent::Text {
+        title: vec![DialogContent::Text {
             value: t!("shortcut.register.title").to_string(),
             styles: None,
         }],
