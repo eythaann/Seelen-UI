@@ -65,19 +65,14 @@ $effect.root(() => {
 
     Widget.self.window.setPosition(new PhysicalPosition(Math.round(x), Math.round(y)));
   });
-});
 
-export function setShowing(show: boolean) {
-  if (showing != show) {
-    Widget.self.window.setIgnoreCursorEvents(!show);
-
-    if (show) {
+  $effect(() => {
+    Widget.self.window.setIgnoreCursorEvents(!showing);
+    if (showing) {
       invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Top });
     }
-  }
-
-  showing = show;
-}
+  });
+});
 
 export const RendererState = {
   get all() {
@@ -88,5 +83,8 @@ export const RendererState = {
   },
   get showing() {
     return showing;
+  },
+  set showing(value: boolean) {
+    showing = value;
   },
 };

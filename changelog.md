@@ -26,6 +26,7 @@
 - task switcher not exiting on escape key.
 - inconsistent windows order on dock.
 - errors on elevated windows.
+- fix invisible hitbox caused by flyouts at start.
 
 ## [2.6.10]
 

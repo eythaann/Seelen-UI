@@ -3,7 +3,7 @@
   import { NotificationsMode } from "@seelen-ui/lib/types";
 
   import { state as gState } from "./state/mod.svelte";
-  import { RendererState, setShowing } from "./state/placement.svelte";
+  import { RendererState } from "./state/placement.svelte";
   import { ConfigState } from "./state/config.svelte";
   import { debounce } from "lodash";
   import Notification from "../notifications/components/Notification.svelte";
@@ -74,7 +74,7 @@
 
   const hideWithDelay = $derived(
     debounce(() => {
-      setShowing(false);
+      RendererState.showing = false;
     }, ConfigState.config.timeToShow * 1000),
   );
 
@@ -139,7 +139,7 @@
     }
 
     if (somethingChanged) {
-      setShowing(true);
+      RendererState.showing = true;
       hideWithDelay();
     }
 
@@ -149,7 +149,7 @@
       (lastChanged === "notification" && !notification)
     ) {
       hideWithDelay.cancel();
-      setShowing(false);
+      RendererState.showing = false;
       lastChanged = null;
     }
 
