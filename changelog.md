@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.7.0-dev]
+## [2.7.0]
 
 ### feature
 
