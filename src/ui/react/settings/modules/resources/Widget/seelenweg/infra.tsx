@@ -4,33 +4,22 @@ import { $is_touch_primary } from "libs/ui/react/utils/signals";
 import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { OptionsFromEnum } from "../shared/utils/app.ts";
+import { OptionsFromEnum } from "../../../shared/utils/app.ts";
 import { getWegConfig, patchWegConfig } from "./application.ts";
+import { getDevTools } from "../../../developer/application.ts";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 import Compact from "antd/es/space/Compact";
 
 export const SeelenWegSettings = () => {
   const settings = getWegConfig();
   const isTouchPrimary = $is_touch_primary.value;
+  const devTools = getDevTools();
 
   const { t } = useTranslation();
 
-  const onToggleEnable = (value: boolean) => {
-    patchWegConfig({ enabled: value });
-  };
-
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <div>
-            <b>{t("weg.enable")}</b>
-          </div>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} />
-        </SettingsOption>
-      </SettingsGroup>
-
       <SettingsGroup>
         <SettingsSubGroup label={t("weg.label")}>
           <SettingsOption>
@@ -229,6 +218,18 @@ export const SeelenWegSettings = () => {
           }
         />
       </SettingsGroup>
+
+      {devTools && (
+        <SettingsGroup>
+          <SettingsOption>
+            <b>{t("weg.show_end_task")}</b>
+            <Switch
+              checked={settings.showEndTask}
+              onChange={(value) => patchWegConfig({ showEndTask: value })}
+            />
+          </SettingsOption>
+        </SettingsGroup>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { settings } from "../../state/mod";
+import { settings } from "../../../../state/mod";
 import type {
   SeelenWallSettings,
   WallpaperCollection,

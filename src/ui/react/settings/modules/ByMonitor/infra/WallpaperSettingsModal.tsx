@@ -5,8 +5,11 @@ import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { $virtual_desktops } from "../../shared/signals";
-import { setMonitorWallpaperCollection, setWorkspaceWallpaperCollection } from "../../Wall/application.ts";
-import { WallpaperCollectionSelector } from "../../Wall/WallpaperCollectionSelector.tsx";
+import {
+  setMonitorWallpaperCollection,
+  setWorkspaceWallpaperCollection,
+} from "../../resources/Widget/Wall/application.ts";
+import { WallpaperCollectionSelector } from "../../resources/Widget/Wall/WallpaperCollectionSelector.tsx";
 import { settings } from "../../../state/mod.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 

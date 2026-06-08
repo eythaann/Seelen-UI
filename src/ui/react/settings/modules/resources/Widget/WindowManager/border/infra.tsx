@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { getBorderConfig, setBorderEnabled, setBorderOffset, setBorderWidth } from "./application.ts";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../../components/SettingsBox/index.tsx";
 
 export const BorderSettings = () => {
   const borderConfig = getBorderConfig();

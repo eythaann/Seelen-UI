@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { getWmConfig, setWmWorkspaceGap, setWmWorkspaceMargin, setWmWorkspacePadding } from "../../application.ts";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../../../components/SettingsBox/index.tsx";
 
 export const GlobalPaddings = () => {
   const wmConfig = getWmConfig();

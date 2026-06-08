@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { getWmConfig, patchWmConfig, setWmDragBehavior, setWmResizeDelta } from "../../application.ts";
 
-import { SettingsGroup, SettingsOption } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption } from "../../../../../../components/SettingsBox/index.tsx";
 import { WmDragBehavior } from "@seelen-ui/lib/types";
 
 export const OthersConfigs = () => {

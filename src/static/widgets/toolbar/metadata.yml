@@ -2,6 +2,7 @@ id: "@seelen/fancy-toolbar"
 icon: BiSolidDockTop
 metadata:
   displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
 instances: ReplicaByMonitor
 loader: InternalReact
 preset: Overlay

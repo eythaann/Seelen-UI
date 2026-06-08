@@ -9,11 +9,9 @@ import { DevToolsSettings } from "./DevToolsSettings.tsx";
 import { SystemIconPackView } from "./CachedIcons.tsx";
 import { SharedComponents } from "./SharedComponents.tsx";
 import { WidgetsDebug } from "./WidgetsDebug.tsx";
-import { getWegConfig, patchWegConfig } from "../seelenweg/application.ts";
 
 export function DeveloperTools() {
   const devTools = getDevTools();
-  const showEndTask = getWegConfig().showEndTask;
   const unstableOptimizations = getUnstableOptimizations();
 
   const { t } = useTranslation();
@@ -33,16 +31,6 @@ export function DeveloperTools() {
           description={t("devtools.unstable_optimizations_description")}
           action={<Switch value={unstableOptimizations} onChange={setUnstableOptimizations} />}
         />
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("weg.show_end_task")}</b>
-          <Switch
-            checked={showEndTask}
-            onChange={(value) => patchWegConfig({ showEndTask: value })}
-          />
-        </SettingsOption>
       </SettingsGroup>
 
       {devTools && (

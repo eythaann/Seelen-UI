@@ -1,6 +1,6 @@
 import { InputNumber, Select, Switch } from "antd";
 import { useTranslation } from "react-i18next";
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../../../components/SettingsBox/index.tsx";
 
 import { getWmConfig, setWmAnimations } from "../../application.ts";
 

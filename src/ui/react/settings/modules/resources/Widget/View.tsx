@@ -23,18 +23,21 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../compon
 import { ResourceDescription } from "../ResourceCard.tsx";
 import { RenderBySettingsDeclaration } from "./ConfigRenderer.tsx";
 import { WidgetInstanceSelector } from "./InstanceSelector.tsx";
-import { SeelenWegSettings } from "../../seelenweg/infra.tsx";
-import { WindowManagerSettings } from "../../WindowManager/main/infra/index.tsx";
-import { FancyToolbarSettings } from "../../fancyToolbar/infra.tsx";
-import { WallSettings } from "../../Wall/infra.tsx";
+import { SeelenWegSettings } from "./seelenweg/infra.tsx";
+import { FancyToolbarSettings } from "./fancyToolbar/infra.tsx";
+import { WallSettings } from "./Wall/infra.tsx";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
+import { Note } from "../../../components/Note/index.tsx";
+import { WindowManagerSettings } from "./WindowManager/main/infra/index.tsx";
 
 export function WidgetConfiguration({
   widgetId,
   monitorId,
+  children,
 }: {
   widgetId: WidgetId;
   monitorId?: string;
+  children?: React.ReactNode;
 }) {
   const [selectedInstance, setSelectedInstance] = useState<string | null>(null);
 
@@ -85,9 +88,9 @@ export function WidgetConfiguration({
 
   return (
     <>
-      <SettingsGroup>
+      <Note>
         <ResourceDescription text={widget.metadata.description} />
-      </SettingsGroup>
+      </Note>
 
       {widgetPlugins.length > 0 && (
         <SettingsGroup>
@@ -150,6 +153,8 @@ export function WidgetConfiguration({
         isByMonitor={!!monitorId}
       />
 
+      {children}
+
       {areDevToolsEnabled && (
         <SettingsGroup>
           <SettingsSubGroup label={<b>Raw Config</b>}>
@@ -171,19 +176,35 @@ export function WidgetView() {
   const widgetId = searchParams.get("id") as WidgetId;
 
   if (widgetId === "@seelen/weg") {
-    return <SeelenWegSettings />;
+    return (
+      <WidgetConfiguration widgetId={widgetId}>
+        <SeelenWegSettings />
+      </WidgetConfiguration>
+    );
   }
 
   if (widgetId === "@seelen/window-manager") {
-    return <WindowManagerSettings />;
+    return (
+      <WidgetConfiguration widgetId={widgetId}>
+        <WindowManagerSettings />
+      </WidgetConfiguration>
+    );
   }
 
   if (widgetId === "@seelen/fancy-toolbar") {
-    return <FancyToolbarSettings />;
+    return (
+      <WidgetConfiguration widgetId={widgetId}>
+        <FancyToolbarSettings />
+      </WidgetConfiguration>
+    );
   }
 
   if (widgetId === "@seelen/wallpaper-manager") {
-    return <WallSettings />;
+    return (
+      <WidgetConfiguration widgetId={widgetId}>
+        <WallSettings />
+      </WidgetConfiguration>
+    );
   }
 
   return <WidgetConfiguration widgetId={widgetId} />;

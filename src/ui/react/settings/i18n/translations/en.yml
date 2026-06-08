@@ -302,9 +302,9 @@ wall:
   create: Create
   create_collection: Create Collection
   default_collection: Default wallpaper or collection
+  default_collection_description: Applied to all monitors and workspaces that do not have a specific override set.
   delete_collection: Delete Collection
   edit_collection: Edit Collection
-  enable: Enable Wallpaper Manager
   extend: Extend primary
   fit:
     contain: Contain
@@ -326,6 +326,7 @@ wall:
   overlayColor: Overlay Color
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: Per monitor
+  per_monitor_config: Per-Monitor Configuration
   playback: Playback speed
   position:
     bottom: Bottom
@@ -353,7 +354,6 @@ weg:
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
-  enable: Enable Dock/Taskbar
   filtering: Item Filtering
   gap: Gap
   hide_mode:
@@ -423,7 +423,6 @@ wm:
   drag_behavior_options:
     sort: Sort (reorder windows while dragging)
     swap: Swap (swap windows on drag end)
-  enable: Enable Tiling Window Manager
   layout: Layout
   resize_delta: Resize Delta (%)
   space_between_containers: Space Between Containers

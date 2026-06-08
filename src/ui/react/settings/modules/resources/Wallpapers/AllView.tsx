@@ -14,8 +14,8 @@ import {
   deleteWallpaperCollection,
   getWallpaperCollections,
   updateWallpaperCollection,
-} from "../../Wall/application.ts";
-import { WallpaperList } from "../../Wall/WallpaperList.tsx";
+} from "../Widget/Wall/application.ts";
+import { WallpaperList } from "../Widget/Wall/WallpaperList.tsx";
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";

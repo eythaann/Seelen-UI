@@ -4,6 +4,10 @@
   border-radius: 0 4px 4px 0;
   font-size: 0.8rem;
   line-height: 1.5;
+
+  border-left: 3px solid var(--color-gray-400);
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-800);
 }
 
 .info {

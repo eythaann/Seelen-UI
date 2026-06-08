@@ -1,4 +1,4 @@
-import { settings } from "../../state/mod";
+import { settings } from "../../../../state/mod";
 import type { FancyToolbarSettings, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 
 /**
@@ -27,13 +27,6 @@ export function patchToolbarConfig(patch: Partial<FancyToolbarSettings>) {
  */
 export function getToolbarConfig(): FancyToolbarSettings {
   return settings.value.byWidget["@seelen/fancy-toolbar"];
-}
-
-/**
- * Sets the enabled state
- */
-export function setToolbarEnabled(enabled: boolean) {
-  patchToolbarConfig({ enabled });
 }
 
 /**

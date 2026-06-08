@@ -8,9 +8,9 @@ import { Button, Modal } from "antd";
 import { Link } from "react-router";
 
 import { getWallpaperCollections, updateWallpaperCollection } from "./application.ts";
-import { wallpapers } from "../../state/resources.ts";
+import { wallpapers } from "../../../../state/resources.ts";
 
-import { ResourcePortrait } from "../resources/ResourceCard.tsx";
+import { ResourcePortrait } from "../../ResourceCard.tsx";
 import cs from "./index.module.css";
 
 interface Props {

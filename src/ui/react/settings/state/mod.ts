@@ -5,6 +5,8 @@ import { monitors } from "./system";
 import { cloneDeep } from "lodash";
 import i18n from "../i18n";
 
+export const DEFAULT_SETTINGS = await invoke(SeelenCommand.StateGetDefaultSettings);
+
 export const settings = signal(await invoke(SeelenCommand.StateGetSettings, { path: null }));
 const initialSettings = signal(JSON.stringify(settings.value));
 subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {

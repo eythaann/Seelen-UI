@@ -1,15 +1,14 @@
 import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { $is_touch_primary } from "libs/ui/react/utils/signals";
-import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
+import { Button, InputNumber, Select, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { OptionsFromEnum } from "../shared/utils/app.ts";
+import { OptionsFromEnum } from "../../../shared/utils/app.ts";
 import {
   getToolbarConfig,
   setToolbarDelayToHide,
   setToolbarDelayToShow,
-  setToolbarEnabled,
   setToolbarHideMode,
   setToolbarItemSize,
   setToolbarMargin,
@@ -17,7 +16,7 @@ import {
   setToolbarPosition,
 } from "./application.ts";
 
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 import Compact from "antd/es/space/Compact";
 
 export function FancyToolbarSettings() {
@@ -28,19 +27,8 @@ export function FancyToolbarSettings() {
 
   const { t } = useTranslation();
 
-  const onToggleEnable = (value: boolean) => {
-    setToolbarEnabled(value);
-  };
-
   return (
     <>
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t("toolbar.enable")}</b>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} />
-        </SettingsOption>
-      </SettingsGroup>
-
       <SettingsGroup>
         <SettingsSubGroup label={t("toolbar.label")}>
           <SettingsOption

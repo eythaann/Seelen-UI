@@ -1,4 +1,4 @@
-import { settings } from "../../../state/mod";
+import { DEFAULT_SETTINGS, settings } from "../../../state/mod";
 import type { WidgetId } from "@seelen-ui/lib/types";
 import { widgets } from "../../../state/resources";
 
@@ -105,16 +105,19 @@ export function removeWidgetInstance(widgetId: WidgetId, instanceId: string) {
  * Resets all user-set config values for a widget, preserving only `enabled` and `$instances`.
  */
 export function resetWidgetConfig(widgetId: WidgetId) {
-  const currentWidget = settings.value.byWidget[widgetId];
-  if (!currentWidget) {
+  const config = settings.value.byWidget[widgetId];
+  if (!config) {
     return;
   }
+
   settings.value = {
     ...settings.value,
     byWidget: {
       ...settings.value.byWidget,
       [widgetId]: {
-        enabled: currentWidget.enabled,
+        ...(DEFAULT_SETTINGS.byWidget[widgetId] ?? {}),
+        // Keep enabled state
+        enabled: config.enabled,
       },
     },
   };

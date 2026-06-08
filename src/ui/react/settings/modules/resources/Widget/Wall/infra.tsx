@@ -8,11 +8,11 @@ import { getWallConfig, patchWallConfig, setDefaultWallpaperCollection } from ".
 import { WallpaperCollectionSelector } from "./WallpaperCollectionSelector.tsx";
 
 import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 
 export function WallSettings() {
   const wall = getWallConfig();
-  const { enabled, interval } = wall;
+  const { interval } = wall;
 
   const [time, setTime] = useState({
     hours: Math.floor(interval / 3600),
@@ -28,10 +28,6 @@ export function WallSettings() {
     });
   }, [interval]);
 
-  function onChangeEnabled(enabled: boolean) {
-    patchWallConfig({ enabled });
-  }
-
   const updateTime = (key: "hours" | "minutes", value: number | null) => {
     if (value === null) return;
     const newTime = { ...time, [key]: Math.floor(value) };
@@ -44,13 +40,6 @@ export function WallSettings() {
     <>
       <SettingsGroup>
         <SettingsOption
-          label={<b>{t("wall.enable")}</b>}
-          action={<Switch value={enabled} onChange={onChangeEnabled} />}
-        />
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption
           label={t("wall.wallpapers_and_collections")}
           action={
             <Link to="/resources/wallpaper">
@@ -61,7 +50,21 @@ export function WallSettings() {
           }
         />
         <SettingsOption
+          label={t("wall.per_monitor_config")}
+          action={
+            <Link to="/monitors">
+              <Button type="primary">
+                <Icon iconName="IoArrowForward" />
+              </Button>
+            </Link>
+          }
+        />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
           label={t("wall.default_collection")}
+          description={t("wall.default_collection_description")}
           action={
             <WallpaperCollectionSelector
               style={{ width: 200 }}
