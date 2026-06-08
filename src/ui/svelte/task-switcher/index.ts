@@ -8,7 +8,7 @@ const root = document.getElementById("root")!;
 
 const widget = Widget.getCurrent();
 await widget.init();
-await widget.window.setResizable(false);
+await widget.window.setFocusable(true);
 
 mount(App, {
   target: root,

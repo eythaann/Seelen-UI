@@ -76,38 +76,50 @@ export const globalState = new State();
 
 $effect.root(() => {
   $effect(() => {
-    if (showing) {
-      widget.show().then(() => widget.focus());
-    } else {
-      widget.hide();
-    }
-  });
-});
-
-// Hide when focus leaves the widget; dispatch synthetic Alt keyup if Alt was released.
-// Uses a cancellation flag to discard responses from stale async checks.
-$effect.root(() => {
-  $effect(() => {
-    let isFocused = focusedWinId.value === widget.windowId;
     let cancelled = false;
 
-    if (isFocused) {
-      invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
-        if (!cancelled && !isPressing) {
-          window.dispatchEvent(new KeyboardEvent("keyup", { key: "Alt" }));
+    if (showing) {
+      widget.show().then(async () => {
+        if (cancelled) {
+          return;
+        }
+
+        // double check for fast keyboard trigger
+        let isPressing = await invoke(SeelenCommand.GetKeyState, { key: "Alt" });
+        if (isPressing) {
+          await widget.focus();
+        } else {
+          onAltKeyUp();
         }
       });
     } else {
-      showing = false;
+      widget.hide();
     }
 
     return () => {
       cancelled = true;
     };
   });
+
+  // Hide when focus leaves the widget
+  $effect(() => {
+    if (focusedWinId.value !== widget.windowId) {
+      showing = false;
+    }
+  });
 });
 
 // +++++++++++++++++++++++ Triggering +++++++++++++++++++++++
+
+function onAltKeyUp() {
+  if (showing && selectedWindow && autoConfirm) {
+    showing = false;
+    invoke(SeelenCommand.WegToggleWindowState, {
+      hwnd: selectedWindow,
+      wasFocused: false,
+    });
+  }
+}
 
 widget.onTrigger((payload) => {
   const direction: string = (payload.customArgs?.direction as string) || "next";
@@ -120,12 +132,6 @@ widget.onTrigger((payload) => {
   // Use the currently selected window when already showing, otherwise start from focused
   const currentHwnd = showing ? selectedWindow : focusedWinId.value;
 
-  // Only capture autoConfirm on the first trigger (when switcher was hidden)
-  if (!showing) {
-    autoConfirm = autoConfirmValue;
-  }
-  showing = true;
-
   let index = windows.value.findIndex((w) => w.hwnd === currentHwnd);
   if (direction === "next") {
     if (index === -1) index = windows.value.length - 1;
@@ -134,6 +140,12 @@ widget.onTrigger((payload) => {
     if (index === -1) index = 0;
     selectedWindow = windows.value[(index - 1 + windows.value.length) % windows.value.length]?.hwnd ?? null;
   }
+
+  // Only capture autoConfirm on the first trigger (when switcher was hidden)
+  if (!showing) {
+    autoConfirm = autoConfirmValue;
+  }
+  showing = true;
 });
 
 window.onkeydown = (e) => {
@@ -143,12 +155,8 @@ window.onkeydown = (e) => {
 };
 
 window.onkeyup = (e) => {
-  if (e.key === "Alt" && showing && selectedWindow && autoConfirm) {
-    showing = false;
-    invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: selectedWindow,
-      wasFocused: false,
-    });
+  if (e.key === "Alt") {
+    onAltKeyUp();
   }
 };
 

@@ -160,7 +160,9 @@ impl UserAppsManager {
         {
             USER_APPS_MANAGER.interactable_windows.for_each(|w| {
                 if w.hwnd == window.address() {
+                    let last_foreground_at = w.last_foreground_at;
                     *w = window.to_serializable();
+                    w.last_foreground_at = last_foreground_at;
                 }
             });
             Self::send(UserAppWinEvent::Updated(window.address()));
