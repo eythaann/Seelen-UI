@@ -308,9 +308,11 @@ wall:
   create: Buat
   create_collection: Buat Koleksi
   default_collection: Kertas dinding atau koleksi lalai
+  default_collection_description: >-
+    Digunakan pada semua monitor dan ruang kerja yang tidak mempunyai set
+    penggantian khusus.
   delete_collection: Padamkan Koleksi
   edit_collection: Edit Koleksi
-  enable: Dayakan Pengurus Wallpaper
   extend: Lanjutkan utama
   fit:
     contain: Mengandungi
@@ -332,6 +334,7 @@ wall:
   overlayColor: Warna overlay
   overlayMixBlendMode: Mod campuran campuran overlay
   per_monitor: Setiap monitor
+  per_monitor_config: Konfigurasi Per-Monitor
   playback: Kelajuan main balik
   position:
     bottom: Bawah
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
-  enable: Dayakan Dock/Taskbar
   filtering: Penapisan item
   gap: Jurang
   hide_mode:
@@ -431,7 +433,6 @@ wm:
   drag_behavior_options:
     sort: Isih (susun semula tetingkap semasa menyeret)
     swap: Tukar (tukar tetingkap pada hujung seret)
-  enable: Dayakan pengurus tetingkap jubin
   layout: Susun atur
   resize_delta: Saiz semula delta (%)
   space_between_containers: Ruang antara bekas

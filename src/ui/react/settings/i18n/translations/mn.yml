@@ -307,9 +307,11 @@ wall:
   create: Үүсгэх
   create_collection: Цуглуулга үүсгэх
   default_collection: Өгөгдмөл ханын цаас эсвэл цуглуулга
+  default_collection_description: >-
+    Тодорхой хүчингүй болгох багц байхгүй бүх монитор болон ажлын талбарт
+    хэрэглэнэ.
   delete_collection: Цуглуулгыг устгах
   edit_collection: Цуглуулга засварлах
-  enable: Wallpaper менежерийг идэвхжүүлэх
   extend: Үндсэн хэсгийг сунгах
   fit:
     contain: Агуулах
@@ -331,6 +333,7 @@ wall:
   overlayColor: Давхардсан өнгө
   overlayMixBlendMode: Холих холимог холимог горим
   per_monitor: Монитор бүрт
+  per_monitor_config: Монитор бүрийн тохиргоо
   playback: Тоглуулах хурд
   position:
     bottom: Ероол
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
-  enable: Док / Taskbar-г идэвхжүүлэх
   filtering: Барааны шүүлтүүр
   gap: Цонх
   hide_mode:
@@ -429,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: Эрэмбэлэх (чирэх үед цонхны дарааллыг өөрчлөх)
     swap: Солих (цонхыг чирэх төгсгөлд солих)
-  enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
   layout: Төлөвлөгөө
   resize_delta: Дельтааг өөрчлөх (%)
   space_between_containers: Савны хоорондох зай

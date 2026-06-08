@@ -309,9 +309,11 @@ wall:
   create: Criar
   create_collection: Criar coleção
   default_collection: Papel de parede ou coleção padrão
+  default_collection_description: >-
+    Aplicado a todos os monitores e áreas de trabalho que não possuem um
+    conjunto de substituição específico.
   delete_collection: Excluir coleção
   edit_collection: Editar coleção
-  enable: Ativar gerente de papel de parede
   extend: Estender primário
   fit:
     contain: Conter
@@ -333,6 +335,7 @@ wall:
   overlayColor: Cor da sobreposição
   overlayMixBlendMode: Overlay Mix Blend Mode (Modo de mistura de sobreposição)
   per_monitor: Por monitor
+  per_monitor_config: Configuração por monitor
   playback: Velocidade de reprodução
   position:
     bottom: Parte inferior
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
   dock_side: Posição
-  enable: Habilitar Dock/Barra de Tarefas
   filtering: Filtragem de itens
   gap: Espaçamento
   hide_mode:
@@ -433,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Classificar (reordenar janelas enquanto arrasta)
     swap: Trocar (trocar janelas ao arrastar)
-  enable: Habilitar gerenciador de janela de ladrilhos
   layout: Disposição
   resize_delta: Delta de redimensionamento (%)
   space_between_containers: Espaço entre contêineres

@@ -310,9 +310,9 @@ wall:
   create: Luoda
   create_collection: Luo kokoelma
   default_collection: Oletus taustakuva tai kokoelma
+  default_collection_description: Koskee kaikkia näyttöjä ja työtiloja, joilla ei ole tiettyä ohitusasetusta.
   delete_collection: Poista kokoelma
   edit_collection: Muokkaa kokoelmaa
-  enable: Ota taustakuvan johtaja käyttöön
   extend: Laajenna ensisijaista
   fit:
     contain: Sisältää
@@ -334,6 +334,7 @@ wall:
   overlayColor: Päällekkäisväri
   overlayMixBlendMode: Päällekkäinen sekoitus sekoitustila
   per_monitor: per monitori
+  per_monitor_config: Monitorikohtainen kokoonpano
   playback: Toistonopeus
   position:
     bottom: Pohja
@@ -361,7 +362,6 @@ weg:
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Sijainti
-  enable: Ota Dock/tehtäväpalkki käyttöön
   filtering: Kohteen suodatus
   gap: Kuilu
   hide_mode:
@@ -432,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Lajittele (järjestä ikkunat uudelleen vetäessäsi)
     swap: Vaihda (vaihda ikkunoita vetämällä)
-  enable: Ota laatta -ikkunanhallinta käyttöön
   layout: Layout
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila

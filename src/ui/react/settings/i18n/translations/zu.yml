@@ -312,9 +312,11 @@ wall:
   create: Dala
   create_collection: Dala Iqoqo
   default_collection: Iphephadonga elizenzakalelayo noma iqoqo
+  default_collection_description: >-
+    Kusetshenziswa kuwo wonke amamonitha nezindawo zokusebenza ezingenayo isethi
+    ethile yokukhipha.
   delete_collection: Susa Iqoqo
   edit_collection: Hlela Iqoqo
-  enable: Nika amandla umphathi wangemuva
   extend: Nweba okuyinhloko
   fit:
     contain: Qukethe
@@ -340,6 +342,7 @@ wall:
   overlayColor: Umbala obheke phambili
   overlayMixBlendMode: Hlanganisa imodi ehlanganisiwe
   per_monitor: Ngemonitha ngayinye
+  per_monitor_config: Ukucushwa kwe-Monitor ngayinye
   playback: Ijubane lokudlala
   position:
     bottom: Esinqeni
@@ -367,7 +370,6 @@ weg:
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
-  enable: Nika amandla i-Dock / Taskbar
   filtering: Ukuhlunga kwento
   gap: Insungubezi
   hide_mode:
@@ -438,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Hlunga (hlela kabusha amawindi ngenkathi uhudula)
     swap: Shintsha (shintshanisa amawindi ekugcineni kokuhudula)
-  enable: Nika amandla umphathi wewindi elijabulisayo
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)
   space_between_containers: Isikhala phakathi kweziqukathi

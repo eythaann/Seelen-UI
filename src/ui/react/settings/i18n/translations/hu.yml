@@ -311,9 +311,11 @@ wall:
   create: Teremt
   create_collection: Gyűjtemény létrehozása
   default_collection: Alapértelmezett háttérkép vagy gyűjtemény
+  default_collection_description: >-
+    Minden olyan monitorra és munkaterületre vonatkozik, amely nem rendelkezik
+    meghatározott felülírással.
   delete_collection: Gyűjtemény törlése
   edit_collection: Gyűjtemény szerkesztése
-  enable: Engedélyezze a háttérképkezelőt
   extend: Hosszabbítsa meg az elsődleges
   fit:
     contain: Tartalmazza a  címet.
@@ -337,6 +339,7 @@ wall:
   overlayColor: Overlay szín
   overlayMixBlendMode: Overlay Mix keverési mód
   per_monitor: Monitoronként
+  per_monitor_config: Monitoronkénti konfiguráció
   playback: Lejátszási sebesség
   position:
     bottom: Alul
@@ -364,7 +367,6 @@ weg:
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
-  enable: Engedélyezze a dokkolót/tálcát
   filtering: Elemszűrés
   gap: Rés
   hide_mode:
@@ -435,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: Rendezés (ablakok átrendezése húzás közben)
     swap: Csere (ablak cseréje a húzás végén)
-  enable: Engedélyezze a csempe ablakkezelőt
   layout: Elrendezés
   resize_delta: Átméretezze a DELTA -t (%)
   space_between_containers: Hely a konténerek között

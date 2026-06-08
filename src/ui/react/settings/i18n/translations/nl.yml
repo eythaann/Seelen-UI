@@ -307,9 +307,11 @@ wall:
   create: Creëren
   create_collection: Verzameling maken
   default_collection: Standaard wallpaper of collectie
+  default_collection_description: >-
+    Toegepast op alle monitoren en werkruimten waarvoor geen specifieke
+    override-set is ingesteld.
   delete_collection: Verzameling verwijderen
   edit_collection: Verzameling bewerken
-  enable: Schakel wallpaper manager in
   extend: Primair uitbreiden
   fit:
     contain: Bevat
@@ -335,6 +337,7 @@ wall:
   overlayColor: Overlay Kleur
   overlayMixBlendMode: Overlay Mix Mengmodus
   per_monitor: Per monitor
+  per_monitor_config: Configuratie per monitor
   playback: Afspeelsnelheid
   position:
     bottom: Bodem
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
-  enable: Schakel dock/taakbalk in
   filtering: Item filteren
   gap: Gat
   hide_mode:
@@ -433,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Sorteren (vensters opnieuw ordenen tijdens slepen)
     swap: Wisselen (vensters verwisselen aan het einde van het slepen)
-  enable: Schakel Tiling Window Manager in
   layout: Lay -out
   resize_delta: Wijzig de wijzers van delta (%)
   space_between_containers: Ruimte tussen containers

@@ -316,9 +316,11 @@ wall:
   create: Erstellen
   create_collection: Sammlung erstellen
   default_collection: Standardhintergrund oder -sammlung
+  default_collection_description: >-
+    Wird auf alle Monitore und Arbeitsbereiche angewendet, für die kein
+    bestimmter Überschreibungssatz festgelegt ist.
   delete_collection: Sammlung löschen
   edit_collection: Sammlung bearbeiten
-  enable: Tapetenmanager aktivieren
   extend: Grundschule verlängern
   fit:
     contain: Enthält
@@ -342,6 +344,7 @@ wall:
   overlayColor: Überlagerungsfarbe
   overlayMixBlendMode: Mischmodus Überlagerung
   per_monitor: Pro Monitor
+  per_monitor_config: Konfiguration pro Monitor
   playback: Wiedergabegeschwindigkeit
   position:
     bottom: Unten
@@ -369,7 +372,6 @@ weg:
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
-  enable: Dock/Taskleiste aktivieren
   filtering: Element-Filterung
   gap: Abstand
   hide_mode:
@@ -440,7 +442,6 @@ wm:
   drag_behavior_options:
     sort: Sortieren (Fenster beim Ziehen neu anordnen)
     swap: Tauschen (Fenster am Ende des Ziehens tauschen)
-  enable: Aktivieren Sie den Tiling Window Manager
   layout: Layout
   resize_delta: Relative Größenänderung (%)
   space_between_containers: Abstand zwischen Containern

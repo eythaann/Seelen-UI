@@ -306,9 +306,11 @@ wall:
   create: Yaradın
   create_collection: Kolleksiya yaradın
   default_collection: Defolt divar kağızı və ya kolleksiya
+  default_collection_description: >-
+    Xüsusi ləğvetmə dəsti olmayan bütün monitorlara və iş sahələrinə tətbiq
+    edilir.
   delete_collection: Kolleksiyanı silin
   edit_collection: Kolleksiyaya düzəliş edin
-  enable: Divar kağızı menecerini aktivləşdirin
   extend: Əsası genişləndirin
   fit:
     contain: Ehtiva etmək
@@ -330,6 +332,7 @@ wall:
   overlayColor: Örtük rəngi
   overlayMixBlendMode: Qarışıq qarışığı rejimi
   per_monitor: Monitor başına
+  per_monitor_config: Monitor başına konfiqurasiya
   playback: Sürətini çalın
   position:
     bottom: Dibli
@@ -357,7 +360,6 @@ weg:
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
-  enable: Dock / tapşırıq çubuğunu aktivləşdirin
   filtering: Element süzgəci
   gap: Gap
   hide_mode:
@@ -427,7 +429,6 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürükləyərkən pəncərələri yenidən sırala)
     swap: Swap (sürük sonunda pəncərələri dəyişdirin)
-  enable: Tiling pəncərə menecerini aktivləşdirin
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)
   space_between_containers: Konteynerlər arasındakı boşluq

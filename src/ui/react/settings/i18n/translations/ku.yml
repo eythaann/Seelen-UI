@@ -308,9 +308,11 @@ wall:
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
   default_collection: Dîwar an berhevoka xwerû
+  default_collection_description: >-
+    Ji bo hemî çavdêr û cîhên xebatê yên ku xwedan sazûmanek berbiçav a taybetî
+    ne têne sepandin.
   delete_collection: Koleksiyonê jêbirin
   edit_collection: Edit Collection
-  enable: Gerînendeyê Wallpaper çalak bike
   extend: Seretayî dirêj bikin
   fit:
     contain: Bêdengman
@@ -332,6 +334,7 @@ wall:
   overlayColor: Rengê dorpêçkirî
   overlayMixBlendMode: Overlay Mode Blend
   per_monitor: Per monitor
+  per_monitor_config: Veavakirina Per-Monitor
   playback: Leza Playback
   position:
     bottom: Erd
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
-  enable: Dock / Taskbar çalak bikin
   filtering: Filterkirina tiştê
   gap: Qelîştok
   hide_mode:
@@ -431,7 +433,6 @@ wm:
   drag_behavior_options:
     sort: Rêzkirin (dema dikişîne paceyan ji nû ve rêz bike)
     swap: Swap (paceyên li ser dawiya kaşkirinê biguherînin)
-  enable: Gerînendeyê Windowê ya Tilî bikar bînin
   layout: Rêz
   resize_delta: Delta Resize (%)
   space_between_containers: Cîhê di navbera konteyneran de

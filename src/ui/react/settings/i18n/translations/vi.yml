@@ -306,9 +306,11 @@ wall:
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
   default_collection: Hình nền hoặc bộ sưu tập mặc định
+  default_collection_description: >-
+    Áp dụng cho tất cả màn hình và không gian làm việc không có bộ ghi đè cụ
+    thể.
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
-  enable: Bật trình quản lý hình nền
   extend: Mở rộng chính
   fit:
     contain: Bao gồm
@@ -330,6 +332,7 @@ wall:
   overlayColor: Màu lớp phủ
   overlayMixBlendMode: Chế độ trộn trộn lớp phủ
   per_monitor: Mỗi màn hình
+  per_monitor_config: Cấu hình trên mỗi màn hình
   playback: Tốc độ phát lại
   position:
     bottom: Đáy
@@ -357,7 +360,6 @@ weg:
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
-  enable: Bật Dock/Thanh tác vụ
   filtering: Lọc vật phẩm
   gap: Khoảng cách
   hide_mode:
@@ -428,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
     swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
-  enable: Bật trình quản lý cửa sổ ốp lát
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container

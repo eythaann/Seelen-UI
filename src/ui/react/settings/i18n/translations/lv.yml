@@ -306,9 +306,11 @@ wall:
   create: Izveidot
   create_collection: Izveidot kolekciju
   default_collection: Noklusējuma fona tapete vai kolekcija
+  default_collection_description: >-
+    Attiecas uz visiem monitoriem un darbvietām, kurām nav noteiktas ignorēšanas
+    kopas.
   delete_collection: Dzēst kolekciju
   edit_collection: Rediģēt kolekciju
-  enable: Iespējot fona attēlu pārvaldnieku
   extend: Pagarināt primāro
   fit:
     contain: Satur
@@ -332,6 +334,7 @@ wall:
   overlayColor: Pārklājuma krāsa
   overlayMixBlendMode: Pārklājuma sajaukšanas režīms
   per_monitor: Uz monitoru
+  per_monitor_config: Viena monitora konfigurācija
   playback: Atskaņošanas ātrums
   position:
     bottom: Apakšējā daļa
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
-  enable: Iespējot doku/uzdevumjoslu
   filtering: Vienumu filtrēšana
   gap: Plaisa
   hide_mode:
@@ -428,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Kārtot (pārkārtot logus, velkot)
     swap: Apmainīt (apmainīt logus vilkšanas beigās)
-  enable: Iespējot flīzēšanas logu pārvaldnieku
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)
   space_between_containers: Telpa starp konteineriem

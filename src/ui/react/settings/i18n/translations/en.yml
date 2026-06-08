@@ -302,7 +302,9 @@ wall:
   create: Create
   create_collection: Create Collection
   default_collection: Default wallpaper or collection
-  default_collection_description: Applied to all monitors and workspaces that do not have a specific override set.
+  default_collection_description: >-
+    Applied to all monitors and workspaces that do not have a specific override
+    set.
   delete_collection: Delete Collection
   edit_collection: Edit Collection
   extend: Extend primary

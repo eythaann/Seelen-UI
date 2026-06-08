@@ -310,9 +310,11 @@ wall:
   create: Створити
   create_collection: Створити колекцію
   default_collection: Шпалери або колекція за умовчанням
+  default_collection_description: >-
+    Застосовується до всіх моніторів і робочих областей, які не мають певного
+    набору замін.
   delete_collection: Видалити колекцію
   edit_collection: Редагувати колекцію
-  enable: Увімкнути менеджер шпалер
   extend: Подовжити основний
   fit:
     contain: Містити
@@ -334,6 +336,7 @@ wall:
   overlayColor: Колір накладання
   overlayMixBlendMode: Режим змішування з накладанням
   per_monitor: На монітор
+  per_monitor_config: Конфігурація для кожного монітора
   playback: Швидкість відтворення
   position:
     bottom: Дно.
@@ -363,7 +366,6 @@ weg:
   delay_to_hide: Затримка приховання
   delay_to_show: Затримка показу
   dock_side: Позиція панелі
-  enable: Увімкнути панель завдань
   filtering: Фільтрація елементів
   gap: Відступ від краю
   hide_mode:
@@ -435,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: Сортування (зміна порядку вікон під час перетягування)
     swap: Swap (міняти місцями вікна на кінці перетягування)
-  enable: Увімкнути менеджер вікон
   layout: Макет
   resize_delta: Змінити розмір дельти (%)
   space_between_containers: Простір між вікнами

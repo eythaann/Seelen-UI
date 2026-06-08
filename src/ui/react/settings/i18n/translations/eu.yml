@@ -308,9 +308,11 @@ wall:
   create: Sortu
   create_collection: Sortu bilduma
   default_collection: Horma-paper edo bilduma lehenetsia
+  default_collection_description: >-
+    Gainbatze-multzo zehatzik ez duten monitore eta lan-eremu guztietan
+    aplikatzen da.
   delete_collection: Ezabatu bilduma
   edit_collection: Editatu bilduma
-  enable: Gaitu horma-kudeatzailea
   extend: Lehen mailakoa luzatzea
   fit:
     contain: Eduki
@@ -332,6 +334,7 @@ wall:
   overlayColor: Overlay kolorea
   overlayMixBlendMode: Overlay nahastu nahasketa modua
   per_monitor: Monitore bakoitzeko
+  per_monitor_config: Monitore bakoitzeko konfigurazioa
   playback: Erreproduzitzeko abiadura
   position:
     bottom: Azpi
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
-  enable: Gaitu kaia / ataza barra
   filtering: Elementua iragaztea
   gap: Tarte
   hide_mode:
@@ -430,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Ordenatu (berrantolatu leihoak arrastatu bitartean)
     swap: Trukatu (trukatu leihoak arrastatu amaieran)
-  enable: Gaitu fitxa leiho kudeatzailea
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)
   space_between_containers: Edukiontzien arteko espazioa

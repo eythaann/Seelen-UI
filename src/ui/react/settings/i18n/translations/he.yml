@@ -293,9 +293,9 @@ wall:
   create: לִיצוֹר
   create_collection: צור אוסף
   default_collection: טפט או אוסף ברירת מחדל
+  default_collection_description: מיושם על כל המסכים ומרחבי העבודה שאין להם ערכת עקיפה ספציפית.
   delete_collection: מחק אוסף
   edit_collection: ערוך אוסף
-  enable: אפשר מנהל טפטים
   extend: הארך את היסוד
   fit:
     contain: לְהַכִיל
@@ -317,6 +317,7 @@ wall:
   overlayColor: צבע שכבה
   overlayMixBlendMode: מצב תערובת תערובת שכבה
   per_monitor: לכל מוניטור
+  per_monitor_config: תצורת פר-מוניטור
   playback: מהירות ההפעלה
   position:
     bottom: תַחתִית
@@ -344,7 +345,6 @@ weg:
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב
-  enable: הפעל את המזח/שורת המשימות
   filtering: סינון פריטים
   gap: פער
   hide_mode:
@@ -414,7 +414,6 @@ wm:
   drag_behavior_options:
     sort: מיון (סדר מחדש את החלונות תוך כדי גרירה)
     swap: החלפה (החלפה של חלונות בקצה הגרירה)
-  enable: אפשר מנהל חלונות אריחים
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)
   space_between_containers: רווח בין מיכלים

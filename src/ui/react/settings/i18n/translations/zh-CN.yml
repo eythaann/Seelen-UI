@@ -269,9 +269,9 @@ wall:
   create: 创建
   create_collection: 创建集合
   default_collection: 默认壁纸或集合
+  default_collection_description: 应用于没有特定覆盖集的所有监视器和工作区。
   delete_collection: 删除集合
   edit_collection: 编辑集合
-  enable: 启用壁纸管理器
   extend: 扩展主屏幕
   fit:
     contain: 适应
@@ -293,6 +293,7 @@ wall:
   overlayColor: 叠加颜色
   overlayMixBlendMode: 叠加混合混合模式
   per_monitor: 每台显示器
+  per_monitor_config: 每个显示器的配置
   playback: 播放速度
   position:
     bottom: 底部
@@ -320,7 +321,6 @@ weg:
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置
-  enable: 启用 Dock / 任务栏
   filtering: 项目过滤
   gap: 间距
   hide_mode:
@@ -387,7 +387,6 @@ wm:
   drag_behavior_options:
     sort: 排序（拖动时重新排序窗口）
     swap: 交换（在拖动端交换窗口）
-  enable: 启用平铺窗口管理器
   layout: 布局
   resize_delta: 调整大小增量（%）
   space_between_containers: 容器间间距

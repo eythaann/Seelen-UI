@@ -307,9 +307,11 @@ wall:
   create: تخلیق کریں
   create_collection: مجموعہ بنائیں
   default_collection: پہلے سے طے شدہ وال پیپر یا مجموعہ
+  default_collection_description: >-
+    ان تمام مانیٹروں اور ورک اسپیس پر لاگو ہوتا ہے جن میں کوئی مخصوص اوور رائڈ
+    سیٹ نہیں ہوتا ہے۔
   delete_collection: مجموعہ حذف کریں
   edit_collection: مجموعہ میں ترمیم کریں
-  enable: وال پیپر مینیجر کو فعال کریں
   extend: پرائمری میں توسیع کریں
   fit:
     contain: مشتمل
@@ -331,6 +333,7 @@ wall:
   overlayColor: اوورلے رنگ
   overlayMixBlendMode: اوورلے مکس مرکب موڈ
   per_monitor: فی مانیٹر
+  per_monitor_config: فی مانیٹر کنفیگریشن
   playback: پلے بیک کی رفتار
   position:
     bottom: نیچے
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
-  enable: ٹاسک بار کو فعال کریں
   filtering: آئٹم فلٹرنگ
   gap: گیپ
   hide_mode:
@@ -429,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: ترتیب دیں (گھسیٹتے وقت ونڈوز کو دوبارہ ترتیب دیں)
     swap: تبادلہ (ڈریگ اینڈ پر ونڈوز تبدیل)
-  enable: ٹائلنگ ونڈو مینیجر کو فعال کریں
   layout: ترتیب
   resize_delta: ڈیلٹا کا سائز (٪)
   space_between_containers: کنٹینرز کے درمیان جگہ

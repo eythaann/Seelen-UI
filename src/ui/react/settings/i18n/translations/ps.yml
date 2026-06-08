@@ -300,9 +300,9 @@ wall:
   create: جوړ کړئ
   create_collection: ټولګه جوړه کړئ
   default_collection: ډیفالټ وال پیپر یا ټولګه
+  default_collection_description: په ټولو څارونکو او کاري ځایونو کې پلي کیږي چې ځانګړي اوورایډ سیټ نلري.
   delete_collection: ټولګه ړنګه کړئ
   edit_collection: ټولګه ترمیم کړئ
-  enable: د وال پیپر مدیر فعال کړئ
   extend: لومړني پراخ کړئ
   fit:
     contain: پکې شامل دي
@@ -324,6 +324,7 @@ wall:
   overlayColor: ډیر رنګ رنګ
   overlayMixBlendMode: د انکشکې مخلوط حالت
   per_monitor: د څارنې لپاره
+  per_monitor_config: د څارنې ترتیب
   playback: د بیا غږولو سرعت
   position:
     bottom: ښکته
@@ -351,7 +352,6 @@ weg:
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
-  enable: دوک / ټاسک بار فعال کړئ
   filtering: توکی فلټر کول
   gap: تشې
   hide_mode:
@@ -421,7 +421,6 @@ wm:
   drag_behavior_options:
     sort: ترتیب کړئ (د ځړولو پرمهال کړکۍ بیا تنظیم کړئ)
     swap: تبادله (د ډریګ په پای کې کړکۍ بدلول)
-  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   space_between_containers: د کانتینرونو ترمینځ ځای

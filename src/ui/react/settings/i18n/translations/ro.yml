@@ -311,9 +311,11 @@ wall:
   create: Crea
   create_collection: Creați o colecție
   default_collection: Tapet sau colecție implicită
+  default_collection_description: >-
+    Se aplică tuturor monitoarelor și spațiilor de lucru care nu au un set de
+    suprareglare specific.
   delete_collection: Șterge colecția
   edit_collection: Editați colecția
-  enable: Activați manager de tapet
   extend: Extindeți primarul
   fit:
     contain: Conține
@@ -335,6 +337,7 @@ wall:
   overlayColor: Culoare suprapunere
   overlayMixBlendMode: Mod de amestecare suprapunere Mix
   per_monitor: Per monitor
+  per_monitor_config: Configurație pe monitor
   playback: Viteza de redare
   position:
     bottom: Fund
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziţie
-  enable: Activați Dock/Bara de activități
   filtering: Filtrarea elementelor
   gap: Decalaj
   hide_mode:
@@ -434,7 +436,6 @@ wm:
   drag_behavior_options:
     sort: Sortare (reordonează ferestrele în timp ce trageți)
     swap: Schimbați (schimbați ferestrele la capătul de tragere)
-  enable: Activați managerul de ferestre de gresie
   layout: Aspect
   resize_delta: Redimensionați delta (%)
   space_between_containers: Spațiu între containere

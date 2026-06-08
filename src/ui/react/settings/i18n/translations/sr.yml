@@ -308,9 +308,11 @@ wall:
   create: Креирај
   create_collection: Направите колекцију
   default_collection: Подразумевана позадина или колекција
+  default_collection_description: >-
+    Примењује се на све мониторе и радне просторе који немају одређени сет за
+    замена.
   delete_collection: Избриши колекцију
   edit_collection: Уреди колекцију
-  enable: Омогућите менаџера позадина
   extend: Продужите примарни
   fit:
     contain: Садрзати
@@ -334,6 +336,7 @@ wall:
   overlayColor: Прекривање боје
   overlayMixBlendMode: Режим прекривене мешавине помешања
   per_monitor: По монитору
+  per_monitor_config: Конфигурација по монитору
   playback: Брзина репродукције
   position:
     bottom: Дно
@@ -363,7 +366,6 @@ weg:
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
   dock_side: Положај
-  enable: Омогући прикључак / траку задатака
   filtering: Филтрирање предмета
   gap: Празнина
   hide_mode:
@@ -435,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: Сортирај (промени редослед прозора током превлачења)
     swap: Замени (замени прозоре на крају превлачења)
-  enable: Омогућите менаџера прозора
   layout: Изглед
   resize_delta: Промените величину Делта (%)
   space_between_containers: Простор између контејнера

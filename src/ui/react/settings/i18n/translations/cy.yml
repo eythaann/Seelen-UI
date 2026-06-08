@@ -306,9 +306,11 @@ wall:
   create: Creu
   create_collection: Creu Casgliad
   default_collection: Papur wal neu gasgliad diofyn
+  default_collection_description: >-
+    Wedi'i gymhwyso i bob monitor a man gwaith nad oes ganddynt set gwrthwneud
+    penodol.
   delete_collection: Dileu Casgliad
   edit_collection: Casgliad Golygu
-  enable: Galluogi Rheolwr Papur Wal
   extend: Ymestyn cynradd
   fit:
     contain: Gynhwysaf
@@ -330,6 +332,7 @@ wall:
   overlayColor: Lliw Troshaen
   overlayMixBlendMode: Modd cyfuniad cymysgedd troshaen
   per_monitor: Fesul monitor
+  per_monitor_config: Cyfluniad Per-Monitor
   playback: Cyflymder chwarae
   position:
     bottom: Waelod
@@ -357,7 +360,6 @@ weg:
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
-  enable: Galluogi doc/bar tasg
   filtering: Hidlo Eitem
   gap: Bwlch
   hide_mode:
@@ -428,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Trefnu (ail-archebu ffenestri wrth lusgo)
     swap: Cyfnewid (cyfnewid ffenestri ar y pen llusgo)
-  enable: Galluogi Rheolwr Ffenestr Teils
   layout: Gynllun
   resize_delta: Newid maint Delta (%)
   space_between_containers: Lle rhwng cynwysyddion

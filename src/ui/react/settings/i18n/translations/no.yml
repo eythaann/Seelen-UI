@@ -307,9 +307,11 @@ wall:
   create: Skape
   create_collection: Opprett samling
   default_collection: Standard tapet eller samling
+  default_collection_description: >-
+    Brukes på alle skjermer og arbeidsområder som ikke har et spesifikt
+    overstyringssett.
   delete_collection: Slett samling
   edit_collection: Rediger samling
-  enable: Aktiver bakgrunnssjef
   extend: Utvid primær
   fit:
     contain: Inneholde
@@ -331,6 +333,7 @@ wall:
   overlayColor: Overleggsfarge
   overlayMixBlendMode: Overlegg blandingsmodus
   per_monitor: Per skjerm
+  per_monitor_config: Konfigurasjon per skjerm
   playback: Avspillingshastighet
   position:
     bottom: Bunn
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
-  enable: Aktiver dock/oppgavelinje
   filtering: Varen filtrering
   gap: Mellomrom
   hide_mode:
@@ -430,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Sorter (omorganiser vinduer mens du drar)
     swap: Bytt (bytt vinduer på dra-enden)
-  enable: Aktiver flislegging av vindusleder
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)
   space_between_containers: Plass mellom containere

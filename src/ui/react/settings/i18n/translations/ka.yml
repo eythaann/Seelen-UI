@@ -307,9 +307,11 @@ wall:
   create: შექმნა
   create_collection: შექმენით კოლექცია
   default_collection: ნაგულისხმევი ფონი ან კოლექცია
+  default_collection_description: >-
+    გამოიყენება ყველა მონიტორზე და სამუშაო სივრცეზე, რომელსაც არ გააჩნია
+    კონკრეტული გადაფარვის ნაკრები.
   delete_collection: კოლექციის წაშლა
   edit_collection: კოლექციის რედაქტირება
-  enable: ჩართეთ ფონი მენეჯერი
   extend: გააფართოვეთ პირველადი
   fit:
     contain: დატევა
@@ -331,6 +333,7 @@ wall:
   overlayColor: გადახურული ფერი
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: თითო მონიტორზე
+  per_monitor_config: თითო მონიტორის კონფიგურაცია
   playback: აღწარმოების სიჩქარე
   position:
     bottom: ძირი
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
-  enable: ჩართეთ dock/taskbar
   filtering: ნივთის ფილტრაცია
   gap: ხარპი
   hide_mode:
@@ -429,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: სორტირება (გადააწყვეთ ფანჯრები გადატანისას)
     swap: შეცვალეთ (გაცვალეთ ფანჯრები ჩავლებით)
-  enable: ჩართეთ ფილების ფანჯრის მენეჯერი
   layout: გამოფენა
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის

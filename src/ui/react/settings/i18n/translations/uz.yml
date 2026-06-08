@@ -312,9 +312,11 @@ wall:
   create: Yaratish
   create_collection: To'plam yaratish
   default_collection: Birlamchi fon rasmi yoki kolleksiyasi
+  default_collection_description: >-
+    Muayyan bekor qilish to'plamiga ega bo'lmagan barcha monitorlar va ish
+    joylari uchun qo'llaniladi.
   delete_collection: To'plamni o'chirish
   edit_collection: To'plamni tahrirlash
-  enable: Fon rasmi menejerini yoqing
   extend: Birlamchini kengaytiring
   fit:
     contain: O'z ichiga olgan
@@ -338,6 +340,7 @@ wall:
   overlayColor: Overlay rang
   overlayMixBlendMode: Ortiqcha aralashtirish rejimini aralashtiring
   per_monitor: Monitor uchun
+  per_monitor_config: Monitor uchun konfiguratsiya
   playback: Qayta tinglash tezligi
   position:
     bottom: Pastki
@@ -365,7 +368,6 @@ weg:
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
-  enable: Dock / vazifalar panelini yoqing
   filtering: Mahsulotni filtrlash
   gap: Bo'shliq
   hide_mode:
@@ -437,7 +439,6 @@ wm:
   drag_behavior_options:
     sort: Saralash (tortish paytida oynalarni qayta tartiblash)
     swap: Almashtirish (drag oxirida oynalarni almashtirish)
-  enable: Tiling oyna boshqaruvchisini yoqing
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   space_between_containers: Idishlar orasidagi bo'shliq

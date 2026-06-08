@@ -311,9 +311,11 @@ wall:
   create: உருவாக்கு
   create_collection: சேகரிப்பை உருவாக்கவும்
   default_collection: இயல்புநிலை வால்பேப்பர் அல்லது சேகரிப்பு
+  default_collection_description: >-
+    குறிப்பிட்ட மேலெழுதுதல் செட் இல்லாத அனைத்து மானிட்டர்கள் மற்றும்
+    பணியிடங்களுக்கும் பொருந்தும்.
   delete_collection: சேகரிப்பை நீக்கு
   edit_collection: தொகுப்பைத் திருத்து
-  enable: வால்பேப்பர் மேலாளரை இயக்கவும்
   extend: முதன்மையை நீட்டவும்
   fit:
     contain: கட்டுப்படுத்தவும்
@@ -337,6 +339,7 @@ wall:
   overlayColor: மேலடுக்கு நிறம்
   overlayMixBlendMode: மேலடுக்கு கலவை கலவை பயன்முறை
   per_monitor: ஒரு மானிட்டருக்கு
+  per_monitor_config: ஒவ்வொரு மானிட்டர் உள்ளமைவு
   playback: பின்னணி வேகம்
   position:
     bottom: கீழே
@@ -364,7 +367,6 @@ weg:
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
-  enable: டாக்/டாஸ்க்பாரை இயக்கவும்
   filtering: பொருள் வடிகட்டுதல்
   gap: இடைவெளி
   hide_mode:
@@ -436,7 +438,6 @@ wm:
   drag_behavior_options:
     sort: வரிசைப்படுத்தவும் (இழுக்கும்போது சாளரங்களை மறுவரிசைப்படுத்தவும்)
     swap: இடமாற்று (இழுக்கும் முனையில் சாளரங்களை மாற்றவும்)
-  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
   layout: தளவமைப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி

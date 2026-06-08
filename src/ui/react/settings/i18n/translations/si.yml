@@ -304,9 +304,11 @@ wall:
   create: නිර්මාණය කරන්න
   create_collection: එකතුවක් සාදන්න
   default_collection: පෙරනිමි බිතුපත හෝ එකතුව
+  default_collection_description: >-
+    විශේෂිත ප්‍රතික්‍රියා කට්ටලයක් නොමැති සියලුම මොනිටර සහ වැඩබිම් සඳහා යොදනු
+    ලැබේ.
   delete_collection: එකතුව මකන්න
   edit_collection: එකතුව සංස්කරණය කරන්න
-  enable: බිතුපත් කළමනාකරු සක්රීය කරන්න
   extend: මූලික දිගු කරන්න
   fit:
     contain: අඩංගු
@@ -328,6 +330,7 @@ wall:
   overlayColor: ආවරණයේ වර්ණය
   overlayMixBlendMode: උඩිස් මිශ්ර මිශ්ර කිරීමේ මාදිලිය
   per_monitor: මොනිටරයකට
+  per_monitor_config: Per-Monitor වින්‍යාසය
   playback: ප්ලේබැක් වේගය
   position:
     bottom: පහළ
@@ -355,7 +358,6 @@ weg:
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර
-  enable: Dock/Taskbar සබල කරන්න
   filtering: අයිතම පෙරීම
   gap: පරතරය
   hide_mode:
@@ -426,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: වර්ග කරන්න (ඇදගෙන යන අතරතුර කවුළු නැවත සකසන්න)
     swap: Swap (drag end මත windows swap)
-  enable: ටයිල්ලිං කවුළු කළමනාකරු සක්රීය කරන්න
   layout: පිරිසැලසුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   space_between_containers: බහාලුම් අතර අවකාශය

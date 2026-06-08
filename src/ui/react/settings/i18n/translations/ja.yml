@@ -284,9 +284,9 @@ wall:
   create: 作成する
   create_collection: コレクションを作成
   default_collection: デフォルトの壁紙またはコレクション
+  default_collection_description: 特定のオーバーライド セットを持たないすべてのモニターとワークスペースに適用されます。
   delete_collection: コレクションの削除
   edit_collection: コレクションの編集
-  enable: 壁紙マネージャーを有効にする
   extend: 拡張
   fit:
     contain: コンテイン
@@ -308,6 +308,7 @@ wall:
   overlayColor: オーバーレイカラー
   overlayMixBlendMode: オーバーレイミックスブレンドモード
   per_monitor: モニターごと
+  per_monitor_config: モニターごとの構成
   playback: 再生速度
   position:
     bottom: 下
@@ -335,7 +336,6 @@ weg:
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: 位置
-  enable: ドック（タスクバー）を有効にする
   filtering: アイテムのフィルタリング
   gap: アイテム間のスペース
   hide_mode:
@@ -404,7 +404,6 @@ wm:
   drag_behavior_options:
     sort: 並べ替え (ドラッグしながらウィンドウの順序を変更)
     swap: スワップ (ドラッグ終了時にウィンドウをスワップ)
-  enable: タイリングウィンドウマネージャーを有効にする
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）
   space_between_containers: ウィンドウ間の間隔

@@ -311,9 +311,11 @@ wall:
   create: Създавайте
   create_collection: Създаване на колекция
   default_collection: Тапет или колекция по подразбиране
+  default_collection_description: >-
+    Прилага се към всички монитори и работни пространства, които нямат конкретен
+    набор за отмяна.
   delete_collection: Изтриване на колекция
   edit_collection: Редактиране на колекция
-  enable: Активирайте мениджъра на тапети
   extend: Удължете основното
   fit:
     contain: Съдържат
@@ -337,6 +339,7 @@ wall:
   overlayColor: Цвят на наслагване
   overlayMixBlendMode: Режим на смесване на наслагване
   per_monitor: На монитор
+  per_monitor_config: Конфигурация на монитор
   playback: Скорост на възпроизвеждане
   position:
     bottom: Дъно
@@ -364,7 +367,6 @@ weg:
   delay_to_hide: Забавяне, за да се скрие
   delay_to_show: Забавяне за показване
   dock_side: Позиция
-  enable: Активирайте док/лента на задачите
   filtering: Филтриране на елементи
   gap: Пропаст
   hide_mode:
@@ -436,7 +438,6 @@ wm:
   drag_behavior_options:
     sort: Сортиране (пренареждане на прозорците при плъзгане)
     swap: Размяна (размяна на прозорци при плъзгане)
-  enable: Активирайте мениджъра на прозорци за облицовка
   layout: Оформление
   resize_delta: Оразмерете делтата (%)
   space_between_containers: Пространство между контейнерите

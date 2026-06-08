@@ -307,9 +307,11 @@ wall:
   create: Skep
   create_collection: Skep versameling
   default_collection: Standaard plakpapier of versameling
+  default_collection_description: >-
+    Toegepas op alle monitors en werkruimtes wat nie 'n spesifieke
+    vervangingstel het nie.
   delete_collection: Vee versameling uit
   edit_collection: Wysig versameling
-  enable: Aktiveer agtergrondbestuurder
   extend: Verleng primêre
   fit:
     contain: Bedwing
@@ -331,6 +333,7 @@ wall:
   overlayColor: Oorlegkleur
   overlayMixBlendMode: Overlay Mix mengmodus
   per_monitor: Per monitor
+  per_monitor_config: Per-monitor konfigurasie
   playback: Playback Speed
   position:
     bottom: Bodem
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
   dock_side: Posisie
-  enable: Aktiveer dok/taakbalk
   filtering: Itemfiltering
   gap: Gat
   hide_mode:
@@ -428,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Sorteer (herrangskik vensters terwyl jy sleep)
     swap: Ruil (ruil vensters op sleepkant)
-  enable: Aktiveer teëlvensterbestuurder
   layout: Uitleg
   resize_delta: Verander die grootte delta (%)
   space_between_containers: Ruimte tussen houers

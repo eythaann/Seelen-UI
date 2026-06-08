@@ -312,9 +312,11 @@ wall:
   create: Créer
   create_collection: Créer une collection
   default_collection: Fond d'écran ou collection par défaut
+  default_collection_description: >-
+    Appliqué à tous les moniteurs et espaces de travail qui n’ont pas de jeu de
+    remplacement spécifique.
   delete_collection: Supprimer la collection
   edit_collection: Modifier la collection
-  enable: Activer le gestionnaire de fonds d'écran
   extend: Étendre le primaire
   fit:
     contain: Contenir
@@ -338,6 +340,7 @@ wall:
   overlayColor: Couleur de la superposition
   overlayMixBlendMode: Mode de mélange de la superposition
   per_monitor: Par moniteur
+  per_monitor_config: Configuration par moniteur
   playback: Vitesse de lecture
   position:
     bottom: Le fond
@@ -367,7 +370,6 @@ weg:
   delay_to_hide: Délai avant masquage
   delay_to_show: Délai avant affichage
   dock_side: Position
-  enable: Activer le Dock/Barre des tâches
   filtering: Filtrage des applications
   gap: Écart
   hide_mode:
@@ -438,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Trier (réorganiser les fenêtres en les faisant glisser)
     swap: Swap (échanger les fenêtres à la fin du glissement)
-  enable: Activer le gestionnaire de fenêtres en mosaïque
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)
   space_between_containers: Espacement entre les conteneurs

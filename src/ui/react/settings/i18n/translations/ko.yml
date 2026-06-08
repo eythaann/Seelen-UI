@@ -283,9 +283,9 @@ wall:
   create: 만들다
   create_collection: 컬렉션 만들기
   default_collection: 기본 배경화면 또는 컬렉션
+  default_collection_description: 특정 재정의가 설정되지 않은 모든 모니터 및 작업 공간에 적용됩니다.
   delete_collection: 컬렉션 삭제
   edit_collection: 컬렉션 편집
-  enable: 배경화면 관리자 활성화
   extend: 기본 확장
   fit:
     contain: 포함
@@ -307,6 +307,7 @@ wall:
   overlayColor: 오버레이 색상
   overlayMixBlendMode: 오버레이 믹스 블렌드 모드
   per_monitor: 모니터당
+  per_monitor_config: 모니터별 구성
   playback: 재생 속도
   position:
     bottom: 하단
@@ -334,7 +335,6 @@ weg:
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치
-  enable: 독/작업 표시줄 활성화
   filtering: 항목 필터링
   gap: 간격
   hide_mode:
@@ -401,7 +401,6 @@ wm:
   drag_behavior_options:
     sort: 정렬(드래그하는 동안 창 재정렬)
     swap: 교환(드래그 끝에서 창 교환)
-  enable: 타일링 윈도우 관리자 활성화
   layout: 레이아웃
   resize_delta: 크기 조정 수치 (%)
   space_between_containers: 컨테이너 간 간격

@@ -292,9 +292,9 @@ wall:
   create: ፍጠር
   create_collection: ስብስብ ይፍጠሩ
   default_collection: ነባሪ ልጣፍ ወይም ስብስብ
+  default_collection_description: የተወሰነ የመሻር ስብስብ ለሌላቸው ሁሉም ተቆጣጣሪዎች እና የስራ ቦታዎች ተተግብሯል።
   delete_collection: ስብስብን ሰርዝ
   edit_collection: ስብስብ አርትዕ
-  enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
   extend: የመጀመሪያ ደረጃን ያራዝሙ
   fit:
     contain: መያዝ
@@ -316,6 +316,7 @@ wall:
   overlayColor: የተደራቢ ቀለም
   overlayMixBlendMode: የተደራቢ ድብልቅ ድብልቅ ድብልቅ ሁኔታ
   per_monitor: በእያንዳንዱ ማሳያ
+  per_monitor_config: የፐር-ሞኒተር ውቅር
   playback: መልሶ ማጫወት ፍጥነት
   position:
     bottom: ታች
@@ -343,7 +344,6 @@ weg:
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
-  enable: መትከያ / ተግባር አሞሌን ያንቁ
   filtering: ዕቃ ማጣሪያ
   gap: ክፍተት
   hide_mode:
@@ -413,7 +413,6 @@ wm:
   drag_behavior_options:
     sort: ደርድር (በመጎተት ላይ መስኮቶችን እንደገና ይዘዙ)
     swap: ስዋፕ (በመጎተት መጨረሻ ላይ መስኮቶችን ይቀያይሩ)
-  enable: የታሸገ መስኮት አቀናባሪን ያንቁ
   layout: አቀማመጥ
   resize_delta: ዴልታ (%)
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ

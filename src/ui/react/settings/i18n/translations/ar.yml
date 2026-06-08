@@ -296,9 +296,11 @@ wall:
   create: يخلق
   create_collection: إنشاء مجموعة
   default_collection: الخلفية الافتراضية أو المجموعة
+  default_collection_description: >-
+    يتم تطبيقه على كافة الشاشات ومساحات العمل التي لا تحتوي على مجموعة تجاوز
+    محددة.
   delete_collection: حذف المجموعة
   edit_collection: تحرير المجموعة
-  enable: تمكين مدير الخلفيات
   extend: تمديد الابتدائية
   fit:
     contain: احتواء
@@ -320,6 +322,7 @@ wall:
   overlayColor: لون التراكب
   overlayMixBlendMode: وضع مزج مزيج التراكب
   per_monitor: لكل شاشة
+  per_monitor_config: التكوين لكل شاشة
   playback: سرعة التشغيل
   position:
     bottom: القاع
@@ -347,7 +350,6 @@ weg:
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المكان
-  enable: تفعيل قفص الاتهام/شريط المهام
   filtering: تصفية العناصر
   gap: الفراغ
   hide_mode:
@@ -417,7 +419,6 @@ wm:
   drag_behavior_options:
     sort: فرز (إعادة ترتيب النوافذ أثناء السحب)
     swap: مبادلة (تبديل النوافذ عند نهاية السحب)
-  enable: تفعيل مدير نافذة البلاط
   layout: التخطيط
   resize_delta: غير حجم دلتا (%)
   space_between_containers: المساحه بين الحاويات

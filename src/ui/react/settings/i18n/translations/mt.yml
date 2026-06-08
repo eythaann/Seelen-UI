@@ -311,9 +311,11 @@ wall:
   create: Oħloq
   create_collection: Oħloq Ġbir
   default_collection: Wallpaper default jew ġbir
+  default_collection_description: >-
+    Applikata għall-monitors u l-ispazji tax-xogħol kollha li m'għandhomx sett
+    ta' override speċifiku.
   delete_collection: Ħassar Ġbir
   edit_collection: Edit Ġbir
-  enable: Enable Wallpaper Manager
   extend: Estendi primarja
   fit:
     contain: Fihom
@@ -335,6 +337,7 @@ wall:
   overlayColor: Kulur overlay
   overlayMixBlendMode: Modalità ta 'taħlita ta' taħlita overlay
   per_monitor: Għal kull monitor
+  per_monitor_config: Konfigurazzjoni Per-Monitor
   playback: Veloċità tad-daqq
   position:
     bottom: Qiegħ
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
-  enable: Enable Dock / Taskbar
   filtering: Iffiltrar tal-Oġġett
   gap: Vojt
   hide_mode:
@@ -433,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Issortja (ordna mill-ġdid it-twieqi waqt li tkaxkar)
     swap: Ibdel (tbiddel it-twieqi fit-tarf tat-tkaxkir)
-  enable: Ippermetti maniġer tat-tieqa tal-madum
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   space_between_containers: Spazju bejn il-kontenituri

@@ -306,9 +306,11 @@ wall:
   create: Schafen
   create_collection: Schafen Kollektioun
   default_collection: Standard Tapeten oder Sammlung
+  default_collection_description: >-
+    Applizéiert op all Monitore an Aarbechtsberäicher déi net e spezifeschen
+    Iwwerschreiden Set hunn.
   delete_collection: Läschen Kollektioun
   edit_collection: Kollektioun änneren
-  enable: Aktivéiert Wallpaper Manager
   extend: Primär verlängeren
   fit:
     contain: Enthalen
@@ -332,6 +334,7 @@ wall:
   overlayColor: Iwwerlauschteren Faarf
   overlayMixBlendMode: Overlay Mix vermëschen Modus
   per_monitor: Pro Monitor
+  per_monitor_config: Per-Monitor Configuratioun
   playback: Spillversuch
   position:
     bottom: Siwenn
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
-  enable: Aktivéiert Dock / Taskbar
   filtering: Item Filter
   gap: Knënn
   hide_mode:
@@ -430,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Sortéieren (Fënstere nei bestellen beim zéien)
     swap: Tauschen (Swap Fënsteren um Drag End)
-  enable: Aktivéiert Fenster-Manager
   layout: Lueden
   resize_delta: Resize Delta (%)
   space_between_containers: Raum tëscht Behälter

@@ -307,9 +307,11 @@ wall:
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
   default_collection: Varsayılan duvar kağıdı veya koleksiyon
+  default_collection_description: >-
+    Belirli bir geçersiz kılma ayarı olmayan tüm monitörlere ve çalışma
+    alanlarına uygulanır.
   delete_collection: Koleksiyonu Sil
   edit_collection: Koleksiyonu Düzenle
-  enable: Duvar Kağıdı Yöneticisini Etkinleştir
   extend: Birincil'i genişlet
   fit:
     contain: Konteyner
@@ -333,6 +335,7 @@ wall:
   overlayColor: Kaplama Rengi
   overlayMixBlendMode: Kaplama Karışım Karışım Modu
   per_monitor: Monitör başına
+  per_monitor_config: Monitör Başına Yapılandırma
   playback: Oynatma hızı
   position:
     bottom: Alt
@@ -360,7 +363,6 @@ weg:
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum
-  enable: Dock/Görev Çubuğunu Etkinleştir
   filtering: Öğe Filtreleme
   gap: Boşluk
   hide_mode:
@@ -432,7 +434,6 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürüklerken pencereleri yeniden sıralayın)
     swap: Değiştir (sürükleme ucunda pencereleri değiştir)
-  enable: Döşeme Pencere Yöneticisini Etkinleştir
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)
   space_between_containers: Konteynerler Arası Boşluk

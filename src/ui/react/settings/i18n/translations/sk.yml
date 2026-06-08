@@ -310,9 +310,11 @@ wall:
   create: Vytvorte
   create_collection: Vytvoriť zbierku
   default_collection: Predvolená tapeta alebo kolekcia
+  default_collection_description: >-
+    Aplikuje sa na všetky monitory a pracovné priestory, ktoré nemajú nastavené
+    špecifické prepísanie.
   delete_collection: Odstrániť zbierku
   edit_collection: Upraviť kolekciu
-  enable: Povoliť manažéra tapiet
   extend: Predĺžte primárne
   fit:
     contain: Obsahuje
@@ -336,6 +338,7 @@ wall:
   overlayColor: Farba prekrytia
   overlayMixBlendMode: Režim prekrývania Mix
   per_monitor: Na jeden monitor
+  per_monitor_config: Konfigurácia podľa monitora
   playback: Rýchlosť prehrávania
   position:
     bottom: Spodná časť
@@ -363,7 +366,6 @@ weg:
   delay_to_hide: Odložiť skryť
   delay_to_show: Oneskorenie zobrazenia
   dock_side: Pozícia
-  enable: Povoliť prístavisko/panel úloh
   filtering: Filtrovanie položiek
   gap: Priepasť
   hide_mode:
@@ -434,7 +436,6 @@ wm:
   drag_behavior_options:
     sort: Triediť (zmeniť poradie okien počas ťahania)
     swap: Vymeniť (vymeniť okná na konci ťahania)
-  enable: Povoľte správcu okien obkladov
   layout: Usporiadanie
   resize_delta: Zmeňte veľkosť delty (%)
   space_between_containers: Priestor medzi nádobami

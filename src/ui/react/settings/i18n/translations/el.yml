@@ -316,9 +316,11 @@ wall:
   create: Δημιουργώ
   create_collection: Δημιουργία συλλογής
   default_collection: Προεπιλεγμένη ταπετσαρία ή συλλογή
+  default_collection_description: >-
+    Εφαρμόζεται σε όλες τις οθόνες και τους χώρους εργασίας που δεν έχουν
+    συγκεκριμένο σύνολο παράκαμψης.
   delete_collection: Διαγραφή συλλογής
   edit_collection: Επεξεργασία συλλογής
-  enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
   extend: Επέκταση πρωτοβάθμιας
   fit:
     contain: Περιέχει
@@ -342,6 +344,7 @@ wall:
   overlayColor: Χρώμα επικάλυψης
   overlayMixBlendMode: Λειτουργία ανάμειξης μίξης επικάλυψης
   per_monitor: Ανά οθόνη
+  per_monitor_config: Διαμόρφωση ανά οθόνη
   playback: Ταχύτητα αναπαραγωγής
   position:
     bottom: Κάτω μέρος
@@ -369,7 +372,6 @@ weg:
   delay_to_hide: Καθυστέρηση για απόκρυψη
   delay_to_show: Καθυστέρηση εμφάνισης
   dock_side: Θέση
-  enable: Ενεργοποίηση λίστα/γραμμή εργασιών
   filtering: Φιλτράρισμα στοιχείων
   gap: Χάσμα
   hide_mode:
@@ -441,7 +443,6 @@ wm:
   drag_behavior_options:
     sort: Ταξινόμηση (αναδιάταξη των παραθύρων κατά τη μεταφορά)
     swap: Εναλλαγή (εναλλαγή παραθύρων στο τέλος μεταφοράς)
-  enable: Ενεργοποίηση διαχειριστή παραθύρων πλακιδίων
   layout: Διάταξη
   resize_delta: Αλλαγή μεγέθους Delta (%)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων

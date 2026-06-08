@@ -309,9 +309,11 @@ wall:
   create: Эҷод кунед
   create_collection: Маҷмӯа эҷод кунед
   default_collection: Обои пешфарз ё коллексия
+  default_collection_description: >-
+    Ба ҳама мониторҳо ва ҷойҳои корӣ, ки маҷмӯи мушаххаси барҳамдиҳӣ надоранд,
+    татбиқ карда мешавад.
   delete_collection: Маҷмӯаро нест кунед
   edit_collection: Маҷмӯаро таҳрир кунед
-  enable: Фаъолсозии менеҷери обои
   extend: Давом додани ибтидоӣ
   fit:
     contain: Нигоҳубин кардан
@@ -335,6 +337,7 @@ wall:
   overlayColor: Ранги пурраи
   overlayMixBlendMode: Реҷаи омехтаи пурраи омехта
   per_monitor: Ба як монитор
+  per_monitor_config: Конфигуратсияи ҳар як монитор
   playback: Суръати бозӣ
   position:
     bottom: Тагпо
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
-  enable: Dock / Travelar
   filtering: Фортинги ашё
   gap: Фосила
   hide_mode:
@@ -434,7 +436,6 @@ wm:
   drag_behavior_options:
     sort: Мураттаб кардан (аз нав тартиби тирезаҳо ҳангоми кашолакунӣ)
     swap: Своп (иваз кардани тирезаҳо дар охири кашолакунӣ)
-  enable: Фаъолсозии мудири тиреза
   layout: Тарҳ
   resize_delta: Татбиқи Delta (%)
   space_between_containers: Фосила байни контейнер

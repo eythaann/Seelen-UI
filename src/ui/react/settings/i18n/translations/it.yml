@@ -316,9 +316,11 @@ wall:
   create: Creare
   create_collection: Crea raccolta
   default_collection: Sfondo o raccolta predefinita
+  default_collection_description: >-
+    Applicato a tutti i monitor e le aree di lavoro che non dispongono di un set
+    di override specifico.
   delete_collection: Elimina raccolta
   edit_collection: Modifica raccolta
-  enable: Abilita Gestore degli Sfondi
   extend: Estendi primario
   fit:
     contain: Contenere
@@ -340,6 +342,7 @@ wall:
   overlayColor: Colore di sovrapposizione
   overlayMixBlendMode: Modalità di miscelazione della sovrapposizione
   per_monitor: Per monitor
+  per_monitor_config: Configurazione per monitor
   playback: Velocità di riproduzione
   position:
     bottom: Fondo
@@ -369,7 +372,6 @@ weg:
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
-  enable: Abilita Dock/Barra delle Attività
   filtering: Filtraggio degli articoli
   gap: Spazio
   hide_mode:
@@ -441,7 +443,6 @@ wm:
   drag_behavior_options:
     sort: Ordina (riordina le finestre durante il trascinamento)
     swap: Scambia (scambia le finestre alla fine del trascinamento)
-  enable: Abilita Gestore delle Finestre a Tiling
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)
   space_between_containers: Spazio tra i Contenitori

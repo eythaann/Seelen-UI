@@ -304,9 +304,9 @@ wall:
   create: બનાવો
   create_collection: સંગ્રહ બનાવો
   default_collection: ડિફૉલ્ટ વૉલપેપર અથવા સંગ્રહ
+  default_collection_description: બધા મોનિટર અને વર્કસ્પેસ પર લાગુ કે જેમાં ચોક્કસ ઓવરરાઇડ સેટ નથી.
   delete_collection: સંગ્રહ કાઢી નાખો
   edit_collection: સંગ્રહ સંપાદિત કરો
-  enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
   extend: પ્રાથમિક વિસ્તારો
   fit:
     contain: સમાવવું
@@ -328,6 +328,7 @@ wall:
   overlayColor: Overંચો રંગ
   overlayMixBlendMode: ઓવરલે મિક્સ બ્લેન્ડ મોડ
   per_monitor: મોનિટર દીઠ
+  per_monitor_config: પ્રતિ-મોનિટર રૂપરેખાંકન
   playback: પ્લેબેક ગતિ
   position:
     bottom: તળિયે
@@ -355,7 +356,6 @@ weg:
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
-  enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   filtering: બાબત
   gap: ગેપ
   hide_mode:
@@ -426,7 +426,6 @@ wm:
   drag_behavior_options:
     sort: સૉર્ટ કરો (ડ્રેગ કરતી વખતે વિંડોઝને ફરીથી ગોઠવો)
     swap: સ્વેપ (ડ્રેગ એન્ડ પર વિન્ડોઝ સ્વેપ)
-  enable: ટાઇલિંગ વિંડો મેનેજરને સક્ષમ કરો
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
   space_between_containers: કન્ટેનર વચ્ચે જગ્યા

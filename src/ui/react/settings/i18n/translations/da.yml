@@ -305,9 +305,11 @@ wall:
   create: Skabe
   create_collection: Opret samling
   default_collection: Standard tapet eller samling
+  default_collection_description: >-
+    Anvendes på alle skærme og arbejdsområder, der ikke har et specifikt
+    tilsidesættelsessæt.
   delete_collection: Slet samling
   edit_collection: Rediger samling
-  enable: Aktivér tapet manager
   extend: Forlæng primær
   fit:
     contain: Indeholder
@@ -329,6 +331,7 @@ wall:
   overlayColor: Overlay-farve
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: Per skærm
+  per_monitor_config: Konfiguration pr. skærm
   playback: Afspilningshastighed
   position:
     bottom: I bunden
@@ -356,7 +359,6 @@ weg:
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
-  enable: Aktivér dock/proceslinje
   filtering: Filtrering af varer
   gap: Gap
   hide_mode:
@@ -426,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: Sorter (omarranger vinduer, mens du trækker)
     swap: Swap (byt vinduer ved træk-enden)
-  enable: Aktivér flisevindue manager
   layout: Layout
   resize_delta: Ændre størrelse på Delta (%)
   space_between_containers: Rum mellem containere

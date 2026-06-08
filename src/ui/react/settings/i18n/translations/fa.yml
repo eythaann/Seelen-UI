@@ -305,9 +305,11 @@ wall:
   create: ایجاد کنید
   create_collection: ایجاد مجموعه
   default_collection: تصویر زمینه یا مجموعه پیش فرض
+  default_collection_description: >-
+    برای همه مانیتورها و فضاهای کاری که مجموعه ای از حذف خاصی ندارند اعمال می
+    شود.
   delete_collection: حذف مجموعه
   edit_collection: ویرایش مجموعه
-  enable: مدیر تصویر زمینه را فعال کنید
   extend: اولیه را گسترش دهید
   fit:
     contain: حاوی بودن
@@ -329,6 +331,7 @@ wall:
   overlayColor: رنگ روکش
   overlayMixBlendMode: حالت مخلوط مخلوط روکش
   per_monitor: در هر مانیتور
+  per_monitor_config: پیکربندی هر مانیتور
   playback: سرعت پخش
   position:
     bottom: پایین
@@ -356,7 +359,6 @@ weg:
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
-  enable: Dock/TaskBar را فعال کنید
   filtering: فیلتر کردن مورد
   gap: شکاف
   hide_mode:
@@ -426,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: مرتب سازی (ترتیب مجدد پنجره ها در حین کشیدن)
     swap: تعویض (تعویض پنجره ها در انتهای کشیدن)
-  enable: مدیر پنجره کاشی کاری را فعال کنید
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)
   space_between_containers: فضای بین ظروف

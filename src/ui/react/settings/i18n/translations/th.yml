@@ -296,9 +296,9 @@ wall:
   create: สร้าง
   create_collection: สร้างคอลเลกชัน
   default_collection: วอลล์เปเปอร์หรือคอลเลกชันเริ่มต้น
+  default_collection_description: ใช้กับจอภาพและพื้นที่ทำงานทั้งหมดที่ไม่มีชุดการแทนที่เฉพาะ
   delete_collection: ลบคอลเลกชั่น
   edit_collection: แก้ไขคอลเลกชัน
-  enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
   extend: ขยายหลัก
   fit:
     contain: บรรจุ
@@ -320,6 +320,7 @@ wall:
   overlayColor: สีซ้อนทับ
   overlayMixBlendMode: โหมดผสมมิกซ์ซ้อนทับ
   per_monitor: ต่อจอภาพ
+  per_monitor_config: การกำหนดค่าต่อจอภาพ
   playback: ความเร็วในการเล่น
   position:
     bottom: ด้านล่าง
@@ -347,7 +348,6 @@ weg:
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
-  enable: เปิดใช้งาน Dock/Task -Babar
   filtering: การกรองรายการ
   gap: ช่องว่าง
   hide_mode:
@@ -417,7 +417,6 @@ wm:
   drag_behavior_options:
     sort: จัดเรียง (เรียงลำดับหน้าต่างใหม่ขณะลาก)
     swap: สลับ (สลับหน้าต่างที่ปลายลาก)
-  enable: เปิดใช้งานตัวจัดการหน้าต่างปูกระเบื้อง
   layout: เค้าโครง
   resize_delta: ปรับขนาดเดลต้า (%)
   space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ

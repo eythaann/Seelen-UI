@@ -308,9 +308,11 @@ wall:
   create: Vytvořit
   create_collection: Vytvořit sbírku
   default_collection: Výchozí tapeta nebo kolekce
+  default_collection_description: >-
+    Aplikuje se na všechny monitory a pracovní prostory, které nemají nastaveno
+    specifické přepsání.
   delete_collection: Smazat sbírku
   edit_collection: Upravit sbírku
-  enable: Povolit správce tapet
   extend: Prodloužit primární
   fit:
     contain: Obsahuje
@@ -332,6 +334,7 @@ wall:
   overlayColor: Barva překrytí
   overlayMixBlendMode: Režim prolnutí překryvné směsi
   per_monitor: Na monitor
+  per_monitor_config: Konfigurace podle monitoru
   playback: Rychlost přehrávání
   position:
     bottom: Spodní část
@@ -359,7 +362,6 @@ weg:
   delay_to_hide: Zpoždění schování
   delay_to_show: Zpoždění zobrazení
   dock_side: Pozice
-  enable: Povolte lištu/hlavní panel
   filtering: Filtrování položek
   gap: Mezera
   hide_mode:
@@ -430,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Řadit (změnit pořadí oken při přetahování)
     swap: Zaměnit (vyměnit okna na konci přetažení)
-  enable: Povolit správce oken
   layout: Rozložení
   resize_delta: Změna velikosti (%)
   space_between_containers: Prostor mezi kontejnery

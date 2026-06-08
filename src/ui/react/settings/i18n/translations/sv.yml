@@ -306,9 +306,11 @@ wall:
   create: Skapa
   create_collection: Skapa samling
   default_collection: Standard tapet eller samling
+  default_collection_description: >-
+    Tillämpas på alla bildskärmar och arbetsytor som inte har en specifik
+    åsidosättningsuppsättning.
   delete_collection: Ta bort samling
   edit_collection: Redigera samling
-  enable: Aktivera tapetchef
   extend: Förläng primär
   fit:
     contain: Innehåller
@@ -330,6 +332,7 @@ wall:
   overlayColor: Färg på överlägg
   overlayMixBlendMode: Overlay Mix Blandningsläge
   per_monitor: Per bildskärm
+  per_monitor_config: Konfiguration per bildskärm
   playback: Uppspelningshastighet
   position:
     bottom: Botten
@@ -357,7 +360,6 @@ weg:
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Placera
-  enable: Aktivera bryggor/aktivitetsfält
   filtering: Filtrering av objekt
   gap: Glipa
   hide_mode:
@@ -427,7 +429,6 @@ wm:
   drag_behavior_options:
     sort: Sortera (ordna om fönster medan du drar)
     swap: Byt (byta fönster på dragänden)
-  enable: Aktivera kakelfönsterhanterare
   layout: Layout
   resize_delta: Ändra ändra delta (%)
   space_between_containers: Utrymme mellan containrar

@@ -310,9 +310,9 @@ wall:
   create: सिर्जना गर्नुहोस्
   create_collection: संग्रह सिर्जना गर्नुहोस्
   default_collection: पूर्वनिर्धारित वालपेपर वा संग्रह
+  default_collection_description: सबै मोनिटरहरू र कार्यस्थानहरूमा लागू हुन्छ जसमा निश्चित ओभरराइड सेट छैन।
   delete_collection: संग्रह मेटाउनुहोस्
   edit_collection: सङ्ग्रह सम्पादन गर्नुहोस्
-  enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
   extend: प्राथमिक विस्तार गर्नुहोस्
   fit:
     contain: भित्र हुनु
@@ -336,6 +336,7 @@ wall:
   overlayColor: ओभरलाइ रंग
   overlayMixBlendMode: ओभरले मिक्स मिश्रण मोड
   per_monitor: प्रति मोनिटर
+  per_monitor_config: प्रति-मोनिटर कन्फिगरेसन
   playback: प्लेब्याक गति
   position:
     bottom: पिंध
@@ -363,7 +364,6 @@ weg:
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
-  enable: डक / टास्कबार सक्षम गर्नुहोस्
   filtering: वस्तु फिल्टरिंग
   gap: अन्तराल
   hide_mode:
@@ -435,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: 'क्रमबद्ध गर्नुहोस् (तान्दा विन्डोहरू पुन: क्रमबद्ध गर्नुहोस्)'
     swap: स्वैप (ड्र्याग एन्डमा विन्डोज स्वैप)
-  enable: टलिंग विन्डो प्रबन्धक सक्षम गर्नुहोस्
   layout: नक्शा
   resize_delta: रिसाइज डेल्टा (%)
   space_between_containers: कन्टेनर बीचको ठाउँ

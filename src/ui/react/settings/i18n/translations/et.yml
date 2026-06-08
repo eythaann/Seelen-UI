@@ -304,9 +304,11 @@ wall:
   create: Loo
   create_collection: Loo kollektsioon
   default_collection: Vaike taustpilt või kogu
+  default_collection_description: >-
+    Rakendatakse kõikidele monitoridele ja tööruumidele, millel pole konkreetset
+    alistamise komplekti.
   delete_collection: Kustuta kogu
   edit_collection: Redigeeri kogu
-  enable: Luba tapeedihaldur
   extend: Laiendage esmast
   fit:
     contain: Sisaldab
@@ -328,6 +330,7 @@ wall:
   overlayColor: Kattekihi värv
   overlayMixBlendMode: Overlay Mix segamisrežiim
   per_monitor: Monitori kohta
+  per_monitor_config: Monitoripõhine konfiguratsioon
   playback: Taasesituse kiirus
   position:
     bottom: Alumine
@@ -355,7 +358,6 @@ weg:
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
-  enable: Luba dokk/ülesanderiba
   filtering: Objektide filtreerimine
   gap: Lüngad
   hide_mode:
@@ -426,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: Sorteeri (akende järjestamine lohistamise ajal ümber)
     swap: Vaheta (vahetage aknad lohistamise lõpus)
-  enable: Luba plaatide aknahaldur
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)
   space_between_containers: Konteinerite vaheline ruum

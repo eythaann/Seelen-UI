@@ -307,9 +307,11 @@ wall:
   create: Sukurti
   create_collection: Sukurti kolekciją
   default_collection: Numatytasis ekrano užsklanda arba kolekcija
+  default_collection_description: >-
+    Taikoma visiems monitoriams ir darbo sritims, kuriose nėra konkretaus
+    nepaisymo rinkinio.
   delete_collection: Ištrinti kolekciją
   edit_collection: Redaguoti kolekciją
-  enable: Įgalinkite tapetų tvarkytuvę
   extend: Prailginti pirminį
   fit:
     contain: Sudėtis
@@ -331,6 +333,7 @@ wall:
   overlayColor: Perdangos spalva
   overlayMixBlendMode: Perdangos mišinio režimas
   per_monitor: Vienam monitoriui
+  per_monitor_config: Konfigūracija vienam monitoriui
   playback: Atkūrimo greitis
   position:
     bottom: Dugnas
@@ -358,7 +361,6 @@ weg:
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
-  enable: Įgalinti doką/užduočių juostą
   filtering: Elementų filtravimas
   gap: Tarpas
   hide_mode:
@@ -429,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: Rūšiuoti (pertvarkykite langus vilkdami)
     swap: Sukeisti (keisti langus vilkimo pabaigoje)
-  enable: Įgalinkite plytelių langų tvarkyklę
   layout: Išdėstymas
   resize_delta: Pakeisti deltos dydį (%)
   space_between_containers: Tarpas tarp konteinerių

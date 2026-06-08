@@ -303,9 +303,9 @@ wall:
   create: Búa til
   create_collection: Búðu til safn
   default_collection: Sjálfgefið veggfóður eða safn
+  default_collection_description: Notað á alla skjái og vinnusvæði sem eru ekki með sérstakt yfirskriftarsett.
   delete_collection: Eyða safni
   edit_collection: Breyta safni
-  enable: Virkja veggfóðursstjóra
   extend: Framlengja prófkjör
   fit:
     contain: Inniheldur
@@ -327,6 +327,7 @@ wall:
   overlayColor: Yfirlag litur
   overlayMixBlendMode: Yfirlagsblöndublöndunarstilling
   per_monitor: Á hvern skjá
+  per_monitor_config: Stillingar á skjá
   playback: Spilunarhraði
   position:
     bottom: Botn
@@ -354,7 +355,6 @@ weg:
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
-  enable: Virkja bryggju/verkefnastiku
   filtering: Hlut síun
   gap: Bil
   hide_mode:
@@ -425,7 +425,6 @@ wm:
   drag_behavior_options:
     sort: Raða (endurraða gluggum á meðan þú dregur)
     swap: Skipta (skipta um glugga á dragenda)
-  enable: Virkja flísagluggastjóra
   layout: Skipulag
   resize_delta: Breyta stærð delta (%)
   space_between_containers: Rými milli gáma

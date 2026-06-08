@@ -311,9 +311,11 @@ wall:
   create: Membuat
   create_collection: Buat Koleksi
   default_collection: Wallpaper atau koleksi default
+  default_collection_description: >-
+    Diterapkan ke semua monitor dan ruang kerja yang tidak memiliki set override
+    tertentu.
   delete_collection: Hapus Koleksi
   edit_collection: Sunting Koleksi
-  enable: Aktifkan Manajer Wallpaper
   extend: Perpanjang primer
   fit:
     contain: Berisi
@@ -335,6 +337,7 @@ wall:
   overlayColor: Warna Hamparan
   overlayMixBlendMode: Mode Campuran Campuran Hamparan
   per_monitor: Per monitor
+  per_monitor_config: Konfigurasi Per-Monitor
   playback: Kecepatan pemutaran
   position:
     bottom: Bawah
@@ -362,7 +365,6 @@ weg:
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
   dock_side: Posisi
-  enable: Aktifkan Dock/Taskbar
   filtering: Pemfilteran Item
   gap: Celah
   hide_mode:
@@ -433,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Sortir (urutkan ulang jendela sambil menyeret)
     swap: Swap (menukar jendela pada drag end)
-  enable: Aktifkan Manajer Jendela Ubin
   layout: Tata letak
   resize_delta: Ubah Ubah Delta (%)
   space_between_containers: Ruang antar wadah

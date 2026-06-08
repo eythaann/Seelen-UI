@@ -310,9 +310,11 @@ wall:
   create: Создавать
   create_collection: Создать коллекцию
   default_collection: Обои или коллекция по умолчанию
+  default_collection_description: >-
+    Применяется ко всем мониторам и рабочим пространствам, для которых не задан
+    специальный набор переопределений.
   delete_collection: Удалить коллекцию
   edit_collection: Редактировать коллекцию
-  enable: Включить менеджер обоев
   extend: Продлить основной
   fit:
     contain: Содержите
@@ -334,6 +336,7 @@ wall:
   overlayColor: Цвет наложения
   overlayMixBlendMode: Режим наложения "Перекрытие
   per_monitor: На монитор
+  per_monitor_config: Конфигурация для каждого монитора
   playback: Скорость воспроизведения
   position:
     bottom: Дно
@@ -361,7 +364,6 @@ weg:
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
   dock_side: Расположение
-  enable: Включить
   filtering: Фильтрация элементов
   gap: Расстояние
   hide_mode:
@@ -432,7 +434,6 @@ wm:
   drag_behavior_options:
     sort: Сортировка (изменение порядка окон при перетаскивании)
     swap: Swap (поменять окна на конце перетаскивания)
-  enable: Включить менеджер по плитке окна
   layout: Макет
   resize_delta: Шаг изменения размера (%)
   space_between_containers: Пространство между контейнерами

@@ -299,9 +299,9 @@ wall:
   create: ສ້າງ
   create_collection: ສ້າງຄໍເລັກຊັນ
   default_collection: ຮູບພື້ນຫຼັງ ຫຼືຄໍເລັກຊັນເລີ່ມຕົ້ນ
+  default_collection_description: ນຳໃຊ້ກັບຈໍພາບ ແລະພື້ນທີ່ເຮັດວຽກທັງໝົດທີ່ບໍ່ມີຊຸດການລົບລ້າງສະເພາະ.
   delete_collection: ລຶບຄໍເລັກຊັນ
   edit_collection: ແກ້ໄຂຄໍເລັກຊັນ
-  enable: ເປີດໃຊ້ Wallpaper Manager
   extend: ຂະຫຍາຍຂັ້ນຕົ້ນ
   fit:
     contain: ບັນຈຸ
@@ -323,6 +323,7 @@ wall:
   overlayColor: ສີ Overlay
   overlayMixBlendMode: ຮູບແບບການຜະສົມຜະສານແບບປະສົມ
   per_monitor: ຕໍ່ຈໍພາບ
+  per_monitor_config: ການຕັ້ງຄ່າຕໍ່ Monitor
   playback: ຄວາມໄວ PlaySback
   position:
     bottom: ດ້ານລຸ່ມ
@@ -350,7 +351,6 @@ weg:
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
-  enable: ເປີດໃຊ້ Dock/Taskbar
   filtering: ການກັ່ນຕອງລາຍການ
   gap: ຊ່ອງຫວ່າງ
   hide_mode:
@@ -421,7 +421,6 @@ wm:
   drag_behavior_options:
     sort: ຈັດຮຽງ (ຈັດຮຽງໜ້າຕ່າງໃໝ່ໃນຂະນະທີ່ລາກ)
     swap: Swap (ສະຫຼັບປ່ອງຢ້ຽມຢູ່ປາຍລາກ)
-  enable: ເປີດໃຊ້ຜູ້ຈັດການປ່ອງຢ້ຽມກະເບື້ອງ
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)
   space_between_containers: ຊ່ອງຫວ່າງລະຫວ່າງບັນຈຸ
