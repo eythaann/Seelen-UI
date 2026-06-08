@@ -78,7 +78,7 @@ jobs:
         with:
           rust-targets: ${{ matrix.target }}
           cache-key-prefix: rust-build-${{ matrix.target }}
-      - name: Install frontend dependencies
+      - name: Install frontend dependencies & Gen Core Lib
         run: npm install
 
       - name: Build Hook DLL
@@ -167,7 +167,7 @@ jobs:
           cache-key-prefix: rust-bundle-${{ matrix.target }}
 
       - name: Install frontend dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
 
       - name: Install MSIX dependencies
         shell: pwsh

@@ -120,7 +120,7 @@ jobs:
           cache-key-prefix: rust-bundle-${{ matrix.target }}
 
       - name: Install frontend dependencies
-        run: npm install
+        run: npm ci --ignore-scripts
 
       - name: Install MSIX dependencies
         shell: pwsh
