@@ -375,5 +375,11 @@ fn is_ignored_file(path: &std::path::Path) -> bool {
     };
 
     let ext = extension.to_string_lossy().to_lowercase();
+
+    // Backup files can have numbers in their name (e.g. 1, 2, 3, etc.)
+    if ext.starts_with("bak") || ext.starts_with("backup") {
+        return true;
+    }
+
     IGNORED.contains(ext.as_str())
 }

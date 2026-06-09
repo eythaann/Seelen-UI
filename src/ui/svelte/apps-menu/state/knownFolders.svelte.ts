@@ -50,41 +50,51 @@ function pathAsItem(path: string): StartMenuItem {
   };
 }
 
-function predicate(path: string): boolean {
-  let lowercased = path.toLowerCase();
-  return !lowercased.endsWith(".ini") && !lowercased.endsWith(".tmp");
-}
-
 const _foldersAsStartMenuItems = $derived.by(() => {
   return [
-    desktop.filter(predicate).map(pathAsItem),
-    downloads.filter(predicate).map(pathAsItem),
-    documents.filter(predicate).map(pathAsItem),
-    music.filter(predicate).map(pathAsItem),
-    pictures.filter(predicate).map(pathAsItem),
-    videos.filter(predicate).map(pathAsItem),
+    desktop.map(pathAsItem),
+    downloads.map(pathAsItem),
+    documents.map(pathAsItem),
+    music.map(pathAsItem),
+    pictures.map(pathAsItem),
+    videos.map(pathAsItem),
   ].flat();
 });
-
-function logInitialInfo() {
-  const seen = new Set<string>();
-  const extensions: string[] = [];
-
-  for (const item of _foldersAsStartMenuItems) {
-    const extension = item.path.split(".").pop();
-    if (extension && !seen.has(extension)) {
-      extensions.push(extension);
-      seen.add(extension);
-    }
-  }
-
-  console.debug("[Init] Total user files to be indexed:", _foldersAsStartMenuItems.length);
-  console.debug("[Init] File extensions found:", extensions);
-}
-logInitialInfo();
 
 export const foldersAsStartMenuItems = {
   get value() {
     return _foldersAsStartMenuItems;
   },
 };
+
+// =======================================================
+// ======================For Debug========================
+// =======================================================
+
+const extensionCounts: Record<string, number> = {};
+let index = 0;
+function process(deadline: IdleDeadline) {
+  while (index < _foldersAsStartMenuItems.length && deadline.timeRemaining() > 0) {
+    const item = _foldersAsStartMenuItems[index++];
+    const extension = item?.path.split(".").pop();
+    if (extension) {
+      extensionCounts[extension] ??= 0;
+      extensionCounts[extension]++;
+    }
+  }
+
+  if (index < _foldersAsStartMenuItems.length) {
+    requestIdleCallback(process);
+    return;
+  }
+
+  invoke(SeelenCommand.WriteFile, {
+    filename: "index.log",
+    content: JSON.stringify({
+      totalFiles: _foldersAsStartMenuItems.length,
+      extensionCounts,
+    }),
+  });
+}
+
+requestIdleCallback(process);
