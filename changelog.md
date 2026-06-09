@@ -2,6 +2,10 @@
 
 ## [2.7.1-dev]
 
+### fix
+
+- apps menu crashing on search when too many items.
+
 ## [2.7.0]
 
 ### feature

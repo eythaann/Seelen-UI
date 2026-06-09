@@ -30,11 +30,10 @@ interface SearchableItem extends StartMenuItem {
 }
 
 const _itemsWhereToSearch: SearchableItem[] = $derived.by(() => {
-  const allItems: StartMenuItem[] = [...globalState.allItems];
-
-  if (hasSearch) {
-    allItems.push(...foldersAsStartMenuItems.value);
-  }
+  const allItems: StartMenuItem[] = [
+    ...globalState.allItems,
+    ...(hasSearch ? foldersAsStartMenuItems.value : []),
+  ];
 
   if (filterBy === "web") {
     return [];
