@@ -61,6 +61,9 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
         }
     }
 
+    // save normalized shortcut
+    reg.shortcut = Some(shortcut.clone());
+
     let is_first_trigger = reg.dialog_id.is_nil();
     if is_first_trigger {
         reg.dialog_id = Uuid::new_v4();
@@ -91,7 +94,7 @@ fn get_dialog(id: Uuid, shortcut: &[String]) -> Dialog {
             value: t!("shortcut.register.placeholder").to_string(),
             styles: Some(
                 CssStyles::new()
-                    .add("color", "#6c6c6c")
+                    .add("color", "var(--color-gray-400)")
                     .add("fontSize", "1rem")
                     .add("fontStyle", "italic"),
             ),
@@ -103,7 +106,7 @@ fn get_dialog(id: Uuid, shortcut: &[String]) -> Dialog {
                 value: s.to_string(),
                 styles: Some(
                     CssStyles::new()
-                        .add("backgroundColor", "#fefefe")
+                        .add("backgroundColor", "var(--slu-std-bg-light-color)")
                         .add("padding", "4px 10px")
                         .add("borderRadius", "4px"),
                 ),

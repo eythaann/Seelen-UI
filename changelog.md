@@ -6,6 +6,7 @@
 
 - apps menu crashing on search when too many items.
 - gui settings not persisting internal state.
+- saving raw shortcuts instead normalized ones.
 
 ## [2.7.0]
 
