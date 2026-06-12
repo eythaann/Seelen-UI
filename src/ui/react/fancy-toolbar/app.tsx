@@ -7,6 +7,7 @@ import { FancyToolbar } from "./modules/main/Toolbar.tsx";
 import { computed, effect } from "@preact/signals";
 import { $focused, $top_interactable_window, $widget_statuses } from "./modules/shared/state/windows.ts";
 import { useEffect } from "preact/hooks";
+import { debounce } from "lodash";
 
 const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
 
@@ -20,12 +21,16 @@ const focusedIsAppsMenu = computed(
 );
 const alwaysOnTop = computed(() => !topWindowIsFullscreen.value || focusedIsAppsMenu.value);
 
-effect(() => {
-  if (alwaysOnTop.value) {
+const setAlwaysOnTop = debounce((alwaysOnTop: boolean) => {
+  if (alwaysOnTop) {
     invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.TopMost });
   } else {
     invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Bottom });
   }
+}, 200);
+
+effect(() => {
+  setAlwaysOnTop(alwaysOnTop.value);
 });
 
 export function App() {
