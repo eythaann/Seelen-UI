@@ -1,28 +1,39 @@
 import { Button, Flex, Modal } from "antd";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { z } from "zod";
 
 import cs from "./index.module.css";
 import { useState } from "preact/hooks";
 import { useTranslation } from "react-i18next";
 import { Icon } from "libs/ui/react/components/Icon";
 import { cx } from "libs/ui/react/utils/styling";
+import { persistentSignal } from "libs/ui/react/utils/PersistentSignal";
 
 const REVIEW_URL = "ms-windows-store://review/?ProductId=9P67C2D4T9FB&mode=mini";
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-function shouldShowReviewModal(): boolean {
-  if (localStorage.getItem("alreadyReviewed")) {
+const WelcomeStateSchema = z.object({
+  welcomeShown: z.boolean().default(false),
+  alreadyReviewed: z.boolean().default(false),
+  lastReviewPrompt: z.number().nullable(),
+});
+
+type WelcomeState = z.infer<typeof WelcomeStateSchema>;
+const DEFAULT_STATE = WelcomeStateSchema.parse({});
+
+const ReviewState = await persistentSignal("welcomeModal", DEFAULT_STATE, WelcomeStateSchema);
+
+function shouldShowReviewModal(state: WelcomeState): boolean {
+  if (state.alreadyReviewed) {
     return false;
   }
 
-  const firstSeenStr = localStorage.getItem("lastReviewPrompt");
-  if (!firstSeenStr) {
-    localStorage.setItem("lastReviewPrompt", Date.now().toString());
+  if (!state.lastReviewPrompt) {
+    ReviewState.value = { ...ReviewState.value, lastReviewPrompt: Date.now() };
     return false;
   }
 
-  const firstSeen = parseInt(firstSeenStr, 10);
-  return Date.now() - firstSeen >= ONE_WEEK_MS;
+  return Date.now() - state.lastReviewPrompt >= ONE_WEEK_MS;
 }
 
 function StarRating({ onRate }: { onRate: () => void }) {
@@ -46,19 +57,15 @@ function StarRating({ onRate }: { onRate: () => void }) {
 }
 
 export const WelcomeModal = () => {
-  const [isNewUser, setIsNewUser] = useState(!localStorage.getItem("welcomeShown"));
-  const [showReviewModal, setShowReviewModal] = useState(
-    () => !isNewUser && shouldShowReviewModal(),
-  );
+  const state = ReviewState.value;
+  const isNewUser = !state.welcomeShown;
+  const showReviewModal = !isNewUser && shouldShowReviewModal(state);
 
   const { t } = useTranslation();
 
   const openReviewAndMark = () => {
     invoke(SeelenCommand.OpenFile, { path: REVIEW_URL });
-    localStorage.setItem("alreadyReviewed", "yes");
-    localStorage.setItem("welcomeShown", "yes");
-    setIsNewUser(false);
-    setShowReviewModal(false);
+    ReviewState.value = { ...ReviewState.value, alreadyReviewed: true, welcomeShown: true };
   };
 
   return (
@@ -77,8 +84,7 @@ export const WelcomeModal = () => {
             <Button
               type="primary"
               onClick={() => {
-                setIsNewUser(false);
-                localStorage.setItem("welcomeShown", "yes");
+                ReviewState.value = { ...ReviewState.value, welcomeShown: true };
               }}
             >
               {t("welcome.ok")}
@@ -102,8 +108,7 @@ export const WelcomeModal = () => {
           <Flex justify="flex-end" gap="1rem">
             <Button
               onClick={() => {
-                localStorage.setItem("lastReviewPrompt", Date.now().toString());
-                setShowReviewModal(false);
+                ReviewState.value = { ...ReviewState.value, lastReviewPrompt: Date.now() };
               }}
             >
               {t("review_request.not_now")}

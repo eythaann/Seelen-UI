@@ -5,6 +5,7 @@
 ### fix
 
 - apps menu crashing on search when too many items.
+- gui settings not persisting internal state.
 
 ## [2.7.0]
 
