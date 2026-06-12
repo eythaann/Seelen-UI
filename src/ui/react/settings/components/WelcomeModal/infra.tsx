@@ -15,7 +15,7 @@ const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const WelcomeStateSchema = z.object({
   welcomeShown: z.boolean().default(false),
   alreadyReviewed: z.boolean().default(false),
-  lastReviewPrompt: z.number().nullable(),
+  lastReviewPrompt: z.number().nullish(),
 });
 
 type WelcomeState = z.infer<typeof WelcomeStateSchema>;
