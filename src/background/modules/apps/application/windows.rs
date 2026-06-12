@@ -81,18 +81,6 @@ impl UserAppsManager {
         let mut is_interactable = USER_APPS_MANAGER.contains_win(&window);
 
         match event {
-            WinEvent::SystemForeground => {
-                if is_interactable {
-                    let hwnd = window.address();
-                    let now = now_millis();
-                    USER_APPS_MANAGER.interactable_windows.for_each(|w| {
-                        if w.hwnd == hwnd {
-                            w.last_foreground_at = now;
-                        }
-                    });
-                    Self::send(UserAppWinEvent::Updated(window.address()));
-                }
-            }
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
                 if !is_interactable && is_interactable_window(&window) {
                     USER_APPS_MANAGER.add_win(&window);
@@ -146,26 +134,56 @@ impl UserAppsManager {
         }
 
         // update cases on UserAppWindow
-        if is_interactable
-            && matches!(
-                event,
-                WinEvent::ObjectNameChange
-                    | WinEvent::SystemMinimizeStart
-                    | WinEvent::SystemMinimizeEnd
-                    | WinEvent::SynDebouncedForegroundRectChange
-                    | WinEvent::SyntheticFullscreenStart
-                    | WinEvent::SyntheticFullscreenEnd
-                    | WinEvent::SyntheticMonitorChanged
-            )
-        {
-            USER_APPS_MANAGER.interactable_windows.for_each(|w| {
-                if w.hwnd == window.address() {
-                    let last_foreground_at = w.last_foreground_at;
-                    *w = window.to_serializable();
-                    w.last_foreground_at = last_foreground_at;
+        if is_interactable {
+            let mut changed = false;
+            USER_APPS_MANAGER.interactable_windows.for_each(|entry| {
+                if entry.hwnd == window.address() {
+                    changed = Self::update_window_data(entry, event);
                 }
             });
-            Self::send(UserAppWinEvent::Updated(window.address()));
+
+            if changed {
+                Self::send(UserAppWinEvent::Updated(window.address()));
+            }
+        }
+    }
+
+    fn update_window_data(data: &mut UserAppWindow, event: WinEvent) -> bool {
+        match event {
+            WinEvent::ObjectNameChange => {
+                let window = Window::from(data.hwnd);
+                data.title = window.title();
+                true
+            }
+            WinEvent::SynDebouncedRectChange | WinEvent::SyntheticMonitorChanged => {
+                let window = Window::from(data.hwnd);
+                data.is_zoomed = window.is_maximized();
+                data.rect = window.inner_rect().ok();
+                data.monitor = window.monitor().stable_id().unwrap_or_default();
+                true
+            }
+            WinEvent::SystemForeground => {
+                let now = now_millis();
+                data.last_foreground_at = now;
+                true
+            }
+            WinEvent::SystemMinimizeStart => {
+                data.is_iconic = true;
+                true
+            }
+            WinEvent::SystemMinimizeEnd => {
+                data.is_iconic = false;
+                true
+            }
+            WinEvent::SyntheticFullscreenStart => {
+                data.is_fullscreen = true;
+                true
+            }
+            WinEvent::SyntheticFullscreenEnd => {
+                data.is_fullscreen = false;
+                true
+            }
+            _ => false,
         }
     }
 }

@@ -109,7 +109,7 @@ impl WinPreviewManager {
             }
             let addr = window.address();
             match event {
-                WinEvent::ObjectNameChange | WinEvent::SynDebouncedForegroundRectChange => {
+                WinEvent::ObjectNameChange | WinEvent::SynDebouncedRectChange => {
                     WINDOWS_PREVIEWS.enqueue_capture(addr);
                 }
                 WinEvent::SystemMinimizeEnd => {

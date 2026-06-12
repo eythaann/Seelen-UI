@@ -1,4 +1,6 @@
-use std::sync::LazyLock;
+use std::collections::HashMap;
+use std::sync::{mpsc, LazyLock};
+use std::time::{Duration, Instant};
 
 use crate::hook::HookManager;
 use crate::windows_api::window::Window;
@@ -97,7 +99,7 @@ pub enum WinEvent {
     // ================== Synthetic events ==================
     /// intended to reduce the amount of events processed by other listeners
     SynThrottledForegroundRectChange,
-    SynDebouncedForegroundRectChange,
+    SynDebouncedRectChange,
     SyntheticFullscreenStart,
     SyntheticFullscreenEnd,
     SyntheticMonitorChanged,
@@ -209,28 +211,88 @@ static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<isize>> = LazyLo
     )
 });
 
-static LAZY_LOCATION_CHANGE_EVENT2: LazyLock<slu_utils::Debounce<isize>> = LazyLock::new(|| {
-    slu_utils::debounce(
-        |addr| {
-            let window = Window::from(addr);
-            if window.is_focused() {
-                HookManager::send((WinEvent::SynDebouncedForegroundRectChange, window));
+enum PerWindowMsg {
+    Update(isize),
+    TerminateAll,
+}
+
+struct PerWindowDebounce {
+    sender: mpsc::Sender<PerWindowMsg>,
+}
+
+impl PerWindowDebounce {
+    fn new(delay: Duration, callback: impl Fn(isize) + Send + 'static) -> Self {
+        let (tx, rx) = mpsc::channel::<PerWindowMsg>();
+        std::thread::spawn(move || {
+            let mut pending: HashMap<isize, Instant> = HashMap::new();
+            loop {
+                let result = if pending.is_empty() {
+                    rx.recv().map_err(|_| mpsc::RecvTimeoutError::Disconnected)
+                } else {
+                    let timeout = pending
+                        .values()
+                        .map(|t| delay.saturating_sub(t.elapsed()))
+                        .min()
+                        .unwrap_or(Duration::ZERO);
+                    rx.recv_timeout(timeout)
+                };
+
+                match result {
+                    Ok(PerWindowMsg::Update(addr)) => {
+                        pending.insert(addr, Instant::now());
+                    }
+                    Ok(PerWindowMsg::TerminateAll) => {
+                        for (addr, _) in pending.drain() {
+                            callback(addr);
+                        }
+                    }
+                    Err(mpsc::RecvTimeoutError::Timeout) => {
+                        let now = Instant::now();
+                        let fired: Vec<isize> = pending
+                            .iter()
+                            .filter(|(_, t)| now.duration_since(**t) >= delay)
+                            .map(|(addr, _)| *addr)
+                            .collect();
+                        for addr in fired {
+                            pending.remove(&addr);
+                            callback(addr);
+                        }
+                    }
+                    Err(mpsc::RecvTimeoutError::Disconnected) => break,
+                }
             }
-        },
-        std::time::Duration::from_millis(100),
-    )
+        });
+        Self { sender: tx }
+    }
+
+    fn call(&self, addr: isize) {
+        let _ = self.sender.send(PerWindowMsg::Update(addr));
+    }
+
+    fn terminate(&self) {
+        let _ = self.sender.send(PerWindowMsg::TerminateAll);
+    }
+}
+
+static LAZY_LOCATION_CHANGE_DEBOUNCE: LazyLock<PerWindowDebounce> = LazyLock::new(|| {
+    PerWindowDebounce::new(Duration::from_millis(100), |addr| {
+        let window = Window::from(addr);
+        HookManager::send((WinEvent::SynDebouncedRectChange, window));
+    })
 });
 
 impl WinEvent {
     pub fn debounce_as_needed(&self, origin: &Window) {
         match self {
-            Self::ObjectLocationChange if origin.is_focused() => {
-                LAZY_LOCATION_CHANGE_EVENT.call(origin.address());
-                LAZY_LOCATION_CHANGE_EVENT2.call(origin.address());
+            Self::ObjectLocationChange => {
+                if origin.is_focused() {
+                    LAZY_LOCATION_CHANGE_EVENT.call(origin.address());
+                }
+                LAZY_LOCATION_CHANGE_DEBOUNCE.call(origin.address());
             }
             Self::SystemMoveSizeEnd => {
                 LAZY_LOCATION_CHANGE_EVENT.terminate();
-                LAZY_LOCATION_CHANGE_EVENT2.terminate();
+                LAZY_LOCATION_CHANGE_DEBOUNCE.terminate();
             }
             _ => {}
         }
