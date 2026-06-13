@@ -28,6 +28,7 @@ export function SeelenWeg() {
 
   return (
     <div
+      data-has-margin={!!settings.margin}
       className={cx("taskbar", settings.position.toLowerCase(), {
         horizontal: isHorizontal,
         vertical: !isHorizontal,

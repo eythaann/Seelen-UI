@@ -33,6 +33,7 @@ export const $currentMonitorMaximizedColors = computed<UserAppWindowColors | nul
   const maximized = $interactables.value.find(
     (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
   );
+  document.documentElement.dataset.thereIsMaximizedOnBg = `${!!maximized}`;
   if (!maximized) return null;
   return $windowsColors.value[maximized.hwnd] ?? null;
 });

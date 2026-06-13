@@ -1,8 +1,9 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import type { FocusedApp, UserAppWindow } from "@seelen-ui/lib/types";
-import { $widget_rect } from "./settings";
-import { computed, signal } from "@preact/signals";
+import type { FocusedApp, UserAppWindow, UserAppWindowColors } from "@seelen-ui/lib/types";
+import { SeelenWegSide } from "@seelen-ui/lib/types";
+import { $settings, $widget_rect } from "./settings";
+import { computed, effect, signal } from "@preact/signals";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types";
 
@@ -20,6 +21,21 @@ export const $top_interactable_window = computed(() =>
 
 export const $previews = lazySignal(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
+
+export const $windowsColors = lazySignal<Record<number, UserAppWindowColors>>(() =>
+  invoke(SeelenCommand.GetUserAppWindowsColors)
+);
+subscribe(SeelenEvent.UserAppWindowsColorsChanged, $windowsColors.setByPayload);
+
+export const $currentMonitorMaximizedColors = computed<UserAppWindowColors | null>(() => {
+  const monitorId = widget.decoded.monitorId;
+  const maximized = $interactables.value.find(
+    (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
+  );
+  document.documentElement.dataset.thereIsMaximizedOnBg = `${!!maximized}`;
+  if (!maximized) return null;
+  return $windowsColors.value[maximized.hwnd] ?? null;
+});
 
 /** Used to check which window was last focused on interactions with the current window */
 export const $delayedFocused = signal<FocusedApp | null>(null);
@@ -46,7 +62,46 @@ await Promise.all([
   $previews.init(),
   $focused.init(),
   $widget_statuses.init(),
+  $windowsColors.init(),
 ]);
+
+effect(() => {
+  const colors = $currentMonitorMaximizedColors.value;
+  const root = document.documentElement;
+
+  if (!colors) {
+    root.style.removeProperty("--window-gradient");
+    return;
+  }
+
+  const toRgba = ({ r, g, b, a }: { r: number; g: number; b: number; a: number }) =>
+    `rgba(${r},${g},${b},${(a / 255).toFixed(3)})`;
+
+  const toHGradient = (stops: typeof colors.top) =>
+    `linear-gradient(to right,${
+      stops
+        .map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`)
+        .join(",")
+    })`;
+
+  const toVGradient = (stops: typeof colors.left) =>
+    `linear-gradient(to bottom,${
+      stops
+        .map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`)
+        .join(",")
+    })`;
+
+  const pos = $settings.value.position;
+  if (pos === SeelenWegSide.Top) {
+    root.style.setProperty("--window-gradient", toHGradient(colors.top));
+  } else if (pos === SeelenWegSide.Bottom) {
+    root.style.setProperty("--window-gradient", toHGradient(colors.bottom));
+  } else if (pos === SeelenWegSide.Left) {
+    root.style.setProperty("--window-gradient", toVGradient(colors.left));
+  } else {
+    root.style.setProperty("--window-gradient", toVGradient(colors.right));
+  }
+});
 
 export const $is_dock_overlapped = computed(() => {
   const focused = $focused.value;

@@ -74,6 +74,8 @@ pub struct UserAppWindowPreview {
 pub struct UserAppWindowColors {
     pub top: Vec<Color>,
     pub bottom: Vec<Color>,
+    pub left: Vec<Color>,
+    pub right: Vec<Color>,
 }
 
 #[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
