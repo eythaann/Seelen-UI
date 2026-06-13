@@ -122,15 +122,6 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --ignore-scripts
 
-      - name: Install MSIX dependencies
-        shell: pwsh
-        run: |
-          winget upgrade winget --accept-package-agreements --accept-source-agreements --disable-interactivity --force || Write-Output "Ignoring winget update failure"
-          winget source update --name winget || Write-Output "Ignoring winget source update failure"
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
-
       - name: Download binaries
         uses: actions/download-artifact@v4
         with:
