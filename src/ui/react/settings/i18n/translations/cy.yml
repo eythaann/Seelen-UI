@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Llwythwch ffeil ffurfweddu arfer
   data_folder: Ffolder data
   enable: Galluogi Offer Datblygwr
+  enable_description: >-
+    Yn datgloi offer datblygedig ar gyfer archwilio a dadfygio mewnolwyr Seelen
+    UI. Heb ei fwriadu ar gyfer defnydd rheolaidd.
   icons: Eiconau Cached
   install_folder: Ffolder gosod
   load: Lwythet
@@ -94,6 +97,10 @@ devtools:
     trigger: Efelychu
     widget_id_placeholder: '@author/widget-name'
   tools: Offer
+  unlock_shortcuts: Datgloi Llwybrau Byr Darllen yn Unig
+  unlock_shortcuts_description: >-
+    Caniatáu golygu llwybrau byr sydd fel arfer yn ddarllenadwy yn unig (e.e.
+    diystyru system).
   unstable_optimizations: Optimizations Ansefydlog
   unstable_optimizations_description: >-
     Galluogi fflagiau Chromium arbrofol sy'n lleihau'r defnydd o RAM.

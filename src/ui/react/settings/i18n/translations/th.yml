@@ -76,6 +76,9 @@ devtools:
   custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
   data_folder: โฟลเดอร์ข้อมูล
   enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
+  enable_description: >-
+    ปลดล็อกเครื่องมือขั้นสูงสำหรับการตรวจสอบและแก้ไขจุดบกพร่องภายใน UI ของ
+    Seelen ไม่ได้มีไว้สำหรับการใช้งานปกติ
   icons: ไอคอนแคช
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
@@ -91,6 +94,8 @@ devtools:
     trigger: จำลอง
     widget_id_placeholder: '@author/widget-name'
   tools: เครื่องมือ
+  unlock_shortcuts: ปลดล็อคทางลัดแบบอ่านอย่างเดียว
+  unlock_shortcuts_description: อนุญาตให้แก้ไขทางลัดที่ปกติเป็นแบบอ่านอย่างเดียว (เช่น การแทนที่ระบบ)
   unstable_optimizations: การเพิ่มประสิทธิภาพที่ไม่เสถียร
   unstable_optimizations_description: >-
     เปิดใช้งานการตั้งค่าสถานะ Chromium รุ่นทดลองที่ลดการใช้ RAM 

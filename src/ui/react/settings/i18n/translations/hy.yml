@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
   enable: Միացնել մշակողի գործիքները
+  enable_description: >-
+    Ապակողպում է առաջադեմ գործիքներ Seelen UI-ի ներքին մասերը ստուգելու և
+    վրիպազերծելու համար: Նախատեսված չէ կանոնավոր օգտագործման համար:
   icons: Քեշավորված Սրբապատկերներ
   install_folder: Տեղադրման պանակ
   load: Բեռ
@@ -95,6 +98,10 @@ devtools:
     trigger: Մոդելավորել
     widget_id_placeholder: '@author/widget-name'
   tools: Գործիքներ
+  unlock_shortcuts: Բացել միայն կարդալու դյուրանցումները
+  unlock_shortcuts_description: >-
+    Թույլատրել խմբագրել դյուրանցումները, որոնք սովորաբար միայն կարդալու են
+    (օրինակ՝ համակարգի անտեսումները):
   unstable_optimizations: Անկայուն օպտիմիզացումներ
   unstable_optimizations_description: >-
     Միացնել փորձնական Chromium դրոշները, որոնք նվազեցնում են RAM-ի օգտագործումը:

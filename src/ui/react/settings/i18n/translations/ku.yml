@@ -77,6 +77,9 @@ devtools:
   custom_config_file: Pelê Config-ê ya xwerû barkirin
   data_folder: Peldanka daneyê
   enable: Amûrên Pêşdebir çalak bikin
+  enable_description: >-
+    Amûrên pêşkeftî yên ji bo teftîşkirin û verastkirina hundurên UI-ya Seelen
+    vedike. Ji bo karanîna birêkûpêk nayê armanc kirin.
   icons: Îkonên Cached
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
@@ -92,6 +95,10 @@ devtools:
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
   tools: Amûrên
+  unlock_shortcuts: Kurtenivîsên Tenê-Xwendinî vekin
+  unlock_shortcuts_description: >-
+    Destûrê bide guheztina kurtebirên ku bi gelemperî tenê-xwendewar in (mînak
+    guheztinên pergalê).
   unstable_optimizations: Optimîzasyonên nestable
   unstable_optimizations_description: >-
     Alên Chromium-ê yên ceribandinê yên ku karanîna RAM-ê kêm dikin çalak bike.

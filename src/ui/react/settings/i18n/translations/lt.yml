@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
   data_folder: Duomenų aplankas
   enable: Įgalinkite kūrėjo įrankius
+  enable_description: >-
+    Atrakina pažangius įrankius, skirtus Seelen vartotojo sąsajos vidinėms
+    detalėms tikrinti ir derinti. Neskirtas nuolatiniam naudojimui.
   icons: Talpykloje saugomos piktogramos
   install_folder: Diegimo aplankas
   load: Įkelti
@@ -95,6 +98,10 @@ devtools:
     trigger: Imituoti
     widget_id_placeholder: '@autorius/valdiklio pavadinimas'
   tools: Įrankiai
+  unlock_shortcuts: Atrakinkite tik skaitymo sparčiuosius klavišus
+  unlock_shortcuts_description: >-
+    Leisti redaguoti sparčiuosius klavišus, kurie paprastai yra tik skaitomi
+    (pvz., sistemos nepaisymas).
   unstable_optimizations: Nestabilios optimizacijos
   unstable_optimizations_description: >-
     Įgalinkite eksperimentines „Chromium“ žymas, kurios sumažina RAM naudojimą.

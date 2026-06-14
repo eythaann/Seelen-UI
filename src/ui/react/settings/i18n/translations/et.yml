@@ -78,6 +78,9 @@ devtools:
   custom_config_file: Laadige kohandatud konfiguratsioonifail
   data_folder: Andmekaust
   enable: Luba arendaja tööriistad
+  enable_description: >-
+    Avab täiustatud tööriistad Seeleni kasutajaliidese sisemiste kontrollimiseks
+    ja silumiseks. Ei ole ette nähtud regulaarseks kasutamiseks.
   icons: Vahemällu salvestatud ikoonid
   install_folder: Installi kaust
   load: Laadima
@@ -93,6 +96,10 @@ devtools:
     trigger: Simuleerida
     widget_id_placeholder: '@autor/vidina nimi'
   tools: Tööriistad
+  unlock_shortcuts: Avage kirjutuskaitstud otseteed
+  unlock_shortcuts_description: >-
+    Lubage redigeerida otseteid, mis on tavaliselt kirjutuskaitstud (nt süsteemi
+    alistamised).
   unstable_optimizations: Ebastabiilsed optimeerimised
   unstable_optimizations_description: >-
     Lubage eksperimentaalsed Chromiumi lipud, mis vähendavad RAM-i kasutamist.

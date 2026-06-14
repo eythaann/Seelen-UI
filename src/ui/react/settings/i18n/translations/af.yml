@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Laai Custom Config -lêer
   data_folder: Datapap
   enable: Aktiveer ontwikkelaarsgereedskap
+  enable_description: >-
+    Ontsluit gevorderde nutsgoed vir die inspeksie en ontfouting van Seelen
+    UI-interne. Nie bedoel vir gereelde gebruik nie.
   icons: Gekas ikone
   install_folder: Installasie -lêergids
   load: Vrag
@@ -95,6 +98,10 @@ devtools:
     trigger: Simuleer
     widget_id_placeholder: '@outeur/legstuknaam'
   tools: Gereedskap
+  unlock_shortcuts: Ontsluit leesalleenkortpaaie
+  unlock_shortcuts_description: >-
+    Laat redigeerkortpaaie toe wat normaalweg leesalleen is (bv.
+    stelselverwydering).
   unstable_optimizations: Onstabiele optimalisering
   unstable_optimizations_description: >-
     Aktiveer eksperimentele Chromium-vlae wat RAM-gebruik verminder.

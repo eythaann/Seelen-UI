@@ -78,6 +78,9 @@ devtools:
   custom_config_file: Xüsusi konfiqurasiya faylını yükləyin
   data_folder: Məlumat qovluğu
   enable: Developer alətlərini aktivləşdirin
+  enable_description: >-
+    Seelen UI daxili hissələrini yoxlamaq və sazlamaq üçün qabaqcıl alətləri
+    açır. Daimi istifadə üçün nəzərdə tutulmayıb.
   icons: Keşlənmiş Nişanlar
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
@@ -93,6 +96,10 @@ devtools:
     trigger: Simulyasiya edin
     widget_id_placeholder: '@author/widget-name'
   tools: Alətlər
+  unlock_shortcuts: Yalnız oxumaq üçün qısayolları kiliddən çıxarın
+  unlock_shortcuts_description: >-
+    Normalda yalnız oxumaq üçün olan qısayolları redaktə etməyə icazə verin
+    (məsələn, sistem ləğvi).
   unstable_optimizations: Qeyri-sabit optimallaşdırmalar
   unstable_optimizations_description: >-
     RAM istifadəsini azaldan eksperimental Chromium bayraqlarını aktiv edin.

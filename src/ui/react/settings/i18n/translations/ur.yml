@@ -79,6 +79,9 @@ devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
   enable: ڈویلپر ٹولز کو فعال کریں
+  enable_description: >-
+    Seelen UI انٹرنلز کا معائنہ اور ڈیبگ کرنے کے لیے جدید ٹولز کو غیر مقفل کرتا
+    ہے۔ باقاعدہ استعمال کے لیے نہیں ہے۔
   icons: کیشڈ آئیکنز
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
@@ -94,6 +97,10 @@ devtools:
     trigger: نقل کرنا
     widget_id_placeholder: '@author/widget-name'
   tools: اوزار
+  unlock_shortcuts: صرف پڑھنے کے لیے شارٹ کٹس کو غیر مقفل کریں۔
+  unlock_shortcuts_description: >-
+    شارٹ کٹس میں ترمیم کی اجازت دیں جو عام طور پر صرف پڑھنے کے لیے ہوتے ہیں
+    (جیسے سسٹم اوور رائیڈز)۔
   unstable_optimizations: غیر مستحکم اصلاح
   unstable_optimizations_description: >-
     تجرباتی Chromium جھنڈوں کو فعال کریں جو RAM کے استعمال کو کم کرتے ہیں۔ 

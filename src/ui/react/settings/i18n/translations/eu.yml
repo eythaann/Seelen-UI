@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Kargatu Config fitxategi pertsonalizatua
   data_folder: Datu karpeta
   enable: Gaitu garatzaileen tresnak
+  enable_description: >-
+    Tresna aurreratuak desblokeatzen ditu Seelen UI barrukoak ikuskatzeko eta
+    arazketa egiteko. Ez da ohiko erabilerarako pentsatua.
   icons: Cachean gordetako ikonoak
   install_folder: Instalazio karpeta
   load: Zamatu
@@ -94,6 +97,10 @@ devtools:
     trigger: Simulatu
     widget_id_placeholder: '@egilea/widget-izena'
   tools: Tresnak
+  unlock_shortcuts: Desblokeatu irakurtzeko soilik lasterbideak
+  unlock_shortcuts_description: >-
+    Baimendu normalean irakurtzeko soilik diren lasterbideak editatzen
+    (adibidez, sistema gainidaztea).
   unstable_optimizations: Optimizazio ezegonkorrak
   unstable_optimizations_description: >-
     Gaitu RAM erabilera murrizten duten Chromium bandera esperimentalak.

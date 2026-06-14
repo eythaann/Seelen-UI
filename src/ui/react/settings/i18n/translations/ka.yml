@@ -80,6 +80,9 @@ devtools:
   custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
   data_folder: მონაცემთა საქაღალდე
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
+  enable_description: >-
+    ხსნის მოწინავე ინსტრუმენტებს Seelen UI-ის ინტერიერების შესამოწმებლად და
+    გამართვისთვის. არ არის განკუთვნილი რეგულარული გამოყენებისთვის.
   icons: ქეშირებული ხატები
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
@@ -95,6 +98,10 @@ devtools:
     trigger: სიმულაცია
     widget_id_placeholder: '@author/widget-name'
   tools: ხელსაწყოები
+  unlock_shortcuts: განბლოკეთ მხოლოდ წაკითხული მალსახმობები
+  unlock_shortcuts_description: >-
+    მალსახმობების რედაქტირების დაშვება, რომლებიც ჩვეულებრივ მხოლოდ წაკითხვადია
+    (მაგ. სისტემის უგულებელყოფა).
   unstable_optimizations: არასტაბილური ოპტიმიზაცია
   unstable_optimizations_description: >-
     ჩართეთ ექსპერიმენტული Chromium დროშები, რომლებიც ამცირებს RAM-ის

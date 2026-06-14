@@ -489,6 +489,8 @@ pub struct Settings {
     pub backup_sync_enabled: bool,
     /// Suspend all webviews when Windows GameMode is active to free resources for the game.
     pub suspend_on_game_mode: bool,
+    /// Allow editing read-only shortcuts (e.g. system overrides). Only effective when dev_tools is enabled.
+    pub unlock_shortcuts: bool,
 }
 
 impl Default for Settings {
@@ -517,6 +519,7 @@ impl Default for Settings {
             streaming_mode: false,
             backup_sync_enabled: true,
             suspend_on_game_mode: false,
+            unlock_shortcuts: false,
         }
     }
 }

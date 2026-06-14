@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Ielādēt pielāgotu konfigurācijas failu
   data_folder: Datu mape
   enable: Iespējot izstrādātāju rīkus
+  enable_description: >-
+    Atbloķē uzlabotus rīkus Seelen UI iekšējo ierīču pārbaudei un atkļūdošanai.
+    Nav paredzēts regulārai lietošanai.
   icons: Kešatmiņā saglabātās ikonas
   install_folder: Instalēšanas mape
   load: Slodze
@@ -94,6 +97,10 @@ devtools:
     trigger: Simulēt
     widget_id_placeholder: '@autors/logrīka nosaukums'
   tools: Rīki
+  unlock_shortcuts: Atbloķējiet tikai lasāmās saīsnes
+  unlock_shortcuts_description: >-
+    Atļaut rediģēt saīsnes, kas parasti ir tikai lasāmas (piemēram, sistēmas
+    ignorēšana).
   unstable_optimizations: Nestabila optimizācija
   unstable_optimizations_description: >-
     Iespējojiet eksperimentālos Chromium karogus, kas samazina RAM lietojumu.

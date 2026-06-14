@@ -79,6 +79,9 @@ devtools:
   custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
   data_folder: ডেটা ফোল্ডার
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
+  enable_description: >-
+    Seelen UI অভ্যন্তরীণ পরিদর্শন এবং ডিবাগ করার জন্য উন্নত সরঞ্জামগুলি আনলক
+    করে৷ নিয়মিত ব্যবহারের উদ্দেশ্যে নয়।
   icons: ক্যাশে আইকন
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
@@ -94,6 +97,8 @@ devtools:
     trigger: অনুকরণ
     widget_id_placeholder: '@লেখক/উইজেট-নাম'
   tools: টুলস
+  unlock_shortcuts: শুধুমাত্র পঠনযোগ্য শর্টকাট আনলক করুন
+  unlock_shortcuts_description: সাধারণত পঠনযোগ্য শর্টকাট সম্পাদনা করার অনুমতি দিন (যেমন সিস্টেম ওভাররাইড)।
   unstable_optimizations: অস্থির অপ্টিমাইজেশান
   unstable_optimizations_description: >-
     পরীক্ষামূলক ক্রোমিয়াম পতাকাগুলি সক্ষম করে যা RAM ব্যবহার হ্রাস করে৷

@@ -78,6 +78,9 @@ devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   data_folder: د معلوماتو فولډر
   enable: د پراختیا کونکي وسیلې فعال کړئ
+  enable_description: >-
+    د سیلین UI داخلي تفتیش او ډیبګ کولو لپاره پرمختللي وسیلې خلاصوي. د منظم
+    استعمال لپاره نه دی.
   icons: کیش شوي شبیه
   install_folder: لګول فولډر
   load: بار
@@ -93,6 +96,10 @@ devtools:
     trigger: سمول
     widget_id_placeholder: '@author/widget-name'
   tools: وسیلې
+  unlock_shortcuts: یوازې د لوستلو شارټ کټونه خلاص کړئ
+  unlock_shortcuts_description: >-
+    د شارټ کټ ترمیم کولو ته اجازه ورکړئ کوم چې معمولا یوازې لوستل کیږي (د بیلګې
+    په توګه سیسټم اوورایډز).
   unstable_optimizations: بې ثباته اصلاح کول
   unstable_optimizations_description: >-
     تجربوي کرومیم بیرغونه فعال کړئ چې د RAM کارول کموي.

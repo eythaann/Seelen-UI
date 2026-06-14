@@ -75,6 +75,7 @@ devtools:
   custom_config_file: 사용자 정의 구성 파일 로드
   data_folder: 데이터 폴더
   enable: 개발자 도구 활성화
+  enable_description: Seelen UI 내부를 검사하고 디버깅하기 위한 고급 도구를 잠금 해제합니다. 정기적인 사용을 위한 것이 아닙니다.
   icons: 캐시된 아이콘
   install_folder: 설치 폴더
   load: 로드
@@ -90,6 +91,8 @@ devtools:
     trigger: 시뮬레이션
     widget_id_placeholder: '@작성자/위젯 이름'
   tools: 도구
+  unlock_shortcuts: 읽기 전용 바로가기 잠금 해제
+  unlock_shortcuts_description: '일반적으로 읽기 전용인 편집 단축키를 허용합니다(예: 시스템 재정의).'
   unstable_optimizations: 불안정한 최적화
   unstable_optimizations_description: |-
     RAM 사용량을 줄이는 실험적인 Chromium 플래그를 활성화합니다.

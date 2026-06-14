@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Indlæs brugerdefineret konfigurationsfil
   data_folder: Datamappe
   enable: Aktivér udviklerværktøjer
+  enable_description: >-
+    Låser op avancerede værktøjer til inspektion og fejlretning af Seelen
+    UI-internal. Not intended for regular use.
   icons: Cachelagrede ikoner
   install_folder: Installationsmappe
   load: belastning
@@ -94,6 +97,10 @@ devtools:
     trigger: Simuler
     widget_id_placeholder: '@forfatter/widget-navn'
   tools: Værktøjer
+  unlock_shortcuts: Lås skrivebeskyttede genveje op
+  unlock_shortcuts_description: >-
+    Tillad redigeringsgenveje, der normalt er skrivebeskyttede (f.eks.
+    systemtilsidesættelser).
   unstable_optimizations: Ustabile optimeringer
   unstable_optimizations_description: >-
     Aktiver eksperimentelle Chromium-flag, der reducerer RAM-forbrug.

@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Muat file konfigurasi khusus
   data_folder: Folder Data
   enable: Aktifkan alat pengembang
+  enable_description: >-
+    Membuka alat canggih untuk memeriksa dan men-debug internal Seelen UI. Tidak
+    dimaksudkan untuk penggunaan biasa.
   icons: Ikon yang di-cache
   install_folder: Folder Instalasi
   load: Memuat
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulasikan
     widget_id_placeholder: '@penulis/nama-widget'
   tools: Peralatan
+  unlock_shortcuts: Buka Kunci Pintasan Hanya-Baca
+  unlock_shortcuts_description: >-
+    Izinkan pintasan pengeditan yang biasanya hanya dapat dibaca (misalnya
+    penggantian sistem).
   unstable_optimizations: Optimasi Tidak Stabil
   unstable_optimizations_description: >-
     Aktifkan tanda Chromium eksperimental yang mengurangi penggunaan RAM.

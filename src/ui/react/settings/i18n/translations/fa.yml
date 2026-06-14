@@ -79,6 +79,9 @@ devtools:
   custom_config_file: بارگیری پرونده پیکربندی سفارشی
   data_folder: پوشه داده ها
   enable: ابزارهای توسعه دهنده را فعال کنید
+  enable_description: >-
+    ابزارهای پیشرفته را برای بازرسی و رفع اشکال داخلی UI Seelen باز می کند. برای
+    استفاده منظم در نظر گرفته نشده است.
   icons: نمادهای ذخیره شده در حافظه پنهان
   install_folder: پوشه نصب
   load: بار
@@ -94,6 +97,8 @@ devtools:
     trigger: شبیه سازی کنید
     widget_id_placeholder: '@author/widget-name'
   tools: ابزار
+  unlock_shortcuts: قفل میانبرهای فقط خواندنی را باز کنید
+  unlock_shortcuts_description: اجازه ویرایش میانبرهایی که معمولاً فقط خواندنی هستند (مثلاً لغو سیستم).
   unstable_optimizations: بهینه سازی های ناپایدار
   unstable_optimizations_description: >-
     پرچم‌های آزمایشی Chromium را فعال کنید که مصرف RAM را کاهش می‌دهد.

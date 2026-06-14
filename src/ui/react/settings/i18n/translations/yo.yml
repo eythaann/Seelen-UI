@@ -77,6 +77,9 @@ devtools:
   custom_config_file: Fifuye faili atunto aṣa
   data_folder: Folda data
   enable: Mu awọn irinṣẹ Oláàmúdà ṣiṣẹ
+  enable_description: >-
+    Ṣii awọn irinṣẹ ilọsiwaju fun ayewo ati ṣiṣatunṣe awọn inu inu Seelen UI. Ko
+    ṣe ipinnu fun lilo deede.
   icons: Awọn aami ti a fipamọ
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
@@ -92,6 +95,10 @@ devtools:
     trigger: Ṣe afarawe
     widget_id_placeholder: '@author / ailorukọ-orukọ'
   tools: Awọn irinṣẹ
+  unlock_shortcuts: Ṣii Awọn ọna abuja Ka-nikan
+  unlock_shortcuts_description: >-
+    Gba awọn ọna abuja ṣiṣatunṣe ti o jẹ deede kika-nikan (fun apẹẹrẹ awọn
+    agbekọja eto).
   unstable_optimizations: Awọn iṣapeye ti ko duro
   unstable_optimizations_description: >-
     Mu awọn asia Chromium adanwo ṣiṣẹ ti o dinku lilo Ramu. 

@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ
   data_folder: Папкаи додаҳо
   enable: Воситаҳои таҳиягарро фаъол кунед
+  enable_description: >-
+    Асбобҳои пешрафтаро барои тафтиш ва ислоҳи ҷузъҳои дохилии Seelen UI
+    мекушояд. Барои истифодаи мунтазам пешбинӣ нашудааст.
   icons: Нишонаҳои кэшшуда
   install_folder: Феҳристи насб
   load: Сарборӣ
@@ -95,6 +98,10 @@ devtools:
     trigger: Тақлид кардан
     widget_id_placeholder: '@author/widget-name'
   tools: Воситаҳо
+  unlock_shortcuts: Миёнабурҳои танҳо барои хонданро кушоед
+  unlock_shortcuts_description: >-
+    Ба таҳрири миёнабурҳо иҷозат диҳед, ки одатан танҳо барои хондан ҳастанд
+    (масалан, бекоркунии система).
   unstable_optimizations: Оптимизатсияи ноустувор
   unstable_optimizations_description: >-
     Парчамҳои таҷрибавии Chromium-ро фаъол созед, ки истифодаи RAM-ро кам

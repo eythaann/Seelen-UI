@@ -71,6 +71,7 @@ devtools:
   custom_config_file: 加載自定義設定文件
   data_folder: 數據文件夾
   enable: 啟用開發人員工具
+  enable_description: 解鎖用於檢查和調試 Seelen UI 內部結構的高級工具。 不適合常規使用。
   icons: 快取圖示
   install_folder: 安裝文件夾
   load: 載入
@@ -86,6 +87,8 @@ devtools:
     trigger: 模擬
     widget_id_placeholder: '@作者/小工具名稱'
   tools: 工具
+  unlock_shortcuts: 解鎖唯讀捷徑
+  unlock_shortcuts_description: 允許編輯通常只讀的捷徑（例如係統覆蓋）。
   unstable_optimizations: 不穩定的最佳化
   unstable_optimizations_description: |-
     啟用可減少 RAM 使用的實驗性 Chromium 標誌。 

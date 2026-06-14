@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Încărcați fișierul de configurare personalizat
   data_folder: Folder de date
   enable: Activați instrumentele pentru dezvoltatori
+  enable_description: >-
+    Deblochează instrumente avansate pentru inspectarea și depanarea elementelor
+    interne ale interfeței de utilizare Seelen. Nu este destinat utilizării
+    regulate.
   icons: Pictograme stocate în cache
   install_folder: Folder de instalare
   load: Sarcină
@@ -95,6 +99,10 @@ devtools:
     trigger: Simula
     widget_id_placeholder: '@autor/nume-widget'
   tools: Instrumente
+  unlock_shortcuts: Deblocați comenzi rapide numai pentru citire
+  unlock_shortcuts_description: >-
+    Permiteți editarea comenzilor rapide care sunt în mod normal numai pentru
+    citire (de exemplu, suprascrieri de sistem).
   unstable_optimizations: Optimizări instabile
   unstable_optimizations_description: >-
     Activați semnalizatoarele Chromium experimentale care reduc utilizarea RAM.

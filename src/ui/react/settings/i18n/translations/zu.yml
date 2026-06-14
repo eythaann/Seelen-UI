@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Layisha ifayela le-config yangokwezifiso
   data_folder: Ifolda yedatha
   enable: Nika amandla amathuluzi onjiniyela
+  enable_description: >-
+    Ivula amathuluzi athuthukile okuhlola nokulungisa amaphutha abangaphakathi
+    kwe-Seelen UI. Ayihloselwe ukusetshenziswa njalo.
   icons: Izithonjana Ezigciniwe
   install_folder: Ifolda yokufaka
   load: Thwala
@@ -95,6 +98,10 @@ devtools:
     trigger: Lingisa
     widget_id_placeholder: '@author/widget-name'
   tools: Amathuluzi
+  unlock_shortcuts: Vula Izinqamuleli Zokufunda Kuphela
+  unlock_shortcuts_description: >-
+    Vumela izinqamuleli zokuhlela ezivame ukufunda kuphela (isb. ukukhishwa
+    kwesistimu).
   unstable_optimizations: Ukulungiselelwa Okungazinzile
   unstable_optimizations_description: >-
     Nika amandla amafulegi e-Chromium okuhlola anciphisa ukusetshenziswa

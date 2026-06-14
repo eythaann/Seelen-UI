@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Tagħbija Fajl tal-Konfigurazzjoni Custom
   data_folder: Folder tad-dejta
   enable: Ippermetti għodod għall-iżviluppaturi
+  enable_description: >-
+    Jiżblokka għodod avvanzati għall-ispezzjoni u l-iddibaggjar tal-interns
+    tal-UI Seelen. Mhux maħsub għal użu regolari.
   icons: Ikoni Cached
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
@@ -94,6 +97,10 @@ devtools:
     trigger: Issimula
     widget_id_placeholder: '@ awtur/widget-isem'
   tools: Għodda
+  unlock_shortcuts: Nisfruttaw Shortcuts tal-Qari biss
+  unlock_shortcuts_description: >-
+    Ippermetti shortcuts tal-editjar li normalment jinqraw biss (eż. overrides
+    tas-sistema).
   unstable_optimizations: Ottimizzazzjonijiet instabbli
   unstable_optimizations_description: >-
     Ippermetti bnadar sperimentali tal-Kromju li jnaqqsu l-użu tar-RAM.

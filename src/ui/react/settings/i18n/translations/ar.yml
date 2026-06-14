@@ -77,6 +77,9 @@ devtools:
   custom_config_file: تحميل ملف الأعدادات المخصص
   data_folder: مجلد البيانات
   enable: تفعيل أدوات المطور
+  enable_description: >-
+    يفتح الأدوات المتقدمة لفحص وتصحيح الأجزاء الداخلية لـ Seelen UI. غير مخصص
+    للاستخدام المنتظم.
   icons: الرموز المخزنة مؤقتا
   install_folder: مجلد التثبيت
   load: تحميل
@@ -92,6 +95,8 @@ devtools:
     trigger: محاكاة
     widget_id_placeholder: '@author/اسم القطعة'
   tools: أدوات
+  unlock_shortcuts: فتح اختصارات القراءة فقط
+  unlock_shortcuts_description: السماح بتحرير الاختصارات التي تكون عادةً للقراءة فقط (مثل تجاوزات النظام).
   unstable_optimizations: تحسينات غير مستقرة
   unstable_optimizations_description: >-
     تمكين علامات Chromium التجريبية التي تقلل من استخدام ذاكرة الوصول العشوائي.

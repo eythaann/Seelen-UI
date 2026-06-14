@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Luede personaliséiert Konfiguratiounsdatei
   data_folder: Etabond Dossier
   enable: Aktivéiert Entwéckler Tools
+  enable_description: >-
+    Spär fortgeschratt Tools fir Inspektioun an Debugging Seelen UI Interns. Net
+    fir regelméisseg Gebrauch geduecht.
   icons: Cache Ikonen
   install_folder: Installatioun Dossier
   load: Lueden
@@ -95,6 +98,10 @@ devtools:
     trigger: Simuléieren
     widget_id_placeholder: '@auteur/widget-name'
   tools: Tools
+  unlock_shortcuts: Spär Read-Only Ofkiirzungen
+  unlock_shortcuts_description: >-
+    Erlaabt Änneren Ofkiirzungen déi normalerweis nëmme liesen (z.B. System
+    Iwwerschreiden).
   unstable_optimizations: Onbestänneg Optimisatiounen
   unstable_optimizations_description: >-
     Aktivéiert experimentell Chromium Fändelen déi d'RAM Benotzung reduzéieren.

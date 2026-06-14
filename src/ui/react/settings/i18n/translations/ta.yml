@@ -81,6 +81,9 @@ devtools:
   custom_config_file: தனிப்பயன் கட்டமைப்பு கோப்பை ஏற்றவும்
   data_folder: தரவு கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு
+  enable_description: >-
+    சீலன் UI இன்டர்னல்களை ஆய்வு செய்வதற்கும் பிழைத்திருத்துவதற்கும் மேம்பட்ட
+    கருவிகளைத் திறக்கிறது. வழக்கமான பயன்பாட்டிற்காக அல்ல.
   icons: தற்காலிக சேமிப்பு சின்னங்கள்
   install_folder: நிறுவல் கோப்புறை
   load: ஏற்றவும்
@@ -96,6 +99,10 @@ devtools:
     trigger: உருவகப்படுத்து
     widget_id_placeholder: '@author/widget-name'
   tools: கருவிகள்
+  unlock_shortcuts: படிக்க மட்டும் குறுக்குவழிகளைத் திறக்கவும்
+  unlock_shortcuts_description: >-
+    பொதுவாக படிக்க மட்டுமே இருக்கும் குறுக்குவழிகளைத் திருத்த அனுமதி (எ.கா.
+    சிஸ்டம் மேலெழுதுதல்).
   unstable_optimizations: நிலையற்ற மேம்படுத்தல்கள்
   unstable_optimizations_description: >-
     ரேம் பயன்பாட்டைக் குறைக்கும் சோதனை Chromium கொடிகளை இயக்கவும். 

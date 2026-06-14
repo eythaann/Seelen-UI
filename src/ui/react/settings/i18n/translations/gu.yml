@@ -79,6 +79,9 @@ devtools:
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
   data_folder: ડેટા ફોલ્ડર
   enable: વિકાસકર્તા સાધનો સક્ષમ કરો
+  enable_description: >-
+    સીલેન UI ઇન્ટરનલ્સને તપાસવા અને ડીબગ કરવા માટે અદ્યતન સાધનોને અનલૉક કરે છે.
+    નિયમિત ઉપયોગ માટે બનાવાયેલ નથી.
   icons: કેશ્ડ ચિહ્નો
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
@@ -94,6 +97,10 @@ devtools:
     trigger: અનુકરણ કરો
     widget_id_placeholder: '@author/widget-name'
   tools: સાધનો
+  unlock_shortcuts: ફક્ત વાંચવા માટેના શૉર્ટકટ્સ અનલૉક કરો
+  unlock_shortcuts_description: >-
+    સામાન્ય રીતે ફક્ત વાંચવા માટેના શોર્ટકટને સંપાદિત કરવાની મંજૂરી આપો (દા.ત.
+    સિસ્ટમ ઓવરરાઇડ્સ).
   unstable_optimizations: અસ્થિર ઑપ્ટિમાઇઝેશન
   unstable_optimizations_description: >-
     પ્રાયોગિક Chromium ફ્લેગ્સ સક્ષમ કરો જે RAM નો ઉપયોગ ઘટાડે છે.

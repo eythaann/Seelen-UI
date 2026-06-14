@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Custom Compigh файлыг ачаалах
   data_folder: Д код хавтас
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  enable_description: >-
+    Seelen UI-ийн дотоод хэсгүүдийг шалгаж, дибаг хийх дэвшилтэт хэрэгслүүдийн
+    түгжээг нээдэг. Тогтмол хэрэглээнд зориулагдаагүй.
   icons: Кэшлэгдсэн дүрсүүд
   install_folder: Суулгалах хүрээ
   load: Ачих
@@ -94,6 +97,10 @@ devtools:
     trigger: Дуурайх
     widget_id_placeholder: '@зохиогч/виджетийн нэр'
   tools: Багаж хэрэгсэл
+  unlock_shortcuts: Зөвхөн унших боломжтой товчлолуудын түгжээг тайл
+  unlock_shortcuts_description: >-
+    Ердийн үед зөвхөн унших боломжтой товчлолуудыг засварлахыг зөвшөөрөх (жишээ
+    нь, системийн хүчингүй болгох).
   unstable_optimizations: Тогтворгүй оновчлолууд
   unstable_optimizations_description: >-
     RAM ашиглалтыг бууруулдаг туршилтын Chromium дарцагуудыг идэвхжүүлнэ үү.

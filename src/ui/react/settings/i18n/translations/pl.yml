@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
   data_folder: Folder danych
   enable: Włącz narzędzia programistów
+  enable_description: >-
+    Odblokowuje zaawansowane narzędzia do sprawdzania i debugowania wewnętrznych
+    elementów interfejsu użytkownika Seelen. Nie jest przeznaczony do
+    regularnego użytku.
   icons: Ikony w pamięci podręcznej
   install_folder: Folder instalacyjny
   load: Obciążenie
@@ -95,6 +99,10 @@ devtools:
     trigger: Symulować
     widget_id_placeholder: '@autor/nazwa-widgetu'
   tools: Narzędzia
+  unlock_shortcuts: Odblokuj skróty tylko do odczytu
+  unlock_shortcuts_description: >-
+    Zezwalaj na edytowanie skrótów, które zwykle są tylko do odczytu (np.
+    zastąpienia systemowe).
   unstable_optimizations: Niestabilne optymalizacje
   unstable_optimizations_description: >-
     Włącz eksperymentalne flagi Chromium, które zmniejszają użycie pamięci RAM.

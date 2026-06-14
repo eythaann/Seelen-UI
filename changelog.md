@@ -5,6 +5,7 @@
 ### enhancements
 
 - user flow for resources download.
+- more dev tools.
 
 ### fix
 

@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
   data_folder: Папка со податоци
   enable: Овозможете алатки за развивачи
+  enable_description: >-
+    Отклучува напредни алатки за проверка и дебагирање на внатрешните интерфејси
+    на Seelen UI. Не е наменет за редовна употреба.
   icons: Кеширани икони
   install_folder: Папка за инсталација
   load: Оптоварување
@@ -95,6 +98,10 @@ devtools:
     trigger: Симулирајте
     widget_id_placeholder: '@author/виџет-име'
   tools: Алатки
+  unlock_shortcuts: Отклучете ги кратенките само за читање
+  unlock_shortcuts_description: >-
+    Дозволете уредување кратенки кои вообичаено се само за читање (на пр.
+    системски отфрлања).
   unstable_optimizations: Нестабилни оптимизации
   unstable_optimizations_description: >-
     Овозможете експериментални ознаки на Chromium што ја намалуваат употребата

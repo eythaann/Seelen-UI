@@ -78,6 +78,9 @@ devtools:
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
   enable: Kích hoạt các công cụ nhà phát triển
+  enable_description: >-
+    Mở khóa các công cụ nâng cao để kiểm tra và gỡ lỗi nội bộ giao diện người
+    dùng Seelen. Không dành cho sử dụng thường xuyên.
   icons: Biểu tượng được lưu trong bộ nhớ đệm
   install_folder: Thư mục cài đặt
   load: Trọng tải
@@ -93,6 +96,10 @@ devtools:
     trigger: mô phỏng
     widget_id_placeholder: '@tác giả/tên widget'
   tools: Công cụ
+  unlock_shortcuts: Mở khóa các phím tắt chỉ đọc
+  unlock_shortcuts_description: >-
+    Cho phép chỉnh sửa các phím tắt thường ở chế độ chỉ đọc (ví dụ: ghi đè hệ
+    thống).
   unstable_optimizations: Tối ưu hóa không ổn định
   unstable_optimizations_description: >-
     Bật cờ Chrome thử nghiệm để giảm mức sử dụng RAM. 

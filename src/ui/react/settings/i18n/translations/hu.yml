@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Töltse be az egyéni konfigurációs fájlt
   data_folder: Adatmappa
   enable: Engedélyezze a fejlesztői eszközöket
+  enable_description: >-
+    Feloldja a fejlett eszközöket a Seelen UI belső részeinek vizsgálatához és
+    hibakereséséhez. Nem rendszeres használatra készült.
   icons: Gyorsítótárazott ikonok
   install_folder: Telepítési mappa
   load: Betöltés
@@ -94,6 +97,10 @@ devtools:
     trigger: Szimulál
     widget_id_placeholder: '@author/widget-name'
   tools: Eszközök
+  unlock_shortcuts: Oldja fel a csak olvasható parancsikonokat
+  unlock_shortcuts_description: >-
+    Engedélyezze az általában csak olvasható parancsikonok szerkesztését (pl.
+    rendszerfelülbírálások).
   unstable_optimizations: Instabil optimalizálás
   unstable_optimizations_description: >-
     Engedélyezze a kísérleti Chromium-jelzőket, amelyek csökkentik a

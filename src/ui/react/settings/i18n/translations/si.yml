@@ -78,6 +78,9 @@ devtools:
   custom_config_file: අභිරුචි වින්‍යාස ගොනුව පූරණය කරන්න
   data_folder: දත්ත ෆෝල්ඩරය
   enable: සංවර්ධක මෙවලම් සබල කරන්න
+  enable_description: >-
+    සීලෙන් යූඅයි අභ්‍යන්තර පරීක්ෂා කිරීම සහ නිදොස් කිරීම සඳහා උසස් මෙවලම් අගුළු
+    හරියි. නිතිපතා භාවිතය සඳහා අදහස් නොකෙරේ.
   icons: හැඹිලිගත අයිකන
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
@@ -93,6 +96,10 @@ devtools:
     trigger: අනුකරණය කරන්න
     widget_id_placeholder: '@author/widget-name'
   tools: මෙවලම්
+  unlock_shortcuts: කියවීමට පමණක් කෙටිමං අගුළු හරින්න
+  unlock_shortcuts_description: >-
+    සාමාන්‍යයෙන් කියවීමට පමණක් ඇති කෙටිමං සංස්කරණය කිරීමට ඉඩ දෙන්න (උදා. පද්ධති
+    අභිබවා යාම).
   unstable_optimizations: අස්ථායී ප්‍රශස්තකරණය
   unstable_optimizations_description: >-
     RAM භාවිතය අඩු කරන පර්යේෂණාත්මක Chromium ධජ සබල කරන්න.

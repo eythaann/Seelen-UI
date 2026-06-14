@@ -61,6 +61,7 @@ devtools.color_palette_note: 9cf30c80
 devtools.custom_config_file: 24c01b3f
 devtools.data_folder: 5eb0ce0f
 devtools.enable: ea3fdd78
+devtools.enable_description: c2ee248c
 devtools.icons: 2dd43a70
 devtools.install_folder: 5e374a60
 devtools.load: 2e9dda8
@@ -74,6 +75,8 @@ devtools.simulate_perm.result_denied: 6dab574d
 devtools.simulate_perm.trigger: 63b9308
 devtools.simulate_perm.widget_id_placeholder: dc3e33d8
 devtools.tools: 7328aa8
+devtools.unlock_shortcuts: f7bedb74
+devtools.unlock_shortcuts_description: a2269e62
 devtools.unstable_optimizations: e3aaebf4
 devtools.unstable_optimizations_description: 32ee923c
 devtools.widgets_debug.actions: d932aecc

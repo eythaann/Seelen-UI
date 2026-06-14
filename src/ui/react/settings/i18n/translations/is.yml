@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Hlaða sérsniðna config skrá
   data_folder: Gagnamappa
   enable: Virkja verktaki verktaki
+  enable_description: >-
+    Opnar háþróuð verkfæri til að skoða og kemba Seelen UI innri. Ekki ætlað til
+    reglulegrar notkunar.
   icons: Tákn í skyndiminni
   install_folder: Uppsetningarmöppu
   load: Hlaða
@@ -94,6 +97,10 @@ devtools:
     trigger: Herma eftir
     widget_id_placeholder: '@höfundur/nafn búnaðar'
   tools: Verkfæri
+  unlock_shortcuts: Opnaðu skrifvarða flýtivísa
+  unlock_shortcuts_description: >-
+    Leyfa flýtileiðir til breytinga sem eru venjulega skrifvarandi (t.d.
+    kerfishnekkingar).
   unstable_optimizations: Óstöðugar hagræðingar
   unstable_optimizations_description: >-
     Virkjaðu tilrauna Chromium fána sem draga úr vinnsluminni notkun.

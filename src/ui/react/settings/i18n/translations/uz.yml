@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Custom Config faylini yuklang
   data_folder: Ma'lumotlar papkasi
   enable: Ishlab chiqaruvchi vositalarni yoqish
+  enable_description: >-
+    Seelen UI ichki qismlarini tekshirish va disk raskadrovka qilish uchun
+    ilg'or vositalarni qulfdan chiqaradi. Muntazam foydalanish uchun
+    mo'ljallanmagan.
   icons: Keshlangan piktogrammalar
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
@@ -95,6 +99,10 @@ devtools:
     trigger: Simulyatsiya qilish
     widget_id_placeholder: '@muallif/vidjet nomi'
   tools: Asboblar
+  unlock_shortcuts: Faqat o'qish uchun yorliqlarni qulfdan chiqaring
+  unlock_shortcuts_description: >-
+    Odatda faqat o‘qish uchun mo‘ljallangan yorliqlarni tahrirlashga ruxsat
+    bering (masalan, tizimni bekor qilish).
   unstable_optimizations: Barqaror optimallashtirish
   unstable_optimizations_description: >-
     RAM sarfini kamaytiradigan eksperimental Chromium bayroqlarini yoqing. 

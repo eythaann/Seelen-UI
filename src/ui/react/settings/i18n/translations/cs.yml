@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Načíst vlastní konfigurační soubor
   data_folder: Datová složka
   enable: Povolit vývojové nástroje
+  enable_description: >-
+    Odemyká pokročilé nástroje pro kontrolu a ladění vnitřků uživatelského
+    rozhraní Seelen. Není určeno pro pravidelné používání.
   icons: Ikony uložené v mezipaměti
   install_folder: Instalační složka
   load: Načíst
@@ -94,6 +97,10 @@ devtools:
     trigger: Simulovat
     widget_id_placeholder: '@autor/název-widgetu'
   tools: Nástroje
+  unlock_shortcuts: Odemknout zkratky pouze pro čtení
+  unlock_shortcuts_description: >-
+    Povolit úpravy zkratek, které jsou normálně pouze pro čtení (např. přepsání
+    systému).
   unstable_optimizations: Nestabilní optimalizace
   unstable_optimizations_description: >-
     Povolit experimentální příznaky prohlížeče Chromium, které snižují využití

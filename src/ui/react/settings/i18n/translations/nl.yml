@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Laad het aangepaste configuratiebestand
   data_folder: Gegevensmap
   enable: Schakel ontwikkelaarstools in
+  enable_description: >-
+    Ontgrendelt geavanceerde tools voor het inspecteren en debuggen van Seelen
+    UI-internals. Niet bedoeld voor regelmatig gebruik.
   icons: Gecachte pictogrammen
   install_folder: Installatiemap
   load: Laden
@@ -95,6 +98,10 @@ devtools:
     trigger: Simuleren
     widget_id_placeholder: '@auteur/widgetnaam'
   tools: Hulpmiddelen
+  unlock_shortcuts: Ontgrendel alleen-lezen snelkoppelingen
+  unlock_shortcuts_description: >-
+    Sta bewerkingssnelkoppelingen toe die normaal gesproken alleen-lezen zijn
+    (bijvoorbeeld systeemoverschrijvingen).
   unstable_optimizations: Onstabiele optimalisaties
   unstable_optimizations_description: >-
     Schakel experimentele Chromium-vlaggen in die het RAM-gebruik verminderen.

@@ -76,6 +76,9 @@ devtools:
   custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
   data_folder: የውሂብ አቃፊ
   enable: የገንቢ መሳሪያዎችን ያንቁ
+  enable_description: >-
+    Seelen UI ውስጣዊ ነገሮችን ለመመርመር እና ለማረም የላቁ መሳሪያዎችን ይከፍታል። ለመደበኛ አገልግሎት የታሰበ
+    አይደለም።
   icons: የተሸጎጡ አዶዎች
   install_folder: የመጫን አቃፊ
   load: ጭነት
@@ -91,6 +94,8 @@ devtools:
     trigger: አስመስለው
     widget_id_placeholder: '@ደራሲ/መግብር-ስም'
   tools: መሳሪያዎች
+  unlock_shortcuts: ተነባቢ-ብቻ አቋራጮችን ይክፈቱ
+  unlock_shortcuts_description: በመደበኛነት ተነባቢ-ብቻ የሆኑ (ለምሳሌ የስርዓት መሻር) አቋራጮችን ማረም ይፍቀዱ።
   unstable_optimizations: ያልተረጋጉ ማሻሻያዎች
   unstable_optimizations_description: |-
     የ RAM አጠቃቀምን የሚቀንሱ የሙከራ Chromium ባንዲራዎችን ያንቁ።

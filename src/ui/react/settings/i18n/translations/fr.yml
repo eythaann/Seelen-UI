@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Charger un fichier de configuration personnalisé
   data_folder: Dossier des données de l'application
   enable: Activer les outils de développement
+  enable_description: >-
+    Débloque des outils avancés pour inspecter et déboguer les composants
+    internes de l’interface utilisateur de Seelen. Non destiné à un usage
+    régulier.
   icons: Icônes mises en cache
   install_folder: Dossier d'installation
   load: Charger
@@ -95,6 +99,10 @@ devtools:
     trigger: Simuler
     widget_id_placeholder: '@auteur/nom-widget'
   tools: Outils
+  unlock_shortcuts: Déverrouiller les raccourcis en lecture seule
+  unlock_shortcuts_description: >-
+    Autoriser la modification des raccourcis qui sont normalement en lecture
+    seule (par exemple, les remplacements du système).
   unstable_optimizations: Optimisations instables
   unstable_optimizations_description: "Activez les indicateurs Chromium expérimentaux qui réduisent l’utilisation de la RAM.\nAttention\_: si un widget plante, tous les widgets partageant le même chargeur planteront ensemble."
   widgets_debug:

@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka
   enable: Omogućite alate za razvojne programere
+  enable_description: >-
+    Otključava napredne alate za provjeru i otklanjanje grešaka unutarnje
+    komponente korisničkog sučelja Seelen. Nije namijenjen za redovitu upotrebu.
   icons: Spremljene ikone
   install_folder: Mapa za instalaciju
   load: Opterećenje
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulirati
     widget_id_placeholder: '@autor/ime-widgeta'
   tools: Alati
+  unlock_shortcuts: Otključajte prečace samo za čitanje
+  unlock_shortcuts_description: >-
+    Dopusti prečace za uređivanje koji su obično samo za čitanje (npr.
+    nadjačavanje sustava).
   unstable_optimizations: Nestabilne optimizacije
   unstable_optimizations_description: >-
     Omogućite eksperimentalne zastavice Chromiuma koje smanjuju upotrebu RAM-a.

@@ -73,6 +73,7 @@ devtools:
   custom_config_file: カスタム構成ファイルをロードする
   data_folder: データのフォルダー
   enable: 開発者ツールを有効にする
+  enable_description: Seelen UI の内部を検査およびデバッグするための高度なツールのロックを解除します。 通常の使用を目的としていません。
   icons: キャッシュされたアイコン
   install_folder: アプリのフォルダー
   load: ロード
@@ -88,6 +89,8 @@ devtools:
     trigger: シミュレートする
     widget_id_placeholder: '@作成者/ウィジェット名'
   tools: ツール
+  unlock_shortcuts: 読み取り専用ショートカットのロックを解除する
+  unlock_shortcuts_description: 通常は読み取り専用であるショートカットの編集を許可します (システム オーバーライドなど)。
   unstable_optimizations: 不安定な最適化
   unstable_optimizations_description: |-
     RAM の使用量を削減する実験的な Chromium フラグを有効にします。

@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Pakia faili ya usanidi wa kawaida
   data_folder: Folda ya data
   enable: Wezesha zana za msanidi programu
+  enable_description: >-
+    Hufungua zana za kina za kukagua na kutatua vifaa vya ndani vya Seelen UI.
+    Haikusudiwa kwa matumizi ya kawaida.
   icons: Aikoni Zilizohifadhiwa
   install_folder: Folda ya usanikishaji
   load: Mzigo
@@ -94,6 +97,10 @@ devtools:
     trigger: Iga
     widget_id_placeholder: '@mwandishi/wijeti-jina'
   tools: Zana
+  unlock_shortcuts: Fungua Njia za Mkato za Kusoma Pekee
+  unlock_shortcuts_description: >-
+    Ruhusu njia za mkato za kuhariri ambazo kwa kawaida ni za kusoma pekee (k.m.
+    kubatilisha mfumo).
   unstable_optimizations: Uboreshaji Usio thabiti
   unstable_optimizations_description: >-
     Washa alama za majaribio za Chromium ambazo hupunguza matumizi ya RAM. 

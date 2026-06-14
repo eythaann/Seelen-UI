@@ -77,6 +77,9 @@ devtools:
   custom_config_file: טען קובץ תצורה מותאם אישית
   data_folder: תיקיית נתונים
   enable: אפשר כלי מפתחים
+  enable_description: >-
+    פותח כלים מתקדמים לבדיקה וניפוי באגים פנימיים של ממשק המשתמש של Seelen. לא
+    מיועד לשימוש קבוע.
   icons: סמלים מאוחסנים במטמון
   install_folder: תיקיית התקנה
   load: טען
@@ -92,6 +95,8 @@ devtools:
     trigger: לְחַקוֹת
     widget_id_placeholder: '@author/widget-name'
   tools: כְּלֵי עֲבוֹדָה
+  unlock_shortcuts: בטל את הנעילה של קיצורי דרך לקריאה בלבד
+  unlock_shortcuts_description: אפשר לערוך קיצורי דרך שהם בדרך כלל לקריאה בלבד (למשל, עקיפות מערכת).
   unstable_optimizations: אופטימיזציות לא יציבות
   unstable_optimizations_description: |-
     הפעל דגלי Chromium ניסיוניים המפחיתים את השימוש ב-RAM.

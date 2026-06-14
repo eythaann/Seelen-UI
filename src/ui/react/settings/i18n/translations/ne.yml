@@ -80,6 +80,9 @@ devtools:
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
   data_folder: डेटा फोल्डर
   enable: विकासकर्ता उपकरणहरू सक्षम गर्नुहोस्
+  enable_description: >-
+    Seelen UI आन्तरिकहरू निरीक्षण र डिबग गर्नको लागि उन्नत उपकरणहरू अनलक गर्दछ।
+    नियमित प्रयोगको लागि इरादा छैन।
   icons: क्यास गरिएका आइकनहरू
   install_folder: स्थापना फोल्डर
   load: बोभ्क
@@ -95,6 +98,10 @@ devtools:
     trigger: अनुकरण गर्नुहोस्
     widget_id_placeholder: '@author/widget-name'
   tools: उपकरणहरू
+  unlock_shortcuts: पढ्ने मात्र सर्टकटहरू अनलक गर्नुहोस्
+  unlock_shortcuts_description: >-
+    सर्टकटहरू सम्पादन गर्न अनुमति दिनुहोस् जुन सामान्यतया पढ्ने मात्र हुन्छ
+    (जस्तै प्रणाली ओभरराइडहरू)।
   unstable_optimizations: अस्थिर अप्टिमाइजेसनहरू
   unstable_optimizations_description: >-
     प्रयोगात्मक क्रोमियम फ्ल्यागहरू सक्षम गर्नुहोस् जसले RAM को प्रयोग घटाउँछ।

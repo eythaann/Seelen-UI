@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Ladda anpassad konfigurationsfil
   data_folder: Datarmapp
   enable: Aktivera utvecklarverktyg
+  enable_description: >-
+    Låser upp avancerade verktyg för att inspektera och felsöka Seelen UI
+    interna delar. Ej avsedd för regelbunden användning.
   icons: Cachade ikoner
   install_folder: Installationsmapp
   load: Ladda
@@ -94,6 +97,10 @@ devtools:
     trigger: Simulera
     widget_id_placeholder: '@författare/widget-namn'
   tools: Verktyg
+  unlock_shortcuts: Lås upp skrivskyddade genvägar
+  unlock_shortcuts_description: >-
+    Tillåt redigeringsgenvägar som normalt är skrivskyddade (t.ex.
+    systemöverstyrningar).
   unstable_optimizations: Instabila optimeringar
   unstable_optimizations_description: >-
     Aktivera experimentella Chromium-flaggor som minskar RAM-användningen. 

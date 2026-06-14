@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Імпортувати файл конфігурації
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
+  enable_description: >-
+    Відкриває розширені інструменти для перевірки та налагодження внутрішніх
+    елементів інтерфейсу Seelen. Не призначений для регулярного використання.
   icons: Кешовані значки
   install_folder: Папка встановлення
   load: Відкрити
@@ -95,6 +98,10 @@ devtools:
     trigger: Симулювати
     widget_id_placeholder: '@author/назва-віджета'
   tools: Інструменти
+  unlock_shortcuts: Розблокуйте ярлики лише для читання
+  unlock_shortcuts_description: >-
+    Дозволити редагування ярликів, які зазвичай доступні лише для читання
+    (наприклад, системні зміни).
   unstable_optimizations: Нестабільні оптимізації
   unstable_optimizations_description: >-
     Увімкніть експериментальні позначки Chromium, які зменшують використання

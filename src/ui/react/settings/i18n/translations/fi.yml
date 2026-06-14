@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Lataa mukautettu konfigurointitiedosto
   data_folder: Tietokansio
   enable: Ota kehittäjätyökalut käyttöön
+  enable_description: >-
+    Avaa edistyneet työkalut Seelen-käyttöliittymän sisäosien tarkastamiseen ja
+    virheenkorjaukseen. Ei tarkoitettu säännölliseen käyttöön.
   icons: Välimuistissa olevat kuvakkeet
   install_folder: Asennuskansio
   load: Ladata
@@ -94,6 +97,10 @@ devtools:
     trigger: Simuloida
     widget_id_placeholder: '@author/widgetin nimi'
   tools: Työkalut
+  unlock_shortcuts: Avaa vain luku -pikakuvakkeet
+  unlock_shortcuts_description: >-
+    Salli muokkausten pikakuvakkeet, jotka ovat normaalisti vain luku -tilassa
+    (esim. järjestelmän ohitukset).
   unstable_optimizations: Epävakaat optimoinnit
   unstable_optimizations_description: >-
     Ota käyttöön kokeelliset Chromium-merkit, jotka vähentävät RAM-muistin

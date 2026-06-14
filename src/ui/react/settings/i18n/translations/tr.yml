@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   data_folder: Veri Klasörü
   enable: Geliştirici Araçlarını Etkinleştir
+  enable_description: >-
+    Seelen UI dahili bileşenlerini incelemek ve hata ayıklamak için gelişmiş
+    araçların kilidini açar. Düzenli kullanım için tasarlanmamıştır.
   icons: Önbelleğe Alınmış Simgeler
   install_folder: Kurulum Klasörü
   load: Yükle
@@ -94,6 +97,10 @@ devtools:
     trigger: Benzetmek
     widget_id_placeholder: '@yazar/widget-adı'
   tools: Aletler
+  unlock_shortcuts: Salt Okunur Kısayolların Kilidini Aç
+  unlock_shortcuts_description: >-
+    Normalde salt okunur olan kısayolların düzenlenmesine izin verin (ör. sistem
+    geçersiz kılmaları).
   unstable_optimizations: Kararsız Optimizasyonlar
   unstable_optimizations_description: >-
     RAM kullanımını azaltan deneysel Chromium işaretlerini etkinleştirin. 

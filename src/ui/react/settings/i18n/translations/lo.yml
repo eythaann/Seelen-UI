@@ -77,6 +77,9 @@ devtools:
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   data_folder: ແຟ້ມຂໍ້ມູນ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ
+  enable_description: >-
+    ປົດລັອກເຄື່ອງມືຂັ້ນສູງສຳລັບການກວດສອບ ແລະແກ້ໄຂຂໍ້ມູນພາຍໃນ Seelen UI.
+    ບໍ່ໄດ້ມີຈຸດປະສົງສໍາລັບການນໍາໃຊ້ປົກກະຕິ.
   icons: ໄອຄອນທີ່ຈັດເກັບໄວ້
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
@@ -92,6 +95,8 @@ devtools:
     trigger: ຈຳລອງ
     widget_id_placeholder: '@author/widget-name'
   tools: ເຄື່ອງມື
+  unlock_shortcuts: ປົດລັອກທາງລັດອ່ານເທົ່ານັ້ນ
+  unlock_shortcuts_description: 'ອະນຸຍາດໃຫ້ແກ້ໄຂທາງລັດທີ່ປົກກະຕິອ່ານເທົ່ານັ້ນ (ເຊັ່ນ: ການລົບລ້າງລະບົບ).'
   unstable_optimizations: ການເພີ່ມປະສິດທິພາບທີ່ບໍ່ສະຖຽນ
   unstable_optimizations_description: >-
     ເປີດໃຊ້ທຸງ Chromium ທົດລອງທີ່ຫຼຸດການໃຊ້ RAM.

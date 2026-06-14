@@ -78,6 +78,9 @@ devtools:
   custom_config_file: Load Custom Config File
   data_folder: Data Folder
   enable: Enable Developer Tools
+  enable_description: >-
+    Unlocks advanced tools for inspecting and debugging Seelen UI internals. Not
+    intended for regular use.
   icons: Cached Icons
   install_folder: Installation Folder
   load: Load
@@ -93,6 +96,8 @@ devtools:
     trigger: Simulate
     widget_id_placeholder: '@author/widget-name'
   tools: Tools
+  unlock_shortcuts: Unlock Read-Only Shortcuts
+  unlock_shortcuts_description: Allow editing shortcuts that are normally read-only (e.g. system overrides).
   unstable_optimizations: Unstable Optimizations
   unstable_optimizations_description: >-
     Enable experimental Chromium flags that reduce RAM usage.

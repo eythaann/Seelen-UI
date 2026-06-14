@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Carregueu el fitxer de configuració personalitzada
   data_folder: Carpeta de dades
   enable: Activa les eines de desenvolupadors
+  enable_description: >-
+    Desbloqueja eines avançades per inspeccionar i depurar els elements interns
+    de la interfície d'usuari de Seelen. No està pensat per a un ús habitual.
   icons: Icones en memòria cau
   install_folder: Carpeta d'instal·lació
   load: Carregar
@@ -94,6 +97,10 @@ devtools:
     trigger: Simular
     widget_id_placeholder: '@autor/nom-widget'
   tools: Eines
+  unlock_shortcuts: Desbloqueja les dreceres de només lectura
+  unlock_shortcuts_description: >-
+    Permet l'edició de dreceres que normalment són només de lectura (p. ex.,
+    substitucions del sistema).
   unstable_optimizations: Optimitzacions inestables
   unstable_optimizations_description: >-
     Activa les marques experimentals de Chromium que redueixen l'ús de RAM.

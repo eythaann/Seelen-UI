@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
   data_folder: Datenordner
   enable: Entwicklerwerkzeuge aktivieren
+  enable_description: >-
+    Schaltet erweiterte Tools zum Überprüfen und Debuggen von Seelen-UI-Interna
+    frei. Nicht für den regelmäßigen Gebrauch bestimmt.
   icons: Zwischengespeicherte Symbole
   install_folder: Installationsordner
   load: Laden
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulieren
     widget_id_placeholder: '@Autor/Widget-Name'
   tools: Werkzeuge
+  unlock_shortcuts: Schalten Sie schreibgeschützte Verknüpfungen frei
+  unlock_shortcuts_description: >-
+    Bearbeitungsverknüpfungen zulassen, die normalerweise schreibgeschützt sind
+    (z. B. Systemüberschreibungen).
   unstable_optimizations: Instabile Optimierungen
   unstable_optimizations_description: >-
     Aktivieren Sie experimentelle Chromium-Flags, die die RAM-Nutzung

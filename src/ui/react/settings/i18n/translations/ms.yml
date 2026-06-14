@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Muatkan fail konfigurasi tersuai
   data_folder: Folder Data
   enable: Dayakan alat pemaju
+  enable_description: >-
+    Membuka kunci alatan lanjutan untuk memeriksa dan menyahpepijat dalaman UI
+    Seelen. Tidak bertujuan untuk kegunaan biasa.
   icons: Ikon Cache
   install_folder: Folder pemasangan
   load: Beban
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulasikan
     widget_id_placeholder: '@nama pengarang/widget'
   tools: Alatan
+  unlock_shortcuts: Buka kunci Pintasan Baca Sahaja
+  unlock_shortcuts_description: >-
+    Benarkan pintasan pengeditan yang biasanya dibaca sahaja (cth. menimpa
+    sistem).
   unstable_optimizations: Pengoptimuman Tidak Stabil
   unstable_optimizations_description: >-
     Dayakan bendera Chromium percubaan yang mengurangkan penggunaan RAM.

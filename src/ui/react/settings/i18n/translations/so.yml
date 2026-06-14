@@ -81,6 +81,9 @@ devtools:
   custom_config_file: Xamuul faylka caadiga ah ee config
   data_folder: Faylka xogta
   enable: U oggolow qalabka horumarinta
+  enable_description: >-
+    Waxay furaysaa aaladaha horumarsan ee lagu baadho laguna saxayo gudaha
+    Seelen UI. Looguma talagalin isticmaalka joogtada ah.
   icons: Astaamaha kaydsan
   install_folder: Xeerka rakibaadda
   load: Xammuul
@@ -96,6 +99,10 @@ devtools:
     trigger: Isku day
     widget_id_placeholder: '@author/widget-name'
   tools: Qalabka
+  unlock_shortcuts: Fur Jidadka gaagaaban ee Akhriska-Kaliya
+  unlock_shortcuts_description: >-
+    Oggolow tafatirka dariiqyada gaagaaban ee sida caadiga ah akhrinta-kaliya
+    (tusaale hab-maamuuska).
   unstable_optimizations: Hagaajinta Aan degganayn
   unstable_optimizations_description: >-
     Daar calaamadaha Chromium ee tijaabada ah ee dhimaya isticmaalka RAM.

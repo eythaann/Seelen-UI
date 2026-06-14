@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Carregar Arquivo de Configuração Personalizado
   data_folder: Pasta de Dados
   enable: Ativar Ferramentas de Desenvolvedor
+  enable_description: >-
+    Desbloqueia ferramentas avançadas para inspecionar e depurar os componentes
+    internos da UI do Seelen. Não se destina ao uso regular.
   icons: Ícones em cache
   install_folder: Pasta de Instalação
   load: Carregar
@@ -94,6 +97,10 @@ devtools:
     trigger: Simular
     widget_id_placeholder: '@autor/nome do widget'
   tools: Ferramentas
+  unlock_shortcuts: Desbloquear atalhos somente leitura
+  unlock_shortcuts_description: >-
+    Permitir edição de atalhos que normalmente são somente leitura (por exemplo,
+    substituições do sistema).
   unstable_optimizations: Otimizações instáveis
   unstable_optimizations_description: >-
     Ative sinalizadores experimentais do Chromium que reduzem o uso de RAM.

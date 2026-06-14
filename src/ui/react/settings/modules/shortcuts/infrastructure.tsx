@@ -12,6 +12,7 @@ import {
   shortcutsError,
   updateShortcut,
 } from "./application.ts";
+import { settings } from "../../state/mod";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../components/SettingsBox/index.tsx";
 import { Note } from "../../components/Note/index.tsx";
@@ -100,7 +101,10 @@ interface ShortcutProps {
 }
 
 function Shortcut({ entry, onChanged }: ShortcutProps) {
-  const { id, label, keys, readonly } = entry;
+  const { id, label, keys, readonly: sugestedReadonly } = entry;
+
+  const { devTools, unlockShortcuts } = settings.value;
+  const readonly = sugestedReadonly && !(devTools && unlockShortcuts);
 
   const isAttachedWidgetEnabled = entry.widgetId ? isWidgetEnabled(entry.widgetId) : true;
 

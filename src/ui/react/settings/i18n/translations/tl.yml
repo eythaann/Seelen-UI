@@ -82,6 +82,9 @@ devtools:
   custom_config_file: I -load ang pasadyang config file
   data_folder: Folder ng data
   enable: Paganahin ang mga tool ng developer
+  enable_description: >-
+    Ina-unlock ang mga advanced na tool para sa pag-inspeksyon at pag-debug sa
+    mga internal ng Seelen UI. Hindi inilaan para sa regular na paggamit.
   icons: Mga Naka-cache na Icon
   install_folder: Folder ng pag -install
   load: Mag -load
@@ -97,6 +100,10 @@ devtools:
     trigger: Gayahin
     widget_id_placeholder: '@author/widget-name'
   tools: Mga gamit
+  unlock_shortcuts: I-unlock ang Mga Read-Only na Shortcut
+  unlock_shortcuts_description: >-
+    Payagan ang pag-edit ng mga shortcut na karaniwang read-only (hal.
+    pag-override ng system).
   unstable_optimizations: Mga Hindi Matatag na Optimization
   unstable_optimizations_description: >-
     I-enable ang pang-eksperimentong mga flag ng Chromium na nagpapababa sa
