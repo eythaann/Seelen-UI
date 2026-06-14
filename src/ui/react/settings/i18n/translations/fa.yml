@@ -125,6 +125,8 @@ extras:
   clear_icons_tooltip: >-
     یک راه اندازی مجدد می تواند مورد نیاز باشد تا به طور کامل در همه ویجت ها
     تأثیر بگذارد
+  discord_rpc: اختلاف حضور غنی
+  discord_rpc_description: به همه نشان دهید که سبک دارید!
   exit: ترک/خروج
   relaunch: مجدداً
   streaming_mode: حالت جریان
@@ -176,6 +178,7 @@ general:
   theme:
     available: تم های موجود
     selected: تم های فعال
+global: جهانی
 header:
   labels:
     config: تنظیمات
@@ -216,6 +219,7 @@ reset_to_default: تنظیم مجدد به مقدار پیش فرض
 resources:
   affected_widgets: ابزارک های تحت تأثیر
   app_outdated: این منبع به نسخه جدیدتر Seelen UI نیاز دارد تا به درستی کار کند.
+  coming_soon: به زودی
   corrupted_wallpaper: استخراج تصویر کوچک انجام نشد - فرمت ویدیو خراب یا پشتیبانی نشده است
   delete: منبع را حذف کنید
   discover: منابع بیشتری را کشف کنید

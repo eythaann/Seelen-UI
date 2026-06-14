@@ -25,6 +25,9 @@ resource:
   downloading: Загрузка активов...
   downloading_body: Это может занять несколько секунд, пожалуйста, не закрывайте окно.
   enable: Включить
+  login_required_action: Войти
+  login_required_body: Вам необходимо войти в систему, чтобы загрузить этот ресурс.
+  login_required_title: Требуется вход
 runtime:
   corrupted_data: Поврежденные данные
   corrupted_file: Файл конфигурации поврежден, вместо него используются значения по умолчанию.

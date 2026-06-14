@@ -127,6 +127,8 @@ extras:
     кунед.
   clear_icons: Нишондиҳандаи системаи тозагӣ
   clear_icons_tooltip: Бозоғоз кардан мумкин аст, ки ба ҳама виджет пурра таъсир расонад
+  discord_rpc: Ҳузури бойро ҷудо кунед
+  discord_rpc_description: Ба ҳама нишон диҳед, ки услуб доред!
   exit: Курат / баромадан
   relaunch: Радкунӣ
   streaming_mode: Ҳолати ҷараён
@@ -179,6 +181,7 @@ general:
   theme:
     available: Мавзӯъҳои дастрас
     selected: Мавзӯъҳои фаъол
+global: Глобалӣ
 header:
   labels:
     config: Конфигуратсия
@@ -219,6 +222,7 @@ reset_to_default: Аз нав танзимкунии арзиши пешфарз
 resources:
   affected_widgets: Виҷетҳои зарардида
   app_outdated: Ин манбаъ як версияи нави seelen-ро талаб мекунад, то дуруст кор кунам.
+  coming_soon: Ба зудӣ
   corrupted_wallpaper: Истихроҷи ангораи видео - формати вайроншуда ё дастгирӣнашаванда
   delete: Манбаъро нест мекунад
   discover: Нахуст захираҳои бештарро кашф кунед

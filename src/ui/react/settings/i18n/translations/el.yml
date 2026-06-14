@@ -127,6 +127,8 @@ extras:
     μέσω του cloud.
   clear_icons: Εκκαθάριση προσωρινής μνήμης εικονιδίων συστήματος
   clear_icons_tooltip: Μπορεί να απαιτηθεί επανεκκίνηση για να ισχύσει πλήρως σε όλα τα widgets
+  discord_rpc: Διχόνοια πλούσια παρουσία
+  discord_rpc_description: Δείξτε σε όλους ότι έχετε στυλ!
   exit: Εγκατάλειψη/έξοδο
   relaunch: Ξεκίνησα ξανά
   streaming_mode: Λειτουργία ροής
@@ -180,6 +182,7 @@ general:
   theme:
     available: Διαθέσιμα θέματα
     selected: Ενεργά θέματα
+global: Καθολικός
 header:
   labels:
     config: Διαμορφώσεις
@@ -222,6 +225,7 @@ resources:
   app_outdated: >-
     Αυτός ο πόρος απαιτεί μια νεότερη έκδοση του Seelen UI για να λειτουργήσει
     σωστά.
+  coming_soon: Προσεχώς
   corrupted_wallpaper: >-
     Αποτυχία εξαγωγής μικρογραφίας - κατεστραμμένη ή μη υποστηριζόμενη μορφή
     βίντεο

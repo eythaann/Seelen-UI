@@ -122,6 +122,8 @@ extras:
   backup_sync_description: Bulud vasitəsilə parametrlərinizi avtomatik olaraq yedəkləyin və bərpa edin.
   clear_icons: Sistem nişanlar önbelleği təmizləyin
   clear_icons_tooltip: Bütün vidjetlərə tam təsir göstərmək üçün yenidən başlama tələb oluna bilər
+  discord_rpc: Zəngin varlığı ayırın
+  discord_rpc_description: Stiliniz olan hər kəsə göstərin!
   exit: Çıxmaq / çıxmaq
   relaunch: Başsız
   streaming_mode: Yayım rejimi
@@ -174,6 +176,7 @@ general:
   theme:
     available: Mövcud Mövzular
     selected: Aktiv Mövzular
+global: Qlobal
 header:
   labels:
     config: Konfiqurasiya
@@ -216,6 +219,7 @@ resources:
   app_outdated: >-
     Bu qaynaq, Seelen UI-nin düzgün işləməsi üçün daha yeni bir versiyasını
     tələb edir.
+  coming_soon: Tezliklə
   corrupted_wallpaper: Miniatürü çıxarmaq alınmadı - zədələnmiş və ya dəstəklənməyən video formatı
   delete: Resurs silmək
   discover: Daha çox mənbəyi kəşf edin

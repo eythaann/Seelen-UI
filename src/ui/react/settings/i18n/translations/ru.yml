@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     Для полного вступления в силу всех виджетов может потребоваться
     перезагрузка.
+  discord_rpc: Богатое присутствие Discord
+  discord_rpc_description: Покажите всем, что у вас есть стиль!
   exit: Выйти
   relaunch: Перезапустить
   streaming_mode: Режим потоковой передачи
@@ -180,6 +182,7 @@ general:
   theme:
     available: Доступные темы
     selected: Активные темы
+global: Глобальный
 header:
   labels:
     config: Конфигурации
@@ -220,6 +223,7 @@ reset_to_default: Сброс на значение по умолчанию
 resources:
   affected_widgets: Затронутые виджеты
   app_outdated: Для корректной работы этого ресурса требуется более новая версия Seelen UI.
+  coming_soon: Вскоре
   corrupted_wallpaper: 'Не удалось извлечь миниатюру: формат видео поврежден или не поддерживается.'
   delete: Удалить ресурс
   discover: Откройте для себя больше ресурсов

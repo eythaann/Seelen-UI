@@ -22,6 +22,9 @@ resource:
   downloading: Downloading assets...
   downloading_body: This might take a few seconds, please don't close the window.
   enable: Enable
+  login_required_action: Sign In
+  login_required_body: You need to sign in to download this resource.
+  login_required_title: Sign in Required
 runtime:
   corrupted_data: Corrupted data
   corrupted_file: A configuration file is corrupted, using default values instead.

@@ -25,6 +25,9 @@ resource:
   downloading: সম্পদ ডাউনলোড করা ...
   downloading_body: এটি কয়েক সেকেন্ড সময় নিতে পারে, দয়া করে উইন্ডোটি বন্ধ করবেন না।
   enable: সক্ষম করুন
+  login_required_action: সাইন ইন করুন
+  login_required_body: এই সম্পদ ডাউনলোড করতে আপনাকে সাইন ইন করতে হবে।
+  login_required_title: সাইন ইন আবশ্যক
 runtime:
   corrupted_data: দূষিত ডেটা
   corrupted_file: পরিবর্তে ডিফল্ট মানগুলি ব্যবহার করে একটি কনফিগারেশন ফাইল দূষিত হয়।

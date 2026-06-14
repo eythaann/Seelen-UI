@@ -25,6 +25,9 @@ resource:
   downloading: Varlıklar indiriliyor...
   downloading_body: Bu işlem birkaç saniye sürebilir, lütfen pencereyi kapatmayın.
   enable: Etkinleştir
+  login_required_action: Oturum aç
+  login_required_body: Bu kaynağı indirmek için oturum açmanız gerekiyor.
+  login_required_title: Oturum açmanız gerekiyor
 runtime:
   corrupted_data: Bozuk veriler
   corrupted_file: >-

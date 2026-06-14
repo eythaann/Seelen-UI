@@ -126,6 +126,8 @@ extras:
   clear_icons_tooltip: >-
     Pengaktifan ulang mungkin diperlukan untuk menerapkan efek sepenuhnya pada
     semua widget
+  discord_rpc: Kehadiran yang kaya akan perselisihan
+  discord_rpc_description: Tunjukkan kepada semua orang bahwa Anda punya gaya!
   exit: Berhenti/keluar
   relaunch: Peluncuran kembali
   streaming_mode: Modus Streaming
@@ -179,6 +181,7 @@ general:
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
+global: Global
 header:
   labels:
     config: Konfigurasi
@@ -221,6 +224,7 @@ resources:
   app_outdated: >-
     Sumber daya ini membutuhkan versi terbaru dari Seelen UI agar dapat
     berfungsi dengan baik.
+  coming_soon: Segera hadir
   corrupted_wallpaper: Gagal mengekstrak thumbnail - format video rusak atau tidak didukung
   delete: Hapus sumber daya
   discover: Temukan lebih banyak sumber daya

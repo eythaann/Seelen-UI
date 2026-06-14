@@ -26,6 +26,9 @@ resource:
   downloading: Varojen lataaminen...
   downloading_body: Tämä saattaa kestää muutaman sekunnin, älä sulje ikkunaa.
   enable: Ota käyttöön
+  login_required_action: Kirjaudu sisään
+  login_required_body: Sinun on kirjauduttava sisään ladataksesi tämän resurssin.
+  login_required_title: Pakollinen sisäänkirjautuminen
 runtime:
   corrupted_data: Vioittuneet tiedot
   corrupted_file: Määritystiedosto on vioittunut ja käyttää sen sijaan oletusarvoja.

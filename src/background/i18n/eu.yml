@@ -26,6 +26,9 @@ resource:
   downloading: Aktiboak deskargatzen ...
   downloading_body: Honek segundo batzuk iraun ditzake, mesedez, ez itxi leihoa.
   enable: Ahalbidetu
+  login_required_action: Hasi saioa
+  login_required_body: Baliabide hau deskargatzeko saioa hasi behar duzu.
+  login_required_title: Saioa hasi behar da
 runtime:
   corrupted_data: Hondatutako datuak
   corrupted_file: >-

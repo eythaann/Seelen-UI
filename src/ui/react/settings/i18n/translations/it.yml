@@ -126,6 +126,8 @@ extras:
     cloud.
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
+  discord_rpc: Presenza ricca di discordia
+  discord_rpc_description: Mostra a tutti che hai stile!
   exit: Esci
   relaunch: Riavvia
   streaming_mode: Modalità streaming
@@ -181,6 +183,7 @@ general:
   theme:
     available: Temi disponibili
     selected: Temi attivi
+global: Globale
 header:
   labels:
     config: Configurazioni
@@ -223,6 +226,7 @@ resources:
   app_outdated: >-
     Questa risorsa richiede una versione più recente di Seelen UI per funzionare
     correttamente.
+  coming_soon: Prossimamente
   corrupted_wallpaper: >-
     Impossibile estrarre la miniatura: formato video danneggiato o non
     supportato

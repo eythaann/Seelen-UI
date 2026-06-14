@@ -25,6 +25,9 @@ resource:
   downloading: Kupakua mali ...
   downloading_body: Hii inaweza kuchukua sekunde chache, tafadhali usifunge dirisha.
   enable: Wezesha
+  login_required_action: Ingia
+  login_required_body: Unahitaji kuingia ili kupakua nyenzo hii.
+  login_required_title: Ingia katika akaunti Inahitajika
 runtime:
   corrupted_data: Data iliyoharibiwa
   corrupted_file: Faili ya usanidi imeharibiwa, kwa kutumia maadili ya msingi badala yake.

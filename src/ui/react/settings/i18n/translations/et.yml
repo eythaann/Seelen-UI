@@ -122,6 +122,8 @@ extras:
   backup_sync_description: Varundage ja taastage seaded automaatselt pilve kaudu.
   clear_icons: Tühjenda süsteemi ikoonide vahemälu
   clear_icons_tooltip: Kõigi vidinate täielikuks jõustumiseks võib olla vajalik taaskäivitamine.
+  discord_rpc: Discord rikas kohalolek
+  discord_rpc_description: Näidake kõigile, et teil on stiil!
   exit: Lõpeta/väljumine
   relaunch: Taaskäivitama
   streaming_mode: Voogesitusrežiim
@@ -173,6 +175,7 @@ general:
   theme:
     available: Saadaolevad teemad
     selected: Aktiivsed teemad
+global: Globaalne
 header:
   labels:
     config: Konfiguratsioonid
@@ -213,6 +216,7 @@ reset_to_default: Nullida vaikimisi väärtus
 resources:
   affected_widgets: Mõjutatud vidinad
   app_outdated: Selle ressursi korralikuks kasutamiseks on vaja Seelen UI uuemat versiooni.
+  coming_soon: Varsti
   corrupted_wallpaper: >-
     Pisipildi ekstraktimine ebaõnnestus – videovorming on rikutud või seda ei
     toetata

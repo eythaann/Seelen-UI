@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Hifadhi nakala kiotomatiki na urejeshe mipangilio yako kupitia wingu.
   clear_icons: Kashe ya icons za mfumo wazi
   clear_icons_tooltip: Kuanza tena kunaweza kuhitajika kuchukua kikamilifu kwa vilivyoandikwa vyote
+  discord_rpc: Tofautisha uwepo wa tajiri
+  discord_rpc_description: Onyesha kila mtu ambaye una mtindo!
   exit: Acha/exit
   relaunch: Kuzindua tena
   streaming_mode: Hali ya Kutiririsha
@@ -174,6 +176,7 @@ general:
   theme:
     available: Mandhari Zinazopatikana
     selected: Mandhari Inayotumika
+global: Ulimwenguni
 header:
   labels:
     config: Usanidi
@@ -214,6 +217,7 @@ reset_to_default: Rudisha kwa thamani ya msingi
 resources:
   affected_widgets: Wijeti Zilizoathiriwa
   app_outdated: Rasilimali hii inahitaji toleo jipya la Seelen UI kufanya kazi vizuri.
+  coming_soon: Inakuja Hivi Karibuni
   corrupted_wallpaper: Imeshindwa kutoa kijipicha - umbizo la video mbovu au ambalo halitumiki
   delete: Futa rasilimali
   discover: Gundua rasilimali zaidi

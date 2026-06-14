@@ -76,20 +76,22 @@ export function Information() {
               </span>
             }
           />
-          <SettingsOption
-            label={t("update.channel")}
-            action={
-              <Select
-                value={updaterSettings.channel}
-                disabled={isMsixBuild}
-                onChange={onChangeUpdateChannel}
-                options={Object.values(UpdateChannel).map((c) => ({
-                  value: c,
-                  label: c,
-                }))}
-              />
-            }
-          />
+
+          {!isFixed && !isMsixBuild && (
+            <SettingsOption
+              label={t("update.channel")}
+              action={
+                <Select
+                  value={updaterSettings.channel}
+                  onChange={onChangeUpdateChannel}
+                  options={Object.values(UpdateChannel).map((c) => ({
+                    value: c,
+                    label: c,
+                  }))}
+                />
+              }
+            />
+          )}
         </SettingsSubGroup>
       </SettingsGroup>
 
@@ -113,10 +115,12 @@ export function Information() {
       )}
 
       <SettingsGroup>
-        <SettingsOption>
-          <b>Discord RPC</b>
-          <Switch value={drpc} onChange={onToggleDrpc} />
-        </SettingsOption>
+        <SettingsOption
+          label={t("extras.discord_rpc")}
+          description={t("extras.discord_rpc_description")}
+          action={<Switch value={drpc} onChange={onToggleDrpc} />}
+        />
+
         <SettingsOption
           label={t("extras.streaming_mode")}
           description={t("extras.streaming_mode_description")}

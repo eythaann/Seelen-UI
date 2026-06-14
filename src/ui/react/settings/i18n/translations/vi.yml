@@ -124,6 +124,8 @@ extras:
   clear_icons_tooltip: >-
     Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
     tiện ích
+  discord_rpc: Sự hiện diện phong phú của Discord
+  discord_rpc_description: Cho mọi người thấy bạn có phong cách!
   exit: Thoát/Thoát
   relaunch: Khởi động lại
   streaming_mode: Chế độ phát trực tuyến
@@ -175,6 +177,7 @@ general:
   theme:
     available: Chủ đề có sẵn
     selected: Chủ đề đang hoạt động
+global: Toàn cầu
 header:
   labels:
     config: Cấu hình
@@ -215,6 +218,7 @@ reset_to_default: Đặt lại về giá trị mặc định
 resources:
   affected_widgets: Widget bị ảnh hưởng
   app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  coming_soon: Sắp ra mắt
   corrupted_wallpaper: >-
     Không thể trích xuất hình thu nhỏ - định dạng video bị hỏng hoặc không được
     hỗ trợ

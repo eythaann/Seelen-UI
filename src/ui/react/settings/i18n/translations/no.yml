@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Sikkerhetskopier og gjenopprett innstillingene dine automatisk via skyen.
   clear_icons: Klare systemikoner cache
   clear_icons_tooltip: Det kan kreves en omstart for å tre i kraft alle widgeter
+  discord_rpc: Discord rik tilstedeværelse
+  discord_rpc_description: Vis alle at du har stil!
   exit: Avslutt/avslutte
   relaunch: Relanseres
   streaming_mode: Strømmemodus
@@ -175,6 +177,7 @@ general:
   theme:
     available: Tilgjengelige temaer
     selected: Aktive temaer
+global: Global
 header:
   labels:
     config: Konfigurasjoner
@@ -217,6 +220,7 @@ resources:
   app_outdated: >-
     Denne ressursen krever en nyere versjon av Seelen UI for å fungere
     ordentlig.
+  coming_soon: Kommer snart
   corrupted_wallpaper: Kunne ikke pakke ut miniatyrbildet – ødelagt eller ikke støttet videoformat
   delete: Slett ressurs
   discover: Oppdag flere ressurser

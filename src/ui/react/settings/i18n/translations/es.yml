@@ -128,6 +128,8 @@ extras:
   clear_icons_tooltip: >-
     Podría ser necesario reiniciar el sistema para que surta efecto en todos los
     widgets.
+  discord_rpc: Presencia rica en discordia
+  discord_rpc_description: ¡Muéstrales a todos que tienes estilo!
   exit: Salir
   relaunch: Relanzamiento
   streaming_mode: Modo de transmisión
@@ -182,6 +184,7 @@ general:
   theme:
     available: Temas disponibles
     selected: Temas activos
+global: Global
 header:
   labels:
     config: Configuraciones
@@ -224,6 +227,7 @@ resources:
   app_outdated: >-
     Este recurso requiere una versión más reciente de Seelen UI para funcionar
     correctamente.
+  coming_soon: Muy pronto
   corrupted_wallpaper: 'No se pudo extraer la miniatura: formato de video dañado o no compatible'
   delete: Eliminar recursos
   discover: Descubra más recursos

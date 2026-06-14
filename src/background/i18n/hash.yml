@@ -11,6 +11,9 @@ resource.download_failed_title: 6545fc98
 resource.downloading: 777d27a0
 resource.downloading_body: fff1aee0
 resource.enable: f765fe50
+resource.login_required_action: 61bab070
+resource.login_required_body: 17dcc438
+resource.login_required_title: 1f340bf0
 runtime.corrupted_data: efa9e6f7
 runtime.corrupted_file: e94b1fc8
 runtime.corrupted_file_path: 9d921bd8

@@ -124,6 +124,8 @@ extras:
   backup_sync_description: Rugsteun outomaties en herstel jou instellings via die wolk.
   clear_icons: Maak stelselikone kas uit
   clear_icons_tooltip: '''N Herbegin kan nodig wees om alle widgets ten volle in werking te stel'
+  discord_rpc: Onenigheid ryke teenwoordigheid
+  discord_rpc_description: Wys vir almal jy het styl!
   exit: Hou op/uitgang
   relaunch: Herlaai
   streaming_mode: Stroommodus
@@ -175,6 +177,7 @@ general:
   theme:
     available: Beskikbare temas
     selected: Aktiewe temas
+global: Wêreldwyd
 header:
   labels:
     config: Konfigurasies
@@ -217,6 +220,7 @@ resources:
   app_outdated: >-
     Hierdie hulpbron vereis dat 'n nuwer weergawe van Seelen UI behoorlik moet
     werk.
+  coming_soon: Binnekort
   corrupted_wallpaper: Kon nie kleinkiekie onttrek nie - korrupte of ongesteunde videoformaat
   delete: Vee hulpbron uit
   discover: Ontdek meer bronne

@@ -125,6 +125,8 @@ extras:
   clear_icons_tooltip: >-
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
     logrīkos.
+  discord_rpc: Nesaskaņu bagāta klātbūtne
+  discord_rpc_description: Parādiet visiem, ka jums ir stils!
   exit: Atmest/iziet
   relaunch: Atsākšana
   streaming_mode: Straumēšanas režīms
@@ -176,6 +178,7 @@ general:
   theme:
     available: Pieejamie motīvi
     selected: Aktīvās tēmas
+global: Globāli
 header:
   labels:
     config: Konfigurācijas
@@ -216,6 +219,7 @@ reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   affected_widgets: Ietekmētie logrīki
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  coming_soon: Drīzumā
   corrupted_wallpaper: "Neizdevās izvilkt sīktēlu\_— bojāts vai neatbalstīts video formāts"
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu

@@ -24,6 +24,9 @@ resource:
   downloading: د شتمنیو ډاونلوډ کول ...
   downloading_body: دا ممکن یو څو ثانیې ونیسي، مهرباني وکړئ کړکۍ بند کړئ.
   enable: وړ
+  login_required_action: ننوتل
+  login_required_body: تاسو اړتیا لرئ د دې سرچینې ډاونلوډ کولو لپاره لاسلیک وکړئ.
+  login_required_title: ننوتل اړین دي
 runtime:
   corrupted_data: فاسد ډاټا
   corrupted_file: د سازونې فایل فاسد شوی، پرځای یې د ډیفالټ ارزښتونو په کارولو سره.

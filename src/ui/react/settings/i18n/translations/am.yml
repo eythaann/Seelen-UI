@@ -118,6 +118,8 @@ extras:
   backup_sync_description: በራስ-ሰር ምትኬ ያስቀምጡ እና ቅንብሮችዎን በደመና በኩል ወደነበሩበት ይመልሱ።
   clear_icons: የስርዓት አዶዎች መሸጎጫ
   clear_icons_tooltip: ዳግም ማስጀመር በሁሉም ፍርግሞች ላይ ሙሉ በሙሉ እንዲተገበር ሊፈልግ ይችላል
+  discord_rpc: የበለጸገ መገኘት አለመግባባት
+  discord_rpc_description: ቅጥ ያላችሁትን ሁሉ ያሳዩ!
   exit: ማቆም / መውጣት
   relaunch: እንደገና መነገር
   streaming_mode: የዥረት ሁነታ
@@ -167,6 +169,7 @@ general:
   theme:
     available: የሚገኙ ገጽታዎች
     selected: ንቁ ገጽታዎች
+global: ዓለም አቀፍ
 header:
   labels:
     config: ውቅሮች
@@ -207,6 +210,7 @@ reset_to_default: ወደ ነባሪ እሴት ዳግም ያስጀምሩ
 resources:
   affected_widgets: የተጎዱ መግብሮች
   app_outdated: ይህ ሀብት በአግባቡ እንዲሠራ አዲስ የአዲስ ስሪት ይፈልጋል.
+  coming_soon: በቅርብ ቀን
   corrupted_wallpaper: ድንክዬ ማውጣት አልተሳካም - የተበላሸ ወይም የማይደገፍ የቪዲዮ ቅርጸት
   delete: ምንጭን ሰርዝ
   discover: ተጨማሪ ሀብቶችን ያግኙ

@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
     il-widgets kollha
+  discord_rpc: Discord preżenza rikka
+  discord_rpc_description: Uri lil kulħadd li għandek stil!
   exit: Nieqaf / ħruġ
   relaunch: Tnedija mill-ġdid
   streaming_mode: Modalità Streaming
@@ -179,6 +181,7 @@ general:
   theme:
     available: Temi Disponibbli
     selected: Temi Attivi
+global: Globali
 header:
   labels:
     config: Konfigurazzjonijiet
@@ -219,6 +222,7 @@ reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   affected_widgets: Widgets Affettwati
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  coming_soon: Dalwaqt
   corrupted_wallpaper: >-
     Naqas milli jiġi estratt thumbnail - format tal-vidjo korrotta jew mhux
     appoġġjata

@@ -26,6 +26,9 @@ resource:
   downloading: Téléchargement des actifs...
   downloading_body: Cela peut prendre quelques secondes, ne fermez pas la fenêtre.
   enable: Activer
+  login_required_action: Se connecter
+  login_required_body: Vous devez vous connecter pour télécharger cette ressource.
+  login_required_title: Connexion obligatoire
 runtime:
   corrupted_data: Données corrompues
   corrupted_file: Un fichier de configuration est corrompu et utilise des valeurs par défaut.

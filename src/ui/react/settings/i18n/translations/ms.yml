@@ -124,6 +124,8 @@ extras:
   backup_sync_description: Sandarkan dan pulihkan tetapan anda secara automatik melalui awan.
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
+  discord_rpc: Kehadiran yang kaya dengan perselisihan
+  discord_rpc_description: Tunjukkan kepada semua orang bahawa anda mempunyai gaya!
   exit: Berhenti/keluar
   relaunch: Pelancaran semula
   streaming_mode: Mod Penstriman
@@ -176,6 +178,7 @@ general:
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
+global: Global
 header:
   labels:
     config: Konfigurasi
@@ -218,6 +221,7 @@ resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
+  coming_soon: Akan Datang
   corrupted_wallpaper: Gagal mengeluarkan lakaran kecil - format video rosak atau tidak disokong
   delete: Padam sumber
   discover: Cari lebih banyak sumber

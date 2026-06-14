@@ -25,6 +25,9 @@ resource:
   downloading: Зеркашии дороиҳо ...
   downloading_body: Ин метавонад якчанд сонияро талаб кунад, лутфан тирезаро пӯшед.
   enable: Имконият додан
+  login_required_action: Даромад
+  login_required_body: Барои зеркашии ин манбаъ шумо бояд ворид шавед.
+  login_required_title: Воридшавӣ ҳатмист
 runtime:
   corrupted_data: Маълумоти вайроншуда
   corrupted_file: Файли танзимот вайрон шудааст, бо истифода аз арзишҳои пешфарз ба ҷои.

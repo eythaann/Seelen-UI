@@ -25,6 +25,9 @@ resource:
   downloading: Lawrlwytho asedau ...
   downloading_body: Efallai y bydd hyn yn cymryd ychydig eiliadau, peidiwch â chau'r ffenestr.
   enable: Galluoga
+  login_required_action: Mewngofnodwch
+  login_required_body: Mae angen i chi fewngofnodi i lawrlwytho'r adnodd hwn.
+  login_required_title: Angen Mewngofnodi
 runtime:
   corrupted_data: Data llygredig
   corrupted_file: Mae ffeil ffurfweddu yn llygredig, gan ddefnyddio gwerthoedd diofyn yn lle.

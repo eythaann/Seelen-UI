@@ -26,6 +26,9 @@ resource:
   downloading: Herunterladen von Assets...
   downloading_body: Dies kann ein paar Sekunden dauern, bitte schließen Sie das Fenster nicht.
   enable: Aktivieren Sie
+  login_required_action: Anmelden
+  login_required_body: Sie müssen sich anmelden, um diese Ressource herunterzuladen.
+  login_required_title: Anmeldung erforderlich
 runtime:
   corrupted_data: Beschädigte Daten
   corrupted_file: >-

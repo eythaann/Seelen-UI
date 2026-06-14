@@ -27,7 +27,7 @@ use crate::{
     session::application::SessionManager,
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
-    widgets::trigger_dialog_backend,
+    widgets::{show_settings_at, trigger_dialog_backend},
 };
 
 pub const URI: &str = "seelen-ui.uri:";
@@ -169,6 +169,16 @@ async fn download_resource(url: &str) -> Result<()> {
 
     let file = match _download_resource(url).await {
         Ok(file) => file,
+        Err(err) if err.code() == reqwest::StatusCode::UNAUTHORIZED.as_u16() => {
+            let event = "open_settings_extras";
+            get_app_handle().once(event, move |_| {
+                log_error!(show_settings_at("/extras"));
+            });
+            log_error!(trigger_dialog_backend(login_required_dialog(
+                dialog_id, event
+            )));
+            return Err(err);
+        }
         Err(err) => {
             log_error!(trigger_dialog_backend(error_dialog(
                 dialog_id,
@@ -184,10 +194,11 @@ async fn download_resource(url: &str) -> Result<()> {
 
 async fn _download_resource(url: &str) -> Result<SluResourceFile> {
     let res = SessionManager::authed_get(url).send().await?;
-    if !res.status().is_success() {
-        let status = res.status();
+    let status = res.status();
+    if !status.is_success() {
         let body = res.text().await.unwrap_or_default();
-        return Err(format!("{status} - {body}").into());
+        log::error!("Failed to download resource: {status} - {body}");
+        return Err(status.into());
     }
 
     let file = res.json::<SluResourceFile>().await?;
@@ -242,7 +253,16 @@ fn update_dialog_to_added_resource(dialog_id: Uuid, resource: &Resource) -> Resu
                 let mut state = state.cloned();
                 match kind {
                     ResourceKind::Theme => {
-                        state.settings.active_themes.push(used_id.clone().into());
+                        let theme_id = used_id.clone().into();
+                        let has_shared_styles = RESOURCES
+                            .themes
+                            .read(&theme_id, |_, t| !t.shared_styles.is_empty())
+                            .unwrap_or(false);
+                        if has_shared_styles {
+                            state.settings.active_themes.clear();
+                            state.settings.active_themes.push("@default/theme".into());
+                        }
+                        state.settings.active_themes.push(theme_id);
                     }
                     ResourceKind::IconPack => {
                         state
@@ -397,6 +417,43 @@ fn auth_error_dialog(err: &str) -> Dialog {
                 styles: None,
             },
         ],
+        ..Default::default()
+    }
+}
+
+fn login_required_dialog(id: Uuid, login_event: &str) -> Dialog {
+    Dialog {
+        identifier: id,
+        title: vec![DialogContent::Group {
+            items: vec![
+                DialogContent::Icon {
+                    name: "LuUserRound".to_string(),
+                    styles: Some(
+                        CssStyles::new()
+                            .add("color", "var(--color-blue-800)")
+                            .add("height", "1.2rem"),
+                    ),
+                },
+                DialogContent::Text {
+                    value: t!("resource.login_required_title").to_string(),
+                    styles: None,
+                },
+            ],
+            styles: Some(CssStyles::new().add("alignItems", "center")),
+        }],
+        content: vec![DialogContent::Text {
+            value: t!("resource.login_required_body").to_string(),
+            styles: None,
+        }],
+        footer: vec![DialogContent::Button {
+            skin: Some("solid".to_string()),
+            inner: vec![DialogContent::Text {
+                value: t!("resource.login_required_action").to_string(),
+                styles: None,
+            }],
+            on_click: login_event.to_string(),
+            styles: None,
+        }],
         ..Default::default()
     }
 }

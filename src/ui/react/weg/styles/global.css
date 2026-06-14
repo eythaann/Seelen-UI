@@ -86,14 +86,14 @@ body {
     }
   }
 
-  &.full-width {
+  &[data-size="full-width"] {
     .weg-item-drag-container:has(.weg-separator) {
       flex: 1;
     }
   }
 
   &.horizontal {
-    &.full-width {
+    &[data-size="full-width"] {
       width: var(--weg-max-taskbar-width);
     }
 
@@ -105,7 +105,7 @@ body {
   }
 
   &.vertical {
-    &.full-width {
+    &[data-size="full-width"] {
       height: var(--weg-max-taskbar-height);
     }
 

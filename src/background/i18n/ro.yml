@@ -25,6 +25,9 @@ resource:
   downloading: Descărcarea activelor...
   downloading_body: Aceasta poate dura câteva secunde, vă rugăm să nu închideți fereastra.
   enable: Activare
+  login_required_action: Conectare
+  login_required_body: Trebuie să vă conectați pentru a descărca această resursă.
+  login_required_title: Conectare obligatorie
 runtime:
   corrupted_data: Date corupte
   corrupted_file: >-

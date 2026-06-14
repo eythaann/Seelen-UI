@@ -126,6 +126,8 @@ extras:
     debesį.
   clear_icons: Išvalyti sistemos piktogramų talpyklą
   clear_icons_tooltip: Gali prireikti iš naujo paleisti, kad visi valdikliai visiškai įsigaliotų.
+  discord_rpc: Nesantaika turtingas buvimas
+  discord_rpc_description: Parodyk visiems, kad turi stilių!
   exit: Mesti/išeiti
   relaunch: Atsikrauti
   streaming_mode: Srautinio perdavimo režimas
@@ -177,6 +179,7 @@ general:
   theme:
     available: Galimos temos
     selected: Aktyvios temos
+global: Pasaulinis
 header:
   labels:
     config: Konfigūracijos
@@ -217,6 +220,7 @@ reset_to_default: Iš naujo nustatyti numatytąją vertę
 resources:
   affected_widgets: Paveikti valdikliai
   app_outdated: Kad šis išteklius veiktų tinkamai, reikia naujesnės "Seelen UI" versijos.
+  coming_soon: Netrukus
   corrupted_wallpaper: >-
     Nepavyko išskleisti miniatiūros – sugadintas arba nepalaikomas vaizdo įrašo
     formatas

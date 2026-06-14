@@ -26,6 +26,9 @@ resource:
   downloading: Изтегляне на активи...
   downloading_body: Това може да отнеме няколко секунди, моля, не затваряйте прозореца.
   enable: Активиране на
+  login_required_action: Вход
+  login_required_body: Трябва да влезете, за да изтеглите този ресурс.
+  login_required_title: Задължително влизане
 runtime:
   corrupted_data: Повредени данни
   corrupted_file: >-

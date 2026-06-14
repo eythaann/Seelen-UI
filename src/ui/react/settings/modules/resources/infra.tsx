@@ -1,4 +1,5 @@
 import { ResourceKind } from "@seelen-ui/lib/types";
+import { cx } from "libs/ui/react/utils/styling.ts";
 import { useTranslation } from "react-i18next";
 import { NavLink, Route, Routes } from "react-router";
 
@@ -14,7 +15,14 @@ import { ResourceUpdatesModal } from "./UpdatesModal.tsx";
 import { AllWallpapersView } from "./Wallpapers/AllView.tsx";
 import { WidgetsView } from "./Widget/AllView.tsx";
 
-const kinds = Object.values(ResourceKind);
+const kinds = [
+  ResourceKind.Theme,
+  ResourceKind.IconPack,
+  ResourceKind.Wallpaper,
+  ResourceKind.Widget,
+  ResourceKind.Plugin,
+  ResourceKind.SoundPack,
+];
 const DISABLED_KINDS: ResourceKind[] = [ResourceKind.SoundPack];
 
 export function ResourcesView() {
@@ -22,7 +30,7 @@ export function ResourcesView() {
     <>
       <ResourceUpdatesModal />
       <Routes>
-        <Route index Component={KindSelector} />
+        <Route index Component={() => <KindSelector />} />
         <Route path="theme" Component={ThemesView} />
         <Route path="plugin" Component={PluginsView} />
         <Route path="widget" Component={WidgetsView} />
@@ -34,30 +42,36 @@ export function ResourcesView() {
   );
 }
 
-function KindSelector() {
+export function KindSelector({ compact = false }: { compact?: boolean }) {
   const { t } = useTranslation();
 
   return (
-    <div className={cs.kindSelector}>
+    <div className={cx(cs.kindSelector, { [cs.compact!]: compact })}>
       {kinds.map((kind) => {
         const disabled = DISABLED_KINDS.includes(kind);
-        return disabled
-          ? (
-            <div key={kind} className={`${cs.kind} ${cs.kindDisabled}`}>
+        const label = t(`header.labels.${kind.toLowerCase()}`);
+
+        if (disabled) {
+          if (compact) return null;
+          return (
+            <div key={kind} className={cx(cs.kind, cs.kindDisabled)}>
               <ResourceIcon kind={kind} />
-              <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
+              <b>{label}</b>
+              <span className={cs.kindSoon}>{t("resources.coming_soon")}</span>
             </div>
-          )
-          : (
-            <NavLink
-              key={kind}
-              to={`${RoutePath.Resource}/${kind.toLowerCase()}`}
-              className={cs.kind}
-            >
-              <ResourceIcon kind={kind} />
-              <b>{t(`header.labels.${kind.toLowerCase()}`)}</b>
-            </NavLink>
           );
+        }
+
+        return (
+          <NavLink
+            key={kind}
+            to={`${RoutePath.Resource}/${kind.toLowerCase()}`}
+            className={({ isActive }) => cx(cs.kind, { [cs.kindActive!]: isActive })}
+          >
+            <ResourceIcon kind={kind} />
+            <b>{label}</b>
+          </NavLink>
+        );
       })}
     </div>
   );

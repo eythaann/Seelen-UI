@@ -111,6 +111,8 @@ extras:
   backup_sync_description: 透過雲端自動備份和還原您的設定。
   clear_icons: 清除系統圖標緩存
   clear_icons_tooltip: 小工具可能需要重新啟動才會生效
+  discord_rpc: 不和諧豐富的存在
+  discord_rpc_description: 向大家展示您的風格！
   exit: 退出seelen
   relaunch: 重新啟動seelen
   streaming_mode: 串流模式
@@ -150,6 +152,7 @@ general:
   theme:
     available: 可用的主題
     selected: 使用中的主題
+global: 全球的
 header:
   labels:
     config: 設定
@@ -190,6 +193,7 @@ reset_to_default: 恢復為預設值
 resources:
   affected_widgets: 受影響的小工具
   app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  coming_soon: 即將推出
   corrupted_wallpaper: 無法提取縮略圖 - 影片格式已損壞或不受支持
   delete: 刪除資源
   discover: 發現更多資源

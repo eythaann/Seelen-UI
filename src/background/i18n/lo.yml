@@ -26,6 +26,9 @@ resource:
   downloading: ການດາວໂຫລດຊັບສິນ ...
   downloading_body: ມັນອາດໃຊ້ເວລາສອງສາມວິນາທີ, ກະລຸນາຢ່າປິດປ່ອງຢ້ຽມ.
   enable: ເປີດໃຊ້
+  login_required_action: ເຂົ້າສູ່ລະບົບ
+  login_required_body: ທ່ານຈໍາເປັນຕ້ອງເຂົ້າສູ່ລະບົບເພື່ອດາວໂຫລດຊັບພະຍາກອນນີ້.
+  login_required_title: ຕ້ອງການເຂົ້າສູ່ລະບົບ
 runtime:
   corrupted_data: ຂໍ້ມູນທີ່ເສີຍຫາຍ
   corrupted_file: ເອກະສານການຕັ້ງຄ່າແມ່ນເສຍຫາຍ, ໂດຍໃຊ້ຄຸນຄ່າເລີ່ມຕົ້ນແທນ.

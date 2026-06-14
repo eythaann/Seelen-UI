@@ -19,6 +19,9 @@ resource:
   downloading: アセットのダウンロード...
   downloading_body: ウィンドウを閉じないでください。
   enable: 有効にする
+  login_required_action: サインイン
+  login_required_body: このリソースをダウンロードするにはサインインする必要があります。
+  login_required_title: サインインが必要です
 runtime:
   corrupted_data: データが破損しています。
   corrupted_file: 設定ファイルが破損しているため、代わりにデフォルト値が使用されています。

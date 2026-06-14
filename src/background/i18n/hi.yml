@@ -25,6 +25,9 @@ resource:
   downloading: संपत्ति डाउनलोड करना ...
   downloading_body: इसमें कुछ सेकंड लग सकते हैं, कृपया खिड़की बंद न करें।
   enable: सक्षम
+  login_required_action: दाखिल करना
+  login_required_body: इस संसाधन को डाउनलोड करने के लिए आपको साइन इन करना होगा।
+  login_required_title: साइन इन आवश्यक
 runtime:
   corrupted_data: दूषित आंकड़ा
   corrupted_file: एक कॉन्फ़िगरेशन फ़ाइल दूषित है, इसके बजाय डिफ़ॉल्ट मानों का उपयोग करके।

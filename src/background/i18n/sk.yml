@@ -25,6 +25,9 @@ resource:
   downloading: Sťahovanie aktív...
   downloading_body: Môže to trvať niekoľko sekúnd, nezatvárajte okno.
   enable: Povolenie stránky
+  login_required_action: Prihlásiť sa
+  login_required_body: Na stiahnutie tohto zdroja sa musíte prihlásiť.
+  login_required_title: Vyžaduje sa prihlásenie
 runtime:
   corrupted_data: Poškodené údaje
   corrupted_file: >-

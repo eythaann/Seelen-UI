@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     Dib-u-bilaabi kara ayaa loo baahan karaa inuu si buuxda u dhaqan geliyo
     dhammaan waxyaabaha widgets
+  discord_rpc: Khilaaf joogitaan qani ah
+  discord_rpc_description: Tus qof kasta oo aad leedahay qaab!
   exit: Jooji / bixitaan
   relaunch: Dib u beer
   streaming_mode: Habka socodka
@@ -181,6 +183,7 @@ general:
   theme:
     available: Mawduucyada la heli karo
     selected: Mawduucyada Firfircoon
+global: Caalamka
 header:
   labels:
     config: Qaabaynta
@@ -223,6 +226,7 @@ resources:
   app_outdated: >-
     Kheyraadkaani wuxuu u baahan yahay nooc cusub oo ah Selelel Ui oo si sax ah
     u shaqeynaya.
+  coming_soon: Goordhow imaanaya
   corrupted_wallpaper: >-
     Ku guuldareystay in la soo saaro thumbnail - qaab muuqaal ah oo xumaaday ama
     aan la taageerin

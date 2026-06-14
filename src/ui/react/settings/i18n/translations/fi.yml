@@ -126,6 +126,8 @@ extras:
   clear_icons_tooltip: >-
     Uudelleenkäynnistystä saatetaan tarvita, jotta kaikki widgetit tulisivat
     täysin voimaan.
+  discord_rpc: Eripurainen läsnäolo
+  discord_rpc_description: Näytä kaikille, että sinulla on tyyliä!
   exit: Lopettaa/poistua
   relaunch: Käynnistää uudelleen
   streaming_mode: Suoratoistotila
@@ -178,6 +180,7 @@ general:
   theme:
     available: Käytettävissä olevat teemat
     selected: Aktiiviset teemat
+global: Maailmanlaajuinen
 header:
   labels:
     config: Kokoonpanot
@@ -218,6 +221,7 @@ reset_to_default: Nollaa oletusarvoon
 resources:
   affected_widgets: Asianomaiset widgetit
   app_outdated: Tämä resurssi vaatii uudemman version Seelen UI:sta toimiakseen oikein.
+  coming_soon: Tulossa pian
   corrupted_wallpaper: >-
     Pikkukuvan purkaminen epäonnistui – videomuoto on vioittunut tai sitä ei
     tueta

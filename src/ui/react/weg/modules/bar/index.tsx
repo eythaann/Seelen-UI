@@ -29,11 +29,10 @@ export function SeelenWeg() {
   return (
     <div
       data-has-margin={!!settings.margin}
+      data-size={settings.mode === SeelenWegMode.FullWidth ? "full-width" : "min-content"}
       className={cx("taskbar", settings.position.toLowerCase(), {
         horizontal: isHorizontal,
         vertical: !isHorizontal,
-        // 'temporal-only': isTemporalOnlyWegBar, todo handle this type of state via new config
-        "full-width": settings.mode === SeelenWegMode.FullWidth,
         hidden: $dock_should_be_hidden.value,
       })}
       onContextMenu={onContextMenu}

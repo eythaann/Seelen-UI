@@ -26,6 +26,9 @@ resource:
   downloading: ఆస్తులను డౌన్‌లోడ్ చేస్తోంది ...
   downloading_body: దీనికి కొన్ని సెకన్లు పట్టవచ్చు, దయచేసి విండోను మూసివేయవద్దు.
   enable: ఎనేబుల్
+  login_required_action: సైన్ ఇన్ చేయండి
+  login_required_body: ఈ వనరును డౌన్‌లోడ్ చేయడానికి మీరు సైన్ ఇన్ చేయాలి.
+  login_required_title: సైన్ ఇన్ అవసరం
 runtime:
   corrupted_data: పాడైన డేటా
   corrupted_file: బదులుగా డిఫాల్ట్ విలువలను ఉపయోగించి కాన్ఫిగరేషన్ ఫైల్ పాడైంది.

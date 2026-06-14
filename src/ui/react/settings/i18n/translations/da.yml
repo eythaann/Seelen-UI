@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Sikkerhedskopier og gendan automatisk dine indstillinger via skyen.
   clear_icons: Ryd cache for systemikoner
   clear_icons_tooltip: En genstart kan være nødvendig for at få fuld effekt på alle widgets
+  discord_rpc: Splid rig tilstedeværelse
+  discord_rpc_description: Vis alle, du har stil!
   exit: Afslut/exit
   relaunch: Relancering
   streaming_mode: Streaming tilstand
@@ -174,6 +176,7 @@ general:
   theme:
     available: Tilgængelige temaer
     selected: Aktive temaer
+global: Global
 header:
   labels:
     config: Konfigurationer
@@ -214,6 +217,7 @@ reset_to_default: Nulstil til standardværdi
 resources:
   affected_widgets: Berørte widgets
   app_outdated: Denne ressource kræver en nyere version af Seelen UI for at fungere korrekt.
+  coming_soon: Kommer snart
   corrupted_wallpaper: >-
     Kunne ikke udtrække miniaturebilledet - beskadiget eller ikke-understøttet
     videoformat

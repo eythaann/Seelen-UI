@@ -22,6 +22,9 @@ resource:
   downloading: Завантаження активів...
   downloading_body: Це може зайняти кілька секунд, будь ласка, не закривайте вікно.
   enable: Увімкнути
+  login_required_action: Увійти
+  login_required_body: Вам потрібно увійти, щоб завантажити цей ресурс.
+  login_required_title: Увійти обов'язково
 runtime:
   corrupted_data: Пошкоджені дані
   corrupted_file: >-

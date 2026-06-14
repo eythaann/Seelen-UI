@@ -131,6 +131,8 @@ extras:
   clear_icons_tooltip: >-
     Ang isang pag -restart ay maaaring kailanganin upang ganap na maisakatuparan
     ang lahat ng mga widget
+  discord_rpc: Discord rich presence
+  discord_rpc_description: Ipakita sa lahat na mayroon kang istilo!
   exit: Huminto/exit
   relaunch: Muling pagsasaayos
   streaming_mode: Streaming Mode
@@ -184,6 +186,7 @@ general:
   theme:
     available: Magagamit na Mga Tema
     selected: Mga Aktibong Tema
+global: Global
 header:
   labels:
     config: Mga pagsasaayos
@@ -226,6 +229,7 @@ resources:
   app_outdated: >-
     Ang mapagkukunang ito ay nangangailangan ng isang mas bagong bersyon ng
     Seelen UI upang gumana nang maayos.
+  coming_soon: Malapit na
   corrupted_wallpaper: >-
     Nabigong i-extract ang thumbnail - sira o hindi sinusuportahang format ng
     video

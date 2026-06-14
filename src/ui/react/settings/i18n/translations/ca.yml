@@ -125,6 +125,8 @@ extras:
     mitjançant el núvol.
   clear_icons: Esborrar la memòria cau de les icones del sistema
   clear_icons_tooltip: Es pot requerir un reinici per tenir efecte sobre tots els ginys
+  discord_rpc: Presència rica en discòrdia
+  discord_rpc_description: Mostra a tothom que tens estil!
   exit: Deixar/sortir
   relaunch: Rellançar
   streaming_mode: Mode de streaming
@@ -180,6 +182,7 @@ general:
   theme:
     available: Temes disponibles
     selected: Temes actius
+global: Global
 header:
   labels:
     config: Configuracions
@@ -222,6 +225,7 @@ resources:
   app_outdated: >-
     Aquest recurs requereix una versió més recent de la interfície d'usuari de
     Seelen per funcionar correctament.
+  coming_soon: Aviat
   corrupted_wallpaper: 'No s''ha pogut extreure la miniatura: format de vídeo danyat o no compatible'
   delete: Esborra el recurs
   discover: Descobriu més recursos

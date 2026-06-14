@@ -124,6 +124,8 @@ extras:
   backup_sync_description: Maak automatisch een back-up van uw instellingen en herstel ze via de cloud.
   clear_icons: Systeempictogrammen cache wissen
   clear_icons_tooltip: Er kan een herstart nodig zijn om volledig effect te hebben op alle widgets
+  discord_rpc: Onenigheid rijke aanwezigheid
+  discord_rpc_description: Laat iedereen zien dat je stijl hebt!
   exit: Stop/exit
   relaunch: Opnieuw starten
   streaming_mode: Streaming-modus
@@ -177,6 +179,7 @@ general:
   theme:
     available: Beschikbare thema's
     selected: Actieve thema's
+global: Globaal
 header:
   labels:
     config: Configuraties
@@ -217,6 +220,7 @@ reset_to_default: Terugzetten naar standaardwaarde
 resources:
   affected_widgets: Betrokken widgets
   app_outdated: Deze bron vereist een nieuwere versie van Seelen UI om goed te werken.
+  coming_soon: Binnenkort beschikbaar
   corrupted_wallpaper: Kan miniatuur niet extraheren - beschadigd of niet-ondersteund videoformaat
   delete: Verwijder resource
   discover: Ontdek meer bronnen

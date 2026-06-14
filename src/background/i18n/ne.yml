@@ -25,6 +25,9 @@ resource:
   downloading: सम्पत्ति डाउनलोड गर्दै ...
   downloading_body: यसले केहि सेकेन्ड लिन सक्दछ, कृपया विन्डो बन्द नगर्नुहोस्।
   enable: समर्थ बनाउनु
+  login_required_action: साइन इन गर्नुहोस्
+  login_required_body: तपाईंले यो स्रोत डाउनलोड गर्न साइन इन गर्न आवश्यक छ।
+  login_required_title: साइन इन आवश्यक छ
 runtime:
   corrupted_data: भ्रष्ट डाटा
   corrupted_file: एक कन्फिगरेसन फाईल बिग्रेको छ, यसको सट्टामा पूर्वनिर्धारित मान प्रयोग गर्दै।

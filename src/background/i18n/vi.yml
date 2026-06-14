@@ -26,6 +26,9 @@ resource:
   downloading: Tải xuống tài sản ...
   downloading_body: Điều này có thể mất vài giây, xin vui lòng không đóng cửa sổ.
   enable: Cho phép
+  login_required_action: Đăng nhập
+  login_required_body: Bạn cần đăng nhập để tải xuống tài nguyên này.
+  login_required_title: Yêu cầu đăng nhập
 runtime:
   corrupted_data: Dữ liệu bị hỏng
   corrupted_file: Một tệp cấu hình bị hỏng, sử dụng các giá trị mặc định thay thế.

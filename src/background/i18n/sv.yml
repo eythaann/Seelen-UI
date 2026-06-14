@@ -25,6 +25,9 @@ resource:
   downloading: Nedladdning av tillgångar...
   downloading_body: Det kan ta några sekunder, men stäng inte fönstret.
   enable: Aktivera
+  login_required_action: Logga in
+  login_required_body: Du måste logga in för att ladda ner den här resursen.
+  login_required_title: Inloggning krävs
 runtime:
   corrupted_data: Korrupta data
   corrupted_file: En konfigurationsfil är skadad och standardvärden används i stället.

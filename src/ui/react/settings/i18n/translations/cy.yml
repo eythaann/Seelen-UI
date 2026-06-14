@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Gwneud copi wrth gefn yn awtomatig ac adfer eich gosodiadau trwy'r cwmwl.
   clear_icons: Storfa eiconau system glir
   clear_icons_tooltip: Gellid bod yn ofynnol i ailgychwyn ddod i rym yn llawn ar bob teclyn
+  discord_rpc: Presenoldeb cyfoethog anghytgord
+  discord_rpc_description: Dangoswch i bawb fod gennych chi steil!
   exit: Rhoi'r gorau iddi/allanfa
   relaunch: Hail -deirion
   streaming_mode: Modd Ffrydio
@@ -174,6 +176,7 @@ general:
   theme:
     available: Themâu sydd ar Gael
     selected: Themâu Gweithredol
+global: Byd-eang
 header:
   labels:
     config: Cyfluniadau
@@ -216,6 +219,7 @@ resources:
   app_outdated: >-
     Mae'r adnodd hwn yn gofyn am fersiwn mwy newydd o Seelen UI i weithio'n
     iawn.
+  coming_soon: Yn Dod yn Fuan
   corrupted_wallpaper: Wedi methu echdynnu mân-lun - fformat fideo llygredig neu heb ei gefnogi
   delete: Dileu Adnodd
   discover: Darganfyddwch fwy o adnoddau

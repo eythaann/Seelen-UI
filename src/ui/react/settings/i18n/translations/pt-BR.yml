@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Faça backup e restaure automaticamente suas configurações por meio da nuvem.
   clear_icons: Limpar cache de ícones do sistema
   clear_icons_tooltip: Pode ser necessário reiniciar para aplicar a todos os widgets
+  discord_rpc: Discord rica presença
+  discord_rpc_description: Mostre a todos que você tem estilo!
   exit: Sair
   relaunch: Reiniciar
   streaming_mode: Modo de transmissão
@@ -176,6 +178,7 @@ general:
   theme:
     available: Temas disponíveis
     selected: Temas ativos
+global: Global
 header:
   labels:
     config: Configurações
@@ -218,6 +221,7 @@ resources:
   app_outdated: >-
     Esse recurso requer uma versão mais recente da interface do usuário da
     Seelen para funcionar corretamente.
+  coming_soon: Em breve
   corrupted_wallpaper: Falha ao extrair miniatura – formato de vídeo corrompido ou incompatível
   delete: Excluir recursos
   discover: Descubra mais recursos

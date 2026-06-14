@@ -121,6 +121,8 @@ extras:
   backup_sync_description: Ṣe afẹyinti laifọwọyi ati mu awọn eto rẹ pada nipasẹ awọsanma.
   clear_icons: Ko awọn ilana eto kuro
   clear_icons_tooltip: A le nilo atunbere lati ṣe ipa ni kikun lori gbogbo awọn ẹrọ ailorukọ
+  discord_rpc: Discord ọlọrọ niwaju
+  discord_rpc_description: Ṣe afihan gbogbo eniyan ti o ni aṣa!
   exit: Duro / Jade
   relaunch: Ṣadi
   streaming_mode: Ipo ṣiṣanwọle
@@ -172,6 +174,7 @@ general:
   theme:
     available: Awọn akori to wa
     selected: Awọn akori ti nṣiṣe lọwọ
+global: Agbaye
 header:
   labels:
     config: Awọn atunto
@@ -212,6 +215,7 @@ reset_to_default: Tunto si iye aiyipada
 resources:
   affected_widgets: Awọn ẹrọ ailorukọ ti o kan
   app_outdated: Afikun yii nilo ẹya tuntun ti Sisen UI lati ṣiṣẹ daradara.
+  coming_soon: Nbọ laipẹ
   corrupted_wallpaper: >-
     Kuna lati jade eekanna atanpako - ibajẹ tabi ọna kika fidio ti ko ṣe
     atilẹyin

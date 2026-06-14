@@ -22,6 +22,9 @@ resource:
   downloading: Gbigba awọn ohun-ini ...
   downloading_body: Eyi le gba iṣẹju diẹ, jọwọ maṣe pa window naa.
   enable: Mu ṣiṣẹ
+  login_required_action: Wọle
+  login_required_body: O nilo lati wọle lati ṣe igbasilẹ ohun elo yii.
+  login_required_title: Wọle Ti beere fun
 runtime:
   corrupted_data: Awọn data ti o bajẹ
   corrupted_file: Faili iṣeto kan jẹ ibajẹ, lilo awọn iye aifọwọyi dipo.

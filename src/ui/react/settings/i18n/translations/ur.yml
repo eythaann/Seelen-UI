@@ -123,6 +123,8 @@ extras:
   backup_sync_description: خودکار طور پر بیک اپ لیں اور کلاؤڈ کے ذریعے اپنی ترتیبات کو بحال کریں۔
   clear_icons: صاف نظام شبیہیں کیشے
   clear_icons_tooltip: دوبارہ شروع کرنے کے لئے تمام ویجٹوں پر مکمل اثر ڈالنے کی ضرورت ہوسکتی ہے
+  discord_rpc: امیر کی موجودگی کو مسترد کریں۔
+  discord_rpc_description: ہر ایک کو دکھائیں جس کا آپ کا انداز ہے!
   exit: چھوڑ دیں/باہر نکلیں
   relaunch: دوبارہ لانچ
   streaming_mode: اسٹریمنگ موڈ
@@ -175,6 +177,7 @@ general:
   theme:
     available: دستیاب تھیمز
     selected: ایکٹو تھیمز
+global: عالمی
 header:
   labels:
     config: تشکیلات
@@ -217,6 +220,7 @@ resources:
   app_outdated: >-
     اس وسیلہ کے لئے مناسب طریقے سے کام کرنے کے لئے سیلین UI کا ایک نیا ورژن
     درکار ہے۔
+  coming_soon: جلد آرہا ہے۔
   corrupted_wallpaper: تھمب نیل نکالنے میں ناکام - خراب یا غیر تعاون یافتہ ویڈیو فارمیٹ
   delete: وسائل کو حذف کریں
   discover: مزید وسائل دریافت کریں

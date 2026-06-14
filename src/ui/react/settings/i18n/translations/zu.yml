@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     Ukuqalisa kabusha kungadingeka ukuthi kusebenze ngokuphelele kuwo wonke
     amawijethi
+  discord_rpc: Hlukanisa ubukhona obucebile
+  discord_rpc_description: Bonisa wonke umuntu onesitayela!
   exit: Quit / Phuma
   relaunch: Qondisa amandla ehlehliseyo
   streaming_mode: Imodi yokusakaza
@@ -180,6 +182,7 @@ general:
   theme:
     available: Izingqikithi Ezitholakalayo
     selected: Izindikimba ezisebenzayo
+global: Umhlaba jikelele
 header:
   labels:
     config: Ukulungiswa
@@ -220,6 +223,7 @@ reset_to_default: Setha kabusha ngenani elizenzakalelayo
 resources:
   affected_widgets: Amawijethi Athintekile
   app_outdated: Lesi sisetshenziswa sidinga uhlobo olusha lweSeelen UI ukusebenza kahle.
+  coming_soon: Kuyeza maduze
   corrupted_wallpaper: >-
     Yehlulekile ukukhipha isithonjana - ifomethi yevidiyo eyonakele noma
     engasekelwe

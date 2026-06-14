@@ -127,6 +127,8 @@ extras:
     através da nuvem.
   clear_icons: Ícones do sistema limpo cache
   clear_icons_tooltip: Pode ser necessário reinício para entrar em vigor em todos os widgets
+  discord_rpc: Discord rica presença
+  discord_rpc_description: Mostre a todos que tem estilo!
   exit: Desistir/sair
   relaunch: Relançar
   streaming_mode: Modo de transmissão
@@ -181,6 +183,7 @@ general:
   theme:
     available: Temas disponíveis
     selected: Temas ativos
+global: Global
 header:
   labels:
     config: Configurações
@@ -223,6 +226,7 @@ resources:
   app_outdated: >-
     Este recurso exige que uma versão mais recente da UI Seelen funcione
     corretamente.
+  coming_soon: Em breve
   corrupted_wallpaper: Falha ao extrair miniatura – formato de vídeo corrompido ou incompatível
   delete: Excluir recursos
   discover: Descubra mais recursos

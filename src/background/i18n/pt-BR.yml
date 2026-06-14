@@ -25,6 +25,9 @@ resource:
   downloading: Download de ativos...
   downloading_body: Isso pode levar alguns segundos, mas não feche a janela.
   enable: Habilitar
+  login_required_action: Entrar
+  login_required_body: Você precisa fazer login para baixar este recurso.
+  login_required_title: Login obrigatório
 runtime:
   corrupted_data: Dados corrompidos
   corrupted_file: >-

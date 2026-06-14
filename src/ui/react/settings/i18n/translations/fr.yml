@@ -122,6 +122,8 @@ extras:
   clear_icons_tooltip: >-
     Un redémarrage peut être nécessaire pour que cela prenne effet sur tous les
     widgets
+  discord_rpc: Présence riche en discorde
+  discord_rpc_description: "Montrez à tout le monde que vous avez du style\_!"
   exit: Quitter
   relaunch: Redémarrer Seelen UI
   streaming_mode: Mode diffusion
@@ -177,6 +179,7 @@ general:
   theme:
     available: Thèmes disponibles
     selected: Thèmes actifs
+global: Mondial
 header:
   labels:
     config: Configurations
@@ -219,6 +222,7 @@ resources:
   app_outdated: >-
     Cette ressource nécessite une version plus récente de Seelen UI pour
     fonctionner correctement.
+  coming_soon: À venir
   corrupted_wallpaper: "Échec de l'extraction de la vignette\_: format vidéo corrompu ou non pris en charge"
   delete: Supprimer les ressources
   discover: Découvrez d'autres ressources

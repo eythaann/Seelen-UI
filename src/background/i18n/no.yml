@@ -25,6 +25,9 @@ resource:
   downloading: Last ned eiendeler ...
   downloading_body: Dette kan ta noen sekunder, ikke lukk vinduet.
   enable: Aktiver
+  login_required_action: Logg på
+  login_required_body: Du må logge på for å laste ned denne ressursen.
+  login_required_title: Pålogging kreves
 runtime:
   corrupted_data: Ødelagte data
   corrupted_file: En konfigurasjonsfil er ødelagt ved å bruke standardverdier i stedet.

@@ -25,6 +25,9 @@ resource:
   downloading: Descarregar actius ...
   downloading_body: Això pot trigar uns segons, si us plau, no tanqueu la finestra.
   enable: Capacitar
+  login_required_action: Inicieu la sessió
+  login_required_body: Heu d'iniciar sessió per descarregar aquest recurs.
+  login_required_title: Inicia sessió obligatori
 runtime:
   corrupted_data: Dades corrompudes
   corrupted_file: >-

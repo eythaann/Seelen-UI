@@ -126,6 +126,8 @@ extras:
     oblaka.
   clear_icons: Očistite predmemoriju ikona sustava
   clear_icons_tooltip: Ponovno pokretanje moglo bi se u potpunosti stupiti na sve widgete
+  discord_rpc: Discord bogata prisutnost
+  discord_rpc_description: Pokažite svima da imate stila!
   exit: Prestati/izaći
   relaunch: Ponovno pokretanje
   streaming_mode: Način strujanja
@@ -177,6 +179,7 @@ general:
   theme:
     available: Dostupne teme
     selected: Aktivne teme
+global: Globalno
 header:
   labels:
     config: Konfiguracije
@@ -219,6 +222,7 @@ resources:
   app_outdated: >-
     Ovaj resurs zahtijeva da novija verzija Seelen korisničkog sučelja radi
     ispravno.
+  coming_soon: Dolazi uskoro
   corrupted_wallpaper: >-
     Izdvajanje minijature nije uspjelo - format videozapisa je oštećen ili nije
     podržan

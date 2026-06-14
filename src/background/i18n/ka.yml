@@ -26,6 +26,9 @@ resource:
   downloading: აქტივების ჩამოტვირთვა ...
   downloading_body: ამას შეიძლება რამდენიმე წამი დასჭირდეს, გთხოვთ, არ დახუროთ ფანჯარა.
   enable: შესაძლებლობის მიცემა
+  login_required_action: შესვლა
+  login_required_body: ამ რესურსის ჩამოსატვირთად უნდა შეხვიდეთ სისტემაში.
+  login_required_title: შესვლა აუცილებელია
 runtime:
   corrupted_data: კორუმპირებული მონაცემები
   corrupted_file: >-

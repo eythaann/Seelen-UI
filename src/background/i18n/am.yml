@@ -19,6 +19,9 @@ resource:
   downloading: ንብረቶችን ማውረድ ...
   downloading_body: ይህ ደግሞ ጥቂት ሰኮንዶች ሊወስድ ይችላል, እባክዎን መስኮቱን አይዝጉ.
   enable: አንቃ
+  login_required_action: ይግቡ
+  login_required_body: ይህንን ሃብት ለማውረድ በመለያ መግባት አለብህ።
+  login_required_title: መግባት ያስፈልጋል
 runtime:
   corrupted_data: የተበላሸ ውሂብ
   corrupted_file: የውቅረት ፋይል ተበላሽቷል, ይልቁንስ ነባሪ እሴቶችን በመጠቀም ተበላሽቷል.

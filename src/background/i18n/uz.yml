@@ -26,6 +26,9 @@ resource:
   downloading: Aktivlarni yuklab olish ...
   downloading_body: Bu bir necha soniya davom etishi mumkin, iltimos derazani yopmang.
   enable: Yoqib yubormoq
+  login_required_action: Tizimga kirish
+  login_required_body: Ushbu resursni yuklab olish uchun tizimga kirishingiz kerak.
+  login_required_title: Kirish shart
 runtime:
   corrupted_data: Buzilgan ma'lumotlar
   corrupted_file: >-

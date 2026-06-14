@@ -26,6 +26,9 @@ resource:
   downloading: Daxistina Assets ...
   downloading_body: Ev dibe ku çend hûrdeman bigire, ji kerema xwe pencereyê bigire.
   enable: Bikêrkirin
+  login_required_action: Têketin
+  login_required_body: Ji bo daxistina vê çavkaniyê divê hûn têkevinê.
+  login_required_title: Têkeve Pêdivî ye
 runtime:
   corrupted_data: Daneyên hilweşandî
   corrupted_file: Pelek mîhengê hilweşandî ye, li şûna nirxên xwerû bikar tîne.

@@ -109,6 +109,8 @@ extras:
   backup_sync_description: 通过云自动备份和恢复您的设置。
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
+  discord_rpc: 不和谐丰富的存在
+  discord_rpc_description: 向大家展示您的风格！
   exit: 退出
   relaunch: 重启应用
   streaming_mode: 串流模式
@@ -146,6 +148,7 @@ general:
   theme:
     available: 可用主题
     selected: 当前主题
+global: 全球的
 header:
   labels:
     config: 配置
@@ -186,6 +189,7 @@ reset_to_default: 重置为默认值
 resources:
   affected_widgets: 受影响的小部件
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  coming_soon: 即将推出
   corrupted_wallpaper: 无法提取缩略图 - 视频格式已损坏或不受支持
   delete: 删除资源
   discover: 发现更多资源

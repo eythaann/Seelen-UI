@@ -6,32 +6,84 @@
   width: 100%;
   height: 100%;
 
+  &.compact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xs);
+    height: auto;
+    width: auto;
+    min-width: 160px;
+
+    .kind {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: var(--spacing-xs);
+      height: auto;
+      padding: var(--spacing-xs) var(--spacing-s);
+      border: 1px solid var(--color-gray-200);
+      border-radius: 6px;
+
+      .kindIcon {
+        width: 1.1rem;
+        height: 1.1rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+
   .kind {
     width: 100%;
     height: 100%;
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     gap: var(--spacing-xs);
+
     border: 2px solid var(--color-gray-200);
     border-radius: 8px;
+    color: var(--color-gray-900);
+
+    &.kindDisabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &.kindActive {
+      background-color: var(--color-blue-100);
+      border-color: var(--color-blue-500);
+      color: var(--color-blue-900);
+    }
 
     &:hover {
       background-color: var(--color-blue-100);
-      border: 2px solid var(--color-blue-300);
+      border-color: var(--color-blue-300);
       color: var(--color-blue-900);
     }
 
     .kindIcon {
       height: 25%;
+      width: 25%;
+      flex-shrink: 0;
     }
-  }
 
-  .kindDisabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    pointer-events: none;
+    .kindSoon {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 5px;
+      border-radius: 9999px;
+      background-color: var(--color-gray-200);
+      color: var(--color-gray-500);
+    }
   }
 }
 

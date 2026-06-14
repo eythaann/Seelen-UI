@@ -121,6 +121,8 @@ extras:
   backup_sync_description: النسخ الاحتياطي واستعادة إعداداتك تلقائيًا عبر السحابة.
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
+  discord_rpc: حضور غني بالخلاف
+  discord_rpc_description: أظهر للجميع أن لديك أسلوبًا!
   exit: إنهاء/خروج
   relaunch: إعادة التشغيل
   streaming_mode: وضع الدفق
@@ -171,6 +173,7 @@ general:
   theme:
     available: السمات المتاحة
     selected: المواضيع النشطة
+global: عالمي
 header:
   labels:
     config: التكوينات
@@ -211,6 +214,7 @@ reset_to_default: إعادة التعيين إلى القيمة الافتراض
 resources:
   affected_widgets: الحاجيات المتضررة
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
+  coming_soon: قريباً
   corrupted_wallpaper: فشل استخراج الصورة المصغرة - تنسيق الفيديو تالف أو غير مدعوم
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد

@@ -25,6 +25,9 @@ resource:
   downloading: Að hlaða niður eignum ...
   downloading_body: Þetta gæti tekið nokkrar sekúndur, vinsamlegast ekki loka glugganum.
   enable: Virkja
+  login_required_action: Skráðu þig inn
+  login_required_body: Þú þarft að skrá þig inn til að hlaða niður þessu tilfangi.
+  login_required_title: Innskráning krafist
 runtime:
   corrupted_data: Skemmd gögn
   corrupted_file: Stillingarskrá er skemmd og notar sjálfgefin gildi í staðinn.

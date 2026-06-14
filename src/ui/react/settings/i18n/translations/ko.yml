@@ -115,6 +115,8 @@ extras:
   backup_sync_description: 클라우드를 통해 설정을 자동으로 백업하고 복원합니다.
   clear_icons: 시스템 아이콘 캐시 지우기
   clear_icons_tooltip: 모든 위젯에 완전히 적용하려면 다시 시작해야 할 수 있습니다.
+  discord_rpc: 디스코드의 풍부한 존재감
+  discord_rpc_description: 당신의 스타일을 모두에게 보여주세요!
   exit: 종료/나가기
   relaunch: 다시 시작
   streaming_mode: 스트리밍 모드
@@ -160,6 +162,7 @@ general:
   theme:
     available: 사용 가능한 테마
     selected: 현재 테마
+global: 글로벌
 header:
   labels:
     config: 구성
@@ -200,6 +203,7 @@ reset_to_default: 기본값으로 재설정
 resources:
   affected_widgets: 영향을 받는 위젯
   app_outdated: 이 리소스가 제대로 작동하려면 최신 버전의 Seelen UI가 필요합니다.
+  coming_soon: 출시 예정
   corrupted_wallpaper: 썸네일 추출 실패 - 손상되었거나 지원되지 않는 비디오 형식
   delete: 리소스 삭제
   discover: 더 많은 리소스 살펴보기

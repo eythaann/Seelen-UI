@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     সমস্ত উইজেটগুলিতে পুরোপুরি কার্যকর করার জন্য একটি পুনঃসূচনা প্রয়োজন হতে
     পারে
+  discord_rpc: বিরোধ সমৃদ্ধ উপস্থিতি
+  discord_rpc_description: আপনার শৈলী আছে সবাইকে দেখান!
   exit: প্রস্থান/প্রস্থান
   relaunch: পুনরায় চালু
   streaming_mode: স্ট্রিমিং মোড
@@ -178,6 +180,7 @@ general:
   theme:
     available: উপলব্ধ থিম
     selected: সক্রিয় থিম
+global: গ্লোবাল
 header:
   labels:
     config: কনফিগারেশন
@@ -220,6 +223,7 @@ resources:
   app_outdated: >-
     এই সংস্থানটির জন্য সঠিকভাবে কাজ করার জন্য সিলেন ইউআইয়ের একটি নতুন সংস্করণ
     প্রয়োজন।
+  coming_soon: শীঘ্রই আসছে
   corrupted_wallpaper: থাম্বনেল বের করতে ব্যর্থ হয়েছে - দূষিত বা অসমর্থিত ভিডিও বিন্যাস
   delete: সংস্থান মুছুন
   discover: আরও সংস্থান আবিষ্কার করুন

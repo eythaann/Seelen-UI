@@ -26,6 +26,9 @@ resource:
   downloading: Descarga de activos...
   downloading_body: Esto puede tardar unos segundos, por favor no cierre la ventana.
   enable: Activar
+  login_required_action: Iniciar sesión
+  login_required_body: Debes iniciar sesión para descargar este recurso.
+  login_required_title: Iniciar sesión requerido
 runtime:
   corrupted_data: Datos dañados
   corrupted_file: >-

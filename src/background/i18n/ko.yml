@@ -19,6 +19,9 @@ resource:
   downloading: 에셋 다운로드...
   downloading_body: 몇 초 정도 소요될 수 있으니 창을 닫지 마세요.
   enable: 사용
+  login_required_action: 로그인
+  login_required_body: 이 리소스를 다운로드하려면 로그인해야 합니다.
+  login_required_title: 로그인이 필요합니다
 runtime:
   corrupted_data: 손상된 데이터
   corrupted_file: 구성 파일이 손상되어 기본값 대신 기본값을 사용합니다.

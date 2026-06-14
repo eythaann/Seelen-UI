@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Säkerhetskopiera och återställ dina inställningar automatiskt via molnet.
   clear_icons: Rensa cachen för systemikoner
   clear_icons_tooltip: En omstart kan krävas för att få full effekt på alla widgets
+  discord_rpc: Discord rik närvaro
+  discord_rpc_description: Visa alla att du har stil!
   exit: Sluta/avsluta
   relaunch: Omstart
   streaming_mode: Strömningsläge
@@ -175,6 +177,7 @@ general:
   theme:
     available: Tillgängliga teman
     selected: Aktiva teman
+global: Global
 header:
   labels:
     config: Konfigurationer
@@ -215,6 +218,7 @@ reset_to_default: Återställ till standardvärde
 resources:
   affected_widgets: Berörda widgetar
   app_outdated: Denna resurs kräver en nyare version av Seelen UI för att fungera korrekt.
+  coming_soon: Kommer snart
   corrupted_wallpaper: >-
     Det gick inte att extrahera miniatyrbilden - skadat eller videoformat som
     inte stöds

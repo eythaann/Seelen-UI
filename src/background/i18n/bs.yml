@@ -25,6 +25,9 @@ resource:
   downloading: Preuzimanje imovine ...
   downloading_body: Ovo bi moglo potrajati nekoliko sekundi, molim vas nemojte zatvoriti prozor.
   enable: Omogućiti
+  login_required_action: Prijavite se
+  login_required_body: Morate se prijaviti da preuzmete ovaj resurs.
+  login_required_title: Prijava je obavezna
 runtime:
   corrupted_data: Oštećeni podaci
   corrupted_file: >-

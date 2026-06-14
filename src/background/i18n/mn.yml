@@ -26,6 +26,9 @@ resource:
   downloading: Хөрөнгө татаж авах ...
   downloading_body: Энэ нь хэдэн секунд болж магадгүй бөгөөд цонхыг хааж болохгүй.
   enable: Болоцоо огох
+  login_required_action: Нэвтрэх
+  login_required_body: Та энэ нөөцийг татаж авахын тулд нэвтрэх шаардлагатай.
+  login_required_title: Нэвтрэх шаардлагатай
 runtime:
   corrupted_data: Гэмтсэн өгөгдөл
   corrupted_file: Тохируулгын файл эвдэрсэн, оронд нь үндсэн утгыг ашиглана.

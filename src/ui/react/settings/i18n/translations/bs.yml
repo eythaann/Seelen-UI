@@ -124,6 +124,8 @@ extras:
   backup_sync_description: Automatski napravite rezervnu kopiju i vratite svoje postavke putem oblaka.
   clear_icons: Clear System Icons predmemorija
   clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
+  discord_rpc: Discord bogato prisustvo
+  discord_rpc_description: Pokažite svima da imate stila!
   exit: Prestanite / izlaz
   relaunch: Ponovno pokretanje
   streaming_mode: Streaming Mode
@@ -175,6 +177,7 @@ general:
   theme:
     available: Dostupne teme
     selected: Aktivne teme
+global: Global
 header:
   labels:
     config: Konfiguracija
@@ -215,6 +218,7 @@ reset_to_default: Resetiranje na zadanu vrijednost
 resources:
   affected_widgets: Pogođeni vidžeti
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
+  coming_soon: Uskoro
   corrupted_wallpaper: Ekstrahiranje sličice nije uspjelo - oštećen ili nepodržan video format
   delete: Izbriši resurs
   discover: Otkrijte više resursa

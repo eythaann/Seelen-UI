@@ -26,6 +26,9 @@ resource:
   downloading: Memuat turun aset ...
   downloading_body: Ini mungkin mengambil masa beberapa saat, jangan menutup tetingkap.
   enable: Membolehkan
+  login_required_action: Log Masuk
+  login_required_body: Anda perlu log masuk untuk memuat turun sumber ini.
+  login_required_title: Log masuk Diperlukan
 runtime:
   corrupted_data: Data yang rosak
   corrupted_file: Fail konfigurasi rosak, menggunakan nilai lalai.

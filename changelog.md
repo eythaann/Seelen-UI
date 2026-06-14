@@ -2,6 +2,10 @@
 
 ## [2.7.1-dev]
 
+### enhancements
+
+- user flow for resources download.
+
 ### fix
 
 - apps menu crashing on search when too many items.

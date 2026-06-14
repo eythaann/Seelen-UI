@@ -26,6 +26,9 @@ resource:
   downloading: Pobieranie zasobów...
   downloading_body: Może to potrwać kilka sekund, nie zamykaj okna.
   enable: Włącz
+  login_required_action: Zalogować się
+  login_required_body: Aby pobrać ten zasób, musisz się zalogować.
+  login_required_title: Zaloguj się Wymagane
 runtime:
   corrupted_data: Uszkodzone dane
   corrupted_file: >-

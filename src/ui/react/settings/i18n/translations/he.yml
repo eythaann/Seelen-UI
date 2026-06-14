@@ -119,6 +119,8 @@ extras:
   backup_sync_description: גבה ושחזר את ההגדרות שלך באופן אוטומטי דרך הענן.
   clear_icons: מטמון סמלי מערכת נקה
   clear_icons_tooltip: ניתן להידרש להפעלה מחדש כדי להיכנס לתוקף באופן מלא על כל הווידג'טים
+  discord_rpc: נוכחות עשירה בדיסקורד
+  discord_rpc_description: תראה לכולם שיש לך סטייל!
   exit: צא
   relaunch: השקה מחדש
   streaming_mode: מצב סטרימינג
@@ -168,6 +170,7 @@ general:
   theme:
     available: ערכות נושא זמינות
     selected: ערכות נושא פעילות
+global: גלוֹבָּלִי
 header:
   labels:
     config: תצורות
@@ -208,6 +211,7 @@ reset_to_default: אפס לערך ברירת המחדל
 resources:
   affected_widgets: ווידג'טים מושפעים
   app_outdated: משאב זה דורש גרסה חדשה יותר של ממשק המשתמש של Seelen כדי לעבוד כראוי.
+  coming_soon: בקרוב
   corrupted_wallpaper: חילוץ התמונה הממוזערת נכשל - פורמט וידאו פגום או לא נתמך
   delete: מחק משאב
   discover: לגלות משאבים נוספים

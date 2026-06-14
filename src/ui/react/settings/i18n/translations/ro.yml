@@ -126,6 +126,8 @@ extras:
   clear_icons_tooltip: >-
     Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
     vigoare
+  discord_rpc: Prezență bogată în discordia
+  discord_rpc_description: Arată tuturor că ai stil!
   exit: Renunță/ieșire
   relaunch: Relansare
   streaming_mode: Modul de streaming
@@ -179,6 +181,7 @@ general:
   theme:
     available: Teme disponibile
     selected: Teme active
+global: Global
 header:
   labels:
     config: Configurații
@@ -221,6 +224,7 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
+  coming_soon: În curând
   corrupted_wallpaper: Nu s-a extras miniatura - format video corupt sau neacceptat
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse

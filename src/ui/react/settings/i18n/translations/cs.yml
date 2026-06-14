@@ -124,6 +124,8 @@ extras:
   backup_sync_description: Automaticky zálohujte a obnovujte svá nastavení prostřednictvím cloudu.
   clear_icons: Vymazání mezipaměti systémových ikon
   clear_icons_tooltip: Aby se plně projevily všechny widgety, mohlo by být nutné restartování.
+  discord_rpc: Neshoda bohatá přítomnost
+  discord_rpc_description: Ukažte všem, že máte styl!
   exit: Ukončit
   relaunch: Znovu spustit
   streaming_mode: Režim streamování
@@ -175,6 +177,7 @@ general:
   theme:
     available: Dostupné motivy
     selected: Aktivní motivy
+global: Globální
 header:
   labels:
     config: Konfigurace
@@ -217,6 +220,7 @@ resources:
   app_outdated: >-
     Tento zdroj vyžaduje pro správnou funkci novější verzi uživatelského
     rozhraní Seelen.
+  coming_soon: Již brzy
   corrupted_wallpaper: >-
     Nepodařilo se extrahovat miniaturu – poškozený nebo nepodporovaný formát
     videa

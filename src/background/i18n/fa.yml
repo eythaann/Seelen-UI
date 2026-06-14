@@ -22,6 +22,9 @@ resource:
   downloading: بارگیری دارایی ...
   downloading_body: این ممکن است چند ثانیه طول بکشد ، لطفاً پنجره را ببندید.
   enable: فعال کردن
+  login_required_action: وارد شوید
+  login_required_body: برای دانلود این منبع باید وارد سیستم شوید.
+  login_required_title: ورود به سیستم الزامی است
 runtime:
   corrupted_data: داده های فاسد شده
   corrupted_file: به جای آن ، یک فایل پیکربندی خراب است.

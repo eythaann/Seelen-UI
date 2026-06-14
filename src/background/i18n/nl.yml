@@ -26,6 +26,9 @@ resource:
   downloading: Bedrijfsmiddelen downloaden...
   downloading_body: Dit kan enkele seconden duren, sluit het venster niet.
   enable: inschakelen
+  login_required_action: Inloggen
+  login_required_body: U moet inloggen om deze bron te downloaden.
+  login_required_title: Aanmelden vereist
 runtime:
   corrupted_data: Beschadigde gegevens
   corrupted_file: >-

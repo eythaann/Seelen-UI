@@ -26,6 +26,9 @@ resource:
   downloading: ਸੰਪਤੀ ਨੂੰ ਡਾ ing ਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ ...
   downloading_body: ਇਹ ਕੁਝ ਸਕਿੰਟ ਲੈ ਸਕਦਾ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਵਿੰਡੋ ਨੂੰ ਬੰਦ ਨਾ ਕਰੋ.
   enable: ਯੋਗ
+  login_required_action: ਸਾਈਨ - ਇਨ
+  login_required_body: ਤੁਹਾਨੂੰ ਇਸ ਸਰੋਤ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਸਾਈਨ ਇਨ ਕਰਨ ਦੀ ਲੋੜ ਹੈ।
+  login_required_title: ਸਾਈਨ ਇਨ ਦੀ ਲੋੜ ਹੈ
 runtime:
   corrupted_data: ਖਰਾਬ ਡੇਟਾ
   corrupted_file: ਇਸ ਦੀ ਬਜਾਏ ਡਿਫਾਲਟ ਮੁੱਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਸੰਰਚਨਾ ਫਾਇਲ ਖਰਾਬ ਹੋ ਗਈ ਹੈ.

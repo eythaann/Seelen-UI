@@ -26,6 +26,9 @@ resource:
   downloading: Tniżżil ta 'assi ...
   downloading_body: Dan jista 'jieħu ftit sekondi, jekk jogħġbok ma tagħlaqx it-tieqa.
   enable: Jippermetti
+  login_required_action: Idħol
+  login_required_body: Għandek bżonn tidħol biex tniżżel din ir-riżorsa.
+  login_required_title: Sign in Meħtieġa
 runtime:
   corrupted_data: Dejta korrotta
   corrupted_file: Fajl ta 'konfigurazzjoni huwa korrotta, billi tuża valuri default minflok.

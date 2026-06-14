@@ -123,6 +123,8 @@ extras:
   clear_icons_tooltip: >-
     Pêdivî ye ku ji nû ve destpêkirinê were xwestin ku bi tevahî li ser hemî
     widgetan bandor bike
+  discord_rpc: Hebûna dewlemend a nakokiyê
+  discord_rpc_description: Ji her kesî re nîşan bide ku we stîla we heye!
   exit: Qut / derketin
   relaunch: Berxwedêr
   streaming_mode: Mode Streaming
@@ -174,6 +176,7 @@ general:
   theme:
     available: Mijarên Berdest
     selected: Mijarên Çalak
+global: Cîhane
 header:
   labels:
     config: Mîhengên
@@ -216,6 +219,7 @@ resources:
   app_outdated: >-
     Vê çavkaniyê guhertoyek nû ya Seelen UI hewce dike ku bi rengek baş
     bixebite.
+  coming_soon: Hema têm
   corrupted_wallpaper: >-
     Derxistina wêneya piçûk bi ser neket - formata vîdyoyê ya xerabûyî an nayê
     piştgirî kirin

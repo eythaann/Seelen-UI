@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Ayarlarınızı bulut aracılığıyla otomatik olarak yedekleyin ve geri yükleyin.
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
+  discord_rpc: Discord'un zengin varlığı
+  discord_rpc_description: Herkese tarzınız olduğunu gösterin!
   exit: Çık
   relaunch: Yeniden Başlat
   streaming_mode: Akış Modu
@@ -175,6 +177,7 @@ general:
   theme:
     available: Mevcut Temalar
     selected: Aktif Temalar
+global: Küresel
 header:
   labels:
     config: Konfigürasyonlar
@@ -217,6 +220,7 @@ resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
+  coming_soon: Yakında gelecek
   corrupted_wallpaper: Küçük resim çıkarılamadı - bozuk veya desteklenmeyen video biçimi
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin

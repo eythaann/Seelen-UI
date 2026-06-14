@@ -26,6 +26,9 @@ resource:
   downloading: Aktivləri yükləmək ...
   downloading_body: Bu bir neçə saniyə çəkə bilər, xahiş edirəm pəncərəni bağlamayın.
   enable: Aktivləşdirmək
+  login_required_action: Daxil ol
+  login_required_body: Bu resursu yükləmək üçün daxil olmalısınız.
+  login_required_title: Giriş Tələb olunur
 runtime:
   corrupted_data: Zərərli məlumatlar
   corrupted_file: >-

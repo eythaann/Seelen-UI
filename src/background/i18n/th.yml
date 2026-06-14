@@ -23,6 +23,9 @@ resource:
   downloading: ดาวน์โหลดสินทรัพย์ ...
   downloading_body: อาจใช้เวลาสองสามวินาทีโปรดอย่าปิดหน้าต่าง
   enable: เปิดใช้งาน
+  login_required_action: เข้าสู่ระบบ
+  login_required_body: คุณต้องลงชื่อเข้าใช้เพื่อดาวน์โหลดทรัพยากรนี้
+  login_required_title: จำเป็นต้องลงชื่อเข้าใช้
 runtime:
   corrupted_data: ข้อมูลที่เสียหาย
   corrupted_file: ไฟล์การกำหนดค่าเสียหายโดยใช้ค่าเริ่มต้นแทน

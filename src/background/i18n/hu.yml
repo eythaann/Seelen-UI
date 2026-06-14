@@ -22,6 +22,9 @@ resource:
   downloading: Eszközök letöltése...
   downloading_body: Ez eltarthat néhány másodpercig, kérjük, ne zárja be az ablakot.
   enable: Engedélyezze a
+  login_required_action: Jelentkezzen be
+  login_required_body: Az erőforrás letöltéséhez be kell jelentkeznie.
+  login_required_title: Bejelentkezés szükséges
 runtime:
   corrupted_data: Hibás adatok
   corrupted_file: Egy konfigurációs fájl sérült, helyette alapértelmezett értékeket használ.

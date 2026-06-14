@@ -26,6 +26,9 @@ resource:
   downloading: Aktīvu lejupielāde...
   downloading_body: Tas var aizņemt dažas sekundes, lūdzu, neaizveriet logu.
   enable: Ieslēgt
+  login_required_action: Pierakstīties
+  login_required_body: Lai lejupielādētu šo resursu, jums ir jāpierakstās.
+  login_required_title: Nepieciešama pierakstīšanās
 runtime:
   corrupted_data: Bojāti dati
   corrupted_file: >-

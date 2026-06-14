@@ -44,7 +44,9 @@ export function ThemesView() {
 
   const allFiltered = search
     ? themes.value.filter((theme) =>
-      resolveDisplayName(theme.metadata.displayName, i18n.language).toLowerCase().includes(search.toLowerCase())
+      resolveDisplayName(theme.metadata.displayName, i18n.language)
+        .toLowerCase()
+        .includes(search.toLowerCase())
     )
     : themes.value;
 
@@ -113,6 +115,7 @@ function ThemeItem({ theme, checked, onToggle, widgets }: ThemeItemProps) {
 
   let gpuImpact = false;
   let affectedWidgets: Widget[] = [];
+  const hasSharedStyles = !!theme.sharedStyles;
 
   for (const [widgetId, style] of Object.entries(theme.styles)) {
     const widget = widgets.find((x) => x.id === widgetId);
@@ -144,11 +147,13 @@ function ThemeItem({ theme, checked, onToggle, widgets }: ThemeItemProps) {
             </Tooltip>
           )}
 
-          {affectedWidgets.map((widget) => (
-            <div key={widget.id} className={cs.tag}>
-              <ResourceText text={widget.metadata.displayName} />
-            </div>
-          ))}
+          {hasSharedStyles ? <div className={cs.tag}>{t("global")}</div> : (
+            affectedWidgets.map((widget) => (
+              <div key={widget.id} className={cs.tag}>
+                <ResourceText text={widget.metadata.displayName} />
+              </div>
+            ))
+          )}
         </div>
       }
       actions={

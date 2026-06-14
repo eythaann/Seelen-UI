@@ -25,6 +25,9 @@ resource:
   downloading: Stahování aktiv...
   downloading_body: To může trvat několik sekund, nezavírejte proto okno.
   enable: Povolit
+  login_required_action: Přihlaste se
+  login_required_body: Chcete-li stáhnout tento zdroj, musíte se přihlásit.
+  login_required_title: Je vyžadováno přihlášení
 runtime:
   corrupted_data: Poškozená data
   corrupted_file: Konfigurační soubor je poškozen a místo něj se používají výchozí hodnoty.

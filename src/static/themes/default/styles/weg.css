@@ -16,7 +16,8 @@
   }
 }
 
-.taskbar[data-has-margin="true"]:not(.full-width) {
+.taskbar[data-has-margin="true"],
+.taskbar[data-size="min-content"] {
   border-radius: 15px;
 
   > .weg-items-container {

@@ -25,6 +25,9 @@ resource:
   downloading: Turto atsisiuntimas...
   downloading_body: Tai gali užtrukti kelias sekundes, todėl neuždarykite lango.
   enable: Įjungti
+  login_required_action: Prisijunkite
+  login_required_body: Norėdami atsisiųsti šį šaltinį, turite prisijungti.
+  login_required_title: Reikalingas prisijungimas
 runtime:
   corrupted_data: Sugadinti duomenys
   corrupted_file: >-

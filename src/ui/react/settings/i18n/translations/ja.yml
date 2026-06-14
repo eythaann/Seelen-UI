@@ -113,6 +113,8 @@ extras:
   backup_sync_description: クラウド経由で設定を自動的にバックアップおよび復元します。
   clear_icons: システムアイコンキャッシュをクリアする
   clear_icons_tooltip: すべてのウィジェットに完全に反映させるには、再起動が必要な場合があります。
+  discord_rpc: Discordの豊かな存在感
+  discord_rpc_description: あなたのスタイルをみんなに見せましょう！
   exit: SeelenUIを終了
   relaunch: SeelenUIを再起動
   streaming_mode: ストリーミングモード
@@ -159,6 +161,7 @@ general:
   theme:
     available: 利用可能なテーマ
     selected: アクティブなテーマ
+global: グローバル
 header:
   labels:
     config: 設定
@@ -199,6 +202,7 @@ reset_to_default: デフォルトに戻す
 resources:
   affected_widgets: 影響を受けるウィジェット
   app_outdated: このリソースが正しく動作するためには、新しいバージョンのSeelen UIが必要です。
+  coming_soon: 近日公開
   corrupted_wallpaper: サムネイルの抽出に失敗しました - 破損したビデオ形式またはサポートされていないビデオ形式です
   delete: リソースを削除します
   discover: その他のリソース

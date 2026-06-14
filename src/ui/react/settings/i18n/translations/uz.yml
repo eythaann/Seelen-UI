@@ -126,6 +126,8 @@ extras:
   clear_icons_tooltip: >-
     Barcha vidjetlarga to'liq ta'sir qilish uchun qayta boshlash talab qilinishi
     mumkin
+  discord_rpc: Ko'p ishtirok etish
+  discord_rpc_description: O'zingizning uslubingiz borligini hammaga ko'rsating!
   exit: Chiqish / chiqish
   relaunch: Qolma
   streaming_mode: Oqim rejimi
@@ -180,6 +182,7 @@ general:
   theme:
     available: Mavjud mavzular
     selected: Faol mavzular
+global: Global
 header:
   labels:
     config: Konfiguratsiya
@@ -220,6 +223,7 @@ reset_to_default: Standart qiymatni qayta o'rnating
 resources:
   affected_widgets: Ta'sir qilingan vidjetlar
   app_outdated: Ushbu resurs Seelen UIning yangi versiyasini kerakli ishlashga talab qiladi.
+  coming_soon: Tez kunlarda
   corrupted_wallpaper: >-
     Eskizni chiqarib boʻlmadi - buzilgan yoki qoʻllab-quvvatlanmaydigan video
     formati

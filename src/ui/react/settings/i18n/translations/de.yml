@@ -130,6 +130,8 @@ extras:
   clear_icons_tooltip: >-
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
     aktivieren.
+  discord_rpc: Zwietrachtreiche Präsenz
+  discord_rpc_description: Zeigen Sie allen, dass Sie Stil haben!
   exit: Beenden
   relaunch: Neu starten
   streaming_mode: Streaming-Modus
@@ -182,6 +184,7 @@ general:
   theme:
     available: Verfügbare Themen
     selected: Aktive Themen
+global: Global
 header:
   labels:
     config: Konfigurationen
@@ -224,6 +227,7 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
+  coming_soon: Demnächst erhältlich
   corrupted_wallpaper: >-
     Miniaturansicht konnte nicht extrahiert werden – beschädigtes oder nicht
     unterstütztes Videoformat

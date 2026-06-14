@@ -27,6 +27,9 @@ resource:
   downloading: Scaricare le risorse...
   downloading_body: L'operazione potrebbe richiedere alcuni secondi; non chiudere la finestra.
   enable: Abilitazione
+  login_required_action: Registrazione
+  login_required_body: È necessario accedere per scaricare questa risorsa.
+  login_required_title: Accesso obbligatorio
 runtime:
   corrupted_data: Dati corrotti
   corrupted_file: Un file di configurazione è danneggiato e utilizza valori predefiniti.

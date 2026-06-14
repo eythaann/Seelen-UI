@@ -26,6 +26,9 @@ resource:
   downloading: Ակտիվների ներբեռնում ...
   downloading_body: "Սա կարող է տեւել մի քանի վայրկյան, խնդրում եմ մի փակեք պատուհանը:"
   enable: Միացնել
+  login_required_action: Մուտք գործեք
+  login_required_body: "Այս ռեսուրսը ներբեռնելու համար պետք է մուտք գործեք:"
+  login_required_title: Մուտք գործելը պարտադիր է
 runtime:
   corrupted_data: Կոռումպացված տվյալներ
   corrupted_file: "Կազմաձեւման ֆայլը կոռումպացված է, փոխարենը օգտագործելով լռելյայն արժեքներ:"

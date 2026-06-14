@@ -26,6 +26,9 @@ resource:
   downloading: અસ્કયામતો ડાઉનલોડ કરી રહ્યા છીએ ...
   downloading_body: આને થોડી સેકંડ લાગી શકે છે, કૃપા કરીને વિંડો બંધ ન કરો.
   enable: સક્ષમ કરવું
+  login_required_action: સાઇન ઇન કરો
+  login_required_body: આ સંસાધનને ડાઉનલોડ કરવા માટે તમારે સાઇન ઇન કરવાની જરૂર છે.
+  login_required_title: સાઇન ઇન જરૂરી છે
 runtime:
   corrupted_data: ભ્રષ્ટ આંકડા
   corrupted_file: તેના બદલે ડિફ default લ્ટ મૂલ્યોનો ઉપયોગ કરીને, એક રૂપરેખાંકન ફાઇલ દૂષિત છે.

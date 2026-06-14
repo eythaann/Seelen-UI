@@ -122,6 +122,8 @@ extras:
   backup_sync_description: Automatically back up and restore your settings via the cloud.
   clear_icons: Clear System Icons Cache
   clear_icons_tooltip: A restart could be required to fully take effect on all widgets
+  discord_rpc: Discord rich presence
+  discord_rpc_description: Show everyone you've got style!
   exit: Quit/Exit
   relaunch: Relaunch
   streaming_mode: Streaming Mode
@@ -173,6 +175,7 @@ general:
   theme:
     available: Available Themes
     selected: Active Themes
+global: Global
 header:
   labels:
     config: Configurations
@@ -213,6 +216,7 @@ reset_to_default: Reset to default value
 resources:
   affected_widgets: Affected Widgets
   app_outdated: This resource requires a newer version of Seelen UI to work properly.
+  coming_soon: Coming Soon
   corrupted_wallpaper: Failed to extract thumbnail - corrupted or unsupported video format
   delete: Delete Resource
   discover: Discover more resources

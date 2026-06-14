@@ -25,6 +25,9 @@ resource:
   downloading: Mengunduh aset...
   downloading_body: Ini mungkin memerlukan waktu beberapa detik, mohon jangan menutup jendela.
   enable: Aktifkan
+  login_required_action: Masuk
+  login_required_body: Anda harus masuk untuk mengunduh sumber daya ini.
+  login_required_title: Diperlukan Masuk
 runtime:
   corrupted_data: Data yang rusak
   corrupted_file: File konfigurasi rusak, menggunakan nilai default sebagai gantinya.

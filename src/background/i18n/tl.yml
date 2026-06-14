@@ -26,6 +26,9 @@ resource:
   downloading: Pag -download ng mga assets ...
   downloading_body: Maaaring tumagal ito ng ilang segundo, mangyaring huwag isara ang window.
   enable: Paganahin
+  login_required_action: Mag-sign In
+  login_required_body: Kailangan mong mag-sign in upang i-download ang mapagkukunang ito.
+  login_required_title: Kailangang mag-sign in
 runtime:
   corrupted_data: Nasira data
   corrupted_file: >-

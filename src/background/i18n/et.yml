@@ -26,6 +26,9 @@ resource:
   downloading: Varade allalaadimine...
   downloading_body: See võib võtta paar sekundit, palun ärge sulgege akent.
   enable: Lubage
+  login_required_action: Logi sisse
+  login_required_body: Selle ressursi allalaadimiseks peate sisse logima.
+  login_required_title: Sisselogimine Nõutav
 runtime:
   corrupted_data: Vigastatud andmed
   corrupted_file: Konfiguratsioonifail on rikutud, kasutades selle asemel vaikeväärtusi.

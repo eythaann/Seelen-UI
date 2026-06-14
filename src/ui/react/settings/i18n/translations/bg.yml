@@ -127,6 +127,8 @@ extras:
   clear_icons_tooltip: >-
     Може да се наложи рестартиране, за да се прояви напълно ефектът върху всички
     джаджи.
+  discord_rpc: Богато присъствие на Discord
+  discord_rpc_description: Покажете на всички, че имате стил!
   exit: QUIT/EXIT
   relaunch: Рестартиране
   streaming_mode: Режим на поточно предаване
@@ -179,6 +181,7 @@ general:
   theme:
     available: Налични теми
     selected: Активни теми
+global: Глобален
 header:
   labels:
     config: Конфигурации
@@ -219,6 +222,7 @@ reset_to_default: Възстановяване на стойността по п
 resources:
   affected_widgets: Засегнати джаджи
   app_outdated: Този ресурс изисква по-нова версия на Seelen UI, за да работи правилно.
+  coming_soon: Очаквайте скоро
   corrupted_wallpaper: >-
     Неуспешно извличане на миниизображение - повреден или неподдържан видео
     формат

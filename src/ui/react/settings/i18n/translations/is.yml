@@ -123,6 +123,8 @@ extras:
   backup_sync_description: Afritaðu sjálfkrafa og endurheimtu stillingarnar þínar í gegnum skýið.
   clear_icons: Hreinsa kerfistákn skyndiminni
   clear_icons_tooltip: Endurræsing gæti verið nauðsynleg til að taka gildi að fullu á allar búnaðir
+  discord_rpc: Ósætti rík nærvera
+  discord_rpc_description: Sýndu öllum að þú hafir stíl!
   exit: Hætta/hætta
   relaunch: Fylgdu aftur
   streaming_mode: Streymishamur
@@ -174,6 +176,7 @@ general:
   theme:
     available: Þemu í boði
     selected: Virk þemu
+global: Alþjóðlegt
 header:
   labels:
     config: Stillingar
@@ -214,6 +217,7 @@ reset_to_default: Endurstilla í sjálfgefið gildi
 resources:
   affected_widgets: Græjur sem hafa áhrif
   app_outdated: Þessi auðlind krefst nýrrar útgáfu af Seelen HÍ til að virka rétt.
+  coming_soon: Kemur bráðum
   corrupted_wallpaper: Mistókst að draga út smámynd - skemmd eða óstudd myndbandssnið
   delete: Eyða auðlindinni
   discover: Uppgötvaðu fleiri úrræði

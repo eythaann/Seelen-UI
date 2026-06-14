@@ -19,6 +19,9 @@ resource:
   downloading: הורדת נכסים ...
   downloading_body: זה עשוי לקחת מספר שניות, אנא אל תסגור את החלון.
   enable: אפשר
+  login_required_action: היכנס
+  login_required_body: עליך להיכנס כדי להוריד את המשאב הזה.
+  login_required_title: נדרשת כניסה
 runtime:
   corrupted_data: נתונים פגומים
   corrupted_file: קובץ תצורה פגום, באמצעות ערכי ברירת מחדל במקום זאת.

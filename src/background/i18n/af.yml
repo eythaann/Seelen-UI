@@ -26,6 +26,9 @@ resource:
   downloading: Aflaai bates ...
   downloading_body: Dit kan 'n paar sekondes duur, moenie die venster toemaak nie.
   enable: In staat stel
+  login_required_action: Meld aan
+  login_required_body: Jy moet aanmeld om hierdie hulpbron af te laai.
+  login_required_title: Aanmelding vereis
 runtime:
   corrupted_data: Korrupte data
   corrupted_file: '''N Konfigurasielêer word beskadig, met behulp van standaardwaardes.'

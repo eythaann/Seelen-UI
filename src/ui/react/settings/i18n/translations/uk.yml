@@ -125,6 +125,8 @@ extras:
   backup_sync_description: Автоматичне резервне копіювання та відновлення налаштувань через хмару.
   clear_icons: Очистити кеш системних іконок
   clear_icons_tooltip: Може знадобитися перезапуск для повного набрання чинності для всіх віджетів
+  discord_rpc: Дискорд багата присутність
+  discord_rpc_description: Покажіть усім, що у вас є стиль!
   exit: Закрити програму
   relaunch: Перезапустити
   streaming_mode: Потоковий режим
@@ -177,6 +179,7 @@ general:
   theme:
     available: Доступні теми
     selected: Активні теми
+global: Глобальний
 header:
   labels:
     config: Конфігурації
@@ -217,6 +220,7 @@ reset_to_default: Скидання до значення за замовчува
 resources:
   affected_widgets: Вражені віджети
   app_outdated: Для коректної роботи цього ресурсу потрібна новіша версія інтерфейсу Seelen.
+  coming_soon: Незабаром
   corrupted_wallpaper: >-
     Не вдалося видобути мініатюру – формат відео пошкоджений або не
     підтримується

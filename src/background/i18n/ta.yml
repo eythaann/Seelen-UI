@@ -25,6 +25,9 @@ resource:
   downloading: சொத்துக்களைப் பதிவிறக்குவது ...
   downloading_body: இதற்கு சில வினாடிகள் ஆகலாம், தயவுசெய்து சாளரத்தை மூட வேண்டாம்.
   enable: இயக்கு
+  login_required_action: உள்நுழையவும்
+  login_required_body: இந்த ஆதாரத்தைப் பதிவிறக்க நீங்கள் உள்நுழைய வேண்டும்.
+  login_required_title: உள்நுழைவது அவசியம்
 runtime:
   corrupted_data: சிதைந்த தரவு
   corrupted_file: >-

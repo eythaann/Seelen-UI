@@ -20,6 +20,9 @@ resource:
   downloading: تنزيل الأصول...
   downloading_body: قد يستغرق ذلك بضع ثوانٍ، يُرجى عدم إغلاق النافذة.
   enable: التمكين
+  login_required_action: تسجيل الدخول
+  login_required_body: تحتاج إلى تسجيل الدخول لتنزيل هذا المورد.
+  login_required_title: تسجيل الدخول مطلوب
 runtime:
   corrupted_data: بيانات تالفة
   corrupted_file: ملف التكوين تالف، باستخدام قيم افتراضية بدلاً من ذلك.

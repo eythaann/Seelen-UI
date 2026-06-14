@@ -122,6 +122,8 @@ extras:
   backup_sync_description: په اوتومات ډول د بادل له لارې خپل تنظیمات بیک اپ او بحال کړئ.
   clear_icons: د ایکسین عکس کې کیچ
   clear_icons_tooltip: یو چالان ته اړتیا لیدل کیدی شي چې په بشپړ پوړ کې په بشپړ ډول پلي شي
+  discord_rpc: د بډایه شتون سره مخالفت وکړئ
+  discord_rpc_description: هرڅوک وښایاست چې تاسو سټایل لرئ!
   exit: پریښودل / وتل
   relaunch: بیا پیل کول
   streaming_mode: د جریان حالت
@@ -173,6 +175,7 @@ general:
   theme:
     available: شته موضوعات
     selected: فعال موضوعات
+global: نړیوال
 header:
   labels:
     config: تشکیلات
@@ -213,6 +216,7 @@ reset_to_default: د ډیفالټ ارزښت ته بیا تنظیمول
 resources:
   affected_widgets: اغیزمن ویجټونه
   app_outdated: دا سرچینه د سم کار کولو لپاره یو نوي نسخه ته اړتیا لري.
+  coming_soon: ژر راځي
   corrupted_wallpaper: د تمبنیل په ایستلو کې پاتې راغلی - فاسد یا غیر ملاتړ شوی ویډیو بڼه
   delete: سرچینه حذف کړئ
   discover: ډیرې سرچینې ومومئ

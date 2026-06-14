@@ -25,6 +25,9 @@ resource:
   downloading: Преузимање имовине ...
   downloading_body: Ово би могло потрајати неколико секунди, молим вас, не затворите прозор.
   enable: Омогућити
+  login_required_action: Пријавите се
+  login_required_body: Морате да се пријавите да бисте преузели овај ресурс.
+  login_required_title: Пријава је обавезна
 runtime:
   corrupted_data: Оштећени подаци
   corrupted_file: Конфигурациона датотека је оштећена, користећи задане вредности уместо тога.

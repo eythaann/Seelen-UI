@@ -26,6 +26,9 @@ resource:
   downloading: Ukulanda Amafa ...
   downloading_body: Lokhu kungathatha imizuzwana embalwa, ngicela ungavali iwindi.
   enable: Nika amandla
+  login_required_action: Ngena ngemvume
+  login_required_body: Udinga ukungena ngemvume ukuze ulande lesi sisetshenziswa.
+  login_required_title: Kudingeka ukungena ngemvume
 runtime:
   corrupted_data: Idatha eyonakalisiwe
   corrupted_file: >-

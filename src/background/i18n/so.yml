@@ -28,6 +28,9 @@ resource:
     Tani waxay qaadan kartaa dhowr ilbidhiqsi, fadlan ha xiri ka dhigin
     daaqadda.
   enable: Karsiin
+  login_required_action: Soo gal
+  login_required_body: Waxaad u baahan tahay inaad gasho si aad u soo dejiso agabkan.
+  login_required_title: Saxeexa loo baahan yahay
 runtime:
   corrupted_data: Xogta musuqmaasuqa
   corrupted_file: >-

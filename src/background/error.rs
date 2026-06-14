@@ -6,7 +6,7 @@ macro_rules! define_app_errors {
             impl From<$error_type> for AppError {
                 fn from(err: $error_type) -> Self {
                     let backtrace = backtrace::Backtrace::new();
-                    AppError { msg: format!("{}({:?})", stringify!($variant), err), backtrace }
+                    AppError { code: 0, msg: format!("{}({:?})", stringify!($variant), err), backtrace }
                 }
             }
         )*
@@ -28,6 +28,7 @@ macro_rules! log_error {
 }
 
 pub struct AppError {
+    code: u16, // used for http responses
     msg: String,
     backtrace: backtrace::Backtrace,
 }
@@ -65,6 +66,12 @@ define_app_errors!(
     Positioning(positioning::error::Error);
     Time(time::error::Error);
 );
+
+impl AppError {
+    pub fn code(&self) -> u16 {
+        self.code
+    }
+}
 
 impl std::fmt::Debug for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -123,7 +130,7 @@ impl std::fmt::Debug for AppError {
 
 impl std::fmt::Display for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{self:?}")
+        write!(f, "{}", self.msg)
     }
 }
 
@@ -150,13 +157,27 @@ impl From<tauri_plugin_shell::process::Output> for AppError {
             cow.to_string().to_owned()
         };
         let backtrace = backtrace::Backtrace::new();
-        AppError { msg, backtrace }
+        AppError {
+            code: 0,
+            msg,
+            backtrace,
+        }
     }
 }
 
 impl<T> From<crossbeam_channel::SendError<T>> for AppError {
     fn from(_err: crossbeam_channel::SendError<T>) -> Self {
         "Crossbeam channel disconnected".into()
+    }
+}
+
+impl From<reqwest::StatusCode> for AppError {
+    fn from(status: reqwest::StatusCode) -> Self {
+        AppError {
+            code: status.as_u16(),
+            msg: status.canonical_reason().unwrap_or("Unknown").to_string(),
+            backtrace: backtrace::Backtrace::new(),
+        }
     }
 }
 

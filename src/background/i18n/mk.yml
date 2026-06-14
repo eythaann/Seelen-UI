@@ -25,6 +25,9 @@ resource:
   downloading: Преземање средства ...
   downloading_body: Ова може да потрае неколку секунди, ве молиме, не затворајте го прозорецот.
   enable: Овозможи
+  login_required_action: Пријавете се
+  login_required_body: Треба да се најавите за да го преземете овој ресурс.
+  login_required_title: Задолжително најавување
 runtime:
   corrupted_data: Расипани податоци
   corrupted_file: >-

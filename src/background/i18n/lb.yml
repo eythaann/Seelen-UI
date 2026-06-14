@@ -25,6 +25,9 @@ resource:
   downloading: Eruppes-Opstellung erofgeluedenen ...
   downloading_body: Dëst kann e puer Sekonnen da daach, wann ech net zou d'Found sinn.
   enable: Erméiglecher zréck
+  login_required_action: Umellen
+  login_required_body: Dir musst Iech umellen fir dës Ressource erofzelueden.
+  login_required_title: Umellen erfuerderlech
 runtime:
   corrupted_data: Korrupt Daten
   corrupted_file: Eng Konfiguratiounsdatei ass beschiedegt, déi Standard Wäerter amplaz.

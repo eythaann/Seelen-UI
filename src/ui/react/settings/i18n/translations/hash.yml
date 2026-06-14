@@ -94,6 +94,8 @@ extras.backup_sync: d1f55d18
 extras.backup_sync_description: 43e043ca
 extras.clear_icons: fe606300
 extras.clear_icons_tooltip: c44c0ec1
+extras.discord_rpc: e464f750
+extras.discord_rpc_description: 3b18e06c
 extras.exit: a9218188
 extras.relaunch: 7e2b5b63
 extras.streaming_mode: a77bfa6f
@@ -126,6 +128,7 @@ general.suspend_on_game_mode: 488dae37
 general.suspend_on_game_mode_description: 74f49a88
 general.theme.available: 736476c2
 general.theme.selected: 54972c40
+global: 34641f58
 header.labels.config: c5d1de31
 header.labels.developer: bd09ca80
 header.labels.extras: cc691f20
@@ -161,6 +164,7 @@ reset_configurations: '6014e128'
 reset_to_default: d4916a18
 resources.affected_widgets: 30f4b240
 resources.app_outdated: e6c0e850
+resources.coming_soon: 806f7920
 resources.corrupted_wallpaper: 4e5b67f0
 resources.delete: 2c759137
 resources.discover: 841755b8

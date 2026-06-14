@@ -25,6 +25,9 @@ resource:
   downloading: Download af aktiver...
   downloading_body: Det kan tage et par sekunder, så lad være med at lukke vinduet.
   enable: Gør det muligt
+  login_required_action: Log ind
+  login_required_body: Du skal logge ind for at downloade denne ressource.
+  login_required_title: Log ind påkrævet
 runtime:
   corrupted_data: Beskadigede data
   corrupted_file: En konfigurationsfil er beskadiget og bruger standardværdier i stedet.
