@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}} ٪ باقی'
+  smart_charge: سمارٹ چارج
+bluetooth:
+  available: دستیاب آلات (جوڑا نہیں)
+  cancel: منسوخ کریں
+  connected: منسلک آلات
+  forget: بھول جاؤ
+  lowenergy: کم توانائی
+  more: مزید بلوٹوتھ کی ترتیبات
+  not_found: کوئی بلوٹوتھ ڈیوائس نہیں ملا
+  pair: جوڑی
+  paired: محفوظ شدہ آلات
+  placeholder:
+    passphrase: پاسفریز ، کوڈ یا پن
+  scanning: آلات کے لئے اسکیننگ
+context_menu:
+  add_custom_text: کسٹم ٹیکسٹ آئٹم شامل کریں
+  modules: ماڈیولز
+  remove: ماڈیول کو ہٹا دیں
+  reorder_disable: لاک ٹول بار
+  reorder_enable: ٹول بار کو انلاک کریں
+  restore: ڈیفالٹ میں بحال کریں
+  settings: ترتیبات
+  task_manager: ٹاسک مینیجر
+media:
+  default_multimedia_volume: ملٹی میڈیا حجم
+  device:
+    channel:
+      system: سسٹم کی آوازیں
+    comunications: کمیونیکیشن
+    missing: لاپتہ آلہ
+    mixer: حجم مکسر
+    multimedia: ملٹی میڈیا
+    settings: مزید آلہ کی ترتیبات
+    volume: ڈیوائس کا حجم
+  input_devices: ان پٹ ڈیوائسز
+  output_devices: آؤٹ پٹ ڈیوائسز
+  players: میڈیا پلیئرز
+notifications:
+  clear: سب کو صاف کریں
+  empty: کوئی اطلاعات نہیں
+  settings: مزید اطلاعات کی ترتیبات
+  title: اطلاعات
+placeholder:
+  bluetooth_devices: بلوٹوتھ اور ڈیوائسز
+  ethernet_connected: ایتھر نیٹ کنیکٹڈ
+  ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
+  notifications: اطلاعات
+  settings: سیٹٹنگ
+  volume: والیم
+plugged: پلگ
+settings:
+  app_settings: ایپ کی ترتیبات
+  brightness: چمک
+  power: پاور
+  restart: ریسٹارٹ
+  title: عنوان
+show_desktop: ڈیسک ٹاپ دکھائیں۔

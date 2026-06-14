@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}٪ پاتې'
+  smart_charge: سمارټ چارج
+bluetooth:
+  available: موجود وسایل (جوړ شوی ندی)
+  cancel: لغوه کول
+  connected: تړلي وسایل
+  forget: هیر یی کړه
+  lowenergy: ټیټ انرژي
+  more: نور بلوتوث بیا تنظیمات
+  not_found: هیڅ بلوتوث توکي وموندل شول
+  pair: جوړه
+  paired: خوندي شوي وسیلې
+  placeholder:
+    passphrase: پاسفراس، کوډ یا پن
+  scanning: د وسیلو لپاره سکین کول
+context_menu:
+  add_custom_text: د دودیز متن توکي اضافه کړئ
+  modules: موډلونه
+  remove: موډول لرې کړئ
+  reorder_disable: لاک توکپټه
+  reorder_enable: تواکاره توکپټه
+  restore: ډیفالټ ته راګرځي
+  settings: ترتیبات
+  task_manager: د دندې مدیر
+media:
+  default_multimedia_volume: ملټي میډیا حجم
+  device:
+    channel:
+      system: سیسټم غږونه
+    comunications: مخابرات
+    missing: ورک شوی وسیله
+    mixer: حجم مکسر
+    multimedia: ملټي میډیا
+    settings: د آلې امستنې
+    volume: د وسیلې حجم
+  input_devices: ننوت وسایل
+  output_devices: وتستۍ وسایل
+  players: د میډیا لوبغاړي
+notifications:
+  clear: ټول پاک کړه
+  empty: خبرتیاوې نشته
+  settings: نور د خبرتیاوې تنظیمات
+  title: خبرتیاوې
+placeholder:
+  bluetooth_devices: بلوتوث او وسایل
+  ethernet_connected: انټرنیټ لاسرسی
+  ethernet_disconnected: هیڅ انټرنیټ لاسرسی
+  notifications: خبرتیاوې
+  settings: ګړندي امستنې
+  volume: حجم
+plugged: پلګ شوی
+settings:
+  app_settings: د ایپ امستنې
+  brightness: روښانه کول
+  power: ځواک
+  restart: بیا روښانه کول
+  title: امستنې
+show_desktop: ډیسټاپ وښایاست

@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Qalan'
+  smart_charge: Ağıllı şarj
+bluetooth:
+  available: Mövcud qurğular (qoşululmur)
+  cancel: Ləğv etmək
+  connected: Bağlı qurğular
+  forget: Unutmaq
+  lowenergy: Aşağı enerji
+  more: Daha çox bluetooth parametrləri
+  not_found: Bluetooth cihazları tapılmadı
+  pair: Cütləşdirmək
+  paired: Qurtaran qurğular
+  placeholder:
+    passphrase: Passphrase, kod və ya pin
+  scanning: Cihazlar üçün tarama
+context_menu:
+  add_custom_text: Xüsusi mətn elementi əlavə edin
+  modules: Modullar
+  remove: Modulu çıxarın
+  reorder_disable: Lövhə
+  reorder_enable: Toolbar kilidini açın
+  restore: Defolt olaraq bərpa edin
+  settings: Parametrlər
+  task_manager: Tapşırıq meneceri
+media:
+  default_multimedia_volume: Multimedia həcmi
+  device:
+    channel:
+      system: Sistem səsləri
+    comunications: Rabitə
+    missing: İtkin cihaz
+    mixer: Həcm qarışdırıcı
+    multimedia: Multimedia
+    settings: Daha çox cihaz parametrləri
+    volume: Cihaz həcmi
+  input_devices: Giriş cihazları
+  output_devices: Çıxış cihazları
+  players: Media oyunçuları
+notifications:
+  clear: Hamısını təmizləmək
+  empty: Bildiriş yoxdur
+  settings: Daha çox bildiriş parametrləri
+  title: Bildirişlər
+placeholder:
+  bluetooth_devices: Bluetooth və Cihazlar
+  ethernet_connected: İnternetə çıxışı
+  ethernet_disconnected: İnternetə giriş yoxdur
+  notifications: Bildirişlər
+  settings: Tez Parametrlər
+  volume: Həcm
+plugged: Qoşulub
+settings:
+  app_settings: Tətbiq parametrləri
+  brightness: Parlaqlıq
+  power: Güc
+  restart: Yenidən başlamaq
+  title: Parametrlər
+show_desktop: Masaüstünü göstər

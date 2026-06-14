@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% återstår'
+  smart_charge: Smart Charge
+bluetooth:
+  available: Tillgängliga enheter (ej ihopkopplade)
+  cancel: Avbryt
+  connected: Uppkopplade enheter
+  forget: Glömma
+  lowenergy: Låg energi
+  more: Fler Bluetooth-inställningar
+  not_found: Inga Bluetooth-enheter hittades
+  pair: Par
+  paired: Sparade enheter
+  placeholder:
+    passphrase: Lösenfras, kod eller PIN-kod
+  scanning: Skanning efter enheter
+context_menu:
+  add_custom_text: Lägg till anpassat textobjekt
+  modules: Moduler
+  remove: Ta bort modulen
+  reorder_disable: Lås verktygsfältet
+  reorder_enable: Lås upp verktygsfältet
+  restore: Återställ till standard
+  settings: Inställningar
+  task_manager: Task Manager
+media:
+  default_multimedia_volume: Multimedia Volym
+  device:
+    channel:
+      system: Systemljud
+    comunications: Kommunikation
+    missing: Saknad enhet
+    mixer: Volymmixer
+    multimedia: Multimedia
+    settings: Fler enhetsinställningar
+    volume: Enhetens volym
+  input_devices: Inmatningsenheter
+  output_devices: Utmatningsenheter
+  players: Mediaspelare
+notifications:
+  clear: Rensa alla
+  empty: Inga meddelanden
+  settings: Fler inställningar för aviseringar
+  title: Meddelanden
+placeholder:
+  bluetooth_devices: Bluetooth & enheter
+  ethernet_connected: internetåtkomst
+  ethernet_disconnected: Ingen internetuppkoppling
+  notifications: Meddelanden
+  settings: Snabbinställningar
+  volume: Volym
+plugged: Pluggad
+settings:
+  app_settings: App inställningar
+  brightness: Ljusstyrka
+  power: Driva
+  restart: Omstart
+  title: inställningar
+show_desktop: Visa skrivbordet

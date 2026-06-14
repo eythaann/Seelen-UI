@@ -1,8 +1,6 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { ZOrder } from "@seelen-ui/lib/types";
 
-import { ErrorBoundary } from "../weg/components/Error/index.tsx";
-import { ErrorFallback } from "./components/Error/index.tsx";
 import { FancyToolbar } from "./modules/main/Toolbar.tsx";
 import { computed, effect } from "@preact/signals";
 import { $focused, $top_interactable_window, $widget_statuses } from "./modules/shared/state/windows.ts";
@@ -38,9 +36,5 @@ export function App() {
     Widget.self.ready();
   }, []);
 
-  return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
-      <FancyToolbar />
-    </ErrorBoundary>
-  );
+  return <FancyToolbar />;
 }

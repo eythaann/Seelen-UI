@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% που απομένει'
+  smart_charge: Έξυπνη φόρτιση
+bluetooth:
+  available: Διαθέσιμες συσκευές (χωρίς ζεύξη)
+  cancel: Ακύρωση
+  connected: Συνδεδεμένες συσκευές
+  forget: Ξεχάστε το
+  lowenergy: Χαμηλή ενέργεια
+  more: Περισσότερες ρυθμίσεις Bluetooth
+  not_found: Δεν βρέθηκαν συσκευές Bluetooth
+  pair: Ζευγάρι
+  paired: Αποθηκευμένες συσκευές
+  placeholder:
+    passphrase: Συνθηματική φράση, κωδικός ή PIN
+  scanning: Σάρωση για συσκευές
+context_menu:
+  add_custom_text: Προσθήκη προσαρμοσμένου στοιχείου κειμένου
+  modules: Ενότητες
+  remove: Αφαιρέστε την ενότητα
+  reorder_disable: Κλείδωμα γραμμής εργαλείων
+  reorder_enable: Ξεκλείδωμα γραμμής εργαλείων
+  restore: Επαναφορά στην προεπιλογή
+  settings: Ρυθμίσεις
+  task_manager: Task Manager
+media:
+  default_multimedia_volume: Όγκος πολυμέσων
+  device:
+    channel:
+      system: Ήχοι συστήματος
+    comunications: Διαβιβάσεις
+    missing: Λείπει η συσκευή
+    mixer: Μίξερ έντασης ήχου
+    multimedia: ΠΟΛΥΜΕΣΑ
+    settings: Περισσότερες ρυθμίσεις συσκευής
+    volume: Όγκος συσκευής
+  input_devices: Συσκευές εισόδου
+  output_devices: Συσκευές εξόδου
+  players: Media players
+notifications:
+  clear: Εκκαθάριση όλων
+  empty: Δεν υπάρχουν ειδοποιήσεις
+  settings: Περισσότερες ρυθμίσεις ειδοποιήσεων
+  title: Ειδοποιήσεις
+placeholder:
+  bluetooth_devices: Bluetooth & συσκευές
+  ethernet_connected: πρόσβαση στο διαδίκτυο
+  ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
+  notifications: Ειδοποιήσεις
+  settings: Γρήγορες ρυθμίσεις
+  volume: Ενταση ΗΧΟΥ
+plugged: Συνδεδεμένο
+settings:
+  app_settings: Ρυθμίσεις εφαρμογής
+  brightness: Φωτεινότητα
+  power: Εξουσία
+  restart: Επανεκκίνηση
+  title: Ρυθμίσεις
+show_desktop: Εμφάνιση επιφάνειας εργασίας

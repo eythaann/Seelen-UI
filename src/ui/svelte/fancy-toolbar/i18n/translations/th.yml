@@ -1,0 +1,59 @@
+battery:
+  remaining: เหลืออีก {{0}}%
+  smart_charge: ชาร์จอัจฉริยะ
+bluetooth:
+  available: อุปกรณ์ที่มีอยู่ (ไม่จับคู่)
+  cancel: ยกเลิก
+  connected: อุปกรณ์ที่เชื่อมต่อ
+  forget: ลืม
+  lowenergy: พลังงานต่ำ
+  more: การตั้งค่าบลูทู ธ เพิ่มเติม
+  not_found: ไม่พบอุปกรณ์บลูทู ธ
+  pair: คู่
+  paired: อุปกรณ์ที่บันทึกไว้
+  placeholder:
+    passphrase: รหัสผ่านรหัสหรือพิน
+  scanning: การสแกนสำหรับอุปกรณ์
+context_menu:
+  add_custom_text: เพิ่มรายการข้อความที่กำหนดเอง
+  modules: โมดูล
+  remove: ลบโมดูล
+  reorder_disable: ล็อคแถบเครื่องมือ
+  reorder_enable: ปลดล็อคแถบเครื่องมือ
+  restore: คืนค่าเป็นค่าเริ่มต้น
+  settings: การตั้งค่า
+  task_manager: ตัวจัดการงาน
+media:
+  default_multimedia_volume: ปริมาณมัลติมีเดีย
+  device:
+    channel:
+      system: เสียงของระบบ
+    comunications: การสื่อสาร
+    missing: อุปกรณ์ที่หายไป
+    mixer: เครื่องผสมระดับเสียง
+    multimedia: มัลติมีเดีย
+    settings: การตั้งค่าอุปกรณ์เพิ่มเติม
+    volume: ปริมาณอุปกรณ์
+  input_devices: อุปกรณ์อินพุต
+  output_devices: อุปกรณ์เอาต์พุต
+  players: เครื่องเล่นสื่อ
+notifications:
+  clear: ล้างทั้งหมด
+  empty: ไม่มีการแจ้งเตือน
+  settings: การตั้งค่าการแจ้งเตือนเพิ่มเติม
+  title: การแจ้งเตือน
+placeholder:
+  bluetooth_devices: บลูทู ธ และอุปกรณ์
+  ethernet_connected: การเข้าถึงอินเทอร์เน็ต
+  ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
+  notifications: การแจ้งเตือน
+  settings: การตั้งค่าอย่างรวดเร็ว
+  volume: ปริมาณ
+plugged: เสียบปลั๊กแล้ว
+settings:
+  app_settings: การตั้งค่าแอป
+  brightness: ความสว่าง
+  power: พลัง
+  restart: เริ่มต้นใหม่
+  title: การตั้งค่า
+show_desktop: แสดงเดสก์ท็อป

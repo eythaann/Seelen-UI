@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% oor'
+  smart_charge: Smart Charge
+bluetooth:
+  available: Beskikbare toestelle (nie gepaar nie)
+  cancel: Kanselleer
+  connected: Gekoppelde toestelle
+  forget: Vergeet
+  lowenergy: Lae energie
+  more: Meer Bluetooth -instellings
+  not_found: Geen Bluetooth -toestelle gevind nie
+  pair: Paar
+  paired: Gestoorde toestelle
+  placeholder:
+    passphrase: Passfrase, kode of PIN
+  scanning: Skandering vir toestelle
+context_menu:
+  add_custom_text: Voeg pasgemaakte teksitem by
+  modules: Modules
+  remove: Verwyder die module
+  reorder_disable: Sluitbalk
+  reorder_enable: Ontsluit werkbalk
+  restore: Herstel na standaard
+  settings: Instellings
+  task_manager: Taakbestuurder
+media:
+  default_multimedia_volume: Multimedia volume
+  device:
+    channel:
+      system: Stelselklanke
+    comunications: Kommunikasie
+    missing: Ontbrekende toestel
+    mixer: Volume menger
+    multimedia: Multimedia
+    settings: Meer toestelinstellings
+    volume: Toestelvolume
+  input_devices: Insettoestelle
+  output_devices: Uitsettoestelle
+  players: Mediaspelers
+notifications:
+  clear: Duidelik alles
+  empty: Geen kennisgewings nie
+  settings: Meer kennisgewingsinstellings
+  title: Kennisgewings
+placeholder:
+  bluetooth_devices: Bluetooth & toestelle
+  ethernet_connected: toegang tot die internet
+  ethernet_disconnected: Geen internettoegang nie
+  notifications: Kennisgewings
+  settings: Vinnige instellings
+  volume: Volume
+plugged: Geprop
+settings:
+  app_settings: Appinstellings
+  brightness: Helderheid
+  power: Mag
+  restart: Begin oor
+  title: Instellings
+show_desktop: Wys lessenaar

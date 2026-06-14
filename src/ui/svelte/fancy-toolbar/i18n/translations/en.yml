@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Remaining'
+  smart_charge: Smart Charge
+bluetooth:
+  available: Available Devices (Not Paired)
+  cancel: Cancel
+  connected: Connected Devices
+  forget: Forget
+  lowenergy: Low Energy
+  more: More Bluetooth Settings
+  not_found: No Bluetooth devices found
+  pair: Pair
+  paired: Saved Devices
+  placeholder:
+    passphrase: Passphrase, Code or PIN
+  scanning: Scanning for devices
+context_menu:
+  add_custom_text: Add custom text item
+  modules: Modules
+  remove: Remove Module
+  reorder_disable: Lock toolbar
+  reorder_enable: Unlock toolbar
+  restore: Restore to Default
+  settings: Settings
+  task_manager: Task Manager
+media:
+  default_multimedia_volume: Multimedia Volume
+  device:
+    channel:
+      system: System sounds
+    comunications: Communications
+    missing: Missing Device
+    mixer: Volume Mixer
+    multimedia: Multimedia
+    settings: More Device Settings
+    volume: Device Volume
+  input_devices: Input devices
+  output_devices: Output devices
+  players: Media Players
+notifications:
+  clear: Clear all
+  empty: No notifications
+  settings: More Notifications Settings
+  title: Notifications
+placeholder:
+  bluetooth_devices: Bluetooth & Devices
+  ethernet_connected: Internet access
+  ethernet_disconnected: No internet access
+  notifications: Notifications
+  settings: Quick Settings
+  volume: Volume
+plugged: Plugged
+settings:
+  app_settings: App Settings
+  brightness: Brightness
+  power: Power
+  restart: Restart
+  title: Settings
+show_desktop: Show Desktop

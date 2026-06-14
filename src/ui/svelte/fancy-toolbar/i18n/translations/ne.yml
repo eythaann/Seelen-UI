@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% बाँकी'
+  smart_charge: स्मार्ट चार्ज
+bluetooth:
+  available: उपलब्ध उपकरणहरू (जोडी छैन)
+  cancel: रद्द गर्नु
+  connected: जडित उपकरणहरू
+  forget: भुल्नु
+  lowenergy: कम ऊर्जा
+  more: अधिक ब्लुटुथ सेटिंग्स
+  not_found: कुनै ब्लुटुथ उपकरणहरू फेला परेन
+  pair: जोडी
+  paired: बचत गरिएको उपकरणहरू
+  placeholder:
+    passphrase: पासफ्रेज, कोड वा पिन
+  scanning: उपकरणहरूको लागि स्क्यान गर्दै
+context_menu:
+  add_custom_text: कस्टम पाठ वस्तु थप्नुहोस्
+  modules: मोड्युलहरू
+  remove: मोड्युल हटाउनुहोस्
+  reorder_disable: लक उपकरणपट्टी
+  reorder_enable: अनलक उपकरणपट्टी
+  restore: पूर्वनिर्धारित गर्न पुनर्स्थापना
+  settings: सेटिङहरू
+  task_manager: कार्य प्रबन्धक
+media:
+  default_multimedia_volume: मल्टिमेडिया भोल्युम
+  device:
+    channel:
+      system: प्रणाली ध्वनिहरू
+    comunications: संचार
+    missing: हराइरहेको उपकरण
+    mixer: भोल्युम मिक्सर
+    multimedia: मल्टिमेडिया
+    settings: अधिक उपकरण सेटिंग्स
+    volume: उपकरण भोल्युम
+  input_devices: इनपुट उपकरणहरू
+  output_devices: आउटपुट उपकरणहरू
+  players: मिडिया खेलाडीहरु
+notifications:
+  clear: सबै खाली गर्नुहोस्
+  empty: NOSESTIONES
+  settings: अधिक सूचनाहरू सेटिंग्स
+  title: सूचना
+placeholder:
+  bluetooth_devices: ब्लुटुथ र उपकरणहरू
+  ethernet_connected: इन्टरनेट पहुँच
+  ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
+  notifications: सूचना
+  settings: द्रुत सेटिंग्स
+  volume: आवाज
+plugged: प्लग गरिएको
+settings:
+  app_settings: अनुप्रयोग सेटिंग्स
+  brightness: काठको जग
+  power: बल
+  restart: फेरि शुरु गर्नु
+  title: बतंग
+show_desktop: डेस्कटप देखाउनुहोस्

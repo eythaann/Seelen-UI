@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Fadal'
+  smart_charge: Ħlas Intelliġenti
+bluetooth:
+  available: Apparat disponibbli (mhux imqabbad)
+  cancel: Ikkanċella
+  connected: Apparat konness
+  forget: Tinsa
+  lowenergy: Enerġija baxxa
+  more: Aktar settings Bluetooth
+  not_found: L-ebda apparat Bluetooth ma nstab
+  pair: Par
+  paired: Apparat salvat
+  placeholder:
+    passphrase: Passphrase, kodiċi jew pin
+  scanning: Skennjar għal apparati
+context_menu:
+  add_custom_text: Żid oġġett tat-test tad-dwana
+  modules: Moduli
+  remove: Neħħi l-modulu
+  reorder_disable: Lock Toolbar
+  reorder_enable: Nisfruttaw toolbar
+  restore: Irrestawra lil Default
+  settings: Settings
+  task_manager: Task Manager
+media:
+  default_multimedia_volume: Volum multimedjali
+  device:
+    channel:
+      system: Ħsejjes tas-sistema
+    comunications: Komunikazzjonijiet
+    missing: Apparat nieqes
+    mixer: Volum Mixer
+    multimedia: Multimedja
+    settings: Aktar settings tal-apparat
+    volume: Volum tal-Apparat
+  input_devices: Apparat ta 'input
+  output_devices: Apparat tal-ħruġ
+  players: Plejers tal-midja
+notifications:
+  clear: Ċar kollox
+  empty: L-ebda notifika
+  settings: Aktar settings ta 'notifiki
+  title: Notifiki
+placeholder:
+  bluetooth_devices: Bluetooth & Apparat
+  ethernet_connected: Aċċess għall-Internet
+  ethernet_disconnected: L-ebda aċċess għall-internet
+  notifications: Notifiki
+  settings: Settings ta 'malajr
+  volume: Volum
+plugged: Ipplaggjat
+settings:
+  app_settings: Settings tal-App
+  brightness: Luminożità
+  power: Qawwa
+  restart: Erġa ibda
+  title: Settings
+show_desktop: Uri Desktop

@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% બાકી'
+  smart_charge: સ્માર્ટ ચાર્જ
+bluetooth:
+  available: ઉપલબ્ધ ઉપકરણો (જોડી નથી)
+  cancel: રદ કરવું
+  connected: સંલગ્ન ઉપકરણો
+  forget: ભૂલવું
+  lowenergy: ઓછી energyર્જા
+  more: વધુ બ્લૂટૂથ સેટિંગ્સ
+  not_found: કોઈ બ્લૂટૂથ ઉપકરણો મળ્યાં નથી
+  pair: જોડી
+  paired: બચાવેલા ઉપકરણો
+  placeholder:
+    passphrase: પાસફ્રેઝ, કોડ અથવા પિન
+  scanning: ઉપકરણો માટે સ્કેન કરવું
+context_menu:
+  add_custom_text: કસ્ટમ ટેક્સ્ટ આઇટમ ઉમેરો
+  modules: અંતલો
+  remove: મોડ્યુલ દૂર કરો
+  reorder_disable: તલવાર
+  reorder_enable: ટૂલબારને અનલ lock ક કરો
+  restore: ડિફ default લ્ટ પર પુન restore સ્થાપિત કરો
+  settings: સેટિંગ્સ
+  task_manager: ટાસ્ક મેનેજર
+media:
+  default_multimedia_volume: બહુમાળ વોલ્યુમ
+  device:
+    channel:
+      system: સિસ્ટમ અવાજો
+    comunications: સંચાર
+    missing: ખૂટેલું ઉપકરણ
+    mixer: વોલ્યુમ મિક્સર
+    multimedia: બહુમાળી
+    settings: વધુ ઉપકરણ સેટિંગ્સ
+    volume: ઉપકરણનું પ્રમાણ
+  input_devices: ઇનપુટ ઉપકરણો
+  output_devices: ઉત્પાદન
+  players: માધ્યમો ખેલાડીઓ
+notifications:
+  clear: બધુ સાફ કરવું
+  empty: કોઈ સૂચનાઓ
+  settings: વધુ સૂચનાઓ સેટિંગ્સ
+  title: સૂચના
+placeholder:
+  bluetooth_devices: બ્લૂટૂથ અને ઉપકરણો
+  ethernet_connected: ઇન્ટરનેટનો ઉપયોગ
+  ethernet_disconnected: કોઈ ઇન્ટરનેટ એક્સેસ નથી
+  notifications: સૂચના
+  settings: ઝડપી સેટિંગ્સ
+  volume: જથ્થો
+plugged: પ્લગ કરેલ
+settings:
+  app_settings: એપ્લિકેશન સેટિંગ્સ
+  brightness: ઉદ્ધતાઈ
+  power: શક્તિ
+  restart: પુનઃપ્રારંભ
+  title: પતાવટ
+show_desktop: ડેસ્કટોપ બતાવો

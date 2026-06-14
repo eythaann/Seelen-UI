@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% বাকি'
+  smart_charge: স্মার্ট চার্জ
+bluetooth:
+  available: উপলব্ধ ডিভাইস (জোড় নয়)
+  cancel: বাতিল
+  connected: সংযুক্ত ডিভাইস
+  forget: ভুলে যাও
+  lowenergy: কম শক্তি
+  more: আরও ব্লুটুথ সেটিংস
+  not_found: কোনও ব্লুটুথ ডিভাইস পাওয়া যায় নি
+  pair: জুটি
+  paired: সংরক্ষণ করা ডিভাইস
+  placeholder:
+    passphrase: পাসফ্রেজ, কোড বা পিন
+  scanning: ডিভাইসগুলির জন্য স্ক্যানিং
+context_menu:
+  add_custom_text: কাস্টম পাঠ্য আইটেম যুক্ত করুন
+  modules: মডিউল
+  remove: মডিউল সরান
+  reorder_disable: লক টুলবার
+  reorder_enable: সরঞ্জামদণ্ড আনলক করুন
+  restore: ডিফল্ট পুনরুদ্ধার
+  settings: সেটিংস
+  task_manager: টাস্ক ম্যানেজার
+media:
+  default_multimedia_volume: মাল্টিমিডিয়া ভলিউম
+  device:
+    channel:
+      system: সিস্টেম শব্দ
+    comunications: যোগাযোগ
+    missing: অনুপস্থিত ডিভাইস
+    mixer: ভলিউম মিক্সার
+    multimedia: মাল্টিমিডিয়া
+    settings: আরও ডিভাইস সেটিংস
+    volume: ডিভাইস ভলিউম
+  input_devices: ইনপুট ডিভাইস
+  output_devices: আউটপুট ডিভাইস
+  players: মিডিয়া প্লেয়ার
+notifications:
+  clear: সব পরিষ্কার
+  empty: কোন বিজ্ঞপ্তি
+  settings: আরও বিজ্ঞপ্তি সেটিংস
+  title: বিজ্ঞপ্তি
+placeholder:
+  bluetooth_devices: ব্লুটুথ এবং ডিভাইস
+  ethernet_connected: ইন্টারনেট সুবিধা
+  ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
+  notifications: বিজ্ঞপ্তি
+  settings: দ্রুত সেটিংস
+  volume: ভলিউম
+plugged: প্লাগ করা হয়েছে
+settings:
+  app_settings: অ্যাপ সেটিংস
+  brightness: উজ্জ্বলতা
+  power: শক্তি
+  restart: আবার শুরু
+  title: সেটিংস
+show_desktop: ডেস্কটপ দেখান

@@ -1,0 +1,9 @@
+:root {
+  --config-item-size: 24px;
+  --config-margin: 0px;
+  --config-padding: 4px;
+  --config-height: calc(var(--config-item-size) + var(--config-padding) * 2 + var(--config-margin) * 2);
+
+  --config-time-before-hide: 800ms;
+  --config-time-before-show: 100ms;
+}

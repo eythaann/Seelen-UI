@@ -1,0 +1,59 @@
+battery:
+  remaining: '%{{0}} Kalan'
+  smart_charge: Akıllı Şarj
+bluetooth:
+  available: Mevcut Cihazlar (Eşleştirilmemiş)
+  cancel: İptal
+  connected: Bağlantılı Cihazlar
+  forget: Unutmak
+  lowenergy: Düşük Enerji
+  more: Daha Fazla Bluetooth Ayarı
+  not_found: Bluetooth cihazı bulunamadı
+  pair: Çift
+  paired: Kaydedilen Cihazlar
+  placeholder:
+    passphrase: Parola, Kod veya PIN
+  scanning: Cihazlar için tarama
+context_menu:
+  add_custom_text: Özel metin öğesi ekleme
+  modules: Modüller
+  remove: Modülü Kaldır
+  reorder_disable: Araç çubuğunu kilitle
+  reorder_enable: Araç çubuğunun kilidini aç
+  restore: Varsayılana Geri Yükle
+  settings: Ayarlar
+  task_manager: Görev Yöneticisi
+media:
+  default_multimedia_volume: Multimedya Hacmi
+  device:
+    channel:
+      system: Sistem sesleri
+    comunications: İletişim
+    missing: Kayıp Cihaz
+    mixer: Ses Mikseri
+    multimedia: Multimedya
+    settings: Daha Fazla Cihaz Ayarı
+    volume: Cihaz Hacmi
+  input_devices: Giriş cihazları
+  output_devices: Çıkış cihazları
+  players: Medya Oynatıcıları
+notifications:
+  clear: Tümünü temizle
+  empty: Bildirim yok
+  settings: Daha Fazla Bildirim Ayarı
+  title: Bildirimler
+placeholder:
+  bluetooth_devices: Bluetooth ve Cihazlar
+  ethernet_connected: İnternet erişimi
+  ethernet_disconnected: İnternet erişimi yok
+  notifications: Bildirimler
+  settings: Hızlı Ayarlar
+  volume: Ses
+plugged: Takılı
+settings:
+  app_settings: Uygulama Ayarları
+  brightness: Parlaklık
+  power: Güç
+  restart: Yeniden başlat
+  title: Ayarlar
+show_desktop: Masaüstünü Göster

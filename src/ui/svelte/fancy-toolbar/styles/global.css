@@ -1,0 +1,140 @@
+/**
+ * The styles in this file are only structural for toolbar,
+ * all the design should be added to the default theme css.
+ */
+
+:root {
+  font-size: var(--config-item-size);
+}
+
+body {
+  overflow: hidden;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+  line-height: var(--config-item-size);
+
+  button {
+    line-height: var(--config-item-size);
+  }
+}
+
+#root {
+  --item-padding: calc(var(--config-padding) / 2);
+
+  position: absolute;
+  width: 100vw;
+  transition: transform 0.2s ease-in-out;
+
+  &:has(.ft-bar.top) {
+    top: 0;
+  }
+
+  &:has(.ft-bar.bottom) {
+    bottom: 0;
+  }
+
+  &:not(:hover) {
+    &:has(.ft-bar-hidden.top) {
+      transform: translate3d(0, calc(var(--config-height) * -1), 0);
+    }
+
+    &:has(.ft-bar-hidden.bottom) {
+      transform: translate3d(0, calc(var(--config-height)), 0);
+    }
+  }
+}
+
+.ft-bar {
+  position: relative;
+  height: calc(var(--config-item-size) + var(--config-padding) * 2);
+  padding: var(--item-padding) calc(var(--config-padding) * 2);
+  margin: var(--config-margin);
+  overflow: hidden;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  figure,
+  img {
+    width: var(--config-item-size);
+    height: var(--config-item-size);
+    object-fit: contain;
+  }
+
+  .ft-bar-left,
+  .ft-bar-center,
+  .ft-bar-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 4px;
+  }
+
+  .ft-bar-left {
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    justify-content: flex-start;
+  }
+
+  .ft-bar-center {
+    justify-content: center;
+    padding: 0 6px;
+  }
+
+  .ft-bar-right {
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    justify-content: flex-end;
+  }
+}
+
+.ft-bar-separator {
+  width: 8px;
+  height: 100%;
+}
+
+.ft-bar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--item-padding);
+
+  button {
+    height: 100%;
+    padding: 0 var(--item-padding);
+    border: 0;
+  }
+
+  .ft-bar-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    > span {
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: pre;
+    }
+  }
+}
+
+.ft-corner-button {
+  position: absolute;
+  z-index: 1;
+  width: 10px;
+  height: 100%;
+
+  &:first-child {
+    left: 0;
+  }
+
+  &:last-child {
+    right: 0;
+  }
+}

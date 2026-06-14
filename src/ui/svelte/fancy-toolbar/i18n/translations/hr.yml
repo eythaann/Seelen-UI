@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Preostalo'
+  smart_charge: Pametno punjenje
+bluetooth:
+  available: Dostupni uređaji (nisu upareni)
+  cancel: Otkazati
+  connected: Povezani uređaji
+  forget: Zaboraviti
+  lowenergy: Niska energija
+  more: Više Bluetooth postavki
+  not_found: Nisu pronađeni Bluetooth uređaji
+  pair: Par
+  paired: Spremljeni uređaji
+  placeholder:
+    passphrase: Prolaznu frazu, kod ili pin
+  scanning: Skeniranje za uređaje
+context_menu:
+  add_custom_text: Dodajte prilagođenu tekstualnu stavku
+  modules: Moduli
+  remove: Uklonite modul
+  reorder_disable: Alatna traka za zaključavanje
+  reorder_enable: Otključavanje alatne trake
+  restore: Vratite u zadani
+  settings: postavke
+  task_manager: Upravitelj zadataka
+media:
+  default_multimedia_volume: Multimedijski volumen
+  device:
+    channel:
+      system: Zvukovi sustava
+    comunications: Komunikacija
+    missing: Nedostaje uređaj
+    mixer: Mikser
+    multimedia: Multimedija
+    settings: Više postavki uređaja
+    volume: Glasnoća uređaja
+  input_devices: Ulazni uređaji
+  output_devices: Izlazni uređaji
+  players: Medijski igrači
+notifications:
+  clear: Očisti sve
+  empty: Nema obavijesti
+  settings: Više postavki obavijesti
+  title: Obavijesti
+placeholder:
+  bluetooth_devices: Bluetooth i uređaji
+  ethernet_connected: pristup internetu
+  ethernet_disconnected: Nema pristupa internetu
+  notifications: Obavijesti
+  settings: Brze postavke
+  volume: Volumen
+plugged: Uključeno
+settings:
+  app_settings: Postavke aplikacija
+  brightness: Svjetlost
+  power: Vlast
+  restart: Ponovno pokrenuti
+  title: Postavke
+show_desktop: Prikaži radnu površinu

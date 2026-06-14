@@ -1,0 +1,59 @@
+battery:
+  remaining: Осталось {{0}}%
+  smart_charge: Умная зарядка
+bluetooth:
+  available: Доступные устройства (не сопряженные)
+  cancel: Отмена
+  connected: Подключенные устройства
+  forget: Удалить
+  lowenergy: Низкое энергопотребление
+  more: Другие настройки Bluetooth
+  not_found: Устройства Bluetooth не найдены
+  pair: Сопрячь
+  paired: Сопряжённые устройства
+  placeholder:
+    passphrase: Пароль, код или PIN-код
+  scanning: Сканирование для поиска устройств
+context_menu:
+  add_custom_text: Добавить пользовательский текстовый элемент
+  modules: Модули
+  remove: Удалить модуль
+  reorder_disable: Заблокировать панели
+  reorder_enable: Разблокировать панель
+  restore: Восстановить по умолчанию
+  settings: Настройки
+  task_manager: Диспетчер задач
+media:
+  default_multimedia_volume: Громкость устройств мультимедиа
+  device:
+    channel:
+      system: Системные звуки
+    comunications: Связь
+    missing: Отсутствующее устройство
+    mixer: Микшер громкости
+    multimedia: Мультимедиа
+    settings: Другие настройки устройства
+    volume: Громкость устройства
+  input_devices: Устройства ввода
+  output_devices: Устройства вывода
+  players: Медиаплееры
+notifications:
+  clear: Очистить все
+  empty: Нет уведомлений
+  settings: Другие настройки уведомлений
+  title: Уведомления
+placeholder:
+  bluetooth_devices: Bluetooth и устройства
+  ethernet_connected: Сеть
+  ethernet_disconnected: Нет сети
+  notifications: Уведомления
+  settings: Быстрые настройки
+  volume: Громкость
+plugged: Заткнуто
+settings:
+  app_settings: Настройки приложения
+  brightness: Яркость
+  power: Питание
+  restart: Перезагрузка
+  title: Настройки
+show_desktop: Показать рабочий стол

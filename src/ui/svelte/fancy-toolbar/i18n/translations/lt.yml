@@ -1,0 +1,59 @@
+battery:
+  remaining: Liko {{0}} %
+  smart_charge: Išmanusis įkrovimas
+bluetooth:
+  available: Turimi įrenginiai (nesuporuoti)
+  cancel: Atšaukti
+  connected: Prijungti įrenginiai
+  forget: Pamirškite
+  lowenergy: Mažai energijos
+  more: Daugiau "Bluetooth" nustatymų
+  not_found: '"Bluetooth" įrenginių nerasta'
+  pair: Pora
+  paired: Išsaugoti įrenginiai
+  placeholder:
+    passphrase: Slaptažodžių frazė, kodas arba PIN kodas
+  scanning: Įrenginių nuskaitymas
+context_menu:
+  add_custom_text: Pridėti pasirinktinį teksto elementą
+  modules: Moduliai
+  remove: Pašalinkite modulį
+  reorder_disable: Užrakinti įrankių juostą
+  reorder_enable: Atrakinti įrankių juostą
+  restore: Atkurti numatytąjį nustatymą
+  settings: Nustatymai
+  task_manager: Užduočių tvarkyklė
+media:
+  default_multimedia_volume: Daugialypės terpės apimtis
+  device:
+    channel:
+      system: Sistemos garsai
+    comunications: Ryšiai
+    missing: Trūkstamas įrenginys
+    mixer: Garsumo maišytuvas
+    multimedia: Multimedija
+    settings: Daugiau įrenginio nustatymų
+    volume: Įrenginio tūris
+  input_devices: Įvesties įrenginiai
+  output_devices: Išvesties įrenginiai
+  players: Žiniasklaidos žaidėjai
+notifications:
+  clear: Išvalyti viską
+  empty: Jokių pranešimų
+  settings: Daugiau pranešimų nustatymų
+  title: Pranešimai
+placeholder:
+  bluetooth_devices: „Bluetooth“ ir įrenginiai
+  ethernet_connected: Interneto ryšys
+  ethernet_disconnected: Jokios interneto prieigos
+  notifications: Pranešimai
+  settings: Greiti nustatymai
+  volume: Apimtis
+plugged: Prijungtas
+settings:
+  app_settings: Programos nustatymai
+  brightness: Ryškumas
+  power: Galia
+  restart: Perkrauti
+  title: Nustatymai
+show_desktop: Rodyti darbalaukį

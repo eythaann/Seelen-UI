@@ -1,0 +1,59 @@
+battery:
+  remaining: ຍັງເຫຼືອ {{0}}%.
+  smart_charge: ການສາກໄຟອັດສະລິຍະ
+bluetooth:
+  available: ອຸປະກອນທີ່ມີຢູ່ (ບໍ່ໄດ້ຈັບຄູ່ກັນ)
+  cancel: ຍົກເລີກ
+  connected: ອຸປະກອນເຊື່ອມຕໍ່
+  forget: ລືມ
+  lowenergy: ພະລັງງານຕ່ໍາ
+  more: ການຕັ້ງຄ່າ Bluetooth ເພີ່ມເຕີມ
+  not_found: ບໍ່ພົບອຸປະກອນ Bluetooth
+  pair: ຄູ່
+  paired: ອຸປະກອນທີ່ບັນທຶກໄວ້
+  placeholder:
+    passphrase: passphrase, ລະຫັດຫຼື PIN
+  scanning: ການສະແກນສໍາລັບອຸປະກອນຕ່າງໆ
+context_menu:
+  add_custom_text: ເພີ່ມລາຍການຕົວຫນັງສືທີ່ກໍານົດເອງ
+  modules: ໂມດູນ
+  remove: ດຶງອອກຈາກໂມດູນ
+  reorder_disable: ແຖບເຄື່ອງມືລັອກ
+  reorder_enable: ແຖບເຄື່ອງມືປົດລັອກ
+  restore: ຟື້ນຟູໃຫ້ເປັນຄ່າເລີ່ມຕົ້ນ
+  settings: ການຕັ້ງຄ່າ
+  task_manager: Task Manager
+media:
+  default_multimedia_volume: ປະລິມານມັນຕິມີເດຍ
+  device:
+    channel:
+      system: ລະບົບ SYSTYS
+    comunications: ການສື່ສານ
+    missing: ອຸປະກອນທີ່ຂາດຫາຍໄປ
+    mixer: ປະລິມານ mixer ປະລິມານ
+    multimedia: ໂມສອນເຄີຍີຫໍ້
+    settings: ການຕັ້ງຄ່າອຸປະກອນເພີ່ມເຕີມ
+    volume: ປະລິມານອຸປະກອນ
+  input_devices: ອຸປະກອນປ້ອນຂໍ້ມູນ
+  output_devices: ອຸປະກອນຜົນໄດ້ຮັບ
+  players: ເຄື່ອງຫຼີ້ນສື່
+notifications:
+  clear: ລ້າງທັງຫມົດ
+  empty: ບໍ່ມີການແຈ້ງເຕືອນ
+  settings: ການຕັ້ງຄ່າການແຈ້ງເຕືອນເພີ່ມເຕີມ
+  title: ແຈ້ງການ
+placeholder:
+  bluetooth_devices: Bluetooth & ອຸປະກອນ
+  ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
+  ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
+  notifications: ແຈ້ງການ
+  settings: ການຕັ້ງຄ່າດ່ວນ
+  volume: ປະລິມານ
+plugged: ສຽບ
+settings:
+  app_settings: ການຕັ້ງຄ່າແອັບ app
+  brightness: ຄວາມສະຫວ່າງ
+  power: ພະເດດ
+  restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
+  title: ການກໍານົດ
+show_desktop: ສະແດງ Desktop

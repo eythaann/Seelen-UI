@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% متبقي'
+  smart_charge: الشحن الذكي
+bluetooth:
+  available: الأجهزة المتوفرة (غير مقترنة)
+  cancel: إلغاء
+  connected: الأجهزة المتصلة
+  forget: انسى
+  lowenergy: طاقة منخفضة
+  more: المزيد من إعدادات البلوتوث
+  not_found: لم يتم العثور على أجهزة بلوتوث
+  pair: زوج
+  paired: الأجهزة المحفوظة
+  placeholder:
+    passphrase: عبارة المرور أو الرمز أو رقم التعريف الشخصي
+  scanning: المسح الضوئي للأجهزة
+context_menu:
+  add_custom_text: إضافة عنصر نص مخصص
+  modules: الوحدات النمطية
+  remove: إزالة الوحدة النمطية
+  reorder_disable: قفل شريط الأدوات
+  reorder_enable: فتح شريط الأدوات
+  restore: الاستعادة إلى الوضع الافتراضي
+  settings: إعدادات
+  task_manager: مدير المهام
+media:
+  default_multimedia_volume: حجم الوسائط المتعددة
+  device:
+    channel:
+      system: أصوات النظام
+    comunications: مجال الاتصالات
+    missing: الجهاز المفقود
+    mixer: خلاط الصوت
+    multimedia: الوسائط المتعددة
+    settings: المزيد من إعدادات الجهاز
+    volume: حجم الجهاز
+  input_devices: أجهزة الإدخال
+  output_devices: أجهزة الإخراج
+  players: مشغلات الوسائط
+notifications:
+  clear: مسح الكل
+  empty: لا توجد إخطارات
+  settings: المزيد من إعدادات الإشعارات
+  title: الإشعارات
+placeholder:
+  bluetooth_devices: بلوتوث
+  ethernet_connected: خدمة الإنترنت
+  ethernet_disconnected: لا يوجد اتصال بالإنترنت
+  notifications: الإشعارات
+  settings: الإعدادات السريعة
+  volume: الصوت
+plugged: موصول
+settings:
+  app_settings: إعدادات التطبيقات
+  brightness: السطوع
+  power: الطاقة
+  restart: إعادة التشغيل
+  title: إعدادات
+show_desktop: عرض سطح المكتب
