@@ -27,7 +27,7 @@ use windows::{
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     modules::{
         apps::application::msix::get_hightest_quality_posible_for_uwp_image,
         start::application::StartMenuManager,
@@ -121,7 +121,7 @@ impl NotificationManager {
             .GetNotificationsAsync(NotificationKinds::Toast)?
             .join()?;
         for u_notification in u_notifications {
-            log_error!(self.load_notification(u_notification));
+            self.load_notification(u_notification).log_error();
         }
 
         // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
@@ -153,7 +153,7 @@ impl NotificationManager {
                 .NotificationModeChanged(&TypedEventHandler::new(Self::on_mode_change))?,
         );
 
-        let eid = Self::subscribe(|e| log_error!(Self::process_event(e)));
+        let eid = Self::subscribe(|e| Self::process_event(e).log_error());
         Self::set_event_handler_priority(&eid, 1);
         Ok(())
     }

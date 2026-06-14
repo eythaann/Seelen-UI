@@ -8,8 +8,7 @@ use tauri_plugin_dialog::DialogExt;
 
 use crate::{
     app::get_app_handle,
-    error::Result,
-    log_error,
+    error::{Result, ResultLogExt},
     state::application::{performance::PERFORMANCE_MODE, BUNDLED_SETTINGS_BY_APP},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::WindowsApi,
@@ -105,7 +104,7 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
                     let folder_to_store = SEELEN_COMMON
                         .user_wallpapers_path()
                         .join(date_based_hex_id());
-                    log_error!(Wallpaper::create_from_file(&path, &folder_to_store, true));
+                    Wallpaper::create_from_file(&path, &folder_to_store, true).log_error();
                 }
             }
         });

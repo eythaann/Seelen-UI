@@ -21,7 +21,7 @@ use windows_future::IAsyncOperation;
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager, get_tokio_handle, log_error,
+    event_manager, get_tokio_handle,
     utils::lock_free::SyncHashMap,
     windows_api::{DeviceEnumerator, DeviceEvent, DeviceId},
 };
@@ -38,7 +38,7 @@ const PAIRING_CONFIRMATION_RETRY_INTERVAL_MS: u64 = 500;
 
 static BLUETOOTH_MANAGER_INSTANCE: LazyLock<BluetoothManager> = LazyLock::new(|| {
     let mut m = BluetoothManager::create();
-    log_error!(m.initialize());
+    m.initialize().log_error();
     m
 });
 
@@ -558,7 +558,7 @@ impl BluetoothManager {
         // Device enumerators are automatically stopped via Drop trait
         self.devices.clear();
         self.le_devices.clear();
-        log_error!(self.stop_scanning());
+        self.stop_scanning().log_error();
     }
 }
 

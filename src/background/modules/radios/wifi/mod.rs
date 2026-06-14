@@ -19,7 +19,7 @@ use windows_core::HSTRING;
 
 use crate::{
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     utils::lock_free::SyncHashMap,
     windows_api::{string_utils::WindowsString, DeviceEnumerator, DeviceEvent, DeviceId},
 };
@@ -119,7 +119,7 @@ impl WifiManager {
         let selector = WiFiAdapter::GetDeviceSelector()?.to_string();
 
         let enumerator = DeviceEnumerator::new(selector, |event| {
-            log_error!(WifiManager::instance().on_device_event(event));
+            WifiManager::instance().on_device_event(event).log_error();
         })?;
 
         let devices = enumerator.start_blocking()?;

@@ -193,7 +193,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             Some(code) => {
                 // if exit code is 0 it means that the app was closed by the user
                 if code == 0 {
-                    log_error!(ServicePipe::request(SvcAction::Stop));
+                    ServicePipe::request(SvcAction::Stop).log_error();
                 }
             }
             // prevent close background on webview windows closing

@@ -23,7 +23,7 @@ use windows::Win32::{
 use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
-    event_manager, log_error,
+    event_manager,
     state::application::FULL_STATE,
     utils::spawn_named_thread,
     widgets::weg::SeelenWeg,
@@ -70,7 +70,7 @@ impl HookManager {
         // deprecated code refactor this on future.
         if FULL_STATE.load().is_weg_enabled() {
             // raw events should be only used for a fastest and immediately processing
-            log_error!(SeelenWeg::process_raw_win_event(event, origin));
+            SeelenWeg::process_raw_win_event(event, origin).log_error();
         }
 
         let event = WinEvent::from(event);

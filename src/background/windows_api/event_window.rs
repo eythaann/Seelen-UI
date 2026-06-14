@@ -20,8 +20,8 @@ use windows::Win32::{
 };
 
 use crate::{
-    error::{Result, WindowsResultExt},
-    event_manager, log_error,
+    error::{Result, ResultLogExt, WindowsResultExt},
+    event_manager,
     utils::spawn_named_thread,
     widgets::manager::WIDGET_MANAGER,
 };
@@ -220,7 +220,7 @@ pub fn create_background_window() -> Result<()> {
     let (tx, rx) = crossbeam_channel::bounded(1);
     spawn_named_thread("Background Window", move || {
         log::trace!("Creating background window...");
-        log_error!(unsafe { BgWindowProc::_create_background_window(&tx) });
+        unsafe { BgWindowProc::_create_background_window(&tx) }.log_error();
     });
     rx.recv()?;
     log::trace!("Background window created");
@@ -232,6 +232,6 @@ where
     F: Fn(u32, usize, isize) -> Result<()> + Send + Sync + 'static,
 {
     BgWindowProc::subscribe(move |arg| {
-        log_error!(callback(arg.0, arg.1, arg.2));
+        callback(arg.0, arg.1, arg.2).log_error();
     });
 }

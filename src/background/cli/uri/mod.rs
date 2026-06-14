@@ -22,7 +22,8 @@ use crate::{
     app::{emit_to_webviews, get_app_handle},
     cli::uri::icons_downloader::download_remote_icons,
     error::Result,
-    get_tokio_handle, log_error,
+    error::ResultLogExt,
+    get_tokio_handle,
     resources::RESOURCES,
     session::application::SessionManager,
     state::application::FULL_STATE,
@@ -72,9 +73,7 @@ pub fn process_uri(uri: &str) -> Result<()> {
         get_tokio_handle().spawn(async move {
             if let Err(err) = SessionManager::handle_auth_callback(code, state).await {
                 log::error!("Auth callback failed: {err:?}");
-                log_error!(trigger_dialog_backend(auth_error_dialog(&format!(
-                    "{err:?}"
-                ))));
+                trigger_dialog_backend(auth_error_dialog(&format!("{err:?}"))).log_error();
             }
         });
         return Ok(());
@@ -102,7 +101,7 @@ pub fn process_uri(uri: &str) -> Result<()> {
 
     let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");
     get_tokio_handle().spawn(async move {
-        log_error!(download_resource(&url).await);
+        download_resource(&url).await.log_error();
     });
 
     Ok(())
@@ -172,18 +171,14 @@ async fn download_resource(url: &str) -> Result<()> {
         Err(err) if err.code() == reqwest::StatusCode::UNAUTHORIZED.as_u16() => {
             let event = "open_settings_extras";
             get_app_handle().once(event, move |_| {
-                log_error!(show_settings_at("/extras"));
+                show_settings_at("/extras").log_error();
             });
-            log_error!(trigger_dialog_backend(login_required_dialog(
-                dialog_id, event
-            )));
+            trigger_dialog_backend(login_required_dialog(dialog_id, event)).log_error();
             return Err(err);
         }
         Err(err) => {
-            log_error!(trigger_dialog_backend(error_dialog(
-                dialog_id,
-                format!("{err:?}").as_str()
-            )));
+            trigger_dialog_backend(error_dialog(dialog_id, format!("{err:?}").as_str()))
+                .log_error();
             return Err(err);
         }
     };
@@ -294,7 +289,7 @@ fn update_dialog_to_added_resource(dialog_id: Uuid, resource: &Resource) -> Resu
                 emit_to_webviews(SeelenEvent::PluginEnabled, id);
             }
 
-            log_error!(FULL_STATE.load().write_settings());
+            FULL_STATE.load().write_settings().log_error();
         });
     });
 

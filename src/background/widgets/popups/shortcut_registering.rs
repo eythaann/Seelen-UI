@@ -8,7 +8,9 @@ use uuid::Uuid;
 use tauri::{Emitter, Listener};
 
 use crate::{
-    app::get_app_handle, cli::ServicePipe, error::Result, log_error,
+    app::get_app_handle,
+    cli::ServicePipe,
+    error::{Result, ResultLogExt},
     widgets::trigger_dialog_backend,
 };
 
@@ -26,7 +28,9 @@ pub struct RegShortcutData {
 impl RegShortcutData {
     fn emit_state_to_requester(&self) {
         if let (Some(label), Some(event)) = (&self.response_view_label, &self.response_event) {
-            log_error!(get_app_handle().emit_to(label, event, &self.shortcut));
+            get_app_handle()
+                .emit_to(label, event, &self.shortcut)
+                .log_error();
         }
     }
 
@@ -71,13 +75,13 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
         // listen once for each button action; re-registers after cancel/accept
         let dialog_id = reg.dialog_id;
         get_app_handle().once("user_shortcut_accepted", move |_| {
-            log_error!(ServicePipe::request(SvcAction::StopShortcutRegistration));
+            ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
             let mut reg = REG_SHORTCUT_DATA.lock();
             reg.emit_state_to_requester();
             reg.cancel_shortcut_registering();
         });
         get_app_handle().once("shortcut_register_cancelled", move |_| {
-            log_error!(ServicePipe::request(SvcAction::StopShortcutRegistration));
+            ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
             let mut reg = REG_SHORTCUT_DATA.lock();
             if reg.dialog_id == dialog_id {
                 reg.cancel_shortcut_registering();

@@ -4,8 +4,8 @@ use seelen_core::system_state::{RadioDevice, RadioDeviceKind};
 use windows::Devices::Radios::{Radio, RadioAccessStatus, RadioState};
 
 use crate::{
-    error::Result,
-    event_manager, log_error,
+    error::{Result, ResultLogExt},
+    event_manager,
     modules::radios::device::SluRadioDevice,
     utils::lock_free::SyncHashMap,
     windows_api::{DeviceEnumerator, DeviceEvent, DeviceId},
@@ -33,7 +33,7 @@ impl RadioManager {
     fn initialize(&mut self) -> Result<()> {
         // Create device enumerator with callback
         let enumerator = DeviceEnumerator::new(Radio::GetDeviceSelector()?.to_string(), |event| {
-            log_error!(RadioManager::instance().on_event(&event));
+            RadioManager::instance().on_event(&event).log_error();
             RadioManager::send(event);
         })?;
 
@@ -61,7 +61,7 @@ impl RadioManager {
     pub fn instance() -> &'static Self {
         static RADIO_MANAGER_INSTANCE: LazyLock<RadioManager> = LazyLock::new(|| {
             let mut m = RadioManager::create();
-            log_error!(m.initialize());
+            m.initialize().log_error();
             m
         });
         &RADIO_MANAGER_INSTANCE

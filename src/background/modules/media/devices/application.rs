@@ -18,7 +18,7 @@ use windows::Win32::{
 use windows_core::Interface;
 
 use crate::{
-    error::{ErrorMap, Result, ResultLogExt},
+    error::{Result, ResultLogExt},
     event_manager,
     utils::{lock_free::SyncHashMap, pcwstr},
     windows_api::{process::Process, string_utils::WindowsString, Com},
@@ -475,7 +475,6 @@ impl IMMNotificationClient_Impl for DevicesManagerEvents_Impl {
             DEVICE_STATE_ACTIVE => tx.send(DevicesEvent::DeviceAdded(device_id)),
             _ => tx.send(DevicesEvent::DeviceRemoved(device_id)),
         }
-        .wrap_error()
         .log_error();
         Ok(())
     }

@@ -22,7 +22,9 @@ use winreg::{
 };
 
 use crate::{
-    app::get_app_handle, error::Result, event_manager, log_error, trace_lock,
+    app::get_app_handle,
+    error::{Result, ResultLogExt},
+    event_manager, trace_lock,
     windows_api::WindowsApi,
 };
 
@@ -185,7 +187,7 @@ impl UserManager {
             None,
             move |result: DebounceEventResult| match result {
                 Ok(_events) => {
-                    log_error!(Self::reload_folder_content(folder_type));
+                    Self::reload_folder_content(folder_type).log_error();
                 }
                 Err(errors) => {
                     log::error!("Folder Watcher Error for {:?}: {errors:?}", folder_type);

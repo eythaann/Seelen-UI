@@ -4,8 +4,7 @@ use tauri::Listener;
 
 use crate::{
     app::get_app_handle,
-    error::Result,
-    log_error,
+    error::{Result, ResultLogExt},
     widgets::{show_settings_at, trigger_dialog_backend},
 };
 
@@ -14,7 +13,7 @@ pub fn show_shortcut_conflict_popup() -> Result<()> {
     let event = "open_settings_shortcuts";
 
     get_app_handle().once(event, move |_| {
-        log_error!(show_settings_at("/shortcuts"));
+        show_settings_at("/shortcuts").log_error();
     });
 
     trigger_dialog_backend(dialog)

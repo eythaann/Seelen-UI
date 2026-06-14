@@ -6,7 +6,9 @@ use seelen_core::{
 };
 
 use crate::{
-    error::Result, log_error, resources::RESOURCES, utils::icon_extractor::queue::IconExtractor,
+    error::{Result, ResultLogExt},
+    resources::RESOURCES,
+    utils::icon_extractor::queue::IconExtractor,
 };
 use std::sync::Arc;
 
@@ -46,7 +48,7 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
         ResourceKind::Theme => {
             RESOURCES.themes.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
-                    log_error!(v.delete());
+                    v.delete().log_error();
                     return false;
                 }
                 true
@@ -55,7 +57,7 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
         ResourceKind::Plugin => {
             RESOURCES.plugins.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
-                    log_error!(v.delete());
+                    v.delete().log_error();
                     return false;
                 }
                 true
@@ -64,7 +66,7 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
         ResourceKind::Widget => {
             RESOURCES.widgets.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
-                    log_error!(v.delete());
+                    v.delete().log_error();
                     return false;
                 }
                 true
@@ -73,7 +75,7 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
         ResourceKind::IconPack => {
             RESOURCES.icon_packs.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
-                    log_error!(v.delete());
+                    v.delete().log_error();
                     return false;
                 }
                 true
@@ -82,7 +84,7 @@ pub fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
         ResourceKind::Wallpaper => {
             RESOURCES.wallpapers.retain(|_, v| {
                 if *v.id == id && !v.metadata.internal.bundled {
-                    log_error!(v.delete());
+                    v.delete().log_error();
                     return false;
                 }
                 true

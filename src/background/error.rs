@@ -1,3 +1,15 @@
+pub struct AppError {
+    code: u16, // used for http responses
+    msg: String,
+    backtrace: backtrace::Backtrace,
+}
+
+impl AppError {
+    pub fn code(&self) -> u16 {
+        self.code
+    }
+}
+
 macro_rules! define_app_errors {
     ($(
         $variant:ident($error_type:ty);
@@ -11,26 +23,6 @@ macro_rules! define_app_errors {
             }
         )*
     };
-}
-
-#[macro_export]
-macro_rules! log_error {
-    ($result:expr) => {
-        if let Err(err) = $result {
-            log::error!("{:?}", err);
-        }
-    };
-    ($result:expr, $context:expr) => {
-        if let Err(err) = $result {
-            log::error!("Context: {:?} Err: {:?}", $context, err);
-        }
-    };
-}
-
-pub struct AppError {
-    code: u16, // used for http responses
-    msg: String,
-    backtrace: backtrace::Backtrace,
 }
 
 define_app_errors!(
@@ -66,12 +58,6 @@ define_app_errors!(
     Positioning(positioning::error::Error);
     Time(time::error::Error);
 );
-
-impl AppError {
-    pub fn code(&self) -> u16 {
-        self.code
-    }
-}
 
 impl std::fmt::Debug for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -196,11 +182,6 @@ pub trait ResultLogExt {
     fn log_error(self);
 }
 
-// todo remove this trait
-pub trait ErrorMap<T> {
-    fn wrap_error(self) -> core::result::Result<T, AppError>;
-}
-
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {
@@ -216,13 +197,6 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
                 }
             }
         }
-    }
-}
-
-impl<T, E: Into<AppError>> ErrorMap<T> for core::result::Result<T, E> {
-    #[inline(always)]
-    fn wrap_error(self) -> core::result::Result<T, AppError> {
-        self.map_err(Into::into)
     }
 }
 

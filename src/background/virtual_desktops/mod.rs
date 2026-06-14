@@ -14,6 +14,7 @@ use slu_utils::{debounce, Debounce};
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
 use crate::error::{Result, ResultLogExt};
+use crate::event_manager;
 use crate::hook::HookManager;
 use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
 use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
@@ -22,7 +23,6 @@ use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
 use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
-use crate::{event_manager, log_error};
 
 use events::VirtualDesktopEvent;
 
@@ -497,7 +497,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
                 let _ = MINIMIZED_BY_WORKSPACES.insert(window.address());
-                log_error!(window.show_window(mode));
+                window.show_window(mode).log_error();
             }
         }
     }
@@ -518,13 +518,13 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
                 // fires on the hook thread before this thread reaches the push.
                 RESTORED_EVENT_QUEUE.push(*addr);
                 // use normal show instead async cuz it will keep the order of restoring
-                log_error!(window.show_window(SW_RESTORE));
+                window.show_window(SW_RESTORE).log_error();
             }
             MINIMIZED_BY_WORKSPACES.remove(addr);
 
             // ensure correct focus
             if idx == len - 1 {
-                log_error!(window.focus());
+                window.focus().log_error();
             }
         }
     }
