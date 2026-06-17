@@ -1,0 +1,41 @@
+app_menu:
+  close: 關閉
+  close_multiple: 關閉全部
+  copy_handles: 複製把手
+  edit_app_icon: 編輯應用程式圖標
+  kill: 結束進程
+  kill_multiple: 結束所有進程
+  open_file_location: 打開文件位置
+  pin: 固定
+  pin_to_center: 固定到中心
+  pin_to_left: 固定到左邊
+  pin_to_right: 固定到右邊
+  run_as: 以管理員身份運行
+  unpin: 取消固定
+context_menu:
+  edit_icon: 編輯圖示
+  remove_module: 移除模塊
+  reorder_disable: 鎖任務欄
+  reorder_enable: 解鎖任務欄
+media:
+  label: 媒體播放器
+  not_playing: 當前無播放內容
+show_desktop:
+  label: 顯示桌面
+start:
+  label: 開始選單
+taskbar_menu:
+  add_file: 引導自定義文件
+  desktop: 添加桌面模塊
+  media: 添加媒體模塊
+  settings: 設定
+  start: 添加開始模塊
+  task_manager: 工作管理員
+  trash_bin: 新增回收站模組
+trash_bin:
+  edit_icon_empty: 編輯圖示（空）
+  edit_icon_full: 編輯圖示（完整）
+  empty_bin: 清空回收站
+  label: 回收站
+weg:
+  empty: 沒有顯示的物品

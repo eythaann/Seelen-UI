@@ -1,6 +1,7 @@
 export * from "./LazyRune.svelte";
 export * from "./PersistentRune.svelte";
 export * from "./i18n";
+export * from "./signals.svelte";
 
 /** Get relative time string from a date (e.g., "2 hours ago", "3 days ago") */
 export function relativeTimeFromNow(date: Date): string {

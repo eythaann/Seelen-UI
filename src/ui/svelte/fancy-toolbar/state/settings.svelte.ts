@@ -1,6 +1,7 @@
 import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
 import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
+import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { currentMonitor } from "./system.svelte.ts";
@@ -79,9 +80,7 @@ async function updateWidgetPosition() {
 
   await Widget.self.setPosition(rect);
 
-  const isTouchPrimary = window.matchMedia("(hover: hover) and (pointer: fine)").matches === false;
-
-  if (hideMode === HideMode.Never || isTouchPrimary) {
+  if (hideMode === HideMode.Never || isTouchPrimary.value) {
     await invoke(SeelenCommand.RegisterAppBar, {
       rect,
       edge: position as unknown as AppBarEdge,
@@ -119,8 +118,7 @@ $effect.root(() => {
   });
 
   $effect(() => {
-    const isTouchPrimary = window.matchMedia("(hover: hover) and (pointer: fine)").matches === false;
-    if (isTouchPrimary) return;
+    if (isTouchPrimary.value) return;
 
     let unlisten: (() => void) | null = null;
     declareDocumentAsLayeredHitbox({

@@ -281,6 +281,21 @@ subscribe(SeelenEvent.YourDataChanged, (event) => {
 await $data.init();
 ```
 
+## Svelte: Only Svelte 5+ APIs (Non-Negotiable)
+
+All Svelte code in this repo targets **Svelte 5**. Never write Svelte 4 / legacy patterns:
+
+| Forbidden (legacy)              | Required (Svelte 5+)                  |
+| ------------------------------- | ------------------------------------- |
+| `use:action` for DOM attachment | `{@attach fn}`                        |
+| `export let prop`               | `let { prop } = $props()`             |
+| `$:` reactive statements        | `$derived` / `$effect`                |
+| `createEventDispatcher`         | callback props                        |
+| `<slot>`                        | `{@render children()}` with `Snippet` |
+
+When attaching imperative DOM integrations (e.g. `@dnd-kit/svelte` sortable), always use `{@attach sortable.attach}`
+directly — never wrap it in a `use:action` helper.
+
 ## Creating Svelte Widgets (High-Level)
 
 Seelen UI supports standalone Svelte widgets. Prefer following existing widget patterns; do not invent new build

@@ -1,0 +1,41 @@
+app_menu:
+  close: Tuvs
+  close_multiple: Aizvērt visu
+  copy_handles: Kopēt rokturus
+  edit_app_icon: Rediģēt lietotnes ikonu
+  kill: Nogalināšanas process
+  kill_multiple: Nogalināt visus procesus
+  open_file_location: Atveriet faila atrašanās vietu
+  pin: Piespraust
+  pin_to_center: Piespraudiet centrā
+  pin_to_left: Piespraudiet pa kreisi
+  pin_to_right: Piespraudiet labajā pusē
+  run_as: Izpildīt kā administratoram
+  unpin: Neslēpt
+context_menu:
+  edit_icon: Rediģēšanas ikona
+  remove_module: Noņemiet moduli
+  reorder_disable: Uzdevumjoslas bloķēšana
+  reorder_enable: Uzdevumjoslas atbloķēšana
+media:
+  label: Multivides atskaņotājs
+  not_playing: Nekas nespēlē
+show_desktop:
+  label: Rādīt darbvirsmu
+start:
+  label: Sākt izvēlne
+taskbar_menu:
+  add_file: Piesprauž pielāgotu failu
+  desktop: Pievienojiet darbvirsmas moduli
+  media: Pievienojiet multivides moduli
+  settings: Iestatījumi
+  start: Pievienojiet starta moduli
+  task_manager: Uzdevumu pārvaldnieks
+  trash_bin: Pievienojiet atkritnes moduli
+trash_bin:
+  edit_icon_empty: Rediģēšanas ikona (tukšs)
+  edit_icon_full: Rediģēšanas ikona (pilna)
+  empty_bin: Iztukšojiet atkritni
+  label: Atkritne
+weg:
+  empty: Nav vienumu, ko parādīt

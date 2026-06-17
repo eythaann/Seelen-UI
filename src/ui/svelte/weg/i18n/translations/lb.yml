@@ -1,0 +1,41 @@
+app_menu:
+  close: Zoumaachen
+  close_multiple: Alles dobäi
+  copy_handles: Kopie Handelen
+  edit_app_icon: Ännerung App Ikon
+  kill: Kill Prozess
+  kill_multiple: Kill All Prozesser
+  open_file_location: Open Dateiplaz
+  pin: Pin
+  pin_to_center: PIN op Zentrum
+  pin_to_left: PIN fir lénks
+  pin_to_right: PIN op riets
+  run_as: Lafen als Administrator
+  unpin: Net unsträichen
+context_menu:
+  edit_icon: Ikon änneren
+  remove_module: Ewechzehuelen Modul
+  reorder_disable: Lock Taskbar
+  reorder_enable: Spär Taskbar
+media:
+  label: Media Player
+  not_playing: Näischt spillt
+show_desktop:
+  label: Show Desktop
+start:
+  label: Start Menu
+taskbar_menu:
+  add_file: PIN personaliséiert Datei
+  desktop: Dobäizemaachen Desktop Modul
+  media: Füügt Media Modul bäi
+  settings: Astellungen
+  start: Füügt Start Modul
+  task_manager: Aufgab Manager
+  trash_bin: Recycle Bin Modul dobäisetzen
+trash_bin:
+  edit_icon_empty: Ikon änneren (Eidel)
+  edit_icon_full: Edit Ikon (voll)
+  empty_bin: Eidel Recycle Bin
+  label: Recycle Bin
+weg:
+  empty: Keng Elementer ze weisen

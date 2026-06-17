@@ -1,0 +1,41 @@
+app_menu:
+  close: Наздик
+  close_multiple: Ҳамаашро пӯшед
+  copy_handles: Дасткор
+  edit_app_icon: Тасвири барномаро таҳрир кунед
+  kill: Раванди куштан
+  kill_multiple: Ҳама равандҳоро кушед
+  open_file_location: Кушодани макони кушод
+  pin: PIN
+  pin_to_center: PIN ба марказ
+  pin_to_left: PIN ба чап
+  pin_to_right: PIN ба рост
+  run_as: Ҳамчун мудир кор кунед
+  unpin: Ватанӣ
+context_menu:
+  edit_icon: Таҳрири Нишона
+  remove_module: Модулро хориҷ кунед
+  reorder_disable: Қулфи супоришҳо
+  reorder_enable: Қулфи панел
+media:
+  label: Плеери медиа
+  not_playing: Ҳеҷ чиз бозӣ намекунад
+show_desktop:
+  label: Мизи кориро нишон диҳед
+start:
+  label: Менюи оғоз
+taskbar_menu:
+  add_file: Файли фармоишии PIN
+  desktop: Иловаи модули мизи корӣ
+  media: Иловаи модули ВАО
+  settings: Танзимотҳо
+  start: Иловаи модули оғоз
+  task_manager: Менеҷери вазифа
+  trash_bin: Модули қуттии партовро илова кунед
+trash_bin:
+  edit_icon_empty: Тасвири таҳрир (холӣ)
+  edit_icon_full: Тасвири таҳрир (Пурра)
+  empty_bin: Қуттии партови холӣ
+  label: Қуттии партов
+weg:
+  empty: Ягон ашё барои нишон додан

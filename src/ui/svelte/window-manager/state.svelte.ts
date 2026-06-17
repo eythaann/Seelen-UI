@@ -6,12 +6,7 @@ import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
-
-const _pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-let isTouchPrimary = $state(!_pointerQuery.matches);
-_pointerQuery.addEventListener("change", (e) => {
-  isTouchPrimary = !e.matches;
-});
+import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 
 let layouts = lazyRune(() => invoke(SeelenCommand.WmGetRenderTree));
 subscribe(SeelenEvent.WMTreeChanged, layouts.setByPayload);
@@ -101,7 +96,7 @@ const widgetRect = $derived.by(() => {
   if (
     tbConfig.enabled &&
     tbMonitorConfig.enabled &&
-    (tbConfig.hideMode === HideMode.Never || isTouchPrimary)
+    (tbConfig.hideMode === HideMode.Never || isTouchPrimary.value)
   ) {
     const tbSize = Math.round(
       (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) * monitor.scaleFactor,

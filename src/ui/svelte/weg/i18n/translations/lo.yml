@@ -1,0 +1,41 @@
+app_menu:
+  close: ປິດ
+  close_multiple: ປິດທັງຫມົດ
+  copy_handles: ຄັດລອກ
+  edit_app_icon: ແກ້ໄຂໄອຄອນແອັບ
+  kill: ຂະບວນການຂ້າ
+  kill_multiple: ຂ້າຂະບວນການທັງຫມົດ
+  open_file_location: ເປີດສະຖານທີ່ເອກະສານ
+  pin: ເຂັມ PIN
+  pin_to_center: PIN ເຖິງສູນກາງ
+  pin_to_left: ເຂັມຊ້າຍໄປ
+  pin_to_right: PIN ກັບຂວາ
+  run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
+  unpin: unppin
+context_menu:
+  edit_icon: ແກ້ໄຂໄອຄອນ
+  remove_module: ເອົາໂມດູນອອກ
+  reorder_disable: ລັອກ task task
+  reorder_enable: ປົດລ taskbar taskbar
+media:
+  label: Media Player
+  not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
+show_desktop:
+  label: ສະແດງ Desktop
+start:
+  label: ເມນູເລີ່ມຕົ້ນ
+taskbar_menu:
+  add_file: PIN File Custom
+  desktop: ເພີ່ມໂມດູນ Desktop
+  media: ຕື່ມການໂມດູນສື່
+  settings: ການຕັ້ງຄ່າ
+  start: ເພີ່ມໂມດູນ Start
+  task_manager: Task Manager
+  trash_bin: ເພີ່ມໂມດູນ Recycle Bin
+trash_bin:
+  edit_icon_empty: ແກ້ໄຂໄອຄອນ (ຫວ່າງເປົ່າ)
+  edit_icon_full: ແກ້ໄຂໄອຄອນ (ເຕັມ)
+  empty_bin: ຖັງ Recycle ຫວ່າງເປົ່າ
+  label: ຖັງ Recycle
+weg:
+  empty: ບໍ່ມີລາຍການໃຫ້ສະແດງ
