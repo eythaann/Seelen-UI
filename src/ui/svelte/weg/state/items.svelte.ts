@@ -2,7 +2,8 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import { type WegItem, type WegItems, WegItemType } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
-import type { SeparatorWegItem } from "../types.ts";
+import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
+import { getWindowsForItem, interactables } from "./windows.svelte.ts";
 
 interface OptimisticDockState {
   isReorderDisabled: boolean;
@@ -173,3 +174,59 @@ export const dockStateActions = {
     }
   },
 };
+
+$effect.root(() => {
+  $effect(() => {
+    const windows = interactables.value;
+    const state = _dockState;
+
+    const appOrFileItems = state.items.filter(
+      (item): item is AppOrFileWegItem => item.type === WegItemType.AppOrFile,
+    );
+
+    const itemsToRemove = new Set(
+      appOrFileItems
+        .filter((item) => !item.pinned && getWindowsForItem(item, windows).length === 0)
+        .map((item) => item.id),
+    );
+
+    const remainingItems = appOrFileItems.filter((item) => !itemsToRemove.has(item.id));
+    const uncoveredWindows = windows.filter(
+      (w) => !remainingItems.some((item) => getWindowsForItem(item, [w]).length > 0),
+    );
+
+    const seen = new Set<string>();
+    const newItems: AppOrFileWegItem[] = [];
+
+    for (const w of uncoveredWindows) {
+      const key = w.umid ?? w.process.path?.toString();
+      if (!key) continue;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      newItems.push({
+        id: crypto.randomUUID(),
+        type: WegItemType.AppOrFile,
+        displayName: w.appName,
+        umid: w.umid ?? null,
+        path: w.process.path?.toString() ?? "",
+        pinned: false,
+        preventPinning: w.preventPinning,
+        relaunch: w.relaunch ?? null,
+      });
+    }
+
+    if (itemsToRemove.size === 0 && newItems.length === 0) return;
+
+    const filteredItems = state.items.filter((item) => !itemsToRemove.has(item.id));
+    const separatorRightIdx = filteredItems.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+    _dockState = {
+      ...state,
+      items: [
+        ...filteredItems.slice(0, separatorRightIdx),
+        ...newItems,
+        ...filteredItems.slice(separatorRightIdx),
+      ],
+    };
+  });
+});
