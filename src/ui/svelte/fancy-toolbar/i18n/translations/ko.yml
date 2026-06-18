@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% 남음'
+  smart_charge: 스마트 충전
+bluetooth:
+  available: 사용 가능한 장치(페어링되지 않음)
+  cancel: 취소
+  connected: 연결된 장치
+  forget: 잊어버림
+  lowenergy: 저에너지
+  more: 추가 블루투스 설정
+  not_found: 블루투스 장치를 찾을 수 없습니다.
+  pair: 페어
+  paired: 저장된 장치
+  placeholder:
+    passphrase: 비밀번호, 코드 또는 PIN
+  scanning: 디바이스 검색
+context_menu:
+  add_custom_text: 사용자 지정 텍스트 항목 추가
+  modules: 모듈
+  remove: 모듈 제거
+  reorder_disable: 잠금 도구 모음
+  reorder_enable: 도구 모음 잠금 해제
+  restore: 기본값으로 복원
+  settings: 설정
+  task_manager: 작업 관리자
+media:
+  default_multimedia_volume: 멀티미디어 볼륨
+  device:
+    channel:
+      system: 시스템 사운드
+    comunications: 통신 장치
+    missing: 누락된 장치
+    mixer: 볼륨 믹서
+    multimedia: 멀티미디어 장치
+    settings: 더 많은 장치 설정
+    volume: 장치 볼륨
+  input_devices: 입력 장치
+  output_devices: 출력 장치
+  players: 미디어 플레이어
+notifications:
+  clear: 모두 지우기
+  empty: 알림 없음
+  settings: 추가 알림 설정
+  title: 알림
+placeholder:
+  bluetooth_devices: 블루투스 및 장치
+  ethernet_connected: 인터넷 연결됨
+  ethernet_disconnected: 인터넷 연결 안됨
+  notifications: 알림
+  settings: 빠른 설정
+  volume: 볼륨
+plugged: 연결됨
+settings:
+  app_settings: 앱 설정
+  brightness: 밝기
+  power: 전원
+  restart: 다시 시작
+  title: 설정
+show_desktop: 데스크탑 표시

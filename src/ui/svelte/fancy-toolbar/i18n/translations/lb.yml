@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Rescht'
+  smart_charge: Smart Charge
+bluetooth:
+  available: Verfügbaren Apparater (net gepaart)
+  cancel: Ofbriechen
+  connected: Verbonne Geräter
+  forget: Vergiess
+  lowenergy: Wéineg Energie
+  more: Méi Bluetooth Astellunge
+  not_found: Keng Bluetooth Geräter fonnt
+  pair: Pabeier
+  paired: Gerett Geräter
+  placeholder:
+    passphrase: Passphrase, Code oder PIN
+  scanning: Scannen fir Apparater
+context_menu:
+  add_custom_text: Füügt personaliséiert Textartikel
+  modules: Moduls
+  remove: Ewechzehuelen Modul
+  reorder_disable: Lock Toolbar
+  reorder_enable: Spär Toolbar
+  restore: Restauréieren op Standard
+  settings: Astellungen
+  task_manager: Aufgab Manager
+media:
+  default_multimedia_volume: Multimedia Volumen
+  device:
+    channel:
+      system: System kléngt
+    comunications: Kommunikatiounen
+    missing: Vermësste Gerät
+    mixer: Volumenmëschung
+    multimedia: Multimedia
+    settings: Méi Apparat Astellunge
+    volume: Apparat Volumen
+  input_devices: Input Apparater
+  output_devices: Ausgangsapparater
+  players: Media Spiller
+notifications:
+  clear: Emlotzen alleng
+  empty: Keng Notifikatiounen
+  settings: Méi Notifikatiounen Astellunge
+  title: Notifikatiounen
+placeholder:
+  bluetooth_devices: Bluetooth & Apparater
+  ethernet_connected: Internet Zougang
+  ethernet_disconnected: Keen Internetzougang
+  notifications: Notifikatiounen
+  settings: Quick Astellungen
+  volume: Vuesso
+plugged: Verstoppt
+settings:
+  app_settings: App Astellunge
+  brightness: Hellegkeet
+  power: Kraaftbeldscht
+  restart: Neistart
+  title: Astellunge
+show_desktop: Show Desktop

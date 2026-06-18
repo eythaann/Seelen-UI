@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% Maradt'
+  smart_charge: Smart Charge
+bluetooth:
+  available: Elérhető eszközök (nem párosított)
+  cancel: Mégse
+  connected: Csatlakoztatott eszközök
+  forget: Eszköz elfelejtése
+  lowenergy: Alacsony energiafogyasztás
+  more: További Bluetooth-beállítások
+  not_found: Nincs elérhető Bluetooth-eszköz
+  pair: Párosítás
+  paired: Párosított eszközök
+  placeholder:
+    passphrase: Jelszó, kód vagy PIN
+  scanning: Eszközök keresése
+context_menu:
+  add_custom_text: Egyéni szövegelem hozzáadása
+  modules: Modulok
+  remove: Modul eltávolítása
+  reorder_disable: Eszköztár zárolása
+  reorder_enable: Eszköztár feloldása
+  restore: Alapértelmezett állapot visszaállítása
+  settings: Beállítások
+  task_manager: Feladatkezelő
+media:
+  default_multimedia_volume: Alapértelmezett médiakötet
+  device:
+    channel:
+      system: Rendszerhangok
+    comunications: Kommunikáció
+    missing: Hiányzó eszköz
+    mixer: Hangerő-keverő
+    multimedia: Multimédia
+    settings: További eszközbeállítások
+    volume: Eszköz hangerő
+  input_devices: Bemeneti eszközök
+  output_devices: Kimeneti eszközök
+  players: Médialejátszók
+notifications:
+  clear: Összes törlése
+  empty: Nincsenek értesítések
+  settings: További értesítési beállítások
+  title: Értesítések
+placeholder:
+  bluetooth_devices: Bluetooth és eszközök
+  ethernet_connected: Internet-hozzáférés
+  ethernet_disconnected: Nincs internet-hozzáférés
+  notifications: Értesítések
+  settings: Gyorsbeállítások
+  volume: Hangerő
+plugged: Dugva
+settings:
+  app_settings: Alkalmazásbeállítások
+  brightness: Fényerő
+  power: Kikapcsolás
+  restart: Újraindítás
+  title: Beállítások
+show_desktop: Asztal megjelenítése

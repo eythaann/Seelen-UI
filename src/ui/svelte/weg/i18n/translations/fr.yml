@@ -1,0 +1,41 @@
+app_menu:
+  close: Fermer
+  close_multiple: Tout fermer
+  copy_handles: Copier l'ID du processus
+  edit_app_icon: Modifier l'icône de l'application
+  kill: Terminer le processus
+  kill_multiple: Terminer tous les processus
+  open_file_location: Ouvrir l'emplacement du fichier
+  pin: Épingler
+  pin_to_center: Épingler au centre
+  pin_to_left: Épingler à gauche
+  pin_to_right: Épingler à droite
+  run_as: Exécuter en tant qu'administrateur
+  unpin: Détacher
+context_menu:
+  edit_icon: Modifier l'icône
+  remove_module: Supprimer le module
+  reorder_disable: Verrouiller la barre des tâches
+  reorder_enable: Déverrouiller la barre des tâches
+media:
+  label: Lecteur multimédia
+  not_playing: Vide
+show_desktop:
+  label: Afficher le bureau
+start:
+  label: Menu Démarrer
+taskbar_menu:
+  add_file: Épingler un fichier
+  desktop: Ajouter un module de bureau
+  media: Afficher le module multimédia
+  settings: Paramètres
+  start: Afficher le module "Menu démarrer"
+  task_manager: Gestionnaire des tâches
+  trash_bin: Ajouter un module de corbeille
+trash_bin:
+  edit_icon_empty: Icône Modifier (vide)
+  edit_icon_full: Icône Modifier (complète)
+  empty_bin: Corbeille vide
+  label: Corbeille
+weg:
+  empty: Aucun élément à afficher

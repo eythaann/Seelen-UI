@@ -1,0 +1,41 @@
+app_menu:
+  close: Naby
+  close_multiple: Sluit alles
+  copy_handles: Kopiehandvatsels
+  edit_app_icon: Wysig App-ikoon
+  kill: Doodproses
+  kill_multiple: Maak alle prosesse dood
+  open_file_location: Oop lêlokasie
+  pin: Speld
+  pin_to_center: Speld na die sentrum
+  pin_to_left: Speld na links
+  pin_to_right: Speld na regs
+  run_as: Hardloop as administrateur
+  unpin: Unpin
+context_menu:
+  edit_icon: Wysig ikoon
+  remove_module: Verwyder module
+  reorder_disable: Sluit taakbalk
+  reorder_enable: Ontsluit taakbalk
+media:
+  label: Mediaspeler
+  not_playing: Niks speel nie
+show_desktop:
+  label: Wys lessenaar
+start:
+  label: Begin Kieslys
+taskbar_menu:
+  add_file: Pin Custom File
+  desktop: Voeg lessenaarmodule by
+  media: Voeg mediasmodule by
+  settings: Instellings
+  start: Voeg beginmodule by
+  task_manager: Taakbestuurder
+  trash_bin: Voeg asblikmodule by
+trash_bin:
+  edit_icon_empty: Wysig-ikoon (leeg)
+  edit_icon_full: Wysig-ikoon (Vol)
+  empty_bin: Leë asblik
+  label: Asblik
+weg:
+  empty: Geen items om te wys nie

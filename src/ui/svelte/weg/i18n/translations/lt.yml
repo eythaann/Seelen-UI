@@ -1,0 +1,41 @@
+app_menu:
+  close: Uždaryti
+  close_multiple: Uždaryk viską
+  copy_handles: Kopijavimo rankenos
+  edit_app_icon: Redaguoti programos piktogramą
+  kill: Nužudymo procesas
+  kill_multiple: Nužudyti visus procesus
+  open_file_location: Atidarykite failo vietą
+  pin: Kaištis
+  pin_to_center: Kaištis iki centro
+  pin_to_left: Kaištis į kairę
+  pin_to_right: Kaištis į dešinę
+  run_as: Vykdykite kaip administratorius
+  unpin: Unpin
+context_menu:
+  edit_icon: Redagavimo piktograma
+  remove_module: Pašalinti modulį
+  reorder_disable: Užrakinti užduočių juostą
+  reorder_enable: Užduočių juostos atrakinimas
+media:
+  label: Media Player
+  not_playing: Niekas nežaidžia
+show_desktop:
+  label: Rodyti darbalaukį
+start:
+  label: Pradėti meniu
+taskbar_menu:
+  add_file: PIN pasirinktinis failas
+  desktop: Pridėti darbalaukio modulį
+  media: Pridėkite laikmenos modulį
+  settings: Nustatymai
+  start: Pridėkite pradžios modulį
+  task_manager: Užduočių tvarkyklė
+  trash_bin: Pridėkite šiukšliadėžės modulį
+trash_bin:
+  edit_icon_empty: Redagavimo piktograma (tuščia)
+  edit_icon_full: Redagavimo piktograma (visa)
+  empty_bin: Ištuštinkite šiukšliadėžę
+  label: Šiukšliadėžė
+weg:
+  empty: Nėra elementų, kuriuos būtų galima rodyti

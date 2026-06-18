@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% נותרו'
+  smart_charge: טעינה חכמה
+bluetooth:
+  available: מכשירים זמינים
+  cancel: ביטול
+  connected: מכשירים מחוברים
+  forget: הסר התקן
+  lowenergy: סוללה נמוכה
+  more: הגדרות Bluetooth נוספות
+  not_found: לא נמצאו מכשירי Bluetooth
+  pair: הוסף התקן
+  paired: מכשירים שנשמרו
+  placeholder:
+    passphrase: משפט סיסמה, קוד או סיכה
+  scanning: סריקה לאיתור מכשירים
+context_menu:
+  add_custom_text: הוסף פריט טקסט מותאם אישית
+  modules: מודולים
+  remove: הסר את המודול
+  reorder_disable: סרגל הכלים לנעול
+  reorder_enable: בטל את סרגל הכלים
+  restore: שחזר לברירת מחדל
+  settings: הגדרות
+  task_manager: מנהל משימות
+media:
+  default_multimedia_volume: עוצמת קול מולטימדיה
+  device:
+    channel:
+      system: צלילי מערכת
+    comunications: תקשורת
+    missing: מכשיר חסר
+    mixer: מערבל עוצמת קול
+    multimedia: מולטימדיה
+    settings: הגדרות מכשירים נוספות
+    volume: נפח המכשיר
+  input_devices: מכשירי קלט
+  output_devices: מכשירי פלט
+  players: נגני מדיה
+notifications:
+  clear: נקה הכל
+  empty: אין התראות
+  settings: הגדרות התראות נוספות
+  title: התראות
+placeholder:
+  bluetooth_devices: Bluetooth ומכשירים
+  ethernet_connected: גישה לאינטרנט
+  ethernet_disconnected: אין גישה לאינטרנט
+  notifications: התראות
+  settings: הגדרות מהירות
+  volume: עוצמת קול
+plugged: פָּקוּק
+settings:
+  app_settings: הגדרות אפליקציה
+  brightness: בהירות
+  power: סוללה
+  restart: הפעל מחדש
+  title: הגדרות
+show_desktop: הצג את שולחן העבודה

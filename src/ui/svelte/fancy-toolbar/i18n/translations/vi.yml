@@ -1,0 +1,59 @@
+battery:
+  remaining: Còn lại {{0}}%
+  smart_charge: Sạc thông minh
+bluetooth:
+  available: Các thiết bị có sẵn (không được ghép nối)
+  cancel: Hủy bỏ
+  connected: Các thiết bị được kết nối
+  forget: Quên
+  lowenergy: Năng lượng thấp
+  more: Thêm cài đặt Bluetooth
+  not_found: Không tìm thấy thiết bị Bluetooth
+  pair: Đôi
+  paired: Thiết bị lưu
+  placeholder:
+    passphrase: Cụm mật khẩu, mã hoặc pin
+  scanning: Quét cho các thiết bị
+context_menu:
+  add_custom_text: Thêm mục văn bản tùy chỉnh
+  modules: Mô -đun
+  remove: Xóa mô -đun
+  reorder_disable: Thanh công cụ khóa
+  reorder_enable: Mở khóa thanh công cụ
+  restore: Khôi phục về mặc định
+  settings: Cài đặt
+  task_manager: Trình quản lý tác vụ
+media:
+  default_multimedia_volume: Khối lượng đa phương tiện
+  device:
+    channel:
+      system: Âm thanh hệ thống
+    comunications: Truyền thông
+    missing: Thiếu thiết bị
+    mixer: Máy trộn khối lượng
+    multimedia: Đa phương tiện
+    settings: Nhiều cài đặt thiết bị hơn
+    volume: Khối lượng thiết bị
+  input_devices: Thiết bị đầu vào
+  output_devices: Thiết bị đầu ra
+  players: Người chơi truyền thông
+notifications:
+  clear: Rõ ràng tất cả
+  empty: Không có thông báo
+  settings: Nhiều cài đặt thông báo
+  title: Thông báo
+placeholder:
+  bluetooth_devices: Bluetooth & thiết bị
+  ethernet_connected: truy cập Internet
+  ethernet_disconnected: Không có kết nối mạng
+  notifications: Thông báo
+  settings: Cài đặt nhanh
+  volume: Âm lượng
+plugged: Đã cắm
+settings:
+  app_settings: Cài đặt ứng dụng
+  brightness: Độ sáng
+  power: Quyền lực
+  restart: Khởi động lại
+  title: Cài đặt
+show_desktop: Hiển thị màn hình

@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% ይቀራል'
+  smart_charge: ብልጥ ክፍያ
+bluetooth:
+  available: የሚገኙ መሣሪያዎች (የተጣመሩ)
+  cancel: ይቅር
+  connected: የተገናኙ መሣሪያዎች
+  forget: ረሳ
+  lowenergy: ዝቅተኛ ኃይል
+  more: ተጨማሪ የብሉቱዝ ቅንብሮች
+  not_found: ምንም የብሉቱዝ መሣሪያዎች አልተገኙም
+  pair: ጥንድ ጥንድ
+  paired: የተቀመጡ መሣሪያዎች
+  placeholder:
+    passphrase: የይለፍ ሐረግ, ኮድ ወይም ፒን
+  scanning: ለመሣሪያዎች መቃኘት
+context_menu:
+  add_custom_text: ብጁ ጽሑፍን ንጥል ያክሉ
+  modules: ሞጁሎች
+  remove: ሞጁሎችን ያስወግዱ
+  reorder_disable: የመሳሪያ አሞሌ
+  reorder_enable: የመሣሪያ አሞሌን ይክፈቱ
+  restore: ወደ ነባሪነት ይመልሱ
+  settings: ቅንብሮች
+  task_manager: ተግባር አስተዳዳሪ
+media:
+  default_multimedia_volume: መልቲሚዲያ መጠን
+  device:
+    channel:
+      system: የስርዓት ድምጾች
+    comunications: ግንኙነቶች
+    missing: የመሳሪያ መሣሪያ
+    mixer: ጥራዝ ድብልቅ
+    multimedia: መልቲሚዲያ
+    settings: ተጨማሪ የመሣሪያ ቅንብሮች
+    volume: የመሣሪያ መጠን
+  input_devices: የግቤት መሣሪያዎች
+  output_devices: የውጤት መሣሪያዎች
+  players: የሚዲያ ተጫዋቾች
+notifications:
+  clear: ሁሉንም አጥራ
+  empty: ማስታወቂያዎች የሉም
+  settings: ተጨማሪ የማሳወቂያዎች ቅንብሮች
+  title: ማሳወቂያዎች
+placeholder:
+  bluetooth_devices: ብሉቱዝ እና መሣሪያዎች
+  ethernet_connected: የበይነመረብ መዳረሻ
+  ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
+  notifications: ማሳወቂያዎች
+  settings: ፈጣን ቅንብሮች
+  volume: ድምጽ
+plugged: ተሰክቷል
+settings:
+  app_settings: የመተግበሪያ ቅንጅቶች
+  brightness: ብሩህነት
+  power: ኃይል
+  restart: እንደገና ጀምር
+  title: ቅንብሮች
+show_desktop: ዴስክቶፕን አሳይ

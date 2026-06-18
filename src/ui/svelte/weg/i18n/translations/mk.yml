@@ -1,0 +1,41 @@
+app_menu:
+  close: Затвори
+  close_multiple: Затворете ги сите
+  copy_handles: Копирање рачки
+  edit_app_icon: Уредете ја иконата на апликацијата
+  kill: Процес на убивање
+  kill_multiple: Убиј ги сите процеси
+  open_file_location: Отворете ја локацијата на датотеката
+  pin: Игла
+  pin_to_center: Игла до центар
+  pin_to_left: Игла на лево
+  pin_to_right: Игла надесно
+  run_as: Работи како администратор
+  unpin: Unpin
+context_menu:
+  edit_icon: Икона за уредување
+  remove_module: Отстранете го модулот
+  reorder_disable: Заклучете ја лентата со задачи
+  reorder_enable: Отклучете ја лентата со задачи
+media:
+  label: Медиа плеер
+  not_playing: Ништо не игра
+show_desktop:
+  label: Прикажи работна површина
+start:
+  label: Старт мени
+taskbar_menu:
+  add_file: Пинк за прилагодена датотека
+  desktop: Додадете модул за работна површина
+  media: Додадете медиумски модул
+  settings: Поставки
+  start: Додадете модул за почеток
+  task_manager: Управувач со задачи
+  trash_bin: Додадете модул за корпа за отпадоци
+trash_bin:
+  edit_icon_empty: Икона за уредување (празна)
+  edit_icon_full: Икона за уредување (целосна)
+  empty_bin: Празна корпа за отпадоци
+  label: Корпа за рециклирање
+weg:
+  empty: Нема ставки за прикажување

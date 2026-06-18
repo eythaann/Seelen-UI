@@ -1,0 +1,59 @@
+battery:
+  remaining: Zostáva {{0}} %.
+  smart_charge: Inteligentné nabíjanie
+bluetooth:
+  available: Dostupné zariadenia (nespárované)
+  cancel: Zrušiť
+  connected: Pripojené zariadenia
+  forget: Zabudnite na
+  lowenergy: Nízka energia
+  more: Ďalšie nastavenia Bluetooth
+  not_found: Nenašli sa žiadne zariadenia Bluetooth
+  pair: Pár
+  paired: Uložené zariadenia
+  placeholder:
+    passphrase: Fráza, kód alebo PIN
+  scanning: Skenovanie zariadení
+context_menu:
+  add_custom_text: Pridanie vlastnej textovej položky
+  modules: Moduly
+  remove: Odstrániť modul
+  reorder_disable: Uzamknutie panela nástrojov
+  reorder_enable: Odomknutie panela nástrojov
+  restore: Obnovenie predvoleného nastavenia
+  settings: Nastavenia
+  task_manager: Správca úloh
+media:
+  default_multimedia_volume: Multimediálny objem
+  device:
+    channel:
+      system: Zvuky systému
+    comunications: Komunikácia
+    missing: Chýbajúce zariadenie
+    mixer: Zmiešavač hlasitosti
+    multimedia: Multimédiá
+    settings: Ďalšie nastavenia zariadenia
+    volume: Objem zariadenia
+  input_devices: Vstupné zariadenia
+  output_devices: Výstupné zariadenia
+  players: Médiá
+notifications:
+  clear: Vymazať všetko
+  empty: Žiadne oznámenia
+  settings: Ďalšie nastavenia oznámení
+  title: Oznámenia
+placeholder:
+  bluetooth_devices: Bluetooth a zariadenia
+  ethernet_connected: Prístup na internet
+  ethernet_disconnected: Žiadny prístup na internet
+  notifications: Oznámenia
+  settings: Rýchle nastavenia
+  volume: Zväzok
+plugged: Zapojené
+settings:
+  app_settings: Nastavenia aplikácií
+  brightness: Jas
+  power: Moc
+  restart: Reštart
+  title: nastavenie
+show_desktop: Zobraziť pracovnú plochu

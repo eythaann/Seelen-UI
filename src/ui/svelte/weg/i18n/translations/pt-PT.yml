@@ -1,0 +1,41 @@
+app_menu:
+  close: Perto
+  close_multiple: Feche tudo
+  copy_handles: Alças de cópia
+  edit_app_icon: Editar ícone da aplicação
+  kill: Processo de matar
+  kill_multiple: Mate todos os processos
+  open_file_location: Localização do arquivo aberto
+  pin: Pino
+  pin_to_center: Pino para centralizar
+  pin_to_left: Pino para a esquerda
+  pin_to_right: Pino para a direita
+  run_as: Executar como administrador
+  unpin: Não
+context_menu:
+  edit_icon: Editar ícone
+  remove_module: Remover Módulo
+  reorder_disable: Bloquear barra de tarefas
+  reorder_enable: Desbloqueie a barra de tarefas
+media:
+  label: Reprodutor de multimédia
+  not_playing: Nada está tocando
+show_desktop:
+  label: Mostrar área de trabalho
+start:
+  label: Menu Iniciar
+taskbar_menu:
+  add_file: PIN File personalizado
+  desktop: Adicionar módulo de área de trabalho
+  media: Adicione módulo de mídia
+  settings: Configurações
+  start: Adicione o módulo inicial
+  task_manager: Gerente de tarefas
+  trash_bin: Adicionar módulo de reciclagem
+trash_bin:
+  edit_icon_empty: Editar ícone (vazio)
+  edit_icon_full: Editar ícone (completo)
+  empty_bin: Esvaziar Lixeira
+  label: Lixeira
+weg:
+  empty: Sem itens para mostrar

@@ -1,0 +1,41 @@
+app_menu:
+  close: වසන්න
+  close_multiple: සියල්ල වසා දමන්න
+  copy_handles: හසුරුමය
+  edit_app_icon: යෙදුම් නිරූපකය සංස්කරණය කරන්න
+  kill: කිල් ක්‍රියාවලිය
+  kill_multiple: සියලුම ක්‍රියාවලීන් මරා දමන්න
+  open_file_location: ගොනුව විවෘත ස්ථානය
+  pin: පින්
+  pin_to_center: මධ්යස්ථානයට පින් කරන්න
+  pin_to_left: වමට
+  pin_to_right: පින් කරන්න දකුණට
+  run_as: පරිපාලක ලෙස ක්රියාත්මක වන්න
+  unpin: UNTIN
+context_menu:
+  edit_icon: සංස්කරණ නිරූපකය
+  remove_module: මොඩියුලය ඉවත් කරන්න
+  reorder_disable: අගුළු කාර්ය තීරුව
+  reorder_enable: කාර්ය තීරු අගුළු ඇරීම
+media:
+  label: මාධ්ය වාදකය
+  not_playing: කිසිවක් සෙල්ලම් කරන්නේ නැත
+show_desktop:
+  label: ඩෙස්ක්ටොප් පෙන්වන්න
+start:
+  label: ආරම්භක මෙනුව
+taskbar_menu:
+  add_file: පින් අභිරුචි ගොනුව
+  desktop: ඩෙස්ක්ටොප් මොඩියුලය එක් කරන්න
+  media: මාධ්ය මොඩියුලය එක් කරන්න
+  settings: සැකසීම්
+  start: ආරම්භක මොඩියුලය එක් කරන්න
+  task_manager: කාර්ය කළමනාකරු
+  trash_bin: Recycle Bin Module එක එකතු කරන්න
+trash_bin:
+  edit_icon_empty: සංස්කරණ නිරූපකය (හිස්)
+  edit_icon_full: සංස්කරණ නිරූපකය (සම්පූර්ණ)
+  empty_bin: හිස් ප්‍රතිචක්‍රීකරණ බඳුන
+  label: ප්‍රතිචක්‍රීකරණ බඳුන
+weg:
+  empty: පෙන්වීමට අයිතම නැත

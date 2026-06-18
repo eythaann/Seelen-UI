@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% eftir'
+  smart_charge: Snjallhleðsla
+bluetooth:
+  available: Laus tæki (ekki parað)
+  cancel: Hætta við
+  connected: Tengd tæki
+  forget: Gleymdu
+  lowenergy: Lítil orka
+  more: Fleiri Bluetooth stillingar
+  not_found: Engin Bluetooth tæki fundust
+  pair: Par
+  paired: Vistað tæki
+  placeholder:
+    passphrase: Passphrase, kóða eða pinna
+  scanning: Skönnun fyrir tæki
+context_menu:
+  add_custom_text: Bættu við sérsniðnum textahluta
+  modules: Einingar
+  remove: Fjarlægðu eininguna
+  reorder_disable: Læsa tækjastiku
+  reorder_enable: Opnaðu tækjastiku
+  restore: Endurheimta í sjálfgefið
+  settings: Stillingar
+  task_manager: Verkefnastjóri
+media:
+  default_multimedia_volume: Margmiðlunarrúmmál
+  device:
+    channel:
+      system: Kerfishljóð
+    comunications: Samskipti
+    missing: Vantar tæki
+    mixer: Bindi blöndunartæki
+    multimedia: Margmiðlun
+    settings: Fleiri tækjastillingar
+    volume: Tæki rúmmál
+  input_devices: Inntakstæki
+  output_devices: Framleiðsla tæki
+  players: Fjölmiðla leikmenn
+notifications:
+  clear: Skýrt allt
+  empty: Engar tilkynningar
+  settings: Fleiri tilkynningarstillingar
+  title: Tilkynningar
+placeholder:
+  bluetooth_devices: Bluetooth og tæki
+  ethernet_connected: internet aðgangur
+  ethernet_disconnected: Enginn internetaðgangur
+  notifications: Tilkynningar
+  settings: Fljótar stillingar
+  volume: Bindi
+plugged: Tengdur
+settings:
+  app_settings: Forritastillingar
+  brightness: Birtustig
+  power: Máttur
+  restart: Endurræsa
+  title: Stillingar
+show_desktop: Sýna skjáborð

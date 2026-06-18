@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% restante'
+  smart_charge: Carga inteligente
+bluetooth:
+  available: Dispositivos disponíveis (não emparelhados)
+  cancel: Cancelar
+  connected: Dispositivos conectados
+  forget: Esquecer
+  lowenergy: Baixa energia
+  more: Mais configurações de Bluetooth
+  not_found: Nenhum dispositivo Bluetooth encontrado
+  pair: Emparelhar
+  paired: Dispositivos emparelhados
+  placeholder:
+    passphrase: Senha, código ou PIN
+  scanning: Procurando dispositivos
+context_menu:
+  add_custom_text: Adicionar item de texto personalizado
+  modules: Módulos
+  remove: Remover módulo
+  reorder_disable: Bloquear barra de ferramentas
+  reorder_enable: Desbloquear barra de ferramentas
+  restore: Restaurar padrão
+  settings: Configurações
+  task_manager: Gerenciador de Tarefas
+media:
+  default_multimedia_volume: Volume multimídia
+  device:
+    channel:
+      system: Sons do sistema
+    comunications: Comunicações
+    missing: Dispositivo ausente
+    mixer: Mixer de volume
+    multimedia: Multimídia
+    settings: Mais configurações do dispositivo
+    volume: Volume do dispositivo
+  input_devices: Dispositivos de entrada
+  output_devices: Dispositivos de saída
+  players: Reprodutores de mídia
+notifications:
+  clear: Limpar tudo
+  empty: Sem notificações
+  settings: Mais configurações de notificações
+  title: Notificações
+placeholder:
+  bluetooth_devices: Bluetooth e Dispositivos
+  ethernet_connected: Acesso à Internet
+  ethernet_disconnected: Sem acesso à Internet
+  notifications: Notificações
+  settings: Configurações rápidas
+  volume: Volume
+plugged: Conectado
+settings:
+  app_settings: Configurações do aplicativo
+  brightness: Brilho
+  power: Energia
+  restart: Reiniciar
+  title: Configurações
+show_desktop: Mostrar área de trabalho

@@ -1,0 +1,41 @@
+app_menu:
+  close: Close
+  close_multiple: Close All
+  copy_handles: Copy Handles
+  edit_app_icon: Edit App Icon
+  kill: Kill Process
+  kill_multiple: Kill All Processes
+  open_file_location: Open File Location
+  pin: Pin
+  pin_to_center: Pin to Center
+  pin_to_left: Pin to Left
+  pin_to_right: Pin to Right
+  run_as: Run as Administrator
+  unpin: Unpin
+context_menu:
+  edit_icon: Edit Icon
+  remove_module: Remove Module
+  reorder_disable: Lock taskbar
+  reorder_enable: Unlock taskbar
+media:
+  label: Media Player
+  not_playing: Nothing is playing
+show_desktop:
+  label: Show Desktop
+start:
+  label: Start Menu
+taskbar_menu:
+  add_file: Pin Custom File
+  desktop: Add Desktop Module
+  media: Add Media Module
+  settings: Settings
+  start: Add Start Module
+  task_manager: Task Manager
+  trash_bin: Add Recycle Bin Module
+trash_bin:
+  edit_icon_empty: Edit Icon (Empty)
+  edit_icon_full: Edit Icon (Full)
+  empty_bin: Empty Recycle Bin
+  label: Recycle Bin
+weg:
+  empty: No items to show

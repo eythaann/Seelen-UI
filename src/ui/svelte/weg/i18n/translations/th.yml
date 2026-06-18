@@ -1,0 +1,41 @@
+app_menu:
+  close: ปิด
+  close_multiple: ปิดทั้งหมด
+  copy_handles: สำเนามือจับ
+  edit_app_icon: แก้ไขไอคอนแอป
+  kill: ฆ่ากระบวนการ
+  kill_multiple: ฆ่ากระบวนการทั้งหมด
+  open_file_location: เปิดตำแหน่งไฟล์
+  pin: เข็มหมุด
+  pin_to_center: พินไปยังศูนย์
+  pin_to_left: พินไปทางซ้าย
+  pin_to_right: พินไปทางขวา
+  run_as: เรียกใช้เป็นผู้ดูแลระบบ
+  unpin: คลาย
+context_menu:
+  edit_icon: แก้ไขไอคอน
+  remove_module: ถอดโมดูลออก
+  reorder_disable: ล็อคแถบงาน
+  reorder_enable: ปลดล็อกแถบงาน
+media:
+  label: เครื่องเล่นมีเดีย
+  not_playing: ไม่มีอะไรเล่น
+show_desktop:
+  label: แสดงเดสก์ท็อป
+start:
+  label: เมนูเริ่ม
+taskbar_menu:
+  add_file: ไฟล์ที่กำหนดเองพิน
+  desktop: เพิ่มโมดูลเดสก์ท็อป
+  media: เพิ่มโมดูลสื่อ
+  settings: การตั้งค่า
+  start: เพิ่มโมดูลเริ่มต้น
+  task_manager: ตัวจัดการงาน
+  trash_bin: เพิ่มโมดูลถังรีไซเคิล
+trash_bin:
+  edit_icon_empty: แก้ไขไอคอน (ว่าง)
+  edit_icon_full: แก้ไขไอคอน (เต็ม)
+  empty_bin: ถังรีไซเคิลว่างเปล่า
+  label: ถังขยะรีไซเคิล
+weg:
+  empty: ไม่มีรายการที่จะแสดง

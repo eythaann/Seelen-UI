@@ -1,0 +1,59 @@
+battery:
+  remaining: Залишилося {{0}}%.
+  smart_charge: Smart Charge
+bluetooth:
+  available: Доступні пристрої (не в парі)
+  cancel: Скасувати
+  connected: Підключені пристрої
+  forget: Забудь.
+  lowenergy: Низька енергія
+  more: Більше налаштувань Bluetooth
+  not_found: Пристроїв Bluetooth не знайдено
+  pair: Пара
+  paired: Збережені пристрої
+  placeholder:
+    passphrase: Пароль, код або PIN-код
+  scanning: Сканування на наявність пристроїв
+context_menu:
+  add_custom_text: Додати власний текстовий елемент
+  modules: Модулі
+  remove: Видалити модуль
+  reorder_disable: Заблокувати панель інструментів
+  reorder_enable: Розблокувати панель інструментів
+  restore: Відновити за замовчуванням
+  settings: Налаштування
+  task_manager: Диспетчер задач
+media:
+  default_multimedia_volume: Мультимедійна гучність
+  device:
+    channel:
+      system: Звуки системи
+    comunications: Комунікація
+    missing: Відсутній пристрій
+    mixer: Змішувач гучності
+    multimedia: Мультимедіа
+    settings: Більше налаштувань пристрою
+    volume: Гучність пристрою
+  input_devices: Пристрої введення
+  output_devices: Пристрої виводу
+  players: Медіаплеєри
+notifications:
+  clear: Зачистити все.
+  empty: Немає сповіщень
+  settings: Більше налаштувань сповіщень
+  title: Сповіщення
+placeholder:
+  bluetooth_devices: Bluetooth та пристрої
+  ethernet_connected: Доступ в інтернет
+  ethernet_disconnected: Немає доступу до Інтернету
+  notifications: Сповіщення
+  settings: Швидкі налаштування
+  volume: Гучність
+plugged: Підключено
+settings:
+  app_settings: Налаштування додатку
+  brightness: Яскравість
+  power: Живлення
+  restart: Перезапустити
+  title: Налаштування
+show_desktop: Показати робочий стіл

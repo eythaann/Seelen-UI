@@ -1,0 +1,41 @@
+app_menu:
+  close: Chaewch
+  close_multiple: Cau popeth
+  copy_handles: Dolenni copi
+  edit_app_icon: Golygu Eicon App
+  kill: Proses Lladd
+  kill_multiple: Lladd Pob Proses
+  open_file_location: Lleoliad Ffeil Agored
+  pin: Piniff
+  pin_to_center: Pin i'r canol
+  pin_to_left: Pin i'r chwith
+  pin_to_right: Pin i'r dde
+  run_as: Rhedeg fel Gweinyddwr
+  unpin: Dadleuon
+context_menu:
+  edit_icon: Eicon Golygu
+  remove_module: Dileu Modiwl
+  reorder_disable: Bar tasgau clo
+  reorder_enable: Datgloi Bar Tasg
+media:
+  label: Chwaraewr Cyfryngau
+  not_playing: Nid oes dim yn chwarae
+show_desktop:
+  label: Dangos Penbwrdd
+start:
+  label: Dewislen Cychwyn
+taskbar_menu:
+  add_file: Pin ffeil arfer
+  desktop: Ychwanegu Modiwl Penbwrdd
+  media: Ychwanegu Modiwl Cyfryngau
+  settings: Gosodiadau
+  start: Ychwanegu Modiwl Start
+  task_manager: Rheolwr Tasg
+  trash_bin: Ychwanegu Modiwl Bin Ailgylchu
+trash_bin:
+  edit_icon_empty: Eicon Golygu (Gwag)
+  edit_icon_full: Eicon Golygu (Llawn)
+  empty_bin: Bin Ailgylchu Gwag
+  label: Bin Ailgylchu
+weg:
+  empty: Dim eitemau i'w dangos

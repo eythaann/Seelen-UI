@@ -1,0 +1,59 @@
+battery:
+  remaining: '{{0}}% to ku'
+  smart_charge: Smart idiyele
+bluetooth:
+  available: Awọn ẹrọ ti o wa (ko so pọ)
+  cancel: Fagilee
+  connected: Awọn ẹrọ ti o sopọ mọ
+  forget: Gbagbe
+  lowenergy: Agbara kekere
+  more: Awọn eto Bluetooth diẹ sii
+  not_found: Ko si awọn ẹrọ Bluetooth naa
+  pair: Meji
+  paired: Awọn ẹrọ ti o fipamọ
+  placeholder:
+    passphrase: Ọrọ kukuru, koodu tabi PIN
+  scanning: Sisọnu fun awọn ẹrọ
+context_menu:
+  add_custom_text: Ṣafikun Nkan Nkan Nkan
+  modules: Awọn modulu
+  remove: Yọ module
+  reorder_disable: Ọpa irinṣẹ Titiipa
+  reorder_enable: Ṣii bọtini irinṣẹ
+  restore: Mu pada si aiyipada
+  settings: Eto
+  task_manager: Oluṣakoso iṣẹ-ṣiṣe
+media:
+  default_multimedia_volume: Iwọn didun Multimedia
+  device:
+    channel:
+      system: Awọn ohun eto
+    comunications: Awọn ibaraẹnisọrọ
+    missing: Ẹrọ sonu
+    mixer: Ipọpọ iwọn didun
+    multimedia: Multimedia
+    settings: Eto ẹrọ diẹ sii
+    volume: Iwọn didun ẹrọ
+  input_devices: Ẹrọ titẹ sii
+  output_devices: Awọn ẹrọ iṣelọpọ
+  players: Awọn oṣere Media
+notifications:
+  clear: Pa gbogbo run
+  empty: Ko si awọn iwifunni
+  settings: Awọn ifiranṣẹ iwifunni diẹ sii
+  title: Awọn iwifunni
+placeholder:
+  bluetooth_devices: Bluetooth & awọn ẹrọ
+  ethernet_connected: Wiwọle Intanẹẹti
+  ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
+  notifications: Awọn iwifunni
+  settings: Eto Awọn ọna
+  volume: Iwọn didun
+plugged: Ti so pọ
+settings:
+  app_settings: Eto App
+  brightness: Didan
+  power: Agbara
+  restart: Tun bẹrẹ
+  title: Ètò
+show_desktop: Ṣe afihan Ojú-iṣẹ

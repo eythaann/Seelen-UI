@@ -1,0 +1,41 @@
+app_menu:
+  close: بندول
+  close_multiple: ټول وتړئ
+  copy_handles: لاسوندونه کاپي کوي
+  edit_app_icon: د اپلیکیشن آیکون ایډیټ کړئ
+  kill: د وژلو پروسه
+  kill_multiple: ټولې پروسې وژني
+  open_file_location: د فایل ځای خلاص کړئ
+  pin: پن
+  pin_to_center: مرکز ته پن
+  pin_to_left: د کی to اړخ ته پن
+  pin_to_right: ښیې خوا ته
+  run_as: د مدیر په توګه چلول
+  unpin: غیر رنګ
+context_menu:
+  edit_icon: اډیټ آیکون
+  remove_module: موډل لرې کړئ
+  reorder_disable: ټاسک بار
+  reorder_enable: د ټاسلف بار
+media:
+  label: د رسنیو پلیر
+  not_playing: هیڅ شی نه لوبیږی
+show_desktop:
+  label: ډیسټاپ وښایاست
+start:
+  label: د پیل مینو
+taskbar_menu:
+  add_file: دود دودیز فایل
+  desktop: د ډیسټاپ ماډل اضافه کړئ
+  media: د میډیا موډول اضافه کړئ
+  settings: ترتیبات
+  start: د پیل ماډل اضافه کړئ
+  task_manager: د دندې مدیر
+  trash_bin: د ریسایکل بن ماډل اضافه کړئ
+trash_bin:
+  edit_icon_empty: د سمون نښه (خالي)
+  edit_icon_full: اډیټ آیکون (بشپړ)
+  empty_bin: د ریسایکل بن خالي کړئ
+  label: د ریسایکل بن
+weg:
+  empty: د ښودلو لپاره هیڅ توکي نشته
