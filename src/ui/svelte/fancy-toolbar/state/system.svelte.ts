@@ -13,38 +13,44 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
 });
 await virtualDesktop.init();
 
-export const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
+const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 await monitors.init();
 
-export const currentMonitor = {
-  get value() {
-    return monitors.value.find((m) => m.id === currentMonitorId)!;
-  },
-};
+const _currentMonitor = $derived(monitors.value.find((m) => m.id === currentMonitorId)!);
 
 const mousePos = lazyRune(() => invoke(SeelenCommand.GetMousePosition));
 subscribe(SeelenEvent.GlobalMouseMove, mousePos.setByPayload);
 await mousePos.init();
 
-export const mouseAtEdge = {
-  get value(): FancyToolbarSide | null {
-    const box = currentMonitor.value.rect;
-    const x = mousePos.value[0];
-    const y = mousePos.value[1];
+const _mouseAtEdge = $derived.by((): FancyToolbarSide | null => {
+  const box = _currentMonitor.rect;
+  const x = mousePos.value[0];
+  const y = mousePos.value[1];
 
-    if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
-      return null;
-    }
-
-    if (y === box.top) {
-      return FancyToolbarSide.Top;
-    }
-
-    if (y === box.bottom - 1) {
-      return FancyToolbarSide.Bottom;
-    }
-
+  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
     return null;
-  },
-};
+  }
+
+  if (y === box.top) {
+    return FancyToolbarSide.Top;
+  }
+
+  if (y === box.bottom - 1) {
+    return FancyToolbarSide.Bottom;
+  }
+
+  return null;
+});
+
+class SystemState {
+  get currentMonitor() {
+    return _currentMonitor;
+  }
+
+  get mouseAtEdge(): FancyToolbarSide | null {
+    return _mouseAtEdge;
+  }
+}
+
+export const systemState = new SystemState();

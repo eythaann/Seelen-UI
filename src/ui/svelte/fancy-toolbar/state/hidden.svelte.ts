@@ -1,8 +1,8 @@
 import { HideMode } from "@seelen-ui/lib/types";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { settingsState } from "./settings.svelte.ts";
-import { mouseAtEdge } from "./system.svelte.ts";
-import { isTbOverlapped } from "./windows.svelte.ts";
+import { systemState } from "./system.svelte.ts";
+import { windowsState } from "./windows.svelte.ts";
 
 let _hiddenByAutohide = $state(false);
 
@@ -15,7 +15,7 @@ export const hiddenByAutohide = {
 $effect.root(() => {
   $effect(() => {
     const { delayToHide, delayToShow, hideMode, position } = settingsState;
-    const isMouseOverEdge = mouseAtEdge.value === position;
+    const isMouseOverEdge = systemState.mouseAtEdge === position;
 
     let hidden = false;
     let flush = false;
@@ -30,7 +30,8 @@ $effect.root(() => {
         flush = isTouchPrimary.value;
         break;
       case HideMode.OnOverlap:
-        hidden = !isTouchPrimary.value && isTbOverlapped.value && !isThisWebviewFocused.value && !isMouseOverEdge;
+        hidden = !isTouchPrimary.value && windowsState.isTbOverlapped && !isThisWebviewFocused.value &&
+          !isMouseOverEdge;
         flush = isTouchPrimary.value;
         break;
     }

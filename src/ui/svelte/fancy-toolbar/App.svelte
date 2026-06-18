@@ -5,14 +5,14 @@
   import { debounce } from "lodash";
   import Toolbar from "./components/Toolbar.svelte";
   import {
-    topInteractableWindow,
+    windowsState,
     focused,
     widgetStatuses,
   } from "./state/windows.svelte.ts";
 
   const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
 
-  const topWindowIsFullscreen = $derived(topInteractableWindow.value?.isFullscreen);
+  const topWindowIsFullscreen = $derived(windowsState.topInteractableWindow?.isFullscreen);
 
   const focusedIsAppsMenu = $derived(
     startMenuExes.some((program) => (focused.value?.exe || "").endsWith(program)) ||

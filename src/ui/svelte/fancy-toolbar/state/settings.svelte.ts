@@ -4,7 +4,7 @@ import { lazyRune } from "libs/ui/svelte/utils";
 import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
-import { currentMonitor } from "./system.svelte.ts";
+import { systemState } from "./system.svelte.ts";
 
 const _settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (_settings.value = s));
@@ -59,14 +59,14 @@ export const widgetRect = {
   get value() {
     const { itemSize, margin, padding } = settingsState;
     const height = Math.round(
-      (itemSize + padding * 2 + margin * 2) * currentMonitor.value.scaleFactor,
+      (itemSize + padding * 2 + margin * 2) * systemState.currentMonitor.scaleFactor,
     );
-    const rect = { ...currentMonitor.value.rect };
+    const rect = { ...systemState.currentMonitor.rect };
 
     if (settingsState.position === FancyToolbarSide.Top) {
-      rect.bottom = currentMonitor.value.rect.top + height;
+      rect.bottom = systemState.currentMonitor.rect.top + height;
     } else if (settingsState.position === FancyToolbarSide.Bottom) {
-      rect.top = currentMonitor.value.rect.bottom - height;
+      rect.top = systemState.currentMonitor.rect.bottom - height;
     }
 
     return rect;

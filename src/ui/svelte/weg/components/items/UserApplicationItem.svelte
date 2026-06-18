@@ -5,7 +5,7 @@
   import { t } from "../../i18n/index.ts";
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState, getDockContextMenuAlignment } from "../../state/settings.svelte.ts";
-  import { delayedFocused, focused } from "../../state/windows.svelte.ts";
+  import { windowsState, focused } from "../../state/windows.svelte.ts";
   import { notifications } from "../../state/system.svelte.ts";
   import { isTouchPrimary } from "libs/ui/svelte/utils";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
@@ -83,7 +83,7 @@
     } else {
       invoke(SeelenCommand.WegToggleWindowState, {
         hwnd: win.hwnd,
-        wasFocused: delayedFocused.value?.hwnd === win.hwnd,
+        wasFocused: windowsState.delayedFocused?.hwnd === win.hwnd,
       });
     }
   }

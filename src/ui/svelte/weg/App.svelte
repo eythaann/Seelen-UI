@@ -4,11 +4,11 @@
   import { onMount } from "svelte";
   import { debounce } from "lodash";
   import Dock from "./components/Dock.svelte";
-  import { topInteractableWindow, focused, widgetStatuses } from "./state/windows.svelte.ts";
+  import { windowsState, focused, widgetStatuses } from "./state/windows.svelte.ts";
 
   const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
 
-  const topWindowIsFullscreen = $derived(topInteractableWindow.value?.isFullscreen);
+  const topWindowIsFullscreen = $derived(windowsState.topInteractableWindow?.isFullscreen);
 
   const focusedIsAppsMenu = $derived(
     startMenuExes.some((program) => (focused.value?.exe || "").endsWith(program)) ||

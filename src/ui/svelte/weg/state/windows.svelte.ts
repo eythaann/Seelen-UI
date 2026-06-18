@@ -19,15 +19,9 @@ export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
 );
 subscribe(SeelenEvent.UserAppWindowsColorsChanged, windowsColors.setByPayload);
 
-let _delayedFocused = $state<FocusedApp | null>(null);
-export const delayedFocused = {
-  get value() {
-    return _delayedFocused;
-  },
-};
-
 export const focused = lazyRune(() => invoke(SeelenCommand.GetFocusedApp));
 
+let _delayedFocused = $state<FocusedApp | null>(null);
 const setDelayedFocused = debounce((v: FocusedApp) => {
   _delayedFocused = v;
 }, 200);
@@ -51,44 +45,53 @@ await Promise.all([
   windowsColors.init(),
 ]);
 
-export const topInteractableWindow = {
-  get value() {
-    return interactables.value
-      .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
-      .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic);
-  },
-};
+const _topInteractableWindow = $derived(
+  interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic),
+);
 
-export const currentMonitorMaximizedColors = {
-  get value(): UserAppWindowColors | null {
-    const monitorId = widget.decoded.monitorId;
-    const maximized = interactables.value.find(
-      (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
-    );
-    document.documentElement.dataset.thereIsMaximizedOnBg = `${!!maximized}`;
-    if (!maximized) return null;
-    return windowsColors.value[maximized.hwnd] ?? null;
-  },
-};
+const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
+  const monitorId = widget.decoded.monitorId;
+  const maximized = interactables.value.find(
+    (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
+  );
+  if (!maximized) return null;
+  return windowsColors.value[maximized.hwnd] ?? null;
+});
 
-export const isDockOverlapped = {
-  get value() {
-    const f = focused.value;
-    const by = f?.monitor === widget.decoded.monitorId ? f : null;
+const _isDockOverlapped = $derived.by(() => {
+  const f = focused.value;
+  const by = f?.monitor === widget.decoded.monitorId ? f : null;
 
-    if (!by || !by.rect) return false;
-    if (!interactables.value.some((w) => w.hwnd === by.hwnd)) return false;
+  if (!by || !by.rect) return false;
+  if (!interactables.value.some((w) => w.hwnd === by.hwnd)) return false;
 
-    const a = widgetRect.value.hitboxRect;
-    const b = by.rect;
+  const a = widgetRect.value.hitboxRect;
+  const b = by.rect;
 
-    if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
-      return false;
-    }
+  if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
+    return false;
+  }
 
-    return true;
-  },
-};
+  return true;
+});
+
+class WindowsState {
+  get topInteractableWindow() {
+    return _topInteractableWindow;
+  }
+
+  get delayedFocused(): FocusedApp | null {
+    return _delayedFocused;
+  }
+
+  get isDockOverlapped() {
+    return _isDockOverlapped;
+  }
+}
+
+export const windowsState = new WindowsState();
 
 // on change of this function update src\background\widgets\weg\cli.rs too.
 export function getWindowsForItem(
@@ -109,8 +112,10 @@ export function getWindowsForItem(
 
 $effect.root(() => {
   $effect(() => {
-    const colors = currentMonitorMaximizedColors.value;
+    const colors = _currentMonitorMaximizedColors;
     const root = document.documentElement;
+
+    root.dataset.thereIsMaximizedOnBg = `${!!colors}`;
 
     if (!colors) {
       root.style.removeProperty("--window-gradient");

@@ -1,7 +1,7 @@
 import { HideMode } from "@seelen-ui/lib/types";
 import { settingsState } from "./settings.svelte.ts";
-import { mouseAtEdge } from "./system.svelte.ts";
-import { isDockOverlapped } from "./windows.svelte.ts";
+import { systemState } from "./system.svelte.ts";
+import { windowsState } from "./windows.svelte.ts";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils";
 
 let _hiddenByAutohide = $state(false);
@@ -15,7 +15,7 @@ export const dockShouldBeHidden = {
 $effect.root(() => {
   $effect(() => {
     const { delayToHide, delayToShow, hideMode, position } = settingsState;
-    const isMouseOverEdge = mouseAtEdge.value === position;
+    const isMouseOverEdge = systemState.mouseAtEdge === position;
 
     let hidden = false;
     let flush = false;
@@ -31,7 +31,7 @@ $effect.root(() => {
         break;
       case HideMode.OnOverlap:
         hidden = !isTouchPrimary.value &&
-          isDockOverlapped.value &&
+          windowsState.isDockOverlapped &&
           !isThisWebviewFocused.value &&
           !isMouseOverEdge;
         flush = isTouchPrimary.value;

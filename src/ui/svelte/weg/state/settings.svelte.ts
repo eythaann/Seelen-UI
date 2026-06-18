@@ -3,7 +3,7 @@ import { Alignment, FancyToolbarSide, HideMode, SeelenWegSide } from "@seelen-ui
 import { isTouchPrimary, lazyRune } from "libs/ui/svelte/utils";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
-import { currentMonitor } from "./system.svelte.ts";
+import { systemState } from "./system.svelte.ts";
 
 const _settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (_settings.value = s));
@@ -71,9 +71,9 @@ export function getDockContextMenuAlignment(position: SeelenWegSide): {
 
 const workArea = {
   get value() {
-    const workArea = currentMonitor.value.rect;
+    const workArea = systemState.currentMonitor.rect;
     const tbConfig = _settings.value.byWidget["@seelen/fancy-toolbar"] as any;
-    const tbMonitorConfig = (_settings.value.monitorsV3[currentMonitor.value.id] as any)
+    const tbMonitorConfig = (_settings.value.monitorsV3[systemState.currentMonitor.id] as any)
       ?.byWidget?.["@seelen/fancy-toolbar"] || { enabled: true };
 
     if (!tbConfig?.enabled || !tbMonitorConfig?.enabled) {
@@ -82,7 +82,7 @@ const workArea = {
 
     const tbSize = Math.round(
       (tbConfig.itemSize + tbConfig.padding * 2 + tbConfig.margin * 2) *
-        currentMonitor.value.scaleFactor,
+        systemState.currentMonitor.scaleFactor,
     );
 
     switch (tbConfig.position) {
@@ -104,7 +104,7 @@ export const widgetRect = {
 
     const size = Math.round(
       (settingsState.size + settingsState.padding * 2 + settingsState.margin * 2) *
-        currentMonitor.value.scaleFactor,
+        systemState.currentMonitor.scaleFactor,
     );
 
     switch (settingsState.position) {
@@ -165,13 +165,7 @@ $effect.root(() => {
   });
 
   $effect(() => {
-    // track reactive deps
-    settingsState.position;
-    settingsState.hideMode;
-    settingsState.size;
-    settingsState.margin;
-    settingsState.padding;
-    isTouchPrimary.value;
+    let _tracked = settingsState;
     updateWidgetPosition();
   });
 

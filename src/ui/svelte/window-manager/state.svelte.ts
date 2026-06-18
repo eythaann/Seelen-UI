@@ -121,7 +121,7 @@ const widgetRect = $derived.by(() => {
   if (
     wegConfig.enabled &&
     wegMonitorConfig.enabled &&
-    (wegConfig.hideMode === HideMode.Never || isTouchPrimary)
+    (wegConfig.hideMode === HideMode.Never || isTouchPrimary.value)
   ) {
     const wegSize = Math.round(
       (wegConfig.size + wegConfig.padding * 2 + wegConfig.margin * 2) * monitor.scaleFactor,

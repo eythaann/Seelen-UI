@@ -9,22 +9,6 @@ export const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindo
 subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 await interactables.init();
 
-export const topInteractableWindow = {
-  get value() {
-    return interactables.value
-      .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
-      .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic);
-  },
-};
-
-export const thereIsMaximizedOnBg = {
-  get value() {
-    return interactables.value.some(
-      (w) => !w.isIconic && w.isZoomed && w.monitor === widget.decoded.monitorId,
-    );
-  },
-};
-
 export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
   () => invoke(SeelenCommand.GetUserAppWindowsColors),
 );
@@ -39,42 +23,67 @@ export const widgetStatuses = lazyRune(() => invoke(SeelenCommand.DebugGetWidget
 subscribe(SeelenEvent.WidgetDebugInfoChanged, widgetStatuses.setByPayload);
 await widgetStatuses.init();
 
-export const isTbOverlapped = {
-  get value() {
-    const f = focused.value;
-    const by = f?.monitor === widget.decoded.monitorId ? f : null;
-    const ints = interactables.value;
+const _topInteractableWindow = $derived(
+  interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic),
+);
 
-    if (!by || !by.rect) return false;
-    if (!ints.some((w) => w.hwnd === by.hwnd)) return false;
+const _thereIsMaximizedOnBg = $derived(
+  interactables.value.some(
+    (w) => !w.isIconic && w.isZoomed && w.monitor === widget.decoded.monitorId,
+  ),
+);
 
-    const a = widgetRect.value;
-    const b = by.rect;
+const _isTbOverlapped = $derived.by(() => {
+  const f = focused.value;
+  const by = f?.monitor === widget.decoded.monitorId ? f : null;
+  const ints = interactables.value;
 
-    if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
-      return false;
-    }
+  if (!by || !by.rect) return false;
+  if (!ints.some((w) => w.hwnd === by.hwnd)) return false;
 
-    return true;
-  },
-};
+  const a = widgetRect.value;
+  const b = by.rect;
 
-export const currentMonitorMaximizedColors = {
-  get value(): UserAppWindowColors | null {
-    const monitorId = widget.decoded.monitorId;
-    const maximized = interactables.value.find(
-      (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
-    );
-    document.documentElement.dataset.thereIsMaximizedOnBg = `${!!maximized}`;
-    if (!maximized) return null;
-    return windowsColors.value[maximized.hwnd] ?? null;
-  },
-};
+  if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
+    return false;
+  }
+
+  return true;
+});
+
+const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
+  const monitorId = widget.decoded.monitorId;
+  const maximized = interactables.value.find(
+    (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
+  );
+  if (!maximized) return null;
+  return windowsColors.value[maximized.hwnd] ?? null;
+});
+
+class WindowsState {
+  get topInteractableWindow() {
+    return _topInteractableWindow;
+  }
+
+  get thereIsMaximizedOnBg() {
+    return _thereIsMaximizedOnBg;
+  }
+
+  get isTbOverlapped() {
+    return _isTbOverlapped;
+  }
+}
+
+export const windowsState = new WindowsState();
 
 $effect.root(() => {
   $effect(() => {
-    const colors = currentMonitorMaximizedColors.value;
+    const colors = _currentMonitorMaximizedColors;
     const root = document.documentElement;
+
+    root.dataset.thereIsMaximizedOnBg = `${!!colors}`;
 
     if (!colors) {
       root.style.removeProperty("--window-gradient");

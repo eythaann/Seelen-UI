@@ -7,7 +7,7 @@
   import { t } from "../i18n/index.ts";
   import { dockState } from "../state/items.svelte.ts";
   import { settingsState, getDockContextMenuAlignment } from "../state/settings.svelte.ts";
-  import { currentMonitor } from "../state/system.svelte.ts";
+  import { systemState } from "../state/system.svelte.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
   import { dockShouldBeHidden } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
@@ -29,7 +29,7 @@
   const visibleItems = $derived.by(() => {
     const pinnedVisibility = settings?.pinnedItemsVisibility as WegPinnedItemsVisibility;
     const temporalVisibility = settings?.temporalItemsVisibility as WegTemporalItemsVisibility;
-    const monitor = currentMonitor.value;
+    const monitor = systemState.currentMonitor;
 
     const showPinned =
       pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, MissingIcon } from "libs/ui/svelte/components/Icon/index.ts";
-  import { delayedFocused, previews } from "../../state/windows.svelte.ts";
+  import { windowsState, previews } from "../../state/windows.svelte.ts";
 
   interface Props {
     title: string;
@@ -15,7 +15,7 @@
   function onClick() {
     invoke(SeelenCommand.WegToggleWindowState, {
       hwnd,
-      wasFocused: delayedFocused.value?.hwnd === hwnd,
+      wasFocused: windowsState.delayedFocused?.hwnd === hwnd,
     });
   }
 

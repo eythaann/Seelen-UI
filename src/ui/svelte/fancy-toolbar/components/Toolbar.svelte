@@ -20,7 +20,7 @@
   } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { hiddenByAutohide } from "../state/hidden.svelte.ts";
-  import { thereIsMaximizedOnBg } from "../state/windows.svelte.ts";
+  import { windowsState } from "../state/windows.svelte.ts";
   import { matchIds } from "../utils.ts";
   import ItemsGroup from "./ItemsGroup.svelte";
   import CornerAction from "./CornerAction.svelte";
@@ -203,7 +203,7 @@
   class="ft-bar {settingsState.position.toLowerCase()}"
   class:ft-bar-hidden={hiddenByAutohide.value}
   data-has-margin={!!settingsState.margin}
-  data-there-is-maximized-on-background={thereIsMaximizedOnBg.value}
+  data-there-is-maximized-on-background={windowsState.thereIsMaximizedOnBg}
   oncontextmenu={handleContextMenu}
 >
   <CornerAction />

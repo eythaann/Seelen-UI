@@ -5,7 +5,7 @@
   import type { StartMenuWegItem } from "../../types.ts";
   import { settingsState, getDockContextMenuAlignment } from "../../state/settings.svelte.ts";
   import { getMenuForItem } from "../../generalMenu.ts";
-  import { delayedFocused } from "../../state/windows.svelte.ts";
+  import { windowsState } from "../../state/windows.svelte.ts";
 
   interface Props {
     item: StartMenuWegItem;
@@ -15,7 +15,7 @@
 
   const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
   const isStartMenuOpen = $derived(
-    startMenuExes.some((program) => (delayedFocused.value?.exe || "").endsWith(program)),
+    startMenuExes.some((program) => (windowsState.delayedFocused?.exe || "").endsWith(program)),
   );
 
   function onClick() {
