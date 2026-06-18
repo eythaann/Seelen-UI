@@ -10,4 +10,10 @@ thiserror = { workspace = true }
 log = { workspace = true }
 keyframe = "1.1.1"
 scc = { workspace = true }
-windows = { workspace = true, features = ["Win32_Foundation", "Win32_Graphics_Gdi", "Win32_UI_WindowsAndMessaging"] }
+windows = { workspace = true, features = [
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_UI_WindowsAndMessaging",
+  "Win32_System_Threading",
+  "Win32_Security",
+] }

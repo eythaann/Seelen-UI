@@ -49,6 +49,7 @@ impl PositionerBuilder {
     pub fn place(&self) -> Result<()> {
         for (window_id, rect) in self.to_positioning.iter() {
             position_window(*window_id, rect, true, false)?;
+            let _ = force_redraw_window(*window_id);
         }
         Ok(())
     }
@@ -134,37 +135,88 @@ impl WindowAnimation {
         animation_duration: std::time::Duration,
         interrupt_rx: std::sync::mpsc::Receiver<()>,
     ) -> Result<bool> {
+        use windows::Win32::Foundation::CloseHandle;
+        use windows::Win32::System::Threading::{
+            CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, CreateWaitableTimerExW, GetCurrentThread,
+            INFINITE, SetThreadPriority, SetWaitableTimer, THREAD_PRIORITY_HIGHEST,
+            WaitForSingleObject,
+        };
+
+        unsafe {
+            let _ = SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
+        }
+
+        // High-resolution waitable timer (~100ns precision vs ~15.6ms for thread::sleep).
+        let timer = unsafe {
+            CreateWaitableTimerExW(
+                None,
+                None,
+                CREATE_WAITABLE_TIMER_HIGH_RESOLUTION,
+                0x001F0003,
+            )?
+        };
+
+        let animation_secs = animation_duration.as_secs_f64();
+        let frame_duration = std::time::Duration::from_millis(7); // ~144 fps cap
         let start_time = std::time::Instant::now();
-        let mut progress = 0.0;
         let mut interrupted = false;
+        let mut last_rect = data.from;
+        let mut frame_i = 0u32;
+        let mut frames = 0u32;
 
-        let mut frames = 0;
-        let mut last_frame_time = start_time;
-        let min_frame_duration = std::time::Duration::from_millis(7); // ~ 144 fps as limit
-
-        while progress < 1.0 {
+        loop {
             if interrupt_rx.try_recv().is_ok() {
                 interrupted = true;
                 break;
             }
 
             let elapsed = start_time.elapsed();
-            progress =
-                (elapsed.as_millis() as f64 / animation_duration.as_millis() as f64).min(1.0);
+            let progress = (elapsed.as_secs_f64() / animation_secs).min(1.0);
 
+            // Skip SetWindowPos when the interpolated pixel position didn't change —
+            // common at easing tails where speed < 1px per frame.
             let rect = keyframe::ease(easing, data.from, data.to, progress);
-            position_window(data.hwnd, &rect, data.is_explorer, !data.is_size_changing)?;
-
-            frames += 1;
-            let elapsed = last_frame_time.elapsed();
-            if elapsed < min_frame_duration {
-                std::thread::sleep(min_frame_duration - elapsed);
+            if rect != last_rect {
+                position_window(data.hwnd, &rect, data.is_explorer, !data.is_size_changing)?;
+                last_rect = rect;
+                frames += 1;
             }
-            last_frame_time = std::time::Instant::now();
+
+            if progress >= 1.0 {
+                break;
+            }
+
+            // Check interrupt before sleeping to keep abort latency < 1 SetWindowPos call.
+            if interrupt_rx.try_recv().is_ok() {
+                interrupted = true;
+                break;
+            }
+
+            // Absolute target prevents per-frame jitter from accumulating across the animation.
+            frame_i += 1;
+            let next_target = start_time + frame_duration * frame_i;
+            let now = std::time::Instant::now();
+            if let Some(remaining) = next_target.checked_duration_since(now) {
+                // Negative due time = relative, in 100ns units.
+                let due_100ns = -(remaining.as_nanos() as i64 / 100).max(1);
+                unsafe {
+                    let _ = SetWaitableTimer(timer, &due_100ns, 0, None, None, false);
+                    WaitForSingleObject(timer, INFINITE);
+                }
+            }
+        }
+
+        unsafe {
+            let _ = CloseHandle(timer);
         }
 
         if !interrupted {
-            log::trace!("Animation({:?}) completed in {frames} frames", data.hwnd);
+            log::trace!(
+                "Animation({:?}) completed: {} ticks, {} unique pixel frames",
+                data.hwnd,
+                frame_i,
+                frames
+            );
             let _ = force_redraw_window(data.hwnd);
         }
 

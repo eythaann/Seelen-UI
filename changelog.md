@@ -2,6 +2,10 @@
 
 ## [2.7.2-dev]
 
+### enhancements
+
+- twm animations.
+
 ## [2.7.1]
 
 ### enhancements

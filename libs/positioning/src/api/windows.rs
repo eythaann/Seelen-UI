@@ -40,6 +40,9 @@ pub fn move_window(hwnd: isize, rect: &Rect, redraw: bool) -> Result<()> {
     Ok(())
 }
 
+// SWP_NOSENDCHANGING is required: without it, Explorer.exe reacts to every animation frame via
+// WM_WINDOWPOSCHANGING and causes severe visual artifacts. DeferWindowPos does not support this
+// flag (crashes), which is why the defer API below is unused.
 pub fn position_window(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) -> Result<()> {
     let mut flags = SWP_NOACTIVATE | SWP_NOSENDCHANGING | SWP_NOZORDER | SWP_NOOWNERZORDER;
 
