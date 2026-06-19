@@ -1,14 +1,11 @@
 import { getRootContainer } from "libs/ui/react/utils/index.ts";
 import { mount } from "svelte";
 import App from "./App.svelte";
-import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
 
 import "./styles/variables.css";
 import "@seelen-ui/lib/styles/reset.css";
 import "./styles/global.css";
-
-await loadTranslations();
 
 await Widget.getCurrent().init();
 

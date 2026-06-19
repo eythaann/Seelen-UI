@@ -23,6 +23,13 @@ export function createCopyPublicPlugin(appFolders: string[]): esbuild.Plugin {
             if (fs.existsSync(source)) {
               fs.cpSync(source, target, { recursive: true, force: true });
             }
+
+            // Eythan: I did this to avoid doing a pr moving all the translations files to public folders.
+            const translationsSource = `src/ui/${folder}/i18n/translations`;
+            const translationsTarget = `dist/${folder}/translations`;
+            if (fs.existsSync(translationsSource)) {
+              fs.cpSync(translationsSource, translationsTarget, { recursive: true, force: true });
+            }
           }
 
           // Move nested folders to root

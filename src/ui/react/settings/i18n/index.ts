@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init(
   undefined,
 );
 
-export async function loadTranslations() {
+async function loadTranslations() {
   const translations: Record<SupportedLanguagesCode, { default: string }> = {
     en: await import("./translations/en.yml"),
     es: await import("./translations/es.yml"),
@@ -96,4 +96,5 @@ export async function loadTranslations() {
   }
 }
 
+await loadTranslations();
 export default i18n;

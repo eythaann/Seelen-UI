@@ -1,6 +1,5 @@
 import { mount } from "svelte";
 import App from "./app.svelte";
-import { loadTranslations } from "./i18n/index.ts";
 import { Widget } from "@seelen-ui/lib";
 import "moment/min/locales";
 
@@ -12,8 +11,6 @@ const widget = Widget.getCurrent();
 await widget.init({
   autoSizeByContent: root,
 });
-
-await loadTranslations();
 
 mount(App, {
   target: root,

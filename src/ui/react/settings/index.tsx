@@ -7,7 +7,7 @@ import { LogicalSize } from "@seelen-ui/lib/tauri";
 
 import { App } from "./app.tsx";
 
-import i18n, { loadTranslations } from "./i18n/index.ts";
+import i18n from "./i18n/index.ts";
 
 import "./styles/variables.css";
 import "@seelen-ui/lib/styles/reset.css";
@@ -34,8 +34,6 @@ Widget.self.onTrigger((payload) => {
     globalThis.location.hash = route;
   }
 });
-
-await loadTranslations();
 
 const container = getRootContainer();
 createRoot(container).render(

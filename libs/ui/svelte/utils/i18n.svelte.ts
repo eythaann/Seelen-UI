@@ -1,8 +1,7 @@
-import { derived, get, writable } from "svelte/store";
 import yaml from "js-yaml";
 
-const _locale = writable("en");
-const _messages = writable<Record<string, any>>({});
+let _locale = $state("en");
+let _messages = $state.raw<Record<string, any>>({});
 
 function translate(locale: string, key: string, vars: Record<string, string> = {}) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
@@ -13,7 +12,8 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   // Grab the translation from the translations object.
   // Support nested keys like "profile.log_out"
   const keys = key.split(".");
-  let text = get(_messages)[locale];
+  let text = _messages[locale];
+
   for (const k of keys) {
     text = text?.[k];
   }
@@ -21,7 +21,7 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   if (!text) {
     console.error(`no translation found for ${locale}.${key}`);
     // Try fallback to English
-    let fallback = get(_messages)["en"];
+    let fallback = _messages["en"];
     for (const k of keys) {
       fallback = fallback?.[k];
     }
@@ -41,33 +41,30 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   return text;
 }
 
-export const t = derived(
-  _locale,
-  (locale) => (key: string, vars?: Record<string, string>) => translate(locale, key, vars),
-);
+export function t(key: string, vars?: Record<string, string>) {
+  return translate(_locale, key, vars);
+}
 
-export const locale = {
-  get value() {
-    return get(_locale);
-  },
+class i18n {
+  get locale() {
+    return _locale;
+  }
 
-  async set(newLocale: string) {
-    if (get(_messages)[newLocale]) {
-      _locale.set(newLocale);
+  async loadLocale(newLocale: string) {
+    if (_messages[newLocale]) {
+      _locale = newLocale;
       return;
     }
 
     const res = await fetch(`./translations/${newLocale}.yml`);
     const text = await res.text();
-    const messages = yaml.load(text) as Record<string, any>;
-    _messages.update((m) => ({
-      ...m,
-      [newLocale]: messages,
-    }));
-    _locale.set(newLocale);
-  },
-};
-
-export function setMessages(newMessages: Record<string, any>) {
-  _messages.set(newMessages);
+    const obj = yaml.load(text) as Record<string, any>;
+    _messages = {
+      ..._messages,
+      [newLocale]: obj,
+    };
+    _locale = newLocale;
+  }
 }
+
+export default i18n;

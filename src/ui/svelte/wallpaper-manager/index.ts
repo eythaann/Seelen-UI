@@ -1,11 +1,8 @@
 import { mount } from "svelte";
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import App from "./app.svelte";
-import { loadTranslations } from "./i18n/index.ts";
-
 import "@seelen-ui/lib/styles/reset.css";
 
-await loadTranslations();
 await Widget.self.init({ saveAndRestoreLastRect: false });
 await Widget.self.window.setResizable(false);
 // Must be called before setIgnoreCursorEvents. tao's apply_diff (dispatched async to the main

@@ -5,6 +5,7 @@
 ### enhancements
 
 - twm animations.
+- lazy load of translations.
 
 ## [2.7.1]
 

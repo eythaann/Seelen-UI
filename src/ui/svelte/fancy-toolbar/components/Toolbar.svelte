@@ -5,7 +5,6 @@
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
   import { onDestroy, onMount } from "svelte";
-  import { get } from "svelte/store";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { getResourceText } from "libs/ui/react/utils/index.ts";
   import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
@@ -99,7 +98,7 @@
   });
 
   function buildContextMenu(): ContextMenu {
-    const language = get(locale);
+    const language = locale.value;
 
     function isAlreadyAdded(id: PluginId): boolean {
       return toolbarState.items.some((item) => item === id);
