@@ -281,6 +281,37 @@ subscribe(SeelenEvent.YourDataChanged, (event) => {
 await $data.init();
 ```
 
+## Svelte: State Encapsulation (Non-Negotiable)
+
+Never export `$state` variables directly from a module. Always wrap them in a class with getters and export a single
+instance of that class. This applies to both raw `$state` and reactive wrappers like `lazyRune`.
+
+**Bad:**
+
+```ts
+export let count = $state(0);
+export const items = lazyRune(() => invoke(SomeCommand));
+```
+
+**Good:**
+
+```ts
+const items = lazyRune<Item[]>(() => invoke(SomeCommand));
+let count = $state(0);
+
+class MyState {
+  get items() {
+    return items;
+  }
+  get count() {
+    return count;
+  }
+}
+export const myState = new MyState();
+```
+
+State and reactive values live at module scope; the class only exposes getters (and setters when mutation is needed).
+
 ## Svelte: Only Svelte 5+ APIs (Non-Negotiable)
 
 All Svelte code in this repo targets **Svelte 5**. Never write Svelte 4 / legacy patterns:

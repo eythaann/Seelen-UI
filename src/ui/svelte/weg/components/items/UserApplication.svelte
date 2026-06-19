@@ -2,7 +2,6 @@
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { interactables, getWindowsForItem } from "../../state/windows.svelte.ts";
-  import { isTouchPrimary } from "libs/ui/svelte/utils";
   import UserApplicationItem from "./UserApplicationItem.svelte";
 
   interface Props {
@@ -14,7 +13,7 @@
 
   const windows = $derived(getWindowsForItem(item, interactables.value));
   const settings = $derived(settingsState.value as any);
-  const showAsSeparatedItems = $derived(settings?.splitWindows || isTouchPrimary.value);
+  const showAsSeparatedItems = $derived(settings?.splitWindows);
 </script>
 
 {#if showAsSeparatedItems && windows.length > 1}

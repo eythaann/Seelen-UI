@@ -1,15 +1,14 @@
 import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { settingsState } from "./state/settings.svelte.ts";
+import { settingsState, widgetRect } from "./state/settings.svelte.ts";
 
-export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise<void> {
+export function triggerWidget(widgetId: WidgetId, itemId: string): void {
   if (typeof widgetId !== "string") {
     return;
   }
 
-  const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
+  const { left: windowX, top: windowY } = widgetRect.value;
 
   const element = document.getElementById(itemId);
   if (!element) {
@@ -25,7 +24,7 @@ export async function triggerWidget(widgetId: WidgetId, itemId: string): Promise
 
   const y = isTopPosition ? windowY + toPhysicalPixels(rootRect.bottom) : windowY + toPhysicalPixels(rootRect.top);
 
-  await invoke(SeelenCommand.TriggerWidget, {
+  invoke(SeelenCommand.TriggerWidget, {
     payload: {
       id: widgetId,
       desiredPosition: { x, y },
