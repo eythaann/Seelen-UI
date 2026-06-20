@@ -6,12 +6,16 @@ function alignment(value: any): Alignment {
 }
 
 let timeoutRef: ReturnType<typeof setTimeout> | null = null;
+let tooltipVisible = false;
+let lastShownOn: any = null;
+
 function showTooltip(text: string, alignX: Alignment, alignY: Alignment) {
   if (timeoutRef) {
     clearTimeout(timeoutRef);
   }
 
   timeoutRef = setTimeout(() => {
+    tooltipVisible = true;
     const payload: WidgetTriggerPayload = {
       id: "@seelen/tooltip" as WidgetId,
       alignX,
@@ -25,8 +29,16 @@ function showTooltip(text: string, alignX: Alignment, alignY: Alignment) {
 function hideTooltip() {
   if (timeoutRef) {
     clearTimeout(timeoutRef);
+    timeoutRef = null;
   }
 
+  lastShownOn = null;
+
+  if (!tooltipVisible) {
+    return;
+  }
+
+  tooltipVisible = false;
   const payload: WidgetTriggerPayload = {
     id: "@seelen/tooltip" as WidgetId,
     customArgs: { show: false },
@@ -34,10 +46,13 @@ function hideTooltip() {
   _invoke("trigger_widget", { payload });
 }
 
-let lastShownOn: any = null;
 document.addEventListener(
   "pointerenter",
   (e) => {
+    if (!window.__SLU_WIDGET_INSTANCE?.isReady) {
+      return;
+    }
+
     const target = e.target;
     if (!target || !(target instanceof HTMLElement)) {
       return;
@@ -66,17 +81,17 @@ document.addEventListener(
 document.addEventListener(
   "pointerleave",
   (e) => {
-    if (lastShownOn !== e.target) {
-      return;
+    if (lastShownOn === e.target) {
+      hideTooltip();
     }
-    hideTooltip();
   },
   true,
 );
 
 globalThis.addEventListener("blur", () => {
-  hideTooltip();
-  lastShownOn = null;
+  if (lastShownOn) {
+    hideTooltip();
+  }
 });
 
 /*

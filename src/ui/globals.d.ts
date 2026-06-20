@@ -35,6 +35,7 @@ interface Window {
     invoke: any;
   };
   __SLU_WIDGET: import("@seelen-ui/lib/types").Widget;
+  __SLU_WIDGET_INSTANCE: import("@seelen-ui/lib").Widget;
 }
 
 type anyObject = Record<PropertyKey, any>;

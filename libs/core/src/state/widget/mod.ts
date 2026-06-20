@@ -96,6 +96,11 @@ export class Widget {
     return this.runtimeState.hwnd;
   }
 
+  /** Returns if the widget is ready */
+  get isReady(): boolean {
+    return this.runtimeState.ready;
+  }
+
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
