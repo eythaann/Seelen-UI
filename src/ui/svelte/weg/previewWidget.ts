@@ -6,7 +6,7 @@ export function triggerPreviewWidget(itemEl: HTMLElement, windows: UserAppWindow
   const dockSide = settingsState.position;
 
   const elRect = itemEl.getBoundingClientRect();
-  const viewRect = widgetRect.value.webviewRect;
+  const viewRect = widgetRect.value.hitboxRect;
 
   const toPhysical = (n: number) => Math.round(n * globalThis.devicePixelRatio);
 
