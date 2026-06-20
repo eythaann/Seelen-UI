@@ -1,12 +1,8 @@
-import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { RuntimeStyleSheet } from "@seelen-ui/lib";
+import type { MediaPlayer } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { lazyRune } from "../../utils";
 
-const players = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
-subscribe(SeelenEvent.MediaSessions, players.setByPayload);
-await players.init();
-
-const player = $derived(players.value.find((p) => p.default));
+let player = $state<MediaPlayer | null>(null);
 const thumbnailSrc = $derived(player?.thumbnail ? convertFileSrc(player.thumbnail) : null);
 
 let fetchingThumbnail = $state(false);
@@ -57,6 +53,9 @@ $effect.root(() => {
 class WallpaperState {
   get player() {
     return player;
+  }
+  set player(value: MediaPlayer | null) {
+    player = value;
   }
   get fetchingThumbnail() {
     return fetchingThumbnail;

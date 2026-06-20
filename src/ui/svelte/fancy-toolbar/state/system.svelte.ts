@@ -1,27 +1,9 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { FancyToolbarSide } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
+import { currentMonitorId, monitors, mousePos, virtualDesktop } from "./getters.svelte.ts";
 
-const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
-
-export const virtualDesktop = lazyRune(async () => {
-  const initialDesktops = await invoke(SeelenCommand.StateGetVirtualDesktops);
-  return initialDesktops.monitors[currentMonitorId];
-});
-subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
-  virtualDesktop.value = e.payload.monitors[currentMonitorId];
-});
-await virtualDesktop.init();
-
-const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-await monitors.init();
+export { virtualDesktop };
 
 const _currentMonitor = $derived(monitors.value.find((m) => m.id === currentMonitorId)!);
-
-const mousePos = lazyRune(() => invoke(SeelenCommand.GetMousePosition));
-subscribe(SeelenEvent.GlobalMouseMove, mousePos.setByPayload);
-await mousePos.init();
 
 const _mouseAtEdge = $derived.by((): FancyToolbarSide | null => {
   const box = _currentMonitor.rect;

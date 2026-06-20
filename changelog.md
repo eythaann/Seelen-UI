@@ -6,6 +6,7 @@
 
 - twm animations.
 - lazy load of translations.
+- reduce boot time for toolbar and dock.
 
 ## [2.7.1]
 

@@ -1,36 +1,7 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { SeelenWegSide } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
+import { currentMonitorId, monitors, mousePos, notifications, players, trashBinInfo } from "./getters.svelte.ts";
 
-const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
-
-const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-
-export const players = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
-subscribe(SeelenEvent.MediaSessions, players.setByPayload);
-
-export const notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
-subscribe(SeelenEvent.Notifications, notifications.setByPayload);
-
-const mousePos = lazyRune(async () => {
-  const [x, y] = await invoke(SeelenCommand.GetMousePosition);
-  return { x, y };
-});
-subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
-  mousePos.value = { x, y };
-});
-
-export const trashBinInfo = lazyRune(() => invoke(SeelenCommand.GetTrashBinInfo));
-subscribe(SeelenEvent.TrashBinChanged, trashBinInfo.setByPayload);
-
-await Promise.all([
-  monitors.init(),
-  players.init(),
-  notifications.init(),
-  mousePos.init(),
-  trashBinInfo.init(),
-]);
+export { notifications, players, trashBinInfo };
 
 const _currentMonitor = $derived(monitors.value.find((m) => m.id === currentMonitorId)!);
 

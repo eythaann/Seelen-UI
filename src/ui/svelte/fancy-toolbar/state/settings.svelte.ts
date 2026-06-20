@@ -1,14 +1,10 @@
-import { invoke, RuntimeStyleSheet, SeelenCommand, Settings, Widget } from "@seelen-ui/lib";
+import { invoke, RuntimeStyleSheet, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
 import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { systemState } from "./system.svelte.ts";
-
-const _settings = lazyRune(() => Settings.getAsync());
-Settings.onChange((s) => (_settings.value = s));
-await _settings.init();
+import { settings as _settings } from "./getters.svelte.ts";
 
 $effect.root(() => {
   $effect(() => {

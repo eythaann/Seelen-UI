@@ -1,25 +1,13 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { type FocusedApp, SeelenWegSide, type UserAppWindow, type UserAppWindowColors } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
 import { settingsState, widgetRect } from "./settings.svelte.ts";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types.ts";
+import { focused, interactables, previews, selfWinId, widgetStatuses, windowsColors } from "./getters.svelte.ts";
+
+export { focused, interactables, previews, widgetStatuses, windowsColors };
 
 const widget = Widget.getCurrent();
-const selfWinId = await invoke(SeelenCommand.GetSelfWindowId);
-
-export const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
-
-export const previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
-
-export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
-  () => invoke(SeelenCommand.GetUserAppWindowsColors),
-);
-subscribe(SeelenEvent.UserAppWindowsColorsChanged, windowsColors.setByPayload);
-
-export const focused = lazyRune(() => invoke(SeelenCommand.GetFocusedApp));
 
 let _delayedFocused = $state<FocusedApp | null>(null);
 const setDelayedFocused = debounce((v: FocusedApp) => {
@@ -29,21 +17,10 @@ const setDelayedFocused = debounce((v: FocusedApp) => {
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focused.value = e.payload;
   setDelayedFocused(e.payload);
-  if (e.payload.hwnd !== selfWinId) {
+  if (e.payload.hwnd !== selfWinId.value) {
     setDelayedFocused.flush();
   }
 });
-
-export const widgetStatuses = lazyRune(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
-subscribe(SeelenEvent.WidgetDebugInfoChanged, widgetStatuses.setByPayload);
-
-await Promise.all([
-  interactables.init(),
-  previews.init(),
-  focused.init(),
-  widgetStatuses.init(),
-  windowsColors.init(),
-]);
 
 const _topInteractableWindow = $derived(
   interactables.value

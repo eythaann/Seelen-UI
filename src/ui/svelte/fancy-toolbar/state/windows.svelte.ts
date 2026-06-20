@@ -1,27 +1,11 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { Widget } from "@seelen-ui/lib";
 import { FancyToolbarSide, type UserAppWindowColors } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
 import { settingsState, widgetRect } from "./settings.svelte.ts";
+import { focused, interactables, widgetStatuses, windowsColors } from "./getters.svelte.ts";
+
+export { focused, interactables, widgetStatuses, windowsColors };
 
 const widget = Widget.getCurrent();
-
-export const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
-await interactables.init();
-
-export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
-  () => invoke(SeelenCommand.GetUserAppWindowsColors),
-);
-subscribe(SeelenEvent.UserAppWindowsColorsChanged, windowsColors.setByPayload);
-await windowsColors.init();
-
-export const focused = lazyRune(() => invoke(SeelenCommand.GetFocusedApp));
-subscribe(SeelenEvent.GlobalFocusChanged, focused.setByPayload);
-await focused.init();
-
-export const widgetStatuses = lazyRune(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
-subscribe(SeelenEvent.WidgetDebugInfoChanged, widgetStatuses.setByPayload);
-await widgetStatuses.init();
 
 const _topInteractableWindow = $derived(
   interactables.value

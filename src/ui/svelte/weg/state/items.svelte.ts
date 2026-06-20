@@ -4,6 +4,7 @@ import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
 import { getWindowsForItem, interactables } from "./windows.svelte.ts";
+import { wegItems } from "./getters.svelte.ts";
 
 interface OptimisticDockState {
   isReorderDisabled: boolean;
@@ -40,7 +41,7 @@ function getStateFromStored(state: WegItems): OptimisticDockState {
   };
 }
 
-let _dockState = $state(getStateFromStored(await invoke(SeelenCommand.StateGetWegItems)));
+let _dockState = $state(getStateFromStored(wegItems.value));
 
 export const dockState = {
   get isReorderDisabled() {

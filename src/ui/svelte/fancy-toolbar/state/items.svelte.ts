@@ -1,9 +1,12 @@
-import { invoke, PluginList, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
 import { ToolbarJsScope } from "@seelen-ui/lib/types";
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
+import { plugins, toolbarItems } from "./getters.svelte.ts";
+
+export { plugins };
 
 export const baseItem: ToolbarItem = {
   id: "-",
@@ -71,9 +74,7 @@ export function getStateFromStored(state: ToolbarState): OptimisticToolbarState 
   };
 }
 
-let _toolbarState = $state(
-  getStateFromStored(await invoke(SeelenCommand.StateGetToolbarItems)),
-);
+let _toolbarState = $state(getStateFromStored(toolbarItems.value));
 
 export const toolbarState = {
   get isReorderDisabled() {
@@ -126,17 +127,6 @@ export function restoreStateToDefault() {
   });
 }
 
-let _plugins = $state((await PluginList.getAsync()).forCurrentWidget());
-await PluginList.onChange((list) => {
-  _plugins = list.forCurrentWidget();
-});
-
-export const plugins = {
-  get value() {
-    return _plugins;
-  },
-};
-
 let isRemoteUpdate = false;
 listen<SyncPayload>("hidden::sync-toolbar-items", ({ payload }) => {
   if (payload.source === CLIENT_ID) return;
@@ -185,7 +175,7 @@ $effect.root(() => {
 });
 
 subscribe(SeelenEvent.PluginEnabled, (e) => {
-  if (_plugins.some((p) => p.id === e.payload)) {
+  if (plugins.value.some((p) => p.id === e.payload)) {
     toolbarActions.addItem(e.payload);
   }
 });

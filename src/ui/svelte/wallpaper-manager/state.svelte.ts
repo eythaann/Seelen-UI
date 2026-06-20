@@ -1,55 +1,35 @@
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { Wallpaper } from "@seelen-ui/lib/types";
-import { lazyRune } from "libs/ui/svelte/utils";
 import { locale } from "./i18n/index.ts";
 import { debounce } from "lodash";
 import { calculateMonitorCoverage } from "./utils/monitorCoverage.ts";
-
-let _settings = $state(await Settings.getAsync());
-Settings.onChange((s) => (_settings = s));
+import {
+  focused,
+  interactables,
+  monitors,
+  performanceMode,
+  players,
+  settings as _settings,
+  virtualDesktops,
+  wallpapers,
+} from "./getters.svelte.ts";
+import WallpaperState from "libs/ui/svelte/components/Wallpaper/state.svelte.ts";
 
 const settings = $derived.by(() => ({
-  ..._settings.byWidget["@seelen/wallpaper-manager"],
-  byWallpaper: _settings.byWallpaper,
-  byMonitor: _settings.monitorsV3,
+  ..._settings.value.byWidget["@seelen/wallpaper-manager"],
+  byWallpaper: _settings.value.byWallpaper,
+  byMonitor: _settings.value.monitorsV3,
 }));
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(_settings.language || "en");
+    locale.set(_settings.value.language || "en");
+  });
+
+  $effect(() => {
+    WallpaperState.player = players.value.find((p) => p.default) || null;
   });
 });
-
-const focused = lazyRune(() => invoke(SeelenCommand.GetFocusedApp));
-subscribe(SeelenEvent.GlobalFocusChanged, focused.setByPayload);
-
-const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
-
-const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
-
-const virtualDesktops = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
-subscribe(SeelenEvent.VirtualDesktopsChanged, virtualDesktops.setByPayload);
-
-const wallpapers = lazyRune(() => invoke(SeelenCommand.StateGetWallpapers));
-subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
-
-const performanceMode = lazyRune(() => invoke(SeelenCommand.StateGetPerformanceMode));
-subscribe(SeelenEvent.StatePerformanceModeChanged, performanceMode.setByPayload);
-
-const players = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
-subscribe(SeelenEvent.MediaSessions, players.setByPayload);
-
-await Promise.all([
-  focused.init(),
-  interactables.init(),
-  monitors.init(),
-  virtualDesktops.init(),
-  wallpapers.init(),
-  performanceMode.init(),
-  players.init(),
-]);
 
 let idle = $state(false);
 const setAsIdle = debounce(
