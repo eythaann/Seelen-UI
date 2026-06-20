@@ -5,6 +5,7 @@
   import { debounce } from "lodash";
   import Dock from "./components/Dock.svelte";
   import { windowsState, focused, widgetStatuses } from "./state/windows.svelte.ts";
+  import { settingsState } from "./state/settings.svelte.ts";
 
   const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];
 
@@ -33,7 +34,9 @@
   });
 
   onMount(() => {
-    Widget.self.ready();
+    Widget.self.ready().then(() => {
+      settingsState.isReady = true;
+    });
   });
 </script>
 

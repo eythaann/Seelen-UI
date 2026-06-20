@@ -18,7 +18,15 @@ export const fullSettings = {
   },
 };
 
+let isWidgetReady = $state(false);
+
 export const settingsState = {
+  get isReady() {
+    return isWidgetReady;
+  },
+  set isReady(v: boolean) {
+    isWidgetReady = v;
+  },
   get value() {
     return _settings.value.byWidget["@seelen/weg"] as any;
   },
@@ -129,13 +137,21 @@ export const widgetRect = {
 
 async function updateWidgetPosition() {
   const { hitboxRect, webviewRect } = widgetRect.value;
+  const isTouch = isTouchPrimary.value;
+  const hideMode = settingsState.hideMode;
+  const position = settingsState.position;
+  const isReady = settingsState.isReady;
 
   await Widget.self.setPosition(webviewRect);
 
-  if (settingsState.hideMode === HideMode.Never || isTouchPrimary.value) {
+  if (!isReady) {
+    return;
+  }
+
+  if (hideMode === HideMode.Never || isTouch) {
     await invoke(SeelenCommand.RegisterAppBar, {
       rect: hitboxRect,
-      edge: settingsState.position as any,
+      edge: position as any,
     });
   } else {
     await invoke(SeelenCommand.UnregisterAppBar);
@@ -162,7 +178,6 @@ $effect.root(() => {
   });
 
   $effect(() => {
-    let _tracked = settingsState;
     updateWidgetPosition();
   });
 

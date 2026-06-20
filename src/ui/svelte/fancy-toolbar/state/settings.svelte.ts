@@ -12,7 +12,15 @@ $effect.root(() => {
   });
 });
 
+let isWidgetReady = $state(false);
+
 export const settingsState = {
+  get isReady() {
+    return isWidgetReady;
+  },
+  set isReady(v: boolean) {
+    isWidgetReady = v;
+  },
   get value() {
     return _settings.value.byWidget["@seelen/fancy-toolbar"] as any;
   },
@@ -70,13 +78,19 @@ export const widgetRect = {
 };
 
 async function updateWidgetPosition() {
+  const isTouch = isTouchPrimary.value;
   const rect = widgetRect.value;
   const hideMode = settingsState.hideMode;
   const position = settingsState.position;
+  const isReady = settingsState.isReady;
 
   await Widget.self.setPosition(rect);
 
-  if (hideMode === HideMode.Never || isTouchPrimary.value) {
+  if (!isReady) {
+    return;
+  }
+
+  if (hideMode === HideMode.Never || isTouch) {
     await invoke(SeelenCommand.RegisterAppBar, {
       rect,
       edge: position as unknown as AppBarEdge,
@@ -104,12 +118,6 @@ $effect.root(() => {
   });
 
   $effect(() => {
-    // track reactive deps
-    settingsState.position;
-    settingsState.hideMode;
-    settingsState.itemSize;
-    settingsState.margin;
-    settingsState.padding;
     updateWidgetPosition();
   });
 

@@ -9,7 +9,7 @@ use windows::Win32::{
     },
 };
 
-use crate::trace_lock;
+use crate::{error::Result, trace_lock};
 
 static REGISTERED_BARS: LazyLock<Mutex<Vec<isize>>> = LazyLock::new(|| Mutex::new(Vec::new()));
 
@@ -71,27 +71,29 @@ impl AppBarData {
         self.0.rc = rect;
     }
 
-    pub fn register_as_new_bar(&mut self) {
+    pub fn register_as_new_bar(&mut self) -> Result<()> {
         let mut data = self.0;
         let addr = data.hWnd.0 as isize;
-        let is_new = {
-            let mut registered = trace_lock!(REGISTERED_BARS);
-            if !registered.contains(&addr) {
-                registered.push(addr);
-                true
-            } else {
-                false
+        let mut guard = trace_lock!(REGISTERED_BARS);
+
+        if !guard.contains(&addr) {
+            let ok = unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
+            if ok == 0 {
+                return Err("Failed to register App Bar".into());
             }
-        };
-        if is_new {
-            unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
+            guard.push(addr);
         }
+
         unsafe { SHAppBarMessage(ABM_SETPOS, &mut data) };
+        Ok(())
     }
 
-    pub fn unregister_bar(&mut self) {
+    pub fn unregister_bar(&mut self) -> Result<()> {
         let mut data = self.0;
+        let addr = data.hWnd.0 as isize;
+        let mut guard = trace_lock!(REGISTERED_BARS);
         unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
-        trace_lock!(REGISTERED_BARS).retain(|x| *x != data.hWnd.0 as isize);
+        guard.retain(|x| *x != addr);
+        Ok(())
     }
 }

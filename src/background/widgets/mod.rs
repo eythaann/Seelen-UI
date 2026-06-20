@@ -22,10 +22,11 @@ use seelen_core::{
         context_menu::ContextMenu, dialog::Dialog, Alignment, WidgetDebugInfo, WidgetInstanceMode,
         WidgetStatus, WidgetTriggerPayload,
     },
-    system_state::ZOrder,
+    system_state::{AppBarEdge, ZOrder},
     Rect,
 };
 use tauri::{Emitter, Manager};
+use windows::Win32::Foundation::{HWND, RECT};
 
 use crate::{
     app::{emit_to_webviews, get_app_handle},
@@ -36,7 +37,7 @@ use crate::{
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
     windows_api::{
         input::{Keyboard, Mouse},
-        WindowsApi,
+        AppBarData, WindowsApi,
     },
 };
 
@@ -180,7 +181,6 @@ pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
 
 #[tauri::command(async)]
 pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()> {
-    use windows::Win32::Foundation::{HWND, RECT};
     use windows::Win32::Graphics::Gdi::*;
     use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
@@ -209,7 +209,6 @@ pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()
 
 #[tauri::command(async)]
 pub fn set_self_z_order(webview: tauri::WebviewWindow, z_order: ZOrder) -> Result<()> {
-    use windows::Win32::Foundation::HWND;
     use windows::Win32::UI::WindowsAndMessaging::{
         HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST,
     };
@@ -325,6 +324,32 @@ pub fn debug_open_dev_tools(label: String) -> Result<()> {
         .get_webview_window(&label)
         .ok_or("Widget window not found")?;
     window.open_devtools();
+    Ok(())
+}
+
+#[tauri::command(async)]
+pub fn register_app_bar(webview: tauri::WebviewWindow, rect: Rect, edge: AppBarEdge) -> Result<()> {
+    log::info!("Registering {} as Shell Bar", webview.label());
+    let hwnd = HWND(webview.hwnd()?.0);
+    let rect = RECT {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+    };
+    let mut app_bar = AppBarData::from_handle(hwnd);
+    app_bar.set_rect(rect);
+    app_bar.set_edge(edge);
+    app_bar.register_as_new_bar()?;
+    Ok(())
+}
+
+#[tauri::command(async)]
+pub fn unregister_app_bar(webview: tauri::WebviewWindow) -> Result<()> {
+    log::info!("Unregistering {} as Shell Bar", webview.label());
+    let hwnd = HWND(webview.hwnd()?.0);
+    let mut app_bar = AppBarData::from_handle(hwnd);
+    app_bar.unregister_bar()?;
     Ok(())
 }
 

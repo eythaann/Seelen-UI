@@ -8,6 +8,10 @@
 - lazy load of translations.
 - reduce boot time for toolbar and dock.
 
+### fix
+
+- app bars not being registered.
+
 ## [2.7.1]
 
 ### enhancements
