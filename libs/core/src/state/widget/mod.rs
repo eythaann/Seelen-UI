@@ -67,6 +67,8 @@ pub struct Widget {
     pub no_memory_leak_workaround: bool,
     /// will open dev tools inmediately when webview is created
     pub debug: bool,
+    /// ignores the user settings and force hardware acceleration for this widget
+    pub force_hardware_acceleration: bool,
 
     /// Way to load the widget
     pub loader: WidgetLoader,

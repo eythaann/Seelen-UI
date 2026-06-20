@@ -7,6 +7,7 @@ loader: Internal
 preset: Desktop
 instances: Single
 noMemoryLeakWorkaround: true
+forceHardwareAcceleration: true
 shortcuts:
   - id: wallpaper-next
     command: ["wallpaper", "next"]
