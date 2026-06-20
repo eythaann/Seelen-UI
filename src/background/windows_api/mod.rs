@@ -362,12 +362,7 @@ impl WindowsApi {
     }
 
     pub fn set_z_order(hwnd: HWND, order: HWND) -> Result<()> {
-        Self::set_position(
-            hwnd,
-            Some(order),
-            &RECT::default(),
-            SWP_NOMOVE | SWP_NOSIZE | SWP_ASYNCWINDOWPOS,
-        )
+        Self::set_position(hwnd, Some(order), &RECT::default(), SWP_NOMOVE | SWP_NOSIZE)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow

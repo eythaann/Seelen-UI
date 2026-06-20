@@ -11,6 +11,7 @@
 ### fix
 
 - app bars not being registered.
+- dock and toolbar not being on top, after exiting from fullscreen app.
 
 ## [2.7.1]
 
