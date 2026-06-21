@@ -206,7 +206,7 @@
   oncontextmenu={handleContextMenu}
 >
   <CornerAction />
-  <BackgroundByLayers id="ft-bar-background" class="" />
+  <BackgroundByLayers />
 
   <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
     <ItemsGroup id="left" items={splittedItems.left} startIndex={0} />

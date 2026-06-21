@@ -80,7 +80,7 @@
   class:hidden={dockShouldBeHidden.value}
   oncontextmenu={onContextMenu}
 >
-  <BackgroundByLayers id="weg-background" class="" />
+  <BackgroundByLayers />
   <div class="weg-items-container">
     <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
       <div class="weg-items">

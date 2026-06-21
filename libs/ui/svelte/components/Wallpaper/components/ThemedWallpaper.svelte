@@ -21,19 +21,19 @@
 </script>
 
 {#if !definition || (definition.type === "MediaPlayer" && !wallState.player)}
-  <BackgroundByLayers id="@default/wallpaper" class={["wallpaper", "default-wallpaper"]} />
+  <div id="@default/wallpaper" class={["wallpaper", "default-wallpaper"]}>
+    <BackgroundByLayers />
+  </div>
 {:else}
-  <BackgroundByLayers
-    id={definition.id}
-    class="wallpaper"
-    style={config ? getWallpaperStyles(config) : undefined}
-  >
+  <div id={definition.id} class="wallpaper" style={config ? getWallpaperStyles(config) : undefined}>
+    <BackgroundByLayers />
     {@html `<style>@scope { ${definition.css || ""} }</style>`}
-  </BackgroundByLayers>
+  </div>
 {/if}
 
 <style>
   :global(.wallpaper) {
+    position: relative;
     width: 100%;
     height: 100%;
   }

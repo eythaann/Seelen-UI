@@ -1,30 +1,10 @@
-<script lang="ts">
-  import type { ClassValue } from "svelte/elements";
-
-  interface Props {
-    id: string;
-    class: ClassValue;
-    style?: string;
-    children?: any;
-  }
-
-  const props: Props = $props();
-</script>
-
-<div {...props} class={["bg-container", props.class]}>
-  <div class="bg-layers">
-    {#each Array.from({ length: 10 }, (_, i) => i) as index}
-      <div class={`bg-layer bg-layer-${index + 1}`}></div>
-    {/each}
-  </div>
-  {@render props.children?.()}
+<div class="bg-layers">
+  {#each Array.from({ length: 10 }, (_, i) => i) as index}
+    <div class={`bg-layer bg-layer-${index + 1}`}></div>
+  {/each}
 </div>
 
 <style>
-  :global(.bg-container) {
-    position: relative;
-  }
-
   :global(.bg-layers) {
     position: absolute;
     top: 0;
