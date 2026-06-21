@@ -43,7 +43,6 @@ impl std::str::FromStr for SysTrayIconId {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[ts(export)]
 pub struct SysTrayIcon {
     /// Identifier for the icon. Will not change for the lifetime of the
     /// icon.
@@ -104,7 +103,7 @@ pub struct SysTrayIcon {
 
 /// Actions that can be performed on a `SystrayIcon`.
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[ts(export, repr(enum = name))]
+#[ts(repr(enum = name))]
 pub enum SystrayIconAction {
     HoverEnter,
     HoverLeave,
