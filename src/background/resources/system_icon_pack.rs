@@ -21,7 +21,12 @@ use crate::{
 static SAVE_SYSTEM_ICON_PACK: LazyLock<slu_utils::Throttle<()>> = LazyLock::new(|| {
     slu_utils::throttle(
         |()| {
-            RESOURCES.with_system_pack(|pack| pack.save()).log_error();
+            let pack = RESOURCES.system_icon_pack.lock().clone();
+            if let Some(pack) = pack {
+                crate::get_tokio_handle().spawn(async move {
+                    pack.save().await.log_error();
+                });
+            }
         },
         std::time::Duration::from_secs(1),
     )

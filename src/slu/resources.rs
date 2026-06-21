@@ -12,14 +12,14 @@ type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>
 
 pub async fn process(cmd: ResourceManagerCli) -> Result<()> {
     match cmd.subcommand {
-        ResourceSubCommand::Bundle { kind, path } => bundle(kind, path)?,
+        ResourceSubCommand::Bundle { kind, path } => bundle(kind, path).await?,
         ResourceSubCommand::Translate { path, source_lang } => translate(path, source_lang).await?,
         _ => return Err("This command needs Seelen UI to be running".into()),
     }
     Ok(())
 }
 
-fn bundle(kind: ClapResourceKind, path: PathBuf) -> Result<()> {
+async fn bundle(kind: ClapResourceKind, path: PathBuf) -> Result<()> {
     let mut to_store_path = path.clone();
 
     let format = time::macros::format_description!("[year]-[month]-[day] [hour]-[minute]-[second]");
@@ -39,29 +39,29 @@ fn bundle(kind: ClapResourceKind, path: PathBuf) -> Result<()> {
 
     match kind {
         ClapResourceKind::Theme => {
-            let mut theme = Theme::load_ext(&path, false).map_err(e)?;
+            let mut theme = Theme::load_ext(&path, false).await.map_err(e)?;
             theme.metadata.internal.path = to_store_path.clone();
-            theme.save().map_err(e)?;
+            theme.save().await.map_err(e)?;
         }
         ClapResourceKind::Plugin => {
-            let mut plugin = Plugin::load_ext(&path, false).map_err(e)?;
+            let mut plugin = Plugin::load_ext(&path, false).await.map_err(e)?;
             plugin.metadata.internal.path = to_store_path.clone();
-            plugin.save().map_err(e)?;
+            plugin.save().await.map_err(e)?;
         }
         ClapResourceKind::Widget => {
-            let mut widget = Widget::load_ext(&path, false).map_err(e)?;
+            let mut widget = Widget::load_ext(&path, false).await.map_err(e)?;
             widget.metadata.internal.path = to_store_path.clone();
-            widget.save().map_err(e)?;
+            widget.save().await.map_err(e)?;
         }
         ClapResourceKind::IconPack => {
-            let mut icon_pack = IconPack::load_ext(&path, false).map_err(e)?;
+            let mut icon_pack = IconPack::load_ext(&path, false).await.map_err(e)?;
             icon_pack.metadata.internal.path = to_store_path.clone();
-            icon_pack.save().map_err(e)?;
+            icon_pack.save().await.map_err(e)?;
         }
         ClapResourceKind::Wallpaper => {
-            let mut wallpaper = Wallpaper::load_ext(&path, false).map_err(e)?;
+            let mut wallpaper = Wallpaper::load_ext(&path, false).await.map_err(e)?;
             wallpaper.metadata.internal.path = to_store_path.clone();
-            wallpaper.save().map_err(e)?;
+            wallpaper.save().await.map_err(e)?;
         }
         _ => return Err("Not implemented".into()),
     }

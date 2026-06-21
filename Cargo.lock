@@ -5098,6 +5098,7 @@ version = "2.7.2"
 dependencies = [
  "base64 0.22.1",
  "chrono",
+ "futures",
  "grass",
  "num_enum",
  "paste",
@@ -5109,6 +5110,7 @@ dependencies = [
  "serde_path_to_error",
  "serde_yaml",
  "sys-locale",
+ "tokio",
  "ts-rs",
  "url",
  "uuid 1.22.0",

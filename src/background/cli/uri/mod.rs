@@ -42,8 +42,8 @@ pub fn process_uri(uri: &str) -> Result<()> {
             return Err("Invalid file to load".into());
         }
 
-        let file = SluResourceFile::load(&path)?;
-        store_file_on_respective_user_folder(&file)?;
+        let file = crate::get_tokio_handle().block_on(SluResourceFile::load(&path))?;
+        crate::get_tokio_handle().block_on(store_file_on_respective_user_folder(&file))?;
         let dialog_id = Uuid::new_v4();
         trigger_dialog_backend(Dialog {
             identifier: dialog_id,
@@ -118,17 +118,17 @@ fn path_by_resource_kind(kind: &ResourceKind) -> &Path {
     }
 }
 
-fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<PathBuf> {
+async fn store_file_on_respective_user_folder(file: &SluResourceFile) -> Result<PathBuf> {
     let mut path_to_store = path_by_resource_kind(&file.resource.kind).to_path_buf();
     if file.resource.kind == ResourceKind::IconPack || file.resource.kind == ResourceKind::Wallpaper
     {
         path_to_store.push(file.resource.id.to_string());
-        std::fs::create_dir_all(&path_to_store)?;
+        tokio::fs::create_dir_all(&path_to_store).await?;
         path_to_store.push("metadata.slu");
     } else {
         path_to_store.push(format!("{}.slu", file.resource.id));
     }
-    file.store(&path_to_store)?;
+    file.store(&path_to_store).await?;
     Ok(path_to_store)
 }
 
@@ -197,15 +197,15 @@ async fn _download_resource(url: &str) -> Result<SluResourceFile> {
     }
 
     let file = res.json::<SluResourceFile>().await?;
-    let saved_path = store_file_on_respective_user_folder(&file)?;
+    let saved_path = store_file_on_respective_user_folder(&file).await?;
 
     if file.resource.kind == ResourceKind::IconPack {
-        let mut pack = IconPack::load(saved_path.parent().unwrap())?;
+        let mut pack = IconPack::load(saved_path.parent().unwrap()).await?;
         download_remote_icons(&mut pack).await?;
     }
 
     if file.resource.kind == ResourceKind::Wallpaper {
-        let mut wallpaper = Wallpaper::load(saved_path.parent().unwrap())?;
+        let mut wallpaper = Wallpaper::load(saved_path.parent().unwrap()).await?;
         download_remote_wallpapers(&mut wallpaper).await?;
     }
 
@@ -510,7 +510,7 @@ async fn download_remote_wallpapers(wallpaper: &mut Wallpaper) -> Result<()> {
         wallpaper.thumbnail_filename = Some(thumbnail_filename);
     }
 
-    wallpaper.save()?;
+    wallpaper.save().await?;
     Ok(())
 }
 

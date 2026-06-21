@@ -77,14 +77,6 @@ impl SluResource for Wallpaper {
                 }
             }
         }
-
-        // remove thumbnail if doesn't exist
-        if let Some(filename) = &self.thumbnail_filename {
-            let thumbnail_path = self.metadata.internal.path.join(filename);
-            if !thumbnail_path.exists() {
-                self.thumbnail_filename = None;
-            }
-        }
     }
 
     fn validate(&self) -> Result<()> {
@@ -104,7 +96,7 @@ impl Wallpaper {
     pub const SUPPORTED_VIDEOS: [&str; 7] = ["mp4", "webm", "ogg", "avi", "mov", "mkv", "mpeg"];
 
     /// path should be the path to the wallpaper image or video to be moved or copied to the wallpaper folder
-    pub fn create_from_file(path: &Path, folder_to_store: &Path, copy: bool) -> Result<Self> {
+    pub async fn create_from_file(path: &Path, folder_to_store: &Path, copy: bool) -> Result<Self> {
         if !path.exists() || path.is_dir() {
             return Err("File does not exist".into());
         }
@@ -129,11 +121,11 @@ impl Wallpaper {
             ..Default::default()
         };
 
-        std::fs::create_dir_all(folder_to_store)?;
+        tokio::fs::create_dir_all(folder_to_store).await?;
         if copy {
-            std::fs::copy(path, folder_to_store.join(&filename))?;
+            tokio::fs::copy(path, folder_to_store.join(&filename)).await?;
         } else {
-            std::fs::rename(path, folder_to_store.join(&filename))?;
+            tokio::fs::rename(path, folder_to_store.join(&filename)).await?;
         }
 
         let r#type = if Self::SUPPORTED_IMAGES.contains(&ext.as_str()) {
@@ -156,7 +148,7 @@ impl Wallpaper {
             },
             ..Default::default()
         };
-        wallpaper.save()?;
+        wallpaper.save().await?;
 
         Ok(wallpaper)
     }

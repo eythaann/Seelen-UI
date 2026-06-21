@@ -56,18 +56,24 @@ impl SeelenUI {
     pub async fn start() -> Result<()> {
         Migrations::run()?;
 
-        // RESOURCES and FULL_STATE settings have no mutual dependency at init time;
+        // RESOURCES and FULL_STATE have no mutual dependency at init time;
         // load them in parallel then run the RESOURCES-dependent FULL_STATE steps.
-        std::thread::scope(|s| {
-            s.spawn(|| {
-                let _ = &*RESOURCES;
+        // SessionManager is pre-warmed in setup() so its PasswordVault cost is already
+        // paid by this point; accessing it here is a fast LazyLock hit.
+        tokio::join!(
+            async {
+                RESOURCES.initialize().await;
                 CRONOMETER.record("RESOURCES");
-            });
-            s.spawn(|| {
-                let _ = FULL_STATE.load();
-                CRONOMETER.record("FULL_STATE");
-            });
-        });
+            },
+            async {
+                tokio::task::spawn_blocking(|| {
+                    let _ = FULL_STATE.load();
+                    CRONOMETER.record("FULL_STATE");
+                })
+                .await
+                .log_error();
+            }
+        );
         CRONOMETER.record("Settings & Resources Load");
 
         FULL_STATE.rcu(|state| {
@@ -84,18 +90,30 @@ impl SeelenUI {
         }
 
         WIDGET_MANAGER.reconcile()?;
+        CRONOMETER.record("reconcile");
 
         create_background_window()?;
+        CRONOMETER.record("background_window");
+
         register_win_hook()?;
+        CRONOMETER.record("win_hook");
+
         start_discord_rpc()?;
+        CRONOMETER.record("discord_rpc");
+
         initialize_user_resources_watcher()?;
+        CRONOMETER.record("resource_watcher");
 
         let widgets = RESOURCES.widgets();
         let widget_refs: Vec<_> = widgets.iter().map(|w| w.as_ref()).collect();
         let (resolved, _) = resolve_shortcuts(&state.settings, &widget_refs);
+        CRONOMETER.record("resolve_shortcuts");
+
         if !crate::cli::shortcuts::SHORTCUTS_PAUSED.load(std::sync::atomic::Ordering::Acquire) {
             ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
         }
+        CRONOMETER.record("shortcuts");
+
         Ok(())
     }
 

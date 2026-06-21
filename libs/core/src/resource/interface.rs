@@ -1,4 +1,4 @@
-use std::{fs::File, path::Path};
+use std::path::Path;
 
 use serde::{de::DeserializeOwned, Serialize};
 
@@ -12,13 +12,14 @@ use crate::{
 
 use super::ResourceMetadata;
 
+#[allow(async_fn_in_trait)]
 pub trait SluResource: Sized + Serialize + DeserializeOwned {
     const KIND: ResourceKind;
 
     fn metadata(&self) -> &ResourceMetadata;
     fn metadata_mut(&mut self) -> &mut ResourceMetadata;
 
-    fn load_from_file(path: &Path, resolve_self_vars: bool) -> Result<Self> {
+    async fn load_from_file(path: &Path, resolve_self_vars: bool) -> Result<Self> {
         let ext = path
             .extension()
             .ok_or("Invalid file extension")?
@@ -27,18 +28,17 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
         let resource: Self = match ext.to_string_lossy().as_ref() {
             "yml" | "yaml" => {
                 if resolve_self_vars {
-                    deserialize_extended_yaml(path)?
+                    deserialize_extended_yaml(path).await?
                 } else {
-                    deserialize_extended_yaml_no_vars(path)?
+                    deserialize_extended_yaml_no_vars(path).await?
                 }
             }
             "json" | "jsonc" => {
-                let file = File::open(path)?;
-                file.lock_shared()?;
-                serde_json::from_reader(file)?
+                let bytes = tokio::fs::read(path).await?;
+                serde_json::from_slice(&bytes)?
             }
             "slu" => {
-                let file = SluResourceFile::load(path)?;
+                let file = SluResourceFile::load(path).await?;
                 if Self::KIND != file.resource.kind {
                     return Err(format!(
                         "Resource file is not of expected kind: {:?} instead is {:?}",
@@ -58,16 +58,19 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
         Ok(resource)
     }
 
-    fn load_from_folder(path: &Path, resolve_self_vars: bool) -> Result<Self> {
-        let file = search_resource_entrypoint(path).ok_or("No metadata file found")?;
-        Self::load_from_file(&file, resolve_self_vars)
+    async fn load_from_folder(path: &Path, resolve_self_vars: bool) -> Result<Self> {
+        let file = search_resource_entrypoint(path)
+            .await
+            .ok_or("No metadata file found")?;
+        Self::load_from_file(&file, resolve_self_vars).await
     }
 
-    fn load_ext(path: &Path, resolve_self_vars: bool) -> Result<Self> {
-        let mut resource = if path.is_dir() {
-            Self::load_from_folder(path, resolve_self_vars)?
+    async fn load_ext(path: &Path, resolve_self_vars: bool) -> Result<Self> {
+        let fs_meta = tokio::fs::metadata(path).await?;
+        let mut resource = if fs_meta.is_dir() {
+            Self::load_from_folder(path, resolve_self_vars).await?
         } else {
-            Self::load_from_file(path, resolve_self_vars)?
+            Self::load_from_file(path, resolve_self_vars).await?
         };
 
         let meta = resource.metadata_mut();
@@ -77,15 +80,15 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
             .unwrap_or_default()
             .to_string_lossy()
             .to_string();
-        meta.internal.written_at = path.metadata()?.modified()?.into();
+        meta.internal.written_at = fs_meta.modified()?.into();
 
         resource.sanitize();
         resource.validate()?;
         Ok(resource)
     }
 
-    fn load(path: &Path) -> Result<Self> {
-        Self::load_ext(path, true)
+    async fn load(path: &Path) -> Result<Self> {
+        Self::load_ext(path, true).await
     }
 
     /// Sanitize the resource data
@@ -97,11 +100,12 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
     }
 
     /// Saves the resource in same path as it was loaded
-    fn save(&self) -> Result<()> {
+    async fn save(&self) -> Result<()> {
         let mut save_path = self.metadata().internal.path.to_path_buf();
         if save_path.is_dir() {
-            std::fs::create_dir_all(&save_path)?;
+            tokio::fs::create_dir_all(&save_path).await?;
             save_path = search_resource_entrypoint(&save_path)
+                .await
                 .unwrap_or_else(|| save_path.join("metadata.yml"));
         }
 
@@ -113,17 +117,17 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
 
         match extension.as_str() {
             "slu" => {
-                let mut slu_file = SluResourceFile::load(&save_path)?;
+                let mut slu_file = SluResourceFile::load(&save_path).await?;
                 slu_file.data = serde_json::to_value(self)?.into();
-                slu_file.store(&save_path)?;
+                slu_file.store(&save_path).await?;
             }
             "yml" | "yaml" => {
-                let file = File::create(save_path)?;
-                serde_yaml::to_writer(file, self)?;
+                let content = serde_yaml::to_string(self)?;
+                tokio::fs::write(save_path, content).await?;
             }
             "json" | "jsonc" => {
-                let file = File::create(save_path)?;
-                serde_json::to_writer_pretty(file, self)?;
+                let content = serde_json::to_string_pretty(self)?;
+                tokio::fs::write(save_path, content).await?;
             }
             _ => {
                 return Err("Unsupported path extension".into());
@@ -132,12 +136,12 @@ pub trait SluResource: Sized + Serialize + DeserializeOwned {
         Ok(())
     }
 
-    fn delete(&self) -> Result<()> {
+    async fn delete(&self) -> Result<()> {
         let path = self.metadata().internal.path.to_path_buf();
         if path.is_dir() {
-            std::fs::remove_dir_all(path)?;
+            tokio::fs::remove_dir_all(path).await?;
         } else {
-            std::fs::remove_file(path)?;
+            tokio::fs::remove_file(path).await?;
         }
         Ok(())
     }

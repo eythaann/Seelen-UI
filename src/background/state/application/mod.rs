@@ -86,7 +86,8 @@ pub fn initialize_user_resources_watcher() -> Result<()> {
         |result: DebounceEventResult| match result {
             Ok(events) => {
                 let changed = join_and_filter_debounced_changes(events);
-                process_changes(&changed).log_error();
+                crate::get_tokio_handle()
+                    .spawn(async move { process_changes(&changed).await.log_error() });
             }
             Err(errors) => errors
                 .iter()
@@ -113,7 +114,7 @@ fn join_and_filter_debounced_changes(events: Vec<DebouncedEvent>) -> HashSet<Pat
     result
 }
 
-fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
+async fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
     let mut widgets_changed = false;
     let mut icons_changed = false;
     let mut themes_changed = false;
@@ -154,25 +155,25 @@ fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
 
     if widgets_changed {
         log::info!("Widgets changed");
-        RESOURCES.load_all_of_type(ResourceKind::Widget)?;
+        RESOURCES.load_all_of_type(ResourceKind::Widget).await?;
         RESOURCES.emit_widgets()?;
     }
 
     if themes_changed {
         log::info!("Themes changed");
-        RESOURCES.load_all_of_type(ResourceKind::Theme)?;
+        RESOURCES.load_all_of_type(ResourceKind::Theme).await?;
         RESOURCES.emit_themes();
     }
 
     if plugins_changed {
         log::info!("Plugins changed");
-        RESOURCES.load_all_of_type(ResourceKind::Plugin)?;
+        RESOURCES.load_all_of_type(ResourceKind::Plugin).await?;
         RESOURCES.emit_plugins();
     }
 
     if wallpapers_changed {
         log::info!("Wallpapers changed");
-        RESOURCES.load_all_of_type(ResourceKind::Wallpaper)?;
+        RESOURCES.load_all_of_type(ResourceKind::Wallpaper).await?;
         RESOURCES.emit_wallpapers();
 
         FULL_STATE.rcu(move |state| {
@@ -186,7 +187,7 @@ fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
 
     if icons_changed {
         log::info!("Icon Packs changed");
-        RESOURCES.load_all_of_type(ResourceKind::IconPack)?;
+        RESOURCES.load_all_of_type(ResourceKind::IconPack).await?;
         RESOURCES.emit_icon_packs();
     }
 

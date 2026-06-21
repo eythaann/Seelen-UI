@@ -65,19 +65,30 @@ impl<T: Into<serde_json::Value>> From<T> for TsUnknown {
     }
 }
 
-static ALLOWED_ROOT_FILESTEMS: &[&str] = &["metadata", "index", "mod", "main"];
-static ALLOWED_ROOT_EXTENSIONS: &[&str] = &["yml", "yaml", "slu", "json"];
-pub fn search_resource_entrypoint(folder: &Path) -> Option<PathBuf> {
-    if folder.is_file() {
-        return None;
-    }
-    for filestem in ALLOWED_ROOT_FILESTEMS {
-        for extension in ALLOWED_ROOT_EXTENSIONS {
-            let path = folder.join(format!("{filestem}.{extension}"));
-            if path.is_file() {
-                return Some(path);
-            }
-        }
-    }
-    None
+static ALLOWED_ROOT_FILESTEMS: &[&str] = &["metadata"];
+static ALLOWED_ROOT_EXTENSIONS: &[&str] = &["yml", "slu", "yaml", "json"];
+pub async fn search_resource_entrypoint(folder: &Path) -> Option<PathBuf> {
+    // Build all candidates in priority order (stem × extension),
+    // then probe all of them concurrently instead of sequentially.
+    // The first candidate in priority order that exists is returned.
+    let candidates: Vec<PathBuf> = ALLOWED_ROOT_FILESTEMS
+        .iter()
+        .flat_map(|stem| {
+            ALLOWED_ROOT_EXTENSIONS
+                .iter()
+                .map(move |ext| folder.join(format!("{stem}.{ext}")))
+        })
+        .collect();
+
+    let exists: Vec<bool> = futures::future::join_all(
+        candidates
+            .iter()
+            .map(|p| async move { tokio::fs::metadata(p).await.is_ok_and(|m| m.is_file()) }),
+    )
+    .await;
+
+    candidates
+        .into_iter()
+        .zip(exists)
+        .find_map(|(path, found)| found.then_some(path))
 }

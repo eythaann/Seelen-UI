@@ -1,6 +1,5 @@
 use std::{
-    fs::File,
-    io::{Read, Seek, SeekFrom, Write},
+    io::{Cursor, Read, Seek, SeekFrom, Write},
     path::Path,
 };
 
@@ -70,17 +69,19 @@ impl SluResourceFile {
         Ok(())
     }
 
-    pub fn load(path: &Path) -> Result<Self> {
-        let file = File::open(path)?;
-        let mut decoded = Self::decode(&file)?;
+    pub async fn load(path: &Path) -> Result<Self> {
+        let bytes = tokio::fs::read(path).await?;
+        let mut decoded = Self::decode(Cursor::new(bytes))?;
         decoded.resource.sanitize();
         decoded.resource.verify()?;
         Ok(decoded)
     }
 
-    pub fn store(&self, path: &Path) -> Result<()> {
-        let mut file = File::create(path)?;
-        self.encode(&mut file)
+    pub async fn store(&self, path: &Path) -> Result<()> {
+        let mut buf = Vec::new();
+        self.encode(&mut buf)?;
+        tokio::fs::write(path, buf).await?;
+        Ok(())
     }
 
     pub fn try_parse_into<T>(&self) -> Result<T>

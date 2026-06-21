@@ -9,8 +9,6 @@ use std::{
     sync::{Arc, LazyLock},
 };
 
-use rayon::iter::{IntoParallelIterator, IntoParallelRefIterator, ParallelIterator};
-
 use seelen_core::{
     resource::{IconPackId, PluginId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId},
     state::{IconPack, Plugin, Theme, Wallpaper, Widget},
@@ -21,11 +19,8 @@ use crate::{
     utils::{constants::SEELEN_COMMON, date_based_hex_id, lock_free::TracedMutex},
 };
 
-pub static RESOURCES: LazyLock<Arc<ResourceManager>> = LazyLock::new(|| {
-    let resources = ResourceManager::default();
-    resources.initialize();
-    Arc::new(resources)
-});
+pub static RESOURCES: LazyLock<Arc<ResourceManager>> =
+    LazyLock::new(|| Arc::new(ResourceManager::default()));
 
 #[derive(Default)]
 pub struct ResourceManager {
@@ -42,22 +37,48 @@ pub struct ResourceManager {
 }
 
 impl ResourceManager {
-    fn initialize(&self) {
-        [
-            ResourceKind::Theme,
-            ResourceKind::Plugin,
-            ResourceKind::Widget,
-            ResourceKind::Wallpaper,
-            ResourceKind::IconPack,
-        ]
-        .into_par_iter()
-        .for_each(|kind| self.load_all_of_type(kind).log_error());
+    pub async fn initialize(&self) {
+        tokio::join!(
+            async {
+                let t = std::time::Instant::now();
+                self.load_all_of_type(ResourceKind::Theme).await.log_error();
+                log::info!("Themes loaded in {:?}", t.elapsed());
+            },
+            async {
+                let t = std::time::Instant::now();
+                self.load_all_of_type(ResourceKind::Plugin)
+                    .await
+                    .log_error();
+                log::info!("Plugins loaded in {:?}", t.elapsed());
+            },
+            async {
+                let t = std::time::Instant::now();
+                self.load_all_of_type(ResourceKind::Widget)
+                    .await
+                    .log_error();
+                log::info!("Widgets loaded in {:?}", t.elapsed());
+            },
+            async {
+                let t = std::time::Instant::now();
+                self.load_all_of_type(ResourceKind::Wallpaper)
+                    .await
+                    .log_error();
+                log::info!("Wallpapers loaded in {:?}", t.elapsed());
+            },
+            async {
+                let t = std::time::Instant::now();
+                self.load_all_of_type(ResourceKind::IconPack)
+                    .await
+                    .log_error();
+                log::info!("IconPacks loaded in {:?}", t.elapsed());
+            },
+        );
     }
 
-    pub fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {
+    pub async fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {
         match kind {
             ResourceKind::Theme => {
-                let mut theme = Theme::load(path)?;
+                let mut theme = Theme::load(path).await?;
                 if theme.id.starts_with("@deprecated") {
                     return Ok(());
                 }
@@ -66,7 +87,7 @@ impl ResourceManager {
                 self.themes.upsert(theme.id.clone(), Arc::new(theme));
             }
             ResourceKind::Widget => {
-                let mut widget = Widget::load(path)?;
+                let mut widget = Widget::load(path).await?;
                 widget.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_widgets_path());
 
@@ -84,13 +105,17 @@ impl ResourceManager {
                 self.widgets.upsert(widget.id.clone(), Arc::new(widget));
             }
             ResourceKind::Plugin => {
-                let mut plugin = Plugin::load(path)?;
+                let mut plugin = Plugin::load(path).await?;
                 plugin.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_plugins_path());
                 self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
             }
             ResourceKind::Wallpaper => {
-                if path.is_file() {
+                let path_is_file = tokio::fs::metadata(path)
+                    .await
+                    .map(|m| m.is_file())
+                    .unwrap_or(false);
+                if path_is_file {
                     let Some(extension) = path.extension() else {
                         return Err("Wallpaper has no extension".into());
                     };
@@ -106,29 +131,31 @@ impl ResourceManager {
                                 .join(date_based_hex_id()),
                             // copy if file is outside of user wallpapers (ex: Desktop)
                             !path.starts_with(SEELEN_COMMON.user_wallpapers_path()),
-                        )?;
+                        )
+                        .await?;
                         self.wallpapers
                             .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
                     }
                     return Ok(());
                 }
 
-                let wallpaper = Wallpaper::load(path)?;
+                let wallpaper = Wallpaper::load(path).await?;
                 self.wallpapers
                     .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
             }
             ResourceKind::IconPack => {
                 let is_system = path == SEELEN_COMMON.system_icon_pack_path();
                 if is_system {
-                    let mut system_pack = self.system_icon_pack.lock();
-                    if system_pack.is_none() {
-                        let mut icon_pack = IconPack::load(path)?;
+                    // Check before awaiting — never hold MutexGuard across an await point
+                    let needs_load = self.system_icon_pack.lock().is_none();
+                    if needs_load {
+                        let mut icon_pack = IconPack::load(path).await?;
                         icon_pack.metadata.internal.bundled = true;
                         // we only read the system icon pack once, after that it is entirely runtime managed
-                        *system_pack = Some(icon_pack);
+                        *self.system_icon_pack.lock() = Some(icon_pack);
                     }
                 } else {
-                    let icon_pack = IconPack::load(path)?;
+                    let icon_pack = IconPack::load(path).await?;
                     self.icon_packs
                         .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
                 }
@@ -189,71 +216,68 @@ impl ResourceManager {
         }
     }
 
-    /// returns a list of dirs to be read by this kind
-    fn get_entries_for_type(kind: &ResourceKind) -> Result<Vec<std::fs::ReadDir>> {
-        let list = match kind {
-            ResourceKind::Theme => {
-                let user_path = SEELEN_COMMON.user_themes_path();
-                let bundled_path = SEELEN_COMMON.bundled_themes_path();
-                vec![
-                    std::fs::read_dir(bundled_path)?,
-                    std::fs::read_dir(user_path)?,
-                ]
-            }
-            ResourceKind::Widget => {
-                let user_path = SEELEN_COMMON.user_widgets_path();
-                let bundled_path = SEELEN_COMMON.bundled_widgets_path();
-                vec![
-                    std::fs::read_dir(bundled_path)?,
-                    std::fs::read_dir(user_path)?,
-                ]
-            }
-            ResourceKind::Plugin => {
-                let user_path = SEELEN_COMMON.user_plugins_path();
-                let bundled_path = SEELEN_COMMON.bundled_plugins_path();
-                vec![
-                    std::fs::read_dir(bundled_path)?,
-                    std::fs::read_dir(user_path)?,
-                ]
-            }
-            ResourceKind::Wallpaper => {
-                let user_path = SEELEN_COMMON.user_wallpapers_path();
-                vec![std::fs::read_dir(user_path)?]
-            }
-            ResourceKind::IconPack => {
-                let user_path = SEELEN_COMMON.user_icons_path();
-                vec![std::fs::read_dir(user_path)?]
-            }
-            ResourceKind::SoundPack => {
-                let user_path = SEELEN_COMMON.user_sounds_path();
-                vec![std::fs::read_dir(user_path)?]
-            }
+    /// returns a flat list of paths to be loaded for this kind
+    async fn get_entries_for_type(kind: &ResourceKind) -> Result<Vec<PathBuf>> {
+        let dirs: Vec<PathBuf> = match kind {
+            ResourceKind::Theme => vec![
+                SEELEN_COMMON.bundled_themes_path().to_path_buf(),
+                SEELEN_COMMON.user_themes_path().to_path_buf(),
+            ],
+            ResourceKind::Widget => vec![
+                SEELEN_COMMON.bundled_widgets_path().to_path_buf(),
+                SEELEN_COMMON.user_widgets_path().to_path_buf(),
+            ],
+            ResourceKind::Plugin => vec![
+                SEELEN_COMMON.bundled_plugins_path().to_path_buf(),
+                SEELEN_COMMON.user_plugins_path().to_path_buf(),
+            ],
+            ResourceKind::Wallpaper => vec![SEELEN_COMMON.user_wallpapers_path().to_path_buf()],
+            ResourceKind::IconPack => vec![SEELEN_COMMON.user_icons_path().to_path_buf()],
+            ResourceKind::SoundPack => vec![SEELEN_COMMON.user_sounds_path().to_path_buf()],
         };
-        Ok(list)
+
+        async fn read_dir_entries(dir: PathBuf) -> Result<Vec<PathBuf>> {
+            let mut rd = tokio::fs::read_dir(&dir).await?;
+            let mut entries = Vec::new();
+            while let Some(entry) = rd.next_entry().await? {
+                entries.push(entry.path());
+            }
+            Ok(entries)
+        }
+
+        // read all dirs concurrently (kinds with bundled + user have 2 independent dirs)
+        let results = futures::future::join_all(dirs.into_iter().map(read_dir_entries)).await;
+        let mut paths = Vec::new();
+        for result in results {
+            paths.extend(result?);
+        }
+        Ok(paths)
     }
 
-    pub fn load_all_of_type(&self, kind: ResourceKind) -> Result<()> {
+    pub async fn load_all_of_type(&self, kind: ResourceKind) -> Result<()> {
         log::trace!("Loading {kind:?}s");
 
-        let entries = Self::get_entries_for_type(&kind)?;
+        let paths = Self::get_entries_for_type(&kind).await?;
         self.unload_all(&kind);
 
-        let paths: Vec<_> = entries
+        // spawn each path as an independent task for true multi-thread parallelism
+        // (join_all drives all futures on the same thread; spawn distributes across the pool)
+        let handles = paths
             .into_iter()
-            .flatten()
-            .flatten()
-            .map(|e| e.path())
-            .collect();
-
-        paths.par_iter().for_each(|path| {
-            if let Err(e) = self.load(&kind, path) {
-                log::error!("Failed to load {kind:?}, error: {e}");
+            .map(|path| tokio::spawn(async move { RESOURCES.load(&kind, &path).await }));
+        for result in futures::future::join_all(handles).await {
+            match result {
+                Ok(Err(e)) => log::error!("Failed to load {kind:?}, error: {e}"),
+                Err(e) => log::error!("Task panicked while loading {kind:?}: {e}"),
+                Ok(Ok(())) => {}
             }
-        });
+        }
 
         if kind == ResourceKind::IconPack {
             // try load system icon pack
-            let _ = self.load(&kind, SEELEN_COMMON.system_icon_pack_path());
+            let _ = self
+                .load(&kind, SEELEN_COMMON.system_icon_pack_path())
+                .await;
             // creates the system icon pack if not loaded
             self.ensure_system_icon_pack()?;
         }

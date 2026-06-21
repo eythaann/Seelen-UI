@@ -37,7 +37,7 @@ pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
 
     pack.entries = entries;
     pack.downloaded = true;
-    pack.save()?;
+    pack.save().await?;
     Ok(())
 }
 

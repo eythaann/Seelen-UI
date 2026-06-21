@@ -104,7 +104,11 @@ pub fn state_request_wallpaper_addition() -> Result<()> {
                     let folder_to_store = SEELEN_COMMON
                         .user_wallpapers_path()
                         .join(date_based_hex_id());
-                    Wallpaper::create_from_file(&path, &folder_to_store, true).log_error();
+                    crate::get_tokio_handle().spawn(async move {
+                        Wallpaper::create_from_file(&path, &folder_to_store, true)
+                            .await
+                            .log_error();
+                    });
                 }
             }
         });

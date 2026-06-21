@@ -33,6 +33,7 @@ use cli::{handle_console_client, SelfPipe, ServicePipe};
 use error::Result;
 use exposed::register_invoke_handler;
 use logger::SeelenLogger;
+use session::application::SessionManager;
 use slu_ipc::messages::SvcAction;
 use tauri_plugins::register_plugins;
 use utils::{
@@ -111,7 +112,7 @@ async fn main() -> std::process::ExitCode {
                     log::error!("Error while setting up: {err:?}");
                     handle.exit(1);
                 }
-                CRONOMETER.record("setup");
+                CRONOMETER.record("Setup");
             });
             Ok(())
         })
@@ -127,15 +128,19 @@ async fn main() -> std::process::ExitCode {
 
 async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     print_initial_information();
-    CRONOMETER.record("print_initial_information");
     create_main_folders()?;
-    CRONOMETER.record("create_main_folders");
 
     SelfPipe::start_listener()?;
     if !ServicePipe::is_running() {
         ServicePipe::start_service().await?;
     }
     CRONOMETER.record("IPC");
+
+    // Pre-warm SessionManager early so its PasswordVault decryption (~1s) overlaps
+    // with the integrity checks instead of running during the startup critical path.
+    std::thread::spawn(|| {
+        let _ = SessionManager::instance();
+    });
 
     if let Err(err) = tokio::try_join!(
         utils::integrity::validate_webview_runtime(),
@@ -156,10 +161,10 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
         }
         return Err(format!("Integrity check failed: {err:?}").into());
     }
-    CRONOMETER.record("integrity");
+    CRONOMETER.record("Integrity check");
 
     SeelenUI::start().await?;
-    CRONOMETER.record("start");
+    CRONOMETER.record("Start");
 
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();

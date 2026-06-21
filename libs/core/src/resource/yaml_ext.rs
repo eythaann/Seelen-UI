@@ -1,6 +1,6 @@
 // the idea with this module is improve YAML with extensibility, via custom keywords
 
-use std::{collections::HashMap, fs::File, path::Path};
+use std::{collections::HashMap, path::Path};
 
 use serde_path_to_error;
 use serde_yaml::{Mapping, Value};
@@ -8,31 +8,41 @@ use serde_yaml::{Mapping, Value};
 use crate::error::Result;
 
 /// Will deserialize a YAML file and parse the custom extended syntax
-pub fn deserialize_extended_yaml<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T> {
-    let value = read_and_parse_yml(path)?;
+pub async fn deserialize_extended_yaml<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T> {
+    let value = read_and_parse_yml(path).await?;
     serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
 }
 
-fn read_and_parse_yml(path: &Path) -> Result<Value> {
-    let file = File::open(path)?;
-    file.lock_shared()?;
+// serde_yaml::from_str is CPU-bound and can take several ms even for small files.
+// Offloading to the blocking thread pool prevents it from stalling tokio's async
+// worker threads when many resources are loaded concurrently at startup.
+async fn parse_yaml_content(content: Vec<u8>) -> Result<Value> {
+    tokio::task::spawn_blocking(move || {
+        serde_yaml::from_slice::<Value>(&content).map_err(|e| e.to_string())
+    })
+    .await
+    .map_err(|e| e.to_string())?
+    .map_err(Into::into)
+}
 
-    let base = path.parent().ok_or("No parent directory")?;
-    let value: Value = serde_yaml::from_reader(file)?;
-    let value = resolve_extensions(base, value)?;
+async fn read_and_parse_yml(path: &Path) -> Result<Value> {
+    let base = path.parent().ok_or("No parent directory")?.to_path_buf();
+    let content = tokio::fs::read(path).await?;
+    let value = parse_yaml_content(content).await?;
+    let value = resolve_extensions(&base, value).await?;
     let vars = collect_vars(value.as_mapping(), value.as_mapping(), true);
     Ok(resolve_vars_yaml(value, &vars))
 }
 
 /// Like [`deserialize_extended_yaml`] but only resolves `vars.*` placeholders, leaving
 /// `${self.*}` literals intact so they can be resolved at runtime with the published id.
-pub fn deserialize_extended_yaml_no_vars<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T> {
-    let file = File::open(path)?;
-    file.lock_shared()?;
-
-    let base = path.parent().ok_or("No parent directory")?;
-    let value: Value = serde_yaml::from_reader(file)?;
-    let value = resolve_extensions(base, value)?;
+pub async fn deserialize_extended_yaml_no_vars<T: serde::de::DeserializeOwned>(
+    path: &Path,
+) -> Result<T> {
+    let base = path.parent().ok_or("No parent directory")?.to_path_buf();
+    let content = tokio::fs::read(path).await?;
+    let value = parse_yaml_content(content).await?;
+    let value = resolve_extensions(&base, value).await?;
     let vars = collect_vars(value.as_mapping(), value.as_mapping(), false);
 
     serde_path_to_error::deserialize(resolve_vars_yaml(value, &vars))
@@ -130,23 +140,26 @@ pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value 
     }
 }
 
-fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
+async fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
     match value {
         Value::Mapping(map) => {
+            let futs = map.into_iter().map(|(key, val)| async move {
+                let resolved = Box::pin(resolve_extensions(base, val)).await?;
+                Ok::<_, crate::error::SeelenLibError>((key, resolved))
+            });
+            let pairs: Vec<_> = futures::future::try_join_all(futs).await?;
             let mut new_map = Mapping::new();
-            for (key, value) in map {
-                let value = resolve_extensions(base, value)?;
-                new_map.insert(key, value);
+            for (k, v) in pairs {
+                new_map.insert(k, v);
             }
             Ok(Value::Mapping(new_map))
         }
         Value::Sequence(seq) => {
-            let mut new_seq = Vec::new();
-            for value in seq {
-                let value = resolve_extensions(base, value)?;
-                new_seq.push(value);
-            }
-            Ok(Value::Sequence(new_seq))
+            let futs = seq
+                .into_iter()
+                .map(|val| Box::pin(resolve_extensions(base, val)));
+            let resolved = futures::future::try_join_all(futs).await?;
+            Ok(Value::Sequence(resolved))
         }
         Value::Tagged(tag) => {
             if tag.tag == "!include" {
@@ -156,9 +169,14 @@ fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
                         .extension()
                         .is_some_and(|ext| ext == "scss" || ext == "sass")
                     {
-                        grass::from_path(&to_include, &grass::Options::default())?
+                        // SCSS compilation is CPU-bound sync — offload to blocking pool
+                        tokio::task::spawn_blocking(move || {
+                            grass::from_path(&to_include, &grass::Options::default())
+                        })
+                        .await
+                        .map_err(|e| crate::error::SeelenLibError::from(e.to_string()))??
                     } else {
-                        std::fs::read_to_string(&to_include)?
+                        tokio::fs::read_to_string(&to_include).await?
                     };
                     return Ok(Value::String(text));
                 }
@@ -166,7 +184,7 @@ fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
 
             if tag.tag == "!extend" {
                 if let Value::String(relative_path) = tag.value {
-                    let value = read_and_parse_yml(&base.join(relative_path))?;
+                    let value = Box::pin(read_and_parse_yml(&base.join(relative_path))).await?;
                     return Ok(value);
                 }
             }

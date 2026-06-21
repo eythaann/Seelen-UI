@@ -26,8 +26,11 @@ async function main() {
   console.info(`Build mode: ${args.isProd ? "production" : "development"}`);
   console.info(`Serve: ${args.serve ? "enabled" : "disabled"}\n`);
 
-  // Step 1 & 2: Extract icons and clean dist directory in parallel
-  await Promise.all([extractIcons(), Promise.resolve(cleanDist())]);
+  // Step 1 & 2: Extract icons; clean dist only on production builds
+  if (args.isProd) {
+    cleanDist();
+  }
+  await extractIcons();
 
   // Step 3: Discover entry points
   const entryPoints = discoverEntryPoints();

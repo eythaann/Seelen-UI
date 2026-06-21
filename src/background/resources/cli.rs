@@ -7,7 +7,7 @@ pub fn process(cmd: ResourceManagerCli) -> Result<()> {
     match cmd.subcommand {
         ResourceSubCommand::Load { kind, path } => {
             let kind = kind.into();
-            RESOURCES.load(&kind, &path)?;
+            crate::get_tokio_handle().block_on(RESOURCES.load(&kind, &path))?;
             let _ = RESOURCES.manual.insert(path);
             RESOURCES.emit_kind_changed(&kind)?;
         }

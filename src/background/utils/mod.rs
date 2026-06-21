@@ -209,6 +209,6 @@ impl Cronometer {
     }
 
     pub fn record(&self, name: &str) {
-        log::debug!("{} took: {:?}", name, self.elapsed());
+        log::debug!("{} at: {:?}", name, self.elapsed());
     }
 }

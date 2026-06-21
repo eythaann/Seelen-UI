@@ -82,17 +82,20 @@ pub fn wallpaper_prev() {
 }
 
 #[tauri::command(async)]
-pub fn wallpaper_save_thumbnail(wallpaper_id: WallpaperId, thumbnail_bytes: Vec<u8>) -> Result<()> {
+pub async fn wallpaper_save_thumbnail(
+    wallpaper_id: WallpaperId,
+    thumbnail_bytes: Vec<u8>,
+) -> Result<()> {
     let Some(wallpaper) = RESOURCES.wallpapers.get(&wallpaper_id) else {
         return Err("Invalid wallpaper id".into());
     };
 
     let thumbnail_filename = format!("thumbnail_{}.jpg", date_based_hex_id());
     let thumbnail_path = wallpaper.metadata.directory()?.join(&thumbnail_filename);
-    std::fs::write(&thumbnail_path, &thumbnail_bytes)?;
+    tokio::fs::write(&thumbnail_path, &thumbnail_bytes).await?;
 
     let mut wallpaper_mut = Wallpaper::clone(&wallpaper);
     wallpaper_mut.thumbnail_filename = Some(thumbnail_filename);
-    wallpaper_mut.save()?;
+    wallpaper_mut.save().await?;
     Ok(())
 }
