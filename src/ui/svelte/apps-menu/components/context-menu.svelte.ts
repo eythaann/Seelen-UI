@@ -36,7 +36,10 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(
       const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
       invoke(SeelenCommand.Run, { program, args: null, workingDir: null, elevated: true });
     } else if (key === "edit_icon") {
-      const entry = iconPackManager.value.getIconEntry({ path: item.path, umid: item.umid ?? null });
+      const entry = iconPackManager.value.getIconEntry({
+        path: item.path,
+        umid: item.umid ?? null,
+      });
       invoke(SeelenCommand.TriggerWidget, {
         payload: {
           id: "@seelen/icon-editor" as WidgetId,
@@ -80,54 +83,50 @@ export function getFolderContextMenu(
 
 export function getItemContextMenu(item: StartMenuItem, t: (key: string) => string): ContextMenu {
   const isPinned = globalState.isPinned(item);
+  const umid = item.umid;
+  const path = item.path.toLowerCase();
+
+  const items: ContextMenu["items"] = [
+    {
+      type: "Item",
+      key: "pin",
+      label: isPinned ? t("unpin") : t("pin"),
+      icon: isPinned ? "TbPinnedOff" : "TbPin",
+      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+    },
+  ];
+
+  if (path) {
+    items.push({
+      type: "Item" as const,
+      key: "open_file_location",
+      label: t("open_file_location"),
+      icon: "MdOutlineMyLocation",
+      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+    });
+  }
+
+  if (umid || path.endsWith(".exe") || path.endsWith(".lnk")) {
+    items.push({
+      type: "Item" as const,
+      key: "run_as_admin",
+      label: t("run_as_admin"),
+      icon: "MdOutlineAdminPanelSettings",
+      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+    });
+  }
+
+  items.push({
+    type: "Item",
+    key: "edit_icon",
+    label: t("edit_icon"),
+    icon: "RiEditBoxLine",
+    callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+  });
 
   return {
     identifier: CONTEXT_MENU_ID,
     meta: { item },
-    items: [
-      {
-        type: "Item",
-        key: "pin",
-        label: isPinned ? t("unpin") : t("pin"),
-        icon: isPinned ? "TbPinnedOff" : "TbPin",
-        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-      },
-      ...(item.path
-        ? [
-          {
-            type: "Item" as const,
-            key: "open_file_location",
-            label: t("open_file_location"),
-            icon: "MdOutlineMyLocation",
-            callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-          },
-        ]
-        : []),
-      {
-        type: "Item",
-        key: "pin_to_dock",
-        label: t("pin_to_dock"),
-        icon: "RiPushpinLine",
-        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-      },
-      ...(item.umid || item.path.toLowerCase().endsWith(".lnk")
-        ? [
-          {
-            type: "Item" as const,
-            key: "run_as_admin",
-            label: t("run_as_admin"),
-            icon: "MdOutlineAdminPanelSettings",
-            callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-          },
-        ]
-        : []),
-      {
-        type: "Item",
-        key: "edit_icon",
-        label: t("edit_icon"),
-        icon: "RiEditBoxLine",
-        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-      },
-    ],
+    items,
   };
 }
