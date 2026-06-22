@@ -3,7 +3,7 @@
   import { state } from "./state.svelte";
 
   $effect(() => {
-    Widget.getCurrent().ready({ show: true });
+    Widget.getCurrent().ready();
   });
 
   const lines = $derived((state.text ?? "").split("\n"));

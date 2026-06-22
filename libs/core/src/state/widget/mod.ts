@@ -298,7 +298,6 @@ export class Widget {
 
     if (show && !(await this.window.isVisible())) {
       await this.show();
-      // await this.focus();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists

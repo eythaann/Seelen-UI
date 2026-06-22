@@ -20,6 +20,16 @@ Widget.self.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) =>
   showing = true;
 });
 
+$effect.root(() => {
+  $effect(() => {
+    if (showing) {
+      Widget.self.show();
+    } else {
+      Widget.self.hide();
+    }
+  });
+});
+
 class State {
   get text() {
     return text;

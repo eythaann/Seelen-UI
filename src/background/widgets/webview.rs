@@ -70,12 +70,11 @@ impl WidgetWebview {
                 .skip_taskbar(true)
                 .minimizable(false)
                 .maximizable(false)
-                .closable(false)
-                .focusable(false);
+                .closable(false);
         }
 
         if matches!(widget.preset, WidgetPreset::Desktop | WidgetPreset::Overlay) {
-            builder = builder.focusable(false);
+            builder = builder.focusable(false).focused(false);
         }
 
         match widget.preset {

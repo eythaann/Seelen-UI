@@ -5,6 +5,8 @@
 ### fix
 
 - slu client failing without printing real error.
+- tooltips being focused on show.
+- not closing tooltips on hide.
 
 ## [2.7.2]
 
