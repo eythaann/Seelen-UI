@@ -21,11 +21,16 @@ impl IpcResponse {
     pub fn ok(self) -> Result<()> {
         match self {
             IpcResponse::Success => Ok(()),
-            IpcResponse::Err(err) => Err(Error::IpcResponseError(err)),
+            IpcResponse::Err(err) => Err(Error::IpcResponse(err)),
         }
     }
 
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
+        if bytes.is_empty() {
+            return Err(Error::IpcResponse(
+                "No response received (server may have crashed or disconnected)".to_string(),
+            ));
+        }
         Ok(serde_json::from_slice(bytes)?)
     }
 

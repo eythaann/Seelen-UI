@@ -65,7 +65,7 @@ pub async fn handle_console_client() -> Result<()> {
     Ok(())
 }
 
-pub fn process_app_command(cmd: AppCommand) -> Result<()> {
+pub async fn process_app_command(cmd: AppCommand) -> Result<()> {
     match cmd {
         AppCommand::Settings => {
             show_settings()?;
@@ -86,7 +86,7 @@ pub fn process_app_command(cmd: AppCommand) -> Result<()> {
             widget_cli::run(command)?;
         }
         AppCommand::Resource(command) => {
-            resources_cli::process(command)?;
+            resources_cli::process(command).await?;
         }
         AppCommand::Popup(command) => {
             popups_cli::process(command)?;

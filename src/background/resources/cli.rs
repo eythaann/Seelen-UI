@@ -3,11 +3,11 @@ use slu_ipc::commands::ResourceSubCommand;
 
 use crate::{error::Result, resources::RESOURCES};
 
-pub fn process(cmd: ResourceManagerCli) -> Result<()> {
+pub async fn process(cmd: ResourceManagerCli) -> Result<()> {
     match cmd.subcommand {
         ResourceSubCommand::Load { kind, path } => {
             let kind = kind.into();
-            crate::get_tokio_handle().block_on(RESOURCES.load(&kind, &path))?;
+            RESOURCES.load(&kind, &path).await?;
             let _ = RESOURCES.manual.insert(path);
             RESOURCES.emit_kind_changed(&kind)?;
         }

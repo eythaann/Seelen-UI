@@ -4,13 +4,13 @@ use thiserror::Error;
 pub enum Error {
     #[error("IO Error: {0}")]
     Io(#[from] std::io::Error),
-    #[error("Service Error: {0}")]
-    IpcResponseError(String),
+    #[error("IPC Response Error: {0}")]
+    IpcResponse(String),
     #[error("Serde Json Error: {0}")]
     SerdeJson(#[from] serde_json::Error),
     #[error("IPC Timeout: {0}")]
     Timeout(String),
-    #[error("Windows: {0}")]
+    #[error("Windows Error: {0}")]
     Windows(#[from] windows::core::Error),
 }
 

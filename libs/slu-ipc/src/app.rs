@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{future::Future, sync::Arc};
 
 use interprocess::os::windows::named_pipe::{
     DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
@@ -32,9 +32,10 @@ impl AppIpc {
         format!(r"\\.\pipe\seelen-ui-{}", session_id)
     }
 
-    pub fn start<F>(cb: F) -> Result<()>
+    pub fn start<R, F>(cb: F) -> Result<()>
     where
-        F: Fn(AppMessage) -> IpcResponse + Send + Sync + 'static,
+        R: Future<Output = IpcResponse> + Send + Sync,
+        F: Fn(AppMessage) -> R + Send + Sync + 'static,
     {
         let sd = create_security_descriptor()?;
 
@@ -63,9 +64,13 @@ impl AppIpc {
         Ok(())
     }
 
-    async fn process_connection<F>(stream: &AsyncDuplexPipeStream<Bytes>, cb: Arc<F>) -> Result<()>
+    async fn process_connection<R, F>(
+        stream: &AsyncDuplexPipeStream<Bytes>,
+        cb: Arc<F>,
+    ) -> Result<()>
     where
-        F: Fn(AppMessage) -> IpcResponse,
+        R: Future<Output = IpcResponse> + Send + Sync,
+        F: Fn(AppMessage) -> R + Send + Sync + 'static,
     {
         let data = read_from_ipc_stream(stream).await?;
         if data.is_empty() {
@@ -74,7 +79,7 @@ impl AppIpc {
 
         let message = AppMessage::from_bytes(&data)?;
         log::trace!("IPC command received: {message:?}");
-        Self::response_to_client(stream, cb(message)).await?;
+        Self::response_to_client(stream, cb(message).await).await?;
         Ok(())
     }
 

@@ -33,7 +33,7 @@ use crate::{
 
 pub const URI: &str = "seelen-ui.uri:";
 
-pub fn process_uri(uri: &str) -> Result<()> {
+pub async fn process_uri(uri: &str) -> Result<()> {
     log::trace!("Loading URI: {uri}");
 
     if !uri.starts_with(URI) {
@@ -42,8 +42,9 @@ pub fn process_uri(uri: &str) -> Result<()> {
             return Err("Invalid file to load".into());
         }
 
-        let file = crate::get_tokio_handle().block_on(SluResourceFile::load(&path))?;
-        crate::get_tokio_handle().block_on(store_file_on_respective_user_folder(&file))?;
+        let file = SluResourceFile::load(&path).await?;
+        store_file_on_respective_user_folder(&file).await?;
+
         let dialog_id = Uuid::new_v4();
         trigger_dialog_backend(Dialog {
             identifier: dialog_id,
@@ -100,10 +101,7 @@ pub fn process_uri(uri: &str) -> Result<()> {
     };
 
     let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");
-    get_tokio_handle().spawn(async move {
-        download_resource(&url).await.log_error();
-    });
-
+    download_resource(&url).await?;
     Ok(())
 }
 

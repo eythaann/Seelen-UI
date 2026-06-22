@@ -13,7 +13,7 @@ use crate::{
 
 pub struct SelfPipe;
 impl SelfPipe {
-    fn handle_raw_cli_message(argv: Vec<String>) -> Result<()> {
+    async fn handle_raw_cli_message(argv: Vec<String>) -> Result<()> {
         if argv.is_empty() {
             return Ok(());
         }
@@ -33,7 +33,7 @@ impl SelfPipe {
             };
 
         if let Ok(cli) = AppCli::try_parse_from(normalized) {
-            if let Err(err) = process_app_command(cli.command) {
+            if let Err(err) = process_app_command(cli.command).await {
                 log::error!("Failed to process command: {err}");
                 return Err(err);
             }
@@ -41,22 +41,22 @@ impl SelfPipe {
         Ok(())
     }
 
-    fn handle_message(message: AppMessage) -> IpcResponse {
+    async fn handle_message(message: AppMessage) -> IpcResponse {
         match message {
             AppMessage::Cli(argv) => {
-                if let Err(err) = Self::handle_raw_cli_message(argv) {
+                if let Err(err) = Self::handle_raw_cli_message(argv).await {
                     return IpcResponse::Err(err.to_string());
                 }
             }
             AppMessage::Command(cmd) => {
-                if let Err(err) = process_app_command(cmd) {
+                if let Err(err) = process_app_command(cmd).await {
                     log::error!("Failed to process command: {err}");
                     return IpcResponse::Err(err.to_string());
                 }
             }
             AppMessage::OpenUri(uri) => {
-                std::thread::spawn(move || {
-                    process_uri(&uri).log_error();
+                tokio::spawn(async move {
+                    process_uri(&uri).await.log_error();
                 });
             }
             AppMessage::TrayChanged(event) => {

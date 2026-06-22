@@ -20,7 +20,7 @@ async fn main() {
     }
 
     if let Err(err) = run(cli).await {
-        eprintln!("Error: {err}");
+        eprintln!("{err}");
         std::process::exit(1);
     }
 }
@@ -62,8 +62,6 @@ async fn send_to_main_instance(cli: AppCli) -> Result<()> {
         println!("Sending {args:#?}");
     }
 
-    AppIpc::send(AppMessage::Cli(args))
-        .await
-        .map_err(|_| "Can't establish connection, ensure Seelen UI is running.")?;
+    AppIpc::send(AppMessage::Cli(args)).await?;
     Ok(())
 }

@@ -2,6 +2,10 @@
 
 ## [2.7.3-dev]
 
+### fix
+
+- slu client failing without printing real error.
+
 ## [2.7.2]
 
 ### features
