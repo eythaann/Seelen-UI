@@ -67,7 +67,7 @@ export async function buildReact(
   if (isWatchMode) {
     const ctx = await esbuild.context(config);
     await ctx.rebuild();
-    // ctx.watch();
+    ctx.watch();
   } else {
     await esbuild.build(config);
   }

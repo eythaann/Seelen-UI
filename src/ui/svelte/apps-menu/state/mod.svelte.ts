@@ -1,8 +1,13 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { StartMenuItem, StartMenuLayoutItem } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
 import { StartDisplayMode, StartView } from "../constants";
 import { foldersAsStartMenuItems } from "./knownFolders.svelte";
+
+import { locale } from "../i18n/index.ts";
+
+let settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
 subscribe(SeelenEvent.UserChanged, user.setByPayload);
@@ -13,7 +18,13 @@ subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 const startMenuItems = lazyRune(() => invoke(SeelenCommand.GetStartMenuItems));
 subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
 
-await Promise.all([user.init(), monitors.init(), startMenuItems.init()]);
+await Promise.all([settings.init(), user.init(), monitors.init(), startMenuItems.init()]);
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
+});
 
 // Folder and pinned items types
 export interface FavFolderItem {

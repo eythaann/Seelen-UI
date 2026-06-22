@@ -40,7 +40,6 @@ async function placeCenteredToMonitor(targetMonitor: PhysicalMonitor): Promise<v
     y = Math.round(monitorCenterY - height / 2);
   }
 
-  await widget.window.setShadow(globalState.displayMode === StartDisplayMode.Normal);
   await widget.setPosition({
     left: x,
     top: y,

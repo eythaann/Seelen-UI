@@ -7,11 +7,6 @@ loader: Internal
 preset: Overlay
 hidden: true
 # lazy: true
-settings:
-  - type: switch
-    key: acrylic
-    label: !extend i18n/settings/acrylic.yml
-    defaultValue: false
 shortcuts:
   - id: apps-menu-toggle
     command: ["widget", "trigger", "${self.id}"]
