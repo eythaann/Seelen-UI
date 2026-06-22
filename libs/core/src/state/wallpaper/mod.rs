@@ -26,6 +26,8 @@ pub struct Wallpaper {
     #[serde(alias = "thumbnail_filename")]
     pub thumbnail_filename: Option<String>,
 
+    /// Only used if the wallpaper type is `Layered`.
+    pub html: Option<String>,
     /// Only used if the wallpaper type is `Layered` or `MediaPlayer`.\
     /// Custom css that will be applied only on this wallpaper.
     pub css: Option<String>,

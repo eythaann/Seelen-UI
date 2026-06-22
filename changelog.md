@@ -2,6 +2,10 @@
 
 ## [2.7.2-dev]
 
+### features
+
+- html wallpapers.
+
 ### enhancements
 
 - twm animations.

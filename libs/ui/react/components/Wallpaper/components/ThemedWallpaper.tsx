@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { useEffect } from "preact/hooks";
 import { BackgroundByLayersV2 } from "libs/ui/react/components/BackgroundByLayers/infra.tsx";
@@ -23,10 +24,14 @@ export function ThemedWallpaper({
     );
   }
 
+  const safeHtml = DOMPurify.sanitize(definition.html || "");
+  const safeCss = (definition.css || "").replace(/<\/style/gi, "<\\/style");
+
   return (
     <div id={definition.id} className={cs.wallpaper} style={getWallpaperStyles(config)}>
-      <style>{`@scope { ${definition.css || ""} }`}</style>
+      <style>{`@scope { ${safeCss} }`}</style>
       <BackgroundByLayersV2 />
+      <div dangerouslySetInnerHTML={{ __html: safeHtml }} />
     </div>
   );
 }

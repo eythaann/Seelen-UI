@@ -37,6 +37,7 @@
     "@tauri-apps/api": "^2.11.0",
     "@tauri-apps/cli": "^2.11.2",
     "@types/object-inspect": "^1.13.0",
+    "dompurify": "^3.4.11",
     "esbuild-svelte": "^0.9.3",
     "flexsearch": "^0.8.212",
     "object-inspect": "^1.13.4",

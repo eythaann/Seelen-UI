@@ -1,3 +1,5 @@
+<script lang="ts"></script>
+
 <div class="bg-layers">
   {#each Array.from({ length: 10 }, (_, i) => i) as index}
     <div class={`bg-layer bg-layer-${index + 1}`}></div>
