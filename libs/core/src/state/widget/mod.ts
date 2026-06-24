@@ -261,7 +261,9 @@ export class Widget {
         break;
     }
 
-    await startThemingTool();
+    if (options.useThemes ?? true) {
+      await startThemingTool();
+    }
     await initMonitorsState();
 
     if (options.disableCssAnimations ?? true) {

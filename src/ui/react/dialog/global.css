@@ -21,7 +21,7 @@ body,
   grid-template-rows: min-content 1fr min-content;
 
   background-color: var(--slu-std-bg-color);
-  color: var(--color-gray-900);
+  color: var(--slu-std-fg-color);
   border-radius: 10px;
 
   box-shadow: var(--shadow-m);

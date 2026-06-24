@@ -1,8 +1,4 @@
 :root {
-  /* font variables */
-  --placeholder-font-color: var(--color-gray-400);
-  --error-font-color: var(--color-red-800);
-
   /* config variables */
   --config-border-radius: 8px;
 

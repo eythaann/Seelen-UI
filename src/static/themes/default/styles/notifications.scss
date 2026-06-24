@@ -37,7 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-gray-500);
+    color: var(--slu-std-fg-muted-color);
     font-weight: 600;
     font-size: 0.8rem;
     height: 200px;
@@ -68,7 +68,7 @@
       align-items: center;
       gap: 8px;
       font-size: 0.8rem;
-      color: var(--color-gray-800);
+      color: var(--slu-std-fg-secondary-color);
       font-weight: 600;
 
       .notification-icon {

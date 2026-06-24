@@ -13,6 +13,11 @@
 @import "./buttons.scss";
 
 :root {
+  --slu-std-fg-color: var(--color-gray-900);
+  --slu-std-fg-secondary-color: var(--color-gray-700);
+  --slu-std-fg-muted-color: var(--color-gray-600);
+  --slu-std-fg-disabled-color: var(--color-gray-400);
+
   --slu-std-bg-dark-color: light-dark(var(--color-gray-75), var(--color-gray-25));
   --slu-std-bg-color: var(--color-gray-50);
   --slu-std-bg-light-color: light-dark(var(--color-gray-25), var(--color-gray-75));
@@ -87,7 +92,6 @@ body:has(> div > .slu-std-popover) {
   margin: 10px; // this margin will allow the box-shadow to be visible
 
   background-color: var(--slu-std-bg-color);
-  color: var(--color-gray-900);
   border-radius: 10px;
 
   box-shadow: var(--shadow-m);

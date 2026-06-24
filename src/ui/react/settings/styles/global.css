@@ -9,6 +9,27 @@ body {
   overflow: hidden;
 }
 
+/* Todo remove this after allowing the use of themes feature on settings */
+* {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    border-radius: 8px;
+
+    &:active {
+      background-color: var(--color-gray-500);
+    }
+  }
+}
+
 hr {
   margin: var(--spacing-2xs) 0;
 }

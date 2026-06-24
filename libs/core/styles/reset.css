@@ -124,6 +124,6 @@
     border: 1px solid;
     margin: 0.5em 0;
     opacity: 0.8;
-    color: var(--color-gray-100, #e5e5e5);
+    color: inherit;
   }
 }

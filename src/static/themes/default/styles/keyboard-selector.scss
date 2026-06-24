@@ -41,7 +41,7 @@
         .layout-keyboard {
           font-size: 0.8rem;
           font-weight: 600;
-          color: var(--color-gray-600);
+          color: var(--slu-std-fg-secondary-color);
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -54,7 +54,7 @@
     button {
       font-size: 0.8rem;
       font-weight: 600;
-      color: var(--color-gray-600);
+      color: var(--slu-std-fg-secondary-color);
     }
   }
 }

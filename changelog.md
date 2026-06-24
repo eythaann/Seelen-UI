@@ -2,6 +2,10 @@
 
 ## [2.7.4-dev]
 
+### enhancements
+
+- default theme inconsistencies.
+
 ## [2.7.3]
 
 ### fix

@@ -1,10 +1,14 @@
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import { signal } from "@preact/signals";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, UIColors } from "@seelen-ui/lib";
+import { effect, signal } from "@preact/signals";
 
 export const uiColors = lazySignal(() => invoke(SeelenCommand.SystemGetColors));
 subscribe(SeelenEvent.ColorsChanged, uiColors.setByPayload);
 await uiColors.init();
+
+effect(() => {
+  new UIColors(uiColors.value).setAsCssVariables();
+});
 
 export const monitors = lazySignal(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);

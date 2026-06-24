@@ -73,7 +73,7 @@
   line-height: var(--config-item-size);
   vertical-align: middle;
   font-style: italic;
-  color: var(--color-gray-400);
+  color: oklch(from var(--slu-std-fg-color) l c h / 0.5);
   margin: 0 calc(var(--config-padding) * 2);
 }
 
@@ -97,8 +97,8 @@
     top: 0;
     right: 0;
     transform: translate(25%, -25%);
-    background-color: var(--system-accent-color);
-    color: #efefef;
+    background-color: var(--slu-std-ui-color);
+    color: var(--color-gray-100);
     height: 16px;
     min-width: 16px;
     font-size: 10px;

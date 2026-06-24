@@ -23,15 +23,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1000;
 
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
     padding: 12px 20px;
+    border-radius: 10px;
+
+    backdrop-filter: blur(10px);
+    background-color: oklch(from var(--slu-std-bg-light-color) l c h / 0.5);
+    color: var(--slu-std-fg-color);
+
     font-size: 14px;
     font-weight: 500;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    z-index: 1000;
   }
 }
 

@@ -48,7 +48,6 @@ select[data-skin="default"] {
 
   background-color: var(--slu-std-bg-light-color);
   border: 1px solid var(--slu-std-bg-dark-color);
-  color: var(--color-gray-900);
   border-radius: 6px;
 
   font-size: inherit;
@@ -63,13 +62,14 @@ select[data-skin="default"] {
 
   &:read-only {
     background-color: var(--slu-std-bg-color);
+    color: var(--slu-std-fg-muted-color);
     cursor: default;
   }
 
   &:disabled {
     opacity: 0.8;
     background-color: var(--slu-std-bg-color);
-    color: var(--color-gray-600);
+    color: var(--slu-std-fg-disabled-color);
     cursor: default;
   }
 }
@@ -219,7 +219,7 @@ select[data-skin="transparent"] {
   appearance: base-select;
 
   &::picker-icon {
-    color: var(--color-gray-400);
+    color: var(--slu-std-fg-muted-color);
     width: min-content;
     height: min-content;
     transition: transform 0.4s ease;

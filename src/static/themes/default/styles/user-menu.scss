@@ -9,7 +9,7 @@
     padding: 0 8px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--color-gray-600);
+    color: var(--slu-std-fg-secondary-color);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -41,7 +41,7 @@
         align-items: center;
         justify-content: center;
         font-size: 2rem;
-        color: var(--color-gray-600);
+        color: var(--slu-std-fg-secondary-color);
       }
 
       .user-profile-lock-button,
@@ -58,7 +58,7 @@
         justify-content: center;
         cursor: pointer;
         font-size: 0.9rem;
-        color: var(--color-gray-700);
+        color: var(--slu-std-fg-secondary-color);
 
         &:hover {
           background-color: var(--slu-std-bg-dark-color);
@@ -98,7 +98,7 @@
 
       .user-profile-email {
         font-size: 0.85rem;
-        color: var(--color-gray-600);
+        color: var(--slu-std-fg-secondary-color);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -128,7 +128,7 @@
 
       .slu-icon {
         font-size: 1.1rem;
-        color: var(--color-gray-600);
+        color: var(--slu-std-fg-secondary-color);
       }
 
       .user-seelen-option-item-title {
@@ -212,7 +212,7 @@
 
       .user-file-date {
         font-size: 0.75rem;
-        color: var(--color-gray-500);
+        color: var(--slu-std-fg-muted-color);
         flex-shrink: 0;
       }
     }
@@ -239,7 +239,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  color: var(--color-gray-500);
+  color: var(--slu-std-fg-muted-color);
   font-style: italic;
   font-size: 0.9rem;
 }

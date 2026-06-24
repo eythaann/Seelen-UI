@@ -14,6 +14,9 @@ if (!window.__SLU_WIDGET) {
   throw new Error(`Widget definition not found for ${currentWidgetId}`);
 }
 
+// set document id
+document.documentElement.id = currentWidgetId;
+
 // hook local storage, to avoid collition of keys
 hookLocalStorage(currentWidgetId);
 

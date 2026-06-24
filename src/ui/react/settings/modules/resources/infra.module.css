@@ -81,8 +81,8 @@
       letter-spacing: 0.05em;
       padding: 2px 5px;
       border-radius: 9999px;
-      background-color: var(--color-gray-200);
-      color: var(--color-gray-500);
+      background-color: var(--slu-std-bg-dark-color);
+      color: var(--slu-std-fg-muted-color);
     }
   }
 }
@@ -226,8 +226,8 @@
     align-items: center;
     padding: var(--spacing-2xs);
     border-radius: 6px;
-    background-color: var(--color-gray-100);
-    color: var(--color-gray-600);
+    background-color: var(--slu-std-bg-light-color);
+    color: var(--slu-std-fg-muted-color);
     font-size: 0.7rem;
     line-height: 1em;
 

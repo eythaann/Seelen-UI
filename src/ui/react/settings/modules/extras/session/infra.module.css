@@ -31,7 +31,7 @@
   padding: var(--spacing-xs) var(--spacing-s);
   width: 100%;
   font-size: 0.85rem;
-  color: var(--error-font-color);
+  color: var(--color-red-800);
   background-color: color-mix(in srgb, var(--color-red-800) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-red-800) 20%, transparent);
   border-radius: var(--config-border-radius);
@@ -51,8 +51,9 @@
   flex-direction: column;
   gap: var(--spacing-m);
   padding: var(--spacing-m) var(--spacing-l);
-  background-color: var(--color-gray-50);
-  border: 1px solid var(--color-gray-200);
+  background-color: var(--slu-std-bg-color);
+  color: var(--slu-std-fg-color);
+  border: 1px solid var(--slu-std-bg-dark-color);
   border-radius: var(--config-border-radius);
 }
 
@@ -83,7 +84,7 @@
   .username,
   .email {
     font-size: 0.8rem;
-    color: var(--color-gray-400);
+    color: var(--slu-std-fg-secondary-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

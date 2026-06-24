@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
-    color: var(--color-gray-500);
+    color: var(--slu-std-fg-muted-color);
     font-style: italic;
     font-size: 0.95rem;
     text-align: center;
@@ -50,14 +50,14 @@
       padding-left: 8px;
       margin-bottom: 8px;
       font-weight: 600;
-      color: var(--color-gray-600);
+      color: var(--slu-std-fg-secondary-color);
       text-transform: uppercase;
       letter-spacing: 0.5px;
 
       .bluetooth-scanning {
         display: flex;
         align-items: center;
-        color: var(--color-gray-500);
+        color: var(--slu-std-fg-muted-color);
 
         .slu-icon {
           animation: rotateToTheLeft 1s linear infinite;
@@ -115,7 +115,7 @@
 
           .bt-device-pairing-message {
             font-size: 0.85rem;
-            color: var(--color-gray-600);
+            color: var(--slu-std-fg-secondary-color);
             font-style: italic;
           }
 
@@ -159,7 +159,7 @@
         align-items: center;
         justify-content: center;
         height: 100px;
-        color: var(--color-gray-500);
+        color: var(--slu-std-fg-muted-color);
         font-style: italic;
         font-size: 0.9rem;
       }

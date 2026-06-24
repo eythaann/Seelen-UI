@@ -79,6 +79,16 @@ export interface InitWidgetOptions {
    * @default true
    */
   disableCssAnimations?: boolean;
+
+  /**
+   * Applies the active themes and system UI colors to the widget document.
+   *
+   * Set to `false` for widgets that manage their own styling and don't need
+   * the global theme system (e.g. internal tooling, plain HTML overlays).
+   *
+   * @default true
+   */
+  useThemes?: boolean;
 }
 
 export interface ReadyWidgetOptions {

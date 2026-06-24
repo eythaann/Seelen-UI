@@ -27,7 +27,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: capitalize;
-  color: var(--color-gray-700);
+  color: var(--slu-std-fg-secondary-color);
 }
 
 .swatches {
@@ -53,6 +53,6 @@
 
 .swatchLabel {
   font-size: 0.6rem;
-  color: var(--color-gray-600);
+  color: var(--slu-std-fg-secondary-color);
   line-height: 1;
 }

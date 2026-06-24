@@ -23,7 +23,7 @@ await Promise.all([
 ]);
 await window.center();
 
-await Widget.self.init();
+await Widget.self.init({ useThemes: false });
 await Widget.self.show();
 
 Widget.self.onTrigger((payload) => {
