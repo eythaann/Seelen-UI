@@ -30,5 +30,5 @@
     <Icon iconName={item.icon as any} />
   {/if}
   <span class="menu-item-label">{item.label}</span>
-  <Icon class="menu-item-chevron" iconName="FaChevronRight" />
+  <Icon class="menu-item-chevron" iconName="IoChevronForward" />
 </button>

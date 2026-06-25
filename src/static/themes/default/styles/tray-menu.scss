@@ -2,22 +2,13 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-xs);
 
   .system-tray-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
-    border-radius: 8px;
-
-    &:hover {
-      background-color: var(--slu-std-ui-hover-overlay);
-    }
-
-    &:active {
-      background-color: var(--slu-std-ui-pressed-overlay);
-    }
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
 
     .system-tray-item-icon-box {
       .system-tray-item-icon {

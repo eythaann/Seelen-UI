@@ -7,7 +7,7 @@
   .media-device-view {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-xs);
   }
 
   // Common labels
@@ -15,7 +15,7 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--slu-std-fg-secondary-color);
-    margin-top: 8px;
+    margin-top: var(--spacing-xs);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 
@@ -28,7 +28,7 @@
   .media-control-volume {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-xs);
     width: 100%;
   }
 
@@ -36,15 +36,14 @@
   .media-device-group {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--spacing-xs);
   }
 
   // Individual device item
   .media-device {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px;
+    gap: var(--spacing-xs);
 
     .media-device-name {
       flex: 1;
@@ -59,7 +58,7 @@
   .media-control-session-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-xs);
   }
 
   // Device detail view
@@ -67,8 +66,8 @@
     .media-device-header {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-xs);
 
       .media-device-title {
         font-size: 14px;
@@ -82,12 +81,12 @@
     .media-device-mixer {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--spacing-xs);
 
       .media-device-mixer-entry {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: var(--spacing-xs);
 
         .media-device-mixer-entry-icon {
           display: flex;
@@ -101,8 +100,8 @@
     }
 
     .media-device-footer {
-      margin-top: 8px;
-      padding-top: 8px;
+      margin-top: var(--spacing-xs);
+      padding-top: var(--spacing-xs);
       border-top: 1px solid var(--color-gray-300);
     }
   }
@@ -112,10 +111,10 @@
 .media-session {
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: var(--spacing-xs);
+  padding: var(--spacing-xs);
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-xs);
 
   .media-session-blurred-thumbnail {
     position: absolute;
@@ -179,8 +178,8 @@
 
     .media-session-actions {
       display: flex;
-      gap: 8px;
-      margin-top: 8px;
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-xs);
     }
   }
 }

@@ -50,6 +50,7 @@
     {#if item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
       <button
         class="system-tray-item"
+        data-skin="transparent"
         onclick={(e) => onClick(e, item.stable_id)}
         ondblclick={(e) => onDoubleClick(e, item.stable_id)}
         oncontextmenu={(e) => onClick(e, item.stable_id)}

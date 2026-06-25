@@ -1,18 +1,23 @@
 .context-menu {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xs);
+  gap: var(--spacing-xs);
+
   width: fit-content;
   min-width: 200px;
 
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-
   .menu-item {
     display: flex;
-    gap: 8px;
-    padding: 8px;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
 
     &.danger {
-      color: var(--color-red-600);
+      color: red;
+    }
+
+    .slu-icon {
+      opacity: 0.6;
     }
 
     .menu-item-img-icon {
@@ -25,6 +30,7 @@
 
     .menu-item-label {
       flex: 1;
+      font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;

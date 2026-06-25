@@ -52,11 +52,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--color-gray-400);
+    background-color: var(--color-gray-300);
     border-radius: 8px;
 
     &:active {
-      background-color: var(--color-gray-500);
+      background-color: var(--color-gray-400);
     }
   }
 }
@@ -88,7 +88,7 @@ body:has(> div > .slu-std-popover) {
   max-height: 700px;
   overflow: auto;
 
-  padding: 10px;
+  padding: var(--spacing-xs);
   margin: 10px; // this margin will allow the box-shadow to be visible
 
   background-color: var(--slu-std-bg-color);
