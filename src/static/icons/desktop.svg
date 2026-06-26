@@ -22,7 +22,8 @@
         <g
           id="shape-556d6d82-daaa-808b-8006-e2aea6af3b96"
         >
-          <style>#shape-556d6d82-daaa-808b-8006-e2aea6aebea0 {
+          <style>
+          #shape-556d6d82-daaa-808b-8006-e2aea6aebea0 {
             .cls-1 {
               stroke-linejoin: round;
               stroke-opacity: 0.8;
@@ -35,11 +36,14 @@
               fill: #edf9ff;
             }
 
-            .cls-2, .cls-3, .cls-4 {
+            .cls-2,
+            .cls-3,
+            .cls-4 {
               fill-rule: evenodd;
             }
 
-            .cls-2, .cls-4 {
+            .cls-2,
+            .cls-4 {
               opacity: 0.69;
             }
 
@@ -50,7 +54,8 @@
             .cls-4 {
               fill: #edfaff;
             }
-          }</style>
+          }
+          </style>
         </g>
       </defs>
     </g>

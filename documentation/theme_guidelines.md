@@ -352,13 +352,13 @@ declaring them yourself.
 **Windows accent colors** — taken from the user's Windows accent color setting:
 
 ```css
---system-accent-color          /* main accent */
---system-accent-light-color    /* light variant */
---system-accent-lighter-color  /* lighter variant */
---system-accent-lightest-color /* lightest variant */
---system-accent-dark-color     /* dark variant */
---system-accent-darker-color   /* darker variant */
---system-accent-darkest-color  /* darkest variant */
+--system-accent-color /* main accent */
+  --system-accent-light-color /* light variant */
+  --system-accent-lighter-color /* lighter variant */
+  --system-accent-lightest-color /* lightest variant */
+  --system-accent-dark-color /* dark variant */
+  --system-accent-darker-color /* darker variant */
+  --system-accent-darkest-color /* darkest variant */
 ```
 
 ---
