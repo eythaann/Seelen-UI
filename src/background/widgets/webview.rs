@@ -218,15 +218,17 @@ pub struct WebviewArgs {
 
 impl WebviewArgs {
     const BASE_ARGS: &[&str] = &[
-        "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer,BackForwardCache,InterestCohort,SharedArrayBuffer,CalculateNativeWinOcclusion,OptimizationHints,AutofillServerCommunication",
+        "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer,BackForwardCache,InterestCohort,SharedArrayBuffer,CalculateNativeWinOcclusion,OptimizationHints,AutofillServerCommunication,PaintHolding",
         "--no-first-run",
         "--disable-site-isolation-trials",
 
-        "--disk-cache-size=1",
-        "--media-cache-size=1",
+        "--disk-cache-size=0",
+        "--disable-application-cache",
+        "--media-cache-size=0",
 
         "--disable-extensions",
         "--disable-component-extensions-with-background-pages",
+        "--disable-ipc-flooding-protection",
 
         "--disable-breakpad",
         "--disable-crash-reporter",
@@ -235,11 +237,13 @@ impl WebviewArgs {
         "--disable-component-update",
         "--disable-background-timer-throttling",
         "--disable-backgrounding-occluded-windows",
-        "--disable-renderer-backgrounding",
+        // prevents the browser from lowering the CPU priority of invisible windows, oposite of what we want
+        // "--disable-renderer-backgrounding"
         "--disable-sync",
 
         "--no-pings",
-        // "--aggressive-cache-discard", // maybe causes more resources than it reduces
+        // maybe causes more resources than it reduces
+        // "--aggressive-cache-discard",
     ];
 
     const GPU_ARGS: &[&str] = &[
@@ -253,8 +257,10 @@ impl WebviewArgs {
     ];
 
     const PERFORMANCE_ARGS: &[&str] = &[
-        // "--enable-low-end-device-mode", // unstable flag that causes more issues than it solves
-        // "--in-process-gpu", // unstable flag
+        // unstable flag that causes more issues than it solves
+        // "--enable-low-end-device-mode",
+        // this completely removes the gpu process
+        "--in-process-gpu",
         "--disable-gpu",
         "--disable-gpu-compositing",
         "--disable-gpu-shader-disk-cache",
