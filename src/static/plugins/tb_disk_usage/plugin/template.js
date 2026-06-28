@@ -14,8 +14,7 @@ units.forEach((unitSize) => {
   }
 });
 
-return [
-  icon("BsDeviceHdd"),
-  " ",
-  totalRead.toFixed(0) + unit + "/s" + " | " + totalWritten.toFixed(0) + unit + "/s",
-];
+const read = totalRead === 0 ? "-" : totalRead.toFixed(0) + unit + "/s";
+const written = totalWritten === 0 ? "-" : totalWritten.toFixed(0) + unit + "/s";
+
+return [icon("BsDeviceHdd"), " ", read + " | " + written];
