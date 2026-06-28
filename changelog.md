@@ -5,6 +5,7 @@
 ### enhancements
 
 - default theme inconsistencies.
+- QoL improvements for developers of widgets.
 
 ## [2.7.3]
 
