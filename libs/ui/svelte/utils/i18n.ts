@@ -52,18 +52,26 @@ export const locale = {
   },
 
   async set(newLocale: string) {
-    if (get(_messages)[newLocale]) {
-      _locale.set(newLocale);
-      return;
+    const current = get(_messages);
+    const toLoad: Promise<void>[] = [];
+
+    const loadLocale = async (locale: string) => {
+      // If the locale is already loaded, don't load it again
+      if (current[locale]) {
+        return;
+      }
+      const res = await fetch(`./translations/${locale}.yml`);
+      const text = await res.text();
+      const messages = yaml.load(text) as Record<string, any>;
+      _messages.update((m) => ({ ...m, [locale]: messages }));
+    };
+
+    toLoad.push(loadLocale(newLocale));
+    if (newLocale !== "en") {
+      toLoad.push(loadLocale("en"));
     }
 
-    const res = await fetch(`./translations/${newLocale}.yml`);
-    const text = await res.text();
-    const messages = yaml.load(text) as Record<string, any>;
-    _messages.update((m) => ({
-      ...m,
-      [newLocale]: messages,
-    }));
+    await Promise.all(toLoad);
     _locale.set(newLocale);
   },
 };

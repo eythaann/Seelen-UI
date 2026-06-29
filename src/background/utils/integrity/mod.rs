@@ -35,7 +35,7 @@ pub fn print_initial_information() {
     let local = if is_local_dev() { " (local)" } else { "" };
 
     let os = os_info::get();
-    let sys_locale = seelen_core::state::Settings::get_locale();
+    let sys_locale = seelen_core::state::Settings::get_system_locale();
 
     log::info!(
         "───────────────────── Starting Seelen UI v{version}{local}{debug} ─────────────────────"

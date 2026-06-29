@@ -91,7 +91,7 @@ async fn main() -> std::process::ExitCode {
         .set(tokio::runtime::Handle::current())
         .expect("Failed to set runtime handle");
 
-    rust_i18n::set_locale(&seelen_core::state::Settings::get_system_language());
+    rust_i18n::set_locale(&seelen_core::state::Settings::get_app_language());
 
     let _ = CRONOMETER;
     let mut app_builder = tauri::Builder::default();

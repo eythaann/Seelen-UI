@@ -110,7 +110,6 @@ impl AppSettings {
     }
 
     pub fn locale(&self) -> &String {
-        // always should be filled
-        self.settings.language.as_ref().unwrap()
+        &self.settings.language
     }
 }

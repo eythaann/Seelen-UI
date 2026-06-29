@@ -450,7 +450,7 @@ pub struct Settings {
     /// discord rich presence
     pub drpc: bool,
     /// language to use, if null the system locale is used
-    pub language: Option<String>,
+    pub language: String,
     /// MomentJS date format
     pub date_format: String,
     /// Start of week for calendar
@@ -505,7 +505,7 @@ impl Default for Settings {
             active_icon_packs: vec!["@system/icon-pack".into()],
             monitors_v3: HashMap::new(),
             dev_tools: false,
-            language: Some(Self::get_system_language()),
+            language: Self::get_app_language(),
             date_format: "ddd D MMM, hh:mm A".to_owned(),
             start_of_week: StartOfWeek::default(),
             updater: UpdaterSettings::default(),
@@ -525,15 +525,29 @@ impl Default for Settings {
 }
 
 impl Settings {
-    pub fn get_locale() -> Option<String> {
+    pub fn get_system_locale() -> Option<String> {
         sys_locale::get_locale()
     }
 
-    pub fn get_system_language() -> String {
-        match sys_locale::get_locale() {
-            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
-            None => "en".to_string(),
+    pub fn get_app_language() -> String {
+        use crate::constants::SUPPORTED_LANGUAGES;
+
+        let Some(sys_locale) = sys_locale::get_locale() else {
+            return "en".to_string();
+        };
+
+        if SUPPORTED_LANGUAGES.iter().any(|l| l.value == sys_locale) {
+            return sys_locale;
         }
+
+        let Some(base) = sys_locale.split('-').next() else {
+            return "en".to_string();
+        };
+        if SUPPORTED_LANGUAGES.iter().any(|l| l.value == base) {
+            return base.to_string();
+        }
+
+        "en".to_string()
     }
 
     pub fn migrate(&mut self) -> Result<()> {
@@ -570,8 +584,8 @@ impl Settings {
     }
 
     pub fn sanitize(&mut self) -> Result<()> {
-        if self.language.is_none() {
-            self.language = Some(Self::get_system_language());
+        if self.language.is_empty() {
+            self.language = Self::get_app_language();
         }
 
         // ensure base is always selected

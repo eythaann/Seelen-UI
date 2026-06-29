@@ -4,14 +4,14 @@ import type { PerformanceModeSettings, StartOfWeek } from "@seelen-ui/lib/types"
 /**
  * Gets the current language setting
  */
-export function getLanguage(): string | null {
+export function getLanguage(): string {
   return settings.value.language;
 }
 
 /**
  * Sets the language
  */
-export function setLanguage(language: string | null) {
+export function setLanguage(language: string) {
   settings.value = {
     ...settings.value,
     language,

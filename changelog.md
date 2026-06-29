@@ -5,6 +5,8 @@
 ### fix
 
 - non-interactable windows being added to a workspace when using send to workspace command.
+- language detection not preserving regional variants (e.g. `pt-BR`, `zh-CN`) when supported.
+- i18n English fallback not loading when the initial locale was not English.
 
 ### enhancements
 
