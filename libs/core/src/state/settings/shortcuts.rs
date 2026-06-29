@@ -238,17 +238,15 @@ pub fn resolve_shortcuts(
     // 2. System-level declarations
     let system_overrides = &settings.shortcuts.shortcuts;
     for decl in system_shortcut_declarations() {
-        let keys = if decl.readonly {
-            decl.default_keys.clone()
-        } else {
-            system_overrides
-                .get(&decl.id)
-                .cloned()
-                .unwrap_or_else(|| decl.default_keys.clone())
-        };
+        let keys = system_overrides
+            .get(&decl.id)
+            .cloned()
+            .unwrap_or_else(|| decl.default_keys.clone());
+
         if keys.is_empty() {
             continue;
         }
+
         resolved.push(ResolvedShortcut {
             command: decl.command.clone(),
             keys,

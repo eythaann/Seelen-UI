@@ -36,7 +36,7 @@ function widgetShortcutToEntry(decl: WidgetShortcutDeclaration, widgetId: Widget
   return {
     id: decl.id,
     label: decl.label,
-    keys: decl.readonly ? decl.defaultKeys : (overrides[decl.id] ?? decl.defaultKeys),
+    keys: overrides[decl.id] ?? decl.defaultKeys,
     defaultKeys: decl.defaultKeys,
     readonly: decl.readonly,
     widgetId,
@@ -118,7 +118,7 @@ export const shortcutGroups = computed((): ShortcutGroups => {
     (d): ShortcutEntry => ({
       id: d.id,
       label: d.label,
-      keys: d.readonly ? d.defaultKeys : (systemOverrides[d.id] ?? d.defaultKeys),
+      keys: systemOverrides[d.id] ?? d.defaultKeys,
       defaultKeys: d.defaultKeys,
       readonly: d.readonly,
       widgetId: null,

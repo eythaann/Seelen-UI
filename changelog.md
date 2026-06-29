@@ -2,18 +2,19 @@
 
 ## [2.7.4-dev]
 
+### enhancements
+
+- default theme inconsistencies.
+- QoL improvements for developers of widgets.
+- add support for disabled attribute on the standard styled components library.
+
 ### fix
 
 - widgets not fitting into monitor bounds when restoring last position.
 - non-interactable windows being added to a workspace when using send to workspace command.
 - language detection not preserving regional variants (e.g. `pt-BR`, `zh-CN`) when supported.
 - i18n English fallback not loading when the initial locale was not English.
-
-### enhancements
-
-- default theme inconsistencies.
-- QoL improvements for developers of widgets.
-- add support for disabled attribute on the standard styled components library.
+- edit of readonly shortcuts not working when devtools - unlock shortcuts is true.
 
 ## [2.7.3]
 
