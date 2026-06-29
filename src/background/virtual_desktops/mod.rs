@@ -362,6 +362,12 @@ impl SluWorkspacesManager2 {
 
     /// Send a window to a specific workspace
     pub fn send_to(&self, window: &Window, workspace_id: &WorkspaceId) -> Result<()> {
+        // Only move windows that are already tracked; non-interactable windows don't belong
+        // to any workspace and should not be added to one by being "moved".
+        if !self.contains(window) {
+            return Ok(());
+        }
+
         let monitor_id = self.get_monitor_of_workspace(workspace_id);
         let window_id = window.address();
 

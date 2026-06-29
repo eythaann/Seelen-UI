@@ -2,6 +2,10 @@
 
 ## [2.7.4-dev]
 
+### fix
+
+- non-interactable windows being added to a workspace when using send to workspace command.
+
 ### enhancements
 
 - default theme inconsistencies.
