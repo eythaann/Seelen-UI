@@ -161,15 +161,17 @@ export class Widget {
    */
   private async persistPositionAndSize(): Promise<void> {
     const storage = globalThis.window.localStorage;
+    const autoSizeOnly = !!this.autoSizer;
 
     const [x, y, width, height] = [`x`, `y`, `width`, `height`].map((k) => storage.getItem(`${k}`));
-    if (x && y && width && height) {
-      const frame = {
+
+    if (x && y) {
+      const frame = await OPTIMISTIC_FRAME.runExclusive((ref) => ({
         x: Number(x),
         y: Number(y),
-        width: Number(width),
-        height: Number(height),
-      };
+        width: autoSizeOnly ? ref.width : Number(width),
+        height: autoSizeOnly ? ref.height : Number(height),
+      }));
 
       const safeFrame = fitIntoMonitor(frame);
       await this.setPosition({
@@ -189,14 +191,16 @@ export class Widget {
       }, 500),
     );
 
-    this.window.onResized(
-      debounce((e) => {
-        const { width, height } = e.payload;
-        storage.setItem(`width`, width.toString());
-        storage.setItem(`height`, height.toString());
-        console.info(`Widget size saved: ${width} ${height}`);
-      }, 500),
-    );
+    if (!autoSizeOnly) {
+      this.window.onResized(
+        debounce((e) => {
+          const { width, height } = e.payload;
+          storage.setItem(`width`, width.toString());
+          storage.setItem(`height`, height.toString());
+          console.info(`Widget size saved: ${width} ${height}`);
+        }, 500),
+      );
+    }
   }
 
   private async normalizeDevicePixelRatio(): Promise<void> {
@@ -223,13 +227,18 @@ export class Widget {
       return;
     }
 
-    this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
     this.runtimeState.initialized = true;
+    this.runtimeState.hwnd = await invoke(SeelenCommand.GetSelfWindowId);
     this.destroyOnHide = options.closeOnHide ?? this.def.lazy;
 
     if (options.normalizeDevicePixelRatio) {
       await this.normalizeDevicePixelRatio();
     }
+
+    await initMonitorsState();
+    await OPTIMISTIC_FRAME.runExclusive(async (state) => {
+      await state.init(this);
+    });
 
     if (options.autoSizeByContent) {
       this.autoSizer = new WidgetAutoSizer(
@@ -264,17 +273,12 @@ export class Widget {
     if (options.useThemes ?? true) {
       await startThemingTool();
     }
-    await initMonitorsState();
 
     if (options.disableCssAnimations ?? true) {
       await disableAnimationsOnPerformanceMode();
     } else {
       console.trace("Animations won't be disabled because widget configuration");
     }
-
-    await OPTIMISTIC_FRAME.runExclusive(async (state) => {
-      await state.init(this);
-    });
   }
 
   /**
