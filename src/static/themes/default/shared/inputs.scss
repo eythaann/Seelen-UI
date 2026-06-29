@@ -1,11 +1,17 @@
-input[type="range"] {
+%common {
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+input[type="range"][data-skin="flat"] {
+  @extend %common;
+
   appearance: none;
   width: 100%;
   position: relative;
   overflow: hidden;
-}
 
-input[type="range"][data-skin="flat"] {
   height: 1.5rem;
   border-radius: 8px;
   background: oklch(from var(--slu-std-ui-hover-color) l c h / 0.2);
@@ -52,7 +58,7 @@ select[data-skin="default"] {
 
   font-size: inherit;
 
-  &:hover {
+  &:hover:enabled {
     border-color: var(--slu-std-ui-hover-color);
   }
 
@@ -63,13 +69,6 @@ select[data-skin="default"] {
   &:read-only {
     background-color: var(--slu-std-bg-color);
     color: var(--slu-std-fg-muted-color);
-    cursor: default;
-  }
-
-  &:disabled {
-    opacity: 0.8;
-    background-color: var(--slu-std-bg-color);
-    color: var(--slu-std-fg-disabled-color);
     cursor: default;
   }
 }
@@ -108,12 +107,6 @@ select[data-skin="transparent"] {
     background-color: transparent;
     cursor: default;
   }
-
-  &:disabled {
-    opacity: 0.8;
-    background-color: transparent;
-    cursor: default;
-  }
 }
 
 input[type="radio"][data-skin="default"] {
@@ -127,7 +120,9 @@ input[type="radio"][data-skin="default"] {
   border: 2px solid var(--color-gray-400);
   background-color: transparent;
   flex-shrink: 0;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
   cursor: pointer;
 
   &::before {
@@ -149,13 +144,8 @@ input[type="radio"][data-skin="default"] {
     }
   }
 
-  &:hover:not(:checked) {
+  &:hover:not(:checked):enabled {
     border-color: var(--slu-std-ui-hover-color);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 }
 
@@ -170,7 +160,9 @@ input[type="checkbox"][data-skin="default"] {
   border: 2px solid var(--color-gray-400);
   background-color: transparent;
   flex-shrink: 0;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
   cursor: pointer;
 
   &::before {
@@ -192,13 +184,8 @@ input[type="checkbox"][data-skin="default"] {
     }
   }
 
-  &:hover:not(:checked) {
+  &:hover:not(:checked):enabled {
     border-color: var(--slu-std-ui-hover-color);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 }
 
@@ -234,15 +221,10 @@ input[type="checkbox"][data-skin="switch"] {
     }
   }
 
-  &:hover {
+  &:hover:enabled {
     &:not(:checked) {
       background-color: var(--color-gray-500);
     }
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
   }
 }
 
@@ -295,10 +277,10 @@ select[data-skin="transparent"] {
 }
 
 select[data-skin="transparent"] {
-  &:hover {
+  &:hover:enabled {
     background-color: var(--slu-std-ui-hover-overlay);
   }
-  &:active {
+  &:active:enabled {
     background-color: var(--slu-std-ui-pressed-overlay);
   }
 }

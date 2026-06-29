@@ -6,8 +6,12 @@
   align-items: center;
   gap: 0.5em;
 
-  &:active {
+  &:enabled:active {
     transform: translateY(1px) scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 }
 
@@ -35,11 +39,11 @@ button[data-skin="transparent"] {
   @extend %common;
   border: 1px solid transparent;
 
-  &:hover {
+  &:hover:enabled {
     background-color: var(--slu-std-ui-hover-overlay);
   }
 
-  &:active {
+  &:active:enabled {
     background-color: var(--slu-std-ui-pressed-overlay);
   }
 }
@@ -50,7 +54,7 @@ button[data-skin="solid"] {
   color: var(--color-gray-100);
   box-shadow: var(--shadow-s);
 
-  &:hover {
+  &:hover:enabled {
     background-color: var(--slu-std-ui-hover-color);
   }
 }
@@ -60,7 +64,7 @@ button[data-skin="default"] {
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
 
-  &:hover {
+  &:hover:enabled {
     color: var(--slu-std-ui-hover-color);
   }
 }

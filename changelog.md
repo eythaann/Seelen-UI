@@ -6,6 +6,7 @@
 
 - default theme inconsistencies.
 - QoL improvements for developers of widgets.
+- add support for disabled attribute on the standard styled components library.
 
 ## [2.7.3]
 
