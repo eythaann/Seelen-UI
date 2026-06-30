@@ -102,7 +102,7 @@ pub fn update_discord_rpc(enabled: bool) -> Result<()> {
             }
 
             log::trace!("Trying to connect to Discord IPC");
-            let mut client = DiscordIpcClient::new("1384275226652704928").unwrap(); // never fails
+            let mut client = DiscordIpcClient::new("1384275226652704928");
 
             if client.connect().is_err() {
                 log::trace!(
