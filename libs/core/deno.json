@@ -25,8 +25,6 @@
     "@std/encoding": "jsr:@std/encoding@^1.0.10",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.11.0",
     "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.7.1",
-    "@tauri-apps/plugin-fs": "npm:@tauri-apps/plugin-fs@^2.5.1",
-    "@tauri-apps/plugin-log": "npm:@tauri-apps/plugin-log@^2.8.0",
     "@tauri-apps/plugin-process": "npm:@tauri-apps/plugin-process@^2.3.1"
   },
   "compilerOptions": {
@@ -62,5 +60,6 @@
   },
   "exclude": [
     "npm"
-  ]
+  ],
+  "vendor": true
 }

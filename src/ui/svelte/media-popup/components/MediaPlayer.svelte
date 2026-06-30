@@ -2,7 +2,6 @@
   import type { MediaPlayer } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
-  import { path } from "@tauri-apps/api";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import { defaultThumbnail } from "../state.svelte";
 

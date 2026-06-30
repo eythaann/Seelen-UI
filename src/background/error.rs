@@ -46,7 +46,7 @@ define_app_errors!(
     FileNotify(notify_debouncer_full::notify::Error);
     Base64Decode(base64::DecodeError);
     WideStringNull(widestring::error::MissingNulTerminator);
-    Reqwest(tauri_plugin_http::reqwest::Error);
+    Reqwest(reqwest::Error);
     Updater(tauri_plugin_updater::Error);
     WinScreenshot(win_screenshot::capture::WSError);
     TryFromSliceError(std::array::TryFromSliceError);

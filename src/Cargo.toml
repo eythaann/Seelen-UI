@@ -30,13 +30,10 @@ slu-ipc = { workspace = true }
 slu-utils = { workspace = true }
 positioning = { workspace = true }
 tauri = { workspace = true, features = ["devtools", "protocol-asset"] }
-tauri-plugin-fs = { workspace = true }
 tauri-plugin-dialog = { workspace = true }
 tauri-plugin-shell = { workspace = true }
 tauri-plugin-process = { workspace = true }
 tauri-plugin-updater = { workspace = true }
-tauri-plugin-deep-link = { workspace = true }
-tauri-plugin-http = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
