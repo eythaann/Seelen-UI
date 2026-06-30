@@ -64,7 +64,7 @@ rand = "0.9.3"
 rustfft = "6"
 rayon = "1.10"
 regex = "1.12.3"
-reqwest = "0.12.28"
+reqwest = "0.13.1"
 rust-i18n = "4.1.0"
 sha2 = "0.10.9"
 seelen-core = { path = "libs/core" }
