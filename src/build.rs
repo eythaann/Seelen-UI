@@ -1,6 +1,9 @@
 use std::{fs::create_dir, path::PathBuf};
 
-use slu_utils::{checksums::CheckSums, signature::sign_minisign};
+use slu_utils::{
+    checksums::CheckSums,
+    signature::{sign_minisign, UNSIGNED_MARKER},
+};
 
 fn main() {
     let _ = create_dir("gen");
@@ -56,14 +59,22 @@ where
 }
 
 fn sign_sha256sums(path: &PathBuf) {
-    let key_base64 =
-        std::env::var("TAURI_SIGNING_PRIVATE_KEY").expect("TAURI_SIGNING_PRIVATE_KEY missing");
-    let password = std::env::var("TAURI_SIGNING_PRIVATE_KEY_PASSWORD")
-        .expect("TAURI_SIGNING_PRIVATE_KEY_PASSWORD missing");
+    let key_base64 = std::env::var("TAURI_SIGNING_PRIVATE_KEY").unwrap_or_default();
+    let password = std::env::var("TAURI_SIGNING_PRIVATE_KEY_PASSWORD").unwrap_or_default();
+
+    let sig_path = path.with_extension("sig");
+
+    // No signing key available (e.g. forks / self-built releases): emit an
+    // unsigned placeholder instead of failing the build. The runtime integrity
+    // check recognizes this marker and falls back to checksum-only validation.
+    if key_base64.trim().is_empty() {
+        println!("cargo:warning=TAURI_SIGNING_PRIVATE_KEY not set; producing an UNSIGNED build.");
+        std::fs::write(&sig_path, UNSIGNED_MARKER).expect("Failed to write placeholder signature");
+        return;
+    }
 
     let data = std::fs::read(path).expect("Failed to read SHA256SUMS file");
     let signature = sign_minisign(&data, &key_base64, password).expect("Failed to sign data");
 
-    let sig_path = path.with_extension("sig");
     std::fs::write(&sig_path, signature).expect("Failed to write signature");
 }

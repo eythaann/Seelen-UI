@@ -3,6 +3,12 @@ use std::io::Cursor;
 use base64::Engine;
 use minisign::{PublicKeyBox, SecretKeyBox, SignatureBox};
 
+/// Placeholder written in place of a real minisign signature when a build is
+/// produced without a signing key (e.g. forks / self-built releases). The
+/// runtime integrity check recognizes this marker, skips cryptographic
+/// signature verification, and relies on checksum comparison only.
+pub const UNSIGNED_MARKER: &str = "SEELEN-UI-UNSIGNED-BUILD";
+
 /// Sign data with minisign
 pub fn sign_minisign(
     data: &[u8],
