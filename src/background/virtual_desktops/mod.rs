@@ -509,8 +509,11 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
     }
 
     fn restore(&self) {
-        let len = self.windows.len();
-        for (idx, addr) in self.windows.iter().enumerate() {
+        // self.windows is kept in focus order (SystemForeground pushes the focused
+        // window to the end), so the last window that ends up visible is the topmost
+        // one and the only one that should be activated.
+        let mut topmost: Option<isize> = None;
+        for addr in self.windows.iter() {
             let window = Window::from(*addr);
             let is_minimized = window.is_minimized();
 
@@ -532,10 +535,14 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             }
             MINIMIZED_BY_WORKSPACES.remove(addr);
 
-            // ensure correct focus on the topmost window only
-            if idx == len - 1 {
-                window.focus().log_error();
-            }
+            // this window is now visible; remember it as the current topmost candidate
+            topmost = Some(*addr);
+        }
+
+        // Focus only the topmost visible window. If every window stayed minimized
+        // (nothing was restored), don't force anything to the foreground.
+        if let Some(addr) = topmost {
+            Window::from(addr).focus().log_error();
         }
     }
 }
