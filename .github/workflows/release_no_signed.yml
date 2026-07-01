@@ -258,6 +258,11 @@ jobs:
         run: |
           npm install -g @tauri-apps/cli
 
+          if [ -z "$TAURI_PRIVATE_KEY" ]; then
+            echo "No updater signing key available (fork / unsigned build); skipping updater signatures."
+            exit 0
+          fi
+
           echo "Removing existing .sig files to regenerate with Tauri updater keys..."
           find ./bundles -name "*.sig" -type f -delete
           echo "Existing signatures removed"
