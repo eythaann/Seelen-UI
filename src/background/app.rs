@@ -11,6 +11,7 @@ use crate::{
     error::{Result, ResultLogExt},
     hook::register_win_hook,
     migrations::Migrations,
+    modules::monitors::{MonitorManager, MonitorManagerEvent},
     modules::user::infrastructure::reemit_user,
     resources::RESOURCES,
     session::infrastructure::reemit_session,
@@ -91,6 +92,19 @@ impl SeelenUI {
 
         WIDGET_MANAGER.reconcile()?;
         CRONOMETER.record("reconcile");
+
+        // Re-evaluate per-monitor widgets (toolbar, weg, ...) when a display is
+        // connected or disconnected. Without this, a removed monitor's widgets are
+        // never evicted and Windows relocates their webviews onto a surviving
+        // monitor, stacking them over that monitor's own bars.
+        MonitorManager::subscribe(|event| {
+            if matches!(
+                event,
+                MonitorManagerEvent::ViewAdded(_) | MonitorManagerEvent::ViewRemoved(_)
+            ) {
+                WIDGET_MANAGER.reconcile().log_error();
+            }
+        });
 
         create_background_window()?;
         CRONOMETER.record("background_window");
