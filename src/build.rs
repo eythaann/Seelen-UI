@@ -1,9 +1,6 @@
 use std::{fs::create_dir, path::PathBuf};
 
-use slu_utils::{
-    checksums::CheckSums,
-    signature::{sign_minisign, UNSIGNED_MARKER},
-};
+use slu_utils::{checksums::CheckSums, signature::sign_minisign};
 
 fn main() {
     let _ = create_dir("gen");
@@ -69,7 +66,8 @@ fn sign_sha256sums(path: &PathBuf) {
     // check recognizes this marker and falls back to checksum-only validation.
     if key_base64.trim().is_empty() {
         println!("cargo:warning=TAURI_SIGNING_PRIVATE_KEY not set; producing an UNSIGNED build.");
-        std::fs::write(&sig_path, UNSIGNED_MARKER).expect("Failed to write placeholder signature");
+        std::fs::write(&sig_path, slu_utils::signature::UNSIGNED_MARKER)
+            .expect("Failed to write placeholder signature");
         return;
     }
 

@@ -96,7 +96,7 @@ fn verify_external_signature(file: &Path, signature_file: &Path, key_base64: &st
     // cryptographic check for those; file integrity is still enforced by the
     // checksum comparison in validate_directory_checksums().
     if signature_content.trim() == slu_utils::signature::UNSIGNED_MARKER {
-        log::warn!("Bundle is UNSIGNED; skipping signature verification (checksums still enforced).");
+        log::warn!("Bundle is UNSIGNED; skipping signature check (checksums still enforced).");
         return Ok(());
     }
 
