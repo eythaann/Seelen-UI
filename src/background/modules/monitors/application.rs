@@ -202,18 +202,26 @@ impl MonitorManager {
         let mut old_views = Self::instance().state_views.to_hash_map();
 
         // new monitors were added
+        let mut added = Vec::new();
         for id in current_views.keys() {
             if old_views.remove(id).is_none() {
-                Self::send(MonitorManagerEvent::ViewAdded(id.clone()));
+                added.push(id.clone());
             }
         }
+        // whatever remains in old_views was removed/disconnected
+        let removed: Vec<MonitorId> = old_views.into_keys().collect();
 
-        // residuals were removed/disconnected
-        for (id, _) in old_views {
+        // Update the cache BEFORE notifying subscribers so anything that reacts to
+        // these events (e.g. widget reconcile) observes the new set of monitors via
+        // get_cached_ids() instead of the stale one.
+        Self::instance().state_views.replace(current_views);
+
+        for id in added {
+            Self::send(MonitorManagerEvent::ViewAdded(id));
+        }
+        for id in removed {
             Self::send(MonitorManagerEvent::ViewRemoved(id));
         }
-
-        Self::instance().state_views.replace(current_views);
         Ok(())
     }
 
