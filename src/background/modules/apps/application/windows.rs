@@ -175,13 +175,12 @@ impl UserAppsManager {
                 data.is_iconic = false;
                 true
             }
-            WinEvent::SyntheticFullscreenStart => {
-                data.is_fullscreen = true;
-                true
-            }
-            WinEvent::SyntheticFullscreenEnd => {
-                data.is_fullscreen = false;
-                true
+            WinEvent::SyntheticFullscreenStart | WinEvent::SyntheticFullscreenEnd => {
+                // here we do a double check to see because native shell reports fullscreen ends on focus change,
+                // but the window on background can still be fullscreened
+                let old = data.is_fullscreen;
+                data.is_fullscreen = Window::from(data.hwnd).is_fullscreen();
+                old != data.is_fullscreen
             }
             _ => false,
         }

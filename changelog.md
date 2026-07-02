@@ -6,6 +6,10 @@
 
 - toolbar and dock autohide on overlap logic for multimonitor setups.
 
+### fix
+
+- fullscreen state being removed from background windows on foreground change.
+
 ## [2.7.4]
 
 ### enhancements
