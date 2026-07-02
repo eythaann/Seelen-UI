@@ -95,6 +95,23 @@ impl WidgetWebview {
             }
         }
 
+        // A previous instance with this label may still be tearing down (window
+        // destruction is async). Rapid suspend/resume cycles — e.g. Windows game
+        // mode toggling quickly — otherwise make build() fail with
+        // WebviewLabelAlreadyExists, leaving the widget stuck in CrashedOnCreation
+        // (toolbar won't hide, dock never shows). Destroy the stale window and wait
+        // for it to disappear before creating the new one.
+        let app = get_app_handle();
+        if let Some(existing) = app.get_webview_window(&label.raw) {
+            let _ = existing.destroy();
+            for _ in 0..40 {
+                if app.get_webview_window(&label.raw).is_none() {
+                    break;
+                }
+                std::thread::sleep(std::time::Duration::from_millis(25));
+            }
+        }
+
         let window = builder
             .data_directory(args.data_directory())
             .additional_browser_args(&args.to_string())

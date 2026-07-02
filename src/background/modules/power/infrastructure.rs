@@ -1,4 +1,4 @@
-use std::sync::Once;
+use std::sync::{atomic::Ordering, Once};
 
 use seelen_core::{
     handlers::SeelenEvent,
@@ -12,7 +12,7 @@ use crate::{
     modules::power::application::{PowerManager, PowerManagerEvent},
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
-    widgets::manager::WIDGET_MANAGER,
+    widgets::manager::{GAME_MODE_ACTIVE, WIDGET_MANAGER},
     windows_api::WindowsApi,
 };
 
@@ -30,9 +30,15 @@ fn get_power_manager() -> &'static TracedMutex<PowerManager> {
             }
             PowerManagerEvent::PowerModeChanged(mode) => {
                 if FULL_STATE.load().settings.suspend_on_game_mode {
+                    // Only act on real transitions. Rapid power-mode flapping (game
+                    // mode toggling several times per second) would otherwise churn
+                    // suspend/resume and race widget re-creation.
+                    let suspended = GAME_MODE_ACTIVE.load(Ordering::Acquire);
                     match mode {
-                        PowerMode::GameMode => WIDGET_MANAGER.suspend_all(),
-                        _ => WIDGET_MANAGER.resume_all().log_error(),
+                        PowerMode::GameMode if !suspended => WIDGET_MANAGER.suspend_all(),
+                        PowerMode::GameMode => {}
+                        _ if suspended => WIDGET_MANAGER.resume_all().log_error(),
+                        _ => {}
                     }
                 }
                 emit_to_webviews(SeelenEvent::PowerMode, mode);
