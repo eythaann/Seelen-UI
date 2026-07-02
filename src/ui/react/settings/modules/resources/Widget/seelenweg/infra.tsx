@@ -104,6 +104,14 @@ export const SeelenWegSettings = () => {
               onChange={(value) => patchWegConfig({ delayToHide: value || 0 })}
             />
           </SettingsOption>
+          <SettingsOption>
+            <span>{t("weg.per_monitor_auto_hide")}</span>
+            <Switch
+              checked={settings.perMonitorAutoHide}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
+              onChange={(value) => patchWegConfig({ perMonitorAutoHide: value })}
+            />
+          </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 

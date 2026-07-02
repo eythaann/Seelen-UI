@@ -38,16 +38,27 @@ const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | nul
 });
 
 const _isDockOverlapped = $derived.by(() => {
-  // Use this monitor's own topmost window, not the globally focused one. Deriving
-  // overlap from the focused app meant a dock only hid while its own monitor was
-  // focused, so focusing another monitor made every other dock reappear even when
-  // a window still covered it. Each dock now hides based on its own monitor.
-  const by = _topInteractableWindow;
+  const monitorId = widget.decoded.monitorId;
 
-  if (!by || !by.rect) return false;
+  // Which window drives overlap-based auto-hide:
+  // - perMonitorAutoHide: this monitor's own topmost window, so each dock hides
+  //   independently based on what covers it on that monitor.
+  // - default (original author behavior): the globally focused window, only when
+  //   it is on this monitor, so just the focused monitor's dock reacts.
+  let overlapWindow: UserAppWindow | FocusedApp | null = null;
+  if (settingsState.perMonitorAutoHide) {
+    overlapWindow = _topInteractableWindow ?? null;
+  } else {
+    const f = focused.value;
+    if (f?.monitor === monitorId && interactables.value.some((w) => w.hwnd === f.hwnd)) {
+      overlapWindow = f;
+    }
+  }
+
+  const b = overlapWindow?.rect;
+  if (!b) return false;
 
   const a = widgetRect.value.hitboxRect;
-  const b = by.rect;
 
   if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
     return false;

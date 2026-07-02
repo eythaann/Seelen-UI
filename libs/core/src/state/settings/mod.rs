@@ -157,6 +157,11 @@ pub struct SeelenWegSettings {
     pub mode: SeelenWegMode,
     /// When to hide the dock
     pub hide_mode: HideMode,
+    /// When enabled, each monitor's dock decides its auto-hide from the topmost
+    /// window on its own monitor. When disabled (default, original behavior), the
+    /// overlap is derived from the globally focused window, so only the focused
+    /// monitor's dock reacts.
+    pub per_monitor_auto_hide: bool,
     /// Split windows into separated items instead of grouped.
     pub split_windows: bool,
     /// Which temporal items to show on the dock instance (this can be overridden per monitor)
@@ -198,6 +203,7 @@ impl Default for SeelenWegSettings {
             shortcuts: None,
             mode: SeelenWegMode::MinContent,
             hide_mode: HideMode::OnOverlap,
+            per_monitor_auto_hide: false,
             position: SeelenWegSide::Bottom,
             visible_separators: true,
             show_instance_counter: true,

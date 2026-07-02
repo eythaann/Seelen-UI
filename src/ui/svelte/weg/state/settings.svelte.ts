@@ -36,6 +36,9 @@ export const settingsState = {
   get hideMode(): HideMode {
     return (this.value?.hideMode ?? HideMode.Never) as HideMode;
   },
+  get perMonitorAutoHide(): boolean {
+    return (this.value?.perMonitorAutoHide ?? false) as boolean;
+  },
   get delayToHide(): number {
     return (this.value?.delayToHide ?? 800) as number;
   },
