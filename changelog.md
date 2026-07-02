@@ -2,6 +2,10 @@
 
 ## [2.7.5-dev]
 
+### enhancements
+
+- toolbar and dock autohide on overlap logic for multimonitor setups.
+
 ## [2.7.4]
 
 ### enhancements

@@ -20,21 +20,24 @@ const _thereIsMaximizedOnBg = $derived(
 );
 
 const _isTbOverlapped = $derived.by(() => {
-  const f = focused.value;
-  const by = f?.monitor === widget.decoded.monitorId ? f : null;
-  const ints = interactables.value;
-
-  if (!by || !by.rect) return false;
-  if (!ints.some((w) => w.hwnd === by.hwnd)) return false;
-
-  const a = widgetRect.value;
-  const b = by.rect;
-
-  if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
+  // If foreground is not in interactable windows, return false directly, this handled start menu or desktop focus cases.
+  const foreground = focused.value;
+  if (!interactables.value.some((w) => w.hwnd === foreground.hwnd)) {
     return false;
   }
 
-  return true;
+  // Check if any interactable window overlaps with the hitbox
+  const a = widgetRect.value;
+  for (const app of interactables.value) {
+    if (app.monitor !== widget.decoded.monitorId || app.isIconic || !app.rect) continue;
+    const b = app.rect;
+
+    if (!(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom)) {
+      return true;
+    }
+  }
+
+  return false;
 });
 
 const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {

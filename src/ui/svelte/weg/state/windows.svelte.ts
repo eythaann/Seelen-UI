@@ -38,20 +38,24 @@ const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | nul
 });
 
 const _isDockOverlapped = $derived.by(() => {
-  const f = focused.value;
-  const by = f?.monitor === widget.decoded.monitorId ? f : null;
-
-  if (!by || !by.rect) return false;
-  if (!interactables.value.some((w) => w.hwnd === by.hwnd)) return false;
-
-  const a = widgetRect.value.hitboxRect;
-  const b = by.rect;
-
-  if (a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom) {
+  // If foreground is not in interactable windows, return false directly, this handled start menu or desktop focus cases.
+  const foreground = focused.value;
+  if (!interactables.value.some((w) => w.hwnd === foreground.hwnd)) {
     return false;
   }
 
-  return true;
+  // Check if any interactable window overlaps with the hitbox
+  const a = widgetRect.value.hitboxRect;
+  for (const app of interactables.value) {
+    if (app.monitor !== widget.decoded.monitorId || app.isIconic || !app.rect) continue;
+    const b = app.rect;
+
+    if (!(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom)) {
+      return true;
+    }
+  }
+
+  return false;
 });
 
 class WindowsState {
@@ -104,12 +108,16 @@ $effect.root(() => {
 
     const toHGradient = (stops: typeof colors.top) =>
       `linear-gradient(to right,${
-        stops.map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`).join(",")
+        stops
+          .map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`)
+          .join(",")
       })`;
 
     const toVGradient = (stops: typeof colors.left) =>
       `linear-gradient(to bottom,${
-        stops.map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`).join(",")
+        stops
+          .map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`)
+          .join(",")
       })`;
 
     const pos = settingsState.position;
