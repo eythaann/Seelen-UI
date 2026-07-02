@@ -45,11 +45,15 @@ jobs:
             const regex = new RegExp(`(?<=\\[${version}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
 
+            // Unique per-run tag so repeated unsigned builds of the same app
+            // version don't collide on `v${version}` (which blocks un-drafting).
+            // Installer filenames keep the plain version.
+            const tag = `v${version}-build.${context.runNumber}`;
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: `v${version}`,
-              name: `Seelen UI v${version}`,
+              tag_name: tag,
+              name: `Seelen UI v${version} (build ${context.runNumber})`,
               body: releaseNotes,
               generate_release_notes: true,
               draft: true,
