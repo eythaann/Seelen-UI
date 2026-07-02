@@ -1,7 +1,11 @@
 use slu_ipc::commands::VdCommand;
 pub use slu_ipc::commands::VirtualDesktopCli;
 
-use crate::{error::Result, virtual_desktops::SluWorkspacesManager2, windows_api::window::Window};
+use crate::{
+    error::Result,
+    virtual_desktops::SluWorkspacesManager2,
+    windows_api::{input::Mouse, monitor::Monitor, window::Window},
+};
 
 pub fn process(cmd: VirtualDesktopCli) -> Result<()> {
     process_vd_command(cmd.subcommand)
@@ -9,7 +13,11 @@ pub fn process(cmd: VirtualDesktopCli) -> Result<()> {
 
 fn process_vd_command(cmd: VdCommand) -> Result<()> {
     let focused_win = Window::get_foregrounded();
-    let monitor_id = focused_win.monitor().stable_id()?;
+    // Target the monitor under the mouse cursor rather than the focused window's
+    // monitor. When switching to an empty/all-minimized workspace no window gets
+    // focused on that monitor, so the foreground escapes to another monitor and
+    // the next Ctrl+Win would operate on the wrong screen. The cursor is stable.
+    let monitor_id = Monitor::at_point(&Mouse::get_cursor_pos()?).stable_id()?;
     let vd = SluWorkspacesManager2::instance();
 
     match cmd {
