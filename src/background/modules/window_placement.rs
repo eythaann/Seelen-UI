@@ -48,5 +48,8 @@ fn nudge_into_work_area(window: &Window) -> Result<()> {
         right: outer.right + dx,
         bottom: outer.bottom + dy,
     };
-    window.set_position(&new_rect, SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS)
+    window.set_position(
+        &new_rect,
+        SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS,
+    )
 }
