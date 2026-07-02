@@ -93,6 +93,9 @@ impl SeelenUI {
         WIDGET_MANAGER.reconcile()?;
         CRONOMETER.record("reconcile");
 
+        // Keep newly-opened windows out of the shell-bar reserved area (toolbar).
+        crate::modules::window_placement::init();
+
         // Re-evaluate per-monitor widgets (toolbar, weg, ...) when a display is
         // connected or disconnected. Without this, a removed monitor's widgets are
         // never evicted and Windows relocates their webviews onto a surviving
