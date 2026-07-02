@@ -61,6 +61,25 @@ jobs:
             });
             return data.id;
 
+  # Report which optional secrets are configured, so publish-time jobs that need
+  # them can be skipped cleanly on forks instead of failing the whole run.
+  check-secrets:
+    runs-on: ubuntu-latest
+    outputs:
+      has_ms: ${{ steps.check.outputs.has_ms }}
+      has_signing: ${{ steps.check.outputs.has_signing }}
+      has_discord: ${{ steps.check.outputs.has_discord }}
+    steps:
+      - id: check
+        env:
+          MS: ${{ secrets.MS_CLIENT_ID }}
+          SIGNING: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          DISCORD: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          echo "has_ms=$([ -n "$MS" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "has_signing=$([ -n "$SIGNING" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "has_discord=$([ -n "$DISCORD" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
   build-binaries:
     needs: create-release
     strategy:
@@ -312,7 +331,8 @@ jobs:
             });
 
   microsoft-store-submission:
-    needs: [publish-release, merge-bundles]
+    needs: [check-secrets, publish-release, merge-bundles]
+    if: ${{ needs.check-secrets.outputs.has_ms == 'true' }}
     runs-on: windows-2025
     steps:
       - uses: actions/checkout@v4
@@ -335,7 +355,8 @@ jobs:
           SBDisableTelemetry: true
 
   generate-update-file:
-    needs: [get-version, create-release, publish-release]
+    needs: [check-secrets, get-version, create-release, publish-release]
+    if: ${{ needs.check-secrets.outputs.has_signing == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -346,7 +367,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   discord:
-    needs: [get-version, publish-release]
+    needs: [check-secrets, get-version, publish-release]
+    if: ${{ needs.check-secrets.outputs.has_discord == 'true' }}
     uses: ./.github/workflows/discord-notify.yml
     with:
       tag: v${{ needs.get-version.outputs.version }}
