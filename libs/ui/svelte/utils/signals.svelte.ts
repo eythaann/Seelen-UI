@@ -2,7 +2,11 @@ import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 
 let _isThisWebviewFocused = $state(false);
 subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: { hwnd, ownerHwnd } }) => {
-  _isThisWebviewFocused = Widget.self.windowId === hwnd || Widget.self.windowId === ownerHwnd;
+  // Guard against null/0 ids: when focus goes to an owner-less window, ownerHwnd
+  // can be 0/null and match a not-yet-initialized self id, which briefly marks the
+  // widget as focused and flashes auto-hidden docks/toolbars. Only match real ids.
+  const self = Widget.self.windowId;
+  _isThisWebviewFocused = (!!self && self === hwnd) || (!!ownerHwnd && self === ownerHwnd);
 });
 
 export const isThisWebviewFocused = {
