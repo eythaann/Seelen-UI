@@ -11,7 +11,7 @@ use std::sync::LazyLock;
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
 use slu_utils::{debounce, Debounce};
-use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
+use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_SHOWNOACTIVATE};
 
 use crate::error::{Result, ResultLogExt};
 use crate::event_manager;
@@ -509,8 +509,11 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
     }
 
     fn restore(&self) {
-        let len = self.windows.len();
-        for (idx, addr) in self.windows.iter().enumerate() {
+        // self.windows is kept in focus order (SystemForeground pushes the focused
+        // window to the end), so the last window that ends up visible is the topmost
+        // one and the only one that should be activated.
+        let mut topmost: Option<isize> = None;
+        for addr in self.windows.iter() {
             let window = Window::from(*addr);
             let is_minimized = window.is_minimized();
 
@@ -523,15 +526,23 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
                 // Push before show_window to avoid a race where SystemMinimizeEnd
                 // fires on the hook thread before this thread reaches the push.
                 RESTORED_EVENT_QUEUE.push(*addr);
-                // use normal show instead async cuz it will keep the order of restoring
-                window.show_window(SW_RESTORE).log_error();
+                // Restore WITHOUT activating. SW_RESTORE activates each window, so a
+                // workspace with N windows steals foreground N times in a row, which
+                // shows up as rapid flashing (worse the more windows there are). Only
+                // the topmost window is activated, via focus() below.
+                // Sync (not async) show keeps the restore order.
+                window.show_window(SW_SHOWNOACTIVATE).log_error();
             }
             MINIMIZED_BY_WORKSPACES.remove(addr);
 
-            // ensure correct focus
-            if idx == len - 1 {
-                window.focus().log_error();
-            }
+            // this window is now visible; remember it as the current topmost candidate
+            topmost = Some(*addr);
+        }
+
+        // Focus only the topmost visible window. If every window stayed minimized
+        // (nothing was restored), don't force anything to the foreground.
+        if let Some(addr) = topmost {
+            Window::from(addr).focus().log_error();
         }
     }
 }
