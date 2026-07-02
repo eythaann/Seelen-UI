@@ -1,7 +1,5 @@
 use windows::Win32::Foundation::RECT;
-use windows::Win32::UI::WindowsAndMessaging::{
-    SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOZORDER,
-};
+use windows::Win32::UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOZORDER};
 
 use crate::{
     error::{Result, ResultLogExt},
