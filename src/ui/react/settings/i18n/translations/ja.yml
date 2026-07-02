@@ -340,6 +340,7 @@ wall:
 weg:
   auto_hide: 自動的に隠す
   auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
+  per_monitor_auto_hide: モニターごとにドックを個別に隠す
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: 位置

@@ -325,6 +325,7 @@ wall:
 weg:
   auto_hide: 自动隐藏
   auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
+  per_monitor_auto_hide: 每个屏幕各自隐藏任务栏
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置

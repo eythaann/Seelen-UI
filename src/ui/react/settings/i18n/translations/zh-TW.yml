@@ -329,6 +329,7 @@ wall:
 weg:
   auto_hide: 自動隱藏
   auto_hide_touch_disabled: 自動隱藏在觸控螢幕裝置上不可用
+  per_monitor_auto_hide: 每個螢幕各自隱藏工具列
   delay_to_hide: 延遲隱藏
   delay_to_show: 延遲顯示
   dock_side: 位置

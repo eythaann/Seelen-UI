@@ -339,6 +339,7 @@ wall:
 weg:
   auto_hide: 자동 숨기기
   auto_hide_touch_disabled: 터치 스크린 장치에서는 자동 숨기기를 사용할 수 없습니다.
+  per_monitor_auto_hide: 모니터별로 독을 개별적으로 숨기기
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치
