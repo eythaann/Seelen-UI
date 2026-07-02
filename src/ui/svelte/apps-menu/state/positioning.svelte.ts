@@ -10,6 +10,14 @@ let monitorToShow = $derived.by(() => {
     targetMonitor = globalState.monitors.find((m) => m.id === globalState.desiredMonitorId);
   }
 
+  // No explicit monitor: use the one under the requested point (mouse cursor).
+  if (!targetMonitor && globalState.desiredPosition) {
+    const p = globalState.desiredPosition;
+    targetMonitor = globalState.monitors.find((m) =>
+      p.x >= m.rect.left && p.x < m.rect.right && p.y >= m.rect.top && p.y < m.rect.bottom
+    );
+  }
+
   // Fallback to primary monitor if not found or not specified
   if (!targetMonitor) {
     targetMonitor = globalState.monitors.find((m) => m.isPrimary) || globalState.monitors[0];
@@ -57,9 +65,13 @@ $effect.root(() => {
   });
 });
 
-export async function onTriggered(monitorId?: string | null) {
+export async function onTriggered(
+  monitorId?: string | null,
+  position?: { x: number; y: number } | null,
+) {
   globalState.view = StartView.Favorites;
   globalState.desiredMonitorId = monitorId || null;
+  globalState.desiredPosition = position || null;
   globalState.version++; // trigger reactive updates
 
   await Widget.self.show();

@@ -274,6 +274,7 @@ class State {
   disbandFolder = disbandFolder;
 
   desiredMonitorId = $state<string | null>(null);
+  desiredPosition = $state<{ x: number; y: number } | null>(null);
 
   view = $state(StartView.Favorites);
   preselectedItem = $state<string | null>(null);

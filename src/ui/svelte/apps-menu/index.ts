@@ -16,7 +16,7 @@ widget.onTrigger(async (args) => {
   if (visible) {
     widget.hide();
   } else {
-    onTriggered(args.monitorId);
+    onTriggered(args.monitorId, args.desiredPosition);
   }
 });
 
