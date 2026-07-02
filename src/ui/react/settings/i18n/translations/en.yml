@@ -362,7 +362,7 @@ wall:
 weg:
   auto_hide: Auto Hide
   auto_hide_touch_disabled: Auto hide is not available on touch screen devices
-  per_monitor_auto_hide: Auto hide each monitor's dock independently
+  per_monitor_auto_hide: Hide each screen's dock independently
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
