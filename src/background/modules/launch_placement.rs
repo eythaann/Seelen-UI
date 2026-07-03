@@ -4,7 +4,11 @@ use std::{
 };
 
 use windows::Win32::{
-    Foundation::RECT,
+    Foundation::{CloseHandle, HANDLE, RECT},
+    System::Diagnostics::ToolHelp::{
+        CreateToolhelp32Snapshot, Process32FirstW, Process32NextW, PROCESSENTRY32W,
+        TH32CS_SNAPPROCESS,
+    },
     UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOZORDER},
 };
 
@@ -20,7 +24,15 @@ use crate::{
 /// triggered the launch from. When launched via Seelen (apps-menu, dock/weg),
 /// remember the monitor under the cursor at launch time and, once the process'
 /// first window shows up, move it there.
-const PENDING_TTL: Duration = Duration::from_secs(20);
+///
+/// Generous TTL: the launched process may show a "can't verify publisher"
+/// prompt (common for network-drive exes) that waits on the user, or run
+/// through antivirus/SmartScreen scanning, before its real window appears.
+const PENDING_TTL: Duration = Duration::from_secs(60);
+/// Many launchers (game boot/updater screens, installers) spawn the real app
+/// as a brand new process instead of just opening a window themselves. Walk
+/// up the parent chain this many hops looking for a pending launch.
+const MAX_ANCESTOR_HOPS: u8 = 8;
 
 static PENDING: LazyLock<SyncHashMap<u32, (RECT, Instant)>> = LazyLock::new(SyncHashMap::new);
 
@@ -41,13 +53,13 @@ pub fn register(pid: u32, target_monitor_rect: RECT) {
 
 fn place_on_target_monitor(window: &Window) -> Result<()> {
     let pid = window.process().id();
-    let Some((target, registered_at)) = PENDING.get(&pid, |v| *v) else {
+    let Some((target, _)) = find_pending(pid) else {
         return Ok(());
     };
-    if registered_at.elapsed() > PENDING_TTL {
-        PENDING.remove(&pid);
-        return Ok(());
-    }
+
+    // Found via an ancestor: remember the real pid too, so sibling/later
+    // windows from this same process match directly without re-walking.
+    PENDING.get_or_insert(pid, || (target, Instant::now()), |_| {});
 
     if !window.is_interactable_and_not_hidden() || window.is_maximized() || window.is_minimized() {
         return Ok(());
@@ -72,4 +84,56 @@ fn place_on_target_monitor(window: &Window) -> Result<()> {
         &new_rect,
         SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS,
     )
+}
+
+/// Looks up `pid` directly, then its ancestor chain, for a live pending entry.
+fn find_pending(pid: u32) -> Option<(RECT, Instant)> {
+    if PENDING.is_empty() {
+        return None; // common case: nothing was launched via Seelen recently
+    }
+
+    let mut current = pid;
+    for _ in 0..=MAX_ANCESTOR_HOPS {
+        if let Some(entry) = PENDING.get(&current, |v| *v) {
+            if entry.1.elapsed() <= PENDING_TTL {
+                return Some(entry);
+            }
+            PENDING.remove(&current);
+            return None;
+        }
+        current = match parent_process_id(current) {
+            Some(ppid) if ppid != 0 && ppid != current => ppid,
+            _ => break,
+        };
+    }
+    None
+}
+
+fn parent_process_id(pid: u32) -> Option<u32> {
+    // SAFETY: standard CreateToolhelp32Snapshot/Process32*W walk; handle is closed below.
+    unsafe {
+        let snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0).ok()?;
+        let result = walk_for_parent(snapshot, pid);
+        let _ = CloseHandle(snapshot);
+        result
+    }
+}
+
+unsafe fn walk_for_parent(snapshot: HANDLE, pid: u32) -> Option<u32> {
+    let mut entry = PROCESSENTRY32W {
+        dwSize: std::mem::size_of::<PROCESSENTRY32W>() as u32,
+        ..Default::default()
+    };
+
+    if Process32FirstW(snapshot, &mut entry).is_err() {
+        return None;
+    }
+    loop {
+        if entry.th32ProcessID == pid {
+            return Some(entry.th32ParentProcessID);
+        }
+        if Process32NextW(snapshot, &mut entry).is_err() {
+            return None;
+        }
+    }
 }

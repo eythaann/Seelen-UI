@@ -120,6 +120,7 @@ windows = { workspace = true, features = [
     "Win32_System_EventLog",
     "Win32_System_TaskScheduler",
     "Win32_System_Threading",
+    "Win32_System_Diagnostics_ToolHelp",
     "Win32_System_WinRT",
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
