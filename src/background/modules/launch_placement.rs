@@ -49,8 +49,7 @@ fn place_on_target_monitor(window: &Window) -> Result<()> {
         return Ok(());
     }
 
-    if !window.is_interactable_and_not_hidden() || window.is_maximized() || window.is_minimized()
-    {
+    if !window.is_interactable_and_not_hidden() || window.is_maximized() || window.is_minimized() {
         return Ok(());
     }
 
