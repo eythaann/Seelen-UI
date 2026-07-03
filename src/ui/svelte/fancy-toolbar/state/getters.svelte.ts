@@ -12,6 +12,9 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, (e) => {
   virtualDesktop.value = e.payload.monitors[currentMonitorId];
 });
 
+export const virtualDesktops = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, virtualDesktops.setByPayload);
+
 export const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
@@ -44,6 +47,7 @@ PluginList.onChange((list) => {
 
 await Promise.all([
   virtualDesktop.init(),
+  virtualDesktops.init(),
   monitors.init(),
   mousePos.init(),
   settings.init(),

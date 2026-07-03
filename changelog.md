@@ -10,6 +10,7 @@
 
 - fullscreen state being removed from background windows on foreground change.
 - dock and toolbar hidding while dragging items.
+- state while switching workspaces.
 
 ## [2.7.4]
 

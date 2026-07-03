@@ -102,6 +102,13 @@ where
         self.0.lock().drain().collect()
     }
 
+    pub fn with_lock<F, R>(&self, f: F) -> R
+    where
+        F: FnOnce(&mut HashMap<K, V>) -> R,
+    {
+        f(&mut self.0.lock())
+    }
+
     pub fn replace(&self, value: HashMap<K, V>) {
         *self.0.lock() = value;
     }

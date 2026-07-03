@@ -8,14 +8,23 @@ use seelen_core::{
 };
 
 use crate::{
-    app::emit_to_webviews, error::Result, resources::RESOURCES, utils::date_based_hex_id,
-    virtual_desktops::SluWorkspacesManager2,
+    app::emit_to_webviews,
+    error::Result,
+    resources::RESOURCES,
+    utils::date_based_hex_id,
+    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
 };
 
 fn get_vd_manager() -> &'static SluWorkspacesManager2 {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
-        SluWorkspacesManager2::subscribe(|_event| {
+        SluWorkspacesManager2::subscribe(|event| {
+            // As switching is atomic operation the data was send via the event to avoid waiting for switch end.
+            if let VirtualDesktopEvent::SwitchingDesktop(payload) = event {
+                emit_to_webviews(SeelenEvent::VirtualDesktopsChanged, payload);
+                return;
+            }
+
             let payload: VirtualDesktops = SluWorkspacesManager2::instance().into();
             emit_to_webviews(SeelenEvent::VirtualDesktopsChanged, payload);
         });

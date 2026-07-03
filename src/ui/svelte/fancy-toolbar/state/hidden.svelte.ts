@@ -1,8 +1,11 @@
 import { HideMode } from "@seelen-ui/lib/types";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
+import { virtualDesktops } from "./getters.svelte.ts";
 import { settingsState } from "./settings.svelte.ts";
 import { systemState } from "./system.svelte.ts";
 import { windowsState } from "./windows.svelte.ts";
+
+const isSwitchingWorkspace = $derived(virtualDesktops.value.switching);
 
 let _hiddenByAutohide = $state(false);
 let _isDraggingItem = $state(false);
@@ -18,7 +21,17 @@ export function setToolbarIsDraggingItem(isDragging: boolean): void {
 }
 
 $effect.root(() => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
   $effect(() => {
+    if (isSwitchingWorkspace) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      return;
+    }
+
     const { delayToHide, delayToShow, hideMode, position } = settingsState;
     const isMouseOverEdge = systemState.mouseAtEdge === position;
 
@@ -35,7 +48,9 @@ $effect.root(() => {
         flush = isTouchPrimary.value;
         break;
       case HideMode.OnOverlap:
-        hidden = !isTouchPrimary.value && windowsState.isTbOverlapped && !isThisWebviewFocused.value &&
+        hidden = !isTouchPrimary.value &&
+          windowsState.isTbOverlapped &&
+          !isThisWebviewFocused.value &&
           !isMouseOverEdge;
         flush = isTouchPrimary.value;
         break;
@@ -46,7 +61,6 @@ $effect.root(() => {
       flush = true;
     }
 
-    let timeout: ReturnType<typeof setTimeout> | null = null;
     if (hidden) {
       timeout = setTimeout(() => {
         _hiddenByAutohide = true;
@@ -62,7 +76,10 @@ $effect.root(() => {
     }
 
     return () => {
-      if (timeout) clearTimeout(timeout);
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
     };
   });
 });

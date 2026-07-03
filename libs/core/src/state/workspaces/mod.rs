@@ -12,6 +12,8 @@ pub struct VirtualDesktops {
     pub monitors: HashMap<MonitorId, VirtualDesktopMonitor>,
     /// pinned windows will be not affected by switching workspaces
     pub pinned: Vec<isize>,
+    /// true if the system is currently switching workspaces
+    pub switching: bool,
 }
 
 impl VirtualDesktops {

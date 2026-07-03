@@ -1,10 +1,16 @@
-use seelen_core::{state::WorkspaceId, system_state::MonitorId};
+use seelen_core::{
+    state::{VirtualDesktops, WorkspaceId},
+    system_state::MonitorId,
+};
 
 #[derive(Debug, Clone)]
 #[allow(dead_code)]
 pub enum VirtualDesktopEvent {
     DesktopCreated(WorkspaceId),
     DesktopDestroyed(WorkspaceId),
+    SwitchingDesktop(VirtualDesktops),
+    /// Emitted once the workspace switch (and its settle grace period) is fully done.
+    SwitchingFinished,
     DesktopChanged {
         monitor: MonitorId,
         workspace: WorkspaceId,

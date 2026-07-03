@@ -4,6 +4,9 @@ import { lazyRune } from "libs/ui/svelte/utils";
 
 export const currentMonitorId = Widget.getCurrent().decoded.monitorId!;
 
+export const virtualDesktops = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, virtualDesktops.setByPayload);
+
 export const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
@@ -48,6 +51,7 @@ subscribe(SeelenEvent.WidgetDebugInfoChanged, widgetStatuses.setByPayload);
 export const wegItems = lazyRune(() => invoke(SeelenCommand.StateGetWegItems));
 
 await Promise.all([
+  virtualDesktops.init(),
   monitors.init(),
   players.init(),
   notifications.init(),

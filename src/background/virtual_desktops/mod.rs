@@ -6,6 +6,7 @@ pub mod wallpapers;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Write;
+use std::sync::atomic::{AtomicU32, Ordering};
 use std::sync::LazyLock;
 
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
@@ -37,6 +38,10 @@ pub struct SluWorkspacesManager2 {
     pub monitors: SyncHashMap<MonitorId, VirtualDesktopMonitor>,
     pub workspace_index: SyncHashMap<WorkspaceId, MonitorId>,
     pub pinned: SyncVec<isize>,
+    /// Count of in-flight `switch_to_id` calls. Used instead of a bool so that
+    /// concurrent switches (e.g. on different monitors) don't race: the last
+    /// one to finish is the only one allowed to clear the "switching" state.
+    switching: AtomicU32,
 }
 
 event_manager!(SluWorkspacesManager2, VirtualDesktopEvent);
@@ -319,27 +324,45 @@ impl SluWorkspacesManager2 {
 
     /// Switch to a workspace by ID on a specific monitor
     pub fn switch_to_id(&self, monitor_id: &MonitorId, workspace_id: &WorkspaceId) -> Result<()> {
-        let changed = self
-            .monitors
-            .get(monitor_id, |monitor| {
+        let switched = self.monitors.with_lock(|monitors| -> Result<bool> {
+            {
+                let monitor = monitors.get(monitor_id).ok_or("Monitor not found")?;
                 if monitor.active_workspace_id() == workspace_id {
+                    log::trace!("Already on workspace {workspace_id} on monitor {monitor_id}");
                     return Ok(false);
                 }
+            }
 
-                monitor.active_workspace().hide(false);
-                monitor.set_active_workspace(workspace_id)?;
-                monitor.active_workspace().restore();
-                Result::Ok(true)
-            })
-            .ok_or("Monitor not found")??;
+            self.switching.fetch_add(1, Ordering::SeqCst);
+            Self::send(VirtualDesktopEvent::SwitchingDesktop(VirtualDesktops {
+                monitors: monitors.clone(),
+                pinned: self.pinned.to_vec(),
+                switching: true,
+            }));
 
-        if changed {
+            let monitor = monitors.get_mut(monitor_id).ok_or("Monitor not found")?;
+            monitor.active_workspace().hide(false);
+            monitor.set_active_workspace(workspace_id)?;
+            monitor.active_workspace().restore();
+
             log::trace!("Switched to workspace {workspace_id} on monitor {monitor_id}");
             Self::send(VirtualDesktopEvent::DesktopChanged {
                 monitor: monitor_id.clone(),
                 workspace: workspace_id.clone(),
             });
+
             self.request_save();
+            Ok(true)
+        })?;
+
+        if switched {
+            std::thread::sleep(std::time::Duration::from_millis(300));
+            // Only the switch that brings the counter back to 0 is done switching;
+            // if it's still > 0, another concurrent switch is still in flight and
+            // the "switching" state must remain true.
+            if self.switching.fetch_sub(1, Ordering::SeqCst) == 1 {
+                Self::send(VirtualDesktopEvent::SwitchingFinished);
+            }
         }
 
         Ok(())
@@ -478,6 +501,7 @@ impl From<VirtualDesktops> for SluWorkspacesManager2 {
             monitors: SyncHashMap::from(value.monitors),
             workspace_index: SyncHashMap::from(workspace_index),
             pinned: SyncVec::from(value.pinned),
+            switching: AtomicU32::new(0),
         }
     }
 }
@@ -487,6 +511,7 @@ impl From<&SluWorkspacesManager2> for VirtualDesktops {
         Self {
             monitors: value.monitors.to_hash_map(),
             pinned: value.pinned.to_vec(),
+            switching: value.switching.load(Ordering::SeqCst) > 0,
         }
     }
 }

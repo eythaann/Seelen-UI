@@ -1,6 +1,8 @@
 use parking_lot::{Mutex, MutexGuard};
-use rust_i18n::AtomicStr;
-use std::panic::Location;
+use std::{
+    panic::Location,
+    sync::atomic::{AtomicPtr, Ordering},
+};
 
 use crate::error::AppError;
 
@@ -8,7 +10,7 @@ use crate::error::AppError;
 /// This is useful for debugging deadlocks and understanding lock contention.
 pub struct TracedMutex<T> {
     inner: Mutex<T>,
-    last_lock_location: AtomicStr,
+    last_lock_location: AtomicPtr<Location<'static>>,
 }
 
 impl<T> TracedMutex<T> {
@@ -16,7 +18,7 @@ impl<T> TracedMutex<T> {
     pub fn new(value: T) -> Self {
         Self {
             inner: Mutex::new(value),
-            last_lock_location: AtomicStr::new(""),
+            last_lock_location: AtomicPtr::new(std::ptr::null_mut()),
         }
     }
 
@@ -33,28 +35,36 @@ impl<T> TracedMutex<T> {
     /// - The last recorded lock location (if any)
     #[track_caller]
     pub fn lock<'a>(&'a self) -> MutexGuard<'a, T> {
-        // let current_location = Location::caller();
-
         // Try to acquire the lock with a timeout to detect potential deadlocks
         match self.inner.try_lock_for(std::time::Duration::from_secs(5)) {
             Some(guard) => {
                 let location = Location::caller();
-                self.last_lock_location.replace(format!(
-                    "{}:{}:{}",
-                    location.file(),
-                    location.line(),
-                    location.column()
-                ));
+                self.last_lock_location
+                    .store(location as *const _ as *mut _, Ordering::Release);
                 guard
             }
-            None => {
-                // Lock is already held, gather information and panic
-                let msg = format!(
-                    "Mutex is deadlocked, Last lock location: {}",
-                    self.last_lock_location
-                );
-                panic!("{:?}", AppError::from(msg));
-            }
+            None => self.panic_timeout(),
+        }
+    }
+
+    #[cold]
+    fn panic_timeout(&self) -> ! {
+        let last = unsafe { self.last_lock_location.load(Ordering::Acquire).as_ref() };
+
+        match last {
+            Some(last) => panic!(
+                "{:?}",
+                AppError::from(format!(
+                    "Mutex lock timed out after 5 seconds.\nLast lock acquired at {}:{}:{}",
+                    last.file(),
+                    last.line(),
+                    last.column(),
+                ))
+            ),
+            None => panic!(
+                "{:?}",
+                AppError::from("Mutex lock timed out after 5 seconds.")
+            ),
         }
     }
 }
