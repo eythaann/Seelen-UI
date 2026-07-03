@@ -47,6 +47,7 @@ pub fn init() {
 /// Call right after launching a process from a Seelen-triggered action, with
 /// the monitor the user's cursor was on at that moment.
 pub fn register(pid: u32, target_monitor_rect: RECT) {
+    log::trace!("launch_placement: registering pid={pid} target={target_monitor_rect:?}");
     PENDING.retain(|(_, (_, at))| at.elapsed() < PENDING_TTL);
     PENDING.upsert(pid, (target_monitor_rect, Instant::now()));
 }
@@ -56,17 +57,28 @@ fn place_on_target_monitor(window: &Window) -> Result<()> {
     let Some((target, _)) = find_pending(pid) else {
         return Ok(());
     };
+    log::trace!(
+        "launch_placement: matched new window (hwnd={:?}, pid={pid}) to target={target:?}",
+        window.hwnd()
+    );
 
     // Found via an ancestor: remember the real pid too, so sibling/later
     // windows from this same process match directly without re-walking.
     PENDING.get_or_insert(pid, || (target, Instant::now()), |_| {});
 
     if !window.is_interactable_and_not_hidden() || window.is_maximized() || window.is_minimized() {
+        log::trace!(
+            "launch_placement: skipping pid={pid}, interactable={} maximized={} minimized={}",
+            window.is_interactable_and_not_hidden(),
+            window.is_maximized(),
+            window.is_minimized()
+        );
         return Ok(());
     }
 
     let current = window.monitor().info()?.monitorInfo.rcMonitor;
     if current.left == target.left && current.top == target.top {
+        log::trace!("launch_placement: pid={pid} already on target monitor");
         return Ok(()); // already on the right monitor
     }
 
@@ -80,6 +92,7 @@ fn place_on_target_monitor(window: &Window) -> Result<()> {
         right: outer.right + dx,
         bottom: outer.bottom + dy,
     };
+    log::trace!("launch_placement: moving pid={pid} to {new_rect:?}");
     window.set_position(
         &new_rect,
         SWP_NOZORDER | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS,
@@ -92,6 +105,7 @@ fn find_pending(pid: u32) -> Option<(RECT, Instant)> {
         return None; // common case: nothing was launched via Seelen recently
     }
 
+    let mut chain = vec![pid];
     let mut current = pid;
     for _ in 0..=MAX_ANCESTOR_HOPS {
         if let Some(entry) = PENDING.get(&current, |v| *v) {
@@ -102,10 +116,14 @@ fn find_pending(pid: u32) -> Option<(RECT, Instant)> {
             return None;
         }
         current = match parent_process_id(current) {
-            Some(ppid) if ppid != 0 && ppid != current => ppid,
+            Some(ppid) if ppid != 0 && ppid != current => {
+                chain.push(ppid);
+                ppid
+            }
             _ => break,
         };
     }
+    log::trace!("launch_placement: no pending match for pid chain {chain:?}");
     None
 }
 

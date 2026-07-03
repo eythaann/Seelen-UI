@@ -32,7 +32,10 @@ use crate::{
 /// Best-effort: registers the monitor under the cursor as the target for the
 /// next window that shows up from the process we're about to launch.
 fn register_launch_target(pid: Option<u32>) {
-    let Some(pid) = pid else { return };
+    let Some(pid) = pid else {
+        log::trace!("launch_placement: execute() returned no pid, can't track this launch");
+        return;
+    };
     if let Ok(pos) = Mouse::get_cursor_pos() {
         if let Ok(info) = Monitor::at_point(&pos).info() {
             launch_placement::register(pid, info.monitorInfo.rcMonitor);
