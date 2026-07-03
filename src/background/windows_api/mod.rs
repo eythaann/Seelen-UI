@@ -85,8 +85,8 @@ use windows::{
             Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
             Threading::{
-                GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
-                OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, GetProcessId,
+                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
                 PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
@@ -97,7 +97,7 @@ use windows::{
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
                 SHCreateItemFromParsingName, SHGetKnownFolderItem, SHGetKnownFolderPath,
                 SHLoadIndirectString, ShellExecuteExW, ShellLink, VirtualDesktopManager,
-                KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
+                KF_FLAG_DEFAULT, SEE_MASK_NOCLOSEPROCESS, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 FindWindowExW, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -1019,12 +1019,14 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// Launches `program`, returning the id of the newly created process when
+    /// the shell hands one back (it doesn't for some verbs/associations).
     pub fn execute(
         program: String,
         args: Option<String>,
         working_dir: Option<PathBuf>,
         elevated: bool,
-    ) -> Result<()> {
+    ) -> Result<Option<u32>> {
         log::trace!("Running: {program:?} with args: {args:?} in working dir: {working_dir:?}");
 
         let program = WindowsString::from_str(&program);
@@ -1035,6 +1037,7 @@ impl WindowsApi {
 
         let mut info = SHELLEXECUTEINFOW {
             cbSize: std::mem::size_of::<SHELLEXECUTEINFOW>() as _,
+            fMask: SEE_MASK_NOCLOSEPROCESS,
             nShow: SW_SHOWNORMAL.0,
             lpFile: program.as_pcwstr(),
             lpParameters: match &args {
@@ -1053,6 +1056,13 @@ impl WindowsApi {
         };
 
         unsafe { ShellExecuteExW(&mut info)? };
-        Ok(())
+
+        if info.hProcess.is_invalid() {
+            return Ok(None);
+        }
+        // SAFETY: SEE_MASK_NOCLOSEPROCESS means we own this handle now.
+        let process = unsafe { Owned::new(info.hProcess) };
+        let pid = unsafe { GetProcessId(*process) };
+        Ok(if pid == 0 { None } else { Some(pid) })
     }
 }

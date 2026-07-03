@@ -2,6 +2,7 @@ pub mod apps;
 pub mod clipboard;
 pub mod focus_assist;
 pub mod fonts;
+pub mod launch_placement;
 pub mod media;
 pub mod monitors;
 pub mod network;

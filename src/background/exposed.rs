@@ -1,4 +1,4 @@
-use std::{collections::HashMap, os::windows::process::CommandExt, path::PathBuf};
+use std::{collections::HashMap, path::PathBuf};
 
 use seelen_core::{
     command_handler_list,
@@ -8,11 +8,11 @@ use seelen_core::{
 use slu_ipc::{messages::SvcAction, ServiceIpc};
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
 use crate::{
     app::{get_app_handle, SeelenUI},
     error::Result,
+    modules::launch_placement,
     utils::{
         self,
         constants::SEELEN_COMMON,
@@ -23,8 +23,22 @@ use crate::{
         permissions::{request_widget_permission, WidgetPerm},
         popups::shortcut_registering::REG_SHORTCUT_DATA,
     },
-    windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
+    windows_api::{
+        hdc::DeviceContext, input::Mouse, monitor::Monitor, string_utils::WindowsString,
+        window::Window, WindowsApi,
+    },
 };
+
+/// Best-effort: registers the monitor under the cursor as the target for the
+/// next window that shows up from the process we're about to launch.
+fn register_launch_target(pid: Option<u32>) {
+    let Some(pid) = pid else { return };
+    if let Ok(pos) = Mouse::get_cursor_pos() {
+        if let Ok(info) = Monitor::at_point(&pos).info() {
+            launch_placement::register(pid, info.monitorInfo.rcMonitor);
+        }
+    }
+}
 
 #[tauri::command(async)]
 pub fn log_from_webview(level: u8, message: String, location: String) {
@@ -39,16 +53,8 @@ pub fn log_from_webview(level: u8, message: String, location: String) {
 }
 
 pub fn open_file_inner(path: String) -> Result<()> {
-    std::process::Command::new("cmd")
-        .raw_arg("/c")
-        .raw_arg("start")
-        .raw_arg("\"\"")
-        .raw_arg(format!("\"{path}\""))
-        .creation_flags(CREATE_NO_WINDOW.0 | CREATE_NEW_PROCESS_GROUP.0)
-        .stdin(std::process::Stdio::null())
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .spawn()?;
+    let pid = WindowsApi::execute(path, None, None, false)?;
+    register_launch_target(pid);
     Ok(())
 }
 
@@ -78,7 +84,9 @@ async fn run(
 ) -> Result<()> {
     request_widget_permission(&webview, WidgetPerm::Run)?;
     let args = args.map(|args| args.to_string());
-    WindowsApi::execute(program, args, working_dir, elevated)
+    let pid = WindowsApi::execute(program, args, working_dir, elevated)?;
+    register_launch_target(pid);
+    Ok(())
 }
 
 #[tauri::command(async)]
