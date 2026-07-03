@@ -43,13 +43,24 @@ impl UserAppsManager {
         self.interactable_windows.any(|w| w.hwnd == hwnd)
     }
 
-    fn add_win(&self, window: &Window) {
-        log::trace!("Adding: {window}");
-        let mut serialized = window.to_serializable();
-        if window.is_focused() {
-            serialized.last_foreground_at = windows::now_millis();
-        }
-        self.interactable_windows.push(serialized);
+    /// Atomically inserts `window` if it isn't already tracked. Returns `true` if it was
+    /// inserted. Using a single locked check-and-insert avoids the race between the WinEvent
+    /// dispatcher thread and the `InteractableWindowsRevalidator` thread both observing the
+    /// window as untracked and pushing a duplicate entry.
+    fn add_win(&self, window: &Window) -> bool {
+        let hwnd = window.address();
+        let is_focused = window.is_focused();
+        self.interactable_windows.get_or_insert_with(
+            |w| w.hwnd == hwnd,
+            || {
+                log::trace!("Adding: {window}");
+                let mut serialized = window.to_serializable();
+                if is_focused {
+                    serialized.last_foreground_at = windows::now_millis();
+                }
+                serialized
+            },
+        )
     }
 
     fn remove_win(&self, window: &Window) {

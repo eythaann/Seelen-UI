@@ -33,6 +33,19 @@ impl<T> SyncVec<T> {
         self.0.lock().iter().any(f)
     }
 
+    /// Atomically checks whether an item matching `pred` is already present and, if not,
+    /// inserts the item produced by `make`. The check and insert happen under a single lock
+    /// acquisition, avoiding the TOCTOU race of calling `any`/`contains` followed by `push`.
+    /// Returns `true` if the item was inserted.
+    pub fn get_or_insert_with(&self, pred: impl Fn(&T) -> bool, make: impl FnOnce() -> T) -> bool {
+        let mut items = self.0.lock();
+        if items.iter().any(pred) {
+            return false;
+        }
+        items.push(make());
+        true
+    }
+
     pub fn for_each<F>(&self, f: F)
     where
         F: FnMut(&mut T),
