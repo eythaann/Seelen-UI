@@ -5,12 +5,17 @@ import { windowsState } from "./windows.svelte.ts";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils";
 
 let _hiddenByAutohide = $state(false);
+let _isDraggingItem = $state(false);
 
 export const dockShouldBeHidden = {
   get value() {
     return _hiddenByAutohide;
   },
 };
+
+export function setDockIsDraggingItem(isDragging: boolean): void {
+  _isDraggingItem = isDragging;
+}
 
 $effect.root(() => {
   $effect(() => {
@@ -36,6 +41,11 @@ $effect.root(() => {
           !isMouseOverEdge;
         flush = isTouchPrimary.value;
         break;
+    }
+
+    if (_isDraggingItem) {
+      hidden = false;
+      flush = true;
     }
 
     let timeout: ReturnType<typeof setTimeout> | null = null;

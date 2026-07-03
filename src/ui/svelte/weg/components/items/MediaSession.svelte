@@ -59,7 +59,7 @@
 </script>
 
 <div
-  role="banner"
+  role="group"
   class="weg-item media-session-container"
   class:media-session-container-horizontal={isHorizontal}
   class:media-session-container-vertical={!isHorizontal}

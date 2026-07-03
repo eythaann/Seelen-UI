@@ -5,12 +5,17 @@ import { systemState } from "./system.svelte.ts";
 import { windowsState } from "./windows.svelte.ts";
 
 let _hiddenByAutohide = $state(false);
+let _isDraggingItem = $state(false);
 
 export const hiddenByAutohide = {
   get value() {
     return _hiddenByAutohide;
   },
 };
+
+export function setToolbarIsDraggingItem(isDragging: boolean): void {
+  _isDraggingItem = isDragging;
+}
 
 $effect.root(() => {
   $effect(() => {
@@ -34,6 +39,11 @@ $effect.root(() => {
           !isMouseOverEdge;
         flush = isTouchPrimary.value;
         break;
+    }
+
+    if (_isDraggingItem) {
+      hidden = false;
+      flush = true;
     }
 
     let timeout: ReturnType<typeof setTimeout> | null = null;

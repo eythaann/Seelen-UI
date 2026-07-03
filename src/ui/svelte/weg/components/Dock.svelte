@@ -9,7 +9,7 @@
   import { settingsState, getDockContextMenuAlignment } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
-  import { dockShouldBeHidden } from "../state/hidden.svelte.ts";
+  import { dockShouldBeHidden, setDockIsDraggingItem } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
   import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
   import type { SwItem } from "../types.ts";
@@ -67,6 +67,14 @@
     const newItems = move(dockState.items, event);
     dockState.items = newItems;
   }
+
+  function handleDragStart() {
+    setDockIsDraggingItem(true);
+  }
+
+  function handleDragEnd() {
+    setDockIsDraggingItem(false);
+  }
 </script>
 
 <div
@@ -82,7 +90,13 @@
 >
   <BackgroundByLayers />
   <div class="weg-items-container">
-    <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
+    <DragDropProvider
+      plugins={DND_PLUGINS}
+      sensors={DND_SENSORS}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
       <div class="weg-items">
         {#if isEmpty}
           <span class="weg-empty-state-label">{$t("weg.empty")}</span>

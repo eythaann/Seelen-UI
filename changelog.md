@@ -9,6 +9,7 @@
 ### fix
 
 - fullscreen state being removed from background windows on foreground change.
+- dock and toolbar hidding while dragging items.
 
 ## [2.7.4]
 

@@ -18,7 +18,7 @@
     HARDCODED_SEPARATOR_RIGHT,
   } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
-  import { hiddenByAutohide } from "../state/hidden.svelte.ts";
+  import { hiddenByAutohide, setToolbarIsDraggingItem } from "../state/hidden.svelte.ts";
   import { windowsState } from "../state/windows.svelte.ts";
   import { matchIds } from "../utils.ts";
   import ItemsGroup from "./ItemsGroup.svelte";
@@ -182,6 +182,14 @@
     toolbarState.items = newIds.map((id) => toolbarState.items.find((i) => matchIds(i, id))!);
   }
 
+  function handleDragStart() {
+    setToolbarIsDraggingItem(true);
+  }
+
+  function handleDragEnd() {
+    setToolbarIsDraggingItem(false);
+  }
+
   // ── Resolve overlay item ──────────────────────────────────────────────────
 
   function resolveOverlayModule(sourceId: string) {
@@ -208,7 +216,13 @@
   <CornerAction />
   <BackgroundByLayers />
 
-  <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
+  <DragDropProvider
+    plugins={DND_PLUGINS}
+    sensors={DND_SENSORS}
+    onDragStart={handleDragStart}
+    onDragOver={handleDragOver}
+    onDragEnd={handleDragEnd}
+  >
     <ItemsGroup id="left" items={splittedItems.left} startIndex={0} />
     <ItemsGroup id="center" items={splittedItems.center} startIndex={splittedItems.left.length} />
     <ItemsGroup

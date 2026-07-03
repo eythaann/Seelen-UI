@@ -202,7 +202,7 @@
   }
 
   &:active {
-    transform: scale(0.8);
+    transform: translateY(2px);
   }
 
   &:not(:active) {
@@ -261,6 +261,10 @@
 
   &.media-session-container-vertical {
     height: var(--max-item-size);
+  }
+
+  &:active {
+    transform: none;
   }
 
   .media-session {
