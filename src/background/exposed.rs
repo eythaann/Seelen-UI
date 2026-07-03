@@ -8,6 +8,9 @@ use seelen_core::{
 use slu_ipc::{messages::SvcAction, ServiceIpc};
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::UI::Shell::{
+    ApplicationActivationManager, IApplicationActivationManager, AO_NONE,
+};
 
 use crate::{
     app::{get_app_handle, SeelenUI},
@@ -25,7 +28,7 @@ use crate::{
     },
     windows_api::{
         hdc::DeviceContext, input::Mouse, monitor::Monitor, string_utils::WindowsString,
-        window::Window, WindowsApi,
+        window::Window, Com, WindowsApi,
     },
 };
 
@@ -56,9 +59,33 @@ pub fn log_from_webview(level: u8, message: String, location: String) {
 }
 
 pub fn open_file_inner(path: String) -> Result<()> {
+    // Packaged/Store apps (modern Notepad, Calculator, etc.) are launched via
+    // `shell:AppsFolder\<aumid>` (see apps-menu's AppItem.svelte). ShellExecuteExW
+    // "succeeds" on that path, but the process id it hands back belongs to the
+    // shell's activation broker, not the actual app -- so PID-based tracking in
+    // launch_placement never matches. IApplicationActivationManager activates the
+    // same way but returns the real process id directly.
+    if let Some(aumid) = path.strip_prefix(r"shell:AppsFolder\") {
+        let pid = activate_packaged_app(aumid)?;
+        register_launch_target(Some(pid));
+        return Ok(());
+    }
+
     let pid = WindowsApi::execute(path, None, None, false)?;
     register_launch_target(pid);
     Ok(())
+}
+
+fn activate_packaged_app(aumid: &str) -> Result<u32> {
+    Com::run_with_context(|| unsafe {
+        let activator: IApplicationActivationManager =
+            Com::create_instance(&ApplicationActivationManager)?;
+        let aumid = WindowsString::from_str(aumid);
+        let empty_args = WindowsString::from_str("");
+        let pid =
+            activator.ActivateApplication(aumid.as_pcwstr(), empty_args.as_pcwstr(), AO_NONE)?;
+        Ok(pid)
+    })
 }
 
 #[tauri::command(async)]
