@@ -8,6 +8,7 @@ use crate::{
         },
         WorkspaceId,
     },
+    system_state::MonitorId,
     Rect,
 };
 
@@ -18,6 +19,8 @@ pub type WindowId = isize;
 #[serde(rename_all = "camelCase")]
 pub struct TwmGlobalRuntimeTree {
     pub workspaces: HashMap<WorkspaceId, TwmRuntimeTree>,
+    pub paused: bool,
+    pub paused_by_monitor: HashMap<MonitorId, bool>,
 }
 
 impl TwmGlobalRuntimeTree {

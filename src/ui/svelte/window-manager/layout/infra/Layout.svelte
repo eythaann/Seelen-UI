@@ -20,14 +20,8 @@
     },
   });
 
-  let someIsMaximizedOnBg = $derived.by(() => {
-    return state.interactables.some(
-      (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen) && !app.isIconic,
-    );
-  });
-
   let overlayVisible = $derived.by(() => {
-    if (!layout || someIsMaximizedOnBg || state.paused) {
+    if (!layout || state.pausedByMonitor[monitorId] || state.paused) {
       return false;
     }
 

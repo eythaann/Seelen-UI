@@ -6,11 +6,7 @@ import type { State } from "../state.svelte";
 const monitorId = Widget.self.decoded.monitorId!;
 
 export function requestPositioningOfLeaves(state: State) {
-  const someIsMaximizedOnBg = state.interactables.some(
-    (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen) && !app.isIconic,
-  );
-
-  if (someIsMaximizedOnBg || state.paused) {
+  if (state.pausedByMonitor[monitorId] || state.paused) {
     return;
   }
 

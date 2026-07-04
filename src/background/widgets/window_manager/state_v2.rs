@@ -19,6 +19,7 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     hook::HookManager,
+    modules::apps::application::UserAppsManager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
@@ -86,6 +87,14 @@ impl TwmState {
 
         HookManager::subscribe(|(event, origin)| {
             WindowManagerV2::process_win_event(event, origin).log_error()
+        });
+
+        self.recompute_paused_by_monitor();
+        UserAppsManager::subscribe(|_event| {
+            let mut state = WM_STATE.lock();
+            if state.recompute_paused_by_monitor() {
+                TwmState::send(TwmStateEvent::Changed);
+            }
         });
 
         let settings = FULL_STATE.load();
@@ -502,6 +511,28 @@ impl TwmState {
 
         *old = new_layout;
         Self::send(TwmStateEvent::Changed);
+    }
+
+    pub fn toggle_paused(&mut self) {
+        self.state.paused = !self.state.paused;
+        Self::send(TwmStateEvent::Changed);
+    }
+
+    /// Recomputes `paused_by_monitor` from the live interactable-windows list.
+    /// Returns `true` if the computed value changed.
+    pub fn recompute_paused_by_monitor(&mut self) -> bool {
+        let mut computed: HashMap<seelen_core::system_state::MonitorId, bool> = HashMap::new();
+        for w in UserAppsManager::instance().interactable_windows.to_vec() {
+            let flag = (w.is_zoomed || w.is_fullscreen) && !w.is_iconic;
+            let entry = computed.entry(w.monitor.clone()).or_insert(false);
+            *entry = *entry || flag;
+        }
+
+        if computed == self.state.paused_by_monitor {
+            return false;
+        }
+        self.state.paused_by_monitor = computed;
+        true
     }
 
     pub fn toggle_monocle(&mut self, workspace_id: &WorkspaceId) {
