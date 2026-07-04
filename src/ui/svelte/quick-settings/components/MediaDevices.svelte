@@ -32,13 +32,13 @@
     <input
       type="range"
       data-skin="flat"
-      value={defaultOutput.volume}
+      value={defaultOutput.volume * 100}
       oninput={(e) => {
-        setVolumeThrottled(defaultOutput.id, Number(e.currentTarget.value));
+        setVolumeThrottled(defaultOutput.id, Number(e.currentTarget.value) / 100);
       }}
       min={0}
-      max={1}
-      step={0.01}
+      max={100}
+      step={1}
     />
     <span class="quick-settings-percentage">
       {Math.round(defaultOutput.volume * 100)}%
@@ -54,13 +54,13 @@
     <input
       type="range"
       data-skin="flat"
-      value={defaultInput.volume}
+      value={defaultInput.volume * 100}
       oninput={(e) => {
-        setVolumeThrottled(defaultInput.id, Number(e.currentTarget.value));
+        setVolumeThrottled(defaultInput.id, Number(e.currentTarget.value) / 100);
       }}
       min={0}
-      max={1}
-      step={0.01}
+      max={100}
+      step={1}
     />
     <span class="quick-settings-percentage">
       {Math.round(defaultInput.volume * 100)}%

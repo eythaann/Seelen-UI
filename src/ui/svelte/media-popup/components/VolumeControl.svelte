@@ -30,33 +30,16 @@
   let internalValue = $state(0);
 
   $effect(() => {
-    internalValue = value;
+    internalValue = value * 100;
   });
 
   const onExternalChange = throttle((value: number) => {
     invoke(SeelenCommand.SetVolumeLevel, {
       deviceId,
       sessionId: sessionId || null,
-      level: value,
+      level: value / 100,
     }).catch(console.error);
   }, 100);
-
-  function onInternalChange(value: number) {
-    internalValue = value;
-    onExternalChange(value);
-  }
-
-  function handleSliderChange(e: Event) {
-    const target = e.target as HTMLInputElement;
-    onInternalChange(Number(target.value));
-  }
-
-  function handleWheel(e: WheelEvent) {
-    e.preventDefault();
-    const isUp = e.deltaY < 0;
-    const level = Math.max(0, Math.min(1, internalValue + (isUp ? 0.02 : -0.02)));
-    onInternalChange(level);
-  }
 
   async function toggleMute() {
     await invoke(SeelenCommand.MediaToggleMute, {
@@ -76,9 +59,12 @@
     data-skin="flat"
     value={internalValue}
     min={0}
-    max={1}
-    step={0.01}
-    onchange={handleSliderChange}
+    max={100}
+    step={1}
+    oninput={(e) => {
+      internalValue = Number(e.currentTarget.value);
+      onExternalChange(internalValue);
+    }}
   />
 
   {#if onRightAction}

@@ -1,11 +1,11 @@
-%common {
+%input-common {
   &:disabled {
     opacity: 0.5;
   }
 }
 
 input[type="range"][data-skin="flat"] {
-  @extend %common;
+  @extend %input-common;
 
   appearance: none;
   width: 100%;

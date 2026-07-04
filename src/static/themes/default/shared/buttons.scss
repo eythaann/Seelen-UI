@@ -1,4 +1,4 @@
-%common {
+%btn-common {
   padding: 0.25em 0.5em;
   border-radius: 6px;
   display: flex;
@@ -36,7 +36,7 @@ div[data-behavior="group"] {
 }
 
 button[data-skin="transparent"] {
-  @extend %common;
+  @extend %btn-common;
   border: 1px solid transparent;
 
   &:hover:enabled {
@@ -49,7 +49,7 @@ button[data-skin="transparent"] {
 }
 
 button[data-skin="solid"] {
-  @extend %common;
+  @extend %btn-common;
   background-color: var(--slu-std-ui-color);
   color: var(--color-gray-100);
   box-shadow: var(--shadow-s);
@@ -60,7 +60,7 @@ button[data-skin="solid"] {
 }
 
 button[data-skin="default"] {
-  @extend %common;
+  @extend %btn-common;
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
 

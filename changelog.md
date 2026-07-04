@@ -5,6 +5,7 @@
 ### enhancements
 
 - toolbar and dock autohide on overlap logic for multimonitor setups.
+- tooltips on sliders.
 
 ### fix
 
