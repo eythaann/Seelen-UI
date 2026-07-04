@@ -9,7 +9,6 @@ plugin:
     - Bluetooth
   tooltip: |-
     return "Bluetooth";
-  template: |-
-    return Icon({ name: "TbBluetooth" });
+  template: !include plugin.js
   onClickV2: |-
     trigger("@seelen/bluetooth-popup");

@@ -84,7 +84,7 @@ impl BluetoothLEDeviceWrapper {
         id: &str,
         device: &BluetoothLEDevice,
     ) -> Result<SerializableBluetoothDevice> {
-        use seelen_core::system_state::enums::{BluetoothMajorClass, BluetoothMinorClass};
+        use seelen_core::system_state::class_of_device_enums::BluetoothClass;
         use windows::Devices::Bluetooth::BluetoothConnectionStatus;
 
         let pairing_state = device.DeviceInformation()?.Pairing()?;
@@ -97,8 +97,7 @@ impl BluetoothLEDeviceWrapper {
             name: device.Name()?.to_string(),
             address: device.BluetoothAddress()?,
             major_service_classes: Vec::new(),
-            major_class: BluetoothMajorClass::Uncategorized,
-            minor_class: BluetoothMinorClass::Uncategorized { unused: 0 },
+            class: BluetoothClass::Uncategorized { minor: 0 },
             appearance: Some(device.Appearance()?.RawValue()?.into()),
             connected: is_connected,
             paired: is_paired,

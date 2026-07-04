@@ -63,28 +63,29 @@ impl BluetoothDeviceWrapper {
         id: &str,
         device: &BluetoothDevice,
     ) -> Result<SerializableBluetoothDevice> {
-        use seelen_core::system_state::enums::{BluetoothMajorClass, BluetoothMajorServiceClass};
+        use seelen_core::system_state::class_of_device_enums::{
+            BluetoothClass, BluetoothMajorServiceClass,
+        };
         use windows::Devices::Bluetooth::BluetoothConnectionStatus;
 
         let class = device.ClassOfDevice()?;
         let pairing_state = device.DeviceInformation()?.Pairing()?;
         let class_value = class.RawValue()?;
-        let (major_service_classes, major_class, minor_class) =
+        let (major_service_classes, class) =
             SerializableBluetoothDevice::get_parts_of_class(class_value);
 
         let is_paired = pairing_state.IsPaired()?;
         let is_connected = device.ConnectionStatus()? == BluetoothConnectionStatus::Connected;
         let is_audio = major_service_classes.contains(&BluetoothMajorServiceClass::Audio)
-            || major_service_classes.contains(&BluetoothMajorServiceClass::LowEnergyAudio)
-            || major_class == BluetoothMajorClass::AudioVideo;
+            || major_service_classes.contains(&BluetoothMajorServiceClass::LEaudio)
+            || matches!(class, BluetoothClass::AudioVideo { .. });
 
         Ok(SerializableBluetoothDevice {
             id: id.to_owned(),
             name: device.Name()?.to_string(),
             address: device.BluetoothAddress()?,
             major_service_classes,
-            major_class,
-            minor_class,
+            class,
             appearance: None,
             connected: is_connected,
             paired: is_paired,

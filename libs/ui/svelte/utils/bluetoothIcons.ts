@@ -2,72 +2,81 @@ import type {
   BLEAppearance,
   BLEAppearanceHumanInterfaceDeviceSubCategory,
   BluetoothAudioVideoMinor,
+  BluetoothClass,
   BluetoothComputerMinor,
   BluetoothDevice,
   BluetoothHealthMinor,
-  BluetoothMinorClass,
-  BluetoothNetworkMinor,
+  BluetoothImagingMinor,
+  BluetoothLANNetworkAccessPointMinor,
   BluetoothPeripheralMinor,
   BluetoothPeripheralSubMinor,
   BluetoothPhoneMinor,
   BluetoothToyMinor,
   BluetoothWearableMinor,
 } from "@seelen-ui/lib/types";
-import { BluetoothImagingMinor } from "@seelen-ui/lib/types";
 
 const UNKNOWN_ICON = "TbDeviceUnknown";
 
 type IconsDict<T> = Record<Extract<T, string>, string>;
 
+/** Returns `dict[value]`, falling back to `fallbackIcon` when `value` isn't a plain string (e.g. `{ Reserved: number }`). */
+function iconFor<T extends string>(dict: Record<T, string>, value: T | unknown, fallbackIcon: string): string {
+  return typeof value === "string" ? dict[value as T] : fallbackIcon;
+}
+
 const COMPUTER_ICONS: IconsDict<BluetoothComputerMinor> = {
   Uncategorized: "IoDesktopOutline",
-  Desktop: "IoDesktopOutline",
-  Server: "IoServerOutline",
+  DesktopWorkstation: "IoDesktopOutline",
+  ServerclassComputer: "IoServerOutline",
   Laptop: "IoLaptopOutline",
-  Handheld: "IoMdPhoneLandscape",
-  PalmSize: "IoMdPhoneLandscape",
+  HandheldPCPDA: "IoMdPhoneLandscape",
+  PalmsizePCPDA: "IoMdPhoneLandscape",
   Tablet: "IoIosTabletPortrait",
-  Wearable: "IoMdWatch",
+  WearableComputer: "IoMdWatch",
 };
 
 const PHONE_ICONS: IconsDict<BluetoothPhoneMinor> = {
   Uncategorized: "IoPhonePortraitOutline",
   Cellular: "IoPhonePortraitOutline",
   Cordless: "IoPhonePortraitOutline",
-  SmartPhone: "IoPhonePortraitOutline",
-  Wired: "BsModem",
-  Isdn: "LuPhone",
+  Smartphone: "IoPhonePortraitOutline",
+  WiredModemorVoiceGateway: "BsModem",
+  CommonISDNAccess: "LuPhone",
 };
 
-const NETWORK_ICONS: IconsDict<BluetoothNetworkMinor> = {
-  FullyAvailable: "PiNetwork",
-  Used01To17Percent: "PiNetwork",
-  Used17To33Percent: "PiNetwork",
-  Used33To50Percent: "PiNetwork",
-  Used50To67Percent: "PiNetwork",
-  Used67To83Percent: "PiNetwork",
-  Used83To99Percent: "PiNetwork",
-  NoServiceAvailable: "PiNetworkX",
+const LAN_NETWORK_ICONS: IconsDict<BluetoothLANNetworkAccessPointMinor> = {
+  Fullyavailable: "PiNetwork",
+  N1to17utilized: "PiNetwork",
+  N17to33utilized: "PiNetwork",
+  N33to50utilized: "PiNetwork",
+  N50to67utilized: "PiNetwork",
+  N67to83utilized: "PiNetwork",
+  N83to99utilized: "PiNetwork",
+  Noserviceavailable: "PiNetworkX",
 };
 
 const AUDIO_VIDEO_ICONS: IconsDict<BluetoothAudioVideoMinor> = {
   Uncategorized: "LuSpeaker",
-  Headset: "IoHeadset",
-  HandsFree: "IoHeadset",
+  WearableHeadsetDevice: "IoHeadset",
+  HandsfreeDevice: "IoHeadset",
+  ReservedforFutureUse: "LuSpeaker",
   Microphone: "HiOutlineMicrophone",
   Loudspeaker: "LuSpeaker",
   Headphones: "IoHeadset",
   PortableAudio: "LuSpeaker",
   CarAudio: "BsPciCardSound",
-  SetTopBox: "CgModem",
+  Settopbox: "CgModem",
   HiFiAudioDevice: "IoHeadset",
-  Vcr: "TbCapProjecting",
+  VCR: "TbCapProjecting",
   VideoCamera: "HiOutlineVideoCamera",
-  CamCorder: "HiOutlineVideoCamera",
+  Camcorder: "HiOutlineVideoCamera",
   VideoMonitor: "PiMonitorPlay",
-  VideoDisplayAndLoudspeaker: "PiMonitorPlay",
+  VideoDisplayandLoudspeaker: "PiMonitorPlay",
   VideoConferencing: "PiVideoConference",
+  ReservedforFutureUse0x11: "LuSpeaker",
   GamingToy: "GiGameConsole",
+  HearingAid: "IoEarOutline",
+  Glasses: "IoGlassesOutline",
 };
 
 const PERIPHERAL_SUBMINOR_ICONS: IconsDict<BluetoothPeripheralSubMinor> = {
@@ -75,19 +84,19 @@ const PERIPHERAL_SUBMINOR_ICONS: IconsDict<BluetoothPeripheralSubMinor> = {
   Joystick: "LuJoystick",
   Gamepad: "IoGameControllerOutline",
   RemoteControl: "RiRemoteControl2Line",
-  Sensor: "MdSensorOccupied",
+  SensingDevice: "MdSensorOccupied",
   DigitizerTablet: "IoTabletLandscapeOutline",
   CardReader: "MdOutlineChromeReaderMode",
   DigitalPen: "IoPencil",
   HandheldScanner: "MdOutlineScanner",
-  HandheldGestural: "MdOutlineGesture",
+  HandheldGesturalInputDevice: "MdOutlineGesture",
 };
 
 const PERIPHERAL_MINOR_ICONS: IconsDict<BluetoothPeripheralMinor> = {
   Uncategorized: PERIPHERAL_SUBMINOR_ICONS.Uncategorized,
   Keyboard: "BsKeyboard",
-  Pointing: "BsMouse",
-  ComboKeyboardPointing: "BsKeyboard",
+  PointingDevice: "BsMouse",
+  ComboKeyboardPointingDevice: "BsKeyboard",
 };
 
 const WEARABLE_ICONS: IconsDict<BluetoothWearableMinor> = {
@@ -102,7 +111,7 @@ const WEARABLE_ICONS: IconsDict<BluetoothWearableMinor> = {
 const TOY_ICONS: IconsDict<BluetoothToyMinor> = {
   Robot: "RiRobot3Line",
   Vehicle: "FaCar",
-  Doll: "LiaBabySolid",
+  DollActionFigure: "LiaBabySolid",
   Controller: "IoGameControllerOutline",
   Game: "CgGames",
 };
@@ -114,10 +123,10 @@ const HEALTH_ICONS: IconsDict<BluetoothHealthMinor> = {
   WeighingScale: "FaWeightScale",
   GlucoseMeter: "PiSpeedometerBold",
   PulseOximeter: "BsClipboardPulse",
-  HeartPulseMonitor: "BsHeartPulse",
+  HeartPulseRateMonitor: "BsHeartPulse",
   HealthDataDisplay: "TbHeartRateMonitor",
   StepCounter: "IoFootstepsSharp",
-  BodyCompositionMonitor: "IoBodyOutline",
+  BodyCompositionAnalyzer: "IoBodyOutline",
   PeakFlowMonitor: "TbHeartRateMonitor",
   MedicationMonitor: "MdOutlineMedication",
   KneeProsthesis: "GiRobotLeg",
@@ -126,54 +135,43 @@ const HEALTH_ICONS: IconsDict<BluetoothHealthMinor> = {
   PersonalMobilityDevice: "FaWheelchair",
 };
 
-const FUNC_BY_MAJOR = {
-  Miscellaneous: () => UNKNOWN_ICON,
-  Computer: (minor: BluetoothComputerMinor) => {
-    if (typeof minor !== "string") return COMPUTER_ICONS.Uncategorized;
-    return COMPUTER_ICONS[minor];
-  },
-  Phone: (minor: BluetoothPhoneMinor) => {
-    if (typeof minor !== "string") return PHONE_ICONS.Uncategorized;
-    return PHONE_ICONS[minor];
-  },
-  NetworkAccessPoint: ([minor, _subminor]: [BluetoothNetworkMinor, string]) => {
-    return NETWORK_ICONS[minor];
-  },
-  AudioVideo: (minor: BluetoothAudioVideoMinor) => {
-    if (typeof minor !== "string") return AUDIO_VIDEO_ICONS.Uncategorized;
-    return AUDIO_VIDEO_ICONS[minor];
-  },
-  Peripheral: ([minor, subminor]: [BluetoothPeripheralMinor, BluetoothPeripheralSubMinor]) => {
-    if (typeof subminor === "string" && subminor !== "Uncategorized") {
-      return PERIPHERAL_SUBMINOR_ICONS[subminor];
+function iconForClass(cls: BluetoothClass): string {
+  switch (cls.major) {
+    case "Miscellaneous":
+    case "Uncategorized":
+    case "Reserved":
+      return UNKNOWN_ICON;
+    case "Computer":
+      return iconFor(COMPUTER_ICONS, cls.minor, COMPUTER_ICONS.Uncategorized);
+    case "Phone":
+      return iconFor(PHONE_ICONS, cls.minor, PHONE_ICONS.Uncategorized);
+    case "LANNetworkAccessPoint":
+      return iconFor(LAN_NETWORK_ICONS, cls.minor, LAN_NETWORK_ICONS.Fullyavailable);
+    case "AudioVideo":
+      return iconFor(AUDIO_VIDEO_ICONS, cls.minor, AUDIO_VIDEO_ICONS.Uncategorized);
+    case "Peripheral": {
+      if (typeof cls.subminor === "string" && cls.subminor !== "Uncategorized") {
+        return PERIPHERAL_SUBMINOR_ICONS[cls.subminor];
+      }
+      return iconFor(PERIPHERAL_MINOR_ICONS, cls.minor, PERIPHERAL_MINOR_ICONS.Uncategorized);
     }
-    return PERIPHERAL_MINOR_ICONS[minor];
-  },
-  Imaging: ([minors, _subminor]: [BluetoothImagingMinor[], string]) => {
-    if (minors.includes(BluetoothImagingMinor.Display)) return "BsDisplay";
-    if (
-      minors.includes(BluetoothImagingMinor.Scanner) ||
-      minors.includes(BluetoothImagingMinor.Printer)
-    ) {
-      return "IoPrintOutline";
+    case "Imaging": {
+      const flags: BluetoothImagingMinor[] = cls.minor;
+      if (flags.includes("Display")) return "BsDisplay";
+      if (flags.includes("Scanner") || flags.includes("Printer")) {
+        return "IoPrintOutline";
+      }
+      if (flags.includes("Camera")) return "IoCameraOutline";
+      return "IoImagesOutline";
     }
-    if (minors.includes(BluetoothImagingMinor.Camera)) return "IoCameraOutline";
-    return "IoImagesOutline";
-  },
-  Wearable: (minor: BluetoothWearableMinor) => {
-    if (typeof minor !== "string") return WEARABLE_ICONS.Wristwatch;
-    return WEARABLE_ICONS[minor];
-  },
-  Toy: (minor: BluetoothToyMinor) => {
-    if (typeof minor !== "string") return "LuToyBrick";
-    return TOY_ICONS[minor];
-  },
-  Health: (minor: BluetoothHealthMinor) => {
-    if (typeof minor !== "string") return HEALTH_ICONS.Undefined;
-    return HEALTH_ICONS[minor];
-  },
-  Uncategorized: () => UNKNOWN_ICON,
-};
+    case "Wearable":
+      return iconFor(WEARABLE_ICONS, cls.minor, WEARABLE_ICONS.Wristwatch);
+    case "Toy":
+      return iconFor(TOY_ICONS, cls.minor, "LuToyBrick");
+    case "Health":
+      return iconFor(HEALTH_ICONS, cls.minor, HEALTH_ICONS.Undefined);
+  }
+}
 
 const HUMAN_INTERFACE_DEVICE_ICONS: IconsDict<
   BLEAppearanceHumanInterfaceDeviceSubCategory
@@ -266,23 +264,9 @@ export function getIconByAppearance(appearance: BLEAppearance): string {
   return icon(appearance.subcategory as any);
 }
 
-export function getIconForBTDevice(device: BluetoothDevice): string {
+export function getIconNameForBTDevice(device: BluetoothDevice): string {
   if (device.appearance) {
     return getIconByAppearance(device.appearance);
   }
-
-  const Minor = device.minorClass as any;
-  const Major = Object.keys(Minor)[0]!;
-  const func = (FUNC_BY_MAJOR as any)[Major];
-  return func(Minor[Major]);
-}
-
-export function getMinorAsString(minor: BluetoothMinorClass): string {
-  const MinorObj = minor as any;
-  const Major = Object.keys(MinorObj)[0]!;
-  const Minor = MinorObj[Major];
-  if (typeof Minor === "string") {
-    return Minor;
-  }
-  return JSON.stringify(Minor);
+  return iconForClass(device.class);
 }

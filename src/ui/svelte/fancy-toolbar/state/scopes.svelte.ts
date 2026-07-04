@@ -2,6 +2,7 @@ import { type AllSeelenCommandReturns, invoke, SeelenCommand, SeelenEvent, subsc
 import { NotificationsMode, ToolbarJsScope } from "@seelen-ui/lib/types";
 import { throttle } from "lodash";
 import moment from "moment";
+import { getIconNameForBTDevice } from "libs/ui/svelte/utils/bluetoothIcons";
 import { settingsState } from "./settings.svelte.ts";
 import { focused, widgetStatuses } from "./windows.svelte.ts";
 import { virtualDesktop } from "./system.svelte.ts";
@@ -271,9 +272,8 @@ export function buildItemScope(
     if (_bluetoothDevices.fetching) {
       fetching = true;
     } else {
-      const devices = _bluetoothDevices.data as any[];
-      data.devices = devices;
-      data.connectedDevices = devices?.filter((d: any) => d.connected) || [];
+      data.devices = _bluetoothDevices.data || [];
+      data.getIconNameForBTDevice = getIconNameForBTDevice;
     }
   }
 

@@ -3,7 +3,7 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { t } from "../i18n";
-  import { getIconForBTDevice, getMinorAsString } from "../icons";
+  import { getIconNameForBTDevice } from "libs/ui/svelte/utils/bluetoothIcons";
   import { BluetoothOperation, globalState } from "../state.svelte";
 
   interface Props {
@@ -150,7 +150,7 @@
     if (device.appearance) {
       return `${device.appearance.category} - ${device.appearance.subcategory}`;
     }
-    return `${device.majorClass} - ${getMinorAsString(device.minorClass)}`;
+    return `${device.class.major} - ${device.class.minor}`;
   }
 </script>
 
@@ -173,7 +173,7 @@
   <div class="bt-device-info">
     <Icon iconName={device.connected ? "TbBluetoothConnected" : "TbBluetooth"} />
     <span class="bt-device-name">{device.name}</span>
-    <Icon iconName={getIconForBTDevice(device) as any} title={getDeviceTooltip()} />
+    <Icon iconName={getIconNameForBTDevice(device) as any} title={getDeviceTooltip()} />
     {#if device.isLowEnergy}
       <Icon iconName="MdOutlineEnergySavingsLeaf" title={$t("lowenergy")} />
     {/if}
