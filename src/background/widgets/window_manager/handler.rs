@@ -43,6 +43,11 @@ pub fn schedule_window_position(window: isize, rect: Rect) {
 
 #[tauri::command(async)]
 pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
+    log::trace!(
+        "set_app_windows_positions called with {} positions",
+        positions.len()
+    );
+
     let mut list = HashMap::new();
     let mut inner: HashMap<isize, Rect> = HashMap::new();
 

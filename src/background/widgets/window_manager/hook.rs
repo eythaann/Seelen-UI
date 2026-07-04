@@ -97,6 +97,12 @@ impl WindowManagerV2 {
 
     pub fn process_win_event(event: WinEvent, window: Window) -> Result<()> {
         match event {
+            WinEvent::SystemForeground => {
+                let mut state = WM_STATE.lock();
+                if state.pending_reservation.is_some() {
+                    state.cancel_reservation();
+                }
+            }
             WinEvent::SynThrottledForegroundRectChange => {
                 Self::synthetic_foreground_location_change(&window)?;
             }

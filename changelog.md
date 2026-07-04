@@ -7,6 +7,7 @@
 - toolbar and dock autohide on overlap logic for multimonitor setups.
 - tooltips on sliders.
 - bluetooth toolbar module.
+- twm animations for multimonitor movement.
 
 ### fix
 

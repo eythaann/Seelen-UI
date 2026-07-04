@@ -20,6 +20,16 @@ pub struct PositionerBuilder {
     pub to_positioning: HashMap<isize, Rect>,
 }
 
+/// Whether two rects differ by more than `tolerance` pixels on any field.
+/// Used to tell an OS-driven external move (e.g. WM_DPICHANGED resize) apart
+/// from harmless rounding noise between the eased rect and the reported one.
+fn rect_diff_exceeds(a: &Rect, b: &Rect, tolerance: i32) -> bool {
+    (a.x - b.x).abs() > tolerance
+        || (a.y - b.y).abs() > tolerance
+        || (a.width - b.width).abs() > tolerance
+        || (a.height - b.height).abs() > tolerance
+}
+
 struct WinDataForAnimation {
     hwnd: isize,
     from: Rect,
@@ -164,6 +174,14 @@ impl WindowAnimation {
         let mut frame_i = 0u32;
         let mut frames = 0u32;
 
+        // The active interpolation segment. Rebased whenever the window's actual rect
+        // drifts from what we last set (e.g. the OS resizing it synchronously on a
+        // WM_DPICHANGED when crossing a monitor boundary), so we resume smoothly from
+        // wherever the window actually is instead of snapping it back mid-flight.
+        let mut segment_from = data.from;
+        let mut segment_start = start_time;
+        let mut segment_secs = animation_secs;
+
         loop {
             if interrupt_rx.try_recv().is_ok() {
                 interrupted = true;
@@ -171,18 +189,37 @@ impl WindowAnimation {
             }
 
             let elapsed = start_time.elapsed();
-            let progress = (elapsed.as_secs_f64() / animation_secs).min(1.0);
+            let overall_progress = (elapsed.as_secs_f64() / animation_secs).min(1.0);
+
+            if overall_progress < 1.0
+                && let Ok(actual_rect) = get_window_rect(data.hwnd)
+                && rect_diff_exceeds(&actual_rect, &last_rect, 10)
+            {
+                segment_from = actual_rect;
+                segment_start = std::time::Instant::now();
+                segment_secs = animation_duration
+                    .saturating_sub(elapsed)
+                    .max(std::time::Duration::from_millis(1))
+                    .as_secs_f64();
+                last_rect = actual_rect;
+            }
+
+            let segment_progress = if overall_progress >= 1.0 {
+                1.0
+            } else {
+                (segment_start.elapsed().as_secs_f64() / segment_secs).min(1.0)
+            };
 
             // Skip SetWindowPos when the interpolated pixel position didn't change —
             // common at easing tails where speed < 1px per frame.
-            let rect = keyframe::ease(easing, data.from, data.to, progress);
+            let rect = keyframe::ease(easing, segment_from, data.to, segment_progress);
             if rect != last_rect {
                 position_window(data.hwnd, &rect, data.is_explorer, !data.is_size_changing)?;
                 last_rect = rect;
                 frames += 1;
             }
 
-            if progress >= 1.0 {
+            if overall_progress >= 1.0 {
                 break;
             }
 

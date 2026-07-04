@@ -222,8 +222,31 @@ impl SluWorkspacesManager2 {
             WinEvent::SyntheticMonitorChanged => {
                 let manager = Self::instance();
                 if manager.contains(&window) && !manager.is_pinned(&window_id) {
-                    manager.remove(&window);
-                    manager.add_to_current_workspace(&window);
+                    let Ok(monitor_id) = window.monitor().stable_id() else {
+                        return Ok(());
+                    };
+
+                    let Some(target_workspace_id) = manager
+                        .monitors
+                        .get(&monitor_id, |m| m.active_workspace_id().clone())
+                    else {
+                        return Ok(());
+                    };
+
+                    // Skip if the window is already recorded under the monitor's active
+                    // workspace (e.g. it was just moved there programmatically via `send_to`).
+                    // Otherwise this would unconditionally remove+re-add the window, emitting
+                    // redundant WindowRemoved/WindowAdded events for no actual change.
+                    let already_there = manager
+                        .monitors
+                        .get(&monitor_id, |m| {
+                            m.active_workspace().windows.contains(&window_id)
+                        })
+                        .unwrap_or(false);
+
+                    if !already_there {
+                        manager.send_to(&window, &target_workspace_id)?;
+                    }
                 }
             }
             _ => {}

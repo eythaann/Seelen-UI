@@ -73,7 +73,7 @@ $effect.root(() => {
 //                   Positioning
 // =================================================
 
-const monitorId = Widget.getCurrent().decoded.monitorId;
+const monitorId = Widget.getCurrent().decoded.monitorId!;
 
 const widgetRect = $derived.by(() => {
   const monitor = monitors.value.find((m) => m.id === monitorId);
@@ -159,6 +159,10 @@ await declareDocumentAsLayeredHitbox({
 
 export type State = _State;
 class _State {
+  readonly paused = $derived.by(
+    () => layouts.value.paused || !!layouts.value.pausedByMonitor[monitorId],
+  );
+
   getLayout(monitorId: string): TwmRuntimeTree | null {
     const activeWsId = workspaces.value?.monitors?.[monitorId]?.active_workspace;
     if (!activeWsId) return null;
@@ -178,12 +182,6 @@ class _State {
   }
   get reservation() {
     return reservation;
-  }
-  get paused() {
-    return layouts.value.paused;
-  }
-  get pausedByMonitor() {
-    return layouts.value.pausedByMonitor;
   }
   get widgetRect() {
     return widgetRect;
