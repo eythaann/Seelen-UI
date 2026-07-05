@@ -25,7 +25,7 @@ static SEELEN_LOGO_ASCII: &str = r#"
   0&&&&  &&&&&&&       ,&&&&&&&&&&&&                &
   :&&&&; &&&&&0       ,;&&&&&&&&&&&             ;  .0
    0&&&&&&&&&&0     ,;&&&&&&&&&&&&&             &  &;
-    0&&&&&&&&&&0   :',;".&&&&&&".&             && &0
+    0&&&&&&&&&0    :',;".&&&&&&".&             && &0
      0&&&&&&&&&0  ',;',&&&&&" ,&'             &&&&0
       0&&&&&&&&&0 ,x&&&&" .&&&              &&&&0
         0&&&&&& .&&&&"'''"&&"&&            &&&&&0
@@ -37,22 +37,17 @@ static SEELEN_LOGO_ASCII: &str = r#"
 "#;
 
 static SEELEN_LOGO_ASCII_SMALL: &str = r#"
-           xx x                    
-           xxxxxx xxxxxxxX         
-    xx  xx xxxxxxxxxxxxx           
-   xx    xxxxxxxxxx                
-  xx  x   xxxxxxx  xxx             
- xxxxx  xxxxxxx                    
-xxxx  xxxxxxX                      
-xxx  xxxxxx          xxxx          
-xxx  xxxxxx       xxxxxxxxxxx     x
-xxxxxxxxxx     xxxxxxxxxx         x
-xxxxxxxxxx    xxxxxxxxx        x xx
- xxxxxxxxx  xxxxxxxxxxx       xxxxx
- xxxxxxxxx xxxxxxxxxxx       xxxxx 
-  xxxxxxxx xxxxxxxxxx       xxxxx  
-   xxxxxxxxxxxxxxxxx      xxxxxx   
-    Xxxxxxxxxxx  xxxxxxxxxxxxx     
-        xxxxxxxxxxxxxxxxxxxx       
-          xxxxxxxxxxxxxxx          
+        .   :  # ..;'
+    .    & .& .&&'
+  dl  #  &&$$&&*""'
+ &$ .  .$$$&&*.  ##
+;&;&  .$$$''
+0$;  &$$&'      ,.sxs.
+0$: :$$$'    ,&.$$$$$&s>      :
+0$&.0$$0   ,;&&&&'&;'         ;  Seelen Corp
+:0$$$$$; ."':&&;'&&        ; &
+ :0$$$$$, ;$$&'&'&        .$&'
+  :$$$0'.$&'  .#.#.    .&$&*'
+   `' .&'.$$$$$$$$$$$$$$$&'
+     ' '*&S$$$$$$$$$S&*'
 "#;
