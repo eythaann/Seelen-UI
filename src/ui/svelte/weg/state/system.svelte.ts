@@ -3,7 +3,11 @@ import { currentMonitorId, monitors, mousePos, notifications, players, trashBinI
 
 export { notifications, players, trashBinInfo };
 
-const _currentMonitor = $derived(monitors.value.find((m) => m.id === currentMonitorId)!);
+const _currentMonitor = $derived(
+  monitors.value.find((m) => m.id === currentMonitorId) ??
+    monitors.value.find((m) => m.isPrimary) ??
+    monitors.value[0]!,
+);
 
 const _mouseAtEdge = $derived.by((): SeelenWegSide | null => {
   const box = _currentMonitor.rect;
