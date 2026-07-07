@@ -38,7 +38,9 @@ mod tests {
         )?;
 
         let mut appearance_enum = vec![
-            "#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]".to_string(),
+            "#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]".to_string(),
+            "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]"
+                .to_string(),
             "#[serde(tag = \"category\", content = \"subcategory\")]".to_string(),
             "pub enum BLEAppearance {".to_string(),
         ];
@@ -62,8 +64,9 @@ mod tests {
             ));
 
             let mut subcategory_enum = vec![
-            "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
-            "#[cfg_attr(feature = \"gen-binds\", ts(export_to = \"BLEAppearanceSubCategory.ts\"))]".to_string(),
+            "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]".to_string(),
+            "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]".to_string(),
+            "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), ts(export_to = \"BLEAppearanceSubCategory.ts\"))]".to_string(),
             "#[repr(u16)]".to_string(),
             format!("pub enum {sub_enum_name} {{"),
         ];
@@ -162,7 +165,8 @@ mod tests {
         use std::io::Write;
 
         let mut lines = vec![
-        "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
+        "#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]".to_string(),
+        "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]".to_string(),
         "#[repr(u8)]".to_string(),
         format!("pub enum {name} {{"),
     ];
@@ -210,7 +214,9 @@ mod tests {
 
         let mut service_names = Vec::new();
         let mut service_enum = vec![
-            "#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]".to_string(),
+            "#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]".to_string(),
+            "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]"
+                .to_string(),
             "#[repr(u32)]".to_string(),
             "pub enum BluetoothMajorServiceClass {".to_string(),
         ];
@@ -240,7 +246,9 @@ mod tests {
 
         // -- Class (major + minor + subminor merged into a single tagged enum) --
         let mut class_enum = vec![
-            "#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]".to_string(),
+            "#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]".to_string(),
+            "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]"
+                .to_string(),
             "#[serde(tag = \"major\")]".to_string(),
             "pub enum BluetoothClass {".to_string(),
         ];
@@ -262,7 +270,8 @@ mod tests {
                 let flags_name = format!("Bluetooth{major_name}Minor");
 
                 let mut flags_enum = vec![
-                    "#[derive(Debug, Copy, Clone, Eq, PartialEq, IntoPrimitive, Serialize, Deserialize, TS)]".to_string(),
+                    "#[derive(Debug, Copy, Clone, Eq, PartialEq, IntoPrimitive, Serialize, Deserialize)]".to_string(),
+                    "#[cfg_attr(all(feature = \"gen-binds\", not(feature = \"salvo\")), derive(ts_rs::TS))]".to_string(),
                     "#[repr(u8)]".to_string(),
                     format!("pub enum {flags_name} {{"),
                 ];

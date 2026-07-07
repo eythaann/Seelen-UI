@@ -8,15 +8,19 @@ use std::collections::HashMap;
 use config::ThemeSettingsDefinition;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 
 use crate::resource::{ResourceKind, ResourceMetadata, SluResource, ThemeId, WidgetId};
 
 pub static ALLOWED_STYLE_EXTENSIONS: &[&str] = &["css", "scss", "sass"];
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 pub struct Theme {
     pub id: ThemeId,
     /// Metadata about the theme

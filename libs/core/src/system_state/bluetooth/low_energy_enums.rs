@@ -1,24 +1,27 @@
 // This file was generated via rust macros. Don't modify manually.
 // all this structs are based on official docs https://www.bluetooth.com/specifications/assigned-numbers
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceUnknownSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearancePhoneSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceComputerSubCategory {
     DesktopWorkstation = 0x1,
@@ -40,8 +43,9 @@ pub enum BLEAppearanceComputerSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceWatchSubCategory {
     SportsWatch = 0x1,
@@ -50,72 +54,81 @@ pub enum BLEAppearanceWatchSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceClockSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceDisplaySubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceRemoteControlSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceEyeglassesSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceTagSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceKeyringSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceMediaPlayerSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceBarcodeScannerSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceThermometerSubCategory {
     EarThermometer = 0x1,
@@ -123,8 +136,9 @@ pub enum BLEAppearanceThermometerSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHeartRateSensorSubCategory {
     HeartRateBelt = 0x1,
@@ -132,8 +146,9 @@ pub enum BLEAppearanceHeartRateSensorSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceBloodPressureSubCategory {
     ArmBloodPressure = 0x1,
@@ -142,8 +157,9 @@ pub enum BLEAppearanceBloodPressureSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHumanInterfaceDeviceSubCategory {
     Keyboard = 0x1,
@@ -160,16 +176,18 @@ pub enum BLEAppearanceHumanInterfaceDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceGlucoseMeterSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceRunningWalkingSensorSubCategory {
     InShoeRunningWalkingSensor = 0x1,
@@ -179,8 +197,9 @@ pub enum BLEAppearanceRunningWalkingSensorSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceCyclingSubCategory {
     CyclingComputer = 0x1,
@@ -192,8 +211,9 @@ pub enum BLEAppearanceCyclingSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceControlDeviceSubCategory {
     Switch = 0x1,
@@ -213,8 +233,9 @@ pub enum BLEAppearanceControlDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceNetworkDeviceSubCategory {
     AccessPoint = 0x1,
@@ -224,8 +245,9 @@ pub enum BLEAppearanceNetworkDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceSensorSubCategory {
     MotionSensor = 0x1,
@@ -257,8 +279,9 @@ pub enum BLEAppearanceSensorSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceLightFixturesSubCategory {
     WallLight = 0x1,
@@ -290,8 +313,9 @@ pub enum BLEAppearanceLightFixturesSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceFanSubCategory {
     CeilingFan = 0x1,
@@ -304,8 +328,9 @@ pub enum BLEAppearanceFanSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHVACSubCategory {
     Thermostat = 0x1,
@@ -323,24 +348,27 @@ pub enum BLEAppearanceHVACSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAirConditioningSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHumidifierSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHeatingSubCategory {
     Radiator = 0x1,
@@ -354,8 +382,9 @@ pub enum BLEAppearanceHeatingSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAccessControlSubCategory {
     AccessDoor = 0x1,
@@ -371,8 +400,9 @@ pub enum BLEAppearanceAccessControlSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceMotorizedDeviceSubCategory {
     MotorizedGate = 0x1,
@@ -384,8 +414,9 @@ pub enum BLEAppearanceMotorizedDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearancePowerDeviceSubCategory {
     PowerOutlet = 0x1,
@@ -401,8 +432,9 @@ pub enum BLEAppearancePowerDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceLightSourceSubCategory {
     IncandescentLightBulb = 0x1,
@@ -417,8 +449,9 @@ pub enum BLEAppearanceLightSourceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceWindowCoveringSubCategory {
     WindowShades = 0x1,
@@ -431,8 +464,9 @@ pub enum BLEAppearanceWindowCoveringSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAudioSinkSubCategory {
     StandaloneSpeaker = 0x1,
@@ -444,8 +478,9 @@ pub enum BLEAppearanceAudioSinkSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAudioSourceSubCategory {
     Microphone = 0x1,
@@ -461,8 +496,9 @@ pub enum BLEAppearanceAudioSourceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceMotorizedVehicleSubCategory {
     Car = 0x1,
@@ -484,8 +520,9 @@ pub enum BLEAppearanceMotorizedVehicleSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceDomesticApplianceSubCategory {
     Refrigerator = 0x1,
@@ -507,8 +544,9 @@ pub enum BLEAppearanceDomesticApplianceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceWearableAudioDeviceSubCategory {
     Earbud = 0x1,
@@ -519,8 +557,9 @@ pub enum BLEAppearanceWearableAudioDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAircraftSubCategory {
     LightAircraft = 0x1,
@@ -531,8 +570,9 @@ pub enum BLEAppearanceAircraftSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceAVEquipmentSubCategory {
     Amplifier = 0x1,
@@ -549,8 +589,9 @@ pub enum BLEAppearanceAVEquipmentSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceDisplayEquipmentSubCategory {
     Television = 0x1,
@@ -560,8 +601,9 @@ pub enum BLEAppearanceDisplayEquipmentSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceHearingaidSubCategory {
     Inearhearingaid = 0x1,
@@ -571,8 +613,9 @@ pub enum BLEAppearanceHearingaidSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceGamingSubCategory {
     HomeVideoGameConsole = 0x1,
@@ -581,8 +624,9 @@ pub enum BLEAppearanceGamingSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceSignageSubCategory {
     DigitalSignage = 0x1,
@@ -591,8 +635,9 @@ pub enum BLEAppearanceSignageSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearancePulseOximeterSubCategory {
     FingertipPulseOximeter = 0x1,
@@ -601,16 +646,18 @@ pub enum BLEAppearancePulseOximeterSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceWeightScaleSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearancePersonalMobilityDeviceSubCategory {
     PoweredWheelchair = 0x1,
@@ -619,16 +666,18 @@ pub enum BLEAppearancePersonalMobilityDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceContinuousGlucoseMonitorSubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceInsulinPumpSubCategory {
     InsulinPumpdurablepump = 0x1,
@@ -638,16 +687,18 @@ pub enum BLEAppearanceInsulinPumpSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceMedicationDeliverySubCategory {
     #[num_enum(catch_all)]
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceSpirometerSubCategory {
     HandheldSpirometer = 0x1,
@@ -655,8 +706,9 @@ pub enum BLEAppearanceSpirometerSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceOutdoorSportsActivitySubCategory {
     LocationDisplay = 0x1,
@@ -667,8 +719,9 @@ pub enum BLEAppearanceOutdoorSportsActivitySubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceIndustrialMeasurementDeviceSubCategory {
     TorqueTestingDevice = 0x1,
@@ -681,8 +734,9 @@ pub enum BLEAppearanceIndustrialMeasurementDeviceSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export_to = "BLEAppearanceSubCategory.ts"))]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export_to = "BLEAppearanceSubCategory.ts"))]
 #[repr(u16)]
 pub enum BLEAppearanceIndustrialToolsSubCategory {
     MachineToolHolder = 0x1,
@@ -698,7 +752,8 @@ pub enum BLEAppearanceIndustrialToolsSubCategory {
     Reserved(u16),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "category", content = "subcategory")]
 pub enum BLEAppearance {
     Unknown(BLEAppearanceUnknownSubCategory),

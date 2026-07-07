@@ -35,7 +35,8 @@ macro_rules! slu_commands_declaration {
                     if { $($args)* }
                     do {
                         #[cfg(test)]
-                        #[derive(Deserialize, TS)]
+                        #[derive(Deserialize)]
+                        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
                         #[serde(rename_all = "camelCase")]
                         #[allow(dead_code)]
                         struct [<SeelenCommand $key Args>] {
@@ -49,8 +50,9 @@ macro_rules! slu_commands_declaration {
             /// Internal used as mapping of commands to their arguments
             #[cfg(test)]
             #[allow(non_camel_case_types, dead_code)]
-            #[derive(Deserialize, TS)]
-            #[cfg_attr(feature = "gen-binds", ts(export))]
+            #[derive(Deserialize)]
+            #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+            #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
             enum SeelenCommandArgument {
                 $(
                     #[allow(non_snake_case)]
@@ -64,8 +66,9 @@ macro_rules! slu_commands_declaration {
         }
 
         /// Internal used as mapping of commands to their return types
-        #[derive(Serialize, TS)]
-        #[cfg_attr(feature = "gen-binds", ts(export))]
+        #[derive(Serialize)]
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
         #[allow(non_camel_case_types, dead_code)]
         #[cfg(test)]
         enum SeelenCommandReturn {
@@ -128,9 +131,9 @@ slu_commands_declaration! {
     GetUserEnvs = get_user_envs() -> HashMap<String, String>,
     ShowStartMenu = show_start_menu(),
     GetIcon = get_icon(
-        #[ts(optional = nullable)]
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
         path: Option<PathBuf>,
-        #[ts(optional = nullable)]
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
         umid: Option<String>
     ),
     ShowDesktop = show_desktop(),

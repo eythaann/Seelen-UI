@@ -3,8 +3,9 @@ use std::path::PathBuf;
 use super::Color;
 use crate::{rect::Rect, system_state::MonitorId};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum ZOrder {
     TopMost,
     NoTopMost,
@@ -12,7 +13,8 @@ pub enum ZOrder {
     Bottom,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
     pub hwnd: isize,
@@ -29,7 +31,8 @@ pub struct FocusedApp {
     pub rect: Option<Rect>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct UserAppWindow {
     pub hwnd: isize,
@@ -55,13 +58,15 @@ pub struct UserAppWindow {
     pub last_foreground_at: i64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct ProcessInformation {
     pub id: u32,
     pub path: Option<PathBuf>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct UserAppWindowPreview {
     pub hash: String,
@@ -70,7 +75,8 @@ pub struct UserAppWindowPreview {
     pub height: u32,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct UserAppWindowColors {
     pub top: Vec<Color>,
     pub bottom: Vec<Color>,
@@ -78,7 +84,8 @@ pub struct UserAppWindowColors {
     pub right: Vec<Color>,
 }
 
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct Relaunch {
     /// program to be executed
@@ -91,7 +98,8 @@ pub struct Relaunch {
     pub icon: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(untagged)]
 pub enum RelaunchArguments {
     Array(Vec<String>),

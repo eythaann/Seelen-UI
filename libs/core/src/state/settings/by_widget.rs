@@ -7,7 +7,8 @@ use crate::{resource::WidgetId, utils::TsUnknown};
 
 use super::{FancyToolbarSettings, SeelenWallSettings, SeelenWegSettings, WindowManagerSettings};
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default)]
 pub struct SettingsByWidget {
     #[serde(rename = "@seelen/weg")]
@@ -77,7 +78,8 @@ impl SettingsByWidget {
     }
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default)]
 pub struct ThirdPartyWidgetSettings {
     /// Enable or disable the widget
@@ -86,13 +88,13 @@ pub struct ThirdPartyWidgetSettings {
     /// The map values will be merged with the root object and default values on settings declaration.
     #[serde(rename = "$instances")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[ts(optional = nullable)]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
     pub instances: Option<HashMap<Uuid, HashMap<String, TsUnknown>>>,
     /// Key overrides for widget-declared shortcuts (`shortcut_id -> keys`).
     /// When present, replaces the shortcut's `defaultKeys` for this widget instance.
     #[serde(rename = "$shortcuts")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[ts(optional = nullable)]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
     pub shortcuts: Option<HashMap<String, Vec<String>>>,
     #[serde(flatten)]
     pub rest: HashMap<String, TsUnknown>,

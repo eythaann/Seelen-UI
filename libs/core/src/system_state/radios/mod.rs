@@ -1,6 +1,7 @@
 /// Represents a radio device like a bluetooth - wifi etc.
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct RadioDevice {
     pub id: String,
     pub name: String,
@@ -9,8 +10,9 @@ pub struct RadioDevice {
     pub is_enabled: bool,
 }
 
-#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum RadioDeviceKind {
     Other,
     WiFi,

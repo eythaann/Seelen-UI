@@ -1,10 +1,10 @@
 use serde::Serialize;
-use ts_rs::TS;
 
 /// Full clipboard state — emitted as a single payload on every relevant change.
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct ClipboardData {
     /// Whether the user has enabled clipboard history in Windows Settings.
     pub is_history_enabled: bool,
@@ -13,7 +13,8 @@ pub struct ClipboardData {
 }
 
 /// Content of a clipboard entry.
-#[derive(Debug, Default, Clone, Serialize, TS)]
+#[derive(Debug, Default, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct ClipboardEntryContent {
     pub text: Option<String>,
@@ -27,7 +28,8 @@ pub struct ClipboardEntryContent {
 }
 
 /// A single entry in the Windows clipboard history.
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct ClipboardEntry {
     /// Unique identifier assigned by Windows.

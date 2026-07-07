@@ -32,7 +32,7 @@ runs:
     - name: Setup Rust
       uses: dtolnay/rust-toolchain@master
       with:
-        toolchain: nightly-2025-09-12
+        toolchain: nightly-2026-05-22
         components: ${{ inputs.rust-components }}
         targets: ${{ inputs.rust-targets }}
 

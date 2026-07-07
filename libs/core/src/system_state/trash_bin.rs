@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct TrashBinInfo {
     /// Number of items currently in the recycle bin

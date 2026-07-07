@@ -1,7 +1,8 @@
 // This file was generated via rust macros. Don't modify manually.
 // all this structs are based on official docs https://bitbucket.org/bluetooth-SIG/public/src/main/assigned_numbers/core/class_of_device.yaml
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u32)]
 pub enum BluetoothMajorServiceClass {
     LimitedDiscoverableMode = 0x1,
@@ -28,7 +29,8 @@ impl BluetoothMajorServiceClass {
     }
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothComputerMinor {
     Uncategorized = 0x0,
@@ -43,7 +45,8 @@ pub enum BluetoothComputerMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothPhoneMinor {
     Uncategorized = 0x0,
@@ -56,7 +59,8 @@ pub enum BluetoothPhoneMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothLANNetworkAccessPointMinor {
     Fullyavailable = 0x0,
@@ -71,7 +75,8 @@ pub enum BluetoothLANNetworkAccessPointMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothLANNetworkAccessPointSubMinor {
     Uncategorized = 0x0,
@@ -79,7 +84,8 @@ pub enum BluetoothLANNetworkAccessPointSubMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothAudioVideoMinor {
     Uncategorized = 0x0,
@@ -107,7 +113,8 @@ pub enum BluetoothAudioVideoMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothPeripheralMinor {
     Uncategorized = 0x0,
@@ -118,7 +125,8 @@ pub enum BluetoothPeripheralMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothPeripheralSubMinor {
     Uncategorized = 0x0,
@@ -135,7 +143,8 @@ pub enum BluetoothPeripheralSubMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothImagingMinor {
     Display = 0x1,
@@ -144,7 +153,8 @@ pub enum BluetoothImagingMinor {
     Printer = 0x8,
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothImagingSubMinor {
     Uncategorized = 0x0,
@@ -152,7 +162,8 @@ pub enum BluetoothImagingSubMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothWearableMinor {
     Wristwatch = 0x1,
@@ -165,7 +176,8 @@ pub enum BluetoothWearableMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothToyMinor {
     Robot = 0x1,
@@ -177,7 +189,8 @@ pub enum BluetoothToyMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize, TS)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, FromPrimitive, IntoPrimitive, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[repr(u8)]
 pub enum BluetoothHealthMinor {
     Undefined = 0x0,
@@ -200,7 +213,8 @@ pub enum BluetoothHealthMinor {
     Reserved(u8),
 }
 
-#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "major")]
 pub enum BluetoothClass {
     Miscellaneous { minor: u8 },

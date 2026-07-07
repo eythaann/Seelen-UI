@@ -1,12 +1,14 @@
 use std::path::PathBuf;
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayerOwner {
     pub name: String,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayerTimeline {
     /// The starting timestamp in nanoseconds (aparently it's always 0)
@@ -22,7 +24,8 @@ pub struct MediaPlayerTimeline {
     pub last_updated_time: i64,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaPlayer {
     pub umid: String,
@@ -35,7 +38,8 @@ pub struct MediaPlayer {
     pub default: bool,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaDeviceSession {
     pub id: String,
@@ -48,15 +52,17 @@ pub struct MediaDeviceSession {
     pub muted: bool,
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, TS)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[ts(repr(enum = name))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum MediaDeviceType {
     Input,
     Output,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaDevice {
     pub id: String,
@@ -69,7 +75,8 @@ pub struct MediaDevice {
     pub muted: bool,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct AudioWaveform {
     /// Mono PCM samples from the ring buffer (2048 values), each in [-1.0, 1.0].

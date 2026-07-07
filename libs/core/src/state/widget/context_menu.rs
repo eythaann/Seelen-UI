@@ -1,8 +1,9 @@
 use crate::{resource::ResourceText, state::Alignment, utils::TsUnknown};
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, optional_fields = nullable))]
 pub struct ContextMenu {
     pub identifier: uuid::Uuid,
     /// Optional metadata that will be sent back in the callback payload when an item is clicked.
@@ -15,9 +16,10 @@ pub struct ContextMenu {
     pub align_y: Option<Alignment>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "type", rename_all_fields = "camelCase")]
-#[ts(optional_fields = nullable)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional_fields = nullable))]
 pub enum ContextMenuItem {
     Separator,
     Item {
@@ -41,9 +43,10 @@ pub enum ContextMenuItem {
     },
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, optional_fields = nullable))]
 pub struct ContextMenuCallbackPayload {
     /// The key of the clicked item
     key: String,

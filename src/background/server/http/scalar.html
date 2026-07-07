@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Seelen UI - HTTP API</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://seelen.io/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <div class="sl-external-links">
+      <a href="https://seelen.io" target="_blank" rel="noopener">Website</a>
+      <a href="https://github.com/eythaann/seelen-ui" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+    <script>
+    Scalar.createApiReference("#app", {
+      url: "/api-doc/openapi.json",
+      theme: "kepler",
+      showDeveloperTools: "never",
+      favicon: "https://seelen.io/favicon.ico",
+      defaultHttpClient: {
+        targetKey: "javascript",
+        clientKey: "fetch",
+      },
+      info: {
+        title: "Seelen UI",
+        description: "Public HTTP API to interact with the desktop environment",
+      },
+      sources: [
+        {
+          url: "/api-doc/openapi.json",
+          title: "Seelen UI",
+        },
+      ],
+    });
+    </script>
+    <style>
+    .scalar-mcp-layer {
+      display: none !important;
+    }
+
+    .sl-external-links {
+      position: fixed;
+      top: 12px;
+      right: 16px;
+      z-index: 1000;
+      display: flex;
+      gap: 16px;
+      font-family: var(--scalar-font, sans-serif);
+      font-size: 13px;
+    }
+
+    .sl-external-links a {
+      color: var(--scalar-color-1, #333);
+      text-decoration: none;
+      opacity: 0.75;
+    }
+
+    .sl-external-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    </style>
+  </body>
+</html>

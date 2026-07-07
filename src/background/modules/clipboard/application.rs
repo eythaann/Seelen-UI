@@ -116,7 +116,7 @@ impl ClipboardManager {
 
     pub fn get_data(&self) -> ClipboardData {
         let mut history = self.entries.values();
-        history.sort_by(|a, b| b.timestamp.cmp(&a.timestamp));
+        history.sort_by_key(|b| std::cmp::Reverse(b.timestamp));
         ClipboardData {
             history,
             is_history_enabled: self.history_enabled.load(Ordering::SeqCst),

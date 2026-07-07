@@ -125,6 +125,7 @@ impl UserAppsManager {
                     Self::send(UserAppWinEvent::Removed(window.address()));
                 }
             }
+            #[allow(clippy::collapsible_match)]
             WinEvent::ObjectDestroy => {
                 if is_interactable {
                     USER_APPS_MANAGER.remove_win(&window);

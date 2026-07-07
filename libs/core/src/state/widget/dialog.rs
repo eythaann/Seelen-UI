@@ -2,9 +2,10 @@ use std::collections::HashMap;
 
 use url::Url;
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct Dialog {
     pub identifier: uuid::Uuid,
     pub width: f64,
@@ -27,13 +28,14 @@ impl Default for Dialog {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(
     tag = "type",
     rename_all = "camelCase",
     rename_all_fields = "camelCase"
 )]
-#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, optional_fields = nullable))]
 pub enum DialogContent {
     Text {
         value: String,
@@ -77,7 +79,8 @@ impl DialogContent {
     }
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct CssStyles(HashMap<String, String>);
 
 impl CssStyles {

@@ -2,15 +2,19 @@ use std::sync::LazyLock;
 
 use schemars::JsonSchema;
 use serde::{de::Visitor, Deserialize, Deserializer, Serialize};
-use ts_rs::TS;
 
 use crate::error::Result;
 
 /// A URL-safe slug: lowercase ASCII letters, digits, and hyphens.
 /// Must start and end with an alphanumeric character.
 /// Example: `my-cool-theme`, `dark-mode-2`
-#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, JsonSchema, TS)]
-#[ts(type = "string & { __brand: 'Slug' }")]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Hash, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(type = "string & { __brand: 'Slug' }")
+)]
 pub struct Slug(String);
 
 impl Slug {

@@ -91,7 +91,7 @@ impl NotificationManager {
 
     pub fn notifications(&self) -> Vec<AppNotification> {
         let mut notifications = self.notifications.values();
-        notifications.sort_by(|a, b| b.date.cmp(&a.date));
+        notifications.sort_by_key(|b| std::cmp::Reverse(b.date));
         notifications
     }
 

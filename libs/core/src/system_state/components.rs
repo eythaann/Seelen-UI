@@ -1,7 +1,8 @@
 use std::path::PathBuf;
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct Disk {
     pub name: String,
@@ -14,8 +15,9 @@ pub struct Disk {
     pub written_bytes: u64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct NetworkStatistics {
     pub name: String,
@@ -25,8 +27,9 @@ pub struct NetworkStatistics {
     pub packets_transmitted: u64,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct Memory {
     pub total: u64,
@@ -35,8 +38,9 @@ pub struct Memory {
     pub swap_free: u64,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct Core {
     pub name: String,

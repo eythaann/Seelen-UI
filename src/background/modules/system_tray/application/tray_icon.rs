@@ -65,13 +65,13 @@ impl SystemTrayManager {
         // set application name if not tooltip is set
         match &mut event {
             Win32TrayEvent::IconAdd { data: icon_data }
-            | Win32TrayEvent::IconUpdate { data: icon_data } => {
-                if icon_data.tooltip.as_ref().is_none() {
-                    if let Some(window_handle) = icon_data.window_handle {
-                        let window = Window::from(window_handle);
-                        if let Ok(name) = window.app_display_name() {
-                            icon_data.tooltip = Some(name);
-                        }
+            | Win32TrayEvent::IconUpdate { data: icon_data }
+                if icon_data.tooltip.as_ref().is_none() =>
+            {
+                if let Some(window_handle) = icon_data.window_handle {
+                    let window = Window::from(window_handle);
+                    if let Ok(name) = window.app_display_name() {
+                        icon_data.tooltip = Some(name);
                     }
                 }
             }

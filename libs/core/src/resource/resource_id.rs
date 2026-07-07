@@ -10,8 +10,13 @@ use crate::error::Result;
 ///   Human-readable `@creator/name` format; never assigned a UUID until published.
 /// - [`ResourceId::Remote`] — assigned by the marketplace when a resource is published.
 ///   All downloaded resources are identified by UUID, not by their original local ID.
-#[derive(Debug, Clone, PartialEq, Eq, Hash, JsonSchema, TS)]
-#[ts(type = "string & { __brand: 'ResourceId' }")]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(type = "string & { __brand: 'ResourceId' }")
+)]
 pub enum ResourceId {
     /// Development / bundled resource. Format: `@creator/name`.
     Local(String),
@@ -191,8 +196,10 @@ macro_rules! resource_id_variant {
     ($name:ident) => {
         /// Visual id composed of the creator username and the resource name. e.g. `@username/resource-name`
         #[derive(
-            Debug, Clone, Hash, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS,
+            Debug, Clone, Hash, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema,
         )]
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+        #[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
         pub struct $name(ResourceId);
         crate::identifier_impl!($name, ResourceId);
 

@@ -6,7 +6,8 @@ use std::path::PathBuf;
 /// its guid. Since a systray icon can be updated to also include a
 /// guid or window handle/uid later on, a stable ID is useful for
 /// consistently identifying an icon.
-#[derive(Clone, Debug, Eq, Hash, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Clone, Debug, Eq, Hash, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub enum SysTrayIconId {
     HandleUid(isize, u32),
     Guid(uuid::Uuid),
@@ -42,7 +43,8 @@ impl std::str::FromStr for SysTrayIconId {
     }
 }
 
-#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct SysTrayIcon {
     /// Identifier for the icon. Will not change for the lifetime of the
     /// icon.
@@ -102,8 +104,9 @@ pub struct SysTrayIcon {
 }
 
 /// Actions that can be performed on a `SystrayIcon`.
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Serialize, Deserialize, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum SystrayIconAction {
     HoverEnter,
     HoverLeave,

@@ -1,11 +1,11 @@
 use std::{collections::HashSet, path::PathBuf};
 
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 
 use crate::system_state::{Relaunch, RelaunchArguments};
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct WegItemData {
     /// internal UUID to differentiate items
@@ -24,7 +24,8 @@ pub struct WegItemData {
     pub relaunch: Option<Relaunch>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "type")]
 pub enum WegItem {
     #[serde(alias = "PinnedApp", alias = "Pinned")]
@@ -47,8 +48,9 @@ pub enum WegItem {
     },
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, repr(enum = name)))]
 pub enum WegItemType {
     AppOrFile,
     Separator,
@@ -84,9 +86,10 @@ impl WegItem {
     }
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct WegItems {
     /// Whether the reordering possible on the weg
     pub is_reorder_disabled: bool,
@@ -192,8 +195,9 @@ impl WegItems {
 
 // ===================== DEPRECATED STRUCTS =====================
 
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum OldWegItemSubtype {
     File,
     Folder,
@@ -202,7 +206,8 @@ pub enum OldWegItemSubtype {
     UnknownV2_1_6,
 }
 
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct OldWegItemData {
     /// internal UUID to differentiate items

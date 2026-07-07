@@ -2,13 +2,13 @@ use std::collections::{HashMap, HashSet};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 use url::Url;
 
 use crate::{resource::PluginId, utils::TsUnknown};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum ToolbarJsScope {
     Date,
     Notifications,
@@ -28,7 +28,8 @@ pub enum ToolbarJsScope {
 
 type JsFunctionBody = String;
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct ToolbarItem {
     /// Id to identify the item, should be unique. Preferably a uuid.
@@ -52,7 +53,8 @@ pub struct ToolbarItem {
     pub remote_data: HashMap<String, RemoteDataDeclaration>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteDataDeclaration {
     url: Url,
@@ -60,16 +62,18 @@ pub struct RemoteDataDeclaration {
     update_interval_seconds: Option<u32>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(untagged)]
 pub enum StyleValue {
     String(String),
     Number(serde_json::Number),
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[ts(repr(enum = name))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WorkspaceToolbarItemMode {
     #[default]
     Dotted,
@@ -87,16 +91,18 @@ impl ToolbarItem {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(untagged)]
 pub enum ToolbarItem2 {
     Plugin(PluginId),
     Inline(Box<ToolbarItem>),
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct ToolbarState {
     /// Whether the reordering possible on the toolbar
     pub is_reorder_disabled: bool,

@@ -169,17 +169,19 @@ impl BgWindowProc {
             );
 
             match w_param.0 as u32 {
-                WTS_SESSION_LOCK => {
-                    if l_param.0 as u32 == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) {
-                        IS_LOCKED.store(true, Ordering::Release);
-                        log::info!("Session locked");
-                    }
+                WTS_SESSION_LOCK
+                    if l_param.0 as u32
+                        == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) =>
+                {
+                    IS_LOCKED.store(true, Ordering::Release);
+                    log::info!("Session locked");
                 }
-                WTS_SESSION_UNLOCK => {
-                    if l_param.0 as u32 == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) {
-                        IS_LOCKED.store(false, Ordering::Release);
-                        log::info!("Session unlocked");
-                    }
+                WTS_SESSION_UNLOCK
+                    if l_param.0 as u32
+                        == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) =>
+                {
+                    IS_LOCKED.store(false, Ordering::Release);
+                    log::info!("Session unlocked");
                 }
                 _ => {}
             }

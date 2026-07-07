@@ -75,7 +75,7 @@ discord-rich-presence = { workspace = true }
 win-hotkeys = { workspace = true }
 walkdir = { workspace = true }
 tokio = { workspace = true }
-seelen-core = { workspace = true }
+seelen-core = { workspace = true, features = ["salvo"] }
 wmi = { workspace = true }
 windows = { workspace = true, features = [
     "Win32_Foundation",
@@ -183,6 +183,7 @@ time = { workspace = true, features = ["formatting", "local-offset"] }
 scc = { workspace = true }
 open = "5.3.3"
 futures = { workspace = true }
+salvo = { workspace = true, features = ["oapi"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

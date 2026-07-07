@@ -11,7 +11,9 @@ use crate::{
     resource::{Resource, ResourceText},
 };
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct ResourceMetadata {
     /// Map of language code to display name. Could be a string, mapped to `en`.
@@ -53,7 +55,9 @@ impl ResourceMetadata {
     }
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 #[serde(default, rename_all = "camelCase")]
 pub struct InternalResourceMetadata {
     pub path: PathBuf,

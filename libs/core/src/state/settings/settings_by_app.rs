@@ -2,10 +2,10 @@ use regex::Regex;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
-use ts_rs::TS;
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum AppExtraFlag {
     /// Mark this app as non interactive window.
     #[serde(alias = "no-interactive")]
@@ -26,8 +26,9 @@ pub enum AppExtraFlag {
     Unknown,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum AppIdentifierType {
     #[serde(alias = "exe")]
     Exe,
@@ -39,8 +40,9 @@ pub enum AppIdentifierType {
     Path,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum MatchingStrategy {
     #[serde(alias = "equals", alias = "legacy", alias = "Legacy")]
     Equals,
@@ -55,7 +57,8 @@ pub enum MatchingStrategy {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct AppIdentifier {
     /// Depending of the kind this can be case sensitive or not.
@@ -150,9 +153,10 @@ impl AppIdentifier {
 }
 
 #[serde_alias(SnakeCase)]
-#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct AppConfig {
     /// name of the app
     pub name: String,
@@ -182,7 +186,8 @@ impl AppConfig {
     }
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct AppsConfigurationList(Vec<AppConfig>);
 
 impl AppsConfigurationList {

@@ -5,7 +5,6 @@ use std::{
 
 use base64::Engine;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use ts_rs::TS;
 
 use crate::{error::Result, utils::TsUnknown};
 
@@ -18,9 +17,10 @@ use super::Resource;
 /// This struct contains all the necessary data that a resource needs.
 /// It uses a custom `.slu` file extension format that can change over time
 /// with new versions.
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct SluResourceFile {
     pub version: u32,
     /// information about the downloaded resource

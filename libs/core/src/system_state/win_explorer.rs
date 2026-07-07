@@ -1,7 +1,8 @@
 use std::path::PathBuf;
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct StartMenuItem {
     pub path: PathBuf,
     pub umid: Option<String>,
@@ -12,14 +13,16 @@ pub struct StartMenuItem {
     pub display_name: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct StartMenuLayout {
     pub pinned_list: Vec<StartMenuLayoutItem>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub enum StartMenuLayoutItem {
     DestopAppId(String),
@@ -28,14 +31,16 @@ pub enum StartMenuLayoutItem {
     SecondaryTile(String),
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct TrayIcon {
     pub label: String,
     pub registry: RegistryNotifyIcon,
 }
 
-#[derive(Debug, Clone, Serialize, TS)]
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct RegistryNotifyIcon {
     /// can be used as a unique identifier of the registered tray icon

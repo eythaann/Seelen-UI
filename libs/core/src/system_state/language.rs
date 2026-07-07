@@ -1,6 +1,7 @@
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct SystemLanguage {
     pub id: String,
     pub code: String,
@@ -10,7 +11,8 @@ pub struct SystemLanguage {
     pub keyboard_layouts: Vec<KeyboardLayout>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct KeyboardLayout {
     /// HKL-based: KLID e.g. "00000409". TSF: full tip e.g. "0412:{CLSID}{ProfileGUID}".
@@ -122,9 +124,10 @@ pub struct KeyboardLayout {
 /// - `IME_CMODE_SYMBOL`
 ///
 /// Modern TSF-based IMEs often do not report these consistently.
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct ImeState {
     /// Native language mode.
     ///

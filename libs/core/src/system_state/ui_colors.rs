@@ -1,6 +1,7 @@
 /// https://learn.microsoft.com/is-is/uwp/api/windows.ui.viewmanagement.uicolortype?view=winrt-19041
-#[derive(Debug, Default, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Default, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct UIColors {
     pub accent_lightest: Color,
     pub accent_lighter: Color,
@@ -50,8 +51,9 @@ impl UIColors {
 }
 
 /// since v2.2.0 this should be used to handle every used color in the app
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct Color {
     pub r: u8,
     pub g: u8,

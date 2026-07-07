@@ -20,14 +20,15 @@ use std::{
 use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 use uuid::Uuid;
 
 use crate::error::Result;
 
 // =============================================================================
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 #[serde(untagged)]
 /// Map of language code as key an translated values. Could be a string, mapped to `en`.
 pub enum ResourceText {
@@ -82,8 +83,10 @@ impl ResourceText {
 
 // =============================================================================
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 pub enum ResourceKind {
     Theme,
     IconPack,
@@ -95,8 +98,10 @@ pub enum ResourceKind {
 
 // =============================================================================
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 pub enum ResourceStatus {
     /// Initial state
     Draft,
@@ -112,8 +117,10 @@ pub enum ResourceStatus {
 
 // =============================================================================
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 pub enum ResourceAttribute {
     /// this resource is not working
     NotWorking,
@@ -125,9 +132,11 @@ pub enum ResourceAttribute {
 
 /// Represents a pending update submitted by the creator of a Published resource.
 /// The live resource remains unchanged until the update is approved or rejected.
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 pub struct ResourcePendingUpdate {
     /// Proposed new metadata (applied to the resource on approve)
     pub metadata: ResourceMetadata,
@@ -138,9 +147,11 @@ pub struct ResourcePendingUpdate {
 }
 
 /// Represents a resource in the cloud, uploaded by a user
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct Resource {
     /// unique id
     pub id: Uuid,
@@ -183,7 +194,7 @@ pub struct Resource {
     pub rejected_pending_reason: Option<String>,
 
     /// @deprecated - used for migrations only
-    #[ts(skip)]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(skip))]
     #[serde(rename = "friendlyId")]
     pub deprecated_id: Option<ResourceId>,
 }

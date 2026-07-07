@@ -3,13 +3,17 @@ use std::path::PathBuf;
 use chrono::{DateTime, Utc};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 
 use crate::resource::{IconPackId, ResourceKind, ResourceMetadata, SluResource};
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
 pub struct IconPack {
     pub id: IconPackId,
     #[serde(alias = "info")]
@@ -79,7 +83,13 @@ impl IconPack {
 /// Key can be user model id, filename or a full path.
 /// In case of path this should be an executable or a lnk file or any other file that can
 /// have an unique/individual icon as are the applications, otherwise use `shared`.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(rename_all = "camelCase")]
 pub struct UniqueIconPackEntry {
     /// Application user model id
@@ -96,12 +106,18 @@ pub struct UniqueIconPackEntry {
     pub icon: Option<Icon>,
     /// Source file modification time for cache invalidation
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[ts(optional = nullable)]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
     pub source_mtime: Option<DateTime<Utc>>,
 }
 
 /// Intended to store file icons by extension
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(rename_all = "camelCase")]
 pub struct SharedIconPackEntry {
     /// File extension without the dot, e.g. "txt"
@@ -110,7 +126,13 @@ pub struct SharedIconPackEntry {
 }
 
 /// Here specific/custom icons for widgets can be stored.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(rename_all = "camelCase")]
 pub struct CustomIconPackEntry {
     /// we recomend following the widget id + icon name to avoid collisions
@@ -120,7 +142,13 @@ pub struct CustomIconPackEntry {
     pub icon: Icon,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(tag = "type", rename_all = "camelCase")]
 pub enum IconPackEntry {
     Unique(UniqueIconPackEntry),
@@ -148,7 +176,13 @@ impl IconPackEntry {
 }
 
 /// The icon paths in this structure are relative to the icon pack folder.
-#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, PartialEq, Eq, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(default, rename_all = "camelCase")]
 pub struct Icon {
     /// Icon to use if no light or dark icon is specified, if both light and dark are specified this can be omitted

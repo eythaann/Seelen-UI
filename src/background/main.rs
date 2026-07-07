@@ -12,6 +12,7 @@ mod logger;
 mod migrations;
 mod modules;
 mod resources;
+mod server;
 mod session;
 mod state;
 mod tauri_context;
@@ -169,6 +170,7 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();
     backups::infrastructure::start_backup_sync();
+    tokio::spawn(server::http::start_server());
     Ok(())
 }
 

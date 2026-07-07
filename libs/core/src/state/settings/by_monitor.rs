@@ -1,14 +1,14 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use ts_rs::TS;
 
 use crate::{
     resource::WidgetId,
     state::{by_widget::ThirdPartyWidgetSettings, WorkspaceId},
 };
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct MonitorSettingsByWidget(HashMap<WidgetId, ThirdPartyWidgetSettings>);
 
 impl MonitorSettingsByWidget {
@@ -27,7 +27,8 @@ impl MonitorSettingsByWidget {
     }
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct MonitorConfiguration {
     /// dictionary of settings by widget
@@ -39,7 +40,8 @@ pub struct MonitorConfiguration {
     pub by_workspace: HashMap<WorkspaceId, WorkspaceConfiguration>,
 }
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct WorkspaceConfiguration {
     /// Id of the wallpaper collection to use in this workspace.\

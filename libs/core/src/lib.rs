@@ -17,9 +17,6 @@ extern crate serde;
 #[macro_use(JsonSchema)]
 extern crate schemars;
 
-#[macro_use(TS)]
-extern crate ts_rs;
-
 #[macro_use(FromPrimitive, IntoPrimitive)]
 extern crate num_enum;
 

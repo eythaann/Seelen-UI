@@ -1,4 +1,6 @@
 mod slug;
+pub mod traits;
+
 pub use slug::*;
 
 use std::path::{Path, PathBuf};
@@ -55,8 +57,12 @@ macro_rules! identifier_impl {
     };
 }
 
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(type = "unknown")]
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    ts(type = "unknown")
+)]
 pub struct TsUnknown(pub serde_json::Value);
 
 impl<T: Into<serde_json::Value>> From<T> for TsUnknown {

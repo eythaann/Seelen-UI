@@ -7,7 +7,6 @@ use std::collections::HashMap;
 use declaration::WidgetSettingsDeclarationList;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use ts_rs::TS;
 
 use crate::{
     error::Result,
@@ -20,7 +19,8 @@ use crate::{
 
 /// Declares a shortcut that belongs to this widget.
 /// The user can override the keys via the widget's `$shortcuts` setting entry.
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct WidgetShortcutDeclaration {
     /// Stable identifier for this shortcut (e.g. `"wm-focus-up"`).
@@ -38,9 +38,10 @@ pub struct WidgetShortcutDeclaration {
     pub readonly: bool,
 }
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct Widget {
     /// Resource id ex: `@seelen/weg`
     pub id: WidgetId,
@@ -117,8 +118,9 @@ impl SluResource for Widget {
     }
 }
 
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WidgetInstanceMode {
     /// Default behavior, only one instance of this widget is allowed.
     /// This is useful for widgets intended to work as custom config window.
@@ -132,8 +134,9 @@ pub enum WidgetInstanceMode {
     ReplicaByMonitor,
 }
 
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WidgetLoader {
     /// Used for old internal widgets, similar to `Internal`.
     Legacy,
@@ -146,8 +149,9 @@ pub enum WidgetLoader {
     ThirdParty,
 }
 
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WidgetPreset {
     /// No special behavior, all should be manually configured
     #[default]
@@ -168,9 +172,10 @@ pub enum WidgetPreset {
 }
 
 /// Arguments that could be passed on the trigger widget function, widgets decides if use it or not.
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export, optional_fields = nullable))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, optional_fields = nullable))]
 pub struct WidgetTriggerPayload {
     pub id: WidgetId,
     pub monitor_id: Option<MonitorId>,
@@ -216,16 +221,18 @@ impl WidgetTriggerPayload {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum Alignment {
     Start,
     Center,
     End,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetDebugInfo {
     pub label: String,
@@ -236,8 +243,9 @@ pub struct WidgetDebugInfo {
     pub webview_window_id: Option<isize>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export, repr(enum = name)))]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, repr(enum = name)))]
 pub enum WidgetStatus {
     /// Widget has been registered, but not yet loaded
     Pending,

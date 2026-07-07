@@ -2,7 +2,6 @@ use std::collections::HashSet;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Deserializer, Serialize};
-use ts_rs::TS;
 
 use crate::resource::ResourceText;
 
@@ -12,8 +11,9 @@ use crate::resource::ResourceText;
 /// This structure is used to render and store widget settings in a user-friendly way,
 /// matching the style of the settings window. With this approach, custom configuration
 /// windows for specific widgets are not needed.
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct WidgetSettingsDeclarationList(Vec<WidgetConfigDefinition>);
 
 impl WidgetSettingsDeclarationList {
@@ -59,7 +59,8 @@ impl WidgetSettingsDeclarationList {
 }
 
 /// A widget configuration definition that can be either a group container or a settings item
-#[derive(Debug, Clone, Serialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(untagged, rename_all = "camelCase")]
 pub enum WidgetConfigDefinition {
     /// A group that contains nested configuration items.
@@ -69,14 +70,16 @@ pub enum WidgetConfigDefinition {
     Item(Box<WidgetSettingItem>),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetConfigGroupVariant {
     group: WidgetConfigGroup,
 }
 
 /// A group of widget configuration items with a label
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetConfigGroup {
     /// Label for this group, can use `t::` prefix for translation
@@ -111,7 +114,8 @@ impl<'de> Deserialize<'de> for WidgetConfigDefinition {
 }
 
 /// Individual widget setting item with type-specific configuration
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "type")]
 pub enum WidgetSettingItem {
     /// Toggle switch for boolean values.\
@@ -166,10 +170,14 @@ impl WidgetSettingItem {
 }
 
 /// Common fields shared across all widget setting items
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 #[schemars(bound = "T: JsonSchema + Default")]
-#[ts(bound = "T: TS")]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    ts(bound = "T: ts_rs::TS")
+)]
 pub struct WidgetSettingBase<T = ()> {
     /// Unique key for this setting, used to identify it in the configuration.\
     /// Must be unique within the widget. Duplicates will be ignored.
@@ -198,14 +206,16 @@ pub struct WidgetSettingBase<T = ()> {
     pub default_value: T,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingSwitch {
     #[serde(flatten)]
     pub base: WidgetSettingBase<bool>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingSelect {
     #[serde(flatten)]
@@ -218,7 +228,8 @@ pub struct WidgetSettingSelect {
     pub subtype: WidgetSelectSubtype,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingInputText {
     #[serde(flatten)]
@@ -232,7 +243,8 @@ pub struct WidgetSettingInputText {
     pub max_length: Option<u32>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingInputNumber {
     #[serde(flatten)]
@@ -245,7 +257,8 @@ pub struct WidgetSettingInputNumber {
     pub step: Option<f64>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingRange {
     #[serde(flatten)]
@@ -258,7 +271,8 @@ pub struct WidgetSettingRange {
     pub step: Option<f64>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingColor {
     #[serde(flatten)]
@@ -268,7 +282,8 @@ pub struct WidgetSettingColor {
     pub allow_alpha: bool,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSettingFont {
     #[serde(flatten)]
@@ -276,7 +291,8 @@ pub struct WidgetSettingFont {
 }
 
 /// An option in a select widget setting
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct WidgetSelectOption {
     /// Optional React icon name to display with this option
@@ -288,8 +304,9 @@ pub struct WidgetSelectOption {
 }
 
 /// Visual style for rendering select options
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema, TS)]
-#[ts(repr(enum = name))]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WidgetSelectSubtype {
     /// Render as a dropdown list (default)
     #[default]

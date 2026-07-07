@@ -5,23 +5,31 @@ use serde::{de::Visitor, Deserialize, Deserializer};
 
 use crate::{error::Result, resource::ResourceText};
 
-#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct ThemeSettingsDefinition(Vec<ThemeConfigDefinition>);
 
-#[derive(Debug, Clone, Serialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(untagged, rename_all = "camelCase")]
 pub enum ThemeConfigDefinition {
     Group(ThemeConfigGroupVariant),
     Item(Box<ThemeVariableDefinition>),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct ThemeConfigGroupVariant {
     group: ThemeConfigGroup,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct ThemeConfigGroup {
     header: ResourceText,
@@ -51,7 +59,9 @@ impl<'de> Deserialize<'de> for ThemeConfigDefinition {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "syntax")]
 pub enum ThemeVariableDefinition {
     /// This config definition will allow to users write any string.\
@@ -115,9 +125,11 @@ pub enum ThemeVariableDefinition {
     FamilyName(ThemeVariable<String>),
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-pub struct ThemeVariable<T> {
+pub struct ThemeVariable<T: crate::utils::traits::SalvoBound> {
     /// Css variable name, example: `--my-css-variable`
     pub name: CssVariableName,
     /// Label to show to the user on Settings.
@@ -144,16 +156,20 @@ pub struct ThemeVariable<T> {
     pub options: Option<Vec<T>>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-pub struct ThemeVariableWithUnit<T> {
+pub struct ThemeVariableWithUnit<T: crate::utils::traits::SalvoBound> {
     #[serde(flatten)]
     pub _extends: ThemeVariable<T>,
     pub initial_value_unit: String,
 }
 
 /// Valid CSS variable name that starts with `--` and follows CSS naming conventions
-#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, Serialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct CssVariableName(String);
 
 static CSS_VAR_REGEX: LazyLock<regex::Regex> =
