@@ -5625,7 +5625,7 @@ dependencies = [
  "phf 0.11.3",
  "positioning",
  "quick-xml",
- "rand 0.9.4",
+ "rand 0.10.2",
  "rayon",
  "regex",
  "reqwest 0.13.4",
