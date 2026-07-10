@@ -47,6 +47,45 @@ async fn icon_packs() -> Json<Vec<std::sync::Arc<seelen_core::state::IconPack>>>
     Json(RESOURCES.icon_packs())
 }
 
+/// Theme Tokens
+///
+/// Returns the design tokens resolved from all currently enabled themes.
+/// Enabled themes are merged in activation order, so themes activated later
+/// take priority over the ones activated before them.
+#[endpoint(tag("Resources"))]
+async fn theme_tokens(
+    // Whether to resolve dark-mode tokens. Themes without `tokensDark` fall back to `tokens`.
+    dark: salvo::oapi::extract::QueryParam<bool, false>,
+) -> Json<seelen_core::state::ThemeTokens> {
+    let dark = dark.into_inner().unwrap_or(false);
+    let state = crate::state::application::FULL_STATE.load();
+
+    let themes_by_id: std::collections::HashMap<_, _> = RESOURCES
+        .themes()
+        .into_iter()
+        .map(|theme| (theme.id.clone(), theme))
+        .collect();
+
+    let tokens = state
+        .settings
+        .active_themes
+        .iter()
+        .filter_map(|id| themes_by_id.get(id))
+        .filter_map(|theme| {
+            if dark {
+                theme.tokens_dark.as_ref().or(theme.tokens.as_ref())
+            } else {
+                theme.tokens.as_ref()
+            }
+        })
+        .cloned()
+        .fold(seelen_core::state::ThemeTokens::default(), |acc, tokens| {
+            acc.merge(tokens)
+        });
+
+    Json(tokens)
+}
+
 /* #[endpoint]
 async fn settings() -> Json<seelen_core::state::Settings> {
     let state = crate::state::application::FULL_STATE.load();
@@ -60,6 +99,7 @@ pub async fn start_server() {
         .push(
             Router::with_path("resources")
                 .push(Router::with_path("themes").get(themes))
+                .push(Router::with_path("themes/tokens").get(theme_tokens))
                 .push(Router::with_path("icon-packs").get(icon_packs)),
         );
 

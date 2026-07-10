@@ -51,9 +51,13 @@ impl UIColors {
 }
 
 /// since v2.2.0 this should be used to handle every used color in the app
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(feature = "salvo", derive(salvo::oapi::ToSchema))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 pub struct Color {
     pub r: u8,
     pub g: u8,

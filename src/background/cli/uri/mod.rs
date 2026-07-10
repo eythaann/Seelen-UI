@@ -249,7 +249,9 @@ fn update_dialog_to_added_resource(dialog_id: Uuid, resource: &Resource) -> Resu
                         let theme_id = used_id.clone().into();
                         let has_shared_styles = RESOURCES
                             .themes
-                            .read(&theme_id, |_, t| !t.shared_styles.is_empty())
+                            .read(&theme_id, |_, t| {
+                                t.shared_styles.as_ref().is_some_and(|s| !s.is_empty())
+                            })
                             .unwrap_or(false);
                         if has_shared_styles {
                             state.settings.active_themes.clear();
