@@ -81,6 +81,8 @@ async fn _process_action(command: SvcAction) -> Result<()> {
         SvcAction::StopShortcutRegistration => {
             crate::hotkeys::stop_shortcut_registration().await?;
         }
+        SvcAction::HideNativeTaskbar => crate::shutdown::hide_native_taskbar(),
+        SvcAction::RestoreNativeTaskbar => crate::shutdown::restore_native_taskbar()?,
     }
     Ok(())
 }

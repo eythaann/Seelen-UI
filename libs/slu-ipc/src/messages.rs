@@ -98,6 +98,8 @@ pub enum SvcAction {
     SetForeground(isize),
     StartShortcutRegistration,
     StopShortcutRegistration,
+    HideNativeTaskbar,
+    RestoreNativeTaskbar,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

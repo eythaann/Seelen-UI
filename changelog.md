@@ -15,6 +15,7 @@
 - dock and toolbar hidding while dragging items.
 - state while switching workspaces.
 - twm window not being moved when there is a fullscreen app on target monitor.
+- native taskbar autohide being disabled on settings save.
 
 ## [2.7.4]
 
