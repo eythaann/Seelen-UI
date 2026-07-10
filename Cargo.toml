@@ -1,11 +1,10 @@
-cargo-features = ["profile-rustflags", "codegen-backend"]
+cargo-features = ["codegen-backend"]
 
 [profile.dev]
 debug = "full"
 strip = false
 opt-level = 0
 incremental = false
-rustflags = ["-Z", "threads=8", "-C", "linker=rust-lld"]
 
 [profile.rust-analyzer]
 inherits = "dev"
@@ -17,7 +16,6 @@ strip = true
 opt-level = "z"
 lto = true
 codegen-units = 1
-rustflags = ["-Z", "threads=8", "-C", "linker=rust-lld"]
 
 [workspace]
 members = [
