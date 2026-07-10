@@ -9,9 +9,7 @@ use std::thread::JoinHandle;
 
 use windows::Win32::{
     Foundation::HWND,
-    UI::WindowsAndMessaging::{
-        SetWindowPos, HWND_TOPMOST, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SW_HIDE, SW_SHOWNORMAL,
-    },
+    UI::WindowsAndMessaging::{SW_HIDE, SW_SHOWNORMAL},
 };
 
 use crate::{
@@ -59,19 +57,6 @@ impl SeelenWeg {
     pub fn restore_native_taskbar() -> Result<()> {
         for hwnd in get_taskbars_handles()? {
             AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
-            
-            unsafe {
-                let _ = SetWindowPos(
-                    hwnd,
-                    HWND_TOPMOST,
-                    0,
-                    0,
-                    0,
-                    0,
-                    SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-                );
-            }
-            
             WindowsApi::show_window_async(hwnd, SW_SHOWNORMAL)?;
         }
         Ok(())
