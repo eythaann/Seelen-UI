@@ -46,32 +46,27 @@ export const t = derived(
   (locale) => (key: string, vars?: Record<string, string>) => translate(locale, key, vars),
 );
 
+async function loadLocale(locale: string) {
+  // If the locale is already loaded, don't load it again
+  if (get(_messages)[locale]) {
+    return;
+  }
+  const res = await fetch(`./translations/${locale}.yml`);
+  const text = await res.text();
+  const messages = yaml.load(text) as Record<string, any>;
+  _messages.update((m) => ({ ...m, [locale]: messages }));
+}
+
+// Load the default locale in the background
+loadLocale("en");
+
 export const locale = {
   get value() {
     return get(_locale);
   },
 
   async set(newLocale: string) {
-    const current = get(_messages);
-    const toLoad: Promise<void>[] = [];
-
-    const loadLocale = async (locale: string) => {
-      // If the locale is already loaded, don't load it again
-      if (current[locale]) {
-        return;
-      }
-      const res = await fetch(`./translations/${locale}.yml`);
-      const text = await res.text();
-      const messages = yaml.load(text) as Record<string, any>;
-      _messages.update((m) => ({ ...m, [locale]: messages }));
-    };
-
-    toLoad.push(loadLocale(newLocale));
-    if (newLocale !== "en") {
-      toLoad.push(loadLocale("en"));
-    }
-
-    await Promise.all(toLoad);
+    await loadLocale(newLocale);
     _locale.set(newLocale);
   },
 };

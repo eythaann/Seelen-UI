@@ -24,7 +24,7 @@ const settings = $derived.by(() => ({
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(_settings.value.language || "en");
+    locale.set(_settings.value.language);
   });
 
   $effect(() => {

@@ -25,7 +25,7 @@ const startDayMap: Record<StartOfWeek, number> = {
 
 $effect.root(() => {
   $effect(() => {
-    const lang = settings.language || "en";
+    const lang = settings.language;
     locale.set(lang);
 
     const momentLang = toMomentLang(lang);
@@ -49,7 +49,7 @@ class State {
     return settings;
   }
   get momentLang() {
-    return toMomentLang(settings.language || "en");
+    return toMomentLang(settings.language);
   }
 }
 

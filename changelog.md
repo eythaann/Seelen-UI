@@ -20,6 +20,7 @@
 - state while switching workspaces.
 - twm window not being moved when there is a fullscreen app on target monitor.
 - native taskbar autohide being disabled on settings save.
+- icon editor missing translations.
 
 ## [2.7.4]
 

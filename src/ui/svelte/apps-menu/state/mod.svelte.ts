@@ -22,7 +22,7 @@ await Promise.all([settings.init(), user.init(), monitors.init(), startMenuItems
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(settings.value.language || "en");
+    locale.set(settings.value.language);
   });
 });
 

@@ -1,5 +1,17 @@
-import { Widget } from "@seelen-ui/lib";
+import { Settings, Widget } from "@seelen-ui/lib";
 import type { IconPackEntry } from "@seelen-ui/lib/types";
+import { locale } from "./i18n/index.ts";
+import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+
+const settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
+await settings.init();
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language);
+  });
+});
 
 let entry = $state<IconPackEntry | null>(null);
 

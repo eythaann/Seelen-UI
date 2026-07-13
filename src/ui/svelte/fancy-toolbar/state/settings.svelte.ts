@@ -9,7 +9,7 @@ import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(_settings.value.language || "en");
+    locale.set(_settings.value.language);
     dateState.setLang(_settings.value.language);
     dateState.setFormat(_settings.value.dateFormat);
   });

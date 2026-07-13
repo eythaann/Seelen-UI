@@ -12,7 +12,7 @@ await settings.init();
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(settings.value.language || "en");
+    locale.set(settings.value.language);
   });
 });
 
