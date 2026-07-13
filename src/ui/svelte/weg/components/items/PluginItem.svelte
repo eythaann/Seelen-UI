@@ -74,8 +74,11 @@
     evalSanboxed(rendererExec, {
       ...scope,
       themeTokens: {
-        fgColor: computed.getPropertyValue("--slu-std-fg-color"),
-        bgColor: computed.getPropertyValue("--slu-std-bg-color"),
+        foregroundColor: computed.getPropertyValue("--slu-std-fg-color"),
+        foregroundSecondaryColor: computed.getPropertyValue("--slu-std-fg-secondary-color"),
+        foregroundMutedColor: computed.getPropertyValue("--slu-std-fg-muted-color"),
+        foregroundDisabledColor: computed.getPropertyValue("--slu-std-fg-disabled-color"),
+        backgroundColor: computed.getPropertyValue("--slu-std-bg-color"),
       },
       canvas: {
         getContext: (contextId: string) => canvas.getContext(contextId),

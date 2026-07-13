@@ -179,7 +179,7 @@ function notificationsStep(data: any): boolean {
     return true;
   }
 
-  const notifs = _notifications.data as any[];
+  const notifs = _notifications.data;
   data.count = notifs?.length || 0;
   data.dndActive = _notificationsMode.data !== NotificationsMode.All;
   return false;
@@ -193,12 +193,13 @@ function mediaStep(data: any): boolean {
     return true;
   }
 
-  const [mediaInputs, mediaOutputs] = _mediaDevices.data as any[];
-  const defaultOutputDevice = (mediaOutputs as any[])?.find((d: any) => d.isDefaultMultimedia);
-  const defaultInputDevice = (mediaInputs as any[])?.find((d: any) => d.isDefaultMultimedia);
-  const defaultMediaSession = (_mediaSessions.data as any[])?.find((d: any) => d.default);
+  const [mediaInputs, mediaOutputs] = _mediaDevices.data || [[], []];
+  const defaultOutputDevice = mediaOutputs.find((d: any) => d.isDefaultMultimedia);
+  const defaultInputDevice = mediaInputs.find((d: any) => d.isDefaultMultimedia);
+  const defaultMediaSession = _mediaSessions.data?.find((d: any) => d.default);
   const { volume = 0, muted: isMuted = true } = defaultOutputDevice || {};
   const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice || {};
+
   data.defaultOutputDevice = defaultOutputDevice;
   data.defaultInputDevice = defaultInputDevice;
   data.volume = volume;
@@ -219,7 +220,7 @@ function networkStep(data: any): boolean {
     return true;
   }
 
-  const interfaces = _networkAdapters.data as any[];
+  const interfaces = _networkAdapters.data;
   const defaultIp = _networkLocalIp.data;
   const usingInterface = interfaces?.find((i: any) => i.ipv4 === defaultIp) || null;
   data.online = _networkOnline.data;
@@ -237,7 +238,7 @@ function keyboardStep(data: any): boolean {
     return true;
   }
 
-  const languages = _languages.data as any[];
+  const languages = _languages.data;
   const imeState = _imeState.data;
   const activeLang = languages?.find((l: any) => l.keyboardLayouts.some((k: any) => k.active)) || languages?.[0];
   const activeKeyboard = activeLang?.keyboardLayouts.find((k: any) => k.active) || activeLang?.keyboardLayouts[0];
@@ -327,7 +328,7 @@ function workspacesStep(data: any): boolean {
   }
 
   const monitorId = Widget.getCurrent().decoded.monitorId!;
-  const vd = (_virtualDesktops.data as any)?.monitors?.[monitorId];
+  const vd = _virtualDesktops.data?.monitors?.[monitorId];
   data.workspaces = vd?.workspaces || [];
   data.activeWorkspace = vd?.active_workspace;
 

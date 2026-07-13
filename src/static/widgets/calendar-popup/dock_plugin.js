@@ -20,7 +20,7 @@ ctx.lineJoin = "round";
 ctx.beginPath();
 ctx.arc(cx, cy, radius, 0, Math.PI * 2);
 ctx.lineWidth = lineWidth;
-ctx.strokeStyle = themeTokens.fgColor;
+ctx.strokeStyle = themeTokens.foregroundColor;
 ctx.stroke();
 
 const seconds = now.getSeconds();
@@ -36,7 +36,7 @@ function drawHand(angle, length, width) {
   ctx.moveTo(cx, cy);
   ctx.lineTo(cx + Math.cos(angle) * length, cy + Math.sin(angle) * length);
   ctx.lineWidth = width;
-  ctx.strokeStyle = themeTokens.fgColor;
+  ctx.strokeStyle = themeTokens.foregroundColor;
   ctx.stroke();
 }
 
@@ -47,5 +47,5 @@ drawHand(minutesAngle, radius * 0.75, lineWidth / 2);
 // Center cap
 ctx.beginPath();
 ctx.arc(cx, cy, lineWidth, 0, Math.PI * 2);
-ctx.fillStyle = themeTokens.fgColor;
+ctx.fillStyle = themeTokens.foregroundColor;
 ctx.fill();

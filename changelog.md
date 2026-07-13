@@ -5,6 +5,8 @@
 ### features
 
 - plugins system for dock/taskbar.
+- add clock plugin to dock.
+- add network plugin to dock
 
 ### enhancements
 
