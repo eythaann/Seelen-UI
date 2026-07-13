@@ -43,12 +43,17 @@
 
   const sandbox = createPluginSandbox();
 
-  const tooltipExec = $derived(compileSandboxed(sandbox, payload.tooltip));
-  const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
   const renderExec = $derived(compileSandboxed(sandbox, payload.render));
+  const tooltipExec = $derived(compileSandboxed(sandbox, payload.tooltip));
+  const badgeExec = $derived(compileSandboxed(sandbox, payload.badge));
+  const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
 
   const tooltipText = $derived(
     payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : undefined,
+  );
+
+  const badgeText = $derived(
+    payload.badge ? stringFromEvaluated(evalSanboxed(badgeExec, scope)) : undefined,
   );
 
   function handleClick() {
@@ -100,19 +105,25 @@
 </script>
 
 {#if !scopeResult.fetching}
-  <div
-    id={item.id}
-    role="button"
-    tabindex="0"
-    class="weg-item"
-    data-tooltip={tooltipText}
-    data-tooltip-align-x={settingsState.popupAlignX}
-    data-tooltip-align-y={settingsState.popupAlignY}
-    onclick={handleClick}
-    oncontextmenu={handleContextMenu}
-    onkeypress={() => {}}
-  >
-    <img bind:this={img} class="weg-item-icon" alt="" />
+  <div class="weg-item-overlay">
+    <div
+      id={item.id}
+      role="button"
+      tabindex="0"
+      class="weg-item"
+      data-tooltip={tooltipText}
+      data-tooltip-align-x={settingsState.popupAlignX}
+      data-tooltip-align-y={settingsState.popupAlignY}
+      onclick={handleClick}
+      oncontextmenu={handleContextMenu}
+      onkeypress={() => {}}
+    >
+      <img bind:this={img} class="weg-item-icon" alt="" />
+    </div>
+
+    {#if badgeText}
+      <div class="weg-item-custom-badge">{badgeText}</div>
+    {/if}
   </div>
 {/if}
 

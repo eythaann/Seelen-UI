@@ -12,6 +12,8 @@ pub struct WegPluginItem {
     pub render: String,
     /// JS function definition for content to display in tooltip of the item.
     pub tooltip: Option<String>,
+    /// JS function definition for content to display in badge of the item.
+    pub badge: Option<String>,
     /// JS function definition that will be executed when the item is clicked.
     pub on_click: Option<String>,
 }

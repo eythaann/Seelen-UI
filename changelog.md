@@ -8,6 +8,7 @@
 - add clock plugin to dock.
 - add network plugin to dock
 - add bluetooth plugin to dock.
+- add notifications plugin to dock.
 
 ### enhancements
 

@@ -89,7 +89,8 @@
 .weg-item-overlay {
   position: relative;
 
-  .weg-item-notification-badge {
+  .weg-item-notification-badge,
+  .weg-item-custom-badge {
     display: flex;
     align-items: center;
     justify-content: center;

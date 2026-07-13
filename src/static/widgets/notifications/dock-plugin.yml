@@ -1,0 +1,14 @@
+id: "@seelen/dock-notifications"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: IoNotificationsOutline
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Notifications
+  render: !include dock_plugin.js
+  badge: "return count > 0 ? count : null"
+  tooltip: 'return "Notifications: " + count'
+  onClick: |-
+    trigger("@seelen/notifications");
