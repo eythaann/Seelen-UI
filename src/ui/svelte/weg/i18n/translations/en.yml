@@ -28,6 +28,7 @@ taskbar_menu:
   add_file: Pin Custom File
   desktop: Add Desktop Module
   media: Add Media Module
+  modules: Modules
   settings: Settings
   start: Add Start Module
   task_manager: Task Manager

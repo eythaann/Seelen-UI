@@ -5,10 +5,16 @@ import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { systemState } from "./system.svelte.ts";
 import { settings as _settings } from "./getters.svelte.ts";
+import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
+
+let isWidgetReady = $state(false);
+const settings = $derived(_settings.value.byWidget["@seelen/weg"]);
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(_settings.value.language || "en");
+    locale.set(_settings.value.language);
+    dateState.setLang(_settings.value.language);
+    dateState.setFormat(_settings.value.dateFormat);
   });
 });
 
@@ -18,66 +24,73 @@ export const fullSettings = {
   },
 };
 
-let isWidgetReady = $state(false);
+class SettingsState {
+  popupAlignX = $derived.by(() => {
+    switch (settings.position) {
+      case SeelenWegSide.Left:
+        return Alignment.Start;
+      case SeelenWegSide.Right:
+        return Alignment.End;
+      default:
+        return Alignment.Center;
+    }
+  });
 
-export const settingsState = {
+  popupAlignY = $derived.by(() => {
+    switch (settings.position) {
+      case SeelenWegSide.Bottom:
+        return Alignment.End;
+      case SeelenWegSide.Top:
+        return Alignment.Start;
+      default:
+        return Alignment.Center;
+    }
+  });
+
   get isReady() {
     return isWidgetReady;
-  },
+  }
+
   set isReady(v: boolean) {
     isWidgetReady = v;
-  },
-  get value() {
-    return _settings.value.byWidget["@seelen/weg"] as any;
-  },
-  get position(): SeelenWegSide {
-    return (this.value?.position ?? SeelenWegSide.Bottom) as SeelenWegSide;
-  },
-  get hideMode(): HideMode {
-    return (this.value?.hideMode ?? HideMode.Never) as HideMode;
-  },
-  get delayToHide(): number {
-    return (this.value?.delayToHide ?? 800) as number;
-  },
-  get delayToShow(): number {
-    return (this.value?.delayToShow ?? 300) as number;
-  },
-  get size(): number {
-    return (this.value?.size ?? 40) as number;
-  },
-  get padding(): number {
-    return (this.value?.padding ?? 4) as number;
-  },
-  get margin(): number {
-    return (this.value?.margin ?? 0) as number;
-  },
-};
+  }
 
-export function isHorizontalDock(): boolean {
-  const pos = settingsState.position;
-  return pos === SeelenWegSide.Top || pos === SeelenWegSide.Bottom;
+  get allByWidget() {
+    return _settings.value.byWidget;
+  }
+
+  get value() {
+    return settings;
+  }
+
+  get position(): SeelenWegSide {
+    return settings.position;
+  }
+
+  get hideMode(): HideMode {
+    return settings.hideMode;
+  }
+
+  get delayToHide(): number {
+    return settings.delayToHide;
+  }
+
+  get delayToShow(): number {
+    return settings.delayToShow;
+  }
 }
 
-export function getDockContextMenuAlignment(position: SeelenWegSide): {
-  alignX: Alignment;
-  alignY: Alignment;
-} {
-  switch (position) {
-    case SeelenWegSide.Bottom:
-      return { alignX: Alignment.Center, alignY: Alignment.End };
-    case SeelenWegSide.Top:
-      return { alignX: Alignment.Center, alignY: Alignment.Start };
-    case SeelenWegSide.Left:
-      return { alignX: Alignment.Start, alignY: Alignment.Center };
-    case SeelenWegSide.Right:
-      return { alignX: Alignment.End, alignY: Alignment.Center };
-  }
+export const settingsState = new SettingsState();
+
+export function isHorizontalDock(): boolean {
+  const pos = settings.position;
+  return pos === SeelenWegSide.Top || pos === SeelenWegSide.Bottom;
 }
 
 const workArea = {
   get value() {
     const workArea = systemState.currentMonitor.rect;
-    const tbConfig = _settings.value.byWidget["@seelen/fancy-toolbar"] as any;
+    const tbConfig = _settings.value.byWidget["@seelen/fancy-toolbar"];
     const tbMonitorConfig = (_settings.value.monitorsV3[systemState.currentMonitor.id] as any)
       ?.byWidget?.["@seelen/fancy-toolbar"] || { enabled: true };
 
@@ -108,11 +121,11 @@ export const widgetRect = {
     const webviewRect = { ...workArea.value };
 
     const size = Math.round(
-      (settingsState.size + settingsState.padding * 2 + settingsState.margin * 2) *
+      (settings.size + settings.padding * 2 + settings.margin * 2) *
         systemState.currentMonitor.scaleFactor,
     );
 
-    switch (settingsState.position) {
+    switch (settings.position) {
       case SeelenWegSide.Left:
         hitboxRect.right = hitboxRect.left + size;
         webviewRect.right = isTouchPrimary.value ? hitboxRect.right : wa.right - Math.round((wa.right - wa.left) / 2);
@@ -138,8 +151,8 @@ export const widgetRect = {
 async function updateWidgetPosition() {
   const { hitboxRect, webviewRect } = widgetRect.value;
   const isTouch = isTouchPrimary.value;
-  const hideMode = settingsState.hideMode;
-  const position = settingsState.position;
+  const hideMode = settings.hideMode;
+  const position = settings.position;
   const isReady = settingsState.isReady;
 
   await Widget.self.setPosition(webviewRect);
@@ -167,13 +180,13 @@ Widget.self.window.onMoved(({ payload }) => {
 
 $effect.root(() => {
   $effect(() => {
-    const { size, padding, margin, spaceBetweenItems, zoomSize } = settingsState.value || {};
+    const { size, padding, margin, spaceBetweenItems, zoomSize } = settings;
     const sheet = new RuntimeStyleSheet("@config/weg");
-    sheet.addVariable("--config-margin", `${margin ?? 0}px`);
-    sheet.addVariable("--config-padding", `${padding ?? 0}px`);
-    sheet.addVariable("--config-item-size", `${size ?? 40}px`);
-    sheet.addVariable("--config-item-zoom-size", `${zoomSize ?? 40}px`);
-    sheet.addVariable("--config-space-between-items", `${spaceBetweenItems ?? 0}px`);
+    sheet.addVariable("--config-margin", `${margin}px`);
+    sheet.addVariable("--config-padding", `${padding}px`);
+    sheet.addVariable("--config-item-size", `${size}px`);
+    sheet.addVariable("--config-item-zoom-size", `${zoomSize}px`);
+    sheet.addVariable("--config-space-between-items", `${spaceBetweenItems}px`);
     sheet.applyToDocument();
   });
 

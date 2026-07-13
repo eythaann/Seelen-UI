@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
+import { invoke, PluginList, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import type { UserAppWindowColors } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 
@@ -50,6 +50,11 @@ subscribe(SeelenEvent.WidgetDebugInfoChanged, widgetStatuses.setByPayload);
 
 export const wegItems = lazyRune(() => invoke(SeelenCommand.StateGetWegItems));
 
+export const plugins = lazyRune(async () => (await PluginList.getAsync()).forCurrentWidget());
+PluginList.onChange((list) => {
+  plugins.value = list.forCurrentWidget();
+});
+
 await Promise.all([
   virtualDesktops.init(),
   monitors.init(),
@@ -65,4 +70,5 @@ await Promise.all([
   focused.init(),
   widgetStatuses.init(),
   wegItems.init(),
+  plugins.init(),
 ]);

@@ -1,10 +1,21 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import { dialog } from "@seelen-ui/lib/tauri";
-import type { ContextMenu, WidgetId } from "@seelen-ui/lib/types";
+import {
+  type ContextMenu,
+  type ContextMenuItem,
+  type PluginId,
+  WegItemType,
+  type WidgetId,
+} from "@seelen-ui/lib/types";
+import { getResourceText } from "libs/ui/react/utils/index.ts";
+import { locale } from "./i18n/index.ts";
 import { dockState, dockStateActions } from "./state/items.svelte.ts";
+import { plugins } from "./state/getters.svelte.ts";
 
 const identifier = crypto.randomUUID();
+const modulesIdentifier = crypto.randomUUID();
 const onBarMenuClick = "weg::bar_menu_click";
+const onTogglePlugin = "weg::toggle_plugin";
 
 let _t: (key: string) => string = (key) => key;
 
@@ -67,13 +78,44 @@ Widget.self.webview.listen(onBarMenuClick, ({ payload }) => {
   handleBarMenuClick((payload as { key: BarMenuKey }).key);
 });
 
+Widget.self.webview.listen(onTogglePlugin, ({ payload }) => {
+  const { key, checked } = payload as { key: PluginId; checked: boolean };
+  if (checked) {
+    dockStateActions.addPlugin(key);
+  } else {
+    dockStateActions.removePlugin(key);
+  }
+});
+
 export function getSeelenWegMenu(t: (key: string) => string): ContextMenu {
   _t = t;
   const { isReorderDisabled } = dockState;
+  const language = locale.value;
+
+  function isPluginAdded(id: PluginId): boolean {
+    return dockState.items.some((item) => item.type === WegItemType.Plugin && item.plugin === id);
+  }
 
   return {
     identifier,
     items: [
+      {
+        type: "Submenu",
+        icon: "CgExtensionAdd",
+        label: t("taskbar_menu.modules"),
+        identifier: modulesIdentifier,
+        items: plugins.value
+          .map<Extract<ContextMenuItem, { type: "Item" }>>((plugin) => ({
+            type: "Item",
+            key: plugin.id,
+            label: getResourceText(plugin.metadata.displayName, language),
+            icon: plugin.icon,
+            callbackEvent: onTogglePlugin,
+            checked: isPluginAdded(plugin.id),
+          }))
+          .toSorted((p1, p2) => p1.label.localeCompare(p2.label)),
+      },
+      { type: "Separator" },
       {
         type: "Item",
         key: "add-start-module",

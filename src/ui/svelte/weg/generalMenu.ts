@@ -49,7 +49,8 @@ export function getMenuForItem(t: (key: string) => string, item: SwItem): Contex
     item.type === WegItemType.ShowDesktop ||
     item.type === WegItemType.Media ||
     item.type === WegItemType.StartMenu ||
-    item.type === WegItemType.TrashBin
+    item.type === WegItemType.TrashBin ||
+    item.type === WegItemType.Plugin
   ) {
     const items: ContextMenuItem[] = [
       {

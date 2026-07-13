@@ -8,6 +8,8 @@ use serde::{Deserialize, Serialize};
 #[serde(default, rename_all = "camelCase")]
 pub struct WegPluginItem {
     pub scopes: HashSet<String>,
+    // JS function definition for content to display in the item.
+    pub renderer: String,
     /// JS function definition for content to display in tooltip of the item.
     pub tooltip: Option<String>,
     /// JS function definition that will be executed when the item is clicked.

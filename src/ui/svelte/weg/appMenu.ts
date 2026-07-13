@@ -136,8 +136,8 @@ export function getUserApplicationContextMenu(
       danger: true,
     });
 
-    const settings = fullSettings.value.byWidget["@seelen/weg"] as any;
-    if (settings?.showEndTask) {
+    const settings = fullSettings.value.byWidget["@seelen/weg"];
+    if (settings.showEndTask) {
       items.push({
         type: "Item",
         key: "kill",

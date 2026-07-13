@@ -1,0 +1,13 @@
+id: "@seelen/dock-calendar-popup"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: FaCalendar
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Date
+  renderer: !include dock_plugin.js
+  tooltip: return date
+  onClick: |-
+    trigger("@seelen/calendar-popup");

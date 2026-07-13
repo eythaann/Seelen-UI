@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import type { SwItem } from "../types.ts";
-  import { settingsState, isHorizontalDock, getDockContextMenuAlignment } from "../state/settings.svelte.ts";
-  import { Alignment, SeelenWegSide } from "@seelen-ui/lib/types";
+  import { settingsState, isHorizontalDock } from "../state/settings.svelte.ts";
   import { t } from "../i18n/index.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
   import { createSortable } from "@dnd-kit/svelte/sortable";
@@ -51,28 +50,6 @@
         return undefined;
     }
   });
-
-  const tooltipAlignX = $derived.by(() => {
-    switch (settingsState.position) {
-      case SeelenWegSide.Left:
-        return Alignment.Start;
-      case SeelenWegSide.Right:
-        return Alignment.End;
-      default:
-        return Alignment.Center;
-    }
-  });
-
-  const tooltipAlignY = $derived.by(() => {
-    switch (settingsState.position) {
-      case SeelenWegSide.Bottom:
-        return Alignment.End;
-      case SeelenWegSide.Top:
-        return Alignment.Start;
-      default:
-        return Alignment.Center;
-    }
-  });
 </script>
 
 <div
@@ -82,8 +59,8 @@
   class="weg-item-drag-container"
   class:dragging={sortable.isDragging}
   data-tooltip={tooltip}
-  data-tooltip-align-x={tooltipAlignX}
-  data-tooltip-align-y={tooltipAlignY}
+  data-tooltip-align-x={settingsState.popupAlignX}
+  data-tooltip-align-y={settingsState.popupAlignY}
 >
   {@render children()}
 </div>

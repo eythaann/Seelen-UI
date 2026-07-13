@@ -1,0 +1,121 @@
+<script lang="ts">
+  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import type { WegPluginItem as WegPluginPayload, WidgetId } from "@seelen-ui/lib/types";
+  import type { PluginWegItem } from "../../types.ts";
+  import { t } from "../../i18n/index.ts";
+  import { getMenuForItem } from "../../generalMenu.ts";
+  import {
+    compileSandboxed,
+    createPluginSandbox,
+    evalActionSanboxed,
+    evalSanboxed,
+    stringFromEvaluated,
+    triggerWidget,
+  } from "../../pluginEval.svelte.ts";
+  import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
+  import { settingsState } from "../../state/settings.svelte.ts";
+
+  const CANVAS_SIZE = 256;
+
+  interface Props {
+    item: PluginWegItem;
+    payload: WegPluginPayload;
+  }
+
+  let { item, payload }: Props = $props();
+
+  let img = $state<HTMLImageElement | null>(null);
+  const canvas = document.createElement("canvas");
+  canvas.width = CANVAS_SIZE;
+  canvas.height = CANVAS_SIZE;
+  let lastObjectUrl: string | null = null;
+
+  let userSourceName = $derived.by(() => {
+    const allByWidget = settingsState.allByWidget;
+    const userMenuConfig = allByWidget["@seelen/user-menu" as WidgetId];
+    return userMenuConfig?.displayNameSource as string;
+  });
+
+  const scopeResult = $derived(resolveScopes(payload.scopes, { userSourceName }));
+  const scope = $derived({
+    ...scopeResult.data,
+  });
+
+  const sandbox = createPluginSandbox();
+
+  const tooltipExec = $derived(compileSandboxed(sandbox, payload.tooltip));
+  const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
+  const rendererExec = $derived(compileSandboxed(sandbox, payload.renderer));
+
+  const tooltipText = $derived(
+    payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : undefined,
+  );
+
+  function handleClick() {
+    evalActionSanboxed(onClickExec, {
+      trigger: (widgetId: WidgetId) => triggerWidget(widgetId, item.id),
+    });
+  }
+
+  function handleContextMenu(e: MouseEvent) {
+    e.stopPropagation();
+    const alignX = settingsState.popupAlignX;
+    const alignY = settingsState.popupAlignY;
+    invoke(SeelenCommand.TriggerContextMenu, {
+      menu: { ...getMenuForItem($t, item), alignX, alignY },
+      forwardTo: null,
+    });
+  }
+
+  $effect(() => {
+    if (!rendererExec || !img) return;
+
+    const computed = getComputedStyle(img);
+    evalSanboxed(rendererExec, {
+      ...scope,
+      themeTokens: {
+        fgColor: computed.getPropertyValue("--slu-std-fg-color"),
+        bgColor: computed.getPropertyValue("--slu-std-bg-color"),
+      },
+      canvas: {
+        getContext: (contextId: string) => canvas.getContext(contextId),
+        width: CANVAS_SIZE,
+        height: CANVAS_SIZE,
+      },
+    });
+
+    // <img> downscaling uses the browser's high-quality resampler; a canvas
+    // rendered at CANVAS_SIZE and shrunk via CSS looks noticeably pixelated.
+    canvas.toBlob((blob) => {
+      if (!blob || !img) return;
+      const url = URL.createObjectURL(blob);
+      img.src = url;
+      if (lastObjectUrl) URL.revokeObjectURL(lastObjectUrl);
+      lastObjectUrl = url;
+    });
+  });
+</script>
+
+{#if !scopeResult.fetching}
+  <div
+    id={item.id}
+    role="button"
+    tabindex="0"
+    class="weg-item"
+    data-tooltip={tooltipText}
+    data-tooltip-align-x={settingsState.popupAlignX}
+    data-tooltip-align-y={settingsState.popupAlignY}
+    onclick={handleClick}
+    oncontextmenu={handleContextMenu}
+    onkeypress={() => {}}
+  >
+    <img bind:this={img} class="weg-item-icon" alt="" />
+  </div>
+{/if}
+
+<style>
+  .weg-item-icon {
+    width: 100%;
+    height: 100%;
+  }
+</style>

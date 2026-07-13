@@ -3,7 +3,7 @@
   import { SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { t } from "../../i18n/index.ts";
   import type { StartMenuWegItem } from "../../types.ts";
-  import { settingsState, getDockContextMenuAlignment } from "../../state/settings.svelte.ts";
+  import { settingsState } from "../../state/settings.svelte.ts";
   import { getMenuForItem } from "../../generalMenu.ts";
   import { windowsState } from "../../state/windows.svelte.ts";
 
@@ -26,7 +26,8 @@
 
   function onContextMenu(e: MouseEvent) {
     e.stopPropagation();
-    const { alignX, alignY } = getDockContextMenuAlignment(settingsState.position);
+    const alignX = settingsState.popupAlignX;
+    const alignY = settingsState.popupAlignY;
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: { ...getMenuForItem($t, item), alignX, alignY },
       forwardTo: null,

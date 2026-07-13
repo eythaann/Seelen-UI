@@ -2,6 +2,10 @@
 
 ## [2.7.5-dev]
 
+### features
+
+- plugins system for dock/taskbar.
+
 ### enhancements
 
 - toolbar and dock autohide on overlap logic for multimonitor setups.

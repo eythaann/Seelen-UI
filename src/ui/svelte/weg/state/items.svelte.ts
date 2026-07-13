@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import { type WegItem, type WegItems, WegItemType } from "@seelen-ui/lib/types";
+import { type PluginId, type WegItem, type WegItems, WegItemType } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
@@ -173,6 +173,25 @@ export const dockStateActions = {
         items: [..._dockState.items, { id: crypto.randomUUID(), type: WegItemType.TrashBin }],
       };
     }
+  },
+  addPlugin(plugin: PluginId) {
+    if (!_dockState.items.some((i) => i.type === WegItemType.Plugin && i.plugin === plugin)) {
+      _dockState = {
+        ..._dockState,
+        items: [
+          ..._dockState.items,
+          { id: crypto.randomUUID(), type: WegItemType.Plugin, plugin },
+        ],
+      };
+    }
+  },
+  removePlugin(plugin: PluginId) {
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.filter(
+        (i) => !(i.type === WegItemType.Plugin && i.plugin === plugin),
+      ),
+    };
   },
 };
 
