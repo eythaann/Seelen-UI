@@ -7,6 +7,7 @@
 - plugins system for dock/taskbar.
 - add clock plugin to dock.
 - add network plugin to dock
+- add bluetooth plugin to dock.
 
 ### enhancements
 

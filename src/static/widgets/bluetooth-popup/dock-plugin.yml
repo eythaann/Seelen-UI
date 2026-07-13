@@ -1,0 +1,14 @@
+id: "@seelen/dock-bluetooth-popup"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: TbBluetooth
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Bluetooth
+  renderer: !include dock_plugin.js
+  tooltip: |-
+    return "Bluetooth";
+  onClick: |-
+    trigger("@seelen/bluetooth-popup");
