@@ -7,7 +7,7 @@ target: "@seelen/weg"
 plugin:
   scopes:
     - Network
-  renderer: !include dock_plugin.js
+  render: !include dock_plugin.js
   tooltip: >-
     return usingInterface?.type === "IEEE80211" ? "Wi-Fi" : online ? "Ethernet" : "Disconnected";
   onClick: |-

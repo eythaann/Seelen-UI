@@ -45,7 +45,7 @@
 
   const tooltipExec = $derived(compileSandboxed(sandbox, payload.tooltip));
   const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
-  const rendererExec = $derived(compileSandboxed(sandbox, payload.renderer));
+  const renderExec = $derived(compileSandboxed(sandbox, payload.render));
 
   const tooltipText = $derived(
     payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : undefined,
@@ -68,10 +68,10 @@
   }
 
   $effect(() => {
-    if (!rendererExec || !img) return;
+    if (!renderExec || !img) return;
 
     const computed = getComputedStyle(img);
-    evalSanboxed(rendererExec, {
+    evalSanboxed(renderExec, {
       ...scope,
       themeTokens: {
         foregroundColor: computed.getPropertyValue("--slu-std-fg-color"),

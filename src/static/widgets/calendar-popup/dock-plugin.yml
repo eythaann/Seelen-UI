@@ -7,7 +7,7 @@ target: "@seelen/weg"
 plugin:
   scopes:
     - Date
-  renderer: !include dock_plugin.js
+  render: !include dock_plugin.js
   tooltip: return date
   onClick: |-
     trigger("@seelen/calendar-popup");

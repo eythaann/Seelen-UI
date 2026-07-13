@@ -7,7 +7,7 @@ target: "@seelen/weg"
 plugin:
   scopes:
     - Bluetooth
-  renderer: !include dock_plugin.js
+  render: !include dock_plugin.js
   tooltip: |-
     return "Bluetooth";
   onClick: |-
