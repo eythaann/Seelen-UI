@@ -5,10 +5,13 @@ import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { systemState } from "./system.svelte.ts";
 import { settings as _settings } from "./getters.svelte.ts";
+import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
 
 $effect.root(() => {
   $effect(() => {
     locale.set(_settings.value.language || "en");
+    dateState.setLang(_settings.value.language);
+    dateState.setFormat(_settings.value.dateFormat);
   });
 });
 
@@ -21,41 +24,35 @@ export const settingsState = {
   set isReady(v: boolean) {
     isWidgetReady = v;
   },
+
   get value() {
-    return _settings.value.byWidget["@seelen/fancy-toolbar"] as any;
+    return _settings.value.byWidget["@seelen/fancy-toolbar"];
   },
-  get language() {
-    return (_settings.value.language || "en") as string;
-  },
-  get dateFormat() {
-    return _settings.value.dateFormat as string;
-  },
-  get startOfWeek() {
-    return _settings.value.startOfWeek;
-  },
+
   get allByWidget() {
     return _settings.value.byWidget;
   },
+
   get itemSize(): number {
-    return (this.value?.itemSize ?? 24) as number;
+    return this.value.itemSize;
   },
   get margin(): number {
-    return (this.value?.margin ?? 0) as number;
+    return this.value.margin;
   },
   get padding(): number {
-    return (this.value?.padding ?? 4) as number;
+    return this.value.padding;
   },
   get position(): FancyToolbarSide {
-    return (this.value?.position ?? FancyToolbarSide.Top) as FancyToolbarSide;
+    return this.value.position;
   },
   get hideMode(): HideMode {
-    return (this.value?.hideMode ?? HideMode.Never) as HideMode;
+    return this.value.hideMode;
   },
   get delayToHide(): number {
-    return (this.value?.delayToHide ?? 800) as number;
+    return this.value.delayToHide;
   },
   get delayToShow(): number {
-    return (this.value?.delayToShow ?? 300) as number;
+    return this.value.delayToShow;
   },
 };
 

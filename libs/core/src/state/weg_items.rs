@@ -2,7 +2,10 @@ use std::{collections::HashSet, path::PathBuf};
 
 use serde::{Deserialize, Serialize};
 
-use crate::system_state::{Relaunch, RelaunchArguments};
+use crate::{
+    resource::PluginId,
+    system_state::{Relaunch, RelaunchArguments},
+};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
@@ -46,6 +49,10 @@ pub enum WegItem {
     TrashBin {
         id: uuid::Uuid,
     },
+    Plugin {
+        id: uuid::Uuid,
+        plugin: PluginId,
+    },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -58,6 +65,7 @@ pub enum WegItemType {
     StartMenu,
     ShowDesktop,
     TrashBin,
+    Plugin,
 }
 
 impl WegItem {
@@ -70,6 +78,7 @@ impl WegItem {
             WegItem::StartMenu { id } => id,
             WegItem::ShowDesktop { id } => id,
             WegItem::TrashBin { id } => id,
+            WegItem::Plugin { id, .. } => id,
         }
     }
 
@@ -82,6 +91,7 @@ impl WegItem {
             WegItem::StartMenu { id } => *id = identifier,
             WegItem::ShowDesktop { id } => *id = identifier,
             WegItem::TrashBin { id } => *id = identifier,
+            WegItem::Plugin { id, .. } => *id = identifier,
         }
     }
 }

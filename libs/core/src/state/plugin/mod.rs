@@ -1,5 +1,6 @@
 pub mod twm;
 pub mod value;
+pub mod weg;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

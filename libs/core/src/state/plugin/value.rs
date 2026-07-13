@@ -2,7 +2,7 @@ use schemars::JsonSchema;
 
 use crate::{
     resource::WidgetId,
-    state::{twm::TwmPlugin, ToolbarItem},
+    state::{twm::TwmPlugin, weg::WegPluginItem, ToolbarItem},
     utils::TsUnknown,
 };
 
@@ -22,6 +22,8 @@ pub enum KnownPlugin {
     FacyToolbar(Box<ToolbarItem>),
     #[serde(rename = "@seelen/window-manager")]
     WManager(Box<TwmPlugin>),
+    #[serde(rename = "@seelen/weg")]
+    Weg(Box<WegPluginItem>),
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]

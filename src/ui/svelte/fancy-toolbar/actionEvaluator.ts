@@ -1,35 +1,70 @@
-import Sandbox from "@nyariv/sandboxjs";
-import { SeelenCommand, SeelenEvent } from "@seelen-ui/lib";
-import { invoke } from "@tauri-apps/api/core";
-import { emit, emitTo } from "@tauri-apps/api/event";
+import type Sandbox from "@nyariv/sandboxjs";
+import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
+import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { settingsState, widgetRect } from "./state/settings.svelte.ts";
+
+const ALLOWED_COMMANDS = [
+  SeelenCommand.SwitchWorkspace,
+  SeelenCommand.SetVolumeLevel,
+  SeelenCommand.OpenFile,
+];
 
 const ActionsScope = {
   SeelenCommand,
-  SeelenEvent,
   invoke(command: SeelenCommand, args?: any) {
+    if (!ALLOWED_COMMANDS.includes(command)) {
+      console.warn(`Trying to execute command that is not allowed: "${command}"`);
+      return;
+    }
     invoke(command, args);
-  },
-  emit(event: SeelenEvent, payload?: unknown) {
-    emit(event, payload);
-  },
-  emitTo(target: string, event: SeelenEvent, payload?: unknown) {
-    emitTo(target, event, payload);
   },
   open(path: string) {
     invoke(SeelenCommand.OpenFile, { path });
   },
-  run(
-    program: string,
-    args: string[] | null = null,
-    workingDir: string | null = null,
-    elevated: boolean = false,
-  ) {
-    invoke(SeelenCommand.Run, { program, args, workingDir, elevated });
-  },
+  // trigger is added on other step but is present too
 };
 
-export async function EvaluateAction(code: string, scope: Record<string, any>) {
-  const sandbox = new Sandbox();
-  const executor = sandbox.compileAsync(code);
-  await executor({ ...scope, ...ActionsScope }).run();
+export function evalActionSanboxed(
+  executor: ReturnType<Sandbox["compile"]> | null,
+  scope: Record<string, any>,
+) {
+  if (!executor) return null;
+  try {
+    return executor({ ...scope, ...ActionsScope }).run();
+  } catch (error) {
+    console.error("Error executing sandboxed code:", { error });
+    return null;
+  }
+}
+
+export function triggerWidget(widgetId: WidgetId, itemId: string): void {
+  if (typeof widgetId !== "string") {
+    return;
+  }
+
+  const { left: windowX, top: windowY } = widgetRect.value;
+
+  const element = document.getElementById(itemId);
+  if (!element) {
+    console.error(`Element with id ${itemId} not found`);
+    return;
+  }
+
+  const domRect = element.getBoundingClientRect();
+  const x = windowX + toPhysicalPixels(domRect.left + domRect.width / 2);
+
+  const rootRect = document.getElementById("root")!.getBoundingClientRect();
+  const isTopPosition = settingsState.position === FancyToolbarSide.Top;
+
+  const y = isTopPosition ? windowY + toPhysicalPixels(rootRect.bottom) : windowY + toPhysicalPixels(rootRect.top);
+
+  invoke(SeelenCommand.TriggerWidget, {
+    payload: {
+      id: widgetId,
+      desiredPosition: { x, y },
+      alignX: Alignment.Center,
+      alignY: isTopPosition ? Alignment.Start : Alignment.End,
+    },
+  });
 }

@@ -9,14 +9,19 @@
   } from "@seelen-ui/lib/types";
   import type { createSortable } from "@dnd-kit/svelte/sortable";
   import { t } from "../i18n/index.ts";
-  import { EvaluateAction } from "../actionEvaluator.ts";
-  import { evalSandboxedCode, stringFromEvaluated } from "../evaluatedComponents.ts";
-  import { buildItemScope } from "../state/scopes.svelte.ts";
+  import { evalActionSanboxed, triggerWidget } from "../actionEvaluator.ts";
+  import {
+    compileSandboxed,
+    evalComponentSandboxed,
+    stringFromEvaluated,
+  } from "../evaluatedComponents.ts";
   import { toolbarActions } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
-  import { triggerWidget } from "../widgetTrigger.ts";
   import { styleToString } from "../utils.ts";
   import EvaluatedComponents from "../EvaluatedComponents.svelte";
+  import Sandbox from "@nyariv/sandboxjs";
+  import { createRemoteDataResolver } from "../remoteData.svelte.ts";
+  import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
 
   interface Props {
     module: ToolbarItem;
@@ -26,47 +31,6 @@
   let { module: self, sortable = null }: Props = $props();
 
   const noopAttach = () => {};
-
-  // ── Remote data fetching ─────────────────────────────────────────────────
-
-  let fetchedData = $state<Record<string, any>>({});
-
-  $effect(() => {
-    const remoteData = self.remoteData ?? {};
-    const intervals: Record<string, ReturnType<typeof setInterval>> = {};
-    let mounted = true;
-
-    async function fetchKey(key: string, rd: any) {
-      if (!mounted) return;
-      try {
-        const response = await fetch(rd.url, rd.requestInit as RequestInit);
-        const data = response.headers.get("Content-Type")?.includes("application/json")
-          ? await response.json()
-          : await response.text();
-        if (mounted) {
-          fetchedData = { ...fetchedData, [key]: data };
-        }
-      } catch (err) {
-        console.error(`Error fetching ${key}:`, err);
-      }
-    }
-
-    for (const [key, rd] of Object.entries(remoteData)) {
-      if (!rd) continue;
-      fetchKey(key, rd);
-      if ((rd as any).updateIntervalSeconds) {
-        intervals[key] = setInterval(
-          () => fetchKey(key, rd),
-          (rd as any).updateIntervalSeconds * 1000,
-        );
-      }
-    }
-
-    return () => {
-      mounted = false;
-      Object.values(intervals).forEach(clearInterval);
-    };
-  });
 
   // ── Context menu listener ────────────────────────────────────────────────
 
@@ -94,23 +58,41 @@
 
   // ── Scope computation ────────────────────────────────────────────────────
 
-  const _scopeResult = $derived(buildItemScope(self.scopes, self.id, $t));
+  let userSourceName = $derived.by(() => {
+    const allByWidget = settingsState.allByWidget;
+    const userMenuConfig = allByWidget["@seelen/user-menu" as WidgetId];
+    return userMenuConfig?.displayNameSource as string;
+  });
 
+  let fetchedData = createRemoteDataResolver(() => self.remoteData ?? {});
+
+  const _scopeResult = $derived(resolveScopes(self.scopes, { userSourceName }));
   const fetching = $derived(_scopeResult.fetching);
-
   const scope = $derived.by(() => ({
     ..._scopeResult.data,
     ...fetchedData,
-    trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
+    t: (key: string) => $t(key),
   }));
 
   // ── Sandboxed code evaluation ────────────────────────────────────────────
 
-  const content = $derived(evalSandboxedCode(self.template, scope));
-  const tooltip = $derived(self.tooltip ? evalSandboxedCode(self.tooltip, scope) : null);
-  const badge = $derived(self.badge ? evalSandboxedCode(self.badge, scope) : null);
+  const sandbox = new Sandbox();
 
-  // ── Event handlers ───────────────────────────────────────────────────────
+  const contentExec = $derived(compileSandboxed(sandbox, self.template));
+  const tooltipExec = $derived(compileSandboxed(sandbox, self.tooltip));
+  const badgeExec = $derived(compileSandboxed(sandbox, self.badge));
+
+  const onClickExec = $derived(compileSandboxed(sandbox, self.onClick));
+  const onWheelUpExec = $derived(compileSandboxed(sandbox, self.onWheelUp));
+  const onWheelDownExec = $derived(compileSandboxed(sandbox, self.onWheelDown));
+
+  const content = $derived(evalComponentSandboxed(self.template, contentExec, scope));
+  const tooltip = $derived(
+    self.tooltip ? evalComponentSandboxed(self.tooltip, tooltipExec, scope) : null,
+  );
+  const badge = $derived(self.badge ? evalComponentSandboxed(self.badge, badgeExec, scope) : null);
+
+  // ── Others derives ───────────────────────────────────────────────────────
 
   const alignY = $derived(
     settingsState.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start,
@@ -118,10 +100,20 @@
 
   const tooltipText = $derived(tooltip ? stringFromEvaluated(tooltip) : undefined);
 
+  const itemStyle = $derived(
+    styleToString({
+      ...self.style,
+      opacity: sortable?.isDragging ? 0.3 : 1,
+    }),
+  );
+
+  // ── Event handlers ───────────────────────────────────────────────────────
+
   function handleClick() {
-    if (self.onClick) {
-      EvaluateAction(self.onClick, scope);
-    }
+    evalActionSanboxed(onClickExec, {
+      ...scope,
+      trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
+    });
   }
 
   function handleContextMenu(e: MouseEvent) {
@@ -145,18 +137,11 @@
   }
 
   function handleWheel(e: WheelEvent) {
-    const handler = e.deltaY < 0 ? self.onWheelUp : self.onWheelDown;
-    if (handler) {
-      EvaluateAction(handler, scope);
-    }
+    evalActionSanboxed(e.deltaY < 0 ? onWheelUpExec : onWheelDownExec, {
+      ...scope,
+      trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
+    });
   }
-
-  const itemStyle = $derived(
-    styleToString({
-      ...self.style,
-      opacity: sortable?.isDragging ? 0.3 : 1,
-    }),
-  );
 </script>
 
 {#if !fetching && content}

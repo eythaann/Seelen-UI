@@ -1,6 +1,5 @@
-import Sandbox from "@nyariv/sandboxjs";
+import type Sandbox from "@nyariv/sandboxjs";
 import { z } from "zod";
-import { EvaluateAction } from "./actionEvaluator.ts";
 
 export enum ObjectComponentKind {
   Icon = "Icon",
@@ -100,26 +99,26 @@ export function parseComponentProps(content: object): ParsedComponent | null {
   }
 }
 
-function compileSandboxed(code: string) {
+export function compileSandboxed(sandbox: Sandbox, source?: string | null) {
+  if (!source) return null;
   try {
-    const sandbox = new Sandbox();
-    return { sandbox, executor: sandbox.compile(code) };
+    return sandbox.compile(source);
   } catch (e) {
     console.error("Error compiling code:", e);
     return null;
   }
 }
 
-export function evalSandboxedCode(code: string, scope: Record<string, any>): unknown {
-  const compiled = compileSandboxed(code);
-  if (!compiled) return null;
-
+export function evalComponentSandboxed(
+  source: string,
+  executor: ReturnType<Sandbox["compile"]> | null,
+  scope: Record<string, any>,
+): unknown {
+  if (!executor) return null;
   try {
-    return compiled.executor({ ...scope, ...ComponentCreatorScope }).run();
+    return executor({ ...scope, ...ComponentCreatorScope }).run();
   } catch (error) {
-    console.error("Error executing sandboxed code:", { error, code });
+    console.error("Error executing sandboxed code:", { error, source });
     return null;
   }
 }
-
-export { EvaluateAction };

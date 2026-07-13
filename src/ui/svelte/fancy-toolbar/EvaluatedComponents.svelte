@@ -2,16 +2,27 @@
   import { convertFileSrc } from "@tauri-apps/api/core";
   import type { IconName } from "libs/ui/icons";
   import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
-  import { EvaluateAction } from "./actionEvaluator.ts";
+  import { evalActionSanboxed } from "./actionEvaluator.ts";
   import { ObjectComponentKind, parseComponentProps } from "./evaluatedComponents.ts";
   import { styleToString } from "./utils.ts";
   import EvaluatedComponents from "./EvaluatedComponents.svelte";
+  import Sandbox from "@nyariv/sandboxjs";
 
   interface Props {
     content: unknown;
   }
 
   let { content }: Props = $props();
+
+  let onClickSource = $derived.by(() => {
+    if (typeof content === "object") {
+      const parsed = parseComponentProps(content as object);
+      if (parsed?.kind === ObjectComponentKind.Button) {
+        return parsed.props.onClick;
+      }
+    }
+    return undefined;
+  });
 </script>
 
 {#if typeof content === "string"}
@@ -19,7 +30,7 @@
 {:else if typeof content === "number" || typeof content === "boolean" || typeof content === "bigint"}
   <span>{String(content)}</span>
 {:else if Array.isArray(content)}
-  {#each content as item, i (i)}
+  {#each content as item, idx (idx)}
     <EvaluatedComponents content={item} />
   {/each}
 {:else if content !== null && typeof content === "object"}
@@ -37,7 +48,12 @@
     <button
       data-skin="transparent"
       style={styleToString(parsed.props.style)}
-      onclick={() => parsed.props.onClick && EvaluateAction(parsed.props.onClick, {})}
+      onclick={() => {
+        if (!onClickSource) return;
+        const sandbox = new Sandbox();
+        const executor = sandbox.compileAsync(onClickSource);
+        evalActionSanboxed(executor, {});
+      }}
     >
       <EvaluatedComponents content={parsed.props.content} />
     </button>

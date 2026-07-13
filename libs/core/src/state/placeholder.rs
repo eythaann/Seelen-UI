@@ -6,26 +6,6 @@ use url::Url;
 
 use crate::{resource::PluginId, utils::TsUnknown};
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
-pub enum ToolbarJsScope {
-    Date,
-    Notifications,
-    Media,
-    Network,
-    Keyboard,
-    User,
-    Bluetooth,
-    Power,
-    FocusedApp,
-    Workspaces,
-    Disk,
-    NetworkStatistics,
-    Memory,
-    Cpu,
-}
-
 type JsFunctionBody = String;
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
@@ -35,7 +15,7 @@ pub struct ToolbarItem {
     /// Id to identify the item, should be unique. Preferably a uuid.
     pub id: String,
     /// List of scopes to be loaded in the item js execution scope.
-    pub scopes: HashSet<ToolbarJsScope>,
+    pub scopes: HashSet<String>,
     /// JS function definition for content to display in the item.
     pub template: JsFunctionBody,
     /// JS function definition for content to display in tooltip of the item.
@@ -146,7 +126,7 @@ impl ToolbarState {
                 ToolbarItem2::Inline(mut item) => {
                     // migration step for old default separator before v2.5
                     if item.template.contains("window") && item.scopes.is_empty() {
-                        item.scopes.insert(ToolbarJsScope::FocusedApp);
+                        item.scopes.insert("FocusedApp".to_owned());
                         item.template = item.template.replace("window", "focusedApp");
                     }
 

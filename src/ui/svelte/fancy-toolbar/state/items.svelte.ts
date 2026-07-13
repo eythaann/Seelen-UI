@@ -1,6 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-ui/lib/types";
-import { ToolbarJsScope } from "@seelen-ui/lib/types";
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
@@ -108,7 +107,7 @@ export function restoreStateToDefault() {
       {
         ...baseItem,
         id: crypto.randomUUID() as string,
-        scopes: [ToolbarJsScope.FocusedApp],
+        scopes: ["FocusedApp"],
         template: 'return focusedApp.title ? "-" : ""',
       },
       "@default/focused-app-title" as PluginId,

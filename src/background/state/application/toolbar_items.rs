@@ -3,7 +3,7 @@ use std::{collections::HashSet, sync::LazyLock};
 use parking_lot::Mutex;
 use seelen_core::{
     resource::WidgetId,
-    state::{ToolbarItem, ToolbarItem2, ToolbarJsScope, ToolbarState},
+    state::{ToolbarItem, ToolbarItem2, ToolbarState},
 };
 
 use crate::{
@@ -69,7 +69,7 @@ fn initial_items() -> ToolbarState {
             })),
             ToolbarItem2::Plugin("@default/focused-app".into()),
             ToolbarItem2::Inline(Box::new(ToolbarItem {
-                scopes: HashSet::from([ToolbarJsScope::FocusedApp]),
+                scopes: HashSet::from(["FocusedApp".to_owned()]),
                 template: "return focusedApp.title ? \"-\" : \"\"".into(),
                 ..Default::default()
             })),
