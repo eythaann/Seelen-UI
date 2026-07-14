@@ -1,0 +1,13 @@
+id: "@seelen/dock-keyboard-selector"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: FaRegKeyboard
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Keyboard
+  render: !include dock_plugin.js
+  tooltip: return [activeLang?.name || "!?", " - ", activeKeyboard?.displayName || "!?"]
+  onClick: |-
+    trigger("@seelen/keyboard-selector");

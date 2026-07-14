@@ -247,6 +247,7 @@ function keyboardStep(data: any): boolean {
   const imeState = _imeState.data;
   const activeLang = languages?.find((l: any) => l.keyboardLayouts.some((k: any) => k.active)) || languages?.[0];
   const activeKeyboard = activeLang?.keyboardLayouts.find((k: any) => k.active) || activeLang?.keyboardLayouts[0];
+
   let activeLangPrefix = activeLang?.nativeName
     ?.split("")
     .slice(0, 3)
@@ -260,10 +261,13 @@ function keyboardStep(data: any): boolean {
       .join("")
       .toLocaleUpperCase()
     : words[0]?.slice(0, 3).toLocaleUpperCase() || "";
+
   data.activeLang = activeLang;
   data.activeKeyboard = activeKeyboard;
+
   data.activeLangPrefix = activeLangPrefix;
   data.activeKeyboardPrefix = activeKeyboardPrefix;
+
   data.languages = languages;
   data.imeState = imeState;
 
