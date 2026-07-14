@@ -9,6 +9,7 @@
 - add network plugin to dock
 - add bluetooth plugin to dock.
 - add notifications plugin to dock.
+- add system tray plugin to dock.
 
 ### enhancements
 

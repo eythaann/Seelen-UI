@@ -39,6 +39,7 @@
   const scopeResult = $derived(resolveScopes(payload.scopes, { userSourceName }));
   const scope = $derived({
     ...scopeResult.data,
+    position: settingsState.position,
   });
 
   const sandbox = createPluginSandbox();

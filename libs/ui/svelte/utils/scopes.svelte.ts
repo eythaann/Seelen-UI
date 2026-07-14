@@ -89,6 +89,7 @@ const _virtualDesktops = new LazyScope(
   SeelenCommand.StateGetVirtualDesktops,
   SeelenEvent.VirtualDesktopsChanged,
 );
+const _trayIcons = new LazyScope(SeelenCommand.GetSystemTrayIcons, SeelenEvent.SystemTrayChanged);
 
 export interface ScopesResult {
   fetching: boolean;
@@ -159,6 +160,10 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
 
   if (scopesSet.has("cpu")) {
     fetching ||= cpuStep(data);
+  }
+
+  if (scopesSet.has("tray")) {
+    fetching ||= trayStep(data);
   }
 
   return {
@@ -379,6 +384,18 @@ function cpuStep(data: any): boolean {
   }
 
   data.cores = _cores.data;
+
+  return false;
+}
+
+function trayStep(data: any): boolean {
+  _trayIcons.lazyInit();
+
+  if (_trayIcons.fetching) {
+    return true;
+  }
+
+  data.trayIcons = _trayIcons.data || [];
 
   return false;
 }

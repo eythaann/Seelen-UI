@@ -1,0 +1,14 @@
+id: "@seelen/dock-system-tray"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: IoIosArrowDropdown
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Tray
+  render: !include dock_plugin.js
+  tooltip: |-
+    return "System Tray";
+  onClick: |-
+    trigger("@seelen/system-tray");
