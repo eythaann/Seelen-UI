@@ -10,6 +10,32 @@ function updateCargoVersion(filePath: string, version: string): void {
   fs.writeFileSync(filePath, content);
 }
 
+const IGNORED_DIRS = new Set(["node_modules", "target", ".git", "dist"]);
+
+function findCargoTomls(dir: string, results: string[] = []): string[] {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      if (!IGNORED_DIRS.has(entry.name)) {
+        findCargoTomls(`${dir}/${entry.name}`, results);
+      }
+      continue;
+    }
+    if (entry.name === "Cargo.toml") {
+      results.push(`${dir}/${entry.name}`);
+    }
+  }
+  return results;
+}
+
+function updateAllCargoVersions(version: string): void {
+  for (const cargoToml of findCargoTomls(".")) {
+    const content = fs.readFileSync(cargoToml, "utf-8");
+    if (/^version\s*=\s*".*"/m.test(content)) {
+      updateCargoVersion(cargoToml, version);
+    }
+  }
+}
+
 function updateJsonVersion(filePath: string, version: string): void {
   const json = JSON.parse(fs.readFileSync(filePath, "utf-8"));
   json.version = version;
@@ -47,15 +73,14 @@ function createGitTag(tag: string): void {
 }
 
 function updateAllVersions(version: string, skipLockfiles = false): void {
-  // Update library versions
-  console.log("Updating library versions...");
-  updateCargoVersion("./libs/core/Cargo.toml", version);
+  // Update all crate versions (workspace root + every member Cargo.toml)
+  console.log("Updating Cargo.toml versions...");
+  updateAllCargoVersions(version);
   updateJsonVersion("./libs/core/deno.json", version);
-  console.log("✓ Library versions updated");
+  console.log("✓ Cargo.toml versions updated");
 
   // Update app versions
   console.log("Updating app versions...");
-  updateCargoVersion("./src/Cargo.toml", version);
   const packageJson = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
   packageJson.version = version;
   fs.writeFileSync("./package.json", JSON.stringify(packageJson, null, 2) + "\n");
