@@ -3,7 +3,11 @@
   import type { WegPluginItem as WegPluginPayload, WidgetId } from "@seelen-ui/lib/types";
   import type { PluginWegItem } from "../../types.ts";
   import { t } from "../../i18n/index.ts";
-  import { getEditCustomIconEntry, getMenuForItem } from "../../generalMenu.ts";
+  import {
+    getEditCustomIconEntry,
+    getEmptyTrashBinEntry,
+    getMenuForItem,
+  } from "../../generalMenu.ts";
   import {
     compileSandboxed,
     createPluginSandbox,
@@ -64,6 +68,8 @@
     payload.noCanvas ? stringFromEvaluated(evalSanboxed(renderExec, scope)) : null,
   );
 
+  const hasTrashBinScope = $derived(payload.scopes.some((s) => s.toLowerCase() === "trashbin"));
+
   function handleClick() {
     evalActionSanboxed(onClickExec, {
       trigger: (widgetId: WidgetId) => triggerWidget(widgetId, item.id),
@@ -79,6 +85,10 @@
 
     if (customIconKey) {
       menu.items.unshift(getEditCustomIconEntry($t, customIconKey), { type: "Separator" });
+    }
+
+    if (hasTrashBinScope) {
+      menu.items.unshift(getEmptyTrashBinEntry($t), { type: "Separator" });
     }
 
     invoke(SeelenCommand.TriggerContextMenu, {

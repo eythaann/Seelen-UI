@@ -35,6 +35,16 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(onItemMenuClick, ({ paylo
   }
 });
 
+export function getEmptyTrashBinEntry(t: (key: string) => string): ContextMenuItem {
+  return {
+    type: "Item",
+    key: "empty_bin",
+    icon: "FaRegTrashAlt",
+    label: t("trash_bin.empty_bin"),
+    callbackEvent: onItemMenuClick,
+  };
+}
+
 export function getEditCustomIconEntry(
   t: (key: string) => string,
   iconName: string,
@@ -71,13 +81,7 @@ export function getMenuForItem(t: (key: string) => string, item: SwItem): Contex
 
     if (item.type === WegItemType.TrashBin) {
       items.unshift(
-        {
-          type: "Item",
-          key: "empty_bin",
-          icon: "FaRegTrashAlt",
-          label: t("trash_bin.empty_bin"),
-          callbackEvent: onItemMenuClick,
-        },
+        getEmptyTrashBinEntry(t),
         { type: "Separator" },
         getEditCustomIconEntry(t, "bin::full"),
         getEditCustomIconEntry(t, "bin::empty"),

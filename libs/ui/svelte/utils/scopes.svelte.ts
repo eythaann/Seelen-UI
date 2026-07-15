@@ -90,10 +90,12 @@ const _virtualDesktops = new LazyScope(
   SeelenEvent.VirtualDesktopsChanged,
 );
 const _trayIcons = new LazyScope(SeelenCommand.GetSystemTrayIcons, SeelenEvent.SystemTrayChanged);
+const _trashBinInfo = new LazyScope(SeelenCommand.GetTrashBinInfo, SeelenEvent.TrashBinChanged);
 
+type Data = Record<string, unknown>;
 export interface ScopesResult {
   fetching: boolean;
-  data: Record<string, any>;
+  data: Data;
 }
 
 export interface ScopeMofidiers {
@@ -104,7 +106,7 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
   const scopesSet = new Set(scopes.map((s) => s.toLowerCase()));
 
   let fetching = false;
-  const data: Record<string, any> = {};
+  const data: Data = {};
 
   if (scopesSet.has("date")) {
     dateStep(data);
@@ -166,17 +168,21 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
     fetching ||= trayStep(data);
   }
 
+  if (scopesSet.has("trashbin")) {
+    fetching ||= trashBinStep(data);
+  }
+
   return {
     fetching,
     data,
   };
 }
 
-function dateStep(data: any): void {
+function dateStep(data: Data): void {
   data.date = dateState.formatedDate;
 }
 
-function notificationsStep(data: any): boolean {
+function notificationsStep(data: Data): boolean {
   _notifications.lazyInit();
   _notificationsMode.lazyInit();
 
@@ -190,7 +196,7 @@ function notificationsStep(data: any): boolean {
   return false;
 }
 
-function mediaStep(data: any): boolean {
+function mediaStep(data: Data): boolean {
   _mediaSessions.lazyInit();
   _mediaDevices.lazyInit();
 
@@ -216,7 +222,7 @@ function mediaStep(data: any): boolean {
   return false;
 }
 
-function networkStep(data: any): boolean {
+function networkStep(data: Data): boolean {
   _networkOnline.lazyInit();
   _networkAdapters.lazyInit();
   _networkLocalIp.lazyInit();
@@ -235,7 +241,7 @@ function networkStep(data: any): boolean {
   return false;
 }
 
-function keyboardStep(data: any): boolean {
+function keyboardStep(data: Data): boolean {
   _languages.lazyInit();
   _imeState.lazyInit();
 
@@ -274,7 +280,7 @@ function keyboardStep(data: any): boolean {
   return false;
 }
 
-function userStep(data: any, userSourceName: string): boolean {
+function userStep(data: Data, userSourceName: string): boolean {
   _user.lazyInit();
 
   if (_user.fetching) {
@@ -288,7 +294,7 @@ function userStep(data: any, userSourceName: string): boolean {
   return false;
 }
 
-function bluetoothStep(data: any): boolean {
+function bluetoothStep(data: Data): boolean {
   _bluetoothDevices.lazyInit();
 
   if (_bluetoothDevices.fetching) {
@@ -301,7 +307,7 @@ function bluetoothStep(data: any): boolean {
   return false;
 }
 
-function powerStep(data: any): boolean {
+function powerStep(data: Data): boolean {
   _power.lazyInit();
   _powerMode.lazyInit();
   _batteries.lazyInit();
@@ -317,7 +323,7 @@ function powerStep(data: any): boolean {
   return false;
 }
 
-function focusedAppStep(data: any): boolean {
+function focusedAppStep(data: Data): boolean {
   _focusedApp.lazyInit();
 
   if (_focusedApp.fetching) {
@@ -329,7 +335,7 @@ function focusedAppStep(data: any): boolean {
   return false;
 }
 
-function workspacesStep(data: any): boolean {
+function workspacesStep(data: Data): boolean {
   _virtualDesktops.lazyInit();
 
   if (_virtualDesktops.fetching) {
@@ -344,7 +350,7 @@ function workspacesStep(data: any): boolean {
   return false;
 }
 
-function diskStep(data: any): boolean {
+function diskStep(data: Data): boolean {
   _disks.lazyInit();
 
   if (_disks.fetching) {
@@ -356,7 +362,7 @@ function diskStep(data: any): boolean {
   return false;
 }
 
-function networkStatisticsStep(data: any): boolean {
+function networkStatisticsStep(data: Data): boolean {
   _networkStatistics.lazyInit();
 
   if (_networkStatistics.fetching) {
@@ -368,7 +374,7 @@ function networkStatisticsStep(data: any): boolean {
   return false;
 }
 
-function memoryStep(data: any): boolean {
+function memoryStep(data: Data): boolean {
   _memory.lazyInit();
 
   if (_memory.fetching) {
@@ -380,7 +386,7 @@ function memoryStep(data: any): boolean {
   return false;
 }
 
-function cpuStep(data: any): boolean {
+function cpuStep(data: Data): boolean {
   _cores.lazyInit();
 
   if (_cores.fetching) {
@@ -392,7 +398,7 @@ function cpuStep(data: any): boolean {
   return false;
 }
 
-function trayStep(data: any): boolean {
+function trayStep(data: Data): boolean {
   _trayIcons.lazyInit();
 
   if (_trayIcons.fetching) {
@@ -400,6 +406,18 @@ function trayStep(data: any): boolean {
   }
 
   data.trayIcons = _trayIcons.data || [];
+
+  return false;
+}
+
+function trashBinStep(data: Data): boolean {
+  _trashBinInfo.lazyInit();
+
+  if (_trashBinInfo.fetching) {
+    return true;
+  }
+
+  data.trashBinInfo = _trashBinInfo.data;
 
   return false;
 }

@@ -5,8 +5,6 @@ metadata:
 icon: IoIosArrowDropdown
 target: "@seelen/weg"
 plugin:
-  scopes:
-    - Tray
   render: !include dock_plugin.js
   tooltip: |-
     return "System Tray";

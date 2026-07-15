@@ -1,0 +1,14 @@
+id: "@default/weg-trash-bin"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: PiTrashDuotone
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - TrashBin
+  noCanvas: true
+  render: |-
+    return trashBinInfo.itemCount > 0 ? "bin::full" : "bin::empty";
+  onClick: |-
+    invoke(SeelenCommand.OpenFile, { path: "shell:RecycleBinFolder" });
