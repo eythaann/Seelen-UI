@@ -12,6 +12,7 @@
 - add system tray plugin to dock.
 - add keyboard selector plugin to dock.
 - add battery plugin to dock.
+- add volume plugin to dock.
 
 ### enhancements
 

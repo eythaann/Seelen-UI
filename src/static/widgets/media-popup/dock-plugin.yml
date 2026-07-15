@@ -1,0 +1,21 @@
+id: "@seelen/dock-media-popup"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: IoVolumeHighOutline
+target: "@seelen/weg"
+plugin:
+  scopes:
+    - Media
+  render: !include dock_plugin.js
+  tooltip: 'return ["Volume: ", (volume * 100).toFixed(0), "%"]'
+  onClick: |-
+    trigger("@seelen/media-popup");
+  onWheelUp: |-
+    if (defaultOutputDevice) {
+      invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level: Math.min(1, volume + 0.02), sessionId: null });
+    }
+  onWheelDown: |-
+    if (defaultOutputDevice) {
+      invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level: Math.max(0, volume - 0.02), sessionId: null });
+    }

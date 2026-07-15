@@ -10,3 +10,4 @@ hidden: true
 lazy: true
 plugins:
   - !extend ./toolbar-plugin.yml
+  - !extend ./dock-plugin.yml
