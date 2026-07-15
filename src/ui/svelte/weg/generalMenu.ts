@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuItem, WidgetId } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuCallbackPayload, ContextMenuItem, WidgetId } from "@seelen-ui/lib/types";
 import { WegItemType } from "@seelen-ui/lib/types";
 import type { SwItem } from "./types.ts";
 import { dockStateActions } from "./state/items.svelte.ts";
@@ -10,15 +10,8 @@ const onItemMenuClick = "weg::item_menu_click";
 
 let pendingItem: SwItem | null = null;
 
-const customIconKeyMap: Record<string, string> = {
-  edit_icon_start: "@seelen/weg::start-menu",
-  edit_icon_desktop: "@seelen/weg::show-desktop",
-  edit_icon_bin_full: "bin::full",
-  edit_icon_bin_empty: "bin::empty",
-};
-
-Widget.self.webview.listen(onItemMenuClick, ({ payload }) => {
-  const { key } = payload as { key: string };
+Widget.self.webview.listen<ContextMenuCallbackPayload>(onItemMenuClick, ({ payload }) => {
+  const { key } = payload;
   const item = pendingItem;
   if (!item) return;
 
@@ -30,9 +23,9 @@ Widget.self.webview.listen(onItemMenuClick, ({ payload }) => {
     }
   } else if (key === "empty_bin") {
     invoke(SeelenCommand.TrashBinEmpty);
-  } else if (key in customIconKeyMap) {
-    const iconKey = customIconKeyMap[key]!;
-    const entry = iconPackManager.value.getCustomIconEntry(iconKey);
+  } else if (key === "edit_custom_icon") {
+    const iconName = payload.value as string;
+    const entry = iconPackManager.value.getCustomIconEntry(iconName);
     invoke(SeelenCommand.TriggerWidget, {
       payload: {
         id: "@seelen/icon-editor" as WidgetId,
@@ -41,6 +34,20 @@ Widget.self.webview.listen(onItemMenuClick, ({ payload }) => {
     });
   }
 });
+
+export function getEditCustomIconEntry(
+  t: (key: string) => string,
+  iconName: string,
+): ContextMenuItem {
+  return {
+    type: "Item",
+    key: "edit_custom_icon",
+    value: iconName,
+    icon: "RiEditBoxLine",
+    label: t("context_menu.edit_icon"),
+    callbackEvent: onItemMenuClick,
+  };
+}
 
 export function getMenuForItem(t: (key: string) => string, item: SwItem): ContextMenu {
   pendingItem = item;
@@ -72,48 +79,18 @@ export function getMenuForItem(t: (key: string) => string, item: SwItem): Contex
           callbackEvent: onItemMenuClick,
         },
         { type: "Separator" },
-        {
-          type: "Item",
-          key: "edit_icon_bin_full",
-          icon: "RiEditBoxLine",
-          label: t("trash_bin.edit_icon_full"),
-          callbackEvent: onItemMenuClick,
-        },
-        {
-          type: "Item",
-          key: "edit_icon_bin_empty",
-          icon: "RiEditBoxLine",
-          label: t("trash_bin.edit_icon_empty"),
-          callbackEvent: onItemMenuClick,
-        },
+        getEditCustomIconEntry(t, "bin::full"),
+        getEditCustomIconEntry(t, "bin::empty"),
         { type: "Separator" },
       );
     }
 
     if (item.type === WegItemType.StartMenu) {
-      items.unshift(
-        {
-          type: "Item",
-          key: "edit_icon_start",
-          icon: "RiEditBoxLine",
-          label: t("context_menu.edit_icon"),
-          callbackEvent: onItemMenuClick,
-        },
-        { type: "Separator" },
-      );
+      items.unshift(getEditCustomIconEntry(t, "@seelen/weg::start-menu"), { type: "Separator" });
     }
 
     if (item.type === WegItemType.ShowDesktop) {
-      items.unshift(
-        {
-          type: "Item",
-          key: "edit_icon_desktop",
-          icon: "RiEditBoxLine",
-          label: t("context_menu.edit_icon"),
-          callbackEvent: onItemMenuClick,
-        },
-        { type: "Separator" },
-      );
+      items.unshift(getEditCustomIconEntry(t, "@seelen/weg::show-desktop"), { type: "Separator" });
     }
 
     return { identifier, items };

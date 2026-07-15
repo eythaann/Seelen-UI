@@ -1,0 +1,13 @@
+id: "@default/weg-show-desktop"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: PiDesktopDuotone
+target: "@seelen/weg"
+plugin:
+  scopes: []
+  noCanvas: true
+  render: |-
+    return "@seelen/weg::show-desktop";
+  onClick: |-
+    invoke(SeelenCommand.ShowDesktop);

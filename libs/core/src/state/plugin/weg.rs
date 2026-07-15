@@ -10,6 +10,9 @@ pub struct WegPluginItem {
     pub scopes: HashSet<String>,
     // JS function definition for content to display in the item.
     pub render: String,
+    /// If true, `render` is expected to return a custom icon key (string) instead of
+    /// drawing on the canvas. The item will be displayed using that custom icon.
+    pub no_canvas: bool,
     /// JS function definition for content to display in tooltip of the item.
     pub tooltip: Option<String>,
     /// JS function definition for content to display in badge of the item.
