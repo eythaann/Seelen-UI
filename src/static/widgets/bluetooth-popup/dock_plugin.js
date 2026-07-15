@@ -16,11 +16,11 @@ const hasConnected = connectedDevices.length > 0;
 const color = themeTokens.foregroundColor;
 const lineWidth = 18;
 
-const top = h * 0.16;
-const bottom = h * 0.84;
+const top = h * 0.1;
+const bottom = h * 0.9;
 const quarter = (bottom - top) / 4;
-const leftX = cx - w * 0.2;
-const rightX = cx + w * 0.2;
+const leftX = cx - w * 0.25;
+const rightX = cx + w * 0.25;
 const upperY = top + quarter;
 const lowerY = bottom - quarter;
 
@@ -39,7 +39,7 @@ ctx.stroke();
 
 if (hasConnected) {
   const dotRadius = lineWidth * 0.55;
-  const dotOffset = w * 0.32;
+  const dotOffset = w * 0.40;
 
   ctx.fillStyle = color;
 

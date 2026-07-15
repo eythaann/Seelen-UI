@@ -11,15 +11,16 @@ ctx.textBaseline = "middle";
 
 const lang = activeLangPrefix || "Null";
 const variant = activeKeyboardPrefix || "";
+const inputsLength = activeLang.keyboardLayouts.length;
 
-if (variant) {
+if (variant && inputsLength > 1) {
   ctx.fillStyle = themeTokens.foregroundColor;
-  ctx.font = "700 92px sans-serif";
-  ctx.fillText(lang, cx, h * 0.36);
+  ctx.font = "700 100px sans-serif";
+  ctx.fillText(lang, cx, h * 0.42);
 
   ctx.fillStyle = themeTokens.foregroundSecondaryColor;
-  ctx.font = "600 60px sans-serif";
-  ctx.fillText(variant, cx, h * 0.74);
+  ctx.font = "600 80px sans-serif";
+  ctx.fillText(variant, cx, h * 0.72);
 } else {
   ctx.fillStyle = themeTokens.foregroundColor;
   ctx.font = "700 96px sans-serif";
