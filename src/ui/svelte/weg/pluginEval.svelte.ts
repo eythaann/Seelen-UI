@@ -6,6 +6,7 @@ import { settingsState, widgetRect } from "./state/settings.svelte.ts";
 const ALLOWED_COMMANDS: SeelenCommand[] = [
   SeelenCommand.OpenFile,
   SeelenCommand.ShowDesktop,
+  SeelenCommand.ShowStartMenu,
 ];
 
 export function createPluginSandbox(): Sandbox {
