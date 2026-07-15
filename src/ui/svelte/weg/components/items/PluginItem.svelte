@@ -79,6 +79,15 @@
     const computed = getComputedStyle(img);
     evalSanboxed(renderExec, {
       ...scope,
+      systemTokens: {
+        accentLightestColor: computed.getPropertyValue("--system-accent-lightest-color"),
+        accentLighterColor: computed.getPropertyValue("--system-accent-lighter-color"),
+        accentLightColor: computed.getPropertyValue("--system-accent-light-color"),
+        accentColor: computed.getPropertyValue("--system-accent-color"),
+        accentDarkColor: computed.getPropertyValue("--system-accent-dark-color"),
+        accentDarkerColor: computed.getPropertyValue("--system-accent-darker-color"),
+        accentDarkestColor: computed.getPropertyValue("--system-accent-darkest-color"),
+      },
       themeTokens: {
         foregroundColor: computed.getPropertyValue("--slu-std-fg-color"),
         foregroundSecondaryColor: computed.getPropertyValue("--slu-std-fg-secondary-color"),

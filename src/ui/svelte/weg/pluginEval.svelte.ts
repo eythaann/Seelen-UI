@@ -3,7 +3,9 @@ import { Alignment, SeelenWegSide, type WidgetId } from "@seelen-ui/lib/types";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settingsState, widgetRect } from "./state/settings.svelte.ts";
 
-const ALLOWED_COMMANDS: SeelenCommand[] = [];
+const ALLOWED_COMMANDS: SeelenCommand[] = [
+  SeelenCommand.OpenFile,
+];
 
 export function createPluginSandbox(): Sandbox {
   const prototypeWhitelist = new Map(Sandbox.SAFE_PROTOTYPES);

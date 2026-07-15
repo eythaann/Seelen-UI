@@ -11,6 +11,7 @@
 - add notifications plugin to dock.
 - add system tray plugin to dock.
 - add keyboard selector plugin to dock.
+- add battery plugin to dock.
 
 ### enhancements
 
