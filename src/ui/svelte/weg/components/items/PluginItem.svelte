@@ -13,6 +13,8 @@
     triggerWidget,
   } from "../../pluginEval.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
+  import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
+
   import { settingsState } from "../../state/settings.svelte.ts";
 
   const CANVAS_SIZE = 256;
@@ -79,6 +81,7 @@
     const computed = getComputedStyle(img);
     evalSanboxed(renderExec, {
       ...scope,
+      isDarkMode: prefersDarkColorScheme.value,
       systemTokens: {
         accentLightestColor: computed.getPropertyValue("--system-accent-lightest-color"),
         accentLighterColor: computed.getPropertyValue("--system-accent-lighter-color"),

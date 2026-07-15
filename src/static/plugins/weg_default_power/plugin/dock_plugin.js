@@ -17,7 +17,7 @@ const percentage = hasBattery
   : 0;
 
 const color = themeTokens.foregroundColor;
-const accent = systemTokens.accentColor;
+const accent = isDarkMode ? systemTokens.accentLightColor : systemTokens.accentDarkColor;
 const dangerColor = "#e5484d";
 const lineWidth = w * 0.06;
 
