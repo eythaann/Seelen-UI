@@ -2,7 +2,6 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import {
     SeelenWegMode,
-    WegItemType,
     WegPinnedItemsVisibility,
     WegTemporalItemsVisibility,
   } from "@seelen-ui/lib/types";
@@ -51,7 +50,7 @@
   });
 
   const isEmpty = $derived(
-    visibleItems.filter((c) => c.type !== WegItemType.Separator).length === 0,
+    visibleItems.filter((c) => c.type !== "Separator").length === 0,
   );
 
   function onContextMenu() {

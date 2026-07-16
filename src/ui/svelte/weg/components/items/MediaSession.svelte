@@ -8,7 +8,7 @@
   import type { MediaWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { getMenuForItem } from "../../generalMenu.ts";
-  import { players } from "../../state/system.svelte.ts";
+  import { players } from "../../state/getters.svelte.ts";
   import { calcLuminance } from "../../application.ts";
 
   interface Props {

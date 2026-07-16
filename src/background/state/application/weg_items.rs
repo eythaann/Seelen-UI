@@ -66,8 +66,14 @@ fn initial_items() -> WegItems {
     WegItems {
         is_reorder_disabled: false,
         left: vec![
-            WegItem::StartMenu { id: Uuid::new_v4() },
-            WegItem::ShowDesktop { id: Uuid::new_v4() },
+            WegItem::Plugin {
+                id: Uuid::new_v4(),
+                plugin: "@default/weg-start-menu".into(),
+            },
+            WegItem::Plugin {
+                id: Uuid::new_v4(),
+                plugin: "@default/weg-show-desktop".into(),
+            },
         ],
         center: vec![WegItem::AppOrFile(WegItemData {
             id: Uuid::new_v4(),
@@ -79,7 +85,10 @@ fn initial_items() -> WegItems {
             relaunch: None,
         })],
         right: vec![
-            WegItem::TrashBin { id: Uuid::new_v4() },
+            WegItem::Plugin {
+                id: Uuid::new_v4(),
+                plugin: "@default/weg-trash-bin".into(),
+            },
             WegItem::Media { id: Uuid::new_v4() },
         ],
     }

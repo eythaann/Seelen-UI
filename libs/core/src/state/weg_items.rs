@@ -40,32 +40,25 @@ pub enum WegItem {
     Media {
         id: uuid::Uuid,
     },
-    StartMenu {
+    /// deprecated: migrated to `Plugin { plugin: "@default/weg-start-menu" }` on load
+    #[serde(rename = "StartMenu")]
+    DeprecatedStartMenu {
         id: uuid::Uuid,
     },
-    ShowDesktop {
+    /// deprecated: migrated to `Plugin { plugin: "@default/weg-show-desktop" }` on load
+    #[serde(rename = "ShowDesktop")]
+    DeprecatedShowDesktop {
         id: uuid::Uuid,
     },
-    TrashBin {
+    /// deprecated: migrated to `Plugin { plugin: "@default/weg-trash-bin" }` on load
+    #[serde(rename = "TrashBin")]
+    DeprecatedTrashBin {
         id: uuid::Uuid,
     },
     Plugin {
         id: uuid::Uuid,
         plugin: PluginId,
     },
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export, repr(enum = name)))]
-pub enum WegItemType {
-    AppOrFile,
-    Separator,
-    Media,
-    StartMenu,
-    ShowDesktop,
-    TrashBin,
-    Plugin,
 }
 
 impl WegItem {
@@ -75,9 +68,9 @@ impl WegItem {
             WegItem::AppOrFile(data) => &data.id,
             WegItem::Separator { id } => id,
             WegItem::Media { id } => id,
-            WegItem::StartMenu { id } => id,
-            WegItem::ShowDesktop { id } => id,
-            WegItem::TrashBin { id } => id,
+            WegItem::DeprecatedStartMenu { id } => id,
+            WegItem::DeprecatedShowDesktop { id } => id,
+            WegItem::DeprecatedTrashBin { id } => id,
             WegItem::Plugin { id, .. } => id,
         }
     }
@@ -88,9 +81,9 @@ impl WegItem {
             WegItem::AppOrFile(data) => data.id = identifier,
             WegItem::Separator { id } => *id = identifier,
             WegItem::Media { id } => *id = identifier,
-            WegItem::StartMenu { id } => *id = identifier,
-            WegItem::ShowDesktop { id } => *id = identifier,
-            WegItem::TrashBin { id } => *id = identifier,
+            WegItem::DeprecatedStartMenu { id } => *id = identifier,
+            WegItem::DeprecatedShowDesktop { id } => *id = identifier,
+            WegItem::DeprecatedTrashBin { id } => *id = identifier,
             WegItem::Plugin { id, .. } => *id = identifier,
         }
     }
@@ -110,8 +103,27 @@ pub struct WegItems {
 
 impl WegItems {
     fn migrate_item(item: WegItem) -> Option<WegItem> {
-        let WegItem::DeprecatedOldPinned(mut data) = item else {
-            return Some(item);
+        let mut data = match item {
+            WegItem::DeprecatedOldPinned(data) => data,
+            WegItem::DeprecatedStartMenu { id } => {
+                return Some(WegItem::Plugin {
+                    id,
+                    plugin: "@default/weg-start-menu".into(),
+                });
+            }
+            WegItem::DeprecatedShowDesktop { id } => {
+                return Some(WegItem::Plugin {
+                    id,
+                    plugin: "@default/weg-show-desktop".into(),
+                });
+            }
+            WegItem::DeprecatedTrashBin { id } => {
+                return Some(WegItem::Plugin {
+                    id,
+                    plugin: "@default/weg-trash-bin".into(),
+                });
+            }
+            other => return Some(other),
         };
 
         // migration step for items before v2.1.6

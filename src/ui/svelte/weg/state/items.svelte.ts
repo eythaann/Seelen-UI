@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import { type PluginId, type WegItem, type WegItems, WegItemType } from "@seelen-ui/lib/types";
+import type { PluginId, WegItem, WegItems } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
@@ -20,12 +20,12 @@ const CLIENT_ID = crypto.randomUUID();
 
 export const HARDCODED_SEPARATOR_LEFT: SeparatorWegItem = {
   id: "hardcoded-separator-1",
-  type: WegItemType.Separator,
+  type: "Separator",
 };
 
 export const HARDCODED_SEPARATOR_RIGHT: SeparatorWegItem = {
   id: "hardcoded-separator-2",
-  type: WegItemType.Separator,
+  type: "Separator",
 };
 
 function getStateFromStored(state: WegItems): OptimisticDockState {
@@ -65,7 +65,7 @@ subscribe(SeelenEvent.WegAddItem, (e) => {
   const item: WegItem = {
     ...e.payload,
     id: crypto.randomUUID(),
-    type: WegItemType.AppOrFile,
+    type: "AppOrFile",
   };
 
   const items = [..._dockState.items];
@@ -143,44 +143,26 @@ export const dockStateActions = {
     };
   },
   addMediaModule() {
-    if (!_dockState.items.some((i) => i.type === WegItemType.Media)) {
+    if (!_dockState.items.some((i) => i.type === "Media")) {
       _dockState = {
         ..._dockState,
-        items: [..._dockState.items, { id: crypto.randomUUID(), type: WegItemType.Media }],
+        items: [..._dockState.items, { id: crypto.randomUUID(), type: "Media" }],
       };
     }
   },
-  addStartModule() {
-    if (!_dockState.items.some((i) => i.type === WegItemType.StartMenu)) {
-      _dockState = {
-        ..._dockState,
-        items: [{ id: crypto.randomUUID(), type: WegItemType.StartMenu }, ..._dockState.items],
-      };
-    }
-  },
-  addDesktopModule() {
-    if (!_dockState.items.some((i) => i.type === WegItemType.ShowDesktop)) {
-      _dockState = {
-        ..._dockState,
-        items: [{ id: crypto.randomUUID(), type: WegItemType.ShowDesktop }, ..._dockState.items],
-      };
-    }
-  },
-  addTrashBinModule() {
-    if (!_dockState.items.some((i) => i.type === WegItemType.TrashBin)) {
-      _dockState = {
-        ..._dockState,
-        items: [..._dockState.items, { id: crypto.randomUUID(), type: WegItemType.TrashBin }],
-      };
-    }
+  removeMediaModule() {
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.filter((i) => i.type !== "Media"),
+    };
   },
   addPlugin(plugin: PluginId) {
-    if (!_dockState.items.some((i) => i.type === WegItemType.Plugin && i.plugin === plugin)) {
+    if (!_dockState.items.some((i) => i.type === "Plugin" && i.plugin === plugin)) {
       _dockState = {
         ..._dockState,
         items: [
           ..._dockState.items,
-          { id: crypto.randomUUID(), type: WegItemType.Plugin, plugin },
+          { id: crypto.randomUUID(), type: "Plugin", plugin },
         ],
       };
     }
@@ -189,7 +171,7 @@ export const dockStateActions = {
     _dockState = {
       ..._dockState,
       items: _dockState.items.filter(
-        (i) => !(i.type === WegItemType.Plugin && i.plugin === plugin),
+        (i) => !(i.type === "Plugin" && i.plugin === plugin),
       ),
     };
   },
@@ -201,7 +183,7 @@ $effect.root(() => {
     const state = _dockState;
 
     const appOrFileItems = state.items.filter(
-      (item): item is AppOrFileWegItem => item.type === WegItemType.AppOrFile,
+      (item): item is AppOrFileWegItem => item.type === "AppOrFile",
     );
 
     const itemsToRemove = new Set(
@@ -226,7 +208,7 @@ $effect.root(() => {
 
       newItems.push({
         id: crypto.randomUUID(),
-        type: WegItemType.AppOrFile,
+        type: "AppOrFile",
         displayName: w.appName,
         umid: w.umid ?? null,
         path: w.process.path?.toString() ?? "",

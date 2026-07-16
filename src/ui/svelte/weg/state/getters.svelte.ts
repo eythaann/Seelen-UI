@@ -24,9 +24,6 @@ subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
   mousePos.value = { x, y };
 });
 
-export const trashBinInfo = lazyRune(() => invoke(SeelenCommand.GetTrashBinInfo));
-subscribe(SeelenEvent.TrashBinChanged, trashBinInfo.setByPayload);
-
 export const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 
@@ -61,7 +58,6 @@ await Promise.all([
   players.init(),
   notifications.init(),
   mousePos.init(),
-  trashBinInfo.init(),
   settings.init(),
   selfWinId.init(),
   interactables.init(),

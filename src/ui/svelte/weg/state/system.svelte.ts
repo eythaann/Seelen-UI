@@ -1,7 +1,5 @@
 import { SeelenWegSide } from "@seelen-ui/lib/types";
-import { currentMonitorId, monitors, mousePos, notifications, players, trashBinInfo } from "./getters.svelte.ts";
-
-export { notifications, players, trashBinInfo };
+import { currentMonitorId, monitors, mousePos } from "./getters.svelte.ts";
 
 const _currentMonitor = $derived(monitors.value.find((m) => m.id === currentMonitorId)!);
 

@@ -6,7 +6,7 @@
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { windowsState, focused } from "../../state/windows.svelte.ts";
-  import { notifications } from "../../state/system.svelte.ts";
+  import { notifications } from "../../state/getters.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
   import { triggerPreviewWidget } from "../../previewWidget.ts";
 
