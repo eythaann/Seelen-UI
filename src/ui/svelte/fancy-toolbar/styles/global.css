@@ -52,8 +52,8 @@ body {
   margin: var(--config-margin);
   overflow: hidden;
 
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
 
   figure,
@@ -73,8 +73,6 @@ body {
   }
 
   .ft-bar-left {
-    max-width: 50%;
-    width: 50%;
     overflow: hidden;
     justify-content: flex-start;
   }
@@ -85,8 +83,6 @@ body {
   }
 
   .ft-bar-right {
-    max-width: 50%;
-    width: 50%;
     overflow: hidden;
     justify-content: flex-end;
   }

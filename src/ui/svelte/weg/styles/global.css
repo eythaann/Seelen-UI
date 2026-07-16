@@ -77,84 +77,112 @@ body {
 
     max-width: var(--weg-max-taskbar-width);
     max-height: var(--weg-max-taskbar-height);
+    height: 100%;
 
     padding: var(--config-padding);
 
     .weg-items {
       display: flex;
-      gap: var(--config-space-between-items);
+      min-width: 100%;
+      width: max-content;
     }
-  }
 
-  &[data-size="full-width"] {
-    .weg-item-drag-container:has(.weg-separator) {
-      flex: 1;
+    .weg-items-left,
+    .weg-items-center,
+    .weg-items-right {
+      flex: 1 0 0px;
+      display: flex;
+      gap: var(--config-space-between-items);
     }
   }
 
   &.horizontal {
     &[data-size="full-width"] {
       width: var(--weg-max-taskbar-width);
+
+      .weg-items-left {
+        justify-content: flex-start;
+      }
+
+      .weg-items-right {
+        justify-content: flex-end;
+      }
+
+      .weg-items-center {
+        justify-content: center;
+      }
     }
 
     .weg-items {
       flex-direction: row;
       min-width: 100%;
       width: max-content;
+      height: var(--config-item-size);
+    }
+
+    .weg-items-left,
+    .weg-items-center,
+    .weg-items-right {
+      flex-direction: row;
+    }
+
+    .weg-items-container:has(.weg-items-left[data-empty="true"]) {
+      .weg-item-drag-container:first-child:has(.weg-separator) {
+        margin-right: calc(var(--config-space-between-items) * -1);
+      }
+    }
+
+    .weg-items-container:has(.weg-items-right[data-empty="true"]) {
+      .weg-item-drag-container:last-child:has(.weg-separator) {
+        margin-left: calc(var(--config-space-between-items) * -1);
+      }
     }
   }
 
   &.vertical {
     &[data-size="full-width"] {
       height: var(--weg-max-taskbar-height);
+
+      .weg-items-left {
+        justify-content: flex-start;
+      }
+
+      .weg-items-right {
+        justify-content: flex-end;
+      }
+
+      .weg-items-center {
+        justify-content: center;
+      }
     }
 
     .weg-items {
       flex-direction: column;
       min-height: 100%;
       height: max-content;
+      width: var(--config-item-size);
+    }
+
+    .weg-items-left,
+    .weg-items-center,
+    .weg-items-right {
+      flex-direction: column;
+    }
+
+    .weg-items-container:has(.weg-items-left[data-empty="true"]) {
+      .weg-item-drag-container:first-child:has(.weg-separator) {
+        margin-bottom: calc(var(--config-space-between-items) * -1);
+      }
+    }
+
+    .weg-items-container:has(.weg-items-right[data-empty="true"]) {
+      .weg-item-drag-container:last-child:has(.weg-separator) {
+        margin-top: calc(var(--config-space-between-items) * -1);
+      }
     }
   }
 
   &:has(.weg-item-drag-container.dragging) {
     pointer-events: none;
-  }
-}
-
-.weg-separator {
-  opacity: 0;
-
-  .vertical & {
-    width: var(--config-item-size);
-  }
-
-  .horizontal & {
-    height: var(--config-item-size);
-  }
-
-  .weg-item-drag-container:not(:first-child):not(:last-child) > & {
-    &.visible {
-      opacity: 1;
-    }
-  }
-
-  .weg-item-drag-container:first-child > & {
-    .vertical & {
-      margin-top: calc(var(--config-space-between-items) * -1);
-    }
-
-    .horizontal & {
-      margin-left: calc(var(--config-space-between-items) * -1);
-    }
-  }
-
-  .weg-item-drag-container:last-child > & {
-    .vertical & {
-      margin-bottom: calc(var(--config-space-between-items) * -1);
-    }
-
-    .horizontal & {
-      margin-right: calc(var(--config-space-between-items) * -1);
-    }
   }
 }

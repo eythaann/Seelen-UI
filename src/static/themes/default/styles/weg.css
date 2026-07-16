@@ -49,21 +49,11 @@
 
 .weg-separator {
   .horizontal & {
-    &.weg-separator-1 {
-      border-left: 1px solid var(--color-gray-500);
-    }
-    &.weg-separator-2 {
-      border-right: 1px solid var(--color-gray-500);
-    }
+    border-left: 1px solid var(--slu-std-fg-muted-color);
   }
 
   .vertical & {
-    &.weg-separator-1 {
-      border-top: 1px solid var(--color-gray-500);
-    }
-    &.weg-separator-2 {
-      border-bottom: 1px solid var(--color-gray-500);
-    }
+    border-top: 1px solid var(--slu-std-fg-muted-color);
   }
 }
 

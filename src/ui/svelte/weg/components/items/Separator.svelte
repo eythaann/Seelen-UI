@@ -14,9 +14,22 @@
   const visible = $derived(settingsState.value?.visibleSeparators);
 </script>
 
-<div
-  class="weg-separator"
-  class:weg-separator-1={isSeparator1}
-  class:weg-separator-2={isSeparator2}
-  class:visible
-></div>
+<div class="weg-separator" class:visible={visible && !isSeparator1 && !isSeparator2}></div>
+
+<style>
+  .weg-separator {
+    opacity: 0;
+
+    :global(.vertical) & {
+      width: var(--config-item-size);
+    }
+
+    :global(.horizontal) & {
+      height: var(--config-item-size);
+    }
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+</style>

@@ -29,6 +29,8 @@
 - twm window not being moved when there is a fullscreen app on target monitor.
 - native taskbar autohide being disabled on settings save.
 - icon editor missing translations.
+- dock drag and sorting not working properly.
+- dock full size not working on vertical mode.
 
 ## [2.7.4]
 
