@@ -30,8 +30,21 @@ use events::VirtualDesktopEvent;
 static WORKSPACES_MANAGER: LazyLock<SluWorkspacesManager2> =
     LazyLock::new(SluWorkspacesManager2::create);
 
+/// Not a membership list — a window can belong to a workspace (be in its
+/// `DesktopWorkspace.windows`) without being here. Tracks *why* a window is
+/// currently minimized: only windows minimized by `hide()` because their
+/// workspace got hidden are added here. Windows already minimized for another
+/// reason (manually by the user, or by the WM as an inactive stack member) are
+/// left out, so `restore()` knows not to touch them when their workspace comes
+/// back — it only auto-`SW_RESTORE`s windows found in this set.
 pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<isize>> =
     LazyLock::new(scc::HashSet::new);
+
+/// Addresses of windows that `restore()` is about to (or just did) `SW_RESTORE`
+/// itself. `on_win_event`'s `SystemMinimizeEnd` handler consumes an entry here
+/// to recognize "this unminimize was caused by our own workspace restore" and
+/// ignore it, instead of misreading it as the user unminimizing the window
+/// (which would otherwise re-trigger another `switch_to_id` in a loop).
 pub static RESTORED_EVENT_QUEUE: LazyLock<SyncVec<isize>> = LazyLock::new(SyncVec::new);
 
 pub struct SluWorkspacesManager2 {
@@ -188,6 +201,11 @@ impl SluWorkspacesManager2 {
                 if found {
                     return Ok(());
                 }
+
+                // Genuine user action (taskbar click, alt-tab, etc.), not an echo of our own
+                // restore(). Let other modules (e.g. the TWM) react to it without having to
+                // listen to the raw, indiscriminate SystemMinimizeEnd hook event themselves.
+                Self::send(VirtualDesktopEvent::WindowUnminimizedByUser { window: window_id });
 
                 let manager = Self::instance();
                 if let Ok(workspace_id) = window.workspace_id() {

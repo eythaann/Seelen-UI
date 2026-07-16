@@ -35,4 +35,12 @@ pub enum VirtualDesktopEvent {
     WindowRemoved {
         window: isize,
     },
+    /// A window's `SystemMinimizeEnd` that was a genuine user action (e.g. clicking a taskbar
+    /// thumbnail or alt-tabbing to it), as opposed to an echo of `restore()` unminimizing the
+    /// rest of a workspace's windows. Consumers that react to "the user brought this window
+    /// back" (e.g. the TWM reactivating a stack tab) should listen for this instead of the raw
+    /// `SystemMinimizeEnd` hook event, which fires for both cases indiscriminately.
+    WindowUnminimizedByUser {
+        window: isize,
+    },
 }

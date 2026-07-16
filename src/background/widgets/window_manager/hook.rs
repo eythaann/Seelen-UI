@@ -3,7 +3,7 @@ use seelen_core::state::WmDragBehavior;
 use crate::{
     error::Result,
     state::application::FULL_STATE,
-    virtual_desktops::MINIMIZED_BY_WORKSPACES,
+    virtual_desktops::{events::VirtualDesktopEvent, MINIMIZED_BY_WORKSPACES},
     widgets::window_manager::state_v2::{TwmState, TwmStateEvent, MINIMIZED_BY_STACK, WM_STATE},
     windows_api::window::{event::WinEvent, Window},
 };
@@ -124,18 +124,52 @@ impl WindowManagerV2 {
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }
-            WinEvent::SystemMinimizeEnd => {
-                let mut state = WM_STATE.lock();
-                if state.is_managed(&window) {
-                    state.set_stack_active_window(&window)?;
-                    return Ok(());
+            _ => {}
+        };
+        Ok(())
+    }
+
+    pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
+        let mut state = WM_STATE.lock();
+        match event {
+            VirtualDesktopEvent::DesktopChanged { .. } => {
+                state.cancel_reservation();
+                TwmState::send(TwmStateEvent::Changed);
+            }
+            VirtualDesktopEvent::WindowAdded { window, desktop } => {
+                let window = &Window::from(window);
+                if !state.is_managed(window) && Self::should_be_managed(window.hwnd()) {
+                    state.add_to_layout(window, &desktop);
+                    TwmState::send(TwmStateEvent::Changed);
+                }
+            }
+            VirtualDesktopEvent::WindowMoved { window, desktop } => {
+                let window = &Window::from(window);
+                if state.is_managed(window) {
+                    state.remove(window);
+                    state.add_to_layout(window, &desktop);
+                    TwmState::send(TwmStateEvent::Changed);
+                }
+            }
+            VirtualDesktopEvent::WindowRemoved { window } => {
+                let window = &Window::from(window);
+                if state.is_managed(window) {
+                    state.remove(window);
+                    TwmState::send(TwmStateEvent::Changed);
+                }
+            }
+            VirtualDesktopEvent::WindowUnminimizedByUser { window } => {
+                let window = &Window::from(window);
+                if state.is_managed(window) {
+                    state.set_stack_active_window(window)?;
                 } else if Self::should_be_managed(window.hwnd()) {
-                    state.add_to_layout(&window, &window.workspace_id()?);
+                    let desktop = window.workspace_id()?;
+                    state.add_to_layout(window, &desktop);
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }
             _ => {}
-        };
+        }
         Ok(())
     }
 }

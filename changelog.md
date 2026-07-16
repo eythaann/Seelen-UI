@@ -32,6 +32,7 @@
 - icon editor missing translations.
 - dock drag and sorting not working properly.
 - dock full size not working on vertical mode.
+- twm flickering on stacks when manual uniminized a window from a stack in another workspace.
 
 ## [2.7.4]
 

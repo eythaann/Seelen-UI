@@ -22,7 +22,7 @@ use crate::{
     modules::apps::application::UserAppsManager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
-    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
+    virtual_desktops::SluWorkspacesManager2,
     widgets::window_manager::{
         cli::{Axis, NodeSiblingSide, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
@@ -82,7 +82,7 @@ impl TwmState {
         });
 
         SluWorkspacesManager2::subscribe(|event| {
-            WM_STATE.lock().process_vd_event(&event).log_error();
+            WindowManagerV2::process_vd_event(event).log_error();
         });
 
         HookManager::subscribe(|(event, origin)| {
@@ -129,39 +129,6 @@ impl TwmState {
         let settings = FULL_STATE.load();
         let layout = settings.get_wm_layout(workspace_id);
         TwmRuntimeTree::from_plugin(&layout)
-    }
-
-    pub fn process_vd_event(&mut self, event: &VirtualDesktopEvent) -> Result<()> {
-        match event {
-            VirtualDesktopEvent::DesktopChanged { .. } => {
-                self.cancel_reservation();
-                Self::send(TwmStateEvent::Changed);
-            }
-            VirtualDesktopEvent::WindowAdded { window, desktop } => {
-                let window = &Window::from(*window);
-                if !self.is_managed(window) && WindowManagerV2::should_be_managed(window.hwnd()) {
-                    self.add_to_layout(window, desktop);
-                    Self::send(TwmStateEvent::Changed);
-                }
-            }
-            VirtualDesktopEvent::WindowMoved { window, desktop } => {
-                let window = &Window::from(*window);
-                if self.is_managed(window) {
-                    self.remove(window);
-                    self.add_to_layout(window, desktop);
-                    Self::send(TwmStateEvent::Changed);
-                }
-            }
-            VirtualDesktopEvent::WindowRemoved { window } => {
-                let window = &Window::from(*window);
-                if self.is_managed(window) {
-                    self.remove(window);
-                    Self::send(TwmStateEvent::Changed);
-                }
-            }
-            _ => {}
-        }
-        Ok(())
     }
 
     fn get_or_insert_tree_mut(&mut self, workspace_id: &WorkspaceId) -> &mut TwmRuntimeTree {
