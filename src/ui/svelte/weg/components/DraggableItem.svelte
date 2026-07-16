@@ -56,6 +56,7 @@
   {@attach sortable.attach}
   style="opacity: {sortable.isDragging ? 0.3 : 1}"
   data-dragging={sortable.isDragging}
+  data-item-id={item.id}
   class="weg-item-drag-container"
   class:dragging={sortable.isDragging}
   data-tooltip={tooltip}

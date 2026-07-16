@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { ContextMenu, ContextMenuCallbackPayload, ContextMenuItem, WidgetId } from "@seelen-ui/lib/types";
 import type { SwItem } from "./types.ts";
-import { dockStateActions } from "./state/items.svelte.ts";
+import { dockStateActions, HARDCODED_SEPARATOR_LEFT, HARDCODED_SEPARATOR_RIGHT } from "./state/items.svelte.ts";
 import { iconPackManager } from "libs/ui/svelte/components/Icon/index.ts";
 
 const identifier = crypto.randomUUID();
@@ -64,6 +64,24 @@ export function getMenuForItem(t: (key: string) => string, item: SwItem): Contex
         key: "remove",
         icon: "CgExtensionRemove",
         label: t("context_menu.remove_module"),
+        callbackEvent: onItemMenuClick,
+      },
+    ];
+
+    return { identifier, items };
+  }
+
+  if (
+    item.type === "Separator" &&
+    item.id !== HARDCODED_SEPARATOR_LEFT.id &&
+    item.id !== HARDCODED_SEPARATOR_RIGHT.id
+  ) {
+    const items: ContextMenuItem[] = [
+      {
+        type: "Item",
+        key: "remove",
+        icon: "IoRemove",
+        label: t("context_menu.remove_separator"),
         callbackEvent: onItemMenuClick,
       },
     ];

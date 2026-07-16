@@ -180,13 +180,6 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>{t("weg.items.visible_separators")}</div>
-            <Switch
-              checked={settings.visibleSeparators}
-              onChange={(value) => patchWegConfig({ visibleSeparators: value })}
-            />
-          </SettingsOption>
-          <SettingsOption>
             <div>{t("weg.items.split_windows")}</div>
             <Switch
               checked={settings.splitWindows}

@@ -307,7 +307,6 @@ A fully featured dock/taskbar replacement supporting pinned apps, running window
 | `spaceBetweenItems`       | Gap between items in px                                                          |
 | `showWindowTitle`         | Show window title next to open app icons                                         |
 | `showInstanceCounter`     | Show badge with count of open windows per app                                    |
-| `visibleSeparators`       | Show visual separators between sections                                          |
 | `splitWindows`            | Show each window as a separate item instead of grouping by app                   |
 | `temporalItemsVisibility` | `All` (show running apps from all monitors) or `OnMonitor` (only this monitor)   |
 | `pinnedItemsVisibility`   | `Always` (show pinned items on every monitor) or `WhenPrimary` (only on primary) |

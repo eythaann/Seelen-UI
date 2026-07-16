@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Edit Icon
   remove_module: Remove Module
+  remove_separator: Remove Separator
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
 media:
@@ -26,6 +27,7 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Pin Custom File
+  add_separator: Add Separator
   media: Media Player
   modules: Modules
   settings: Settings

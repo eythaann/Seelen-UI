@@ -72,6 +72,7 @@ body {
   height: min-content;
 
   .weg-items-container {
+    position: relative;
     overflow: auto;
     scrollbar-width: none;
 

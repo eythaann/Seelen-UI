@@ -10,6 +10,7 @@ import type {
 import { getResourceText } from "libs/ui/react/utils/index.ts";
 import { locale } from "./i18n/index.ts";
 import { dockState, dockStateActions } from "./state/items.svelte.ts";
+import { isHorizontalDock } from "./state/settings.svelte.ts";
 import { plugins } from "./state/getters.svelte.ts";
 
 const MENU_ID = crypto.randomUUID();
@@ -20,8 +21,11 @@ const PLUGINS_SUBMENU_EVENT = "weg::toggle_plugin";
 
 let _t: (key: string) => string = (key) => key;
 
-async function handleBarMenuClick({ key, checked }: ContextMenuCallbackPayload) {
+async function handleBarMenuClick({ key, checked, value }: ContextMenuCallbackPayload) {
   switch (key) {
+    case "add-separator":
+      dockStateActions.addSeparatorNear(value as { x: number; y: number });
+      break;
     case "toggle-media-module":
       if (checked) {
         dockStateActions.addMediaModule();
@@ -74,7 +78,10 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(PLUGINS_SUBMENU_EVENT, ({
   }
 });
 
-export function getSeelenWegMenu(t: (key: string) => string): ContextMenu {
+export function getSeelenWegMenu(
+  t: (key: string) => string,
+  cursor: { x: number; y: number },
+): ContextMenu {
   _t = t;
   const { isReorderDisabled } = dockState;
   const language = locale.value;
@@ -118,6 +125,14 @@ export function getSeelenWegMenu(t: (key: string) => string): ContextMenu {
         key: "add-item",
         icon: "RiFileAddLine",
         label: t("taskbar_menu.add_file"),
+        callbackEvent: MENU_EVENT,
+      },
+      {
+        type: "Item",
+        key: "add-separator",
+        icon: isHorizontalDock() ? "LuSeparatorVertical" : "LuSeparatorHorizontal",
+        label: t("taskbar_menu.add_separator"),
+        value: cursor,
         callbackEvent: MENU_EVENT,
       },
       { type: "Separator" },

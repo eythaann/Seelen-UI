@@ -85,11 +85,12 @@
     return map;
   });
 
-  function onContextMenu() {
+  function onContextMenu(e: MouseEvent) {
     const alignX = settingsState.popupAlignX;
     const alignY = settingsState.popupAlignY;
+    const cursor = { x: e.clientX, y: e.clientY };
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu: { ...getSeelenWegMenu($t), alignX, alignY },
+      menu: { ...getSeelenWegMenu($t, cursor), alignX, alignY },
       forwardTo: null,
     });
   }

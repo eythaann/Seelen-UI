@@ -5,6 +5,7 @@ import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
 import { getWindowsForItem, interactables } from "./windows.svelte.ts";
 import { wegItems } from "./getters.svelte.ts";
+import { isHorizontalDock } from "./settings.svelte.ts";
 
 interface OptimisticDockState {
   isReorderDisabled: boolean;
@@ -174,6 +175,44 @@ export const dockStateActions = {
         (i) => !(i.type === "Plugin" && i.plugin === plugin),
       ),
     };
+  },
+  /** Inserts a new separator next to whichever rendered item is closest to the given cursor position. */
+  addSeparatorNear(cursor: { x: number; y: number }) {
+    const newSeparator: SeparatorWegItem = { id: crypto.randomUUID(), type: "Separator" };
+    const items = [..._dockState.items];
+
+    const containers = Array.from(
+      document.querySelectorAll<HTMLElement>(".weg-item-drag-container"),
+    );
+
+    let insertIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+
+    if (containers.length > 0) {
+      const horizontal = isHorizontalDock();
+      let nearestId: string | undefined;
+      let nearestDist = Infinity;
+      let insertAfter = false;
+
+      for (const el of containers) {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dist = Math.hypot(cursor.x - cx, cursor.y - cy);
+        if (dist < nearestDist) {
+          nearestDist = dist;
+          nearestId = el.dataset.itemId;
+          insertAfter = horizontal ? cursor.x > cx : cursor.y > cy;
+        }
+      }
+
+      const nearestIdx = items.findIndex((i) => i.id === nearestId);
+      if (nearestIdx !== -1) {
+        insertIdx = insertAfter ? nearestIdx + 1 : nearestIdx;
+      }
+    }
+
+    items.splice(insertIdx, 0, newSeparator);
+    _dockState = { ..._dockState, items };
   },
 };
 

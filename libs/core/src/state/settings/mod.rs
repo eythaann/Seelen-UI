@@ -177,8 +177,6 @@ pub struct SeelenWegSettings {
     pub show_instance_counter: bool,
     /// enable or disable the window title visibility for opened apps
     pub show_window_title: bool,
-    /// enable or disable separators visibility
-    pub visible_separators: bool,
     /// item size in px
     pub size: u32,
     /// zoomed item size in px
@@ -207,7 +205,6 @@ impl Default for SeelenWegSettings {
             mode: SeelenWegMode::MinContent,
             hide_mode: HideMode::OnOverlap,
             position: SeelenWegSide::Bottom,
-            visible_separators: true,
             show_instance_counter: true,
             show_window_title: false,
             temporal_items_visibility: WegTemporalItemsVisibility::All,
