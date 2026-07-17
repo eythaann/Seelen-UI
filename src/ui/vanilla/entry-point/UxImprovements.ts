@@ -11,7 +11,7 @@ let lastShownOn: HTMLElement | null = null;
 let tooltipObserver: MutationObserver | null = null;
 
 function getTooltipText(target: HTMLElement): string | null {
-  const isRange = target instanceof HTMLInputElement && target.type === "range";
+  const isRange = target instanceof HTMLInputElement && target.type === "range" && !!target.dataset.skin;
   return isRange ? target.value : target.dataset.tooltip || target.title || target.getAttribute("aria-label");
 }
 
@@ -55,7 +55,7 @@ function setTooltipParentElement(element: HTMLElement) {
   tooltipObserver = new MutationObserver(() => updateTooltipText(element));
   tooltipObserver.observe(element, {
     attributes: true,
-    attributeFilter: ["title", "data-tooltip"],
+    attributeFilter: ["title", "data-tooltip", "aria-label"],
   });
 }
 
@@ -139,12 +139,6 @@ document.addEventListener(
   },
   true,
 );
-
-globalThis.addEventListener("blur", () => {
-  if (lastShownOn) {
-    hideTooltip();
-  }
-});
 
 // UX for sliders
 

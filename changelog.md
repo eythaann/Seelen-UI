@@ -35,6 +35,7 @@
 - twm flickering on stacks when manual uniminized a window from a stack in another workspace.
 - wallpaper incorrect size/position after monitor hotplug (stale virtual screen metrics).
 - widgets not being created/destroyed on monitors change.
+- stucked tooltips.
 
 ## [2.7.4]
 
