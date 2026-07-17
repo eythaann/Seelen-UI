@@ -101,16 +101,14 @@ use windows::{
             },
             WindowsAndMessaging::{
                 FindWindowExW, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SendMessageW, SetForegroundWindow, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, GW_OWNER,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
-                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
-                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
-                WS_THICKFRAME,
+                GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
+                IsIconic, IsWindow, IsWindowVisible, IsZoomed, PostMessageW, SendMessageW,
+                SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_SHOWNORMAL, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE,
+                WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -770,13 +768,29 @@ impl WindowsApi {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen
+    ///
+    /// `GetSystemMetrics(SM_*VIRTUALSCREEN)` is cached by the system and is only refreshed
+    /// once the calling thread processes a `WM_DISPLAYCHANGE` message. Callers that don't pump
+    /// that message (e.g. background/async command threads, or windows reparented as children
+    /// via `SetParent` which stop receiving broadcasted messages) can observe a stale virtual
+    /// screen rect right after a monitor hotplug. Compute the rect instead from a live monitor
+    /// enumeration, which is always accurate.
     pub fn virtual_screen_rect() -> Result<RECT> {
+        let monitors = MonitorEnumerator::enumerate_win32()?;
         let mut rect = RECT::default();
-        unsafe {
-            rect.left = GetSystemMetrics(SM_XVIRTUALSCREEN);
-            rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
-            rect.right = rect.left + GetSystemMetrics(SM_CXVIRTUALSCREEN);
-            rect.bottom = rect.top + GetSystemMetrics(SM_CYVIRTUALSCREEN);
+        for (idx, monitor) in monitors.iter().enumerate() {
+            let m_rect = monitor.rect()?;
+            if idx == 0 {
+                rect.left = m_rect.left;
+                rect.top = m_rect.top;
+                rect.right = m_rect.right;
+                rect.bottom = m_rect.bottom;
+                continue;
+            }
+            rect.left = rect.left.min(m_rect.left);
+            rect.top = rect.top.min(m_rect.top);
+            rect.right = rect.right.max(m_rect.right);
+            rect.bottom = rect.bottom.max(m_rect.bottom);
         }
         Ok(rect)
     }

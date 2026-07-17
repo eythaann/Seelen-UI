@@ -77,7 +77,9 @@ const monitorId = Widget.getCurrent().decoded.monitorId!;
 
 const widgetRect = $derived.by(() => {
   const monitor = monitors.value.find((m) => m.id === monitorId);
-  if (!monitor) return { left: 0, top: 0, right: 0, bottom: 0 };
+  if (!monitor) {
+    throw new Error("Current monitor not found");
+  }
 
   const rect = { ...monitor.rect };
   const tbConfig = fullSettings.byWidget["@seelen/fancy-toolbar"];

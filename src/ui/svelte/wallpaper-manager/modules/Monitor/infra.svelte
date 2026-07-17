@@ -8,7 +8,7 @@
   );
 
   const primaryMonitor = $derived(
-    gState.monitors.find((m) => m.isPrimary) ?? gState.monitors[0],
+    gState.relativeMonitors.find((m) => m.isPrimary) ?? gState.relativeMonitors[0],
   );
 </script>
 

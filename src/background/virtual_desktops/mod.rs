@@ -135,8 +135,7 @@ impl SluWorkspacesManager2 {
         });
 
         // create monitors
-        for view in MonitorManager::instance().read_all_views()? {
-            let id = view.primary_target()?.stable_id()?;
+        for id in MonitorManager::instance().get_cached_ids() {
             if self.monitors.contains_key(&id) {
                 continue;
             }
@@ -155,13 +154,16 @@ impl SluWorkspacesManager2 {
 
         MonitorManager::subscribe(|e| match e {
             MonitorManagerEvent::ViewAdded(monitor_id) => {
-                Self::instance()
-                    .monitors
-                    .upsert(monitor_id, VirtualDesktopMonitor::create());
+                Self::instance().monitors.get_or_insert(
+                    monitor_id,
+                    VirtualDesktopMonitor::create,
+                    |_| {},
+                );
             }
-            MonitorManagerEvent::ViewRemoved(monitor_id) => {
-                // Todo: move windows to another monitor
-                Self::instance().monitors.remove(&monitor_id);
+            MonitorManagerEvent::ViewRemoved(_monitor_id) => {
+                // Todo: move windows to another monitor, this is probably already done by windows events btw.
+                // we don't remove the workspaces items to persist monitor workspaces configuration.
+                // Self::instance().monitors.remove(&monitor_id);
             }
             _ => {}
         });

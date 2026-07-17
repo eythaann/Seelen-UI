@@ -15,9 +15,10 @@ fn get_monitor_manager() -> &'static MonitorManager {
             log::debug!("Initial monitors: {monitors:#?}");
         }
 
-        MonitorManager::subscribe(|_event| {
+        MonitorManager::subscribe(|event| {
+            log::trace!("MonitorManagerEvent::{:?}", event);
             if let Ok(monitors) = _get_connected_monitors() {
-                log::debug!("Monitors changed: {monitors:#?}");
+                log::debug!("{monitors:#?}");
                 emit_to_webviews(SeelenEvent::SystemMonitorsChanged, monitors);
             }
         });

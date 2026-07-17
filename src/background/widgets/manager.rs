@@ -9,7 +9,8 @@ use seelen_core::{
 };
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
+    modules::monitors::MonitorManager,
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
@@ -26,6 +27,10 @@ pub struct WidgetManager {
 
 impl WidgetManager {
     fn create() -> Self {
+        let sub_id = MonitorManager::subscribe(|_event| {
+            WIDGET_MANAGER.reconcile().log_error();
+        });
+        MonitorManager::set_event_handler_priority(&sub_id, 1);
         Self {
             deployments: SyncHashMap::new(),
         }

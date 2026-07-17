@@ -17,5 +17,19 @@ await Widget.self.window.setResizable(false);
 await invoke(SeelenCommand.SetAsWallpaper);
 // await Widget.self.window.setIgnoreCursorEvents(true); btw this does nothing so better not call it.
 
+// Polling instead of Widget.self.normalizeDevicePixelRatio() (onScaleChanged event): this
+// window is reparented to WorkerW via SetParent, and onScaleChanged doesn't fire reliably
+// there, so we poll devicePixelRatio instead.
+let oldDPR = globalThis.devicePixelRatio;
+async function lookupDPI() {
+  if (globalThis.devicePixelRatio !== 1) {
+    // when zoom was set dpr changed, so in case of change this is accomulative unit
+    oldDPR = oldDPR * globalThis.devicePixelRatio;
+    await Widget.self.webview.setZoom(1 / oldDPR);
+  }
+  setTimeout(lookupDPI, 500);
+}
+await lookupDPI();
+
 const root = document.getElementById("root")!;
 mount(App, { target: root });

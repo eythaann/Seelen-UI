@@ -1,6 +1,7 @@
-use std::{collections::HashMap, sync::LazyLock};
+use std::{collections::HashMap, sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::MonitorId;
+use slu_utils::{debounce, Debounce};
 use windows::{
     Devices::Display::Core::{
         DisplayManager, DisplayManagerChangedEventArgs, DisplayManagerDisabledEventArgs,
@@ -16,7 +17,9 @@ use crate::{
     event_manager,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
     utils::lock_free::SyncHashMap,
-    windows_api::{event_window::subscribe_to_background_window, monitor::DisplayView},
+    windows_api::{
+        event_window::subscribe_to_background_window, monitor::DisplayView, MonitorEnumerator,
+    },
 };
 
 pub struct MonitorManager {
@@ -105,19 +108,62 @@ impl MonitorManager {
         SystemSettings::subscribe(|event| {
             if event == SystemSettingsEvent::TextScaleChanged {
                 log::debug!("Text scale changed, re-emitting ViewsChanged");
-                Self::send(MonitorManagerEvent::ViewsChanged);
+                Self::request_display_state_refresh();
             }
         });
 
         subscribe_to_background_window(|event, _w_param, _l_param| {
             if event == WM_DISPLAYCHANGE {
                 log::debug!("Displays changed");
-                Self::send(MonitorManagerEvent::ViewsChanged);
-                Self::check_for_display_changes().log_error();
+                Self::request_display_state_refresh();
             }
             Ok(())
         });
         Ok(())
+    }
+
+    /// Coalesces bursts of display notifications (WM_DISPLAYCHANGE + the several
+    /// WinRT DisplayManager events can all fire for a single physical connect/disconnect)
+    /// and waits for the Win32 topology to settle before diffing state, since Windows
+    /// can take a moment after WinRT reports a target as connected to finish applying
+    /// the mode/DPI/work-area for a newly attached monitor.
+    fn request_display_state_refresh() {
+        static DEBOUNCER: LazyLock<Debounce<()>> = LazyLock::new(|| {
+            debounce(
+                |_| {
+                    MonitorManager::check_for_display_changes().log_error();
+                    MonitorManager::send(MonitorManagerEvent::ViewsChanged);
+                },
+                Duration::from_millis(400),
+            )
+        });
+        DEBOUNCER.call(());
+    }
+
+    /// Polls the Win32 monitor enumeration until it reflects `expected_count` monitors
+    /// with non-degenerate rects, or gives up after a few attempts. Runs on the debounce's
+    /// own background thread, so blocking here is safe.
+    fn wait_for_win32_to_settle(expected_count: usize) {
+        const MAX_ATTEMPTS: u32 = 20;
+        const RETRY_DELAY: Duration = Duration::from_millis(150);
+
+        for attempt in 0..MAX_ATTEMPTS {
+            if let Ok(monitors) = MonitorEnumerator::enumerate_win32() {
+                let ready = monitors.len() == expected_count
+                    && monitors
+                        .iter()
+                        .all(|m| m.rect().is_ok_and(|r| r.right > r.left && r.bottom > r.top));
+                if ready {
+                    return;
+                }
+            }
+            if attempt + 1 < MAX_ATTEMPTS {
+                std::thread::sleep(RETRY_DELAY);
+            }
+        }
+        log::warn!(
+            "Win32 monitor state did not settle after display change, proceeding with possibly stale data"
+        );
     }
 
     // Is recommended that subscribers re-enumerate all targets and state in this call,
@@ -156,7 +202,7 @@ impl MonitorManager {
         args: windows_core::Ref<DisplayManagerChangedEventArgs>,
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager changed");
-        Self::check_for_display_changes().log_error();
+        Self::request_display_state_refresh();
 
         // Critical!: app will crash if this is not set
         if let Some(args) = args.as_ref() {
@@ -171,7 +217,7 @@ impl MonitorManager {
     ) -> windows_core::Result<()> {
         log::trace!("DisplayManager paths failed or invalidated");
         // Treat this as a change event
-        Self::check_for_display_changes().log_error();
+        Self::request_display_state_refresh();
 
         // Critical!: app will crash if this is not set
         if let Some(args) = args.as_ref() {
@@ -199,11 +245,15 @@ impl MonitorManager {
             current_views.insert(id, view);
         }
 
+        Self::wait_for_win32_to_settle(current_views.len());
+
         let mut old_views = Self::instance().state_views.to_hash_map();
+        let current_ids: Vec<MonitorId> = current_views.keys().cloned().collect();
+        Self::instance().state_views.replace(current_views);
 
         // new monitors were added
-        for id in current_views.keys() {
-            if old_views.remove(id).is_none() {
+        for id in current_ids {
+            if old_views.remove(&id).is_none() {
                 Self::send(MonitorManagerEvent::ViewAdded(id.clone()));
             }
         }
@@ -213,18 +263,11 @@ impl MonitorManager {
             Self::send(MonitorManagerEvent::ViewRemoved(id));
         }
 
-        Self::instance().state_views.replace(current_views);
         Ok(())
     }
 
     pub fn get_cached_ids(&self) -> Vec<MonitorId> {
         self.state_views.keys()
-    }
-
-    pub fn read_all_views(&self) -> Result<Vec<DisplayView>> {
-        let state = self.display_manager.TryReadCurrentStateForAllTargets()?;
-        let state = state.State()?;
-        Ok(state.Views()?.into_iter().map(DisplayView::from).collect())
     }
 }
 

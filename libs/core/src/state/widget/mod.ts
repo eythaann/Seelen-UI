@@ -208,10 +208,10 @@ export class Widget {
     let oldDPR = globalThis.devicePixelRatio;
     await this.webview.setZoom(1 / oldDPR);
     this.window.onScaleChanged(() => {
-      if (globalThis.devicePixelRatio !== oldDPR) {
+      if (globalThis.devicePixelRatio !== 1) {
         // when zoom was set dpr changed, so in case of change this is accomulative unit
         oldDPR = oldDPR * globalThis.devicePixelRatio;
-        this.webview.setZoom(1 / (oldDPR * globalThis.devicePixelRatio));
+        this.webview.setZoom(1 / oldDPR);
       }
     });
   }

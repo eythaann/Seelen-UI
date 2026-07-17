@@ -131,9 +131,6 @@ class State {
   get settings() {
     return settings;
   }
-  get monitors() {
-    return monitors.value;
-  }
   get relativeMonitors() {
     return relativeMonitors;
   }
@@ -164,11 +161,8 @@ class State {
 
 $effect.root(() => {
   $effect(() => {
-    monitors.value;
-    // wait to desktop to be ready after monitor change
-    setTimeout(() => {
-      invoke(SeelenCommand.SetAsWallpaper);
-    }, 5000);
+    relativeMonitors;
+    invoke(SeelenCommand.SetAsWallpaper);
   });
 });
 

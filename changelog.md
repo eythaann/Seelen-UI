@@ -33,6 +33,8 @@
 - dock drag and sorting not working properly.
 - dock full size not working on vertical mode.
 - twm flickering on stacks when manual uniminized a window from a stack in another workspace.
+- wallpaper incorrect size/position after monitor hotplug (stale virtual screen metrics).
+- widgets not being created/destroyed on monitors change.
 
 ## [2.7.4]
 

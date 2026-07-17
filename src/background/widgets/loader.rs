@@ -93,15 +93,17 @@ impl WidgetDeployment {
             }
             WidgetInstanceMode::ReplicaByMonitor => {
                 let configs = FULL_STATE.load();
+                let connected_ids = MonitorManager::instance().get_cached_ids();
 
-                // Remove disabled instances
+                // Remove disabled or disconnected instances
                 self.pods.retain(|(label, _)| {
                     let monitor_id = label.monitor_id.as_ref().expect("Missing monitor id");
-                    configs.is_widget_enable_on_monitor(&self.definition.id, monitor_id)
+                    connected_ids.contains(monitor_id)
+                        && configs.is_widget_enable_on_monitor(&self.definition.id, monitor_id)
                 });
 
                 // Add new/enabled instances
-                for monitor_id in MonitorManager::instance().get_cached_ids() {
+                for monitor_id in connected_ids {
                     if self
                         .pods
                         .any(|(label, _)| label.monitor_id.as_ref() == Some(&monitor_id))

@@ -107,21 +107,27 @@
     });
   });
 
-  const left = $derived(extended ? "0" : `${monitor.rect.left / globalThis.devicePixelRatio}px`);
-  const top = $derived(extended ? "0" : `${monitor.rect.top / globalThis.devicePixelRatio}px`);
+  const left = $derived(extended ? "0" : `${monitor.rect.left}px`);
+  const top = $derived(extended ? "0" : `${monitor.rect.top}px`);
+
   const width = $derived(
-    extended
-      ? "100%"
-      : `${(monitor.rect.right - monitor.rect.left) / globalThis.devicePixelRatio}px`,
+    extended ? "100%" : `${(monitor.rect.right - monitor.rect.left) / monitor.scaleFactor}px`,
   );
   const height = $derived(
-    extended
-      ? "100%"
-      : `${(monitor.rect.bottom - monitor.rect.top) / globalThis.devicePixelRatio}px`,
+    extended ? "100%" : `${(monitor.rect.bottom - monitor.rect.top) / monitor.scaleFactor}px`,
   );
 </script>
 
-<div class="monitor" style:position="fixed" style:left style:top style:width style:height>
+<div
+  class="monitor"
+  style:position="fixed"
+  style:left
+  style:top
+  style:width
+  style:height
+  style:transform={extended ? "" : `scale(${monitor.scaleFactor})`}
+  style:transform-origin="left top"
+>
   {#if slotAMounted}
     <div class="slot" style:z-index={activeSlot === "a" ? 2 : 1}>
       <Wallpaper

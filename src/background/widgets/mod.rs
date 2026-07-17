@@ -329,7 +329,9 @@ pub fn debug_open_dev_tools(label: String) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn register_app_bar(webview: tauri::WebviewWindow, rect: Rect, edge: AppBarEdge) -> Result<()> {
-    log::info!("Registering {} as Shell Bar", webview.label());
+    let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    log::info!(target: &label.decoded, "Registering as Shell Bar");
+
     let hwnd = HWND(webview.hwnd()?.0);
     let rect = RECT {
         left: rect.left,
@@ -346,7 +348,9 @@ pub fn register_app_bar(webview: tauri::WebviewWindow, rect: Rect, edge: AppBarE
 
 #[tauri::command(async)]
 pub fn unregister_app_bar(webview: tauri::WebviewWindow) -> Result<()> {
-    log::info!("Unregistering {} as Shell Bar", webview.label());
+    let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    log::info!(target: &label.decoded, "Unregistering as Shell Bar");
+
     let hwnd = HWND(webview.hwnd()?.0);
     let mut app_bar = AppBarData::from_handle(hwnd);
     app_bar.unregister_bar()?;
