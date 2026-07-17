@@ -1,10 +1,8 @@
-cargo-features = ["codegen-backend"]
-
 [profile.dev]
 debug = "full"
 strip = false
 opt-level = 0
-incremental = false
+incremental = true
 
 [profile.rust-analyzer]
 inherits = "dev"

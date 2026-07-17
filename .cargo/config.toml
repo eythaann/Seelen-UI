@@ -4,13 +4,5 @@ TS_RS_EXPORT_DIR = "./gen/types"
 TS_RS_IMPORT_EXTENSION = "ts"
 TS_RS_LARGE_INT = "number"
 
-[build]
-rustflags = ["-Z", "threads=8"]
-
-# rust-lld works well as the MSVC linker on Windows, but on Linux it needs a
-# full gcc/cc toolchain wired up to find libc/libgcc_s; using the default
-# linker there avoids "unable to find library -lgcc_s" build failures (e.g.
-# in CI's ubuntu-based js-test-and-linter job, which needs `cargo build` to
-# generate libs/core TS bindings).
 [target.x86_64-pc-windows-msvc]
-rustflags = ["-Z", "threads=8", "-C", "linker=rust-lld"]
+linker = "rust-lld.exe"
