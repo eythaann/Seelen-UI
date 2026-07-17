@@ -19,8 +19,21 @@ use crate::{
 
 impl WindowManagerV2 {
     fn should_be_managed(hwnd: HWND) -> bool {
+        Self::should_be_managed_impl(hwnd, true)
+    }
+
+    /// Same as [Self::should_be_managed] but ignoring the minimized state of the window.
+    ///
+    /// Used when building the initial layout on startup: windows on non-active workspaces are
+    /// minimized by the virtual desktop manager to hide them (see `VirtualDesktopMonitor::hide`),
+    /// but they should still occupy their tiled slot in their own workspace layout.
+    fn should_be_managed_ignoring_minimized(hwnd: HWND) -> bool {
+        Self::should_be_managed_impl(hwnd, false)
+    }
+
+    fn should_be_managed_impl(hwnd: HWND, check_minimized: bool) -> bool {
         let window = Window::from(hwnd);
-        if !window.is_interactable_and_not_hidden() || window.is_minimized() {
+        if !window.is_interactable_and_not_hidden() || (check_minimized && window.is_minimized()) {
             return false;
         }
 

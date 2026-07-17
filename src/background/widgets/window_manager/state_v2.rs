@@ -70,7 +70,7 @@ impl TwmState {
                 let mut tree = Self::create_tree(&workspace.id);
                 for &hwnd in &workspace.windows {
                     let window = Window::from(hwnd);
-                    if WindowManagerV2::should_be_managed(window.hwnd()) {
+                    if WindowManagerV2::should_be_managed_ignoring_minimized(window.hwnd()) {
                         let residual = tree.add_to_tiled(window.address());
                         for w in residual {
                             tree.add_to_floating(w);
