@@ -14,8 +14,7 @@
     toolbarActions,
     plugins,
     restoreStateToDefault,
-    HARDCODED_SEPARATOR_LEFT,
-    HARDCODED_SEPARATOR_RIGHT,
+    listToGroups,
   } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { hiddenByAutohide, setToolbarIsDraggingItem } from "../state/hidden.svelte.ts";
@@ -27,19 +26,17 @@
 
   // ── Derived splits ───────────────────────────────────────────────────────
 
-  const splittedItems = $derived.by(() => {
-    const items = toolbarState.items;
-    const idx1 = items.findIndex(
-      (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id,
-    );
-    const idx2 = items.findIndex(
-      (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id,
-    );
-    return {
-      left: items.slice(0, idx1),
-      center: items.slice(idx1, idx2 + 1),
-      right: items.slice(idx2 + 1),
-    };
+  const groups = $derived(listToGroups(toolbarState.items));
+
+  // dnd-kit's `move()` reorders by index within the full, unfiltered items
+  // array, so sortables must report their true index there, not their
+  // position within the (possibly filtered) rendered group.
+  const itemIndexById = $derived.by(() => {
+    const map = new Map<string, number>();
+    toolbarState.items.forEach((item, i) => {
+      map.set(typeof item === "string" ? item : item.id, i);
+    });
+    return map;
   });
 
   // ── Context menu ─────────────────────────────────────────────────────────
@@ -223,13 +220,9 @@
     onDragOver={handleDragOver}
     onDragEnd={handleDragEnd}
   >
-    <ItemsGroup id="left" items={splittedItems.left} startIndex={0} />
-    <ItemsGroup id="center" items={splittedItems.center} startIndex={splittedItems.left.length} />
-    <ItemsGroup
-      id="right"
-      items={splittedItems.right}
-      startIndex={splittedItems.left.length + splittedItems.center.length}
-    />
+    <ItemsGroup id="left" items={groups.left} {itemIndexById} />
+    <ItemsGroup id="center" items={groups.center} {itemIndexById} />
+    <ItemsGroup id="right" items={groups.right} {itemIndexById} />
 
     <DragOverlay>
       {#snippet children(source)}

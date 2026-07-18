@@ -9,11 +9,7 @@
   import { move } from "@dnd-kit/helpers";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { t } from "../i18n/index.ts";
-  import {
-    dockState,
-    HARDCODED_SEPARATOR_LEFT,
-    HARDCODED_SEPARATOR_RIGHT,
-  } from "../state/items.svelte.ts";
+  import { dockState, listToGroups } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
@@ -25,19 +21,15 @@
   import WegItemSwitch from "./WegItemSwitch.svelte";
 
   const settings = $derived(settingsState.value as any);
-  const isHorizontal = $derived(
-    settings?.position === "Top" || settings?.position === "Bottom",
-  );
+  const isHorizontal = $derived(settings?.position === "Top" || settings?.position === "Bottom");
 
   function isItemVisible(item: SwItem): boolean {
     const pinnedVisibility = settings?.pinnedItemsVisibility as WegPinnedItemsVisibility;
     const temporalVisibility = settings?.temporalItemsVisibility as WegTemporalItemsVisibility;
     const monitor = systemState.currentMonitor;
 
-    const showPinned =
-      pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
-    const filterByMonitor =
-      temporalVisibility === WegTemporalItemsVisibility.OnMonitor;
+    const showPinned = pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
+    const filterByMonitor = temporalVisibility === WegTemporalItemsVisibility.OnMonitor;
 
     const windows = filterByMonitor
       ? interactables.value.filter((w) => w.monitor === monitor.id)
@@ -54,17 +46,7 @@
 
   // splits the flat items array (left..., left-separator, center..., right-separator, ...right)
   // into their three groups, same as the toolbar does
-  const groupedItems = $derived.by(() => {
-    const items = dockState.items;
-    const idx1 = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_LEFT.id);
-    const idx2 = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
-    return {
-      left: items.slice(0, idx1),
-      center: items.slice(idx1, idx2 + 1),
-      right: items.slice(idx2 + 1),
-    };
-  });
-
+  const groupedItems = $derived(listToGroups(dockState.items));
   const visibleGroupedItems = $derived.by(() => ({
     left: groupedItems.left.filter(isItemVisible),
     center: groupedItems.center.filter(isItemVisible),

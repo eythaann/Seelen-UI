@@ -88,18 +88,25 @@ const emitSyncEvent = debounce((state: OptimisticDockState) => {
   emit<SyncPayload>("hidden::sync-dock-items", { source: CLIENT_ID, state });
 }, 300);
 
+export function listToGroups(items: WegItem[]) {
+  let idx1 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id);
+  let idx2 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id);
+  if (idx1 > idx2) {
+    [idx1, idx2] = [idx2, idx1];
+  }
+  return {
+    left: items.slice(0, idx1),
+    center: items.slice(idx1 + 1, idx2),
+    right: items.slice(idx2 + 1),
+  };
+}
+
 const saveDockState = debounce(async (state: OptimisticDockState) => {
   console.trace("Saving dock state");
-
-  const index1 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_LEFT.id);
-  const index2 = state.items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
-
   await invoke(SeelenCommand.StateWriteWegItems, {
     items: {
       isReorderDisabled: state.isReorderDisabled,
-      left: state.items.slice(0, index1),
-      center: state.items.slice(index1 + 1, index2),
-      right: state.items.slice(index2 + 1),
+      ...listToGroups(state.items),
     },
   });
 }, 1000);
@@ -161,19 +168,14 @@ export const dockStateActions = {
     if (!_dockState.items.some((i) => i.type === "Plugin" && i.plugin === plugin)) {
       _dockState = {
         ..._dockState,
-        items: [
-          ..._dockState.items,
-          { id: crypto.randomUUID(), type: "Plugin", plugin },
-        ],
+        items: [..._dockState.items, { id: crypto.randomUUID(), type: "Plugin", plugin }],
       };
     }
   },
   removePlugin(plugin: PluginId) {
     _dockState = {
       ..._dockState,
-      items: _dockState.items.filter(
-        (i) => !(i.type === "Plugin" && i.plugin === plugin),
-      ),
+      items: _dockState.items.filter((i) => !(i.type === "Plugin" && i.plugin === plugin)),
     };
   },
   /** Inserts a new separator next to whichever rendered item is closest to the given cursor position. */

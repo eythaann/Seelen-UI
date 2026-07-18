@@ -3,7 +3,7 @@ import type { PluginId, ToolbarItem, ToolbarItem2, ToolbarState } from "@seelen-
 import { matchIds } from "../utils.ts";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
-import { plugins, toolbarItems } from "./getters.svelte.ts";
+import { plugins, toolbarItems as SaveFile } from "./getters.svelte.ts";
 
 export { plugins };
 
@@ -46,13 +46,12 @@ export const HARDCODED_SEPARATOR_RIGHT: ToolbarItem = {
   style: { flexShrink: 0, opacity: 0 },
 };
 
-function splitItems(items: ToolbarItem2[]) {
-  const idx1 = items.findIndex(
-    (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id,
-  );
-  const idx2 = items.findIndex(
-    (i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id,
-  );
+export function listToGroups(items: ToolbarItem2[]) {
+  let idx1 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id);
+  let idx2 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id);
+  if (idx1 > idx2) {
+    [idx1, idx2] = [idx2, idx1];
+  }
   return {
     left: items.slice(0, idx1),
     center: items.slice(idx1 + 1, idx2),
@@ -60,20 +59,30 @@ function splitItems(items: ToolbarItem2[]) {
   };
 }
 
-export function getStateFromStored(state: ToolbarState): OptimisticToolbarState {
+function getStateFromStored(state: ToolbarState): OptimisticToolbarState {
+  // check used for duplicate ids/plugins
+  const seen = new Set<string>([HARDCODED_SEPARATOR_LEFT.id, HARDCODED_SEPARATOR_RIGHT.id]);
+  const sanitize = (items: ToolbarItem2[]) =>
+    items.filter((i) => {
+      const id = typeof i === "string" ? i : i.id;
+      if (seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+
   return {
     isReorderDisabled: state.isReorderDisabled,
     items: [
-      ...state.left,
+      ...sanitize(state.left),
       HARDCODED_SEPARATOR_LEFT,
-      ...state.center,
+      ...sanitize(state.center),
       HARDCODED_SEPARATOR_RIGHT,
-      ...state.right,
+      ...sanitize(state.right),
     ],
   };
 }
 
-let _toolbarState = $state(getStateFromStored(toolbarItems.value));
+let _toolbarState = $state(getStateFromStored(SaveFile.value));
 
 export const toolbarState = {
   get isReorderDisabled() {
@@ -141,7 +150,7 @@ const emitSyncEvent = debounce((state: OptimisticToolbarState) => {
 
 const saveTbState = debounce(async (state: OptimisticToolbarState) => {
   console.trace("Saving toolbar state");
-  const { left, center, right } = splitItems(state.items);
+  const { left, center, right } = listToGroups(state.items);
   await invoke(SeelenCommand.StateWriteToolbarItems, {
     items: { isReorderDisabled: state.isReorderDisabled, left, center, right },
   });
@@ -162,7 +171,7 @@ $effect.root(() => {
       return;
     }
 
-    const { left, center, right } = splitItems(state.items);
+    const { left, center, right } = listToGroups(state.items);
     if (left.length === 0 && center.length === 0 && right.length === 0) {
       restoreStateToDefault();
       return;
