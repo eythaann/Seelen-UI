@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Simgeyi Düzenle
   remove_module: Modülü Kaldır
+  remove_separator: Ayırıcıyı Kaldır
   reorder_disable: Görev çubuğunu kilitle
   reorder_enable: Görev çubuğunun kilidini aç
 media:
@@ -26,16 +27,14 @@ start:
   label: Başlat Menüsü
 taskbar_menu:
   add_file: Özel Dosya Sabitle
-  desktop: Masaüstü Modülü Ekle
-  media: Medya Modülü Ekle
+  add_separator: Ayırıcı Ekle
+  media: Medya Oynatıcı
+  modules: Modüller
   settings: Ayarlar
-  start: Başlat Modülü Ekle
   task_manager: Görev Yöneticisi
-  trash_bin: Geri Dönüşüm Kutusu Modülü Ekle
 trash_bin:
-  edit_icon_empty: Simgeyi Düzenle (Boş)
-  edit_icon_full: Simgeyi Düzenle (Tam)
   empty_bin: Geri Dönüşüm Kutusunu Boşalt
+  item_count: '{{0}} öğe'
   label: Geri Dönüşüm Kutusu
 weg:
   empty: Gösterilecek öğe yok

@@ -398,7 +398,6 @@ weg:
       all: All
       label: Unpinned Elementer Visibilitéit
       on_monitor: Op Monitor
-    visible_separators: Sechsi seichtbar Seperure
   label: Dock / Taskbar
   margin: Den Jean-Margin
   mode:

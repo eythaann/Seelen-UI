@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Editatu ikonoa
   remove_module: Kendu modulua
+  remove_separator: Kendu bereizlea
   reorder_disable: Blokeatu ataza barra
   reorder_enable: Desblokeatu ataza barra
 media:
@@ -26,16 +27,14 @@ start:
   label: Hasi menua
 taskbar_menu:
   add_file: PIN fitxategi pertsonalizatua
-  desktop: Gehitu mahaigaineko modulua
-  media: Gehitu multimedia modulua
+  add_separator: Gehitu bereizlea
+  media: Multimedia erreproduzitzailea
+  modules: Moduluak
   settings: Ezarpenak
-  start: Gehitu abiapuntu modulua
   task_manager: Zereginen kudeatzailea
-  trash_bin: Gehitu Zaborrontzia Modulua
 trash_bin:
-  edit_icon_empty: Editatu ikonoa (hutsik)
-  edit_icon_full: Editatu ikonoa (osoa)
   empty_bin: Hustu zakarrontzira
+  item_count: '{{0}} elementu'
   label: Birziklatzeko paperontzia
 weg:
   empty: Ez dago erakusteko elementurik

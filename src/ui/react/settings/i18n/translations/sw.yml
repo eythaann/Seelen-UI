@@ -393,7 +393,6 @@ weg:
       all: Wote
       label: Mwonekano wa Vipengee Vilivyobanduliwa
       on_monitor: Kwenye Monitor
-    visible_separators: Watenganisho unaoonekana
   label: Dock/Taskbar
   margin: Margin
   mode:

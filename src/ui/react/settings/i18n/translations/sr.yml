@@ -402,7 +402,6 @@ weg:
       all: Све
       label: Видљивост откачених ставки
       on_monitor: На монитору
-    visible_separators: Видљиви сепаратори
   label: Доцк / трака задатака
   margin: Маргина
   mode:

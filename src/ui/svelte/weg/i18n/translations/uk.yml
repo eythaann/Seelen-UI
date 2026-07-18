@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Значок редагування
   remove_module: Видалити модуль
+  remove_separator: Видалити роздільник
   reorder_disable: Блокування панелі завдань
   reorder_enable: Розблокувати панель завдань
 media:
@@ -26,16 +27,14 @@ start:
   label: Меню Пуск
 taskbar_menu:
   add_file: Закріпити власний файл
-  desktop: Додайте модуль робочого столу
-  media: Додати медіа модуль
+  add_separator: Додати роздільник
+  media: Медіаплеєр
+  modules: Модулі
   settings: Налаштування
-  start: Додати кнопку Пуск
   task_manager: Диспетчер задач
-  trash_bin: Додайте модуль кошика
 trash_bin:
-  edit_icon_empty: Значок редагування (порожній)
-  edit_icon_full: Значок редагування (повний)
   empty_bin: Очистити корзину
+  item_count: '{{0}} елементів'
   label: Кошик
 weg:
   empty: Немає елементів для показу

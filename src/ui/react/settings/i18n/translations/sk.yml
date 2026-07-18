@@ -402,7 +402,6 @@ weg:
       all: Všetky
       label: Viditeľnosť nepripnutých položiek
       on_monitor: Na monitore
-    visible_separators: Viditeľné oddeľovače
   label: Prístavný panel
   margin: Okraj
   mode:

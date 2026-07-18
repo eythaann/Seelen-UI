@@ -357,7 +357,6 @@ weg:
       all: 全部
       label: 未鎖定的物品可見性
       on_monitor: 在顯示器上
-    visible_separators: 可見的分割符號
   label: Dock
   margin: 邊距
   mode:

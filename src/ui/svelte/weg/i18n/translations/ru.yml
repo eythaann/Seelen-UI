@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Значок редактирования
   remove_module: Удалить модуль
+  remove_separator: Удалить разделитель
   reorder_disable: Заблокировать панель
   reorder_enable: Разблокировать панель
 media:
@@ -26,16 +27,14 @@ start:
   label: Меню «Пуск»
 taskbar_menu:
   add_file: Добавить файл
-  desktop: Добавить модуль рабочего стола
-  media: Добавить модуль медиа
+  add_separator: Добавить разделитель
+  media: Медиаплеер
+  modules: Модули
   settings: Настройки
-  start: Добавить модуль «Пуск»
   task_manager: Диспетчер задач
-  trash_bin: Добавить модуль корзины
 trash_bin:
-  edit_icon_empty: Значок редактирования (пустой)
-  edit_icon_full: Значок редактирования (полный)
   empty_bin: Пустая корзина
+  item_count: "{{0}}\_элементов"
   label: Корзина
 weg:
   empty: Нет элементов для отображения

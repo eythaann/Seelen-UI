@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: แก้ไขไอคอน
   remove_module: ถอดโมดูลออก
+  remove_separator: ลบตัวคั่น
   reorder_disable: ล็อคแถบงาน
   reorder_enable: ปลดล็อกแถบงาน
 media:
@@ -26,16 +27,14 @@ start:
   label: เมนูเริ่ม
 taskbar_menu:
   add_file: ไฟล์ที่กำหนดเองพิน
-  desktop: เพิ่มโมดูลเดสก์ท็อป
-  media: เพิ่มโมดูลสื่อ
+  add_separator: เพิ่มตัวคั่น
+  media: เครื่องเล่นมีเดีย
+  modules: โมดูล
   settings: การตั้งค่า
-  start: เพิ่มโมดูลเริ่มต้น
   task_manager: ตัวจัดการงาน
-  trash_bin: เพิ่มโมดูลถังรีไซเคิล
 trash_bin:
-  edit_icon_empty: แก้ไขไอคอน (ว่าง)
-  edit_icon_full: แก้ไขไอคอน (เต็ม)
   empty_bin: ถังรีไซเคิลว่างเปล่า
+  item_count: '{{0}} รายการ'
   label: ถังขยะรีไซเคิล
 weg:
   empty: ไม่มีรายการที่จะแสดง

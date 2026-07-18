@@ -397,7 +397,6 @@ weg:
       all: Almal
       label: Sigbaarheid van ontspelde items
       on_monitor: Op Monitor
-    visible_separators: Sigbare skeiers
   label: Dock/Taakbalk
   margin: Marge
   mode:

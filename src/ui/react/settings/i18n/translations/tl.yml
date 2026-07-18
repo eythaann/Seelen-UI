@@ -408,7 +408,6 @@ weg:
       all: Lahat
       label: Visibility ng Mga Na-unpin na Item
       on_monitor: Sa Monitor
-    visible_separators: Visible Separator
   label: Dock/Taskbar
   margin: Margin
   mode:

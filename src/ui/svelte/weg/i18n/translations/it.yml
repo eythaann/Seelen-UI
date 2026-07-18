@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Modifica icona
   remove_module: Rimuovi modulo
+  remove_separator: Rimuovere il separatore
   reorder_disable: Blocco della barra delle applicazioni
   reorder_enable: Sbloccare la barra delle applicazioni
 media:
@@ -26,16 +27,14 @@ start:
   label: Menù di avvio
 taskbar_menu:
   add_file: Aggiungi File Personalizzato
-  desktop: Aggiungi modulo desktop
-  media: Aggiungi Modulo Media
+  add_separator: Aggiungi separatore
+  media: Lettore multimediale
+  modules: Moduli
   settings: Impostazioni
-  start: Aggiungi Modulo Start
   task_manager: Gestione Attività
-  trash_bin: Aggiungi il modulo Cestino
 trash_bin:
-  edit_icon_empty: Modifica icona (vuota)
-  edit_icon_full: Modifica icona (completa)
   empty_bin: Cestino vuoto
+  item_count: '{{0}} elementi'
   label: Cestino
 weg:
   empty: Nessun elemento da mostrare

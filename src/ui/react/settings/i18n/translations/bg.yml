@@ -403,7 +403,6 @@ weg:
       all: Всички
       label: Видимост на незакрепените елементи
       on_monitor: На монитора
-    visible_separators: Видими разделители
   label: Док/лента на задачите
   margin: Марж
   mode:

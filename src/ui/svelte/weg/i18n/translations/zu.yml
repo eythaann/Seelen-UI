@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Hlela Isithonjana
   remove_module: Susa Imojuli
+  remove_separator: Susa Isihlukanisi
   reorder_disable: Khiya i-taskbar
   reorder_enable: Vula i-Taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Qala Imenyu
 taskbar_menu:
   add_file: I-PIN ifayela ngokwezifiso
-  desktop: Engeza Imojula yedeskithophu
-  media: Faka imodyuli yabezindaba
+  add_separator: Engeza isihlukanisi
+  media: Isidlali Semidiya
+  modules: Amamojula
   settings: Izilungiselelo
-  start: Faka imodyuli yokuqala
   task_manager: Umphathi Womsebenzi
-  trash_bin: Engeza i-Recycle Bin Module
 trash_bin:
-  edit_icon_empty: Hlela Isithonjana (Akunalutho)
-  edit_icon_full: Hlela Isithonjana (Sigcwele)
   empty_bin: I-Recycle Bin engenalutho
+  item_count: '{{0}} izinto'
   label: Ubhini wokulahla udoti
 weg:
   empty: Azikho izinto ezizoboniswa

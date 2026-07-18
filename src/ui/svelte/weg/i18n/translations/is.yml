@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Breyta táknmynd
   remove_module: Fjarlægðu einingu
+  remove_separator: Fjarlægðu skiljuna
   reorder_disable: Læstu verkstiku
   reorder_enable: Opnaðu verkefnastiku
 media:
@@ -26,16 +27,14 @@ start:
   label: Start Valmynd
 taskbar_menu:
   add_file: Pinna sérsniðna skrá
-  desktop: Bæta við skrifborðseiningu
-  media: Bættu við Media Module
+  add_separator: Bæta við skilju
+  media: Fjölmiðlaspilari
+  modules: Einingar
   settings: Stillingar
-  start: Bættu við Start Module
   task_manager: Verkefnastjóri
-  trash_bin: Bæta við ruslatunnueiningu
 trash_bin:
-  edit_icon_empty: Breyta táknmynd (tómt)
-  edit_icon_full: Breyta táknmynd (fullt)
   empty_bin: Tóm ruslatunnu
+  item_count: '{{0}} atriði'
   label: Ruslatunna
 weg:
   empty: Engin atriði til að sýna

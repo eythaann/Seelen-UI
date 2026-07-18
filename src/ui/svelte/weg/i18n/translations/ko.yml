@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: 아이콘 편집
   remove_module: 모듈 제거
+  remove_separator: 구분 기호 제거
   reorder_disable: 작업 표시줄 잠금
   reorder_enable: 작업 표시줄 잠금 해제
 media:
@@ -26,16 +27,14 @@ start:
   label: 시작 메뉴
 taskbar_menu:
   add_file: 사용자 정의 파일 추가
-  desktop: 데스크탑 모듈 추가
-  media: 미디어 모듈 추가
+  add_separator: 구분 기호 추가
+  media: 미디어 플레이어
+  modules: 모듈
   settings: 설정
-  start: 시작 버튼 추가
   task_manager: 작업 관리자
-  trash_bin: 휴지통 모듈 추가
 trash_bin:
-  edit_icon_empty: 편집 아이콘(비어 있음)
-  edit_icon_full: 아이콘 편집(전체)
   empty_bin: 휴지통 비우기
+  item_count: '{{0}}개 항목'
   label: 휴지통
 weg:
   empty: 표시할 항목이 없습니다.

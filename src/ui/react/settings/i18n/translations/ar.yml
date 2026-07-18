@@ -384,7 +384,6 @@ weg:
       all: الجميع
       label: رؤية العناصر غير المثبتة
       on_monitor: على الشاشة
-    visible_separators: الفواصل المرئية
   label: قفص الاتهام / شريط المهام
   margin: الهامش
   mode:

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Icona d'edició
   remove_module: Elimina el mòdul
+  remove_separator: Elimina el separador
   reorder_disable: Barra de tasques de bloqueig
   reorder_enable: Desbloqueja la barra de tasques
 media:
@@ -26,16 +27,14 @@ start:
   label: Menú d'inici
 taskbar_menu:
   add_file: Pin el fitxer personalitzat
-  desktop: Afegeix un mòdul d'escriptori
-  media: Afegiu el mòdul de suports
+  add_separator: Afegeix un separador
+  media: Reproductor multimèdia
+  modules: Mòduls
   settings: Configuració
-  start: Afegiu el mòdul d'inici
   task_manager: Gestor de tasques
-  trash_bin: Afegiu el mòdul de la paperera de reciclatge
 trash_bin:
-  edit_icon_empty: Icona d'edició (buida)
-  edit_icon_full: Icona d'edició (completa)
   empty_bin: Buida la paperera de reciclatge
+  item_count: '{{0}} elements'
   label: Paperera de reciclatge
 weg:
   empty: No hi ha elements per mostrar

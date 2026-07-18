@@ -398,7 +398,6 @@ weg:
       all: Visi
       label: Atsprausto vienumu redzamība
       on_monitor: Uz monitora
-    visible_separators: Redzami atdalītāji
   label: Doks/uzdevumjosla
   margin: Robeža
   mode:

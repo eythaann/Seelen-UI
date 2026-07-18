@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Επεξεργασία εικονιδίου
   remove_module: Αφαιρέστε τη μονάδα
+  remove_separator: Αφαιρέστε το διαχωριστικό
   reorder_disable: Κλείδωμα γραμμής εργασιών
   reorder_enable: Ξεκλείδωμα της γραμμής εργασιών
 media:
@@ -26,16 +27,14 @@ start:
   label: Μενού Έναρξη
 taskbar_menu:
   add_file: PIN προσαρμοσμένο αρχείο
-  desktop: Προσθήκη μονάδας επιφάνειας εργασίας
-  media: Προσθήκη ενότητας μέσων
+  add_separator: Προσθήκη διαχωριστικού
+  media: Media Player
+  modules: Ενότητες
   settings: Ρυθμίσεις
-  start: Προσθήκη μονάδας εκκίνησης
   task_manager: Task Manager
-  trash_bin: Προσθήκη μονάδας κάδου ανακύκλωσης
 trash_bin:
-  edit_icon_empty: Εικονίδιο επεξεργασίας (κενό)
-  edit_icon_full: Εικονίδιο επεξεργασίας (πλήρες)
   empty_bin: Άδειος Κάδος Ανακύκλωσης
+  item_count: '{{0}} στοιχεία'
   label: Κάδος Ανακύκλωσης
 weg:
   empty: Δεν υπάρχουν στοιχεία για εμφάνιση

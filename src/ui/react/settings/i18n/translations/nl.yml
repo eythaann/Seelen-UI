@@ -401,7 +401,6 @@ weg:
       all: Alle
       label: Zichtbaarheid van losgemaakte items
       on_monitor: Op monitor
-    visible_separators: Zichtbare scheiders
   label: Dock/taakbalk
   margin: Marge
   mode:

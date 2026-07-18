@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: آئیکن میں ترمیم کریں۔
   remove_module: ماڈیول کو ہٹا دیں
+  remove_separator: الگ کرنے والا ہٹا دیں۔
   reorder_disable: لاک ٹاسک بار
   reorder_enable: ٹاسک بار کو غیر مقفل کریں
 media:
@@ -26,16 +27,14 @@ start:
   label: مینو شروع کریں
 taskbar_menu:
   add_file: کسٹم فائل کو پن کریں
-  desktop: ڈیسک ٹاپ ماڈیول شامل کریں
-  media: میڈیا ماڈیول شامل کریں
+  add_separator: الگ کرنے والا شامل کریں۔
+  media: میڈیا پلیئر
+  modules: ماڈیولز
   settings: ترتیبات
-  start: اسٹارٹ ماڈیول شامل کریں
   task_manager: ٹاسک مینیجر
-  trash_bin: ری سائیکل بن ماڈیول شامل کریں۔
 trash_bin:
-  edit_icon_empty: آئیکن میں ترمیم کریں (خالی)
-  edit_icon_full: آئیکن میں ترمیم کریں (مکمل)
   empty_bin: خالی ری سائیکل بن
+  item_count: '{{0}} آئٹمز'
   label: ری سائیکل بن
 weg:
   empty: دکھانے کے لیے کوئی آئٹمز نہیں۔

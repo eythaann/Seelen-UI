@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: 編輯圖示
   remove_module: 移除模塊
+  remove_separator: 刪除分隔符
   reorder_disable: 鎖任務欄
   reorder_enable: 解鎖任務欄
 media:
@@ -26,16 +27,14 @@ start:
   label: 開始選單
 taskbar_menu:
   add_file: 引導自定義文件
-  desktop: 添加桌面模塊
-  media: 添加媒體模塊
+  add_separator: 新增分隔符
+  media: 媒體播放器
+  modules: 模組
   settings: 設定
-  start: 添加開始模塊
   task_manager: 工作管理員
-  trash_bin: 新增回收站模組
 trash_bin:
-  edit_icon_empty: 編輯圖示（空）
-  edit_icon_full: 編輯圖示（完整）
   empty_bin: 清空回收站
+  item_count: '{{0}} 項'
   label: 回收站
 weg:
   empty: 沒有顯示的物品

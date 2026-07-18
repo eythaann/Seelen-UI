@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: सम्पादन आइकन
   remove_module: मोड्युल हटाउनुहोस्
+  remove_separator: विभाजक हटाउनुहोस्
   reorder_disable: लक टकबार लक
   reorder_enable: टास्कबार अनलक गर्नुहोस्
 media:
@@ -26,16 +27,14 @@ start:
   label: सुरु मेनु
 taskbar_menu:
   add_file: पिन अनुकूलन फाइल
-  desktop: डेस्कटप मोड्युल थप्नुहोस्
-  media: मिडिया मोड्युल थप्नुहोस्
+  add_separator: विभाजक थप्नुहोस्
+  media: मिडिया प्लेयर
+  modules: मोड्युलहरू
   settings: सेटिङहरू
-  start: स्टार्ट मोड्युल थप्नुहोस्
   task_manager: कार्य प्रबन्धक
-  trash_bin: रिसायकल बिन मोड्युल थप्नुहोस्
 trash_bin:
-  edit_icon_empty: सम्पादन आइकन (खाली)
-  edit_icon_full: सम्पादन आइकन (पूर्ण)
   empty_bin: रिसायकल बिन खाली गर्नुहोस्
+  item_count: '{{0}} वस्तुहरू'
   label: रिसायकल बिन
 weg:
   empty: देखाउनका लागि कुनै वस्तुहरू छैनन्

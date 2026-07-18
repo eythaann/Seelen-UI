@@ -401,7 +401,6 @@ weg:
       all: Todos
       label: Visibilidade de itens não fixados
       on_monitor: No monitor
-    visible_separators: Separadores Visíveis
   label: Dock/barra de tarefas
   margin: Margem
   mode:

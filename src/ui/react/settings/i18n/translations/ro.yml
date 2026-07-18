@@ -402,7 +402,6 @@ weg:
       all: Toate
       label: Vizibilitatea elementelor nefixate
       on_monitor: Pe monitor
-    visible_separators: Separatoare vizibile
   label: Dock/Bara de activități
   margin: Marjă
   mode:

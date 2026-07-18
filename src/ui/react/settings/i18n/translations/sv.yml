@@ -396,7 +396,6 @@ weg:
       all: Alla
       label: Synlighet för lossade objekt
       on_monitor: På bildskärm
-    visible_separators: Synliga separatorer
   label: Docka/arbetsfält
   margin: Marginal
   mode:

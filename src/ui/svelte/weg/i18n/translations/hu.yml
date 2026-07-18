@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Szerkesztés ikon
   remove_module: Modul eltávolítása
+  remove_separator: Távolítsa el az elválasztót
   reorder_disable: Feladatsáv zárolása
   reorder_enable: Feloldja a tálcát
 media:
@@ -26,16 +27,14 @@ start:
   label: Start menü
 taskbar_menu:
   add_file: Pin egyedi fájl
-  desktop: Asztali modul hozzáadása
-  media: Adjon hozzá média modult
+  add_separator: Elválasztó hozzáadása
+  media: Médialejátszó
+  modules: Modulok
   settings: Beállítások elemre
-  start: Adja hozzá a Start modult
   task_manager: Feladatkezelő
-  trash_bin: Adja hozzá a Lomtár modult
 trash_bin:
-  edit_icon_empty: Szerkesztési ikon (üres)
-  edit_icon_full: Szerkesztési ikon (teljes)
   empty_bin: Ürítse ki a Lomtárat
+  item_count: '{{0}} elem'
   label: Lomtár
 weg:
   empty: Nincs megjeleníthető elem

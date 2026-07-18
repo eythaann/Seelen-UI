@@ -396,7 +396,6 @@ weg:
       all: Hamısı
       label: Saxlanmamış Elementlərin Görünüşü
       on_monitor: Monitorda
-    visible_separators: Görünən ayırıcılar
   label: Dock / tapşırıq çubuğu
   margin: Kənarə
   mode:

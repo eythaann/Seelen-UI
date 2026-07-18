@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Hariri Ikoni
   remove_module: Ondoa Moduli
+  remove_separator: Ondoa Kitenganishi
   reorder_disable: Lock Taskbar
   reorder_enable: Fungua Taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Anza Menyu
 taskbar_menu:
   add_file: Piga faili ya kawaida
-  desktop: Ongeza Moduli ya Eneo-kazi
-  media: Ongeza moduli ya media
+  add_separator: Ongeza Kitenganishi
+  media: Kicheza media
+  modules: Moduli
   settings: Mipangilio
-  start: Ongeza moduli ya kuanza
   task_manager: Meneja wa Kazi
-  trash_bin: Ongeza moduli ya Recycle Bin
 trash_bin:
-  edit_icon_empty: Hariri Ikoni (Tupu)
-  edit_icon_full: Hariri Ikoni (Imejaa)
   empty_bin: Bin Tupu ya Kusaga
+  item_count: Vipengee {{0}}
   label: Recycle Bin
 weg:
   empty: Hakuna vipengee vya kuonyesha

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Edit Ikon
   remove_module: Keluarkan Modul
+  remove_separator: Keluarkan Pemisah
   reorder_disable: Kunci bar tugas
   reorder_enable: Buka kunci bar tugas
 media:
@@ -26,16 +27,14 @@ start:
   label: Menu Mula
 taskbar_menu:
   add_file: Fail tersuai pin
-  desktop: Tambah Modul Desktop
-  media: Tambah Modul Media
+  add_separator: Tambah Pemisah
+  media: Pemain Media
+  modules: Modul
   settings: tetapan
-  start: Tambah Modul Mula
   task_manager: Pengurus Tugas
-  trash_bin: Tambah Modul Tong Kitar Semula
 trash_bin:
-  edit_icon_empty: Edit Ikon (Kosong)
-  edit_icon_full: Ikon Edit (Penuh)
   empty_bin: Tong Kitar Semula Kosong
+  item_count: '{{0}} item'
   label: Tong Kitar Semula
 weg:
   empty: Tiada item untuk ditunjukkan

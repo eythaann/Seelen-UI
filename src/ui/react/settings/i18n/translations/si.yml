@@ -394,7 +394,6 @@ weg:
       all: සියල්ල
       label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව
       on_monitor: මොනිටරය මත
-    visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
   label: ඩොක්/කාර්ය තීරුව
   margin: ආන්තිකය
   mode:

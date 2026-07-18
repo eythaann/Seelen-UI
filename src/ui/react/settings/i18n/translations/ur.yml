@@ -397,7 +397,6 @@ weg:
       all: تمام
       label: ان پن کردہ آئٹمز کی مرئیت
       on_monitor: مانیٹر پر
-    visible_separators: مرئی جداکار
   label: ٹاسک بار
   margin: مارجن
   mode:

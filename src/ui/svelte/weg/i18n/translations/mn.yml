@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Засварлах дүрс
   remove_module: Модуль устгах
+  remove_separator: Тусгаарлагчийг арилгах
   reorder_disable: Түгжих ажлын самбар
   reorder_enable: Taskbar түгжээг тайл
 media:
@@ -26,16 +27,14 @@ start:
   label: Эхлэх цэс
 taskbar_menu:
   add_file: PIN захиалгын файл
-  desktop: Ширээний модуль нэмнэ үү
-  media: Медиа модулийг нэмнэ
+  add_separator: Тусгаарлагч нэмэх
+  media: Медиа тоглуулагч
+  modules: Модулиуд
   settings: Тохиргоо
-  start: Эхлэх модулийг нэмнэ үү
   task_manager: Ажлын менежер
-  trash_bin: Хогийн савны модулийг нэмнэ үү
 trash_bin:
-  edit_icon_empty: Засварлах дүрс (хоосон)
-  edit_icon_full: Засварлах дүрс (бүтэн)
   empty_bin: Хогийн савыг хоосон
+  item_count: '{{0}} зүйл'
   label: Хогийн сав
 weg:
   empty: Үзүүлэх зүйл алга

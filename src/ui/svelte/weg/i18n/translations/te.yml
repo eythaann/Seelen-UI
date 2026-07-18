@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: సవరణ చిహ్నం
   remove_module: మాడ్యూల్‌ని తీసివేయండి
+  remove_separator: సెపరేటర్‌ని తీసివేయండి
   reorder_disable: టాస్క్‌బార్ లాక్
   reorder_enable: టాస్క్‌బార్‌ను అన్‌లాక్ చేయండి
 media:
@@ -26,16 +27,14 @@ start:
   label: ప్రారంభ మెను
 taskbar_menu:
   add_file: కస్టమ్ ఫైల్‌ను పిన్ చేయండి
-  desktop: డెస్క్‌టాప్ మాడ్యూల్‌ని జోడించండి
-  media: మీడియా మాడ్యూల్ జోడించండి
+  add_separator: సెపరేటర్‌ని జోడించండి
+  media: మీడియా ప్లేయర్
+  modules: మాడ్యూల్స్
   settings: సెట్టింగ్‌లు
-  start: ప్రారంభ మాడ్యూల్ జోడించండి
   task_manager: టాస్క్ మేనేజర్
-  trash_bin: రీసైకిల్ బిన్ మాడ్యూల్ జోడించండి
 trash_bin:
-  edit_icon_empty: సవరణ చిహ్నం (ఖాళీ)
-  edit_icon_full: సవరణ చిహ్నం (పూర్తి)
   empty_bin: ఖాళీ రీసైకిల్ బిన్
+  item_count: '{{0}} అంశాలు'
   label: రీసైకిల్ బిన్
 weg:
   empty: చూపడానికి అంశాలు లేవు

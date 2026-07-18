@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Ṣatunkọ Aami
   remove_module: Yọ Module kuro
+  remove_separator: Yọ Iyapa kuro
   reorder_disable: Nutbar tiipa
   reorder_enable: Ṣii ṣiṣẹ Iṣẹ-ṣiṣe Ṣii silẹ
 media:
@@ -26,16 +27,14 @@ start:
   label: Bẹrẹ Akojọ aṣyn
 taskbar_menu:
   add_file: Faili aṣa
-  desktop: Fi Ojú-iṣẹ Module
-  media: Ṣafikun module Media
+  add_separator: Fi Separator
+  media: Media Player
+  modules: Awọn modulu
   settings: Eto
-  start: Ṣafikun module Bẹrẹ
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
-  trash_bin: Fi Atunlo Bin Module
 trash_bin:
-  edit_icon_empty: Ṣatunkọ Aami (Ofo)
-  edit_icon_full: Aami Ṣatunkọ (Kikun)
   empty_bin: Ofo atunlo Bin
+  item_count: '{0}} nkan'
   label: Atunlo Bin
 weg:
   empty: Ko si awọn nkan lati ṣafihan

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Едит Ицон
   remove_module: Уклоните модул
+  remove_separator: Уклоните сепаратор
   reorder_disable: Закључајте траку задатака
   reorder_enable: Откључајте траку задатака
 media:
@@ -26,16 +27,14 @@ start:
   label: Старт Мену
 taskbar_menu:
   add_file: ПИН Прилагођена датотека
-  desktop: Додајте модул радне површине
-  media: Додајте медијски модул
+  add_separator: Додај сепаратор
+  media: Медиа Плаиер
+  modules: Модули
   settings: Подешавања
-  start: Додајте почетни модул
   task_manager: Таск Манагер
-  trash_bin: Додајте модул корпе за отпатке
 trash_bin:
-  edit_icon_empty: Икона за уређивање (празно)
-  edit_icon_full: Икона за уређивање (пуна)
   empty_bin: Празна корпа за отпатке
+  item_count: '{{0}} ставки'
   label: Рецицле Бин
 weg:
   empty: Нема ставки за приказ

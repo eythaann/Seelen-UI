@@ -394,7 +394,6 @@ weg:
       all: Kõik
       label: Kinnitamata üksuste nähtavus
       on_monitor: Monitoril
-    visible_separators: Nähtavad eraldajad
   label: Dokk/ülesanderiba
   margin: Marginaal
   mode:

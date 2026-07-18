@@ -398,7 +398,6 @@ weg:
       all: Semua
       label: Keterlihatan Item Dinyahsemat
       on_monitor: Pada Monitor
-    visible_separators: Pemisah yang kelihatan
   label: Dock/Taskbar
   margin: Margin
   mode:

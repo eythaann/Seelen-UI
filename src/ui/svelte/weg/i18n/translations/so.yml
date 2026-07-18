@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Wax ka beddel astaanta
   remove_module: Ka saar Module
+  remove_separator: Kala saar
   reorder_disable: Qufulka Qufulka
   reorder_enable: Unlock Taskbarbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Bilow Menu
 taskbar_menu:
   add_file: Faylka caadada PIN
-  desktop: Kudar Module Desktop
-  media: Ku dar module warbaahinta
+  add_separator: Ku dar kala saare
+  media: Ciyaartoyga Warbaahinta
+  modules: Modules
   settings: Dejinta
-  start: Ku dar cutubka bilowga
   task_manager: Maareeyaha Hawsha
-  trash_bin: Kudar Dib-u-warshadaynta Bin Module
 trash_bin:
-  edit_icon_empty: Wax ka beddel astaanta (madhan)
-  edit_icon_full: Wax ka beddel astaanta (Full)
   empty_bin: Dib u warshadaynta madhan
+  item_count: '{{0}} walxaha'
   label: Dib u warshadaynta bin
 weg:
   empty: Ma jiraan waxyaabo la tuso

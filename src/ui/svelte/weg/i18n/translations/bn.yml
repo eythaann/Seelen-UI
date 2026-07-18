@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: আইকন সম্পাদনা করুন
   remove_module: মডিউল সরান
+  remove_separator: বিভাজক সরান
   reorder_disable: লক টাস্কবার
   reorder_enable: টাস্কবার আনলক করুন
 media:
@@ -26,16 +27,14 @@ start:
   label: স্টার্ট মেনু
 taskbar_menu:
   add_file: কাস্টম ফাইল পিন করুন
-  desktop: ডেস্কটপ মডিউল যোগ করুন
-  media: মিডিয়া মডিউল যুক্ত করুন
+  add_separator: বিভাজক যোগ করুন
+  media: মিডিয়া প্লেয়ার
+  modules: মডিউল
   settings: সেটিংস
-  start: স্টার্ট মডিউল যুক্ত করুন
   task_manager: টাস্ক ম্যানেজার
-  trash_bin: রিসাইকেল বিন মডিউল যোগ করুন
 trash_bin:
-  edit_icon_empty: আইকন সম্পাদনা করুন (খালি)
-  edit_icon_full: আইকন সম্পাদনা করুন (সম্পূর্ণ)
   empty_bin: খালি রিসাইকেল বিন
+  item_count: '{{0}}টি আইটেম'
   label: রিসাইকেল বিন
 weg:
   empty: দেখানোর জন্য কোনো আইটেম নেই

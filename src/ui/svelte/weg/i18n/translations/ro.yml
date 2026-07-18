@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Editare pictogramă
   remove_module: Eliminați modulul
+  remove_separator: Scoateți separatorul
   reorder_disable: Blocarea barei de activități
   reorder_enable: Deblocați bara de activități
 media:
@@ -26,16 +27,14 @@ start:
   label: Meniul Start
 taskbar_menu:
   add_file: Fișier personalizat
-  desktop: Adăugați modul desktop
-  media: Adăugați modul media
+  add_separator: Adăugați separator
+  media: Media Player
+  modules: Module
   settings: Setări
-  start: Adăugați modulul de pornire
   task_manager: Manager de activități
-  trash_bin: Adăugați modulul Coș de reciclare
 trash_bin:
-  edit_icon_empty: Pictograma Editați (goală)
-  edit_icon_full: Pictograma Editați (complet)
   empty_bin: Goliți coșul de reciclare
+  item_count: '{{0}} articole'
   label: Coșul de reciclare
 weg:
   empty: Nu există elemente de afișat

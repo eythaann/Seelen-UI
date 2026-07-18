@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Redigera ikon
   remove_module: Ta bort modulen
+  remove_separator: Ta bort separatorn
   reorder_disable: Lås aktivitetsfältet
   reorder_enable: Lås upp aktivitetsfältet
 media:
@@ -26,16 +27,14 @@ start:
   label: Startmenyn
 taskbar_menu:
   add_file: Pin Custom File
-  desktop: Lägg till skrivbordsmodul
-  media: Lägg till mediemodul
+  add_separator: Lägg till separator
+  media: Mediaspelare
+  modules: Moduler
   settings: Inställningar
-  start: Lägg till startmodul
   task_manager: Task Manager
-  trash_bin: Lägg till papperskorgsmodul
 trash_bin:
-  edit_icon_empty: Redigera ikon (tom)
-  edit_icon_full: Redigera ikon (fullständig)
   empty_bin: Töm papperskorgen
+  item_count: '{{0}} objekt'
   label: Papperskorgen
 weg:
   empty: Inga objekt att visa

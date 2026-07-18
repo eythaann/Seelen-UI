@@ -398,7 +398,6 @@ weg:
       all: Kaikki
       label: Irrotettujen kohteiden näkyvyys
       on_monitor: Monitorissa
-    visible_separators: Näkyvät erottimet
   label: Telakka/tehtäväpalkki
   margin: Marginaali
   mode:

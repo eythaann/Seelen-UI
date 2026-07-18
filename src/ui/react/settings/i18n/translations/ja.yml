@@ -368,7 +368,6 @@ weg:
       all: 全て
       label: 固定されていないアイテムの表示設定
       on_monitor: モニター上
-    visible_separators: セパレーターを表示する
   label: ドック（タスクバー）
   margin: ドックの隙間
   mode:

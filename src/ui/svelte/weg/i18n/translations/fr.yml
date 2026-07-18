@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Modifier l'icône
   remove_module: Supprimer le module
+  remove_separator: Supprimer le séparateur
   reorder_disable: Verrouiller la barre des tâches
   reorder_enable: Déverrouiller la barre des tâches
 media:
@@ -26,16 +27,14 @@ start:
   label: Menu Démarrer
 taskbar_menu:
   add_file: Épingler un fichier
-  desktop: Ajouter un module de bureau
-  media: Afficher le module multimédia
+  add_separator: Ajouter un séparateur
+  media: Lecteur multimédia
+  modules: Modules
   settings: Paramètres
-  start: Afficher le module "Menu démarrer"
   task_manager: Gestionnaire des tâches
-  trash_bin: Ajouter un module de corbeille
 trash_bin:
-  edit_icon_empty: Icône Modifier (vide)
-  edit_icon_full: Icône Modifier (complète)
   empty_bin: Corbeille vide
+  item_count: "{{0}}\_éléments"
   label: Corbeille
 weg:
   empty: Aucun élément à afficher

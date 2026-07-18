@@ -392,7 +392,6 @@ weg:
       all: બધા
       label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા
       on_monitor: મોનિટર પર
-    visible_separators: દૃશ્યમાન વિભાજક
   label: ડોક/ટાસ્કબાર
   margin: માર્જિન
   mode:

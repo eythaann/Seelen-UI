@@ -406,7 +406,6 @@ weg:
       all: Konke
       label: Ukubonakala Kwezinto Ezingaphiniwe
       on_monitor: Ku-Monitor
-    visible_separators: Abahlukanisi ababonakalayo
   label: Dock / taskbar
   margin: Image
   mode:

@@ -398,7 +398,6 @@ weg:
       all: Vše
       label: Viditelnost nepřipnutých položek
       on_monitor: Na monitoru
-    visible_separators: Viditelné oddělovače
   label: Lišta/Hlavní panel
   margin: Okraj
   mode:

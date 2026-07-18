@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Խմբագրել պատկերակը
   remove_module: Հեռացնել մոդուլը
+  remove_separator: Հեռացնել բաժանարարը
   reorder_disable: Կողպեք առաջադրանքներիբար
   reorder_enable: Բացել աշխատանքային գիծը
 media:
@@ -26,16 +27,14 @@ start:
   label: Սկսել ցանկը
 taskbar_menu:
   add_file: PIN պատվերով ֆայլ
-  desktop: Ավելացնել աշխատասեղանի մոդուլ
-  media: Ավելացնել մեդիա մոդուլ
+  add_separator: Ավելացնել բաժանարար
+  media: Մեդիա նվագարկիչ
+  modules: Մոդուլներ
   settings: Կարգավորումներ
-  start: Ավելացնել Սկսել մոդուլը
   task_manager: Առաջադրանքների կառավարիչ
-  trash_bin: Ավելացնել թափոնարկղ մոդուլ
 trash_bin:
-  edit_icon_empty: Խմբագրել պատկերակը (դատարկ)
-  edit_icon_full: Խմբագրել պատկերակը (ամբողջական)
   empty_bin: Դատարկ թափոնարկղ
+  item_count: '{{0}} տարր'
   label: Վերամշակման աղբարկղ
 weg:
   empty: Ցուցադրելու տարրեր չկան

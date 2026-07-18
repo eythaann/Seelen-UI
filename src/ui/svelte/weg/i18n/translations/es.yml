@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Editar icono
   remove_module: Quitar módulo
+  remove_separator: Quitar separador
   reorder_disable: Bloquear la barra de tareas
   reorder_enable: Desbloquear la barra de tareas
 media:
@@ -26,16 +27,14 @@ start:
   label: Menú Inicio
 taskbar_menu:
   add_file: Pin archivo personalizado
-  desktop: Agregar módulo de escritorio
-  media: Añadir módulo de medios
+  add_separator: Agregar separador
+  media: Reproductor multimedia
+  modules: Módulos
   settings: Ajustes
-  start: Añadir módulo de inicio
   task_manager: Administrador de tareas
-  trash_bin: Agregar módulo de papelera de reciclaje
 trash_bin:
-  edit_icon_empty: Editar icono (vacía)
-  edit_icon_full: Editar icono (completa)
   empty_bin: Papelera de reciclaje vacía
+  item_count: '{{0}} artículos'
   label: Papelera de reciclaje
 weg:
   empty: No hay elementos para mostrar

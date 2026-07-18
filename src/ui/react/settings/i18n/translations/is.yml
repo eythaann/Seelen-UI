@@ -391,7 +391,6 @@ weg:
       all: Allt
       label: Sýnileiki ófestra hluta
       on_monitor: Á Skjár
-    visible_separators: Sýnilegir skilju
   label: Bryggju/verkefnabar
   margin: Framlegð
   mode:

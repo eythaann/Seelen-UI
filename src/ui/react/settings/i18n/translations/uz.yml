@@ -405,7 +405,6 @@ weg:
       all: Hammasi
       label: Ochilmagan elementlarning ko'rinishi
       on_monitor: Monitorda
-    visible_separators: Ko'rinadigan ajratuvchi
   label: Dok / vazifalar paneli
   margin: Marja
   mode:

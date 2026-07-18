@@ -399,7 +399,6 @@ weg:
       all: Tümü
       label: Sabitlenmemiş Öğelerin Görünürlüğü
       on_monitor: Monitörde
-    visible_separators: Görünür Ayırıcılar
   label: Dock/Görev Çubuğu
   margin: Kenar Boşluğu
   mode:

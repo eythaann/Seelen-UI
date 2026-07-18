@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Wysig ikoon
   remove_module: Verwyder module
+  remove_separator: Verwyder skeiding
   reorder_disable: Sluit taakbalk
   reorder_enable: Ontsluit taakbalk
 media:
@@ -26,16 +27,14 @@ start:
   label: Begin Kieslys
 taskbar_menu:
   add_file: Pin Custom File
-  desktop: Voeg lessenaarmodule by
-  media: Voeg mediasmodule by
+  add_separator: Voeg skeiding by
+  media: Mediaspeler
+  modules: Modules
   settings: Instellings
-  start: Voeg beginmodule by
   task_manager: Taakbestuurder
-  trash_bin: Voeg asblikmodule by
 trash_bin:
-  edit_icon_empty: Wysig-ikoon (leeg)
-  edit_icon_full: Wysig-ikoon (Vol)
   empty_bin: Leë asblik
+  item_count: '{{0}} items'
   label: Asblik
 weg:
   empty: Geen items om te wys nie

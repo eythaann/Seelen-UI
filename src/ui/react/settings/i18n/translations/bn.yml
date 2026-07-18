@@ -395,7 +395,6 @@ weg:
       all: সব
       label: আনপিন করা আইটেম দৃশ্যমানতা
       on_monitor: মনিটরে
-    visible_separators: দৃশ্যমান বিভাজক
   label: ডক/টাস্কবার
   margin: মার্জিন
   mode:

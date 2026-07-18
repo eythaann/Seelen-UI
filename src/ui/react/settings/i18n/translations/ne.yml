@@ -400,7 +400,6 @@ weg:
       all: सबै
       label: अनपिन गरिएका वस्तुहरूको दृश्यता
       on_monitor: मोनिटरमा
-    visible_separators: दृश्य बिल्कुलरहरू
   label: डक / टास्कबार
   margin: स्पानलिन
   mode:

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Tahrirlash belgisi
   remove_module: Modulni olib tashlash
+  remove_separator: Separatorni olib tashlang
   reorder_disable: Qulf vazifasi paneli
   reorder_enable: Vazifalar panelini oching
 media:
@@ -26,16 +27,14 @@ start:
   label: Boshlash menyusi
 taskbar_menu:
   add_file: PIN-kod
-  desktop: Ish stoli modulini qo'shing
-  media: Media modul qo'shing
+  add_separator: Ajratuvchi qo'shing
+  media: Media pleer
+  modules: Modullar
   settings: Sozlamalar
-  start: Boshlash moduli qo'shing
   task_manager: Vazifa menejeri
-  trash_bin: Chiqindi qutisi modulini qo'shing
 trash_bin:
-  edit_icon_empty: Tahrirlash belgisi (boʻsh)
-  edit_icon_full: Tahrirlash belgisi (toʻliq)
   empty_bin: Chiqindi qutisini bo'sh
+  item_count: '{{0}} ta element'
   label: Chiqindi qutisi
 weg:
   empty: Ko‘rsatiladigan elementlar yo‘q

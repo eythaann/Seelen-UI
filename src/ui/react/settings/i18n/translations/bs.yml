@@ -399,7 +399,6 @@ weg:
       all: Sve
       label: Vidljivost nezakačenih stavki
       on_monitor: Na monitoru
-    visible_separators: Vidljivi separatori
   label: Dock / programska traka
   margin: Marža
   mode:

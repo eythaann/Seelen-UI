@@ -396,7 +396,6 @@ weg:
       all: Pawb
       label: Eitemau heb eu Pinio Gwelededd
       on_monitor: Ar Fonitor
-    visible_separators: Gwahanyddion gweladwy
   label: Doc/bar tasgau
   margin: Ngherlong
   mode:

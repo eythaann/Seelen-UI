@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: ערוך סמל
   remove_module: הסר מודול
+  remove_separator: הסר את המפריד
   reorder_disable: נעל את שורת המשימות
   reorder_enable: ביטול נעילת שורת המשימות
 media:
@@ -26,16 +27,14 @@ start:
   label: תפריט התחל
 taskbar_menu:
   add_file: הצמד קובץ מותאם אישית
-  desktop: הוסף מודול שולחן עבודה
-  media: הוסף מודול מדיה
+  add_separator: הוסף מפריד
+  media: נגן מדיה
+  modules: מודולים
   settings: הגדרות
-  start: הוסף מודול התחל
   task_manager: מנהל משימות
-  trash_bin: הוסף מודול סל המיחזור
 trash_bin:
-  edit_icon_empty: ערוך סמל (ריק)
-  edit_icon_full: ערוך סמל (מלא)
   empty_bin: ריק סל המיחזור
+  item_count: '{{0}} פריטים'
   label: סל המיחזור
 weg:
   empty: אין פריטים להצגה

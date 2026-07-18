@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Edytuj ikonę
   remove_module: Usuń moduł
+  remove_separator: Usuń separator
   reorder_disable: Zablokuj pasek zadań
   reorder_enable: Odblokuj pasek zadań
 media:
@@ -26,16 +27,14 @@ start:
   label: Menu startowe
 taskbar_menu:
   add_file: Dodaj skrót
-  desktop: Dodaj moduł pulpitu
-  media: Dodaj moduł multimediów
+  add_separator: Dodaj separator
+  media: Odtwarzacz multimediów
+  modules: Moduły
   settings: Ustawienia
-  start: Dodaj przycisk Start
   task_manager: Menedżer zadań
-  trash_bin: Dodaj moduł Kosza
 trash_bin:
-  edit_icon_empty: Ikona edycji (pusta)
-  edit_icon_full: Ikona edycji (pełna)
   empty_bin: Opróżnij Kosz
+  item_count: '{{0}} elementów'
   label: Kosz
 weg:
   empty: Brak elementów do pokazania

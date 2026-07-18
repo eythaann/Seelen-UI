@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Redagavimo piktograma
   remove_module: Pašalinti modulį
+  remove_separator: Pašalinti separatorių
   reorder_disable: Užrakinti užduočių juostą
   reorder_enable: Užduočių juostos atrakinimas
 media:
@@ -26,16 +27,14 @@ start:
   label: Pradėti meniu
 taskbar_menu:
   add_file: PIN pasirinktinis failas
-  desktop: Pridėti darbalaukio modulį
-  media: Pridėkite laikmenos modulį
+  add_separator: Pridėti skyriklį
+  media: Media Player
+  modules: Moduliai
   settings: Nustatymai
-  start: Pridėkite pradžios modulį
   task_manager: Užduočių tvarkyklė
-  trash_bin: Pridėkite šiukšliadėžės modulį
 trash_bin:
-  edit_icon_empty: Redagavimo piktograma (tuščia)
-  edit_icon_full: Redagavimo piktograma (visa)
   empty_bin: Ištuštinkite šiukšliadėžę
+  item_count: '{{0}} elementai'
   label: Šiukšliadėžė
 weg:
   empty: Nėra elementų, kuriuos būtų galima rodyti

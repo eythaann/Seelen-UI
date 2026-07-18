@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Biguherîne Icon
   remove_module: Modulê jêbirin
+  remove_separator: Separatorê rakin
   reorder_disable: Taskbar Lock
   reorder_enable: Taskbar Unlock
 media:
@@ -26,16 +27,14 @@ start:
   label: Pêşeka Destpêkê
 taskbar_menu:
   add_file: Pelê Custom Pel
-  desktop: Modula Sermaseyê zêde bikin
-  media: Modela medyayê lê zêde bike
+  add_separator: Veqetandinê lê zêde bike
+  media: Media Player
+  modules: Modules
   settings: Settings
-  start: Modulê dest pê bikin
   task_manager: Gerînendetiya Peywiran
-  trash_bin: Modula Recycle Bin zêde bikin
 trash_bin:
-  edit_icon_empty: Îkona biguherîne (vala)
-  edit_icon_full: Îkona biguherîne (Tijî)
   empty_bin: Vala Recycle Bin
+  item_count: '{{0}} hêman'
   label: Recycle Bin
 weg:
   empty: Tiştek tune ku nîşan bide

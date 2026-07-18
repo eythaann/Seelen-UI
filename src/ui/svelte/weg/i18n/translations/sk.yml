@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Ikona Upraviť
   remove_module: Odstráňte modul
+  remove_separator: Odstráňte separátor
   reorder_disable: Uzamknutie panela úloh
   reorder_enable: Odomknutie panela úloh
 media:
@@ -26,16 +27,14 @@ start:
   label: Ponuka Štart
 taskbar_menu:
   add_file: Vlastný súbor
-  desktop: Pridať modul pracovnej plochy
-  media: Pridať mediálny modul
+  add_separator: Pridať oddeľovač
+  media: Prehrávač médií
+  modules: Moduly
   settings: Nastavenia
-  start: Pridať štartový modul
   task_manager: Správca úloh
-  trash_bin: Pridať modul koša
 trash_bin:
-  edit_icon_empty: Ikona úprav (prázdna)
-  edit_icon_full: Ikona úprav (úplná)
   empty_bin: Vyprázdniť kôš
+  item_count: 'Počet položiek: {{0}}'
   label: Kôš
 weg:
   empty: Žiadne položky na zobrazenie

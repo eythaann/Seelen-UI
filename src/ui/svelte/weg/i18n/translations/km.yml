@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: កែសម្រួលរូបតំណាង
   remove_module: យកម៉ូឌុលចេញ
+  remove_separator: ដកឧបករណ៍បំបែកចេញ
   reorder_disable: ចាក់សោរបារភារកិច្ច
   reorder_enable: ដោះសោរបារភារកិច្ច
 media:
@@ -26,16 +27,14 @@ start:
   label: ម៉ឺនុយចាប់ផ្តើម
 taskbar_menu:
   add_file: លេខកូដសម្ងាត់លេខសម្ងាត់
-  desktop: បន្ថែមម៉ូឌុលផ្ទៃតុ
-  media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
+  add_separator: បន្ថែមឧបករណ៍បំបែក
+  media: កម្មវិធីចាក់មេឌៀ
+  modules: ម៉ូឌុល
   settings: ការកំណត់
-  start: បន្ថែមម៉ូឌុលចាប់ផ្តើម
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
-  trash_bin: បន្ថែមម៉ូឌុល Recycle Bin
 trash_bin:
-  edit_icon_empty: កែសម្រួលរូបតំណាង (ទទេ)
-  edit_icon_full: កែសម្រួលរូបតំណាង (ពេញ)
   empty_bin: ធុងសំរាមទទេ
+  item_count: ធាតុ {{0}}
   label: ធុងសំរាម
 weg:
   empty: មិនមានធាតុដែលត្រូវបង្ហាញទេ។

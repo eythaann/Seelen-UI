@@ -398,7 +398,6 @@ weg:
       all: Gişt
       label: Dîtina Tiştên Nepînekirî
       on_monitor: Li ser Monitor
-    visible_separators: Dabeşên Visible
   label: Dock / Taskbar
   margin: Radihêj
   mode:

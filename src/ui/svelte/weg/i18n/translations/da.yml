@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Rediger ikon
   remove_module: Fjern modul
+  remove_separator: Fjern separatoren
   reorder_disable: Lås proceslinjen
   reorder_enable: Lås proceslinjen op
 media:
@@ -26,16 +27,14 @@ start:
   label: Startmenu
 taskbar_menu:
   add_file: Pin brugerdefineret fil
-  desktop: Tilføj skrivebordsmodul
-  media: Tilføj mediemodul
+  add_separator: Tilføj separator
+  media: Medieafspiller
+  modules: Moduler
   settings: Indstillinger
-  start: Tilføj startmodul
   task_manager: Task Manager
-  trash_bin: Tilføj papirkurvsmodul
 trash_bin:
-  edit_icon_empty: Rediger ikon (tomt)
-  edit_icon_full: Rediger ikon (fuldstændig)
   empty_bin: Tøm papirkurven
+  item_count: '{{0}} elementer'
   label: Papirkurv
 weg:
   empty: Ingen elementer at vise

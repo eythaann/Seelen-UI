@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: ແກ້ໄຂໄອຄອນ
   remove_module: ເອົາໂມດູນອອກ
+  remove_separator: ເອົາຕົວແຍກອອກ
   reorder_disable: ລັອກ task task
   reorder_enable: ປົດລ taskbar taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: ເມນູເລີ່ມຕົ້ນ
 taskbar_menu:
   add_file: PIN File Custom
-  desktop: ເພີ່ມໂມດູນ Desktop
-  media: ຕື່ມການໂມດູນສື່
+  add_separator: ເພີ່ມຕົວແຍກ
+  media: Media Player
+  modules: ໂມດູນ
   settings: ການຕັ້ງຄ່າ
-  start: ເພີ່ມໂມດູນ Start
   task_manager: Task Manager
-  trash_bin: ເພີ່ມໂມດູນ Recycle Bin
 trash_bin:
-  edit_icon_empty: ແກ້ໄຂໄອຄອນ (ຫວ່າງເປົ່າ)
-  edit_icon_full: ແກ້ໄຂໄອຄອນ (ເຕັມ)
   empty_bin: ຖັງ Recycle ຫວ່າງເປົ່າ
+  item_count: '{{0}} ລາຍການ'
   label: ຖັງ Recycle
 weg:
   empty: ບໍ່ມີລາຍການໃຫ້ສະແດງ

@@ -401,7 +401,6 @@ weg:
       all: Semua
       label: Visibilitas Item yang Tidak Disematkan
       on_monitor: Di Monitor
-    visible_separators: Pemisah yang terlihat
   label: Dock/Taskbar
   margin: Batas
   mode:

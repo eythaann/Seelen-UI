@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Symbol bearbeiten
   remove_module: Modul entfernen
+  remove_separator: Entfernen Sie den Separator
   reorder_disable: Taskleiste sperren
   reorder_enable: Taskleiste entsperren
 media:
@@ -26,16 +27,14 @@ start:
   label: Startmenü
 taskbar_menu:
   add_file: PIN benutzerdefinierte Datei
-  desktop: Desktop-Modul hinzufügen
-  media: Medienmodul hinzufügen
+  add_separator: Trennzeichen hinzufügen
+  media: Mediaplayer
+  modules: Module
   settings: Einstellungen
-  start: Startmodul hinzufügen
   task_manager: Task-Manager
-  trash_bin: Fügen Sie das Papierkorbmodul hinzu
 trash_bin:
-  edit_icon_empty: Symbol „Bearbeiten“ (leer)
-  edit_icon_full: Symbol bearbeiten (vollständig)
   empty_bin: Leeren Sie den Papierkorb
+  item_count: '{{0}} Artikel'
   label: Papierkorb
 weg:
   empty: Keine Artikel zum Anzeigen vorhanden

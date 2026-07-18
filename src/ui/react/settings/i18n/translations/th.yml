@@ -382,7 +382,6 @@ weg:
       all: ทั้งหมด
       label: การมองเห็นรายการที่เลิกปักหมุด
       on_monitor: บนจอภาพ
-    visible_separators: ตัวแยกที่มองเห็นได้
   label: แท่นวาง/บาร์
   margin: ระยะขอบ
   mode:

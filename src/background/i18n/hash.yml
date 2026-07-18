@@ -33,8 +33,8 @@ shortcut.conflicts.review: 58267bb8
 shortcut.conflicts.title: b6bf4944
 shortcut.register.placeholder: ae206329
 shortcut.register.title: 6a1680cc
-widget_liveness.failed_description: "5241e670"
-widget_liveness.failed_title: "8e071700"
+widget_liveness.failed_description: 5241e670
+widget_liveness.failed_title: 8e071700
 widget_permissions.perm_open_file: 4e36b870
 widget_permissions.perm_run: 1957ac04
 widget_permissions.request_description: 6c292f05

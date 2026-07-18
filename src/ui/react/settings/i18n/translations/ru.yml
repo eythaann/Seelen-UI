@@ -401,7 +401,6 @@ weg:
       all: Все
       label: Видимость незакрепленных элементов
       on_monitor: На мониторе
-    visible_separators: Разделители
   label: Панель задач
   margin: Внешний отступ
   mode:

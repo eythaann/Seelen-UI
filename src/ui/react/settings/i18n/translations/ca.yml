@@ -403,7 +403,6 @@ weg:
       all: Tots
       label: Visibilitat dels elements sense fixar
       on_monitor: Al monitor
-    visible_separators: Separadors visibles
   label: Moll/barra de tasques
   margin: Marge
   mode:

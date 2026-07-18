@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: ચિહ્ન સંપાદિત કરો
   remove_module: મોડ્યુલ દૂર કરો
+  remove_separator: વિભાજક દૂર કરો
   reorder_disable: ટાસ્કબાર
   reorder_enable: ટાસ્કબારને અનલ lock ક કરો
 media:
@@ -26,16 +27,14 @@ start:
   label: સ્ટાર્ટ મેનૂ
 taskbar_menu:
   add_file: પિન કસ્ટમ ફાઇલ
-  desktop: ડેસ્કટોપ મોડ્યુલ ઉમેરો
-  media: મીડિયા મોડ્યુલ ઉમેરો
+  add_separator: વિભાજક ઉમેરો
+  media: મીડિયા પ્લેયર
+  modules: મોડ્યુલ્સ
   settings: સેટિંગ્સ
-  start: પ્રારંભ મોડ્યુલ ઉમેરો
   task_manager: ટાસ્ક મેનેજર
-  trash_bin: રિસાયકલ બિન મોડ્યુલ ઉમેરો
 trash_bin:
-  edit_icon_empty: સંપાદિત કરો આઇકન (ખાલી)
-  edit_icon_full: આઇકન સંપાદિત કરો (સંપૂર્ણ)
   empty_bin: ખાલી રિસાયકલ બિન
+  item_count: '{{0}} વસ્તુઓ'
   label: રિસાયકલ બિન
 weg:
   empty: બતાવવા માટે કોઈ આઇટમ નથી

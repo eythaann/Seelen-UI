@@ -408,7 +408,6 @@ weg:
       all: Wszystkie ekrany
       label: Widoczność uruchomionych aplikacji
       on_monitor: Jeden ekran
-    visible_separators: Widoczne separatory
   label: Dock/Pasek zadań
   margin: Margines
   mode:

@@ -401,7 +401,6 @@ weg:
       all: Ҳама
       label: Намоиши ҷузъҳои ҷудонашуда
       on_monitor: Дар Монитор
-    visible_separators: Бандиаткунандагони намоён
   label: Dock / супоришҳо
   margin: Маржа
   mode:

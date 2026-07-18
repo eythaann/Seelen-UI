@@ -397,7 +397,6 @@ weg:
       all: ყველა
       label: ჩამაგრებული ერთეულების ხილვადობა
       on_monitor: მონიტორზე
-    visible_separators: ხილული გამყოფი
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
   mode:

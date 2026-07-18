@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: I-edit ang Icon
   remove_module: Alisin ang Module
+  remove_separator: Alisin ang Separator
   reorder_disable: I -lock ang taskbar
   reorder_enable: I -unlock ang taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Pin pasadyang file
-  desktop: Magdagdag ng Desktop Module
-  media: Magdagdag ng module ng media
+  add_separator: Magdagdag ng Separator
+  media: Media Player
+  modules: Mga module
   settings: Mga setting
-  start: Magdagdag ng Start Module
   task_manager: Task Manager
-  trash_bin: Magdagdag ng Recycle Bin Module
 trash_bin:
-  edit_icon_empty: I-edit ang Icon (Walang laman)
-  edit_icon_full: I-edit ang Icon (Buo)
   empty_bin: Walang laman ang Recycle Bin
+  item_count: '{{0}} mga item'
   label: Recycle Bin
 weg:
   empty: Walang maipapakitang item

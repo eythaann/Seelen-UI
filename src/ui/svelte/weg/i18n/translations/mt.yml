@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Editja Ikona
   remove_module: Neħħi Modulu
+  remove_separator: Neħħi Separatur
   reorder_disable: Lock Taskbar
   reorder_enable: Nisfruttaw taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: Fajl tad-dwana pin
-  desktop: Żid il-Modulu tad-Desktop
-  media: Żid il-modulu tal-midja
+  add_separator: Żid Separatur
+  media: Media Player
+  modules: Moduli
   settings: Settings
-  start: Żid il-modulu tal-bidu
   task_manager: Task Manager
-  trash_bin: Żid Recycle Bin Modulu
 trash_bin:
-  edit_icon_empty: Editja Ikona (Vojta)
-  edit_icon_full: Editja Ikona (Sħiħa)
   empty_bin: Vojta Recycle Bin
+  item_count: '{{0}} oġġetti'
   label: Recycle Bin
 weg:
   empty: Ebda oġġetti li juru

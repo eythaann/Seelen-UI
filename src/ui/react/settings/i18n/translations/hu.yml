@@ -403,7 +403,6 @@ weg:
       all: Minden
       label: Rögzített elemek láthatósága
       on_monitor: Monitoron
-    visible_separators: Látható elválasztók
   label: Dokk/tálca
   margin: Árrés
   mode:

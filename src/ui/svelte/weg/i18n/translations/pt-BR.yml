@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Editar ícone
   remove_module: Remover Módulo
+  remove_separator: Remover separador
   reorder_disable: Bloquear barra de tarefas
   reorder_enable: Desbloquear barra de tarefas
 media:
@@ -26,16 +27,14 @@ start:
   label: Menu Iniciar
 taskbar_menu:
   add_file: Fixar arquivo personalizado
-  desktop: Adicionar módulo de área de trabalho
-  media: Adicionar módulo de mídia
+  add_separator: Adicionar separador
+  media: Reprodutor de mídia
+  modules: Módulos
   settings: Configurações
-  start: Adicionar módulo Iniciar
   task_manager: Gerenciador de Tarefas
-  trash_bin: Adicionar módulo de lixeira
 trash_bin:
-  edit_icon_empty: Editar ícone (vazio)
-  edit_icon_full: Editar ícone (completo)
   empty_bin: Esvaziar Lixeira
+  item_count: '{{0}} itens'
   label: Lixeira
 weg:
   empty: Nenhum item para mostrar

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Икона за редактиране
   remove_module: Премахване на модула
+  remove_separator: Премахване на разделителя
   reorder_disable: Заключване на лентата на задачите
   reorder_enable: Отключване на лентата на задачите
 media:
@@ -26,16 +27,14 @@ start:
   label: Старт меню
 taskbar_menu:
   add_file: ПИН Персонализиран файл
-  desktop: Добавяне на десктоп модул
-  media: Добавете медиен модул
+  add_separator: Добавяне на разделител
+  media: Медиен плейър
+  modules: Модули
   settings: Настройки
-  start: Добавете старт модул
   task_manager: Диспечер на задачите
-  trash_bin: Добавяне на модул за кошче
 trash_bin:
-  edit_icon_empty: Икона за редактиране (празна)
-  edit_icon_full: Икона за редактиране (пълна)
   empty_bin: Изпразване на кошчето
+  item_count: '{{0}} елемента'
   label: Кошче
 weg:
   empty: Няма елементи за показване

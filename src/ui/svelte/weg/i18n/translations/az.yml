@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Redaktə Nişanı
   remove_module: Modulu çıxarın
+  remove_separator: Ayırıcını çıxarın
   reorder_disable: Tapşırıq çubuğunu kilidləyin
   reorder_enable: Tapşırıq çubuğunu açın
 media:
@@ -26,16 +27,14 @@ start:
   label: Başlat Menyu
 taskbar_menu:
   add_file: Xüsusi faylı pin edin
-  desktop: Masaüstü Modulu əlavə edin
-  media: Media modulu əlavə edin
+  add_separator: Ayırıcı əlavə edin
+  media: Media pleyer
+  modules: Modullar
   settings: Parametrlər
-  start: Başlama modulu əlavə edin
   task_manager: Tapşırıq meneceri
-  trash_bin: Zibil qutusu modulu əlavə edin
 trash_bin:
-  edit_icon_empty: Redaktə Nişanı (Boş)
-  edit_icon_full: Redaktə Nişanı (Tam)
   empty_bin: Zibil qutusunu boşaldın
+  item_count: '{{0}} element'
   label: Zibil qutusu
 weg:
   empty: Göstəriləcək element yoxdur

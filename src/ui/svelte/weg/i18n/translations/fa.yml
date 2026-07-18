@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: ویرایش نماد
   remove_module: حذف ماژول
+  remove_separator: جداکننده را بردارید
   reorder_disable: نوار وظیفه قفل
   reorder_enable: نوار کار را باز کنید
 media:
@@ -26,16 +27,14 @@ start:
   label: منوی شروع
 taskbar_menu:
   add_file: پرونده سفارشی
-  desktop: اضافه کردن ماژول دسکتاپ
-  media: ماژول رسانه را اضافه کنید
+  add_separator: جداکننده را اضافه کنید
+  media: مدیا پلیر
+  modules: ماژول ها
   settings: تنظیمات
-  start: ماژول شروع را اضافه کنید
   task_manager: Task Manager
-  trash_bin: اضافه کردن ماژول سطل بازیافت
 trash_bin:
-  edit_icon_empty: نماد ویرایش (خالی)
-  edit_icon_full: نماد ویرایش (کامل)
   empty_bin: سطل بازیافت خالی
+  item_count: '{{0}} مورد'
   label: سطل بازیافت
 weg:
   empty: هیچ موردی برای نمایش وجود ندارد

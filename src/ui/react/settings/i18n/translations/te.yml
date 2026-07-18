@@ -400,7 +400,6 @@ weg:
       all: అన్నీ
       label: అన్‌పిన్ చేయబడిన అంశాల దృశ్యమానత
       on_monitor: మానిటర్‌లో
-    visible_separators: కనిపించే సెపరేటర్లు
   label: డాక్/టాస్క్‌బార్
   margin: మార్జిన్
   mode:

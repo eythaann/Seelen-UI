@@ -379,7 +379,6 @@ weg:
       all: כל
       label: נראות פריטים לא מוצמדים
       on_monitor: על מוניטור
-    visible_separators: מפרידים גלויים
   label: שורת המזח/המשימות
   margin: שולים
   mode:

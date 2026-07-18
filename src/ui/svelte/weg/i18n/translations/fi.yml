@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Muokkaa kuvaketta
   remove_module: Poista moduuli
+  remove_separator: Poista erotin
   reorder_disable: Lukitse tehtäväpalkki
   reorder_enable: Tehtäväpalkin lukituksen avaaminen
 media:
@@ -26,16 +27,14 @@ start:
   label: Käynnistä-valikko
 taskbar_menu:
   add_file: Pin mukautettu tiedosto
-  desktop: Lisää työpöytämoduuli
-  media: Lisää mediamoduuli
+  add_separator: Lisää erotin
+  media: Mediasoitin
+  modules: Moduulit
   settings: Asetukset
-  start: Lisää aloitusmoduuli
   task_manager: Tehtävienhallinta
-  trash_bin: Lisää roskakorimoduuli
 trash_bin:
-  edit_icon_empty: Muokkauskuvake (tyhjä)
-  edit_icon_full: Muokkauskuvake (täysi)
   empty_bin: Tyhjennä roskakori
+  item_count: '{{0}} kohdetta'
   label: Roskakori
 weg:
   empty: Ei näytettäviä kohteita

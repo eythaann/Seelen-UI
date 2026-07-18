@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Pictogram bewerken
   remove_module: Module verwijderen
+  remove_separator: Scheidingsteken verwijderen
   reorder_disable: Taakbalk vergrendelen
   reorder_enable: Taakbalk ontgrendelen
 media:
@@ -26,16 +27,14 @@ start:
   label: Startmenu
 taskbar_menu:
   add_file: Pin aangepaste bestand
-  desktop: Voeg bureaubladmodule toe
-  media: Voeg mediamodule toe
+  add_separator: Scheidingsteken toevoegen
+  media: Mediaspeler
+  modules: Modules
   settings: Instellingen
-  start: Startmodule toevoegen
   task_manager: Taakbeheer
-  trash_bin: Voeg Prullenbakmodule toe
 trash_bin:
-  edit_icon_empty: Bewerkingspictogram (leeg)
-  edit_icon_full: Pictogram Bewerken (Volledig)
   empty_bin: Prullenbak leegmaken
+  item_count: '{{0}} artikelen'
   label: Prullenbak
 weg:
   empty: Er zijn geen items om te tonen

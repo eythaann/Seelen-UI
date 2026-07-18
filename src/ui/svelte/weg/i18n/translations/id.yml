@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Sunting Ikon
   remove_module: Hapus Modul
+  remove_separator: Hapus Pemisah
   reorder_disable: Mengunci bilah tugas
   reorder_enable: Buka kunci bilah tugas
 media:
@@ -26,16 +27,14 @@ start:
   label: Menu Mulai
 taskbar_menu:
   add_file: Pin file khusus
-  desktop: Tambahkan Modul Desktop
-  media: Tambahkan modul media
+  add_separator: Tambahkan Pemisah
+  media: Pemutar Media
+  modules: Modul
   settings: Pengaturan
-  start: Tambahkan modul Mulai
   task_manager: Manajer Tugas
-  trash_bin: Tambahkan Modul Recycle Bin
 trash_bin:
-  edit_icon_empty: Edit Ikon (Kosong)
-  edit_icon_full: Edit Ikon (Penuh)
   empty_bin: Kosongkan Tempat Sampah
+  item_count: '{{0}} item'
   label: Tempat Sampah
 weg:
   empty: Tidak ada item untuk ditampilkan

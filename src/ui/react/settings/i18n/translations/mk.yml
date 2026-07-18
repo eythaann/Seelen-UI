@@ -401,7 +401,6 @@ weg:
       all: Сите
       label: Видливост на откачени ставки
       on_monitor: На монитор
-    visible_separators: Видливи сепаратори
   label: Док/лента со задачи
   margin: Маргина
   mode:

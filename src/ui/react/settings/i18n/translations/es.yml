@@ -409,7 +409,6 @@ weg:
       all: Todos
       label: Visibilidad de los elementos no fijados
       on_monitor: En monitor
-    visible_separators: Separadores visibles
   label: Muelle/Barra de Muelle
   margin: Margen
   mode:

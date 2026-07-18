@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: რედაქტირების ხატულა
   remove_module: მოდულის ამოღება
+  remove_separator: გამყოფის ამოღება
   reorder_disable: ჩაკეტეთ დავალების პანელი
   reorder_enable: განბლოკეთ დავალების ზოლი
 media:
@@ -26,16 +27,14 @@ start:
   label: დაწყება მენიუ
 taskbar_menu:
   add_file: Pin Custom File
-  desktop: დესკტოპის მოდულის დამატება
-  media: დაამატეთ მედია მოდული
+  add_separator: დაამატეთ გამყოფი
+  media: მედია ფლეერი
+  modules: მოდულები
   settings: პარამეტრები
-  start: დაამატეთ დაწყების მოდული
   task_manager: სამუშაო მენეჯერი
-  trash_bin: დაამატეთ Recycle Bin მოდული
 trash_bin:
-  edit_icon_empty: რედაქტირების ხატულა (ცარიელი)
-  edit_icon_full: რედაქტირების ხატულა (სრული)
   empty_bin: ცარიელი გადასამუშავებელი ურნა
+  item_count: '{{0}} ელემენტი'
   label: Recycle Bin
 weg:
   empty: საჩვენებელი ელემენტი არ არის

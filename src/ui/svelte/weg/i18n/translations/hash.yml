@@ -13,6 +13,7 @@ app_menu.run_as: b120b0b9
 app_menu.unpin: 8d405748
 context_menu.edit_icon: 3e13e39
 context_menu.remove_module: 7ca72fa8
+context_menu.remove_separator: f773914
 context_menu.reorder_disable: 84ba2562
 context_menu.reorder_enable: 8aa9ce10
 media.label: c2894d1c
@@ -20,14 +21,12 @@ media.not_playing: 12bf2974
 show_desktop.label: e4cedf30
 start.label: bea3104f
 taskbar_menu.add_file: 60d2864b
-taskbar_menu.desktop: 337df754
-taskbar_menu.media: 75c5879c
+taskbar_menu.add_separator: c5b89690
+taskbar_menu.media: c2894d1c
+taskbar_menu.modules: 7e5ecec0
 taskbar_menu.settings: a9d006ec
-taskbar_menu.start: 8de2be73
 taskbar_menu.task_manager: 8c6c6106
-taskbar_menu.trash_bin: 75515c23
-trash_bin.edit_icon_empty: c33a6eeb
-trash_bin.edit_icon_full: 8fa2be98
 trash_bin.empty_bin: d3cac42
+trash_bin.item_count: de12ae1
 trash_bin.label: 654391f5
 weg.empty: ce67d228

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Таҳрири Нишона
   remove_module: Модулро хориҷ кунед
+  remove_separator: Ҷудокунандаро хориҷ кунед
   reorder_disable: Қулфи супоришҳо
   reorder_enable: Қулфи панел
 media:
@@ -26,16 +27,14 @@ start:
   label: Менюи оғоз
 taskbar_menu:
   add_file: Файли фармоишии PIN
-  desktop: Иловаи модули мизи корӣ
-  media: Иловаи модули ВАО
+  add_separator: Иловаи ҷудокунанда
+  media: Плеери медиа
+  modules: Модулҳо
   settings: Танзимотҳо
-  start: Иловаи модули оғоз
   task_manager: Менеҷери вазифа
-  trash_bin: Модули қуттии партовро илова кунед
 trash_bin:
-  edit_icon_empty: Тасвири таҳрир (холӣ)
-  edit_icon_full: Тасвири таҳрир (Пурра)
   empty_bin: Қуттии партови холӣ
+  item_count: '{{0}} адад'
   label: Қуттии партов
 weg:
   empty: Ягон ашё барои нишон додан

@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: 编辑图标
   remove_module: 移除模块
+  remove_separator: 删除分隔符
   reorder_disable: 锁定任务栏
   reorder_enable: 解锁任务栏
 media:
@@ -26,16 +27,14 @@ start:
   label: 开始菜单
 taskbar_menu:
   add_file: 固定自定义文件
-  desktop: 添加桌面模块
-  media: 添加媒体模块
+  add_separator: 添加分隔符
+  media: 媒体播放器
+  modules: 模块
   settings: 设置
-  start: 添加开始菜单模块
   task_manager: 任务管理器
-  trash_bin: 添加回收站模块
 trash_bin:
-  edit_icon_empty: 编辑图标（空）
-  edit_icon_full: 编辑图标（完整）
   empty_bin: 清空回收站
+  item_count: '{{0}} 项'
   label: 回收站
 weg:
   empty: 暂无内容显示

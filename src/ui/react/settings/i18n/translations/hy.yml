@@ -399,7 +399,6 @@ weg:
       all: Բոլորը
       label: Չամրացված տարրերի տեսանելիություն
       on_monitor: Մոնիտորի վրա
-    visible_separators: Տեսանելի տարանջատիչներ
   label: Dock / Taskbar
   margin: Լուսանցք
   mode:

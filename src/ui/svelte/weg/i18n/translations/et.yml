@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Redigeerimise ikoon
   remove_module: Eemalda moodul
+  remove_separator: Eemalda eraldaja
   reorder_disable: Ülesanderiba lukustamine
   reorder_enable: Avage tegumiriba avamine
 media:
@@ -26,16 +27,14 @@ start:
   label: Menüü Start
 taskbar_menu:
   add_file: PIN -i kohandatud fail
-  desktop: Lisage töölauamoodul
-  media: Lisage meediumimoodul
+  add_separator: Lisa eraldaja
+  media: Meediumipleier
+  modules: Moodulid
   settings: Seaded
-  start: Lisage käivitusmoodul
   task_manager: Tegumihaldur
-  trash_bin: Lisage prügikasti moodul
 trash_bin:
-  edit_icon_empty: Redigeerimise ikoon (tühi)
-  edit_icon_full: Redigeerimise ikoon (täielik)
   empty_bin: Tühjenda prügikast
+  item_count: '{{0}} üksust'
   label: Prügikast
 weg:
   empty: Kuvatavaid üksusi pole

@@ -396,7 +396,6 @@ weg:
       all: Tất cả
       label: Hiển thị các mục đã được bỏ ghim
       on_monitor: Trên màn hình
-    visible_separators: Phân tách có thể nhìn thấy
   label: Dock/Thanh tác vụ
   margin: Lề
   mode:

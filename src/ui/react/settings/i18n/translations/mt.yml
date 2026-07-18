@@ -401,7 +401,6 @@ weg:
       all: Kollha
       label: Oġġetti Unpinned Viżibilità
       on_monitor: Fuq Monitor
-    visible_separators: Separaturi viżibbli
   label: Dock / Taskbar
   margin: Marġni
   mode:

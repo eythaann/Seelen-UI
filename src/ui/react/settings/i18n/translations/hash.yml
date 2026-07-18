@@ -16,7 +16,7 @@ apps_configurations.app.options.WmForce: 24115ee7
 apps_configurations.app.options.WmUnmanage: 64965f18
 apps_configurations.app.options_label: e59f1640
 apps_configurations.app.title_create: 4c88e45c
-apps_configurations.app.title_edit: '2e803948'
+apps_configurations.app.title_edit: 2e803948
 apps_configurations.app.title_readonly: a83c34da
 apps_configurations.app.weg_options_label: 233ba963
 apps_configurations.app.wm_options_label: c1155da4
@@ -34,7 +34,7 @@ apps_configurations.identifier.add_block: 14d6c3a0
 apps_configurations.identifier.and: 91666dc6
 apps_configurations.identifier.id: 4b1ff02a
 apps_configurations.identifier.kind: 45e8b571
-apps_configurations.identifier.matching_strategy: '6075e478'
+apps_configurations.identifier.matching_strategy: 6075e478
 apps_configurations.identifier.matching_strategy_option.contains: 7f028480
 apps_configurations.identifier.matching_strategy_option.ends_with: 94e92ef8
 apps_configurations.identifier.matching_strategy_option.equals: bfbdfe14
@@ -212,7 +212,7 @@ shortcuts.readonly_tooltip: 5970b9a4
 shortcuts.reset: d4e466e4
 sides.bottom: fabbdb8c
 sides.left: 6f4fbe5c
-sides.right: '7e763538'
+sides.right: 7e763538
 sides.top: 2992a40
 toolbar.auto_hide: 976be4fc
 toolbar.auto_hide_touch_disabled: fe4479c4
@@ -269,7 +269,7 @@ wall.playback: 293b43a0
 wall.position.bottom: fabbdb8c
 wall.position.center: 8cee2094
 wall.position.left: 6f4fbe5c
-wall.position.right: '7e763538'
+wall.position.right: 7e763538
 wall.position.top: 2992a40
 wall.processing_video: c104f534
 wall.random: d4ad7290
@@ -310,7 +310,6 @@ weg.items.split_windows: 5996ebfb
 weg.items.temporal_visibility.all: 75afe364
 weg.items.temporal_visibility.label: a0f1cee4
 weg.items.temporal_visibility.on_monitor: '64489710'
-weg.items.visible_separators: 738f33d7
 weg.label: 5fa99610
 weg.margin: 51c6e39a
 weg.mode.full_width: c7545420
@@ -346,5 +345,5 @@ wm.layout: 5e6c76c
 wm.resize_delta: 5c46372a
 wm.space_between_containers: 55cac7f8
 wm.workspace_offset: 5c851354
-wm.workspace_padding: '84e30535'
+wm.workspace_padding: 84e30535
 'yes': baa44134

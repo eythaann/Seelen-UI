@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Ikon änneren
   remove_module: Ewechzehuelen Modul
+  remove_separator: Separator ewechhuelen
   reorder_disable: Lock Taskbar
   reorder_enable: Spär Taskbar
 media:
@@ -26,16 +27,14 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: PIN personaliséiert Datei
-  desktop: Dobäizemaachen Desktop Modul
-  media: Füügt Media Modul bäi
+  add_separator: Add Separator
+  media: Media Player
+  modules: Moduler
   settings: Astellungen
-  start: Füügt Start Modul
   task_manager: Aufgab Manager
-  trash_bin: Recycle Bin Modul dobäisetzen
 trash_bin:
-  edit_icon_empty: Ikon änneren (Eidel)
-  edit_icon_full: Edit Ikon (voll)
   empty_bin: Eidel Recycle Bin
+  item_count: '{{0}} Artikelen'
   label: Recycle Bin
 weg:
   empty: Keng Elementer ze weisen

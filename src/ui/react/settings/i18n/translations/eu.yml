@@ -398,7 +398,6 @@ weg:
       all: Denak
       label: Ainguratu gabeko elementuen ikusgaitasuna
       on_monitor: Monitorean
-    visible_separators: Ikusgai bereizgailuak
   label: Dock / ataza barra
   margin: Emandar
   mode:

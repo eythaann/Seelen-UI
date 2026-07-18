@@ -395,7 +395,6 @@ weg:
       all: Alle
       label: Synlighed af frigjorte elementer
       on_monitor: På monitor
-    visible_separators: Synlige separatorer
   label: Dock/proceslinje
   margin: Margin
   mode:

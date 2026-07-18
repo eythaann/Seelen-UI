@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: Edit Icon
   remove_module: Uklonite modul
+  remove_separator: Uklonite separator
   reorder_disable: Zaključavanje zadataka
   reorder_enable: Otključajte traku zadataka
 media:
@@ -26,16 +27,14 @@ start:
   label: Start Menu
 taskbar_menu:
   add_file: PIN prilagođena datoteka
-  desktop: Dodaj radni modul
-  media: Dodajte medijski modul
+  add_separator: Dodaj separator
+  media: Media Player
+  modules: Moduli
   settings: Postavke
-  start: Dodajte početni modul
   task_manager: Task Manager
-  trash_bin: Dodajte modul korpe za otpatke
 trash_bin:
-  edit_icon_empty: Ikona za uređivanje (prazno)
-  edit_icon_full: Ikona za uređivanje (puna)
   empty_bin: Ispraznite koš za smeće
+  item_count: '{{0}} stavki'
   label: Recycle Bin
 weg:
   empty: Nema stavki za prikaz

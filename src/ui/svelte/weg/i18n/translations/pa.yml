@@ -15,6 +15,7 @@ app_menu:
 context_menu:
   edit_icon: ਆਈਕਨ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
   remove_module: ਮੋਡੀਊਲ ਹਟਾਓ
+  remove_separator: ਵੱਖਰਾ ਹਟਾਓ
   reorder_disable: ਟਾਸਕਬਾਰ ਨੂੰ ਲਾਕ ਕਰੋ
   reorder_enable: ਟਾਸਕਬਾਰ ਨੂੰ ਅਨਲੌਕ ਕਰੋ
 media:
@@ -26,16 +27,14 @@ start:
   label: ਸਟਾਰਟ ਮੀਨੂ
 taskbar_menu:
   add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
-  desktop: ਡੈਸਕਟਾਪ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
-  media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
+  add_separator: ਵੱਖਰਾ ਜੋੜੋ
+  media: ਮੀਡੀਆ ਪਲੇਅਰ
+  modules: ਮੋਡੀਊਲ
   settings: ਸੈਟਿੰਗਾਂ
-  start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ
   task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
-  trash_bin: ਰੀਸਾਈਕਲ ਬਿਨ ਮੋਡੀਊਲ ਸ਼ਾਮਲ ਕਰੋ
 trash_bin:
-  edit_icon_empty: ਸੰਪਾਦਨ ਪ੍ਰਤੀਕ (ਖਾਲੀ)
-  edit_icon_full: ਸੰਪਾਦਨ ਪ੍ਰਤੀਕ (ਪੂਰਾ)
   empty_bin: ਖਾਲੀ ਰੀਸਾਈਕਲ ਬਿਨ
+  item_count: '{{0}} ਆਈਟਮਾਂ'
   label: ਰੀਸਾਈਕਲ ਬਿਨ
 weg:
   empty: ਦਿਖਾਉਣ ਲਈ ਕੋਈ ਆਈਟਮਾਂ ਨਹੀਂ ਹਨ

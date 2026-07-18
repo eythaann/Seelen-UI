@@ -408,7 +408,6 @@ weg:
       all: Tutto
       label: Visibilità degli elementi non bloccati
       on_monitor: Sul monitor
-    visible_separators: Separatori Visibili
   label: Dock/Barra delle Attività
   margin: Margine
   mode:
