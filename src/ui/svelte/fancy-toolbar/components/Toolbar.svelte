@@ -26,7 +26,7 @@
 
   // ── Derived splits ───────────────────────────────────────────────────────
 
-  const groups = $derived(listToGroups(toolbarState.items));
+  const groups = $derived(listToGroups(toolbarState.items, true));
 
   // dnd-kit's `move()` reorders by index within the full, unfiltered items
   // array, so sortables must report their true index there, not their

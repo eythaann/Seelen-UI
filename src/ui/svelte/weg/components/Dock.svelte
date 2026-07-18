@@ -46,7 +46,7 @@
 
   // splits the flat items array (left..., left-separator, center..., right-separator, ...right)
   // into their three groups, same as the toolbar does
-  const groupedItems = $derived(listToGroups(dockState.items));
+  const groupedItems = $derived(listToGroups(dockState.items, true));
   const visibleGroupedItems = $derived.by(() => ({
     left: groupedItems.left.filter(isItemVisible),
     center: groupedItems.center.filter(isItemVisible),

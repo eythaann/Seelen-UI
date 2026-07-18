@@ -88,7 +88,7 @@ const emitSyncEvent = debounce((state: OptimisticDockState) => {
   emit<SyncPayload>("hidden::sync-dock-items", { source: CLIENT_ID, state });
 }, 300);
 
-export function listToGroups(items: WegItem[]) {
+export function listToGroups(items: WegItem[], includeSeparator = false) {
   let idx1 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id);
   let idx2 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_RIGHT.id);
   if (idx1 > idx2) {
@@ -96,7 +96,7 @@ export function listToGroups(items: WegItem[]) {
   }
   return {
     left: items.slice(0, idx1),
-    center: items.slice(idx1 + 1, idx2),
+    center: includeSeparator ? items.slice(idx1, idx2 + 1) : items.slice(idx1 + 1, idx2),
     right: items.slice(idx2 + 1),
   };
 }
