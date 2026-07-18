@@ -11,8 +11,9 @@ const batteriesText = batteries
     }
 
     content += t("battery.remaining", { 0: battery.percentage });
-    content += battery.smartCharging ? `- ${t("battery.smart_charge")}` : "";
-
+    if (battery.smartCharging) {
+      content += ` - ${t("battery.smart_charge")}`;
+    }
     return content;
   })
   .join("\n");

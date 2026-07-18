@@ -72,6 +72,9 @@
     role="menuitem"
     tabindex="0"
     class="weg-item"
+    data-tooltip={item.displayName}
+    data-tooltip-align-x={settingsState.popupAlignX}
+    data-tooltip-align-y={settingsState.popupAlignY}
     onclick={onClick}
     onauxclick={onAuxClick}
     oncontextmenu={onContextMenu}

@@ -159,6 +159,11 @@
     align-items: center;
     overflow: hidden;
 
+    .media-session-title,
+    .media-session-author {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
     .media-session-title {
       width: 100%;
       font-size: 14px;
@@ -169,6 +174,7 @@
     }
 
     .media-session-author {
+      width: 100%;
       font-size: 12px;
       opacity: 0.8;
       overflow: hidden;
@@ -177,7 +183,9 @@
     }
 
     .media-session-actions {
+      width: 100%;
       display: flex;
+      justify-content: center;
       gap: var(--spacing-xs);
       margin-top: var(--spacing-xs);
     }

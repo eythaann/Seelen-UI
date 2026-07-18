@@ -9,5 +9,7 @@ plugin:
   noCanvas: true
   render: |-
     return "@seelen/weg::show-desktop";
+  tooltip: |-
+    return t("show_desktop.label");
   onClick: |-
     invoke(SeelenCommand.ShowDesktop);

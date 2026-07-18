@@ -57,6 +57,10 @@
       tauriInvoke(cmd, { id: session.umid }).catch(console.error);
     }
   }
+
+  const tooltip = $derived(
+    session ? `${session.title}\n${session.author}` : $t("media.label"),
+  );
 </script>
 
 <div
@@ -64,6 +68,9 @@
   class="weg-item media-session-container"
   class:media-session-container-horizontal={isHorizontal}
   class:media-session-container-vertical={!isHorizontal}
+  data-tooltip={tooltip}
+  data-tooltip-align-x={settingsState.popupAlignX}
+  data-tooltip-align-y={settingsState.popupAlignY}
   oncontextmenu={onContextMenu}
 >
   <div

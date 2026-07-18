@@ -47,6 +47,7 @@
   const scope = $derived({
     ...scopeResult.data,
     position: settingsState.position,
+    t: (...args: [string, Record<string, string>]) => $t(...args),
   });
 
   const sandbox = createPluginSandbox();

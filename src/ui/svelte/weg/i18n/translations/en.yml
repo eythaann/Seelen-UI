@@ -33,9 +33,8 @@ taskbar_menu:
   settings: Settings
   task_manager: Task Manager
 trash_bin:
-  edit_icon_empty: Edit Icon (Empty)
-  edit_icon_full: Edit Icon (Full)
   empty_bin: Empty Recycle Bin
+  item_count: '{{0}} items'
   label: Recycle Bin
 weg:
   empty: No items to show

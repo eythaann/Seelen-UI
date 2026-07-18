@@ -71,7 +71,7 @@
   const scope = $derived.by(() => ({
     ..._scopeResult.data,
     ...fetchedData,
-    t: (key: string) => $t(key),
+    t: (...args: [string, Record<string, string>]) => $t(...args),
   }));
 
   // ── Sandboxed code evaluation ────────────────────────────────────────────

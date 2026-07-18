@@ -10,5 +10,7 @@ plugin:
   noCanvas: true
   render: |-
     return trashBinInfo.itemCount > 0 ? "bin::full" : "bin::empty";
+  tooltip: |-
+    return t("trash_bin.label") + "\n" + t("trash_bin.item_count", { 0: trashBinInfo.itemCount });
   onClick: |-
     invoke(SeelenCommand.OpenFile, { path: "shell:RecycleBinFolder" });

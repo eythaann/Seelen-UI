@@ -9,5 +9,7 @@ plugin:
   noCanvas: true
   render: |-
     return "@seelen/weg::start-menu";
+  tooltip: |-
+    return t("start.label");
   onClick: |-
     invoke(SeelenCommand.ShowStartMenu);
