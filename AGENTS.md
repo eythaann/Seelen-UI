@@ -384,9 +384,11 @@ User/developer-facing docs live under `documentation/`. Always check there befor
 
 - `FEATURES.md` — Full feature reference: every widget, setting, shortcut, and system capability
 - `resource_guidelines.md` — Shared concepts: resource IDs, YAML `!include`/`!extend`, i18n, `slu` CLI
-- `widget_guidelines.md` — How to build a custom widget
+- `widgets/` — How to build a custom widget: the resource guideline plus the runtime JS API (`init`/`ready`,
+  `invoke`/`subscribe`)
 - `theme_guidelines.md` — How to create a theme
-- `plugin_guidelines.md` — How to extend widgets via plugins
+- `plugins/` — Plugins: flat per-widget extension files, with the shared guideline plus per-target-widget schemas
+  (toolbar, dock, window manager layouts)
 
 The three external resource types and their required files:
 
