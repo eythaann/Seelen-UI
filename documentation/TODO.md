@@ -14,15 +14,15 @@ done (or just delete the line).
 These are referenced constantly by existing docs ("read the widget's documentation", "call the SLU library") but the
 referenced thing doesn't exist yet.
 
-- [x] ~~`widget_js_api.md`~~ — done as [`widgets/js_api.md`](./widgets/js_api.md) (category: `widgets`): covers
+- [x] ~~`widget_js_api.md`~~ — done as [`widget-js-api`](./widget-js-api) (category: `widgets`): covers
       `Widget.self.init()`/`.ready()`, the `invoke`/`subscribe` wrappers, and points to
       `libs/core/src/handlers/commands.rs`/`events.rs` as the source of truth instead of listing every command/event by
       hand. `LazySignal`-from-a-widget's-perspective is still not covered — worth a follow-up section if it comes up in
       practice.
-- [x] ~~`toolbar_item_scripting.md`~~ — done as [`toolbar_plugins.md`](./toolbar_plugins.md) (category: `plugins`).
-- [x] ~~`window_manager_layout_plugin.md`~~ — done as [`wm_layouts.md`](./wm_layouts.md) (category: `plugins`).
+- [x] ~~`toolbar_item_scripting.md`~~ — done as [`toolbar-plugins`](./toolbar-plugins) (category: `plugins`).
+- [x] ~~`window_manager_layout_plugin.md`~~ — done as [`wm-layouts`](./wm-layouts) (category: `plugins`).
 - [x] ~~dock plugin schema~~ — not originally tracked here, but the same gap existed for `@seelen/weg`; done as
-      [`dock_plugins.md`](./dock_plugins.md) (category: `plugins`).
+      [`dock-plugins`](./dock-plugins) (category: `plugins`).
 
 ## P1 — Needed to actually publish/distribute a resource
 
@@ -45,9 +45,9 @@ referenced thing doesn't exist yet.
 
 ## P2 — Quality-of-life for resource authors
 
-- [ ] **`widget_shortcuts.md`** or a section added to `widgets/guidelines.md` — widgets can declare their own shortcuts,
-      but `widgets/guidelines.md`'s `metadata.yml` reference never shows the field for declaring a widget-owned
-      shortcut, its default keys, or how the widget receives the trigger at runtime.
+- [ ] **`widget_shortcuts.md`** or a section added to `widget-guidelines` — widgets can declare their own shortcuts, but
+      `widget-guidelines`'s `metadata.yml` reference never shows the field for declaring a widget-owned shortcut, its
+      default keys, or how the widget receives the trigger at runtime.
 - [ ] **`popup_widget_api.md`** (category: `reference`) — Seelen UI ships a built-in Popup Widget (typed content blocks:
       `text`/`icon`/`image`/`button`/`group`; title/content/footer zones) usable by third-party widgets and plugins, but
       there's no doc for how to actually invoke it (which command, what payload shape, positioning options relative to a

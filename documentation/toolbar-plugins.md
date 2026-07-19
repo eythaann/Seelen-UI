@@ -1,6 +1,6 @@
 # Toolbar Plugins — `@seelen/fancy-toolbar`
 
-This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./guidelines.md):
+This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./plugin-guidelines):
 `@seelen/fancy-toolbar` is the target widget, and this page documents **its** schema for `plugin`, and **its** rules for
 parsing and executing that data. None of this is special-cased in Seelen UI's core — the toolbar widget owns all of it.
 

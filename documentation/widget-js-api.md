@@ -1,8 +1,8 @@
 # Widget JS API — `@seelen-ui/lib`
 
 This page covers the runtime JS/TS API a widget actually calls once it's loaded — how it initializes itself, how it
-calls backend commands, and how it listens for backend events. Read [widget guidelines](./guidelines.md) first for how a
-widget is declared and packaged; this page is about what your widget's code does once it's running.
+calls backend commands, and how it listens for backend events. Read [widget guidelines](./widget-guidelines) first for
+how a widget is declared and packaged; this page is about what your widget's code does once it's running.
 
 ---
 

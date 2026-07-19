@@ -74,7 +74,7 @@ label:
 
 For anything longer (a resource's `displayName`/`description`, or many settings with many languages), split each text
 into its own file under `i18n/` and pull it in with `!extend`, exactly like described in the
-[Extended YAML section](resource_guidelines.md#extend--embed-a-yaml-file) of the resource guidelines:
+[Extended YAML section](./resource-guidelines#extend--embed-a-yaml-file) of the resource guidelines:
 
 ```yaml
 # metadata.yml
@@ -110,7 +110,7 @@ slu resource translate <path/to/file.yml> [source_lang]
 
 1. The command reads the file and looks for an entry matching `source_lang`. If it's missing, the command fails — write
    your source text first.
-2. It iterates over every language in [Seelen UI's supported languages list](supported_languages.md):
+2. It iterates over every language in [Seelen UI's supported languages list](./supported-languages):
    - If a translation for that language **already exists** in the file, it is **skipped** (never overwritten).
    - Otherwise, it calls the Google Translate API to translate the source text into that language and adds it to the
      file.

@@ -1,6 +1,6 @@
 # Dock Plugins — `@seelen/weg`
 
-This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./guidelines.md):
+This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./plugin-guidelines):
 `@seelen/weg` (SeelenWeg, the dock/taskbar) is the target widget, and this page documents **its** schema for `plugin`,
 and **its** rules for parsing and executing that data. None of this is special-cased in Seelen UI's core — the dock
 widget owns all of it.
@@ -29,8 +29,8 @@ plugin:
 ```
 
 `scopes` follow the same names and shapes documented in
-[Toolbar Plugins — §2](./toolbar_plugins.md#2-scopes--what-data-gets-injected); the resolver is shared between the dock
-and the toolbar. Here `Notifications` injects `count` and `dndActive` into every script below.
+[Toolbar Plugins — §2](./toolbar-plugins#2-scopes--what-data-gets-injected); the resolver is shared between the dock and
+the toolbar. Here `Notifications` injects `count` and `dndActive` into every script below.
 
 ---
 
@@ -174,5 +174,5 @@ you're done, remove it with:
 slu resource unload plugin ./MyPlugin
 ```
 
-See [resource_guidelines.md — §8](../resource_guidelines.md#8-loading-and-unloading-resources) for the full
-load/unload/bundle workflow shared by every resource kind.
+See [resource guidelines — §8](./resource-guidelines#8-loading-and-unloading-resources) for the full load/unload/bundle
+workflow shared by every resource kind.

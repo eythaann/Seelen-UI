@@ -6,7 +6,7 @@ Vue, vanilla JS, anything) or none at all.
 
 Seelen's own built-in widgets are mostly written in Svelte; the Settings panel is written in React.
 
-Read [resource_guidelines](../resource_guidelines.md) first for concepts shared across all resource kinds.
+Read [resource guidelines](./resource-guidelines) first for concepts shared across all resource kinds.
 
 ---
 
@@ -40,7 +40,7 @@ bundled CSS file. These are referenced from `metadata.yml` using `!include` and 
 webview window.
 
 This guide covers how your widget is declared and packaged. For the runtime JS API your widget code calls once it's
-actually running — `Widget.self.init()`/`.ready()`, `invoke`, `subscribe` — see [js_api.md](./js_api.md).
+actually running — `Widget.self.init()`/`.ready()`, `invoke`, `subscribe` — see [Widget JS API](./widget-js-api).
 
 ---
 
@@ -383,7 +383,7 @@ toolbar needs to render it. The toolbar discovers installed plugins at runtime a
 Your widget does not have to support plugins at all. But if you want to allow others to extend it, you can define a
 plugin schema, document what fields you expect in the plugin data, and load plugins targeting your widget ID at runtime.
 
-See [plugin guidelines](../plugins/guidelines.md) for how to create plugins.
+See [plugin guidelines](./plugin-guidelines) for how to create plugins.
 
 ---
 

@@ -170,7 +170,7 @@ Use whatever languages you are comfortable with. The more the better, but Englis
 > `displayName`/`description` are just two examples of a `ResourceText` field — the same type and the same
 > `slu
 > resource translate` workflow apply to every user-facing label, description, and tooltip across widgets, themes,
-> plugins, and shortcuts. See [resource_text.md](resource_text.md) for the full reference.
+> plugins, and shortcuts. See [ResourceText](./resource-text) for the full reference.
 
 ---
 

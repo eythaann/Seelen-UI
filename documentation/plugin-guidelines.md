@@ -4,7 +4,7 @@ Reference guide for creating plugins. A plugin is a declaration file that extend
 widget. The plugin itself only declares who it targets and provides a data payload — the target widget is entirely
 responsible for loading, parsing, and deciding what to do with that data.
 
-Read [resource_guidelines](../resource_guidelines.md) first for concepts shared across all resource kinds.
+Read [resource guidelines](./resource-guidelines) first for concepts shared across all resource kinds.
 
 ---
 
@@ -38,9 +38,9 @@ the target widget — not in the plugin resource, and not in Seelen UI's core.**
 
 For Seelen UI's own built-in widgets that accept plugins, see the dedicated guides:
 
-- [Toolbar Plugins](./toolbar_plugins.md) — `@seelen/fancy-toolbar`
-- [Dock Plugins](./dock_plugins.md) — `@seelen/weg`
-- [Window Manager Layouts](./wm_layouts.md) — `@seelen/window-manager`
+- [Toolbar Plugins](./toolbar-plugins) — `@seelen/fancy-toolbar`
+- [Dock Plugins](./dock-plugins) — `@seelen/weg`
+- [Window Manager Layouts](./wm-layouts) — `@seelen/window-manager`
 
 If you are building your own widget and want to support plugins, you are free to design any `plugin` schema you like —
 document it for your users the same way the three guides above document Seelen UI's built-in widgets.

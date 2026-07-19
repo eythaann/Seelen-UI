@@ -2,7 +2,7 @@
 
 Seelen UI maintains a single, authoritative list of the languages it supports across the app: the Settings language
 picker, `i18n/translations/` locale files, and the
-[`slu resource translate`](resource_text.md#4-translating-with-the-slu-cli) command all draw from this same list.
+[`slu resource translate`](./resource-text#4-translating-with-the-slu-cli) command all draw from this same list.
 
 ## Where it's defined
 
@@ -28,8 +28,8 @@ libs/core/src/constants/mod.ts
 ## Why this matters for resources
 
 Anything that consumes "which languages does Seelen UI support" — the Settings language dropdown, and the
-`slu resource translate` command described in [resource_text.md](resource_text.md) — reads from this list. Adding a
-language here automatically:
+`slu resource translate` command described in [ResourceText](./resource-text) — reads from this list. Adding a language
+here automatically:
 
 - Makes it selectable in the Settings language picker (once a matching locale file exists under `i18n/translations/`).
 - Makes `slu resource translate` fill it in for every `ResourceText` field in a resource, with no changes needed on the

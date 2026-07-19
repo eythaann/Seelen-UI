@@ -1,6 +1,6 @@
 # Window Manager Layouts — `@seelen/window-manager`
 
-This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./guidelines.md): the
+This is one concrete example of the generic Plugin mechanism described in [plugin guidelines](./plugin-guidelines): the
 tiling Window Manager (`@seelen/window-manager`) is the target widget, and this page documents **its** schema for
 `plugin`, and **its** rules for parsing that data into a live layout tree. None of this is special-cased in Seelen UI's
 core — the window manager owns all of it.

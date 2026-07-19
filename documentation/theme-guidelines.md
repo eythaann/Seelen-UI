@@ -3,7 +3,7 @@
 Reference guide for creating themes. A theme customizes the look of Seelen UI widgets by providing CSS (or SCSS) styles
 and optional user-configurable CSS variables.
 
-Read [resource_guidelines](./resource_guidelines) first for concepts shared across all resource kinds.
+Read [resource guidelines](./resource-guidelines) first for concepts shared across all resource kinds.
 
 ---
 
