@@ -1,6 +1,6 @@
 [package]
 name = "sluhk"
-version = "2.8.0"
+version = "2.8.1"
 edition = "2021"
 
 [lib]
