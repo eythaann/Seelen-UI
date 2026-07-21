@@ -186,7 +186,7 @@ fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result
     {
         // Reassign via the workspaces manager (emits a single WindowMoved event) instead of
         // mutating WM_STATE directly here. Otherwise, once the window physically lands on the
-        // target monitor, the SyntheticMonitorChanged hook finds the workspaces manager's own
+        // target monitor, the SynDebouncedRectChange handler finds the workspaces manager's own
         // bookkeeping stale and re-triggers a redundant remove+add cycle, doubling up on
         // WM_STATE updates and causing extra set_app_windows_positions calls.
         SluWorkspacesManager2::instance().send_to(foreground, &target_workspace_id)?;

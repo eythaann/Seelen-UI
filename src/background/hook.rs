@@ -14,8 +14,8 @@ use windows::Win32::{
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            HSHELL_MONITORCHANGED, MSG, OBJID_WINDOW,
+            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
+            OBJID_WINDOW,
         },
     },
 };
@@ -28,10 +28,7 @@ use crate::{
     utils::spawn_named_thread,
     widgets::weg::SeelenWeg,
     windows_api::{
-        event_window::{
-            BgWindowProc, HSHELL_FULLSCREEN_ENTER, HSHELL_FULLSCREEN_EXIT, IS_INTERACTIVE_SESSION,
-            WM_SHELLHOOKMESSAGE,
-        },
+        event_window::IS_INTERACTIVE_SESSION,
         input::Mouse,
         window::{event::WinEvent, Window},
         WindowEnumerator,
@@ -99,30 +96,6 @@ impl HookManager {
         });
         Self::set_event_handler_priority(&eid, 1);
 
-        BgWindowProc::subscribe(|(msg, wparam, lparam)| {
-            // Same burst-drain guard: shell hook messages can still arrive while the
-            // channel backlog is being processed after a session switch.
-            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
-                return;
-            }
-
-            if msg == WM_SHELLHOOKMESSAGE.load(Ordering::Acquire) {
-                // println!("WM_SHELLHOOKMESSAGE: {msg} {wparam} {lparam}");
-                match wparam as u32 {
-                    HSHELL_MONITORCHANGED => {
-                        Self::send((WinEvent::SyntheticMonitorChanged, Window::from(lparam)));
-                    }
-                    HSHELL_FULLSCREEN_ENTER => {
-                        Self::send((WinEvent::SyntheticFullscreenStart, Window::from(lparam)));
-                    }
-                    HSHELL_FULLSCREEN_EXIT => {
-                        Self::send((WinEvent::SyntheticFullscreenEnd, Window::from(lparam)));
-                    }
-                    _ => {}
-                }
-            }
-        });
-
         spawn_named_thread("WinEventHook", move || unsafe {
             SetWinEventHook(
                 EVENT_MIN,
@@ -167,8 +140,6 @@ impl HookManager {
                     | WinEvent::ObjectNameChange
                     | WinEvent::SystemMoveSizeStart
                     | WinEvent::SystemMoveSizeEnd
-                    | WinEvent::SyntheticFullscreenStart
-                    | WinEvent::SyntheticFullscreenEnd
             );
 
             if shoup_update_focused && origin.is_focused() {

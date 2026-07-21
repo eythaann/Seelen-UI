@@ -157,9 +157,10 @@ impl UserAppsManager {
                 data.title = window.title();
                 true
             }
-            WinEvent::SynDebouncedRectChange | WinEvent::SyntheticMonitorChanged => {
+            WinEvent::SynDebouncedRectChange => {
                 let window = Window::from(data.hwnd);
                 data.is_zoomed = window.is_maximized();
+                data.is_fullscreen = window.is_fullscreen();
                 data.rect = window.inner_rect().ok();
                 data.monitor = window.monitor().stable_id().unwrap_or_default();
                 true
@@ -176,13 +177,6 @@ impl UserAppsManager {
             WinEvent::SystemMinimizeEnd => {
                 data.is_iconic = false;
                 true
-            }
-            WinEvent::SyntheticFullscreenStart | WinEvent::SyntheticFullscreenEnd => {
-                // here we do a double check to see because native shell reports fullscreen ends on focus change,
-                // but the window on background can still be fullscreened
-                let old = data.is_fullscreen;
-                data.is_fullscreen = Window::from(data.hwnd).is_fullscreen();
-                old != data.is_fullscreen
             }
             _ => false,
         }

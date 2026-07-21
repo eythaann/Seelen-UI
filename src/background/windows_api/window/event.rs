@@ -100,9 +100,6 @@ pub enum WinEvent {
     /// intended to reduce the amount of events processed by other listeners
     SynThrottledForegroundRectChange,
     SynDebouncedRectChange,
-    SyntheticFullscreenStart,
-    SyntheticFullscreenEnd,
-    SyntheticMonitorChanged,
 }
 
 impl From<u32> for WinEvent {

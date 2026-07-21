@@ -51,9 +51,7 @@ impl Optimizations {
         HookManager::subscribe(|(event, _origin)| {
             if matches!(
                 event,
-                WinEvent::SystemForeground
-                    | WinEvent::SyntheticFullscreenStart
-                    | WinEvent::SyntheticFullscreenEnd
+                WinEvent::SystemForeground | WinEvent::SynDebouncedRectChange
             ) {
                 Self::check_for_changes();
             }
