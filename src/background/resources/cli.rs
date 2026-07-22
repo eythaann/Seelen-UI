@@ -7,11 +7,14 @@ pub async fn process(cmd: ResourceManagerCli) -> Result<()> {
     match cmd.subcommand {
         ResourceSubCommand::Load { kind, path } => {
             let kind = kind.into();
-            if let Some(id) = RESOURCES.load(&kind, &path).await? {
+            let loaded_id = RESOURCES.load(&kind, &path).await?;
+            let _ = RESOURCES.manual.insert(path);
+            // emit the updated resource list before enabling it, so the frontend
+            // already knows about the resource by the time it receives the enable event
+            RESOURCES.emit_kind_changed(&kind)?;
+            if let Some(id) = loaded_id {
                 RESOURCES.enable_resource(kind, id);
             }
-            let _ = RESOURCES.manual.insert(path);
-            RESOURCES.emit_kind_changed(&kind)?;
         }
         ResourceSubCommand::Unload { kind, path } => {
             let kind = kind.into();
