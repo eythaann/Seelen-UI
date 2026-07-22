@@ -60,6 +60,7 @@ as top-level variables — no `scope.` prefix needed.
 | `Cpu`               | `cores` (`Core[]`)                                                                                              | `GetSystemCores`                                                                 |
 | `Tray`              | `trayIcons`                                                                                                     | `GetSystemTrayIcons`                                                             |
 | `TrashBin`          | `trashBinInfo` (`TrashBinInfo`)                                                                                 | `GetTrashBinInfo`                                                                |
+| `Waveform`          | `waveform` (`AudioWaveform`)                                                                                    | `GetMediaWaveform`                                                               |
 
 Shapes of the more structured values (generated TS, `libs/core/gen/types/`):
 

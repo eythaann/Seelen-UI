@@ -91,6 +91,7 @@ const _virtualDesktops = new LazyScope(
 );
 const _trayIcons = new LazyScope(SeelenCommand.GetSystemTrayIcons, SeelenEvent.SystemTrayChanged);
 const _trashBinInfo = new LazyScope(SeelenCommand.GetTrashBinInfo, SeelenEvent.TrashBinChanged);
+const _waveform = new LazyScope(SeelenCommand.GetMediaWaveform, SeelenEvent.MediaWaveform);
 
 type Data = Record<string, unknown>;
 export interface ScopesResult {
@@ -170,6 +171,10 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
 
   if (scopesSet.has("trashbin")) {
     fetching ||= trashBinStep(data);
+  }
+
+  if (scopesSet.has("waveform")) {
+    fetching ||= waveformStep(data);
   }
 
   return {
@@ -418,6 +423,18 @@ function trashBinStep(data: Data): boolean {
   }
 
   data.trashBinInfo = _trashBinInfo.data;
+
+  return false;
+}
+
+function waveformStep(data: Data): boolean {
+  _waveform.lazyInit();
+
+  if (_waveform.fetching) {
+    return true;
+  }
+
+  data.waveform = _waveform.data;
 
   return false;
 }
