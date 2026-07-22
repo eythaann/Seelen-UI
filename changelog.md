@@ -2,6 +2,10 @@
 
 ## [2.8.1-dev]
 
+### fix
+
+- floating windows while twm is disabled.
+
 ## [2.8.0]
 
 ### features

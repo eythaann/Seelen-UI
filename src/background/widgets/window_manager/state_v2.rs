@@ -740,6 +740,9 @@ impl TwmState {
 
 pub fn twm_set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Result<()> {
     let guard = FULL_STATE.load();
+    if !guard.settings.by_widget.wm.enabled {
+        return Ok(());
+    }
     let config = &guard.settings.by_widget.wm.floating;
 
     let monitor_dpi = monitor.scale_factor()?;
