@@ -10,12 +10,18 @@ use std::{
 };
 
 use seelen_core::{
-    resource::{IconPackId, PluginId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId},
-    state::{IconPack, Plugin, Theme, Wallpaper, Widget},
+    handlers::SeelenEvent,
+    resource::{
+        IconPackId, PluginId, ResourceId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId,
+    },
+    state::{IconPack, Plugin, Theme, Wallpaper, WallpaperCollection, Widget},
 };
+use uuid::Uuid;
 
 use crate::{
+    app::emit_to_webviews,
     error::{Result, ResultLogExt},
+    state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id, lock_free::TracedMutex},
 };
 
@@ -75,16 +81,20 @@ impl ResourceManager {
         );
     }
 
-    pub async fn load(&self, kind: &ResourceKind, path: &Path) -> Result<()> {
-        match kind {
+    /// Returns the id of the resource that was loaded, if any (e.g. a deprecated theme
+    /// or the system icon pack are loaded but don't produce an activatable resource id).
+    pub async fn load(&self, kind: &ResourceKind, path: &Path) -> Result<Option<ResourceId>> {
+        let id = match kind {
             ResourceKind::Theme => {
                 let mut theme = Theme::load(path).await?;
                 if theme.id.starts_with("@deprecated") {
-                    return Ok(());
+                    return Ok(None);
                 }
                 theme.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_themes_path());
+                let id = (*theme.id).clone();
                 self.themes.upsert(theme.id.clone(), Arc::new(theme));
+                id
             }
             ResourceKind::Widget => {
                 let mut widget = Widget::load(path).await?;
@@ -102,13 +112,17 @@ impl ResourceManager {
                     self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
                 }
 
+                let id = (*widget.id).clone();
                 self.widgets.upsert(widget.id.clone(), Arc::new(widget));
+                id
             }
             ResourceKind::Plugin => {
                 let mut plugin = Plugin::load(path).await?;
                 plugin.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_plugins_path());
+                let id = (*plugin.id).clone();
                 self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
+                id
             }
             ResourceKind::Wallpaper => {
                 let path_is_file = tokio::fs::metadata(path)
@@ -133,15 +147,19 @@ impl ResourceManager {
                             !path.starts_with(SEELEN_COMMON.user_wallpapers_path()),
                         )
                         .await?;
+                        let id = (*wallpaper.id).clone();
                         self.wallpapers
                             .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
+                        return Ok(Some(id));
                     }
-                    return Ok(());
+                    return Ok(None);
                 }
 
                 let wallpaper = Wallpaper::load(path).await?;
+                let id = (*wallpaper.id).clone();
                 self.wallpapers
                     .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
+                id
             }
             ResourceKind::IconPack => {
                 let is_system = path == SEELEN_COMMON.system_icon_pack_path();
@@ -154,17 +172,21 @@ impl ResourceManager {
                         // we only read the system icon pack once, after that it is entirely runtime managed
                         *self.system_icon_pack.lock() = Some(icon_pack);
                     }
-                } else {
-                    let icon_pack = IconPack::load(path).await?;
-                    self.icon_packs
-                        .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
+                    return Ok(None);
                 }
+
+                let icon_pack = IconPack::load(path).await?;
+                let id = (*icon_pack.id).clone();
+                self.icon_packs
+                    .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
+                id
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
+                return Ok(None);
             }
-        }
-        Ok(())
+        };
+        Ok(Some(id))
     }
 
     pub fn unload(&self, kind: &ResourceKind, path: &Path) {
@@ -269,7 +291,7 @@ impl ResourceManager {
             match result {
                 Ok(Err(e)) => log::error!("Failed to load {kind:?}, error: {e}"),
                 Err(e) => log::error!("Task panicked while loading {kind:?}: {e}"),
-                Ok(Ok(())) => {}
+                Ok(Ok(_)) => {}
             }
         }
 
@@ -282,6 +304,74 @@ impl ResourceManager {
             self.ensure_system_icon_pack()?;
         }
         Ok(())
+    }
+
+    /// Activates a loaded resource the same way the "Enable" button does after installing
+    /// a resource from the marketplace (via `seelen-ui.uri:` or a dropped `.slu` file).
+    pub fn enable_resource(&self, kind: ResourceKind, id: ResourceId) {
+        let plugin_events: Vec<PluginId> = match &kind {
+            ResourceKind::Plugin => vec![PluginId::from(id.clone())],
+            ResourceKind::Widget => {
+                let widget_id = WidgetId::from(id.clone());
+                self.widgets
+                    .read(&widget_id, |_, w| {
+                        w.plugins.iter().map(|p| p.id.clone()).collect()
+                    })
+                    .unwrap_or_default()
+            }
+            _ => vec![],
+        };
+
+        std::thread::spawn(move || {
+            FULL_STATE.rcu(move |state| {
+                let mut state = state.cloned();
+                match kind {
+                    ResourceKind::Theme => {
+                        let theme_id = ThemeId::from(id.clone());
+                        let has_shared_styles = RESOURCES
+                            .themes
+                            .read(&theme_id, |_, t| {
+                                t.shared_styles.as_ref().is_some_and(|s| !s.is_empty())
+                            })
+                            .unwrap_or(false);
+                        if has_shared_styles {
+                            state.settings.active_themes.clear();
+                            state.settings.active_themes.push("@default/theme".into());
+                        }
+                        state.settings.active_themes.push(theme_id);
+                    }
+                    ResourceKind::IconPack => {
+                        state
+                            .settings
+                            .active_icon_packs
+                            .push(IconPackId::from(id.clone()));
+                    }
+                    ResourceKind::Widget => {
+                        state
+                            .settings
+                            .set_widget_enabled(&WidgetId::from(id.clone()), true);
+                    }
+                    ResourceKind::Wallpaper => {
+                        let collection = WallpaperCollection {
+                            id: Uuid::new_v4(),
+                            name: "-".to_owned(),
+                            wallpapers: vec![WallpaperId::from(id.clone())],
+                            hidden: true,
+                        };
+                        state.settings.by_widget.wall.default_collection = Some(collection.id);
+                        state.settings.wallpaper_collections.push(collection);
+                    }
+                    _ => {}
+                }
+                state
+            });
+
+            for plugin_id in plugin_events {
+                emit_to_webviews(SeelenEvent::PluginEnabled, plugin_id);
+            }
+
+            FULL_STATE.load().write_settings().log_error();
+        });
     }
 }
 

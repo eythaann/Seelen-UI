@@ -9,17 +9,14 @@ use std::{
 
 use itertools::Itertools;
 use seelen_core::{
-    handlers::SeelenEvent,
-    resource::{
-        PluginId, Resource, ResourceId, ResourceKind, SluResource, SluResourceFile, WidgetId,
-    },
-    state::{CssStyles, Dialog, DialogContent, IconPack, Wallpaper, WallpaperCollection},
+    resource::{Resource, ResourceId, ResourceKind, SluResource, SluResourceFile},
+    state::{CssStyles, Dialog, DialogContent, IconPack, Wallpaper},
 };
 use tauri::Listener;
 use uuid::Uuid;
 
 use crate::{
-    app::{emit_to_webviews, get_app_handle},
+    app::get_app_handle,
     cli::uri::icons_downloader::download_remote_icons,
     error::Result,
     error::ResultLogExt,
@@ -217,80 +214,9 @@ fn update_dialog_to_added_resource(dialog_id: Uuid, resource: &Resource) -> Resu
     let used_id = ResourceId::Remote(resource.id);
     let kind = resource.kind;
 
-    let display_name = {
-        let state = FULL_STATE.load();
-        resource
-            .metadata
-            .display_name
-            .get(state.locale())
-            .to_owned()
-    };
-
     let event = format!("resource::{}::enable", resource.id);
     get_app_handle().once(event, move |_| {
-        std::thread::spawn(move || {
-            let plugin_events: Vec<PluginId> = match &kind {
-                ResourceKind::Plugin => vec![PluginId::from(used_id.clone())],
-                ResourceKind::Widget => {
-                    let widget_id = WidgetId::from(used_id.clone());
-                    RESOURCES
-                        .widgets
-                        .get(&widget_id)
-                        .map(|w| w.plugins.iter().map(|p| p.id.clone()).collect())
-                        .unwrap_or_default()
-                }
-                _ => vec![],
-            };
-
-            FULL_STATE.rcu(move |state| {
-                let mut state = state.cloned();
-                match kind {
-                    ResourceKind::Theme => {
-                        let theme_id = used_id.clone().into();
-                        let has_shared_styles = RESOURCES
-                            .themes
-                            .read(&theme_id, |_, t| {
-                                t.shared_styles.as_ref().is_some_and(|s| !s.is_empty())
-                            })
-                            .unwrap_or(false);
-                        if has_shared_styles {
-                            state.settings.active_themes.clear();
-                            state.settings.active_themes.push("@default/theme".into());
-                        }
-                        state.settings.active_themes.push(theme_id);
-                    }
-                    ResourceKind::IconPack => {
-                        state
-                            .settings
-                            .active_icon_packs
-                            .push(used_id.clone().into());
-                    }
-                    ResourceKind::Widget => {
-                        state
-                            .settings
-                            .set_widget_enabled(&used_id.clone().into(), true);
-                    }
-                    ResourceKind::Wallpaper => {
-                        let collection = WallpaperCollection {
-                            id: Uuid::new_v4(),
-                            name: display_name.clone(),
-                            wallpapers: vec![used_id.clone().into()],
-                            hidden: true,
-                        };
-                        state.settings.by_widget.wall.default_collection = Some(collection.id);
-                        state.settings.wallpaper_collections.push(collection);
-                    }
-                    _ => {}
-                }
-                state
-            });
-
-            for id in plugin_events {
-                emit_to_webviews(SeelenEvent::PluginEnabled, id);
-            }
-
-            FULL_STATE.load().write_settings().log_error();
-        });
+        RESOURCES.enable_resource(kind, used_id.clone());
     });
 
     Ok(())

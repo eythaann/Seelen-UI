@@ -7,7 +7,9 @@ pub async fn process(cmd: ResourceManagerCli) -> Result<()> {
     match cmd.subcommand {
         ResourceSubCommand::Load { kind, path } => {
             let kind = kind.into();
-            RESOURCES.load(&kind, &path).await?;
+            if let Some(id) = RESOURCES.load(&kind, &path).await? {
+                RESOURCES.enable_resource(kind, id);
+            }
             let _ = RESOURCES.manual.insert(path);
             RESOURCES.emit_kind_changed(&kind)?;
         }

@@ -4,7 +4,7 @@ import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
 import { getWindowsForItem, interactables } from "./windows.svelte.ts";
-import { wegItems } from "./getters.svelte.ts";
+import { plugins, wegItems } from "./getters.svelte.ts";
 import { isHorizontalDock } from "./settings.svelte.ts";
 
 interface OptimisticDockState {
@@ -73,6 +73,12 @@ subscribe(SeelenEvent.WegAddItem, (e) => {
   const separatorIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
   items.splice(separatorIdx, 0, item);
   _dockState = { ..._dockState, items };
+});
+
+subscribe(SeelenEvent.PluginEnabled, (e) => {
+  if (plugins.value.some((p) => p.id === e.payload)) {
+    dockStateActions.addPlugin(e.payload);
+  }
 });
 
 let isRemoteUpdate = false;
@@ -217,6 +223,23 @@ export const dockStateActions = {
     _dockState = { ..._dockState, items };
   },
 };
+
+$effect.root(() => {
+  $effect(() => {
+    const pluginIds = new Set(plugins.value.map((p) => p.id));
+    const hasStalePlugin = _dockState.items.some(
+      (item) => item.type === "Plugin" && !pluginIds.has(item.plugin),
+    );
+    if (!hasStalePlugin) return;
+
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.filter(
+        (item) => !(item.type === "Plugin" && !pluginIds.has(item.plugin)),
+      ),
+    };
+  });
+});
 
 $effect.root(() => {
   $effect(() => {

@@ -188,6 +188,20 @@ subscribe(SeelenEvent.PluginEnabled, (e) => {
   }
 });
 
+$effect.root(() => {
+  $effect(() => {
+    const pluginIds = new Set(plugins.value.map((p) => p.id));
+    const isStale = (item: ToolbarItem2) => typeof item === "string" && !pluginIds.has(item);
+
+    if (!_toolbarState.items.some(isStale)) return;
+
+    _toolbarState = {
+      ..._toolbarState,
+      items: _toolbarState.items.filter((item) => !isStale(item)),
+    };
+  });
+});
+
 export const toolbarActions = {
   addTextItem(text: string) {
     const cleaned = text.trim().replace(/"/g, '\\"');
