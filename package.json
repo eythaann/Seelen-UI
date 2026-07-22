@@ -28,10 +28,10 @@
     "url": "https://github.com/eythaann/seelen-ui.git"
   },
   "dependencies": {
-    "@dnd-kit/abstract": "^0.4.0",
-    "@dnd-kit/helpers": "^0.4.0",
-    "@dnd-kit/react": "^0.4.0",
-    "@dnd-kit/svelte": "^0.4.0",
+    "@dnd-kit/abstract": "^0.5.0",
+    "@dnd-kit/helpers": "^0.5.0",
+    "@dnd-kit/react": "^0.5.0",
+    "@dnd-kit/svelte": "^0.5.0",
     "@preact/compat": "^18.3.2",
     "@preact/signals": "^2.9.0",
     "@tauri-apps/api": "^2.11.0",
