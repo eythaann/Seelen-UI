@@ -64,7 +64,7 @@ regex = "1.12.3"
 reqwest = "0.13.1"
 rust-i18n = "4.1.0"
 salvo = { git = "https://github.com/eythaann/salvo.git" }
-sha2 = "0.10.9"
+sha2 = "0.11.0"
 seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
 slu-macros = { path = "libs/slu-macros" }
