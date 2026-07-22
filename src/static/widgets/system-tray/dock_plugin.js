@@ -12,9 +12,10 @@ ctx.lineJoin = "round";
 
 const color = themeTokens.foregroundColor;
 const size = w * 0.22;
+const lineWidth = w * 0.085;
 
 ctx.strokeStyle = color;
-ctx.lineWidth = 22;
+ctx.lineWidth = lineWidth;
 
 // the popup opens away from the screen edge the dock is docked to,
 // so the chevron points in that same direction.

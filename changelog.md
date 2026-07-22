@@ -2,6 +2,10 @@
 
 ## [2.8.1-dev]
 
+### features
+
+- mutiple dock items sizes.
+
 ### fix
 
 - floating windows while twm is disabled.

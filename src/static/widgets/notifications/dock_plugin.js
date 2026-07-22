@@ -10,7 +10,7 @@ ctx.lineCap = "round";
 ctx.lineJoin = "round";
 
 const color = themeTokens.foregroundColor;
-const lineWidth = 18;
+const lineWidth = w * 0.07;
 
 const knobRadius = lineWidth * 0.5;
 const clapperRadius = lineWidth * 0.55;

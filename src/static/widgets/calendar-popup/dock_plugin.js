@@ -8,7 +8,7 @@ const h = canvas.height;
 const cx = w / 2;
 const cy = h / 2;
 
-const lineWidth = 16;
+const lineWidth = w * 0.06;
 const radius = Math.min(w, h) / 2 - lineWidth / 2;
 
 ctx.clearRect(0, 0, w, h);

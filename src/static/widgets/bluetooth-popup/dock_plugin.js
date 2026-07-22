@@ -14,7 +14,7 @@ const connectedDevices = (devices || []).filter((d) => d.connected);
 const hasConnected = connectedDevices.length > 0;
 
 const color = themeTokens.foregroundColor;
-const lineWidth = 18;
+const lineWidth = w * 0.07;
 
 const top = h * 0.1;
 const bottom = h * 0.9;

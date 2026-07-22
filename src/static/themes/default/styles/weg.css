@@ -68,12 +68,13 @@
 }
 
 :root {
-  --padding-ratio: 0.15; /* this count as x2 like there is a padding on each side */
-  --inner-spacing: calc(var(--config-item-size) * var(--padding-ratio));
-  /* this represent the max item size as 3 items to follow simetry */
-  --max-item-size: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+  /* this count as x2 like there is a padding on each side */
+  --item-inner-spacing: calc(var(--config-item-size) * 0.15);
   /* same as use 25% but this works for rectangles */
-  --border-radius: calc(var(--config-item-size) * 0.25);
+  --item-border-radius: calc(var(--config-item-size) * 0.25);
+
+  --item-size-medium: calc(var(--config-item-size) * 2 + var(--config-space-between-items));
+  --item-size-large: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
 }
 
 .weg-item-overlay {
@@ -177,18 +178,48 @@
   align-items: center;
   overflow: hidden;
 
-  gap: var(--inner-spacing);
-  padding: var(--inner-spacing);
-  min-width: var(--config-item-size);
-  max-width: var(--max-item-size);
-  height: var(--config-item-size);
+  gap: var(--item-inner-spacing);
+  padding: var(--item-inner-spacing);
 
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
-  border-radius: var(--border-radius);
+  border-radius: var(--item-border-radius);
+
+  height: var(--config-item-size);
+  width: var(--config-item-size);
+
+  /* this is needed for the apps window title text */
+  .horizontal & {
+    width: auto;
+    min-width: var(--config-item-size);
+    max-width: var(--item-size-large);
+  }
+
+  &.weg-item-medium {
+    .horizontal & {
+      width: var(--item-size-medium);
+    }
+    .vertical & {
+      height: var(--item-size-medium);
+    }
+  }
+
+  &.weg-item-large {
+    .horizontal & {
+      width: var(--item-size-large);
+    }
+    .vertical & {
+      height: var(--item-size-large);
+    }
+  }
 
   &:hover {
     background-color: var(--slu-std-bg-dark-color);
+
+    .weg-item-icon,
+    .weg-item-canvas {
+      filter: brightness(1.05) saturate(1.1);
+    }
   }
 
   &:active {
@@ -199,16 +230,6 @@
     transition: transform 0.2s linear;
   }
 
-  /* &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    box-shadow:
-      inset -5px -5px 20px -15px rgba(0, 0, 0, 0.3),
-      inset 8px 8px 7px -6px rgba(255, 255, 255, 0.3);
-  } */
-
   &:has(.weg-item-icon[data-shape="square"]) {
     padding: 0;
   }
@@ -218,12 +239,6 @@
     width: unset;
     aspect-ratio: 1/1;
     object-fit: contain;
-  }
-
-  &:hover {
-    .weg-item-icon {
-      filter: brightness(1.05) saturate(1.1);
-    }
   }
 
   .weg-item-title {
@@ -244,14 +259,6 @@
 .weg-item.media-session-container {
   overflow: hidden;
   padding: 0;
-
-  &.media-session-container-horizontal {
-    width: var(--max-item-size);
-  }
-
-  &.media-session-container-vertical {
-    height: var(--max-item-size);
-  }
 
   &:active {
     transform: none;

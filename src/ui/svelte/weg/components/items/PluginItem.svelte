@@ -1,6 +1,10 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import type { WegPluginItem as WegPluginPayload, WidgetId } from "@seelen-ui/lib/types";
+  import {
+    type WegPluginItem as WegPluginPayload,
+    type WidgetId,
+    CanvasSize,
+  } from "@seelen-ui/lib/types";
   import type { PluginWegItem } from "../../types.ts";
   import { t } from "../../i18n/index.ts";
   import {
@@ -22,8 +26,6 @@
 
   import { settingsState } from "../../state/settings.svelte.ts";
 
-  const CANVAS_SIZE = 256;
-
   interface Props {
     item: PluginWegItem;
     payload: WegPluginPayload;
@@ -31,11 +33,7 @@
 
   let { item, payload }: Props = $props();
 
-  let img = $state<HTMLImageElement | null>(null);
-  const canvas = document.createElement("canvas");
-  canvas.width = CANVAS_SIZE;
-  canvas.height = CANVAS_SIZE;
-  let lastObjectUrl: string | null = null;
+  let canvas = $state<HTMLCanvasElement | null>(null);
 
   let userSourceName = $derived.by(() => {
     const allByWidget = settingsState.allByWidget;
@@ -99,9 +97,12 @@
   }
 
   $effect(() => {
-    if (payload.noCanvas || !renderExec || !img) return;
+    if (payload.noCanvas || !renderExec || !canvas) return;
 
-    const computed = getComputedStyle(img);
+    canvas.width = canvas.clientWidth * window.devicePixelRatio;
+    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+
+    const computed = getComputedStyle(canvas);
     evalSanboxed(renderExec, {
       ...scope,
       isDarkMode: prefersDarkColorScheme.value,
@@ -122,21 +123,15 @@
         backgroundColor: computed.getPropertyValue("--slu-std-bg-color"),
       },
       canvas: {
-        getContext: (contextId: string) => canvas.getContext(contextId),
-        width: CANVAS_SIZE,
-        height: CANVAS_SIZE,
+        getContext: (contextId: string) => canvas!.getContext(contextId),
+        width: canvas.width,
+        height: canvas.height,
       },
     });
 
-    // <img> downscaling uses the browser's high-quality resampler; a canvas
-    // rendered at CANVAS_SIZE and shrunk via CSS looks noticeably pixelated.
-    canvas.toBlob((blob) => {
-      if (!blob || !img) return;
-      const url = URL.createObjectURL(blob);
-      img.src = url;
-      if (lastObjectUrl) URL.revokeObjectURL(lastObjectUrl);
-      lastObjectUrl = url;
-    });
+    // note: <img> downscaling uses the browser's high-quality resampler; a canvas
+    // rendered at CANVAS_SIZE (256) and shrunk via CSS looks noticeably pixelated.
+    // this was before but now we use canvas directly because performance on fast changes.
   });
 </script>
 
@@ -147,6 +142,8 @@
       role="button"
       tabindex="0"
       class="weg-item"
+      class:weg-item-medium={payload.canvasSize === CanvasSize.Medium}
+      class:weg-item-large={payload.canvasSize === CanvasSize.Large}
       data-tooltip={tooltipText}
       data-tooltip-align-x={settingsState.popupAlignX}
       data-tooltip-align-y={settingsState.popupAlignY}
@@ -157,7 +154,7 @@
       {#if payload.noCanvas}
         <SpecificIcon class="weg-item-icon" name={customIconKey || ""} />
       {:else}
-        <img bind:this={img} class="weg-item-icon" alt="" />
+        <canvas bind:this={canvas} class="weg-item-canvas"></canvas>
       {/if}
     </div>
 
@@ -168,7 +165,7 @@
 {/if}
 
 <style>
-  .weg-item-icon {
+  .weg-item-canvas {
     width: 100%;
     height: 100%;
   }

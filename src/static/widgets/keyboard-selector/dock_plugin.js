@@ -15,14 +15,14 @@ const inputsLength = activeLang.keyboardLayouts.length;
 
 if (variant && inputsLength > 1) {
   ctx.fillStyle = themeTokens.foregroundColor;
-  ctx.font = "700 100px sans-serif";
+  ctx.font = `700 ${h * 0.4}px sans-serif`;
   ctx.fillText(lang, cx, h * 0.42);
 
   ctx.fillStyle = themeTokens.foregroundSecondaryColor;
-  ctx.font = "600 80px sans-serif";
-  ctx.fillText(variant, cx, h * 0.72);
+  ctx.font = `600 ${h * 0.35}px sans-serif`;
+  ctx.fillText(variant, cx, h * 0.75);
 } else {
   ctx.fillStyle = themeTokens.foregroundColor;
-  ctx.font = "700 96px sans-serif";
+  ctx.font = `700 ${h * 0.4}px sans-serif`;
   ctx.fillText(lang, cx, h / 2);
 }

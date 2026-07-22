@@ -11,7 +11,7 @@ ctx.lineJoin = "round";
 
 const isWifi = usingInterface?.type === "IEEE80211";
 const color = online ? themeTokens.foregroundColor : themeTokens.foregroundMutedColor;
-const lineWidth = 20;
+const lineWidth = w * 0.08;
 
 function drawWifi() {
   const baseY = h * 0.78;

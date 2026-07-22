@@ -58,16 +58,12 @@
     }
   }
 
-  const tooltip = $derived(
-    session ? `${session.title}\n${session.author}` : $t("media.label"),
-  );
+  const tooltip = $derived(session ? `${session.title} - ${session.author}` : $t("media.label"));
 </script>
 
 <div
   role="group"
-  class="weg-item media-session-container"
-  class:media-session-container-horizontal={isHorizontal}
-  class:media-session-container-vertical={!isHorizontal}
+  class="weg-item weg-item-large media-session-container"
   data-tooltip={tooltip}
   data-tooltip-align-x={settingsState.popupAlignX}
   data-tooltip-align-y={settingsState.popupAlignY}
@@ -116,18 +112,14 @@
 
 <style>
   .media-session {
-    display: grid;
+    display: flex;
     position: relative;
     width: 100%;
     height: 100%;
-  }
 
-  .media-session-container-horizontal .media-session {
-    grid-template-columns: var(--config-item-size) 1fr;
-  }
-
-  .media-session-container-vertical .media-session {
-    grid-template-rows: var(--config-item-size) 1fr;
+    :global(.vertical) & {
+      flex-direction: column;
+    }
   }
 
   .media-session-blurred-thumbnail-container {
@@ -135,83 +127,86 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
-  }
 
-  .media-session-blurred-thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    filter: blur(10px) brightness(125%) contrast(125%);
+    .media-session-blurred-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      filter: blur(10px) brightness(125%) contrast(125%);
+    }
   }
 
   .media-session-thumbnail-container {
     position: relative;
-    width: 100%;
-    height: 100%;
-  }
+    width: var(--config-item-size);
+    height: var(--config-item-size);
+    flex-shrink: 0;
 
-  .media-session-thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #0004;
-  }
+    .media-session-thumbnail {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #0004;
+    }
 
-  :global(.media-session-app-icon) {
-    position: absolute;
-    width: 25%;
-    aspect-ratio: 1/1;
-    right: 5%;
-    bottom: 5%;
-    object-fit: contain;
+    :global(.media-session-app-icon) {
+      position: absolute;
+      width: 25%;
+      aspect-ratio: 1/1;
+      right: 5%;
+      bottom: 5%;
+      object-fit: contain;
+    }
   }
 
   .media-session-info {
-    position: relative;
+    flex: 1;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    position: relative;
     overflow: hidden;
     padding: 4px;
-  }
 
-  .media-session-title {
-    letter-spacing: 0.3px;
-    line-height: 1.3em;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 100%;
-    margin-bottom: 2px;
-    margin-right: -2px;
-  }
+    .media-session-title {
+      letter-spacing: 0.3px;
+      line-height: 1.3em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+      margin-bottom: 2px;
+      margin-right: -2px;
 
-  .media-session-title-default {
-    text-align: center;
-    white-space: normal;
-  }
+      &.media-session-title-default {
+        text-align: center;
+        white-space: normal;
+      }
 
-  .media-session-container-vertical .media-session-title {
-    display: none;
-  }
+      :global(.vertical) & {
+        display: none;
+      }
+    }
 
-  .media-session-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-  }
+    .media-session-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
 
-  .media-session-container-vertical .media-session-actions {
-    flex-direction: column;
-    gap: 12px;
-  }
+      :global(.vertical) & {
+        flex-direction: column;
+        gap: 12px;
+      }
 
-  .media-session-actions button {
-    height: 16px;
-    color: inherit;
+      button {
+        font-size: 8px;
+      }
+    }
   }
 </style>
