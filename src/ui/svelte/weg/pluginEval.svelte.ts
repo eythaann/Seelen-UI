@@ -1,19 +1,14 @@
-import Sandbox from "@nyariv/sandboxjs";
+import type Sandbox from "@nyariv/sandboxjs";
 import { Alignment, SeelenWegSide, type WidgetId } from "@seelen-ui/lib/types";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settingsState, widgetRect } from "./state/settings.svelte.ts";
+import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS: SeelenCommand[] = [
   SeelenCommand.OpenFile,
   SeelenCommand.ShowDesktop,
   SeelenCommand.ShowStartMenu,
 ];
-
-export function createPluginSandbox(): Sandbox {
-  const prototypeWhitelist = new Map(Sandbox.SAFE_PROTOTYPES);
-  prototypeWhitelist.set(CanvasRenderingContext2D, new Set());
-  return new Sandbox({ prototypeWhitelist });
-}
 
 const ActionsScope = {
   SeelenCommand,
@@ -25,29 +20,6 @@ const ActionsScope = {
     invoke(command, args);
   },
 };
-
-export function compileSandboxed(sandbox: Sandbox, source?: string | null) {
-  if (!source) return null;
-  try {
-    return sandbox.compile(source);
-  } catch (error) {
-    console.error("Error compiling code:", error);
-    return null;
-  }
-}
-
-export function evalSanboxed(
-  executor: ReturnType<Sandbox["compile"]> | null,
-  scope: Record<string, any>,
-): unknown {
-  if (!executor) return null;
-  try {
-    return executor({ ...scope }).run();
-  } catch (error) {
-    console.error("Error executing sandboxed code:", error);
-    return null;
-  }
-}
 
 export function evalActionSanboxed(
   executor: ReturnType<Sandbox["compile"]> | null,

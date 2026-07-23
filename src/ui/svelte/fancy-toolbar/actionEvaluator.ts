@@ -3,6 +3,7 @@ import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settingsState, widgetRect } from "./state/settings.svelte.ts";
+import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS = [
   SeelenCommand.SwitchWorkspace,
@@ -29,13 +30,7 @@ export function evalActionSanboxed(
   executor: ReturnType<Sandbox["compile"]> | null,
   scope: Record<string, any>,
 ) {
-  if (!executor) return null;
-  try {
-    return executor({ ...scope, ...ActionsScope }).run();
-  } catch (error) {
-    console.error("Error executing sandboxed code:", { error });
-    return null;
-  }
+  evalSanboxed(executor, { ...scope, ...ActionsScope });
 }
 
 export function triggerWidget(widgetId: WidgetId, itemId: string): void {

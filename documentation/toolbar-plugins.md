@@ -25,8 +25,8 @@ plugin:
     trigger("@seelen/notifications");
 ```
 
-The full field set (`scopes`, `template`, `tooltip`, `badge`, `onClick`/`onClickV2`, `onWheelUp`, `onWheelDown`,
-`style`, `remoteData`) is shown in the sections below.
+The full field set (`scopes`, `template`, `render`, `canvasSize`, `tooltip`, `badge`, `onClick`/`onClickV2`,
+`onWheelUp`, `onWheelDown`, `style`, `remoteData`) is shown in the sections below.
 
 Every field except `scopes` and `template` is optional. `template`, `tooltip`, `badge`, `onClick`, `onWheelUp`, and
 `onWheelDown` are all **JS function bodies** written as plain strings (typically pulled in with `!include` from a `.js`
@@ -159,6 +159,34 @@ Run with `{ ...resolvedScopes, ...resolvedRemoteData, t }`, where `t(key, args)`
 const totalUsage = cores.reduce((total, core) => total + core.usage, 0);
 const used = totalUsage / cores.length;
 return [icon("LuCpu"), " ", used.toFixed(0) + "%"];
+```
+
+### Canvas script — `render`
+
+`render` is an alternative to `template` for cases where a plugin needs pixel-level control (custom icons, waveforms,
+sparklines, etc.) instead of composing `icon()`/`Image()`/`Button()`/`Group()` elements. If a plugin sets `render`, it
+takes priority over `template` for the item's main content — `template` is ignored in that case. `tooltip`, `badge`, and
+the action scripts are unaffected and keep working exactly as described elsewhere on this page.
+
+Unlike the dock (see [Dock Plugins — §2](./dock-plugins#2-render)), toolbar items have no fixed size — width is normally
+intrinsic to content — so a `render`-based item needs an explicit width to give the canvas something to draw into:
+
+- `canvasSize` (`number`, optional) — width in **pixels** of the canvas. If omitted, the item is drawn square (width =
+  height).
+- The canvas height always tracks the toolbar's configured item size (`--config-item-size`), the same value every other
+  toolbar item's height derives from.
+
+The scope contract for `render` is otherwise identical to the dock's: it runs with the resolved `scopes`/`remoteData`
+plus `isDarkMode`, `systemTokens`/`themeTokens` (CSS custom-property color values as plain strings), and a `canvas`
+object (`{ getContext(contextId), width, height }`). See
+[Dock Plugins — §2.1](./dock-plugins#21-drawing-onto-the-canvas-default) for the full drawing API and an example that
+draws with `ctx.arc/lineTo/stroke/fill`.
+
+```yaml
+plugin:
+  scopes: [Waveform]
+  render: !include render.js
+  canvasSize: 40
 ```
 
 ### Action scripts — `onClick`, `onWheelUp`, `onWheelDown`

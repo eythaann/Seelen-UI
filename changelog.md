@@ -5,6 +5,7 @@
 ### features
 
 - mutiple dock items sizes.
+- new renderer for toolbar plugins via canvas.
 
 ### fix
 

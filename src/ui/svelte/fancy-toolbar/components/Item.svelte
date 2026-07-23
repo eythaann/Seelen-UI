@@ -10,18 +10,21 @@
   import type { createSortable } from "@dnd-kit/svelte/sortable";
   import { t } from "../i18n/index.ts";
   import { evalActionSanboxed, triggerWidget } from "../actionEvaluator.ts";
-  import {
-    compileSandboxed,
-    evalComponentSandboxed,
-    stringFromEvaluated,
-  } from "../evaluatedComponents.ts";
+  import { evalComponentSandboxed, stringFromEvaluated } from "../evaluatedComponents.ts";
   import { toolbarActions } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { styleToString } from "../utils.ts";
   import EvaluatedComponents from "../EvaluatedComponents.svelte";
-  import Sandbox from "@nyariv/sandboxjs";
   import { createRemoteDataResolver } from "../remoteData.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
+  import {
+    compileSandboxed,
+    createCanvasSandbox,
+    evalSanboxed,
+    getSystemTokens,
+    getThemeTokens,
+  } from "libs/ui/svelte/utils/sandbox.ts";
+  import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
 
   interface Props {
     module: ToolbarItem;
@@ -71,14 +74,17 @@
   const scope = $derived.by(() => ({
     ..._scopeResult.data,
     ...fetchedData,
+    position: settingsState.position,
     t: (...args: [string, Record<string, string>]) => $t(...args),
   }));
 
   // ── Sandboxed code evaluation ────────────────────────────────────────────
 
-  const sandbox = new Sandbox();
+  const sandbox = createCanvasSandbox();
+  let canvas = $state<HTMLCanvasElement | null>(null);
 
   const contentExec = $derived(compileSandboxed(sandbox, self.template));
+  const renderExec = $derived(compileSandboxed(sandbox, self.render));
   const tooltipExec = $derived(compileSandboxed(sandbox, self.tooltip));
   const badgeExec = $derived(compileSandboxed(sandbox, self.badge));
 
@@ -86,11 +92,13 @@
   const onWheelUpExec = $derived(compileSandboxed(sandbox, self.onWheelUp));
   const onWheelDownExec = $derived(compileSandboxed(sandbox, self.onWheelDown));
 
-  const content = $derived(evalComponentSandboxed(self.template, contentExec, scope));
-  const tooltip = $derived(
-    self.tooltip ? evalComponentSandboxed(self.tooltip, tooltipExec, scope) : null,
+  const content = $derived(self.render ? null : evalComponentSandboxed(contentExec, scope));
+  const tooltip = $derived(self.tooltip ? evalComponentSandboxed(tooltipExec, scope) : null);
+  const badge = $derived(self.badge ? evalComponentSandboxed(badgeExec, scope) : null);
+
+  const canvasWidth = $derived(
+    self.canvasSize ? `${self.canvasSize}px` : "var(--config-item-size)",
   );
-  const badge = $derived(self.badge ? evalComponentSandboxed(self.badge, badgeExec, scope) : null);
 
   // ── Others derives ───────────────────────────────────────────────────────
 
@@ -142,9 +150,29 @@
       trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
     });
   }
+
+  $effect(() => {
+    if (!self.render || !renderExec || !canvas) return;
+
+    canvas.width = canvas.clientWidth * window.devicePixelRatio;
+    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+
+    const computed = getComputedStyle(canvas);
+    evalSanboxed(renderExec, {
+      ...scope,
+      isDarkMode: prefersDarkColorScheme.value,
+      systemTokens: getSystemTokens(computed),
+      themeTokens: getThemeTokens(computed),
+      canvas: {
+        getContext: (contextId: string) => canvas!.getContext(contextId),
+        width: canvas.width,
+        height: canvas.height,
+      },
+    });
+  });
 </script>
 
-{#if !fetching && content}
+{#if !fetching && (content || self.render)}
   {#if self.id.startsWith("hardcoded-separator")}
     <div {@attach sortable?.attach ?? noopAttach} class="ft-bar-separator"></div>
   {:else}
@@ -166,7 +194,12 @@
       onkeypress={() => {}}
     >
       <div class="ft-bar-item-content">
-        <EvaluatedComponents {content} />
+        {#if self.render}
+          <canvas bind:this={canvas} class="ft-bar-item-canvas" style:width={canvasWidth}></canvas>
+        {:else}
+          <EvaluatedComponents {content} />
+        {/if}
+
         {#if badge}
           <div class="ft-bar-item-badge">
             <EvaluatedComponents content={badge} />
@@ -176,3 +209,10 @@
     </div>
   {/if}
 {/if}
+
+<style>
+  .ft-bar-item-canvas {
+    display: block;
+    height: var(--config-item-size);
+  }
+</style>

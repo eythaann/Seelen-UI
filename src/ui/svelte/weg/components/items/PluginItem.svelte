@@ -13,10 +13,7 @@
     getMenuForItem,
   } from "../../generalMenu.ts";
   import {
-    compileSandboxed,
-    createPluginSandbox,
     evalActionSanboxed,
-    evalSanboxed,
     stringFromEvaluated,
     triggerWidget,
   } from "../../pluginEval.svelte.ts";
@@ -25,6 +22,13 @@
   import { SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
 
   import { settingsState } from "../../state/settings.svelte.ts";
+  import {
+    createCanvasSandbox,
+    compileSandboxed,
+    evalSanboxed,
+    getSystemTokens,
+    getThemeTokens,
+  } from "libs/ui/svelte/utils/sandbox.ts";
 
   interface Props {
     item: PluginWegItem;
@@ -48,7 +52,7 @@
     t: (...args: [string, Record<string, string>]) => $t(...args),
   });
 
-  const sandbox = createPluginSandbox();
+  const sandbox = createCanvasSandbox();
 
   const renderExec = $derived(compileSandboxed(sandbox, payload.render));
   const tooltipExec = $derived(compileSandboxed(sandbox, payload.tooltip));
@@ -106,22 +110,8 @@
     evalSanboxed(renderExec, {
       ...scope,
       isDarkMode: prefersDarkColorScheme.value,
-      systemTokens: {
-        accentLightestColor: computed.getPropertyValue("--system-accent-lightest-color"),
-        accentLighterColor: computed.getPropertyValue("--system-accent-lighter-color"),
-        accentLightColor: computed.getPropertyValue("--system-accent-light-color"),
-        accentColor: computed.getPropertyValue("--system-accent-color"),
-        accentDarkColor: computed.getPropertyValue("--system-accent-dark-color"),
-        accentDarkerColor: computed.getPropertyValue("--system-accent-darker-color"),
-        accentDarkestColor: computed.getPropertyValue("--system-accent-darkest-color"),
-      },
-      themeTokens: {
-        foregroundColor: computed.getPropertyValue("--slu-std-fg-color"),
-        foregroundSecondaryColor: computed.getPropertyValue("--slu-std-fg-secondary-color"),
-        foregroundMutedColor: computed.getPropertyValue("--slu-std-fg-muted-color"),
-        foregroundDisabledColor: computed.getPropertyValue("--slu-std-fg-disabled-color"),
-        backgroundColor: computed.getPropertyValue("--slu-std-bg-color"),
-      },
+      systemTokens: getSystemTokens(computed),
+      themeTokens: getThemeTokens(computed),
       canvas: {
         getContext: (contextId: string) => canvas!.getContext(contextId),
         width: canvas.width,

@@ -18,6 +18,12 @@ pub struct ToolbarItem {
     pub scopes: HashSet<String>,
     /// JS function definition for content to display in the item.
     pub template: JsFunctionBody,
+    /// JS function definition that draws directly onto a canvas instead of using `template`.
+    /// When present, this takes priority over `template` for the item's main content.
+    pub render: Option<JsFunctionBody>,
+    /// Width (px) of the canvas when `render` is used. Height is always the toolbar's
+    /// configured item size. If not set, the canvas is square (width = height).
+    pub canvas_size: Option<u32>,
     /// JS function definition for content to display in tooltip of the item.
     pub tooltip: Option<JsFunctionBody>,
     /// JS function definition badge content, will be displayed over the item, useful as notifications.

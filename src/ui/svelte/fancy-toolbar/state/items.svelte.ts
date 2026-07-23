@@ -11,6 +11,8 @@ export const baseItem: ToolbarItem = {
   id: "-",
   scopes: [],
   template: 'return ""',
+  render: null,
+  canvasSize: null,
   tooltip: null,
   badge: null,
   remoteData: {},
@@ -183,9 +185,7 @@ $effect.root(() => {
 });
 
 subscribe(SeelenEvent.PluginEnabled, (e) => {
-  if (plugins.value.some((p) => p.id === e.payload)) {
-    toolbarActions.addItem(e.payload);
-  }
+  toolbarActions.addItem(e.payload);
 });
 
 $effect.root(() => {
@@ -218,6 +218,8 @@ export const toolbarActions = {
     };
   },
   addItem(id: PluginId) {
+    if (!plugins.value.some((p) => p.id === id)) return;
+    if (_toolbarState.items.some((item) => matchIds(item, id))) return;
     _toolbarState = {
       ..._toolbarState,
       items: [..._toolbarState.items, id],

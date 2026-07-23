@@ -76,9 +76,7 @@ subscribe(SeelenEvent.WegAddItem, (e) => {
 });
 
 subscribe(SeelenEvent.PluginEnabled, (e) => {
-  if (plugins.value.some((p) => p.id === e.payload)) {
-    dockStateActions.addPlugin(e.payload);
-  }
+  dockStateActions.addPlugin(e.payload);
 });
 
 let isRemoteUpdate = false;
@@ -171,12 +169,12 @@ export const dockStateActions = {
     };
   },
   addPlugin(plugin: PluginId) {
-    if (!_dockState.items.some((i) => i.type === "Plugin" && i.plugin === plugin)) {
-      _dockState = {
-        ..._dockState,
-        items: [..._dockState.items, { id: crypto.randomUUID(), type: "Plugin", plugin }],
-      };
-    }
+    if (!plugins.value.some((p) => p.id === plugin)) return;
+    if (_dockState.items.some((i) => i.type === "Plugin" && i.plugin === plugin)) return;
+    _dockState = {
+      ..._dockState,
+      items: [..._dockState.items, { id: crypto.randomUUID(), type: "Plugin", plugin }],
+    };
   },
   removePlugin(plugin: PluginId) {
     _dockState = {

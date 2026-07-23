@@ -1,4 +1,5 @@
 import type Sandbox from "@nyariv/sandboxjs";
+import { evalSanboxed } from "libs/ui/svelte/utils/sandbox";
 import { z } from "zod";
 
 export enum ObjectComponentKind {
@@ -9,40 +10,31 @@ export enum ObjectComponentKind {
   Group = "Group",
 }
 
-export const ComponentCreatorScope = {
-  icon: (arg1?: unknown, arg2?: unknown) => EvaluatedReactIconPropsSchema.parse({ name: arg1, size: arg2 }),
-  Icon: (arg: unknown) => EvaluatedReactIconPropsSchema.parse(arg),
-  AppIcon: (arg: unknown) => EvaluatedAppIconPropsSchema.parse(arg),
-  Image: (arg: unknown) => EvaluatedImagePropsSchema.parse(arg),
-  Button: (arg: unknown) => EvaluatedButtonPropsSchema.parse(arg),
-  Group: (arg: unknown) => EvaluatedGroupPropsSchema.parse(arg),
-};
-
-export const EvaluatedReactIconPropsSchema = z.object({
+const EvaluatedReactIconPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Icon).default(ObjectComponentKind.Icon),
   name: z.string(),
 });
 
-export const EvaluatedAppIconPropsSchema = z.object({
+const EvaluatedAppIconPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.AppIcon).default(ObjectComponentKind.AppIcon),
   path: z.string().nullish(),
   umid: z.string().nullish(),
 });
 
-export const EvaluatedImagePropsSchema = z.object({
+const EvaluatedImagePropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Image).default(ObjectComponentKind.Image),
   url: z.string().nullish(),
   path: z.string().nullish(),
 });
 
-export const EvaluatedButtonPropsSchema = z.object({
+const EvaluatedButtonPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Button).default(ObjectComponentKind.Button),
   style: z.record(z.any()).default({}),
   content: z.unknown().nullish(),
   onClick: z.string().nullish(),
 });
 
-export const EvaluatedGroupPropsSchema = z.object({
+const EvaluatedGroupPropsSchema = z.object({
   "@component": z.literal(ObjectComponentKind.Group).default(ObjectComponentKind.Group),
   style: z.record(z.any()).default({}),
   content: z.unknown().nullish(),
@@ -65,7 +57,7 @@ export function stringFromEvaluated(content: unknown): string {
   }
 }
 
-export type ParsedComponent =
+type ParsedComponent =
   | { kind: ObjectComponentKind.Icon; props: z.infer<typeof EvaluatedReactIconPropsSchema> }
   | { kind: ObjectComponentKind.AppIcon; props: z.infer<typeof EvaluatedAppIconPropsSchema> }
   | { kind: ObjectComponentKind.Image; props: z.infer<typeof EvaluatedImagePropsSchema> }
@@ -99,26 +91,18 @@ export function parseComponentProps(content: object): ParsedComponent | null {
   }
 }
 
-export function compileSandboxed(sandbox: Sandbox, source?: string | null) {
-  if (!source) return null;
-  try {
-    return sandbox.compile(source);
-  } catch (e) {
-    console.error("Error compiling code:", e);
-    return null;
-  }
-}
+const ComponentCreatorScope = {
+  icon: (arg1?: unknown, arg2?: unknown) => EvaluatedReactIconPropsSchema.parse({ name: arg1, size: arg2 }),
+  Icon: (arg: unknown) => EvaluatedReactIconPropsSchema.parse(arg),
+  AppIcon: (arg: unknown) => EvaluatedAppIconPropsSchema.parse(arg),
+  Image: (arg: unknown) => EvaluatedImagePropsSchema.parse(arg),
+  Button: (arg: unknown) => EvaluatedButtonPropsSchema.parse(arg),
+  Group: (arg: unknown) => EvaluatedGroupPropsSchema.parse(arg),
+};
 
 export function evalComponentSandboxed(
-  source: string,
   executor: ReturnType<Sandbox["compile"]> | null,
   scope: Record<string, any>,
 ): unknown {
-  if (!executor) return null;
-  try {
-    return executor({ ...scope, ...ComponentCreatorScope }).run();
-  } catch (error) {
-    console.error("Error executing sandboxed code:", { error, source });
-    return null;
-  }
+  return evalSanboxed(executor, { ...scope, ...ComponentCreatorScope });
 }
