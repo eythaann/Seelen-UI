@@ -11,6 +11,7 @@
 
 - floating windows while twm is disabled.
 - disabling widgets on shortcuts change.
+- workspaces behaviors on multimonitor setups.
 
 ## [2.8.0]
 
