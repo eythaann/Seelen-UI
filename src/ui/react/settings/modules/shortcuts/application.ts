@@ -1,7 +1,7 @@
 import type {
+  GenericWidgetSettings,
   ResourceText,
   SluShortcutsSettings,
-  ThirdPartyWidgetSettings,
   Widget,
   WidgetShortcutDeclaration,
 } from "@seelen-ui/lib/types";
@@ -63,7 +63,7 @@ export function updateShortcut(entry: ShortcutEntry, keys: string[]) {
   if (entry.widgetId) {
     const byWidget = settings.value.byWidget;
 
-    const widgetUserConfig: ThirdPartyWidgetSettings = byWidget[entry.widgetId] || {
+    const widgetUserConfig: GenericWidgetSettings = byWidget[entry.widgetId] || {
       // we can safestly assume the widget is enabled as otherwise it wouldn't be here
       enabled: true,
     };

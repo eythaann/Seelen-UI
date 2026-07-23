@@ -1,6 +1,6 @@
 import { SeelenCommand, SeelenEvent, type UnSubscriber } from "../../handlers/mod.ts";
 
-import type { Settings as ISettings, ThirdPartyWidgetSettings } from "@seelen-ui/types";
+import type { GenericWidgetSettings, Settings as ISettings } from "@seelen-ui/types";
 import { newFromInvoke, newOnEvent } from "../../utils/State.ts";
 import { invoke } from "../../handlers/mod.ts";
 import { Widget } from "../widget/mod.ts";
@@ -35,7 +35,7 @@ export class Settings {
    * - the instance patch settings (if apply)
    * - the monitor patch settings (if apply)
    */
-  getCurrentWidgetConfig(): ThirdPartyWidgetSettings {
+  getCurrentWidgetConfig(): GenericWidgetSettings {
     const currentWidget = Widget.getCurrent();
 
     const widgetId = currentWidget.id;

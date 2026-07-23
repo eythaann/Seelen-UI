@@ -1,8 +1,8 @@
 import {
   type Alignment,
   type Frame,
+  type GenericWidgetSettings,
   type Rect,
-  type ThirdPartyWidgetSettings,
   type Widget as IWidget,
   type WidgetConfigDefinition,
   type WidgetId,
@@ -102,8 +102,8 @@ export class Widget {
   }
 
   /** Returns the default config of the widget, declared on the widget definition */
-  public getDefaultConfig(): ThirdPartyWidgetSettings {
-    const config: ThirdPartyWidgetSettings = { enabled: true };
+  public getDefaultConfig(): GenericWidgetSettings {
+    const config: GenericWidgetSettings = { enabled: true };
     for (const definition of this.def.settings) {
       Object.assign(config, getDefinitionDefaultValues(definition));
     }
