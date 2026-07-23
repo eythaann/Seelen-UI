@@ -15,7 +15,7 @@ export function isWidgetEnabled(widgetId: WidgetId) {
   if (config) {
     return config.enabled;
   }
-  return widget?.loader !== "Legacy" && !!widget?.metadata.bundled;
+  return !!widget?.metadata.bundled;
 }
 
 /**

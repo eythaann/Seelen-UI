@@ -7,6 +7,13 @@ use crate::{resource::WidgetId, utils::TsUnknown};
 
 use super::{FancyToolbarSettings, SeelenWallSettings, SeelenWegSettings, WindowManagerSettings};
 
+const SYSTEM_WIDGET_IDS: &[&str] = &[
+    "@seelen/settings",
+    "@seelen/dialog",
+    "@seelen/context-menu",
+    "@seelen/tooltip",
+];
+
 #[derive(Clone, Debug, Default, Serialize, Deserialize, JsonSchema)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default)]
@@ -20,7 +27,7 @@ pub struct SettingsByWidget {
     #[serde(rename = "@seelen/wallpaper-manager")]
     pub wall: SeelenWallSettings,
     #[serde(flatten)]
-    pub others: HashMap<WidgetId, ThirdPartyWidgetSettings>,
+    pub others: HashMap<WidgetId, GenericWidgetSettings>,
 }
 
 impl SettingsByWidget {
@@ -68,7 +75,7 @@ impl SettingsByWidget {
                     o.get_mut().enabled = enabled;
                 }
                 std::collections::hash_map::Entry::Vacant(v) => {
-                    v.insert(ThirdPartyWidgetSettings {
+                    v.insert(GenericWidgetSettings {
                         enabled,
                         ..Default::default()
                     });
@@ -76,12 +83,26 @@ impl SettingsByWidget {
             },
         }
     }
+
+    /// System widgets can not be disabled. If a system widget is present in `others`
+    /// (e.g. leftover from an older config), force it back to enabled; otherwise do nothing.
+    pub fn sanitize(&mut self) {
+        for id in SYSTEM_WIDGET_IDS {
+            if let Some(settings) = self.others.get_mut(&WidgetId::from(*id)) {
+                settings.enabled = true;
+            }
+        }
+    }
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(export)
+)]
 #[serde(default)]
-pub struct ThirdPartyWidgetSettings {
+pub struct GenericWidgetSettings {
     /// Enable or disable the widget
     pub enabled: bool,
     /// By intance will be used to store settings in case of multiple instances allowed on widget.\

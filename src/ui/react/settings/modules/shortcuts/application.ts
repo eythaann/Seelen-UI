@@ -1,4 +1,10 @@
-import type { ResourceText, SluShortcutsSettings, Widget, WidgetShortcutDeclaration } from "@seelen-ui/lib/types";
+import type {
+  ResourceText,
+  SluShortcutsSettings,
+  ThirdPartyWidgetSettings,
+  Widget,
+  WidgetShortcutDeclaration,
+} from "@seelen-ui/lib/types";
 import { computed } from "@preact/signals";
 import { settings } from "../../state/mod";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
@@ -25,13 +31,13 @@ export interface ShortcutEntry {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function getWidgetOverrides(widgetId: WidgetId): Record<string, string[]> {
+function getWidgetShortcutsOverrides(widgetId: WidgetId): Record<string, string[]> {
   const byWidget = settings.value.byWidget;
   return byWidget[widgetId]?.$shortcuts ?? {};
 }
 
 function widgetShortcutToEntry(decl: WidgetShortcutDeclaration, widgetId: WidgetId): ShortcutEntry {
-  const overrides = getWidgetOverrides(widgetId);
+  const overrides = getWidgetShortcutsOverrides(widgetId);
 
   return {
     id: decl.id,
@@ -57,25 +63,31 @@ export function updateShortcut(entry: ShortcutEntry, keys: string[]) {
   if (entry.widgetId) {
     const byWidget = settings.value.byWidget;
 
+    const widgetUserConfig: ThirdPartyWidgetSettings = byWidget[entry.widgetId] || {
+      // we can safestly assume the widget is enabled as otherwise it wouldn't be here
+      enabled: true,
+    };
+
     settings.value = {
       ...settings.value,
       byWidget: {
         ...settings.value.byWidget,
         [entry.widgetId]: {
-          ...(byWidget[entry.widgetId] ?? {}),
-          $shortcuts: { ...getWidgetOverrides(entry.widgetId), [entry.id]: keys },
+          ...widgetUserConfig,
+          $shortcuts: { ...getWidgetShortcutsOverrides(entry.widgetId), [entry.id]: keys },
         },
       } as typeof settings.value.byWidget,
     };
-  } else {
-    settings.value = {
-      ...settings.value,
-      shortcuts: {
-        ...settings.value.shortcuts,
-        shortcuts: { ...settings.value.shortcuts.shortcuts, [entry.id]: keys },
-      },
-    };
+    return;
   }
+
+  settings.value = {
+    ...settings.value,
+    shortcuts: {
+      ...settings.value.shortcuts,
+      shortcuts: { ...settings.value.shortcuts.shortcuts, [entry.id]: keys },
+    },
+  };
 }
 
 export function resetShortcuts() {

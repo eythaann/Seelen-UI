@@ -10,6 +10,7 @@
 ### fix
 
 - floating windows while twm is disabled.
+- disabling widgets on shortcuts change.
 
 ## [2.8.0]
 

@@ -612,6 +612,7 @@ impl Settings {
         self.dedup_icon_packs();
 
         self.by_app.prepare();
+        self.by_widget.sanitize();
 
         self.polling_interval = self.polling_interval.max(1);
         Ok(())
