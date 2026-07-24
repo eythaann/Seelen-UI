@@ -1,12 +1,12 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { Alignment, SeelenWegSide, type UserAppWindow, type WidgetId } from "@seelen-ui/lib/types";
-import { settingsState, widgetRect } from "./state/settings.svelte.ts";
+import { settingsState } from "./state/settings.svelte.ts";
 
 export function triggerPreviewWidget(itemEl: HTMLElement, windows: UserAppWindow[]) {
   const dockSide = settingsState.position;
 
   const elRect = itemEl.getBoundingClientRect();
-  const viewRect = widgetRect.value.hitboxRect;
+  const viewRect = settingsState.widgetRect.hitboxRect;
 
   const toPhysical = (n: number) => Math.round(n * globalThis.devicePixelRatio);
 

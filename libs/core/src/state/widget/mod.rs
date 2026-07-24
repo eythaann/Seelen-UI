@@ -180,7 +180,9 @@ pub struct WidgetTriggerPayload {
     pub id: WidgetId,
     pub monitor_id: Option<MonitorId>,
     pub instance_id: Option<uuid::Uuid>,
-    /// Desired position to show the widget
+    /// Desired position to show the widget.
+    /// Either axis can be set to `i32::MIN` to mean "unset", in which case that axis will
+    /// fall back to the current cursor position while the other axis keeps the given value.
     pub desired_position: Option<Point>,
     /// This will be used to align the widget at the desired position
     /// - start will set the widget at the left of point,

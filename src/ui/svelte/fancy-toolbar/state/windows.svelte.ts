@@ -1,6 +1,6 @@
 import { Widget } from "@seelen-ui/lib";
 import { FancyToolbarSide, type UserAppWindowColors } from "@seelen-ui/lib/types";
-import { settingsState, widgetRect } from "./settings.svelte.ts";
+import { settingsState } from "./settings.svelte.ts";
 import { focused, interactables, widgetStatuses, windowsColors } from "./getters.svelte.ts";
 
 export { focused, interactables, widgetStatuses, windowsColors };
@@ -27,7 +27,7 @@ const _isTbOverlapped = $derived.by(() => {
   }
 
   // Check if any interactable window overlaps with the hitbox
-  const a = widgetRect.value;
+  const a = settingsState.widgetRect;
   for (const app of interactables.value) {
     if (app.monitor !== widget.decoded.monitorId || app.isIconic || !app.rect) continue;
     const b = app.rect;

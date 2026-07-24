@@ -1,6 +1,6 @@
 import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { type FocusedApp, SeelenWegSide, type UserAppWindow, type UserAppWindowColors } from "@seelen-ui/lib/types";
-import { settingsState, widgetRect } from "./settings.svelte.ts";
+import { settingsState } from "./settings.svelte.ts";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types.ts";
 import { focused, interactables, previews, selfWinId, widgetStatuses, windowsColors } from "./getters.svelte.ts";
@@ -45,7 +45,7 @@ const _isDockOverlapped = $derived.by(() => {
   }
 
   // Check if any interactable window overlaps with the hitbox
-  const a = widgetRect.value.hitboxRect;
+  const a = settingsState.widgetRect.hitboxRect;
   for (const app of interactables.value) {
     if (app.monitor !== widget.decoded.monitorId || app.isIconic || !app.rect) continue;
     const b = app.rect;

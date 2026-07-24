@@ -7,6 +7,10 @@
 - mutiple dock items sizes.
 - new renderer for toolbar plugins via canvas.
 
+### enhancements
+
+- tooltip placement on toolbar and dock items.
+
 ### fix
 
 - floating windows while twm is disabled.

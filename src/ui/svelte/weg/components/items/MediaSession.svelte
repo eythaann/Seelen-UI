@@ -65,6 +65,8 @@
   role="group"
   class="weg-item weg-item-large media-session-container"
   data-tooltip={tooltip}
+  data-tooltip-origin-y={settingsState.tooltipOrigin.y}
+  data-tooltip-origin-x={settingsState.tooltipOrigin.x}
   data-tooltip-align-x={settingsState.popupAlignX}
   data-tooltip-align-y={settingsState.popupAlignY}
   oncontextmenu={onContextMenu}

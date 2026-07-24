@@ -7,13 +7,14 @@
   });
 </script>
 
-<div class={["slu-std-surface", "tooltip"]} data-showing={state.showing}>{state.text ?? ""}</div>
+<div class="tooltip" data-showing={state.showing}>{state.text ?? ""}</div>
 
 <style>
   .tooltip {
     width: max-content;
     opacity: 0;
     white-space: pre-line;
+    overflow-wrap: anywhere;
   }
 
   .tooltip[data-showing="true"] {

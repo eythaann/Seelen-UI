@@ -106,8 +106,20 @@ fn trigger_widget_inner(
         }
     }
 
-    if payload.desired_position.is_none() {
-        payload.desired_position = Some(Mouse::get_cursor_pos()?);
+    match &mut payload.desired_position {
+        None => payload.desired_position = Some(Mouse::get_cursor_pos()?),
+        // `i32::MIN` marks an axis as unset, so it falls back to the cursor position on
+        // that axis while keeping the caller-provided value on the other.
+        Some(pos) if pos.x == i32::MIN || pos.y == i32::MIN => {
+            let cursor = Mouse::get_cursor_pos()?;
+            if pos.x == i32::MIN {
+                pos.x = cursor.x;
+            }
+            if pos.y == i32::MIN {
+                pos.y = cursor.y;
+            }
+        }
+        Some(_) => {}
     }
 
     if !WIDGET_MANAGER.is_ready(&label) {

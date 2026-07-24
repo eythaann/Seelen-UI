@@ -12,11 +12,7 @@
     getEmptyTrashBinEntry,
     getMenuForItem,
   } from "../../generalMenu.ts";
-  import {
-    evalActionSanboxed,
-    stringFromEvaluated,
-    triggerWidget,
-  } from "../../pluginEval.svelte.ts";
+  import { evalActionSanboxed, triggerWidget } from "../../pluginEval.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
   import { SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
@@ -28,6 +24,7 @@
     evalSanboxed,
     getSystemTokens,
     getThemeTokens,
+    evalToStr,
   } from "libs/ui/svelte/utils/sandbox.ts";
 
   interface Props {
@@ -60,16 +57,11 @@
   const badgeExec = $derived(compileSandboxed(sandbox, payload.badge));
   const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
 
-  const tooltipText = $derived(
-    payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : null,
-  );
-
-  const badgeText = $derived(
-    payload.badge ? stringFromEvaluated(evalSanboxed(badgeExec, scope)) : null,
-  );
+  const tooltipText = $derived(evalToStr(evalSanboxed(tooltipExec, scope)));
+  const badgeText = $derived(evalToStr(evalSanboxed(badgeExec, scope)));
 
   const customIconKey = $derived(
-    payload.noCanvas ? stringFromEvaluated(evalSanboxed(renderExec, scope)) : null,
+    payload.noCanvas ? evalToStr(evalSanboxed(renderExec, scope)) : null,
   );
 
   const hasTrashBinScope = $derived(payload.scopes.some((s) => s.toLowerCase() === "trashbin"));
@@ -150,6 +142,8 @@
       class:weg-item-medium={payload.canvasSize === CanvasSize.Medium}
       class:weg-item-large={payload.canvasSize === CanvasSize.Large}
       data-tooltip={tooltipText}
+      data-tooltip-origin-y={settingsState.tooltipOrigin.y}
+      data-tooltip-origin-x={settingsState.tooltipOrigin.x}
       data-tooltip-align-x={settingsState.popupAlignX}
       data-tooltip-align-y={settingsState.popupAlignY}
       onclick={handleClick}

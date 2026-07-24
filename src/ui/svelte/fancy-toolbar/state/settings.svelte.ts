@@ -7,6 +7,69 @@ import { systemState } from "./system.svelte.ts";
 import { settings as _settings } from "./getters.svelte.ts";
 import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
 
+let isWidgetReady = $state(false);
+
+const widgetRect = $derived.by(() => {
+  const { itemSize, margin, padding } = settingsState;
+  const height = Math.round(
+    (itemSize + padding * 2 + margin * 2) * systemState.currentMonitor.scaleFactor,
+  );
+  const rect = { ...systemState.currentMonitor.rect };
+
+  if (settingsState.position === FancyToolbarSide.Top) {
+    rect.bottom = systemState.currentMonitor.rect.top + height;
+  } else if (settingsState.position === FancyToolbarSide.Bottom) {
+    rect.top = systemState.currentMonitor.rect.bottom - height;
+  }
+  return rect;
+});
+
+class SettingsState {
+  get isReady() {
+    return isWidgetReady;
+  }
+
+  set isReady(v: boolean) {
+    isWidgetReady = v;
+  }
+
+  get widgetRect() {
+    return widgetRect;
+  }
+
+  get value() {
+    return _settings.value.byWidget["@seelen/fancy-toolbar"];
+  }
+
+  get allByWidget() {
+    return _settings.value.byWidget;
+  }
+
+  get itemSize(): number {
+    return this.value.itemSize;
+  }
+  get margin(): number {
+    return this.value.margin;
+  }
+  get padding(): number {
+    return this.value.padding;
+  }
+  get position(): FancyToolbarSide {
+    return this.value.position;
+  }
+  get hideMode(): HideMode {
+    return this.value.hideMode;
+  }
+  get delayToHide(): number {
+    return this.value.delayToHide;
+  }
+  get delayToShow(): number {
+    return this.value.delayToShow;
+  }
+}
+
+export const settingsState = new SettingsState();
+
 $effect.root(() => {
   $effect(() => {
     locale.set(_settings.value.language);
@@ -15,68 +78,9 @@ $effect.root(() => {
   });
 });
 
-let isWidgetReady = $state(false);
-
-export const settingsState = {
-  get isReady() {
-    return isWidgetReady;
-  },
-  set isReady(v: boolean) {
-    isWidgetReady = v;
-  },
-
-  get value() {
-    return _settings.value.byWidget["@seelen/fancy-toolbar"];
-  },
-
-  get allByWidget() {
-    return _settings.value.byWidget;
-  },
-
-  get itemSize(): number {
-    return this.value.itemSize;
-  },
-  get margin(): number {
-    return this.value.margin;
-  },
-  get padding(): number {
-    return this.value.padding;
-  },
-  get position(): FancyToolbarSide {
-    return this.value.position;
-  },
-  get hideMode(): HideMode {
-    return this.value.hideMode;
-  },
-  get delayToHide(): number {
-    return this.value.delayToHide;
-  },
-  get delayToShow(): number {
-    return this.value.delayToShow;
-  },
-};
-
-export const widgetRect = {
-  get value() {
-    const { itemSize, margin, padding } = settingsState;
-    const height = Math.round(
-      (itemSize + padding * 2 + margin * 2) * systemState.currentMonitor.scaleFactor,
-    );
-    const rect = { ...systemState.currentMonitor.rect };
-
-    if (settingsState.position === FancyToolbarSide.Top) {
-      rect.bottom = systemState.currentMonitor.rect.top + height;
-    } else if (settingsState.position === FancyToolbarSide.Bottom) {
-      rect.top = systemState.currentMonitor.rect.bottom - height;
-    }
-
-    return rect;
-  },
-};
-
 async function updateWidgetPosition() {
+  const rect = widgetRect;
   const isTouch = isTouchPrimary.value;
-  const rect = widgetRect.value;
   const hideMode = settingsState.hideMode;
   const position = settingsState.position;
   const isReady = settingsState.isReady;
@@ -98,8 +102,8 @@ async function updateWidgetPosition() {
 }
 
 Widget.self.window.onMoved(({ payload }) => {
-  if (payload.x !== widgetRect.value.left || payload.y !== widgetRect.value.top) {
-    Widget.self.setPosition(widgetRect.value);
+  if (payload.x !== widgetRect.left || payload.y !== widgetRect.top) {
+    Widget.self.setPosition(widgetRect);
   }
 });
 
@@ -124,7 +128,7 @@ $effect.root(() => {
     let unlisten: (() => void) | null = null;
     declareDocumentAsLayeredHitbox({
       getPhysicalRect: () => {
-        const r = widgetRect.value;
+        const r = widgetRect;
         return { x: r.left, y: r.top, width: r.right - r.left, height: r.bottom - r.top };
       },
     }).then((unlistenFn) => {

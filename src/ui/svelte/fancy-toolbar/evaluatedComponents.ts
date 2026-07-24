@@ -40,23 +40,6 @@ const EvaluatedGroupPropsSchema = z.object({
   content: z.unknown().nullish(),
 });
 
-export function stringFromEvaluated(content: unknown): string {
-  switch (typeof content) {
-    case "string":
-      return content;
-    case "number":
-    case "boolean":
-    case "bigint":
-      return String(content);
-    case "object":
-      if (content === null) return "";
-      if (Array.isArray(content)) return content.map(stringFromEvaluated).join("");
-      return "";
-    default:
-      return "";
-  }
-}
-
 type ParsedComponent =
   | { kind: ObjectComponentKind.Icon; props: z.infer<typeof EvaluatedReactIconPropsSchema> }
   | { kind: ObjectComponentKind.AppIcon; props: z.infer<typeof EvaluatedAppIconPropsSchema> }

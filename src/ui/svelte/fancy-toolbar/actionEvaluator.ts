@@ -2,7 +2,7 @@ import type Sandbox from "@nyariv/sandboxjs";
 import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { settingsState, widgetRect } from "./state/settings.svelte.ts";
+import { settingsState } from "./state/settings.svelte.ts";
 import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS = [
@@ -38,7 +38,7 @@ export function triggerWidget(widgetId: WidgetId, itemId: string): void {
     return;
   }
 
-  const { left: windowX, top: windowY } = widgetRect.value;
+  const { left: windowX, top: windowY } = settingsState.widgetRect;
 
   const element = document.getElementById(itemId);
   if (!element) {

@@ -1,8 +1,23 @@
 import { _invoke } from "./_tauri";
-import { Alignment, type WidgetId, type WidgetTriggerPayload } from "@seelen-ui/lib/types";
+import { Alignment, type Point, type WidgetId, type WidgetTriggerPayload } from "@seelen-ui/lib/types";
 
 function alignment(value: any): Alignment {
   return Object.values(Alignment).includes(value) ? value : Alignment.Start;
+}
+
+// Mirrors `i32::MIN` on the backend: marks an axis as unset so it falls back
+// to the current cursor position while the other axis keeps its given value.
+const AXIS_UNSET = -2147483648;
+
+function getTooltipOrigin(target: HTMLElement): Point | null {
+  const { tooltipOriginX, tooltipOriginY } = target.dataset;
+  if (tooltipOriginX == null && tooltipOriginY == null) {
+    return null;
+  }
+  return {
+    x: tooltipOriginX != null ? Number(tooltipOriginX) : AXIS_UNSET,
+    y: tooltipOriginY != null ? Number(tooltipOriginY) : AXIS_UNSET,
+  };
 }
 
 let timeoutRef: ReturnType<typeof setTimeout> | null = null;
@@ -33,6 +48,7 @@ function updateTooltipText(target: HTMLElement) {
       tooltip,
       alignment(target.dataset.tooltipAlignX),
       alignment(target.dataset.tooltipAlignY),
+      getTooltipOrigin(target),
       true,
     );
   }
@@ -55,7 +71,13 @@ function setTooltipParentElement(element: HTMLElement) {
   tooltipObserver = new MutationObserver(() => updateTooltipText(element));
   tooltipObserver.observe(element, {
     attributes: true,
-    attributeFilter: ["title", "data-tooltip", "aria-label"],
+    attributeFilter: [
+      "title",
+      "data-tooltip",
+      "aria-label",
+      "data-tooltip-origin-x",
+      "data-tooltip-origin-y",
+    ],
   });
 }
 
@@ -67,7 +89,13 @@ function clearTooltipParentElement() {
   tooltipObserver = null;
 }
 
-function showTooltip(text: string, alignX: Alignment, alignY: Alignment, immediate = false) {
+function showTooltip(
+  text: string,
+  alignX: Alignment,
+  alignY: Alignment,
+  origin: Point | null = null,
+  immediate = false,
+) {
   if (timeoutRef) {
     clearTimeout(timeoutRef);
     timeoutRef = null;
@@ -79,6 +107,7 @@ function showTooltip(text: string, alignX: Alignment, alignY: Alignment, immedia
       id: "@seelen/tooltip" as WidgetId,
       alignX,
       alignY,
+      desiredPosition: origin,
       customArgs: { text, show: true },
     };
     _invoke("trigger_widget", { payload });
@@ -135,6 +164,7 @@ document.addEventListener(
       tooltip,
       alignment(target.dataset.tooltipAlignX),
       alignment(target.dataset.tooltipAlignY),
+      getTooltipOrigin(target),
     );
   },
   true,

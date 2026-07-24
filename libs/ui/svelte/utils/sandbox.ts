@@ -18,16 +18,30 @@ export function compileSandboxed(sandbox: Sandbox, source?: string | null): Sanb
   }
 }
 
-export function evalSanboxed(
-  executor: SanboxedEval | null,
-  scope: Record<string, any>,
-): unknown {
+export function evalSanboxed(executor: SanboxedEval | null, scope: Record<string, any>): unknown {
   if (!executor) return null;
   try {
     return executor({ ...scope }).run();
   } catch (error) {
     console.error("Error executing sandboxed code:", error);
     return null;
+  }
+}
+
+export function evalToStr(content: unknown): string {
+  switch (typeof content) {
+    case "string":
+      return content;
+    case "number":
+    case "boolean":
+    case "bigint":
+      return String(content);
+    case "object":
+      if (content === null) return "";
+      if (Array.isArray(content)) return content.map(evalToStr).join("");
+      return "";
+    default:
+      return "";
   }
 }
 

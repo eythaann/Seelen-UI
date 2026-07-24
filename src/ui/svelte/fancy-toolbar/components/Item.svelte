@@ -10,7 +10,7 @@
   import type { createSortable } from "@dnd-kit/svelte/sortable";
   import { t } from "../i18n/index.ts";
   import { evalActionSanboxed, triggerWidget } from "../actionEvaluator.ts";
-  import { evalComponentSandboxed, stringFromEvaluated } from "../evaluatedComponents.ts";
+  import { evalComponentSandboxed } from "../evaluatedComponents.ts";
   import { toolbarActions } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { styleToString } from "../utils.ts";
@@ -21,6 +21,7 @@
     compileSandboxed,
     createCanvasSandbox,
     evalSanboxed,
+    evalToStr,
     getSystemTokens,
     getThemeTokens,
   } from "libs/ui/svelte/utils/sandbox.ts";
@@ -93,8 +94,8 @@
   const onWheelDownExec = $derived(compileSandboxed(sandbox, self.onWheelDown));
 
   const content = $derived(self.render ? null : evalComponentSandboxed(contentExec, scope));
-  const tooltip = $derived(self.tooltip ? evalComponentSandboxed(tooltipExec, scope) : null);
-  const badge = $derived(self.badge ? evalComponentSandboxed(badgeExec, scope) : null);
+  const tooltip = $derived(evalToStr(evalComponentSandboxed(tooltipExec, scope)));
+  const badge = $derived(evalToStr(evalComponentSandboxed(badgeExec, scope)));
 
   const canvasWidth = $derived(
     self.canvasSize ? `${self.canvasSize}px` : "var(--config-item-size)",
@@ -102,11 +103,14 @@
 
   // ── Others derives ───────────────────────────────────────────────────────
 
+  const tooltipY = $derived(
+    settingsState.position === FancyToolbarSide.Bottom
+      ? settingsState.widgetRect.top
+      : settingsState.widgetRect.bottom,
+  );
   const alignY = $derived(
     settingsState.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start,
   );
-
-  const tooltipText = $derived(tooltip ? stringFromEvaluated(tooltip) : undefined);
 
   const itemStyle = $derived(
     styleToString({
@@ -182,9 +186,10 @@
       role="button"
       tabindex="0"
       data-dragging={sortable?.isDragging}
-      data-tooltip={tooltipText}
+      data-tooltip={tooltip}
       data-tooltip-align-x="Center"
       data-tooltip-align-y={alignY}
+      data-tooltip-origin-y={tooltipY}
       style={itemStyle}
       class="ft-bar-item"
       class:ft-bar-item-clickable={!!self.onClick}

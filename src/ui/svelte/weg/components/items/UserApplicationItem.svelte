@@ -73,6 +73,8 @@
     tabindex="0"
     class="weg-item"
     data-tooltip={item.displayName}
+    data-tooltip-origin-y={settingsState.tooltipOrigin.y}
+    data-tooltip-origin-x={settingsState.tooltipOrigin.x}
     data-tooltip-align-x={settingsState.popupAlignX}
     data-tooltip-align-y={settingsState.popupAlignY}
     onclick={onClick}
