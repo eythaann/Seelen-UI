@@ -38,6 +38,7 @@
   let { item, payload }: Props = $props();
 
   let canvas = $state<HTMLCanvasElement | null>(null);
+  let canDraw = $state(false);
 
   let userSourceName = $derived.by(() => {
     const allByWidget = settingsState.allByWidget;
@@ -100,8 +101,26 @@
     });
   }
 
+  // during mount (e.g. inside the drag overlay portal) layout may not be
+  // flushed yet, leaving clientWidth/clientHeight at 0; wait for the
+  // ResizeObserver above to report the real size before drawing.
   $effect(() => {
-    if (payload.noCanvas || !renderExec || !canvas) return;
+    if (!canvas) return;
+    const el = canvas;
+    const observer = new ResizeObserver(() => {
+      canDraw = !!el.clientWidth && !!el.clientHeight;
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  });
+
+  $effect(() => {
+    if (payload.noCanvas || !renderExec || !canvas || !canDraw) {
+      return;
+    }
+
+    // sub to all settings changes, like theme changes, etc.
+    let _sub = settingsState.all;
 
     canvas.width = canvas.clientWidth * window.devicePixelRatio;
     canvas.height = canvas.clientHeight * window.devicePixelRatio;
@@ -118,10 +137,6 @@
         height: canvas.height,
       },
     });
-
-    // note: <img> downscaling uses the browser's high-quality resampler; a canvas
-    // rendered at CANVAS_SIZE (256) and shrunk via CSS looks noticeably pixelated.
-    // this was before but now we use canvas directly because performance on fast changes.
   });
 </script>
 

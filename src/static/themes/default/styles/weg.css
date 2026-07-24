@@ -188,13 +188,6 @@
   height: var(--config-item-size);
   width: var(--config-item-size);
 
-  /* this is needed for the apps window title text */
-  .horizontal & {
-    width: auto;
-    min-width: var(--config-item-size);
-    max-width: var(--item-size-large);
-  }
-
   &.weg-item-medium {
     .horizontal & {
       width: var(--item-size-medium);
@@ -239,6 +232,16 @@
     width: unset;
     aspect-ratio: 1/1;
     object-fit: contain;
+  }
+
+  /* this is needed for the apps window title text */
+  &:has(.weg-item-title) {
+    .horizontal & {
+      width: fit-content;
+      padding-right: var(--item-inner-spacing);
+      min-width: var(--config-item-size);
+      max-width: var(--item-size-large);
+    }
   }
 
   .weg-item-title {

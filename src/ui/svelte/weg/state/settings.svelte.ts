@@ -55,6 +55,10 @@ class SettingsState {
     isWidgetReady = v;
   }
 
+  get all() {
+    return _settings.value;
+  }
+
   get allByWidget() {
     return _settings.value.byWidget;
   }
