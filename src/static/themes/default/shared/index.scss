@@ -61,6 +61,22 @@
   }
 }
 
+body {
+  color: var(--slu-std-fg-color);
+  background-color: var(--slu-std-bg-color);
+}
+
+// @deprecated
+.slu-std-surface {
+  background-color: var(--slu-std-bg-color);
+}
+
+// @deprecated
+.slu-std-surface-elevated {
+  background-color: var(--slu-std-bg-light-color);
+  box-shadow: var(--shadow-s);
+}
+
 // Standard for popover
 body:has(> div > .slu-std-popover) {
   background-color: transparent;
@@ -72,15 +88,6 @@ body:has(> div > .slu-std-popover) {
     height: min-content;
     overflow: hidden; // disable margin collapse
   }
-}
-
-.slu-std-surface {
-  background-color: var(--slu-std-bg-color);
-}
-
-.slu-std-surface-elevated {
-  background-color: var(--slu-std-bg-light-color);
-  box-shadow: var(--shadow-s);
 }
 
 .slu-std-popover {

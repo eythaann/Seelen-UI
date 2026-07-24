@@ -68,7 +68,7 @@
       {$t("no_adapter")}
     </div>
   {:else}
-    <div class="slu-std-surface-elevated bluetooth-radio-control">
+    <div class="bluetooth-radio-control">
       <div class="bluetooth-radio-label">
         <Icon iconName="IoBluetooth" />
         <span>Bluetooth</span>

@@ -32,22 +32,6 @@ const BUTTON_ENTRIES: ComponentEntry[] = [
 
 const SURFACE_ENTRIES: ComponentEntry[] = [
   {
-    selector: ".slu-std-surface",
-    preview: (
-      <div className="slu-std-surface" style={{ padding: "8px 12px", borderRadius: 6 }}>
-        Surface
-      </div>
-    ),
-  },
-  {
-    selector: ".slu-std-surface-elevated",
-    preview: (
-      <div className="slu-std-surface-elevated" style={{ padding: "8px 12px", borderRadius: 6 }}>
-        Surface Elevated
-      </div>
-    ),
-  },
-  {
     selector: ".slu-std-popover",
     preview: (
       <div className="slu-std-popover" style={{ position: "relative", margin: 0 }}>

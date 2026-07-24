@@ -163,7 +163,7 @@
 </script>
 
 <div
-  class={["slu-std-surface", "flyout"]}
+  class="flyout"
   data-placement={ConfigState.config.placement}
   data-showing={RendererState.showing}
 >

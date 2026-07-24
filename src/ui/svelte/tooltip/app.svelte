@@ -7,7 +7,7 @@
   });
 </script>
 
-<div class="tooltip" data-showing={state.showing}>{state.text ?? ""}</div>
+<div class={["slu-std-popover", "tooltip"]} data-showing={state.showing}>{state.text ?? ""}</div>
 
 <style>
   .tooltip {

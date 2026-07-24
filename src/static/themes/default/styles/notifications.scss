@@ -46,6 +46,7 @@
 
 .notification {
   border-radius: 12px;
+  background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
   padding: 10px;
   transition: scale 0.1s ease-in-out;

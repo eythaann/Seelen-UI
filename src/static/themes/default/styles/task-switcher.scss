@@ -10,6 +10,8 @@
   max-width: 100%;
   max-height: 100%;
 
+  background-color: var(--slu-std-bg-color);
+
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -29,6 +31,7 @@
     width: fit-content;
     border-radius: 10px;
     width: 260px;
+    background-color: var(--slu-std-bg-light-color);
     box-shadow: var(--shadow-s);
 
     &:focus {

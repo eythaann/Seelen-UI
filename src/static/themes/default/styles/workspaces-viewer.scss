@@ -22,7 +22,9 @@
 
     .workspaces {
       border-radius: 10px;
+      background-color: var(--slu-std-bg-color);
       padding: var(--spacing-m);
+      box-shadow: var(--shadow-m);
 
       display: flex;
       gap: var(--spacing-m);
@@ -37,6 +39,7 @@
         position: relative;
         width: 230px;
         border-radius: 10px;
+        background-color: var(--slu-std-bg-light-color);
         box-shadow: var(--shadow-s);
         padding: var(--spacing-s);
         flex-shrink: 0;
@@ -99,6 +102,7 @@
         flex-shrink: 0;
 
         border-radius: 8px;
+        background-color: var(--slu-std-bg-light-color);
         box-shadow: var(--shadow-s);
 
         display: flex;
@@ -129,6 +133,8 @@
   width: fit-content;
 
   border-radius: 10px;
+  background-color: var(--slu-std-bg-light-color);
+  box-shadow: var(--shadow-s);
   overflow: hidden;
 
   .window-header {

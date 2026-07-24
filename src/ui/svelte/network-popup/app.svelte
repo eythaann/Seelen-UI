@@ -74,7 +74,7 @@
       {$t("no_adapter")}
     </div>
   {:else}
-    <div class="slu-std-surface-elevated network-radio-control">
+    <div class="network-radio-control">
       <div class="network-radio-label">
         <Icon iconName="FaWifi" />
         <span>Wi-Fi</span>

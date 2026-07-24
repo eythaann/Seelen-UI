@@ -82,7 +82,7 @@
 
 <div
   bind:this={boxRef}
-  class="task slu-std-surface-elevated"
+  class="task"
   role="button"
   tabindex="0"
   onkeydown={handleKeyDown}

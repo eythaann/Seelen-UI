@@ -20,6 +20,8 @@
     justify-content: space-between;
     padding: 10px 6px;
     border-radius: 8px;
+    background-color: var(--slu-std-bg-light-color);
+    box-shadow: var(--shadow-s);
 
     .bluetooth-radio-label {
       display: flex;

@@ -70,7 +70,7 @@
 
 <div
   {@attach droppable.attach}
-  class="slu-std-surface-elevated workspace"
+  class="workspace"
   class:workspace-active={active}
   class:workspace-viewing={viewing}
   class:workspace-drop-target={droppable.isDropTarget}

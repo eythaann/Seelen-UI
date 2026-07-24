@@ -63,7 +63,7 @@
       <Wallpaper definition={activeWallpaper} static muted />
     </div>
 
-    <div class="slu-std-surface workspaces">
+    <div class="workspaces">
       {#if vdMonitor}
         {#each vdMonitor.workspaces as workspace, index}
           <Workspace
@@ -78,7 +78,7 @@
         {/each}
       {/if}
 
-      <button class="slu-std-surface-elevated add-workspace" onclick={createWorkspace}>
+      <button class="add-workspace" onclick={createWorkspace}>
         <Icon iconName="IoAdd" />
       </button>
     </div>
