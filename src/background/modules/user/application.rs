@@ -1,6 +1,6 @@
 use notify_debouncer_full::{
     new_debouncer,
-    notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
+    notify::{ReadDirectoryChangesWatcher, RecursiveMode},
     DebounceEventResult, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
@@ -218,7 +218,7 @@ impl UserManager {
                 let content =
                     Self::get_folder_content(path.clone(), folder_type).unwrap_or_default();
                 let mut watcher = Self::create_folder_watcher(folder_type)?;
-                watcher.watcher().watch(&path, RecursiveMode::Recursive)?;
+                watcher.watch(&path, RecursiveMode::Recursive)?;
 
                 folders.insert(
                     folder_type,

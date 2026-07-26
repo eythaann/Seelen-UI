@@ -10,7 +10,7 @@ pub use weg_items::WEG_ITEMS_MANAGER;
 use arc_swap::ArcSwap;
 use notify_debouncer_full::{
     new_debouncer,
-    notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
+    notify::{ReadDirectoryChangesWatcher, RecursiveMode},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::{
@@ -95,9 +95,7 @@ pub fn initialize_user_resources_watcher() -> Result<()> {
         },
     )?;
 
-    debouncer
-        .watcher()
-        .watch(SEELEN_COMMON.app_data_dir(), RecursiveMode::Recursive)?;
+    debouncer.watch(SEELEN_COMMON.app_data_dir(), RecursiveMode::Recursive)?;
     USER_RESOURCES_WATCHER.set(debouncer).ok();
     Ok(())
 }

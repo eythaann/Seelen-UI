@@ -4,7 +4,7 @@ use std::time::Duration;
 
 use notify_debouncer_full::{
     new_debouncer,
-    notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
+    notify::{ReadDirectoryChangesWatcher, RecursiveMode},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::system_state::StartMenuItem;
@@ -226,9 +226,8 @@ impl StartMenuManager {
             },
         )?;
 
-        let watcher = debouncer.watcher();
-        watcher.watch(&Self::common_items_path(), RecursiveMode::Recursive)?;
-        watcher.watch(&Self::user_items_path(), RecursiveMode::Recursive)?;
+        debouncer.watch(Self::common_items_path(), RecursiveMode::Recursive)?;
+        debouncer.watch(Self::user_items_path(), RecursiveMode::Recursive)?;
 
         Ok(Arc::new(debouncer))
     }
