@@ -72,8 +72,15 @@ impl SeelenWall {
     }
 
     pub fn try_set_under_desktop_items(hwnd: HWND) -> Result<()> {
-        Self::setup_desktop_layer()?;
-        let worker_w = Self::detect_worker_w()?;
+        // Sending the "spawn worker" message when a raised WorkerW already exists makes
+        // Explorer tear down and recreate it, destroying our webview (SetParent'd into the
+        // old one) as a side effect. That retriggers this same code on remount, causing an
+        // infinite create/destroy loop. Only ask Explorer to create it when it's missing.
+        let mut worker_w = Self::detect_worker_w()?;
+        if worker_w.is_none() {
+            Self::setup_desktop_layer()?;
+            worker_w = Self::detect_worker_w()?;
+        }
         log::trace!("Setting under desktop, worker_w: {worker_w:?}");
 
         let worker_w = worker_w.ok_or("WorkerW not found")?;
