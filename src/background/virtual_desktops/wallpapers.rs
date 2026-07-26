@@ -3,7 +3,7 @@ use std::sync::{Arc, LazyLock, OnceLock};
 use std::time::Duration;
 
 use parking_lot::RwLock;
-use rand::Rng;
+use rand::RngExt;
 use seelen_core::handlers::SeelenEvent;
 use seelen_core::resource::WallpaperId;
 use seelen_core::state::{WallpaperCollection, WorkspaceId};
