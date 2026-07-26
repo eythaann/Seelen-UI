@@ -330,7 +330,7 @@ impl AnimationOrchestrator {
         // Start animation (this will interrupt any existing animation for this window only)
         let mut animation = self
             .animations
-            .entry(hwnd)
+            .entry_sync(hwnd)
             .or_insert_with(WindowAnimation::new);
         animation.start(hwnd, target_rect, easing, duration_ms, on_end)?;
         Ok(())

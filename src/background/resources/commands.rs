@@ -56,49 +56,64 @@ pub async fn remove_resource(kind: ResourceKind, id: ResourceId) -> Result<()> {
 
     match kind {
         ResourceKind::Theme => {
-            RESOURCES.themes.retain(|_, v| {
-                if *v.id == id && !v.metadata.internal.bundled {
-                    to_delete.push(v.metadata.internal.path.clone());
-                    return false;
-                }
-                true
-            });
+            RESOURCES
+                .themes
+                .retain_async(|_, v| {
+                    if *v.id == id && !v.metadata.internal.bundled {
+                        to_delete.push(v.metadata.internal.path.clone());
+                        return false;
+                    }
+                    true
+                })
+                .await;
         }
         ResourceKind::Plugin => {
-            RESOURCES.plugins.retain(|_, v| {
-                if *v.id == id && !v.metadata.internal.bundled {
-                    to_delete.push(v.metadata.internal.path.clone());
-                    return false;
-                }
-                true
-            });
+            RESOURCES
+                .plugins
+                .retain_async(|_, v| {
+                    if *v.id == id && !v.metadata.internal.bundled {
+                        to_delete.push(v.metadata.internal.path.clone());
+                        return false;
+                    }
+                    true
+                })
+                .await;
         }
         ResourceKind::Widget => {
-            RESOURCES.widgets.retain(|_, v| {
-                if *v.id == id && !v.metadata.internal.bundled {
-                    to_delete.push(v.metadata.internal.path.clone());
-                    return false;
-                }
-                true
-            });
+            RESOURCES
+                .widgets
+                .retain_async(|_, v| {
+                    if *v.id == id && !v.metadata.internal.bundled {
+                        to_delete.push(v.metadata.internal.path.clone());
+                        return false;
+                    }
+                    true
+                })
+                .await;
         }
         ResourceKind::IconPack => {
-            RESOURCES.icon_packs.retain(|_, v| {
-                if *v.id == id && !v.metadata.internal.bundled {
-                    to_delete.push(v.metadata.internal.path.clone());
-                    return false;
-                }
-                true
-            });
+            RESOURCES
+                .icon_packs
+                .retain_async(|_, v| {
+                    if *v.id == id && !v.metadata.internal.bundled {
+                        to_delete.push(v.metadata.internal.path.clone());
+                        return false;
+                    }
+                    true
+                })
+                .await;
         }
         ResourceKind::Wallpaper => {
-            RESOURCES.wallpapers.retain(|_, v| {
-                if *v.id == id && !v.metadata.internal.bundled {
-                    to_delete.push(v.metadata.internal.path.clone());
-                    return false;
-                }
-                true
-            });
+            RESOURCES
+                .wallpapers
+                .retain_async(|_, v| {
+                    if *v.id == id && !v.metadata.internal.bundled {
+                        to_delete.push(v.metadata.internal.path.clone());
+                        return false;
+                    }
+                    true
+                })
+                .await;
         }
         ResourceKind::SoundPack => {
             // feature not implemented

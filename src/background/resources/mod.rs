@@ -93,7 +93,9 @@ impl ResourceManager {
                 theme.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_themes_path());
                 let id = (*theme.id).clone();
-                self.themes.upsert(theme.id.clone(), Arc::new(theme));
+                self.themes
+                    .upsert_async(theme.id.clone(), Arc::new(theme))
+                    .await;
                 id
             }
             ResourceKind::Widget => {
@@ -109,11 +111,15 @@ impl ResourceManager {
                     plugin.metadata.internal = widget.metadata.internal.clone();
                     // plugins inherit the parent widget's premium flag
                     plugin.metadata.premium |= widget.metadata.premium;
-                    self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
+                    self.plugins
+                        .upsert_async(plugin.id.clone(), Arc::new(plugin))
+                        .await;
                 }
 
                 let id = (*widget.id).clone();
-                self.widgets.upsert(widget.id.clone(), Arc::new(widget));
+                self.widgets
+                    .upsert_async(widget.id.clone(), Arc::new(widget))
+                    .await;
                 id
             }
             ResourceKind::Plugin => {
@@ -121,7 +127,9 @@ impl ResourceManager {
                 plugin.metadata.internal.bundled =
                     path.starts_with(SEELEN_COMMON.bundled_plugins_path());
                 let id = (*plugin.id).clone();
-                self.plugins.upsert(plugin.id.clone(), Arc::new(plugin));
+                self.plugins
+                    .upsert_async(plugin.id.clone(), Arc::new(plugin))
+                    .await;
                 id
             }
             ResourceKind::Wallpaper => {
@@ -149,7 +157,8 @@ impl ResourceManager {
                         .await?;
                         let id = (*wallpaper.id).clone();
                         self.wallpapers
-                            .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
+                            .upsert_async(wallpaper.id.clone(), Arc::new(wallpaper))
+                            .await;
                         return Ok(Some(id));
                     }
                     return Ok(None);
@@ -158,7 +167,8 @@ impl ResourceManager {
                 let wallpaper = Wallpaper::load(path).await?;
                 let id = (*wallpaper.id).clone();
                 self.wallpapers
-                    .upsert(wallpaper.id.clone(), Arc::new(wallpaper));
+                    .upsert_async(wallpaper.id.clone(), Arc::new(wallpaper))
+                    .await;
                 id
             }
             ResourceKind::IconPack => {
@@ -178,7 +188,8 @@ impl ResourceManager {
                 let icon_pack = IconPack::load(path).await?;
                 let id = (*icon_pack.id).clone();
                 self.icon_packs
-                    .upsert(icon_pack.id.clone(), Arc::new(icon_pack));
+                    .upsert_async(icon_pack.id.clone(), Arc::new(icon_pack))
+                    .await;
                 id
             }
             ResourceKind::SoundPack => {
@@ -192,22 +203,26 @@ impl ResourceManager {
     pub fn unload(&self, kind: &ResourceKind, path: &Path) {
         match kind {
             ResourceKind::Theme => {
-                self.themes.retain(|_, v| v.metadata.internal.path != path);
+                self.themes
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Widget => {
-                self.plugins.retain(|_, v| v.metadata.internal.path != path);
-                self.widgets.retain(|_, v| v.metadata.internal.path != path);
+                self.plugins
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
+                self.widgets
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Plugin => {
-                self.plugins.retain(|_, v| v.metadata.internal.path != path);
+                self.plugins
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Wallpaper => {
                 self.wallpapers
-                    .retain(|_, v| v.metadata.internal.path != path);
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::IconPack => {
                 self.icon_packs
-                    .retain(|_, v| v.metadata.internal.path != path);
+                    .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::SoundPack => {
                 // feature not implemented
@@ -219,19 +234,19 @@ impl ResourceManager {
         match kind {
             ResourceKind::Theme => self
                 .themes
-                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
+                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
             ResourceKind::Plugin => self
                 .plugins
-                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
+                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
             ResourceKind::Widget => self
                 .widgets
-                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
+                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
             ResourceKind::IconPack => self
                 .icon_packs
-                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
+                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
             ResourceKind::Wallpaper => self
                 .wallpapers
-                .retain(|_, v| self.manual.contains(&v.metadata.internal.path)),
+                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
             ResourceKind::SoundPack => {
                 // feature not implemented
             }
@@ -314,7 +329,7 @@ impl ResourceManager {
             ResourceKind::Widget => {
                 let widget_id = WidgetId::from(id.clone());
                 self.widgets
-                    .read(&widget_id, |_, w| {
+                    .read_sync(&widget_id, |_, w| {
                         w.plugins.iter().map(|p| p.id.clone()).collect()
                     })
                     .unwrap_or_default()
@@ -330,7 +345,7 @@ impl ResourceManager {
                         let theme_id = ThemeId::from(id.clone());
                         let has_shared_styles = RESOURCES
                             .themes
-                            .read(&theme_id, |_, t| {
+                            .read_sync(&theme_id, |_, t| {
                                 t.shared_styles.as_ref().is_some_and(|s| !s.is_empty())
                             })
                             .unwrap_or(false);

@@ -42,13 +42,13 @@ impl AppSettings {
 
     /// Resources id changed for remote/downloaded resources.
     pub(super) fn migration_v2_5_0(&mut self, resources: &ResourceManager) -> Result<()> {
-        resources.themes.scan(|new_id, theme| {
+        resources.themes.iter_sync(|new_id, theme| {
             let Some(remote) = &theme.metadata.internal.remote else {
-                return;
+                return true;
             };
 
             let Some(old_id) = remote.deprecated_id.clone() else {
-                return;
+                return true;
             };
             let old_id = old_id.into();
 
@@ -61,15 +61,16 @@ impl AppSettings {
                     *id = new_id.clone();
                 }
             }
+            true
         });
 
-        resources.wallpapers.scan(|new_id, wallpaper| {
+        resources.wallpapers.iter_sync(|new_id, wallpaper| {
             let Some(remote) = &wallpaper.metadata.internal.remote else {
-                return;
+                return true;
             };
 
             let Some(old_id) = remote.deprecated_id.clone() else {
-                return;
+                return true;
             };
             let old_id = old_id.into();
 
@@ -84,15 +85,16 @@ impl AppSettings {
                     }
                 }
             }
+            true
         });
 
-        resources.widgets.scan(|k, v| {
+        resources.widgets.iter_sync(|k, v| {
             let Some(remote) = &v.metadata.internal.remote else {
-                return;
+                return true;
             };
 
             let Some(old_id) = remote.deprecated_id.clone() else {
-                return;
+                return true;
             };
             let old_id = old_id.into();
 
@@ -104,7 +106,8 @@ impl AppSettings {
                 if let Some(config) = monitor.by_widget.remove(&old_id) {
                     monitor.by_widget.insert(k.clone(), config);
                 };
-            })
+            });
+            true
         });
 
         Ok(())
@@ -117,7 +120,7 @@ impl AppSettings {
             let original_len = collection.wallpapers.len();
             collection
                 .wallpapers
-                .retain(|wallpaper_id| resources.wallpapers.contains(wallpaper_id));
+                .retain(|wallpaper_id| resources.wallpapers.contains_sync(wallpaper_id));
             if collection.wallpapers.len() != original_len {
                 changed = true;
             }

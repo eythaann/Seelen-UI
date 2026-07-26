@@ -127,7 +127,7 @@ impl SluWorkspacesManager2 {
                 } else {
                     // allow resume workspaces correctly on change
                     for addr in &workspace.windows {
-                        let _ = MINIMIZED_BY_WORKSPACES.insert(*addr);
+                        let _ = MINIMIZED_BY_WORKSPACES.insert_sync(*addr);
                     }
                     workspace.hide(true);
                 }
@@ -486,7 +486,7 @@ impl SluWorkspacesManager2 {
                 // Hide window if target workspace is not active
                 if monitor.active_workspace_id() != workspace_id {
                     window.show_window(SW_MINIMIZE).ok();
-                    let _ = MINIMIZED_BY_WORKSPACES.insert(window_id);
+                    let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window_id);
                 }
 
                 Self::send(VirtualDesktopEvent::WindowMoved {
@@ -598,7 +598,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
         for addr in &self.windows {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
-                let _ = MINIMIZED_BY_WORKSPACES.insert(window.address());
+                let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window.address());
                 window.show_window(mode).log_error();
             }
         }
@@ -611,7 +611,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             let is_minimized = window.is_minimized();
 
             // avoid restore windows manually minimized by the user
-            if is_minimized && !MINIMIZED_BY_WORKSPACES.contains(addr) {
+            if is_minimized && !MINIMIZED_BY_WORKSPACES.contains_sync(addr) {
                 continue;
             }
 
@@ -622,7 +622,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
                 // use normal show instead async cuz it will keep the order of restoring
                 window.show_window(SW_RESTORE).log_error();
             }
-            MINIMIZED_BY_WORKSPACES.remove(addr);
+            MINIMIZED_BY_WORKSPACES.remove_sync(addr);
 
             // ensure correct focus
             if idx == len - 1 {

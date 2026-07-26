@@ -24,11 +24,12 @@ impl ResourceManager {
     pub fn widgets(&self) -> Vec<Arc<Widget>> {
         let show_premiums = SessionManager::instance().lock().has_premium_access();
         let mut widgets = Vec::new();
-        self.widgets.scan(|_, v| {
+        self.widgets.iter_sync(|_, v| {
             if v.metadata.premium && !show_premiums {
-                return;
+                return true;
             }
             widgets.push(v.clone());
+            true
         });
         widgets
     }
@@ -36,11 +37,12 @@ impl ResourceManager {
     pub fn themes(&self) -> Vec<Arc<Theme>> {
         let show_premiums = SessionManager::instance().lock().has_premium_access();
         let mut themes = Vec::new();
-        self.themes.scan(|_, v| {
+        self.themes.iter_sync(|_, v| {
             if v.metadata.premium && !show_premiums {
-                return;
+                return true;
             }
             themes.push(v.clone());
+            true
         });
         themes
     }
@@ -48,11 +50,12 @@ impl ResourceManager {
     pub fn plugins(&self) -> Vec<Arc<seelen_core::state::Plugin>> {
         let show_premiums = SessionManager::instance().lock().has_premium_access();
         let mut plugins = Vec::new();
-        self.plugins.scan(|_, v| {
+        self.plugins.iter_sync(|_, v| {
             if v.metadata.premium && !show_premiums {
-                return;
+                return true;
             }
             plugins.push(v.clone());
+            true
         });
         plugins
     }
@@ -65,11 +68,12 @@ impl ResourceManager {
             icon_packs.push(std::sync::Arc::new(system_pack.clone()));
         }
         // Add user icon packs
-        self.icon_packs.scan(|_, v| {
+        self.icon_packs.iter_sync(|_, v| {
             if v.metadata.premium && !show_premiums {
-                return;
+                return true;
             }
             icon_packs.push(v.clone());
+            true
         });
         icon_packs
     }
@@ -77,11 +81,12 @@ impl ResourceManager {
     pub fn wallpapers(&self) -> Vec<Arc<seelen_core::state::Wallpaper>> {
         let show_premiums = SessionManager::instance().lock().has_premium_access();
         let mut wallpapers = Vec::new();
-        self.wallpapers.scan(|_, v| {
+        self.wallpapers.iter_sync(|_, v| {
             if v.metadata.premium && !show_premiums {
-                return;
+                return true;
             }
             wallpapers.push(v.clone());
+            true
         });
         wallpapers
     }
@@ -145,33 +150,46 @@ impl ResourceManager {
     pub fn emit_on_session_changed(&self) -> Result<()> {
         let mut has_premium = false;
 
-        self.themes.scan(|_, v| has_premium |= v.metadata.premium);
+        self.themes.iter_sync(|_, v| {
+            has_premium |= v.metadata.premium;
+            true
+        });
         if has_premium {
             self.emit_themes();
             has_premium = false;
         }
 
-        self.plugins.scan(|_, v| has_premium |= v.metadata.premium);
+        self.plugins.iter_sync(|_, v| {
+            has_premium |= v.metadata.premium;
+            true
+        });
         if has_premium {
             self.emit_plugins();
             has_premium = false;
         }
 
-        self.widgets.scan(|_, v| has_premium |= v.metadata.premium);
+        self.widgets.iter_sync(|_, v| {
+            has_premium |= v.metadata.premium;
+            true
+        });
         if has_premium {
             self.emit_widgets()?;
             has_premium = false;
         }
 
-        self.icon_packs
-            .scan(|_, v| has_premium |= v.metadata.premium);
+        self.icon_packs.iter_sync(|_, v| {
+            has_premium |= v.metadata.premium;
+            true
+        });
         if has_premium {
             self.emit_icon_packs();
             has_premium = false;
         }
 
-        self.wallpapers
-            .scan(|_, v| has_premium |= v.metadata.premium);
+        self.wallpapers.iter_sync(|_, v| {
+            has_premium |= v.metadata.premium;
+            true
+        });
         if has_premium {
             self.emit_wallpapers();
         }

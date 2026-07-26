@@ -67,13 +67,14 @@ impl WidgetManager {
     pub fn reconcile(&self) -> Result<()> {
         // remove deleted resources
         self.deployments
-            .retain(|(key, _)| RESOURCES.widgets.contains(key));
+            .retain(|(key, _)| RESOURCES.widgets.contains_sync(key));
 
         let mut filtered = Vec::new();
-        RESOURCES.widgets.scan(|k, w| {
+        RESOURCES.widgets.iter_sync(|k, w| {
             if w.loader != WidgetLoader::Legacy {
                 filtered.push((k.clone(), w.clone()));
             }
+            true
         });
 
         let state = FULL_STATE.load();

@@ -109,7 +109,7 @@ impl PermissionsManager {
         // Bundled widgets always have permission.
         if RESOURCES
             .widgets
-            .read(widget_id, |_, w| w.metadata.internal.bundled)
+            .read_sync(widget_id, |_, w| w.metadata.internal.bundled)
             .unwrap_or(false)
         {
             return Ok(());
@@ -131,7 +131,7 @@ impl PermissionsManager {
         let lang = rust_i18n::locale();
         let widget_name = RESOURCES
             .widgets
-            .read(widget_id, |_, w| {
+            .read_sync(widget_id, |_, w| {
                 w.metadata.display_name.get(&lang).to_string()
             })
             .unwrap_or_else(|| widget_id.to_string());

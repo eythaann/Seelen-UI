@@ -302,7 +302,10 @@ impl WidgetPod {
                             let lang = rust_i18n::locale();
                             let widget_name = RESOURCES
                                 .widgets
-                                .read(&label.widget_id, |_, w| w.metadata.display_name.get(&lang).to_string())
+                                .read_async(&label.widget_id, |_, w| {
+                                    w.metadata.display_name.get(&lang).to_string()
+                                })
+                                .await
                                 .unwrap_or_else(|| label.widget_id.to_string());
                             app.dialog()
                                 .message(t!("widget_liveness.failed_description", widget_name = widget_name))

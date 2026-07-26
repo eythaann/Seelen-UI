@@ -111,11 +111,11 @@ impl WindowManagerV2 {
                 Self::force_retiling()?;
             }
             WinEvent::SystemMinimizeStart => {
-                if MINIMIZED_BY_WORKSPACES.contains(&window.address()) {
+                if MINIMIZED_BY_WORKSPACES.contains_sync(&window.address()) {
                     return Ok(());
                 }
 
-                if MINIMIZED_BY_STACK.contains(&window.address()) {
+                if MINIMIZED_BY_STACK.contains_sync(&window.address()) {
                     return Ok(());
                 }
 

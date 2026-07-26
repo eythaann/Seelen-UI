@@ -50,7 +50,7 @@ impl AppSettings {
         let layout_id = self.get_wm_layout_id(workspace_id);
 
         let mut plugin_with_layout = None;
-        RESOURCES.plugins.any(|_, p| {
+        RESOURCES.plugins.any_sync(|_, p| {
             if p.id == layout_id {
                 plugin_with_layout = Some(p.clone());
                 true

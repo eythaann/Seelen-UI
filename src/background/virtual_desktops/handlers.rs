@@ -95,7 +95,7 @@ pub async fn wallpaper_save_thumbnail(
     wallpaper_id: WallpaperId,
     thumbnail_bytes: Vec<u8>,
 ) -> Result<()> {
-    let Some(wallpaper) = RESOURCES.wallpapers.get(&wallpaper_id) else {
+    let Some(wallpaper) = RESOURCES.wallpapers.get_sync(&wallpaper_id) else {
         return Err("Invalid wallpaper id".into());
     };
 

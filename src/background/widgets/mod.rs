@@ -75,9 +75,8 @@ fn trigger_widget_inner(
 
     let widget = RESOURCES
         .widgets
-        .get(&payload.id)
-        .ok_or("Widget not found")?
-        .clone();
+        .read_sync(&payload.id, |_, w| w.clone())
+        .ok_or("Widget not found")?;
 
     let monitor_id = payload.monitor_id.as_ref().map(|id| id.to_string());
     let label = WidgetWebviewLabel::new(

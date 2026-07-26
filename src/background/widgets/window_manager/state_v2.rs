@@ -672,12 +672,12 @@ impl TwmState {
                 }
 
                 if let Some(active) = node.active_window {
-                    MINIMIZED_BY_STACK.remove(&active);
+                    MINIMIZED_BY_STACK.remove_sync(&active);
                     Window::from(active).unminimize().log_error();
 
                     for w in &node.windows {
                         if *w != active {
-                            let _ = MINIMIZED_BY_STACK.insert(*w);
+                            let _ = MINIMIZED_BY_STACK.insert_sync(*w);
                             Window::from(*w).show_window(SW_FORCEMINIMIZE).log_error();
                         }
                     }
