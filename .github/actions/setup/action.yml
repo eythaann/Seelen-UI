@@ -2,6 +2,14 @@ name: Setup Development Environment
 description: Sets up Node.js, Deno, and Rust toolchain with caching
 
 inputs:
+  node:
+    description: Whether to set up Node.js
+    required: false
+    default: "true"
+  deno:
+    description: Whether to set up Deno
+    required: false
+    default: "true"
   rust-components:
     description: Additional Rust components to install (comma-separated)
     required: false
@@ -19,12 +27,14 @@ runs:
   using: composite
   steps:
     - name: Setup Node.js
+      if: inputs.node == 'true'
       uses: actions/setup-node@v4
       with:
         node-version: 24
         cache: npm
 
     - name: Setup Deno
+      if: inputs.deno == 'true'
       uses: denoland/setup-deno@v2
       with:
         deno-version: v2.x

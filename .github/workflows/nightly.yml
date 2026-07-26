@@ -100,24 +100,10 @@ jobs:
             target/${{ matrix.target }}/release/SHA256SUMS.sig
             target/${{ matrix.target }}/release/seelen_ui.pdb
 
-  merge-binaries:
-    needs: build-binaries
-    runs-on: ubuntu-latest
-    outputs:
-      artifact-id: ${{ steps.merge-binaries.outputs.artifact-id }}
-    steps:
-      - name: Merge binaries artifacts
-        id: merge-binaries
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: binaries
-          pattern: binaries-*
-          separate-directories: true
-
   bundle:
     needs:
       - update-tag
-      - merge-binaries
+      - build-binaries
     strategy:
       fail-fast: false
       matrix:
@@ -132,6 +118,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
+          deno: false
           rust-targets: ${{ matrix.target }}
           cache-key-prefix: rust-bundle-${{ matrix.target }}
 
@@ -169,24 +156,10 @@ jobs:
           name: bundles-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/bundle
 
-  merge-bundles:
-    needs: bundle
-    runs-on: ubuntu-latest
-    outputs:
-      artifact-id: ${{ steps.upload-merged.outputs.artifact-id }}
-    steps:
-      - name: Merge artifacts
-        id: upload-merged
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: bundles
-          pattern: bundles-*
-          delete-merged: true
-
   upload-bundles:
     needs:
       - update-tag
-      - merge-bundles
+      - bundle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -227,11 +200,12 @@ jobs:
             await Promise.all(deletions);
             core.info('✅ All existing assets cleaned');
 
-      - name: Download merged bundles
+      - name: Download bundles
         uses: actions/download-artifact@v4
         with:
-          name: bundles
+          pattern: bundles-*
           path: bundles
+          merge-multiple: true
 
       - name: File Tree
         run: |-
