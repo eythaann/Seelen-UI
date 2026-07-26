@@ -1,6 +1,6 @@
 use std::{collections::HashMap, sync::LazyLock, time::Duration};
 
-use seelen_core::system_state::MonitorId;
+use seelen_core::system_state::{MonitorId, PhysicalMonitor};
 use slu_utils::{debounce, Debounce};
 use windows::{
     Devices::Display::Core::{
@@ -16,14 +16,31 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
-    utils::lock_free::SyncHashMap,
+    utils::lock_free::{SyncHashMap, SyncVec},
     windows_api::{
         event_window::subscribe_to_background_window, monitor::DisplayView, MonitorEnumerator,
     },
 };
 
+/// Builds a stable-ordered snapshot of the current physical monitors (rect/scale/primary),
+/// used to detect real changes vs spurious WM_DISPLAYCHANGE/WinRT notifications that carry
+/// no actual diff (e.g. the same set of targets, but re-reported without any property change).
+fn snapshot_physical_monitors() -> Vec<PhysicalMonitor> {
+    let mut monitors: Vec<PhysicalMonitor> = MonitorEnumerator::enumerate_win32()
+        .map(|monitors| {
+            monitors
+                .into_iter()
+                .filter_map(|m| PhysicalMonitor::try_from(m).ok())
+                .collect()
+        })
+        .unwrap_or_default();
+    monitors.sort_by(|a, b| a.id.0.cmp(&b.id.0));
+    monitors
+}
+
 pub struct MonitorManager {
     state_views: SyncHashMap<MonitorId, DisplayView>,
+    state_data: SyncVec<PhysicalMonitor>,
     /// DisplayManager manages critical hardware so be sure to be correctly used, or will make the app crash.
     /// https://learn.microsoft.com/en-us/uwp/api/windows.devices.display.core.displaymanager
     display_manager: DisplayManager,
@@ -63,6 +80,7 @@ impl MonitorManager {
         Ok(MonitorManager {
             display_manager,
             state_views: SyncHashMap::from(state_views),
+            state_data: SyncVec::from(snapshot_physical_monitors()),
             enabled_token: None,
             disabled_token: None,
             changed_token: None,
@@ -130,9 +148,15 @@ impl MonitorManager {
     fn request_display_state_refresh() {
         static DEBOUNCER: LazyLock<Debounce<()>> = LazyLock::new(|| {
             debounce(
-                |_| {
-                    MonitorManager::check_for_display_changes().log_error();
-                    MonitorManager::send(MonitorManagerEvent::ViewsChanged);
+                |_| match MonitorManager::check_for_display_changes() {
+                    Ok(changed) => {
+                        if changed {
+                            MonitorManager::send(MonitorManagerEvent::ViewsChanged);
+                        } else {
+                            log::trace!("Display state refresh requested but nothing changed");
+                        }
+                    }
+                    Err(e) => log::warn!("Failed to check for display changes: {e}"),
                 },
                 Duration::from_millis(400),
             )
@@ -226,7 +250,11 @@ impl MonitorManager {
         Ok(())
     }
 
-    fn check_for_display_changes() -> windows_core::Result<()> {
+    /// Diffs the current WinRT display state against the last known one, emitting
+    /// `ViewAdded`/`ViewRemoved` for any real differences. Returns whether anything
+    /// actually changed, so callers can avoid reacting to spurious notifications
+    /// (WM_DISPLAYCHANGE and the WinRT display events can fire with no real topology change).
+    fn check_for_display_changes() -> windows_core::Result<bool> {
         let current_state = Self::instance()
             .display_manager
             .TryReadCurrentStateForAllTargets()?
@@ -251,23 +279,41 @@ impl MonitorManager {
         let current_ids: Vec<MonitorId> = current_views.keys().cloned().collect();
         Self::instance().state_views.replace(current_views);
 
+        let mut changed = false;
+
         // new monitors were added
         for id in current_ids {
             if old_views.remove(&id).is_none() {
+                changed = true;
                 Self::send(MonitorManagerEvent::ViewAdded(id.clone()));
             }
         }
 
         // residuals were removed/disconnected
         for (id, _) in old_views {
+            changed = true;
             Self::send(MonitorManagerEvent::ViewRemoved(id));
         }
 
-        Ok(())
+        // the WinRT target set can stay identical while rect/scale/primary changed
+        // (monitor rearranged, DPI change, primary swapped), so diff the physical
+        // properties too instead of relying only on target add/remove.
+        let physical_snapshot = snapshot_physical_monitors();
+        let state_data = &Self::instance().state_data;
+        if state_data.to_vec() != physical_snapshot {
+            changed = true;
+            state_data.replace(physical_snapshot);
+        }
+
+        Ok(changed)
     }
 
     pub fn get_cached_ids(&self) -> Vec<MonitorId> {
         self.state_views.keys()
+    }
+
+    pub fn get_cached_data(&self) -> Vec<PhysicalMonitor> {
+        self.state_data.to_vec()
     }
 }
 

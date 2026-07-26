@@ -16,6 +16,7 @@
 - floating windows while twm is disabled.
 - disabling widgets on shortcuts change.
 - workspaces behaviors on multimonitor setups.
+- wallpaper flicker/fade caused by spurious monitor-change notifications retriggering the desktop refresh.
 
 ## [2.8.0]
 
