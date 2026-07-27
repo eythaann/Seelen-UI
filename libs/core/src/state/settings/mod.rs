@@ -262,6 +262,8 @@ pub struct WindowManagerSettings {
     pub animations: WmAnimations,
     /// window manager drag behavior
     pub drag_behavior: WmDragBehavior,
+    /// when to show the stack bar (tabs) on stacked containers
+    pub stack_bar_visibility: WmStackBarVisibility,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -272,6 +274,16 @@ pub enum WmDragBehavior {
     Sort,
     /// On drag end the dragged and the overlaped will be swapped.
     Swap,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum WmStackBarVisibility {
+    /// Always show the stack bar, even if the stack only has one window.
+    Always,
+    /// Only show the stack bar when the stack has 2 or more windows.
+    AsNeeded,
 }
 
 #[serde_alias(SnakeCase)]
@@ -346,6 +358,7 @@ impl Default for WindowManagerSettings {
             default_layout: "@default/wm-bspwm".into(),
             animations: WmAnimations::default(),
             drag_behavior: WmDragBehavior::Sort,
+            stack_bar_visibility: WmStackBarVisibility::AsNeeded,
         }
     }
 }

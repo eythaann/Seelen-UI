@@ -435,6 +435,10 @@ wm:
     swap: Swap (swap windows on drag end)
   layout: Layout
   resize_delta: Resize Delta (%)
+  stack_bar_visibility: Stack Bar Visibility
+  stack_bar_visibility_options:
+    always: Always
+    as_needed: As needed
   space_between_containers: Space Between Containers
   workspace_offset: Workspaces Offset (Margins)
   workspace_padding: Workspaces Padding

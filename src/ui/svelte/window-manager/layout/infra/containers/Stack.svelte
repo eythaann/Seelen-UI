@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { TwmRuntimeNode } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { WmStackBarVisibility } from "@seelen-ui/lib/types";
   import { state } from "../../../state.svelte.ts";
   import Leaf from "./Leaf.svelte";
   import FileIcon from "libs/ui/svelte/components/Icon/FileIcon.svelte";
@@ -15,10 +16,16 @@
   function onTabClick(winId: number) {
     invoke(SeelenCommand.WmSetStackActiveWindow, { hwnd: winId });
   }
+
+  const shouldShowStackBar = $derived(
+    state.settings.stackBarVisibility === WmStackBarVisibility.Always
+      ? node.windows.length > 0
+      : node.windows.length > 1,
+  );
 </script>
 
 <div style:flex-grow={node.growFactor} class={["wm-container", "wm-stack"]}>
-  {#if node.windows.length > 1}
+  {#if shouldShowStackBar}
     <div class="wm-stack-bar" data-allow-mouse-events={overlayVisible}>
       {#each node.windows as winId (winId)}
         {@const info = state.interactables.find((app) => app.hwnd === winId)}

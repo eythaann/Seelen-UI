@@ -1,5 +1,12 @@
 import { settings } from "../../../../state/mod";
-import type { PluginId, Rect, WindowManagerSettings, WmAnimations, WmDragBehavior } from "@seelen-ui/lib/types";
+import type {
+  PluginId,
+  Rect,
+  WindowManagerSettings,
+  WmAnimations,
+  WmDragBehavior,
+  WmStackBarVisibility,
+} from "@seelen-ui/lib/types";
 
 /**
  * Patches the WindowManager configuration with partial updates.
@@ -81,4 +88,11 @@ export function setWmDragBehavior(dragBehavior: WmDragBehavior) {
  */
 export function setWmAnimations(animations: WmAnimations) {
   patchWmConfig({ animations });
+}
+
+/**
+ * Sets when the stack bar should be shown
+ */
+export function setWmStackBarVisibility(stackBarVisibility: WmStackBarVisibility) {
+  patchWmConfig({ stackBarVisibility });
 }

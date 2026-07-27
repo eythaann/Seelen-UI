@@ -6,6 +6,7 @@
 
 - mutiple dock items sizes.
 - new renderer for toolbar plugins via canvas.
+- configurable stack bar visibility on window manager: "Always" or "As needed" (2+ windows).
 
 ### enhancements
 
