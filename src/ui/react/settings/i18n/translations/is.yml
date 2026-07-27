@@ -438,6 +438,10 @@ wm:
   layout: Skipulag
   resize_delta: Breyta stærð delta (%)
   space_between_containers: Rými milli gáma
+  stack_bar_visibility: Sýnileiki staflastikunnar
+  stack_bar_visibility_options:
+    always: Alltaf
+    as_needed: Eftir þörfum
   workspace_offset: Vinnusvæði offset (framlegð)
   workspace_padding: Vinnusvæði padding
 'yes': Já

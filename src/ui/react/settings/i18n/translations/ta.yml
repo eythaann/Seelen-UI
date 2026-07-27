@@ -451,6 +451,10 @@ wm:
   layout: தளவமைப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
+  stack_bar_visibility: ஸ்டாக் பார் தெரிவுநிலை
+  stack_bar_visibility_options:
+    always: எப்போதும்
+    as_needed: தேவைக்கேற்ப
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   workspace_padding: பணியிடங்கள் திணிப்பு
 'yes': ஆம்

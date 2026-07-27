@@ -425,6 +425,10 @@ wm:
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)
   space_between_containers: רווח בין מיכלים
+  stack_bar_visibility: נראות סרגל מחסנית
+  stack_bar_visibility_options:
+    always: תָמִיד
+    as_needed: לפי הצורך
   workspace_offset: הסטת שולי סביבת עבודה
   workspace_padding: ריפוד סביבת עבודה
 'yes': כֵּן

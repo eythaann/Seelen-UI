@@ -446,6 +446,10 @@ wm:
   layout: Դասավորություն
   resize_delta: Չափափոխել դելտան (%)
   space_between_containers: Տիեզերք բեռնարկղերի միջեւ
+  stack_bar_visibility: Stack Bar-ի տեսանելիություն
+  stack_bar_visibility_options:
+    always: Միշտ
+    as_needed: Ըստ անհրաժեշտության
   workspace_offset: Աշխատանքային տարածքների օֆսեթ (լուսանցքներ)
   workspace_padding: Աշխատանքային տարածքների լիցքավորում
 'yes': Այո

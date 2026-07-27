@@ -449,6 +449,10 @@ wm:
   layout: Тарҳ
   resize_delta: Татбиқи Delta (%)
   space_between_containers: Фосила байни контейнер
+  stack_bar_visibility: Намоиши Бари Stack
+  stack_bar_visibility_options:
+    always: Ҳамеша
+    as_needed: Тавре ки лозим аст
   workspace_offset: Ҷойгиршавӣ
   workspace_padding: Worlpaces Padding
 'yes': Ҳа

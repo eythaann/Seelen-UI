@@ -448,6 +448,10 @@ wm:
   layout: Макет
   resize_delta: Шаг изменения размера (%)
   space_between_containers: Пространство между контейнерами
+  stack_bar_visibility: Видимость панели стека
+  stack_bar_visibility_options:
+    always: Всегда
+    as_needed: По мере необходимости
   workspace_offset: Внешний отступ рабочего пространства
   workspace_padding: Внутренний отступ рабочего пространства
 'yes': Да

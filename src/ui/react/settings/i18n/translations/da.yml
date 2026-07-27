@@ -441,6 +441,10 @@ wm:
   layout: Layout
   resize_delta: Ændre størrelse på Delta (%)
   space_between_containers: Rum mellem containere
+  stack_bar_visibility: Stack Bar synlighed
+  stack_bar_visibility_options:
+    always: Altid
+    as_needed: Efter behov
   workspace_offset: Arbejdsområder offset (marginer)
   workspace_padding: Arbejdsområder polstring
 'yes': Ja

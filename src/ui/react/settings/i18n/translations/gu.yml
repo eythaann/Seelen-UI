@@ -439,6 +439,10 @@ wm:
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
   space_between_containers: કન્ટેનર વચ્ચે જગ્યા
+  stack_bar_visibility: સ્ટેક બાર દૃશ્યતા
+  stack_bar_visibility_options:
+    always: હંમેશા
+    as_needed: જરૂર મુજબ
   workspace_offset: વર્કસ્પેસ ઓફસેટ (માર્જિન)
   workspace_padding: વર્કસ્પેસ પેડિંગ
 'yes': હા

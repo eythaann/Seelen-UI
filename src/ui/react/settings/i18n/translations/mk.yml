@@ -449,6 +449,10 @@ wm:
   layout: Распоред
   resize_delta: Променете ја големината на Делта (%)
   space_between_containers: Простор помеѓу контејнери
+  stack_bar_visibility: Видливост на оџакот
+  stack_bar_visibility_options:
+    always: Секогаш
+    as_needed: По потреба
   workspace_offset: Работни места за неутрализирање (маргини)
   workspace_padding: Подлога за работни места
 'yes': Да

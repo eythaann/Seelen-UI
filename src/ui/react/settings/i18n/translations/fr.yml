@@ -454,6 +454,10 @@ wm:
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)
   space_between_containers: Espacement entre les conteneurs
+  stack_bar_visibility: Visibilité de la barre de pile
+  stack_bar_visibility_options:
+    always: Toujours
+    as_needed: Au besoin
   workspace_offset: Décalage des bureaux virtuels (Marges)
   workspace_padding: Rembourrage(Padding) des bureaux virtuels
 'yes': Oui

@@ -396,6 +396,10 @@ wm:
   layout: 布局
   resize_delta: 调整大小增量（%）
   space_between_containers: 容器间间距
+  stack_bar_visibility: 堆栈栏可见性
+  stack_bar_visibility_options:
+    always: 总是
+    as_needed: 根据需要
   workspace_offset: 工作区偏移（边距）
   workspace_padding: 工作区内边距
 'yes': 是

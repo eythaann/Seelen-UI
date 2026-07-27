@@ -444,6 +444,10 @@ wm:
   layout: ترتیب
   resize_delta: ڈیلٹا کا سائز (٪)
   space_between_containers: کنٹینرز کے درمیان جگہ
+  stack_bar_visibility: اسٹیک بار کی مرئیت
+  stack_bar_visibility_options:
+    always: ہمیشہ
+    as_needed: ضرورت کے مطابق
   workspace_offset: ورک اسپیس آفسیٹ (مارجن)
   workspace_padding: ورک اسپیس پیڈنگ
 'yes': ہاں

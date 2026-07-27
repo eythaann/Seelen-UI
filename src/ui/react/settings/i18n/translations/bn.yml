@@ -443,6 +443,10 @@ wm:
   layout: বিন্যাস
   resize_delta: পুনরায় আকার ডেল্টা (%)
   space_between_containers: পাত্রে স্থান
+  stack_bar_visibility: স্ট্যাক বার দৃশ্যমানতা
+  stack_bar_visibility_options:
+    always: সর্বদা
+    as_needed: প্রয়োজন মতো
   workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
 'yes': হ্যাঁ

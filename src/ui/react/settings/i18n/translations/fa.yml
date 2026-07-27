@@ -439,6 +439,10 @@ wm:
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)
   space_between_containers: فضای بین ظروف
+  stack_bar_visibility: قابلیت مشاهده نوار پشته
+  stack_bar_visibility_options:
+    always: همیشه
+    as_needed: در حد نیاز
   workspace_offset: مکانهای کار افست (حاشیه)
   workspace_padding: قسمتهای کاری PADING
 'yes': بله

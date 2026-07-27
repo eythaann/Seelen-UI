@@ -445,6 +445,10 @@ wm:
   layout: Rozložení
   resize_delta: Změna velikosti (%)
   space_between_containers: Prostor mezi kontejnery
+  stack_bar_visibility: Viditelnost sloupce
+  stack_bar_visibility_options:
+    always: Vždy
+    as_needed: Podle potřeby
   workspace_offset: Posun pracovních prostor (marže)
   workspace_padding: Padding pracovních prostorů
 'yes': Ano

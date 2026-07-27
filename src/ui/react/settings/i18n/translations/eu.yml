@@ -445,6 +445,10 @@ wm:
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)
   space_between_containers: Edukiontzien arteko espazioa
+  stack_bar_visibility: Pila-barraren ikusgarritasuna
+  stack_bar_visibility_options:
+    always: Beti
+    as_needed: Behar bezala
   workspace_offset: Laneko espazioak desplazamendua (marjinak)
   workspace_padding: Laneko guneak betegarria
 'yes': Bai

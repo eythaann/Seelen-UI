@@ -449,6 +449,10 @@ wm:
   layout: Esquema
   resize_delta: Redimensionar delta (%)
   space_between_containers: Espaço entre recipientes
+  stack_bar_visibility: Visibilidade da barra de pilha
+  stack_bar_visibility_options:
+    always: Sempre
+    as_needed: Conforme necessário
   workspace_offset: Espaços de trabalho Offset (margens)
   workspace_padding: Espaços de trabalho preenchem
 'yes': Sim

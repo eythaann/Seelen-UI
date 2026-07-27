@@ -448,6 +448,10 @@ wm:
   layout: नक्शा
   resize_delta: रिसाइज डेल्टा (%)
   space_between_containers: कन्टेनर बीचको ठाउँ
+  stack_bar_visibility: स्ट्याक बार दृश्यता
+  stack_bar_visibility_options:
+    always: सधैं
+    as_needed: आवश्यकता अनुसार
   workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
   workspace_padding: कार्यक्षेत्र प्याडिंग
 'yes': हुन्छ

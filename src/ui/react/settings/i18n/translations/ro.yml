@@ -450,6 +450,10 @@ wm:
   layout: Aspect
   resize_delta: Redimensionați delta (%)
   space_between_containers: Spațiu între containere
+  stack_bar_visibility: Stack Bar Vizibilitate
+  stack_bar_visibility_options:
+    always: Întotdeauna
+    as_needed: La nevoie
   workspace_offset: Spații de lucru Offset (marje)
   workspace_padding: Padding spații de lucru
 'yes': Da

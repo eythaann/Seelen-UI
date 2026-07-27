@@ -344,6 +344,9 @@ wm.drag_behavior_options.swap: 39cf55f8
 wm.layout: 5e6c76c
 wm.resize_delta: 5c46372a
 wm.space_between_containers: 55cac7f8
+wm.stack_bar_visibility: da13c420
+wm.stack_bar_visibility_options.always: 18be346d
+wm.stack_bar_visibility_options.as_needed: 605e7518
 wm.workspace_offset: 5c851354
 wm.workspace_padding: 84e30535
 'yes': baa44134

@@ -445,6 +445,10 @@ wm:
   layout: Layout
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila
+  stack_bar_visibility: Pinopalkin näkyvyys
+  stack_bar_visibility_options:
+    always: Aina
+    as_needed: Tarpeen mukaan
   workspace_offset: Työtilojen siirtymä (marginaalit)
   workspace_padding: Työtilat
 'yes': Kyllä

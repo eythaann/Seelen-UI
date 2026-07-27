@@ -455,6 +455,10 @@ wm:
   layout: Layout
   resize_delta: Relative Größenänderung (%)
   space_between_containers: Abstand zwischen Containern
+  stack_bar_visibility: Sichtbarkeit der Stapelleiste
+  stack_bar_visibility_options:
+    always: Stets
+    as_needed: Nach Bedarf
   workspace_offset: Arbeitsbereichs-Versatz (Ränder)
   workspace_padding: Arbeitsbereichs-Padding
 'yes': Ja

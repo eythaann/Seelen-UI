@@ -453,6 +453,10 @@ wm:
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)
   space_between_containers: Isikhala phakathi kweziqukathi
+  stack_bar_visibility: Ukubonakala Kwebha Yesitaki
+  stack_bar_visibility_options:
+    always: Njalo
+    as_needed: Njengoba kudingeka
   workspace_offset: Izindawo zokusebenzela (Margins)
   workspace_padding: I-Workespashe Padding
 'yes': Yebo

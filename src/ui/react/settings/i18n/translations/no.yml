@@ -445,6 +445,10 @@ wm:
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)
   space_between_containers: Plass mellom containere
+  stack_bar_visibility: Stabelbar synlighet
+  stack_bar_visibility_options:
+    always: Alltid
+    as_needed: Etter behov
   workspace_offset: Arbeidsområder forskyvning (marginer)
   workspace_padding: Arbeidsområder polstring
 'yes': Ja

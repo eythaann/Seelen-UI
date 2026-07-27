@@ -447,6 +447,10 @@ wm:
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)
   space_between_containers: Konteynerler Arası Boşluk
+  stack_bar_visibility: Yığın Çubuğu Görünürlüğü
+  stack_bar_visibility_options:
+    always: Her zaman
+    as_needed: Gerektiğinde
   workspace_offset: Çalışma Alanları Uzaklıkları (Kenar Boşlukları)
   workspace_padding: Çalışma Alanları İç Boşluğu
 'yes': Evet

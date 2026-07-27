@@ -445,6 +445,10 @@ wm:
   layout: Lueden
   resize_delta: Resize Delta (%)
   space_between_containers: Raum tëscht Behälter
+  stack_bar_visibility: Stack Bar Visibilitéit
+  stack_bar_visibility_options:
+    always: Ëmmer
+    as_needed: Wéi néideg
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
 'yes': Jo

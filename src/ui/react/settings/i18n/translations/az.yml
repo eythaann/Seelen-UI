@@ -442,6 +442,10 @@ wm:
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)
   space_between_containers: Konteynerlər arasındakı boşluq
+  stack_bar_visibility: Stack Bar Görünüşü
+  stack_bar_visibility_options:
+    always: Həmişə
+    as_needed: Lazım olduğu kimi
   workspace_offset: İş yerləri ofset (kənarları)
   workspace_padding: İş sahələri padding
 'yes': Bəli

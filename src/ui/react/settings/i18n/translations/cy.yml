@@ -443,6 +443,10 @@ wm:
   layout: Gynllun
   resize_delta: Newid maint Delta (%)
   space_between_containers: Lle rhwng cynwysyddion
+  stack_bar_visibility: Gwelededd Stack Bar
+  stack_bar_visibility_options:
+    always: Bob amser
+    as_needed: Yn ôl yr angen
   workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
   workspace_padding: Padin lleoedd gwaith
 'yes': Ie

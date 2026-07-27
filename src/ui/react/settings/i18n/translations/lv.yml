@@ -443,6 +443,10 @@ wm:
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)
   space_between_containers: Telpa starp konteineriem
+  stack_bar_visibility: Stack Bar redzamība
+  stack_bar_visibility_options:
+    always: Vienmēr
+    as_needed: Pēc vajadzības
   workspace_offset: Darbvietu kompensācija (malas)
   workspace_padding: Darbvietas polsterējums
 'yes': Jā

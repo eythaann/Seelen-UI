@@ -441,6 +441,10 @@ wm:
   layout: පිරිසැලසුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   space_between_containers: බහාලුම් අතර අවකාශය
+  stack_bar_visibility: Stack Bar Visibility
+  stack_bar_visibility_options:
+    always: සෑම විටම
+    as_needed: අවශ්ය පරිදි
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
   workspace_padding: වැඩබිම් පිරවුම
 'yes': ඔව්

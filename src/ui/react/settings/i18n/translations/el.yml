@@ -457,6 +457,10 @@ wm:
   layout: Διάταξη
   resize_delta: Αλλαγή μεγέθους Delta (%)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
+  stack_bar_visibility: Ορατότητα γραμμής στοίβας
+  stack_bar_visibility_options:
+    always: Πάντοτε
+    as_needed: Όσο χρειάζεται
   workspace_offset: Μετατόπιση χώρων εργασίας (περιθώρια)
   workspace_padding: Πλατύφυλλα
 'yes': Ναί

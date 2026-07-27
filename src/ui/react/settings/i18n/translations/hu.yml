@@ -450,6 +450,10 @@ wm:
   layout: Elrendezés
   resize_delta: Átméretezze a DELTA -t (%)
   space_between_containers: Hely a konténerek között
+  stack_bar_visibility: Stack Bar láthatósága
+  stack_bar_visibility_options:
+    always: Mindig
+    as_needed: Szükség szerint
   workspace_offset: A munkaterületek eltolása (margók)
   workspace_padding: Munkaterületek párnázása
 'yes': Igen

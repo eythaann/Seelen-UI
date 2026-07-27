@@ -448,6 +448,10 @@ wm:
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   space_between_containers: Spazju bejn il-kontenituri
+  stack_bar_visibility: Munzell Bar Viżibilità
+  stack_bar_visibility_options:
+    always: Dejjem
+    as_needed: Kif meħtieġ
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   workspace_padding: Padding tal-ispazji tax-xogħol
 'yes': IVA

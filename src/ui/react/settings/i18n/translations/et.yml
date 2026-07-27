@@ -441,6 +441,10 @@ wm:
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)
   space_between_containers: Konteinerite vaheline ruum
+  stack_bar_visibility: Virnariba nähtavus
+  stack_bar_visibility_options:
+    always: Alati
+    as_needed: Vastavalt vajadusele
   workspace_offset: Tööruumide nihkumine (veerised)
   workspace_padding: Tööruumide polsterdus
 'yes': Jah

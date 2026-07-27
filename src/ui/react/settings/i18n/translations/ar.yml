@@ -430,6 +430,10 @@ wm:
   layout: التخطيط
   resize_delta: غير حجم دلتا (%)
   space_between_containers: المساحه بين الحاويات
+  stack_bar_visibility: رؤية شريط المكدس
+  stack_bar_visibility_options:
+    always: دائماً
+    as_needed: حسب الحاجة
   workspace_offset: المساحه حول مساحات العمل
   workspace_padding: المساحه بين مساحات العمل
 'yes': نعم

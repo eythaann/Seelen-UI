@@ -448,6 +448,10 @@ wm:
   layout: Lay -out
   resize_delta: Wijzig de wijzers van delta (%)
   space_between_containers: Ruimte tussen containers
+  stack_bar_visibility: Zichtbaarheid stapelbalk
+  stack_bar_visibility_options:
+    always: Altijd
+    as_needed: Indien nodig
   workspace_offset: Workspaces Offset (marges)
   workspace_padding: Workspaces -vulling
 'yes': Ja

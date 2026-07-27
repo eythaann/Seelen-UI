@@ -444,6 +444,10 @@ wm:
   layout: Төлөвлөгөө
   resize_delta: Дельтааг өөрчлөх (%)
   space_between_containers: Савны хоорондох зай
+  stack_bar_visibility: Stack Bar харагдах байдал
+  stack_bar_visibility_options:
+    always: Үргэлж
+    as_needed: Шаардлагатай бол
   workspace_offset: Ажлын талбар нь офсет (Margins)
   workspace_padding: Ажлын талбарууд
 'yes': Мон

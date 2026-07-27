@@ -454,6 +454,10 @@ wm:
   layout: Układ
   resize_delta: Delta rozmiaru (%)
   space_between_containers: Przestrzeń między oknami
+  stack_bar_visibility: Widoczność paska stosu
+  stack_bar_visibility_options:
+    always: Zawsze
+    as_needed: W razie potrzeby
   workspace_offset: Marginesy przestrzeni roboczych
   workspace_padding: Wysokość tła przestrzeni roboczych
 'yes': Tak

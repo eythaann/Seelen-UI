@@ -443,6 +443,10 @@ wm:
   layout: Uitleg
   resize_delta: Verander die grootte delta (%)
   space_between_containers: Ruimte tussen houers
+  stack_bar_visibility: Stapelbalksigbaarheid
+  stack_bar_visibility_options:
+    always: Altyd
+    as_needed: Soos nodig
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
 'yes': Ja

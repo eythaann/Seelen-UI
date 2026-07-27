@@ -453,6 +453,10 @@ wm:
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka
+  stack_bar_visibility: Muuqaalka Bar Stack
+  stack_bar_visibility_options:
+    always: Had iyo jeer
+    as_needed: Sida loo baahdo
   workspace_offset: Goobaha shaqada ayaa ka dhigtay
   workspace_padding: Goobta Goobta Goobta
 'yes': Haa

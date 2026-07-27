@@ -413,6 +413,10 @@ wm:
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）
   space_between_containers: ウィンドウ間の間隔
+  stack_bar_visibility: スタックバーの表示設定
+  stack_bar_visibility_options:
+    always: いつも
+    as_needed: 必要に応じて
   workspace_offset: ワークスペース全体の間隔（マージン）
   workspace_padding: ワークスペースの全体の間隔
 'yes': はい

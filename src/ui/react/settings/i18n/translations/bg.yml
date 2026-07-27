@@ -451,6 +451,10 @@ wm:
   layout: Оформление
   resize_delta: Оразмерете делтата (%)
   space_between_containers: Пространство между контейнерите
+  stack_bar_visibility: Видимост на лентата на стека
+  stack_bar_visibility_options:
+    always: Винаги
+    as_needed: Колкото е необходимо
   workspace_offset: Изместване на работните пространства (маржове)
   workspace_padding: Работни пространства подплънки
 'yes': Да

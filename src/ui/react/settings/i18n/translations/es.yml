@@ -456,6 +456,10 @@ wm:
   layout: Diseño
   resize_delta: Redimensionar Delta (%)
   space_between_containers: Espacio entre contenedores
+  stack_bar_visibility: Visibilidad de la barra de pila
+  stack_bar_visibility_options:
+    always: Siempre
+    as_needed: Según sea necesario
   workspace_offset: Desplazamiento de los espacios de trabajo (márgenes)
   workspace_padding: Espacios de trabajo Acolchado
 'yes': Sí

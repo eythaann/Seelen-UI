@@ -428,6 +428,10 @@ wm:
   layout: เค้าโครง
   resize_delta: ปรับขนาดเดลต้า (%)
   space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ
+  stack_bar_visibility: การมองเห็นแถบสแต็ก
+  stack_bar_visibility_options:
+    always: เสมอ
+    as_needed: ตามความจำเป็น
   workspace_offset: พื้นที่ทำงานออฟเซ็ต (ระยะขอบ)
   workspace_padding: ช่องว่างพื้นที่ทำงาน
 'yes': ใช่

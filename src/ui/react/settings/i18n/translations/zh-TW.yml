@@ -400,6 +400,10 @@ wm:
   layout: 佈局
   resize_delta: 調整大小增量（％）
   space_between_containers: 容器之間的空間
+  stack_bar_visibility: 堆疊欄可見性
+  stack_bar_visibility_options:
+    always: 總是
+    as_needed: 根據需要
   workspace_offset: 工作區偏移（邊距）
   workspace_padding: 工作區填充
 'yes': 是的

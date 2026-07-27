@@ -448,6 +448,10 @@ wm:
   layout: Tata letak
   resize_delta: Ubah Ubah Delta (%)
   space_between_containers: Ruang antar wadah
+  stack_bar_visibility: Visibilitas Stack Bar
+  stack_bar_visibility_options:
+    always: Selalu
+    as_needed: Sesuai kebutuhan
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
 'yes': Ya

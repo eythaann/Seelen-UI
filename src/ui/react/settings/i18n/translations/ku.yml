@@ -446,6 +446,10 @@ wm:
   layout: Rêz
   resize_delta: Delta Resize (%)
   space_between_containers: Cîhê di navbera konteyneran de
+  stack_bar_visibility: Visibility Bar Stack
+  stack_bar_visibility_options:
+    always: Herdem
+    as_needed: Wekî ku pêdivî ye
   workspace_offset: Karûbarên Workspan (Margins)
   workspace_padding: Karên xebitandinê
 'yes': Erê

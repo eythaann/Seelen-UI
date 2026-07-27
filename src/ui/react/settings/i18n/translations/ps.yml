@@ -434,6 +434,10 @@ wm:
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   space_between_containers: د کانتینرونو ترمینځ ځای
+  stack_bar_visibility: د سټیک بار لید
+  stack_bar_visibility_options:
+    always: تل
+    as_needed: لکه څنګه چې اړتیا وي
   workspace_offset: د کاري ځای ځایونه (مارجینز)
   workspace_padding: د کارډا ریسس
 'yes': هو

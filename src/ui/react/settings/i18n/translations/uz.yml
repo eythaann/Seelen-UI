@@ -453,6 +453,10 @@ wm:
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   space_between_containers: Idishlar orasidagi bo'shliq
+  stack_bar_visibility: Stack Bar ko'rinishi
+  stack_bar_visibility_options:
+    always: Har doim
+    as_needed: Zarur bo'lganda
   workspace_offset: Ishxonalar ofset (marjalar)
   workspace_padding: Ish plakding
 'yes': Ha

@@ -432,6 +432,10 @@ wm:
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)
   space_between_containers: ຊ່ອງຫວ່າງລະຫວ່າງບັນຈຸ
+  stack_bar_visibility: ການເບິ່ງເຫັນແຖບ stack
+  stack_bar_visibility_options:
+    always: ສະເໝີ
+    as_needed: ຕາມຄວາມຕ້ອງການ
   workspace_offset: ພື້ນທີ່ເຮັດວຽກຊົດເຊີຍ (ຂອບ)
   workspace_padding: ພື້ນທີ່ເຮັດວຽກ Padding
 'yes': ແລ້ວ

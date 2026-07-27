@@ -440,6 +440,10 @@ wm:
   layout: Mpangilio
   resize_delta: Rudisha Delta (%)
   space_between_containers: Nafasi kati ya vyombo
+  stack_bar_visibility: Mwonekano wa Upau wa Rafu
+  stack_bar_visibility_options:
+    always: Daima
+    as_needed: Kama inahitajika
   workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
   workspace_padding: Nafasi za kazi
 'yes': Ndio

@@ -449,6 +449,10 @@ wm:
   layout: Usporiadanie
   resize_delta: Zmeňte veľkosť delty (%)
   space_between_containers: Priestor medzi nádobami
+  stack_bar_visibility: Viditeľnosť zásobníka
+  stack_bar_visibility_options:
+    always: Vždy
+    as_needed: Podľa potreby
   workspace_offset: Offsety Workspaces (marže)
   workspace_padding: Čalúnenie pracovných priestorov
 'yes': Áno

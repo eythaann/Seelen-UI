@@ -435,6 +435,10 @@ wm:
   layout: Agbekalẹ
   resize_delta: Tun ṣe Delta (%)
   space_between_containers: Aaye laarin awọn apoti
+  stack_bar_visibility: Stack Bar Hihan
+  stack_bar_visibility_options:
+    always: Nigbagbogbo
+    as_needed: Bi o ṣe nilo
   workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
   workspace_padding: Awọn iṣẹ itasi
 'yes': Bẹẹni

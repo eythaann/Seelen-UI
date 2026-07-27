@@ -424,6 +424,10 @@ wm:
   layout: አቀማመጥ
   resize_delta: ዴልታ (%)
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
+  stack_bar_visibility: የቁልል አሞሌ ታይነት
+  stack_bar_visibility_options:
+    always: ሁሌም
+    as_needed: እንደ አስፈላጊነቱ
   workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
   workspace_padding: የስራ ቦታዎች ፓድ
 'yes': አዎ

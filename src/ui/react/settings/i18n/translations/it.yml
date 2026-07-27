@@ -456,6 +456,10 @@ wm:
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)
   space_between_containers: Spazio tra i Contenitori
+  stack_bar_visibility: Visibilità della barra dello stack
+  stack_bar_visibility_options:
+    always: Sempre
+    as_needed: Secondo necessità
   workspace_offset: Offset dei Workspace (Margini)
   workspace_padding: Spaziatura dei Workspace
 'yes': SÌ

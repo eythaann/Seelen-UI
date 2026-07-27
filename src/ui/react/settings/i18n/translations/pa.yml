@@ -438,6 +438,10 @@ wm:
   layout: ਖਾਕਾ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
+  stack_bar_visibility: ਸਟੈਕ ਬਾਰ ਦਿਖਣਯੋਗਤਾ
+  stack_bar_visibility_options:
+    always: ਹਮੇਸ਼ਾ
+    as_needed: ਲੋੜ ਅਨੁਸਾਰ
   workspace_offset: ਵਰਕਸਪੇਸ ਆਫਸੈੱਟ (ਮਾਰਜਿਨ)
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
 'yes': ਹਾਂ

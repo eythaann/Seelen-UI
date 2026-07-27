@@ -447,6 +447,10 @@ wm:
   layout: Raspored
   resize_delta: Promijenite veličinu delta (%)
   space_between_containers: Prostor između spremnika
+  stack_bar_visibility: Vidljivost trake snopa
+  stack_bar_visibility_options:
+    always: Uvijek
+    as_needed: Prema potrebi
   workspace_offset: Pomak radnog prostora (margine)
   workspace_padding: Radni prostori jastučići
 'yes': Da

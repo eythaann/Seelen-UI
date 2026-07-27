@@ -444,6 +444,10 @@ wm:
   layout: Išdėstymas
   resize_delta: Pakeisti deltos dydį (%)
   space_between_containers: Tarpas tarp konteinerių
+  stack_bar_visibility: Stack Bar matomumas
+  stack_bar_visibility_options:
+    always: Visada
+    as_needed: Kaip reikia
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
 'yes': Taip

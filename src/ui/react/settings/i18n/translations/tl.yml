@@ -456,6 +456,10 @@ wm:
   layout: Layout
   resize_delta: Baguhin ang laki ng Delta (%)
   space_between_containers: Puwang sa pagitan ng mga lalagyan
+  stack_bar_visibility: Stack Bar Visibility
+  stack_bar_visibility_options:
+    always: Laging
+    as_needed: Kung kinakailangan
   workspace_offset: Workspaces Offset (Margin)
   workspace_padding: Mga workspaces padding
 'yes': Oo

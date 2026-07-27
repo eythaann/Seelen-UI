@@ -443,6 +443,10 @@ wm:
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container
+  stack_bar_visibility: Hiển thị thanh ngăn xếp
+  stack_bar_visibility_options:
+    always: Luôn luôn
+    as_needed: Khi cần thiết
   workspace_offset: Không gian làm việc bù (lề)
   workspace_padding: Không gian làm việc đệm
 'yes': Đúng

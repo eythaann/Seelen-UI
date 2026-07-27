@@ -410,6 +410,10 @@ wm:
   layout: 레이아웃
   resize_delta: 크기 조정 수치 (%)
   space_between_containers: 컨테이너 간 간격
+  stack_bar_visibility: 스택 막대 가시성
+  stack_bar_visibility_options:
+    always: 언제나
+    as_needed: 필요에 따라
   workspace_offset: 작업 공간 바깥 여백
   workspace_padding: 작업 공간 안쪽 여백
 'yes': 예

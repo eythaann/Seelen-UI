@@ -444,6 +444,10 @@ wm:
   layout: გამოფენა
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის
+  stack_bar_visibility: დასტის ზოლის ხილვადობა
+  stack_bar_visibility_options:
+    always: ყოველთვის
+    as_needed: როგორც საჭიროა
   workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)
   workspace_padding: სამუშაო ადგილები padding
 'yes': დიახ

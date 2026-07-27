@@ -448,6 +448,10 @@ wm:
   layout: లేఅవుట్
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
   space_between_containers: కంటైనర్ల మధ్య ఖాళీ
+  stack_bar_visibility: స్టాక్ బార్ విజిబిలిటీ
+  stack_bar_visibility_options:
+    always: ఎల్లప్పుడూ
+    as_needed: అవసరం మేరకు
   workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
   workspace_padding: కార్యస్థలాల పాడింగ్
 'yes': అవును
