@@ -221,19 +221,10 @@ pub fn resolve_shortcuts(
             if keys.is_empty() {
                 continue;
             }
-            let widget_id = widget.id.to_string();
-            let command = decl
-                .command
-                .iter()
-                .map(|s| {
-                    if s == "$self" {
-                        widget_id.clone()
-                    } else {
-                        s.clone()
-                    }
-                })
-                .collect();
-            resolved.push(ResolvedShortcut { command, keys });
+            resolved.push(ResolvedShortcut {
+                command: decl.command.clone(),
+                keys,
+            });
         }
     }
 

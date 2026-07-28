@@ -53,7 +53,8 @@ impl SluResourceFile {
         reader.read_to_end(&mut buffer)?;
         let decoded = base64::engine::general_purpose::STANDARD.decode(&buffer)?;
         let value: serde_yaml::Value = serde_yaml::from_slice(&decoded)?;
-        let vars = yaml_ext::extract_vars_slu(&value);
+        let self_id = yaml_ext::extract_self_id_slu(&value)?;
+        let vars = std::collections::HashMap::from([("self.id".to_string(), self_id)]);
         let value = yaml_ext::resolve_vars_yaml(value, &vars);
         Ok(serde_yaml::from_value(value)?)
     }

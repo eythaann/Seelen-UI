@@ -9,14 +9,48 @@ use crate::error::Result;
 
 /// Will deserialize a YAML file and parse the custom extended syntax
 pub async fn deserialize_extended_yaml<T: serde::de::DeserializeOwned>(path: &Path) -> Result<T> {
-    let value = read_and_parse_yml(path).await?;
+    let value = read_and_parse_yml(path, true, &HashMap::new()).await?;
     serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
+}
+
+/// Like [`deserialize_extended_yaml`] but leaves `${self.id}` / `${super.id}` literals intact
+/// so they can be resolved at runtime with the published id.
+///
+/// This must also apply to `!extend`ed files (bundling resolves the whole tree), so the
+/// `resolve_self: false` mode is threaded through [`resolve_extensions`] instead of only
+/// being applied at the top level.
+pub async fn deserialize_extended_yaml_no_vars<T: serde::de::DeserializeOwned>(
+    path: &Path,
+) -> Result<T> {
+    let value = read_and_parse_yml(path, false, &HashMap::new()).await?;
+    serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
+}
+
+async fn read_and_parse_yml(
+    path: &Path,
+    resolve_self: bool,
+    inherited_vars: &HashMap<String, String>,
+) -> Result<Value> {
+    let base = path.parent().ok_or("No parent directory")?.to_path_buf();
+    let content = tokio::fs::read(path).await?;
+    let raw_value = slice_to_yml_value(content).await?;
+
+    if !resolve_self {
+        return resolve_extensions(&base, raw_value, resolve_self, inherited_vars).await;
+    }
+
+    let self_id = extract_self_id(&raw_value)?;
+    let mut vars = shift_vars(inherited_vars);
+    vars.insert("self.id".to_string(), self_id);
+
+    let value = resolve_extensions(&base, raw_value, resolve_self, &vars).await?;
+    Ok(resolve_vars_yaml(value, &vars))
 }
 
 // serde_yaml::from_str is CPU-bound and can take several ms even for small files.
 // Offloading to the blocking thread pool prevents it from stalling tokio's async
 // worker threads when many resources are loaded concurrently at startup.
-async fn parse_yaml_content(content: Vec<u8>) -> Result<Value> {
+async fn slice_to_yml_value(content: Vec<u8>) -> Result<Value> {
     tokio::task::spawn_blocking(move || {
         serde_yaml::from_slice::<Value>(&content).map_err(|e| e.to_string())
     })
@@ -25,105 +59,68 @@ async fn parse_yaml_content(content: Vec<u8>) -> Result<Value> {
     .map_err(Into::into)
 }
 
-async fn read_and_parse_yml(path: &Path) -> Result<Value> {
-    let base = path.parent().ok_or("No parent directory")?.to_path_buf();
-    let content = tokio::fs::read(path).await?;
-    let value = parse_yaml_content(content).await?;
-    let value = resolve_extensions(&base, value).await?;
-    let vars = collect_vars(value.as_mapping(), value.as_mapping(), true);
-    Ok(resolve_vars_yaml(value, &vars))
-}
-
-/// Like [`deserialize_extended_yaml`] but only resolves `vars.*` placeholders, leaving
-/// `${self.*}` literals intact so they can be resolved at runtime with the published id.
-pub async fn deserialize_extended_yaml_no_vars<T: serde::de::DeserializeOwned>(
-    path: &Path,
-) -> Result<T> {
-    let base = path.parent().ok_or("No parent directory")?.to_path_buf();
-    let content = tokio::fs::read(path).await?;
-    let value = parse_yaml_content(content).await?;
-    let value = resolve_extensions(&base, value).await?;
-    let vars = collect_vars(value.as_mapping(), value.as_mapping(), false);
-
-    serde_path_to_error::deserialize(resolve_vars_yaml(value, &vars))
-        .map_err(|e| e.to_string().into())
-}
-
-/// Builds a variable map for a `.slu` document.
+/// Extracts the top-level `id` field of a resource document, used as `self.id`.
 ///
-/// `self.id` comes from `root["resource"]["id"]` (the published UUID).
-/// Other `self.*` and `vars.*` come from `root["data"]`.
-pub fn extract_vars_slu(root: &Value) -> HashMap<String, String> {
-    let self_id_source = root
+/// Every Seelen UI resource document must declare an `id`, so a missing/invalid
+/// field is an error rather than an absent value.
+fn extract_self_id(value: &Value) -> Result<String> {
+    value
         .as_mapping()
-        .and_then(|m| m.get("resource"))
-        .and_then(Value::as_mapping);
-
-    let data = root
-        .as_mapping()
-        .and_then(|m| m.get("data"))
-        .and_then(Value::as_mapping);
-
-    let mut vars = collect_vars(self_id_source, data, true);
-
-    // self.id from resource overrides whatever may be in data
-    if let Some(id) = self_id_source
         .and_then(|m| m.get("id"))
         .and_then(Value::as_str)
-    {
-        vars.insert("self.id".to_string(), id.to_string());
-    }
-
-    vars
+        .map(str::to_string)
+        .ok_or_else(|| "Resource is missing required top-level 'id' field".into())
 }
 
-/// Collects `self.*` (from `self_map`) and `vars.*` (from `vars_map["vars"]`) into one map.
-/// Pass `resolve_self: false` to skip `self.*` collection (bundle mode).
-fn collect_vars(
-    self_map: Option<&Mapping>,
-    vars_map: Option<&Mapping>,
-    resolve_self: bool,
-) -> HashMap<String, String> {
-    let mut vars = HashMap::new();
-
-    if resolve_self {
-        if let Some(map) = self_map {
-            for (k, v) in map {
-                if let (Some(k), Some(v)) = (k.as_str(), v.as_str()) {
-                    vars.entry(format!("self.{k}"))
-                        .or_insert_with(|| v.to_string());
-                }
-            }
-        }
-    }
-
-    if let Some(user_vars) = vars_map
-        .and_then(|m| m.get("vars"))
+/// Extracts `self.id` for a `.slu` document, coming from `root["resource"]["id"]`
+/// (the published UUID).
+///
+/// Every `.slu` file must carry this id, so a missing/invalid field is an error
+/// rather than an absent value.
+pub fn extract_self_id_slu(root: &Value) -> Result<String> {
+    root.as_mapping()
+        .and_then(|m| m.get("resource"))
         .and_then(Value::as_mapping)
-    {
-        for (k, v) in user_vars {
-            if let (Some(k), Some(v)) = (k.as_str(), v.as_str()) {
-                vars.insert(format!("vars.{k}"), v.to_string());
-            }
-        }
-    }
+        .and_then(|m| m.get("id"))
+        .and_then(Value::as_str)
+        .map(str::to_string)
+        .ok_or_else(|| "SLU resource file is missing required 'resource.id' field".into())
+}
 
-    vars
+/// Shifts a `self.id`/`super.id`/`super.super.id`/... map down one `!extend` level:
+/// what was `self.id` for the extending file becomes `super.id` for the extended
+/// (base) file, what was `super.id` becomes `super.super.id`, and so on.
+fn shift_vars(vars: &HashMap<String, String>) -> HashMap<String, String> {
+    vars.iter()
+        .map(|(k, v)| {
+            let new_key = if k == "self.id" {
+                "super.id".to_string()
+            } else {
+                format!("super.{k}")
+            };
+            (new_key, v.clone())
+        })
+        .collect()
 }
 
 /// Substitutes `${key}` placeholders in a string using the given variable map.
 fn interpolate(s: String, vars: &HashMap<String, String>) -> String {
     let mut result = s;
     for (key, val) in vars {
-        result = result.replace(&format!("${{{key}}}"), val);
+        let placeholder = format!("${{{key}}}");
+        if result.contains(&placeholder) {
+            result = result.replace(&placeholder, val);
+        }
     }
     result
 }
 
-/// Recursively substitutes `${key}` placeholders in all YAML string values.
+/// Recursively substitutes `${self.id}` / `${super.id}` / `${super.super.id}` / ...
+/// placeholders in all YAML string values.
 pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value {
     match value {
         Value::String(s) => Value::String(interpolate(s, vars)),
+
         Value::Mapping(map) => {
             let mut new_map = Mapping::new();
             for (k, v) in map {
@@ -131,6 +128,7 @@ pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value 
             }
             Value::Mapping(new_map)
         }
+
         Value::Sequence(seq) => Value::Sequence(
             seq.into_iter()
                 .map(|v| resolve_vars_yaml(v, vars))
@@ -140,11 +138,16 @@ pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value 
     }
 }
 
-async fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
+async fn resolve_extensions(
+    base: &Path,
+    value: Value,
+    resolve_self: bool,
+    vars: &HashMap<String, String>,
+) -> Result<Value> {
     match value {
         Value::Mapping(map) => {
             let futs = map.into_iter().map(|(key, val)| async move {
-                let resolved = Box::pin(resolve_extensions(base, val)).await?;
+                let resolved = Box::pin(resolve_extensions(base, val, resolve_self, vars)).await?;
                 Ok::<_, crate::error::SeelenLibError>((key, resolved))
             });
             let pairs: Vec<_> = futures::future::try_join_all(futs).await?;
@@ -154,13 +157,15 @@ async fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
             }
             Ok(Value::Mapping(new_map))
         }
+
         Value::Sequence(seq) => {
             let futs = seq
                 .into_iter()
-                .map(|val| Box::pin(resolve_extensions(base, val)));
+                .map(|val| Box::pin(resolve_extensions(base, val, resolve_self, vars)));
             let resolved = futures::future::try_join_all(futs).await?;
             Ok(Value::Sequence(resolved))
         }
+
         Value::Tagged(tag) => {
             if tag.tag == "!include" {
                 if let Value::String(relative_path) = tag.value {
@@ -184,7 +189,12 @@ async fn resolve_extensions(base: &Path, value: Value) -> Result<Value> {
 
             if tag.tag == "!extend" {
                 if let Value::String(relative_path) = tag.value {
-                    let value = Box::pin(read_and_parse_yml(&base.join(relative_path))).await?;
+                    let value = Box::pin(read_and_parse_yml(
+                        &base.join(relative_path),
+                        resolve_self,
+                        vars,
+                    ))
+                    .await?;
                     return Ok(value);
                 }
             }
