@@ -97,12 +97,12 @@ impl StartMenuManager {
 
     pub fn get_by_target(&self, target: &Path) -> Option<Arc<StartMenuItem>> {
         self.list
-            .find(|item| item.target.as_ref().is_some_and(|t| t == target))
+            .find_and_clone(|item| item.target.as_ref().is_some_and(|t| t == target))
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn get_by_file_umid(&self, umid: &str) -> Option<Arc<StartMenuItem>> {
-        self.list.find(|item| {
+        self.list.find_and_clone(|item| {
             if let Some(item_umid) = &item.umid {
                 return item_umid == umid;
             }

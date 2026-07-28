@@ -39,11 +39,13 @@ impl<T> TracedMutex<T> {
         }
     }
 
+    #[inline]
     #[cfg(test)]
     fn timeout(&self) -> std::time::Duration {
         self.timeout
     }
 
+    #[inline]
     #[cfg(not(test))]
     fn timeout(&self) -> std::time::Duration {
         DEFAULT_TIMEOUT
@@ -62,6 +64,7 @@ impl<T> TracedMutex<T> {
     /// The panic will include:
     /// - The current caller location (where this call to `lock()` is blocked)
     /// - The last recorded lock location (if any)
+    #[inline]
     #[track_caller]
     pub fn lock<'a>(&'a self) -> MutexGuard<'a, T> {
         // Try to acquire the lock with a timeout to detect potential deadlocks
