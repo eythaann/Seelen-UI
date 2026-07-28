@@ -2,6 +2,10 @@
 
 ## [2.8.2-dev]
 
+### enhancements
+
+- use of Chrome DevTools Protocol to clean memory periodically.
+
 ## [2.8.1]
 
 ### features

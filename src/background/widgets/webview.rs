@@ -106,6 +106,63 @@ impl WidgetWebview {
     pub fn reload(&self) {
         self.0.reload().log_error();
     }
+
+    /// Handle to the underlying webview, cheap to clone, safe to hold outside
+    /// this struct's lifetime (unlike `WidgetWebview` itself, which destroys the
+    /// native window on drop).
+    pub fn handle(&self) -> tauri::WebviewWindow {
+        self.0.clone()
+    }
+}
+
+/// Forces the WebView2 renderer to react as if the OS was under memory pressure,
+/// via the same CDP call DevTools issues internally. Unlike `window.gc()`, this
+/// actually makes V8/Blink release freed pages back to the OS, because real pressure
+/// almost never reaches an individual background widget when the system overall has
+/// plenty of RAM free.
+pub fn simulate_memory_pressure(webview: &tauri::WebviewWindow) {
+    if webview.is_focused().unwrap_or(false) {
+        return;
+    }
+
+    webview
+        .with_webview(|platform_webview| {
+            let controller = platform_webview.controller();
+            let core_webview = match unsafe { controller.CoreWebView2() } {
+                Ok(core_webview) => core_webview,
+                Err(err) => {
+                    log::warn!("Failed to get ICoreWebView2 for memory pressure simulation: {err}");
+                    return;
+                }
+            };
+
+            // Can't use our own `WindowsString` here: webview2-com pins its own `windows`
+            // crate version (0.61) which is semver-incompatible with the one this project
+            // depends on directly (0.62.2), so their `PCWSTR` types don't unify. Must go
+            // through webview2-com's own string helper, built against its own `windows`.
+            let result =
+                webview2_com::CallDevToolsProtocolMethodCompletedHandler::wait_for_async_operation(
+                    Box::new(move |handler| unsafe {
+                        let method = webview2_com::CoTaskMemPWSTR::from(
+                            "Memory.simulatePressureNotification",
+                        );
+                        let params = webview2_com::CoTaskMemPWSTR::from(r#"{"level":"critical"}"#);
+                        core_webview
+                            .CallDevToolsProtocolMethod(
+                                *method.as_ref().as_pcwstr(),
+                                *params.as_ref().as_pcwstr(),
+                                &handler,
+                            )
+                            .map_err(webview2_com::Error::WindowsError)
+                    }),
+                    Box::new(|error_code, _result| error_code),
+                );
+
+            if let Err(err) = result {
+                log::warn!("Memory.simulatePressureNotification failed: {err:?}");
+            }
+        })
+        .log_error();
 }
 
 impl Drop for WidgetWebview {
@@ -244,11 +301,6 @@ impl WebviewArgs {
         "--no-pings",
         // maybe causes more resources than it reduces
         // "--aggressive-cache-discard",
-
-        // exposes window.gc() so MemoryLeakWorkaround.ts can force collection on
-        // occluded/background widgets, whose idle-time V8 GC otherwise gets throttled
-        // and lets the JS heap balloon until something (e.g. DevTools attaching) forces a GC.
-        "--js-flags=--expose-gc",
     ];
 
     const GPU_ARGS: &[&str] = &[

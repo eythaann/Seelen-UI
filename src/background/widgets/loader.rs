@@ -16,7 +16,9 @@ use crate::{
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
     widgets::{
-        manager::WIDGET_MANAGER, notify_widget_statuses_change, webview::WidgetWebview,
+        manager::WIDGET_MANAGER,
+        notify_widget_statuses_change,
+        webview::{self, WidgetWebview},
         WidgetWebviewLabel,
     },
     windows_api::event_window::IS_INTERACTIVE_SESSION,
@@ -32,6 +34,10 @@ const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(3);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
 // Grace period after session resume or soft_restart to let the webview finish reloading.
 const LIVENESS_RELOAD_GRACE_PERIOD: Duration = Duration::from_secs(10);
+// Widgets sit occluded/background almost all the time, so the OS never signals real
+// memory pressure to their renderer and the JS heap balloons unchecked. Simulating it
+// periodically forces WebView2 to actually release freed pages back to the OS.
+const MEMORY_PRESSURE_INTERVAL: Duration = Duration::from_secs(30);
 
 pub struct WidgetDeployment {
     pub definition: Arc<Widget>,
@@ -157,6 +163,7 @@ pub struct WidgetPod {
 
     live: Arc<tokio::sync::Notify>,
     liveness_prove_handle: Option<tokio::task::JoinHandle<()>>,
+    memory_pressure_handle: Option<tokio::task::JoinHandle<()>>,
     retries: Arc<AtomicU8>,
 }
 
@@ -170,6 +177,7 @@ impl WidgetPod {
             owner_hwnd,
             live: Arc::new(tokio::sync::Notify::new()),
             liveness_prove_handle: None,
+            memory_pressure_handle: None,
             retries: Arc::new(AtomicU8::new(0)),
         }
     }
@@ -247,6 +255,23 @@ impl WidgetPod {
         self.window = Some(window);
         notify_widget_statuses_change();
         self.start_liveness_prove();
+        self.start_memory_pressure_simulation();
+    }
+
+    fn start_memory_pressure_simulation(&mut self) {
+        let Some(window) = &self.window else {
+            return;
+        };
+        let webview = window.handle();
+
+        let handle = get_tokio_handle().spawn(async move {
+            loop {
+                tokio::time::sleep(MEMORY_PRESSURE_INTERVAL).await;
+                webview::simulate_memory_pressure(&webview);
+            }
+        });
+
+        self.memory_pressure_handle = Some(handle);
     }
 
     fn start_liveness_prove(&mut self) {
@@ -328,6 +353,9 @@ impl Drop for WidgetPod {
     fn drop(&mut self) {
         log::trace!(target: &self.label.decoded, "dropped");
         if let Some(handle) = self.liveness_prove_handle.take() {
+            handle.abort();
+        }
+        if let Some(handle) = self.memory_pressure_handle.take() {
             handle.abort();
         }
     }

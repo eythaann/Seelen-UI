@@ -57,6 +57,7 @@ windows-future = { workspace = true }
 win-screenshot = { workspace = true }
 base64 = { workspace = true }
 webp = { workspace = true }
+webview2-com = { workspace = true }
 arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }

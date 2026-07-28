@@ -5668,6 +5668,7 @@ dependencies = [
  "uuid 1.22.0",
  "walkdir",
  "webp",
+ "webview2-com",
  "widestring",
  "win-hotkeys",
  "win-screenshot",
