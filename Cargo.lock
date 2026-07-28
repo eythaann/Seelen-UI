@@ -5590,7 +5590,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-core"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "base64 0.22.1",
  "chrono",
@@ -5616,7 +5616,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "arc-swap",
  "backtrace",
@@ -6077,7 +6077,7 @@ checksum = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
 
 [[package]]
 name = "slu-ipc"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "clap",
  "interprocess",
@@ -6093,7 +6093,7 @@ dependencies = [
 
 [[package]]
 name = "slu-macros"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -6102,7 +6102,7 @@ dependencies = [
 
 [[package]]
 name = "slu-utils"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "base64 0.22.1",
  "minisign",
@@ -6111,7 +6111,7 @@ dependencies = [
 
 [[package]]
 name = "sluhk"
-version = "2.8.1"
+version = "2.8.2"
 dependencies = [
  "slu-ipc",
  "uuid 1.22.0",
