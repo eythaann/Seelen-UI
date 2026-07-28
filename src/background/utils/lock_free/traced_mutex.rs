@@ -133,6 +133,14 @@ mod tests {
     use std::sync::Arc;
     use std::time::Duration;
 
+    /// `panics_with_blocked_and_last_lock_locations_on_timeout` installs a process-global
+    /// panic hook while it expects a panic on this thread. Since tests run in parallel by
+    /// default, any other test panicking concurrently (e.g. the intentional panic in
+    /// `panics_without_last_location_when_never_locked_successfully`) would be captured by
+    /// that hook instead, corrupting the recorded location. Serialize the two tests that
+    /// deliberately panic to avoid this race.
+    static PANIC_TEST_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
     #[test]
     fn locks_and_unlocks() {
         let mutex = TracedMutex::new(0);
@@ -153,6 +161,7 @@ mod tests {
 
     #[test]
     fn panics_with_blocked_and_last_lock_locations_on_timeout() {
+        let _serialize = PANIC_TEST_LOCK.lock().unwrap();
         let mutex = Arc::new(TracedMutex::with_timeout(0, Duration::from_millis(50)));
 
         // Take the lock on another thread and hold it, recording "last lock" here.
@@ -208,6 +217,7 @@ mod tests {
 
     #[test]
     fn panics_without_last_location_when_never_locked_successfully() {
+        let _serialize = PANIC_TEST_LOCK.lock().unwrap();
         let mutex: TracedMutex<i32> = TracedMutex::with_timeout(0, Duration::from_millis(50));
         // Poison-free: hold the underlying lock directly without going through
         // `TracedMutex::lock`, so `last_lock_location` is never populated.
