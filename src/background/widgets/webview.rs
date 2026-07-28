@@ -244,6 +244,11 @@ impl WebviewArgs {
         "--no-pings",
         // maybe causes more resources than it reduces
         // "--aggressive-cache-discard",
+
+        // exposes window.gc() so MemoryLeakWorkaround.ts can force collection on
+        // occluded/background widgets, whose idle-time V8 GC otherwise gets throttled
+        // and lets the JS heap balloon until something (e.g. DevTools attaching) forces a GC.
+        "--js-flags=--expose-gc",
     ];
 
     const GPU_ARGS: &[&str] = &[

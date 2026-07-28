@@ -1,13 +1,17 @@
-import { _invoke, webviewInfo } from "./_tauri";
-import type { FocusedApp } from "@seelen-ui/lib/types";
+import { webviewInfo } from "./_tauri";
+// import type { FocusedApp } from "@seelen-ui/lib/types";
 import { emitTo, listen } from "@tauri-apps/api/event";
 
-// trigger garbage collection
-setInterval(() => {
-  window.gc?.();
-}, 10000);
+// for some reason the gc is not running for webview2 overlays as are our widgets
+if (window.gc) {
+  setInterval(() => {
+    window.gc?.();
+  }, 10000);
+} else {
+  console.warn("Garbage collector not available");
+}
 
-if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
+/* if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
   // workaround for tauri/webview2 memory leak
   setInterval(async () => {
     const app = await _invoke<FocusedApp>("get_focused_app");
@@ -19,7 +23,7 @@ if (!window.__SLU_WIDGET.noMemoryLeakWorkaround) {
     console.trace("Reloading widget.");
     location.search = `r=${Date.now()}`; // add a query hash to force be a new page
   }, 60_000 * 10); // every 10 minutes
-}
+}*/
 
 // important in case of unexpected crash like Out of Memory
 listen<string>(
