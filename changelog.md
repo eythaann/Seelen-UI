@@ -6,6 +6,10 @@
 
 - use of Chrome DevTools Protocol to clean memory periodically.
 
+### fix
+
+- not loading system account profile picture on windows 10.
+
 ## [2.8.1]
 
 ### features

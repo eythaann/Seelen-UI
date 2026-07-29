@@ -1,4 +1,3 @@
-#[allow(dead_code)]
 pub enum PictureQuality {
     Quality1080,
     Quality448,
@@ -14,6 +13,20 @@ pub enum PictureQuality {
 }
 
 impl PictureQuality {
+    pub const ALL: [PictureQuality; 11] = [
+        PictureQuality::Quality1080,
+        PictureQuality::Quality448,
+        PictureQuality::Quality424,
+        PictureQuality::Quality240,
+        PictureQuality::Quality208,
+        PictureQuality::Quality192,
+        PictureQuality::Quality96,
+        PictureQuality::Quality64,
+        PictureQuality::Quality48,
+        PictureQuality::Quality40,
+        PictureQuality::Quality32,
+    ];
+
     pub fn as_str(&self) -> &'static str {
         match self {
             PictureQuality::Quality1080 => "Image1080",

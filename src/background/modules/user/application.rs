@@ -115,14 +115,26 @@ impl UserManager {
         Ok(list)
     }
 
-    fn get_user_profile_picture_path(sid: &str, quality: PictureQuality) -> Result<PathBuf> {
+    /// Tries every known picture quality from highest to lowest, since Windows only
+    /// populates the registry values it actually generated: Windows 11 writes `Image1080`,
+    /// but Windows 10 stops at `Image448`, so requesting `Image1080` there always fails.
+    fn get_user_profile_picture_path(sid: &str) -> Result<PathBuf> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
         let settings = hklm.open_subkey(
             format!("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\{sid}")
                 .as_str(),
         )?;
-        let path: String = settings.get_value(quality.as_str())?;
-        Ok(path.into())
+
+        for quality in PictureQuality::ALL {
+            if let Ok(path) = settings.get_value::<String, _>(quality.as_str()) {
+                let path = PathBuf::from(path);
+                if path.exists() {
+                    return Ok(path);
+                }
+            }
+        }
+
+        Err("No profile picture found for any known quality".into())
     }
 
     fn get_one_drive_attributes() -> Result<(String, PathBuf)> {
@@ -166,8 +178,7 @@ impl UserManager {
         };
 
         if let Ok(sid) = Self::get_logged_on_user_sid() {
-            user.profile_picture_path =
-                Self::get_user_profile_picture_path(&sid, PictureQuality::Quality1080).ok();
+            user.profile_picture_path = Self::get_user_profile_picture_path(&sid).ok();
             if let Ok((user_mail, one_drive_path)) = Self::get_one_drive_attributes() {
                 user.email = Some(user_mail);
                 user.one_drive_path = Some(one_drive_path);

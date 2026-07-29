@@ -35,7 +35,7 @@ export function App() {
 
   return (
     <div className="dialog">
-      <header data-tauri-drag-region className="header">
+      <header className="header">
         <div className="header-content">
           {dialog.title.map((entry, idx) => <SluPopupContent key={idx} entry={entry} />)}
         </div>
