@@ -13,8 +13,8 @@ pub async fn deserialize_extended_yaml<T: serde::de::DeserializeOwned>(path: &Pa
     serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
 }
 
-/// Like [`deserialize_extended_yaml`] but leaves `${self.id}` / `${super.id}` literals intact
-/// so they can be resolved at runtime with the published id.
+/// Like [`deserialize_extended_yaml`] but leaves `${self.id}` literals intact so they can be
+/// resolved at runtime with the published id.
 ///
 /// This must also apply to `!extend`ed files (bundling resolves the whole tree), so the
 /// `resolve_self: false` mode is threaded through [`resolve_extensions`] instead of only
@@ -26,6 +26,10 @@ pub async fn deserialize_extended_yaml_no_vars<T: serde::de::DeserializeOwned>(
     serde_path_to_error::deserialize(value).map_err(|e| e.to_string().into())
 }
 
+/// `${self.id}` always refers to the id of the root document, never the id of whichever
+/// `!extend`ed file is currently being read. `vars` is computed once, at the root (when
+/// `inherited_vars` is empty), and then passed down unchanged through every `!extend` level -
+/// it is inherited, not recomputed per file.
 async fn read_and_parse_yml(
     path: &Path,
     resolve_self: bool,
@@ -39,9 +43,13 @@ async fn read_and_parse_yml(
         return resolve_extensions(&base, raw_value, resolve_self, inherited_vars).await;
     }
 
-    let self_id = extract_self_id(&raw_value)?;
-    let mut vars = shift_vars(inherited_vars);
-    vars.insert("self.id".to_string(), self_id);
+    let vars = if inherited_vars.is_empty() {
+        let mut vars = HashMap::new();
+        vars.insert("self.id".to_string(), extract_self_id(&raw_value)?);
+        vars
+    } else {
+        inherited_vars.clone()
+    };
 
     let value = resolve_extensions(&base, raw_value, resolve_self, &vars).await?;
     Ok(resolve_vars_yaml(value, &vars))
@@ -87,22 +95,6 @@ pub fn extract_self_id_slu(root: &Value) -> Result<String> {
         .ok_or_else(|| "SLU resource file is missing required 'resource.id' field".into())
 }
 
-/// Shifts a `self.id`/`super.id`/`super.super.id`/... map down one `!extend` level:
-/// what was `self.id` for the extending file becomes `super.id` for the extended
-/// (base) file, what was `super.id` becomes `super.super.id`, and so on.
-fn shift_vars(vars: &HashMap<String, String>) -> HashMap<String, String> {
-    vars.iter()
-        .map(|(k, v)| {
-            let new_key = if k == "self.id" {
-                "super.id".to_string()
-            } else {
-                format!("super.{k}")
-            };
-            (new_key, v.clone())
-        })
-        .collect()
-}
-
 /// Substitutes `${key}` placeholders in a string using the given variable map.
 fn interpolate(s: String, vars: &HashMap<String, String>) -> String {
     let mut result = s;
@@ -115,8 +107,7 @@ fn interpolate(s: String, vars: &HashMap<String, String>) -> String {
     result
 }
 
-/// Recursively substitutes `${self.id}` / `${super.id}` / `${super.super.id}` / ...
-/// placeholders in all YAML string values.
+/// Recursively substitutes `${self.id}` placeholders in all YAML string values.
 pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value {
     match value {
         Value::String(s) => Value::String(interpolate(s, vars)),
