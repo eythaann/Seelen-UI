@@ -1258,7 +1258,7 @@ dependencies = [
  "libc",
  "option-ext",
  "redox_users",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -1493,7 +1493,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2442,7 +2442,7 @@ dependencies = [
  "js-sys",
  "log",
  "wasm-bindgen",
- "windows-core 0.62.2",
+ "windows-core 0.60.1",
 ]
 
 [[package]]
@@ -3532,7 +3532,7 @@ version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "680998035259dcfcafe653688bf2aa6d3e2dc05e98be6ab46afb089dc84f1df8"
 dependencies = [
- "proc-macro-crate 3.4.0",
+ "proc-macro-crate 1.3.1",
  "proc-macro2",
  "quote",
  "syn 2.0.117",
@@ -3879,7 +3879,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7d8fae84b431384b68627d0f9b3b1245fcf9f46f6c0e3dc902e9dce64edd1967"
 dependencies = [
  "libc",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -4528,7 +4528,7 @@ dependencies = [
  "once_cell",
  "socket2",
  "tracing",
- "windows-sys 0.60.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -5184,7 +5184,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -5243,7 +5243,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -5294,7 +5294,7 @@ dependencies = [
 [[package]]
 name = "salvo"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
  "salvo-oapi",
  "salvo-proxy",
@@ -5304,7 +5304,7 @@ dependencies = [
 [[package]]
 name = "salvo-oapi"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -5338,9 +5338,9 @@ dependencies = [
 [[package]]
 name = "salvo-oapi-macros"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
- "proc-macro-crate 3.4.0",
+ "proc-macro-crate 2.0.0",
  "proc-macro2",
  "proc-macro2-diagnostics",
  "quote",
@@ -5352,7 +5352,7 @@ dependencies = [
 [[package]]
 name = "salvo-proxy"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
  "fastrand",
  "futures-util",
@@ -5369,7 +5369,7 @@ dependencies = [
 [[package]]
 name = "salvo-serde-util"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -5379,7 +5379,7 @@ dependencies = [
 [[package]]
 name = "salvo_core"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -5429,9 +5429,9 @@ dependencies = [
 [[package]]
 name = "salvo_macros"
 version = "0.94.0"
-source = "git+https://github.com/eythaann/salvo.git#5f22bd3ccad36a6e8d54c7bc5babe42030e44cfa"
+source = "git+https://github.com/eythaann/salvo.git#e863b51b3539d77846b7e7863d7a9fb7ca1d0eb5"
 dependencies = [
- "proc-macro-crate 3.4.0",
+ "proc-macro-crate 2.0.0",
  "proc-macro2",
  "quote",
  "salvo-serde-util",
@@ -6802,7 +6802,7 @@ dependencies = [
  "getrandom 0.3.4",
  "once_cell",
  "rustix",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -7895,7 +7895,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -8578,7 +8578,7 @@ dependencies = [
  "serde",
  "thiserror 2.0.18",
  "windows 0.62.2",
- "windows-core 0.62.2",
+ "windows-core 0.60.1",
 ]
 
 [[package]]
