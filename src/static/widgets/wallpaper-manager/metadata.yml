@@ -12,8 +12,8 @@ shortcuts:
   - id: wallpaper-next
     command: ["wallpaper", "next"]
     label: !extend i18n/shortcuts/wallpaper-next.yml
-    defaultKeys: ["Ctrl", "Win", "Up"]
+    defaultKeys: ["Win", "Alt", "Up"]
   - id: wallpaper-prev
     command: ["wallpaper", "prev"]
     label: !extend i18n/shortcuts/wallpaper-prev.yml
-    defaultKeys: ["Ctrl", "Win", "Down"]
+    defaultKeys: ["Win", "Alt", "Down"]

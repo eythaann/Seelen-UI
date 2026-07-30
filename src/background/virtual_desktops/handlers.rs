@@ -48,7 +48,15 @@ pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result
 #[tauri::command(async)]
 pub fn create_workspace(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
     let vd = get_vd_manager();
-    let workspace_id = vd.create_desktop(&monitor_id)?;
+    let workspace_id = vd.create_desktop(&monitor_id, false)?;
+    vd.switch_to_id(&monitor_id, &workspace_id)?;
+    Ok(workspace_id)
+}
+
+#[tauri::command(async)]
+pub fn create_workspace_row(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
+    let vd = get_vd_manager();
+    let workspace_id = vd.create_desktop(&monitor_id, true)?;
     vd.switch_to_id(&monitor_id, &workspace_id)?;
     Ok(workspace_id)
 }

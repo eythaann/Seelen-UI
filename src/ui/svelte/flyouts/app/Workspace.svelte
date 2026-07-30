@@ -3,7 +3,7 @@
   import type { DesktopWorkspace } from "@seelen-ui/lib/types";
 
   interface Props {
-    workspace: DesktopWorkspace & { idx: number };
+    workspace: DesktopWorkspace & { rowIdx: number; colIdx: number };
   }
 
   let { workspace }: Props = $props();
@@ -11,7 +11,7 @@
 
 <div class="workspace">
   <span class="workspace-name">
-    {workspace.name || `Workspace ${workspace.idx + 1}`}
+    {workspace.name || `Workspace ${workspace.rowIdx + 1}.${workspace.colIdx + 1}`}
   </span>
   <Icon iconName={(workspace.icon as any) || "PiMonitorBold"} />
 </div>

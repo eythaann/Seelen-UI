@@ -2,6 +2,10 @@
 
 ## [2.8.2-dev]
 
+### features
+
+- Grid workspaces system.
+
 ### enhancements
 
 - use of Chrome DevTools Protocol to clean memory periodically.

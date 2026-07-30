@@ -7,14 +7,15 @@
   import { createDroppable } from "@dnd-kit/svelte";
 
   interface Props {
-    index: number;
+    row: number;
+    column: number;
     workspace: DesktopWorkspace;
     active: boolean;
     viewing: boolean;
     onHover: () => void;
   }
 
-  let { workspace, index, active, viewing, onHover }: Props = $props();
+  let { workspace, row, column, active, viewing, onHover }: Props = $props();
 
   const wallpaper = $derived(store.findWallpaper(workspace.wallpaper));
 
@@ -93,7 +94,7 @@
       bind:value={workspaceName}
       data-skin="transparent"
       class="workspace-name-input"
-      placeholder={`Workspace ${index + 1}`}
+      placeholder={`Workspace ${row}.${column}`}
       onblur={handleNameChange}
       onkeydown={handleKeyDown}
       onclick={(e) => e.stopPropagation()}
@@ -107,3 +108,9 @@
     <Wallpaper definition={wallpaper} static muted />
   </div>
 </div>
+
+<style>
+  .workspace-preview {
+    position: relative;
+  }
+</style>

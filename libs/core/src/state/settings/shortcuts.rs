@@ -103,6 +103,13 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
             readonly
         ),
         decl!(
+            "vd-create-workspace-row",
+            "t:shortcuts.labels.create_new_workspace_row",
+            cmd!["vd", "create-new-workspace-row"],
+            cmd!["Ctrl", "Win", "Shift", "D"],
+            readonly
+        ),
+        decl!(
             "vd-destroy-workspace",
             "t:shortcuts.labels.destroy_current_workspace",
             cmd!["vd", "destroy-current-workspace"],
@@ -121,6 +128,20 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
             "t:shortcuts.labels.switch_to_previous_workspace",
             cmd!["vd", "switch-prev"],
             cmd!["Ctrl", "Win", "Left"],
+            readonly
+        ),
+        decl!(
+            "vd-switch-up",
+            "t:shortcuts.labels.switch_to_workspace_up",
+            cmd!["vd", "switch-up"],
+            cmd!["Ctrl", "Win", "Up"],
+            readonly
+        ),
+        decl!(
+            "vd-switch-down",
+            "t:shortcuts.labels.switch_to_workspace_down",
+            cmd!["vd", "switch-down"],
+            cmd!["Ctrl", "Win", "Down"],
             readonly
         ),
     ];

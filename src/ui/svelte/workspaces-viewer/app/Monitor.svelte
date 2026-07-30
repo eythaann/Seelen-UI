@@ -34,13 +34,14 @@
 
   const activeWallpaper = $derived(store.findWallpaper(viewingWorkspace?.wallpaper));
 
-  async function createWorkspace(e: MouseEvent) {
+  function createWorkspace(e: MouseEvent) {
     e.stopPropagation();
-    try {
-      await invoke(SeelenCommand.CreateWorkspace, { monitorId: monitor.id });
-    } catch (error) {
-      console.error("Failed to create workspace:", error);
-    }
+    invoke(SeelenCommand.CreateWorkspace, { monitorId: monitor.id });
+  }
+  
+  function createWorkspaceRow(e: MouseEvent) {
+    e.stopPropagation();
+    invoke(SeelenCommand.CreateWorkspaceRow, { monitorId: monitor.id });
   }
 </script>
 
@@ -69,25 +70,37 @@
       <Wallpaper definition={activeWallpaper} static muted />
     </div>
 
-    <div class="workspaces">
-      {#if vdMonitor}
-        {#each vdMonitor.workspaces.flat() as workspace, index}
-          <Workspace
-            active={vdMonitor.active_workspace === workspace.id}
-            viewing={viewingWorkspaceId === workspace.id}
-            {workspace}
-            {index}
-            onHover={() => {
-              viewingWorkspaceId = workspace.id;
-            }}
-          />
+    {#if vdMonitor}
+      <div
+        class="workspaces"
+        role="grid"
+        style:--column-count={`${vdMonitor.workspaces[0]?.length || 1}`}
+        style:--row-count={`${vdMonitor.workspaces.length}`}
+      >
+        {#each vdMonitor.workspaces as row, rowIndex}
+          {#each row as workspace, columnIndex}
+            <Workspace
+              active={vdMonitor.active_workspace === workspace.id}
+              viewing={viewingWorkspaceId === workspace.id}
+              {workspace}
+              row={rowIndex + 1}
+              column={columnIndex + 1}
+              onHover={() => {
+                viewingWorkspaceId = workspace.id;
+              }}
+            />
+          {/each}
         {/each}
-      {/if}
 
-      <button class="add-workspace" onclick={createWorkspace}>
-        <Icon iconName="IoAdd" />
-      </button>
-    </div>
+        <button class="add-workspace-column" onclick={createWorkspace}>
+          <Icon iconName="IoAdd" />
+        </button>
+
+        <button class="add-workspace-row" onclick={createWorkspaceRow}>
+          <Icon iconName="IoAdd" />
+        </button>
+      </div>
+    {/if}
 
     {#if viewingWorkspace}
       <div class="windows">

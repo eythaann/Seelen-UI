@@ -96,7 +96,7 @@ impl VirtualDesktopMonitor {
         }
     }
 
-    /// Add a new workspace and return its id
+    /// Add a new workspace column and return the id of the new cell on the active row
     pub fn add_workspace_column(&mut self) -> WorkspaceId {
         self.workspaces.add_column();
         let row = self.active_row();
@@ -105,14 +105,29 @@ impl VirtualDesktopMonitor {
         workspace_id
     }
 
+    /// Add a new workspace row and return the id of the new cell on the active column
+    pub fn add_workspace_row(&mut self) -> WorkspaceId {
+        let (_, col_idx) = self
+            .workspaces
+            .position(&self.active_workspace)
+            .expect("Active workspace doesn't exist in the grid");
+        self.workspaces.add_row();
+        let workspace_id = self.workspaces.0.last().unwrap()[col_idx].id.clone();
+        self.active_workspace = workspace_id.clone();
+        workspace_id
+    }
+
     /// Remove a workspace by id
-    /// - Removing a workspace means removing its whole column across every row (minimum 1 column required)
+    /// - If the grid has more than one column, removes the whole column across every row
+    ///   (minimum 1 column required), moving all windows from each removed cell to the side
+    ///   column in its own row
+    /// - Otherwise, if the grid has more than one row, removes the current row instead,
+    ///   moving all windows from the removed cell to the side row in the same column
     /// - If the removed workspace was current, switches to the side one
-    /// - Moves all windows from each removed cell to the side column in its own row
+    /// - Fails if the grid is already 1x1
     pub fn remove_workspace(&mut self, workspace_id: &WorkspaceId) -> Result<()> {
-        // Don't remove if it's the last column
         if self.workspaces.column_count() <= 1 {
-            return Err("Cannot remove the last workspace".into());
+            return self.remove_workspace_row(workspace_id);
         }
 
         // Find the column to remove
@@ -134,6 +149,42 @@ impl VirtualDesktopMonitor {
 
             row.remove(col_idx);
         }
+
+        if let Some(active) = new_active {
+            self.active_workspace = active;
+        }
+
+        self.workspaces.sanitize();
+        Ok(())
+    }
+
+    /// Remove the row containing `workspace_id`, moving its windows to the side row in the
+    /// same column. Fails if it's the last remaining row.
+    fn remove_workspace_row(&mut self, workspace_id: &WorkspaceId) -> Result<()> {
+        if self.workspaces.row_count() <= 1 {
+            return Err("Cannot remove the last workspace".into());
+        }
+
+        let (row_idx, _) = self
+            .workspaces
+            .position(workspace_id)
+            .ok_or("Workspace not found")?;
+
+        let row_to_move = if row_idx == 0 { 1 } else { row_idx - 1 };
+
+        let mut new_active = None;
+        for col_idx in 0..self.workspaces.column_count() {
+            let windows = self.workspaces.0[row_idx][col_idx].windows.clone();
+            self.workspaces.0[row_to_move][col_idx]
+                .windows
+                .extend(windows);
+
+            if self.workspaces.0[row_idx][col_idx].id == self.active_workspace {
+                new_active = Some(self.workspaces.0[row_to_move][col_idx].id.clone());
+            }
+        }
+
+        self.workspaces.0.remove(row_idx);
 
         if let Some(active) = new_active {
             self.active_workspace = active;

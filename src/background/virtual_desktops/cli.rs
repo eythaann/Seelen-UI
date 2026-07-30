@@ -83,7 +83,7 @@ fn process_vd_command(cmd: VdCommand) -> Result<()> {
                 let desired_col = if cmd == VdCommand::SwitchNext {
                     col + 1
                 } else {
-                    col - 1
+                    col.saturating_sub(1)
                 };
 
                 Result::Ok(
@@ -98,9 +98,42 @@ fn process_vd_command(cmd: VdCommand) -> Result<()> {
                 vd.switch_to_id(&monitor_id, &new_workspace_id)?;
             }
         }
+        VdCommand::SwitchUp | VdCommand::SwitchDown => {
+            let monitor_id = cursor_monitor_id()?;
+
+            let new_workspace_id = vd.monitors.with_lock(|monitors| {
+                let monitor = monitors.get(&monitor_id).ok_or("Monitor not found")?;
+                let (row, col) = monitor
+                    .workspaces
+                    .position(monitor.active_workspace_id())
+                    .ok_or("Active workspace not found")?;
+
+                let desired_row = if cmd == VdCommand::SwitchDown {
+                    row + 1
+                } else {
+                    row.saturating_sub(1)
+                };
+
+                Result::Ok(
+                    monitor
+                        .workspaces
+                        .get(desired_row, col)
+                        .map(|w| w.id.clone()),
+                )
+            })?;
+
+            if let Some(new_workspace_id) = new_workspace_id {
+                vd.switch_to_id(&monitor_id, &new_workspace_id)?;
+            }
+        }
         VdCommand::CreateNewWorkspace => {
             let monitor_id = cursor_monitor_id()?;
-            let workspace_id = vd.create_desktop(&monitor_id)?;
+            let workspace_id = vd.create_desktop(&monitor_id, false)?;
+            vd.switch_to_id(&monitor_id, &workspace_id)?;
+        }
+        VdCommand::CreateNewWorkspaceRow => {
+            let monitor_id = cursor_monitor_id()?;
+            let workspace_id = vd.create_desktop(&monitor_id, true)?;
             vd.switch_to_id(&monitor_id, &workspace_id)?;
         }
         VdCommand::DestroyCurrentWorkspace => {

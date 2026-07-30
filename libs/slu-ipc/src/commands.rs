@@ -205,9 +205,15 @@ pub enum VdCommand {
     SwitchNext,
     /// Switch to the previous workspace column
     SwitchPrev,
+    /// Switch to the previous workspace row
+    SwitchUp,
+    /// Switch to the next workspace row
+    SwitchDown,
     /// Create a new workspace column
     CreateNewWorkspace,
-    /// Destroy the current workspace column (will do nothing if there's only one workspace)
+    /// Create a new workspace row
+    CreateNewWorkspaceRow,
+    /// Destroy the current workspace column or row if there is only one column
     DestroyCurrentWorkspace,
 }
 

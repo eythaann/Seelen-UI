@@ -263,6 +263,7 @@ shortcuts:
     Client
   labels:
     create_new_workspace: Create new Workspace
+    create_new_workspace_row: Create New Workspace Row
     destroy_current_workspace: Destroy Current Workspace
     misc_force_quit: Force Quit
     misc_force_restart: Force Restart
@@ -271,6 +272,8 @@ shortcuts:
     send_to_workspace: Send to Workspace {{0}}
     switch_to_next_workspace: Switch to Next Workspace
     switch_to_previous_workspace: Switch to Previous Workspace
+    switch_to_workspace_down: Switch to Workspace Below
+    switch_to_workspace_up: Switch to Workspace Above
     switch_workspace: Switch to Workspace {{0}}
   readonly_tooltip: This is a read-only shortcut
   reset: Reset to Defaults

@@ -101,6 +101,7 @@ slu_commands_declaration! {
     StateGetVirtualDesktops = get_virtual_desktops() -> VirtualDesktops,
     SwitchWorkspace = switch_workspace(workspace_id: WorkspaceId),
     CreateWorkspace = create_workspace(monitor_id: MonitorId) -> WorkspaceId,
+    CreateWorkspaceRow = create_workspace_row(monitor_id: MonitorId) -> WorkspaceId,
     DestroyWorkspace = destroy_workspace(workspace_id: WorkspaceId),
     RenameWorkspace = rename_workspace(workspace_id: WorkspaceId, name: Option<String>),
     MoveWindowToWorkspace = move_window_to_workspace(hwnd: isize, workspace_id: WorkspaceId),

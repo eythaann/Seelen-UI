@@ -39,21 +39,18 @@
 
   let activeWorkspaceData = $derived.by(() => {
     return vd?.workspaces
-      .flat()
-      .map((workspace, idx) => ({ ...workspace, idx }))
+      .flatMap((row, rowIdx) => row.flatMap((workspace, colIdx) => ({ ...workspace, rowIdx, colIdx })))
       .find((workspace) => workspace.id == vd.active_workspace);
   });
 
   // Use [0] (newest) instead of .pop() (oldest) on a descending-sorted array.
-  let notification = $derived.by(
-    () => {
-      const top = gState.notifications.toSorted((a, b) => Number(b.date - a.date))[0];
-      // Also filter out stale notifications (older than 10 s) to avoid showing them as new
-      // when a previously dismissed notification causes the top item to change.
-      const isRecent = !!top && Date.now() - top.date < 10_000;
-      return isRecent ? top : null;
-    },
-  );
+  let notification = $derived.by(() => {
+    const top = gState.notifications.toSorted((a, b) => Number(b.date - a.date))[0];
+    // Also filter out stale notifications (older than 10 s) to avoid showing them as new
+    // when a previously dismissed notification causes the top item to change.
+    const isRecent = !!top && Date.now() - top.date < 10_000;
+    return isRecent ? top : null;
+  });
 
   let notificationId = $derived(notification?.id);
   let isDnd = $derived(gState.notificationsMode !== NotificationsMode.All);

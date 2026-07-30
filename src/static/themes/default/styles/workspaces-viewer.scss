@@ -21,32 +21,46 @@
     }
 
     .workspaces {
-      border-radius: 10px;
-      background-color: var(--slu-std-bg-color);
+      --card-height: 200px;
+      --card-width: 280px;
+
+      flex-shrink: 0;
+      width: min-content;
+      max-width: 100%;
+      height: calc(var(--card-height) + var(--spacing-m) * 2);
+
       padding: var(--spacing-m);
       box-shadow: var(--shadow-m);
 
-      display: flex;
-      gap: var(--spacing-m);
-      flex-shrink: 0;
+      background-color: var(--slu-std-bg-color);
+      border-radius: 10px;
 
-      width: min-content;
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
+      display: grid;
+      grid-template-columns: repeat(calc(var(--column-count) + 1), var(--card-width));
+      grid-template-rows: repeat(calc(var(--row-count) + 1), var(--card-height));
+      gap: var(--spacing-m);
+
+      overflow: auto;
+      scroll-snap-type: y mandatory;
 
       .workspace {
+        scroll-snap-align: center;
+
         position: relative;
-        width: 230px;
-        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: var(--spacing-s);
+
         background-color: var(--slu-std-bg-light-color);
-        box-shadow: var(--shadow-s);
         padding: var(--spacing-s);
-        flex-shrink: 0;
+        box-shadow: var(--shadow-s);
+        border-radius: 10px;
 
         .workspace-header {
           display: flex;
-          margin-bottom: 10px;
           align-items: center;
           gap: var(--spacing-s);
 
@@ -61,9 +75,8 @@
         }
 
         .workspace-preview {
-          position: relative;
           width: 100%;
-          aspect-ratio: 16/9;
+          height: 100%;
           border-radius: 8px;
           overflow: hidden;
         }
@@ -97,8 +110,11 @@
         }
       }
 
-      .add-workspace {
-        width: 230px;
+      .add-workspace-column,
+      .add-workspace-row {
+        width: 100%;
+        height: 100%;
+        padding: var(--spacing-s);
         flex-shrink: 0;
 
         border-radius: 8px;
@@ -108,6 +124,22 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      .add-workspace-column {
+        grid-row: 1/-1;
+        grid-column: -2/-1;
+
+        position: sticky;
+        top: 0;
+        bottom: 0;
+        height: var(--card-height);
+      }
+
+      .add-workspace-row {
+        scroll-snap-align: center;
+        grid-row: -2/-1;
+        grid-column: 1/-2;
       }
     }
   }

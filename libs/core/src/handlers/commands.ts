@@ -3,6 +3,7 @@ export enum SeelenCommand {
   StateGetVirtualDesktops = "get_virtual_desktops",
   SwitchWorkspace = "switch_workspace",
   CreateWorkspace = "create_workspace",
+  CreateWorkspaceRow = "create_workspace_row",
   DestroyWorkspace = "destroy_workspace",
   RenameWorkspace = "rename_workspace",
   MoveWindowToWorkspace = "move_window_to_workspace",

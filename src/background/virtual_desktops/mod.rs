@@ -479,11 +479,17 @@ impl SluWorkspacesManager2 {
             .ok_or("Monitor not found")?
     }
 
-    /// Create a new workspace on a specific monitor
-    pub fn create_desktop(&self, monitor_id: &MonitorId) -> Result<WorkspaceId> {
+    /// Create a new workspace column (or row) on a specific monitor
+    pub fn create_desktop(&self, monitor_id: &MonitorId, as_row: bool) -> Result<WorkspaceId> {
         let workspace_id = self
             .monitors
-            .get(monitor_id, |monitor| monitor.add_workspace_column())
+            .get(monitor_id, |monitor| {
+                if as_row {
+                    monitor.add_workspace_row()
+                } else {
+                    monitor.add_workspace_column()
+                }
+            })
             .ok_or("Monitor not found")?;
         self.workspace_index
             .upsert(workspace_id.clone(), monitor_id.clone());
