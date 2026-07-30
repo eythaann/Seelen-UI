@@ -63,7 +63,7 @@ rayon = "1.10"
 regex = "1.12.3"
 reqwest = "0.13.1"
 rust-i18n = "4.1.0"
-salvo = { git = "https://github.com/eythaann/salvo.git" }
+salvo = "0.95.1"
 sha2 = "0.10.9"
 seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
