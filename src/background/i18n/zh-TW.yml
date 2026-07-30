@@ -2,7 +2,7 @@ auth:
   login_failed_body: 登入期間出現問題。如果這種情況仍然存在，請確保 Windows「憑證管理員」服務 (VaultSvc) 已啟用並正在執行，然後重試。
   login_failed_title: 登入失敗
 cancel: 取消
-done: 完畢
+done: 完成
 elevated:
   description: |-
     Seelen UI 正在以管理員權限執行。
@@ -41,10 +41,10 @@ service:
   not_running_ok: 開始服務
 shortcut:
   conflicts:
-    body: 某些快速鍵已指派給多個操作，請重新指派它們。
-    dismiss: 解僱
-    review: 審查
-    title: 偵測到快捷方式衝突
+    body: 某些快捷鍵已指派給多個操作，請重新指派它們。
+    dismiss: 解僱 #wrong
+    review: 審查 #wrong
+    title: 偵測到快捷鍵衝突
   register:
     placeholder: 按下任意快捷鍵組合
     title: 註冊新的快捷鍵
