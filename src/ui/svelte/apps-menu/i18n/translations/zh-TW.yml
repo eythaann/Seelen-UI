@@ -1,22 +1,22 @@
 all: 所有應用程式
 app_settings: 應用程式設定
-applications: 應用領域
+applications: 應用程式
 back: 返回
 disband: 解散文件夾
 edit_icon: 編輯圖示
 folder: 資料夾
-no_matching_items: 未找到與您的搜索相符的商品
-open_file_location: 打開文件位置
-pin: 固定
-pin_to_dock: 固定到Dock
-power_menu: 電源選單
+no_matching_items: 未找到與您的搜尋相符的文件
+open_file_location: 開啟所屬資料夾
+pin: 釘選
+pin_to_dock: 釘選到Dock
+power_menu: 開/關機選單
 query:
   all: 全部
   apps: 應用程式
   files: 文件
-  web: 網絡
-run_as_admin: 以管理員身份運行
-unpin: 取消固定
-web_search: 按 Enter 鍵搜索網絡
+  web: 網路
+run_as_admin: 以管理員身份執行
+unpin: 取消釘選
+web_search: 按 Enter 鍵搜尋網路
 welcome_message: 歡迎使用 Seelen UI 應用程式選單。
 welcome_message2: 在此選項卡上，您可以固定您最喜歡的應用程式。
