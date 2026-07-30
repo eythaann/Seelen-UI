@@ -28,7 +28,9 @@
     viewingWorkspaceId = activeWorkspaceId;
   });
 
-  const viewingWorkspace = $derived(vdMonitor?.workspaces.find((w) => w.id === viewingWorkspaceId));
+  const viewingWorkspace = $derived(
+    vdMonitor?.workspaces.flat().find((w) => w.id === viewingWorkspaceId),
+  );
 
   const activeWallpaper = $derived(store.findWallpaper(viewingWorkspace?.wallpaper));
 
@@ -69,7 +71,7 @@
 
     <div class="workspaces">
       {#if vdMonitor}
-        {#each vdMonitor.workspaces as workspace, index}
+        {#each vdMonitor.workspaces.flat() as workspace, index}
           <Workspace
             active={vdMonitor.active_workspace === workspace.id}
             viewing={viewingWorkspaceId === workspace.id}

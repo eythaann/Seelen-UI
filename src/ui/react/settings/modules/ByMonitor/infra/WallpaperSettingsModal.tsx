@@ -58,22 +58,26 @@ export function WallpaperSettingsModal({ monitorId, title }: Props) {
             <div style={{ marginBottom: 12 }}>
               <b>{t("wall.workspace_collections")}</b>
             </div>
-            {monitorWorkspaces.value.map((workspace, idx) => {
-              const workspaceConfig = monitorConfig?.byWorkspace?.[workspace.id];
-              const workspaceCollection = workspaceConfig?.wallpaperCollection ?? null;
+            {monitorWorkspaces.value
+              .map((row, rowIdx) => {
+                return row.map((workspace, idx) => {
+                  const workspaceConfig = monitorConfig?.byWorkspace?.[workspace.id];
+                  const workspaceCollection = workspaceConfig?.wallpaperCollection ?? null;
 
-              return (
-                <SettingsOption key={workspace.id}>
-                  <span>{workspace.name || `Workspace ${idx + 1}`}</span>
-                  <WallpaperCollectionSelector
-                    style={{ width: 300 }}
-                    value={workspaceCollection}
-                    onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value)}
-                    placeholder={t("inherit")}
-                  />
-                </SettingsOption>
-              );
-            })}
+                  return (
+                    <SettingsOption key={workspace.id}>
+                      <span>{workspace.name || `Workspace ${rowIdx + 1}.${idx + 1}`}</span>
+                      <WallpaperCollectionSelector
+                        style={{ width: 300 }}
+                        value={workspaceCollection}
+                        onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value)}
+                        placeholder={t("inherit")}
+                      />
+                    </SettingsOption>
+                  );
+                });
+              })
+              .flat()}
           </SettingsGroup>
         )}
       </Modal>

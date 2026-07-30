@@ -31,7 +31,7 @@ fn process_vd_command(cmd: VdCommand) -> Result<()> {
                 .monitors
                 .get(&monitor_id, |monitor| {
                     monitor
-                        .workspaces
+                        .active_row()
                         .get(index)
                         .map(|w| w.id.clone())
                         .ok_or_else(|| format!("Workspace index {} not found", index))
@@ -46,7 +46,7 @@ fn process_vd_command(cmd: VdCommand) -> Result<()> {
                 .monitors
                 .get(&monitor_id, |monitor| {
                     monitor
-                        .workspaces
+                        .active_row()
                         .get(index)
                         .map(|w| w.id.clone())
                         .ok_or_else(|| format!("Workspace index {} not found", index))
@@ -54,32 +54,49 @@ fn process_vd_command(cmd: VdCommand) -> Result<()> {
                 .ok_or("Monitor not found")??;
             vd.send_to(&focused_win, &workspace_id)?;
             std::thread::sleep(std::time::Duration::from_millis(20));
-            vd.switch_to(&monitor_id, index)?;
+            vd.switch_to_id(&monitor_id, &workspace_id)?;
         }
         VdCommand::SwitchWorkspace { index } => {
             let monitor_id = cursor_monitor_id()?;
-            vd.switch_to(&monitor_id, index)?;
+            let workspace_id = vd
+                .monitors
+                .get(&monitor_id, |monitor| {
+                    monitor
+                        .active_row()
+                        .get(index)
+                        .map(|w| w.id.clone())
+                        .ok_or_else(|| format!("Workspace index {} not found", index))
+                })
+                .ok_or("Monitor not found")??;
+            vd.switch_to_id(&monitor_id, &workspace_id)?;
         }
         VdCommand::SwitchNext | VdCommand::SwitchPrev => {
             let monitor_id = cursor_monitor_id()?;
-            let (active_workspace_idx, len) = vd
-                .monitors
-                .get(&monitor_id, |monitor| {
-                    let active_workspace_idx = monitor
-                        .workspaces
-                        .iter()
-                        .position(|w| &w.id == monitor.active_workspace_id())
-                        .ok_or("No active workspace")?;
-                    Result::Ok((active_workspace_idx, monitor.workspaces.len()))
-                })
-                .ok_or("Monitor not found")??;
 
-            let next_idx = if cmd == VdCommand::SwitchNext {
-                (active_workspace_idx + 1) % len
-            } else {
-                (active_workspace_idx + (len - 1)) % len
-            };
-            vd.switch_to(&monitor_id, next_idx)?;
+            let new_workspace_id = vd.monitors.with_lock(|monitors| {
+                let monitor = monitors.get(&monitor_id).ok_or("Monitor not found")?;
+                let (row, col) = monitor
+                    .workspaces
+                    .position(monitor.active_workspace_id())
+                    .ok_or("Active workspace not found")?;
+
+                let desired_col = if cmd == VdCommand::SwitchNext {
+                    col + 1
+                } else {
+                    col - 1
+                };
+
+                Result::Ok(
+                    monitor
+                        .workspaces
+                        .get(row, desired_col)
+                        .map(|w| w.id.clone()),
+                )
+            })?;
+
+            if let Some(new_workspace_id) = new_workspace_id {
+                vd.switch_to_id(&monitor_id, &new_workspace_id)?;
+            }
         }
         VdCommand::CreateNewWorkspace => {
             let monitor_id = cursor_monitor_id()?;

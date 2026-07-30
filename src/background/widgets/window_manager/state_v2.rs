@@ -66,18 +66,20 @@ impl TwmState {
     fn initialize(&mut self) {
         let vd = SluWorkspacesManager2::instance();
         vd.monitors.for_each(|(_, monitor)| {
-            for workspace in &monitor.workspaces {
-                let mut tree = Self::create_tree(&workspace.id);
-                for &hwnd in &workspace.windows {
-                    let window = Window::from(hwnd);
-                    if WindowManagerV2::should_be_managed_ignoring_minimized(window.hwnd()) {
-                        let residual = tree.add_to_tiled(window.address());
-                        for w in residual {
-                            tree.add_to_floating(w);
+            for row in monitor.workspaces.rows() {
+                for workspace in row {
+                    let mut tree = Self::create_tree(&workspace.id);
+                    for &hwnd in &workspace.windows {
+                        let window = Window::from(hwnd);
+                        if WindowManagerV2::should_be_managed_ignoring_minimized(window.hwnd()) {
+                            let residual = tree.add_to_tiled(window.address());
+                            for w in residual {
+                                tree.add_to_floating(w);
+                            }
                         }
                     }
+                    self.state.workspaces.insert(workspace.id.clone(), tree);
                 }
-                self.state.workspaces.insert(workspace.id.clone(), tree);
             }
         });
 

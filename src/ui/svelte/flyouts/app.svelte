@@ -39,6 +39,7 @@
 
   let activeWorkspaceData = $derived.by(() => {
     return vd?.workspaces
+      .flat()
       .map((workspace, idx) => ({ ...workspace, idx }))
       .find((workspace) => workspace.id == vd.active_workspace);
   });

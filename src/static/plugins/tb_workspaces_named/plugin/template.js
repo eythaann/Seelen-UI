@@ -1,7 +1,12 @@
-return Group({
-  content: workspaces.map((w, idx) => {
-    const isActive = w.id === activeWorkspace;
+const activeRow = workspaces.find((row) => row.some((w) => w.id === activeWorkspace));
 
+if (!activeRow) {
+  return null;
+}
+
+return Group({
+  content: activeRow.map((w) => {
+    const isActive = w.id === activeWorkspace;
     return Button({
       content: w.name || `Workspace ${idx + 1}`,
       style: {

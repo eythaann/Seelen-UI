@@ -248,13 +248,10 @@ impl Window {
         let workspace_id = SluWorkspacesManager2::instance()
             .monitors
             .get(&monitor_id, |monitor| {
-                monitor.workspaces.iter().find_map(|w| {
-                    if w.windows.contains(&win_id) {
-                        Some(w.id.clone())
-                    } else {
-                        None
-                    }
-                })
+                monitor
+                    .workspaces
+                    .get_by_window_id(win_id)
+                    .map(|w| w.id.clone())
             })
             .ok_or("Monitor not found")?
             .ok_or("This window is not binded to a seelen ui workspace")?;

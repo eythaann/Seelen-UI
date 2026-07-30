@@ -121,15 +121,17 @@ impl SluWorkspacesManager2 {
 
         // restore workspaces state
         self.monitors.for_each(|(_, monitor)| {
-            for workspace in &monitor.workspaces {
-                if &workspace.id == monitor.active_workspace_id() {
-                    workspace.restore();
-                } else {
-                    // allow resume workspaces correctly on change
-                    for addr in &workspace.windows {
-                        let _ = MINIMIZED_BY_WORKSPACES.insert_sync(*addr);
+            for row in monitor.workspaces.rows() {
+                for workspace in row {
+                    if &workspace.id == monitor.active_workspace_id() {
+                        workspace.restore();
+                    } else {
+                        // allow resume workspaces correctly on change
+                        for addr in &workspace.windows {
+                            let _ = MINIMIZED_BY_WORKSPACES.insert_sync(*addr);
+                        }
+                        workspace.hide(true);
                     }
-                    workspace.hide(true);
                 }
             }
         });
@@ -223,18 +225,14 @@ impl SluWorkspacesManager2 {
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 let manager = Self::instance();
                 let mut updated = false;
-
                 // Update z-order: move focused window to end of the list
                 manager.monitors.for_each(|(_, monitor)| {
-                    for workspace in &mut monitor.workspaces {
-                        if workspace.windows.contains(&window_id) {
-                            workspace.windows.retain(|w| w != &window_id);
-                            workspace.windows.push(window_id);
-                            updated = true;
-                        }
+                    if let Some(workspace) = monitor.workspaces.get_by_window_id_mut(window_id) {
+                        workspace.windows.retain(|w| w != &window_id);
+                        workspace.windows.push(window_id);
+                        updated = true;
                     }
                 });
-
                 if updated {
                     manager.request_save();
                 }
@@ -252,11 +250,7 @@ impl SluWorkspacesManager2 {
                 // Find the monitor whose workspace bookkeeping currently owns this window.
                 let recorded_monitor_id = manager.monitors.with_lock(|monitors| {
                     monitors.iter().find_map(|(monitor_id, monitor)| {
-                        if monitor
-                            .workspaces
-                            .iter()
-                            .any(|w| w.windows.contains(&window_id))
-                        {
+                        if monitor.workspaces.get_by_window_id(window_id).is_some() {
                             Some(monitor_id.clone())
                         } else {
                             None
@@ -304,8 +298,10 @@ impl SluWorkspacesManager2 {
 
     pub fn for_each_workspace<F: Fn(&mut DesktopWorkspace)>(&mut self, f: F) {
         self.monitors.for_each(|(_, monitor)| {
-            for workspace in &mut monitor.workspaces {
-                f(workspace);
+            for row in monitor.workspaces.rows_mut() {
+                for workspace in row {
+                    f(workspace);
+                }
             }
         });
     }
@@ -323,12 +319,8 @@ impl SluWorkspacesManager2 {
     fn contains(&self, window: &Window) -> bool {
         let window_id = window.address();
         self.is_pinned(&window_id) || {
-            self.monitors.any(|(_, monitor)| {
-                monitor
-                    .workspaces
-                    .iter()
-                    .any(|w| w.windows.contains(&window_id))
-            })
+            self.monitors
+                .any(|(_, monitor)| monitor.workspaces.get_by_window_id(window_id).is_some())
         }
     }
 
@@ -384,8 +376,10 @@ impl SluWorkspacesManager2 {
 
         // Remove from all workspaces
         self.monitors.for_each(|(_, monitor)| {
-            for workspace in &mut monitor.workspaces {
-                workspace.windows.retain(|w| w != &window_id);
+            for row in monitor.workspaces.rows_mut() {
+                for workspace in row {
+                    workspace.windows.retain(|w| w != &window_id);
+                }
             }
         });
 
@@ -439,21 +433,6 @@ impl SluWorkspacesManager2 {
         Ok(())
     }
 
-    /// Switch to a workspace by index on a specific monitor
-    pub fn switch_to(&self, monitor_id: &MonitorId, index: usize) -> Result<()> {
-        let workspace_id = self
-            .monitors
-            .get(monitor_id, |monitor| {
-                monitor
-                    .workspaces
-                    .get(index)
-                    .map(|w| w.id.clone())
-                    .ok_or_else(|| format!("Workspace index {} not found", index))
-            })
-            .ok_or("Monitor not found")??;
-        self.switch_to_id(monitor_id, &workspace_id)
-    }
-
     /// Send a window to a specific workspace
     pub fn send_to(&self, window: &Window, workspace_id: &WorkspaceId) -> Result<()> {
         // Only move windows that are already tracked; non-interactable windows don't belong
@@ -467,8 +446,10 @@ impl SluWorkspacesManager2 {
 
         // Remove window from current workspace
         self.monitors.for_each(|(_, monitor)| {
-            for workspace in &mut monitor.workspaces {
-                workspace.windows.retain(|w| w != &window_id);
+            for row in monitor.workspaces.rows_mut() {
+                for workspace in row {
+                    workspace.windows.retain(|w| w != &window_id);
+                }
             }
         });
 
@@ -477,8 +458,7 @@ impl SluWorkspacesManager2 {
             .get(&monitor_id, |monitor| {
                 let target_workspace = monitor
                     .workspaces
-                    .iter_mut()
-                    .find(|w| &w.id == workspace_id)
+                    .get_by_id_mut(workspace_id)
                     .ok_or("Workspace not found in monitor")?;
 
                 target_workspace.windows.push(window_id);
@@ -503,7 +483,7 @@ impl SluWorkspacesManager2 {
     pub fn create_desktop(&self, monitor_id: &MonitorId) -> Result<WorkspaceId> {
         let workspace_id = self
             .monitors
-            .get(monitor_id, |monitor| monitor.add_workspace())
+            .get(monitor_id, |monitor| monitor.add_workspace_column())
             .ok_or("Monitor not found")?;
         self.workspace_index
             .upsert(workspace_id.clone(), monitor_id.clone());
@@ -563,8 +543,10 @@ impl From<VirtualDesktops> for SluWorkspacesManager2 {
     fn from(value: VirtualDesktops) -> Self {
         let mut workspace_index = HashMap::new();
         for (mid, m) in &value.monitors {
-            for w in &m.workspaces {
-                workspace_index.insert(w.id.clone(), mid.clone());
+            for row in m.workspaces.rows() {
+                for w in row {
+                    workspace_index.insert(w.id.clone(), mid.clone());
+                }
             }
         }
 

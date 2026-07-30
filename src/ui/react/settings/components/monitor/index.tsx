@@ -15,7 +15,7 @@ export function Monitor({ monitorId, width = 1920, height = 1080 }: Props) {
   const wallpaperSettings = settings.value.byWallpaper;
 
   const monitor = $virtual_desktops.value.monitors[monitorId];
-  const workspace = monitor?.workspaces.find((w) => w.id === monitor.active_workspace);
+  const workspace = monitor?.workspaces.flat().find((w) => w.id === monitor.active_workspace);
 
   const wallpaperId = workspace?.wallpaper;
   const wallpaper = wallpapers.value.find((w) => w.id === wallpaperId);

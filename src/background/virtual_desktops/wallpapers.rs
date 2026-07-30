@@ -195,10 +195,8 @@ impl WorkspaceWallpapersManager {
     /// Update wallpaper IDs in all workspaces (internal method with manager reference)
     pub(super) fn update_workspace_wallpapers_internal(vd_manager: &super::SluWorkspacesManager2) {
         vd_manager.monitors.for_each(|(monitor_id, monitor)| {
-            for workspace in &mut monitor.workspaces {
-                let wallpaper_id = Self::get_current_wallpaper(monitor_id, &workspace.id);
-                workspace.wallpaper = wallpaper_id;
-            }
+            monitor
+                .set_wallpapers(|workspace| Self::get_current_wallpaper(monitor_id, &workspace.id));
         });
     }
 

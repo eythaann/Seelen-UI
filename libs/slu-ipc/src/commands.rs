@@ -186,28 +186,28 @@ pub struct VirtualDesktopCli {
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize, clap::Subcommand)]
 pub enum VdCommand {
-    /// Send the window to the specified workspace
+    /// Send the window to the specified workspace in the active workspace row
     SendToWorkspace {
         /// The index of the workspace to switch to.
         index: usize,
     },
-    /// Switch to the specified workspace
+    /// Switch to the specified workspace in the active workspace row
     SwitchWorkspace {
         /// The index of the workspace to switch to.
         index: usize,
     },
-    /// Send the window to the specified workspace and switch to it
+    /// Send the window to the specified workspace in the active workspace row and switch to it
     MoveToWorkspace {
         /// The index of the workspace to switch to.
         index: usize,
     },
-    /// Switch to the next workspace
+    /// Switch to the next workspace column
     SwitchNext,
-    /// Switch to the previous workspace
+    /// Switch to the previous workspace column
     SwitchPrev,
-    /// Create a new workspace
+    /// Create a new workspace column
     CreateNewWorkspace,
-    /// Destroy the current workspace (will do nothing if there's only one workspace)
+    /// Destroy the current workspace column (will do nothing if there's only one workspace)
     DestroyCurrentWorkspace,
 }
 
