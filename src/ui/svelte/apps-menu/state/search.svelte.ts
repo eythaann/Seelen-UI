@@ -49,7 +49,7 @@ const _itemsWhereToSearch: SearchableItem[] = $derived.by(() => {
   for (const item of allItems) {
     if (!item.path) {
       if (item.umid && shouldInclude.apps) {
-        filtered.push(item);
+        filtered.push({ ...item, isApp: true });
       }
       continue;
     }

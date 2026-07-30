@@ -10,8 +10,10 @@ use notify_debouncer_full::{
 use seelen_core::system_state::StartMenuItem;
 use windows::Win32::UI::Shell::{FOLDERID_CommonStartMenu, FOLDERID_StartMenu};
 use windows::{
-    ApplicationModel::PackageCatalog, Foundation::TypedEventHandler,
-    Management::Deployment::PackageManager, UI::StartScreen::StartScreenManager,
+    ApplicationModel::{Core::AppListEntry, PackageCatalog},
+    Foundation::TypedEventHandler,
+    Management::Deployment::PackageManager,
+    UI::StartScreen::StartScreenManager,
 };
 
 use crate::{
@@ -175,35 +177,50 @@ impl StartMenuManager {
 
         let packages = pkg_manager.FindPackagesByUserSecurityId(&"".into())?;
         for package in packages {
-            let apps = package.GetAppListEntries()?;
+            let apps = match package.GetAppListEntries() {
+                Ok(apps) => apps,
+                Err(e) => {
+                    log::error!("Failed to get app list entries for a package: {e:?}");
+                    continue;
+                }
+            };
 
             for app in apps {
-                // https://learn.microsoft.com/en-us/uwp/schemas/appxpackage/uapmanifestschema/element-uap-visualelements
-                let is_on_start_screen = start_screen.SupportsAppListEntry(&app)?;
-
-                if is_on_start_screen {
-                    let umid = app.AppUserModelId()?.to_string_lossy();
-
-                    // Get display name from DisplayInfo
-                    let display_name = app
-                        .DisplayInfo()?
-                        .DisplayName()?
-                        .to_string_lossy()
-                        .to_string();
-
-                    items.push(Arc::new(StartMenuItem {
-                        umid: Some(umid),
-                        toast_activator: None,
-                        path: PathBuf::new(),
-                        target: None,
-                        display_name,
-                    }))
+                match Self::_process_app_list_entry(&start_screen, &app) {
+                    Ok(Some(item)) => items.push(item),
+                    Ok(None) => {}
+                    Err(e) => log::error!("Failed to process start menu app entry: {e:?}"),
                 }
             }
         }
 
         log::trace!("Loaded {} start menu items", items.len());
         Ok(items)
+    }
+
+    /// https://learn.microsoft.com/en-us/uwp/schemas/appxpackage/uapmanifestschema/element-uap-visualelements
+    fn _process_app_list_entry(
+        start_screen: &StartScreenManager,
+        app: &AppListEntry,
+    ) -> Result<Option<Arc<StartMenuItem>>> {
+        if !start_screen.SupportsAppListEntry(app)? {
+            return Ok(None);
+        }
+
+        let umid = app.AppUserModelId()?.to_string_lossy();
+        let display_name = app
+            .DisplayInfo()?
+            .DisplayName()?
+            .to_string_lossy()
+            .to_string();
+
+        Ok(Some(Arc::new(StartMenuItem {
+            umid: Some(umid),
+            toast_activator: None,
+            path: PathBuf::new(),
+            target: None,
+            display_name,
+        })))
     }
 
     fn create_file_watcher(

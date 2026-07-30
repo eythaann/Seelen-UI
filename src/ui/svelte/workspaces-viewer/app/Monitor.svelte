@@ -7,9 +7,14 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
-  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd";
+  import { onDestroy } from "svelte";
+  import { createDragDropManager } from "libs/ui/dnd";
 
   const { monitor } = $props<{ monitor: PhysicalMonitor }>();
+
+  // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
+  const manager = createDragDropManager();
+  onDestroy(() => manager.destroy());
 
   const width = $derived((monitor.rect.right - monitor.rect.left) / monitor.scaleFactor);
   const height = $derived((monitor.rect.bottom - monitor.rect.top) / monitor.scaleFactor);
@@ -38,8 +43,7 @@
 </script>
 
 <DragDropProvider
-  plugins={DND_PLUGINS}
-  sensors={DND_SENSORS}
+  {manager}
   onDragEnd={(event) => {
     const { source, target } = event.operation;
     if (!source || !target) return;

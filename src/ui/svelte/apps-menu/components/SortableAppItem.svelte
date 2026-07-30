@@ -2,12 +2,14 @@
   import type { StartMenuItem } from "@seelen-ui/lib/types";
   import { createSortable } from "@dnd-kit/svelte/sortable";
   import AppItem from "./AppItem.svelte";
+  import type { SelectionScope } from "../keyboard-navigation";
 
   interface Props {
     item: StartMenuItem;
     idx: number;
     isActiveDropzone?: boolean;
     isInsideFolder?: boolean;
+    scope: SelectionScope;
   }
 
   let {
@@ -15,6 +17,7 @@
     idx,
     isActiveDropzone = false,
     isInsideFolder = false,
+    scope,
   }: Props = $props();
 
   const itemId = $derived(item.umid || item.path.toLowerCase());
@@ -35,4 +38,4 @@
   });
 </script>
 
-<AppItem {item} {idx} {isActiveDropzone} {sortable} />
+<AppItem {item} {idx} {isActiveDropzone} {sortable} {scope} />

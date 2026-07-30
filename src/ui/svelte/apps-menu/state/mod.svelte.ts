@@ -276,7 +276,6 @@ class State {
   desiredMonitorId = $state<string | null>(null);
 
   view = $state(StartView.Favorites);
-  preselectedItem = $state<string | null>(null);
 
   version = $state<number>(0);
 

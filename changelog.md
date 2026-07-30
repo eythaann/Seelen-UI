@@ -9,6 +9,9 @@
 ### fix
 
 - not loading system account profile picture on windows 10.
+- apps menu not prioritizing apps on search.
+- apps menu failing to load entirely when a single packaged app entry has an invalid resource map.
+- apps menu keyboard navigation.
 
 ## [2.8.1]
 

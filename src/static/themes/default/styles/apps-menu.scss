@@ -146,12 +146,6 @@ body {
     background-color: var(--bg-light);
   }
 
-  &.preselected {
-    background-color: var(--bg-light);
-    outline: 2px solid var(--system-accent-color);
-    outline-offset: 2px;
-  }
-
   &:active {
     transform: scale(0.95);
   }
@@ -224,12 +218,6 @@ body {
     background-color: var(--bg-light);
   }
 
-  &.preselected {
-    background-color: var(--bg-light);
-    outline: 2px solid var(--system-accent-color);
-    outline-offset: 2px;
-  }
-
   &:active {
     transform: scale(0.95);
   }
@@ -292,6 +280,16 @@ body {
     font-size: 0.85rem;
     line-height: 1.2em;
     font-weight: 600;
+  }
+}
+
+.app,
+.folder {
+  &:focus-visible,
+  &[aria-selected="true"] {
+    background-color: var(--bg-light);
+    outline: 2px solid var(--system-accent-color);
+    outline-offset: 2px;
   }
 }
 

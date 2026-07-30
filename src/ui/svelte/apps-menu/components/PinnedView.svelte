@@ -6,9 +6,62 @@
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
-  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd";
+  import { onDestroy } from "svelte";
+  import { createDragDropManager } from "libs/ui/dnd";
+  import {
+    navigateInDirection,
+    selectPreselectedOrFirst,
+    type SelectionScope,
+  } from "../keyboard-navigation";
 
   type UniqueIdentifier = string | number;
+
+  // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
+  const manager = createDragDropManager();
+  onDestroy(() => manager.destroy());
+
+  // Selection is fully local to this view: its own state, its own scope,
+  // its own keydown handling. Nothing outside this component touches it.
+  let selectedItemId = $state<string | null>(null);
+
+  const scope: SelectionScope = {
+    container: () => document,
+    getSelected: () => selectedItemId,
+    setSelected: (id) => {
+      selectedItemId = id;
+    },
+  };
+
+  // Reset selection whenever the menu is (re)opened
+  $effect(() => {
+    globalState.version;
+    selectedItemId = null;
+  });
+
+  function handleWindowKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case "Enter":
+        event.preventDefault();
+        selectPreselectedOrFirst(scope)?.click();
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        navigateInDirection("up", scope);
+        break;
+      case "ArrowDown":
+        event.preventDefault();
+        navigateInDirection("down", scope);
+        break;
+      case "ArrowLeft":
+        event.preventDefault();
+        navigateInDirection("left", scope);
+        break;
+      case "ArrowRight":
+        event.preventDefault();
+        navigateInDirection("right", scope);
+        break;
+    }
+  }
 
   // Position-based sorting threshold (20% of item width)
   const POSITION_THRESHOLD = 0.2;
@@ -26,11 +79,11 @@
   }
 </script>
 
+<svelte:window onkeydown={handleWindowKeyDown} />
 <div class="pinned-view">
-  <div class="pinned-view-list">
+  <ul class="pinned-view-list" role="listbox" aria-label={$t("applications")}>
     <DragDropProvider
-      plugins={DND_PLUGINS}
-      sensors={DND_SENSORS}
+      {manager}
       onDragMove={(event) => {
         const { source, target } = event.operation;
 
@@ -130,15 +183,21 @@
               {item}
               {idx}
               isActiveDropzone={activeDropzoneId === pinnedItem.itemId}
+              {scope}
             />
           {/if}
         {:else if pinnedItem.type === "folder"}
           {@const folder = pinnedItem}
-          <FolderItem {folder} {idx} isActiveDropzone={activeDropzoneId === pinnedItem.itemId} />
+          <FolderItem
+            {folder}
+            {idx}
+            isActiveDropzone={activeDropzoneId === pinnedItem.itemId}
+            {scope}
+          />
         {/if}
       {/each}
     </DragDropProvider>
-  </div>
+  </ul>
 
   {#if globalState.pinnedItems.length === 0}
     <div class="pinned-view-empty">

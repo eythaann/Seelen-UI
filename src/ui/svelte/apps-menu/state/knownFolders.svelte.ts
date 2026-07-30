@@ -10,12 +10,12 @@ const [desktopInit, downloadsInit, documentsInit, musicInit, picturesInit, video
   invoke(SeelenCommand.GetUserFolderContent, { folderType: FolderType.Videos }),
 ]);
 
-let desktop = $state(desktopInit);
-let downloads = $state(downloadsInit);
-let documents = $state(documentsInit);
-let music = $state(musicInit);
-let pictures = $state(picturesInit);
-let videos = $state(videosInit);
+let desktop = $state.raw(desktopInit);
+let downloads = $state.raw(downloadsInit);
+let documents = $state.raw(documentsInit);
+let music = $state.raw(musicInit);
+let pictures = $state.raw(picturesInit);
+let videos = $state.raw(videosInit);
 
 subscribe(SeelenEvent.UserFolderChanged, ({ payload: { ofFolder, content } }) => {
   switch (ofFolder) {

@@ -7,7 +7,7 @@ import { useMemo } from "preact/hooks";
 import { genericHandleDragOver } from "../../../../../../libs/ui/react/utils/DndKit/utils.ts";
 
 import cs from "./index.module.css";
-import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
+import { createDragDropManager } from "libs/ui/dnd.ts";
 
 interface Props<T> {
   disabled?: boolean;
@@ -22,6 +22,9 @@ export function VerticalSortableSelect<T extends string>({
   onChange,
   disabled = false,
 }: Props<T>) {
+  // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
+  const manager = useMemo(() => createDragDropManager(), []);
+
   const enabledOpts = options
     .filter(({ value }) => enabled.includes(value))
     .toSorted((a, b) => enabled.indexOf(a.value) - enabled.indexOf(b.value));
@@ -57,7 +60,7 @@ export function VerticalSortableSelect<T extends string>({
   }
 
   return (
-    <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
+    <DragDropProvider manager={manager} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
       <div className={cs.container}>
         {containers.map(({ id, items }) => (
           <div className={cs.box}>
@@ -73,9 +76,7 @@ export function VerticalSortableSelect<T extends string>({
         ))}
         <DragOverlay>
           {(source) => {
-            const opt = options.find(({ value }) =>
-              value === source.id
-            );
+            const opt = options.find(({ value }) => value === source.id);
             return opt ? <div className={cs.item}>{opt.label}</div> : null;
           }}
         </DragOverlay>

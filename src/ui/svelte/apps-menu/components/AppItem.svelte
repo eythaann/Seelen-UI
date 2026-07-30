@@ -2,11 +2,10 @@
   import type { StartMenuItem } from "@seelen-ui/lib/types";
   import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
-  import { globalState } from "../state/mod.svelte";
-  import { searchState } from "../state/search.svelte";
   import { t } from "../i18n";
   import type { createSortable } from "@dnd-kit/svelte/sortable";
   import { getItemContextMenu } from "./context-menu.svelte";
+  import type { SelectionScope } from "../keyboard-navigation";
 
   interface Props {
     item: StartMenuItem;
@@ -14,17 +13,32 @@
     isActiveDropzone?: boolean;
     lazy?: boolean;
     sortable?: ReturnType<typeof createSortable> | null;
+    scope: SelectionScope;
   }
 
-  let { item, idx, isActiveDropzone = false, lazy = false, sortable = null }: Props = $props();
+  let {
+    item,
+    idx,
+    isActiveDropzone = false,
+    lazy = false,
+    sortable = null,
+    scope,
+  }: Props = $props();
+
+  let el: HTMLLIElement;
 
   const itemId = $derived(item.umid || item.path.toLowerCase());
-  const isPreselected = $derived(
-    globalState.preselectedItem === itemId || (idx === 0 && !globalState.preselectedItem),
-  );
+  const isSelected = $derived(scope.getSelected() === itemId);
+  const tabindex = $derived(isSelected || (idx === 0 && !scope.getSelected()) ? 0 : -1);
 
   const menu = $derived(getItemContextMenu(item, $t));
   const noopAttach = () => {};
+
+  $effect(() => {
+    if (isSelected) {
+      el.scrollIntoView({ block: "nearest" });
+    }
+  });
 
   function handleClick() {
     Widget.self.hide();
@@ -38,24 +52,32 @@
       forwardTo: null,
     });
   }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.stopPropagation();
+      handleClick();
+    }
+  }
 </script>
 
-<button
+<li
+  bind:this={el}
   {@attach sortable?.attach ?? noopAttach}
+  role="option"
+  aria-selected={isSelected}
+  {tabindex}
   data-item-id={itemId}
   class="app"
-  class:preselected={isPreselected && searchState.searchQuery}
   class:is-dragging={sortable?.isDragging}
   class:is-dropping={sortable?.isDropping}
   class:is-drop-target={isActiveDropzone}
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
-  onfocus={() => {
-    globalState.preselectedItem = itemId;
-  }}
+  onkeydown={handleKeyDown}
 >
   <FileIcon class="app-icon" path={item.path} umid={item.umid} {lazy} />
   <div class="app-name" title={item.display_name}>
     {item.display_name}
   </div>
-</button>
+</li>

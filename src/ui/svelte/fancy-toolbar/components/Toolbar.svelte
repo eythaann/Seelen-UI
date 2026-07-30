@@ -7,7 +7,7 @@
   import { onDestroy, onMount } from "svelte";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { getResourceText } from "libs/ui/react/utils/index.ts";
-  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
+  import { createDragDropManager } from "libs/ui/dnd.ts";
   import { t, locale } from "../i18n/index.ts";
   import {
     toolbarState,
@@ -23,6 +23,10 @@
   import ItemsGroup from "./ItemsGroup.svelte";
   import CornerAction from "./CornerAction.svelte";
   import Item from "./Item.svelte";
+
+  // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
+  const manager = createDragDropManager();
+  onDestroy(() => manager.destroy());
 
   // ── Derived splits ───────────────────────────────────────────────────────
 
@@ -214,8 +218,7 @@
   <BackgroundByLayers />
 
   <DragDropProvider
-    plugins={DND_PLUGINS}
-    sensors={DND_SENSORS}
+    {manager}
     onDragStart={handleDragStart}
     onDragOver={handleDragOver}
     onDragEnd={handleDragEnd}

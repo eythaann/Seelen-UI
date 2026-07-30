@@ -1,11 +1,16 @@
 import type { Plugins, Sensors } from "@dnd-kit/abstract";
-import { KeyboardSensor, PointerActivationConstraints, PointerSensor } from "@dnd-kit/dom";
+import {
+  DragDropManager,
+  // KeyboardSensor,
+  PointerActivationConstraints,
+  PointerSensor,
+} from "@dnd-kit/dom";
 
-export function DND_PLUGINS(defaults: Plugins): Plugins {
+function DND_PLUGINS(defaults: Plugins): Plugins {
   return [...defaults];
 }
 
-export const DND_SENSORS: Sensors = [
+const DND_SENSORS: Sensors = [
   PointerSensor.configure({
     // Allow dragging from buttons and other interactive elements inside items.
     preventActivation: () => false,
@@ -25,5 +30,14 @@ export const DND_SENSORS: Sensors = [
       }
     },
   }),
-  KeyboardSensor,
+  /* KeyboardSensor.configure({
+    preventActivation: () => true,
+  }), */
 ];
+
+export function createDragDropManager() {
+  return new DragDropManager({
+    sensors: DND_SENSORS,
+    plugins: DND_PLUGINS,
+  });
+}

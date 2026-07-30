@@ -7,6 +7,7 @@
   } from "@seelen-ui/lib/types";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
+  import { onDestroy } from "svelte";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { t } from "../i18n/index.ts";
   import { dockState, listToGroups } from "../state/items.svelte.ts";
@@ -15,10 +16,14 @@
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
   import { dockShouldBeHidden, setDockIsDraggingItem } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
-  import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
+  import { createDragDropManager } from "libs/ui/dnd.ts";
   import type { SwItem } from "../types.ts";
   import DockItemsGroup from "./DockItemsGroup.svelte";
   import WegItemSwitch from "./WegItemSwitch.svelte";
+
+  // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
+  const manager = createDragDropManager();
+  onDestroy(() => manager.destroy());
 
   const settings = $derived(settingsState.value as any);
   const isHorizontal = $derived(settings?.position === "Top" || settings?.position === "Bottom");
@@ -105,8 +110,7 @@
   <BackgroundByLayers />
   <div class="weg-items-container">
     <DragDropProvider
-      plugins={DND_PLUGINS}
-      sensors={DND_SENSORS}
+      {manager}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}

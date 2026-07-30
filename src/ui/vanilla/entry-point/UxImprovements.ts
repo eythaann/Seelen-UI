@@ -27,7 +27,7 @@ let tooltipObserver: MutationObserver | null = null;
 
 function getTooltipText(target: HTMLElement): string | null {
   const isRange = target instanceof HTMLInputElement && target.type === "range" && !!target.dataset.skin;
-  return isRange ? target.value : target.dataset.tooltip || target.title || target.getAttribute("aria-label");
+  return isRange ? target.value : target.dataset.tooltip || target.title;
 }
 
 // `title` is moved into `data-tooltip` so every code path (CSS, MutationObserver) can
@@ -74,7 +74,6 @@ function setTooltipParentElement(element: HTMLElement) {
     attributeFilter: [
       "title",
       "data-tooltip",
-      "aria-label",
       "data-tooltip-origin-x",
       "data-tooltip-origin-y",
     ],
