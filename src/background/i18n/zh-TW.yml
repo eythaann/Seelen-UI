@@ -1,5 +1,5 @@
 auth:
-  login_failed_body: 登入期間出現問題。 如果這種情況仍然存在，請確保 Windows「憑證管理員」服務 (VaultSvc) 已啟用並正在執行，然後重試。
+  login_failed_body: 登入期間出現問題。如果這種情況仍然存在，請確保 Windows「憑證管理員」服務 (VaultSvc) 已啟用並正在執行，然後重試。
   login_failed_title: 登入失敗
 cancel: 取消
 done: 完畢
@@ -14,7 +14,7 @@ resource:
   added: 添加了一個新資源
   download_failed_body: 下載資源時出現問題，請向Seelen開發人員團隊報告。
   download_failed_title: 資源下載失敗
-  downloading: 下載資源中...
+  downloading: 下載資源中……
   downloading_body: 這可能需要幾秒鐘，請不要關閉視窗。
   enable: 啟用
   login_required_action: 登入
@@ -32,9 +32,9 @@ runtime:
     請從官方網站重新安裝。
   files_integrity_title: 安全警報 - 文件完整性檢查失敗
   not_found: 找不到 WebView2 runtime
-  not_found_description: Seelen UI 需要 WebView2 runtime。 請安裝。
+  not_found_description: Seelen UI 需要 WebView2 runtime。請安裝。
   outdated: WebView2 runtime 版本過舊
-  outdated_description: Seelen UI 需要 WebView2 runtime ％{min_version} 或更高的版本。 請更新。
+  outdated_description: Seelen UI 需要 WebView2 runtime ％{min_version} 或更高的版本。請更新。
 service:
   not_running: 服務尚未執行
   not_running_description: SEELEN UI服務（SLU服務）是該是應用程式正常運作所需的必要元件。
