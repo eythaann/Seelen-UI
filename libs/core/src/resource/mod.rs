@@ -126,6 +126,8 @@ pub enum ResourceAttribute {
     NotWorking,
     /// this resource is recommended by the staff
     StaffLiked,
+    /// this resource is being promoted by the staff
+    Promoted,
 }
 
 // =============================================================================
