@@ -24,7 +24,7 @@ use crate::{
     utils::lock_free::TracedMutex,
     virtual_desktops::SluWorkspacesManager2,
     widgets::window_manager::{
-        cli::{Axis, NodeSiblingSide, StepWay},
+        cli::{Axis, Direction, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
         WindowManagerV2,
     },
@@ -552,7 +552,7 @@ impl TwmState {
         source_id: isize,
         source_rect: &Rect,
         workspace_id: &WorkspaceId,
-        side: NodeSiblingSide,
+        side: Direction,
     ) -> Option<isize> {
         fn horizontal_overlap(a: &Rect, b: &Rect) -> i32 {
             let left = a.left.max(b.left);
@@ -595,7 +595,7 @@ impl TwmState {
                 let rect = n.rect.as_ref()?;
 
                 let (primary_distance, perpendicular_distance, overlap) = match side {
-                    NodeSiblingSide::Right => {
+                    Direction::Right => {
                         if rect.left < source_rect.right {
                             return None;
                         }
@@ -607,7 +607,7 @@ impl TwmState {
                         )
                     }
 
-                    NodeSiblingSide::Left => {
+                    Direction::Left => {
                         if rect.right > source_rect.left {
                             return None;
                         }
@@ -619,7 +619,7 @@ impl TwmState {
                         )
                     }
 
-                    NodeSiblingSide::Down => {
+                    Direction::Down => {
                         if rect.top < source_rect.bottom {
                             return None;
                         }
@@ -631,7 +631,7 @@ impl TwmState {
                         )
                     }
 
-                    NodeSiblingSide::Up => {
+                    Direction::Up => {
                         if rect.bottom > source_rect.top {
                             return None;
                         }

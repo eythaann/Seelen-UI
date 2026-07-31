@@ -1,5 +1,5 @@
 use slu_ipc::commands::AllowedReservations;
-pub use slu_ipc::commands::{Axis, NodeSiblingSide, Sizing, StepWay, WindowManagerCli, WmCommand};
+pub use slu_ipc::commands::{Axis, Direction, Sizing, StepWay, WindowManagerCli, WmCommand};
 
 use seelen_core::state::twm::TwmReservation;
 
@@ -144,7 +144,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
     Ok(())
 }
 
-fn process_focus_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result<()> {
+fn process_focus_to_monitor(foreground: &Window, side: Direction) -> Result<()> {
     let source_monitor = foreground.monitor();
 
     let Some(target_monitor) = get_neartest_monitor_at_side(&source_monitor, side)? else {
@@ -171,7 +171,7 @@ fn process_focus_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Resul
     Ok(())
 }
 
-fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result<()> {
+fn process_move_to_monitor(foreground: &Window, side: Direction) -> Result<()> {
     let source_monitor = foreground.monitor();
 
     let Some(target_monitor) = get_neartest_monitor_at_side(&source_monitor, side)? else {
@@ -212,10 +212,7 @@ fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result
     Ok(())
 }
 
-pub fn get_neartest_monitor_at_side(
-    monitor: &Monitor,
-    side: NodeSiblingSide,
-) -> Result<Option<Monitor>> {
+pub fn get_neartest_monitor_at_side(monitor: &Monitor, side: Direction) -> Result<Option<Monitor>> {
     let monitors = MonitorEnumerator::enumerate_win32()?;
     let center = monitor.rect()?.center();
 
@@ -229,22 +226,22 @@ pub fn get_neartest_monitor_at_side(
         let current_center = current.rect()?.center();
 
         match side {
-            NodeSiblingSide::Left => {
+            Direction::Left => {
                 if current_center.x > center.x {
                     continue;
                 }
             }
-            NodeSiblingSide::Right => {
+            Direction::Right => {
                 if current_center.x < center.x {
                     continue;
                 }
             }
-            NodeSiblingSide::Up => {
+            Direction::Up => {
                 if current_center.y > center.y {
                     continue;
                 }
             }
-            NodeSiblingSide::Down => {
+            Direction::Down => {
                 if current_center.y < center.y {
                     continue;
                 }

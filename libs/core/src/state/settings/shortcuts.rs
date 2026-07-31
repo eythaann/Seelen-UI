@@ -117,31 +117,59 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
             readonly
         ),
         decl!(
-            "vd-switch-next",
+            "vd-switch-to-next",
             "t:shortcuts.labels.switch_to_next_workspace",
-            cmd!["vd", "switch-next"],
+            cmd!["vd", "switch-to", "right"],
             cmd!["Ctrl", "Win", "Right"],
             readonly
         ),
         decl!(
-            "vd-switch-prev",
+            "vd-switch-to-prev",
             "t:shortcuts.labels.switch_to_previous_workspace",
-            cmd!["vd", "switch-prev"],
+            cmd!["vd", "switch-to", "left"],
             cmd!["Ctrl", "Win", "Left"],
             readonly
         ),
         decl!(
-            "vd-switch-up",
+            "vd-switch-to-up",
             "t:shortcuts.labels.switch_to_workspace_up",
-            cmd!["vd", "switch-up"],
+            cmd!["vd", "switch-to", "up"],
             cmd!["Ctrl", "Win", "Up"],
             readonly
         ),
         decl!(
-            "vd-switch-down",
+            "vd-switch-to-down",
             "t:shortcuts.labels.switch_to_workspace_down",
-            cmd!["vd", "switch-down"],
+            cmd!["vd", "switch-to", "down"],
             cmd!["Ctrl", "Win", "Down"],
+            readonly
+        ),
+        decl!(
+            "vd-send-to-next",
+            "t:shortcuts.labels.send_to_next_workspace",
+            cmd!["vd", "send-to", "right"],
+            cmd!["Shift", "Win", "Right"],
+            readonly
+        ),
+        decl!(
+            "vd-send-to-prev",
+            "t:shortcuts.labels.send_to_previous_workspace",
+            cmd!["vd", "send-to", "left"],
+            cmd!["Shift", "Win", "Left"],
+            readonly
+        ),
+        decl!(
+            "vd-send-to-up",
+            "t:shortcuts.labels.send_to_workspace_up",
+            cmd!["vd", "send-to", "up"],
+            cmd!["Shift", "Win", "Up"],
+            readonly
+        ),
+        decl!(
+            "vd-send-to-down",
+            "t:shortcuts.labels.send_to_workspace_down",
+            cmd!["vd", "send-to", "down"],
+            cmd!["Shift", "Win", "Down"],
             readonly
         ),
     ];
@@ -156,21 +184,21 @@ pub fn system_shortcut_declarations() -> Vec<SystemShortcutDeclaration> {
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-switch-to-{}", index),
             label: format!("t:shortcuts.labels.switch_workspace:{}", index + 1),
-            command: cmd!["vd", "switch-workspace", index],
+            command: cmd!["vd", "switch-to", index],
             default_keys: vec!["Alt".to_string(), digit.clone()],
             readonly: false,
         });
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-move-to-{}", index),
             label: format!("t:shortcuts.labels.move_to_workspace:{}", index + 1),
-            command: cmd!["vd", "move-to-workspace", index],
+            command: cmd!["vd", "move-to", index],
             default_keys: vec!["Alt".to_string(), "Shift".to_string(), digit.clone()],
             readonly: false,
         });
         decls.push(SystemShortcutDeclaration {
             id: format!("vd-send-to-{}", index),
             label: format!("t:shortcuts.labels.send_to_workspace:{}", index + 1),
-            command: cmd!["vd", "send-to-workspace", index],
+            command: cmd!["vd", "send-to", index],
             default_keys: vec!["Win".to_string(), "Shift".to_string(), digit],
             readonly: false,
         });

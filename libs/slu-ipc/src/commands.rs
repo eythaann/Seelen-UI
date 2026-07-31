@@ -184,37 +184,44 @@ pub struct VirtualDesktopCli {
     pub subcommand: VdCommand,
 }
 
-#[derive(Debug, PartialEq, Eq, Serialize, Deserialize, clap::Subcommand)]
+#[derive(Debug, Serialize, Deserialize, clap::Subcommand)]
 pub enum VdCommand {
-    /// Send the window to the specified workspace in the active workspace row
-    SendToWorkspace {
-        /// The index of the workspace to switch to.
-        index: usize,
-    },
-    /// Switch to the specified workspace in the active workspace row
-    SwitchWorkspace {
-        /// The index of the workspace to switch to.
-        index: usize,
-    },
-    /// Send the window to the specified workspace in the active workspace row and switch to it
-    MoveToWorkspace {
-        /// The index of the workspace to switch to.
-        index: usize,
-    },
-    /// Switch to the next workspace column
-    SwitchNext,
-    /// Switch to the previous workspace column
-    SwitchPrev,
-    /// Switch to the previous workspace row
-    SwitchUp,
-    /// Switch to the next workspace row
-    SwitchDown,
+    /// Switch to a neighbor workspace
+    SwitchTo { direction: DirectionOrIndex },
+    /// Send the active window to a neighbor workspace
+    SendTo { direction: DirectionOrIndex },
+    /// Move to a neighbor workspace and switch to it
+    MoveTo { direction: DirectionOrIndex },
     /// Create a new workspace column
     CreateNewWorkspace,
     /// Create a new workspace row
     CreateNewWorkspaceRow,
     /// Destroy the current workspace column or row if there is only one column
     DestroyCurrentWorkspace,
+}
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum DirectionOrIndex {
+    Direction(Direction),
+    Index(usize),
+}
+
+impl std::str::FromStr for DirectionOrIndex {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if let Ok(n) = s.parse::<usize>() {
+            Ok(Self::Index(n))
+        } else {
+            Ok(match s.to_lowercase().as_str() {
+                "left" => Self::Direction(Direction::Left),
+                "right" => Self::Direction(Direction::Right),
+                "up" => Self::Direction(Direction::Up),
+                "down" => Self::Direction(Direction::Down),
+                _ => return Err("Invalid direction or index".to_string()),
+            })
+        }
+    }
 }
 
 // ===== Widget =====
@@ -291,7 +298,7 @@ pub enum AllowedReservations {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, clap::ValueEnum)]
-pub enum NodeSiblingSide {
+pub enum Direction {
     Left,
     Right,
     Up,
@@ -360,17 +367,17 @@ pub enum WmCommand {
     /// Focuses the window in the specified position.
     Focus {
         /// The position of the window to focus.
-        side: NodeSiblingSide,
+        side: Direction,
     },
     /// Moves the window to the specified position
     Move {
         /// Direction to move
-        side: NodeSiblingSide,
+        side: Direction,
     },
     /// Moves the window to another monitor in the specified side
     MoveToMonitor {
         /// Direction to move
-        side: NodeSiblingSide,
+        side: Direction,
     },
 }
 

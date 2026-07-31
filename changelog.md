@@ -5,6 +5,8 @@
 ### features
 
 - Grid workspaces system.
+- Workspaces shortcuts to switch to the next/previous workspace column or row.
+- Workspaces shortcuts to send the focused window to the next/previous workspace column or row.
 
 ### enhancements
 

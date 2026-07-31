@@ -138,10 +138,6 @@ export const shortcutGroups = computed((): ShortcutGroups => {
   );
 
   const vdMainIds = [
-    "vd-switch-next",
-    "vd-switch-prev",
-    "vd-switch-up",
-    "vd-switch-down",
     "vd-create-workspace",
     "vd-create-workspace-row",
     "vd-destroy-workspace",
@@ -150,8 +146,8 @@ export const shortcutGroups = computed((): ShortcutGroups => {
   const system: ShortcutGroups["system"] = {
     vdMain: systemEntries.filter((e) => vdMainIds.includes(e.id)),
     vdSwitch: systemEntries.filter((e) => e.id.startsWith("vd-switch-to-")),
-    vdMove: systemEntries.filter((e) => e.id.startsWith("vd-move-to-")),
     vdSend: systemEntries.filter((e) => e.id.startsWith("vd-send-to-")),
+    vdMove: systemEntries.filter((e) => e.id.startsWith("vd-move-to-")),
     misc: systemEntries.filter(
       (e) =>
         !vdMainIds.includes(e.id) &&
