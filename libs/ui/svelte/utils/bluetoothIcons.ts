@@ -270,3 +270,22 @@ export function getIconNameForBTDevice(device: BluetoothDevice): string {
   }
   return iconForClass(device.class);
 }
+
+/** Some physical devices are enumerated twice, once as Classic and once as LE. Keep the Classic entry when both exist. */
+export function dedupeBluetoothDevices(devices: BluetoothDevice[]): BluetoothDevice[] {
+  const filtered: BluetoothDevice[] = [];
+  const seen = new Set<string>();
+
+  for (const device of devices) {
+    if (seen.has(device.name)) continue;
+
+    const hasClassicCounterpart = device.isLowEnergy &&
+      devices.some((d) => d.name === device.name && d.id !== device.id && !d.isLowEnergy);
+    if (hasClassicCounterpart) continue;
+
+    filtered.push(device);
+    seen.add(device.name);
+  }
+
+  return filtered;
+}

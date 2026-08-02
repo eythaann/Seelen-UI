@@ -6,37 +6,9 @@
   import { t } from "./i18n";
   import BluetoothDevice from "./components/BluetoothDevice.svelte";
   import { Widget } from "@seelen-ui/lib";
+  import { dedupeBluetoothDevices } from "libs/ui/svelte/utils/bluetoothIcons.ts";
 
-  // Filter devices to avoid duplicates (same name, prefer non-LE version)
-  const uniqueDevices = $derived.by(() => {
-    const devices = globalState.devices;
-    const filtered: typeof devices = [];
-    const seen = new Set<string>();
-
-    for (const device of devices) {
-      const existing = devices.find(
-        (d) => d.name === device.name && d.id !== device.id && !d.isLowEnergy
-      );
-      if (existing) {
-        if (!device.isLowEnergy) {
-          // This is the classic version, keep it
-          if (!seen.has(device.name)) {
-            filtered.push(device);
-            seen.add(device.name);
-          }
-        }
-        // Skip LE version if classic exists
-      } else {
-        // No duplicate, add it
-        if (!seen.has(device.name)) {
-          filtered.push(device);
-          seen.add(device.name);
-        }
-      }
-    }
-
-    return filtered;
-  });
+  const uniqueDevices = $derived(dedupeBluetoothDevices(globalState.devices));
 
   const connectedDevices = $derived(uniqueDevices.filter((d) => d.paired && d.connected));
   const pairedDevices = $derived(uniqueDevices.filter((d) => d.paired && !d.connected));

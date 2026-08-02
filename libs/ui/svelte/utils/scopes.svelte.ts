@@ -3,7 +3,7 @@
 import { type AllSeelenCommandReturns, invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { NotificationsMode } from "@seelen-ui/lib/types";
 import { dateState } from "../runes/date.svelte.ts";
-import { getIconNameForBTDevice } from "./bluetoothIcons.ts";
+import { dedupeBluetoothDevices, getIconNameForBTDevice } from "./bluetoothIcons.ts";
 
 class LazyScope<C extends SeelenCommand> {
   private _ready = $state.raw(false);
@@ -306,7 +306,7 @@ function bluetoothStep(data: Data): boolean {
     return true;
   }
 
-  data.devices = _bluetoothDevices.data || [];
+  data.devices = dedupeBluetoothDevices(_bluetoothDevices.data || []);
   data.getIconNameForBTDevice = getIconNameForBTDevice;
 
   return false;
