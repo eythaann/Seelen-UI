@@ -5,7 +5,7 @@ if (!activeRow) {
 }
 
 return Group({
-  content: activeRow.map((w) => {
+  content: activeRow.map((w, idx) => {
     const isActive = w.id === activeWorkspace;
     return Button({
       content: w.name || `Workspace ${idx + 1}`,
