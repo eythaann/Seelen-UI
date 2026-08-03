@@ -65,16 +65,17 @@
 {/if}
 
 <style>
-  :global(.slu-icon-outer) {
+  .slu-icon-outer {
     position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
-  :global(.slu-icon-outer img) {
-    height: 100%;
-    object-fit: contain;
-  }
-
-  :global(.slu-icon-mask) {
+  .slu-icon-mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -84,6 +85,7 @@
     mask-size: contain;
     mask-position: center;
     mask-mode: luminance;
-    background-color: var(--system-accent-light-color);
+    background-color: var(--system-accent-color);
+    mix-blend-mode: multiply;
   }
 </style>

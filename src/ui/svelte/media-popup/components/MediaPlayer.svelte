@@ -1,9 +1,8 @@
 <script lang="ts">
   import type { MediaPlayer } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
+  import { Icon, FileIcon, iconPackManager } from "libs/ui/svelte/components/Icon";
   import { convertFileSrc } from "@tauri-apps/api/core";
-  import { defaultThumbnail } from "../state.svelte";
 
   interface Props {
     session: MediaPlayer;
@@ -17,7 +16,14 @@
 
   let luminance = $state(0);
 
-  let thumbnailSrc = $derived(convertFileSrc(session?.thumbnail || defaultThumbnail));
+  let thumbnailSrc = $derived.by(() => {
+    if (session?.thumbnail) {
+      return convertFileSrc(session.thumbnail);
+    }
+    const icon = iconPackManager.value.getCustomIcon("defaultPlayerThumbnail");
+    const resolved = icon ? iconPackManager.resolve(icon).src : null;
+    return resolved || "";
+  });
 
   function calcLuminance(imageUrl: string): Promise<number> {
     return new Promise((resolve, reject) => {

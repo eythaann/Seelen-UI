@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { DEFAULT_THUMBNAIL } from "../../constants.ts";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { SeelenWegSide } from "@seelen-ui/lib/types";
-  import { FileIcon, Icon } from "libs/ui/svelte/components/Icon/index.ts";
+  import { FileIcon, Icon, SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { convertFileSrc, invoke as tauriInvoke } from "@tauri-apps/api/core";
   import { t } from "../../i18n/index.ts";
   import type { MediaWegItem } from "../../types.ts";
@@ -21,22 +19,20 @@
   const MIN_LUMINANCE = 40;
   const BRIGHTNESS_MULTIPLIER = 1.5;
 
-  let luminance = $state(150);
-
   const session = $derived(players.value.find((s) => s.default));
-  const thumbnailSrc = $derived(
-    convertFileSrc(session?.thumbnail ? session.thumbnail : DEFAULT_THUMBNAIL),
-  );
-  const isHorizontal = $derived(
-    settingsState.position === SeelenWegSide.Bottom || settingsState.position === SeelenWegSide.Top,
-  );
+  const thumbnailSrc = $derived(session?.thumbnail ? convertFileSrc(session.thumbnail) : null);
 
+  let luminance = $state(150);
   const filteredLuminance = $derived(
     Math.max(Math.min(luminance * BRIGHTNESS_MULTIPLIER, MAX_LUMINANCE), MIN_LUMINANCE),
   );
   const textColor = $derived(filteredLuminance < 125 ? "#efefef" : "#222222");
 
   $effect(() => {
+    if (!thumbnailSrc) {
+      luminance = 150;
+      return;
+    }
     calcLuminance(thumbnailSrc)
       .then((l) => (luminance = l))
       .catch(console.error);
@@ -71,16 +67,23 @@
   data-tooltip-align-y={settingsState.popupAlignY}
   oncontextmenu={onContextMenu}
 >
-  <div
-    class="media-session"
-    style="background-color: rgb({filteredLuminance}, {filteredLuminance}, {filteredLuminance})"
-  >
-    <div class="media-session-blurred-thumbnail-container">
-      <img class="media-session-blurred-thumbnail" src={thumbnailSrc} loading="lazy" alt="" />
-    </div>
+  <div class="media-session">
+    {#if thumbnailSrc}
+      <div
+        class="media-session-blurred-thumbnail-container"
+        style:background-color={`rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`}
+      >
+        <img class="media-session-blurred-thumbnail" src={thumbnailSrc} loading="lazy" alt="" />
+      </div>
+    {/if}
 
     <div class="media-session-thumbnail-container">
-      <img class="media-session-thumbnail" src={thumbnailSrc} loading="lazy" alt="" />
+      {#if thumbnailSrc}
+        <img class="media-session-thumbnail" src={thumbnailSrc} loading="lazy" alt="" />
+      {:else}
+        <SpecificIcon class="media-session-thumbnail" name="defaultPlayerThumbnail" />
+      {/if}
+
       {#if session}
         <FileIcon class="media-session-app-icon" umid={session.umid} />
       {/if}
@@ -90,21 +93,21 @@
       <span
         class="media-session-title"
         class:media-session-title-default={!session}
-        style="color: {textColor}"
+        style:color={session ? textColor : undefined}
       >
         {session ? session.title : $t("media.not_playing")}
       </span>
 
       {#if session}
-        <div class="media-session-actions">
+        <div class="media-session-actions" style="color: {textColor}">
           <button data-skin="transparent" onclick={() => onClickBtn("media_prev")}>
-            <Icon iconName="IoPlaySkipBack" color={textColor} size={12} />
+            <Icon iconName="IoPlaySkipBack" size={12} />
           </button>
           <button data-skin="transparent" onclick={() => onClickBtn("media_toggle_play_pause")}>
-            <Icon iconName={session?.playing ? "IoPause" : "IoPlay"} color={textColor} size={12} />
+            <Icon iconName={session?.playing ? "IoPause" : "IoPlay"} size={12} />
           </button>
           <button data-skin="transparent" onclick={() => onClickBtn("media_next")}>
-            <Icon iconName="IoPlaySkipForward" color={textColor} size={12} />
+            <Icon iconName="IoPlaySkipForward" size={12} />
           </button>
         </div>
       {/if}

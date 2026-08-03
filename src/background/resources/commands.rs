@@ -136,7 +136,7 @@ pub async fn state_delete_cached_icons() -> Result<()> {
         pack.delete().await?;
     }
     IconExtractor::instance().clear_failures();
-    RESOURCES.ensure_system_icon_pack()?;
+    RESOURCES.ensure_system_icon_pack(true)?;
     RESOURCES.emit_icon_packs();
     Ok(())
 }

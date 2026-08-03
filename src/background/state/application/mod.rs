@@ -153,25 +153,33 @@ async fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
 
     if widgets_changed {
         log::info!("Widgets changed");
-        RESOURCES.load_all_of_type(ResourceKind::Widget).await?;
+        RESOURCES
+            .load_all_of_type(ResourceKind::Widget, false)
+            .await?;
         RESOURCES.emit_widgets()?;
     }
 
     if themes_changed {
         log::info!("Themes changed");
-        RESOURCES.load_all_of_type(ResourceKind::Theme).await?;
+        RESOURCES
+            .load_all_of_type(ResourceKind::Theme, false)
+            .await?;
         RESOURCES.emit_themes();
     }
 
     if plugins_changed {
         log::info!("Plugins changed");
-        RESOURCES.load_all_of_type(ResourceKind::Plugin).await?;
+        RESOURCES
+            .load_all_of_type(ResourceKind::Plugin, false)
+            .await?;
         RESOURCES.emit_plugins();
     }
 
     if wallpapers_changed {
         log::info!("Wallpapers changed");
-        RESOURCES.load_all_of_type(ResourceKind::Wallpaper).await?;
+        RESOURCES
+            .load_all_of_type(ResourceKind::Wallpaper, false)
+            .await?;
         RESOURCES.emit_wallpapers();
 
         FULL_STATE.rcu(move |state| {
@@ -185,7 +193,9 @@ async fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
 
     if icons_changed {
         log::info!("Icon Packs changed");
-        RESOURCES.load_all_of_type(ResourceKind::IconPack).await?;
+        RESOURCES
+            .load_all_of_type(ResourceKind::IconPack, false)
+            .await?;
         RESOURCES.emit_icon_packs();
     }
 

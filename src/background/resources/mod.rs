@@ -47,33 +47,37 @@ impl ResourceManager {
         tokio::join!(
             async {
                 let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Theme).await.log_error();
+                self.load_all_of_type(ResourceKind::Theme, true)
+                    .await
+                    .log_error();
                 log::info!("Themes loaded in {:?}", t.elapsed());
             },
             async {
                 let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Plugin)
+                self.load_all_of_type(ResourceKind::Plugin, true)
                     .await
                     .log_error();
                 log::info!("Plugins loaded in {:?}", t.elapsed());
             },
             async {
                 let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Widget)
+                self.load_all_of_type(ResourceKind::Widget, true)
                     .await
                     .log_error();
                 log::info!("Widgets loaded in {:?}", t.elapsed());
             },
             async {
                 let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Wallpaper)
+                self.load_all_of_type(ResourceKind::Wallpaper, true)
                     .await
                     .log_error();
                 log::info!("Wallpapers loaded in {:?}", t.elapsed());
             },
             async {
                 let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::IconPack)
+                // true: on app start, always overwrite default icons with the bundled
+                // versions so an updated app version replaces stale cached icons.
+                self.load_all_of_type(ResourceKind::IconPack, true)
                     .await
                     .log_error();
                 log::info!("IconPacks loaded in {:?}", t.elapsed());
@@ -291,7 +295,12 @@ impl ResourceManager {
         Ok(paths)
     }
 
-    pub async fn load_all_of_type(&self, kind: ResourceKind) -> Result<()> {
+    /// `on_mount` should be true only when called during app startup. It only affects
+    /// `ResourceKind::IconPack`: when true, bundled default icons overwrite existing files
+    /// on disk (so an updated app version replaces stale cached icons); otherwise they're
+    /// only written if missing, avoiding redundant writes on the frequent icon-pack-changed
+    /// reload.
+    pub async fn load_all_of_type(&self, kind: ResourceKind, on_mount: bool) -> Result<()> {
         log::trace!("Loading {kind:?}s");
 
         let paths = Self::get_entries_for_type(&kind).await?;
@@ -316,7 +325,7 @@ impl ResourceManager {
                 .load(&kind, SEELEN_COMMON.system_icon_pack_path())
                 .await;
             // creates the system icon pack if not loaded
-            self.ensure_system_icon_pack()?;
+            self.ensure_system_icon_pack(on_mount)?;
         }
         Ok(())
     }

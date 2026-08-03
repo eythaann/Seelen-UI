@@ -47,13 +47,17 @@ impl ResourceManager {
         SAVE_SYSTEM_ICON_PACK.call(());
     }
 
-    /// Ensures default icons exist in the system icon pack directory
-    fn sanitize_default_icons(sys_icons_path: &Path) -> Result<()> {
+    /// Ensures default icons exist in the system icon pack directory.
+    /// When `override_icons` is true, bundled icons always replace existing files
+    /// (used on app start so updated bundled assets aren't left stale); otherwise
+    /// files are only written if missing, to avoid redundant disk writes on the
+    /// frequent icon-pack-changed reloads.
+    fn sanitize_default_icons(sys_icons_path: &Path, override_icons: bool) -> Result<()> {
         std::fs::create_dir_all(sys_icons_path)?;
 
         let ensure_icon = |filename: &str| {
             let icon_path = sys_icons_path.join(filename);
-            if !icon_path.exists() {
+            if override_icons || !icon_path.exists() {
                 std::fs::copy(
                     SEELEN_COMMON
                         .app_resource_dir()
@@ -66,11 +70,16 @@ impl ResourceManager {
         };
 
         ensure_icon("missing.png")?;
-        ensure_icon("music_thumbnail.jpg")?;
         ensure_icon("url.png")?;
-        ensure_icon("start-menu.svg")?;
         ensure_icon("folder.svg")?;
         ensure_icon("desktop.svg")?;
+
+        ensure_icon("start_menu.svg")?;
+        ensure_icon("start_menu_dark.svg")?;
+        ensure_icon("start_menu_mask.svg")?;
+
+        ensure_icon("music_thumbnail.svg")?;
+        ensure_icon("music_thumbnail_mask.svg")?;
 
         ensure_icon("trash_bin_empty.png")?;
         ensure_icon("trash_bin_full.png")?;
@@ -98,8 +107,9 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "@seelen/weg::start-menu".to_owned(),
             icon: Icon {
-                base: Some("start-menu.svg".to_owned()),
-                mask: Some("start-menu.svg".to_owned()),
+                light: Some("start_menu.svg".to_owned()),
+                dark: Some("start_menu_dark.svg".to_owned()),
+                mask: Some("start_menu_mask.svg".to_owned()),
                 ..Default::default()
             },
         }));
@@ -125,7 +135,8 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "defaultPlayerThumbnail".to_owned(),
             icon: Icon {
-                base: Some("music_thumbnail.jpg".to_owned()),
+                base: Some("music_thumbnail.svg".to_owned()),
+                mask: Some("music_thumbnail_mask.svg".to_owned()),
                 is_aproximately_square: true,
                 ..Default::default()
             },
@@ -150,7 +161,7 @@ impl ResourceManager {
         }));
     }
 
-    pub fn ensure_system_icon_pack(&self) -> Result<()> {
+    pub fn ensure_system_icon_pack(&self, override_icons: bool) -> Result<()> {
         let sys_icons_path = SEELEN_COMMON.system_icon_pack_path();
 
         let mut guard = self.system_icon_pack.lock();
@@ -171,7 +182,7 @@ impl ResourceManager {
         // Always sanitize default icon entries and files
         let system_pack = guard.as_mut().expect("System icon pack should exist");
         Self::sanitize_default_entries(system_pack);
-        Self::sanitize_default_icons(sys_icons_path)?;
+        Self::sanitize_default_icons(sys_icons_path, override_icons)?;
 
         self.request_save_system_icon_pack();
         Ok(())
