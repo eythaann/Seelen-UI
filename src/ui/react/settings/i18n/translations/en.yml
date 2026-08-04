@@ -378,6 +378,12 @@ weg:
     always: Always
     never: Never
     on_overlap: On overlap
+  import_error: Failed to import taskbar items
+  import_from_taskbar:
+    button: Import from Windows Taskbar
+    label: Import Pinned Items
+  import_no_items: No pinned items found in Windows taskbar
+  import_success: Successfully imported {{count}} item(s) from Windows taskbar
   items:
     gap: Space Between Items
     label: Items
