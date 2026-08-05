@@ -5590,7 +5590,7 @@ dependencies = [
 name = "seelen-core"
 version = "2.8.2"
 dependencies = [
- "base64 0.22.1",
+ "base64 0.23.0",
  "chrono",
  "futures",
  "grass",
@@ -5618,7 +5618,7 @@ version = "2.8.2"
 dependencies = [
  "arc-swap",
  "backtrace",
- "base64 0.22.1",
+ "base64 0.23.0",
  "battery",
  "clap",
  "crossbeam-channel",
@@ -6103,7 +6103,7 @@ dependencies = [
 name = "slu-utils"
 version = "2.8.2"
 dependencies = [
- "base64 0.22.1",
+ "base64 0.23.0",
  "minisign",
  "sha2",
 ]
