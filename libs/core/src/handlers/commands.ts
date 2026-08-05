@@ -105,6 +105,7 @@ export enum SeelenCommand {
   WegKillApp = "weg_kill_app",
   WegToggleWindowState = "weg_toggle_window_state",
   WegPinItem = "weg_pin_item",
+  WegImportPinnedTaskbarItems = "weg_import_pinned_taskbar_items",
   WmGetRenderTree = "wm_get_render_tree",
   SetAppWindowsPositions = "set_app_windows_positions",
   RequestFocus = "request_focus",

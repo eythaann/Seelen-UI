@@ -240,6 +240,7 @@ slu_commands_declaration! {
     WegKillApp = weg_kill_app(hwnd: isize),
     WegToggleWindowState = weg_toggle_window_state(hwnd: isize, was_focused: bool),
     WegPinItem = weg_pin_item(path: PathBuf),
+    WegImportPinnedTaskbarItems = weg_import_pinned_taskbar_items() -> usize,
 
     // Windows Manager
     WmGetRenderTree = wm_get_render_tree() -> TwmGlobalRuntimeTree,

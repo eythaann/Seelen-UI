@@ -1,11 +1,11 @@
 import { HideMode, SeelenWegMode, SeelenWegSide, WegMiddleClickAction } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { $is_touch_primary } from "libs/ui/react/utils/signals";
-import { Button, InputNumber, Select, Switch, Tooltip } from "antd";
+import { Button, InputNumber, message, Select, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { OptionsFromEnum } from "../../../shared/utils/app.ts";
-import { getWegConfig, patchWegConfig } from "./application.ts";
+import { getWegConfig, importFromWindowsTaskbar, patchWegConfig } from "./application.ts";
 import { getDevTools } from "../../../developer/application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
@@ -17,6 +17,20 @@ export const SeelenWegSettings = () => {
   const devTools = getDevTools();
 
   const { t } = useTranslation();
+
+  const handleImportTaskbarItems = async () => {
+    try {
+      const count = await importFromWindowsTaskbar();
+      if (count === 0) {
+        message.info(t("weg.import_no_items"));
+      } else {
+        message.success(t("weg.import_success", { count }));
+      }
+    } catch (error) {
+      message.error(t("weg.import_error"));
+      console.error("Failed to import taskbar items:", error);
+    }
+  };
 
   return (
     <>
@@ -223,6 +237,15 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
         </SettingsGroup>
       )}
+
+      <SettingsGroup>
+        <SettingsOption>
+          <div>{t("weg.import_from_taskbar.label")}</div>
+          <Button onClick={handleImportTaskbarItems}>
+            {t("weg.import_from_taskbar.button")}
+          </Button>
+        </SettingsOption>
+      </SettingsGroup>
     </>
   );
 };

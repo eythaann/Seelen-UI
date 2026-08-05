@@ -113,6 +113,7 @@ slu_events_declaration! {
 
     // SeelenWeg
     WegAddItem(WegItemData) as "weg::add-item",
+    WegItemsChanged(WegItems) as "weg::items-changed",
 
     // Trash Bin
     TrashBinChanged(TrashBinInfo) as "trash-bin::changed",
