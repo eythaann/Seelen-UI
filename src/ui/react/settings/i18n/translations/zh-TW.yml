@@ -26,7 +26,7 @@ apps_configurations:
     wm_options_label: 視窗管理器
     workspace: 工作區
     workspace_placeholder: 無
-  bundled_msg: 這些捆綁的配置不可編輯，旨在為您提供最佳體驗而沒有自定義。 他們會自動為您配置最常見的應用程序。
+  bundled_msg: 這些捆綁的配置不可編輯，旨在為您提供最佳體驗而沒有自定義。他們會自動為您配置最常見的應用程序。
   bundled_title: App Config與Seelen捆綁在一起
   confirm_delete: 您確定要刪除此設定嗎？
   confirm_delete_title: 確認刪除
@@ -34,8 +34,7 @@ apps_configurations:
   export: 匯出
   export_full: 按應用程式匯出設定
   extra_info: >-
-    SEELEN
-    UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
+    SEELEN UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
   identifier:
     add_block: 添加塊
     and: 和
@@ -56,8 +55,8 @@ apps_configurations:
       exe: EXE文件
       path: 路徑
       title: 標題
-  import: 導入
-  import_full: 通過應用程式導入設定
+  import: 匯入
+  import_full: 通過應用程式匯入設定
   new: 新增
   search: 搜尋
   swap: 交換
@@ -67,11 +66,11 @@ delete: 刪除
 devtools:
   app_folders: 應用文件夾
   color_palette: 調色盤
-  color_palette_note: 這些顏色自動適應明/暗模式 - 每種顏色都是相對於當前背景的對比度，而不是固定值。 使用它們而不是硬編碼顏色來獲得自動主題支援。
-  custom_config_file: 加載自定義設定文件
+  color_palette_note: 這些顏色會自動適應淺色/深色模式——每種色調都與當前背景對比度相關，而不是固定值。使用它們代替寫死的顏色，即可獲得自動主題支援。
+  custom_config_file: 載入自定義設定文件
   data_folder: 數據文件夾
   enable: 啟用開發人員工具
-  enable_description: 解鎖用於檢查和調試 Seelen UI 內部結構的高級工具。 不適合常規使用。
+  enable_description: 解鎖用於檢查和除錯 Seelen UI 內部結構的進階工具。不建議日常使用。
   icons: 快取圖示
   install_folder: 安裝文件夾
   load: 載入
@@ -88,14 +87,14 @@ devtools:
     widget_id_placeholder: '@作者/小工具名稱'
   tools: 工具
   unlock_shortcuts: 解鎖唯讀捷徑
-  unlock_shortcuts_description: 允許編輯通常只讀的捷徑（例如係統覆蓋）。
+  unlock_shortcuts_description: 允許編輯通常為唯讀的捷徑（例如系統覆蓋）。
   unstable_optimizations: 不穩定的最佳化
   unstable_optimizations_description: |-
-    啟用可減少 RAM 使用的實驗性 Chromium 標誌。 
+    啟用可減少 RAM 使用的實驗性 Chromium 標誌。
     警告：如果一個小工具崩潰，共享相同載入器的所有小工具將一起崩潰。
   widgets_debug:
     actions: 行動
-    empty: 沒有載入小部件。 單擊刷新。
+    empty: 沒有載入小部件。單擊刷新。
     instance_id: 實例ID
     monitor_id: 顯示器ID
     open_devtools: 開發工具
@@ -104,32 +103,31 @@ devtools:
     tab: 小部件
     widget_id: 小部件 ID
 discord_banner:
-  message: 與其他 Seelen UI 用戶聯繫、獲取協助、分享主題並了解最新消息。
-  title: 加入我們的社區
+  message: 與其他 Seelen UI 使用者聯繫、獲取協助、分享主題並了解最新消息。
+  title: 加入我們的社群
 extras:
   backup_group: 雲端備份
   backup_last_sync: 上次同步
   backup_never_synced: 從未同步過
   backup_sync: 將設定同步到雲端
   backup_sync_description: 透過雲端自動備份和還原您的設定。
-  clear_icons: 清除系統圖標緩存
+  clear_icons: 清除系統圖示快取
   clear_icons_tooltip: 小工具可能需要重新啟動才會生效
-  discord_rpc: 不和諧豐富的存在
+  discord_rpc: Discord富狀態
   discord_rpc_description: 向大家展示您的風格！
-  exit: 退出seelen
-  relaunch: 重新啟動seelen
+  exit: 退出Seelen
+  relaunch: 重新啟動Seelen
   streaming_mode: 串流模式
   streaming_mode_description: 用佔位符取代敏感資訊（例如電子郵件），以在錄製或螢幕截圖期間保護隱私。
   version: 版本
   version_fixed: >-
-    應用程式和 WebView2 runtime 版本已修復。這意味著應用程序將不會接收更新，並且 WebView2 runtime 也不會隨
-    Windows 更新自動更新。
+    應用程式和 WebView2 runtime 版本已修復。這意味著應用程式將不會接收更新，並且 WebView2 runtime 也不會隨 Windows 更新自動更新。
 general:
   accent_color: 主色調
   date_format: 日期格式
   date_format_how_to: 日期格式怎麼寫？
   hardware_acceleration: 硬體加速
-  hardware_acceleration_description: 停用硬體加速將減少記憶體使用。 如果您不使用大量動畫，則停用它是安全的，但無論此設定如何，單一小工具仍可能強制使用 GPU。
+  hardware_acceleration_description: 停用硬體加速將減少記憶體使用。如果您不使用大量動畫，則停用它是安全的，但無論此設定如何，單一小工具仍可能強制使用 GPU。
   icon_pack:
     available: 可用的icon包
     selected: 使用中的icon包
@@ -145,13 +143,13 @@ general:
       minimal: 基本優化
     plugged: 插電或充電時
   polling_interval: 系統輪詢間隔
-  polling_interval_description: Seelen UI 檢查 CPU、RAM、網路和磁碟活動等系統資源的頻率（以秒為單位）。 數字越小意味著更新越頻繁，但資源使用率會稍高。
+  polling_interval_description: Seelen UI 檢查 CPU、RAM、網路和磁碟活動等系統資源的頻率（以秒為單位）。數字越小意味著更新越頻繁，但資源使用率會稍高。
   saturday: 星期六
   start_of_week: 一週的第一天
   startup: 開機時自動啟動
   sunday: 星期日
   suspend_on_game_mode: 在遊戲模式下暫停小工具
-  suspend_on_game_mode_description: 當 Windows 遊戲模式處於活動狀態時，所有小工具 Web 視圖都會被銷毀，以釋放遊戲的 CPU 和記憶體。 遊戲模式結束時小工具會自動恢復。
+  suspend_on_game_mode_description: 當 Windows 遊戲模式處於活動狀態時，所有小工具 Web 視圖都會被銷毀，以釋出遊戲的 CPU 和記憶體。遊戲模式結束時小工具會自動恢復。
   theme:
     available: 可用的主題
     selected: 使用中的主題
@@ -195,17 +193,17 @@ reset_configurations: 重置設定
 reset_to_default: 恢復為預設值
 resources:
   affected_widgets: 受影響的小工具
-  app_outdated: 此資源要求Seelen UI的較新版本才能正常工作。
+  app_outdated: 此資源需要較新版本的Seelen UI才能正常運作。
   coming_soon: 即將推出
-  corrupted_wallpaper: 無法提取縮略圖 - 影片格式已損壞或不受支持
+  corrupted_wallpaper: 無法擷取縮圖 - 影片格式已損壞或不受支持
   delete: 刪除資源
   discover: 發現更多資源
   has_update: 有更新可用
   high_impact: 對性能影響很大
-  import_wallpapers: 導入本地桌布
+  import_wallpapers: 匯入本機桌布
   included_plugins: 包含的擴充功能
   open_folder: 打開資源文件夾
-  outdated: 該資源是為Seelen UI的較舊版本而設計的，可能無法正常工作。
+  outdated: 此資源是為舊版Seelen UI設計的，可能無法正常運作。
   see_on_website: 查看詳情
   update_now: 更新
   updates_available: 可用更新
@@ -213,7 +211,7 @@ resources:
 review_request:
   not_now: 再體驗看看
   sure: 當然！
-  title: 喜歡 Seelen UI 嗎？
+  title: 喜歡Seelen UI嗎？
 save: 保存
 save_and_restart: 保存並重新啟動
 search: 搜尋
@@ -227,14 +225,14 @@ session:
 shortcuts:
   disabled_tooltip: 小工具及其快捷鍵已停用
   duplicate_error: 偵測到衝突的捷徑
-  duplicate_error_hint: 有些快捷鍵被指派給多個操作。 禁用衝突的小部件之一或重新分配重複的鍵綁定來解決。
+  duplicate_error_hint: 有些快捷鍵被指派給多個操作。禁用衝突的小部件之一或重新分配重複的鍵綁定來解決。
   enable: 使用內建快捷鍵
   enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:
     create_new_workspace: 創建新工作區
     destroy_current_workspace: 刪除當前工作區
-    misc_force_quit: 強制退出seelen
-    misc_force_restart: 強制重新啟動seelen
+    misc_force_quit: 強制退出Seelen
+    misc_force_restart: 強制重新啟動Seelen
     move_to_workspace: 移至工作區{{0}}
     pause_toggle: 暫停/恢復快捷方式
     send_to_workspace: 發送到工作區{{0}}
@@ -265,7 +263,7 @@ toolbar:
   padding: 填充尺寸
   placeholder: {}
 update:
-  available: 更新可用！
+  available: 有更新！
   channel: 更新頻道
   downloading: 下載...
 wall:
@@ -279,7 +277,7 @@ wall:
   coverage_pause_threshold: 暫停閾值（視窗覆蓋率）
   create: 創建
   create_collection: 創建收藏
-  default_collection: 預設壁紙或集合
+  default_collection: 預設桌布或集合
   default_collection_description: 應用於沒有特定覆蓋集的所有監視器和工作區。
   delete_collection: 刪除集合
   edit_collection: 編輯收藏
@@ -290,15 +288,15 @@ wall:
     fill: 填充
   flipHorizontal: 水平翻轉
   flipVertical: 垂直翻轉
-  generating_thumbnails: 生成桌布縮略圖
+  generating_thumbnails: 生成桌布縮圖
   hours: 小時
   interval: 更換桌布的時間間隔
   minutes: 分鐘
   monitor_collection: 顯示器集合
   multimonitor_behaviour: 多顯示器行為
-  muted: 將影片音頻靜音
+  muted: 將影片音訊靜音
   no_background: 使用主題的背景為空幻燈片。
-  no_collections: 尚未創建任何集合。 單擊 + 按鈕創建一個。
+  no_collections: 尚未創建任何集合。單擊 + 按鈕創建一個。
   objectFit: 背景適應方式
   objectPosition: 背景位置
   overlayColor: 覆蓋顏色
@@ -317,12 +315,12 @@ wall:
   saturation: 飽和
   seconds: 秒
   select_collection: 選擇系列
-  thumbnail_generation_complete: 縮略圖生成完成
-  thumbnail_generation_finished: 縮略圖生成已成功完成
+  thumbnail_generation_complete: 縮圖生成完成
+  thumbnail_generation_finished: 縮圖生成已成功完成
   use_accent_color: 使用桌布強調色
   wallpaper_collection: 桌布合集
   wallpaper_settings: 桌布設定
-  wallpapers: 壁紙
+  wallpapers: 桌布
   wallpapers_and_collections: 桌布和收藏
   withOverlay: 啟用疊加層
   workspace_collections: 工作區集合
@@ -371,7 +369,7 @@ welcome:
     Seelen UI 是一個適用於 Windows 的免費開源桌面環境。
     在這裡，您可以完全控制桌面的外觀和行為，允許您自定義每個細節以匹配您的工作流程和風格。
   ok: 讓我們開始吧！
-  review: 如果您喜歡使用 Seelen UI，請考慮在商店中留下評論 - 您的反饋有助於項目的成長和改進。
+  review: 如果您喜歡使用 Seelen UI，請考慮在商店留下評論，您的回饋有助於專案的發展和改進。
   title: 歡迎來到Seelen UI！
 widget:
   default_instance: 預設視窗

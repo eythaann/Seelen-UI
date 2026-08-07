@@ -1,14 +1,14 @@
-available: 可用網絡
+available: 可用網路
 connect: 連接
 connected: 連接到
-connecting: 正在連接...
-disconnect: 斷開
-forget: 忘記
-hidden: 隱藏網絡
-more: 更多網絡設定
-no_adapter: 找不到 Wi-Fi 適配器
-not_found: 未找到 Wi-Fi 網絡
+connecting: 正在連接……
+disconnect: 中斷
+forget: 遺忘
+hidden: 隱藏網路
+more: 更多網路設定
+no_adapter: 找不到 Wi-Fi 轉接器
+not_found: 未找到 Wi-Fi 網路
 password: 密碼
-saved: 已保存的網絡
-scanning: 掃描網絡
-secured: 加密網絡
+saved: 已儲存網路
+scanning: 掃描網路
+secured: 加密網路

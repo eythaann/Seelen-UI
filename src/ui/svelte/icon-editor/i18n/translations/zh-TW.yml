@@ -1,20 +1,20 @@
 angle: 角度
-approximately_square: 大約正方形
+approximately_square: 接近正方形
 background: 背景
-brush_size: 刷子尺寸
-clear_draw: 清晰的繪圖
-delete: 刪除自訂圖標
-draw_color: 繪製顏色
-draw_mode_off: 畫
-draw_mode_on: 繪畫
-gradient: 坡度
+brush_size: 筆刷尺寸
+clear_draw: 清除
+delete: 刪除自訂圖示
+draw_color: 繪筆顏色
+draw_mode_off: 繪圖
+draw_mode_on: 圖畫
+gradient: 漸層
 none: 無（透明）
 pick_image: 選擇圖片
-position_x: 位置 X
-position_y: 位置 Y
+position_x: 位置X
+position_y: 位置Y
 reset: 重置
-save: 節省
-saving: 儲存...
-scale: 規模
+save: 儲存
+saving: 儲存中……
+scale: 縮放大小
 solid: 純色
 title: 自訂圖示編輯器
