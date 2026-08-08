@@ -1,0 +1,2 @@
+en: One entry per line. Entries match an app name, window title, executable name, or executable path, case-insensitively. An empty list disables filtering.
+zh-CN: 每行填写一项。条目会不区分大小写地匹配应用名、窗口标题、可执行文件名或可执行文件路径。留空表示不筛选。

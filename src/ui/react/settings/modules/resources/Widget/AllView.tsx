@@ -12,7 +12,13 @@ import { getWidgetConfig, patchWidgetConfig } from "./application.ts";
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 
-const SYSTEM_WIDGET_IDS = ["@seelen/settings", "@seelen/dialog", "@seelen/context-menu", "@seelen/tooltip"];
+const SYSTEM_WIDGET_IDS = [
+  "@seelen/settings",
+  "@seelen/dialog",
+  "@seelen/context-menu",
+  "@seelen/tooltip",
+  "@seelen/task-switcher",
+];
 
 function WidgetItem({ widget }: { widget: Widget }) {
   const rootConfig = getWidgetConfig(widget.id);

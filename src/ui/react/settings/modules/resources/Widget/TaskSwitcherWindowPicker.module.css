@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.description {
+  flex: 1;
+  color: var(--color-gray-600);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 280px;
+  overflow-y: auto;
+  margin-top: var(--spacing-xs);
+}
+
+.status {
+  display: grid;
+  min-height: 96px;
+  place-items: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-height: 44px;
+  padding: 5px 6px;
+  border-bottom: 1px solid light-dark(#00000010, #ffffff12);
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.info {
+  min-width: 0;
+}
+
+.name,
+.meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--spacing-xs);
+  color: var(--color-gray-600);
+  font-size: 0.72rem;
+}
+
+.meta > :first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

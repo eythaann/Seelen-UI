@@ -14,7 +14,9 @@
 
   let boxRef: HTMLDivElement | undefined = $state();
   const isSelected = $derived(task.hwnd === globalState.selectedWindow);
-  const preview = $derived(globalState.previews[task.hwnd]);
+  const preview = $derived(
+    globalState.previewEnabled ? globalState.previews[task.hwnd] : undefined,
+  );
 
   // Focus button when selected
   $effect(() => {
@@ -102,11 +104,13 @@
       <Icon iconName="TbX" />
     </button>
   </div>
-  <div class="task-preview-container">
-    {#if preview}
-      <img class="task-preview" src={`data:image/webp;base64,${preview.data}`} alt="" />
-    {:else}
-      <MissingIcon class="task-no-preview" />
-    {/if}
-  </div>
+  {#if globalState.previewEnabled}
+    <div class="task-preview-container">
+      {#if preview}
+        <img class="task-preview" src={`data:image/webp;base64,${preview.data}`} alt="" />
+      {:else}
+        <MissingIcon class="task-no-preview" />
+      {/if}
+    </div>
+  {/if}
 </div>
