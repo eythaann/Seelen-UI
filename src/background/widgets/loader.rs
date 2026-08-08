@@ -137,6 +137,11 @@ impl WidgetDeployment {
     }
 
     pub fn start_webview(&self, label: &WidgetWebviewLabel) {
+        // Lazy widgets may be triggered before their deployment thread has created the pod.
+        // Reconcile here so the first trigger can start the requested instance immediately.
+        if !self.pods.contains_key(label) {
+            self.reconcile();
+        }
         self.pods.get(label, |pod| {
             pod.run(&self.definition);
         });
