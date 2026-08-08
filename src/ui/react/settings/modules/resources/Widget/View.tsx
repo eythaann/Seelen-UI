@@ -82,7 +82,8 @@ export function WidgetConfiguration({
     ...(monitorConfig || {}),
   };
 
-  const showToggleEnabled = !monitorId || widget.instances === "ReplicaByMonitor";
+  const showToggleEnabled = (!monitorId || widget.instances === "ReplicaByMonitor") &&
+    widgetId !== "@seelen/task-switcher";
 
   const widgetPlugins = widget.plugins;
 

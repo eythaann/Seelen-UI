@@ -7,6 +7,44 @@ instances: Single
 loader: Internal
 preset: Overlay
 hidden: true
+settings:
+  - type: select
+    key: windowFilterMode
+    label: !extend i18n/settings/window-filter-mode.yml
+    options:
+      - value: all
+        label: !extend i18n/settings/window-filter-mode-all.yml
+      - value: blacklist
+        label: !extend i18n/settings/window-filter-mode-blacklist.yml
+      - value: whitelist
+        label: !extend i18n/settings/window-filter-mode-whitelist.yml
+    defaultValue: all
+
+  - type: text
+    key: windowFilterPatterns
+    label: !extend i18n/settings/window-filter-patterns.yml
+    description: !extend i18n/settings/window-filter-patterns-description.yml
+    defaultValue: ""
+    multiline: true
+
+  - group:
+      label: !extend i18n/settings/preview-group.yml
+      items:
+        - type: switch
+          key: previewEnabled
+          label: !extend i18n/settings/preview-enabled.yml
+          defaultValue: true
+
+        - type: number
+          key: previewDelay
+          label: !extend i18n/settings/preview-delay.yml
+          description: !extend i18n/settings/preview-delay-description.yml
+          defaultValue: 1000
+          dependencies: [previewEnabled]
+          min: 0
+          max: 5000
+          step: 100
+
 shortcuts:
   - id: task-switcher-next-auto
     command: ["task-switcher", "select-next-task", "--auto-confirm"]

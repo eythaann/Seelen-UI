@@ -10,6 +10,7 @@
 
 <div
   class="task-switcher-overlay"
+  style:--task-switcher-preview-delay={`${globalState.previewDelay}ms`}
   role="dialog"
   tabindex="-1"
   onclick={() => {
