@@ -29,6 +29,7 @@ import { WallSettings } from "./Wall/infra.tsx";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Note } from "../../../components/Note/index.tsx";
 import { WindowManagerSettings } from "./WindowManager/main/infra/index.tsx";
+import { TaskSwitcherWindowPicker } from "./TaskSwitcherWindowPicker.tsx";
 
 export function WidgetConfiguration({
   widgetId,
@@ -153,6 +154,14 @@ export function WidgetConfiguration({
         onConfigChange={onConfigChange}
         isByMonitor={!!monitorId}
       />
+
+      {widgetId === "@seelen/task-switcher" && !monitorId && (
+        <TaskSwitcherWindowPicker
+          mode={typeof config.windowFilterMode === "string" ? config.windowFilterMode : "all"}
+          patterns={typeof config.windowFilterPatterns === "string" ? config.windowFilterPatterns : ""}
+          onChange={(patterns) => onConfigChange("windowFilterPatterns", patterns)}
+        />
+      )}
 
       {children}
 

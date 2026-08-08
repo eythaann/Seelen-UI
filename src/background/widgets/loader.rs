@@ -237,13 +237,13 @@ impl WidgetPod {
                 // APPLICATION_HANG_ENDTASK_HungThreadIsIdle crash.
                 let label = label.clone();
                 std::thread::spawn(move || {
-                    WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
+                    if let Some(deploy) = WIDGET_MANAGER.deployments.get_cloned(&label.widget_id) {
                         deploy.kill_pod(&label);
                         deploy.reconcile();
                         if !deploy.definition.lazy {
                             deploy.start_all_webviews();
                         }
-                    });
+                    }
                 });
             }
         });
@@ -317,11 +317,11 @@ impl WidgetPod {
                         log::warn!("Liveness prove failed for {label} (attempt {}/{LIVENESS_PROVE_MAX_RETRIES}), reloading webview.", attempt + 1);
 
                         if attempt < LIVENESS_PROVE_MAX_RETRIES {
-                            WIDGET_MANAGER.deployments.get(&label.widget_id, |deployment| {
+                            if let Some(deployment) = WIDGET_MANAGER.deployments.get_cloned(&label.widget_id) {
                                 deployment.pods.get(&label, |pod| {
                                     pod.soft_restart();
                                 });
-                            });
+                            }
                         } else {
                             log::error!("Liveness prove failed for {label} too many times, giving up.");
                             let lang = rust_i18n::locale();

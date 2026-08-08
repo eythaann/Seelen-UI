@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{collections::HashSet, path::PathBuf};
 
 use seelen_core::state::{
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, AppConfig,
@@ -9,6 +9,7 @@ use tauri_plugin_dialog::DialogExt;
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
+    resources::RESOURCES,
     state::application::{performance::PERFORMANCE_MODE, BUNDLED_SETTINGS_BY_APP},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::WindowsApi,
@@ -65,14 +66,57 @@ pub fn state_get_default_wallpaper_settings() -> WallpaperInstanceSettings {
 #[tauri::command(async)]
 pub fn state_write_settings(mut settings: Settings) -> Result<()> {
     settings.sanitize()?;
+    let previous = FULL_STATE.load().settings.clone();
+    let reconcile_widgets = widget_topology_changed(&previous, &settings);
     FULL_STATE.rcu(move |state| {
         let mut state = state.cloned();
         state.settings = settings.clone();
         state
     });
-    FULL_STATE.load().write_settings()?;
+    FULL_STATE
+        .load()
+        .write_settings_with_reconcile(reconcile_widgets)?;
     crate::backups::application::on_settings_saved();
     Ok(())
+}
+
+fn widget_topology_changed(previous: &Settings, next: &Settings) -> bool {
+    let monitor_ids: HashSet<_> = previous
+        .monitors_v3
+        .keys()
+        .chain(next.monitors_v3.keys())
+        .cloned()
+        .collect();
+
+    RESOURCES
+        .widgets
+        .any_sync(|widget_id, _| {
+            if previous.is_widget_enabled(widget_id) != next.is_widget_enabled(widget_id) {
+                return true;
+            }
+
+            let previous_instances = previous
+                .by_widget
+                .others
+                .get(widget_id)
+                .and_then(|config| config.instances.as_ref());
+            let next_instances = next
+                .by_widget
+                .others
+                .get(widget_id)
+                .and_then(|config| config.instances.as_ref());
+            if previous_instances.map(|instances| instances.keys().cloned().collect::<HashSet<_>>())
+                != next_instances.map(|instances| instances.keys().cloned().collect::<HashSet<_>>())
+            {
+                return true;
+            }
+
+            monitor_ids.iter().any(|monitor_id| {
+                previous.is_widget_enabled_on_monitor(widget_id, monitor_id)
+                    != next.is_widget_enabled_on_monitor(widget_id, monitor_id)
+            })
+        })
+        .is_some()
 }
 
 #[tauri::command(async)]

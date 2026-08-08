@@ -185,7 +185,7 @@ async fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
         FULL_STATE.rcu(move |state| {
             let mut state = state.cloned();
             if state.sanitize_wallpaper_collections(&RESOURCES) {
-                state.emit_settings().log_error();
+                state.emit_settings(true).log_error();
             }
             state
         });
@@ -204,7 +204,7 @@ async fn process_changes(changed: &HashSet<PathBuf>) -> Result<()> {
     /* if settings_changed {
         log::info!("Seelen Settings changed");
         self.read_settings();
-        self.emit_settings()?;
+        self.emit_settings(true)?;
     } */
 
     Ok(())

@@ -136,6 +136,15 @@ where
     V: Clone,
 {
     #[inline]
+    pub fn get_cloned<Q: ?Sized>(&self, key: &Q) -> Option<V>
+    where
+        K: Borrow<Q>,
+        Q: Eq + Hash,
+    {
+        self.0.lock().get(key).cloned()
+    }
+
+    #[inline]
     pub fn to_hash_map(&self) -> HashMap<K, V> {
         self.0.lock().clone()
     }

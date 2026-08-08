@@ -377,6 +377,18 @@ widget:
   extra_instances: 额外实例
   instance: 实例
   instances: 实例
+task_switcher:
+  application_list:
+    title: 当前运行的应用
+    description: 点击按钮即可将应用加入或移出筛选列表。
+    search: 搜索当前运行的应用
+    refresh: 刷新应用列表
+    add: 添加到筛选列表
+    remove: 从筛选列表移除
+    empty: 没有匹配的运行中应用
+    load_failed: 无法加载当前运行的应用
+    no_path: 无法获取可执行文件路径
+    windows: "{{count}} 个窗口"
 wm:
   animations:
     duration: 动画时长（毫秒）

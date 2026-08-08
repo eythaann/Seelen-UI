@@ -1,6 +1,6 @@
 use std::sync::{
     atomic::{AtomicBool, Ordering},
-    LazyLock,
+    Arc, LazyLock,
 };
 
 use seelen_core::{
@@ -22,7 +22,7 @@ pub static GAME_MODE_ACTIVE: AtomicBool = AtomicBool::new(false);
 
 pub struct WidgetManager {
     /// group of widgets instances by widget resource id
-    pub deployments: SyncHashMap<WidgetId, WidgetDeployment>,
+    pub deployments: SyncHashMap<WidgetId, Arc<WidgetDeployment>>,
 }
 
 impl WidgetManager {
@@ -38,25 +38,24 @@ impl WidgetManager {
 
     pub fn is_ready(&self, label: &WidgetWebviewLabel) -> bool {
         self.deployments
-            .get(&label.widget_id, |deploy| {
-                deploy.pods.any(|(key, pod)| key == label && pod.is_ready())
-            })
+            .get_cloned(&label.widget_id)
+            .map(|deploy| deploy.pods.any(|(key, pod)| key == label && pod.is_ready()))
             .unwrap_or(false)
     }
 
     pub fn set_status(&self, label: &WidgetWebviewLabel, status: WidgetStatus) {
-        self.deployments.get(&label.widget_id, |deploy| {
+        if let Some(deploy) = self.deployments.get_cloned(&label.widget_id) {
             deploy.pods.get(label, |instance| {
                 instance.set_status(status);
             });
-        });
+        }
     }
 
     pub fn suspend_all(&self) {
         GAME_MODE_ACTIVE.store(true, Ordering::Release);
-        self.deployments.for_each(|(_, deploy)| {
+        for deploy in self.deployments.values() {
             deploy.pods.clear();
-        });
+        }
     }
 
     pub fn resume_all(&self) -> Result<()> {
@@ -86,7 +85,7 @@ impl WidgetManager {
 
             if !self.deployments.contains_key(&id) {
                 self.deployments
-                    .upsert(id.clone(), WidgetDeployment::new(widget));
+                    .upsert(id.clone(), Arc::new(WidgetDeployment::new(widget)));
             }
         }
 
@@ -105,15 +104,15 @@ impl WidgetManager {
                 WidgetId::known_toolbar(),
                 WidgetId::known_weg(),
             ] {
-                WIDGET_MANAGER.deployments.get(&priority, |deployment| {
-                    reconcile(deployment);
-                });
+                if let Some(deployment) = WIDGET_MANAGER.deployments.get_cloned(&priority) {
+                    reconcile(&deployment);
+                }
             }
 
-            // All other widgets
-            WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
-                reconcile(deployment);
-            });
+            // Clone the Arc handles while locked, then perform webview work outside the map lock.
+            for deployment in WIDGET_MANAGER.deployments.values() {
+                reconcile(&deployment);
+            }
         });
 
         Ok(())

@@ -18,10 +18,12 @@ use crate::{
 use super::AppSettings;
 
 impl AppSettings {
-    pub(super) fn emit_settings(&self) -> Result<()> {
+    pub(super) fn emit_settings(&self, reconcile_widgets: bool) -> Result<()> {
         emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
         SeelenUI::on_settings_change(self)?;
-        WIDGET_MANAGER.reconcile().log_error();
+        if reconcile_widgets {
+            WIDGET_MANAGER.reconcile().log_error();
+        }
         WM_STATE.lock().on_settings_changed();
         Ok(())
     }
@@ -129,8 +131,12 @@ impl AppSettings {
     }
 
     pub fn write_settings(&self) -> Result<()> {
+        self.write_settings_with_reconcile(true)
+    }
+
+    pub fn write_settings_with_reconcile(&self, reconcile_widgets: bool) -> Result<()> {
         self.settings.save(SEELEN_COMMON.settings_path())?;
-        self.emit_settings()?;
+        self.emit_settings(reconcile_widgets)?;
         Ok(())
     }
 }

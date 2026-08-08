@@ -424,6 +424,18 @@ widget:
   extra_instances: Extra Instances
   instance: Instance
   instances: Instances
+task_switcher:
+  application_list:
+    title: Running applications
+    description: Add or remove the visible applications with one click.
+    search: Search running applications
+    refresh: Refresh application list
+    add: Add to filter
+    remove: Remove from filter
+    empty: No matching running applications
+    load_failed: Could not load running applications
+    no_path: Executable path unavailable
+    windows: "{{count}} window(s)"
 wm:
   animations:
     duration: Animation Duration (ms)
