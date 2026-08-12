@@ -379,9 +379,9 @@ checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "base64"
-version = "0.23.0"
+version = "0.23.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b25655df2c3cdd83c5e5b293b88acd880332b2ddadd7c30ac43144fdc0033da9"
+checksum = "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5"
 
 [[package]]
 name = "battery"
@@ -5310,7 +5310,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "015b206bdf2cddc9c0916cbe47b82f335ef9e8901855e263fbbf7e3a93d5eef3"
 dependencies = [
  "anyhow",
- "base64 0.23.0",
+ "base64 0.23.1",
  "bytes",
  "chrono",
  "compact_str",
@@ -5388,7 +5388,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4b84cf138372528688a80180ab954d156676f05bc0cd5661516eee241fc251b7"
 dependencies = [
  "async-trait",
- "base64 0.23.0",
+ "base64 0.23.1",
  "brotli",
  "bytes",
  "chardetng",
@@ -5599,7 +5599,7 @@ dependencies = [
 name = "seelen-core"
 version = "2.8.2"
 dependencies = [
- "base64 0.23.0",
+ "base64 0.23.1",
  "chrono",
  "futures",
  "grass",
@@ -5627,7 +5627,7 @@ version = "2.8.2"
 dependencies = [
  "arc-swap",
  "backtrace",
- "base64 0.23.0",
+ "base64 0.23.1",
  "battery",
  "clap",
  "crossbeam-channel",
@@ -6112,7 +6112,7 @@ dependencies = [
 name = "slu-utils"
 version = "2.8.2"
 dependencies = [
- "base64 0.23.0",
+ "base64 0.23.1",
  "minisign",
  "sha2",
 ]
