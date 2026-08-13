@@ -2,6 +2,10 @@
 
 ## [2.8.3-dev]
 
+### fix
+
+- launched apps not seeing environment variable changes made after Seelen UI started.
+
 ## [2.8.2]
 
 ### features

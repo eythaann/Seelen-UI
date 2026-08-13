@@ -24,7 +24,8 @@ use widestring::U16CStr;
 use windows_core::{Interface, Owned};
 
 use std::{
-    ffi::OsString,
+    collections::{HashMap, HashSet},
+    ffi::{c_void, OsString},
     os::windows::ffi::{OsStrExt, OsStringExt},
     path::{Path, PathBuf},
     thread::sleep,
@@ -1033,6 +1034,83 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// Recomputes the environment block that a freshly logged-on user would have (machine +
+    /// user registry variables, correctly expanded and merged, plus the variables Windows
+    /// computes dynamically and never stores in the registry, e.g. `USERNAME`, `SESSIONNAME`,
+    /// `PSModulePath`) and applies the diff to the current process, so that processes spawned
+    /// afterwards (which inherit this process' environment block) see up to date values
+    /// instead of the ones that were inherited when this process was started.
+    ///
+    /// This mimics what `explorer.exe` does when it receives a `WM_SETTINGCHANGE` message,
+    /// since Win32 APIs like `ShellExecuteExW`/`CreateProcessW` don't offer a "use fresh
+    /// environment" flag and otherwise always inherit the caller's environment block. It uses
+    /// the same `CreateEnvironmentBlock` API Windows itself uses to build a logon environment,
+    /// instead of hand-rolling registry reads, so variable expansion order and inclusion of
+    /// non-registry variables match what the OS would actually produce.
+    pub fn refresh_environment_variables() {
+        use windows::Win32::System::Environment::{
+            CreateEnvironmentBlock, DestroyEnvironmentBlock,
+        };
+
+        let Ok(token) = Self::open_current_process_token() else {
+            log::warn!("refresh_environment_variables: failed to open current process token");
+            return;
+        };
+
+        let mut block: *mut c_void = std::ptr::null_mut();
+        let new_vars = unsafe {
+            if let Err(err) = CreateEnvironmentBlock(&mut block, Some(*token), false) {
+                log::warn!("refresh_environment_variables: CreateEnvironmentBlock failed: {err}");
+                return;
+            }
+            let vars = Self::parse_environment_block(block as *const u16);
+            if let Err(err) = DestroyEnvironmentBlock(block) {
+                log::warn!("refresh_environment_variables: DestroyEnvironmentBlock failed: {err}");
+            }
+            vars
+        };
+
+        let new_keys: HashSet<String> = new_vars
+            .keys()
+            .map(|name| name.to_ascii_uppercase())
+            .collect();
+
+        for (name, value) in &new_vars {
+            std::env::set_var(name, value);
+        }
+
+        for (name, _) in std::env::vars() {
+            if !new_keys.contains(&name.to_ascii_uppercase()) {
+                std::env::remove_var(name);
+            }
+        }
+    }
+
+    /// Parses a double-null-terminated block of `NAME=VALUE\0` wide strings, as returned by
+    /// `CreateEnvironmentBlock`, into a name/value map.
+    unsafe fn parse_environment_block(mut ptr: *const u16) -> HashMap<String, String> {
+        let mut vars = HashMap::new();
+        unsafe {
+            loop {
+                let mut len = 0usize;
+                while *ptr.add(len) != 0 {
+                    len += 1;
+                }
+                if len == 0 {
+                    break;
+                }
+                let entry = String::from_utf16_lossy(std::slice::from_raw_parts(ptr, len));
+                if let Some((name, value)) = entry.split_once('=') {
+                    if !name.is_empty() {
+                        vars.insert(name.to_string(), value.to_string());
+                    }
+                }
+                ptr = ptr.add(len + 1);
+            }
+        }
+        vars
+    }
+
     pub fn execute(
         program: String,
         args: Option<String>,
@@ -1040,6 +1118,7 @@ impl WindowsApi {
         elevated: bool,
     ) -> Result<()> {
         log::trace!("Running: {program:?} with args: {args:?} in working dir: {working_dir:?}");
+        Self::refresh_environment_variables();
 
         let program = WindowsString::from_str(&program);
         let args = args.map(WindowsString::from);
