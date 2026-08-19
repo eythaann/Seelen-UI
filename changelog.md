@@ -2,6 +2,10 @@
 
 ## [2.8.3-dev]
 
+### enhancements
+
+- load native taskbar pins, for new users.
+
 ### fix
 
 - launched apps not seeing environment variable changes made after Seelen UI started.

@@ -143,7 +143,7 @@ impl StartMenuManager {
             }
 
             if file_type.is_file() {
-                let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, _)| t);
+                let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, ..)| t);
                 // Get display name from filename without extension
                 let display_name = path
                     .file_stem()

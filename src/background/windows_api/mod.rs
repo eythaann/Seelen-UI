@@ -570,8 +570,8 @@ impl WindowsApi {
         Ok(app_info)
     }
 
-    /// return the program and arguments
-    pub fn resolve_lnk_target(lnk_path: &Path) -> Result<(PathBuf, OsString)> {
+    /// return the program, arguments and working directory as stored in the shortcut
+    pub fn resolve_lnk_target(lnk_path: &Path) -> Result<(PathBuf, OsString, PathBuf)> {
         Com::run_with_context(|| {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
             let lnk_wide = lnk_path
@@ -591,7 +591,15 @@ impl WindowsApi {
             let mut arguments = WindowsString::new_to_fill(1024);
             unsafe { shell_link.GetArguments(arguments.as_mut_slice())? };
 
-            Ok((target_path.to_os_string().into(), arguments.to_os_string()))
+            let mut working_dir = WindowsString::new_to_fill(1024);
+            unsafe { shell_link.GetWorkingDirectory(working_dir.as_mut_slice())? };
+            let working_dir = Self::resolve_environment_variables(&working_dir)?;
+
+            Ok((
+                target_path.to_os_string().into(),
+                arguments.to_os_string(),
+                working_dir.to_os_string().into(),
+            ))
         })
     }
 

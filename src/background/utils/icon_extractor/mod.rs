@@ -481,7 +481,7 @@ fn _extract_and_save_icon_from_file(origin: &Path) -> Result<()> {
         let has_custom_icon = WindowsApi::resolve_lnk_custom_icon_path(origin).is_ok();
 
         if !has_custom_icon {
-            let (target, _) = WindowsApi::resolve_lnk_target(origin)?;
+            let (target, ..) = WindowsApi::resolve_lnk_target(origin)?;
             _extract_and_save_icon_from_file(&target)?;
             RESOURCES.add_system_icon_redirect(umid, origin, &target);
             return Ok(());

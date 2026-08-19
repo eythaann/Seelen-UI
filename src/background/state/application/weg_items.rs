@@ -9,9 +9,9 @@ use uuid::Uuid;
 
 use crate::{
     error::{Result, ResultLogExt},
-    exposed::get_windows_taskbar_pinned_apps,
     modules::apps::application::msix::MsixAppsManager,
     utils::{atomic_write_file, constants::SEELEN_COMMON},
+    widgets::weg::native_taskbar::get_windows_taskbar_pinned_apps,
 };
 
 pub static WEG_ITEMS_MANAGER: LazyLock<WegItemsManager> = LazyLock::new(|| {

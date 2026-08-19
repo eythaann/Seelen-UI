@@ -1,6 +1,7 @@
 pub mod cli;
 pub mod handler;
 pub mod hook;
+pub mod native_taskbar;
 
 use slu_ipc::messages::SvcAction;
 
