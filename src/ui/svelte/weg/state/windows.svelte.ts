@@ -22,11 +22,15 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   }
 });
 
-const _topInteractableWindow = $derived(
-  interactables.value
-    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
-    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic),
-);
+const _topInteractableWindow = $derived.by(() => {
+  const fg = focused.value;
+  if (!fg) return null;
+  const app = interactables.value.find((w) => w.hwnd === fg.hwnd);
+  if (app && app.monitor === widget.decoded.monitorId && !app.isIconic) {
+    return app;
+  }
+  return null;
+});
 
 const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
   const monitorId = widget.decoded.monitorId;

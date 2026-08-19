@@ -168,6 +168,8 @@ impl UserAppsManager {
             WinEvent::SystemForeground => {
                 let now = now_millis();
                 data.last_foreground_at = now;
+                let window = Window::from(data.hwnd);
+                data.is_fullscreen = window.is_fullscreen();
                 true
             }
             WinEvent::SystemMinimizeStart => {

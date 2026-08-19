@@ -25,7 +25,7 @@
     if (value) {
       invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.TopMost });
     } else {
-      invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Bottom });
+      invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.NoTopMost });
     }
   }, 200);
 
@@ -34,6 +34,7 @@
   });
 
   onMount(() => {
+    invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.TopMost });
     Widget.self.ready().then(() => {
       settingsState.isReady = true;
     });

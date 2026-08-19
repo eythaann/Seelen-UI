@@ -7,11 +7,15 @@ export { focused, interactables, widgetStatuses, windowsColors };
 
 const widget = Widget.getCurrent();
 
-const _topInteractableWindow = $derived(
-  interactables.value
-    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
-    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic),
-);
+const _topInteractableWindow = $derived.by(() => {
+  const fg = focused.value;
+  if (!fg) return null;
+  const app = interactables.value.find((w) => w.hwnd === fg.hwnd);
+  if (app && app.monitor === widget.decoded.monitorId && !app.isIconic) {
+    return app;
+  }
+  return null;
+});
 
 const _thereIsMaximizedOnBg = $derived(
   interactables.value.some(
