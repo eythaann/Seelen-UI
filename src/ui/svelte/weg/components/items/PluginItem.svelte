@@ -138,6 +138,7 @@
       id={item.id}
       role="button"
       tabindex="0"
+      data-plugin-id={item.plugin}
       class="weg-item"
       class:weg-item-medium={payload.canvasSize === CanvasSize.Medium}
       class:weg-item-large={payload.canvasSize === CanvasSize.Large}

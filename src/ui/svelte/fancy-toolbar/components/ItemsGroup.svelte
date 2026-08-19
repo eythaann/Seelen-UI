@@ -19,7 +19,7 @@
       {@const cached = plugins.value.find((p) => p.id === entry)}
       {#if cached}
         {@const module = { ...(cached.plugin as ToolbarItem), id: entry }}
-        <SortableItem {module} {index} />
+        <SortableItem {module} {index} pluginId={entry} />
       {/if}
     {:else}
       <SortableItem module={entry} {index} />

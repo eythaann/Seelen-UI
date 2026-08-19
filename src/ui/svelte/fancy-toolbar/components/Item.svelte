@@ -30,9 +30,10 @@
   interface Props {
     module: ToolbarItem;
     sortable?: ReturnType<typeof createSortable> | null;
+    pluginId?: string;
   }
 
-  let { module: self, sortable = null }: Props = $props();
+  let { module: self, sortable = null, pluginId }: Props = $props();
 
   const noopAttach = () => {};
 
@@ -185,6 +186,7 @@
       {@attach sortable?.attach ?? noopAttach}
       role="button"
       tabindex="0"
+      data-plugin-id={pluginId}
       data-dragging={sortable?.isDragging}
       data-tooltip={tooltip}
       data-tooltip-align-x="Center"

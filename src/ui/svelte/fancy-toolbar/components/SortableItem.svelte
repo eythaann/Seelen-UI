@@ -8,9 +8,10 @@
   interface Props {
     module: ToolbarItem;
     index: number;
+    pluginId?: string;
   }
 
-  let { module, index }: Props = $props();
+  let { module, index, pluginId }: Props = $props();
 
   const sortable = createSortable({
     get id() {
@@ -26,4 +27,4 @@
   });
 </script>
 
-<Item {module} {sortable} />
+<Item {module} {sortable} {pluginId} />

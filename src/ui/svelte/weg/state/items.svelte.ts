@@ -30,14 +30,23 @@ export const HARDCODED_SEPARATOR_RIGHT: SeparatorWegItem = {
 };
 
 function getStateFromStored(state: WegItems): OptimisticDockState {
+  // check used for duplicate ids
+  const seen = new Set<string>([HARDCODED_SEPARATOR_LEFT.id, HARDCODED_SEPARATOR_RIGHT.id]);
+  const sanitize = (items: WegItem[]) =>
+    items.filter((item) => {
+      if (seen.has(item.id)) return false;
+      seen.add(item.id);
+      return true;
+    });
+
   return {
     isReorderDisabled: state.isReorderDisabled,
     items: [
-      ...state.left,
+      ...sanitize(state.left),
       HARDCODED_SEPARATOR_LEFT,
-      ...state.center,
+      ...sanitize(state.center),
       HARDCODED_SEPARATOR_RIGHT,
-      ...state.right,
+      ...sanitize(state.right),
     ],
   };
 }
