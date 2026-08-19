@@ -79,6 +79,11 @@ subscribe(SeelenEvent.PluginEnabled, (e) => {
   dockStateActions.addPlugin(e.payload);
 });
 
+subscribe(SeelenEvent.WegItemsChanged, (e) => {
+  // Reload the entire dock state from the backend
+  _dockState = getStateFromStored(e.payload);
+});
+
 let isRemoteUpdate = false;
 listen<SyncPayload>("hidden::sync-dock-items", ({ payload }) => {
   if (payload.source === CLIENT_ID) return;

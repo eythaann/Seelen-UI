@@ -6,6 +6,7 @@ use tauri_plugin_shell::ShellExt;
 use crate::{
     app::{emit_to_webviews, get_app_handle},
     error::Result,
+    state::application::WEG_ITEMS_MANAGER,
     windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
@@ -67,4 +68,17 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
 
     emit_to_webviews(SeelenEvent::WegAddItem, &item);
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn weg_import_pinned_taskbar_items() -> Result<usize> {
+    let count = WEG_ITEMS_MANAGER.import_from_windows_taskbar()?;
+
+    // Emit event to notify all webviews about the updated items
+    if count > 0 {
+        let items = WEG_ITEMS_MANAGER.get();
+        emit_to_webviews(SeelenEvent::WegItemsChanged, items);
+    }
+
+    Ok(count)
 }

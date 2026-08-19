@@ -1,3 +1,4 @@
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settings } from "../../../../state/mod";
 import type { SeelenWegSettings } from "@seelen-ui/lib/types";
 
@@ -27,4 +28,11 @@ export function patchWegConfig(patch: Partial<SeelenWegSettings>) {
  */
 export function getWegConfig(): SeelenWegSettings {
   return settings.value.byWidget["@seelen/weg"];
+}
+
+/**
+ * Imports pinned items from Windows taskbar
+ */
+export async function importFromWindowsTaskbar(): Promise<number> {
+  return await invoke(SeelenCommand.WegImportPinnedTaskbarItems);
 }

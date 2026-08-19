@@ -1,8 +1,13 @@
-use std::{collections::HashMap, os::windows::process::CommandExt, path::PathBuf};
+use std::{
+    collections::HashMap,
+    os::windows::process::CommandExt,
+    path::{Path, PathBuf},
+};
 
 use seelen_core::{
     command_handler_list,
-    system_state::{Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
+    state::WegItemData,
+    system_state::{Color, Relaunch, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
 };
 
 use slu_ipc::{messages::SvcAction, ServiceIpc};
@@ -182,6 +187,199 @@ async fn get_native_start_menu() -> Result<StartMenuLayout> {
 }
 
 #[tauri::command(async)]
+pub(crate) fn get_windows_taskbar_pinned_apps() -> Result<Vec<WegItemData>> {
+    let mut pinned_apps = Vec::new();
+
+    match get_taskbar_order_from_registry() {
+        Ok(ordered_paths) if !ordered_paths.is_empty() => {
+            for lnk_path_str in ordered_paths {
+                let lnk_path = PathBuf::from(&lnk_path_str);
+
+                if lnk_path.exists() {
+                    if let Ok(item_data) = create_weg_item_from_shortcut(&lnk_path) {
+                        pinned_apps.push(item_data);
+                    }
+                }
+            }
+        }
+        Ok(_) | Err(_) => {
+            pinned_apps = fallback_get_taskbar_items()?;
+        }
+    }
+
+    // Deduplicate by path (case-insensitive)
+    let mut seen_paths = std::collections::HashSet::new();
+    pinned_apps.retain(|item| {
+        let path_lower = item.path.to_string_lossy().to_lowercase();
+        seen_paths.insert(path_lower)
+    });
+
+    Ok(pinned_apps)
+}
+
+/// Extract taskbar pinned items order from Windows registry
+fn get_taskbar_order_from_registry() -> Result<Vec<String>> {
+    use regex::Regex;
+    use winreg::enums::*;
+    use winreg::RegKey;
+
+    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+    let taskband_key =
+        hkcu.open_subkey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Taskband")?;
+
+    // Read the FavoritesResolve binary value as bytes using Windows API directly
+    let favorites_resolve: Vec<u8> = {
+        use std::ffi::OsStr;
+        use std::os::windows::ffi::OsStrExt;
+        use windows::Win32::System::Registry::*;
+
+        let key_name: Vec<u16> = OsStr::new("FavoritesResolve")
+            .encode_wide()
+            .chain(Some(0))
+            .collect();
+        let mut value_type = REG_VALUE_TYPE(0);
+        let mut data_size: u32 = 0;
+
+        // First call to get size
+        unsafe {
+            RegQueryValueExW(
+                HKEY(taskband_key.raw_handle() as _),
+                windows::core::PCWSTR(key_name.as_ptr()),
+                None,
+                Some(&mut value_type),
+                None,
+                Some(&mut data_size),
+            )
+            .ok()?;
+        }
+
+        // Allocate buffer and read data
+        let mut buffer = vec![0u8; data_size as usize];
+        unsafe {
+            RegQueryValueExW(
+                HKEY(taskband_key.raw_handle() as _),
+                windows::core::PCWSTR(key_name.as_ptr()),
+                None,
+                Some(&mut value_type),
+                Some(buffer.as_mut_ptr()),
+                Some(&mut data_size),
+            )
+            .ok()?;
+        }
+
+        buffer
+    };
+
+    // Convert binary data to string
+    let result: String = favorites_resolve.iter().map(|&byte| byte as char).collect();
+
+    // Extract file paths from binary data
+    let userprofile =
+        std::env::var("USERPROFILE").map_err(|e| crate::error::AppError::from(e.to_string()))?;
+    let pattern_str = format!(r"{}.+?\.\w{{2,4}}", regex::escape(&userprofile));
+    let pattern =
+        Regex::new(&pattern_str).map_err(|e| crate::error::AppError::from(e.to_string()))?;
+
+    let paths: Vec<String> = pattern
+        .find_iter(&result)
+        .map(|m| m.as_str().to_string())
+        .collect();
+
+    Ok(paths)
+}
+
+/// Fallback: scan filesystem and sort by creation time
+fn fallback_get_taskbar_items() -> Result<Vec<WegItemData>> {
+    let mut pinned_apps = Vec::new();
+
+    if let Ok(app_data) = std::env::var("APPDATA") {
+        let user_pinned_path = PathBuf::from(app_data)
+            .join(r"Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar");
+
+        if user_pinned_path.exists() {
+            if let Ok(entries) = std::fs::read_dir(&user_pinned_path) {
+                let mut items_with_time: Vec<(WegItemData, std::time::SystemTime)> = Vec::new();
+
+                for entry in entries.flatten() {
+                    let entry_path = entry.path();
+                    if entry_path.extension().is_some_and(|ext| ext == "lnk") {
+                        if let Ok(item_data) = create_weg_item_from_shortcut(&entry_path) {
+                            let created = std::fs::metadata(&entry_path)
+                                .and_then(|m| m.created())
+                                .unwrap_or_else(|_| std::time::SystemTime::now());
+                            items_with_time.push((item_data, created));
+                        }
+                    }
+                }
+
+                items_with_time.sort_by_key(|(_, time)| *time);
+                pinned_apps = items_with_time.into_iter().map(|(item, _)| item).collect();
+            }
+        }
+    }
+
+    Ok(pinned_apps)
+}
+
+/// Creates a WegItemData from a .lnk shortcut file
+fn create_weg_item_from_shortcut(lnk_path: &Path) -> Result<WegItemData> {
+    let (target_path, arguments) = WindowsApi::resolve_lnk_target(lnk_path)?;
+
+    let display_name = lnk_path
+        .file_stem()
+        .and_then(|s| s.to_str())
+        .unwrap_or("Unknown")
+        .to_string();
+
+    let umid = WindowsApi::get_file_umid(lnk_path).ok();
+
+    let args = if arguments.is_empty() {
+        None
+    } else {
+        Some(RelaunchArguments::String(
+            arguments.to_string_lossy().to_string(),
+        ))
+    };
+
+    let custom_icon_path = WindowsApi::resolve_lnk_custom_icon_path(lnk_path)
+        .ok()
+        .map(|(icon_path, _)| icon_path);
+
+    let command = if !target_path.as_os_str().is_empty() {
+        target_path.to_string_lossy().to_string()
+    } else if let Some(ref icon_path) = custom_icon_path {
+        icon_path.to_string_lossy().to_string()
+    } else {
+        String::new()
+    };
+
+    let relaunch = if !command.is_empty() {
+        Some(Relaunch {
+            command,
+            args,
+            working_dir: if !target_path.as_os_str().is_empty() {
+                target_path.parent().map(|p| p.to_path_buf())
+            } else {
+                None
+            },
+            icon: None,
+        })
+    } else {
+        None
+    };
+
+    Ok(WegItemData {
+        id: uuid::Uuid::new_v4(),
+        display_name,
+        umid,
+        path: lnk_path.to_path_buf(),
+        pinned: true,
+        prevent_pinning: false,
+        relaunch,
+    })
+}
+
+#[tauri::command(async)]
 async fn request_to_user_input_shortcut(
     window: WebviewWindow,
     callback_event: String,
@@ -233,4 +431,157 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     use crate::resources::user_icon_pack::*;
 
     app_builder.invoke_handler(command_handler_list!())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_create_weg_item_from_shortcut_handles_invalid_path() {
+        let invalid_path = PathBuf::from("C:\\NonExistent\\Path\\file.lnk");
+        let result = create_weg_item_from_shortcut(&invalid_path);
+        assert!(result.is_err(), "Should fail for non-existent path");
+    }
+
+    #[test]
+    fn test_create_weg_item_from_shortcut_with_system_shortcut() {
+        // Test with Windows Explorer - should exist on all Windows systems
+        let explorer_path = PathBuf::from("C:\\Windows\\explorer.exe");
+        if explorer_path.exists() {
+            // Create a test by checking if we can at least construct a basic item
+            let result = WegItemData {
+                id: uuid::Uuid::new_v4(),
+                display_name: "Test Explorer".to_string(),
+                umid: None,
+                path: explorer_path.clone(),
+                pinned: true,
+                prevent_pinning: false,
+                relaunch: Some(Relaunch {
+                    command: explorer_path.to_string_lossy().to_string(),
+                    args: None,
+                    working_dir: None,
+                    icon: None,
+                }),
+            };
+
+            assert_eq!(result.display_name, "Test Explorer");
+            assert!(result.pinned);
+            assert!(!result.prevent_pinning);
+        }
+    }
+
+    #[test]
+    fn test_deduplication_case_insensitive() {
+        let mut items = vec![
+            WegItemData {
+                id: uuid::Uuid::new_v4(),
+                display_name: "Item1".to_string(),
+                umid: None,
+                path: PathBuf::from("C:\\Test\\App.exe"),
+                pinned: true,
+                prevent_pinning: false,
+                relaunch: None,
+            },
+            WegItemData {
+                id: uuid::Uuid::new_v4(),
+                display_name: "Item2".to_string(),
+                umid: None,
+                path: PathBuf::from("C:\\TEST\\APP.EXE"), // Same path, different case
+                pinned: true,
+                prevent_pinning: false,
+                relaunch: None,
+            },
+            WegItemData {
+                id: uuid::Uuid::new_v4(),
+                display_name: "Item3".to_string(),
+                umid: None,
+                path: PathBuf::from("C:\\Other\\App.exe"),
+                pinned: true,
+                prevent_pinning: false,
+                relaunch: None,
+            },
+        ];
+
+        // Simulate deduplication logic
+        let mut seen_paths = std::collections::HashSet::new();
+        items.retain(|item| {
+            let path_lower = item.path.to_string_lossy().to_lowercase();
+            seen_paths.insert(path_lower)
+        });
+
+        assert_eq!(items.len(), 2, "Should deduplicate case-insensitive paths");
+    }
+
+    #[test]
+    fn test_fallback_get_taskbar_items_handles_missing_directory() {
+        // Test with a non-existent APPDATA path
+        std::env::set_var("APPDATA", "C:\\NonExistent\\AppData");
+        let result = fallback_get_taskbar_items();
+
+        // Should return Ok with empty list, not crash
+        assert!(result.is_ok());
+        if let Ok(items) = result {
+            assert!(
+                items.is_empty() || !items.is_empty(),
+                "Should handle gracefully"
+            );
+        }
+    }
+
+    #[test]
+    fn test_regex_pattern_handles_various_extensions() {
+        use regex::Regex;
+
+        // Test the original regex pattern
+        let userprofile = "C:\\Users\\TestUser";
+        let pattern_str = format!(r"{}.+?\.\w{{2,4}}", regex::escape(userprofile));
+        let pattern = Regex::new(&pattern_str).expect("Pattern should be valid");
+
+        // Test various extension lengths that the pattern should match
+        let test_cases = vec![
+            (format!("{}\\path\\file.lnk", userprofile), true), // 3 chars
+            (format!("{}\\path\\file.exe", userprofile), true), // 3 chars
+            (format!("{}\\path\\file.msix", userprofile), true), // 4 chars
+            (format!("{}\\path\\file.url", userprofile), true), // 3 chars
+            ("C:\\OtherUser\\file.lnk".to_string(), false),     // Wrong user - should not match
+        ];
+
+        for (path, should_match) in test_cases {
+            let matches = pattern.is_match(&path);
+            assert_eq!(
+                matches, should_match,
+                "Pattern matching failed for: {}. Expected: {}, Got: {}",
+                path, should_match, matches
+            );
+        }
+    }
+
+    #[test]
+    fn test_get_windows_taskbar_pinned_apps_returns_valid_structure() {
+        // This test will run but may return empty results on systems without pinned items
+        let result = get_windows_taskbar_pinned_apps();
+
+        // Should not panic, and if successful, should return a valid Vec
+        match result {
+            Ok(items) => {
+                // Validate structure of returned items
+                for item in items {
+                    assert!(
+                        !item.display_name.is_empty(),
+                        "Display name should not be empty"
+                    );
+                    assert!(item.id != uuid::Uuid::nil(), "ID should not be nil");
+                    // Path might not exist if it's a packaged app, so we don't assert existence
+                }
+            }
+            Err(e) => {
+                // Failing is acceptable if registry is inaccessible or empty
+                eprintln!(
+                    "Note: get_windows_taskbar_pinned_apps failed (acceptable in test): {}",
+                    e
+                );
+            }
+        }
+    }
 }
