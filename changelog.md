@@ -5,6 +5,8 @@
 ### enhancements
 
 - load native taskbar pins, for new users.
+- show task switcher on the monitor where the cursor is positioned.
+- add option to filter task switcher apps by the active monitor.
 
 ### fix
 

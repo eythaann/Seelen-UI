@@ -1,9 +1,13 @@
-.task-switcher-overlay {
+.task-switcher-window {
   width: 100vw;
   height: 100vh;
+}
+
+.task-switcher-monitor {
   display: grid;
   place-items: center;
-  padding: 5vw;
+  box-sizing: border-box;
+  padding: 2rem;
 }
 
 .task-switcher {

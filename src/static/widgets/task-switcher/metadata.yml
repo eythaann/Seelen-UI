@@ -6,7 +6,11 @@ metadata:
 instances: Single
 loader: Internal
 preset: Overlay
-hidden: true
+settings:
+  - type: switch
+    key: onlyOnActiveMonitor
+    label: !extend i18n/settings/only-on-active-monitor.yml
+    defaultValue: false
 shortcuts:
   - id: task-switcher-next-auto
     command: ["task-switcher", "select-next-task", "--auto-confirm"]
