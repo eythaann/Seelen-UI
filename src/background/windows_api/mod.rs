@@ -21,7 +21,8 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
-use windows_core::{Interface, Owned};
+use windows_core::{Interface, Owned, RuntimeType};
+use windows_future::{AsyncStatus, IAsyncOperation};
 
 use std::{
     collections::{HashMap, HashSet},
@@ -36,7 +37,8 @@ use windows::{
     core::{BSTR, GUID, PCWSTR},
     ApplicationModel::AppInfo,
     Storage::Streams::{
-        DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
+        DataReader, DataWriter, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
+        InMemoryRandomAccessStream, RandomAccessStreamReference,
     },
     Wdk::System::{
         SystemServices::PROCESS_EXTENDED_BASIC_INFORMATION,
@@ -101,11 +103,12 @@ use windows::{
                 KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                FindWindowExW, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
-                IsIconic, IsWindow, IsWindowVisible, IsZoomed, PostMessageW, SendMessageW,
-                SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS,
+                DispatchMessageW, FindWindowExW, GetClassNameW, GetDesktopWindow,
+                GetForegroundWindow, GetParent, GetWindow, GetWindowLongW, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, PeekMessageW, PostMessageW, SendMessageW, SetForegroundWindow,
+                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, TranslateMessage,
+                GWL_EXSTYLE, GWL_STYLE, GW_OWNER, MSG, PM_REMOVE, SET_WINDOW_POS_FLAGS,
                 SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
                 SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
                 SWP_NOZORDER, SW_SHOWNORMAL, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE,
@@ -147,6 +150,34 @@ macro_rules! hstring {
 
 pub struct WindowsApi {}
 impl WindowsApi {
+    /// Blocks the calling thread until `op` completes, like `.join()`, but pumps
+    /// the thread's window message queue while waiting instead of doing a plain
+    /// `WaitForSingleObject`.
+    ///
+    /// Some WinRT async operations (notably `Windows.ApplicationModel.DataTransfer`
+    /// clipboard APIs, which are a thin wrapper over the legacy USER32/OLE clipboard)
+    /// marshal their completion callback back onto the STA thread that started the
+    /// operation via a window message. `IAsyncOperation::join()` waits for that
+    /// completion with a raw `WaitForSingleObject`, which never dispatches the
+    /// message — so on an STA thread that isn't otherwise pumping (e.g. one created
+    /// with `Com::run_with_context` for a single one-off call), it deadlocks
+    /// forever. Use this instead of `.join()` for such calls.
+    pub fn join_pumped<T: RuntimeType + 'static>(op: &IAsyncOperation<T>) -> Result<T> {
+        loop {
+            if op.Status()? != AsyncStatus::Started {
+                return Ok(op.GetResults()?);
+            }
+            unsafe {
+                let mut msg = MSG::default();
+                while PeekMessageW(&mut msg, None, 0, 0, PM_REMOVE).as_bool() {
+                    let _ = TranslateMessage(&msg);
+                    DispatchMessageW(&msg);
+                }
+            }
+            std::thread::sleep(std::time::Duration::from_millis(1));
+        }
+    }
+
     pub fn module_handle_w() -> Result<HMODULE> {
         Ok(unsafe { GetModuleHandleW(None) }?)
     }
@@ -940,7 +971,7 @@ impl WindowsApi {
         let input_stream = stream.GetInputStreamAt(0)?;
         let data_reader = DataReader::CreateDataReader(&input_stream)?;
 
-        data_reader.LoadAsync(size as u32)?.join()?;
+        Self::join_pumped(&data_reader.LoadAsync(size as u32)?)?;
         data_reader.ReadBytes(&mut buffer)?;
 
         let image = image::load_from_memory(&buffer)?;
@@ -959,7 +990,7 @@ impl WindowsApi {
     }
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
-        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.join()?)
+        Self::extract_thumbnail_from_stream(Self::join_pumped(&stream.OpenReadAsync()?)?)
     }
 
     pub fn dynamic_image_to_webp_base64(image: image::DynamicImage) -> Result<String> {
@@ -972,9 +1003,30 @@ impl WindowsApi {
         Ok(STANDARD.encode(&buf))
     }
 
-    pub fn stream_ref_to_webp_base64(stream: IRandomAccessStreamReference) -> Result<String> {
-        let image = Self::stream_to_dynamic_image(stream.OpenReadAsync()?.join()?)?;
-        Self::dynamic_image_to_webp_base64(image)
+    /// Decodes a base64-encoded WebP image and wraps it as a
+    /// `IRandomAccessStreamReference` suitable for `DataPackage::SetBitmap`.
+    pub fn webp_base64_to_random_access_stream_ref(
+        base64_webp: &str,
+    ) -> Result<RandomAccessStreamReference> {
+        use base64::{engine::general_purpose::STANDARD, Engine};
+
+        let webp_bytes = STANDARD.decode(base64_webp)?;
+        let image = image::load_from_memory(&webp_bytes)?;
+
+        let mut png_bytes = Vec::new();
+        image.write_to(
+            &mut std::io::Cursor::new(&mut png_bytes),
+            image::ImageFormat::Png,
+        )?;
+
+        let stream = InMemoryRandomAccessStream::new()?;
+        let output = stream.GetOutputStreamAt(0)?;
+        let writer = DataWriter::CreateDataWriter(&output)?;
+        writer.WriteBytes(&png_bytes)?;
+        Self::join_pumped(&writer.StoreAsync()?)?;
+        Self::join_pumped(&output.FlushAsync()?)?;
+
+        RandomAccessStreamReference::CreateFromStream(&stream).map_err(Into::into)
     }
 
     pub fn lock_machine() -> Result<()> {

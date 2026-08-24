@@ -169,6 +169,8 @@ windows = { workspace = true, features = [
     "Networking_NetworkOperators",
     "Networking_Connectivity",
     "Security_Credentials",
+    "Security_Cryptography",
+    "Security_Cryptography_DataProtection",
     "Devices_Custom",
     "Devices_Bluetooth",
     "Devices_Bluetooth_Rfcomm",

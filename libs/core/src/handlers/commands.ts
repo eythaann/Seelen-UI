@@ -150,6 +150,8 @@ export enum SeelenCommand {
   ClipboardClearHistory = "clipboard_clear_history",
   ClipboardSetContent = "clipboard_set_content",
   ClipboardPaste = "clipboard_paste",
+  ClipboardPinEntry = "clipboard_pin_entry",
+  ClipboardUnpinEntry = "clipboard_unpin_entry",
   GetFonts = "get_fonts",
   GetFocusAssist = "get_focus_assist",
   SetFocusAssist = "set_focus_assist",

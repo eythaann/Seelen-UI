@@ -314,7 +314,9 @@ slu_commands_declaration! {
     ClipboardDeleteEntry = clipboard_delete_entry(id: String),
     ClipboardClearHistory = clipboard_clear_history(),
     ClipboardSetContent = clipboard_set_content(id: String),
-    ClipboardPaste = clipboard_paste(id: String),
+    ClipboardPaste = clipboard_paste(id: String, plain: bool),
+    ClipboardPinEntry = clipboard_pin_entry(id: String),
+    ClipboardUnpinEntry = clipboard_unpin_entry(id: String),
 
     // Fonts
     GetFonts = get_fonts() -> Vec<SeelenFont>,

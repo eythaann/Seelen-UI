@@ -2,6 +2,7 @@ use std::sync::atomic::{AtomicBool, AtomicIsize, AtomicU32, Ordering};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     System::{
+        DataExchange::AddClipboardFormatListener,
         Power::RegisterSuspendResumeNotification,
         RemoteDesktop::{WTSRegisterSessionNotification, NOTIFY_FOR_ALL_SESSIONS},
     },
@@ -11,9 +12,10 @@ use windows::Win32::{
             SHGetSpecialFolderLocation, SHCNRF_SOURCE,
         },
         WindowsAndMessaging::{
-            CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
-            RegisterClassW, RegisterShellHookWindow, RegisterWindowMessageW, TranslateMessage,
-            DEVICE_NOTIFY_WINDOW_HANDLE, MSG, WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_DESTROY,
+            ChangeWindowMessageFilterEx, CreateWindowExW, DefWindowProcW, DispatchMessageW,
+            GetMessageW, PostQuitMessage, RegisterClassW, RegisterShellHookWindow,
+            RegisterWindowMessageW, TranslateMessage, DEVICE_NOTIFY_WINDOW_HANDLE, MSG,
+            MSGFLT_ALLOW, WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_CLIPBOARDUPDATE, WM_DESTROY,
             WM_WTSSESSION_CHANGE, WNDCLASSW, WTS_SESSION_LOCK, WTS_SESSION_UNLOCK,
         },
     },
@@ -102,6 +104,20 @@ impl BgWindowProc {
         // Register for session change notifications (lock/unlock, user switch, etc.)
         // This is critical for pausing background threads when session is not interactive
         WTSRegisterSessionNotification(hwnd, NOTIFY_FOR_ALL_SESSIONS)?;
+
+        // Register to receive WM_CLIPBOARDUPDATE whenever the clipboard content
+        // changes. This is the reliable, package-identity-independent way to detect
+        // clipboard changes; the WinRT `Clipboard.ContentChanged` event does not
+        // fire for unpackaged Win32 apps like this one.
+        //
+        // If this process ever runs elevated, UIPI blocks WM_CLIPBOARDUPDATE from
+        // lower-integrity processes (e.g. a normal copy in Notepad) unless we
+        // explicitly allow it through the message filter.
+        match AddClipboardFormatListener(hwnd) {
+            Ok(()) => log::debug!("[event_window] registered clipboard format listener"),
+            Err(e) => log::error!("[event_window] AddClipboardFormatListener failed: {e}"),
+        }
+        ChangeWindowMessageFilterEx(hwnd, WM_CLIPBOARDUPDATE, MSGFLT_ALLOW, None).log_error();
 
         // Register for shell change notifications so that WM_TRASH_BIN_NOTIFY is sent
         // to the background window whenever the recycle bin contents change.

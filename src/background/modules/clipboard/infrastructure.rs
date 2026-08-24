@@ -40,19 +40,34 @@ pub fn clipboard_clear_history() -> Result<()> {
 }
 
 #[tauri::command(async)]
+pub fn clipboard_pin_entry(id: String) -> Result<()> {
+    get_clipboard_manager();
+    ClipboardManager::pin_entry(&id)
+}
+
+#[tauri::command(async)]
+pub fn clipboard_unpin_entry(id: String) -> Result<()> {
+    get_clipboard_manager();
+    ClipboardManager::unpin_entry(&id)
+}
+
+#[tauri::command(async)]
 pub fn clipboard_set_content(id: String) -> Result<()> {
     get_clipboard_manager();
-    ClipboardManager::set_clipboard_content(&id)
+    ClipboardManager::set_clipboard_content(&id, false)
 }
 
 /// Sets the given history entry as current clipboard content and simulates Ctrl+V
 /// so the previously focused window receives a paste event.
 /// A small delay is introduced to allow the widget to fully hide and focus to
 /// return to the target window before the keystrokes are sent.
+///
+/// When `plain` is `true`, only plain text is placed on the clipboard, so the
+/// target app receives plain text instead of any rich (HTML/RTF/...) content.
 #[tauri::command(async)]
-pub fn clipboard_paste(id: String) -> Result<()> {
+pub fn clipboard_paste(id: String, plain: bool) -> Result<()> {
     get_clipboard_manager();
-    ClipboardManager::set_clipboard_content(&id)?;
+    ClipboardManager::set_clipboard_content(&id, plain)?;
     Keyboard::new().send_keys("{ctrl}v").log_error();
     Ok(())
 }

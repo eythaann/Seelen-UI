@@ -1,29 +1,36 @@
-use std::{
-    collections::HashMap,
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        OnceLock,
-    },
+use std::sync::{
+    atomic::{AtomicBool, Ordering},
+    LazyLock, OnceLock,
 };
 
 use seelen_core::system_state::{ClipboardData, ClipboardEntry, ClipboardEntryContent};
+use slu_utils::{debounce, Debounce};
 use windows::{
+    core::HSTRING,
     ApplicationModel::DataTransfer::{
-        Clipboard, ClipboardHistoryChangedEventArgs, ClipboardHistoryItem,
-        ClipboardHistoryItemsResultStatus, DataPackageView, StandardDataFormats,
+        Clipboard, DataPackage, DataPackageView, StandardDataFormats,
     },
-    Foundation::EventHandler,
+    Foundation::{EventHandler, Uri},
     Win32::{
-        System::Com::{CoInitializeEx, COINIT_APARTMENTTHREADED},
-        UI::WindowsAndMessaging::{DispatchMessageW, GetMessageW, TranslateMessage, MSG},
+        System::DataExchange::GetClipboardOwner,
+        UI::WindowsAndMessaging::{
+            DispatchMessageW, GetMessageW, TranslateMessage, MSG, WM_CLIPBOARDUPDATE,
+        },
     },
 };
 
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    modules::clipboard::{
+        constants::{
+            CLIPBOARD_MAX_ENTRIES, CLIPBOARD_MAX_ENTRY_BYTES, CLIPBOARD_MAX_TOTAL_BYTES,
+            CLIPBOARD_PERSIST_DEBOUNCE,
+        },
+        persistence::{self, ClipboardStore},
+    },
     utils::lock_free::SyncHashMap,
-    windows_api::{types::DateTimeExt, WindowsApi},
+    windows_api::{event_window::subscribe_to_background_window, window::Window, Com, WindowsApi},
 };
 
 /// Runs `f` on a fresh STA thread and returns its result.
@@ -35,27 +42,44 @@ where
 {
     let (tx, rx) = std::sync::mpsc::channel();
     std::thread::spawn(move || {
-        unsafe {
-            let _ = CoInitializeEx(None, COINIT_APARTMENTTHREADED);
-        };
-        tx.send(f()).ok();
+        tx.send(Com::run_with_context(f)).ok();
     });
     rx.recv().map_err(|e| e.to_string())?
 }
 
+/// Runs `f` on a fresh STA thread, fire-and-forget: does not block the
+/// caller, just logs `context` on failure. Use for work whose result no one
+/// is waiting on (e.g. reacting to an incoming event), as opposed to
+/// [`sta_call`] which is for work the caller needs the result of.
+fn spawn_sta<F>(context: &'static str, f: F)
+where
+    F: FnOnce() -> Result<()> + Send + 'static,
+{
+    std::thread::spawn(move || {
+        if let Err(e) = Com::run_with_context(f) {
+            log::error!("[clipboard] {context} failed: {e}");
+        }
+    });
+}
+
 #[derive(Debug, Clone)]
 pub enum ClipboardEvent {
-    HistoryChanged,
+    EntriesChanged,
     EnabledChanged,
 }
 
 pub struct ClipboardManager {
-    /// Already-processed entries keyed by their Windows-assigned id.
-    /// Shared between the STA pump thread (event handler) and sta_call threads (get_data).
+    /// Our own clipboard history, keyed by our own generated id.
     pub entries: SyncHashMap<String, ClipboardEntry>,
+    /// Ids of entries pinned by the user, kept separate from `entries` so
+    /// pin state survives entry eviction/replacement without extra bookkeeping.
+    pub pinned_ids: SyncHashMap<String, ()>,
+    /// Whether Windows' *native* clipboard history is enabled. Kept only for
+    /// debugging/informational purposes — it no longer affects our capture,
+    /// since we listen to `WM_CLIPBOARDUPDATE` directly instead of the native
+    /// history API.
     pub history_enabled: AtomicBool,
 
-    history_changed_token: Option<i64>,
     history_enabled_token: Option<i64>,
 }
 
@@ -68,45 +92,76 @@ impl ClipboardManager {
     fn new() -> Self {
         Self {
             entries: SyncHashMap::new(),
+            pinned_ids: SyncHashMap::new(),
             history_enabled: AtomicBool::new(false),
-            history_changed_token: None,
             history_enabled_token: None,
         }
+    }
+
+    /// Debounces disk writes: repeated calls within [`CLIPBOARD_PERSIST_DEBOUNCE`]
+    /// of each other collapse into a single write of the current entries.
+    fn request_persist() {
+        static DEBOUNCER: LazyLock<Debounce<()>> = LazyLock::new(|| {
+            debounce(
+                |_| {
+                    let manager = ClipboardManager::instance();
+                    let store = ClipboardStore {
+                        items: manager.entries.values(),
+                        pinned_ids: manager.pinned_ids.keys(),
+                    };
+                    log::debug!(
+                        "[clipboard] persisting {} entries to disk",
+                        store.items.len()
+                    );
+                    match persistence::save_store(&store) {
+                        Ok(()) => {
+                            log::debug!("[clipboard] persisted clipboard history successfully")
+                        }
+                        Err(e) => {
+                            log::error!("[clipboard] failed to persist clipboard history: {e}")
+                        }
+                    }
+                },
+                CLIPBOARD_PERSIST_DEBOUNCE,
+            )
+        });
+        DEBOUNCER.call(());
     }
 
     pub fn instance() -> &'static Self {
         static MANAGER: OnceLock<ClipboardManager> = OnceLock::new();
         if MANAGER.get().is_none() {
+            log::debug!("[clipboard] starting ClipboardManager STA thread");
+
             // Clipboard WinRT APIs require an STA thread. Spawn a dedicated one
             // that initialises COM as STA, registers event listeners, then runs a
             // Windows message pump so that WinRT can dispatch event callbacks.
             let (ready_tx, ready_rx) = std::sync::mpsc::channel::<()>();
             std::thread::spawn(move || {
-                unsafe {
-                    let _ = CoInitializeEx(None, COINIT_APARTMENTTHREADED);
-                };
+                let _ = Com::run_with_context(|| {
+                    MANAGER.get_or_init(|| {
+                        let mut m = ClipboardManager::new();
+                        m.init().log_error();
+                        m
+                    });
 
-                MANAGER.get_or_init(|| {
-                    let mut m = ClipboardManager::new();
-                    m.init().log_error();
-                    m
-                });
+                    // Signal that the manager is ready before entering the pump.
+                    ready_tx.send(()).ok();
 
-                // Signal that the manager is ready before entering the pump.
-                ready_tx.send(()).ok();
-
-                // Pump messages so WinRT delivers HistoryChanged / HistoryEnabledChanged.
-                let mut msg = MSG::default();
-                loop {
-                    if unsafe { GetMessageW(&mut msg, None, 0, 0) }.as_bool() {
-                        unsafe {
-                            let _ = TranslateMessage(&msg);
-                            DispatchMessageW(&msg);
+                    // Pump messages so WinRT delivers HistoryEnabledChanged.
+                    let mut msg = MSG::default();
+                    loop {
+                        if unsafe { GetMessageW(&mut msg, None, 0, 0) }.as_bool() {
+                            unsafe {
+                                let _ = TranslateMessage(&msg);
+                                DispatchMessageW(&msg);
+                            }
+                        } else {
+                            break;
                         }
-                    } else {
-                        break;
                     }
-                }
+                    Ok(())
+                });
             });
 
             ready_rx.recv().ok();
@@ -120,137 +175,260 @@ impl ClipboardManager {
         ClipboardData {
             history,
             is_history_enabled: self.history_enabled.load(Ordering::SeqCst),
+            pinned_ids: self.pinned_ids.keys(),
         }
     }
 
-    /// Deletes the history entry with the given id.
+    /// Deletes the history entry with the given id from our own store.
     pub fn delete_entry(id: &str) -> Result<()> {
-        let id = id.to_owned();
-        sta_call(move || {
-            let result = Clipboard::GetHistoryItemsAsync()?.join()?;
-            if result.Status()? != ClipboardHistoryItemsResultStatus::Success {
-                return Ok(());
-            }
-            let items = result.Items()?;
-            for item in items {
-                if item.Id()? == id {
-                    Clipboard::DeleteItemFromHistory(&item)?;
-                    return Ok(());
-                }
-            }
-            Ok(())
-        })
+        let manager = Self::instance();
+        manager.entries.remove(id);
+        manager.pinned_ids.remove(id);
+        log::debug!("[clipboard] deleted entry {id}");
+        Self::send(ClipboardEvent::EntriesChanged);
+        Self::request_persist();
+        Ok(())
     }
 
-    /// Removes all entries from the clipboard history.
+    /// Removes all non-pinned entries from our own clipboard history store.
     pub fn clear_history() -> Result<()> {
-        sta_call(|| {
-            Clipboard::ClearHistory()?;
-            Ok(())
-        })
+        let manager = Self::instance();
+        manager
+            .entries
+            .retain(|(id, _)| manager.pinned_ids.contains_key(id));
+        log::debug!("[clipboard] cleared all non-pinned entries");
+        Self::send(ClipboardEvent::EntriesChanged);
+        Self::request_persist();
+        Ok(())
     }
 
-    /// Sets the given history entry as the current clipboard content.
-    pub fn set_clipboard_content(id: &str) -> Result<()> {
-        let id = id.to_owned();
+    /// Marks the given entry as pinned, exempting it from [`Self::clear_history`].
+    pub fn pin_entry(id: &str) -> Result<()> {
+        let manager = Self::instance();
+        if !manager.entries.contains_key(id) {
+            return Err("Clipboard entry not found".into());
+        }
+        manager.pinned_ids.upsert(id.to_owned(), ());
+        log::debug!("[clipboard] pinned entry {id}");
+        Self::send(ClipboardEvent::EntriesChanged);
+        Self::request_persist();
+        Ok(())
+    }
+
+    /// Removes the pinned status from the given entry.
+    pub fn unpin_entry(id: &str) -> Result<()> {
+        let manager = Self::instance();
+        manager.pinned_ids.remove(id);
+        log::debug!("[clipboard] unpinned entry {id}");
+        Self::send(ClipboardEvent::EntriesChanged);
+        Self::request_persist();
+        Ok(())
+    }
+
+    /// Sets the given history entry as the current Windows clipboard content,
+    /// rebuilding a `DataPackage` from what we have stored for it.
+    ///
+    /// When `plain` is `true`, only the plain text is restored, so a
+    /// subsequent paste always lands as plain text regardless of what rich
+    /// formats (HTML, RTF, bitmap, ...) the entry also has stored.
+    pub fn set_clipboard_content(id: &str, plain: bool) -> Result<()> {
+        let entry = Self::instance()
+            .entries
+            .get(id, |e| e.clone())
+            .ok_or("Clipboard entry not found")?;
+
+        log::debug!("[clipboard] setting clipboard content from entry {id} (plain={plain})");
         sta_call(move || {
-            let result = Clipboard::GetHistoryItemsAsync()?.join()?;
-            if result.Status()? != ClipboardHistoryItemsResultStatus::Success {
-                return Ok(());
+            let package = DataPackage::new()?;
+            let content = &entry.content;
+            let mut set_something = false;
+
+            if let Some(text) = &content.text {
+                package.SetText(&HSTRING::from(text.as_str()))?;
+                set_something = true;
             }
-            let items = result.Items()?;
-            for item in items {
-                if item.Id()? == id {
-                    Clipboard::SetHistoryItemAsContent(&item)?;
-                    return Ok(());
+
+            if !plain {
+                if let Some(html) = &content.html {
+                    package.SetHtmlFormat(&HSTRING::from(html.as_str()))?;
+                    set_something = true;
+                }
+                if let Some(rtf) = &content.rtf {
+                    package.SetRtf(&HSTRING::from(rtf.as_str()))?;
+                    set_something = true;
+                }
+                if let Some(bitmap) = &content.bitmap {
+                    let stream_ref = WindowsApi::webp_base64_to_random_access_stream_ref(bitmap)?;
+                    package.SetBitmap(&stream_ref)?;
+                    set_something = true;
+                }
+                if let Some(link) = &content.application_link {
+                    package.SetApplicationLink(&Uri::CreateUri(&HSTRING::from(link.as_str()))?)?;
+                    set_something = true;
+                }
+                if let Some(link) = &content.web_link {
+                    package.SetWebLink(&Uri::CreateUri(&HSTRING::from(link.as_str()))?)?;
+                    set_something = true;
                 }
             }
+
+            // We only ever stored file *names* for display, not their full
+            // paths, so we have no way to restore file items onto the
+            // clipboard here.
+            if !set_something && content.files.is_some() {
+                return Err("This entry only contains file names and can't be pasted back".into());
+            }
+
+            Clipboard::SetContent(&package)?;
             Ok(())
         })
     }
 
-    /// Processes a single WinRT history item into a [`ClipboardEntry`].
-    /// Must be called from an STA-initialised thread.
-    fn process_item(item: &ClipboardHistoryItem) -> Result<ClipboardEntry> {
-        let id = item.Id()?.to_string();
-        let timestamp = item.Timestamp()?.to_unix_ms();
-        let content_view = item.Content()?;
+    /// Processes the current WinRT clipboard view into a [`ClipboardEntry`].
+    /// `owner_hwnd` is the clipboard owner window (via `GetClipboardOwner`) captured
+    /// at the time of the clipboard change, used to resolve the source app's name,
+    /// app user model id and executable path. Must be called from an STA-initialised
+    /// thread.
+    fn process_view(view: &DataPackageView, owner_hwnd: isize) -> Result<ClipboardEntry> {
+        let (source_app_name, source_app_umid, source_app_path) = if owner_hwnd != 0 {
+            let window = Window::from(owner_hwnd);
+            let name = window.app_display_name().ok().filter(|s| !s.is_empty());
+            let umid = window.app_user_model_id().map(|umid| umid.to_string());
+            let path = window
+                .process()
+                .program_path()
+                .ok()
+                .map(|p| p.to_string_lossy().to_string());
+            (name, umid, path)
+        } else {
+            (None, None, None)
+        };
 
-        let props = content_view.Properties()?;
-        let source_app_name = props
-            .ApplicationName()
-            .ok()
-            .map(|s| s.to_string())
-            .filter(|s| !s.is_empty());
+        // Fall back to the WinRT-provided application name, which is only ever
+        // populated when the source app explicitly set it via `DataPackage`
+        // (mostly packaged apps using the WinRT clipboard APIs directly).
+        let source_app_name = source_app_name.or_else(|| {
+            view.Properties()
+                .ok()?
+                .ApplicationName()
+                .ok()
+                .map(|s| s.to_string())
+                .filter(|s| !s.is_empty())
+        });
 
-        let source_app_logo = props
-            .Square30x30Logo()
-            .ok()
-            .and_then(|logo_ref| WindowsApi::stream_ref_to_webp_base64(logo_ref).ok());
-
-        let content = get_content_from_view(&content_view)?;
+        let content = get_content_from_view(view)?;
 
         Ok(ClipboardEntry {
-            id,
-            timestamp,
+            id: uuid::Uuid::new_v4().to_string(),
+            timestamp: now_ms(),
             source_app_name,
-            source_app_logo,
+            source_app_umid,
+            source_app_path,
             content,
         })
     }
 
-    fn fetch_history() -> Result<HashMap<String, ClipboardHistoryItem>> {
-        let result = Clipboard::GetHistoryItemsAsync()?.join()?;
-        if result.Status()? != ClipboardHistoryItemsResultStatus::Success {
-            return Err("Failed to read clipboard history".into());
+    /// Called for every message received by the shared background window.
+    /// WinRT's `Clipboard.ContentChanged` event does not reliably fire for
+    /// unpackaged Win32 apps like this one, so we instead rely on the classic
+    /// `WM_CLIPBOARDUPDATE` notification (see `AddClipboardFormatListener` in
+    /// `windows_api::event_window`), which works regardless of package identity.
+    fn on_bg_window_proc(msg: u32, _w_param: usize, _l_param: isize) -> Result<()> {
+        if msg != WM_CLIPBOARDUPDATE {
+            return Ok(());
         }
-
-        let items = result.Items()?;
-        let mut map = HashMap::new();
-        for item in items {
-            map.insert(item.Id()?.to_string(), item);
-        }
-
-        Ok(map)
+        log::debug!("[clipboard] WM_CLIPBOARDUPDATE received");
+        // Capture the clipboard owner now, while it still reflects the app that
+        // just changed the clipboard content, rather than inside the spawned
+        // thread where it could already have changed again.
+        let owner_hwnd = unsafe { GetClipboardOwner() }
+            .map(|hwnd| hwnd.0 as isize)
+            .unwrap_or(0);
+        // Handle on a dedicated, throwaway thread instead of `sta_call`'s
+        // blocking wait: this callback runs on the *shared* background-window
+        // dispatch thread that every other module's events also go through
+        // (trash bin, power, shell hook, ...). If clipboard processing ever
+        // blocks or is slow, doing it inline here would stall every one of
+        // them, not just clipboard, for as long as it takes (or forever).
+        spawn_sta("failed to process clipboard content change", move || {
+            Self::handle_content_changed(owner_hwnd)
+        });
+        Ok(())
     }
 
-    fn on_history_changed(
-        _sender: windows_core::Ref<windows_core::IInspectable>,
-        _args: windows_core::Ref<ClipboardHistoryChangedEventArgs>,
-    ) -> windows_core::Result<()> {
-        let items = match Self::fetch_history() {
-            Ok(items) => items,
-            Err(e) => {
-                log::error!("Failed to read clipboard history: {e}");
-                return Ok(());
-            }
-        };
+    fn handle_content_changed(owner_hwnd: isize) -> Result<()> {
+        let view = Clipboard::GetContent()?;
+        let entry = Self::process_view(&view, owner_hwnd)?;
 
-        // Snapshot the old state; keys remaining at the end are removed entries.
-        let mut old_state = Self::instance().entries.to_hash_map();
-        let mut new_state = HashMap::new();
-
-        for (id, item) in items {
-            if let Some(entry) = old_state.remove(&id) {
-                // Already known — reuse without re-processing.
-                new_state.insert(id, entry);
-                continue;
-            }
-
-            // New item — process it for the first time.
-            match Self::process_item(&item) {
-                Ok(entry) => {
-                    new_state.insert(id, entry);
-                }
-                Err(e) => {
-                    log::error!("Failed to process clipboard entry: {e}");
-                }
-            }
+        let size = entry.content.approx_size();
+        if size > CLIPBOARD_MAX_ENTRY_BYTES {
+            log::debug!(
+                "[clipboard] skipping entry larger than the configured limit ({size} bytes > {CLIPBOARD_MAX_ENTRY_BYTES})"
+            );
+            return Ok(());
         }
 
-        Self::instance().entries.replace(new_state);
-        Self::send(ClipboardEvent::HistoryChanged);
+        let manager = Self::instance();
+        let fingerprint = entry.content.fingerprint();
+
+        // Look up and (depending on the outcome) update or insert under a
+        // single lock, so that two clipboard changes handled concurrently
+        // (each on its own thread, see `on_bg_window_proc`) can't both see
+        // "no duplicate" and insert the same content twice.
+        let is_new = manager.entries.with_lock(|map| {
+            if let Some((id, existing)) = map
+                .iter_mut()
+                .find(|(_, e)| e.content.fingerprint() == fingerprint)
+            {
+                log::debug!(
+                    "[clipboard] duplicate content, bumping timestamp of existing entry {id}"
+                );
+                existing.timestamp = entry.timestamp;
+                false
+            } else {
+                log::debug!(
+                    "[clipboard] inserting new entry {} (size={size} bytes, app={:?})",
+                    entry.id,
+                    entry.source_app_name
+                );
+                map.insert(entry.id.clone(), entry);
+                true
+            }
+        });
+
+        if is_new {
+            Self::evict_if_needed();
+        }
+
+        Self::send(ClipboardEvent::EntriesChanged);
+        Self::request_persist();
+        log::debug!("[clipboard] entries count now = {}", manager.entries.len());
         Ok(())
+    }
+
+    /// Evicts the oldest entries until both the entry-count and total-size
+    /// limits are satisfied.
+    fn evict_if_needed() {
+        let manager = Self::instance();
+        manager.entries.with_lock(|map| loop {
+            let over_count = map.len() > CLIPBOARD_MAX_ENTRIES;
+            let total_size: usize = map.values().map(|e| e.content.approx_size()).sum();
+            let over_size = total_size > CLIPBOARD_MAX_TOTAL_BYTES;
+
+            if !over_count && !over_size {
+                break;
+            }
+
+            let Some(oldest_id) = map.values().min_by_key(|e| e.timestamp).map(|e| e.id.clone())
+            else {
+                break;
+            };
+
+            log::debug!(
+                "[clipboard] evicting oldest entry {oldest_id} (over_count={over_count}, over_size={over_size})"
+            );
+            map.remove(&oldest_id);
+        });
     }
 
     fn on_history_enabled_changed(
@@ -258,6 +436,7 @@ impl ClipboardManager {
         _args: windows_core::Ref<windows_core::IInspectable>,
     ) -> windows_core::Result<()> {
         if let Ok(enabled) = Clipboard::IsHistoryEnabled() {
+            log::debug!("[clipboard] native IsHistoryEnabled changed -> {enabled}");
             Self::instance()
                 .history_enabled
                 .store(enabled, Ordering::SeqCst);
@@ -267,62 +446,78 @@ impl ClipboardManager {
     }
 
     fn init(&mut self) -> Result<()> {
-        self.history_enabled
-            .store(Clipboard::IsHistoryEnabled()?, Ordering::SeqCst);
+        self.history_enabled.store(
+            Clipboard::IsHistoryEnabled().unwrap_or_default(),
+            Ordering::SeqCst,
+        );
+        log::debug!(
+            "[clipboard] init: native IsHistoryEnabled={}",
+            self.history_enabled.load(Ordering::SeqCst)
+        );
 
-        let items = Self::fetch_history()?;
-        for (id, item) in items {
-            let entry = Self::process_item(&item)?;
-            self.entries.upsert(id, entry);
+        let store = persistence::load_store();
+        log::debug!(
+            "[clipboard] init: loaded {} entries ({} pinned) from disk",
+            store.items.len(),
+            store.pinned_ids.len()
+        );
+        for entry in store.items {
+            self.entries.upsert(entry.id.clone(), entry);
         }
-
-        self.history_changed_token = Some(Clipboard::HistoryChanged(&EventHandler::new(
-            Self::on_history_changed,
-        ))?);
+        for id in store.pinned_ids {
+            self.pinned_ids.upsert(id, ());
+        }
 
         self.history_enabled_token = Some(Clipboard::HistoryEnabledChanged(&EventHandler::new(
             Self::on_history_enabled_changed,
         ))?);
 
+        subscribe_to_background_window(Self::on_bg_window_proc);
+
+        log::debug!("[clipboard] init done, listening for WM_CLIPBOARDUPDATE");
         Ok(())
     }
 }
 
 impl Drop for ClipboardManager {
     fn drop(&mut self) {
-        if let Some(token) = self.history_changed_token.take() {
-            Clipboard::RemoveHistoryChanged(token).log_error();
-        }
         if let Some(token) = self.history_enabled_token.take() {
             Clipboard::RemoveHistoryEnabledChanged(token).log_error();
         }
     }
 }
 
+fn now_ms() -> i64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_millis() as i64)
+        .unwrap_or_default()
+}
+
 fn get_content_from_view(view: &DataPackageView) -> Result<ClipboardEntryContent> {
     let mut content = ClipboardEntryContent::default();
 
     if view.Contains(&StandardDataFormats::Text()?)? {
-        if let Ok(text) = view.GetTextAsync()?.join() {
+        if let Ok(text) = WindowsApi::join_pumped(&view.GetTextAsync()?) {
             content.text = Some(text.to_string());
         }
     }
 
     if view.Contains(&StandardDataFormats::Html()?)? {
-        if let Ok(html) = view.GetHtmlFormatAsync()?.join() {
+        if let Ok(html) = WindowsApi::join_pumped(&view.GetHtmlFormatAsync()?) {
             content.html = Some(html.to_string());
         }
     }
 
     if view.Contains(&StandardDataFormats::Rtf()?)? {
-        if let Ok(rtf) = view.GetRtfAsync()?.join() {
+        if let Ok(rtf) = WindowsApi::join_pumped(&view.GetRtfAsync()?) {
             content.rtf = Some(rtf.to_string());
         }
     }
 
     if view.Contains(&StandardDataFormats::Bitmap()?)? {
-        if let Ok(stream_ref) = view.GetBitmapAsync()?.join() {
-            let stream = stream_ref.OpenReadAsync()?.join()?;
+        if let Ok(stream_ref) = WindowsApi::join_pumped(&view.GetBitmapAsync()?) {
+            let stream = WindowsApi::join_pumped(&stream_ref.OpenReadAsync()?)?;
             let image = WindowsApi::stream_to_dynamic_image(stream)?;
             let data = WindowsApi::dynamic_image_to_webp_base64(image)?;
 
@@ -331,7 +526,7 @@ fn get_content_from_view(view: &DataPackageView) -> Result<ClipboardEntryContent
     }
 
     if view.Contains(&StandardDataFormats::StorageItems()?)? {
-        if let Ok(list) = view.GetStorageItemsAsync()?.join() {
+        if let Ok(list) = WindowsApi::join_pumped(&view.GetStorageItemsAsync()?) {
             let mut data = Vec::new();
             for item in list {
                 let name = item.Name()?.to_string();
@@ -343,13 +538,13 @@ fn get_content_from_view(view: &DataPackageView) -> Result<ClipboardEntryContent
     }
 
     if view.Contains(&StandardDataFormats::ApplicationLink()?)? {
-        if let Ok(uri) = view.GetApplicationLinkAsync()?.join() {
+        if let Ok(uri) = WindowsApi::join_pumped(&view.GetApplicationLinkAsync()?) {
             content.application_link = Some(uri.DisplayUri()?.to_string());
         }
     }
 
     if view.Contains(&StandardDataFormats::WebLink()?)? {
-        if let Ok(uri) = view.GetWebLinkAsync()?.join() {
+        if let Ok(uri) = WindowsApi::join_pumped(&view.GetWebLinkAsync()?) {
             content.web_link = Some(uri.DisplayUri()?.to_string());
         }
     }

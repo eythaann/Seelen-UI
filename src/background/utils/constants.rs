@@ -28,6 +28,7 @@ pub struct SeelenCommon {
     bundled_plugins: PathBuf,
     bundled_app_configs: PathBuf,
     wallpapers: PathBuf,
+    clipboard_history: PathBuf,
     widgets: PathBuf,
     bundled_widgets: PathBuf,
     sounds: PathBuf,
@@ -64,6 +65,7 @@ impl SeelenCommon {
             widgets: data_dir.join("widgets"),
             bundled_widgets: resource_dir.join("static/widgets"),
             wallpapers: data_dir.join("wallpapers"),
+            clipboard_history: data_dir.join("clipboard_history.bin"),
             // general
             data_dir,
             resource_dir,
@@ -140,6 +142,10 @@ impl SeelenCommon {
 
     pub fn user_wallpapers_path(&self) -> &Path {
         &self.wallpapers
+    }
+
+    pub fn clipboard_history_path(&self) -> &Path {
+        &self.clipboard_history
     }
 
     pub fn widget_data_dir(&self, id: &WidgetId) -> PathBuf {
