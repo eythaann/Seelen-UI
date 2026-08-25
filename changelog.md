@@ -11,6 +11,7 @@
 ### fix
 
 - launched apps not seeing environment variable changes made after Seelen UI started.
+- context menu metadata not being send for submenus.
 
 ## [2.8.2]
 

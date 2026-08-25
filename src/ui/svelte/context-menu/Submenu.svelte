@@ -17,6 +17,7 @@
         items: item.items,
         alignX: Alignment.Start,
         alignY: state.data?.alignY,
+        meta: state.data?.meta,
       },
       forwardTo: state.forwardTo || state.owner,
     });
