@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { Widget } from "@seelen-ui/lib";
   import type { ContextMenuItem, ContextMenuCallbackPayload } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { emitTo } from "@tauri-apps/api/event";
-  import { state as gState } from "./state.svelte";
+  import { state as gState, closeContextMenuChain } from "./state.svelte";
 
   interface MenuItemProps {
     item: Extract<ContextMenuItem, { type: "Item" }>;
@@ -43,7 +42,7 @@
     });
 
     if (item.checked === null) {
-      Widget.self.hide();
+      closeContextMenuChain();
     }
   }
 </script>

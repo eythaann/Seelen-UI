@@ -12,6 +12,7 @@
 
 - launched apps not seeing environment variable changes made after Seelen UI started.
 - context menu metadata not being send for submenus.
+- context menu not being close on submenu item interaction.
 
 ## [2.8.2]
 
