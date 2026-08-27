@@ -17,12 +17,10 @@ use windows::Win32::{
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
-        Input::KeyboardAndMouse::{keybd_event, KEYEVENTF_EXTENDEDKEY, KEYEVENTF_KEYUP, VK_MENU},
         Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
         WindowsAndMessaging::{
-            FindWindowW, GetClassNameW, GetForegroundWindow, GetWindowTextW, SetForegroundWindow,
-            SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-            SWP_NOACTIVATE, SWP_NOZORDER,
+            FindWindowW, GetClassNameW, GetWindowTextW, SetWindowPos, ShowWindow, ShowWindowAsync,
+            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER,
         },
     },
 };
@@ -54,40 +52,8 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn get_foreground_window() -> HWND {
-        unsafe { GetForegroundWindow() }
-    }
-
     pub fn set_foreground(addr: isize) -> Result<()> {
-        let target_hwnd = HWND(addr as _);
-        if !unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
-            // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
-            unsafe {
-                keybd_event(VK_MENU.0 as u8, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
-                keybd_event(
-                    VK_MENU.0 as u8,
-                    0x45,
-                    KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP,
-                    0,
-                );
-            }
-            // this can fail but still be successful.
-            let _ = unsafe { SetForegroundWindow(target_hwnd) };
-        }
-
-        // based on windows doc, get foreground can return null while window is losing activation
-        // so we wait until we get a valid window.
-        let mut focus_hwnd = Self::get_foreground_window();
-        let mut retries = 0;
-        while focus_hwnd != target_hwnd && retries < 10 {
-            std::thread::sleep(std::time::Duration::from_millis(1));
-            focus_hwnd = Self::get_foreground_window();
-            retries += 1;
-        }
-
-        if focus_hwnd != target_hwnd {
-            return Err("Failed to set foreground window".into());
-        }
+        slu_utils::windows::set_foreground(addr)?;
         Ok(())
     }
 

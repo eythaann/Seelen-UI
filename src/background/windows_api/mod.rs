@@ -106,13 +106,13 @@ use windows::{
                 DispatchMessageW, FindWindowExW, GetClassNameW, GetDesktopWindow,
                 GetForegroundWindow, GetParent, GetWindow, GetWindowLongW, GetWindowRect,
                 GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
-                IsZoomed, PeekMessageW, PostMessageW, SendMessageW, SetForegroundWindow,
-                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, TranslateMessage,
-                GWL_EXSTYLE, GWL_STYLE, GW_OWNER, MSG, PM_REMOVE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SW_SHOWNORMAL, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE,
-                WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
+                IsZoomed, PeekMessageW, PostMessageW, SendMessageW, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, TranslateMessage, GWL_EXSTYLE, GWL_STYLE,
+                GW_OWNER, MSG, PM_REMOVE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
+                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
+                WS_THICKFRAME,
             },
         },
     },
@@ -121,10 +121,7 @@ use windows::{
 use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
-    windows_api::{
-        input::Keyboard,
-        window::{event::WinEvent, Window},
-    },
+    windows_api::window::{event::WinEvent, Window},
 };
 
 #[macro_export]
@@ -154,14 +151,19 @@ impl WindowsApi {
     /// the thread's window message queue while waiting instead of doing a plain
     /// `WaitForSingleObject`.
     ///
-    /// Some WinRT async operations (notably `Windows.ApplicationModel.DataTransfer`
-    /// clipboard APIs, which are a thin wrapper over the legacy USER32/OLE clipboard)
-    /// marshal their completion callback back onto the STA thread that started the
-    /// operation via a window message. `IAsyncOperation::join()` waits for that
-    /// completion with a raw `WaitForSingleObject`, which never dispatches the
-    /// message — so on an STA thread that isn't otherwise pumping (e.g. one created
-    /// with `Com::run_with_context` for a single one-off call), it deadlocks
-    /// forever. Use this instead of `.join()` for such calls.
+    /// Needed specifically for reading the *live* clipboard `DataPackageView`
+    /// (see `clipboard::get_content_from_view`): its data may be served by
+    /// another process' `DataPackage`, in which case completion is marshaled
+    /// back to our STA thread via a window message. `IAsyncOperation::join()`
+    /// waits for that with a raw `WaitForSingleObject`, which never dispatches
+    /// the message — so on an STA thread that isn't otherwise pumping (e.g. one
+    /// created with `Com::run_with_context` for a single one-off call), it
+    /// deadlocks forever.
+    ///
+    /// Most other WinRT async calls in this codebase complete synchronously
+    /// (in-process, local data) and don't need this — use plain `.join()` for
+    /// those; reach for this only when profiling/testing shows the same
+    /// cross-process-completion deadlock.
     pub fn join_pumped<T: RuntimeType + 'static>(op: &IAsyncOperation<T>) -> Result<T> {
         loop {
             if op.Status()? != AsyncStatus::Started {
@@ -404,27 +406,7 @@ impl WindowsApi {
     pub fn set_foreground(target_hwnd: HWND) -> Result<()> {
         let window = Window::from(target_hwnd);
 
-        if !unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
-            // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
-            let keyboard = Keyboard::new();
-            keyboard.send_keys("{alt}")?;
-            // this can fail but still be successful.
-            let _ = unsafe { SetForegroundWindow(target_hwnd) };
-        }
-
-        // based on windows doc, get foreground can return null while window is losing activation
-        // so we wait until we get a valid window.
-        let mut focus_hwnd = Self::get_foreground_window();
-        let mut retries = 0;
-        while focus_hwnd != target_hwnd && retries < 10 {
-            std::thread::sleep(std::time::Duration::from_millis(1));
-            focus_hwnd = Self::get_foreground_window();
-            retries += 1;
-        }
-
-        if focus_hwnd != target_hwnd {
-            return Err("Failed to set foreground window".into());
-        }
+        slu_utils::windows::set_foreground(target_hwnd.0 as isize)?;
 
         // event sometimes is not emitted, so we manually emit it, this will cause 2 foreground events
         // if original was recieved, btw having it twice is better than nothing
@@ -971,7 +953,7 @@ impl WindowsApi {
         let input_stream = stream.GetInputStreamAt(0)?;
         let data_reader = DataReader::CreateDataReader(&input_stream)?;
 
-        Self::join_pumped(&data_reader.LoadAsync(size as u32)?)?;
+        data_reader.LoadAsync(size as u32)?.join()?;
         data_reader.ReadBytes(&mut buffer)?;
 
         let image = image::load_from_memory(&buffer)?;
@@ -990,7 +972,7 @@ impl WindowsApi {
     }
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
-        Self::extract_thumbnail_from_stream(Self::join_pumped(&stream.OpenReadAsync()?)?)
+        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.join()?)
     }
 
     pub fn dynamic_image_to_webp_base64(image: image::DynamicImage) -> Result<String> {
@@ -1023,8 +1005,8 @@ impl WindowsApi {
         let output = stream.GetOutputStreamAt(0)?;
         let writer = DataWriter::CreateDataWriter(&output)?;
         writer.WriteBytes(&png_bytes)?;
-        Self::join_pumped(&writer.StoreAsync()?)?;
-        Self::join_pumped(&output.FlushAsync()?)?;
+        writer.StoreAsync()?.join()?;
+        output.FlushAsync()?.join()?;
 
         RandomAccessStreamReference::CreateFromStream(&stream).map_err(Into::into)
     }

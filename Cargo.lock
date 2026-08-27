@@ -5724,6 +5724,7 @@ dependencies = [
  "win-hotkeys",
  "win-screenshot",
  "windows 0.62.2",
+ "windows-collections 0.3.2",
  "windows-core 0.62.2",
  "windows-future 0.3.2",
  "winreg",
@@ -6178,6 +6179,7 @@ dependencies = [
  "base64 0.23.1",
  "minisign",
  "sha2",
+ "windows 0.62.2",
 ]
 
 [[package]]

@@ -8,6 +8,12 @@ rust-version = "1.89"
 minisign = { workspace = true }
 sha2 = { workspace = true }
 base64 = { workspace = true }
+windows = { workspace = true, features = [
+  "Win32_Foundation",
+  "Win32_UI_WindowsAndMessaging",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_System_Threading",
+] }
 
 [lints]
 workspace = true

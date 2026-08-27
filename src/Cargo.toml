@@ -53,6 +53,7 @@ sysinfo = { workspace = true }
 battery = { workspace = true }
 winreg = { workspace = true }
 windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-collections = { workspace = true }
 windows-future = { workspace = true }
 win-screenshot = { workspace = true }
 base64 = { workspace = true }
@@ -151,6 +152,7 @@ windows = { workspace = true, features = [
     "Media_Effects",
     "Media_Control",
     "Storage",
+    "Storage_Search",
     "Storage_Streams",
     "Win32_Devices_Bluetooth",
     "Win32_Devices_Display",

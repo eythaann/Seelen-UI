@@ -1,5 +1,5 @@
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
+    atomic::{AtomicBool, AtomicU32, Ordering},
     LazyLock, OnceLock,
 };
 
@@ -8,9 +8,10 @@ use slu_utils::{debounce, Debounce};
 use windows::{
     core::HSTRING,
     ApplicationModel::DataTransfer::{
-        Clipboard, DataPackage, DataPackageView, StandardDataFormats,
+        Clipboard, DataPackage, DataPackageOperation, DataPackageView, StandardDataFormats,
     },
     Foundation::{EventHandler, Uri},
+    Storage::{IStorageItem, StorageFile, StorageFolder},
     Win32::{
         System::DataExchange::GetClipboardOwner,
         UI::WindowsAndMessaging::{
@@ -61,6 +62,17 @@ where
         }
     });
 }
+
+/// Counts clipboard writes we ourselves originated (via [`ClipboardManager::set_clipboard_content`])
+/// that haven't yet been observed via `WM_CLIPBOARDUPDATE`. Incremented right
+/// before we call `Clipboard::SetContent`, decremented when the resulting
+/// notification arrives.
+///
+/// This can't be done by checking the clipboard owner window instead, because
+/// restoring an entry can be triggered by our own API/CLI without any of our
+/// windows being focused (or existing at all) at that moment, so there's no
+/// reliable "our window owns the clipboard" signal to check against.
+static PENDING_SELF_SETS: AtomicU32 = AtomicU32::new(0);
 
 #[derive(Debug, Clone)]
 pub enum ClipboardEvent {
@@ -238,8 +250,10 @@ impl ClipboardManager {
             .ok_or("Clipboard entry not found")?;
 
         log::debug!("[clipboard] setting clipboard content from entry {id} (plain={plain})");
-        sta_call(move || {
+        let result = sta_call(move || {
             let package = DataPackage::new()?;
+            package.SetRequestedOperation(DataPackageOperation::Copy)?;
+
             let content = &entry.content;
             let mut set_something = false;
 
@@ -272,16 +286,63 @@ impl ClipboardManager {
                 }
             }
 
-            // We only ever stored file *names* for display, not their full
-            // paths, so we have no way to restore file items onto the
-            // clipboard here.
-            if !set_something && content.files.is_some() {
-                return Err("This entry only contains file names and can't be pasted back".into());
+            if let Some(paths) = &content.files {
+                let mut items = Vec::with_capacity(paths.len());
+                for path in paths {
+                    let item = Self::storage_item_from_path(path)?;
+                    items.push(Some(item));
+                }
+                let items = windows_collections::IIterable::<IStorageItem>::from(items);
+                package.SetStorageItems(&items, false)?;
+                set_something = true;
             }
 
-            Clipboard::SetContent(&package)?;
-            Ok(())
-        })
+            if !set_something {
+                return Err("This entry has no restorable content".into());
+            }
+
+            // Mark this write as self-originated *before* handing it to the
+            // OS, so the `WM_CLIPBOARDUPDATE` it triggers is guaranteed to
+            // see the incremented counter whenever it arrives.
+            PENDING_SELF_SETS.fetch_add(1, Ordering::SeqCst);
+            let result = Clipboard::SetContent(&package).and_then(|_| Clipboard::Flush());
+            if result.is_err() {
+                // The write never reached the clipboard, so no matching
+                // notification will ever arrive to consume this count.
+                PENDING_SELF_SETS.fetch_sub(1, Ordering::SeqCst);
+            }
+            Ok(result?)
+        });
+
+        if result.is_ok() {
+            let manager = Self::instance();
+            if manager
+                .entries
+                .get(id, |e| e.timestamp = now_ms())
+                .is_some()
+            {
+                Self::send(ClipboardEvent::EntriesChanged);
+                Self::request_persist();
+            }
+        }
+
+        result
+    }
+
+    /// Resolves a filesystem path back into an `IStorageItem`, for restoring
+    /// file/folder clipboard entries.
+    fn storage_item_from_path(path: &str) -> Result<IStorageItem> {
+        use windows_core::Interface;
+
+        let is_dir = std::path::Path::new(path).is_dir();
+        let path = HSTRING::from(path);
+        if is_dir {
+            let folder = StorageFolder::GetFolderFromPathAsync(&path)?.join()?;
+            Ok(folder.cast::<IStorageItem>()?)
+        } else {
+            let file = StorageFile::GetFileFromPathAsync(&path)?.join()?;
+            Ok(file.cast::<IStorageItem>()?)
+        }
     }
 
     /// Processes the current WinRT clipboard view into a [`ClipboardEntry`].
@@ -338,6 +399,20 @@ impl ClipboardManager {
             return Ok(());
         }
         log::debug!("[clipboard] WM_CLIPBOARDUPDATE received");
+
+        // Consume one self-set credit, if any, instead of processing this as
+        // an externally-originated change. This is what stops restoring an
+        // entry (`set_clipboard_content`) from being re-captured as a brand
+        // new entry, which for bitmaps also caused a decode/re-encode loop
+        // that degraded the image a little more on every restore.
+        let was_self_set = PENDING_SELF_SETS
+            .fetch_update(Ordering::SeqCst, Ordering::SeqCst, |v| v.checked_sub(1))
+            .is_ok();
+        if was_self_set {
+            log::debug!("[clipboard] ignoring self-triggered clipboard update");
+            return Ok(());
+        }
+
         // Capture the clipboard owner now, while it still reflects the app that
         // just changed the clipboard content, rather than inside the spawned
         // thread where it could already have changed again.
@@ -361,6 +436,14 @@ impl ClipboardManager {
         let entry = Self::process_view(&view, owner_hwnd)?;
 
         let size = entry.content.approx_size();
+        if size == 0 {
+            log::debug!(
+                "[clipboard] skipping empty entry (app={:?})",
+                entry.source_app_name
+            );
+            return Ok(());
+        }
+
         if size > CLIPBOARD_MAX_ENTRY_BYTES {
             log::debug!(
                 "[clipboard] skipping entry larger than the configured limit ({size} bytes > {CLIPBOARD_MAX_ENTRY_BYTES})"
@@ -529,8 +612,8 @@ fn get_content_from_view(view: &DataPackageView) -> Result<ClipboardEntryContent
         if let Ok(list) = WindowsApi::join_pumped(&view.GetStorageItemsAsync()?) {
             let mut data = Vec::new();
             for item in list {
-                let name = item.Name()?.to_string();
-                data.push(name);
+                let path = item.Path()?.to_string();
+                data.push(path);
             }
 
             content.files = Some(data);
