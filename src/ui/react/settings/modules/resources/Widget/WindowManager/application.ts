@@ -1,5 +1,6 @@
 import { settings } from "../../../../state/mod";
 import type {
+  FloatingWindowSettings,
   PluginId,
   Rect,
   WindowManagerSettings,
@@ -95,4 +96,11 @@ export function setWmAnimations(animations: WmAnimations) {
  */
 export function setWmStackBarVisibility(stackBarVisibility: WmStackBarVisibility) {
   patchWmConfig({ stackBarVisibility });
+}
+
+/**
+ * Sets the initial size used for floating windows
+ */
+export function setWmFloatingSize(floating: FloatingWindowSettings) {
+  patchWmConfig({ floating });
 }

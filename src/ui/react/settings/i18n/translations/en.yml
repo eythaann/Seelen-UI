@@ -446,6 +446,10 @@ wm:
   drag_behavior_options:
     sort: Sort (reorder windows while dragging)
     swap: Swap (swap windows on drag end)
+  floating:
+    height: Floating Windows Height
+    title: Floating Windows Size
+    width: Floating Windows Width
   layout: Layout
   resize_delta: Resize Delta (%)
   space_between_containers: Space Between Containers

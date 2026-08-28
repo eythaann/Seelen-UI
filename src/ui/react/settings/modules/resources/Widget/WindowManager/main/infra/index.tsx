@@ -15,6 +15,7 @@ import { SettingsGroup, SettingsOption } from "../../../../../../components/Sett
 import { WmDragBehavior, WmStackBarVisibility } from "@seelen-ui/lib/types";
 
 import { WmAnimationsSettings } from "./Animations.tsx";
+import { WmFloatingSizeSettings } from "./FloatingSize.tsx";
 import { GlobalPaddings } from "./GlobalPaddings.tsx";
 import { LayoutSelector } from "./LayoutSelector.tsx";
 
@@ -73,6 +74,7 @@ export function WindowManagerSettings() {
       </SettingsGroup>
 
       <GlobalPaddings />
+      <WmFloatingSizeSettings />
       <BorderSettings />
 
       <SettingsGroup>

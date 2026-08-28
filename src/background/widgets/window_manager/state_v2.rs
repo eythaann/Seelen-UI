@@ -740,20 +740,30 @@ impl TwmState {
     }
 }
 
+// keep in sync with the bounds enforced by the settings GUI (380p - 720p)
+const FLOATING_MIN_WIDTH: f64 = 676.0;
+const FLOATING_MAX_WIDTH: f64 = 1280.0;
+const FLOATING_MIN_HEIGHT: f64 = 380.0;
+const FLOATING_MAX_HEIGHT: f64 = 720.0;
+
 pub fn twm_set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Result<()> {
     let guard = FULL_STATE.load();
     if !guard.settings.by_widget.wm.enabled {
         return Ok(());
     }
     let config = &guard.settings.by_widget.wm.floating;
+    let width = config.width.clamp(FLOATING_MIN_WIDTH, FLOATING_MAX_WIDTH);
+    let height = config
+        .height
+        .clamp(FLOATING_MIN_HEIGHT, FLOATING_MAX_HEIGHT);
 
     let monitor_dpi = monitor.scale_factor()?;
     let monitor_rect = monitor.rect()?;
     let monitor_width = monitor_rect.right - monitor_rect.left;
     let monitor_height = monitor_rect.bottom - monitor_rect.top;
 
-    let window_width = (config.width * monitor_dpi) as i32;
-    let window_height = (config.height * monitor_dpi) as i32;
+    let window_width = (width * monitor_dpi) as i32;
+    let window_height = (height * monitor_dpi) as i32;
 
     let x = monitor_rect.left + (monitor_width - window_width) / 2;
     let y = monitor_rect.top + (monitor_height - window_height) / 2;
