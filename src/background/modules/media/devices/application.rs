@@ -20,18 +20,29 @@ use windows_core::Interface;
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    utils::{lock_free::SyncHashMap, pcwstr},
-    windows_api::{process::Process, string_utils::WindowsString, Com},
+    utils::lock_free::SyncHashMap,
+    windows_api::{process::Process, string_utils::WindowsString, Com, ComThread},
 };
 
 use super::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType};
 
+/// Marks a COM interface pointer as movable across threads. Sound as long as no method is
+/// ever called on it from more than one thread at a time — true here: values wrapped in
+/// this only ever cross from the devices COM thread back to whichever thread asked for
+/// them, and from then on only that thread touches them (mirrors the `unsafe impl Send`
+/// already accepted below for `DevicesEvent`/`DevicesManager`).
+struct SendCom<T>(T);
+unsafe impl<T> Send for SendCom<T> {}
+
+pub struct DevicesManagerComState {
+    device_enumerator: IMMDeviceEnumerator,
+    mm_notification_client: IMMNotificationClient,
+}
+
 pub struct DevicesManager {
     inputs: SyncHashMap<String, MediaDevice>,
     outputs: SyncHashMap<String, MediaDevice>,
-
-    device_enumerator: IMMDeviceEnumerator,
-    mm_notification_client: IMMNotificationClient,
+    com: ComThread<DevicesManagerComState>,
 }
 
 #[derive(Debug, Clone)]
@@ -73,27 +84,41 @@ event_manager!(DevicesManager, DevicesEvent);
 
 impl DevicesManager {
     fn new() -> Result<Self> {
+        let com = ComThread::spawn("Devices COM", || {
+            Ok(DevicesManagerComState {
+                device_enumerator: Com::create_instance(&MMDeviceEnumerator)?,
+                mm_notification_client: DevicesManagerEvents.into(),
+            })
+        })?;
+
         Ok(Self {
             inputs: SyncHashMap::new(),
             outputs: SyncHashMap::new(),
-            device_enumerator: Com::create_instance(&MMDeviceEnumerator)?,
-            mm_notification_client: DevicesManagerEvents.into(),
+            com,
         })
     }
 
-    fn init(&mut self) -> Result<()> {
-        unsafe {
-            let collection = self
+    fn init(&self) -> Result<()> {
+        let devices = self.com.call(|state| unsafe {
+            let collection = state
                 .device_enumerator
                 .EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?;
 
+            let mut devices = Vec::new();
             for idx in 0..collection.GetCount()? {
-                // log instead propagate error to avoid panic if just some device fail to load
-                self.load_device(&collection.Item(idx)?).log_error();
+                devices.push(SendCom(collection.Item(idx)?));
             }
 
-            self.device_enumerator
-                .RegisterEndpointNotificationCallback(&self.mm_notification_client)?;
+            state
+                .device_enumerator
+                .RegisterEndpointNotificationCallback(&state.mm_notification_client)?;
+
+            Ok(devices)
+        })?;
+
+        for device in devices {
+            // log instead propagate error to avoid panic if just some device fail to load
+            self.load_device(&device.0).log_error();
         }
 
         let eid = Self::subscribe(|event| {
@@ -106,7 +131,7 @@ impl DevicesManager {
 
     pub fn instance() -> &'static Self {
         static MANAGER: LazyLock<DevicesManager> = LazyLock::new(|| {
-            let mut manager = DevicesManager::new().expect("Failed to create devices manager");
+            let manager = DevicesManager::new().expect("Failed to create devices manager");
             manager.init().log_error();
             manager
         });
@@ -122,7 +147,16 @@ impl DevicesManager {
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
-        unsafe { self.device_enumerator.GetDevice(pcwstr(device_id)) }.ok()
+        let device_id = device_id.to_owned();
+        self.com
+            .call(move |state| {
+                let device_id = WindowsString::from_str(&device_id);
+                Ok(SendCom(
+                    unsafe { state.device_enumerator.GetDevice(device_id.as_pcwstr()) }.ok(),
+                ))
+            })
+            .ok()
+            .and_then(|SendCom(device)| device)
     }
 
     pub fn set_volume_level(
@@ -219,13 +253,17 @@ impl DevicesManager {
             MediaDeviceType::Input => eCapture,
             MediaDeviceType::Output => eRender,
         };
-        unsafe {
-            self.device_enumerator
-                .GetDefaultAudioEndpoint(dataflow, role)
-                .and_then(|d| d.GetId())
-                .map(|id| id.to_hstring() == device.id)
-                .unwrap_or(false)
-        }
+        let device_id = device.id.clone();
+        self.com
+            .call(move |state| unsafe {
+                Ok(state
+                    .device_enumerator
+                    .GetDefaultAudioEndpoint(dataflow, role)
+                    .and_then(|d| d.GetId())
+                    .map(|id| id.to_hstring() == device_id)
+                    .unwrap_or(false))
+            })
+            .unwrap_or(false)
     }
 
     fn process_event(&self, event: DevicesEvent) -> Result<()> {
@@ -424,11 +462,17 @@ impl Drop for DevicesManager {
     fn drop(&mut self) {
         self.inputs.clear();
         self.outputs.clear();
-        unsafe {
-            self.device_enumerator
-                .UnregisterEndpointNotificationCallback(&self.mm_notification_client)
+        self.com
+            .call(|state| {
+                unsafe {
+                    state
+                        .device_enumerator
+                        .UnregisterEndpointNotificationCallback(&state.mm_notification_client)
+                }
                 .log_error();
-        }
+                Ok(())
+            })
+            .log_error();
     }
 }
 
