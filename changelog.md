@@ -13,6 +13,8 @@
 - launched apps not seeing environment variable changes made after Seelen UI started.
 - context menu metadata not being send for submenus.
 - context menu not being close on submenu item interaction.
+- toolbar showing the muted volume icon when there is no default audio output device.
+- default audio device flags being cleared when the new default device was not loaded yet.
 
 ## [2.8.2]
 
