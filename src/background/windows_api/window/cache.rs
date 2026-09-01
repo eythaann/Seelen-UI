@@ -10,8 +10,9 @@ use crate::{utils::get_parts_of_inline_command, windows_api::types::AppUserModel
 use super::Window;
 
 impl Window {
-    pub fn to_serializable(self: &Window) -> UserAppWindow {
-        let umid = self.app_user_model_id();
+    /// `Relaunch` info and `prevent_pinning` both only apply to windows with a
+    /// property-store assigned umid, so they're derived from it together.
+    pub fn relaunch_info(&self, umid: &Option<AppUserModelId>) -> (Option<Relaunch>, bool) {
         let mut prevent_pinning = false;
 
         let relaunch = match umid {
@@ -35,6 +36,13 @@ impl Window {
             }
             _ => None,
         };
+
+        (relaunch, prevent_pinning)
+    }
+
+    pub fn to_serializable(self: &Window) -> UserAppWindow {
+        let umid = self.app_user_model_id();
+        let (relaunch, prevent_pinning) = self.relaunch_info(&umid);
 
         UserAppWindow {
             hwnd: self.address(),

@@ -155,6 +155,17 @@ impl UserAppsManager {
             WinEvent::ObjectNameChange => {
                 let window = Window::from(data.hwnd);
                 data.title = window.title();
+
+                // Windows has no event for property-store changes, so we piggyback on the
+                // name change event to re-check the umid. Some apps (e.g. Firefox PWAs) only
+                // get their AppUserModelId assigned after the window is already created.
+                let umid = window.app_user_model_id();
+                data.app_name = window.app_display_name().unwrap_or_default();
+                let (relaunch, prevent_pinning) = window.relaunch_info(&umid);
+                data.relaunch = relaunch;
+                data.prevent_pinning = prevent_pinning;
+                data.umid = umid.map(|umid| umid.to_string());
+
                 true
             }
             WinEvent::SynDebouncedRectChange => {

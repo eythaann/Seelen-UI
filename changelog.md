@@ -2,6 +2,11 @@
 
 ## [2.8.4-dev]
 
+### fix
+
+- PWA windows (e.g. Firefox PWAs) grouped under their parent browser instead of being detected as separate apps when the
+  AppUserModelId is assigned after window creation.
+
 ## [2.8.3]
 
 ### enhancements

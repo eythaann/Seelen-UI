@@ -181,9 +181,13 @@ impl Window {
                     let info = AppInfo::GetFromAppUserModelId(&umid.into())?;
                     return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
                 }
-                AppUserModelId::PropertyStore(_) => {
+                AppUserModelId::PropertyStore(ref umid) => {
                     if let Some(display_name) = self.relaunch_display_name() {
                         return Ok(display_name);
+                    }
+                    let guard = StartMenuManager::instance();
+                    if let Some(item) = guard.get_by_file_umid(umid) {
+                        return Ok(item.display_name.clone());
                     }
                 }
             }
