@@ -206,13 +206,12 @@
         {:else}
           <EvaluatedComponents {content} />
         {/if}
-
-        {#if badge}
-          <div class="ft-bar-item-badge">
-            <EvaluatedComponents content={badge} />
-          </div>
-        {/if}
       </div>
+      {#if badge}
+        <div class="ft-bar-item-badge">
+          <EvaluatedComponents content={badge} />
+        </div>
+      {/if}
     </div>
   {/if}
 {/if}

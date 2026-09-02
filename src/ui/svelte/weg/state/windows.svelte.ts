@@ -30,9 +30,9 @@ const _topInteractableWindow = $derived(
 
 const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
   const monitorId = widget.decoded.monitorId;
-  const maximized = interactables.value.find(
-    (w) => !w.isIconic && w.isZoomed && w.monitor === monitorId,
-  );
+  const maximized = interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => !w.isIconic && w.isZoomed && w.monitor === monitorId);
   if (!maximized) return null;
   return windowsColors.value[maximized.hwnd] ?? null;
 });
