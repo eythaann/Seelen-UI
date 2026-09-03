@@ -8,8 +8,8 @@
   width: 12rem;
   overflow: hidden;
   transition: width 300ms ease;
-  background-color: var(--color-fixed-gray-900);
-  color: var(--color-fixed-gray-50);
+  background-color: light-dark(#00000008, #0000001a);
+  color: var(--color-gray-900);
 
   &.collapsed {
     width: 44px;
@@ -23,7 +23,7 @@
     gap: var(--spacing-xs);
     align-items: center;
 
-    border-bottom: 1px solid var(--color-fixed-gray-700);
+    border-bottom: 1px solid var(--color-gray-200);
 
     > img {
       width: min(28px, 100%);
@@ -79,7 +79,7 @@
     width: 100%;
     height: 1px;
     min-height: 1px;
-    background-color: var(--color-fixed-gray-700);
+    background-color: var(--color-gray-200);
   }
 
   .footer {
@@ -88,7 +88,7 @@
     gap: var(--spacing-s);
 
     padding: var(--spacing-xs);
-    border-top: 1px solid var(--color-fixed-gray-700);
+    border-top: 1px solid var(--color-gray-200);
   }
 }
 
@@ -108,11 +108,11 @@
   transition: background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    background-color: var(--system-accent-darker-color);
+    background-color: var(--system-accent-dark-color);
   }
 
   &.active {
-    background-color: var(--system-accent-dark-color);
+    background-color: var(--system-accent-color);
   }
 
   :global(.slu-icon) {
@@ -192,7 +192,7 @@
     .email {
       font-size: 0.7rem;
       line-height: 1em;
-      color: var(--color-fixed-gray-200);
+      color: var(--color-gray-700);
     }
   }
 

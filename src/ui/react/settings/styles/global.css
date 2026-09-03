@@ -1,12 +1,16 @@
-#root {
-  width: 100%;
-  height: 100%;
-}
-
 body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(217deg, var(--color-red-100), rgba(255, 0, 0, 0) 70%),
+    linear-gradient(127deg, var(--color-blue-100), rgba(0, 0, 255, 0) 70%),
+    linear-gradient(336deg, var(--color-cyan-100), rgba(0, 255, 0, 0) 70%);
 }
 
 /* Todo remove this after allowing the use of themes feature on settings */
