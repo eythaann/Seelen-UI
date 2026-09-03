@@ -36,6 +36,13 @@
 
   let canvas = $state<HTMLCanvasElement | null>(null);
   let canDraw = $state(false);
+  let canvasResizeRevision = $state(0);
+
+  function getCanvasResolutionScale(): number {
+    const itemSize = Math.max(Number(settingsState.value.size) || 0, 1);
+    const zoomSize = Math.max(Number(settingsState.value.zoomSize) || 0, itemSize);
+    return zoomSize / itemSize;
+  }
 
   let userSourceName = $derived.by(() => {
     const allByWidget = settingsState.allByWidget;
@@ -101,6 +108,14 @@
     const el = canvas;
     const observer = new ResizeObserver(() => {
       canDraw = !!el.clientWidth && !!el.clientHeight;
+
+      const zoomScale = getCanvasResolutionScale();
+      const dpr = Math.max(window.devicePixelRatio || 1, 1);
+      const requiredWidth = Math.ceil(el.clientWidth * dpr * zoomScale);
+      const requiredHeight = Math.ceil(el.clientHeight * dpr * zoomScale);
+      if (el.width < requiredWidth || el.height < requiredHeight) {
+        canvasResizeRevision += 1;
+      }
     });
     observer.observe(el);
     return () => observer.disconnect();
@@ -113,9 +128,16 @@
 
     // sub to all settings changes, like theme changes, etc.
     let _sub = settingsState.all;
+    canvasResizeRevision;
 
-    canvas.width = canvas.clientWidth * window.devicePixelRatio;
-    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+    const zoomScale = getCanvasResolutionScale();
+    const dpr = Math.max(window.devicePixelRatio || 1, 1);
+
+    // Dock magnification is applied with CSS transforms. Render enough backing
+    // pixels for the configured maximum scale so the browser never has to
+    // enlarge a low-resolution canvas during the animation.
+    canvas.width = Math.max(1, Math.ceil(canvas.clientWidth * dpr * zoomScale));
+    canvas.height = Math.max(1, Math.ceil(canvas.clientHeight * dpr * zoomScale));
 
     const computed = getComputedStyle(canvas);
     evalSanboxed(renderExec, {
