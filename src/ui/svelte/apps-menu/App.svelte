@@ -74,7 +74,9 @@
   });
 
   $effect(() => {
-    Widget.self.ready({ show: false });
+    if (!Widget.self.isReady) {
+      void Widget.self.ready({ show: false });
+    }
   });
 </script>
 
