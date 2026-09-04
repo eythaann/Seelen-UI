@@ -213,8 +213,12 @@ function mediaStep(data: Data): boolean {
   const defaultOutputDevice = mediaOutputs.find((d: any) => d.isDefaultMultimedia);
   const defaultInputDevice = mediaInputs.find((d: any) => d.isDefaultMultimedia);
   const defaultMediaSession = _mediaSessions.data?.find((d: any) => d.default);
-  const { volume = 0, muted: isMuted = true } = defaultOutputDevice || {};
-  const { volume: inputVolume = 0, muted: inputIsMuted = true } = defaultInputDevice || {};
+  // Defaulting `muted` to true when there is no default device makes "no output
+  // device" render with the very same muted icon as a device the user actually
+  // muted, so the toolbar reports a mute that does not exist. Falling back to
+  // false keeps volume at 0, which renders the distinct "no output" icon.
+  const { volume = 0, muted: isMuted = false } = defaultOutputDevice || {};
+  const { volume: inputVolume = 0, muted: inputIsMuted = false } = defaultInputDevice || {};
 
   data.defaultOutputDevice = defaultOutputDevice;
   data.defaultInputDevice = defaultInputDevice;

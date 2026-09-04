@@ -287,6 +287,17 @@ impl DevicesManager {
                     &self.outputs
                 };
 
+                // Windows can report a new default device before we have loaded it,
+                // e.g. a bluetooth endpoint that is still being enumerated. Flagging
+                // blindly would then clear the flag on every device and set it on
+                // none, leaving the UI with no default device at all.
+                if !device_id.is_empty()
+                    && !devices.contains_key(device_id)
+                    && let Some(raw) = self.get_raw_device(device_id)
+                {
+                    self.load_device(&raw).log_error();
+                }
+
                 devices.for_each(|(_, device)| {
                     if *role == eMultimedia {
                         device.is_default_multimedia = device.id == *device_id;
