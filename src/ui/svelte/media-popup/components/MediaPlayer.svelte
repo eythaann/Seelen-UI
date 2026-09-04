@@ -3,6 +3,7 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, FileIcon, iconPackManager } from "libs/ui/svelte/components/Icon";
   import { convertFileSrc } from "@tauri-apps/api/core";
+  import MediaProgress from "./MediaProgress.svelte";
 
   interface Props {
     session: MediaPlayer;
@@ -87,29 +88,32 @@
 <div
   class="media-session"
   style:background-color="rgb({filteredLuminance}, {filteredLuminance}, {filteredLuminance})"
+  style:color
 >
   <img class="media-session-blurred-thumbnail" src={thumbnailSrc} alt="" />
+
   <div class="media-session-thumbnail-container">
-    <FileIcon class="media-session-app-icon" umid={session.umid} title={session.owner.name} />
     <img class="media-session-thumbnail" src={thumbnailSrc} alt="" />
   </div>
 
-  <div class="media-session-info" style:color>
+  <div class="media-session-info">
     <h4 class="media-session-title">{session.title}</h4>
     <span class="media-session-author">{session.author}</span>
-    <div class="media-session-actions">
-      <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaPrev)}>
-        <Icon iconName="IoPlaySkipBack" {color} />
-      </button>
-      <button
-        data-skin="transparent"
-        onclick={() => onClickBtn(SeelenCommand.MediaTogglePlayPause)}
-      >
-        <Icon iconName={session.playing ? "IoPause" : "IoPlay"} {color} />
-      </button>
-      <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaNext)}>
-        <Icon iconName="IoPlaySkipForward" {color} />
-      </button>
-    </div>
+  </div>
+
+  <FileIcon class="media-session-app-icon" umid={session.umid} title={session.owner.name} />
+
+  <MediaProgress {session} />
+
+  <div class="media-session-actions">
+    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaPrev)}>
+      <Icon iconName="IoPlaySkipBack" />
+    </button>
+    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaTogglePlayPause)}>
+      <Icon iconName={session.playing ? "IoPause" : "IoPlay"} />
+    </button>
+    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaNext)}>
+      <Icon iconName="IoPlaySkipForward" />
+    </button>
   </div>
 </div>

@@ -2,6 +2,10 @@
 
 ## [2.8.4-dev]
 
+### enhancements
+
+- media player, seekable progress bar with live-updating playback position while playing.
+
 ### fix
 
 - PWA windows (e.g. Firefox PWAs) grouped under their parent browser instead of being detected as separate apps when the

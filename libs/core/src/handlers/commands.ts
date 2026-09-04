@@ -86,6 +86,7 @@ export enum SeelenCommand {
   MediaPrev = "media_prev",
   MediaTogglePlayPause = "media_toggle_play_pause",
   MediaNext = "media_next",
+  MediaSeek = "media_seek",
   SetVolumeLevel = "set_volume_level",
   MediaToggleMute = "media_toggle_mute",
   MediaSetDefaultDevice = "media_set_default_device",

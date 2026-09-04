@@ -15,7 +15,7 @@
 <div class="player">
   <div class="player-thumbnail-container">
     {#if playing.thumbnail}
-      <img src={convertFileSrc(playing.thumbnail)} alt="" />
+      <img class="player-thumbnail" src={convertFileSrc(playing.thumbnail)} alt="" />
     {:else}
       <SpecificIcon name="defaultPlayerThumbnail" />
     {/if}

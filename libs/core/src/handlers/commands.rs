@@ -215,6 +215,7 @@ slu_commands_declaration! {
     MediaPrev = media_prev(id: String),
     MediaTogglePlayPause = media_toggle_play_pause(id: String),
     MediaNext = media_next(id: String),
+    MediaSeek = media_seek(id: String, position: i64),
     SetVolumeLevel = set_volume_level(device_id: String, session_id: Option<String>, level: f32),
     MediaToggleMute = media_toggle_mute(device_id: String, session_id: Option<String>),
     MediaSetDefaultDevice = media_set_default_device(id: String, role: String),

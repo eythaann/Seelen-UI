@@ -49,6 +49,12 @@ body,
       border-radius: 50%;
       width: 1.5rem;
       height: 1.5rem;
+
+      .player {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     .player-info {

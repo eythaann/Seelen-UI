@@ -113,7 +113,10 @@
   overflow: hidden;
   border-radius: var(--spacing-xs);
   padding: var(--spacing-xs);
-  display: flex;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-auto-rows: min-content;
   gap: var(--spacing-xs);
 
   .media-session-blurred-thumbnail {
@@ -122,36 +125,34 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: blur(10px);
+    object-fit: fill;
+    filter: blur(14px);
     opacity: 0.8;
     z-index: 0;
   }
 
   .media-session-thumbnail-container {
+    height: 40px;
+    aspect-ratio: 1;
     position: relative;
     z-index: 1;
 
-    .media-session-app-icon {
-      position: absolute !important;
-      right: 4px;
-      bottom: 4px;
-      width: 1rem;
-      height: 1rem;
-    }
-
     .media-session-thumbnail {
-      width: 80px;
-      height: 80px;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
       border-radius: 8px;
     }
   }
 
+  .media-session-app-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
   .media-session-info {
     position: relative;
     z-index: 1;
-    flex: 1;
 
     display: flex;
     flex-direction: column;
@@ -181,13 +182,52 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
 
-    .media-session-actions {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: var(--spacing-xs);
-      margin-top: var(--spacing-xs);
+  .media-session-progress {
+    z-index: 1;
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    .media-session-time {
+      font-size: 11px;
+      opacity: 0.8;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
     }
+
+    .media-session-progress-bar {
+      appearance: none;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      height: 4px;
+      border-radius: 8px;
+      background: oklch(from var(--slu-std-bg-dark-color) l c h / 0.8);
+
+      &::-webkit-slider-runnable-track {
+        appearance: none;
+      }
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 0;
+        height: 0;
+        box-shadow: -100vw 0 0 100vw var(--slu-std-ui-color);
+      }
+    }
+  }
+
+  .media-session-actions {
+    z-index: 1;
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
   }
 }

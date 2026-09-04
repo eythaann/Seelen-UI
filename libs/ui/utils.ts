@@ -1,12 +1,14 @@
 export function nanosecondsToPlayingTime(nanoseconds: number): string {
-  const hours = Math.floor(nanoseconds / 3_600_000_000_000);
-  const minutes = Math.floor(nanoseconds / 60_000_000_000);
-  const seconds = Math.floor((nanoseconds - minutes * 60_000_000_000) / 1_000_000_000);
+  const totalSeconds = Math.floor(nanoseconds / 1_000_000_000);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const pad = (n: number) => n.toString().padStart(2, "0");
 
   if (hours > 0) {
-    return `${hours}:${minutes}:${seconds}`;
+    return `${hours}:${pad(minutes)}:${pad(seconds)}`;
   } else {
-    return `${minutes}:${seconds}`;
+    return `${minutes}:${pad(seconds)}`;
   }
 }
 
