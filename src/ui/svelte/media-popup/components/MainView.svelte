@@ -1,7 +1,6 @@
 <script lang="ts">
   import { globalState } from "../state.svelte";
   import { t } from "../i18n";
-  import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import VolumeControl from "./VolumeControl.svelte";
   import MediaDevice from "./MediaDevice.svelte";
   import MediaPlayer from "./MediaPlayer.svelte";
@@ -22,7 +21,7 @@
       <VolumeControl
         value={globalState.defaultOutput.volume}
         deviceId={globalState.defaultOutput.id}
-        icon={globalState.defaultOutput.muted ? "IoVolumeMuteOutline" : "IoVolumeHighOutline"}
+        icon="IoVolumeHighOutline"
         mutedIcon="IoVolumeMuteOutline"
         muted={globalState.defaultOutput.muted}
         onRightAction={() => setViewDeviceId(globalState.defaultOutput!.id)}
@@ -33,8 +32,8 @@
       <VolumeControl
         value={globalState.defaultInput.volume}
         deviceId={globalState.defaultInput.id}
-        icon={globalState.defaultInput.muted ? "BiMicrophoneOff" : "BiMicrophone"}
-        mutedIcon="BiMicrophoneOff"
+        icon="IoMicOutline"
+        mutedIcon="IoMicOffOutline"
         muted={globalState.defaultInput.muted}
         onRightAction={() => setViewDeviceId(globalState.defaultInput!.id)}
       />

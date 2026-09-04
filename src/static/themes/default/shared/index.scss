@@ -103,4 +103,8 @@ body:has(> div > .slu-std-popover) {
 
   box-shadow: var(--shadow-m);
   font-size: 0.8rem;
+
+  .svg-icon {
+    height: 1rem;
+  }
 }

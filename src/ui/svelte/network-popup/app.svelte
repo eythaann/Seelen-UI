@@ -116,7 +116,7 @@
         <span>{$t("available")}</span>
         {#if globalState.isScanning}
           <div class="network-scanning">
-            <Icon iconName="TbRefresh" size={12} />
+            <Icon iconName="TbRefresh" />
           </div>
         {/if}
       </div>

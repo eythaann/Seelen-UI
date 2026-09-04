@@ -21,6 +21,10 @@
       transition: all 0.2s ease;
       min-height: 80px;
 
+      .svg-icon {
+        height: 2rem;
+      }
+
       .radio-button-label {
         font-size: 12px;
         font-weight: 500;

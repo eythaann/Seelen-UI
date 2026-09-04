@@ -49,14 +49,14 @@
       onclick={onClickMultimedia}
       title={$t("device.multimedia")}
     >
-      <Icon iconName="IoMusicalNotes" size={14} />
+      <Icon iconName="IoMusicalNotes" />
     </button>
     <button
       data-skin={device.isDefaultCommunications ? "solid" : "default"}
       onclick={onClickCommunications}
       title={$t("device.comunications")}
     >
-      <Icon iconName="FaPhoneFlip" size={12} />
+      <Icon iconName="IoCall" style="transform: scaleX(-1);" />
     </button>
   </div>
   <span class="media-device-name">{device.name}</span>

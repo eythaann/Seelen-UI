@@ -12,7 +12,14 @@ body {
   background: transparent;
   width: 100vw;
   height: 100vh;
+
+  font-size: calc(var(--config-item-size) * 0.8);
+  font-weight: 500;
   line-height: var(--config-item-size);
+
+  .svg-icon {
+    height: var(--config-item-size);
+  }
 
   button {
     line-height: var(--config-item-size);

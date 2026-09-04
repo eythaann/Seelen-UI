@@ -66,7 +66,7 @@
   transition-duration: 100ms;
   transition-timing-function: ease-in-out;
 
-  .slu-icon {
-    height: 3rem !important;
+  .svg-icon {
+    height: 3rem;
   }
 }

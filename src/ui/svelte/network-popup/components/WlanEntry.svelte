@@ -142,7 +142,7 @@
   }}
 >
   <div class="wlan-entry-info">
-    <Icon iconName={signalIcon} size={20} />
+    <Icon iconName={signalIcon} />
     <span class="wlan-entry-ssid">
       {entry.ssid || `${$t("hidden")} (${group.length})`}
     </span>

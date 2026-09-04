@@ -18,14 +18,16 @@
 </script>
 
 {#if svgContent}
-  <i {...rest} class={["inline-svg", className]}>
+  <i {...rest} class={["svg-icon", className]}>
     {@html svgContent}
   </i>
 {/if}
 
 <style>
-  .inline-svg :global(> svg) {
-    width: 100%;
-    height: 100%;
+  @layer svg-icon {
+    .svg-icon :global(> svg) {
+      width: 100%;
+      height: 100%;
+    }
   }
 </style>

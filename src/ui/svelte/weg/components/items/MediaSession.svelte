@@ -101,13 +101,13 @@
       {#if session}
         <div class="media-session-actions" style="color: {textColor}">
           <button data-skin="transparent" onclick={() => onClickBtn("media_prev")}>
-            <Icon iconName="IoPlaySkipBack" size={12} />
+            <Icon iconName="IoPlaySkipBack" />
           </button>
           <button data-skin="transparent" onclick={() => onClickBtn("media_toggle_play_pause")}>
-            <Icon iconName={session?.playing ? "IoPause" : "IoPlay"} size={12} />
+            <Icon iconName={session?.playing ? "IoPause" : "IoPlay"} />
           </button>
           <button data-skin="transparent" onclick={() => onClickBtn("media_next")}>
-            <Icon iconName="IoPlaySkipForward" size={12} />
+            <Icon iconName="IoPlaySkipForward" />
           </button>
         </div>
       {/if}
@@ -211,6 +211,10 @@
 
       button {
         font-size: 8px;
+
+        :global(.svg-icon) {
+          height: 12px;
+        }
       }
     }
   }

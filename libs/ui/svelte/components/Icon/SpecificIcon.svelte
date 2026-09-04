@@ -3,6 +3,7 @@
   import { iconPackManager, type IconState } from "./common.svelte.ts";
   import { prefersDarkColorScheme } from "../../runes/DarkMode.svelte.ts";
   import MissingIcon from "./MissingIcon.svelte";
+  import SluIconRenderer from "./SluIconRenderer.svelte";
 
   interface Props {
     name: string;
@@ -29,42 +30,7 @@
 </script>
 
 {#if state.src}
-  <figure
-    {...imgProps}
-    class={["slu-icon-outer", className]}
-    data-shape={state.isAproximatelySquare ? "square" : "unknown"}
-  >
-    <img src={state.src} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
-    {#if state.mask}
-      <div class="slu-icon-mask" style="mask-image: url('{state.mask}')"></div>
-    {/if}
-  </figure>
+  <SluIconRenderer {...imgProps} {state} class={className} {lazy} />
 {:else}
   <MissingIcon {...imgProps} class={className} />
 {/if}
-
-<style>
-  .slu-icon-outer {
-    position: relative;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-
-  .slu-icon-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    mask-position: center;
-    mask-mode: luminance;
-    background-color: var(--system-accent-color);
-    mix-blend-mode: multiply;
-  }
-</style>

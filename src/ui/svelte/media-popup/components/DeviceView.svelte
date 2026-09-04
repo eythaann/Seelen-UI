@@ -26,9 +26,9 @@
       });
   });
 
-  const iconName = $derived(device?.type === "input" ? "BiMicrophone" : "IoVolumeHighOutline");
+  const iconName = $derived(device?.type === "input" ? "IoMicOutline" : "IoVolumeHighOutline");
   const mutedIconName = $derived(
-    device?.type === "input" ? "BiMicrophoneOff" : "IoVolumeMuteOutline",
+    device?.type === "input" ? "IoMicOffOutline" : "IoVolumeMuteOutline",
   );
 
   function openDeviceSettings() {
@@ -53,7 +53,7 @@
     <VolumeControl
       deviceId={device.id}
       value={device.volume}
-      icon={device.muted ? mutedIconName : iconName}
+      icon={iconName}
       mutedIcon={mutedIconName}
       muted={device.muted}
     />
@@ -65,7 +65,7 @@
           <div class="media-device-mixer-entry">
             <div class="media-device-mixer-entry-icon">
               {#if channel.isSystem}
-                <Icon iconName="BsSpeaker" size={24} />
+                <Icon iconName="BsSpeaker" />
               {:else}
                 <FileIcon path={channel.iconPath} />
               {/if}

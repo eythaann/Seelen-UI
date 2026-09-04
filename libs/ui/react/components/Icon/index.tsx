@@ -26,7 +26,3 @@ export const Icon = forwardRef<HTMLElement, ReactIconProps>((props, ref) => {
     />
   );
 });
-
-export * from "./FileIcon.tsx";
-export * from "./MissingIcon.tsx";
-export * from "./SpecificIcon.tsx";

@@ -126,8 +126,7 @@
         background-color: var(--slu-std-ui-hover-overlay);
       }
 
-      .slu-icon {
-        font-size: 1.1rem;
+      .svg-icon {
         color: var(--slu-std-fg-secondary-color);
       }
 
@@ -156,9 +155,7 @@
       background-color: var(--slu-std-ui-hover-overlay);
     }
 
-    .user-directory-icon {
-      font-size: 1.1rem;
-    }
+    // .user-directory-icon {}
 
     .user-directory-title {
       flex: 1;
@@ -166,7 +163,6 @@
 
     .chevron {
       transition: transform 0.2s;
-      font-size: 1rem;
 
       &.chevron-active {
         transform: rotate(180deg);

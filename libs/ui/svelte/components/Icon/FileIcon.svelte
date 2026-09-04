@@ -4,6 +4,7 @@
   import { IconPackManager } from "@seelen-ui/lib";
   import { iconPackManager, type IconState } from "./common.svelte.ts";
   import MissingIcon from "./MissingIcon.svelte";
+  import SluIconRenderer from "./SluIconRenderer.svelte";
   import { prefersDarkColorScheme } from "../../runes/DarkMode.svelte.ts";
 
   interface Props extends SeelenCommandGetIconArgs {
@@ -48,44 +49,14 @@
 </script>
 
 {#if icon.src}
-  <figure
+  <SluIconRenderer
     {...imgProps}
-    class={["slu-icon-outer", className]}
-    data-shape={icon.isAproximatelySquare ? "square" : "unknown"}
+    state={icon}
+    class={className}
+    {lazy}
     data-path={path ?? undefined}
     data-umid={umid ?? undefined}
-  >
-    <img src={icon.src} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
-    {#if icon.mask}
-      <div class="slu-icon-mask" style="mask-image: url('{icon.mask}')"></div>
-    {/if}
-  </figure>
+  />
 {:else}
   <MissingIcon {...imgProps} class={className} />
 {/if}
-
-<style>
-  .slu-icon-outer {
-    position: relative;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-
-  .slu-icon-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    mask-position: center;
-    mask-mode: luminance;
-    background-color: var(--system-accent-color);
-    mix-blend-mode: multiply;
-  }
-</style>

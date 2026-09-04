@@ -4,44 +4,32 @@
   import type { IconName } from "libs/ui/icons";
 
   interface Props {
-    iconName: IconName;
-    size?: string | number;
-    color?: string;
+    name?: IconName;
+    iconName?: IconName;
     class?: ClassValue;
     [key: string]: any;
   }
 
-  let { iconName, size, color, class: className, ...rest }: Props = $props();
+  let { name, iconName, class: className, ...rest }: Props = $props();
 
-  const computedStyle = $derived.by(() => {
-    const styles: string[] = [];
-    if (size) {
-      const sizeValue = typeof size === "number" ? `${size}px` : size;
-      styles.push(`height: ${sizeValue}`);
-    }
-    if (color) {
-      styles.push(`color: ${color}`);
-    }
-    return styles.join("; ");
-  });
+  let filename = $derived(name || iconName);
 </script>
 
-<InlineSVG
-  {...rest}
-  src={`/icons/${iconName}.svg`}
-  class={["slu-icon", className]}
-  style={computedStyle}
-/>
+{#if filename}
+  <InlineSVG {...rest} src={`/icons/${filename}.svg`} class={["slu-icon", className]} />
+{/if}
 
 <style>
-  :global(.slu-icon) {
-    height: 1rem;
-    width: max-content;
-    min-width: max-content;
-    display: inline-block;
+  @layer svg-icon {
+    :global(.slu-icon) {
+      height: 1em;
+      width: max-content;
+      min-width: max-content;
+      display: inline-block;
 
-    > :global(svg) {
-      vertical-align: middle;
+      > :global(svg) {
+        vertical-align: middle;
+      }
     }
   }
 </style>

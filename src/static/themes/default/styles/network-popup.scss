@@ -62,7 +62,7 @@
         align-items: center;
         color: var(--slu-std-fg-secondary-color);
 
-        .slu-icon {
+        .svg-icon {
           animation: rotateToTheLeft 1s linear infinite;
         }
       }
@@ -97,6 +97,10 @@
           display: flex;
           align-items: center;
           gap: 8px;
+
+          .svg-icon {
+            height: 20px;
+          }
 
           .wlan-entry-ssid {
             flex: 1;
