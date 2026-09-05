@@ -23,6 +23,10 @@ use windows::{
         UserNotificationChangedKind,
     },
 };
+use winreg::{
+    RegKey,
+    enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
+};
 
 use crate::{
     app::get_app_handle,
@@ -242,7 +246,15 @@ impl NotificationManager {
     }
 
     fn clean_toast(toast: &mut Toast, umid: &str) -> Result<()> {
-        if toast.launch.is_none() {
+        // `shell:AppsFolder\<aumid>` only resolves for packaged (Appx/Msix) apps. Win32
+        // apps that use a dedicated toast AUMID register it under
+        // `SOFTWARE\Classes\AppUserModelId` and are never listed in AppsFolder, so
+        // synthesizing that launch string made the click fail with
+        // "Windows cannot find shell:AppsFolder\<aumid>". It also forced `Protocol`
+        // activation, which skips the COM activator that is the correct way to activate
+        // those toasts. Leave `launch` empty for them so `activate_notification` falls
+        // through to `INotificationActivationCallback`.
+        if toast.launch.is_none() && AppUserModelId::from(umid.to_owned()).is_appx() {
             toast.launch = Some(format!("shell:AppsFolder\\{umid}"));
             toast.activation_type = ToastActionActivationType::Protocol;
         }
@@ -468,6 +480,13 @@ fn get_text_from_toast(toast: &Toast) -> String {
 pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
     match app_umid {
         AppUserModelId::PropertyStore(umid) => {
+            // Win32 apps using a dedicated toast AUMID (Firefox's `FirefoxToast-*`,
+            // FanControl, DSX...) have no start menu shortcut carrying that AUMID, so
+            // the shortcut lookup below can't find them. Their CLSID lives in the
+            // registry instead.
+            if let Some(clsid) = get_registered_custom_activator(umid) {
+                return Ok(clsid);
+            }
             let guard = StartMenuManager::instance();
             if let Some(item) = guard.get_by_file_umid(umid) {
                 let clsid = WindowsApi::get_file_toast_activator(&item.path)?;
@@ -479,6 +498,28 @@ pub fn get_toast_activator_clsid(app_umid: &AppUserModelId) -> Result<String> {
         }
     };
     Err(format!("Unable to get toast activator clsid for: {app_umid:?}").into())
+}
+
+/// Reads `CustomActivator` from `SOFTWARE\Classes\AppUserModelId\<aumid>`, where
+/// Win32 apps register the CLSID of their `INotificationActivationCallback` when they
+/// use a dedicated toast AUMID. HKCU takes precedence over HKLM, matching how the
+/// shell resolves `Classes`.
+/// https://learn.microsoft.com/en-us/windows/win32/shell/enable-desktop-toast-with-com-server
+fn get_registered_custom_activator(umid: &str) -> Option<String> {
+    let subkey = format!(r"SOFTWARE\Classes\AppUserModelId\{umid}");
+    for root in [HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE] {
+        let Ok(key) = RegKey::predef(root).open_subkey(&subkey) else {
+            continue;
+        };
+        let Ok(clsid) = key.get_value::<String, _>("CustomActivator") else {
+            continue;
+        };
+        let clsid = clsid.trim().trim_start_matches('{').trim_end_matches('}');
+        if !clsid.is_empty() {
+            return Some(clsid.to_owned());
+        }
+    }
+    None
 }
 
 /// Reads the package's `AppxManifest.xml` (via the shared `PackageManifest`
