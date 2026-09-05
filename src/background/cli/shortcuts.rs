@@ -2,7 +2,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 use seelen_core::{
     handlers::SeelenEvent,
-    state::shortcuts::{resolve_shortcuts, system_shortcut_declarations, ResolvedShortcut},
+    state::shortcuts::{ResolvedShortcut, resolve_shortcuts, system_shortcut_declarations},
 };
 use slu_ipc::messages::SvcAction;
 

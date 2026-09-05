@@ -1,12 +1,11 @@
 use std::sync::{
-    atomic::{AtomicBool, AtomicU32, Ordering},
     LazyLock, OnceLock,
+    atomic::{AtomicBool, AtomicU32, Ordering},
 };
 
 use seelen_core::system_state::{ClipboardData, ClipboardEntry, ClipboardEntryContent};
-use slu_utils::{debounce, Debounce};
+use slu_utils::{Debounce, debounce};
 use windows::{
-    core::HSTRING,
     ApplicationModel::DataTransfer::{
         Clipboard, DataPackage, DataPackageOperation, DataPackageView, StandardDataFormats,
     },
@@ -15,9 +14,10 @@ use windows::{
     Win32::{
         System::DataExchange::GetClipboardOwner,
         UI::WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, MSG, WM_CLIPBOARDUPDATE,
+            DispatchMessageW, GetMessageW, MSG, TranslateMessage, WM_CLIPBOARDUPDATE,
         },
     },
+    core::HSTRING,
 };
 
 use crate::{
@@ -31,7 +31,7 @@ use crate::{
         persistence::{self, ClipboardStore},
     },
     utils::lock_free::SyncHashMap,
-    windows_api::{event_window::subscribe_to_background_window, window::Window, Com, WindowsApi},
+    windows_api::{Com, WindowsApi, event_window::subscribe_to_background_window, window::Window},
 };
 
 /// Runs `f` on a fresh STA thread and returns its result.
@@ -580,56 +580,56 @@ fn now_ms() -> i64 {
 fn get_content_from_view(view: &DataPackageView) -> Result<ClipboardEntryContent> {
     let mut content = ClipboardEntryContent::default();
 
-    if view.Contains(&StandardDataFormats::Text()?)? {
-        if let Ok(text) = WindowsApi::join_pumped(&view.GetTextAsync()?) {
-            content.text = Some(text.to_string());
-        }
+    if view.Contains(&StandardDataFormats::Text()?)?
+        && let Ok(text) = WindowsApi::join_pumped(&view.GetTextAsync()?)
+    {
+        content.text = Some(text.to_string());
     }
 
-    if view.Contains(&StandardDataFormats::Html()?)? {
-        if let Ok(html) = WindowsApi::join_pumped(&view.GetHtmlFormatAsync()?) {
-            content.html = Some(html.to_string());
-        }
+    if view.Contains(&StandardDataFormats::Html()?)?
+        && let Ok(html) = WindowsApi::join_pumped(&view.GetHtmlFormatAsync()?)
+    {
+        content.html = Some(html.to_string());
     }
 
-    if view.Contains(&StandardDataFormats::Rtf()?)? {
-        if let Ok(rtf) = WindowsApi::join_pumped(&view.GetRtfAsync()?) {
-            content.rtf = Some(rtf.to_string());
-        }
+    if view.Contains(&StandardDataFormats::Rtf()?)?
+        && let Ok(rtf) = WindowsApi::join_pumped(&view.GetRtfAsync()?)
+    {
+        content.rtf = Some(rtf.to_string());
     }
 
-    if view.Contains(&StandardDataFormats::Bitmap()?)? {
-        if let Ok(stream_ref) = WindowsApi::join_pumped(&view.GetBitmapAsync()?) {
-            let stream = WindowsApi::join_pumped(&stream_ref.OpenReadAsync()?)?;
-            let image = WindowsApi::stream_to_dynamic_image(stream)?;
-            let data = WindowsApi::dynamic_image_to_webp_base64(image)?;
+    if view.Contains(&StandardDataFormats::Bitmap()?)?
+        && let Ok(stream_ref) = WindowsApi::join_pumped(&view.GetBitmapAsync()?)
+    {
+        let stream = WindowsApi::join_pumped(&stream_ref.OpenReadAsync()?)?;
+        let image = WindowsApi::stream_to_dynamic_image(stream)?;
+        let data = WindowsApi::dynamic_image_to_webp_base64(image)?;
 
-            content.bitmap = Some(data);
-        }
+        content.bitmap = Some(data);
     }
 
-    if view.Contains(&StandardDataFormats::StorageItems()?)? {
-        if let Ok(list) = WindowsApi::join_pumped(&view.GetStorageItemsAsync()?) {
-            let mut data = Vec::new();
-            for item in list {
-                let path = item.Path()?.to_string();
-                data.push(path);
-            }
-
-            content.files = Some(data);
+    if view.Contains(&StandardDataFormats::StorageItems()?)?
+        && let Ok(list) = WindowsApi::join_pumped(&view.GetStorageItemsAsync()?)
+    {
+        let mut data = Vec::new();
+        for item in list {
+            let path = item.Path()?.to_string();
+            data.push(path);
         }
+
+        content.files = Some(data);
     }
 
-    if view.Contains(&StandardDataFormats::ApplicationLink()?)? {
-        if let Ok(uri) = WindowsApi::join_pumped(&view.GetApplicationLinkAsync()?) {
-            content.application_link = Some(uri.DisplayUri()?.to_string());
-        }
+    if view.Contains(&StandardDataFormats::ApplicationLink()?)?
+        && let Ok(uri) = WindowsApi::join_pumped(&view.GetApplicationLinkAsync()?)
+    {
+        content.application_link = Some(uri.DisplayUri()?.to_string());
     }
 
-    if view.Contains(&StandardDataFormats::WebLink()?)? {
-        if let Ok(uri) = WindowsApi::join_pumped(&view.GetWebLinkAsync()?) {
-            content.web_link = Some(uri.DisplayUri()?.to_string());
-        }
+    if view.Contains(&StandardDataFormats::WebLink()?)?
+        && let Ok(uri) = WindowsApi::join_pumped(&view.GetWebLinkAsync()?)
+    {
+        content.web_link = Some(uri.DisplayUri()?.to_string());
     }
 
     Ok(content)

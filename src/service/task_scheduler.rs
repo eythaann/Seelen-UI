@@ -1,18 +1,17 @@
 use windows::Win32::{
     Foundation::{VARIANT_FALSE, VARIANT_TRUE},
     System::TaskScheduler::{
-        IExecAction2, ITaskFolder, ITaskService, TaskScheduler, TASK_ACTION_EXEC,
-        TASK_CREATE_OR_UPDATE, TASK_LOGON_INTERACTIVE_TOKEN, TASK_RUNLEVEL_HIGHEST,
-        TASK_TRIGGER_LOGON,
+        IExecAction2, ITaskFolder, ITaskService, TASK_ACTION_EXEC, TASK_CREATE_OR_UPDATE,
+        TASK_LOGON_INTERACTIVE_TOKEN, TASK_RUNLEVEL_HIGHEST, TASK_TRIGGER_LOGON, TaskScheduler,
     },
     UI::Shell::FOLDERID_LocalAppData,
 };
-use windows_core::{Interface, BSTR};
+use windows_core::{BSTR, Interface};
 
 use crate::{
     enviroment::was_installed_using_msix,
     error::Result,
-    windows_api::{com::Com, WindowsApi},
+    windows_api::{WindowsApi, com::Com},
 };
 
 pub struct TaskSchedulerHelper {}
@@ -23,28 +22,32 @@ static SERVICE_TASK_NAME: &str = "Seelen UI Service";
 
 impl TaskSchedulerHelper {
     unsafe fn get_task_service() -> Result<ITaskService> {
-        let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-        task_service.Connect(
-            &Default::default(),
-            &Default::default(),
-            &Default::default(),
-            &Default::default(),
-        )?;
-        Ok(task_service)
+        unsafe {
+            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
+            task_service.Connect(
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+                &Default::default(),
+            )?;
+            Ok(task_service)
+        }
     }
 
     unsafe fn register_task(folder: &ITaskFolder, task_name: &str, task_xml: &BSTR) -> Result<()> {
-        folder.RegisterTask(
-            &task_name.into(),
-            task_xml,
-            TASK_CREATE_OR_UPDATE.0,
-            &Default::default(),
-            &Default::default(),
-            TASK_LOGON_INTERACTIVE_TOKEN,
-            &Default::default(),
-        )?;
-        log::debug!("Registered task {}", task_name);
-        Ok(())
+        unsafe {
+            folder.RegisterTask(
+                &task_name.into(),
+                task_xml,
+                TASK_CREATE_OR_UPDATE.0,
+                &Default::default(),
+                &Default::default(),
+                TASK_LOGON_INTERACTIVE_TOKEN,
+                &Default::default(),
+            )?;
+            log::debug!("Registered task {}", task_name);
+            Ok(())
+        }
     }
 
     /// this task handles the startup of the service and the app on login

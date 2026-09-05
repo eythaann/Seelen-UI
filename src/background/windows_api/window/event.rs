@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::sync::{mpsc, LazyLock};
+use std::sync::{LazyLock, mpsc};
 use std::time::{Duration, Instant};
 
 use crate::hook::HookManager;

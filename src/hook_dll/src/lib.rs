@@ -1,6 +1,6 @@
 use slu_ipc::{
-    messages::{AppMessage, IconEventData, Win32TrayEvent},
     AppIpc,
+    messages::{AppMessage, IconEventData, Win32TrayEvent},
 };
 use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
@@ -8,10 +8,10 @@ use windows::Win32::{
     UI::{
         Shell::{
             NIF_GUID, NIF_ICON, NIF_MESSAGE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY,
-            NIM_SETVERSION, NIS_HIDDEN, NOTIFYICONDATAW_0, NOTIFY_ICON_DATA_FLAGS,
-            NOTIFY_ICON_INFOTIP_FLAGS, NOTIFY_ICON_MESSAGE, NOTIFY_ICON_STATE,
+            NIM_SETVERSION, NIS_HIDDEN, NOTIFY_ICON_DATA_FLAGS, NOTIFY_ICON_INFOTIP_FLAGS,
+            NOTIFY_ICON_MESSAGE, NOTIFY_ICON_STATE, NOTIFYICONDATAW_0,
         },
-        WindowsAndMessaging::{CallNextHookEx, GetClassNameW, CWPSTRUCT, WM_COPYDATA},
+        WindowsAndMessaging::{CWPSTRUCT, CallNextHookEx, GetClassNameW, WM_COPYDATA},
     },
 };
 use windows_core::GUID;
@@ -125,57 +125,61 @@ fn get_window_class(hwnd: HWND) -> String {
 /// https://learn.microsoft.com/en-us/windows/win32/winmsg/callwndproc
 ///
 /// # Safety
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "system" fn CallWndProc(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
-    let next = || CallNextHookEx(None, code, wparam, lparam);
-    if code < 0 {
-        return next();
+    unsafe {
+        let next = || CallNextHookEx(None, code, wparam, lparam);
+        if code < 0 {
+            return next();
+        }
+
+        let Some(msg) = (lparam.0 as *const CWPSTRUCT).as_ref() else {
+            return next();
+        };
+
+        let class = get_window_class(msg.hwnd);
+        if class != "Shell_TrayWnd" {
+            return next();
+        }
+
+        // Send debug message for all messages received
+        /* let debug_msg = format!(
+            "CallWndProc - code: {}, hwnd: {:?}, message: 0x{:X}, wparam: {:?}, lparam: {:?}",
+            code, msg.hwnd, msg.message, msg.wParam, msg.lParam
+        );
+        let _ = AppIpc::send_sync(&AppMessage::Debug(debug_msg)); */
+
+        if let Some(event) = process_tray_message(msg) {
+            send_event_via_ipc(event);
+        }
+
+        next()
     }
-
-    let Some(msg) = (lparam.0 as *const CWPSTRUCT).as_ref() else {
-        return next();
-    };
-
-    let class = get_window_class(msg.hwnd);
-    if class != "Shell_TrayWnd" {
-        return next();
-    }
-
-    // Send debug message for all messages received
-    /* let debug_msg = format!(
-        "CallWndProc - code: {}, hwnd: {:?}, message: 0x{:X}, wparam: {:?}, lparam: {:?}",
-        code, msg.hwnd, msg.message, msg.wParam, msg.lParam
-    );
-    let _ = AppIpc::send_sync(&AppMessage::Debug(debug_msg)); */
-
-    if let Some(event) = process_tray_message(msg) {
-        send_event_via_ipc(event);
-    }
-
-    next()
 }
 
 /// Processes a tray message and returns an event if relevant
 unsafe fn process_tray_message(msg: &CWPSTRUCT) -> Option<Win32TrayEvent> {
-    if msg.message != WM_COPYDATA {
-        return None;
-    }
+    unsafe {
+        if msg.message != WM_COPYDATA {
+            return None;
+        }
 
-    let copy_data = (msg.lParam.0 as *const COPYDATASTRUCT).as_ref()?;
+        let copy_data = (msg.lParam.0 as *const COPYDATASTRUCT).as_ref()?;
 
-    // Type 1 is the tray icon message
-    if copy_data.dwData != 1 || copy_data.lpData.is_null() {
-        return None;
-    }
+        // Type 1 is the tray icon message
+        if copy_data.dwData != 1 || copy_data.lpData.is_null() {
+            return None;
+        }
 
-    let tray_message = &*copy_data.lpData.cast::<ShellTrayMessage>();
-    let icon_data: IconEventData = tray_message.icon_data.into();
+        let tray_message = &*copy_data.lpData.cast::<ShellTrayMessage>();
+        let icon_data: IconEventData = tray_message.icon_data.into();
 
-    match NOTIFY_ICON_MESSAGE(tray_message.message_type) {
-        NIM_ADD => Some(Win32TrayEvent::IconAdd { data: icon_data }),
-        NIM_MODIFY | NIM_SETVERSION => Some(Win32TrayEvent::IconUpdate { data: icon_data }),
-        NIM_DELETE => Some(Win32TrayEvent::IconRemove { data: icon_data }),
-        _ => None,
+        match NOTIFY_ICON_MESSAGE(tray_message.message_type) {
+            NIM_ADD => Some(Win32TrayEvent::IconAdd { data: icon_data }),
+            NIM_MODIFY | NIM_SETVERSION => Some(Win32TrayEvent::IconUpdate { data: icon_data }),
+            NIM_DELETE => Some(Win32TrayEvent::IconRemove { data: icon_data }),
+            _ => None,
+        }
     }
 }
 
@@ -198,7 +202,7 @@ fn send_event_via_ipc(event: Win32TrayEvent) {
 /// This is called when the DLL is loaded/unloaded in any process
 ///
 /// # Safety
-#[no_mangle]
+#[unsafe(no_mangle)]
 #[allow(non_snake_case)]
 pub extern "system" fn DllMain(
     _hinst_dll: windows::Win32::Foundation::HINSTANCE,

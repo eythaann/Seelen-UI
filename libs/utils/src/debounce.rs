@@ -1,5 +1,5 @@
 use std::pin::Pin;
-use std::sync::{mpsc, Arc, Mutex};
+use std::sync::{Arc, Mutex, mpsc};
 use std::time::{self, Duration};
 
 pub fn debounce<F, T>(closure: F, delay: Duration) -> Debounce<T>
@@ -15,7 +15,8 @@ where
     }));
 
     let dup_debounce_config = debounce_config.clone();
-    let debounce = Debounce {
+
+    Debounce {
         sender: Some(sender),
         thread: Some(std::thread::spawn(move || {
             let debounce_config = dup_debounce_config;
@@ -67,8 +68,7 @@ where
             }
         })),
         debounce_config,
-    };
-    debounce
+    }
 }
 
 struct DebounceConfig<T> {

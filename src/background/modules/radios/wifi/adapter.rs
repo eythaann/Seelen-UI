@@ -99,10 +99,10 @@ impl SluWifiAdapter {
     pub fn scan(&self) {
         let adapter = self.raw.clone();
         std::thread::spawn(move || {
-            if let Ok(operation) = adapter.ScanAsync() {
-                if operation.join().is_ok() {
-                    WifiManager::send(WifiManagerEvent::NetworksChanged);
-                }
+            if let Ok(operation) = adapter.ScanAsync()
+                && operation.join().is_ok()
+            {
+                WifiManager::send(WifiManagerEvent::NetworksChanged);
             }
         });
     }

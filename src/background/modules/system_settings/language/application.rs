@@ -2,7 +2,6 @@ use std::sync::LazyLock;
 
 use seelen_core::system_state::{ImeState, KeyboardLayout, SystemLanguage};
 use windows::{
-    core::GUID,
     Win32::{
         Globalization::{
             GetLocaleInfoEx, LCIDToLocaleName, LOCALE_SLOCALIZEDDISPLAYNAME,
@@ -11,30 +10,31 @@ use windows::{
         UI::{
             Input::{
                 Ime::{
-                    ImmGetDefaultIMEWnd, IME_CMODE_FULLSHAPE, IME_CMODE_HANJACONVERT,
-                    IME_CMODE_KATAKANA, IME_CMODE_NATIVE, IME_CMODE_ROMAN, IME_CONVERSION_MODE,
-                    IME_SENTENCE_MODE,
+                    IME_CMODE_FULLSHAPE, IME_CMODE_HANJACONVERT, IME_CMODE_KATAKANA,
+                    IME_CMODE_NATIVE, IME_CMODE_ROMAN, IME_CONVERSION_MODE, IME_SENTENCE_MODE,
+                    ImmGetDefaultIMEWnd,
                 },
                 KeyboardAndMouse::{GetKeyboardLayout, HKL},
             },
             TextServices::{
-                CLSID_TF_InputProcessorProfiles, ITfInputProcessorProfileMgr,
-                ITfInputProcessorProfiles, GUID_TFCAT_TIP_KEYBOARD, TF_IPPMF_FORPROCESS,
-                TF_IPPMF_FORSESSION, TF_IPP_FLAG_ACTIVE, TF_IPP_FLAG_ENABLED,
+                CLSID_TF_InputProcessorProfiles, GUID_TFCAT_TIP_KEYBOARD,
+                ITfInputProcessorProfileMgr, ITfInputProcessorProfiles, TF_IPP_FLAG_ACTIVE,
+                TF_IPP_FLAG_ENABLED, TF_IPPMF_FORPROCESS, TF_IPPMF_FORSESSION,
                 TF_PROFILETYPE_INPUTPROCESSOR, TF_PROFILETYPE_KEYBOARDLAYOUT,
             },
             WindowsAndMessaging::WM_IME_CONTROL,
         },
     },
+    core::GUID,
 };
-use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
+use winreg::{RegKey, enums::HKEY_LOCAL_MACHINE};
 
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::{lock_free::SyncVec, spawn_named_thread},
     windows_api::{
-        event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString, Com, WindowsApi,
+        Com, WindowsApi, event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString,
     },
 };
 
@@ -101,7 +101,9 @@ impl LanguageManager {
                 let current_tip = Self::get_active_tip().unwrap_or_default();
                 let current_hkl = Self::get_active_hkl();
                 if hkl != current_hkl || active_tip != current_tip {
-                    log::debug!("Language changed: {hkl:?} -> {current_hkl:?} | {active_tip} -> {current_tip}");
+                    log::debug!(
+                        "Language changed: {hkl:?} -> {current_hkl:?} | {active_tip} -> {current_tip}"
+                    );
                     active_tip = current_tip;
                     hkl = current_hkl;
                     Self::send(LanguageEvent::LayoutChanged);
@@ -424,10 +426,10 @@ impl LanguageManager {
 
             for klid in reg_layouts.enum_keys().flatten() {
                 let entry = reg_layouts.open_subkey(&klid)?;
-                if let Ok(id) = entry.get_value::<String, _>("Layout Id") {
-                    if layout_id_to_search == id.to_uppercase() {
-                        return Ok(klid);
-                    }
+                if let Ok(id) = entry.get_value::<String, _>("Layout Id")
+                    && layout_id_to_search == id.to_uppercase()
+                {
+                    return Ok(klid);
                 }
             }
             Err(format!("KLID not found for HKL {hkl:08X}").into())

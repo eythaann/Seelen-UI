@@ -1,15 +1,15 @@
 use std::collections::HashMap;
 
 use crate::{
+    Rect,
     state::{
+        WorkspaceId,
         twm::{
             TwmCondition, TwmConditionContext, TwmNodeKind, TwmNodeLifetime, TwmPlugin,
             TwmPluginNode, TwmReservation, TwmStackPolicy,
         },
-        WorkspaceId,
     },
     system_state::MonitorId,
-    Rect,
 };
 
 pub type NodeId = u64;
@@ -286,7 +286,7 @@ impl TwmRuntimeTree {
                     }
 
                     for &window in &windows {
-                        if let Some(WindowLocation::Tiled(ref mut nid, _)) =
+                        if let Some(WindowLocation::Tiled(nid, _)) =
                             self.window_map.get_mut(&window)
                         {
                             *nid = parent_id;
@@ -692,10 +692,10 @@ impl TwmRuntimeNode {
 
     fn accepts_windows(&self, ctx: &TwmConditionContext) -> bool {
         // 1. condition check (DSL rule)
-        if let Some(cond) = &self.condition {
-            if !cond.evaluate(ctx) {
-                return false;
-            }
+        if let Some(cond) = &self.condition
+            && !cond.evaluate(ctx)
+        {
+            return false;
         }
 
         // 2. structural rules
@@ -716,10 +716,10 @@ impl TwmRuntimeNode {
     fn accepts_windows_on_overflow(&self, ctx: &TwmConditionContext) -> bool {
         match self.kind {
             TwmNodeKind::Stack => {
-                if let Some(cond) = &self.condition {
-                    if !cond.evaluate(ctx) {
-                        return false;
-                    }
+                if let Some(cond) = &self.condition
+                    && !cond.evaluate(ctx)
+                {
+                    return false;
                 }
 
                 self.stack_policy == TwmStackPolicy::AutoWhenOverflow

@@ -50,10 +50,12 @@ impl WindowEnumerator {
         let mut callback: ForEachCallback = Box::new(cb);
 
         unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                (*boxed)(Window::from(hwnd));
+            unsafe {
+                if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
+                    (*boxed)(Window::from(hwnd));
+                }
+                true.into()
             }
-            true.into()
         }
 
         self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
@@ -92,10 +94,12 @@ impl WindowEnumerator {
         }
 
         unsafe extern "system" fn enum_proc<T>(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
-                wrapper.processed.push((wrapper.cb)(hwnd));
+            unsafe {
+                if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
+                    wrapper.processed.push((wrapper.cb)(hwnd));
+                }
+                true.into()
             }
-            true.into()
         }
 
         let mut wrapper = MapCallbackWrapper {
@@ -121,11 +125,13 @@ impl MonitorEnumerator {
             _rect_clip: *mut RECT,
             lparam: LPARAM,
         ) -> BOOL {
-            let data_ptr = lparam.0 as *mut Vec<Monitor>;
-            if let Some(data) = data_ptr.as_mut() {
-                data.push(Monitor::from(hmonitor));
+            unsafe {
+                let data_ptr = lparam.0 as *mut Vec<Monitor>;
+                if let Some(data) = data_ptr.as_mut() {
+                    data.push(Monitor::from(hmonitor));
+                }
+                true.into()
             }
-            true.into()
         }
 
         WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;

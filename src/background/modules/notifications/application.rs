@@ -7,8 +7,8 @@ use std::{
     collections::HashSet,
     path::PathBuf,
     sync::{
-        atomic::{AtomicBool, Ordering},
         LazyLock,
+        atomic::{AtomicBool, Ordering},
     },
 };
 use tauri::Manager;
@@ -37,9 +37,9 @@ use crate::{
         lock_free::SyncHashMap, spawn_named_thread,
     },
     windows_api::{
+        WindowsApi,
         event_window::IS_INTERACTIVE_SESSION,
         types::{AppUserModelId, DateTimeExt},
-        WindowsApi,
     },
 };
 

@@ -1,12 +1,12 @@
 use std::path::{Path, PathBuf};
 
 use windows::{
-    core::PCWSTR,
     Win32::{
         Foundation::{HMODULE, LPARAM, LRESULT, WPARAM},
         System::LibraryLoader::{GetProcAddress, LoadLibraryW},
-        UI::WindowsAndMessaging::{SetWindowsHookExW, HHOOK, WH_CALLWNDPROC},
+        UI::WindowsAndMessaging::{HHOOK, SetWindowsHookExW, WH_CALLWNDPROC},
     },
+    core::PCWSTR,
 };
 use windows_core::Owned;
 

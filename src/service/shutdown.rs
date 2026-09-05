@@ -8,9 +8,9 @@ use windows::Win32::{
 use crate::{
     error::Result,
     windows_api::{
+        WindowsApi,
         app_bar::{AppBarData, AppBarDataState},
         iterator::WindowEnumerator,
-        WindowsApi,
     },
 };
 

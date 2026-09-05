@@ -1,7 +1,7 @@
 use seelen_core::{
     resource::{ResourceId, ResourceKind, SluResource},
     state::{
-        settings::shortcuts::SystemShortcutDeclaration, IconPack, Plugin, Theme, Wallpaper, Widget,
+        IconPack, Plugin, Theme, Wallpaper, Widget, settings::shortcuts::SystemShortcutDeclaration,
     },
 };
 

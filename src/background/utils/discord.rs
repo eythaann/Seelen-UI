@@ -1,11 +1,11 @@
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
     LazyLock,
+    atomic::{AtomicBool, Ordering},
 };
 
 use discord_rich_presence::{
-    activity::{Activity, Assets, Button, Party, Timestamps},
     DiscordIpc, DiscordIpcClient,
+    activity::{Activity, Assets, Button, Party, Timestamps},
 };
 
 use crate::{

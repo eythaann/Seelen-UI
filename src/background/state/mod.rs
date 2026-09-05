@@ -5,9 +5,9 @@ use application::AppSettings;
 use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
+        WorkspaceId,
         twm::TwmPlugin,
         value::{KnownPlugin, PluginValue},
-        WorkspaceId,
     },
     system_state::MonitorId,
 };

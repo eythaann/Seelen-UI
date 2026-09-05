@@ -1,6 +1,6 @@
 use windows::Win32::{
     Devices::Display::{
-        GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness, PHYSICAL_MONITOR,
+        GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR, SetMonitorBrightness,
     },
     Foundation::HANDLE,
     Storage::FileSystem::{
@@ -9,11 +9,11 @@ use windows::Win32::{
     },
 };
 
-use windows_core::{Owned, BOOL};
+use windows_core::{BOOL, Owned};
 
 use crate::{
     error::Result,
-    windows_api::{monitor::MonitorTarget, string_utils::WindowsString, WindowsApi},
+    windows_api::{WindowsApi, monitor::MonitorTarget, string_utils::WindowsString},
 };
 
 use super::Monitor;

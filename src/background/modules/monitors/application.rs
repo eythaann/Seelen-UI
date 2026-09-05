@@ -1,7 +1,7 @@
 use std::{collections::HashMap, sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::{MonitorId, PhysicalMonitor};
-use slu_utils::{debounce, Debounce};
+use slu_utils::{Debounce, debounce};
 use windows::{
     Devices::Display::Core::{
         DisplayManager, DisplayManagerChangedEventArgs, DisplayManagerDisabledEventArgs,
@@ -18,7 +18,7 @@ use crate::{
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
     utils::lock_free::{SyncHashMap, SyncVec},
     windows_api::{
-        event_window::subscribe_to_background_window, monitor::DisplayView, MonitorEnumerator,
+        MonitorEnumerator, event_window::subscribe_to_background_window, monitor::DisplayView,
     },
 };
 

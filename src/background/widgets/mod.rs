@@ -16,14 +16,14 @@ use std::{
 };
 
 use seelen_core::{
+    Rect,
     handlers::SeelenEvent,
     resource::ResourceId,
     state::{
-        context_menu::ContextMenu, dialog::Dialog, Alignment, WidgetDebugInfo, WidgetInstanceMode,
-        WidgetStatus, WidgetTriggerPayload,
+        Alignment, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus, WidgetTriggerPayload,
+        context_menu::ContextMenu, dialog::Dialog,
     },
     system_state::{AppBarEdge, ZOrder},
-    Rect,
 };
 use tauri::{Emitter, Manager};
 use windows::Win32::Foundation::{HWND, RECT};
@@ -36,8 +36,8 @@ use crate::{
     utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::SyncHashMap},
     widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
     windows_api::{
-        input::{Keyboard, Mouse},
         AppBarData, WindowsApi,
+        input::{Keyboard, Mouse},
     },
 };
 

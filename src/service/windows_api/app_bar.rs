@@ -1,6 +1,6 @@
 use windows::Win32::{
     Foundation::{HWND, LPARAM},
-    UI::Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
+    UI::Shell::{ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA, SHAppBarMessage},
 };
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters

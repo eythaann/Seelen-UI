@@ -9,7 +9,7 @@ pub use svc_pipe::ServicePipe;
 
 use std::sync::atomic::Ordering;
 
-use slu_ipc::{commands::AppCommand, messages::AppMessage, AppIpc};
+use slu_ipc::{AppIpc, commands::AppCommand, messages::AppMessage};
 
 use crate::{
     error::Result,

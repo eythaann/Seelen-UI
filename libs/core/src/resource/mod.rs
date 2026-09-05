@@ -205,12 +205,11 @@ impl Resource {
     /// Fills in missing fields from available data. Call before `verify`.
     /// Currently: derives `slug` from `friendly_id` when `slug` is empty.
     pub fn sanitize(&mut self) {
-        if self.slug.is_empty() {
-            if let Some(id) = &self.deprecated_id {
-                if let Some(name) = id.resource_name() {
-                    self.slug = Slug::from_lossy(&name);
-                }
-            }
+        if self.slug.is_empty()
+            && let Some(id) = &self.deprecated_id
+            && let Some(name) = id.resource_name()
+        {
+            self.slug = Slug::from_lossy(&name);
         }
     }
 
@@ -219,16 +218,16 @@ impl Resource {
             return Err("missing slug".into());
         }
 
-        if let ResourceText::Localized(map) = &self.metadata.display_name {
-            if map.get("en").is_none() {
-                return Err("missing mandatory english display name".into());
-            }
+        if let ResourceText::Localized(map) = &self.metadata.display_name
+            && map.get("en").is_none()
+        {
+            return Err("missing mandatory english display name".into());
         }
 
-        if let ResourceText::Localized(map) = &self.metadata.description {
-            if map.get("en").is_none() {
-                return Err("missing mandatory english description".into());
-            }
+        if let ResourceText::Localized(map) = &self.metadata.description
+            && map.get("en").is_none()
+        {
+            return Err("missing mandatory english description".into());
         }
         Ok(())
     }

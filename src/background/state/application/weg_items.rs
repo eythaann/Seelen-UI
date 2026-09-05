@@ -178,12 +178,11 @@ fn initial_items() -> WegItems {
 
 fn update_weg_items_paths(items: &mut [WegItem]) {
     for item in items {
-        if let WegItem::AppOrFile(data) = item {
-            if let Some(umid) = &data.umid {
-                if let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid) {
-                    data.path = app_path;
-                }
-            }
+        if let WegItem::AppOrFile(data) = item
+            && let Some(umid) = &data.umid
+            && let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid)
+        {
+            data.path = app_path;
         }
     }
 }

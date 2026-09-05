@@ -3,8 +3,8 @@ use std::{sync::atomic::Ordering, time::Duration};
 use serde::Serialize;
 use uuid::Uuid;
 use winreg::{
-    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS, KEY_READ},
     RegKey,
+    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS, KEY_READ},
 };
 
 use crate::get_tokio_handle;
@@ -37,12 +37,11 @@ pub enum TelemetryEvent {
 fn get_or_create_install_id() -> crate::error::Result<Uuid> {
     let hkcu = RegKey::predef(HKEY_CURRENT_USER);
 
-    if let Ok(key) = hkcu.open_subkey_with_flags(REGISTRY_SUBKEY, KEY_READ) {
-        if let Ok(id_str) = key.get_value::<String, _>(INSTALL_ID_VALUE) {
-            if let Ok(id) = Uuid::parse_str(&id_str) {
-                return Ok(id);
-            }
-        }
+    if let Ok(key) = hkcu.open_subkey_with_flags(REGISTRY_SUBKEY, KEY_READ)
+        && let Ok(id_str) = key.get_value::<String, _>(INSTALL_ID_VALUE)
+        && let Ok(id) = Uuid::parse_str(&id_str)
+    {
+        return Ok(id);
     }
 
     let new_id = Uuid::new_v4();

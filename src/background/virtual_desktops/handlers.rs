@@ -12,7 +12,7 @@ use crate::{
     error::Result,
     resources::RESOURCES,
     utils::date_based_hex_id,
-    virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
+    virtual_desktops::{SluWorkspacesManager2, events::VirtualDesktopEvent},
 };
 
 fn get_vd_manager() -> &'static SluWorkspacesManager2 {

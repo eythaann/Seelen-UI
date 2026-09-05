@@ -7,11 +7,11 @@ use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::widgets::window_manager::state_v2::{
-    twm_set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
+    TwmState, TwmStateEvent, WM_STATE, twm_set_rect_to_float_initial_size,
 };
+use crate::windows_api::MonitorEnumerator;
 use crate::windows_api::monitor::Monitor;
 use crate::windows_api::window::Window;
-use crate::windows_api::MonitorEnumerator;
 
 fn to_wm_reservation(side: AllowedReservations) -> TwmReservation {
     match side {

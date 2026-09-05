@@ -18,7 +18,7 @@ use crate::{
     event_manager,
     modules::start::application::StartMenuManager,
     utils::{icon_extractor::request_icon_extraction_from_umid, lock_free::SyncHashMap},
-    windows_api::{types::AppUserModelId, WindowsApi},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 use super::domain::{MediaPlayer, MediaPlayerSession};

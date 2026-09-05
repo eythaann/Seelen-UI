@@ -17,12 +17,12 @@ use queue::{IconExtractor, IconExtractorRequest};
 use windows::Win32::Storage::FileSystem::FILE_FLAGS_AND_ATTRIBUTES;
 use windows::Win32::UI::Controls::{IImageList, ILD_TRANSPARENT};
 use windows::Win32::UI::Shell::{
-    SHGetFileInfoW, SHGetImageList, SHFILEINFOW, SHGFI_SYSICONINDEX, SHIL_JUMBO,
+    SHFILEINFOW, SHGFI_SYSICONINDEX, SHGetFileInfoW, SHGetImageList, SHIL_JUMBO,
 };
 use windows::Win32::{
     Graphics::Gdi::{
-        CreateCompatibleDC, DeleteDC, GetDIBits, GetObjectW, SelectObject, BITMAP, BITMAPINFO,
-        BITMAPINFOHEADER, BI_RGB, DIB_RGB_COLORS, HBITMAP,
+        BI_RGB, BITMAP, BITMAPINFO, BITMAPINFOHEADER, CreateCompatibleDC, DIB_RGB_COLORS, DeleteDC,
+        GetDIBits, GetObjectW, HBITMAP, SelectObject,
     },
     UI::{
         Shell::ExtractIconExW,
@@ -38,7 +38,7 @@ use crate::{
     modules::{apps::application::msix::MsixAppsManager, start::application::StartMenuManager},
     resources::RESOURCES,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
-    windows_api::{string_utils::WindowsString, types::AppUserModelId, WindowsApi},
+    windows_api::{WindowsApi, string_utils::WindowsString, types::AppUserModelId},
 };
 
 /// Convert BGRA to RGBA

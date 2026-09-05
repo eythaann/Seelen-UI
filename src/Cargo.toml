@@ -6,7 +6,7 @@ authors = ["eythaann"]
 license = "AGPL-3.0-or-later"
 repository = "https://github.com/eythaann/seelen-ui.git"
 default-run = "seelen-ui"
-edition = "2021"
+edition = "2024"
 rust-version = "1.89"
 
 [[bin]]

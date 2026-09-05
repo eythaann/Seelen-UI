@@ -142,13 +142,12 @@ impl WegItems {
         }
 
         // migration of old scheme before v2.5
-        if let Some(args) = &data.relaunch_args {
-            if data.relaunch_program.contains("explorer")
-                && args.to_string().starts_with("shell:AppsFolder")
-            {
-                data.relaunch_program = args.to_string();
-                data.relaunch_args = None;
-            }
+        if let Some(args) = &data.relaunch_args
+            && data.relaunch_program.contains("explorer")
+            && args.to_string().starts_with("shell:AppsFolder")
+        {
+            data.relaunch_program = args.to_string();
+            data.relaunch_args = None;
         }
 
         if data.relaunch_program.is_empty() {

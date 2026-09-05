@@ -5,9 +5,10 @@ use windows::Win32::{
     Foundation::HANDLE,
     System::{
         Power::{
-            PowerRegisterForEffectivePowerModeNotifications, PowerSettingRegisterNotification,
-            PowerUnregisterFromEffectivePowerModeNotifications, DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS,
-            EFFECTIVE_POWER_MODE, EFFECTIVE_POWER_MODE_V2, HPOWERNOTIFY, SYSTEM_POWER_STATUS,
+            DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS, EFFECTIVE_POWER_MODE, EFFECTIVE_POWER_MODE_V2,
+            HPOWERNOTIFY, PowerRegisterForEffectivePowerModeNotifications,
+            PowerSettingRegisterNotification, PowerUnregisterFromEffectivePowerModeNotifications,
+            SYSTEM_POWER_STATUS,
         },
         SystemServices::GUID_BATTERY_PERCENTAGE_REMAINING,
     },
@@ -24,7 +25,7 @@ use crate::{
     event_manager, get_tokio_handle,
     modules::power::domain::power_mode_to_serializable,
     utils::lock_free::TracedMutex,
-    windows_api::{event_window::subscribe_to_background_window, WindowsApi},
+    windows_api::{WindowsApi, event_window::subscribe_to_background_window},
 };
 
 use super::domain::{battery_to_slu_battery, power_status_to_serializable};

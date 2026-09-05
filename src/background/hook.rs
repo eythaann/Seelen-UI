@@ -1,8 +1,8 @@
 use std::{
     collections::HashSet,
     sync::{
-        atomic::{AtomicBool, Ordering},
         Arc,
+        atomic::{AtomicBool, Ordering},
     },
     time::Duration,
 };
@@ -12,10 +12,10 @@ use seelen_core::handlers::SeelenEvent;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
-        Accessibility::{SetWinEventHook, HWINEVENTHOOK},
+        Accessibility::{HWINEVENTHOOK, SetWinEventHook},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
-            OBJID_WINDOW,
+            DispatchMessageW, EVENT_MAX, EVENT_MIN, GetMessageW, MSG, OBJID_WINDOW,
+            TranslateMessage,
         },
     },
 };
@@ -28,10 +28,10 @@ use crate::{
     utils::spawn_named_thread,
     widgets::weg::SeelenWeg,
     windows_api::{
+        WindowEnumerator,
         event_window::IS_INTERACTIVE_SESSION,
         input::Mouse,
-        window::{event::WinEvent, Window},
-        WindowEnumerator,
+        window::{Window, event::WinEvent},
     },
 };
 
@@ -179,11 +179,11 @@ pub fn register_win_hook() -> Result<()> {
                 continue;
             }
 
-            if let Ok(pos) = Mouse::get_cursor_pos() {
-                if last_pos != pos {
-                    emit_to_webviews(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
-                    last_pos = pos;
-                }
+            if let Ok(pos) = Mouse::get_cursor_pos()
+                && last_pos != pos
+            {
+                emit_to_webviews(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
+                last_pos = pos;
             }
             std::thread::sleep(sleep_time);
         }

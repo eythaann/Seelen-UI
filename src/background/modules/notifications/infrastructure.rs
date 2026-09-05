@@ -5,20 +5,20 @@ use seelen_core::{
     system_state::{AppNotification, NotificationsMode, ToastActionActivationType},
 };
 use windows::{
-    core::GUID,
     Win32::UI::{
         Notifications::{INotificationActivationCallback, NOTIFICATION_USER_INPUT_DATA},
-        Shell::{ApplicationActivationManager, IApplicationActivationManager, AO_NONE},
+        Shell::{AO_NONE, ApplicationActivationManager, IApplicationActivationManager},
     },
+    core::GUID,
 };
 
 use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::notifications::application::{
-        get_toast_activator_clsid, NotificationEvent, NotificationManager,
+        NotificationEvent, NotificationManager, get_toast_activator_clsid,
     },
-    windows_api::{string_utils::WindowsString, types::AppUserModelId, Com},
+    windows_api::{Com, string_utils::WindowsString, types::AppUserModelId},
 };
 
 fn get_notification_manager() -> &'static NotificationManager {

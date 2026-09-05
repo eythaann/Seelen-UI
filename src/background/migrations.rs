@@ -1,5 +1,5 @@
 use seelen_core::resource::WidgetId;
-use tauri::{path::BaseDirectory, Manager};
+use tauri::{Manager, path::BaseDirectory};
 
 use crate::{app::get_app_handle, error::Result, utils::constants::SEELEN_COMMON};
 

@@ -83,7 +83,7 @@ impl MsixAppsManager {
             None => {
                 return get_hightest_quality_posible_for_uwp_image(&store_logo)
                     .or_else(|| get_icon_via_display_info(&app_info, app_umid))
-                    .ok_or("Could not find package logo path".into())
+                    .ok_or("Could not find package logo path".into());
             }
         };
 

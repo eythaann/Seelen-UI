@@ -1,21 +1,21 @@
 use std::{collections::HashMap, sync::LazyLock, time::Duration};
 
-use base64::{engine::general_purpose::STANDARD, Engine as _};
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
 use seelen_core::system_state::{Color, UserAppWindowColors, UserAppWindowPreview};
-use slu_utils::{debounce, Debounce};
+use slu_utils::{Debounce, debounce};
 use win_screenshot::prelude::capture_window;
 
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     hook::HookManager,
-    modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
+    modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
     utils::lock_free::SyncHashMap,
     windows_api::{
-        event_window::IS_INTERACTIVE_SESSION,
-        window::{event::WinEvent, Window},
         WindowsApi,
+        event_window::IS_INTERACTIVE_SESSION,
+        window::{Window, event::WinEvent},
     },
 };
 

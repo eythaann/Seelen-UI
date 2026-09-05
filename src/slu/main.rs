@@ -3,9 +3,9 @@ mod resources;
 
 use clap::Parser;
 use slu_ipc::{
+    AppIpc,
     commands::{AppCli, AppCommand, CommandExecutionMode, SluCliCommand},
     messages::AppMessage,
-    AppIpc,
 };
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error + Send + Sync>>;

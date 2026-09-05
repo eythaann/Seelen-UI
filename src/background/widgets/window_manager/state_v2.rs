@@ -8,8 +8,8 @@ use seelen_core::{
     rect::Rect,
     resource::PluginId,
     state::{
-        twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
         NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
+        twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
 };
 use windows::Win32::UI::WindowsAndMessaging::SW_FORCEMINIMIZE;
@@ -24,9 +24,9 @@ use crate::{
     utils::lock_free::TracedMutex,
     virtual_desktops::SluWorkspacesManager2,
     widgets::window_manager::{
+        WindowManagerV2,
         cli::{Axis, Direction, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
-        WindowManagerV2,
     },
     windows_api::{monitor::Monitor, window::Window},
 };
@@ -328,11 +328,11 @@ impl TwmState {
     /// Uses `try_lock` internally; call this from non-lock-holding contexts.
     pub fn set_cached_node_rect(&mut self, window_id: isize, rect: Rect) {
         for tree in self.state.workspaces.values_mut() {
-            if let Some(node_id) = tree.node_of_window(&window_id) {
-                if let Some(node) = tree.nodes.get_mut(&node_id) {
-                    node.rect = Some(rect);
-                    return;
-                }
+            if let Some(node_id) = tree.node_of_window(&window_id)
+                && let Some(node) = tree.nodes.get_mut(&node_id)
+            {
+                node.rect = Some(rect);
+                return;
             }
         }
     }
@@ -416,19 +416,21 @@ impl TwmState {
                         .children
                         .iter()
                         .enumerate()
-                        .filter(|(idx, &c)| {
+                        .filter(|&(idx, &c)| {
                             let correct_side = match axis {
                                 Axis::Horizontal | Axis::Vertical => true,
-                                Axis::Left | Axis::Top => *idx < child_idx,
-                                Axis::Right | Axis::Bottom => *idx > child_idx,
+                                Axis::Left | Axis::Top => idx < child_idx,
+                                Axis::Right | Axis::Bottom => idx > child_idx,
                             };
-                            *idx != child_idx && correct_side && tree.has_any_windows(c)
+                            idx != child_idx && correct_side && tree.has_any_windows(c)
                         })
                         .map(|(_, &c)| c)
                         .collect();
 
                     if sibling_ids.is_empty() {
-                        log::warn!("Can't change size at {axis:?} if there are no other windows on that side");
+                        log::warn!(
+                            "Can't change size at {axis:?} if there are no other windows on that side"
+                        );
                         return Ok(());
                     }
 

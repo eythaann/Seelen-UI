@@ -1,18 +1,18 @@
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
     Arc, LazyLock,
+    atomic::{AtomicBool, Ordering},
 };
 
 use parking_lot::Mutex;
-use rustfft::{num_complex::Complex, FftPlanner};
+use rustfft::{FftPlanner, num_complex::Complex};
 use seelen_core::{state::PerformanceMode, system_state::AudioWaveform};
 use windows::Win32::{
     Media::Audio::{
-        eMultimedia, eRender, IAudioCaptureClient, IAudioClient, IMMDeviceEnumerator,
-        MMDeviceEnumerator, AUDCLNT_BUFFERFLAGS_SILENT, AUDCLNT_SHAREMODE_SHARED,
-        AUDCLNT_STREAMFLAGS_LOOPBACK,
+        AUDCLNT_BUFFERFLAGS_SILENT, AUDCLNT_SHAREMODE_SHARED, AUDCLNT_STREAMFLAGS_LOOPBACK,
+        IAudioCaptureClient, IAudioClient, IMMDeviceEnumerator, MMDeviceEnumerator, eMultimedia,
+        eRender,
     },
-    System::Com::{CoTaskMemFree, CLSCTX_ALL},
+    System::Com::{CLSCTX_ALL, CoTaskMemFree},
 };
 
 use crate::{
@@ -21,7 +21,7 @@ use crate::{
     modules::media::devices::{DevicesEvent, DevicesManager},
     state::application::performance::PERFORMANCE_MODE,
     utils::spawn_named_thread,
-    windows_api::{event_window::IS_INTERACTIVE_SESSION, Com},
+    windows_api::{Com, event_window::IS_INTERACTIVE_SESSION},
 };
 
 use super::domain::CaptureSession;
@@ -80,10 +80,11 @@ impl WaveformManager {
 
         // Reinitialize when the default render device changes.
         DevicesManager::subscribe(|event| {
-            if let DevicesEvent::DefaultDeviceChanged { flow, role, .. } = event {
-                if flow == eRender && role == eMultimedia {
-                    WaveformManager::instance().restart_capture_async();
-                }
+            if let DevicesEvent::DefaultDeviceChanged { flow, role, .. } = event
+                && flow == eRender
+                && role == eMultimedia
+            {
+                WaveformManager::instance().restart_capture_async();
             }
         });
 

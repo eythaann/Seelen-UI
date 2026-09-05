@@ -27,10 +27,10 @@ mod windows_api;
 extern crate rust_i18n;
 i18n!("background/i18n", fallback = "en");
 
-use std::sync::{atomic::AtomicBool, OnceLock};
+use std::sync::{OnceLock, atomic::AtomicBool};
 
 use app::SeelenUI;
-use cli::{handle_console_client, SelfPipe, ServicePipe};
+use cli::{SelfPipe, ServicePipe, handle_console_client};
 use error::Result;
 use exposed::register_invoke_handler;
 use logger::SeelenLogger;
@@ -45,7 +45,7 @@ use utils::{
 use crate::{
     app::get_app_handle,
     error::ResultLogExt,
-    utils::{constants::SEELEN_COMMON, CRONOMETER},
+    utils::{CRONOMETER, constants::SEELEN_COMMON},
 };
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
@@ -101,7 +101,7 @@ async fn main() -> std::process::ExitCode {
 
     // if no custom runtime is present, the app will use the installed with the system
     if let Some(path) = crate::utils::get_fixed_runtime_path() {
-        std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path);
+        unsafe { std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path) };
     }
 
     let app = app_builder

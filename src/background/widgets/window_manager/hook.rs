@@ -3,12 +3,12 @@ use seelen_core::state::WmDragBehavior;
 use crate::{
     error::Result,
     state::application::FULL_STATE,
-    virtual_desktops::{events::VirtualDesktopEvent, MINIMIZED_BY_WORKSPACES},
-    widgets::window_manager::state_v2::{TwmState, TwmStateEvent, MINIMIZED_BY_STACK, WM_STATE},
-    windows_api::window::{event::WinEvent, Window},
+    virtual_desktops::{MINIMIZED_BY_WORKSPACES, events::VirtualDesktopEvent},
+    widgets::window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
+    windows_api::window::{Window, event::WinEvent},
 };
 
-use super::{cli::Axis, WindowManagerV2};
+use super::{WindowManagerV2, cli::Axis};
 
 impl WindowManagerV2 {
     fn system_move_size_end(window: &Window) -> Result<()> {

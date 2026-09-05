@@ -9,9 +9,8 @@ pub use weg_items::WEG_ITEMS_MANAGER;
 
 use arc_swap::ArcSwap;
 use notify_debouncer_full::{
-    new_debouncer,
+    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap, new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode},
-    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::{
     resource::ResourceKind,
@@ -26,7 +25,7 @@ use std::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    resources::{ResourceManager, RESOURCES},
+    resources::{RESOURCES, ResourceManager},
     utils::constants::SEELEN_COMMON,
 };
 

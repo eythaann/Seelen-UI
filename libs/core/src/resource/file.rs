@@ -4,7 +4,7 @@ use std::{
 };
 
 use base64::Engine;
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
+use serde::{Deserialize, Serialize, de::DeserializeOwned};
 
 use crate::{error::Result, utils::TsUnknown};
 

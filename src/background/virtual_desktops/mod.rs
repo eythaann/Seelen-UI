@@ -6,12 +6,12 @@ pub mod wallpapers;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Write;
-use std::sync::atomic::{AtomicU32, Ordering};
 use std::sync::LazyLock;
+use std::sync::atomic::{AtomicU32, Ordering};
 
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
-use slu_utils::{debounce, Debounce};
+use slu_utils::{Debounce, debounce};
 use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
 use crate::error::{Result, ResultLogExt};
@@ -22,8 +22,8 @@ use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::utils::constants::SEELEN_COMMON;
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
-use crate::windows_api::window::event::WinEvent;
 use crate::windows_api::window::Window;
+use crate::windows_api::window::event::WinEvent;
 
 use events::VirtualDesktopEvent;
 

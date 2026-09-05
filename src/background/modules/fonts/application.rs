@@ -2,7 +2,7 @@ use std::sync::LazyLock;
 
 use seelen_core::system_state::SeelenFont;
 use windows::Win32::Graphics::DirectWrite::{
-    DWriteCreateFactory, IDWriteFactory, IDWriteFontFamily, DWRITE_FACTORY_TYPE_SHARED,
+    DWRITE_FACTORY_TYPE_SHARED, DWriteCreateFactory, IDWriteFactory, IDWriteFontFamily,
 };
 use windows_core::{BOOL, HSTRING};
 
@@ -43,22 +43,24 @@ impl FontManager {
     }
 
     unsafe fn get_font_family_name(family: &IDWriteFontFamily) -> Result<SeelenFont> {
-        let names = family.GetFamilyNames()?;
+        unsafe {
+            let names = family.GetFamilyNames()?;
 
-        let mut locale_index = 0u32;
-        let mut exists = BOOL::from(false);
-        let _ = names.FindLocaleName(&HSTRING::from("en-us"), &mut locale_index, &mut exists);
-        if !exists.as_bool() {
-            locale_index = 0;
+            let mut locale_index = 0u32;
+            let mut exists = BOOL::from(false);
+            let _ = names.FindLocaleName(&HSTRING::from("en-us"), &mut locale_index, &mut exists);
+            if !exists.as_bool() {
+                locale_index = 0;
+            }
+
+            let len = names.GetStringLength(locale_index)?;
+            let mut buf = WindowsString::new_to_fill(len as usize + 1);
+            names.GetString(locale_index, buf.as_mut_slice())?;
+
+            Ok(SeelenFont {
+                family: buf.to_string(),
+            })
         }
-
-        let len = names.GetStringLength(locale_index)?;
-        let mut buf = WindowsString::new_to_fill(len as usize + 1);
-        names.GetString(locale_index, buf.as_mut_slice())?;
-
-        Ok(SeelenFont {
-            family: buf.to_string(),
-        })
     }
 
     pub fn get_fonts(&self) -> Result<Vec<SeelenFont>> {

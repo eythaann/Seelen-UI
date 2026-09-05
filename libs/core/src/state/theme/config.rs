@@ -1,7 +1,7 @@
 use std::sync::LazyLock;
 
 use schemars::JsonSchema;
-use serde::{de::Visitor, Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer, de::Visitor};
 
 use crate::{error::Result, resource::ResourceText};
 

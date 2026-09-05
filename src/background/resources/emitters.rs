@@ -3,7 +3,7 @@ use std::sync::Arc;
 use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceKind,
-    state::{settings::shortcuts::resolve_shortcuts, Theme, Widget},
+    state::{Theme, Widget, settings::shortcuts::resolve_shortcuts},
 };
 use slu_ipc::messages::SvcAction;
 

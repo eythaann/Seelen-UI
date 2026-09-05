@@ -14,7 +14,7 @@ use windows::Win32::{
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 
 impl WindowManagerV2 {

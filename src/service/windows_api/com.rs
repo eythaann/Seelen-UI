@@ -1,9 +1,9 @@
 use crate::error::Result;
 use windows::{
-    core::{Interface, GUID},
     Win32::System::Com::{
-        CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
+        CLSCTX_ALL, COINIT_APARTMENTTHREADED, CoCreateInstance, CoInitializeEx, CoUninitialize,
     },
+    core::{GUID, Interface},
 };
 
 pub struct Com {}

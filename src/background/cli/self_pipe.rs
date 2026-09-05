@@ -1,8 +1,8 @@
 use clap::Parser;
 use slu_ipc::{
+    AppIpc,
     commands::{AppCli, AppCommand},
     messages::{AppMessage, IpcResponse},
-    AppIpc,
 };
 
 use crate::{
@@ -32,11 +32,11 @@ impl SelfPipe {
                     .collect()
             };
 
-        if let Ok(cli) = AppCli::try_parse_from(normalized) {
-            if let Err(err) = process_app_command(cli.command).await {
-                log::error!("Failed to process command: {err}");
-                return Err(err);
-            }
+        if let Ok(cli) = AppCli::try_parse_from(normalized)
+            && let Err(err) = process_app_command(cli.command).await
+        {
+            log::error!("Failed to process command: {err}");
+            return Err(err);
         }
         Ok(())
     }

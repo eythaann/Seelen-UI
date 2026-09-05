@@ -45,10 +45,12 @@ impl WindowEnumerator {
         let mut callback: ForEachCallback = Box::new(cb);
 
         unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-            if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                (*boxed)(hwnd);
+            unsafe {
+                if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
+                    (*boxed)(hwnd);
+                }
+                true.into()
             }
-            true.into()
         }
 
         self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))

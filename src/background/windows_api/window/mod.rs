@@ -4,12 +4,12 @@ pub mod event;
 use seelen_core::state::WorkspaceId;
 use seelen_core::{rect::Rect, system_state::MonitorId};
 use slu_ipc::messages::SvcAction;
-use std::sync::atomic::Ordering;
 use std::sync::Arc;
+use std::sync::atomic::Ordering;
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
-    sync::{atomic::AtomicIsize, LazyLock},
+    sync::{LazyLock, atomic::AtomicIsize},
 };
 
 use windows::{
@@ -34,7 +34,7 @@ use crate::{
 };
 
 use super::{
-    monitor::Monitor, process::Process, types::AppUserModelId, WindowEnumerator, WindowsApi,
+    WindowEnumerator, WindowsApi, monitor::Monitor, process::Process, types::AppUserModelId,
 };
 
 static DRAGGING_WINDOW: AtomicIsize = AtomicIsize::new(0);
@@ -62,7 +62,7 @@ impl From<isize> for Window {
 impl Debug for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("Window")
-            .field("handle", &self.0 .0)
+            .field("handle", &self.0.0)
             .field(
                 "exe",
                 &self.process().program_exe_name().unwrap_or_default(),
@@ -75,7 +75,7 @@ impl Debug for Window {
 
 impl Display for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Window({:?})", self.0 .0)
+        write!(f, "Window({:?})", self.0.0)
     }
 }
 
@@ -95,7 +95,7 @@ impl Window {
     }
 
     pub fn address(&self) -> isize {
-        self.0 .0 as isize
+        self.0.0 as isize
     }
 
     pub fn is_electron(&self) -> bool {

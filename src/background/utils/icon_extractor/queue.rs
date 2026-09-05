@@ -4,7 +4,7 @@ use std::{
 };
 
 use serde::{Deserialize, Serialize};
-use slu_utils::{debounce, Debounce};
+use slu_utils::{Debounce, debounce};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -23,12 +23,11 @@ const PER_FILE_EXTENSIONS: &[&str] = &["exe", "lnk", "url"];
 /// Returns the real file path for Windows `path,index` icon notation (e.g. `"file.ico,0"` → `"file.ico"`).
 /// For normal paths the input is returned unchanged.
 fn real_path_for_ext(path: &Path) -> std::borrow::Cow<'_, std::path::Path> {
-    if let Some(s) = path.to_str() {
-        if let Some(comma) = s.rfind(',') {
-            if s[comma + 1..].trim().parse::<i32>().is_ok() {
-                return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
-            }
-        }
+    if let Some(s) = path.to_str()
+        && let Some(comma) = s.rfind(',')
+        && s[comma + 1..].trim().parse::<i32>().is_ok()
+    {
+        return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
     }
     std::borrow::Cow::Borrowed(path)
 }

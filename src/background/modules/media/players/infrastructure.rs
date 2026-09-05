@@ -4,7 +4,7 @@ use seelen_core::handlers::SeelenEvent;
 
 use crate::{app::emit_to_webviews, error::Result};
 
-use super::{domain::MediaPlayer, PlayersManager};
+use super::{PlayersManager, domain::MediaPlayer};
 
 fn get_players_manager() -> &'static PlayersManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();

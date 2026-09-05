@@ -7,7 +7,7 @@ use windows::Win32::{
         Controls::{WM_MOUSEHOVER, WM_MOUSELEAVE},
         Shell::{NIN_POPUPCLOSE, NIN_POPUPOPEN, NIN_SELECT},
         WindowsAndMessaging::{
-            AllowSetForegroundWindow, GetWindowThreadProcessId, SendNotifyMessageW, HICON,
+            AllowSetForegroundWindow, GetWindowThreadProcessId, HICON, SendNotifyMessageW,
             WM_CONTEXTMENU, WM_LBUTTONDBLCLK, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MBUTTONDOWN,
             WM_MBUTTONUP, WM_MOUSEMOVE, WM_RBUTTONDOWN, WM_RBUTTONUP,
         },
@@ -15,9 +15,9 @@ use windows::Win32::{
 };
 
 use crate::{
-    modules::system_tray::application::{util::Util, SystemTrayManager},
+    modules::system_tray::application::{SystemTrayManager, util::Util},
     utils::{constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image},
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 
@@ -115,17 +115,17 @@ impl SystemTrayManager {
 
                     if let Some(icon_handle) = icon_data.icon_handle {
                         // Avoid re-reading the icon image if it's the same as the existing icon.
-                        if to_update.icon_handle != Some(icon_handle) {
-                            if let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _)) {
-                                to_update.icon_handle = Some(icon_handle);
-                                to_update.icon_image_hash = Some(image_to_hash(&img));
+                        if to_update.icon_handle != Some(icon_handle)
+                            && let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _))
+                        {
+                            to_update.icon_handle = Some(icon_handle);
+                            to_update.icon_image_hash = Some(image_to_hash(&img));
 
-                                let path = SEELEN_COMMON
-                                    .app_temp_dir()
-                                    .join(format!("{}.png", to_update.stable_id));
-                                img.save(&path).unwrap();
-                                to_update.icon_path = Some(path);
-                            }
+                            let path = SEELEN_COMMON
+                                .app_temp_dir()
+                                .join(format!("{}.png", to_update.stable_id));
+                            img.save(&path).unwrap();
+                            to_update.icon_path = Some(path);
                         }
                     }
 
@@ -159,15 +159,15 @@ impl SystemTrayManager {
                     let mut icon_image_hash = None;
                     let mut icon_path = None;
 
-                    if let Some(icon_handle) = icon_data.icon_handle {
-                        if let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _)) {
-                            icon_image_hash = Some(image_to_hash(&img));
-                            let path = SEELEN_COMMON
-                                .app_temp_dir()
-                                .join(format!("{}.png", stable_id));
-                            img.save(&path).unwrap();
-                            icon_path = Some(path);
-                        }
+                    if let Some(icon_handle) = icon_data.icon_handle
+                        && let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _))
+                    {
+                        icon_image_hash = Some(image_to_hash(&img));
+                        let path = SEELEN_COMMON
+                            .app_temp_dir()
+                            .join(format!("{}.png", stable_id));
+                        img.save(&path).unwrap();
+                        icon_path = Some(path);
                     }
 
                     let icon = SysTrayIcon {

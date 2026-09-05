@@ -8,7 +8,7 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     modules::radios::bluetooth::{
-        manager::BluetoothManager, BluetoothDeviceType, BluetoothManagerEvent,
+        BluetoothDeviceType, BluetoothManagerEvent, manager::BluetoothManager,
     },
 };
 
@@ -104,7 +104,7 @@ impl BluetoothDeviceWrapper {
 pub(super) fn disconnect_via_ioctl(address: u64) -> crate::error::Result<()> {
     use std::mem::size_of;
     use windows::Win32::Devices::Bluetooth::{
-        BluetoothFindFirstRadio, BluetoothFindRadioClose, BLUETOOTH_FIND_RADIO_PARAMS,
+        BLUETOOTH_FIND_RADIO_PARAMS, BluetoothFindFirstRadio, BluetoothFindRadioClose,
     };
     use windows::Win32::Foundation::HANDLE;
     use windows::Win32::System::IO::DeviceIoControl;
@@ -142,8 +142,8 @@ pub(super) fn disconnect_via_ioctl(address: u64) -> crate::error::Result<()> {
 /// again is a no-op. The disable→enable cycle forces Windows to initiate a new connection.
 pub(super) fn connect_via_service_state(address: u64) -> crate::error::Result<()> {
     use std::mem::{size_of, zeroed};
+    use windows::Win32::Devices::Bluetooth::{BLUETOOTH_DEVICE_INFO, BluetoothSetServiceState};
     use windows::core::GUID;
-    use windows::Win32::Devices::Bluetooth::{BluetoothSetServiceState, BLUETOOTH_DEVICE_INFO};
 
     // Bluetooth SIG service class UUIDs — 16-bit short UUIDs expanded to 128-bit
     // using the BT base UUID: 00000000-0000-1000-8000-00805F9B34FB.

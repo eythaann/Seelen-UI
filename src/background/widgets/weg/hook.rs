@@ -1,14 +1,14 @@
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{
-        FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, SW_HIDE,
+        EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, FindWindowExA, SW_HIDE,
     },
 };
 
 use crate::{
     error::Result,
     pcstr,
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 
 use super::{SeelenWeg, TASKBAR_CLASS};

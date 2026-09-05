@@ -62,7 +62,7 @@ fn is_sync_pending() -> bool {
 }
 
 fn write_last_sync_now() {
-    use time::{format_description::well_known::Rfc3339, OffsetDateTime};
+    use time::{OffsetDateTime, format_description::well_known::Rfc3339};
     let now = OffsetDateTime::now_utc()
         .format(&Rfc3339)
         .unwrap_or_default();

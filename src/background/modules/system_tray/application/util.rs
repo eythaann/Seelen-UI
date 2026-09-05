@@ -1,7 +1,7 @@
 use windows::Win32::{
     Foundation::{LPARAM, POINT, WPARAM},
     UI::WindowsAndMessaging::{
-        GetCursorPos, RegisterWindowMessageW, SendNotifyMessageW, HWND_BROADCAST,
+        GetCursorPos, HWND_BROADCAST, RegisterWindowMessageW, SendNotifyMessageW,
     },
 };
 

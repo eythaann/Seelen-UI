@@ -7,7 +7,7 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     modules::radios::bluetooth::{
-        manager::BluetoothManager, BluetoothDeviceType, BluetoothManagerEvent,
+        BluetoothDeviceType, BluetoothManagerEvent, manager::BluetoothManager,
     },
 };
 

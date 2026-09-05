@@ -1,5 +1,5 @@
 use seelen_core::state::UpdateChannel;
-use slu_ipc::{messages::SvcAction, ServiceIpc, IPC};
+use slu_ipc::{IPC, ServiceIpc, messages::SvcAction};
 use tauri_plugin_updater::{Update, UpdaterExt};
 
 use crate::{

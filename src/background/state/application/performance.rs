@@ -1,4 +1,4 @@
-use std::sync::{atomic::AtomicU8, LazyLock};
+use std::sync::{LazyLock, atomic::AtomicU8};
 
 use seelen_core::{handlers::SeelenEvent, state::PerformanceMode, system_state::PowerMode};
 use tauri::Listener;
@@ -8,7 +8,7 @@ use crate::{
     hook::HookManager,
     modules::power::infrastructure::{get_batteries, get_power_mode, get_power_status},
     state::application::FULL_STATE,
-    windows_api::window::{event::WinEvent, Window},
+    windows_api::window::{Window, event::WinEvent},
 };
 
 pub static PERFORMANCE_MODE: LazyLock<Optimizations> = LazyLock::new(|| {

@@ -16,11 +16,11 @@ use windows::Win32::{
         Threading::{GetCurrentProcess, GetCurrentProcessId, OpenProcessToken},
     },
     UI::{
-        HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
-        Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
+        HiDpi::{DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2, SetProcessDpiAwarenessContext},
+        Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
         WindowsAndMessaging::{
-            FindWindowW, GetClassNameW, GetWindowTextW, SetWindowPos, ShowWindow, ShowWindowAsync,
-            SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER,
+            FindWindowW, GetClassNameW, GetWindowTextW, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+            SWP_NOACTIVATE, SWP_NOZORDER, SetWindowPos, ShowWindow, ShowWindowAsync,
         },
     },
 };

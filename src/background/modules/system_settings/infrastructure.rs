@@ -17,10 +17,10 @@ fn get_system_settings() -> &'static SystemSettings {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
         SystemSettings::subscribe(|event| {
-            if event == SystemSettingsEvent::ColorChanged {
-                if let Ok(colors) = SystemSettings::instance().get_colors() {
-                    emit_to_webviews(SeelenEvent::ColorsChanged, &colors);
-                }
+            if event == SystemSettingsEvent::ColorChanged
+                && let Ok(colors) = SystemSettings::instance().get_colors()
+            {
+                emit_to_webviews(SeelenEvent::ColorsChanged, &colors);
             }
         });
     });

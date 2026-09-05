@@ -1,6 +1,6 @@
 use winreg::{
-    enums::{HKEY_LOCAL_MACHINE, KEY_ALL_ACCESS, REG_EXPAND_SZ},
     RegKey, RegValue,
+    enums::{HKEY_LOCAL_MACHINE, KEY_ALL_ACCESS, REG_EXPAND_SZ},
 };
 
 use crate::error::Result;

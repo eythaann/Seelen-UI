@@ -26,7 +26,7 @@ use windows_future::{AsyncStatus, IAsyncOperation};
 
 use std::{
     collections::{HashMap, HashSet},
-    ffi::{c_void, OsString},
+    ffi::{OsString, c_void},
     os::windows::ffi::{OsStrExt, OsStringExt},
     path::{Path, PathBuf},
     thread::sleep,
@@ -34,7 +34,6 @@ use std::{
 };
 
 use windows::{
-    core::{BSTR, GUID, PCWSTR},
     ApplicationModel::AppInfo,
     Storage::Streams::{
         DataReader, DataWriter, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
@@ -54,21 +53,21 @@ use windows::{
         },
         Graphics::{
             Dwm::{
-                DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
-                DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP,
-                DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
+                DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL, DWMWA_CLOAKED,
+                DWMWA_EXTENDED_FRAME_BOUNDS, DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,
+                DWMWINDOWATTRIBUTE, DwmGetWindowAttribute,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow,
-                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY,
+                MONITORENUMPROC, MONITORINFOEXW, MonitorFromPoint, MonitorFromWindow,
             },
         },
         Security::{
             AdjustTokenPrivileges,
-            Authentication::Identity::{GetUserNameExW, EXTENDED_NAME_FORMAT},
-            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, SE_PRIVILEGE_ENABLED,
-            SE_SHUTDOWN_NAME, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
-            TOKEN_QUERY,
+            Authentication::Identity::{EXTENDED_NAME_FORMAT, GetUserNameExW},
+            GetTokenInformation, LookupPrivilegeValueW, SE_PRIVILEGE_ENABLED, SE_SHUTDOWN_NAME,
+            TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES, TOKEN_QUERY,
+            TokenElevation,
         },
         Storage::{
             EnhancedStorage::{
@@ -83,45 +82,47 @@ use windows::{
             Com::{IPersistFile, STGM_READ},
             Environment::ExpandEnvironmentStringsW,
             LibraryLoader::GetModuleHandleW,
-            Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
+            Power::{GetSystemPowerStatus, SYSTEM_POWER_STATUS, SetSuspendState},
             RemoteDesktop::ProcessIdToSessionId,
-            Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
-            SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
+            Shutdown::{EXIT_WINDOWS_FLAGS, ExitWindowsEx, LockWorkStation, SHUTDOWN_REASON},
+            SystemInformation::{COMPUTER_NAME_FORMAT, GetComputerNameExW},
             Threading::{
                 GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
-                OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
-                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
+                OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+                PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
             },
         },
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
                 BHID_EnumItems, IEnumShellItems, IShellItem2, IShellLinkW, IVirtualDesktopManager,
-                PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHGetKnownFolderItem, SHGetKnownFolderPath,
-                SHLoadIndirectString, ShellExecuteExW, ShellLink, VirtualDesktopManager,
-                KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
+                KF_FLAG_DEFAULT,
+                PropertiesSystem::{GPS_DEFAULT, IPropertyStore, SHGetPropertyStoreForWindow},
+                SHCreateItemFromParsingName, SHELLEXECUTEINFOW, SHGetKnownFolderItem,
+                SHGetKnownFolderPath, SHLoadIndirectString, SIGDN_NORMALDISPLAY, ShellExecuteExW,
+                ShellLink, VirtualDesktopManager,
             },
             WindowsAndMessaging::{
-                DispatchMessageW, FindWindowExW, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetWindow, GetWindowLongW, GetWindowRect,
-                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
-                IsZoomed, PeekMessageW, PostMessageW, SendMessageW, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, TranslateMessage, GWL_EXSTYLE, GWL_STYLE,
-                GW_OWNER, MSG, PM_REMOVE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
-                WS_THICKFRAME,
+                DispatchMessageW, FindWindowExW, GW_OWNER, GWL_EXSTYLE, GWL_STYLE, GetClassNameW,
+                GetDesktopWindow, GetForegroundWindow, GetParent, GetWindow, GetWindowLongW,
+                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
+                IsWindowVisible, IsZoomed, MSG, PM_REMOVE, PeekMessageW, PostMessageW,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SW_SHOWNORMAL, SWP_ASYNCWINDOWPOS,
+                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, SendMessageW, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, TranslateMessage, WINDOW_EX_STYLE,
+                WINDOW_STYLE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
+    core::{BSTR, GUID, PCWSTR},
 };
 
 use crate::{
     error::{Result, WindowsResultExt},
     hook::HookManager,
-    windows_api::window::{event::WinEvent, Window},
+    windows_api::window::{Window, event::WinEvent},
 };
 
 #[macro_export]
@@ -976,7 +977,7 @@ impl WindowsApi {
     }
 
     pub fn dynamic_image_to_webp_base64(image: image::DynamicImage) -> Result<String> {
-        use base64::{engine::general_purpose::STANDARD, Engine};
+        use base64::{Engine, engine::general_purpose::STANDARD};
         let mut buf = Vec::new();
         image.write_to(
             &mut std::io::Cursor::new(&mut buf),
@@ -990,7 +991,7 @@ impl WindowsApi {
     pub fn webp_base64_to_random_access_stream_ref(
         base64_webp: &str,
     ) -> Result<RandomAccessStreamReference> {
-        use base64::{engine::general_purpose::STANDARD, Engine};
+        use base64::{Engine, engine::general_purpose::STANDARD};
 
         let webp_bytes = STANDARD.decode(base64_webp)?;
         let image = image::load_from_memory(&webp_bytes)?;
@@ -1118,12 +1119,12 @@ impl WindowsApi {
             .collect();
 
         for (name, value) in &new_vars {
-            std::env::set_var(name, value);
+            unsafe { std::env::set_var(name, value) };
         }
 
         for (name, _) in std::env::vars() {
             if !new_keys.contains(&name.to_ascii_uppercase()) {
-                std::env::remove_var(name);
+                unsafe { std::env::remove_var(name) };
             }
         }
     }
@@ -1142,10 +1143,10 @@ impl WindowsApi {
                     break;
                 }
                 let entry = String::from_utf16_lossy(std::slice::from_raw_parts(ptr, len));
-                if let Some((name, value)) = entry.split_once('=') {
-                    if !name.is_empty() {
-                        vars.insert(name.to_string(), value.to_string());
-                    }
+                if let Some((name, value)) = entry.split_once('=')
+                    && !name.is_empty()
+                {
+                    vars.insert(name.to_string(), value.to_string());
                 }
                 ptr = ptr.add(len + 1);
             }

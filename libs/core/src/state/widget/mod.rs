@@ -9,12 +9,12 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use crate::{
+    Point,
     error::Result,
     resource::{ResourceKind, ResourceMetadata, ResourceText, SluResource, WidgetId},
     state::Plugin,
     system_state::MonitorId,
     utils::TsUnknown,
-    Point,
 };
 
 /// Declares a shortcut that belongs to this widget.

@@ -6,7 +6,7 @@ use seelen_core::{
 };
 
 use crate::{
-    app::{emit_to_webviews, SeelenUI},
+    app::{SeelenUI, emit_to_webviews},
     error::{Result, ResultLogExt},
     resources::ResourceManager,
     utils::constants::SEELEN_COMMON,

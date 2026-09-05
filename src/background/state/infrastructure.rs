@@ -1,15 +1,15 @@
 use std::path::PathBuf;
 
 use seelen_core::state::{
-    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings, AppConfig,
-    IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
+    AppConfig, IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
+    by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings,
 };
 use tauri_plugin_dialog::DialogExt;
 
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
-    state::application::{performance::PERFORMANCE_MODE, BUNDLED_SETTINGS_BY_APP},
+    state::application::{BUNDLED_SETTINGS_BY_APP, performance::PERFORMANCE_MODE},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::WindowsApi,
 };

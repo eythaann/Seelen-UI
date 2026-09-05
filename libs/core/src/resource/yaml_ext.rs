@@ -158,36 +158,36 @@ async fn resolve_extensions(
         }
 
         Value::Tagged(tag) => {
-            if tag.tag == "!include" {
-                if let Value::String(relative_path) = tag.value {
-                    let to_include = base.join(relative_path);
-                    let text = if to_include
-                        .extension()
-                        .is_some_and(|ext| ext == "scss" || ext == "sass")
-                    {
-                        // SCSS compilation is CPU-bound sync — offload to blocking pool
-                        tokio::task::spawn_blocking(move || {
-                            grass::from_path(&to_include, &grass::Options::default())
-                        })
-                        .await
-                        .map_err(|e| crate::error::SeelenLibError::from(e.to_string()))??
-                    } else {
-                        tokio::fs::read_to_string(&to_include).await?
-                    };
-                    return Ok(Value::String(text));
-                }
+            if tag.tag == "!include"
+                && let Value::String(relative_path) = tag.value
+            {
+                let to_include = base.join(relative_path);
+                let text = if to_include
+                    .extension()
+                    .is_some_and(|ext| ext == "scss" || ext == "sass")
+                {
+                    // SCSS compilation is CPU-bound sync — offload to blocking pool
+                    tokio::task::spawn_blocking(move || {
+                        grass::from_path(&to_include, &grass::Options::default())
+                    })
+                    .await
+                    .map_err(|e| crate::error::SeelenLibError::from(e.to_string()))??
+                } else {
+                    tokio::fs::read_to_string(&to_include).await?
+                };
+                return Ok(Value::String(text));
             }
 
-            if tag.tag == "!extend" {
-                if let Value::String(relative_path) = tag.value {
-                    let value = Box::pin(read_and_parse_yml(
-                        &base.join(relative_path),
-                        resolve_self,
-                        vars,
-                    ))
-                    .await?;
-                    return Ok(value);
-                }
+            if tag.tag == "!extend"
+                && let Value::String(relative_path) = tag.value
+            {
+                let value = Box::pin(read_and_parse_yml(
+                    &base.join(relative_path),
+                    resolve_self,
+                    vars,
+                ))
+                .await?;
+                return Ok(value);
             }
 
             Ok(Value::Tagged(tag))

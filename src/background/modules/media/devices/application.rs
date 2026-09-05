@@ -4,14 +4,15 @@ use windows::Win32::{
     Devices::FunctionDiscovery::PKEY_Device_FriendlyName,
     Foundation::PROPERTYKEY,
     Media::Audio::{
-        eAll, eCapture, eCommunications, eMultimedia, eRender, EDataFlow, ERole,
+        DEVICE_STATE_ACTIVE, EDataFlow, ERole,
         Endpoints::{
             IAudioEndpointVolume, IAudioEndpointVolumeCallback, IAudioEndpointVolumeCallback_Impl,
         },
         IAudioSessionControl, IAudioSessionControl2, IAudioSessionEvents, IAudioSessionEvents_Impl,
         IAudioSessionManager2, IAudioSessionNotification, IAudioSessionNotification_Impl,
         IMMDevice, IMMDeviceEnumerator, IMMEndpoint, IMMNotificationClient,
-        IMMNotificationClient_Impl, ISimpleAudioVolume, MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
+        IMMNotificationClient_Impl, ISimpleAudioVolume, MMDeviceEnumerator, eAll, eCapture,
+        eCommunications, eMultimedia, eRender,
     },
     System::Com::{CLSCTX_ALL, STGM_READ},
 };
@@ -21,7 +22,7 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::lock_free::SyncHashMap,
-    windows_api::{process::Process, string_utils::WindowsString, Com, ComThread},
+    windows_api::{Com, ComThread, process::Process, string_utils::WindowsString},
 };
 
 use super::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType};
@@ -363,53 +364,57 @@ type SessionManagerData = (
 
 impl MediaDevice {
     pub unsafe fn load(raw_device: &IMMDevice) -> Result<Self> {
-        let device_id = WindowsString::from(raw_device.GetId()?).to_string();
-        let volume_endpoint: IAudioEndpointVolume = raw_device.Activate(CLSCTX_ALL, None)?;
-        let (sessions, session_manager, session_created_callback) =
-            Self::load_sessions(raw_device, &device_id);
+        unsafe {
+            let device_id = WindowsString::from(raw_device.GetId()?).to_string();
+            let volume_endpoint: IAudioEndpointVolume = raw_device.Activate(CLSCTX_ALL, None)?;
+            let (sessions, session_manager, session_created_callback) =
+                Self::load_sessions(raw_device, &device_id);
 
-        let properties = raw_device.OpenPropertyStore(STGM_READ)?;
-        let data_flow = if raw_device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture {
-            MediaDeviceType::Input
-        } else {
-            MediaDeviceType::Output
-        };
+            let properties = raw_device.OpenPropertyStore(STGM_READ)?;
+            let data_flow = if raw_device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture {
+                MediaDeviceType::Input
+            } else {
+                MediaDeviceType::Output
+            };
 
-        let volume_callback = IAudioEndpointVolumeCallback::from(MediaDeviceEventHandler {
-            device_id: device_id.clone(),
-        });
+            let volume_callback = IAudioEndpointVolumeCallback::from(MediaDeviceEventHandler {
+                device_id: device_id.clone(),
+            });
 
-        let device = MediaDevice {
-            id: device_id.clone(),
-            name: properties.GetValue(&PKEY_Device_FriendlyName)?.to_string(),
-            r#type: data_flow,
-            is_default_multimedia: false, // unset, parent should set this
-            is_default_communications: false, // unset, parent should set this
-            sessions,
-            volume: volume_endpoint.GetMasterVolumeLevelScalar()?,
-            muted: volume_endpoint.GetMute()?.as_bool(),
-            volume_endpoint,
-            volume_callback,
-            session_manager,
-            session_created_callback,
-        };
+            let device = MediaDevice {
+                id: device_id.clone(),
+                name: properties.GetValue(&PKEY_Device_FriendlyName)?.to_string(),
+                r#type: data_flow,
+                is_default_multimedia: false, // unset, parent should set this
+                is_default_communications: false, // unset, parent should set this
+                sessions,
+                volume: volume_endpoint.GetMasterVolumeLevelScalar()?,
+                muted: volume_endpoint.GetMute()?.as_bool(),
+                volume_endpoint,
+                volume_callback,
+                session_manager,
+                session_created_callback,
+            };
 
-        device
-            .volume_endpoint
-            .RegisterControlChangeNotify(&device.volume_callback)?;
-        Ok(device)
+            device
+                .volume_endpoint
+                .RegisterControlChangeNotify(&device.volume_callback)?;
+            Ok(device)
+        }
     }
 
     // Session manager activation may fail for some devices (HDMI without display,
     // Bluetooth, virtual devices). Returns empty sessions so the device still appears.
     unsafe fn load_sessions(raw_device: &IMMDevice, device_id: &str) -> SessionManagerData {
-        match Self::try_load_sessions(raw_device, device_id) {
-            Ok(data) => data,
-            Err(e) => {
-                log::warn!(
-                    "Session manager unavailable for device {device_id}, sessions will not be tracked: {e:?}"
-                );
-                (Vec::new(), None, None)
+        unsafe {
+            match Self::try_load_sessions(raw_device, device_id) {
+                Ok(data) => data,
+                Err(e) => {
+                    log::warn!(
+                        "Session manager unavailable for device {device_id}, sessions will not be tracked: {e:?}"
+                    );
+                    (Vec::new(), None, None)
+                }
             }
         }
     }
@@ -418,54 +423,59 @@ impl MediaDevice {
         raw_device: &IMMDevice,
         device_id: &str,
     ) -> Result<SessionManagerData> {
-        let sm: IAudioSessionManager2 = raw_device.Activate(CLSCTX_ALL, None)?;
-        let mut sessions = Vec::new();
-        let enumerator = sm.GetSessionEnumerator()?;
-        for session_idx in 0..enumerator.GetCount()? {
-            let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
-            match MediaDeviceSession::load(session, device_id) {
-                Ok(s) => sessions.push(s),
-                Err(e) => log::error!("Failed to load session: {e:?}"),
+        unsafe {
+            let sm: IAudioSessionManager2 = raw_device.Activate(CLSCTX_ALL, None)?;
+            let mut sessions = Vec::new();
+            let enumerator = sm.GetSessionEnumerator()?;
+            for session_idx in 0..enumerator.GetCount()? {
+                let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
+                match MediaDeviceSession::load(session, device_id) {
+                    Ok(s) => sessions.push(s),
+                    Err(e) => log::error!("Failed to load session: {e:?}"),
+                }
             }
+            let cb = IAudioSessionNotification::from(MediaDeviceEventHandler {
+                device_id: device_id.to_owned(),
+            });
+            sm.RegisterSessionNotification(&cb)?;
+            Ok((sessions, Some(sm), Some(cb)))
         }
-        let cb = IAudioSessionNotification::from(MediaDeviceEventHandler {
-            device_id: device_id.to_owned(),
-        });
-        sm.RegisterSessionNotification(&cb)?;
-        Ok((sessions, Some(sm), Some(cb)))
     }
 }
 
 impl MediaDeviceSession {
     pub unsafe fn load(session: IAudioSessionControl2, device_id: &str) -> Result<Self> {
-        let session_id = WindowsString::from(session.GetSessionIdentifier()?).to_string();
-        let volume: ISimpleAudioVolume = session.cast()?;
-        let proccess = Process::from_id(session.GetProcessId()?);
+        unsafe {
+            let session_id = WindowsString::from(session.GetSessionIdentifier()?).to_string();
+            let volume: ISimpleAudioVolume = session.cast()?;
+            let proccess = Process::from_id(session.GetProcessId()?);
 
-        let events_callback = IAudioSessionEvents::from(MediaSessionEventHandler {
-            device_id: device_id.to_owned(),
-            session_id: session_id.clone(),
-        });
+            let events_callback = IAudioSessionEvents::from(MediaSessionEventHandler {
+                device_id: device_id.to_owned(),
+                session_id: session_id.clone(),
+            });
 
-        let session = MediaDeviceSession {
-            id: session_id,
-            instance_id: WindowsString::from(session.GetSessionInstanceIdentifier()?).to_string(),
-            process_id: proccess.id(),
-            name: proccess
-                .program_display_name()
-                .unwrap_or_else(|_| "???".to_string()),
-            icon_path: proccess.program_path().ok(),
-            is_system: session.IsSystemSoundsSession().0 == 0,
-            volume: volume.GetMasterVolume()?,
-            muted: volume.GetMute()?.as_bool(),
-            controls: session,
-            events_callback,
-        };
+            let session = MediaDeviceSession {
+                id: session_id,
+                instance_id: WindowsString::from(session.GetSessionInstanceIdentifier()?)
+                    .to_string(),
+                process_id: proccess.id(),
+                name: proccess
+                    .program_display_name()
+                    .unwrap_or_else(|_| "???".to_string()),
+                icon_path: proccess.program_path().ok(),
+                is_system: session.IsSystemSoundsSession().0 == 0,
+                volume: volume.GetMasterVolume()?,
+                muted: volume.GetMute()?.as_bool(),
+                controls: session,
+                events_callback,
+            };
 
-        session
-            .controls
-            .RegisterAudioSessionNotification(&session.events_callback)?;
-        Ok(session)
+            session
+                .controls
+                .RegisterAudioSessionNotification(&session.events_callback)?;
+            Ok(session)
+        }
     }
 }
 

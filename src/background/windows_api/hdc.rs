@@ -1,6 +1,6 @@
 use windows::Win32::{
     Foundation::HWND,
-    Graphics::Gdi::{GetDC, GetPixel, ReleaseDC, CLR_INVALID, HDC},
+    Graphics::Gdi::{CLR_INVALID, GetDC, GetPixel, HDC, ReleaseDC},
 };
 
 use seelen_core::system_state::Color;

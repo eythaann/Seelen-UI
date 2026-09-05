@@ -13,7 +13,7 @@ use windows_core::Owned;
 
 use crate::error::Result;
 
-use super::{string_utils::WindowsString, types::AppUserModelId, window::Window, WindowsApi};
+use super::{WindowsApi, string_utils::WindowsString, types::AppUserModelId, window::Window};
 
 // https://stackoverflow.com/questions/47300622/meaning-of-flags-in-process-extended-basic-information-struct
 #[allow(dead_code)]

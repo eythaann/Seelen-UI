@@ -1,8 +1,8 @@
-use crossbeam_channel::{bounded, Receiver, Sender};
+use crossbeam_channel::{Receiver, Sender, bounded};
 use parking_lot::Mutex;
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
     Arc,
+    atomic::{AtomicBool, Ordering},
 };
 use windows::{
     Devices::Enumeration::{DeviceInformation, DeviceInformationUpdate, DeviceWatcher},
@@ -91,10 +91,10 @@ impl DeviceEnumerator {
 
                         // Only notify callback if enumeration has completed
                         // (to avoid notifying for devices that existed at startup)
-                        if enumeration_completed.load(Ordering::Acquire) {
-                            if let Ok(id) = info.Id() {
-                                callback(DeviceEvent::Added(id.to_string()));
-                            }
+                        if enumeration_completed.load(Ordering::Acquire)
+                            && let Ok(id) = info.Id()
+                        {
+                            callback(DeviceEvent::Added(id.to_string()));
                         }
                     }
                     Ok(())
@@ -109,10 +109,10 @@ impl DeviceEnumerator {
             let handler = TypedEventHandler::new(
                 move |_: windows_core::Ref<DeviceWatcher>,
                       update: windows_core::Ref<DeviceInformationUpdate>| {
-                    if let Some(update) = update.as_ref() {
-                        if let Ok(id) = update.Id() {
-                            callback(DeviceEvent::Updated(id.to_string()));
-                        }
+                    if let Some(update) = update.as_ref()
+                        && let Ok(id) = update.Id()
+                    {
+                        callback(DeviceEvent::Updated(id.to_string()));
                     }
                     Ok(())
                 },
@@ -127,18 +127,18 @@ impl DeviceEnumerator {
             let handler = TypedEventHandler::new(
                 move |_: windows_core::Ref<DeviceWatcher>,
                       update: windows_core::Ref<DeviceInformationUpdate>| {
-                    if let Some(update) = update.as_ref() {
-                        if let Ok(id) = update.Id() {
-                            let id_str = id.to_string();
+                    if let Some(update) = update.as_ref()
+                        && let Ok(id) = update.Id()
+                    {
+                        let id_str = id.to_string();
 
-                            // Remove device from our internal list
-                            devices.lock().retain(|dev| {
-                                dev.Id().map(|dev_id| dev_id != id_str).unwrap_or(true)
-                            });
+                        // Remove device from our internal list
+                        devices
+                            .lock()
+                            .retain(|dev| dev.Id().map(|dev_id| dev_id != id_str).unwrap_or(true));
 
-                            // Notify callback
-                            callback(DeviceEvent::Removed(id_str));
-                        }
+                        // Notify callback
+                        callback(DeviceEvent::Removed(id_str));
                     }
                     Ok(())
                 },

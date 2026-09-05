@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use slu_ipc::{messages::SvcAction, ServiceIpc, IPC};
+use slu_ipc::{IPC, ServiceIpc, messages::SvcAction};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
 use windows::Win32::{
     System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},

@@ -5,7 +5,7 @@ use std::{
 
 use seelen_core::state::WegItemData;
 use seelen_core::system_state::RelaunchArguments;
-use winreg::{enums::HKEY_CURRENT_USER, RegKey};
+use winreg::{RegKey, enums::HKEY_CURRENT_USER};
 
 use crate::{error::Result, windows_api::WindowsApi};
 
@@ -76,13 +76,13 @@ fn fallback_get_taskbar_items() -> Result<Vec<WegItemData>> {
 
             for entry in entries.flatten() {
                 let entry_path = entry.path();
-                if entry_path.extension().is_some_and(|ext| ext == "lnk") {
-                    if let Ok(item_data) = create_weg_item_from_shortcut(&entry_path) {
-                        let created = std::fs::metadata(&entry_path)
-                            .and_then(|m| m.created())
-                            .unwrap_or_else(|_| std::time::SystemTime::now());
-                        items_with_time.push((item_data, created));
-                    }
+                if entry_path.extension().is_some_and(|ext| ext == "lnk")
+                    && let Ok(item_data) = create_weg_item_from_shortcut(&entry_path)
+                {
+                    let created = std::fs::metadata(&entry_path)
+                        .and_then(|m| m.created())
+                        .unwrap_or_else(|_| std::time::SystemTime::now());
+                    items_with_time.push((item_data, created));
                 }
             }
 
@@ -208,7 +208,7 @@ mod tests {
 
     #[test]
     fn test_fallback_get_taskbar_items_handles_missing_directory() {
-        std::env::set_var("APPDATA", "C:\\NonExistent\\AppData");
+        unsafe { std::env::set_var("APPDATA", "C:\\NonExistent\\AppData") };
         let result = fallback_get_taskbar_items();
 
         assert!(result.is_ok());

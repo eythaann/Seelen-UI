@@ -12,17 +12,17 @@ pub use winver::*;
 
 use std::{
     collections::HashMap,
-    fs::{create_dir_all, File},
+    fs::{File, create_dir_all},
     io::Write,
     path::{Path, PathBuf},
-    sync::{atomic::AtomicBool, LazyLock},
+    sync::{LazyLock, atomic::AtomicBool},
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
 use parking_lot::Mutex;
 use windows::{
+    Win32::UI::Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
     core::GUID,
-    Win32::UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
 };
 
 use crate::{error::Result, windows_api::string_utils::WindowsString};

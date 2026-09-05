@@ -1,6 +1,6 @@
 use std::sync::{
-    atomic::{AtomicBool, Ordering},
     LazyLock,
+    atomic::{AtomicBool, Ordering},
 };
 
 use seelen_core::{
@@ -14,7 +14,7 @@ use crate::{
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
-    widgets::{loader::WidgetDeployment, WidgetWebviewLabel},
+    widgets::{WidgetWebviewLabel, loader::WidgetDeployment},
 };
 
 pub static WIDGET_MANAGER: LazyLock<WidgetManager> = LazyLock::new(WidgetManager::create);

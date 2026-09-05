@@ -1,15 +1,15 @@
 pub mod processing;
 
-use slu_ipc::{messages::SvcAction, ServiceIpc};
+use slu_ipc::{ServiceIpc, messages::SvcAction};
 
 use clap::{Arg, ArgAction, Command};
 
 use crate::{
+    SERVICE_DISPLAY_NAME,
     enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     error::Result,
     logger::SluServiceLogger,
     task_scheduler::TaskSchedulerHelper,
-    SERVICE_DISPLAY_NAME,
 };
 
 pub struct ServiceSubcommands;

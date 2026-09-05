@@ -1,6 +1,6 @@
 use std::path::{Path, PathBuf};
 
-use base64::{engine::general_purpose::STANDARD, Engine};
+use base64::{Engine, engine::general_purpose::STANDARD};
 use seelen_core::{
     resource::{IconPackId, ResourceKind, SluResource},
     state::{Icon, IconPack, IconPackEntry},
@@ -58,10 +58,10 @@ fn with_icon(entry: IconPackEntry, icon_rel_path: String) -> IconPackEntry {
 }
 
 async fn load_or_create_pack(dir: &Path) -> IconPack {
-    if dir.exists() {
-        if let Ok(pack) = IconPack::load(dir).await {
-            return pack;
-        }
+    if dir.exists()
+        && let Ok(pack) = IconPack::load(dir).await
+    {
+        return pack;
     }
     let mut pack = IconPack {
         id: USER_PACK_ID.into(),

@@ -1,13 +1,13 @@
 use std::{ffi::c_void, mem::zeroed};
 
 use windows::{
-    core::{Interface, Param, Result, GUID, HRESULT, PCWSTR},
     Devices::Custom::DeviceSharingMode,
     Win32::{
         Foundation::PROPERTYKEY,
         Media::Audio::{ERole, WAVEFORMATEX},
         System::Com::StructuredStorage::PROPVARIANT,
     },
+    core::{GUID, HRESULT, Interface, PCWSTR, Param, Result},
 };
 use windows_core::BOOL;
 
@@ -24,13 +24,15 @@ windows_core::imp::interface_hierarchy!(IPolicyConfig, windows_core::IUnknown);
 #[allow(non_snake_case)]
 impl IPolicyConfig {
     pub unsafe fn GetMixFormat(&self, device_id: impl Param<PCWSTR>) -> Result<*mut WAVEFORMATEX> {
-        let mut result__ = zeroed::<*mut WAVEFORMATEX>();
-        (Interface::vtable(self).GetMixFormat)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            &mut result__,
-        )
-        .and_then(|| windows_core::Type::from_abi(result__))
+        unsafe {
+            let mut result__ = zeroed::<*mut WAVEFORMATEX>();
+            (Interface::vtable(self).GetMixFormat)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                &mut result__,
+            )
+            .and_then(|| windows_core::Type::from_abi(result__))
+        }
     }
 
     pub unsafe fn GetDeviceFormat(
@@ -38,22 +40,26 @@ impl IPolicyConfig {
         device_id: impl Param<PCWSTR>,
         default: impl Into<BOOL>,
     ) -> Result<*mut WAVEFORMATEX> {
-        let mut result__ = zeroed::<*mut WAVEFORMATEX>();
-        (Interface::vtable(self).GetDeviceFormat)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            default.into().0,
-            &mut result__,
-        )
-        .and_then(|| windows_core::Type::from_abi(result__))
+        unsafe {
+            let mut result__ = zeroed::<*mut WAVEFORMATEX>();
+            (Interface::vtable(self).GetDeviceFormat)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                default.into().0,
+                &mut result__,
+            )
+            .and_then(|| windows_core::Type::from_abi(result__))
+        }
     }
 
     pub unsafe fn ResetDeviceFormat(&self, device_id: impl Param<PCWSTR>) -> Result<()> {
-        (Interface::vtable(self).ResetDeviceFormat)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).ResetDeviceFormat)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn SetDeviceFormat(
@@ -62,13 +68,15 @@ impl IPolicyConfig {
         mut endpoint_format: WAVEFORMATEX,
         mut mix_format: WAVEFORMATEX,
     ) -> Result<()> {
-        (Interface::vtable(self).SetDeviceFormat)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            &mut endpoint_format,
-            &mut mix_format,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetDeviceFormat)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                &mut endpoint_format,
+                &mut mix_format,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn GetProcessingPeriod(
@@ -78,14 +86,16 @@ impl IPolicyConfig {
         default_period: *mut i64,
         min_period: *mut i64,
     ) -> Result<()> {
-        (Interface::vtable(self).GetProcessingPeriod)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            default.into().0,
-            default_period,
-            min_period,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).GetProcessingPeriod)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                default.into().0,
+                default_period,
+                min_period,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn SetProcessingPeriod(
@@ -93,22 +103,26 @@ impl IPolicyConfig {
         device_id: impl Param<PCWSTR>,
         period: *mut i64,
     ) -> Result<()> {
-        (Interface::vtable(self).SetProcessingPeriod)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            period,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetProcessingPeriod)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                period,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn GetShareMode(&self, device_id: impl Param<PCWSTR>) -> Result<DeviceSharingMode> {
-        let mut result__ = zeroed::<DeviceSharingMode>();
-        (Interface::vtable(self).GetShareMode)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            &mut result__,
-        )
-        .and_then(|| windows_core::Type::from_abi(result__))
+        unsafe {
+            let mut result__ = zeroed::<DeviceSharingMode>();
+            (Interface::vtable(self).GetShareMode)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                &mut result__,
+            )
+            .and_then(|| windows_core::Type::from_abi(result__))
+        }
     }
 
     pub unsafe fn SetShareMode(
@@ -116,12 +130,14 @@ impl IPolicyConfig {
         device_id: impl Param<PCWSTR>,
         mut mode: DeviceSharingMode,
     ) -> Result<()> {
-        (Interface::vtable(self).SetShareMode)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            &mut mode,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetShareMode)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                &mut mode,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn GetPropertyValue(
@@ -130,15 +146,17 @@ impl IPolicyConfig {
         bFxStore: impl Into<BOOL>,
         key: *const PROPERTYKEY,
     ) -> Result<PROPVARIANT> {
-        let mut result__ = zeroed();
-        (Interface::vtable(self).GetPropertyValue)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            bFxStore.into().0,
-            key,
-            &mut result__,
-        )
-        .map(|| result__)
+        unsafe {
+            let mut result__ = zeroed();
+            (Interface::vtable(self).GetPropertyValue)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                bFxStore.into().0,
+                key,
+                &mut result__,
+            )
+            .map(|| result__)
+        }
     }
 
     pub unsafe fn SetPropertyValue(
@@ -148,14 +166,16 @@ impl IPolicyConfig {
         key: *const PROPERTYKEY,
         propvar: *const PROPVARIANT,
     ) -> Result<()> {
-        (Interface::vtable(self).SetPropertyValue)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            bFxStore.into().0,
-            key,
-            propvar,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetPropertyValue)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                bFxStore.into().0,
+                key,
+                propvar,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn SetDefaultEndpoint(
@@ -163,12 +183,14 @@ impl IPolicyConfig {
         device_id: impl Param<PCWSTR>,
         role: ERole,
     ) -> Result<()> {
-        (Interface::vtable(self).SetDefaultEndpoint)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            role,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetDefaultEndpoint)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                role,
+            )
+            .ok()
+        }
     }
 
     pub unsafe fn SetEndpointVisibility(
@@ -176,12 +198,14 @@ impl IPolicyConfig {
         device_id: impl Param<PCWSTR>,
         visible: impl Into<BOOL>,
     ) -> Result<()> {
-        (Interface::vtable(self).SetEndpointVisibility)(
-            Interface::as_raw(self),
-            device_id.param().abi(),
-            visible.into().0,
-        )
-        .ok()
+        unsafe {
+            (Interface::vtable(self).SetEndpointVisibility)(
+                Interface::as_raw(self),
+                device_id.param().abi(),
+                visible.into().0,
+            )
+            .ok()
+        }
     }
 }
 

@@ -1,13 +1,13 @@
 use crate::error::Result;
 use windows::{
-    core::{Interface, GUID},
     Win32::{
         Foundation::RPC_E_CHANGED_MODE,
         System::Com::{
-            CoCreateInstance, CoInitializeEx, CoTaskMemFree, CoUninitialize, CLSCTX_ALL,
-            COINIT_APARTMENTTHREADED,
+            CLSCTX_ALL, COINIT_APARTMENTTHREADED, CoCreateInstance, CoInitializeEx, CoTaskMemFree,
+            CoUninitialize,
         },
     },
+    core::{GUID, Interface},
 };
 
 pub struct Com {}
@@ -64,8 +64,8 @@ use windows::Win32::{
     Foundation::{LPARAM, WPARAM},
     System::Threading::GetCurrentThreadId,
     UI::WindowsAndMessaging::{
-        DispatchMessageW, GetMessageW, PeekMessageW, PostThreadMessageW, TranslateMessage, MSG,
-        PM_NOREMOVE, WM_APP, WM_QUIT,
+        DispatchMessageW, GetMessageW, MSG, PM_NOREMOVE, PeekMessageW, PostThreadMessageW,
+        TranslateMessage, WM_APP, WM_QUIT,
     },
 };
 

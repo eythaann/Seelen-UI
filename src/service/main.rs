@@ -18,13 +18,13 @@ use error::Result;
 use itertools::Itertools;
 use logger::SluServiceLogger;
 use shutdown::restore_native_taskbar;
-use slu_ipc::{AppIpc, ServiceIpc, IPC};
-use std::sync::{atomic::AtomicBool, LazyLock, OnceLock};
+use slu_ipc::{AppIpc, IPC, ServiceIpc};
+use std::sync::{LazyLock, OnceLock, atomic::AtomicBool};
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
 use tokio::sync::mpsc::Sender;
 use windows::Win32::{
-    Foundation::{GetLastError, ERROR_ALREADY_EXISTS},
+    Foundation::{ERROR_ALREADY_EXISTS, GetLastError},
     Security::SE_TCB_NAME,
     System::Threading::CreateMutexW,
     UI::WindowsAndMessaging::SW_MINIMIZE,

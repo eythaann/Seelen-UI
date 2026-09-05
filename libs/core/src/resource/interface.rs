@@ -1,11 +1,11 @@
 use std::path::Path;
 
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{Serialize, de::DeserializeOwned};
 
 use crate::{
     error::Result,
     resource::{
-        deserialize_extended_yaml, deserialize_extended_yaml_no_vars, ResourceKind, SluResourceFile,
+        ResourceKind, SluResourceFile, deserialize_extended_yaml, deserialize_extended_yaml_no_vars,
     },
     utils::search_resource_entrypoint,
 };

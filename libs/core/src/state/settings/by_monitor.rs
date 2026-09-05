@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 use crate::{
     resource::WidgetId,
-    state::{by_widget::GenericWidgetSettings, WorkspaceId},
+    state::{WorkspaceId, by_widget::GenericWidgetSettings},
 };
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]

@@ -1,6 +1,6 @@
 pub mod tauri;
 
-use std::sync::{atomic::Ordering, LazyLock};
+use std::sync::{LazyLock, atomic::Ordering};
 
 use seelen_core::system_state::{Core, Disk, Memory, NetworkStatistics};
 
@@ -65,15 +65,17 @@ impl SystemInfo {
         *self.last_cores.lock() = self.cores();
 
         // Spawn monitoring thread
-        std::thread::spawn(|| loop {
-            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
-                std::thread::sleep(std::time::Duration::from_secs(5));
-                continue;
-            }
+        std::thread::spawn(|| {
+            loop {
+                if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                    std::thread::sleep(std::time::Duration::from_secs(5));
+                    continue;
+                }
 
-            let interval = FULL_STATE.load().settings.polling_interval;
-            std::thread::sleep(std::time::Duration::from_secs(interval));
-            SystemInfo::instance().check_and_emit_changes();
+                let interval = FULL_STATE.load().settings.polling_interval;
+                std::thread::sleep(std::time::Duration::from_secs(interval));
+                SystemInfo::instance().check_and_emit_changes();
+            }
         });
 
         Ok(())

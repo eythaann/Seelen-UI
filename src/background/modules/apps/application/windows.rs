@@ -10,12 +10,12 @@ use windows::Win32::UI::WindowsAndMessaging::{
 
 use crate::{
     hook::HookManager,
-    modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
+    modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
     utils::spawn_named_thread,
     windows_api::{
-        event_window::IS_INTERACTIVE_SESSION,
-        window::{event::WinEvent, Window},
         WindowEnumerator, WindowsApi,
+        event_window::IS_INTERACTIVE_SESSION,
+        window::{Window, event::WinEvent},
     },
 };
 
@@ -46,31 +46,33 @@ impl UserAppsManager {
 
         HookManager::subscribe(|(event, window)| Self::on_win_event(event, window));
 
-        spawn_named_thread("InteractableWindowsRevalidator", || loop {
-            std::thread::sleep(std::time::Duration::from_millis(5000));
+        spawn_named_thread("InteractableWindowsRevalidator", || {
+            loop {
+                std::thread::sleep(std::time::Duration::from_millis(5000));
 
-            // Pause when session is not interactive to reduce CPU usage
-            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
-                continue;
+                // Pause when session is not interactive to reduce CPU usage
+                if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                    continue;
+                }
+
+                Self::instance().interactable_windows.retain(|w| {
+                    let window = Window::from(w.hwnd);
+                    if window.is_interactable_and_not_hidden() {
+                        true
+                    } else {
+                        Self::send(UserAppWinEvent::Removed(window.address()));
+                        false
+                    }
+                });
+
+                // Scan for windows that now qualify but were never tracked (e.g. style/frame
+                // state was not settled at creation time).
+                let _ = WindowEnumerator::new().for_each(|window| {
+                    if is_interactable_window(&window) && USER_APPS_MANAGER.add_win(&window) {
+                        Self::send(UserAppWinEvent::Added(window.address()));
+                    }
+                });
             }
-
-            Self::instance().interactable_windows.retain(|w| {
-                let window = Window::from(w.hwnd);
-                if window.is_interactable_and_not_hidden() {
-                    true
-                } else {
-                    Self::send(UserAppWinEvent::Removed(window.address()));
-                    false
-                }
-            });
-
-            // Scan for windows that now qualify but were never tracked (e.g. style/frame
-            // state was not settled at creation time).
-            let _ = WindowEnumerator::new().for_each(|window| {
-                if is_interactable_window(&window) && USER_APPS_MANAGER.add_win(&window) {
-                    Self::send(UserAppWinEvent::Added(window.address()));
-                }
-            });
         });
 
         initial
@@ -108,14 +110,12 @@ impl UserAppsManager {
                 }
 
                 // re-check for UWP apps that on creation starts without a parent
-                if event == WinEvent::ObjectParentChange {
-                    if let Some(parent) = window.parent() {
-                        if parent.is_interactable_and_not_hidden()
-                            && USER_APPS_MANAGER.add_win(&parent)
-                        {
-                            Self::send(UserAppWinEvent::Added(parent.address()));
-                        }
-                    }
+                if event == WinEvent::ObjectParentChange
+                    && let Some(parent) = window.parent()
+                    && parent.is_interactable_and_not_hidden()
+                    && USER_APPS_MANAGER.add_win(&parent)
+                {
+                    Self::send(UserAppWinEvent::Added(parent.address()));
                 }
             }
             WinEvent::ObjectHide => {

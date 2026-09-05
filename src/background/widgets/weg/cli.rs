@@ -11,7 +11,7 @@ use crate::{
     error::Result,
     modules::apps::application::USER_APPS_MANAGER,
     state::application::WEG_ITEMS_MANAGER,
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 
 /// Mirrors `getWindowsForItem` from the frontend (`windows.ts`).

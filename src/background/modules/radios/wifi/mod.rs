@@ -10,8 +10,8 @@ use windows::{
     Win32::{
         Foundation::HANDLE,
         NetworkManagement::WiFi::{
-            WlanCloseHandle, WlanDeleteProfile, WlanEnumInterfaces, WlanOpenHandle, WlanScan,
             DOT11_SSID, WLAN_API_VERSION_2_0, WLAN_INTERFACE_INFO, WLAN_INTERFACE_INFO_LIST,
+            WlanCloseHandle, WlanDeleteProfile, WlanEnumInterfaces, WlanOpenHandle, WlanScan,
         },
     },
 };
@@ -21,10 +21,10 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::lock_free::SyncHashMap,
-    windows_api::{string_utils::WindowsString, DeviceEnumerator, DeviceEvent, DeviceId},
+    windows_api::{DeviceEnumerator, DeviceEvent, DeviceId, string_utils::WindowsString},
 };
 
-use adapter::{wifi_known_profiles, SluWifiAdapter};
+use adapter::{SluWifiAdapter, wifi_known_profiles};
 
 // ── Win32 WLAN handle (only used for directed probe on hidden networks) ──────
 
@@ -310,10 +310,8 @@ impl WifiManager {
             }
         }
 
-        if !deleted_any {
-            if let Some(err) = last_err {
-                return Err(format!("WlanDeleteProfile failed: {err}").into());
-            }
+        if !deleted_any && let Some(err) = last_err {
+            return Err(format!("WlanDeleteProfile failed: {err}").into());
         }
         Ok(())
     }

@@ -278,18 +278,14 @@ impl WebviewArgs {
         "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer,BackForwardCache,InterestCohort,SharedArrayBuffer,CalculateNativeWinOcclusion,OptimizationHints,AutofillServerCommunication,PaintHolding",
         "--no-first-run",
         "--disable-site-isolation-trials",
-
         "--disk-cache-size=0",
         "--disable-application-cache",
         "--media-cache-size=0",
-
         "--disable-extensions",
         "--disable-component-extensions-with-background-pages",
         "--disable-ipc-flooding-protection",
-
         "--disable-breakpad",
         "--disable-crash-reporter",
-
         "--disable-background-networking",
         "--disable-component-update",
         "--disable-background-timer-throttling",
@@ -297,7 +293,6 @@ impl WebviewArgs {
         // prevents the browser from lowering the CPU priority of invisible windows, oposite of what we want
         // "--disable-renderer-backgrounding"
         "--disable-sync",
-
         "--no-pings",
         // maybe causes more resources than it reduces
         // "--aggressive-cache-discard",

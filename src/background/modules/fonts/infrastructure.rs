@@ -10,10 +10,10 @@ fn get_font_manager() -> &'static FontManager {
     static REGISTER: Once = Once::new();
     REGISTER.call_once(|| {
         FontManager::subscribe(|event| {
-            if event == FontManagerEvent::FontsChanged {
-                if let Ok(fonts) = FontManager::instance().get_fonts() {
-                    emit_to_webviews(SeelenEvent::SystemFontsChanged, &fonts);
-                }
+            if event == FontManagerEvent::FontsChanged
+                && let Ok(fonts) = FontManager::instance().get_fonts()
+            {
+                emit_to_webviews(SeelenEvent::SystemFontsChanged, &fonts);
             }
         });
     });

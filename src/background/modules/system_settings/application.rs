@@ -197,10 +197,10 @@ impl SystemSettings {
     pub fn set_accent_color(color: seelen_core::system_state::Color) -> Result<()> {
         use windows::Win32::{
             Foundation::{LPARAM, WPARAM},
-            UI::WindowsAndMessaging::{SendNotifyMessageW, HWND_BROADCAST, WM_SETTINGCHANGE},
+            UI::WindowsAndMessaging::{HWND_BROADCAST, SendNotifyMessageW, WM_SETTINGCHANGE},
         };
         use windows_core::w;
-        use winreg::{enums::HKEY_CURRENT_USER, RegKey};
+        use winreg::{RegKey, enums::HKEY_CURRENT_USER};
 
         log::info!(
             "Setting accent color to #{:02X}{:02X}{:02X}{:02X}",

@@ -5,8 +5,8 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     Graphics::Gdi::{InvalidateRect, UpdateWindow},
     UI::WindowsAndMessaging::{
-        FindWindowA, FindWindowExA, PostMessageW, SetParent, SetWindowLongPtrW, GWL_EXSTYLE,
-        GWL_STYLE, WS_CHILDWINDOW, WS_CLIPSIBLINGS, WS_EX_ACCEPTFILES, WS_EX_APPWINDOW,
+        FindWindowA, FindWindowExA, GWL_EXSTYLE, GWL_STYLE, PostMessageW, SetParent,
+        SetWindowLongPtrW, WS_CHILDWINDOW, WS_CLIPSIBLINGS, WS_EX_ACCEPTFILES, WS_EX_APPWINDOW,
         WS_EX_WINDOWEDGE,
     },
 };
@@ -37,10 +37,10 @@ impl SeelenWall {
         // 0x00100B8A "" WorkerW       <-- This is the WorkerW we want
         // 0x000100EC "Program Manager" Progman
         WindowEnumerator::new().for_each(|current| unsafe {
-            if FindWindowExA(Some(current.hwnd()), None, pcstr!("SHELLDLL_DefView"), None).is_ok() {
-                if let Ok(w) = FindWindowExA(None, Some(current.hwnd()), pcstr!("WorkerW"), None) {
-                    worker_w = Some(w);
-                }
+            if FindWindowExA(Some(current.hwnd()), None, pcstr!("SHELLDLL_DefView"), None).is_ok()
+                && let Ok(w) = FindWindowExA(None, Some(current.hwnd()), pcstr!("WorkerW"), None)
+            {
+                worker_w = Some(w);
             }
         })?;
 

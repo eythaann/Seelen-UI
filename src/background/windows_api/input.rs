@@ -11,9 +11,9 @@ use seelen_core::Point;
 use windows::Win32::UI::Input::KeyboardAndMouse::*;
 use windows::Win32::UI::WindowsAndMessaging::GetCursorPos;
 use windows::Win32::UI::WindowsAndMessaging::GetSystemMetrics;
-use windows::Win32::UI::WindowsAndMessaging::SetCursorPos;
 use windows::Win32::UI::WindowsAndMessaging::SM_CXSCREEN;
 use windows::Win32::UI::WindowsAndMessaging::SM_CYSCREEN;
+use windows::Win32::UI::WindowsAndMessaging::SetCursorPos;
 
 use crate::error::Result;
 

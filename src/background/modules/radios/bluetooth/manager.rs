@@ -27,8 +27,8 @@ use crate::{
 };
 
 use super::{
-    classic::BluetoothDeviceWrapper, low_energy::BluetoothLEDeviceWrapper, BluetoothDeviceType,
-    BluetoothManagerEvent,
+    BluetoothDeviceType, BluetoothManagerEvent, classic::BluetoothDeviceWrapper,
+    low_energy::BluetoothLEDeviceWrapper,
 };
 
 // Pairing configuration constants

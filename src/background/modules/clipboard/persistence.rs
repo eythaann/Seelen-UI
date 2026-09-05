@@ -1,8 +1,8 @@
 use seelen_core::system_state::ClipboardEntry;
 use serde::{Deserialize, Serialize};
 use windows::{
-    core::HSTRING,
     Security::Cryptography::{CryptographicBuffer, DataProtection::DataProtectionProvider},
+    core::HSTRING,
 };
 
 use crate::{error::Result, utils::constants::SEELEN_COMMON};

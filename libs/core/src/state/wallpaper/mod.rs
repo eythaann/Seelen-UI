@@ -65,20 +65,20 @@ impl SluResource for Wallpaper {
 
     fn sanitize(&mut self) {
         // migration step for old wallpapers
-        if WallpaperKind::Unsupported == self.r#type {
-            if let Some(filename) = &self.filename {
-                if Self::SUPPORTED_VIDEOS
-                    .iter()
-                    .any(|ext| filename.ends_with(ext))
-                {
-                    self.r#type = WallpaperKind::Video;
-                }
-                if Self::SUPPORTED_IMAGES
-                    .iter()
-                    .any(|ext| filename.ends_with(ext))
-                {
-                    self.r#type = WallpaperKind::Image;
-                }
+        if WallpaperKind::Unsupported == self.r#type
+            && let Some(filename) = &self.filename
+        {
+            if Self::SUPPORTED_VIDEOS
+                .iter()
+                .any(|ext| filename.ends_with(ext))
+            {
+                self.r#type = WallpaperKind::Video;
+            }
+            if Self::SUPPORTED_IMAGES
+                .iter()
+                .any(|ext| filename.ends_with(ext))
+            {
+                self.r#type = WallpaperKind::Image;
             }
         }
     }

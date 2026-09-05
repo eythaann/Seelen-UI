@@ -8,7 +8,7 @@ use itertools::Itertools;
 use tauri::webview_version;
 use tauri_plugin_dialog::DialogExt;
 use windows::Win32::{
-    Foundation::{GetLastError, ERROR_ALREADY_EXISTS},
+    Foundation::{ERROR_ALREADY_EXISTS, GetLastError},
     System::Threading::CreateMutexW,
 };
 
@@ -16,7 +16,7 @@ use crate::{
     error::Result,
     is_local_dev,
     utils::{has_fixed_runtime, is_running_as_appx},
-    windows_api::{string_utils::WindowsString, WindowsApi},
+    windows_api::{WindowsApi, string_utils::WindowsString},
 };
 
 #[derive(Debug)]
@@ -77,7 +77,7 @@ pub fn restart_as_appx() -> Result<!> {
 }
 
 fn is_uac_enabled() -> bool {
-    use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
+    use winreg::{RegKey, enums::HKEY_LOCAL_MACHINE};
     let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
     let Ok(key) = hklm.open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
     else {

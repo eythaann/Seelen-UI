@@ -581,22 +581,22 @@ impl Settings {
 
     pub fn migrate(&mut self) -> Result<()> {
         // Migrate step for v2.5
-        if let Some(backgrounds) = self.by_widget.wall.deprecated_bgs.take() {
-            if !backgrounds.is_empty() {
-                let collection = WallpaperCollection {
-                    id: uuid::Uuid::new_v4(),
-                    name: "Migrated".to_string(),
-                    wallpapers: backgrounds,
-                    hidden: false,
-                };
+        if let Some(backgrounds) = self.by_widget.wall.deprecated_bgs.take()
+            && !backgrounds.is_empty()
+        {
+            let collection = WallpaperCollection {
+                id: uuid::Uuid::new_v4(),
+                name: "Migrated".to_string(),
+                wallpapers: backgrounds,
+                hidden: false,
+            };
 
-                // Set as default collection if no default is set
-                if self.by_widget.wall.default_collection.is_none() {
-                    self.by_widget.wall.default_collection = Some(collection.id);
-                }
-
-                self.wallpaper_collections.push(collection);
+            // Set as default collection if no default is set
+            if self.by_widget.wall.default_collection.is_none() {
+                self.by_widget.wall.default_collection = Some(collection.id);
             }
+
+            self.wallpaper_collections.push(collection);
         }
 
         Ok(())

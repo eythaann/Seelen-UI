@@ -1,7 +1,7 @@
 use seelen_core::state::shortcuts::ResolvedShortcut;
-use slu_ipc::{messages::AppMessage, AppIpc};
+use slu_ipc::{AppIpc, messages::AppMessage};
 use win_hotkeys::{
-    error::WHKError, events::KeyboardInputEvent, Hotkey, HotkeyManager, TriggerTiming, VKey,
+    Hotkey, HotkeyManager, TriggerTiming, VKey, error::WHKError, events::KeyboardInputEvent,
 };
 
 use crate::{

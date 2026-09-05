@@ -2,7 +2,7 @@ use schemars::JsonSchema;
 
 use crate::{
     resource::WidgetId,
-    state::{twm::TwmPlugin, weg::WegPluginItem, ToolbarItem},
+    state::{ToolbarItem, twm::TwmPlugin, weg::WegPluginItem},
     utils::TsUnknown,
 };
 

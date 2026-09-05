@@ -66,10 +66,10 @@ impl WorkspaceWallpapersManager {
 
         // Try to get workspace collection
         if let Some(monitor_config) = state.settings.monitors_v3.get(monitor_id) {
-            if let Some(workspace_config) = monitor_config.by_workspace.get(workspace_id) {
-                if let Some(collection_id) = workspace_config.wallpaper_collection {
-                    return Some(collection_id);
-                }
+            if let Some(workspace_config) = monitor_config.by_workspace.get(workspace_id)
+                && let Some(collection_id) = workspace_config.wallpaper_collection
+            {
+                return Some(collection_id);
             }
 
             // Try to get monitor collection
@@ -230,19 +230,19 @@ impl WorkspaceWallpapersManager {
 
     /// Manually advance to next wallpaper
     pub fn next() {
-        if let Some(sender) = MANUAL_CHANGE_SENDER.get() {
-            if let Err(e) = sender.send(ChangeDirection::Next) {
-                log::warn!("Failed to send next wallpaper command: {}", e);
-            }
+        if let Some(sender) = MANUAL_CHANGE_SENDER.get()
+            && let Err(e) = sender.send(ChangeDirection::Next)
+        {
+            log::warn!("Failed to send next wallpaper command: {}", e);
         }
     }
 
     /// Manually go to previous wallpaper
     pub fn previous() {
-        if let Some(sender) = MANUAL_CHANGE_SENDER.get() {
-            if let Err(e) = sender.send(ChangeDirection::Previous) {
-                log::warn!("Failed to send previous wallpaper command: {}", e);
-            }
+        if let Some(sender) = MANUAL_CHANGE_SENDER.get()
+            && let Err(e) = sender.send(ChangeDirection::Previous)
+        {
+            log::warn!("Failed to send previous wallpaper command: {}", e);
         }
     }
 }

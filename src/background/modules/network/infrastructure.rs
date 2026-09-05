@@ -7,7 +7,7 @@ use windows::Win32::Networking::NetworkListManager::{
 
 use crate::{app::emit_to_webviews, error::Result};
 
-use super::application::{get_local_ip_address, NetworkManager, NetworkManagerEvent};
+use super::application::{NetworkManager, NetworkManagerEvent, get_local_ip_address};
 
 fn get_network_manager() -> &'static NetworkManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();

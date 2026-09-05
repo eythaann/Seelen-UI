@@ -7,7 +7,7 @@ use crate::{
     app::{emit_to_webviews, get_app_handle},
     error::Result,
     state::application::WEG_ITEMS_MANAGER,
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
 

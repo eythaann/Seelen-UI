@@ -3,9 +3,8 @@ use std::sync::{Arc, LazyLock};
 use std::time::Duration;
 
 use notify_debouncer_full::{
-    new_debouncer,
+    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap, new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode},
-    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use seelen_core::system_state::StartMenuItem;
 use windows::Win32::UI::Shell::{FOLDERID_CommonStartMenu, FOLDERID_StartMenu};

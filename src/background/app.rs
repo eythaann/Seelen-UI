@@ -7,6 +7,7 @@ use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 use seelen_core::state::shortcuts::resolve_shortcuts;
 
 use crate::{
+    APP_HANDLE,
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     hook::register_win_hook,
@@ -14,20 +15,19 @@ use crate::{
     modules::user::infrastructure::reemit_user,
     resources::RESOURCES,
     session::infrastructure::reemit_session,
-    state::application::{initialize_user_resources_watcher, AppSettings, FULL_STATE},
+    state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
     utils::{
-        discord::{start_discord_rpc, update_discord_rpc},
         CRONOMETER,
+        discord::{start_discord_rpc, update_discord_rpc},
     },
     widgets::{
         manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,
         weg::SeelenWeg,
     },
     windows_api::{
-        event_window::{create_background_window, IS_INTERACTIVE_SESSION},
         Com,
+        event_window::{IS_INTERACTIVE_SESSION, create_background_window},
     },
-    APP_HANDLE,
 };
 
 /// Tauri app handle

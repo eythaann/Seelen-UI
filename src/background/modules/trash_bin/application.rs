@@ -2,7 +2,7 @@ use std::sync::LazyLock;
 
 use seelen_core::system_state::TrashBinInfo;
 use windows::Win32::UI::Shell::{
-    SHEmptyRecycleBinW, SHQueryRecycleBinW, SHERB_NOSOUND, SHQUERYRBINFO,
+    SHERB_NOSOUND, SHEmptyRecycleBinW, SHQUERYRBINFO, SHQueryRecycleBinW,
 };
 use windows_core::PCWSTR;
 
@@ -10,7 +10,7 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::lock_free::TracedMutex,
-    windows_api::event_window::{subscribe_to_background_window, WM_TRASH_BIN_NOTIFY},
+    windows_api::event_window::{WM_TRASH_BIN_NOTIFY, subscribe_to_background_window},
 };
 
 #[derive(Debug)]

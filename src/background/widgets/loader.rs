@@ -1,5 +1,5 @@
 use std::{
-    sync::{atomic::AtomicU8, Arc},
+    sync::{Arc, atomic::AtomicU8},
     time::Duration,
 };
 
@@ -16,10 +16,10 @@ use crate::{
     state::application::FULL_STATE,
     utils::lock_free::SyncHashMap,
     widgets::{
+        WidgetWebviewLabel,
         manager::WIDGET_MANAGER,
         notify_widget_statuses_change,
         webview::{self, WidgetWebview},
-        WidgetWebviewLabel,
     },
     windows_api::event_window::IS_INTERACTIVE_SESSION,
 };

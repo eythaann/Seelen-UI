@@ -31,10 +31,8 @@ pub fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> Res
     let manager = get_wifi_manager();
     match manager.connect(&ssid, password.as_deref(), hidden) {
         Ok(result) => {
-            if result {
-                if let Ok(networks) = manager.get_available_networks() {
-                    emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
-                }
+            if result && let Ok(networks) = manager.get_available_networks() {
+                emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
             }
             Ok(result)
         }

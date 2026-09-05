@@ -1,7 +1,6 @@
 use notify_debouncer_full::{
-    new_debouncer,
+    DebounceEventResult, Debouncer, FileIdMap, new_debouncer,
     notify::{ReadDirectoryChangesWatcher, RecursiveMode},
-    DebounceEventResult, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
 use seelen_core::system_state::{FolderType, User};
@@ -17,8 +16,8 @@ use windows::Win32::{
     System::SystemInformation::ComputerNameDnsDomain,
 };
 use winreg::{
-    enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
+    enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
 };
 
 use crate::{

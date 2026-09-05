@@ -11,12 +11,12 @@ use windows::{
     Win32::{
         Foundation::{HANDLE, NO_ERROR},
         NetworkManagement::IpHelper::{
-            CancelMibChangeNotify2, GetAdaptersAddresses, NotifyIpInterfaceChange,
-            GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX, IP_ADAPTER_ADDRESSES_LH,
-            MIB_IPINTERFACE_ROW, MIB_NOTIFICATION_TYPE,
+            CancelMibChangeNotify2, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
+            GetAdaptersAddresses, IP_ADAPTER_ADDRESSES_LH, MIB_IPINTERFACE_ROW,
+            MIB_NOTIFICATION_TYPE, NotifyIpInterfaceChange,
         },
         Networking::{
-            NetworkListManager::{INetworkListManager, NetworkListManager, NLM_CONNECTIVITY},
+            NetworkListManager::{INetworkListManager, NLM_CONNECTIVITY, NetworkListManager},
             WinSock::AF_UNSPEC,
         },
     },
@@ -129,10 +129,10 @@ impl Drop for NetworkManager {
             NetworkInformation::RemoveNetworkStatusChanged(token).log_error();
         }
 
-        if let Some(handle) = self.ip_interface_change_handle.take() {
-            if let Err(err) = unsafe { CancelMibChangeNotify2(handle).ok() } {
-                log::error!("CancelMibChangeNotify2 failed: {err}");
-            }
+        if let Some(handle) = self.ip_interface_change_handle.take()
+            && let Err(err) = unsafe { CancelMibChangeNotify2(handle).ok() }
+        {
+            log::error!("CancelMibChangeNotify2 failed: {err}");
         }
     }
 }
@@ -151,14 +151,16 @@ trait IterFromRaw {
 
 impl IterFromRaw for SluNetAdapter {
     unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<SluNetAdapter>> {
-        let mut adapters = Vec::new();
-        let mut ptr = raw;
-        while !ptr.is_null() {
-            let adapter = &*ptr;
-            adapters.push(adapter_to_slu_net_adapter(adapter)?);
-            ptr = adapter.Next;
+        unsafe {
+            let mut adapters = Vec::new();
+            let mut ptr = raw;
+            while !ptr.is_null() {
+                let adapter = &*ptr;
+                adapters.push(adapter_to_slu_net_adapter(adapter)?);
+                ptr = adapter.Next;
+            }
+            Ok(adapters)
         }
-        Ok(adapters)
     }
 }
 

@@ -5,13 +5,13 @@ use seelen_core::{
     system_state::{Color, RelaunchArguments, StartMenuLayout, StartMenuLayoutItem},
 };
 
-use slu_ipc::{messages::SvcAction, ServiceIpc};
+use slu_ipc::{ServiceIpc, messages::SvcAction};
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
 use crate::{
-    app::{get_app_handle, SeelenUI},
+    app::{SeelenUI, get_app_handle},
     error::Result,
     utils::{
         self,
@@ -20,10 +20,10 @@ use crate::{
         pwsh::PwshScript,
     },
     widgets::{
-        permissions::{request_widget_permission, WidgetPerm},
+        permissions::{WidgetPerm, request_widget_permission},
         popups::shortcut_registering::REG_SHORTCUT_DATA,
     },
-    windows_api::{hdc::DeviceContext, string_utils::WindowsString, window::Window, WindowsApi},
+    windows_api::{WindowsApi, hdc::DeviceContext, string_utils::WindowsString, window::Window},
 };
 
 #[tauri::command(async)]

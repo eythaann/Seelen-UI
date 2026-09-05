@@ -14,7 +14,7 @@ use seelen_core::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    resources::{ResourceManager, RESOURCES},
+    resources::{RESOURCES, ResourceManager},
     utils::constants::SEELEN_COMMON,
 };
 
@@ -259,10 +259,10 @@ impl ResourceManager {
             };
 
             let mut found = None;
-            if let (Some(entry_umid), Some(umid)) = (&entry.umid, umid) {
-                if entry_umid == umid {
-                    found = Some(entry);
-                }
+            if let (Some(entry_umid), Some(umid)) = (&entry.umid, umid)
+                && entry_umid == umid
+            {
+                found = Some(entry);
             }
 
             if found.is_none()
@@ -292,10 +292,10 @@ impl ResourceManager {
                     .map(strip_icon_index)
                     .as_deref()
                     .and_then(last_edit_at);
-                if let (Some(cached), Some(current)) = (entry.source_mtime, entry_current_mtime) {
-                    if cached != current {
-                        continue;
-                    }
+                if let (Some(cached), Some(current)) = (entry.source_mtime, entry_current_mtime)
+                    && cached != current
+                {
+                    continue;
                 }
 
                 if let Some(redirect) = &entry.redirect {
@@ -303,10 +303,10 @@ impl ResourceManager {
                         || Self::_has_shared_file_icon(system_pack, redirect);
                 }
 
-                if let Some(icon) = &entry.icon {
-                    if Self::icon_exists(icon) {
-                        return true;
-                    }
+                if let Some(icon) = &entry.icon
+                    && Self::icon_exists(icon)
+                {
+                    return true;
                 }
             };
         }
@@ -347,12 +347,11 @@ fn last_edit_at(path: &Path) -> Option<DateTime<Utc>> {
 /// For example `"C:\foo\bar.ico,0"` → `PathBuf("C:\foo\bar.ico")`.
 /// Paths without a `,<integer>` suffix are returned as-is.
 fn strip_icon_index(path: &Path) -> std::borrow::Cow<'_, Path> {
-    if let Some(s) = path.to_str() {
-        if let Some(comma) = s.rfind(',') {
-            if s[comma + 1..].trim().parse::<i32>().is_ok() {
-                return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
-            }
-        }
+    if let Some(s) = path.to_str()
+        && let Some(comma) = s.rfind(',')
+        && s[comma + 1..].trim().parse::<i32>().is_ok()
+    {
+        return std::borrow::Cow::Owned(PathBuf::from(&s[..comma]));
     }
     std::borrow::Cow::Borrowed(path)
 }

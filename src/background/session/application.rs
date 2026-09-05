@@ -4,8 +4,8 @@ use parking_lot::Mutex;
 use seelen_core::system_state::SeelenSession;
 use uuid::Uuid;
 use windows::{
-    core::HSTRING,
     Security::Credentials::{PasswordCredential, PasswordVault},
+    core::HSTRING,
 };
 
 use crate::{
@@ -13,7 +13,7 @@ use crate::{
     event_manager, get_tokio_handle,
 };
 
-use super::domain::{decode_jwt_payload, JwtPayload};
+use super::domain::{JwtPayload, decode_jwt_payload};
 
 // ─── Shared HTTP client ───────────────────────────────────────────────────────
 

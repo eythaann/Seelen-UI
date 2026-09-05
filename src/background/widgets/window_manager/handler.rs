@@ -7,9 +7,9 @@ use crate::{
     app::emit_to_webviews,
     cli::ServicePipe,
     error::Result,
-    state::application::{performance::PERFORMANCE_MODE, FULL_STATE},
+    state::application::{FULL_STATE, performance::PERFORMANCE_MODE},
     widgets::window_manager::state_v2::{TwmState, WM_STATE},
-    windows_api::{window::Window, WindowsApi},
+    windows_api::{WindowsApi, window::Window},
 };
 use seelen_core::{
     handlers::SeelenEvent,

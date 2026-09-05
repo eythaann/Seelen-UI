@@ -1,6 +1,6 @@
 use std::sync::LazyLock;
 
-use positioning::{easings::Easing, AnimationOrchestrator, PositionerBuilder};
+use positioning::{AnimationOrchestrator, PositionerBuilder, easings::Easing};
 use slu_ipc::messages::{IpcResponse, SvcAction};
 
 use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::WindowsApi};
