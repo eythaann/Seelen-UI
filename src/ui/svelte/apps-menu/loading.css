@@ -1,0 +1,23 @@
+.apps-menu.apps-menu-loading {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+  pointer-events: none;
+}
+
+.apps-menu-loading-indicator {
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  border: 3px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: apps-menu-loading-spin 700ms linear infinite;
+}
+
+@keyframes apps-menu-loading-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
