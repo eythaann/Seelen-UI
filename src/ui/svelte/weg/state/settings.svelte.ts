@@ -204,12 +204,11 @@ Widget.self.window.onMoved(({ payload }) => {
 
 $effect.root(() => {
   $effect(() => {
-    const { size, padding, margin, spaceBetweenItems, zoomSize } = settings;
+    const { size, padding, margin, spaceBetweenItems } = settings;
     const sheet = new RuntimeStyleSheet("@config/weg");
     sheet.addVariable("--config-margin", `${margin}px`);
     sheet.addVariable("--config-padding", `${padding}px`);
     sheet.addVariable("--config-item-size", `${size}px`);
-    sheet.addVariable("--config-item-zoom-size", `${zoomSize}px`);
     sheet.addVariable("--config-space-between-items", `${spaceBetweenItems}px`);
     sheet.applyToDocument();
   });

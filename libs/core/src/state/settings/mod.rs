@@ -179,8 +179,6 @@ pub struct SeelenWegSettings {
     pub show_window_title: bool,
     /// item size in px
     pub size: u32,
-    /// zoomed item size in px
-    pub zoom_size: u32,
     /// Dock/Taskbar margin in px
     pub margin: u32,
     /// Dock/Taskbar padding in px
@@ -210,7 +208,6 @@ impl Default for SeelenWegSettings {
             temporal_items_visibility: WegTemporalItemsVisibility::All,
             pinned_items_visibility: WegPinnedItemsVisibility::Always,
             size: 40,
-            zoom_size: 70,
             margin: 8,
             padding: 8,
             space_between_items: 8,
