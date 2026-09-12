@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { flip } from "svelte/animate";
+  import { scale } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
   import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
-  import { plugins } from "../state/items.svelte.ts";
+  import { plugins, toolbarState } from "../state/items.svelte.ts";
   import SortableItem from "./SortableItem.svelte";
 
   interface Props {
@@ -10,19 +13,34 @@
   }
 
   let { id, items, itemIndexById }: Props = $props();
+
+  let mounted = $state(false);
+
+  $effect(() => {
+    const timeout = setTimeout(() => {
+      mounted = true;
+    }, 350);
+    return () => clearTimeout(timeout);
+  });
 </script>
 
 <div class="ft-bar-container ft-bar-{id}">
   {#each items as entry (typeof entry === "string" ? entry : entry.id)}
     {@const index = itemIndexById.get(typeof entry === "string" ? entry : entry.id) ?? 0}
-    {#if typeof entry === "string"}
-      {@const cached = plugins.value.find((p) => p.id === entry)}
-      {#if cached}
-        {@const module = { ...(cached.plugin as ToolbarItem), id: entry }}
-        <SortableItem {module} {index} pluginId={entry} />
+    <div
+      class="ft-bar-item-animator"
+      animate:flip={{ duration: 200, easing: cubicOut }}
+      transition:scale={{ duration: mounted ? 180 : 0, start: 0.7, easing: cubicOut }}
+    >
+      {#if typeof entry === "string"}
+        {@const cached = plugins.value.find((p) => p.id === entry)}
+        {#if cached}
+          {@const module = { ...(cached.plugin as ToolbarItem), id: entry }}
+          <SortableItem {module} {index} pluginId={entry} />
+        {/if}
+      {:else}
+        <SortableItem module={entry} {index} />
       {/if}
-    {:else}
-      <SortableItem module={entry} {index} />
-    {/if}
+    </div>
   {/each}
 </div>

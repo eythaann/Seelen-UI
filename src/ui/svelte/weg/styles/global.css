@@ -7,6 +7,8 @@
   --weg-max-taskbar-width: calc(100vw - var(--config-margin) * 2);
   --weg-max-taskbar-height: calc(100vh - var(--config-margin) * 2);
   --dock-size: calc(var(--config-item-size) + (var(--config-padding) + var(--config-margin)) * 2);
+  --weg-animation-duration: 220ms;
+  --weg-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -128,13 +130,13 @@ body {
     }
 
     .weg-items-container:has(.weg-items-left[data-empty="true"]) {
-      .weg-item-drag-container:first-child:has(.weg-separator) {
+      :is(.weg-item-drag-container, .weg-item-animator):first-child:has(.weg-separator) {
         margin-right: calc(var(--config-space-between-items) * -1);
       }
     }
 
     .weg-items-container:has(.weg-items-right[data-empty="true"]) {
-      .weg-item-drag-container:last-child:has(.weg-separator) {
+      :is(.weg-item-drag-container, .weg-item-animator):last-child:has(.weg-separator) {
         margin-left: calc(var(--config-space-between-items) * -1);
       }
     }
@@ -171,13 +173,13 @@ body {
     }
 
     .weg-items-container:has(.weg-items-left[data-empty="true"]) {
-      .weg-item-drag-container:first-child:has(.weg-separator) {
+      :is(.weg-item-drag-container, .weg-item-animator):first-child:has(.weg-separator) {
         margin-bottom: calc(var(--config-space-between-items) * -1);
       }
     }
 
     .weg-items-container:has(.weg-items-right[data-empty="true"]) {
-      .weg-item-drag-container:last-child:has(.weg-separator) {
+      :is(.weg-item-drag-container, .weg-item-animator):last-child:has(.weg-separator) {
         margin-top: calc(var(--config-space-between-items) * -1);
       }
     }
@@ -185,5 +187,19 @@ body {
 
   &:has(.weg-item-drag-container.dragging) {
     pointer-events: none;
+  }
+}
+
+.weg-item-animator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weg-item-animator {
+    animation: none !important;
+    transition: none !important;
   }
 }

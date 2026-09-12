@@ -5,6 +5,8 @@
 
 :root {
   font-size: var(--config-item-size);
+  --ft-animation-duration: 200ms;
+  --ft-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -117,6 +119,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
+    transition: opacity 160ms var(--ft-animation-easing, ease-in-out);
 
     > span {
       text-wrap: nowrap;
@@ -124,6 +127,19 @@ body {
       overflow: hidden;
       white-space: pre;
     }
+  }
+}
+
+.ft-bar-item-animator {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ft-bar-item-animator {
+    animation: none !important;
+    transition: none !important;
   }
 }
 

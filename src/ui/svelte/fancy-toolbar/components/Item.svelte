@@ -26,6 +26,8 @@
     getThemeTokens,
   } from "libs/ui/svelte/utils/sandbox.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
+  import { scale } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
 
   interface Props {
     module: ToolbarItem;
@@ -208,7 +210,10 @@
         {/if}
       </div>
       {#if badge}
-        <div class="ft-bar-item-badge">
+        <div
+          class="ft-bar-item-badge"
+          transition:scale={{ duration: 180, start: 0.4, easing: cubicOut }}
+        >
           <EvaluatedComponents content={badge} />
         </div>
       {/if}
