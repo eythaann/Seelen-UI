@@ -39,19 +39,24 @@
     const gap =
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--config-space-between-items")) ||
       8;
+    const offset = Math.round(dimension * 0.35);
 
     return {
-      duration: 220,
+      duration: 240,
       easing: cubicOut,
       css: (t: number) => {
-        const scale = 0.7 + 0.3 * t;
+        const scale = 0.85 + 0.15 * t;
         const currentSize = dimension * t;
         const currentMargin = (1 - t) * -gap;
+        const move = (1 - t) * offset;
+        const transform = horizontal
+          ? `translateY(${move}px) scale(${scale})`
+          : `translateX(${-move}px) scale(${scale})`;
         const sizeStyle = horizontal
           ? `max-width: ${currentSize}px; width: ${currentSize}px; min-width: 0px; margin-right: ${currentMargin}px;`
           : `max-height: ${currentSize}px; height: ${currentSize}px; min-height: 0px; margin-bottom: ${currentMargin}px;`;
 
-        return `opacity: ${t * targetOpacity}; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
+        return `opacity: ${t * targetOpacity}; transform: ${transform}; ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
       },
     };
   }
@@ -74,19 +79,24 @@
     const gap =
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--config-space-between-items")) ||
       8;
+    const offset = Math.round(dimension * 0.35);
 
     return {
-      duration: 220,
+      duration: 240,
       easing: cubicOut,
       css: (t: number) => {
-        const scale = 0.7 + 0.3 * t;
+        const scale = 0.85 + 0.15 * t;
         const currentSize = dimension * t;
         const currentMargin = (1 - t) * -gap;
+        const move = (1 - t) * offset;
+        const transform = horizontal
+          ? `translateY(${move}px) scale(${scale})`
+          : `translateX(${-move}px) scale(${scale})`;
         const sizeStyle = horizontal
           ? `max-width: ${currentSize}px; width: ${currentSize}px; min-width: 0px; margin-right: ${currentMargin}px;`
           : `max-height: ${currentSize}px; height: ${currentSize}px; min-height: 0px; margin-bottom: ${currentMargin}px;`;
 
-        return `opacity: ${t * targetOpacity}; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
+        return `opacity: ${t * targetOpacity}; transform: ${transform}; ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
       },
     };
   }
