@@ -190,17 +190,41 @@ body {
   }
 }
 
+[data-dnd-overlay] {
+  pointer-events: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
 .weg-item-drag-container {
   display: flex;
   justify-content: center;
   align-items: inherit;
+
+  &.is-overlay {
+    pointer-events: none !important;
+    overflow: visible !important;
+    width: 100%;
+    height: 100%;
+  }
 
   > .weg-item-overlay {
     flex-shrink: 0;
     display: flex;
     justify-content: center;
     align-items: inherit;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
   }
+}
+
+.weg-item-overlay {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
 }
 
 @media (prefers-reduced-motion: reduce) {

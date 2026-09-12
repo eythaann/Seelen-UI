@@ -69,7 +69,13 @@
   }
 </script>
 
-<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay">
+<div
+  bind:this={itemEl}
+  role="menu"
+  tabindex="0"
+  class="weg-item-overlay"
+  class:is-overlay={isOverlay}
+>
   <div
     role="menuitem"
     tabindex="0"
