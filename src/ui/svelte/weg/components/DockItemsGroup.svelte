@@ -29,7 +29,6 @@
     node: HTMLElement,
     { horizontal = true }: { horizontal?: boolean } = {},
   ): TransitionConfig {
-    console.info("[WEG] dockItemExit starting for node");
     const style = getComputedStyle(node);
     const targetOpacity = +style.opacity || 1;
     const targetDimension = horizontal ? node.offsetWidth : node.offsetHeight;
@@ -45,7 +44,7 @@
       duration: 220,
       easing: cubicOut,
       css: (t: number) => {
-        const scale = 0.6 + 0.4 * t;
+        const scale = 0.7 + 0.3 * t;
         const currentSize = dimension * t;
         const currentMargin = (1 - t) * -gap;
         const sizeStyle = horizontal
@@ -65,7 +64,8 @@
       return { duration: 0 };
     }
 
-    console.info("[WEG] dockItemEnter starting for node");
+    const style = getComputedStyle(node);
+    const targetOpacity = +style.opacity || 1;
     const targetDimension = horizontal ? node.offsetWidth : node.offsetHeight;
     const fallbackSize =
       parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--config-item-size")) ||
@@ -79,14 +79,14 @@
       duration: 220,
       easing: cubicOut,
       css: (t: number) => {
-        const scale = 0.6 + 0.4 * t;
+        const scale = 0.7 + 0.3 * t;
         const currentSize = dimension * t;
         const currentMargin = (1 - t) * -gap;
         const sizeStyle = horizontal
           ? `max-width: ${currentSize}px; width: ${currentSize}px; min-width: 0px; margin-right: ${currentMargin}px;`
           : `max-height: ${currentSize}px; height: ${currentSize}px; min-height: 0px; margin-bottom: ${currentMargin}px;`;
 
-        return `opacity: ${t}; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
+        return `opacity: ${t * targetOpacity}; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
       },
     };
   }
