@@ -190,6 +190,19 @@ body {
   }
 }
 
+.weg-item-drag-container {
+  display: flex;
+  justify-content: center;
+  align-items: inherit;
+
+  > .weg-item-overlay {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: inherit;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .weg-item-drag-container {
     animation: none !important;
