@@ -195,6 +195,8 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
