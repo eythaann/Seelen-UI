@@ -22,10 +22,10 @@ export function dockItemExit(
     8;
 
   return {
-    duration: 220,
+    duration: 240,
     easing: cubicOut,
     css: (t: number) => {
-      const scale = 0.7 + 0.3 * t;
+      const scale = t;
       const currentSize = dimension * t;
       const currentMargin = (1 - t) * -gap;
       const sizeStyle = horizontal
@@ -34,7 +34,7 @@ export function dockItemExit(
 
       return `opacity: ${
         t * targetOpacity
-      }; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
+      }; transform: scale(${scale}); transform-origin: center center; ${sizeStyle} flex-shrink: 0;`;
     },
   };
 }
@@ -57,10 +57,10 @@ export function dockItemEnter(
     8;
 
   return {
-    duration: 220,
+    duration: 240,
     easing: cubicOut,
     css: (t: number) => {
-      const scale = 0.7 + 0.3 * t;
+      const scale = t;
       const currentSize = dimension * t;
       const currentMargin = (1 - t) * -gap;
       const sizeStyle = horizontal
@@ -69,7 +69,7 @@ export function dockItemEnter(
 
       return `opacity: ${
         t * targetOpacity
-      }; transform: scale(${scale}); ${sizeStyle} overflow: hidden; flex-shrink: 0;`;
+      }; transform: scale(${scale}); transform-origin: center center; ${sizeStyle} flex-shrink: 0;`;
     },
   };
 }
