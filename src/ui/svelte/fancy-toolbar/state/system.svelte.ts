@@ -16,15 +16,17 @@ const _mouseAtEdge = $derived.by((): FancyToolbarSide | null => {
   const x = mousePos.value[0];
   const y = mousePos.value[1];
 
-  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
+  const threshold = Math.max(3, Math.round(2 * (_currentMonitor.scaleFactor || 1)));
+
+  if (x < box.left - 1 || x > box.right + 1 || y < box.top - 1 || y > box.bottom + 1) {
     return null;
   }
 
-  if (y === box.top) {
+  if (y <= box.top + threshold) {
     return FancyToolbarSide.Top;
   }
 
-  if (y === box.bottom - 1) {
+  if (y >= box.bottom - threshold) {
     return FancyToolbarSide.Bottom;
   }
 

@@ -171,7 +171,7 @@ pub fn register_win_hook() -> Result<()> {
     // todo move this to input/mouse/keyboard module
     spawn_named_thread("MouseEventHook", || {
         let mut last_pos = seelen_core::Point::default();
-        let sleep_time = Duration::from_millis(100); // 10fps
+        let sleep_time = Duration::from_millis(33); // ~30fps for responsive edge detection
         loop {
             // Pause when session is not interactive to reduce CPU usage
             if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
