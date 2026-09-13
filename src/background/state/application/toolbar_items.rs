@@ -33,8 +33,11 @@ impl ToolbarItemsManager {
         let path = SEELEN_COMMON
             .widget_data_dir(&WidgetId::known_toolbar())
             .join("state.yml");
+        // Hold the lock while writing so concurrent saves (one webview per
+        // monitor) are serialized instead of racing on the same file.
+        let mut guard = self.items.lock();
         atomic_write_file(&path, serde_yaml::to_string(&items)?.as_bytes())?;
-        *self.items.lock() = items;
+        *guard = items;
         Ok(())
     }
 

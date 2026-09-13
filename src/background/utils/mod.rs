@@ -15,7 +15,10 @@ use std::{
     fs::{File, create_dir_all},
     io::Write,
     path::{Path, PathBuf},
-    sync::{LazyLock, atomic::AtomicBool},
+    sync::{
+        LazyLock,
+        atomic::{AtomicBool, AtomicU64, Ordering},
+    },
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
@@ -27,20 +30,39 @@ use windows::{
 
 use crate::{error::Result, windows_api::string_utils::WindowsString};
 
-/// Writes `content` to `path` atomically: writes to a sibling `.tmp` file first,
+static ATOMIC_WRITE_COUNTER: AtomicU64 = AtomicU64::new(0);
+
+/// Writes `content` to `path` atomically: writes to a sibling temporary file first,
 /// syncs to disk, then renames into place. This guarantees the target file is
 /// never left empty or partially written, even if the process is killed mid-write.
+///
+/// The temporary file name is unique per call. Two concurrent writers of the same
+/// target (e.g. one dock webview per monitor saving its state at the same time)
+/// used to share a single `.tmp` file: the first rename moved it away and the
+/// second one failed with `NotFound`.
 pub fn atomic_write_file(path: &Path, content: &[u8]) -> Result<()> {
     let dir = path.parent().ok_or("Path has no parent directory")?;
     create_dir_all(dir)?;
 
-    let tmp_path = path.with_extension("tmp");
+    let file_name = path
+        .file_name()
+        .ok_or("Path has no file name")?
+        .to_string_lossy();
+    let tmp_path = path.with_file_name(format!(
+        "{file_name}.{}.{}.tmp",
+        std::process::id(),
+        ATOMIC_WRITE_COUNTER.fetch_add(1, Ordering::Relaxed)
+    ));
+
     let mut file = File::create(&tmp_path)?;
     file.write_all(content)?;
     file.flush()?;
     file.sync_all()?;
     drop(file); // must close before rename on Windows
-    std::fs::rename(&tmp_path, path)?;
+    if let Err(err) = std::fs::rename(&tmp_path, path) {
+        let _ = std::fs::remove_file(&tmp_path);
+        return Err(err.into());
+    }
     Ok(())
 }
 
