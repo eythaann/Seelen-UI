@@ -11,21 +11,20 @@ const _currentMonitor = $derived.by(() => {
   return monitor;
 });
 
+const THRESHOLD = 2;
+function inRange(value: number, origin: number) {
+  return value >= origin - THRESHOLD && value <= origin + THRESHOLD;
+}
+
 const _mouseAtEdge = $derived.by((): FancyToolbarSide | null => {
   const box = _currentMonitor.rect;
   const x = mousePos.value[0];
   const y = mousePos.value[1];
 
-  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
-    return null;
-  }
-
-  if (y === box.top) {
-    return FancyToolbarSide.Top;
-  }
-
-  if (y === box.bottom - 1) {
-    return FancyToolbarSide.Bottom;
+  const isOutHorizontally = x < box.left || x > box.right;
+  if (!isOutHorizontally) {
+    if (inRange(y, box.top)) return FancyToolbarSide.Top;
+    if (inRange(y, box.bottom - 1)) return FancyToolbarSide.Bottom;
   }
 
   return null;

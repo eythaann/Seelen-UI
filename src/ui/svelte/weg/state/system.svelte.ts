@@ -9,19 +9,27 @@ const _currentMonitor = $derived.by(() => {
   return monitor;
 });
 
+const THRESHOLD = 2;
+function inRange(value: number, origin: number) {
+  return value >= origin - THRESHOLD && value <= origin + THRESHOLD;
+}
+
 const _mouseAtEdge = $derived.by((): SeelenWegSide | null => {
   const box = _currentMonitor.rect;
   const x = mousePos.value.x;
   const y = mousePos.value.y;
 
-  if (x < box.left || x > box.right || y < box.top || y > box.bottom) {
-    return null;
+  const isOutHorizontally = x < box.left || x > box.right;
+  if (!isOutHorizontally) {
+    if (inRange(y, box.top)) return SeelenWegSide.Top;
+    if (inRange(y, box.bottom - 1)) return SeelenWegSide.Bottom;
   }
 
-  if (y === box.top) return SeelenWegSide.Top;
-  if (x === box.left) return SeelenWegSide.Left;
-  if (y === box.bottom - 1) return SeelenWegSide.Bottom;
-  if (x === box.right - 1) return SeelenWegSide.Right;
+  const isOutVertically = y < box.top || y > box.bottom;
+  if (!isOutVertically) {
+    if (inRange(x, box.left)) return SeelenWegSide.Left;
+    if (inRange(x, box.right - 1)) return SeelenWegSide.Right;
+  }
 
   return null;
 });

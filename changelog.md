@@ -2,6 +2,10 @@
 
 ## [2.8.6-dev]
 
+### fix
+
+- dock and toolbar edge triggering on high DPI displays.
+
 ## [2.8.5]
 
 ### features
