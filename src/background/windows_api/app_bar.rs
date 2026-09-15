@@ -1,4 +1,3 @@
-use parking_lot::Mutex;
 use seelen_core::system_state::AppBarEdge;
 use std::sync::LazyLock;
 use windows::Win32::{
@@ -9,9 +8,10 @@ use windows::Win32::{
     },
 };
 
-use crate::{error::Result, trace_lock};
+use crate::{error::Result, utils::lock_free::TracedMutex};
 
-static REGISTERED_BARS: LazyLock<Mutex<Vec<isize>>> = LazyLock::new(|| Mutex::new(Vec::new()));
+static REGISTERED_BARS: LazyLock<TracedMutex<Vec<isize>>> =
+    LazyLock::new(|| TracedMutex::new(Vec::new()));
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
 #[derive(Debug, Clone, Copy)]
@@ -74,7 +74,7 @@ impl AppBarData {
     pub fn register_as_new_bar(&mut self) -> Result<()> {
         let mut data = self.0;
         let addr = data.hWnd.0 as isize;
-        let mut guard = trace_lock!(REGISTERED_BARS);
+        let mut guard = REGISTERED_BARS.lock();
 
         if !guard.contains(&addr) {
             let ok = unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
@@ -91,7 +91,7 @@ impl AppBarData {
     pub fn unregister_bar(&mut self) -> Result<()> {
         let mut data = self.0;
         let addr = data.hWnd.0 as isize;
-        let mut guard = trace_lock!(REGISTERED_BARS);
+        let mut guard = REGISTERED_BARS.lock();
         unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
         guard.retain(|x| *x != addr);
         Ok(())
