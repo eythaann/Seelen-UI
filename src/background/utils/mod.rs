@@ -11,15 +11,13 @@ mod winver;
 pub use winver::*;
 
 use std::{
-    collections::HashMap,
     fs::{File, create_dir_all},
     io::Write,
     path::{Path, PathBuf},
-    sync::{LazyLock, atomic::AtomicBool},
+    sync::LazyLock,
     time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 
-use parking_lot::Mutex;
 use windows::{
     Win32::UI::Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
     core::GUID,
@@ -70,51 +68,6 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     }
 
     Ok(path_buf)
-}
-
-pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(true);
-pub static LAST_SUCCESSFUL_LOCK: LazyLock<Mutex<HashMap<String, String>>> =
-    LazyLock::new(|| Mutex::new(HashMap::new()));
-
-#[macro_export]
-macro_rules! trace_lock {
-    ($mutex:expr) => {
-        trace_lock!($mutex, 5)
-    };
-    ($mutex:expr, $duration:expr) => {{
-        let guard = $mutex.try_lock_for(std::time::Duration::from_secs($duration));
-        let guard_name = stringify!($mutex);
-        match guard {
-            Some(guard) => {
-                if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Acquire) {
-                    let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK
-                        .try_lock_for(std::time::Duration::from_secs(5))
-                        .unwrap();
-                    let location = format!("{}:{}", file!(), line!());
-                    map.insert(guard_name.to_owned(), location);
-                }
-                guard
-            }
-            None => {
-                let mut panic_msg = format!(
-                    "{} mutex is deadlocked at {}:{}",
-                    guard_name,
-                    file!(),
-                    line!()
-                );
-
-                if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK
-                    .try_lock_for(std::time::Duration::from_secs(5))
-                    .unwrap()
-                    .get(guard_name)
-                {
-                    panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
-                }
-
-                panic!("{:?}", $crate::error::AppError::from(panic_msg));
-            }
-        }
-    }};
 }
 
 /// Useful when spawning threads that will allocate a loop or some other blocking operation

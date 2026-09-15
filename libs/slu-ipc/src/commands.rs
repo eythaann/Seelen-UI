@@ -71,8 +71,6 @@ pub struct DebuggerCli {
 pub enum DebuggerSubCommand {
     /// Toggles the tracing of window events
     ToggleWinEvents,
-    /// Toggles the tracing of mutex lock
-    ToggleTraceLock,
 }
 
 // ===== Art =====
