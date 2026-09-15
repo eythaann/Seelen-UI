@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.5-dev]
+## [2.8.5]
 
 ### features
 
