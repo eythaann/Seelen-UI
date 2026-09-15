@@ -26,8 +26,7 @@
     getThemeTokens,
   } from "libs/ui/svelte/utils/sandbox.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
-  import { scale } from "svelte/transition";
-  import { cubicOut } from "svelte/easing";
+  import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
 
   interface Props {
     module: ToolbarItem;
@@ -118,7 +117,7 @@
   const itemStyle = $derived(
     styleToString({
       ...self.style,
-      opacity: sortable?.isDragging ? 0.3 : 1,
+      ...(sortable?.isDragging ? { opacity: 0.2 } : {}),
     }),
   );
 
@@ -201,6 +200,7 @@
       onwheel={self.onWheelUp || self.onWheelDown ? handleWheel : undefined}
       oncontextmenu={handleContextMenu}
       onkeypress={() => {}}
+      transition:CssHandled|global
     >
       <div class="ft-bar-item-content">
         {#if self.render}
@@ -209,13 +209,9 @@
           <EvaluatedComponents {content} />
         {/if}
       </div>
+
       {#if badge}
-        <div
-          class="ft-bar-item-badge"
-          transition:scale={{ duration: 180, start: 0.4, easing: cubicOut }}
-        >
-          <EvaluatedComponents content={badge} />
-        </div>
+        <div class="ft-bar-item-badge" transition:CssHandled>{badge}</div>
       {/if}
     </div>
   {/if}

@@ -188,7 +188,6 @@
           {/if}
         {:else if "action" in entry}
           {@const action = entry.action}
-          {(console.debug("[notifications] action entry", action), "")}
           {#if action["@placement"] !== "ContextMenu"}
             <button
               data-skin="default"

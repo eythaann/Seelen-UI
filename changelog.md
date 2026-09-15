@@ -2,6 +2,10 @@
 
 ## [2.8.6-dev]
 
+### enhancements
+
+- customizable toolbar items transitions (in/out).
+
 ### fix
 
 - dock and toolbar edge triggering on high DPI displays.

@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { flip } from "svelte/animate";
-  import { scale } from "svelte/transition";
-  import { cubicOut } from "svelte/easing";
   import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
-  import { plugins, toolbarState } from "../state/items.svelte.ts";
+  import { plugins } from "../state/items.svelte.ts";
   import SortableItem from "./SortableItem.svelte";
 
   interface Props {
@@ -14,25 +11,31 @@
 
   let { id, items, itemIndexById }: Props = $props();
 
+  let entries = $derived.by(() => {
+    const expanded: { pluginId?: string; index: number; item: ToolbarItem }[] = [];
+    for (const entry of items) {
+      if (typeof entry !== "string") {
+        const index = itemIndexById.get(entry.id) ?? 0;
+        expanded.push({ item: entry, index });
+        continue;
+      }
+
+      const index = itemIndexById.get(entry) ?? 0;
+      const plugin = plugins.value.find((p) => p.id === entry);
+      if (plugin) {
+        expanded.push({
+          item: { ...(plugin.plugin as ToolbarItem), id: plugin.id },
+          pluginId: plugin.id,
+          index,
+        });
+      }
+    }
+    return expanded;
+  });
 </script>
 
 <div class="ft-bar-container ft-bar-{id}">
-  {#each items as entry (typeof entry === "string" ? entry : entry.id)}
-    {@const index = itemIndexById.get(typeof entry === "string" ? entry : entry.id) ?? 0}
-    <div
-      class="ft-bar-item-animator"
-      animate:flip={{ duration: 200, easing: cubicOut }}
-      transition:scale={{ duration: 180, start: 0.7, easing: cubicOut }}
-    >
-      {#if typeof entry === "string"}
-        {@const cached = plugins.value.find((p) => p.id === entry)}
-        {#if cached}
-          {@const module = { ...(cached.plugin as ToolbarItem), id: entry }}
-          <SortableItem {module} {index} pluginId={entry} />
-        {/if}
-      {:else}
-        <SortableItem module={entry} {index} />
-      {/if}
-    </div>
+  {#each entries as entry (entry.item.id)}
+    <SortableItem module={entry.item} index={entry.index} pluginId={entry.pluginId} />
   {/each}
 </div>

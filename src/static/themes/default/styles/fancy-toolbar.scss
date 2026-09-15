@@ -1,3 +1,21 @@
+@mixin fade {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  &[data-unmounting] {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
 .ft-bar {
   background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
 
@@ -10,6 +28,7 @@
 
 .ft-bar-item {
   position: relative;
+  @include fade;
 
   &.ft-bar-item-clickable {
     border-radius: calc(var(--config-item-size) * 0.3);
@@ -29,6 +48,7 @@
 }
 
 .ft-bar-item-badge {
+  @include fade;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,10 +61,6 @@
   min-width: 12px;
   font-size: 10px;
   border-radius: 8px;
-
-  &:empty {
-    display: none;
-  }
 }
 
 .ft-corner-button {

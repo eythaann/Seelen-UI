@@ -3,8 +3,7 @@
 }
 
 .ft-bar-item {
-  color: var(--color-fixed-gray-100);
-  background-color: var(--color-fixed-gray-900);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
   border-radius: 10px;
   padding: 2px 8px;
   height: 25px;
