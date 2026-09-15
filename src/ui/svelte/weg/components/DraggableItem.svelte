@@ -5,6 +5,7 @@
   import { createSortable } from "@dnd-kit/svelte/sortable";
   import { RestrictToHorizontalAxis, RestrictToVerticalAxis } from "@dnd-kit/abstract/modifiers";
   import { dockState } from "../state/items.svelte.ts";
+  import { dockItemEnter, dockItemExit } from "../transitions.ts";
 
   interface Props {
     item: SwItem;
@@ -13,6 +14,8 @@
   }
 
   let { item, index, children }: Props = $props();
+
+  const isHorizontal = $derived(isHorizontalDock());
 
   const sortable = createSortable({
     get id() {
@@ -37,6 +40,8 @@
   data-item-id={item.id}
   class="weg-item-drag-container"
   class:dragging={sortable.isDragging}
+  in:dockItemEnter|global={{ horizontal: isHorizontal }}
+  out:dockItemExit|global={{ horizontal: isHorizontal }}
 >
   {@render children()}
 </div>

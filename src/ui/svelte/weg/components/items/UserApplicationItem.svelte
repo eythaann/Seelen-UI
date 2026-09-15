@@ -9,6 +9,8 @@
   import { notifications } from "../../state/getters.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
   import { triggerPreviewWidget } from "../../previewWidget.ts";
+  import { scale } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
 
   interface Props {
     item: AppOrFileWegItem;
@@ -67,7 +69,13 @@
   }
 </script>
 
-<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay">
+<div
+  bind:this={itemEl}
+  role="menu"
+  tabindex="0"
+  class="weg-item-overlay"
+  class:is-overlay={isOverlay}
+>
   <div
     role="menuitem"
     tabindex="0"
@@ -89,11 +97,21 @@
   </div>
 
   {#if notificationsCount > 0}
-    <div class="weg-item-notification-badge">{notificationsCount}</div>
+    <div
+      class="weg-item-notification-badge"
+      transition:scale={{ duration: 180, start: 0.4, easing: cubicOut }}
+    >
+      {notificationsCount}
+    </div>
   {/if}
 
   {#if settings?.showInstanceCounter && windows.length > 1}
-    <div class="weg-item-instance-counter-badge">{windows.length}</div>
+    <div
+      class="weg-item-instance-counter-badge"
+      transition:scale={{ duration: 180, start: 0.4, easing: cubicOut }}
+    >
+      {windows.length}
+    </div>
   {/if}
 
   {#if !settings?.showWindowTitle}

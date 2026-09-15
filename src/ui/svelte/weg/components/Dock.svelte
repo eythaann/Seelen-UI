@@ -129,7 +129,9 @@
         {#snippet children(source)}
           {@const overlayItem = dockState.items.find((c) => c.id === source.id)}
           {#if overlayItem}
-            <WegItemSwitch item={overlayItem} isOverlay={true} />
+            <div class="weg-item-drag-container is-overlay">
+              <WegItemSwitch item={overlayItem} isOverlay={true} />
+            </div>
           {/if}
         {/snippet}
       </DragOverlay>

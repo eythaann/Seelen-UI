@@ -20,6 +20,12 @@ export function setDockIsDraggingItem(isDragging: boolean): void {
   _isDraggingItem = isDragging;
 }
 
+export const dockIsDragging = {
+  get value() {
+    return _isDraggingItem;
+  },
+};
+
 $effect.root(() => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 

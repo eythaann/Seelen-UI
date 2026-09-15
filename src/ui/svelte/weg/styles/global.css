@@ -7,6 +7,8 @@
   --weg-max-taskbar-width: calc(100vw - var(--config-margin) * 2);
   --weg-max-taskbar-height: calc(100vh - var(--config-margin) * 2);
   --dock-size: calc(var(--config-item-size) + (var(--config-padding) + var(--config-margin)) * 2);
+  --weg-animation-duration: 220ms;
+  --weg-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -185,5 +187,49 @@ body {
 
   &:has(.weg-item-drag-container.dragging) {
     pointer-events: none;
+  }
+}
+
+[data-dnd-overlay] {
+  pointer-events: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+.weg-item-drag-container {
+  display: flex;
+  justify-content: center;
+  align-items: inherit;
+
+  &.is-overlay {
+    pointer-events: none !important;
+    overflow: visible !important;
+    width: 100%;
+    height: 100%;
+  }
+
+  > .weg-item-overlay {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: inherit;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+  }
+}
+
+.weg-item-overlay {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weg-item-drag-container {
+    animation: none !important;
+    transition: none !important;
   }
 }
