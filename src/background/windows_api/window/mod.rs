@@ -275,7 +275,7 @@ impl Window {
     }
 
     pub fn is_maximized(&self) -> bool {
-        WindowsApi::is_zoomed(self.0)
+        WindowsApi::is_maximized(self.0)
     }
 
     pub fn is_cloaked(&self) -> bool {

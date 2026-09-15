@@ -205,12 +205,6 @@ pub fn is_interactable_window(window: &Window) -> bool {
         return false;
     }
 
-    // ignore windows without a title, these are not intended to be shown to users (comonly are invisible windows)
-    let title = window.title();
-    if title.is_empty() {
-        return false;
-    }
-
     // this class is used for edge tabs to be shown as independent windows on alt + tab
     // this only applies when the new tab is created it is binded to explorer.exe for some reason
     // maybe we can search/learn more about edge tabs later.
@@ -221,6 +215,19 @@ pub fn is_interactable_window(window: &Window) -> bool {
 
     let style = WindowsApi::get_styles(window.hwnd());
     let ex_style = WindowsApi::get_ex_styles(window.hwnd());
+
+    // Most titleless windows are helpers, but some applications intentionally use a
+    // titleless top-level window. Accept only windows with explicit app semantics.
+    if window.title().is_empty()
+        && (!ex_style.contains(WS_EX_APPWINDOW)
+            || !style.contains(WS_MINIMIZEBOX)
+            || style.contains(WS_CHILD)
+            || ex_style.contains(WS_EX_TOOLWINDOW)
+            || ex_style.contains(WS_EX_NOACTIVATE)
+            || window.owner().is_some())
+    {
+        return false;
+    }
 
     if !ex_style.contains(WS_EX_APPWINDOW) {
         // It must not be owned by another window
