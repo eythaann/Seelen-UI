@@ -9,6 +9,8 @@ const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 await settings.init();
 
+const isDevtoolsEnabled = $derived(settings.value.devTools);
+
 $effect.root(() => {
   $effect(() => {
     locale.set(settings.value.language);
@@ -81,6 +83,10 @@ class State {
   }
   set loadingOperation(value: BluetoothOperation | null) {
     loadingOperation = value;
+  }
+
+  get isDevtoolsEnabled() {
+    return isDevtoolsEnabled;
   }
 }
 

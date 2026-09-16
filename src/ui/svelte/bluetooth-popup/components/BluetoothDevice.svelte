@@ -152,6 +152,30 @@
     }
     return `${device.class.major} - ${device.class.minor}`;
   }
+
+  function formatAddress(address: number): string {
+    return address
+      .toString(16)
+      .padStart(12, "0")
+      .match(/.{1,2}/g)!
+      .join(":")
+      .toUpperCase();
+  }
+
+  const showExtraInfo = $derived(selected && globalState.isDevtoolsEnabled);
+  const extraInfo = $derived.by(() => {
+    const info = [{ label: "Address", value: formatAddress(device.address) }];
+    if (device.classRaw != null) {
+      info.push({ label: "Class", value: `0x${device.classRaw.toString(16).toUpperCase()}` });
+    }
+    if (device.appearanceRaw != null) {
+      info.push({
+        label: "Appearance",
+        value: `0x${device.appearanceRaw.toString(16).toUpperCase()}`,
+      });
+    }
+    return info;
+  });
 </script>
 
 <div
@@ -178,6 +202,14 @@
       <Icon iconName="MdOutlineEnergySavingsLeaf" title={$t("lowenergy")} />
     {/if}
   </div>
+
+  {#if showExtraInfo}
+    <ul class="bt-device-extra-info">
+      {#each extraInfo as info (info.label)}
+        <li><b>{info.label}</b> {info.value}</li>
+      {/each}
+    </ul>
+  {/if}
 
   {#if selected}
     {#if loading}
@@ -239,7 +271,7 @@
               {$t("disconnect")}
             </button>
           {/if}
-          
+
           <button data-skin="default" onclick={handleForget} disabled={loading}>
             {$t("unpair")}
           </button>

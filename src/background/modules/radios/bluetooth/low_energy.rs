@@ -91,6 +91,7 @@ impl BluetoothLEDeviceWrapper {
 
         let is_paired = pairing_state.IsPaired()?;
         let is_connected = device.ConnectionStatus()? == BluetoothConnectionStatus::Connected;
+        let appearance_raw = device.Appearance()?.RawValue()?;
 
         Ok(SerializableBluetoothDevice {
             id: id.to_owned(),
@@ -98,13 +99,15 @@ impl BluetoothLEDeviceWrapper {
             address: device.BluetoothAddress()?,
             major_service_classes: Vec::new(),
             class: BluetoothClass::Uncategorized { minor: 0 },
-            appearance: Some(device.Appearance()?.RawValue()?.into()),
+            appearance: Some(appearance_raw.into()),
             connected: is_connected,
             paired: is_paired,
             can_pair: pairing_state.CanPair()?,
             can_disconnect: false,
             can_connect: is_paired && !is_connected,
             is_low_energy: true,
+            class_raw: None,
+            appearance_raw: Some(appearance_raw),
         })
     }
 }

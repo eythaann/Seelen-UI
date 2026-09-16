@@ -27,6 +27,13 @@ pub struct BluetoothDevice {
     pub can_disconnect: bool,
     pub can_connect: bool,
     pub is_low_energy: bool,
+    /// Raw Class of Device value reported by the radio, only available for
+    /// Classic (BR/EDR) devices. `class`/`major_service_classes` are decoded
+    /// from this same value.
+    pub class_raw: Option<u32>,
+    /// Raw BLE Appearance value, only available for Low Energy devices.
+    /// `appearance` is decoded from this same value.
+    pub appearance_raw: Option<u16>,
 }
 
 impl BluetoothDevice {

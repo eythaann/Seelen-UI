@@ -93,6 +93,8 @@ impl BluetoothDeviceWrapper {
             can_disconnect: is_connected && is_audio,
             can_connect: is_paired && !is_connected && is_audio,
             is_low_energy: false,
+            class_raw: Some(class_value),
+            appearance_raw: None,
         })
     }
 }

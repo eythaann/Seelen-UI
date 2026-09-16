@@ -118,17 +118,13 @@
         }
 
         .wlan-entry-extra-info {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-
           font-size: 0.7rem;
           font-family: monospace;
           color: var(--slu-std-fg-secondary-color);
 
           li {
             display: flex;
-            gap: 6px;
+            gap: var(--spacing-xs);
 
             b {
               min-width: 90px;
