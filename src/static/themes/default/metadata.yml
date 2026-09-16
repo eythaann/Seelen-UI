@@ -14,7 +14,7 @@ styles:
   "@seelen/power-menu": !include styles/power-menu.scss
   "@seelen/task-switcher": !include styles/task-switcher.scss
   "@seelen/wallpaper-manager": !include styles/wallpaper-manager.css
-  "@seelen/weg": !include styles/weg.css
+  "@seelen/weg": !include styles/weg.scss
   "@seelen/window-manager": !include styles/window-manager.css
   "@seelen/system-tray": !include styles/tray-menu.scss
   "@seelen/quick-settings": !include styles/quick-settings.scss

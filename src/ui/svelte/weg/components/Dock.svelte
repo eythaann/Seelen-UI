@@ -83,8 +83,9 @@
   }
 
   function handleDragOver(event: any) {
-    const newItems = move(dockState.items, event);
-    dockState.items = newItems;
+    const temp = dockState.items.map((item) => item.id);
+    const newIds = move(temp, event);
+    dockState.items = newIds.map((id) => dockState.items.find((item) => item.id === id)!);
   }
 
   function handleDragStart() {
@@ -129,9 +130,7 @@
         {#snippet children(source)}
           {@const overlayItem = dockState.items.find((c) => c.id === source.id)}
           {#if overlayItem}
-            <div class="weg-item-drag-container is-overlay">
-              <WegItemSwitch item={overlayItem} isOverlay={true} />
-            </div>
+            <WegItemSwitch item={overlayItem} isOverlay />
           {/if}
         {/snippet}
       </DragOverlay>

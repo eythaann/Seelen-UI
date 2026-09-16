@@ -5,8 +5,6 @@
 
 :root {
   font-size: var(--config-item-size);
-  --ft-animation-duration: 200ms;
-  --ft-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -75,9 +73,9 @@ body {
   .ft-bar-left,
   .ft-bar-center,
   .ft-bar-right {
+    height: 100%;
     display: flex;
     align-items: center;
-    height: 100%;
     gap: 4px;
   }
 
@@ -103,23 +101,17 @@ body {
 }
 
 .ft-bar-item {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 0;
   padding: var(--item-padding);
 
-  button {
-    height: 100%;
-    padding: 0 var(--item-padding);
-    border: 0;
-  }
-
   .ft-bar-item-content {
+    height: var(--config-item-size);
     display: flex;
     align-items: center;
-    width: 100%;
-    transition: opacity 160ms var(--ft-animation-easing, ease-in-out);
 
     > span {
       text-wrap: nowrap;
@@ -127,19 +119,12 @@ body {
       overflow: hidden;
       white-space: pre;
     }
-  }
-}
 
-.ft-bar-item-animator {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ft-bar-item-animator {
-    animation: none !important;
-    transition: none !important;
+    button {
+      height: 100%;
+      padding: 0 var(--item-padding);
+      border: 0;
+    }
   }
 }
 

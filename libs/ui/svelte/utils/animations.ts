@@ -2,6 +2,7 @@ import type { TransitionConfig } from "svelte/transition";
 
 interface Params {
   duration?: number;
+  enabled?: () => boolean;
 }
 
 interface Options {
@@ -15,8 +16,13 @@ type TransitionSetup = (
   opts: Options,
 ) => TransitionConfig | TransitionGenerator;
 
-const _CssHandled: TransitionSetup = (node, { duration = 200 } = {}) => {
+const _CssHandled: TransitionSetup = (node, { duration = 200, enabled } = {}) => {
   return ({ direction }) => {
+    const isEnabled = enabled?.() ?? true;
+    if (!isEnabled) {
+      return {};
+    }
+
     if (direction === "in") {
       delete node.dataset.unmounting;
       node.dataset.mounting = "";

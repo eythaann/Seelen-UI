@@ -1,3 +1,21 @@
+@mixin fade {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 200ms ease,
+    scale 200ms ease;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.4;
+  }
+
+  &[data-unmounting] {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
 @keyframes shadow-on-horizontal-scroll {
   from {
     box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
@@ -82,26 +100,12 @@
 
   .weg-item-notification-badge,
   .weg-item-custom-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include fade;
+
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(25%, -25%);
-    background-color: var(--slu-std-ui-color);
-    color: var(--color-gray-100);
-    height: 16px;
-    min-width: 16px;
-    font-size: 10px;
-    font-weight: 600;
-    border-radius: 8px;
-  }
-
-  .weg-item-instance-counter-badge {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    translate: 25% -25%;
 
     display: flex;
     align-items: center;
@@ -109,7 +113,28 @@
 
     height: 16px;
     min-width: 16px;
-    transform: translate(25%, 25%);
+    border-radius: 8px;
+
+    background-color: var(--slu-std-ui-color);
+    color: var(--color-gray-100);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .weg-item-instance-counter-badge {
+    @include fade;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    translate: 25% -25%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 16px;
+    min-width: 16px;
     border-radius: 8px;
 
     background-color: var(--color-gray-400);
@@ -187,6 +212,27 @@
 
   height: var(--config-item-size);
   width: var(--config-item-size);
+  transition:
+    width 200ms ease,
+    height 200ms ease,
+    padding 200ms ease,
+    border-radius 200ms ease;
+
+  .weg-item-drag-container[data-mounting] & {
+    @starting-style {
+      width: 0;
+      height: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  .weg-item-drag-container[data-unmounting] & {
+    width: 0;
+    height: 0;
+    padding: 0;
+    border-radius: 0;
+  }
 
   &.weg-item-medium {
     .horizontal & {
@@ -217,10 +263,6 @@
 
   &:active {
     transform: translateY(2px);
-  }
-
-  &:not(:active) {
-    transition: transform 0.2s linear;
   }
 
   &:has(.weg-item-icon[data-shape="square"]) {

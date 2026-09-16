@@ -5,10 +5,12 @@
 ### enhancements
 
 - customizable toolbar items transitions (in/out).
+- customizable dock items transitions (in/out).
 
 ### fix
 
 - dock and toolbar edge triggering on high DPI displays.
+- duplicated dock items briefly appearing (and then disappearing) for open, unpinned apps on multi-monitor setups.
 
 ## [2.8.5]
 

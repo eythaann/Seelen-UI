@@ -3,13 +3,10 @@
 }
 
 .ft-bar-item {
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.95);
   border-radius: 10px;
-  padding: 2px 8px;
-  height: 25px;
 
-  &.ft-bar-item-clickable {
-    padding: 2px 8px;
-    border-radius: 10px;
+  &.ft-bar-item-clickable:hover {
+    background-color: oklch(from var(--slu-std-bg-light-color) l c h / 0.95);
   }
 }

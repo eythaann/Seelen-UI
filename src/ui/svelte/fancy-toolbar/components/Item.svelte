@@ -200,7 +200,11 @@
       onwheel={self.onWheelUp || self.onWheelDown ? handleWheel : undefined}
       oncontextmenu={handleContextMenu}
       onkeypress={() => {}}
-      transition:CssHandled|global
+      transition:CssHandled|global={{
+        enabled() {
+          return !!sortable && !sortable.isDragging;
+        },
+      }}
     >
       <div class="ft-bar-item-content">
         {#if self.render}

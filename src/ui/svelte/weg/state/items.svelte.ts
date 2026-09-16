@@ -6,6 +6,7 @@ import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
 import { getWindowsForItem, interactables } from "./windows.svelte.ts";
 import { plugins, wegItems } from "./getters.svelte.ts";
 import { isHorizontalDock } from "./settings.svelte.ts";
+import { stableUUID } from "libs/ui/utils.ts";
 
 interface OptimisticDockState {
   isReorderDisabled: boolean;
@@ -283,7 +284,7 @@ $effect.root(() => {
       seen.add(key);
 
       newItems.push({
-        id: crypto.randomUUID(),
+        id: stableUUID(key),
         type: "AppOrFile",
         displayName: w.appName,
         umid: w.umid ?? null,

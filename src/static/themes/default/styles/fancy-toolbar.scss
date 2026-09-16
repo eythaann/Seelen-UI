@@ -1,18 +1,20 @@
 @mixin fade {
   opacity: 1;
-  transform: scale(1);
+  scale: 1;
   transition:
     opacity 200ms ease,
-    transform 200ms ease;
+    scale 200ms ease;
 
-  @starting-style {
-    opacity: 0;
-    transform: scale(0.4);
+  &[data-mounting] {
+    @starting-style {
+      opacity: 0;
+      scale: 0.4;
+    }
   }
 
   &[data-unmounting] {
     opacity: 0;
-    transform: scale(0.4);
+    scale: 0.4;
   }
 }
 

@@ -7,8 +7,6 @@
   --weg-max-taskbar-width: calc(100vw - var(--config-margin) * 2);
   --weg-max-taskbar-height: calc(100vh - var(--config-margin) * 2);
   --dock-size: calc(var(--config-item-size) + (var(--config-padding) + var(--config-margin)) * 2);
-  --weg-animation-duration: 220ms;
-  --weg-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -86,6 +84,7 @@ body {
 
     .weg-items {
       display: flex;
+      align-items: center;
       min-width: 100%;
       width: max-content;
     }
@@ -95,6 +94,7 @@ body {
     .weg-items-right {
       flex: 1 0 0px;
       display: flex;
+      align-items: center;
       gap: var(--config-space-between-items);
     }
   }
@@ -129,13 +129,13 @@ body {
       flex-direction: row;
     }
 
-    .weg-items-container:has(.weg-items-left[data-empty="true"]) {
+    .weg-items-container:has(.weg-items-left:empty) {
       .weg-item-drag-container:first-child:has(.weg-separator) {
         margin-right: calc(var(--config-space-between-items) * -1);
       }
     }
 
-    .weg-items-container:has(.weg-items-right[data-empty="true"]) {
+    .weg-items-container:has(.weg-items-right:empty) {
       .weg-item-drag-container:last-child:has(.weg-separator) {
         margin-left: calc(var(--config-space-between-items) * -1);
       }
@@ -172,13 +172,13 @@ body {
       flex-direction: column;
     }
 
-    .weg-items-container:has(.weg-items-left[data-empty="true"]) {
+    .weg-items-container:has(.weg-items-left:empty) {
       .weg-item-drag-container:first-child:has(.weg-separator) {
         margin-bottom: calc(var(--config-space-between-items) * -1);
       }
     }
 
-    .weg-items-container:has(.weg-items-right[data-empty="true"]) {
+    .weg-items-container:has(.weg-items-right:empty) {
       .weg-item-drag-container:last-child:has(.weg-separator) {
         margin-top: calc(var(--config-space-between-items) * -1);
       }
@@ -187,49 +187,5 @@ body {
 
   &:has(.weg-item-drag-container.dragging) {
     pointer-events: none;
-  }
-}
-
-[data-dnd-overlay] {
-  pointer-events: none !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  overflow: visible !important;
-}
-
-.weg-item-drag-container {
-  display: flex;
-  justify-content: center;
-  align-items: inherit;
-
-  &.is-overlay {
-    pointer-events: none !important;
-    overflow: visible !important;
-    width: 100%;
-    height: 100%;
-  }
-
-  > .weg-item-overlay {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: inherit;
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-  }
-}
-
-.weg-item-overlay {
-  position: relative;
-  width: fit-content;
-  height: fit-content;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .weg-item-drag-container {
-    animation: none !important;
-    transition: none !important;
   }
 }
