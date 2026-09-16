@@ -8,8 +8,9 @@ use windows::{
     Networking::{
         Connectivity::{NetworkInformation, NetworkStatusChangedEventHandler},
         NetworkOperators::{
-            NetworkOperatorTetheringManager, TetheringCapability, TetheringOperationStatus,
-            TetheringOperationalState, TetheringWiFiAuthenticationKind, TetheringWiFiBand,
+            NetworkOperatorTetheringAccessPointConfiguration, NetworkOperatorTetheringManager,
+            TetheringCapability, TetheringOperationStatus, TetheringOperationalState,
+            TetheringWiFiAuthenticationKind, TetheringWiFiBand,
         },
     },
     Win32::{
@@ -153,7 +154,24 @@ impl NetworkManager {
             return Ok(None);
         };
 
-        let config = tethering.GetCurrentAccessPointConfiguration()?;
+        let config = match tethering.GetCurrentAccessPointConfiguration() {
+            Ok(config) => config,
+            // Windows never persisted an access-point configuration for this profile
+            // (e.g. the native Mobile Hotspot feature was never turned on). Tethering
+            // is still available, so configure a default access point and retry.
+            Err(_) => {
+                let default_config = NetworkOperatorTetheringAccessPointConfiguration::new()?;
+                let ssid =
+                    std::env::var("COMPUTERNAME").unwrap_or_else(|_| "PC Hotspot".to_string());
+                default_config.SetSsid(&ssid.into())?;
+                default_config.SetPassphrase(&"12345678".into())?;
+                tethering
+                    .ConfigureAccessPointAsync(&default_config)?
+                    .join()?;
+                tethering.GetCurrentAccessPointConfiguration()?
+            }
+        };
+
         let band = match config.Band()? {
             TetheringWiFiBand::Auto => "Auto",
             TetheringWiFiBand::TwoPointFourGigahertz => "2.4GHz",
