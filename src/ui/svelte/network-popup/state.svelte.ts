@@ -9,6 +9,8 @@ const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 await settings.init();
 
+const isDevtoolsEnabled = $derived(settings.value.devTools);
+
 $effect.root(() => {
   $effect(() => {
     locale.set(settings.value.language);
@@ -93,6 +95,10 @@ class State {
 
   set selectedSsid(value: string | null) {
     selectedSsid = value;
+  }
+
+  get isDevtoolsEnabled() {
+    return isDevtoolsEnabled;
   }
 }
 

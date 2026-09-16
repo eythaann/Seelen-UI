@@ -76,8 +76,9 @@
       .wlan-entry {
         display: flex;
         flex-direction: column;
-        padding: 10px 8px;
-        border-radius: 8px;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs);
+        border-radius: var(--spacing-xs);
 
         &:hover,
         &:focus {
@@ -116,18 +117,36 @@
           }
         }
 
+        .wlan-entry-extra-info {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+
+          font-size: 0.7rem;
+          font-family: monospace;
+          color: var(--slu-std-fg-secondary-color);
+
+          li {
+            display: flex;
+            gap: 6px;
+
+            b {
+              min-width: 90px;
+              color: var(--slu-std-fg-color);
+            }
+          }
+        }
+
         .wlan-entry-fields {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          margin-top: 12px;
         }
 
         .wlan-entry-actions {
           display: flex;
           justify-content: flex-end;
           gap: 8px;
-          margin-top: 12px;
         }
       }
 

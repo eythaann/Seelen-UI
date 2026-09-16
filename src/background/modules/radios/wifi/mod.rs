@@ -1,7 +1,7 @@
 pub mod adapter;
 pub mod handlers;
 
-use std::{sync::LazyLock, time::Duration};
+use std::{collections::HashSet, sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::WlanBssEntry;
 use windows::{
@@ -11,7 +11,8 @@ use windows::{
         Foundation::HANDLE,
         NetworkManagement::WiFi::{
             DOT11_SSID, WLAN_API_VERSION_2_0, WLAN_INTERFACE_INFO, WLAN_INTERFACE_INFO_LIST,
-            WlanCloseHandle, WlanDeleteProfile, WlanEnumInterfaces, WlanOpenHandle, WlanScan,
+            WlanCloseHandle, WlanDeleteProfile, WlanEnumInterfaces, WlanFreeMemory, WlanOpenHandle,
+            WlanScan,
         },
     },
 };
@@ -26,7 +27,7 @@ use crate::{
 
 use adapter::{SluWifiAdapter, wifi_known_profiles};
 
-// ── Win32 WLAN handle (only used for directed probe on hidden networks) ──────
+// ── Win32 WLAN handle (native scans, directed probe on hidden networks) ──────
 
 struct WlanHandle(HANDLE);
 
@@ -61,10 +62,11 @@ fn get_wlan_interfaces(client: HANDLE) -> Result<Vec<WLAN_INTERFACE_INFO>> {
             return Err(format!("WlanEnumInterfaces failed: {err}").into());
         }
         let list = &*ptr;
-        Ok(
+        let interfaces =
             std::slice::from_raw_parts(list.InterfaceInfo.as_ptr(), list.dwNumberOfItems as usize)
-                .to_vec(),
-        )
+                .to_vec();
+        WlanFreeMemory(ptr as *const _);
+        Ok(interfaces)
     }
 }
 
@@ -169,16 +171,28 @@ impl WifiManager {
         self.adapters.for_each(|(_, adapter)| adapter.scan());
     }
 
-    /// Read the current `NetworkReport` from all cached adapters.
+    /// Read the current WLAN BSS list (one entry per physical access point)
+    /// across every native WLAN interface, enriched with per-SSID security
+    /// info and known/connected status derived from the cached adapters.
     pub fn get_available_networks(&self) -> Result<Vec<WlanBssEntry>> {
         let known = wifi_known_profiles();
+        let mut connected = HashSet::new();
+        self.adapters.for_each(|(_, adapter)| {
+            if let Some(ssid) = adapter.get_connected_ssid() {
+                connected.insert(ssid);
+            }
+        });
+
+        let handle = open_wlan()?;
+        let ifaces = get_wlan_interfaces(*handle)?;
+
         let mut entries = Vec::new();
-        self.adapters.for_each(
-            |(_, adapter)| match adapter.get_available_networks(&known) {
+        for iface in &ifaces {
+            match adapter::scan_bss_list(*handle, &iface.InterfaceGuid, &known, &connected) {
                 Ok(mut list) => entries.append(&mut list),
-                Err(e) => log::error!("get_available_networks error: {e}"),
-            },
-        );
+                Err(e) => log::error!("scan_bss_list error: {e}"),
+            }
+        }
         Ok(entries)
     }
 

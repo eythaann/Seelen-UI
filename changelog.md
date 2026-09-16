@@ -6,6 +6,7 @@
 
 - customizable toolbar items transitions (in/out).
 - customizable dock items transitions (in/out).
+- detailed information of WLAN when devtools enabled.
 
 ### fix
 

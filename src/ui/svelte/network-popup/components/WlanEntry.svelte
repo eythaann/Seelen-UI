@@ -123,6 +123,23 @@
     }
     return Array.from(detected);
   });
+
+  const showExtraInfo = $derived(selected && globalState.isDevtoolsEnabled);
+
+  const extraInfo = $derived.by(() => {
+    return group.flatMap((e, i) => {
+      const prefix = group.length > 1 ? `#${i + 1} ` : "";
+      return [
+        { label: `${prefix}BSSID`, value: e.bssid },
+        { label: `${prefix}PHY`, value: e.phyType },
+        { label: `${prefix}Channel`, value: `${e.channel} (${e.band}, ${e.bandwidth || "N/A"})` },
+        { label: `${prefix}RSSI`, value: `${e.rssi} dBm` },
+        { label: `${prefix}Signal`, value: `${e.signal}%` },
+        { label: `${prefix}Auth`, value: e.auth },
+        { label: `${prefix}Cipher`, value: e.cipher ?? "N/A" },
+      ];
+    });
+  });
 </script>
 
 <div
@@ -153,6 +170,14 @@
       <Icon iconName="PiPasswordFill" title={entry.auth} />
     {/if}
   </div>
+
+  {#if showExtraInfo}
+    <ul class="wlan-entry-extra-info">
+      {#each extraInfo as info (info.label)}
+        <li><b>{info.label}</b> {info.value}</li>
+      {/each}
+    </ul>
+  {/if}
 
   {#if selected}
     {#if showFields && !loading}

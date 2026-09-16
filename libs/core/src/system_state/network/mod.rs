@@ -7,14 +7,28 @@ pub struct WlanBssEntry {
     pub bssid: String,
     /// Channel center frequency in kHz
     pub channel_frequency: u32,
-    /// Signal strength 0–100 (derived from WinRT SignalBars × 20)
+    /// 802.11 channel number derived from `channel_frequency`, 0 if unknown
+    pub channel: u32,
+    /// Frequency band, e.g. "2.4GHz", "5GHz", "6GHz", "60GHz"
+    pub band: String,
+    /// Signal quality 0–100 (native WLAN link quality)
     pub signal: u32,
+    /// Raw received signal strength in dBm
+    pub rssi: i32,
+    /// PHY / Wi-Fi generation label, e.g. "802.11ax (Wi-Fi 6)"
+    pub phy_type: String,
+    /// Channel width parsed from the beacon's HT/VHT/HE information elements,
+    /// e.g. "20MHz", "40MHz", "80MHz", "160MHz", "80+80MHz". None if it could
+    /// not be determined.
+    pub bandwidth: Option<String>,
     /// true if Windows has a saved profile for this network
     pub known: bool,
     /// true if the network requires authentication (WEP/WPA/WPA2/WPA3)
     pub secured: bool,
-    /// Human-readable authentication type, e.g. "WPA2-Personal", "Open"
+    /// Human-readable authentication type, e.g. "WPA2-Personal", "Open", "WPA3-Personal", "Enhanced Open"
     pub auth: String,
+    /// Human-readable cipher algorithm, e.g. "AES-CCMP", "TKIP", "WEP", None if unknown
+    pub cipher: Option<String>,
     /// true if currently connected to this network
     pub connected: bool,
 }
