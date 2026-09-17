@@ -35,7 +35,9 @@
   let { item, payload }: Props = $props();
 
   let canvas = $state<HTMLCanvasElement | null>(null);
-  let canDraw = $state(false);
+  let canvasWidth = $state(0);
+  let canvasHeight = $state(0);
+  const canDraw = $derived(canvasWidth > 0 && canvasHeight > 0);
 
   let userSourceName = $derived.by(() => {
     const allByWidget = settingsState.allByWidget;
@@ -100,9 +102,10 @@
     if (!canvas) return;
     const el = canvas;
     const observer = new ResizeObserver(() => {
-      canDraw = !!el.clientWidth && !!el.clientHeight;
+      canvasWidth = el.clientWidth;
+      canvasHeight = el.clientHeight;
     });
-    observer.observe(el);
+    observer.observe(canvas);
     return () => observer.disconnect();
   });
 
@@ -114,8 +117,8 @@
     // sub to all settings changes, like theme changes, etc.
     let _sub = settingsState.all;
 
-    canvas.width = canvas.clientWidth * window.devicePixelRatio;
-    canvas.height = canvas.clientHeight * window.devicePixelRatio;
+    canvas.width = canvasWidth * window.devicePixelRatio;
+    canvas.height = canvasHeight * window.devicePixelRatio;
 
     const computed = getComputedStyle(canvas);
     evalSanboxed(renderExec, {
