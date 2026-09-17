@@ -159,6 +159,8 @@ class State {
   }
 }
 
+// wait for initial positioning before ready;
+await invoke(SeelenCommand.SetAsWallpaper).catch(console.error);
 $effect.root(() => {
   $effect(() => {
     relativeMonitors;

@@ -101,9 +101,10 @@ async function updateWidgetPosition() {
   }
 }
 
-$effect.root(() => {
-  Widget.self.attachPosition();
+Widget.self.attachPosition();
+await updateWidgetPosition();
 
+$effect.root(() => {
   $effect(() => {
     const { itemSize, margin, padding } = settingsState;
     const sheet = new RuntimeStyleSheet("@config/fancy-toolbar");

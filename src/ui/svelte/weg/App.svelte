@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-  import { ZOrder } from "@seelen-ui/lib/types";
+  import { Widget } from "@seelen-ui/lib";
   import { onMount } from "svelte";
   import { debounce } from "lodash";
   import Dock from "./components/Dock.svelte";
@@ -14,27 +13,27 @@
   const focusedIsAppsMenu = $derived(
     startMenuExes.some((program) => (focused.value?.exe || "").endsWith(program)) ||
       widgetStatuses.value.some(
-        (w) =>
-          w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === focused.value?.hwnd,
+        (w) => w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === focused.value?.hwnd,
       ),
   );
 
-  const alwaysOnTop = $derived(!topWindowIsFullscreen || focusedIsAppsMenu);
-
-  const setAlwaysOnTop = debounce((value: boolean) => {
+  const showWidget = $derived(!topWindowIsFullscreen || focusedIsAppsMenu);
+  const setWidgetVisibility = debounce((value: boolean) => {
     if (value) {
-      invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.TopMost });
+      Widget.self.show();
     } else {
-      invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Bottom });
+      Widget.self.hide();
     }
-  }, 200);
+  }, 100);
 
   $effect(() => {
-    setAlwaysOnTop(alwaysOnTop);
+    if (settingsState.isReady) {
+      setWidgetVisibility(showWidget);
+    }
   });
 
   onMount(() => {
-    Widget.self.ready().then(() => {
+    Widget.self.ready({ show: false }).then(() => {
       settingsState.isReady = true;
     });
   });
