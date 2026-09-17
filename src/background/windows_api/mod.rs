@@ -87,8 +87,8 @@ use windows::{
             Shutdown::{EXIT_WINDOWS_FLAGS, ExitWindowsEx, LockWorkStation, SHUTDOWN_REASON},
             SystemInformation::{COMPUTER_NAME_FORMAT, GetComputerNameExW},
             Threading::{
-                GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
-                OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
+                OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
                 PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
             },
         },
@@ -394,8 +394,41 @@ impl WindowsApi {
         Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
+    /// Per [`SetWindowPos`]'s docs: "To use SetWindowPos to bring a window to the top, the
+    /// process that owns the window must have SetForegroundWindow permission." A background
+    /// process/service usually doesn't have that permission (the same restriction
+    /// [`WindowsApi::set_foreground`] works around), so a plain call can return success while
+    /// silently leaving the real Z order unchanged: it still applies the `WS_EX_TOPMOST`
+    /// extended style, so the pending restack only takes effect later, whenever this process
+    /// happens to legitimately gain foreground rights (e.g. on the next real focus change) -
+    /// which is exactly the "comes back on focus" symptom this works around. This hits
+    /// non-activatable (`WS_EX_NOACTIVATE`) always-on-top windows hardest, since they never earn
+    /// foreground rights on their own.
+    ///
+    /// The fix is the same [`AttachThreadInput`] trick used for [`SetForegroundWindow`]:
+    /// attaching to the current foreground window's thread shares its input/activation state
+    /// with this thread for the duration of the call, which satisfies the permission check
+    /// without actually moving focus (`SWP_NOACTIVATE` is still set below).
+    ///
+    /// [`SetWindowPos`]: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowpos
+    /// [`SetForegroundWindow`]: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setforegroundwindow
     pub fn set_z_order(hwnd: HWND, order: HWND) -> Result<()> {
-        Self::set_position(hwnd, Some(order), &RECT::default(), SWP_NOMOVE | SWP_NOSIZE)
+        let foreground = unsafe { GetForegroundWindow() };
+        let foreground_thread = unsafe { GetWindowThreadProcessId(foreground, None) };
+        let current_thread = unsafe { GetCurrentThreadId() };
+
+        let attached = foreground_thread != 0
+            && foreground_thread != current_thread
+            && unsafe { AttachThreadInput(current_thread, foreground_thread, true) }.as_bool();
+
+        let result =
+            Self::set_position(hwnd, Some(order), &RECT::default(), SWP_NOMOVE | SWP_NOSIZE);
+
+        if attached {
+            let _ = unsafe { AttachThreadInput(current_thread, foreground_thread, false) };
+        }
+
+        result
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
