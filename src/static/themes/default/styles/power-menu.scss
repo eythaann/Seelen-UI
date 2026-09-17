@@ -102,9 +102,9 @@ $base-noise-010: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp
             justify-content: center;
             margin-bottom: 4px;
 
-            :global(.svg-icon) {
-              height: 40px !important;
-              width: 40px !important;
+            .slu-icon {
+              height: 25px !important;
+              width: 25px !important;
             }
           }
 

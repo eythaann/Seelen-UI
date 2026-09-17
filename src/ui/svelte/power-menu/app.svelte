@@ -10,19 +10,24 @@
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
 
   let isVisible = $state(false);
+  let hideTimeout: ReturnType<typeof setTimeout> | null = null;
 
   onMount(() => {
     Widget.getCurrent().ready();
     isVisible = true;
 
     window.addEventListener("focus", () => {
+      if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+      }
       isVisible = true;
     });
   });
 
   function onCancel() {
     isVisible = false;
-    setTimeout(() => {
+    hideTimeout = setTimeout(() => {
       Widget.self.hide();
     }, 200);
   }
