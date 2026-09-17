@@ -24,7 +24,7 @@
     if (bluetoothRadio) {
       await invoke(SeelenCommand.SetRadioState, {
         kind: RadioDeviceKind.Bluetooth,
-        enabled: !bluetoothRadio.is_enabled,
+        enabled: !bluetoothRadio.isEnabled,
       });
     }
   }
@@ -49,14 +49,14 @@
         <input
           type="checkbox"
           data-skin="switch"
-          checked={bluetoothRadio.is_enabled}
+          checked={bluetoothRadio.isEnabled}
           onchange={toggleBluetoothRadio}
         />
       </label>
     </div>
   {/if}
 
-  {#if bluetoothRadio?.is_enabled}
+  {#if bluetoothRadio?.isEnabled}
     {#if connectedDevices.length > 0}
       <div class="bt-list">
         <div class="bt-list-title">{$t("connected")}</div>
@@ -99,7 +99,7 @@
       </div>
     </div>
 
-    {#if bluetoothRadio?.is_enabled}
+    {#if bluetoothRadio?.isEnabled}
       <div class="bluetooth-footer">
         <button data-skin="transparent" onclick={openBluetoothSettings}>
           {$t("more")}

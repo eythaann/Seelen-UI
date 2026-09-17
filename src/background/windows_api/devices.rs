@@ -6,8 +6,10 @@ use std::sync::{
 };
 use windows::{
     Devices::Enumeration::{DeviceInformation, DeviceInformationUpdate, DeviceWatcher},
-    Foundation::TypedEventHandler,
+    Foundation::{IPropertyValue, PropertyType, TypedEventHandler},
+    Win32::Devices::DeviceAndDriverInstallation::CM_LOCATE_DEVNODE_FLAGS,
 };
+use windows_core::Interface;
 
 use crate::error::Result;
 
@@ -204,4 +206,148 @@ impl Drop for DeviceEnumerator {
     fn drop(&mut self) {
         let _ = self.watcher.Stop();
     }
+}
+
+#[allow(dead_code)]
+pub fn get_string_property(
+    info: &DeviceInformation,
+    name: &str,
+) -> windows::core::Result<Option<String>> {
+    let value = info.Properties()?.Lookup(&name.into())?;
+
+    let property = value.cast::<IPropertyValue>()?;
+
+    if property.Type()? == PropertyType::String {
+        return Ok(Some(property.GetString()?.to_string()));
+    }
+
+    Ok(None)
+}
+
+use windows::{
+    Win32::Devices::DeviceAndDriverInstallation::{
+        CM_Get_DevNode_PropertyW, CM_Get_Device_Interface_PropertyW, CM_Locate_DevNodeW,
+        CM_MapCrToWin32Err, CONFIGRET, CR_BUFFER_SMALL, CR_NO_SUCH_VALUE, CR_SUCCESS,
+    },
+    Win32::Devices::Properties::{
+        DEVPKEY_Device_DeviceDesc, DEVPKEY_Device_FriendlyName, DEVPKEY_Device_InstanceId,
+        DEVPROPTYPE,
+    },
+    Win32::Foundation::{DEVPROPKEY, ERROR_GEN_FAILURE},
+};
+
+use super::string_utils::WindowsString;
+
+fn cr_to_error(cr: CONFIGRET) -> windows::core::Error {
+    let win32_err = unsafe { CM_MapCrToWin32Err(cr, ERROR_GEN_FAILURE.0) };
+    windows::core::Error::from_hresult(windows::core::HRESULT::from_win32(win32_err))
+}
+
+#[allow(dead_code)]
+/// Reads a string property of a device node, given its devinst handle and property key.
+/// Returns `Ok(None)` when the device has no value set for that property.
+fn get_devnode_string_property(devinst: u32, key: &DEVPROPKEY) -> Result<Option<String>> {
+    let mut property_type = DEVPROPTYPE::default();
+    let mut buffer_size = 0u32;
+
+    // First call: obtain required buffer size.
+    let cr = unsafe {
+        CM_Get_DevNode_PropertyW(devinst, key, &mut property_type, None, &mut buffer_size, 0)
+    };
+
+    if cr == CR_NO_SUCH_VALUE {
+        return Ok(None);
+    }
+    if cr != CR_SUCCESS && cr != CR_BUFFER_SMALL {
+        return Err(cr_to_error(cr).into());
+    }
+
+    let mut buffer = WindowsString::new_to_fill(buffer_size.div_ceil(2) as usize);
+
+    let cr = unsafe {
+        CM_Get_DevNode_PropertyW(
+            devinst,
+            key,
+            &mut property_type,
+            Some(buffer.as_mut_slice().as_mut_ptr() as *mut u8),
+            &mut buffer_size,
+            0,
+        )
+    };
+
+    if cr != CR_SUCCESS {
+        return Err(cr_to_error(cr).into());
+    }
+
+    Ok(Some(buffer.to_string()))
+}
+
+#[allow(dead_code)]
+/// Reads the instance id (`DEVPKEY_Device_InstanceId`) of the device owning a device interface path.
+pub fn get_instance_id_from_interface(interface_path: &str) -> Result<String> {
+    let path = WindowsString::from_str(interface_path);
+
+    let mut property_type = DEVPROPTYPE::default();
+    let mut buffer_size = 0u32;
+
+    let cr = unsafe {
+        CM_Get_Device_Interface_PropertyW(
+            path.as_pcwstr(),
+            &DEVPKEY_Device_InstanceId,
+            &mut property_type,
+            None,
+            &mut buffer_size,
+            0,
+        )
+    };
+
+    if cr != CR_SUCCESS && cr != CR_BUFFER_SMALL {
+        return Err(cr_to_error(cr).into());
+    }
+
+    let mut buffer = WindowsString::new_to_fill(buffer_size.div_ceil(2) as usize);
+
+    let cr = unsafe {
+        CM_Get_Device_Interface_PropertyW(
+            path.as_pcwstr(),
+            &DEVPKEY_Device_InstanceId,
+            &mut property_type,
+            Some(buffer.as_mut_slice().as_mut_ptr() as *mut u8),
+            &mut buffer_size,
+            0,
+        )
+    };
+
+    if cr != CR_SUCCESS {
+        return Err(cr_to_error(cr).into());
+    }
+
+    Ok(buffer.to_string())
+}
+
+#[allow(dead_code)]
+/// Obtains the hardware device name shown in Device Manager: the device's friendly name,
+/// falling back to its device description when no friendly name was set.
+pub fn get_device_friendly_name(instance_id: &str) -> Result<String> {
+    let instance_id = WindowsString::from_str(instance_id);
+
+    let mut devinst: u32 = 0;
+
+    let cr = unsafe {
+        CM_Locate_DevNodeW(
+            &mut devinst,
+            instance_id.as_pcwstr(),
+            CM_LOCATE_DEVNODE_FLAGS(0),
+        )
+    };
+
+    if cr != CR_SUCCESS {
+        return Err(cr_to_error(cr).into());
+    }
+
+    if let Some(name) = get_devnode_string_property(devinst, &DEVPKEY_Device_FriendlyName)? {
+        return Ok(name);
+    }
+
+    Ok(get_devnode_string_property(devinst, &DEVPKEY_Device_DeviceDesc)?.unwrap_or_default())
 }

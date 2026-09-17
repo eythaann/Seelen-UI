@@ -60,7 +60,7 @@
     if (wifiRadio) {
       await invoke(SeelenCommand.SetRadioState, {
         kind: RadioDeviceKind.WiFi,
-        enabled: !wifiRadio.is_enabled,
+        enabled: !wifiRadio.isEnabled,
       });
     }
   }
@@ -87,11 +87,10 @@
         <input
           type="checkbox"
           data-skin="switch"
-          checked={wifiRadio.is_enabled}
+          checked={wifiRadio.isEnabled}
           onchange={toggleWifiRadio}
         />
       </div>
-
       {#if globalState.hotspot}
         <div class="network-section">
           <div class="network-section-title">{$t("hotspot.title")}</div>
@@ -102,7 +101,7 @@
       {/if}
     {/if}
 
-    {#if wifiRadio?.is_enabled}
+    {#if wifiRadio?.isEnabled}
       {#if connected}
         <div class="network-section">
           <div class="network-section-title">{$t("connected")}</div>
@@ -146,7 +145,7 @@
         </div>
       </div>
 
-      {#if wifiRadio?.is_enabled}
+      {#if wifiRadio?.isEnabled}
         <div class="network-footer">
           <button data-skin="transparent" onclick={openNetworkSettings}>
             {$t("more")}

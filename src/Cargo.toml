@@ -157,6 +157,7 @@ windows = { workspace = true, features = [
     "Win32_Devices_Bluetooth",
     "Win32_Devices_Display",
     "Win32_Devices_DeviceAndDriverInstallation",
+    "Win32_Devices_Properties",
     "Win32_Devices_FunctionDiscovery",
     "UI_Core",
     "UI_Shell",

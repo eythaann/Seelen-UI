@@ -1,9 +1,11 @@
 /// Represents a radio device like a bluetooth - wifi etc.
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct RadioDevice {
     pub id: String,
+    /// radio name e.g. "Bluetooth" or "Wi-Fi"
     pub name: String,
     pub kind: RadioDeviceKind,
     /// True if the radio device is currently `On`.
