@@ -13,6 +13,8 @@
 
 - dock and toolbar edge triggering on high DPI displays.
 - duplicated dock items briefly appearing (and then disappearing) for open, unpinned apps on multi-monitor setups.
+- WLAN networks and Bluetooth devices not being scanned automatically after turning their radio back on.
+- bluetooth popup scanning indicator/scanning showing while the popup was unfocused instead of while it was open.
 
 ## [2.8.5]
 

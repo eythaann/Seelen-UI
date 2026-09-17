@@ -248,6 +248,19 @@ impl BluetoothManager {
         Ok(())
     }
 
+    /// Restart discovery if it was already active. The discovery watchers don't
+    /// reliably resume finding devices on their own after the Bluetooth radio is
+    /// turned off and back on, so recreate them from scratch when that happens.
+    pub fn restart_scanning_if_active(&self) -> Result<()> {
+        if self.discovery_classic_enumerator.load().is_none()
+            && self.discovery_le_enumerator.load().is_none()
+        {
+            return Ok(());
+        }
+        self.stop_scanning()?;
+        self.start_scanning()
+    }
+
     /// Prepares a device for pairing by setting up event handlers and creating the pending request.
     /// Returns the mpsc receiver, pair handler, and protection level needed for pairing.
     fn prepare_pair_device(

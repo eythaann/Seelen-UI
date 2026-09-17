@@ -1,7 +1,7 @@
 mod classic;
 pub mod handlers;
 mod low_energy;
-mod manager;
+pub mod manager;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum BluetoothDeviceType {

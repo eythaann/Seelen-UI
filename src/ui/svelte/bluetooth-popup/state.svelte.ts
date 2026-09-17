@@ -38,7 +38,7 @@ let loadingDeviceId = $state<string | null>(null);
 let loadingOperation = $state<BluetoothOperation | null>(null);
 
 widget.window.onFocusChanged(async (e) => {
-  if (!e.payload) {
+  if (e.payload) {
     await invoke(SeelenCommand.StartBluetoothScanning);
     isScanning = true;
   } else {

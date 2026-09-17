@@ -42,7 +42,7 @@
   async function toggleRadio(radio: RadioDevice) {
     await invoke(SeelenCommand.SetRadioState, {
       kind: radio.kind,
-      enabled: !radio.is_enabled,
+      enabled: !radio.isEnabled,
     });
   }
 
@@ -78,9 +78,9 @@
   {#each state.radios as radio (radio.id)}
     <button
       class="radio-button"
-      data-skin={radio.is_enabled ? "solid" : "default"}
+      data-skin={radio.isEnabled ? "solid" : "default"}
       onclick={() => toggleRadio(radio)}
-      title={`${radio.name} - ${radio.is_enabled ? $t("enabled") : $t("disabled")}`}
+      title={`${radio.name} - ${radio.isEnabled ? $t("enabled") : $t("disabled")}`}
     >
       <Icon iconName={getRadioIcon(radio.kind)} />
       <span class="radio-button-label">{getRadioLabel(radio.kind)}</span>

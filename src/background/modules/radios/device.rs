@@ -4,7 +4,13 @@ use windows::{
     Foundation::TypedEventHandler,
 };
 
-use crate::{error::Result, modules::radios::manager::RadioManager, windows_api::DeviceEvent};
+use crate::{
+    error::{Result, ResultLogExt},
+    modules::radios::{
+        bluetooth::manager::BluetoothManager, manager::RadioManager, wifi::WifiManager,
+    },
+    windows_api::DeviceEvent,
+};
 
 pub struct SluRadioDevice {
     pub id: String,
@@ -26,10 +32,32 @@ impl SluRadioDevice {
                 if let Some(sender) = sender.as_ref() {
                     let is_enabled = sender.State().is_ok_and(|s| s == RadioState::On);
                     // Now update the cache with the lock (fast operation)
-                    RadioManager::instance().radios.get(&id, |r| {
+                    let kind = RadioManager::instance().radios.get(&id, |r| {
                         r.cache.is_enabled = is_enabled;
+                        match r.cache.kind {
+                            RadioDeviceKind::WiFi => Some(RadioDeviceKind::WiFi),
+                            RadioDeviceKind::Bluetooth => Some(RadioDeviceKind::Bluetooth),
+                            _ => None,
+                        }
                     });
                     RadioManager::send(DeviceEvent::Updated(id.clone()));
+
+                    // Neither the WiFi network scan nor the Bluetooth discovery
+                    // watchers reliably resume on their own right after their
+                    // radio is turned back on, so kick them explicitly.
+                    if is_enabled {
+                        match kind.flatten() {
+                            Some(RadioDeviceKind::WiFi) => {
+                                WifiManager::instance().scan_networks();
+                            }
+                            Some(RadioDeviceKind::Bluetooth) => {
+                                BluetoothManager::instance()
+                                    .restart_scanning_if_active()
+                                    .log_error();
+                            }
+                            _ => {}
+                        }
+                    }
                 }
                 Ok(())
             },

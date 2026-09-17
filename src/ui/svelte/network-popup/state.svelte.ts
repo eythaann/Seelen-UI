@@ -47,7 +47,11 @@ widget.window.onFocusChanged((e) => {
 
 $effect.root(() => {
   $effect(() => {
-    if (isScanning) {
+    const wifiEnabled = radios.value.some(
+      (radio) => radio.kind === RadioDeviceKind.WiFi && radio.isEnabled,
+    );
+
+    if (isScanning && wifiEnabled) {
       invoke(SeelenCommand.WlanScan);
       scanInterval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
       return;
