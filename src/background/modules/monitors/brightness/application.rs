@@ -12,6 +12,9 @@ use crate::{
     utils::lock_free::SyncVec,
 };
 
+/// `WBEM_E_NOT_SUPPORTED`: the provider has no instances to offer on this hardware.
+const WBEM_E_NOT_SUPPORTED: i32 = 0x8004100C_u32 as i32;
+
 #[derive(Debug, Clone)]
 pub enum BrightnessManagerEvent {
     Changed(Vec<WmiMonitorBrightness>),
@@ -42,6 +45,18 @@ impl BrightnessManager {
     fn init(&mut self) -> Result<()> {
         let wmi = WMIConnection::with_namespace_path("ROOT\\WMI")?;
 
+        let brightness: Vec<WmiMonitorBrightness> = match wmi.query() {
+            Ok(brightness) => brightness,
+            // No monitor exposes brightness through WMI (the usual case for desktops with
+            // external displays). There is nothing to track, so don't report it as an error.
+            Err(wmi::WMIError::HResultError { hres }) if hres == WBEM_E_NOT_SUPPORTED => {
+                log::debug!("Monitor brightness is not supported through WMI on this system");
+                return Ok(());
+            }
+            Err(error) => return Err(error.into()),
+        };
+        self.brightness = brightness.into();
+
         std::thread::spawn(move || {
             let wmi = WMIConnection::with_namespace_path("ROOT\\WMI")?;
             for event in wmi.notification::<WmiMonitorBrightnessEvent>()? {
@@ -57,8 +72,6 @@ impl BrightnessManager {
             }
             Result::Ok(())
         });
-
-        self.brightness = wmi.query::<WmiMonitorBrightness>()?.into();
         Ok(())
     }
 
