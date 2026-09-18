@@ -47,6 +47,10 @@
 
 .ft-bar-item-content {
   position: relative;
+
+  img {
+    border-radius: calc(var(--config-item-size) * 0.3);
+  }
 }
 
 .ft-bar-item-badge {
