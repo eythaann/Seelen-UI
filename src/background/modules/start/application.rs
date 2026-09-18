@@ -72,26 +72,22 @@ impl StartMenuManager {
     }
 
     fn init(&mut self) -> Result<()> {
-        if self.cache_path.exists() {
-            match self.load_cache() {
-                Ok(_) => {
-                    // refresh without blocking
-                    std::thread::spawn(|| {
-                        Self::reload().log_error();
-                    });
-                    // Setup listeners after loading cache
-                    self.setup_listeners().log_error();
-                    return Ok(());
-                }
-                Err(e) => {
-                    log::error!("Failed to load start menu cache: {e}");
-                }
-            }
+        if self.cache_path.exists()
+            && let Err(e) = self.load_cache()
+        {
+            log::error!("Failed to load start menu cache: {e}");
         }
 
-        self.list.replace(Self::load_start_menu_items()?);
-        self.store_cache()?;
-        // Setup listeners after initial load
+        // Always load the real items on a background thread, even when there is no
+        // cache yet. Doing it synchronously here runs inside the `LazyLock`
+        // initializer, so every other caller of `instance()` blocks until the whole
+        // scan (shortcuts + package catalog) finishes; on a cold start that is long
+        // enough for the service health check to time out and restart the app in a
+        // loop (#1778). `reload` stores the cache and emits `ItemsRefreshed` so
+        // consumers pick up the items once they are ready.
+        std::thread::spawn(|| {
+            Self::reload().log_error();
+        });
         self.setup_listeners().log_error();
         Ok(())
     }
