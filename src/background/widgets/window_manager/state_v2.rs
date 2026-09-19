@@ -66,12 +66,22 @@ impl TwmState {
     fn initialize(&mut self) {
         let vd = SluWorkspacesManager2::instance();
         vd.monitors.for_each(|(_, monitor)| {
+            let active_workspace_id = monitor.active_workspace_id().clone();
             for row in monitor.workspaces.rows() {
                 for workspace in row {
+                    // Windows on inactive workspaces are minimized by the virtual desktop
+                    // manager to hide them and must keep their slot; on the active workspace
+                    // a minimized window was minimized by the user and must not get one,
+                    // otherwise the layout shows an empty tile until the next re-render.
+                    let should_be_managed = if workspace.id == active_workspace_id {
+                        WindowManagerV2::should_be_managed
+                    } else {
+                        WindowManagerV2::should_be_managed_ignoring_minimized
+                    };
                     let mut tree = Self::create_tree(&workspace.id);
                     for &hwnd in &workspace.windows {
                         let window = Window::from(hwnd);
-                        if WindowManagerV2::should_be_managed_ignoring_minimized(window.hwnd()) {
+                        if should_be_managed(window.hwnd()) {
                             let residual = tree.add_to_tiled(window.address());
                             for w in residual {
                                 tree.add_to_floating(w);
