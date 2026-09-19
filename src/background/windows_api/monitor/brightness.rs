@@ -1,6 +1,7 @@
 use windows::Win32::{
     Devices::Display::{
-        GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR, SetMonitorBrightness,
+        DestroyPhysicalMonitor, GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR,
+        SetMonitorBrightness,
     },
     Foundation::HANDLE,
     Storage::FileSystem::{
@@ -18,11 +19,22 @@ use crate::{
 
 use super::Monitor;
 
-#[derive(Debug, Default)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub struct DdcciBrightnessValues {
     pub min: u32,
     pub current: u32,
     pub max: u32,
+}
+
+/// Owned `PHYSICAL_MONITOR` handle, released with `DestroyPhysicalMonitor` on drop.
+struct PhysicalMonitorHandle(PHYSICAL_MONITOR);
+
+impl Drop for PhysicalMonitorHandle {
+    fn drop(&mut self) {
+        unsafe {
+            let _ = DestroyPhysicalMonitor(self.0.hPhysicalMonitor);
+        }
+    }
 }
 
 #[allow(dead_code)]
@@ -50,15 +62,35 @@ impl MonitorTarget {
     }
 }
 
-#[allow(dead_code)]
+/// Display Data Channel / Command Interface (DDC/CI) access through `dxva2.dll`.
+///
+/// These calls talk to the monitor over the I2C bus of the video cable, so they are slow
+/// (tens of milliseconds, seconds on a misbehaving monitor) and must never run on the UI
+/// thread. Callers should also serialize them: concurrent DDC/CI transactions to the same
+/// monitor can corrupt each other.
 impl Monitor {
-    fn main_physical(&self) -> Result<PHYSICAL_MONITOR> {
-        let physical_monitors = WindowsApi::get_physical_monitors(self.handle())?;
-        let main_physical_monitor = physical_monitors.first().ok_or("no physical monitor")?;
-        Ok(*main_physical_monitor)
+    /// Every physical monitor handle obtained through `GetPhysicalMonitorsFromHMONITOR` must be
+    /// released with `DestroyPhysicalMonitor`; the returned guard does that on drop.
+    fn main_physical(&self) -> Result<PhysicalMonitorHandle> {
+        // wrap every handle first so the ones we don't use are still released
+        let physical_monitors: Vec<PhysicalMonitorHandle> =
+            WindowsApi::get_physical_monitors(self.handle())?
+                .into_iter()
+                .map(PhysicalMonitorHandle)
+                .collect();
+        physical_monitors
+            .into_iter()
+            .next()
+            .ok_or("no physical monitor".into())
     }
 
-    // Display Data Channel/Command Interface
+    /// Whether the monitor claims DDC/CI support through `GetMonitorCapabilities`.
+    ///
+    /// Note that this is only advisory: some monitors that do answer brightness requests fail
+    /// this call (e.g. BenQ GW-series), and Microsoft documents that others report
+    /// capabilities they don't actually have. Prefer probing `ddcci_get_monitor_brightness`
+    /// directly and validating its result.
+    #[allow(dead_code)]
     pub fn supports_ddcci(&self) -> Result<bool> {
         let physical_monitor = self.main_physical()?;
         let ddcci_is_supported = unsafe {
@@ -66,7 +98,7 @@ impl Monitor {
             let mut pdwsupportedcolortemperatures: u32 = 0;
             // This function fails if the monitor does not support DDC/CI.
             BOOL(GetMonitorCapabilities(
-                physical_monitor.hPhysicalMonitor,
+                physical_monitor.0.hPhysicalMonitor,
                 &mut pdwmonitorcapabilities,
                 &mut pdwsupportedcolortemperatures,
             ))
@@ -80,7 +112,7 @@ impl Monitor {
         let mut values = DdcciBrightnessValues::default();
         unsafe {
             BOOL(GetMonitorBrightness(
-                physical_monitor.hPhysicalMonitor,
+                physical_monitor.0.hPhysicalMonitor,
                 &mut values.min,
                 &mut values.current,
                 &mut values.max,
@@ -94,7 +126,7 @@ impl Monitor {
         let physical_monitor = self.main_physical()?;
         unsafe {
             BOOL(SetMonitorBrightness(
-                physical_monitor.hPhysicalMonitor,
+                physical_monitor.0.hPhysicalMonitor,
                 value,
             ))
             .ok()?
