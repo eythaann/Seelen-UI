@@ -237,6 +237,7 @@ resources:
   high_impact: Բարձր ազդեցություն կատարման վրա
   import_wallpapers: Ներմուծեք տեղական պաստառներ
   included_plugins: Ներառված պլագիններ
+  modified: Փոփոխված
   open_folder: Բացեք ռեսուրսների թղթապանակ
   outdated: >-
     Այս ռեսուրսը նախատեսված էր Seelen UI- ի ավելի հին տարբերակի համար եւ կարող է

@@ -237,6 +237,7 @@ resources:
   high_impact: Великий вплив на продуктивність
   import_wallpapers: Імпортувати місцеві шпалери
   included_plugins: Включені плагіни
+  modified: Змінено
   open_folder: Відкрийте папку з ресурсами
   outdated: >-
     Цей ресурс був розроблений для старої версії інтерфейсу Seelen і може не

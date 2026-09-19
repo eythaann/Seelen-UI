@@ -235,6 +235,7 @@ resources:
   high_impact: Гүйцэтгэлд өндөр нөлөө үзүүлдэг
   import_wallpapers: Орон нутгийн ханын цаас импортлох
   included_plugins: Оруулсан залгаасууд
+  modified: Өөрчлөгдсөн
   open_folder: Нээлттэй зөөврийн
   outdated: >-
     Энэ нөөц нь Seelen Ui-ийн хуучин хувилбарт зориулагдсан бөгөөд зөв

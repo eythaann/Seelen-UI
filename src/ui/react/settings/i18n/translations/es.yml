@@ -243,6 +243,7 @@ resources:
   high_impact: Alto impacto en el rendimiento
   import_wallpapers: Importar fondos de pantalla locales
   included_plugins: Complementos incluidos
+  modified: Modificado
   open_folder: Abrir carpeta de recursos
   outdated: >-
     Este recurso fue diseñado para una versión anterior de Seelen UI y podría no

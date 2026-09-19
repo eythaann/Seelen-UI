@@ -237,6 +237,7 @@ resources:
   high_impact: Vysoký dopad na výkon
   import_wallpapers: Import místních tapet
   included_plugins: Zahrnuté pluginy
+  modified: Změněno
   open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a

@@ -235,6 +235,7 @@ resources:
   high_impact: کارکردگی پر زیادہ اثر
   import_wallpapers: مقامی وال پیپر درآمد کریں
   included_plugins: شامل پلگ انز
+  modified: تبدیل شدہ
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
     یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ

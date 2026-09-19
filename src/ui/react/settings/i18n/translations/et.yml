@@ -233,6 +233,7 @@ resources:
   high_impact: Suur mõju jõudlusele
   import_wallpapers: Kohalike taustapiltide importimine
   included_plugins: Kaasasolevad pistikprogrammid
+  modified: Muudetud
   open_folder: Avage ressursside kaust
   outdated: >-
     See ressurss on loodud Seelen UI vanema versiooni jaoks ja see ei pruugi

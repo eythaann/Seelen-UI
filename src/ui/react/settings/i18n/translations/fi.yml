@@ -238,6 +238,7 @@ resources:
   high_impact: Suuri vaikutus suorituskykyyn
   import_wallpapers: Tuo paikallisia taustakuvia
   included_plugins: Mukana lisäosat
+  modified: Muutettu
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se

@@ -57,11 +57,15 @@ export class Theme {
       if (!isValidCssVariableName(def.name)) {
         return;
       }
+      const syntax = def.syntax === "<boolean>" ? "*" : def.syntax;
+      const initialValue = def.syntax === "<boolean>"
+        ? (def.initialValue ? "1" : "0")
+        : `${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""}`;
       styles += `
         @property ${def.name} {
-          syntax: "${def.syntax}";
+          syntax: "${syntax}";
           inherits: true;
-          initial-value: ${def.initialValue}${"initialValueUnit" in def ? def.initialValueUnit : ""};
+          initial-value: ${initialValue};
         }
       `;
     });

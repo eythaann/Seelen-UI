@@ -240,6 +240,7 @@ resources:
   high_impact: Impact mare asupra performanței
   import_wallpapers: Importați imagini de fundal locale
   included_plugins: Pluginuri incluse
+  modified: Modificat
   open_folder: Deschideți folderul de resurse
   outdated: >-
     Această resursă a fost proiectată pentru o versiune mai veche a Seelen UI și

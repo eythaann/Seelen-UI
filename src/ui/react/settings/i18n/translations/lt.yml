@@ -237,6 +237,7 @@ resources:
   high_impact: Didelis poveikis našumui
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   included_plugins: Įtraukti papildiniai
+  modified: Pakeista
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
