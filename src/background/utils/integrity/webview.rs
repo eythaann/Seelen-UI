@@ -7,7 +7,7 @@ use crate::{app::get_app_handle, error::Result};
 
 use super::IntegrityError;
 
-pub async fn validate_webview_runtime() -> std::result::Result<(), IntegrityError> {
+pub fn validate_webview_runtime() -> std::result::Result<(), IntegrityError> {
     match webview_version() {
         Ok(version) => {
             let major: u32 = version
@@ -67,7 +67,7 @@ fn open_webview2_download(app: &tauri::AppHandle) -> Result<()> {
 
 /// Try creating a webview window, tauri for some reason could panic stopping the setup hook and for some reason
 /// the panic hook is not catching this so this implementation is a workaround for that.
-pub async fn check_for_webview_optimal_state() -> std::result::Result<(), IntegrityError> {
+pub async fn check_for_webview_optimal_state() -> bool {
     log::info!("Testing webview optimal state...");
 
     let (tx, rx) = tokio::sync::oneshot::channel();
@@ -90,12 +90,11 @@ pub async fn check_for_webview_optimal_state() -> std::result::Result<(), Integr
     tokio::select! {
         _ = rx => {
             log::info!("Webview optimal state confirmed.");
+            true
         }
         _ = tokio::time::sleep(std::time::Duration::from_secs(3)) => {
             log::error!("Webview optimal state check timed out.");
-            return Err(IntegrityError::WebviewOptimalStateFailed);
+            false
         }
     }
-
-    Ok(())
 }

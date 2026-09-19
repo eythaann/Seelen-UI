@@ -17,7 +17,9 @@ macro_rules! define_app_errors {
         $(
             impl From<$error_type> for AppError {
                 fn from(err: $error_type) -> Self {
-                    let backtrace = backtrace::Backtrace::new();
+                    // symbols are resolved lazily on Debug, resolving here is very expensive
+                    // (~800ms the first time on debug builds) and most errors are never printed.
+                    let backtrace = backtrace::Backtrace::new_unresolved();
                     AppError { code: 0, msg: format!("{}({:?})", stringify!($variant), err), backtrace }
                 }
             }
@@ -68,7 +70,10 @@ impl std::fmt::Debug for AppError {
             }
         }
 
-        let frames = self.backtrace.frames();
+        let mut backtrace = self.backtrace.clone();
+        backtrace.resolve();
+
+        let frames = backtrace.frames();
         let mut index = 0;
         for frame in frames {
             for symbol in frame.symbols() {
@@ -143,7 +148,7 @@ impl From<tauri_plugin_shell::process::Output> for AppError {
             let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
             cow.to_string().to_owned()
         };
-        let backtrace = backtrace::Backtrace::new();
+        let backtrace = backtrace::Backtrace::new_unresolved();
         AppError {
             code: 0,
             msg,
@@ -163,7 +168,7 @@ impl From<reqwest::StatusCode> for AppError {
         AppError {
             code: status.as_u16(),
             msg: status.canonical_reason().unwrap_or("Unknown").to_string(),
-            backtrace: backtrace::Backtrace::new(),
+            backtrace: backtrace::Backtrace::new_unresolved(),
         }
     }
 }

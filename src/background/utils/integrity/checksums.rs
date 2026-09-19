@@ -1,29 +1,18 @@
 use std::path::Path;
 
-use slu_utils::checksums::CheckSums;
-use walkdir::WalkDir;
+use futures::StreamExt;
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
+use slu_utils::checksums::{CheckSums, calculate_sha256};
 
 use crate::error::Result;
 
 use tauri::Manager;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 
-use super::IntegrityError;
-
 /// Public key for minisign verification (same as updater)
 const MINISIGN_PUBLIC_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
 
-pub async fn ensure_bundle_files_integrity(
-    app: &tauri::AppHandle,
-) -> std::result::Result<(), IntegrityError> {
-    if let Err(e) = try_ensure_bundle_files_integrity(app).await {
-        log::error!("Bundle integrity check failed: {e:?}");
-        return Err(IntegrityError::BundleIntegrityFailed);
-    }
-    Ok(())
-}
-
-async fn try_ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
+pub async fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()> {
     log::trace!("Validating bundle files integrity");
 
     let install_dir = app.path().resource_dir()?;
@@ -52,29 +41,41 @@ async fn try_ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()>
 async fn validate_directory_checksums(base_path: &Path, checksums_path: &Path) -> Result<()> {
     log::trace!("Validating checksums for {}", base_path.display());
 
-    let checksums_content = std::fs::read(checksums_path)?;
+    let checksums_content = tokio::fs::read(checksums_path).await?;
     let expected_checksums = CheckSums::parse(&checksums_content)?;
 
-    // Calculate actual checksums
+    let root = base_path.parent().unwrap();
+    let walk_path = base_path.to_path_buf();
+    let files =
+        tokio::task::spawn_blocking(move || crate::utils::collect_files(walk_path.as_path()))
+            .await
+            .map_err(|e| format!("Bundle files listing task failed: {e}"))?;
+
+    let contents = futures::stream::iter(files)
+        .map(|path| async move {
+            let content = tokio::fs::read(&path).await.ok()?;
+            Some((path, content))
+        })
+        .buffer_unordered(64)
+        .filter_map(futures::future::ready)
+        .collect::<Vec<_>>()
+        .await;
+
+    // Hashing is CPU bound, so it is spread between the cores off the runtime workers
+    let hashes = tokio::task::spawn_blocking(move || {
+        contents
+            .into_par_iter()
+            .map(|(path, content)| (path, calculate_sha256(&content)))
+            .collect::<Vec<_>>()
+    })
+    .await
+    .map_err(|e| format!("Bundle files hashing task failed: {e}"))?;
+
+    // Store checksums with the path relative to the bundle root
     let mut actual_checksums = CheckSums::new();
-    for entry in WalkDir::new(base_path)
-        .follow_links(false)
-        .into_iter()
-        .flatten()
-    {
-        let path = entry.path();
-        if !path.is_file() {
-            continue;
-        }
-
-        let relative_path = path
-            .strip_prefix(base_path.parent().unwrap())
-            .expect("Strip failed");
-
-        // Read file using full path, but store checksum with relative path
-        let content =
-            std::fs::read(path).map_err(|e| format!("Failed to read {}: {}", path.display(), e))?;
-        actual_checksums.raw_add(&content, relative_path);
+    for (path, hash) in hashes {
+        let relative_path = path.strip_prefix(root).expect("Strip failed");
+        actual_checksums.add_hash(hash, relative_path);
     }
 
     let diffs = expected_checksums.compare(&actual_checksums);

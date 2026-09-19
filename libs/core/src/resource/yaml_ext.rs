@@ -96,37 +96,42 @@ pub fn extract_self_id_slu(root: &Value) -> Result<String> {
 }
 
 /// Substitutes `${key}` placeholders in a string using the given variable map.
-fn interpolate(s: String, vars: &HashMap<String, String>) -> String {
-    let mut result = s;
+fn interpolate(s: &mut String, vars: &HashMap<String, String>) {
+    // fast path: most strings have no placeholders, avoid allocating `format!` per var
+    if !s.contains("${") {
+        return;
+    }
     for (key, val) in vars {
         let placeholder = format!("${{{key}}}");
-        if result.contains(&placeholder) {
-            result = result.replace(&placeholder, val);
+        if s.contains(&placeholder) {
+            *s = s.replace(&placeholder, val);
         }
     }
-    result
+}
+
+fn resolve_vars_in_place(value: &mut Value, vars: &HashMap<String, String>) {
+    match value {
+        Value::String(s) => interpolate(s, vars),
+        Value::Mapping(map) => {
+            for (_, v) in map.iter_mut() {
+                resolve_vars_in_place(v, vars);
+            }
+        }
+        Value::Sequence(seq) => {
+            for v in seq.iter_mut() {
+                resolve_vars_in_place(v, vars);
+            }
+        }
+        _ => {}
+    }
 }
 
 /// Recursively substitutes `${self.id}` placeholders in all YAML string values.
-pub fn resolve_vars_yaml(value: Value, vars: &HashMap<String, String>) -> Value {
-    match value {
-        Value::String(s) => Value::String(interpolate(s, vars)),
-
-        Value::Mapping(map) => {
-            let mut new_map = Mapping::new();
-            for (k, v) in map {
-                new_map.insert(k, resolve_vars_yaml(v, vars));
-            }
-            Value::Mapping(new_map)
-        }
-
-        Value::Sequence(seq) => Value::Sequence(
-            seq.into_iter()
-                .map(|v| resolve_vars_yaml(v, vars))
-                .collect(),
-        ),
-        _ => value,
+pub fn resolve_vars_yaml(mut value: Value, vars: &HashMap<String, String>) -> Value {
+    if !vars.is_empty() {
+        resolve_vars_in_place(&mut value, vars);
     }
+    value
 }
 
 async fn resolve_extensions(

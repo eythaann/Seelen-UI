@@ -19,5 +19,5 @@ fn get_start_menu_manager() -> &'static StartMenuManager {
 #[tauri::command(async)]
 pub fn get_start_menu_items() -> Vec<Arc<StartMenuItem>> {
     let manager = get_start_menu_manager();
-    manager.list.to_vec()
+    manager.get_all()
 }

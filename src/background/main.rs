@@ -42,11 +42,7 @@ use utils::{
     is_running_as_appx, was_installed_using_msix,
 };
 
-use crate::{
-    app::get_app_handle,
-    error::ResultLogExt,
-    utils::{CRONOMETER, constants::SEELEN_COMMON},
-};
+use crate::{app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON};
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 static TOKIO_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
@@ -94,7 +90,6 @@ async fn main() -> std::process::ExitCode {
 
     rust_i18n::set_locale(&seelen_core::state::Settings::get_app_language());
 
-    let _ = CRONOMETER;
     let mut app_builder = tauri::Builder::default();
     app_builder = register_plugins(app_builder);
     app_builder = register_invoke_handler(app_builder);
@@ -109,11 +104,10 @@ async fn main() -> std::process::ExitCode {
             APP_HANDLE.set(app.handle().to_owned()).unwrap();
             tokio::spawn(async move {
                 let handle = get_app_handle();
-                if let Err(err) = setup(handle).await {
+                if let Err(err) = crate::measure!("Setup", setup(handle).await) {
                     log::error!("Error while setting up: {err:?}");
                     handle.exit(1);
                 }
-                CRONOMETER.record("Setup");
             });
             Ok(())
         })
@@ -135,7 +129,6 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     if !ServicePipe::is_running() {
         ServicePipe::start_service().await?;
     }
-    CRONOMETER.record("IPC");
 
     // Pre-warm SessionManager early so its PasswordVault decryption (~1s) overlaps
     // with the integrity checks instead of running during the startup critical path.
@@ -143,34 +136,32 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
         let _ = SessionManager::instance();
     });
 
-    if let Err(err) = tokio::try_join!(
-        utils::integrity::validate_webview_runtime(),
-        utils::integrity::ensure_bundle_files_integrity(app_handle),
-        utils::integrity::check_for_webview_optimal_state(),
-    ) {
+    if let Err(err) = utils::integrity::validate_webview_runtime() {
         match err {
             utils::integrity::IntegrityError::WebviewRuntimeNotInstalled => {
-                utils::integrity::show_not_installed_dialog(app_handle)?;
+                utils::integrity::show_not_installed_dialog(get_app_handle())?;
             }
             utils::integrity::IntegrityError::WebviewRuntimeOutdated => {
-                utils::integrity::show_outdated_dialog(app_handle)?;
+                utils::integrity::show_outdated_dialog(get_app_handle())?;
             }
-            utils::integrity::IntegrityError::BundleIntegrityFailed => {
-                utils::integrity::show_bundle_integrity_dialog(app_handle);
-            }
-            utils::integrity::IntegrityError::WebviewOptimalStateFailed => {}
         }
         return Err(format!("Integrity check failed: {err:?}").into());
     }
-    CRONOMETER.record("Integrity check");
 
+    if let Err(err) = crate::measure!(
+        "Integrity check",
+        utils::integrity::ensure_bundle_files_integrity(get_app_handle()).await
+    ) {
+        utils::integrity::show_bundle_integrity_dialog(get_app_handle());
+        return Err(err);
+    }
+
+    SeelenUI::pre_start().await?;
     SeelenUI::start().await?;
-    CRONOMETER.record("Start");
-
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();
     backups::infrastructure::start_backup_sync();
-    tokio::spawn(server::http::start_server());
+    server::http::start_http_server();
     Ok(())
 }
 

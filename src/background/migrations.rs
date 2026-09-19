@@ -90,7 +90,7 @@ impl Migrations {
         Ok(())
     }
 
-    pub fn run() -> Result<()> {
+    pub fn run_all() -> Result<()> {
         Self::migration_v1_8_3()?;
         Self::migration_v2_1_0()?;
         Self::migration_v2_3_9()?;

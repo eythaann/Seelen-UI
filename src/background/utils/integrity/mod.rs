@@ -23,8 +23,6 @@ use crate::{
 pub enum IntegrityError {
     WebviewRuntimeNotInstalled,
     WebviewRuntimeOutdated,
-    BundleIntegrityFailed,
-    WebviewOptimalStateFailed,
 }
 
 /// Prints information about the computer runtime context to help debugging.

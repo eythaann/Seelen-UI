@@ -162,9 +162,9 @@ impl ResourceManager {
     }
 
     pub fn ensure_system_icon_pack(&self, override_icons: bool) -> Result<()> {
+        let mut guard = self.system_icon_pack.lock();
         let sys_icons_path = SEELEN_COMMON.system_icon_pack_path();
 
-        let mut guard = self.system_icon_pack.lock();
         // Create new pack if it doesn't exist
         if guard.is_none() {
             let mut system_pack = IconPack {

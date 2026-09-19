@@ -8,7 +8,7 @@ workspace = true
 
 [dependencies]
 clap = { workspace = true, features = ["derive"] }
-tokio = { workspace = true }
+tokio = { workspace = true, features = ["rt", "time"] }
 thiserror = { workspace = true }
 log = { workspace = true }
 interprocess = { workspace = true, features = ["tokio"] }

@@ -31,7 +31,13 @@ impl CheckSums {
     /// This method calculates the SHA-256 hash of the provided content
     /// and stores it with the normalized path (forward slashes).
     pub fn raw_add<P: AsRef<Path>>(&mut self, content: &[u8], path: P) {
-        let hash = calculate_sha256(content);
+        self.add_hash(calculate_sha256(content), path);
+    }
+
+    /// Add an already calculated hash, normalizing path
+    ///
+    /// Useful to calculate the hashes elsewhere (e.g. in parallel) using [`calculate_sha256`].
+    pub fn add_hash<P: AsRef<Path>>(&mut self, hash: String, path: P) {
         let normalized = PathBuf::from(path.as_ref().to_string_lossy().replace("\\", "/"));
         self.0.insert(normalized, hash);
     }

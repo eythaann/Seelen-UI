@@ -43,46 +43,33 @@ pub struct ResourceManager {
 }
 
 impl ResourceManager {
+    #[rustfmt::skip]
     pub async fn initialize(&self) {
-        tokio::join!(
-            async {
-                let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Theme, true)
-                    .await
-                    .log_error();
-                log::info!("Themes loaded in {:?}", t.elapsed());
-            },
-            async {
-                let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Plugin, true)
-                    .await
-                    .log_error();
-                log::info!("Plugins loaded in {:?}", t.elapsed());
-            },
-            async {
-                let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Widget, true)
-                    .await
-                    .log_error();
-                log::info!("Widgets loaded in {:?}", t.elapsed());
-            },
-            async {
-                let t = std::time::Instant::now();
-                self.load_all_of_type(ResourceKind::Wallpaper, true)
-                    .await
-                    .log_error();
-                log::info!("Wallpapers loaded in {:?}", t.elapsed());
-            },
-            async {
-                let t = std::time::Instant::now();
-                // true: on app start, always overwrite default icons with the bundled
-                // versions so an updated app version replaces stale cached icons.
-                self.load_all_of_type(ResourceKind::IconPack, true)
-                    .await
-                    .log_error();
-                log::info!("IconPacks loaded in {:?}", t.elapsed());
-            },
-        );
+        // measuring here doesn't make sense because all are loaded in parallel
+        // using all available cores/threads acting as single task, so all finish at the same time.
+        tokio::try_join!(
+            tokio::spawn(async move {
+                RESOURCES.load_all_of_type(ResourceKind::Theme, true).await.log_error()
+            }),
+            tokio::spawn(async move {
+                RESOURCES.load_all_of_type(ResourceKind::Plugin, true).await.log_error()
+            }),
+            tokio::spawn(async move {
+                RESOURCES.load_all_of_type(ResourceKind::Widget, true).await.log_error()
+            }),
+            tokio::spawn(async move {
+               RESOURCES.load_all_of_type(ResourceKind::Wallpaper, true).await.log_error()
+            }),
+            tokio::spawn(async move {
+                RESOURCES.load_all_of_type(ResourceKind::IconPack, true).await.log_error()
+            }),
+        ).log_error();
+
+        /* crate::measure!("Themes", self.load_all_of_type(ResourceKind::Theme, true).await).log_error();
+        crate::measure!("Plugins", self.load_all_of_type(ResourceKind::Plugin, true).await).log_error();
+        crate::measure!("Widgets", self.load_all_of_type(ResourceKind::Widget, true).await).log_error();
+        crate::measure!("Wallpapers", self.load_all_of_type(ResourceKind::Wallpaper, true).await).log_error();
+        crate::measure!("IconPacks", self.load_all_of_type(ResourceKind::IconPack, true).await).log_error(); */
     }
 
     /// Returns the id of the resource that was loaded, if any (e.g. a deprecated theme
@@ -278,7 +265,7 @@ impl ResourceManager {
         };
 
         async fn read_dir_entries(dir: PathBuf) -> Result<Vec<PathBuf>> {
-            let mut rd = tokio::fs::read_dir(&dir).await?;
+            let mut rd = tokio::fs::read_dir(dir).await?;
             let mut entries = Vec::new();
             while let Some(entry) = rd.next_entry().await? {
                 entries.push(entry.path());
@@ -286,12 +273,11 @@ impl ResourceManager {
             Ok(entries)
         }
 
-        // read all dirs concurrently (kinds with bundled + user have 2 independent dirs)
-        let results = futures::future::join_all(dirs.into_iter().map(read_dir_entries)).await;
-        let mut paths = Vec::new();
-        for result in results {
-            paths.extend(result?);
-        }
+        let paths = futures::future::try_join_all(dirs.into_iter().map(read_dir_entries))
+            .await?
+            .into_iter()
+            .flatten()
+            .collect();
         Ok(paths)
     }
 
@@ -306,18 +292,14 @@ impl ResourceManager {
         let paths = Self::get_entries_for_type(&kind).await?;
         self.unload_all(&kind);
 
-        // spawn each path as an independent task for true multi-thread parallelism
-        // (join_all drives all futures on the same thread; spawn distributes across the pool)
-        let handles = paths
-            .into_iter()
-            .map(|path| tokio::spawn(async move { RESOURCES.load(&kind, &path).await }));
-        for result in futures::future::join_all(handles).await {
-            match result {
-                Ok(Err(e)) => log::error!("Failed to load {kind:?}, error: {e}"),
-                Err(e) => log::error!("Task panicked while loading {kind:?}: {e}"),
-                Ok(Ok(_)) => {}
-            }
-        }
+        let handles = paths.into_iter().map(|path| {
+            tokio::spawn(async move {
+                if let Err(e) = RESOURCES.load(&kind, &path).await {
+                    log::error!("Failed to load {kind:?}, error: {e}");
+                }
+            })
+        });
+        futures::future::join_all(handles).await;
 
         if kind == ResourceKind::IconPack {
             // try load system icon pack
@@ -325,7 +307,7 @@ impl ResourceManager {
                 .load(&kind, SEELEN_COMMON.system_icon_pack_path())
                 .await;
             // creates the system icon pack if not loaded
-            self.ensure_system_icon_pack(on_mount)?;
+            std::thread::spawn(move || RESOURCES.ensure_system_icon_pack(on_mount).log_error());
         }
         Ok(())
     }

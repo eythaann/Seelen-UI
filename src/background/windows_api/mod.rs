@@ -732,6 +732,33 @@ impl WindowsApi {
         })
     }
 
+    /// Same as [`Self::get_file_umid`] + [`Self::get_file_toast_activator`], but creating the
+    /// shell item and its property store only once.
+    pub fn get_file_umid_and_toast_activator(path: &Path) -> (Option<String>, Option<String>) {
+        Com::run_with_context(|| unsafe {
+            let shell_item = Self::get_shell_item(path)?;
+            let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
+            let umid = store
+                .GetValue(&PKEY_AppUserModel_ID)
+                .ok()
+                .filter(|value| !value.is_empty())
+                .map(|value| value.to_string());
+            let toast_activator = store
+                .GetValue(&PKEY_AppUserModel_ToastActivatorCLSID)
+                .ok()
+                .filter(|value| !value.is_empty())
+                .map(|value| {
+                    value
+                        .to_string()
+                        .trim_start_matches("{")
+                        .trim_end_matches("}")
+                        .to_owned()
+                });
+            Ok((umid, toast_activator))
+        })
+        .unwrap_or_default()
+    }
+
     pub fn get_window_text(hwnd: HWND) -> String {
         let mut text: [u16; 512] = [0; 512];
         let len = unsafe { GetWindowTextW(hwnd, &mut text) };

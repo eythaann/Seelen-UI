@@ -14,11 +14,8 @@ use std::{
     fs::{File, create_dir_all},
     io::Write,
     path::{Path, PathBuf},
-    sync::{
-        LazyLock,
-        atomic::{AtomicU64, Ordering},
-    },
-    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
+    sync::atomic::{AtomicU64, Ordering},
+    time::{SystemTime, UNIX_EPOCH},
 };
 
 use windows::{
@@ -165,16 +162,23 @@ pub fn get_parts_of_inline_command(cmd: &str) -> (String, Option<String>) {
     (program, if args.is_empty() { None } else { Some(args) })
 }
 
-pub static CRONOMETER: LazyLock<Cronometer> = LazyLock::new(|| Cronometer(Instant::now()));
+#[macro_export]
+macro_rules! measure {
+    ($name:literal, $expr:expr) => {{
+        let start = std::time::Instant::now();
+        let result = $expr;
+        let elapsed = start.elapsed();
+        log::debug!("[measure] {}: {:.2?}", $name, elapsed);
+        result
+    }};
+}
 
-pub struct Cronometer(pub Instant);
-
-impl Cronometer {
-    pub fn elapsed(&self) -> Duration {
-        self.0.elapsed()
-    }
-
-    pub fn record(&self, name: &str) {
-        log::debug!("{} at: {:?}", name, self.elapsed());
-    }
+pub fn collect_files(dir: &Path) -> Vec<PathBuf> {
+    walkdir::WalkDir::new(dir)
+        .follow_links(false)
+        .into_iter()
+        .filter_map(std::result::Result::ok)
+        .filter(|e| e.file_type().is_file())
+        .map(|entry| entry.into_path())
+        .collect()
 }

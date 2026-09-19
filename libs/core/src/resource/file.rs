@@ -72,7 +72,11 @@ impl SluResourceFile {
 
     pub async fn load(path: &Path) -> Result<Self> {
         let bytes = tokio::fs::read(path).await?;
-        let mut decoded = Self::decode(Cursor::new(bytes))?;
+        // base64 + yaml parsing is CPU-bound, offload it to the blocking pool so loading many
+        // resources concurrently doesn't serialize on (or stall) the async worker threads.
+        let mut decoded = tokio::task::spawn_blocking(move || Self::decode(Cursor::new(bytes)))
+            .await
+            .map_err(|e| crate::error::SeelenLibError::from(e.to_string()))??;
         decoded.resource.sanitize();
         decoded.resource.verify()?;
         Ok(decoded)
