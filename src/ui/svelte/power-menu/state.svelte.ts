@@ -61,4 +61,7 @@ export const state = {
   get user() {
     return user.value;
   },
+  async refreshUser() {
+    await invoke(SeelenCommand.GetUser);
+  },
 };
