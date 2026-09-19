@@ -63,8 +63,17 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
 
     for (hwnd, rect) in &positions {
         let window = Window::from(*hwnd);
-        if let Some(desired_rect) = desired_rect_for(&window, rect)? {
-            list.insert(*hwnd, desired_rect);
+        match desired_rect_for(&window, rect) {
+            Ok(Some(desired_rect)) => {
+                list.insert(*hwnd, desired_rect);
+            }
+            Ok(None) => {}
+            // A window can be destroyed between the layout render and this call; failing
+            // the whole batch would leave every other window at its previous rect while the
+            // tree (and the overlay) already show the new layout.
+            Err(err) => {
+                log::debug!("Skipping window {hwnd:#x} while positioning: {err}");
+            }
         }
     }
 
