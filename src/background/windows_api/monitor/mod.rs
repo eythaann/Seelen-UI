@@ -1,4 +1,4 @@
-mod brightness;
+pub mod brightness;
 
 use windows::{
     Devices::Display::Core::{
