@@ -1,8 +1,10 @@
-use std::{sync::LazyLock, time::Duration};
+use std::{
+    sync::{Arc, LazyLock},
+    time::Duration,
+};
 
 use parking_lot::Mutex;
-
-use seelen_core::system_state::{MonitorBrightness, MonitorId};
+use seelen_core::system_state::MonitorBrightness;
 use wmi::WMIConnection;
 
 use crate::{
@@ -18,7 +20,7 @@ use crate::{
     utils::lock_free::SyncVec,
     windows_api::{
         MonitorEnumerator,
-        monitor::{Monitor, brightness::DdcciBrightnessValues},
+        monitor::brightness::{DdcciBrightnessValues, PhysicalMonitorHandle},
     },
 };
 
@@ -30,8 +32,10 @@ const WBEM_E_NOT_SUPPORTED: i32 = 0x8004100C_u32 as i32;
 /// (~60 ms on a healthy monitor) on a background thread.
 const DDCCI_POLL_INTERVAL: Duration = Duration::from_secs(5);
 
-/// Serializes every DDC/CI transaction (polling and writes). Concurrent transactions over
-/// the same I2C bus can corrupt each other or make the monitor stop answering.
+/// Serializes every DDC/CI transaction (polling and writes) *together with* the publication
+/// of its result into `BrightnessManager::ddcci`. Holding the lock across both steps means a
+/// read that started before a write can never overwrite the written value afterwards.
+/// Concurrent transactions over the same I2C bus can also corrupt each other.
 static DDCCI_LOCK: Mutex<()> = Mutex::new(());
 
 #[derive(Debug, Clone)]
@@ -41,12 +45,13 @@ pub enum BrightnessManagerEvent {
 
 event_manager!(BrightnessManager, BrightnessManagerEvent);
 
-/// An external monitor reachable through DDC/CI. Brightness is exposed to the UI as a
-/// percentage regardless of the raw range reported by the monitor.
+/// One physical panel reachable through DDC/CI. Brightness is exposed to the UI as a
+/// percentage regardless of the raw range reported by the panel.
 #[derive(Debug, Clone)]
 struct DdcciMonitor {
-    id: MonitorId,
-    handle: Monitor,
+    /// Stable monitor id, suffixed with `#<index>` for the extra panels of a cloned group.
+    instance_name: String,
+    handle: Arc<PhysicalMonitorHandle>,
     values: DdcciBrightnessValues,
 }
 
@@ -68,7 +73,7 @@ impl DdcciMonitor {
 impl From<&DdcciMonitor> for MonitorBrightness {
     fn from(m: &DdcciMonitor) -> Self {
         MonitorBrightness {
-            instance_name: m.id.0.clone(),
+            instance_name: m.instance_name.clone(),
             current_brightness: m.percent(),
             levels: 101,
             available_levels: (0..=100).collect(),
@@ -97,7 +102,7 @@ enum DdcciWorkerMessage {
 pub struct BrightnessManager {
     /// Internal displays (laptops), managed through WMI.
     wmi: SyncVec<WmiMonitorBrightness>,
-    /// External displays, managed through DDC/CI.
+    /// External displays, managed through DDC/CI. Written only while holding `DDCCI_LOCK`.
     ddcci: SyncVec<DdcciMonitor>,
     ddcci_tx: crossbeam_channel::Sender<DdcciWorkerMessage>,
 }
@@ -193,14 +198,13 @@ impl BrightnessManager {
         }
     }
 
-    /// Reads the brightness of a monitor and validates the answer. Monitors that don't speak
-    /// DDC/CI fail the read; monitors that answer nonsense are treated the same way, since
-    /// writing to them could leave the panel in a bad state.
-    fn ddcci_read(monitor: &Monitor) -> Result<DdcciBrightnessValues> {
-        let _guard = DDCCI_LOCK.lock();
-        let values = monitor.ddcci_get_monitor_brightness()?;
+    /// Reads the brightness of a panel and validates the answer. Panels that don't speak
+    /// DDC/CI fail the read; panels that answer nonsense are treated the same way, since
+    /// writing to them could leave the panel in a bad state. Caller must hold `DDCCI_LOCK`.
+    fn ddcci_read(handle: &PhysicalMonitorHandle) -> Result<DdcciBrightnessValues> {
+        let values = handle.ddcci_get_brightness()?;
         if values.max <= values.min || values.current < values.min || values.current > values.max {
-            return Err(format!("monitor reported an invalid brightness range: {values:?}").into());
+            return Err(format!("panel reported an invalid brightness range: {values:?}").into());
         }
         Ok(values)
     }
@@ -214,47 +218,64 @@ impl BrightnessManager {
             }
         };
 
+        let guard = DDCCI_LOCK.lock();
         let mut found = Vec::new();
         for monitor in monitors {
             let Ok((id, name)) = monitor.get_stable_info() else {
                 continue;
             };
-            match Self::ddcci_read(&monitor) {
-                Ok(values) => {
-                    log::debug!("DDC/CI brightness available on {name} ({id:?}): {values:?}");
-                    found.push(DdcciMonitor {
-                        id,
-                        handle: monitor,
-                        values,
-                    });
-                }
-                Err(err) => {
-                    log::debug!("DDC/CI brightness unavailable on {name} ({id:?}): {err}");
+            let Ok(panels) = monitor.physical_monitors() else {
+                continue;
+            };
+            for (index, handle) in panels.into_iter().enumerate() {
+                let instance_name = if index == 0 {
+                    id.0.clone()
+                } else {
+                    format!("{}#{index}", id.0)
+                };
+                let description = handle.description();
+                match Self::ddcci_read(&handle) {
+                    Ok(values) => {
+                        log::debug!(
+                            "DDC/CI brightness available on {name} / {description} ({instance_name}): {values:?}"
+                        );
+                        found.push(DdcciMonitor {
+                            instance_name,
+                            handle: Arc::new(handle),
+                            values,
+                        });
+                    }
+                    Err(err) => {
+                        log::debug!(
+                            "DDC/CI brightness unavailable on {name} / {description} ({instance_name}): {err}"
+                        );
+                    }
                 }
             }
         }
-        found.sort_by(|a, b| a.id.0.cmp(&b.id.0));
+        found.sort_by(|a, b| a.instance_name.cmp(&b.instance_name));
 
         let manager = Self::instance();
-        let changed = {
-            let previous = manager.ddcci.to_vec();
-            previous.len() != found.len()
-                || previous
-                    .iter()
-                    .zip(&found)
-                    .any(|(a, b)| a.id != b.id || a.values != b.values)
-        };
+        let previous = manager.ddcci.to_vec();
+        let changed = previous.len() != found.len()
+            || previous
+                .iter()
+                .zip(&found)
+                .any(|(a, b)| a.instance_name != b.instance_name || a.values != b.values);
         manager.ddcci.replace(found);
+        drop(guard);
+
         if changed {
             manager.emit_changed();
         }
     }
 
-    /// Re-reads the known DDC/CI monitors to catch changes made from the monitor's OSD.
+    /// Re-reads the known DDC/CI panels to catch changes made from the monitor's OSD.
     /// A failed read (monitor asleep or unplugged) keeps the last known value; hotplug is
     /// handled by the rescan triggered from `MonitorManager`.
     fn ddcci_poll() {
         let manager = Self::instance();
+        let guard = DDCCI_LOCK.lock();
         let mut changed = false;
         for known in manager.ddcci.to_vec() {
             let Ok(values) = Self::ddcci_read(&known.handle) else {
@@ -263,12 +284,14 @@ impl BrightnessManager {
             if values != known.values {
                 changed = true;
                 manager.ddcci.for_each(|m| {
-                    if m.id == known.id {
+                    if m.instance_name == known.instance_name {
                         m.values = values;
                     }
                 });
             }
         }
+        drop(guard);
+
         if changed {
             manager.emit_changed();
         }
@@ -286,23 +309,28 @@ impl BrightnessManager {
     }
 
     pub fn set_brightness(&self, instance_name: &str, level: u8) -> Result<()> {
-        if let Some(monitor) = self.ddcci.find_and_clone(|m| m.id.0 == instance_name) {
-            return self.set_ddcci_brightness(monitor, level);
+        if self.ddcci.any(|m| m.instance_name == instance_name) {
+            return self.set_ddcci_brightness(instance_name, level);
         }
         self.set_wmi_brightness(instance_name, level)
     }
 
-    fn set_ddcci_brightness(&self, monitor: DdcciMonitor, percent: u8) -> Result<()> {
+    fn set_ddcci_brightness(&self, instance_name: &str, percent: u8) -> Result<()> {
+        let guard = DDCCI_LOCK.lock();
+        // re-resolve under the lock: a rescan may have replaced the handles meanwhile
+        let monitor = self
+            .ddcci
+            .find_and_clone(|m| m.instance_name == instance_name)
+            .ok_or("Instance not found")?;
         let raw = monitor.raw_from_percent(percent);
-        {
-            let _guard = DDCCI_LOCK.lock();
-            monitor.handle.ddcci_set_monitor_brightness(raw)?;
-        }
+        monitor.handle.ddcci_set_brightness(raw)?;
         self.ddcci.for_each(|m| {
-            if m.id == monitor.id {
+            if m.instance_name == instance_name {
                 m.values.current = raw;
             }
         });
+        drop(guard);
+
         self.emit_changed();
         Ok(())
     }
