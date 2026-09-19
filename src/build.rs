@@ -14,7 +14,7 @@ fn main() {
     let sums_path = target_dir.join("SHA256SUMS");
     checksums.write(&sums_path).unwrap();
 
-    if !cfg!(debug_assertions) {
+    if !cfg!(debug_assertions) && std::env::var_os("SEELEN_LOCAL_BUILD").is_none() {
         sign_sha256sums(&sums_path);
     } else {
         std::fs::write(

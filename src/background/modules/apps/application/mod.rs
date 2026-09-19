@@ -1,6 +1,7 @@
 pub mod msix;
 pub mod msix_manifest;
 pub mod previews;
+mod graphics_capture;
 mod windows;
 
 pub use windows::*;

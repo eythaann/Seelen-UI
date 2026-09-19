@@ -292,6 +292,33 @@ impl WindowsApi {
         unsafe { IsZoomed(hwnd) }.into()
     }
 
+    /// Returns true for both native maximized windows and borderless windows
+    /// that occupy their monitor's full work area.
+    pub fn is_maximized(hwnd: HWND) -> bool {
+        if Self::is_zoomed(hwnd) {
+            return true;
+        }
+
+        if !Self::is_window_visible(hwnd) || Self::is_iconic(hwnd) {
+            return false;
+        }
+
+        let monitor_rect = match Self::monitor_rect(Self::monitor_from_window(hwnd)) {
+            Ok(rect) => rect,
+            Err(_) => return false,
+        };
+        let window_rect = match Self::get_inner_window_rect(hwnd) {
+            Ok(rect) => rect,
+            Err(_) => return false,
+        };
+
+        const TOLERANCE: i32 = 2;
+        window_rect.left <= monitor_rect.left + TOLERANCE
+            && window_rect.top <= monitor_rect.top + TOLERANCE
+            && window_rect.right >= monitor_rect.right - TOLERANCE
+            && window_rect.bottom >= monitor_rect.bottom - TOLERANCE
+    }
+
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
         let styles = WindowsApi::get_styles(hwnd);
         if styles.contains(WS_THICKFRAME) {
