@@ -1,4 +1,15 @@
 app_settings: Alkalmazásbeállítások
+brightness: Fényesség
+dark_mode: Sötét mód
+default_multimedia_volume: Alapértelmezett multimédiás hangerő
 disabled: Letiltva
 enabled: Engedélyezve
+eye_care: Szemkörnyékápoló
+fm_radio: FM rádió
+hdr: Magas dinamikatartomány
+hotspot: Hotspot
+light_mode: Fény mód
+mobile_broadband: Mobil szélessáv
+night_light: Éjszakai fény
 power: Hatalom
+unknown: Ismeretlen

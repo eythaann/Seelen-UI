@@ -274,14 +274,21 @@ shortcuts:
     செயல்படுத்தினால் முடக்கு
   labels:
     create_new_workspace: புதிய பணியிடத்தை உருவாக்கவும்
+    create_new_workspace_row: புதிய பணியிட வரிசையை உருவாக்கவும்
     destroy_current_workspace: தற்போதைய பணியிடத்தை அழிக்கவும்
     misc_force_quit: படை வெளியேறுதல்
     misc_force_restart: படை மறுதொடக்கம்
     move_to_workspace: பணியிடத்திற்கு நகர்த்தவும் {{0}}
     pause_toggle: குறுக்குவழிகளை இடைநிறுத்தவும்/மீண்டும் தொடங்கவும்
+    send_to_next_workspace: அடுத்த பணியிடத்திற்கு சாளரத்தை அனுப்பவும்
+    send_to_previous_workspace: முந்தைய பணியிடத்திற்கு சாளரத்தை அனுப்பவும்
     send_to_workspace: பணியிடத்திற்கு அனுப்பவும் {{0}}
+    send_to_workspace_down: கீழே உள்ள பணியிடத்திற்கு சாளரத்தை அனுப்பவும்
+    send_to_workspace_up: மேலே உள்ள பணியிடத்திற்கு சாளரத்தை அனுப்பவும்
     switch_to_next_workspace: அடுத்த பணியிடத்திற்கு மாறவும்
     switch_to_previous_workspace: முந்தைய பணியிடத்திற்கு மாறவும்
+    switch_to_workspace_down: கீழே உள்ள பணியிடத்திற்கு மாறவும்
+    switch_to_workspace_up: மேலே உள்ள பணியிடத்திற்கு மாறவும்
     switch_workspace: பணியிடத்திற்கு மாறவும் {{0}}
   readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
   reset: இயல்புநிலைகளுக்கு மீட்டமைக்கவும்
@@ -384,6 +391,14 @@ weg:
     always: எப்போதும்
     never: ஒருபோதும் இல்லை
     on_overlap: ஒன்றுடன் ஒன்று
+  import_error: பணிப்பட்டி உருப்படிகளை இறக்குமதி செய்ய முடியவில்லை
+  import_from_taskbar:
+    button: Windows Taskbar இலிருந்து இறக்குமதி செய்யவும்
+    label: பின் செய்யப்பட்ட பொருட்களை இறக்குமதி செய்யவும்
+  import_no_items: விண்டோஸ் டாஸ்க்பாரில் பின் செய்யப்பட்ட உருப்படிகள் எதுவும் இல்லை
+  import_success: >-
+    Windows பணிப்பட்டியில் இருந்து {{count}} உருப்படி(கள்) வெற்றிகரமாக இறக்குமதி
+    செய்யப்பட்டது
   items:
     gap: பொருட்களுக்கு இடையே உள்ள இடம்
     label: பொருட்களை
@@ -448,6 +463,10 @@ wm:
   drag_behavior_options:
     sort: வரிசைப்படுத்தவும் (இழுக்கும்போது சாளரங்களை மறுவரிசைப்படுத்தவும்)
     swap: இடமாற்று (இழுக்கும் முனையில் சாளரங்களை மாற்றவும்)
+  floating:
+    height: மிதக்கும் விண்டோஸ் உயரம்
+    title: மிதக்கும் விண்டோஸ் அளவு
+    width: மிதக்கும் விண்டோஸ் அகலம்
   layout: தளவமைப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி

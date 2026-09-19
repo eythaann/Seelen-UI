@@ -280,14 +280,21 @@ shortcuts:
     χρησιμοποιώντας τον πελάτη SEELEN UI
   labels:
     create_new_workspace: Δημιουργήστε νέο χώρο εργασίας
+    create_new_workspace_row: Δημιουργία νέας σειράς χώρου εργασίας
     destroy_current_workspace: Καταστρέψτε τον τρέχοντα χώρο εργασίας
     misc_force_quit: Φρικιασμένη δύναμη
     misc_force_restart: Αναγκαστική επανεκκίνηση
     move_to_workspace: Μετακίνηση στο χώρο εργασίας {{0}}
     pause_toggle: Συντομεύσεις παύσης/συνέχισης
+    send_to_next_workspace: Αποστολή παραθύρου στον επόμενο χώρο εργασίας
+    send_to_previous_workspace: Αποστολή παραθύρου στον προηγούμενο χώρο εργασίας
     send_to_workspace: Αποστολή στο χώρο εργασίας {{0}}
+    send_to_workspace_down: Αποστολή παραθύρου στον παρακάτω χώρο εργασίας
+    send_to_workspace_up: Αποστολή παραθύρου στον χώρο εργασίας παραπάνω
     switch_to_next_workspace: Μεταβείτε στον επόμενο χώρο εργασίας
     switch_to_previous_workspace: Μεταβείτε σε προηγούμενο χώρο εργασίας
+    switch_to_workspace_down: Μετάβαση στον χώρο εργασίας παρακάτω
+    switch_to_workspace_up: Μεταβείτε στον Χώρο Εργασίας παραπάνω
     switch_workspace: Μεταβείτε στο χώρο εργασίας {{0}}
   readonly_tooltip: Αυτή είναι μια συντόμευση μόνο για ανάγνωση
   reset: Επαναφορά σε προεπιλογές
@@ -390,6 +397,14 @@ weg:
     always: Πάντοτε
     never: Ποτέ
     on_overlap: Σε επικάλυψη
+  import_error: Αποτυχία εισαγωγής στοιχείων της γραμμής εργασιών
+  import_from_taskbar:
+    button: Εισαγωγή από τη γραμμή εργασιών των Windows
+    label: Εισαγωγή καρφιτσωμένων αντικειμένων
+  import_no_items: Δεν βρέθηκαν καρφιτσωμένα στοιχεία στη γραμμή εργασιών των Windows
+  import_success: >-
+    Έγινε επιτυχής εισαγωγή {{count}} στοιχείων από τη γραμμή εργασιών των
+    Windows
   items:
     gap: Χώρος μεταξύ αντικειμένων
     label: Αντικείμενα
@@ -454,6 +469,10 @@ wm:
   drag_behavior_options:
     sort: Ταξινόμηση (αναδιάταξη των παραθύρων κατά τη μεταφορά)
     swap: Εναλλαγή (εναλλαγή παραθύρων στο τέλος μεταφοράς)
+  floating:
+    height: Ύψος αιωρούμενου παραθύρου
+    title: Πλωτό μέγεθος παραθύρων
+    width: Πλωτό πλάτος παραθύρων
   layout: Διάταξη
   resize_delta: Αλλαγή μεγέθους Delta (%)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων

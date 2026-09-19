@@ -279,14 +279,21 @@ shortcuts:
     -Client implementieren
   labels:
     create_new_workspace: Erstellen Sie einen neuen Arbeitsbereich
+    create_new_workspace_row: Erstellen Sie eine neue Arbeitsbereichszeile
     destroy_current_workspace: Zerstören Sie den aktuellen Arbeitsbereich
     misc_force_quit: Kraft verlassen
     misc_force_restart: Neustart erzwingen
     move_to_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
     pause_toggle: Verknüpfungen zum Anhalten/Fortsetzen
+    send_to_next_workspace: Fenster an nächsten Arbeitsbereich senden
+    send_to_previous_workspace: Fenster an vorherigen Arbeitsbereich senden
     send_to_workspace: An den Arbeitsbereich senden {{0}}
+    send_to_workspace_down: Fenster an den Arbeitsbereich unten senden
+    send_to_workspace_up: Fenster an den Arbeitsbereich oben senden
     switch_to_next_workspace: Wechseln Sie zum nächsten Arbeitsbereich
     switch_to_previous_workspace: Wechseln Sie zum vorherigen Arbeitsbereich
+    switch_to_workspace_down: Wechseln Sie zum Arbeitsbereich unten
+    switch_to_workspace_up: Wechseln Sie zum Arbeitsbereich oben
     switch_workspace: Wechseln Sie zum Arbeitsbereich {{0}}
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
   reset: Auf Standards zurücksetzen
@@ -389,6 +396,12 @@ weg:
     always: Stets
     never: Niemals
     on_overlap: Auf Überlappung
+  import_error: Taskleistenelemente konnten nicht importiert werden
+  import_from_taskbar:
+    button: Aus der Windows-Taskleiste importieren
+    label: Angepinnte Elemente importieren
+  import_no_items: In der Windows-Taskleiste wurden keine angehefteten Elemente gefunden
+  import_success: '{{count}} Elemente erfolgreich aus der Windows-Taskleiste importiert'
   items:
     gap: Abstand zwischen Elementen
     label: Elemente
@@ -452,6 +465,10 @@ wm:
   drag_behavior_options:
     sort: Sortieren (Fenster beim Ziehen neu anordnen)
     swap: Tauschen (Fenster am Ende des Ziehens tauschen)
+  floating:
+    height: Schwebende Fensterhöhe
+    title: Floating Windows-Größe
+    width: Schwebende Fensterbreite
   layout: Layout
   resize_delta: Relative Größenänderung (%)
   space_between_containers: Abstand zwischen Containern

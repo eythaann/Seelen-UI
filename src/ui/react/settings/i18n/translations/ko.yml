@@ -242,14 +242,21 @@ shortcuts:
   enable_tooltip: Seelen UI 클라이언트를 사용하여 자신의 바로 가기 시스템을 구현하는 경우 비활성화하십시오.
   labels:
     create_new_workspace: 새 작업 공간을 만듭니다
+    create_new_workspace_row: 새 작업공간 행 생성
     destroy_current_workspace: 현재 작업 공간을 파괴하십시오
     misc_force_quit: 힘을 끊으십시오
     misc_force_restart: 강제 재시작
     move_to_workspace: 작업 공간으로 이동 {{0}}
     pause_toggle: 일시중지/재개 바로가기
+    send_to_next_workspace: 창을 다음 작업 공간으로 보내기
+    send_to_previous_workspace: 이전 작업 공간으로 창 보내기
     send_to_workspace: 작업 공간으로 보내 {{0}}
+    send_to_workspace_down: 창을 아래 작업 공간으로 보내기
+    send_to_workspace_up: 창을 위의 작업 공간으로 보내기
     switch_to_next_workspace: 다음 작업 공간으로 전환하십시오
     switch_to_previous_workspace: 이전 작업 공간으로 전환하십시오
+    switch_to_workspace_down: 아래 작업공간으로 전환
+    switch_to_workspace_up: 위 작업공간으로 전환
     switch_workspace: 작업 공간으로 전환 {{0}}
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
   reset: 기본값으로 재설정하십시오
@@ -348,6 +355,12 @@ weg:
     always: 항상
     never: 안 함
     on_overlap: 오버랩 시
+  import_error: 작업 표시줄 항목을 가져오지 못했습니다.
+  import_from_taskbar:
+    button: Windows 작업 표시줄에서 가져오기
+    label: 고정된 항목 가져오기
+  import_no_items: Windows 작업 표시줄에 고정된 항목이 없습니다.
+  import_success: Windows 작업 표시줄에서 {{count}}개 항목을 성공적으로 가져왔습니다.
   items:
     gap: 항목 간 간격
     label: 항목
@@ -407,6 +420,10 @@ wm:
   drag_behavior_options:
     sort: 정렬(드래그하는 동안 창 재정렬)
     swap: 교환(드래그 끝에서 창 교환)
+  floating:
+    height: 부동 창 높이
+    title: 부동 창 크기
+    width: 부동 창 너비
   layout: 레이아웃
   resize_delta: 크기 조정 수치 (%)
   space_between_containers: 컨테이너 간 간격

@@ -270,14 +270,21 @@ shortcuts:
     хэрэгжүүлэхийг идэвхгүй болго
   labels:
     create_new_workspace: Шинэ ажлын талбар үүсгэх
+    create_new_workspace_row: Ажлын талбайн шинэ мөр үүсгэх
     destroy_current_workspace: Одоогийн ажлын талбарыг устгах
     misc_force_quit: Хүчний гарах
     misc_force_restart: Хүчийг дахин эхлүүлэх
     move_to_workspace: Ажлын талбар руу шилжих {{0}}
     pause_toggle: Түр зогсоох/Үргэлжлүүлэх товчлол
+    send_to_next_workspace: Дараагийн ажлын талбар руу цонх илгээх
+    send_to_previous_workspace: Өмнөх ажлын талбар руу цонх илгээх
     send_to_workspace: Ажлын талбар руу илгээх {{0}}
+    send_to_workspace_down: Доорх ажлын талбар руу цонх илгээнэ үү
+    send_to_workspace_up: Дээрх ажлын талбар руу цонх илгээнэ үү
     switch_to_next_workspace: Дараагийн ажлын талбар руу шилжих
     switch_to_previous_workspace: Өмнөх ажлын талбар руу шилжих
+    switch_to_workspace_down: Доорх ажлын талбар руу шилжинэ үү
+    switch_to_workspace_up: Дээрх ажлын талбар руу шилжинэ үү
     switch_workspace: Ажлын талбар руу шилжих {{0}}
   readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
   reset: Үндсэндээ тохируулах
@@ -378,6 +385,12 @@ weg:
     always: Үргэлж
     never: Хэзээ ч үгүй
     on_overlap: Давхардсан дээр
+  import_error: Ажлын талбарын зүйлсийг импорт хийж чадсангүй
+  import_from_taskbar:
+    button: Windows Taskbar-аас импортлох
+    label: Хаалттай зүйлсийг импортлох
+  import_no_items: Windows taskbar-д бэхлэгдсэн зүйл олдсонгүй
+  import_success: Windows taskbar-аас {{count}} зүйлийг амжилттай импортлов
   items:
     gap: Зүйлийн хоорондох зай
     label: Зүйл
@@ -441,6 +454,10 @@ wm:
   drag_behavior_options:
     sort: Эрэмбэлэх (чирэх үед цонхны дарааллыг өөрчлөх)
     swap: Солих (цонхыг чирэх төгсгөлд солих)
+  floating:
+    height: Хөвөгч цонхны өндөр
+    title: Хөвөгч цонхны хэмжээ
+    width: Хөвөгч цонхны өргөн
   layout: Төлөвлөгөө
   resize_delta: Дельтааг өөрчлөх (%)
   space_between_containers: Савны хоорондох зай

@@ -1,4 +1,15 @@
 app_settings: Поставки за апликација
+brightness: Осветленост
+dark_mode: Темниот режим
+default_multimedia_volume: Стандардна мултимедијална јачина на звук
 disabled: Оневозможено
 enabled: Овозможено
+eye_care: Нега за очи
+fm_radio: FM радио
+hdr: Висок динамички опсег
+hotspot: Жешка точка
+light_mode: Светлосен режим
+mobile_broadband: Мобилен широкопојасен интернет
+night_light: Ноќна светлина
 power: Моќ
+unknown: Непознат

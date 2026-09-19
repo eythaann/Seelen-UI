@@ -5,6 +5,15 @@ connecting: जडान गर्दै...
 disconnect: जडान विच्छेद गर्नुहोस्
 forget: बिर्सनुहोस्
 hidden: लुकेको नेटवर्क
+hotspot:
+  band: ब्यान्ड
+  'off': बन्द
+  'on': अन
+  open_network: नेटवर्क खोल्नुहोस्
+  password: पासवर्ड
+  settings: थप हटस्पट सेटिङहरू
+  ssid: नेटवर्क नाम
+  title: हटस्पट
 more: थप नेटवर्क सेटिङहरू
 no_adapter: कुनै Wi-Fi एडाप्टर फेला परेन
 not_found: कुनै Wi-Fi नेटवर्क फेला परेन

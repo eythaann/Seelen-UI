@@ -4,6 +4,7 @@
   import { state } from "../state.svelte";
   import { brightnessIcon } from "libs/ui/utils";
   import { throttle } from "lodash";
+  import { t } from "../i18n";
 
   const setBrightnessThrottled = throttle((instanceName: string, level: number) => {
     invoke(SeelenCommand.SetMonitorBrightness, { instanceName, level });
@@ -11,7 +12,7 @@
 </script>
 
 {#each state.brightness as brightness}
-  <span class="quick-settings-label">Brightness</span>
+  <span class="quick-settings-label">{$t("brightness")}</span>
   <div class="quick-settings-item">
     <button data-skin="transparent">
       <Icon iconName={brightnessIcon(brightness.currentBrightness)} />

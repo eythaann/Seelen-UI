@@ -270,14 +270,21 @@ shortcuts:
     -klienten
   labels:
     create_new_workspace: Lag nytt arbeidsområde
+    create_new_workspace_row: Opprett ny arbeidsområderad
     destroy_current_workspace: Ødelegg gjeldende arbeidsområde
     misc_force_quit: Force slutter
     misc_force_restart: Force omstart på nytt
     move_to_workspace: Flytt til arbeidsområdet {{0}}
     pause_toggle: Pause/Fortsett snarveier
+    send_to_next_workspace: Send vindu til neste arbeidsområde
+    send_to_previous_workspace: Send vindu til forrige arbeidsområde
     send_to_workspace: Send til arbeidsområdet {{0}}
+    send_to_workspace_down: Send vinduet til arbeidsområdet nedenfor
+    send_to_workspace_up: Send vinduet til arbeidsområdet ovenfor
     switch_to_next_workspace: Bytt til neste arbeidsområde
     switch_to_previous_workspace: Bytt til tidligere arbeidsområde
+    switch_to_workspace_down: Bytt til arbeidsområdet nedenfor
+    switch_to_workspace_up: Bytt til arbeidsområde ovenfor
     switch_workspace: Bytt til arbeidsområdet {{0}}
   readonly_tooltip: Dette er en leselinje-snarvei
   reset: Tilbakestill til standardverdier
@@ -378,6 +385,12 @@ weg:
     always: Alltid
     never: Aldri
     on_overlap: På overlapping
+  import_error: Kunne ikke importere elementer på oppgavelinjen
+  import_from_taskbar:
+    button: Importer fra Windows oppgavelinje
+    label: Importer festede elementer
+  import_no_items: Fant ingen festede elementer i Windows-oppgavelinjen
+  import_success: Vellykket importert {{count}} element(er) fra Windows-oppgavelinjen
   items:
     gap: Plass mellom varene
     label: Gjenstander
@@ -442,6 +455,10 @@ wm:
   drag_behavior_options:
     sort: Sorter (omorganiser vinduer mens du drar)
     swap: Bytt (bytt vinduer på dra-enden)
+  floating:
+    height: Flytende vinduer Høyde
+    title: Flytende Windows-størrelse
+    width: Flytende Windows-bredde
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)
   space_between_containers: Plass mellom containere

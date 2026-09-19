@@ -5,6 +5,15 @@ connecting: Ühendamine...
 disconnect: Katkesta ühendus
 forget: Unusta
 hidden: Varjatud võrk
+hotspot:
+  band: Bänd
+  'off': Väljas
+  'on': Sees
+  open_network: Avatud võrk
+  password: Parool
+  settings: Rohkem leviala seadeid
+  ssid: Võrgu nimi
+  title: Hotspot
 more: Rohkem võrgusätteid
 no_adapter: Wi-Fi-adapterit ei leitud
 not_found: WiFi-võrke ei leitud

@@ -1,4 +1,15 @@
 app_settings: 앱 설정
+brightness: 명도
+dark_mode: 다크 모드
+default_multimedia_volume: 기본 멀티미디어 볼륨
 disabled: 장애가 있는
 enabled: 활성화됨
+eye_care: 눈 관리
+fm_radio: FM 라디오
+hdr: 높은 다이내믹 레인지
+hotspot: 핫스팟
+light_mode: 라이트 모드
+mobile_broadband: 모바일 광대역
+night_light: 야간 조명
 power: 힘
+unknown: 알려지지 않은

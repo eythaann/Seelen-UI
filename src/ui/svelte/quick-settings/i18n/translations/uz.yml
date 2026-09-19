@@ -1,4 +1,15 @@
 app_settings: Ilova sozlamalari
+brightness: Yorqinlik
+dark_mode: Qorong'i rejim
+default_multimedia_volume: Standart multimedia tovushi
 disabled: O'chirilgan
 enabled: Yoqilgan
+eye_care: Ko'zni parvarish qilish
+fm_radio: FM radio
+hdr: Yuqori dinamik diapazon
+hotspot: Hotspot
+light_mode: Nur rejimi
+mobile_broadband: Mobil keng polosali
+night_light: Tungi yorug'lik
 power: Quvvat
+unknown: Noma'lum

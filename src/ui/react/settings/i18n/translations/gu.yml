@@ -267,14 +267,21 @@ shortcuts:
     લાગુ કરશો તો અક્ષમ કરો
   labels:
     create_new_workspace: નવી વર્કસ્પેસ બનાવો
+    create_new_workspace_row: નવી વર્કસ્પેસ પંક્તિ બનાવો
     destroy_current_workspace: વર્તમાન વર્કસ્પેસનો નાશ કરો
     misc_force_quit: છોડી દેવું
     misc_force_restart: બળનો ફરીથી પ્રારંભ કરવો
     move_to_workspace: વર્કસ્પેસ {{0}} પર ખસેડો
     pause_toggle: શૉર્ટકટ્સ થોભાવો/ફરીથી શરૂ કરો
+    send_to_next_workspace: વિન્ડોને નેક્સ્ટ વર્કસ્પેસ પર મોકલો
+    send_to_previous_workspace: વિન્ડોને પહેલાની વર્કસ્પેસ પર મોકલો
     send_to_workspace: વર્કસ્પેસ {{0}} પર મોકલો
+    send_to_workspace_down: વિન્ડોને નીચે વર્કસ્પેસ પર મોકલો
+    send_to_workspace_up: ઉપર વર્કસ્પેસ પર વિન્ડો મોકલો
     switch_to_next_workspace: આગળના કાર્યસ્થળ પર સ્વિચ કરો
     switch_to_previous_workspace: પાછલા વર્કસ્પેસ પર સ્વિચ કરો
+    switch_to_workspace_down: નીચે વર્કસ્પેસ પર સ્વિચ કરો
+    switch_to_workspace_up: ઉપર વર્કસ્પેસ પર સ્વિચ કરો
     switch_workspace: વર્કસ્પેસ પર સ્વિચ કરો {{0}}
   readonly_tooltip: આ ફક્ત એક વાંચવા માટે શોર્ટકટ છે
   reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
@@ -373,6 +380,12 @@ weg:
     always: હંમેશા
     never: ક્યારેય નહીં
     on_overlap: ઓવરલેપ પર
+  import_error: ટાસ્કબાર આઇટમ્સ આયાત કરવામાં નિષ્ફળ
+  import_from_taskbar:
+    button: વિન્ડોઝ ટાસ્કબારમાંથી આયાત કરો
+    label: પિન કરેલી વસ્તુઓ આયાત કરો
+  import_no_items: Windows ટાસ્કબારમાં કોઈ પિન કરેલી આઇટમ્સ મળી નથી
+  import_success: Windows ટાસ્કબારમાંથી {{count}} આઇટમ્સ સફળતાપૂર્વક આયાત કરી
   items:
     gap: વસ્તુઓ વચ્ચે જગ્યા
     label: વસ્તુઓ
@@ -436,6 +449,10 @@ wm:
   drag_behavior_options:
     sort: સૉર્ટ કરો (ડ્રેગ કરતી વખતે વિંડોઝને ફરીથી ગોઠવો)
     swap: સ્વેપ (ડ્રેગ એન્ડ પર વિન્ડોઝ સ્વેપ)
+  floating:
+    height: ફ્લોટિંગ વિન્ડોઝ ઊંચાઈ
+    title: ફ્લોટિંગ વિન્ડોઝ કદ
+    width: ફ્લોટિંગ વિન્ડોઝ પહોળાઈ
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
   space_between_containers: કન્ટેનર વચ્ચે જગ્યા

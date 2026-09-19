@@ -274,14 +274,21 @@ shortcuts:
     l-klijent Seelen UI
   labels:
     create_new_workspace: Oħloq spazju ta 'xogħol ġdid
+    create_new_workspace_row: Oħloq Ringiela ta' Spazju tax-Xogħol Ġdid
     destroy_current_workspace: Jeqirdu l-ispazju ta 'xogħol attwali
     misc_force_quit: Forza nieqaf
     misc_force_restart: Startjar mill-ġdid tal-forza
     move_to_workspace: Mexxi għal Workspace {{0}}
     pause_toggle: Waqfa/Ibda Shortcuts
+    send_to_next_workspace: Ibgħat Tieqa lill-Ispazju tax-Xogħol Li jmiss
+    send_to_previous_workspace: Ibgħat Tieqa lill-Ispazju tax-Xogħol Preċedenti
     send_to_workspace: Ibgħat lil Workspace {{0}}
+    send_to_workspace_down: Ibgħat Tieqa għall-Ispazju tax-Xogħol Hawn taħt
+    send_to_workspace_up: Ibgħat Tieqa lill-Ispazju tax-Xogħol Fuq
     switch_to_next_workspace: Aqleb għall-Ispazju tax-Xogħol li jmiss
     switch_to_previous_workspace: Aqleb għall-ispazju ta 'xogħol preċedenti
+    switch_to_workspace_down: Aqleb għall-Ispazju tax-Xogħol Hawn taħt
+    switch_to_workspace_up: Aqleb għall-Ispazju tax-Xogħol Fuq
     switch_workspace: Aqleb għal Workspace {{0}}
   readonly_tooltip: Din hija shortcut li jinqara biss
   reset: Irrisettja għal nuqqasijiet
@@ -382,6 +389,12 @@ weg:
     always: Dejjem
     never: Qatt
     on_overlap: Fuq koinċidenza
+  import_error: Naqas milli jimporta oġġetti tal-bar tat-task
+  import_from_taskbar:
+    button: Importa mill-Windows Taskbar
+    label: Importa Oġġetti Pinnjati
+  import_no_items: L-ebda oġġett ippinjat misjub fit-taskbar tal-Windows
+  import_success: Importati b'suċċess {{count}} oġġett(i) mit-taskbar tal-Windows
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: Issortja (ordna mill-ġdid it-twieqi waqt li tkaxkar)
     swap: Ibdel (tbiddel it-twieqi fit-tarf tat-tkaxkir)
+  floating:
+    height: Għoli tal-Windows f'wiċċ l-ilma
+    title: Daqs tal-Windows f'wiċċ l-ilma
+    width: Wisa' tal-Windows f'wiċċ l-ilma
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   space_between_containers: Spazju bejn il-kontenituri

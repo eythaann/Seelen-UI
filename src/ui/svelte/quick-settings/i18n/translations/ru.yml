@@ -1,4 +1,15 @@
 app_settings: Настройки приложения
+brightness: Яркость
+dark_mode: Темный режим
+default_multimedia_volume: Громкость мультимедиа по умолчанию
 disabled: Неполноценный
 enabled: Включено
+eye_care: Уход за глазами
+fm_radio: FM-радио
+hdr: Широкий динамический диапазон
+hotspot: Точка доступа
+light_mode: Светлый режим
+mobile_broadband: Мобильная широкополосная связь
+night_light: Ночной свет
 power: Власть
+unknown: Неизвестный

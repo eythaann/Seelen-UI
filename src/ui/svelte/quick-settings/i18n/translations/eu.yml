@@ -1,4 +1,15 @@
 app_settings: Aplikazioaren ezarpenak
+brightness: Distira
+dark_mode: Modu iluna
+default_multimedia_volume: Multimedia-bolumen lehenetsia
 disabled: Ezindua
 enabled: Gaituta
+eye_care: Begietako Zainketa
+fm_radio: FM Irratia
+hdr: Gama Dinamiko Handia
+hotspot: Hotspot
+light_mode: Argi modua
+mobile_broadband: Banda Zabal mugikorra
+night_light: Gau Argia
 power: Boterea
+unknown: Ezezaguna

@@ -269,14 +269,21 @@ shortcuts:
     УИ клијента
   labels:
     create_new_workspace: Креирајте нови радни простор
+    create_new_workspace_row: Креирајте нови ред радног простора
     destroy_current_workspace: Уништите тренутни радни простор
     misc_force_quit: Престанак
     misc_force_restart: Поново покренути
     move_to_workspace: Пређите на радни простор {{0}}
     pause_toggle: Пречице за паузу/настављање
+    send_to_next_workspace: Пошаљи прозор на следећи радни простор
+    send_to_previous_workspace: Пошаљи прозор у претходни радни простор
     send_to_workspace: Пошаљи на радни простор {{0}}
+    send_to_workspace_down: Пошаљите прозор у радни простор испод
+    send_to_workspace_up: Пошаљи прозор у радни простор изнад
     switch_to_next_workspace: Пређите на следећи радни простор
     switch_to_previous_workspace: Пређите на претходни радни простор
+    switch_to_workspace_down: Пребаците се на радни простор испод
+    switch_to_workspace_up: Пређите на радни простор изнад
     switch_workspace: Пређите на радни простор {{0}}
   readonly_tooltip: Ово је пречица само за читање
   reset: Ресетујте на подразумеване вредности
@@ -383,6 +390,12 @@ weg:
     always: Увек
     never: Никада
     on_overlap: На преклапање
+  import_error: Увоз ставки траке задатака није успео
+  import_from_taskbar:
+    button: Увоз са Виндовс траке задатака
+    label: Увезите закачене ставке
+  import_no_items: На Виндовс траци задатака нису пронађене закачене ставке
+  import_success: Успешно увезено {{цоунт}} ставки са Виндовс траке задатака
   items:
     gap: Простор између предмета
     label: Предмети
@@ -447,6 +460,10 @@ wm:
   drag_behavior_options:
     sort: Сортирај (промени редослед прозора током превлачења)
     swap: Замени (замени прозоре на крају превлачења)
+  floating:
+    height: Плутајућа висина прозора
+    title: Плутајућа величина Виндовс-а
+    width: Плутајућа ширина прозора
   layout: Изглед
   resize_delta: Промените величину Делта (%)
   space_between_containers: Простор између контејнера

@@ -275,14 +275,21 @@ shortcuts:
     le-Seelen UI
   labels:
     create_new_workspace: Dala indawo yokusebenza entsha
+    create_new_workspace_row: Dala Umugqa Wendawo Yokusebenzela Entsha
     destroy_current_workspace: Ukubhubhisa indawo yokusebenza yamanje
     misc_force_quit: Amandla ayeke
     misc_force_restart: Force Qala kabusha
     move_to_workspace: Hambisa ku-Workpace {{0}}
     pause_toggle: Misa isikhashana/Qalisa kabusha Izinqamuleli
+    send_to_next_workspace: Thumela Iwindi Endaweni Yokusebenzela Elandelayo
+    send_to_previous_workspace: Thumela Iwindi Endaweni Yokusebenzela Yangaphambilini
     send_to_workspace: Thumela kwi-Workpace {{0}}
+    send_to_workspace_down: Thumela Iwindi Endaweni Yokusebenzela Ngezansi
+    send_to_workspace_up: Thumela Iwindi Endaweni Yokusebenzela Ngenhla
     switch_to_next_workspace: Shintshela endaweni yokusebenzela elandelayo
     switch_to_previous_workspace: Shintshela endaweni yokusebenza edlule
+    switch_to_workspace_down: Shintshela Endaweni Yokusebenzela Ngezansi
+    switch_to_workspace_up: Shintshela Endaweni Yokusebenzela Ngenhla
     switch_workspace: Shintshela endaweni yokusebenza {{0}}
   readonly_tooltip: Lesi isinqamuleli esifundwayo kuphela
   reset: Setha kabusha okuzenzakalelayo
@@ -387,6 +394,14 @@ weg:
     always: Njalo
     never: Ungalokothi
     on_overlap: Ngokugqagqana
+  import_error: Yehlulekile ukungenisa izinto zebha yomsebenzi
+  import_from_taskbar:
+    button: Ngenisa usuka kubha yomsebenzi weWindows
+    label: Ngenisa Izinto Eziphiniwe
+  import_no_items: Azikho izinto eziphiniwe ezitholakele kubha yomsebenzi ye-Windows
+  import_success: >-
+    Ingenise ngempumelelo izinto ezingu-{{count}} ukusuka kubha yomsebenzi
+    ye-Windows
   items:
     gap: Isikhala phakathi kwezinto
     label: Into
@@ -450,6 +465,10 @@ wm:
   drag_behavior_options:
     sort: Hlunga (hlela kabusha amawindi ngenkathi uhudula)
     swap: Shintsha (shintshanisa amawindi ekugcineni kokuhudula)
+  floating:
+    height: Ukuphakama kweWindows okuntantayo
+    title: Usayizi WeWindows Ontantayo
+    width: Ububanzi beWindows obuntantayo
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)
   space_between_containers: Isikhala phakathi kweziqukathi

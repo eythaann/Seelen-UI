@@ -270,14 +270,21 @@ shortcuts:
     implementeer
   labels:
     create_new_workspace: Skep nuwe werkruimte
+    create_new_workspace_row: Skep nuwe werkruimtery
     destroy_current_workspace: Vernietig die huidige werkruimte
     misc_force_quit: Force Quit
     misc_force_restart: Force herbegin
     move_to_workspace: Beweeg na WorkSpace {{0}}
     pause_toggle: Onderbreek/Hervat kortpaaie
+    send_to_next_workspace: Stuur venster na volgende werkspasie
+    send_to_previous_workspace: Stuur Venster na Vorige Werkspasie
     send_to_workspace: Stuur na WorkSpace {{0}}
+    send_to_workspace_down: Stuur Venster na Werkspasie hieronder
+    send_to_workspace_up: Stuur venster na werkspasie hierbo
     switch_to_next_workspace: Skakel oor na die volgende werkruimte
     switch_to_previous_workspace: Skakel oor na vorige werkruimte
+    switch_to_workspace_down: Skakel oor na Werkspasie hieronder
+    switch_to_workspace_up: Skakel oor na Werkspasie hierbo
     switch_workspace: Skakel oor na WorkSpace {{0}}
   readonly_tooltip: Dit is 'n leesalleen kortpad
   reset: Stel weer in standaard
@@ -378,6 +385,12 @@ weg:
     always: Altyd
     never: Nooit nie
     on_overlap: Op oorvleueling
+  import_error: Kon nie taakbalkitems invoer nie
+  import_from_taskbar:
+    button: Voer in vanaf Windows-taakbalk
+    label: Voer vasgespelde items in
+  import_no_items: Geen vasgespelde items in Windows-taakbalk gevind nie
+  import_success: Het {{count}} item(s) suksesvol vanaf Windows-taakbalk ingevoer
   items:
     gap: Ruimte tussen items
     label: Voorwerpe
@@ -440,6 +453,10 @@ wm:
   drag_behavior_options:
     sort: Sorteer (herrangskik vensters terwyl jy sleep)
     swap: Ruil (ruil vensters op sleepkant)
+  floating:
+    height: Swaaiende vensterhoogte
+    title: Swaai venstergrootte
+    width: Swaai vensterbreedte
   layout: Uitleg
   resize_delta: Verander die grootte delta (%)
   space_between_containers: Ruimte tussen houers

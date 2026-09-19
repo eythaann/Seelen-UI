@@ -31,11 +31,11 @@
       case "Bluetooth":
         return "Bluetooth";
       case "MobileBroadband":
-        return "Mobile Broadband";
+        return $t("mobile_broadband");
       case "FM":
-        return "FM Radio";
+        return $t("fm_radio");
       default:
-        return "Unknown";
+        return $t("unknown");
     }
   }
 
@@ -105,7 +105,7 @@
       class="radio-button"
       data-skin={hdrEnabled ? "solid" : "default"}
       onclick={toggleHdr}
-      title={`HDR - ${hdrEnabled ? $t("enabled") : $t("disabled")}`}
+      title={`${$t("hdr")} -${hdrEnabled ? $t("enabled") : $t("disabled")}`}
     >
       <Icon iconName="TbHdr" />
       <span class="radio-button-label">{$t("hdr")}</span>

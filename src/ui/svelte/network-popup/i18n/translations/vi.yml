@@ -5,6 +5,15 @@ connecting: Đang kết nối...
 disconnect: Ngắt kết nối
 forget: Quên
 hidden: Mạng ẩn
+hotspot:
+  band: Ban nhạc
+  'off': Tắt
+  'on': TRÊN
+  open_network: Mạng mở
+  password: Mật khẩu
+  settings: Thêm cài đặt điểm phát sóng
+  ssid: Tên mạng
+  title: Điểm phát sóng
 more: Thêm cài đặt mạng
 no_adapter: Không tìm thấy bộ chuyển đổi Wi-Fi
 not_found: Không tìm thấy mạng Wi-Fi

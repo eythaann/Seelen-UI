@@ -271,14 +271,21 @@ shortcuts:
     bicîh bikin
   labels:
     create_new_workspace: Karê nû nû çêbikin
+    create_new_workspace_row: Rêza Cihê Xebatê ya Nû biafirîne
     destroy_current_workspace: Qada xebata heyî hilweşînin
     misc_force_quit: Hêza Qedexe
     misc_force_restart: Hêza Destpêkirin
     move_to_workspace: Move to Workspace {{0}}
     pause_toggle: Rawestandin/Destpêkirina Kurtebiran
+    send_to_next_workspace: Paceyê bişînin Cihê Xebatê ya Piştre
+    send_to_previous_workspace: Paceyê bişîne Qada Xebatê ya Berê
     send_to_workspace: Ji bo Workspace {{0} bişînin.
+    send_to_workspace_down: Paceyê bişînin qada xebatê ya jêrîn
+    send_to_workspace_up: Paceyê bişînin qada xebatê ya jorîn
     switch_to_next_workspace: Veguherînin qada xebata next
     switch_to_previous_workspace: Vegere qada xebata berê
+    switch_to_workspace_down: Biguherînin Cihê Xebatê li jêr
+    switch_to_workspace_up: Veguheztin Cihê Karê Jorîn
     switch_workspace: Switch to Workspace {{0}}
   readonly_tooltip: Ev kurteyek xwendinê ye
   reset: Reset to Default
@@ -379,6 +386,12 @@ weg:
     always: Herdem
     never: Qet
     on_overlap: Li ser hevgirtinê
+  import_error: Têkhatina hêmanên darika peywirê bi ser neket
+  import_from_taskbar:
+    button: Ji Taskbara Windows-ê derxînin
+    label: Tiştên Pînekirî Import
+  import_no_items: Tiştên pînekirî di barika peywirê ya Windows-ê de nehatin dîtin
+  import_success: Bi serketî {{hejmar}} tişt ji barika peywirê ya Windows-ê hat importkirin
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên
@@ -443,6 +456,10 @@ wm:
   drag_behavior_options:
     sort: Rêzkirin (dema dikişîne paceyan ji nû ve rêz bike)
     swap: Swap (paceyên li ser dawiya kaşkirinê biguherînin)
+  floating:
+    height: Bilindahiya Windows-ê ya floating
+    title: Pîvana Windows-ê ya Pêdeng
+    width: Berfirehiya Windows-ê ya Pêdeng
   layout: Rêz
   resize_delta: Delta Resize (%)
   space_between_containers: Cîhê di navbera konteyneran de

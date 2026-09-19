@@ -5,6 +5,15 @@ connecting: S'està connectant...
 disconnect: Desconnecta
 forget: Oblida't
 hidden: Xarxa oculta
+hotspot:
+  band: Banda
+  'off': Apagat
+  'on': Encès
+  open_network: Xarxa oberta
+  password: Contrasenya
+  settings: Més configuració de hotspot
+  ssid: Nom de la xarxa
+  title: Hotspot
 more: Més configuració de xarxa
 no_adapter: No s'ha trobat cap adaptador Wi-Fi
 not_found: No s'han trobat xarxes Wi-Fi

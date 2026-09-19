@@ -269,14 +269,21 @@ shortcuts:
     UI -klienten
   labels:
     create_new_workspace: Skapa en ny arbetsyta
+    create_new_workspace_row: Skapa ny arbetsytarad
     destroy_current_workspace: Förstör den aktuella arbetsytan
     misc_force_quit: Straffa
     misc_force_restart: Tvinga omstart
     move_to_workspace: Flytta till Workspace {{0}}
     pause_toggle: Pausa/Fortsätt genvägar
+    send_to_next_workspace: Skicka fönster till nästa arbetsyta
+    send_to_previous_workspace: Skicka fönster till föregående arbetsyta
     send_to_workspace: Skicka till Workspace {{0}}
+    send_to_workspace_down: Skicka fönstret till arbetsytan nedan
+    send_to_workspace_up: Skicka fönstret till arbetsytan ovan
     switch_to_next_workspace: Byt till nästa arbetsyta
     switch_to_previous_workspace: Byt till tidigare arbetsyta
+    switch_to_workspace_down: Byt till Workspace nedan
+    switch_to_workspace_up: Byt till arbetsyta ovan
     switch_workspace: Byt till Workspace {{0}}
   readonly_tooltip: Detta är en skrivskyddad genväg
   reset: Återställas till standardvärden
@@ -377,6 +384,12 @@ weg:
     always: Alltid
     never: Aldrig
     on_overlap: På överlappning
+  import_error: Det gick inte att importera objekt i aktivitetsfältet
+  import_from_taskbar:
+    button: Importera från Windows Aktivitetsfält
+    label: Importera fästa objekt
+  import_no_items: Inga fästa objekt hittades i Windows aktivitetsfält
+  import_success: '{{count}} objekt har importerats från aktivitetsfältet i Windows'
   items:
     gap: Utrymme mellan föremål
     label: Föremål
@@ -439,6 +452,10 @@ wm:
   drag_behavior_options:
     sort: Sortera (ordna om fönster medan du drar)
     swap: Byt (byta fönster på dragänden)
+  floating:
+    height: Flytande fönsterhöjd
+    title: Flytande fönsterstorlek
+    width: Flytande fönsterbredd
   layout: Layout
   resize_delta: Ändra ändra delta (%)
   space_between_containers: Utrymme mellan containrar

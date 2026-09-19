@@ -269,14 +269,21 @@ shortcuts:
     ddefnyddio cleient Seelen UI
   labels:
     create_new_workspace: Creu man gwaith newydd
+    create_new_workspace_row: Creu Rhes Gweithle Newydd
     destroy_current_workspace: Dinistrio man gwaith cyfredol
     misc_force_quit: Rhoi'r gorau iddi
     misc_force_restart: Ailgychwyn grym
     move_to_workspace: Symud i Workpace {{0}}
     pause_toggle: Saib/Ail-ddechrau Llwybrau Byr
+    send_to_next_workspace: Anfon Ffenestr i Next Workspace
+    send_to_previous_workspace: Anfon Ffenestr i Weithfan Blaenorol
     send_to_workspace: Anfonwch i Workpace {{0}}
+    send_to_workspace_down: Anfon Ffenestr i Weithfan Isod
+    send_to_workspace_up: Anfon Ffenestr i Weithfan Uchod
     switch_to_next_workspace: Newid i ofod gwaith nesaf
     switch_to_previous_workspace: Newid i Workpace Blaenorol
+    switch_to_workspace_down: Newid i Weithfan Isod
+    switch_to_workspace_up: Newid i Weithfan Uchod
     switch_workspace: Newid i Workpace {{0}}
   readonly_tooltip: Llwybr byr darllen yn unig yw hwn
   reset: Ailosod i ddiffygion
@@ -377,6 +384,12 @@ weg:
     always: Bob amser
     never: Byth
     on_overlap: Ar gorgyffwrdd
+  import_error: Wedi methu mewnforio eitemau bar tasgau
+  import_from_taskbar:
+    button: Mewnforio o Windows Taskbar
+    label: Mewnforio Eitemau wedi'u Pinio
+  import_no_items: Ni chanfuwyd unrhyw eitemau wedi'u pinio ym mar tasgau Windows
+  import_success: Wedi mewngludo {{count}} eitem(au) o far tasgau Windows yn llwyddiannus
   items:
     gap: Lle rhwng eitemau
     label: Eitemau
@@ -440,6 +453,10 @@ wm:
   drag_behavior_options:
     sort: Trefnu (ail-archebu ffenestri wrth lusgo)
     swap: Cyfnewid (cyfnewid ffenestri ar y pen llusgo)
+  floating:
+    height: Uchder Windows fel y bo'r angen
+    title: Maint Windows fel y bo'r angen
+    width: Lled Windows fel y bo'r angen
   layout: Gynllun
   resize_delta: Newid maint Delta (%)
   space_between_containers: Lle rhwng cynwysyddion

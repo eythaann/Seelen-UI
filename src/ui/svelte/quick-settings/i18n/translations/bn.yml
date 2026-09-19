@@ -1,4 +1,15 @@
 app_settings: অ্যাপ সেটিংস
+brightness: উজ্জ্বলতা
+dark_mode: ডার্ক মোড
+default_multimedia_volume: ডিফল্ট মাল্টিমিডিয়া ভলিউম
 disabled: অক্ষম
 enabled: সক্রিয়
+eye_care: চোখের যত্ন
+fm_radio: এফএম রেডিও
+hdr: উচ্চ গতিশীল পরিসীমা
+hotspot: হটস্পট
+light_mode: হালকা মোড
+mobile_broadband: মোবাইল ব্রডব্যান্ড
+night_light: রাতের আলো
 power: শক্তি
+unknown: অজানা

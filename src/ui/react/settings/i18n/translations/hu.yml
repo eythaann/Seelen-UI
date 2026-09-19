@@ -274,14 +274,21 @@ shortcuts:
     parancsikonjait
   labels:
     create_new_workspace: Hozzon létre új munkaterületet
+    create_new_workspace_row: Új munkaterület-sor létrehozása
     destroy_current_workspace: Pusztítsd el az aktuális munkaterületet
     misc_force_quit: Erőt hagy
     misc_force_restart: Újraindítás kikényszerítése
     move_to_workspace: Költözni a munkaterületre {{0}}
     pause_toggle: Parancsikonok szüneteltetése/folytatása
+    send_to_next_workspace: Ablak küldése a következő munkaterületre
+    send_to_previous_workspace: Ablak küldése az előző munkaterületre
     send_to_workspace: Küldje el a munkaterületre {{0}}
+    send_to_workspace_down: Küldje el az ablakot az alábbi munkaterületre
+    send_to_workspace_up: Küldje el az ablakot a fenti munkaterületre
     switch_to_next_workspace: Váltás a következő munkaterületre
     switch_to_previous_workspace: Váltás az előző munkaterületre
+    switch_to_workspace_down: Váltson az alábbi munkaterületre
+    switch_to_workspace_up: Váltson a fenti munkaterületre
     switch_workspace: Váltás a munkaterületre {{0}}
   readonly_tooltip: Ez egy csak olvasható parancsikon
   reset: Alapértelmezés visszaállítása az alapértelmezésekre
@@ -384,6 +391,12 @@ weg:
     always: Mindig
     never: Soha
     on_overlap: Az átfedésben
+  import_error: Nem sikerült importálni a tálca elemeit
+  import_from_taskbar:
+    button: Importálás a Windows tálcáról
+    label: Rögzített elemek importálása
+  import_no_items: Nem található rögzített elem a Windows tálcán
+  import_success: Sikeresen importált {{count}} elemet a Windows tálcájáról
   items:
     gap: Hely az elemek között
     label: Tárgyak
@@ -447,6 +460,10 @@ wm:
   drag_behavior_options:
     sort: Rendezés (ablakok átrendezése húzás közben)
     swap: Csere (ablak cseréje a húzás végén)
+  floating:
+    height: Lebegő ablakmagasság
+    title: Lebegő Windows-méret
+    width: Lebegő ablakszélesség
   layout: Elrendezés
   resize_delta: Átméretezze a DELTA -t (%)
   space_between_containers: Hely a konténerek között

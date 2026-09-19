@@ -1,4 +1,15 @@
 app_settings: App-Einstellungen
+brightness: Helligkeit
+dark_mode: Dunkler Modus
+default_multimedia_volume: Standard-Multimedia-Lautstärke
 disabled: Deaktiviert
 enabled: Ermöglicht
+eye_care: Augenpflege
+fm_radio: UKW-Radio
+hdr: Hoher Dynamikbereich
+hotspot: Hotspot
+light_mode: Lichtmodus
+mobile_broadband: Mobiles Breitband
+night_light: Nachtlicht
 power: Leistung
+unknown: Unbekannt

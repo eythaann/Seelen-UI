@@ -5,6 +5,15 @@ connecting: მიმდინარეობს დაკავშირებ�
 disconnect: გათიშვა
 forget: დაივიწყე
 hidden: დამალული ქსელი
+hotspot:
+  band: ბენდი
+  'off': გამორთულია
+  'on': ჩართულია
+  open_network: გახსენით ქსელი
+  password: პაროლი
+  settings: Hotspot-ის სხვა პარამეტრები
+  ssid: ქსელის სახელი
+  title: ცხელი წერტილი
 more: მეტი ქსელის პარამეტრები
 no_adapter: Wi-Fi ადაპტერი ვერ მოიძებნა
 not_found: Wi-Fi ქსელები ვერ მოიძებნა

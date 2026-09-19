@@ -278,14 +278,21 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Crea un nuevo espacio de trabajo
+    create_new_workspace_row: Crear nueva fila de espacio de trabajo
     destroy_current_workspace: Destruir el espacio de trabajo actual
     misc_force_quit: Fuerza deja de salir
     misc_force_restart: Forzar reinicio
     move_to_workspace: Mover al espacio de trabajo {{0}}
     pause_toggle: Pausar/reanudar atajos
+    send_to_next_workspace: Enviar ventana al siguiente espacio de trabajo
+    send_to_previous_workspace: Enviar ventana al espacio de trabajo anterior
     send_to_workspace: Enviar al espacio de trabajo {{0}}
+    send_to_workspace_down: Enviar ventana al espacio de trabajo a continuación
+    send_to_workspace_up: Enviar ventana al espacio de trabajo de arriba
     switch_to_next_workspace: Cambiar al siguiente espacio de trabajo
     switch_to_previous_workspace: Cambiar al espacio de trabajo anterior
+    switch_to_workspace_down: Cambiar al espacio de trabajo a continuación
+    switch_to_workspace_up: Cambiar al espacio de trabajo de arriba
     switch_workspace: Cambiar al espacio de trabajo {{0}}
   readonly_tooltip: Este es un atajo de solo lectura
   reset: Reiniciar a los valores predeterminados
@@ -390,6 +397,14 @@ weg:
     always: Siempre
     never: Nunca
     on_overlap: Sobre el solapamiento
+  import_error: No se pudieron importar elementos de la barra de tareas
+  import_from_taskbar:
+    button: Importar desde la barra de tareas de Windows
+    label: Importar elementos fijados
+  import_no_items: No se encontraron elementos anclados en la barra de tareas de Windows
+  import_success: >-
+    Se importaron con éxito {{count}} elementos desde la barra de tareas de
+    Windows
   items:
     gap: Espacio entre elementos
     label: Elementos
@@ -453,6 +468,10 @@ wm:
   drag_behavior_options:
     sort: Ordenar (reordenar ventanas mientras arrastra)
     swap: Intercambiar (intercambiar ventanas al final del arrastre)
+  floating:
+    height: Altura de las ventanas flotantes
+    title: Tamaño de ventanas flotantes
+    width: Ancho de ventanas flotantes
   layout: Diseño
   resize_delta: Redimensionar Delta (%)
   space_between_containers: Espacio entre contenedores

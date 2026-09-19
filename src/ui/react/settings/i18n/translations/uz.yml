@@ -276,14 +276,21 @@ shortcuts:
     oshirsangiz, o'chiring
   labels:
     create_new_workspace: Yangi ish maydonini yarating
+    create_new_workspace_row: Yangi ish maydoni qatorini yarating
     destroy_current_workspace: Hozirgi ish maydonini yo'q qiling
     misc_force_quit: Kuch berish
     misc_force_restart: Kuchni qayta boshlang
     move_to_workspace: Ish maydoni uchun {{0}}
     pause_toggle: Qisqa klavishlarni to'xtatib turish/davom etish
+    send_to_next_workspace: Oynani keyingi ish maydoniga yuborish
+    send_to_previous_workspace: Oynani oldingi ish maydoniga yuborish
     send_to_workspace: Ish maydoni uchun {{0}}
+    send_to_workspace_down: Quyidagi ish maydoniga oynani yuboring
+    send_to_workspace_up: Yuqoridagi ish maydoniga oynani yuboring
     switch_to_next_workspace: Keyingi ish joyiga o'tish
     switch_to_previous_workspace: Oldingi ish joyiga o'tish
+    switch_to_workspace_down: Quyidagi ish maydoniga o'ting
+    switch_to_workspace_up: Yuqoridagi ish maydoniga o'tish
     switch_workspace: Ish maydoni {{0}}
   readonly_tooltip: Bu faqat o'qish faqat yorliqidir
   reset: Standartlarga qayta o'rnating
@@ -386,6 +393,14 @@ weg:
     always: Har doim
     never: Hech qachon
     on_overlap: Bir-biriga yopishgan holda
+  import_error: Vazifalar paneli elementlarini import qilib bo‘lmadi
+  import_from_taskbar:
+    button: Windows vazifalar panelidan import qiling
+    label: Belgilangan narsalarni import qilish
+  import_no_items: Windows vazifalar panelida mahkamlangan elementlar topilmadi
+  import_success: >-
+    Windows vazifalar panelidan {{count}} ta element muvaffaqiyatli import
+    qilindi
   items:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar
@@ -450,6 +465,10 @@ wm:
   drag_behavior_options:
     sort: Saralash (tortish paytida oynalarni qayta tartiblash)
     swap: Almashtirish (drag oxirida oynalarni almashtirish)
+  floating:
+    height: Suzuvchi Windows balandligi
+    title: Suzuvchi Windows hajmi
+    width: Suzuvchi Windows kengligi
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   space_between_containers: Idishlar orasidagi bo'shliq

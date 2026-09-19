@@ -5,6 +5,15 @@ connecting: Bağlanıyor...
 disconnect: Bağlantıyı kes
 forget: Unutmak
 hidden: Gizli Ağ
+hotspot:
+  band: Bant
+  'off': Kapalı
+  'on': Açık
+  open_network: Ağı aç
+  password: Şifre
+  settings: Daha Fazla Erişim Noktası Ayarları
+  ssid: Ağ adı
+  title: Sıcak nokta
 more: Diğer Ağ Ayarları
 no_adapter: Wi-Fi bağdaştırıcısı bulunamadı
 not_found: Hiçbir Wi-Fi ağı bulunamadı

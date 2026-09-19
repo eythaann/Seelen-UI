@@ -5,6 +5,15 @@ connecting: සම්බන්ධ වෙමින්...
 disconnect: විසන්ධි කරන්න
 forget: අමතක කරන්න
 hidden: සැඟවුණු ජාලය
+hotspot:
+  band: සංගීත කණ්ඩායම
+  'off': අක්රියයි
+  'on': ක්‍රියාත්මකයි
+  open_network: ජාලය විවෘත කරන්න
+  password: මුරපදය
+  settings: තවත් හොට්ස්පොට් සැකසුම්
+  ssid: ජාලයේ නම
+  title: හොට්ස්පොට්
 more: තවත් ජාල සැකසුම්
 no_adapter: Wi-Fi ඇඩැප්ටරයක් ​​හමු නොවීය
 not_found: Wi-Fi ජාල කිසිවක් හමු නොවීය

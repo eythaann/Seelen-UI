@@ -1,4 +1,15 @@
 app_settings: Mga Setting ng App
+brightness: Liwanag
+dark_mode: Dark Mode
+default_multimedia_volume: Default na Dami ng Multimedia
 disabled: Hindi pinagana
 enabled: Pinagana
+eye_care: Pangangalaga sa Mata
+fm_radio: FM Radio
+hdr: Mataas na Dynamic na Saklaw
+hotspot: Hotspot
+light_mode: Light Mode
+mobile_broadband: Mobile Broadband
+night_light: Liwanag ng Gabi
 power: kapangyarihan
+unknown: Hindi kilala

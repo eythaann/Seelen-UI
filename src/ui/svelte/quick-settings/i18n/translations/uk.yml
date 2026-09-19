@@ -1,4 +1,15 @@
 app_settings: Налаштування програми
+brightness: Яскравість
+dark_mode: Темний режим
+default_multimedia_volume: Гучність мультимедіа за замовчуванням
 disabled: Вимкнено
 enabled: Увімкнено
+eye_care: Догляд за очима
+fm_radio: FM-радіо
+hdr: Високий динамічний діапазон
+hotspot: Точка доступу
+light_mode: Світловий режим
+mobile_broadband: Мобільний широкосмуговий зв'язок
+night_light: Нічне світло
 power: потужність
+unknown: Невідомий

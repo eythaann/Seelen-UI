@@ -5,6 +5,15 @@ connecting: Yhdistetään...
 disconnect: Katkaise yhteys
 forget: Unohtaa
 hidden: Piilotettu verkko
+hotspot:
+  band: Bändi
+  'off': Pois
+  'on': Päällä
+  open_network: Avoin verkko
+  password: Salasana
+  settings: Lisää hotspot-asetuksia
+  ssid: Verkon nimi
+  title: Hotspot
 more: Lisää verkkoasetuksia
 no_adapter: Wi-Fi-sovitinta ei löydy
 not_found: Wi-Fi-verkkoja ei löytynyt

@@ -271,14 +271,21 @@ shortcuts:
     menggunakan pelanggan Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
+    create_new_workspace_row: Buat Baris Ruang Kerja Baharu
     destroy_current_workspace: Memusnahkan ruang kerja semasa
     misc_force_quit: Memaksa berhenti
     misc_force_restart: Memaksa memulakan semula
     move_to_workspace: Pindah ke ruang kerja {{0}}
     pause_toggle: Jeda/Sambung Pintasan
+    send_to_next_workspace: Hantar Tetingkap ke Ruang Kerja Seterusnya
+    send_to_previous_workspace: Hantar Tetingkap ke Ruang Kerja Sebelumnya
     send_to_workspace: Hantar ke Workspace {{0}}
+    send_to_workspace_down: Hantar Tetingkap ke Ruang Kerja Di Bawah
+    send_to_workspace_up: Hantar Tetingkap ke Ruang Kerja Di Atas
     switch_to_next_workspace: Beralih ke ruang kerja seterusnya
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
+    switch_to_workspace_down: Tukar ke Ruang Kerja Di Bawah
+    switch_to_workspace_up: Tukar ke Ruang Kerja Di Atas
     switch_workspace: Tukar ke ruang kerja {{0}}
   readonly_tooltip: Ini adalah jalan pintas baca sahaja
   reset: Tetapkan semula ke lalai
@@ -379,6 +386,12 @@ weg:
     always: Sentiasa
     never: tidak pernah
     on_overlap: Bertindih
+  import_error: Gagal mengimport item bar tugas
+  import_from_taskbar:
+    button: Import daripada Windows Taskbar
+    label: Import Item Disemat
+  import_no_items: Tiada item yang disematkan ditemui dalam bar tugas Windows
+  import_success: Berjaya mengimport {{count}} item daripada bar tugas Windows
   items:
     gap: Ruang antara item
     label: Item
@@ -443,6 +456,10 @@ wm:
   drag_behavior_options:
     sort: Isih (susun semula tetingkap semasa menyeret)
     swap: Tukar (tukar tetingkap pada hujung seret)
+  floating:
+    height: Ketinggian Windows Terapung
+    title: Saiz Windows Terapung
+    width: Lebar Windows Terapung
   layout: Susun atur
   resize_delta: Saiz semula delta (%)
   space_between_containers: Ruang antara bekas

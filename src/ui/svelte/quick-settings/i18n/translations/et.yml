@@ -1,4 +1,15 @@
 app_settings: Rakenduse seaded
+brightness: Heledus
+dark_mode: Tume režiim
+default_multimedia_volume: Vaikimisi multimeedia helitugevus
 disabled: Keelatud
 enabled: Lubatud
+eye_care: Silmahooldus
+fm_radio: FM raadio
+hdr: Kõrge dünaamiline ulatus
+hotspot: Hotspot
+light_mode: Valgusrežiim
+mobile_broadband: Mobiilne lairibaühendus
+night_light: Öine valgus
 power: Võimsus
+unknown: Tundmatu

@@ -277,14 +277,21 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Utwórz nowy obszar roboczy
+    create_new_workspace_row: Utwórz nowy wiersz obszaru roboczego
     destroy_current_workspace: Zniszcz obecny obszar roboczy
     misc_force_quit: Force zrezygnować
     misc_force_restart: Wymuś restart
     move_to_workspace: Przenieś się do przestrzeni roboczej {{0}}
     pause_toggle: Wstrzymaj/Wznów skróty
+    send_to_next_workspace: Wyślij okno do następnego obszaru roboczego
+    send_to_previous_workspace: Wyślij okno do poprzedniego obszaru roboczego
     send_to_workspace: Wyślij do przestrzeni roboczej {{0}}
+    send_to_workspace_down: Wyślij okno do obszaru roboczego poniżej
+    send_to_workspace_up: Wyślij okno do obszaru roboczego powyżej
     switch_to_next_workspace: Przejdź na następny obszar roboczy
     switch_to_previous_workspace: Przejdź na poprzedni obszar roboczy
+    switch_to_workspace_down: Przejdź do obszaru roboczego poniżej
+    switch_to_workspace_up: Przełącz na obszar roboczy powyżej
     switch_workspace: Przełącz na przestrzeń roboczą {{0}}
   readonly_tooltip: To jest skrót tylko do odczytu
   reset: Zresetuj do domyślnych
@@ -389,6 +396,12 @@ weg:
     always: Zawsze
     never: Nigdy
     on_overlap: Kiedy zasłania
+  import_error: Nie udało się zaimportować elementów paska zadań
+  import_from_taskbar:
+    button: Importuj z paska zadań systemu Windows
+    label: Importuj przypięte elementy
+  import_no_items: Nie znaleziono przypiętych elementów na pasku zadań systemu Windows
+  import_success: Pomyślnie zaimportowano elementy ({{count}}) z paska zadań systemu Windows
   items:
     gap: Przerwa między elementami
     label: Elementy
@@ -451,6 +464,10 @@ wm:
   drag_behavior_options:
     sort: Sortuj (zmieniaj kolejność okien podczas przeciągania)
     swap: Zamień (zamień okna po przeciągnięciu)
+  floating:
+    height: Wysokość ruchomego okna
+    title: Pływający rozmiar systemu Windows
+    width: Zmienna szerokość okna
   layout: Układ
   resize_delta: Delta rozmiaru (%)
   space_between_containers: Przestrzeń między oknami

@@ -269,14 +269,21 @@ shortcuts:
     klientu
   labels:
     create_new_workspace: Izveidojiet jaunu darbvietu
+    create_new_workspace_row: Izveidojiet jaunu darbvietas rindu
     destroy_current_workspace: Iznīcināt pašreizējo darbvietu
     misc_force_quit: Spēks atmest
     misc_force_restart: Piespiedu restartēšana
     move_to_workspace: Pārvietojieties uz darbvietu {{0}}
     pause_toggle: Pārtraukt/Atsākt saīsnes
+    send_to_next_workspace: Nosūtīt logu uz nākamo darbvietu
+    send_to_previous_workspace: Sūtīt logu uz iepriekšējo darbvietu
     send_to_workspace: Nosūtīt uz darbvietu {{0}}
+    send_to_workspace_down: Nosūtiet logu uz zemāk esošo darbvietu
+    send_to_workspace_up: Nosūtīt logu uz darbvietu iepriekš
     switch_to_next_workspace: Pārslēdzieties uz nākamo darbvietu
     switch_to_previous_workspace: Pārslēdzieties uz iepriekšējo darbvietu
+    switch_to_workspace_down: Pārslēdzieties uz tālāk redzamo darbvietu
+    switch_to_workspace_up: Pārslēdzieties uz darbvietu augšpusē
     switch_workspace: Pārslēdzieties uz darbvietu {{0}}
   readonly_tooltip: Tas ir tikai lasāms saīsne
   reset: Atiestatīt uz noklusējuma
@@ -379,6 +386,12 @@ weg:
     always: Vienmēr
     never: Nekad
     on_overlap: Uz pārklāšanās
+  import_error: Neizdevās importēt uzdevumjoslas vienumus
+  import_from_taskbar:
+    button: Importēt no Windows uzdevumjoslas
+    label: Importēt piespraustos vienumus
+  import_no_items: Windows uzdevumjoslā nav atrasts neviens piesprausts vienums
+  import_success: "No Windows uzdevumjoslas veiksmīgi importēts(-i) {{count}}\_vienums(-i)."
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
@@ -440,6 +453,10 @@ wm:
   drag_behavior_options:
     sort: Kārtot (pārkārtot logus, velkot)
     swap: Apmainīt (apmainīt logus vilkšanas beigās)
+  floating:
+    height: Peldošs logu augstums
+    title: Peldošais Windows izmērs
+    width: Peldošs logu platums
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)
   space_between_containers: Telpa starp konteineriem

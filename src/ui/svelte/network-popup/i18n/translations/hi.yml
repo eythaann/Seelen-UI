@@ -5,6 +5,15 @@ connecting: कनेक्ट हो रहा है...
 disconnect: डिस्कनेक्ट
 forget: भूल जाओ
 hidden: छिपा हुआ नेटवर्क
+hotspot:
+  band: बैंड
+  'off': बंद
+  'on': पर
+  open_network: नेटवर्क खोलें
+  password: पासवर्ड
+  settings: अधिक हॉटस्पॉट सेटिंग्स
+  ssid: नेटवर्क का नाम
+  title: हॉटस्पॉट
 more: अधिक नेटवर्क सेटिंग्स
 no_adapter: कोई वाई-फ़ाई एडाप्टर नहीं मिला
 not_found: कोई वाई-फ़ाई नेटवर्क नहीं मिला

@@ -271,14 +271,21 @@ shortcuts:
     інтерфейсу SEELEN
   labels:
     create_new_workspace: Створіть нову робочу область
+    create_new_workspace_row: Створити новий рядок робочої області
     destroy_current_workspace: Знищити поточну робочу область
     misc_force_quit: Сила кинути
     misc_force_restart: Примусовий перезапуск
     move_to_workspace: Перемістіть до робочої області {{0}}
     pause_toggle: Призупинити/відновити ярлики
+    send_to_next_workspace: Надіслати вікно до наступної робочої області
+    send_to_previous_workspace: Надіслати вікно до попередньої робочої області
     send_to_workspace: Надіслати на робочу область {{0}}
+    send_to_workspace_down: Надіслати вікно в робочу область нижче
+    send_to_workspace_up: Надіслати вікно в робочу область вище
     switch_to_next_workspace: Перейдіть на наступну робочу область
     switch_to_previous_workspace: Перехід на попередню робочу область
+    switch_to_workspace_down: Перейдіть до робочої області нижче
+    switch_to_workspace_up: Перейдіть до робочої області вище
     switch_workspace: Переключення на робочу область {{0}}
   readonly_tooltip: Це ярлик лише для читання
   reset: Скидання за замовчуванням
@@ -383,6 +390,12 @@ weg:
     always: Завжди
     never: Ніколи
     on_overlap: При перекритті
+  import_error: Не вдалося імпортувати елементи панелі завдань
+  import_from_taskbar:
+    button: Імпортувати з панелі завдань Windows
+    label: Імпорт закріплених елементів
+  import_no_items: На панелі завдань Windows не знайдено закріплених елементів
+  import_success: Успішно імпортовано {{count}} елемент(ів) із панелі завдань Windows
   items:
     gap: Проміжок між піктограмами
     label: Піктограми
@@ -447,6 +460,10 @@ wm:
   drag_behavior_options:
     sort: Сортування (зміна порядку вікон під час перетягування)
     swap: Swap (міняти місцями вікна на кінці перетягування)
+  floating:
+    height: Плаваюча висота вікон
+    title: Плаваючий розмір вікна
+    width: Плаваюча ширина вікна
   layout: Макет
   resize_delta: Змінити розмір дельти (%)
   space_between_containers: Простір між вікнами

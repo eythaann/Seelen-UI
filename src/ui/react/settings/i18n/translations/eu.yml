@@ -271,14 +271,21 @@ shortcuts:
     baduzu
   labels:
     create_new_workspace: Sortu laneko espazioa berria
+    create_new_workspace_row: Sortu lan-eremuaren errenkada berria
     destroy_current_workspace: Destroy uneko lan-eremua
     misc_force_quit: Behartu irten
     misc_force_restart: Indarra berrabiarazi
     move_to_workspace: Mugitu lan-eremura {{0}}
     pause_toggle: Pausatu/Berrekin lasterbideak
+    send_to_next_workspace: Bidali leihoa hurrengo lan-eremura
+    send_to_previous_workspace: Bidali leihoa aurreko lan-eremura
     send_to_workspace: Bidali lantokiari {{0}}
+    send_to_workspace_down: Bidali leihoa beheko lan-eremura
+    send_to_workspace_up: Bidali leihoa goiko laneko eremura
     switch_to_next_workspace: Aldatu hurrengo lantokira
     switch_to_previous_workspace: Aldatu aurreko lan-eremura
+    switch_to_workspace_down: Aldatu beheko lan-eremura
+    switch_to_workspace_up: Aldatu Goiko lan-eremura
     switch_workspace: Aldatu lan-eremura {{0}}
   readonly_tooltip: Hau irakurtzeko lasterbidea da
   reset: Berrezarri lehenetsitakoak
@@ -379,6 +386,12 @@ weg:
     always: Beti
     never: Inoiz ez
     on_overlap: Gainjartzean
+  import_error: Ezin izan dira ataza-barrako elementuak inportatu
+  import_from_taskbar:
+    button: Inportatu Windows ataza-barratik
+    label: Inportatu ainguratutako elementuak
+  import_no_items: Ez da ainguratutako elementurik aurkitu Windows ataza-barran
+  import_success: Windows ataza-barratik {{count}} elementu behar bezala inportatu dira
   items:
     gap: Elementuen arteko espazioa
     label: Manatu
@@ -442,6 +455,10 @@ wm:
   drag_behavior_options:
     sort: Ordenatu (berrantolatu leihoak arrastatu bitartean)
     swap: Trukatu (trukatu leihoak arrastatu amaieran)
+  floating:
+    height: Leihoen altuera flotagarria
+    title: Mugikorreko Windows Tamaina
+    width: Leihoen zabalera flotagarria
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)
   space_between_containers: Edukiontzien arteko espazioa

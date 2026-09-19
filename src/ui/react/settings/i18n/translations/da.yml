@@ -268,14 +268,21 @@ shortcuts:
     Seelen UI Client
   labels:
     create_new_workspace: Opret et nyt arbejdsområde
+    create_new_workspace_row: Opret ny arbejdsområderække
     destroy_current_workspace: Ødelæg det nuværende arbejdsområde
     misc_force_quit: Force stopper
     misc_force_restart: Fremtving genstart
     move_to_workspace: Flyt til arbejdsområde {{0}}
     pause_toggle: Pause/Genoptag genveje
+    send_to_next_workspace: Send vindue til næste arbejdsområde
+    send_to_previous_workspace: Send vindue til forrige arbejdsområde
     send_to_workspace: Send til arbejdsområde {{0}}
+    send_to_workspace_down: Send vindue til arbejdsområde nedenfor
+    send_to_workspace_up: Send vindue til arbejdsområde ovenfor
     switch_to_next_workspace: Skift til næste arbejdsområde
     switch_to_previous_workspace: Skift til forrige arbejdsområde
+    switch_to_workspace_down: Skift til Workspace nedenfor
+    switch_to_workspace_up: Skift til Workspace ovenfor
     switch_workspace: Skift til arbejdsområde {{0}}
   readonly_tooltip: Dette er en skrivebeskyttet genvej
   reset: Nulstil til standardindstillinger
@@ -376,6 +383,12 @@ weg:
     always: Altid
     never: Aldrig
     on_overlap: På overlapning
+  import_error: Kunne ikke importere proceslinjeelementer
+  import_from_taskbar:
+    button: Importer fra Windows proceslinje
+    label: Importer fastgjorte elementer
+  import_no_items: Der blev ikke fundet nogen fastgjorte elementer på proceslinjen i Windows
+  import_success: '{{count}} emne(r) blev importeret fra proceslinjen i Windows'
   items:
     gap: Rum mellem genstande
     label: Genstande
@@ -438,6 +451,10 @@ wm:
   drag_behavior_options:
     sort: Sorter (omarranger vinduer, mens du trækker)
     swap: Swap (byt vinduer ved træk-enden)
+  floating:
+    height: Flydende vindueshøjde
+    title: Flydende vinduesstørrelse
+    width: Flydende vinduesbredde
   layout: Layout
   resize_delta: Ændre størrelse på Delta (%)
   space_between_containers: Rum mellem containere

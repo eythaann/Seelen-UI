@@ -5,6 +5,15 @@ connecting: Se conectează...
 disconnect: Deconecta
 forget: Uita
 hidden: Rețea ascunsă
+hotspot:
+  band: Bandă
+  'off': Oprit
+  'on': Pe
+  open_network: Rețea deschisă
+  password: Parolă
+  settings: Mai multe setări hotspot
+  ssid: Numele rețelei
+  title: Hotspot
 more: Mai multe setări de rețea
 no_adapter: Nu a fost găsit niciun adaptor Wi-Fi
 not_found: Nu au fost găsite rețele Wi-Fi

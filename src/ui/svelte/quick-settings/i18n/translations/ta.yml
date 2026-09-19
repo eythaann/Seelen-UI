@@ -1,4 +1,15 @@
 app_settings: பயன்பாட்டு அமைப்புகள்
+brightness: பிரகாசம்
+dark_mode: இருண்ட பயன்முறை
+default_multimedia_volume: இயல்புநிலை மல்டிமீடியா தொகுதி
 disabled: முடக்கப்பட்டது
 enabled: இயக்கப்பட்டது
+eye_care: கண் பராமரிப்பு
+fm_radio: FM வானொலி
+hdr: உயர் டைனமிக் வரம்பு
+hotspot: ஹாட்ஸ்பாட்
+light_mode: ஒளி முறை
+mobile_broadband: மொபைல் பிராட்பேண்ட்
+night_light: இரவு விளக்கு
 power: சக்தி
+unknown: தெரியவில்லை

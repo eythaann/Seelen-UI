@@ -274,14 +274,21 @@ shortcuts:
     на клиента на Seelen UI
   labels:
     create_new_workspace: Създайте ново работно пространство
+    create_new_workspace_row: Създайте нов ред на работното пространство
     destroy_current_workspace: Унищожете текущото работно пространство
     misc_force_quit: Силата напусна
     misc_force_restart: Принудително рестартиране
     move_to_workspace: Преместете се в работно пространство {{0}}
     pause_toggle: Преки пътища за пауза/възобновяване
+    send_to_next_workspace: Изпращане на прозорец към следващото работно пространство
+    send_to_previous_workspace: Изпращане на прозорец към предишното работно пространство
     send_to_workspace: Изпратете в Workspace {{0}}
+    send_to_workspace_down: Изпратете прозорец към работното пространство по-долу
+    send_to_workspace_up: Изпращане на прозорец към работното пространство по-горе
     switch_to_next_workspace: Превключете към следващото работно пространство
     switch_to_previous_workspace: Превключете към предишното работно пространство
+    switch_to_workspace_down: Превключете към работното пространство по-долу
+    switch_to_workspace_up: Превключете към работното пространство отгоре
     switch_workspace: Превключете в работно пространство {{0}}
   readonly_tooltip: Това е пряк път само за четене
   reset: Нулирайте по подразбиране
@@ -384,6 +391,12 @@ weg:
     always: Винаги
     never: Никога
     on_overlap: При припокриване
+  import_error: Неуспешно импортиране на елементи от лентата на задачите
+  import_from_taskbar:
+    button: Импортиране от лентата на задачите на Windows
+    label: Импортиране на фиксирани елементи
+  import_no_items: Няма намерени фиксирани елементи в лентата на задачите на Windows
+  import_success: Успешно импортирани {{count}} елемент(а) от лентата на задачите на Windows
   items:
     gap: Пространство между артикулите
     label: Елементи
@@ -448,6 +461,10 @@ wm:
   drag_behavior_options:
     sort: Сортиране (пренареждане на прозорците при плъзгане)
     swap: Размяна (размяна на прозорци при плъзгане)
+  floating:
+    height: Плаваща височина на Windows
+    title: Плаващ размер на Windows
+    width: Ширина на плаващ прозорец
   layout: Оформление
   resize_delta: Оразмерете делтата (%)
   space_between_containers: Пространство между контейнерите

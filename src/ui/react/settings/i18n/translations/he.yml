@@ -254,14 +254,21 @@ shortcuts:
   enable_tooltip: השבת אם תיישם מערכת קיצורי דרך משלך באמצעות לקוח ממשק המשתמש של Seelen
   labels:
     create_new_workspace: צור סביבת עבודה חדשה
+    create_new_workspace_row: צור שורת סביבת עבודה חדשה
     destroy_current_workspace: להרוס את סביבת העבודה הנוכחית
     misc_force_quit: כוח התפטר
     misc_force_restart: הכוח להפעיל מחדש
     move_to_workspace: עברו לסביבת עבודה {{0}}
     pause_toggle: השהה/המשך קיצורי דרך
+    send_to_next_workspace: שלח חלון לסביבת העבודה הבאה
+    send_to_previous_workspace: שלח חלון לסביבת העבודה הקודמת
     send_to_workspace: שלח לסביבת עבודה {{0}}
+    send_to_workspace_down: שלח חלון לסביבת העבודה למטה
+    send_to_workspace_up: שלח חלון לסביבת העבודה למעלה
     switch_to_next_workspace: עבור לסביבת העבודה הבאה
     switch_to_previous_workspace: עבור לסביבת העבודה הקודמת
+    switch_to_workspace_down: עבור אל סביבת העבודה למטה
+    switch_to_workspace_up: עבור אל סביבת העבודה למעלה
     switch_workspace: עברו לסביבת עבודה {{0}}
   readonly_tooltip: זהו קיצור דרך לקריאה בלבד
   reset: אפס לברירות מחדל
@@ -360,6 +367,12 @@ weg:
     always: תָמִיד
     never: לעולם לא
     on_overlap: על חפיפה
+  import_error: ייבוא ​​פריטי שורת המשימות נכשל
+  import_from_taskbar:
+    button: ייבא משורת המשימות של Windows
+    label: ייבוא ​​פריטים מוצמדים
+  import_no_items: לא נמצאו פריטים מוצמדים בשורת המשימות של Windows
+  import_success: '{{count}} פריטים יובאו בהצלחה משורת המשימות של Windows'
   items:
     gap: רווח בין פריטים
     label: פריטים
@@ -422,6 +435,10 @@ wm:
   drag_behavior_options:
     sort: מיון (סדר מחדש את החלונות תוך כדי גרירה)
     swap: החלפה (החלפה של חלונות בקצה הגרירה)
+  floating:
+    height: גובה חלונות צף
+    title: גודל חלונות צף
+    width: רוחב חלונות צף
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)
   space_between_containers: רווח בין מיכלים

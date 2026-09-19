@@ -1,4 +1,15 @@
 app_settings: Appinnstillinger
+brightness: Lysstyrke
+dark_mode: Mørk modus
+default_multimedia_volume: Standard multimedievolum
 disabled: Funksjonshemmet
 enabled: Aktivert
+eye_care: Øyepleie
+fm_radio: FM-radio
+hdr: Høyt dynamisk område
+hotspot: Hotspot
+light_mode: Lysmodus
+mobile_broadband: Mobilt bredbånd
+night_light: Nattlys
 power: Makt
+unknown: Ukjent

@@ -1,4 +1,15 @@
 app_settings: アプリの設定
+brightness: 輝度
+dark_mode: ダークモード
+default_multimedia_volume: デフォルトのマルチメディア ボリューム
 disabled: 無効
 enabled: 有効
+eye_care: 目のケア
+fm_radio: FMラジオ
+hdr: ハイダイナミックレンジ
+hotspot: ホットスポット
+light_mode: ライトモード
+mobile_broadband: モバイルブロードバンド
+night_light: ナイトライト
 power: 力
+unknown: 未知

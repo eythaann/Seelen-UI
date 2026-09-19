@@ -1,4 +1,15 @@
 app_settings: Impostazioni dell'app
+brightness: Luminosità
+dark_mode: Modalità oscura
+default_multimedia_volume: Volume multimediale predefinito
 disabled: Disabilitata
 enabled: Abilitata
+eye_care: Cura degli occhi
+fm_radio: Radio FM
+hdr: Gamma dinamica elevata
+hotspot: Punto caldo
+light_mode: Modalità luce
+mobile_broadband: Banda larga mobile
+night_light: Luce notturna
 power: Energia
+unknown: Sconosciuta

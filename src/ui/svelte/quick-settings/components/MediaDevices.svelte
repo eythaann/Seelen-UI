@@ -3,6 +3,7 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
   import { throttle } from "lodash";
+  import { t } from "../i18n";
 
   let defaultOutput = $derived(state.mediaOutputs.find((d) => d.isDefaultMultimedia));
   let defaultInput = $derived(state.mediaInputs.find((d) => d.isDefaultMultimedia));
@@ -21,7 +22,7 @@
 </script>
 
 {#if defaultInput || defaultOutput}
-  <span class="quick-settings-label">Default Multimedia Volume</span>
+  <span class="quick-settings-label">{$t("default_multimedia_volume")}</span>
 {/if}
 
 {#if defaultOutput}

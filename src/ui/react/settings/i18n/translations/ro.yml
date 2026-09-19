@@ -275,14 +275,21 @@ shortcuts:
     clientul UI Seelen
   labels:
     create_new_workspace: Creați un spațiu de lucru nou
+    create_new_workspace_row: Creați un nou rând de spațiu de lucru
     destroy_current_workspace: Distrugeți spațiul de lucru actual
     misc_force_quit: Forța a renunțat
     misc_force_restart: Forțați repornirea
     move_to_workspace: Treceți la Workspace {{0}}
     pause_toggle: Întrerupeți/Reluați comenzile rapide
+    send_to_next_workspace: Trimiteți fereastra la următorul spațiu de lucru
+    send_to_previous_workspace: Trimiteți fereastra în spațiul de lucru anterior
     send_to_workspace: Trimiteți la Workspace {{0}}
+    send_to_workspace_down: Trimiteți fereastra la spațiul de lucru de mai jos
+    send_to_workspace_up: Trimiteți fereastra în spațiul de lucru de mai sus
     switch_to_next_workspace: Treceți la următorul spațiu de lucru
     switch_to_previous_workspace: Treceți la spațiul de lucru anterior
+    switch_to_workspace_down: Comutați la spațiul de lucru de mai jos
+    switch_to_workspace_up: Comutați la spațiul de lucru de mai sus
     switch_workspace: Treceți la Workspace {{0}}
   readonly_tooltip: Aceasta este o scurtătură numai pentru citire
   reset: Resetați la valorile implicite
@@ -383,6 +390,12 @@ weg:
     always: Întotdeauna
     never: Nu
     on_overlap: Pe suprapunere
+  import_error: Nu s-au putut importa elementele din bara de activități
+  import_from_taskbar:
+    button: Importați din bara de activități Windows
+    label: Importați elemente fixate
+  import_no_items: Nu s-au găsit elemente fixate în bara de activități Windows
+  import_success: S-au importat {{count}} articole din bara de activități Windows
   items:
     gap: Spațiu între articole
     label: Articole
@@ -447,6 +460,10 @@ wm:
   drag_behavior_options:
     sort: Sortare (reordonează ferestrele în timp ce trageți)
     swap: Schimbați (schimbați ferestrele la capătul de tragere)
+  floating:
+    height: Înălțimea ferestrelor plutitoare
+    title: Dimensiunea ferestrelor plutitoare
+    width: Lățimea ferestrelor plutitoare
   layout: Aspect
   resize_delta: Redimensionați delta (%)
   space_between_containers: Spațiu între containere

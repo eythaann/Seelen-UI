@@ -278,14 +278,21 @@ shortcuts:
     leedahay adiga oo adeegsanaya macmiilka SELEN UI
   labels:
     create_new_workspace: Abuuro shaqooyin cusub
+    create_new_workspace_row: Samee saf cusub oo goobta shaqada
     destroy_current_workspace: Burburinta goobta shaqada ee hadda jirta
     misc_force_quit: Xoog ku jooji
     misc_force_restart: Xoogga dib u bilow
     move_to_workspace: U dhaqaaq goobta shaqada {0}}
     pause_toggle: Hakis/Bilow Wadooyinka Gaaban
+    send_to_next_workspace: U dir daaqada goobta shaqada ee xigta
+    send_to_previous_workspace: U dir daaqada goobta shaqada ee hore
     send_to_workspace: U dir goobta shaqada {{0}}
+    send_to_workspace_down: U dir daaqada goobta shaqada ee hoose
+    send_to_workspace_up: U dir daaqada goobta shaqada ee sare
     switch_to_next_workspace: U beddelo goobta shaqada ee xiga
     switch_to_previous_workspace: U beddelo shaqooyin hore
+    switch_to_workspace_down: U beddelo goobta shaqada ee hoose
+    switch_to_workspace_up: U beddelo goobta shaqada ee sare
     switch_workspace: U beddelo goobta shaqada {{0}}
   readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
   reset: Dib u dejiso defafyada
@@ -386,6 +393,12 @@ weg:
     always: Had iyo jeer
     never: Marna
     on_overlap: Isku dhafka
+  import_error: Ku guul daraystay soo dejinta shayada bar taskbar
+  import_from_taskbar:
+    button: Ka soo daji Windows Taskbar
+    label: Soo daji Walxaha Ku xidhan
+  import_no_items: Wax qabad la'aan lagama helin Windows taskbar
+  import_success: Si guul leh looga soo dejiyay {{count}} shay(yada) ee Windows taskbar
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
@@ -450,6 +463,10 @@ wm:
   drag_behavior_options:
     sort: Kala sooc (dib u hagaaji daaqadaha markaad jiidanayso)
     swap: Isku beddel (ku beddel daaqadaha dhamaadka jiida)
+  floating:
+    height: Dhererka Daaqadaha sabbaynaya
+    title: Cabbirka Daaqadaha sabbaynaya
+    width: Balaadhka Daaqadaha sabbaynaya
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka

@@ -5,6 +5,15 @@ connecting: Isku xidhka...
 disconnect: Xiriirka ka jar
 forget: Iska ilow
 hidden: Shabakadda Qarsoon
+hotspot:
+  band: Kooxda
+  'off': Demin
+  'on': Daar
+  open_network: Shabakadda fur
+  password: Furaha
+  settings: Meelo badan oo Hotspot ah
+  ssid: Magaca shabakada
+  title: Hotspot
 more: Dejinta Shabakad badan
 no_adapter: Lama helin adabtarada Wi-Fi
 not_found: Lama helin shabakadaha Wi-Fi

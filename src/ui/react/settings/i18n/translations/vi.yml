@@ -269,14 +269,21 @@ shortcuts:
     ứng dụng UI Seelen
   labels:
     create_new_workspace: Tạo không gian làm việc mới
+    create_new_workspace_row: Tạo hàng không gian làm việc mới
     destroy_current_workspace: Phá hủy không gian làm việc hiện tại
     misc_force_quit: BẮT ĐẦU
     misc_force_restart: Bắt đầu lại
     move_to_workspace: Di chuyển đến không gian làm việc {{0}}
     pause_toggle: Phím tắt tạm dừng/tiếp tục
+    send_to_next_workspace: Gửi cửa sổ tới không gian làm việc tiếp theo
+    send_to_previous_workspace: Gửi cửa sổ tới không gian làm việc trước đó
     send_to_workspace: Gửi đến không gian làm việc {{0}}
+    send_to_workspace_down: Gửi cửa sổ đến không gian làm việc bên dưới
+    send_to_workspace_up: Gửi cửa sổ tới không gian làm việc ở trên
     switch_to_next_workspace: Chuyển sang không gian làm việc tiếp theo
     switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
+    switch_to_workspace_down: Chuyển sang Không gian làm việc bên dưới
+    switch_to_workspace_up: Chuyển sang Không gian làm việc ở trên
     switch_workspace: Chuyển sang không gian làm việc {{0}}
   readonly_tooltip: Đây là một lối tắt chỉ đọc
   reset: Đặt lại về mặc định
@@ -377,6 +384,12 @@ weg:
     always: Luôn luôn
     never: Không bao giờ
     on_overlap: Trên sự chồng chéo
+  import_error: Không thể nhập các mục trên thanh tác vụ
+  import_from_taskbar:
+    button: Nhập từ Thanh tác vụ Windows
+    label: Nhập các mục đã ghim
+  import_no_items: Không tìm thấy mục nào được ghim trên thanh tác vụ Windows
+  import_success: Đã nhập thành công {{count}} mục từ thanh tác vụ Windows
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
@@ -440,6 +453,10 @@ wm:
   drag_behavior_options:
     sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
     swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
+  floating:
+    height: Chiều cao Windows nổi
+    title: Kích thước cửa sổ nổi
+    width: Chiều rộng cửa sổ nổi
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container

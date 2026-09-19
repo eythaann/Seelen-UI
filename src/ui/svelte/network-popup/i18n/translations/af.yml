@@ -5,6 +5,15 @@ connecting: Koppel tans …
 disconnect: Ontkoppel
 forget: Vergeet
 hidden: Versteekte netwerk
+hotspot:
+  band: Band
+  'off': Af
+  'on': Aan
+  open_network: Oop netwerk
+  password: Wagwoord
+  settings: Meer Hotspot-instellings
+  ssid: Netwerk naam
+  title: Warmkol
 more: Meer netwerkinstellings
 no_adapter: Geen Wi-Fi-adapter gevind nie
 not_found: Geen Wi-Fi-netwerke gevind nie

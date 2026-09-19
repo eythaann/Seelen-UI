@@ -270,14 +270,21 @@ shortcuts:
     devre dışı bırakın
   labels:
     create_new_workspace: Yeni çalışma alanı oluşturun
+    create_new_workspace_row: Yeni Çalışma Alanı Satırı Oluştur
     destroy_current_workspace: Mevcut çalışma alanını yok et
     misc_force_quit: Çıkarma
     misc_force_restart: Yeniden Başlatmaya Zorla
     move_to_workspace: Çalışma Alanına Taşın {{0}}
     pause_toggle: Duraklatma/Devam Etme Kısayolları
+    send_to_next_workspace: Pencereyi Sonraki Çalışma Alanına Gönder
+    send_to_previous_workspace: Pencereyi Önceki Çalışma Alanına Gönder
     send_to_workspace: Çalışma Alanına Gönder {{0}}
+    send_to_workspace_down: Pencereyi Aşağıdaki Çalışma Alanına Gönder
+    send_to_workspace_up: Pencereyi Yukarıdaki Çalışma Alanına Gönder
     switch_to_next_workspace: Sonraki çalışma alanına geçin
     switch_to_previous_workspace: Önceki çalışma alanına geçin
+    switch_to_workspace_down: Aşağıdaki Çalışma Alanına Geçin
+    switch_to_workspace_up: Yukarıdaki Çalışma Alanına Geç
     switch_workspace: Çalışma alanına geç {{0}}
   readonly_tooltip: Bu salt okunur bir kısayol
   reset: Varsayılanlara sıfırlayın
@@ -380,6 +387,12 @@ weg:
     always: Her zaman
     never: Asla
     on_overlap: Üst üste binme durumunda
+  import_error: Görev çubuğu öğeleri içe aktarılamadı
+  import_from_taskbar:
+    button: Windows Görev Çubuğundan içe aktar
+    label: Sabitlenmiş Öğeleri İçe Aktar
+  import_no_items: Windows görev çubuğunda sabitlenmiş öğe bulunamadı
+  import_success: '{{count}} öğe Windows görev çubuğundan başarıyla içe aktarıldı'
   items:
     gap: Öğeler Arası Boşluk
     label: Öğeler
@@ -444,6 +457,10 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürüklerken pencereleri yeniden sıralayın)
     swap: Değiştir (sürükleme ucunda pencereleri değiştir)
+  floating:
+    height: Yüzer Pencere Yüksekliği
+    title: Yüzen Pencere Boyutu
+    width: Yüzen Pencere Genişliği
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)
   space_between_containers: Konteynerler Arası Boşluk

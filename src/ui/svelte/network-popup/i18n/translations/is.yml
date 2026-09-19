@@ -5,6 +5,15 @@ connecting: Tengist...
 disconnect: Aftengdu
 forget: Gleymdu
 hidden: Falið net
+hotspot:
+  band: Hljómsveit
+  'off': Slökkt
+  'on': Á
+  open_network: Opið net
+  password: Lykilorð
+  settings: Fleiri netstillingar
+  ssid: Nafn nets
+  title: Hotspot
 more: Fleiri netstillingar
 no_adapter: Enginn Wi-Fi millistykki fannst
 not_found: Ekkert Wi-Fi net fannst

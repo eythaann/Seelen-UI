@@ -228,14 +228,21 @@ shortcuts:
   enable_tooltip: 如果您使用 Seelen UI 客户端实现自己的快捷键系统，那么请禁用此项。
   labels:
     create_new_workspace: 创建工作区
+    create_new_workspace_row: 创建新的工作区行
     destroy_current_workspace: 销毁当前工作区
     misc_force_quit: 强制退出
     misc_force_restart: 强制重启
     move_to_workspace: 移动到工作区 {{0}}
     pause_toggle: 暂停/恢复快捷方式
+    send_to_next_workspace: 将窗口发送到下一个工作区
+    send_to_previous_workspace: 将窗口发送到上一个工作区
     send_to_workspace: 发送到工作区 {{0}}
+    send_to_workspace_down: 将窗口发送到下面的工作区
+    send_to_workspace_up: 将窗口发送到上面的工作区
     switch_to_next_workspace: 切换到下一个工作区
     switch_to_previous_workspace: 切换到先前的工作区
+    switch_to_workspace_down: 切换到下面的工作区
+    switch_to_workspace_up: 切换到上面的工作区
     switch_workspace: 切换到工作区 {{0}}
   readonly_tooltip: 此为只读的快捷键
   reset: 重置为默认值
@@ -334,6 +341,12 @@ weg:
     always: 总是
     never: 从不
     on_overlap: 重叠时
+  import_error: 无法导入任务栏项目
+  import_from_taskbar:
+    button: 从 Windows 任务栏导入
+    label: 导入固定项目
+  import_no_items: 在 Windows 任务栏中找不到固定项目
+  import_success: 已成功从 Windows 任务栏导入 {{count}} 项
   items:
     gap: 项目间间距
     label: 项目
@@ -393,6 +406,10 @@ wm:
   drag_behavior_options:
     sort: 排序（拖动时重新排序窗口）
     swap: 交换（在拖动端交换窗口）
+  floating:
+    height: 浮动窗口高度
+    title: 浮动窗口大小
+    width: 浮动窗口宽度
   layout: 布局
   resize_delta: 调整大小增量（%）
   space_between_containers: 容器间间距

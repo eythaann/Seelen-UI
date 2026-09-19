@@ -1,4 +1,15 @@
 app_settings: Nastavení aplikace
+brightness: Jas
+dark_mode: Tmavý režim
+default_multimedia_volume: Výchozí hlasitost multimédií
 disabled: Zakázáno
 enabled: Povoleno
+eye_care: Oční péče
+fm_radio: FM rádio
+hdr: Vysoký dynamický rozsah
+hotspot: Hotspot
+light_mode: Světelný režim
+mobile_broadband: Mobilní širokopásmové připojení
+night_light: Noční světlo
 power: Moc
+unknown: Neznámý

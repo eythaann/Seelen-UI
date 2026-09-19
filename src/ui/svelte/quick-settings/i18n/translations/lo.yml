@@ -1,4 +1,15 @@
 app_settings: ການຕັ້ງຄ່າແອັບ
+brightness: ຄວາມສະຫວ່າງ
+dark_mode: ໂໝດມືດ
+default_multimedia_volume: ລະດັບສຽງມັນຕິມີເດຍເລີ່ມຕົ້ນ
 disabled: ຄົນພິການ
 enabled: ເປີດໃຊ້ແລ້ວ
+eye_care: ບຳລຸງສາຍຕາ
+fm_radio: ວິທະຍຸ FM
+hdr: ຊ່ວງໄດນາມິກສູງ
+hotspot: ຮັອດສະປອດ
+light_mode: ໂໝດແສງ
+mobile_broadband: ບຣອດແບນມືຖື
+night_light: ແສງກາງຄືນ
 power: ພະລັງງານ
+unknown: ບໍ່ຮູ້ຈັກ

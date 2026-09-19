@@ -1,10 +1,15 @@
 app_settings: App Settings
-hotspot: Hotspot
-hdr: High Dynamic Range
-light_mode: Light Mode
+brightness: Brightness
 dark_mode: Dark Mode
-night_light: Night Light
-eye_care: Eye Care
+default_multimedia_volume: Default Multimedia Volume
 disabled: Disabled
 enabled: Enabled
+eye_care: Eye Care
+fm_radio: FM Radio
+hdr: High Dynamic Range
+hotspot: Hotspot
+light_mode: Light Mode
+mobile_broadband: Mobile Broadband
+night_light: Night Light
 power: Power
+unknown: Unknown

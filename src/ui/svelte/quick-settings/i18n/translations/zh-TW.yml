@@ -1,4 +1,15 @@
 app_settings: 應用程式設定
+brightness: 亮度
+dark_mode: 深色模式
+default_multimedia_volume: 預設多媒體音量
 disabled: 停用
 enabled: 啟用
+eye_care: 眼部護理
+fm_radio: 調頻收音機
+hdr: 高動態範圍
+hotspot: 熱點
+light_mode: 燈光模式
+mobile_broadband: 行動寬頻
+night_light: 夜燈
 power: 電源
+unknown: 未知

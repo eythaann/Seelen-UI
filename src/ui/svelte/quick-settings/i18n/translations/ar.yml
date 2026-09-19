@@ -1,4 +1,15 @@
 app_settings: إعدادات التطبيق
+brightness: سطوع
+dark_mode: الوضع المظلم
+default_multimedia_volume: حجم الوسائط المتعددة الافتراضي
 disabled: عاجز
 enabled: ممكّن
+eye_care: العناية بالعيون
+fm_radio: راديو اف ام
+hdr: نطاق ديناميكي عالي
+hotspot: نقطة اتصال
+light_mode: وضع الضوء
+mobile_broadband: النطاق العريض المحمول
+night_light: ضوء الليل
 power: قوة
+unknown: مجهول

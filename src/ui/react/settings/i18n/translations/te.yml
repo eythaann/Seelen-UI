@@ -271,14 +271,21 @@ shortcuts:
     చేస్తే నిలిపివేయండి
   labels:
     create_new_workspace: క్రొత్త వర్క్‌స్పేస్‌ను సృష్టించండి
+    create_new_workspace_row: కొత్త కార్యస్థలం వరుసను సృష్టించండి
     destroy_current_workspace: ప్రస్తుత వర్క్‌స్పేస్‌ను నాశనం చేయండి
     misc_force_quit: ఫోర్స్ క్విట్
     misc_force_restart: ఫోర్స్ పున art ప్రారంభం
     move_to_workspace: వర్క్‌స్పేస్‌కు తరలించండి {{0}}
     pause_toggle: సత్వరమార్గాలను పాజ్/రెస్యూమ్ చేయండి
+    send_to_next_workspace: తదుపరి కార్యస్థలానికి విండోను పంపండి
+    send_to_previous_workspace: మునుపటి కార్యస్థలానికి విండోను పంపండి
     send_to_workspace: వర్క్‌స్పేస్‌కు పంపండి {{0}}
+    send_to_workspace_down: దిగువ కార్యస్థలానికి విండోను పంపండి
+    send_to_workspace_up: పైన ఉన్న కార్యస్థలానికి విండోను పంపండి
     switch_to_next_workspace: తదుపరి వర్క్‌స్పేస్‌కు మారండి
     switch_to_previous_workspace: మునుపటి వర్క్‌స్పేస్‌కు మారండి
+    switch_to_workspace_down: దిగువ వర్క్‌స్పేస్‌కి మారండి
+    switch_to_workspace_up: పైన వర్క్‌స్పేస్‌కి మారండి
     switch_workspace: వర్క్‌స్పేస్‌కు మారండి {{0}}
   readonly_tooltip: ఇది చదవడానికి మాత్రమే సత్వరమార్గం
   reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
@@ -381,6 +388,12 @@ weg:
     always: ఎల్లప్పుడూ
     never: ఎప్పుడూ
     on_overlap: అతివ్యాప్తిపై
+  import_error: టాస్క్‌బార్ అంశాలను దిగుమతి చేయడంలో విఫలమైంది
+  import_from_taskbar:
+    button: విండోస్ టాస్క్‌బార్ నుండి దిగుమతి చేయండి
+    label: పిన్ చేసిన వస్తువులను దిగుమతి చేయండి
+  import_no_items: Windows టాస్క్‌బార్‌లో పిన్ చేసిన అంశాలు ఏవీ కనుగొనబడలేదు
+  import_success: Windows టాస్క్‌బార్ నుండి {{count}} అంశం(లు) విజయవంతంగా దిగుమతి చేయబడింది
   items:
     gap: వస్తువుల మధ్య ఖాళీ
     label: వస్తువులు
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: క్రమబద్ధీకరించు (డ్రాగ్ చేస్తున్నప్పుడు విండోలను క్రమాన్ని మార్చండి)
     swap: స్వాప్ (డ్రాగ్ ఎండ్‌లో విండోలను స్వాప్ చేయండి)
+  floating:
+    height: ఫ్లోటింగ్ విండోస్ ఎత్తు
+    title: ఫ్లోటింగ్ విండోస్ పరిమాణం
+    width: ఫ్లోటింగ్ విండోస్ వెడల్పు
   layout: లేఅవుట్
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
   space_between_containers: కంటైనర్ల మధ్య ఖాళీ

@@ -5,6 +5,15 @@ connecting: Csatlakozás...
 disconnect: Leválasztás
 forget: Felejtsd el
 hidden: Rejtett hálózat
+hotspot:
+  band: Zenekar
+  'off': Le
+  'on': 'On'
+  open_network: Nyitott hálózat
+  password: Jelszó
+  settings: További hotspot beállítások
+  ssid: Hálózat neve
+  title: Hotspot
 more: További hálózati beállítások
 no_adapter: Nem található Wi-Fi adapter
 not_found: Nem található Wi-Fi hálózat

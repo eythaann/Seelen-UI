@@ -275,14 +275,21 @@ shortcuts:
     सिस्टम को लागू करेंगे
   labels:
     create_new_workspace: नया कार्यक्षेत्र बनाएं
+    create_new_workspace_row: नई कार्यस्थान पंक्ति बनाएँ
     destroy_current_workspace: वर्तमान कार्यक्षेत्र को नष्ट करें
     misc_force_quit: जबरन छोड़ना
     misc_force_restart: बल फिर से शुरू करना
     move_to_workspace: कार्यक्षेत्र {{0}} पर जाएं
     pause_toggle: शॉर्टकट रोकें/फिर से शुरू करें
+    send_to_next_workspace: विंडो को अगले कार्यस्थान पर भेजें
+    send_to_previous_workspace: पिछले कार्यस्थान पर विंडो भेजें
     send_to_workspace: कार्यक्षेत्र {{0}} को भेजें
+    send_to_workspace_down: नीचे कार्यस्थान पर विंडो भेजें
+    send_to_workspace_up: उपरोक्त कार्यस्थान पर विंडो भेजें
     switch_to_next_workspace: अगले कार्यक्षेत्र पर स्विच करें
     switch_to_previous_workspace: पिछले कार्यक्षेत्र पर स्विच करें
+    switch_to_workspace_down: नीचे कार्यस्थान पर स्विच करें
+    switch_to_workspace_up: ऊपर कार्यस्थान पर स्विच करें
     switch_workspace: कार्यक्षेत्र {{0}} पर स्विच करें
   readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
   reset: डिफ़ॉल्ट पर पुनः सेट करें
@@ -383,6 +390,12 @@ weg:
     always: हमेशा
     never: कभी नहीं
     on_overlap: ओवरलैप पर
+  import_error: टास्कबार आइटम आयात करने में विफल
+  import_from_taskbar:
+    button: विंडोज़ टास्कबार से आयात करें
+    label: पिन किए गए आइटम आयात करें
+  import_no_items: विंडोज़ टास्कबार में कोई पिन किया हुआ आइटम नहीं मिला
+  import_success: विंडोज़ टास्कबार से {{गिनती}} आइटम सफलतापूर्वक आयात किया गया
   items:
     gap: वस्तुओं के बीच का स्थान
     label: सामान
@@ -447,6 +460,10 @@ wm:
   drag_behavior_options:
     sort: क्रमबद्ध करें (खींचते समय विंडोज़ को पुनः व्यवस्थित करें)
     swap: स्वैप (ड्रैग एंड पर विंडोज़ स्वैप करें)
+  floating:
+    height: फ्लोटिंग विंडोज़ ऊँचाई
+    title: फ़्लोटिंग विंडोज़ आकार
+    width: फ़्लोटिंग विंडोज़ चौड़ाई
   layout: लेआउट
   resize_delta: डेल्टा का आकार बदलें (%)
   space_between_containers: कंटेनरों के बीच की जगह

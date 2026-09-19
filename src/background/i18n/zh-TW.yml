@@ -42,8 +42,8 @@ service:
 shortcut:
   conflicts:
     body: 某些快捷鍵已指派給多個操作，請重新指派它們。
-    dismiss: 解僱 #wrong
-    review: 審查 #wrong
+    dismiss: 解僱
+    review: 審查
     title: 偵測到快捷鍵衝突
   register:
     placeholder: 按下任意快捷鍵組合

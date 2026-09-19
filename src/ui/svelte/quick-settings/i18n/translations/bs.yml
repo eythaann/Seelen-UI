@@ -1,4 +1,15 @@
 app_settings: Postavke aplikacije
+brightness: Osvetljenost
+dark_mode: Dark Mode
+default_multimedia_volume: Zadana jačina zvuka multimedije
 disabled: Onemogućeno
 enabled: Omogućeno
+eye_care: Eye Care
+fm_radio: FM Radio
+hdr: Visoki dinamički opseg
+hotspot: Hotspot
+light_mode: Light Mode
+mobile_broadband: Mobile Broadband
+night_light: Night Light
 power: Snaga
+unknown: Nepoznato

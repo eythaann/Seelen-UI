@@ -5,6 +5,15 @@ connecting: 正在連接……
 disconnect: 中斷
 forget: 遺忘
 hidden: 隱藏網路
+hotspot:
+  band: 樂團
+  'off': 離開
+  'on': 在
+  open_network: 開放網路
+  password: 密碼
+  settings: 更多熱點設置
+  ssid: 網路名稱
+  title: 熱點
 more: 更多網路設定
 no_adapter: 找不到 Wi-Fi 轉接器
 not_found: 未找到 Wi-Fi 網路

@@ -269,14 +269,21 @@ shortcuts:
     keçirəcəksənsə deaktiv edin
   labels:
     create_new_workspace: Yeni iş sahəsi yaradın
+    create_new_workspace_row: Yeni İş sahəsi cərgəsi yaradın
     destroy_current_workspace: Cari iş sahəsini məhv edin
     misc_force_quit: Çıxmaq
     misc_force_restart: Güc yenidən başladın
     move_to_workspace: İş sahəsinə keçin {{0}}
     pause_toggle: Qısayolları dayandırın/davam edin
+    send_to_next_workspace: Pəncərəni Növbəti İş sahəsinə göndərin
+    send_to_previous_workspace: Pəncərəni Əvvəlki İş sahəsinə göndərin
     send_to_workspace: İş sahəsinə göndərin {{0}}
+    send_to_workspace_down: Pəncərəni Aşağıdakı İş sahəsinə göndərin
+    send_to_workspace_up: Pəncərəni yuxarıdakı iş sahəsinə göndərin
     switch_to_next_workspace: Növbəti iş sahəsinə keçin
     switch_to_previous_workspace: Əvvəlki iş sahəsinə keçin
+    switch_to_workspace_down: Aşağıdakı İş sahəsinə keçin
+    switch_to_workspace_up: Yuxarıdakı İş sahəsinə keçin
     switch_workspace: İş sahəsinə keçin {{0}}
   readonly_tooltip: Bu yalnız bir oxu qısa yoldur
   reset: Defoltlara yenidən qurun
@@ -377,6 +384,12 @@ weg:
     always: Həmişə
     never: Heç vaxt
     on_overlap: Üst-üstə düşür
+  import_error: Tapşırıq paneli elementlərini idxal etmək alınmadı
+  import_from_taskbar:
+    button: Windows tapşırıq çubuğundan idxal edin
+    label: Saxlanmış elementləri idxal edin
+  import_no_items: Windows tapşırıqlar panelində bərkidilmiş element tapılmadı
+  import_success: Windows tapşırıqlar panelindən {{count}} element (lər) uğurla import edildi
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr
@@ -439,6 +452,10 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürükləyərkən pəncərələri yenidən sırala)
     swap: Swap (sürük sonunda pəncərələri dəyişdirin)
+  floating:
+    height: Üzən Windows Hündürlüyü
+    title: Üzən Windows Ölçüsü
+    width: Üzən Windows Genişliyi
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)
   space_between_containers: Konteynerlər arasındakı boşluq

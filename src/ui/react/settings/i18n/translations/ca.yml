@@ -276,14 +276,21 @@ shortcuts:
     el client de la interfície d'usuari de Seelen
   labels:
     create_new_workspace: Creeu un espai de treball nou
+    create_new_workspace_row: Crea una fila d'espai de treball nova
     destroy_current_workspace: Destrueix l'espai de treball actual
     misc_force_quit: Força deixar de fumar
     misc_force_restart: Reinici de la força
     move_to_workspace: Desplaceu -vos a l'espai de treball {{0}}
     pause_toggle: Pausa/reprèn les dreceres
+    send_to_next_workspace: Envia la finestra a l'espai de treball següent
+    send_to_previous_workspace: Envia la finestra a l'espai de treball anterior
     send_to_workspace: Enviar a l'espai de treball {{0}}
+    send_to_workspace_down: Envia la finestra a l'espai de treball següent
+    send_to_workspace_up: Envia la finestra a l'espai de treball de dalt
     switch_to_next_workspace: Canvieu al següent espai de treball
     switch_to_previous_workspace: Canvieu a l'espai de treball anterior
+    switch_to_workspace_down: Canvia a l'espai de treball a continuació
+    switch_to_workspace_up: Canvia a l'espai de treball superior
     switch_workspace: Switch a Workspace {{0}}
   readonly_tooltip: Aquesta és una drecera de només lectura
   reset: Restableix als valors predeterminats
@@ -384,6 +391,14 @@ weg:
     always: Sempre
     never: Mai
     on_overlap: Sobre la superposició
+  import_error: No s'han pogut importar els elements de la barra de tasques
+  import_from_taskbar:
+    button: Importa des de la barra de tasques de Windows
+    label: Importa els elements fixats
+  import_no_items: No s'han trobat elements fixats a la barra de tasques de Windows
+  import_success: >-
+    S'han importat correctament {{count}} elements de la barra de tasques de
+    Windows
   items:
     gap: Espai entre articles
     label: Plantes
@@ -447,6 +462,10 @@ wm:
   drag_behavior_options:
     sort: Ordena (reordena les finestres mentre arrossegues)
     swap: Canvi (canvi de finestres a l'extrem d'arrossegament)
+  floating:
+    height: Alçada de finestres flotants
+    title: Mida de les finestres flotants
+    width: Amplada de finestres flotants
   layout: Pla
   resize_delta: Redimensiona el delta (%)
   space_between_containers: Espai entre contenidors

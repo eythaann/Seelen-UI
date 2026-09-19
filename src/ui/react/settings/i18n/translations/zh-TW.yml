@@ -34,7 +34,8 @@ apps_configurations:
   export: 匯出
   export_full: 按應用程式匯出設定
   extra_info: >-
-    SEELEN UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
+    SEELEN
+    UI僅使用每個應用程序使用一個標識符（第一次匹配），因此“如何指定”的順序很重要，最新添加的添加將得到優先級，因為註意表的默認情況下是從最新到舊的。
   identifier:
     add_block: 添加塊
     and: 和
@@ -121,7 +122,8 @@ extras:
   streaming_mode_description: 用佔位符取代敏感資訊（例如電子郵件），以在錄製或螢幕截圖期間保護隱私。
   version: 版本
   version_fixed: >-
-    應用程式和 WebView2 runtime 版本已修復。這意味著應用程式將不會接收更新，並且 WebView2 runtime 也不會隨 Windows 更新自動更新。
+    應用程式和 WebView2 runtime 版本已修復。這意味著應用程式將不會接收更新，並且 WebView2 runtime 也不會隨
+    Windows 更新自動更新。
 general:
   accent_color: 主色調
   date_format: 日期格式
@@ -230,14 +232,21 @@ shortcuts:
   enable_tooltip: 禁用您使用SEELEN UI客戶端實現自己的快捷方式系統
   labels:
     create_new_workspace: 創建新工作區
+    create_new_workspace_row: 建立新的工作區行
     destroy_current_workspace: 刪除當前工作區
     misc_force_quit: 強制退出Seelen
     misc_force_restart: 強制重新啟動Seelen
     move_to_workspace: 移至工作區{{0}}
     pause_toggle: 暫停/恢復快捷方式
+    send_to_next_workspace: 將視窗傳送到下一個工作區
+    send_to_previous_workspace: 將視窗傳送到上一個工作區
     send_to_workspace: 發送到工作區{{0}}
+    send_to_workspace_down: 將視窗傳送到下面的工作區
+    send_to_workspace_up: 將視窗傳送到上面的工作區
     switch_to_next_workspace: 切換到下一個工作區
     switch_to_previous_workspace: 切換到前一個的工作區
+    switch_to_workspace_down: 切換到下面的工作區
+    switch_to_workspace_up: 切換到上面的工作區
     switch_workspace: 切換到工作區{{0}}
   readonly_tooltip: 這是不可變更的快捷鍵
   reset: 重置為預設值
@@ -336,6 +345,12 @@ weg:
     always: 總是
     never: 絕不
     on_overlap: 視窗重疊時
+  import_error: 無法匯入工作列項目
+  import_from_taskbar:
+    button: 從 Windows 工作列匯入
+    label: 導入固定項目
+  import_no_items: 在 Windows 工作列中找不到固定項目
+  import_success: 已成功從 Windows 工作列匯入 {{count}} 項
   items:
     gap: 項目間距
     label: 項目
@@ -395,6 +410,10 @@ wm:
   drag_behavior_options:
     sort: 排序（拖動時重新排序窗口）
     swap: 交換（在拖動端交換窗口）
+  floating:
+    height: 浮動視窗高度
+    title: 浮動視窗大小
+    width: 浮動視窗寬度
   layout: 佈局
   resize_delta: 調整大小增量（％）
   space_between_containers: 容器之間的空間

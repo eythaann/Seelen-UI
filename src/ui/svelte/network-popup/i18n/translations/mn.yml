@@ -5,6 +5,15 @@ connecting: Холбож байна...
 disconnect: Салгах
 forget: Мартах
 hidden: Далд сүлжээ
+hotspot:
+  band: Хамтлаг
+  'off': Унтраах
+  'on': Асаалттай
+  open_network: Нээлттэй сүлжээ
+  password: Нууц үг
+  settings: Илүү халуун цэгийн тохиргоо
+  ssid: Сүлжээний нэр
+  title: Халуун цэг
 more: Нэмэлт сүлжээний тохиргоо
 no_adapter: Wi-Fi адаптер олдсонгүй
 not_found: Wi-Fi сүлжээ олдсонгүй

@@ -5,6 +5,15 @@ connecting: Nsopọ...
 disconnect: Ge asopọ
 forget: Gbagbe
 hidden: Nẹtiwọọki ti o farasin
+hotspot:
+  band: Ẹgbẹ
+  'off': Paa
+  'on': Tan-an
+  open_network: Ṣii nẹtiwọki
+  password: Ọrọigbaniwọle
+  settings: Diẹ Hotspot Eto
+  ssid: Orukọ nẹtiwọki
+  title: Gbona
 more: Die Network Eto
 no_adapter: Ko si ohun ti nmu badọgba Wi-Fi ri
 not_found: Ko ri awọn nẹtiwọki Wi-Fi

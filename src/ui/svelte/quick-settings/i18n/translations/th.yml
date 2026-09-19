@@ -1,4 +1,15 @@
 app_settings: การตั้งค่าแอพ
+brightness: ความสว่าง
+dark_mode: โหมดมืด
+default_multimedia_volume: ระดับเสียงมัลติมีเดียเริ่มต้น
 disabled: พิการ
 enabled: เปิดใช้งานแล้ว
+eye_care: บำรุงสายตา
+fm_radio: วิทยุเอฟเอ็ม
+hdr: ช่วงไดนามิกสูง
+hotspot: ฮอตสปอต
+light_mode: โหมดแสง
+mobile_broadband: บรอดแบนด์มือถือ
+night_light: แสงกลางคืน
 power: พลัง
+unknown: ไม่ทราบ

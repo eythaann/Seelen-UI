@@ -5,6 +5,15 @@ connecting: Notiek savienojuma izveide...
 disconnect: Atvienot
 forget: Aizmirsti
 hidden: Slēpts tīkls
+hotspot:
+  band: Grupa
+  'off': Izslēgts
+  'on': Ieslēgts
+  open_network: Atvērts tīkls
+  password: Parole
+  settings: Vairāk tīklāja iestatījumu
+  ssid: Tīkla nosaukums
+  title: Hotspot
 more: Vairāk tīkla iestatījumu
 no_adapter: Wi-Fi adapteris netika atrasts
 not_found: Nav atrasts neviens Wi-Fi tīkls

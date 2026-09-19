@@ -1,4 +1,15 @@
 app_settings: Ρυθμίσεις εφαρμογής
+brightness: Λάμψη
+dark_mode: Σκοτεινή λειτουργία
+default_multimedia_volume: Προεπιλεγμένη ένταση ήχου πολυμέσων
 disabled: Ανάπηρος
 enabled: Ενεργοποιημένο
+eye_care: Περιποίηση ματιών
+fm_radio: Ραδιόφωνο FM
+hdr: Υψηλό δυναμικό εύρος
+hotspot: Hotspot
+light_mode: Λειτουργία φωτός
+mobile_broadband: Mobile Broadband
+night_light: Φως νύχτας
 power: Εξουσία
+unknown: Αγνωστος

@@ -5,6 +5,15 @@ connecting: Се поврзува...
 disconnect: Исклучете се
 forget: Заборавете
 hidden: Скриена мрежа
+hotspot:
+  band: Бенд
+  'off': Исклучено
+  'on': Вклучено
+  open_network: Отворена мрежа
+  password: Лозинка
+  settings: Повеќе поставки за жариште
+  ssid: Име на мрежата
+  title: Жешка точка
 more: Повеќе мрежни поставки
 no_adapter: Не е пронајден адаптер за Wi-Fi
 not_found: Не се пронајдени Wi-Fi мрежи

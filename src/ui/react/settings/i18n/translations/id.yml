@@ -274,14 +274,21 @@ shortcuts:
     menggunakan klien Seelen UI
   labels:
     create_new_workspace: Buat ruang kerja baru
+    create_new_workspace_row: Buat Baris Ruang Kerja Baru
     destroy_current_workspace: Hancurkan ruang kerja saat ini
     misc_force_quit: Force berhenti
     misc_force_restart: Memaksa Mulai Ulang
     move_to_workspace: Pindah ke Workspace {{0}}
     pause_toggle: Jeda/Lanjutkan Pintasan
+    send_to_next_workspace: Kirim Jendela ke Ruang Kerja Berikutnya
+    send_to_previous_workspace: Kirim Jendela ke Ruang Kerja Sebelumnya
     send_to_workspace: Kirim ke Workspace {{0}}
+    send_to_workspace_down: Kirim Jendela ke Ruang Kerja Di Bawah
+    send_to_workspace_up: Kirim Jendela ke Ruang Kerja Di Atas
     switch_to_next_workspace: Beralih ke ruang kerja berikutnya
     switch_to_previous_workspace: Beralih ke ruang kerja sebelumnya
+    switch_to_workspace_down: Beralih ke Ruang Kerja Di Bawah
+    switch_to_workspace_up: Beralih ke Ruang Kerja Di Atas
     switch_workspace: Beralih ke Workspace {{0}}
   readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
   reset: Reset ke default
@@ -382,6 +389,12 @@ weg:
     always: Selalu
     never: Tidak pernah
     on_overlap: Di tumpang tindih
+  import_error: Gagal mengimpor item bilah tugas
+  import_from_taskbar:
+    button: Impor dari Bilah Tugas Windows
+    label: Impor Item yang Disematkan
+  import_no_items: Tidak ada item yang disematkan di bilah tugas Windows
+  import_success: Berhasil mengimpor {{count}} item dari taskbar Windows
   items:
     gap: Ruang antar item
     label: Item
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: Sortir (urutkan ulang jendela sambil menyeret)
     swap: Swap (menukar jendela pada drag end)
+  floating:
+    height: Ketinggian Jendela Mengambang
+    title: Ukuran Jendela Mengambang
+    width: Lebar Jendela Mengambang
   layout: Tata letak
   resize_delta: Ubah Ubah Delta (%)
   space_between_containers: Ruang antar wadah

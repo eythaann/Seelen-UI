@@ -267,14 +267,21 @@ shortcuts:
     kasutajaliidese klienti
   labels:
     create_new_workspace: Looge uus tööruum
+    create_new_workspace_row: Looge uus tööruumi rida
     destroy_current_workspace: Hävitada praegune tööruum
     misc_force_quit: Sund lõpetama
     misc_force_restart: Taaskäivituse sundimine
     move_to_workspace: Liikuge tööruumi {{0}} saidile
     pause_toggle: Peata/jätka otseteed
+    send_to_next_workspace: Saada aken järgmisele tööalale
+    send_to_previous_workspace: Saada aken eelmisele tööalale
     send_to_workspace: Saada tööruumi {{0}}
+    send_to_workspace_down: Saada aken allolevasse tööruumi
+    send_to_workspace_up: Saada aken ülalolevasse tööruumi
     switch_to_next_workspace: Lülitage järgmisele tööalale
     switch_to_previous_workspace: Lülitage eelmisele tööalale
+    switch_to_workspace_down: Lülituge allolevale tööruumile
+    switch_to_workspace_up: Lülituge ülalolevale tööruumile
     switch_workspace: Lülitage tööruumi {{0}}
   readonly_tooltip: See on kirjutuskaitstud otsetee
   reset: Lähtestage vaikeseadetele
@@ -375,6 +382,12 @@ weg:
     always: Alati
     never: Mitte kunagi
     on_overlap: Kattumises
+  import_error: Tegumiriba üksuste importimine ebaõnnestus
+  import_from_taskbar:
+    button: Importige Windowsi tegumiribalt
+    label: Kinnitatud üksuste importimine
+  import_no_items: Windowsi tegumiribal ei leitud kinnitatud üksusi
+  import_success: Windowsi tegumiribalt imporditi edukalt {{count}} üksust
   items:
     gap: Esemete vaheline ruum
     label: Esemed
@@ -438,6 +451,10 @@ wm:
   drag_behavior_options:
     sort: Sorteeri (akende järjestamine lohistamise ajal ümber)
     swap: Vaheta (vahetage aknad lohistamise lõpus)
+  floating:
+    height: Ujuv akna kõrgus
+    title: Ujuv Windowsi suurus
+    width: Ujuv akende laius
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)
   space_between_containers: Konteinerite vaheline ruum

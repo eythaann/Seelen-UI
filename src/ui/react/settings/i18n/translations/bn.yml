@@ -270,14 +270,21 @@ shortcuts:
     করেন তবে অক্ষম করুন
   labels:
     create_new_workspace: নতুন কর্মক্ষেত্র তৈরি করুন
+    create_new_workspace_row: নতুন ওয়ার্কস্পেস সারি তৈরি করুন
     destroy_current_workspace: বর্তমান কর্মক্ষেত্র ধ্বংস করুন
     misc_force_quit: ফোর্স প্রস্থান
     misc_force_restart: জোর পুনরায় চালু করুন
     move_to_workspace: ওয়ার্কস্পেসে যান {{0}}
     pause_toggle: শর্টকাট বিরতি/পুনরায় শুরু করুন
+    send_to_next_workspace: পরবর্তী কর্মক্ষেত্রে উইন্ডো পাঠান
+    send_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে উইন্ডো পাঠান
     send_to_workspace: ওয়ার্কস্পেসে প্রেরণ করুন {{0}}
+    send_to_workspace_down: নিচের ওয়ার্কস্পেসে উইন্ডো পাঠান
+    send_to_workspace_up: উপরের ওয়ার্কস্পেসে উইন্ডো পাঠান
     switch_to_next_workspace: পরবর্তী কর্মক্ষেত্রে স্যুইচ করুন
     switch_to_previous_workspace: পূর্ববর্তী কর্মক্ষেত্রে স্যুইচ করুন
+    switch_to_workspace_down: নীচের কর্মক্ষেত্রে স্যুইচ করুন
+    switch_to_workspace_up: উপরে ওয়ার্কস্পেস এ স্যুইচ করুন
     switch_workspace: ওয়ার্কস্পেসে স্যুইচ করুন {{0}}
   readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
   reset: ডিফল্ট পুনরায় সেট করুন
@@ -376,6 +383,12 @@ weg:
     always: সর্বদা
     never: কখনই না
     on_overlap: ওভারল্যাপে
+  import_error: টাস্কবার আইটেম আমদানি করতে ব্যর্থ হয়েছে
+  import_from_taskbar:
+    button: উইন্ডোজ টাস্কবার থেকে আমদানি করুন
+    label: পিন করা আইটেম আমদানি করুন
+  import_no_items: Windows টাস্কবারে কোনো পিন করা আইটেম পাওয়া যায়নি
+  import_success: Windows টাস্কবার থেকে সফলভাবে {{count}}টি আইটেম(গুলি) আমদানি করা হয়েছে৷
   items:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম
@@ -440,6 +453,10 @@ wm:
   drag_behavior_options:
     sort: সাজান (ড্র্যাগ করার সময় উইন্ডোজ পুনরায় সাজান)
     swap: অদলবদল (ড্র্যাগ এন্ডে সোয়াপ উইন্ডো)
+  floating:
+    height: ভাসমান উইন্ডোজের উচ্চতা
+    title: ফ্লোটিং উইন্ডোজ সাইজ
+    width: ভাসমান উইন্ডোজ প্রস্থ
   layout: বিন্যাস
   resize_delta: পুনরায় আকার ডেল্টা (%)
   space_between_containers: পাত্রে স্থান

@@ -273,14 +273,21 @@ shortcuts:
     -asiakkaan avulla
   labels:
     create_new_workspace: Luo uusi työtila
+    create_new_workspace_row: Luo uusi työtilarivi
     destroy_current_workspace: Tuhoa nykyinen työtila
     misc_force_quit: Pakottaa
     misc_force_restart: Pakota uudelleenkäynnistys
     move_to_workspace: Siirry työtilaan {{0}}
     pause_toggle: Keskeytä/Jatka pikanäppäimet
+    send_to_next_workspace: Lähetä ikkuna seuraavaan työtilaan
+    send_to_previous_workspace: Lähetä ikkuna edelliseen työtilaan
     send_to_workspace: Lähetä työtilaan {{0}}
+    send_to_workspace_down: Lähetä ikkuna alla olevaan työtilaan
+    send_to_workspace_up: Lähetä ikkuna yllä olevaan työtilaan
     switch_to_next_workspace: Vaihda seuraavaan työtilaan
     switch_to_previous_workspace: Vaihda edelliseen työtilaan
+    switch_to_workspace_down: Vaihda alla olevaan työtilaan
+    switch_to_workspace_up: Vaihda työtilaan yläpuolella
     switch_workspace: Vaihda työtilaan {{0}}
   readonly_tooltip: Tämä on vain luku-pikakuvake
   reset: Palauta laiminlyöntiin
@@ -379,6 +386,12 @@ weg:
     always: Aina
     never: Ei koskaan
     on_overlap: Päällekkäin
+  import_error: Tehtäväpalkin kohteiden tuonti epäonnistui
+  import_from_taskbar:
+    button: Tuo Windowsin tehtäväpalkista
+    label: Tuo kiinnitetyt kohteet
+  import_no_items: Windowsin tehtäväpalkista ei löytynyt kiinnitettyjä kohteita
+  import_success: '{{count}} kohde(tta) tuotiin onnistuneesti Windowsin tehtäväpalkista'
   items:
     gap: Tilaa esineiden välillä
     label: Kohteet
@@ -442,6 +455,10 @@ wm:
   drag_behavior_options:
     sort: Lajittele (järjestä ikkunat uudelleen vetäessäsi)
     swap: Vaihda (vaihda ikkunoita vetämällä)
+  floating:
+    height: Kelluva ikkunakorkeus
+    title: Kelluva Windowsin koko
+    width: Kelluva ikkunan leveys
   layout: Layout
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila

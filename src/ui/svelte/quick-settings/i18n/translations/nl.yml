@@ -1,4 +1,15 @@
 app_settings: App-instellingen
+brightness: Helderheid
+dark_mode: Donkere modus
+default_multimedia_volume: Standaard multimediavolume
 disabled: Gehandicapt
 enabled: Ingeschakeld
+eye_care: Oogzorg
+fm_radio: FM-radio
+hdr: Hoog dynamisch bereik
+hotspot: Hotspot
+light_mode: Lichtmodus
+mobile_broadband: Mobiel breedband
+night_light: Nachtlampje
 power: Stroom
+unknown: Onbekend

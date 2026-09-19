@@ -5,6 +5,15 @@ connecting: Ansluter...
 disconnect: Koppla från
 forget: Glömma
 hidden: Dolt nätverk
+hotspot:
+  band: Band
+  'off': Av
+  'on': På
+  open_network: Öppet nätverk
+  password: Lösenord
+  settings: Fler hotspot-inställningar
+  ssid: Nätverksnamn
+  title: Hotspot
 more: Fler nätverksinställningar
 no_adapter: Ingen Wi-Fi-adapter hittades
 not_found: Inga Wi-Fi-nätverk hittades

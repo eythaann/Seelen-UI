@@ -5,6 +5,15 @@ connecting: กำลังเชื่อมต่อ...
 disconnect: ตัดการเชื่อมต่อ
 forget: ลืม
 hidden: เครือข่ายที่ซ่อนอยู่
+hotspot:
+  band: วงดนตรี
+  'off': ปิด
+  'on': บน
+  open_network: เปิดเครือข่าย
+  password: รหัสผ่าน
+  settings: การตั้งค่าฮอตสปอตเพิ่มเติม
+  ssid: ชื่อเครือข่าย
+  title: ฮอตสปอต
 more: การตั้งค่าเครือข่ายเพิ่มเติม
 no_adapter: ไม่พบอแด็ปเตอร์ Wi-Fi
 not_found: ไม่พบเครือข่าย Wi-Fi

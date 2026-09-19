@@ -257,14 +257,21 @@ shortcuts:
   enable_tooltip: تعطيل إذا كنت ستنفذ نظام الاختصارات الخاص بك باستخدام عميل Seelen UI
   labels:
     create_new_workspace: إنشاء مساحة عمل جديدة
+    create_new_workspace_row: إنشاء صف مساحة عمل جديد
     destroy_current_workspace: تدمير مساحة العمل الحالية
     misc_force_quit: استقال
     misc_force_restart: فرض إعادة التشغيل
     move_to_workspace: انتقل إلى مساحة العمل {{0}}
     pause_toggle: إيقاف مؤقت/استئناف الاختصارات
+    send_to_next_workspace: إرسال نافذة إلى مساحة العمل التالية
+    send_to_previous_workspace: إرسال النافذة إلى مساحة العمل السابقة
     send_to_workspace: أرسل إلى مساحة العمل {{0}}
+    send_to_workspace_down: إرسال نافذة إلى مساحة العمل أدناه
+    send_to_workspace_up: إرسال نافذة إلى مساحة العمل أعلاه
     switch_to_next_workspace: التبديل إلى مساحة العمل التالية
     switch_to_previous_workspace: التبديل إلى مساحة العمل السابقة
+    switch_to_workspace_down: قم بالتبديل إلى مساحة العمل أدناه
+    switch_to_workspace_up: قم بالتبديل إلى مساحة العمل أعلاه
     switch_workspace: التبديل إلى مساحة العمل {{0}}
   readonly_tooltip: هذا اختصار للقراءة فقط
   reset: إعادة ضبط على الافتراضات
@@ -365,6 +372,12 @@ weg:
     always: دائماً
     never: أبداً
     on_overlap: على التداخل
+  import_error: فشل استيراد عناصر شريط المهام
+  import_from_taskbar:
+    button: الاستيراد من شريط مهام Windows
+    label: استيراد العناصر المثبتة
+  import_no_items: لم يتم العثور على أي عناصر مثبتة في شريط مهام Windows
+  import_success: تم بنجاح استيراد {{count}} عنصر (عناصر) من شريط مهام Windows
   items:
     gap: الفراغ بين العناصر
     label: العناصر
@@ -427,6 +440,10 @@ wm:
   drag_behavior_options:
     sort: فرز (إعادة ترتيب النوافذ أثناء السحب)
     swap: مبادلة (تبديل النوافذ عند نهاية السحب)
+  floating:
+    height: ارتفاع النوافذ العائمة
+    title: حجم النوافذ العائمة
+    width: عرض النوافذ العائمة
   layout: التخطيط
   resize_delta: غير حجم دلتا (%)
   space_between_containers: المساحه بين الحاويات

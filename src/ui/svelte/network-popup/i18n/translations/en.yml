@@ -6,14 +6,14 @@ disconnect: Disconnect
 forget: Forget
 hidden: Hidden Network
 hotspot:
-  title: Hotspot
-  on: On
-  off: Off
-  ssid: Network name
-  password: Password
   band: Band
+  'off': 'Off'
+  'on': 'On'
   open_network: Open network
+  password: Password
   settings: More Hotspot Settings
+  ssid: Network name
+  title: Hotspot
 more: More Network Settings
 no_adapter: No Wi-Fi adapter found
 not_found: No Wi-Fi networks found

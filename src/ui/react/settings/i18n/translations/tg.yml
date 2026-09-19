@@ -272,14 +272,21 @@ shortcuts:
     баред
   labels:
     create_new_workspace: Эҷоди фазои нав
+    create_new_workspace_row: Эҷоди як қатори нави фазои корӣ
     destroy_current_workspace: Ҷоизаҳои ҷориро нест кунед
     misc_force_quit: Қувваи корӣ
     misc_force_restart: Бастори қувват
     move_to_workspace: Ба кории {{0}} гузаред
     pause_toggle: Миёнбурҳои таваққуф/идома
+    send_to_next_workspace: Равзанаро ба фазои кории оянда фиристед
+    send_to_previous_workspace: Равзанаро ба фазои кории қаблӣ фиристед
     send_to_workspace: Ба кории rowspace {{0}}
+    send_to_workspace_down: Равзанаро ба фазои корӣ дар зер фиристед
+    send_to_workspace_up: Равзанаро ба фазои корӣ дар боло фиристед
     switch_to_next_workspace: Гузариш ба фазои оянда
     switch_to_previous_workspace: Ба фазои пешина гузаред
+    switch_to_workspace_down: Гузариш ба фазои корӣ дар зер
+    switch_to_workspace_up: Гузариш ба фазои кории боло
     switch_workspace: Гузаштан ба роҳҳои корӣ {{0}}
   readonly_tooltip: Ин як миёнабурҳои ягона аст
   reset: Аз нав танзимкунии пешфарз
@@ -382,6 +389,12 @@ weg:
     always: Ҳамеша
     never: Ҳеҷ гоҳ
     on_overlap: Дар такрори
+  import_error: Воридоти ҷузъҳои панели супоришҳо муяссар нашуд
+  import_from_taskbar:
+    button: Воридот аз панели супоришҳои Windows
+    label: Воридоти ашёи басташуда
+  import_no_items: Дар панели вазифаҳои Windows ягон ҷузъе, ки басташуда ёфт нашуд
+  import_success: '{{count}} ашё(ҳо) аз панели вазифаҳои Windows бомуваффақият ворид карда шуд'
   items:
     gap: Фосила байни ашё
     label: Ашё
@@ -446,6 +459,10 @@ wm:
   drag_behavior_options:
     sort: Мураттаб кардан (аз нав тартиби тирезаҳо ҳангоми кашолакунӣ)
     swap: Своп (иваз кардани тирезаҳо дар охири кашолакунӣ)
+  floating:
+    height: Баландии шинокунандаи Windows
+    title: Андозаи Windows шинокунанда
+    width: Паҳнои Windows шинокунанда
   layout: Тарҳ
   resize_delta: Татбиқи Delta (%)
   space_between_containers: Фосила байни контейнер

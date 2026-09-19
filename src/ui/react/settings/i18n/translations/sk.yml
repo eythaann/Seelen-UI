@@ -273,14 +273,21 @@ shortcuts:
     klienta Seelen UI klienta
   labels:
     create_new_workspace: Vytvorte nový pracovný priestor
+    create_new_workspace_row: Vytvorte nový riadok pracovného priestoru
     destroy_current_workspace: Zničiť súčasný pracovný priestor
     misc_force_quit: Vynútiť prestať
     misc_force_restart: Vynútiť reštart
     move_to_workspace: Presunúť do pracovného priestoru {{0}}
     pause_toggle: Pozastaviť/Obnoviť skratky
+    send_to_next_workspace: Odoslať okno do ďalšieho pracovného priestoru
+    send_to_previous_workspace: Odoslať okno do predchádzajúceho pracovného priestoru
     send_to_workspace: Odoslať do Workspace {{0}}
+    send_to_workspace_down: Odoslať okno do pracovného priestoru nižšie
+    send_to_workspace_up: Odoslať okno do pracovného priestoru vyššie
     switch_to_next_workspace: Prepnite na ďalší pracovný priestor
     switch_to_previous_workspace: Prepnite na predchádzajúci pracovný priestor
+    switch_to_workspace_down: Nižšie prepnite na pracovný priestor
+    switch_to_workspace_up: Prepnúť na pracovný priestor vyššie
     switch_workspace: Prepnite na pracovný priestor {{0}}
   readonly_tooltip: Toto je skratka iba na čítanie
   reset: Reset na predvolené hodnoty
@@ -383,6 +390,12 @@ weg:
     always: Vždy
     never: Nikdy
     on_overlap: Na prekrytí
+  import_error: Nepodarilo sa importovať položky panela úloh
+  import_from_taskbar:
+    button: Importovať z panela úloh systému Windows
+    label: Importujte pripnuté položky
+  import_no_items: Na paneli úloh systému Windows sa nenašli žiadne pripnuté položky
+  import_success: Úspešne importované položky ({{count}}) z panela úloh systému Windows
   items:
     gap: Priestor medzi položkami
     label: Predmety
@@ -446,6 +459,10 @@ wm:
   drag_behavior_options:
     sort: Triediť (zmeniť poradie okien počas ťahania)
     swap: Vymeniť (vymeniť okná na konci ťahania)
+  floating:
+    height: Plávajúca výška okna
+    title: Veľkosť pohyblivého okna
+    width: Plávajúca šírka okna
   layout: Usporiadanie
   resize_delta: Zmeňte veľkosť delty (%)
   space_between_containers: Priestor medzi nádobami

@@ -267,14 +267,21 @@ shortcuts:
     කරන්නේ නම් අක්රීය කරන්න
   labels:
     create_new_workspace: නව වැඩබිම සාදන්න
+    create_new_workspace_row: නව කාර්ය ඉඩ පේළියක් සාදන්න
     destroy_current_workspace: වත්මන් වැඩබිම විනාශ කරන්න
     misc_force_quit: බලය ඉවත්වීම
     misc_force_restart: බලය නැවත ආරම්භ කරන්න
     move_to_workspace: වැඩපොළ වෙත යන්න {{0}}
     pause_toggle: කෙටිමං විරාම/නැවත ආරම්භ කරන්න
+    send_to_next_workspace: Next Workspace වෙත කවුළුව යවන්න
+    send_to_previous_workspace: පෙර වැඩබිමට කවුළුව යවන්න
     send_to_workspace: වැඩපොළ වෙත යවන්න {{0}}
+    send_to_workspace_down: පහත වැඩබිම වෙත කවුළුව යවන්න
+    send_to_workspace_up: ඉහත වැඩබිමට කවුළුව යවන්න
     switch_to_next_workspace: ඊළඟ වැඩබිම වෙත මාරු වන්න
     switch_to_previous_workspace: පෙර වැඩබිම වෙත මාරු වන්න
+    switch_to_workspace_down: පහත වැඩබිම වෙත මාරු වන්න
+    switch_to_workspace_up: ඉහත කාර්ය ඉඩ වෙත මාරු වන්න
     switch_workspace: වැඩබිම් වෙත මාරු වන්න {{0}}
   readonly_tooltip: මෙය කියවීමට පමණක් කෙටිමඟකි
   reset: පෙරනිමි වෙත නැවත සකසන්න
@@ -375,6 +382,12 @@ weg:
     always: සෑම විටම
     never: කවදාවත් නැහැ
     on_overlap: අතිච්ඡාදනය මත
+  import_error: කාර්ය තීරු අයිතම ආයාත කිරීමට අසමත් විය
+  import_from_taskbar:
+    button: Windows Taskbar වෙතින් ආයාත කරන්න
+    label: පින් කළ අයිතම ආනයනය කරන්න
+  import_no_items: Windows කාර්ය තීරුවේ අමුණන ලද අයිතම කිසිවක් හමු නොවීය
+  import_success: Windows කාර්ය තීරුවෙන් {{count}} අයිතම(ය) සාර්ථකව ආයාත කරන ලදී
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
@@ -438,6 +451,10 @@ wm:
   drag_behavior_options:
     sort: වර්ග කරන්න (ඇදගෙන යන අතරතුර කවුළු නැවත සකසන්න)
     swap: Swap (drag end මත windows swap)
+  floating:
+    height: පාවෙන වින්ඩෝස් උස
+    title: පාවෙන වින්ඩෝස් ප්‍රමාණය
+    width: පාවෙන වින්ඩෝස් පළල
   layout: පිරිසැලසුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   space_between_containers: බහාලුම් අතර අවකාශය

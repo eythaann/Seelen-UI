@@ -264,14 +264,21 @@ shortcuts:
     ਨੂੰ ਲਾਗੂ ਕਰੋਗੇ
   labels:
     create_new_workspace: ਨਵਾਂ ਵਰਕਸਪੇਸ ਬਣਾਓ
+    create_new_workspace_row: ਨਵੀਂ ਵਰਕਸਪੇਸ ਕਤਾਰ ਬਣਾਓ
     destroy_current_workspace: ਮੌਜੂਦਾ ਵਰਕਸਪੇਸ ਨੂੰ ਨਸ਼ਟ ਕਰੋ
     misc_force_quit: ਰੱਦ
     misc_force_restart: ਫੋਰਸ ਚਾਲੂ
     move_to_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਜਾਓ {{0}}}
     pause_toggle: ਸ਼ਾਰਟਕੱਟ ਰੋਕੋ/ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ
+    send_to_next_workspace: ਵਿੰਡੋ ਨੂੰ ਅਗਲੀ ਵਰਕਸਪੇਸ 'ਤੇ ਭੇਜੋ
+    send_to_previous_workspace: ਵਿੰਡੋ ਨੂੰ ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਵਿੱਚ ਭੇਜੋ
     send_to_workspace: ਵਰਕਸਪੇਸ ਨੂੰ ਭੇਜੋ {{0}}
+    send_to_workspace_down: ਵਿੰਡੋ ਨੂੰ ਹੇਠਾਂ ਵਰਕਸਪੇਸ ਵਿੱਚ ਭੇਜੋ
+    send_to_workspace_up: ਵਿੰਡੋ ਨੂੰ ਉੱਪਰ ਵਰਕਸਪੇਸ ਵਿੱਚ ਭੇਜੋ
     switch_to_next_workspace: ਅਗਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
     switch_to_previous_workspace: ਪਿਛਲੇ ਵਰਕਸਪੇਸ ਤੇ ਜਾਓ
+    switch_to_workspace_down: ਹੇਠਾਂ ਵਰਕਸਪੇਸ 'ਤੇ ਸਵਿਚ ਕਰੋ
+    switch_to_workspace_up: ਉੱਪਰ ਵਰਕਸਪੇਸ 'ਤੇ ਸਵਿਚ ਕਰੋ
     switch_workspace: ਵਰਕਸਪੇਸ ਵਿੱਚ ਸਵਿੱਚ ਕਰੋ {{0}}}
   readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
   reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
@@ -372,6 +379,12 @@ weg:
     always: ਹਮੇਸ਼ਾ
     never: ਕਦੇ ਨਹੀਂ
     on_overlap: ਓਵਰਲੈਪ 'ਤੇ
+  import_error: ਟਾਸਕਬਾਰ ਆਈਟਮਾਂ ਨੂੰ ਆਯਾਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ
+  import_from_taskbar:
+    button: ਵਿੰਡੋਜ਼ ਟਾਸਕਬਾਰ ਤੋਂ ਆਯਾਤ ਕਰੋ
+    label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਆਯਾਤ ਕਰੋ
+  import_no_items: ਵਿੰਡੋਜ਼ ਟਾਸਕਬਾਰ ਵਿੱਚ ਕੋਈ ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਨਹੀਂ ਮਿਲੀਆਂ
+  import_success: ਵਿੰਡੋਜ਼ ਟਾਸਕਬਾਰ ਤੋਂ {{count}} ਆਈਟਮਾਂ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਆਯਾਤ ਕੀਤਾ ਗਿਆ
   items:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ
@@ -435,6 +448,10 @@ wm:
   drag_behavior_options:
     sort: ਕ੍ਰਮਬੱਧ (ਖਿੱਚਣ ਵੇਲੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰੋ)
     swap: ਸਵੈਪ (ਡਰੈਗ ਐਂਡ 'ਤੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਸਵੈਪ ਕਰੋ)
+  floating:
+    height: ਫਲੋਟਿੰਗ ਵਿੰਡੋਜ਼ ਦੀ ਉਚਾਈ
+    title: ਫਲੋਟਿੰਗ ਵਿੰਡੋਜ਼ ਦਾ ਆਕਾਰ
+    width: ਫਲੋਟਿੰਗ ਵਿੰਡੋਜ਼ ਚੌੜਾਈ
   layout: ਖਾਕਾ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ

@@ -5,6 +5,15 @@ connecting: Menghubungkan...
 disconnect: Memutuskan
 forget: Lupa
 hidden: Jaringan Tersembunyi
+hotspot:
+  band: Pita
+  'off': Mati
+  'on': Pada
+  open_network: Jaringan terbuka
+  password: Kata sandi
+  settings: Pengaturan Hotspot Lainnya
+  ssid: Nama jaringan
+  title: titik panas
 more: Pengaturan Jaringan Lainnya
 no_adapter: Tidak ditemukan adaptor Wi-Fi
 not_found: Tidak ada jaringan Wi-Fi yang ditemukan

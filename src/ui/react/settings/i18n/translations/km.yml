@@ -266,14 +266,21 @@ shortcuts:
     បិទប្រសិនបើអ្នកនឹងអនុវត្តប្រព័ន្ធផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើម៉ាស៊ីនភ្ញៀវយូណេយូយូ
   labels:
     create_new_workspace: បង្កើតកន្លែងធ្វើការថ្មី
+    create_new_workspace_row: បង្កើតជួរដេកកន្លែងធ្វើការថ្មី។
     destroy_current_workspace: បំផ្លាញកន្លែងធ្វើការបច្ចុប្បន្ន
     misc_force_quit: បង្ខំឱ្យឈប់
     misc_force_restart: បង្ខំឱ្យចាប់ផ្តើមឡើងវិញ
     move_to_workspace: ផ្លាស់ទីទៅកន្លែងធ្វើការ {{0}}
     pause_toggle: ផ្អាក/បន្តផ្លូវកាត់
+    send_to_next_workspace: ផ្ញើបង្អួចទៅកន្លែងធ្វើការបន្ទាប់
+    send_to_previous_workspace: ផ្ញើបង្អួចទៅកន្លែងធ្វើការពីមុន
     send_to_workspace: ផ្ញើទៅកន្លែងធ្វើការ {{0}}
+    send_to_workspace_down: ផ្ញើបង្អួចទៅកន្លែងធ្វើការខាងក្រោម
+    send_to_workspace_up: ផ្ញើបង្អួចទៅកន្លែងធ្វើការខាងលើ
     switch_to_next_workspace: ប្តូរទៅកន្លែងធ្វើការបន្ទាប់
     switch_to_previous_workspace: ប្តូរទៅកន្លែងធ្វើការមុន
+    switch_to_workspace_down: ប្តូរទៅកន្លែងធ្វើការខាងក្រោម
+    switch_to_workspace_up: ប្តូរទៅកន្លែងធ្វើការខាងលើ
     switch_workspace: ប្តូរទៅកន្លែងធ្វើការ {{0}}
   readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
   reset: កំណត់ឡើងវិញនូវលំនាំដើម
@@ -374,6 +381,12 @@ weg:
     always: ជានិច្ច
     never: មិនដែល
     on_overlap: នៅលើការត្រួតស៊ីគ្នា។
+  import_error: បានបរាជ័យក្នុងការនាំចូលធាតុរបារភារកិច្ច
+  import_from_taskbar:
+    button: នាំចូលពីរបារភារកិច្ចវីនដូ
+    label: នាំចូលធាតុដែលបានខ្ទាស់
+  import_no_items: រកមិនឃើញធាតុដែលបានខ្ទាស់នៅក្នុងរបារភារកិច្ចវីនដូទេ។
+  import_success: បាននាំចូលធាតុ {{count}} ដោយជោគជ័យពីរបារភារកិច្ច Windows
   items:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
@@ -438,6 +451,10 @@ wm:
   drag_behavior_options:
     sort: តម្រៀប (តម្រៀបបង្អួចឡើងវិញពេលកំពុងអូស)
     swap: ប្តូរ (ប្តូរបង្អួចនៅលើចុងអូស)
+  floating:
+    height: កម្ពស់វីនដូអណ្តែត
+    title: ទំហំវីនដូអណ្តែត
+    width: ទទឹងវីនដូអណ្តែត
   layout: ប្លង់
   resize_delta: ប្តូរទំហំដីសណ្តរ (%)
   space_between_containers: ចន្លោះរវាងកុងតឺន័រ

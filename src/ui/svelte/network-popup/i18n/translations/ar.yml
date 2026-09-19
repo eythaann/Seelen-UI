@@ -5,6 +5,15 @@ connecting: جارٍ الاتصال...
 disconnect: قطع الاتصال
 forget: ينسى
 hidden: الشبكة المخفية
+hotspot:
+  band: فرقة
+  'off': عن
+  'on': على
+  open_network: شبكة مفتوحة
+  password: كلمة المرور
+  settings: المزيد من إعدادات نقطة الاتصال
+  ssid: اسم الشبكة
+  title: نقطة اتصال
 more: المزيد من إعدادات الشبكة
 no_adapter: لم يتم العثور على محول Wi-Fi
 not_found: لم يتم العثور على شبكات Wi-Fi

@@ -5,6 +5,15 @@ connecting: Verbinden...
 disconnect: Trennen
 forget: Vergessen
 hidden: Verstecktes Netzwerk
+hotspot:
+  band: Band
+  'off': Aus
+  'on': An
+  open_network: Offenes Netzwerk
+  password: Passwort
+  settings: Weitere Hotspot-Einstellungen
+  ssid: Netzwerkname
+  title: Hotspot
 more: Weitere Netzwerkeinstellungen
 no_adapter: Kein WLAN-Adapter gefunden
 not_found: Keine WLAN-Netzwerke gefunden

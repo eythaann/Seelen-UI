@@ -1,4 +1,15 @@
 app_settings: Uygulama Ayarları
+brightness: Parlaklık
+dark_mode: Karanlık Mod
+default_multimedia_volume: Varsayılan Multimedya Ses Düzeyi
 disabled: Engelli
 enabled: Etkinleştirilmiş
+eye_care: Göz Bakımı
+fm_radio: FM Radyo
+hdr: Yüksek Dinamik Aralık
+hotspot: Sıcak nokta
+light_mode: Işık Modu
+mobile_broadband: Mobil Geniş Bant
+night_light: Gece Lambası
 power: Güç
+unknown: Bilinmiyor

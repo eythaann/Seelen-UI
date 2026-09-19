@@ -5,6 +5,15 @@ connecting: Inaunganisha...
 disconnect: Tenganisha
 forget: Sahau
 hidden: Mtandao Uliofichwa
+hotspot:
+  band: Bendi
+  'off': Imezimwa
+  'on': Washa
+  open_network: Fungua mtandao
+  password: Nenosiri
+  settings: Mipangilio Zaidi ya Hotspot
+  ssid: Jina la mtandao
+  title: Hotspot
 more: Mipangilio Zaidi ya Mtandao
 no_adapter: Hakuna adapta ya Wi-Fi iliyopatikana
 not_found: Hakuna mitandao ya Wi-Fi iliyopatikana

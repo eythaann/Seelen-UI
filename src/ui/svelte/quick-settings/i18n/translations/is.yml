@@ -1,4 +1,15 @@
 app_settings: Stillingar forrita
+brightness: Birtustig
+dark_mode: Dark Mode
+default_multimedia_volume: Sjálfgefin margmiðlunarstyrkur
 disabled: Öryrkjar
 enabled: Virkt
+eye_care: Augnhirða
+fm_radio: FM útvarp
+hdr: High Dynamic Range
+hotspot: Hotspot
+light_mode: Ljóshamur
+mobile_broadband: Farsíma breiðband
+night_light: Næturljós
 power: Kraftur
+unknown: Óþekkt

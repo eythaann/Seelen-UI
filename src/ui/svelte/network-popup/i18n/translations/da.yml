@@ -5,6 +5,15 @@ connecting: Opretter forbindelse...
 disconnect: Afbryde
 forget: Glemme
 hidden: Skjult netværk
+hotspot:
+  band: Band
+  'off': Slukket
+  'on': På
+  open_network: Åbent netværk
+  password: Adgangskode
+  settings: Flere hotspot-indstillinger
+  ssid: Netværksnavn
+  title: Hotspot
 more: Flere netværksindstillinger
 no_adapter: Ingen Wi-Fi-adapter fundet
 not_found: Ingen Wi-Fi-netværk fundet

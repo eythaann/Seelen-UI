@@ -274,14 +274,21 @@ shortcuts:
     помош на клиентот Seelen UI
   labels:
     create_new_workspace: Создадете нов работен простор
+    create_new_workspace_row: Создадете нов ред за работниот простор
     destroy_current_workspace: Уништи сегашниот работен простор
     misc_force_quit: Сила откажана
     misc_force_restart: Рестартирање на силата
     move_to_workspace: Преместете се на работниот простор {{0}}
     pause_toggle: Кратенки за пауза/продолжување
+    send_to_next_workspace: Испратете го прозорецот до следниот работен простор
+    send_to_previous_workspace: Испрати прозорец до претходен работен простор
     send_to_workspace: Испрати на работниот простор {{0}}
+    send_to_workspace_down: Испратете го прозорецот до Работниот простор подолу
+    send_to_workspace_up: Испратете го прозорецот до работен простор погоре
     switch_to_next_workspace: Префрлете се на следниот работен простор
     switch_to_previous_workspace: Префрлете се на претходниот работен простор
+    switch_to_workspace_down: Префрлете се на Работниот простор подолу
+    switch_to_workspace_up: Префрлете се на Работниот простор погоре
     switch_workspace: Префрлете се на работниот простор {{0}}
   readonly_tooltip: Ова е кратенка само за читање
   reset: Ресетирање на стандардно
@@ -382,6 +389,12 @@ weg:
     always: Секогаш
     never: Никогаш
     on_overlap: На преклопување
+  import_error: Не успеа да се увезат ставки од лентата со задачи
+  import_from_taskbar:
+    button: Увезете од лентата со задачи на Windows
+    label: Увезете закачени ставки
+  import_no_items: Не се пронајдени закачени ставки во лентата со задачи на Windows
+  import_success: Успешно увезени {{count}} ставки од лентата со задачи на Windows
   items:
     gap: Простор помеѓу предмети
     label: Предмети
@@ -446,6 +459,10 @@ wm:
   drag_behavior_options:
     sort: Подреди (прередете ги прозорците додека се влечете)
     swap: Заменете (заменете ги прозорците на крајот на влечење)
+  floating:
+    height: Висина на пловечки прозорци
+    title: Лебдечка големина на Windows
+    width: Ширина на лебдечки прозорци
   layout: Распоред
   resize_delta: Променете ја големината на Делта (%)
   space_between_containers: Простор помеѓу контејнери

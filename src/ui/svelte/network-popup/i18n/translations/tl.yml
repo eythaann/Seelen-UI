@@ -5,6 +5,15 @@ connecting: Kumokonekta...
 disconnect: Idiskonekta
 forget: Kalimutan
 hidden: Nakatagong Network
+hotspot:
+  band: banda
+  'off': Naka-off
+  'on': Naka-on
+  open_network: Buksan ang network
+  password: Password
+  settings: Higit pang Mga Setting ng Hotspot
+  ssid: Pangalan ng network
+  title: Hotspot
 more: Higit pang Mga Setting ng Network
 no_adapter: Walang nakitang Wi-Fi adapter
 not_found: Walang nakitang mga Wi-Fi network

@@ -273,14 +273,21 @@ shortcuts:
     गर्नुहुन्छ भने असक्षम गर्नुहोस्
   labels:
     create_new_workspace: नयाँ कार्यस्थान सिर्जना गर्नुहोस्
+    create_new_workspace_row: नयाँ कार्यस्थान पङ्क्ति सिर्जना गर्नुहोस्
     destroy_current_workspace: वर्तमान कार्यक्षेत्र नष्ट गर्नुहोस्
     misc_force_quit: बल छोडियो
     misc_force_restart: साउसाट
     move_to_workspace: कार्यक्षेत्रमा जानुहोस् {0}}
     pause_toggle: सर्टकटहरू पज/सुरु गर्नुहोस्
+    send_to_next_workspace: विन्डोलाई अर्को कार्यस्थानमा पठाउनुहोस्
+    send_to_previous_workspace: विन्डोलाई अघिल्लो कार्यस्थानमा पठाउनुहोस्
     send_to_workspace: कार्यक्षेत्रमा पठाउनुहोस् {0}}}
+    send_to_workspace_down: तलको कार्यस्थानमा विन्डो पठाउनुहोस्
+    send_to_workspace_up: माथिको कार्यस्थानमा विन्डो पठाउनुहोस्
     switch_to_next_workspace: अर्को कार्यक्षेत्रमा स्विच गर्नुहोस्
     switch_to_previous_workspace: अघिल्लो कार्यक्षेत्रमा स्विच गर्नुहोस्
+    switch_to_workspace_down: तलको कार्यस्थानमा स्विच गर्नुहोस्
+    switch_to_workspace_up: माथिको कार्यस्थानमा स्विच गर्नुहोस्
     switch_workspace: कार्यक्षेत्रमा स्विच {0}}
   readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
   reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
@@ -381,6 +388,12 @@ weg:
     always: सधैं
     never: कहिल्यै
     on_overlap: ओभरल्यापमा
+  import_error: कार्यपट्टी वस्तुहरू आयात गर्न असफल भयो
+  import_from_taskbar:
+    button: विन्डोज टास्कबारबाट आयात गर्नुहोस्
+    label: पिन गरिएका वस्तुहरू आयात गर्नुहोस्
+  import_no_items: विन्डोज टास्कबारमा पिन गरिएका वस्तुहरू फेला परेनन्
+  import_success: Windows टास्कबारबाट सफलतापूर्वक {{count}} वस्तु(हरू) आयात गरियो
   items:
     gap: वस्तुहरू बीचको ठाउँ
     label: वस्तुहरू
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: 'क्रमबद्ध गर्नुहोस् (तान्दा विन्डोहरू पुन: क्रमबद्ध गर्नुहोस्)'
     swap: स्वैप (ड्र्याग एन्डमा विन्डोज स्वैप)
+  floating:
+    height: फ्लोटिंग विन्डोज उचाइ
+    title: फ्लोटिंग विन्डोज आकार
+    width: फ्लोटिंग विन्डोज चौडाई
   layout: नक्शा
   resize_delta: रिसाइज डेल्टा (%)
   space_between_containers: कन्टेनर बीचको ठाउँ

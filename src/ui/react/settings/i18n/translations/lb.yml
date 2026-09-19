@@ -269,14 +269,21 @@ shortcuts:
     Segen UI Client
   labels:
     create_new_workspace: Neie Aarbechtsberäich erstellen
+    create_new_workspace_row: Erstellt eng nei Workspace Row
     destroy_current_workspace: Zerstéiert aktuell Aarbechtsberäich
     misc_force_quit: Kraaft opzehalen
     misc_force_restart: Kraaft Restart
     move_to_workspace: Plënnert op Aarbechtsberäich {{0}}
     pause_toggle: Pause / Resume Ofkiirzungen
+    send_to_next_workspace: Schéckt Fënster op Next Workspace
+    send_to_previous_workspace: Schéckt Fënster op virdrun Workspace
     send_to_workspace: Schéckt op Aarbechtsberäich {{0}}
+    send_to_workspace_down: Schéckt Fënster op d'Aarbechtsberäich ënnen
+    send_to_workspace_up: Schéckt Fënster op d'Aarbechtsberäich uewen
     switch_to_next_workspace: Wiesselt op d'nächst Aarbechtsberäich
     switch_to_previous_workspace: Wiesselt op virdrun Aarbechtsberäich
+    switch_to_workspace_down: Wiesselt op d'Aarbechtsberäich hei drënner
+    switch_to_workspace_up: Wiesselt op d'Aarbechtsberäich uewen
     switch_workspace: Schalt op Aarbechtsberäich {{0}}
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
   reset: Reset op Defaults
@@ -379,6 +386,12 @@ weg:
     always: Ëmmer
     never: Ni
     on_overlap: Op Iwwerlappung
+  import_error: Ausgefall op Taskbar Elementer importéieren
+  import_from_taskbar:
+    button: Import vun der Windows Taskbar
+    label: Import Pinned Elementer
+  import_no_items: Keng gepecht Elementer an der Windows Taskbar fonnt
+  import_success: Erfollegräich importéiert {{count}} Element(en) vun der Windows Taskbar
   items:
     gap: Raum tëscht Artikelen
     label: Artikelen
@@ -442,6 +455,10 @@ wm:
   drag_behavior_options:
     sort: Sortéieren (Fënstere nei bestellen beim zéien)
     swap: Tauschen (Swap Fënsteren um Drag End)
+  floating:
+    height: Floating Windows Héicht
+    title: Floating Windows Gréisst
+    width: Schwiewend Windows Breet
   layout: Lueden
   resize_delta: Resize Delta (%)
   space_between_containers: Raum tëscht Behälter

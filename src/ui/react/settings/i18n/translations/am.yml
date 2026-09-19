@@ -253,14 +253,21 @@ shortcuts:
   enable_tooltip: የእራስዎን አቋራጮችን ስርዓት የሚተገበሩበትን የእራስዎን አቋራጮዎች ስርዓት የሚተገበሩ ከሆነ ያሰናክሉ
   labels:
     create_new_workspace: አዲስ የስራ ቦታ ይፍጠሩ
+    create_new_workspace_row: አዲስ የስራ ቦታ ረድፍ ፍጠር
     destroy_current_workspace: የአሁኑን የስራ ቦታ አጥፋ
     misc_force_quit: ኃይል አቁሟል
     misc_force_restart: አስገባ
     move_to_workspace: ወደ የሥራ ቦታ ይሂዱ {{0}}}
     pause_toggle: አቋራጮችን ለአፍታ አቁም/ከቆመበት ቀጥል
+    send_to_next_workspace: መስኮት ወደ ቀጣዩ የስራ ቦታ ላክ
+    send_to_previous_workspace: መስኮት ወደ ቀዳሚው የስራ ቦታ ላክ
     send_to_workspace: ወደ የሥራ ቦታ {{0}}}}
+    send_to_workspace_down: መስኮት ከታች ወደ የስራ ቦታ ይላኩ።
+    send_to_workspace_up: መስኮት ከላይ ወደ የስራ ቦታ ላክ
     switch_to_next_workspace: ወደ ቀጣዩ የስራ ቦታ ይቀይሩ
     switch_to_previous_workspace: ወደ ቀዳሚው የስራ ቦታ ይቀይሩ
+    switch_to_workspace_down: ከታች ወደ የስራ ቦታ ቀይር
+    switch_to_workspace_up: ከላይ ወደ የስራ ቦታ ቀይር
     switch_workspace: ወደ የሥራ ቦታ ቀይር {{0}}}
   readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
@@ -359,6 +366,12 @@ weg:
     always: ሁሌም
     never: በጭራሽ
     on_overlap: መደራረብ ላይ
+  import_error: የተግባር አሞሌ ንጥሎችን ማስመጣት አልተሳካም።
+  import_from_taskbar:
+    button: ከዊንዶውስ የተግባር አሞሌ አስመጣ
+    label: የታሰሩ ዕቃዎችን አስመጣ
+  import_no_items: በዊንዶውስ የተግባር አሞሌ ውስጥ ምንም የተሰካ እቃዎች አልተገኙም።
+  import_success: በተሳካ ሁኔታ ከዊንዶውስ የተግባር አሞሌ {{count}} ንጥል ነገር አስመጣ
   items:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች
@@ -421,6 +434,10 @@ wm:
   drag_behavior_options:
     sort: ደርድር (በመጎተት ላይ መስኮቶችን እንደገና ይዘዙ)
     swap: ስዋፕ (በመጎተት መጨረሻ ላይ መስኮቶችን ይቀያይሩ)
+  floating:
+    height: ተንሳፋፊ የዊንዶውስ ከፍታ
+    title: ተንሳፋፊ የዊንዶውስ መጠን
+    width: ተንሳፋፊ የዊንዶውስ ስፋት
   layout: አቀማመጥ
   resize_delta: ዴልታ (%)
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ

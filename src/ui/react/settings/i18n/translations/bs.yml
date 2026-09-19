@@ -268,14 +268,21 @@ shortcuts:
     SEELEN UI
   labels:
     create_new_workspace: Kreirajte novi radni prostor
+    create_new_workspace_row: Kreirajte novi red radnog prostora
     destroy_current_workspace: Uništite trenutni radni prostor
     misc_force_quit: Prisiliti
     misc_force_restart: Restart sile
     move_to_workspace: Pređite na radni prostor {{0}}
     pause_toggle: Prečice za pauzu/nastavljanje
+    send_to_next_workspace: Pošalji prozor na sljedeći radni prostor
+    send_to_previous_workspace: Pošalji prozor u prethodni radni prostor
     send_to_workspace: Pošaljite u radni prostor {{0}}
+    send_to_workspace_down: Pošalji prozor u radni prostor ispod
+    send_to_workspace_up: Pošalji prozor u radni prostor iznad
     switch_to_next_workspace: Prebacite se na sljedeći radni prostor
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor
+    switch_to_workspace_down: Prebacite se na radni prostor ispod
+    switch_to_workspace_up: Prebacite se na radni prostor iznad
     switch_workspace: Prebacite se na radni prostor {{0}}
   readonly_tooltip: Ovo je prečica za čitanje
   reset: Resetiranje na zadane vrijednosti
@@ -380,6 +387,12 @@ weg:
     always: Uvijek
     never: Nikad
     on_overlap: Na preklapanje
+  import_error: Uvoz stavki trake zadataka nije uspio
+  import_from_taskbar:
+    button: Uvoz sa Windows trake zadataka
+    label: Uvezite zakačene stavke
+  import_no_items: Nema zakačenih stavki na Windows traci zadataka
+  import_success: Uspješno uvezeno {{count}} stavki sa Windows trake zadataka
   items:
     gap: Prostor između predmeta
     label: Predmeti
@@ -444,6 +457,10 @@ wm:
   drag_behavior_options:
     sort: Sortiraj (promijeni redoslijed prozora tokom prevlačenja)
     swap: Zamijeni (zamijeni prozore na kraju povlačenja)
+  floating:
+    height: Plutajuća visina prozora
+    title: Plutajuća veličina Windowsa
+    width: Plutajuća širina prozora
   layout: Izgled
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera

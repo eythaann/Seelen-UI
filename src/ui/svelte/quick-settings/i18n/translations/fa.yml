@@ -1,4 +1,15 @@
 app_settings: تنظیمات برنامه
+brightness: روشنایی
+dark_mode: حالت تاریک
+default_multimedia_volume: میزان صدای چندرسانه ای پیش فرض
 disabled: از کار افتاده است
 enabled: فعال شد
+eye_care: مراقبت از چشم
+fm_radio: رادیو اف ام
+hdr: محدوده دینامیکی بالا
+hotspot: هات اسپات
+light_mode: حالت نور
+mobile_broadband: پهنای باند موبایل
+night_light: نور شب
 power: قدرت
+unknown: ناشناس

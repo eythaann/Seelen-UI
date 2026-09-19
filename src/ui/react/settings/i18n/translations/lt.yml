@@ -270,14 +270,21 @@ shortcuts:
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodų sistemą naudodami „Seelen UI“ klientą
   labels:
     create_new_workspace: Sukurkite naują darbo vietą
+    create_new_workspace_row: Sukurti naują darbo srities eilutę
     destroy_current_workspace: Sunaikinkite dabartinę darbo vietą
     misc_force_quit: Jėga mesti
     misc_force_restart: Priverstinis paleidimas iš naujo
     move_to_workspace: Pereikite į darbo vietą {{0}}
     pause_toggle: Pristabdyti / tęsti sparčiuosius klavišus
+    send_to_next_workspace: Siųsti langą į kitą darbo sritį
+    send_to_previous_workspace: Siųsti langą į ankstesnę darbo sritį
     send_to_workspace: Siųsti į darbo vietą {{0}}
+    send_to_workspace_down: Siųsti langą į žemiau esančią darbo sritį
+    send_to_workspace_up: Siųsti langą į aukščiau esančią darbo sritį
     switch_to_next_workspace: Perjunkite į kitą darbo vietą
     switch_to_previous_workspace: Perjunkite į ankstesnę darbo vietą
+    switch_to_workspace_down: Perjunkite į toliau pateiktą darbo sritį
+    switch_to_workspace_up: Perjunkite į aukščiau esančią darbo sritį
     switch_workspace: Perjunkite į darbo vietą {{0}}
   readonly_tooltip: Tai tik skaitomas nuoroda
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus
@@ -378,6 +385,12 @@ weg:
     always: Visada
     never: Niekada
     on_overlap: Ant persidengimo
+  import_error: Nepavyko importuoti užduočių juostos elementų
+  import_from_taskbar:
+    button: Importuoti iš Windows užduočių juostos
+    label: Importuoti prisegtus elementus
+  import_no_items: „Windows“ užduočių juostoje nerasta prisegtų elementų
+  import_success: 'Iš „Windows“ užduočių juostos sėkmingai importuota (-ių) elementų: {{count}}'
   items:
     gap: Tarpas tarp daiktų
     label: Daiktai
@@ -441,6 +454,10 @@ wm:
   drag_behavior_options:
     sort: Rūšiuoti (pertvarkykite langus vilkdami)
     swap: Sukeisti (keisti langus vilkimo pabaigoje)
+  floating:
+    height: Plaukiojantis langų aukštis
+    title: Plaukiojantis „Windows“ dydis
+    width: Plaukiojantis langų plotis
   layout: Išdėstymas
   resize_delta: Pakeisti deltos dydį (%)
   space_between_containers: Tarpas tarp konteinerių

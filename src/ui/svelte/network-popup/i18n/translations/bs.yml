@@ -5,6 +5,15 @@ connecting: Povezivanje...
 disconnect: Prekini vezu
 forget: Zaboravi
 hidden: Skrivena mreža
+hotspot:
+  band: Band
+  'off': Isključeno
+  'on': 'On'
+  open_network: Otvorena mreža
+  password: Lozinka
+  settings: Više postavki Hotspota
+  ssid: Ime mreže
+  title: Hotspot
 more: Više mrežnih postavki
 no_adapter: Nije pronađen Wi-Fi adapter
 not_found: Nije pronađena nijedna Wi-Fi mreža

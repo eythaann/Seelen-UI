@@ -270,14 +270,21 @@ shortcuts:
     Selen UI -client
   labels:
     create_new_workspace: Maak een nieuwe werkruimte
+    create_new_workspace_row: Maak een nieuwe werkruimterij
     destroy_current_workspace: Vernietig de huidige werkruimte
     misc_force_quit: Force stoppen
     misc_force_restart: Opnieuw opstarten forceren
     move_to_workspace: Ga naar de werkruimte {{0}}
     pause_toggle: Snelkoppelingen pauzeren/hervatten
+    send_to_next_workspace: Venster naar volgende werkruimte verzenden
+    send_to_previous_workspace: Venster naar vorige werkruimte verzenden
     send_to_workspace: Verzenden naar werkruimte {{0}}
+    send_to_workspace_down: Stuur venster naar onderstaande werkruimte
+    send_to_workspace_up: Stuur venster naar werkruimte hierboven
     switch_to_next_workspace: Schakel over naar de volgende werkruimte
     switch_to_previous_workspace: Schakel over naar vorige werkruimte
+    switch_to_workspace_down: Schakel hieronder over naar de werkruimte
+    switch_to_workspace_up: Schakel over naar Werkruimte hierboven
     switch_workspace: Schakel over naar werkruimte {{0}}
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
   reset: Reset naar standaardwaarden
@@ -382,6 +389,12 @@ weg:
     always: Altijd
     never: Nooit
     on_overlap: Op overlap
+  import_error: Kan taakbalkitems niet importeren
+  import_from_taskbar:
+    button: Importeren vanuit de Windows-taakbalk
+    label: Vastgezette items importeren
+  import_no_items: Geen vastgezette items gevonden in de Windows-taakbalk
+  import_success: Met succes {{count}} item(s) geïmporteerd uit de Windows-taakbalk
   items:
     gap: Ruimte tussen items
     label: Items
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: Sorteren (vensters opnieuw ordenen tijdens slepen)
     swap: Wisselen (vensters verwisselen aan het einde van het slepen)
+  floating:
+    height: Zwevende vensterhoogte
+    title: Zwevende Windows-grootte
+    width: Zwevende vensterbreedte
   layout: Lay -out
   resize_delta: Wijzig de wijzers van delta (%)
   space_between_containers: Ruimte tussen containers

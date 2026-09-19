@@ -5,6 +5,15 @@ connecting: De liaison...
 disconnect: Déconnecter
 forget: Oublier
 hidden: Réseau caché
+hotspot:
+  band: Groupe
+  'off': Désactivé
+  'on': Sur
+  open_network: Réseau ouvert
+  password: Mot de passe
+  settings: Plus de paramètres de point d'accès
+  ssid: Nom du réseau
+  title: Point chaud
 more: Plus de paramètres réseau
 no_adapter: Aucun adaptateur Wi-Fi trouvé
 not_found: Aucun réseau Wi-Fi trouvé

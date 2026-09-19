@@ -5,6 +5,15 @@ connecting: 연결 중...
 disconnect: 연결 끊기
 forget: 잊다
 hidden: 숨겨진 네트워크
+hotspot:
+  band: 밴드
+  'off': 끄다
+  'on': ~에
+  open_network: 개방형 네트워크
+  password: 비밀번호
+  settings: 추가 핫스팟 설정
+  ssid: 네트워크 이름
+  title: 핫스팟
 more: 추가 네트워크 설정
 no_adapter: Wi-Fi 어댑터를 찾을 수 없습니다.
 not_found: Wi-Fi 네트워크를 찾을 수 없습니다.

@@ -277,14 +277,21 @@ shortcuts:
     client UI Seelen
   labels:
     create_new_workspace: Crea nuovo spazio di lavoro
+    create_new_workspace_row: Crea una nuova riga dell'area di lavoro
     destroy_current_workspace: Distruggi l'attuale spazio di lavoro
     misc_force_quit: Force smettila
     misc_force_restart: Riavvio forzato
     move_to_workspace: Passa su Workspace {{0}}
     pause_toggle: Pausa/Riprendi scorciatoie
+    send_to_next_workspace: Invia la finestra all'area di lavoro successiva
+    send_to_previous_workspace: Invia la finestra all'area di lavoro precedente
     send_to_workspace: Invia a Workspace {{0}}
+    send_to_workspace_down: Invia la finestra all'area di lavoro sottostante
+    send_to_workspace_up: Invia la finestra all'area di lavoro sopra
     switch_to_next_workspace: Passa all'area di lavoro successiva
     switch_to_previous_workspace: Passa all'area di lavoro precedente
+    switch_to_workspace_down: Passa all'area di lavoro qui sotto
+    switch_to_workspace_up: Passa all'area di lavoro sopra
     switch_workspace: Passa a Workspace {{0}}
   readonly_tooltip: Questo è un collegamento di sola lettura
   reset: Ripristina le impostazioni predefinite
@@ -389,6 +396,12 @@ weg:
     always: Sempre
     never: Mai
     on_overlap: Sulla sovrapposizione
+  import_error: Impossibile importare gli elementi della barra delle applicazioni
+  import_from_taskbar:
+    button: Importa dalla barra delle applicazioni di Windows
+    label: Importa elementi appuntati
+  import_no_items: Nessun elemento aggiunto trovato nella barra delle applicazioni di Windows
+  import_success: '{{count}} elemento/i importato/i dalla barra delle applicazioni di Windows'
   items:
     gap: Spazio tra gli Elementi
     label: Elementi
@@ -453,6 +466,10 @@ wm:
   drag_behavior_options:
     sort: Ordina (riordina le finestre durante il trascinamento)
     swap: Scambia (scambia le finestre alla fine del trascinamento)
+  floating:
+    height: Altezza delle finestre mobili
+    title: Dimensioni finestre mobili
+    width: Larghezza delle finestre mobili
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)
   space_between_containers: Spazio tra i Contenitori

@@ -257,14 +257,21 @@ shortcuts:
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ระบบทางลัดของคุณเองโดยใช้ไคลเอนต์ SEELEN UI
   labels:
     create_new_workspace: สร้างพื้นที่ทำงานใหม่
+    create_new_workspace_row: สร้างแถวพื้นที่ทำงานใหม่
     destroy_current_workspace: ทำลายพื้นที่ทำงานปัจจุบัน
     misc_force_quit: บังคับให้เลิก
     misc_force_restart: บังคับให้รีสตาร์ท
     move_to_workspace: ย้ายไปที่ WorksPace {{0}}
     pause_toggle: ทางลัดหยุดชั่วคราว / ดำเนินการต่อ
+    send_to_next_workspace: ส่งหน้าต่างไปยังพื้นที่ทำงานถัดไป
+    send_to_previous_workspace: ส่งหน้าต่างไปยังพื้นที่ทำงานก่อนหน้า
     send_to_workspace: ส่งไปยัง WorksPace {{0}}
+    send_to_workspace_down: ส่งหน้าต่างไปยังพื้นที่ทำงานด้านล่าง
+    send_to_workspace_up: ส่งหน้าต่างไปยังพื้นที่ทำงานด้านบน
     switch_to_next_workspace: เปลี่ยนเป็นพื้นที่ทำงานถัดไป
     switch_to_previous_workspace: เปลี่ยนไปใช้พื้นที่ทำงานก่อนหน้า
+    switch_to_workspace_down: สลับไปที่พื้นที่ทำงานด้านล่าง
+    switch_to_workspace_up: สลับไปที่พื้นที่ทำงานด้านบน
     switch_workspace: สลับไปที่ WorksPace {{0}}
   readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
   reset: รีเซ็ตเป็นค่าเริ่มต้น
@@ -363,6 +370,12 @@ weg:
     always: เสมอ
     never: ไม่เคย
     on_overlap: เมื่อทับซ้อนกัน
+  import_error: ไม่สามารถนำเข้ารายการแถบงานได้
+  import_from_taskbar:
+    button: นำเข้าจากทาสก์บาร์ของ Windows
+    label: นำเข้ารายการที่ปักหมุด
+  import_no_items: ไม่พบรายการที่ปักหมุดไว้ในทาสก์บาร์ของ Windows
+  import_success: นำเข้ารายการ {{count}} รายการจากทาสก์บาร์ของ Windows สำเร็จแล้ว
   items:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ
@@ -425,6 +438,10 @@ wm:
   drag_behavior_options:
     sort: จัดเรียง (เรียงลำดับหน้าต่างใหม่ขณะลาก)
     swap: สลับ (สลับหน้าต่างที่ปลายลาก)
+  floating:
+    height: ความสูงของหน้าต่างลอยตัว
+    title: ขนาดหน้าต่างลอยตัว
+    width: ความกว้างของหน้าต่างแบบลอยตัว
   layout: เค้าโครง
   resize_delta: ปรับขนาดเดลต้า (%)
   space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ

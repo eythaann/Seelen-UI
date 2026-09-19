@@ -5,6 +5,15 @@ connecting: Złączony...
 disconnect: Odłączyć
 forget: Zapominać
 hidden: Ukryta sieć
+hotspot:
+  band: Zespół
+  'off': Wyłączony
+  'on': NA
+  open_network: Otwarta sieć
+  password: Hasło
+  settings: Więcej ustawień hotspotu
+  ssid: Nazwa sieci
+  title: Hotspot
 more: Więcej ustawień sieciowych
 no_adapter: Nie znaleziono adaptera Wi-Fi
 not_found: Nie znaleziono sieci Wi-Fi

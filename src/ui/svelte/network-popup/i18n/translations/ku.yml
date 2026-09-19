@@ -5,6 +5,15 @@ connecting: Têkilî...
 disconnect: Hevqetandin
 forget: Jibîrkirin
 hidden: Tora veşartî
+hotspot:
+  band: Koma
+  'off': Ji
+  'on': Li
+  open_network: Tora vekirî
+  password: Şîfre
+  settings: More Settings Hotspot
+  ssid: Navê torê
+  title: Hotspot
 more: More Settings Network
 no_adapter: Adapterek Wi-Fi nehat dîtin
 not_found: Tora Wi-Fi nehat dîtin

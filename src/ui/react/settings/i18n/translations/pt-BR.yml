@@ -270,14 +270,21 @@ shortcuts:
     UI Client
   labels:
     create_new_workspace: Crie um novo espaço de trabalho
+    create_new_workspace_row: Criar nova linha do espaço de trabalho
     destroy_current_workspace: Destrua o espaço de trabalho atual
     misc_force_quit: Force parou
     misc_force_restart: Forçar reinicialização
     move_to_workspace: Mova para o espaço de trabalho {{0}}
     pause_toggle: Pausar/retomar atalhos
+    send_to_next_workspace: Enviar janela para o próximo espaço de trabalho
+    send_to_previous_workspace: Enviar janela para espaço de trabalho anterior
     send_to_workspace: Enviar para o espaço de trabalho {{0}}
+    send_to_workspace_down: Enviar janela para o espaço de trabalho abaixo
+    send_to_workspace_up: Enviar janela para a área de trabalho acima
     switch_to_next_workspace: Mude para o próximo espaço de trabalho
     switch_to_previous_workspace: Mudar para o espaço de trabalho anterior
+    switch_to_workspace_down: Mudar para o espaço de trabalho abaixo
+    switch_to_workspace_up: Mudar para o espaço de trabalho acima
     switch_workspace: Mudar para o espaço de trabalho {{0}}
   readonly_tooltip: Este é um atalho somente leitura
   reset: Redefinir para padrões
@@ -382,6 +389,12 @@ weg:
     always: Sempre
     never: Nunca
     on_overlap: Na sobreposição
+  import_error: Falha ao importar itens da barra de tarefas
+  import_from_taskbar:
+    button: Importar da barra de tarefas do Windows
+    label: Importar itens fixados
+  import_no_items: Nenhum item fixado encontrado na barra de tarefas do Windows
+  import_success: '{{count}} itens importados com sucesso da barra de tarefas do Windows'
   items:
     gap: Espaço entre itens
     label: Item
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: Classificar (reordenar janelas enquanto arrasta)
     swap: Trocar (trocar janelas ao arrastar)
+  floating:
+    height: Altura flutuante das janelas
+    title: Tamanho flutuante das janelas
+    width: Largura flutuante das janelas
   layout: Disposição
   resize_delta: Delta de redimensionamento (%)
   space_between_containers: Espaço entre contêineres

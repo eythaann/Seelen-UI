@@ -270,14 +270,21 @@ shortcuts:
     گے تو غیر فعال کریں
   labels:
     create_new_workspace: نیا ورک اسپیس بنائیں
+    create_new_workspace_row: نئی ورک اسپیس قطار بنائیں
     destroy_current_workspace: موجودہ ورک اسپیس کو ختم کریں
     misc_force_quit: فورس چھوڑ دیں
     misc_force_restart: زبردستی دوبارہ شروع کریں
     move_to_workspace: ورک اسپیس {{0}} میں منتقل کریں
     pause_toggle: شارٹ کٹس کو موقوف/دوبارہ شروع کریں۔
+    send_to_next_workspace: ونڈو کو نیکسٹ ورک اسپیس پر بھیجیں۔
+    send_to_previous_workspace: ونڈو کو پچھلے ورک اسپیس پر بھیجیں۔
     send_to_workspace: ورک اسپیس کو بھیجیں {{0}}
+    send_to_workspace_down: ونڈو کو نیچے ورک اسپیس پر بھیجیں۔
+    send_to_workspace_up: ونڈو کو اوپر والے ورک اسپیس پر بھیجیں۔
     switch_to_next_workspace: اگلی ورک اسپیس پر سوئچ کریں
     switch_to_previous_workspace: پچھلے ورک اسپیس پر سوئچ کریں
+    switch_to_workspace_down: ذیل میں ورک اسپیس پر سوئچ کریں۔
+    switch_to_workspace_up: اوپر ورک اسپیس پر سوئچ کریں۔
     switch_workspace: ورک اسپیس {{0}} پر سوئچ کریں
   readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
@@ -378,6 +385,12 @@ weg:
     always: ہمیشہ
     never: کبھی نہیں
     on_overlap: اوورلیپ پر
+  import_error: ٹاسک بار آئٹمز درآمد کرنے میں ناکام
+  import_from_taskbar:
+    button: ونڈوز ٹاسک بار سے درآمد کریں۔
+    label: پن کی ہوئی اشیاء درآمد کریں۔
+  import_no_items: ونڈوز ٹاسک بار میں کوئی پن شدہ آئٹم نہیں ملا
+  import_success: ونڈوز ٹاسک بار سے کامیابی کے ساتھ {{count}} آئٹمز درآمد کی گئیں۔
   items:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء
@@ -441,6 +454,10 @@ wm:
   drag_behavior_options:
     sort: ترتیب دیں (گھسیٹتے وقت ونڈوز کو دوبارہ ترتیب دیں)
     swap: تبادلہ (ڈریگ اینڈ پر ونڈوز تبدیل)
+  floating:
+    height: فلوٹنگ ونڈوز کی اونچائی
+    title: فلوٹنگ ونڈوز سائز
+    width: فلوٹنگ ونڈوز چوڑائی
   layout: ترتیب
   resize_delta: ڈیلٹا کا سائز (٪)
   space_between_containers: کنٹینرز کے درمیان جگہ

@@ -5,6 +5,15 @@ connecting: Підключення...
 disconnect: Відключити
 forget: Забути
 hidden: Прихована мережа
+hotspot:
+  band: Група
+  'off': Вимкнено
+  'on': Увімкнено
+  open_network: Відкрита мережа
+  password: Пароль
+  settings: Більше налаштувань точки доступу
+  ssid: Назва мережі
+  title: Точка доступу
 more: Більше налаштувань мережі
 no_adapter: Адаптер Wi-Fi не знайдено
 not_found: Немає мереж Wi-Fi

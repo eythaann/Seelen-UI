@@ -266,14 +266,21 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Unda nafasi mpya ya kazi
+    create_new_workspace_row: Unda Safu Mpya ya Nafasi ya Kazi
     destroy_current_workspace: Kuharibu nafasi ya kazi ya sasa
     misc_force_quit: Nguvu kuacha
     misc_force_restart: Nguvu Anzisha tena
     move_to_workspace: Hoja kwa nafasi ya kazi {{0}}
     pause_toggle: Sitisha/Rejesha Njia za mkato
+    send_to_next_workspace: Tuma Dirisha kwa Nafasi ya Kazi Inayofuata
+    send_to_previous_workspace: Tuma Dirisha kwa Nafasi ya Kazi Iliyotangulia
     send_to_workspace: Tuma kwa nafasi ya kazi {{0}}
+    send_to_workspace_down: Tuma Dirisha kwa Nafasi ya Kazi Hapa Chini
+    send_to_workspace_up: Tuma Dirisha kwa Nafasi ya Kazi Hapo Juu
     switch_to_next_workspace: Badilisha kwenye nafasi ya kazi inayofuata
     switch_to_previous_workspace: Badilisha kwenye nafasi ya kazi ya hapo awali
+    switch_to_workspace_down: Badili hadi Nafasi ya Kazi Hapa chini
+    switch_to_workspace_up: Badili hadi Nafasi ya Kazi Hapo Juu
     switch_workspace: Badilika kwa nafasi ya kazi {{0}}
   readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
   reset: Rudisha kwa defaults
@@ -374,6 +381,14 @@ weg:
     always: Daima
     never: Kamwe
     on_overlap: Juu ya mwingiliano
+  import_error: Imeshindwa kuleta vipengee vya upau wa kazi
+  import_from_taskbar:
+    button: Ingiza kutoka kwa Upau wa Kazi wa Windows
+    label: Ingiza Vipengee Vilivyobandikwa
+  import_no_items: >-
+    Hakuna vipengee vilivyobandikwa vilivyopatikana kwenye upau wa kazi wa
+    Windows
+  import_success: Imefaulu kuleta bidhaa {{count}} kutoka kwa upau wa kazi wa Windows
   items:
     gap: Nafasi kati ya vitu
     label: Vitu
@@ -437,6 +452,10 @@ wm:
   drag_behavior_options:
     sort: Panga (panga upya madirisha huku ukiburuta)
     swap: Badili (badilisha madirisha kwenye mwisho wa buruta)
+  floating:
+    height: Urefu wa Windows unaoelea
+    title: Ukubwa wa Windows unaoelea
+    width: Upana wa Windows unaoelea
   layout: Mpangilio
   resize_delta: Rudisha Delta (%)
   space_between_containers: Nafasi kati ya vyombo

@@ -5,6 +5,15 @@ connecting: Menyambung...
 disconnect: Putuskan sambungan
 forget: lupa
 hidden: Rangkaian Tersembunyi
+hotspot:
+  band: Band
+  'off': Mati
+  'on': hidup
+  open_network: Buka rangkaian
+  password: Kata laluan
+  settings: Lagi Tetapan Hotspot
+  ssid: Nama rangkaian
+  title: Hotspot
 more: Lagi Tetapan Rangkaian
 no_adapter: Tiada penyesuai Wi-Fi ditemui
 not_found: Tiada rangkaian Wi-Fi ditemui

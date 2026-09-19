@@ -281,14 +281,21 @@ shortcuts:
     shortcut gamit ang Seelen UI Client
   labels:
     create_new_workspace: Lumikha ng bagong workspace
+    create_new_workspace_row: Gumawa ng Bagong Workspace Row
     destroy_current_workspace: Wasakin ang kasalukuyang workspace
     misc_force_quit: Puwersa na huminto
     misc_force_restart: Force restart
     move_to_workspace: Lumipat sa workspace {{0}}
     pause_toggle: I-pause/Ipagpatuloy ang Mga Shortcut
+    send_to_next_workspace: Ipadala ang Window sa Susunod na Workspace
+    send_to_previous_workspace: Ipadala ang Window sa Nakaraang Workspace
     send_to_workspace: Ipadala sa Workspace {{0}}
+    send_to_workspace_down: Ipadala ang Window sa Workspace sa ibaba
+    send_to_workspace_up: Ipadala ang Window sa Workspace sa Itaas
     switch_to_next_workspace: Lumipat sa Susunod na Workspace
     switch_to_previous_workspace: Lumipat sa nakaraang workspace
+    switch_to_workspace_down: Lumipat sa Workspace sa ibaba
+    switch_to_workspace_up: Lumipat sa Workspace sa Itaas
     switch_workspace: Lumipat sa workspace {{0}}
   readonly_tooltip: Ito ay isang shortcut na basahin lamang
   reset: I -reset sa mga default
@@ -389,6 +396,12 @@ weg:
     always: Laging
     never: Hindi kailanman
     on_overlap: Sa overlap
+  import_error: Nabigong mag-import ng mga item sa taskbar
+  import_from_taskbar:
+    button: Mag-import mula sa Windows Taskbar
+    label: Mag-import ng Mga Naka-pin na Item
+  import_no_items: Walang nakitang mga naka-pin na item sa Windows taskbar
+  import_success: Matagumpay na na-import ang {{count}} (mga) item mula sa Windows taskbar
   items:
     gap: Puwang sa pagitan ng mga item
     label: Mga item
@@ -453,6 +466,10 @@ wm:
   drag_behavior_options:
     sort: Pagbukud-bukurin (muling ayusin ang mga bintana habang nagda-drag)
     swap: Magpalit (magpalit ng mga bintana sa dulo ng pag-drag)
+  floating:
+    height: Lumulutang na Taas ng Windows
+    title: Lumulutang na Sukat ng Windows
+    width: Lumulutang na Lapad ng Windows
   layout: Layout
   resize_delta: Baguhin ang laki ng Delta (%)
   space_between_containers: Puwang sa pagitan ng mga lalagyan

@@ -1,4 +1,15 @@
 app_settings: Програмын тохиргоо
+brightness: Гэрэлтүүлэг
+dark_mode: Харанхуй горим
+default_multimedia_volume: Өгөгдмөл мультимедиа дууны хэмжээ
 disabled: Идэвхгүй
 enabled: Идэвхжүүлсэн
+eye_care: Нүдний арчилгаа
+fm_radio: FM радио
+hdr: Өндөр динамик хүрээ
+hotspot: Халуун цэг
+light_mode: Гэрэл горим
+mobile_broadband: Гар утасны өргөн зурвас
+night_light: Шөнийн гэрэл
 power: Хүч
+unknown: Тодорхойгүй

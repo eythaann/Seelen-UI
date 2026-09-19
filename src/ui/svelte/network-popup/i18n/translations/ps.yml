@@ -5,6 +5,15 @@ connecting: نښلول...
 disconnect: منحل کول
 forget: هېرول
 hidden: پټه شبکه
+hotspot:
+  band: بند
+  'off': بند
+  'on': پر
+  open_network: خلاص شبکه
+  password: رمز
+  settings: نور Hotspot ترتیبات
+  ssid: د شبکې نوم
+  title: هټ سپټ
 more: نور د شبکې ترتیبات
 no_adapter: هیڅ Wi-Fi اډاپټر ونه موندل شو
 not_found: هیڅ Wi-Fi شبکه ونه موندل شوه

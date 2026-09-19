@@ -5,6 +5,15 @@ connecting: Повезивање...
 disconnect: Прекини везу
 forget: Заборави
 hidden: Скривена мрежа
+hotspot:
+  band: Банд
+  'off': Офф
+  'on': Он
+  open_network: Отворена мрежа
+  password: Лозинка
+  settings: Још подешавања хотспота
+  ssid: Име мреже
+  title: Хотспот
 more: Више мрежних подешавања
 no_adapter: Није пронађен Ви-Фи адаптер
 not_found: Није пронађена ниједна Ви-Фи мрежа

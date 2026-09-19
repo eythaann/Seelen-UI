@@ -274,14 +274,21 @@ shortcuts:
     используя клиент UI SEELEN
   labels:
     create_new_workspace: Создайте новое рабочее пространство
+    create_new_workspace_row: Создать новую строку рабочей области
     destroy_current_workspace: Уничтожить текущее рабочее пространство
     misc_force_quit: Сила ухода
     misc_force_restart: Принудительный перезапуск
     move_to_workspace: Перейти в рабочую пространство {{0}}
     pause_toggle: Ярлыки паузы/возобновления
+    send_to_next_workspace: Отправить окно в следующую рабочую область
+    send_to_previous_workspace: Отправить окно в предыдущую рабочую область
     send_to_workspace: Отправить в рабочее пространство {{0}}
+    send_to_workspace_down: Отправить окно в рабочую область ниже
+    send_to_workspace_up: Отправить окно в рабочую область выше
     switch_to_next_workspace: Переключиться на следующее рабочее пространство
     switch_to_previous_workspace: Переключиться на предыдущее рабочее пространство
+    switch_to_workspace_down: Переключиться на рабочую область ниже
+    switch_to_workspace_up: Переключиться на рабочую область выше
     switch_workspace: Переключить на рабочее пространство {{0}}
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
@@ -382,6 +389,12 @@ weg:
     always: Всегда
     never: Никогда
     on_overlap: При перекрытии
+  import_error: Не удалось импортировать элементы панели задач.
+  import_from_taskbar:
+    button: Импорт из панели задач Windows
+    label: Импортировать закрепленные элементы
+  import_no_items: На панели задач Windows не найдено закрепленных элементов.
+  import_success: Успешно импортировано {{count}} элементов с панели задач Windows.
   items:
     gap: Расстояние между иконок
     label: Иконки
@@ -445,6 +458,10 @@ wm:
   drag_behavior_options:
     sort: Сортировка (изменение порядка окон при перетаскивании)
     swap: Swap (поменять окна на конце перетаскивания)
+  floating:
+    height: Плавающая высота окон
+    title: Плавающий размер окна
+    width: Плавающая ширина окна
   layout: Макет
   resize_delta: Шаг изменения размера (%)
   space_between_containers: Пространство между контейнерами

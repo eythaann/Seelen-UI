@@ -5,6 +5,15 @@ connecting: Conectando...
 disconnect: Desconectar
 forget: Esquecer
 hidden: Rede Oculta
+hotspot:
+  band: Banda
+  'off': Desligada
+  'on': Sobre
+  open_network: Rede aberta
+  password: Senha
+  settings: Mais configurações de ponto de acesso
+  ssid: Nome da rede
+  title: Ponto de acesso
 more: Mais configurações de rede
 no_adapter: Nenhum adaptador Wi-Fi encontrado
 not_found: Nenhuma rede Wi-Fi encontrada

@@ -1,4 +1,15 @@
 app_settings: Configuració de l'aplicació
+brightness: Brillantor
+dark_mode: Mode fosc
+default_multimedia_volume: Volum multimèdia predeterminat
 disabled: Inhabilitat
 enabled: Habilitat
+eye_care: Cura dels ulls
+fm_radio: Ràdio FM
+hdr: Alt rang dinàmic
+hotspot: Hotspot
+light_mode: Mode de llum
+mobile_broadband: Banda ampla mòbil
+night_light: Llum nocturna
 power: Poder
+unknown: Desconegut

@@ -274,14 +274,21 @@ shortcuts:
     du client de l'interface utilisateur Seelen
   labels:
     create_new_workspace: Créer un nouvel espace de travail
+    create_new_workspace_row: Créer une nouvelle ligne d'espace de travail
     destroy_current_workspace: Détruire l'espace de travail actuel
     misc_force_quit: Force quitter
     misc_force_restart: Forcer le redémarrage
     move_to_workspace: Déplacer dans l'espace de travail {{0}}
     pause_toggle: Raccourcis Pause/Reprise
+    send_to_next_workspace: Envoyer la fenêtre à l'espace de travail suivant
+    send_to_previous_workspace: Envoyer la fenêtre vers l'espace de travail précédent
     send_to_workspace: Envoyer à Workspace {{0}}
+    send_to_workspace_down: Envoyer la fenêtre vers l'espace de travail ci-dessous
+    send_to_workspace_up: Envoyer la fenêtre vers l'espace de travail ci-dessus
     switch_to_next_workspace: Passez à l'espace de travail suivant
     switch_to_previous_workspace: Passez à l'espace de travail précédent
+    switch_to_workspace_down: Passer à l'espace de travail ci-dessous
+    switch_to_workspace_up: Passer à l'espace de travail ci-dessus
     switch_workspace: Passez à Workspace {{0}}
   readonly_tooltip: Ceci est un raccourci en lecture seule
   reset: Réinitialiser les valeurs par défaut
@@ -388,6 +395,14 @@ weg:
     always: Toujours
     never: Jamais
     on_overlap: Si chevauchement
+  import_error: Échec de l'importation des éléments de la barre des tâches
+  import_from_taskbar:
+    button: Importer depuis la barre des tâches Windows
+    label: Importer des éléments épinglés
+  import_no_items: Aucun élément épinglé trouvé dans la barre des tâches Windows
+  import_success: >-
+    {{count}} élément(s) importé(s) avec succès depuis la barre des tâches
+    Windows
   items:
     gap: Espace entre les éléments
     label: Applications
@@ -451,6 +466,10 @@ wm:
   drag_behavior_options:
     sort: Trier (réorganiser les fenêtres en les faisant glisser)
     swap: Swap (échanger les fenêtres à la fin du glissement)
+  floating:
+    height: Hauteur des fenêtres flottantes
+    title: Taille des fenêtres flottantes
+    width: Largeur des fenêtres flottantes
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)
   space_between_containers: Espacement entre les conteneurs

@@ -5,6 +5,15 @@ connecting: Qoşulur...
 disconnect: Bağlantını kəsin
 forget: Unut
 hidden: Gizli şəbəkə
+hotspot:
+  band: Band
+  'off': Söndür
+  'on': Aktiv
+  open_network: Açıq şəbəkə
+  password: parol
+  settings: Daha çox Hotspot Parametrləri
+  ssid: Şəbəkə adı
+  title: Qaynar nöqtə
 more: Daha çox Şəbəkə Parametrləri
 no_adapter: Wi-Fi adapteri tapılmadı
 not_found: Heç bir Wi-Fi şəbəkəsi tapılmadı

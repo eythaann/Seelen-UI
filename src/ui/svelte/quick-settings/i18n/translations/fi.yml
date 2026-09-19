@@ -1,4 +1,15 @@
 app_settings: Sovellusasetukset
+brightness: Kirkkaus
+dark_mode: Tumma tila
+default_multimedia_volume: Multimedian oletusäänenvoimakkuus
 disabled: Ei käytössä
 enabled: Käytössä
+eye_care: Näönhoito
+fm_radio: FM-radio
+hdr: Korkea dynaaminen alue
+hotspot: Hotspot
+light_mode: Valotila
+mobile_broadband: Mobiililaajakaista
+night_light: Yövalo
 power: Tehoa
+unknown: Tuntematon

@@ -5,6 +5,15 @@ connecting: Ulanmoqda...
 disconnect: Ulanishni uzing
 forget: Unut
 hidden: Yashirin tarmoq
+hotspot:
+  band: Band
+  'off': Oʻchirilgan
+  'on': Yoniq
+  open_network: Ochiq tarmoq
+  password: Parol
+  settings: Ko'proq Hotspot sozlamalari
+  ssid: Tarmoq nomi
+  title: Hotspot
 more: Qo'shimcha tarmoq sozlamalari
 no_adapter: Hech qanday Wi-Fi adapteri topilmadi
 not_found: Wi-Fi tarmoqlari topilmadi

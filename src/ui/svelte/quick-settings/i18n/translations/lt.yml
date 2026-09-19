@@ -1,4 +1,15 @@
 app_settings: Programos nustatymai
+brightness: Ryškumas
+dark_mode: Tamsusis režimas
+default_multimedia_volume: Numatytasis daugialypės terpės garsumas
 disabled: Išjungta
 enabled: Įjungta
+eye_care: Akių priežiūra
+fm_radio: FM radijas
+hdr: Didelis dinaminis diapazonas
+hotspot: Hotspot
+light_mode: Šviesos režimas
+mobile_broadband: Mobilusis plačiajuostis ryšys
+night_light: Naktinė šviesa
 power: Galia
+unknown: Nežinoma

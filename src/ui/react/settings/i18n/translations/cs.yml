@@ -271,14 +271,21 @@ shortcuts:
     Seelen UI.
   labels:
     create_new_workspace: Vytvoření nového pracovního prostoru
+    create_new_workspace_row: Vytvořit nový řádek pracovního prostoru
     destroy_current_workspace: Zničit aktuální pracovní prostor
     misc_force_quit: Síla přestat
     misc_force_restart: Vynutit restart
     move_to_workspace: Přesun do pracovního prostoru {{0}}
     pause_toggle: Zkratky pro pozastavení/obnovení
+    send_to_next_workspace: Odeslat okno do dalšího pracovního prostoru
+    send_to_previous_workspace: Odeslat okno do předchozího pracovního prostoru
     send_to_workspace: Odeslat do pracovního prostoru {{0}}
+    send_to_workspace_down: Odeslat okno do pracovního prostoru níže
+    send_to_workspace_up: Odeslat okno do pracovního prostoru výše
     switch_to_next_workspace: Přepnutí na další pracovní plochu
     switch_to_previous_workspace: Přepnutí na předchozí pracovní plochu
+    switch_to_workspace_down: Přepněte na pracovní prostor níže
+    switch_to_workspace_up: Přepněte na pracovní prostor výše
     switch_workspace: Přepnutí na pracovní plochu {{0}}
   readonly_tooltip: Toto je zkratka pouze pro čtení
   reset: Obnovení výchozího nastavení
@@ -379,6 +386,12 @@ weg:
     always: Vždy
     never: Nikdy
     on_overlap: Při překrytí
+  import_error: Import položek hlavního panelu se nezdařil
+  import_from_taskbar:
+    button: Import z hlavního panelu Windows
+    label: Importujte připnuté položky
+  import_no_items: Na hlavním panelu Windows nebyly nalezeny žádné připnuté položky
+  import_success: Úspěšně importováno {{count}} položek z hlavního panelu Windows
   items:
     gap: Prostor mezi položkami
     label: Položky
@@ -442,6 +455,10 @@ wm:
   drag_behavior_options:
     sort: Řadit (změnit pořadí oken při přetahování)
     swap: Zaměnit (vyměnit okna na konci přetažení)
+  floating:
+    height: Výška plovoucí okna
+    title: Velikost plovoucího okna
+    width: Plovoucí šířka okna
   layout: Rozložení
   resize_delta: Změna velikosti (%)
   space_between_containers: Prostor mezi kontejnery

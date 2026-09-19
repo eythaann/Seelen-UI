@@ -5,6 +5,15 @@ connecting: በመገናኘት ላይ...
 disconnect: ግንኙነት አቋርጥ
 forget: እርሳ
 hidden: የተደበቀ አውታረ መረብ
+hotspot:
+  band: ባንድ
+  'off': ጠፍቷል
+  'on': በርቷል
+  open_network: አውታረ መረብ ክፈት
+  password: የይለፍ ቃል
+  settings: ተጨማሪ መገናኛ ነጥብ ቅንብሮች
+  ssid: የአውታረ መረብ ስም
+  title: መገናኛ ነጥብ
 more: ተጨማሪ የአውታረ መረብ ቅንብሮች
 no_adapter: ምንም የWi-Fi አስማሚ አልተገኘም።
 not_found: ምንም የWi-Fi አውታረ መረቦች አልተገኙም።

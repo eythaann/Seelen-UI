@@ -5,6 +5,15 @@ connecting: Spojovací...
 disconnect: Odpojit
 forget: Zapomenout
 hidden: Skrytá síť
+hotspot:
+  band: Kapela
+  'off': Vypnuto
+  'on': Na
+  open_network: Otevřená síť
+  password: Heslo
+  settings: Další nastavení hotspotu
+  ssid: Název sítě
+  title: Hotspot
 more: Další nastavení sítě
 no_adapter: Nebyl nalezen žádný adaptér Wi-Fi
 not_found: Nebyly nalezeny žádné sítě Wi-Fi

@@ -1,4 +1,15 @@
 app_settings: აპის პარამეტრები
+brightness: სიკაშკაშე
+dark_mode: მუქი რეჟიმი
+default_multimedia_volume: ნაგულისხმევი მულტიმედიური მოცულობა
 disabled: გამორთულია
 enabled: ჩართულია
+eye_care: თვალის მოვლა
+fm_radio: FM რადიო
+hdr: მაღალი დინამიური დიაპაზონი
+hotspot: ცხელი წერტილი
+light_mode: სინათლის რეჟიმი
+mobile_broadband: მობილური ინტერნეტი
+night_light: ღამის სინათლე
 power: ძალაუფლება
+unknown: უცნობი

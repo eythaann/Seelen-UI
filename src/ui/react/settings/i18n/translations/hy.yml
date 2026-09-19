@@ -272,14 +272,21 @@ shortcuts:
     `օգտագործելով Seelen UI հաճախորդը
   labels:
     create_new_workspace: Ստեղծեք նոր աշխատանքային տարածք
+    create_new_workspace_row: Ստեղծեք աշխատանքային տարածքի նոր տող
     destroy_current_workspace: Քանդել ընթացիկ աշխատանքային տարածքը
     misc_force_quit: Ուժը թողնել
     misc_force_restart: FORCE REARTART
     move_to_workspace: Տեղափոխվել դեպի Workspace {0}
     pause_toggle: Դադարեցնել/Վերսկսել դյուրանցումներ
+    send_to_next_workspace: Ուղարկեք պատուհանը հաջորդ աշխատանքային տարածք
+    send_to_previous_workspace: Ուղարկեք պատուհանը նախորդ աշխատանքային տարածք
     send_to_workspace: Ուղարկել Workspace- ին {0}
+    send_to_workspace_down: Պատուհանն ուղարկեք ստորև բերված աշխատանքային տարածք
+    send_to_workspace_up: Ուղարկեք պատուհանը վերևում գտնվող աշխատանքային տարածք
     switch_to_next_workspace: Անցեք հաջորդ աշխատանքային տարածքին
     switch_to_previous_workspace: Անցեք նախորդ աշխատանքային տարածքին
+    switch_to_workspace_down: Անցեք ներքևում գտնվող աշխատանքային տարածքին
+    switch_to_workspace_up: Անցեք վերևում գտնվող աշխատանքային տարածքին
     switch_workspace: Անցեք Workspace- ին {{0}}
   readonly_tooltip: Սա ընթերցված դյուրանցում է
   reset: Վերականգնել կանխադրված
@@ -380,6 +387,12 @@ weg:
     always: Միշտ
     never: Երբեք
     on_overlap: Համընկնման վրա
+  import_error: Չհաջողվեց ներմուծել առաջադրանքների տողի տարրերը
+  import_from_taskbar:
+    button: Ներմուծում Windows Taskbar-ից
+    label: Ներմուծեք ամրացված տարրեր
+  import_no_items: Windows-ի առաջադրանքների տողում ամրացված տարրեր չեն գտնվել
+  import_success: Windows-ի առաջադրանքների տողից հաջողությամբ ներմուծվեց {{count}} տարր
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
@@ -443,6 +456,10 @@ wm:
   drag_behavior_options:
     sort: Տեսակավորել (վերադասավորել պատուհանները քաշելիս)
     swap: Փոխանակում (փոխանակեք պատուհանները՝ քաշելու վերջում)
+  floating:
+    height: Լողացող պատուհանների բարձրությունը
+    title: Լողացող պատուհանների չափը
+    width: Լողացող պատուհանների լայնությունը
   layout: Դասավորություն
   resize_delta: Չափափոխել դելտան (%)
   space_between_containers: Տիեզերք բեռնարկղերի միջեւ

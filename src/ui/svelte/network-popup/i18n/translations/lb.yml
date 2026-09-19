@@ -5,6 +5,15 @@ connecting: Connectéiert ...
 disconnect: Trennen
 forget: Vergiessen
 hidden: Hidden Network
+hotspot:
+  band: Band
+  'off': 'Off'
+  'on': Op
+  open_network: Open Reseau
+  password: Passwuert
+  settings: Méi Hotspot Astellungen
+  ssid: Netzwierk Numm
+  title: Hotspot
 more: Méi Network Settings
 no_adapter: Kee Wi-Fi Adapter fonnt
 not_found: Keng Wi-Fi Netzwierker fonnt

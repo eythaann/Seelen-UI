@@ -5,6 +5,15 @@ connecting: 正在连接...
 disconnect: 断开
 forget: 忘记
 hidden: 隐藏网络
+hotspot:
+  band: 乐队
+  'off': 离开
+  'on': 在
+  open_network: 开放网络
+  password: 密码
+  settings: 更多热点设置
+  ssid: 网络名称
+  title: 热点
 more: 更多网络设置
 no_adapter: 找不到 Wi-Fi 适配器
 not_found: 未找到 Wi-Fi 网络

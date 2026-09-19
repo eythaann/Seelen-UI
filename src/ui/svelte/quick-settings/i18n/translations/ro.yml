@@ -1,4 +1,15 @@
 app_settings: Setările aplicației
+brightness: Luminozitate
+dark_mode: Modul întunecat
+default_multimedia_volume: Volum multimedia implicit
 disabled: Dezactivat
 enabled: Activat
+eye_care: Îngrijirea ochilor
+fm_radio: Radio FM
+hdr: Interval dinamic ridicat
+hotspot: Hotspot
+light_mode: Modul de lumină
+mobile_broadband: Banda largă mobilă
+night_light: Lumină de noapte
 power: Putere
+unknown: Necunoscut

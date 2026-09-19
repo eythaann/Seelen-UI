@@ -243,14 +243,21 @@ shortcuts:
   enable_tooltip: Seelen UIクライアントを使用して独自のショートカットシステムを実装する場合は無効にします
   labels:
     create_new_workspace: 新しいワークスペースを作成
+    create_new_workspace_row: 新しいワークスペース行の作成
     destroy_current_workspace: 現在のワークスペースを破棄
     misc_force_quit: 強制終了する
     misc_force_restart: 強制再起動する
     move_to_workspace: ワークスペースに移動{{0}}
     pause_toggle: 一時停止/再開のショートカット
+    send_to_next_workspace: ウィンドウを次のワークスペースに送信
+    send_to_previous_workspace: ウィンドウを前のワークスペースに送信
     send_to_workspace: ワークスペース {{0}} に送信
+    send_to_workspace_down: ウィンドウを下のワークスペースに送信
+    send_to_workspace_up: ウィンドウを上のワークスペースに送信
     switch_to_next_workspace: 次のワークスペースに切り替え
     switch_to_previous_workspace: 前のワークスペースに切り替え
+    switch_to_workspace_down: 以下のワークスペースに切り替えます
+    switch_to_workspace_up: 上のワークスペースに切り替える
     switch_workspace: ワークスペースに切り替え{{0}}
   readonly_tooltip: 読み取り専用
   reset: デフォルトにリセット
@@ -349,6 +356,12 @@ weg:
     always: 常に
     never: 無効
     on_overlap: 重なり時
+  import_error: タスクバー項目のインポートに失敗しました
+  import_from_taskbar:
+    button: Windows タスクバーからインポート
+    label: ピン留めされたアイテムをインポートする
+  import_no_items: Windows タスクバーに固定された項目が見つかりません
+  import_success: Windows タスクバーから {{count}} 個のアイテムを正常にインポートしました
   items:
     gap: アイテム間のスペース
     label: ドック上のアイテム
@@ -410,6 +423,10 @@ wm:
   drag_behavior_options:
     sort: 並べ替え (ドラッグしながらウィンドウの順序を変更)
     swap: スワップ (ドラッグ終了時にウィンドウをスワップ)
+  floating:
+    height: フローティング ウィンドウの高さ
+    title: フローティング ウィンドウのサイズ
+    width: フローティング ウィンドウの幅
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）
   space_between_containers: ウィンドウ間の間隔

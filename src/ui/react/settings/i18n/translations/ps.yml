@@ -263,14 +263,21 @@ shortcuts:
     کړئ
   labels:
     create_new_workspace: نوی کارځای جوړ کړئ
+    create_new_workspace_row: د نوي کاري ځای قطار جوړ کړئ
     destroy_current_workspace: اوسني کاري ځای ویجاړ کړئ
     misc_force_quit: ځواک پرېښودل
     misc_force_restart: ځواک بیاچالانول
     move_to_workspace: د کارځای ته لاړ شئ {0 0}}
     pause_toggle: شارټ کټونه ودرول/بیا پیل کړئ
+    send_to_next_workspace: کړکۍ بل کاري ځای ته واستوئ
+    send_to_previous_workspace: مخکینی کاري ځای ته کړکۍ واستوئ
     send_to_workspace: کارځای ته واستوئ {{0}}
+    send_to_workspace_down: لاندې کاري ځای ته کړکۍ واستوئ
+    send_to_workspace_up: پورته کاري ځای ته کړکۍ واستوئ
     switch_to_next_workspace: راتلونکی کاري ځای ته لاړشئ
     switch_to_previous_workspace: پخوانیو ورکشاپ ته واړوئ
+    switch_to_workspace_down: لاندې کاري ځای ته لاړشئ
+    switch_to_workspace_up: پورته کاري ځای ته لاړشئ
     switch_workspace: د کارځای ته لاړشئ {0 0}}
   readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
   reset: د افلاسیون لپاره بیا تنظیمول
@@ -369,6 +376,12 @@ weg:
     always: تل
     never: هیڅکله نه
     on_overlap: پر اوورلیپ
+  import_error: د ټاسک بار توکي واردولو کې پاتې راغلل
+  import_from_taskbar:
+    button: د وینډوز ټاسک بار څخه وارد کړئ
+    label: پینډ شوي توکي وارد کړئ
+  import_no_items: په وینډوز ټاسک بار کې هیڅ پنډ شوي توکي ندي موندل شوي
+  import_success: د وینډوز ټاسک بار څخه په بریالیتوب سره {{count}} توکي وارد شوي
   items:
     gap: د توکو تر مینځ فضا
     label: توکي
@@ -431,6 +444,10 @@ wm:
   drag_behavior_options:
     sort: ترتیب کړئ (د ځړولو پرمهال کړکۍ بیا تنظیم کړئ)
     swap: تبادله (د ډریګ په پای کې کړکۍ بدلول)
+  floating:
+    height: د وینډوز لوړوالی تیریږي
+    title: د وینډوز اندازه تیریږي
+    width: د وینډوز پلنوالی
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   space_between_containers: د کانتینرونو ترمینځ ځای

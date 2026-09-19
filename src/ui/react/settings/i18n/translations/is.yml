@@ -266,14 +266,21 @@ shortcuts:
     viðskiptavininum
   labels:
     create_new_workspace: Búðu til nýja vinnusvæði
+    create_new_workspace_row: Búðu til nýja vinnusvæðislínu
     destroy_current_workspace: Eyðileggja núverandi vinnusvæði
     misc_force_quit: Force hætti
     misc_force_restart: Force endurræsing
     move_to_workspace: Fara í vinnusvæði {{0}}
     pause_toggle: Gera hlé / halda áfram flýtileiðum
+    send_to_next_workspace: Senda glugga á næsta vinnusvæði
+    send_to_previous_workspace: Senda glugga á fyrra vinnusvæði
     send_to_workspace: Sendu á Workspace {{0}}
+    send_to_workspace_down: Sendu glugga á vinnusvæði fyrir neðan
+    send_to_workspace_up: Sendu glugga á vinnusvæði fyrir ofan
     switch_to_next_workspace: Skiptu yfir í næsta vinnusvæði
     switch_to_previous_workspace: Skiptu yfir í fyrri vinnusvæði
+    switch_to_workspace_down: Skiptu yfir í vinnusvæði fyrir neðan
+    switch_to_workspace_up: Skiptu yfir í vinnusvæði hér að ofan
     switch_workspace: Skiptu yfir í vinnusvæði {{0}}
   readonly_tooltip: Þetta er aðeins skrifvarinn
   reset: Endurstilla í vanskil
@@ -372,6 +379,12 @@ weg:
     always: Alltaf
     never: Aldrei
     on_overlap: Á skörun
+  import_error: Mistókst að flytja inn verkstikuatriði
+  import_from_taskbar:
+    button: Flytja inn frá Windows Verkefnastikunni
+    label: Flytja inn festa hluti
+  import_no_items: Engir festir hlutir fundust í Windows verkefnastikunni
+  import_success: Tókst að flytja inn {{count}} atriði af Windows verkefnastikunni
   items:
     gap: Rými milli atriða
     label: Hlutir
@@ -435,6 +448,10 @@ wm:
   drag_behavior_options:
     sort: Raða (endurraða gluggum á meðan þú dregur)
     swap: Skipta (skipta um glugga á dragenda)
+  floating:
+    height: Fljótandi gluggahæð
+    title: Fljótandi Windows Stærð
+    width: Fljótandi Windows Breidd
   layout: Skipulag
   resize_delta: Breyta stærð delta (%)
   space_between_containers: Rými milli gáma

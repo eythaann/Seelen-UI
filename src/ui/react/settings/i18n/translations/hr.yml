@@ -273,14 +273,21 @@ shortcuts:
     Seelen UI
   labels:
     create_new_workspace: Stvorite novi radni prostor
+    create_new_workspace_row: Stvorite novi redak radnog prostora
     destroy_current_workspace: Uništiti trenutni radni prostor
     misc_force_quit: Sila je odustala
     misc_force_restart: Ponovno pokrenite
     move_to_workspace: Pomaknite se na radni prostor {{0}}
     pause_toggle: Pauziraj/nastavi prečace
+    send_to_next_workspace: Pošalji prozor na sljedeći radni prostor
+    send_to_previous_workspace: Pošalji prozor na prethodni radni prostor
     send_to_workspace: Pošaljite u radni prostor {{0}}
+    send_to_workspace_down: Pošalji prozor u radni prostor ispod
+    send_to_workspace_up: Pošalji prozor u radni prostor iznad
     switch_to_next_workspace: Prebacite se na sljedeći radni prostor
     switch_to_previous_workspace: Prebacite se na prethodni radni prostor
+    switch_to_workspace_down: Prebacite se na radni prostor ispod
+    switch_to_workspace_up: Prebacite se na radni prostor iznad
     switch_workspace: Prebacite se na radni prostor {{0}}
   readonly_tooltip: Ovo je prečac samo za čitanje
   reset: Ponovno postavite na zadane vrijednosti
@@ -381,6 +388,12 @@ weg:
     always: Uvijek
     never: Nikada
     on_overlap: Na preklapanju
+  import_error: Uvoz stavki programske trake nije uspio
+  import_from_taskbar:
+    button: Uvoz iz programske trake sustava Windows
+    label: Uvoz prikvačenih stavki
+  import_no_items: Na programskoj traci sustava Windows nisu pronađene prikvačene stavke
+  import_success: Uspješno uvezeno {{count}} stavki s Windows programske trake
   items:
     gap: Prostor između predmeta
     label: Predmeti
@@ -444,6 +457,10 @@ wm:
   drag_behavior_options:
     sort: Poredaj (promjena redoslijeda prozora tijekom povlačenja)
     swap: Zamjena (zamjena prozora na kraju povlačenja)
+  floating:
+    height: Plutajuća visina prozora
+    title: Plutajuća veličina prozora
+    width: Plutajuća širina prozora
   layout: Raspored
   resize_delta: Promijenite veličinu delta (%)
   space_between_containers: Prostor između spremnika

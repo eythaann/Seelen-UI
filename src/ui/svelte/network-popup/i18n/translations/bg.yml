@@ -5,6 +5,15 @@ connecting: Свързване...
 disconnect: Прекъснете връзката
 forget: Забравете
 hidden: Скрита мрежа
+hotspot:
+  band: Група
+  'off': Изкл
+  'on': включено
+  open_network: Отворена мрежа
+  password: Парола
+  settings: Още настройки на Hotspot
+  ssid: Име на мрежата
+  title: Гореща точка
 more: Още мрежови настройки
 no_adapter: Не е намерен Wi-Fi адаптер
 not_found: Няма намерени Wi-Fi мрежи

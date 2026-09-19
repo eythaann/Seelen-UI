@@ -5,6 +5,15 @@ connecting: Verbinden...
 disconnect: Verbreek de verbinding
 forget: Vergeten
 hidden: Verborgen netwerk
+hotspot:
+  band: Band
+  'off': Uit
+  'on': Op
+  open_network: Open netwerk
+  password: Wachtwoord
+  settings: Meer hotspot-instellingen
+  ssid: Netwerknaam
+  title: Hotspot
 more: Meer netwerkinstellingen
 no_adapter: Geen wifi-adapter gevonden
 not_found: Geen wifi-netwerken gevonden

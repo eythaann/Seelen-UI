@@ -266,14 +266,21 @@ shortcuts:
     ، غیرفعال کنید
   labels:
     create_new_workspace: فضای کاری جدید ایجاد کنید
+    create_new_workspace_row: ردیف فضای کاری جدید ایجاد کنید
     destroy_current_workspace: فضای کاری فعلی را نابود کنید
     misc_force_quit: نیرو ترک
     misc_force_restart: مجدداً نیرو
     move_to_workspace: حرکت به فضای کاری {{0}}
     pause_toggle: میانبرهای مکث/ازسرگیری
+    send_to_next_workspace: پنجره را به فضای کاری بعدی ارسال کنید
+    send_to_previous_workspace: ارسال پنجره به فضای کاری قبلی
     send_to_workspace: ارسال به فضای کاری {{0}}
+    send_to_workspace_down: پنجره را به فضای کاری زیر ارسال کنید
+    send_to_workspace_up: پنجره را به فضای کاری بالا ارسال کنید
     switch_to_next_workspace: به فضای کاری بعدی بروید
     switch_to_previous_workspace: به فضای کاری قبلی بروید
+    switch_to_workspace_down: به فضای کاری زیر بروید
+    switch_to_workspace_up: به فضای کاری بالا بروید
     switch_workspace: تغییر به فضای کاری {{0}}
   readonly_tooltip: این یک میانبر فقط خواندنی است
   reset: تنظیم مجدد به پیش فرض
@@ -374,6 +381,12 @@ weg:
     always: همیشه
     never: هرگز
     on_overlap: روی همپوشانی
+  import_error: وارد کردن موارد نوار وظیفه انجام نشد
+  import_from_taskbar:
+    button: وارد کردن از نوار وظیفه ویندوز
+    label: موارد پین شده را وارد کنید
+  import_no_items: هیچ مورد پین شده ای در نوار وظیفه ویندوز یافت نشد
+  import_success: '{{count}} مورد از نوار وظیفه ویندوز با موفقیت وارد شد'
   items:
     gap: فضای بین موارد
     label: موارد
@@ -436,6 +449,10 @@ wm:
   drag_behavior_options:
     sort: مرتب سازی (ترتیب مجدد پنجره ها در حین کشیدن)
     swap: تعویض (تعویض پنجره ها در انتهای کشیدن)
+  floating:
+    height: ارتفاع پنجره شناور
+    title: اندازه ویندوز شناور
+    width: پهنای ویندوز شناور
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)
   space_between_containers: فضای بین ظروف

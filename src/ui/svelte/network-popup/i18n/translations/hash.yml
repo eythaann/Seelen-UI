@@ -5,6 +5,14 @@ connecting: 283f1f98
 disconnect: 989cd708
 forget: 2ff92d4c
 hidden: e3cf5b88
+hotspot.band: '16753748'
+hotspot.off: 1d49fc5c
+hotspot.on: 3ee4486a
+hotspot.open_network: 68302d48
+hotspot.password: 9c06d432
+hotspot.settings: 780df3a8
+hotspot.ssid: efd5fda8
+hotspot.title: 822cd310
 more: c7c0c460
 no_adapter: 35032bd4
 not_found: 75a8cbf4

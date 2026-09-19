@@ -5,6 +5,15 @@ connecting: Konnessjoni...
 disconnect: Skonnettja
 forget: Tinsa
 hidden: Netwerk Moħbi
+hotspot:
+  band: Banda
+  'off': Mitfi
+  'on': Fuq
+  open_network: Netwerk miftuħ
+  password: Password
+  settings: Aktar Settings Hotspot
+  ssid: Isem tan-netwerk
+  title: Hotspot
 more: Aktar Settings tan-Netwerk
 no_adapter: Ma nstab l-ebda adapter Wi-Fi
 not_found: Ma nstab l-ebda netwerk Wi-Fi

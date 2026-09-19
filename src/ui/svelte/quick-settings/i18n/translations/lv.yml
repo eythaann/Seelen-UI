@@ -1,4 +1,15 @@
 app_settings: Lietotņu iestatījumi
+brightness: Spilgtums
+dark_mode: Tumšais režīms
+default_multimedia_volume: Noklusējuma multivides skaļums
 disabled: Atspējots
 enabled: Iespējots
+eye_care: Acu kopšana
+fm_radio: FM radio
+hdr: Augsts dinamiskais diapazons
+hotspot: Hotspot
+light_mode: Gaismas režīms
+mobile_broadband: Mobilais platjoslas savienojums
+night_light: Nakts gaisma
 power: Jauda
+unknown: Nezināms

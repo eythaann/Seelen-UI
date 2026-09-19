@@ -262,14 +262,21 @@ shortcuts:
   enable_tooltip: Muu Ti o ba yoo ṣe eto awọn ọna ọna abuja tirẹ nipa lilo alajọṣepọ UI
   labels:
     create_new_workspace: Ṣẹda ibi-iṣẹ tuntun
+    create_new_workspace_row: Ṣẹda New Workspace kana
     destroy_current_workspace: Pa ip [lọwọlọwọ run
     misc_force_quit: Fi agbara mu
     misc_force_restart: Fi ipa mu
     move_to_workspace: Gbe lọ si ibi-iṣẹ {{0}
     pause_toggle: Daduro/Tẹsiwaju Awọn ọna abuja
+    send_to_next_workspace: Fi Ferese ranṣẹ si Aaye iṣẹ atẹle
+    send_to_previous_workspace: Fi Ferese ranṣẹ si aaye iṣẹ iṣaaju
     send_to_workspace: Firanṣẹ si Accepace {{0}
+    send_to_workspace_down: Fi Ferese ranṣẹ si aaye iṣẹ ni isalẹ
+    send_to_workspace_up: Fi Ferese ranṣẹ si aaye iṣẹ Loke
     switch_to_next_workspace: Yipada si ibi-iṣẹ t'okan
     switch_to_previous_workspace: Yipada si ibi-iṣẹ iṣaaju
+    switch_to_workspace_down: Yipada si aaye iṣẹ ni isalẹ
+    switch_to_workspace_up: Yipada si Workspace Loke
     switch_workspace: Yipada si ibi-iṣẹ {0}
   readonly_tooltip: Eyi jẹ ọna abuja-kika
   reset: Tun si awọn aseku
@@ -370,6 +377,12 @@ weg:
     always: Nigbagbogbo
     never: Kò
     on_overlap: Lori agbekọja
+  import_error: Kuna lati gbe awọn ohun iṣẹ-ṣiṣe wọle
+  import_from_taskbar:
+    button: Gbe wọle lati Windows taskbar
+    label: Wọle Awọn nkan Pinni
+  import_no_items: Ko si awọn ohun kan ti a fi pinni ti a rii ni ile-iṣẹ Windows
+  import_success: Aṣeyọri akowọle {{count}} ohun kan(awọn) lati ibi iṣẹ ṣiṣe Windows
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
@@ -432,6 +445,10 @@ wm:
   drag_behavior_options:
     sort: Too (tunto awọn window lakoko ti o nfa)
     swap: Paṣipaa (paṣipaa awọn window ni ipari fifa)
+  floating:
+    height: Lilefoofo Windows Giga
+    title: Lilefoofo Windows Iwon
+    width: Lilefoofo Windows Width
   layout: Agbekalẹ
   resize_delta: Tun ṣe Delta (%)
   space_between_containers: Aaye laarin awọn apoti

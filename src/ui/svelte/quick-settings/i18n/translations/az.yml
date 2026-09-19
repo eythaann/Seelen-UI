@@ -1,4 +1,15 @@
 app_settings: Tətbiq Parametrləri
+brightness: Parlaqlıq
+dark_mode: Qaranlıq rejim
+default_multimedia_volume: Defolt Multimedia Həcmi
 disabled: Əlil
 enabled: Aktivdir
+eye_care: Gözə Qulluq
+fm_radio: FM Radio
+hdr: Yüksək dinamik diapazon
+hotspot: Qaynar nöqtə
+light_mode: İşıq rejimi
+mobile_broadband: Mobil genişzolaqlı
+night_light: Gecə İşığı
 power: Güc
+unknown: Naməlum
