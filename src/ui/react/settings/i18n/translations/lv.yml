@@ -234,6 +234,7 @@ resources:
   high_impact: Liela ietekme uz veiktspēju
   import_wallpapers: Importēt vietējās tapetes
   included_plugins: Iekļautie spraudņi
+  modified: Modificēts
   open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties

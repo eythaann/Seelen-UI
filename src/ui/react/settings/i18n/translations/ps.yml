@@ -231,6 +231,7 @@ resources:
   high_impact: په فعالیت باندې لوړه اغیزه
   import_wallpapers: ځایی وال پیپرونه وارد کړئ
   included_plugins: شامل شوي پلگ انونه
+  modified: بدل شوی
   open_folder: د سرچینو پوښۍ خلاصه کړئ
   outdated: دا سرچینه د ښایسته UI زاړه نسخه لپاره ډیزاین شوې وه او شاید سم کار ونه کړي.
   see_on_website: په ویب پاڼه کې وګورئ

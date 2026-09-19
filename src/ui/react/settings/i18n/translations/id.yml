@@ -239,6 +239,7 @@ resources:
   high_impact: Dampak tinggi pada kinerja
   import_wallpapers: Impor wallpaper lokal
   included_plugins: Termasuk Plugin
+  modified: Diubah
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak

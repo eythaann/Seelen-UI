@@ -244,6 +244,7 @@ resources:
   high_impact: Hoher Einfluss auf die Leistung
   import_wallpapers: Lokale Hintergrundbilder importieren
   included_plugins: Enthaltene Plugins
+  modified: Geändert
   open_folder: Ressourcenordner öffnen
   outdated: >-
     Diese Ressource wurde für eine ältere Version von Seelen UI entwickelt und

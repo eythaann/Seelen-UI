@@ -235,6 +235,7 @@ resources:
   high_impact: Performans üzerinde yüksek etki
   import_wallpapers: Yerel duvar kağıtlarını içe aktarma
   included_plugins: Dahil Edilen Eklentiler
+  modified: Değiştirildi
   open_folder: Kaynak klasörünü aç
   outdated: >-
     Bu kaynak Seelen UI'nin eski bir sürümü için tasarlanmıştır ve düzgün

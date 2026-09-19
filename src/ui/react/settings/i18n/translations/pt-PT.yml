@@ -241,6 +241,7 @@ resources:
   high_impact: Alto impacto no desempenho
   import_wallpapers: Importar papéis de parede locais
   included_plugins: Plug-ins incluídos
+  modified: Modificado
   open_folder: Pasta de recursos aberta
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da UI Seelen e pode

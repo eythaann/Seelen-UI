@@ -240,6 +240,7 @@ resources:
   high_impact: Alt impacte en el rendiment
   import_wallpapers: Importa fons de pantalla locals
   included_plugins: Connectors inclosos
+  modified: Modificat
   open_folder: Obrir la carpeta de recursos
   outdated: >-
     Aquest recurs va ser dissenyat per a una versió anterior de la interfície
