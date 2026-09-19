@@ -6,7 +6,7 @@ use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 use crate::{
     app::emit_to_webviews,
     cli::ServicePipe,
-    error::Result,
+    error::{AppError, Result},
     state::application::{FULL_STATE, performance::PERFORMANCE_MODE},
     widgets::window_manager::state_v2::{TwmState, WM_STATE},
     windows_api::{WindowsApi, window::Window},
@@ -60,6 +60,10 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
     );
 
     let mut list = HashMap::new();
+    // Resolve every window before placing any: one failure must not leave the rest of the
+    // batch at their previous rects while the tree (and the overlay drawn from it) already
+    // show the new layout. The first real error is still reported once the others are placed.
+    let mut first_error: Option<AppError> = None;
 
     for (hwnd, rect) in &positions {
         let window = Window::from(*hwnd);
@@ -68,11 +72,13 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
                 list.insert(*hwnd, desired_rect);
             }
             Ok(None) => {}
-            // A window can be destroyed between the layout render and this call; failing
-            // the whole batch would leave every other window at its previous rect while the
-            // tree (and the overlay) already show the new layout.
+            // destroyed between the layout render and this call, nothing to place
+            Err(err) if !window.is_window() => {
+                log::debug!("Skipping destroyed window {hwnd:#x} while positioning: {err}");
+            }
             Err(err) => {
-                log::debug!("Skipping window {hwnd:#x} while positioning: {err}");
+                log::warn!("Failed to resolve the rect of window {hwnd:#x}: {err}");
+                first_error.get_or_insert(err);
             }
         }
     }
@@ -98,7 +104,11 @@ pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> 
         animation_duration: state.settings.by_widget.wm.animations.duration_ms,
         easing: state.settings.by_widget.wm.animations.ease_function.clone(),
     })?;
-    Ok(())
+
+    match first_error {
+        Some(err) => Err(err),
+        None => Ok(()),
+    }
 }
 
 /// Immediately requests `window` be moved to `rect`, bypassing the batched layout-render path
