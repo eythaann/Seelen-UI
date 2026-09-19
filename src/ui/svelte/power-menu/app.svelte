@@ -21,6 +21,7 @@
         clearTimeout(hideTimeout);
         hideTimeout = null;
       }
+      globalState.refreshUser();
       isVisible = true;
     });
   });
@@ -59,6 +60,8 @@
 }} />
 
 {#if isVisible}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
     class="power-menu-overlay"
     role="menu"
@@ -77,6 +80,8 @@
         style:transform={`scale(${menu.scale})`}
         style:transform-origin="left top"
       >
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
         <div class="power-popup" onclick={(e) => e.stopPropagation()}>
           <div class="power-menu-header">
             <div class="power-menu-user">

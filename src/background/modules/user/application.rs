@@ -114,4 +114,14 @@ impl UserManager {
             user: Self::get_logged_user(),
         }
     }
+
+    pub fn refresh(&mut self) -> bool {
+        let new_user = Self::get_logged_user();
+        if self.user != new_user {
+            self.user = new_user;
+            true
+        } else {
+            false
+        }
+    }
 }
