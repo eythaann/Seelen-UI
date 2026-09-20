@@ -44,10 +44,16 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
 });
 
 let fullSettings = $state(settingsInit);
-let settings = $state<WindowManagerSettings>(settingsInit.byWidget["@seelen/window-manager"]);
+// Use the per-monitor aware accessor, as flyouts and task-switcher already do.
+// Reading byWidget directly ignores monitorsV3[id].byWidget overrides, so
+// per-monitor settings such as workspaceMargin were silently dropped even
+// though this same file honours per-monitor `enabled` for the toolbar and weg.
+let settings = $state<WindowManagerSettings>(
+  settingsInit.getCurrentWidgetConfig() as WindowManagerSettings,
+);
 Settings.onChange((s) => {
   fullSettings = s;
-  settings = s.byWidget["@seelen/window-manager"];
+  settings = s.getCurrentWidgetConfig() as WindowManagerSettings;
 });
 
 // =================================================
