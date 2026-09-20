@@ -320,6 +320,9 @@ export class Widget extends WidgetBasics {
     }
   }
 
+  /** Tasks to be executed before the widget be marked as ready */
+  public preReadyTasks: Promise<void>[] = [];
+
   /**
    * Will mark the widget as `ready` and pool pending triggers.
    *
@@ -346,6 +349,10 @@ export class Widget extends WidgetBasics {
 
     if (this.autoSize.enabled) {
       await this.executeAutoSize();
+    }
+
+    for (const task of this.preReadyTasks) {
+      await task;
     }
 
     globalThis.document.documentElement.dataset.widgetReady = "";

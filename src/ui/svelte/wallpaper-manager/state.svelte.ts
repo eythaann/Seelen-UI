@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import type { Wallpaper } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { debounce } from "lodash";
@@ -15,6 +15,7 @@ import {
   wallpapers,
 } from "./getters.svelte.ts";
 import WallpaperState from "libs/ui/svelte/components/Wallpaper/state.svelte.ts";
+import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 const settings = $derived.by(() => ({
   ..._settings.value.byWidget["@seelen/wallpaper-manager"],
@@ -160,12 +161,11 @@ class State {
 }
 
 // wait for initial positioning before ready;
-await invoke(SeelenCommand.SetAsWallpaper).catch(console.error);
-$effect.root(() => {
-  $effect(() => {
-    relativeMonitors;
-    invoke(SeelenCommand.SetAsWallpaper);
-  });
-});
+Widget.self.preReadyTasks.push(
+  rootEffectAsync(() => {
+    desktopRect;
+    return invoke(SeelenCommand.SetAsWallpaper);
+  }),
+);
 
 export const gState = new State();

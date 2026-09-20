@@ -6,6 +6,7 @@ import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { systemState } from "./system.svelte.ts";
 import { settings as _settings } from "./getters.svelte.ts";
 import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
+import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 let isWidgetReady = $state(false);
 
@@ -102,7 +103,7 @@ async function updateWidgetPosition() {
 }
 
 Widget.self.attachPosition();
-await updateWidgetPosition();
+Widget.self.preReadyTasks.push(rootEffectAsync(updateWidgetPosition));
 
 $effect.root(() => {
   $effect(() => {
@@ -113,10 +114,6 @@ $effect.root(() => {
     sheet.addVariable("--config-padding", `${padding}px`);
     sheet.addVariable("--config-height", `${itemSize + padding * 2 + margin * 2}px`);
     sheet.applyToDocument();
-  });
-
-  $effect(() => {
-    updateWidgetPosition();
   });
 
   $effect(() => {

@@ -6,6 +6,7 @@ import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
 import { systemState } from "./system.svelte.ts";
 import { settings as _settings } from "./getters.svelte.ts";
 import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
+import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 let isWidgetReady = $state(false);
 const settings = $derived(_settings.value.byWidget["@seelen/weg"]);
@@ -196,7 +197,7 @@ async function updateWidgetPosition() {
 }
 
 Widget.self.attachPosition();
-await updateWidgetPosition();
+Widget.self.preReadyTasks.push(rootEffectAsync(updateWidgetPosition));
 
 $effect.root(() => {
   $effect(() => {
@@ -207,10 +208,6 @@ $effect.root(() => {
     sheet.addVariable("--config-item-size", `${size}px`);
     sheet.addVariable("--config-space-between-items", `${spaceBetweenItems}px`);
     sheet.applyToDocument();
-  });
-
-  $effect(() => {
-    updateWidgetPosition();
   });
 
   $effect(() => {

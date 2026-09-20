@@ -35,7 +35,7 @@
 // default hide/show widget animations.
 :root {
   opacity: 1;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 150ms ease-out;
 
   &[data-widget-hidden] {
     opacity: 0;
