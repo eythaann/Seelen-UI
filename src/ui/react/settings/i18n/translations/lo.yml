@@ -228,6 +228,7 @@ resources:
   high_impact: ຜົນກະທົບສູງຕໍ່ການປະຕິບັດ
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   included_plugins: ລວມມີປລັກອິນ
+  modified: ດັດແກ້ແລ້ວ
   open_folder: Open Opence Folder
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI

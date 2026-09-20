@@ -239,6 +239,7 @@ resources:
   high_impact: Высокое влияние на производительность
   import_wallpapers: Импорт местных обоев
   included_plugins: Включенные плагины
+  modified: Изменено
   open_folder: Откройте папку с ресурсами
   outdated: >-
     Этот ресурс был разработан для старой версии Seelen UI и может работать

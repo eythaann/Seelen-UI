@@ -234,6 +234,7 @@ resources:
   high_impact: Stor indflydelse på ydeevnen
   import_wallpapers: Importer lokale baggrunde
   included_plugins: Inkluderede plugins
+  modified: Ændret
   open_folder: Åbn ressourcemappen
   outdated: >-
     Denne ressource er designet til en ældre version af Seelen UI og fungerer

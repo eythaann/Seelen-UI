@@ -214,6 +214,7 @@ resources:
   high_impact: 성능에 큰 영향
   import_wallpapers: 로컬 배경화면 가져오기
   included_plugins: 포함된 플러그인
+  modified: 수정됨
   open_folder: 리소스 폴더 열기
   outdated: 이 리소스는 이전 버전의 Seelen UI용으로 설계되었으며 제대로 작동하지 않을 수 있습니다.
   see_on_website: 웹사이트에서 확인하세요

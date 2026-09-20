@@ -229,6 +229,7 @@ resources:
   high_impact: ਪ੍ਰਦਰਸ਼ਨ 'ਤੇ ਉੱਚ ਪ੍ਰਭਾਵ
   import_wallpapers: ਸਥਾਨਕ ਵਾਲਪੇਪਰ ਆਯਾਤ ਕਰੋ
   included_plugins: ਸ਼ਾਮਲ ਪਲੱਗਇਨ
+  modified: ਸੋਧਿਆ ਗਿਆ
   open_folder: ਓਪਨ ਸਰੋਤ ਫੋਲਡਰ
   outdated: >-
     ਇਹ ਸਰੋਤ ਸੰਸਥ UI ਦੇ ਪੁਰਾਣੇ ਸੰਸਕਰਣ ਲਈ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਸ਼ਾਇਦ ਸਹੀ ਤਰ੍ਹਾਂ

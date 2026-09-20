@@ -200,6 +200,7 @@ resources:
   high_impact: 对性能影响很大
   import_wallpapers: 导入本地壁纸
   included_plugins: 包含的插件
+  modified: 已修改
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
   see_on_website: 在网站中查看

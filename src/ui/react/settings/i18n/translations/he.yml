@@ -224,6 +224,7 @@ resources:
   high_impact: השפעה רבה על הביצועים
   import_wallpapers: ייבא טפטים מקומיים
   included_plugins: תוספים כלולים
+  modified: שונה
   open_folder: פתיחת תיקיית משאבים
   outdated: משאב זה תוכנן לגרסה ישנה יותר של ממשק המשתמש של Seelen ואולי לא יעבוד כראוי.
   see_on_website: ראה באתר
