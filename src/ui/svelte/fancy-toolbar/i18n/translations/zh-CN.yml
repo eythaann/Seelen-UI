@@ -49,7 +49,7 @@ placeholder:
   notifications: 通知
   settings: 快速设置
   volume: 音量
-plugged: 堵塞
+plugged: 电源管理
 settings:
   app_settings: 应用设置
   brightness: 亮度
