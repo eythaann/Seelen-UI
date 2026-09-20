@@ -207,7 +207,7 @@ resources:
   updates_available: 可用更新
   updates_available_description: 以下资源有可用更新。
 review_request:
-  not_now: 暂时不是
+  not_now: 下次再说
   sure: 当然！
   title: 喜欢 Seelen UI 吗？
 save: 保存
