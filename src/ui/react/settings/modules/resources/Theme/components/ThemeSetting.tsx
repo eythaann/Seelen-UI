@@ -17,57 +17,7 @@ export interface ThemeSettingProps {
   definition: ThemeVariableDefinition;
 }
 
-interface BooleanPair {
-  trueVal: string;
-  falseVal: string;
-}
-
-function detectBooleanOptions(options: unknown[]): BooleanPair | null {
-  if (!options || options.length !== 2) {
-    return null;
-  }
-  const first = options[0];
-  const second = options[1];
-  if (first == null || second == null) {
-    return null;
-  }
-  const optA = String(first);
-  const optB = String(second);
-  const truthySet = new Set(["1", "1.0", "true", "on", "yes", "enabled", "enable"]);
-  const falsySet = new Set(["0", "0.0", "false", "off", "no", "disabled", "disable"]);
-
-  const aIsTruthy = truthySet.has(optA.toLowerCase());
-  const bIsFalsy = falsySet.has(optB.toLowerCase());
-  if (aIsTruthy && bIsFalsy) {
-    return { trueVal: optA, falseVal: optB };
-  }
-
-  const bIsTruthy = truthySet.has(optB.toLowerCase());
-  const aIsFalsy = falsySet.has(optA.toLowerCase());
-  if (bIsTruthy && aIsFalsy) {
-    return { trueVal: optB, falseVal: optA };
-  }
-
-  return null;
-}
-
-function isTruthyMatch(val: string | number | boolean | undefined, trueVal: string): boolean {
-  if (val == null) return false;
-  const s = String(val).trim().toLowerCase();
-  const t = trueVal.trim().toLowerCase();
-  if (s === t) return true;
-  const numVal = Number(s);
-  const numTrue = Number(t);
-  if (!isNaN(numVal) && !isNaN(numTrue)) {
-    return numVal === numTrue;
-  }
-  return false;
-}
-
 function isSwitchSetting(definition: ThemeVariableDefinition): boolean {
-  if (definition.options && detectBooleanOptions(definition.options)) {
-    return true;
-  }
   if (definition.syntax === "<boolean>") {
     return true;
   }
@@ -83,12 +33,11 @@ function isSwitchSetting(definition: ThemeVariableDefinition): boolean {
 }
 
 function isSegmentedSetting(definition: ThemeVariableDefinition): boolean {
-  if (!definition.options || detectBooleanOptions(definition.options)) {
+  if (!definition.options) {
     return false;
   }
   const opts = definition.options.map(String);
-  const totalChars = opts.reduce((sum, o) => sum + o.length, 0);
-  return opts.length >= 2 && opts.length <= 6 && totalChars <= 50;
+  return opts.length >= 2 && opts.length <= 5 && opts.every((o) => o.length <= 16);
 }
 
 function getInitialValueString(definition: ThemeVariableDefinition): string {
@@ -101,7 +50,7 @@ function getInitialValueString(definition: ThemeVariableDefinition): string {
   return String(definition.initialValue ?? "");
 }
 
-export function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
+export function ThemeSetting({ themeId, definition }: ThemeSettingProps): ReactNode {
   const { value: userStoredValue, onChange, onReset } = useThemeVariable(themeId, definition.name);
   const { t } = useTranslation();
 
@@ -109,14 +58,9 @@ export function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
   const isSegmented = isSegmentedSetting(definition);
   const isStandaloneSlider = definition.syntax === "<number>" && definition.step != null;
 
-  const initialValStr = getInitialValueString(definition).trim().toLowerCase();
-  const currentValStr = (userStoredValue ?? initialValStr).trim().toLowerCase();
-  const isModified = userStoredValue !== undefined && (
-    definition.syntax === "<boolean>"
-      ? (isTruthyMatch(currentValStr, "1") || isTruthyMatch(currentValStr, "true")) !==
-        (isTruthyMatch(initialValStr, "1") || isTruthyMatch(initialValStr, "true"))
-      : currentValStr !== initialValStr
-  );
+  const initialValStr = getInitialValueString(definition).trim();
+  const currentValStr = (userStoredValue ?? initialValStr).trim();
+  const isModified = userStoredValue !== undefined && currentValStr !== initialValStr;
 
   const input = renderInput(definition, userStoredValue, onChange, onReset);
   const isLooseAction = isSwitch || isSegmented || isStandaloneSlider;
@@ -176,19 +120,8 @@ function renderInput(
   onReset: () => void,
 ): ReactNode {
   if (definition.options) {
-    const boolPair = detectBooleanOptions(definition.options);
-    if (boolPair) {
-      const isChecked = isTruthyMatch(userStoredValue ?? String(definition.initialValue), boolPair.trueVal);
-      return (
-        <Switch
-          checked={isChecked}
-          onChange={(checked) => onChange(checked ? boolPair.trueVal : boolPair.falseVal)}
-        />
-      );
-    }
-
-    const opts = definition.options.map(String);
-    if (opts.length >= 2 && opts.length <= 5 && opts.every((o) => o.length <= 16)) {
+    if (isSegmentedSetting(definition)) {
+      const opts = definition.options.map(String);
       const currentValue = userStoredValue ?? String(definition.initialValue);
       return (
         <Segmented
@@ -211,9 +144,7 @@ function renderInput(
 
   switch (definition.syntax) {
     case "<boolean>": {
-      const isChecked = userStoredValue != null
-        ? isTruthyMatch(userStoredValue, "1") || isTruthyMatch(userStoredValue, "true")
-        : Boolean(definition.initialValue);
+      const isChecked = userStoredValue != null ? userStoredValue === "1" : Boolean(definition.initialValue);
       return (
         <Switch
           checked={isChecked}
@@ -266,7 +197,7 @@ function renderInput(
       const { min, max, step } = definition;
 
       if (min === 0 && max === 1 && (step == null || step === 1)) {
-        const isChecked = isTruthyMatch(userStoredValue ?? String(definition.initialValue), "1");
+        const isChecked = (userStoredValue ?? String(definition.initialValue)) === "1";
         return (
           <Switch
             checked={isChecked}
