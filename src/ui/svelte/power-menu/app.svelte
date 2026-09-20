@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
   import { options } from "./options";
   import { state as globalState } from "./state.svelte";
   import { convertFileSrc } from "@tauri-apps/api/core";
@@ -9,28 +8,16 @@
   import { t } from "./i18n";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
 
-  let isVisible = $state(false);
-  let hideTimeout: ReturnType<typeof setTimeout> | null = null;
-
   onMount(() => {
     Widget.getCurrent().ready();
-    isVisible = true;
 
     window.addEventListener("focus", () => {
-      if (hideTimeout) {
-        clearTimeout(hideTimeout);
-        hideTimeout = null;
-      }
       globalState.refreshUser();
-      isVisible = true;
     });
   });
 
   function onCancel() {
-    isVisible = false;
-    hideTimeout = setTimeout(() => {
-      Widget.self.hide();
-    }, 200);
+    Widget.self.hide();
   }
 
   const menu = $derived.by(() => {
@@ -59,7 +46,6 @@
   }
 }} />
 
-{#if isVisible}
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
   <div
@@ -67,7 +53,6 @@
     role="menu"
     tabindex="-1"
     onclick={onCancel}
-    transition:fade={{ duration: 200 }}
   >
     {#if menu}
       <div
@@ -119,7 +104,6 @@
       </div>
     {/if}
   </div>
-{/if}
 
 <style>
   :global(body) {
@@ -127,3 +111,4 @@
     overflow: hidden;
   }
 </style>
+
