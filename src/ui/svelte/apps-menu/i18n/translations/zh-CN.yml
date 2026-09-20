@@ -1,7 +1,7 @@
 all: 所有应用程序
 app_settings: 应用程序设置
-applications: 应用
-back: 后退
+applications: 搜索应用
+back: 返回
 disband: 解散文件夹
 edit_icon: 编辑图标
 folder: 文件夹
