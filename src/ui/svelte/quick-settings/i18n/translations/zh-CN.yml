@@ -2,7 +2,7 @@ app_settings: 应用程序设置
 brightness: 亮度
 dark_mode: 深色模式
 default_multimedia_volume: 默认多媒体音量
-disabled: 已禁用
+disabled: 禁用
 enabled: 启用
 eye_care: 护眼模式
 fm_radio: 调频收音机
