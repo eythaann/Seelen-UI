@@ -12,7 +12,10 @@ use crate::{
     error::{Result, ResultLogExt},
     hook::register_win_hook,
     migrations::Migrations,
-    modules::{start::application::StartMenuManager, user::infrastructure::reemit_user},
+    modules::{
+        clipboard::infrastructure::init_clipboard_manager, start::application::StartMenuManager,
+        user::infrastructure::reemit_user,
+    },
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
@@ -89,6 +92,9 @@ impl SeelenUI {
         WIDGET_MANAGER.reconcile()?;
         create_background_window()?;
         register_win_hook()?;
+
+        std::thread::spawn(init_clipboard_manager);
+
         start_discord_rpc()?;
 
         initialize_user_resources_watcher()?;

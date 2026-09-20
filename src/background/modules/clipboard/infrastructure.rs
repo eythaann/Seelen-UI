@@ -22,6 +22,13 @@ fn get_clipboard_manager() -> &'static ClipboardManager {
     ClipboardManager::instance()
 }
 
+/// Starts the clipboard manager (history restore + capture) without registering
+/// the webview bridge, which still happens lazily on first command access.
+/// Called at startup so history is captured even if no widget requests it.
+pub fn init_clipboard_manager() {
+    ClipboardManager::instance();
+}
+
 #[tauri::command(async)]
 pub fn clipboard_get_data() -> ClipboardData {
     get_clipboard_manager().get_data()
