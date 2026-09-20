@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.7-dev]
+
+### enhancements
+
+- customizable widgets show/hide animations, themes can style them via the `data-widget-hidden` attribute on the root
+  element. The default theme includes a fade in/out.
+
 ## [2.8.6]
 
 ### enhancements

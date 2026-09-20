@@ -24,7 +24,7 @@ listen<Widget[]>("widgets-changed", ({ payload }) => {
 });
 
 // set document id
-document.documentElement.id = currentWidgetId;
+document.documentElement.dataset.widgetId = currentWidgetId;
 
 // hook local storage, to avoid collition of keys
 hookLocalStorage(currentWidgetId);
