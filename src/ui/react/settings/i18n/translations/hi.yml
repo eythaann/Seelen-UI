@@ -240,6 +240,7 @@ resources:
   high_impact: प्रदर्शन पर उच्च प्रभाव
   import_wallpapers: स्थानीय वॉलपेपर आयात करें
   included_plugins: प्लगइन्स शामिल हैं
+  modified: संशोधित
   open_folder: संसाधन फ़ोल्डर खोलें
   outdated: >-
     यह संसाधन सीलेन यूआई के पुराने संस्करण के लिए डिज़ाइन किया गया था और ठीक से

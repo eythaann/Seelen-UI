@@ -242,6 +242,7 @@ resources:
   high_impact: Duży wpływ na wydajność
   import_wallpapers: Import lokalnych tapet
   included_plugins: Dołączone wtyczki
+  modified: Zmodyfikowano
   open_folder: Otwórz folder zasobów
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie

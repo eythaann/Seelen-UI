@@ -2,6 +2,7 @@ import { UIColors } from "../../system_state/ui_colors.ts";
 import { RuntimeStyleSheet } from "../../utils/DOM.ts";
 import { Settings } from "../settings/mod.ts";
 import { ThemeList } from "./mod.ts";
+import { registerPerformanceStyles } from "../widget/performance.ts";
 
 /**
  * This will apply the active themes for this widget, and automatically update
@@ -21,7 +22,7 @@ export async function startThemingTool(): Promise<void> {
     themes.applyToDocument(settings.activeThemes, settings.byTheme);
   });
 
-  setPerformanceStyles();
+  registerPerformanceStyles();
   startDateCssVariables();
 
   (await UIColors.getAsync()).setAsCssVariables();
@@ -30,28 +31,7 @@ export async function startThemingTool(): Promise<void> {
   themes.applyToDocument(settings.activeThemes, settings.byTheme);
 }
 
-// Used by performance mode to reduce cpu/gpu usage
-const PERF_CSS = `
-html[data-animations-off] *,
-html[data-animations-off] *::before,
-html[data-animations-off] *::after {
-  animation-duration: 0.001ms !important;
-  animation-iteration-count: 1 !important;
-  animation-delay: 0s !important;
-
-  transition-duration: 0.001ms !important;
-  transition-delay: 0s !important;
-
-  scroll-behavior: auto !important;
-}`;
-
-export function setPerformanceStyles(): void {
-  const styleSheet = new RuntimeStyleSheet("@static/performance");
-  styleSheet.addStyle(PERF_CSS);
-  styleSheet.applyToDocument();
-}
-
-export function startDateCssVariables(): void {
+function startDateCssVariables(): void {
   // Set initial values immediately
   updateDateCssVariables();
   // Update every minute (60000ms) to avoid overhead from seconds

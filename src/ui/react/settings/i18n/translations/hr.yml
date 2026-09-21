@@ -239,6 +239,7 @@ resources:
   high_impact: Veliki utjecaj na performanse
   import_wallpapers: Uvoz lokalnih pozadina
   included_plugins: Uključeni dodaci
+  modified: Izmijenjeno
   open_folder: Mapa otvorenih resursa
   outdated: >-
     Ovaj je resurs dizajniran za stariju verziju seelen korisničkog sučelja i

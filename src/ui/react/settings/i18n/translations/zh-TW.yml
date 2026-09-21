@@ -204,6 +204,7 @@ resources:
   high_impact: 對性能影響很大
   import_wallpapers: 匯入本機桌布
   included_plugins: 包含的擴充功能
+  modified: 已修改
   open_folder: 打開資源文件夾
   outdated: 此資源是為舊版Seelen UI設計的，可能無法正常運作。
   see_on_website: 查看詳情

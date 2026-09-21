@@ -232,6 +232,7 @@ resources:
   high_impact: تاثیر زیاد بر عملکرد
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   included_plugins: پلاگین های گنجانده شده
+  modified: اصلاح شده
   open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار

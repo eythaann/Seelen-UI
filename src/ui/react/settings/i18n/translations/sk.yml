@@ -238,6 +238,7 @@ resources:
   high_impact: Vysoký vplyv na výkon
   import_wallpapers: Import miestnych tapiet
   included_plugins: Zahrnuté pluginy
+  modified: Zmenené
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
     Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania

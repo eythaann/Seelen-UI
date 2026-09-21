@@ -2,7 +2,7 @@ auth:
   login_failed_body: 登录期间出现问题。 如果这种情况仍然存在，请确保 Windows“凭据管理器”服务 (VaultSvc) 已启用并正在运行，然后重试。
   login_failed_title: 登录失败
 cancel: 取消
-done: 完毕
+done: 完成
 elevated:
   description: |-
     Seelen UI 正在以管理员权限运行。
@@ -17,7 +17,7 @@ resource:
   downloading: 正在下载资源...
   downloading_body: 这可能需要几秒钟，请不要关闭窗口。
   enable: 启用
-  login_required_action: 登入
+  login_required_action: 登录
   login_required_body: 您需要登录才能下载此资源。
   login_required_title: 需要登录
 runtime:
@@ -42,8 +42,8 @@ service:
 shortcut:
   conflicts:
     body: 某些快捷键已分配给多个操作，请重新分配它们。
-    dismiss: 解雇
-    review: 审查
+    dismiss: 关闭
+    review: 查看
     title: 检测到快捷方式冲突
   register:
     placeholder: 按下任意组合键
@@ -53,7 +53,7 @@ widget_liveness:
     小组件“%{widget_name}”停止响应的次数过多。
 
     您可以尝试重新启动应用程序。
-  failed_title: 小部件错误
+  failed_title: 小组件错误
 widget_permissions:
   perm_open_file: 打开文件
   perm_run: 运行程序

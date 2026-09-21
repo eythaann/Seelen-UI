@@ -1,7 +1,7 @@
 import type { ThemeId, ThemeVariableDefinition } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
-import { Button, ColorPicker, Input, InputNumber, Select, Slider, Space, Tooltip } from "antd";
+import { Button, ColorPicker, Input, InputNumber, Segmented, Select, Slider, Space, Switch, Tooltip } from "antd";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import type { ReactNode } from "react";
@@ -17,27 +17,98 @@ export interface ThemeSettingProps {
   definition: ThemeVariableDefinition;
 }
 
-export function ThemeSetting({ themeId, definition }: ThemeSettingProps) {
+function isSwitchSetting(definition: ThemeVariableDefinition): boolean {
+  if (definition.syntax === "<boolean>") {
+    return true;
+  }
+  if (
+    definition.syntax === "<number>" &&
+    definition.min === 0 &&
+    definition.max === 1 &&
+    (definition.step == null || definition.step === 1)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function isSegmentedSetting(definition: ThemeVariableDefinition): boolean {
+  if (!definition.options) {
+    return false;
+  }
+  const opts = definition.options.map(String);
+  return opts.length >= 2 && opts.length <= 5 && opts.every((o) => o.length <= 16);
+}
+
+function getInitialValueString(definition: ThemeVariableDefinition): string {
+  if (definition.syntax === "<boolean>") {
+    return definition.initialValue ? "1" : "0";
+  }
+  if (definition.syntax === "<length-percentage>") {
+    return `${definition.initialValue}${definition.initialValueUnit ?? ""}`;
+  }
+  return String(definition.initialValue ?? "");
+}
+
+export function ThemeSetting({ themeId, definition }: ThemeSettingProps): ReactNode {
   const { value: userStoredValue, onChange, onReset } = useThemeVariable(themeId, definition.name);
   const { t } = useTranslation();
 
+  const isSwitch = isSwitchSetting(definition);
+  const isSegmented = isSegmentedSetting(definition);
+  const isStandaloneSlider = definition.syntax === "<number>" && definition.step != null;
+
+  const initialValStr = getInitialValueString(definition).trim();
+  const currentValStr = (userStoredValue ?? initialValStr).trim();
+  const isModified = userStoredValue !== undefined && currentValStr !== initialValStr;
+
   const input = renderInput(definition, userStoredValue, onChange, onReset);
+  const isLooseAction = isSwitch || isSegmented || isStandaloneSlider;
 
   return (
     <SettingsOption
-      label={<ResourceText text={definition.label} />}
+      label={
+        <Space size={6} align="center">
+          <ResourceText text={definition.label} />
+          {isModified && (
+            <Tooltip title={t("resources.modified", "Modified")}>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  backgroundColor: "var(--ant-color-primary, #1677ff)",
+                  verticalAlign: "middle",
+                }}
+              />
+            </Tooltip>
+          )}
+        </Space>
+      }
       tip={definition.tip ? <ResourceText text={definition.tip} /> : undefined}
       description={definition.description ? <ResourceText text={definition.description} /> : undefined}
-      action={
-        <Space.Compact>
-          {input}
-          <Tooltip title={t("reset_to_default")}>
-            <Button onClick={onReset}>
-              <Icon iconName="BiReset" />
-            </Button>
-          </Tooltip>
-        </Space.Compact>
-      }
+      action={isLooseAction
+        ? (
+          <Space align="center" size={8}>
+            {input}
+            <Tooltip title={isModified ? t("reset_to_default") : undefined}>
+              <Button onClick={onReset} disabled={!isModified}>
+                <Icon iconName="BiReset" />
+              </Button>
+            </Tooltip>
+          </Space>
+        )
+        : (
+          <Space.Compact>
+            {input}
+            <Tooltip title={isModified ? t("reset_to_default") : undefined}>
+              <Button onClick={onReset} disabled={!isModified}>
+                <Icon iconName="BiReset" />
+              </Button>
+            </Tooltip>
+          </Space.Compact>
+        )}
     />
   );
 }
@@ -49,6 +120,18 @@ function renderInput(
   onReset: () => void,
 ): ReactNode {
   if (definition.options) {
+    if (isSegmentedSetting(definition)) {
+      const opts = definition.options.map(String);
+      const currentValue = userStoredValue ?? String(definition.initialValue);
+      return (
+        <Segmented
+          options={opts.map((opt) => ({ label: opt, value: opt }))}
+          value={opts.includes(currentValue) ? currentValue : opts[0]}
+          onChange={(val) => onChange(String(val))}
+        />
+      );
+    }
+
     return (
       <Select
         options={definition.options.map((value) => ({ value: String(value) }))}
@@ -59,9 +142,17 @@ function renderInput(
     );
   }
 
-  const { min, max, step } = definition;
-
   switch (definition.syntax) {
+    case "<boolean>": {
+      const isChecked = userStoredValue != null ? userStoredValue === "1" : Boolean(definition.initialValue);
+      return (
+        <Switch
+          checked={isChecked}
+          onChange={(checked) => onChange(checked ? "1" : "0")}
+        />
+      );
+    }
+
     case "<color>": {
       const value = userStoredValue || definition.initialValue;
       return (
@@ -88,9 +179,9 @@ function renderInput(
               }
               onChange(`${newValue}${unit}`);
             }}
-            min={min || undefined}
-            max={max || undefined}
-            step={step || undefined}
+            min={definition.min || undefined}
+            max={definition.max || undefined}
+            step={definition.step || undefined}
           />
           <Select
             options={CSS_UNITS.map((unit) => ({ value: unit }))}
@@ -103,6 +194,18 @@ function renderInput(
     }
 
     case "<number>": {
+      const { min, max, step } = definition;
+
+      if (min === 0 && max === 1 && (step == null || step === 1)) {
+        const isChecked = (userStoredValue ?? String(definition.initialValue)) === "1";
+        return (
+          <Switch
+            checked={isChecked}
+            onChange={(checked) => onChange(checked ? "1" : "0")}
+          />
+        );
+      }
+
       const value = userStoredValue ? parseFloat(userStoredValue) : definition.initialValue;
 
       const handleChange = (newValue: number | null) => {
@@ -166,6 +269,7 @@ function renderInput(
     }
 
     case "<string>": {
+      const { min, max } = definition;
       const value = userStoredValue ?? definition.initialValue;
       return (
         <Input
@@ -183,8 +287,6 @@ function renderInput(
     }
 
     default: {
-      // @ts-expect-error should never happen
-      definition.syntax;
       return null;
     }
   }

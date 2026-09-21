@@ -13,6 +13,6 @@
  * last link in the chain. The numeric prefix only reflects file/require order, not
  * importance.
  */
-import { Widget_3 } from "./3_autosize.ts";
+import { Widget_4 } from "./4_visibility.ts";
 
-export abstract class WidgetBasics extends Widget_3 {}
+export abstract class WidgetBasics extends Widget_4 {}

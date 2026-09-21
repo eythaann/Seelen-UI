@@ -32,6 +32,16 @@
   --slu-std-ui-pressed-overlay: oklch(from var(--system-accent-color) l c h / 0.3);
 }
 
+// default hide/show widget animations.
+:root {
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+
+  &[data-widget-hidden] {
+    opacity: 0;
+  }
+}
+
 // Accessibility Improvement
 *:focus-visible {
   outline-offset: 2px;
@@ -64,17 +74,6 @@
 body {
   color: var(--slu-std-fg-color);
   background-color: var(--slu-std-bg-color);
-}
-
-// @deprecated
-.slu-std-surface {
-  background-color: var(--slu-std-bg-color);
-}
-
-// @deprecated
-.slu-std-surface-elevated {
-  background-color: var(--slu-std-bg-light-color);
-  box-shadow: var(--shadow-s);
 }
 
 // Standard for popover

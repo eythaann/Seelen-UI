@@ -239,6 +239,7 @@ resources:
   high_impact: Nagy hatás a teljesítményre
   import_wallpapers: Helyi háttérképek importálása
   included_plugins: Tartalmazott bővítmények
+  modified: Módosítva
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,

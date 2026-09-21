@@ -57,7 +57,6 @@ export class Widget extends WidgetBasics {
   /** decoded widget instance information */
   public readonly decoded: WidgetInformation;
 
-  private destroyOnHide = false;
   private runtimeState: WidgetInternalState = {
     initialized: false,
     ready: false,
@@ -273,7 +272,7 @@ export class Widget extends WidgetBasics {
     this.runtimeState.initialized = true;
     await this.prepare();
 
-    this.destroyOnHide = options.closeOnHide ?? this.def.lazy;
+    this._destroyOnHide = options.closeOnHide ?? this.def.lazy;
 
     if (options.normalizeDevicePixelRatio) {
       await this.normalizeDevicePixelRatio();
@@ -321,6 +320,9 @@ export class Widget extends WidgetBasics {
     }
   }
 
+  /** Tasks to be executed before the widget be marked as ready */
+  public preReadyTasks: Promise<void>[] = [];
+
   /**
    * Will mark the widget as `ready` and pool pending triggers.
    *
@@ -328,8 +330,6 @@ export class Widget extends WidgetBasics {
    * Lazy widget should be shown on trigger action.
    */
   public async ready(options: ReadyWidgetOptions = {}): Promise<void> {
-    const { show = !this.def.lazy } = options;
-
     if (!this.runtimeState.initialized) {
       throw new Error(`Widget was not initialized before ready`);
     }
@@ -338,18 +338,30 @@ export class Widget extends WidgetBasics {
       console.warn(`Widget is already ready`);
       return;
     }
-
     this.runtimeState.ready = true;
+
+    const { show = !this.def.lazy } = options;
+
+    const alreadyVisible = await this.window.isVisible();
+    globalThis.document.documentElement.toggleAttribute("data-widget-hidden", !alreadyVisible);
+    // pre-compute styles
+    globalThis.getComputedStyle(globalThis.document.documentElement).opacity;
+
     if (this.autoSize.enabled) {
       await this.executeAutoSize();
     }
 
-    if (show && !(await this.window.isVisible())) {
-      await this.show();
+    for (const task of this.preReadyTasks) {
+      await task;
     }
 
+    globalThis.document.documentElement.dataset.widgetReady = "";
     // this will mark the widget as ready, and send pending trigger event if exists
     await invoke(SeelenCommand.SetCurrentWidgetStatus, { status: WidgetStatus.Ready });
+
+    if (show && !alreadyVisible) {
+      await this.show();
+    }
   }
 
   private _attach: { enabled: boolean; unsub?: () => void; rect?: Rect } = { enabled: false };
@@ -429,11 +441,6 @@ export class Widget extends WidgetBasics {
     });
   }
 
-  public async show(): Promise<void> {
-    debouncedClose.cancel();
-    await this.window.show();
-  }
-
   /** Will force foreground the widget */
   public async focus(): Promise<void> {
     if (this.runtimeState.firstFocus) {
@@ -442,18 +449,7 @@ export class Widget extends WidgetBasics {
     }
     await invoke(SeelenCommand.RequestFocus, { hwnd: this.windowId }).catch(() => {});
   }
-
-  public hide(): void {
-    this.window.hide();
-    if (this.destroyOnHide) {
-      debouncedClose();
-    }
-  }
 }
-
-const debouncedClose = debounce(() => {
-  Widget.self.window.close();
-}, 30_000);
 
 type ExtendedGlobalThis = typeof globalThis & {
   __SLU_WIDGET?: IWidget;

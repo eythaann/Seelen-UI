@@ -105,6 +105,13 @@ pub enum ThemeVariableDefinition {
     /// ```
     #[serde(rename = "<number>")]
     Number(ThemeVariable<f64>),
+    /// This will allow to users to toggle a boolean switch.
+    /// ### example:
+    /// ```css
+    /// --var-name: 1
+    /// ```
+    #[serde(rename = "<boolean>")]
+    Boolean(ThemeVariable<bool>),
     /// This will allow to users to set any url.\
     /// Css syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/url_value \
     /// ### example:

@@ -18,5 +18,10 @@ pub fn reemit_user() {
 
 #[tauri::command(async)]
 pub fn get_user() -> User {
-    maybe_redact_user(UserManager::instance().lock().user.clone())
+    let mut manager = UserManager::instance().lock();
+    if manager.refresh() {
+        let user = manager.user.clone();
+        emit_to_webviews(SeelenEvent::UserChanged, maybe_redact_user(user));
+    }
+    maybe_redact_user(manager.user.clone())
 }

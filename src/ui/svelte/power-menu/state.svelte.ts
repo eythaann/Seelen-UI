@@ -1,6 +1,7 @@
 import { invoke, type Rect, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
@@ -31,10 +32,13 @@ let desktopRect = $derived.by(() => {
   return rect;
 });
 
-$effect.root(() => {
-  $effect(() => {
-    Widget.self.setPosition(desktopRect);
-  });
+const posSet = rootEffectAsync(() => Widget.self.setPosition(desktopRect));
+
+Widget.self.onTrigger(async () => {
+  invoke(SeelenCommand.GetUser); // refresh user information
+  await posSet; // wait for the initial position to be set
+  await Widget.self.show();
+  await Widget.self.focus();
 });
 
 let relativePrimaryMonitor = $derived.by(() => {

@@ -235,6 +235,7 @@ resources:
   high_impact: Tác động cao đến hiệu suất
   import_wallpapers: Nhập hình nền địa phương
   included_plugins: Các plugin đi kèm
+  modified: Đã sửa đổi
   open_folder: Mở thư mục tài nguyên
   outdated: >-
     Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không

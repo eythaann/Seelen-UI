@@ -243,6 +243,7 @@ resources:
   high_impact: Υψηλό αντίκτυπο στην απόδοση
   import_wallpapers: Εισαγωγή τοπικών ταπετσαριών
   included_plugins: Συμπεριλαμβανόμενα πρόσθετα
+  modified: Τροποποιήθηκε
   open_folder: Άνοιγμα φακέλου πόρων
   outdated: >-
     Αυτός ο πόρος σχεδιάστηκε για μια παλαιότερη έκδοση του Seelen UI και

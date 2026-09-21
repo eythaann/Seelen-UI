@@ -236,6 +236,7 @@ resources:
   high_impact: Alto impacto no desempenho
   import_wallpapers: Importar papéis de parede locais
   included_plugins: Plug-ins incluídos
+  modified: Modificado
   open_folder: Abrir a pasta de recursos
   outdated: >-
     Esse recurso foi projetado para uma versão mais antiga da interface do

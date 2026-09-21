@@ -229,6 +229,7 @@ resources:
   high_impact: High impact on performance
   import_wallpapers: Import local wallpapers
   included_plugins: Included Plugins
+  modified: Modified
   open_folder: Open resource folder
   outdated: >-
     This resource was designed for an older version of Seelen UI and might not

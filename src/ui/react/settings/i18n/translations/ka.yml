@@ -236,6 +236,7 @@ resources:
   high_impact: მაღალი გავლენა შესრულებაზე
   import_wallpapers: ადგილობრივი ფონების იმპორტი
   included_plugins: მოყვება დანამატები
+  modified: შეცვლილია
   open_folder: ღია რესურსების საქაღალდე
   outdated: >-
     ეს რესურსი შეიქმნა Seelen UI- ს ძველი ვერსიისთვის და შესაძლოა არ იმუშაოს

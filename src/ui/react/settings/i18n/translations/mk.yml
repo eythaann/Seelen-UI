@@ -239,6 +239,7 @@ resources:
   high_impact: Високо влијание врз перформансите
   import_wallpapers: Увезете локални позадини
   included_plugins: Вклучени приклучоци
+  modified: Изменето
   open_folder: Отворена папка со ресурси
   outdated: >-
     Овој ресурс беше дизајниран за постара верзија на Seelen UI и можеби нема да

@@ -79,7 +79,7 @@ devtools:
     label: 模拟对话
     trigger: 扳机
   simulate_perm:
-    label: 模拟Widget权限请求
+    label: 模拟小部件权限请求
     result_allowed: ✓ 已获得许可
     result_denied: ✗ 权限被拒绝
     trigger: 模拟
@@ -112,7 +112,7 @@ extras:
   backup_sync_description: 通过云自动备份和恢复您的设置。
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
-  discord_rpc: 不和谐丰富的存在
+  discord_rpc: Discord 状态
   discord_rpc_description: 向大家展示您的风格！
   exit: 退出
   relaunch: 重启应用
@@ -151,7 +151,7 @@ general:
   theme:
     available: 可用主题
     selected: 当前主题
-global: 全球的
+global: 全局
 header:
   labels:
     config: 配置
@@ -200,6 +200,7 @@ resources:
   high_impact: 对性能影响很大
   import_wallpapers: 导入本地壁纸
   included_plugins: 包含的插件
+  modified: 已修改
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
   see_on_website: 在网站中查看
@@ -217,7 +218,7 @@ see_more: 查看更多
 session:
   logout: 登出
   plan: 计划
-  sign_in: 登入
+  sign_in: 登录
   sign_in_hint: 您的浏览器将打开，以便您可以安全登录。
   upgrade_to: 升级至
 shortcuts:
@@ -256,13 +257,13 @@ toolbar:
   auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
-  dock_side: 职位
+  dock_side: 停靠侧
   enable: 启用精美工具栏
   hide_mode:
     always: 总是
     never: 从不
     on_overlap: 重叠时
-  item_size: 商品尺寸
+  item_size: 项目大小
   label: 工具栏
   margin: 边距大小
   padding: 填充尺寸

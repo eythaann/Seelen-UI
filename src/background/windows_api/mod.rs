@@ -54,8 +54,9 @@ use windows::{
         Graphics::{
             Dwm::{
                 DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL, DWMWA_CLOAKED,
-                DWMWA_EXTENDED_FRAME_BOUNDS, DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,
-                DWMWINDOWATTRIBUTE, DwmGetWindowAttribute,
+                DWMWA_EXTENDED_FRAME_BOUNDS, DWMWA_TRANSITIONS_FORCEDISABLED,
+                DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, DWMWINDOWATTRIBUTE, DwmGetWindowAttribute,
+                DwmSetWindowAttribute,
             },
             Gdi::{
                 EnumDisplayMonitors, GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY,
@@ -780,6 +781,28 @@ impl WindowsApi {
             )?;
         }
         Ok(())
+    }
+
+    pub fn dwm_set_window_attribute<T>(
+        hwnd: HWND,
+        attribute: DWMWINDOWATTRIBUTE,
+        value: &T,
+    ) -> Result<()> {
+        unsafe {
+            DwmSetWindowAttribute(
+                hwnd,
+                attribute,
+                (value as *const T).cast(),
+                u32::try_from(std::mem::size_of::<T>())?,
+            )?;
+        }
+        Ok(())
+    }
+
+    /// Disables the system show/hide animations (fade, minimize, etc.) of the window.
+    pub fn set_system_transitions_disabled(hwnd: HWND, disabled: bool) -> Result<()> {
+        let value = windows_core::BOOL::from(disabled);
+        Self::dwm_set_window_attribute(hwnd, DWMWA_TRANSITIONS_FORCEDISABLED, &value)
     }
 
     /// Get the window rect including drop shadow
