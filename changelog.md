@@ -7,6 +7,10 @@
 - customizable widgets show/hide animations, themes can style them via the `data-widget-hidden` attribute on the root
   element. The default theme includes a fade in/out.
 
+### fix
+
+- network/hotspot api failing on windows 10.
+
 ## [2.8.6]
 
 ### enhancements

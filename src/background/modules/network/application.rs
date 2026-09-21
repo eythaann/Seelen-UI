@@ -172,20 +172,22 @@ impl NetworkManager {
             }
         };
 
-        let band = match config.Band()? {
+        // Band was introduced in windows 10 19041
+        let band = match config.Band().unwrap_or_default() {
             TetheringWiFiBand::Auto => "Auto",
             TetheringWiFiBand::TwoPointFourGigahertz => "2.4GHz",
             TetheringWiFiBand::FiveGigahertz => "5GHz",
             TetheringWiFiBand::SixGigahertz => "6GHz",
-            _ => "???",
+            _ => "Unknown",
         }
         .to_string();
 
-        let encryption = match config.AuthenticationKind()? {
+        // AuthenticationKind was introduced in windows 11 26100
+        let encryption = match config.AuthenticationKind().unwrap_or_default() {
             TetheringWiFiAuthenticationKind::Wpa2 => "WPA2",
             TetheringWiFiAuthenticationKind::Wpa3 => "WPA3",
             TetheringWiFiAuthenticationKind::Wpa3TransitionMode => "WPA2/WPA3",
-            _ => "???",
+            _ => "Unknown",
         }
         .to_string();
 
