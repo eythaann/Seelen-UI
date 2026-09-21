@@ -49,7 +49,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT, STATUS_SUCCESS, WPARAM,
+            GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT,
+            STATUS_SUCCESS, SetLastError, WIN32_ERROR, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -328,21 +329,37 @@ impl WindowsApi {
     ///
     /// https://stackoverflow.com/questions/16881820/win32-api-deadlocks-while-using-different-threads
     /// https://stackoverflow.com/questions/15637124/whats-the-difference-between-showwindow-and-showwindowasync
+    /// `ShowWindow`'s return value is the *previous* visibility of the window, not whether
+    /// the call succeeded: it is `FALSE` for any window that was hidden, and `.ok()` would then
+    /// report whatever stale error the thread carries. The only way to detect an actual
+    /// failure (e.g. an invalid handle) is to clear the thread error state first and check it
+    /// after a `FALSE` return.
+    /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
-        // BOOL is returned but does not signify whether or not the operation was succesful
-        // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        unsafe { ShowWindow(hwnd, command) }
-            .ok()
-            .filter_fake_error()?;
+        unsafe {
+            SetLastError(WIN32_ERROR(0));
+            if !ShowWindow(hwnd, command).as_bool() {
+                let error = GetLastError();
+                if error.is_err() {
+                    return Err(windows::core::Error::from(error).into());
+                }
+            }
+        }
         Ok(())
     }
 
+    /// Same contract as [`Self::show_window`].
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
     pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
-        // BOOL is returned but does not signify whether or not the operation was succesful
-        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        unsafe { ShowWindowAsync(hwnd, command) }
-            .ok()
-            .filter_fake_error()?;
+        unsafe {
+            SetLastError(WIN32_ERROR(0));
+            if !ShowWindowAsync(hwnd, command).as_bool() {
+                let error = GetLastError();
+                if error.is_err() {
+                    return Err(windows::core::Error::from(error).into());
+                }
+            }
+        }
         Ok(())
     }
 
