@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
-import { NotificationsMode } from "@seelen-ui/lib/types";
+import type { NotificationsMode } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 
 let shortcutsPaused = $state<boolean | null>(null);
@@ -22,17 +22,7 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 
-// Same as the notifications widget: the mode API is Windows 11 only, and this promise sits
-// inside the `Promise.all` below, so a rejection would prevent the whole flyouts widget
-// from mounting.
-let notificationsMode = lazyRune(async () => {
-  try {
-    return await invoke(SeelenCommand.GetNotificationsMode);
-  } catch (error) {
-    console.warn("Notifications mode is not supported on this OS, defaulting to 'All':", error);
-    return NotificationsMode.All;
-  }
-});
+let notificationsMode = lazyRune(() => invoke(SeelenCommand.GetNotificationsMode));
 subscribe(SeelenEvent.NotificationsModeChanged, notificationsMode.setByPayload);
 
 await Promise.all([
