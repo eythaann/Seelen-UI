@@ -24,7 +24,9 @@ fn get_system_tray_manager() -> &'static SystemTrayManager {
 
 impl crate::tauri_handlers::Handlers {
     pub fn get_system_tray_icons() -> Vec<SysTrayIcon> {
-        get_system_tray_manager().icons()
+        let manager = get_system_tray_manager();
+        manager.prune_dead_icons();
+        manager.icons()
     }
 
     pub fn send_system_tray_icon_action(

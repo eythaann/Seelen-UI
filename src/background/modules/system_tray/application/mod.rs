@@ -51,7 +51,10 @@ impl SystemTrayManager {
     /// Handles a tray event received via IPC
     /// This method should be called from the AppIpc handler
     pub fn handle_tray_event(event: Win32TrayEvent) {
-        if let Some(_event) = Self::instance().process_event(event) {
+        let manager = Self::instance();
+        let changed = manager.process_event(event).is_some();
+        let pruned = manager.prune_dead_icons();
+        if changed || pruned {
             Self::send(SystemTrayEvent::Changed);
         }
     }

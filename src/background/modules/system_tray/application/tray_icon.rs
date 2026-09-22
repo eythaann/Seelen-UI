@@ -15,7 +15,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    modules::system_tray::application::{SystemTrayManager, util::Util},
+    modules::system_tray::application::{SystemTrayEvent, SystemTrayManager, util::Util},
     utils::{constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image},
     windows_api::{WindowsApi, window::Window},
 };
@@ -34,6 +34,28 @@ impl SystemTrayManager {
     /// Returns all icons managed by the `Systray`.
     pub fn icons(&self) -> Vec<SysTrayIcon> {
         self.icons.values()
+    }
+
+    /// Removes icons whose owner window no longer exists.
+    ///
+    /// When a process dies without calling `NIM_DELETE` (crash, forced kill,
+    /// in-place update), Explorer drops its icons internally, so the hook never
+    /// sees an `IconRemove` for them and they would stay here forever.
+    ///
+    /// Returns `true` if any icon was removed.
+    pub fn prune_dead_icons(&self) -> bool {
+        let mut removed = false;
+        self.icons.retain(|(id, icon)| {
+            let alive = icon
+                .window_handle
+                .is_none_or(|handle| WindowsApi::is_window(HWND(handle as _)));
+            if !alive {
+                log::trace!("Tray icon removed, its window no longer exists: {}", id);
+                removed = true;
+            }
+            alive
+        });
+        removed
     }
 
     /// Returns the icon with the given handle and uid.
@@ -223,7 +245,12 @@ impl SystemTrayManager {
             .ok_or("Inoperable icon, missing callback")?;
 
         if !WindowsApi::is_window(HWND(window_handle as _)) {
-            return Err("Window handle is invalid".into());
+            // The owner died without removing its icon, drop it (Explorer does
+            // the same when the mouse passes over a dead icon).
+            if self.prune_dead_icons() {
+                SystemTrayManager::send(SystemTrayEvent::Changed);
+            }
+            return Ok(());
         }
 
         let is_mouse_click = matches!(
