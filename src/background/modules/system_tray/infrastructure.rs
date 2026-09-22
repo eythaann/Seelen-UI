@@ -6,7 +6,9 @@ use seelen_core::{
 };
 
 use crate::{
-    app::emit_to_webviews, error::Result, modules::system_tray::application::SystemTrayManager,
+    app::emit_to_webviews,
+    error::Result,
+    modules::system_tray::application::{SystemTrayEvent, SystemTrayManager},
 };
 
 fn get_system_tray_manager() -> &'static SystemTrayManager {
@@ -25,7 +27,10 @@ fn get_system_tray_manager() -> &'static SystemTrayManager {
 impl crate::tauri_handlers::Handlers {
     pub fn get_system_tray_icons() -> Vec<SysTrayIcon> {
         let manager = get_system_tray_manager();
-        manager.prune_dead_icons();
+        if manager.prune_dead_icons() {
+            // keep every other tray consumer in sync, not only this caller
+            SystemTrayManager::send(SystemTrayEvent::Changed);
+        }
         manager.icons()
     }
 

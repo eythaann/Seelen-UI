@@ -14,6 +14,9 @@ use crate::{
 
 pub struct SystemTrayManager {
     icons: SyncHashMap<SysTrayIconId, SysTrayIcon>,
+    /// Process that owned each icon's window when it was registered, used to
+    /// detect a recycled window handle.
+    owners: SyncHashMap<SysTrayIconId, u32>,
     _loader: Option<TrayHookLoader>,
 }
 
@@ -38,6 +41,7 @@ impl SystemTrayManager {
 
         Self {
             icons: SyncHashMap::new(),
+            owners: SyncHashMap::new(),
             _loader: loader,
         }
     }
