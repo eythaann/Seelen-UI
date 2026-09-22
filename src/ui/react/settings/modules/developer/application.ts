@@ -3,8 +3,9 @@ import { path } from "@tauri-apps/api";
 import { needRestart, settings } from "../../state/mod";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
-export async function simulatePerm(widgetId: string, perm: string): Promise<void> {
-  await invoke(SeelenCommand.SimulatePerm, { widgetId, perm });
+export async function simulatePerm(_widgetId: string, _perm: string): Promise<void> {
+  // todo: uncomment after peding refactor
+  // await invoke(SeelenCommand.SimulatePerm, { widgetId, perm });
 }
 
 /**

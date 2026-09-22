@@ -32,25 +32,25 @@ fn get_brightness_manager() -> &'static BrightnessManager {
     BrightnessManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_all_monitors_brightness() -> Result<Vec<MonitorBrightness>> {
-    let manager = get_brightness_manager();
-    let brightness = manager.get_all_brightness();
+impl crate::tauri_handlers::Handlers {
+    pub fn get_all_monitors_brightness() -> Result<Vec<MonitorBrightness>> {
+        let manager = get_brightness_manager();
+        let brightness = manager.get_all_brightness();
 
-    Ok(brightness
-        .into_iter()
-        .map(|b| MonitorBrightness {
-            instance_name: b.instance_name,
-            current_brightness: b.current_brightness,
-            levels: b.levels,
-            available_levels: b.level,
-            active: b.active,
-        })
-        .collect())
-}
+        Ok(brightness
+            .into_iter()
+            .map(|b| MonitorBrightness {
+                instance_name: b.instance_name,
+                current_brightness: b.current_brightness,
+                levels: b.levels,
+                available_levels: b.level,
+                active: b.active,
+            })
+            .collect())
+    }
 
-#[tauri::command(async)]
-pub fn set_monitor_brightness(instance_name: String, level: u8) -> Result<()> {
-    let manager = get_brightness_manager();
-    manager.set_brightness(&instance_name, level)
+    pub fn set_monitor_brightness(instance_name: String, level: u8) -> Result<()> {
+        let manager = get_brightness_manager();
+        manager.set_brightness(&instance_name, level)
+    }
 }

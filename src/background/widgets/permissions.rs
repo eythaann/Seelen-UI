@@ -185,9 +185,11 @@ pub fn request_widget_permission(
     WIDGET_PERMISSIONS.request(&label.widget_id, command)
 }
 
-/// Dev-only command: simulates a permission request for any widget ID and perm.
-/// Follows the same flow as a real request (checks cache, shows dialog, persists result).
-#[tauri::command(async)]
-pub fn simulate_perm(widget_id: String, perm: WidgetPerm) -> Result<()> {
-    WIDGET_PERMISSIONS.request(&WidgetId::from(widget_id.as_str()), perm)
+/* impl crate::tauri_handlers::Handlers {
+    /// Dev-only command: simulates a permission request for any widget ID and perm.
+    /// Follows the same flow as a real request (checks cache, shows dialog, persists result).
+    pub fn simulate_perm(widget_id: String, perm: WidgetPerm) -> Result<()> {
+        WIDGET_PERMISSIONS.request(&WidgetId::from(widget_id.as_str()), perm)
+    }
 }
+ */

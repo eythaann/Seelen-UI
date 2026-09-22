@@ -74,7 +74,7 @@ unsafe impl Send for PlayersEvent {}
 event_manager!(PlayersManager, PlayersEvent);
 
 pub struct PlayersManager {
-    playing: SyncHashMap<String, MediaPlayer>,
+    pub playing: SyncHashMap<String, MediaPlayer>,
     sessions: SyncHashMap<String, MediaPlayerSession>,
     manager: GlobalSystemMediaTransportControlsSessionManager,
 }
@@ -146,8 +146,14 @@ impl PlayersManager {
             .to_string_lossy())
     }
 
-    pub fn get_playing_sessions(&self) -> Vec<MediaPlayer> {
-        self.playing.values()
+    pub fn get_playing_sessions(&self) -> Vec<seelen_core::system_state::MediaPlayer> {
+        let mut players = Vec::new();
+        self.playing.for_each(|(_, player)| {
+            if player.removed_at.is_none() {
+                players.push(player.base.clone());
+            }
+        });
+        players
     }
 
     fn process_event(&self, event: &PlayersEvent) -> Result<()> {

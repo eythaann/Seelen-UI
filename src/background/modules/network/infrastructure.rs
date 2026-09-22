@@ -35,42 +35,40 @@ fn get_network_manager() -> &'static NetworkManager {
     NetworkManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_network_default_local_ip() -> Result<String> {
-    get_network_manager();
-    get_local_ip_address()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_network_default_local_ip() -> Result<String> {
+        get_network_manager();
+        get_local_ip_address()
+    }
 
-#[tauri::command(async)]
-pub fn get_network_adapters() -> Result<Vec<seelen_core::system_state::NetworkAdapter>> {
-    get_network_manager();
-    NetworkManager::get_adapters()
-}
+    pub fn get_network_adapters() -> Result<Vec<seelen_core::system_state::NetworkAdapter>> {
+        get_network_manager();
+        NetworkManager::get_adapters()
+    }
 
-#[tauri::command(async)]
-pub fn get_network_hotspot() -> Result<Option<Hotspot>> {
-    get_network_manager();
-    NetworkManager::get_hotspot()
-}
+    pub fn get_network_hotspot() -> Result<Option<Hotspot>> {
+        get_network_manager();
+        NetworkManager::get_hotspot()
+    }
 
-#[tauri::command(async)]
-pub fn set_network_hotspot_state(enabled: bool) -> Result<()> {
-    get_network_manager();
-    NetworkManager::toggle_hotspot(enabled)
-}
+    pub fn set_network_hotspot_state(enabled: bool) -> Result<()> {
+        get_network_manager();
+        NetworkManager::toggle_hotspot(enabled)
+    }
 
-#[tauri::command(async)]
-pub fn get_network_internet_connection() -> Result<bool> {
-    get_network_manager();
-    use crate::windows_api::Com;
-    use windows::Win32::Networking::NetworkListManager::{INetworkListManager, NetworkListManager};
-    Com::run_with_context(|| {
-        let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
-        let connectivity = unsafe { list_manager.GetConnectivity()? };
-        Ok(
-            connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0 == NLM_CONNECTIVITY_IPV4_INTERNET.0
+    pub fn get_network_internet_connection() -> Result<bool> {
+        get_network_manager();
+        use crate::windows_api::Com;
+        use windows::Win32::Networking::NetworkListManager::{
+            INetworkListManager, NetworkListManager,
+        };
+        Com::run_with_context(|| {
+            let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
+            let connectivity = unsafe { list_manager.GetConnectivity()? };
+            Ok(connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
+                == NLM_CONNECTIVITY_IPV4_INTERNET.0
                 || connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
-                    == NLM_CONNECTIVITY_IPV6_INTERNET.0,
-        )
-    })
+                    == NLM_CONNECTIVITY_IPV6_INTERNET.0)
+        })
+    }
 }

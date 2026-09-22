@@ -3,7 +3,7 @@ import type {
   IconPack,
   IconPack as IIconPack,
   IconPackEntry,
-  SeelenCommandGetIconArgs,
+  SluCmdArgumentMap,
 } from "@seelen-ui/types";
 import { List } from "../utils/List.ts";
 import { newFromInvoke, newOnEvent } from "../utils/State.ts";
@@ -11,6 +11,8 @@ import { invoke, SeelenCommand, SeelenEvent, type UnSubscriber } from "../handle
 import { Settings } from "./settings/mod.ts";
 import type { UnlistenFn } from "@tauri-apps/api/event";
 import { convertFileSrc } from "@tauri-apps/api/core";
+
+type GetIconArgs = Extract<SluCmdArgumentMap, { [SeelenCommand.GetIcon]: unknown }>[SeelenCommand.GetIcon];
 
 export class IconPackList extends List<IIconPack> {
   static getAsync(): Promise<IconPackList> {
@@ -156,12 +158,12 @@ export class IconPackManager {
     };
   }
 
-  public getIconEntry(args: SeelenCommandGetIconArgs): IconPackEntry | null {
+  public getIconEntry(args: GetIconArgs): IconPackEntry | null {
     const {
       path,
       umid,
       __seen = new Set<string>(),
-    } = args as SeelenCommandGetIconArgs & { __seen?: Set<string> };
+    } = args as GetIconArgs & { __seen?: Set<string> };
 
     // If neither path nor UMID is provided, return null
     if (!path && !umid) {
@@ -219,7 +221,7 @@ export class IconPackManager {
             return null;
           }
           __seen.add(entry.redirect);
-          return this.getIconEntry({ path: entry.redirect, __seen } as SeelenCommandGetIconArgs);
+          return this.getIconEntry({ path: entry.redirect, __seen } as GetIconArgs);
         }
 
         if (entry.icon) {
@@ -247,12 +249,12 @@ export class IconPackManager {
     return null;
   }
 
-  public getIconPath(args: SeelenCommandGetIconArgs): IIcon | null {
+  public getIconPath(args: GetIconArgs): IIcon | null {
     const entry = this.getIconEntry(args);
     return entry?.icon || null;
   }
 
-  public getIcon({ path, umid }: SeelenCommandGetIconArgs): IIcon | null {
+  public getIcon({ path, umid }: GetIconArgs): IIcon | null {
     const iconPath = this.getIconPath({ path, umid });
     return iconPath ? resolveAsSrc(iconPath) : null;
   }
@@ -324,7 +326,7 @@ export class IconPackManager {
    *   umid: "Seelen.SeelenUI_p6yyn03m1894e!App"
    * });
    */
-  public static requestIconExtraction(obj: SeelenCommandGetIconArgs): Promise<void> {
+  public static requestIconExtraction(obj: GetIconArgs): Promise<void> {
     return invoke(SeelenCommand.GetIcon, obj);
   }
 

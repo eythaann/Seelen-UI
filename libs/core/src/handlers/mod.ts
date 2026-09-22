@@ -1,13 +1,11 @@
-import type { SeelenCommandArgument, SeelenCommandReturn, SeelenEventPayload } from "@seelen-ui/types";
-import { invoke as tauriInvoke, type InvokeOptions } from "@tauri-apps/api/core";
+import type { SeelenEventPayload, SluCmdArgumentMap, SluCmdReturnMap } from "@seelen-ui/types";
+import { invoke as tauriInvoke } from "@tauri-apps/api/core";
 import { type EventCallback, listen, type Options as ListenerOptions } from "@tauri-apps/api/event";
 
-import type { SeelenCommand } from "./commands.ts";
-import type { SeelenEvent } from "./events.ts";
+import { SeelenCommand } from "./commands.ts";
+import { SeelenEvent } from "./events.ts";
 
-type $keyof<Type> = [Type] extends [never] ? keyof Type
-  : Type extends Type ? keyof Type
-  : never;
+type $keyof<Type> = [Type] extends [never] ? keyof Type : Type extends Type ? keyof Type : never;
 
 type UnionToIntersection<Type> = {
   [Key in $keyof<Type>]: Extract<
@@ -18,22 +16,10 @@ type UnionToIntersection<Type> = {
   >[Key];
 };
 
-type MapNullToVoid<Obj> = {
-  [K in keyof Obj]: [Obj[K]] extends [null] ? void : Obj[K];
-};
+type EmptyObject = Record<symbol, never>;
 
-type MapNullToUndefined<Obj> = {
-  [K in keyof Obj]: [Obj[K]] extends [null] ? undefined : Obj[K];
-};
-
-export type AllSeelenCommandArguments = MapNullToUndefined<
-  UnionToIntersection<SeelenCommandArgument>
->;
-export type AllSeelenCommandReturns = MapNullToVoid<
-  UnionToIntersection<SeelenCommandReturn>
->;
-
-export type AllSeelenEventPayloads = UnionToIntersection<SeelenEventPayload>;
+export type AllSeelenCommandArguments = UnionToIntersection<SluCmdArgumentMap>;
+export type AllSeelenCommandReturns = UnionToIntersection<SluCmdReturnMap>;
 
 /**
  * Will call to the background process
@@ -42,22 +28,15 @@ export type AllSeelenEventPayloads = UnionToIntersection<SeelenEventPayload>;
  * @return Result of the command
  */
 export function invoke<T extends SeelenCommand>(
-  ...args: [AllSeelenCommandArguments[T]] extends [undefined] ? [
-      command: T,
-      args?: undefined,
-      options?: InvokeOptions,
-    ]
-    : [
-      command: T,
-      args: AllSeelenCommandArguments[T],
-      options?: InvokeOptions,
-    ]
+  ...args: EmptyObject extends Required<AllSeelenCommandArguments[T]> ? [command: T]
+    : [command: T, args: AllSeelenCommandArguments[T]]
 ): Promise<AllSeelenCommandReturns[T]> {
-  const [command, commandArgs, options] = args;
-  return tauriInvoke(command, commandArgs, options);
+  const [command, commandArgs] = args;
+  return tauriInvoke(command, commandArgs);
 }
 
 export type UnSubscriber = () => void;
+export type AllSeelenEventPayloads = UnionToIntersection<SeelenEventPayload>;
 
 export function subscribe<T extends SeelenEvent>(
   event: T,
@@ -67,5 +46,4 @@ export function subscribe<T extends SeelenEvent>(
   return listen(event, cb, options);
 }
 
-export * from "./events.ts";
-export * from "./commands.ts";
+export { SeelenCommand, SeelenEvent };

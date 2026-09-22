@@ -42,50 +42,43 @@ fn get_power_manager() -> &'static TracedMutex<PowerManager> {
     PowerManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_power_status() -> PowerStatus {
-    get_power_manager().lock().power_status.clone()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_power_status() -> PowerStatus {
+        get_power_manager().lock().power_status.clone()
+    }
 
-#[tauri::command(async)]
-pub fn get_power_mode() -> PowerMode {
-    get_power_manager().lock().power_mode
-}
+    pub fn get_power_mode() -> PowerMode {
+        get_power_manager().lock().power_mode
+    }
 
-#[tauri::command(async)]
-pub fn get_batteries() -> Vec<Battery> {
-    get_power_manager().lock().batteries.clone()
-}
+    pub fn get_batteries() -> Vec<Battery> {
+        get_power_manager().lock().batteries.clone()
+    }
 
-#[tauri::command(async)]
-pub fn log_out() {
-    WindowsApi::exit_windows(EWX_LOGOFF, SHTDN_REASON_NONE).log_error();
-}
+    pub fn log_out() {
+        WindowsApi::exit_windows(EWX_LOGOFF, SHTDN_REASON_NONE).log_error();
+    }
 
-#[tauri::command(async)]
-pub fn suspend() {
-    WindowsApi::set_suspend_state(false).log_error();
-}
+    pub fn suspend() {
+        WindowsApi::set_suspend_state(false).log_error();
+    }
 
-#[tauri::command(async)]
-pub fn hibernate() {
-    WindowsApi::set_suspend_state(true).log_error();
-}
+    pub fn hibernate() {
+        WindowsApi::set_suspend_state(true).log_error();
+    }
 
-#[tauri::command(async)]
-pub fn restart() -> Result<()> {
-    WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
-    Ok(())
-}
+    pub fn restart() -> Result<()> {
+        WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
+        Ok(())
+    }
 
-#[tauri::command(async)]
-pub fn shutdown() -> Result<()> {
-    WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
-    Ok(())
-}
+    pub fn shutdown() -> Result<()> {
+        WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
+        Ok(())
+    }
 
-#[tauri::command(async)]
-pub fn lock() -> Result<()> {
-    WindowsApi::lock_machine()?;
-    Ok(())
+    pub fn lock() -> Result<()> {
+        WindowsApi::lock_machine()?;
+        Ok(())
+    }
 }

@@ -79,10 +79,6 @@
   );
 
   const color = $derived(filteredLuminance < 125 ? "#efefef" : "#222222");
-
-  function onClickBtn(cmd: SeelenCommand) {
-    invoke(cmd, { id: session.umid }).catch(console.error);
-  }
 </script>
 
 <div
@@ -106,13 +102,22 @@
   <MediaProgress {session} />
 
   <div class="media-session-actions">
-    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaPrev)}>
+    <button
+      data-skin="transparent"
+      onclick={() => invoke(SeelenCommand.MediaPrev, { id: session.umid })}
+    >
       <Icon iconName="IoPlaySkipBack" />
     </button>
-    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaTogglePlayPause)}>
+    <button
+      data-skin="transparent"
+      onclick={() => invoke(SeelenCommand.MediaTogglePlayPause, { id: session.umid })}
+    >
       <Icon iconName={session.playing ? "IoPause" : "IoPlay"} />
     </button>
-    <button data-skin="transparent" onclick={() => onClickBtn(SeelenCommand.MediaNext)}>
+    <button
+      data-skin="transparent"
+      onclick={() => invoke(SeelenCommand.MediaNext, { id: session.umid })}
+    >
       <Icon iconName="IoPlaySkipForward" />
     </button>
   </div>

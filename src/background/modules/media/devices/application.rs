@@ -139,12 +139,32 @@ impl DevicesManager {
         &MANAGER
     }
 
-    pub fn get_inputs(&self) -> Vec<MediaDevice> {
-        self.inputs.values()
+    pub fn get_inputs(&self) -> Vec<seelen_core::system_state::MediaDevice> {
+        self.inputs
+            .map(|(_, device)| seelen_core::system_state::MediaDevice {
+                id: device.id.clone(),
+                name: device.name.clone(),
+                r#type: seelen_core::system_state::MediaDeviceType::Input,
+                is_default_multimedia: device.is_default_multimedia,
+                is_default_communications: device.is_default_communications,
+                sessions: Vec::new(),
+                volume: device.volume,
+                muted: device.muted,
+            })
     }
 
-    pub fn get_outputs(&self) -> Vec<MediaDevice> {
-        self.outputs.values()
+    pub fn get_outputs(&self) -> Vec<seelen_core::system_state::MediaDevice> {
+        self.outputs
+            .map(|(_, device)| seelen_core::system_state::MediaDevice {
+                id: device.id.clone(),
+                name: device.name.clone(),
+                r#type: seelen_core::system_state::MediaDeviceType::Output,
+                is_default_multimedia: device.is_default_multimedia,
+                is_default_communications: device.is_default_communications,
+                sessions: Vec::new(),
+                volume: device.volume,
+                muted: device.muted,
+            })
     }
 
     pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {

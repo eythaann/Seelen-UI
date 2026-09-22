@@ -31,6 +31,9 @@ Backend architecture rules:
 
 - System modules in `src/background/modules/` MUST follow the modern pattern (lazy init + lazy tauri registration).
 - Business logic must NOT call `emit_to_webviews` directly.
+- Never write `#[tauri::command]` by hand. Commands are declared once in `libs/core/src/handlers/commands.rs`
+  (`slu_commands_declaration!`) and their Tauri wrappers are generated at compile time; implement the handler body as a
+  plain `impl crate::tauri_handlers::Handlers { pub fn your_command(...) { ... } }` block.
 
 WinRT / COM safety:
 
@@ -129,7 +132,7 @@ fn get_manager() -> &'static YourManager {
     REGISTER.call_once(|| {
         YourManager::subscribe(|_event: YourEvent| {
             // Keep this small and side-effect focused.
-            if let Ok(data) = get_your_data() {
+            if let Ok(data) = crate::tauri_handlers::Handlers::get_your_data() {
                 emit_to_webviews(SeelenEvent::YourDataChanged, data);
             }
         });
@@ -137,12 +140,17 @@ fn get_manager() -> &'static YourManager {
     YourManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_your_data() -> Result<Vec<YourType>> {
-    let manager = get_manager();
-    Ok(manager.get_data())
+impl crate::tauri_handlers::Handlers {
+    pub fn get_your_data() -> Result<Vec<YourType>> {
+        let manager = get_manager();
+        Ok(manager.get_data())
+    }
 }
 ```
+
+Handler methods are plain functions, not Tauri commands — no `#[tauri::command]` attribute, no manual
+`async`/return-type plumbing. The wrapper that Tauri actually invokes is generated from the declaration in
+`libs/core/src/handlers/commands.rs` (see below) and calls `Handlers::your_command(...)` for you.
 
 Minimal pattern (application side):
 
@@ -193,13 +201,38 @@ impl YourManager {
 
 When adding a new backend feature exposed to the UI, update `libs/core`:
 
-1. `libs/core/src/handlers/commands.rs`
+1. Declare the command in `libs/core/src/handlers/commands.rs`. The macro generates the `#[tauri::command]` wrapper, the
+   TS binding, and the `tauri::generate_handler![]` entry — do not write any of that by hand.
 
 ```rust
 slu_commands_declaration! {
     GetYourData = get_your_data() -> Vec<YourType>,
 }
 ```
+
+Add modifiers before the fn name as needed (order doesn't matter, all are optional):
+
+- `@fallible()` — the handler returns `crate::Result<T>` (fails); omit it when the handler can never fail and just
+  returns `T` directly. Mirror the return type in the declaration either way (write `-> T`, not `-> Result<T>`).
+- `@async()` — the handler is an `async fn` and gets `.await`ed by the generated wrapper.
+- `@webview()` — the generated wrapper injects a `tauri::WebviewWindow` as the first argument (e.g. for
+  `request_widget_permission` checks).
+
+```rust
+slu_commands_declaration! {
+    SetYourData =
+        @async()
+        @fallible()
+        set_your_data(value: YourType),
+    OpenYourFile =
+        @webview()
+        @fallible()
+        open_your_file(path: String),
+}
+```
+
+Then implement each handler as a plain method on `Handlers` in the owning module's `infrastructure.rs` (see the
+"Backend: System Modules" pattern above) — never annotate it with `#[tauri::command]` yourself.
 
 2. `libs/core/src/handlers/events.rs`
 

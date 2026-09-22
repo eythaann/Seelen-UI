@@ -71,75 +71,75 @@ async fn load_or_create_pack(dir: &Path) -> IconPack {
     pack
 }
 
-#[tauri::command(async)]
-pub async fn register_user_custom_app_icon(
-    icon_base64: String,
-    entry: IconPackEntry,
-) -> Result<()> {
-    let dir = pack_dir();
-    let icon_dir = dir.join("icons");
-    tokio::fs::create_dir_all(&icon_dir).await?;
+impl crate::tauri_handlers::Handlers {
+    pub async fn register_user_custom_app_icon(
+        icon_base64: String,
+        entry: IconPackEntry,
+    ) -> Result<()> {
+        let dir = pack_dir();
+        let icon_dir = dir.join("icons");
+        tokio::fs::create_dir_all(&icon_dir).await?;
 
-    let mut pack = load_or_create_pack(&dir).await;
+        let mut pack = load_or_create_pack(&dir).await;
 
-    // Delete the old icon file on disk when replacing an existing entry
-    let old_rel = pack
-        .find_similar(&entry)
-        .and_then(|existing| match existing {
-            IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
-            IconPackEntry::Shared(s) => s.icon.base.clone(),
-            IconPackEntry::Custom(c) => c.icon.base.clone(),
+        // Delete the old icon file on disk when replacing an existing entry
+        let old_rel = pack
+            .find_similar(&entry)
+            .and_then(|existing| match existing {
+                IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
+                IconPackEntry::Shared(s) => s.icon.base.clone(),
+                IconPackEntry::Custom(c) => c.icon.base.clone(),
+            });
+        if let Some(rel) = old_rel {
+            let _ = tokio::fs::remove_file(dir.join(rel)).await;
+        }
+
+        let filename = format!("{}.png", date_based_hex_id());
+        let bytes = STANDARD.decode(&icon_base64)?;
+        tokio::fs::write(icon_dir.join(&filename), bytes).await?;
+
+        pack.add_entry(with_icon(entry, format!("icons/{filename}")));
+        pack.save().await?;
+
+        RESOURCES.load(&ResourceKind::IconPack, &dir).await?;
+
+        let pack_id: IconPackId = USER_PACK_ID.into();
+        FULL_STATE.rcu(|state| {
+            let mut state = state.cloned();
+            state.settings.active_icon_packs.retain(|id| id != &pack_id);
+            state.settings.active_icon_packs.push(pack_id.clone());
+            state
         });
-    if let Some(rel) = old_rel {
-        let _ = tokio::fs::remove_file(dir.join(rel)).await;
+        FULL_STATE.load().write_settings()?;
+
+        RESOURCES.emit_icon_packs();
+        Ok(())
     }
 
-    let filename = format!("{}.png", date_based_hex_id());
-    let bytes = STANDARD.decode(&icon_base64)?;
-    tokio::fs::write(icon_dir.join(&filename), bytes).await?;
+    pub async fn delete_user_custom_app_icon(entry: IconPackEntry) -> Result<()> {
+        let dir = pack_dir();
+        if !dir.exists() {
+            return Ok(());
+        }
 
-    pack.add_entry(with_icon(entry, format!("icons/{filename}")));
-    pack.save().await?;
+        let mut pack = load_or_create_pack(&dir).await;
 
-    RESOURCES.load(&ResourceKind::IconPack, &dir).await?;
+        let old_rel = pack
+            .find_similar(&entry)
+            .and_then(|existing| match existing {
+                IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
+                IconPackEntry::Shared(s) => s.icon.base.clone(),
+                IconPackEntry::Custom(c) => c.icon.base.clone(),
+            });
+        if let Some(rel) = old_rel {
+            let _ = tokio::fs::remove_file(dir.join(rel)).await;
+        }
 
-    let pack_id: IconPackId = USER_PACK_ID.into();
-    FULL_STATE.rcu(|state| {
-        let mut state = state.cloned();
-        state.settings.active_icon_packs.retain(|id| id != &pack_id);
-        state.settings.active_icon_packs.push(pack_id.clone());
-        state
-    });
-    FULL_STATE.load().write_settings()?;
+        pack.entries.retain(|e| !e.matches(&entry));
+        pack.save().await?;
 
-    RESOURCES.emit_icon_packs();
-    Ok(())
-}
-
-#[tauri::command(async)]
-pub async fn delete_user_custom_app_icon(entry: IconPackEntry) -> Result<()> {
-    let dir = pack_dir();
-    if !dir.exists() {
-        return Ok(());
+        RESOURCES.load(&ResourceKind::IconPack, &dir).await?;
+        RESOURCES.emit_icon_packs();
+        Ok(())
     }
-
-    let mut pack = load_or_create_pack(&dir).await;
-
-    let old_rel = pack
-        .find_similar(&entry)
-        .and_then(|existing| match existing {
-            IconPackEntry::Unique(u) => u.icon.as_ref().and_then(|i| i.base.clone()),
-            IconPackEntry::Shared(s) => s.icon.base.clone(),
-            IconPackEntry::Custom(c) => c.icon.base.clone(),
-        });
-    if let Some(rel) = old_rel {
-        let _ = tokio::fs::remove_file(dir.join(rel)).await;
-    }
-
-    pack.entries.retain(|e| !e.matches(&entry));
-    pack.save().await?;
-
-    RESOURCES.load(&ResourceKind::IconPack, &dir).await?;
-    RESOURCES.emit_icon_packs();
-    Ok(())
 }

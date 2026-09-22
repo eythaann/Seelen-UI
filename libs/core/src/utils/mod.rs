@@ -57,10 +57,18 @@ macro_rules! identifier_impl {
     };
 }
 
-#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[derive(Serialize)]
 #[cfg_attr(
     all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
+    ts(type = "void")
+)]
+pub struct TsVoid;
+
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(
+    all(feature = "gen-binds", not(feature = "salvo")),
+    derive(ts_rs::TS),
     ts(type = "unknown")
 )]
 pub struct TsUnknown(pub serde_json::Value);

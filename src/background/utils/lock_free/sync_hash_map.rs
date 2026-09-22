@@ -90,6 +90,11 @@ where
     }
 
     #[inline]
+    pub fn map<R>(&self, f: impl FnMut((&K, &V)) -> R) -> Vec<R> {
+        self.0.lock().iter().map(f).collect()
+    }
+
+    #[inline]
     pub fn retain<F>(&self, mut f: F)
     where
         F: FnMut((&K, &mut V)) -> bool,

@@ -22,13 +22,16 @@ fn get_system_tray_manager() -> &'static SystemTrayManager {
     SystemTrayManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_system_tray_icons() -> Vec<SysTrayIcon> {
-    get_system_tray_manager().icons()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_system_tray_icons() -> Vec<SysTrayIcon> {
+        get_system_tray_manager().icons()
+    }
 
-#[tauri::command(async)]
-pub fn send_system_tray_icon_action(id: SysTrayIconId, action: SystrayIconAction) -> Result<()> {
-    get_system_tray_manager().send_action(&id, &action)?;
-    Ok(())
+    pub fn send_system_tray_icon_action(
+        id: SysTrayIconId,
+        action: SystrayIconAction,
+    ) -> Result<()> {
+        get_system_tray_manager().send_action(&id, &action)?;
+        Ok(())
+    }
 }

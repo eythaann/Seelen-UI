@@ -10,14 +10,18 @@ fn get_start_menu_manager() -> &'static StartMenuManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
         StartMenuManager::subscribe(|_event| {
-            emit_to_webviews(SeelenEvent::StartMenuItemsChanged, get_start_menu_items());
+            emit_to_webviews(
+                SeelenEvent::StartMenuItemsChanged,
+                get_start_menu_manager().get_all(),
+            );
         });
     });
     StartMenuManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_start_menu_items() -> Vec<Arc<StartMenuItem>> {
-    let manager = get_start_menu_manager();
-    manager.get_all()
+impl crate::tauri_handlers::Handlers {
+    pub fn get_start_menu_items() -> Vec<Arc<StartMenuItem>> {
+        let manager = get_start_menu_manager();
+        manager.get_all()
+    }
 }

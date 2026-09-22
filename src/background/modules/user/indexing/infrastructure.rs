@@ -37,8 +37,7 @@ fn ensure_folders_manager() -> bool {
     false
 }
 
-#[tauri::command(async)]
-pub fn get_user_folder_content(folder_type: FolderType) -> Vec<PathBuf> {
+fn get_user_folder_content(folder_type: FolderType) -> Vec<PathBuf> {
     // same as `get_user`, `SeelenEvent::UserFolderChanged` will bring the real content
     // once the background indexing finishes
     if !ensure_folders_manager() {
@@ -48,5 +47,11 @@ pub fn get_user_folder_content(folder_type: FolderType) -> Vec<PathBuf> {
     match manager.folders.get(&folder_type) {
         Some(details) => details.content.clone(),
         None => Vec::new(),
+    }
+}
+
+impl crate::tauri_handlers::Handlers {
+    pub fn get_user_folder_content(folder_type: FolderType) -> Vec<PathBuf> {
+        get_user_folder_content(folder_type)
     }
 }

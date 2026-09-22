@@ -33,86 +33,78 @@ fn get_vd_manager() -> &'static SluWorkspacesManager2 {
     SluWorkspacesManager2::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_virtual_desktops() -> VirtualDesktops {
-    get_vd_manager().into()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_virtual_desktops() -> VirtualDesktops {
+        get_vd_manager().into()
+    }
 
-#[tauri::command(async)]
-pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
-    let manager = get_vd_manager();
-    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
-    manager.switch_to_id(&monitor_id, &workspace_id)
-}
+    pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
+        let manager = get_vd_manager();
+        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        manager.switch_to_id(&monitor_id, &workspace_id)
+    }
 
-#[tauri::command(async)]
-pub fn create_workspace(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
-    let vd = get_vd_manager();
-    let workspace_id = vd.create_desktop(&monitor_id, false)?;
-    vd.switch_to_id(&monitor_id, &workspace_id)?;
-    Ok(workspace_id)
-}
+    pub fn create_workspace(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
+        let vd = get_vd_manager();
+        let workspace_id = vd.create_desktop(&monitor_id, false)?;
+        vd.switch_to_id(&monitor_id, &workspace_id)?;
+        Ok(workspace_id)
+    }
 
-#[tauri::command(async)]
-pub fn create_workspace_row(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
-    let vd = get_vd_manager();
-    let workspace_id = vd.create_desktop(&monitor_id, true)?;
-    vd.switch_to_id(&monitor_id, &workspace_id)?;
-    Ok(workspace_id)
-}
+    pub fn create_workspace_row(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
+        let vd = get_vd_manager();
+        let workspace_id = vd.create_desktop(&monitor_id, true)?;
+        vd.switch_to_id(&monitor_id, &workspace_id)?;
+        Ok(workspace_id)
+    }
 
-#[tauri::command(async)]
-pub fn destroy_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
-    let manager = get_vd_manager();
-    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
-    manager.destroy_desktop(&monitor_id, &workspace_id)
-}
+    pub fn destroy_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
+        let manager = get_vd_manager();
+        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        manager.destroy_desktop(&monitor_id, &workspace_id)
+    }
 
-#[tauri::command(async)]
-pub fn rename_workspace(
-    workspace_id: seelen_core::state::WorkspaceId,
-    name: Option<String>,
-) -> Result<()> {
-    let manager = get_vd_manager();
-    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
-    manager.rename_desktop(&monitor_id, &workspace_id, name)
-}
+    pub fn rename_workspace(
+        workspace_id: seelen_core::state::WorkspaceId,
+        name: Option<String>,
+    ) -> Result<()> {
+        let manager = get_vd_manager();
+        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        manager.rename_desktop(&monitor_id, &workspace_id, name)
+    }
 
-#[tauri::command(async)]
-pub fn move_window_to_workspace(
-    hwnd: isize,
-    workspace_id: seelen_core::state::WorkspaceId,
-) -> Result<()> {
-    let manager = get_vd_manager();
-    let window = crate::windows_api::window::Window::from(hwnd);
-    manager.send_to(&window, &workspace_id)
-}
+    pub fn move_window_to_workspace(
+        hwnd: isize,
+        workspace_id: seelen_core::state::WorkspaceId,
+    ) -> Result<()> {
+        let manager = get_vd_manager();
+        let window = crate::windows_api::window::Window::from(hwnd);
+        manager.send_to(&window, &workspace_id)
+    }
 
-#[tauri::command(async)]
-pub fn wallpaper_next() {
-    super::wallpapers::WorkspaceWallpapersManager::next();
-}
+    pub fn wallpaper_next() {
+        super::wallpapers::WorkspaceWallpapersManager::next();
+    }
 
-#[tauri::command(async)]
-pub fn wallpaper_prev() {
-    super::wallpapers::WorkspaceWallpapersManager::previous();
-}
+    pub fn wallpaper_prev() {
+        super::wallpapers::WorkspaceWallpapersManager::previous();
+    }
 
-#[tauri::command(async)]
-pub async fn wallpaper_save_thumbnail(
-    wallpaper_id: WallpaperId,
-    thumbnail_bytes: Vec<u8>,
-) -> Result<()> {
-    let Some(wallpaper) = RESOURCES.wallpapers.get_sync(&wallpaper_id) else {
-        return Err("Invalid wallpaper id".into());
-    };
+    pub async fn wallpaper_save_thumbnail(
+        wallpaper_id: WallpaperId,
+        thumbnail_bytes: Vec<u8>,
+    ) -> Result<()> {
+        let Some(wallpaper) = RESOURCES.wallpapers.get_sync(&wallpaper_id) else {
+            return Err("Invalid wallpaper id".into());
+        };
 
-    let thumbnail_filename = format!("thumbnail_{}.jpg", date_based_hex_id());
-    let thumbnail_path = wallpaper.metadata.directory()?.join(&thumbnail_filename);
-    tokio::fs::write(&thumbnail_path, &thumbnail_bytes).await?;
+        let thumbnail_filename = format!("thumbnail_{}.jpg", date_based_hex_id());
+        let thumbnail_path = wallpaper.metadata.directory()?.join(&thumbnail_filename);
+        tokio::fs::write(&thumbnail_path, &thumbnail_bytes).await?;
 
-    let mut wallpaper_mut = Wallpaper::clone(&wallpaper);
-    wallpaper_mut.thumbnail_filename = Some(thumbnail_filename);
-    wallpaper_mut.save().await?;
-    Ok(())
+        let mut wallpaper_mut = Wallpaper::clone(&wallpaper);
+        wallpaper_mut.thumbnail_filename = Some(thumbnail_filename);
+        wallpaper_mut.save().await?;
+        Ok(())
+    }
 }

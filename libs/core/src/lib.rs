@@ -42,6 +42,6 @@ fn generate_schemas() {
     write_schema::<Widget>("./gen/schemas/widget.schema.json");
     write_schema::<IconPack>("./gen/schemas/icon_pack.schema.json");
 
-    handlers::SeelenEvent::generate_ts_file("./src/handlers/events.ts");
-    handlers::SeelenCommand::generate_ts_file("./src/handlers/commands.ts");
+    handlers::events::SeelenEvent::generate_ts_file("./src/handlers/events.ts");
+    handlers::commands::SeelenCommand::generate_ts_file("./src/handlers/commands.ts");
 }

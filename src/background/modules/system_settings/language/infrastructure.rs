@@ -29,20 +29,19 @@ fn get_language_manager() -> &'static LanguageManager {
     LanguageManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_system_languages() -> Vec<SystemLanguage> {
-    get_language_manager().get_languages()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_system_languages() -> Vec<SystemLanguage> {
+        get_language_manager().get_languages()
+    }
 
-#[tauri::command(async)]
-pub fn get_ime_state() -> Result<ImeState> {
-    get_language_manager();
-    LanguageManager::get_ime_state()
-}
+    pub fn get_ime_state() -> Result<ImeState> {
+        get_language_manager();
+        LanguageManager::get_ime_state()
+    }
 
-#[tauri::command(async)]
-pub fn set_system_keyboard_layout(id: String, handle: String) -> Result<()> {
-    get_language_manager();
-    LanguageManager::set_keyboard_layout(&id, &handle)?;
-    Ok(())
+    pub fn set_system_keyboard_layout(id: String, handle: String) -> Result<()> {
+        get_language_manager();
+        LanguageManager::set_keyboard_layout(&id, &handle)?;
+        Ok(())
+    }
 }

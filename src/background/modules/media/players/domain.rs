@@ -68,12 +68,3 @@ pub struct MediaPlayer {
     pub base: seelen_core::system_state::MediaPlayer,
     pub removed_at: Option<Instant>,
 }
-
-impl serde::Serialize for MediaPlayer {
-    fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
-    where
-        S: serde::Serializer,
-    {
-        self.base.serialize(serializer)
-    }
-}

@@ -17,7 +17,7 @@ const ActionsScope = {
       console.warn(`Trying to execute command that is not allowed: "${command}"`);
       return;
     }
-    invoke(command, args);
+    (invoke as any)(command, args);
   },
 };
 

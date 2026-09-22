@@ -23,12 +23,12 @@ fn get_radio_manager() -> &'static RadioManager {
     RadioManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_radios() -> Vec<RadioDevice> {
-    get_radio_manager().get_radios()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_radios() -> Vec<RadioDevice> {
+        get_radio_manager().get_radios()
+    }
 
-#[tauri::command(async)]
-pub fn set_radios_state(kind: RadioDeviceKind, enabled: bool) -> Result<()> {
-    get_radio_manager().set_radios_state(kind, enabled)
+    pub fn set_radios_state(kind: RadioDeviceKind, enabled: bool) -> Result<()> {
+        get_radio_manager().set_radios_state(kind, enabled)
+    }
 }

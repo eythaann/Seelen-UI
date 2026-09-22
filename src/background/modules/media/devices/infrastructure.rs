@@ -1,6 +1,6 @@
 use std::sync::Once;
 
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::MediaDevice};
 
 use crate::{app::emit_to_webviews, error::Result, windows_api::WindowsApi};
 
@@ -22,29 +22,29 @@ fn get_devices_manager() -> &'static DevicesManager {
     DevicesManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_media_devices() -> Result<(serde_json::Value, serde_json::Value)> {
-    let manager = get_devices_manager();
-    let inputs = serde_json::to_value(manager.get_inputs())?;
-    let outputs = serde_json::to_value(manager.get_outputs())?;
-    Ok((inputs, outputs))
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_media_devices() -> Result<(Vec<MediaDevice>, Vec<MediaDevice>)> {
+        let manager = get_devices_manager();
+        Ok((manager.get_inputs(), manager.get_outputs()))
+    }
 
-#[tauri::command(async)]
-pub async fn media_set_default_device(id: String, role: String) -> Result<()> {
-    get_devices_manager();
-    WindowsApi::set_default_audio_device(&id, &role)?;
-    Ok(())
-}
+    pub fn media_set_default_device(id: String, role: String) -> Result<()> {
+        get_devices_manager();
+        WindowsApi::set_default_audio_device(&id, &role)?;
+        Ok(())
+    }
 
-#[tauri::command(async)]
-pub fn media_toggle_mute(device_id: String, session_id: Option<String>) -> Result<()> {
-    let manager = get_devices_manager();
-    manager.toggle_mute(device_id, session_id)
-}
+    pub fn media_toggle_mute(device_id: String, session_id: Option<String>) -> Result<()> {
+        let manager = get_devices_manager();
+        manager.toggle_mute(device_id, session_id)
+    }
 
-#[tauri::command(async)]
-pub fn set_volume_level(device_id: String, session_id: Option<String>, level: f32) -> Result<()> {
-    let manager = get_devices_manager();
-    manager.set_volume_level(device_id, session_id, level)
+    pub fn set_volume_level(
+        device_id: String,
+        session_id: Option<String>,
+        level: f32,
+    ) -> Result<()> {
+        let manager = get_devices_manager();
+        manager.set_volume_level(device_id, session_id, level)
+    }
 }

@@ -17,13 +17,13 @@ fn get_trash_bin_manager() -> &'static TracedMutex<TrashBinManager> {
     TrashBinManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_trash_bin_info() -> TrashBinInfo {
-    get_trash_bin_manager().lock().info.clone()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_trash_bin_info() -> TrashBinInfo {
+        get_trash_bin_manager().lock().info.clone()
+    }
 
-#[tauri::command(async)]
-pub fn trash_bin_empty() -> Result<()> {
-    get_trash_bin_manager();
-    TrashBinManager::empty()
+    pub fn trash_bin_empty() -> Result<()> {
+        get_trash_bin_manager();
+        TrashBinManager::empty()
+    }
 }

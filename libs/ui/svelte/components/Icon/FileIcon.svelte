@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { ClassValue } from "svelte/elements";
-  import type { SeelenCommandGetIconArgs } from "@seelen-ui/lib/types";
   import { IconPackManager } from "@seelen-ui/lib";
   import { iconPackManager, type IconState } from "./common.svelte.ts";
   import MissingIcon from "./MissingIcon.svelte";
   import SluIconRenderer from "./SluIconRenderer.svelte";
   import { prefersDarkColorScheme } from "../../runes/DarkMode.svelte.ts";
 
-  interface Props extends SeelenCommandGetIconArgs {
+  interface Props {
+    path?: string | null;
+    umid?: string | null;
     class?: ClassValue;
     lazy?: boolean;
     [key: string]: any;

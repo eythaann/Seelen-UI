@@ -46,54 +46,50 @@ fn get_apps_manager() -> &'static UserAppsManager {
     UserAppsManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_focused_app() -> FocusedApp {
-    Window::get_foregrounded().as_focused_app_information()
-}
-
-#[tauri::command(async)]
-pub fn get_mouse_position() -> [i32; 2] {
-    let point = Mouse::get_cursor_pos().unwrap_or_default();
-    [point.x, point.y]
-}
-
-#[tauri::command(async)]
-pub fn get_key_state(key: win_hotkeys::VKey) -> bool {
-    use win_hotkeys::VKey;
-    use win_hotkeys::state::KeyboardState;
-
-    if key == VKey::Menu {
-        return KeyboardState::async_is_key_down(VKey::Menu.to_vk_code())
-            || KeyboardState::async_is_key_down(VKey::LMenu.to_vk_code())
-            || KeyboardState::async_is_key_down(VKey::RMenu.to_vk_code());
+impl crate::tauri_handlers::Handlers {
+    pub fn get_focused_app() -> FocusedApp {
+        Window::get_foregrounded().as_focused_app_information()
     }
 
-    KeyboardState::async_is_key_down(key.to_vk_code())
-}
+    pub fn get_mouse_position() -> [i32; 2] {
+        let point = Mouse::get_cursor_pos().unwrap_or_default();
+        [point.x, point.y]
+    }
 
-#[tauri::command(async)]
-pub fn get_user_app_windows() -> Vec<UserAppWindow> {
-    get_apps_manager().interactable_windows.to_vec()
-}
+    pub fn get_key_state(key: String) -> Result<bool> {
+        use win_hotkeys::VKey;
+        use win_hotkeys::state::KeyboardState;
 
-#[tauri::command(async)]
-pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
-    get_apps_manager();
-    WinPreviewManager::instance().get_previews()
-}
+        let key = VKey::from_keyname(&key)?;
+        if key == VKey::Menu {
+            return Ok(KeyboardState::async_is_key_down(VKey::Menu.to_vk_code())
+                || KeyboardState::async_is_key_down(VKey::LMenu.to_vk_code())
+                || KeyboardState::async_is_key_down(VKey::RMenu.to_vk_code()));
+        }
 
-#[tauri::command(async)]
-pub fn get_user_app_windows_colors() -> HashMap<isize, UserAppWindowColors> {
-    get_apps_manager();
-    WinPreviewManager::instance().get_colors()
-}
+        Ok(KeyboardState::async_is_key_down(key.to_vk_code()))
+    }
 
-/// This function is called show_desktop but acts more like minimize_all
-#[tauri::command(async)]
-pub fn show_desktop() -> Result<()> {
-    Com::run_with_context(|| {
-        let shell: IShellDispatch6 = Com::create_instance(&Shell)?;
-        unsafe { shell.ToggleDesktop()? };
-        Ok(())
-    })
+    pub fn get_user_app_windows() -> Vec<UserAppWindow> {
+        get_apps_manager().interactable_windows.to_vec()
+    }
+
+    pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
+        get_apps_manager();
+        WinPreviewManager::instance().get_previews()
+    }
+
+    pub fn get_user_app_windows_colors() -> HashMap<isize, UserAppWindowColors> {
+        get_apps_manager();
+        WinPreviewManager::instance().get_colors()
+    }
+
+    /// This function is called show_desktop but acts more like minimize_all
+    pub fn show_desktop() -> Result<()> {
+        Com::run_with_context(|| {
+            let shell: IShellDispatch6 = Com::create_instance(&Shell)?;
+            unsafe { shell.ToggleDesktop()? };
+            Ok(())
+        })
+    }
 }

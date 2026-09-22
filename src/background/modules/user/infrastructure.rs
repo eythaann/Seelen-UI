@@ -16,12 +16,13 @@ pub fn reemit_user() {
     emit_to_webviews(SeelenEvent::UserChanged, maybe_redact_user(user));
 }
 
-#[tauri::command(async)]
-pub fn get_user() -> User {
-    let mut manager = UserManager::instance().lock();
-    if manager.refresh() {
-        let user = manager.user.clone();
-        emit_to_webviews(SeelenEvent::UserChanged, maybe_redact_user(user));
+impl crate::tauri_handlers::Handlers {
+    pub fn get_user() -> User {
+        let mut manager = UserManager::instance().lock();
+        if manager.refresh() {
+            let user = manager.user.clone();
+            emit_to_webviews(SeelenEvent::UserChanged, maybe_redact_user(user));
+        }
+        maybe_redact_user(manager.user.clone())
     }
-    maybe_redact_user(manager.user.clone())
 }

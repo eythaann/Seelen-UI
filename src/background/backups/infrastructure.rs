@@ -29,7 +29,8 @@ pub fn start_backup_sync() {
     });
 }
 
-#[tauri::command(async)]
-pub fn get_backup_status() -> BackupStatus {
-    super::application::get_backup_status()
+impl crate::tauri_handlers::Handlers {
+    pub fn get_backup_status() -> BackupStatus {
+        super::application::get_backup_status()
+    }
 }

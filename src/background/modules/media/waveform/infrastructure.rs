@@ -19,7 +19,8 @@ fn get_waveform_manager() -> &'static WaveformManager {
     WaveformManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_media_waveform() -> Result<AudioWaveform> {
-    Ok(get_waveform_manager().get_latest())
+impl crate::tauri_handlers::Handlers {
+    pub fn get_media_waveform() -> Result<AudioWaveform> {
+        Ok(get_waveform_manager().get_latest())
+    }
 }

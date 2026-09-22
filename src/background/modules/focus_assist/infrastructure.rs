@@ -16,12 +16,12 @@ fn get_focus_assist_manager() -> &'static FocusAssistManager {
     FocusAssistManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_focus_assist() -> bool {
-    get_focus_assist_manager().is_active()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_focus_assist() -> bool {
+        get_focus_assist_manager().is_active()
+    }
 
-#[tauri::command(async)]
-pub fn set_focus_assist(enabled: bool) -> Result<()> {
-    get_focus_assist_manager().set_focus_assist(enabled)
+    pub fn set_focus_assist(enabled: bool) -> Result<()> {
+        get_focus_assist_manager().set_focus_assist(enabled)
+    }
 }

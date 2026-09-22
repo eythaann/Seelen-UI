@@ -21,12 +21,13 @@ use crate::{
     hook::HookManager,
     modules::apps::application::UserAppsManager,
     state::application::FULL_STATE,
+    tauri_handlers::Handlers,
     utils::lock_free::TracedMutex,
     virtual_desktops::SluWorkspacesManager2,
     widgets::window_manager::{
         WindowManagerV2,
         cli::{Axis, Direction, StepWay},
-        handler::{set_app_window_position, set_app_windows_positions},
+        handler::set_app_window_position,
     },
     windows_api::{monitor::Monitor, window::Window},
 };
@@ -389,7 +390,7 @@ impl TwmState {
             }
             let mut positions = HashMap::new();
             positions.insert(window_id, rect);
-            return set_app_windows_positions(positions);
+            return Handlers::set_app_windows_positions(positions);
         }
 
         let Some(leaf_node_id) = tree.node_of_window(&window_id) else {

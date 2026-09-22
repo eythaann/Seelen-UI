@@ -9,7 +9,7 @@ workspace = true
 
 [dependencies]
 slu-macros = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
+serde = { workspace = true, features = ["derive", "rc"] }
 serde_json = { workspace = true }
 serde_path_to_error = { workspace = true }
 serde_yaml = { workspace = true }

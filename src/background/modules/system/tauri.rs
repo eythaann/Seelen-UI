@@ -46,22 +46,20 @@ fn get_system_info() -> &'static SystemInfo {
     SystemInfo::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_system_disks() -> Vec<Disk> {
-    get_system_info().last_disks.lock().clone()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_system_disks() -> Vec<Disk> {
+        get_system_info().last_disks.lock().clone()
+    }
 
-#[tauri::command(async)]
-pub fn get_system_network() -> Vec<NetworkStatistics> {
-    get_system_info().last_networks.lock().clone()
-}
+    pub fn get_system_network() -> Vec<NetworkStatistics> {
+        get_system_info().last_networks.lock().clone()
+    }
 
-#[tauri::command(async)]
-pub fn get_system_memory() -> Memory {
-    get_system_info().last_memory.lock().clone()
-}
+    pub fn get_system_memory() -> Memory {
+        get_system_info().last_memory.lock().clone()
+    }
 
-#[tauri::command(async)]
-pub fn get_system_cores() -> Vec<Core> {
-    get_system_info().last_cores.lock().clone()
+    pub fn get_system_cores() -> Vec<Core> {
+        get_system_info().last_cores.lock().clone()
+    }
 }

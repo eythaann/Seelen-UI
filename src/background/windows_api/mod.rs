@@ -2,7 +2,6 @@ mod app_bar;
 mod com;
 mod devices;
 pub mod event_window;
-pub mod hdc;
 pub mod input;
 mod iterator;
 pub mod monitor;
@@ -986,17 +985,17 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn set_wallpaper(path: String) -> Result<()> {
-        if !PathBuf::from(&path).exists() {
+    pub fn set_wallpaper(path: PathBuf) -> Result<()> {
+        if !path.exists() {
             return Err("File not found".into());
         }
 
-        let mut path = path.encode_utf16().chain(Some(0)).collect_vec();
+        let mut path = WindowsString::from(path);
         unsafe {
             SystemParametersInfoW(
                 SPI_SETDESKWALLPAPER,
                 MAX_PATH,
-                Some(path.as_mut_ptr() as _),
+                Some(path.as_mut_slice().as_mut_ptr() as _),
                 SPIF_SENDCHANGE | SPIF_UPDATEINIFILE,
             )?;
         }

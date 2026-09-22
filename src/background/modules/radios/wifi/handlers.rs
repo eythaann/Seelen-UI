@@ -21,44 +21,42 @@ fn get_wifi_manager() -> &'static WifiManager {
     WifiManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn wlan_scan() {
-    get_wifi_manager().scan_networks();
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn wlan_scan() {
+        get_wifi_manager().scan_networks();
+    }
 
-#[tauri::command(async)]
-pub fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> Result<bool> {
-    let manager = get_wifi_manager();
-    match manager.connect(&ssid, password.as_deref(), hidden) {
-        Ok(result) => {
-            if result && let Ok(networks) = manager.get_available_networks() {
-                emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
+    pub fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> Result<bool> {
+        let manager = get_wifi_manager();
+        match manager.connect(&ssid, password.as_deref(), hidden) {
+            Ok(result) => {
+                if result && let Ok(networks) = manager.get_available_networks() {
+                    emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
+                }
+                Ok(result)
             }
-            Ok(result)
+            Err(err) => {
+                log::error!("WiFi connect error: {err}");
+                Ok(false)
+            }
         }
-        Err(err) => {
-            log::error!("WiFi connect error: {err}");
-            Ok(false)
+    }
+
+    pub fn wlan_forget(ssid: String) -> Result<()> {
+        let manager = get_wifi_manager();
+        manager.forget(&ssid)?;
+        if let Ok(networks) = manager.get_available_networks() {
+            emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
         }
+        Ok(())
     }
-}
 
-#[tauri::command(async)]
-pub fn wlan_forget(ssid: String) -> Result<()> {
-    let manager = get_wifi_manager();
-    manager.forget(&ssid)?;
-    if let Ok(networks) = manager.get_available_networks() {
-        emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
+    pub fn wlan_disconnect() -> Result<()> {
+        let manager = get_wifi_manager();
+        manager.disconnect()?;
+        if let Ok(networks) = manager.get_available_networks() {
+            emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
+        }
+        Ok(())
     }
-    Ok(())
-}
-
-#[tauri::command(async)]
-pub fn wlan_disconnect() -> Result<()> {
-    let manager = get_wifi_manager();
-    manager.disconnect()?;
-    if let Ok(networks) = manager.get_available_networks() {
-        emit_to_webviews(SeelenEvent::NetworkWlanScanned, &networks);
-    }
-    Ok(())
 }

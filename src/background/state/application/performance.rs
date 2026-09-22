@@ -6,8 +6,8 @@ use tauri::Listener;
 use crate::{
     app::{emit_to_webviews, get_app_handle},
     hook::HookManager,
-    modules::power::infrastructure::{get_batteries, get_power_mode, get_power_status},
     state::application::FULL_STATE,
+    tauri_handlers::Handlers,
     windows_api::window::{Window, event::WinEvent},
 };
 
@@ -81,7 +81,7 @@ fn calculate_current_perf_mode() -> PerformanceMode {
         return PerformanceMode::Extreme;
     }
 
-    let power_mode = get_power_mode();
+    let power_mode = Handlers::get_power_mode();
     if matches!(power_mode, PowerMode::GameMode | PowerMode::MixedReality) {
         return PerformanceMode::Extreme;
     }
@@ -96,8 +96,8 @@ fn calculate_current_perf_mode() -> PerformanceMode {
         return config.on_energy_saver;
     }
 
-    let power_status = get_power_status();
-    let batteries = get_batteries();
+    let power_status = Handlers::get_power_status();
+    let batteries = Handlers::get_batteries();
     if !batteries.is_empty() && power_status.ac_line_status != 1 {
         return config.on_battery;
     }

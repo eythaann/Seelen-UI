@@ -26,16 +26,16 @@ fn get_monitor_manager() -> &'static MonitorManager {
     MonitorManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_connected_monitors() -> Vec<PhysicalMonitor> {
-    get_monitor_manager().get_cached_data()
-}
+impl crate::tauri_handlers::Handlers {
+    pub fn get_connected_monitors() -> Vec<PhysicalMonitor> {
+        get_monitor_manager().get_cached_data()
+    }
 
-#[tauri::command(async)]
-pub fn set_monitor_hdr(id: MonitorId, state: bool) -> Result<()> {
-    let monitor = MonitorEnumerator::enumerate_win32()?
-        .into_iter()
-        .find(|m| matches!(m.get_stable_info(), Ok((mid, _)) if mid == id))
-        .ok_or("Monitor not found")?;
-    monitor.set_hdr_state(state)
+    pub fn set_monitor_hdr(id: MonitorId, state: bool) -> Result<()> {
+        let monitor = MonitorEnumerator::enumerate_win32()?
+            .into_iter()
+            .find(|m| matches!(m.get_stable_info(), Ok((mid, _)) if mid == id))
+            .ok_or("Monitor not found")?;
+        monitor.set_hdr_state(state)
+    }
 }

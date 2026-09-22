@@ -20,7 +20,8 @@ fn get_font_manager() -> &'static FontManager {
     FontManager::instance()
 }
 
-#[tauri::command(async)]
-pub fn get_fonts() -> Result<Vec<SeelenFont>> {
-    get_font_manager().get_fonts()
+impl crate::tauri_handlers::Handlers {
+    pub fn get_fonts() -> Result<Vec<SeelenFont>> {
+        get_font_manager().get_fonts()
+    }
 }

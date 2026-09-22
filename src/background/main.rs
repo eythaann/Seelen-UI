@@ -16,6 +16,7 @@ mod server;
 mod session;
 mod state;
 mod tauri_context;
+mod tauri_handlers;
 mod tauri_plugins;
 mod telemetry;
 mod utils;
@@ -32,10 +33,10 @@ use std::sync::{OnceLock, atomic::AtomicBool};
 use app::SeelenUI;
 use cli::{SelfPipe, ServicePipe, handle_console_client};
 use error::Result;
-use exposed::register_invoke_handler;
 use logger::SeelenLogger;
 use session::application::SessionManager;
 use slu_ipc::messages::SvcAction;
+use tauri_handlers::register_invoke_handler;
 use tauri_plugins::register_plugins;
 use utils::{
     integrity::{is_already_running, print_initial_information, restart_as_appx, warn_if_elevated},
