@@ -152,10 +152,22 @@ impl NotificationManager {
             }
         }
 
-        self.mode_changed_token = Some(
-            self.manager
-                .NotificationModeChanged(&TypedEventHandler::new(Self::on_mode_change))?,
-        );
+        // `NotificationModeChanged` is only implemented on Windows 11. On Windows 10 the
+        // call fails with E_NOINTERFACE, and propagating that error here would skip the
+        // `subscribe` below. Without it every Added/Removed event goes unhandled and the
+        // notification list silently freezes, so treat the mode API as optional.
+        match self
+            .manager
+            .NotificationModeChanged(&TypedEventHandler::new(Self::on_mode_change))
+        {
+            Ok(token) => self.mode_changed_token = Some(token),
+            Err(error) => {
+                log::warn!(
+                    "Notification mode is not supported on this OS, the do not disturb \
+                     state will not be tracked in real time: {error}"
+                );
+            }
+        }
 
         let eid = Self::subscribe(|e| Self::process_event(e).log_error());
         Self::set_event_handler_priority(&eid, 1);
@@ -432,7 +444,14 @@ impl NotificationManager {
     }
 
     pub fn get_notifications_mode(&self) -> Result<NotificationsMode> {
-        let mode = self.manager.NotificationMode()?;
+        // Only available on Windows 11. This backs the do not disturb toggle, so degrade to
+        // `All` on systems without the API instead of failing the command: the frontend
+        // awaits it at module top level, and a rejection there prevents the widget from
+        // mounting, which surfaces to the user as "notifications never show up".
+        let Ok(mode) = self.manager.NotificationMode() else {
+            return Ok(NotificationsMode::All);
+        };
+
         let mode = match mode {
             ToastNotificationMode::Unrestricted => NotificationsMode::All,
             ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,

@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
-import type { AppNotification, NotificationsMode } from "@seelen-ui/lib/types";
+import { NotificationsMode, type AppNotification } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
@@ -17,7 +17,17 @@ let notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
 subscribe(SeelenEvent.Notifications, notifications.setByPayload);
 await notifications.init();
 
-let notificationsMode = lazyRune(() => invoke(SeelenCommand.GetNotificationsMode));
+// The notifications mode API only exists on Windows 11. This await is at module top level,
+// so letting it reject would prevent the widget from mounting at all (the user only sees a
+// blank popup), therefore fall back to `All` when the command is unavailable.
+let notificationsMode = lazyRune(async () => {
+  try {
+    return await invoke(SeelenCommand.GetNotificationsMode);
+  } catch (error) {
+    console.warn("Notifications mode is not supported on this OS, defaulting to 'All':", error);
+    return NotificationsMode.All;
+  }
+});
 subscribe(SeelenEvent.NotificationsModeChanged, notificationsMode.setByPayload);
 await notificationsMode.init();
 
