@@ -1,3 +1,13 @@
+//! Tray hook DLL, loaded into our process and injected into the
+//! `Shell_TrayWnd` thread.
+//!
+//! Build it with `RUSTFLAGS=-C target-feature=+crt-static`, as the release
+//! workflows do. Against the dynamic CRT this DLL imports `VCRUNTIME140.dll`
+//! from the Visual C++ Redistributable, which Windows does not ship; on a
+//! machine without it `LoadLibrary` fails with `ERROR_MOD_NOT_FOUND`
+//! (0x8007007E) and the system tray silently ends up empty, with nothing but a
+//! line in the log to show for it.
+
 use slu_ipc::{
     AppIpc,
     messages::{AppMessage, IconEventData, Win32TrayEvent},

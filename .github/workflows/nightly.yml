@@ -79,6 +79,14 @@ jobs:
           npx tsx scripts/versionish.ts ci ${{ needs.update-tag.outputs.version }}
 
       - name: Build Hook DLL
+        # Static CRT on purpose: this DLL is loaded into our process and then
+        # injected into explorer.exe, so it must depend on nothing outside
+        # Windows itself. Linked dynamically it imports VCRUNTIME140.dll from
+        # the Visual C++ Redistributable, which Windows does not ship. On a
+        # machine without that redistributable LoadLibrary fails with
+        # ERROR_MOD_NOT_FOUND and the system tray silently stays empty.
+        env:
+          RUSTFLAGS: "-C target-feature=+crt-static"
         run: cargo build --release --target ${{ matrix.target }} -p sluhk
 
       - name: Build
