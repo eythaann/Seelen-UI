@@ -1,6 +1,7 @@
 use windows::Win32::{
     Devices::Display::{
-        GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR, SetMonitorBrightness,
+        DestroyPhysicalMonitor, GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR,
+        SetMonitorBrightness,
     },
     Foundation::HANDLE,
     Storage::FileSystem::{
@@ -18,7 +19,7 @@ use crate::{
 
 use super::Monitor;
 
-#[derive(Debug, Default)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub struct DdcciBrightnessValues {
     pub min: u32,
     pub current: u32,
@@ -50,37 +51,80 @@ impl MonitorTarget {
     }
 }
 
-#[allow(dead_code)]
 impl Monitor {
-    fn main_physical(&self) -> Result<PHYSICAL_MONITOR> {
-        let physical_monitors = WindowsApi::get_physical_monitors(self.handle())?;
-        let main_physical_monitor = physical_monitors.first().ok_or("no physical monitor")?;
-        Ok(*main_physical_monitor)
+    /// The physical panels behind this logical monitor. Usually one, but a cloned/mirrored
+    /// display group shares a single `HMONITOR` and yields one handle per panel.
+    pub fn physical_monitors(&self) -> Result<Vec<PhysicalMonitorHandle>> {
+        Ok(WindowsApi::get_physical_monitors(self.handle())?
+            .into_iter()
+            .map(PhysicalMonitorHandle)
+            .collect())
+    }
+}
+
+/// Owned `PHYSICAL_MONITOR` handle, released with `DestroyPhysicalMonitor` on drop.
+///
+/// Brightness goes through Display Data Channel / Command Interface (DDC/CI) via `dxva2.dll`.
+/// These calls talk to the monitor over the I2C bus of the video cable, so they are slow
+/// (tens of milliseconds, seconds on a misbehaving monitor) and must never run on the UI
+/// thread. Callers should also serialize them: concurrent DDC/CI transactions to the same
+/// monitor can corrupt each other.
+pub struct PhysicalMonitorHandle(PHYSICAL_MONITOR);
+
+impl std::fmt::Debug for PhysicalMonitorHandle {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let handle = self.0.hPhysicalMonitor;
+        f.debug_struct("PhysicalMonitorHandle")
+            .field("handle", &handle)
+            .field("description", &self.description())
+            .finish()
+    }
+}
+
+unsafe impl Send for PhysicalMonitorHandle {}
+unsafe impl Sync for PhysicalMonitorHandle {}
+
+impl Drop for PhysicalMonitorHandle {
+    fn drop(&mut self) {
+        unsafe {
+            let _ = DestroyPhysicalMonitor(self.0.hPhysicalMonitor);
+        }
+    }
+}
+
+impl PhysicalMonitorHandle {
+    /// Human readable description reported by the driver, e.g. `Generic PnP Monitor`.
+    pub fn description(&self) -> String {
+        // `PHYSICAL_MONITOR` is packed, so the array has to be copied out before borrowing it
+        let description = self.0.szPhysicalMonitorDescription;
+        WindowsString::from_slice(&description).to_string()
     }
 
-    // Display Data Channel/Command Interface
-    pub fn supports_ddcci(&self) -> Result<bool> {
-        let physical_monitor = self.main_physical()?;
-        let ddcci_is_supported = unsafe {
+    /// Whether the monitor claims DDC/CI support through `GetMonitorCapabilities`.
+    ///
+    /// Only advisory: some monitors that do answer brightness requests fail this call (e.g.
+    /// BenQ ZOWIE XL), and Microsoft documents that others report capabilities they don't
+    /// actually have. Prefer probing `ddcci_get_brightness` directly and validating its result.
+    #[allow(dead_code)]
+    pub fn supports_ddcci(&self) -> bool {
+        unsafe {
             let mut pdwmonitorcapabilities: u32 = 0;
             let mut pdwsupportedcolortemperatures: u32 = 0;
             // This function fails if the monitor does not support DDC/CI.
             BOOL(GetMonitorCapabilities(
-                physical_monitor.hPhysicalMonitor,
+                self.0.hPhysicalMonitor,
                 &mut pdwmonitorcapabilities,
                 &mut pdwsupportedcolortemperatures,
             ))
             .as_bool()
-        };
-        Ok(ddcci_is_supported)
+        }
     }
 
-    pub fn ddcci_get_monitor_brightness(&self) -> Result<DdcciBrightnessValues> {
-        let physical_monitor = self.main_physical()?;
+    pub fn ddcci_get_brightness(&self) -> Result<DdcciBrightnessValues> {
         let mut values = DdcciBrightnessValues::default();
         unsafe {
             BOOL(GetMonitorBrightness(
-                physical_monitor.hPhysicalMonitor,
+                self.0.hPhysicalMonitor,
                 &mut values.min,
                 &mut values.current,
                 &mut values.max,
@@ -90,15 +134,10 @@ impl Monitor {
         Ok(values)
     }
 
-    pub fn ddcci_set_monitor_brightness(&self, value: u32) -> Result<()> {
-        let physical_monitor = self.main_physical()?;
+    pub fn ddcci_set_brightness(&self, value: u32) -> Result<()> {
         unsafe {
-            BOOL(SetMonitorBrightness(
-                physical_monitor.hPhysicalMonitor,
-                value,
-            ))
-            .ok()?
-        };
+            BOOL(SetMonitorBrightness(self.0.hPhysicalMonitor, value)).ok()?;
+        }
         Ok(())
     }
 }
