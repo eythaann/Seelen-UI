@@ -5,9 +5,18 @@
   import { t } from "./i18n/index.ts";
   import Notification from "./components/Notification.svelte";
   import { Icon } from "libs/ui/svelte/components/Icon";
+  import { notificationCardExit } from "./transitions.ts";
+  import { fade } from "svelte/transition";
+
+  let exitingCount = $state(0);
+  let isInitialLoad = $state(true);
 
   $effect(() => {
     Widget.getCurrent().ready();
+    const timer = setTimeout(() => {
+      isInitialLoad = false;
+    }, 400);
+    return () => clearTimeout(timer);
   });
 
   async function handleClearAll() {
@@ -46,18 +55,36 @@
     >
       <Icon iconName={isDndActive ? "IoMoon" : "IoMoonOutline"} />
     </button>
-    <button data-skin="default" onclick={handleClearAll}>
+    <button
+      data-skin="default"
+      onclick={handleClearAll}
+      disabled={globalState.notifications.length === 0 || exitingCount > 0}
+    >
       {$t("clear")}
     </button>
   </div>
 
   <div class="notifications-popup-body">
     {#each globalState.notifications as notification (notification.id)}
-      <Notification {notification} />
+      <div
+        class="notification-card-container"
+        out:notificationCardExit|global
+        onoutrostart={() => {
+          exitingCount++;
+        }}
+        onoutroend={() => {
+          exitingCount--;
+        }}
+      >
+        <Notification {notification} />
+      </div>
     {/each}
 
-    {#if globalState.notifications.length === 0}
-      <div class="notifications-popup-empty">
+    {#if globalState.notifications.length === 0 && exitingCount === 0}
+      <div
+        class="notifications-popup-empty"
+        in:fade={{ duration: isInitialLoad ? 0 : 180 }}
+      >
         <p>{$t("empty")}</p>
       </div>
     {/if}
@@ -69,3 +96,12 @@
     </button>
   </div>
 </div>
+
+<style>
+  .notification-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
+</style>
