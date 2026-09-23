@@ -213,9 +213,10 @@ impl SluWorkspacesManager2 {
 
                 let manager = Self::instance();
                 if let Ok(workspace_id) = window.workspace_id() {
-                    let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
                     // Restore workspace if the window was unminimized by the user via alt+tab or others
-                    manager.switch_to_id(&monitor_id, &workspace_id)?;
+                    if let Some(monitor_id) = manager.get_monitor_of_workspace(&workspace_id) {
+                        manager.switch_to_id(&monitor_id, &workspace_id)?;
+                    }
                 } else if !manager.is_pinned(&window_id) && window.is_interactable_and_not_hidden()
                 {
                     // Add minimized windows during the scanning, to the current active workspace
@@ -306,10 +307,14 @@ impl SluWorkspacesManager2 {
         });
     }
 
-    pub fn get_monitor_of_workspace(&self, workspace_id: &WorkspaceId) -> MonitorId {
-        self.workspace_index
-            .get(workspace_id, |x| x.clone())
-            .expect("workspace_index is broken")
+    /// The monitor a workspace belongs to, or `None` when the workspace is not
+    /// known any more.
+    ///
+    /// A miss is not a bug in itself: removing a monitor drops its workspaces,
+    /// while a window can still carry the id of one of them until it is
+    /// retracked. Panicking here took the whole app down on a display change.
+    pub fn get_monitor_of_workspace(&self, workspace_id: &WorkspaceId) -> Option<MonitorId> {
+        self.workspace_index.get(workspace_id, |x| x.clone())
     }
 
     pub fn is_pinned(&self, window_id: &isize) -> bool {
@@ -441,7 +446,9 @@ impl SluWorkspacesManager2 {
             return Ok(());
         }
 
-        let monitor_id = self.get_monitor_of_workspace(workspace_id);
+        let Some(monitor_id) = self.get_monitor_of_workspace(workspace_id) else {
+            return Ok(());
+        };
         let window_id = window.address();
 
         // Remove window from current workspace
