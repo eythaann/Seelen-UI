@@ -6,13 +6,24 @@ export function notificationCardExit(node: HTMLElement): TransitionConfig {
   const targetOpacity = +style.opacity || 1;
   const height = node.offsetHeight;
   const parent = node.parentElement;
-  const gap = parent ? parseFloat(getComputedStyle(parent).rowGap || getComputedStyle(parent).gap) || 8 : 8;
+  let gap = 8;
+  if (parent) {
+    const computed = getComputedStyle(parent);
+    const rawGap = computed.rowGap || computed.gap;
+    if (rawGap === "normal") {
+      gap = 0;
+    } else {
+      const parsed = parseFloat(rawGap);
+      if (Number.isFinite(parsed)) {
+        gap = parsed;
+      }
+    }
+  }
 
   return {
     duration: 220,
     easing: cubicOut,
-    css: (t: number) => {
-      const u = 1 - t;
+    css: (t: number, u: number) => {
       const currentHeight = height * t;
       const currentMarginBottom = -gap * u;
       const swipeX = u * 28;

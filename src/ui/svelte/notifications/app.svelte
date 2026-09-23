@@ -10,6 +10,7 @@
 
   let exitingCount = $state(0);
   let isInitialLoad = $state(true);
+  let isClearing = $state(false);
 
   $effect(() => {
     Widget.getCurrent().ready();
@@ -20,10 +21,16 @@
   });
 
   async function handleClearAll() {
+    if (isClearing) {
+      return;
+    }
+    isClearing = true;
     try {
       await invoke(SeelenCommand.NotificationsCloseAll);
     } catch (error) {
       console.error("Failed to clear notifications:", error);
+    } finally {
+      isClearing = false;
     }
   }
 
@@ -58,7 +65,7 @@
     <button
       data-skin="default"
       onclick={handleClearAll}
-      disabled={globalState.notifications.length === 0 || exitingCount > 0}
+      disabled={globalState.notifications.length === 0 || exitingCount > 0 || isClearing}
     >
       {$t("clear")}
     </button>
@@ -75,7 +82,7 @@
               exitingCount++;
             }}
             onoutroend={() => {
-              exitingCount--;
+              exitingCount = Math.max(0, exitingCount - 1);
             }}
           >
             <Notification {notification} />
@@ -118,6 +125,10 @@
     width: 100%;
     min-width: 0;
     z-index: 1;
+  }
+
+  .notifications-cards-layer:empty {
+    pointer-events: none;
   }
 
   .notification-card-container {
