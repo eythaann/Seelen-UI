@@ -115,13 +115,14 @@
     grid-template-rows: auto;
     width: 100%;
     min-width: 0;
+    gap: inherit;
   }
 
   .notifications-cards-layer {
     grid-area: 1 / 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: inherit;
     width: 100%;
     min-width: 0;
     z-index: 1;
