@@ -65,29 +65,33 @@
   </div>
 
   <div class="notifications-popup-body">
-    {#each globalState.notifications as notification (notification.id)}
-      <div
-        class="notification-card-container"
-        out:notificationCardExit|global
-        onoutrostart={() => {
-          exitingCount++;
-        }}
-        onoutroend={() => {
-          exitingCount--;
-        }}
-      >
-        <Notification {notification} />
+    <div class="notifications-layout-stack">
+      <div class="notifications-cards-layer">
+        {#each globalState.notifications as notification (notification.id)}
+          <div
+            class="notification-card-container"
+            out:notificationCardExit|global
+            onoutrostart={() => {
+              exitingCount++;
+            }}
+            onoutroend={() => {
+              exitingCount--;
+            }}
+          >
+            <Notification {notification} />
+          </div>
+        {/each}
       </div>
-    {/each}
 
-    {#if globalState.notifications.length === 0 && exitingCount === 0}
-      <div
-        class="notifications-popup-empty"
-        in:fade={{ duration: isInitialLoad ? 0 : 180 }}
-      >
-        <p>{$t("empty")}</p>
-      </div>
-    {/if}
+      {#if globalState.notifications.length === 0}
+        <div
+          class="notifications-popup-empty"
+          in:fade={{ duration: isInitialLoad ? 0 : 180 }}
+        >
+          <p>{$t("empty")}</p>
+        </div>
+      {/if}
+    </div>
   </div>
 
   <div class="notifications-popup-footer">
@@ -98,10 +102,33 @@
 </div>
 
 <style>
+  .notifications-layout-stack {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .notifications-cards-layer {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    z-index: 1;
+  }
+
   .notification-card-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     min-width: 0;
+  }
+
+  .notifications-popup-empty {
+    grid-area: 1 / 1;
+    z-index: 0;
   }
 </style>
