@@ -2,10 +2,10 @@ app_menu:
   close: 关闭
   close_multiple: 关闭全部
   copy_handles: 复制句柄
-  edit_app_icon: 编辑应用程序图标
+  edit_app_icon: 编辑应用图标
   kill: 结束进程
   kill_multiple: 结束所有进程
-  open_file_location: 打开文件位置
+  open_file_location: 打开文件所在位置
   pin: 固定
   pin_to_center: 固定到中心
   pin_to_left: 固定到左侧
@@ -15,7 +15,7 @@ app_menu:
 context_menu:
   edit_icon: 编辑图标
   remove_module: 移除模块
-  remove_separator: 删除分隔符
+  remove_separator: 移除分隔符
   reorder_disable: 锁定任务栏
   reorder_enable: 解锁任务栏
 media:
