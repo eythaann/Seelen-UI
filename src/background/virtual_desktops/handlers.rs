@@ -40,7 +40,9 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
         let manager = get_vd_manager();
-        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        let monitor_id = manager
+            .get_monitor_of_workspace(&workspace_id)
+            .ok_or("Unknown workspace")?;
         manager.switch_to_id(&monitor_id, &workspace_id)
     }
 
@@ -60,7 +62,9 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn destroy_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
         let manager = get_vd_manager();
-        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        let monitor_id = manager
+            .get_monitor_of_workspace(&workspace_id)
+            .ok_or("Unknown workspace")?;
         manager.destroy_desktop(&monitor_id, &workspace_id)
     }
 
@@ -69,7 +73,9 @@ impl crate::tauri_handlers::Handlers {
         name: Option<String>,
     ) -> Result<()> {
         let manager = get_vd_manager();
-        let monitor_id = manager.get_monitor_of_workspace(&workspace_id);
+        let monitor_id = manager
+            .get_monitor_of_workspace(&workspace_id)
+            .ok_or("Unknown workspace")?;
         manager.rename_desktop(&monitor_id, &workspace_id, name)
     }
 
