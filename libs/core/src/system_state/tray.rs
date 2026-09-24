@@ -68,6 +68,12 @@ pub struct SysTrayIcon {
     /// Note that multiple icons can have the same window handle.
     pub window_handle: Option<isize>,
 
+    /// Path of the executable that owns the icon's window, if it could be read.
+    ///
+    /// Unlike the window handle it survives restarts, so together with the uid
+    /// it identifies the icon across sessions (e.g. to remember its position).
+    pub exe_path: Option<PathBuf>,
+
     /// GUID for the icon.
     ///
     /// Used as an alternate way to identify the icon (versus its window
