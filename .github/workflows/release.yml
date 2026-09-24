@@ -90,6 +90,25 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         run: npx tauri build --ci --verbose --no-bundle --target ${{ matrix.target }}
 
+      # `tauri bundle` writes the bundle type into the main binary. If that happens after SignPath,
+      # the signature breaks (HashMismatch) and Smart App Control blocks the app. Writing it here,
+      # before signing, makes the bundler find no placeholder and leave the signed binary untouched.
+      - name: Set NSIS bundle type before signing
+        shell: pwsh
+        run: |
+          $exe = "target/${{ matrix.target }}/release/seelen-ui.exe"
+          $bytes = [IO.File]::ReadAllBytes($exe)
+          $text = [Text.Encoding]::Latin1.GetString($bytes)
+          $placeholder = "__TAURI_BUNDLE_TYPE_VAR_UNK"
+          $index = $text.IndexOf($placeholder, [StringComparison]::Ordinal)
+          if ($index -lt 0 -or $index -ne $text.LastIndexOf($placeholder, [StringComparison]::Ordinal)) {
+            Write-Error "Expected exactly one $placeholder in $exe"
+            exit 1
+          }
+          [Text.Encoding]::ASCII.GetBytes("__TAURI_BUNDLE_TYPE_VAR_NSS").CopyTo($bytes, $index)
+          [IO.File]::WriteAllBytes($exe, $bytes)
+          Write-Output "Bundle type set to NSIS at offset $index"
+
       - name: Upload binaries to artifacts
         uses: actions/upload-artifact@v4
         with:
