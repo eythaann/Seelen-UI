@@ -1,5 +1,5 @@
 action:
-  confirm: 你确定吗？
+  confirm: 确定？
   confirm_body: 此操作无法撤销。
 apps_configurations:
   app:
@@ -13,27 +13,27 @@ apps_configurations:
     ok_edit: 更新
     ok_readonly: 另存为新配置
     options:
-      NoInteractive: 没有互动
+      NoInteractive: 非交互式
       VdPinned: 在所有工作区中显示
-      WmFloat: Twm - 开始浮动
-      WmForce: Twm - 强制管理
-      WmUnmanage: Twm - 取消管理
-    options_label: 其他
+      WmFloat: 浮动
+      WmForce: 强制纳入管理
+      WmUnmanage: 取消管理
+    options_label: 额外选项
     title_create: 创建 {{name}}
     title_edit: 编辑 {{name}}
     title_readonly: 查看 {{name}}
-    weg_options_label: Dock / 任务栏选项
+    weg_options_label: 停靠栏/任务栏选项
     wm_options_label: 窗口管理器选项
     workspace: 工作区
     workspace_placeholder: 无
-  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供无需自定义的最佳体验。它们会自动为您配置最常见的应用程序。
-  bundled_title: Seelen 捆绑的应用配置
-  confirm_delete: 确定要删除此配置吗？
+  bundled_msg: 这些内置配置不可编辑，旨在让您无需自定义即可获得最佳体验。它们会自动为您配置最常用的应用。
+  bundled_title: Seelen 内置的应用配置
+  confirm_delete: 确定要删除所选的配置吗？
   confirm_delete_title: 确认删除
   delete: 删除
   export: 导出
-  export_full: 按应用程序导出设置
-  extra_info: Seelen UI 对每个应用仅使用一个标识符（找到的第一个匹配项），因此指定的顺序很重要，最新添加的将优先处理，请注意表格默认按从新到旧排序。
+  export_full: 按应用导出设置
+  extra_info: Seelen UI 对每个应用只使用一个标识符（第一个匹配到的），因此指定顺序很重要：最后添加的优先。请注意，表格默认按从新到旧排序。
   identifier:
     add_block: 添加块
     and: 与
@@ -42,10 +42,10 @@ apps_configurations:
     matching_strategy: 匹配策略
     matching_strategy_option:
       contains: 包含
-      ends_with: 结束于
+      ends_with: 结尾为
       equals: 等于
       regex: 正则表达式
-      starts_with: 开始于
+      starts_with: 开头为
     negation: 否定匹配
     or: 或
     remove: 删除块
@@ -55,7 +55,7 @@ apps_configurations:
       path: 路径
       title: 标题
   import: 导入
-  import_full: 按应用程序导入设置
+  import_full: 按应用导入设置
   new: 新建
   search: 搜索
   swap: 交换
@@ -65,42 +65,42 @@ delete: 删除
 devtools:
   app_folders: 应用文件夹
   color_palette: 调色板
-  color_palette_note: 这些颜色自动适应明/暗模式 - 每种颜色都是相对于当前背景的对比度，而不是固定值。 使用它们而不是硬编码颜色来获得自动主题支持。
+  color_palette_note: 这些颜色会自动适应浅色/深色模式——每种色阶都是相对当前背景的对比度，而非固定值。用它们代替硬编码颜色，即可自动适配主题。
   custom_config_file: 加载自定义配置文件
   data_folder: 数据文件夹
   enable: 启用开发者工具
-  enable_description: 解锁用于检查和调试 Seelen UI 内部结构的高级工具。 不适合常规使用。
+  enable_description: 解锁用于检查和调试 Seelen UI 内部的高级工具。不适合日常使用。
   icons: 缓存图标
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件
   shared_components: SLU 标准组件
   simulate_dialog:
-    label: 模拟对话
-    trigger: 扳机
+    label: 模拟对话框
+    trigger: 触发
   simulate_perm:
-    label: 模拟小部件权限请求
-    result_allowed: ✓ 已获得许可
-    result_denied: ✗ 权限被拒绝
+    label: 模拟部件权限请求
+    result_allowed: ✓ 已授予权限
+    result_denied: ✗ 已拒绝权限
     trigger: 模拟
-    widget_id_placeholder: '@作者/小部件名称'
+    widget_id_placeholder: '@作者/部件名称'
   tools: 工具
-  unlock_shortcuts: 解锁只读快捷方式
-  unlock_shortcuts_description: 允许编辑通常只读的快捷方式（例如系统覆盖）。
-  unstable_optimizations: 不稳定的优化
+  unlock_shortcuts: 解锁只读快捷键
+  unlock_shortcuts_description: 允许编辑通常只读的快捷键（例如系统覆盖项）。
+  unstable_optimizations: 不稳定优化
   unstable_optimizations_description: |-
-    启用可减少 RAM 使用的实验性 Chromium 标志。 
-    警告：如果一个小部件崩溃，共享同一加载器的所有小部件将一起崩溃。
+    启用可减少 RAM 使用的实验性 Chromium 标志。
+    警告：如果某个部件崩溃，共享同一加载器的所有部件都会一起崩溃。
   widgets_debug:
-    actions: 行动
-    empty: 没有加载小部件。 单击刷新。
-    instance_id: 实例ID
-    monitor_id: 显示器ID
-    open_devtools: 开发工具
+    actions: 操作
+    empty: 未加载任何部件。点击刷新。
+    instance_id: 实例 ID
+    monitor_id: 显示器 ID
+    open_devtools: 开发者工具
     refresh: 刷新
-    status: 地位
-    tab: 小部件
-    widget_id: 小部件 ID
+    status: 状态
+    tab: 部件
+    widget_id: 部件 ID
 discord_banner:
   message: 与其他 Seelen UI 用户联系、获取帮助、分享主题并了解最新消息。
   title: 加入我们的社区
@@ -109,28 +109,28 @@ extras:
   backup_last_sync: 上次同步
   backup_never_synced: 从未同步过
   backup_sync: 将设置同步到云端
-  backup_sync_description: 通过云自动备份和恢复您的设置。
+  backup_sync_description: 通过云端自动备份和恢复您的设置。
   clear_icons: 清除系统图标缓存
-  clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
-  discord_rpc: Discord 状态
-  discord_rpc_description: 向大家展示您的风格！
+  clear_icons_tooltip: 可能需要重启才能在所有部件上完全生效
+  discord_rpc: Discord 活动状态
+  discord_rpc_description: 向大家展示您的风格
   exit: 退出
   relaunch: 重启应用
-  streaming_mode: 串流模式
-  streaming_mode_description: 用占位符替换敏感信息（例如电子邮件），以在录制或屏幕截图期间保护隐私。
+  streaming_mode: 直播模式
+  streaming_mode_description: 在录制或截图期间用占位文本替换敏感信息（例如邮箱），以保护隐私。
   version: 版本
-  version_fixed: 应用程序和 WebView2 运行时版本已修复。这意味着应用程序将不会接收更新，并且 WebView2 运行时也不会随 Windows 更新自动更新。
+  version_fixed: 应用和 WebView2 运行时版本已固定。这意味着应用不会接收更新，WebView2 运行时也不会随 Windows 更新自动更新。
 general:
-  accent_color: 主色调
+  accent_color: 强调色
   date_format: 日期格式
   date_format_how_to: 日期格式怎么写？
   hardware_acceleration: 硬件加速
-  hardware_acceleration_description: 禁用硬件加速将减少内存使用。 如果您不使用大量动画，则禁用它是安全的，但无论此设置如何，单个小部件仍可能强制使用 GPU。
+  hardware_acceleration_description: 禁用硬件加速可减少内存占用。如果您没有使用大量动画，禁用是安全的，但个别部件仍可能无视此设置强制使用 GPU。
   icon_pack:
     available: 可用图标包
     selected: 当前图标包
   language: 语言
-  monday: 周一
+  monday: 星期一
   performance_mode:
     label: 优化
     on_battery: 使用电池时
@@ -141,13 +141,13 @@ general:
       minimal: 最小
     plugged: 插电或充电时
   polling_interval: 系统轮询间隔
-  polling_interval_description: Seelen UI 检查 CPU、RAM、网络和磁盘活动等系统资源的频率（以秒为单位）。 数字越小意味着更新越频繁，但资源使用率会稍高。
-  saturday: 周六
-  start_of_week: 一周的开始
+  polling_interval_description: Seelen UI 检查 CPU、RAM、网络和磁盘活动等系统资源的频率（单位为秒）。数值越小更新越频繁，但资源占用会稍高。
+  saturday: 星期六
+  start_of_week: 每周起始日
   startup: 开机自启
   sunday: 星期日
-  suspend_on_game_mode: 在游戏模式下暂停小部件
-  suspend_on_game_mode_description: 当 Windows 游戏模式处于活动状态时，所有小部件 Web 视图都会被销毁，以释放游戏的 CPU 和内存。 游戏模式结束时小部件会自动恢复。
+  suspend_on_game_mode: 在游戏模式下暂停部件
+  suspend_on_game_mode_description: 当 Windows 游戏模式启用时，所有部件 Web 视图都会被销毁，为游戏释放 CPU 和内存。游戏模式结束后，部件会自动恢复。
   theme:
     available: 可用主题
     selected: 当前主题
@@ -163,21 +163,21 @@ header:
     monitors: 显示器
     plugin: 插件
     resources: 资源
-    session: 帐户
+    session: 账户
     shortcuts: 快捷键
     soundpack: 音效包
     specific_apps: 按应用设置
     theme: 主题
     virtual_desk: 虚拟桌面
     wallpaper: 壁纸
-    widget: 小部件
+    widget: 部件
 home:
   new_resources: 新资源
 inherit: 继承
-inProgress: 进行中...
+inProgress: 进行中…
 insert: 插入
-join_us: 加入我们！
-loading: 加载中...
+join_us: 加入我们
+loading: 加载中…
 miscellaneous: 杂项
 monitors_configurations:
   label: 显示器 {{index}}
@@ -186,14 +186,14 @@ more: 更多
 open: 打开
 quit: 退出
 remove: 移除
-reset_all_to_default: 重置所有为默认值
+reset_all_to_default: 全部重置为默认值
 reset_configurations: 重置配置
 reset_to_default: 重置为默认值
 resources:
-  affected_widgets: 受影响的小部件
+  affected_widgets: 受影响的部件
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
   coming_soon: 即将推出
-  corrupted_wallpaper: 无法提取缩略图 - 视频格式已损坏或不受支持
+  corrupted_wallpaper: 无法提取缩略图：视频格式已损坏或不受支持
   delete: 删除资源
   discover: 发现更多资源
   has_update: 有更新可用
@@ -203,49 +203,49 @@ resources:
   modified: 已修改
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
-  see_on_website: 在网站中查看
+  see_on_website: 在网站上查看
   update_now: 更新
   updates_available: 可用更新
   updates_available_description: 以下资源有可用更新。
 review_request:
-  not_now: 下次再说
-  sure: 当然！
+  not_now: 暂不
+  sure: 当然
   title: 喜欢 Seelen UI 吗？
 save: 保存
 save_and_restart: 保存并重启
 search: 搜索
 see_more: 查看更多
 session:
-  logout: 登出
+  logout: 退出登录
   plan: 计划
   sign_in: 登录
-  sign_in_hint: 您的浏览器将打开，以便您可以安全登录。
+  sign_in_hint: 浏览器将打开，以便您安全登录。
   upgrade_to: 升级至
 shortcuts:
-  disabled_tooltip: 小部件及其快捷方式被禁用
-  duplicate_error: 检测到冲突的快捷方式
-  duplicate_error_hint: 有些快捷键被分配给多个操作。禁用冲突的小部件之一或重新分配重复的键绑定来解决。
+  disabled_tooltip: 部件及其快捷键已被禁用
+  duplicate_error: 检测到冲突的快捷键
+  duplicate_error_hint: 部分快捷键被分配给了多个操作。禁用其中一个冲突的部件，或重新分配重复的按键绑定即可解决。
   enable: 启用内置快捷键系统
-  enable_tooltip: 如果您使用 Seelen UI 客户端实现自己的快捷键系统，那么请禁用此项。
+  enable_tooltip: 如果您要用 Seelen UI 客户端实现自己的快捷键系统，请禁用此项。
   labels:
     create_new_workspace: 创建工作区
-    create_new_workspace_row: 创建新的工作区行
+    create_new_workspace_row: 新建工作区行
     destroy_current_workspace: 销毁当前工作区
     misc_force_quit: 强制退出
     misc_force_restart: 强制重启
     move_to_workspace: 移动到工作区 {{0}}
-    pause_toggle: 暂停/恢复快捷方式
+    pause_toggle: 暂停/恢复快捷键
     send_to_next_workspace: 将窗口发送到下一个工作区
     send_to_previous_workspace: 将窗口发送到上一个工作区
     send_to_workspace: 发送到工作区 {{0}}
     send_to_workspace_down: 将窗口发送到下面的工作区
     send_to_workspace_up: 将窗口发送到上面的工作区
     switch_to_next_workspace: 切换到下一个工作区
-    switch_to_previous_workspace: 切换到先前的工作区
+    switch_to_previous_workspace: 切换到上一个工作区
     switch_to_workspace_down: 切换到下面的工作区
     switch_to_workspace_up: 切换到上面的工作区
     switch_workspace: 切换到工作区 {{0}}
-  readonly_tooltip: 此为只读的快捷键
+  readonly_tooltip: 这是只读快捷键
   reset: 重置为默认值
 sides:
   bottom: 下方
@@ -254,10 +254,10 @@ sides:
   top: 顶部
 toolbar:
   auto_hide: 自动隐藏
-  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
-  delay_to_hide: 延迟隐藏
-  delay_to_show: 延迟显示
-  dock_side: 停靠侧
+  auto_hide_touch_disabled: 触摸屏设备不支持自动隐藏
+  delay_to_hide: 隐藏延迟
+  delay_to_show: 显示延迟
+  dock_side: 位置
   enable: 启用精美工具栏
   hide_mode:
     always: 总是
@@ -266,28 +266,28 @@ toolbar:
   item_size: 项目大小
   label: 工具栏
   margin: 边距大小
-  padding: 填充尺寸
+  padding: 内边距大小
   placeholder: {}
 update:
-  available: 有可用更新！
+  available: 有可用更新
   channel: 更新通道
-  downloading: 下载中...
+  downloading: 下载中…
 wall:
   blur: 模糊度
   cancel: 取消
   close: 关闭
-  collection_name: 收藏名称
-  collections: 收藏
+  collection_name: 集合名称
+  collections: 集合
   contrast: 对比度
-  corrupted_wallpapers_message: 已损坏的壁纸，请考虑删除这些：
+  corrupted_wallpapers_message: 以下壁纸已损坏，建议删除：
   coverage_pause_threshold: 暂停阈值（窗口覆盖率）
   create: 创建
   create_collection: 创建集合
   default_collection: 默认壁纸或集合
-  default_collection_description: 应用于没有特定覆盖集的所有监视器和工作区。
+  default_collection_description: 应用于所有未设置特定覆盖的显示器与工作区。
   delete_collection: 删除集合
   edit_collection: 编辑集合
-  extend: 扩展主屏幕
+  extend: 跨屏延伸
   fit:
     contain: 适应
     cover: 覆盖
@@ -296,17 +296,17 @@ wall:
   flipVertical: 垂直翻转
   generating_thumbnails: 生成壁纸缩略图
   hours: 小时
-  interval: 更换壁纸的时间间隔
+  interval: 更换壁纸间隔
   minutes: 分钟
-  monitor_collection: 监控集合
+  monitor_collection: 显示器集合
   multimonitor_behaviour: 多显示器行为
-  muted: 将视频音频静音
-  no_background: 幻灯片为空，将使用主题背景替代。
-  no_collections: 尚未创建任何集合。单击 “+” 按钮创建一个。
+  muted: 静音视频音频
+  no_background: 幻灯片为空，将改用主题背景。
+  no_collections: 尚未创建任何集合。点击“+”按钮创建一个。
   objectFit: 背景适应方式
   objectPosition: 背景位置
-  overlayColor: 叠加颜色
-  overlayMixBlendMode: 叠加混合混合模式
+  overlayColor: 叠加层颜色
+  overlayMixBlendMode: 叠加层混合模式
   per_monitor: 每台显示器
   per_monitor_config: 每个显示器的配置
   playback: 播放速度
@@ -317,22 +317,22 @@ wall:
     right: 右侧
     top: 顶部
   processing_video: 处理视频
-  random: 随机更改壁纸
+  random: 随机播放幻灯片
   saturation: 饱和度
   seconds: 秒
   select_collection: 选择集合
   thumbnail_generation_complete: 缩略图生成完成
-  thumbnail_generation_finished: 缩略图生成已成功完成
+  thumbnail_generation_finished: 缩略图已成功生成
   use_accent_color: 使用壁纸强调色
   wallpaper_collection: 壁纸集合
   wallpaper_settings: 壁纸设置
   wallpapers: 壁纸
-  wallpapers_and_collections: 壁纸和收藏
+  wallpapers_and_collections: 壁纸和集合
   withOverlay: 启用叠加层
   workspace_collections: 工作区集合
 weg:
   auto_hide: 自动隐藏
-  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
+  auto_hide_touch_disabled: 触摸屏设备不支持自动隐藏
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置
@@ -352,8 +352,8 @@ weg:
     gap: 项目间间距
     label: 项目
     middle_click_action:
-      close_app: 关闭应用程序
-      label: 中键单击操作
+      close_app: 关闭应用
+      label: 中键操作
       open_new_instance: 打开新实例
     pinned_visibility:
       always: 总是
@@ -366,27 +366,27 @@ weg:
     temporal_visibility:
       all: 全部
       label: 未固定项目的可见性
-      on_monitor: 在监视器上
-  label: Dock / 任务栏
+      on_monitor: 在显示器上
+  label: 停靠栏/任务栏
   margin: 边距
   mode:
     full_width: 全屏宽度
-    min_content: 最小化内容
+    min_content: 尽可能小
   padding: 内边距
   show_end_task: 在任务栏中显示结束任务
   width: 宽度
 welcome:
-  give_a_review: 发表评论
+  give_a_review: 写评价
   message: >-
-    Seelen UI 是一个适用于 Windows 的免费开源桌面环境。
-    在这里，您可以完全控制桌面的外观和行为，允许您自定义每个细节以匹配您的工作流程和风格。
-  ok: 让我们开始吧！
-  review: 如果您喜欢使用 Seelen UI，请考虑在商店中留下评论 - 您的反馈有助于项目的成长和改进。
-  title: 欢迎来到Seelen UI！
+    Seelen UI 是一款面向 Windows 的免费开源桌面环境。
+    您可以完全掌控桌面的外观与行为，自定义每一处细节，以契合您的工作流程与风格。
+  ok: 开始使用
+  review: 如果您喜欢使用 Seelen UI，欢迎在商店留下评价——您的反馈有助于项目成长和改进。
+  title: 欢迎使用 Seelen UI
 widget:
   default_instance: 默认实例
-  default_instance_hint: 始终处于活动状态，使用根小部件配置
-  enable: 启用此小部件
+  default_instance_hint: 始终处于活动状态，使用根部件配置
+  enable: 启用此部件
   enable_for_monitor: 在此显示器上启用
   extra_instances: 额外实例
   instance: 实例
@@ -406,7 +406,7 @@ wm:
   drag_behavior: 拖动行为
   drag_behavior_options:
     sort: 排序（拖动时重新排序窗口）
-    swap: 交换（在拖动端交换窗口）
+    swap: 交换（拖动结束时交换窗口）
   floating:
     height: 浮动窗口高度
     title: 浮动窗口大小
@@ -414,7 +414,7 @@ wm:
   layout: 布局
   resize_delta: 调整大小增量（%）
   space_between_containers: 容器间间距
-  stack_bar_visibility: 堆栈栏可见性
+  stack_bar_visibility: 堆叠栏可见性
   stack_bar_visibility_options:
     always: 总是
     as_needed: 根据需要
