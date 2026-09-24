@@ -35,6 +35,11 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(
       Widget.self.hide();
       const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
       invoke(SeelenCommand.Run, { program, args: null, workingDir: null, elevated: true });
+    } else if (key === "uninstall") {
+      // Same as the native start menu for desktop apps: open the list of
+      // installed apps, where the user uninstalls it with Windows' own flow.
+      Widget.self.hide();
+      invoke(SeelenCommand.OpenFile, { path: "ms-settings:appsfeatures" });
     } else if (key === "edit_icon") {
       const entry = iconPackManager.value.getIconEntry({
         path: item.path,
@@ -115,6 +120,14 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
       callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
     });
   }
+
+  items.push({
+    type: "Item",
+    key: "uninstall",
+    label: t("uninstall"),
+    icon: "FaRegTrashAlt",
+    callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+  });
 
   items.push({
     type: "Item",
