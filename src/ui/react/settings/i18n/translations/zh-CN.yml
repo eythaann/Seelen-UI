@@ -302,7 +302,7 @@ wall:
   multimonitor_behaviour: 多显示器行为
   muted: 静音视频音频
   no_background: 幻灯片为空，将改用主题背景。
-  no_collections: 尚未创建任何集合。点击“+”按钮创建一个。
+  no_collections: 尚未创建任何集合。点击「+」按钮创建一个。
   objectFit: 背景适应方式
   objectPosition: 背景位置
   overlayColor: 叠加层颜色

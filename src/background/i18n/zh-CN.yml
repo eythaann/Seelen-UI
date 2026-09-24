@@ -1,5 +1,5 @@
 auth:
-  login_failed_body: 登录期间出现问题。如果这种情况仍然存在，请确保 Windows“凭据管理器”服务 (VaultSvc) 已启用并正在运行，然后重试。
+  login_failed_body: 登录期间出现问题。如果这种情况仍然存在，请确保 Windows「凭据管理器」服务 (VaultSvc) 已启用并正在运行，然后重试。
   login_failed_title: 登录失败
 cancel: 取消
 done: 完成
@@ -50,7 +50,7 @@ shortcut:
     title: 注册新快捷键
 widget_liveness:
   failed_description: |-
-    部件“%{widget_name}”停止响应的次数过多。
+    部件「%{widget_name}」停止响应的次数过多。
 
     您可以尝试重新启动应用。
   failed_title: 部件错误
@@ -58,7 +58,7 @@ widget_permissions:
   perm_open_file: 打开文件
   perm_run: 运行程序
   request_description: |-
-    部件“%{widget_name}”正在请求 %{command} 的权限。
+    部件「%{widget_name}」正在请求 %{command} 的权限。
 
     是否允许？
   request_title: 部件权限请求
