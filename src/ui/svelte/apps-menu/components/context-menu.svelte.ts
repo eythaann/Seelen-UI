@@ -111,7 +111,9 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
     });
   }
 
-  if (umid || path.endsWith(".exe") || path.endsWith(".lnk")) {
+  const isApp = !!umid || path.endsWith(".exe") || path.endsWith(".lnk");
+
+  if (isApp) {
     items.push({
       type: "Item" as const,
       key: "run_as_admin",
@@ -121,13 +123,16 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
     });
   }
 
-  items.push({
-    type: "Item",
-    key: "uninstall",
-    label: t("uninstall"),
-    icon: "FaRegTrashAlt",
-    callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-  });
+  // only apps can be uninstalled, not documents found by the search
+  if (isApp) {
+    items.push({
+      type: "Item",
+      key: "uninstall",
+      label: t("uninstall"),
+      icon: "FaRegTrashAlt",
+      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+    });
+  }
 
   items.push({
     type: "Item",
