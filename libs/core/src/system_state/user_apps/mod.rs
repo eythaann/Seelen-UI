@@ -56,6 +56,22 @@ pub struct UserAppWindow {
     /// 0 means it has never been focused since tracking started.
     /// clients that want z-order-like sorting should sort descending by this field.
     pub last_foreground_at: i64,
+    /// attention requested by the window via `FlashWindowEx`, cleared when it gets activated.
+    pub attention: WindowAttention,
+}
+
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum WindowAttention {
+    /// the window is not requesting attention
+    #[default]
+    None,
+    /// the window is actively flashing
+    Flashing,
+    /// the window stopped flashing but still waits to be activated, like the
+    /// orange taskbar button left after a flash limited by `uCount`
+    Highlighted,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

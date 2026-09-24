@@ -1,4 +1,4 @@
-import { HideMode, SeelenWegMode, SeelenWegSide, WegMiddleClickAction } from "@seelen-ui/lib/types";
+import { HideMode, SeelenWegMode, SeelenWegSide, WegAttentionReveal, WegMiddleClickAction } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { $is_touch_primary } from "libs/ui/react/utils/signals";
 import { Button, InputNumber, message, Select, Switch, Tooltip } from "antd";
@@ -116,6 +116,16 @@ export const SeelenWegSettings = () => {
               max={10000}
               disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
               onChange={(value) => patchWegConfig({ delayToHide: value || 0 })}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t("weg.reveal_on_attention.label")}</span>
+            <Select
+              style={{ width: "160px" }}
+              value={settings.revealOnAttention}
+              options={OptionsFromEnum(t, WegAttentionReveal, "weg.reveal_on_attention")}
+              disabled={settings.hideMode === HideMode.Never || isTouchPrimary}
+              onChange={(value) => patchWegConfig({ revealOnAttention: value })}
             />
           </SettingsOption>
         </SettingsSubGroup>

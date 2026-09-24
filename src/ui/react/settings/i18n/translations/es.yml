@@ -431,6 +431,11 @@ weg:
     full_width: Ancho de pantalla completo
     min_content: Más pequeño imposible
   padding: Acolchado
+  reveal_on_attention:
+    label: Mostrar cuando una app pide atención
+    never: Nunca
+    until_activated: Hasta abrir la app
+    while_flashing: Mientras parpadea
   show_end_task: Mostrar la tarea final en la barra de tareas
   width: Anchura
 welcome:
