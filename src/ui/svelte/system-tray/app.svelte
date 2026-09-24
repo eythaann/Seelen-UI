@@ -3,7 +3,7 @@
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { onDestroy } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd";
-  import { iconsOrder, sortIcons, sortKey, state } from "./state.svelte";
+  import { keyIcons, mergeOrder, sortIcons, trayState } from "./state.svelte";
   import TrayItem from "./TrayItem.svelte";
 
   $effect(() => {
@@ -22,24 +22,24 @@
 
   const items = $derived(
     sortIcons(
-      state.trayItems.filter(
-        (item) => item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid)),
+      keyIcons(
+        trayState.trayItems.filter(
+          (item) => item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid)),
+        ),
       ),
-      iconsOrder.value,
+      trayState.iconsOrder,
     ),
   );
 
   function moveItem(sourceKey: string, targetKey: string) {
-    const keys = items.map(sortKey);
+    const keys = items.map((item) => item.key);
     const from = keys.indexOf(sourceKey);
     const to = keys.indexOf(targetKey);
     if (from === -1 || to === -1) {
       return;
     }
     keys.splice(to, 0, keys.splice(from, 1)[0]!);
-    // keep the position of icons whose app is not running right now
-    const absent = iconsOrder.value.filter((key) => !keys.includes(key));
-    iconsOrder.value = [...keys, ...absent];
+    trayState.iconsOrder = mergeOrder(trayState.iconsOrder, keys);
   }
 </script>
 
@@ -53,8 +53,8 @@
       }
     }}
   >
-    {#each items as item, idx (sortKey(item))}
-      <TrayItem {item} {idx} />
+    {#each items as { key, icon }, idx (key)}
+      <TrayItem item={icon} sortId={key} {idx} />
     {/each}
   </DragDropProvider>
 </div>

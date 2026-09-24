@@ -4,18 +4,18 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { createSortable } from "@dnd-kit/svelte/sortable";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
-  import { sortKey } from "./state.svelte";
 
   interface Props {
     item: SysTrayIcon;
+    sortId: string;
     idx: number;
   }
 
-  let { item, idx }: Props = $props();
+  let { item, sortId, idx }: Props = $props();
 
   const sortable = createSortable({
     get id() {
-      return sortKey(item);
+      return sortId;
     },
     get index() {
       return idx;
