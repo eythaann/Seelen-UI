@@ -284,7 +284,7 @@ wall:
   create: 创建
   create_collection: 创建集合
   default_collection: 默认壁纸或集合
-  default_collection_description: 应用于所有未设置特定覆盖的显示器与工作区。
+  default_collection_description: 应用于所有未单独指定集合的显示器与工作区。
   delete_collection: 删除集合
   edit_collection: 编辑集合
   extend: 跨屏延伸
@@ -300,7 +300,7 @@ wall:
   minutes: 分钟
   monitor_collection: 显示器集合
   multimonitor_behaviour: 多显示器行为
-  muted: 静音视频音频
+  muted: 静音视频声音
   no_background: 幻灯片为空，将改用主题背景。
   no_collections: 尚未创建任何集合。点击「+」按钮创建一个。
   objectFit: 背景适应方式

@@ -1,5 +1,5 @@
 auth:
-  login_failed_body: 登录期间出现问题。如果这种情况仍然存在，请确保 Windows「凭据管理器」服务 (VaultSvc) 已启用并正在运行，然后重试。
+  login_failed_body: 登录期间出现问题。如果这种情况仍然存在，请确保 Windows 「凭据管理器」服务（VaultSvc）已启用并正在运行，然后重试。
   login_failed_title: 登录失败
 cancel: 取消
 done: 完成
