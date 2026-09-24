@@ -8,10 +8,10 @@
 
   interface Props {
     node: TwmRuntimeNode;
-    overlayVisible: boolean;
+    stackBarInteractive: boolean;
   }
 
-  let { node, overlayVisible }: Props = $props();
+  let { node, stackBarInteractive }: Props = $props();
 
   function onTabClick(winId: number) {
     invoke(SeelenCommand.WmSetStackActiveWindow, { hwnd: winId });
@@ -26,22 +26,22 @@
 
 <div style:flex-grow={node.growFactor} class={["wm-container", "wm-stack"]}>
   {#if shouldShowStackBar}
-    <div class="wm-stack-bar" data-allow-mouse-events={overlayVisible}>
+    <div class="wm-stack-bar" data-allow-mouse-events={stackBarInteractive}>
       {#each node.windows as winId (winId)}
         {@const info = state.interactables.find((app) => app.hwnd === winId)}
         <button
           class="wm-stack-bar-item"
           data-skin={winId === node.activeWindow ? "solid" : "default"}
-          data-allow-mouse-events={overlayVisible}
+          data-allow-mouse-events={stackBarInteractive}
           onclick={() => onTabClick(winId)}
         >
           <FileIcon
             path={info?.relaunch?.icon || info?.process?.path}
             umid={info?.umid}
             class="wm-stack-bar-item-icon"
-            data-allow-mouse-events={overlayVisible}
+            data-allow-mouse-events={stackBarInteractive}
           />
-          <span class="wm-stack-bar-item-title" data-allow-mouse-events={overlayVisible}>
+          <span class="wm-stack-bar-item-title" data-allow-mouse-events={stackBarInteractive}>
             {info?.title || `0x${winId.toString(16)}`}
           </span>
         </button>

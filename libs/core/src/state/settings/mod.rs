@@ -261,6 +261,9 @@ pub struct WindowManagerSettings {
     pub drag_behavior: WmDragBehavior,
     /// when to show the stack bar (tabs) on stacked containers
     pub stack_bar_visibility: WmStackBarVisibility,
+    /// keep the stack bars visible and clickable while the focused window is outside
+    /// the tiled tree (floating window, unmanaged app...). Borders are still hidden.
+    pub keep_stack_bar_when_unfocused: bool,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -356,6 +359,7 @@ impl Default for WindowManagerSettings {
             animations: WmAnimations::default(),
             drag_behavior: WmDragBehavior::Sort,
             stack_bar_visibility: WmStackBarVisibility::AsNeeded,
+            keep_stack_bar_when_unfocused: false,
         }
     }
 }

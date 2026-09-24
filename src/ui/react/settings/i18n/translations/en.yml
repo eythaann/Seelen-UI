@@ -94,7 +94,7 @@ devtools:
     result_allowed: ✓ Permission granted
     result_denied: ✗ Permission denied
     trigger: Simulate
-    widget_id_placeholder: '@author/widget-name'
+    widget_id_placeholder: "@author/widget-name"
   tools: Tools
   unlock_shortcuts: Unlock Read-Only Shortcuts
   unlock_shortcuts_description: Allow editing shortcuts that are normally read-only (e.g. system overrides).
@@ -211,7 +211,7 @@ miscellaneous: Miscellaneous
 monitors_configurations:
   label: Monitor {{index}}
 more: More
-'no': 'No'
+"no": "No"
 open: Open
 quit: Quit
 remove: Remove
@@ -314,7 +314,7 @@ wall:
   collection_name: Collection Name
   collections: Collections
   contrast: Contrast
-  corrupted_wallpapers_message: 'Corrupted wallpapers, consider deleting these:'
+  corrupted_wallpapers_message: "Corrupted wallpapers, consider deleting these:"
   coverage_pause_threshold: Pause threshold (window coverage)
   create: Create
   create_collection: Create Collection
@@ -451,6 +451,7 @@ wm:
     height: Floating Windows Height
     title: Floating Windows Size
     width: Floating Windows Width
+  keep_stack_bar_when_unfocused: Keep Stack Bar When Unfocused
   layout: Layout
   resize_delta: Resize Delta (%)
   space_between_containers: Space Between Containers
@@ -460,4 +461,4 @@ wm:
     as_needed: As needed
   workspace_offset: Workspaces Offset (Margins)
   workspace_padding: Workspaces Padding
-'yes': 'Yes'
+"yes": "Yes"
