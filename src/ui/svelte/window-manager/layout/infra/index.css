@@ -73,3 +73,8 @@
     }
   }
 }
+
+/* focus is outside the tiled tree and the user opted to keep the stack bars: hide the rest */
+body.wm-stack-bars-only .wm-leaf {
+  visibility: hidden;
+}

@@ -10,10 +10,10 @@
 
   interface Props {
     nodeId: number;
-    overlayVisible: boolean;
+    stackBarInteractive: boolean;
   }
 
-  let { nodeId, overlayVisible }: Props = $props();
+  let { nodeId, stackBarInteractive }: Props = $props();
 
   const ctx = getContext<{ tree: TwmRuntimeTree | null }>(TREE_CONTEXT_KEY);
   let tree = $derived(ctx.tree);
@@ -22,7 +22,7 @@
 
 {#if node && tree && !NodeUtils.isEmpty(tree, nodeId)}
   {#if node.kind === TwmNodeKind.Stack}
-    <Stack {node} {overlayVisible} />
+    <Stack {node} {stackBarInteractive} />
   {:else if node.kind === TwmNodeKind.Leaf && node.activeWindow !== null}
     <Leaf hwnd={node.activeWindow} growFactor={node.growFactor} />
   {:else if node.kind === TwmNodeKind.Horizontal || node.kind === TwmNodeKind.Vertical}
@@ -31,7 +31,7 @@
       class={["wm-container", `wm-${node.kind.toLowerCase()}`]}
     >
       {#each node.children as childId (childId)}
-        <Container nodeId={childId} {overlayVisible} />
+        <Container nodeId={childId} {stackBarInteractive} />
       {/each}
     </div>
   {/if}

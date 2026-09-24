@@ -71,6 +71,14 @@ export function WindowManagerSettings() {
             onSelect={onChangeStackBarVisibility}
           />
         </SettingsOption>
+
+        <SettingsOption>
+          <b>{t("wm.keep_stack_bar_when_unfocused")}</b>
+          <Switch
+            checked={wmConfig.keepStackBarWhenUnfocused}
+            onChange={(value) => patchWmConfig({ keepStackBarWhenUnfocused: value })}
+          />
+        </SettingsOption>
       </SettingsGroup>
 
       <GlobalPaddings />

@@ -43,7 +43,7 @@ apps_configurations:
     más reciente a más antiguo.
   identifier:
     add_block: Añadir bloque
-    and: 'Y'
+    and: "Y"
     id: Identificador
     kind: Identificar por
     matching_strategy: Estrategia de emparejamiento
@@ -97,7 +97,7 @@ devtools:
     result_allowed: ✓ Permiso concedido
     result_denied: ✗ Permiso denegado
     trigger: Simular
-    widget_id_placeholder: '@autor/nombre-widget'
+    widget_id_placeholder: "@autor/nombre-widget"
   tools: Herramientas
   unlock_shortcuts: Desbloquear atajos de sólo lectura
   unlock_shortcuts_description: >-
@@ -223,7 +223,7 @@ miscellaneous: Varios
 monitors_configurations:
   label: Monitor {{index}}
 more: Más
-'no': 'No'
+"no": "No"
 open: Abrir
 quit: Deje de
 remove: Eliminar
@@ -236,7 +236,7 @@ resources:
     Este recurso requiere una versión más reciente de Seelen UI para funcionar
     correctamente.
   coming_soon: Muy pronto
-  corrupted_wallpaper: 'No se pudo extraer la miniatura: formato de video dañado o no compatible'
+  corrupted_wallpaper: "No se pudo extraer la miniatura: formato de video dañado o no compatible"
   delete: Eliminar recursos
   discover: Descubra más recursos
   has_update: Una actualización está disponible
@@ -331,7 +331,7 @@ wall:
   collection_name: Nombre de la colección
   collections: Colecciones
   contrast: Contraste
-  corrupted_wallpapers_message: 'Fondos de pantalla corruptos, considere eliminar estos:'
+  corrupted_wallpapers_message: "Fondos de pantalla corruptos, considere eliminar estos:"
   coverage_pause_threshold: Umbral de pausa (cobertura de ventana)
   create: Crear
   create_collection: Crear colección
@@ -473,6 +473,7 @@ wm:
     height: Altura de las ventanas flotantes
     title: Tamaño de ventanas flotantes
     width: Ancho de ventanas flotantes
+  keep_stack_bar_when_unfocused: Mantener la barra de pila sin foco
   layout: Diseño
   resize_delta: Redimensionar Delta (%)
   space_between_containers: Espacio entre contenedores
@@ -482,4 +483,4 @@ wm:
     as_needed: Según sea necesario
   workspace_offset: Desplazamiento de los espacios de trabajo (márgenes)
   workspace_padding: Espacios de trabajo Acolchado
-'yes': Sí
+"yes": Sí

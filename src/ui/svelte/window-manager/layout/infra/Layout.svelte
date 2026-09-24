@@ -48,6 +48,20 @@
     return true;
   });
 
+  // Opt-in: while focus is outside the tiled tree, keep only the stack bars
+  // visible and clickable so the user can switch stacked windows with the mouse.
+  // Maximized/fullscreen windows still hide everything: tracked ones pause the
+  // layout, and the focused one is checked too because windows excluded from
+  // the interactable list (e.g. `no-interactive` apps) never pause it.
+  let stackBarsOnly = $derived(
+    !overlayVisible &&
+      !!layout &&
+      !wmState.paused &&
+      !wmState.focusedApp.isFullscreened &&
+      !wmState.focusedApp.isMaximized &&
+      wmState.settings.keepStackBarWhenUnfocused,
+  );
+
   $effect(() => {
     wmState.forceRepositioning; // subscription
     if (layout) {
@@ -57,12 +71,13 @@
 
   // Update body opacity based on overlay visibility
   $effect(() => {
-    document.body.style.opacity = overlayVisible ? "1" : "0";
+    document.body.style.opacity = overlayVisible || stackBarsOnly ? "1" : "0";
+    document.body.classList.toggle("wm-stack-bars-only", stackBarsOnly);
   });
 </script>
 
 {#if layout}
-  <Container nodeId={layout.root} {overlayVisible} />
+  <Container nodeId={layout.root} stackBarInteractive={overlayVisible || stackBarsOnly} />
 {/if}
 
 <style>
