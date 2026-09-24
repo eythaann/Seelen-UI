@@ -33,6 +33,7 @@
   const menu = $derived(getFolderContextMenu(folder, $t));
 
   let isModalOpen = $state(false);
+  let openedWithKeyboard = $state(false);
 
   const isSelected = $derived(scope.getSelected() === folder.itemId);
   const tabindex = $derived(isSelected || (idx === 0 && !scope.getSelected()) ? 0 : -1);
@@ -65,7 +66,8 @@
     });
   }
 
-  function openModal() {
+  function openModal(fromKeyboard: boolean) {
+    openedWithKeyboard = fromKeyboard;
     isModalOpen = true;
   }
 
@@ -76,7 +78,7 @@
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
       e.stopPropagation();
-      openModal();
+      openModal(true);
     }
   }
 </script>
@@ -92,7 +94,7 @@
   class:is-dragging={sortable.isDragging}
   class:is-dropping={sortable.isDropping}
   class:is-drop-target={isActiveDropzone}
-  onclick={openModal}
+  onclick={(e) => openModal(e.detail === 0)}
   oncontextmenu={handleFolderContextMenu}
   onkeydown={handleKeyDown}
 >
@@ -109,5 +111,5 @@
 </li>
 
 {#if isModalOpen}
-  <FolderModal {folder} onClose={closeModal} />
+  <FolderModal {folder} preselectFirst={openedWithKeyboard} onClose={closeModal} />
 {/if}
