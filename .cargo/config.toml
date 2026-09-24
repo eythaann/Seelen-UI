@@ -6,3 +6,8 @@ TS_RS_LARGE_INT = "number"
 
 [target.x86_64-pc-windows-msvc]
 linker = "rust-lld.exe"
+# Statically link the MSVC CRT (VCRUNTIME140.dll, api-ms-win-crt-*.dll) into every
+# binary, including hook_dll (cdylib) which gets injected into third-party processes
+# that may not have the VC++ Redistributable installed or may carry a conflicting
+# CRT version. Removes the dependency on the user having the redist installed.
+rustflags = ["-C", "target-feature=+crt-static"]
