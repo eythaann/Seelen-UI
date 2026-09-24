@@ -1,4 +1,7 @@
-use std::hash::{DefaultHasher, Hash, Hasher};
+use std::{
+    hash::{DefaultHasher, Hash, Hasher},
+    path::PathBuf,
+};
 
 use seelen_core::system_state::{SysTrayIcon, SysTrayIconId, SystrayIconAction};
 use windows::Win32::{
@@ -154,6 +157,7 @@ impl SystemTrayManager {
                         && to_update.window_handle != Some(window_handle)
                     {
                         to_update.window_handle = Some(window_handle);
+                        to_update.exe_path = window_exe_path(window_handle);
                         self.track_owner(&to_update.stable_id, window_handle);
                     }
 
@@ -226,6 +230,7 @@ impl SystemTrayManager {
                         stable_id,
                         uid: icon_data.uid,
                         window_handle: icon_data.window_handle,
+                        exe_path: icon_data.window_handle.and_then(window_exe_path),
                         guid: icon_data.guid,
                         tooltip: icon_data.tooltip.clone().unwrap_or_default(),
                         icon_handle: icon_data.icon_handle,
@@ -383,6 +388,12 @@ fn window_pid(handle: isize) -> Option<u32> {
     let mut pid = 0;
     unsafe { GetWindowThreadProcessId(HWND(handle as _), Some(&mut pid)) };
     (pid != 0).then_some(pid)
+}
+
+/// Path of the executable of the process that owns the window.
+fn window_exe_path(handle: isize) -> Option<PathBuf> {
+    let pid = window_pid(handle)?;
+    WindowsApi::exe_path_by_process(pid).ok().map(PathBuf::from)
 }
 
 /// Computes a hash of the icon image.

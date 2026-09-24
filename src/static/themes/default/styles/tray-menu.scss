@@ -10,6 +10,10 @@
     gap: var(--spacing-xs);
     padding: var(--spacing-xs);
 
+    &.is-dragging {
+      opacity: 0.5;
+    }
+
     .system-tray-item-icon-box {
       .system-tray-item-icon {
         width: 1rem;
