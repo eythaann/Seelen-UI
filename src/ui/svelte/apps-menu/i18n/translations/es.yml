@@ -16,6 +16,7 @@ query:
   files: Archivos
   web: Web
 run_as_admin: Ejecutar como administradora
+uninstall: Desinstalar
 unpin: Desprender
 web_search: Presione Enter para buscar en la web
 welcome_message: Bienvenido al menú de la aplicación Seelen UI.
