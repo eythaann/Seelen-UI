@@ -3,7 +3,9 @@
 //! are not standard windows events, so we handle cached windows data to check for these changes, and emit
 //! synthetic events for them.
 
-use seelen_core::system_state::{FocusedApp, Relaunch, RelaunchArguments, UserAppWindow};
+use seelen_core::system_state::{
+    FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
+};
 
 use crate::{utils::get_parts_of_inline_command, windows_api::types::AppUserModelId};
 
@@ -58,7 +60,7 @@ impl Window {
             relaunch,
             rect: self.inner_rect().ok(),
             last_foreground_at: 0,
-            is_flashing: false,
+            attention: WindowAttention::None,
         }
     }
 

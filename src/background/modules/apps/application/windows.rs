@@ -3,7 +3,10 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-use seelen_core::{state::AppExtraFlag, system_state::UserAppWindow};
+use seelen_core::{
+    state::AppExtraFlag,
+    system_state::{UserAppWindow, WindowAttention},
+};
 use windows::Win32::UI::WindowsAndMessaging::{
     WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
 };
@@ -179,7 +182,7 @@ impl UserAppsManager {
             WinEvent::SystemForeground => {
                 let now = now_millis();
                 data.last_foreground_at = now;
-                data.is_flashing = false;
+                data.attention = WindowAttention::None;
                 true
             }
             WinEvent::SystemMinimizeStart => {

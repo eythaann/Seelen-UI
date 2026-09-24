@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { WegMiddleClickAction, type UserAppWindow } from "@seelen-ui/lib/types";
+  import { WegMiddleClickAction, WindowAttention, type UserAppWindow } from "@seelen-ui/lib/types";
   import { FileIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { t } from "../../i18n/index.ts";
   import type { AppOrFileWegItem } from "../../types.ts";
@@ -26,7 +26,10 @@
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,
   );
   const isFocused = $derived(windows.some((w) => w.hwnd === focused.value?.hwnd));
-  const isFlashing = $derived(windows.some((w) => w.isFlashing));
+  const isFlashing = $derived(windows.some((w) => w.attention === WindowAttention.Flashing));
+  const needsAttention = $derived(
+    isFlashing || windows.some((w) => w.attention === WindowAttention.Highlighted),
+  );
 
   let itemEl: HTMLDivElement | null = $state(null);
 
@@ -78,6 +81,7 @@
     role="menuitem"
     tabindex="0"
     class="weg-item"
+    class:weg-item-attention={needsAttention}
     class:weg-item-flashing={isFlashing}
     data-tooltip={item.displayName}
     data-tooltip-origin-y={settingsState.tooltipOrigin.y}
@@ -112,7 +116,7 @@
       class="weg-item-open-sign"
       class:weg-item-open-sign-active={windows.length > 0}
       class:weg-item-open-sign-focused={isFocused}
-      class:weg-item-open-sign-flashing={isFlashing}
+      class:weg-item-open-sign-attention={needsAttention}
     ></div>
   {/if}
 </div>

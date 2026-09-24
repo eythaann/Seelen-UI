@@ -16,13 +16,13 @@
   }
 }
 
-/* like the native taskbar: pulse a few times, then stay highlighted until the window is activated */
+/* like the native taskbar: pulse while the app flashes, then stay highlighted until the window is activated */
 @keyframes weg-item-flashing {
   from {
     background-color: var(--slu-std-bg-light-color);
   }
   to {
-    background-color: oklch(from var(--color-orange-500) l c h / 0.6);
+    background-color: var(--weg-item-attention-color);
   }
 }
 
@@ -103,6 +103,8 @@
 
   --item-size-medium: calc(var(--config-item-size) * 2 + var(--config-space-between-items));
   --item-size-large: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+
+  --weg-item-attention-color: oklch(from var(--color-orange-500) l c h / 0.6);
 }
 
 .weg-item-overlay {
@@ -205,7 +207,7 @@
       }
     }
 
-    &.weg-item-open-sign-flashing {
+    &.weg-item-open-sign-attention {
       opacity: 1;
       background-color: var(--color-orange-500);
     }
@@ -249,9 +251,16 @@
     border-radius: 0;
   }
 
+  &.weg-item-attention {
+    background-color: var(--weg-item-attention-color);
+  }
+
   &.weg-item-flashing {
-    /* odd iteration count so it ends on the highlighted keyframe */
-    animation: weg-item-flashing 600ms ease-in-out 7 alternate forwards;
+    animation: weg-item-flashing 530ms ease-in-out infinite alternate;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   &.weg-item-medium {

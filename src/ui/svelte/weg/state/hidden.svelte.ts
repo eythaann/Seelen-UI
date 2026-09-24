@@ -1,11 +1,27 @@
-import { HideMode } from "@seelen-ui/lib/types";
+import { HideMode, WegAttentionReveal, WegTemporalItemsVisibility, WindowAttention } from "@seelen-ui/lib/types";
 import { virtualDesktops } from "./getters.svelte.ts";
 import { settingsState } from "./settings.svelte.ts";
 import { systemState } from "./system.svelte.ts";
-import { windowsState } from "./windows.svelte.ts";
+import { interactables, windowsState } from "./windows.svelte.ts";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils";
 
 const isSwitchingWorkspace = $derived(virtualDesktops.value.switching);
+
+/** a window shown on this dock asks for attention and the user wants to see it */
+const isRevealedByAttention = $derived.by(() => {
+  const reveal = settingsState.value.revealOnAttention;
+  if (reveal === WegAttentionReveal.Never) return false;
+
+  const monitorId = systemState.currentMonitor.id;
+  const onlyThisMonitor = settingsState.value.temporalItemsVisibility === WegTemporalItemsVisibility.OnMonitor;
+
+  return interactables.value.some((w) => {
+    if (onlyThisMonitor && w.monitor !== monitorId) return false;
+    return reveal === WegAttentionReveal.WhileFlashing
+      ? w.attention === WindowAttention.Flashing
+      : w.attention !== WindowAttention.None;
+  });
+});
 
 let _hiddenByAutohide = $state(false);
 let _isDraggingItem = $state(false);
@@ -65,6 +81,10 @@ $effect.root(() => {
     if (_isDraggingItem) {
       hidden = false;
       flush = true;
+    }
+
+    if (hidden && isRevealedByAttention) {
+      hidden = false;
     }
 
     if (hidden) {
