@@ -58,6 +58,7 @@ impl Window {
             relaunch,
             rect: self.inner_rect().ok(),
             last_foreground_at: 0,
+            is_flashing: false,
         }
     }
 

@@ -26,6 +26,7 @@
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,
   );
   const isFocused = $derived(windows.some((w) => w.hwnd === focused.value?.hwnd));
+  const isFlashing = $derived(windows.some((w) => w.isFlashing));
 
   let itemEl: HTMLDivElement | null = $state(null);
 
@@ -77,6 +78,7 @@
     role="menuitem"
     tabindex="0"
     class="weg-item"
+    class:weg-item-flashing={isFlashing}
     data-tooltip={item.displayName}
     data-tooltip-origin-y={settingsState.tooltipOrigin.y}
     data-tooltip-origin-x={settingsState.tooltipOrigin.x}
@@ -110,6 +112,7 @@
       class="weg-item-open-sign"
       class:weg-item-open-sign-active={windows.length > 0}
       class:weg-item-open-sign-focused={isFocused}
+      class:weg-item-open-sign-flashing={isFlashing}
     ></div>
   {/if}
 </div>

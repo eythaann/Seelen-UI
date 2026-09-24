@@ -56,6 +56,8 @@ pub struct UserAppWindow {
     /// 0 means it has never been focused since tracking started.
     /// clients that want z-order-like sorting should sort descending by this field.
     pub last_foreground_at: i64,
+    /// the window is requesting user attention (`FlashWindowEx`), cleared when it gets activated.
+    pub is_flashing: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

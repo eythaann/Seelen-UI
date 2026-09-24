@@ -179,6 +179,7 @@ impl UserAppsManager {
             WinEvent::SystemForeground => {
                 let now = now_millis();
                 data.last_foreground_at = now;
+                data.is_flashing = false;
                 true
             }
             WinEvent::SystemMinimizeStart => {

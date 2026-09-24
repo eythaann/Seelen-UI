@@ -16,6 +16,16 @@
   }
 }
 
+/* like the native taskbar: pulse a few times, then stay highlighted until the window is activated */
+@keyframes weg-item-flashing {
+  from {
+    background-color: var(--slu-std-bg-light-color);
+  }
+  to {
+    background-color: oklch(from var(--color-orange-500) l c h / 0.6);
+  }
+}
+
 @keyframes shadow-on-horizontal-scroll {
   from {
     box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
@@ -194,6 +204,11 @@
         width: 50%;
       }
     }
+
+    &.weg-item-open-sign-flashing {
+      opacity: 1;
+      background-color: var(--color-orange-500);
+    }
   }
 }
 
@@ -232,6 +247,11 @@
     height: 0;
     padding: 0;
     border-radius: 0;
+  }
+
+  &.weg-item-flashing {
+    /* odd iteration count so it ends on the highlighted keyframe */
+    animation: weg-item-flashing 600ms ease-in-out 7 alternate forwards;
   }
 
   &.weg-item-medium {
