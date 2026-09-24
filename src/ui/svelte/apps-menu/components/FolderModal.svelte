@@ -15,10 +15,13 @@
 
   interface Props {
     folder: FavFolderItem;
+    // true when the folder was opened from the keyboard, so arrow/Enter
+    // navigation starts on the first item; a mouse open shows no selection
+    preselectFirst?: boolean;
     onClose: () => void;
   }
 
-  let { folder, onClose }: Props = $props();
+  let { folder, preselectFirst = false, onClose }: Props = $props();
 
   // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
   const manager = createDragDropManager();
@@ -34,7 +37,7 @@
 
   let dialog: HTMLDialogElement;
   // svelte-ignore state_referenced_locally
-  let selectedItemId = $state<string | null>(expandedItems[0]?.id ?? null);
+  let selectedItemId = $state<string | null>(preselectFirst ? (expandedItems[0]?.id ?? null) : null);
 
   const scope: SelectionScope = {
     container: () => dialog ?? document,
