@@ -11,9 +11,9 @@ hotspot:
   'on': 开启
   open_network: 开放网络
   password: 密码
-  settings: 更多热点设置
+  settings: 更多移动热点设置
   ssid: 网络名称
-  title: 热点
+  title: 移动热点
 more: 更多网络设置
 no_adapter: 未找到 Wi-Fi 适配器
 not_found: 未找到 Wi-Fi 网络

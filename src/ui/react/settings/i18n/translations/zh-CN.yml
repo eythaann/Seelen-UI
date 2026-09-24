@@ -134,7 +134,7 @@ general:
   performance_mode:
     label: 优化
     on_battery: 使用电池时
-    on_energy_saver: 节能模式下
+    on_energy_saver: 节电模式下
     options:
       disabled: 禁用
       extreme: 极致
@@ -287,7 +287,7 @@ wall:
   default_collection_description: 应用于所有未单独指定集合的显示器与工作区。
   delete_collection: 删除集合
   edit_collection: 编辑集合
-  extend: 跨屏延伸
+  extend: 跨屏扩展
   fit:
     contain: 适应
     cover: 覆盖
