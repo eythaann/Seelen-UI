@@ -52,10 +52,9 @@ export function triggerWidget(widgetId: WidgetId, itemId: string): void {
   const domRect = element.getBoundingClientRect();
   const x = windowX + toPhysicalPixels(domRect.left + domRect.width / 2);
 
-  const rootRect = document.getElementById("root")!.getBoundingClientRect();
   const isTopPosition = settingsState.position === FancyToolbarSide.Top;
 
-  const y = isTopPosition ? windowY + toPhysicalPixels(rootRect.bottom) : windowY + toPhysicalPixels(rootRect.top);
+  const y = isTopPosition ? windowY + toPhysicalPixels(domRect.bottom) : windowY + toPhysicalPixels(domRect.top);
 
   invoke(SeelenCommand.TriggerWidget, {
     payload: {

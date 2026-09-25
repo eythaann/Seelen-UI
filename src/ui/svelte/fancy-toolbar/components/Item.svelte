@@ -185,8 +185,7 @@
     <div
       id={self.id}
       {@attach sortable?.attach ?? noopAttach}
-      role="button"
-      tabindex="0"
+      role={self.onClick ? "button" : undefined}
       data-plugin-id={pluginId}
       data-dragging={sortable?.isDragging}
       data-tooltip={tooltip}
@@ -196,7 +195,7 @@
       style={itemStyle}
       class="ft-bar-item"
       class:ft-bar-item-clickable={!!self.onClick}
-      onclick={handleClick}
+      onclick={self.onClick ? handleClick : undefined}
       onwheel={self.onWheelUp || self.onWheelDown ? handleWheel : undefined}
       oncontextmenu={handleContextMenu}
       onkeypress={() => {}}

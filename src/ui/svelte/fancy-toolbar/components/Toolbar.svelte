@@ -57,7 +57,7 @@
     Widget.self.webview
       .listen(onContextMenuClickEvent, ({ payload }) => {
         const { key } = payload as any;
-        if (key === "reoder") {
+        if (key === "reorder") {
           toolbarState.state = {
             ...toolbarState.state,
             isReorderDisabled: !toolbarState.isReorderDisabled,
@@ -137,7 +137,7 @@
         { type: "Separator" },
         {
           type: "Item",
-          key: "reoder",
+          key: "reorder",
           icon: toolbarState.isReorderDisabled ? "VscUnlock" : "VscLock",
           label: $t(
             toolbarState.isReorderDisabled

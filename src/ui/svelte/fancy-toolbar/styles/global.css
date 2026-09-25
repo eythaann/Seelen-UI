@@ -108,6 +108,10 @@ body {
   min-width: 0;
   padding: var(--item-padding);
 
+  &.ft-bar-item-clickable {
+    cursor: pointer;
+  }
+
   .ft-bar-item-content {
     height: var(--config-item-size);
     display: flex;
