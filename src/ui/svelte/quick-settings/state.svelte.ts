@@ -6,6 +6,7 @@ import { locale } from "./i18n/index.ts";
 const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 await settings.init();
+await locale.set(settings.value.language);
 
 $effect.root(() => {
   $effect(() => {
