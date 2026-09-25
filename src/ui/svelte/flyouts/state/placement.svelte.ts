@@ -41,7 +41,7 @@ $effect.root(() => {
       x = monitor.rect.left + padding;
       y = Math.round(monitorCenterY - height / 2);
     } else if (placement === "top") {
-      x = Math.round(monitorCenterX - width / 2);
+      x = monitor.rect.right - width - padding;
       y = monitor.rect.top + padding;
     } else if (placement === "right") {
       x = monitor.rect.right - width - padding;
