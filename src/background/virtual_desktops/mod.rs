@@ -212,6 +212,9 @@ impl SluWorkspacesManager2 {
                 Self::send(VirtualDesktopEvent::WindowUnminimizedByUser { window: window_id });
 
                 let manager = Self::instance();
+                // It may come back on another monitor than its workspace's (e.g. after a
+                // display change); move it there instead of switching the old monitor.
+                manager.follow_window_monitor(&window).log_error();
                 if let Ok(workspace_id) = window.workspace_id() {
                     // Restore workspace if the window was unminimized by the user via alt+tab or others
                     if let Some(monitor_id) = manager.get_monitor_of_workspace(&workspace_id) {
@@ -239,60 +242,67 @@ impl SluWorkspacesManager2 {
                 }
             }
             WinEvent::SynDebouncedRectChange => {
-                let manager = Self::instance();
-                if manager.is_pinned(&window_id) {
-                    return Ok(());
-                }
-
-                let Ok(current_monitor_id) = window.monitor().stable_id() else {
-                    return Ok(());
-                };
-
-                // Find the monitor whose workspace bookkeeping currently owns this window.
-                let recorded_monitor_id = manager.monitors.with_lock(|monitors| {
-                    monitors.iter().find_map(|(monitor_id, monitor)| {
-                        if monitor.workspaces.get_by_window_id(window_id).is_some() {
-                            Some(monitor_id.clone())
-                        } else {
-                            None
-                        }
-                    })
-                });
-
-                let Some(recorded_monitor_id) = recorded_monitor_id else {
-                    // window is not tracked by any workspace, nothing to reconcile
-                    return Ok(());
-                };
-
-                // Window's physical monitor still matches its workspace's monitor, as it
-                // should be, so this is just a regular rect change, not a monitor move.
-                if recorded_monitor_id == current_monitor_id {
-                    return Ok(());
-                }
-
-                let Some(target_workspace_id) = manager
-                    .monitors
-                    .get(&current_monitor_id, |m| m.active_workspace_id().clone())
-                else {
-                    return Ok(());
-                };
-
-                // Skip if the window is already recorded under the monitor's active
-                // workspace (e.g. it was just moved there programmatically via `send_to`).
-                // Otherwise this would unconditionally remove+re-add the window, emitting
-                // redundant WindowRemoved/WindowAdded events for no actual change.
-                let already_there = manager
-                    .monitors
-                    .get(&current_monitor_id, |m| {
-                        m.active_workspace().windows.contains(&window_id)
-                    })
-                    .unwrap_or(false);
-
-                if !already_there {
-                    manager.send_to(&window, &target_workspace_id)?;
-                }
+                Self::instance().follow_window_monitor(&window)?;
             }
             _ => {}
+        }
+        Ok(())
+    }
+
+    /// Moves `window` to the active workspace of the monitor it is on when its workspace
+    /// belongs to another monitor. Does nothing for untracked or pinned windows.
+    fn follow_window_monitor(&self, window: &Window) -> Result<()> {
+        let window_id = window.address();
+        if self.is_pinned(&window_id) {
+            return Ok(());
+        }
+
+        let Ok(current_monitor_id) = window.monitor().stable_id() else {
+            return Ok(());
+        };
+
+        // Find the monitor whose workspace bookkeeping currently owns this window.
+        let recorded_monitor_id = self.monitors.with_lock(|monitors| {
+            monitors.iter().find_map(|(monitor_id, monitor)| {
+                if monitor.workspaces.get_by_window_id(window_id).is_some() {
+                    Some(monitor_id.clone())
+                } else {
+                    None
+                }
+            })
+        });
+
+        let Some(recorded_monitor_id) = recorded_monitor_id else {
+            // window is not tracked by any workspace, nothing to reconcile
+            return Ok(());
+        };
+
+        // Window's physical monitor still matches its workspace's monitor, as it
+        // should be, so this is just a regular rect change, not a monitor move.
+        if recorded_monitor_id == current_monitor_id {
+            return Ok(());
+        }
+
+        let Some(target_workspace_id) = self
+            .monitors
+            .get(&current_monitor_id, |m| m.active_workspace_id().clone())
+        else {
+            return Ok(());
+        };
+
+        // Skip if the window is already recorded under the monitor's active
+        // workspace (e.g. it was just moved there programmatically via `send_to`).
+        // Otherwise this would unconditionally remove+re-add the window, emitting
+        // redundant WindowRemoved/WindowAdded events for no actual change.
+        let already_there = self
+            .monitors
+            .get(&current_monitor_id, |m| {
+                m.active_workspace().windows.contains(&window_id)
+            })
+            .unwrap_or(false);
+
+        if !already_there {
+            self.send_to(window, &target_workspace_id)?;
         }
         Ok(())
     }
@@ -331,10 +341,10 @@ impl SluWorkspacesManager2 {
 
     fn add_to_current_workspace(&self, window: &Window) {
         // A window belongs to one workspace only. If it is already tracked, even on another
-        // monitor, leave it there: when it really changed monitor, the rect-change handler
-        // moves it with `send_to`. Adding it again here left it listed on both monitors, and
-        // the window manager kept pulling it back to the old one.
+        // monitor, don't add it again (that left it listed on both monitors, and the window
+        // manager kept pulling it back to the old one); just move it if its monitor changed.
         if self.contains(window) {
+            self.follow_window_monitor(window).log_error();
             return;
         }
 
