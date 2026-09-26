@@ -246,18 +246,23 @@ impl Window {
             .and_then(|config| config.category.clone())
     }
 
+    /// The workspace this window is bound to, on whichever monitor that workspace lives.
+    ///
+    /// Not looked up on the window's current monitor only: after a display change, or when a
+    /// window is restored onto another monitor, it is still bound to its old monitor's workspace
+    /// until the rect-change handler moves it, and a miss here made callers add it a second time.
     pub fn workspace_id(&self) -> Result<WorkspaceId> {
         let win_id = self.address();
-        let monitor_id = self.monitor_id();
         let workspace_id = SluWorkspacesManager2::instance()
             .monitors
-            .get(&monitor_id, |monitor| {
-                monitor
-                    .workspaces
-                    .get_by_window_id(win_id)
-                    .map(|w| w.id.clone())
+            .with_lock(|monitors| {
+                monitors.values().find_map(|monitor| {
+                    monitor
+                        .workspaces
+                        .get_by_window_id(win_id)
+                        .map(|w| w.id.clone())
+                })
             })
-            .ok_or("Monitor not found")?
             .ok_or("This window is not binded to a seelen ui workspace")?;
         Ok(workspace_id)
     }
