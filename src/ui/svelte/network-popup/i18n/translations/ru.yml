@@ -1,14 +1,14 @@
 available: Доступные сети
-connect: Соединять
+connect: Подключить
 connected: Подключено к
 connecting: Подключение...
 disconnect: Отключить
-forget: Забывать
+forget: Забыть
 hidden: Скрытая сеть
 hotspot:
-  band: Группа
-  'off': Выключенный
-  'on': На
+  band: Полоса
+  'off': Откл.
+  'on': Вкл.
   open_network: Открытая сеть
   password: Пароль
   settings: Дополнительные настройки точки доступа
