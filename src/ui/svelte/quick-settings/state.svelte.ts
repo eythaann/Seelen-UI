@@ -6,11 +6,30 @@ import { locale } from "./i18n/index.ts";
 const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 await settings.init();
-await locale.set(settings.value.language);
+
+async function setInitialLocale(language: string) {
+  try {
+    await locale.set(language);
+  } catch (error) {
+    console.error(`Failed to load initial locale "${language}"`, error);
+    if (language === "en") return;
+
+    try {
+      await locale.set("en");
+    } catch (fallbackError) {
+      // Locale loading must never prevent quick settings from mounting.
+      console.error('Failed to load fallback locale "en"', fallbackError);
+    }
+  }
+}
+
+await setInitialLocale(settings.value.language);
 
 $effect.root(() => {
   $effect(() => {
-    locale.set(settings.value.language);
+    locale.set(settings.value.language).catch((error) => {
+      console.error(`Failed to change locale to "${settings.value.language}"`, error);
+    });
   });
 });
 
