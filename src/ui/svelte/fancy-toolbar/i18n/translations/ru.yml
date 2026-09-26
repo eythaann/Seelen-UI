@@ -6,19 +6,19 @@ bluetooth:
   cancel: Отмена
   connected: Подключенные устройства
   forget: Удалить
-  lowenergy: Низкое энергопотребление
+  lowenergy: Низкая энергия
   more: Другие настройки Bluetooth
   not_found: Устройства Bluetooth не найдены
   pair: Сопрячь
   paired: Сопряжённые устройства
   placeholder:
-    passphrase: Пароль, код или PIN-код
+    passphrase: Парольная фраза, код или PIN-код
   scanning: Сканирование для поиска устройств
 context_menu:
   add_custom_text: Добавить пользовательский текстовый элемент
   modules: Модули
   remove: Удалить модуль
-  reorder_disable: Заблокировать панели
+  reorder_disable: Заблокировать панель
   reorder_enable: Разблокировать панель
   restore: Восстановить по умолчанию
   settings: Настройки
@@ -49,7 +49,7 @@ placeholder:
   notifications: Уведомления
   settings: Быстрые настройки
   volume: Громкость
-plugged: Заткнуто
+plugged: Подключено
 settings:
   app_settings: Настройки приложения
   brightness: Яркость
