@@ -330,6 +330,14 @@ impl SluWorkspacesManager2 {
     }
 
     fn add_to_current_workspace(&self, window: &Window) {
+        // A window belongs to one workspace only. If it is already tracked, even on another
+        // monitor, leave it there: when it really changed monitor, the rect-change handler
+        // moves it with `send_to`. Adding it again here left it listed on both monitors, and
+        // the window manager kept pulling it back to the old one.
+        if self.contains(window) {
+            return;
+        }
+
         let window_id = window.address();
 
         // Get monitor ID with fallback to pinned list
