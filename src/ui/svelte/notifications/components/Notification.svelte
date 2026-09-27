@@ -95,6 +95,7 @@
   tabindex="0"
   onclick={handleNotificationClick}
   onkeydown={(e) => {
+    if (e.target !== e.currentTarget) return;
     if (e.key === "Enter" || e.key === " ") {
       handleNotificationClick();
     }
@@ -109,7 +110,11 @@
         {moment(notification.date).fromNow()}
       </div>
     </div>
-    <button data-skin="transparent" onclick={handleClose}>
+    <button
+      data-skin="transparent"
+      onclick={handleClose}
+      onkeydown={(e) => e.stopPropagation()}
+    >
       <Icon iconName="IoClose" />
     </button>
   </div>
@@ -171,6 +176,7 @@
               placeholder={input["@placeHolderContent"] || ""}
               value={inputData[input["@id"]] || ""}
               onclick={(e) => e.stopPropagation()}
+              onkeydown={(e) => e.stopPropagation()}
               oninput={(e) => handleInputChange(input["@id"], e.currentTarget.value)}
             />
           {:else if input["@type"] === "Selection"}
@@ -178,6 +184,7 @@
               data-skin="default"
               value={inputData[input["@id"]]}
               onclick={(e) => e.stopPropagation()}
+              onkeydown={(e) => e.stopPropagation()}
               onchange={(e) => handleInputChange(input["@id"], e.currentTarget.value)}
               placeholder={input["@placeHolderContent"]}
             >
@@ -196,6 +203,7 @@
                 e.stopPropagation();
                 handleAction(action["@arguments"], action["@activationType"]);
               }}
+              onkeydown={(e) => e.stopPropagation()}
             >
               {action["@content"]}
             </button>

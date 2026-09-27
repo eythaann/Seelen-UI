@@ -5,6 +5,7 @@ import { ConfigState } from "./config.svelte";
 import { PhysicalPosition } from "@tauri-apps/api/window";
 
 let showing = $state(false);
+let activeType = $state<string | null>(null);
 
 const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
 subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
@@ -25,7 +26,7 @@ $effect.root(() => {
       return;
     }
 
-    const placement = ConfigState.config.placement;
+    const placement = activeType === "notification" ? "top-right" : ConfigState.config.placement;
     const padding = ConfigState.config.margin * window.devicePixelRatio;
 
     const monitorWidth = monitor.rect.right - monitor.rect.left;
@@ -41,7 +42,7 @@ $effect.root(() => {
       x = monitor.rect.left + padding;
       y = Math.round(monitorCenterY - height / 2);
     } else if (placement === "top") {
-      x = monitor.rect.right - width - padding;
+      x = Math.round(monitorCenterX - width / 2);
       y = monitor.rect.top + padding;
     } else if (placement === "right") {
       x = monitor.rect.right - width - padding;
@@ -86,5 +87,11 @@ export const RendererState = {
   },
   set showing(value: boolean) {
     showing = value;
+  },
+  get activeType() {
+    return activeType;
+  },
+  set activeType(value: string | null) {
+    activeType = value;
   },
 };

@@ -158,6 +158,10 @@
     prev.notificationId = notificationId;
     prev.shortcutsPaused = shortcutsPaused;
   });
+
+  $effect(() => {
+    RendererState.activeType = lastChanged;
+  });
 </script>
 
 <div

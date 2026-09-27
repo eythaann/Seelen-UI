@@ -182,10 +182,12 @@
   {#if self.id.startsWith("hardcoded-separator")}
     <div {@attach sortable?.attach ?? noopAttach} class="ft-bar-separator"></div>
   {:else}
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
     <div
       id={self.id}
       {@attach sortable?.attach ?? noopAttach}
       role={self.onClick ? "button" : undefined}
+      tabindex={self.onClick ? 0 : undefined}
       data-plugin-id={pluginId}
       data-dragging={sortable?.isDragging}
       data-tooltip={tooltip}
@@ -196,9 +198,16 @@
       class="ft-bar-item"
       class:ft-bar-item-clickable={!!self.onClick}
       onclick={self.onClick ? handleClick : undefined}
+      onkeydown={self.onClick
+        ? (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleClick();
+            }
+          }
+        : undefined}
       onwheel={self.onWheelUp || self.onWheelDown ? handleWheel : undefined}
       oncontextmenu={handleContextMenu}
-      onkeypress={() => {}}
       transition:CssHandled|global={{
         enabled() {
           return !!sortable && !sortable.isDragging;
