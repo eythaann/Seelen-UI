@@ -5,21 +5,21 @@ bluetooth:
   available: 可用设备（未配对）
   cancel: 取消
   connected: 已连接设备
-  forget: 忘记设备
-  lowenergy: 低功耗模式
+  forget: 忘记
+  lowenergy: 低功耗
   more: 更多蓝牙设置
   not_found: 未找到蓝牙设备
   pair: 配对
-  paired: 已配对设备
+  paired: 已保存设备
   placeholder:
-    passphrase: 密码、代码或 PIN
-  scanning: 正在搜索设备
+    passphrase: 密码短语、配对码或 PIN
+  scanning: 正在扫描设备
 context_menu:
   add_custom_text: 添加自定义文本项
   modules: 模块
   remove: 移除模块
-  reorder_disable: 锁定花式工具栏
-  reorder_enable: 解锁花式工具栏
+  reorder_disable: 锁定工具栏
+  reorder_enable: 解锁工具栏
   restore: 恢复默认值
   settings: 设置
   task_manager: 任务管理器
@@ -30,7 +30,7 @@ media:
       system: 系统声音
     comunications: 通信
     missing: 设备缺失
-    mixer: 音量混合器
+    mixer: 音量合成器
     multimedia: 多媒体
     settings: 更多设备设置
     volume: 设备音量

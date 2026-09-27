@@ -1,22 +1,22 @@
-all: 所有应用程序
-app_settings: 应用程序设置
-applications: 搜索应用
+all: 所有应用
+app_settings: 应用设置
+applications: 应用
 back: 返回
 disband: 解散文件夹
 edit_icon: 编辑图标
 folder: 文件夹
-no_matching_items: 未找到与您的搜索相符的条目
+no_matching_items: 未找到与搜索匹配的条目
 open_file_location: 打开文件所在位置
 pin: 固定
-pin_to_dock: 固定到应用程序菜单
+pin_to_dock: 固定到停靠栏
 power_menu: 电源菜单
 query:
   all: 全部
-  apps: 应用程序
+  apps: 应用
   files: 文件
-  web: 网络
+  web: 网页
 run_as_admin: 以管理员身份运行
 unpin: 取消固定
-web_search: 按 Enter 键搜索网络
-welcome_message: 欢迎使用 Seelen UI 应用程序菜单。
-welcome_message2: 在此选项卡上，您可以固定您最喜欢的应用程序。
+web_search: 按 Enter 搜索网页
+welcome_message: 欢迎使用 Seelen UI 应用菜单。
+welcome_message2: 在此选项卡中，可固定常用应用。

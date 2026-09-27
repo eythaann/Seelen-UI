@@ -2,9 +2,9 @@ default_multimedia_volume: 多媒体音量
 device:
   channel:
     system: 系统声音
-  comunications: 通讯
-  missing: 丢失设备
-  mixer: 音量混合器
+  comunications: 通信
+  missing: 设备缺失
+  mixer: 音量合成器
   multimedia: 多媒体
   settings: 更多设备设置
   volume: 设备音量
