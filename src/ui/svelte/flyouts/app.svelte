@@ -18,8 +18,11 @@
   });
 
   let lastChanged = $state<string | null>(null);
+  let effectivePlacement = $derived(
+    lastChanged === "notification" ? "top-right" : ConfigState.config.placement,
+  );
   let orientation = $derived(
-    ["left", "right"].includes(ConfigState.config.placement) ? "vertical" : "horizontal",
+    ["left", "right"].includes(effectivePlacement) ? "vertical" : "horizontal",
   );
 
   let output = $derived.by(() => {
@@ -166,7 +169,7 @@
 
 <div
   class="flyout"
-  data-placement={ConfigState.config.placement}
+  data-placement={effectivePlacement}
   data-showing={RendererState.showing}
 >
   {#if lastChanged === "notification" && notification}
