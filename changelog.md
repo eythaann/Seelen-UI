@@ -29,6 +29,7 @@
 - unable to switch to the workspaces created on other rows when adding a new workspace column (and vice versa).
 - renaming a workspace re-tiling the windows of the tiling window manager.
 - changing the wallpaper rotation interval not being applied until the current rotation ended.
+- broken signature of `seelen-ui.exe` on setup installers, causing it to be blocked by Smart App Control.
 
 ## [2.8.6]
 

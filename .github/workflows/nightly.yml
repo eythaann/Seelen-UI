@@ -145,7 +145,7 @@ jobs:
           }
 
       - name: Bundle
-        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign
+        run: npx tauri bundle --ci --verbose --target ${{ matrix.target }} --no-sign --no-binary-patching
 
       - name: Bundle MSIX
         run: npx tsx scripts/bundle.msix.ts --target ${{ matrix.target }}
