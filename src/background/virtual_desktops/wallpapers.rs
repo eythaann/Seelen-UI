@@ -9,7 +9,8 @@ use seelen_core::resource::WallpaperId;
 use seelen_core::state::{WallpaperCollection, WorkspaceId};
 use seelen_core::system_state::MonitorId;
 use tauri::Listener;
-use tokio::sync::mpsc;
+use tokio::sync::{Notify, mpsc};
+use tokio::time::Instant;
 use uuid::Uuid;
 
 use crate::app::get_app_handle;
@@ -25,6 +26,10 @@ static COLLECTION_INDICES: LazyLock<Arc<RwLock<HashMap<Uuid, usize>>>> =
 
 static MANUAL_CHANGE_SENDER: OnceLock<mpsc::UnboundedSender<ChangeDirection>> = OnceLock::new();
 
+/// Notifies the rotation loop that settings changed, so a new interval is applied
+/// to the current rotation period instead of waiting for it to end.
+static SETTINGS_CHANGED: LazyLock<Notify> = LazyLock::new(Notify::new);
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum ChangeDirection {
     Next,
@@ -33,7 +38,7 @@ enum ChangeDirection {
 
 pub struct WorkspaceWallpapersManager;
 impl WorkspaceWallpapersManager {
-    pub fn init(manager: &super::SluWorkspacesManager2) {
+    pub fn init(manager: &super::VdManager) {
         log::trace!("Initializing Workspaces Wallpaper Manager");
 
         // Set initial wallpapers for all workspaces
@@ -54,9 +59,10 @@ impl WorkspaceWallpapersManager {
 
     /// Handle settings changes
     fn on_settings_changed() {
-        let vd_manager = super::SluWorkspacesManager2::instance();
+        let vd_manager = super::VdManager::instance();
         Self::update_workspace_wallpapers_internal(vd_manager);
-        super::SluWorkspacesManager2::send(VirtualDesktopEvent::StateChanged);
+        super::VdManager::send(VirtualDesktopEvent::StateChanged);
+        SETTINGS_CHANGED.notify_one();
     }
 
     /// Get the wallpaper collection ID for a given workspace on a monitor
@@ -186,14 +192,14 @@ impl WorkspaceWallpapersManager {
         }
 
         {
-            let vd_manager = super::SluWorkspacesManager2::instance();
+            let vd_manager = super::VdManager::instance();
             Self::update_workspace_wallpapers_internal(vd_manager);
-            super::SluWorkspacesManager2::send(VirtualDesktopEvent::StateChanged);
+            super::VdManager::send(VirtualDesktopEvent::StateChanged);
         }
     }
 
     /// Update wallpaper IDs in all workspaces (internal method with manager reference)
-    pub(super) fn update_workspace_wallpapers_internal(vd_manager: &super::SluWorkspacesManager2) {
+    pub(super) fn update_workspace_wallpapers_internal(vd_manager: &super::VdManager) {
         vd_manager.monitors.for_each(|(monitor_id, monitor)| {
             monitor
                 .set_wallpapers(|workspace| Self::get_current_wallpaper(monitor_id, &workspace.id));
@@ -209,21 +215,26 @@ impl WorkspaceWallpapersManager {
 
     /// Main rotation loop
     async fn rotation_loop(mut rx: mpsc::UnboundedReceiver<ChangeDirection>) -> Result<()> {
+        let mut period_start = Instant::now();
         loop {
-            let interval = Self::get_interval_duration();
+            // Recomputed on each iteration, so an interval change applies to the current period
+            let deadline = period_start + Self::get_interval_duration();
 
-            // Wait for either the interval to elapse or a manual change to be triggered
+            // Wait for either the interval to elapse, a manual change to be triggered or settings to change
             tokio::select! {
-                _ = tokio::time::sleep(interval) => {
+                _ = tokio::time::sleep_until(deadline) => {
                     log::trace!("Automatic wallpaper rotation triggered");
                     Self::update_all_wallpapers(ChangeDirection::Next);
+                    period_start = Instant::now();
                 }
                 direction = rx.recv() => {
                     if let Some(direction) = direction {
                         log::trace!("Manual wallpaper change triggered: {:?}", direction);
                         Self::update_all_wallpapers(direction);
+                        period_start = Instant::now();
                     }
                 }
+                _ = SETTINGS_CHANGED.notified() => {}
             }
         }
     }

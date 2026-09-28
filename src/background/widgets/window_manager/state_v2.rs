@@ -23,7 +23,7 @@ use crate::{
     state::application::FULL_STATE,
     tauri_handlers::Handlers,
     utils::lock_free::TracedMutex,
-    virtual_desktops::SluWorkspacesManager2,
+    virtual_desktops::VdManager,
     widgets::window_manager::{
         WindowManagerV2,
         cli::{Axis, Direction, StepWay},
@@ -65,7 +65,7 @@ event_manager!(TwmState, TwmStateEvent);
 
 impl TwmState {
     fn initialize(&mut self) {
-        let vd = SluWorkspacesManager2::instance();
+        let vd = VdManager::instance();
         vd.monitors.for_each(|(_, monitor)| {
             let active_workspace_id = monitor.active_workspace_id().clone();
             for row in monitor.workspaces.rows() {
@@ -94,7 +94,7 @@ impl TwmState {
             }
         });
 
-        SluWorkspacesManager2::subscribe(|event| {
+        VdManager::subscribe(|event| {
             WindowManagerV2::process_vd_event(event).log_error();
         });
 
@@ -317,6 +317,20 @@ impl TwmState {
                 }
                 break;
             }
+        }
+    }
+
+    /// Drops all the state related to a destroyed workspace.
+    pub fn remove_workspace(&mut self, workspace_id: &WorkspaceId) {
+        self.state.workspaces.remove(workspace_id);
+        self.monocle.remove(workspace_id);
+        self.layout_cache.remove(workspace_id);
+        if self
+            .pending_reservation
+            .as_ref()
+            .is_some_and(|r| &r.workspace_id == workspace_id)
+        {
+            self.cancel_reservation();
         }
     }
 
@@ -670,11 +684,9 @@ impl TwmState {
 
     pub fn restore_stacks(&self) {
         let mut active_ids = std::collections::HashSet::new();
-        SluWorkspacesManager2::instance()
-            .monitors
-            .for_each(|(_, monitor)| {
-                active_ids.insert(monitor.active_workspace_id().clone());
-            });
+        VdManager::instance().monitors.for_each(|(_, monitor)| {
+            active_ids.insert(monitor.active_workspace_id().clone());
+        });
 
         for (workspace_id, tree) in &self.state.workspaces {
             if !active_ids.contains(workspace_id) {

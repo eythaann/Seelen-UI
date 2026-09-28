@@ -96,25 +96,23 @@ impl VirtualDesktopMonitor {
         }
     }
 
-    /// Add a new workspace column and return the id of the new cell on the active row
+    /// Add a new workspace column and return the id of the new cell on the active row.
+    /// The active workspace is not changed, switching to it is up to the caller.
     pub fn add_workspace_column(&mut self) -> WorkspaceId {
         self.workspaces.add_column();
         let row = self.active_row();
-        let workspace_id = row.last().unwrap().id.clone();
-        self.active_workspace = workspace_id.clone();
-        workspace_id
+        row.last().unwrap().id.clone()
     }
 
-    /// Add a new workspace row and return the id of the new cell on the active column
+    /// Add a new workspace row and return the id of the new cell on the active column.
+    /// The active workspace is not changed, switching to it is up to the caller.
     pub fn add_workspace_row(&mut self) -> WorkspaceId {
         let (_, col_idx) = self
             .workspaces
             .position(&self.active_workspace)
             .expect("Active workspace doesn't exist in the grid");
         self.workspaces.add_row();
-        let workspace_id = self.workspaces.0.last().unwrap()[col_idx].id.clone();
-        self.active_workspace = workspace_id.clone();
-        workspace_id
+        self.workspaces.0.last().unwrap()[col_idx].id.clone()
     }
 
     /// Remove a workspace by id

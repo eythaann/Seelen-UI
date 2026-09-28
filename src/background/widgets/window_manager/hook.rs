@@ -151,6 +151,11 @@ impl WindowManagerV2 {
                     TwmState::send(TwmStateEvent::Changed);
                 }
             }
+            VirtualDesktopEvent::DesktopDestroyed(workspace_id) => {
+                // its windows were already moved out via WindowMoved events
+                state.remove_workspace(&workspace_id);
+                TwmState::send(TwmStateEvent::Changed);
+            }
             VirtualDesktopEvent::WindowRemoved { window } => {
                 let window = &Window::from(window);
                 if state.is_managed(window) {

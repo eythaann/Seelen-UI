@@ -11,6 +11,24 @@
 
 - network/hotspot api failing on windows 10.
 - download wallpapers without thumbnail failing.
+- possible deadlock on startup when an internal event was dispatched while its module was still initializing.
+- creating a new workspace leaving the windows of the previous workspace visible.
+- failed workspace switch leaving the current workspace hidden and the switching state stuck.
+- destroying a workspace leaving its windows minimized on the active workspace, not restoring the new active workspace
+  when the removed column contained it, and not re-tiling the moved windows.
+- stored pinned windows not being revalidated on startup, keeping closed windows as pinned.
+- restoring a window from a workspace of a disconnected monitor minimizing windows visible on other monitors.
+- unminimizing a window sometimes not switching to its workspace.
+- new windows sometimes being treated as hidden by a workspace, not being removed from the tiling layout when minimized.
+- window sent to another workspace sometimes not being tiled when switching to that workspace.
+- pinned windows could be sent to a workspace, being hidden on workspace switch while still pinned.
+- sending a window to its own workspace reordering it on the tiling layout.
+- unminimizing a window of another workspace (taskbar click, alt+tab) sometimes focusing a different window of that
+  workspace.
+- windows sometimes being tracked on two workspaces at once, or kept on a workspace after being closed.
+- unable to switch to the workspaces created on other rows when adding a new workspace column (and vice versa).
+- renaming a workspace re-tiling the windows of the tiling window manager.
+- changing the wallpaper rotation interval not being applied until the current rotation ended.
 
 ## [2.8.6]
 

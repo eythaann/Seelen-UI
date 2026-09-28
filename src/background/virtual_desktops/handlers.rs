@@ -12,25 +12,25 @@ use crate::{
     error::Result,
     resources::RESOURCES,
     utils::date_based_hex_id,
-    virtual_desktops::{SluWorkspacesManager2, events::VirtualDesktopEvent},
+    virtual_desktops::{VdManager, events::VirtualDesktopEvent},
 };
 
-fn get_vd_manager() -> &'static SluWorkspacesManager2 {
+fn get_vd_manager() -> &'static VdManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
     TAURI_EVENT_REGISTRATION.call_once(|| {
-        SluWorkspacesManager2::subscribe(|event| {
+        VdManager::subscribe(|event| {
             // As switching is atomic operation the data was send via the event to avoid waiting for switch end.
             if let VirtualDesktopEvent::SwitchingDesktop(payload) = event {
                 emit_to_webviews(SeelenEvent::VirtualDesktopsChanged, payload);
                 return;
             }
 
-            let payload: VirtualDesktops = SluWorkspacesManager2::instance().into();
+            let payload: VirtualDesktops = VdManager::instance().into();
             emit_to_webviews(SeelenEvent::VirtualDesktopsChanged, payload);
         });
     });
 
-    SluWorkspacesManager2::instance()
+    VdManager::instance()
 }
 
 impl crate::tauri_handlers::Handlers {
@@ -39,44 +39,32 @@ impl crate::tauri_handlers::Handlers {
     }
 
     pub fn switch_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
-        let manager = get_vd_manager();
-        let monitor_id = manager
-            .get_monitor_of_workspace(&workspace_id)
-            .ok_or("Unknown workspace")?;
-        manager.switch_to_id(&monitor_id, &workspace_id)
+        get_vd_manager().switch_to_id(&workspace_id)
     }
 
     pub fn create_workspace(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
         let vd = get_vd_manager();
         let workspace_id = vd.create_desktop(&monitor_id, false)?;
-        vd.switch_to_id(&monitor_id, &workspace_id)?;
+        vd.switch_to_id(&workspace_id)?;
         Ok(workspace_id)
     }
 
     pub fn create_workspace_row(monitor_id: MonitorId) -> Result<seelen_core::state::WorkspaceId> {
         let vd = get_vd_manager();
         let workspace_id = vd.create_desktop(&monitor_id, true)?;
-        vd.switch_to_id(&monitor_id, &workspace_id)?;
+        vd.switch_to_id(&workspace_id)?;
         Ok(workspace_id)
     }
 
     pub fn destroy_workspace(workspace_id: seelen_core::state::WorkspaceId) -> Result<()> {
-        let manager = get_vd_manager();
-        let monitor_id = manager
-            .get_monitor_of_workspace(&workspace_id)
-            .ok_or("Unknown workspace")?;
-        manager.destroy_desktop(&monitor_id, &workspace_id)
+        get_vd_manager().destroy_desktop(&workspace_id)
     }
 
     pub fn rename_workspace(
         workspace_id: seelen_core::state::WorkspaceId,
         name: Option<String>,
     ) -> Result<()> {
-        let manager = get_vd_manager();
-        let monitor_id = manager
-            .get_monitor_of_workspace(&workspace_id)
-            .ok_or("Unknown workspace")?;
-        manager.rename_desktop(&monitor_id, &workspace_id, name)
+        get_vd_manager().rename_desktop(&workspace_id, name)
     }
 
     pub fn move_window_to_workspace(

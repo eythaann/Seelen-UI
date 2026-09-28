@@ -23,9 +23,18 @@ macro_rules! event_manager {
             crossbeam_channel::Receiver<$event>,
         )> = std::sync::LazyLock::new(crossbeam_channel::unbounded);
 
+        /// Copy-on-write list: the dispatcher takes a snapshot and runs the callbacks
+        /// without holding any lock, so a callback blocking (e.g. waiting on a LazyLock
+        /// being initialized) never prevents others from (un)subscribing.
         static SUBSCRIBERS: std::sync::LazyLock<
-            parking_lot::RwLock<Vec<(String, Box<dyn Fn($event) + Sync + Send + 'static>, u32)>>,
-        > = std::sync::LazyLock::new(|| parking_lot::RwLock::new(Vec::new()));
+            arc_swap::ArcSwap<
+                Vec<(
+                    String,
+                    std::sync::Arc<dyn Fn($event) + Sync + Send + 'static>,
+                    u32,
+                )>,
+            >,
+        > = std::sync::LazyLock::new(|| arc_swap::ArcSwap::from_pointee(Vec::new()));
 
         static THREAD_INIT: std::sync::Once = std::sync::Once::new();
 
@@ -36,7 +45,7 @@ macro_rules! event_manager {
                     let rx = CHANNEL.1.clone();
                     std::thread::spawn(move || {
                         for event in rx {
-                            let subscribers = SUBSCRIBERS.read();
+                            let subscribers = SUBSCRIBERS.load_full();
                             for (_id, callback, _) in subscribers.iter() {
                                 callback(event.clone());
                             }
@@ -62,27 +71,34 @@ macro_rules! event_manager {
                 F: Fn($event) + Sync + Send + 'static,
             {
                 let id = uuid::Uuid::new_v4().to_string();
-                SUBSCRIBERS
-                    .write()
-                    .push((id.clone(), Box::new(callback), 0));
+                let callback: std::sync::Arc<dyn Fn($event) + Sync + Send + 'static> =
+                    std::sync::Arc::new(callback);
+                SUBSCRIBERS.rcu(|subscribers| {
+                    let mut subscribers = Vec::clone(subscribers);
+                    subscribers.push((id.clone(), callback.clone(), 0));
+                    subscribers
+                });
                 id
             }
 
             pub fn set_event_handler_priority(id: &str, priority: u32) {
-                let mut subscribers = SUBSCRIBERS.write();
-                for s in subscribers.iter_mut() {
-                    if s.0 == id {
+                SUBSCRIBERS.rcu(|subscribers| {
+                    let mut subscribers = Vec::clone(subscribers);
+                    if let Some(s) = subscribers.iter_mut().find(|s| s.0 == id) {
                         s.2 = priority;
-                        break;
                     }
-                }
-                // Higher priority subscribers will be called first
-                subscribers.sort_by(|a, b| b.2.cmp(&a.2));
+                    // Higher priority subscribers will be called first
+                    subscribers.sort_by(|a, b| b.2.cmp(&a.2));
+                    subscribers
+                });
             }
 
             pub fn unsubscribe(id: &str) {
-                let mut subscribers = SUBSCRIBERS.write();
-                subscribers.retain(|(i, _, _)| i != id);
+                SUBSCRIBERS.rcu(|subscribers| {
+                    let mut subscribers = Vec::clone(subscribers);
+                    subscribers.retain(|(i, _, _)| i != id);
+                    subscribers
+                });
             }
         }
     };
