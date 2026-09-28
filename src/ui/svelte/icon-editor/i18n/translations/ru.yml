@@ -1,9 +1,9 @@
 angle: Угол
-approximately_square: Примерно квадратный
+approximately_square: Скругленный квадрат
 background: Фон
 brush_size: Размер кисти
 clear_draw: Четкий рисунок
-delete: Удалить собственный значок
+delete: Удалить пользовательский значок
 draw_color: Цвет рисования
 draw_mode_off: Рисовать
 draw_mode_on: Рисунок
@@ -13,7 +13,7 @@ pick_image: Выберите изображение
 position_x: Позиция X
 position_y: Позиция Y
 reset: Перезагрузить
-save: Сохранять
+save: Сохранить
 saving: Сохранение...
 scale: Шкала
 solid: Сплошной цвет
