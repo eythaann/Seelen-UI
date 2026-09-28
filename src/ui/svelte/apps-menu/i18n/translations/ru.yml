@@ -3,11 +3,11 @@ app_settings: Настройки приложения
 applications: Приложения
 back: Назад
 disband: Расформировать папку
-edit_icon: Значок редактирования
+edit_icon: Редактировать значок
 folder: Папка
-no_matching_items: Не найдено товаров, соответствующих вашему запросу
+no_matching_items: Не найдено элементов, соответствующих вашему запросу
 open_file_location: Открыть местоположение файла
-pin: Приколоть
+pin: Закрепить
 pin_to_dock: Закрепить в Dock
 power_menu: Меню питания
 query:

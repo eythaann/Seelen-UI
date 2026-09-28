@@ -1,4 +1,4 @@
-default_multimedia_volume: Мультимедийный объем
+default_multimedia_volume: Громкость мультимедиа
 device:
   channel:
     system: Системные звуки
