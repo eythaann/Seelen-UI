@@ -5648,7 +5648,7 @@ dependencies = [
  "os_info",
  "owo-colors",
  "parking_lot",
- "phf 0.11.3",
+ "phf 0.13.1",
  "positioning",
  "quick-xml",
  "rand 0.10.3",
