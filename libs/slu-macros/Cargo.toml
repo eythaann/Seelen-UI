@@ -2,7 +2,7 @@
 name = "slu-macros"
 version = "2.8.7"
 edition = "2024"
-rust-version = "1.89"
+rust-version = "1.97"
 
 [lints]
 workspace = true
