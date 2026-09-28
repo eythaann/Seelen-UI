@@ -10,10 +10,10 @@ app_menu:
   pin_to_center: По центру
   pin_to_left: Слева
   pin_to_right: Справа
-  run_as: Запустить от администратора
+  run_as: Запустить от имени администратора
   unpin: Открепить
 context_menu:
-  edit_icon: Значок редактирования
+  edit_icon: Редактировать значок 
   remove_module: Удалить модуль
   remove_separator: Удалить разделитель
   reorder_disable: Заблокировать панель
@@ -26,7 +26,7 @@ show_desktop:
 start:
   label: Меню «Пуск»
 taskbar_menu:
-  add_file: Добавить файл
+  add_file: Добавить пользов. файл
   add_separator: Добавить разделитель
   media: Медиаплеер
   modules: Модули
@@ -34,7 +34,7 @@ taskbar_menu:
   task_manager: Диспетчер задач
 trash_bin:
   empty_bin: Пустая корзина
-  item_count: "{{0}}\_элементов"
+  item_count: "{{0}} элементов"
   label: Корзина
 weg:
   empty: Нет элементов для отображения
