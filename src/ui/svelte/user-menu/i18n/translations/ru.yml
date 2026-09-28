@@ -1,9 +1,9 @@
-empty_list: Нет товаров
+empty_list: Нет элементов
 folders:
   desktop: Рабочий стол
   documents: Документы
   downloads: Загрузки
-  more_items: Показать больше...
+  more_items: Показать еще...
   music: Музыка
   pictures: Картинки
   recent: Недавно использовано
@@ -18,4 +18,4 @@ profile:
 seelen_options:
   open_installation_folder: Открыть папку настроек Seelen
   open_log_folder: Открыть папку журнала Seelen
-  title: Зеелен каталоги
+  title: Каталоги Seelen
