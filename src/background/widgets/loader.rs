@@ -17,7 +17,7 @@ use crate::{
     utils::lock_free::SyncHashMap,
     widgets::{
         WidgetWebviewLabel,
-        manager::WIDGET_MANAGER,
+        manager::{GAME_MODE_ACTIVE, WIDGET_MANAGER},
         notify_widget_statuses_change,
         webview::{self, WidgetWebview},
     },
@@ -240,7 +240,12 @@ impl WidgetPod {
                     WIDGET_MANAGER.deployments.get(&label.widget_id, |deploy| {
                         deploy.kill_pod(&label);
                         deploy.reconcile();
-                        if !deploy.definition.lazy {
+                        // suspend_all() destroys every widget when game mode starts; respawning
+                        // here would bring them back on top of the game. resume_all() starts
+                        // them again once game mode ends.
+                        if !deploy.definition.lazy
+                            && !GAME_MODE_ACTIVE.load(std::sync::atomic::Ordering::Acquire)
+                        {
                             deploy.start_all_webviews();
                         }
                     });
