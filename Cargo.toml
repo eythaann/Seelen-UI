@@ -71,12 +71,12 @@ slu-macros = { path = "libs/slu-macros" }
 slu-utils = { path = "libs/utils" }
 positioning = { path = "libs/positioning" }
 sysinfo = "0.38.3"
-tauri = "2.11.2"
-tauri-build = "2.6.2"
-tauri-plugin-dialog = "2.7.1"
+tauri = "2.11.6"
+tauri-build = "2.6.3"
+tauri-plugin-dialog = "2.7.3"
 tauri-plugin-process = "2.3.1"
-tauri-plugin-shell = "2.3.5"
-tauri-plugin-updater = "2.10.1"
+tauri-plugin-shell = "2.3.6"
+tauri-plugin-updater = "2.12.0"
 translators = "0.1.5"
 url = "2.5.8"
 urlencoding = "2.1.3"
