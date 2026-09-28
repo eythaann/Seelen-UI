@@ -9,8 +9,10 @@ pub struct SeelenLogger {}
 
 fn format_now() -> String {
     static FMT: LazyLock<Vec<time::format_description::BorrowedFormatItem>> = LazyLock::new(|| {
-        time::format_description::parse("[[[year]-[month]-[day]][[[hour]:[minute]:[second]]")
-            .expect("valid time format")
+        time::format_description::parse_borrowed::<1>(
+            "[[[year]-[month]-[day]][[[hour]:[minute]:[second]]",
+        )
+        .expect("valid time format")
     });
 
     time::OffsetDateTime::now_local()
