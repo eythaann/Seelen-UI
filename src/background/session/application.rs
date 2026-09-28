@@ -20,6 +20,7 @@ use super::domain::{JwtPayload, decode_jwt_payload};
 static HTTP_CLIENT: LazyLock<reqwest::Client> = LazyLock::new(|| {
     reqwest::Client::builder()
         .timeout(std::time::Duration::from_secs(15))
+        .user_agent(concat!("SeelenUI/", env!("CARGO_PKG_VERSION")))
         .build()
         .expect("failed to build reqwest client")
 });

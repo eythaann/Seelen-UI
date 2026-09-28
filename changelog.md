@@ -2,8 +2,6 @@
 
 ## [2.8.7-dev]
 
-## [2.8.7-dev]
-
 ### enhancements
 
 - customizable widgets show/hide animations, themes can style them via the `data-widget-hidden` attribute on the root
@@ -12,6 +10,7 @@
 ### fix
 
 - network/hotspot api failing on windows 10.
+- download wallpapers without thumbnail failing.
 
 ## [2.8.6]
 
