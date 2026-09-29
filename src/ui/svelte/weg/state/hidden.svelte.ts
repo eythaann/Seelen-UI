@@ -19,7 +19,7 @@ const isRevealedByAttention = $derived.by(() => {
     if (onlyThisMonitor && w.monitor !== monitorId) return false;
     return reveal === WegAttentionReveal.WhileFlashing
       ? w.attention === WindowAttention.Flashing
-      : w.attention !== WindowAttention.None;
+      : w.attention === WindowAttention.Highlighted;
   });
 });
 

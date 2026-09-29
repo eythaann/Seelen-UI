@@ -71,18 +71,11 @@
   }
 </script>
 
-<div
-  bind:this={itemEl}
-  role="menu"
-  tabindex="0"
-  class="weg-item-overlay"
->
+<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay">
   <div
     role="menuitem"
     tabindex="0"
     class="weg-item"
-    class:weg-item-attention={needsAttention}
-    class:weg-item-flashing={isFlashing}
     data-tooltip={item.displayName}
     data-tooltip-origin-y={settingsState.tooltipOrigin.y}
     data-tooltip-origin-x={settingsState.tooltipOrigin.x}
@@ -96,6 +89,13 @@
     <FileIcon class="weg-item-icon" path={item.relaunch?.icon || item.path} umid={item.umid} />
     {#if itemLabel}
       <div class="weg-item-title">{itemLabel}</div>
+    {/if}
+
+    {#if needsAttention}
+      <div
+        class="weg-item-attention-indicator"
+        class:weg-item-attention-indicator-flashing={isFlashing}
+      ></div>
     {/if}
   </div>
 

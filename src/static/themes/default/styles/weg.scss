@@ -19,7 +19,7 @@
 /* like the native taskbar: pulse while the app flashes, then stay highlighted until the window is activated */
 @keyframes weg-item-flashing {
   from {
-    background-color: var(--slu-std-bg-light-color);
+    background-color: transparent;
   }
   to {
     background-color: var(--weg-item-attention-color);
@@ -104,7 +104,7 @@
   --item-size-medium: calc(var(--config-item-size) * 2 + var(--config-space-between-items));
   --item-size-large: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
 
-  --weg-item-attention-color: oklch(from var(--color-orange-500) l c h / 0.6);
+  --weg-item-attention-color: oklch(from var(--system-accent-color) l c h / 0.2);
 }
 
 .weg-item-overlay {
@@ -196,7 +196,7 @@
     }
 
     &.weg-item-open-sign-focused {
-      background-color: var(--system-accent-color);
+      background-color: var(--slu-std-ui-color);
 
       .vertical & {
         height: 50%;
@@ -208,13 +208,13 @@
     }
 
     &.weg-item-open-sign-attention {
-      opacity: 1;
-      background-color: var(--color-orange-500);
+      background-color: var(--slu-std-ui-color);
     }
   }
 }
 
 .weg-item {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -251,18 +251,6 @@
     border-radius: 0;
   }
 
-  &.weg-item-attention {
-    background-color: var(--weg-item-attention-color);
-  }
-
-  &.weg-item-flashing {
-    animation: weg-item-flashing 530ms ease-in-out infinite alternate;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-    }
-  }
-
   &.weg-item-medium {
     .horizontal & {
       width: var(--item-size-medium);
@@ -296,6 +284,16 @@
 
   &:has(.weg-item-icon[data-shape="square"]) {
     padding: 0;
+  }
+
+  .weg-item-attention-indicator {
+    position: absolute;
+    inset: 0;
+    background-color: var(--weg-item-attention-color);
+
+    &.weg-item-attention-indicator-flashing {
+      animation: weg-item-flashing 0.5s ease-in-out infinite alternate;
+    }
   }
 
   .weg-item-icon {
