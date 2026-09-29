@@ -410,6 +410,11 @@ weg:
     full_width: Full screen width
     min_content: Small as can be
   padding: Padding
+  reveal_on_attention:
+    label: Show when an app requests attention
+    never: Never
+    until_activated: Until the app is opened
+    while_flashing: While it flashes
   show_end_task: Show end task in taskbar
   width: Width
 welcome:

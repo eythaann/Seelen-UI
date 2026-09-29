@@ -144,6 +144,18 @@ pub enum WegMiddleClickAction {
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum WegAttentionReveal {
+    /// Keep the dock hidden, only the item is highlighted
+    Never,
+    /// Show the dock while a window is flashing
+    WhileFlashing,
+    /// Show the dock until the window requesting attention is activated (like the native taskbar)
+    UntilActivated,
+}
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum SeelenWegSide {
     Left,
     Right,
@@ -189,6 +201,8 @@ pub struct SeelenWegSettings {
     pub delay_to_show: u32,
     /// delay to hide the toolbar on Mouse Leave in milliseconds
     pub delay_to_hide: u32,
+    /// Show the auto-hidden dock when a window requests attention
+    pub reveal_on_attention: WegAttentionReveal,
     /// show end task button on context menu (needs developer mode enabled)
     pub show_end_task: bool,
     /// Action to perform when middle-clicking a dock item
@@ -213,6 +227,7 @@ impl Default for SeelenWegSettings {
             space_between_items: 8,
             delay_to_show: 100,
             delay_to_hide: 800,
+            reveal_on_attention: WegAttentionReveal::UntilActivated,
             show_end_task: false,
             split_windows: false,
             middle_click_action: WegMiddleClickAction::OpenNewInstance,

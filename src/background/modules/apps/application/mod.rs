@@ -1,3 +1,4 @@
+mod flashing;
 pub mod msix;
 pub mod msix_manifest;
 pub mod previews;
@@ -29,9 +30,11 @@ event_manager!(UserAppsManager, UserAppWinEvent);
 
 impl UserAppsManager {
     fn init() -> Self {
-        Self {
+        let manager = Self {
             interactable_windows: SyncVec::from(Self::init_listing_app_windows()),
-        }
+        };
+        Self::init_flash_tracking();
+        manager
     }
 
     pub fn instance() -> &'static Self {

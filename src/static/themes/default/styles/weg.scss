@@ -16,6 +16,16 @@
   }
 }
 
+/* like the native taskbar: pulse while the app flashes, then stay highlighted until the window is activated */
+@keyframes weg-item-flashing {
+  from {
+    background-color: var(--slu-std-bg-light-color);
+  }
+  to {
+    background-color: var(--weg-item-attention-color);
+  }
+}
+
 @keyframes shadow-on-horizontal-scroll {
   from {
     box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
@@ -93,6 +103,8 @@
 
   --item-size-medium: calc(var(--config-item-size) * 2 + var(--config-space-between-items));
   --item-size-large: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+
+  --weg-item-attention-color: oklch(from var(--color-orange-500) l c h / 0.6);
 }
 
 .weg-item-overlay {
@@ -194,6 +206,11 @@
         width: 50%;
       }
     }
+
+    &.weg-item-open-sign-attention {
+      opacity: 1;
+      background-color: var(--color-orange-500);
+    }
   }
 }
 
@@ -232,6 +249,18 @@
     height: 0;
     padding: 0;
     border-radius: 0;
+  }
+
+  &.weg-item-attention {
+    background-color: var(--weg-item-attention-color);
+  }
+
+  &.weg-item-flashing {
+    animation: weg-item-flashing 530ms ease-in-out infinite alternate;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   &.weg-item-medium {
