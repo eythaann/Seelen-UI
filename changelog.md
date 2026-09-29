@@ -2,10 +2,16 @@
 
 ## [2.8.7-dev]
 
+### features
+
+- pinnable tray icons.
+- show pinned tray icons in the toolbar.
+
 ### enhancements
 
 - customizable widgets show/hide animations, themes can style them via the `data-widget-hidden` attribute on the root
   element. The default theme includes a fade in/out.
+- tray icons now are sortable.
 
 ### fix
 

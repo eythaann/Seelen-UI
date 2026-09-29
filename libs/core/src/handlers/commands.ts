@@ -127,6 +127,8 @@ export enum SeelenCommand {
   SetNetworkHotspotState = "set_network_hotspot_state",
   GetSystemTrayIcons = "get_system_tray_icons",
   SendSystemTrayIconAction = "send_system_tray_icon_action",
+  SetSystemTrayIconPromoted = "set_system_tray_icon_promoted",
+  SetSystemTrayIconsOrder = "set_system_tray_icons_order",
   GetNotifications = "get_notifications",
   NotificationsClose = "notifications_close",
   NotificationsCloseAll = "notifications_close_all",

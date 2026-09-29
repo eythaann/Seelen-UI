@@ -1,59 +1,18 @@
 use std::path::PathBuf;
 
-/// Identifier for a systray icon.
-///
-/// A systray icon is either identified by a (window handle + uid) or
-/// its guid. Since a systray icon can be updated to also include a
-/// guid or window handle/uid later on, a stable ID is useful for
-/// consistently identifying an icon.
-#[derive(Clone, Debug, Eq, Hash, PartialEq, Serialize, Deserialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-pub enum SysTrayIconId {
-    HandleUid(isize, u32),
-    Guid(uuid::Uuid),
-}
-
-impl std::fmt::Display for SysTrayIconId {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            SysTrayIconId::HandleUid(handle, uid) => write!(f, "{:x}_{}", handle, uid),
-            SysTrayIconId::Guid(guid) => write!(f, "{}", guid),
-        }
-    }
-}
-
-impl std::str::FromStr for SysTrayIconId {
-    type Err = crate::error::SeelenLibError;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        // Try parsing as handle and uid (format: "handle:uid").
-        if let Some((handle_str, uid_str)) = s.split_once(':') {
-            return Ok(SysTrayIconId::HandleUid(
-                handle_str.parse().map_err(|_| "Invalid icon id")?,
-                uid_str.parse().map_err(|_| "Invalid icon id")?,
-            ));
-        }
-
-        // Try parsing as a guid.
-        if let Ok(guid) = uuid::Uuid::parse_str(s) {
-            return Ok(SysTrayIconId::Guid(guid));
-        }
-
-        Err("Invalid icon id".into())
-    }
-}
-
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct SysTrayIcon {
-    /// Identifier for the icon. Will not change for the lifetime of the
-    /// icon.
+    /// Persistent identifier assigned by Windows to the icon: the name of its subkey under
+    /// `HKCU\Control Panel\NotifyIconSettings`, bound to the executable that registered the
+    /// icon plus its uid or guid. Unlike the (window handle + uid) pair it survives sessions.
     ///
-    /// The Windows shell uses either a (window handle + uid) or its guid
-    /// to identify which icon to operate on.
-    ///
-    /// Read more: https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-notifyicondataw
-    pub stable_id: SysTrayIconId,
+    /// It is a u64 on Windows, exposed as string because it exceeds the JS safe integer range.
+    pub registry_key: String,
+
+    /// Path of the executable that registered the icon.
+    pub executable_path: PathBuf,
 
     /// Application-defined identifier for the icon, used in combination
     /// with the window handle.
@@ -101,6 +60,11 @@ pub struct SysTrayIcon {
     ///
     /// This is determined by the `NIS_HIDDEN` flag in the icon's state.
     pub is_visible: bool,
+
+    /// Whether the icon is shown directly on the taskbar, otherwise it is only
+    /// shown in the tray overflow. Stored by Windows as `IsPromoted` on the icon's
+    /// registry entry.
+    pub is_promoted: bool,
 }
 
 /// Actions that can be performed on a `SystrayIcon`.

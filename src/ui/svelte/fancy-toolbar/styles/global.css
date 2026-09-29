@@ -109,6 +109,7 @@ body {
   padding: var(--item-padding);
 
   .ft-bar-item-content {
+    position: relative;
     height: var(--config-item-size);
     display: flex;
     align-items: center;
@@ -121,8 +122,8 @@ body {
     }
 
     button {
-      height: 100%;
-      padding: 0 var(--item-padding);
+      height: calc(var(--config-item-size) + var(--item-padding) * 2);
+      padding: var(--item-padding);
       border: 0;
     }
   }

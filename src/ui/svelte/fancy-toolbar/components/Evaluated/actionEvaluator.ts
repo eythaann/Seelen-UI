@@ -2,7 +2,7 @@ import type Sandbox from "@nyariv/sandboxjs";
 import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
-import { settingsState } from "./state/settings.svelte.ts";
+import { settingsState } from "../../state/settings.svelte.ts";
 import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS = [
@@ -12,6 +12,7 @@ const ALLOWED_COMMANDS = [
   SeelenCommand.MediaPrev,
   SeelenCommand.MediaNext,
   SeelenCommand.MediaTogglePlayPause,
+  SeelenCommand.SendSystemTrayIconAction,
 ];
 
 const ActionsScope = {
@@ -30,13 +31,20 @@ const ActionsScope = {
 };
 
 export function evalActionSanboxed(
+  parentItemId: string,
   executor: ReturnType<Sandbox["compile"]> | null,
   scope: Record<string, any>,
 ) {
-  evalSanboxed(executor, { ...scope, ...ActionsScope });
+  evalSanboxed(executor, {
+    ...scope,
+    ...ActionsScope,
+    trigger(widgetId: WidgetId) {
+      triggerWidget(widgetId, parentItemId);
+    },
+  });
 }
 
-export function triggerWidget(widgetId: WidgetId, itemId: string): void {
+function triggerWidget(widgetId: WidgetId, itemId: string): void {
   if (typeof widgetId !== "string") {
     return;
   }

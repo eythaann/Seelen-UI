@@ -37,7 +37,6 @@ div[data-behavior="group"] {
 
 button[data-skin="transparent"] {
   @extend %btn-common;
-  border: 1px solid transparent;
 
   &:hover:enabled {
     background-color: var(--slu-std-ui-hover-overlay);

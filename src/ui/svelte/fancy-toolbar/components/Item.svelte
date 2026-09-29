@@ -9,12 +9,10 @@
   } from "@seelen-ui/lib/types";
   import type { createSortable } from "@dnd-kit/svelte/sortable";
   import { t } from "../i18n/index.ts";
-  import { evalActionSanboxed, triggerWidget } from "../actionEvaluator.ts";
-  import { evalComponentSandboxed } from "../evaluatedComponents.ts";
+  import { evalActionSanboxed } from "./Evaluated/actionEvaluator.ts";
   import { toolbarActions } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { styleToString } from "../utils.ts";
-  import EvaluatedComponents from "../EvaluatedComponents.svelte";
   import { createRemoteDataResolver } from "../remoteData.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import {
@@ -27,6 +25,8 @@
   } from "libs/ui/svelte/utils/sandbox.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
+  import { evalComponentSandboxed } from "./Evaluated/definitions.ts";
+  import UnknownEvaluatedComponent from "./Evaluated/Unknown.svelte";
 
   interface Props {
     module: ToolbarItem;
@@ -124,10 +124,7 @@
   // ── Event handlers ───────────────────────────────────────────────────────
 
   function handleClick() {
-    evalActionSanboxed(onClickExec, {
-      ...scope,
-      trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
-    });
+    evalActionSanboxed(self.id, onClickExec, scope);
   }
 
   function handleContextMenu(e: MouseEvent) {
@@ -151,10 +148,7 @@
   }
 
   function handleWheel(e: WheelEvent) {
-    evalActionSanboxed(e.deltaY < 0 ? onWheelUpExec : onWheelDownExec, {
-      ...scope,
-      trigger: (widgetId: WidgetId) => triggerWidget(widgetId, self.id),
-    });
+    evalActionSanboxed(self.id, e.deltaY < 0 ? onWheelUpExec : onWheelDownExec, scope);
   }
 
   $effect(() => {
@@ -210,7 +204,7 @@
         {#if self.render}
           <canvas bind:this={canvas} class="ft-bar-item-canvas" style:width={canvasWidth}></canvas>
         {:else}
-          <EvaluatedComponents {content} />
+          <UnknownEvaluatedComponent parentId={self.id} {content} />
         {/if}
       </div>
 

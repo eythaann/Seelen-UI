@@ -492,7 +492,13 @@ slu_commands_declaration! {
     GetSystemTrayIcons = get_system_tray_icons() -> Vec<SysTrayIcon>,
     SendSystemTrayIconAction =
         @fallible()
-        send_system_tray_icon_action(id: SysTrayIconId, action: SystrayIconAction),
+        send_system_tray_icon_action(id: String, action: SystrayIconAction),
+    SetSystemTrayIconPromoted =
+        @fallible()
+        set_system_tray_icon_promoted(id: String, promoted: bool),
+    SetSystemTrayIconsOrder =
+        @fallible()
+        set_system_tray_icons_order(keys: Vec<String>),
 
     // Notifications
     GetNotifications = get_notifications() -> Vec<AppNotification>,

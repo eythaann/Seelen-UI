@@ -7,7 +7,7 @@ use windows::Win32::{
     System::DataExchange::COPYDATASTRUCT,
     UI::{
         Shell::{
-            NIF_GUID, NIF_ICON, NIF_MESSAGE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY,
+            NIF_GUID, NIF_ICON, NIF_MESSAGE, NIF_STATE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY,
             NIM_SETVERSION, NIS_HIDDEN, NOTIFY_ICON_DATA_FLAGS, NOTIFY_ICON_INFOTIP_FLAGS,
             NOTIFY_ICON_MESSAGE, NOTIFY_ICON_STATE, NOTIFYICONDATAW_0,
         },
@@ -30,6 +30,9 @@ struct ShellTrayMessage {
 }
 
 /// Contains the data for a system tray icon.
+/// https://learn.microsoft.com/en-us/windows/win32/api/shellapi/ns-shellapi-notifyicondataw
+/// in the windows crate NOTIFYICONDATAW use raw pointers that are 64-bit on 64-bit systems but this
+/// need always be 32-bit, so we use a self-defined struct.
 #[repr(C)]
 #[derive(Clone, Copy)]
 struct NotifyIconData {
@@ -52,20 +55,19 @@ struct NotifyIconData {
 
 impl From<NotifyIconData> for IconEventData {
     fn from(icon_data: NotifyIconData) -> Self {
-        let icon_handle = if icon_data.icon_handle != 0 && icon_data.flags.0 & NIF_ICON.0 != 0 {
+        let icon_handle = if icon_data.flags.contains(NIF_ICON) && icon_data.icon_handle != 0 {
             Some(icon_data.icon_handle as isize)
         } else {
             None
         };
 
-        let guid = if icon_data.guid_item != GUID::default() && icon_data.flags.0 & NIF_GUID.0 != 0
-        {
+        let guid = if icon_data.flags.contains(NIF_GUID) && icon_data.guid_item != GUID::default() {
             Some(uuid::Uuid::from_u128(icon_data.guid_item.to_u128()))
         } else {
             None
         };
 
-        let tooltip = if icon_data.flags.0 & NIF_TIP.0 != 0 {
+        let tooltip = if icon_data.flags.contains(NIF_TIP) {
             let tooltip_len = icon_data.tooltip.iter().position(|&c| c == 0).unwrap_or(0);
             let tooltip_str = String::from_utf16_lossy(&icon_data.tooltip[..tooltip_len])
                 .replace('\r', "")
@@ -95,7 +97,10 @@ impl From<NotifyIconData> for IconEventData {
             None
         };
 
-        let is_visible = icon_data.state.0 & NIS_HIDDEN.0 == 0;
+        let mut is_visible = true;
+        if icon_data.flags.contains(NIF_STATE) {
+            is_visible = !icon_data.state.contains(NIS_HIDDEN);
+        }
 
         IconEventData {
             uid,

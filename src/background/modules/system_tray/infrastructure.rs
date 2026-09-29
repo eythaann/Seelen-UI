@@ -2,7 +2,7 @@ use std::sync::Once;
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{SysTrayIcon, SysTrayIconId, SystrayIconAction},
+    system_state::{SysTrayIcon, SystrayIconAction},
 };
 
 use crate::{
@@ -34,11 +34,16 @@ impl crate::tauri_handlers::Handlers {
         manager.icons()
     }
 
-    pub fn send_system_tray_icon_action(
-        id: SysTrayIconId,
-        action: SystrayIconAction,
-    ) -> Result<()> {
+    pub fn send_system_tray_icon_action(id: String, action: SystrayIconAction) -> Result<()> {
         get_system_tray_manager().send_action(&id, &action)?;
         Ok(())
+    }
+
+    pub fn set_system_tray_icon_promoted(id: String, promoted: bool) -> Result<()> {
+        get_system_tray_manager().set_promoted(&id, promoted)
+    }
+
+    pub fn set_system_tray_icons_order(keys: Vec<String>) -> Result<()> {
+        get_system_tray_manager().set_order(&keys)
     }
 }
