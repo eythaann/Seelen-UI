@@ -110,8 +110,7 @@
 .weg-item-overlay {
   position: relative;
 
-  .weg-item-notification-badge,
-  .weg-item-custom-badge {
+  .weg-item-badge {
     @include fade;
 
     position: absolute;
@@ -126,11 +125,22 @@
     height: 16px;
     min-width: 16px;
     border-radius: 8px;
+    overflow: hidden;
 
     background-color: var(--slu-std-ui-color);
     color: var(--color-gray-100);
     font-size: 10px;
     font-weight: 600;
+
+    &:has(img) {
+      background-color: transparent;
+    }
+
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .weg-item-instance-counter-badge {

@@ -13,7 +13,10 @@ use windows::Win32::UI::WindowsAndMessaging::{
 
 use crate::{
     hook::HookManager,
-    modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
+    modules::{
+        apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager, WindowBadges},
+        notifications::wpn_service::WpnService,
+    },
     utils::spawn_named_thread,
     windows_api::{
         WindowEnumerator, WindowsApi,
@@ -128,8 +131,8 @@ impl UserAppsManager {
                     Self::send(UserAppWinEvent::Removed(window.address()));
                 }
             }
-            #[allow(clippy::collapsible_match)]
             WinEvent::ObjectDestroy => {
+                WindowBadges::instance().remove(window.address());
                 if is_interactable {
                     USER_APPS_MANAGER.remove_win(&window);
                     Self::send(UserAppWinEvent::Removed(window.address()));
@@ -167,6 +170,9 @@ impl UserAppsManager {
                 let (relaunch, prevent_pinning) = window.relaunch_info(&umid);
                 data.relaunch = relaunch;
                 data.prevent_pinning = prevent_pinning;
+                data.badge_value = umid
+                    .as_ref()
+                    .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));
                 data.umid = umid.map(|umid| umid.to_string());
 
                 true

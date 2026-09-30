@@ -1,11 +1,13 @@
 use windows::Win32::{
-    Foundation::{LPARAM, POINT, WPARAM},
+    Foundation::{HWND, LPARAM, POINT, WPARAM},
     UI::WindowsAndMessaging::{
         GetCursorPos, HWND_BROADCAST, RegisterWindowMessageW, SendNotifyMessageW,
     },
 };
 
 use windows_core::w;
+
+use crate::modules::apps::application::USER_APPS_MANAGER;
 
 pub struct Util;
 impl Util {
@@ -30,13 +32,37 @@ impl Util {
     /// re-add their icons, in which case it's an implementation error on
     /// their side. These windows that fail also do not re-add their icons
     /// to the Windows taskbar when `explorer.exe` is restarted ordinarily.
-    pub fn refresh_icons() -> crate::Result<()> {
-        log::info!("Refreshing icons by sending `TaskbarCreated` message.");
+    pub fn refresh_tray_icons() -> crate::Result<()> {
+        log::info!("Refreshing tray icons by sending `TaskbarCreated` message.");
         let msg = unsafe { RegisterWindowMessageW(w!("TaskbarCreated")) };
         if msg == 0 {
             return Err("Failed to register message".into());
         }
         unsafe { SendNotifyMessageW(HWND_BROADCAST, msg, WPARAM::default(), LPARAM::default()) }?;
+        Ok(())
+    }
+
+    /// Refreshes the taskbar buttons state (overlay icons/badges, progress, etc.).
+    ///
+    /// Sends `TaskbarButtonCreated` to the already opened windows so they re-apply
+    /// their `ITaskbarList3` state, as ManagedShell does on startup. Only meant to be
+    /// called once, as some apps re-add their thumbbar buttons on this message.
+    ///
+    /// Doesn't work for Electron apps: they don't listen to `TaskbarButtonCreated`, and on
+    /// `TaskbarCreated` they only restore their thumbbar buttons, so their overlay icon is
+    /// only sent again when the app itself changes it.
+    pub fn refresh_taskbar_buttons() -> crate::Result<()> {
+        log::info!("Refreshing taskbar buttons by sending `TaskbarButtonCreated` message.");
+        let msg = unsafe { RegisterWindowMessageW(w!("TaskbarButtonCreated")) };
+        if msg == 0 {
+            return Err("Failed to register message".into());
+        }
+        USER_APPS_MANAGER.interactable_windows.for_each(|w| {
+            // notify (non-blocking) to avoid hanging on unresponsive windows
+            let _ = unsafe {
+                SendNotifyMessageW(HWND(w.hwnd as _), msg, WPARAM::default(), LPARAM::default())
+            };
+        });
         Ok(())
     }
 }

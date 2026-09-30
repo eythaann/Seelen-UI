@@ -6,6 +6,7 @@
 
 - pinnable tray icons.
 - show pinned tray icons in the toolbar.
+- add support for application badge notifications.
 
 ### enhancements
 

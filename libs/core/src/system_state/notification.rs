@@ -370,3 +370,128 @@ pub enum NotificationsMode {
     PriorityOnly,
     AlarmsOnly,
 }
+
+/// Badge notification payload, e.g. `<badge value="19"/>`.
+///
+/// https://learn.microsoft.com/en-us/windows/apps/develop/notifications/badges
+/// https://learn.microsoft.com/en-us/uwp/schemas/tiles/badgeschema/element-badge
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+pub struct Badge {
+    #[serde(rename = "@value")]
+    pub value: BadgeValue,
+}
+
+impl Badge {
+    /// `none` or `0` clear the badge
+    pub fn is_cleared(&self) -> bool {
+        matches!(
+            self.value,
+            BadgeValue::Count(0) | BadgeValue::Glyph(BadgeGlyph::None)
+        )
+    }
+}
+
+/// Serialized as a number or a glyph name, deserialized from a number or a string
+/// (the raw XML attribute is always a string).
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(untagged)]
+pub enum BadgeValue {
+    /// 1 to 99 are shown as is, greater values are shown as "99+"
+    Count(u32),
+    Glyph(BadgeGlyph),
+}
+
+impl BadgeValue {
+    fn from_count(count: u64) -> Self {
+        match count {
+            // a value of 0 is equivalent to the glyph value "none"
+            0 => Self::Glyph(BadgeGlyph::None),
+            count => Self::Count(u32::try_from(count).unwrap_or(u32::MAX)),
+        }
+    }
+
+    fn from_str_value(value: &str) -> Self {
+        match value.trim().parse::<u64>() {
+            Ok(count) => Self::from_count(count),
+            Err(_) => Self::Glyph(BadgeGlyph::from_str_value(value)),
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for BadgeValue {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        struct BadgeValueVisitor;
+
+        impl serde::de::Visitor<'_> for BadgeValueVisitor {
+            type Value = BadgeValue;
+
+            fn expecting(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                f.write_str("a badge count or a badge glyph name")
+            }
+
+            fn visit_u64<E: serde::de::Error>(self, value: u64) -> Result<Self::Value, E> {
+                Ok(BadgeValue::from_count(value))
+            }
+
+            fn visit_i64<E: serde::de::Error>(self, value: i64) -> Result<Self::Value, E> {
+                Ok(BadgeValue::from_count(value.max(0) as u64))
+            }
+
+            fn visit_str<E: serde::de::Error>(self, value: &str) -> Result<Self::Value, E> {
+                Ok(BadgeValue::from_str_value(value))
+            }
+        }
+
+        deserializer.deserialize_any(BadgeValueVisitor)
+    }
+}
+
+/// Non-extensible set of status glyphs provided by the system.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum BadgeGlyph {
+    /// no badge shown
+    None,
+    Activity,
+    Alarm,
+    Alert,
+    Attention,
+    Available,
+    Away,
+    Busy,
+    Error,
+    NewMessage,
+    Paused,
+    Playing,
+    Unavailable,
+    #[serde(other)]
+    Unknown,
+}
+
+impl BadgeGlyph {
+    /// Case insensitive, accepts the XML values (`newMessage`) and the serialized ones (`NewMessage`).
+    fn from_str_value(value: &str) -> Self {
+        match value.trim().to_ascii_lowercase().as_str() {
+            "none" => Self::None,
+            "activity" => Self::Activity,
+            "alarm" => Self::Alarm,
+            "alert" => Self::Alert,
+            "attention" => Self::Attention,
+            "available" => Self::Available,
+            "away" => Self::Away,
+            "busy" => Self::Busy,
+            "error" => Self::Error,
+            "newmessage" => Self::NewMessage,
+            "paused" => Self::Paused,
+            "playing" => Self::Playing,
+            "unavailable" => Self::Unavailable,
+            _ => Self::Unknown,
+        }
+    }
+}

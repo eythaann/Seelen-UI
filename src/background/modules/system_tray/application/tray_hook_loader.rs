@@ -2,11 +2,11 @@ use std::path::{Path, PathBuf};
 
 use windows::{
     Win32::{
-        Foundation::{HMODULE, LPARAM, LRESULT, WPARAM},
+        Foundation::{HMODULE, HWND, LPARAM, LRESULT, WPARAM},
         System::LibraryLoader::{GetProcAddress, LoadLibraryW},
-        UI::WindowsAndMessaging::{HHOOK, SetWindowsHookExW, WH_CALLWNDPROC},
+        UI::WindowsAndMessaging::{GetPropW, HHOOK, SetWindowsHookExW, WH_CALLWNDPROC},
     },
-    core::PCWSTR,
+    core::{PCWSTR, w},
 };
 use windows_core::Owned;
 
@@ -49,6 +49,7 @@ impl TrayHookLoader {
 
         let shell_tray = WindowsApi::find_window(None, None, None, Some("Shell_TrayWnd"))?;
         let (_pid, thread_id) = WindowsApi::window_thread_process_id(shell_tray);
+        Self::log_taskband_info(shell_tray, thread_id);
 
         let hook_handle = unsafe {
             SetWindowsHookExW(
@@ -62,12 +63,30 @@ impl TrayHookLoader {
 
         log::info!("Tray hook DLL loaded and installed successfully");
 
-        Util::refresh_icons().log_error();
+        Util::refresh_tray_icons().log_error();
+        Util::refresh_taskbar_buttons().log_error();
 
         Ok(Self {
             _hook_handle: Some(unsafe { Owned::new(hook_handle) }),
             _dll_handle: Some(dll_handle),
         })
+    }
+
+    /// Diagnostic: the hook is only installed on the `Shell_TrayWnd` thread, so `ITaskbarList3`
+    /// messages sent to the taskband are only captured if both windows share the same thread.
+    fn log_taskband_info(shell_tray: HWND, tray_thread_id: u32) {
+        let taskband = HWND(unsafe { GetPropW(shell_tray, w!("TaskbandHWND")) }.0);
+        if taskband.is_invalid() {
+            log::warn!("TaskbandHWND prop not found on Shell_TrayWnd");
+            return;
+        }
+        let (_pid, taskband_thread_id) = WindowsApi::window_thread_process_id(taskband);
+        log::info!(
+            "TaskbandHWND: {:?}, class: {:?}, same thread as Shell_TrayWnd: {}",
+            taskband,
+            WindowsApi::get_class(taskband),
+            taskband_thread_id == tray_thread_id
+        );
     }
 
     /// Gets the DLL path, copying it to SEELEN_COMMON temp directory to avoid

@@ -50,6 +50,8 @@ pub enum AppMessage {
     OpenUri(String),
     /// System tray change event
     TrayChanged(Win32TrayEvent),
+    /// Taskbar button change event (`ITaskbarList3` calls captured by the hook)
+    TaskbarButtonChanged(Win32TaskbarButtonEvent),
     /// Debug message for logging and diagnostics
     Debug(String),
 }
@@ -166,4 +168,22 @@ pub enum Win32TrayEvent {
     IconAdd { data: IconEventData },
     IconUpdate { data: IconEventData },
     IconRemove { data: IconEventData },
+}
+
+// ========== Taskbar Buttons ==========
+
+/// `ITaskbarList3` calls sent by applications to the taskband, captured by the hook
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(tag = "type")]
+pub enum Win32TaskbarButtonEvent {
+    /// `SetOverlayIcon` icon part, `icon_handle` is None when the overlay was removed.
+    OverlayIconChanged {
+        hwnd: isize,
+        icon_handle: Option<isize>,
+    },
+    /// `SetOverlayIcon` description part (accessibility text, e.g. "3 unread messages").
+    OverlayDescriptionChanged {
+        hwnd: isize,
+        description: Option<String>,
+    },
 }

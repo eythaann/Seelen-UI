@@ -384,6 +384,20 @@ Shared styling for widgets:
 
 - Use `data-skin` attributes for common control styling (buttons, inputs) to avoid class collisions.
 
+## Rust File Layout (Item Order)
+
+Rust files must always declare their items in this order (after the `use` imports):
+
+1. Constants (`const` / `static`)
+2. Main struct, together with the events it emits (event enum + `event_manager!`)
+3. Main struct / events `impl` blocks
+4. Sub structs/enums used by the main struct, top-down (a type goes before the types it uses). Every `impl` goes
+   immediately after its type, and only then the next type: `struct A` > `impl A` > `struct B` > `impl B`.
+5. Utility (free) functions
+6. `#[cfg(test)] mod tests`
+
+Reference: `src/background/modules/notifications/wpn_service.rs`.
+
 ## Rust Types: Tagged Enums (Serde)
 
 Avoid tuple variants for internally tagged enums.

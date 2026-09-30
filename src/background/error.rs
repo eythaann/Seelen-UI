@@ -39,6 +39,7 @@ define_app_errors!(
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
     SerdeXml(quick_xml::de::DeError);
+    Sqlite(rusqlite::Error);
     Utf8(std::string::FromUtf8Error);
     Utf16(std::string::FromUtf16Error);
     CrossbeamRecv(crossbeam_channel::RecvError);

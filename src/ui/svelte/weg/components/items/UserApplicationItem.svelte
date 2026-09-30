@@ -6,10 +6,11 @@
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { windowsState, focused } from "../../state/windows.svelte.ts";
-  import { notifications } from "../../state/getters.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
   import { triggerPreviewWidget } from "../../previewWidget.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
+  import { getBadge } from "../../state/badge.svelte.ts";
+  import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
 
   interface Props {
     item: AppOrFileWegItem;
@@ -19,9 +20,9 @@
   let { item, windows }: Props = $props();
 
   const settings = $derived(settingsState.value as any);
-  const notificationsCount = $derived(
-    notifications.value.filter((n: any) => n.appUmid === item.umid).length,
-  );
+
+  const badge = $derived(getBadge(item, windows));
+
   const itemLabel = $derived(
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,
   );
@@ -99,9 +100,17 @@
     {/if}
   </div>
 
-  {#if notificationsCount > 0}
-    <div class="weg-item-notification-badge" transition:CssHandled>
-      {notificationsCount}
+  {#if badge}
+    <div class="weg-item-badge" transition:CssHandled>
+      {#if badge.type === "count"}
+        {badge.count}
+      {:else if badge.type === "color"}
+        <div class="weg-item-badge-color" style:background-color={badge.color}></div>
+      {:else if badge.type === "icon"}
+        <Icon name={badge.name} />
+      {:else if badge.type === "image"}
+        <img src={badge.src} alt="" />
+      {/if}
     </div>
   {/if}
 
@@ -120,3 +129,10 @@
     ></div>
   {/if}
 </div>
+
+<style>
+  .weg-item-badge-color {
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -162,7 +162,7 @@
     </div>
 
     {#if badgeText}
-      <div class="weg-item-custom-badge">{badgeText}</div>
+      <div class="weg-item-badge">{badgeText}</div>
     {/if}
   </div>
 {/if}

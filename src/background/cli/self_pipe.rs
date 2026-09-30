@@ -8,7 +8,7 @@ use slu_ipc::{
 use crate::{
     cli::{process_app_command, uri::process_uri},
     error::{Result, ResultLogExt},
-    modules::system_tray::SystemTrayManager,
+    modules::{apps::application::WindowBadges, system_tray::SystemTrayManager},
 };
 
 pub struct SelfPipe;
@@ -61,6 +61,9 @@ impl SelfPipe {
             }
             AppMessage::TrayChanged(event) => {
                 SystemTrayManager::handle_tray_event(event);
+            }
+            AppMessage::TaskbarButtonChanged(event) => {
+                WindowBadges::instance().process_event(event);
             }
             AppMessage::Debug(_msg) => {}
         }

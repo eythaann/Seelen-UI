@@ -7,7 +7,11 @@ use seelen_core::system_state::{
     FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
 };
 
-use crate::{utils::get_parts_of_inline_command, windows_api::types::AppUserModelId};
+use crate::{
+    modules::{apps::application::WindowBadges, notifications::wpn_service::WpnService},
+    utils::get_parts_of_inline_command,
+    windows_api::types::AppUserModelId,
+};
 
 use super::Window;
 
@@ -45,6 +49,10 @@ impl Window {
     pub fn to_serializable(self: &Window) -> UserAppWindow {
         let umid = self.app_user_model_id();
         let (relaunch, prevent_pinning) = self.relaunch_info(&umid);
+        let badge = WindowBadges::instance().get(self.address());
+        let badge_value = umid
+            .as_ref()
+            .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));
 
         UserAppWindow {
             hwnd: self.address(),
@@ -61,6 +69,9 @@ impl Window {
             rect: self.inner_rect().ok(),
             last_foreground_at: 0,
             attention: WindowAttention::None,
+            badge_icon_path: badge.as_ref().map(|b| b.icon_path.clone()),
+            badge_updated_at: badge.map_or(0, |b| b.updated_at),
+            badge_value,
         }
     }
 

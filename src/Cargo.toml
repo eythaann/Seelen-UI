@@ -63,6 +63,7 @@ arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }
 quick-xml = { workspace = true, features = ["serialize", "encoding"] }
+rusqlite = { workspace = true, features = ["bundled"] }
 backtrace = { workspace = true }
 owo-colors = { workspace = true }
 rust-i18n = { workspace = true }
