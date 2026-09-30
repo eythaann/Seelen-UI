@@ -5,18 +5,30 @@ import { focused, interactables, widgetStatuses, windowsColors } from "./getters
 
 export { focused, interactables, widgetStatuses, windowsColors };
 
+type WindowColor = UserAppWindowColors["top"][number];
+
+function relativeLuminance({ r, g, b }: WindowColor): number {
+  const toLinear = (channel: number) => {
+    const normalized = channel / 255;
+    return normalized <= 0.03928
+      ? normalized / 12.92
+      : ((normalized + 0.055) / 1.055) ** 2.4;
+  };
+
+  return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+}
+
+function averageLuminance(colors: WindowColor[]): number {
+  if (!colors.length) return 0;
+  return colors.reduce((total, color) => total + relativeLuminance(color), 0) / colors.length;
+}
+
 const widget = Widget.getCurrent();
 
 const _topInteractableWindow = $derived(
   interactables.value
     .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
     .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic),
-);
-
-const _thereIsMaximizedOnBg = $derived(
-  interactables.value.some(
-    (w) => !w.isIconic && w.isZoomed && w.monitor === widget.decoded.monitorId,
-  ),
 );
 
 const _isTbOverlapped = $derived.by(() => {
@@ -40,14 +52,20 @@ const _isTbOverlapped = $derived.by(() => {
   return false;
 });
 
-const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
+const _currentMonitorMaximizedWindow = $derived.by(() => {
   const monitorId = widget.decoded.monitorId;
-  const maximized = interactables.value
+  return interactables.value
     .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
     .find((w) => !w.isIconic && w.isZoomed && w.monitor === monitorId);
+});
+
+const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | null => {
+  const maximized = _currentMonitorMaximizedWindow;
   if (!maximized) return null;
   return windowsColors.value[maximized.hwnd] ?? null;
 });
+
+const _thereIsMaximizedOnBg = $derived(_currentMonitorMaximizedColors !== null);
 
 class WindowsState {
   get topInteractableWindow() {
@@ -73,6 +91,8 @@ $effect.root(() => {
     root.dataset.thereIsMaximizedOnBg = `${!!colors}`;
 
     if (!colors) {
+      // The non-maximized theme uses a light glass surface by default.
+      root.dataset.toolbarForeground = "dark";
       root.style.removeProperty("--window-gradient");
       return;
     }
@@ -86,6 +106,9 @@ $effect.root(() => {
           .map((c, i) => `${toRgba(c)} ${((i / (stops.length - 1)) * 100).toFixed(1)}%`)
           .join(",")
       })`;
+
+    const stops = settingsState.position === FancyToolbarSide.Top ? colors.top : colors.bottom;
+    root.dataset.toolbarForeground = averageLuminance(stops) >= 0.45 ? "dark" : "light";
 
     if (settingsState.position === FancyToolbarSide.Top) {
       root.style.setProperty("--window-gradient", toGradient(colors.top));
