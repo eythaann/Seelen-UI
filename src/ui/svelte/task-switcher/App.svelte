@@ -2,6 +2,7 @@
   import { Widget } from "@seelen-ui/lib";
   import { globalState } from "./state/index.svelte.ts";
   import TaskItem from "./components/TaskItem.svelte";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
   $effect(() => {
     Widget.self.ready({ show: false });
@@ -14,10 +15,11 @@
     }
 
     const { rect, scaleFactor } = monitor;
+    const relativeRect = monitors.calculateDesktopRelativeRect(rect);
 
     return {
-      x: rect.left,
-      y: rect.top,
+      x: relativeRect.left,
+      y: relativeRect.top,
       // we reduce the size and later scale it, to get the correct display by dpi aware
       width: (rect.right - rect.left) / scaleFactor,
       height: (rect.bottom - rect.top) / scaleFactor,

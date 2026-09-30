@@ -6,6 +6,7 @@
   import { t } from "../../i18n/index.ts";
   import { extractAccentColorFromSrc } from "../accentExtractor.ts";
   import { convertFileSrc } from "@tauri-apps/api/core";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
   let { monitor, extended = false }: { monitor: PhysicalMonitor; extended?: boolean } = $props();
 
@@ -107,14 +108,14 @@
     });
   });
 
-  const left = $derived(extended ? "0" : `${monitor.rect.left}px`);
-  const top = $derived(extended ? "0" : `${monitor.rect.top}px`);
-
+  const relativeRect = $derived(monitors.calculateDesktopRelativeRect(monitor.rect));
+  const left = $derived(extended ? "0" : `${relativeRect.left}px`);
+  const top = $derived(extended ? "0" : `${relativeRect.top}px`);
   const width = $derived(
-    extended ? "100%" : `${(monitor.rect.right - monitor.rect.left) / monitor.scaleFactor}px`,
+    extended ? "100%" : `${(relativeRect.right - relativeRect.left) / monitor.scaleFactor}px`,
   );
   const height = $derived(
-    extended ? "100%" : `${(monitor.rect.bottom - monitor.rect.top) / monitor.scaleFactor}px`,
+    extended ? "100%" : `${(relativeRect.bottom - relativeRect.top) / monitor.scaleFactor}px`,
   );
 </script>
 

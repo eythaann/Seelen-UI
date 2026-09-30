@@ -1,9 +1,10 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { debounce } from "lodash";
 import z from "zod";
-import { focusedWinId, monitors, previews, settings, widget, windows } from "./getters.svelte.ts";
+import { focusedWinId, previews, settings, widget, windows } from "./getters.svelte.ts";
+import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
-export { focusedWinId, monitors, previews, settings, widget, windows };
+export { focusedWinId, previews, settings, widget, windows };
 
 const WidgetConfigSchema = z.object({
   onlyOnActiveMonitor: z.boolean(),
@@ -34,29 +35,18 @@ $effect.root(() => {
   });
 });
 
-let desktopRect = $derived.by(() => {
-  let rect = { top: 0, left: 0, right: 0, bottom: 0 };
-  for (const monitor of monitors.value) {
-    rect.left = Math.min(rect.left, monitor.rect.left);
-    rect.top = Math.min(rect.top, monitor.rect.top);
-    rect.right = Math.max(rect.right, monitor.rect.right);
-    rect.bottom = Math.max(rect.bottom, monitor.rect.bottom);
-  }
-  return rect;
-});
-
 // Monitor under the cursor position that triggered the switcher, falling back to primary
 let activeMonitor = $derived.by(() => {
   const pos = desiredPosition;
   const found = pos &&
-    monitors.value.find(
+    monitors.all.find(
       (m) =>
         m.rect.left <= pos.x &&
         pos.x < m.rect.right &&
         m.rect.top <= pos.y &&
         pos.y < m.rect.bottom,
     );
-  return found || monitors.value.find((m) => m.isPrimary) || monitors.value[0];
+  return found || monitors.primaryMonitor;
 });
 
 // Windows shown in the switcher, optionally restricted to the active monitor
@@ -68,26 +58,10 @@ let filteredWindows = $derived.by(() => {
   return windows.value.filter((w) => w.monitor === monitor.id);
 });
 
-let relativeActiveMonitor = $derived.by(() => {
-  const monitor = activeMonitor;
-  if (!monitor) {
-    return null;
-  }
-  return {
-    ...monitor,
-    rect: {
-      top: monitor.rect.top - desktopRect.top,
-      left: monitor.rect.left - desktopRect.left,
-      right: monitor.rect.right - desktopRect.left,
-      bottom: monitor.rect.bottom - desktopRect.top,
-    },
-  };
-});
-
 $effect.root(() => {
   widget.attachPosition();
   $effect(() => {
-    widget.setPosition(desktopRect);
+    widget.setPosition(monitors.desktopRect);
   });
 });
 
@@ -119,7 +93,7 @@ class State {
   }
 
   get activeMonitor() {
-    return relativeActiveMonitor;
+    return activeMonitor;
   }
 }
 

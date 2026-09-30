@@ -32,7 +32,10 @@
  */
 export function stableUUID(key: string): string {
   // cyrb128: https://github.com/bryc/code/blob/master/jshash/PRNGs.md
-  let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+  let h1 = 1779033703,
+    h2 = 3144134277,
+    h3 = 1013904242,
+    h4 = 2773480762;
   for (let i = 0; i < key.length; i++) {
     const k = key.charCodeAt(i);
     h1 = h2 ^ Math.imul(h1 ^ k, 597399067);
@@ -112,5 +115,20 @@ export function freezePageByLoop() {
   console.debug("Attempting to freeze the page with an infinite loop...");
   while (true) {
     // An empty loop is sufficient to block the main thread
+  }
+}
+
+const UNINITIALIZED = Symbol();
+export class LazyCell<T> {
+  private _value: T | typeof UNINITIALIZED = UNINITIALIZED;
+
+  constructor(private initializer: () => T) {}
+
+  get value(): T {
+    if (this._value === UNINITIALIZED) {
+      this._value = this.initializer();
+    }
+
+    return this._value as T;
   }
 }

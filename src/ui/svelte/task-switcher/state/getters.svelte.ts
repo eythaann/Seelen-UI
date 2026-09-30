@@ -1,5 +1,6 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
 export const widget = Widget.getCurrent();
 
@@ -22,9 +23,6 @@ export const focusedWinId = lazyRune(async () => (await invoke(SeelenCommand.Get
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedWinId.value = e.payload.hwnd;
 });
-
-export const monitors = lazyRune(() => invoke(SeelenCommand.SystemGetMonitors));
-subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
 await Promise.all([
   settings.init(),

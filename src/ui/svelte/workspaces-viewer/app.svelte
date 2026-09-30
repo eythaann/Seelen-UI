@@ -1,7 +1,8 @@
 <script lang="ts">
   import Monitor from "./app/Monitor.svelte";
-  import { state } from "./state.svelte";
+  import "./state.svelte";
   import { Widget } from "@seelen-ui/lib";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
   $effect(() => {
     Widget.self.ready();
@@ -23,7 +24,7 @@
     }
   }}
 >
-  {#each state.monitors as monitor}
+  {#each monitors.all as monitor (monitor.id)}
     <Monitor {monitor} />
   {/each}
 </div>

@@ -2,22 +2,19 @@
   import { MultimonitorBehaviour } from "@seelen-ui/lib/types";
   import { gState } from "../../state.svelte.ts";
   import Monitor from "./Monitor.svelte";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
   const isExtendMode = $derived(
     gState.settings.multimonitorBehaviour === MultimonitorBehaviour.Extend,
   );
-
-  const primaryMonitor = $derived(
-    gState.relativeMonitors.find((m) => m.isPrimary) ?? gState.relativeMonitors[0],
-  );
 </script>
 
 {#if isExtendMode}
-  {#if primaryMonitor}
-    <Monitor monitor={primaryMonitor} extended />
+  {#if monitors.primaryMonitor}
+    <Monitor monitor={monitors.primaryMonitor} extended />
   {/if}
 {:else}
-  {#each gState.relativeMonitors as monitor (monitor.id)}
+  {#each monitors.all as monitor (monitor.id)}
     <Monitor {monitor} />
   {/each}
 {/if}

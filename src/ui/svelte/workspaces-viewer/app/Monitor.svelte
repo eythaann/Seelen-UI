@@ -9,6 +9,7 @@
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { onDestroy } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
   const { monitor } = $props<{ monitor: PhysicalMonitor }>();
 
@@ -16,8 +17,9 @@
   const manager = createDragDropManager();
   onDestroy(() => manager.destroy());
 
-  const width = $derived((monitor.rect.right - monitor.rect.left) / monitor.scaleFactor);
-  const height = $derived((monitor.rect.bottom - monitor.rect.top) / monitor.scaleFactor);
+  const relativeRect = $derived(monitors.calculateDesktopRelativeRect(monitor.rect));
+  const width = $derived((relativeRect.right - relativeRect.left) / monitor.scaleFactor);
+  const height = $derived((relativeRect.bottom - relativeRect.top) / monitor.scaleFactor);
 
   const vdMonitor = $derived(store.workspaces.monitors[monitor.id]);
   const activeWorkspaceId = $derived(vdMonitor?.active_workspace);
@@ -59,8 +61,8 @@
   <div
     class="monitor"
     style:position="fixed"
-    style:left={monitor.rect.left + "px"}
-    style:top={monitor.rect.top + "px"}
+    style:left={relativeRect.left + "px"}
+    style:top={relativeRect.top + "px"}
     style:width={width + "px"}
     style:height={height + "px"}
     style:transform={`scale(${monitor.scaleFactor})`}

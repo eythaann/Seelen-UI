@@ -7,6 +7,7 @@
   import { Widget } from "@seelen-ui/lib";
   import { t } from "./i18n";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
+  import { monitors } from "libs/ui/svelte/runes/monitors.svelte";
 
   onMount(() => {
     Widget.getCurrent().ready();
@@ -17,17 +18,16 @@
   }
 
   const menu = $derived.by(() => {
-    if (!globalState.primaryMonitor) {
+    if (!monitors.primaryMonitor) {
       return null;
     }
 
-    const {
-      primaryMonitor: { rect, scaleFactor },
-    } = globalState;
+    const { rect, scaleFactor } = monitors.primaryMonitor;
+    const relativeRect = monitors.calculateDesktopRelativeRect(rect);
 
     return {
-      x: rect.left,
-      y: rect.top,
+      x: relativeRect.left,
+      y: relativeRect.top,
       // we reduce the size and later scale it, to get the correct display by dpi aware
       width: (rect.right - rect.left) / scaleFactor,
       height: (rect.bottom - rect.top) / scaleFactor,
