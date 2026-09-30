@@ -95,3 +95,6 @@ windows-core = "0.62.2"
 winreg = "0.55.0"
 time = "0.3.55"
 scc = "3.8.4"
+
+[patch.crates-io]
+tao = { git = "https://github.com/eythaann/tao", branch = "dev" }

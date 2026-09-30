@@ -23,6 +23,7 @@
 ### fix
 
 - network/hotspot api failing on windows 10.
+- non focusable widgets (like the tooltip) stealing the focus when shown.
 - download wallpapers without thumbnail failing.
 - possible deadlock on startup when an internal event was dispatched while its module was still initializing.
 - creating a new workspace leaving the windows of the previous workspace visible.

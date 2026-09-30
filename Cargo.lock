@@ -6157,8 +6157,7 @@ dependencies = [
 [[package]]
 name = "tao"
 version = "0.37.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f37f381f4e048e6cdf038b5705f8cf14ad108279d46eb968140a7b291aba9400"
+source = "git+https://github.com/eythaann/tao?branch=dev#99858075a2302263d8979a7b4ae39771b213d4ed"
 dependencies = [
  "bitflags 2.13.2",
  "block2",
@@ -6185,7 +6184,7 @@ dependencies = [
  "parking_lot",
  "percent-encoding",
  "raw-window-handle",
- "tao-macros",
+ "tao-macros 0.1.4 (git+https://github.com/eythaann/tao?branch=dev)",
  "unicode-segmentation",
  "url",
  "windows 0.62.2",
@@ -6199,6 +6198,16 @@ name = "tao-macros"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5f7eeb6d99155545da6150a1795945f16ac9c178deb2a5f2e74d776107bd5849"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
+]
+
+[[package]]
+name = "tao-macros"
+version = "0.1.4"
+source = "git+https://github.com/eythaann/tao?branch=dev#99858075a2302263d8979a7b4ae39771b213d4ed"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -8133,7 +8142,7 @@ dependencies = [
  "raw-window-handle",
  "sha2",
  "soup3",
- "tao-macros",
+ "tao-macros 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror 2.0.21",
  "url",
  "webkit2gtk",

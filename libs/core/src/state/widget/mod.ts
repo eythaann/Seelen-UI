@@ -24,7 +24,6 @@ import { OPTIMISTIC_FRAME } from "./abstractions/3_autosize.ts";
 interface WidgetInternalState {
   initialized: boolean;
   ready: boolean;
-  firstFocus: boolean;
 }
 
 /**
@@ -60,7 +59,6 @@ export class Widget extends WidgetBasics {
   private runtimeState: WidgetInternalState = {
     initialized: false,
     ready: false,
-    firstFocus: true,
   };
 
   private constructor(widget: IWidget) {
@@ -441,12 +439,11 @@ export class Widget extends WidgetBasics {
     });
   }
 
-  /** Will force foreground the widget */
+  /**
+   * Will force foreground the widget.\
+   * No need to focus the webview itself, wry moves the focus into it on the window `WM_SETFOCUS`.
+   */
   public async focus(): Promise<void> {
-    if (this.runtimeState.firstFocus) {
-      await this.webview.setFocus();
-      this.runtimeState.firstFocus = false;
-    }
     await invoke(SeelenCommand.RequestFocus, { hwnd: this.windowId }).catch(() => {});
   }
 }
