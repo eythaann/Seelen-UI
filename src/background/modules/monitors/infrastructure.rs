@@ -6,7 +6,12 @@ use seelen_core::{
 };
 
 use crate::{
-    app::emit_to_webviews, error::Result, modules::monitors::MonitorManager,
+    app::emit_to_webviews,
+    error::Result,
+    modules::monitors::{
+        MonitorManager,
+        brightness::{BrightnessManager, BrightnessManagerEvent},
+    },
     windows_api::MonitorEnumerator,
 };
 
@@ -18,17 +23,35 @@ fn get_monitor_manager() -> &'static MonitorManager {
 
         MonitorManager::subscribe(|event| {
             log::trace!("MonitorManagerEvent::{:?}", event);
-            let monitors = MonitorManager::instance().get_cached_data();
+            let monitors = get_monitors();
             log::debug!("{monitors:#?}");
             emit_to_webviews(SeelenEvent::SystemMonitorsChanged, monitors);
+        });
+
+        BrightnessManager::subscribe(|event| match event {
+            BrightnessManagerEvent::Changed => {
+                emit_to_webviews(SeelenEvent::SystemMonitorsChanged, get_monitors());
+            }
         });
     });
     MonitorManager::instance()
 }
 
+/// The connected monitors together with their brightness, which is tracked apart from the
+/// display topology by `BrightnessManager`.
+fn get_monitors() -> Vec<PhysicalMonitor> {
+    let brightness = BrightnessManager::instance();
+    let mut monitors = MonitorManager::instance().get_cached_data();
+    for monitor in &mut monitors {
+        monitor.brightness = brightness.get_brightness(&monitor.id);
+    }
+    monitors
+}
+
 impl crate::tauri_handlers::Handlers {
     pub fn get_connected_monitors() -> Vec<PhysicalMonitor> {
-        get_monitor_manager().get_cached_data()
+        get_monitor_manager();
+        get_monitors()
     }
 
     pub fn set_monitor_hdr(id: MonitorId, state: bool) -> Result<()> {
@@ -37,5 +60,10 @@ impl crate::tauri_handlers::Handlers {
             .find(|m| matches!(m.get_stable_info(), Ok((mid, _)) if mid == id))
             .ok_or("Monitor not found")?;
         monitor.set_hdr_state(state)
+    }
+
+    pub fn set_monitor_brightness(id: MonitorId, brightness: u8) -> Result<()> {
+        get_monitor_manager();
+        BrightnessManager::instance().set_brightness(&id, brightness)
     }
 }

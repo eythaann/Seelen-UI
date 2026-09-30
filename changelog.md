@@ -2,6 +2,12 @@
 
 ## [2.8.7-dev]
 
+### breaking changes
+
+- monitor brightness is now part of `PhysicalMonitor` (`brightness`, 0-100 or null when not supported), removing the
+  `GetAllMonitorsBrightness` command and the `SystemMonitorsBrightnessChanged` event. `SetMonitorBrightness` now takes
+  the monitor id and a percentage.
+
 ### features
 
 - pinnable tray icons.

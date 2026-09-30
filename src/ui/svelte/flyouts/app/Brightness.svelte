@@ -3,25 +3,25 @@
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { brightnessIcon } from "libs/ui/utils";
   import { throttle } from "lodash";
-  import type { MonitorBrightness } from "@seelen-ui/lib/types";
+  import type { PhysicalMonitor } from "@seelen-ui/lib/types";
 
   interface Props {
-    brightness: MonitorBrightness;
+    monitor: PhysicalMonitor;
     orientation: string;
   }
 
-  let { brightness, orientation }: Props = $props();
+  let { monitor, orientation }: Props = $props();
 
   // svelte-ignore state_referenced_locally
-  let currentBrightness = $state(brightness.currentBrightness);
+  let currentBrightness = $state(monitor.brightness ?? 0);
   let isDragging = $state(false);
 
   $effect(() => {
-    if (!isDragging) currentBrightness = brightness.currentBrightness;
+    if (!isDragging) currentBrightness = monitor.brightness ?? 0;
   });
 
-  const setBrightnessThrottled = throttle((instanceName: string, level: number) => {
-    invoke(SeelenCommand.SetMonitorBrightness, { instanceName, level });
+  const setBrightnessThrottled = throttle((id: string, brightness: number) => {
+    invoke(SeelenCommand.SetMonitorBrightness, { id, brightness });
   }, 100);
 </script>
 
@@ -36,10 +36,10 @@
     onpointerup={() => (isDragging = false)}
     oninput={(e) => {
       currentBrightness = Number(e.currentTarget.value);
-      setBrightnessThrottled(brightness.instanceName, currentBrightness);
+      setBrightnessThrottled(monitor.id, currentBrightness);
     }}
-    min={brightness.availableLevels[0]}
-    max={brightness.availableLevels[brightness.levels]}
+    min={0}
+    max={100}
   />
   <span class="flyout-value-label">{Math.round(currentBrightness)}%</span>
 </div>

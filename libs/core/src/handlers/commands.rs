@@ -221,6 +221,9 @@ slu_commands_declaration! {
     SetMonitorHdr =
         @fallible()
         set_monitor_hdr(id: MonitorId, state: bool),
+    SetMonitorBrightness =
+        @fallible()
+        set_monitor_brightness(id: MonitorId, brightness: u8),
     SystemGetColors =
         @fallible()
         get_system_colors() -> UIColors,
@@ -406,14 +409,6 @@ slu_commands_declaration! {
     GetMediaWaveform =
         @fallible()
         get_media_waveform() -> AudioWaveform,
-
-    // Brightness - Multi-monitor support
-    GetAllMonitorsBrightness =
-        @fallible()
-        get_all_monitors_brightness() -> Vec<MonitorBrightness>,
-    SetMonitorBrightness =
-        @fallible()
-        set_monitor_brightness(instance_name: String, level: u8),
 
     // Power
     GetPowerStatus = get_power_status() -> PowerStatus,

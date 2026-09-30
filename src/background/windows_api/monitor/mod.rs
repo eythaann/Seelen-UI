@@ -126,33 +126,39 @@ impl Monitor {
         let (display_config, indices) = self.matching_paths()?;
         for idx in indices {
             let path = &display_config.paths[idx];
-            unsafe {
-                // Query the DisplayConfig target device name for the friendly name.
-                let mut target_name = DISPLAYCONFIG_TARGET_DEVICE_NAME {
-                    header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
-                        r#type: DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
-                        size: std::mem::size_of::<DISPLAYCONFIG_TARGET_DEVICE_NAME>() as u32,
-                        adapterId: path.targetInfo.adapterId,
-                        id: path.targetInfo.id,
-                    },
-                    ..Default::default()
-                };
-                let _ = DisplayConfigGetDeviceInfo(&mut target_name.header);
-                let friendly_name =
-                    WindowsString::from_slice(&target_name.monitorFriendlyDeviceName).to_string();
+            // Query the DisplayConfig target device name for the friendly name.
+            let target_name = target_device_name(path);
+            let friendly_name =
+                WindowsString::from_slice(&target_name.monitorFriendlyDeviceName).to_string();
 
-                // Try WinRT lookup — virtual paths won't match and we'll skip them.
-                if let Ok(result) = winrt_stable_id_for_target(
-                    path.targetInfo.adapterId.LowPart,
-                    path.targetInfo.adapterId.HighPart,
-                    path.targetInfo.id,
-                    friendly_name,
-                ) {
-                    return Ok(result);
-                }
+            // Try WinRT lookup — virtual paths won't match and we'll skip them.
+            if let Ok(result) = winrt_stable_id_for_target(
+                path.targetInfo.adapterId.LowPart,
+                path.targetInfo.adapterId.HighPart,
+                path.targetInfo.id,
+                friendly_name,
+            ) {
+                return Ok(result);
             }
         }
         Err("No WinRT DisplayTarget found for HMONITOR".into())
+    }
+
+    /// Device interface paths of every target scanning out this monitor, e.g.
+    /// `\\?\DISPLAY#BOE0900#4&10fd3ab1&0&UID265988#{e6f07b5f-ee97-4a90-b076-33f57bf4eaa7}`.
+    ///
+    /// Unlike `get_stable_info` this doesn't stop at the first target WinRT knows about, so
+    /// it also covers the other panels of a cloned group and the paths WinRT doesn't surface.
+    pub fn target_device_paths(&self) -> Result<Vec<String>> {
+        let (display_config, indices) = self.matching_paths()?;
+        Ok(indices
+            .into_iter()
+            .map(|idx| {
+                let target_name = target_device_name(&display_config.paths[idx]);
+                WindowsString::from_slice(&target_name.monitorDevicePath).to_string()
+            })
+            .filter(|path| !path.is_empty())
+            .collect())
     }
 
     /// Returns the HDR / advanced-color state of this monitor.
@@ -356,6 +362,23 @@ impl DisplayConfigAndModes {
             Ok(Self { paths, modes })
         }
     }
+}
+
+/// Queries the target (monitor) names of a display path. On failure the names are left empty.
+fn target_device_name(path: &DISPLAYCONFIG_PATH_INFO) -> DISPLAYCONFIG_TARGET_DEVICE_NAME {
+    let mut target_name = DISPLAYCONFIG_TARGET_DEVICE_NAME {
+        header: DISPLAYCONFIG_DEVICE_INFO_HEADER {
+            r#type: DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME,
+            size: std::mem::size_of::<DISPLAYCONFIG_TARGET_DEVICE_NAME>() as u32,
+            adapterId: path.targetInfo.adapterId,
+            id: path.targetInfo.id,
+        },
+        ..Default::default()
+    };
+    unsafe {
+        let _ = DisplayConfigGetDeviceInfo(&mut target_name.header);
+    }
+    target_name
 }
 
 /// Looks up the WinRT `DisplayTarget` matching the given adapter LUID and target ID,

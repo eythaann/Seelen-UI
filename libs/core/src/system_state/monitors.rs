@@ -15,25 +15,9 @@ pub struct PhysicalMonitor {
     pub is_primary: bool,
     /// `None` when the monitor does not support HDR / advanced color.
     pub hdr: Option<bool>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-pub struct Brightness {
-    pub min: u32,
-    pub max: u32,
-    pub current: u32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-#[serde(rename_all = "camelCase")]
-pub struct MonitorBrightness {
-    pub instance_name: String,
-    pub current_brightness: u8,
-    pub levels: u32,
-    pub available_levels: Vec<u8>,
-    pub active: bool,
+    /// Brightness as a percentage (0-100), `None` when the monitor does not support
+    /// brightness control.
+    pub brightness: Option<u8>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]

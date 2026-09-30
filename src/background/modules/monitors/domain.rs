@@ -13,6 +13,8 @@ impl TryFrom<Monitor> for PhysicalMonitor {
             scale_factor: m.scale_factor()?,
             is_primary: m.is_primary(),
             hdr: m.hdr_state().unwrap_or(None),
+            // tracked apart by `BrightnessManager`, filled in when exposing the monitors
+            brightness: None,
         })
     }
 }

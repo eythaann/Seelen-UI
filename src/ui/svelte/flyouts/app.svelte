@@ -56,7 +56,15 @@
   let isDnd = $derived(gState.notificationsMode !== NotificationsMode.All);
   let volume = $derived(output?.volume || 0);
   let playingTitle = $derived(recomendedPlayer?.title);
-  let brightnessLevel = $derived(gState.brightness?.currentBrightness);
+  let brightnessLevels = $derived(
+    new Map(RendererState.all.filter((m) => m.brightness != null).map((m) => [m.id, m.brightness])),
+  );
+  // the monitor whose brightness changed last
+  let brightnessMonitorId = $state<string | null>(null);
+  let brightnessMonitor = $derived.by(() => {
+    const monitor = RendererState.all.find((m) => m.id === brightnessMonitorId);
+    return monitor?.brightness != null ? monitor : null;
+  });
   let activeWorkspace = $derived(vd?.active_workspace);
   let shortcutsPaused = $derived(gState.shortcutsPaused);
 
@@ -64,7 +72,7 @@
   const prev = {
     volume,
     playingTitle,
-    brightnessLevel,
+    brightnessLevels,
     activeWorkspace,
     notificationId,
     shortcutsPaused,
@@ -100,12 +108,13 @@
       somethingChanged = true;
     }
 
-    // Guard with `gState.brightness` so we never show an empty flyout when brightness is unavailable.
-    if (
-      ConfigState.config.showBrightnessChange &&
-      prev.brightnessLevel !== brightnessLevel &&
-      gState.brightness
-    ) {
+    // Only monitors already known count, so a monitor being connected (or its brightness
+    // becoming available) doesn't show the flyout.
+    const changedBrightness = [...brightnessLevels].find(
+      ([id, level]) => prev.brightnessLevels.has(id) && prev.brightnessLevels.get(id) !== level,
+    );
+    if (ConfigState.config.showBrightnessChange && changedBrightness) {
+      brightnessMonitorId = changedBrightness[0];
       lastChanged = "brightness";
       somethingChanged = true;
     }
@@ -153,7 +162,7 @@
 
     prev.volume = volume;
     prev.playingTitle = playingTitle;
-    prev.brightnessLevel = brightnessLevel;
+    prev.brightnessLevels = brightnessLevels;
     prev.activeWorkspace = activeWorkspace;
     prev.notificationId = notificationId;
     prev.shortcutsPaused = shortcutsPaused;
@@ -177,8 +186,8 @@
     <MediaDevices {output} {orientation} />
   {/if}
 
-  {#if lastChanged === "brightness" && gState.brightness}
-    <Brightness brightness={gState.brightness} {orientation} />
+  {#if lastChanged === "brightness" && brightnessMonitor}
+    <Brightness monitor={brightnessMonitor} {orientation} />
   {/if}
 
   {#if lastChanged === "mediaPlaying" && recomendedPlayer}

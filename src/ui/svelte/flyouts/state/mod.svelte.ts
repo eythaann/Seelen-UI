@@ -13,9 +13,6 @@ subscribe(SeelenEvent.MediaDevices, mediaDevices.setByPayload);
 let mediaPlaying = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
 subscribe(SeelenEvent.MediaSessions, mediaPlaying.setByPayload);
 
-let brightness = lazyRune(() => invoke(SeelenCommand.GetAllMonitorsBrightness));
-subscribe(SeelenEvent.SystemMonitorsBrightnessChanged, brightness.setByPayload);
-
 let workspaces = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
 subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 
@@ -28,7 +25,6 @@ subscribe(SeelenEvent.NotificationsModeChanged, notificationsMode.setByPayload);
 await Promise.all([
   mediaDevices.init(),
   mediaPlaying.init(),
-  brightness.init(),
   workspaces.init(),
   notifications.init(),
   notificationsMode.init(),
@@ -43,9 +39,6 @@ export const state = {
   },
   get mediaPlaying() {
     return mediaPlaying.value;
-  },
-  get brightness() {
-    return brightness.value[0] || null;
   },
   get workspaces() {
     return workspaces.value;

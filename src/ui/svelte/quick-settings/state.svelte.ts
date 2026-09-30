@@ -14,9 +14,6 @@ $effect.root(() => {
 });
 
 // Initialize lazy signals
-const brightness = lazyRune(() => invoke(SeelenCommand.GetAllMonitorsBrightness));
-subscribe(SeelenEvent.SystemMonitorsBrightnessChanged, brightness.setByPayload);
-
 const mediaDevices = lazyRune(async () => {
   const [inputs, outputs] = await invoke(SeelenCommand.GetMediaDevices);
   return { inputs, outputs };
@@ -40,7 +37,6 @@ subscribe(SeelenEvent.DarkModeChanged, darkMode.setByPayload);
 const nightLightEnabled = lazyRune(() => invoke(SeelenCommand.SystemGetNightLightEnabled));
 
 await Promise.all([
-  brightness.init(),
   mediaDevices.init(),
   radios.init(),
   hotspot.init(),
@@ -50,10 +46,6 @@ await Promise.all([
 ]);
 
 class State {
-  get brightness() {
-    return brightness.value;
-  }
-
   get mediaInputs(): MediaDevice[] {
     return mediaDevices.value.inputs;
   }
