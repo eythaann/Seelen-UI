@@ -9,9 +9,10 @@
     module: ToolbarItem;
     index: number;
     pluginId?: string;
+    placement: string;
   }
 
-  let { module, index, pluginId }: Props = $props();
+  let { module, index, pluginId, placement }: Props = $props();
 
   const sortable = createSortable({
     get id() {
@@ -27,4 +28,4 @@
   });
 </script>
 
-<Item {module} {sortable} {pluginId} />
+<Item {module} {sortable} {pluginId} {placement} />

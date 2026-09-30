@@ -32,9 +32,10 @@
     module: ToolbarItem;
     sortable?: ReturnType<typeof createSortable> | null;
     pluginId?: string;
+    placement: string;
   }
 
-  let { module: self, sortable = null, pluginId }: Props = $props();
+  let { module: self, sortable = null, pluginId, placement }: Props = $props();
 
   const noopAttach = () => {};
 
@@ -77,7 +78,8 @@
   const scope = $derived.by(() => ({
     ..._scopeResult.data,
     ...fetchedData,
-    position: settingsState.position,
+    self: { placement },
+    toolbar: { position: settingsState.position },
     t: (...args: [string, Record<string, string>]) => $t(...args),
   }));
 

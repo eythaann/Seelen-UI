@@ -20,7 +20,7 @@ ctx.lineWidth = lineWidth;
 // the popup opens away from the screen edge the dock is docked to,
 // so the chevron points in that same direction.
 ctx.beginPath();
-switch (position) {
+switch (dock.position) {
   case "Top":
     ctx.moveTo(cx - size, cy - size / 2);
     ctx.lineTo(cx, cy + size / 2);

@@ -28,19 +28,17 @@
   style={styleString}
   onclick={(e) => {
     if (onClickExec) {
-      e.stopPropagation();
       evalActionSanboxed(parentId, onClickExec, {});
     }
   }}
   onauxclick={(e) => {
     if (onAuxClickExec) {
-      e.stopPropagation();
       evalActionSanboxed(parentId, onAuxClickExec, {});
     }
   }}
   oncontextmenu={(e) => {
     if (onContextMenuExec) {
-      e.stopPropagation();
+      e.stopPropagation(); // avoid opening the context menu of the module/item
       evalActionSanboxed(parentId, onContextMenuExec, {});
     }
   }}

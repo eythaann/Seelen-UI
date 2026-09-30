@@ -203,6 +203,13 @@
     }
     return entry;
   }
+
+  function resolveOverlayPlacement(sourceId: string) {
+    for (const placement of ["left", "center", "right"] as const) {
+      if (groups[placement].some((i) => matchIds(i, sourceId))) return placement;
+    }
+    return "center";
+  }
 </script>
 
 <div
@@ -223,15 +230,15 @@
     onDragOver={handleDragOver}
     onDragEnd={handleDragEnd}
   >
-    <ItemsGroup id="left" items={groups.left} {itemIndexById} />
-    <ItemsGroup id="center" items={groups.center} {itemIndexById} />
-    <ItemsGroup id="right" items={groups.right} {itemIndexById} />
+    <ItemsGroup placement="left" items={groups.left} {itemIndexById} />
+    <ItemsGroup placement="center" items={groups.center} {itemIndexById} />
+    <ItemsGroup placement="right" items={groups.right} {itemIndexById} />
 
     <DragOverlay>
       {#snippet children(source)}
         {@const module = resolveOverlayModule(source.id as string)}
         {#if module}
-          <Item {module} />
+          <Item {module} placement={resolveOverlayPlacement(source.id as string)} />
         {/if}
       {/snippet}
     </DragOverlay>

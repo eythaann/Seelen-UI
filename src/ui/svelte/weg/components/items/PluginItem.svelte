@@ -48,7 +48,7 @@
   const scopeResult = $derived(resolveScopes(payload.scopes, { userSourceName }));
   const scope = $derived({
     ...scopeResult.data,
-    position: settingsState.position,
+    dock: { position: settingsState.position },
     t: (...args: [string, Record<string, string>]) => $t(...args),
   });
 
