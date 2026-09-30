@@ -71,7 +71,7 @@ slu-ipc = { path = "libs/slu-ipc" }
 slu-macros = { path = "libs/slu-macros" }
 slu-utils = { path = "libs/utils" }
 positioning = { path = "libs/positioning" }
-sysinfo = "0.38.3"
+sysinfo = "0.39.6"
 tauri = "2.12.0"
 tauri-build = "2.7.0"
 tauri-plugin-dialog = "2.8.0"
