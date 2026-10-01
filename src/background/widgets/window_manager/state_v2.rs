@@ -12,7 +12,7 @@ use seelen_core::{
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
 };
-use windows::Win32::UI::WindowsAndMessaging::SW_FORCEMINIMIZE;
+use windows::Win32::UI::WindowsAndMessaging::{HWND_TOP, SW_FORCEMINIMIZE, SW_SHOWNOACTIVATE};
 
 use crate::{
     app::emit_to_webviews,
@@ -29,7 +29,7 @@ use crate::{
         cli::{Axis, Direction, StepWay},
         handler::set_app_window_position,
     },
-    windows_api::{monitor::Monitor, window::Window},
+    windows_api::{WindowsApi, monitor::Monitor, window::Window},
 };
 
 pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
@@ -700,7 +700,18 @@ impl TwmState {
 
                 if let Some(active) = node.active_window {
                     MINIMIZED_BY_STACK.remove_sync(&active);
-                    Window::from(active).unminimize().log_error();
+                    let window = Window::from(active);
+                    // only sanitizes visibility, never activates: focus is the caller's job
+                    // (see `reveal_stack_window`).
+                    if window.is_minimized() {
+                        window.show_window(SW_SHOWNOACTIVATE).log_error();
+                        // a restored window can be drawn above the focused one even without
+                        // activation, so keep the focused managed window on top.
+                        let foreground = Window::get_foregrounded();
+                        if self.is_managed(&foreground) {
+                            WindowsApi::set_z_order(foreground.hwnd(), HWND_TOP).log_error();
+                        }
+                    }
 
                     for w in &node.windows {
                         if *w != active {
@@ -723,11 +734,14 @@ impl TwmState {
         };
         let node = tree.nodes.get_mut(&node_id).ok_or("Node not found")?;
 
-        if node.kind != TwmNodeKind::Stack {
+        // Already active: also covers the `WindowUnminimizedByUser` echo of `restore_stacks`
+        // restoring it, which must not steal the focus.
+        if node.kind != TwmNodeKind::Stack || node.active_window == Some(window_id) {
             return Ok(());
         }
 
         node.active_window = Some(window_id);
+        Self::reveal_stack_window(window);
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
@@ -758,10 +772,20 @@ impl TwmState {
         } else {
             (idx + len - 1) % len
         };
-        node.active_window = Some(node.windows[next_idx]);
+        let next = node.windows[next_idx];
+        node.active_window = Some(next);
 
+        Self::reveal_stack_window(&Window::from(next));
         Self::send(TwmStateEvent::Changed);
         Ok(())
+    }
+
+    /// Restores and focuses the new active window of a stack. The siblings are minimized
+    /// afterwards by [`Self::restore_stacks`] on the `Changed` event.
+    fn reveal_stack_window(window: &Window) {
+        MINIMIZED_BY_STACK.remove_sync(&window.address());
+        window.unminimize().log_error();
+        window.focus().log_error();
     }
 }
 
