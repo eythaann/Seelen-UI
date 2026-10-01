@@ -1,8 +1,7 @@
-import type Sandbox from "@nyariv/sandboxjs";
 import { Alignment, SeelenWegSide, type WidgetId } from "@seelen-ui/lib/types";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settingsState } from "./state/settings.svelte.ts";
-import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
+import { evalSanboxed, type SanboxedEval } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS: SeelenCommand[] = [
   SeelenCommand.OpenFile,
@@ -22,7 +21,7 @@ const ActionsScope = {
 };
 
 export function evalActionSanboxed(
-  executor: ReturnType<Sandbox["compile"]> | null,
+  executor: SanboxedEval | null,
   scope: Record<string, any>,
 ): void {
   evalSanboxed(executor, { ...scope, ...ActionsScope });

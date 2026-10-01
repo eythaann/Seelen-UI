@@ -9,6 +9,7 @@ return Group({
     const isActive = w.id === activeWorkspace;
 
     return Button({
+      tooltip: w.name || `Workspace ${idx + 1}`,
       content: idx + 1,
       style: {
         fontWeight: 600,

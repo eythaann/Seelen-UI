@@ -23,6 +23,7 @@ const items = trayIcons
       })`;
 
     return Button({
+      tooltip: icon.tooltip,
       onClick,
       onAuxClick,
       onContextMenu,
@@ -33,6 +34,7 @@ const items = trayIcons
   });
 
 const OverflowButton = Button({
+  tooltip: "System Tray",
   content: Icon({ name: "IoIosArrowDropdown" }),
   onClick: `trigger("@seelen/system-tray");`,
 });
