@@ -1,15 +1,16 @@
 <script lang="ts">
-  import Sandbox from "@nyariv/sandboxjs";
   import { styleToString } from "../../utils";
   import type { EvaluatedButtonProps } from "./definitions";
   import { compileSandboxed } from "libs/ui/svelte/utils/sandbox";
   import { evalActionSanboxed } from "./actionEvaluator";
   import Unknown from "./Unknown.svelte";
+  import { settingsState } from "../../state/settings.svelte";
 
   let {
     parentId,
     style,
     content,
+    tooltip,
     onClick,
     onAuxClick,
     onContextMenu,
@@ -17,14 +18,17 @@
 
   let styleString = $derived(styleToString(style));
 
-  const sandbox = new Sandbox();
-  const onClickExec = $derived(compileSandboxed(sandbox, onClick));
-  const onAuxClickExec = $derived(compileSandboxed(sandbox, onAuxClick));
-  const onContextMenuExec = $derived(compileSandboxed(sandbox, onContextMenu));
+  const onClickExec = $derived(compileSandboxed(onClick));
+  const onAuxClickExec = $derived(compileSandboxed(onAuxClick));
+  const onContextMenuExec = $derived(compileSandboxed(onContextMenu));
 </script>
 
 <button
   data-skin="transparent"
+  data-tooltip={tooltip}
+  data-tooltip-align-x="Center"
+  data-tooltip-align-y={settingsState.popupAlignY}
+  data-tooltip-origin-y={settingsState.tooltipY}
   style={styleString}
   onclick={(e) => {
     if (onClickExec) {

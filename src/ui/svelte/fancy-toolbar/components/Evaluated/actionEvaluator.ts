@@ -1,9 +1,8 @@
-import type Sandbox from "@nyariv/sandboxjs";
 import { Alignment, FancyToolbarSide, type WidgetId } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils/index.ts";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { settingsState } from "../../state/settings.svelte.ts";
-import { evalSanboxed } from "libs/ui/svelte/utils/sandbox.ts";
+import { evalSanboxed, type SanboxedEval } from "libs/ui/svelte/utils/sandbox.ts";
 
 const ALLOWED_COMMANDS = [
   SeelenCommand.SwitchWorkspace,
@@ -32,7 +31,7 @@ const ActionsScope = {
 
 export function evalActionSanboxed(
   parentItemId: string,
-  executor: ReturnType<Sandbox["compile"]> | null,
+  executor: SanboxedEval | null,
   scope: Record<string, any>,
 ) {
   evalSanboxed(executor, {

@@ -5,10 +5,11 @@ if (!activeRow) {
 }
 
 return Group({
-  content: activeRow.map((w) => {
+  content: activeRow.map((w, idx) => {
     const isActive = w.id === activeWorkspace;
 
     return Button({
+      tooltip: w.name || `Workspace ${idx + 1}`,
       content: "",
       style: {
         padding: 0,

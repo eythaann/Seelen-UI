@@ -1,5 +1,4 @@
-import type Sandbox from "@nyariv/sandboxjs";
-import { evalSanboxed } from "libs/ui/svelte/utils/sandbox";
+import { evalSanboxed, type SanboxedEval } from "libs/ui/svelte/utils/sandbox";
 import { z } from "zod";
 
 const COMPONENT_KEY = "@component";
@@ -36,6 +35,7 @@ export type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
 const EvaluatedButtonPropsSchema = z.object({
   style: z.record(z.any()).default({}),
   content: z.unknown().nullish(),
+  tooltip: z.string().nullish(),
   onClick: z.string().nullish(),
   onAuxClick: z.string().nullish(),
   onContextMenu: z.string().nullish(),
@@ -135,7 +135,7 @@ const ComponentCreatorScope = {
 };
 
 export function evalComponentSandboxed(
-  executor: ReturnType<Sandbox["compile"]> | null,
+  executor: SanboxedEval | null,
   scope: Record<string, any>,
 ): unknown {
   return evalSanboxed(executor, { ...scope, ...ComponentCreatorScope });

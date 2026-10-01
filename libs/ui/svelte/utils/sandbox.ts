@@ -1,17 +1,19 @@
 import Sandbox from "@nyariv/sandboxjs";
 
 /** Sandbox with `CanvasRenderingContext2D` whitelisted so sandboxed code can draw on a canvas. */
-export function createCanvasSandbox(): Sandbox {
+function createCanvasSandbox(): Sandbox {
   const prototypeWhitelist = new Map(Sandbox.SAFE_PROTOTYPES);
   prototypeWhitelist.set(CanvasRenderingContext2D, new Set());
   return new Sandbox({ prototypeWhitelist });
 }
 
-type SanboxedEval = ReturnType<Sandbox["compile"]>;
-export function compileSandboxed(sandbox: Sandbox, source?: string | null): SanboxedEval | null {
+const SANDBOX = createCanvasSandbox();
+
+export type SanboxedEval = ReturnType<Sandbox["compile"]>;
+export function compileSandboxed(source?: string | null): SanboxedEval | null {
   if (!source) return null;
   try {
-    return sandbox.compile(source);
+    return SANDBOX.compile(source, true);
   } catch (e) {
     console.error("Error compiling code:", e);
     return null;

@@ -7,8 +7,4 @@ target: "@seelen/fancy-toolbar"
 plugin:
   scopes:
     - Tray
-  # tooltip: |-
-  #   return "System Tray";
   template: !include toolbar-plugin.js
-  # onClickV2: |-
-  #   trigger("@seelen/system-tray");

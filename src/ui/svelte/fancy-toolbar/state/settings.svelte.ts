@@ -1,5 +1,5 @@
 import { invoke, RuntimeStyleSheet, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
+import { Alignment, type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
 import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
@@ -26,6 +26,14 @@ const widgetRect = $derived.by(() => {
 });
 
 class SettingsState {
+  tooltipY = $derived(
+    settingsState.position === FancyToolbarSide.Bottom ? settingsState.widgetRect.top : settingsState.widgetRect.bottom,
+  );
+
+  popupAlignY = $derived(
+    settingsState.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start,
+  );
+
   get isReady() {
     return isWidgetReady;
   }
