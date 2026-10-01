@@ -49,19 +49,19 @@ const widgetRect = $derived.by(() => {
   switch (settings.position) {
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = isTouchPrimary.value ? hitboxRect.right : wa.right - Math.round((wa.right - wa.left) / 2);
+      webviewRect.right = isTouchPrimary.value ? hitboxRect.right : wa.right - Math.round((wa.right - wa.left) / 4);
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = isTouchPrimary.value ? hitboxRect.left : wa.left + Math.round((wa.right - wa.left) / 2);
+      webviewRect.left = isTouchPrimary.value ? hitboxRect.left : wa.left + Math.round((wa.right - wa.left) / 4);
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = isTouchPrimary.value ? hitboxRect.bottom : wa.top + Math.round((wa.bottom - wa.top) / 2);
+      webviewRect.bottom = isTouchPrimary.value ? hitboxRect.bottom : wa.top + Math.round((wa.bottom - wa.top) / 4);
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = isTouchPrimary.value ? hitboxRect.top : wa.bottom - Math.round((wa.bottom - wa.top) / 2);
+      webviewRect.top = isTouchPrimary.value ? hitboxRect.top : wa.bottom - Math.round((wa.bottom - wa.top) / 4);
       break;
   }
 
