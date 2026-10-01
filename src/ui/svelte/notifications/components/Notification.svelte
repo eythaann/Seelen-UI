@@ -10,6 +10,7 @@
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import FileIcon from "libs/ui/svelte/components/Icon/FileIcon.svelte";
   import moment from "moment";
+  import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
 
   interface Props {
     notification: AppNotification;
@@ -93,6 +94,7 @@
   class="notification"
   role="button"
   tabindex="0"
+  transition:CssHandled|global
   onclick={handleNotificationClick}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {

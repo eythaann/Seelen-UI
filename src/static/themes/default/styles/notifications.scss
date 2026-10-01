@@ -19,9 +19,10 @@
   }
 
   .notifications-popup-body {
+    --notification-gap: 8px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--notification-gap);
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px 10px;
@@ -41,6 +42,12 @@
     font-weight: 600;
     font-size: 0.8rem;
     height: 200px;
+    opacity: 1;
+    transition: opacity 180ms ease;
+
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
 
@@ -49,10 +56,28 @@
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
   padding: 10px;
-  transition: scale 0.1s ease-in-out;
+  transition:
+    scale 0.1s ease-in-out,
+    opacity 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    padding 200ms cubic-bezier(0.16, 1, 0.3, 1);
 
   &:active:not(:has(button:active, input:active, select:active)) {
     scale: 0.9;
+  }
+
+  &[data-unmounting] {
+    opacity: 0;
+    transform: translateX(28px) scale(0.96);
+    height: 0 !important;
+    margin-bottom: calc(-1 * var(--notification-gap, 8px)) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-width: 0 !important;
+    overflow: hidden;
+    pointer-events: none;
   }
 
   .notification-header {
