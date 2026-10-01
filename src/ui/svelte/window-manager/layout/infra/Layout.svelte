@@ -3,7 +3,6 @@
   import { requestPositioningOfLeaves } from "../application.ts";
   import { state as wmState } from "../../state.svelte.ts";
   import Container from "./Container.svelte";
-  import { NodeUtils } from "../../utils.ts";
   import { TREE_CONTEXT_KEY } from "../domain.ts";
   import type { TwmRuntimeTree } from "@seelen-ui/lib/types";
 
@@ -32,21 +31,9 @@
     },
   });
 
-  let overlayVisible = $derived.by(() => {
-    if (!layout || wmState.paused) {
-      return false;
-    }
-
-    if (["Progman", "SysListView32"].includes(wmState.focusedApp.class)) {
-      return true;
-    }
-
-    if (!NodeUtils.contains(layout, layout.root, wmState.focusedApp.hwnd)) {
-      return false;
-    }
-
-    return true;
-  });
+  // z-order is handled by the backend (raised on foreground of managed windows),
+  // so the overlay doesn't need to be hidden when a non managed window is focused.
+  let overlayVisible = $derived(!!layout && !wmState.paused);
 
   $effect(() => {
     wmState.forceRepositioning; // subscription

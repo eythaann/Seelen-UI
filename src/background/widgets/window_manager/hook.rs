@@ -1,11 +1,18 @@
-use seelen_core::state::WmDragBehavior;
+use seelen_core::{resource::WidgetId, state::WmDragBehavior};
+use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::HWND_TOP};
 
 use crate::{
-    error::Result,
+    error::{Result, ResultLogExt},
     state::application::FULL_STATE,
     virtual_desktops::{MINIMIZED_BY_WORKSPACES, events::VirtualDesktopEvent},
-    widgets::window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
-    windows_api::window::{Window, event::WinEvent},
+    widgets::{
+        manager::WIDGET_MANAGER,
+        window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
+    },
+    windows_api::{
+        WindowsApi,
+        window::{Window, event::WinEvent},
+    },
 };
 
 use super::{WindowManagerV2, cli::Axis};
@@ -95,6 +102,31 @@ impl WindowManagerV2 {
         Ok(())
     }
 
+    /// Moves the visible tiled windows of the workspace just below the focused one,
+    /// and then the overlay webviews to the top so they are drawn above the layout.
+    fn bring_layout_to_front(focused: &Window, tiled: &[isize]) {
+        for &hwnd in tiled {
+            if hwnd != focused.address() {
+                WindowsApi::set_z_order(HWND(hwnd as _), focused.hwnd()).log_error();
+            }
+        }
+
+        let mut overlays = Vec::new();
+        WIDGET_MANAGER
+            .deployments
+            .get(&WidgetId::known_wm(), |deploy| {
+                deploy.pods.for_each(|(_, pod)| {
+                    if let Some(hwnd) = pod.hwnd() {
+                        overlays.push(hwnd);
+                    }
+                });
+            });
+
+        for hwnd in overlays {
+            WindowsApi::set_z_order(HWND(hwnd as _), HWND_TOP).log_error();
+        }
+    }
+
     pub fn process_win_event(event: WinEvent, window: Window) -> Result<()> {
         match event {
             WinEvent::SystemForeground => {
@@ -102,6 +134,22 @@ impl WindowManagerV2 {
                 if state.pending_reservation.is_some() {
                     state.cancel_reservation();
                 }
+
+                if !state.is_managed(&window) {
+                    return Ok(());
+                }
+
+                let tiled = if state.is_tiled(&window) {
+                    state
+                        .get_tree_for_window_mut(&window)
+                        .map(|(_, tree)| tree.iter().filter_map(|n| n.active_window).collect())
+                        .unwrap_or_default()
+                } else {
+                    Vec::new()
+                };
+                drop(state);
+
+                Self::bring_layout_to_front(&window, &tiled);
             }
             WinEvent::SynThrottledForegroundRectChange => {
                 Self::synthetic_foreground_location_change(&window)?;

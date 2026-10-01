@@ -19,6 +19,8 @@
 - customizable widgets show/hide animations, themes can style them via the `data-widget-hidden` attribute on the root
   element. The default theme includes a fade in/out.
 - tray icons now are sortable.
+- window manager overlay is no longer topmost. When a managed window is focused, the tiled windows and the overlay are
+  brought to the front, so the overlay no longer needs to be hidden when a non-managed window is focused.
 
 ### fix
 
