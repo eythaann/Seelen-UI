@@ -19,6 +19,7 @@ use windows::Win32::{
 };
 
 use windows_core::Owned;
+use winreg::{RegKey, enums::HKEY_LOCAL_MACHINE};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -29,6 +30,13 @@ use crate::{
 };
 
 use super::domain::{battery_to_slu_battery, power_status_to_serializable};
+
+/// Keys created by Windows Update / CBS when updates are waiting for a shutdown or restart
+/// to be applied (the same condition that makes the shell show "Update and shut down").
+const PENDING_UPDATES_REGISTRY_KEYS: [&str; 2] = [
+    r"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired",
+    r"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending",
+];
 
 #[derive(Debug)]
 pub struct PowerManager {
@@ -219,4 +227,12 @@ pub enum PowerManagerEvent {
     PowerStatusChanged(PowerStatus),
     BatteriesChanged(Vec<Battery>),
     PowerModeChanged(PowerMode),
+}
+
+/// Whether Windows has installed/staged updates waiting for a shutdown or restart to be applied.
+pub fn has_pending_os_updates() -> bool {
+    let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+    PENDING_UPDATES_REGISTRY_KEYS
+        .iter()
+        .any(|path| hklm.open_subkey(path).is_ok())
 }

@@ -85,7 +85,10 @@ use windows::{
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SYSTEM_POWER_STATUS, SetSuspendState},
             RemoteDesktop::ProcessIdToSessionId,
-            Shutdown::{EXIT_WINDOWS_FLAGS, ExitWindowsEx, LockWorkStation, SHUTDOWN_REASON},
+            Shutdown::{
+                EXIT_WINDOWS_FLAGS, ExitWindowsEx, InitiateShutdownW, LockWorkStation,
+                SHUTDOWN_FLAGS, SHUTDOWN_REASON,
+            },
             SystemInformation::{COMPUTER_NAME_FORMAT, GetComputerNameExW},
             Threading::{
                 AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
@@ -1006,6 +1009,14 @@ impl WindowsApi {
     pub fn exit_windows(flags: EXIT_WINDOWS_FLAGS, reason: SHUTDOWN_REASON) -> Result<()> {
         WindowsApi::enable_privilege(SE_SHUTDOWN_NAME)?;
         unsafe { ExitWindowsEx(flags, reason) }?;
+        Ok(())
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-initiateshutdownw
+    pub fn initiate_shutdown(flags: SHUTDOWN_FLAGS, reason: SHUTDOWN_REASON) -> Result<()> {
+        WindowsApi::enable_privilege(SE_SHUTDOWN_NAME)?;
+        let code = unsafe { InitiateShutdownW(PCWSTR::null(), PCWSTR::null(), 0, flags, reason) };
+        WIN32_ERROR(code).ok()?;
         Ok(())
     }
 

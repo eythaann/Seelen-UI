@@ -6,3 +6,6 @@ reboot: Reboot
 shutdown: Power off
 suspend: Suspend
 uptime: Uptime
+update_and_reboot: Update and restart
+update_and_shutdown: Update and shut down
+pending_updates: There's pending system updates. Install now?

@@ -3,8 +3,10 @@ import { SeelenCommand } from "@seelen-ui/lib";
 
 interface Option {
   key: string;
+  /** label used instead of `key` when pending updates will be installed */
+  updateKey?: string;
   icon: string;
-  onClick: () => void;
+  onClick: (installUpdates: boolean) => void;
 }
 
 export const options: Option[] = [
@@ -24,16 +26,18 @@ export const options: Option[] = [
   },
   {
     key: "shutdown",
+    updateKey: "update_and_shutdown",
     icon: "IoPower",
-    onClick() {
-      invoke(SeelenCommand.Shutdown);
+    onClick(installUpdates) {
+      invoke(SeelenCommand.Shutdown, { installUpdates });
     },
   },
   {
     key: "reboot",
+    updateKey: "update_and_reboot",
     icon: "MdRestartAlt",
-    onClick() {
-      invoke(SeelenCommand.Restart);
+    onClick(installUpdates) {
+      invoke(SeelenCommand.Restart, { installUpdates });
     },
   },
   {

@@ -4,12 +4,16 @@ use seelen_core::{
     handlers::SeelenEvent,
     system_state::{Battery, PowerMode, PowerStatus},
 };
-use windows::Win32::System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE};
+use windows::Win32::System::Shutdown::{
+    EWX_LOGOFF, SHTDN_REASON_FLAG_PLANNED, SHTDN_REASON_MAJOR_OPERATINGSYSTEM,
+    SHTDN_REASON_MINOR_UPGRADE, SHTDN_REASON_NONE, SHUTDOWN_FLAGS, SHUTDOWN_INSTALL_UPDATES,
+    SHUTDOWN_POWEROFF, SHUTDOWN_REASON, SHUTDOWN_RESTART,
+};
 
 use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
-    modules::power::application::{PowerManager, PowerManagerEvent},
+    modules::power::application::{PowerManager, PowerManagerEvent, has_pending_os_updates},
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     widgets::manager::WIDGET_MANAGER,
@@ -67,18 +71,33 @@ impl crate::tauri_handlers::Handlers {
         WindowsApi::set_suspend_state(true).log_error();
     }
 
-    pub fn restart() -> Result<()> {
-        WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
-        Ok(())
+    pub fn has_pending_os_updates() -> bool {
+        has_pending_os_updates()
     }
 
-    pub fn shutdown() -> Result<()> {
-        WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
-        Ok(())
+    pub fn restart(install_updates: Option<bool>) -> Result<()> {
+        initiate_shutdown(SHUTDOWN_RESTART, install_updates.unwrap_or(false))
+    }
+
+    pub fn shutdown(install_updates: Option<bool>) -> Result<()> {
+        initiate_shutdown(SHUTDOWN_POWEROFF, install_updates.unwrap_or(false))
     }
 
     pub fn lock() -> Result<()> {
         WindowsApi::lock_machine()?;
         Ok(())
     }
+}
+
+/// Updates are only applied when explicitly requested, mirroring the shell's
+/// "Shut down" vs "Update and shut down" options.
+fn initiate_shutdown(mut flags: SHUTDOWN_FLAGS, install_updates: bool) -> Result<()> {
+    let mut reason: SHUTDOWN_REASON = SHTDN_REASON_NONE;
+    if install_updates {
+        flags |= SHUTDOWN_INSTALL_UPDATES;
+        reason = SHTDN_REASON_FLAG_PLANNED
+            | SHTDN_REASON_MAJOR_OPERATINGSYSTEM
+            | SHTDN_REASON_MINOR_UPGRADE;
+    }
+    WindowsApi::initiate_shutdown(flags, reason)
 }

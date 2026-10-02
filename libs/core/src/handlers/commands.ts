@@ -103,6 +103,7 @@ export enum SeelenCommand {
   LogOut = "log_out",
   Suspend = "suspend",
   Hibernate = "hibernate",
+  HasPendingOsUpdates = "has_pending_os_updates",
   Restart = "restart",
   Shutdown = "shutdown",
   Lock = "lock",

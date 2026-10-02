@@ -13,6 +13,9 @@
     Widget.getCurrent().ready();
   });
 
+  let installUpdates = $state(true);
+  const willInstallUpdates = $derived(globalState.hasPendingOsUpdates && installUpdates);
+
   function onCancel() {
     Widget.self.hide();
   }
@@ -81,22 +84,33 @@
         </div>
       </div>
 
+      {#if globalState.hasPendingOsUpdates}
+        <label class="power-menu-updates">
+          <span class="power-menu-updates-message">{$t("pending_updates")}</span>
+          <input type="checkbox" data-skin="switch" bind:checked={installUpdates} />
+        </label>
+      {/if}
+
       <div class="power-menu-separator"></div>
 
       <ul class="power-menu-list">
         {#each options as option}
+          {@const showUpdate = willInstallUpdates && !!option.updateKey}
           <li>
             <button
               onclick={() => {
-                option.onClick();
+                option.onClick(willInstallUpdates);
                 onCancel();
               }}
               class="power-menu-item"
             >
               <div class="power-menu-item-icon-wrapper">
                 <Icon iconName={option.icon as any} />
+                {#if showUpdate}
+                  <span class="power-menu-item-update-badge"></span>
+                {/if}
               </div>
-              <span class="power-menu-item-label">{$t(option.key)}</span>
+              <span class="power-menu-item-label">{$t(showUpdate ? option.updateKey! : option.key)}</span>
             </button>
           </li>
         {/each}

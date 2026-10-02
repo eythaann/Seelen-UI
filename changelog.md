@@ -13,6 +13,7 @@
 - pinnable tray icons.
 - show pinned tray icons in the toolbar.
 - add support for application badge notifications.
+- allow install system updates on power menu at restart or shutdown.
 
 ### enhancements
 

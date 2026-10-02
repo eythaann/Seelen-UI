@@ -17,12 +17,18 @@ $effect.root(() => {
 let user = lazyRune(() => invoke(SeelenCommand.GetUser));
 subscribe(SeelenEvent.UserChanged, user.setByPayload);
 
-await Promise.all([user.init(), monitors.init()]);
+let hasPendingOsUpdates = $state(false);
+const refreshPendingOsUpdates = async () => {
+  hasPendingOsUpdates = await invoke(SeelenCommand.HasPendingOsUpdates);
+};
+
+await Promise.all([user.init(), monitors.init(), refreshPendingOsUpdates()]);
 
 const posSet = rootEffectAsync(() => Widget.self.setPosition(monitors.desktopRect));
 
 Widget.self.onTrigger(async () => {
   invoke(SeelenCommand.GetUser); // refresh user information
+  refreshPendingOsUpdates();
   await posSet; // wait for the initial position to be set
   await Widget.self.show();
   await Widget.self.focus();
@@ -32,5 +38,8 @@ export type State = typeof state;
 export const state = {
   get user() {
     return user.value;
+  },
+  get hasPendingOsUpdates() {
+    return hasPendingOsUpdates;
   },
 };

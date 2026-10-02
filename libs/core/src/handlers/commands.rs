@@ -417,12 +417,19 @@ slu_commands_declaration! {
     LogOut = log_out(),
     Suspend = suspend(),
     Hibernate = hibernate(),
+    HasPendingOsUpdates = has_pending_os_updates() -> bool,
     Restart =
         @fallible()
-        restart(),
+        restart(
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        install_updates: Option<bool>
+    ),
     Shutdown =
         @fallible()
-        shutdown(),
+        shutdown(
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        install_updates: Option<bool>
+    ),
     Lock =
         @fallible()
         lock(),
