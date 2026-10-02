@@ -6,6 +6,8 @@ pub enum Error {
     StartingPositioningFailed,
     #[error("Positioning failed")]
     SetPositionFailed,
+    #[error("Window has no shell application view")]
+    NoApplicationView,
     #[error("Utf16: {0}")]
     Utf16(#[from] std::string::FromUtf16Error),
 }

@@ -1,6 +1,6 @@
 use std::sync::LazyLock;
 
-use positioning::{AnimationOrchestrator, PositionerBuilder, easings::Easing};
+use positioning::{AnimationMode, AnimationOrchestrator, PositionerBuilder, easings::Easing};
 use slu_ipc::messages::{IpcResponse, SvcAction};
 
 use crate::{error::Result, task_scheduler::TaskSchedulerHelper, windows_api::WindowsApi};
@@ -56,6 +56,7 @@ async fn _process_action(command: SvcAction) -> Result<()> {
                 builder.build(),
                 animation_duration,
                 easing,
+                AnimationMode::Buffered,
                 move |result| {
                     if let Err(err) = result {
                         log::error!("Animated window placement failed: {err}");

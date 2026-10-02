@@ -2,17 +2,40 @@ mod api;
 pub mod easings;
 pub mod error;
 pub mod minimization;
+mod overlay;
 pub mod rect;
+mod shell_view;
+mod timer;
 
 use std::collections::HashMap;
-use std::sync::Arc;
+use std::sync::{Arc, Mutex, MutexGuard, PoisonError};
 
 use crate::{
-    api::{force_redraw_window, get_window_rect, is_explorer, position_window},
+    api::{
+        force_redraw_window, get_class, get_window_rect, position_window, position_window_async,
+    },
     easings::Easing,
     error::Result,
+    overlay::ThumbnailOverlay,
     rect::Rect,
+    shell_view::CloakGuard,
+    timer::{FrameTimer, boost_current_thread_priority},
 };
+
+const FRAME_DURATION: std::time::Duration = std::time::Duration::from_millis(8); // ~120 fps cap
+
+/// How a window animation is rendered.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum AnimationMode {
+    /// Moves/resizes the real window every frame. Content reflows live, but fps is bounded by
+    /// how fast the target app handles each resize.
+    #[default]
+    Realtime,
+    /// Resizes the real window once (cloaked) and animates a stretched DWM thumbnail of it.
+    /// Frames are pure composition, so fps does not depend on the target app, but content is
+    /// scaled during the animation instead of reflowing.
+    Buffered,
+}
 
 #[derive(Debug, Default)]
 pub struct PositionerBuilder {
@@ -36,6 +59,52 @@ struct WinDataForAnimation {
     to: Rect,
     is_size_changing: bool,
     is_explorer: bool,
+    is_chromium: bool,
+}
+
+/// Message sent to a running animation thread.
+enum AnimationSignal {
+    /// Stop as soon as possible.
+    Interrupt,
+    /// Buffered only: continue from the rect currently on screen towards a new target, reusing
+    /// the running thread, overlay, thumbnail and cloak instead of tearing them down.
+    Retarget {
+        to: Rect,
+        easing: Easing,
+        duration: std::time::Duration,
+    },
+}
+
+/// One interpolation leg of a buffered animation; replaced on every retarget.
+struct Segment {
+    from: Rect,
+    to: Rect,
+    easing: Easing,
+    start: std::time::Instant,
+    secs: f64,
+}
+
+impl Segment {
+    fn new(from: Rect, to: Rect, easing: Easing, duration: std::time::Duration) -> Self {
+        Self {
+            from,
+            to,
+            easing,
+            start: std::time::Instant::now(),
+            secs: duration.as_secs_f64(),
+        }
+    }
+
+    fn progress(&self) -> f64 {
+        if self.secs <= 0.0 {
+            return 1.0;
+        }
+        (self.start.elapsed().as_secs_f64() / self.secs).min(1.0)
+    }
+
+    fn rect_at(&self, progress: f64) -> Rect {
+        keyframe::ease(self.easing, self.from, self.to, progress)
+    }
 }
 
 impl PositionerBuilder {
@@ -73,31 +142,44 @@ impl PositionerBuilder {
 /// Manages the animation of a single window
 pub struct WindowAnimation {
     hwnd: isize,
-    interrupt_signal: Option<std::sync::mpsc::Sender<()>>,
+    signal: Option<std::sync::mpsc::Sender<AnimationSignal>>,
     animation_thread: Option<std::thread::JoinHandle<()>>,
+    /// True while the running (buffered) animation accepts [`AnimationSignal::Retarget`]. Only
+    /// flipped under its lock, so a retarget is either seen by the thread or never sent.
+    accepts_retarget: Arc<Mutex<bool>>,
 }
 
 impl WindowAnimation {
     fn new() -> Self {
         Self {
             hwnd: 0,
-            interrupt_signal: None,
+            signal: None,
             animation_thread: None,
+            accepts_retarget: Arc::new(Mutex::new(false)),
         }
     }
 
-    /// Start animating this window. If already animating, interrupt and restart.
+    /// Start animating this window. A running buffered animation is retargeted in place;
+    /// otherwise any running animation is interrupted and a new one started.
     fn start<F>(
         &mut self,
         hwnd: isize,
         target_rect: Rect,
         easing: Easing,
         duration_ms: u64,
+        mode: AnimationMode,
         on_end: Arc<F>,
     ) -> Result<()>
     where
         F: Fn(Result<bool>) + Sync + Send + 'static,
     {
+        let animation_duration = std::time::Duration::from_millis(duration_ms);
+        if mode == AnimationMode::Buffered
+            && self.try_retarget(target_rect, easing, animation_duration)
+        {
+            return Ok(());
+        }
+
         // Interrupt any existing animation for this window
         self.interrupt();
         self.wait();
@@ -116,26 +198,74 @@ impl WindowAnimation {
             return Ok(());
         }
 
-        let data = WinDataForAnimation {
+        let class = get_class(hwnd)?;
+        let mut data = WinDataForAnimation {
             hwnd,
             from: initial_rect,
             to: target_rect,
             is_size_changing,
-            is_explorer: is_explorer(hwnd)?,
+            is_explorer: class == "CabinetWClass" || class == "ExplorerWClass",
+            is_chromium: class.starts_with("Chrome_WidgetWin_"),
         };
 
-        let (tx, rx) = std::sync::mpsc::channel::<()>();
-        let animation_duration = std::time::Duration::from_millis(duration_ms);
+        let (tx, rx) = std::sync::mpsc::channel::<AnimationSignal>();
+        let accepts_retarget = self.accepts_retarget.clone();
+        *lock(&accepts_retarget) = mode == AnimationMode::Buffered;
 
         let thread = std::thread::spawn(move || {
-            let result = Self::perform(&data, easing, animation_duration, rx);
+            let result = match mode {
+                AnimationMode::Realtime => Self::perform(&data, easing, animation_duration, &rx),
+                AnimationMode::Buffered => Self::perform_buffered(
+                    &data,
+                    easing,
+                    animation_duration,
+                    &rx,
+                    &accepts_retarget,
+                )
+                .or_else(|err| {
+                    log::warn!("Buffered animation failed, falling back to realtime: {err}");
+                    // Retargets sent before the gate closed must not be lost (the caller assumed
+                    // they were applied), so the fallback heads to the latest one.
+                    let mut easing = easing;
+                    let mut duration = animation_duration;
+                    *lock(&accepts_retarget) = false;
+                    while let Ok(signal) = rx.try_recv() {
+                        match signal {
+                            AnimationSignal::Interrupt => return Ok(true),
+                            AnimationSignal::Retarget {
+                                to,
+                                easing: e,
+                                duration: d,
+                            } => (data.to, easing, duration) = (to, e, d),
+                        }
+                    }
+                    data.is_size_changing =
+                        data.from.width != data.to.width || data.from.height != data.to.height;
+                    Self::perform(&data, easing, duration, &rx)
+                }),
+            };
             on_end(result);
         });
 
-        self.interrupt_signal = Some(tx);
+        self.signal = Some(tx);
         self.animation_thread = Some(thread);
 
         Ok(())
+    }
+
+    /// Hands a new target to the running buffered animation. Returns false when there is none
+    /// accepting it (finished, finishing, realtime or failed), so a new one must be started.
+    fn try_retarget(&self, to: Rect, easing: Easing, duration: std::time::Duration) -> bool {
+        let accepts = lock(&self.accepts_retarget);
+        *accepts
+            && self.signal.as_ref().is_some_and(|tx| {
+                tx.send(AnimationSignal::Retarget {
+                    to,
+                    easing,
+                    duration,
+                })
+                .is_ok()
+            })
     }
 
     /// Returns true if animation was interrupted/canceled
@@ -143,36 +273,18 @@ impl WindowAnimation {
         data: &WinDataForAnimation,
         easing: Easing,
         animation_duration: std::time::Duration,
-        interrupt_rx: std::sync::mpsc::Receiver<()>,
+        interrupt_rx: &std::sync::mpsc::Receiver<AnimationSignal>,
     ) -> Result<bool> {
-        use windows::Win32::Foundation::CloseHandle;
-        use windows::Win32::System::Threading::{
-            CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, CreateWaitableTimerExW, GetCurrentThread,
-            INFINITE, SetThreadPriority, SetWaitableTimer, THREAD_PRIORITY_HIGHEST,
-            WaitForSingleObject,
-        };
-
-        unsafe {
-            let _ = SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
-        }
-
-        // High-resolution waitable timer (~100ns precision vs ~15.6ms for thread::sleep).
-        let timer = unsafe {
-            CreateWaitableTimerExW(
-                None,
-                None,
-                CREATE_WAITABLE_TIMER_HIGH_RESOLUTION,
-                0x001F0003,
-            )?
-        };
+        boost_current_thread_priority();
+        let timer = FrameTimer::new()?;
 
         let animation_secs = animation_duration.as_secs_f64();
-        let frame_duration = std::time::Duration::from_millis(7); // ~144 fps cap
         let start_time = std::time::Instant::now();
         let mut interrupted = false;
         let mut last_rect = data.from;
         let mut frame_i = 0u32;
         let mut frames = 0u32;
+        let mut resize_this_frame = true;
 
         // The active interpolation segment. Rebased whenever the window's actual rect
         // drifts from what we last set (e.g. the OS resizing it synchronously on a
@@ -210,16 +322,33 @@ impl WindowAnimation {
                 (segment_start.elapsed().as_secs_f64() / segment_secs).min(1.0)
             };
 
+            let is_last_frame = overall_progress >= 1.0;
+            let eased = keyframe::ease(easing, segment_from, data.to, segment_progress);
+
+            // Resizing forces the target app to relayout + repaint (WM_NCCALCSIZE/WM_SIZE), while
+            // moving is just a DWM surface offset. Interleave: move every frame, resize every
+            // other frame, always resizing on the last one so the window lands on its target.
+            let apply_size = data.is_size_changing && (resize_this_frame || is_last_frame);
+            resize_this_frame = !apply_size;
+            let rect = if apply_size {
+                eased
+            } else {
+                Rect {
+                    width: last_rect.width,
+                    height: last_rect.height,
+                    ..eased
+                }
+            };
+
             // Skip SetWindowPos when the interpolated pixel position didn't change —
             // common at easing tails where speed < 1px per frame.
-            let rect = keyframe::ease(easing, segment_from, data.to, segment_progress);
             if rect != last_rect {
-                position_window(data.hwnd, &rect, data.is_explorer, !data.is_size_changing)?;
+                position_window(data.hwnd, &rect, data.is_explorer, !apply_size)?;
                 last_rect = rect;
                 frames += 1;
             }
 
-            if overall_progress >= 1.0 {
+            if is_last_frame {
                 break;
             }
 
@@ -231,20 +360,7 @@ impl WindowAnimation {
 
             // Absolute target prevents per-frame jitter from accumulating across the animation.
             frame_i += 1;
-            let next_target = start_time + frame_duration * frame_i;
-            let now = std::time::Instant::now();
-            if let Some(remaining) = next_target.checked_duration_since(now) {
-                // Negative due time = relative, in 100ns units.
-                let due_100ns = -(remaining.as_nanos() as i64 / 100).max(1);
-                unsafe {
-                    let _ = SetWaitableTimer(timer, &due_100ns, 0, None, None, false);
-                    WaitForSingleObject(timer, INFINITE);
-                }
-            }
-        }
-
-        unsafe {
-            let _ = CloseHandle(timer);
+            timer.sleep_until(start_time + FRAME_DURATION * frame_i);
         }
 
         if !interrupted {
@@ -260,13 +376,193 @@ impl WindowAnimation {
         Ok(interrupted)
     }
 
+    /// Buffered variant of [`Self::perform`]: the real window is cloaked and placed on its target
+    /// rect with a posted (non-blocking) SetWindowPos, while a DWM thumbnail of it is stretched
+    /// from the initial rect to the target on an overlay. Each frame is a single
+    /// DwmUpdateThumbnailProperties call, so the target app is never awaited during the animation.
+    /// New targets arriving meanwhile ([`AnimationSignal::Retarget`]) continue from the rect on
+    /// screen, reusing the thread, overlay, thumbnail and cloak.
+    ///
+    /// Returns true if animation was interrupted/canceled
+    fn perform_buffered(
+        data: &WinDataForAnimation,
+        easing: Easing,
+        animation_duration: std::time::Duration,
+        signals: &std::sync::mpsc::Receiver<AnimationSignal>,
+        accepts_retarget: &Mutex<bool>,
+    ) -> Result<bool> {
+        boost_current_thread_priority();
+        let timer = FrameTimer::new()?;
+
+        // Declaration order matters: guards drop in reverse, so the real window is uncloaked
+        // before the overlay flushes and removes the thumbnail.
+        let overlay = ThumbnailOverlay::create(data.hwnd, &data.from)?;
+        // No DwmFlush in between: the thumbnail reaches DWM before the cloak request does (the
+        // calls are sequential), so it is never composed after the cloak. Saves up to a vsync.
+        let cloak = CloakGuard::cloak(data.hwnd)?;
+
+        // Chromium/Electron suspend rendering while their HWND reports any cloak state, so a
+        // resize done now would leave a stale/black surface. For them the thumbnail stretches the
+        // start-size content and the real resize happens at the end, right before uncloaking.
+        // Everyone else is resized upfront, so the thumbnail shows target-size content that lands
+        // 1:1 (crisp) on the last frame.
+        let pre_resize = !data.is_chromium;
+        // Last rect requested to the real window; posted requests may still be queued.
+        let mut placed = data.from;
+        let mut segment = Segment::new(data.from, data.to, easing, animation_duration);
+        if pre_resize {
+            placed = Self::place(data.hwnd, &placed, &segment.to, true)?;
+        }
+
+        let start_time = std::time::Instant::now();
+        let mut interrupted = false;
+        let mut shown = data.from;
+        let mut frame_i = 0u32;
+        let mut frames = 0u32;
+
+        'frames: loop {
+            while let Ok(signal) = signals.try_recv() {
+                if !Self::apply_signal(
+                    signal,
+                    data.hwnd,
+                    pre_resize,
+                    shown,
+                    &mut segment,
+                    &mut placed,
+                )? {
+                    interrupted = true;
+                    break 'frames;
+                }
+            }
+
+            let progress = segment.progress();
+            let rect = segment.rect_at(progress);
+            if rect != shown {
+                overlay.set_destination(&rect)?;
+                shown = rect;
+                frames += 1;
+            }
+            overlay.pump_messages();
+
+            if progress >= 1.0 {
+                // Close the gate, then drain once more: a retarget sent right before closing
+                // would otherwise be lost.
+                let mut accepts = lock(accepts_retarget);
+                match signals.try_recv() {
+                    Ok(signal) => {
+                        drop(accepts);
+                        if !Self::apply_signal(
+                            signal,
+                            data.hwnd,
+                            pre_resize,
+                            shown,
+                            &mut segment,
+                            &mut placed,
+                        )? {
+                            interrupted = true;
+                            break;
+                        }
+                        continue;
+                    }
+                    Err(_) => {
+                        *accepts = false;
+                        break;
+                    }
+                }
+            }
+
+            frame_i += 1;
+            timer.sleep_until(start_time + FRAME_DURATION * frame_i);
+        }
+
+        // From here placements are synchronous when possible: the window is about to be shown,
+        // and the next animation reads its rect as starting point. A sent (sync) SetWindowPos is
+        // processed before already posted ones, so it is only safe once those landed.
+        let actual = get_window_rect(data.hwnd)?;
+        if interrupted {
+            *lock(accepts_retarget) = false;
+            // Leave the real window where the user last saw it so the next animation starts from
+            // there instead of jumping.
+            if pre_resize && actual != placed {
+                // Still queued: line up behind them instead of being overridden by them.
+                Self::place(data.hwnd, &placed, &shown, true)?;
+            } else {
+                Self::place(data.hwnd, &actual, &shown, false)?;
+            }
+        } else if actual != segment.to {
+            // Chromium's deferred placement, or a slow app that hasn't processed the posted one
+            // yet. Anything still queued ends on this same rect, so it is harmless when it lands.
+            Self::place(data.hwnd, &actual, &segment.to, false)?;
+        }
+
+        drop(cloak);
+        drop(overlay);
+
+        if !interrupted {
+            log::trace!(
+                "Buffered animation({:?}) completed: {} ticks, {} unique pixel frames",
+                data.hwnd,
+                frame_i,
+                frames
+            );
+        }
+
+        Ok(interrupted)
+    }
+
+    /// Applies a signal received by a buffered animation. Returns false on interrupt.
+    fn apply_signal(
+        signal: AnimationSignal,
+        hwnd: isize,
+        pre_resize: bool,
+        shown: Rect,
+        segment: &mut Segment,
+        placed: &mut Rect,
+    ) -> Result<bool> {
+        match signal {
+            AnimationSignal::Interrupt => Ok(false),
+            AnimationSignal::Retarget {
+                to,
+                easing,
+                duration,
+            } => {
+                *segment = Segment::new(shown, to, easing, duration);
+                if pre_resize {
+                    *placed = Self::place(hwnd, placed, &to, true)?;
+                }
+                Ok(true)
+            }
+        }
+    }
+
+    /// Places the window currently at `current` on `rect` with a single redrawn resize, returning
+    /// `rect`. Moves first and sizes after: if the move lands on a monitor with another DPI, the
+    /// app applies its WM_DPICHANGED suggested size during the move, and our resize then
+    /// overrides it with the real target. With `r#async` both requests are posted (applied in
+    /// order) instead of awaited.
+    fn place(hwnd: isize, current: &Rect, rect: &Rect, r#async: bool) -> Result<Rect> {
+        if current == rect {
+            return Ok(*rect);
+        }
+        let place = if r#async {
+            position_window_async
+        } else {
+            position_window
+        };
+        if current.x != rect.x || current.y != rect.y {
+            place(hwnd, rect, false, true)?;
+        }
+        place(hwnd, rect, true, false)?;
+        Ok(*rect)
+    }
+
     pub fn is_running(&self) -> bool {
         self.animation_thread.is_some()
     }
 
     fn interrupt(&mut self) {
-        if let Some(signal) = self.interrupt_signal.take() {
-            let _ = signal.send(());
+        if let Some(signal) = self.signal.take() {
+            let _ = signal.send(AnimationSignal::Interrupt);
         }
     }
 
@@ -304,6 +600,7 @@ impl AnimationOrchestrator {
         batch: HashMap<isize, Rect>,
         duration_ms: u64,
         easing: Easing,
+        mode: AnimationMode,
         on_end: F,
     ) -> Result<()>
     where
@@ -311,7 +608,7 @@ impl AnimationOrchestrator {
     {
         let on_end = Arc::new(on_end);
         for (hwnd, rect) in batch {
-            self.animate_window(hwnd, rect, duration_ms, easing, on_end.clone())?;
+            self.animate_window(hwnd, rect, duration_ms, easing, mode, on_end.clone())?;
         }
         Ok(())
     }
@@ -322,6 +619,7 @@ impl AnimationOrchestrator {
         target_rect: Rect,
         duration_ms: u64,
         easing: Easing,
+        mode: AnimationMode,
         on_end: Arc<F>,
     ) -> Result<()>
     where
@@ -332,7 +630,7 @@ impl AnimationOrchestrator {
             .animations
             .entry_sync(hwnd)
             .or_insert_with(WindowAnimation::new);
-        animation.start(hwnd, target_rect, easing, duration_ms, on_end)?;
+        animation.start(hwnd, target_rect, easing, duration_ms, mode, on_end)?;
         Ok(())
     }
 }
@@ -341,4 +639,8 @@ impl Default for AnimationOrchestrator {
     fn default() -> Self {
         Self::new()
     }
+}
+
+fn lock<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
+    mutex.lock().unwrap_or_else(PoisonError::into_inner)
 }

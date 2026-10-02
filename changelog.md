@@ -22,6 +22,7 @@
 - tray icons now are sortable.
 - window manager overlay is no longer topmost. When a managed window is focused, the tiled windows and the overlay are
   brought to the front, so the overlay no longer needs to be hidden when a non-managed window is focused.
+- smoother twm animations.
 
 ### fix
 

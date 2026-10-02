@@ -211,7 +211,7 @@ impl UserAppsManager {
 /// As windows properties can change, this should be reevaluated on every change.
 pub fn is_interactable_window(window: &Window) -> bool {
     // It must be a visible Window and not cloaked
-    if !window.is_window() || !window.is_visible() || window.is_cloaked() {
+    if !window.is_window() || !window.is_visible() {
         return false;
     }
 

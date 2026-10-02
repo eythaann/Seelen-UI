@@ -6,8 +6,9 @@ use windows::Win32::{
     },
     UI::WindowsAndMessaging::{
         BeginDeferWindowPos, DeferWindowPos, EndDeferWindowPos, GetClassNameW, GetWindowRect, HDWP,
-        MoveWindow, SWP_DEFERERASE, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOOWNERZORDER,
-        SWP_NOREDRAW, SWP_NOSENDCHANGING, SWP_NOSIZE, SWP_NOZORDER, SetWindowPos,
+        MoveWindow, SWP_ASYNCWINDOWPOS, SWP_DEFERERASE, SWP_NOACTIVATE, SWP_NOCOPYBITS,
+        SWP_NOOWNERZORDER, SWP_NOREDRAW, SWP_NOSENDCHANGING, SWP_NOSIZE, SWP_NOZORDER,
+        SetWindowPos,
     },
 };
 
@@ -44,6 +45,23 @@ pub fn move_window(hwnd: isize, rect: &Rect, redraw: bool) -> Result<()> {
 // WM_WINDOWPOSCHANGING and causes severe visual artifacts. DeferWindowPos does not support this
 // flag (crashes), which is why the defer API below is unused.
 pub fn position_window(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) -> Result<()> {
+    set_window_pos(hwnd, rect, redraw, no_size, false)
+}
+
+/// Same as [`position_window`] but posts the request to the window's thread instead of waiting
+/// for it to be processed. Requests are applied in posting order, but after any synchronous
+/// (sent) SetWindowPos issued meanwhile.
+pub fn position_window_async(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) -> Result<()> {
+    set_window_pos(hwnd, rect, redraw, no_size, true)
+}
+
+fn set_window_pos(
+    hwnd: isize,
+    rect: &Rect,
+    redraw: bool,
+    no_size: bool,
+    r#async: bool,
+) -> Result<()> {
     let mut flags = SWP_NOACTIVATE | SWP_NOSENDCHANGING | SWP_NOZORDER | SWP_NOOWNERZORDER;
 
     if !redraw {
@@ -52,6 +70,10 @@ pub fn position_window(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) ->
 
     if no_size {
         flags |= SWP_NOSIZE;
+    }
+
+    if r#async {
+        flags |= SWP_ASYNCWINDOWPOS;
     }
 
     unsafe {
@@ -123,9 +145,4 @@ pub fn get_class(hwnd: isize) -> Result<String> {
     let len = unsafe { GetClassNameW(HWND(hwnd as _), &mut text) };
     let length = usize::try_from(len).unwrap_or(0);
     Ok(String::from_utf16(&text[..length])?)
-}
-
-pub fn is_explorer(hwnd: isize) -> Result<bool> {
-    let class = get_class(hwnd as _)?;
-    Ok(class == "CabinetWClass" || class == "ExplorerWClass")
 }
