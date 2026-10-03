@@ -15,7 +15,6 @@
     "jsr:@ts-morph/common@0.27": "0.27.0",
     "npm:@tauri-apps/api@^2.12.0": "2.12.0",
     "npm:@tauri-apps/plugin-dialog@^2.8.0": "2.8.0",
-    "npm:@tauri-apps/plugin-process@^2.4.0": "2.4.0",
     "npm:ts-morph@*": "28.0.0"
   },
   "jsr": {
@@ -84,12 +83,6 @@
         "@tauri-apps/api"
       ]
     },
-    "@tauri-apps/plugin-process@2.4.0": {
-      "integrity": "sha512-GddrmsSLAYrLa/yTXlXK/YRDzUgYeeOnUXTbiyvJWkmI424RmDPD3FVLeqcon7rv6O6ZfhBilcrHWnSo7o6hIQ==",
-      "dependencies": [
-        "@tauri-apps/api"
-      ]
-    },
     "@ts-morph/common@0.29.0": {
       "integrity": "sha512-35oUmphHbJvQ/+UTwFNme/t2p3FoKiGJ5auTjjpNTop2dyREspirjMy82PLSC1pnDJ8ah1GU98hwpVt64YXQsg==",
       "dependencies": [
@@ -152,8 +145,7 @@
       "jsr:@std/assert@^1.0.19",
       "jsr:@std/encoding@^1.0.10",
       "npm:@tauri-apps/api@^2.12.0",
-      "npm:@tauri-apps/plugin-dialog@^2.8.0",
-      "npm:@tauri-apps/plugin-process@^2.4.0"
+      "npm:@tauri-apps/plugin-dialog@^2.8.0"
     ]
   }
 }

@@ -174,6 +174,8 @@ slu_commands_declaration! {
         run(program: String, args: Option<RelaunchArguments>, working_dir: Option<std::path::PathBuf>, elevated: bool),
     // SimulatePerm = simulate_perm(widget_id: String, perm: String),
 
+    AppExit = app_exit(),
+    AppRestart = app_restart(),
     IsDevMode = is_dev_mode() -> bool,
     IsAppxPackage = is_appx_package() -> bool,
     HasFixedRuntime = has_fixed_runtime() -> bool,

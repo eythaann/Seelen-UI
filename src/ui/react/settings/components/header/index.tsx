@@ -1,4 +1,4 @@
-import { process } from "@seelen-ui/lib/tauri";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { Button } from "antd";
@@ -21,7 +21,7 @@ export const Header = () => {
     if (hasChanges.value) {
       await saveSettings();
       if (needRestart.value) {
-        await process.relaunch();
+        await invoke(SeelenCommand.AppRestart);
       }
     } else {
       await getCurrentWebviewWindow().close();

@@ -15,6 +15,8 @@ export enum SeelenCommand {
   OpenFile = "open_file",
   SelectFileOnExplorer = "select_file_on_explorer",
   Run = "run",
+  AppExit = "app_exit",
+  AppRestart = "app_restart",
   IsDevMode = "is_dev_mode",
   IsAppxPackage = "is_appx_package",
   HasFixedRuntime = "has_fixed_runtime",

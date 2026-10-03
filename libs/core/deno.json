@@ -24,8 +24,7 @@
     "@std/assert": "jsr:@std/assert@^1.0.19",
     "@std/encoding": "jsr:@std/encoding@^1.0.10",
     "@tauri-apps/api": "npm:@tauri-apps/api@^2.12.0",
-    "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.8.0",
-    "@tauri-apps/plugin-process": "npm:@tauri-apps/plugin-process@^2.4.0"
+    "@tauri-apps/plugin-dialog": "npm:@tauri-apps/plugin-dialog@^2.8.0"
   },
   "compilerOptions": {
     "lib": [

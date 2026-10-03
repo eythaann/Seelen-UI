@@ -76,6 +76,14 @@ impl crate::tauri_handlers::Handlers {
         WindowsApi::execute(program, args, working_dir, elevated)
     }
 
+    pub fn app_exit() {
+        get_app_handle().exit(0);
+    }
+
+    pub fn app_restart() {
+        get_app_handle().restart();
+    }
+
     pub fn is_dev_mode() -> bool {
         tauri::is_dev()
     }
