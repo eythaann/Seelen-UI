@@ -108,15 +108,16 @@ use windows::{
             },
             WindowsAndMessaging::{
                 DispatchMessageW, FindWindowExW, GW_OWNER, GWL_EXSTYLE, GWL_STYLE, GetClassNameW,
-                GetDesktopWindow, GetForegroundWindow, GetParent, GetWindow, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, HWND_BROADCAST, IsIconic,
-                IsWindow, IsWindowVisible, IsZoomed, MSG, PM_REMOVE, PeekMessageW, PostMessageW,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SW_SHOWNORMAL, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, SendMessageW, SendNotifyMessageW,
-                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, TranslateMessage,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WM_SETTINGCHANGE, WS_SIZEBOX, WS_THICKFRAME,
+                GetDesktopWindow, GetForegroundWindow, GetParent, GetPropW, GetWindow,
+                GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
+                HWND_BROADCAST, IsIconic, IsWindow, IsWindowVisible, IsZoomed, MSG, PM_REMOVE,
+                PeekMessageW, PostMessageW, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SW_SHOWNORMAL, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, SendMessageW,
+                SendNotifyMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, TranslateMessage, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WM_SETTINGCHANGE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -311,6 +312,12 @@ impl WindowsApi {
             && window_rect.top <= rc_monitor.top + TOLERANCE
             && window_rect.right >= rc_monitor.right - TOLERANCE
             && window_rect.bottom >= rc_monitor.bottom - TOLERANCE)
+    }
+
+    /// Whether the window carries a (non-null) prop with this name.
+    pub fn has_prop(hwnd: HWND, name: &str) -> bool {
+        let name = WindowsString::from(name);
+        !unsafe { GetPropW(hwnd, name.as_pcwstr()) }.0.is_null()
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {

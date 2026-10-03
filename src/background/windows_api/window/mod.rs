@@ -275,6 +275,16 @@ impl Window {
         WindowsApi::is_cloaked(self.0).unwrap_or(false)
     }
 
+    /// Cloaked by a Seelen buffered animation (transient), not by the app or the shell.
+    pub fn is_cloaked_by_seelen(&self) -> bool {
+        WindowsApi::has_prop(self.0, "SluCloaked")
+    }
+
+    /// Removed from the taskbar via `ITaskbarList::DeleteTab`, which marks the window with this prop.
+    pub fn is_taskbar_tab_deleted(&self) -> bool {
+        WindowsApi::has_prop(self.0, "ITaskList_Deleted")
+    }
+
     pub fn is_focused(&self) -> bool {
         WindowsApi::get_foreground_window() == self.0
     }

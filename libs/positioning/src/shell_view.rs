@@ -1,8 +1,5 @@
 //! Undocumented shell COM interfaces used to cloak windows owned by other processes, as
 //! `DwmSetWindowAttribute(DWMWA_CLOAK)` is rejected with E_ACCESSDENIED for foreign HWNDs.
-//!
-//! Interface definitions adapted from komorebi / AltTabAccessor (MIT, Jari Pennanen). Only the
-//! vtable prefix up to the methods we call is declared; trailing methods don't affect the layout.
 
 use std::{
     ffi::c_void,
@@ -11,8 +8,9 @@ use std::{
 
 use windows::{
     Win32::{
-        Foundation::{HWND, RPC_E_DISCONNECTED, RPC_E_SERVER_DIED, RPC_E_SERVER_DIED_DNE},
+        Foundation::{HANDLE, HWND, RPC_E_DISCONNECTED, RPC_E_SERVER_DIED, RPC_E_SERVER_DIED_DNE},
         System::Com::{CLSCTX_ALL, CoCreateInstance, CoIncrementMTAUsage, IServiceProvider},
+        UI::WindowsAndMessaging::{RemovePropW, SetPropW},
     },
     core::{GUID, HRESULT, IUnknown, IUnknown_Vtbl, Interface, PCWSTR, interface},
 };
@@ -30,15 +28,24 @@ const CLOAK_FLAG_SHOW: i32 = 0;
 static VIEW_COLLECTION: Mutex<Option<SharedViewCollection>> = Mutex::new(None);
 
 /// Cloaks a window while alive, uncloaking it on drop (including on errors/early returns).
+///
+/// While cloaked, the window carries the [`crate::CLOAKED_PROP`] prop so window trackers can
+/// tell this transient cloak apart from app/shell cloaking (UWP suspension, virtual desktops).
+/// The prop is set before cloaking and removed after uncloaking, so it covers the whole span.
 pub struct CloakGuard {
+    hwnd: isize,
     view: IApplicationView,
 }
 
 impl CloakGuard {
     pub fn cloak(hwnd: isize) -> Result<Self> {
         let view = get_application_view(hwnd)?;
-        unsafe { view.set_cloak(CLOAK_TYPE, CLOAK_FLAG_HIDE).ok()? };
-        Ok(Self { view })
+        set_cloaked_prop(hwnd, true);
+        if let Err(err) = unsafe { view.set_cloak(CLOAK_TYPE, CLOAK_FLAG_HIDE).ok() } {
+            set_cloaked_prop(hwnd, false);
+            return Err(err.into());
+        }
+        Ok(Self { hwnd, view })
     }
 }
 
@@ -47,6 +54,7 @@ impl Drop for CloakGuard {
         if let Err(err) = unsafe { self.view.set_cloak(CLOAK_TYPE, CLOAK_FLAG_SHOW).ok() } {
             log::error!("Failed to uncloak window: {err}");
         }
+        set_cloaked_prop(self.hwnd, false);
     }
 }
 
@@ -144,4 +152,18 @@ fn is_disconnected(code: HRESULT) -> bool {
         HRESULT(0x800706BF_u32 as _), // RPC_S_CALL_FAILED_DNE
     ]
     .contains(&code)
+}
+
+fn set_cloaked_prop(hwnd: isize, cloaked: bool) {
+    let hwnd = HWND(hwnd as _);
+    let result = unsafe {
+        if cloaked {
+            SetPropW(hwnd, crate::CLOAKED_PROP, Some(HANDLE(1 as _)))
+        } else {
+            RemovePropW(hwnd, crate::CLOAKED_PROP).map(|_| ())
+        }
+    };
+    if let Err(err) = result {
+        log::error!("Failed to update {hwnd:?} cloaked prop: {err}");
+    }
 }

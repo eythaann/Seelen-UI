@@ -24,6 +24,11 @@ use crate::{
 
 const FRAME_DURATION: std::time::Duration = std::time::Duration::from_millis(8); // ~120 fps cap
 
+/// Window prop (boolean, present = true) set on windows cloaked by a buffered animation, so
+/// window trackers can ignore this transient cloak. Mirrored as a literal by the background
+/// (`Window::is_cloaked_by_seelen`), which does not depend on this crate.
+const CLOAKED_PROP: windows::core::PCWSTR = windows::core::w!("SluCloaked");
+
 /// How a window animation is rendered.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum AnimationMode {

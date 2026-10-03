@@ -8,7 +8,7 @@ use seelen_core::{
     system_state::{UserAppWindow, WindowAttention},
 };
 use windows::Win32::UI::WindowsAndMessaging::{
-    WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW, WS_MINIMIZEBOX,
+    WS_CHILD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
 };
 
 use crate::{
@@ -204,25 +204,29 @@ impl UserAppsManager {
     }
 }
 
-/// The idea with this module is contain all the logic under the filteriong of windows
-/// that can be considered as applications windows, it means windows that are interactable
+/// The idea with this module is to contain all the logic for filtering the windows
+/// that can be considered as application windows, meaning windows that are interactable
 /// for the users.
 ///
-/// As windows properties can change, this should be reevaluated on every change.
+/// As window properties can change, this should be reevaluated on every change.
 pub fn is_interactable_window(window: &Window) -> bool {
-    // It must be a visible Window and not cloaked
-    if !window.is_window() || !window.is_visible() {
+    // It must be a visible window and not cloaked. Cloaks done by our own buffered animations
+    // are transient and must not hide the window (e.g. UWP apps like Settings stay cloaked
+    // while suspended, but ours only last for the animation).
+    if !window.is_window()
+        || !window.is_visible()
+        || (window.is_cloaked() && !window.is_cloaked_by_seelen())
+    {
         return false;
     }
 
-    // ignore windows without a title, these are not intended to be shown to users (comonly are invisible windows)
-    let title = window.title();
-    if title.is_empty() {
+    // Removed from the taskbar by the app itself via `ITaskbarList::DeleteTab`
+    if window.is_taskbar_tab_deleted() {
         return false;
     }
 
     // this class is used for edge tabs to be shown as independent windows on alt + tab
-    // this only applies when the new tab is created it is binded to explorer.exe for some reason
+    // this only applies when the new tab is created it is bound to explorer.exe for some reason
     // maybe we can search/learn more about edge tabs later.
     // fix: https://github.com/eythaann/Seelen-UI/issues/83
     if window.class() == "Windows.Internal.Shell.TabProxyWindow" {
@@ -247,12 +251,6 @@ pub fn is_interactable_window(window: &Window) -> bool {
     let process = window.process();
     // unmanageable window, these probably are system processes
     if process.open_limited_handle().is_err() {
-        return false;
-    }
-
-    // Internal behaviour for seelen ui widgets:
-    // Discard unminimizable windows (they have no caption/title bar)
-    if !style.contains(WS_MINIMIZEBOX) && process.is_seelen() {
         return false;
     }
 

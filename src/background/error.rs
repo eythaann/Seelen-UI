@@ -58,7 +58,6 @@ define_app_errors!(
     WinHotkey(win_hotkeys::error::WHKError);
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);
-    Positioning(positioning::error::Error);
     Time(time::error::Error);
     Bond(crate::modules::system_settings::nightlight::bond::BondError);
 );
