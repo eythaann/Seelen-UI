@@ -1,10 +1,9 @@
-use std::{collections::HashMap, os::windows::process::CommandExt, path::PathBuf};
+use std::{collections::HashMap, path::PathBuf};
 
 use seelen_core::system_state::{RelaunchArguments, StartMenuLayout, StartMenuLayoutItem};
 
 use slu_ipc::{ServiceIpc, messages::SvcAction};
 use tauri::WebviewWindow;
-use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
 use crate::{
     app::{SeelenUI, get_app_handle},
@@ -22,20 +21,6 @@ use crate::{
     windows_api::{WindowsApi, string_utils::WindowsString},
 };
 
-pub fn open_file_inner(path: String) -> Result<()> {
-    std::process::Command::new("cmd")
-        .raw_arg("/c")
-        .raw_arg("start")
-        .raw_arg("\"\"")
-        .raw_arg(format!("\"{path}\""))
-        .creation_flags(CREATE_NO_WINDOW.0 | CREATE_NEW_PROCESS_GROUP.0)
-        .stdin(std::process::Stdio::null())
-        .stdout(std::process::Stdio::null())
-        .stderr(std::process::Stdio::null())
-        .spawn()?;
-    Ok(())
-}
-
 impl crate::tauri_handlers::Handlers {
     pub fn log_from_webview(level: u8, message: String, location: String) {
         let level = match level {
@@ -50,7 +35,7 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn open_file(webview: tauri::WebviewWindow, path: String) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::OpenFile)?;
-        open_file_inner(path)
+        WindowsApi::execute(path, None, None, false)
     }
 
     pub fn select_file_on_explorer(path: PathBuf) -> Result<()> {

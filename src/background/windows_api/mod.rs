@@ -80,7 +80,7 @@ use windows::{
             FileSystem::WIN32_FIND_DATAW,
         },
         System::{
-            Com::{IPersistFile, STGM_READ},
+            Com::{IPersistFile, IServiceProvider, STGM_READ},
             Environment::ExpandEnvironmentStringsW,
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SYSTEM_POWER_STATUS, SetSuspendState},
@@ -95,16 +95,19 @@ use windows::{
                 OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
                 PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
             },
+            Variant::VARIANT,
         },
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
-                BHID_EnumItems, IEnumShellItems, IShellItem2, IShellLinkW, IVirtualDesktopManager,
-                KF_FLAG_DEFAULT,
+                BHID_EnumItems, CSIDL_DESKTOP, IEnumShellItems, IShellBrowser, IShellDispatch2,
+                IShellFolderViewDual, IShellItem2, IShellLinkW, IShellWindows,
+                IVirtualDesktopManager, KF_FLAG_DEFAULT,
                 PropertiesSystem::{GPS_DEFAULT, IPropertyStore, SHGetPropertyStoreForWindow},
                 SHCreateItemFromParsingName, SHELLEXECUTEINFOW, SHGetKnownFolderItem,
-                SHGetKnownFolderPath, SHLoadIndirectString, SIGDN_NORMALDISPLAY, ShellExecuteExW,
-                ShellLink, VirtualDesktopManager,
+                SHGetKnownFolderPath, SHLoadIndirectString, SID_STopLevelBrowser,
+                SIGDN_NORMALDISPLAY, SVGIO_BACKGROUND, SWC_DESKTOP, SWFO_NEEDDISPATCH,
+                ShellExecuteExW, ShellLink, ShellWindows, VirtualDesktopManager,
             },
             WindowsAndMessaging::{
                 DispatchMessageW, FindWindowExW, GW_OWNER, GWL_EXSTYLE, GWL_STYLE, GetClassNameW,
@@ -1293,6 +1296,67 @@ impl WindowsApi {
         elevated: bool,
     ) -> Result<()> {
         log::trace!("Running: {program:?} with args: {args:?} in working dir: {working_dir:?}");
+        match Self::shell_execute_through_explorer(&program, &args, &working_dir, elevated) {
+            Ok(()) => return Ok(()),
+            Err(err) => log::error!("Failed to execute through explorer, falling back: {err}"),
+        }
+        Self::shell_execute(program, args, working_dir, elevated)
+    }
+
+    /// Runs `ShellExecute` inside explorer.exe (via the desktop's `IShellDispatch2`), so the
+    /// spawned process is a child of explorer instead of ours: it doesn't inherit our console,
+    /// environment, elevation, or job objects. Note: this is asynchronous, launch errors
+    /// (e.g. file not found) are reported by explorer to the user, not to us.
+    fn shell_execute_through_explorer(
+        program: &str,
+        args: &Option<String>,
+        working_dir: &Option<PathBuf>,
+        elevated: bool,
+    ) -> Result<()> {
+        Com::run_with_context(|| unsafe {
+            let shell_windows: IShellWindows = Com::create_instance(&ShellWindows)?;
+
+            let mut hwnd = 0;
+            let desktop = shell_windows.FindWindowSW(
+                &VARIANT::from(CSIDL_DESKTOP as i32),
+                &VARIANT::default(),
+                SWC_DESKTOP,
+                &mut hwnd,
+                SWFO_NEEDDISPATCH,
+            )?;
+
+            let service_provider: IServiceProvider = desktop.cast()?;
+            let browser: IShellBrowser = service_provider.QueryService(&SID_STopLevelBrowser)?;
+            let view = browser.QueryActiveShellView()?;
+            let folder_view: IShellFolderViewDual = view.GetItemObject(SVGIO_BACKGROUND)?;
+            let shell: IShellDispatch2 = folder_view.Application()?.cast()?;
+
+            let as_variant = |value: Option<String>| match value {
+                Some(value) => VARIANT::from(BSTR::from(value)),
+                None => VARIANT::default(),
+            };
+
+            shell.ShellExecute(
+                &BSTR::from(program),
+                &as_variant(args.clone()),
+                &as_variant(
+                    working_dir
+                        .as_ref()
+                        .map(|d| d.to_string_lossy().to_string()),
+                ),
+                &as_variant(elevated.then(|| "runas".to_string())),
+                &VARIANT::from(SW_SHOWNORMAL.0),
+            )?;
+            Ok(())
+        })
+    }
+
+    fn shell_execute(
+        program: String,
+        args: Option<String>,
+        working_dir: Option<PathBuf>,
+        elevated: bool,
+    ) -> Result<()> {
         Self::refresh_environment_variables();
 
         let program = WindowsString::from_str(&program);

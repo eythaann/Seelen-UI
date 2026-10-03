@@ -73,7 +73,7 @@ impl crate::tauri_handlers::Handlers {
             }
             // Protocol activation: `args` is a URI. Delegate to the shell.
             ToastActionActivationType::Protocol => {
-                crate::exposed::open_file_inner(args)?;
+                crate::windows_api::WindowsApi::execute(args, None, None, false)?;
                 let _ = get_notification_manager().remove_notification(id);
                 return Ok(());
             }
