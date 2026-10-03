@@ -1,15 +1,17 @@
-use std::path::PathBuf;
+use std::{os::windows::process::CommandExt, path::PathBuf};
 
 use seelen_core::{handlers::SeelenEvent, state::WegItemData};
-use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    app::{emit_to_webviews, get_app_handle},
+    app::emit_to_webviews,
     error::Result,
     state::application::WEG_ITEMS_MANAGER,
     windows_api::{WindowsApi, window::Window},
 };
-use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
+use windows::Win32::{
+    System::Threading::CREATE_NO_WINDOW,
+    UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE},
+};
 
 impl crate::tauri_handlers::Handlers {
     pub fn weg_close_app(hwnd: isize) -> Result<()> {
@@ -20,10 +22,9 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn weg_kill_app(hwnd: isize) -> Result<()> {
         let window = Window::from(hwnd);
-        get_app_handle()
-            .shell()
-            .command("taskkill.exe")
+        std::process::Command::new("taskkill.exe")
             .args(["/F", "/PID", &window.process().id().to_string()])
+            .creation_flags(CREATE_NO_WINDOW.0)
             .spawn()?;
         Ok(())
     }

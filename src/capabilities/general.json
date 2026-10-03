@@ -13,7 +13,6 @@
     "core:webview:allow-set-webview-zoom",
     "core:path:default",
     "core:app:default",
-    "dialog:default",
-    "shell:allow-open"
+    "dialog:default"
   ]
 }

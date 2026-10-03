@@ -1,7 +1,6 @@
 use base64::Engine;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
-use tauri_plugin_shell::ShellExt;
 
 use crate::{app::get_app_handle, error::Result};
 
@@ -37,7 +36,7 @@ pub fn show_not_installed_dialog(app: &tauri::AppHandle) -> Result<()> {
         ))
         .blocking_show();
     if ok_pressed {
-        open_webview2_download(app)?;
+        open_webview2_download()?;
     }
     Ok(())
 }
@@ -53,16 +52,14 @@ pub fn show_outdated_dialog(app: &tauri::AppHandle) -> Result<()> {
         ))
         .blocking_show();
     if ok_pressed {
-        open_webview2_download(app)?;
+        open_webview2_download()?;
     }
     Ok(())
 }
 
-fn open_webview2_download(app: &tauri::AppHandle) -> Result<()> {
+fn open_webview2_download() -> Result<()> {
     let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
-    #[allow(deprecated)]
-    app.shell().open(url, None)?;
-    Ok(())
+    crate::exposed::open_file_inner(url.to_string())
 }
 
 /// Try creating a webview window, tauri for some reason could panic stopping the setup hook and for some reason

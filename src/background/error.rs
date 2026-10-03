@@ -33,7 +33,6 @@ define_app_errors!(
     Tauri(tauri::Error);
     Logger(log::SetLoggerError);
     Lib(seelen_core::SeelenLibError);
-    TauriShell(tauri_plugin_shell::Error);
     Windows(windows::core::Error);
     WMI(wmi::WMIError);
     SerdeJson(serde_json::Error);
@@ -139,8 +138,8 @@ impl From<AppError> for tauri::ipc::InvokeError {
     }
 }
 
-impl From<tauri_plugin_shell::process::Output> for AppError {
-    fn from(output: tauri_plugin_shell::process::Output) -> Self {
+impl From<std::process::Output> for AppError {
+    fn from(output: std::process::Output) -> Self {
         let msg = if !output.stderr.is_empty() {
             let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
             cow.to_string().to_owned()

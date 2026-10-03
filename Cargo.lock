@@ -3802,7 +3802,6 @@ version = "5.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aa576c76302b7b808eecc68061e67336c47833ef9d22caa74dda10fa9675eebc"
 dependencies = [
- "dunce",
  "is-wsl",
  "libc",
 ]
@@ -3833,16 +3832,6 @@ dependencies = [
  "objc2-ui-kit",
  "serde",
  "windows-sys 0.61.2",
-]
-
-[[package]]
-name = "os_pipe"
-version = "1.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d8fae84b431384b68627d0f9b3b1245fcf9f46f6c0e3dc902e9dce64edd1967"
-dependencies = [
- "libc",
- "windows-sys 0.45.0",
 ]
 
 [[package]]
@@ -5459,7 +5448,6 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-dialog",
- "tauri-plugin-shell",
  "tauri-plugin-updater",
  "time",
  "tokio",
@@ -5783,42 +5771,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "shared_child"
-version = "1.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e362d9935bc50f019969e2f9ecd66786612daae13e8f277be7bfb66e8bed3f7"
-dependencies = [
- "libc",
- "sigchld",
- "windows-sys 0.60.2",
-]
-
-[[package]]
 name = "shlex"
 version = "2.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
-
-[[package]]
-name = "sigchld"
-version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "47106eded3c154e70176fc83df9737335c94ce22f821c32d17ed1db1f83badb1"
-dependencies = [
- "libc",
- "os_pipe",
- "signal-hook",
-]
-
-[[package]]
-name = "signal-hook"
-version = "0.3.18"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d881a16cf4426aa584979d30bd82cb33429027e42122b169753d6ef1085ed6e2"
-dependencies = [
- "libc",
- "signal-hook-registry",
-]
 
 [[package]]
 name = "signal-hook-registry"
@@ -6422,27 +6378,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "tauri-plugin-shell"
-version = "2.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "094bdbc47e5efe36544ba21b3a53ab5c724150236cf55e6c9be46191deb6eab6"
-dependencies = [
- "encoding_rs",
- "log",
- "open",
- "os_pipe",
- "regex",
- "schemars 0.8.22",
- "serde",
- "serde_json",
- "shared_child",
- "tauri",
- "tauri-plugin",
- "thiserror 2.0.21",
- "tokio",
-]
-
-[[package]]
 name = "tauri-plugin-updater"
 version = "2.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6719,6 +6654,7 @@ dependencies = [
  "libc",
  "mio",
  "pin-project-lite",
+ "signal-hook-registry",
  "socket2",
  "tokio-macros",
  "windows-sys 0.61.2",

@@ -4,7 +4,6 @@ use seelen_core::system_state::{RelaunchArguments, StartMenuLayout, StartMenuLay
 
 use slu_ipc::{ServiceIpc, messages::SvcAction};
 use tauri::WebviewWindow;
-use tauri_plugin_shell::ShellExt;
 use windows::Win32::System::Threading::{CREATE_NEW_PROCESS_GROUP, CREATE_NO_WINDOW};
 
 use crate::{
@@ -56,9 +55,7 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn select_file_on_explorer(path: PathBuf) -> Result<()> {
         let path = path.to_string_lossy().to_string();
-        get_app_handle()
-            .shell()
-            .command(SEELEN_COMMON.system_dir().join("explorer.exe"))
+        std::process::Command::new(SEELEN_COMMON.system_dir().join("explorer.exe"))
             .args(["/select,", &path])
             .spawn()?;
         Ok(())

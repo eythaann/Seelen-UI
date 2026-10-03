@@ -1,10 +1,9 @@
 use std::{env::temp_dir, path::PathBuf, sync::LazyLock};
 
 use itertools::Itertools;
-use tauri_plugin_shell::ShellExt;
-use windows::Win32::UI::Shell::FOLDERID_System;
+use windows::Win32::{System::Threading::CREATE_NO_WINDOW, UI::Shell::FOLDERID_System};
 
-use crate::{app::get_app_handle, error::Result, windows_api::WindowsApi};
+use crate::{error::Result, windows_api::WindowsApi};
 
 const PWSH_COMMON_ARGS: [&str; 7] = [
     "-NoLogo",
@@ -84,8 +83,11 @@ impl PwshScript {
         std::fs::write(&script_path, &self.inner)?;
 
         let args = self.build_args(&script_path.to_string_lossy());
-        let shell = get_app_handle().shell();
-        let result = shell.command(&*POWERSHELL_PATH).args(args).output().await;
+        let result = tokio::process::Command::new(&*POWERSHELL_PATH)
+            .args(args)
+            .creation_flags(CREATE_NO_WINDOW.0)
+            .output()
+            .await;
         // delete script before check output
         std::fs::remove_file(&script_path)?;
         let output = result?;
