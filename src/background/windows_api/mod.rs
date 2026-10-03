@@ -80,7 +80,7 @@ use windows::{
             FileSystem::WIN32_FIND_DATAW,
         },
         System::{
-            Com::{IPersistFile, IServiceProvider, STGM_READ},
+            Com::{IDispatch, IPersistFile, IServiceProvider, STGM_READ},
             Environment::ExpandEnvironmentStringsW,
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SYSTEM_POWER_STATUS, SetSuspendState},
@@ -1328,7 +1328,10 @@ impl WindowsApi {
             let service_provider: IServiceProvider = desktop.cast()?;
             let browser: IShellBrowser = service_provider.QueryService(&SID_STopLevelBrowser)?;
             let view = browser.QueryActiveShellView()?;
-            let folder_view: IShellFolderViewDual = view.GetItemObject(SVGIO_BACKGROUND)?;
+            // the background object is only handed out as IDispatch, asking directly for
+            // IShellFolderViewDual fails with E_NOINTERFACE
+            let folder_view: IShellFolderViewDual =
+                view.GetItemObject::<IDispatch>(SVGIO_BACKGROUND)?.cast()?;
             let shell: IShellDispatch2 = folder_view.Application()?.cast()?;
 
             let as_variant = |value: Option<String>| match value {
