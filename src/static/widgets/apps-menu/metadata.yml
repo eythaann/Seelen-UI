@@ -7,6 +7,19 @@ loader: Internal
 preset: Overlay
 hidden: true
 # lazy: true
+settings:
+  - type: select
+    key: defaultView
+    label: !extend i18n/settings/default-view.yml
+    options:
+      - label: !extend i18n/settings/default-view-favorites.yml
+        value: favorites
+        icon: TbStar
+
+      - label: !extend i18n/settings/default-view-all.yml
+        value: all
+        icon: TbLayoutList
+    defaultValue: favorites
 shortcuts:
   - id: apps-menu-toggle
     command: ["widget", "trigger", "${self.id}"]

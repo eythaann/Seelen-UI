@@ -275,6 +275,12 @@ class State {
 
   view = $state(StartView.Favorites);
 
+  /** View shown each time the menu is opened (widget setting `defaultView`). */
+  get defaultView(): StartView {
+    const value = settings.value.getCurrentWidgetConfig().defaultView;
+    return value === StartView.All ? StartView.All : StartView.Favorites;
+  }
+
   version = $state<number>(0);
 
   get user() {
