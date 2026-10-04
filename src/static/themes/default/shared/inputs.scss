@@ -14,7 +14,7 @@ input[type="range"][data-skin="flat"] {
 
   height: 1.5rem;
   border-radius: 8px;
-  background: oklch(from var(--slu-std-ui-hover-color) l c h / 0.2);
+  background: var(--slu-std-ui-hover-overlay);
 
   &::-webkit-slider-runnable-track {
     appearance: none;
@@ -282,7 +282,7 @@ select[data-skin="transparent"] {
     }
 
     &:hover {
-      background-color: oklch(from var(--slu-std-ui-color) l c h / 0.2);
+      background-color: var(--slu-std-ui-hover-overlay);
     }
 
     &:checked {

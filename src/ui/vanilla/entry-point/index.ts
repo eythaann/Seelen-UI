@@ -1,6 +1,7 @@
 import "../../../../libs/core/styles/colors.css";
 import "../../../../libs/core/styles/spacings.css";
 import "../../../../libs/core/styles/shadows.css";
+import "../../../../libs/core/styles/radius.css";
 
 import "./ConsoleWrapper.ts";
 import "./LivenessProve.ts";

@@ -23,6 +23,8 @@
   --slu-std-bg-light-color: light-dark(var(--color-gray-25), var(--color-gray-75));
 
   --slu-std-ui-color: light-dark(var(--system-accent-dark-color), var(--system-accent-light-color));
+  // text/icons drawn on top of --slu-std-ui-color (inverse of the normal foreground)
+  --slu-std-ui-fg-color: var(--color-gray-100);
   --slu-std-ui-hover-color: light-dark(
     var(--system-accent-darker-color),
     var(--system-accent-lighter-color)
@@ -30,6 +32,7 @@
 
   --slu-std-ui-hover-overlay: oklch(from var(--system-accent-color) l c h / 0.2);
   --slu-std-ui-pressed-overlay: oklch(from var(--system-accent-color) l c h / 0.3);
+  --slu-std-ui-selected-overlay: oklch(from var(--system-accent-color) l c h / 0.1);
 }
 
 // default hide/show widget animations.

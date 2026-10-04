@@ -32,7 +32,7 @@
     background-color: oklch(from var(--slu-std-bg-light-color) l c h / 0.5);
     color: var(--slu-std-fg-color);
 
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 }

@@ -12,13 +12,17 @@
     gap: var(--spacing-xs);
     padding: var(--spacing-xs);
 
-    &.danger {
-      color: red;
-    }
-
     .svg-icon {
       height: 1rem;
-      opacity: 0.6;
+      color: var(--slu-std-fg-muted-color);
+    }
+
+    &.danger {
+      color: var(--color-red-600);
+
+      .svg-icon {
+        color: inherit;
+      }
     }
 
     .menu-item-img-icon {

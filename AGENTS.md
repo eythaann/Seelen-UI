@@ -40,6 +40,24 @@ WinRT / COM safety:
 - For WinRT objects with event subscriptions, use wrapper structs with `Drop` for automatic unregistration.
 - Windows-rs clones `TypedEventHandler` internally: store tokens, not handlers.
 
+Design (see `documentation/design-system.md` before touching any UI/styles):
+
+- Simple as possible: flat design, standard `data-skin` components, tokens only (`--slu-std-*`, `--color-*`,
+  `--system-accent-*`, `--spacing-*`, `--shadow-*`, `--radius-*`), automatic light/dark via tokens. Nested rounded
+  corners must be concentric (inner radius = outer radius - padding).
+- Accent ALWAYS = the user's Windows accent (`--system-accent-*` / `--slu-std-ui-*`). The color hue scales (red, green,
+  blue…) are only for indicators that convey meaning (error, warning, success, info), never for accent or decoration.
+- Widget visuals live in the default theme (`src/static/themes/default/`), not in components, so users can mod them.
+- No `border` or divider lines (flat): separate with spacing and surface tone. `outline` is reserved for focus and state
+  indicators (focus ring, active/selected item, drag & drop target, field error), never decoration.
+- Never redesign, add decorative effects, or invent one-off control styles unless the maintainers explicitly ask.
+- Colors are never hardcoded and never derived with ad-hoc alphas (use the `--slu-std-ui-*-overlay` vars). Status hues:
+  error = red, warning = yellow, success = green, info = blue. The font is always the system font (no monospace).
+  De-emphasize text with `--slu-std-fg-*` tokens, never `opacity`. Text on accent backgrounds uses
+  `--slu-std-ui-fg-color`.
+- UX comes first: rules may only be broken for a functional need (legibility, state feedback, affordance), never for
+  looks. Translucency is only allowed on the toolbar, dock (and its preview) and the window manager stack bar.
+
 ## Common Commands
 
 Initial setup:
@@ -430,6 +448,8 @@ pub enum Action {
 User/developer-facing docs live under `documentation/`. Always check there before asking how something works:
 
 - `FEATURES.md` — Full feature reference: every widget, setting, shortcut, and system capability
+- `design-system.md` — Design manifesto and contract: flat design, tokens, light/dark, `data-skin` components, rules for
+  widget markup and theme styles
 - `resource-guidelines.md` — Shared concepts: resource IDs, YAML `!include`/`!extend`, i18n, `slu` CLI
 - `widget-guidelines.md` / `widget-js-api.md` — How to build a custom widget: the resource guideline plus the runtime JS
   API (`init`/`ready`, `invoke`/`subscribe`)

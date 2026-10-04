@@ -210,7 +210,7 @@
       }
 
       button {
-        font-size: 8px;
+        font-size: 0.5rem;
 
         :global(.svg-icon) {
           height: 12px;

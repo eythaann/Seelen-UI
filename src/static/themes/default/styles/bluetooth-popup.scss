@@ -88,7 +88,7 @@
         }
 
         &.bt-device-selected {
-          background-color: var(--slu-std-ui-pressed-overlay);
+          background-color: var(--slu-std-ui-selected-overlay);
         }
 
         .bt-device-info {
@@ -107,7 +107,6 @@
 
         .bt-device-extra-info {
           font-size: 0.7rem;
-          font-family: monospace;
           color: var(--slu-std-fg-secondary-color);
 
           li {
@@ -144,12 +143,11 @@
             justify-content: center;
             width: 100%;
             padding: 16px 12px;
-            background-color: #{"rgb(from var(--system-accent-color) r g b / 0.1)"};
+            background-color: var(--slu-std-ui-selected-overlay);
             border: 2px solid var(--system-accent-color);
             border-radius: 8px;
             font-size: 1.5rem;
             font-weight: 700;
-            font-family: "Courier New", monospace;
             letter-spacing: 0.3em;
             user-select: text;
           }

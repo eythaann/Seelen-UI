@@ -95,7 +95,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 12px 20px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
     border-radius: 10px;
     backdrop-filter: blur(10px);

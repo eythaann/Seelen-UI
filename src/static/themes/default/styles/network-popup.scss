@@ -87,7 +87,7 @@
         }
 
         &.wlan-entry-selected {
-          background-color: var(--slu-std-ui-pressed-overlay);
+          background-color: var(--slu-std-ui-selected-overlay);
         }
 
         .wlan-entry-info {
@@ -119,7 +119,6 @@
 
         .wlan-entry-extra-info {
           font-size: 0.7rem;
-          font-family: monospace;
           color: var(--slu-std-fg-secondary-color);
 
           li {
@@ -210,7 +209,7 @@
 
     .hotspot-view-title {
       flex: 1;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -224,7 +223,7 @@
     justify-content: center;
     padding: 12px;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--color-fixed-gray-25); // QR codes need a light background in any scheme
 
     img {
       width: 176px;

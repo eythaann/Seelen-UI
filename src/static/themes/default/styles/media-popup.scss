@@ -12,7 +12,7 @@
 
   // Common labels
   .media-control-label {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--slu-std-fg-secondary-color);
     margin-top: var(--spacing-xs);
@@ -50,7 +50,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 14px;
+      font-size: 0.875rem;
     }
   }
 
@@ -70,7 +70,7 @@
       margin-bottom: var(--spacing-xs);
 
       .media-device-title {
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 600;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -162,12 +162,12 @@
 
     .media-session-title,
     .media-session-author {
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 1px 3px #{"hsl(var(--shadow-color) / 0.5)"};
     }
 
     .media-session-title {
       width: 100%;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -176,8 +176,8 @@
 
     .media-session-author {
       width: 100%;
-      font-size: 12px;
-      opacity: 0.8;
+      font-size: 0.75rem;
+      color: var(--slu-std-fg-secondary-color);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -193,9 +193,9 @@
     gap: var(--spacing-xs);
 
     .media-session-time {
-      font-size: 11px;
-      opacity: 0.8;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      font-size: 0.625rem;
+      color: var(--slu-std-fg-secondary-color);
+      text-shadow: 0 1px 3px #{"hsl(var(--shadow-color) / 0.5)"};
       white-space: nowrap;
     }
 
@@ -207,7 +207,7 @@
 
       height: 4px;
       border-radius: 8px;
-      background: oklch(from var(--slu-std-bg-dark-color) l c h / 0.8);
+      background: var(--slu-std-bg-dark-color);
 
       &::-webkit-slider-runnable-track {
         appearance: none;

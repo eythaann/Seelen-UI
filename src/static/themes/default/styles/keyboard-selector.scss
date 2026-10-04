@@ -22,11 +22,11 @@
       border-radius: 0.5rem;
 
       &:hover {
-        background-color: RGB(from var(--system-accent-color) r g b / 0.2);
+        background-color: var(--slu-std-ui-hover-overlay);
       }
 
       &.layout-active {
-        background-color: RGB(from var(--system-accent-color) r g b / 0.4);
+        background-color: var(--slu-std-ui-selected-overlay);
       }
 
       .layout-info {

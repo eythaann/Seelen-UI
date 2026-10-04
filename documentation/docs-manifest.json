@@ -44,13 +44,24 @@
       "status": "published"
     },
     {
+      "id": "design-system",
+      "title": "Design System & Manifesto",
+      "description": "The Seelen UI design contract: flat, simple, light/dark-adaptive design built on shared tokens and data-skin standard components, kept minimal so themes can mod everything.",
+      "file": "design-system.md",
+      "slug": "design-system",
+      "category": "themes",
+      "order": 1,
+      "audience": ["dev"],
+      "status": "published"
+    },
+    {
       "id": "theme-guidelines",
       "title": "Theme Guidelines",
       "description": "How to create a theme: per-widget styles, shared styles, CSS variable settings, system CSS variables.",
       "file": "theme-guidelines.md",
       "slug": "theme-guidelines",
       "category": "themes",
-      "order": 1,
+      "order": 2,
       "audience": ["dev"],
       "status": "published"
     },

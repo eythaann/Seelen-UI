@@ -17,7 +17,7 @@
     padding: 0 4px;
 
     .calendar-date {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 600;
       padding: 4px 8px;
       border-radius: 4px;
@@ -63,10 +63,10 @@
     margin-bottom: 4px;
 
     .calendar-weekday {
-      font-size: 12px;
+      font-size: 0.75rem;
       font-weight: 600;
       padding: 8px 0;
-      opacity: 0.7;
+      color: var(--slu-std-fg-secondary-color);
       text-align: center;
     }
   }
@@ -89,7 +89,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 0.75rem;
     cursor: pointer;
 
     &:hover {
@@ -97,7 +97,7 @@
     }
 
     &.calendar-cell-off-month {
-      opacity: 0.3;
+      color: var(--slu-std-fg-muted-color);
     }
 
     &.calendar-cell-today {
@@ -106,13 +106,12 @@
     }
 
     &.calendar-cell-selected {
-      background-color: var(--system-accent-color);
-      color: white;
+      background-color: var(--slu-std-ui-color);
+      color: var(--color-gray-100);
       font-weight: 600;
 
       &:hover {
-        background-color: var(--system-accent-color);
-        opacity: 0.9;
+        background-color: var(--slu-std-ui-hover-color);
       }
     }
   }
@@ -126,7 +125,7 @@
     .calendar-month-cell {
       padding: 16px 12px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
       text-align: center;

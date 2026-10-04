@@ -1,7 +1,7 @@
 .workspaces-viewer {
   width: 100vw;
   height: 100vh;
-  background-color: #000c; // just in case wallpaper fails
+  background-color: var(--color-fixed-gray-900); // just in case wallpaper fails
 
   .monitor {
     display: flex;

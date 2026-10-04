@@ -28,8 +28,7 @@ $itemListSpacing: 10px;
     gap: var(--spacing-xs);
 
     &:hover {
-      filter: brightness(0.95);
-      backdrop-filter: brightness(0.95);
+      background-color: var(--slu-std-bg-color);
     }
 
     .weg-item-preview-topbar {

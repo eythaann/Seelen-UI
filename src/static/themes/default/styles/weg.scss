@@ -28,19 +28,19 @@
 
 @keyframes shadow-on-horizontal-scroll {
   from {
-    box-shadow: inset -20px 0 15px -10px rgb(0 0 0 / 0.5);
+    box-shadow: inset -20px 0 15px -10px #{"hsl(var(--shadow-color) / 0.5)"};
   }
   to {
-    box-shadow: inset 20px 0 15px -10px rgb(0 0 0 / 0.5);
+    box-shadow: inset 20px 0 15px -10px #{"hsl(var(--shadow-color) / 0.5)"};
   }
 }
 
 @keyframes shadow-on-vertical-scroll {
   from {
-    box-shadow: inset 0 -20px 15px -10px rgb(0 0 0 / 0.5);
+    box-shadow: inset 0 -20px 15px -10px #{"hsl(var(--shadow-color) / 0.5)"};
   }
   to {
-    box-shadow: inset 0 20px 15px -10px rgb(0 0 0 / 0.5);
+    box-shadow: inset 0 20px 15px -10px #{"hsl(var(--shadow-color) / 0.5)"};
   }
 }
 
@@ -91,7 +91,7 @@
   line-height: var(--config-item-size);
   vertical-align: middle;
   font-style: italic;
-  color: oklch(from var(--slu-std-fg-color) l c h / 0.5);
+  color: var(--slu-std-fg-muted-color);
   margin: 0 calc(var(--config-padding) * 2);
 }
 
@@ -104,7 +104,7 @@
   --item-size-medium: calc(var(--config-item-size) * 2 + var(--config-space-between-items));
   --item-size-large: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
 
-  --weg-item-attention-color: oklch(from var(--system-accent-color) l c h / 0.2);
+  --weg-item-attention-color: var(--slu-std-ui-hover-overlay);
 }
 
 .weg-item-overlay {
@@ -129,7 +129,7 @@
 
     background-color: var(--slu-std-ui-color);
     color: var(--color-gray-100);
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
 
     &:has(img) {
@@ -161,7 +161,7 @@
 
     background-color: var(--color-gray-400);
     color: var(--color-gray-100);
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
   }
 

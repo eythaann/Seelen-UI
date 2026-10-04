@@ -1,7 +1,6 @@
 :root {
   --columns: 7;
   --folder-columns: 5;
-  --bg-light: RGB(from var(--system-accent-color) r g b / 0.6);
 }
 
 body {
@@ -143,7 +142,7 @@ body {
   border-radius: 10px;
 
   &:hover {
-    background-color: var(--bg-light);
+    background-color: var(--slu-std-ui-hover-overlay);
   }
 
   &:active {
@@ -178,7 +177,7 @@ body {
       background-color: var(--slu-std-bg-light-color);
 
       img {
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(0 0 2px #{"hsl(var(--shadow-color) / 0.2)"});
       }
     }
   }
@@ -215,7 +214,7 @@ body {
   }
 
   &:hover {
-    background-color: var(--bg-light);
+    background-color: var(--slu-std-ui-hover-overlay);
   }
 
   &:active {
@@ -242,7 +241,7 @@ body {
     padding: 8%;
     box-shadow: var(--shadow-s);
 
-    background-color: RGB(from var(--slu-std-bg-light-color) r g b / 0.6);
+    background-color: var(--slu-std-bg-light-color);
     border-radius: 16%;
 
     .folder-preview {
@@ -287,7 +286,7 @@ body {
 .folder {
   &:focus-visible,
   &[aria-selected="true"] {
-    background-color: var(--bg-light);
+    background-color: var(--slu-std-ui-selected-overlay);
     outline: 2px solid var(--system-accent-color);
     outline-offset: 2px;
   }
