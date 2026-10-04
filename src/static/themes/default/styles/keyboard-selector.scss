@@ -2,7 +2,7 @@
   width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-xs);
 
   .keyboard-selector-header {
     font-weight: 600;
@@ -11,15 +11,15 @@
   .keyboard-selector-body {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--spacing-xs);
 
     .layout {
       display: grid;
       grid-template-columns: 20px 1fr;
       align-items: center;
-      gap: 10px;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-xs) var(--spacing-s);
+      border-radius: var(--radius-s);
 
       &:hover {
         background-color: var(--slu-std-ui-hover-overlay);

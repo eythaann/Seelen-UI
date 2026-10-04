@@ -20,7 +20,7 @@
 
   background-color: var(--slu-std-bg-color);
   box-shadow: var(--shadow-l);
-  border-radius: 1rem;
+  border-radius: var(--radius-l);
   padding: 1rem;
   gap: 1rem;
 
@@ -32,7 +32,7 @@
     flex-shrink: 0;
     overflow: hidden;
     width: fit-content;
-    border-radius: 10px;
+    border-radius: var(--radius-m);
     width: 260px;
     background-color: var(--slu-std-bg-light-color);
     box-shadow: var(--shadow-s);
@@ -56,7 +56,6 @@
 
       .task-title {
         font-weight: 600;
-        font-size: 0.9rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -66,7 +65,7 @@
     .task-preview-container {
       width: 100%;
       height: 150px;
-      border-radius: 0 0 10px 10px;
+      border-radius: 0 0 var(--radius-m) var(--radius-m);
       overflow: hidden;
 
       display: flex;

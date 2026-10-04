@@ -1,16 +1,15 @@
 .bluetooth-popup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-xs);
 
   .bluetooth-no-adapter {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: var(--spacing-2xl) var(--spacing-l);
     color: var(--slu-std-fg-muted-color);
     font-style: italic;
-    font-size: 0.95rem;
     text-align: center;
   }
 
@@ -18,15 +17,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 6px;
-    border-radius: 8px;
+    padding: var(--spacing-xs) var(--spacing-2xs);
+    border-radius: var(--radius-s);
     background-color: var(--slu-std-bg-light-color);
     box-shadow: var(--shadow-s);
 
     .bluetooth-radio-label {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--spacing-xs);
       font-weight: 600;
     }
 
@@ -40,8 +39,8 @@
     flex-direction: column;
 
     &:not(:last-child) {
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--color-gray-300);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 1px solid var(--slu-std-fg-muted-color);
     }
 
     .bt-list-title {
@@ -49,8 +48,8 @@
       align-items: center;
       justify-content: space-between;
 
-      padding-left: 8px;
-      margin-bottom: 8px;
+      padding-left: var(--spacing-xs);
+      margin-bottom: var(--spacing-xs);
       font-weight: 600;
       color: var(--slu-std-fg-secondary-color);
       text-transform: uppercase;
@@ -70,7 +69,7 @@
     .bt-list-devices {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: var(--spacing-xs);
 
       max-height: 300px;
       overflow-x: visible;
@@ -81,7 +80,7 @@
         flex-direction: column;
         gap: var(--spacing-xs);
         padding: var(--spacing-xs);
-        border-radius: var(--spacing-xs);
+        border-radius: var(--radius-s);
 
         &:hover {
           background-color: var(--slu-std-ui-hover-overlay);
@@ -94,7 +93,7 @@
         .bt-device-info {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: var(--spacing-xs);
 
           .bt-device-name {
             flex: 1;
@@ -106,7 +105,6 @@
         }
 
         .bt-device-extra-info {
-          font-size: 0.7rem;
           color: var(--slu-std-fg-secondary-color);
 
           li {
@@ -128,11 +126,10 @@
         .bt-device-pairing {
           display: flex;
           flex-direction: column;
-          gap: 8px;
-          margin-top: 12px;
+          gap: var(--spacing-xs);
+          margin-top: var(--spacing-s);
 
           .bt-device-pairing-message {
-            font-size: 0.85rem;
             color: var(--slu-std-fg-secondary-color);
             font-style: italic;
           }
@@ -142,10 +139,9 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 16px 12px;
+            padding: var(--spacing-m) var(--spacing-s);
             background-color: var(--slu-std-ui-selected-overlay);
-            border: 2px solid var(--system-accent-color);
-            border-radius: 8px;
+            border-radius: var(--radius-s);
             font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: 0.3em;
@@ -156,15 +152,15 @@
         .bt-device-actions {
           display: flex;
           justify-content: flex-end;
-          gap: 8px;
-          margin-top: 12px;
+          gap: var(--spacing-xs);
+          margin-top: var(--spacing-s);
         }
 
         .bt-device-error {
-          margin-top: 8px;
-          padding: 8px;
+          margin-top: var(--spacing-xs);
+          padding: var(--spacing-xs);
           background-color: var(--color-red-100);
-          border-radius: 6px;
+          border-radius: var(--radius-s);
           color: var(--color-red-600);
           font-size: 0.8rem;
           text-align: center;
@@ -178,7 +174,6 @@
         height: 100px;
         color: var(--slu-std-fg-muted-color);
         font-style: italic;
-        font-size: 0.9rem;
       }
     }
   }

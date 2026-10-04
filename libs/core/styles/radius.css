@@ -5,11 +5,13 @@
  *   inner radius = outer radius - padding between them (never below 0)
  *   e.g. border-radius: max(0px, calc(var(--radius-m) - var(--spacing-xs)));
  *
- * Use 50% for circles (avatars, status dots). Never use other percentages.
+ * Use 50% for circles (avatars, status dots). Other percentages only for square,
+ * dynamically sized icons (e.g. apps menu app icons).
  */
 :root {
+  --radius-xs: 4px; /* tiny elements: checkboxes, small icons, compact cells, inline labels */
   --radius-s: 6px; /* controls: buttons, inputs, selects, list items */
   --radius-m: 10px; /* surfaces: popovers, menus, cards */
   --radius-l: 16px; /* large containers: dialogs, full-screen panels */
-  --radius-full: 9999px; /* pills: switches, tags, chips */
+  --radius-full: 9999px; /* pills: switches, badges, chips */
 }

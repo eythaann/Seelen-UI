@@ -1,7 +1,7 @@
 .calendar-popup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-xs);
 
   .calendar {
     display: flex;
@@ -13,14 +13,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
-    padding: 0 4px;
+    margin-bottom: var(--spacing-m);
+    padding: 0 var(--spacing-2xs);
 
     .calendar-date {
-      font-size: 0.875rem;
       font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 4px;
+      padding: var(--spacing-2xs) var(--spacing-xs);
+      border-radius: var(--radius-s);
       cursor: pointer;
 
       &:hover {
@@ -30,42 +29,25 @@
 
     .calendar-actions {
       display: flex;
-      gap: 4px;
-
-      .calendar-navigator {
-        background: transparent;
-        border: none;
-        border-radius: 4px;
-        color: inherit;
-        cursor: pointer;
-        padding: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &:hover {
-          background-color: var(--slu-std-ui-hover-overlay);
-        }
-      }
+      gap: var(--spacing-2xs);
     }
   }
 
   .calendar-month-view {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--spacing-2xs);
   }
 
   .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-    margin-bottom: 4px;
+    gap: var(--spacing-2xs);
+    margin-bottom: var(--spacing-2xs);
 
     .calendar-weekday {
-      font-size: 0.75rem;
       font-weight: 600;
-      padding: 8px 0;
+      padding: var(--spacing-xs) 0;
       color: var(--slu-std-fg-secondary-color);
       text-align: center;
     }
@@ -74,13 +56,13 @@
   .calendar-days {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--spacing-2xs);
   }
 
   .calendar-week {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: var(--spacing-2xs);
   }
 
   .calendar-cell {
@@ -88,8 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    border-radius: var(--radius-s);
     cursor: pointer;
 
     &:hover {
@@ -102,12 +83,12 @@
 
     &.calendar-cell-today {
       font-weight: 700;
-      color: var(--system-accent-color);
+      color: var(--slu-std-ui-color);
     }
 
     &.calendar-cell-selected {
       background-color: var(--slu-std-ui-color);
-      color: var(--color-gray-100);
+      color: var(--slu-std-ui-fg-color);
       font-weight: 600;
 
       &:hover {
@@ -119,13 +100,12 @@
   .calendar-year-view {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 4px;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-2xs);
 
     .calendar-month-cell {
-      padding: 16px 12px;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      padding: var(--spacing-m) var(--spacing-s);
+      border-radius: var(--radius-s);
       font-weight: 500;
       cursor: pointer;
       text-align: center;
@@ -136,7 +116,7 @@
 
       &.calendar-month-cell-current {
         font-weight: 700;
-        color: var(--system-accent-color);
+        color: var(--slu-std-ui-color);
       }
     }
   }

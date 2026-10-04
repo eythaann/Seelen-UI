@@ -12,7 +12,7 @@ body {
     height: 100vh;
 
     &:has(.apps-menu[data-fullscreen="false"]) {
-      padding: 10px;
+      padding: 10px; // this padding will allow the box-shadow to be visible
     }
   }
 }
@@ -22,20 +22,20 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: min-content 1fr min-content;
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
+  background-color: var(--slu-std-bg-color);
 
   &[data-fullscreen="false"] {
     box-shadow: var(--shadow-m);
-    border-radius: 12px;
+    border-radius: var(--radius-l);
   }
 
   .apps-menu-header {
     width: 100%;
-    padding: 10px;
+    padding: var(--spacing-xs);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: var(--spacing-xs);
 
     button {
       flex-shrink: 0;
@@ -59,7 +59,7 @@ body {
 
   .apps-menu-footer {
     width: 100%;
-    padding: 10px;
+    padding: var(--spacing-xs);
 
     display: flex;
     align-items: center;
@@ -68,7 +68,6 @@ body {
     .user-profile {
       white-space: nowrap;
       font-weight: 600;
-      font-size: 0.9rem;
 
       .user-profile-picture {
         height: 1.5rem !important;
@@ -82,39 +81,22 @@ body {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 0.5rem;
+      gap: var(--spacing-xs);
     }
   }
 }
 
-.pinned-view {
-  padding: 2rem;
+.pinned-view,
+.all-apps-view {
+  padding: var(--spacing-m);
   height: 100%;
-
-  .pinned-view-list {
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-    gap: 1rem;
-
-    // .app {}
-  }
-
-  // .pinned-view-empty {}
 }
 
-.all-apps-view {
-  padding: 2rem;
-  height: 100%;
-
-  .all-apps-view-list {
-    display: grid;
-    grid-template-columns: repeat(var(--columns), 1fr);
-    gap: 1rem;
-
-    // .app {}
-  }
-
-  // .all-apps-view-empty {}
+.pinned-view-list,
+.all-apps-view-list {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: var(--spacing-xs);
 }
 
 .pinned-view-empty,
@@ -125,21 +107,29 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-xs);
   color: var(--slu-std-fg-secondary-color);
   font-style: italic;
-  font-size: 1rem;
   font-weight: 600;
-  gap: 0.5rem;
 }
 
-.app {
-  display: grid;
+// shared by apps and folders
+.app,
+.folder {
+  width: 100%;
+  aspect-ratio: 1;
 
+  display: grid;
+  grid-template-rows: 1fr 2.2rem;
   align-items: center;
   justify-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-m);
+
+  > * {
+    pointer-events: none;
+  }
 
   &:hover {
     background-color: var(--slu-std-ui-hover-overlay);
@@ -149,22 +139,48 @@ body {
     transform: scale(0.95);
   }
 
+  &:focus-visible,
+  &[aria-selected="true"] {
+    background-color: var(--slu-std-ui-selected-overlay);
+    outline: 2px solid var(--system-accent-color);
+    outline-offset: 2px;
+  }
+
   &.is-drop-target {
-    border: 3px dashed var(--system-accent-color);
+    outline: 2px dashed var(--system-accent-color);
+    outline-offset: 2px;
     transform: scale(1.05);
 
-    .app-name {
+    .app-name,
+    .folder-name {
       opacity: 0;
     }
   }
 
-  > * {
-    pointer-events: none;
-  }
+  .app-name,
+  .folder-name {
+    width: 100%;
+    height: 100%;
 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+.app {
   .app-icon {
-    width: 60%;
-    aspect-ratio: 1/1;
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+
     border-radius: 18%;
     box-shadow: var(--shadow-s);
 
@@ -181,68 +197,25 @@ body {
       }
     }
   }
-
-  .app-name {
-    width: 100%;
-    height: 2.4em;
-
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-
-    text-align: center;
-    font-size: 0.85rem;
-    line-height: 1.2em;
-    font-weight: 600;
-  }
 }
 
-// Folder styles
 .folder {
-  display: grid;
-
-  align-items: center;
-  justify-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-
-  > * {
-    pointer-events: none;
-  }
-
-  &:hover {
-    background-color: var(--slu-std-ui-hover-overlay);
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  &.is-drop-target {
-    border: 3px dashed var(--system-accent-color);
-    transform: scale(1.05);
-
-    .folder-name {
-      opacity: 0;
-    }
-  }
-
   .folder-grid {
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
 
-    width: 60%;
-    aspect-ratio: 1/1;
     gap: 4%;
     padding: 8%;
     box-shadow: var(--shadow-s);
 
     background-color: var(--slu-std-bg-light-color);
-    border-radius: 16%;
+    border-radius: 18%;
 
     .folder-preview {
       width: 100%;
@@ -254,7 +227,7 @@ body {
       .folder-preview-icon {
         width: 100%;
         height: 100%;
-        border-radius: 16%;
+        border-radius: 18%;
         overflow: hidden;
 
         &:not([data-shape="square"]) {
@@ -263,32 +236,6 @@ body {
         }
       }
     }
-  }
-
-  .folder-name {
-    width: 100%;
-    height: 2.4em;
-
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-
-    text-align: center;
-    font-size: 0.85rem;
-    line-height: 1.2em;
-    font-weight: 600;
-  }
-}
-
-.app,
-.folder {
-  &:focus-visible,
-  &[aria-selected="true"] {
-    background-color: var(--slu-std-ui-selected-overlay);
-    outline: 2px solid var(--system-accent-color);
-    outline-offset: 2px;
   }
 }
 
@@ -299,21 +246,21 @@ body {
   z-index: 100;
 
   background-color: var(--slu-std-bg-color);
-  border-radius: 16px;
+  border-radius: var(--radius-l);
   box-shadow: var(--shadow-l);
   overflow: hidden;
 
   .folder-modal-content {
-    padding: 2rem;
+    padding: var(--spacing-2xl);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: var(--spacing-m);
   }
 
   .folder-modal-name {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
   }
@@ -322,10 +269,8 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(var(--folder-columns), 1fr);
-    gap: 1rem;
+    gap: var(--spacing-m);
     overflow-y: auto;
     align-content: start;
-
-    // .app { .. }
   }
 }

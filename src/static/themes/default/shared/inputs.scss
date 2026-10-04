@@ -13,7 +13,7 @@ input[type="range"][data-skin="flat"] {
   overflow: hidden;
 
   height: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--radius-s);
   background: var(--slu-std-ui-hover-overlay);
 
   &::-webkit-slider-runnable-track {
@@ -55,7 +55,7 @@ select[data-skin="default"] {
 
   background-color: var(--slu-std-bg-light-color);
   border: 1px solid var(--slu-std-bg-dark-color);
-  border-radius: 6px;
+  border-radius: var(--radius-s);
 
   font-size: inherit;
 
@@ -86,18 +86,16 @@ input[type="file"][data-skin="transparent"],
 select[data-skin="transparent"] {
   @extend %input-common;
   width: 100%;
-  padding: 4px 8px;
+  padding: 0.25em 0.5em;
 
   background-color: transparent;
   color: inherit;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: var(--radius-s);
 
   font-size: inherit;
 
   &:focus {
-    /* background-color: var(--color-gray-50);
-    border-color: var(--slu-std-ui-hover-color); */
     outline: none;
   }
 
@@ -133,7 +131,7 @@ input[type="radio"][data-skin="default"] {
     position: absolute;
     inset: 2px;
     border-radius: 50%;
-    background-color: var(--color-gray-50);
+    background-color: var(--slu-std-ui-fg-color);
     transform: scale(0);
     transition: transform 0.2s ease;
   }
@@ -165,7 +163,7 @@ input[type="checkbox"][data-skin="default"] {
   position: relative;
   width: $size;
   height: $size;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   border: 2px solid var(--color-gray-400);
   background-color: transparent;
   flex-shrink: 0;
@@ -178,7 +176,7 @@ input[type="checkbox"][data-skin="default"] {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: var(--color-gray-50);
+    background-color: var(--slu-std-ui-fg-color);
     clip-path: polygon(0% 55%, 15% 40%, 40% 60%, 85% 10%, 100% 25%, 40% 90%);
     transform: scale(0);
     transition: transform 0.15s ease;
@@ -213,7 +211,7 @@ input[type="checkbox"][data-skin="switch"] {
   width: $width;
   height: $height;
   background-color: var(--color-gray-400);
-  border-radius: $height / 2;
+  border-radius: var(--radius-full);
   transition: background-color 0.3s ease;
 
   &::before {
@@ -222,7 +220,7 @@ input[type="checkbox"][data-skin="switch"] {
     width: $height - 4;
     height: $height - 4;
     border-radius: 50%;
-    background-color: var(--color-gray-50);
+    background-color: var(--slu-std-ui-fg-color);
     top: 2px;
     left: 2px;
     transition: transform 0.3s ease;
@@ -248,7 +246,7 @@ input[type="checkbox"][data-skin="switch"] {
   appearance: base-select;
   border: none;
   box-shadow: var(--shadow-s);
-  border-radius: 10px;
+  border-radius: var(--radius-m);
   background-color: var(--slu-std-bg-light-color);
   padding: 0.25em;
 }
@@ -272,9 +270,8 @@ select[data-skin="transparent"] {
   }
 
   option {
-    font-size: 0.95rem;
     padding: 0.25em 0.5em;
-    border-radius: 8px;
+    border-radius: var(--radius-s);
     margin-bottom: 0.5em;
 
     &:last-of-type {
@@ -286,8 +283,7 @@ select[data-skin="transparent"] {
     }
 
     &:checked {
-      background-color: var(--slu-std-ui-hover-color);
-      color: var(--color-gray-100);
+      background-color: var(--slu-std-ui-selected-overlay);
       font-weight: 600;
     }
   }

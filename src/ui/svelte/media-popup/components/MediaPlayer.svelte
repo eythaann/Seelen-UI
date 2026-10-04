@@ -78,7 +78,7 @@
     Math.max(Math.min(luminance * BRIGHTNESS_MULTIPLIER, MAX_LUMINANCE), MIN_LUMINANCE),
   );
 
-  const color = $derived(filteredLuminance < 125 ? "#efefef" : "#222222");
+  const color = $derived(filteredLuminance < 125 ? "var(--color-fixed-gray-50)" : "var(--color-fixed-gray-800)");
 </script>
 
 <div

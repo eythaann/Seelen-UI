@@ -8,6 +8,9 @@ This document defines **how Seelen UI looks and why**.
   changing built-in UI code, styles, or the default theme must follow it. If a change conflicts with this document, the
   change is wrong — not the document. Changing the design language itself requires an explicit decision from the
   maintainers and an update to this file in the same commit.
+- **Window manager overlay: excluded.** The tiling window manager widget (`src/ui/svelte/window-manager`) is not UI but
+  a decorative overlay drawn around the tiled windows (borders, reserved/drop areas, etc.), so these rules do not apply
+  to it. The only exception is its **stack bar**, which is regular UI and follows this document.
 - **Third-party widgets and themes: guide.** Not enforced, but following it is how a community widget integrates
   correctly with the rest of the UI and with user themes that apply global changes (recolors, radius, spacing). A widget
   that hardcodes its look will not follow those themes.
@@ -36,8 +39,8 @@ This document defines **how Seelen UI looks and why**.
    user cannot perceive, a hidden affordance), the usability need wins. Such exceptions must be **functional**, never
    aesthetic, and must stay as small as possible. See [UX exceptions](#ux-exceptions).
 1. **Flat design.** Solid, opaque surfaces, subtle shadows (`--shadow-s/m/l`), soft rounded corners. No gradients,
-   glows, glassmorphism, blur, skeuomorphism, borders, or "eye candy" in the default look. Depth is communicated by
-   surface tone and shadow — nothing else.
+   glows, glassmorphism, skeuomorphism, borders, or "eye candy" in the default look. Depth is communicated by surface
+   tone and shadow — nothing else.
 2. **Dynamic by default.** Every color comes from a variable. UI colors adapt to the user's **light/dark color scheme**
    and **Windows accent color**, so the UI looks correct in both schemes without any extra code.
 3. **Standard components, defined once.** Buttons, inputs, selects, sliders, switches, checkboxes, radios and popovers
@@ -66,16 +69,16 @@ desktop bars below.
 This table is the complete list of accepted exceptions. Use it as precedent: a new exception must meet the same bar and
 is only valid once a maintainer approves it and it is added here.
 
-| Exception                                                       | Where                                                                                   | Why                                                                              |
-| --------------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Semi-transparent background (derived from `--slu-std-bg-color`) | Toolbar, dock (including its window preview) and window manager stack bar **only**      | Design exception: always-visible desktop bars blend with the wallpaper. No blur. |
-| Dark translucent full-screen overlay (scrim)                    | Behind full-screen modals (e.g. power menu)                                             | Signals a modal state covering the whole desktop. The modal itself is standard.  |
-| `text-shadow`                                                   | Text drawn over dynamic images (e.g. media album art)                                   | Legibility over unpredictable backgrounds.                                       |
-| Inset edge shadows                                              | Scrollable containers with overflow (e.g. dock)                                         | Affordance: tells the user there is more content to scroll.                      |
-| Infinite animation                                              | Loading spinners, "needs attention" indicators                                          | State feedback: the state lasts until it changes.                                |
-| Focus ring (`outline`)                                          | Keyboard focus (`:focus-visible`)                                                       | Accessibility: shows where keyboard focus is.                                    |
-| Accent `outline`                                                | Active window (window manager), current selection in task switcher, drag & drop targets | State feedback / affordance: the line _is_ the indicator.                        |
-| Control `border`                                                | Unchecked checkbox / radio                                                              | Affordance: without it the control is invisible.                                 |
+| Exception                                                       | Where                                                                              | Why                                                                             |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Semi-transparent background (derived from `--slu-std-bg-color`) | Toolbar, dock (including its window preview) and window manager stack bar **only** | Design exception: always-visible desktop bars blend with the wallpaper.         |
+| Dark translucent full-screen overlay (scrim)                    | Behind full-screen modals (e.g. power menu)                                        | Signals a modal state covering the whole desktop. The modal itself is standard. |
+| `text-shadow`                                                   | Text drawn over dynamic images (e.g. media album art)                              | Legibility over unpredictable backgrounds.                                      |
+| Inset edge shadows                                              | Scrollable containers with overflow (e.g. dock)                                    | Affordance: tells the user there is more content to scroll.                     |
+| Infinite animation                                              | Loading spinners, "needs attention" indicators                                     | State feedback: the state lasts until it changes.                               |
+| Focus ring (`outline`)                                          | Keyboard focus (`:focus-visible`)                                                  | Accessibility: shows where keyboard focus is.                                   |
+| Accent `outline`                                                | Current selection in task switcher, drag & drop targets                            | State feedback / affordance: the line _is_ the indicator.                       |
+| Control `border`                                                | Unchecked checkbox / radio                                                         | Affordance: without it the control is invisible.                                |
 
 Exceptions change _what_ is drawn, never _how colors are written_: their colors still come from variables
 (`--shadow-color` for shadows, `--color-fixed-*` for scrims), e.g. `hsl(var(--shadow-color) / 0.5)`.
@@ -141,8 +144,9 @@ outlines).
 
 ### Semantic tokens — `--slu-std-*` (use these first)
 
-Defined in `src/static/themes/default/shared/index.scss`. Widgets and theme styles use these first. Use a scale variable
-(`--color-*`) directly only when no `--slu-std-*` token expresses the need (e.g. status hues, `--color-fixed-*`).
+Defined in `src/static/themes/default/shared/index.scss`. When a token here matches the purpose (primary text, base
+surface, text on accent…), use it. Otherwise the color scales are there to be used: `--color-gray-*` freely for any
+neutral fill, line or dot, and the other hues for status/meaning (see above).
 
 | Token                           | Use                                                                   |
 | ------------------------------- | --------------------------------------------------------------------- |
@@ -169,9 +173,6 @@ looks; this is how flat design shows depth without borders.
 foreground on top of it is the inverse of the normal foreground. Always use `--slu-std-ui-fg-color` for text/icons on
 accent backgrounds (solid buttons, selected items, checked controls); never `white`/`black` or a guessed gray.
 
-> Existing code still uses `--color-gray-100` directly for this; it will be migrated to `--slu-std-ui-fg-color` later.
-> New code must use the variable.
-
 **De-emphasis uses foreground tokens, not `opacity`.** Secondary/muted/disabled text and icons get
 `--slu-std-fg-secondary-color`, `--slu-std-fg-muted-color` or `--slu-std-fg-disabled-color`. Lowering `opacity` on text
 mixes it with whatever is behind it and breaks recolor themes. The only allowed `opacity` de-emphasis is the disabled
@@ -188,12 +189,16 @@ The only places where an alpha derivation is written by hand are the definitions
 `shared/index.scss` and the documented [UX exceptions](#ux-exceptions) (toolbar/dock/stack bar background, scrim,
 shadows).
 
-**Interactive states** (lists, cards, cells, menu items — anything that is not a shared `data-skin` control):
+**Interactive states** (lists, cards, cells, menu items — anything that is not a shared `data-skin` control). The
+overlays are for **transparent** elements (no resting fill, like `transparent` buttons, list items or cells), where they
+are the only way to show the state. Elements that already have their own surface or fill (cards, raised items, accent
+fills) may show hover/pressed with a different token instead (e.g. another `--slu-std-bg-*` level or
+`--slu-std-ui-hover-color`).
 
 | State                               | Style                                                               |
 | ----------------------------------- | ------------------------------------------------------------------- |
-| Hover                               | `--slu-std-ui-hover-overlay`                                        |
-| Pressed                             | `--slu-std-ui-pressed-overlay`                                      |
+| Hover (transparent element)         | `--slu-std-ui-hover-overlay`                                        |
+| Pressed (transparent element)       | `--slu-std-ui-pressed-overlay`                                      |
 | Selected / active item in a list    | `--slu-std-ui-selected-overlay`                                     |
 | Single highlighted item (e.g. day)  | `--slu-std-ui-color` background + `--slu-std-ui-fg-color` text      |
 | Keyboard focus / keyboard selection | Focus ring `outline` (see [Borders & outlines](#borders--outlines)) |
@@ -211,22 +216,36 @@ adapt to the scheme). Use them only to convey that meaning (see above).
 `2xs` 4px · `xs` 8px · `s` 12px · `m` 16px · `l` 20px · `xl` 24px · `2xl` 32px. Every padding, margin and gap uses one
 of these.
 
+The only exception is the margin that reserves room for a surface's shadow inside its own window (e.g. `margin: 10px` on
+`.slu-std-popover` and `.flyout`): it is sized to the shadow, not to the layout, so it stays as is.
+
 ### Shadows — `--shadow-*` (`libs/core/styles/shadows.css`)
 
 `--shadow-s` (controls), `--shadow-m` (popovers, menus), `--shadow-l` (modal dialogs). No other shadows, except the ones
 listed in [UX exceptions](#ux-exceptions).
 
+### Blur
+
+Blur is allowed on images and image-based content inside the widget (e.g. a blurred album art background, a blurred
+wallpaper preview), with `filter: blur()` or a `backdrop-filter` placed over that image.
+
+Blur does **not** work at the root level: a widget's root/body/surface cannot blur the desktop or other windows behind
+its webview. So never use blur to build glass/acrylic surfaces (translucent widget backgrounds with `backdrop-filter`);
+it renders as a plain translucent surface.
+
 ### Radius — `--radius-*` (`libs/core/styles/radius.css`)
 
 Radii are a small scale **by role**, not a value per component:
 
-| Token           | Value    | Role                                              |
-| --------------- | -------- | ------------------------------------------------- |
-| `--radius-s`    | `6px`    | Controls: buttons, inputs, selects, list items    |
-| `--radius-m`    | `10px`   | Surfaces: popovers, menus, cards                  |
-| `--radius-l`    | `16px`   | Large containers: dialogs, full-screen panels     |
-| `--radius-full` | `9999px` | Pills: switches, tags, chips                      |
-| `50%`           | —        | Circles only: avatars, status dots, round buttons |
+| Token           | Value    | Role                                                                 |
+| --------------- | -------- | -------------------------------------------------------------------- |
+| `--radius-xs`   | `4px`    | Tiny elements: checkboxes, small icons, compact cells, inline labels |
+| `--radius-s`    | `6px`    | Controls: buttons, inputs, selects, list items                       |
+| `--radius-m`    | `10px`   | Surfaces: popovers, menus, cards                                     |
+| `--radius-l`    | `16px`   | Large containers: dialogs, full-screen panels                        |
+| `--radius-full` | `9999px` | Pills: switches, badges, chips                                       |
+| `50%`           | —        | Circles only: avatars, status dots, round buttons                    |
+| Other `%`       | —        | Square, dynamically sized icons (e.g. app icons in the apps menu)    |
 
 Rules:
 
@@ -246,54 +265,61 @@ Rules:
 
   If the result is 0 or less, the inner element is square (that is correct). Never replace the formula with a different
   number.
-- No percentages other than `50%` (percent radii are computed per axis and produce elliptical, size-dependent corners).
+- Percentages only for `50%` circles and for square elements whose size is dynamic (e.g. app icons that scale with the
+  grid), where the radius must scale with the element. Percent radii are computed per axis, so on non-square elements
+  they produce elliptical corners; never use them there. Proportional padding/gap inside those same icons (e.g.
+  `padding: 8%`) follows the same exception.
 - No hardcoded radius values. A radius is always one of: a `--radius-*` token, a `calc()` derived from one, or a value
   derived from a user setting variable (e.g. the item size of the toolbar/dock). This keeps the whole UI re-shapeable by
   a theme changing just these variables.
 
-> Existing code still has hardcoded radii; it will be migrated to these tokens later. New code must use the tokens.
+> Existing code already uses the radius tokens, but nested elements do not apply the concentric formula yet; that will
+> be migrated later. New code must apply it.
 
 ### Borders & outlines
 
-**`border` — never.** Flat design does not use borders: no framed boxes, no framed inputs, no 1px divider lines.
-Instead:
+**`border` — never to frame things.** Flat design does not use borders: no framed boxes, no framed inputs. Instead:
 
 - **Group / separate content** with spacing (`--spacing-*`) and surface tone (`--slu-std-bg-*`).
 - **Show interactivity** with a surface fill (`--slu-std-bg-light-color`) and the hover/pressed overlays.
 
-The only `border` allowed is the one that draws an unchecked checkbox/radio (without it the control is invisible).
+The only borders allowed are:
+
+- **Dividers**: a 1px line that separates sections (e.g. a header from its content, items of a dock). Always
+  `--slu-std-fg-muted-color`, never lowered with `opacity`. Use them only where spacing and surface tone are not enough.
+- The border that draws an unchecked checkbox/radio (without it the control is invisible).
 
 **`outline` — reserved for focus and state.** `outline` is the UX tool to point at something, never decoration:
 
 - Keyboard focus ring (`:focus-visible`, already defined in shared styles).
-- State indicators where the line _is_ the information: active window, current selection (e.g. task switcher), drag &
-  drop targets, error on a field.
+- State indicators where the line _is_ the information: current selection (e.g. task switcher), drag & drop targets,
+  error on a field.
 
 Always with accent or status color variables; never to frame a box or separate content.
 
-> Existing code still has borders and dividers (and some state indicators drawn with `border`); they will be migrated
-> later. New code must follow these rules.
+> Existing code still has framing borders (and some state indicators drawn with `border`); they will be migrated later.
+> New code must follow these rules.
 
 ### Typography
 
 - Font: **always the inherited system font**. No other font families, including `monospace` for technical data (IPs,
   MACs, codes): the UI never shows content that needs vertical alignment of characters.
-- Sizes: Seelen UI is a desktop UI, not a document, so there is no typographic scale. Only two sizes:
+- Sizes: Seelen UI is a desktop UI, not a document, so there is no fixed typographic scale. Recommended sizes:
   - `1rem` — the base. It is the user's browser/system default, so never override the root font size.
   - `0.8rem` — menus and popovers (`.slu-std-popover` already sets it).
 
-  Hierarchy (titles vs. body vs. captions) is expressed with font weight and the `--slu-std-fg-*` tokens, not with new
-  sizes. Another size is allowed only when the content itself needs it (e.g. a pairing code meant to be read from a
-  distance), never to build a hierarchy.
+  These are a recommendation, not a strict rule: other sizes can be used where the UI needs them (titles, pairing codes,
+  badge counters, glyphs used as icons…). Prefer expressing hierarchy with font weight and the `--slu-std-fg-*` tokens
+  before adding a new size.
 - Font size units: always `rem`/`em`, never `px`, so text follows the user's settings.
-- Weights: regular (`400`), `500`, `600`. No other weights.
+- Weights: any weight is allowed, always as a fixed numeric value (`400`, `500`, `600`, `700`…). Never keywords, and
+  never relative ones (`bolder`, `lighter`), since they depend on the parent and are unpredictable for themes.
 
 ### Icons
 
 - Rendered through the shared `Icon` components in `libs/ui/svelte/components/Icon`; they inherit `currentColor`.
-- **Default size = the font size** (`1em`), so an icon next to text always matches it.
-- Icons are images, so a bigger icon is allowed when the UI needs it (e.g. quick settings tiles, avatars, app icons).
-  Size it in `em`/`rem`, or from a user setting variable when the widget has one (e.g. dock item size).
+- Icons are images: their size is free. As a recommendation, an icon next to text uses the font size (`1em`) so both
+  match, but any size can be used where the UI needs it.
 
 ### Motion
 
@@ -315,7 +341,11 @@ defined in shared styles), state changes of controls, and infinite animations th
 - When a value really must differ between modes, use CSS `light-dark(<light>, <dark>)` with tokens inside, as
   `shared/index.scss` does. Do not write separate `@media (prefers-color-scheme)` blocks in widget/theme styles.
 - In JS, only read the scheme (`libs/ui/svelte/runes/DarkMode.svelte.ts`) for non-CSS needs (e.g. picking an image).
-  Never compute colors in JS.
+  Never use JS to pick UI colors that tokens already cover (scheme, accent, states).
+- **Content-derived colors are allowed.** When a color depends on dynamic content (e.g. the foreground over album art,
+  picked from the image luminance), it can be computed at runtime. Pick between standard variables (e.g.
+  `var(--color-fixed-gray-50)` / `var(--color-fixed-gray-800)` for light/dark text over an image), never hex literals. A
+  value derived directly from the content itself (e.g. a background built from the image luminance) is fine.
 - Every UI change must be checked in **both** light and dark mode, and with a non-default accent color.
 
 ---
@@ -384,8 +414,7 @@ Other shared state attributes: `data-error="true"` on inputs, `:disabled` (rende
 
 Mandatory for the default theme; the recommended practice for community themes:
 
-- Target the widget's root class and nest from there, only as deep as the structure requires. No `!important`, no ID
-  selectors.
+- Target the widget's root class and nest from there, only as deep as the structure requires. No `!important`.
 - Use only tokens (`--slu-std-*`, `--color-*`, `--system-accent-*`, `--spacing-*`, `--shadow-*`, `--radius-*`).
 - Reuse standard components instead of re-styling raw controls.
 - Do not restyle global bare elements in `sharedStyles` (except `body` base colors, already defined).
@@ -400,16 +429,19 @@ Reject these in review, regardless of who (person or AI) wrote them:
 
 - Hardcoded colors (`#fff`, `rgb(0 0 0 / .5)`, `black`, `white`), anywhere, for any reason. Use a variable.
 - Font families other than the inherited system font (including `monospace`).
-- Gradients, glows, blur/acrylic backdrops, neon effects.
+- Gradients, glows, glass/acrylic surfaces (root-level `backdrop-filter`), neon effects. Blur on images is fine (see
+  [Blur](#blur)).
 - Shadows other than the `--shadow-*` tokens, outside the [UX exceptions](#ux-exceptions).
-- `border` or divider lines to draw boxes, frame inputs or separate content; `outline` used for anything other than
-  focus or state indication (see [Borders & outlines](#borders--outlines)).
+- `border` to draw boxes or frame inputs; dividers in any color other than `--slu-std-fg-muted-color` or lowered with
+  `opacity`; `outline` used for anything other than focus or state indication (see
+  [Borders & outlines](#borders--outlines)).
 - Free alpha variants of colors (`oklch(from var(--x) l c h / 0.2)`, `rgb(from …)`, etc.) instead of the standard
   overlay variables.
 - Translucent surfaces outside the toolbar / dock / window manager stack bar exception.
 - Decorative animations (animated backgrounds, idle effects, showy hover animations).
 - "Exceptions" justified by looks instead of a functional UX need (see [UX exceptions](#ux-exceptions)).
-- Colors chosen in JS/TS, or `@media (prefers-color-scheme)` blocks instead of tokens/`light-dark()`.
+- UI colors chosen in JS/TS (content-derived colors are fine, see [Light / Dark Mode](#4-light--dark-mode)), or
+  `@media (prefers-color-scheme)` blocks instead of tokens/`light-dark()`.
 - A fixed brand color or a scale hue (`--color-blue-*`, etc.) used where the user's accent belongs.
 - Scale hues used for decoration instead of conveying a status/meaning to the user.
 - New one-off button/input styles inside a widget instead of `data-skin`.
@@ -435,7 +467,7 @@ Before submitting any UI change:
 - [ ] Controls use `data-skin`; popups use `.slu-std-popover`.
 - [ ] Visual CSS lives in the default theme, not in the component.
 - [ ] Class names are intuitive kebab-case (not renamed without reason); states exposed via `data-*`.
-- [ ] No `border` or divider lines; `outline` only for focus/state indicators.
+- [ ] No framing `border`; dividers use `--slu-std-fg-muted-color`; `outline` only for focus/state indicators.
 - [ ] Still flat and simple — nothing added "for style".
 - [ ] Animations only where needed, and the UI works with all animations disabled.
 - [ ] All text is i18n, rendered in the system font.

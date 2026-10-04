@@ -112,13 +112,13 @@
         {globalState.viewMode === "month" ? date.format("MMMM YYYY") : date.format("YYYY")}
       </span>
       <div class="calendar-actions">
-        <button class="calendar-navigator" onclick={handlePrevious}>
+        <button class="calendar-navigator" data-skin="transparent" onclick={handlePrevious}>
           <Icon iconName="AiOutlineLeft" />
         </button>
-        <button class="calendar-navigator" onclick={handleToday}>
+        <button class="calendar-navigator" data-skin="transparent" onclick={handleToday}>
           <Icon iconName="AiOutlineHome" />
         </button>
-        <button class="calendar-navigator" onclick={handleNext}>
+        <button class="calendar-navigator" data-skin="transparent" onclick={handleNext}>
           <Icon iconName="AiOutlineRight" />
         </button>
       </div>

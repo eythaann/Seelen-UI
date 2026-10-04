@@ -330,13 +330,13 @@
   .brush-label {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: var(--spacing-2xs);
     flex: 1;
     min-width: 100px;
   }
 
   .draw-active {
-    outline: 2px solid var(--slu-accent-color, #5588ff);
+    outline: 2px solid var(--system-accent-color);
   }
 
   .controls {

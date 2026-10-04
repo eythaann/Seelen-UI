@@ -1,9 +1,8 @@
 $itemSize: 256px;
-$itemListSpacing: 10px;
 
 .weg-item-preview-container {
   width: max-content;
-  padding: $itemListSpacing;
+  padding: var(--spacing-xs);
   background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
 
   .weg-item-preview-list {
@@ -11,15 +10,15 @@ $itemListSpacing: 10px;
     overflow: auto;
     flex-wrap: wrap;
 
-    gap: $itemListSpacing;
-    max-width: $itemSize * 4 + $itemListSpacing * 3;
+    gap: var(--spacing-xs);
+    max-width: calc(#{$itemSize * 4} + var(--spacing-xs) * 3);
   }
 
   .weg-item-preview {
     width: $itemSize;
     padding: var(--spacing-xs);
 
-    border-radius: 10px;
+    border-radius: var(--radius-m);
     background-color: var(--slu-std-bg-light-color);
     box-shadow: var(--shadow-s);
 
@@ -56,9 +55,9 @@ $itemListSpacing: 10px;
       justify-content: center;
       align-items: center;
 
-      border-radius: 10px;
+      background-color: var(--slu-std-bg-dark-color);
+      border-radius: var(--radius-m);
       overflow: hidden;
-      border: 1px solid var(--color-gray-300);
 
       .weg-item-preview-image {
         max-height: 100%;

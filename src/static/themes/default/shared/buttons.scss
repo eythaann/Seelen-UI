@@ -1,6 +1,6 @@
 %btn-common {
   padding: 0.25em 0.5em;
-  border-radius: 6px;
+  border-radius: var(--radius-s);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@
 
 div[data-behavior="group"] {
   display: flex;
-  border-radius: 6px;
+  border-radius: var(--radius-s);
   box-shadow: var(--shadow-s);
 
   > button {
@@ -50,7 +50,7 @@ button[data-skin="transparent"] {
 button[data-skin="solid"] {
   @extend %btn-common;
   background-color: var(--slu-std-ui-color);
-  color: var(--color-gray-100);
+  color: var(--slu-std-ui-fg-color);
   box-shadow: var(--shadow-s);
 
   &:hover:enabled {

@@ -20,7 +20,7 @@
 
     gap: var(--spacing-2xs);
     padding: var(--spacing-2xs);
-    border-radius: 6px;
+    border-radius: var(--radius-s);
 
     background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
     box-shadow: var(--shadow-m);
@@ -53,7 +53,7 @@
 
 .wm-reserved {
   background-color: var(--system-accent-lighter-color);
-  border-radius: 8px;
+  border-radius: var(--radius-m);
   opacity: 0.8;
 
   display: flex;

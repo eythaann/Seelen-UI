@@ -30,7 +30,7 @@
       height: 1rem;
       object-fit: contain;
       flex-shrink: 0;
-      border-radius: 4px;
+      border-radius: var(--radius-xs);
     }
 
     .menu-item-label {

@@ -7,8 +7,8 @@ body,
 }
 
 .flyout {
-  border-radius: 10px;
-  padding: 8px;
+  border-radius: var(--radius-m);
+  padding: var(--spacing-xs);
   margin: 10px;
   box-shadow: var(--shadow-m);
   background-color: var(--slu-std-bg-color);
@@ -25,11 +25,11 @@ body,
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: var(--spacing-xs);
   }
 
   .flyout-value-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     width: 2.5em;
     text-align: right;
     flex-shrink: 0;
@@ -83,7 +83,7 @@ body,
     .player-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--spacing-xs);
     }
 
     /* other themes could display it, but by default it's unused */
@@ -130,10 +130,10 @@ body,
 }
 
 .notification {
-  border-radius: 12px;
+  border-radius: var(--radius-m);
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
-  padding: 10px;
+  padding: var(--spacing-xs);
 
   width: 300px;
   font-size: 0.8rem;
@@ -142,15 +142,15 @@ body,
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 6px;
-    border-bottom: solid 1px var(--color-gray-300);
-    margin-bottom: 6px;
+    gap: var(--spacing-m);
+    padding-bottom: var(--spacing-2xs);
+    border-bottom: solid 1px var(--slu-std-fg-muted-color);
+    margin-bottom: var(--spacing-2xs);
 
     .notification-header-info {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--spacing-xs);
       font-weight: 600;
 
       overflow: hidden;
@@ -172,7 +172,7 @@ body,
       grid-row: 1 / 2;
       width: 3rem;
       height: 3rem;
-      margin-right: 10px;
+      margin-right: var(--spacing-xs);
 
       &.notification-body-logo-image-circle {
         border-radius: 50%;
@@ -191,12 +191,12 @@ body,
 
       .notification-group {
         display: flex;
-        gap: 6px;
+        gap: var(--spacing-2xs);
 
         .notification-subgroup {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: var(--spacing-xs);
         }
       }
     }
@@ -207,7 +207,7 @@ body,
       width: 100%;
       max-height: 300px;
       object-fit: cover;
-      margin-top: 10px;
+      margin-top: var(--spacing-xs);
     }
   }
 

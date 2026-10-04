@@ -12,7 +12,6 @@
 
   // Common labels
   .media-control-label {
-    font-size: 0.75rem;
     font-weight: 600;
     color: var(--slu-std-fg-secondary-color);
     margin-top: var(--spacing-xs);
@@ -50,7 +49,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 0.875rem;
     }
   }
 
@@ -70,7 +68,6 @@
       margin-bottom: var(--spacing-xs);
 
       .media-device-title {
-        font-size: 0.875rem;
         font-weight: 600;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -91,10 +88,10 @@
         .media-device-mixer-entry-icon {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: var(--spacing-2xs);
           height: 1rem;
           width: 1rem;
-          margin-left: 0.25rem;
+          margin-left: var(--spacing-2xs);
         }
       }
     }
@@ -102,7 +99,7 @@
     .media-device-footer {
       margin-top: var(--spacing-xs);
       padding-top: var(--spacing-xs);
-      border-top: 1px solid var(--color-gray-300);
+      border-top: 1px solid var(--slu-std-fg-muted-color);
     }
   }
 }
@@ -111,7 +108,7 @@
 .media-session {
   position: relative;
   overflow: hidden;
-  border-radius: var(--spacing-xs);
+  border-radius: var(--radius-m);
   padding: var(--spacing-xs);
 
   display: grid;
@@ -141,7 +138,7 @@
       height: 100%;
       width: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: var(--radius-s);
     }
   }
 
@@ -167,7 +164,6 @@
 
     .media-session-title {
       width: 100%;
-      font-size: 0.875rem;
       font-weight: 600;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -176,7 +172,6 @@
 
     .media-session-author {
       width: 100%;
-      font-size: 0.75rem;
       color: var(--slu-std-fg-secondary-color);
       overflow: hidden;
       text-overflow: ellipsis;
@@ -193,7 +188,6 @@
     gap: var(--spacing-xs);
 
     .media-session-time {
-      font-size: 0.625rem;
       color: var(--slu-std-fg-secondary-color);
       text-shadow: 0 1px 3px #{"hsl(var(--shadow-color) / 0.5)"};
       white-space: nowrap;
@@ -206,7 +200,7 @@
       overflow: hidden;
 
       height: 4px;
-      border-radius: 8px;
+      border-radius: var(--radius-full);
       background: var(--slu-std-bg-dark-color);
 
       &::-webkit-slider-runnable-track {

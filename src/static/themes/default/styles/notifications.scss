@@ -1,16 +1,16 @@
 .notifications-popup {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-xs);
   width: 350px;
   max-height: 700px;
-  padding: 10px;
+  padding: var(--spacing-xs);
 
   .notifications-popup-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 6px;
+    gap: var(--spacing-2xs);
 
     > span {
       font-weight: 600;
@@ -21,11 +21,11 @@
   .notifications-popup-body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-xs);
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 5px 10px;
-    margin: 0 -10px;
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    margin: 0 calc(-1 * var(--spacing-xs));
   }
 
   .notifications-popup-footer {
@@ -45,10 +45,10 @@
 }
 
 .notification {
-  border-radius: 12px;
+  border-radius: var(--radius-m);
   background-color: var(--slu-std-bg-light-color);
   box-shadow: var(--shadow-s);
-  padding: 10px;
+  padding: var(--spacing-xs);
   transition: scale 0.1s ease-in-out;
 
   &:active:not(:has(button:active, input:active, select:active)) {
@@ -59,15 +59,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 6px;
-    border-bottom: solid 1px var(--color-gray-300);
-    margin-bottom: 6px;
+    gap: var(--spacing-m);
+    padding-bottom: var(--spacing-2xs);
+    border-bottom: solid 1px var(--slu-std-fg-muted-color);
+    margin-bottom: var(--spacing-2xs);
 
     .notification-header-info {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: var(--spacing-xs);
       font-size: 0.8rem;
       color: var(--slu-std-fg-secondary-color);
       font-weight: 600;
@@ -87,7 +87,7 @@
       grid-row: 1 / 2;
       width: 3rem;
       height: 3rem;
-      margin-right: 10px;
+      margin-right: var(--spacing-xs);
 
       &.notification-body-logo-image-circle {
         border-radius: 50%;
@@ -106,12 +106,12 @@
 
       .notification-group {
         display: flex;
-        gap: 6px;
+        gap: var(--spacing-2xs);
 
         .notification-subgroup {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: var(--spacing-xs);
         }
       }
     }
@@ -122,14 +122,14 @@
       width: 100%;
       max-height: 300px;
       object-fit: cover;
-      margin-top: 10px;
+      margin-top: var(--spacing-xs);
     }
   }
 
   .notification-actions {
-    margin-top: 6px;
+    margin-top: var(--spacing-2xs);
     display: flex;
-    gap: 6px;
+    gap: var(--spacing-2xs);
     font-size: 0.8rem;
     line-height: 0.8rem;
 

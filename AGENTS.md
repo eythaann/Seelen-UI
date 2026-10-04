@@ -48,8 +48,9 @@ Design (see `documentation/design-system.md` before touching any UI/styles):
 - Accent ALWAYS = the user's Windows accent (`--system-accent-*` / `--slu-std-ui-*`). The color hue scales (red, green,
   blue…) are only for indicators that convey meaning (error, warning, success, info), never for accent or decoration.
 - Widget visuals live in the default theme (`src/static/themes/default/`), not in components, so users can mod them.
-- No `border` or divider lines (flat): separate with spacing and surface tone. `outline` is reserved for focus and state
-  indicators (focus ring, active/selected item, drag & drop target, field error), never decoration.
+- No framing `border` (flat): separate with spacing and surface tone; dividers only when needed, 1px in
+  `--slu-std-fg-muted-color`. `outline` is reserved for focus and state indicators (focus ring, active/selected item,
+  drag & drop target, field error), never decoration.
 - Never redesign, add decorative effects, or invent one-off control styles unless the maintainers explicitly ask.
 - Colors are never hardcoded and never derived with ad-hoc alphas (use the `--slu-std-ui-*-overlay` vars). Status hues:
   error = red, warning = yellow, success = green, info = blue. The font is always the system font (no monospace).

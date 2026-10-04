@@ -46,10 +46,10 @@
 
 .taskbar[data-has-margin="true"],
 .taskbar[data-size="min-content"] {
-  border-radius: 15px;
+  border-radius: var(--radius-l);
 
   > .weg-items-container {
-    border-radius: 15px;
+    border-radius: var(--radius-l);
   }
 }
 
@@ -124,11 +124,11 @@
 
     height: 16px;
     min-width: 16px;
-    border-radius: 8px;
+    border-radius: var(--radius-full);
     overflow: hidden;
 
     background-color: var(--slu-std-ui-color);
-    color: var(--color-gray-100);
+    color: var(--slu-std-ui-fg-color);
     font-size: 0.625rem;
     font-weight: 600;
 
@@ -157,7 +157,7 @@
 
     height: 16px;
     min-width: 16px;
-    border-radius: 8px;
+    border-radius: var(--radius-full);
 
     background-color: var(--color-gray-400);
     color: var(--color-gray-100);
@@ -169,7 +169,7 @@
     position: absolute;
     width: 3px;
     height: 3px;
-    border-radius: 6px;
+    border-radius: var(--radius-full);
     background-color: var(--color-gray-600);
     opacity: 0;
 
@@ -328,7 +328,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
-    font-size: max(calc(var(--config-item-size) / 3), 12px);
+    font-size: max(calc(var(--config-item-size) / 3), 0.75rem);
     font-weight: 600;
     z-index: 1;
 

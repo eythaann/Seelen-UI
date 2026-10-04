@@ -60,11 +60,11 @@
   top: 0;
   right: 0;
   background-color: var(--slu-std-ui-color);
-  color: var(--color-gray-100);
+  color: var(--slu-std-ui-fg-color);
   height: 12px;
   min-width: 12px;
   font-size: 0.625rem;
-  border-radius: 8px;
+  border-radius: var(--radius-full);
 }
 
 .ft-corner-button {
