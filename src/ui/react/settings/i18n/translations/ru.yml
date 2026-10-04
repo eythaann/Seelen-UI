@@ -14,7 +14,7 @@ apps_configurations:
     ok_readonly: Изменить как новое
     options:
       NoInteractive: Нет интерактивности
-      VdPinned: Показать во всех рабочих областях
+      VdPinned: Показать во всех рабочих пространствах
       WmFloat: Twm – Запустить плавающий режим
       WmForce: Twm — Принудительное управление
       WmUnmanage: Twm – Отменить управление
@@ -24,7 +24,7 @@ apps_configurations:
     title_readonly: Просмотр {{name}}
     weg_options_label: Параметры панели задач
     wm_options_label: Параметры управления окном
-    workspace: Рабочая область
+    workspace: Рабочее пространство
     workspace_placeholder: Нет
   bundled_msg: >-
     Эти встроенные конфигурации не подлежат редактированию и созданы для того,
@@ -200,7 +200,7 @@ header:
     monitors: Мониторы
     plugin: Плагины
     resources: Ресурсы
-    session: Счет
+    session: Аккаунт
     shortcuts: Сочетания клавиш
     soundpack: Звуковые пакеты
     specific_apps: Настройки по приложениям
@@ -267,27 +267,27 @@ shortcuts:
     Некоторые сочетания клавиш назначены нескольким действиям. Отключите один из
     конфликтующих виджетов или переназначьте повторяющуюся привязку клавиш для
     разрешения.
-  enable: Включить встроенную систему ярлыков
+  enable: Включить встроенную систему сочетаний клавиш
   enable_tooltip: >-
-    Отключите, если вы будете реализовать свою собственную систему ярлыков,
+    Отключите, если вы будете реализовать свою собственную систему сочетаний клавиш,
     используя клиент Seelen UI
   labels:
     create_new_workspace: Создать новое рабочее пространство
-    create_new_workspace_row: Создать новую строку рабочей области
+    create_new_workspace_row: Создать новую строку рабочего пространства
     destroy_current_workspace: Уничтожить текущее рабочее пространство
     misc_force_quit: Принудительный выход
     misc_force_restart: Принудительный перезапуск
-    move_to_workspace: Перейти в рабочую пространство {{0}}
+    move_to_workspace: Перейти в рабочее пространство {{0}}
     pause_toggle: Пауза/возобновление ярлыков
-    send_to_next_workspace: Отправить окно в следующую рабочую область
-    send_to_previous_workspace: Отправить окно в предыдущую рабочую область
+    send_to_next_workspace: Отправить окно в следующее рабочее пространство
+    send_to_previous_workspace: Отправить окно в предыдущее рабочее пространство
     send_to_workspace: Отправить в рабочее пространство {{0}}
-    send_to_workspace_down: Отправить окно в рабочую область ниже
-    send_to_workspace_up: Отправить окно в рабочую область выше
+    send_to_workspace_down: Отправить окно в рабочее пространство ниже
+    send_to_workspace_up: Отправить окно в рабочее пространство выше
     switch_to_next_workspace: Переключить на следующее рабочее пространство
     switch_to_previous_workspace: Переключить на предыдущее рабочее пространство
-    switch_to_workspace_down: Переключить на рабочую область ниже
-    switch_to_workspace_up: Переключить на рабочую область выше
+    switch_to_workspace_down: Переключить на рабочее пространство ниже
+    switch_to_workspace_up: Переключить на рабочее пространство выше
     switch_workspace: Переключить на рабочее пространство {{0}}
   readonly_tooltip: Это ярлык только для чтения
   reset: Сбросить по умолчанию
@@ -352,7 +352,7 @@ wall:
   objectFit: Фоновая подгонка
   objectPosition: Фоновая позиция
   overlayColor: Цвет наложения
-  overlayMixBlendMode: Режим наложения "Перекрытие
+  overlayMixBlendMode: Режим смешивания оверлея
   per_monitor: На монитор
   per_monitor_config: Конфигурация для каждого монитора
   playback: Скорость воспроизведения
@@ -375,7 +375,7 @@ wall:
   wallpapers: Обои
   wallpapers_and_collections: Обои и коллекции
   withOverlay: С наложением
-  workspace_collections: Коллекции рабочих областей
+  workspace_collections: Коллекции рабочих пространств
 weg:
   auto_hide: Автоскрытие
   auto_hide_touch_disabled: Автоматическое скрытие недоступно на устройствах с сенсорным экраном.
