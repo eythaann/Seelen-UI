@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.8-dev]
+## [2.8.8]
 
 ### security
 
