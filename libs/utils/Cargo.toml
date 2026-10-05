@@ -1,6 +1,6 @@
 [package]
 name = "slu-utils"
-version = "2.8.7"
+version = "2.8.8"
 edition = "2024"
 rust-version = "1.97"
 
