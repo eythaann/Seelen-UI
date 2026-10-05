@@ -31,9 +31,7 @@ impl crate::tauri_handlers::Handlers {
             }
         }
 
-        // refresh_desktop uses SPI_SETDESKWALLPAPER which on MSIX can cause the shell to
-        // rebuild the WorkerW hierarchy, evicting our window from its parent. Log instead
-        // of propagating so positioning already applied above is preserved.
+        // Log instead of propagating so positioning already applied above is preserved.
         if let Err(e) = SeelenWall::refresh_desktop() {
             log::warn!("Failed to refresh desktop after wallpaper attach: {e}");
         }

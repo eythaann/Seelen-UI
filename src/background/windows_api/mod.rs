@@ -991,13 +991,6 @@ impl WindowsApi {
         ))
     }
 
-    pub fn refresh_desktop() -> Result<()> {
-        unsafe {
-            SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, None, SPIF_UPDATEINIFILE)?;
-        }
-        Ok(())
-    }
-
     pub fn set_wallpaper(path: PathBuf) -> Result<()> {
         if !path.exists() {
             return Err("File not found".into());

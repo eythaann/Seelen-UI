@@ -104,6 +104,10 @@ impl SeelenWall {
         Ok(())
     }
 
+    /// Repaints the desktop icons layer only. Never use SPI_SETDESKWALLPAPER here: it makes
+    /// Explorer re-apply the native wallpaper, which on some systems tears down and recreates
+    /// the WorkerW we are parented to, destroying our webview. The widget is then respawned,
+    /// attaches and refreshes again, causing an endless flash-in/fade-out loop (#1704, #1883).
     pub fn refresh_desktop() -> Result<()> {
         unsafe {
             let progman = FindWindowA(pcstr!("Progman"), None)?;
@@ -114,6 +118,6 @@ impl SeelenWall {
                 UpdateWindow(shell_view).ok()?;
             }
         }
-        WindowsApi::refresh_desktop()
+        Ok(())
     }
 }
