@@ -16,8 +16,11 @@ seelen-core = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 uuid = { workspace = true, features = ["serde"] }
+widestring = { workspace = true }
 windows = { workspace = true, features = [
     "Win32_Foundation",
+    "Win32_Security",
+    "Win32_Security_Authorization",
     "Win32_System_IO",
     "Win32_System_RemoteDesktop",
     "Win32_System_Pipes",

@@ -8,11 +8,12 @@ use interprocess::os::windows::named_pipe::{
 use crate::{
     app::current_session_id,
     common::{
-        IPC, create_security_descriptor, read_from_ipc_stream, send_to_ipc_stream,
-        send_to_ipc_stream_blocking, send_with_retry, write_to_ipc_stream,
+        IPC, read_from_ipc_stream, send_to_ipc_stream, send_to_ipc_stream_blocking,
+        send_with_retry, write_to_ipc_stream,
     },
     error::Result,
-    messages::{IpcResponse, SvcAction, SvcMessage},
+    messages::{IpcResponse, SvcAction},
+    security::create_security_descriptor,
 };
 
 pub struct ServiceIpc {
@@ -79,18 +80,9 @@ impl ServiceIpc {
             return Self::response_to_client(stream, IpcResponse::Success).await;
         }
 
-        let message = SvcMessage::from_bytes(&data)?;
-        if !message.is_signature_valid() {
-            Self::response_to_client(
-                stream,
-                IpcResponse::Err("Unauthorized connection".to_owned()),
-            )
-            .await?;
-            return Ok(());
-        }
-
-        log::trace!("IPC command received: {:?}", message.action);
-        Self::response_to_client(stream, cb(message.action).await).await?;
+        let action = SvcAction::from_bytes(&data)?;
+        log::trace!("IPC command received: {action:?}");
+        Self::response_to_client(stream, cb(action).await).await?;
         Ok(())
     }
 
@@ -102,22 +94,12 @@ impl ServiceIpc {
     }
 
     pub async fn send(message: SvcAction) -> Result<()> {
-        let data = SvcMessage {
-            token: SvcMessage::signature().to_string(),
-            action: message,
-        }
-        .to_bytes()?;
-
+        let data = message.to_bytes()?;
         send_with_retry(|| Self::try_send(&data)).await
     }
 
     pub fn send_blocking(message: SvcAction) -> Result<IpcResponse> {
-        let data = SvcMessage {
-            token: SvcMessage::signature().to_string(),
-            action: message,
-        }
-        .to_bytes()?;
-
+        let data = message.to_bytes()?;
         let stream = DuplexPipeStream::connect_by_path(Self::path())?;
         send_to_ipc_stream_blocking(&stream, &data)
     }

@@ -7,11 +7,8 @@ use std::{
     time::Duration,
 };
 
-use interprocess::os::windows::{
-    named_pipe::{
-        DuplexPipeStream, pipe_mode::Bytes, tokio::DuplexPipeStream as AsyncDuplexPipeStream,
-    },
-    security_descriptor::{AsSecurityDescriptorMutExt, SecurityDescriptor},
+use interprocess::os::windows::named_pipe::{
+    DuplexPipeStream, pipe_mode::Bytes, tokio::DuplexPipeStream as AsyncDuplexPipeStream,
 };
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
 use windows::Win32::{
@@ -23,9 +20,6 @@ use windows::Win32::{
 };
 
 use crate::{error::Result, messages::IpcResponse};
-
-/// https://learn.microsoft.com/en-us/windows/win32/secauthz/security-descriptor-control
-pub static SE_DACL_PROTECTED: u16 = 4096u16;
 
 /// End of transmission block marker for IPC messages
 pub const END_OF_TRANSMISSION_BLOCK: u8 = 0x17;
@@ -64,14 +58,6 @@ pub trait IPC {
         });
         rx.recv_timeout(IPC_TIMEOUT).unwrap_or(false)
     }
-}
-
-/// Creates a security descriptor for IPC pipes
-pub fn create_security_descriptor() -> Result<SecurityDescriptor> {
-    let mut sd = SecurityDescriptor::new()?;
-    unsafe { sd.set_dacl(std::ptr::null_mut(), false)? };
-    sd.set_control(SE_DACL_PROTECTED, SE_DACL_PROTECTED)?;
-    Ok(sd)
 }
 
 /// Reads data from an async IPC stream with timeout

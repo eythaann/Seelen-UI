@@ -113,21 +113,7 @@ pub enum SvcAction {
     RestoreNativeTaskbar,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct SvcMessage {
-    pub token: String,
-    pub action: SvcAction,
-}
-
-impl SvcMessage {
-    pub fn signature() -> &'static str {
-        std::env!("SLU_SERVICE_CONNECTION_TOKEN")
-    }
-
-    pub fn is_signature_valid(&self) -> bool {
-        self.token == SvcMessage::signature()
-    }
-
+impl SvcAction {
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         Ok(serde_json::from_slice(bytes)?)
     }

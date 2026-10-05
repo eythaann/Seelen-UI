@@ -9,11 +9,12 @@ use windows::Win32::System::RemoteDesktop::{ProcessIdToSessionId, WTSGetActiveCo
 
 use crate::{
     common::{
-        IPC, create_security_descriptor, read_from_ipc_stream, send_to_ipc_stream,
-        send_to_ipc_stream_blocking, write_to_ipc_stream,
+        IPC, read_from_ipc_stream, send_to_ipc_stream, send_to_ipc_stream_blocking,
+        write_to_ipc_stream,
     },
     error::Result,
     messages::{AppMessage, IpcResponse},
+    security::create_security_descriptor,
 };
 
 pub struct AppIpc {

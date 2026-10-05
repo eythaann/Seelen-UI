@@ -5832,6 +5832,7 @@ dependencies = [
  "thiserror 2.0.21",
  "tokio",
  "uuid 1.26.0",
+ "widestring",
  "windows 0.62.2",
 ]
 
