@@ -91,10 +91,12 @@ pub async fn process_uri(uri: &str) -> Result<()> {
         return Err("Invalid URI format".into());
     };
 
-    let env_prefix = if enviroment == "production" {
-        "".to_string()
-    } else {
-        format!(".{enviroment}")
+    // The environment ends up in the hostname, so it must come from a fixed list: any other
+    // value (e.g. `evil.com?`) would redirect the authenticated request to another host.
+    let env_prefix = match enviroment.as_str() {
+        "production" => "",
+        "staging" => ".staging",
+        _ => return Err("Invalid URI environment".into()),
     };
 
     let url = format!("https://product{env_prefix}.seelen.io/resource/download/{resource_id}");

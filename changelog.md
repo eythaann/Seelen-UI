@@ -2,6 +2,10 @@
 
 ## [2.8.8-dev]
 
+### security
+
+- resource URIs could send the session token to arbitrary hosts.
+
 ## [2.8.7]
 
 ### breaking changes
