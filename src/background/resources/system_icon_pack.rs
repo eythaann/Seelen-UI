@@ -69,10 +69,11 @@ impl ResourceManager {
             Result::Ok(())
         };
 
-        ensure_icon("missing.png")?;
-        ensure_icon("url.png")?;
+        ensure_icon("missing.svg")?;
+        ensure_icon("url.svg")?;
         ensure_icon("folder.svg")?;
-        ensure_icon("desktop.svg")?;
+        ensure_icon("desktop_light.svg")?;
+        ensure_icon("desktop_dark.svg")?;
 
         ensure_icon("start_menu.svg")?;
         ensure_icon("start_menu_dark.svg")?;
@@ -81,9 +82,10 @@ impl ResourceManager {
         ensure_icon("music_thumbnail.svg")?;
         ensure_icon("music_thumbnail_mask.svg")?;
 
-        ensure_icon("trash_bin_empty.png")?;
-        ensure_icon("trash_bin_full.png")?;
-        ensure_icon("trash_bin_mask.png")?;
+        ensure_icon("trash_bin_empty_light.svg")?;
+        ensure_icon("trash_bin_empty_dark.svg")?;
+        ensure_icon("trash_bin_full_light.svg")?;
+        ensure_icon("trash_bin_full_dark.svg")?;
         Ok(())
     }
 
@@ -91,7 +93,7 @@ impl ResourceManager {
     fn sanitize_default_entries(system_pack: &mut IconPack) {
         // Ensure missing icon is set
         system_pack.missing = Some(Icon {
-            base: Some("missing.png".to_owned()),
+            base: Some("missing.svg".to_owned()),
             ..Default::default()
         });
 
@@ -99,7 +101,7 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Shared(SharedIconPackEntry {
             extension: "url".to_string(),
             icon: Icon {
-                base: Some("url.png".to_owned()),
+                base: Some("url.svg".to_owned()),
                 ..Default::default()
             },
         }));
@@ -126,8 +128,8 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "@seelen/weg::show-desktop".to_owned(),
             icon: Icon {
-                base: Some("desktop.svg".to_owned()),
-                is_aproximately_square: true,
+                light: Some("desktop_light.svg".to_owned()),
+                dark: Some("desktop_dark.svg".to_owned()),
                 ..Default::default()
             },
         }));
@@ -145,8 +147,8 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "bin::empty".to_owned(),
             icon: Icon {
-                base: Some("trash_bin_empty.png".to_owned()),
-                mask: Some("trash_bin_mask.png".to_owned()),
+                light: Some("trash_bin_empty_light.svg".to_owned()),
+                dark: Some("trash_bin_empty_dark.svg".to_owned()),
                 ..Default::default()
             },
         }));
@@ -154,8 +156,8 @@ impl ResourceManager {
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "bin::full".to_owned(),
             icon: Icon {
-                base: Some("trash_bin_full.png".to_owned()),
-                mask: Some("trash_bin_mask.png".to_owned()),
+                light: Some("trash_bin_full_light.svg".to_owned()),
+                dark: Some("trash_bin_full_dark.svg".to_owned()),
                 ..Default::default()
             },
         }));

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e3e6ea" />
+      <stop offset="1" stop-color="#c4cad2" />
+    </linearGradient>
+    <linearGradient id="stand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e6ea" />
+      <stop offset="0.45" stop-color="#f4f5f7" />
+      <stop offset="1" stop-color="#cfd4db" />
+    </linearGradient>
+    <linearGradient id="wallpaper" x1="0.16" y1="0.02" x2="0.84" y2="0.98">
+      <stop offset="0" stop-color="#68e0cf" />
+      <stop offset="1" stop-color="#209cff" />
+    </linearGradient>
+  </defs>
+
+  <!-- stand -->
+  <path d="M226 376 H286 L296 448 H216 Z" fill="url(#stand)" />
+  <rect x="156" y="440" width="200" height="28" rx="14" fill="url(#stand)" />
+
+  <!-- monitor bezel -->
+  <rect x="16" y="40" width="480" height="340" rx="36" fill="url(#bezel)" />
+
+  <!-- screen (inner radius = bezel radius - bezel width) -->
+  <rect x="32" y="56" width="448" height="308" rx="20" fill="url(#wallpaper)" />
+
+  <!-- top bar -->
+  <rect x="44" y="66" width="424" height="16" rx="8" fill="#edfaff" fill-opacity="0.69" />
+
+  <!-- dock -->
+  <rect x="158" y="300" width="196" height="52" rx="16" fill="#edf9ff" fill-opacity="0.69" />
+  <g fill="#e4faff">
+    <rect x="170" y="309" width="34" height="34" rx="7" />
+    <rect x="216" y="309" width="34" height="34" rx="7" />
+    <rect x="262" y="309" width="34" height="34" rx="7" />
+    <rect x="308" y="309" width="34" height="34" rx="7" />
+  </g>
+</svg>

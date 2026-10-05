@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4b5058" />
+      <stop offset="0.45" stop-color="#5f656e" />
+      <stop offset="1" stop-color="#3f444b" />
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#767d88" />
+      <stop offset="1" stop-color="#5a616b" />
+    </linearGradient>
+  </defs>
+
+  <!-- scaled to fill the canvas (content bounds: x 30.41..237.41, y -8.34..236), centered on the bin axis -->
+  <g transform="translate(128 128) scale(1.0477) translate(-128 -113.83)">
+    <!-- trash overflowing the rim -->
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <g transform="translate(-6 0)">
+        <path d="M60 84 L72 30 L116 38 L106 90 Z" fill="#c3c8cf" />
+        <path d="M78 46 L104 51 M75 60 L101 65" fill="none" stroke="#8f97a2" stroke-width="5" />
+      </g>
+      <g transform="translate(9 0)">
+        <path d="M168 88 L178 42 L210 50 L200 92 Z" fill="#aeb4bd" />
+      </g>
+      <g transform="translate(2 0)">
+        <circle cx="142" cy="58" r="28" fill="#c3c8cf" />
+        <path d="M124 50 L140 58 L134 74 M140 58 L158 46 M140 58 L160 68" fill="none" stroke="#959da8"
+          stroke-width="5" />
+      </g>
+    </g>
+
+    <!-- body, slightly tapered towards the bottom -->
+    <path d="M38.3 70 H217.7 L201.6 222 a16 16 0 0 1 -16 14 H70.4 a16 16 0 0 1 -16 -14 Z" fill="url(#body)" />
+
+    <!-- shade under the rim -->
+    <path d="M38.3 70 H217.7 L216.4 82 H39.6 Z" fill="#33373d" />
+
+    <!-- recycle symbol: three bent arrows with diagonal-cut tails forming a triangle -->
+    <g transform="translate(128 162)" fill="#383c43" stroke="#383c43" stroke-width="3" stroke-linejoin="round">
+      <path id="recycle-arrow"
+        d="M-18.5 -29.96 L-10.39 -44 L10.39 -44 L23.2 -21.82 L29.26 -25.32 L25 -6.7 L6.74 -12.32 L12.8 -15.82 L3.46 -32 L-3.46 -32 L-12.11 -17.03 Z" />
+      <use href="#recycle-arrow" transform="rotate(120)" />
+      <use href="#recycle-arrow" transform="rotate(240)" />
+    </g>
+
+    <!-- lid pushed open by the trash, resting on the right side of the rim -->
+    <g transform="rotate(14 229.2 70)">
+      <path d="M95.8 46 V36 a12 12 0 0 1 12 -12 H148.2 a12 12 0 0 1 12 12 V46" fill="none" stroke="#858d98"
+        stroke-width="10" />
+      <rect x="22.2" y="44" width="211.6" height="28" rx="12" fill="url(#lid)" />
+    </g>
+  </g>
+</svg>

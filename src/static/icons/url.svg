@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f5f7" />
+      <stop offset="1" stop-color="#e3e6ea" />
+    </linearGradient>
+    <linearGradient id="tag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1667a0" />
+      <stop offset="1" stop-color="#0c4a75" />
+    </linearGradient>
+  </defs>
+
+  <!-- file page with folded top-right corner -->
+  <path d="M48 12 H152 L204 64 V232 a12 12 0 0 1 -12 12 H48 a12 12 0 0 1 -12 -12 V24 a12 12 0 0 1 12 -12 Z"
+    fill="url(#page)" />
+  <path d="M152 12 V54 a10 10 0 0 0 10 10 H204 Z" fill="#c9ced6" />
+
+  <!-- globe -->
+  <g fill="none" stroke="#0ea5d0" stroke-width="7.5" stroke-linecap="round">
+    <circle cx="96" cy="88" r="44" />
+    <ellipse cx="96" cy="88" rx="18" ry="44" />
+    <line x1="52" y1="88" x2="140" y2="88" />
+    <path d="M60 66 H132 M60 110 H132" />
+  </g>
+
+  <!-- URL tag sticking out of the right edge of the page -->
+  <rect x="98" y="148" width="146" height="76" rx="14" fill="#0a3a5c" opacity="0.25" />
+  <rect x="96" y="140" width="146" height="76" rx="14" fill="url(#tag)" />
+  <g fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- U -->
+    <path d="M114 160 V182 a14 14 0 0 0 28 0 V160" />
+    <!-- R -->
+    <path d="M158 196 V160 H171 a10 10 0 0 1 0 20 H158 M171 180 L183 196" />
+    <!-- L -->
+    <path d="M199 160 V196 H223" />
+  </g>
+</svg>

@@ -1,0 +1,71 @@
+<svg
+  width="100%"
+  height="100%"
+  viewBox="0 0 256 256"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="box-front" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #d9a066; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #b97f45; stop-opacity: 1" />
+    </linearGradient>
+    <linearGradient id="box-inside" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #6e4523; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #8a5a30; stop-opacity: 1" />
+    </linearGradient>
+    <linearGradient id="screen" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #f75c46; stop-opacity: 1" />
+      <stop offset="50%" style="stop-color: #9d57f4; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #0054b6; stop-opacity: 1" />
+    </linearGradient>
+  </defs>
+
+  <!-- back flap -->
+  <polygon points="58,124 198,124 186,92 70,92" fill="#c48a52" />
+
+  <!-- box opening -->
+  <polygon points="58,124 198,124 216,146 40,146" fill="url(#box-inside)" />
+
+  <!-- app icon coming out of the box -->
+  <svg x="70" y="34" width="116" height="116" viewBox="0 0 256 256">
+    <rect width="100%" height="100%" rx="20%" ry="20%" fill="#0f0f0f" />
+    <rect
+      x="5%"
+      y="5%"
+      width="90%"
+      height="90%"
+      rx="16%"
+      ry="16%"
+      fill="url(#screen)"
+    />
+    <line
+      stroke-width="2.5%"
+      x1="49%"
+      y1="50%"
+      x2="95%"
+      y2="50%"
+      stroke="#ffffff"
+      stroke-dasharray="6.5% 4%"
+    />
+    <line
+      stroke-width="2.5%"
+      x1="50%"
+      y1="5%"
+      x2="50%"
+      y2="95%"
+      stroke="#ffffff"
+      stroke-dasharray="6.5% 3.95%"
+    />
+  </svg>
+
+  <!-- side flaps -->
+  <polygon points="58,124 40,146 6,128 22,106" fill="#e8b57a" />
+  <polygon points="198,124 216,146 250,128 234,106" fill="#e8b57a" />
+
+  <!-- front face -->
+  <rect x="40" y="146" width="176" height="92" rx="6" ry="6" fill="url(#box-front)" />
+  <rect x="40" y="146" width="176" height="8" fill="#a06a36" />
+
+  <!-- tape -->
+  <rect x="112" y="146" width="32" height="34" fill="#f1d3a8" />
+</svg>

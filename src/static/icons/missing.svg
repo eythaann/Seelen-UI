@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="photo-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d3e0f5" />
+      <stop offset="1" stop-color="#5e6570" />
+    </linearGradient>
+
+    <clipPath id="photo-frame">
+      <rect x="0" y="0" width="256" height="256" rx="56" />
+    </clipPath>
+  </defs>
+
+  <!-- square photo filling the whole icon so it stays legible at small sizes -->
+  <g clip-path="url(#photo-frame)">
+    <rect x="0" y="0" width="256" height="256" fill="url(#photo-bg)" />
+    <circle cx="73" cy="73" r="31" fill="#e6e8ec" />
+    <path d="M0 227 L67 147 L122 207 L181 128 L256 222 V256 H0 Z" fill="#c3cad6" />
+  </g>
+
+  <!-- question mark tilted to the right; the light halo keeps it legible over the photo -->
+  <g transform="translate(178 178) scale(2.4) translate(-200 -188)">
+    <g transform="rotate(25 200 186)" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M184 170a16 16 0 1 1 24 13.8c-5 3-8 6.5-8 12v3" fill="none" stroke="#e6e8ec" stroke-width="18" />
+      <circle cx="200" cy="214" r="10" fill="#e6e8ec" />
+      <path d="M184 170a16 16 0 1 1 24 13.8c-5 3-8 6.5-8 12v3" fill="none" stroke="#6c7482" stroke-width="9" />
+      <circle cx="200" cy="214" r="5.5" fill="#6c7482" />
+    </g>
+  </g>
+</svg>
