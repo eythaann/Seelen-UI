@@ -5,6 +5,7 @@
 ### security
 
 - resource URIs could send the session token to arbitrary hosts.
+- out of bounds read inside explorer.exe on malformed tray messages.
 
 ## [2.8.7]
 

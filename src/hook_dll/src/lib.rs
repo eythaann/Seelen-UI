@@ -46,7 +46,6 @@ struct ShellTrayMessage {
     magic_number: i32,
     message_type: u32,
     icon_data: NotifyIconData,
-    version: u32,
 }
 
 /// Contains the data for a system tray icon.
@@ -206,6 +205,12 @@ unsafe fn process_tray_message(msg: &CWPSTRUCT) -> Option<Win32TrayEvent> {
 
         // Type 1 is the tray icon message
         if copy_data.dwData != 1 || copy_data.lpData.is_null() {
+            return None;
+        }
+
+        // Any process can send WM_COPYDATA to the tray window, never read past the received
+        // buffer as this runs inside explorer.exe.
+        if (copy_data.cbData as usize) < size_of::<ShellTrayMessage>() {
             return None;
         }
 
