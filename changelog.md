@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.7-dev]
+## [2.8.7]
 
 ### breaking changes
 
