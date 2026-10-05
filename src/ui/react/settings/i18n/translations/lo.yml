@@ -228,7 +228,7 @@ resources:
   high_impact: ຜົນກະທົບສູງຕໍ່ການປະຕິບັດ
   import_wallpapers: ນໍາເຂົ້າຮູບວໍເປເປີທ້ອງຖິ່ນ
   included_plugins: ລວມມີປລັກອິນ
-  modified: ດັດແກ້ແລ້ວ
+  modified: ດັດແກ້
   open_folder: Open Opence Folder
   outdated: >-
     ຊັບພະຍາກອນນີ້ໄດ້ຖືກອອກແບບມາສໍາລັບ Apen ຂອງ Searen UI
@@ -405,6 +405,11 @@ weg:
     full_width: ຄວາມກວ້າງເຕັມຈໍ
     min_content: ຂະຫນາດນ້ອຍເທົ່າທີ່ສາມາດເຮັດໄດ້
   padding: padding
+  reveal_on_attention:
+    label: ສະແດງເມື່ອແອັບຕ້ອງການຄວາມສົນໃຈ
+    never: ບໍ່ເຄີຍ
+    until_activated: ຈົນ​ກ​່​ວາ app ໄດ້​ຖືກ​ເປີດ​
+    while_flashing: ໃນຂະນະທີ່ມັນກະພິບ
   show_end_task: ສະແດງວຽກທີ່ສຸດໃນຫນ້າວຽກ
   width: ກວ້າງ
 welcome:

@@ -236,7 +236,7 @@ resources:
   high_impact: Bandora bilind li ser performansê
   import_wallpapers: Dîwarên herêmî yên import bikin
   included_plugins: Pêvekên Tê de
-  modified: Hate guhertin
+  modified: Modified
   open_folder: Peldanka çavkaniya vekirî
   outdated: >-
     Vê çavkaniyê ji bo guhertoyek kevn a Seelen UI hate çêkirin û dibe ku bi
@@ -418,6 +418,11 @@ weg:
     full_width: Firehiya ekrana tevahî
     min_content: Biçûk ku dikare bibe
   padding: Padding
+  reveal_on_attention:
+    label: Dema ku sepanek balê dixwaze nîşan bide
+    never: Qet
+    until_activated: Heta ku sepan vebe
+    while_flashing: Dema ku dibiriqe
   show_end_task: Di peywira peywirê de peywira dawiyê nîşan bide
   width: Berî
 welcome:

@@ -422,6 +422,11 @@ weg:
     full_width: पूर्ण स्क्रीन चौड़ाई
     min_content: जितना छोटा हो सकता है
   padding: गद्दी
+  reveal_on_attention:
+    label: जब कोई ऐप ध्यान आकर्षित करने का अनुरोध करता है तो दिखाएं
+    never: कभी नहीं
+    until_activated: जब तक ऐप ओपन न हो जाए
+    while_flashing: जबकि यह चमकता है
   show_end_task: टास्कबार में अंतिम कार्य दिखाएं
   width: चौड़ाई
 welcome:

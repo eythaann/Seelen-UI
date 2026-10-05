@@ -421,6 +421,11 @@ weg:
     full_width: Wisa 'tal-iskrin sħiħ
     min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
+  reveal_on_attention:
+    label: Uri meta app titlob l-attenzjoni
+    never: Qatt
+    until_activated: Sakemm tinfetaħ l-app
+    while_flashing: Filwaqt li jteptep
   show_end_task: Uri l-kompitu finali fit-taskbar
   width: Wisa '
 welcome:

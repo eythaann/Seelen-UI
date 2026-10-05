@@ -2,7 +2,10 @@ goodbye: La revedere {{0}}
 hibernate: Hibernează
 lock: Blocați sesiunea
 log_out: Deconectați-vă
+pending_updates: Sunt actualizări de sistem în așteptare. Instalați acum?
 reboot: Reporniți
 shutdown: Opriți
 suspend: Suspenda
+update_and_reboot: Actualizați și reporniți
+update_and_shutdown: Actualizați și opriți
 uptime: Timp de funcționare

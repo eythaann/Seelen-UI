@@ -2,7 +2,10 @@ goodbye: ลาก่อน {{0}}
 hibernate: ไฮเบอร์เนต
 lock: ล็อคเซสชัน
 log_out: ออกจากระบบ
+pending_updates: มีการอัปเดตระบบที่รอดำเนินการ ติดตั้งตอนนี้เลย?
 reboot: รีบูต
 shutdown: ปิดเครื่อง
 suspend: ระงับ
+update_and_reboot: อัปเดตและรีสตาร์ท
+update_and_shutdown: อัพเดตและปิดตัวลง
 uptime: เวลาทำงาน

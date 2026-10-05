@@ -237,7 +237,7 @@ resources:
   high_impact: Didelis poveikis našumui
   import_wallpapers: Importuoti vietinius ekrano užsklandas
   included_plugins: Įtraukti papildiniai
-  modified: Pakeista
+  modified: Modifikuota
   open_folder: Atidarykite išteklių aplanką
   outdated: >-
     Šis išteklius buvo sukurtas senesnei "Seelen UI" versijai ir gali neveikti
@@ -417,6 +417,11 @@ weg:
     full_width: Visas ekrano plotis
     min_content: Mažas kaip gali būti
   padding: Paminkštinimas
+  reveal_on_attention:
+    label: Rodyti, kai programa prašo dėmesio
+    never: Niekada
+    until_activated: Kol programa nebus atidaryta
+    while_flashing: Kol mirksi
   show_end_task: Užduoties juostoje rodyti pabaigos užduotį
   width: Plotis
 welcome:

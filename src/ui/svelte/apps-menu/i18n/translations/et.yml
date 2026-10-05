@@ -16,6 +16,7 @@ query:
   files: Failid
   web: Veeb
 run_as_admin: Käivita administraatorina
+uninstall: Desinstalli
 unpin: Vabastage
 web_search: Veebis otsimiseks vajutage sisestusklahvi
 welcome_message: Tere tulemast Seeleni kasutajaliidese rakenduse menüüsse.

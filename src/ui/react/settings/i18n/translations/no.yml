@@ -235,7 +235,7 @@ resources:
   high_impact: Høy innvirkning på ytelsen
   import_wallpapers: Importer lokale bakgrunnsbilder
   included_plugins: Inkludert plugins
-  modified: Endret
+  modified: Modifisert
   open_folder: Åpne ressursmappe
   outdated: >-
     Denne ressursen ble designet for en eldre versjon av Seelen UI og fungerer
@@ -417,6 +417,11 @@ weg:
     full_width: Full skjermbredde
     min_content: Liten som kan være
   padding: Polstring
+  reveal_on_attention:
+    label: Vis når en app ber om oppmerksomhet
+    never: Aldri
+    until_activated: Helt til appen åpnes
+    while_flashing: Mens den blinker
   show_end_task: Vis sluttoppgave i oppgavelinjen
   width: Bredde
 welcome:

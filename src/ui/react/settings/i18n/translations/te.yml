@@ -420,6 +420,11 @@ weg:
     full_width: పూర్తి స్క్రీన్ వెడల్పు
     min_content: వీలైనంత చిన్నది
   padding: పాడింగ్
+  reveal_on_attention:
+    label: యాప్ దృష్టిని అభ్యర్థించినప్పుడు చూపుతుంది
+    never: ఎప్పుడూ
+    until_activated: యాప్ ఓపెన్ అయ్యే వరకు
+    while_flashing: అది మెరుస్తున్నప్పుడు
   show_end_task: టాస్క్‌బార్‌లో ముగింపు పనిని చూపించు
   width: వెడల్పు
 welcome:

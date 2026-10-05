@@ -16,6 +16,7 @@ query:
   files: Tiedostot
   web: Web
 run_as_admin: Suorita järjestelmänvalvojana
+uninstall: Poista asennus
 unpin: Irrota kiinnitys
 web_search: Hae verkosta painamalla Enter
 welcome_message: Tervetuloa Seelen UI -sovellusvalikkoon.

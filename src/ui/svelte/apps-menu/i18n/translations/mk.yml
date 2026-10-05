@@ -16,6 +16,7 @@ query:
   files: Датотеки
   web: Веб
 run_as_admin: Стартувај како администратор
+uninstall: Деинсталирајте
 unpin: Откачи
 web_search: Притиснете Enter за да пребарувате на интернет
 welcome_message: Добре дојдовте во менито на апликацијата Seelen UI.

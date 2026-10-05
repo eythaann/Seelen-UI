@@ -2,7 +2,10 @@ goodbye: وداعا {{0}}
 hibernate: السبات
 lock: قفل الجلسة
 log_out: تسجيل الخروج
+pending_updates: هناك تحديثات معلقة للنظام. هل تريد التثبيت الآن؟
 reboot: إعادة التشغيل
 shutdown: خارج السلطة
 suspend: تعليق
+update_and_reboot: التحديث وإعادة التشغيل
+update_and_shutdown: تحديث وإيقاف
 uptime: الجهوزية

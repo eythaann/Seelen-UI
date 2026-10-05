@@ -2,7 +2,10 @@ goodbye: להתראות {{0}}
 hibernate: שינה
 lock: נעילת הפעלה
 log_out: התנתק
+pending_updates: יש עדכוני מערכת ממתינים. להתקין עכשיו?
 reboot: לְאַתחֵל
 shutdown: כבה
 suspend: לְהַשְׁעוֹת
+update_and_reboot: עדכן והפעל מחדש
+update_and_shutdown: עדכן ותכבה
 uptime: זמן פעולה

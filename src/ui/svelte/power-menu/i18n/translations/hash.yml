@@ -2,7 +2,10 @@ goodbye: ea317b4
 hibernate: '33528678'
 lock: 951d1e68
 log_out: 9a8a8630
+pending_updates: b86b2735
 reboot: 2a0fcb8
 shutdown: c31ee086
 suspend: c7f51658
+update_and_reboot: bcb61c2c
+update_and_shutdown: d9a3e6ae
 uptime: 4e1c6e38

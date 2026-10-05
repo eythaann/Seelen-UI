@@ -13,7 +13,7 @@ app_menu:
   run_as: Запустить от имени администратора
   unpin: Открепить
 context_menu:
-  edit_icon: Редактировать значок 
+  edit_icon: Редактировать значок
   remove_module: Удалить модуль
   remove_separator: Удалить разделитель
   reorder_disable: Заблокировать панель
@@ -34,7 +34,7 @@ taskbar_menu:
   task_manager: Диспетчер задач
 trash_bin:
   empty_bin: Пустая корзина
-  item_count: "{{0}} элементов"
+  item_count: '{{0}} элементов'
   label: Корзина
 weg:
   empty: Нет элементов для отображения

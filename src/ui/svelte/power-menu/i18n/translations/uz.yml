@@ -2,7 +2,10 @@ goodbye: Xayrlashish {{0}}
 hibernate: Xunlamoq
 lock: Qulf sessiyasi
 log_out: Kirish
+pending_updates: Kutilayotgan tizim yangilanishlari mavjud. Hozir oʻrnatilsinmi?
 reboot: Qaytadan yoqmoq
 shutdown: Quvvat
 suspend: To'xtatib yubormoq
+update_and_reboot: Yangilang va qayta ishga tushiring
+update_and_shutdown: Yangilash va o'chirish
 uptime: Uy

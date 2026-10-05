@@ -2,7 +2,10 @@ goodbye: Bless {{0}}
 hibernate: Leggðu í dvala
 lock: Læstu lotu
 log_out: Skráðu þig út
+pending_updates: Það eru kerfisuppfærslur í bið. Setja upp núna?
 reboot: Endurræstu
 shutdown: Slökkvið á
 suspend: Fresta
+update_and_reboot: Uppfærðu og endurræstu
+update_and_shutdown: Uppfærðu og lokaðu
 uptime: Spenntur

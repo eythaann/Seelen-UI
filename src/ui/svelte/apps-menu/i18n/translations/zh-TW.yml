@@ -16,6 +16,7 @@ query:
   files: 文件
   web: 網路
 run_as_admin: 以管理員身份執行
+uninstall: 解除安裝
 unpin: 取消釘選
 web_search: 按 Enter 鍵搜尋網路
 welcome_message: 歡迎使用 Seelen UI 應用程式選單。

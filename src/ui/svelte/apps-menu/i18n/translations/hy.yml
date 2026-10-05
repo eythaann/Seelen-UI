@@ -16,6 +16,7 @@ query:
   files: Ֆայլեր
   web: Վեբ
 run_as_admin: Գործարկել որպես ադմինիստրատոր
+uninstall: Տեղահանել
 unpin: Ապամրացնել
 web_search: Սեղմեք Enter՝ համացանցում որոնելու համար
 welcome_message: 'Բարի գալուստ Seelen UI հավելվածի ընտրացանկ:'

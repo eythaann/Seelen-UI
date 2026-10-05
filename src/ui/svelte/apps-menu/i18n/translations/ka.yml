@@ -16,6 +16,7 @@ query:
   files: ფაილები
   web: ვებ
 run_as_admin: გაუშვით როგორც ადმინისტრატორი
+uninstall: დეინსტალაცია
 unpin: ჩამაგრების მოხსნა
 web_search: დააჭირეთ Enter ინტერნეტში მოსაძებნად
 welcome_message: კეთილი იყოს თქვენი მობრძანება Seelen UI აპლიკაციის მენიუში.

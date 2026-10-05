@@ -2,7 +2,10 @@ goodbye: Хайрбод {{0}}
 hibernate: Мунтазир
 lock: Сессияи қулф
 log_out: Баромадан
+pending_updates: Навсозиҳои система интизоранд. Ҳоло насб кунед?
 reboot: Бозоғоз кунед
 shutdown: Қудрат
 suspend: Боздоштан
+update_and_reboot: Навсозӣ ва аз нав оғоз кунед
+update_and_shutdown: Навсозӣ ва хомӯш кунед
 uptime: Давомнокӣ

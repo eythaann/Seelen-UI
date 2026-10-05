@@ -2,7 +2,10 @@ goodbye: 再見{{0}}
 hibernate: 休眠
 lock: 鎖定
 log_out: 登出
+pending_updates: 有待處理的系統更新。 現在安裝？
 reboot: 重新啟動
 shutdown: 關機
 suspend: 睡眠
+update_and_reboot: 更新並重啟
+update_and_shutdown: 更新並關閉
 uptime: 系統運行時間

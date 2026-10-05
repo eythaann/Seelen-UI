@@ -425,6 +425,11 @@ weg:
     full_width: Amplada de pantalla completa
     min_content: Petit com pot ser
   padding: Encoir
+  reveal_on_attention:
+    label: Mostra quan una aplicació demana atenció
+    never: Mai
+    until_activated: Fins que s'obre l'aplicació
+    while_flashing: Mentre parpelleja
   show_end_task: Mostra la tasca final a la barra de tasques
   width: Amplada
 welcome:

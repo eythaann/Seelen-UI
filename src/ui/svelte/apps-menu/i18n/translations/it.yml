@@ -16,6 +16,7 @@ query:
   files: File
   web: Rete
 run_as_admin: Esegui come amministratore
+uninstall: Disinstallare
 unpin: Sblocca
 web_search: Premi Invio per effettuare ricerche sul Web
 welcome_message: Benvenuto nel menu dell'app Seelen UI.

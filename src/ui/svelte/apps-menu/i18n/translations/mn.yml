@@ -16,6 +16,7 @@ query:
   files: Файлууд
   web: Вэб
 run_as_admin: Администратороор ажиллуулна уу
+uninstall: Устгах
 unpin: Буулгах
 web_search: Вэбээс хайхын тулд Enter дарна уу
 welcome_message: Seelen UI програмын цэсэнд тавтай морилно уу.

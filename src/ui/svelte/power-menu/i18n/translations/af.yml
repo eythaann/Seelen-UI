@@ -2,7 +2,10 @@ goodbye: Totsiens {{0}}
 hibernate: Hiberneer
 lock: Sluit sessie
 log_out: Teken uit
+pending_updates: Daar is hangende stelselopdaterings. Installeer nou?
 reboot: Herlaai
 shutdown: Krag af
 suspend: Opskort
+update_and_reboot: Dateer op en herbegin
+update_and_shutdown: Dateer op en sluit af
 uptime: Optyd

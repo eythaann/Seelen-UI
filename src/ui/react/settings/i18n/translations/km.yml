@@ -232,7 +232,7 @@ resources:
   high_impact: ឥទ្ធិពលខ្ពស់លើការអនុវត្ត
   import_wallpapers: នាំចូលផ្ទាំងរូបភាពក្នុងស្រុក
   included_plugins: រួមបញ្ចូលកម្មវិធីជំនួយ
-  modified: បានកែប្រែ
+  modified: កែប្រែ
   open_folder: បើកថតធនធាន
   outdated: >-
     ធនធាននេះត្រូវបានរចនាឡើងសម្រាប់កំណែចាស់របស់ Seeen UI
@@ -413,6 +413,11 @@ weg:
     full_width: ទទឹងពេញអេក្រង់
     min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
+  reveal_on_attention:
+    label: បង្ហាញនៅពេលដែលកម្មវិធីមួយស្នើសុំការយកចិត្តទុកដាក់
+    never: មិនដែល
+    until_activated: រហូតដល់កម្មវិធីត្រូវបានបើក
+    while_flashing: ខណៈពេលដែលវាបញ្ចេញពន្លឺ
   show_end_task: បង្ហាញភារកិច្ចបញ្ចប់នៅក្នុងរបារភារកិច្ច
   width: ទទឹង
 welcome:

@@ -237,7 +237,7 @@ resources:
   high_impact: Vysoký dopad na výkon
   import_wallpapers: Import místních tapet
   included_plugins: Zahrnuté pluginy
-  modified: Změněno
+  modified: Upraveno
   open_folder: Otevření složky se zdroji
   outdated: >-
     Tento zdroj byl navržen pro starší verzi uživatelského rozhraní Seelen a
@@ -418,6 +418,11 @@ weg:
     full_width: Celá šířka obrazovky
     min_content: Malý jak jen může být
   padding: Padding
+  reveal_on_attention:
+    label: Zobrazit, když aplikace vyžaduje pozornost
+    never: Nikdy
+    until_activated: Dokud se aplikace neotevře
+    while_flashing: Zatímco bliká
   show_end_task: Zobrazení koncové úlohy na hlavním panelu
   width: Šířka
 welcome:

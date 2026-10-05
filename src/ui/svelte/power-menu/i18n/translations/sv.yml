@@ -2,7 +2,10 @@ goodbye: Adjö {{0}}
 hibernate: Övervintra
 lock: Lås session
 log_out: Logga ut
+pending_updates: Det finns väntande systemuppdateringar. Installera nu?
 reboot: Starta om
 shutdown: Ström av
 suspend: Uppskjuta
+update_and_reboot: Uppdatera och starta om
+update_and_shutdown: Uppdatera och stäng av
 uptime: Upptid

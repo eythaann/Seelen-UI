@@ -2,7 +2,10 @@ goodbye: Sbohem {{0}}
 hibernate: Přezimovat
 lock: Uzamknout relaci
 log_out: Odhlaste se
+pending_updates: Čekají na aktualizace systému. Instalovat nyní?
 reboot: Restartujte
 shutdown: Vypněte napájení
 suspend: Pozastavit
+update_and_reboot: Aktualizujte a restartujte
+update_and_shutdown: Aktualizujte a vypněte
 uptime: Doba provozuschopnosti

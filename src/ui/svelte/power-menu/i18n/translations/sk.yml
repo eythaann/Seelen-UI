@@ -2,7 +2,10 @@ goodbye: Dovidenia {{0}}
 hibernate: Hibernácia
 lock: Uzamknúť reláciu
 log_out: Odhláste sa
+pending_updates: Čakajú na aktualizácie systému. Inštalovať teraz?
 reboot: Reštartujte
 shutdown: Vypnúť
 suspend: Pozastaviť
+update_and_reboot: Aktualizujte a reštartujte
+update_and_shutdown: Aktualizujte a vypnite
 uptime: Uptime

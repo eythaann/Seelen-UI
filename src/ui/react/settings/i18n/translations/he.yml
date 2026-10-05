@@ -399,6 +399,11 @@ weg:
     full_width: רוחב מסך מלא
     min_content: קטן ככל שניתן
   padding: ריפוד
+  reveal_on_attention:
+    label: הצג מתי אפליקציה מבקשת תשומת לב
+    never: לְעוֹלָם לֹא
+    until_activated: עד לפתיחת האפליקציה
+    while_flashing: בזמן שהוא מהבהב
   show_end_task: הצג את משימת הסיום בשורת המשימות
   width: רוחב
 welcome:

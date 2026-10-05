@@ -2,7 +2,10 @@ goodbye: Güle güle {{0}}
 hibernate: Hazırda bekletme
 lock: Oturumu kilitle
 log_out: Oturumu kapat
+pending_updates: Bekleyen sistem güncellemeleri var. Şimdi yüklensin mi?
 reboot: Yeniden başlat
 shutdown: Kapat
 suspend: Askıya almak
+update_and_reboot: Güncelle ve yeniden başlat
+update_and_shutdown: Güncelle ve kapat
 uptime: Çalışma süresi

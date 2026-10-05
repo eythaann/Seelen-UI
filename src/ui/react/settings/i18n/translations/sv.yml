@@ -416,6 +416,11 @@ weg:
     full_width: Helskärmsbredd
     min_content: Liten som kan vara
   padding: Stoppning
+  reveal_on_attention:
+    label: Visa när en app begär uppmärksamhet
+    never: Aldrig
+    until_activated: Tills appen öppnas
+    while_flashing: Medan den blinkar
   show_end_task: Visa slutuppgift i aktivitetsfältet
   width: Bredd
 welcome:

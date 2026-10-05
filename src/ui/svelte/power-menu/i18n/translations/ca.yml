@@ -2,7 +2,10 @@ goodbye: Adéu {{0}}
 hibernate: Hibernar
 lock: Bloquejar la sessió
 log_out: Tanca la sessió
+pending_updates: Hi ha actualitzacions del sistema pendents. Instal·lar ara?
 reboot: Reinicieu
 shutdown: Apagueu
 suspend: Suspensió
+update_and_reboot: Actualitzar i reiniciar
+update_and_shutdown: Actualitzar i apagar
 uptime: Temps de funcionament

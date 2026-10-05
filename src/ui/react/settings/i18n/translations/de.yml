@@ -428,6 +428,11 @@ weg:
     full_width: Volle Bildschirmbreite
     min_content: So klein wie möglich
   padding: Polsterung
+  reveal_on_attention:
+    label: Wird angezeigt, wenn eine App Aufmerksamkeit erfordert
+    never: Niemals
+    until_activated: Bis die App geöffnet wird
+    while_flashing: Während es blinkt
   show_end_task: Beendete Aufgabe in der Taskleiste anzeigen
   width: Breite
 welcome:

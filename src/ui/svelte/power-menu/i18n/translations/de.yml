@@ -2,7 +2,10 @@ goodbye: Auf Wiedersehen {{0}}
 hibernate: Überwintern
 lock: Sitzung sperren
 log_out: Abmelden
+pending_updates: Es stehen ausstehende Systemaktualisierungen an. Jetzt installieren?
 reboot: Neustart
 shutdown: Ausschalten
 suspend: Aussetzen
+update_and_reboot: Aktualisieren und neu starten
+update_and_shutdown: Aktualisieren und herunterfahren
 uptime: Betriebszeit

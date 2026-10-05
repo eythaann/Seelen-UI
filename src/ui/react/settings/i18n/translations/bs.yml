@@ -419,6 +419,11 @@ weg:
     full_width: Cijela širina ekrana
     min_content: Manji koliko može
   padding: Obloga
+  reveal_on_attention:
+    label: Prikaži kada aplikacija traži pažnju
+    never: Nikad
+    until_activated: Dok se aplikacija ne otvori
+    while_flashing: Dok treperi
   show_end_task: Prikaži krajnji zadatak u traci zadataka
   width: Širina
 welcome:

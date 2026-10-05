@@ -2,7 +2,10 @@ goodbye: الوداع {{0}}
 hibernate: ہائبرنیٹ
 lock: لاک سیشن
 log_out: لاگ آؤٹ
+pending_updates: سسٹم اپ ڈیٹس زیر التواء ہیں۔ ابھی انسٹال کریں؟
 reboot: ربوٹ
 shutdown: پاور آف
 suspend: معطل
+update_and_reboot: اپ ڈیٹ کریں اور دوبارہ شروع کریں۔
+update_and_shutdown: اپ ڈیٹ کریں اور بند کریں۔
 uptime: اپ ٹائم

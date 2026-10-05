@@ -2,7 +2,10 @@ goodbye: Agur {{0}}
 hibernate: Hibernatu
 lock: Blokeatu saioa
 log_out: Amaitu saioa
+pending_updates: Sistemaren eguneraketak zain daude. Instalatu orain?
 reboot: Berrabiarazi
 shutdown: Itzali
 suspend: Eten
+update_and_reboot: Eguneratu eta berrabiarazi
+update_and_shutdown: Eguneratu eta itzali
 uptime: Epea

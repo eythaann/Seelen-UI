@@ -2,7 +2,10 @@ goodbye: अलविदा {{0}}
 hibernate: हाइबरनेट
 lock: सत्र लॉक करें
 log_out: लॉग आउट
+pending_updates: सिस्टम अपडेट लंबित है. अब स्थापित करें?
 reboot: रीबूट
 shutdown: बिजली बंद
 suspend: निलंबित करें
+update_and_reboot: अद्यतन और पुनः आरंभ करें
+update_and_shutdown: अद्यतन करें और बंद करें
 uptime: अपटाइम

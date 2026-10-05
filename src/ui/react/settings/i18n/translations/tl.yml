@@ -428,6 +428,11 @@ weg:
     full_width: Buong lapad ng screen
     min_content: Maliit hangga't maaari
   padding: Padding
+  reveal_on_attention:
+    label: Ipakita kapag humiling ng atensyon ang isang app
+    never: Hindi kailanman
+    until_activated: Hanggang sa mabuksan ang app
+    while_flashing: Habang kumikislap
   show_end_task: Ipakita ang pagtatapos ng gawain sa taskbar
   width: Lapad
 welcome:

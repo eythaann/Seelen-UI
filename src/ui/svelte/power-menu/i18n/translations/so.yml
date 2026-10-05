@@ -2,7 +2,10 @@ goodbye: Nabad gelyo {{0}}
 hibernate: Hiiberhanate
 lock: Kalfadhiga qufulka
 log_out: Ka bax
+pending_updates: Waxaa jira cusboonaysiinta nidaamka oo la sugayo. Hadda rakib?
 reboot: Dib u bilaabid
 shutdown: Koronto
 suspend: Soo laalaadin
+update_and_reboot: Cusbooneysii oo dib u bilow
+update_and_shutdown: Cusbooneysii oo xidh
 uptime: U qaadid

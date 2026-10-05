@@ -2,7 +2,10 @@ goodbye: Tot ziens {{0}}
 hibernate: Overwinteren
 lock: Sessie vergrendelen
 log_out: Uitloggen
+pending_updates: Er zijn systeemupdates in behandeling. Nu installeren?
 reboot: Opnieuw opstarten
 shutdown: Uitschakelen
 suspend: Opschorten
+update_and_reboot: Updaten en opnieuw opstarten
+update_and_shutdown: Bijwerken en afsluiten
 uptime: Uptime

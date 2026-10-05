@@ -16,6 +16,7 @@ query:
   files: Fichieren
   web: Web
 run_as_admin: Run als Administrator
+uninstall: Uninstalléieren
 unpin: Unpin
 web_search: Dréckt Enter fir um Internet ze sichen
 welcome_message: Wëllkomm op der Seelen UI App Menü.

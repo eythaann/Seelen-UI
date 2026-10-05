@@ -2,7 +2,10 @@ goodbye: Hwyl fawr {{0}}
 hibernate: gaeafgysgu
 lock: Sesiwn cloi
 log_out: Allgofnodi
+pending_updates: Mae diweddariadau system yn yr arfaeth. Gosod nawr?
 reboot: Ailgychwyn
 shutdown: Pŵer i ffwrdd
 suspend: Atal
+update_and_reboot: Diweddaru ac ailgychwyn
+update_and_shutdown: Diweddaru a chau i lawr
 uptime: Uptime

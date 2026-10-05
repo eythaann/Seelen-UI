@@ -2,7 +2,10 @@ goodbye: Goodbye {{0}}
 hibernate: Umgebha
 lock: Iseshini yokukhiya
 log_out: Phuma
+pending_updates: Kunezibuyekezo zesistimu ezilindile. Faka manje?
 reboot: Qala
 shutdown: Ukucishwa amandla
 suspend: Hlehlisa
+update_and_reboot: Buyekeza futhi uqale kabusha
+update_and_shutdown: Buyekeza futhi uvale
 uptime: Isikhathi

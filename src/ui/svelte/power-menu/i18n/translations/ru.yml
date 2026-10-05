@@ -2,7 +2,10 @@ goodbye: До свидания, {{0}}
 hibernate: Спящий режим
 lock: Заблокировать сеанс
 log_out: Выйти
+pending_updates: Есть ожидающие обновления системы. Установить сейчас?
 reboot: Перезагрузить
 shutdown: Выключить
 suspend: Приостановить
+update_and_reboot: Обновить и перезапустить
+update_and_shutdown: Обновить и выключить
 uptime: Время работы

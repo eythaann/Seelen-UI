@@ -422,6 +422,11 @@ weg:
     full_width: На всю ширину екрана
     min_content: Якнайменший
   padding: Внутрішній відступ
+  reveal_on_attention:
+    label: Показувати, коли програма вимагає уваги
+    never: Ніколи
+    until_activated: Поки додаток не буде відкрито
+    while_flashing: Поки блимає
   show_end_task: Показати завершене завдання на панелі завдань
   width: Ширина
 welcome:

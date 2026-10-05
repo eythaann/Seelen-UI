@@ -2,7 +2,10 @@ goodbye: Paalam {{0}}
 hibernate: Hibernate
 lock: Session ng lock
 log_out: Mag -log out
+pending_updates: Mayroong nakabinbing mga update sa system. I-install ngayon?
 reboot: Reboot
 shutdown: Power Off
 suspend: Suspindihin
+update_and_reboot: I-update at i-restart
+update_and_shutdown: I-update at isara
 uptime: Uptime

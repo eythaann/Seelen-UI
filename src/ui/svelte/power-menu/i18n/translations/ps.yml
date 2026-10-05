@@ -2,7 +2,10 @@ goodbye: الوداع {{0}}
 hibernate: هیبرنیټ
 lock: ناسته بنده کړه
 log_out: وتل
+pending_updates: د سیسټم تازه معلومات پاتې دي. اوس نصب کړئ؟
 reboot: ریبوټ
 shutdown: بریښنا بنده
 suspend: ځنډول
+update_and_reboot: تازه او بیا پیل کړئ
+update_and_shutdown: تازه کول او بندول
 uptime: وخت

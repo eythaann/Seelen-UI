@@ -416,6 +416,11 @@ weg:
     full_width: Chiều rộng toàn màn hình
     min_content: Nhỏ nhất có thể
   padding: Đệm
+  reveal_on_attention:
+    label: Hiển thị khi ứng dụng yêu cầu sự chú ý
+    never: Không bao giờ
+    until_activated: Cho đến khi ứng dụng được mở
+    while_flashing: Trong khi nó nhấp nháy
   show_end_task: Hiển thị nhiệm vụ kết thúc trong thanh tác vụ
   width: Chiều rộng
 welcome:

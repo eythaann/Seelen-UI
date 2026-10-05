@@ -2,7 +2,10 @@ goodbye: O dà {{0}
 hibernate: Hibernate
 lock: Titii pa
 log_out: Wọle
+pending_updates: Awọn imudojuiwọn eto wa ni isunmọtosi. Fi sori ẹrọ ni bayi?
 reboot: Atunbere
 shutdown: Ipa pipa
 suspend: Da duro
+update_and_reboot: Ṣe imudojuiwọn ati tun bẹrẹ
+update_and_shutdown: Ṣe imudojuiwọn ati tiipa
 uptime: Iduro

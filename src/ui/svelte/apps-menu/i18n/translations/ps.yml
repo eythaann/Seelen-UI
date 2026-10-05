@@ -16,6 +16,7 @@ query:
   files: فایلونه
   web: ویب
 run_as_admin: د مدیر په توګه چلول
+uninstall: غیر نصب کړئ
 unpin: خلاص کړئ
 web_search: د ویب لټون کولو لپاره Enter فشار ورکړئ
 welcome_message: د Seelen UI ایپ مینو ته ښه راغلاست.

@@ -16,6 +16,7 @@ query:
   files: ගොනු
   web: වෙබ්
 run_as_admin: පරිපාලක ලෙස ධාවනය කරන්න
+uninstall: අස්ථාපනය කරන්න
 unpin: ඇමුණුම ඉවත් කරන්න
 web_search: වෙබය සෙවීමට Enter ඔබන්න
 welcome_message: Seelen UI යෙදුම් මෙනුව වෙත සාදරයෙන් පිළිගනිමු.

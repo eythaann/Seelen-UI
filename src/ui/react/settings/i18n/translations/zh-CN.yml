@@ -200,7 +200,7 @@ resources:
   high_impact: 对性能影响很大
   import_wallpapers: 导入本地壁纸
   included_plugins: 包含的插件
-  modified: 已修改
+  modified: 修改的
   open_folder: 打开资源文件夹
   outdated: 此资源是为旧版本的 Seelen UI 设计的，可能无法正常使用。
   see_on_website: 在网站上查看
@@ -373,13 +373,16 @@ weg:
     full_width: 全屏宽度
     min_content: 尽可能小
   padding: 内边距
+  reveal_on_attention:
+    label: 当应用请求关注时显示
+    never: 绝不
+    until_activated: 直到应用程序打开
+    while_flashing: 当它闪烁时
   show_end_task: 在任务栏中显示结束任务
   width: 宽度
 welcome:
   give_a_review: 写评价
-  message: >-
-    Seelen UI 是一款面向 Windows 的免费开源桌面环境。
-    您可以完全掌控桌面的外观与行为，自定义每一处细节，以契合您的工作流程与风格。
+  message: Seelen UI 是一款面向 Windows 的免费开源桌面环境。 您可以完全掌控桌面的外观与行为，自定义每一处细节，以契合您的工作流程与风格。
   ok: 开始使用
   review: 如果您喜欢使用 Seelen UI，欢迎在商店留下评价——您的反馈有助于项目成长和改进。
   title: 欢迎使用 Seelen UI

@@ -2,7 +2,10 @@ goodbye: Au revoir {{0}}
 hibernate: Hiberner
 lock: Session de verrouillage
 log_out: Se déconnecter
+pending_updates: "Des mises à jour du système sont en attente. Installer maintenant\_?"
 reboot: Redémarrer
 shutdown: Éteindre
 suspend: Suspendre
+update_and_reboot: Mettre à jour et redémarrer
+update_and_shutdown: Mettre à jour et arrêter
 uptime: Temps de disponibilité

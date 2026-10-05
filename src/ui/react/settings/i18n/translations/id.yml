@@ -239,7 +239,7 @@ resources:
   high_impact: Dampak tinggi pada kinerja
   import_wallpapers: Impor wallpaper lokal
   included_plugins: Termasuk Plugin
-  modified: Diubah
+  modified: Dimodifikasi
   open_folder: Buka folder sumber daya
   outdated: >-
     Sumber daya ini dirancang untuk versi lama Seelen UI dan mungkin tidak
@@ -421,6 +421,11 @@ weg:
     full_width: Lebar layar penuh
     min_content: Sekecil mungkin
   padding: Lapisan
+  reveal_on_attention:
+    label: Tampilkan saat aplikasi meminta perhatian
+    never: Tidak pernah
+    until_activated: Sampai aplikasi dibuka
+    while_flashing: Saat itu berkedip
   show_end_task: Menampilkan tugas akhir di bilah tugas
   width: Lebar
 welcome:

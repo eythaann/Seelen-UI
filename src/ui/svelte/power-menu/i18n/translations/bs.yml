@@ -2,7 +2,10 @@ goodbye: zbogom {{0}}
 hibernate: Hibernacija
 lock: Zaključaj sesiju
 log_out: Odjavite se
+pending_updates: Postoje ažuriranja sistema na čekanju. Instalirati sada?
 reboot: Ponovo pokreni
 shutdown: Isključite napajanje
 suspend: Suspend
+update_and_reboot: Ažurirajte i ponovo pokrenite
+update_and_shutdown: Ažurirajte i isključite
 uptime: Uptime

@@ -419,6 +419,11 @@ weg:
     full_width: სრული ეკრანის სიგანე
     min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
+  reveal_on_attention:
+    label: ჩვენება, როდესაც აპი ითხოვს ყურადღებას
+    never: არასოდეს
+    until_activated: სანამ აპლიკაცია არ გაიხსნება
+    while_flashing: სანამ ის ციმციმებს
   show_end_task: აჩვენეთ საბოლოო დავალება დავალების ზოლში
   width: სიგანე
 welcome:

@@ -411,6 +411,11 @@ weg:
     full_width: ਪੂਰੀ ਸਕ੍ਰੀਨ ਚੌੜਾਈ
     min_content: ਛੋਟਾ ਜਿੰਨਾ ਹੋ ਸਕਦਾ ਹੈ
   padding: ਪੈਡਿੰਗ
+  reveal_on_attention:
+    label: ਜਦੋਂ ਕੋਈ ਐਪ ਧਿਆਨ ਦੇਣ ਦੀ ਬੇਨਤੀ ਕਰਦਾ ਹੈ ਤਾਂ ਦਿਖਾਓ
+    never: ਕਦੇ ਨਹੀਂ
+    until_activated: ਐਪ ਓਪਨ ਹੋਣ ਤੱਕ
+    while_flashing: ਜਦੋਂ ਕਿ ਇਹ ਚਮਕਦਾ ਹੈ
   show_end_task: ਟਾਸਕਬਾਰ ਵਿੱਚ ਅੰਤ ਦਾ ਕੰਮ ਵੇਖੋ
   width: ਚੌੜਾਈ
 welcome:

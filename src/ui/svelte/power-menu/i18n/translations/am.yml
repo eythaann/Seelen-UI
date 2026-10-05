@@ -2,7 +2,10 @@ goodbye: ደህና {{0}}}}
 hibernate: ጩኸት
 lock: የመቆለፊያ ክፍለ ጊዜ
 log_out: ውጣ
+pending_updates: በመጠባበቅ ላይ ያሉ የስርዓት ዝመናዎች አሉ። አሁን ይጫኑ?
 reboot: ድጋሚ አስነሳ
 shutdown: ኃይል ጠፍቷል
 suspend: ማገድ
+update_and_reboot: ያዘምኑ እና እንደገና ያስጀምሩ
+update_and_shutdown: አዘምን እና ዝጋ
 uptime: ወደ ላይ

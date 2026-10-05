@@ -16,6 +16,7 @@ query:
   files: فایل ها
   web: وب
 run_as_admin: به عنوان Administrator اجرا شود
+uninstall: حذف نصب کنید
 unpin: پین را بردارید
 web_search: برای جستجو در وب، Enter را فشار دهید
 welcome_message: به منوی اپلیکیشن Seelen UI خوش آمدید.

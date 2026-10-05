@@ -2,7 +2,10 @@ goodbye: Viszlát {{0}}
 hibernate: Hibernálni
 lock: Munkamenet zárolása
 log_out: Jelentkezzen ki
+pending_updates: Függőben lévő rendszerfrissítések vannak. Telepítse most?
 reboot: Indítsa újra
 shutdown: Kapcsolja ki
 suspend: Felfüggeszteni
+update_and_reboot: Frissítés és újraindítás
+update_and_shutdown: Frissítés és leállítás
 uptime: Üzemidő

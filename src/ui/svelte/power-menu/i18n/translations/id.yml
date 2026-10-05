@@ -2,7 +2,10 @@ goodbye: Selamat tinggal {{0}}
 hibernate: Hibernasi
 lock: Sesi kunci
 log_out: Keluar
+pending_updates: Ada pembaruan sistem yang tertunda. Instal sekarang?
 reboot: Menyalakan ulang
 shutdown: Matikan
 suspend: Menskors
+update_and_reboot: Perbarui dan mulai ulang
+update_and_shutdown: Perbarui dan matikan
 uptime: Waktu aktif

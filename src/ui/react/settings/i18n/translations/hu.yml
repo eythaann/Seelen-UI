@@ -239,7 +239,7 @@ resources:
   high_impact: Nagy hatás a teljesítményre
   import_wallpapers: Helyi háttérképek importálása
   included_plugins: Tartalmazott bővítmények
-  modified: Módosítva
+  modified: Módosított
   open_folder: Nyissa meg az erőforrás mappát
   outdated: >-
     Ez az erőforrás a Seelen UI régebbi verziójához készült, és előfordulhat,
@@ -423,6 +423,11 @@ weg:
     full_width: Teljes képernyő szélesség
     min_content: Amennyire csak lehet
   padding: Párnázás
+  reveal_on_attention:
+    label: Megjelenítés, amikor egy alkalmazás figyelmet kér
+    never: Soha
+    until_activated: Amíg az alkalmazás meg nem nyílik
+    while_flashing: Miközben villog
   show_end_task: A feladat befejezésének megjelenítése a feladatsorban
   width: Szélesség
 welcome:

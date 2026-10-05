@@ -419,6 +419,11 @@ weg:
     full_width: Tam ekran genişliği
     min_content: Olabildiğince küçük
   padding: İç Boşluk
+  reveal_on_attention:
+    label: Bir uygulama ilgi istediğinde göster
+    never: Asla
+    until_activated: Uygulama açılana kadar
+    while_flashing: Yanıp sönerken
   show_end_task: Görev çubuğunda görevi sonlandırmayı göster
   width: Genişlik
 welcome:

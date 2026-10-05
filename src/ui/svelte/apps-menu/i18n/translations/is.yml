@@ -16,6 +16,7 @@ query:
   files: Skrár
   web: Vefur
 run_as_admin: Keyra sem stjórnandi
+uninstall: Fjarlægðu
 unpin: Losaðu
 web_search: Ýttu á Enter til að leita á vefnum
 welcome_message: Velkomin í Seelen UI app valmyndina.

@@ -2,7 +2,10 @@ goodbye: Do widzenia {{0}}
 hibernate: Hibernować
 lock: Zablokuj sesję
 log_out: Wyloguj się
+pending_updates: Istnieją oczekujące aktualizacje systemu. Zainstalować teraz?
 reboot: Ponowne uruchomienie
 shutdown: Wyłącz
 suspend: Wstrzymać
+update_and_reboot: Zaktualizuj i uruchom ponownie
+update_and_shutdown: Zaktualizuj i zamknij
 uptime: Czas pracy

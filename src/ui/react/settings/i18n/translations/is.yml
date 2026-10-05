@@ -411,6 +411,11 @@ weg:
     full_width: Full skjábreidd
     min_content: Lítið eins og hægt er
   padding: Padding
+  reveal_on_attention:
+    label: Sýna þegar app biður um athygli
+    never: Aldrei
+    until_activated: Þar til appið er opnað
+    while_flashing: Á meðan það blikkar
   show_end_task: Sýna lokverkefni í verkstikunni
   width: Breidd
 welcome:

@@ -16,6 +16,7 @@ query:
   files: ملفات
   web: ويب
 run_as_admin: تشغيل كمسؤول
+uninstall: إلغاء التثبيت
 unpin: إزالة التثبيت
 web_search: اضغط على Enter للبحث في الويب
 welcome_message: مرحبًا بك في قائمة تطبيق Seelen UI.

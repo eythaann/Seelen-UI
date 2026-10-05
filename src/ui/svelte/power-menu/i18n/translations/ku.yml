@@ -2,7 +2,10 @@ goodbye: Bi xatirê te {{0}}
 hibernate: Hibernate
 lock: Danişîna girtinê
 log_out: Derkeve
+pending_updates: Li benda nûvekirinên pergalê hene. Niha saz bike?
 reboot: Reboot
 shutdown: Power off
 suspend: Dardekirin
+update_and_reboot: Nûve bikin û ji nû ve bidin destpêkirin
+update_and_shutdown: Nûvekirin û girtin
 uptime: Uptime

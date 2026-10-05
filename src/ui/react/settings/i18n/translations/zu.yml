@@ -240,7 +240,7 @@ resources:
   high_impact: Umthelela ophezulu ekusebenzeni
   import_wallpapers: Ngenisa amaphephadonga endawo
   included_plugins: Kufakwe ama-plugin
-  modified: Kushintshiwe
+  modified: Kulungisiwe
   open_folder: Ifolda Yezisetshenziswa
   outdated: >-
     Lo mthombo wenzelwe inguqulo endala yeSeelen UI futhi ingahle isebenze
@@ -428,6 +428,11 @@ weg:
     full_width: Ububanzi besikrini esigcwele
     min_content: Kuncane njengoba kungaba
   padding: Idilidi
+  reveal_on_attention:
+    label: Bonisa uma uhlelo lokusebenza lucela ukunakwa
+    never: Ungalokothi
+    until_activated: Kuze kuvulwe uhlelo lokusebenza
+    while_flashing: Ngenkathi ibaneka
   show_end_task: Khombisa umsebenzi wokugcina kubha yomsebenzi
   width: Ububanzi
 welcome:

@@ -16,6 +16,7 @@ query:
   files: Fail
   web: Web
 run_as_admin: Jalankan sebagai Pentadbir
+uninstall: Nyahpasang
 unpin: Nyahsemat
 web_search: Tekan Enter untuk mencari di web
 welcome_message: Selamat datang ke menu apl UI Seelen.

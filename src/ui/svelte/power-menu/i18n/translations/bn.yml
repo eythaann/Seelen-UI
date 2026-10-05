@@ -2,7 +2,10 @@ goodbye: বিদায় {{0}}
 hibernate: হাইবারনেট
 lock: লক সেশন
 log_out: লগ আউট করুন
+pending_updates: সিস্টেম আপডেট মুলতুবি আছে. এখন ইন্সটল করবেন?
 reboot: রিবুট করুন
 shutdown: পাওয়ার অফ
 suspend: সাসপেন্ড
+update_and_reboot: আপডেট এবং পুনরায় চালু করুন
+update_and_shutdown: আপডেট করুন এবং বন্ধ করুন
 uptime: আপটাইম

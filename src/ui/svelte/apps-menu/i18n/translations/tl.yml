@@ -16,6 +16,7 @@ query:
   files: Mga file
   web: Web
 run_as_admin: Patakbuhin bilang Administrator
+uninstall: I-uninstall
 unpin: I-unpin
 web_search: Pindutin ang Enter upang maghanap sa web
 welcome_message: Maligayang pagdating sa menu ng Seelen UI app.

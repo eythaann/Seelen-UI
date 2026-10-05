@@ -16,6 +16,7 @@ query:
   files: Fitxategiak
   web: Weba
 run_as_admin: Exekutatu Administratzaile gisa
+uninstall: Desinstalatu
 unpin: Kendu aingura
 web_search: Sakatu Sartu sarean bilatzeko
 welcome_message: Ongi etorri Seelen UI aplikazioaren menura.

@@ -2,7 +2,10 @@ goodbye: Uz redzēšanos {{0}}
 hibernate: Pārziemot
 lock: Bloķēt sesiju
 log_out: Atteikties
+pending_updates: Ir neapstiprināti sistēmas atjauninājumi. Vai instalēt tūlīt?
 reboot: Reboot
 shutdown: Izslēdziet barošanu
 suspend: Apturēt
+update_and_reboot: Atjauniniet un restartējiet
+update_and_shutdown: Atjauniniet un izslēdziet
 uptime: Darbības laiks

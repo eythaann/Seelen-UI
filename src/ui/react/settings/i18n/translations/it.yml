@@ -428,6 +428,11 @@ weg:
     full_width: Larghezza dello schermo intero
     min_content: Piccolo quanto può essere
   padding: Spaziatura
+  reveal_on_attention:
+    label: Mostra quando un'app richiede attenzione
+    never: Mai
+    until_activated: Fino all'apertura dell'app
+    while_flashing: Mentre lampeggia
   show_end_task: Mostra la fine dell'attività nella barra delle applicazioni
   width: Larghezza
 welcome:

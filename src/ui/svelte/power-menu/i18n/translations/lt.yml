@@ -2,7 +2,10 @@ goodbye: Atsisveikink {{0}}
 hibernate: Užmigti
 lock: Užrakinti sesiją
 log_out: Atsijungti
+pending_updates: Yra laukiančių sistemos atnaujinimų. Įdiegti dabar?
 reboot: Perkraukite
 shutdown: Išjungti maitinimą
 suspend: Sustabdyti
+update_and_reboot: Atnaujinkite ir paleiskite iš naujo
+update_and_shutdown: Atnaujinkite ir išjunkite
 uptime: Veiklos laikas

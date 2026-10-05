@@ -2,7 +2,10 @@ goodbye: 안녕히 계세요 {{0}}
 hibernate: 최대 절전 모드
 lock: 세션 잠금
 log_out: 로그아웃
+pending_updates: 대기 중인 시스템 업데이트가 있습니다. 지금 설치하시겠습니까?
 reboot: 재부팅
 shutdown: 전원 끄기
 suspend: 유예하다
+update_and_reboot: 업데이트 및 다시 시작
+update_and_shutdown: 업데이트 및 종료
 uptime: 가동 시간

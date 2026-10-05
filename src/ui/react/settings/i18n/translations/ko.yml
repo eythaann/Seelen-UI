@@ -387,6 +387,11 @@ weg:
     full_width: 전체 화면 너비
     min_content: 최대한 작게
   padding: 안쪽 여백
+  reveal_on_attention:
+    label: 앱이 주의를 요청할 때 표시
+    never: 절대
+    until_activated: 앱이 열릴 때까지
+    while_flashing: 깜박이는 동안
   show_end_task: 작업 표시줄에 종료 작업 표시
   width: 너비
 welcome:

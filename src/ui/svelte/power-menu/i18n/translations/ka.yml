@@ -2,7 +2,10 @@ goodbye: ნახვამდის {{0}}
 hibernate: ჰიბერნაცია
 lock: სესიის ჩაკეტვა
 log_out: გასვლა
+pending_updates: მოლოდინშია სისტემის განახლებები. დააინსტალირეთ ახლა?
 reboot: გადატვირთვა
 shutdown: გამორთეთ
 suspend: შეაჩერე
+update_and_reboot: განაახლეთ და გადატვირთეთ
+update_and_shutdown: განაახლეთ და გამორთეთ
 uptime: Uptime

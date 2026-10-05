@@ -15,6 +15,7 @@ query.apps: 53d91aac
 query.files: 5b76247c
 query.web: 6f7de760
 run_as_admin: b120b0b9
+uninstall: 4a0bc1ff
 unpin: 8d405748
 web_search: '28684e66'
 welcome_message: 1e96f022

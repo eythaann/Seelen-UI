@@ -2,7 +2,10 @@ goodbye: Äddi {{0}}
 hibernate: Wanterschlof
 lock: Spär Sëtzung
 log_out: Ausloggen
+pending_updates: Et sinn amgaang Systemupdates. Elo installéieren?
 reboot: Restart
 shutdown: Kraaft aus
 suspend: Suspendéieren
+update_and_reboot: Update an nei starten
+update_and_shutdown: Update an zou
 uptime: Uptime

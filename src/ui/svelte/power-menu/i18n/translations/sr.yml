@@ -2,7 +2,10 @@ goodbye: Збогом {{0}}
 hibernate: Хибернате
 lock: Закључај сесију
 log_out: Одјавите се
+pending_updates: Постоје ажурирања система на чекању. Инсталирати сада?
 reboot: Поново покрени
 shutdown: Искључите напајање
 suspend: Суспенд
+update_and_reboot: Ажурирајте и поново покрените
+update_and_shutdown: Ажурирајте и искључите
 uptime: Уптиме

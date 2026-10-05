@@ -16,6 +16,7 @@ query:
   files: Fájlok
   web: Web
 run_as_admin: Futtassa rendszergazdaként
+uninstall: Eltávolítás
 unpin: Kibont
 web_search: Az interneten való kereséshez nyomja meg az Enter billentyűt
 welcome_message: Üdvözöljük a Seelen UI alkalmazás menüjében.

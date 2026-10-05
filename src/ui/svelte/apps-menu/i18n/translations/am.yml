@@ -16,6 +16,7 @@ query:
   files: ፋይሎች
   web: ድር
 run_as_admin: እንደ አስተዳዳሪ ያሂዱ
+uninstall: አራግፍ
 unpin: ንቀል
 web_search: ድሩን ለመፈለግ አስገባን ይጫኑ
 welcome_message: እንኳን ወደ Seelen UI መተግበሪያ ምናሌ በደህና መጡ።

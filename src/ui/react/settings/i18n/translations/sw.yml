@@ -415,6 +415,11 @@ weg:
     full_width: Upana kamili wa skrini
     min_content: Ndogo kama inaweza kuwa
   padding: Padding
+  reveal_on_attention:
+    label: Onyesha programu inapoomba kuzingatiwa
+    never: Kamwe
+    until_activated: Hadi programu ifunguliwe
+    while_flashing: Wakati inawaka
   show_end_task: Onyesha kazi ya mwisho katika Taskbar
   width: Upana
 welcome:

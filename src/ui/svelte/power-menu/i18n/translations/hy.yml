@@ -2,7 +2,10 @@ goodbye: Ցտեսություն {{0}}
 hibernate: Ձմեռել
 lock: Կողպեք նիստը
 log_out: Դուրս գալ
+pending_updates: 'Սպասվող համակարգի թարմացումներ կան: Տեղադրե՞լ հիմա:'
 reboot: Վերագործարկեք
 shutdown: Անջատեք
 suspend: Կասեցնել
+update_and_reboot: Թարմացրեք և վերագործարկեք
+update_and_shutdown: Թարմացրեք և անջատեք
 uptime: Գործողության ժամանակ

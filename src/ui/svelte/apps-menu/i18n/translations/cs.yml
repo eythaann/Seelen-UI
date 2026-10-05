@@ -16,6 +16,7 @@ query:
   files: Soubory
   web: Web
 run_as_admin: Spustit jako správce
+uninstall: Odinstalovat
 unpin: Odepnout
 web_search: Stisknutím klávesy Enter vyhledáte na webu
 welcome_message: Vítejte v nabídce aplikace Seelen UI.

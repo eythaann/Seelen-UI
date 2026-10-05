@@ -235,7 +235,7 @@ resources:
   high_impact: کارکردگی پر زیادہ اثر
   import_wallpapers: مقامی وال پیپر درآمد کریں
   included_plugins: شامل پلگ انز
-  modified: تبدیل شدہ
+  modified: ترمیم شدہ
   open_folder: اوپن ریسورس فولڈر
   outdated: >-
     یہ وسیلہ سیلین UI کے پرانے ورژن کے لئے ڈیزائن کیا گیا تھا اور ہوسکتا ہے کہ
@@ -417,6 +417,11 @@ weg:
     full_width: پوری سکرین کی چوڑائی
     min_content: جتنا چھوٹا ہو سکتا ہے۔
   padding: بھرتی
+  reveal_on_attention:
+    label: جب کوئی ایپ توجہ طلب کرے تو دکھائیں۔
+    never: کبھی نہیں۔
+    until_activated: جب تک ایپ نہیں کھل جاتی
+    while_flashing: جبکہ یہ چمکتا ہے۔
   show_end_task: ٹاسک بار میں اختتامی کام دکھائیں
   width: چوڑائی
 welcome:

@@ -16,6 +16,7 @@ query:
   files: Fitxers
   web: Web
 run_as_admin: Executar com a administrador
+uninstall: Desinstal·la
 unpin: Desenganxa
 web_search: Premeu Intro per cercar al web
 welcome_message: Benvingut al menú de l'aplicació Seelen UI.

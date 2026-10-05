@@ -16,6 +16,7 @@ query:
   files: ឯកសារ
   web: បណ្តាញ
 run_as_admin: ដំណើរការជាអ្នកគ្រប់គ្រង
+uninstall: លុប
 unpin: ដកខ្ទាស់
 web_search: ចុច Enter ដើម្បីស្វែងរកគេហទំព័រ
 welcome_message: សូមស្វាគមន៍មកកាន់ម៉ឺនុយកម្មវិធី Seelen UI ។

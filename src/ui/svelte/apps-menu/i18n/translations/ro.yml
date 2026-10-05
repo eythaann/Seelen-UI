@@ -16,6 +16,7 @@ query:
   files: Fișiere
   web: Web
 run_as_admin: Rulați ca administrator
+uninstall: Dezinstalează
 unpin: Anulați fixarea
 web_search: Apăsați Enter pentru a căuta pe web
 welcome_message: Bun venit la meniul aplicației Seelen UI.

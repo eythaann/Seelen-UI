@@ -16,6 +16,7 @@ query:
   files: ไฟล์
   web: เว็บ
 run_as_admin: เรียกใช้ในฐานะผู้ดูแลระบบ
+uninstall: ถอนการติดตั้ง
 unpin: เลิกปักหมุด
 web_search: กด Enter เพื่อค้นหาเว็บ
 welcome_message: ยินดีต้อนรับสู่เมนูแอป Seelen UI

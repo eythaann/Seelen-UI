@@ -238,7 +238,7 @@ resources:
   high_impact: Suuri vaikutus suorituskykyyn
   import_wallpapers: Tuo paikallisia taustakuvia
   included_plugins: Mukana lisäosat
-  modified: Muutettu
+  modified: Muokattu
   open_folder: Avaa resurssikansio
   outdated: >-
     Tämä resurssi on suunniteltu Seelen UI:n vanhemmalle versiolle, eikä se
@@ -418,6 +418,11 @@ weg:
     full_width: Koko näytön leveys
     min_content: Niin pieni kuin voi olla
   padding: Pehmuste
+  reveal_on_attention:
+    label: Näytä, kun sovellus pyytää huomiota
+    never: Ei koskaan
+    until_activated: Kunnes sovellus avataan
+    while_flashing: Kun se vilkkuu
   show_end_task: Näyttää lopetetun tehtävän tehtäväpalkissa
   width: Leveys
 welcome:

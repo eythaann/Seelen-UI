@@ -16,6 +16,7 @@ query:
   files: فائلیں
   web: ویب
 run_as_admin: ایڈمنسٹریٹر کی حیثیت سے چلائیں
+uninstall: ان انسٹال کریں۔
 unpin: انپن
 web_search: ویب کو تلاش کرنے کے لئے ENTER دبائیں
 welcome_message: سیلین UI ایپ مینو میں خوش آمدید۔

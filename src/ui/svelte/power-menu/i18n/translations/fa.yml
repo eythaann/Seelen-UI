@@ -2,7 +2,10 @@ goodbye: خداحافظ {{0}}
 hibernate: خواب زمستانی
 lock: قفل کردن جلسه
 log_out: از سیستم خارج شوید
+pending_updates: به‌روزرسانی‌های سیستم در حال انتظار است. اکنون نصب شود؟
 reboot: راه اندازی مجدد
 shutdown: خاموش کنید
 suspend: تعلیق کند
+update_and_reboot: به روز رسانی و راه اندازی مجدد
+update_and_shutdown: به روز کنید و خاموش کنید
 uptime: آپتایم

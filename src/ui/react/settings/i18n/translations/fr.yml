@@ -429,6 +429,11 @@ weg:
     full_width: Pleine largeur
     min_content: Aussi petit que possible
   padding: Hauteur
+  reveal_on_attention:
+    label: Afficher lorsqu'une application requiert votre attention
+    never: Jamais
+    until_activated: Jusqu'à ce que l'application soit ouverte
+    while_flashing: Pendant qu'il clignote
   show_end_task: Afficher la tâche finale dans la barre des tâches
   width: Largeur
 welcome:

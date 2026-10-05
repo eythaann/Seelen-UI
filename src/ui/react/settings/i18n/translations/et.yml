@@ -414,6 +414,11 @@ weg:
     full_width: Täisekraani laius
     min_content: Nii väike kui olla saab
   padding: Polsterdamine
+  reveal_on_attention:
+    label: Näita, kui rakendus nõuab tähelepanu
+    never: Mitte kunagi
+    until_activated: Kuni rakenduse avamiseni
+    while_flashing: Kuni see vilgub
   show_end_task: Ülesande lõpuülesande kuvamine tegumiribal
   width: Laius
 welcome:

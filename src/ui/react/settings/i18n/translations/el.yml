@@ -431,6 +431,11 @@ weg:
     full_width: Πλάτος πλήρους οθόνης
     min_content: Όσο μικρό μπορεί να είναι
   padding: Υλικό παραγεμίσματος
+  reveal_on_attention:
+    label: Εμφάνιση όταν μια εφαρμογή ζητά προσοχή
+    never: Ποτέ
+    until_activated: Μέχρι να ανοίξει η εφαρμογή
+    while_flashing: Ενώ αναβοσβήνει
   show_end_task: Εμφάνιση της εργασίας τέλους στη γραμμή εργασιών
   width: Πλάτος
 welcome:

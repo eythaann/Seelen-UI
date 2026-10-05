@@ -2,7 +2,10 @@ goodbye: ਅਲਵਿਦਾ {{0}}
 hibernate: ਹਾਈਬਰਨੇਟ
 lock: ਲਾਕ ਸੈਸ਼ਨ
 log_out: ਲੌਗ ਆਊਟ ਕਰੋ
+pending_updates: ਸਿਸਟਮ ਅੱਪਡੇਟ ਬਕਾਇਆ ਹਨ। ਹੁਣੇ ਸਥਾਪਿਤ ਕਰੋ?
 reboot: ਰੀਬੂਟ ਕਰੋ
 shutdown: ਪਾਵਰ ਬੰਦ
 suspend: ਮੁਅੱਤਲ
+update_and_reboot: ਅੱਪਡੇਟ ਕਰੋ ਅਤੇ ਰੀਸਟਾਰਟ ਕਰੋ
+update_and_shutdown: ਅੱਪਡੇਟ ਕਰੋ ਅਤੇ ਬੰਦ ਕਰੋ
 uptime: ਅਪਟਾਈਮ

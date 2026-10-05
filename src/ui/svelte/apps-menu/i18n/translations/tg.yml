@@ -16,6 +16,7 @@ query:
   files: Файлҳо
   web: Веб
 run_as_admin: Ҳамчун администратор иҷро кунед
+uninstall: Uninstall
 unpin: Бекор кардан
 web_search: Барои ҷустуҷӯи веб Enter-ро пахш кунед
 welcome_message: Хуш омадед ба менюи барномаи Seelen UI.

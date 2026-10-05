@@ -415,6 +415,11 @@ weg:
     full_width: পূর্ণ পর্দা প্রস্থ
     min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
+  reveal_on_attention:
+    label: কোনো অ্যাপ মনোযোগের অনুরোধ করলে দেখান
+    never: কখনই না
+    until_activated: অ্যাপটি ওপেন না হওয়া পর্যন্ত
+    while_flashing: এটা ঝলকানি যখন
   show_end_task: টাস্কবারে শেষ টাস্ক দেখান
   width: প্রস্থ
 welcome:

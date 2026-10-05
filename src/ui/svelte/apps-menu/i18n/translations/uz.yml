@@ -16,6 +16,7 @@ query:
   files: Fayllar
   web: Veb
 run_as_admin: Administrator sifatida ishga tushirish
+uninstall: Oʻchirish
 unpin: Yechish
 web_search: Internetda qidirish uchun Enter tugmasini bosing
 welcome_message: Seelen UI ilovasi menyusiga xush kelibsiz.

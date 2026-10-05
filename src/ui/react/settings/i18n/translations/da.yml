@@ -415,6 +415,11 @@ weg:
     full_width: Fuld skærmbredde
     min_content: Så lille som det kan være
   padding: Polstring
+  reveal_on_attention:
+    label: Vis, når en app anmoder om opmærksomhed
+    never: Aldrig
+    until_activated: Indtil appen åbnes
+    while_flashing: Mens den blinker
   show_end_task: Vis afslutning af opgave på proceslinjen
   width: Bredde
 welcome:

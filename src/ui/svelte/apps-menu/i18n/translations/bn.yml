@@ -16,6 +16,7 @@ query:
   files: ফাইল
   web: ওয়েব
 run_as_admin: প্রশাসক হিসাবে চালান
+uninstall: আনইনস্টল করুন
 unpin: আনপিন করুন
 web_search: ওয়েব অনুসন্ধান করতে এন্টার টিপুন
 welcome_message: Seelen UI অ্যাপ মেনুতে স্বাগতম।

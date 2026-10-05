@@ -422,6 +422,11 @@ weg:
     full_width: Lățimea ecranului complet
     min_content: Cât de mic poate fi
   padding: Căptușeală
+  reveal_on_attention:
+    label: Afișează când o aplicație solicită atenție
+    never: Nu
+    until_activated: Până când se deschide aplicația
+    while_flashing: În timp ce clipește
   show_end_task: Afișarea sarcinii finale în bara de activități
   width: Lăţime
 welcome:

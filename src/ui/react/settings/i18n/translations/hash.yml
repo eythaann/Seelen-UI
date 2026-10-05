@@ -175,6 +175,7 @@ resources.has_update: d74fb0f4
 resources.high_impact: 6a398c0c
 resources.import_wallpapers: e92f9934
 resources.included_plugins: 5214f55c
+resources.modified: 1be631d8
 resources.open_folder: 48ea9734
 resources.outdated: 79a041ca
 resources.see_on_website: 1ff88503
@@ -327,6 +328,10 @@ weg.margin: 51c6e39a
 weg.mode.full_width: c7545420
 weg.mode.min_content: c130a779
 weg.padding: a65ecf8
+weg.reveal_on_attention.label: 7acd642
+weg.reveal_on_attention.never: 2ce28c8
+weg.reveal_on_attention.until_activated: dfc55674
+weg.reveal_on_attention.while_flashing: 98fc5c
 weg.show_end_task: f556e9d
 weg.width: 985cba5c
 welcome.give_a_review: 64ca6c6c

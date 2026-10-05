@@ -2,7 +2,10 @@ goodbye: Довиждане {{0}}
 hibernate: Хибернация
 lock: Заключване на сесията
 log_out: Излезте
+pending_updates: Има чакащи системни актуализации. Инсталиране сега?
 reboot: Рестартирайте
 shutdown: Изключване
 suspend: Спиране
+update_and_reboot: Актуализирайте и рестартирайте
+update_and_shutdown: Актуализирайте и изключете
 uptime: Работно време

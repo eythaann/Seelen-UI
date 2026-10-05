@@ -243,7 +243,7 @@ resources:
   high_impact: Saamaynta sare ee waxqabadka
   import_wallpapers: Soo dejiso waraaqaha boodhka ee maxalliga ah
   included_plugins: Ku Jira Plugins
-  modified: Wax laga beddelay
+  modified: wax laga beddelay
   open_folder: Fur faylka furan
   outdated: >-
     Kheyraadkan waxaa loogu talagalay in nooc ka weyn oo ah Selelel Ui oo laga
@@ -425,6 +425,11 @@ weg:
     full_width: Ballaca shaashadda oo dhan
     min_content: Yaryar sida ay noqon karto
   padding: Suur
+  reveal_on_attention:
+    label: Muuji marka abka codsado dareenka
+    never: Marna
+    until_activated: Ilaa abka laga furayo
+    while_flashing: Inta ay biliglayso
   show_end_task: Muuji shaqada dhamaadka ee Tooska
   width: Ballac
 welcome:

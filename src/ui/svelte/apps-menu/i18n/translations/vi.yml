@@ -16,6 +16,7 @@ query:
   files: Tập tin
   web: Web
 run_as_admin: Chạy với tư cách quản trị viên
+uninstall: Gỡ cài đặt
 unpin: Bỏ ghim
 web_search: Nhấn Enter để tìm kiếm trên web
 welcome_message: Chào mừng bạn đến với menu ứng dụng Seelen UI.

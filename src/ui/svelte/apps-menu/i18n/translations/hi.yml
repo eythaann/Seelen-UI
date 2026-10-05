@@ -16,6 +16,7 @@ query:
   files: फ़ाइलें
   web: वेब
 run_as_admin: व्यवस्थापक के रूप में चलाएं
+uninstall: अनइंस्टॉल करें
 unpin: अनपिन
 web_search: वेब पर खोजने के लिए Enter दबाएँ
 welcome_message: सीलेन यूआई ऐप मेनू में आपका स्वागत है।

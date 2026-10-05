@@ -16,6 +16,7 @@ query:
   files: ਫਾਈਲਾਂ
   web: ਵੈੱਬ
 run_as_admin: ਪ੍ਰਸ਼ਾਸਕ ਵਜੋਂ ਚਲਾਓ
+uninstall: ਅਣਇੰਸਟੌਲ ਕਰੋ
 unpin: ਅਨਪਿੰਨ ਕਰੋ
 web_search: ਵੈੱਬ ਖੋਜਣ ਲਈ ਐਂਟਰ ਦਬਾਓ
 welcome_message: Seelen UI ਐਪ ਮੀਨੂ ਵਿੱਚ ਸੁਆਗਤ ਹੈ।

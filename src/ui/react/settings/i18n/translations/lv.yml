@@ -234,7 +234,7 @@ resources:
   high_impact: Liela ietekme uz veiktspēju
   import_wallpapers: Importēt vietējās tapetes
   included_plugins: Iekļautie spraudņi
-  modified: Modificēts
+  modified: Pārveidots
   open_folder: Atvērt resursu mapi
   outdated: >-
     Šis resurss ir izstrādāts vecākai Seelen UI versijai un var nedarboties
@@ -418,6 +418,11 @@ weg:
     full_width: Pilna ekrāna platums
     min_content: Cik mazs var būt
   padding: Polsterējums
+  reveal_on_attention:
+    label: Rādīt, kad lietotne pieprasa uzmanību
+    never: Nekad
+    until_activated: Līdz lietotne tiek atvērta
+    while_flashing: Kamēr tas mirgo
   show_end_task: Parādīt beigu uzdevumu uzdevumjoslā
   width: Platums
 welcome:

@@ -421,6 +421,11 @@ weg:
     full_width: Volledige schermbreedte
     min_content: Klein als het maar kan zijn
   padding: Vulling
+  reveal_on_attention:
+    label: Laat zien wanneer een app aandacht vraagt
+    never: Nooit
+    until_activated: Totdat de app wordt geopend
+    while_flashing: Terwijl het knippert
   show_end_task: Taak beëindigen in taakbalk weergeven
   width: Breedte
 welcome:

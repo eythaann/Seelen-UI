@@ -16,6 +16,7 @@ query:
   files: Ffeiliau
   web: Gwe
 run_as_admin: Rhedeg fel Gweinyddwr
+uninstall: Dadosod
 unpin: Dad-binio
 web_search: Pwyswch Enter i chwilio'r we
 welcome_message: Croeso i ddewislen app Seelen UI.

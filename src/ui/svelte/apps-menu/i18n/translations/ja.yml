@@ -16,6 +16,7 @@ query:
   files: ファイル
   web: ウェブ
 run_as_admin: 管理者として実行
+uninstall: アンインストール
 unpin: ピン留め解除
 web_search: Enter キーを押して Web を検索
 welcome_message: Seelen UI アプリ メニューへようこそ。

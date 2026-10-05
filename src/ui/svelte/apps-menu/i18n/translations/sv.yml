@@ -16,6 +16,7 @@ query:
   files: Filer
   web: Web
 run_as_admin: Kör som administratör
+uninstall: Avinstallera
 unpin: Lossa
 web_search: Tryck på Retur för att söka på webben
 welcome_message: Välkommen till Seelen UI-appmenyn.

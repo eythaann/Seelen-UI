@@ -16,6 +16,7 @@ query:
   files: файлове
   web: Мрежа
 run_as_admin: Стартирайте като администратор
+uninstall: Деинсталиране
 unpin: Откачване
 web_search: Натиснете Enter, за да търсите в мрежата
 welcome_message: Добре дошли в менюто на приложението Seelen UI.

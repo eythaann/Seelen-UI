@@ -241,7 +241,7 @@ resources:
   high_impact: Ishlashning yuqori ta'siri
   import_wallpapers: Mahalliy fon rasmlarini import qilish
   included_plugins: Kiritilgan plaginlar
-  modified: O'zgartirildi
+  modified: Oʻzgartirilgan
   open_folder: Resurslar jildini oching
   outdated: >-
     Ushbu manba Seelen UIning eski versiyasi uchun mo'ljallangan va to'g'ri
@@ -427,6 +427,11 @@ weg:
     full_width: To'liq ekran kengligi
     min_content: Iloji boricha kichik
   padding: Plomba
+  reveal_on_attention:
+    label: Ilova e'tiborni so'raganda ko'rsatish
+    never: Hech qachon
+    until_activated: Ilova ochilgunga qadar
+    while_flashing: U miltillaganda
   show_end_task: Vazifalar panelida tugatish vazifasini ko'rsating
   width: Kenglik
 welcome:

@@ -238,7 +238,7 @@ resources:
   high_impact: Vysoký vplyv na výkon
   import_wallpapers: Import miestnych tapiet
   included_plugins: Zahrnuté pluginy
-  modified: Zmenené
+  modified: Upravené
   open_folder: Otvorenie priečinka so zdrojmi
   outdated: >-
     Tento zdroj bol navrhnutý pre staršiu verziu používateľského rozhrania
@@ -422,6 +422,11 @@ weg:
     full_width: Celá šírka obrazovky
     min_content: Malý ako len môže byť
   padding: Vypchávka
+  reveal_on_attention:
+    label: Zobraziť, keď aplikácia vyžaduje pozornosť
+    never: Nikdy
+    until_activated: Kým sa aplikácia neotvorí
+    while_flashing: Kým bliká
   show_end_task: Zobrazenie koncovej úlohy na paneli úloh
   width: Šírka
 welcome:

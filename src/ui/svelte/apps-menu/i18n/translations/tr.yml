@@ -16,6 +16,7 @@ query:
   files: Dosyalar
   web: ağ
 run_as_admin: Yönetici olarak çalıştır
+uninstall: Kaldır
 unpin: Sabitlemeyi kaldır
 web_search: Web'de arama yapmak için Enter'a basın
 welcome_message: Seelen UI uygulama menüsüne hoş geldiniz.

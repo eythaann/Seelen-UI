@@ -2,7 +2,10 @@ goodbye: Farvel {{0}}
 hibernate: Gå i dvale
 lock: Lås session
 log_out: Log ud
+pending_updates: Der er afventende systemopdateringer. Installer nu?
 reboot: Genstart
 shutdown: Sluk
 suspend: Suspendere
+update_and_reboot: Opdater og genstart
+update_and_shutdown: Opdater og luk ned
 uptime: Oppetid

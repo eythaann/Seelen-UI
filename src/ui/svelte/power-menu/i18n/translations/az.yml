@@ -2,7 +2,10 @@ goodbye: Əlvida {{0}}
 hibernate: Qışqırmaq
 lock: Kilid sessiyası
 log_out: Çıxmaq
+pending_updates: Gözləyən sistem yeniləmələri var. İndi quraşdırılsın?
 reboot: Yenidən başlatmaq
 shutdown: Gücləndirmək
 suspend: Dayandırmaq
+update_and_reboot: Yeniləyin və yenidən başladın
+update_and_shutdown: Yeniləyin və söndürün
 uptime: İş vaxtı

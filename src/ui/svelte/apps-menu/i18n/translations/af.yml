@@ -16,6 +16,7 @@ query:
   files: Lêers
   web: Web
 run_as_admin: Begin as administrateur
+uninstall: Deïnstalleer
 unpin: Ontspeld
 web_search: Druk Enter om op die web te soek
 welcome_message: Welkom by die Seelen UI-programkieslys.

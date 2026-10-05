@@ -16,6 +16,7 @@ query:
   files: Fajlovi
   web: Web
 run_as_admin: Pokreni kao administrator
+uninstall: Deinstaliraj
 unpin: Otkvači
 web_search: Pritisnite Enter da pretražite web
 welcome_message: Dobrodošli u meni aplikacije Seelen UI.

@@ -420,6 +420,11 @@ weg:
     full_width: पूर्ण स्क्रिन चौडाइ
     min_content: हुनसक्ने सानो
   padding: प्याडडि .्वन
+  reveal_on_attention:
+    label: जब एक अनुप्रयोगले ध्यान अनुरोध गर्दछ देखाउनुहोस्
+    never: कहिल्यै
+    until_activated: एप नखुलेसम्म
+    while_flashing: जब यो चम्किन्छ
   show_end_task: कार्यबारमा अन्त कार्य देखाउनुहोस्
   width: चौडाई
 welcome:

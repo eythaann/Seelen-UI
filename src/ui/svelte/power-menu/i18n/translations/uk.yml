@@ -2,7 +2,10 @@ goodbye: До побачення {{0}}
 hibernate: сплячий режим
 lock: Сеанс блокування
 log_out: Вийти
+pending_updates: Є незавершені оновлення системи. Встановити зараз?
 reboot: Перезавантаження
 shutdown: Вимкніть живлення
 suspend: Призупинити
+update_and_reboot: Оновіть і перезапустіть
+update_and_shutdown: Оновіть і вимкніть
 uptime: Час роботи

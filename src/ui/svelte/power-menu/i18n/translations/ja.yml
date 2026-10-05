@@ -2,7 +2,10 @@ goodbye: さようなら{{0}}
 hibernate: 休止状態
 lock: ロックセッション
 log_out: ログアウト
+pending_updates: 保留中のシステムアップデートがあります。 今すぐインストールしますか?
 reboot: 再起動
 shutdown: 電源を切る
 suspend: スリープ
+update_and_reboot: アップデートして再起動する
+update_and_shutdown: アップデートしてシャットダウンする
 uptime: 稼働時間

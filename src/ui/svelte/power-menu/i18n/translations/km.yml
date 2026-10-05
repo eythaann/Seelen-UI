@@ -2,7 +2,10 @@ goodbye: លាហើយ {{0}}
 hibernate: សមលាក់សម្ងួរ
 lock: ចាក់សោសម័យ
 log_out: ចេញ
+pending_updates: មានការអាប់ដេតប្រព័ន្ធដែលកំពុងរង់ចាំ។ ដំឡើងឥឡូវនេះ?
 reboot: ចាប់ផ្ដើមដំណើរការឡើងវិញ
 shutdown: បិទថាមពល
 suspend: ប្យួរ
+update_and_reboot: ធ្វើបច្ចុប្បន្នភាព និងចាប់ផ្តើមឡើងវិញ
+update_and_shutdown: ធ្វើឱ្យទាន់សម័យនិងបិទ
 uptime: អីនឹងមានតោហេ

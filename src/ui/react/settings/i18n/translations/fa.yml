@@ -232,7 +232,7 @@ resources:
   high_impact: تاثیر زیاد بر عملکرد
   import_wallpapers: تصاویر پس زمینه محلی را وارد کنید
   included_plugins: پلاگین های گنجانده شده
-  modified: اصلاح شده
+  modified: اصلاح شد
   open_folder: پوشه منبع باز
   outdated: >-
     این منبع برای نسخه قدیمی تر Seelen UI طراحی شده است و ممکن است به درستی کار
@@ -413,6 +413,11 @@ weg:
     full_width: عرض تمام صفحه
     min_content: کوچک که می تواند باشد
   padding: لایه گذاری
+  reveal_on_attention:
+    label: نمایش زمانی که برنامه ای درخواست توجه می کند
+    never: هرگز
+    until_activated: تا زمانی که برنامه باز شود
+    while_flashing: در حالی که چشمک می زند
   show_end_task: نمایش پایان کار در نوار وظیفه
   width: عرض
 welcome:

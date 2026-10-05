@@ -2,7 +2,10 @@ goodbye: Hyvästi {{0}}
 hibernate: Lepotila
 lock: Lukitse istunto
 log_out: Kirjaudu ulos
+pending_updates: Odotettavissa on järjestelmäpäivityksiä. Asennetaan nyt?
 reboot: Käynnistä uudelleen
 shutdown: Virta pois päältä
 suspend: Keskeyttää
+update_and_reboot: Päivitä ja käynnistä uudelleen
+update_and_shutdown: Päivitä ja sammuta
 uptime: Päällä

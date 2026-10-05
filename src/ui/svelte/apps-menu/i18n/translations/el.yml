@@ -16,6 +16,7 @@ query:
   files: Αρχεία
   web: Ιστός
 run_as_admin: Εκτέλεση ως Διαχειριστής
+uninstall: Απεγκατάσταση
 unpin: Ξεκαρφιτσώνω
 web_search: Πατήστε Enter για αναζήτηση στον Ιστό
 welcome_message: Καλώς ήρθατε στο μενού της εφαρμογής Seelen UI.

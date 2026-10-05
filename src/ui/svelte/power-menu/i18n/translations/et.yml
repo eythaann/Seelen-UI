@@ -2,7 +2,10 @@ goodbye: Hüvasti {{0}}
 hibernate: Hibernate
 lock: Lukusta seanss
 log_out: Logi välja
+pending_updates: Ootel on süsteemivärskendusi. Kas installida kohe?
 reboot: Taaskäivitage
 shutdown: Toide välja
 suspend: Peatada
+update_and_reboot: Värskendage ja taaskäivitage
+update_and_shutdown: Värskendage ja sulgege
 uptime: Tööaeg

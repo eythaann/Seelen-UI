@@ -417,6 +417,11 @@ weg:
     full_width: Бүтэн дэлгэцийн өргөн
     min_content: Аль болох жижиг
   padding: Дэвсгэр
+  reveal_on_attention:
+    label: Апп нь анхаарал хандуулахыг хүссэн үед харуулах
+    never: Хэзээ ч үгүй
+    until_activated: Програмыг нээх хүртэл
+    while_flashing: Энэ нь анивчдаг
   show_end_task: ТЕХНИКИЙН ТОНОГ ТӨХӨӨРӨМЖИЙН ТӨЛӨВЛӨГӨӨ
   width: Өргөн
 welcome:

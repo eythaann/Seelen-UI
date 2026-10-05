@@ -16,6 +16,7 @@ query:
   files: ໄຟລ໌
   web: ເວັບ
 run_as_admin: ດໍາເນີນການເປັນ Administrator
+uninstall: ຖອນການຕິດຕັ້ງ
 unpin: ຖອນປັກໝຸດ
 web_search: ກົດ Enter ເພື່ອຊອກຫາເວັບ
 welcome_message: ຍິນດີຕ້ອນຮັບສູ່ເມນູແອັບ Seelen UI.

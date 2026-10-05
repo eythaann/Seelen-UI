@@ -16,6 +16,7 @@ query:
   files: File
   web: jaring
 run_as_admin: Jalankan sebagai Administrator
+uninstall: Copot pemasangan
 unpin: Membuka peniti
 web_search: Tekan Enter untuk mencari di web
 welcome_message: Selamat datang di menu aplikasi Seelen UI.

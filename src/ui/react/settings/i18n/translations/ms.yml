@@ -418,6 +418,11 @@ weg:
     full_width: Lebar skrin penuh
     min_content: Kecil yang boleh
   padding: Padding
+  reveal_on_attention:
+    label: Tunjukkan apabila apl meminta perhatian
+    never: tidak pernah
+    until_activated: Sehingga aplikasi dibuka
+    while_flashing: Semasa ia berkelip
   show_end_task: Tunjukkan tugas akhir di bar tugas
   width: Lebar
 welcome:

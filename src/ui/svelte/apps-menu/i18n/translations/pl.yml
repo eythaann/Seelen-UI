@@ -16,6 +16,7 @@ query:
   files: Akta
   web: Sieć
 run_as_admin: Uruchom jako administrator
+uninstall: Odinstaluj
 unpin: Odpiąć
 web_search: Naciśnij Enter, aby przeszukać Internet
 welcome_message: Witamy w menu aplikacji Seelen UI.

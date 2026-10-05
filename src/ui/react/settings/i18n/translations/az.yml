@@ -416,6 +416,11 @@ weg:
     full_width: Tam ekran eni
     min_content: Ola bildiyi qədər kiçik
   padding: Paddend
+  reveal_on_attention:
+    label: Tətbiq diqqət tələb etdikdə göstərin
+    never: Heç vaxt
+    until_activated: Proqram açılana qədər
+    while_flashing: Yanıb-sönərkən
   show_end_task: Tapşırıq çubuğunda son tapşırığı göstərin
   width: Geniştəhər
 welcome:

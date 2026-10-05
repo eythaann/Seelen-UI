@@ -2,7 +2,10 @@ goodbye: Adieu {{0}}
 hibernate: Iberna
 lock: Lock sessjoni
 log_out: Log out
+pending_updates: Hemm aġġornamenti pendenti tas-sistema. Installa issa?
 reboot: Reboot
 shutdown: Power off
 suspend: Issospendi
+update_and_reboot: Aġġorna u terġa' tibda
+update_and_shutdown: Aġġorna u agħlaq
 uptime: Uptime

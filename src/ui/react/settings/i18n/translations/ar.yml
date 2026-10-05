@@ -227,7 +227,7 @@ resources:
   high_impact: تأثير كبير على الأداء
   import_wallpapers: استيراد الخلفيات المحلية
   included_plugins: وشملت الإضافات
-  modified: معدّل
+  modified: معدل
   open_folder: فتح مجلد الموارد
   outdated: تم تصميم هذا المورد لإصدار أقدم من Seelen UI وقد لا يعمل بشكل صحيح.
   see_on_website: انظر على الموقع
@@ -404,6 +404,11 @@ weg:
     full_width: عرض كامل الشاشة
     min_content: صغيرة كما يمكن أن تكون
   padding: المساحه
+  reveal_on_attention:
+    label: إظهار متى يطلب التطبيق الاهتمام
+    never: أبداً
+    until_activated: حتى يتم فتح التطبيق
+    while_flashing: بينما يومض
   show_end_task: إظهار مهمة النهاية في شريط المهام
   width: العرض
 welcome:

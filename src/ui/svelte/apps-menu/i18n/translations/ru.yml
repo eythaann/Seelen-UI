@@ -16,6 +16,7 @@ query:
   files: Файлы
   web: Интернет
 run_as_admin: Запуск от имени администратора
+uninstall: Удалить
 unpin: Открепить
 web_search: Нажмите Enter, чтобы выполнить поиск в Интернете.
 welcome_message: Добро пожаловать в меню приложения Seelen UI.

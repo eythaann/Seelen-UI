@@ -227,7 +227,7 @@ resources:
   high_impact: มีผลกระทบสูงต่อประสิทธิภาพ
   import_wallpapers: นำเข้าวอลเปเปอร์ในท้องถิ่น
   included_plugins: รวมปลั๊กอิน
-  modified: มีการแก้ไข
+  modified: ดัดแปลง
   open_folder: เปิดโฟลเดอร์ทรัพยากร
   outdated: ทรัพยากรนี้ได้รับการออกแบบมาสำหรับ Seelen UI รุ่นเก่าและอาจทำงานไม่ถูกต้อง
   see_on_website: ดูบนเว็บไซต์
@@ -402,6 +402,11 @@ weg:
     full_width: ความกว้างเต็มหน้าจอ
     min_content: เล็กเท่าที่จะทำได้
   padding: การขยายความ
+  reveal_on_attention:
+    label: แสดงเมื่อแอปเรียกร้องความสนใจ
+    never: ไม่เคย
+    until_activated: จนกว่าจะเปิดแอป
+    while_flashing: ในขณะที่มันกะพริบ
   show_end_task: แสดงงานสิ้นสุดในแถบงาน
   width: ความกว้าง
 welcome:

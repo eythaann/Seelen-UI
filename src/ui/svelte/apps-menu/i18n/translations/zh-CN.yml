@@ -16,6 +16,7 @@ query:
   files: 文件
   web: 网页
 run_as_admin: 以管理员身份运行
+uninstall: 卸载
 unpin: 取消固定
 web_search: 按 Enter 搜索网页
 welcome_message: 欢迎使用 Seelen UI 应用菜单。

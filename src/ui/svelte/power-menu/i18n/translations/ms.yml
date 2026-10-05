@@ -2,7 +2,10 @@ goodbye: Selamat tinggal {{0}}
 hibernate: Hibernate
 lock: Sesi kunci
 log_out: Log keluar
+pending_updates: Terdapat kemas kini sistem yang belum selesai. Pasang sekarang?
 reboot: Reboot
 shutdown: Power Off
 suspend: Menggantung
+update_and_reboot: Kemas kini dan mulakan semula
+update_and_shutdown: Kemas kini dan tutup
 uptime: Uptime

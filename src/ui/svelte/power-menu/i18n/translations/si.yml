@@ -2,7 +2,10 @@ goodbye: ආයුබෝවන් {{0}}
 hibernate: හයිබර්නේට්
 lock: අගුළු සැසිය
 log_out: ලොග් අවුට් වෙන්න
+pending_updates: පද්ධති යාවත්කාලීන පොරොත්තු ඇත. දැන් ස්ථාපනය කරන්නද?
 reboot: නැවත ආරම්භ කරන්න
 shutdown: විදුලිය විසන්ධි කරන්න
 suspend: අත්හිටුවන්න
+update_and_reboot: යාවත්කාලීන කර නැවත ආරම්භ කරන්න
+update_and_shutdown: යාවත්කාලීන කර වසා දමන්න
 uptime: අතිකාල

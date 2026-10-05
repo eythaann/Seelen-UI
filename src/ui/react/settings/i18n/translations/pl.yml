@@ -242,7 +242,7 @@ resources:
   high_impact: Duży wpływ na wydajność
   import_wallpapers: Import lokalnych tapet
   included_plugins: Dołączone wtyczki
-  modified: Zmodyfikowano
+  modified: Zmodyfikowany
   open_folder: Otwórz folder zasobów
   outdated: >-
     Ten zasób został zaprojektowany dla starszej wersji Seelen UI i może nie
@@ -428,6 +428,11 @@ weg:
     full_width: Pełna szerokość ekranu
     min_content: Jak najmniejszy
   padding: Wysokość tła
+  reveal_on_attention:
+    label: Pokazuj, kiedy aplikacja prosi o uwagę
+    never: Nigdy
+    until_activated: Do momentu otwarcia aplikacji
+    while_flashing: Podczas gdy miga
   show_end_task: Pokaż zadanie końcowe na pasku zadań
   width: Szerokość
 welcome:

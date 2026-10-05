@@ -2,7 +2,10 @@ goodbye: goodbye {{0}}
 hibernate: ຮູດ
 lock: LOTAL SINECT
 log_out: ອອກຈາກລະບົບ
+pending_updates: ມີການອັບເດດລະບົບທີ່ລໍຖ້າຢູ່. ຕິດຕັ້ງດຽວນີ້ບໍ?
 reboot: reboot
 shutdown: ພະລັງງານປິດ
 suspend: ແຂວນໄວ້
+update_and_reboot: ອັບເດດ ແລະຣີສະຕາດ
+update_and_shutdown: ປັບປຸງແລະປິດ
 uptime: ເຖິງເວລາ

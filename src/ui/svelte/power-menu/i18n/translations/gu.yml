@@ -2,7 +2,10 @@ goodbye: ગુડબાય {{0}}
 hibernate: હાઇબરનેટ
 lock: લૉક સત્ર
 log_out: લોગ આઉટ કરો
+pending_updates: સિસ્ટમ અપડેટ્સ બાકી છે. હમણાં ઇન્સ્ટોલ કરીએ?
 reboot: રીબૂટ કરો
 shutdown: પાવર બંધ
 suspend: સસ્પેન્ડ કરો
+update_and_reboot: અપડેટ કરો અને પુનઃપ્રારંભ કરો
+update_and_shutdown: અપડેટ કરો અને બંધ કરો
 uptime: અપટાઇમ

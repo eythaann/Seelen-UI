@@ -419,6 +419,11 @@ weg:
     full_width: Ամբողջ էկրանի լայնությունը
     min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
+  reveal_on_attention:
+    label: Ցույց տալ, երբ հավելվածը ուշադրություն է պահանջում
+    never: Երբեք
+    until_activated: Մինչև հավելվածը բացվի
+    while_flashing: Մինչ այն փայլում է
   show_end_task: Show ույց տալ ավարտի առաջադրանքը առաջադրանքի մեջ
   width: Լայնություն
 welcome:
