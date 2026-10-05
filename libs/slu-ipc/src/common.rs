@@ -1,5 +1,9 @@
 use std::{
     io::{BufRead, Write},
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        mpsc::RecvTimeoutError,
+    },
     time::Duration,
 };
 
@@ -10,6 +14,13 @@ use interprocess::os::windows::{
     security_descriptor::{AsSecurityDescriptorMutExt, SecurityDescriptor},
 };
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
+use windows::Win32::{
+    Foundation::{CloseHandle, HANDLE},
+    System::{
+        IO::CancelSynchronousIo,
+        Threading::{GetCurrentThreadId, OpenThread, THREAD_TERMINATE},
+    },
+};
 
 use crate::{error::Result, messages::IpcResponse};
 
@@ -104,11 +115,47 @@ pub async fn send_to_ipc_stream(
     IpcResponse::from_bytes(&buf)
 }
 
-/// Blocking version to test connections without needed of tokio runtime
+/// Blocking version to test connections without needed of tokio runtime.
+/// The exchange is cancelled after `IPC_TIMEOUT`, as callers like the hook dll run on threads
+/// of other processes (explorer.exe tray thread) that must never hang waiting for us.
 pub fn send_to_ipc_stream_blocking(
     stream: &DuplexPipeStream<Bytes>,
     buf: &[u8],
 ) -> Result<IpcResponse> {
+    // CancelSynchronousIo needs a real handle with THREAD_TERMINATE access, not the pseudo one
+    let thread = unsafe { OpenThread(THREAD_TERMINATE, false, GetCurrentThreadId())? };
+    let thread_addr = thread.0 as isize; // HANDLE is not Send
+    let timed_out = AtomicBool::new(false);
+
+    let result = std::thread::scope(|scope| {
+        let (done_tx, done_rx) = std::sync::mpsc::channel::<()>();
+        let timed_out = &timed_out;
+        scope.spawn(move || {
+            if let Err(RecvTimeoutError::Timeout) = done_rx.recv_timeout(IPC_TIMEOUT) {
+                timed_out.store(true, Ordering::Release);
+                // retry until the exchange finishes, the I/O could start right after a cancel
+                while let Err(RecvTimeoutError::Timeout) =
+                    done_rx.recv_timeout(Duration::from_millis(10))
+                {
+                    let _ = unsafe { CancelSynchronousIo(HANDLE(thread_addr as _)) };
+                }
+            }
+        });
+        let result = exchange_blocking(stream, buf);
+        drop(done_tx);
+        result
+    });
+
+    let _ = unsafe { CloseHandle(thread) };
+    if timed_out.load(Ordering::Acquire) && result.is_err() {
+        return Err(crate::error::Error::Timeout(
+            "No response from IPC stream".to_string(),
+        ));
+    }
+    result
+}
+
+fn exchange_blocking(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<IpcResponse> {
     let mut writter = std::io::BufWriter::new(stream);
     writter.write_all(buf)?;
     writter.write_all(&[END_OF_TRANSMISSION_BLOCK])?;

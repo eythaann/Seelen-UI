@@ -4,6 +4,7 @@ use interprocess::os::windows::named_pipe::{
     DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
     tokio::DuplexPipeStream as AsyncDuplexPipeStream,
 };
+use tokio::sync::mpsc;
 use windows::Win32::System::RemoteDesktop::{ProcessIdToSessionId, WTSGetActiveConsoleSessionId};
 
 use crate::{
@@ -46,6 +47,21 @@ impl AppIpc {
         let path = Self::path();
         let (ready_tx, ready_rx) = std::sync::mpsc::channel::<Result<()>>();
 
+        let callback = Arc::new(cb);
+        // Notifications are acknowledged before being handled (see `process_connection`), this
+        // queue keeps them in order and handles them one at a time on the main runtime.
+        let (notifications_tx, mut notifications_rx) = mpsc::unbounded_channel::<AppMessage>();
+        {
+            let callback = callback.clone();
+            main_runtime.spawn(async move {
+                while let Some(message) = notifications_rx.recv().await {
+                    if let IpcResponse::Err(err) = callback(message).await {
+                        log::error!("Failed to process IPC notification: {err}");
+                    }
+                }
+            });
+        }
+
         std::thread::Builder::new()
             .name("AppIpc".into())
             .spawn(move || {
@@ -77,13 +93,18 @@ impl AppIpc {
                     };
                     let _ = ready_tx.send(Ok(()));
 
-                    let callback = Arc::new(cb);
                     while let Ok(stream) = listener.accept().await {
                         let callback = callback.clone();
                         let main_runtime = main_runtime.clone();
+                        let notifications_tx = notifications_tx.clone();
                         tokio::spawn(async move {
-                            if let Err(err) =
-                                Self::process_connection(&stream, callback, &main_runtime).await
+                            if let Err(err) = Self::process_connection(
+                                &stream,
+                                callback,
+                                &main_runtime,
+                                &notifications_tx,
+                            )
+                            .await
                                 && let Err(send_err) = Self::response_to_client(
                                     &stream,
                                     IpcResponse::Err(err.to_string()),
@@ -109,6 +130,7 @@ impl AppIpc {
         stream: &AsyncDuplexPipeStream<Bytes>,
         cb: Arc<F>,
         main_runtime: &tokio::runtime::Handle,
+        notifications: &mpsc::UnboundedSender<AppMessage>,
     ) -> Result<()>
     where
         R: Future<Output = IpcResponse> + Send + Sync + 'static,
@@ -121,6 +143,13 @@ impl AppIpc {
 
         let message = AppMessage::from_bytes(&data)?;
         log::trace!("IPC command received: {message:?}");
+
+        // Notifications come from the hook DLL running on the explorer.exe tray thread, which is
+        // blocked until we answer: reply first so a busy main runtime can't freeze the taskbar.
+        if message.is_notification() {
+            let _ = notifications.send(message);
+            return Self::response_to_client(stream, IpcResponse::Success).await;
+        }
         // the handler runs on the main runtime, this one must never block on it
         let response = main_runtime
             .spawn(async move { cb(message).await })

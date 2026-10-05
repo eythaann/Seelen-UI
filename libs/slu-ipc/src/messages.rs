@@ -57,6 +57,15 @@ pub enum AppMessage {
 }
 
 impl AppMessage {
+    /// Messages sent by the hook DLL from inside explorer.exe, they don't need a meaningful
+    /// response so they are acknowledged before being processed.
+    pub fn is_notification(&self) -> bool {
+        matches!(
+            self,
+            AppMessage::TrayChanged(_) | AppMessage::TaskbarButtonChanged(_) | AppMessage::Debug(_)
+        )
+    }
+
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         Ok(serde_json::from_slice(bytes)?)
     }

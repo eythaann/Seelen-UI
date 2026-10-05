@@ -8,7 +8,7 @@ workspace = true
 
 [dependencies]
 clap = { workspace = true, features = ["derive"] }
-tokio = { workspace = true, features = ["rt", "time"] }
+tokio = { workspace = true, features = ["rt", "time", "sync"] }
 thiserror = { workspace = true }
 log = { workspace = true }
 interprocess = { workspace = true, features = ["tokio"] }
@@ -17,6 +17,9 @@ serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 uuid = { workspace = true, features = ["serde"] }
 windows = { workspace = true, features = [
+    "Win32_Foundation",
+    "Win32_System_IO",
     "Win32_System_RemoteDesktop",
     "Win32_System_Pipes",
+    "Win32_System_Threading",
 ] }
