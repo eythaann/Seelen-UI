@@ -10,6 +10,7 @@ use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::apps::application::{UserAppsManager, previews::WinPreviewManager},
+    widgets::permissions::{WidgetPerm, request_widget_permission},
     windows_api::{Com, input::Mouse, window::Window},
 };
 
@@ -85,7 +86,8 @@ impl crate::tauri_handlers::Handlers {
     }
 
     /// This function is called show_desktop but acts more like minimize_all
-    pub fn show_desktop() -> Result<()> {
+    pub fn show_desktop(webview: tauri::WebviewWindow) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         Com::run_with_context(|| {
             let shell: IShellDispatch6 = Com::create_instance(&Shell)?;
             unsafe { shell.ToggleDesktop()? };

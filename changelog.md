@@ -7,6 +7,7 @@
 - resource URIs could send the session token to arbitrary hosts.
 - out of bounds read inside explorer.exe on malformed tray messages.
 - a busy app could freeze the native taskbar and tray icons.
+- third-party widgets could change settings, kill apps or control windows without asking for permission.
 
 ## [2.8.7]
 

@@ -13,6 +13,7 @@ use crate::{
     resources::RESOURCES,
     utils::date_based_hex_id,
     virtual_desktops::{VdManager, events::VirtualDesktopEvent},
+    widgets::permissions::{WidgetPerm, request_widget_permission},
 };
 
 fn get_vd_manager() -> &'static VdManager {
@@ -68,9 +69,11 @@ impl crate::tauri_handlers::Handlers {
     }
 
     pub fn move_window_to_workspace(
+        webview: tauri::WebviewWindow,
         hwnd: isize,
         workspace_id: seelen_core::state::WorkspaceId,
     ) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         let manager = get_vd_manager();
         let window = crate::windows_api::window::Window::from(hwnd);
         manager.send_to(&window, &workspace_id)

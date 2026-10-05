@@ -9,6 +9,7 @@ use crate::{
     error::{Result, ResultLogExt},
     resources::RESOURCES,
     utils::icon_extractor::queue::IconExtractor,
+    widgets::permissions::{WidgetPerm, request_widget_permission},
 };
 use std::{path::PathBuf, sync::Arc};
 
@@ -45,7 +46,12 @@ impl crate::tauri_handlers::Handlers {
         RESOURCES.icon_packs()
     }
 
-    pub async fn remove_resource(id: ResourceId, kind: ResourceKind) -> Result<()> {
+    pub async fn remove_resource(
+        webview: tauri::WebviewWindow,
+        id: ResourceId,
+        kind: ResourceKind,
+    ) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         let mut to_delete = Vec::new();
 
         match kind {

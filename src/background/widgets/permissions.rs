@@ -23,6 +23,12 @@ use crate::{
 pub enum WidgetPerm {
     Run,
     OpenFile,
+    /// Write settings, toolbar/dock items or remove resources. Toolbar and dock items contain
+    /// code executed by bundled widgets, so this must never be granted silently.
+    ModifyConfiguration,
+    KillProcesses,
+    /// Focus, close, minimize, move or resize windows of other applications.
+    ManageAppWindows,
 }
 
 impl WidgetPerm {
@@ -30,6 +36,11 @@ impl WidgetPerm {
         match self {
             WidgetPerm::Run => t!("widget_permissions.perm_run"),
             WidgetPerm::OpenFile => t!("widget_permissions.perm_open_file"),
+            WidgetPerm::ModifyConfiguration => {
+                t!("widget_permissions.perm_modify_configuration")
+            }
+            WidgetPerm::KillProcesses => t!("widget_permissions.perm_kill_processes"),
+            WidgetPerm::ManageAppWindows => t!("widget_permissions.perm_manage_app_windows"),
         }
         .to_string()
     }

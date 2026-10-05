@@ -4,6 +4,7 @@ use seelen_core::state::{
     AppConfig, IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
     by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings,
 };
+use tauri::WebviewWindow;
 use tauri_plugin_dialog::DialogExt;
 
 use crate::{
@@ -11,6 +12,7 @@ use crate::{
     error::{Result, ResultLogExt},
     state::application::{BUNDLED_SETTINGS_BY_APP, performance::PERFORMANCE_MODE},
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
+    widgets::permissions::{WidgetPerm, request_widget_permission},
     windows_api::WindowsApi,
 };
 
@@ -21,7 +23,8 @@ impl crate::tauri_handlers::Handlers {
         TOOLBAR_ITEMS_MANAGER.get()
     }
 
-    pub fn state_write_toolbar_items(items: ToolbarState) -> Result<()> {
+    pub fn state_write_toolbar_items(webview: WebviewWindow, items: ToolbarState) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         TOOLBAR_ITEMS_MANAGER.write(items)
     }
 
@@ -29,7 +32,8 @@ impl crate::tauri_handlers::Handlers {
         WEG_ITEMS_MANAGER.get()
     }
 
-    pub fn state_write_weg_items(items: WegItems) -> Result<()> {
+    pub fn state_write_weg_items(webview: WebviewWindow, items: WegItems) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         WEG_ITEMS_MANAGER.write(items)
     }
 
@@ -55,7 +59,8 @@ impl crate::tauri_handlers::Handlers {
         WallpaperInstanceSettings::default()
     }
 
-    pub fn state_write_settings(mut settings: Settings) -> Result<()> {
+    pub fn state_write_settings(webview: WebviewWindow, mut settings: Settings) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         settings.sanitize()?;
         FULL_STATE.rcu(move |state| {
             let mut state = state.cloned();
@@ -75,7 +80,8 @@ impl crate::tauri_handlers::Handlers {
         WindowsApi::get_wallpaper()
     }
 
-    pub fn set_native_shell_wallpaper(path: PathBuf) -> Result<()> {
+    pub fn set_native_shell_wallpaper(webview: WebviewWindow, path: PathBuf) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
         WindowsApi::set_wallpaper(path)
     }
 

@@ -142,6 +142,7 @@ slu_commands_declaration! {
         @fallible()
         rename_workspace(workspace_id: WorkspaceId, name: Option<String>),
     MoveWindowToWorkspace =
+        @webview()
         @fallible()
         move_window_to_workspace(hwnd: isize, workspace_id: WorkspaceId),
 
@@ -199,6 +200,7 @@ slu_commands_declaration! {
         umid: Option<String>
     ),
     ShowDesktop =
+        @webview()
         @fallible()
         show_desktop(),
 
@@ -280,22 +282,26 @@ slu_commands_declaration! {
         @fallible()
         get_auto_start_status() -> bool,
     RemoveResource =
+        @webview()
         @async()
         @fallible()
         remove_resource(id: ResourceId, kind: ResourceKind),
 
     StateGetWegItems = state_get_weg_items() -> WegItems,
     StateWriteWegItems =
+        @webview()
         @fallible()
         state_write_weg_items(items: WegItems),
     StateGetToolbarItems = state_get_toolbar_items() -> ToolbarState,
     StateWriteToolbarItems =
+        @webview()
         @fallible()
         state_write_toolbar_items(items: ToolbarState),
     StateGetSettings =
         @fallible()
         state_get_settings(path: Option<std::path::PathBuf>) -> Settings,
     StateWriteSettings =
+        @webview()
         @fallible()
         state_write_settings(settings: Settings),
     StateGetSettingsByApp = state_get_settings_by_app() -> Vec<AppConfig> ,
@@ -371,6 +377,7 @@ slu_commands_declaration! {
         @fallible()
         get_native_shell_wallpaper() -> std::path::PathBuf,
     SetNativeShellWallpaper =
+        @webview()
         @fallible()
         set_native_shell_wallpaper(path: std::path::PathBuf),
 
@@ -438,30 +445,38 @@ slu_commands_declaration! {
 
     // SeelenWeg
     WegCloseApp =
+        @webview()
         @fallible()
         weg_close_app(hwnd: isize),
     WegKillApp =
+        @webview()
         @fallible()
         weg_kill_app(hwnd: isize),
     WegToggleWindowState =
+        @webview()
         @fallible()
         weg_toggle_window_state(hwnd: isize, was_focused: bool),
     WegPinItem =
+        @webview()
         @fallible()
         weg_pin_item(path: std::path::PathBuf),
     WegImportPinnedTaskbarItems =
+        @webview()
         @fallible()
         weg_import_pinned_taskbar_items() -> usize,
 
     // Windows Manager
     WmGetRenderTree = wm_get_render_tree() -> TwmGlobalRuntimeTree,
     SetAppWindowsPositions =
+        @webview()
         @fallible()
         set_app_windows_positions(positions: std::collections::HashMap<isize, Rect>),
     RequestFocus =
+        @webview()
         @fallible()
         request_focus(hwnd: isize),
     WmSetStackActiveWindow =
+        @webview()
         @fallible()
         wm_set_stack_active_window(hwnd: isize),
 

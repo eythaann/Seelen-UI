@@ -8,7 +8,10 @@ use crate::{
     cli::ServicePipe,
     error::Result,
     state::application::{FULL_STATE, performance::PERFORMANCE_MODE},
-    widgets::window_manager::state_v2::{TwmState, WM_STATE},
+    widgets::{
+        permissions::{WidgetPerm, request_widget_permission},
+        window_manager::state_v2::{TwmState, WM_STATE},
+    },
     windows_api::{WindowsApi, window::Window},
 };
 use seelen_core::{
@@ -67,6 +70,45 @@ pub fn set_app_window_position(window: &Window, rect: Rect) -> Result<()> {
     Ok(())
 }
 
+pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
+    log::trace!(
+        "set_app_windows_positions called with {} positions",
+        positions.len()
+    );
+
+    let mut list = HashMap::new();
+
+    for (hwnd, rect) in &positions {
+        let window = Window::from(*hwnd);
+        if let Some(desired_rect) = desired_rect_for(&window, rect)? {
+            list.insert(*hwnd, desired_rect);
+        }
+    }
+
+    let state = FULL_STATE.load();
+    let perf_mode = PERFORMANCE_MODE.load();
+    let place_animated =
+        state.settings.by_widget.wm.animations.enabled && perf_mode == PerformanceMode::Disabled;
+
+    // Store inner (pre-shadow) rects — must match Window::inner_rect() used in comparisons.
+    {
+        let mut state = WM_STATE.lock();
+        for hwnd in list.keys() {
+            if let Some(rect) = positions.get(hwnd) {
+                state.set_cached_node_rect(*hwnd, rect.clone());
+            }
+        }
+    }
+
+    ServicePipe::request(SvcAction::DeferWindowPositions {
+        list,
+        animated: place_animated,
+        animation_duration: state.settings.by_widget.wm.animations.duration_ms,
+        easing: state.settings.by_widget.wm.animations.ease_function.clone(),
+    })?;
+    Ok(())
+}
+
 impl crate::tauri_handlers::Handlers {
     pub fn wm_get_render_tree() -> TwmGlobalRuntimeTree {
         static TAURI_EVENT_REGISTRATION: Once = Once::new();
@@ -81,46 +123,16 @@ impl crate::tauri_handlers::Handlers {
         WM_STATE.lock().state.clone()
     }
 
-    pub fn set_app_windows_positions(positions: HashMap<isize, Rect>) -> Result<()> {
-        log::trace!(
-            "set_app_windows_positions called with {} positions",
-            positions.len()
-        );
-
-        let mut list = HashMap::new();
-
-        for (hwnd, rect) in &positions {
-            let window = Window::from(*hwnd);
-            if let Some(desired_rect) = desired_rect_for(&window, rect)? {
-                list.insert(*hwnd, desired_rect);
-            }
-        }
-
-        let state = FULL_STATE.load();
-        let perf_mode = PERFORMANCE_MODE.load();
-        let place_animated = state.settings.by_widget.wm.animations.enabled
-            && perf_mode == PerformanceMode::Disabled;
-
-        // Store inner (pre-shadow) rects — must match Window::inner_rect() used in comparisons.
-        {
-            let mut state = WM_STATE.lock();
-            for hwnd in list.keys() {
-                if let Some(rect) = positions.get(hwnd) {
-                    state.set_cached_node_rect(*hwnd, rect.clone());
-                }
-            }
-        }
-
-        ServicePipe::request(SvcAction::DeferWindowPositions {
-            list,
-            animated: place_animated,
-            animation_duration: state.settings.by_widget.wm.animations.duration_ms,
-            easing: state.settings.by_widget.wm.animations.ease_function.clone(),
-        })?;
-        Ok(())
+    pub fn set_app_windows_positions(
+        webview: tauri::WebviewWindow,
+        positions: HashMap<isize, Rect>,
+    ) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        set_app_windows_positions(positions)
     }
 
-    pub fn wm_set_stack_active_window(hwnd: isize) -> Result<()> {
+    pub fn wm_set_stack_active_window(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         let window = Window::from(hwnd);
         if !window.is_window() {
             return Ok(());
@@ -130,7 +142,8 @@ impl crate::tauri_handlers::Handlers {
     }
 
     /// TODO delete this is used only by webview, but this should use self_focus command.
-    pub fn request_focus(hwnd: isize) -> Result<()> {
+    pub fn request_focus(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         let window = Window::from(hwnd);
         if !window.is_window() {
             return Ok(());

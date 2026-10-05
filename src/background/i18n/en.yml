@@ -68,6 +68,9 @@ widget_liveness:
     You can try restarting the app.
   failed_title: Widget Error
 widget_permissions:
+  perm_kill_processes: force close applications
+  perm_manage_app_windows: control the windows of other applications (focus, close, minimize, move)
+  perm_modify_configuration: modify the Seelen UI configuration
   perm_open_file: open files
   perm_run: run programs
   request_description: |-
