@@ -20,7 +20,8 @@ use windows::Win32::{
 
 use crate::{
     modules::system_tray::application::{
-        SystemTrayEvent, SystemTrayManager, find_registry_notify_icon, util::Util,
+        RegistryNotifyIcon, SystemTrayEvent, SystemTrayManager, find_registry_notify_icon,
+        find_registry_notify_icon_by_executable, util::Util,
     },
     utils::{
         constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image, spawn_named_thread,
@@ -199,9 +200,7 @@ impl SystemTrayManager {
                     // cannot be identified.
                     let identity = session_identity(icon_data)?;
 
-                    let window_path = icon_data
-                        .window_handle
-                        .and_then(|handle| Window::from(handle).process().program_path().ok());
+                    let window_path = icon_data.window_handle.and_then(owner_program_path);
                     let Some(entry) = find_registry_notify_icon(
                         window_path.as_deref(),
                         icon_data.guid,
@@ -211,46 +210,7 @@ impl SystemTrayManager {
                         return None;
                     };
                     self.pending.remove(&identity);
-
-                    let registry_key = entry.key;
-                    let executable_path = window_path.unwrap_or(entry.executable_path);
-                    log::trace!("Tray icon added: {registry_key} ({executable_path:?})");
-
-                    let mut icon_image_hash = None;
-                    let mut icon_path = None;
-
-                    if let Some(icon_handle) = icon_data.icon_handle
-                        && let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _))
-                    {
-                        icon_image_hash = Some(image_to_hash(&img));
-                        let path = SEELEN_COMMON
-                            .app_temp_dir()
-                            .join(format!("{}.png", registry_key));
-                        img.save(&path).unwrap();
-                        icon_path = Some(path);
-                    }
-
-                    let icon = SysTrayIcon {
-                        registry_key,
-                        executable_path,
-                        uid: icon_data.uid,
-                        window_handle: icon_data.window_handle,
-                        guid: icon_data.guid,
-                        tooltip: icon_data.tooltip.clone().unwrap_or_default(),
-                        icon_handle: icon_data.icon_handle,
-                        icon_path,
-                        icon_image_hash,
-                        callback_message: icon_data.callback_message,
-                        version: icon_data.version,
-                        is_visible: icon_data.is_visible,
-                        is_promoted: entry.is_promoted,
-                    };
-
-                    if let Some(window_handle) = icon.window_handle {
-                        self.track_owner(&icon.registry_key, window_handle);
-                    }
-                    self.icons.upsert(icon.registry_key.clone(), icon.clone());
-                    Some(SystrayEvent::IconAdd(icon))
+                    Some(self.add_icon(icon_data, entry, window_path))
                 }
             }
             Win32TrayEvent::IconRemove { data: icon_data } => {
@@ -264,6 +224,54 @@ impl SystemTrayManager {
                 Some(SystrayEvent::IconRemove(registry_key))
             }
         }
+    }
+
+    /// Stores a new icon under the registry entry that identifies it.
+    fn add_icon(
+        &self,
+        icon_data: &IconEventData,
+        entry: RegistryNotifyIcon,
+        window_path: Option<PathBuf>,
+    ) -> SystrayEvent {
+        let registry_key = entry.key;
+        let executable_path = window_path.unwrap_or(entry.executable_path);
+        log::trace!("Tray icon added: {registry_key} ({executable_path:?})");
+
+        let mut icon_image_hash = None;
+        let mut icon_path = None;
+
+        if let Some(icon_handle) = icon_data.icon_handle
+            && let Ok(img) = convert_hicon_to_rgba_image(&HICON(icon_handle as _))
+        {
+            icon_image_hash = Some(image_to_hash(&img));
+            let path = SEELEN_COMMON
+                .app_temp_dir()
+                .join(format!("{}.png", registry_key));
+            img.save(&path).unwrap();
+            icon_path = Some(path);
+        }
+
+        let icon = SysTrayIcon {
+            registry_key,
+            executable_path,
+            uid: icon_data.uid,
+            window_handle: icon_data.window_handle,
+            guid: icon_data.guid,
+            tooltip: icon_data.tooltip.clone().unwrap_or_default(),
+            icon_handle: icon_data.icon_handle,
+            icon_path,
+            icon_image_hash,
+            callback_message: icon_data.callback_message,
+            version: icon_data.version,
+            is_visible: icon_data.is_visible,
+            is_promoted: entry.is_promoted,
+        };
+
+        if let Some(window_handle) = icon.window_handle {
+            self.track_owner(&icon.registry_key, window_handle);
+        }
+        self.icons.upsert(icon.registry_key.clone(), icon.clone());
+        SystrayEvent::IconAdd(icon)
     }
 
     /// Holds an icon whose registry entry doesn't exist yet and re-dispatches it
@@ -308,7 +316,26 @@ impl SystemTrayManager {
                 }
                 return;
             }
-            SystemTrayManager::instance().pending.remove(&identity);
+
+            let manager = SystemTrayManager::instance();
+            // Explorer may never write an entry with this uid, fall back to the only entry of
+            // the executable unless another icon already took it.
+            if icon_data.guid.is_none()
+                && let Some(entry) = window_path
+                    .as_deref()
+                    .and_then(find_registry_notify_icon_by_executable)
+                && !manager.icons.contains_key(&entry.key)
+                && let Some(data) = manager.pending.remove(&identity)
+            {
+                log::trace!(
+                    "Tray icon {identity} has no entry with its uid, using its executable's"
+                );
+                manager.add_icon(&data, entry, window_path);
+                SystemTrayManager::send(SystemTrayEvent::Changed);
+                return;
+            }
+
+            manager.pending.remove(&identity);
             log::warn!("Tray icon {identity} ({window_path:?}) ignored, no registry entry found");
         });
     }
@@ -435,6 +462,20 @@ fn window_pid(handle: isize) -> Option<u32> {
     let mut pid = 0;
     unsafe { GetWindowThreadProcessId(HWND(handle as _), Some(&mut pid)) };
     (pid != 0).then_some(pid)
+}
+
+/// Path of the program that owns the window. Services running as SYSTEM can show icons
+/// in the user session but their process can't be opened, so its path is read without
+/// a process handle.
+fn owner_program_path(handle: isize) -> Option<PathBuf> {
+    Window::from(handle)
+        .process()
+        .program_path()
+        .ok()
+        .or_else(|| {
+            window_pid(handle)
+                .and_then(|pid| WindowsApi::exe_path_by_process_without_handle(pid).ok())
+        })
 }
 
 /// Computes a hash of the icon image.

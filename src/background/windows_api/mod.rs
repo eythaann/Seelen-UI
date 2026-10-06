@@ -39,6 +39,7 @@ use windows::{
         InMemoryRandomAccessStream, RandomAccessStreamReference,
     },
     Wdk::System::{
+        SystemInformation::{NtQuerySystemInformation, SYSTEM_INFORMATION_CLASS},
         SystemServices::PROCESS_EXTENDED_BASIC_INFORMATION,
         Threading::{NtQueryInformationProcess, ProcessBasicInformation},
     },
@@ -49,7 +50,7 @@ use windows::{
         },
         Foundation::{
             GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, POINT, RECT,
-            STATUS_SUCCESS, SetLastError, WIN32_ERROR, WPARAM,
+            STATUS_SUCCESS, SetLastError, UNICODE_STRING, WIN32_ERROR, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -77,7 +78,7 @@ use windows::{
                 PKEY_AppUserModel_RelaunchIconResource, PKEY_AppUserModel_ToastActivatorCLSID,
                 PKEY_FileDescription,
             },
-            FileSystem::WIN32_FIND_DATAW,
+            FileSystem::{QueryDosDeviceW, WIN32_FIND_DATAW},
         },
         System::{
             Com::{IDispatch, IPersistFile, IServiceProvider, STGM_READ},
@@ -124,7 +125,7 @@ use windows::{
             },
         },
     },
-    core::{BSTR, GUID, PCWSTR},
+    core::{BSTR, GUID, PCWSTR, PWSTR},
 };
 
 use crate::{
@@ -570,6 +571,76 @@ impl WindowsApi {
             QueryFullProcessImageNameW(*handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
         }
         Ok(path.to_os_string())
+    }
+
+    /// Gets the executable path of a process without opening it, so it also works for
+    /// processes that `OpenProcess` denies, like services running as SYSTEM that show
+    /// a tray icon in the user session.
+    pub fn exe_path_by_process_without_handle(process_id: u32) -> Result<PathBuf> {
+        #[repr(C)]
+        struct SystemProcessIdInformation {
+            process_id: HANDLE,
+            image_name: UNICODE_STRING,
+        }
+        // SystemProcessIdInformation, not exposed by the windows crate
+        const SYSTEM_PROCESS_ID_INFORMATION: SYSTEM_INFORMATION_CLASS =
+            SYSTEM_INFORMATION_CLASS(88);
+
+        let mut buffer = vec![0u16; 1024];
+        let mut info = SystemProcessIdInformation {
+            process_id: HANDLE(process_id as usize as _),
+            image_name: UNICODE_STRING {
+                Length: 0,
+                MaximumLength: (buffer.len() * 2) as u16,
+                Buffer: PWSTR(buffer.as_mut_ptr()),
+            },
+        };
+        let status = unsafe {
+            NtQuerySystemInformation(
+                SYSTEM_PROCESS_ID_INFORMATION,
+                &mut info as *mut _ as _,
+                std::mem::size_of::<SystemProcessIdInformation>() as _,
+                std::ptr::null_mut(),
+            )
+        };
+        if status != STATUS_SUCCESS {
+            return Err(format!(
+                "NtQuerySystemInformation failed with status: {:x}",
+                status.0
+            )
+            .into());
+        }
+
+        let len = (info.image_name.Length as usize / 2).min(buffer.len());
+        let nt_path = String::from_utf16_lossy(&buffer[..len]);
+        Self::nt_path_to_dos_path(&nt_path)
+    }
+
+    /// Converts a kernel path like `\Device\HarddiskVolume3\Program Files\app.exe`
+    /// into `C:\Program Files\app.exe`.
+    fn nt_path_to_dos_path(nt_path: &str) -> Result<PathBuf> {
+        for letter in 'A'..='Z' {
+            let drive = format!("{letter}:");
+            let mut target = [0u16; MAX_PATH as usize];
+            let written = unsafe {
+                QueryDosDeviceW(
+                    WindowsString::from_str(&drive).as_pcwstr(),
+                    Some(&mut target),
+                )
+            };
+            if written == 0 {
+                continue;
+            }
+            // the result is a list of null terminated strings, the first one is the current mapping
+            let device_end = target.iter().position(|c| *c == 0).unwrap_or(target.len());
+            let device = String::from_utf16_lossy(&target[..device_end]);
+            if let Some(rest) = strip_prefix_ignore_case(nt_path, &device)
+                && rest.starts_with('\\')
+            {
+                return Ok(PathBuf::from(format!("{drive}{rest}")));
+            }
+        }
+        Err(format!("No drive letter found for {nt_path}").into())
     }
 
     pub fn get_class(hwnd: HWND) -> Result<String> {
@@ -1382,5 +1453,40 @@ impl WindowsApi {
 
         unsafe { ShellExecuteExW(&mut info)? };
         Ok(())
+    }
+}
+
+/// `str::strip_prefix` ignoring ASCII case.
+fn strip_prefix_ignore_case<'a>(s: &'a str, prefix: &str) -> Option<&'a str> {
+    let head = s.get(..prefix.len())?;
+    head.eq_ignore_ascii_case(prefix)
+        .then(|| &s[prefix.len()..])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn exe_path_without_handle_matches_current_exe() {
+        let path = WindowsApi::exe_path_by_process_without_handle(std::process::id()).unwrap();
+        let expected = std::env::current_exe().unwrap();
+        assert!(
+            path.to_string_lossy()
+                .eq_ignore_ascii_case(&expected.to_string_lossy()),
+            "{path:?} != {expected:?}"
+        );
+    }
+
+    #[test]
+    fn strip_prefix_ignores_case() {
+        assert_eq!(
+            strip_prefix_ignore_case(
+                r"\Device\HarddiskVolume3\app.exe",
+                r"\device\harddiskvolume3"
+            ),
+            Some(r"\app.exe")
+        );
+        assert_eq!(strip_prefix_ignore_case(r"\Device", r"\Device\Long"), None);
     }
 }

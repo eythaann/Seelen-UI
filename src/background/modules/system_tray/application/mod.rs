@@ -221,6 +221,33 @@ pub fn find_registry_notify_icon(
         })
 }
 
+/// Finds the entry of an icon without guid by its executable alone, when the executable
+/// has exactly one such entry.
+///
+/// Explorer can keep a single entry per executable with the uid of an older run and never
+/// write one for the current uid, so `find_registry_notify_icon` never matches. It happens
+/// with apps that use their window handle as uid (MSI Afterburner) and with WinForms apps,
+/// which give each `NotifyIcon` a new id (DSX).
+pub fn find_registry_notify_icon_by_executable(
+    executable_path: &Path,
+) -> Option<RegistryNotifyIcon> {
+    let settings = RegKey::predef(HKEY_CURRENT_USER)
+        .open_subkey(NOTIFY_ICON_SETTINGS)
+        .ok()?;
+    let executable_path = executable_path.to_string_lossy().to_lowercase();
+
+    let mut entries = settings
+        .enum_keys()
+        .flatten()
+        .filter_map(|key| read_registry_notify_icon(&settings, &key).ok())
+        .filter(|entry| {
+            entry.icon_guid.is_none()
+                && entry.executable_path.to_string_lossy().to_lowercase() == executable_path
+        });
+    let entry = entries.next()?;
+    entries.next().is_none().then_some(entry)
+}
+
 /// Registry keys of the icons in the order they are displayed on the Win Taskbar and Win Tray Overflow.
 fn get_registry_ui_order() -> Result<Vec<String>> {
     let settings = RegKey::predef(HKEY_CURRENT_USER).open_subkey(NOTIFY_ICON_SETTINGS)?;
