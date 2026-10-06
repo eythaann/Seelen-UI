@@ -4,6 +4,7 @@ use std::{
     time::Duration,
 };
 
+use parking_lot::Mutex;
 use seelen_core::system_state::{SysTrayIcon, SystrayIconAction};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
@@ -34,6 +35,10 @@ use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 /// Explorer writes it after the hook has already reported the icon.
 const REGISTRY_LOOKUP_ATTEMPTS: u32 = 10;
 const REGISTRY_LOOKUP_INTERVAL: Duration = Duration::from_millis(200);
+
+/// Serializes choosing the key of a new icon and storing it, so icons resolved at the same
+/// time (hook thread and registry lookup threads) can't take the same key.
+static ADD_ICON_LOCK: Mutex<()> = Mutex::new(());
 
 /// Events that can be emitted by `Systray`.
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -226,6 +231,23 @@ impl SystemTrayManager {
         }
     }
 
+    /// Key to store a new icon under: the key of its registry entry, unless a live icon
+    /// already uses it. That happens when the fallback by executable gives the same entry to
+    /// two icons; the new one then gets a key of its own so both stay in the tray (it can't
+    /// be pinned, as it has no entry of its own).
+    fn claim_registry_key(&self, entry_key: String, icon_data: &IconEventData) -> String {
+        let taken = self
+            .icons
+            .get(&entry_key, |icon| icon.window_handle)
+            .is_some_and(|handle| {
+                handle.is_none_or(|handle| self.is_owner_alive(&entry_key, handle))
+            });
+        match (taken, session_identity(icon_data)) {
+            (true, Some(identity)) => format!("{entry_key}-{identity}"),
+            _ => entry_key,
+        }
+    }
+
     /// Stores a new icon under the registry entry that identifies it.
     fn add_icon(
         &self,
@@ -233,7 +255,8 @@ impl SystemTrayManager {
         entry: RegistryNotifyIcon,
         window_path: Option<PathBuf>,
     ) -> SystrayEvent {
-        let registry_key = entry.key;
+        let _guard = ADD_ICON_LOCK.lock();
+        let registry_key = self.claim_registry_key(entry.key, icon_data);
         let executable_path = window_path.unwrap_or(entry.executable_path);
         log::trace!("Tray icon added: {registry_key} ({executable_path:?})");
 
@@ -319,12 +342,11 @@ impl SystemTrayManager {
 
             let manager = SystemTrayManager::instance();
             // Explorer may never write an entry with this uid, fall back to the only entry of
-            // the executable unless another icon already took it.
+            // the executable (see `claim_registry_key` if another icon already uses it).
             if icon_data.guid.is_none()
                 && let Some(entry) = window_path
                     .as_deref()
                     .and_then(find_registry_notify_icon_by_executable)
-                && !manager.icons.contains_key(&entry.key)
                 && let Some(data) = manager.pending.remove(&identity)
             {
                 log::trace!(
