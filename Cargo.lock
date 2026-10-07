@@ -748,7 +748,7 @@ checksum = "d38f2da7a0a2c4ccf0065be06397cc26a81f4e528be095826eee9d4adbb8c60f"
 dependencies = [
  "byteorder",
  "fnv",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -758,7 +758,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a347dcabdae9c31b0825fd6a8bed285ec9c2acb89c47827126d52fa4f59cece3"
 dependencies = [
  "fnv",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "web-time",
 ]
 
@@ -4774,7 +4774,7 @@ dependencies = [
  "rkyv_derive",
  "seahash",
  "tinyvec",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -5127,7 +5127,7 @@ dependencies = [
  "tracing",
  "ulid",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -5277,7 +5277,7 @@ dependencies = [
  "serde",
  "serde_json",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -5305,7 +5305,7 @@ dependencies = [
  "serde",
  "serde_json",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -5410,7 +5410,7 @@ dependencies = [
  "tokio",
  "ts-rs",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -5463,7 +5463,7 @@ dependencies = [
  "translators",
  "url",
  "urlencoding",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "walkdir",
  "webp",
  "webview2-com",
@@ -5840,7 +5840,7 @@ dependencies = [
  "serde_json",
  "thiserror 2.0.21",
  "tokio",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "widestring",
  "windows 0.62.2",
 ]
@@ -5869,7 +5869,7 @@ name = "sluhk"
 version = "2.8.8"
 dependencies = [
  "slu-ipc",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "windows 0.62.2",
  "windows-core 0.62.2",
 ]
@@ -6311,7 +6311,7 @@ dependencies = [
  "thiserror 2.0.21",
  "time",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "walkdir",
 ]
 
@@ -6505,7 +6505,7 @@ dependencies = [
  "toml 1.1.6+spec-1.1.0",
  "url",
  "urlpattern",
- "uuid 1.26.0",
+ "uuid 1.27.0",
  "walkdir",
 ]
 
@@ -6994,7 +6994,7 @@ dependencies = [
  "thiserror 2.0.21",
  "ts-rs-macros",
  "url",
- "uuid 1.26.0",
+ "uuid 1.27.0",
 ]
 
 [[package]]
@@ -7158,9 +7158,9 @@ dependencies = [
 
 [[package]]
 name = "uuid"
-version = "1.26.0"
+version = "1.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5772d71c9be8a8a6ac2117d949c5b224c1b72241bb611d9a3012edcf8af7812"
+checksum = "97277d36b9c3ace13e58fa6e753f8b0bbbf302a18dd193240d70f9e29681059a"
 dependencies = [
  "getrandom 0.4.3",
  "js-sys",
