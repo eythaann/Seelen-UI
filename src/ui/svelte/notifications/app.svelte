@@ -21,7 +21,7 @@
   const isDndActive = $derived(globalState.focusAssistMode !== NotificationsMode.All);
   async function toggleDnd() {
     await invoke(SeelenCommand.SetNotificationsMode, {
-      mode: isDndActive ? NotificationsMode.All : NotificationsMode.AlarmsOnly,
+      mode: isDndActive ? NotificationsMode.All : NotificationsMode.PriorityOnly,
     });
   }
 

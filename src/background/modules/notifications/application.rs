@@ -44,6 +44,10 @@ use crate::{
         WindowsApi,
         event_window::IS_INTERACTIVE_SESSION,
         types::{AppUserModelId, DateTimeExt},
+        undocumented::{
+            QUIET_HOURS_PROFILE_ALARMS_ONLY, QUIET_HOURS_PROFILE_PRIORITY_ONLY,
+            QUIET_HOURS_PROFILE_UNRESTRICTED,
+        },
     },
 };
 
@@ -182,13 +186,7 @@ impl NotificationManager {
             return Ok(());
         };
 
-        let mode = sender.NotificationMode()?;
-        let mode = match mode {
-            ToastNotificationMode::Unrestricted => NotificationsMode::All,
-            ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,
-            ToastNotificationMode::PriorityOnly => NotificationsMode::PriorityOnly,
-            _ => NotificationsMode::All,
-        };
+        let mode = toast_mode_to_notifications_mode(sender.NotificationMode()?);
         Self::send(NotificationEvent::ModeChanged(mode));
         Ok(())
     }
@@ -448,24 +446,39 @@ impl NotificationManager {
         // `All` on systems without the API instead of failing the command: the frontend
         // awaits it at module top level, and a rejection there prevents the widget from
         // mounting, which surfaces to the user as "notifications never show up".
-        let Ok(mode) = self.manager.NotificationMode() else {
-            return Ok(NotificationsMode::All);
-        };
+        if let Ok(mode) = self.manager.NotificationMode() {
+            return Ok(toast_mode_to_notifications_mode(mode));
+        }
 
-        let mode = match mode {
-            ToastNotificationMode::Unrestricted => NotificationsMode::All,
-            ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,
-            ToastNotificationMode::PriorityOnly => NotificationsMode::PriorityOnly,
-            _ => NotificationsMode::All,
-        };
-        Ok(mode)
+        // Windows 10 fallback: read the focus assist profile directly
+        match WindowsApi::get_quiet_hours_profile() {
+            Ok(profile) => Ok(quiet_hours_profile_to_notifications_mode(&profile)),
+            Err(error) => {
+                log::debug!("Failed to read the quiet hours profile: {error}");
+                Ok(NotificationsMode::All)
+            }
+        }
     }
 
-    pub fn set_mode(_mode: NotificationsMode) -> Result<()> {
-        // just there's no way to change this with official apis
-        std::process::Command::new("explorer.exe")
-            .arg("ms-settings:notifications")
-            .spawn()?;
+    /// Changes the "Do not disturb" (Windows 11) / "Focus assist" (Windows 10) state.
+    pub fn set_notifications_mode(&self, mode: NotificationsMode) -> Result<()> {
+        let profile = notifications_mode_to_quiet_hours_profile(mode);
+        log::debug!("Setting notifications mode to {mode:?} ({profile})");
+
+        // there is no official api to do this, so if the undocumented one fails
+        // we let the user change it by hand
+        if let Err(error) = WindowsApi::set_quiet_hours_profile(profile) {
+            log::warn!("Failed to set the quiet hours profile, opening system settings: {error}");
+            std::process::Command::new("explorer.exe")
+                .arg("ms-settings:notifications")
+                .spawn()?;
+            return Ok(());
+        }
+
+        // without `NotificationModeChanged` (Windows 10) the change would never be notified
+        if self.mode_changed_token.is_none() {
+            Self::send(NotificationEvent::ModeChanged(mode));
+        }
         Ok(())
     }
 }
@@ -475,7 +488,36 @@ impl Drop for NotificationManager {
         if let Some(token) = self.event_token.take() {
             self.listener.RemoveNotificationChanged(token).log_error();
         }
+        if let Some(token) = self.mode_changed_token.take() {
+            self.manager
+                .RemoveNotificationModeChanged(token)
+                .log_error();
+        }
         RELEASED.store(true, Ordering::Release);
+    }
+}
+
+fn toast_mode_to_notifications_mode(mode: ToastNotificationMode) -> NotificationsMode {
+    match mode {
+        ToastNotificationMode::AlarmsOnly => NotificationsMode::AlarmsOnly,
+        ToastNotificationMode::PriorityOnly => NotificationsMode::PriorityOnly,
+        _ => NotificationsMode::All,
+    }
+}
+
+fn quiet_hours_profile_to_notifications_mode(profile: &str) -> NotificationsMode {
+    match profile {
+        QUIET_HOURS_PROFILE_ALARMS_ONLY => NotificationsMode::AlarmsOnly,
+        QUIET_HOURS_PROFILE_PRIORITY_ONLY => NotificationsMode::PriorityOnly,
+        _ => NotificationsMode::All,
+    }
+}
+
+fn notifications_mode_to_quiet_hours_profile(mode: NotificationsMode) -> &'static str {
+    match mode {
+        NotificationsMode::All => QUIET_HOURS_PROFILE_UNRESTRICTED,
+        NotificationsMode::PriorityOnly => QUIET_HOURS_PROFILE_PRIORITY_ONLY,
+        NotificationsMode::AlarmsOnly => QUIET_HOURS_PROFILE_ALARMS_ONLY,
     }
 }
 

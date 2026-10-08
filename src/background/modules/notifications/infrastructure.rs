@@ -204,6 +204,6 @@ impl crate::tauri_handlers::Handlers {
     }
 
     pub fn set_notifications_mode(mode: NotificationsMode) -> Result<()> {
-        NotificationManager::set_mode(mode)
+        get_notification_manager().set_notifications_mode(mode)
     }
 }

@@ -2,6 +2,10 @@
 
 ## [2.8.9-dev]
 
+### enhancements
+
+- do not disturb can now be toggled from the notifications widget without opening Windows settings.
+
 ### fix
 
 - tray icons pinned in the toolbar not updating their image when the app changes it.

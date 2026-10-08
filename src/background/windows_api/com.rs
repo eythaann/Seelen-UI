@@ -15,8 +15,10 @@ impl Com {
     fn initialize(flags: windows::Win32::System::Com::COINIT) -> Result<ComGuard> {
         let hresult = unsafe { CoInitializeEx(None, flags) };
         if hresult.is_err() {
+            // already initialized on this thread with another concurrency model, COM is
+            // usable anyway, we just must not call `CoUninitialize` for it
             if hresult == RPC_E_CHANGED_MODE {
-                ComGuard { initialized: false };
+                return Ok(ComGuard { initialized: false });
             }
             return Err(format!("CoInitializeEx failed: {:?}", hresult.message()).into());
         }
