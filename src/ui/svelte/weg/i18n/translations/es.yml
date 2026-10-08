@@ -26,15 +26,15 @@ show_desktop:
 start:
   label: Menú Inicio
 taskbar_menu:
-  add_file: Pin archivo personalizado
+  add_file: Anclar archivo personalizado
   add_separator: Agregar separador
   media: Reproductor multimedia
   modules: Módulos
   settings: Ajustes
   task_manager: Administrador de tareas
 trash_bin:
-  empty_bin: Papelera de reciclaje vacía
-  item_count: '{{0}} artículos'
+  empty_bin: Vaciar papelera de reciclaje
+  item_count: '{{0}} elementos'
   label: Papelera de reciclaje
 weg:
   empty: No hay elementos para mostrar
