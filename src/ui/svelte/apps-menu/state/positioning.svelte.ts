@@ -1,7 +1,7 @@
 import { Widget } from "@seelen-ui/lib";
 import type { PhysicalMonitor } from "@seelen-ui/lib/types";
 import { globalState } from "./mod.svelte";
-import { StartDisplayMode, StartView } from "../constants";
+import { StartDisplayMode } from "../constants";
 
 let desiredPosition = $state<{ x: number; y: number } | null>(null);
 
@@ -70,7 +70,7 @@ $effect.root(() => {
 export async function onTriggered(cursorPosition?: { x: number; y: number } | null) {
   desiredPosition = cursorPosition ?? null;
 
-  globalState.view = StartView.Favorites;
+  globalState.view = globalState.defaultView;
   globalState.version++; // trigger reactive updates
 
   await Widget.self.show();
