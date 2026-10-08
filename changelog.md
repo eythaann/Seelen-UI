@@ -13,6 +13,9 @@
 - some dock pins not working as expected.
 - apps menu showing duplicated items caused by same lnk file at system and user folders.
 - external links (resources, news, etc.) not opening on the browser.
+- tray icon menus opening at the wrong position when the cursor is on a monitor at the left or above the primary one.
+- Task Manager tray icon not shown, and warnings logged for its hidden icons.
+- hidden tray icons becoming visible when their app updates them without changing their state.
 
 ## [2.8.8]
 

@@ -153,7 +153,11 @@ pub struct IconEventData {
     pub icon_handle: Option<isize>,
     pub callback_message: Option<u32>,
     pub version: Option<u32>,
-    pub is_visible: bool,
+    /// `NIS_HIDDEN` inverted, `None` if the message doesn't change it.
+    pub is_visible: Option<bool>,
+    /// `NIS_SHAREDICON`: the icon reuses the image of another icon with the same `HICON`.
+    /// `None` if the message doesn't change it.
+    pub shared_icon: Option<bool>,
 }
 
 /// System tray events captured by the hook

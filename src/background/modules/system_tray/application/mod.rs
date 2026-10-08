@@ -31,7 +31,7 @@ pub struct SystemTrayManager {
     owners: SyncHashMap<String, u32>,
     /// Icons reported by the hook whose registry entry wasn't written yet, by
     /// their session identity (see `session_identity`).
-    pending: SyncHashMap<String, IconEventData>,
+    pending: SyncHashMap<String, PendingIcon>,
     _loader: Option<TrayHookLoader>,
 }
 
@@ -85,6 +85,9 @@ impl SystemTrayManager {
     /// Drops the icons owned by a window that was just destroyed.
     fn on_window_destroyed(address: isize) {
         let manager = Self::instance();
+        manager
+            .pending
+            .retain(|(_, pending)| pending.data.window_handle != Some(address));
         let owns_icon = manager
             .icons
             .any(|(_, icon)| icon.window_handle == Some(address));
@@ -145,6 +148,13 @@ impl SystemTrayManager {
         Self::send(SystemTrayEvent::Changed);
         Ok(())
     }
+}
+
+/// Icon reported by the hook that has no registry entry yet.
+pub(super) struct PendingIcon {
+    data: IconEventData,
+    /// Whether a thread is already polling the registry for this icon.
+    lookup_running: bool,
 }
 
 const NOTIFY_ICON_SETTINGS: &str = "Control Panel\\NotifyIconSettings";

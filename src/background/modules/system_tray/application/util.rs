@@ -15,8 +15,8 @@ impl Util {
     /// for `WPARAM` and `LPARAM` values.
     ///
     /// Equivalent to the Win32 `MAKELPARAM` and `MAKEWPARAM` macros.
-    pub fn pack_i32(low: i16, high: i16) -> i32 {
-        low as i32 | ((high as i32) << 16)
+    pub fn pack_u32(low: u16, high: u16) -> u32 {
+        low as u32 | ((high as u32) << 16)
     }
 
     /// Gets the mouse position in screen coordinates.

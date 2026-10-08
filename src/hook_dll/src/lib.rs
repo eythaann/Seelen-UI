@@ -8,9 +8,9 @@ use windows::Win32::{
     UI::{
         Shell::{
             NIF_GUID, NIF_ICON, NIF_MESSAGE, NIF_STATE, NIF_TIP, NIM_ADD, NIM_DELETE, NIM_MODIFY,
-            NIM_SETVERSION, NIS_HIDDEN, NOTIFY_ICON_DATA_FLAGS, NOTIFY_ICON_INFOTIP_FLAGS,
-            NOTIFY_ICON_MESSAGE, NOTIFY_ICON_STATE, NOTIFYICONDATAW_0, SHLockShared,
-            SHUnlockShared,
+            NIM_SETVERSION, NIS_HIDDEN, NIS_SHAREDICON, NOTIFY_ICON_DATA_FLAGS,
+            NOTIFY_ICON_INFOTIP_FLAGS, NOTIFY_ICON_MESSAGE, NOTIFY_ICON_STATE, NOTIFYICONDATAW_0,
+            SHLockShared, SHUnlockShared,
         },
         WindowsAndMessaging::{
             CWPSTRUCT, CallNextHookEx, GetClassNameW, GetWindowThreadProcessId, WM_COPYDATA,
@@ -116,10 +116,13 @@ impl From<NotifyIconData> for IconEventData {
             None
         };
 
-        let mut is_visible = true;
-        if icon_data.flags.contains(NIF_STATE) {
-            is_visible = !icon_data.state.contains(NIS_HIDDEN);
-        }
+        // Only the state bits included in the mask are applied.
+        let state_bit = |bit: NOTIFY_ICON_STATE| {
+            (icon_data.flags.contains(NIF_STATE) && icon_data.state_mask.contains(bit))
+                .then(|| icon_data.state.contains(bit))
+        };
+        let is_visible = state_bit(NIS_HIDDEN).map(|hidden| !hidden);
+        let shared_icon = state_bit(NIS_SHAREDICON);
 
         IconEventData {
             uid,
@@ -130,6 +133,7 @@ impl From<NotifyIconData> for IconEventData {
             callback_message,
             version,
             is_visible,
+            shared_icon,
         }
     }
 }
