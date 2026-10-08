@@ -151,7 +151,8 @@ Run with `{ ...resolvedScopes, ...resolvedRemoteData, t }`, where `t(key, args)`
 - Special tagged objects render as real UI elements, produced by helper functions available in scope:
   - `icon(name, size)` / `Icon(...)` — an icon from the bundled icon set
   - `AppIcon(...)` — an application icon
-  - `Image(...)` — an image element
+  - `Image({ path | url, version? })` — an image element; pass `version` (any string or number that changes with the
+    file contents) to force a reload when the file is overwritten in place
   - `Button(...)` — a clickable button element
   - `Group(...)` — a container grouping other elements
 

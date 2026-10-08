@@ -29,6 +29,7 @@ const items = trayIcons
       onContextMenu,
       content: Image({
         path: icon.iconPath,
+        version: icon.iconImageHash,
       }),
     });
   });

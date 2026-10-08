@@ -2,6 +2,10 @@
 
 ## [2.8.9-dev]
 
+### fix
+
+- tray icons pinned in the toolbar not updating their image when the app changes it.
+
 ## [2.8.8]
 
 ### security

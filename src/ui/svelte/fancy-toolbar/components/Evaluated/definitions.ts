@@ -29,6 +29,8 @@ export type EvaluatedImageProps = z.infer<typeof EvaluatedImagePropsSchema>;
 const EvaluatedImagePropsSchema = z.object({
   url: z.string().nullish(),
   path: z.string().nullish(),
+  /** change it to force the image to be reloaded (e.g. when the file is overwritten in place) */
+  version: z.union([z.string(), z.number()]).nullish(),
 });
 
 export type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;

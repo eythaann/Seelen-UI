@@ -15,6 +15,14 @@
   let { content, parentId }: Props = $props();
 
   const parsed = $derived(parseComponent(content));
+
+  function imageSrc(props: { path?: string | null; url?: string | null; version?: string | number | null }): string {
+    const src = props.path ? convertFileSrc(props.path) : props.url || "";
+    if (!src || props.version == null || props.version === "") {
+      return src;
+    }
+    return `${src}${src.includes("?") ? "&" : "?"}v=${encodeURIComponent(props.version)}`;
+  }
 </script>
 
 {#if parsed}
@@ -33,10 +41,7 @@
   {:else if parsed.kind === ObjectComponentKind.AppIcon}
     <FileIcon path={parsed.props.path} umid={parsed.props.umid} />
   {:else if parsed.kind === ObjectComponentKind.Image}
-    <img
-      src={parsed.props.path ? convertFileSrc(parsed.props.path) : parsed.props.url || ""}
-      alt=""
-    />
+    <img src={imageSrc(parsed.props)} alt="" />
   {:else if parsed.kind === ObjectComponentKind.Button}
     <Button {parentId} {...parsed.props} />
   {/if}
