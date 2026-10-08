@@ -1,4 +1,5 @@
 mod audio_policy_config;
+mod process_image_name;
 mod quiet_hours_settings;
 
 pub use audio_policy_config::*;

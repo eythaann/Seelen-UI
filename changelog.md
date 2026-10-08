@@ -16,6 +16,7 @@
 - tray icon menus opening at the wrong position when the cursor is on a monitor at the left or above the primary one.
 - Task Manager tray icon not shown, and warnings logged for its hidden icons.
 - hidden tray icons becoming visible when their app updates them without changing their state.
+- tray icons of apps running as another user or elevated (e.g. Sunshine) not shown.
 
 ## [2.8.8]
 

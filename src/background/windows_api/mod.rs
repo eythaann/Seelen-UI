@@ -563,7 +563,13 @@ impl WindowsApi {
         Ok(is_frozen)
     }
 
+    /// Falls back to `get_process_path_by_pid` for processes we are not allowed to open.
     pub fn exe_path_by_process(process_id: u32) -> Result<OsString> {
+        Self::exe_path_by_process_handle(process_id)
+            .or_else(|err| Self::get_process_path_by_pid(process_id).map_err(|_| err))
+    }
+
+    fn exe_path_by_process_handle(process_id: u32) -> Result<OsString> {
         let mut path = WindowsString::new_to_fill(1024);
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {

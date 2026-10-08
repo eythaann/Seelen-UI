@@ -183,8 +183,11 @@ pub trait WindowsResultExt {
 }
 
 pub trait ResultLogExt {
+    type Success;
+
     /// Take the result and log it if there is an error
     fn log_error(self);
+    fn ok_logged(self) -> Option<Self::Success>;
 }
 
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
@@ -206,11 +209,25 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
 }
 
 impl<T, E: Into<AppError>> ResultLogExt for core::result::Result<T, E> {
+    type Success = T;
+
     #[inline(always)]
     #[track_caller]
     fn log_error(self) {
         if let Err(err) = self {
             log::error!("{:?}", err.into());
+        }
+    }
+
+    #[inline(always)]
+    #[track_caller]
+    fn ok_logged(self) -> Option<T> {
+        match self {
+            Ok(ok) => Some(ok),
+            Err(err) => {
+                log::error!("{:?}", err.into());
+                None
+            }
         }
     }
 }
