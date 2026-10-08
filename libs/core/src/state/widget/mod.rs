@@ -1,6 +1,7 @@
 pub mod context_menu;
 pub mod declaration;
 pub mod dialog;
+pub mod permissions;
 
 use std::collections::HashMap;
 

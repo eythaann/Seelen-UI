@@ -71,7 +71,7 @@ export const Navigation = memo(() => {
             icon={<Icon iconName="TbHome" />}
             collapsed={collapsed}
           />
-          {[RoutePath.General, RoutePath.Resource].map(Mapper)}
+          {[RoutePath.General, RoutePath.Security, RoutePath.Resource].map(Mapper)}
         </div>
 
         <div className={cs.separator} />

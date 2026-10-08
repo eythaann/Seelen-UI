@@ -14,6 +14,7 @@ use crate::{
     session::application::SessionManager,
     state::application::FULL_STATE,
     widgets::manager::WIDGET_MANAGER,
+    widgets::permissions::WIDGET_PERMISSIONS,
     widgets::popups::shortcut_conflicts::show_shortcut_conflict_popup,
 };
 
@@ -96,6 +97,7 @@ impl ResourceManager {
     pub fn emit_widgets(&self) -> Result<()> {
         let widgets = self.widgets();
         emit_to_webviews(SeelenEvent::StateWidgetsChanged, widgets.clone());
+        WIDGET_PERMISSIONS.remove_uninstalled_widgets().log_error();
 
         WIDGET_MANAGER.reconcile()?;
 

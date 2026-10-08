@@ -204,6 +204,7 @@ header:
     monitors: Monitores
     plugin: Plugins
     resources: Recursos
+    security: Seguridad
     session: Cuenta
     shortcuts: Atajos
     soundpack: Paquetes de sonido
@@ -260,6 +261,14 @@ save: Guardar
 save_and_restart: Guardar y reiniciar
 search: Buscar
 see_more: Ver más
+security:
+  empty: Aún no se ha permitido ni denegado ningún permiso a widgets.
+  perms:
+    kill_processes: Forzar el cierre de aplicaciones
+    manage_app_windows: Controlar las ventanas de otras aplicaciones
+    modify_configuration: Modificar la configuración de Seelen UI
+    open_file: Abrir archivos
+    run: Ejecutar programas
 session:
   logout: Desconectar
   plan: Plan

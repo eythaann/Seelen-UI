@@ -17,6 +17,7 @@ pub use theme::*;
 pub use wallpaper::*;
 pub use weg_items::*;
 pub use widget::dialog::*;
+pub use widget::permissions::*;
 pub use widget::*;
 pub use wm_layout::*;
 pub use workspaces::*;

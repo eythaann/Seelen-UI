@@ -371,6 +371,13 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         read_data_file(filename: String) -> String,
+    GetWidgetPermissions =
+        get_widget_permissions() -> std::collections::HashMap<WidgetId, std::collections::HashMap<WidgetPerm, WidgetPermState>>,
+    // Only callable by the settings widget.
+    SetWidgetPermissions =
+        @webview()
+        @fallible()
+        set_widget_permissions(permissions: std::collections::HashMap<WidgetId, std::collections::HashMap<WidgetPerm, WidgetPermState>>),
 
     // Shell
     GetNativeShellWallpaper =

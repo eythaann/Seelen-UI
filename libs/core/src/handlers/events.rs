@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::resource::PluginId;
+use crate::resource::{PluginId, WidgetId};
 use crate::state::*;
 use crate::system_state::*;
 
@@ -89,6 +89,7 @@ slu_events_declaration! {
     StateIconPacksChanged(Vec<IconPack>) as "icon-packs",
     StatePluginsChanged(Vec<Plugin>) as "plugins-changed",
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
+    WidgetPermissionsChanged(HashMap<WidgetId, HashMap<WidgetPerm, WidgetPermState>>) as "widget::permissions-changed",
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
 
     // system tray

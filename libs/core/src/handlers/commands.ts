@@ -82,6 +82,8 @@ export enum SeelenCommand {
   SetSelfZOrder = "set_self_z_order",
   WriteFile = "write_data_file",
   ReadFile = "read_data_file",
+  GetWidgetPermissions = "get_widget_permissions",
+  SetWidgetPermissions = "set_widget_permissions",
   GetNativeShellWallpaper = "get_native_shell_wallpaper",
   SetNativeShellWallpaper = "set_native_shell_wallpaper",
   GetUser = "get_user",

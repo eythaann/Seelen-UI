@@ -6,6 +6,7 @@ import { DeveloperTools } from "./modules/developer/infra.tsx";
 import { Information } from "./modules/extras/infrastructure.tsx";
 import { General } from "./modules/general/infra/index.tsx";
 import { ResourcesView } from "./modules/resources/infra.tsx";
+import { Security } from "./modules/security/infra.tsx";
 import { Shortcuts } from "./modules/shortcuts/infrastructure.tsx";
 
 import { Layout } from "./components/layout/index.tsx";
@@ -21,6 +22,7 @@ export function Routing() {
       <Route Component={Layout}>
         <Route index Component={Home} />
         <Route path={RoutePath.General} Component={General} />
+        <Route path={RoutePath.Security} Component={Security} />
         <Route path={RoutePath.Resource + "/*"} Component={ResourcesView} />
         <Route path={RoutePath.SettingsByMonitor} Component={SettingsByMonitor} />
         <Route path={RoutePath.Shortcuts} Component={Shortcuts} />

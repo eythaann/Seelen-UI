@@ -4,6 +4,7 @@ import { Modal } from "antd";
 import { monitors } from "./system";
 import { cloneDeep } from "lodash";
 import i18n from "../i18n";
+import { hasPermissionsChanges, restorePermissionsToLastSaved, savePermissions } from "./permissions";
 
 export const DEFAULT_SETTINGS = await invoke(SeelenCommand.StateGetDefaultSettings);
 
@@ -16,13 +17,30 @@ subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
 
 export const language = computed(() => settings.value.language);
 
-export const hasChanges = computed(() => initialSettings.value !== JSON.stringify(settings.value));
+const hasSettingsChanges = computed(() => initialSettings.value !== JSON.stringify(settings.value));
+export const hasChanges = computed(() => hasSettingsChanges.value || hasPermissionsChanges.value);
 export const needRestart = signal(false);
 
 const bundledAppConfigs = await invoke(SeelenCommand.StateGetSettingsByApp);
 export const appsConfig = computed(() => [...bundledAppConfigs, ...settings.value.byApp]);
 
 export async function saveSettings() {
+  try {
+    if (hasPermissionsChanges.value) {
+      await savePermissions();
+    }
+  } catch (error) {
+    Modal.error({
+      title: "Error on Save",
+      content: String(error),
+      centered: true,
+    });
+  }
+
+  if (!hasSettingsChanges.value) {
+    return;
+  }
+
   const s = settings.value;
 
   const referenced = new Set<string>();
@@ -75,4 +93,5 @@ effect(() => {
 
 export function restoreToLastSaved() {
   settings.value = JSON.parse(initialSettings.value);
+  restorePermissionsToLastSaved();
 }
