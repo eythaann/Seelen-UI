@@ -59,11 +59,7 @@
   }
 </script>
 
-<li
-  {@attach sortable.attach}
-  class="system-tray-entry"
-  data-dragging={sortable.isDragging}
->
+<li {@attach sortable.attach} class="system-tray-entry" data-dragging={sortable.isDragging}>
   <button
     class="system-tray-item"
     data-skin="transparent"
@@ -92,11 +88,19 @@
   >
     <div class="system-tray-item-icon-box">
       {#if !!item.iconPath}
-        <img
-          class="system-tray-item-icon"
-          src={convertFileSrc(item.iconPath) + `?hash=${item.iconImageHash || "null"}`}
-          alt=""
-        />
+        {#if item.isGlyph}
+          <!-- single color glyph drawn for the taskbar theme, tinted by the theme instead -->
+          <span
+            class="system-tray-item-icon system-tray-item-icon-glyph"
+            style:--icon-url={`url("${convertFileSrc(item.iconPath)}?hash=${item.iconImageHash || "null"}")`}
+          ></span>
+        {:else}
+          <img
+            class="system-tray-item-icon"
+            src={convertFileSrc(item.iconPath) + `?hash=${item.iconImageHash || "null"}`}
+            alt=""
+          />
+        {/if}
       {:else}
         <MissingIcon class="system-tray-item-icon" />
       {/if}

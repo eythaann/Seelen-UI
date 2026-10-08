@@ -221,11 +221,12 @@ impl SystemTrayManager {
         // Avoid re-reading the icon image if it's the same as the existing icon.
         if let Some(icon_handle) = icon_data.icon_handle
             && icon.icon_handle != Some(icon_handle)
-            && let Some((hash, path)) = save_icon_image(icon_handle, &icon.registry_key)
+            && let Some(image) = save_icon_image(icon_handle, &icon.registry_key)
         {
             icon.icon_handle = Some(icon_handle);
-            icon.icon_image_hash = Some(hash);
-            icon.icon_path = Some(path);
+            icon.icon_image_hash = Some(image.hash);
+            icon.icon_path = Some(image.path);
+            icon.is_glyph = image.is_glyph;
         }
 
         if let Some(callback_message) = icon_data.callback_message {
@@ -269,7 +270,6 @@ impl SystemTrayManager {
         let image = icon_data
             .icon_handle
             .and_then(|handle| save_icon_image(handle, &registry_key));
-        let (icon_image_hash, icon_path) = image.unzip();
 
         let icon = SysTrayIcon {
             registry_key,
@@ -279,8 +279,9 @@ impl SystemTrayManager {
             guid: icon_data.guid,
             tooltip: icon_data.tooltip.clone().unwrap_or_default(),
             icon_handle: icon_data.icon_handle,
-            icon_path,
-            icon_image_hash,
+            icon_image_hash: image.as_ref().map(|image| image.hash.clone()),
+            icon_path: image.as_ref().map(|image| image.path.clone()),
+            is_glyph: image.is_some_and(|image| image.is_glyph),
             callback_message: icon_data.callback_message,
             version: icon_data.version,
             // an icon added without state is visible
@@ -517,6 +518,13 @@ impl SystemTrayManager {
     }
 }
 
+/// Icon image written to disk by `save_icon_image`.
+struct SavedIconImage {
+    hash: String,
+    path: PathBuf,
+    is_glyph: bool,
+}
+
 /// Returns the id of the process that owns the window, if it exists.
 fn window_pid(handle: isize) -> Option<u32> {
     let mut pid = 0;
@@ -543,14 +551,18 @@ fn window_program_path(icon_data: &IconEventData) -> Option<PathBuf> {
         .and_then(|handle| Window::from(handle).process().program_path().ok_logged())
 }
 
-/// Saves the icon image as png in the temp dir, returning its hash and path.
-fn save_icon_image(icon_handle: isize, registry_key: &str) -> Option<(String, PathBuf)> {
+/// Saves the icon image as png in the temp dir.
+fn save_icon_image(icon_handle: isize, registry_key: &str) -> Option<SavedIconImage> {
     let img = convert_hicon_to_rgba_image(&HICON(icon_handle as _)).ok()?;
     let path = SEELEN_COMMON
         .app_temp_dir()
         .join(format!("{registry_key}.png"));
     img.save(&path).unwrap();
-    Some((image_to_hash(&img), path))
+    Some(SavedIconImage {
+        hash: image_to_hash(&img),
+        path,
+        is_glyph: is_glyph_image(&img),
+    })
 }
 
 /// Computes a hash of the icon image.
@@ -558,6 +570,19 @@ fn image_to_hash(icon_image: &image::RgbaImage) -> String {
     let mut hasher = DefaultHasher::new();
     icon_image.as_raw().hash(&mut hasher);
     format!("{:x}", hasher.finish())
+}
+
+/// Checks if every visible pixel has the same color, so the shape only lives in the
+/// alpha channel (theme dependent glyphs drawn for the taskbar) and it can be used as mask.
+fn is_glyph_image(icon_image: &image::RgbaImage) -> bool {
+    let mut visible = icon_image
+        .pixels()
+        .filter(|p| p[3] > 0)
+        .map(|p| [p[0], p[1], p[2]]);
+    let Some(base) = visible.next() else {
+        return false;
+    };
+    visible.all(|rgb| rgb == base)
 }
 
 /// Checks if the icon would change from the given icon data.

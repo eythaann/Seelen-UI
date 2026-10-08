@@ -21,6 +21,12 @@
           height: 1rem;
           object-fit: contain;
         }
+
+        .system-tray-item-icon-glyph {
+          display: block;
+          background-color: var(--slu-std-fg-color);
+          mask: var(--icon-url) center / contain no-repeat;
+        }
       }
 
       .system-tray-item-label {

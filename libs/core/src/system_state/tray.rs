@@ -48,6 +48,11 @@ pub struct SysTrayIcon {
     /// compare the entire image.
     pub icon_image_hash: Option<String>,
 
+    /// Whether the icon image is a single color glyph (all visible pixels share the same
+    /// color, the shape lives in the alpha channel). Shell icons like "Safely Remove Hardware"
+    /// are drawn this way for the taskbar theme, so the UI should use them as alpha mask.
+    pub is_glyph: bool,
+
     /// Application-defined message identifier.
     ///
     /// Used to send messages to the window that contains the icon.
