@@ -16,12 +16,12 @@ fn get_language_manager() -> &'static LanguageManager {
             LanguageEvent::LayoutChanged => {
                 emit_to_webviews(
                     SeelenEvent::SystemLanguagesChanged,
-                    &LanguageManager::instance().get_languages(),
+                    LanguageManager::instance().get_languages(),
                 );
             }
             LanguageEvent::ImeChanged => {
                 if let Ok(state) = LanguageManager::get_ime_state() {
-                    emit_to_webviews(SeelenEvent::SystemImeStateChanged, &state);
+                    emit_to_webviews(SeelenEvent::SystemImeStateChanged, state);
                 }
             }
         });

@@ -182,7 +182,7 @@ pub fn register_win_hook() -> Result<()> {
             if let Ok(pos) = Mouse::get_cursor_pos()
                 && last_pos != pos
             {
-                emit_to_webviews(SeelenEvent::GlobalMouseMove, &[pos.x, pos.y]);
+                emit_to_webviews(SeelenEvent::GlobalMouseMove, [pos.x, pos.y]);
                 last_pos = pos;
             }
             std::thread::sleep(sleep_time);

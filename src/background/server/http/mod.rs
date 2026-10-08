@@ -132,7 +132,9 @@ async fn run_http_server() {
     let router = Router::new()
         .push(api)
         .push(doc.into_router("/api-doc/openapi.json"))
-        .push(Router::with_path("api-doc").goal(scalar_docs));
+        .push(Router::with_path("api-doc").goal(scalar_docs))
+        // internal, kept out of the public api docs
+        .push(Router::with_path("events").goal(crate::server::events::events_ws));
 
     let addr = std::net::SocketAddr::from(([127, 0, 0, 1], LOCAL_API_PORT));
     let acceptor = match TcpListener::new(addr).try_bind().await {

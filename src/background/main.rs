@@ -158,11 +158,13 @@ async fn setup(app_handle: &tauri::AppHandle<tauri::Wry>) -> Result<()> {
     }
 
     SeelenUI::pre_start().await?;
+    // before the widgets are created, so they can connect to the events websocket right away
+    server::http::start_http_server();
     SeelenUI::start().await?;
+
     warn_if_elevated(app_handle);
     telemetry::start_telemetry();
     backups::infrastructure::start_backup_sync();
-    server::http::start_http_server();
     Ok(())
 }
 

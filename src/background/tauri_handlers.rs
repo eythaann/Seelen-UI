@@ -1,5 +1,5 @@
 use seelen_core::{
-    rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
+    handlers::SelfEventsToken, rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
     state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*,
     state::settings::shortcuts::SystemShortcutDeclaration, state::*, system_state::*,
 };

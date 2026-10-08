@@ -188,7 +188,7 @@ time = { workspace = true, features = ["formatting", "local-offset"] }
 scc = { workspace = true }
 open = "5.3.3"
 futures = { workspace = true }
-salvo = { workspace = true, features = ["oapi"] }
+salvo = { workspace = true, features = ["oapi", "websocket"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

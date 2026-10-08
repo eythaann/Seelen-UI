@@ -39,14 +39,24 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 
 pub fn emit_to_webviews<S>(event: &str, payload: S)
 where
-    S: serde::Serialize + Clone,
+    S: serde::Serialize,
 {
-    // log::trace!("Emitting {event} to webviews");
     if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
-        // log::debug!("Skipping event {event} because session is not active");
         return;
     }
-    get_app_handle().emit(event, payload).log_error();
+
+    // serialized once and shared by both transports
+    let payload = match serde_json::to_string(&payload) {
+        Ok(payload) => payload,
+        Err(err) => {
+            log::error!("Failed to serialize event {event}: {err}");
+            return;
+        }
+    };
+
+    crate::server::events::EVENTS_HUB.publish(event, &payload);
+    // kept for backward compatibility with widgets listening via the tauri api
+    get_app_handle().emit_str(event, payload).log_error();
 }
 
 pub struct SeelenUI {}

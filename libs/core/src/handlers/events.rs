@@ -5,7 +5,10 @@ use crate::state::*;
 use crate::system_state::*;
 
 macro_rules! slu_events_declaration {
-    ($($name:ident$(($payload:ty))? as $value:literal,)*) => {
+    ($(
+        $(@queued($($is_queued:tt)?))?
+        $name:ident$(($payload:ty))? as $value:literal,
+    )*) => {
         pub struct SeelenEvent;
 
         #[allow(non_upper_case_globals)]
@@ -13,6 +16,22 @@ macro_rules! slu_events_declaration {
             $(
                 pub const $name: &'static str = $value;
             )*
+
+            /// Events that must be delivered one by one. Any other event is a full-state
+            /// snapshot, so transports may coalesce it and deliver only its latest value.
+            const QUEUED: &'static [&'static str] = &[
+                $($(Self::$name, $($is_queued)?)?)*
+            ];
+
+            /// Whether the given name is a declared event.
+            pub fn exists(event: &str) -> bool {
+                [$(Self::$name),*].contains(&event)
+            }
+
+            /// Whether the event can't be coalesced (it carries an action or a delta, not a snapshot).
+            pub fn is_queued(event: &str) -> bool {
+                Self::QUEUED.contains(&event)
+            }
 
             #[allow(dead_code)]
             pub(crate) fn generate_ts_file(path: &str) {
@@ -55,6 +74,7 @@ slu_events_declaration! {
     SystemImeStateChanged(ImeState) as "system::ime-state-changed",
 
     UserChanged(User) as "user-changed",
+    @queued()
     UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
     UserAppWindowsPreviewsChanged(HashMap<isize, UserAppWindowPreview>) as "user::windows-previews-changed",
@@ -97,6 +117,7 @@ slu_events_declaration! {
 
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 
+    @queued()
     WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
 
     // Radios
@@ -114,6 +135,7 @@ slu_events_declaration! {
     StartMenuItemsChanged(Vec<StartMenuItem>) as "start-menu::items-changed",
 
     // SeelenWeg
+    @queued()
     WegAddItem(WegItemData) as "weg::add-item",
     WegItemsChanged(WegItems) as "weg::items-changed",
 
@@ -135,6 +157,7 @@ slu_events_declaration! {
     Notifications(Vec<AppNotification>) as "notifications",
 
     // Plugins
+    @queued()
     PluginEnabled(PluginId) as "plugin::enabled",
 
     // Shortcuts
@@ -142,4 +165,15 @@ slu_events_declaration! {
 
     // Widget debug info
     WidgetDebugInfoChanged(Vec<WidgetDebugInfo>) as "widget::debug-info-changed",
+}
+
+/// Credentials of a webview to connect to the global events websocket.
+#[derive(Debug, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(rename_all = "camelCase")]
+pub struct SelfEventsToken {
+    /// Identifies the webview, sent as the `token` query param.
+    pub token: String,
+    /// Websocket url, e.g. `ws://127.0.0.1:37074/events`.
+    pub endpoint: String,
 }

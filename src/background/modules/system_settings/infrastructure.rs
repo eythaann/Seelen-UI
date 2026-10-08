@@ -29,7 +29,7 @@ fn get_system_settings() -> &'static SystemSettings {
             if event == SystemSettingsEvent::ColorSchemeSwitched
                 && let Ok(is_dark) = SystemSettings::instance().get_dark_mode()
             {
-                emit_to_webviews(SeelenEvent::DarkModeChanged, &is_dark);
+                emit_to_webviews(SeelenEvent::DarkModeChanged, is_dark);
             }
         });
     });

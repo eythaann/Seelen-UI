@@ -1,6 +1,6 @@
 #[cfg(feature = "gen-binds")]
 use crate::{
-    rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
+    handlers::SelfEventsToken, rect::Rect, resource::*, state::by_monitor::MonitorConfiguration,
     state::by_wallpaper::WallpaperInstanceSettings, state::context_menu::*,
     state::settings::shortcuts::SystemShortcutDeclaration, state::*, system_state::*,
     utils::TsVoid,
@@ -425,6 +425,11 @@ slu_commands_declaration! {
     GetMediaWaveform =
         @fallible()
         get_media_waveform() -> AudioWaveform,
+
+    // events server
+    GetSelfToken =
+        @webview()
+        get_self_token() -> SelfEventsToken,
 
     // Power
     GetPowerStatus = get_power_status() -> PowerStatus,
