@@ -194,6 +194,11 @@ fn set_registry_notify_icon_promoted(key: &str, promoted: bool) -> Result<()> {
 ///
 /// Note: Explorer writes the entry while handling `NIM_ADD`, so for an icon seen for the first
 /// time it may not exist yet when the hook reports it.
+///
+/// For icons whose owner runs as SYSTEM or under a protected process (e.g. anti-cheat like
+/// Riot Vanguard), `window.process().program_path()` can fail because the process cannot be
+/// opened; in that case we fall back to matching by UID alone, since UID collisions within
+/// a single session are extremely rare and only last until the owning window is destroyed.
 pub fn find_registry_notify_icon(
     executable_path: Option<&Path>,
     guid: Option<uuid::Uuid>,
@@ -214,9 +219,12 @@ pub fn find_registry_notify_icon(
                 entry.icon_guid.is_none()
                     && uid.is_some()
                     && entry.icon_uid == uid
-                    && executable_path.as_ref().is_some_and(|path| {
-                        *path == entry.executable_path.to_string_lossy().to_lowercase()
-                    })
+                    && match &executable_path {
+                        Some(path) => {
+                            *path == entry.executable_path.to_string_lossy().to_lowercase()
+                        }
+                        None => true,
+                    }
             }
         })
 }

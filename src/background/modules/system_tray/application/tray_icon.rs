@@ -176,8 +176,11 @@ impl SystemTrayManager {
                             let path = SEELEN_COMMON
                                 .app_temp_dir()
                                 .join(format!("{}.png", to_update.registry_key));
-                            img.save(&path).unwrap();
-                            to_update.icon_path = Some(path);
+                            if let Err(err) = img.save(&path) {
+                                log::warn!("Failed to save tray icon snapshot to {path:?}: {err}");
+                            } else {
+                                to_update.icon_path = Some(path);
+                            }
                         }
                     }
 
@@ -226,8 +229,11 @@ impl SystemTrayManager {
                         let path = SEELEN_COMMON
                             .app_temp_dir()
                             .join(format!("{}.png", registry_key));
-                        img.save(&path).unwrap();
-                        icon_path = Some(path);
+                        if let Err(err) = img.save(&path) {
+                            log::warn!("Failed to save tray icon snapshot to {path:?}: {err}");
+                        } else {
+                            icon_path = Some(path);
+                        }
                     }
 
                     let icon = SysTrayIcon {
