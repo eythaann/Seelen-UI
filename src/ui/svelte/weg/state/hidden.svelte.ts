@@ -1,8 +1,8 @@
-import { HideMode, WegAttentionReveal, WegTemporalItemsVisibility, WindowAttention } from "@seelen-ui/lib/types";
+import { HideMode, WegAttentionReveal, WindowAttention } from "@seelen-ui/lib/types";
 import { virtualDesktops } from "./getters.svelte.ts";
 import { settingsState } from "./settings.svelte.ts";
 import { systemState } from "./system.svelte.ts";
-import { interactables, windowsState } from "./windows.svelte.ts";
+import { windowsState } from "./windows.svelte.ts";
 import { isThisWebviewFocused, isTouchPrimary } from "libs/ui/svelte/utils";
 
 const isSwitchingWorkspace = $derived(virtualDesktops.value.switching);
@@ -12,15 +12,11 @@ const isRevealedByAttention = $derived.by(() => {
   const reveal = settingsState.value.revealOnAttention;
   if (reveal === WegAttentionReveal.Never) return false;
 
-  const monitorId = systemState.currentMonitor.id;
-  const onlyThisMonitor = settingsState.value.temporalItemsVisibility === WegTemporalItemsVisibility.OnMonitor;
-
-  return interactables.value.some((w) => {
-    if (onlyThisMonitor && w.monitor !== monitorId) return false;
-    return reveal === WegAttentionReveal.WhileFlashing
+  return windowsState.dockWindows.some((w) =>
+    reveal === WegAttentionReveal.WhileFlashing
       ? w.attention === WindowAttention.Flashing
-      : w.attention === WindowAttention.Highlighted;
-  });
+      : w.attention === WindowAttention.Highlighted
+  );
 });
 
 let _hiddenByAutohide = $state(false);

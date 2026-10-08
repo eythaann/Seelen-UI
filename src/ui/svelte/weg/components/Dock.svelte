@@ -1,10 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import {
-    SeelenWegMode,
-    WegPinnedItemsVisibility,
-    WegTemporalItemsVisibility,
-  } from "@seelen-ui/lib/types";
+  import { SeelenWegMode, WegPinnedItemsVisibility } from "@seelen-ui/lib/types";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
   import { onDestroy } from "svelte";
@@ -13,7 +9,7 @@
   import { dockState, listToGroups } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
-  import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
+  import { getWindowsForItem, windowsState } from "../state/windows.svelte.ts";
   import { dockShouldBeHidden, setDockIsDraggingItem } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
   import { createDragDropManager } from "libs/ui/dnd.ts";
@@ -30,15 +26,8 @@
 
   function isItemVisible(item: SwItem): boolean {
     const pinnedVisibility = settings?.pinnedItemsVisibility as WegPinnedItemsVisibility;
-    const temporalVisibility = settings?.temporalItemsVisibility as WegTemporalItemsVisibility;
     const monitor = systemState.currentMonitor;
-
     const showPinned = pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
-    const filterByMonitor = temporalVisibility === WegTemporalItemsVisibility.OnMonitor;
-
-    const windows = filterByMonitor
-      ? interactables.value.filter((w) => w.monitor === monitor.id)
-      : interactables.value;
 
     if (item.type !== "AppOrFile") {
       return showPinned;
@@ -46,7 +35,7 @@
     if (item.pinned && showPinned) {
       return true;
     }
-    return getWindowsForItem(item as any, windows).length > 0;
+    return getWindowsForItem(item as any, windowsState.dockWindows).length > 0;
   }
 
   // splits the flat items array (left..., left-separator, center..., right-separator, ...right)

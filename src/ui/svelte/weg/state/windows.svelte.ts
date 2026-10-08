@@ -1,5 +1,11 @@
 import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import { type FocusedApp, SeelenWegSide, type UserAppWindow, type UserAppWindowColors } from "@seelen-ui/lib/types";
+import {
+  type FocusedApp,
+  SeelenWegSide,
+  type UserAppWindow,
+  type UserAppWindowColors,
+  WegTemporalItemsVisibility,
+} from "@seelen-ui/lib/types";
 import { settingsState } from "./settings.svelte.ts";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types.ts";
@@ -20,6 +26,14 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   if (e.payload.hwnd !== selfWinId.value) {
     setDelayedFocused.flush();
   }
+});
+
+/** windows that belong to this dock, honoring the "On Monitor" temporal items visibility */
+const _dockWindows = $derived.by(() => {
+  if (settingsState.value.temporalItemsVisibility !== WegTemporalItemsVisibility.OnMonitor) {
+    return interactables.value;
+  }
+  return interactables.value.filter((w) => w.monitor === widget.decoded.monitorId);
 });
 
 const _topInteractableWindow = $derived(
@@ -59,6 +73,10 @@ const _isDockOverlapped = $derived.by(() => {
 });
 
 class WindowsState {
+  get dockWindows() {
+    return _dockWindows;
+  }
+
   get topInteractableWindow() {
     return _topInteractableWindow;
   }

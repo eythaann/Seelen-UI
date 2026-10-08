@@ -5,6 +5,7 @@
 ### fix
 
 - tray icons pinned in the toolbar not updating their image when the app changes it.
+- dock icons including windows from other monitors when unpinned items visibility is set to "On Monitor".
 
 ## [2.8.8]
 
