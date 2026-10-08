@@ -167,9 +167,9 @@ impl UserAppsManager {
                 // get their AppUserModelId assigned after the window is already created.
                 let umid = window.app_user_model_id();
                 data.app_name = window.app_display_name().unwrap_or_default();
-                let (relaunch, prevent_pinning) = window.relaunch_info(&umid);
+                let (relaunch, prevent_pinning) = window.relaunch_info(&umid).unzip();
                 data.relaunch = relaunch;
-                data.prevent_pinning = prevent_pinning;
+                data.prevent_pinning = prevent_pinning.unwrap_or(false);
                 data.badge_value = umid
                     .as_ref()
                     .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));

@@ -34,6 +34,8 @@ Backend architecture rules:
 - Never write `#[tauri::command]` by hand. Commands are declared once in `libs/core/src/handlers/commands.rs`
   (`slu_commands_declaration!`) and their Tauri wrappers are generated at compile time; implement the handler body as a
   plain `impl crate::tauri_handlers::Handlers { pub fn your_command(...) { ... } }` block.
+- User over system: when the same resource exists both per-user and system-wide (start menu shortcuts, folders, registry
+  keys `HKCU` vs `HKLM`, settings, etc.), always prefer the user one; the system one is only a fallback.
 
 WinRT / COM safety:
 

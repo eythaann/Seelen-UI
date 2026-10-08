@@ -1,4 +1,6 @@
-use std::path::{Path, PathBuf};
+use std::collections::HashSet;
+use std::ffi::OsString;
+use std::path::{MAIN_SEPARATOR, Path, PathBuf};
 use std::sync::{Arc, LazyLock, OnceLock};
 use std::time::Duration;
 
@@ -102,6 +104,11 @@ impl StartMenuManager {
             .find_and_clone(|item| item.target.as_ref().is_some_and(|t| t == target))
     }
 
+    pub fn has_shortcut_with_umid(&self, umid: &str) -> bool {
+        self.shortcuts
+            .any(|item| item.umid.as_deref() == Some(umid))
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn get_by_file_umid(&self, umid: &str) -> Option<Arc<StartMenuItem>> {
         let matches = |item: &Arc<StartMenuItem>| {
@@ -121,7 +128,9 @@ impl StartMenuManager {
 
     /// Resolving each shortcut (lnk target, umid, toast activator) hits the shell, so it's done
     /// in parallel. The order of the given paths is preserved.
-    fn _process_file(path: PathBuf) -> Arc<StartMenuItem> {
+    ///
+    /// Also returns what the shortcut launches, used to drop duplicated shortcuts.
+    fn _process_file(path: PathBuf) -> (Arc<StartMenuItem>, Option<ShortcutIdentity>) {
         // The folders also contain files like desktop.ini, .url or .html, they aren't shell
         // links so there is nothing to resolve on them.
         let is_lnk = path
@@ -129,16 +138,21 @@ impl StartMenuManager {
             .is_some_and(|ext| ext.eq_ignore_ascii_case("lnk"));
 
         // one COM context for all the shell calls, instead of tearing it down after each one
-        let (target, umid, toast_activator) = if is_lnk {
+        let (resolved, umid, toast_activator) = if is_lnk {
             Com::run_with_context(|| {
-                let target = WindowsApi::resolve_lnk_target(&path).ok().map(|(t, ..)| t);
+                let resolved = WindowsApi::resolve_lnk_target(&path).ok();
                 let (umid, toast_activator) = WindowsApi::get_file_umid_and_toast_activator(&path);
-                Ok((target, umid, toast_activator))
+                Ok((resolved, umid, toast_activator))
             })
             .unwrap_or_default()
         } else {
             Default::default()
         };
+
+        let identity = resolved.as_ref().and_then(|(target, args, working_dir)| {
+            ShortcutIdentity::new(target, args, working_dir)
+        });
+        let target = resolved.map(|(target, ..)| target);
 
         // Get display name from filename without extension
         let display_name = path
@@ -147,29 +161,42 @@ impl StartMenuManager {
             .unwrap_or("Unknown")
             .to_string();
 
-        Arc::new(StartMenuItem {
+        let item = Arc::new(StartMenuItem {
             umid,
             toast_activator,
             path,
             target,
             display_name,
-        })
+        });
+        (item, identity)
     }
 
     /// win32 unpackaged
     ///
     /// The common and user folders are independent, so they are scanned at the same time and
     /// each one starts resolving its shortcuts without waiting for the other one.
+    ///
+    /// Some installers create the same shortcut in both folders, so shortcuts launching the same
+    /// target/arguments/working dir are deduplicated. User shortcuts go first so they win over
+    /// the common ones.
     fn load_shortcut_items() -> Vec<Arc<StartMenuItem>> {
-        let (a, b) = rayon::join(
-            || crate::utils::collect_files(&Self::common_items_path()),
+        let (user, common) = rayon::join(
             || crate::utils::collect_files(&Self::user_items_path()),
+            || crate::utils::collect_files(&Self::common_items_path()),
         );
 
-        a.into_par_iter()
-            .chain(b.into_par_iter())
+        let processed = user
+            .into_par_iter()
+            .chain(common.into_par_iter())
             .map(Self::_process_file)
-            .collect::<Vec<_>>()
+            .collect::<Vec<_>>();
+
+        let mut seen = HashSet::new();
+        processed
+            .into_iter()
+            .filter(|(_, identity)| identity.as_ref().is_none_or(|id| seen.insert(id.clone())))
+            .map(|(item, _)| item)
+            .collect()
     }
 
     /// Each package needs several WinRT calls, so they are resolved in parallel. Rayon balances
@@ -311,5 +338,30 @@ impl StartMenuManager {
         self.setup_file_watcher().log_error();
         // Setup package catalog listener
         self.setup_package_catalog_listener().log_error();
+    }
+}
+
+/// What a shortcut launches. Paths are compared case insensitive, as the file system does.
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+struct ShortcutIdentity {
+    target: String,
+    arguments: OsString,
+    working_dir: String,
+}
+
+impl ShortcutIdentity {
+    /// Shortcuts without a resolvable target (e.g. advertised MSI shortcuts) can't be compared.
+    fn new(target: &Path, arguments: &OsString, working_dir: &Path) -> Option<Self> {
+        if target.as_os_str().is_empty() {
+            return None;
+        }
+        Some(Self {
+            target: target.to_string_lossy().to_lowercase(),
+            arguments: arguments.clone(),
+            working_dir: working_dir
+                .to_string_lossy()
+                .trim_end_matches(MAIN_SEPARATOR)
+                .to_lowercase(),
+        })
     }
 }

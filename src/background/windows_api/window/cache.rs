@@ -8,7 +8,10 @@ use seelen_core::system_state::{
 };
 
 use crate::{
-    modules::{apps::application::WindowBadges, notifications::wpn_service::WpnService},
+    modules::{
+        apps::application::WindowBadges, notifications::wpn_service::WpnService,
+        start::application::StartMenuManager,
+    },
     utils::get_parts_of_inline_command,
     windows_api::types::AppUserModelId,
 };
@@ -18,37 +21,32 @@ use super::Window;
 impl Window {
     /// `Relaunch` info and `prevent_pinning` both only apply to windows with a
     /// property-store assigned umid, so they're derived from it together.
-    pub fn relaunch_info(&self, umid: &Option<AppUserModelId>) -> (Option<Relaunch>, bool) {
-        let mut prevent_pinning = false;
-
-        let relaunch = match umid {
-            Some(AppUserModelId::PropertyStore(_)) => {
-                if let Some(cmd) = self.relaunch_command() {
-                    let (command, args) = get_parts_of_inline_command(&cmd);
-                    let args = args.map(RelaunchArguments::String);
-
-                    let icon = self.relaunch_icon();
-                    prevent_pinning = self.prevent_pinning();
-
-                    Some(Relaunch {
-                        command,
-                        args,
-                        working_dir: None,
-                        icon,
-                    })
-                } else {
-                    None
-                }
-            }
-            _ => None,
+    pub fn relaunch_info(&self, umid: &Option<AppUserModelId>) -> Option<(Relaunch, bool)> {
+        let Some(AppUserModelId::PropertyStore(umid)) = umid else {
+            return None;
         };
 
-        (relaunch, prevent_pinning)
+        // apps with a start menu shortcut are launched through `shell:AppsFolder\umid`, which
+        // already applies the shortcut arguments and working dir
+        if StartMenuManager::instance().has_shortcut_with_umid(umid) {
+            return None;
+        }
+
+        let cmd = self.relaunch_command()?;
+        let (command, args) = get_parts_of_inline_command(&cmd);
+
+        let relaunch = Relaunch {
+            command,
+            args: args.map(RelaunchArguments::String),
+            working_dir: None,
+            icon: self.relaunch_icon(),
+        };
+        Some((relaunch, self.prevent_pinning()))
     }
 
     pub fn to_serializable(self: &Window) -> UserAppWindow {
         let umid = self.app_user_model_id();
-        let (relaunch, prevent_pinning) = self.relaunch_info(&umid);
+        let (relaunch, prevent_pinning) = self.relaunch_info(&umid).unzip();
         let badge = WindowBadges::instance().get(self.address());
         let badge_value = umid
             .as_ref()
@@ -64,7 +62,7 @@ impl Window {
             is_fullscreen: self.is_fullscreen(),
             umid: umid.map(|umid| umid.to_string()),
             process: self.process().to_serializable(),
-            prevent_pinning,
+            prevent_pinning: prevent_pinning.unwrap_or(false),
             relaunch,
             rect: self.inner_rect().ok(),
             last_foreground_at: 0,

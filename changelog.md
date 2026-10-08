@@ -6,6 +6,8 @@
 
 - tray icons pinned in the toolbar not updating their image when the app changes it.
 - dock icons including windows from other monitors when unpinned items visibility is set to "On Monitor".
+- some dock pins not working as expected.
+- apps menu showing duplicated items caused by same lnk file at system and user folders.
 
 ## [2.8.8]
 
