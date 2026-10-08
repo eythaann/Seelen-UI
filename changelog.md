@@ -12,6 +12,7 @@
 - dock icons including windows from other monitors when unpinned items visibility is set to "On Monitor".
 - some dock pins not working as expected.
 - apps menu showing duplicated items caused by same lnk file at system and user folders.
+- external links (resources, news, etc.) not opening on the browser.
 
 ## [2.8.8]
 

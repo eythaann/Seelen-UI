@@ -100,6 +100,15 @@ impl WidgetWebview {
         }
 
         let window = builder
+            // wry silently denies new windows if no handler is set, so `target="_blank"` links
+            // and `window.open` did nothing (tauri-plugin-shell used to intercept these clicks).
+            // External links are opened on the default handler instead.
+            .on_new_window(|url, _features| {
+                if matches!(url.scheme(), "http" | "https" | "mailto" | "tel") {
+                    WindowsApi::execute(url.to_string(), None, None, false).log_error();
+                }
+                tauri::webview::NewWindowResponse::Deny
+            })
             .data_directory(args.data_directory())
             .additional_browser_args(&args.to_string())
             .build()?;
