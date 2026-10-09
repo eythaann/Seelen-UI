@@ -101,18 +101,19 @@ body {
 }
 
 .ft-bar-item {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
   min-width: 0;
   padding: var(--item-padding);
 
   .ft-bar-item-content {
     position: relative;
-    height: var(--config-item-size);
     display: flex;
     align-items: center;
+    height: var(--config-item-size);
+    min-width: 0;
 
     > span {
       text-wrap: nowrap;

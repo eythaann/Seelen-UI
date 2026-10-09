@@ -18,6 +18,7 @@
 - hidden tray icons becoming visible when their app updates them without changing their state.
 - tray icons of apps running as another user or elevated (e.g. Sunshine) not shown.
 - single color tray icons (e.g. USB connected) shown always white, they are now tinted to follow the theme.
+- toolbar long text overflow.
 
 ## [2.8.8]
 
