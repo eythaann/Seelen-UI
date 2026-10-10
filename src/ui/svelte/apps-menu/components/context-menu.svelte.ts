@@ -1,7 +1,6 @@
-import { invoke, SeelenCommand, SeelenEvent, Widget } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { ContextMenu, ContextMenuCallbackPayload, StartMenuItem, WidgetId } from "@seelen-ui/lib/types";
 import { type FavFolderItem, globalState } from "../state/mod.svelte";
-import { emit } from "@tauri-apps/api/event";
 import { iconPackManager } from "libs/ui/svelte/components/Icon/common.svelte";
 
 export const CONTEXT_MENU_ID = crypto.randomUUID();
@@ -22,15 +21,9 @@ Widget.self.webview.listen<ContextMenuCallbackPayload>(
       Widget.self.hide();
       invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path });
     } else if (key === "pin_to_dock") {
-      emit(SeelenEvent.WegAddItem, {
-        id: crypto.randomUUID(),
-        displayName: item.display_name,
-        umid: item.umid,
-        path: item.path,
-        pinned: true,
-        preventPinning: false,
-        relaunch: null,
-      });
+      // the dock listens to SeelenEvent.WegAddItem over the events channel, a tauri emit
+      // from here never reaches it, so the backend emits it.
+      invoke(SeelenCommand.WegPinItem, { path: item.path, umid: item.umid });
     } else if (key === "run_as_admin") {
       Widget.self.hide();
       const program = item.umid ? `shell:AppsFolder\\${item.umid}` : item.path;
@@ -91,12 +84,22 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
   const umid = item.umid;
   const path = item.path.toLowerCase();
 
+  const isApp = !!umid || path.endsWith(".exe") || path.endsWith(".lnk");
+
   const items: ContextMenu["items"] = [
     {
       type: "Item",
       key: "pin",
       label: isPinned ? t("unpin") : t("pin"),
       icon: isPinned ? "TbPinnedOff" : "TbPin",
+      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+    },
+    { type: "Separator" },
+    {
+      type: "Item",
+      key: "pin_to_dock",
+      label: t("pin_to_dock"),
+      icon: "RiPushpinLine",
       callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
     },
   ];
@@ -111,27 +114,26 @@ export function getItemContextMenu(item: StartMenuItem, t: (key: string) => stri
     });
   }
 
-  const isApp = !!umid || path.endsWith(".exe") || path.endsWith(".lnk");
-
   if (isApp) {
-    items.push({
-      type: "Item" as const,
-      key: "run_as_admin",
-      label: t("run_as_admin"),
-      icon: "MdOutlineAdminPanelSettings",
-      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-    });
-  }
-
-  // only apps can be uninstalled, not documents found by the search
-  if (isApp) {
-    items.push({
-      type: "Item",
-      key: "uninstall",
-      label: t("uninstall"),
-      icon: "FaRegTrashAlt",
-      callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
-    });
+    items.push(
+      {
+        type: "Item",
+        key: "run_as_admin",
+        label: t("run_as_admin"),
+        icon: "MdOutlineAdminPanelSettings",
+        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+      },
+      { type: "Separator" },
+      // only apps can be uninstalled, not documents found by the search
+      {
+        type: "Item",
+        key: "uninstall",
+        label: t("uninstall"),
+        icon: "FaRegTrashAlt",
+        callbackEvent: CONTEXT_MENU_CALLBACK_EVENT,
+      },
+      { type: "Separator" },
+    );
   }
 
   items.push({

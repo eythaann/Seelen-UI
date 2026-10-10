@@ -73,11 +73,23 @@ export const dockState = {
 };
 
 subscribe(SeelenEvent.WegAddItem, (e) => {
-  const item: WegItem = {
+  const item: AppOrFileWegItem = {
     ...e.payload,
     id: crypto.randomUUID(),
     type: "AppOrFile",
   };
+
+  // the app could already be on the dock, pinned or only open, so it is pinned instead of
+  // being added again.
+  const existing = _dockState.items.find(
+    (i): i is AppOrFileWegItem => i.type === "AppOrFile" && isSameAppOrFile(i, item),
+  );
+  if (existing) {
+    if (!existing.pinned) {
+      dockStateActions.pinApp(existing.id);
+    }
+    return;
+  }
 
   const items = [..._dockState.items];
   const separatorIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
@@ -106,6 +118,15 @@ listen<SyncPayload>("hidden::sync-dock-items", ({ payload }) => {
 const emitSyncEvent = debounce((state: OptimisticDockState) => {
   emit<SyncPayload>("hidden::sync-dock-items", { source: CLIENT_ID, state });
 }, 300);
+
+/** Same umid, or same path when neither has one (paths are case insensitive on Windows). */
+function isSameAppOrFile(a: AppOrFileWegItem, b: AppOrFileWegItem): boolean {
+  if (a.umid && b.umid) {
+    return a.umid === b.umid;
+  }
+  const path = a.path.toLowerCase();
+  return path !== "" && path === b.path.toLowerCase();
+}
 
 export function listToGroups(items: WegItem[], includeSeparator = false) {
   let idx1 = items.findIndex((i) => typeof i !== "string" && i.id === HARDCODED_SEPARATOR_LEFT.id);

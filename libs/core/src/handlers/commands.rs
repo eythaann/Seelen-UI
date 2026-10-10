@@ -475,7 +475,12 @@ slu_commands_declaration! {
     WegPinItem =
         @webview()
         @fallible()
-        weg_pin_item(path: std::path::PathBuf),
+        weg_pin_item(
+        path: std::path::PathBuf,
+        /// packaged apps have no path, so they are pinned by umid
+        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        umid: Option<String>
+    ),
     WegImportPinnedTaskbarItems =
         @webview()
         @fallible()

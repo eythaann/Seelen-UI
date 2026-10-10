@@ -5,6 +5,7 @@ use seelen_core::{handlers::SeelenEvent, state::WegItemData};
 use crate::{
     app::emit_to_webviews,
     error::Result,
+    modules::start::application::StartMenuManager,
     state::application::WEG_ITEMS_MANAGER,
     widgets::permissions::{WidgetPerm, request_widget_permission},
     windows_api::{WindowsApi, window::Window},
@@ -50,18 +51,34 @@ impl crate::tauri_handlers::Handlers {
         Ok(())
     }
 
-    pub fn weg_pin_item(webview: tauri::WebviewWindow, path: PathBuf) -> Result<()> {
+    pub fn weg_pin_item(
+        webview: tauri::WebviewWindow,
+        path: PathBuf,
+        umid: Option<String>,
+    ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
-        if !path.exists() || path.is_dir() {
-            return Err("Invalid path".into());
-        }
 
-        let umid = WindowsApi::get_file_umid(&path).ok();
-        let display_name = WindowsApi::get_executable_display_name(&path).unwrap_or_else(|_| {
-            path.file_stem()
-                .map(|s| s.to_string_lossy().to_string())
-                .unwrap_or_else(|| "Unknown".to_string())
-        });
+        // packaged apps have no path, only the umid
+        let (umid, display_name) = if path.as_os_str().is_empty() {
+            let umid = umid.ok_or("Invalid path")?;
+            let display_name = StartMenuManager::instance()
+                .get_by_file_umid(&umid)
+                .map(|item| item.display_name.clone())
+                .unwrap_or_else(|| umid.clone());
+            (Some(umid), display_name)
+        } else {
+            if !path.exists() || path.is_dir() {
+                return Err("Invalid path".into());
+            }
+            let umid = umid.or_else(|| WindowsApi::get_file_umid(&path).ok());
+            let display_name =
+                WindowsApi::get_executable_display_name(&path).unwrap_or_else(|_| {
+                    path.file_stem()
+                        .map(|s| s.to_string_lossy().to_string())
+                        .unwrap_or_else(|| "Unknown".to_string())
+                });
+            (umid, display_name)
+        };
 
         let item = WegItemData {
             id: uuid::Uuid::new_v4(),

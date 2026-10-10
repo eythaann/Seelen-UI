@@ -19,6 +19,8 @@
 - tray icons of apps running as another user or elevated (e.g. Sunshine) not shown.
 - single color tray icons (e.g. USB connected) shown always white, they are now tinted to follow the theme.
 - toolbar long text overflow.
+- "Pin to Dock" missing on the apps menu context menu, and not working for any app.
+- pinning an app already present on the dock adding it again instead of pinning the existing item.
 
 ## [2.8.8]
 

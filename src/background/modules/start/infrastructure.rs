@@ -12,7 +12,7 @@ fn get_start_menu_manager() -> &'static StartMenuManager {
         StartMenuManager::subscribe(|_event| {
             emit_to_webviews(
                 SeelenEvent::StartMenuItemsChanged,
-                get_start_menu_manager().get_all(),
+                StartMenuManager::instance().get_all(),
             );
         });
     });

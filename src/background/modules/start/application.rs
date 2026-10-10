@@ -26,8 +26,10 @@ use crate::{
 };
 
 pub struct StartMenuManager {
-    /// win32 unpackaged, from the start menu folders. Only refreshed by the file watcher.
-    shortcuts: SyncVec<Arc<StartMenuItem>>,
+    /// win32 unpackaged, from the current user start menu folder. Only refreshed by the file watcher.
+    user_menu: SyncVec<ShortcutEntry>,
+    /// win32 unpackaged, from the start menu folder shared by all users. Only refreshed by the file watcher.
+    system_menu: SyncVec<ShortcutEntry>,
     /// win32/uwp packaged, from the package catalog. Only refreshed by the package events.
     packaged: SyncVec<Arc<StartMenuItem>>,
     _file_watcher: OnceLock<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>,
@@ -60,7 +62,8 @@ impl StartMenuManager {
 
     fn new() -> StartMenuManager {
         StartMenuManager {
-            shortcuts: SyncVec::new(),
+            user_menu: SyncVec::new(),
+            system_menu: SyncVec::new(),
             packaged: SyncVec::new(),
             _file_watcher: OnceLock::new(),
             _package_catalog: OnceLock::new(),
@@ -79,10 +82,7 @@ impl StartMenuManager {
     /// the listeners that keep them updated. Should be awaited during the app startup.
     pub fn initialize() -> Result<()> {
         let manager = Self::instance();
-        manager.shortcuts.replace(crate::measure!(
-            "StartMenu Shortcuts",
-            Self::load_shortcut_items()
-        ));
+        crate::measure!("StartMenu Shortcuts", manager.load_shortcuts());
         manager.packaged.replace(crate::measure!(
             "StartMenu Packaged",
             Self::load_packaged_items()?
@@ -91,27 +91,64 @@ impl StartMenuManager {
         Ok(())
     }
 
-    /// Shortcuts followed by the packaged apps.
+    /// User shortcuts, then the system ones, then the packaged apps, without duplicates as the
+    /// native start menu shows them. The same app can be in both folders, so an item is dropped
+    /// if an earlier one has the same umid or is a shortcut launching the same
+    /// target/arguments/working dir. This way user items win over the system ones.
     pub fn get_all(&self) -> Vec<Arc<StartMenuItem>> {
-        let mut items = self.shortcuts.to_vec();
-        items.extend(self.packaged.to_vec());
+        let mut seen_umids = HashSet::new();
+        let mut seen_identities = HashSet::new();
+
+        let mut is_new = |item: &StartMenuItem, identity: Option<&ShortcutIdentity>| {
+            // both are always registered, so later duplicates of any of them are also dropped
+            let new_umid = item
+                .umid
+                .as_ref()
+                .is_none_or(|umid| seen_umids.insert(umid.clone()));
+            let new_identity = identity.is_none_or(|id| seen_identities.insert(id.clone()));
+            new_umid && new_identity
+        };
+
+        let mut items = Vec::new();
+        let shortcuts = self
+            .user_menu
+            .to_vec()
+            .into_iter()
+            .chain(self.system_menu.to_vec());
+        for entry in shortcuts {
+            if is_new(&entry.item, entry.identity.as_ref()) {
+                items.push(entry.item);
+            }
+        }
+        for item in self.packaged.to_vec() {
+            if is_new(&item, None) {
+                items.push(item);
+            }
+        }
         items
+    }
+
+    /// User shortcuts are checked first, as they win over the system ones.
+    fn find_shortcut(&self, f: impl Fn(&StartMenuItem) -> bool) -> Option<Arc<StartMenuItem>> {
+        self.user_menu
+            .find_and_clone(|entry| f(&entry.item))
+            .or_else(|| self.system_menu.find_and_clone(|entry| f(&entry.item)))
+            .map(|entry| entry.item)
     }
 
     /// Only shortcuts have a target, packaged apps don't.
     pub fn get_by_target(&self, target: &Path) -> Option<Arc<StartMenuItem>> {
-        self.shortcuts
-            .find_and_clone(|item| item.target.as_ref().is_some_and(|t| t == target))
+        self.find_shortcut(|item| item.target.as_ref().is_some_and(|t| t == target))
     }
 
     pub fn has_shortcut_with_umid(&self, umid: &str) -> bool {
-        self.shortcuts
-            .any(|item| item.umid.as_deref() == Some(umid))
+        let matches = |entry: &ShortcutEntry| entry.item.umid.as_deref() == Some(umid);
+        self.user_menu.any(matches) || self.system_menu.any(matches)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn get_by_file_umid(&self, umid: &str) -> Option<Arc<StartMenuItem>> {
-        let matches = |item: &Arc<StartMenuItem>| {
+        let matches = |item: &StartMenuItem| {
             if let Some(item_umid) = &item.umid {
                 return item_umid == umid;
             }
@@ -121,16 +158,15 @@ impl StartMenuManager {
             }
             false
         };
-        self.shortcuts
-            .find_and_clone(matches)
-            .or_else(|| self.packaged.find_and_clone(matches))
+        self.find_shortcut(matches)
+            .or_else(|| self.packaged.find_and_clone(|item| matches(item)))
     }
 
     /// Resolving each shortcut (lnk target, umid, toast activator) hits the shell, so it's done
     /// in parallel. The order of the given paths is preserved.
     ///
-    /// Also returns what the shortcut launches, used to drop duplicated shortcuts.
-    fn _process_file(path: PathBuf) -> (Arc<StartMenuItem>, Option<ShortcutIdentity>) {
+    /// Also keeps what the shortcut launches, used to drop duplicated shortcuts.
+    fn _process_file(path: PathBuf) -> ShortcutEntry {
         // The folders also contain files like desktop.ini, .url or .html, they aren't shell
         // links so there is nothing to resolve on them.
         let is_lnk = path
@@ -168,7 +204,7 @@ impl StartMenuManager {
             target,
             display_name,
         });
-        (item, identity)
+        ShortcutEntry { item, identity }
     }
 
     /// win32 unpackaged
@@ -176,26 +212,20 @@ impl StartMenuManager {
     /// The common and user folders are independent, so they are scanned at the same time and
     /// each one starts resolving its shortcuts without waiting for the other one.
     ///
-    /// Some installers create the same shortcut in both folders, so shortcuts launching the same
-    /// target/arguments/working dir are deduplicated. User shortcuts go first so they win over
-    /// the common ones.
-    fn load_shortcut_items() -> Vec<Arc<StartMenuItem>> {
-        let (user, common) = rayon::join(
-            || crate::utils::collect_files(&Self::user_items_path()),
-            || crate::utils::collect_files(&Self::common_items_path()),
+    /// Everything is kept, duplicates are only dropped on [`Self::get_all`].
+    fn load_shortcuts(&self) {
+        let (user, system) = rayon::join(
+            || Self::load_shortcut_items(&Self::user_items_path()),
+            || Self::load_shortcut_items(&Self::common_items_path()),
         );
+        self.user_menu.replace(user);
+        self.system_menu.replace(system);
+    }
 
-        let processed = user
+    fn load_shortcut_items(folder: &Path) -> Vec<ShortcutEntry> {
+        crate::utils::collect_files(folder)
             .into_par_iter()
-            .chain(common.into_par_iter())
             .map(Self::_process_file)
-            .collect::<Vec<_>>();
-
-        let mut seen = HashSet::new();
-        processed
-            .into_iter()
-            .filter(|(_, identity)| identity.as_ref().is_none_or(|id| seen.insert(id.clone())))
-            .map(|(item, _)| item)
             .collect()
     }
 
@@ -290,9 +320,7 @@ impl StartMenuManager {
     }
 
     fn reload_shortcuts() {
-        Self::instance()
-            .shortcuts
-            .replace(Self::load_shortcut_items());
+        Self::instance().load_shortcuts();
         Self::send(StartMenuEvent::ItemsRefreshed);
     }
 
@@ -339,6 +367,13 @@ impl StartMenuManager {
         // Setup package catalog listener
         self.setup_package_catalog_listener().log_error();
     }
+}
+
+/// A shortcut file and what it launches.
+#[derive(Debug, Clone)]
+struct ShortcutEntry {
+    item: Arc<StartMenuItem>,
+    identity: Option<ShortcutIdentity>,
 }
 
 /// What a shortcut launches. Paths are compared case insensitive, as the file system does.
