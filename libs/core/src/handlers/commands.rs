@@ -355,6 +355,10 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         get_self_window_handle() -> isize,
+    NormalizeSelfDevicePixelRatio =
+        @webview()
+        @fallible()
+        normalize_self_device_pixel_ratio(),
     SetSelfPosition =
         @webview()
         @fallible()

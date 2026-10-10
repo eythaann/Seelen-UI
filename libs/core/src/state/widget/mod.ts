@@ -187,73 +187,17 @@ export class Widget extends WidgetBasics {
     }
   }
 
-  // play with zoom level to reset device pixel ratio to 1:1
+  /**
+   * Makes the webview render 1 CSS px = 1 physical px on every monitor.
+   *
+   * Done natively by pinning the WebView2 rasterization scale to 1.0 and disabling its
+   * own monitor DPI tracking. A zoom-based compensation from here (`zoom = 1 / dpr`) is
+   * unreliable on multi-monitor/mixed-DPI setups: WebView2 updates its rasterization scale
+   * asynchronously after a monitor change and `devicePixelRatio` lags behind `setZoom`,
+   * so the correction gets computed from stale readings and overshoots.
+   */
   private async normalizeDevicePixelRatio(): Promise<void> {
-    // NOTE: intentionally *not* derived from `window.scaleFactor()` (the OS/monitor
-    // DPI scale). That value doesn't necessarily match this webview's own unzoomed
-    // devicePixelRatio (e.g. `window.scaleFactor()` = 1.5 was observed while the
-    // webview's native devicePixelRatio was already 1), so using it as the
-    // compensation source made the correction converge on the wrong target and spin
-    // forever.
-    //
-    // Root cause is in tao itself: `Window::scale_factor()` is not a live query, it's
-    // a cached field (`window_state.scale_factor`) that tao only ever refreshes from
-    // the `WM_DPICHANGED` handler (tao's platform_impl/windows/event_loop.rs). Windows
-    // does not reliably deliver `WM_DPICHANGED` to a window moved/resized while
-    // hidden, so that cache can go stale and stay wrong indefinitely - unlike our own
-    // `WindowsApi::get_monitor_scale_factor` (src/background/windows_api/mod.rs),
-    // which calls `GetDpiForMonitor` live on every call. `globalThis.devicePixelRatio`
-    // is ground truth for what the webview is actually rendering at regardless of
-    // which upstream cache is stale, so we accumulate the correction from that
-    // instead, folding the zoom already applied into the next reading.
-    let zoom = 1;
-    // onScaleChanged / onMoved / onResized / the retest below can all trigger a call
-    // while a previous call's setZoom is still in flight. Without serializing them,
-    // two calls can race on `zoom` and on the webview's actual zoom factor, so the
-    // accumulator here permanently desyncs from what's really applied and the WARN
-    // below fires forever. Chain calls onto this promise so only one runs at a time.
-    let queue = Promise.resolve();
-
-    const normalizeDpr = (retry: number = 0) => {
-      queue = queue.then(async () => {
-        const dpr = globalThis.devicePixelRatio;
-        if (dpr === 1) {
-          return;
-        }
-
-        console.debug(`normalizeDpr: dpr = ${dpr}, current zoom = ${zoom}`);
-
-        zoom = zoom / dpr;
-        await this.webview.setZoom(zoom);
-        console.debug(`Zoom compensation set to ${zoom}`);
-
-        if (globalThis.devicePixelRatio !== 1) {
-          console.warn(
-            `DPR normalization failed! dpr = ${globalThis.devicePixelRatio}, zoom applied = ${zoom}`,
-          );
-          if (retry < 5) {
-            normalizeDpr(retry + 1);
-          }
-        }
-      });
-      return queue;
-    };
-
-    // onScaleChanged relies on WM_DPICHANGED, which is not reliably emitted for a
-    // window that is repositioned while hidden (e.g. moved to another monitor before
-    // being shown). onMoved/onResized do fire in that case, so re-check the scale
-    // factor whenever the window's position or size changes.
-    const recheckDpr = debounce(() => {
-      if (globalThis.devicePixelRatio !== 1) {
-        normalizeDpr();
-      }
-    }, 33);
-
-    await this.window.onScaleChanged(recheckDpr);
-    this.onMoved(recheckDpr);
-    this.onResized(recheckDpr);
-
-    await normalizeDpr();
+    await invoke(SeelenCommand.NormalizeSelfDevicePixelRatio);
   }
 
   /**

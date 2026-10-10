@@ -78,6 +78,7 @@ export enum SeelenCommand {
   TriggerDialog = "trigger_dialog",
   SetCurrentWidgetStatus = "set_current_widget_status",
   GetSelfWindowId = "get_self_window_handle",
+  NormalizeSelfDevicePixelRatio = "normalize_self_device_pixel_ratio",
   SetSelfPosition = "set_self_position",
   SetSelfZOrder = "set_self_z_order",
   WriteFile = "write_data_file",

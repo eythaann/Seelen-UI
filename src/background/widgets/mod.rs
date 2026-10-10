@@ -255,6 +255,10 @@ impl crate::tauri_handlers::Handlers {
         Ok(webview.hwnd()?.0 as isize)
     }
 
+    pub fn normalize_self_device_pixel_ratio(webview: tauri::WebviewWindow) -> Result<()> {
+        webview::lock_rasterization_scale_to_one(&webview)
+    }
+
     pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()> {
         use windows::Win32::Graphics::Gdi::*;
         use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;

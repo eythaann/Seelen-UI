@@ -131,6 +131,34 @@ impl WidgetWebview {
     }
 }
 
+/// Makes the webview render 1 CSS px = 1 physical px (`devicePixelRatio` = 1) on every monitor.
+///
+/// By default WebView2 tracks the monitor DPI itself (`ShouldDetectMonitorScaleChanges`) and
+/// updates its `RasterizationScale` asynchronously after the window crosses monitors, so any
+/// zoom-based compensation done from the webview races against it (and against `WM_DPICHANGED`
+/// not being delivered to hidden windows). Taking ownership of the scale and pinning it to 1.0
+/// removes the race entirely: the scale never changes again, whatever monitor the window is on.
+pub fn lock_rasterization_scale_to_one(webview: &tauri::WebviewWindow) -> Result<()> {
+    use webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2Controller3;
+    use windows_core::Interface;
+
+    webview.with_webview(|platform_webview| {
+        let controller = platform_webview.controller();
+        let result = (|| unsafe {
+            // reset any zoom compensation applied before (zoom persists across reloads)
+            controller.SetZoomFactor(1.0)?;
+            let controller = controller.cast::<ICoreWebView2Controller3>()?;
+            controller.SetShouldDetectMonitorScaleChanges(false)?;
+            controller.SetRasterizationScale(1.0)
+        })();
+
+        if let Err(err) = result {
+            log::error!("Failed to lock webview rasterization scale: {err:?}");
+        }
+    })?;
+    Ok(())
+}
+
 /// Forces the WebView2 renderer to react as if the OS was under memory pressure,
 /// via the same CDP call DevTools issues internally. Unlike `window.gc()`, this
 /// actually makes V8/Blink release freed pages back to the OS, because real pressure
