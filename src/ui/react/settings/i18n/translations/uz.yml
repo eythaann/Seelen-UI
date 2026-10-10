@@ -202,6 +202,7 @@ header:
     monitors: Monitorlar
     plugin: Plaginlar
     resources: Resurslar
+    security: Xavfsizlik
     session: Hisob
     shortcuts: Yorliqlar
     soundpack: Ovozli paketlar
@@ -257,6 +258,14 @@ review_request:
 save: Tejash
 save_and_restart: Saqlang va qayta yoqing
 search: Qidiruv
+security:
+  empty: Hech qanday vidjetga ruxsat berilmagan yoki rad etilmagan.
+  perms:
+    kill_processes: Ilovalarni majburiy yopish
+    manage_app_windows: Boshqa ilovalarning oynalarini boshqaring
+    modify_configuration: Seelen UI konfiguratsiyasini o'zgartiring
+    open_file: Fayllarni oching
+    run: Dasturlarni ishga tushirish
 see_more: Ko'proq ko'rish
 session:
   logout: Tizimdan chiqish

@@ -197,6 +197,7 @@ header:
     monitors: Монитори
     plugin: Додаци
     resources: Ресурси
+    security: Безбедност
     session: Рачун
     shortcuts: Пречице
     soundpack: Звучна паковања
@@ -250,6 +251,14 @@ review_request:
 save: сачувати
 save_and_restart: Сачувај и поново покрените
 search: Тражи
+security:
+  empty: Још увек није дозвољена или одбијена ниједна дозвола за виџет.
+  perms:
+    kill_processes: Присилно затворите апликације
+    manage_app_windows: Контролишите прозоре других апликација
+    modify_configuration: Измените конфигурацију корисничког интерфејса Сеелен
+    open_file: Отворите датотеке
+    run: Покрени програме
 see_more: Видети више
 session:
   logout: Одјави се

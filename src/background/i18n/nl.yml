@@ -80,6 +80,11 @@ widget_liveness:
     U kunt proberen de app opnieuw te starten.
   failed_title: Widgetfout
 widget_permissions:
+  perm_kill_processes: forceer gesloten applicaties
+  perm_manage_app_windows: >-
+    de vensters van andere toepassingen besturen (focussen, sluiten,
+    minimaliseren, verplaatsen)
+  perm_modify_configuration: wijzig de Seelen UI-configuratie
   perm_open_file: bestanden openen
   perm_run: programma's uitvoeren
   request_description: |-

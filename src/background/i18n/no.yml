@@ -73,6 +73,9 @@ widget_liveness:
     Du kan prøve å starte appen på nytt.
   failed_title: Widget-feil
 widget_permissions:
+  perm_kill_processes: tvinge lukkede søknader
+  perm_manage_app_windows: kontroller vinduene til andre applikasjoner (fokus, lukk, minimer, flytt)
+  perm_modify_configuration: endre Seelen UI-konfigurasjonen
   perm_open_file: åpne filer
   perm_run: kjøre programmer
   request_description: |-

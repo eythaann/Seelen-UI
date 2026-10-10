@@ -74,6 +74,11 @@ widget_liveness:
     Tista 'tipprova terġa' tibda l-app.
   failed_title: Widget Żball
 widget_permissions:
+  perm_kill_processes: seħħ applikazzjonijiet mill-qrib
+  perm_manage_app_windows: >-
+    tikkontrolla t-twieqi ta 'applikazzjonijiet oħra (tiffoka, tagħlaq,
+    timminimizza, timxi)
+  perm_modify_configuration: timmodifika l-konfigurazzjoni ta 'Seelen UI
   perm_open_file: fajls miftuħa
   perm_run: imexxu programmi
   request_description: |-

@@ -81,6 +81,11 @@ widget_liveness:
     Maaari mong subukang i-restart ang app.
   failed_title: Error sa Widget
 widget_permissions:
+  perm_kill_processes: puwersahang isara ang mga aplikasyon
+  perm_manage_app_windows: >-
+    kontrolin ang mga bintana ng iba pang mga application (focus, isara,
+    i-minimize, ilipat)
+  perm_modify_configuration: baguhin ang configuration ng Seelen UI
   perm_open_file: buksan ang mga file
   perm_run: magpatakbo ng mga programa
   request_description: |-

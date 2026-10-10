@@ -69,6 +69,11 @@ widget_liveness:
     Можете покушати да поново покренете апликацију.
   failed_title: Грешка у виџету
 widget_permissions:
+  perm_kill_processes: принудно затворите апликације
+  perm_manage_app_windows: >-
+    контролишите прозоре других апликација (фокусирајте, затворите, умањите,
+    померите)
+  perm_modify_configuration: измените конфигурацију корисничког интерфејса Сеелен
   perm_open_file: отворите датотеке
   perm_run: покренути програме
   request_description: |-

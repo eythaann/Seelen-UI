@@ -141,6 +141,7 @@ header.labels.iconpack: 5d88708c
 header.labels.monitors: aadc8c33
 header.labels.plugin: 1bd15328
 header.labels.resources: f7e139dd
+header.labels.security: bba57280
 header.labels.session: b04580
 header.labels.shortcuts: 38128b7a
 header.labels.soundpack: 1180dc82
@@ -188,6 +189,12 @@ review_request.title: 73f9a054
 save: 47ed3b58
 save_and_restart: 77ce9ed8
 search: ad8f2410
+security.empty: ed613e08
+security.perms.kill_processes: 1fe15a10
+security.perms.manage_app_windows: 31612f0c
+security.perms.modify_configuration: 69c63a90
+security.perms.open_file: 4970d870
+security.perms.run: da2eabc5
 see_more: '86432834'
 session.logout: 504cf96c
 session.plan: e0d6259a

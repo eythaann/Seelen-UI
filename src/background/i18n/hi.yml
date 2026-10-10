@@ -73,6 +73,11 @@ widget_liveness:
     आप ऐप को पुनः प्रारंभ करने का प्रयास कर सकते हैं.
   failed_title: विजेट त्रुटि
 widget_permissions:
+  perm_kill_processes: अनुप्रयोगों को बलपूर्वक बंद करें
+  perm_manage_app_windows: >-
+    अन्य अनुप्रयोगों की विंडो को नियंत्रित करें (फोकस करें, बंद करें, छोटा करें,
+    स्थानांतरित करें)
+  perm_modify_configuration: सेलेन यूआई कॉन्फ़िगरेशन को संशोधित करें
   perm_open_file: खुली फ़ाइलें
   perm_run: प्रोग्राम चलाएँ
   request_description: |-

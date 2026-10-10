@@ -74,6 +74,11 @@ widget_liveness:
     Možete pokušati ponovno pokrenuti aplikaciju.
   failed_title: Pogreška widgeta
 widget_permissions:
+  perm_kill_processes: prisilno zatvorite aplikacije
+  perm_manage_app_windows: >-
+    kontrolirati prozore drugih aplikacija (fokusirati, zatvoriti, minimizirati,
+    premjestiti)
+  perm_modify_configuration: izmijenite konfiguraciju korisničkog sučelja Seelen
   perm_open_file: otvorene datoteke
   perm_run: pokretati programe
   request_description: |-

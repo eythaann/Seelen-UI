@@ -78,6 +78,9 @@ widget_liveness:
     Waxaad isku dayi kartaa inaad dib u bilowdo abka.
   failed_title: Khaladka Widget
 widget_permissions:
+  perm_kill_processes: xoog xidhid codsiyada
+  perm_manage_app_windows: xakamee daaqadaha codsiyada kale ( diiradda saar, xidh, yaree, dhaqaaq)
+  perm_modify_configuration: wax ka beddel qaabka Seelen UI
   perm_open_file: faylasha furan
   perm_run: socodsii barnaamijyada
   request_description: |-

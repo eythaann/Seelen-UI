@@ -71,6 +71,9 @@ widget_liveness:
     Anda dapat mencoba memulai ulang aplikasi.
   failed_title: Kesalahan Widget
 widget_permissions:
+  perm_kill_processes: tutup paksa aplikasi
+  perm_manage_app_windows: mengontrol jendela aplikasi lain (fokus, menutup, memperkecil, memindahkan)
+  perm_modify_configuration: memodifikasi konfigurasi Seelen UI
   perm_open_file: membuka file
   perm_run: menjalankan program
   request_description: |-

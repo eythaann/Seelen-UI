@@ -74,6 +74,11 @@ widget_liveness:
     మీరు యాప్‌ని పునఃప్రారంభించి ప్రయత్నించవచ్చు.
   failed_title: విడ్జెట్ లోపం
 widget_permissions:
+  perm_kill_processes: అప్లికేషన్లను బలవంతంగా మూసివేయండి
+  perm_manage_app_windows: >-
+    ఇతర అనువర్తనాల విండోలను నియంత్రించండి (కేంద్రీకరించండి, మూసివేయండి,
+    కనిష్టీకరించండి, తరలించండి)
+  perm_modify_configuration: సీలెన్ UI కాన్ఫిగరేషన్‌ను సవరించండి
   perm_open_file: ఫైళ్లను తెరవండి
   perm_run: కార్యక్రమాలను అమలు చేయండి
   request_description: |-

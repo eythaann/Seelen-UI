@@ -73,6 +73,9 @@ widget_liveness:
     Gallwch geisio ailgychwyn yr app.
   failed_title: Gwall Teclyn
 widget_permissions:
+  perm_kill_processes: gorfodi ceisiadau cau
+  perm_manage_app_windows: rheoli ffenestri cymwysiadau eraill (canolbwyntio, cau, lleihau, symud)
+  perm_modify_configuration: addasu cyfluniad Seelen UI
   perm_open_file: agor ffeiliau
   perm_run: rhedeg rhaglenni
   request_description: |-

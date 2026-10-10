@@ -197,6 +197,7 @@ header:
     monitors: మానిటర్లు
     plugin: ప్లగిన్లు
     resources: వనరులు
+    security: భద్రత
     session: ఖాతా
     shortcuts: సత్వరమార్గాలు
     soundpack: సౌండ్ ప్యాక్‌లు
@@ -252,6 +253,14 @@ review_request:
 save: సేవ్ చేయండి
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
 search: శోధించండి
+security:
+  empty: ఇంకా ఏ విడ్జెట్ అనుమతులు అనుమతించబడలేదు లేదా తిరస్కరించబడలేదు.
+  perms:
+    kill_processes: అప్లికేషన్‌లను బలవంతంగా మూసివేయండి
+    manage_app_windows: ఇతర అనువర్తనాల విండోలను నియంత్రించండి
+    modify_configuration: సీలెన్ UI కాన్ఫిగరేషన్‌ను సవరించండి
+    open_file: ఫైల్‌లను తెరవండి
+    run: కార్యక్రమాలను అమలు చేయండి
 see_more: మరిన్ని చూడండి
 session:
   logout: సైన్ అవుట్ చేయండి

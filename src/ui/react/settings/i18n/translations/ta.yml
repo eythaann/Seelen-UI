@@ -200,6 +200,7 @@ header:
     monitors: கண்காணிப்பாளர்கள்
     plugin: செருகுநிரல்கள்
     resources: வளங்கள்
+    security: பாதுகாப்பு
     session: கணக்கு
     shortcuts: குறுக்குவழிகள்
     soundpack: ஒலி பொதிகள்
@@ -255,6 +256,16 @@ review_request:
 save: சேமிக்கவும்
 save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
 search: தேடு
+security:
+  empty: >-
+    விட்ஜெட் அனுமதிகள் எதுவும் இதுவரை அனுமதிக்கப்படவில்லை அல்லது
+    மறுக்கப்படவில்லை.
+  perms:
+    kill_processes: பயன்பாடுகளை கட்டாயப்படுத்தவும்
+    manage_app_windows: பிற பயன்பாடுகளின் சாளரங்களைக் கட்டுப்படுத்தவும்
+    modify_configuration: சீலன் UI உள்ளமைவை மாற்றவும்
+    open_file: கோப்புகளைத் திறக்கவும்
+    run: நிரல்களை இயக்கவும்
 see_more: மேலும் காண்க
 session:
   logout: வெளியேறு

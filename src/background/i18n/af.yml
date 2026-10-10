@@ -74,6 +74,11 @@ widget_liveness:
     Jy kan probeer om die toepassing te herbegin.
   failed_title: Legstukfout
 widget_permissions:
+  perm_kill_processes: beslote aansoeke afdwing
+  perm_manage_app_windows: >-
+    beheer die vensters van ander toepassings (fokus, sluit, minimaliseer,
+    beweeg)
+  perm_modify_configuration: verander die Seelen UI-konfigurasie
   perm_open_file: maak lêers oop
   perm_run: programme uit te voer
   request_description: |-

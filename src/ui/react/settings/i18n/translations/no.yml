@@ -196,6 +196,7 @@ header:
     monitors: Skjermer
     plugin: Plugins
     resources: Ressurser
+    security: Sikkerhet
     session: Konto
     shortcuts: Snarveier
     soundpack: Lydpakker
@@ -251,6 +252,14 @@ review_request:
 save: Lagre
 save_and_restart: Lagre og start på nytt
 search: Søk
+security:
+  empty: Ingen widget-tillatelser har blitt tillatt eller nektet ennå.
+  perms:
+    kill_processes: Tvinge lukkede søknader
+    manage_app_windows: Kontroller vinduene til andre applikasjoner
+    modify_configuration: Endre Seelen UI-konfigurasjonen
+    open_file: Åpne filer
+    run: Kjør programmer
 see_more: Se mer
 session:
   logout: Logg ut

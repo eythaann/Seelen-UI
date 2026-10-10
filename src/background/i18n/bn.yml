@@ -73,6 +73,11 @@ widget_liveness:
     আপনি অ্যাপটি পুনরায় চালু করার চেষ্টা করতে পারেন।
   failed_title: উইজেট ত্রুটি
 widget_permissions:
+  perm_kill_processes: জোর করে বন্ধ অ্যাপ্লিকেশন
+  perm_manage_app_windows: >-
+    অন্যান্য অ্যাপ্লিকেশনের উইন্ডোগুলি নিয়ন্ত্রণ করুন (ফোকাস করুন, বন্ধ করুন,
+    ছোট করুন, সরান)
+  perm_modify_configuration: Seelen UI কনফিগারেশন পরিবর্তন করুন
   perm_open_file: ফাইল খুলুন
   perm_run: প্রোগ্রাম চালান
   request_description: |-

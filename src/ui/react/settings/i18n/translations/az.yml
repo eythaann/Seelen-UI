@@ -195,6 +195,7 @@ header:
     monitors: Monitorlar
     plugin: Plaginlər
     resources: Resurslar
+    security: Təhlükəsizlik
     session: Hesab
     shortcuts: Qısaylıq
     soundpack: Səs paketləri
@@ -250,6 +251,14 @@ review_request:
 save: Yadda saxla
 save_and_restart: Saxla və yenidən başladın
 search: Axtar
+security:
+  empty: Hələ heç bir vidcetə icazə verilməyib və ya rədd edilib.
+  perms:
+    kill_processes: Tətbiqləri bağlamağa məcbur edin
+    manage_app_windows: Digər proqramların pəncərələrini idarə edin
+    modify_configuration: Seelen UI konfiqurasiyasını dəyişdirin
+    open_file: Faylları açın
+    run: Proqramları işə salın
 see_more: Daha çoxuna baxın
 session:
   logout: Çıxış

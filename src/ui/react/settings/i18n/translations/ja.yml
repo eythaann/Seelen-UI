@@ -176,6 +176,7 @@ header:
     monitors: モニター
     plugin: プラグイン
     resources: リソース
+    security: 安全
     session: アカウント
     shortcuts: ショートカットキー
     soundpack: サウンドパック
@@ -227,6 +228,14 @@ review_request:
 save: 保存
 save_and_restart: 保存して再起動
 search: 検索
+security:
+  empty: ウィジェットの権限はまだ許可または拒否されていません。
+  perms:
+    kill_processes: アプリケーションを強制終了する
+    manage_app_windows: 他のアプリケーションのウィンドウを制御する
+    modify_configuration: Seelen UI 構成を変更する
+    open_file: ファイルを開く
+    run: プログラムを実行する
 see_more: もっと見る
 session:
   logout: サインアウト

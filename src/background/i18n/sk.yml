@@ -75,6 +75,9 @@ widget_liveness:
     Môžete skúsiť reštartovať aplikáciu.
   failed_title: Chyba miniaplikácie
 widget_permissions:
+  perm_kill_processes: vynútiť zatvorenie aplikácií
+  perm_manage_app_windows: ovládať okná iných aplikácií (zamerať, zavrieť, minimalizovať, presunúť)
+  perm_modify_configuration: upraviť konfiguráciu používateľského rozhrania Seelen
   perm_open_file: otvorené súbory
   perm_run: spúšťať programy
   request_description: |-

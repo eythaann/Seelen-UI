@@ -74,6 +74,9 @@ widget_liveness:
     Anda boleh cuba memulakan semula apl.
   failed_title: Ralat Widget
 widget_permissions:
+  perm_kill_processes: paksa tutup aplikasi
+  perm_manage_app_windows: mengawal tingkap aplikasi lain (fokus, tutup, minimumkan, alih)
+  perm_modify_configuration: ubah suai konfigurasi UI Seelen
   perm_open_file: buka fail
   perm_run: menjalankan program
   request_description: |-

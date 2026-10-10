@@ -71,6 +71,9 @@ widget_liveness:
     Můžete zkusit restartovat aplikaci.
   failed_title: Chyba widgetu
 widget_permissions:
+  perm_kill_processes: vynutit uzavření aplikací
+  perm_manage_app_windows: ovládat okna jiných aplikací (zaostřit, zavřít, minimalizovat, přesunout)
+  perm_modify_configuration: upravit konfiguraci uživatelského rozhraní Seelen
   perm_open_file: otevřít soubory
   perm_run: spouštět programy
   request_description: |-

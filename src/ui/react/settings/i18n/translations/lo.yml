@@ -191,6 +191,7 @@ header:
     monitors: ຈໍພາບ
     plugin: Plugins
     resources: ຊັບພະຍາກອນ
+    security: ຄວາມປອດໄພ
     session: ບັນຊີ
     shortcuts: ທາງລັດ
     soundpack: ຊອງສຽງ
@@ -244,6 +245,14 @@ review_request:
 save: ບັນທຶກ
 save_and_restart: ບັນທຶກແລະ Restart
 search: ຊອກຫາ
+security:
+  empty: ບໍ່ມີການອະນຸຍາດ widget ໄດ້ຖືກອະນຸຍາດຫຼືປະຕິເສດເທື່ອ.
+  perms:
+    kill_processes: ບັງຄັບປິດແອັບພລິເຄຊັນ
+    manage_app_windows: ຄວບຄຸມປ່ອງຢ້ຽມຂອງແອັບພລິເຄຊັນອື່ນໆ
+    modify_configuration: ແກ້ໄຂການຕັ້ງຄ່າ Seelen UI
+    open_file: ເປີດໄຟລ໌
+    run: ດໍາເນີນໂຄງການ
 see_more: ເບິ່ງເພີ່ມເຕີມ
 session:
   logout: ອອກຈາກລະບົບ

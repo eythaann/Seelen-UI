@@ -205,6 +205,7 @@ header:
     monitors: Monitor
     plugin: Plugins
     resources: Mga mapagkukunan
+    security: Seguridad
     session: Account
     shortcuts: Mga shortcut
     soundpack: Mga tunog pack
@@ -262,6 +263,14 @@ review_request:
 save: I -save
 save_and_restart: I -save at i -restart
 search: Maghanap
+security:
+  empty: Wala pang pinahihintulutan o tinanggihan ang mga pahintulot ng widget.
+  perms:
+    kill_processes: Piliting isara ang mga aplikasyon
+    manage_app_windows: Kontrolin ang mga bintana ng iba pang mga application
+    modify_configuration: Baguhin ang configuration ng Seelen UI
+    open_file: Buksan ang mga file
+    run: Magpatakbo ng mga programa
 see_more: Makita pa
 session:
   logout: Mag-sign Out

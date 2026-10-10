@@ -200,6 +200,7 @@ header:
     monitors: Մոնիտորներ
     plugin: Plugins
     resources: Ռեսուրսներ
+    security: Անվտանգություն
     session: Հաշիվ
     shortcuts: Դյուրանցումներ
     soundpack: Ձայնային փաթեթներ
@@ -253,6 +254,14 @@ review_request:
 save: Խնայել
 save_and_restart: Պահել եւ վերագործարկել
 search: Որոնում
+security:
+  empty: 'Վիդջեթների թույլտվություններ դեռ չեն թույլատրվել կամ մերժվել:'
+  perms:
+    kill_processes: Ստիպել փակել հավելվածները
+    manage_app_windows: Կառավարեք այլ հավելվածների պատուհանները
+    modify_configuration: Փոփոխեք Seelen UI-ի կոնֆիգուրացիան
+    open_file: Բացեք ֆայլերը
+    run: Գործարկել ծրագրեր
 see_more: Տեսնել ավելին
 session:
   logout: Դուրս գալ

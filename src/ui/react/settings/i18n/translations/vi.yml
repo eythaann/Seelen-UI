@@ -196,6 +196,7 @@ header:
     monitors: Màn hình
     plugin: Plugin
     resources: Tài nguyên
+    security: Bảo vệ
     session: Tài khoản
     shortcuts: Phím tắt
     soundpack: Gói âm thanh
@@ -251,6 +252,14 @@ review_request:
 save: Cứu
 save_and_restart: Lưu & Khởi động lại
 search: Tìm kiếm
+security:
+  empty: Chưa có quyền truy cập tiện ích nào được cho phép hoặc bị từ chối.
+  perms:
+    kill_processes: Buộc đóng ứng dụng
+    manage_app_windows: Kiểm soát cửa sổ của các ứng dụng khác
+    modify_configuration: Sửa đổi cấu hình giao diện người dùng Seelen
+    open_file: Mở tập tin
+    run: Chạy chương trình
 see_more: Xem thêm
 session:
   logout: Đăng xuất

@@ -73,6 +73,9 @@ widget_liveness:
     Unaweza kujaribu kuanzisha upya programu.
   failed_title: Hitilafu ya Wijeti
 widget_permissions:
+  perm_kill_processes: lazimisha maombi ya kufunga
+  perm_manage_app_windows: kudhibiti madirisha ya programu zingine (zingatia, funga, punguza, songa)
+  perm_modify_configuration: rekebisha usanidi wa Seelen UI
   perm_open_file: fungua faili
   perm_run: endesha programu
   request_description: |-

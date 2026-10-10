@@ -202,6 +202,7 @@ header:
     monitors: Kormeerayaasha
     plugin: Pluins
     resources: Kheyraadka
+    security: Amniga
     session: Xisaab
     shortcuts: Gaaban
     soundpack: Xirmooyinka dhawaaqa
@@ -259,6 +260,14 @@ review_request:
 save: Badbaadin
 save_and_restart: Badbaadin & Dib u bilow
 search: Raadi
+security:
+  empty: Wali lama ogola ama la diiday ogolaanshaha widget
+  perms:
+    kill_processes: Ku qasbo xirida codsiyada
+    manage_app_windows: Xakamee daaqadaha codsiyada kale
+    modify_configuration: Wax ka beddel qaabeynta Seelen UI
+    open_file: Fur faylasha
+    run: Ku socodsii barnaamijyada
 see_more: Arag in dheeraad ah
 session:
   logout: Saxiix

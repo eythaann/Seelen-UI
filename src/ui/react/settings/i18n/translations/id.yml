@@ -200,6 +200,7 @@ header:
     monitors: Monitor
     plugin: Plugin
     resources: Sumber daya
+    security: Keamanan
     session: Akun
     shortcuts: Pintasan
     soundpack: Paket Suara
@@ -255,6 +256,14 @@ review_request:
 save: Menyimpan
 save_and_restart: Simpan & restart
 search: Mencari
+security:
+  empty: Belum ada izin widget yang diizinkan atau ditolak.
+  perms:
+    kill_processes: Tutup paksa aplikasi
+    manage_app_windows: Kontrol jendela aplikasi lain
+    modify_configuration: Ubah konfigurasi Seelen UI
+    open_file: Buka file
+    run: Jalankan program
 see_more: Lihat Lebih Lanjut
 session:
   logout: Keluar

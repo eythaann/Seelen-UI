@@ -69,6 +69,11 @@ widget_liveness:
     Du kan prova att starta om appen.
   failed_title: Widgetfel
 widget_permissions:
+  perm_kill_processes: tvinga fram nära ansökningar
+  perm_manage_app_windows: >-
+    kontrollera fönstren i andra applikationer (fokusera, stänga, minimera,
+    flytta)
+  perm_modify_configuration: ändra Seelen UI-konfigurationen
   perm_open_file: öppna filer
   perm_run: köra program
   request_description: |-

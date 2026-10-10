@@ -195,6 +195,7 @@ header:
     monitors: Monitorau
     plugin: Ategion
     resources: Adnoddau
+    security: Diogelwch
     session: Cyfrif
     shortcuts: Llwybrau byr
     soundpack: Pecynnau sain
@@ -250,6 +251,14 @@ review_request:
 save: Hiachasit
 save_and_restart: Cadw ac Ailgychwyn
 search: Chwiliwch
+security:
+  empty: Nid oes unrhyw hawliau teclyn wedi'u caniatáu na'u gwrthod eto.
+  perms:
+    kill_processes: Gorfodi ceisiadau cau
+    manage_app_windows: Rheoli ffenestri cymwysiadau eraill
+    modify_configuration: Addasu cyfluniad UI Seelen
+    open_file: Agor ffeiliau
+    run: Rhedeg rhaglenni
 see_more: Gweld mwy
 session:
   logout: Arwyddo Allan

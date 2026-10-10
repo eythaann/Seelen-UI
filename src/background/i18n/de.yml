@@ -78,6 +78,11 @@ widget_liveness:
     Sie können versuchen, die App neu zu starten.
   failed_title: Widget-Fehler
 widget_permissions:
+  perm_kill_processes: Schließen von Anwendungen erzwingen
+  perm_manage_app_windows: >-
+    Steuern Sie die Fenster anderer Anwendungen (fokussieren, schließen,
+    minimieren, verschieben)
+  perm_modify_configuration: Ändern Sie die Konfiguration der Seelen-Benutzeroberfläche
   perm_open_file: Dateien öffnen
   perm_run: Programme ausführen
   request_description: |-

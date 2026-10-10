@@ -198,6 +198,7 @@ header:
     monitors: Monitori
     plugin: Dodaci
     resources: Resursi
+    security: Sigurnost
     session: Račun
     shortcuts: Prečac
     soundpack: Zvučni paketi
@@ -255,6 +256,14 @@ review_request:
 save: Uštedjeti
 save_and_restart: Spremi i ponovno pokrenite
 search: Pretraživanje
+security:
+  empty: Nijedna dozvola za widget još nije dopuštena niti odbijena.
+  perms:
+    kill_processes: Prisilno zatvaranje aplikacija
+    manage_app_windows: Kontrolirajte prozore drugih aplikacija
+    modify_configuration: Izmijenite konfiguraciju korisničkog sučelja Seelen
+    open_file: Otvorite datoteke
+    run: Pokretanje programa
 see_more: Pogledajte više
 session:
   logout: Odjavi se

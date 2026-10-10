@@ -74,6 +74,11 @@ widget_liveness:
     Ilovani qayta ishga tushirishga urinib ko'rishingiz mumkin.
   failed_title: Vidjet xatosi
 widget_permissions:
+  perm_kill_processes: ilovalarni majburan yopish
+  perm_manage_app_windows: >-
+    boshqa ilovalarning oynalarini boshqarish (fokuslash, yopish,
+    minimallashtirish, ko'chirish)
+  perm_modify_configuration: Seelen UI konfiguratsiyasini o'zgartiring
   perm_open_file: fayllarni oching
   perm_run: dasturlarni ishga tushirish
   request_description: |-

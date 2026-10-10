@@ -200,6 +200,7 @@ header:
     monitors: Монитори
     plugin: Плъгини
     resources: Ресурси
+    security: сигурност
     session: акаунт
     shortcuts: Преки пътища
     soundpack: Звукови пакети
@@ -255,6 +256,14 @@ review_request:
 save: Запазете
 save_and_restart: Запазване и рестартиране
 search: Търсене
+security:
+  empty: Все още не са разрешени или отказани разрешения за джаджи.
+  perms:
+    kill_processes: Принудително затваряне на приложения
+    manage_app_windows: Контролирайте прозорците на други приложения
+    modify_configuration: Променете конфигурацията на потребителския интерфейс на Seelen
+    open_file: Отворете файлове
+    run: Стартирайте програми
 see_more: Вижте повече
 session:
   logout: Излезте

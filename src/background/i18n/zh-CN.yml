@@ -55,6 +55,9 @@ widget_liveness:
     您可以尝试重新启动应用。
   failed_title: 部件错误
 widget_permissions:
+  perm_kill_processes: 强制关闭应用程序
+  perm_manage_app_windows: 控制其他应用程序的窗口（聚焦、关闭、最小化、移动）
+  perm_modify_configuration: 修改Seelen UI配置
   perm_open_file: 打开文件
   perm_run: 运行程序
   request_description: |-

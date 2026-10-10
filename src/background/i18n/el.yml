@@ -75,6 +75,11 @@ widget_liveness:
     Μπορείτε να δοκιμάσετε να επανεκκινήσετε την εφαρμογή.
   failed_title: Σφάλμα widget
 widget_permissions:
+  perm_kill_processes: επιβολή κλεισίματος εφαρμογών
+  perm_manage_app_windows: >-
+    έλεγχος των παραθύρων άλλων εφαρμογών (εστίαση, κλείσιμο, ελαχιστοποίηση,
+    μετακίνηση)
+  perm_modify_configuration: τροποποιήστε τη διαμόρφωση διεπαφής χρήστη Seelen
   perm_open_file: ανοιχτά αρχεία
   perm_run: τρέξτε προγράμματα
   request_description: |-

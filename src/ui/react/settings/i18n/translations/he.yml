@@ -187,6 +187,7 @@ header:
     monitors: צגים
     plugin: תוספים
     resources: אֶמְצָעִי
+    security: בִּטָחוֹן
     session: חֶשְׁבּוֹן
     shortcuts: קיצורי דרך
     soundpack: חבילות סאונד
@@ -238,6 +239,14 @@ review_request:
 save: להציל
 save_and_restart: שמור והפעלה מחדש
 search: לְחַפֵּשׂ
+security:
+  empty: עדיין לא הותרו או נדחו הרשאות ווידג'ט.
+  perms:
+    kill_processes: כפה סגירה של יישומים
+    manage_app_windows: שליטה בחלונות של יישומים אחרים
+    modify_configuration: שנה את תצורת ממשק המשתמש של Seelen
+    open_file: פתח קבצים
+    run: הפעל תוכניות
 see_more: ראה עוד
 session:
   logout: צא

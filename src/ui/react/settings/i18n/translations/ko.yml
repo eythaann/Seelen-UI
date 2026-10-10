@@ -177,6 +177,7 @@ header:
     monitors: 모니터
     plugin: 플러그인
     resources: 리소스
+    security: 보안
     session: 계정
     shortcuts: 단축키
     soundpack: 사운드 팩
@@ -228,6 +229,14 @@ review_request:
 save: 저장
 save_and_restart: 저장 및 재시작
 search: 찾다
+security:
+  empty: 아직 위젯 권한이 허용되거나 거부되지 않았습니다.
+  perms:
+    kill_processes: 애플리케이션 강제 종료
+    manage_app_windows: 다른 응용 프로그램의 창 제어
+    modify_configuration: Seelen UI 구성 수정
+    open_file: 파일 열기
+    run: 프로그램 실행
 see_more: 자세히 보기
 session:
   logout: 로그아웃

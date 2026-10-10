@@ -59,6 +59,9 @@ widget_liveness:
     אתה יכול לנסות להפעיל מחדש את האפליקציה.
   failed_title: שגיאת ווידג'ט
 widget_permissions:
+  perm_kill_processes: לאלץ סגירת יישומים
+  perm_manage_app_windows: לשלוט בחלונות של יישומים אחרים (מיקוד, סגירה, מזעור, הזז)
+  perm_modify_configuration: שנה את תצורת ממשק המשתמש של Seelen
   perm_open_file: לפתוח קבצים
   perm_run: להפעיל תוכניות
   request_description: |-

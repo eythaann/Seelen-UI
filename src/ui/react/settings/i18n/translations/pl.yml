@@ -203,6 +203,7 @@ header:
     monitors: Ekrany
     plugin: Wtyczki
     resources: Zasoby
+    security: Bezpieczeństwo
     session: Konto
     shortcuts: Skróty klawiszowe
     soundpack: Pakiety dźwiękowe
@@ -258,6 +259,14 @@ review_request:
 save: Zastosuj
 save_and_restart: Zastosuj i uruchom ponownie
 search: Szukaj
+security:
+  empty: Nie zezwolono ani nie odmówiono jeszcze żadnych uprawnień do widgetów.
+  perms:
+    kill_processes: Wymuś zamknięcie aplikacji
+    manage_app_windows: Kontroluj okna innych aplikacji
+    modify_configuration: Zmodyfikuj konfigurację interfejsu użytkownika Seelen
+    open_file: Otwórz pliki
+    run: Uruchamiaj programy
 see_more: Zobacz więcej
 session:
   logout: Wyloguj się

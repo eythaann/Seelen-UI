@@ -196,6 +196,7 @@ header:
     monitors: නිරීක්ෂකයින්
     plugin: ප්ලගීන
     resources: සම්පත්
+    security: ආරක්ෂාව
     session: ගිණුම
     shortcuts: කෙටිමං
     soundpack: ශබ්ද ඇසුරුම්
@@ -249,6 +250,14 @@ review_request:
 save: සුරකින්න
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 search: සොයන්න
+security:
+  empty: විජට් අවසර කිසිවක් තවම ඉඩ දී හෝ ප්‍රතික්ෂේප කර නැත.
+  perms:
+    kill_processes: යෙදුම් වසා දැමීමට බල කරන්න
+    manage_app_windows: වෙනත් යෙදුම්වල කවුළු පාලනය කරන්න
+    modify_configuration: Seelen UI වින්‍යාසය වෙනස් කරන්න
+    open_file: ගොනු විවෘත කරන්න
+    run: වැඩසටහන් ධාවනය කරන්න
 see_more: තවත් බලන්න
 session:
   logout: වරන්න

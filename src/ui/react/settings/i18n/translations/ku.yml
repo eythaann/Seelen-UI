@@ -195,6 +195,7 @@ header:
     monitors: Çavdêr
     plugin: Pêçanin
     resources: Resourcesavkaniyên
+    security: Ewlekarî
     session: Konto
     shortcuts: Kurtefîlm
     soundpack: Pakêtên deng
@@ -252,6 +253,14 @@ review_request:
 save: Rizgarkirin
 save_and_restart: Save & Restart
 search: Gerr
+security:
+  empty: Heya niha tu destûrên widgetê nehatine destûr kirin an jî red kirin.
+  perms:
+    kill_processes: Bi zorê sepanên girtina
+    manage_app_windows: Paceyên serîlêdanên din kontrol bikin
+    modify_configuration: Veavakirina Seelen UI biguherînin
+    open_file: Pelên vekin
+    run: Bername bimeşînin
 see_more: Bêtir bibînin
 session:
   logout: Guhê xwe nedene

@@ -67,6 +67,11 @@ widget_liveness:
     ඔබට යෙදුම නැවත ආරම්භ කිරීමට උත්සාහ කළ හැකිය.
   failed_title: විජට් දෝෂය
 widget_permissions:
+  perm_kill_processes: යෙදුම් වසා දැමීමට බල කරන්න
+  perm_manage_app_windows: >-
+    වෙනත් යෙදුම්වල කවුළු පාලනය කරන්න (අවධානය යොමු කරන්න, වසා දමන්න, අවම කරන්න,
+    චලනය කරන්න)
+  perm_modify_configuration: Seelen UI වින්‍යාසය වෙනස් කරන්න
   perm_open_file: විවෘත ගොනු
   perm_run: වැඩසටහන් ක්රියාත්මක කරන්න
   request_description: |-

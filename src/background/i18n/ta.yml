@@ -75,6 +75,11 @@ widget_liveness:
     நீங்கள் பயன்பாட்டை மறுதொடக்கம் செய்ய முயற்சி செய்யலாம்.
   failed_title: விட்ஜெட் பிழை
 widget_permissions:
+  perm_kill_processes: பயன்பாடுகளை கட்டாயப்படுத்தவும்
+  perm_manage_app_windows: >-
+    பிற பயன்பாடுகளின் சாளரங்களைக் கட்டுப்படுத்தவும் (கவனம், மூடு, குறைத்தல்,
+    நகர்த்துதல்)
+  perm_modify_configuration: சீலன் UI கட்டமைப்பை மாற்றவும்
   perm_open_file: கோப்புகளைத் திறக்கவும்
   perm_run: நிரல்களை இயக்கவும்
   request_description: |-

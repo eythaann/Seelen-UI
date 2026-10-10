@@ -71,6 +71,9 @@ widget_liveness:
     آپ ایپ کو دوبارہ شروع کرنے کی کوشش کر سکتے ہیں۔
   failed_title: ویجیٹ کی خرابی۔
 widget_permissions:
+  perm_kill_processes: زبردستی بند ایپلی کیشنز
+  perm_manage_app_windows: دیگر ایپلی کیشنز کی ونڈوز کو کنٹرول کریں (فوکس، بند، کم سے کم، منتقل)
+  perm_modify_configuration: Seelen UI کنفیگریشن میں ترمیم کریں۔
   perm_open_file: فائلیں کھولیں
   perm_run: پروگرام چلائیں
   request_description: |-

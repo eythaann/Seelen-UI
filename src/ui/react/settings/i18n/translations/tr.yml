@@ -196,6 +196,7 @@ header:
     monitors: Monitörler
     plugin: Eklentiler
     resources: Kaynaklar
+    security: Güvenlik
     session: Hesap
     shortcuts: Kısayollar
     soundpack: Ses Paketleri
@@ -251,6 +252,14 @@ review_request:
 save: Kaydet
 save_and_restart: Kaydet ve Yeniden Başlat
 search: Aramak
+security:
+  empty: Henüz hiçbir widget iznine izin verilmedi veya reddedilmedi.
+  perms:
+    kill_processes: Uygulamaları kapatmaya zorla
+    manage_app_windows: Diğer uygulamaların pencerelerini kontrol edin
+    modify_configuration: Seelen kullanıcı arayüzü yapılandırmasını değiştirin
+    open_file: Dosyaları aç
+    run: Programları çalıştır
 see_more: Daha Fazla Gör
 session:
   logout: Oturumu Kapat

@@ -202,6 +202,7 @@ header:
     monitors: Monitor
     plugin: Plugin
     resources: Risorse
+    security: Sicurezza
     session: Account
     shortcuts: Scorciatoie
     soundpack: Pacchetti di suoni
@@ -259,6 +260,14 @@ review_request:
 save: Salva
 save_and_restart: Salva e Riavvia
 search: Ricerca
+security:
+  empty: Nessuna autorizzazione per il widget è stata ancora concessa o negata.
+  perms:
+    kill_processes: Forza la chiusura delle applicazioni
+    manage_app_windows: Controlla le finestre di altre applicazioni
+    modify_configuration: Modifica la configurazione dell'interfaccia utente di Seelen
+    open_file: Apri file
+    run: Esegui programmi
 see_more: Per saperne di più
 session:
   logout: Disconnessione

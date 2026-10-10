@@ -77,6 +77,11 @@ widget_liveness:
     Uygulamayı yeniden başlatmayı deneyebilirsiniz.
   failed_title: Widget Hatası
 widget_permissions:
+  perm_kill_processes: uygulamaları kapatmaya zorla
+  perm_manage_app_windows: >-
+    diğer uygulamaların pencerelerini kontrol edin (odaklayın, kapatın, simge
+    durumuna küçültün, taşıyın)
+  perm_modify_configuration: Seelen kullanıcı arayüzü yapılandırmasını değiştirin
   perm_open_file: dosyaları aç
   perm_run: programları çalıştır
   request_description: |-

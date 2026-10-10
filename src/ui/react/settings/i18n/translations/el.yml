@@ -202,6 +202,7 @@ header:
     monitors: Παρακολουθεί
     plugin: Plugins
     resources: Πόροι
+    security: Ασφάλεια
     session: Λογαριασμός
     shortcuts: Συντομεύσεις
     soundpack: Πακέτα ήχου
@@ -259,6 +260,14 @@ review_request:
 save: Αποθηκεύσετε
 save_and_restart: Αποθήκευση & επανεκκίνηση
 search: Ερευνα
+security:
+  empty: Δεν έχουν επιτραπεί ή απορριφθεί ακόμη δικαιώματα widget.
+  perms:
+    kill_processes: Αναγκαστικό κλείσιμο εφαρμογών
+    manage_app_windows: Ελέγξτε τα παράθυρα άλλων εφαρμογών
+    modify_configuration: Τροποποιήστε τη διαμόρφωση διεπαφής χρήστη Seelen
+    open_file: Άνοιγμα αρχείων
+    run: Εκτελέστε προγράμματα
 see_more: Δείτε περισσότερα
 session:
   logout: Αποσύνδεση

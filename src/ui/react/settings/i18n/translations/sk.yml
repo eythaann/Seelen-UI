@@ -197,6 +197,7 @@ header:
     monitors: Monitorovať
     plugin: Zásuvné moduly
     resources: Zdroje
+    security: Bezpečnosť
     session: účtu
     shortcuts: Skratky
     soundpack: Zvukové balíky
@@ -254,6 +255,14 @@ review_request:
 save: Uložiť
 save_and_restart: Uložiť a reštartovať
 search: Hľadať
+security:
+  empty: Zatiaľ neboli povolené ani zamietnuté žiadne povolenia miniaplikácií.
+  perms:
+    kill_processes: Vynútiť zatvorenie aplikácií
+    manage_app_windows: Ovládajte okná iných aplikácií
+    modify_configuration: Upravte konfiguráciu používateľského rozhrania Seelen
+    open_file: Otvorte súbory
+    run: Spúšťajte programy
 see_more: Pozri viac
 session:
   logout: Odhlásiť sa

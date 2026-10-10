@@ -74,6 +74,11 @@ widget_liveness:
     Կարող եք փորձել վերագործարկել հավելվածը:
   failed_title: Վիջեթի սխալ
 widget_permissions:
+  perm_kill_processes: ստիպել փակել հավելվածները
+  perm_manage_app_windows: >-
+    վերահսկել այլ հավելվածների պատուհանները (կենտրոնանալ, փակել, նվազագույնի
+    հասցնել, տեղափոխել)
+  perm_modify_configuration: փոփոխել Seelen UI-ի կոնֆիգուրացիան
   perm_open_file: բաց ֆայլեր
   perm_run: գործարկել ծրագրեր
   request_description: |-

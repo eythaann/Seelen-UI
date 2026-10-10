@@ -198,6 +198,7 @@ header:
     monitors: Монітори
     plugin: Плагіни
     resources: Ресурси
+    security: Безпека
     session: Обліковий запис
     shortcuts: Сполучення клавіш
     soundpack: Звукові пакети
@@ -253,6 +254,14 @@ review_request:
 save: Зберегти
 save_and_restart: Зберегти та перезапустити
 search: Пошук
+security:
+  empty: Жоден дозвіл на віджет ще не дозволено або заборонено.
+  perms:
+    kill_processes: Примусове закриття програм
+    manage_app_windows: Керуйте вікнами інших програм
+    modify_configuration: Змініть конфігурацію інтерфейсу користувача Seelen
+    open_file: Відкрити файли
+    run: Запуск програм
 see_more: Побачити більше
 session:
   logout: Вийти

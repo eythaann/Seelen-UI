@@ -196,6 +196,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Hulpbronne
+    security: Sekuriteit
     session: Rekening
     shortcuts: Kortpaaie
     soundpack: Klankpakkies
@@ -251,6 +252,14 @@ review_request:
 save: Red
 save_and_restart: Stoor en herbegin
 search: Soek
+security:
+  empty: Geen legstuktoestemmings is nog toegelaat of geweier nie.
+  perms:
+    kill_processes: Forseer geslote aansoeke
+    manage_app_windows: Beheer die vensters van ander toepassings
+    modify_configuration: Verander die Seelen UI-konfigurasie
+    open_file: Maak lêers oop
+    run: Begin programme
 see_more: Sien meer
 session:
   logout: Teken uit

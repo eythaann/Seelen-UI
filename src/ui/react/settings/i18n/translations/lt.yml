@@ -198,6 +198,7 @@ header:
     monitors: Monitoriai
     plugin: Įskiepiai
     resources: Ištekliai
+    security: Saugumas
     session: sąskaita
     shortcuts: Nuorodos
     soundpack: Garso paketai
@@ -253,6 +254,14 @@ review_request:
 save: Sutaupyti
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 search: Ieškoti
+security:
+  empty: Jokie valdiklių leidimai dar nesuteikti arba atmesti.
+  perms:
+    kill_processes: Priverstinai uždaryti programas
+    manage_app_windows: Valdykite kitų programų langus
+    modify_configuration: Pakeiskite Seelen vartotojo sąsajos konfigūraciją
+    open_file: Atidaryti failus
+    run: Paleisti programas
 see_more: Žiūrėti daugiau
 session:
   logout: Atsijungti

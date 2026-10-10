@@ -70,6 +70,9 @@ widget_liveness:
     Hûn dikarin biceribînin ku sepanê ji nû ve bidin destpêkirin.
   failed_title: Çewtiya Widgetê
 widget_permissions:
+  perm_kill_processes: bi zorê sepanên girtina
+  perm_manage_app_windows: pencereyên sepanên din kontrol bikin (balkêşî, girtin, kêmkirin, barkirin)
+  perm_modify_configuration: veavakirina Seelen UI biguherîne
   perm_open_file: pelan vekin
   perm_run: bernameyan bimeşînin
   request_description: |-

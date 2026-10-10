@@ -75,6 +75,11 @@ widget_liveness:
     Puteți încerca să reporniți aplicația.
   failed_title: Eroare widget
 widget_permissions:
+  perm_kill_processes: forțați aplicațiile de închidere
+  perm_manage_app_windows: >-
+    controlați ferestrele altor aplicații (focalizare, închidere, minimizare,
+    mutare)
+  perm_modify_configuration: modificați configurația Seelen UI
   perm_open_file: deschide fișiere
   perm_run: rulați programe
   request_description: |-

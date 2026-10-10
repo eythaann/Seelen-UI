@@ -203,6 +203,7 @@ header:
     monitors: Monitore
     plugin: Plugins
     resources: Ressourcen
+    security: Sicherheit
     session: Konto
     shortcuts: Kurzbefehle
     soundpack: Sound Packs
@@ -260,6 +261,14 @@ review_request:
 save: Speichern
 save_and_restart: Speichern & neu starten
 search: Suchen
+security:
+  empty: Es wurden noch keine Widget-Berechtigungen gewährt oder verweigert.
+  perms:
+    kill_processes: Erzwingen Sie das Schließen von Anwendungen
+    manage_app_windows: Steuern Sie die Fenster anderer Anwendungen
+    modify_configuration: Ändern Sie die Konfiguration der Seelen-Benutzeroberfläche
+    open_file: Dateien öffnen
+    run: Führen Sie Programme aus
 see_more: Mehr sehen
 session:
   logout: Abmelden

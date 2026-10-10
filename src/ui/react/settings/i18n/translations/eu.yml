@@ -197,6 +197,7 @@ header:
     monitors: Monitore
     plugin: Plakins
     resources: Baliabide
+    security: Segurtasuna
     session: Kontua
     shortcuts: Lasterbideak
     soundpack: Soinu paketeak
@@ -252,6 +253,14 @@ review_request:
 save: Aurreztu
 save_and_restart: Gorde eta berrabiarazi
 search: Bilatu
+security:
+  empty: Oraindik ez da widget-en baimenik onartu edo ukatu.
+  perms:
+    kill_processes: Behartu aplikazioak ixtea
+    manage_app_windows: Kontrolatu beste aplikazio batzuen leihoak
+    modify_configuration: Aldatu Seelen UI konfigurazioa
+    open_file: Ireki fitxategiak
+    run: Exekutatu programak
 see_more: Ikusi gehiago
 session:
   logout: Amaitu saioa

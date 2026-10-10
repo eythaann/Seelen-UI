@@ -193,6 +193,7 @@ header:
     monitors: Awọn diirarito
     plugin: Afikun
     resources: Awọn orisun
+    security: Aabo
     session: Iroyin
     shortcuts: Awọn ọna abuja
     soundpack: Awọn akopọ ohun
@@ -246,6 +247,14 @@ review_request:
 save: Fipamọ
 save_and_restart: Fipamọ & Tun bẹrẹ
 search: Wa
+security:
+  empty: Ko si awọn igbanilaaye ẹrọ ailorukọ ti a gba laaye tabi sẹ sibẹsibẹ.
+  perms:
+    kill_processes: Fi ipa pa awọn ohun elo
+    manage_app_windows: Ṣakoso awọn window ti awọn ohun elo miiran
+    modify_configuration: Ṣe atunṣe iṣeto Seelen UI
+    open_file: Ṣii awọn faili
+    run: Ṣiṣe awọn eto
 see_more: Wo diẹ sii
 session:
   logout: Ifowosi jada

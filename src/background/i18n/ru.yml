@@ -72,6 +72,11 @@ widget_liveness:
     Вы можете попробовать перезапустить приложение.
   failed_title: Ошибка виджета
 widget_permissions:
+  perm_kill_processes: принудительно закрывать приложения
+  perm_manage_app_windows: >-
+    управлять окнами других приложений (фокусировать, закрывать, сворачивать,
+    перемещать)
+  perm_modify_configuration: изменить конфигурацию пользовательского интерфейса Seelen
   perm_open_file: открывать файлы
   perm_run: запускать программы
   request_description: |-

@@ -72,6 +72,11 @@ widget_liveness:
     Varat mēģināt restartēt lietotni.
   failed_title: Logrīka kļūda
 widget_permissions:
+  perm_kill_processes: piespiest aizvērt lietojumprogrammas
+  perm_manage_app_windows: >-
+    kontrolēt citu lietojumprogrammu logus (fokusēt, aizvērt, samazināt,
+    pārvietot)
+  perm_modify_configuration: modificēt Seelen UI konfigurāciju
   perm_open_file: atvērt failus
   perm_run: palaist programmas
   request_description: |-

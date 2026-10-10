@@ -72,6 +72,11 @@ widget_liveness:
     ਤੁਸੀਂ ਐਪ ਨੂੰ ਰੀਸਟਾਰਟ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਸਕਦੇ ਹੋ।
   failed_title: ਵਿਜੇਟ ਗਲਤੀ
 widget_permissions:
+  perm_kill_processes: ਐਪਲੀਕੇਸ਼ਨ ਬੰਦ ਕਰਨ ਲਈ ਮਜਬੂਰ ਕਰੋ
+  perm_manage_app_windows: >-
+    ਹੋਰ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀਆਂ ਵਿੰਡੋਜ਼ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ (ਫੋਕਸ ਕਰੋ, ਬੰਦ ਕਰੋ, ਛੋਟਾ ਕਰੋ,
+    ਮੂਵ ਕਰੋ)
+  perm_modify_configuration: Seelen UI ਸੰਰਚਨਾ ਨੂੰ ਸੋਧੋ
   perm_open_file: ਫਾਈਲਾਂ ਖੋਲ੍ਹੋ
   perm_run: ਪ੍ਰੋਗਰਾਮ ਚਲਾਓ
   request_description: |-

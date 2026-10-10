@@ -63,6 +63,9 @@ widget_liveness:
     คุณสามารถลองรีสตาร์ทแอปได้
   failed_title: ข้อผิดพลาดของวิดเจ็ต
 widget_permissions:
+  perm_kill_processes: บังคับปิดแอปพลิเคชัน
+  perm_manage_app_windows: ควบคุมหน้าต่างของแอปพลิเคชั่นอื่น ๆ (โฟกัส ปิด ย่อเล็กสุด ย้าย)
+  perm_modify_configuration: แก้ไขการกำหนดค่า Seelen UI
   perm_open_file: เปิดไฟล์
   perm_run: รันโปรแกรม
   request_description: |-

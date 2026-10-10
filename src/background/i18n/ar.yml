@@ -60,6 +60,9 @@ widget_liveness:
     يمكنك محاولة إعادة تشغيل التطبيق.
   failed_title: خطأ في القطعة
 widget_permissions:
+  perm_kill_processes: فرض إغلاق التطبيقات
+  perm_manage_app_windows: التحكم في نوافذ التطبيقات الأخرى (التركيز، الإغلاق، التصغير، النقل)
+  perm_modify_configuration: تعديل تكوين Seelen UI
   perm_open_file: فتح الملفات
   perm_run: تشغيل البرامج
   request_description: |-

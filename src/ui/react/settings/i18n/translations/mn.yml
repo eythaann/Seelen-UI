@@ -198,6 +198,7 @@ header:
     monitors: Хэлэлт авагч
     plugin: Гарын үсэг
     resources: Ажил
+    security: Аюулгүй байдал
     session: Данс
     shortcuts: Хэв хаягдал
     soundpack: Дууны багц
@@ -251,6 +252,14 @@ review_request:
 save: Аврах
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 search: Хайх
+security:
+  empty: Одоогоор ямар ч виджетийн зөвшөөрлийг зөвшөөрөөгүй эсвэл татгалзаагүй байна.
+  perms:
+    kill_processes: Аппликешнүүдийг хүчээр хаах
+    manage_app_windows: Бусад програмын цонхыг удирдах
+    modify_configuration: Seelen UI тохиргоог өөрчлөх
+    open_file: Файлуудыг нээх
+    run: Програмуудыг ажиллуулах
 see_more: Дэлгэрэнгүйг үзэх
 session:
   logout: Гарах

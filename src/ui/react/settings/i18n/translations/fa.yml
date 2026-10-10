@@ -195,6 +195,7 @@ header:
     monitors: مانیتور
     plugin: پلاگین
     resources: منابع
+    security: امنیت
     session: حساب
     shortcuts: میانبرها
     soundpack: بسته های صدا
@@ -248,6 +249,14 @@ review_request:
 save: صرفه جویی
 save_and_restart: ذخیره و راه اندازی مجدد
 search: جستجو کنید
+security:
+  empty: هیچ مجوز ویجتی هنوز مجاز یا رد نشده است.
+  perms:
+    kill_processes: بستن اجباری برنامه ها
+    manage_app_windows: ویندوز سایر برنامه ها را کنترل کنید
+    modify_configuration: پیکربندی Seelen UI را تغییر دهید
+    open_file: فایل ها را باز کنید
+    run: برنامه ها را اجرا کنید
 see_more: بیشتر ببینید
 session:
   logout: از سیستم خارج شوید

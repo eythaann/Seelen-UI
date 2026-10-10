@@ -57,6 +57,9 @@ widget_liveness:
     앱을 다시 시작해 보세요.
   failed_title: 위젯 오류
 widget_permissions:
+  perm_kill_processes: 애플리케이션 강제 종료
+  perm_manage_app_windows: 다른 애플리케이션의 창 제어(초점, 닫기, 최소화, 이동)
+  perm_modify_configuration: Seelen UI 구성 수정
   perm_open_file: 열린 파일
   perm_run: 프로그램 실행
   request_description: |-

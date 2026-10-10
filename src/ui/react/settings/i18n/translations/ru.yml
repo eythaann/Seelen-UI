@@ -200,6 +200,7 @@ header:
     monitors: Мониторы
     plugin: Плагины
     resources: Ресурсы
+    security: Безопасность
     session: Аккаунт
     shortcuts: Сочетания клавиш
     soundpack: Звуковые пакеты
@@ -253,6 +254,14 @@ review_request:
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
 search: Поиск
+security:
+  empty: Разрешения для виджетов еще не были разрешены или запрещены.
+  perms:
+    kill_processes: Принудительное закрытие приложений
+    manage_app_windows: Управление окнами других приложений
+    modify_configuration: Измените конфигурацию пользовательского интерфейса Seelen.
+    open_file: Открыть файлы
+    run: Запуск программ
 see_more: См. подробнее
 session:
   logout: Выход

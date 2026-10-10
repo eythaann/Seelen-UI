@@ -246,7 +246,6 @@ review_request:
 save: Save
 save_and_restart: Save & Restart
 search: Search
-see_more: See More
 security:
   empty: No widget permissions have been allowed or denied yet.
   perms:
@@ -255,6 +254,7 @@ security:
     modify_configuration: Modify the Seelen UI configuration
     open_file: Open files
     run: Run programs
+see_more: See More
 session:
   logout: Sign Out
   plan: Plan

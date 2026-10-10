@@ -75,6 +75,9 @@ widget_liveness:
     Galite pabandyti iš naujo paleisti programą.
   failed_title: Valdiklio klaida
 widget_permissions:
+  perm_kill_processes: priverstinai uždaryti programas
+  perm_manage_app_windows: valdyti kitų programų langus (fokusuoti, uždaryti, sumažinti, perkelti)
+  perm_modify_configuration: pakeisti Seelen vartotojo sąsajos konfigūraciją
   perm_open_file: atidaryti failus
   perm_run: paleisti programas
   request_description: |-

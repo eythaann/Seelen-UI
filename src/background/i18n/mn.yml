@@ -72,6 +72,9 @@ widget_liveness:
     Та програмыг дахин эхлүүлэхийг оролдож болно.
   failed_title: Виджетийн алдаа
 widget_permissions:
+  perm_kill_processes: програмуудыг хүчээр хаах
+  perm_manage_app_windows: бусад програмын цонхыг удирдах (анхаарал төвлөрүүлэх, хаах, багасгах, зөөх)
+  perm_modify_configuration: Seelen UI тохиргоог өөрчлөх
   perm_open_file: файлуудыг нээх
   perm_run: програмуудыг ажиллуулах
   request_description: |-

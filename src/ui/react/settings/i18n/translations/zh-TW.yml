@@ -167,6 +167,7 @@ header:
     monitors: 顯示器
     plugin: 擴充功能
     resources: 資源
+    security: 安全
     session: 帳戶
     shortcuts: 快捷鍵
     soundpack: 聲音包
@@ -218,6 +219,14 @@ review_request:
 save: 保存
 save_and_restart: 保存並重新啟動
 search: 搜尋
+security:
+  empty: 尚未允許或拒絕任何小部件權限。
+  perms:
+    kill_processes: 強制關閉應用程式
+    manage_app_windows: 控制其他應用程式的窗口
+    modify_configuration: 修改Seelen UI配置
+    open_file: 開啟文件
+    run: 運行程式
 see_more: 查看更多
 session:
   logout: 登出

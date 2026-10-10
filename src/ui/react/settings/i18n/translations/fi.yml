@@ -199,6 +199,7 @@ header:
     monitors: Näytöt
     plugin: Liitännäiset
     resources: Resurssit
+    security: Turvallisuus
     session: Tili
     shortcuts: Pikakuvakkeet
     soundpack: Sound Packit
@@ -254,6 +255,14 @@ review_request:
 save: Tallentaa
 save_and_restart: Tallenna ja käynnistä uudelleen
 search: Haku
+security:
+  empty: Widgetin käyttöoikeuksia ei ole vielä sallittu tai evätty.
+  perms:
+    kill_processes: Pakota sovellukset sulkemaan
+    manage_app_windows: Hallitse muiden sovellusten ikkunoita
+    modify_configuration: Muokkaa Seelen UI -kokoonpanoa
+    open_file: Avaa tiedostot
+    run: Suorita ohjelmia
 see_more: Katso lisää
 session:
   logout: Kirjaudu ulos

@@ -72,6 +72,11 @@ widget_liveness:
     Bạn có thể thử khởi động lại ứng dụng.
   failed_title: Lỗi tiện ích
 widget_permissions:
+  perm_kill_processes: buộc đóng ứng dụng
+  perm_manage_app_windows: >-
+    kiểm soát các cửa sổ của các ứng dụng khác (tập trung, đóng, thu nhỏ, di
+    chuyển)
+  perm_modify_configuration: sửa đổi cấu hình giao diện người dùng Seelen
   perm_open_file: mở tập tin
   perm_run: chạy chương trình
   request_description: |-

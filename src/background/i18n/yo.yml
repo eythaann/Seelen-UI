@@ -64,6 +64,9 @@ widget_liveness:
     O le gbiyanju lati tun app naa bẹrẹ.
   failed_title: Aṣiṣe ẹrọ ailorukọ
 widget_permissions:
+  perm_kill_processes: ipa pa awọn ohun elo
+  perm_manage_app_windows: ṣakoso awọn window ti awọn ohun elo miiran (idojukọ, sunmọ, gbe, gbe)
+  perm_modify_configuration: yipada Seelen UI iṣeto ni
   perm_open_file: ṣii awọn faili
   perm_run: ṣiṣe awọn eto
   request_description: |-

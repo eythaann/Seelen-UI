@@ -71,6 +71,9 @@ widget_liveness:
     Pode tentar reiniciar o aplicativo.
   failed_title: Erro de widget
 widget_permissions:
+  perm_kill_processes: forçar o encerramento de aplicações
+  perm_manage_app_windows: controlar as janelas de outras aplicações (focar, fechar, minimizar, mover)
+  perm_modify_configuration: modificar a configuração da UI do Seelen
   perm_open_file: abrir ficheiros
   perm_run: executar programas
   request_description: |-

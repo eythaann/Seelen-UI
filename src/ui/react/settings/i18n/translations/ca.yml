@@ -201,6 +201,7 @@ header:
     monitors: Monitors
     plugin: Tapins
     resources: Recursos
+    security: Seguretat
     session: Compte
     shortcuts: Dreceres
     soundpack: Paquets de son
@@ -256,6 +257,14 @@ review_request:
 save: Estalviar
 save_and_restart: Desar i reiniciar
 search: Cerca
+security:
+  empty: Encara no s'ha permès ni denegat cap permís de widget.
+  perms:
+    kill_processes: Força el tancament de les aplicacions
+    manage_app_windows: Controla les finestres d'altres aplicacions
+    modify_configuration: Modifiqueu la configuració de la interfície d'usuari de Seelen
+    open_file: Obrir fitxers
+    run: Executar programes
 see_more: Veure més
 session:
   logout: Tanca la sessió

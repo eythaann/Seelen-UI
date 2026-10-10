@@ -186,6 +186,7 @@ header:
     monitors: ተቆጣጣሪዎች
     plugin: ተሰኪዎች
     resources: ሀብቶች
+    security: ደህንነት
     session: መለያ
     shortcuts: አቋራጮች
     soundpack: የድምፅ ማካካሻዎች
@@ -237,6 +238,14 @@ review_request:
 save: አስቀምጥ
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 search: ፈልግ
+security:
+  empty: እስካሁን ምንም የመግብር ፈቃዶች አልተፈቀዱም ወይም አልተከለከሉም።
+  perms:
+    kill_processes: መተግበሪያዎችን መዝጋትን አስገድድ
+    manage_app_windows: የሌሎች መተግበሪያዎችን መስኮቶች ይቆጣጠሩ
+    modify_configuration: የ Seelen UI ውቅረትን ያሻሽሉ።
+    open_file: ፋይሎችን ክፈት
+    run: ፕሮግራሞችን አሂድ
 see_more: ተጨማሪ ይመልከቱ
 session:
   logout: ዘግተህ ውጣ

@@ -78,6 +78,11 @@ widget_liveness:
     Proqramı yenidən başlatmağa cəhd edə bilərsiniz.
   failed_title: Vidcet xətası
 widget_permissions:
+  perm_kill_processes: tətbiqləri bağlamağa məcbur edin
+  perm_manage_app_windows: >-
+    digər proqramların pəncərələrini idarə edin (fokuslayın, bağlayın, minimuma
+    endirin, köçürün)
+  perm_modify_configuration: Seelen UI konfiqurasiyasını dəyişdirin
   perm_open_file: faylları açın
   perm_run: proqramları işlədin
   request_description: |-

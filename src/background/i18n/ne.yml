@@ -69,6 +69,11 @@ widget_liveness:
     तपाईं एप पुन: सुरु गर्ने प्रयास गर्न सक्नुहुन्छ।
   failed_title: विजेट त्रुटि
 widget_permissions:
+  perm_kill_processes: बल बन्द अनुप्रयोगहरू
+  perm_manage_app_windows: >-
+    अन्य अनुप्रयोगहरूको विन्डोहरू नियन्त्रण गर्नुहोस् (फोकस, बन्द, न्यूनतम,
+    सार्नुहोस्)
+  perm_modify_configuration: Seelen UI कन्फिगरेसन परिमार्जन गर्नुहोस्
   perm_open_file: फाइलहरू खोल्नुहोस्
   perm_run: कार्यक्रमहरू सञ्चालन गर्ने
   request_description: |-

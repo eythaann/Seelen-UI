@@ -201,6 +201,7 @@ header:
     monitors: Monitoare
     plugin: Plugin-uri
     resources: Resurse
+    security: Securitate
     session: Cont
     shortcuts: Comitete rapide
     soundpack: Pachete de sunet
@@ -256,6 +257,14 @@ review_request:
 save: Salvați
 save_and_restart: Salvați și reporniți
 search: Căutare
+security:
+  empty: Nu au fost permise sau refuzate încă permisiuni pentru widget-uri.
+  perms:
+    kill_processes: Forțați închiderea aplicațiilor
+    manage_app_windows: Controlați ferestrele altor aplicații
+    modify_configuration: Modificați configurația Seelen UI
+    open_file: Deschideți fișierele
+    run: Rulați programe
 see_more: A se vedea mai mult
 session:
   logout: Sign out

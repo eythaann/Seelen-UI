@@ -195,6 +195,7 @@ header:
     monitors: ម៉ូនីទ័រ
     plugin: រអារ
     resources: ធនធាន
+    security: សន្តិសុខ
     session: គណនី
     shortcuts: ផ្លូវកាត់
     soundpack: កញ្ចប់សំលេង
@@ -248,6 +249,14 @@ review_request:
 save: រក្សាទុក
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
 search: ស្វែងរក
+security:
+  empty: មិនមានការអនុញ្ញាតធាតុក្រាហ្វិកត្រូវបានអនុញ្ញាត ឬបដិសេធនៅឡើយទេ។
+  perms:
+    kill_processes: បង្ខំឱ្យបិទកម្មវិធី
+    manage_app_windows: គ្រប់គ្រងបង្អួចនៃកម្មវិធីផ្សេងទៀត។
+    modify_configuration: កែប្រែការកំណត់រចនាសម្ព័ន្ធ Seelen UI
+    open_file: បើកឯកសារ
+    run: ដំណើរការកម្មវិធី
 see_more: មើលច្រើនទៀត
 session:
   logout: ចេញ

@@ -75,6 +75,11 @@ widget_liveness:
     Може да се обидете да ја рестартирате апликацијата.
   failed_title: Грешка во виџетот
 widget_permissions:
+  perm_kill_processes: присилно затворање апликации
+  perm_manage_app_windows: >-
+    контролирајте ги прозорците на другите апликации (фокусирање, затворање,
+    минимизирање, преместување)
+  perm_modify_configuration: изменете ја конфигурацијата на Seelen UI
   perm_open_file: отворени датотеки
   perm_run: стартувајте програми
   request_description: |-

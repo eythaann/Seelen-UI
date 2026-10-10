@@ -197,6 +197,7 @@ header:
     monitors: Iwwerschwannegkeeten
     plugin: Plugins
     resources: Ressourcen
+    security: Sécherheet
     session: Kont
     shortcuts: Ofkierpsen
     soundpack: Tounpacken
@@ -250,6 +251,14 @@ review_request:
 save: Spuerwäit
 save_and_restart: Spuert & nei starten
 search: Sichen
+security:
+  empty: Keng Widget Permissiounen goufen nach erlaabt oder refuséiert.
+  perms:
+    kill_processes: Force zoumaachen Uwendungen
+    manage_app_windows: Kontrolléiert d'Fënstere vun aneren Uwendungen
+    modify_configuration: Änneren d'Seelen UI Konfiguratioun
+    open_file: Dateien opmaachen
+    run: Programmer lafen
 see_more: Méi gesinn
 session:
   logout: Zeechen Aus

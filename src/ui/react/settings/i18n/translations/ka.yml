@@ -199,6 +199,7 @@ header:
     monitors: მონიტორები
     plugin: ამხებო
     resources: რესურსები
+    security: უსაფრთხოება
     session: ანგარიში
     shortcuts: მალსახმობები
     soundpack: ხმის პაკეტები
@@ -252,6 +253,14 @@ review_request:
 save: Გადარჩენა
 save_and_restart: შენახვა და გადატვირთვა
 search: ძიება
+security:
+  empty: ვიჯეტის ნებართვები ჯერ არ არის დაშვებული ან უარყოფილი.
+  perms:
+    kill_processes: აპლიკაციების იძულებით დახურვა
+    manage_app_windows: აკონტროლეთ სხვა აპლიკაციების ფანჯრები
+    modify_configuration: შეცვალეთ Seelen UI-ის კონფიგურაცია
+    open_file: გახსენით ფაილები
+    run: გაუშვით პროგრამები
 see_more: იხილეთ მეტი
 session:
   logout: გასვლა

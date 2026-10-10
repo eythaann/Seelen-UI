@@ -57,6 +57,9 @@ widget_liveness:
     መተግበሪያውን እንደገና ለማስጀመር መሞከር ይችላሉ።
   failed_title: የመግብር ስህተት
 widget_permissions:
+  perm_kill_processes: አፕሊኬሽኖችን አስገድድ
+  perm_manage_app_windows: የሌሎች መተግበሪያዎችን መስኮቶች ይቆጣጠሩ (ማተኮር ፣ መዝጋት ፣ መቀነስ ፣ ማንቀሳቀስ)
+  perm_modify_configuration: የ Seelen UI ውቅርን ቀይር
   perm_open_file: ፋይሎችን ይክፈቱ
   perm_run: ፕሮግራሞችን አሂድ
   request_description: |-

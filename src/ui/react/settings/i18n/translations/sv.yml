@@ -196,6 +196,7 @@ header:
     monitors: Monitorer
     plugin: Plugins
     resources: Resurser
+    security: Säkerhet
     session: Konto
     shortcuts: Genvägar
     soundpack: Ljudpaket
@@ -251,6 +252,14 @@ review_request:
 save: Spara
 save_and_restart: Spara och starta om
 search: Söka
+security:
+  empty: Inga widgetbehörigheter har tillåtits eller nekats ännu.
+  perms:
+    kill_processes: Tvinga stängning av ansökningar
+    manage_app_windows: Styr fönstren i andra program
+    modify_configuration: Ändra Seelen UI-konfigurationen
+    open_file: Öppna filer
+    run: Kör program
 see_more: Se mer
 session:
   logout: Logga ut

@@ -202,6 +202,7 @@ header:
     monitors: Monitorok
     plugin: Plugins
     resources: Források
+    security: Biztonság
     session: fiók
     shortcuts: Parancsikonok
     soundpack: Hang csomagok
@@ -255,6 +256,14 @@ review_request:
 save: Megment
 save_and_restart: Mentés és újraindítás
 search: Keresés
+security:
+  empty: Még nem engedélyeztek vagy tagadtak meg widget-engedélyeket.
+  perms:
+    kill_processes: Alkalmazások kényszerített bezárása
+    manage_app_windows: Más alkalmazások ablakainak vezérlése
+    modify_configuration: Módosítsa a Seelen UI konfigurációját
+    open_file: Nyissa meg a fájlokat
+    run: Futtasson programokat
 see_more: Lásd még
 session:
   logout: Jelentkezzen ki

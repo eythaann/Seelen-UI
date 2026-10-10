@@ -190,6 +190,7 @@ header:
     monitors: الشاشات
     plugin: المكونات الإضافية
     resources: الموارد
+    security: حماية
     session: حساب
     shortcuts: الاختصارات
     soundpack: حزم الصوت
@@ -241,6 +242,14 @@ review_request:
 save: حفظ
 save_and_restart: حفظ وإعد التشغيل
 search: يبحث
+security:
+  empty: لم يتم السماح أو رفض أي أذونات للأداة حتى الآن.
+  perms:
+    kill_processes: فرض إغلاق التطبيقات
+    manage_app_windows: التحكم في نوافذ التطبيقات الأخرى
+    modify_configuration: قم بتعديل تكوين Seelen UI
+    open_file: فتح الملفات
+    run: تشغيل البرامج
 see_more: شاهد المزيد
 session:
   logout: تسجيل الخروج

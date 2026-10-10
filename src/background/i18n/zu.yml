@@ -74,6 +74,11 @@ widget_liveness:
     Ungazama ukuqala kabusha uhlelo lokusebenza.
   failed_title: Iphutha Lewijethi
 widget_permissions:
+  perm_kill_processes: phoqelela izinhlelo zokusebenza ezivaliwe
+  perm_manage_app_windows: >-
+    lawula amawindi ezinye izinhlelo zokusebenza (gxila, vala, nciphisa,
+    hambisa)
+  perm_modify_configuration: lungisa ukucushwa kwe-Seelen UI
   perm_open_file: vula amafayela
   perm_run: sebenzisa izinhlelo
   request_description: |-

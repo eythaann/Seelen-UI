@@ -74,6 +74,9 @@ widget_liveness:
     Voit yrittää käynnistää sovelluksen uudelleen.
   failed_title: Widget-virhe
 widget_permissions:
+  perm_kill_processes: pakottaa sulkemaan sovellukset
+  perm_manage_app_windows: hallita muiden sovellusten ikkunoita (tarkenna, sulje, pienennä, siirrä)
+  perm_modify_configuration: muokata Seelen UI -kokoonpanoa
   perm_open_file: avaa tiedostoja
   perm_run: ajaa ohjelmia
   request_description: |-

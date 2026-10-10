@@ -192,6 +192,7 @@ header:
     monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
     plugin: ਪਲੱਗਇਨ
     resources: ਸਰੋਤ
+    security: ਸੁਰੱਖਿਆ
     session: ਖਾਤਾ
     shortcuts: ਸ਼ਾਰਟਕੱਟ
     soundpack: ਧੁਨੀ ਪੈਕ
@@ -245,6 +246,14 @@ review_request:
 save: ਸੇਵ ਕਰੋ
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 search: ਖੋਜ
+security:
+  empty: ਅਜੇ ਤੱਕ ਕਿਸੇ ਵੀ ਵਿਜੇਟ ਅਨੁਮਤੀਆਂ ਦੀ ਇਜਾਜ਼ਤ ਜਾਂ ਇਨਕਾਰ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ।
+  perms:
+    kill_processes: ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਜ਼ਬਰਦਸਤੀ ਬੰਦ ਕਰੋ
+    manage_app_windows: ਹੋਰ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀਆਂ ਵਿੰਡੋਜ਼ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ
+    modify_configuration: Seelen UI ਸੰਰਚਨਾ ਨੂੰ ਸੋਧੋ
+    open_file: ਫਾਈਲਾਂ ਖੋਲ੍ਹੋ
+    run: ਪ੍ਰੋਗਰਾਮ ਚਲਾਓ
 see_more: ਹੋਰ ਦੇਖੋ
 session:
   logout: ਸਾਇਨ ਆਉਟ

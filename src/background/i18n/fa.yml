@@ -70,6 +70,9 @@ widget_liveness:
     می توانید برنامه را دوباره راه اندازی کنید.
   failed_title: خطای ویجت
 widget_permissions:
+  perm_kill_processes: اجبار بستن برنامه ها
+  perm_manage_app_windows: کنترل پنجره های سایر برنامه ها (تمرکز، بستن، کوچک کردن، حرکت)
+  perm_modify_configuration: پیکربندی Seelen UI را تغییر دهید
   perm_open_file: باز کردن فایل ها
   perm_run: برنامه ها را اجرا کنید
   request_description: |-

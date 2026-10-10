@@ -202,6 +202,7 @@ header:
     monitors: Монитори
     plugin: Приклучоци
     resources: Ресурси
+    security: Безбедност
     session: Сметка
     shortcuts: Кратенки
     soundpack: Звучни пакувања
@@ -255,6 +256,14 @@ review_request:
 save: Зачувај
 save_and_restart: Зачувај и рестартирај
 search: Пребарување
+security:
+  empty: Сè уште не се дозволени или одбиени дозволи за виџети.
+  perms:
+    kill_processes: Присилно затворање апликации
+    manage_app_windows: Контролирајте ги прозорците на другите апликации
+    modify_configuration: Изменете ја конфигурацијата на Seelen UI
+    open_file: Отворете датотеки
+    run: Стартувај програми
 see_more: Погледнете повеќе
 session:
   logout: Одјавете се

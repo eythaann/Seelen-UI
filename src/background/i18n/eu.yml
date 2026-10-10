@@ -74,6 +74,11 @@ widget_liveness:
     Aplikazioa berrabiarazten saia zaitezke.
   failed_title: Widgetaren errorea
 widget_permissions:
+  perm_kill_processes: behartu itxi aplikazioak
+  perm_manage_app_windows: >-
+    kontrolatu beste aplikazio batzuen leihoak (fokatu, itxi, minimizatu,
+    mugitu)
+  perm_modify_configuration: aldatu Seelen UI konfigurazioa
   perm_open_file: ireki fitxategiak
   perm_run: exekutatu programak
   request_description: |-

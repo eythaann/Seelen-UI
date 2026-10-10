@@ -70,6 +70,11 @@ widget_liveness:
     તમે એપ્લિકેશનને ફરીથી પ્રારંભ કરવાનો પ્રયાસ કરી શકો છો.
   failed_title: વિજેટ ભૂલ
 widget_permissions:
+  perm_kill_processes: દબાણ બંધ કાર્યક્રમો
+  perm_manage_app_windows: >-
+    અન્ય એપ્લિકેશન્સની વિન્ડો નિયંત્રિત કરો (ફોકસ કરો, બંધ કરો, નાનું કરો,
+    ખસેડો)
+  perm_modify_configuration: Seelen UI રૂપરેખાંકન સંશોધિત કરો
   perm_open_file: ફાઇલો ખોલો
   perm_run: કાર્યક્રમો ચલાવો
   request_description: |-

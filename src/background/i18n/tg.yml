@@ -73,6 +73,11 @@ widget_liveness:
     Шумо метавонед кӯшиш кунед, ки барномаро бозоғоз намоед.
   failed_title: Хатогии виджет
 widget_permissions:
+  perm_kill_processes: барномаҳоро маҷбур кунед
+  perm_manage_app_windows: >-
+    идора кардани тирезаҳои барномаҳои дигар (тамаркуз, пӯшидан, кам кардан,
+    ҳаракат кардан)
+  perm_modify_configuration: конфигуратсияи Seelen UI-ро тағир диҳед
   perm_open_file: файлҳоро кушоед
   perm_run: барномаҳоро иҷро кунед
   request_description: |-

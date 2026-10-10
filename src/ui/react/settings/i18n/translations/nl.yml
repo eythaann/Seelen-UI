@@ -198,6 +198,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Bronnen
+    security: Beveiliging
     session: Rekening
     shortcuts: Snelkoppelingen
     soundpack: Geluidspakketten
@@ -251,6 +252,14 @@ review_request:
 save: Opslaan
 save_and_restart: Opslaan en opnieuw opstarten
 search: Zoekopdracht
+security:
+  empty: Er zijn nog geen widgetmachtigingen toegestaan ​​of geweigerd.
+  perms:
+    kill_processes: Sluit applicaties af
+    manage_app_windows: Beheer de vensters van andere toepassingen
+    modify_configuration: Wijzig de Seelen UI-configuratie
+    open_file: Bestanden openen
+    run: Programma's uitvoeren
 see_more: Meer zien
 session:
   logout: Uitloggen

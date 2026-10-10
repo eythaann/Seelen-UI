@@ -190,6 +190,7 @@ header:
     monitors: จอภาพ
     plugin: ปลั๊กอิน
     resources: ทรัพยากร
+    security: ความปลอดภัย
     session: บัญชี
     shortcuts: ทางลัด
     soundpack: ชุดเสียง
@@ -241,6 +242,14 @@ review_request:
 save: บันทึก
 save_and_restart: บันทึกและรีสตาร์ท
 search: ค้นหา
+security:
+  empty: ยังไม่มีการอนุญาตหรือปฏิเสธการอนุญาตวิดเจ็ต
+  perms:
+    kill_processes: บังคับปิดแอปพลิเคชัน
+    manage_app_windows: ควบคุมหน้าต่างของแอพพลิเคชั่นอื่น
+    modify_configuration: แก้ไขการกำหนดค่า Seelen UI
+    open_file: เปิดไฟล์
+    run: เรียกใช้โปรแกรม
 see_more: ดูเพิ่มเติม
 session:
   logout: ออกจากระบบ

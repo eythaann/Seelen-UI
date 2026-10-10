@@ -71,6 +71,9 @@ widget_liveness:
     Þú getur prófað að endurræsa forritið.
   failed_title: Búnaður Villa
 widget_permissions:
+  perm_kill_processes: þvinga loka umsóknir
+  perm_manage_app_windows: stjórna gluggum annarra forrita (fókus, loka, lágmarka, færa)
+  perm_modify_configuration: breyta Seelen UI stillingu
   perm_open_file: opna skrár
   perm_run: keyra forrit
   request_description: |-

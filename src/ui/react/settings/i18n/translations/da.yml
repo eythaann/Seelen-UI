@@ -195,6 +195,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Ressourcer
+    security: Sikkerhed
     session: Konto
     shortcuts: Genveje
     soundpack: Lydpakker
@@ -250,6 +251,14 @@ review_request:
 save: Gemme
 save_and_restart: Gem & genstart
 search: Søge
+security:
+  empty: Ingen widget-tilladelser er blevet tilladt eller nægtet endnu.
+  perms:
+    kill_processes: Tving lukkede ansøgninger
+    manage_app_windows: Styr vinduerne i andre programmer
+    modify_configuration: Rediger Seelen UI-konfigurationen
+    open_file: Åbn filer
+    run: Kør programmer
 see_more: Se mere
 session:
   logout: Log ud

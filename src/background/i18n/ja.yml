@@ -57,6 +57,9 @@ widget_liveness:
     アプリを再起動してみてください。
   failed_title: ウィジェットエラー
 widget_permissions:
+  perm_kill_processes: アプリケーションを強制終了する
+  perm_manage_app_windows: 他のアプリケーションのウィンドウを制御する (フォーカス、閉じる、最小化、移動)
+  perm_modify_configuration: Seelen UI 構成を変更する
   perm_open_file: ファイルを開く
   perm_run: プログラムを実行する
   request_description: |-

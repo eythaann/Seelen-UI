@@ -66,6 +66,9 @@ widget_liveness:
     تاسو کولی شئ د اپلیکیشن بیا پیلولو هڅه وکړئ.
   failed_title: د ویجټ تېروتنه
 widget_permissions:
+  perm_kill_processes: غوښتنلیکونه په زور سره تړل
+  perm_manage_app_windows: د نورو غوښتنلیکونو کړکۍ کنټرول کړئ (توجه، تړل، کمول، حرکت کول)
+  perm_modify_configuration: د Seelen UI ترتیب بدل کړئ
   perm_open_file: فایلونه خلاص کړئ
   perm_run: پروګرامونه چلوي
   request_description: |-

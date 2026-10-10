@@ -200,6 +200,7 @@ header:
     monitors: Мониторҳо
     plugin: Плагинҳо
     resources: Захираҳо
+    security: Амният
     session: Ҳисоб
     shortcuts: Миёнбурҳо
     soundpack: Пойафзолҳои садо
@@ -253,6 +254,14 @@ review_request:
 save: Пул захира кардан
 save_and_restart: Наҷот ва бозоғоз
 search: Ҷустуҷӯ
+security:
+  empty: Ҳанӯз ягон иҷозати виджет иҷозат ё рад нашудааст.
+  perms:
+    kill_processes: Барномаҳоро маҷбур кунед
+    manage_app_windows: Тирезаҳои барномаҳои дигарро идора кунед
+    modify_configuration: Конфигуратсияи Seelen UI-ро тағир диҳед
+    open_file: Файлҳоро кушоед
+    run: Барномаҳоро иҷро кунед
 see_more: Бештар нигаред
 session:
   logout: Баромадан

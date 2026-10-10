@@ -200,6 +200,7 @@ header:
     monitors: Monitors
     plugin: Plugins
     resources: Riżorsi
+    security: Sigurtà
     session: Kont
     shortcuts: Shortcuts
     soundpack: Pakketti tal-ħoss
@@ -255,6 +256,14 @@ review_request:
 save: Ħlief
 save_and_restart: Issejvja u terġa 'tibda
 search: Fittex
+security:
+  empty: S'issa ma ġewx permessi jew miċħuda l-ebda permessi tal-widget.
+  perms:
+    kill_processes: Ġegħla tagħlaq l-applikazzjonijiet
+    manage_app_windows: Ikkontrolla t-twieqi ta 'applikazzjonijiet oħra
+    modify_configuration: Immodifika l-konfigurazzjoni ta 'Seelen UI
+    open_file: Iftaħ fajls
+    run: Mexxi programmi
 see_more: Ara aktar
 session:
   logout: Sign Out

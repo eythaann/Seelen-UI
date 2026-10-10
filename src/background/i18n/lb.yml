@@ -73,6 +73,11 @@ widget_liveness:
     Dir kënnt probéieren d'App nei ze starten.
   failed_title: Widget Feeler
 widget_permissions:
+  perm_kill_processes: Kraaft zoumaachen Uwendungen
+  perm_manage_app_windows: >-
+    Kontrolléiert d'Fënstere vun aneren Uwendungen (fokusséieren, zoumaachen,
+    minimiséieren, réckelen)
+  perm_modify_configuration: d'Seelen UI Konfiguratioun änneren
   perm_open_file: opmaachen Dateien
   perm_run: lafen Programmer
   request_description: |-

@@ -201,6 +201,7 @@ header:
     monitors: Ukuqapha
     plugin: Amaplithi
     resources: Izinsizakusebenza
+    security: Ezokuphepha
     session: I-akhawunti
     shortcuts: Amashoshothi
     soundpack: Amaphakethe omsindo
@@ -256,6 +257,14 @@ review_request:
 save: Hlenga
 save_and_restart: Gcina futhi Qalisa kabusha
 search: Sesha
+security:
+  empty: Azikho izimvume zewijethi ezivunyelwe noma ezinqatshiwe okwamanje.
+  perms:
+    kill_processes: Phoqa izinhlelo zokusebenza ezivaliwe
+    manage_app_windows: Lawula amawindi ezinye izinhlelo zokusebenza
+    modify_configuration: Lungisa ukucushwa kwe-Seelen UI
+    open_file: Vula amafayela
+    run: Qalisa izinhlelo
 see_more: Buka Okuningi
 session:
   logout: Phuma ngemvume

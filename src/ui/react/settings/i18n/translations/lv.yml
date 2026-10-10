@@ -197,6 +197,7 @@ header:
     monitors: Monitori
     plugin: Spraudņi
     resources: Resursi
+    security: Drošība
     session: Konts
     shortcuts: Saīsnes
     soundpack: Skaņu paketes
@@ -250,6 +251,14 @@ review_request:
 save: Ietaupīt
 save_and_restart: Saglabāt un restartēt
 search: Meklēt
+security:
+  empty: Neviena logrīka atļauja vēl nav atļauta vai liegta.
+  perms:
+    kill_processes: Piespiedu kārtā aizvērt lietojumprogrammas
+    manage_app_windows: Kontrolējiet citu lietojumprogrammu logus
+    modify_configuration: Mainiet Seelen UI konfigurāciju
+    open_file: Atveriet failus
+    run: Palaist programmas
 see_more: Skatīt vairāk
 session:
   logout: Izrakstīties

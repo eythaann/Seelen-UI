@@ -72,6 +72,11 @@ widget_liveness:
     Megpróbálhatja újraindítani az alkalmazást.
   failed_title: Widget hiba
 widget_permissions:
+  perm_kill_processes: kényszerítse az alkalmazások bezárását
+  perm_manage_app_windows: >-
+    más alkalmazások ablakainak vezérlése (fókusz, bezárás, kicsinyítés,
+    áthelyezés)
+  perm_modify_configuration: módosítsa a Seelen UI konfigurációját
   perm_open_file: nyissa meg a fájlokat
   perm_run: programokat futtatni
   request_description: |-

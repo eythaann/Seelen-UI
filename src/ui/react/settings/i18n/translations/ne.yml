@@ -199,6 +199,7 @@ header:
     monitors: मोनिटरहरू
     plugin: निशम्न
     resources: वस्तुजार
+    security: सुरक्षा
     session: खाता
     shortcuts: सर्टकटहरू
     soundpack: ध्वनि प्याक
@@ -254,6 +255,14 @@ review_request:
 save: बचाउनु
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
 search: खोज्नुहोस्
+security:
+  empty: कुनै पनि विजेट अनुमतिहरू अझै अनुमति वा अस्वीकार गरिएको छैन।
+  perms:
+    kill_processes: जबरजस्ती अनुप्रयोगहरू बन्द गर्नुहोस्
+    manage_app_windows: अन्य अनुप्रयोगहरूको विन्डोहरू नियन्त्रण गर्नुहोस्
+    modify_configuration: Seelen UI कन्फिगरेसन परिमार्जन गर्नुहोस्
+    open_file: फाइलहरू खोल्नुहोस्
+    run: कार्यक्रमहरू चलाउनुहोस्
 see_more: अझ हेर्नुहोस्
 session:
   logout: साइन आउट गर्नुहोस्

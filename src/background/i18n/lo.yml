@@ -68,6 +68,11 @@ widget_liveness:
     ທ່ານສາມາດລອງຣີສະຕາດແອັບໄດ້.
   failed_title: Widget ຜິດພາດ
 widget_permissions:
+  perm_kill_processes: ບັງຄັບໃຫ້ປິດແອັບພລິເຄຊັນ
+  perm_manage_app_windows: >-
+    ຄວບ​ຄຸມ​ປ່ອງ​ຢ້ຽມ​ຂອງ​ຄໍາ​ຮ້ອງ​ສະ​ຫມັກ​ອື່ນໆ (ສຸມ​ໃສ່​, ປິດ​, ຫຼຸດ​ຜ່ອນ​,
+    ຍ້າຍ​)
+  perm_modify_configuration: ແກ້ໄຂການຕັ້ງຄ່າ Seelen UI
   perm_open_file: ເປີດໄຟລ໌
   perm_run: ດໍາເນີນໂຄງການ
   request_description: |-

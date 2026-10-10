@@ -76,6 +76,11 @@ widget_liveness:
     შეგიძლიათ სცადოთ აპის გადატვირთვა.
   failed_title: ვიჯეტის შეცდომა
 widget_permissions:
+  perm_kill_processes: აპლიკაციების დახურვა ძალით
+  perm_manage_app_windows: >-
+    სხვა აპლიკაციების ფანჯრების კონტროლი (ფოკუსირება, დახურვა, მინიმიზაცია,
+    გადაადგილება)
+  perm_modify_configuration: შეცვალეთ Seelen UI-ის კონფიგურაცია
   perm_open_file: ფაილების გახსნა
   perm_run: პროგრამების გაშვება
   request_description: |-

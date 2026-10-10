@@ -194,6 +194,7 @@ header:
     monitors: څارونکي
     plugin: فلګونه
     resources: سرچینې
+    security: امنیت
     session: حساب
     shortcuts: لنډوکونه
     soundpack: غږ کڅوړه
@@ -245,6 +246,14 @@ review_request:
 save: خوندي کړئ
 save_and_restart: خوندي کول او بیا پیل کړئ
 search: لټون
+security:
+  empty: تر اوسه د ویجټ اجازه نه ده ورکړل شوې یا رد شوې.
+  perms:
+    kill_processes: په زور سره غوښتنلیکونه تړل
+    manage_app_windows: د نورو غوښتنلیکونو کړکۍ کنټرول کړئ
+    modify_configuration: د Seelen UI ترتیب بدل کړئ
+    open_file: فایلونه خلاص کړئ
+    run: پروګرامونه چلول
 see_more: نور وګوره
 session:
   logout: لاسلیک کول

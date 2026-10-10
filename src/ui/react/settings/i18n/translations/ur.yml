@@ -196,6 +196,7 @@ header:
     monitors: مانیٹر
     plugin: پلگ ان
     resources: وسائل
+    security: سیکورٹی
     session: اکاؤنٹ
     shortcuts: شارٹ کٹ
     soundpack: ساؤنڈ پیک
@@ -251,6 +252,14 @@ review_request:
 save: محفوظ کریں
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 search: تلاش کریں۔
+security:
+  empty: ابھی تک کسی ویجیٹ کی اجازت کی اجازت یا تردید نہیں کی گئی ہے۔
+  perms:
+    kill_processes: ایپلی کیشنز کو زبردستی بند کریں۔
+    manage_app_windows: دیگر ایپلی کیشنز کی ونڈوز کو کنٹرول کریں۔
+    modify_configuration: Seelen UI کنفیگریشن میں ترمیم کریں۔
+    open_file: فائلیں کھولیں۔
+    run: پروگرام چلائیں۔
 see_more: مزید دیکھیں
 session:
   logout: سائن آؤٹ کریں۔
