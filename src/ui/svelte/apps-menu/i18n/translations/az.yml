@@ -14,6 +14,7 @@ query:
   all: Hamısı
   apps: Proqramlar
   files: Fayllar
+  settings: Parametrlər
   web: Veb
 run_as_admin: Administrator olaraq işə salın
 uninstall: Silin

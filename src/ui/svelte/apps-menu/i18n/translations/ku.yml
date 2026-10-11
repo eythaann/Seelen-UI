@@ -14,6 +14,7 @@ query:
   all: Gişt
   apps: Apps
   files: Pelên
+  settings: Settings
   web: Tevn
 run_as_admin: Wekî Rêveber bimeşîne
 uninstall: Rakirin

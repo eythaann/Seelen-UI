@@ -14,6 +14,7 @@ query:
   all: सभी
   apps: ऐप्स
   files: फ़ाइलें
+  settings: सेटिंग्स
   web: वेब
 run_as_admin: व्यवस्थापक के रूप में चलाएं
 uninstall: अनइंस्टॉल करें

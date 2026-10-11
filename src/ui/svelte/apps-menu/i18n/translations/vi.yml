@@ -14,6 +14,7 @@ query:
   all: Tất cả
   apps: Ứng dụng
   files: Tập tin
+  settings: Cài đặt
   web: Web
 run_as_admin: Chạy với tư cách quản trị viên
 uninstall: Gỡ cài đặt

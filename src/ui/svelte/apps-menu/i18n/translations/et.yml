@@ -14,6 +14,7 @@ query:
   all: Kõik
   apps: Rakendused
   files: Failid
+  settings: Seaded
   web: Veeb
 run_as_admin: Käivita administraatorina
 uninstall: Desinstalli

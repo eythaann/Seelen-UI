@@ -14,6 +14,7 @@ query:
   all: Almal
   apps: Toepassings
   files: Lêers
+  settings: Instellings
   web: Web
 run_as_admin: Begin as administrateur
 uninstall: Deïnstalleer

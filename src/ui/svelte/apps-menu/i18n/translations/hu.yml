@@ -14,6 +14,7 @@ query:
   all: Minden
   apps: Alkalmazások elemre
   files: Fájlok
+  settings: Beállítások elemre
   web: Web
 run_as_admin: Futtassa rendszergazdaként
 uninstall: Eltávolítás

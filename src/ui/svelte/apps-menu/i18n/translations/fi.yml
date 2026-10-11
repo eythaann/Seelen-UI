@@ -14,6 +14,7 @@ query:
   all: Kaikki
   apps: Sovellukset
   files: Tiedostot
+  settings: Asetukset
   web: Web
 run_as_admin: Suorita järjestelmänvalvojana
 uninstall: Poista asennus

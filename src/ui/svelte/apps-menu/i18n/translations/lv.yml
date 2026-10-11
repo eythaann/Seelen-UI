@@ -14,6 +14,7 @@ query:
   all: Visi
   apps: Lietotnes
   files: Faili
+  settings: Iestatījumi
   web: Web
 run_as_admin: Palaist kā administrators
 uninstall: Atinstalēt

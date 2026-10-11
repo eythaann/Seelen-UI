@@ -14,6 +14,7 @@ query:
   all: 全部
   apps: 应用
   files: 文件
+  settings: 设置
   web: 网页
 run_as_admin: 以管理员身份运行
 uninstall: 卸载

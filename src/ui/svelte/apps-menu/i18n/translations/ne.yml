@@ -14,6 +14,7 @@ query:
   all: सबै
   apps: एपहरू
   files: फाइलहरू
+  settings: सेटिङहरू
   web: वेब
 run_as_admin: प्रशासकको रूपमा चलाउनुहोस्
 uninstall: स्थापना रद्द गर्नुहोस्

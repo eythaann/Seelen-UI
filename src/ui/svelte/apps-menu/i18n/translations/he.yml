@@ -14,6 +14,7 @@ query:
   all: כֹּל
   apps: אפליקציות
   files: קבצים
+  settings: הגדרות
   web: אינטרנט
 run_as_admin: הפעל כמנהל
 uninstall: הסר את ההתקנה

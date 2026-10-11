@@ -14,6 +14,7 @@ query:
   all: সব
   apps: অ্যাপস
   files: ফাইল
+  settings: সেটিংস
   web: ওয়েব
 run_as_admin: প্রশাসক হিসাবে চালান
 uninstall: আনইনস্টল করুন

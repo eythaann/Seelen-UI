@@ -14,6 +14,7 @@ query:
   all: అన్నీ
   apps: యాప్‌లు
   files: ఫైళ్లు
+  settings: సెట్టింగ్‌లు
   web: వెబ్
 run_as_admin: అడ్మినిస్ట్రేటర్‌గా అమలు చేయండి
 uninstall: అన్‌ఇన్‌స్టాల్ చేయండి

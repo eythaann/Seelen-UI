@@ -14,6 +14,7 @@ query:
   all: Бүгд
   apps: Програмууд
   files: Файлууд
+  settings: Тохиргоо
   web: Вэб
 run_as_admin: Администратороор ажиллуулна уу
 uninstall: Устгах

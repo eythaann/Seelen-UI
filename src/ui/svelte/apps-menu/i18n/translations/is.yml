@@ -14,6 +14,7 @@ query:
   all: Allt
   apps: Forrit
   files: Skrár
+  settings: Stillingar
   web: Vefur
 run_as_admin: Keyra sem stjórnandi
 uninstall: Fjarlægðu

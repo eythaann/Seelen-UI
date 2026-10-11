@@ -14,6 +14,7 @@ query:
   all: Wszystko
   apps: Aplikacje
   files: Akta
+  settings: Ustawienia
   web: Sieć
 run_as_admin: Uruchom jako administrator
 uninstall: Odinstaluj

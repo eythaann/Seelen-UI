@@ -13,6 +13,7 @@ power_menu: 435fc864
 query.all: 75afe364
 query.apps: 53d91aac
 query.files: 5b76247c
+query.settings: a9d006ec
 query.web: 6f7de760
 run_as_admin: b120b0b9
 uninstall: 4a0bc1ff

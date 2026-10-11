@@ -14,6 +14,7 @@ query:
   all: ሁሉም
   apps: መተግበሪያዎች
   files: ፋይሎች
+  settings: ቅንብሮች
   web: ድር
 run_as_admin: እንደ አስተዳዳሪ ያሂዱ
 uninstall: አራግፍ

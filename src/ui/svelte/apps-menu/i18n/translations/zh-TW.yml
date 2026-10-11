@@ -14,6 +14,7 @@ query:
   all: 全部
   apps: 應用程式
   files: 文件
+  settings: 設定
   web: 網路
 run_as_admin: 以管理員身份執行
 uninstall: 解除安裝

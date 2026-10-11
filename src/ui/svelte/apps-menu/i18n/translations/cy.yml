@@ -14,6 +14,7 @@ query:
   all: Pawb
   apps: Apiau
   files: Ffeiliau
+  settings: Gosodiadau
   web: Gwe
 run_as_admin: Rhedeg fel Gweinyddwr
 uninstall: Dadosod

@@ -14,6 +14,7 @@ query:
   all: Բոլորը
   apps: Հավելվածներ
   files: Ֆայլեր
+  settings: Կարգավորումներ
   web: Վեբ
 run_as_admin: Գործարկել որպես ադմինիստրատոր
 uninstall: Տեղահանել

@@ -14,6 +14,7 @@ query:
   all: Všetky
   apps: Aplikácie
   files: Súbory
+  settings: Nastavenia
   web: Web
 run_as_admin: Spustite ako správca
 uninstall: Odinštalovať

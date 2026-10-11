@@ -14,6 +14,7 @@ query:
   all: Ολοι
   apps: Εφαρμογές
   files: Αρχεία
+  settings: Ρυθμίσεις
   web: Ιστός
 run_as_admin: Εκτέλεση ως Διαχειριστής
 uninstall: Απεγκατάσταση

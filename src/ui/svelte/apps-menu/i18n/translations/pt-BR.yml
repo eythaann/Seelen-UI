@@ -14,6 +14,7 @@ query:
   all: Todos
   apps: Aplicativas
   files: Arquivos
+  settings: Configurações
   web: Rede
 run_as_admin: Executar como administrador
 uninstall: Desinstalar

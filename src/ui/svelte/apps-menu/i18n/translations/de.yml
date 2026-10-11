@@ -14,6 +14,7 @@ query:
   all: Alle
   apps: Apps
   files: Dateien
+  settings: Einstellungen
   web: Web
 run_as_admin: Als Administrator ausführen
 uninstall: Deinstallieren

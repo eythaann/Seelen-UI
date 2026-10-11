@@ -14,6 +14,7 @@ query:
   all: Semua
   apps: Aplikasi
   files: File
+  settings: Pengaturan
   web: jaring
 run_as_admin: Jalankan sebagai Administrator
 uninstall: Copot pemasangan

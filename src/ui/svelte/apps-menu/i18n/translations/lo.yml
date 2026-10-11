@@ -14,6 +14,7 @@ query:
   all: ທັງໝົດ
   apps: ແອັບ
   files: ໄຟລ໌
+  settings: ການຕັ້ງຄ່າ
   web: ເວັບ
 run_as_admin: ດໍາເນີນການເປັນ Administrator
 uninstall: ຖອນການຕິດຕັ້ງ

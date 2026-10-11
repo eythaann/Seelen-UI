@@ -14,6 +14,7 @@ query:
   all: Toate
   apps: Aplicații
   files: Fișiere
+  settings: Setări
   web: Web
 run_as_admin: Rulați ca administrator
 uninstall: Dezinstalează

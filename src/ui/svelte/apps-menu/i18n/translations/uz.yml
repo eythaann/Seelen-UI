@@ -14,6 +14,7 @@ query:
   all: Hammasi
   apps: Ilovalar
   files: Fayllar
+  settings: Sozlamalar
   web: Veb
 run_as_admin: Administrator sifatida ishga tushirish
 uninstall: Oʻchirish

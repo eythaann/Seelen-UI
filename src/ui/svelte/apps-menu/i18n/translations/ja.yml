@@ -14,6 +14,7 @@ query:
   all: 全て
   apps: アプリ
   files: ファイル
+  settings: 設定
   web: ウェブ
 run_as_admin: 管理者として実行
 uninstall: アンインストール

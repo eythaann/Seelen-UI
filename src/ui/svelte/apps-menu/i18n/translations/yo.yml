@@ -14,6 +14,7 @@ query:
   all: Gbogbo
   apps: Awọn ohun elo
   files: Awọn faili
+  settings: Eto
   web: Ayelujara
 run_as_admin: Ṣiṣe bi Alakoso
 uninstall: Yọ kuro

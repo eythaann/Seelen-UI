@@ -14,6 +14,7 @@ query:
   all: Све
   apps: Аппс
   files: Фајлови
+  settings: Подешавања
   web: Веб
 run_as_admin: Покрени као администратор
 uninstall: Деинсталирај

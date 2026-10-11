@@ -14,6 +14,7 @@ query:
   all: Ҳама
   apps: Барномаҳо
   files: Файлҳо
+  settings: Танзимотҳо
   web: Веб
 run_as_admin: Ҳамчун администратор иҷро кунед
 uninstall: Uninstall

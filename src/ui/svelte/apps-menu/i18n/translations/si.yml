@@ -14,6 +14,7 @@ query:
   all: සියල්ල
   apps: යෙදුම්
   files: ගොනු
+  settings: සැකසීම්
   web: වෙබ්
 run_as_admin: පරිපාලක ලෙස ධාවනය කරන්න
 uninstall: අස්ථාපනය කරන්න

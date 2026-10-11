@@ -14,6 +14,7 @@ query:
   all: બધા
   apps: એપ્લિકેશન્સ
   files: ફાઇલો
+  settings: સેટિંગ્સ
   web: વેબ
 run_as_admin: એડમિનિસ્ટ્રેટર તરીકે ચલાવો
 uninstall: અનઇન્સ્ટોલ કરો

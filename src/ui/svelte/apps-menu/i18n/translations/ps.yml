@@ -14,6 +14,7 @@ query:
   all: ټول
   apps: ایپس
   files: فایلونه
+  settings: ترتیبات
   web: ویب
 run_as_admin: د مدیر په توګه چلول
 uninstall: غیر نصب کړئ

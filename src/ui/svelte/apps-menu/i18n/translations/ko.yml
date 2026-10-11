@@ -14,6 +14,7 @@ query:
   all: 모두
   apps: 앱
   files: 파일
+  settings: 설정
   web: 편물
 run_as_admin: 관리자로 실행
 uninstall: 제거

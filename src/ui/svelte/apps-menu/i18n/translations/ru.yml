@@ -14,6 +14,7 @@ query:
   all: Все
   apps: Приложения
   files: Файлы
+  settings: Настройки
   web: Интернет
 run_as_admin: Запуск от имени администратора
 uninstall: Удалить

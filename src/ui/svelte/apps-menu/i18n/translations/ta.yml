@@ -14,6 +14,7 @@ query:
   all: அனைத்து
   apps: பயன்பாடுகள்
   files: கோப்புகள்
+  settings: அமைப்புகள்
   web: வலை
 run_as_admin: நிர்வாகியாக இயக்கவும்
 uninstall: நிறுவல் நீக்கவும்

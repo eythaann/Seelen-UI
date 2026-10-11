@@ -14,6 +14,7 @@ query:
   all: ទាំងអស់។
   apps: កម្មវិធី
   files: ឯកសារ
+  settings: ការកំណត់
   web: បណ្តាញ
 run_as_admin: ដំណើរការជាអ្នកគ្រប់គ្រង
 uninstall: លុប

@@ -14,6 +14,7 @@ query:
   all: Visi
   apps: Programėlės
   files: Failai
+  settings: Nustatymai
   web: Žiniatinklis
 run_as_admin: Vykdyti kaip administratorius
 uninstall: Pašalinkite
