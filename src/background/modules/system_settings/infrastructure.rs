@@ -2,14 +2,14 @@ use std::sync::Once;
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{Color, NightlightSettings, UIColors},
+    system_state::{Color, NightlightSettings, SystemSettingEntry, UIColors},
 };
 
 use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::system_settings::{
-        application::{SystemSettings, SystemSettingsEvent},
+        application::{SystemSettings, SystemSettingsEvent, SystemSettingsIndex},
         nightlight,
     },
 };
@@ -51,6 +51,10 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn set_system_dark_mode(enabled: bool) -> Result<()> {
         SystemSettings::set_dark_mode(enabled)
+    }
+
+    pub fn enum_system_settings() -> Vec<SystemSettingEntry> {
+        SystemSettingsIndex::instance().entries().to_vec()
     }
 
     pub fn get_system_night_light_settings() -> Result<NightlightSettings> {

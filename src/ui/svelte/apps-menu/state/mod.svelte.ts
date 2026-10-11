@@ -1,5 +1,6 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
-import type { StartMenuItem, StartMenuLayoutItem } from "@seelen-ui/lib/types";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import type { StartMenuItem, StartMenuLayoutItem, SystemSettingEntry } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
 import { StartDisplayMode, StartView } from "../constants";
 import { foldersAsStartMenuItems } from "./knownFolders.svelte";
@@ -19,6 +20,35 @@ const startMenuItems = lazyRune(() => invoke(SeelenCommand.GetStartMenuItems));
 subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
 
 await Promise.all([settings.init(), user.init(), monitors.init(), startMenuItems.init()]);
+
+// static per session, building the index can take a while so it is not awaited.
+let systemSettings = $state.raw<SystemSettingEntry[]>([]);
+invoke(SeelenCommand.SystemEnumSettings)
+  .then((entries) => {
+    registerGlyphFonts(entries);
+    systemSettings = entries;
+  })
+  .catch(console.error);
+
+/** Loads the private icon fonts of the Settings app, system fonts are already available. */
+function registerGlyphFonts(entries: SystemSettingEntry[]) {
+  const fonts = new Map<string, string>();
+  for (const entry of entries) {
+    if (entry.fontFamily && entry.fontPath) {
+      fonts.set(entry.fontFamily, entry.fontPath);
+    }
+  }
+
+  if (!fonts.size) {
+    return;
+  }
+
+  const style = document.createElement("style");
+  style.textContent = [...fonts]
+    .map(([family, path]) => `@font-face { font-family: "${family}"; src: url("${convertFileSrc(path)}"); }`)
+    .join("\n");
+  document.head.appendChild(style);
+}
 
 $effect.root(() => {
   $effect(() => {
@@ -301,6 +331,10 @@ class State {
 
   get allItems() {
     return startMenuItems.value;
+  }
+
+  get systemSettings() {
+    return systemSettings;
   }
 
   get displayMode() {

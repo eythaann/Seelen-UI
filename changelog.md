@@ -2,6 +2,11 @@
 
 ## [2.8.9-dev]
 
+### features
+
+- apps menu search now includes Windows Settings pages and Control Panel items, localized to the system language and
+  indexed from Windows itself, with a new `settings:` filter.
+
 ### enhancements
 
 - do not disturb can now be toggled from the notifications widget without opening Windows settings.

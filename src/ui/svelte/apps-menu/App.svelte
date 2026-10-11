@@ -13,13 +13,13 @@
   // Detect and manage query prefix
   const queryPrefix = $derived.by(() => {
     const query = searchState.searchQuery.trim();
-    const match = query.match(/^(apps|files|web):/i);
+    const match = query.match(/^(apps|files|settings|web):/i);
     return match ? match[1]?.toLowerCase() || "" : "";
   });
 
   function handlePrefixChange(newPrefix: string) {
     const query = searchState.searchQuery.trim();
-    const match = query.match(/^(apps|files|web):/i);
+    const match = query.match(/^(apps|files|settings|web):/i);
     const search = match ? query.slice(match[0].length).trim() : query;
 
     if (newPrefix) {
@@ -99,6 +99,7 @@
         <option value="">{$t("query.all")}</option>
         <option value="apps">{$t("query.apps")}</option>
         <option value="files">{$t("query.files")}</option>
+        <option value="settings">{$t("query.settings")}</option>
         <option value="web">{$t("query.web")}</option>
       </select>
     {/if}

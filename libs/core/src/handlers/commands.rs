@@ -240,6 +240,7 @@ slu_commands_declaration! {
     SystemSetDarkMode =
         @fallible()
         set_system_dark_mode(enabled: bool),
+    SystemEnumSettings = enum_system_settings() -> Vec<SystemSettingEntry>,
     SystemGetNightLightSettings =
         @fallible()
         get_system_night_light_settings() -> NightlightSettings,

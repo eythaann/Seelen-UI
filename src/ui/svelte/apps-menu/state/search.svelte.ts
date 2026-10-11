@@ -1,7 +1,13 @@
-import type { StartMenuItem } from "@seelen-ui/lib/types";
+import type { StartMenuItem, SystemSettingEntry } from "@seelen-ui/lib/types";
 import { Document } from "flexsearch";
 import { globalState } from "./mod.svelte";
 import { foldersAsStartMenuItems } from "./knownFolders.svelte";
+
+const APPS_AND_FILES_LIMIT = 21;
+/** Settings shown together with apps and files, kept low to not bury the apps results. */
+const SETTINGS_LIMIT_MIXED = 8;
+/** Settings shown when filtering by `settings:`, they are the only results. */
+const SETTINGS_LIMIT_FILTERED = 50;
 
 let rawSearch = $state("");
 
@@ -9,6 +15,7 @@ const filterBy = $derived.by(() => {
   const raw = rawSearch.trim().toLowerCase();
   if (raw.startsWith("apps:")) return "apps";
   if (raw.startsWith("files:")) return "files";
+  if (raw.startsWith("settings:")) return "settings";
   if (raw.startsWith("web:")) return "web";
   return undefined;
 });
@@ -29,13 +36,15 @@ interface SearchableItem extends StartMenuItem {
   isApp?: boolean;
 }
 
+export type SearchResult = SearchableItem | SystemSettingEntry;
+
 const _itemsWhereToSearch: SearchableItem[] = $derived.by(() => {
   const allItems: StartMenuItem[] = [
     ...globalState.allItems,
     ...(hasSearch ? foldersAsStartMenuItems.value : []),
   ];
 
-  if (filterBy === "web") {
+  if (filterBy === "web" || filterBy === "settings") {
     return [];
   }
 
@@ -107,14 +116,61 @@ const _searchIndex = $derived.by(() => {
   return { index, itemMap };
 });
 
-// Only queries the pre-built index on each keystroke — no indexing here.
-const searchedItems = $derived.by(() => {
+// Built once, the settings list is static per session.
+const _settingsIndex = $derived.by(() => {
+  const itemMap = new Map<string, SystemSettingEntry>();
+  const index = new Document<{ id: string; title: string; keywords: string }>({
+    document: { id: "id", index: ["title", "keywords"] },
+    // "full" matches in the middle of words, needed for languages without spaces (e.g. chinese)
+    tokenize: "full",
+  });
+
+  for (const entry of globalState.systemSettings) {
+    const id = getResultKey(entry);
+    itemMap.set(id, entry);
+    index.add({ id, title: entry.title, keywords: entry.keywords.join(" ") });
+  }
+
+  return { index, itemMap };
+});
+
+const searchedSettings = $derived.by(() => {
+  if (filterBy && filterBy !== "settings") {
+    return [];
+  }
+
+  const limit = filterBy === "settings" ? SETTINGS_LIMIT_FILTERED : SETTINGS_LIMIT_MIXED;
   if (!search.length) {
-    return _itemsWhereToSearch;
+    // without filter the default "all apps" list is shown, with `settings:` all the entries
+    // (settings and control panel), rendered progressively by the view
+    return filterBy ? globalState.systemSettings.toSorted((a, b) => a.title.localeCompare(b.title)) : [];
+  }
+
+  const { index, itemMap } = _settingsIndex;
+  const results = index.search(search, { limit, enrich: false });
+
+  // title matches are returned before keyword matches
+  const seen = new Set<string>();
+  const matched: SystemSettingEntry[] = [];
+  for (const fieldResult of results) {
+    for (const id of fieldResult.result as string[]) {
+      if (!seen.has(id) && itemMap.has(id)) {
+        seen.add(id);
+        matched.push(itemMap.get(id)!);
+      }
+    }
+  }
+  return matched.slice(0, limit);
+});
+
+// Only queries the pre-built index on each keystroke — no indexing here.
+const searchedItems = $derived.by((): SearchResult[] => {
+  if (!search.length) {
+    return [..._itemsWhereToSearch, ...searchedSettings];
   }
 
   const { index, itemMap } = _searchIndex;
-  const results = index.search(search, { limit: 21, enrich: false });
+  const results = index.search(search, { limit: APPS_AND_FILES_LIMIT, enrich: false });
 
   const seen = new Set<string>();
   const matched: SearchableItem[] = [];
@@ -128,8 +184,14 @@ const searchedItems = $derived.by(() => {
     }
   }
 
-  // apps first, then cap to the global limit
-  return matched.toSorted((a, b) => Number(b.isApp) - Number(a.isApp));
+  // exact settings names first, then apps, then the rest of the items
+  const query = search.toLowerCase();
+  const exactSettings = searchedSettings.filter((s) => s.title.toLowerCase() === query);
+  const otherSettings = searchedSettings.filter((s) => s.title.toLowerCase() !== query);
+  const apps = matched.filter((item) => item.isApp);
+  const others = matched.filter((item) => !item.isApp);
+
+  return [...exactSettings, ...apps, ...otherSettings, ...others];
 });
 
 export const searchState = {
@@ -176,3 +238,15 @@ function getInitials(s: string) {
 }
 
 export const getItemKey = (item: StartMenuItem) => `${item.path}_${item.umid}`;
+
+export function isSystemSetting(item: SearchResult): item is SystemSettingEntry {
+  return "kind" in item;
+}
+
+/** Unique key of a search result, also used as selection id. */
+export function getResultKey(item: SearchResult): string {
+  if (isSystemSetting(item)) {
+    return `${item.target}_${item.title}`;
+  }
+  return getItemKey(item);
+}

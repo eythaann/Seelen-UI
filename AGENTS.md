@@ -445,6 +445,9 @@ pub enum Action {
 
 - Prefer quick feedback loops (`cargo check`, `npm run type-check`, `deno lint`).
 - Keep changes scoped; add tests when behavior changes.
+- Runtime logs can be read directly (no need to ask the user for them):
+  `%LOCALAPPDATA%\com.seelen.seelen-ui\logs\Seelen UI.log` (service: `SLU Service.log` in the same folder; previous
+  session in `*.log.bak`).
 
 ## Documentation & Custom Resources
 

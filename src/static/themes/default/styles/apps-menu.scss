@@ -197,6 +197,15 @@ body {
       }
     }
   }
+
+  // system settings icons are font glyphs
+  .app-icon-glyph {
+    display: grid;
+    place-items: center;
+    container-type: size;
+    font-size: 2rem;
+    line-height: 1;
+  }
 }
 
 .folder {

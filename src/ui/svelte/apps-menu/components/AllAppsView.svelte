@@ -1,16 +1,21 @@
 <script lang="ts">
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
-  import { searchState, getItemKey } from "../state/search.svelte";
+  import AppSettingItem from "./AppSettingItem.svelte";
+  import {
+    searchState,
+    getResultKey,
+    isSystemSetting,
+    type SearchResult,
+  } from "../state/search.svelte";
   import { globalState } from "../state/mod.svelte";
   import {
     navigateInDirection,
     selectPreselectedOrFirst,
     type SelectionScope,
   } from "../keyboard-navigation";
-  import type { StartMenuItem } from "@seelen-ui/lib/types";
 
-  let visibleItems: StartMenuItem[] = $state([]);
+  let visibleItems: SearchResult[] = $state([]);
 
   // Selection is fully local to this view: its own state, its own scope,
   // its own keydown handling. Nothing outside this component touches it.
@@ -31,7 +36,13 @@
     searchState.searchQuery;
 
     const firstItem = searchState.searchQuery ? searchState.searchedItems[0] : undefined;
-    selectedItemId = firstItem ? globalState.getItemId(firstItem) : null;
+    if (!firstItem) {
+      selectedItemId = null;
+    } else {
+      selectedItemId = isSystemSetting(firstItem)
+        ? getResultKey(firstItem)
+        : globalState.getItemId(firstItem);
+    }
   });
 
   function handleWindowKeyDown(event: KeyboardEvent) {
@@ -80,8 +91,12 @@
 <svelte:window onkeydown={handleWindowKeyDown} />
 <div class="all-apps-view">
   <ul role="listbox" class="all-apps-view-list">
-    {#each visibleItems as item, idx (getItemKey(item))}
-      <AppItem {item} {idx} lazy {scope} />
+    {#each visibleItems as item, idx (getResultKey(item))}
+      {#if isSystemSetting(item)}
+        <AppSettingItem {item} {idx} {scope} />
+      {:else}
+        <AppItem {item} {idx} lazy {scope} />
+      {/if}
     {/each}
   </ul>
 

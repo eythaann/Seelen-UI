@@ -37,6 +37,7 @@ export enum SeelenCommand {
   SystemSetAccentColor = "set_system_accent_color",
   SystemGetDarkMode = "get_system_dark_mode",
   SystemSetDarkMode = "set_system_dark_mode",
+  SystemEnumSettings = "enum_system_settings",
   SystemGetNightLightSettings = "get_system_night_light_settings",
   SystemGetNightLightEnabled = "get_system_night_light_enabled",
   SystemSetNightLightEnabled = "set_system_night_light_enabled",
