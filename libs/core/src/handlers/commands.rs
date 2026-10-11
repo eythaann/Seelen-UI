@@ -570,6 +570,7 @@ slu_commands_declaration! {
     GetSystemNetwork = get_system_network() -> Vec<NetworkStatistics>,
     GetSystemMemory = get_system_memory() -> Memory,
     GetSystemCores = get_system_cores() -> Vec<Core>,
+    GetSystemGpus = get_system_gpus() -> Vec<Gpu>,
 
     // Bluetooth
     GetBluetoothDevices = get_bluetooth_devices() -> Vec<BluetoothDevice>,

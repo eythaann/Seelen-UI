@@ -58,6 +58,7 @@ as top-level variables — no `scope.` prefix needed.
 | `NetworkStatistics` | `networkStatistics`                                                                                             | `GetSystemNetwork`                                                               |
 | `Memory`            | `memory` (`Memory`)                                                                                             | `GetSystemMemory`                                                                |
 | `Cpu`               | `cores` (`Core[]`)                                                                                              | `GetSystemCores`                                                                 |
+| `Gpu`               | `gpus` (`Gpu[]`)                                                                                                | `GetSystemGpus`                                                                  |
 | `Tray`              | `trayIcons`                                                                                                     | `GetSystemTrayIcons`                                                             |
 | `TrashBin`          | `trashBinInfo` (`TrashBinInfo`)                                                                                 | `GetTrashBinInfo`                                                                |
 | `Waveform`          | `waveform` (`AudioWaveform`)                                                                                    | `GetMediaWaveform`                                                               |
@@ -67,6 +68,15 @@ Shapes of the more structured values (generated TS, `libs/core/gen/types/`):
 ```ts
 type Memory = { total: number; free: number; swapTotal: number; swapFree: number };
 type Core = { name: string; brand: string; usage: number; frequency: number };
+type Gpu = {
+  id: string;
+  name: string;
+  usage: number; // 0-100, busiest engine (same as the Task Manager)
+  dedicatedMemoryTotal: number;
+  dedicatedMemoryUsed: number;
+  sharedMemoryTotal: number;
+  sharedMemoryUsed: number;
+};
 type Disk = {
   name: string;
   fileSystem: string;

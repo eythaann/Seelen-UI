@@ -146,6 +146,7 @@ export enum SeelenCommand {
   GetSystemNetwork = "get_system_network",
   GetSystemMemory = "get_system_memory",
   GetSystemCores = "get_system_cores",
+  GetSystemGpus = "get_system_gpus",
   GetBluetoothDevices = "get_bluetooth_devices",
   StartBluetoothScanning = "start_bluetooth_scanning",
   StopBluetoothScanning = "stop_bluetooth_scanning",

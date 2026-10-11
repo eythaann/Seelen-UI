@@ -45,6 +45,7 @@ export enum SeelenEvent {
   SystemNetworkChanged = "system::network-changed",
   SystemMemoryChanged = "system::memory-changed",
   SystemCoresChanged = "system::cores-changed",
+  SystemGpusChanged = "system::gpus-changed",
   BluetoothDevicesChanged = "bluetooth-devices-changed",
   StartMenuItemsChanged = "start-menu::items-changed",
   WegAddItem = "weg::add-item",

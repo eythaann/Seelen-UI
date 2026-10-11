@@ -84,6 +84,7 @@ const _networkStatistics = new LazyScope(
 );
 const _memory = new LazyScope(SeelenCommand.GetSystemMemory, SeelenEvent.SystemMemoryChanged);
 const _cores = new LazyScope(SeelenCommand.GetSystemCores, SeelenEvent.SystemCoresChanged);
+const _gpus = new LazyScope(SeelenCommand.GetSystemGpus, SeelenEvent.SystemGpusChanged);
 const _focusedApp = new LazyScope(SeelenCommand.GetFocusedApp, SeelenEvent.GlobalFocusChanged);
 const _virtualDesktops = new LazyScope(
   SeelenCommand.StateGetVirtualDesktops,
@@ -163,6 +164,10 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
 
   if (scopesSet.has("cpu")) {
     fetching ||= cpuStep(data);
+  }
+
+  if (scopesSet.has("gpu")) {
+    fetching ||= gpuStep(data);
   }
 
   if (scopesSet.has("tray")) {
@@ -403,6 +408,18 @@ function cpuStep(data: Data): boolean {
   }
 
   data.cores = _cores.data;
+
+  return false;
+}
+
+function gpuStep(data: Data): boolean {
+  _gpus.lazyInit();
+
+  if (_gpus.fetching) {
+    return true;
+  }
+
+  data.gpus = _gpus.data || [];
 
   return false;
 }

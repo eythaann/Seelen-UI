@@ -45,6 +45,23 @@ pub struct Memory {
 pub struct Core {
     pub name: String,
     pub brand: String,
+    /// Percentage (0-100) of the CPU usage
     pub usage: f32,
     pub frequency: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[serde(rename_all = "camelCase")]
+pub struct Gpu {
+    /// Adapter LUID, unique for each adapter during the current boot
+    pub id: String,
+    pub name: String,
+    /// Percentage (0-100) of the GPU engine.
+    pub usage: f32,
+    pub dedicated_memory_total: u64,
+    pub dedicated_memory_used: u64,
+    pub shared_memory_total: u64,
+    pub shared_memory_used: u64,
 }

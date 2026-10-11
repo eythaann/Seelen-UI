@@ -128,6 +128,7 @@ slu_events_declaration! {
     SystemNetworkChanged(Vec<NetworkStatistics>) as "system::network-changed",
     SystemMemoryChanged(Memory) as "system::memory-changed",
     SystemCoresChanged(Vec<Core>) as "system::cores-changed",
+    SystemGpusChanged(Vec<Gpu>) as "system::gpus-changed",
 
     BluetoothDevicesChanged(Vec<BluetoothDevice>) as "bluetooth-devices-changed",
 

@@ -1,0 +1,10 @@
+id: "@default/gpu-usage"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: BsGpuCard
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Gpu
+  template: !include plugin/template.js
+  tooltip: !include plugin/tooltip.js

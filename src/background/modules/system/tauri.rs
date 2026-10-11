@@ -2,7 +2,7 @@ use std::sync::Once;
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{Core, Disk, Memory, NetworkStatistics},
+    system_state::{Core, Disk, Gpu, Memory, NetworkStatistics},
 };
 
 use crate::{
@@ -40,6 +40,12 @@ fn get_system_info() -> &'static SystemInfo {
                     &*SystemInfo::instance().last_cores.lock(),
                 );
             }
+            SystemInfoEvent::GpusChanged => {
+                emit_to_webviews(
+                    SeelenEvent::SystemGpusChanged,
+                    &*SystemInfo::instance().last_gpus.lock(),
+                );
+            }
         });
     });
 
@@ -61,5 +67,9 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn get_system_cores() -> Vec<Core> {
         get_system_info().last_cores.lock().clone()
+    }
+
+    pub fn get_system_gpus() -> Vec<Gpu> {
+        get_system_info().last_gpus.lock().clone()
     }
 }

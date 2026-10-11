@@ -1,8 +1,10 @@
+pub mod gpu;
 pub mod tauri;
 
 use std::sync::{LazyLock, atomic::Ordering};
 
-use seelen_core::system_state::{Core, Disk, Memory, NetworkStatistics};
+use gpu::GpuMonitor;
+use seelen_core::system_state::{Core, Disk, Gpu, Memory, NetworkStatistics};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -16,11 +18,14 @@ pub struct SystemInfo {
     disks: TracedMutex<sysinfo::Disks>,
     networks: TracedMutex<sysinfo::Networks>,
     system: TracedMutex<sysinfo::System>,
+    /// None if the GPU performance counters are not available
+    gpu: TracedMutex<Option<GpuMonitor>>,
     // Cache for change detection
     pub last_disks: TracedMutex<Vec<Disk>>,
     pub last_networks: TracedMutex<Vec<NetworkStatistics>>,
     pub last_memory: TracedMutex<Memory>,
     pub last_cores: TracedMutex<Vec<Core>>,
+    pub last_gpus: TracedMutex<Vec<Gpu>>,
 }
 
 #[derive(Debug, Clone)]
@@ -30,6 +35,7 @@ pub enum SystemInfoEvent {
     NetworkChanged,
     MemoryChanged,
     CoresChanged,
+    GpusChanged,
 }
 
 event_manager!(SystemInfo, SystemInfoEvent);
@@ -49,11 +55,13 @@ impl SystemInfo {
             disks: TracedMutex::new(sysinfo::Disks::new()),
             networks: TracedMutex::new(sysinfo::Networks::new()),
             system: TracedMutex::new(sysinfo::System::new()),
+            gpu: TracedMutex::new(GpuMonitor::new().ok_logged()),
             // Cache for change detection
             last_disks: TracedMutex::new(Vec::new()),
             last_networks: TracedMutex::new(Vec::new()),
             last_memory: TracedMutex::new(Memory::default()),
             last_cores: TracedMutex::new(Vec::new()),
+            last_gpus: TracedMutex::new(Vec::new()),
         }
     }
 
@@ -63,6 +71,9 @@ impl SystemInfo {
         *self.last_networks.lock() = self.network();
         *self.last_memory.lock() = self.memory();
         *self.last_cores.lock() = self.cores();
+        if let Some(gpus) = self.gpus() {
+            *self.last_gpus.lock() = gpus;
+        }
 
         // Spawn monitoring thread
         std::thread::spawn(|| {
@@ -119,6 +130,14 @@ impl SystemInfo {
                 Self::send(SystemInfoEvent::CoresChanged);
             }
         }
+
+        if let Some(current_gpus) = self.gpus() {
+            let mut last_gpus = self.last_gpus.lock();
+            if Self::gpus_changed(&last_gpus, &current_gpus) {
+                *last_gpus = current_gpus;
+                Self::send(SystemInfoEvent::GpusChanged);
+            }
+        }
     }
 
     fn disks_changed(old: &[Disk], new: &[Disk]) -> bool {
@@ -158,6 +177,22 @@ impl SystemInfo {
         }
         for (old_core, new_core) in old.iter().zip(new.iter()) {
             if old_core.usage != new_core.usage {
+                return true;
+            }
+        }
+        false
+    }
+
+    fn gpus_changed(old: &[Gpu], new: &[Gpu]) -> bool {
+        if old.len() != new.len() {
+            return true;
+        }
+        for (old_gpu, new_gpu) in old.iter().zip(new.iter()) {
+            if old_gpu.id != new_gpu.id
+                || old_gpu.usage != new_gpu.usage
+                || old_gpu.dedicated_memory_used != new_gpu.dedicated_memory_used
+                || old_gpu.shared_memory_used != new_gpu.shared_memory_used
+            {
                 return true;
             }
         }
@@ -227,5 +262,17 @@ impl SystemInfo {
                 frequency: cpu.frequency(),
             })
             .collect()
+    }
+
+    /// Returns None on failure, to keep the last known value
+    fn gpus(&self) -> Option<Vec<Gpu>> {
+        let mut guard = self.gpu.lock();
+        match guard.as_mut()?.gpus() {
+            Ok(gpus) => Some(gpus),
+            Err(err) => {
+                log::debug!("Failed to read GPU usage: {err:?}");
+                None
+            }
+        }
     }
 }
