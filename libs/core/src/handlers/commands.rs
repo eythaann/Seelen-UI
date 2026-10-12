@@ -216,6 +216,9 @@ slu_commands_declaration! {
     ShowStartMenu =
         @fallible()
         show_start_menu(),
+    ShowWindowsStartMenu =
+        @fallible()
+        show_windows_start_menu(),
     GetIcon =
         @fallible()
         get_icon(

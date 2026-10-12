@@ -117,6 +117,16 @@ impl ResourceManager {
         }));
 
         system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
+            key: "@seelen/weg::windows-start-menu".to_owned(),
+            icon: Icon {
+                light: Some("start_menu.svg".to_owned()),
+                dark: Some("start_menu_dark.svg".to_owned()),
+                mask: Some("start_menu_mask.svg".to_owned()),
+                ..Default::default()
+            },
+        }));
+
+        system_pack.add_entry(IconPackEntry::Custom(CustomIconPackEntry {
             key: "@seelen/weg::folder".to_owned(),
             icon: Icon {
                 base: Some("folder.svg".to_owned()),

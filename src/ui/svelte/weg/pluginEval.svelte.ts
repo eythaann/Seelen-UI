@@ -7,6 +7,7 @@ const ALLOWED_COMMANDS: SeelenCommand[] = [
   SeelenCommand.OpenFile,
   SeelenCommand.ShowDesktop,
   SeelenCommand.ShowStartMenu,
+  SeelenCommand.ShowWindowsStartMenu,
 ];
 
 const ActionsScope = {

@@ -8,6 +8,7 @@ export type WeatherSettings = {
   windSpeedUnit: "kmh" | "mph";
   precipitationUnit: "mm" | "inch";
   pressureUnit: "inhg" | "hpa";
+  locationDisplayMode: "town_and_state" | "town" | "state";
   showLocation: boolean;
   showTemperature: boolean;
   showCondition: boolean;
@@ -34,6 +35,8 @@ export type WeatherHour = {
 
 export type WeatherSnapshot = {
   location: string;
+  city?: string;
+  state?: string;
   moonPhase: { name: string; illumination: number };
   condition: string;
   temperature: number;
@@ -44,6 +47,7 @@ export type WeatherSnapshot = {
   windSpeed: number;
   windGusts: number;
   windDirection: number;
+  windCardinal: string;
   cloudCover: number;
   pressure: number;
   sunrise: string;
@@ -57,6 +61,32 @@ export type WeatherSnapshot = {
 
 const REFRESH_INTERVAL = 15 * 60 * 1000;
 
+export const CARDINAL_DIRECTIONS = [
+  "N",
+  "NNE",
+  "NE",
+  "ENE",
+  "E",
+  "ESE",
+  "SE",
+  "SSE",
+  "S",
+  "SSW",
+  "SW",
+  "WSW",
+  "W",
+  "WNW",
+  "NW",
+  "NNW",
+] as const;
+
+export function degreesToCardinal(degrees: number | null | undefined): string {
+  if (typeof degrees !== "number" || !Number.isFinite(degrees)) return "";
+  const normalized = ((degrees % 360) + 360) % 360;
+  const index = Math.round(normalized / 22.5) % 16;
+  return CARDINAL_DIRECTIONS[index] || "N";
+}
+
 const DEFAULT_SETTINGS: WeatherSettings = {
   location: "",
   useSystemLocation: true,
@@ -65,6 +95,7 @@ const DEFAULT_SETTINGS: WeatherSettings = {
   windSpeedUnit: "mph",
   precipitationUnit: "inch",
   pressureUnit: "inhg",
+  locationDisplayMode: "town_and_state",
   showLocation: false,
   showTemperature: true,
   showCondition: false,
@@ -292,10 +323,32 @@ class WeatherModule {
       let latitude: number;
       let longitude: number;
       let locationName = "";
+      let cityName = "";
+      let stateName = "";
       if (settings.useSystemLocation) {
         const position = await getCurrentPosition(controller.signal);
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
+        try {
+          const revUrl = new URL("https://nominatim.openstreetmap.org/reverse");
+          revUrl.search = new URLSearchParams({
+            lat: String(latitude),
+            lon: String(longitude),
+            format: "jsonv2",
+          }).toString();
+          const revResp = await fetch(revUrl, {
+            signal: controller.signal,
+            headers: { "User-Agent": "Seelen-UI/1.0" },
+          });
+          if (revResp.ok) {
+            const revData = await revResp.json();
+            const addr = revData.address || {};
+            cityName = addr.city || addr.town || addr.village || addr.municipality || addr.county || "";
+            stateName = addr.state || "";
+          }
+        } catch {
+          // reverse geocode optional fallback
+        }
       } else {
         const geocodeUrl = new URL("https://geocoding-api.open-meteo.com/v1/search");
         geocodeUrl.search = new URLSearchParams({
@@ -313,7 +366,14 @@ class WeatherModule {
         if (!place) throw new Error(`No matching location found for "${location}"`);
         latitude = place.latitude;
         longitude = place.longitude;
-        locationName = [place.name, place.admin1, place.country].filter(Boolean).join(", ");
+        cityName = place.name || "";
+        stateName = place.admin1 || "";
+      }
+
+      if (cityName && stateName) {
+        locationName = `${cityName}, ${stateName}`;
+      } else {
+        locationName = cityName || stateName || location;
       }
 
       const forecastUrl = new URL("https://api.open-meteo.com/v1/forecast");
@@ -342,6 +402,8 @@ class WeatherModule {
 
       this.snapshotState = {
         location: locationName,
+        city: cityName,
+        state: stateName,
         moonPhase: calculateMoonPhase(Date.now()),
         condition: weatherCondition(current.weather_code),
         temperature: current.temperature_2m,
@@ -355,6 +417,7 @@ class WeatherModule {
         windSpeed: current.wind_speed_10m,
         windGusts: current.wind_gusts_10m,
         windDirection: current.wind_direction_10m,
+        windCardinal: degreesToCardinal(current.wind_direction_10m),
         cloudCover: current.cloud_cover,
         pressure: settings.pressureUnit === "inhg"
           ? Math.round(current.pressure_msl * 0.02953 * 100) / 100

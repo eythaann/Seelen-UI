@@ -95,3 +95,7 @@ moon:
   waning_crescent: Waning crescent
 units_region: Units and region
 pressure_unit: Pressure unit
+location_display_mode: Location display format
+town_and_state: Town and State
+town_only: Town only
+state_only: State only

@@ -12,17 +12,35 @@ const num = (v, digits = 0) => (ok(v) ? String(digits ? Number(v.toFixed(digits)
 const time = (v) => (typeof v === "string" && v.length >= 16 ? v.substring(11, 16) : null);
 const labeled = (key, value, unit = "") => (value === null ? null : `${t(key)} ${value}${unit}`);
 
+let locationText = null;
+if (options.showLocation) {
+  const mode = options.locationDisplayMode || "town_and_state";
+  if (mode === "town" && current.city) {
+    locationText = current.city;
+  } else if (mode === "state" && current.state) {
+    locationText = current.state;
+  } else if (current.city && current.state) {
+    locationText = `${current.city}, ${current.state}`;
+  } else {
+    locationText = current.location || t("weather.current_location");
+  }
+}
+
+const windSpeedReport = ok(current.windSpeed) ? `${num(current.windSpeed)} ${options.windSpeedUnit}` : null;
+const windGustsReport = ok(current.windGusts) ? `${num(current.windGusts)} ${options.windSpeedUnit}` : null;
+const windDirReport = current.windCardinal || (ok(current.windDirection) ? `${num(current.windDirection)}°` : null);
+
 const details = [
-  options.showLocation ? current.location || t("weather.current_location") : null,
+  locationText,
   options.showTemperature && ok(current.temperature) ? `${num(current.temperature)}°` : null,
   options.showCondition && current.condition ? t(`weather.conditions.${current.condition}`) : null,
   options.showRainChance ? labeled("weather.rain_short", num(current.rainChance), "%") : null,
   options.showPrecipitation
     ? labeled("weather.precipitation_short", num(current.precipitation, 1), ` ${options.precipitationUnit}`)
     : null,
-  options.showWindSpeed ? labeled("weather.wind_short", num(current.windSpeed), ` ${options.windSpeedUnit}`) : null,
-  options.showWindGusts ? labeled("weather.wind_gusts_short", num(current.windGusts), ` ${options.windSpeedUnit}`) : null,
-  options.showWindDirection ? labeled("weather.wind_direction_short", num(current.windDirection), "°") : null,
+  options.showWindSpeed ? labeled("weather.wind_short", windSpeedReport) : null,
+  options.showWindGusts ? labeled("weather.wind_gusts_short", windGustsReport) : null,
+  options.showWindDirection ? labeled("weather.wind_direction_short", windDirReport) : null,
   options.showHumidity ? labeled("weather.humidity_short", num(current.humidity), "%") : null,
   options.showCloudCover ? labeled("weather.cloud_cover_short", num(current.cloudCover), "%") : null,
   options.showPressure ? labeled("weather.pressure_short", num(current.pressure, options.pressureUnit === "inhg" ? 2 : 0), options.pressureUnit === "inhg" ? " inHg" : " hPa") : null,

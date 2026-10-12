@@ -25,6 +25,8 @@ show_desktop:
   label: Show Desktop
 start:
   label: Start Menu
+windows_start:
+  label: Windows Start Menu
 taskbar_menu:
   add_file: Pin Custom File
   add_separator: Add Separator

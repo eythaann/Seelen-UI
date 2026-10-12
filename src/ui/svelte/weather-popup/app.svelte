@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Widget } from "@seelen-ui/lib";
   import {
+    degreesToCardinal,
     weatherModule,
     type WeatherSettings,
   } from "libs/ui/svelte/utils/weather.svelte.ts";
@@ -8,7 +9,7 @@
 
   let locationDraft = $state(weatherModule.settings.location);
   let settingsError = $state("");
-  let openSections = $state<Record<string, boolean>>({ location: true });
+  let openSections = $state<Record<string, boolean>>({ display: false, units: false });
 
   function toggleSection(name: string): void {
     openSections[name] = !openSections[name];
@@ -90,42 +91,33 @@
       title={$t("refresh")}
       disabled={weatherModule.loading}
       onclick={() => weatherModule.refresh()}
-    >â†»</button>
+    >↻</button>
   </header>
 
-  <section class="weather-section">
-    <button
-      type="button"
-      class="weather-section-toggle"
-      data-skin="transparent"
-      aria-expanded={!!openSections.location}
-      onclick={() => toggleSection("location")}
-    >{$t("location")}<span aria-hidden="true">{openSections.location ? "▾" : "▸"}</span></button>
-    {#if openSections.location}
-  <form class="weather-location-form" onsubmit={submitLocation}>
-    <label>
-      <span>{$t("location")}</span>
+  <section class="weather-section weather-location-section">
+    <form class="weather-location-form" onsubmit={submitLocation}>
+      <label>
+        <span>{$t("location")}</span>
+        <input
+          type="search"
+          data-skin="default"
+          bind:value={locationDraft}
+          placeholder={$t("location_placeholder")}
+        />
+      </label>
+      <button type="submit" data-skin="default">{$t("save_location")}</button>
+    </form>
+    <label class="weather-setting">
+      <span>{$t("use_system_location")}</span>
       <input
-        type="search"
-        data-skin="default"
-        bind:value={locationDraft}
-        placeholder={$t("location_placeholder")}
+        type="checkbox"
+        data-skin="switch"
+        checked={weatherModule.settings.useSystemLocation}
+        onchange={(event) =>
+          updateSettings({ useSystemLocation: event.currentTarget.checked })}
       />
     </label>
-    <button type="submit" data-skin="default">{$t("save_location")}</button>
-  </form>
-  <label class="weather-setting">
-    <span>{$t("use_system_location")}</span>
-    <input
-      type="checkbox"
-      data-skin="switch"
-      checked={weatherModule.settings.useSystemLocation}
-      onchange={(event) =>
-        updateSettings({ useSystemLocation: event.currentTarget.checked })}
-    />
-  </label>
-  <div class="weather-secondary">{$t("source_note")}</div>
-    {/if}
+    <div class="weather-secondary">{$t("source_note")}</div>
   </section>
 
   {#if weatherModule.loading && !weatherModule.snapshot}
@@ -143,15 +135,15 @@
     <section class="weather-current">
       <div class="weather-current-summary">
         <div class="weather-temperature">
-          {formatNumber(current.temperature)}Â°
+          {formatNumber(current.temperature)}°
         </div>
         <div>
           <div>{$t(`conditions.${current.condition}`)}</div>
           <div class="weather-secondary">
-            {$t("feels_like")}: {formatNumber(current.feelsLike)}Â°
+            {$t("feels_like")}: {formatNumber(current.feelsLike)}°
           </div>
           <div class="weather-secondary">
-            {$t("high_low")}: {formatNumber(current.high)}Â° / {formatNumber(current.low)}Â°
+            {$t("high_low")}: {formatNumber(current.high)}° / {formatNumber(current.low)}°
           </div>
         </div>
       </div>
@@ -160,7 +152,7 @@
         <div><span>{$t("precipitation")}</span><strong>{withSuffix(current.precipitation, ` ${weatherModule.settings.precipitationUnit}`)}</strong></div>
         <div><span>{$t("wind")}</span><strong>{withSuffix(current.windSpeed, ` ${weatherModule.settings.windSpeedUnit}`)}</strong></div>
         <div><span>{$t("wind_gusts")}</span><strong>{withSuffix(current.windGusts, ` ${weatherModule.settings.windSpeedUnit}`)}</strong></div>
-        <div><span>{$t("wind_direction")}</span><strong>{formatNumber(current.windDirection)}Â°</strong></div>
+        <div><span>{$t("wind_direction")}</span><strong>{current.windCardinal || degreesToCardinal(current.windDirection)}</strong></div>
         <div><span>{$t("humidity")}</span><strong>{withSuffix(current.humidity, "%")}</strong></div>
         <div><span>{$t("cloud_cover")}</span><strong>{withSuffix(current.cloudCover, "%")}</strong></div>
         <div><span>{$t("pressure")}</span><strong>{withSuffix(current.pressure, weatherModule.settings.pressureUnit === "inhg" ? " inHg" : " hPa")}</strong></div>
@@ -169,7 +161,7 @@
         <div><span>{$t("sunset")}</span><strong>{formatTime(current.sunset)}</strong></div>
         <div>
           <span>{$t("moon_phase")}</span>
-          <strong>{$t(`moon.${current.moonPhase.name}`)} Â· {current.moonPhase.illumination}%</strong>
+          <strong>{$t(`moon.${current.moonPhase.name}`)} · {current.moonPhase.illumination}%</strong>
         </div>
       </div>
       <div class="weather-hourly">
@@ -178,7 +170,7 @@
           <div class="weather-hour">
             <span>{formatTime(hour.time)}</span>
             <span>{$t(`conditions.${hour.condition}`)}</span>
-            <strong>{formatNumber(hour.temperature)}Â°</strong>
+            <strong>{formatNumber(hour.temperature)}°</strong>
             <span>{withSuffix(hour.rainChance, "%")}</span>
           </div>
         {/each}
@@ -202,6 +194,21 @@
     >{$t("taskbar_display")}<span aria-hidden="true">{openSections.display ? "▾" : "▸"}</span></button>
     {#if openSections.display}
     <div class="weather-setting-list">
+      <label class="weather-setting">
+        <span>{$t("location_display_mode")}</span>
+        <select
+          data-skin="default"
+          value={weatherModule.settings.locationDisplayMode || "town_and_state"}
+          onchange={(event) =>
+            updateSettings({
+              locationDisplayMode: event.currentTarget.value as WeatherSettings["locationDisplayMode"],
+            })}
+        >
+          <option value="town_and_state">{$t("town_and_state")}</option>
+          <option value="town">{$t("town_only")}</option>
+          <option value="state">{$t("state_only")}</option>
+        </select>
+      </label>
       {#each displayOptions as [key, label]}
         <label class="weather-setting">
           <span>{$t(label)}</span>
@@ -236,9 +243,9 @@
         <option value="system">{$t("system_locale")}</option>
         <option value="en-US">English (United States)</option>
         <option value="en-GB">English (United Kingdom)</option>
-        <option value="fr-FR">FranÃ§ais (France)</option>
+        <option value="fr-FR">Français (France)</option>
         <option value="de-DE">Deutsch (Deutschland)</option>
-        <option value="es-ES">EspaÃ±ol (EspaÃ±a)</option>
+        <option value="es-ES">Español (España)</option>
       </select>
     </label>
     <label class="weather-setting">

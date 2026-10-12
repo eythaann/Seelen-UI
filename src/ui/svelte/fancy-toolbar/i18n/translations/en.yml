@@ -64,7 +64,26 @@ weather:
   configure_location: Configure weather location
   unavailable: Weather unavailable
   rain_short: Rain
+  precipitation_short: Precip
   wind_short: Wind
+  wind_gusts_short: Gusts
+  wind_direction_short: Wind Dir
+  humidity_short: Humidity
+  cloud_cover_short: Cloud
+  pressure_short: Pressure
+  uv_index_short: UV
+  sunrise_short: Sunrise
+  sunset_short: Sunset
+  current_location: Current location
+  moon:
+    new_moon: New Moon
+    waxing_crescent: Waxing Crescent
+    first_quarter: First Quarter
+    waxing_gibbous: Waxing Gibbous
+    full_moon: Full Moon
+    waning_gibbous: Waning Gibbous
+    last_quarter: Last Quarter
+    waning_crescent: Waning Crescent
   conditions:
     clear: Clear
     mainly_clear: Mainly clear

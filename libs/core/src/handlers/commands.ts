@@ -30,6 +30,7 @@ export enum SeelenCommand {
   GetKeyState = "get_key_state",
   GetUserEnvs = "get_user_envs",
   ShowStartMenu = "show_start_menu",
+  ShowWindowsStartMenu = "show_windows_start_menu",
   GetIcon = "get_icon",
   ShowDesktop = "show_desktop",
   RequestToUserInputShortcut = "request_to_user_input_shortcut",

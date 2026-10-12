@@ -315,6 +315,10 @@ impl crate::tauri_handlers::Handlers {
         Keyboard::new().send_keys("{win}")
     }
 
+    pub fn show_windows_start_menu() -> Result<()> {
+        Keyboard::new().send_keys("{win}")
+    }
+
     pub fn write_data_file(
         webview: tauri::WebviewWindow,
         filename: String,
