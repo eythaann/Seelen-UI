@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.9-dev]
+## [2.8.9]
 
 ### features
 
