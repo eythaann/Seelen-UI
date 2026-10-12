@@ -593,6 +593,8 @@ pub struct Settings {
     pub session_time_notification_enabled: bool,
     /// Custom text of the screen-time notification. Empty uses a default message.
     pub session_time_notification_message: String,
+    /// JSON-encoded weather module preferences, shared by the toolbar item and its popup.
+    pub weather_settings: String,
     /// Allow editing read-only shortcuts (e.g. system overrides). Only effective when dev_tools is enabled.
     pub unlock_shortcuts: bool,
 }
@@ -629,6 +631,7 @@ impl Default for Settings {
             session_time_audio_cue_custom_path: None,
             session_time_notification_enabled: false,
             session_time_notification_message: String::new(),
+            weather_settings: String::new(),
             unlock_shortcuts: false,
         }
     }

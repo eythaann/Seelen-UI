@@ -58,6 +58,7 @@ settings:
   title: Settings
 show_desktop: Show Desktop
 weather:
+  loading: Loading weather...
   title: Local weather
   configure: Configure weather
   configure_location: Configure weather location

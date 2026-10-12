@@ -73,6 +73,23 @@ impl crate::tauri_handlers::Handlers {
         Ok(())
     }
 
+    pub fn set_weather_settings(webview: WebviewWindow, value: String) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
+        if value.len() > 8 * 1024 || serde_json::from_str::<serde_json::Value>(&value).is_err() {
+            return Err("Invalid weather settings".into());
+        }
+        let mut settings = FULL_STATE.load().settings.clone();
+        settings.weather_settings = value;
+        FULL_STATE.rcu(move |state| {
+            let mut state = state.cloned();
+            state.settings = settings.clone();
+            state
+        });
+        FULL_STATE.load().write_settings()?;
+        crate::backups::application::on_settings_saved();
+        Ok(())
+    }
+
     pub fn state_get_settings_by_app() -> Vec<AppConfig> {
         BUNDLED_SETTINGS_BY_APP.iter().cloned().collect()
     }

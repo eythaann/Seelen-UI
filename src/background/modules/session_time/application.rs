@@ -42,6 +42,7 @@ use seelen_core::{
 use widestring::U16CString;
 use winreg::{RegKey, enums::HKEY_CURRENT_USER};
 
+const PERSIST_INTERVAL_SECONDS: u64 = 30;
 const POLL_INTERVAL: Duration = Duration::from_secs(1);
 const IDLE_THRESHOLD_MILLIS: u32 = 5 * 60 * 1000;
 const HUNDRED_NANOSECONDS_PER_SECOND: u64 = 10_000_000;
@@ -123,10 +124,7 @@ impl SessionTimeManager {
         }
 
         if enabled {
-            if !self.initialized.load(Ordering::Acquire) {
-                *self.state.lock() = Self::load_state();
-                self.initialized.store(true, Ordering::Release);
-            } else {
+            if !self.ensure_loaded() {
                 self.state.lock().last_unbiased_time = unbiased_time_100ns()?;
             }
             self.enabled.store(true, Ordering::Release);
@@ -141,7 +139,19 @@ impl SessionTimeManager {
         Ok(())
     }
 
+    /// Loads the persisted state once; returns true when this call performed the load.
+    fn ensure_loaded(&self) -> bool {
+        let mut timer = self.state.lock();
+        if self.initialized.load(Ordering::Acquire) {
+            return false;
+        }
+        *timer = Self::load_state();
+        self.initialized.store(true, Ordering::Release);
+        true
+    }
+
     pub fn snapshot(&self) -> ActiveSessionTime {
+        self.ensure_loaded();
         let timer = self.state.lock();
         ActiveSessionTime {
             active_seconds: timer.active_time_100ns / HUNDRED_NANOSECONDS_PER_SECOND,
@@ -233,8 +243,10 @@ impl SessionTimeManager {
                 let crossed_cue_interval = count_time
                     && current_seconds / cue_interval_seconds
                         > previous_seconds / cue_interval_seconds;
-                if let Err(error) = persist_state(&timer) {
-                    log::error!("Failed to append active session time log: {error}");
+                if (current_seconds % PERSIST_INTERVAL_SECONDS == 0 || was_idle != timer.is_idle)
+                    && let Err(error) = persist_state(&timer)
+                {
+                    log::error!("Failed to save active session time: {error}");
                 }
                 let update = (current_seconds != previous_seconds || was_idle != timer.is_idle)
                     .then(|| ActiveSessionTime {
@@ -440,8 +452,11 @@ fn load_persisted_state() -> Result<Option<PersistedSessionTime>> {
                     }
                 }
             }
-            if latest.is_some() {
-                return Ok(latest);
+            if let Some(record) = latest {
+                if let Ok(line) = serde_json::to_string(&record) {
+                    let _ = std::fs::write(session_time_path()?, format!("{line}\n"));
+                }
+                return Ok(Some(record));
             }
             load_legacy_persisted_state()
         }

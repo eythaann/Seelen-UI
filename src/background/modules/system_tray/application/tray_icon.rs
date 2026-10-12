@@ -413,13 +413,14 @@ impl SystemTrayManager {
                 log::debug!(
                     "Tray icon {identity} has no Windows registry entry; tracking it for this session"
                 );
+                let key = session_only_icon_key(&executable_path, held.data.guid, held.data.uid);
                 let entry = RegistryNotifyIcon {
-                    key: session_only_icon_key(&identity),
+                    is_promoted: super::session_promotion::is_promoted(&key),
+                    key,
                     executable_path: executable_path.clone(),
                     initial_tooltip: held.data.tooltip.clone(),
                     icon_guid: held.data.guid,
                     icon_uid: held.data.uid,
-                    is_promoted: false,
                 };
                 if manager
                     .store_new_icon(&held.data, entry, Some(executable_path))
@@ -588,9 +589,10 @@ fn window_program_path(icon_data: &IconEventData) -> Option<PathBuf> {
 /// Saves the icon image as png in the temp dir.
 fn save_icon_image(icon_handle: isize, registry_key: &str) -> Option<SavedIconImage> {
     let img = convert_hicon_to_rgba_image(&HICON(icon_handle as _)).ok()?;
-    let path = SEELEN_COMMON
-        .app_temp_dir()
-        .join(format!("{registry_key}.png"));
+    let path = SEELEN_COMMON.app_temp_dir().join(format!(
+        "{}.png",
+        registry_key.replace([':', '\\', '/'], "_")
+    ));
     img.save(&path).unwrap();
     Some(SavedIconImage {
         hash: image_to_hash(&img),
@@ -649,8 +651,22 @@ fn session_identity(data: &IconEventData) -> Option<String> {
     }
 }
 
-fn session_only_icon_key(identity: &str) -> String {
-    format!("{SESSION_ONLY_ICON_KEY_PREFIX}{identity}")
+/// Stable across restarts (unlike window handles): executable path plus guid or uid.
+fn session_only_icon_key(
+    executable_path: &std::path::Path,
+    guid: Option<uuid::Uuid>,
+    uid: Option<u32>,
+) -> String {
+    let path = executable_path.to_string_lossy().to_lowercase();
+    let hash = path.bytes().fold(0xcbf29ce484222325u64, |hash, byte| {
+        (hash ^ byte as u64).wrapping_mul(0x100000001b3)
+    });
+    let tail = match (guid, uid) {
+        (Some(guid), _) => guid.to_string(),
+        (None, Some(uid)) => uid.to_string(),
+        _ => "0".to_string(),
+    };
+    format!("{SESSION_ONLY_ICON_KEY_PREFIX}{hash:016x}_{tail}")
 }
 
 #[cfg(test)]
@@ -658,8 +674,15 @@ mod tests {
     use super::session_only_icon_key;
 
     #[test]
-    fn session_only_keys_are_namespaced_from_windows_registry_keys() {
-        assert_eq!(session_only_icon_key("10618_0"), "session:10618_0");
+    fn session_only_keys_are_stable_and_namespaced() {
+        let path = std::path::Path::new("C:\\App\\app.exe");
+        let key = session_only_icon_key(path, None, Some(3));
+        assert!(key.starts_with("session:"));
+        assert!(key.ends_with("_3"));
+        assert_eq!(
+            key,
+            session_only_icon_key(std::path::Path::new("c:\\app\\APP.exe"), None, Some(3))
+        );
     }
 }
 

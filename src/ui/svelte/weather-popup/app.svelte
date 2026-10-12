@@ -8,6 +8,15 @@
 
   let locationDraft = $state(weatherModule.settings.location);
   let settingsError = $state("");
+  let openSections = $state<Record<string, boolean>>({ location: true });
+
+  function toggleSection(name: string): void {
+    openSections[name] = !openSections[name];
+  }
+
+  $effect(() => {
+    locationDraft = weatherModule.settings.location;
+  });
 
   const displayOptions: [keyof WeatherSettings, string][] = [
     ["showLocation", "show_location"],
@@ -84,8 +93,15 @@
     >â†»</button>
   </header>
 
-  <details class="weather-section" open>
-    <summary>{$t("location")}</summary>
+  <section class="weather-section">
+    <button
+      type="button"
+      class="weather-section-toggle"
+      data-skin="transparent"
+      aria-expanded={!!openSections.location}
+      onclick={() => toggleSection("location")}
+    >{$t("location")}<span aria-hidden="true">{openSections.location ? "▾" : "▸"}</span></button>
+    {#if openSections.location}
   <form class="weather-location-form" onsubmit={submitLocation}>
     <label>
       <span>{$t("location")}</span>
@@ -109,7 +125,8 @@
     />
   </label>
   <div class="weather-secondary">{$t("source_note")}</div>
-  </details>
+    {/if}
+  </section>
 
   {#if weatherModule.loading && !weatherModule.snapshot}
     <div class="weather-message">{$t("loading")}</div>
@@ -146,7 +163,7 @@
         <div><span>{$t("wind_direction")}</span><strong>{formatNumber(current.windDirection)}Â°</strong></div>
         <div><span>{$t("humidity")}</span><strong>{withSuffix(current.humidity, "%")}</strong></div>
         <div><span>{$t("cloud_cover")}</span><strong>{withSuffix(current.cloudCover, "%")}</strong></div>
-        <div><span>{$t("pressure")}</span><strong>{withSuffix(current.pressure, " hPa")}</strong></div>
+        <div><span>{$t("pressure")}</span><strong>{withSuffix(current.pressure, weatherModule.settings.pressureUnit === "inhg" ? " inHg" : " hPa")}</strong></div>
         <div><span>{$t("uv_index")}</span><strong>{formatNumber(current.uvIndex)}</strong></div>
         <div><span>{$t("sunrise")}</span><strong>{formatTime(current.sunrise)}</strong></div>
         <div><span>{$t("sunset")}</span><strong>{formatTime(current.sunset)}</strong></div>
@@ -175,8 +192,15 @@
     </section>
   {/if}
 
-  <details class="weather-section">
-    <summary>{$t("taskbar_display")}</summary>
+  <section class="weather-section">
+    <button
+      type="button"
+      class="weather-section-toggle"
+      data-skin="transparent"
+      aria-expanded={!!openSections.display}
+      onclick={() => toggleSection("display")}
+    >{$t("taskbar_display")}<span aria-hidden="true">{openSections.display ? "▾" : "▸"}</span></button>
+    {#if openSections.display}
     <div class="weather-setting-list">
       {#each displayOptions as [key, label]}
         <label class="weather-setting">
@@ -190,9 +214,17 @@
         </label>
       {/each}
     </div>
-  </details>
-  <details class="weather-section">
-    <summary>{$t("units_region")}</summary>
+    {/if}
+  </section>
+  <section class="weather-section">
+    <button
+      type="button"
+      class="weather-section-toggle"
+      data-skin="transparent"
+      aria-expanded={!!openSections.units}
+      onclick={() => toggleSection("units")}
+    >{$t("units_region")}<span aria-hidden="true">{openSections.units ? "▾" : "▸"}</span></button>
+    {#if openSections.units}
     <div class="weather-setting-list">
     <label class="weather-setting">
       <span>{$t("regional_format")}</span>
@@ -251,8 +283,23 @@
         <option value="inch">{$t("inches")}</option>
       </select>
     </label>
+    <label class="weather-setting">
+      <span>{$t("pressure_unit")}</span>
+      <select
+        data-skin="default"
+        value={weatherModule.settings.pressureUnit}
+        onchange={(event) =>
+          updateSettings({
+            pressureUnit: event.currentTarget.value as WeatherSettings["pressureUnit"],
+          })}
+      >
+        <option value="inhg">inHg</option>
+        <option value="hpa">hPa</option>
+      </select>
+    </label>
     </div>
-  </details>
+    {/if}
+  </section>
   {#if settingsError}
     <div class="weather-error" role="alert">{settingsError}</div>
   {/if}

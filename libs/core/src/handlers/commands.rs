@@ -197,6 +197,10 @@ slu_commands_declaration! {
             notification_enabled: bool,
             notification_message: String
         ),
+    SetWeatherSettings =
+        @webview()
+        @fallible()
+        set_weather_settings(value: String),
     TestSessionTimeAudioCue =
         @webview()
         @fallible()

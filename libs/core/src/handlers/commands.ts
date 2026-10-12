@@ -25,6 +25,7 @@ export enum SeelenCommand {
   GetActiveSessionTime = "get_active_session_time",
   GetSessionTimeAudioCueSounds = "get_session_time_audio_cue_sounds",
   SetSessionTimeAudioCueSettings = "set_session_time_audio_cue_settings",
+  SetWeatherSettings = "set_weather_settings",
   TestSessionTimeAudioCue = "test_session_time_audio_cue",
   GetKeyState = "get_key_state",
   GetUserEnvs = "get_user_envs",

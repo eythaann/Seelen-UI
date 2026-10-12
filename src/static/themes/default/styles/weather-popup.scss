@@ -103,14 +103,12 @@
     flex-direction: column;
     gap: var(--spacing-s);
 
-    summary {
-      cursor: pointer;
+    .weather-section-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       font-weight: 600;
-      padding-block: var(--spacing-xs);
-    }
-
-    &[open] > summary {
-      margin-bottom: var(--spacing-s);
     }
   }
 

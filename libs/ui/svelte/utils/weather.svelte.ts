@@ -1,3 +1,5 @@
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+
 export type WeatherSettings = {
   location: string;
   useSystemLocation: boolean;
@@ -5,6 +7,7 @@ export type WeatherSettings = {
   temperatureUnit: "celsius" | "fahrenheit";
   windSpeedUnit: "kmh" | "mph";
   precipitationUnit: "mm" | "inch";
+  pressureUnit: "inhg" | "hpa";
   showLocation: boolean;
   showTemperature: boolean;
   showCondition: boolean;
@@ -52,16 +55,16 @@ export type WeatherSnapshot = {
   updatedAt: number;
 };
 
-const STORAGE_KEY = "seelen.weather.settings";
 const REFRESH_INTERVAL = 15 * 60 * 1000;
 
 const DEFAULT_SETTINGS: WeatherSettings = {
   location: "",
   useSystemLocation: true,
   locale: "system",
-  temperatureUnit: "celsius",
-  windSpeedUnit: "kmh",
-  precipitationUnit: "mm",
+  temperatureUnit: "fahrenheit",
+  windSpeedUnit: "mph",
+  precipitationUnit: "inch",
+  pressureUnit: "inhg",
   showLocation: false,
   showTemperature: true,
   showCondition: false,
@@ -78,21 +81,19 @@ const DEFAULT_SETTINGS: WeatherSettings = {
   showMoonPhase: false,
 };
 
-function readSettings(): WeatherSettings {
+function parseSettings(stored: string): WeatherSettings | null {
+  if (!stored) return null;
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      const saved = JSON.parse(stored) as Partial<WeatherSettings>;
-      return {
-        ...DEFAULT_SETTINGS,
-        ...saved,
-        useSystemLocation: saved.useSystemLocation ?? !saved.location,
-      };
-    }
+    const saved = JSON.parse(stored) as Partial<WeatherSettings>;
+    return {
+      ...DEFAULT_SETTINGS,
+      ...saved,
+      useSystemLocation: saved.useSystemLocation ?? !saved.location,
+    };
   } catch (error) {
     console.error("Could not load weather settings:", error);
+    return null;
   }
-  return { ...DEFAULT_SETTINGS };
 }
 
 function weatherCondition(code: number): string {
@@ -183,14 +184,15 @@ function getCurrentPosition(signal: AbortSignal): Promise<GeolocationPosition> {
 }
 
 class WeatherModule {
-  private settingsState = $state<WeatherSettings>(readSettings());
+  private settingsState = $state<WeatherSettings>({ ...DEFAULT_SETTINGS });
+  private storedSettings = "";
+  private settingsLoaded = false;
   private snapshotState = $state<WeatherSnapshot | null>(null);
   private loadingState = $state(false);
   private errorState = $state("");
   private consumers = 0;
   private timer: ReturnType<typeof setInterval> | null = null;
   private controller: AbortController | null = null;
-  private storageListener: ((event: StorageEvent) => void) | null = null;
 
   get settings(): WeatherSettings {
     return this.settingsState;
@@ -208,20 +210,35 @@ class WeatherModule {
     return this.errorState;
   }
 
+  private applyStored(stored: string): boolean {
+    if (stored === this.storedSettings) return false;
+    const parsed = parseSettings(stored);
+    if (!parsed) return false;
+    this.storedSettings = stored;
+    this.settingsState = parsed;
+    return true;
+  }
+
+  private async loadSettings(): Promise<void> {
+    if (this.settingsLoaded) return;
+    this.settingsLoaded = true;
+    // Registered before the initial read so a change event is never lost
+    await subscribe(SeelenEvent.StateSettingsChanged, ({ payload }) => {
+      if (this.applyStored(payload.weatherSettings) && this.consumers > 0) {
+        void this.refresh();
+      }
+    });
+    const settings = await invoke(SeelenCommand.StateGetSettings, { path: null });
+    this.applyStored(settings.weatherSettings);
+  }
+
   activate(): () => void {
     this.consumers += 1;
     if (this.consumers === 1) {
-      this.storageListener = (event) => {
-        if (event.key !== STORAGE_KEY || !event.newValue) return;
-        try {
-          this.settingsState = { ...DEFAULT_SETTINGS, ...JSON.parse(event.newValue) };
-          void this.refresh();
-        } catch (error) {
-          console.error("Could not apply updated weather settings:", error);
-        }
-      };
-      window.addEventListener("storage", this.storageListener);
-      void this.refresh();
+      void this.loadSettings().catch((error) => console.error("Could not load weather settings:", error))
+        .finally(() => {
+          if (this.consumers > 0) void this.refresh();
+        });
       this.timer = setInterval(() => void this.refresh(), REFRESH_INTERVAL);
     }
 
@@ -233,8 +250,6 @@ class WeatherModule {
       if (this.consumers !== 0) return;
       if (this.timer) clearInterval(this.timer);
       this.timer = null;
-      if (this.storageListener) window.removeEventListener("storage", this.storageListener);
-      this.storageListener = null;
       this.controller?.abort();
       this.controller = null;
       this.loadingState = false;
@@ -244,7 +259,9 @@ class WeatherModule {
   async updateSettings(changes: Partial<WeatherSettings>): Promise<void> {
     const next = { ...this.settingsState, ...changes };
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      const serialized = JSON.stringify(next);
+      await invoke(SeelenCommand.SetWeatherSettings, { value: serialized });
+      this.storedSettings = serialized;
       this.settingsState = next;
       this.errorState = "";
       if (this.consumers > 0) await this.refresh();
@@ -339,7 +356,9 @@ class WeatherModule {
         windGusts: current.wind_gusts_10m,
         windDirection: current.wind_direction_10m,
         cloudCover: current.cloud_cover,
-        pressure: current.pressure_msl,
+        pressure: settings.pressureUnit === "inhg"
+          ? Math.round(current.pressure_msl * 0.02953 * 100) / 100
+          : Math.round(current.pressure_msl),
         sunrise: forecast.daily.sunrise[0],
         sunset: forecast.daily.sunset[0],
         high: forecast.daily.temperature_2m_max[0],

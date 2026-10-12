@@ -139,7 +139,9 @@ impl SystemTrayManager {
         if !self.icons.contains_key(registry_key) {
             return Err("Icon not found".into());
         }
-        if !registry_key.starts_with(SESSION_ONLY_ICON_KEY_PREFIX) {
+        if registry_key.starts_with(SESSION_ONLY_ICON_KEY_PREFIX) {
+            session_promotion::set(registry_key, promoted);
+        } else {
             set_registry_notify_icon_promoted(registry_key, promoted)?;
         }
         self.icons.with_lock(|icons| {
@@ -161,6 +163,50 @@ pub(super) struct PendingIcon {
 
 const NOTIFY_ICON_SETTINGS: &str = "Control Panel\\NotifyIconSettings";
 pub(super) const SESSION_ONLY_ICON_KEY_PREFIX: &str = "session:";
+
+/// Remembers which icons without a Windows registry entry (Windows 10) are promoted.
+pub(super) mod session_promotion {
+    use std::{collections::HashSet, path::PathBuf};
+
+    fn path() -> Option<PathBuf> {
+        let base = std::env::var_os("LOCALAPPDATA")?;
+        Some(
+            PathBuf::from(base)
+                .join("com.seelen.seelen-ui")
+                .join("promoted-tray-icons.json"),
+        )
+    }
+
+    fn load() -> HashSet<String> {
+        path()
+            .and_then(|path| std::fs::read(path).ok())
+            .and_then(|bytes| serde_json::from_slice(&bytes).ok())
+            .unwrap_or_default()
+    }
+
+    pub fn is_promoted(key: &str) -> bool {
+        load().contains(key)
+    }
+
+    pub fn set(key: &str, promoted: bool) {
+        let mut keys = load();
+        let changed = if promoted {
+            keys.insert(key.to_string())
+        } else {
+            keys.remove(key)
+        };
+        if !changed {
+            return;
+        }
+        let Some(path) = path() else { return };
+        if let Err(error) = serde_json::to_vec(&keys)
+            .map_err(|e| e.to_string())
+            .and_then(|bytes| std::fs::write(path, bytes).map_err(|e| e.to_string()))
+        {
+            log::warn!("Failed to save promoted tray icons: {error}");
+        }
+    }
+}
 
 #[derive(Debug)]
 #[allow(dead_code)]
