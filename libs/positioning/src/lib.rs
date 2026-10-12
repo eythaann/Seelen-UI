@@ -58,21 +58,6 @@ fn rect_diff_exceeds(a: &Rect, b: &Rect, tolerance: i32) -> bool {
         || (a.height - b.height).abs() > tolerance
 }
 
-/// Mode actually used for a window of `class` when `requested` is asked for.
-///
-/// Firefox is never animated buffered: when its startup session restore completes it checks
-/// whether all of its windows are cloaked and, if they are, assumes they live on another virtual
-/// desktop and opens a new window (Mozilla bug 1812489). The first placement of its restored
-/// window lands right in that check, so the buffered cloak made every launch open a second, blank
-/// window. Realtime never cloaks the window.
-fn effective_mode(requested: AnimationMode, class: &str) -> AnimationMode {
-    if class == "MozillaWindowClass" {
-        AnimationMode::Realtime
-    } else {
-        requested
-    }
-}
-
 struct WinDataForAnimation {
     hwnd: isize,
     from: Rect,
@@ -664,6 +649,21 @@ impl Default for AnimationOrchestrator {
 
 fn lock<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
     mutex.lock().unwrap_or_else(PoisonError::into_inner)
+}
+
+/// Mode actually used for a window of `class` when `requested` is asked for.
+///
+/// Firefox is never animated buffered: when its startup session restore completes it checks
+/// whether all of its windows are cloaked and, if they are, assumes they live on another virtual
+/// desktop and opens a new window (Mozilla bug 1812489). The first placement of its restored
+/// window lands right in that check, so the buffered cloak made every launch open a second, blank
+/// window. Realtime never cloaks the window.
+fn effective_mode(requested: AnimationMode, class: &str) -> AnimationMode {
+    if class == "MozillaWindowClass" {
+        AnimationMode::Realtime
+    } else {
+        requested
+    }
 }
 
 #[cfg(test)]
