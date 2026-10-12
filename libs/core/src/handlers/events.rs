@@ -114,6 +114,7 @@ slu_events_declaration! {
 
     // system tray
     SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",
+    ActiveSessionTimeChanged(ActiveSessionTime) as "active-session-time::changed",
 
     StatePerformanceModeChanged(PerformanceMode) as "state::performance-mode-changed",
 

@@ -21,6 +21,11 @@
 .ft-bar {
   background-color: oklch(from var(--slu-std-bg-color) l c h / 0.9);
 
+  &[data-tray-icon-drag-over="true"] {
+    outline: 2px solid var(--slu-std-ui-color);
+    outline-offset: -2px;
+  }
+
   &[data-has-margin="true"] {
     border-radius: calc((var(--config-item-size) + var(--config-padding) * 2) * 0.3);
   }

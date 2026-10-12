@@ -1,0 +1,127 @@
+.weather-popup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+  min-width: 20rem;
+  max-width: 24rem;
+
+  .weather-header,
+  .weather-current-summary,
+  .weather-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-m);
+  }
+
+  .weather-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .weather-location,
+  .weather-secondary {
+    color: var(--slu-std-fg-secondary-color);
+  }
+
+  .weather-location-form,
+  .weather-location-form label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .weather-location-form {
+    gap: var(--spacing-s);
+
+    button {
+      align-self: flex-start;
+    }
+  }
+
+  .weather-current {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+  }
+
+  .weather-current-summary {
+    justify-content: flex-start;
+  }
+
+  .weather-temperature {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .weather-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-m);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2xs);
+    }
+
+    span {
+      color: var(--slu-std-fg-secondary-color);
+    }
+  }
+
+  .weather-hourly {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+  }
+
+  .weather-hour {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto 2.5rem;
+    align-items: center;
+    gap: var(--spacing-s);
+
+    > :nth-child(2),
+    > :last-child {
+      color: var(--slu-std-fg-secondary-color);
+    }
+  }
+
+  .weather-message,
+  .weather-error {
+    padding-block: var(--spacing-s);
+  }
+
+  .weather-error {
+    color: var(--color-red-600);
+    overflow-wrap: anywhere;
+  }
+
+  .weather-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding-block: var(--spacing-xs);
+    }
+
+    &[open] > summary {
+      margin-bottom: var(--spacing-s);
+    }
+  }
+
+  .weather-setting-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+  }
+
+  .weather-setting select {
+    width: 11rem;
+    min-width: 0;
+  }
+}

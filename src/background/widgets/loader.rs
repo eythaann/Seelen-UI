@@ -283,7 +283,7 @@ impl WidgetPod {
         if let Some(window) = &self.window {
             let live = self.live.clone();
             window.0.listen("internal::liveness-pong", move |_event| {
-                live.notify_waiters();
+                live.notify_one();
             });
         }
 

@@ -130,6 +130,8 @@ export function restoreStateToDefault() {
       "@seelen/tb-bluetooth-popup" as PluginId,
       "@seelen/tb-network-popup" as PluginId,
       "@seelen/tb-media-popup" as PluginId,
+      "@default/session-time" as PluginId,
+      "@default/weather" as PluginId,
       "@default/power" as PluginId,
       "@seelen/tb-notifications" as PluginId,
       "@seelen/tb-quick-settings" as PluginId,
@@ -224,6 +226,12 @@ export const toolbarActions = {
       ..._toolbarState,
       items: [..._toolbarState.items, id],
     };
+  },
+  addInlineItem(item: ToolbarItem, index: number) {
+    if (_toolbarState.items.some((current) => matchIds(current, item.id))) return;
+    const items = [..._toolbarState.items];
+    items.splice(Math.max(0, Math.min(index, items.length)), 0, item);
+    _toolbarState = { ..._toolbarState, items };
   },
   removeItem(id: string) {
     _toolbarState = {

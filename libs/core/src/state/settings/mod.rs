@@ -467,6 +467,57 @@ pub enum StartOfWeek {
     Saturday,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum SessionTimeSound {
+    SystemAlarm1,
+    SystemAlarm2,
+    SystemAlarm3,
+    SystemAlarm4,
+    SystemAlarm5,
+    SystemAlarm6,
+    SystemAlarm7,
+    SystemAlarm8,
+    SystemAlarm9,
+    SystemAlarm10,
+    SystemAsterisk,
+    SystemCall1,
+    SystemCall2,
+    SystemCall3,
+    SystemCall4,
+    SystemCall5,
+    SystemCall6,
+    SystemCall7,
+    SystemCall8,
+    SystemCall9,
+    SystemCall10,
+    SystemCriticalBattery,
+    SystemDeviceConnect,
+    SystemDeviceDisconnect,
+    SystemDeviceFail,
+    SystemDefault,
+    SystemExclamation,
+    SystemExit,
+    SystemFaxBeep,
+    SystemHand,
+    SystemIm,
+    SystemLogon,
+    SystemLowBattery,
+    SystemMail,
+    SystemMessageNudge,
+    SystemNotification,
+    SystemProximity,
+    SystemProximityConnection,
+    SystemQuestion,
+    SystemReminder,
+    SystemStart,
+    SystemUac,
+    SystemUnlock,
+    SystemWelcome,
+    CustomMp3,
+}
+
 // ======================== Final Settings Struct ===============================
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -530,6 +581,18 @@ pub struct Settings {
     pub backup_sync_enabled: bool,
     /// Suspend all webviews when Windows GameMode is active to free resources for the game.
     pub suspend_on_game_mode: bool,
+    /// Play a Windows system sound after each configured amount of active screen time.
+    pub session_time_audio_cue_enabled: bool,
+    /// Active screen-time minutes between audio cues.
+    pub session_time_audio_cue_interval_minutes: u32,
+    /// Windows system sound alias used for screen-time audio cues.
+    pub session_time_audio_cue_sound: SessionTimeSound,
+    /// Optional MP3 file used when the selected screen-time sound is CustomMp3.
+    pub session_time_audio_cue_custom_path: Option<String>,
+    /// Show a system notification when the screen-time alert triggers (independent of the sound).
+    pub session_time_notification_enabled: bool,
+    /// Custom text of the screen-time notification. Empty uses a default message.
+    pub session_time_notification_message: String,
     /// Allow editing read-only shortcuts (e.g. system overrides). Only effective when dev_tools is enabled.
     pub unlock_shortcuts: bool,
 }
@@ -560,6 +623,12 @@ impl Default for Settings {
             streaming_mode: false,
             backup_sync_enabled: true,
             suspend_on_game_mode: false,
+            session_time_audio_cue_enabled: false,
+            session_time_audio_cue_interval_minutes: 60,
+            session_time_audio_cue_sound: SessionTimeSound::SystemAsterisk,
+            session_time_audio_cue_custom_path: None,
+            session_time_notification_enabled: false,
+            session_time_notification_message: String::new(),
             unlock_shortcuts: false,
         }
     }

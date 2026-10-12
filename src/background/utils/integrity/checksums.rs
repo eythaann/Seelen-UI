@@ -29,8 +29,8 @@ pub async fn ensure_bundle_files_integrity(app: &tauri::AppHandle) -> Result<()>
         return Err("Checksums file not found".into());
     }
 
-    // Skip signature validation in development mode
-    if !tauri::is_dev() {
+    // Skip signature validation in development mode and unsigned debug builds
+    if !tauri::is_dev() && !cfg!(debug_assertions) {
         verify_external_signature(&checksums_path, &signature_path, MINISIGN_PUBLIC_KEY)?;
     }
     validate_directory_checksums(&static_path, &checksums_path).await?;

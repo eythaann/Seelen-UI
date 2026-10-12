@@ -85,6 +85,8 @@ fn initial_items() -> ToolbarState {
             ToolbarItem2::Plugin("@seelen/tb-bluetooth-popup".into()),
             ToolbarItem2::Plugin("@seelen/tb-network-popup".into()),
             ToolbarItem2::Plugin("@seelen/tb-media-popup".into()),
+            ToolbarItem2::Plugin("@default/session-time".into()),
+            ToolbarItem2::Plugin("@default/weather".into()),
             ToolbarItem2::Plugin("@default/power".into()),
             ToolbarItem2::Plugin("@seelen/tb-notifications".into()),
             ToolbarItem2::Plugin("@seelen/tb-quick-settings".into()),

@@ -1,0 +1,60 @@
+active_session: Current session
+longest_session: Longest active session
+settings: Alert settings
+audio_cue: Play an audio cue
+interval: Interval (minimum 1 minute)
+interval_placeholder: 1m minimum; e.g. 1h or 5m
+invalid_interval: Enter a valid interval, such as 1h30m or 45m.
+sound: Sound
+sound_asterisk: Asterisk
+sound_alarm_1: Windows alarm 1
+sound_alarm_2: Windows alarm 2
+sound_alarm_3: Windows alarm 3
+sound_alarm_4: Windows alarm 4
+sound_alarm_5: Windows alarm 5
+sound_alarm_6: Windows alarm 6
+sound_alarm_7: Windows alarm 7
+sound_alarm_8: Windows alarm 8
+sound_alarm_9: Windows alarm 9
+sound_alarm_10: Windows alarm 10
+sound_call_1: Windows call 1
+sound_call_2: Windows call 2
+sound_call_3: Windows call 3
+sound_call_4: Windows call 4
+sound_call_5: Windows call 5
+sound_call_6: Windows call 6
+sound_call_7: Windows call 7
+sound_call_8: Windows call 8
+sound_call_9: Windows call 9
+sound_call_10: Windows call 10
+sound_critical_battery: Critical battery
+sound_device_connect: Device connected
+sound_device_disconnect: Device disconnected
+sound_device_fail: Device failed
+sound_default: Default
+sound_exclamation: Exclamation
+sound_exit: Exit
+sound_fax: Fax
+sound_hand: Hand
+sound_im: Instant message
+sound_logon: Windows logon
+sound_low_battery: Low battery
+sound_mail: Mail
+sound_message_nudge: Message nudge
+sound_notification: Notification
+sound_proximity: Proximity notification
+sound_proximity_connection: Proximity connection
+sound_question: Question
+sound_reminder: Reminder
+sound_start: Start
+sound_uac: User account control
+sound_unlock: Windows unlock
+sound_welcome: Welcome
+custom_mp3: Custom MP3
+choose_mp3: Choose MP3 file
+select_sound_file: Select an MP3 sound
+no_file_selected: No file selected
+test_sound: Test alert sound
+notification: Show a notification
+notification_message: Notification message
+notification_message_placeholder: Time to take a break

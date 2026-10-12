@@ -1,6 +1,6 @@
 import { dialog } from "@seelen-ui/lib/tauri";
 import { path } from "@tauri-apps/api";
-import { needRestart, settings } from "../../state/mod";
+import { settings } from "../../state/mod";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 
 export async function simulatePerm(_widgetId: string, _perm: string): Promise<void> {
@@ -33,18 +33,6 @@ export function setUnlockShortcuts(unlockShortcuts: boolean) {
   settings.value = {
     ...settings.value,
     unlockShortcuts,
-  };
-}
-
-export function getUnstableOptimizations(): boolean {
-  return settings.value.unstableOptimizations;
-}
-
-export function setUnstableOptimizations(unstableOptimizations: boolean) {
-  needRestart.value = true;
-  settings.value = {
-    ...settings.value,
-    unstableOptimizations,
   };
 }
 

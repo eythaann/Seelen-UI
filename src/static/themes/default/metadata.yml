@@ -26,6 +26,8 @@ styles:
   "@seelen/network-popup": !include styles/network-popup.scss
   "@seelen/calendar-popup": !include styles/calendar-popup.scss
   "@seelen/media-popup": !include styles/media-popup.scss
+  "@seelen/session-time": !include styles/session-time.scss
+  "@seelen/weather-popup": !include styles/weather-popup.scss
   "@seelen/notifications": !include styles/notifications.scss
   "@seelen/context-menu": !include styles/context-menu.scss
   "@seelen/flyouts": !include styles/flyouts.css

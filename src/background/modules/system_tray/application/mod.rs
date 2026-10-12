@@ -134,12 +134,14 @@ impl SystemTrayManager {
         Ok(())
     }
 
-    /// Shows the icon directly on the taskbar or only in the tray overflow.
+    /// Shows the icon in Seelen's toolbar or only in the tray overflow.
     pub fn set_promoted(&self, registry_key: &str, promoted: bool) -> Result<()> {
         if !self.icons.contains_key(registry_key) {
             return Err("Icon not found".into());
         }
-        set_registry_notify_icon_promoted(registry_key, promoted)?;
+        if !registry_key.starts_with(SESSION_ONLY_ICON_KEY_PREFIX) {
+            set_registry_notify_icon_promoted(registry_key, promoted)?;
+        }
         self.icons.with_lock(|icons| {
             if let Some(icon) = icons.get_mut(registry_key) {
                 icon.is_promoted = promoted;
@@ -158,6 +160,7 @@ pub(super) struct PendingIcon {
 }
 
 const NOTIFY_ICON_SETTINGS: &str = "Control Panel\\NotifyIconSettings";
+pub(super) const SESSION_ONLY_ICON_KEY_PREFIX: &str = "session:";
 
 #[derive(Debug)]
 #[allow(dead_code)]

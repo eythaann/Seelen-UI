@@ -6,16 +6,15 @@ use sysinfo::ProcessesToUpdate;
 
 use crate::{enviroment::was_installed_using_msix, error::Result, exit};
 
-/// How long to wait for the app to establish its IPC connection after each launch attempt.
-const STARTUP_TIMEOUT: Duration = Duration::from_secs(2);
+/// Debug builds need more time to initialize the app's IPC listener after launch.
+const STARTUP_TIMEOUT: Duration = Duration::from_secs(if cfg!(debug_assertions) { 15 } else { 2 });
 
 /// How long to wait for the app to restore its IPC pipe after a system resume.
 /// Tauri's async runtime can take several seconds to fully re-initialize.
 const RESUME_GRACE: Duration = Duration::from_secs(10);
 
 /// Max consecutive failures before giving up and stopping the service.
-/// In debug builds we stop immediately after the first failure.
-const MAX_CRASHES: u32 = if cfg!(debug_assertions) { 0 } else { 5 };
+const MAX_CRASHES: u32 = 5;
 
 /// Set to `true` while the system is suspended; cleared on resume.
 /// Written by the power monitor thread, read by the app monitoring thread.

@@ -38,6 +38,7 @@ export enum SeelenEvent {
   WidgetPermissionsChanged = "widget::permissions-changed",
   StateWallpapersChanged = "UserResources::wallpapers-changed",
   SystemTrayChanged = "system-tray::changed",
+  ActiveSessionTimeChanged = "active-session-time::changed",
   StatePerformanceModeChanged = "state::performance-mode-changed",
   WidgetTriggered = "widget::triggered",
   RadiosChanged = "radio::changed",

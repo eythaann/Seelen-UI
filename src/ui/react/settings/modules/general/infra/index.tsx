@@ -12,12 +12,14 @@ import {
   getPollingInterval,
   getStartOfWeek,
   getSuspendOnGameMode,
+  getUnstableOptimizations,
   setDateFormat,
   setHardwareAcceleration,
   setLanguage,
   setPollingInterval,
   setStartOfWeek,
   setSuspendOnGameMode,
+  setUnstableOptimizations,
 } from "../application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
@@ -33,6 +35,7 @@ export function General() {
   const hardwareAcceleration = getHardwareAcceleration();
   const pollingInterval = getPollingInterval();
   const suspendOnGameMode = getSuspendOnGameMode();
+  const unstableOptimizations = getUnstableOptimizations();
 
   const { t } = useTranslation();
 
@@ -136,6 +139,12 @@ export function General() {
           label={t("general.suspend_on_game_mode")}
           description={t("general.suspend_on_game_mode_description")}
           action={<Switch onChange={setSuspendOnGameMode} checked={suspendOnGameMode} />}
+        />
+
+        <SettingsOption
+          label={t("devtools.unstable_optimizations")}
+          description={t("devtools.unstable_optimizations_description")}
+          action={<Switch value={unstableOptimizations} onChange={setUnstableOptimizations} />}
         />
 
         <SettingsOption

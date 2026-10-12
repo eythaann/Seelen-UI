@@ -99,6 +99,10 @@ impl SeelenUI {
             SeelenWeg::hide_native_taskbar();
         }
 
+        crate::modules::session_time::SessionTimeManager::sync_toolbar_items(
+            &crate::state::application::TOOLBAR_ITEMS_MANAGER.get(),
+        )?;
+
         WIDGET_MANAGER.reconcile()?;
         create_background_window()?;
         register_win_hook()?;

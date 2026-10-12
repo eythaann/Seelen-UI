@@ -1,21 +1,24 @@
 .system-tray {
   width: 300px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
   gap: var(--spacing-xs);
 
   .system-tray-entry {
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     gap: var(--spacing-xs);
 
     .system-tray-item {
-      flex: 1;
-      min-width: 0;
-      gap: var(--spacing-xs);
+      flex: 0 0 auto;
       padding: var(--spacing-xs);
 
       .system-tray-item-icon-box {
+        display: flex;
+
         .system-tray-item-icon {
           width: 1rem;
           height: 1rem;
@@ -42,9 +45,5 @@
       }
     }
 
-    .system-tray-item-pin {
-      padding: var(--spacing-xs);
-      color: var(--slu-std-fg-secondary-color);
-    }
   }
 }

@@ -183,6 +183,27 @@ slu_commands_declaration! {
 
     GetFocusedApp = get_focused_app() -> FocusedApp,
     GetMousePosition = get_mouse_position() -> [i32; 2],
+    GetActiveSessionTime = get_active_session_time() -> ActiveSessionTime,
+    GetSessionTimeAudioCueSounds =
+        get_session_time_audio_cue_sounds() -> Vec<SessionTimeSound>,
+    SetSessionTimeAudioCueSettings =
+        @webview()
+        @fallible()
+        set_session_time_audio_cue_settings(
+            enabled: bool,
+            interval_minutes: u32,
+            sound: SessionTimeSound,
+            custom_path: Option<String>,
+            notification_enabled: bool,
+            notification_message: String
+        ),
+    TestSessionTimeAudioCue =
+        @webview()
+        @fallible()
+        test_session_time_audio_cue(
+            sound: SessionTimeSound,
+            custom_path: Option<String>
+        ),
     GetKeyState =
         @fallible()
         get_key_state(key: String) -> bool,

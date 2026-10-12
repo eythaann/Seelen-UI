@@ -4,10 +4,8 @@ import { useTranslation } from "react-i18next";
 import {
   getDevTools,
   getUnlockShortcuts,
-  getUnstableOptimizations,
   setDevTools,
   setUnlockShortcuts,
-  setUnstableOptimizations,
 } from "./application.ts";
 
 import { SettingsGroup, SettingsOption } from "../../components/SettingsBox/index.tsx";
@@ -20,7 +18,6 @@ import { WidgetsDebug } from "./WidgetsDebug.tsx";
 export function DeveloperTools() {
   const devTools = getDevTools();
   const unlockShortcuts = getUnlockShortcuts();
-  const unstableOptimizations = getUnstableOptimizations();
 
   const { t } = useTranslation();
 
@@ -36,11 +33,6 @@ export function DeveloperTools() {
 
       {devTools && (
         <SettingsGroup>
-          <SettingsOption
-            label={t("devtools.unstable_optimizations")}
-            description={t("devtools.unstable_optimizations_description")}
-            action={<Switch value={unstableOptimizations} onChange={setUnstableOptimizations} />}
-          />
           <SettingsOption
             label={t("devtools.unlock_shortcuts")}
             description={t("devtools.unlock_shortcuts_description")}

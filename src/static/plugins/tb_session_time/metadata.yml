@@ -1,0 +1,12 @@
+id: "@default/session-time"
+metadata:
+  displayName: !extend i18n/display_name.yml
+icon: LuClock
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Media
+    - SessionTime
+  template: !include plugin/template.js
+  onClick: 'trigger("@seelen/session-time");'
+  tooltip: 'return "Active screen time this session"'

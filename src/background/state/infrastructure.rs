@@ -25,7 +25,8 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn state_write_toolbar_items(webview: WebviewWindow, items: ToolbarState) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
-        TOOLBAR_ITEMS_MANAGER.write(items)
+        TOOLBAR_ITEMS_MANAGER.write(items.clone())?;
+        crate::modules::session_time::SessionTimeManager::sync_toolbar_items(&items)
     }
 
     pub fn state_get_weg_items() -> WegItems {

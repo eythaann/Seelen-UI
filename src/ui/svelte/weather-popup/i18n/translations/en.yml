@@ -1,0 +1,96 @@
+title: Local weather
+current_location: Current location
+location: Location
+location_placeholder: City, postal code, or place
+save_location: Find weather
+use_system_location: Use this device's location
+source_note: System location is used when allowed; forecasts come from Open-Meteo because Windows has no local weather feed.
+configure_location: Set a location
+configure: Set location
+unavailable: Weather unavailable
+current: Current conditions
+hourly_forecast: Next hours
+feels_like: Feels like
+high_low: High / low
+rain_chance: Precipitation chance
+precipitation_short: Precip
+precipitation: Precipitation
+wind: Wind
+wind_gusts_short: Gust
+wind_gusts: Wind gusts
+wind_direction_short: Dir
+wind_direction: Wind direction
+humidity: Humidity
+cloud_cover_short: Cloud
+humidity_short: Hum
+cloud_cover: Cloud cover
+pressure_short: Pressure
+pressure: Pressure
+uv_index_short: UV
+uv_index: UV index
+sunrise_short: Rise
+sunrise: Sunrise
+sunset_short: Set
+sunset: Sunset
+moon_phase: Moon phase
+updated: Updated
+refresh: Refresh
+taskbar_display: Taskbar display
+show_location: Location
+show_temperature: Temperature
+show_condition: Condition
+show_rain_chance: Rain chance
+show_precipitation: Precipitation amount
+show_wind_speed: Wind speed
+show_wind_gusts: Wind gusts
+show_wind_direction: Wind direction
+show_humidity: Humidity
+show_cloud_cover: Cloud cover
+show_pressure: Pressure
+show_uv_index: UV index
+show_sunrise_sunset: Sunrise and sunset
+show_moon_phase: Moon phase
+regional_format: Regional format
+system_locale: System locale
+temperature_unit: Temperature unit
+wind_unit: Wind speed unit
+precipitation_unit: Precipitation unit
+celsius: Celsius (°C)
+fahrenheit: Fahrenheit (°F)
+kilometers_per_hour: Kilometers per hour
+miles_per_hour: Miles per hour
+millimeters: Millimeters
+inches: Inches
+loading: Loading weather…
+no_weather: Enter a city or postal code to see local weather.
+location:
+  permission_denied: Allow location access in Windows settings or enter a city or postal code.
+  timeout: Location lookup timed out. Enter a city or postal code instead.
+  unavailable: Device location is unavailable. Enter a city or postal code instead.
+  unsupported: Automatic location is not supported here. Enter a city or postal code instead.
+conditions:
+  clear: Clear
+  mainly_clear: Mainly clear
+  partly_cloudy: Partly cloudy
+  overcast: Overcast
+  fog: Fog
+  drizzle: Drizzle
+  freezing_drizzle: Freezing drizzle
+  rain: Rain
+  freezing_rain: Freezing rain
+  snow: Snow
+  snow_grains: Snow grains
+  rain_showers: Rain showers
+  snow_showers: Snow showers
+  thunderstorm: Thunderstorm
+  unknown: Unknown
+moon:
+  new: New moon
+  waxing_crescent: Waxing crescent
+  first_quarter: First quarter
+  waxing_gibbous: Waxing gibbous
+  full: Full moon
+  waning_gibbous: Waning gibbous
+  last_quarter: Last quarter
+  waning_crescent: Waning crescent
+units_region: Units and region

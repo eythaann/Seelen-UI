@@ -1,0 +1,16 @@
+id: "@default/weather"
+metadata:
+  displayName: !extend i18n/display_name.yml
+  description: !extend i18n/description.yml
+icon: LuCloud
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Weather
+  template: !include plugin/template.js
+  onClick: 'trigger("@seelen/weather-popup");'
+  tooltip: |-
+    if (weather.loading) return t("weather.loading");
+    if (!weather.settings.useSystemLocation && !weather.settings.location) return t("weather.configure_location");
+    if (weather.settings.showLocation && weather.snapshot) return weather.snapshot.location || t("weather.current_location");
+    return t("weather.title");

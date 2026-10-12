@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-  import type { ContextMenu, ContextMenuItem, PluginId, WidgetId } from "@seelen-ui/lib/types";
+  import type { ContextMenu, ContextMenuItem, PluginId, ToolbarItem, WidgetId } from "@seelen-ui/lib/types";
   import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
@@ -12,6 +12,7 @@
   import {
     toolbarState,
     toolbarActions,
+    baseItem,
     plugins,
     restoreStateToDefault,
     listToGroups,
@@ -31,6 +32,7 @@
   // ── Derived splits ───────────────────────────────────────────────────────
 
   const groups = $derived(listToGroups(toolbarState.items, true));
+  let trayIconDragOver = $state(false);
 
   // dnd-kit's `move()` reorders by index within the full, unfiltered items
   // array, so sortables must report their true index there, not their
@@ -191,6 +193,80 @@
     setToolbarIsDraggingItem(false);
   }
 
+  function handleTrayDragOver(event: DragEvent) {
+    if (
+      !event.dataTransfer?.types.includes("application/x-seelen-system-tray-icon") &&
+      !event.dataTransfer?.types.includes("text/plain")
+    ) {
+      return;
+    }
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+    trayIconDragOver = true;
+  }
+
+  function handleTrayDragLeave(event: DragEvent) {
+    const currentTarget = event.currentTarget;
+    const relatedTarget = event.relatedTarget;
+    if (currentTarget instanceof Node && relatedTarget instanceof Node && currentTarget.contains(relatedTarget)) {
+      return;
+    }
+    trayIconDragOver = false;
+  }
+
+  function toolbarInsertionIndex(event: DragEvent): number {
+    const coordinate = event.clientX;
+    const nextIndex = toolbarState.items.findIndex((item) => {
+      const id = typeof item === "string" ? item : item.id;
+      const element = document.getElementById(id);
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      const midpoint = rect.left + rect.width / 2;
+      return coordinate < midpoint;
+    });
+    return nextIndex < 0 ? toolbarState.items.length : nextIndex;
+  }
+
+  async function handleTrayDrop(event: DragEvent) {
+    trayIconDragOver = false;
+    const transfer = event.dataTransfer;
+    if (!transfer) return;
+
+    const payload =
+      transfer.getData("application/x-seelen-system-tray-icon") || transfer.getData("text/plain");
+    const prefix = "seelen-system-tray:";
+    if (!payload.startsWith(prefix)) return;
+
+    event.preventDefault();
+    const id = payload.slice(prefix.length);
+    if (!id) return;
+
+    const icon = (await invoke(SeelenCommand.GetSystemTrayIcons)).find(
+      (candidate) => candidate.registryKey === id,
+    );
+    if (!icon) return;
+
+    const itemId = `system-tray-${encodeURIComponent(icon.registryKey)}`;
+    if (toolbarState.items.some((item) => (typeof item === "string" ? item : item.id) === itemId)) {
+      return;
+    }
+    if (icon.isPromoted) {
+      await invoke(SeelenCommand.SetSystemTrayIconPromoted, { id, promoted: false });
+    }
+
+    const template = icon.iconPath
+      ? `return Image({ path: ${JSON.stringify(icon.iconPath)}, version: ${JSON.stringify(icon.iconImageHash)} })`
+      : 'return icon("TbApps")';
+    const toolbarItem: ToolbarItem = {
+      ...baseItem,
+      id: itemId,
+      template,
+      tooltip: `return ${JSON.stringify(icon.tooltip)}`,
+      onClick: `invoke(SeelenCommand.SendSystemTrayIconAction, { id: ${JSON.stringify(id)}, action: "LeftClick" })`,
+    };
+    toolbarActions.addInlineItem(toolbarItem, toolbarInsertionIndex(event));
+  }
+
   // ── Resolve overlay item ──────────────────────────────────────────────────
 
   function resolveOverlayModule(sourceId: string) {
@@ -217,6 +293,10 @@
   tabindex="0"
   class="ft-bar {settingsState.position.toLowerCase()}"
   class:ft-bar-hidden={hiddenByAutohide.value}
+  data-tray-icon-drag-over={trayIconDragOver}
+  ondragover={handleTrayDragOver}
+  ondragleave={handleTrayDragLeave}
+  ondrop={handleTrayDrop}
   data-has-margin={!!settingsState.margin}
   data-there-is-maximized-on-background={windowsState.thereIsMaximizedOnBg}
   oncontextmenu={handleContextMenu}

@@ -4,11 +4,11 @@ use std::path::PathBuf;
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct SysTrayIcon {
-    /// Persistent identifier assigned by Windows to the icon: the name of its subkey under
-    /// `HKCU\Control Panel\NotifyIconSettings`, bound to the executable that registered the
-    /// icon plus its uid or guid. Unlike the (window handle + uid) pair it survives sessions.
+    /// Icon identifier: on Windows 11, the name of its persistent subkey under
+    /// `HKCU\Control Panel\NotifyIconSettings`; on Windows 10, a session-only identifier
+    /// derived from its guid or (window handle + uid).
     ///
-    /// It is a u64 on Windows, exposed as string because it exceeds the JS safe integer range.
+    /// The identifier is exposed as a string for use as a UI key.
     pub registry_key: String,
 
     /// Path of the executable that registered the icon.
@@ -66,9 +66,8 @@ pub struct SysTrayIcon {
     /// This is determined by the `NIS_HIDDEN` flag in the icon's state.
     pub is_visible: bool,
 
-    /// Whether the icon is shown directly on the taskbar, otherwise it is only
-    /// shown in the tray overflow. Stored by Windows as `IsPromoted` on the icon's
-    /// registry entry.
+    /// Whether the icon is shown in Seelen's toolbar. On Windows 11, this state
+    /// is also stored by Windows as `IsPromoted` on the icon's registry entry.
     pub is_promoted: bool,
 }
 

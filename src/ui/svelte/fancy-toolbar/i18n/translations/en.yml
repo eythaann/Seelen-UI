@@ -57,3 +57,26 @@ settings:
   restart: Restart
   title: Settings
 show_desktop: Show Desktop
+weather:
+  title: Local weather
+  configure: Configure weather
+  configure_location: Configure weather location
+  unavailable: Weather unavailable
+  rain_short: Rain
+  wind_short: Wind
+  conditions:
+    clear: Clear
+    mainly_clear: Mainly clear
+    partly_cloudy: Partly cloudy
+    overcast: Overcast
+    fog: Fog
+    drizzle: Drizzle
+    freezing_drizzle: Freezing drizzle
+    rain: Rain
+    freezing_rain: Freezing rain
+    snow: Snow
+    snow_grains: Snow grains
+    rain_showers: Rain showers
+    snow_showers: Snow showers
+    thunderstorm: Thunderstorm
+    unknown: Unknown

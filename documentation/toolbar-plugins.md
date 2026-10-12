@@ -59,8 +59,32 @@ as top-level variables — no `scope.` prefix needed.
 | `Memory`            | `memory` (`Memory`)                                                                                             | `GetSystemMemory`                                                                |
 | `Cpu`               | `cores` (`Core[]`)                                                                                              | `GetSystemCores`                                                                 |
 | `Tray`              | `trayIcons`                                                                                                     | `GetSystemTrayIcons`                                                             |
+| `SessionTime`       | `activeSessionTime` (`{ activeSeconds, longestActiveSeconds, isIdle }`)                                           | `GetActiveSessionTime`                                                           |
 | `TrashBin`          | `trashBinInfo` (`TrashBinInfo`)                                                                                 | `GetTrashBinInfo`                                                                |
 | `Waveform`          | `waveform` (`AudioWaveform`)                                                                                    | `GetMediaWaveform`                                                               |
+
+The built-in `@default/session-time` toolbar plugin displays active screen time for the current Windows login. It tracks
+only while the module is present in the toolbar; removing it pauses tracking, and re-adding it resumes from the saved
+timer and longest-session record. It does not count sleep, and pauses after five minutes without input unless a media
+session is playing. While paused, it shows
+`Zzz`; clicking it opens the longest-session score, which updates live when the current session beats the previous
+record. The longest duration and current timer checkpoint are written once per second to
+`%LOCALAPPDATA%\com.seelen.seelen-ui\active-session-time.log`, outside the Seelen installation. A Seelen-only restart
+restores the current timer without counting the time Seelen was stopped; a Windows reboot starts a fresh current timer
+while retaining the longest-session record. Use the small tools icon below the timer to enable periodic active-time
+alerts, set an interval such as `1h30m`, and choose a Windows system sound or an MP3 file. The alert settings include a
+test button.
+
+The built-in `@default/weather` toolbar module is opt-in by being present in the toolbar. It keeps a cloud icon visible
+while weather is loading or before a location is available. By default it requests approximate coordinates through the
+system geolocation API, then uses Open-Meteo for forecast data; Windows location permission is required. Windows has no
+supported, universal local weather-forecast API, so the popup offers manual city or postal-code entry if system location
+is unavailable. Location names are hidden from the taskbar by default, and no location or forecast request is made
+while the module has no active consumer. Forecasts refresh every 15 minutes only while the module or its popup is active;
+the request contains current conditions, one day of summaries, and only the six displayed hourly points. Removing the
+module from the toolbar stops refresh requests. Taskbar details default to temperature and precipitation chance, with
+settings for the other fields, showing the location name, regional number/date formatting, and temperature, wind, and
+precipitation units. Moon phase and illumination are calculated locally.
 
 Shapes of the more structured values (generated TS, `libs/core/gen/types/`):
 

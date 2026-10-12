@@ -105,6 +105,24 @@ export function setHardwareAcceleration(hardwareAcceleration: boolean) {
 }
 
 /**
+ * Gets whether experimental WebView process-sharing optimizations are enabled.
+ */
+export function getUnstableOptimizations(): boolean {
+  return settings.value.unstableOptimizations;
+}
+
+/**
+ * Sets experimental WebView process-sharing optimizations.
+ */
+export function setUnstableOptimizations(unstableOptimizations: boolean) {
+  needRestart.value = true;
+  settings.value = {
+    ...settings.value,
+    unstableOptimizations,
+  };
+}
+
+/**
  * Gets the suspend on game mode setting
  */
 export function getSuspendOnGameMode(): boolean {

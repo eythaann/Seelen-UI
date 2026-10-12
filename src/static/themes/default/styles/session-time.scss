@@ -1,0 +1,102 @@
+.session-time-popup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 12rem;
+
+  .session-time-heading {
+    color: var(--slu-std-fg-secondary-color);
+  }
+
+  .session-time-settings-toggle {
+    align-self: flex-end;
+    display: inline-flex;
+    flex: 0 0 24px;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    min-height: 24px;
+    padding: 0;
+    color: var(--slu-std-fg-muted-color);
+    font-size: 0;
+    line-height: 0;
+
+    svg {
+      display: block;
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .session-time-file-button,
+  .session-time-test-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .session-time-file-button {
+    white-space: nowrap;
+  }
+
+  .session-time-test-button {
+    align-self: flex-start;
+  }
+
+  .session-time-settings {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+    padding-top: var(--spacing-s);
+  }
+
+  .session-time-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-m);
+  }
+
+  .session-time-setting input[type="text"],
+  .session-time-setting select {
+    width: 10rem;
+    min-width: 0;
+  }
+
+  .session-time-setting select {
+    color: var(--slu-std-fg-color);
+    opacity: 1;
+
+    option {
+      color: var(--slu-std-fg-color);
+      background-color: var(--slu-std-bg-light-color);
+    }
+  }
+
+  .session-time-custom-sound {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-s);
+    color: var(--slu-std-fg-secondary-color);
+    overflow-wrap: anywhere;
+  }
+
+  .session-time-settings-error {
+    color: var(--color-red-600);
+  }
+
+  .session-time-score {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .session-time-current {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-m);
+    color: var(--slu-std-fg-secondary-color);
+  }
+}

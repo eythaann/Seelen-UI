@@ -1,4 +1,12 @@
-use std::{ffi::OsStr, path::PathBuf, sync::LazyLock, time::Duration};
+use std::{
+    ffi::OsStr,
+    path::PathBuf,
+    sync::{
+        LazyLock,
+        atomic::{AtomicBool, Ordering},
+    },
+    time::Duration,
+};
 
 use seelen_core::system_state::{MediaPlayerOwner, MediaPlayerTimeline};
 use windows::{
@@ -30,6 +38,7 @@ const REMOVAL_GRACE_MS: u128 = 1500;
 const REMOVAL_SCHEDULE_MS: u64 = 2000;
 /// Delay (ms) before retrying thumbnail fetch after a missing thumbnail.
 const THUMBNAIL_RETRY_DELAY_MS: u64 = 300;
+static ANY_MEDIA_PLAYING: AtomicBool = AtomicBool::new(false);
 
 fn timeline_from_raw(
     raw: GlobalSystemMediaTransportControlsSessionTimelineProperties,
@@ -107,12 +116,15 @@ impl PlayersManager {
             self.load_session(session)?;
         }
         self.update_recommended_player();
+        self.update_playback_state();
 
         self.manager
             .SessionsChanged(&TypedEventHandler::new(Self::on_media_players_changed))?;
 
         let eid = Self::subscribe(|event| {
-            PlayersManager::instance().process_event(&event).log_error();
+            let manager = PlayersManager::instance();
+            manager.process_event(&event).log_error();
+            manager.update_playback_state();
             // Only re-evaluate the recommended player when the session list or
             // playback status changes. Timeline/property events fire very frequently
             // (every position tick) and do not affect which player is "current".
@@ -136,6 +148,17 @@ impl PlayersManager {
         umid: &str,
     ) -> Option<GlobalSystemMediaTransportControlsSession> {
         self.sessions.get(umid, |session| session.session.clone())
+    }
+
+    pub fn is_any_session_playing() -> bool {
+        ANY_MEDIA_PLAYING.load(Ordering::Acquire)
+    }
+
+    fn update_playback_state(&self) {
+        let is_playing = self
+            .playing
+            .any(|(_, player)| player.removed_at.is_none() && player.base.playing);
+        ANY_MEDIA_PLAYING.store(is_playing, Ordering::Release);
     }
 
     pub fn get_recommended_player_id(&self) -> Result<String> {

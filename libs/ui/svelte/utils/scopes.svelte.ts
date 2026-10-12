@@ -4,6 +4,7 @@ import { type AllSeelenCommandReturns, invoke, SeelenCommand, SeelenEvent, subsc
 import { NotificationsMode } from "@seelen-ui/lib/types";
 import { dateState } from "../runes/date.svelte.ts";
 import { dedupeBluetoothDevices, getIconNameForBTDevice } from "./bluetoothIcons.ts";
+import { weatherModule } from "./weather.svelte.ts";
 
 class LazyScope<C extends SeelenCommand> {
   private _ready = $state.raw(false);
@@ -90,6 +91,10 @@ const _virtualDesktops = new LazyScope(
   SeelenEvent.VirtualDesktopsChanged,
 );
 const _trayIcons = new LazyScope(SeelenCommand.GetSystemTrayIcons, SeelenEvent.SystemTrayChanged);
+const _activeSessionTime = new LazyScope(
+  SeelenCommand.GetActiveSessionTime,
+  SeelenEvent.ActiveSessionTimeChanged,
+);
 const _trashBinInfo = new LazyScope(SeelenCommand.GetTrashBinInfo, SeelenEvent.TrashBinChanged);
 const _waveform = new LazyScope(SeelenCommand.GetMediaWaveform, SeelenEvent.MediaWaveform);
 
@@ -119,6 +124,14 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
 
   if (scopesSet.has("media")) {
     fetching ||= mediaStep(data);
+  }
+
+  if (scopesSet.has("sessiontime")) {
+    fetching ||= activeSessionTimeStep(data);
+  }
+
+  if (scopesSet.has("weather")) {
+    fetching ||= weatherStep(data);
   }
 
   if (scopesSet.has("network")) {
@@ -416,6 +429,40 @@ function trayStep(data: Data): boolean {
 
   data.trayIcons = _trayIcons.data || [];
 
+  return false;
+}
+
+function activeSessionTimeStep(data: Data): boolean {
+  _activeSessionTime.lazyInit();
+
+  if (_activeSessionTime.fetching) {
+    return true;
+  }
+
+  data.activeSessionTime = _activeSessionTime.data || {
+    activeSeconds: 0,
+    longestActiveSeconds: 0,
+    isIdle: false,
+  };
+
+  return false;
+}
+
+function weatherStep(data: Data): boolean {
+  const snapshot = weatherModule.snapshot;
+  const settings = weatherModule.settings;
+  const loading = weatherModule.loading;
+  data.weather = {
+    snapshot: snapshot
+      ? {
+        ...snapshot,
+        moonPhase: { ...snapshot.moonPhase },
+        nextHours: snapshot.nextHours.map((hour) => ({ ...hour })),
+      }
+      : null,
+    settings: { ...settings },
+    loading,
+  };
   return false;
 }
 

@@ -9,6 +9,7 @@
   import { styleToString } from "../utils.ts";
   import { createRemoteDataResolver } from "../remoteData.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
+  import { weatherModule } from "libs/ui/svelte/utils/weather.svelte.ts";
   import {
     compileSandboxed,
     evalSanboxed,
@@ -43,6 +44,7 @@
   let fetchedData = createRemoteDataResolver(() => self.remoteData ?? {});
 
   const _scopeResult = $derived(resolveScopes(self.scopes, { userSourceName }));
+  const usesWeather = $derived(self.scopes.some((scope) => scope.toLowerCase() === "weather"));
   const fetching = $derived(_scopeResult.fetching);
   const scope = $derived.by(() => ({
     ..._scopeResult.data,
@@ -79,7 +81,6 @@
   const itemStyle = $derived(
     styleToString({
       ...self.style,
-      ...(sortable?.isDragging ? { opacity: 0.2 } : {}),
     }),
   );
 
@@ -100,6 +101,11 @@
   function handleWheel(e: WheelEvent) {
     evalActionSanboxed(self.id, e.deltaY < 0 ? onWheelUpExec : onWheelDownExec, scope);
   }
+
+  $effect(() => {
+    if (!usesWeather) return;
+    return weatherModule.activate();
+  });
 
   $effect(() => {
     if (!self.render || !renderExec || !canvas) return;

@@ -21,8 +21,8 @@ use windows::Win32::{
 use crate::{
     error::ResultLogExt,
     modules::system_tray::application::{
-        PendingIcon, RegistryNotifyIcon, SystemTrayEvent, SystemTrayManager,
-        find_registry_notify_icon, util::Util,
+        PendingIcon, RegistryNotifyIcon, SESSION_ONLY_ICON_KEY_PREFIX, SystemTrayEvent,
+        SystemTrayManager, find_registry_notify_icon, util::Util,
     },
     utils::{
         constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image, spawn_named_thread,
@@ -42,7 +42,7 @@ const REGISTRY_LOOKUP_INTERVAL: Duration = Duration::from_millis(200);
 pub enum SystrayEvent {
     IconAdd(SysTrayIcon),
     IconUpdate(SysTrayIcon),
-    /// registry key of the removed icon
+    /// Identifier of the removed icon.
     IconRemove(String),
 }
 
@@ -171,8 +171,14 @@ impl SystemTrayManager {
             return None;
         }
 
-        let entry =
-            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)?;
+        let Some(entry) =
+            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)
+        else {
+            if crate::utils::is_windows_10() {
+                self.defer_until_registered(identity, icon_data.clone(), window_path);
+            }
+            return None;
+        };
         self.store_new_icon(icon_data, entry, window_path)
     }
 
@@ -397,7 +403,35 @@ impl SystemTrayManager {
                 SystemTrayManager::send(SystemTrayEvent::Changed);
                 return;
             }
-            log::warn!("Tray icon {identity} ({window_path:?}) ignored, no registry entry found");
+            if crate::utils::is_windows_10() && held.data.is_visible != Some(false) {
+                let Some(executable_path) = window_path else {
+                    log::warn!(
+                        "Tray icon {identity} has no executable path and cannot be tracked on Windows 10"
+                    );
+                    return;
+                };
+                log::debug!(
+                    "Tray icon {identity} has no Windows registry entry; tracking it for this session"
+                );
+                let entry = RegistryNotifyIcon {
+                    key: session_only_icon_key(&identity),
+                    executable_path: executable_path.clone(),
+                    initial_tooltip: held.data.tooltip.clone(),
+                    icon_guid: held.data.guid,
+                    icon_uid: held.data.uid,
+                    is_promoted: false,
+                };
+                if manager
+                    .store_new_icon(&held.data, entry, Some(executable_path))
+                    .is_some()
+                {
+                    SystemTrayManager::send(SystemTrayEvent::Changed);
+                }
+            } else {
+                log::warn!(
+                    "Tray icon {identity} ({window_path:?}) ignored, no registry entry found"
+                );
+            }
         });
     }
 
@@ -612,6 +646,20 @@ fn session_identity(data: &IconEventData) -> Option<String> {
         (Some(guid), _, _) => Some(guid.to_string()),
         (None, Some(handle), Some(uid)) => Some(format!("{handle:x}_{uid}")),
         _ => None,
+    }
+}
+
+fn session_only_icon_key(identity: &str) -> String {
+    format!("{SESSION_ONLY_ICON_KEY_PREFIX}{identity}")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::session_only_icon_key;
+
+    #[test]
+    fn session_only_keys_are_namespaced_from_windows_registry_keys() {
+        assert_eq!(session_only_icon_key("10618_0"), "session:10618_0");
     }
 }
 

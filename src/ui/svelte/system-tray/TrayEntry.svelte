@@ -1,10 +1,12 @@
 <script lang="ts">
   import { SystrayIconAction, type SysTrayIcon } from "@seelen-ui/lib/types";
   import { convertFileSrc } from "@tauri-apps/api/core";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+  import { Alignment, type ContextMenu } from "@seelen-ui/lib/types";
   import { createSortable } from "@dnd-kit/svelte/sortable";
+  import { onDestroy, onMount } from "svelte";
   import { MissingIcon } from "libs/ui/svelte/components/Icon";
-  import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
+  import { t } from "./i18n";
 
   interface Props {
     item: SysTrayIcon;
@@ -12,6 +14,10 @@
   }
 
   let { item, index }: Props = $props();
+
+  const itemLabel = $derived(
+    item.tooltip || item.guid || `${item.windowHandle?.toString(16)}::${item.uid}`,
+  );
 
   const sortable = createSortable({
     get id() {
@@ -51,11 +57,64 @@
     });
   }
 
-  function setPinned(id: string, promoted: boolean) {
-    invoke(SeelenCommand.SetSystemTrayIconPromoted, {
-      id,
-      promoted,
+  function onDragStart(event: DragEvent, id: string) {
+    if (!event.dataTransfer) return;
+    const payload = `seelen-system-tray:${id}`;
+    event.dataTransfer.effectAllowed = "copy";
+    event.dataTransfer.setData("application/x-seelen-system-tray-icon", payload);
+    event.dataTransfer.setData("text/plain", payload);
+  }
+
+  const contextMenuEvent = `systemTrayContextMenu:${crypto.randomUUID()}`;
+  let unlistenContextMenu: (() => void) | undefined;
+
+  onMount(() => {
+    Widget.self.webview.listen(contextMenuEvent, ({ payload }) => {
+      const { key } = payload as { key: string };
+      if (key === "pin") {
+        invoke(SeelenCommand.SetSystemTrayIconPromoted, {
+          id: item.registryKey,
+          promoted: !item.isPromoted,
+        });
+      } else if (key === "application-menu") {
+        invoke(SeelenCommand.SendSystemTrayIconAction, {
+          id: item.registryKey,
+          action: SystrayIconAction.RightClick,
+        });
+      }
+    }).then((unlisten) => {
+      unlistenContextMenu = unlisten;
     });
+  });
+
+  onDestroy(() => {
+    unlistenContextMenu?.();
+  });
+
+  function showContextMenu(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const menu: ContextMenu = {
+      identifier: crypto.randomUUID(),
+      items: [
+        {
+          type: "Item",
+          key: "pin",
+          icon: item.isPromoted ? "TbPinnedOff" : "TbPin",
+          label: item.isPromoted ? $t("unpin_from_toolbar") : $t("pin_to_toolbar"),
+          callbackEvent: contextMenuEvent,
+        },
+        {
+          type: "Item",
+          key: "application-menu",
+          label: $t("application_menu"),
+          callbackEvent: contextMenuEvent,
+        },
+      ],
+      alignX: Alignment.Center,
+      alignY: Alignment.Start,
+    };
+    invoke(SeelenCommand.TriggerContextMenu, { menu, forwardTo: null });
   }
 </script>
 
@@ -63,10 +122,14 @@
   <button
     class="system-tray-item"
     data-skin="transparent"
+    aria-label={itemLabel}
+    title={itemLabel}
+    draggable="true"
+    ondragstart={(event) => onDragStart(event, item.registryKey)}
     onclick={(e) => onClick(e, item.registryKey)}
     ondblclick={(e) => onDoubleClick(e, item.registryKey)}
-    onauxclick={(e) => onClick(e, item.registryKey)}
-    oncontextmenu={(e) => onClick(e, item.registryKey)}
+    onauxclick={(e) => e.button === 1 && onClick(e, item.registryKey)}
+    oncontextmenu={showContextMenu}
     onmouseenter={() => {
       /* invoke(SeelenCommand.SendSystemTrayIconAction, {
         id: item.registryKey,
@@ -106,16 +169,5 @@
       {/if}
     </div>
 
-    <span class="system-tray-item-label">
-      {item.tooltip || item.guid || `${item.windowHandle?.toString(16)}::${item.uid}`}
-    </span>
-  </button>
-
-  <button
-    data-skin="transparent"
-    class="system-tray-item-pin"
-    onclick={() => setPinned(item.registryKey, !item.isPromoted)}
-  >
-    <Icon name={item.isPromoted ? "TbPinnedOff" : "TbPin"} />
   </button>
 </li>
