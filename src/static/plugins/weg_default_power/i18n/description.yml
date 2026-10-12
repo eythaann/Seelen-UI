@@ -1,2 +1,72 @@
+af: Voeg 'n dok-item by wat die toestand van die batterye en die stelselkragtoestand wys.
+am: የባትሪዎቹን ሁኔታ እና የስርዓቱን የኃይል ሁኔታ የሚያሳይ የመትከያ ንጥል ይጨምራል።
+ar: يضيف عنصر إرساء يوضح حالة البطاريات وحالة طاقة النظام.
+az: Batareyaların vəziyyətini və sistemin güc vəziyyətini göstərən dok elementi əlavə edir.
+bg: Добавя док елемент, който показва състоянието на батериите и състоянието на захранване на системата.
+bn: একটি ডক আইটেম যোগ করে যা ব্যাটারির অবস্থা এবং সিস্টেম পাওয়ার স্টেট দেখায়।
+bs: Dodaje stavku priključne stanice koja prikazuje stanje baterija i stanje napajanja sistema.
+ca: Afegeix un element de base que mostra l'estat de les bateries i l'estat d'alimentació del sistema.
+cs: Přidá položku doku, která zobrazuje stav baterií a stav napájení systému.
+cy: Yn ychwanegu eitem doc sy'n dangos cyflwr y batris a chyflwr pŵer y system.
+da: Tilføjer et dockelement, der viser batteriernes tilstand og systemets strømtilstand.
+de: Fügt ein Dock-Element hinzu, das den Zustand der Batterien und den Energiestatus des Systems anzeigt.
+el: Προσθέτει ένα στοιχείο βάσης που δείχνει την κατάσταση των μπαταριών και την κατάσταση ισχύος του συστήματος.
 en: Adds a dock item that shows the state of the batteries and the system power state.
+es: Agrega un elemento de base que muestra el estado de las baterías y el estado de energía del sistema.
+et: Lisab dokiüksuse, mis näitab akude olekut ja süsteemi toiteolekut.
+eu: Baterien egoera eta sistemaren elikadura-egoera erakusten dituen dock elementu bat gehitzen du.
+fa: یک مورد داک اضافه می کند که وضعیت باتری ها و وضعیت برق سیستم را نشان می دهد.
+fi: Lisää telakointikohteen, joka näyttää akkujen tilan ja järjestelmän virran tilan.
+fr: Ajoute un élément de dock qui affiche l'état des batteries et l'état d'alimentation du système.
+gu: એક ડોક આઇટમ ઉમેરે છે જે બેટરીની સ્થિતિ અને સિસ્ટમ પાવર સ્ટેટ દર્શાવે છે.
+he: מוסיף פריט עגינה המציג את מצב הסוללות ואת מצב צריכת החשמל של המערכת.
+hi: एक डॉक आइटम जोड़ता है जो बैटरियों की स्थिति और सिस्टम पावर स्थिति दिखाता है।
+hr: Dodaje stavku doka koja prikazuje stanje baterija i stanje napajanja sustava.
+hu: Hozzáad egy dokkolóelemet, amely megmutatja az akkumulátorok állapotát és a rendszer tápellátási állapotát.
+hy: "Ավելացնում է մի կետ, որը ցույց է տալիս մարտկոցների վիճակը և համակարգի էներգիայի վիճակը:"
+id: Menambahkan item dok yang menunjukkan status baterai dan status daya sistem.
+is: Bætir við bryggjuhlut sem sýnir stöðu rafhlöðanna og orkustöðu kerfisins.
+it: Aggiunge un elemento dock che mostra lo stato delle batterie e lo stato di alimentazione del sistema.
+ja: バッテリーの状態とシステムの電源状態を示すドック項目を追加します。
+ka: ამატებს დოკის ელემენტს, რომელიც აჩვენებს ბატარეების მდგომარეობას და სისტემის სიმძლავრის მდგომარეობას.
+km: បន្ថែមធាតុចតដែលបង្ហាញពីស្ថានភាពថ្ម និងស្ថានភាពថាមពលរបស់ប្រព័ន្ធ។
+ko: 배터리 상태와 시스템 전원 상태를 표시하는 도크 항목을 추가합니다.
+ku: Tiştek dockê zêde dike ku rewşa batariyan û rewşa hêza pergalê nîşan dide.
+lb: Füügt en Dock Element, deen den Zoustand vun de Batterien an de Systemkraaftstaat weist.
+lo: ເພີ່ມລາຍການ dock ທີ່ສະແດງສະຖານະຂອງຫມໍ້ໄຟແລະສະຖານະພະລັງງານຂອງລະບົບ.
+lt: Pridedamas doko elementas, rodantis baterijų būseną ir sistemos maitinimo būseną.
+lv: Pievieno dokstacijas vienumu, kas parāda akumulatoru stāvokli un sistēmas jaudas stāvokli.
+mk: Додава ставка за приклучок што ја прикажува состојбата на батериите и состојбата на напојувањето на системот.
+mn: Батерейны төлөв болон системийн тэжээлийн төлөвийг харуулсан док элементийг нэмдэг.
+ms: Menambah item dok yang menunjukkan keadaan bateri dan keadaan kuasa sistem.
+mt: Iżżid oġġett tal-baċir li juri l-istat tal-batteriji u l-istat tal-enerġija tas-sistema.
+ne: ब्याट्रीको अवस्था र प्रणालीको शक्ति अवस्था देखाउने डक वस्तु थप्छ।
+nl: Voegt een dockitem toe dat de status van de batterijen en de energiestatus van het systeem weergeeft.
+no: Legger til et dockelement som viser statusen til batteriene og systemets strømstatus.
+pa: ਇੱਕ ਡੌਕ ਆਈਟਮ ਜੋੜਦਾ ਹੈ ਜੋ ਬੈਟਰੀਆਂ ਦੀ ਸਥਿਤੀ ਅਤੇ ਸਿਸਟਮ ਪਾਵਰ ਸਥਿਤੀ ਦਿਖਾਉਂਦਾ ਹੈ।
+pl: Dodaje element stacji dokującej, który pokazuje stan akumulatorów i stan zasilania systemu.
+ps: د ډاک توکي اضافه کوي چې د بیټرۍ حالت او د سیسټم بریښنا حالت ښیې.
+pt-BR: Adiciona um item de encaixe que mostra o estado das baterias e o estado de energia do sistema.
+pt-PT: Adiciona um item de encaixe que mostra o estado das baterias e o estado de energia do sistema.
+ro: Adaugă un element de andocare care arată starea bateriilor și starea de alimentare a sistemului.
+ru: Добавляет элемент док-станции, который показывает состояние батарей и состояние питания системы.
+si: බැටරිවල තත්ත්වය සහ පද්ධති බල තත්ත්වය පෙන්වන ඩොක් අයිතමයක් එක් කරයි.
+sk: Pridá položku doku, ktorá zobrazuje stav batérií a stav napájania systému.
+so: Wuxuu ku daraa shay xidhid oo tusinaya xaalada baytariyada iyo heerka awooda nidaamka
+sr: Додаје ставку прикључне станице која приказује стање батерија и стање напајања система.
+sv: Lägger till ett dockningsobjekt som visar batteriernas tillstånd och systemets strömtillstånd.
+sw: Huongeza kipengee cha kituo kinachoonyesha hali ya betri na hali ya nguvu ya mfumo.
+ta: பேட்டரிகளின் நிலை மற்றும் சிஸ்டம் பவர் நிலையைக் காட்டும் டாக் உருப்படியைச் சேர்க்கிறது.
+te: బ్యాటరీల స్థితి మరియు సిస్టమ్ పవర్ స్థితిని చూపే డాక్ ఐటెమ్‌ను జోడిస్తుంది.
+tg: Як ҷузъи док илова мекунад, ки ҳолати батареяҳо ва ҳолати қувваи системаро нишон медиҳад.
+th: เพิ่มรายการท่าเรือที่แสดงสถานะของแบตเตอรี่และสถานะพลังงานของระบบ
+tl: Nagdaragdag ng dock item na nagpapakita ng estado ng mga baterya at ng system power state.
+tr: Pillerin durumunu ve sistem güç durumunu gösteren bir dock öğesi ekler.
+uk: Додає док-елемент, який показує стан батарей і стан живлення системи.
+ur: ایک ڈاک آئٹم جوڑتا ہے جو بیٹریوں کی حالت اور سسٹم پاور اسٹیٹ کو دکھاتا ہے۔
+uz: Batareyalar holatini va tizim quvvat holatini ko'rsatadigan dock elementini qo'shadi.
+vi: Thêm mục đế hiển thị trạng thái của pin và trạng thái nguồn của hệ thống.
+yo: Ṣe afikun ohun kan ibi iduro ti o fihan ipo ti awọn batiri ati ipo agbara eto.
 zh-CN: 添加一个停靠栏项，显示电池状态和系统电源状态。
+zh-TW: 新增顯示電池狀態和系統電源狀態的底座項目。
+zu: Yengeza into yedokhi ebonisa isimo samabhethri nesimo samandla esistimu.

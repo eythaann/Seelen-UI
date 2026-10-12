@@ -53,7 +53,6 @@ define_app_errors!(
     WinScreenshot(win_screenshot::capture::WSError);
     TryFromSliceError(std::array::TryFromSliceError);
     ParseIntError(std::num::ParseIntError);
-    Translator(translators::Error);
     WinHotkey(win_hotkeys::error::WHKError);
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);

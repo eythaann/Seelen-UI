@@ -69,7 +69,6 @@ url = { workspace = true }
 urlencoding = { workspace = true }
 fern = { workspace = true }
 reqwest = { workspace = true }
-translators = { workspace = true, features = ["google", "tokio-async"] }
 rand = { workspace = true }
 rustfft = { workspace = true }
 discord-rich-presence = { workspace = true }

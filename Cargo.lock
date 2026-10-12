@@ -2301,15 +2301,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "html-escape"
-version = "0.2.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d1ad449764d627e22bfd7cd5e8868264fc9236e07c752972b4080cd351cb476"
-dependencies = [
- "utf8-width",
-]
-
-[[package]]
 name = "html5ever"
 version = "0.39.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3120,33 +3111,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b823e83b2affd8f40a9ee8c29dbc56404c1e34cd2710921f2801e2cf29527afa"
 dependencies = [
  "libc",
-]
-
-[[package]]
-name = "macon"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e2360fdc60235ad3db2d65bb74539e0813c20a626f7e330ce9a64b2d4e513f0"
-dependencies = [
- "macon_api",
- "macon_derive",
-]
-
-[[package]]
-name = "macon_api"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2330ee9375fc537d78cc438ed16695a5d0201f0be9d977bf6bc4ac11e5b4e177"
-
-[[package]]
-name = "macon_derive"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ccd7e1436ba066ad10c8b43ac4a00d304322831b90f039f1d83815f846fee024"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.119",
 ]
 
 [[package]]
@@ -4644,46 +4608,6 @@ dependencies = [
 
 [[package]]
 name = "reqwest"
-version = "0.12.28"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eddd3ca559203180a307f12d114c268abf583f59b03cb906fd0b3ff8646c1147"
-dependencies = [
- "base64 0.22.1",
- "bytes",
- "futures-channel",
- "futures-core",
- "futures-util",
- "http",
- "http-body",
- "http-body-util",
- "hyper",
- "hyper-rustls",
- "hyper-util",
- "js-sys",
- "log",
- "percent-encoding",
- "pin-project-lite",
- "quinn",
- "rustls",
- "rustls-pki-types",
- "serde",
- "serde_json",
- "serde_urlencoded",
- "sync_wrapper",
- "tokio",
- "tokio-rustls",
- "tower",
- "tower-http",
- "tower-service",
- "url",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "webpki-roots",
-]
-
-[[package]]
-name = "reqwest"
 version = "0.13.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "16a1cfa75cc186dd73d5818e510e042e40927bccc9c236b061cea97e1eb08029"
@@ -5167,7 +5091,7 @@ dependencies = [
  "hyper-rustls",
  "hyper-util",
  "percent-encoding",
- "reqwest 0.13.5",
+ "reqwest",
  "salvo_core",
  "tokio",
  "tracing",
@@ -5474,7 +5398,7 @@ dependencies = [
  "rand 0.10.3",
  "rayon",
  "regex",
- "reqwest 0.13.5",
+ "reqwest",
  "rusqlite",
  "rust-i18n",
  "rustfft",
@@ -5493,7 +5417,6 @@ dependencies = [
  "tauri-plugin-updater",
  "time",
  "tokio",
- "translators",
  "url",
  "urlencoding",
  "uuid 1.27.0",
@@ -6285,7 +6208,7 @@ dependencies = [
  "percent-encoding",
  "plist",
  "raw-window-handle",
- "reqwest 0.13.5",
+ "reqwest",
  "serde",
  "serde_json",
  "serde_repr",
@@ -6442,7 +6365,7 @@ dependencies = [
  "minisign-verify",
  "osakit",
  "percent-encoding",
- "reqwest 0.13.5",
+ "reqwest",
  "rustls",
  "semver",
  "serde",
@@ -6973,21 +6896,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "translators"
-version = "0.1.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2957ae11f61a19fdc8c93cef9e0af3e8638c4672dce5f8d578e6232f55220873"
-dependencies = [
- "futures",
- "html-escape",
- "macon",
- "regex",
- "reqwest 0.12.28",
- "tokio",
- "urlencoding",
-]
-
-[[package]]
 name = "transpose"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -7194,12 +7102,6 @@ name = "utf-8"
 version = "0.7.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "09cc8ee72d2a9becf2f2febe0205bbed8fc6615b7cb429ad062dc7b7ddd036a9"
-
-[[package]]
-name = "utf8-width"
-version = "0.1.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1292c0d970b54115d14f2492fe0170adf21d68a1de108eebc51c1df4f346a091"
 
 [[package]]
 name = "utf8_iter"
