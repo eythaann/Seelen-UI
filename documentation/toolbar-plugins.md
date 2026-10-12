@@ -260,3 +260,7 @@ A plain object merged onto the item's container as inline styles, keyed like a R
 In the Fancy Toolbar's own settings, a toolbar item slot accepts either an inline `ToolbarItem` object (as shown above)
 or a plain string â€” the `id` of an already-installed `Plugin` resource targeting `@seelen/fancy-toolbar`. Both forms
 resolve to the exact same `ToolbarItem` shape by the time it reaches the execution engine described in section 4.
+
+### Weather defaults
+
+The weather plugin defaults to imperial units (°F, mph, inches, inHg). Its settings are stored in the Seelen settings file (`weatherSettings`) and persist across restarts. Screen-time can optionally show a toast notification when the sound timer fires.
