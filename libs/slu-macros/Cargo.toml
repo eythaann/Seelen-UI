@@ -1,6 +1,6 @@
 [package]
 name = "slu-macros"
-version = "2.8.9"
+version = "2.8.10"
 edition = "2024"
 rust-version = "1.97"
 
