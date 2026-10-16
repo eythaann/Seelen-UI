@@ -18,7 +18,9 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-pub struct WidgetWebview(pub tauri::WebviewWindow);
+/// `.1` is the HWND, read once on creation: `WebviewWindow::hwnd()` is a blocking round trip
+/// to the UI thread and is called while the widget maps are locked.
+pub struct WidgetWebview(pub tauri::WebviewWindow, pub isize);
 
 impl WidgetWebview {
     pub fn create(
@@ -115,8 +117,9 @@ impl WidgetWebview {
 
         // Widgets handle their own show/hide animations, avoid the ones from the system.
         // SAFETY: HWND in windows 0.61 (tauri) and 0.62 (ours) share the same memory layout
-        WindowsApi::set_system_transitions_disabled(HWND(window.hwnd()?.0), true).log_error();
-        Ok(Self(window))
+        let hwnd = HWND(window.hwnd()?.0);
+        WindowsApi::set_system_transitions_disabled(hwnd, true).log_error();
+        Ok(Self(window, hwnd.0 as isize))
     }
 
     pub fn reload(&self) {

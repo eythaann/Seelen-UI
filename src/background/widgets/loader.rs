@@ -187,7 +187,7 @@ impl WidgetPod {
     }
 
     pub fn hwnd(&self) -> Option<isize> {
-        self.window.as_ref()?.0.hwnd().ok().map(|h| h.0 as isize)
+        self.window.as_ref().map(|w| w.1)
     }
 
     pub fn set_status(&mut self, status: WidgetStatus) {
