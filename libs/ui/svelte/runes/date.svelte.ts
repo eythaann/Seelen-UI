@@ -12,15 +12,21 @@ const updatesEverySecond = $derived(_dateFormat.includes("ss"));
 $effect.root(() => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
+  // The delay is recalculated on every tick. A fixed chained delay (`setTimeout(tick, 60000)`)
+  // keeps the lateness of each timer, so the clock slowly drifts away from the minute boundary and
+  // never recovers. Each monitor has its own webview, so each one drifts by a different amount.
+  function scheduleNextTick() {
+    const period = updatesEverySecond ? 1000 : 60000;
+    timeout = setTimeout(tick, period - (Date.now() % period));
+  }
+
   function tick() {
     _date = Date.now();
-    timeout = setTimeout(tick, updatesEverySecond ? 1000 : 60000);
+    scheduleNextTick();
   }
 
   $effect(() => {
-    const now = Date.now();
-    const msToSync = updatesEverySecond ? 1000 - (now % 1000) : 60000 - (now % 60000);
-    timeout = setTimeout(tick, msToSync);
+    scheduleNextTick();
 
     return () => {
       if (timeout) clearTimeout(timeout);
