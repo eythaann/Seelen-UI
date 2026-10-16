@@ -42,26 +42,26 @@ file) — not JSON, not a declarative object. The toolbar widget compiles and ru
 Each entry in `scopes` (case-insensitive) makes a set of fields available inside `template`/`tooltip`/`badge`/ `onClick`
 as top-level variables — no `scope.` prefix needed.
 
-| Scope               | Injected variables                                                                                              | Backing command(s)                                                               |
-| ------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `Date`              | `date` (formatted string)                                                                                       | local reactive clock                                                             |
-| `Notifications`     | `count`, `dndActive`                                                                                            | `GetNotifications`, `GetNotificationsMode`                                       |
-| `Media`             | `defaultOutputDevice`, `defaultInputDevice`, `volume`, `isMuted`, `inputVolume`, `inputIsMuted`, `mediaSession` | `GetMediaSessions`, `GetMediaDevices`                                            |
-| `Network`           | `online`, `interfaces` (`NetworkAdapter[]`), `usingInterface`                                                   | `GetNetworkInternetConnection`, `GetNetworkAdapters`, `GetNetworkDefaultLocalIp` |
-| `Keyboard`          | `activeLang`, `activeKeyboard`, `activeLangPrefix`, `activeKeyboardPrefix`, `languages`, `imeState`             | `SystemGetLanguages`, `SystemGetImeState`                                        |
-| `User`              | `user` (includes computed `displayName`)                                                                        | `GetUser`                                                                        |
-| `Bluetooth`         | `devices`, `getIconNameForBTDevice(device)`                                                                     | `GetBluetoothDevices`                                                            |
-| `Power`             | `power` (`PowerStatus`), `powerMode`, `batteries` (`Battery[]`)                                                 | `GetPowerStatus`, `GetPowerMode`, `GetBatteries`                                 |
-| `FocusedApp`        | `focusedApp`                                                                                                    | `GetFocusedApp`                                                                  |
-| `Workspaces`        | `workspaces`, `activeWorkspace`                                                                                 | `StateGetVirtualDesktops`                                                        |
-| `Disk`              | `disks` (`Disk[]`)                                                                                              | `GetSystemDisks`                                                                 |
-| `NetworkStatistics` | `networkStatistics`                                                                                             | `GetSystemNetwork`                                                               |
-| `Memory`            | `memory` (`Memory`)                                                                                             | `GetSystemMemory`                                                                |
-| `Cpu`               | `cores` (`Core[]`)                                                                                              | `GetSystemCores`                                                                 |
-| `Gpu`               | `gpus` (`Gpu[]`)                                                                                                | `GetSystemGpus`                                                                  |
-| `Tray`              | `trayIcons`                                                                                                     | `GetSystemTrayIcons`                                                             |
-| `TrashBin`          | `trashBinInfo` (`TrashBinInfo`)                                                                                 | `GetTrashBinInfo`                                                                |
-| `Waveform`          | `waveform` (`AudioWaveform`)                                                                                    | `GetMediaWaveform`                                                               |
+| Scope               | Injected variables                                                                                              | Backing command(s)                                   |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `Date`              | `date` (formatted string)                                                                                       | local reactive clock                                 |
+| `Notifications`     | `count`, `dndActive`                                                                                            | `GetNotifications`, `GetNotificationsMode`           |
+| `Media`             | `defaultOutputDevice`, `defaultInputDevice`, `volume`, `isMuted`, `inputVolume`, `inputIsMuted`, `mediaSession` | `GetMediaSessions`, `GetMediaDevices`                |
+| `Network`           | `online`, `interfaces` (`NetworkAdapter[]`), `usingInterface`                                                   | `GetNetworkInternetConnection`, `GetNetworkAdapters` |
+| `Keyboard`          | `activeLang`, `activeKeyboard`, `activeLangPrefix`, `activeKeyboardPrefix`, `languages`, `imeState`             | `SystemGetLanguages`, `SystemGetImeState`            |
+| `User`              | `user` (includes computed `displayName`)                                                                        | `GetUser`                                            |
+| `Bluetooth`         | `devices`, `getIconNameForBTDevice(device)`                                                                     | `GetBluetoothDevices`                                |
+| `Power`             | `power` (`PowerStatus`), `powerMode`, `batteries` (`Battery[]`)                                                 | `GetPowerStatus`, `GetPowerMode`, `GetBatteries`     |
+| `FocusedApp`        | `focusedApp`                                                                                                    | `GetFocusedApp`                                      |
+| `Workspaces`        | `workspaces`, `activeWorkspace`                                                                                 | `StateGetVirtualDesktops`                            |
+| `Disk`              | `disks` (`Disk[]`)                                                                                              | `GetSystemDisks`                                     |
+| `NetworkStatistics` | `networkStatistics`                                                                                             | `GetSystemNetwork`                                   |
+| `Memory`            | `memory` (`Memory`)                                                                                             | `GetSystemMemory`                                    |
+| `Cpu`               | `cores` (`Core[]`)                                                                                              | `GetSystemCores`                                     |
+| `Gpu`               | `gpus` (`Gpu[]`)                                                                                                | `GetSystemGpus`                                      |
+| `Tray`              | `trayIcons`                                                                                                     | `GetSystemTrayIcons`                                 |
+| `TrashBin`          | `trashBinInfo` (`TrashBinInfo`)                                                                                 | `GetTrashBinInfo`                                    |
+| `Waveform`          | `waveform` (`AudioWaveform`)                                                                                    | `GetMediaWaveform`                                   |
 
 Shapes of the more structured values (generated TS, `libs/core/gen/types/`):
 

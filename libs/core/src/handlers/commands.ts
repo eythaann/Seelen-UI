@@ -127,7 +127,6 @@ export enum SeelenCommand {
   WlanConnect = "wlan_connect",
   WlanDisconnect = "wlan_disconnect",
   WlanForget = "wlan_forget",
-  GetNetworkDefaultLocalIp = "get_network_default_local_ip",
   GetNetworkAdapters = "get_network_adapters",
   GetNetworkInternetConnection = "get_network_internet_connection",
   GetNetworkHotspot = "get_network_hotspot",

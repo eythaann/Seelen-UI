@@ -36,12 +36,18 @@ class LazyScope<C extends SeelenCommand> {
       this._ready = true;
     });
 
-    invoke(this.command as any).then((data) => {
-      if (!this._ready) {
-        this._data = data as AllSeelenCommandReturns[C];
+    invoke(this.command as any)
+      .then((data) => {
+        if (!this._ready) {
+          this._data = data as AllSeelenCommandReturns[C];
+          this._ready = true;
+        }
+      })
+      .catch((error) => {
+        // a failed fetch must not leave the scope fetching forever, that would hide the item
+        console.error(`Failed to fetch scope data for ${this.command}:`, error);
         this._ready = true;
-      }
-    });
+      });
   }
 }
 
@@ -59,10 +65,6 @@ const _networkOnline = new LazyScope(
 const _networkAdapters = new LazyScope(
   SeelenCommand.GetNetworkAdapters,
   SeelenEvent.NetworkAdapters,
-);
-const _networkLocalIp = new LazyScope(
-  SeelenCommand.GetNetworkDefaultLocalIp,
-  SeelenEvent.NetworkDefaultLocalIp,
 );
 const _languages = new LazyScope(
   SeelenCommand.SystemGetLanguages,
@@ -239,15 +241,13 @@ function mediaStep(data: Data): boolean {
 function networkStep(data: Data): boolean {
   _networkOnline.lazyInit();
   _networkAdapters.lazyInit();
-  _networkLocalIp.lazyInit();
 
-  if (_networkOnline.fetching || _networkAdapters.fetching || _networkLocalIp.fetching) {
+  if (_networkOnline.fetching || _networkAdapters.fetching) {
     return true;
   }
 
   const interfaces = _networkAdapters.data;
-  const defaultIp = _networkLocalIp.data;
-  const usingInterface = interfaces?.find((i: any) => i.ipv4 === defaultIp) || null;
+  const usingInterface = interfaces?.find((i) => i.isDefault) || null;
   data.online = _networkOnline.data;
   data.interfaces = interfaces;
   data.usingInterface = usingInterface;

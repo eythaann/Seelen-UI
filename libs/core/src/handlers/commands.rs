@@ -513,9 +513,6 @@ slu_commands_declaration! {
     WlanForget =
         @fallible()
         wlan_forget(ssid: String),
-    GetNetworkDefaultLocalIp =
-        @fallible()
-        get_network_default_local_ip() -> String,
     GetNetworkAdapters =
         @fallible()
         get_network_adapters() -> Vec<NetworkAdapter>,

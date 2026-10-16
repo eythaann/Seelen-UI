@@ -5,6 +5,7 @@
 ### fix
 
 - per-app volume sessions not showing in the media volume mixer.
+- network api crashing when no connected to any network.
 
 ## [2.8.9]
 

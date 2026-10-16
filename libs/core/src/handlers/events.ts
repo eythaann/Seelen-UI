@@ -16,7 +16,6 @@ export enum SeelenEvent {
   MediaInputs = "media-inputs",
   MediaOutputs = "media-outputs",
   MediaWaveform = "media::waveform",
-  NetworkDefaultLocalIp = "network-default-local-ip",
   NetworkAdapters = "network-adapters",
   NetworkInternetConnection = "network-internet-connection",
   NetworkWlanScanned = "wlan-scanned",

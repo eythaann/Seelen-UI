@@ -1,7 +1,4 @@
-use std::{
-    net::{IpAddr, UdpSocket},
-    sync::LazyLock,
-};
+use std::sync::LazyLock;
 
 use seelen_core::system_state::{Hotspot, HotspotState, NetworkAdapter as SluNetAdapter};
 use windows::{
@@ -17,12 +14,12 @@ use windows::{
         Foundation::{HANDLE, NO_ERROR},
         NetworkManagement::IpHelper::{
             CancelMibChangeNotify2, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
-            GetAdaptersAddresses, IP_ADAPTER_ADDRESSES_LH, MIB_IPINTERFACE_ROW,
+            GetAdaptersAddresses, GetBestInterfaceEx, IP_ADAPTER_ADDRESSES_LH, MIB_IPINTERFACE_ROW,
             MIB_NOTIFICATION_TYPE, NotifyIpInterfaceChange,
         },
         Networking::{
             NetworkListManager::{INetworkListManager, NLM_CONNECTIVITY, NetworkListManager},
-            WinSock::AF_UNSPEC,
+            WinSock::{AF_INET, AF_INET6, AF_UNSPEC, SOCKADDR, SOCKADDR_IN, SOCKADDR_IN6},
         },
     },
 };
@@ -44,10 +41,7 @@ pub struct NetworkManager {
 #[allow(clippy::enum_variant_names)]
 pub enum NetworkManagerEvent {
     AdaptersChanged,
-    ConnectivityChanged {
-        connectivity: NLM_CONNECTIVITY,
-        ip: String,
-    },
+    ConnectivityChanged(NLM_CONNECTIVITY),
     HotspotChanged(Option<Hotspot>),
 }
 
@@ -103,11 +97,7 @@ impl NetworkManager {
     fn emit_connectivity_state() -> Result<()> {
         let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
         let connectivity = unsafe { list_manager.GetConnectivity()? };
-        let ip = get_local_ip_address_base()?;
-        NetworkManager::send(NetworkManagerEvent::ConnectivityChanged {
-            connectivity,
-            ip: ip.to_string(),
-        });
+        NetworkManager::send(NetworkManagerEvent::ConnectivityChanged(connectivity));
         Ok(())
     }
 
@@ -262,11 +252,19 @@ trait IterFromRaw {
 impl IterFromRaw for SluNetAdapter {
     unsafe fn iter_from_raw(raw: *const IP_ADAPTER_ADDRESSES_LH) -> Result<Vec<SluNetAdapter>> {
         unsafe {
+            let default_interface = get_default_interface();
             let mut adapters = Vec::new();
             let mut ptr = raw;
             while !ptr.is_null() {
                 let adapter = &*ptr;
-                adapters.push(adapter_to_slu_net_adapter(adapter)?);
+                let is_default = default_interface.as_ref().is_some_and(|d| {
+                    if d.ipv6 {
+                        adapter.Ipv6IfIndex == d.index
+                    } else {
+                        adapter.Anonymous1.Anonymous.IfIndex == d.index
+                    }
+                });
+                adapters.push(adapter_to_slu_net_adapter(adapter, is_default)?);
                 ptr = adapter.Next;
             }
             Ok(adapters)
@@ -274,12 +272,38 @@ impl IterFromRaw for SluNetAdapter {
     }
 }
 
-pub fn get_local_ip_address() -> Result<String> {
-    Ok(get_local_ip_address_base()?.to_string())
+struct DefaultInterface {
+    index: u32,
+    ipv6: bool,
 }
 
-fn get_local_ip_address_base() -> Result<IpAddr> {
-    let socket = UdpSocket::bind("0.0.0.0:0")?;
-    socket.connect("8.8.8.8:80")?;
-    Ok(socket.local_addr()?.ip())
+/// Interface used by the default route, IPv4 preferred and IPv6 as fallback.
+/// Returns `None` when there is no default route (offline), an expected state, not an error.
+fn get_default_interface() -> Option<DefaultInterface> {
+    // public DNS addresses, only used to ask the routing table, no traffic is sent
+    let mut ipv4 = SOCKADDR_IN {
+        sin_family: AF_INET,
+        ..Default::default()
+    };
+    ipv4.sin_addr.S_un.S_addr = u32::from_ne_bytes([8, 8, 8, 8]);
+
+    let mut ipv6 = SOCKADDR_IN6 {
+        sin6_family: AF_INET6,
+        ..Default::default()
+    };
+    ipv6.sin6_addr.u.Byte = "2001:4860:4860::8888"
+        .parse::<std::net::Ipv6Addr>()
+        .ok()?
+        .octets();
+
+    let mut index = 0u32;
+    if unsafe { GetBestInterfaceEx(&ipv4 as *const _ as *const SOCKADDR, &mut index) } == NO_ERROR.0
+    {
+        return Some(DefaultInterface { index, ipv6: false });
+    }
+    if unsafe { GetBestInterfaceEx(&ipv6 as *const _ as *const SOCKADDR, &mut index) } == NO_ERROR.0
+    {
+        return Some(DefaultInterface { index, ipv6: true });
+    }
+    None
 }

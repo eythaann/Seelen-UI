@@ -7,7 +7,7 @@ use windows::Win32::Networking::NetworkListManager::{
 
 use crate::{app::emit_to_webviews, error::Result};
 
-use super::application::{NetworkManager, NetworkManagerEvent, get_local_ip_address};
+use super::application::{NetworkManager, NetworkManagerEvent};
 
 fn get_network_manager() -> &'static NetworkManager {
     static TAURI_EVENT_REGISTRATION: Once = Once::new();
@@ -18,14 +18,17 @@ fn get_network_manager() -> &'static NetworkManager {
                     emit_to_webviews(SeelenEvent::NetworkAdapters, adapters);
                 }
             }
-            NetworkManagerEvent::ConnectivityChanged { connectivity, ip } => {
+            NetworkManagerEvent::ConnectivityChanged(connectivity) => {
                 log::trace!(target: "network", "Connectivity changed: {connectivity:?}");
                 let has_internet = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
                     == NLM_CONNECTIVITY_IPV4_INTERNET.0
                     || connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
                         == NLM_CONNECTIVITY_IPV6_INTERNET.0;
-                emit_to_webviews(SeelenEvent::NetworkDefaultLocalIp, ip);
                 emit_to_webviews(SeelenEvent::NetworkInternetConnection, has_internet);
+                // the default route (`is_default`) may have moved to another adapter
+                if let Ok(adapters) = NetworkManager::get_adapters() {
+                    emit_to_webviews(SeelenEvent::NetworkAdapters, adapters);
+                }
             }
             NetworkManagerEvent::HotspotChanged(hotspot) => {
                 emit_to_webviews(SeelenEvent::NetworkHotspotChanged, hotspot);
@@ -36,11 +39,6 @@ fn get_network_manager() -> &'static NetworkManager {
 }
 
 impl crate::tauri_handlers::Handlers {
-    pub fn get_network_default_local_ip() -> Result<String> {
-        get_network_manager();
-        get_local_ip_address()
-    }
-
     pub fn get_network_adapters() -> Result<Vec<seelen_core::system_state::NetworkAdapter>> {
         get_network_manager();
         NetworkManager::get_adapters()

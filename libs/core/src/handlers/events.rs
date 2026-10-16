@@ -86,7 +86,6 @@ slu_events_declaration! {
     MediaOutputs(Vec<MediaDevice>) as "media-outputs",
     MediaWaveform(AudioWaveform) as "media::waveform",
 
-    NetworkDefaultLocalIp(String) as "network-default-local-ip",
     NetworkAdapters(Vec<NetworkAdapter>) as "network-adapters",
     NetworkInternetConnection(bool) as "network-internet-connection",
     NetworkWlanScanned(Vec<WlanBssEntry>) as "wlan-scanned",

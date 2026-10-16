@@ -93,7 +93,10 @@ unsafe fn get_address(adapter: &IP_ADAPTER_ADDRESSES_LH, address: Address) -> Op
     }
 }
 
-pub fn adapter_to_slu_net_adapter(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Result<NetworkAdapter> {
+pub fn adapter_to_slu_net_adapter(
+    adapter: &IP_ADAPTER_ADDRESSES_LH,
+    is_default: bool,
+) -> Result<NetworkAdapter> {
     unsafe {
         let mac_address = adapter
             .PhysicalAddress
@@ -116,6 +119,7 @@ pub fn adapter_to_slu_net_adapter(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Result<N
             ipv4: get_address(adapter, Address::Ipv4),
             gateway: get_address(adapter, Address::Gateway),
             ipv6: get_address(adapter, Address::Ipv6),
+            is_default,
             interface_type: InterfaceType::from(adapter.IfType)
                 .to_string()
                 .replace("IF_TYPE_", ""),

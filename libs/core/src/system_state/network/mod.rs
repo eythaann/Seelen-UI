@@ -58,6 +58,8 @@ pub struct NetworkAdapter {
     pub ipv4: Option<String>,
     pub gateway: Option<String>,
     pub mac: String,
+    /// true if this adapter holds the default route (the one used to reach the internet)
+    pub is_default: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]
