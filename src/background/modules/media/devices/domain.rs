@@ -86,6 +86,19 @@ impl MediaDevice {
 }
 
 impl MediaDeviceSession {
+    pub fn to_core(&self) -> seelen_core::system_state::MediaDeviceSession {
+        seelen_core::system_state::MediaDeviceSession {
+            id: self.id.clone(),
+            instance_id: self.instance_id.clone(),
+            process_id: self.process_id,
+            name: self.name.clone(),
+            icon_path: self.icon_path.clone(),
+            is_system: self.is_system,
+            volume: self.volume,
+            muted: self.muted,
+        }
+    }
+
     pub fn release(self) {
         unsafe {
             use crate::error::ResultLogExt;

@@ -147,7 +147,7 @@ impl DevicesManager {
                 r#type: seelen_core::system_state::MediaDeviceType::Input,
                 is_default_multimedia: device.is_default_multimedia,
                 is_default_communications: device.is_default_communications,
-                sessions: Vec::new(),
+                sessions: device.sessions.iter().map(|s| s.to_core()).collect(),
                 volume: device.volume,
                 muted: device.muted,
             })
@@ -161,7 +161,7 @@ impl DevicesManager {
                 r#type: seelen_core::system_state::MediaDeviceType::Output,
                 is_default_multimedia: device.is_default_multimedia,
                 is_default_communications: device.is_default_communications,
-                sessions: Vec::new(),
+                sessions: device.sessions.iter().map(|s| s.to_core()).collect(),
                 volume: device.volume,
                 muted: device.muted,
             })

@@ -2,6 +2,10 @@
 
 ## [2.8.10-dev]
 
+### fix
+
+- per-app volume sessions not showing in the media volume mixer.
+
 ## [2.8.9]
 
 ### features
