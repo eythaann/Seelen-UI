@@ -1,10 +1,9 @@
 use std::{
     collections::HashMap,
     path::PathBuf,
-    sync::{LazyLock, Once},
+    sync::{LazyLock, Once, mpsc},
 };
 
-use parking_lot::Mutex;
 use seelen_core::{handlers::SeelenEvent, resource::WidgetId, state::WidgetPermState};
 
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
@@ -16,7 +15,9 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     resources::RESOURCES,
-    utils::{atomic_write_file, constants::SEELEN_COMMON},
+    utils::{
+        atomic_write_file, constants::SEELEN_COMMON, lock_free::TracedMutex, spawn_named_thread,
+    },
     widgets::webview::WidgetWebviewLabel,
 };
 
@@ -34,10 +35,29 @@ pub static WIDGET_PERMISSIONS: LazyLock<PermissionsManager> = LazyLock::new(|| {
     manager
 });
 
+/// Permission dialogs are shown one at a time by a dedicated thread, so no lock is held
+/// while waiting for the user. Requests queued behind a dialog re-check the stored
+/// decision first, so spamming a command can't open more than one dialog for it.
+static DIALOG_QUEUE: LazyLock<mpsc::Sender<DialogRequest>> = LazyLock::new(|| {
+    let (tx, rx) = mpsc::channel::<DialogRequest>();
+    spawn_named_thread("Permission Dialogs", move || {
+        for request in rx {
+            // a panic must not kill the queue: that request is denied (and not
+            // persisted) by dropping its reply, the next ones keep working
+            let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                WIDGET_PERMISSIONS.resolve_with_dialog(&request.widget_id, &request.command)
+            }));
+            if let Ok(granted) = result {
+                // the requester may have given up, nothing to do then
+                let _ = request.reply.send(granted);
+            }
+        }
+    });
+    tx
+});
+
 pub struct PermissionsManager {
-    data: Mutex<WidgetPermissions>,
-    /// Serializes dialog display so only one permission dialog appears at a time.
-    dialog_lock: Mutex<()>,
+    data: TracedMutex<WidgetPermissions>,
     path: PathBuf,
 }
 
@@ -56,8 +76,7 @@ impl PermissionsManager {
             .unwrap_or_default();
 
         Self {
-            data: Mutex::new(data),
-            dialog_lock: Mutex::new(()),
+            data: TracedMutex::new(data),
             path,
         }
     }
@@ -127,12 +146,28 @@ impl PermissionsManager {
             return Self::decision_to_result(granted, widget_id, &command);
         }
 
-        // Slow path: show dialog (serialized so only one dialog appears at a time).
-        let _dialog_guard = self.dialog_lock.lock();
+        // Slow path: queue a dialog and wait for the user's answer.
+        // If the dialog thread is gone (panicked), deny by default.
+        let (reply, answer) = mpsc::channel();
+        DIALOG_QUEUE
+            .send(DialogRequest {
+                widget_id: widget_id.clone(),
+                command: command.clone(),
+                reply,
+            })
+            .map_err(|_| "Permission dialog queue is not available.")?;
+        let granted = answer
+            .recv()
+            .map_err(|_| "Permission dialog closed without an answer.")?;
 
-        // Re-check after acquiring the lock – another thread may have resolved it.
-        if let Some(granted) = self.is_resolved(widget_id, &command) {
-            return Self::decision_to_result(granted, widget_id, &command);
+        Self::decision_to_result(granted, widget_id, &command)
+    }
+
+    /// Runs on the dialog thread only, one request at a time.
+    fn resolve_with_dialog(&self, widget_id: &WidgetId, command: &WidgetPerm) -> bool {
+        // A request queued earlier may have resolved it already.
+        if let Some(granted) = self.is_resolved(widget_id, command) {
+            return granted;
         }
 
         let lang = rust_i18n::locale();
@@ -146,7 +181,7 @@ impl PermissionsManager {
         let message = t!(
             "widget_permissions.request_description",
             widget_name = widget_name,
-            command = perm_i18n_label(&command)
+            command = perm_i18n_label(command)
         );
 
         let granted = get_app_handle()
@@ -159,8 +194,7 @@ impl PermissionsManager {
 
         self.persist_decision(widget_id.clone(), command.clone(), granted);
         self.save().log_error();
-
-        Self::decision_to_result(granted, widget_id, &command)
+        granted
     }
 
     fn decision_to_result(granted: bool, widget_id: &WidgetId, command: &WidgetPerm) -> Result<()> {
@@ -175,6 +209,12 @@ impl PermissionsManager {
             .into())
         }
     }
+}
+
+struct DialogRequest {
+    widget_id: WidgetId,
+    command: WidgetPerm,
+    reply: mpsc::Sender<bool>,
 }
 
 // =============================================================================

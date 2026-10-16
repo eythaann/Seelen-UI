@@ -1,51 +1,85 @@
-use std::sync::LazyLock;
+use std::sync::{
+    LazyLock,
+    atomic::{AtomicBool, Ordering},
+};
 
-use parking_lot::Mutex;
 use seelen_core::state::{CssStyles, Dialog, DialogContent};
 use slu_ipc::messages::SvcAction;
+use tokio::sync::oneshot;
 use uuid::Uuid;
 
-use tauri::{Emitter, Listener};
+use tauri::{EventId, Listener};
 
 use crate::{
     app::get_app_handle,
     cli::ServicePipe,
     error::{Result, ResultLogExt},
+    utils::lock_free::TracedMutex,
     widgets::trigger_dialog_backend,
 };
 
-pub static REG_SHORTCUT_DATA: LazyLock<Mutex<RegShortcutData>> =
-    LazyLock::new(|| Mutex::new(RegShortcutData::default()));
+/// Whether a shortcut registering is in progress. There is only one keyboard to steal,
+/// so only one registering can run at a time, no matter who asked for it.
+static REGISTERING: AtomicBool = AtomicBool::new(false);
+
+/// State of the in-progress shortcut registering (empty when idle). The lock is only taken
+/// to read or update this state, never while showing the dialog or calling the service,
+/// since those wait on other threads and on the user.
+static REG_SHORTCUT_DATA: LazyLock<TracedMutex<RegShortcutData>> =
+    LazyLock::new(|| TracedMutex::new(RegShortcutData::default()));
 
 #[derive(Default)]
-pub struct RegShortcutData {
-    pub dialog_id: Uuid,
-    pub shortcut: Option<Vec<String>>,
-    pub response_view_label: Option<String>,
-    pub response_event: Option<String>,
+struct RegShortcutData {
+    /// Nil until the dialog is shown for the first time.
+    dialog_id: Uuid,
+    shortcut: Option<Vec<String>>,
+    /// Resolves the pending `request_to_user_input_shortcut` call.
+    responder: Option<oneshot::Sender<Option<Vec<String>>>>,
+    /// Dialog button listeners, removed when the registering finishes.
+    listeners: Vec<EventId>,
 }
 
-impl RegShortcutData {
-    fn emit_state_to_requester(&self) {
-        if let (Some(label), Some(event)) = (&self.response_view_label, &self.response_event) {
-            get_app_handle()
-                .emit_to(label, event, &self.shortcut)
-                .log_error();
-        }
-    }
-
-    fn cancel_shortcut_registering(&mut self) {
-        *self = Default::default();
-    }
+/// How a registering ends, decides the result.
+enum Outcome {
+    /// The registered shortcut, `None` if no keys were pressed.
+    Accepted,
+    /// Always `None`.
+    Cancelled,
 }
 
+/// Starts a registering, the receiver gets its result: the shortcut, or `None` if it was
+/// cancelled or no keys were pressed. Returns `None` (and warns) if one is already in progress.
+pub fn begin_shortcut_registering() -> Option<oneshot::Receiver<Option<Vec<String>>>> {
+    if REGISTERING
+        .compare_exchange(false, true, Ordering::AcqRel, Ordering::Acquire)
+        .is_err()
+    {
+        log::warn!("Ignoring shortcut registering request: one is already in progress");
+        return None;
+    }
+    let (tx, rx) = oneshot::channel();
+    REG_SHORTCUT_DATA.lock().responder = Some(tx);
+    Some(rx)
+}
+
+/// Ends the registering without a result, its receiver is dropped (e.g. the service
+/// failed to start it).
+pub fn abort_shortcut_registering() {
+    let reg = std::mem::take(&mut *REG_SHORTCUT_DATA.lock());
+    REGISTERING.store(false, Ordering::Release);
+    remove_listeners(reg.listeners);
+}
+
+/// Called by the service with the keys being pressed, or `None` when it released the
+/// keyboard (Escape or stopped).
 pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
-    let mut reg = REG_SHORTCUT_DATA.lock();
-    reg.shortcut = shortcut.clone();
+    if !REGISTERING.load(Ordering::Acquire) {
+        log::warn!("Ignoring shortcut update: no shortcut registering in progress");
+        return Ok(());
+    }
 
     let Some(mut shortcut) = shortcut else {
-        reg.emit_state_to_requester();
-        reg.cancel_shortcut_registering();
+        finish_registering(None, Outcome::Cancelled);
         return Ok(());
     };
 
@@ -65,31 +99,75 @@ pub fn set_registering_shortcut(shortcut: Option<Vec<String>>) -> Result<()> {
         }
     }
 
-    // save normalized shortcut
-    reg.shortcut = Some(shortcut.clone());
+    let (dialog_id, is_first_trigger) = {
+        let mut reg = REG_SHORTCUT_DATA.lock();
+        // save normalized shortcut
+        reg.shortcut = Some(shortcut.clone());
+        let is_first_trigger = reg.dialog_id.is_nil();
+        if is_first_trigger {
+            reg.dialog_id = Uuid::new_v4();
+        }
+        (reg.dialog_id, is_first_trigger)
+    };
 
-    let is_first_trigger = reg.dialog_id.is_nil();
     if is_first_trigger {
-        reg.dialog_id = Uuid::new_v4();
+        // the state is finished first so the result is delivered before the service
+        // releases the keyboard (which reports `None` and would cancel it)
+        let app = get_app_handle();
+        let listeners = vec![
+            app.once("user_shortcut_accepted", move |_| {
+                finish_registering(Some(dialog_id), Outcome::Accepted);
+                ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
+            }),
+            app.once("shortcut_register_cancelled", move |_| {
+                finish_registering(Some(dialog_id), Outcome::Cancelled);
+                ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
+            }),
+        ];
 
-        // listen once for each button action; re-registers after cancel/accept
-        let dialog_id = reg.dialog_id;
-        get_app_handle().once("user_shortcut_accepted", move |_| {
-            ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
-            let mut reg = REG_SHORTCUT_DATA.lock();
-            reg.emit_state_to_requester();
-            reg.cancel_shortcut_registering();
-        });
-        get_app_handle().once("shortcut_register_cancelled", move |_| {
-            ServicePipe::request(SvcAction::StopShortcutRegistration).log_error();
-            let mut reg = REG_SHORTCUT_DATA.lock();
-            if reg.dialog_id == dialog_id {
-                reg.cancel_shortcut_registering();
-            }
-        });
+        let mut reg = REG_SHORTCUT_DATA.lock();
+        if reg.dialog_id == dialog_id {
+            reg.listeners.extend(listeners);
+        } else {
+            // finished meanwhile
+            drop(reg);
+            remove_listeners(listeners);
+        }
     }
 
-    trigger_dialog_backend(get_dialog(reg.dialog_id, &shortcut))
+    trigger_dialog_backend(get_dialog(dialog_id, &shortcut))
+}
+
+/// Resets the state and resolves the request. With `dialog_id`, only finishes if it is
+/// still the current registering (a stale dialog button must not end a newer one).
+fn finish_registering(dialog_id: Option<Uuid>, outcome: Outcome) {
+    let reg = {
+        let mut reg = REG_SHORTCUT_DATA.lock();
+        if dialog_id.is_some_and(|id| id != reg.dialog_id) {
+            return;
+        }
+        let reg = std::mem::take(&mut *reg);
+        // still under the lock: a new registering can't fill the state before it is taken
+        REGISTERING.store(false, Ordering::Release);
+        reg
+    };
+
+    remove_listeners(reg.listeners);
+    if let Some(responder) = reg.responder {
+        let result = match outcome {
+            Outcome::Accepted => reg.shortcut.filter(|keys| !keys.is_empty()),
+            Outcome::Cancelled => None,
+        };
+        // the request may have been dropped (webview closed), nothing to do then
+        let _ = responder.send(result);
+    }
+}
+
+fn remove_listeners(listeners: Vec<EventId>) {
+    let app = get_app_handle();
+    for id in listeners {
+        app.unlisten(id);
+    }
 }
 
 fn get_dialog(id: Uuid, shortcut: &[String]) -> Dialog {

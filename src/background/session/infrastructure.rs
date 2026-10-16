@@ -7,6 +7,7 @@ use crate::{
     error::{Result, ResultLogExt},
     resources::RESOURCES,
     state::application::FULL_STATE,
+    utils::lock_free::TracedMutex,
 };
 
 use super::application::{SessionManager, SessionManagerEvent};
@@ -20,7 +21,7 @@ fn maybe_redact_session(session: Option<SeelenSession>) -> Option<SeelenSession>
     })
 }
 
-fn get_session_manager() -> &'static parking_lot::Mutex<SessionManager> {
+fn get_session_manager() -> &'static TracedMutex<SessionManager> {
     static REGISTER: Once = Once::new();
     REGISTER.call_once(|| {
         SessionManager::subscribe(|event| {

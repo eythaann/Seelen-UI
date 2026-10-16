@@ -3,7 +3,6 @@ use std::{collections::HashMap, path::PathBuf};
 use seelen_core::system_state::{RelaunchArguments, StartMenuLayout, StartMenuLayoutItem};
 
 use slu_ipc::{ServiceIpc, messages::SvcAction};
-use tauri::WebviewWindow;
 
 use crate::{
     app::{SeelenUI, get_app_handle},
@@ -16,7 +15,7 @@ use crate::{
     },
     widgets::{
         permissions::{WidgetPerm, request_widget_permission},
-        popups::shortcut_registering::REG_SHORTCUT_DATA,
+        popups::shortcut_registering::{abort_shortcut_registering, begin_shortcut_registering},
     },
     windows_api::{WindowsApi, string_utils::WindowsString},
 };
@@ -137,15 +136,19 @@ impl crate::tauri_handlers::Handlers {
         Ok(layout)
     }
 
-    pub async fn request_to_user_input_shortcut(
-        window: WebviewWindow,
-        callback_event: String,
-    ) -> Result<()> {
-        ServiceIpc::send(SvcAction::StartShortcutRegistration).await?;
-
-        let mut data = REG_SHORTCUT_DATA.lock();
-        data.response_view_label = Some(window.label().to_string());
-        data.response_event = Some(callback_event);
-        Ok(())
+    /// Resolves when the user finishes: the shortcut, or `None` if cancelled, no keys were
+    /// pressed or another registering is already in progress.
+    pub async fn request_to_user_input_shortcut() -> Result<Option<Vec<String>>> {
+        // claimed before starting: the service reports the first (empty) shortcut
+        // before its call returns
+        let Some(result) = begin_shortcut_registering() else {
+            return Ok(None);
+        };
+        if let Err(err) = ServiceIpc::send(SvcAction::StartShortcutRegistration).await {
+            abort_shortcut_registering();
+            return Err(err.into());
+        }
+        // a dropped responder means it ended without a result
+        Ok(result.await.unwrap_or(None))
     }
 }

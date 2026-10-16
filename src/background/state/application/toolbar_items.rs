@@ -1,6 +1,5 @@
 use std::{collections::HashSet, sync::LazyLock};
 
-use parking_lot::Mutex;
 use seelen_core::{
     resource::WidgetId,
     state::{ToolbarItem, ToolbarItem2, ToolbarState},
@@ -8,19 +7,19 @@ use seelen_core::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    utils::{atomic_write_file, constants::SEELEN_COMMON},
+    utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::TracedMutex},
 };
 
 pub static TOOLBAR_ITEMS_MANAGER: LazyLock<ToolbarItemsManager> = LazyLock::new(|| {
     let manager = ToolbarItemsManager {
-        items: Mutex::new(ToolbarState::default()),
+        items: TracedMutex::new(ToolbarState::default()),
     };
     manager.load().log_error();
     manager
 });
 
 pub struct ToolbarItemsManager {
-    items: Mutex<ToolbarState>,
+    items: TracedMutex<ToolbarState>,
 }
 
 impl ToolbarItemsManager {

@@ -6,9 +6,11 @@ use std::{
     },
 };
 
-use parking_lot::{Mutex, RwLock};
+use parking_lot::RwLock;
 use seelen_core::handlers::SeelenEvent;
 use tokio::sync::Notify;
+
+use crate::utils::lock_free::TracedMutex;
 
 use super::protocol::event_frame;
 
@@ -127,8 +129,8 @@ impl EventsHub {
 /// and the connection task (consumer).
 #[derive(Default)]
 pub struct Connection {
-    subscriptions: Mutex<HashSet<String>>,
-    pending: Mutex<VecDeque<PendingFrame>>,
+    subscriptions: TracedMutex<HashSet<String>>,
+    pending: TracedMutex<VecDeque<PendingFrame>>,
     notify: Notify,
     closed: AtomicBool,
 }

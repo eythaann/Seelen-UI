@@ -1,6 +1,5 @@
 use std::sync::LazyLock;
 
-use parking_lot::Mutex;
 use seelen_core::system_state::SeelenSession;
 use uuid::Uuid;
 use windows::{
@@ -11,6 +10,7 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     event_manager, get_tokio_handle,
+    utils::lock_free::TracedMutex,
 };
 
 use super::domain::{JwtPayload, decode_jwt_payload};
@@ -70,9 +70,9 @@ pub struct SessionManager {
 }
 
 impl SessionManager {
-    pub fn instance() -> &'static Mutex<SessionManager> {
-        static INSTANCE: LazyLock<Mutex<SessionManager>> =
-            LazyLock::new(|| Mutex::new(SessionManager::load()));
+    pub fn instance() -> &'static TracedMutex<SessionManager> {
+        static INSTANCE: LazyLock<TracedMutex<SessionManager>> =
+            LazyLock::new(|| TracedMutex::new(SessionManager::load()));
         &INSTANCE
     }
 

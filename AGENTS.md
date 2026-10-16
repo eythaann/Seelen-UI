@@ -27,6 +27,16 @@ Rust locking order (avoid deadlocks):
 2. DATA locks
 3. EVENT locks
 
+Rust mutexes:
+
+- ALWAYS use `TracedMutex` (`src/background/utils/lock_free/traced_mutex.rs`, imported as
+  `crate::utils::lock_free::TracedMutex`) in the main binary. Never use `parking_lot::Mutex` or `std::sync::Mutex`. It
+  panics with the full chain on deadlocks (same-thread relock or cross-thread cycles) and after a hard timeout on hangs,
+  instead of freezing the app.
+- Never hold a guard across an unbounded wait (dialogs, user input, network): copy what you need, release it, and lock
+  again afterwards; the hard timeout would crash the app. Serialize such waits with a queue/channel instead.
+- Never hold a `TracedMutex` guard across an `.await`.
+
 Backend architecture rules:
 
 - System modules in `src/background/modules/` MUST follow the modern pattern (lazy init + lazy tauri registration).

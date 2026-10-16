@@ -3,7 +3,6 @@ use std::sync::{
     atomic::{AtomicBool, Ordering},
 };
 
-use parking_lot::Mutex;
 use rustfft::{FftPlanner, num_complex::Complex};
 use seelen_core::{state::PerformanceMode, system_state::AudioWaveform};
 use windows::Win32::{
@@ -20,7 +19,7 @@ use crate::{
     event_manager,
     modules::media::devices::{DevicesEvent, DevicesManager},
     state::application::performance::PERFORMANCE_MODE,
-    utils::spawn_named_thread,
+    utils::{lock_free::TracedMutex, spawn_named_thread},
     windows_api::{Com, event_window::IS_INTERACTIVE_SESSION},
 };
 
@@ -42,7 +41,7 @@ pub enum WaveformEvent {
 unsafe impl Send for WaveformEvent {}
 
 pub struct WaveformManager {
-    latest: Arc<Mutex<AudioWaveform>>,
+    latest: Arc<TracedMutex<AudioWaveform>>,
     stop_flag: Arc<AtomicBool>,
 }
 
@@ -54,7 +53,7 @@ unsafe impl Sync for WaveformManager {}
 impl WaveformManager {
     fn new() -> Self {
         Self {
-            latest: Arc::new(Mutex::new(AudioWaveform {
+            latest: Arc::new(TracedMutex::new(AudioWaveform {
                 samples: vec![0.0f32; MIN_RING_SIZE],
                 frequencies: vec![SILENCE_DBFS; FFT_BINS],
             })),
@@ -187,7 +186,10 @@ fn drain_silently(session: &CaptureSession) {
     }
 }
 
-fn run_capture_loop(latest: Arc<Mutex<AudioWaveform>>, stop_flag: Arc<AtomicBool>) -> Result<()> {
+fn run_capture_loop(
+    latest: Arc<TracedMutex<AudioWaveform>>,
+    stop_flag: Arc<AtomicBool>,
+) -> Result<()> {
     let session = open_loopback_session()?;
     let sample_rate = session.sample_rate;
 

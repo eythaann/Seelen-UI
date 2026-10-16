@@ -1,6 +1,5 @@
 use std::sync::LazyLock;
 
-use parking_lot::Mutex;
 use seelen_core::{
     resource::WidgetId,
     state::{WegItem, WegItemData, WegItems},
@@ -10,20 +9,20 @@ use uuid::Uuid;
 use crate::{
     error::{Result, ResultLogExt},
     modules::apps::application::msix::MsixAppsManager,
-    utils::{atomic_write_file, constants::SEELEN_COMMON},
+    utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::TracedMutex},
     widgets::weg::native_taskbar::get_windows_taskbar_pinned_apps,
 };
 
 pub static WEG_ITEMS_MANAGER: LazyLock<WegItemsManager> = LazyLock::new(|| {
     let manager = WegItemsManager {
-        items: Mutex::new(WegItems::default()),
+        items: TracedMutex::new(WegItems::default()),
     };
     manager.load().log_error();
     manager
 });
 
 pub struct WegItemsManager {
-    items: Mutex<WegItems>,
+    items: TracedMutex<WegItems>,
 }
 
 impl WegItemsManager {
@@ -313,7 +312,7 @@ mod tests {
     #[test]
     fn test_import_from_windows_taskbar_internal_empty_list() {
         let manager = WegItemsManager {
-            items: Mutex::new(WegItems::default()),
+            items: TracedMutex::new(WegItems::default()),
         };
 
         // This will likely fail in test environment, but we test the structure
@@ -361,7 +360,7 @@ mod tests {
     #[test]
     fn test_manager_get_returns_clone() {
         let manager = WegItemsManager {
-            items: Mutex::new(initial_items()),
+            items: TracedMutex::new(initial_items()),
         };
 
         let items1 = manager.get();

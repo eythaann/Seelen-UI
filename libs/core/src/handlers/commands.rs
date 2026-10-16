@@ -205,10 +205,9 @@ slu_commands_declaration! {
         show_desktop(),
 
     RequestToUserInputShortcut =
-        @webview()
         @async()
         @fallible()
-        request_to_user_input_shortcut(callback_event: String),
+        request_to_user_input_shortcut() -> Option<Vec<String>>,
 
     CheckForUpdates =
         @async()

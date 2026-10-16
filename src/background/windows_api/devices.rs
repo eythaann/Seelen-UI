@@ -1,5 +1,4 @@
 use crossbeam_channel::{Receiver, Sender, bounded};
-use parking_lot::Mutex;
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
@@ -11,7 +10,7 @@ use windows::{
 };
 use windows_core::Interface;
 
-use crate::error::Result;
+use crate::{error::Result, utils::lock_free::TracedMutex};
 
 pub type DeviceId = String;
 
@@ -34,7 +33,7 @@ type DeviceChangeCallback = Arc<dyn Fn(DeviceEvent) + Send + Sync + 'static>;
 #[allow(dead_code)]
 pub struct DeviceEnumerator {
     watcher: DeviceWatcher,
-    devices: Arc<Mutex<Vec<DeviceInformation>>>,
+    devices: Arc<TracedMutex<Vec<DeviceInformation>>>,
     enumeration_tx: Sender<()>,
     enumeration_rx: Receiver<()>,
     enumeration_completed: Arc<AtomicBool>,
@@ -71,7 +70,8 @@ impl DeviceEnumerator {
         F: Fn(DeviceEvent) + Send + Sync + 'static,
     {
         let query: String = query.into();
-        let devices: Arc<Mutex<Vec<DeviceInformation>>> = Arc::new(Mutex::new(Vec::new()));
+        let devices: Arc<TracedMutex<Vec<DeviceInformation>>> =
+            Arc::new(TracedMutex::new(Vec::new()));
         let (enumeration_tx, enumeration_rx) = bounded(1);
         let enumeration_completed = Arc::new(AtomicBool::new(false));
         let callback: DeviceChangeCallback = Arc::new(callback) as DeviceChangeCallback;

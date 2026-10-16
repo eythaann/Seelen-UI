@@ -1,4 +1,4 @@
-import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Input, Switch, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
@@ -111,15 +111,13 @@ function Shortcut({ entry, onChanged }: ShortcutProps) {
   const { t } = useTranslation();
   const hasError = shortcutsError.value.has(id);
 
-  function onEdit() {
+  async function onEdit() {
     if (readonly) return;
 
-    invoke(SeelenCommand.RequestToUserInputShortcut, { callbackEvent: "finished" });
-    Widget.getCurrent().webview.once<null | string[]>("finished", (e) => {
-      if (e.payload && e.payload.length >= 2) {
-        onChanged(e.payload);
-      }
-    });
+    const keys = await invoke(SeelenCommand.RequestToUserInputShortcut);
+    if (keys && keys.length >= 2) {
+      onChanged(keys);
+    }
   }
 
   let inputTooltip: string | undefined = undefined;

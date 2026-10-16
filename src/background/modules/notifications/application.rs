@@ -1,4 +1,3 @@
-use parking_lot::Mutex as ParkingLotMutex;
 use seelen_core::system_state::{
     AppNotification, NotificationsMode, Toast, ToastBindingChild, ToastText,
 };
@@ -37,8 +36,10 @@ use crate::{
         start::application::StartMenuManager,
     },
     utils::{
-        convert_file_to_src, icon_extractor::request_icon_extraction_from_umid,
-        lock_free::SyncHashMap, spawn_named_thread,
+        convert_file_to_src,
+        icon_extractor::request_icon_extraction_from_umid,
+        lock_free::{SyncHashMap, TracedMutex},
+        spawn_named_thread,
     },
     windows_api::{
         WindowsApi,
@@ -51,8 +52,8 @@ use crate::{
     },
 };
 
-static LOADED_NOTIFICATIONS: LazyLock<ParkingLotMutex<HashSet<u32>>> =
-    LazyLock::new(|| ParkingLotMutex::new(HashSet::new()));
+static LOADED_NOTIFICATIONS: LazyLock<TracedMutex<HashSet<u32>>> =
+    LazyLock::new(|| TracedMutex::new(HashSet::new()));
 static RELEASED: AtomicBool = AtomicBool::new(true);
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -3,7 +3,6 @@ use std::{
     time::Duration,
 };
 
-use parking_lot::Mutex;
 use seelen_core::system_state::MonitorId;
 use wmi::WMIConnection;
 
@@ -17,7 +16,7 @@ use crate::{
             WmiSetBrightnessPayload,
         },
     },
-    utils::lock_free::SyncVec,
+    utils::lock_free::{SyncVec, TracedMutex},
     windows_api::{
         MonitorEnumerator,
         monitor::{
@@ -39,7 +38,7 @@ const DDCCI_POLL_INTERVAL: Duration = Duration::from_secs(5);
 /// of its result into `BrightnessManager::ddcci`. Holding the lock across both steps means a
 /// read that started before a write can never overwrite the written value afterwards.
 /// Concurrent transactions over the same I2C bus can also corrupt each other.
-static DDCCI_LOCK: Mutex<()> = Mutex::new(());
+static DDCCI_LOCK: TracedMutex<()> = TracedMutex::new(());
 
 /// Tracks the brightness of every panel, keyed by the stable id of the monitor showing it.
 /// A monitor usually has a single panel, but a cloned/mirrored group has one per display.
