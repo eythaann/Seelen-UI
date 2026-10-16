@@ -168,6 +168,16 @@ pub fn register_win_hook() -> Result<()> {
     });
     HookManager::set_event_handler_priority(&eid, 3);
 
+    let eid = HookManager::subscribe(|(event, origin)| {
+        crate::widgets::toolbar::hook::process_win_event(event, origin).log_error();
+    });
+    HookManager::set_event_handler_priority(&eid, 2);
+    crate::widgets::toolbar::hook::process_win_event(
+        WinEvent::SystemForeground,
+        Window::get_foregrounded(),
+    )
+    .log_error();
+
     // todo move this to input/mouse/keyboard module
     spawn_named_thread("MouseEventHook", || {
         let mut last_pos = seelen_core::Point::default();

@@ -18,7 +18,7 @@ use crate::{
 };
 
 impl WindowManagerV2 {
-    fn should_be_managed(hwnd: HWND) -> bool {
+    pub(crate) fn should_be_managed(hwnd: HWND) -> bool {
         Self::should_be_managed_impl(hwnd, true)
     }
 
