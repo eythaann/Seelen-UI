@@ -1,39 +1,39 @@
 app_menu:
   close: Đóng
-  close_multiple: Đóng tất cả
-  copy_handles: Sao chép tay cầm
-  edit_app_icon: Chỉnh sửa biểu tượng ứng dụng
-  kill: Quá trình tiêu diệt
-  kill_multiple: Giết tất cả các tiến trình
-  open_file_location: Mở vị trí file
-  pin: Ghim
-  pin_to_center: Ghim đến trung tâm
+  close_multiple: Đóng tất cả cửa sổ
+  copy_handles: Sao chép mã định danh cửa sổ (HWND)
+  edit_app_icon: Đổi biểu tượng ứng dụng
+  kill: Buộc dừng tiến trình
+  kill_multiple: Buộc dừng tất cả tiến trình
+  open_file_location: Mở vị trí tệp
+  pin: Ghim vào Dock
+  pin_to_center: Ghim vào giữa
   pin_to_left: Ghim sang trái
   pin_to_right: Ghim sang phải
-  run_as: Chạy như quản trị viên
-  unpin: Giải nén
+  run_as: Chạy dưới quyền Quản trị viên (Run as administrator)
+  unpin: Bỏ ghim khỏi Dock
 context_menu:
   edit_icon: Chỉnh sửa biểu tượng
   remove_module: Xóa mô-đun
-  remove_separator: Xóa dấu phân cách
-  reorder_disable: Khóa thanh tác vụ
-  reorder_enable: Mở khóa Thanh nhiệm vụ
+  remove_separator: Xóa vạch phân cách
+  reorder_disable: Khóa vị trí thanh tác vụ
+  reorder_enable: Mở khóa vị trí thanh tác vụ
 media:
   label: Trình phát đa phương tiện
-  not_playing: Không có gì đang chơi
+  not_playing: Không có nội dung đang phát
 show_desktop:
-  label: Hiển thị màn hình
+  label: Hiển thị màn hình Desktop
 start:
-  label: Trình đơn Bắt đầu
+  label: Start Menu
 taskbar_menu:
-  add_file: Pin tùy chỉnh tệp
-  add_separator: Thêm dấu phân cách
+  add_file: Ghim tệp tùy chỉnh
+  add_separator: Thêm vạch phân cách
   media: Trình phát đa phương tiện
-  modules: Mô-đun
+  modules: Các mô-đun
   settings: Cài đặt
-  task_manager: Trình quản lý tác vụ
+  task_manager: Trình quản lý tác vụ (Task Manager)
 trash_bin:
-  empty_bin: Thùng rác trống
+  empty_bin: Dọn sạch thùng rác
   item_count: '{{0}} mục'
   label: Thùng rác
 weg:

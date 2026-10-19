@@ -1,21 +1,21 @@
 empty_list: Không có mục nào
 folders:
-  desktop: Máy tính để bàn
-  documents: Tài liệu
-  downloads: Tải xuống
-  more_items: Hiển thị thêm...
-  music: Âm nhạc
-  pictures: Hình ảnh
-  recent: Được sử dụng gần đây
-  reduce_items: Hiển thị ít hơn...
+  desktop: Màn hình nền (Desktop)
+  documents: Tài liệu (Documents)
+  downloads: Tải xuống (Downloads)
+  more_items: Xem thêm...
+  music: Nhạc (Music)
+  pictures: Hình ảnh (Pictures)
+  recent: Đã mở gần đây
+  reduce_items: Thu gọn...
   title: Thư mục người dùng
   videos: Video
 profile:
-  accounts: Mở cài đặt tài khoản
+  accounts: Cài đặt tài khoản
   log_out: Đăng xuất
   open_onedrive: Mở thư mục OneDrive
-  open_user_folder: Mở thư mục người dùng
+  open_user_folder: Mở thư mục người dùng cá nhân
 seelen_options:
-  open_installation_folder: Mở thư mục cài đặt Seelen
-  open_log_folder: Mở thư mục nhật ký Seelen
-  title: Thư mục Seelen
+  open_installation_folder: Mở thư mục cấu hình Seelen
+  open_log_folder: Mở thư mục nhật ký (Logs)
+  title: Thư mục hệ thống Seelen

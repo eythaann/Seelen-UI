@@ -1,24 +1,24 @@
 all: Tất cả ứng dụng
 app_settings: Cài đặt ứng dụng
 applications: Ứng dụng
-back: Mặt sau
-disband: Giải tán thư mục
+back: Quay lại
+disband: Hủy nhóm thư mục
 edit_icon: Chỉnh sửa biểu tượng
 folder: Thư mục
-no_matching_items: Không tìm thấy mục nào phù hợp với tìm kiếm của bạn
+no_matching_items: Không tìm thấy kết quả phù hợp với tìm kiếm của bạn
 open_file_location: Mở vị trí tệp
 pin: Ghim
 pin_to_dock: Ghim vào Dock
-power_menu: Menu nguồn
+power_menu: Menu nguồn (Tắt máy/Khởi động lại)
 query:
   all: Tất cả
   apps: Ứng dụng
-  files: Tập tin
+  files: Tệp tin
   settings: Cài đặt
   web: Web
-run_as_admin: Chạy với tư cách quản trị viên
+run_as_admin: Chạy dưới quyền Quản trị viên
 uninstall: Gỡ cài đặt
 unpin: Bỏ ghim
 web_search: Nhấn Enter để tìm kiếm trên web
-welcome_message: Chào mừng bạn đến với menu ứng dụng Seelen UI.
-welcome_message2: Trên tab này, bạn có thể ghim các ứng dụng yêu thích của mình.
+welcome_message: Chào mừng bạn đến với Menu ứng dụng của Seelen UI.
+welcome_message2: Tại đây, bạn có thể ghim các ứng dụng yêu thích để truy cập nhanh chóng.

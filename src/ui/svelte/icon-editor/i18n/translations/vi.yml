@@ -1,20 +1,20 @@
-angle: Góc
-approximately_square: Khoảng vuông
-background: Lý lịch
-brush_size: Kích thước cọ
-clear_draw: Bản vẽ rõ ràng
+angle: Góc xoay
+approximately_square: Gần vuông
+background: Nền
+brush_size: Kích thước nét vẽ
+clear_draw: Xóa nét vẽ
 delete: Xóa biểu tượng tùy chỉnh
-draw_color: Vẽ màu
-draw_mode_off: Vẽ tranh
-draw_mode_on: Vẽ
-gradient: Độ dốc
-none: Không có (minh bạch)
+draw_color: Màu nét vẽ
+draw_mode_off: Vẽ
+draw_mode_on: Đang vẽ
+gradient: Chuyển sắc (Gradient)
+none: Không có (Trong suốt)
 pick_image: Chọn hình ảnh
 position_x: Vị trí X
 position_y: Vị trí Y
-reset: Cài lại
-save: Cứu
+reset: Đặt lại
+save: Lưu
 saving: Đang lưu...
-scale: Tỉ lệ
-solid: Màu đặc
+scale: Tỷ lệ
+solid: Màu đơn sắc
 title: Trình chỉnh sửa biểu tượng tùy chỉnh

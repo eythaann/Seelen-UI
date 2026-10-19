@@ -1,11 +1,11 @@
 goodbye: Tạm biệt {{0}}
-hibernate: Ngủ đông
-lock: Khóa phiên
+hibernate: Chế độ ngủ đông (Hibernate)
+lock: Khóa màn hình
 log_out: Đăng xuất
-pending_updates: Có bản cập nhật hệ thống đang chờ xử lý. Cài đặt ngay bây giờ?
+pending_updates: Đang có bản cập nhật hệ thống. Bạn có muốn cài đặt ngay?
 reboot: Khởi động lại
 shutdown: Tắt nguồn
-suspend: Đình chỉ
+suspend: Chế độ ngủ (Sleep)
 update_and_reboot: Cập nhật và khởi động lại
-update_and_shutdown: Cập nhật và tắt
+update_and_shutdown: Cập nhật và tắt máy
 uptime: Thời gian hoạt động

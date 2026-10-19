@@ -1,484 +1,480 @@
 action:
-  confirm: Bạn có chắc không?
-  confirm_body: Hành động này không thể được hoàn tác.
+  confirm: Bạn có chắc chắn không?
+  confirm_body: Thao tác này không thể hoàn tác.
 apps_configurations:
   app:
-    bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
-    category: Loại
+    bindings: 'Ràng buộc màn hình và không gian làm việc (lưu ý: bắt buộc cả hai tùy chọn)'
+    category: Danh mục
     category_placeholder: Không có
     monitor: Màn hình
     monitor_placeholder: Không có
-    name: Tên
-    ok_create: Tạo nên
+    name: Tên ứng dụng
+    ok_create: Tạo mới
     ok_edit: Cập nhật
-    ok_readonly: Chỉnh sửa như mới
+    ok_readonly: Chỉnh sửa dưới dạng bản sao
     options:
-      NoInteractive: Không tương tác
-      VdPinned: Hiển thị trong tất cả không gian làm việc
-      WmFloat: Twm - Bắt đầu nổi
-      WmForce: Twm - Quản lý lực lượng
-      WmUnmanage: Twm - Bỏ quản lý
-    options_label: Tùy chọn bổ sung
-    title_create: Tạo {{name}}
-    title_edit: Chỉnh sửa {{name}}
-    title_readonly: Xem {{name}}
-    weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
-    wm_options_label: Tùy chọn Trình quản lý cửa sổ
+      NoInteractive: Không nhận tương tác
+      VdPinned: Hiển thị trên mọi không gian làm việc
+      WmFloat: Twm - Luôn mở dạng cửa sổ nổi
+      WmForce: Twm - Bắt buộc quản lý cửa sổ
+      WmUnmanage: Twm - Bỏ qua (không quản lý)
+    options_label: Tùy chọn nâng cao
+    title_create: Tạo cấu hình {{name}}
+    title_edit: Chỉnh sửa cấu hình {{name}}
+    title_readonly: Xem cấu hình {{name}}
+    weg_options_label: Tùy chọn Dock / Thanh tác vụ
+    wm_options_label: Tùy chọn Trình quản lý cửa sổ (TWM)
     workspace: Không gian làm việc
     workspace_placeholder: Không có
   bundled_msg: >-
-    Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
-    bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
-    các ứng dụng phổ biến nhất cho bạn.
-  bundled_title: Ứng dụng Cấu hình đi kèm với Seelen
-  confirm_delete: Bạn có chắc bạn muốn xóa cấu hình/s này không?
+    Các cấu hình tích hợp sẵn này ở chế độ chỉ đọc, được tối ưu sẵn nhằm mang lại
+    trải nghiệm tốt nhất cho các ứng dụng phổ biến nhất mà bạn không cần phải tự
+    cấu hình.
+  bundled_title: Cấu hình ứng dụng tích hợp sẵn
+  confirm_delete: Bạn có chắc chắn muốn xóa cấu hình này không?
   confirm_delete_title: Xác nhận xóa
-  delete: Xóa bỏ
-  export: Xuất khẩu
-  export_full: Cài đặt xuất theo ứng dụng
+  delete: Xóa
+  export: Xuất
+  export_full: Xuất cấu hình theo ứng dụng
   extra_info: >-
-    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
-    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
-    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
+    Seelen UI chỉ áp dụng định danh đầu tiên khớp với ứng dụng (first match), do đó
+    thứ tự sắp xếp rất quan trọng. Mục mới thêm sẽ được ưu tiên cao hơn (bảng sắp
+    xếp mặc định từ mới đến cũ).
   identifier:
-    add_block: Thêm khối
+    add_block: Thêm khối điều kiện
     and: VÀ
     id: Định danh
-    kind: Xác định bởi
-    matching_strategy: Chiến lược phù hợp
+    kind: Nhận diện theo
+    matching_strategy: Quy tắc so khớp
     matching_strategy_option:
       contains: Chứa
       ends_with: Kết thúc bằng
-      equals: Bằng
-      regex: Biểu thức chính quy
-      starts_with: Bắt đầu với
-    negation: Phủ nhận sự phù hợp
+      equals: Bằng chính xác
+      regex: Biểu thức chính quy (Regex)
+      starts_with: Bắt đầu bằng
+    negation: Đảo ngược điều kiện (Phủ định)
     or: HOẶC
     remove: Xóa khối
     type:
-      class: Lớp học
-      exe: Exe
-      path: Con đường
-      title: Tiêu đề
-  import: Nhập khẩu
-  import_full: Nhập cài đặt theo ứng dụng
-  new: Mới
+      class: Tên lớp cửa sổ (Window Class)
+      exe: Tên tệp thực thi (.exe)
+      path: Đường dẫn tệp
+      title: Tiêu đề cửa sổ
+  import: Nhập
+  import_full: Nhập cấu hình theo ứng dụng
+  new: Tạo mới
   search: Tìm kiếm
-  swap: Tráo đổi
-cancel: Hủy bỏ
+  swap: Đổi vị trí
+cancel: Hủy
 close: Đóng
-delete: Xóa bỏ
+delete: Xóa
 devtools:
   app_folders: Thư mục ứng dụng
-  color_palette: Bảng màu
+  color_palette: Bảng màu hệ thống
   color_palette_note: >-
-    Những màu này tự động thích ứng với chế độ sáng/tối — mỗi sắc thái có độ
-    tương phản tương ứng với nền hiện tại chứ không phải một giá trị cố định. Sử
-    dụng chúng thay vì màu được mã hóa cứng để nhận được hỗ trợ chủ đề tự động.
+    Các màu này tự động thích ứng với chế độ Sáng/Tối — độ tương phản của từng
+    sắc thái được tính toán dựa trên màu nền hiện tại thay vì một giá trị cố định.
+    Hãy sử dụng các biến màu này thay vì mã màu cố định để hỗ trợ giao diện tự động.
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
-  enable: Kích hoạt các công cụ nhà phát triển
+  enable: Bật công cụ dành cho nhà phát triển (DevTools)
   enable_description: >-
-    Mở khóa các công cụ nâng cao để kiểm tra và gỡ lỗi nội bộ giao diện người
-    dùng Seelen. Không dành cho sử dụng thường xuyên.
-  icons: Biểu tượng được lưu trong bộ nhớ đệm
+    Mở khóa các công cụ chuyên sâu để kiểm tra và gỡ lỗi nội bộ Seelen UI. Không
+    dành cho mục đích sử dụng thông thường.
+  icons: Biểu tượng trong bộ nhớ đệm
   install_folder: Thư mục cài đặt
-  load: Trọng tải
-  settings_file: Cài đặt tập tin
-  shared_components: Thành phần tiêu chuẩn SLU
+  load: Nạp tệp
+  settings_file: Tệp cài đặt
+  shared_components: Thành phần chuẩn SLU
   simulate_dialog:
-    label: Hộp thoại mô phỏng
-    trigger: Cò súng
+    label: Mô phỏng hộp thoại
+    trigger: Kích hoạt
   simulate_perm:
-    label: Mô phỏng yêu cầu cấp phép widget
-    result_allowed: ✓ Đã được cấp phép
-    result_denied: ✗ Quyền bị từ chối
-    trigger: mô phỏng
-    widget_id_placeholder: '@tác giả/tên widget'
+    label: Mô phỏng yêu cầu quyền widget
+    result_allowed: ✓ Đã cấp quyền
+    result_denied: ✗ Đã từ chối quyền
+    trigger: Mô phỏng
+    widget_id_placeholder: '@tac-gia/ten-widget'
   tools: Công cụ
-  unlock_shortcuts: Mở khóa các phím tắt chỉ đọc
+  unlock_shortcuts: Mở khóa phím tắt chỉ đọc
   unlock_shortcuts_description: >-
-    Cho phép chỉnh sửa các phím tắt thường ở chế độ chỉ đọc (ví dụ: ghi đè hệ
-    thống).
-  unstable_optimizations: Tối ưu hóa không ổn định
+    Cho phép chỉnh sửa các phím tắt hệ thống vốn bị khóa ở chế độ chỉ đọc.
+  unstable_optimizations: Tối ưu hóa thử nghiệm (Không ổn định)
   unstable_optimizations_description: >-
-    Bật cờ Chrome thử nghiệm để giảm mức sử dụng RAM. 
+    Bật các cờ Chromium thử nghiệm giúp giảm dung lượng RAM sử dụng.
 
-    Cảnh báo: nếu một tiện ích gặp sự cố, tất cả các tiện ích chia sẻ cùng một
-    trình tải sẽ bị lỗi cùng nhau.
+    Cảnh báo: Nếu một tiện ích bị lỗi/crash, tất cả các tiện ích dùng chung trình
+    nạp sẽ bị đóng cùng lúc.
   widgets_debug:
-    actions: hành động
-    empty: Không có vật dụng nào được tải. Nhấp vào Làm mới.
+    actions: Thao tác
+    empty: Chưa có tiện ích nào được tải. Nhấn Làm mới.
     instance_id: ID phiên bản
-    monitor_id: ID giám sát
-    open_devtools: Công cụ dành cho nhà phát triển
-    refresh: Làm cho khỏe lại
+    monitor_id: ID màn hình
+    open_devtools: Mở DevTools
+    refresh: Làm mới
     status: Trạng thái
-    tab: Widget
+    tab: Tiện ích (Widgets)
     widget_id: ID tiện ích
 discord_banner:
   message: >-
-    Kết nối với những người dùng Seelen UI khác, nhận trợ giúp, chia sẻ chủ đề
-    và cập nhật những tin tức mới nhất.
+    Kết nối với cộng đồng người dùng Seelen UI, nhận trợ giúp, chia sẻ giao diện
+    và cập nhật tin tức mới nhất.
   title: Tham gia cộng đồng của chúng tôi
 extras:
   backup_group: Sao lưu đám mây
-  backup_last_sync: Đồng bộ hóa lần cuối
-  backup_never_synced: Chưa bao giờ được đồng bộ hóa
-  backup_sync: Đồng bộ hóa cài đặt với đám mây
-  backup_sync_description: Tự động sao lưu và khôi phục cài đặt của bạn qua đám mây.
-  clear_icons: Xóa bộ đệm biểu tượng hệ thống
+  backup_last_sync: Lần đồng bộ gần nhất
+  backup_never_synced: Chưa từng đồng bộ
+  backup_sync: Đồng bộ cài đặt lên đám mây
+  backup_sync_description: Tự động sao lưu và khôi phục cài đặt của bạn thông qua đám mây.
+  clear_icons: Xóa bộ nhớ đệm biểu tượng hệ thống
   clear_icons_tooltip: >-
-    Khởi động lại có thể được yêu cầu để có hiệu lực hoàn toàn trên tất cả các
-    tiện ích
-  discord_rpc: Sự hiện diện phong phú của Discord
-  discord_rpc_description: Cho mọi người thấy bạn có phong cách!
-  exit: Thoát/Thoát
-  relaunch: Khởi động lại
-  streaming_mode: Chế độ phát trực tuyến
+    Có thể cần khởi động lại để áp dụng đầy đủ trên tất cả tiện ích
+  discord_rpc: Discord Rich Presence
+  discord_rpc_description: Hiển thị trạng thái phong cách của bạn trên Discord!
+  exit: Thoát ứng dụng
+  relaunch: Khởi động lại ứng dụng
+  streaming_mode: Chế độ Livestream / Quay màn hình
   streaming_mode_description: >-
-    Thay thế thông tin nhạy cảm (ví dụ: email) bằng phần giữ chỗ để bảo vệ quyền
-    riêng tư trong quá trình ghi hoặc chụp ảnh màn hình.
+    Ẩn thông tin nhạy cảm (như email, tài khoản) bằng văn bản giữ chỗ để bảo vệ
+    quyền riêng tư khi quay màn hình hoặc chụp ảnh.
   version: Phiên bản
   version_fixed: >-
-    Ứng dụng và phiên bản WebView2 Runtime đã được sửa. Điều này có nghĩa là ứng
-    dụng sẽ không nhận được bản cập nhật và WebView2 Runtime sẽ không được tự
-    động cập nhật với các bản cập nhật Windows.
+    Phiên bản ứng dụng và WebView2 Runtime đã được cố định. Điều này có nghĩa là
+    ứng dụng sẽ không nhận bản cập nhật mới và WebView2 Runtime sẽ không tự động
+    cập nhật cùng với Windows Update.
 general:
-  accent_color: Màu nhấn
-  date_format: Định dạng ngày
-  date_format_how_to: Làm thế nào để viết một định dạng ngày?
-  hardware_acceleration: Tăng tốc phần cứng
+  accent_color: Màu chủ đạo (Accent Color)
+  date_format: Định dạng ngày tháng
+  date_format_how_to: Cách thiết lập định dạng ngày tháng?
+  hardware_acceleration: Tăng tốc phần cứng (GPU)
   hardware_acceleration_description: >-
-    Vô hiệu hóa khả năng tăng tốc phần cứng sẽ giảm mức sử dụng bộ nhớ. Việc tắt
-    tính năng này là an toàn nếu bạn không sử dụng các hình ảnh động nặng, mặc
-    dù các tiện ích riêng lẻ vẫn có thể buộc sử dụng GPU bất kể cài đặt này.
+    Tắt tăng tốc phần cứng sẽ giúp giảm mức chiếm dụng RAM/VRAM. Tính năng này
+    an toàn để tắt nếu bạn không sử dụng các hiệu ứng chuyển động nặng, tuy nhiên
+    một số tiện ích riêng lẻ vẫn có thể yêu cầu GPU bất kể cài đặt này.
   icon_pack:
     available: Gói biểu tượng có sẵn
-    selected: Gói biểu tượng hoạt động
+    selected: Gói biểu tượng đang dùng
   language: Ngôn ngữ
-  monday: Thứ hai
+  monday: Thứ Hai
   performance_mode:
-    label: Tối ưu hóa
-    on_battery: Trên pin
-    on_energy_saver: Trên tiết kiệm năng lượng
+    label: Chế độ tối ưu hiệu năng
+    on_battery: Khi dùng pin
+    on_energy_saver: Khi bật Tiết kiệm pin
     options:
-      disabled: Tàn tật
-      extreme: Vô cùng
-      minimal: Tối thiểu
-    plugged: Cắm hoặc sạc
-  polling_interval: Khoảng thời gian thăm dò hệ thống
+      disabled: Tắt (Mặc định)
+      extreme: Tối đa (Cực hạn)
+      minimal: Cơ bản
+    plugged: Khi cắm sạc
+  polling_interval: Chu kỳ quét tài nguyên hệ thống
   polling_interval_description: >-
-    Tần suất (tính bằng giây) Seelen UI kiểm tra các tài nguyên hệ thống như
-    hoạt động của CPU, RAM, mạng và ổ đĩa. Số lượng nhỏ hơn có nghĩa là cập nhật
-    thường xuyên hơn nhưng mức sử dụng tài nguyên cao hơn một chút.
-  saturday: Thứ bảy
-  start_of_week: Đầu tuần
-  startup: Chạy khi khởi động?
-  sunday: Chủ nhật
-  suspend_on_game_mode: Tạm dừng các widget trên Chế độ trò chơi
+    Tần suất (tính bằng giây) Seelen UI kiểm tra các tài nguyên như CPU, RAM,
+    mạng và ổ đĩa. Số giây càng nhỏ thì cập nhật càng tức thì nhưng sẽ tốn thêm
+    một chút tài nguyên máy.
+  saturday: Thứ Bảy
+  start_of_week: Ngày bắt đầu tuần
+  startup: Khởi động cùng Windows?
+  sunday: Chủ Nhật
+  suspend_on_game_mode: Tạm dừng các tiện ích khi chơi game (Game Mode)
   suspend_on_game_mode_description: >-
-    Khi Chế độ trò chơi của Windows được kích hoạt, tất cả các lượt xem web của
-    tiện ích sẽ bị hủy để giải phóng CPU và bộ nhớ cho trò chơi. Các widget được
-    tự động khôi phục khi Chế độ trò chơi kết thúc.
+    Khi Windows Game Mode được kích hoạt, toàn bộ webview của các tiện ích sẽ được
+    giải phóng để nhường tối đa CPU và RAM cho game. Các tiện ích sẽ tự động khôi
+    phục khi bạn thoát game.
   theme:
-    available: Chủ đề có sẵn
-    selected: Chủ đề đang hoạt động
-global: Toàn cầu
+    available: Giao diện có sẵn
+    selected: Giao diện đang dùng
+global: Toàn cục
 header:
   labels:
     config: Cấu hình
-    developer: Cho các nhà phát triển
-    extras: Bổ sung
-    general: Tổng quan
+    developer: Cho nhà phát triển
+    extras: Mở rộng
+    general: Cài đặt chung
     home: Trang chủ
     iconpack: Gói biểu tượng
     monitors: Màn hình
-    plugin: Plugin
-    resources: Tài nguyên
-    security: Bảo vệ
+    plugin: Tiện ích mở rộng (Plugins)
+    resources: Kho tài nguyên
+    security: Bảo mật & Quyền
     session: Tài khoản
     shortcuts: Phím tắt
     soundpack: Gói âm thanh
-    specific_apps: Cài đặt theo ứng dụng
-    theme: Chủ đề
-    virtual_desk: Máy tính để bàn ảo
+    specific_apps: Cấu hình theo ứng dụng
+    theme: Giao diện
+    virtual_desk: Màn hình ảo (Workspaces)
     wallpaper: Hình nền
-    widget: Widgets
+    widget: Tiện ích (Widgets)
 home:
   new_resources: Tài nguyên mới
 inherit: Kế thừa
-inProgress: Trong tiến trình...
+inProgress: Đang xử lý...
 insert: Chèn
 join_us: Tham gia cùng chúng tôi!
 loading: Đang tải...
-miscellaneous: Linh tinh
+miscellaneous: Khác
 monitors_configurations:
   label: Màn hình {{index}}
-more: Hơn
-'no': KHÔNG
+more: Thêm
+'no': 'Không'
 open: Mở
-quit: Từ bỏ
-remove: Di dời
-reset_all_to_default: Đặt lại tất cả về giá trị mặc định
+quit: Thoát
+remove: Xóa bỏ
+reset_all_to_default: Khôi phục tất cả về mặc định
 reset_configurations: Đặt lại cấu hình
-reset_to_default: Đặt lại về giá trị mặc định
+reset_to_default: Khôi phục về mặc định
 resources:
-  affected_widgets: Widget bị ảnh hưởng
-  app_outdated: Tài nguyên này yêu cầu phiên bản UI Seelen mới hơn hoạt động đúng.
+  affected_widgets: Tiện ích bị ảnh hưởng
+  app_outdated: Tài nguyên này yêu cầu phiên bản Seelen UI mới hơn để hoạt động chính xác.
   coming_soon: Sắp ra mắt
   corrupted_wallpaper: >-
-    Không thể trích xuất hình thu nhỏ - định dạng video bị hỏng hoặc không được
-    hỗ trợ
+    Không thể tạo ảnh thu nhỏ - tệp video bị lỗi hoặc không được hỗ trợ định dạng
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
-  has_update: Một bản cập nhật có sẵn
-  high_impact: Tác động cao đến hiệu suất
-  import_wallpapers: Nhập hình nền địa phương
-  included_plugins: Các plugin đi kèm
-  modified: Đã sửa đổi
+  has_update: Có bản cập nhật mới
+  high_impact: Tác động lớn đến hiệu năng
+  import_wallpapers: Thêm hình nền từ máy
+  included_plugins: Tiện ích đi kèm
+  modified: Đã chỉnh sửa
   open_folder: Mở thư mục tài nguyên
   outdated: >-
-    Tài nguyên này được thiết kế cho phiên bản cũ của SEELEN UI và có thể không
-    hoạt động đúng.
+    Tài nguyên này được thiết kế cho phiên bản Seelen UI cũ hơn và có thể hoạt
+    động không đúng.
   see_on_website: Xem trên trang web
-  update_now: Cập nhật
-  updates_available: Cập nhật có sẵn
-  updates_available_description: Các tài nguyên sau đây có sẵn các bản cập nhật.
+  update_now: Cập nhật ngay
+  updates_available: Có bản cập nhật
+  updates_available_description: Các tài nguyên sau đây đã có phiên bản cập nhật mới.
 review_request:
-  not_now: Không phải bây giờ
-  sure: Chắc chắn!
-  title: Bạn thích giao diện người dùng Seelen?
-save: Cứu
+  not_now: Để sau
+  sure: Chắc chắn rồi!
+  title: Bạn có thích Seelen UI không?
+save: Lưu
 save_and_restart: Lưu & Khởi động lại
 search: Tìm kiếm
 security:
-  empty: Chưa có quyền truy cập tiện ích nào được cho phép hoặc bị từ chối.
+  empty: Chưa có quyền truy cập tiện ích nào được cấp hoặc bị từ chối.
   perms:
     kill_processes: Buộc đóng ứng dụng
-    manage_app_windows: Kiểm soát cửa sổ của các ứng dụng khác
-    modify_configuration: Sửa đổi cấu hình giao diện người dùng Seelen
-    open_file: Mở tập tin
-    run: Chạy chương trình
+    manage_app_windows: Điều khiển cửa sổ của các ứng dụng khác
+    modify_configuration: Chỉnh sửa cấu hình Seelen UI
+    open_file: Mở tệp tin
+    run: Khởi chạy chương trình
 see_more: Xem thêm
 session:
   logout: Đăng xuất
-  plan: Kế hoạch
+  plan: Gói tài khoản
   sign_in: Đăng nhập
-  sign_in_hint: Trình duyệt của bạn sẽ mở để bạn có thể đăng nhập an toàn.
+  sign_in_hint: Trình duyệt sẽ mở ra để bạn đăng nhập an toàn.
   upgrade_to: Nâng cấp lên
 shortcuts:
-  disabled_tooltip: Tiện ích và các phím tắt của nó đã bị tắt
-  duplicate_error: Đã phát hiện thấy các phím tắt xung đột
+  disabled_tooltip: Tiện ích này và các phím tắt của nó đang bị tắt
+  duplicate_error: Phát hiện xung đột phím tắt
   duplicate_error_hint: >-
-    Một số phím tắt được gán cho nhiều hành động. Vô hiệu hóa một trong các tiện
-    ích xung đột hoặc gán lại liên kết khóa trùng lặp để giải quyết.
+    Một số phím tắt đang được gán cho nhiều hành động cùng lúc. Vui lòng tắt một trong
+    các tiện ích xung đột hoặc đổi tổ hợp phím để giải quyết.
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
-    Tắt nếu bạn sẽ triển khai hệ thống phím tắt của riêng mình bằng cách sử dụng
-    ứng dụng UI Seelen
+    Tắt nếu bạn muốn tự cấu hình hệ thống phím tắt riêng thông qua Seelen UI Client
   labels:
     create_new_workspace: Tạo không gian làm việc mới
     create_new_workspace_row: Tạo hàng không gian làm việc mới
-    destroy_current_workspace: Phá hủy không gian làm việc hiện tại
-    misc_force_quit: BẮT ĐẦU
-    misc_force_restart: Bắt đầu lại
-    move_to_workspace: Di chuyển đến không gian làm việc {{0}}
-    pause_toggle: Phím tắt tạm dừng/tiếp tục
-    send_to_next_workspace: Gửi cửa sổ tới không gian làm việc tiếp theo
-    send_to_previous_workspace: Gửi cửa sổ tới không gian làm việc trước đó
-    send_to_workspace: Gửi đến không gian làm việc {{0}}
-    send_to_workspace_down: Gửi cửa sổ đến không gian làm việc bên dưới
-    send_to_workspace_up: Gửi cửa sổ tới không gian làm việc ở trên
-    switch_to_next_workspace: Chuyển sang không gian làm việc tiếp theo
-    switch_to_previous_workspace: Chuyển sang không gian làm việc trước đó
-    switch_to_workspace_down: Chuyển sang Không gian làm việc bên dưới
-    switch_to_workspace_up: Chuyển sang Không gian làm việc ở trên
-    switch_workspace: Chuyển sang không gian làm việc {{0}}
-  readonly_tooltip: Đây là một lối tắt chỉ đọc
-  reset: Đặt lại về mặc định
+    destroy_current_workspace: Đóng không gian làm việc hiện tại
+    misc_force_quit: Buộc thoát ứng dụng
+    misc_force_restart: Buộc khởi động lại
+    move_to_workspace: Chuyển đến Không gian làm việc {{0}}
+    pause_toggle: Tạm dừng / Tiếp tục phím tắt
+    send_to_next_workspace: Chuyển cửa sổ sang không gian làm việc kế tiếp
+    send_to_previous_workspace: Chuyển cửa sổ sang không gian làm việc trước
+    send_to_workspace: Gửi đến Không gian làm việc {{0}}
+    send_to_workspace_down: Chuyển cửa sổ sang không gian làm việc bên dưới
+    send_to_workspace_up: Chuyển cửa sổ sang không gian làm việc phía trên
+    switch_to_next_workspace: Chuyển sang không gian làm việc kế tiếp
+    switch_to_previous_workspace: Chuyển sang không gian làm việc trước
+    switch_to_workspace_down: Chuyển sang không gian làm việc bên dưới
+    switch_to_workspace_up: Chuyển sang không gian làm việc phía trên
+    switch_workspace: Chuyển sang Không gian làm việc {{0}}
+  readonly_tooltip: Đây là phím tắt chỉ đọc
+  reset: Khôi phục về mặc định
 sides:
-  bottom: Đáy
-  left: Bên trái
+  bottom: Dưới
+  left: Trái
   right: Phải
-  top: Đứng đầu
+  top: Trên
 toolbar:
   auto_hide: Tự động ẩn
-  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
-  delay_to_hide: Trì hoãn việc ẩn giấu
-  delay_to_show: Trì hoãn hiển thị
-  dock_side: Chức vụ
-  enable: Kích hoạt thanh công cụ ưa thích
+  auto_hide_touch_disabled: Tính năng tự động ẩn không hỗ trợ trên thiết bị màn hình cảm ứng
+  delay_to_hide: Độ trễ trước khi ẩn
+  delay_to_show: Độ trễ trước khi hiện
+  dock_side: Vị trí thanh công cụ
+  enable: Bật thanh công cụ (Fancy Toolbar)
   hide_mode:
-    always: Luôn luôn
-    never: Không bao giờ
-    on_overlap: Trên sự chồng chéo
+    always: Luôn ẩn
+    never: Không bao giờ ẩn
+    on_overlap: Khi bị cửa sổ che khuất
   item_size: Kích thước mục
   label: Thanh công cụ
-  margin: Kích thước lề
-  padding: Kích thước đệm
+  margin: Khoảng cách lề ngoài (Margin)
+  padding: Khoảng cách đệm trong (Padding)
   placeholder: {}
 update:
-  available: Cập nhật có sẵn!
-  channel: Cập nhật kênh
-  downloading: Tải xuống ...
+  available: Đã có bản cập nhật mới!
+  channel: Kênh cập nhật
+  downloading: Đang tải bản cập nhật...
 wall:
-  blur: Mờ
-  cancel: Hủy bỏ
+  blur: Độ mờ (Blur)
+  cancel: Hủy
   close: Đóng
   collection_name: Tên bộ sưu tập
   collections: Bộ sưu tập
-  contrast: Sự tương phản
-  corrupted_wallpapers_message: 'Hình nền bị hỏng, hãy cân nhắc việc xóa những hình nền này:'
-  coverage_pause_threshold: Ngưỡng tạm dừng (phạm vi bao phủ cửa sổ)
-  create: Tạo nên
-  create_collection: Tạo bộ sưu tập
+  contrast: Độ tương phản
+  corrupted_wallpapers_message: 'Hình nền bị lỗi, hãy cân nhắc xóa các tệp này:'
+  coverage_pause_threshold: Ngưỡng tạm dừng khi cửa sổ che khuất (%)
+  create: Tạo
+  create_collection: Tạo bộ sưu tập mới
   default_collection: Hình nền hoặc bộ sưu tập mặc định
   default_collection_description: >-
-    Áp dụng cho tất cả màn hình và không gian làm việc không có bộ ghi đè cụ
-    thể.
+    Áp dụng cho mọi màn hình và không gian làm việc chưa được thiết lập riêng.
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
-  extend: Mở rộng chính
+  extend: Trải rộng màn hình chính
   fit:
-    contain: Bao gồm
-    cover: Che phủ
-    fill: Đổ đầy
+    contain: Vừa vặn (Contain)
+    cover: Phủ kín (Cover)
+    fill: Lấp đầy (Fill)
   flipHorizontal: Lật ngang
   flipVertical: Lật dọc
-  generating_thumbnails: Tạo hình thu nhỏ hình nền
+  generating_thumbnails: Đang tạo ảnh thu nhỏ hình nền
   hours: giờ
-  interval: Thay đổi hình nền mỗi
+  interval: Tự động đổi hình nền mỗi
   minutes: phút
-  monitor_collection: Bộ sưu tập giám sát
-  multimonitor_behaviour: Hành vi đa màn hình
-  muted: Tắt âm thanh video
-  no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
-  no_collections: Chưa có bộ sưu tập nào được tạo. Nhấp vào nút + để tạo một cái.
-  objectFit: Phù hợp với nền
-  objectPosition: Vị trí nền
-  overlayColor: Màu lớp phủ
-  overlayMixBlendMode: Chế độ trộn trộn lớp phủ
-  per_monitor: Mỗi màn hình
-  per_monitor_config: Cấu hình trên mỗi màn hình
-  playback: Tốc độ phát lại
+  monitor_collection: Bộ sưu tập theo màn hình
+  multimonitor_behaviour: Chế độ đa màn hình
+  muted: Tắt tiếng video hình nền
+  no_background: Trình chiếu trống, sử dụng màu nền của giao diện.
+  no_collections: Chưa có bộ sưu tập nào. Nhấn nút + để tạo mới.
+  objectFit: Kiểu hiển thị hình nền
+  objectPosition: Vị trí căn chỉnh hình nền
+  overlayColor: Màu lớp phủ (Overlay)
+  overlayMixBlendMode: Chế độ hòa trộn lớp phủ (Mix Blend Mode)
+  per_monitor: Theo từng màn hình
+  per_monitor_config: Cấu hình riêng cho từng màn hình
+  playback: Tốc độ phát video
   position:
-    bottom: Đáy
-    center: Trung tâm
-    left: Bên trái
+    bottom: Dưới
+    center: Giữa
+    left: Trái
     right: Phải
-    top: Đứng đầu
-  processing_video: Đang xử lý video
-  random: Slideshow ngẫu nhiên
-  saturation: Bão hòa
+    top: Trên
+  processing_video: Đang xử lý tệp video
+  random: Trình chiếu ngẫu nhiên (Shuffle)
+  saturation: Độ bão hòa màu
   seconds: giây
-  select_collection: Chọn Bộ sưu tập
-  thumbnail_generation_complete: Hoàn tất việc tạo hình thu nhỏ
-  thumbnail_generation_finished: Việc tạo hình thu nhỏ đã kết thúc thành công
-  use_accent_color: Sử dụng màu nhấn của giấy dán tường
+  select_collection: Chọn bộ sưu tập
+  thumbnail_generation_complete: Tạo ảnh thu nhỏ hoàn tất
+  thumbnail_generation_finished: Đã tạo xong ảnh thu nhỏ thành công
+  use_accent_color: Lấy màu chủ đạo từ hình nền
   wallpaper_collection: Bộ sưu tập hình nền
   wallpaper_settings: Cài đặt hình nền
   wallpapers: Hình nền
   wallpapers_and_collections: Hình nền & Bộ sưu tập
-  withOverlay: Với lớp phủ
-  workspace_collections: Bộ sưu tập không gian làm việc
+  withOverlay: Bật lớp phủ
+  workspace_collections: Bộ sưu tập theo không gian làm việc
 weg:
   auto_hide: Tự động ẩn
-  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
-  delay_to_hide: Trì hoãn việc ẩn giấu
-  delay_to_show: Trì hoãn hiển thị
-  dock_side: Chức vụ
-  filtering: Lọc vật phẩm
-  gap: Khoảng cách
+  auto_hide_touch_disabled: Tính năng tự động ẩn không hỗ trợ trên thiết bị màn hình cảm ứng
+  delay_to_hide: Độ trễ trước khi ẩn
+  delay_to_show: Độ trễ trước khi hiện
+  dock_side: Vị trí Dock
+  filtering: Bộ lọc ứng dụng
+  gap: Khoảng cách
   hide_mode:
-    always: Luôn luôn
-    never: Không bao giờ
-    on_overlap: Trên sự chồng chéo
-  import_error: Không thể nhập các mục trên thanh tác vụ
+    always: Luôn ẩn
+    never: Không bao giờ ẩn
+    on_overlap: Khi bị cửa sổ che khuất
+  import_error: Không thể nhập các mục từ thanh tác vụ
   import_from_taskbar:
-    button: Nhập từ Thanh tác vụ Windows
-    label: Nhập các mục đã ghim
-  import_no_items: Không tìm thấy mục nào được ghim trên thanh tác vụ Windows
+    button: Nhập từ thanh tác vụ Windows
+    label: Nhập ứng dụng đã ghim
+  import_no_items: Không tìm thấy ứng dụng nào được ghim trên thanh tác vụ Windows
   import_success: Đã nhập thành công {{count}} mục từ thanh tác vụ Windows
   items:
-    gap: Không gian giữa các mặt hàng
-    label: Mặt hàng
+    gap: Khoảng cách giữa các biểu tượng
+    label: Biểu tượng ứng dụng
     middle_click_action:
       close_app: Đóng ứng dụng
-      label: Hành động nhấp chuột giữa
-      open_new_instance: Mở phiên bản mới
+      label: Thao tác khi nhấn chuột giữa
+      open_new_instance: Mở cửa sổ mới
     pinned_visibility:
-      always: Luôn luôn
-      label: Hiển thị các mục được ghim
-      when_primary: Khi màn hình là chính
-    show_instance_counter: Hiển thị bộ đếm Windows mở
-    show_window_title: Hiển thị tiêu đề cửa sổ mở (chỉ ngang)
-    size: Kích thước mục
-    split_windows: Chia Windows (một mục trên mỗi cửa sổ)
+      always: Luôn hiển thị
+      label: Hiển thị ứng dụng đã ghim
+      when_primary: Chỉ trên màn hình chính
+    show_instance_counter: Hiển thị số lượng cửa sổ đang mở
+    show_window_title: Hiển thị tiêu đề cửa sổ đang mở (chỉ khi dock nằm ngang)
+    size: Kích thước biểu tượng
+    split_windows: Tách riêng các cửa sổ (mỗi cửa sổ một biểu tượng)
     temporal_visibility:
       all: Tất cả
-      label: Hiển thị các mục đã được bỏ ghim
-      on_monitor: Trên màn hình
-  label: Dock/Thanh tác vụ
-  margin: Lề
+      label: Hiển thị ứng dụng chưa ghim (đang chạy)
+      on_monitor: Chỉ trên màn hình chứa cửa sổ
+  label: Dock / Thanh tác vụ
+  margin: Lề ngoài (Margin)
   mode:
-    full_width: Chiều rộng toàn màn hình
-    min_content: Nhỏ nhất có thể
-  padding: Đệm
+    full_width: Trải rộng toàn màn hình
+    min_content: Thu gọn vừa khít nội dung
+  padding: Đệm trong (Padding)
   reveal_on_attention:
-    label: Hiển thị khi ứng dụng yêu cầu sự chú ý
+    label: Hiện Dock khi ứng dụng cần chú ý
     never: Không bao giờ
     until_activated: Cho đến khi ứng dụng được mở
-    while_flashing: Trong khi nó nhấp nháy
-  show_end_task: Hiển thị nhiệm vụ kết thúc trong thanh tác vụ
-  width: Chiều rộng
+    while_flashing: Khi biểu tượng đang nhấp nháy
+  show_end_task: Hiện nút "Kết thúc tác vụ" (End Task) trong menu ngữ cảnh
+  width: Độ rộng
 welcome:
-  give_a_review: Đưa ra đánh giá
+  give_a_review: Đánh giá ứng dụng
   message: >-
-    Seelen UI là môi trường máy tính để bàn nguồn mở và miễn phí dành cho
-    Windows. Tại đây, bạn có toàn quyền kiểm soát giao diện và hoạt động của màn
-    hình, cho phép bạn tùy chỉnh mọi chi tiết để phù hợp với quy trình làm việc
-    và phong cách của mình.
-  ok: Hãy bắt đầu!
+    Seelen UI là môi trường desktop mã nguồn mở và miễn phí dành cho Windows. Tại
+    đây, bạn có toàn quyền kiểm soát cách thức giao diện máy tính hiển thị và vận
+    hành, cho phép bạn tinh chỉnh từng chi tiết nhỏ nhất để tối ưu cho luồng làm
+    việc và phong cách cá nhân của mình.
+  ok: Bắt đầu ngay!
   review: >-
-    Nếu bạn thích sử dụng Seelen UI, hãy cân nhắc để lại đánh giá trên cửa hàng
-    - phản hồi của bạn sẽ giúp dự án phát triển và cải thiện.
-  title: Chào mừng bạn đến với giao diện người dùng Seelen!
+    Nếu bạn thấy thích Seelen UI, hãy dành chút thời gian để lại đánh giá trên
+    Microsoft Store — phản hồi của bạn sẽ giúp dự án ngày càng hoàn thiện và phát
+    triển hơn.
+  title: Chào mừng bạn đến với Seelen UI!
 widget:
   default_instance: Phiên bản mặc định
-  default_instance_hint: Luôn hoạt động, sử dụng cấu hình widget gốc
-  enable: Kích hoạt tiện ích này
+  default_instance_hint: Luôn hoạt động, sử dụng cấu hình gốc của widget
+  enable: Bật tiện ích này
   enable_for_monitor: Bật trên màn hình này
   extra_instances: Phiên bản bổ sung
-  instance: Ví dụ
-  instances: Trường hợp
+  instance: Phiên bản (Instance)
+  instances: Danh sách phiên bản
 wm:
   animations:
-    duration: Thời lượng hoạt hình (MS)
-    ease_function: Hoạt hình nới lỏng chức năng
-    enable: Bật hình ảnh động của Window
+    duration: Thời lượng chuyển động (ms)
+    ease_function: Hàm gia tốc chuyển động (Easing Function)
+    enable: Bật hiệu ứng chuyển động của cửa sổ
   author: Tác giả
   auto_stack: Tự động xếp chồng theo danh mục ứng dụng
   border:
-    enable: Bật biên giới của cửa sổ
-    offset: Biên giới bù đắp
-    width: Chiều rộng biên giới
-  description: Sự miêu tả
-  drag_behavior: Hành vi kéo
+    enable: Bật viền cửa sổ
+    offset: Khoảng cách thụt lề viền (Offset)
+    width: Độ dày viền
+  description: Mô tả
+  drag_behavior: Thao tác khi kéo cửa sổ
   drag_behavior_options:
-    sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
-    swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
+    sort: Sắp xếp lại (đổi vị trí các cửa sổ trực tiếp khi đang kéo)
+    swap: Hoán đổi (hoán đổi vị trí cửa sổ khi thả chuột)
   floating:
-    height: Chiều cao Windows nổi
-    title: Kích thước cửa sổ nổi
+    height: Chiều cao cửa sổ nổi
+    title: Kích thước mặc định của cửa sổ nổi
     width: Chiều rộng cửa sổ nổi
-  layout: Cách trình bày
-  resize_delta: Thay đổi kích thước delta (%)
-  space_between_containers: Không gian giữa các container
-  stack_bar_visibility: Hiển thị thanh ngăn xếp
+  layout: Bố cục chia lưới
+  resize_delta: Bước thay đổi kích thước (%)
+  space_between_containers: Khoảng cách giữa các khung cửa sổ (Gaps)
+  stack_bar_visibility: Hiển thị thanh tab xếp chồng (Stack Bar)
   stack_bar_visibility_options:
-    always: Luôn luôn
-    as_needed: Khi cần thiết
-  workspace_offset: Không gian làm việc bù (lề)
-  workspace_padding: Không gian làm việc đệm
-'yes': Đúng
+    always: Luôn hiển thị
+    as_needed: Khi cần thiết (nhiều cửa sổ xếp chồng)
+  workspace_offset: Lề ngoài không gian làm việc (Margins)
+  workspace_padding: Khoảng đệm không gian làm việc (Padding)
+'yes': 'Có'
