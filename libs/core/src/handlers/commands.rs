@@ -535,7 +535,7 @@ slu_commands_declaration! {
         set_system_tray_icon_promoted(id: String, promoted: bool),
     SetSystemTrayIconsOrder =
         @fallible()
-        set_system_tray_icons_order(keys: Vec<String>),
+        set_system_tray_icons_order(ids: Vec<String>),
 
     // Notifications
     GetNotifications = get_notifications() -> Vec<AppNotification>,

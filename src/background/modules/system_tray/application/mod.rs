@@ -24,7 +24,7 @@ use crate::{
 };
 
 pub struct SystemTrayManager {
-    /// Icons by their registry key.
+    /// Icons by their session id.
     icons: SyncHashMap<String, SysTrayIcon>,
     /// Process that owned each icon's window when it was registered, used to
     /// detect a recycled window handle.
@@ -116,32 +116,42 @@ impl SystemTrayManager {
             Vec::new()
         });
         icons.sort_by_key(|icon| {
-            order
-                .iter()
-                .position(|key| *key == icon.registry_key)
+            icon.registry_key
+                .as_ref()
+                .and_then(|registry_key| order.iter().position(|key| key == registry_key))
                 .unwrap_or(usize::MAX)
         });
         icons
     }
 
-    /// Reorders the icons on the registry UI order following `keys`, entries not included
-    /// in `keys` (like icons of closed apps) keep their position.
-    pub fn set_order(&self, keys: &[String]) -> Result<()> {
+    /// Reorders the icons on the registry UI order following the given session ids, entries
+    /// not included (like icons of closed apps or icons without registry entry) keep their position.
+    pub fn set_order(&self, session_ids: &[String]) -> Result<()> {
+        let keys: Vec<String> = session_ids
+            .iter()
+            .filter_map(|id| {
+                self.icons
+                    .get(id, |icon| icon.registry_key.clone())
+                    .flatten()
+            })
+            .collect();
         let mut order = get_registry_ui_order()?;
-        sort_ui_order(&mut order, keys);
+        sort_ui_order(&mut order, &keys);
         set_registry_ui_order(&order)?;
         Self::send(SystemTrayEvent::Changed);
         Ok(())
     }
 
     /// Shows the icon directly on the taskbar or only in the tray overflow.
-    pub fn set_promoted(&self, registry_key: &str, promoted: bool) -> Result<()> {
-        if !self.icons.contains_key(registry_key) {
-            return Err("Icon not found".into());
-        }
-        set_registry_notify_icon_promoted(registry_key, promoted)?;
+    pub fn set_promoted(&self, session_id: &str, promoted: bool) -> Result<()> {
+        let registry_key = self
+            .icons
+            .get(session_id, |icon| icon.registry_key.clone())
+            .ok_or("Icon not found")?
+            .ok_or("Icon has no registry entry")?;
+        set_registry_notify_icon_promoted(&registry_key, promoted)?;
         self.icons.with_lock(|icons| {
-            if let Some(icon) = icons.get_mut(registry_key) {
+            if let Some(icon) = icons.get_mut(session_id) {
                 icon.is_promoted = promoted;
             }
         });

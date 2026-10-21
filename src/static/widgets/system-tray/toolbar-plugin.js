@@ -8,17 +8,17 @@ const items = trayIcons
   .filter((icon) => icon.isVisible && icon.isPromoted && !GUIDS_TO_IGNORE.includes(icon.guid))
   .map((icon) => {
     const onClick = `invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: "${icon.registryKey}",
+        id: "${icon.sessionId}",
         action: "LeftClick",
       })`;
 
     const onAuxClick = `invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: "${icon.registryKey}",
+        id: "${icon.sessionId}",
         action: "MiddleClick",
       })`;
 
     const onContextMenu = `invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: "${icon.registryKey}",
+        id: "${icon.sessionId}",
         action: "RightClick",
       })`;
 

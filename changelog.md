@@ -6,6 +6,7 @@
 
 - per-app volume sessions not showing in the media volume mixer.
 - network api crashing when no connected to any network.
+- system tray not showing any icon on Windows 10, and icons without registry entry being ignored on Windows 11.
 
 ## [2.8.9]
 

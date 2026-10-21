@@ -42,7 +42,7 @@ const REGISTRY_LOOKUP_INTERVAL: Duration = Duration::from_millis(200);
 pub enum SystrayEvent {
     IconAdd(SysTrayIcon),
     IconUpdate(SysTrayIcon),
-    /// registry key of the removed icon
+    /// session id of the removed icon
     IconRemove(String),
 }
 
@@ -93,24 +93,24 @@ impl SystemTrayManager {
 
     /// Whether the icon's window still exists and still belongs to the process
     /// that registered the icon (window handles can be recycled).
-    fn is_owner_alive(&self, registry_key: &str, handle: isize) -> bool {
+    fn is_owner_alive(&self, session_id: &str, handle: isize) -> bool {
         if !WindowsApi::is_window(HWND(handle as _)) {
             return false;
         }
-        match self.owners.get(registry_key, |pid| *pid) {
+        match self.owners.get(session_id, |pid| *pid) {
             Some(pid) => window_pid(handle) == Some(pid),
             None => true,
         }
     }
 
     /// Remembers which process owns the icon's window.
-    fn track_owner(&self, registry_key: &str, handle: isize) {
+    fn track_owner(&self, session_id: &str, handle: isize) {
         match window_pid(handle) {
             Some(pid) => {
-                self.owners.upsert(registry_key.to_string(), pid);
+                self.owners.upsert(session_id.to_string(), pid);
             }
             None => {
-                self.owners.remove(registry_key);
+                self.owners.remove(session_id);
             }
         }
     }
@@ -152,12 +152,11 @@ impl SystemTrayManager {
         };
 
         self.pending.remove(&identity);
-        self.store_new_icon(icon_data, entry, window_path)
+        self.store_new_icon(icon_data, Some(entry), window_path)
     }
 
-    /// `NIM_MODIFY`: updates a known icon. Explorer rejects it for icons that were
-    /// never added, so an unknown icon is only added if it is waiting for its
-    /// registry entry or Explorer already persisted it.
+    /// `NIM_MODIFY`: updates a known icon. An unknown icon was added before the hook
+    /// was installed (e.g. shell icons), so it is added as on `NIM_ADD`.
     fn process_nim_update(&self, icon_data: &IconEventData) -> Option<SystrayEvent> {
         if let Some(stored) = self.find_stored_icon(icon_data) {
             return self.update_stored_icon(stored, icon_data);
@@ -171,9 +170,13 @@ impl SystemTrayManager {
             return None;
         }
 
-        let entry =
-            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)?;
-        self.store_new_icon(icon_data, entry, window_path)
+        let Some(entry) =
+            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)
+        else {
+            self.defer_until_registered(identity, icon_data.clone(), window_path);
+            return None;
+        };
+        self.store_new_icon(icon_data, Some(entry), window_path)
     }
 
     /// `NIM_DELETE`: removes the icon, or stops waiting for it if still pending.
@@ -181,11 +184,11 @@ impl SystemTrayManager {
         if let Some(identity) = session_identity(icon_data) {
             self.pending.remove(&identity);
         }
-        let registry_key = self.find_stored_icon(icon_data)?.registry_key;
-        log::trace!("Tray icon removed: {}", registry_key);
-        self.icons.remove(&registry_key);
-        self.owners.remove(&registry_key);
-        Some(SystrayEvent::IconRemove(registry_key))
+        let session_id = self.find_stored_icon(icon_data)?.session_id;
+        log::trace!("Tray icon removed: {}", session_id);
+        self.icons.remove(&session_id);
+        self.owners.remove(&session_id);
+        Some(SystrayEvent::IconRemove(session_id))
     }
 
     /// Applies the fields set in `icon_data` over the stored icon.
@@ -207,7 +210,7 @@ impl SystemTrayManager {
             && icon.window_handle != Some(window_handle)
         {
             icon.window_handle = Some(window_handle);
-            self.track_owner(&icon.registry_key, window_handle);
+            self.track_owner(&icon.session_id, window_handle);
         }
 
         if let Some(guid) = icon_data.guid {
@@ -221,7 +224,7 @@ impl SystemTrayManager {
         // Avoid re-reading the icon image if it's the same as the existing icon.
         if let Some(icon_handle) = icon_data.icon_handle
             && icon.icon_handle != Some(icon_handle)
-            && let Some(image) = save_icon_image(icon_handle, &icon.registry_key)
+            && let Some(image) = save_icon_image(icon_handle, &icon.session_id)
         {
             icon.icon_handle = Some(icon_handle);
             icon.icon_image_hash = Some(image.hash);
@@ -241,37 +244,64 @@ impl SystemTrayManager {
             icon.is_visible = is_visible;
         }
 
-        self.icons.upsert(icon.registry_key.clone(), icon.clone());
+        self.icons.upsert(icon.session_id.clone(), icon.clone());
         Some(SystrayEvent::IconUpdate(icon))
     }
 
-    /// Stores an icon seen for the first time, linked to its registry entry.
+    /// Stores an icon seen for the first time, linked to its registry entry if any.
     ///
     /// The entry may already be held by a visible icon that adopted it (see
-    /// `adopt_hidden_sibling_entry`), a hidden icon never takes it back.
+    /// `adopt_hidden_sibling_entry`), a hidden icon never takes it back, while a
+    /// visible icon replaces the one holding it.
     fn store_new_icon(
         &self,
         icon_data: &IconEventData,
-        entry: RegistryNotifyIcon,
+        entry: Option<RegistryNotifyIcon>,
         window_path: Option<PathBuf>,
     ) -> Option<SystrayEvent> {
-        if icon_data.is_visible == Some(false) && self.icons.contains_key(&entry.key) {
-            log::trace!(
-                "Hidden tray icon ignored, its registry entry is taken: {}",
-                entry.key
-            );
-            return None;
+        let session_id = session_identity(icon_data)?;
+
+        if let Some(entry) = &entry {
+            let holds_entry = |icon: &SysTrayIcon| icon.registry_key.as_ref() == Some(&entry.key);
+            if icon_data.is_visible == Some(false) {
+                if self.icons.any(|(_, icon)| holds_entry(icon)) {
+                    log::trace!(
+                        "Hidden tray icon ignored, its registry entry is taken: {}",
+                        entry.key
+                    );
+                    return None;
+                }
+            } else {
+                let mut replaced = Vec::new();
+                self.icons.retain(|(id, icon)| {
+                    let holds = holds_entry(icon);
+                    if holds {
+                        replaced.push(id.clone());
+                    }
+                    !holds
+                });
+                for id in &replaced {
+                    self.owners.remove(id);
+                }
+            }
         }
 
-        let registry_key = entry.key;
-        let executable_path = window_path.unwrap_or(entry.executable_path);
-        log::trace!("Tray icon added: {registry_key} ({executable_path:?})");
+        let (registry_key, is_promoted, executable_path) = match entry {
+            Some(entry) => (
+                Some(entry.key),
+                entry.is_promoted,
+                window_path.unwrap_or(entry.executable_path),
+            ),
+            None => (None, false, window_path.unwrap_or_default()),
+        };
+        log::trace!("Tray icon added: {session_id} {registry_key:?} ({executable_path:?})");
 
         let image = icon_data
             .icon_handle
-            .and_then(|handle| save_icon_image(handle, &registry_key));
+            .and_then(|handle| save_icon_image(handle, &session_id));
 
         let icon = SysTrayIcon {
+            session_id,
             registry_key,
             executable_path,
             uid: icon_data.uid,
@@ -286,13 +316,13 @@ impl SystemTrayManager {
             version: icon_data.version,
             // an icon added without state is visible
             is_visible: icon_data.is_visible.unwrap_or(true),
-            is_promoted: entry.is_promoted,
+            is_promoted,
         };
 
         if let Some(window_handle) = icon.window_handle {
-            self.track_owner(&icon.registry_key, window_handle);
+            self.track_owner(&icon.session_id, window_handle);
         }
-        self.icons.upsert(icon.registry_key.clone(), icon.clone());
+        self.icons.upsert(icon.session_id.clone(), icon.clone());
         Some(SystrayEvent::IconAdd(icon))
     }
 
@@ -334,7 +364,7 @@ impl SystemTrayManager {
             sibling.uid,
             entry.key
         );
-        self.store_new_icon(icon_data, entry, window_path)
+        self.store_new_icon(icon_data, Some(entry), window_path)
     }
 
     /// Holds an icon whose registry entry doesn't exist yet and re-dispatches it
@@ -342,7 +372,8 @@ impl SystemTrayManager {
     ///
     /// Hidden icons without entry (e.g. Task Manager's `NIS_SHAREDICON` image
     /// sources) are held until they become visible. If the entry never shows up,
-    /// the icon falls back to the entry of a hidden sibling.
+    /// the icon falls back to the entry of a hidden sibling, or is added without
+    /// entry (always the case on Windows 10, where `NotifyIconSettings` doesn't exist).
     fn defer_until_registered(
         &self,
         identity: String,
@@ -397,16 +428,22 @@ impl SystemTrayManager {
                 SystemTrayManager::send(SystemTrayEvent::Changed);
                 return;
             }
-            log::warn!("Tray icon {identity} ({window_path:?}) ignored, no registry entry found");
+            log::warn!("Tray icon {identity} ({window_path:?}) added without registry entry");
+            if manager
+                .store_new_icon(&held.data, None, window_path)
+                .is_some()
+            {
+                SystemTrayManager::send(SystemTrayEvent::Changed);
+            }
         });
     }
 
     /// Sends an action to the systray icon.
-    pub fn send_action(&self, registry_key: &str, action: &SystrayIconAction) -> crate::Result<()> {
-        log::trace!("Sending icon action: {:?} to: {}", action, registry_key);
+    pub fn send_action(&self, session_id: &str, action: &SystrayIconAction) -> crate::Result<()> {
+        log::trace!("Sending icon action: {:?} to: {}", action, session_id);
         let icon = self
             .icons
-            .get(registry_key, |v| v.clone())
+            .get(session_id, |v| v.clone())
             .ok_or("Icon not found")?;
 
         // Early return if we don't have the required fields.
@@ -418,7 +455,7 @@ impl SystemTrayManager {
             .callback_message
             .ok_or("Inoperable icon, missing callback")?;
 
-        if !self.is_owner_alive(&icon.registry_key, window_handle) {
+        if !self.is_owner_alive(&icon.session_id, window_handle) {
             // The owner died without removing its icon, drop it (Explorer does
             // the same when the mouse passes over a dead icon).
             if self.prune_dead_icons() {
@@ -552,11 +589,11 @@ fn window_program_path(icon_data: &IconEventData) -> Option<PathBuf> {
 }
 
 /// Saves the icon image as png in the temp dir.
-fn save_icon_image(icon_handle: isize, registry_key: &str) -> Option<SavedIconImage> {
+fn save_icon_image(icon_handle: isize, session_id: &str) -> Option<SavedIconImage> {
     let img = convert_hicon_to_rgba_image(&HICON(icon_handle as _)).ok()?;
     let path = SEELEN_COMMON
         .app_temp_dir()
-        .join(format!("{registry_key}.png"));
+        .join(format!("{session_id}.png"));
     img.save(&path).unwrap();
     Some(SavedIconImage {
         hash: image_to_hash(&img),

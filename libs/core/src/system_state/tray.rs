@@ -4,12 +4,19 @@ use std::path::PathBuf;
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct SysTrayIcon {
+    /// Identifier of the icon during the session, as the shell identifies it: its guid, or
+    /// its (window handle + uid). Will not change for the lifetime of the icon.
+    pub session_id: String,
+
     /// Persistent identifier assigned by Windows to the icon: the name of its subkey under
     /// `HKCU\Control Panel\NotifyIconSettings`, bound to the executable that registered the
-    /// icon plus its uid or guid. Unlike the (window handle + uid) pair it survives sessions.
+    /// icon plus its uid or guid. Unlike the session id it survives sessions.
+    ///
+    /// Only used to access the icon settings (pinned state and order). It doesn't exist on
+    /// Windows 10 or when Explorer never persisted the icon.
     ///
     /// It is a u64 on Windows, exposed as string because it exceeds the JS safe integer range.
-    pub registry_key: String,
+    pub registry_key: Option<String>,
 
     /// Path of the executable that registered the icon.
     pub executable_path: PathBuf,
@@ -68,7 +75,7 @@ pub struct SysTrayIcon {
 
     /// Whether the icon is shown directly on the taskbar, otherwise it is only
     /// shown in the tray overflow. Stored by Windows as `IsPromoted` on the icon's
-    /// registry entry.
+    /// registry entry, always `false` for icons without registry entry.
     pub is_promoted: bool,
 }
 

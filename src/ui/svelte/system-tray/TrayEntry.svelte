@@ -15,7 +15,7 @@
 
   const sortable = createSortable({
     get id() {
-      return item.registryKey;
+      return item.sessionId;
     },
     get index() {
       return index;
@@ -63,25 +63,25 @@
   <button
     class="system-tray-item"
     data-skin="transparent"
-    onclick={(e) => onClick(e, item.registryKey)}
-    ondblclick={(e) => onDoubleClick(e, item.registryKey)}
-    onauxclick={(e) => onClick(e, item.registryKey)}
-    oncontextmenu={(e) => onClick(e, item.registryKey)}
+    onclick={(e) => onClick(e, item.sessionId)}
+    ondblclick={(e) => onDoubleClick(e, item.sessionId)}
+    onauxclick={(e) => onClick(e, item.sessionId)}
+    oncontextmenu={(e) => onClick(e, item.sessionId)}
     onmouseenter={() => {
       /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.registryKey,
+        id: item.sessionId,
         action: SystrayIconAction.HoverEnter,
       }); */
     }}
     onmousemove={() => {
       /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.registryKey,
+        id: item.sessionId,
         action: SystrayIconAction.HoverMove,
       }); */
     }}
     onmouseleave={() => {
       /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.registryKey,
+        id: item.sessionId,
         action: SystrayIconAction.HoverLeave,
       }); */
     }}
@@ -114,7 +114,8 @@
   <button
     data-skin="transparent"
     class="system-tray-item-pin"
-    onclick={() => setPinned(item.registryKey, !item.isPromoted)}
+    disabled={!item.registryKey}
+    onclick={() => setPinned(item.sessionId, !item.isPromoted)}
   >
     <Icon name={item.isPromoted ? "TbPinnedOff" : "TbPin"} />
   </button>

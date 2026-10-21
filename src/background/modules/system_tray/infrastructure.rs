@@ -43,7 +43,7 @@ impl crate::tauri_handlers::Handlers {
         get_system_tray_manager().set_promoted(&id, promoted)
     }
 
-    pub fn set_system_tray_icons_order(keys: Vec<String>) -> Result<()> {
-        get_system_tray_manager().set_order(&keys)
+    pub fn set_system_tray_icons_order(ids: Vec<String>) -> Result<()> {
+        get_system_tray_manager().set_order(&ids)
     }
 }

@@ -35,12 +35,12 @@
   });
 
   function handleDragOver(event: any) {
-    const currentKeys = itemsSnapshop.map((item) => item.registryKey);
+    const currentKeys = itemsSnapshop.map((item) => item.sessionId);
     const newKeys = move(currentKeys, event);
     if (newKeys === currentKeys) {
       return;
     }
-    const byKey = new Map(itemsSnapshop.map((item) => [item.registryKey, item]));
+    const byKey = new Map(itemsSnapshop.map((item) => [item.sessionId, item]));
     itemsSnapshop = newKeys.map((key) => byKey.get(key)!);
   }
 
@@ -49,18 +49,18 @@
       itemsSnapshop = items;
       return;
     }
-    const currentKeys = items.map((item) => item.registryKey);
-    const newKeys = itemsSnapshop.map((item) => item.registryKey);
+    const currentKeys = items.map((item) => item.sessionId);
+    const newKeys = itemsSnapshop.map((item) => item.sessionId);
     if (newKeys.every((key, i) => key === currentKeys[i])) {
       return;
     }
-    invoke(SeelenCommand.SetSystemTrayIconsOrder, { keys: newKeys });
+    invoke(SeelenCommand.SetSystemTrayIconsOrder, { ids: newKeys });
   }
 </script>
 
 <div class={["slu-std-popover", "system-tray"]}>
   <DragDropProvider {manager} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
-    {#each itemsSnapshop as item, index (item.registryKey)}
+    {#each itemsSnapshop as item, index (item.sessionId)}
       <TrayEntry {item} {index} />
     {/each}
   </DragDropProvider>
