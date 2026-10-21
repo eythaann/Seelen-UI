@@ -1,86 +1,80 @@
 auth:
   login_failed_body: >-
-    Đã xảy ra lỗi trong quá trình đăng nhập. Nếu tình trạng này vẫn tiếp diễn,
-    hãy đảm bảo dịch vụ 'Trình quản lý thông tin xác thực' của Windows
-    (VaultSvc) đã được bật và đang chạy, sau đó thử lại.
-  login_failed_title: Đăng nhập không thành công
-cancel: Hủy bỏ
-done: Xong
+    Đã xảy ra lỗi trong quá trình đăng nhập. Nếu lỗi này vẫn tiếp diễn, hãy đảm
+    bảo dịch vụ 'Credential Manager' của Windows (VaultSvc) đang được bật và
+    hoạt động, sau đó thử lại.
+  login_failed_title: Đăng nhập thất bại
+cancel: Hủy
+done: Hoàn tất
 elevated:
-  description: >-
-    Giao diện người dùng Seelen đang chạy với đặc quyền của quản trị viên.
-
-    Điều này không bổ sung hoặc cải thiện bất kỳ tính năng nào và có thể gây ra
-    rủi ro bảo mật.
-
-    Để bảo mật tốt hơn, vui lòng khởi động lại nó mà không có sự cho phép của
-    quản trị viên.
-  title: Chạy với tư cách quản trị viên
-file_explorer: Trình khám phá tệp
+  description: |-
+    Seelen UI hiện đang chạy dưới quyền Quản trị viên (Administrator).
+    Điều này không giúp tăng thêm tính năng nào mà có thể tiềm ẩn rủi ro bảo mật.
+    Để đảm bảo an toàn, vui lòng khởi động lại ứng dụng với quyền người dùng thông thường.
+  title: Đang chạy dưới quyền Quản trị viên
+file_explorer: Trình quản lý tệp (File Explorer)
 resource:
-  added: Một tài nguyên mới đã được thêm vào
+  added: Đã thêm một tài nguyên mới
   download_failed_body: >-
-    Có điều gì đó không ổn trong khi tải xuống tài nguyên, vui lòng báo cáo cho
-    nhóm Nhà phát triển Seelen.
-  download_failed_title: Tải xuống tài nguyên không thành công
-  downloading: Tải xuống tài sản ...
-  downloading_body: Điều này có thể mất vài giây, xin vui lòng không đóng cửa sổ.
-  enable: Cho phép
+    Đã xảy ra lỗi trong quá trình tải tài nguyên, vui lòng báo lại cho đội ngũ
+    phát triển Seelen UI.
+  download_failed_title: Tải tài nguyên thất bại
+  downloading: Đang tải gói dữ liệu...
+  downloading_body: Quá trình này có thể mất vài giây, vui lòng không đóng cửa sổ.
+  enable: Bật
   login_required_action: Đăng nhập
-  login_required_body: Bạn cần đăng nhập để tải xuống tài nguyên này.
+  login_required_body: Bạn cần đăng nhập để tải tài nguyên này.
   login_required_title: Yêu cầu đăng nhập
 runtime:
-  corrupted_data: Dữ liệu bị hỏng
-  corrupted_file: Một tệp cấu hình bị hỏng, sử dụng các giá trị mặc định thay thế.
-  corrupted_file_path: Đường dẫn tệp bị hỏng
+  corrupted_data: Dữ liệu bị lỗi
+  corrupted_file: Tệp cấu hình bị lỗi, hệ thống sẽ sử dụng các giá trị mặc định thay thế.
+  corrupted_file_path: Đường dẫn tệp bị lỗi
   download: Đi tới trang tải xuống
   files_integrity: >-
-    Chúng tôi không thể xác minh tính toàn vẹn của các tệp ứng dụng.
+    Không thể xác minh tính toàn vẹn của các tệp ứng dụng.
 
-    Điều này có thể xảy ra nếu tệp bị sửa đổi, bị hỏng hoặc quá trình cài đặt
-    chưa hoàn tất.
+    Điều này có thể xảy ra khi tệp bị chỉnh sửa, hư hỏng hoặc quá trình cài đặt
+    bị gián đoạn.
 
-    Vì lý do bảo mật, giao diện người dùng Seelen không thể tiếp tục.
+    Vì lý do an toàn, Seelen UI không thể tiếp tục hoạt động.
 
-    Vui lòng cài đặt lại nó từ trang web chính thức.
-  files_integrity_title: Cảnh báo bảo mật - Kiểm tra tính toàn vẹn của tệp không thành công
-  not_found: Không tìm thấy thời gian chạy WebView2
-  not_found_description: Giao diện người dùng Seelen yêu cầu Thời gian chạy Webview2. Hãy cài đặt nó.
-  outdated: Thời gian chạy WebView2 đã lỗi thời
+    Vui lòng cài đặt lại ứng dụng từ trang chủ chính thức.
+  files_integrity_title: Cảnh báo bảo mật - Kiểm tra toàn vẹn tệp thất bại
+  not_found: Không tìm thấy WebView2 Runtime
+  not_found_description: Seelen UI yêu cầu Microsoft WebView2 Runtime để hoạt động. Vui lòng cài đặt bổ sung.
+  outdated: WebView2 Runtime đã lỗi thời
   outdated_description: >-
-    Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên.
-    Hãy cập nhật nó.
+    Seelen UI yêu cầu WebView2 Runtime phiên bản %{min_version} trở lên. Vui lòng
+    cập nhật phiên bản mới hơn.
 service:
-  not_running: Dịch vụ giao diện người dùng Seelen không chạy
+  not_running: Dịch vụ Seelen UI Service chưa chạy
   not_running_description: >-
-    Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ
-    thuộc/trợ giúp để ứng dụng hoạt động bình thường.
-  not_running_ok: Bắt đầu dịch vụ
+    Dịch vụ nền Seelen UI (slu-service) là thành phần phụ trợ bắt buộc để ứng
+    dụng hoạt động ổn định và an toàn.
+  not_running_ok: Khởi động dịch vụ
 shortcut:
   conflicts:
-    body: Một số phím tắt được gán cho nhiều hành động, vui lòng gán lại chúng.
-    dismiss: Miễn nhiệm
-    review: Ôn tập
-    title: Đã phát hiện xung đột phím tắt
+    body: Một số phím tắt đang bị trùng lặp với nhiều hành động, vui lòng thiết lập lại.
+    dismiss: Bỏ qua
+    review: Xem lại
+    title: Phát hiện xung đột phím tắt
   register:
-    placeholder: Nhấn bất kỳ kết hợp khóa nào
+    placeholder: Nhấn tổ hợp phím bất kỳ
     title: Đăng ký phím tắt mới
 widget_liveness:
   failed_description: |-
-    Tiện ích '%{widget_name}' đã ngừng phản hồi quá nhiều lần.
+    Tiện ích '%{widget_name}' đã ngừng phản hồi nhiều lần.
 
     Bạn có thể thử khởi động lại ứng dụng.
   failed_title: Lỗi tiện ích
 widget_permissions:
-  perm_kill_processes: buộc đóng ứng dụng
-  perm_manage_app_windows: >-
-    kiểm soát các cửa sổ của các ứng dụng khác (tập trung, đóng, thu nhỏ, di
-    chuyển)
-  perm_modify_configuration: sửa đổi cấu hình giao diện người dùng Seelen
-  perm_open_file: mở tập tin
-  perm_run: chạy chương trình
+  perm_kill_processes: buộc đóng các ứng dụng khác
+  perm_manage_app_windows: điều khiển cửa sổ của các ứng dụng khác (focus, đóng, thu nhỏ, di chuyển)
+  perm_modify_configuration: chỉnh sửa cấu hình Seelen UI
+  perm_open_file: mở tệp tin
+  perm_run: khởi chạy chương trình
   request_description: |-
-    Tiện ích '%{widget_name}' đang yêu cầu quyền đối với %{command}.
+    Tiện ích '%{widget_name}' đang yêu cầu quyền: %{command}.
 
-    Bạn có muốn cho phép điều này?
-  request_title: Yêu cầu cấp phép tiện ích
+    Bạn có muốn cấp quyền này không?
+  request_title: Yêu cầu cấp quyền tiện ích

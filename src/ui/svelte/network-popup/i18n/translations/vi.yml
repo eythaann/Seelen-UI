@@ -1,23 +1,23 @@
-available: Mạng có sẵn
+available: Các mạng khả dụng
 connect: Kết nối
 connected: Đã kết nối với
 connecting: Đang kết nối...
 disconnect: Ngắt kết nối
-forget: Quên
+forget: Quên mạng này
 hidden: Mạng ẩn
 hotspot:
-  band: Ban nhạc
+  band: Băng tần
   'off': Tắt
-  'on': TRÊN
-  open_network: Mạng mở
+  'on': Bật
+  open_network: Mạng không bảo mật (Mở)
   password: Mật khẩu
-  settings: Thêm cài đặt điểm phát sóng
-  ssid: Tên mạng
-  title: Điểm phát sóng
-more: Thêm cài đặt mạng
-no_adapter: Không tìm thấy bộ chuyển đổi Wi-Fi
-not_found: Không tìm thấy mạng Wi-Fi
+  settings: Cài đặt điểm phát sóng khác
+  ssid: Tên mạng (SSID)
+  title: Điểm phát sóng di động (Hotspot)
+more: Cài đặt mạng khác
+no_adapter: Không tìm thấy card mạng Wi-Fi
+not_found: Không tìm thấy mạng Wi-Fi nào
 password: Mật khẩu
-saved: Mạng đã lưu
-scanning: Đang quét mạng
-secured: Mạng được mã hóa
+saved: Các mạng đã lưu
+scanning: Đang tìm kiếm mạng Wi-Fi...
+secured: Mạng được bảo mật
