@@ -12,7 +12,7 @@ settings:
     label: !extend i18n/settings/layout.yml
     allowSetByMonitor: true
     allowSetByWorkspace: true
-    source: Plugins
+    source: plugins
     defaultValue: "@default/wm-bspwm"
 shortcuts:
   # =========== MODES ===========

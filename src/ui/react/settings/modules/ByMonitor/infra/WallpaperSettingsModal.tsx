@@ -1,15 +1,16 @@
-import { useComputed } from "@preact/signals";
+import type { WorkspaceId } from "@seelen-ui/lib/types";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Button, Modal } from "antd";
 import { type ReactNode, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { $virtual_desktops } from "../../shared/signals";
 import {
+  getWallConfig,
   setMonitorWallpaperCollection,
   setWorkspaceWallpaperCollection,
 } from "../../resources/Widget/Wall/application.ts";
 import { WallpaperCollectionSelector } from "../../resources/Widget/Wall/WallpaperCollectionSelector.tsx";
+import { WorkspaceOverrides } from "../../resources/Widget/WorkspaceOverrides.tsx";
 import { settings } from "../../../state/mod.ts";
 import { SettingsGroup, SettingsOption } from "../../../components/SettingsBox/index.tsx";
 
@@ -20,70 +21,66 @@ interface Props {
 
 export function WallpaperSettingsModal({ monitorId, title }: Props) {
   const [open, setOpen] = useState(false);
-  const monitorsV3 = settings.value.monitorsV3;
+  // workspaces added as override while there was no collection to start from, so they stay listed until one is picked
+  const [pending, setPending] = useState<WorkspaceId[]>([]);
   const { t } = useTranslation();
 
-  const monitorConfig = monitorsV3[monitorId];
-  const selectedCollection = monitorConfig?.wallpaperCollection ?? null;
+  const monitorConfig = settings.value.monitorsV3[monitorId];
+  const monitorCollection = monitorConfig?.wallpaperCollection ?? null;
 
-  // Get workspaces for this monitor from virtual desktops signal
-  const monitorWorkspaces = useComputed(() => {
-    return $virtual_desktops.value?.monitors[monitorId]?.workspaces || [];
-  });
+  const getWorkspaceCollection = (workspaceId: WorkspaceId) =>
+    monitorConfig?.byWorkspace?.[workspaceId]?.wallpaperCollection ?? null;
+
+  const onAdd = (workspaceId: WorkspaceId) => {
+    // starts from the inherited collection, so adding an override changes nothing until edited
+    const inherited = monitorCollection ?? getWallConfig().defaultCollection;
+    if (inherited) {
+      setWorkspaceWallpaperCollection(monitorId, workspaceId, inherited);
+    } else {
+      setPending((ids) => [...ids, workspaceId]);
+    }
+  };
+
+  const onRemove = (workspaceId: WorkspaceId) => {
+    setWorkspaceWallpaperCollection(monitorId, workspaceId, null);
+    setPending((ids) => ids.filter((id) => id !== workspaceId));
+  };
 
   return (
     <>
-      <Modal
-        open={open}
-        onCancel={() => setOpen(false)}
-        title={title}
-        footer={null}
-        centered
-        width={600}
-      >
-        <SettingsGroup>
-          <SettingsOption>
-            <b>{t("wall.monitor_collection")}</b>
-            <WallpaperCollectionSelector
-              style={{ width: 300 }}
-              value={selectedCollection}
-              onChange={(value) => setMonitorWallpaperCollection(monitorId, value)}
-              placeholder={t("inherit")}
-            />
-          </SettingsOption>
-        </SettingsGroup>
-
-        {monitorWorkspaces.value.length > 0 && (
-          <SettingsGroup>
-            <div style={{ marginBottom: 12 }}>
-              <b>{t("wall.workspace_collections")}</b>
-            </div>
-            {monitorWorkspaces.value
-              .map((row, rowIdx) => {
-                return row.map((workspace, idx) => {
-                  const workspaceConfig = monitorConfig?.byWorkspace?.[workspace.id];
-                  const workspaceCollection = workspaceConfig?.wallpaperCollection ?? null;
-
-                  return (
-                    <SettingsOption key={workspace.id}>
-                      <span>{workspace.name || `Workspace ${rowIdx + 1}.${idx + 1}`}</span>
-                      <WallpaperCollectionSelector
-                        style={{ width: 300 }}
-                        value={workspaceCollection}
-                        onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspace.id, value)}
-                        placeholder={t("inherit")}
-                      />
-                    </SettingsOption>
-                  );
-                });
-              })
-              .flat()}
-          </SettingsGroup>
-        )}
-      </Modal>
       <Button type="default" onClick={() => setOpen(true)}>
         <Icon iconName="RiSettings4Fill" />
       </Button>
+
+      <Modal open={open} onCancel={() => setOpen(false)} title={title} footer={null} centered>
+        <SettingsGroup>
+          <SettingsOption
+            label={t("wall.monitor_collection")}
+            action={
+              <WallpaperCollectionSelector
+                style={{ width: 200 }}
+                value={monitorCollection}
+                onChange={(value) => setMonitorWallpaperCollection(monitorId, value)}
+                placeholder={t("inherit")}
+              />
+            }
+          />
+          <WorkspaceOverrides
+            monitorId={monitorId}
+            isOverridden={(workspaceId) => !!getWorkspaceCollection(workspaceId) || pending.includes(workspaceId)}
+            renderInput={(workspaceId) => (
+              <WallpaperCollectionSelector
+                style={{ width: 200 }}
+                value={getWorkspaceCollection(workspaceId)}
+                onChange={(value) => setWorkspaceWallpaperCollection(monitorId, workspaceId, value)}
+                placeholder={t("inherit")}
+              />
+            )}
+            onAdd={onAdd}
+            onRemove={onRemove}
+          />
+        </SettingsGroup>
+      </Modal>
     </>
   );
 }

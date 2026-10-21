@@ -20,6 +20,8 @@ Translations:
 
 - DO NOT run `npm run translate` during active development.
 - Add translations manually while iterating; run the translate command only right before a final commit.
+- NEVER touch non-English i18n files (no adding, editing, translating or deleting keys). Only edit `en` entries /
+  `en.yml`; every other language is handled exclusively by `npm run translate`.
 
 Rust locking order (avoid deadlocks):
 

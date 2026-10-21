@@ -6,20 +6,18 @@ import {
   WidgetSelectSubtype,
   type WidgetSettingItem,
   type WidgetSettingsDeclarationList,
-  type WorkspaceId,
 } from "@seelen-ui/lib/types";
 import { ResourceText } from "libs/ui/react/components/ResourceText/index.tsx";
 import { Button, ColorPicker, ConfigProvider, Flex, Input, InputNumber, Select, Slider, Switch, Tooltip } from "antd";
 import type { ReactNode } from "react";
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
 import { FontSelect } from "../../../components/FontSelect/index.tsx";
 import { PluginSelect } from "./PluginSelector.tsx";
-import { WorkspaceName, WorkspaceSelector } from "./WorkspaceSelector.tsx";
+import { WallpaperCollectionSelector } from "./Wall/WallpaperCollectionSelector.tsx";
+import { WorkspaceOverrides } from "./WorkspaceOverrides.tsx";
 import { getWorkspaceWidgetConfig, patchWidgetWorkspaceConfig, removeWidgetWorkspaceConfigKey } from "./application.ts";
-import { $virtual_desktops } from "../../shared/signals.ts";
 import Compact from "antd/es/space/Compact";
 import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 
@@ -216,7 +214,7 @@ function WidgetSettingItemRenderer({
         }
       />
       {monitorId && def.allowSetByWorkspace && (
-        <WorkspaceOverrides
+        <WidgetWorkspaceOverrides
           monitorId={monitorId}
           widgetId={widgetId}
           def={def}
@@ -227,7 +225,7 @@ function WidgetSettingItemRenderer({
   );
 }
 
-interface WorkspaceOverridesProps {
+interface WidgetWorkspaceOverridesProps {
   monitorId: MonitorId;
   widgetId: WidgetId;
   def: WidgetSettingItem;
@@ -235,67 +233,29 @@ interface WorkspaceOverridesProps {
   values: Record<string, any>;
 }
 
-/**
- * Lists the workspaces overriding this setting on the monitor, plus a selector to add a new one.
- * Workspaces without an override inherit the monitor value, so they are not listed.
- */
-function WorkspaceOverrides({ monitorId, widgetId, def, values }: WorkspaceOverridesProps) {
-  const { t } = useTranslation();
-
-  const workspaces = ($virtual_desktops.value?.monitors[monitorId]?.workspaces || []).flat();
-  const overridden = workspaces.filter(
-    (workspace) => getWorkspaceWidgetConfig(monitorId, workspace.id, widgetId)?.[def.key] !== undefined,
-  );
-
-  const onAdd = (workspaceId: WorkspaceId | null) => {
-    if (workspaceId) {
-      // starts from the monitor value, so adding an override changes nothing until edited
-      patchWidgetWorkspaceConfig(monitorId, workspaceId, widgetId, {
-        [def.key]: values[def.key] ?? def.defaultValue,
-      });
-    }
-  };
-
+function WidgetWorkspaceOverrides({ monitorId, widgetId, def, values }: WidgetWorkspaceOverridesProps) {
   return (
-    <SettingsSubGroup label={t("widget.workspace_overrides")}>
-      {overridden.map((workspace) => (
-        <SettingsOption
-          key={workspace.id}
-          label={<WorkspaceName monitorId={monitorId} workspaceId={workspace.id} />}
-          action={
-            <Flex gap={8} align="center">
-              <InputRenderer
-                widgetId={widgetId}
-                def={def}
-                values={{ ...values, ...getWorkspaceWidgetConfig(monitorId, workspace.id, widgetId) }}
-                onConfigChange={(key, value) =>
-                  patchWidgetWorkspaceConfig(monitorId, workspace.id, widgetId, { [key]: value })}
-              />
-              <Tooltip title={t("widget.remove_workspace_override")}>
-                <Button
-                  danger
-                  onClick={() => removeWidgetWorkspaceConfigKey(monitorId, workspace.id, widgetId, def.key)}
-                >
-                  <Icon iconName="IoTrash" />
-                </Button>
-              </Tooltip>
-            </Flex>
-          }
+    <WorkspaceOverrides
+      monitorId={monitorId}
+      isOverridden={(workspaceId) =>
+        getWorkspaceWidgetConfig(monitorId, workspaceId, widgetId)?.[def.key] !== undefined}
+      renderInput={(workspaceId) => (
+        <InputRenderer
+          widgetId={widgetId}
+          def={def}
+          values={{ ...values, ...getWorkspaceWidgetConfig(monitorId, workspaceId, widgetId) }}
+          onConfigChange={(key, value) =>
+            patchWidgetWorkspaceConfig(monitorId, workspaceId, widgetId, { [key]: value })}
         />
-      ))}
-      <SettingsOption
-        label={t("widget.add_workspace_override")}
-        action={
-          <WorkspaceSelector
-            monitorId={monitorId}
-            value={null}
-            onSelect={onAdd}
-            exclude={overridden.map((workspace) => workspace.id)}
-            placeholder={t("widget.select_workspace")}
-          />
-        }
-      />
-    </SettingsSubGroup>
+      )}
+      onAdd={(workspaceId) => {
+        // starts from the monitor value, so adding an override changes nothing until edited
+        patchWidgetWorkspaceConfig(monitorId, workspaceId, widgetId, {
+          [def.key]: values[def.key] ?? def.defaultValue,
+        });
+      }}
+      onRemove={(workspaceId) => removeWidgetWorkspaceConfigKey(monitorId, workspaceId, widgetId, def.key)}
+    />
   );
 }
 
@@ -324,6 +284,17 @@ function InputRenderer({ widgetId, def, values, onConfigChange }: InputRenderer)
             target={widgetId}
             value={commonProps.value}
             onSelect={commonProps.onChange}
+          />
+        );
+      }
+
+      if (def.source === WidgetSelectSource.Wallpapers) {
+        return (
+          <WallpaperCollectionSelector
+            style={{ width: 200 }}
+            value={commonProps.value || null}
+            onChange={commonProps.onChange}
+            placeholder="-"
           />
         );
       }

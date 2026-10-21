@@ -329,6 +329,10 @@ pub enum WidgetSelectSubtype {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
 pub enum WidgetSelectSource {
+    #[serde(alias = "plugins")]
     /// Options are the plugins targeting this widget (option value = plugin id)
     Plugins,
+    #[serde(alias = "wallpapers")]
+    /// Options are the wallpaper collections (option value = wallpaper collection id)
+    Wallpapers,
 }
