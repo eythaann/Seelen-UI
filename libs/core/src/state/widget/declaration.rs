@@ -196,6 +196,12 @@ pub struct WidgetSettingBase<T = ()> {
     #[serde(default)]
     pub allow_set_by_monitor: bool,
 
+    /// Whether this setting can be configured per workspace in workspace-specific settings.\
+    /// Implies `allow_set_by_monitor`: a setting allowed by workspace is also configurable
+    /// per monitor even if `allow_set_by_monitor` is false, as workspaces live on monitors.
+    #[serde(default)]
+    pub allow_set_by_workspace: bool,
+
     /// Keys of settings that must be enabled for this item to be active.\
     /// Uses JavaScript truthy logic (!!value) to determine if dependency is met.
     #[serde(default)]
@@ -226,6 +232,9 @@ pub struct WidgetSettingSelect {
     /// How to render the select options
     #[serde(default)]
     pub subtype: WidgetSelectSubtype,
+    /// Optional dynamic source for the options.\
+    /// When set, the options are resolved at runtime from the source and appended to `options`.
+    pub source: Option<WidgetSelectSource>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -313,4 +322,13 @@ pub enum WidgetSelectSubtype {
     List,
     /// Render as inline buttons/tabs
     Inline,
+}
+
+/// Dynamic source used to populate the options of a select widget setting
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum WidgetSelectSource {
+    /// Options are the plugins targeting this widget (option value = plugin id)
+    Plugins,
 }

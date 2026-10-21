@@ -46,7 +46,7 @@ export function setWmEnabled(enabled: boolean) {
  * Sets the default layout
  */
 export function setWmDefaultLayout(defaultLayout: PluginId) {
-  patchWmConfig({ defaultLayout });
+  patchWmConfig({ layout: defaultLayout });
 }
 
 /**

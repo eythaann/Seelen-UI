@@ -3,7 +3,7 @@ import { plugins } from "src/ui/react/settings/state/resources";
 import { SeelenWindowManagerWidgetId } from "@seelen-ui/lib";
 import { TwmNodeKind, type TwmPluginNode } from "@seelen-ui/lib/types";
 import { SettingsGroup, SettingsOption } from "src/ui/react/settings/components/SettingsBox";
-import { Select } from "antd";
+import { PluginSelect } from "src/ui/react/settings/modules/resources/Widget/PluginSelector";
 import { ResourceText } from "libs/ui/react/components/ResourceText";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +11,7 @@ import cs from "./LayoutSelector.module.css";
 
 export function LayoutSelector() {
   const wmSettings = getWmConfig();
-  const defaultLayout = wmSettings.defaultLayout;
+  const defaultLayout = wmSettings.layout;
 
   const layouts = plugins.value.filter((plugin) => plugin.target === SeelenWindowManagerWidgetId);
   const usingLayout = layouts.find((plugin) => plugin.id === defaultLayout);
@@ -23,15 +23,10 @@ export function LayoutSelector() {
       <SettingsOption
         label={t("wm.layout")}
         action={
-          <Select
-            style={{ width: "200px" }}
+          <PluginSelect
+            target={SeelenWindowManagerWidgetId}
             value={defaultLayout}
-            options={layouts.map((layout) => ({
-              key: layout.id,
-              label: <ResourceText text={layout.metadata.displayName} />,
-              value: layout.id,
-            }))}
-            onSelect={(value) => setWmDefaultLayout(value)}
+            onSelect={setWmDefaultLayout}
           />
         }
         description={usingLayout ? <ResourceText text={usingLayout.metadata.description} /> : undefined}

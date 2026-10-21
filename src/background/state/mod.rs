@@ -6,6 +6,7 @@ use seelen_core::{
     resource::{PluginId, WidgetId},
     state::{
         WorkspaceId,
+        by_widget::GenericWidgetSettings,
         twm::TwmPlugin,
         value::{KnownPlugin, PluginValue},
     },
@@ -13,7 +14,10 @@ use seelen_core::{
 };
 use uuid::Uuid;
 
-use crate::resources::RESOURCES;
+use crate::{resources::RESOURCES, virtual_desktops::VdManager};
+
+/// Key of the layout setting declared on the window manager widget metadata
+const WM_LAYOUT_SETTING_KEY: &str = "layout";
 
 impl AppSettings {
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
@@ -74,39 +78,39 @@ impl AppSettings {
         *layout.clone()
     }
 
-    pub fn get_wm_layout_id(&self, _workspace_id: &WorkspaceId) -> PluginId {
-        let mut default = self.settings.by_widget.wm.default_layout.clone();
-        if !default.is_valid() {
-            default = "@default/wm-bspwm".into();
+    /// Priority: workspace layout → monitor layout → global layout → bspwm
+    pub fn get_wm_layout_id(&self, workspace_id: &WorkspaceId) -> PluginId {
+        let wm_id = WidgetId::known_wm();
+        let from_overrides = |settings: Option<&GenericWidgetSettings>| -> Option<PluginId> {
+            let value = settings?.rest.get(WM_LAYOUT_SETTING_KEY)?;
+            let layout_id: PluginId = value.0.as_str()?.into();
+            layout_id.is_valid().then_some(layout_id)
+        };
+
+        let monitor_config = VdManager::instance()
+            .get_monitor_of_workspace(workspace_id)
+            .and_then(|monitor_id| self.settings.monitors_v3.get(&monitor_id));
+
+        if let Some(monitor_config) = monitor_config {
+            let by_workspace = monitor_config
+                .by_workspace
+                .get(workspace_id)
+                .and_then(|config| from_overrides(config.by_widget.get(&wm_id)));
+            if let Some(layout_id) = by_workspace {
+                return layout_id;
+            }
+
+            if let Some(layout_id) = from_overrides(monitor_config.by_widget.get(&wm_id)) {
+                return layout_id;
+            }
         }
 
-        /* let Ok(id) = monitor.stable_id() else {
-            return default;
-        }; */
-
-        /* let config = match self.settings.monitors_v3.get(&id) {
-            Some(config) => config,
-            None => return default,
-        };
-
-        let workspace = match config.workspaces_v2.get(workspace_idx) {
-            Some(workspace) => workspace,
-            None => return default,
-        };
-
-        match &workspace.layout {
-            Some(layout_id) => {
-                let layout_id: PluginId = layout_id.as_str().into();
-                if layout_id.is_valid() {
-                    layout_id
-                } else {
-                    default
-                }
-            }
-            None => default,
-        } */
-
-        default
+        let default = self.settings.by_widget.wm.layout.clone();
+        if default.is_valid() {
+            default
+        } else {
+            "@default/wm-bspwm".into()
+        }
     }
 
     pub fn locale(&self) -> &String {

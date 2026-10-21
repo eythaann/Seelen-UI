@@ -268,8 +268,9 @@ pub struct WindowManagerSettings {
     pub workspace_margin: Rect,
     /// floating window settings
     pub floating: FloatingWindowSettings,
-    /// default layout
-    pub default_layout: PluginId,
+    /// layout plugin id used by default on all monitors and workspaces
+    #[serde(alias = "defaultLayout")]
+    pub layout: PluginId,
     /// window manager animations
     pub animations: WmAnimations,
     /// window manager drag behavior
@@ -367,7 +368,7 @@ impl Default for WindowManagerSettings {
             workspace_padding: 10,
             workspace_margin: Rect::default(),
             floating: FloatingWindowSettings::default(),
-            default_layout: "@default/wm-bspwm".into(),
+            layout: "@default/wm-bspwm".into(),
             animations: WmAnimations::default(),
             drag_behavior: WmDragBehavior::Sort,
             stack_bar_visibility: WmStackBarVisibility::AsNeeded,

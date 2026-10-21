@@ -17,7 +17,6 @@ import { WmDragBehavior, WmStackBarVisibility } from "@seelen-ui/lib/types";
 import { WmAnimationsSettings } from "./Animations.tsx";
 import { WmFloatingSizeSettings } from "./FloatingSize.tsx";
 import { GlobalPaddings } from "./GlobalPaddings.tsx";
-import { LayoutSelector } from "./LayoutSelector.tsx";
 
 export function WindowManagerSettings() {
   const wmConfig = getWmConfig();
@@ -45,7 +44,7 @@ export function WindowManagerSettings() {
 
   return (
     <>
-      <LayoutSelector />
+      {/* <LayoutSelector /> */}
 
       <SettingsGroup>
         <SettingsOption>

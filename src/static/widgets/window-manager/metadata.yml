@@ -6,6 +6,14 @@ metadata:
 loader: Internal
 instances: ReplicaByMonitor
 preset: Overlay
+settings:
+  - type: select
+    key: layout
+    label: !extend i18n/settings/layout.yml
+    allowSetByMonitor: true
+    allowSetByWorkspace: true
+    source: Plugins
+    defaultValue: "@default/wm-bspwm"
 shortcuts:
   # =========== MODES ===========
   - id: wm-toggle

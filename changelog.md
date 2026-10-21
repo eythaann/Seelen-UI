@@ -2,6 +2,10 @@
 
 ## [2.8.10-dev]
 
+### enhancements
+
+- allow set twm layout per monitor and per workspace.
+
 ### fix
 
 - per-app volume sessions not showing in the media volume mixer.

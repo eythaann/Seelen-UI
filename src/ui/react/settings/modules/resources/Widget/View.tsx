@@ -11,6 +11,7 @@ import {
   patchWidgetInstanceConfig as patchInstance,
   patchWidgetMonitorConfig as patchMonitor,
   resetWidgetConfig,
+  resetWidgetMonitorConfig,
 } from "./application.ts";
 import { widgets } from "../../../state/resources.ts";
 import { getDevTools } from "../../developer/application.ts";
@@ -30,37 +31,34 @@ import { Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { Note } from "../../../components/Note/index.tsx";
 import { WindowManagerSettings } from "./WindowManager/main/infra/index.tsx";
 
-export function WidgetConfiguration({
-  widgetId,
-  monitorId,
-  children,
-}: {
+interface Props {
   widgetId: WidgetId;
   monitorId?: string;
   children?: React.ReactNode;
-}) {
+}
+
+export function WidgetConfiguration({ widgetId, monitorId, children }: Props) {
+  if (monitorId) {
+    return <WidgetConfigOnMonitor widgetId={widgetId} monitorId={monitorId} />;
+  }
+  return <RootWidgetConfiguration widgetId={widgetId}>{children}</RootWidgetConfiguration>;
+}
+
+function RootWidgetConfiguration({ widgetId, children }: Omit<Props, "monitorId">) {
   const [selectedInstance, setSelectedInstance] = useState<string | null>(null);
 
   const widget = widgets.value.find((t) => t.id === widgetId);
+
   const rootConfig = getWidgetConfig(widgetId) || {
     enabled: widget?.loader !== "Legacy" && !!widget?.metadata.bundled,
   };
+  const instanceConfig = selectedInstance ? rootConfig.$instances?.[selectedInstance] : undefined;
 
-  const monitorConfig = monitorId ? getMonitorWidgetConfig(monitorId, widgetId) : undefined;
   const areDevToolsEnabled = getDevTools();
 
   const { t } = useTranslation();
 
-  if (!widget) {
-    return <div>404</div>;
-  }
-
   const onConfigChange = (key: string, value: any) => {
-    if (monitorId) {
-      patchMonitor(monitorId, widgetId, { [key]: value });
-      return;
-    }
-
     // intances `enabled` always inherit from widget root config
     if (selectedInstance && key !== "enabled") {
       patchInstance(widgetId, selectedInstance, { [key]: value });
@@ -75,14 +73,14 @@ export function WidgetConfiguration({
     value: instanceId,
   }));
 
-  const instanceConfig = selectedInstance ? rootConfig.$instances?.[selectedInstance] : undefined;
-  const config = {
+  const fullConfigPatch = {
     ...rootConfig,
     ...(instanceConfig || {}),
-    ...(monitorConfig || {}),
   };
 
-  const showToggleEnabled = !monitorId || widget.instances === "ReplicaByMonitor";
+  if (!widget) {
+    return <div>404</div>;
+  }
 
   const widgetPlugins = widget.plugins;
 
@@ -106,25 +104,23 @@ export function WidgetConfiguration({
         </SettingsGroup>
       )}
 
-      {showToggleEnabled && (
-        <SettingsGroup>
-          <SettingsOption>
-            <b>{monitorId ? t("widget.enable_for_monitor") : t("widget.enable")}</b>
-            <Switch
-              checked={config.enabled}
-              onChange={(value) => {
-                onConfigChange("enabled", value);
-              }}
-            />
-          </SettingsOption>
-          <SettingsOption>
-            <b>{t("reset_configurations")}</b>
-            <Button onClick={() => resetWidgetConfig(widgetId)}>
-              <Icon iconName="RiResetLeftLine" />
-            </Button>
-          </SettingsOption>
-        </SettingsGroup>
-      )}
+      <SettingsGroup>
+        <SettingsOption>
+          <b>{t("widget.enable")}</b>
+          <Switch
+            checked={fullConfigPatch.enabled}
+            onChange={(value) => {
+              onConfigChange("enabled", value);
+            }}
+          />
+        </SettingsOption>
+        <SettingsOption>
+          <b>{t("reset_configurations")}</b>
+          <Button onClick={() => resetWidgetConfig(widgetId)}>
+            <Icon iconName="RiResetLeftLine" />
+          </Button>
+        </SettingsOption>
+      </SettingsGroup>
 
       {widget.instances === "Multiple" && (
         <SettingsGroup>
@@ -147,10 +143,10 @@ export function WidgetConfiguration({
       )}
 
       <RenderBySettingsDeclaration
+        widgetId={widgetId}
         definitions={widget.settings}
-        values={config}
+        values={fullConfigPatch}
         onConfigChange={onConfigChange}
-        isByMonitor={!!monitorId}
       />
 
       {children}
@@ -160,11 +156,87 @@ export function WidgetConfiguration({
           <SettingsSubGroup label={<b>Raw Config</b>}>
             <pre>{JSON.stringify(rootConfig, null, 2)}</pre>
           </SettingsSubGroup>
-          {!!monitorId && (
-            <SettingsSubGroup label={<b>Raw Monitor Patch</b>}>
-              <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : "Inherited"}</pre>
-            </SettingsSubGroup>
-          )}
+        </SettingsGroup>
+      )}
+    </>
+  );
+}
+
+interface MonitorProps {
+  widgetId: WidgetId;
+  monitorId: string;
+}
+
+function WidgetConfigOnMonitor({ widgetId, monitorId }: MonitorProps) {
+  const widget = widgets.value.find((t) => t.id === widgetId);
+
+  const rootConfig = getWidgetConfig(widgetId) || {
+    enabled: widget?.loader !== "Legacy" && !!widget?.metadata.bundled,
+  };
+  const monitorConfig = getMonitorWidgetConfig(monitorId, widgetId) || { enabled: true };
+
+  const areDevToolsEnabled = getDevTools();
+
+  const { t } = useTranslation();
+
+  const onConfigChange = (key: string, value: any) => {
+    patchMonitor(monitorId, widgetId, { [key]: value });
+  };
+
+  const fullConfigPatch = {
+    ...rootConfig,
+    ...monitorConfig,
+  };
+
+  if (!widget) {
+    return <div>404</div>;
+  }
+
+  const showToggleEnabled = widget.instances === "ReplicaByMonitor";
+
+  return (
+    <>
+      <Note>
+        <ResourceDescription text={widget.metadata.description} />
+      </Note>
+
+      {showToggleEnabled && (
+        <SettingsGroup>
+          <SettingsOption>
+            <b>{t("widget.enable_for_monitor")}</b>
+            <Switch
+              checked={fullConfigPatch.enabled}
+              onChange={(value) => {
+                onConfigChange("enabled", value);
+              }}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <b>{t("reset_configurations")}</b>
+            <Button onClick={() => resetWidgetMonitorConfig(monitorId, widgetId)}>
+              <Icon iconName="RiResetLeftLine" />
+            </Button>
+          </SettingsOption>
+        </SettingsGroup>
+      )}
+
+      <RenderBySettingsDeclaration
+        widgetId={widgetId}
+        definitions={widget.settings}
+        values={fullConfigPatch}
+        onConfigChange={onConfigChange}
+        monitorId={monitorId}
+      />
+
+      {areDevToolsEnabled && (
+        <SettingsGroup>
+          <SettingsSubGroup label={<b>Root Config</b>}>
+            <pre>{JSON.stringify(rootConfig, null, 2)}</pre>
+          </SettingsSubGroup>
+
+          <SettingsSubGroup label={<b>Monitor Patch</b>}>
+            <pre>{monitorConfig ? JSON.stringify(monitorConfig, null, 2) : "Inherited"}</pre>
+          </SettingsSubGroup>
         </SettingsGroup>
       )}
     </>

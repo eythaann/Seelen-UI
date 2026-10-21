@@ -9,13 +9,17 @@ use crate::{
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-pub struct MonitorSettingsByWidget(HashMap<WidgetId, GenericWidgetSettings>);
+pub struct GenericSettingsByWidget(HashMap<WidgetId, GenericWidgetSettings>);
 
-impl MonitorSettingsByWidget {
+impl GenericSettingsByWidget {
     pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
         self.0
             .get(widget_id)
             .is_none_or(|settings| settings.enabled)
+    }
+
+    pub fn get(&self, widget_id: &WidgetId) -> Option<&GenericWidgetSettings> {
+        self.0.get(widget_id)
     }
 
     pub fn remove(&mut self, widget_id: &WidgetId) -> Option<GenericWidgetSettings> {
@@ -32,7 +36,7 @@ impl MonitorSettingsByWidget {
 #[serde(default, rename_all = "camelCase")]
 pub struct MonitorConfiguration {
     /// dictionary of settings by widget
-    pub by_widget: MonitorSettingsByWidget,
+    pub by_widget: GenericSettingsByWidget,
     /// Id of the wallpaper collection to use in this monitor.\
     /// If not set, the default wallpaper collection will be used.
     pub wallpaper_collection: Option<uuid::Uuid>,
@@ -44,6 +48,8 @@ pub struct MonitorConfiguration {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
 pub struct WorkspaceConfiguration {
+    /// dictionary of settings by widget on this workspace
+    pub by_widget: GenericSettingsByWidget,
     /// Id of the wallpaper collection to use in this workspace.\
     /// If not set, the monitor's wallpaper collection will be used.
     pub wallpaper_collection: Option<uuid::Uuid>,

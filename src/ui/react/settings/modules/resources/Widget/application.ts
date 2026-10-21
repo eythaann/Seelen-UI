@@ -1,5 +1,5 @@
 import { DEFAULT_SETTINGS, settings } from "../../../state/mod";
-import type { WidgetId } from "@seelen-ui/lib/types";
+import type { GenericWidgetSettings, WidgetId } from "@seelen-ui/lib/types";
 import { widgets } from "../../../state/resources";
 
 /**
@@ -161,4 +161,116 @@ export function patchWidgetMonitorConfig(
       },
     },
   };
+}
+
+/**
+ * Resets the monitor-specific config values for a widget (including its workspace overrides on
+ * that monitor), preserving only `enabled`. Root config is untouched, so the monitor inherits it again.
+ */
+export function resetWidgetMonitorConfig(monitorId: string, widgetId: WidgetId) {
+  const monitor = settings.value.monitorsV3[monitorId];
+  if (!monitor) {
+    return;
+  }
+
+  const { [widgetId]: current, ...byWidget } = monitor.byWidget;
+  if (current) {
+    byWidget[widgetId] = { enabled: current.enabled };
+  }
+
+  const byWorkspace = Object.fromEntries(
+    Object.entries(monitor.byWorkspace).map(([workspaceId, workspace]) => {
+      const { [widgetId]: _, ...workspaceByWidget } = workspace.byWidget;
+      return [workspaceId, { ...workspace, byWidget: workspaceByWidget }];
+    }),
+  );
+
+  settings.value = {
+    ...settings.value,
+    monitorsV3: {
+      ...settings.value.monitorsV3,
+      [monitorId]: { ...monitor, byWidget, byWorkspace },
+    },
+  };
+}
+
+/**
+ * Gets the workspace-specific configuration for a widget
+ */
+export function getWorkspaceWidgetConfig(monitorId: string, workspaceId: string, widgetId: WidgetId) {
+  return settings.value.monitorsV3[monitorId]?.byWorkspace[workspaceId]?.byWidget[widgetId];
+}
+
+/**
+ * Replaces the workspace-specific configuration for a widget, removing it when empty
+ */
+function setWidgetWorkspaceConfig(
+  monitorId: string,
+  workspaceId: string,
+  widgetId: WidgetId,
+  config: GenericWidgetSettings | undefined,
+) {
+  const monitor = settings.value.monitorsV3[monitorId];
+  if (!monitor) {
+    return;
+  }
+
+  const workspace = monitor.byWorkspace[workspaceId] || { byWidget: {}, wallpaperCollection: null };
+  const { [widgetId]: _, ...byWidget } = workspace.byWidget;
+  if (config) {
+    byWidget[widgetId] = config;
+  }
+
+  settings.value = {
+    ...settings.value,
+    monitorsV3: {
+      ...settings.value.monitorsV3,
+      [monitorId]: {
+        ...monitor,
+        byWorkspace: {
+          ...monitor.byWorkspace,
+          [workspaceId]: { ...workspace, byWidget },
+        },
+      },
+    },
+  };
+}
+
+/**
+ * Patches the workspace-specific configuration for a widget
+ */
+export function patchWidgetWorkspaceConfig(
+  monitorId: string,
+  workspaceId: string,
+  widgetId: WidgetId,
+  config: Record<string, any>,
+) {
+  const current = getWorkspaceWidgetConfig(monitorId, workspaceId, widgetId) || { enabled: true };
+  setWidgetWorkspaceConfig(monitorId, workspaceId, widgetId, { ...current, ...config });
+}
+
+/**
+ * Removes a key from the workspace-specific configuration of a widget,
+ * so the workspace inherits it again from the monitor.
+ */
+export function removeWidgetWorkspaceConfigKey(
+  monitorId: string,
+  workspaceId: string,
+  widgetId: WidgetId,
+  key: string,
+) {
+  const current = getWorkspaceWidgetConfig(monitorId, workspaceId, widgetId);
+  if (!current) {
+    return;
+  }
+
+  const { [key]: _, ...remaining } = current;
+  // `enabled` is not overridable by workspace, so only it remaining means there's nothing left
+  const isEmpty = Object.keys(remaining).every((k) => k === "enabled");
+  setWidgetWorkspaceConfig(
+    monitorId,
+    workspaceId,
+    widgetId,
+    isEmpty ? undefined : (remaining as GenericWidgetSettings),
+  );
 }

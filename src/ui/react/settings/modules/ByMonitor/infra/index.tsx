@@ -113,7 +113,7 @@ function isConfigurableByMonitor(widget: Widget) {
       stack.push(...definition.group.items);
     } else {
       // It's a setting item, check if it allows configuration by monitor
-      if (definition.allowSetByMonitor) {
+      if (definition.allowSetByMonitor || definition.allowSetByWorkspace) {
         return true;
       }
     }

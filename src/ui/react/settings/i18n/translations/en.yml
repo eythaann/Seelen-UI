@@ -445,6 +445,12 @@ widget:
   extra_instances: Extra Instances
   instance: Instance
   instances: Instances
+  add_workspace_override: Override on a workspace
+  remove_workspace_override: Remove override (inherit from monitor)
+  select_workspace: Select a workspace
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Workspace overrides
+  workspace_row: Row {{0}}
 wm:
   animations:
     duration: Animation Duration (ms)

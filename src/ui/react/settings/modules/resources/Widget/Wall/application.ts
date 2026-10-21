@@ -148,7 +148,8 @@ export function setWorkspaceWallpaperCollection(
         byWorkspace: {
           ...(monitor.byWorkspace || {}),
           [workspaceId]: {
-            ...(monitor.byWorkspace?.[workspaceId] || {}),
+            byWidget: {},
+            ...monitor.byWorkspace?.[workspaceId],
             wallpaperCollection: collectionId,
           },
         },
