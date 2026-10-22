@@ -87,6 +87,29 @@ export function WallSettings() {
           }
         />
         <SettingsOption
+          label={<b>{t("wall.multimonitor_behaviour")}</b>}
+          action={
+            <Select
+              style={{ width: 200 }}
+              value={wall.multimonitorBehaviour}
+              onChange={(value) => patchWallConfig({ multimonitorBehaviour: value })}
+              options={[
+                {
+                  label: t("wall.per_monitor"),
+                  value: MultimonitorBehaviour.PerMonitor,
+                },
+                {
+                  label: t("wall.extend"),
+                  value: MultimonitorBehaviour.Extend,
+                },
+              ]}
+            />
+          }
+        />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption
           label={<b>{t("wall.coverage_pause_threshold")}</b>}
           action={
             <InputNumber
@@ -106,22 +129,11 @@ export function WallSettings() {
           }
         />
         <SettingsOption
-          label={<b>{t("wall.multimonitor_behaviour")}</b>}
+          label={<b>{t("wall.show_paused_message")}</b>}
           action={
-            <Select
-              style={{ width: 200 }}
-              value={wall.multimonitorBehaviour}
-              onChange={(value) => patchWallConfig({ multimonitorBehaviour: value })}
-              options={[
-                {
-                  label: t("wall.per_monitor"),
-                  value: MultimonitorBehaviour.PerMonitor,
-                },
-                {
-                  label: t("wall.extend"),
-                  value: MultimonitorBehaviour.Extend,
-                },
-              ]}
+            <Switch
+              value={wall.showPausedMessage}
+              onChange={(showPausedMessage) => patchWallConfig({ showPausedMessage })}
             />
           }
         />

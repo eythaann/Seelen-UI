@@ -5,6 +5,7 @@
 ### enhancements
 
 - allow set twm layout per monitor and per workspace.
+- allow hide pause message on wallpapers.
 
 ### fix
 

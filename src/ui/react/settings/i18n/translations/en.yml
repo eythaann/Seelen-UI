@@ -367,6 +367,7 @@ wall:
   saturation: Saturation
   seconds: seconds
   select_collection: Select Collection
+  show_paused_message: Show paused message
   thumbnail_generation_complete: Thumbnail Generation Complete
   thumbnail_generation_finished: Thumbnail generation has finished successfully
   use_accent_color: Use wallpaper accent color

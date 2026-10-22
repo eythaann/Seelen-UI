@@ -44,6 +44,13 @@
   const slotAWallpaper = $derived(gState.findWallpaper(slotAWallpaperId));
   const slotBWallpaper = $derived(gState.findWallpaper(slotBWallpaperId));
 
+  const slotAWallpaperConfig = $derived(
+    slotAWallpaper ? gState.settings.byWallpaper[slotAWallpaper.id] : undefined,
+  );
+  const slotBWallpaperConfig = $derived(
+    slotBWallpaper ? gState.settings.byWallpaper[slotBWallpaper.id] : undefined,
+  );
+
   // svelte-ignore state_referenced_locally
   let lastActiveRef: { value: string | null } = { value: wallpaperId };
 
@@ -108,6 +115,12 @@
     });
   });
 
+  const pausedMessage = $derived(
+    gState.settings.showPausedMessage && gState.performanceMode !== "Disabled"
+      ? $t("paused_by_performance_mode")
+      : undefined,
+  );
+
   const relativeRect = $derived(monitors.calculateDesktopRelativeRect(monitor.rect));
   const left = $derived(extended ? "0" : `${relativeRect.left}px`);
   const top = $derived(extended ? "0" : `${relativeRect.top}px`);
@@ -117,6 +130,12 @@
   const height = $derived(
     extended ? "100%" : `${(relativeRect.bottom - relativeRect.top) / monitor.scaleFactor}px`,
   );
+
+  function onSlotLoad(slot: "a" | "b") {
+    if (slot === activeSlot) {
+      currentWasLoaded = true;
+    }
+  }
 </script>
 
 <div
@@ -133,14 +152,12 @@
     <div class="slot" style:z-index={activeSlot === "a" ? 2 : 1}>
       <Wallpaper
         definition={slotAWallpaper}
-        config={slotAWallpaper ? gState.settings.byWallpaper[slotAWallpaper.id] : undefined}
-        onLoad={activeSlot === "a" ? () => (currentWasLoaded = true) : undefined}
+        config={slotAWallpaperConfig}
+        onLoad={() => onSlotLoad("a")}
         paused={slotAOut || gState.isPaused(monitor.id)}
         muted={slotAOut || gState.muted || !monitor.isPrimary}
         out={slotAOut}
-        pausedMessage={activeSlot === "a" && gState.performanceMode !== "Disabled"
-          ? $t("paused_by_performance_mode")
-          : undefined}
+        {pausedMessage}
       />
     </div>
   {/if}
@@ -149,14 +166,12 @@
     <div class="slot" style:z-index={activeSlot === "b" ? 2 : 1}>
       <Wallpaper
         definition={slotBWallpaper}
-        config={slotBWallpaper ? gState.settings.byWallpaper[slotBWallpaper.id] : undefined}
-        onLoad={activeSlot === "b" ? () => (currentWasLoaded = true) : undefined}
+        config={slotBWallpaperConfig}
+        onLoad={() => onSlotLoad("b")}
         paused={slotBOut || gState.isPaused(monitor.id)}
         muted={slotBOut || gState.muted || !monitor.isPrimary}
         out={slotBOut}
-        pausedMessage={activeSlot === "b" && gState.performanceMode !== "Disabled"
-          ? $t("paused_by_performance_mode")
-          : undefined}
+        {pausedMessage}
       />
     </div>
   {/if}

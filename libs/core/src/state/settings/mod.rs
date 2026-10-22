@@ -408,6 +408,8 @@ pub struct SeelenWallSettings {
     pub use_accent_color: bool,
     /// fraction of monitor area that must be covered by windows before pausing wallpaper (0.5–1.0)
     pub coverage_pause_threshold: f64,
+    /// whether to show a message over the wallpaper when it is paused by performance mode
+    pub show_paused_message: bool,
     /// deprecated, this field will be removed on v3
     #[serde(alias = "backgroundsV2")]
     pub deprecated_bgs: Option<Vec<WallpaperId>>,
@@ -424,6 +426,7 @@ impl Default for SeelenWallSettings {
             multimonitor_behaviour: MultimonitorBehaviour::PerMonitor,
             use_accent_color: false,
             coverage_pause_threshold: 0.8,
+            show_paused_message: true,
             deprecated_bgs: None,
         }
     }
