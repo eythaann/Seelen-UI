@@ -61,6 +61,8 @@ export class Widget extends WidgetBasics {
     ready: false,
   };
 
+  private toolbarTriggerInProgress = false;
+
   private constructor(widget: IWidget) {
     super();
 
@@ -101,20 +103,40 @@ export class Widget extends WidgetBasics {
 
   /** Will apply the recommended settings for a popup widget */
   private applyPopupPreset(): void {
-    this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
-      if (desiredPosition) {
-        await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
+    this.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) => {
+      const toolbarToggle = customArgs?.__seelenToolbarToggle === true;
+      if (toolbarToggle && this.toolbarTriggerInProgress) {
+        return;
       }
-      await this.show();
-      await this.focus();
-      // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
-      // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
-      // can arrive before the trigger fires and roll back the optimistic size to an intermediate
-      // value. If the trigger then repositions with that stale size its SetSelfPosition call
-      // lands in the Win32 queue after the correct resize, overwriting it. Running execute()
-      // here detects the remaining diff and issues a corrective resize + position adjustment.
-      if (this.autoSize.enabled) {
-        await this.executeAutoSize();
+
+      if (toolbarToggle) {
+        this.toolbarTriggerInProgress = true;
+      }
+      try {
+        // A second click on the same toolbar item is an explicit close. Do not
+        // show/focus the popup again and race its focus-loss hide handler.
+        if (toolbarToggle && await this.window.isVisible()) {
+          await this.hide();
+          return;
+        }
+
+        if (desiredPosition) {
+          await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
+        }
+        await this.show();
+        await this.focus();
+        // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
+        // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
+        // can arrive before the trigger fires and roll back the optimistic size to an intermediate
+        // value. Running execute() here detects the remaining diff and issues a corrective
+        // resize + position adjustment.
+        if (this.autoSize.enabled) {
+          await this.executeAutoSize();
+        }
+      } finally {
+        if (toolbarToggle) {
+          this.toolbarTriggerInProgress = false;
+        }
       }
     });
   }
