@@ -378,6 +378,7 @@ wall:
   saturation: Заситеност
   seconds: секунди
   select_collection: Изберете Колекција
+  show_paused_message: Прикажи паузирана порака
   thumbnail_generation_complete: Генерирањето сликички е завршено
   thumbnail_generation_finished: Генерирањето сликички заврши успешно
   use_accent_color: Користете боја на акцент на позадина

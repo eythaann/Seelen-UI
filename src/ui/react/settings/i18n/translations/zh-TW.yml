@@ -334,6 +334,7 @@ wall:
   saturation: 飽和
   seconds: 秒
   select_collection: 選擇系列
+  show_paused_message: 顯示暫停的訊息
   thumbnail_generation_complete: 縮圖生成完成
   thumbnail_generation_finished: 縮圖生成已成功完成
   use_accent_color: 使用桌布強調色

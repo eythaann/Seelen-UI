@@ -382,6 +382,7 @@ wall:
   saturation: SATION
   seconds: sekan
   select_collection: Dooro Ururinta
+  show_paused_message: Muuji fariinta hakad
   thumbnail_generation_complete: Jiilka thumbnail oo Dhamaystiran
   thumbnail_generation_finished: Jiilkii thumbnail waxa uu u dhamaaday si guul leh
   use_accent_color: Isticmaal midabka lahjadda gidaarka

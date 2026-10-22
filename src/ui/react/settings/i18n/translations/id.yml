@@ -378,6 +378,7 @@ wall:
   saturation: Kejenuhan
   seconds: detik
   select_collection: Pilih Koleksi
+  show_paused_message: Tampilkan pesan yang dijeda
   thumbnail_generation_complete: Pembuatan Gambar Kecil Selesai
   thumbnail_generation_finished: Pembuatan thumbnail telah selesai dengan sukses
   use_accent_color: Gunakan warna aksen wallpaper

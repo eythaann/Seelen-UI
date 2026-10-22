@@ -370,6 +370,7 @@ wall:
   saturation: Độ bão hòa màu
   seconds: giây
   select_collection: Chọn bộ sưu tập
+  show_paused_message: Hiển thị tin nhắn bị tạm dừng
   thumbnail_generation_complete: Tạo ảnh thu nhỏ hoàn tất
   thumbnail_generation_finished: Đã tạo xong ảnh thu nhỏ thành công
   use_accent_color: Lấy màu chủ đạo từ hình nền

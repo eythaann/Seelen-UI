@@ -377,6 +377,7 @@ wall:
   saturation: संतृप्ति
   seconds: सेकेन्ड
   select_collection: संग्रह चयन गर्नुहोस्
+  show_paused_message: रोकिएको सन्देश देखाउनुहोस्
   thumbnail_generation_complete: थम्बनेल जेनेरेसन पूरा भयो
   thumbnail_generation_finished: थम्बनेल उत्पादन सफलतापूर्वक समाप्त भयो
   use_accent_color: वालपेपर उच्चारण रंग प्रयोग गर्नुहोस्

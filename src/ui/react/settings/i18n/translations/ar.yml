@@ -361,6 +361,7 @@ wall:
   saturation: التشبع
   seconds: ثوان
   select_collection: حدد المجموعة
+  show_paused_message: إظهار الرسالة المتوقفة مؤقتًا
   thumbnail_generation_complete: اكتمل إنشاء الصورة المصغرة
   thumbnail_generation_finished: تم الانتهاء من إنشاء الصور المصغرة بنجاح
   use_accent_color: استخدام لون لهجة ورق الحائط

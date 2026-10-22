@@ -370,6 +370,7 @@ wall:
   saturation: اشباع
   seconds: ثانیه
   select_collection: مجموعه را انتخاب کنید
+  show_paused_message: نمایش پیام متوقف شده
   thumbnail_generation_complete: تولید ریز عکسها کامل شد
   thumbnail_generation_finished: تولید تصویر بند انگشتی با موفقیت به پایان رسید
   use_accent_color: از رنگ تاکیدی کاغذ دیواری استفاده کنید

@@ -376,6 +376,7 @@ wall:
   saturation: Насыщенность
   seconds: секунды
   select_collection: Выбрать коллекцию
+  show_paused_message: Показать приостановленное сообщение
   thumbnail_generation_complete: Создание миниатюр завершено
   thumbnail_generation_finished: Создание миниатюр успешно завершено
   use_accent_color: Используйте акцентный цвет обоев

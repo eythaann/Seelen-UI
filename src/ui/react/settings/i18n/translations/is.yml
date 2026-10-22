@@ -368,6 +368,7 @@ wall:
   saturation: Mettun
   seconds: sekúndur
   select_collection: Veldu Safn
+  show_paused_message: Sýna hlé á skeyti
   thumbnail_generation_complete: Smámyndagerð lokið
   thumbnail_generation_finished: Smámyndagerð hefur lokið með góðum árangri
   use_accent_color: Notaðu veggfóður hreim lit

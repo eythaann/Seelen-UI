@@ -377,6 +377,7 @@ wall:
   saturation: Насиченість
   seconds: секунди
   select_collection: Виберіть Колекція
+  show_paused_message: Показати призупинене повідомлення
   thumbnail_generation_complete: Генерація ескізів завершена
   thumbnail_generation_finished: Створення мініатюри успішно завершено
   use_accent_color: Використовуйте акцентний колір шпалер

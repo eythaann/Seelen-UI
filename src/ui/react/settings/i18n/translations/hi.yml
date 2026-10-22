@@ -379,6 +379,7 @@ wall:
   saturation: परिपूर्णता
   seconds: सेकंड
   select_collection: संग्रह का चयन करें
+  show_paused_message: रुका हुआ संदेश दिखाएँ
   thumbnail_generation_complete: थंबनेल जनरेशन पूर्ण
   thumbnail_generation_finished: थंबनेल पीढ़ी सफलतापूर्वक समाप्त हो गई है
   use_accent_color: वॉलपेपर एक्सेंट रंग का प्रयोग करें

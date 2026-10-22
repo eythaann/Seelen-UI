@@ -365,6 +365,7 @@ wall:
   saturation: تړل
   seconds: ثانیې
   select_collection: ټولګه وټاکئ
+  show_paused_message: ځنډول شوی پیغام وښایاست
   thumbnail_generation_complete: د تمبیل تولید بشپړ شو
   thumbnail_generation_finished: د تمبیل تولید په بریالیتوب سره پای ته ورسید
   use_accent_color: د وال پیپر تلفظ رنګ وکاروئ

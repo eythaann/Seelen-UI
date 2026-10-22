@@ -380,6 +380,7 @@ wall:
   saturation: Насищане
   seconds: секунди
   select_collection: Изберете Колекция
+  show_paused_message: Показване на съобщението на пауза
   thumbnail_generation_complete: Генерирането на миниатюри е завършено
   thumbnail_generation_finished: Генерирането на миниатюри завърши успешно
   use_accent_color: Използвайте акцентен цвят на тапета

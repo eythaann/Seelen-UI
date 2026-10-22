@@ -374,6 +374,7 @@ wall:
   saturation: Metning
   seconds: sekunder
   select_collection: Velg Samling
+  show_paused_message: Vis midlertidig stoppet melding
   thumbnail_generation_complete: Generering av miniatyrbilder er fullført
   thumbnail_generation_finished: Generering av miniatyrbilder er fullført
   use_accent_color: Bruk bakgrunnsfarge

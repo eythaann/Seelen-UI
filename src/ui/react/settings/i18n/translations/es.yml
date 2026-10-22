@@ -384,6 +384,7 @@ wall:
   saturation: Saturación
   seconds: segundos
   select_collection: Seleccionar colección
+  show_paused_message: Mostrar mensaje pausado
   thumbnail_generation_complete: Generación de miniaturas completa
   thumbnail_generation_finished: La generación de miniaturas ha finalizado correctamente.
   use_accent_color: Utilice un color de acento en el papel tapiz

@@ -373,6 +373,7 @@ wall:
   saturation: Mättnad
   seconds: sekunder
   select_collection: Välj Samling
+  show_paused_message: Visa pausat meddelande
   thumbnail_generation_complete: Generering av miniatyrbilder är klar
   thumbnail_generation_finished: Generering av miniatyrbilder har slutförts framgångsrikt
   use_accent_color: Använd tapetaccentfärg

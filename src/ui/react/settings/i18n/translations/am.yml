@@ -355,6 +355,7 @@ wall:
   saturation: ማሞቂያ
   seconds: ሰከንዶች
   select_collection: ስብስብ ይምረጡ
+  show_paused_message: ባለበት የቆመ መልእክት አሳይ
   thumbnail_generation_complete: ድንክዬ ማመንጨት ተጠናቋል
   thumbnail_generation_finished: ድንክዬ ማመንጨት በተሳካ ሁኔታ ተጠናቅቋል
   use_accent_color: የግድግዳ ወረቀት የአነጋገር ቀለም ይጠቀሙ

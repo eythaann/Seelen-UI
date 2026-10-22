@@ -362,6 +362,7 @@ wall:
   saturation: ອີ່ມຕົວ
   seconds: ວິນາທີ
   select_collection: ເລືອກຄໍເລັກຊັນ
+  show_paused_message: ສະແດງຂໍ້ຄວາມທີ່ຢຸດຊົ່ວຄາວ
   thumbnail_generation_complete: ການສ້າງຮູບຕົວຢ່າງສໍາເລັດ
   thumbnail_generation_finished: ການສ້າງຮູບຕົວຢ່າງສຳເລັດແລ້ວ
   use_accent_color: ໃຊ້ສີທີ່ເນັ້ນໃສ່ຮູບພື້ນຫຼັງ

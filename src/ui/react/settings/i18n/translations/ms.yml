@@ -375,6 +375,7 @@ wall:
   saturation: Ketepuan
   seconds: saat
   select_collection: Pilih Koleksi
+  show_paused_message: Tunjukkan mesej yang dijeda
   thumbnail_generation_complete: Penjanaan Thumbnail Selesai
   thumbnail_generation_finished: Penjanaan imej kecil telah berjaya diselesaikan
   use_accent_color: Gunakan warna aksen kertas dinding

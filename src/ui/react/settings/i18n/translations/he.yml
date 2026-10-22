@@ -356,6 +356,7 @@ wall:
   saturation: רִוּוּי
   seconds: שניות
   select_collection: בחר אוסף
+  show_paused_message: הצג הודעה מושהית
   thumbnail_generation_complete: יצירת תמונות ממוזערות הושלמה
   thumbnail_generation_finished: יצירת התמונות הממוזערות הסתיים בהצלחה
   use_accent_color: השתמש בצבע מבטא טפט

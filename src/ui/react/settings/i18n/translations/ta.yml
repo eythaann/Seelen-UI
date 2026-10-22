@@ -382,6 +382,7 @@ wall:
   saturation: செறிவு
   seconds: விநாடிகள்
   select_collection: சேகரிப்பைத் தேர்ந்தெடுக்கவும்
+  show_paused_message: இடைநிறுத்தப்பட்ட செய்தியைக் காட்டு
   thumbnail_generation_complete: சிறுபட உருவாக்கம் முடிந்தது
   thumbnail_generation_finished: சிறுபட உருவாக்கம் வெற்றிகரமாக முடிந்தது
   use_accent_color: வால்பேப்பர் உச்சரிப்பு வண்ணத்தைப் பயன்படுத்தவும்

@@ -376,6 +376,7 @@ wall:
   saturation: Saturação
   seconds: segundas
   select_collection: Selecione a coleção
+  show_paused_message: Mostrar mensagem pausada
   thumbnail_generation_complete: Geração de miniaturas concluída
   thumbnail_generation_finished: A geração da miniatura foi concluída com sucesso
   use_accent_color: Use a cor de destaque do papel de parede

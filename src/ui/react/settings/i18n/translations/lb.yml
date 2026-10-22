@@ -375,6 +375,7 @@ wall:
   saturation: Saturatioun
   seconds: Sekonnen
   select_collection: Wielt Kollektioun
+  show_paused_message: Pauséiert Message weisen
   thumbnail_generation_complete: Thumbnail Generatioun Komplett
   thumbnail_generation_finished: Thumbnail Generatioun ass erfollegräich ofgeschloss
   use_accent_color: Benotzt Tapeten Akzentfaarf

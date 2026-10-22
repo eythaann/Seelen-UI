@@ -373,6 +373,7 @@ wall:
   saturation: Doydurma
   seconds: saniyə
   select_collection: Kolleksiya seçin
+  show_paused_message: Pauza edilmiş mesajı göstərin
   thumbnail_generation_complete: Miniatürlərin yaradılması tamamlandı
   thumbnail_generation_finished: Miniatür yaradılması uğurla tamamlandı
   use_accent_color: Divar kağızı vurğu rəngindən istifadə edin

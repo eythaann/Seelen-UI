@@ -374,6 +374,7 @@ wall:
   saturation: Цэнгэхны бэлтгэл, төгсөг
   seconds: хоёр цаг
   select_collection: Цуглуулга сонгоно уу
+  show_paused_message: Түр зогсоосон мессежийг харуулах
   thumbnail_generation_complete: Өнгөц зураг үүсгэж дууслаа
   thumbnail_generation_finished: Өнгөц зураг үүсгэх ажиллагаа амжилттай дууслаа
   use_accent_color: Ханын цаасны өргөлтийн өнгийг ашигла

@@ -370,6 +370,7 @@ wall:
   saturation: ផាបថបតរ
   seconds: វិនាទី
   select_collection: ជ្រើសរើសបណ្តុំ
+  show_paused_message: បង្ហាញសារដែលបានផ្អាក
   thumbnail_generation_complete: ការបង្កើតរូបភាពតូចបានបញ្ចប់
   thumbnail_generation_finished: ការបង្កើតរូបភាពតូចបានបញ្ចប់ដោយជោគជ័យ
   use_accent_color: ប្រើពណ៌សង្កត់សំឡេងផ្ទាំងរូបភាព

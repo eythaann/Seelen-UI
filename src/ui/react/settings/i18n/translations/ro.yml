@@ -379,6 +379,7 @@ wall:
   saturation: Saturație
   seconds: secunde
   select_collection: Selectați Colecție
+  show_paused_message: Afișează mesajul întrerupt
   thumbnail_generation_complete: Generarea miniaturii finalizată
   thumbnail_generation_finished: Generarea miniaturilor s-a încheiat cu succes
   use_accent_color: Utilizați culoarea de accent pentru tapet

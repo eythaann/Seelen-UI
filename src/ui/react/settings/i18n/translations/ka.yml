@@ -374,6 +374,7 @@ wall:
   saturation: გაჯერება
   seconds: წამები
   select_collection: აირჩიეთ კოლექცია
+  show_paused_message: შეჩერებული შეტყობინების ჩვენება
   thumbnail_generation_complete: მინიატურების გენერაცია დასრულებულია
   thumbnail_generation_finished: ესკიზების შექმნა წარმატებით დასრულდა
   use_accent_color: გამოიყენეთ ფონის აქცენტის ფერი

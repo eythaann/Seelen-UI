@@ -373,6 +373,7 @@ wall:
   saturation: Dirlawnder
   seconds: eiliadau
   select_collection: Dewiswch Casgliad
+  show_paused_message: Dangos neges sydd wedi'i seibio
   thumbnail_generation_complete: Cynhyrchu Mân-luniau Wedi'i Gyflawni
   thumbnail_generation_finished: Mae cynhyrchu mân-luniau wedi gorffen yn llwyddiannus
   use_accent_color: Defnyddiwch liw acen papur wal

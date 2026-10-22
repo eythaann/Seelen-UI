@@ -372,6 +372,7 @@ wall:
   saturation: Mætning
   seconds: sekunder
   select_collection: Vælg Samling
+  show_paused_message: Vis pauseret besked
   thumbnail_generation_complete: Generering af miniaturebilleder er fuldført
   thumbnail_generation_finished: Generering af miniaturebilleder er afsluttet
   use_accent_color: Brug tapet accentfarve

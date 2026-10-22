@@ -372,6 +372,7 @@ wall:
   saturation: স্যাচুরেশন
   seconds: সেকেন্ড
   select_collection: সংগ্রহ নির্বাচন করুন
+  show_paused_message: বিরতি দেওয়া বার্তা দেখান
   thumbnail_generation_complete: থাম্বনেইল জেনারেশন সম্পূর্ণ
   thumbnail_generation_finished: থাম্বনেইল জেনারেশন সফলভাবে শেষ হয়েছে
   use_accent_color: ওয়ালপেপার অ্যাকসেন্ট রঙ ব্যবহার করুন

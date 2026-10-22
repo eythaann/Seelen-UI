@@ -371,6 +371,7 @@ wall:
   saturation: Küllastumine
   seconds: sekundid
   select_collection: Valige Kogu
+  show_paused_message: Kuva peatatud sõnum
   thumbnail_generation_complete: Pisipiltide genereerimine on lõpetatud
   thumbnail_generation_finished: Pisipiltide genereerimine on edukalt lõppenud
   use_accent_color: Kasutage tapeedi aktsentvärvi

@@ -382,6 +382,7 @@ wall:
   saturation: To'yinganlik
   seconds: soniya
   select_collection: To'plamni tanlang
+  show_paused_message: Pauza qilingan xabarni ko'rsatish
   thumbnail_generation_complete: Eskiz yaratish tugallandi
   thumbnail_generation_finished: Eskiz yaratish muvaffaqiyatli yakunlandi
   use_accent_color: Fon rasmi aksent rangidan foydalaning

@@ -383,6 +383,7 @@ wall:
   saturation: Nasycenie
   seconds: sekund
   select_collection: Wybierz opcję Kolekcja
+  show_paused_message: Pokaż wstrzymaną wiadomość
   thumbnail_generation_complete: Generowanie miniatur zostało ukończone
   thumbnail_generation_finished: Generowanie miniatury zakończyło się pomyślnie
   use_accent_color: Użyj koloru akcentującego tapetę

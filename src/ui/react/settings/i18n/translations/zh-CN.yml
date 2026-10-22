@@ -330,6 +330,7 @@ wall:
   saturation: 饱和度
   seconds: 秒
   select_collection: 选择集合
+  show_paused_message: 显示暂停的消息
   thumbnail_generation_complete: 缩略图生成完成
   thumbnail_generation_finished: 缩略图已成功生成
   use_accent_color: 使用壁纸强调色

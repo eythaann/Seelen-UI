@@ -377,6 +377,7 @@ wall:
   saturation: Zasićenost
   seconds: sekundi
   select_collection: Odaberite Zbirka
+  show_paused_message: Prikaži pauziranu poruku
   thumbnail_generation_complete: Generiranje sličica dovršeno
   thumbnail_generation_finished: Generiranje sličica je uspješno završeno
   use_accent_color: Koristite boju tapeta

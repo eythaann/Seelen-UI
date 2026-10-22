@@ -376,6 +376,7 @@ wall:
   saturation: Հագեցում
   seconds: վայրկյան
   select_collection: Ընտրեք Հավաքածու
+  show_paused_message: Ցույց տալ դադարեցված հաղորդագրությունը
   thumbnail_generation_complete: Մանրապատկերների ստեղծումն ավարտված է
   thumbnail_generation_finished: Մանրապատկերների ստեղծումը հաջողությամբ ավարտվեց
   use_accent_color: Օգտագործեք պաստառի շեշտադրման գույնը

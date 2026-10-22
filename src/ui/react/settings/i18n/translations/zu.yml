@@ -383,6 +383,7 @@ wall:
   saturation: Ukutacwaba
   seconds: imisa
   select_collection: Khetha Iqoqo
+  show_paused_message: Bonisa umlayezo omisiwe
   thumbnail_generation_complete: Ukukhiqizwa Kwesithonjana Kuqediwe
   thumbnail_generation_finished: Ukwenziwa kwezithonjana kuqede ngempumelelo
   use_accent_color: Sebenzisa umbala wokugcizelela isithombe sangemuva

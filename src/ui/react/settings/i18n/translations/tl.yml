@@ -385,6 +385,7 @@ wall:
   saturation: Saturation
   seconds: segundo
   select_collection: Piliin ang Koleksyon
+  show_paused_message: Ipakita ang naka-pause na mensahe
   thumbnail_generation_complete: Kumpleto na ang Pagbuo ng Thumbnail
   thumbnail_generation_finished: Matagumpay na natapos ang pagbuo ng thumbnail
   use_accent_color: Gumamit ng kulay ng accent ng wallpaper

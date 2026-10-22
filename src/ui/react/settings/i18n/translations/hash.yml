@@ -291,6 +291,7 @@ wall.random: d4ad7290
 wall.saturation: 58b9d2c8
 wall.seconds: bb9e64c1
 wall.select_collection: 6b9945ba
+wall.show_paused_message: 3a646a44
 wall.thumbnail_generation_complete: 3c5150e0
 wall.thumbnail_generation_finished: c0572627
 wall.use_accent_color: 97fa88a8

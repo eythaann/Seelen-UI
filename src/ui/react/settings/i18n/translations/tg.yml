@@ -378,6 +378,7 @@ wall:
   saturation: Соф
   seconds: сонияҳо
   select_collection: Коллексияро интихоб кунед
+  show_paused_message: Паёми таваққуфшударо нишон диҳед
   thumbnail_generation_complete: Насли тасвири ангора анҷом ёфт
   thumbnail_generation_finished: Насли эскиз бомуваффақият анҷом ёфт
   use_accent_color: Ранги аксенти деворро истифода баред

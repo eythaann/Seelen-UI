@@ -383,6 +383,7 @@ wall:
   saturation: Saturazione
   seconds: secondi
   select_collection: Seleziona Raccolta
+  show_paused_message: Mostra messaggio in pausa
   thumbnail_generation_complete: Generazione delle miniature completata
   thumbnail_generation_finished: La generazione delle miniature è stata completata correttamente
   use_accent_color: Usa il colore in risalto della carta da parati

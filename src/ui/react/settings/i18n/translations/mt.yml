@@ -378,6 +378,7 @@ wall:
   saturation: Saturazzjoni
   seconds: sekondi
   select_collection: Agħżel Ġbir
+  show_paused_message: Uri messaġġ imwaqqaf
   thumbnail_generation_complete: Ġenerazzjoni Thumbnail Tlesti
   thumbnail_generation_finished: Il-ġenerazzjoni ta' miniatures spiċċat b'suċċess
   use_accent_color: Uża l-kulur tal-aċċent tal-wallpaper

@@ -382,6 +382,7 @@ wall:
   saturation: Saturation
   seconds: secondes
   select_collection: Sélectionnez une collection
+  show_paused_message: Afficher le message en pause
   thumbnail_generation_complete: Génération de vignettes terminée
   thumbnail_generation_finished: La génération des vignettes s'est terminée avec succès
   use_accent_color: Utiliser la couleur d’accent du papier peint

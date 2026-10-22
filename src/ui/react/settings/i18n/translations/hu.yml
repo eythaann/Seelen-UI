@@ -380,6 +380,7 @@ wall:
   saturation: Telítettség
   seconds: másodpercek
   select_collection: Válassza a Gyűjtemény lehetőséget
+  show_paused_message: Szüneteltetett üzenet megjelenítése
   thumbnail_generation_complete: A miniatűrök generálása kész
   thumbnail_generation_finished: A miniatűrök generálása sikeresen befejeződött
   use_accent_color: Használjon tapéta kiemelő színt

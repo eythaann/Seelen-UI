@@ -374,6 +374,7 @@ wall:
   saturation: سنترپتی
   seconds: سیکنڈ
   select_collection: مجموعہ منتخب کریں
+  show_paused_message: روکا ہوا پیغام دکھائیں۔
   thumbnail_generation_complete: تھمب نیل جنریشن مکمل
   thumbnail_generation_finished: تھمب نیل جنریشن نے کامیابی کے ساتھ ختم کیا ہے
   use_accent_color: وال پیپر کے لہجے کا رنگ استعمال کریں۔

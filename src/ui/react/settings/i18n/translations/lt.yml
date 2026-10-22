@@ -374,6 +374,7 @@ wall:
   saturation: Sodrumas
   seconds: sekundės
   select_collection: Pasirinkite Kolekcija
+  show_paused_message: Rodyti pristabdytą pranešimą
   thumbnail_generation_complete: Miniatiūrų generavimas baigtas
   thumbnail_generation_finished: Miniatiūrų generavimas sėkmingai baigtas
   use_accent_color: Naudokite tapetų akcento spalvą

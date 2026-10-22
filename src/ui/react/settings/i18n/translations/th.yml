@@ -359,6 +359,7 @@ wall:
   saturation: ความอิ่มตัว
   seconds: ไม่กี่วินาที
   select_collection: เลือกคอลเลกชัน
+  show_paused_message: แสดงข้อความที่หยุดชั่วคราว
   thumbnail_generation_complete: การสร้างภาพขนาดย่อเสร็จสมบูรณ์
   thumbnail_generation_finished: การสร้างภาพขนาดย่อเสร็จสิ้นเรียบร้อยแล้ว
   use_accent_color: ใช้สีเน้นวอลเปเปอร์

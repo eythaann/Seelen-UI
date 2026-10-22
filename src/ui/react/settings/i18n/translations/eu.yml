@@ -375,6 +375,7 @@ wall:
   saturation: Saturazio
   seconds: bizkarbete
   select_collection: Hautatu Bilduma
+  show_paused_message: Erakutsi pausatutako mezua
   thumbnail_generation_complete: Miniaturak sortzea amaituta
   thumbnail_generation_finished: Miniaturak sortzea ondo amaitu da
   use_accent_color: Erabili horma-paperaren azentu kolorea

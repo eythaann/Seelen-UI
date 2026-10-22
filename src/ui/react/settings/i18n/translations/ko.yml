@@ -344,6 +344,7 @@ wall:
   saturation: 채도
   seconds: 초
   select_collection: 컬렉션 선택
+  show_paused_message: 일시중지된 메시지 표시
   thumbnail_generation_complete: 썸네일 생성 완료
   thumbnail_generation_finished: 썸네일 생성이 성공적으로 완료되었습니다.
   use_accent_color: 벽지 강조 색상 사용

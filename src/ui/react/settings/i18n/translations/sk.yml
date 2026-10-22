@@ -379,6 +379,7 @@ wall:
   saturation: Nasýtenie
   seconds: sekundy
   select_collection: Vyberte položku Zbierka
+  show_paused_message: Zobraziť pozastavenú správu
   thumbnail_generation_complete: Generovanie miniatúr je dokončené
   thumbnail_generation_finished: Generovanie miniatúr bolo úspešne ukončené
   use_accent_color: Použite akcentovú farbu tapety

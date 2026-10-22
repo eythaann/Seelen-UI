@@ -375,6 +375,7 @@ wall:
   saturation: Piesātinājums
   seconds: sekundes
   select_collection: Atlasiet Kolekcija
+  show_paused_message: Rādīt apturēto ziņojumu
   thumbnail_generation_complete: Sīktēlu ģenerēšana ir pabeigta
   thumbnail_generation_finished: Sīktēlu ģenerēšana ir veiksmīgi pabeigta
   use_accent_color: Izmantojiet tapetes akcenta krāsu

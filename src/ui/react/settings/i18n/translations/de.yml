@@ -385,6 +385,7 @@ wall:
   saturation: Sättigung
   seconds: Sekunden
   select_collection: Wählen Sie Sammlung
+  show_paused_message: Pausierte Nachricht anzeigen
   thumbnail_generation_complete: Miniaturbild-Erstellung abgeschlossen
   thumbnail_generation_finished: Die Miniaturbildgenerierung wurde erfolgreich abgeschlossen
   use_accent_color: Verwenden Sie eine Akzentfarbe für die Tapete
