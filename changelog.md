@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.10-dev]
+## [2.8.10]
 
 ### enhancements
 
