@@ -386,7 +386,6 @@ wall:
   wallpapers: Achtergronden
   wallpapers_and_collections: Achtergronden en collecties
   withOverlay: Met overlay
-  workspace_collections: Werkruimtecollecties
 weg:
   auto_hide: Automatisch Verbergen
   auto_hide_touch_disabled: Automatisch verbergen is niet beschikbaar op apparaten met aanraakscherm
@@ -450,6 +449,7 @@ welcome:
     verbeteren.
   title: Welkom bij de Seelen-gebruikersinterface!
 widget:
+  add_workspace_override: Overschrijven op een werkruimte
   default_instance: Standaardinstantie
   default_instance_hint: Altijd actief, gebruikt de rootwidgetconfiguratie
   enable: Deze widget inschakelen
@@ -457,6 +457,11 @@ widget:
   extra_instances: Extra exemplaren
   instance: Aanleg
   instances: Instanties
+  remove_workspace_override: Overschrijving verwijderen (overnemen van monitor)
+  select_workspace: Selecteer een werkruimte
+  workspace_fallback_name: Bureaublad {{0}}
+  workspace_overrides: Overschrijvingen van de werkruimte
+  workspace_row: Rij {{0}}
 wm:
   animations:
     duration: Animatieduur (MS)

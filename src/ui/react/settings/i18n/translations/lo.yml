@@ -370,7 +370,6 @@ wall:
   wallpapers: ພາບພື້ນຫຼັງ
   wallpapers_and_collections: ພາບພື້ນຫຼັງ & ຄໍເລັກຊັນ
   withOverlay: ດ້ວຍການຊ້ອນກັນ
-  workspace_collections: ການເກັບພື້ນທີ່ເຮັດວຽກ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
   auto_hide_touch_disabled: ການເຊື່ອງອັດຕະໂນມັດບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນໜ້າຈໍສໍາຜັດ
@@ -434,6 +433,7 @@ welcome:
     ຄໍາຄິດເຫັນຂອງທ່ານຊ່ວຍໃຫ້ໂຄງການຂະຫຍາຍຕົວແລະປັບປຸງ.
   title: ຍິນດີຕ້ອນຮັບສູ່ Seelen UI!
 widget:
+  add_workspace_override: ຍົກເລີກພື້ນທີ່ເຮັດວຽກ
   default_instance: ຕົວຢ່າງເລີ່ມຕົ້ນ
   default_instance_hint: ເຄື່ອນໄຫວຢູ່ສະເໝີ, ໃຊ້ການຕັ້ງຄ່າ widget ຮາກ
   enable: ເປີດໃຊ້ widget ນີ້
@@ -441,6 +441,11 @@ widget:
   extra_instances: ກໍລະນີພິເສດ
   instance: ຕົວຢ່າງ
   instances: ຖານະ
+  remove_workspace_override: ເອົາ​ການ​ລົບ​ລ້າງ (ສືບ​ທອດ​ຈາກ​ການ​ຕິດ​ຕາມ​)
+  select_workspace: ເລືອກພື້ນທີ່ເຮັດວຽກ
+  workspace_fallback_name: ເດັສທັອບ {{0}}
+  workspace_overrides: ແທນທີ່ພື້ນທີ່ເຮັດວຽກ
+  workspace_row: ແຖວ {{0}}
 wm:
   animations:
     duration: ໄລຍະເວລາທີ່ມີຊີວິດຊີວາ (MS)

@@ -383,7 +383,6 @@ wall:
   wallpapers: tapety
   wallpapers_and_collections: Tapety a kolekce
   withOverlay: S překrytím
-  workspace_collections: Kolekce pracovního prostoru
 weg:
   auto_hide: Automatické skrytí
   auto_hide_touch_disabled: Automatické skrytí není k dispozici na zařízeních s dotykovou obrazovkou
@@ -447,6 +446,7 @@ welcome:
     zpětná vazba pomáhá projektu růst a zlepšovat se.
   title: Vítejte v uživatelském rozhraní Seelen!
 widget:
+  add_workspace_override: Přepsat v pracovním prostoru
   default_instance: Výchozí instance
   default_instance_hint: Vždy aktivní, používá kořenovou konfiguraci widgetu
   enable: Povolení tohoto widgetu
@@ -454,6 +454,11 @@ widget:
   extra_instances: Extra instance
   instance: Instance
   instances: Instance
+  remove_workspace_override: Odebrat přepsání (zdědit z monitoru)
+  select_workspace: Vyberte pracovní prostor
+  workspace_fallback_name: Počítač {{0}}
+  workspace_overrides: Přepsání pracovního prostoru
+  workspace_row: Řádek {{0}}
 wm:
   animations:
     duration: Animace doba trvání (MS)

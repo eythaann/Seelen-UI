@@ -385,7 +385,6 @@ wall:
   wallpapers: వాల్‌పేపర్‌లు
   wallpapers_and_collections: వాల్‌పేపర్‌లు & సేకరణలు
   withOverlay: అతివ్యాప్తితో
-  workspace_collections: కార్యస్థల సేకరణలు
 weg:
   auto_hide: ఆటో దాచు
   auto_hide_touch_disabled: టచ్ స్క్రీన్ పరికరాలలో స్వీయ దాచు అందుబాటులో లేదు
@@ -450,6 +449,7 @@ welcome:
     మరియు మెరుగుపరచడంలో సహాయపడుతుంది.
   title: Seelen UIకి స్వాగతం!
 widget:
+  add_workspace_override: కార్యస్థలంపై భర్తీ చేయండి
   default_instance: డిఫాల్ట్ ఉదాహరణ
   default_instance_hint: ఎల్లప్పుడూ సక్రియంగా ఉంటుంది, రూట్ విడ్జెట్ కాన్ఫిగర్‌ని ఉపయోగిస్తుంది
   enable: ఈ విడ్జెట్‌ను ప్రారంభించండి
@@ -457,6 +457,11 @@ widget:
   extra_instances: అదనపు సందర్భాలు
   instance: ఉదాహరణ
   instances: ఉదాహరణలు
+  remove_workspace_override: ఓవర్‌రైడ్‌ని తీసివేయండి (మానిటర్ నుండి వారసత్వంగా పొందండి)
+  select_workspace: కార్యస్థలాన్ని ఎంచుకోండి
+  workspace_fallback_name: డెస్క్‌టాప్ {{0}}
+  workspace_overrides: కార్యస్థలం ఓవర్‌రైడ్ అవుతుంది
+  workspace_row: అడ్డు వరుస {{0}}
 wm:
   animations:
     duration: యానిమేషన్ వ్యవధి (ఎంఎస్)

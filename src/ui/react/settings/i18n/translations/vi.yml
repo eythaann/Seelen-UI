@@ -3,7 +3,9 @@ action:
   confirm_body: Thao tác này không thể hoàn tác.
 apps_configurations:
   app:
-    bindings: 'Ràng buộc màn hình và không gian làm việc (lưu ý: bắt buộc cả hai tùy chọn)'
+    bindings: >-
+      Ràng buộc màn hình và không gian làm việc (lưu ý: bắt buộc cả hai tùy
+      chọn)
     category: Danh mục
     category_placeholder: Không có
     monitor: Màn hình
@@ -27,9 +29,9 @@ apps_configurations:
     workspace: Không gian làm việc
     workspace_placeholder: Không có
   bundled_msg: >-
-    Các cấu hình tích hợp sẵn này ở chế độ chỉ đọc, được tối ưu sẵn nhằm mang lại
-    trải nghiệm tốt nhất cho các ứng dụng phổ biến nhất mà bạn không cần phải tự
-    cấu hình.
+    Các cấu hình tích hợp sẵn này ở chế độ chỉ đọc, được tối ưu sẵn nhằm mang
+    lại trải nghiệm tốt nhất cho các ứng dụng phổ biến nhất mà bạn không cần
+    phải tự cấu hình.
   bundled_title: Cấu hình ứng dụng tích hợp sẵn
   confirm_delete: Bạn có chắc chắn muốn xóa cấu hình này không?
   confirm_delete_title: Xác nhận xóa
@@ -37,9 +39,9 @@ apps_configurations:
   export: Xuất
   export_full: Xuất cấu hình theo ứng dụng
   extra_info: >-
-    Seelen UI chỉ áp dụng định danh đầu tiên khớp với ứng dụng (first match), do đó
-    thứ tự sắp xếp rất quan trọng. Mục mới thêm sẽ được ưu tiên cao hơn (bảng sắp
-    xếp mặc định từ mới đến cũ).
+    Seelen UI chỉ áp dụng định danh đầu tiên khớp với ứng dụng (first match), do
+    đó thứ tự sắp xếp rất quan trọng. Mục mới thêm sẽ được ưu tiên cao hơn (bảng
+    sắp xếp mặc định từ mới đến cũ).
   identifier:
     add_block: Thêm khối điều kiện
     and: VÀ
@@ -73,8 +75,9 @@ devtools:
   color_palette: Bảng màu hệ thống
   color_palette_note: >-
     Các màu này tự động thích ứng với chế độ Sáng/Tối — độ tương phản của từng
-    sắc thái được tính toán dựa trên màu nền hiện tại thay vì một giá trị cố định.
-    Hãy sử dụng các biến màu này thay vì mã màu cố định để hỗ trợ giao diện tự động.
+    sắc thái được tính toán dựa trên màu nền hiện tại thay vì một giá trị cố
+    định. Hãy sử dụng các biến màu này thay vì mã màu cố định để hỗ trợ giao
+    diện tự động.
   custom_config_file: Tải tệp cấu hình tùy chỉnh
   data_folder: Thư mục dữ liệu
   enable: Bật công cụ dành cho nhà phát triển (DevTools)
@@ -97,14 +100,13 @@ devtools:
     widget_id_placeholder: '@tac-gia/ten-widget'
   tools: Công cụ
   unlock_shortcuts: Mở khóa phím tắt chỉ đọc
-  unlock_shortcuts_description: >-
-    Cho phép chỉnh sửa các phím tắt hệ thống vốn bị khóa ở chế độ chỉ đọc.
+  unlock_shortcuts_description: Cho phép chỉnh sửa các phím tắt hệ thống vốn bị khóa ở chế độ chỉ đọc.
   unstable_optimizations: Tối ưu hóa thử nghiệm (Không ổn định)
   unstable_optimizations_description: >-
     Bật các cờ Chromium thử nghiệm giúp giảm dung lượng RAM sử dụng.
 
-    Cảnh báo: Nếu một tiện ích bị lỗi/crash, tất cả các tiện ích dùng chung trình
-    nạp sẽ bị đóng cùng lúc.
+    Cảnh báo: Nếu một tiện ích bị lỗi/crash, tất cả các tiện ích dùng chung
+    trình nạp sẽ bị đóng cùng lúc.
   widgets_debug:
     actions: Thao tác
     empty: Chưa có tiện ích nào được tải. Nhấn Làm mới.
@@ -127,8 +129,7 @@ extras:
   backup_sync: Đồng bộ cài đặt lên đám mây
   backup_sync_description: Tự động sao lưu và khôi phục cài đặt của bạn thông qua đám mây.
   clear_icons: Xóa bộ nhớ đệm biểu tượng hệ thống
-  clear_icons_tooltip: >-
-    Có thể cần khởi động lại để áp dụng đầy đủ trên tất cả tiện ích
+  clear_icons_tooltip: Có thể cần khởi động lại để áp dụng đầy đủ trên tất cả tiện ích
   discord_rpc: Discord Rich Presence
   discord_rpc_description: Hiển thị trạng thái phong cách của bạn trên Discord!
   exit: Thoát ứng dụng
@@ -149,8 +150,8 @@ general:
   hardware_acceleration: Tăng tốc phần cứng (GPU)
   hardware_acceleration_description: >-
     Tắt tăng tốc phần cứng sẽ giúp giảm mức chiếm dụng RAM/VRAM. Tính năng này
-    an toàn để tắt nếu bạn không sử dụng các hiệu ứng chuyển động nặng, tuy nhiên
-    một số tiện ích riêng lẻ vẫn có thể yêu cầu GPU bất kể cài đặt này.
+    an toàn để tắt nếu bạn không sử dụng các hiệu ứng chuyển động nặng, tuy
+    nhiên một số tiện ích riêng lẻ vẫn có thể yêu cầu GPU bất kể cài đặt này.
   icon_pack:
     available: Gói biểu tượng có sẵn
     selected: Gói biểu tượng đang dùng
@@ -176,9 +177,9 @@ general:
   sunday: Chủ Nhật
   suspend_on_game_mode: Tạm dừng các tiện ích khi chơi game (Game Mode)
   suspend_on_game_mode_description: >-
-    Khi Windows Game Mode được kích hoạt, toàn bộ webview của các tiện ích sẽ được
-    giải phóng để nhường tối đa CPU và RAM cho game. Các tiện ích sẽ tự động khôi
-    phục khi bạn thoát game.
+    Khi Windows Game Mode được kích hoạt, toàn bộ webview của các tiện ích sẽ
+    được giải phóng để nhường tối đa CPU và RAM cho game. Các tiện ích sẽ tự
+    động khôi phục khi bạn thoát game.
   theme:
     available: Giao diện có sẵn
     selected: Giao diện đang dùng
@@ -214,7 +215,7 @@ miscellaneous: Khác
 monitors_configurations:
   label: Màn hình {{index}}
 more: Thêm
-'no': 'Không'
+'no': Không
 open: Mở
 quit: Thoát
 remove: Xóa bỏ
@@ -226,7 +227,8 @@ resources:
   app_outdated: Tài nguyên này yêu cầu phiên bản Seelen UI mới hơn để hoạt động chính xác.
   coming_soon: Sắp ra mắt
   corrupted_wallpaper: >-
-    Không thể tạo ảnh thu nhỏ - tệp video bị lỗi hoặc không được hỗ trợ định dạng
+    Không thể tạo ảnh thu nhỏ - tệp video bị lỗi hoặc không được hỗ trợ định
+    dạng
   delete: Xóa tài nguyên
   discover: Khám phá thêm tài nguyên
   has_update: Có bản cập nhật mới
@@ -268,11 +270,12 @@ shortcuts:
   disabled_tooltip: Tiện ích này và các phím tắt của nó đang bị tắt
   duplicate_error: Phát hiện xung đột phím tắt
   duplicate_error_hint: >-
-    Một số phím tắt đang được gán cho nhiều hành động cùng lúc. Vui lòng tắt một trong
-    các tiện ích xung đột hoặc đổi tổ hợp phím để giải quyết.
+    Một số phím tắt đang được gán cho nhiều hành động cùng lúc. Vui lòng tắt một
+    trong các tiện ích xung đột hoặc đổi tổ hợp phím để giải quyết.
   enable: Bật hệ thống phím tắt tích hợp
   enable_tooltip: >-
-    Tắt nếu bạn muốn tự cấu hình hệ thống phím tắt riêng thông qua Seelen UI Client
+    Tắt nếu bạn muốn tự cấu hình hệ thống phím tắt riêng thông qua Seelen UI
+    Client
   labels:
     create_new_workspace: Tạo không gian làm việc mới
     create_new_workspace_row: Tạo hàng không gian làm việc mới
@@ -330,8 +333,7 @@ wall:
   create: Tạo
   create_collection: Tạo bộ sưu tập mới
   default_collection: Hình nền hoặc bộ sưu tập mặc định
-  default_collection_description: >-
-    Áp dụng cho mọi màn hình và không gian làm việc chưa được thiết lập riêng.
+  default_collection_description: Áp dụng cho mọi màn hình và không gian làm việc chưa được thiết lập riêng.
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
   extend: Trải rộng màn hình chính
@@ -376,7 +378,6 @@ wall:
   wallpapers: Hình nền
   wallpapers_and_collections: Hình nền & Bộ sưu tập
   withOverlay: Bật lớp phủ
-  workspace_collections: Bộ sưu tập theo không gian làm việc
 weg:
   auto_hide: Tự động ẩn
   auto_hide_touch_disabled: Tính năng tự động ẩn không hỗ trợ trên thiết bị màn hình cảm ứng
@@ -430,17 +431,18 @@ weg:
 welcome:
   give_a_review: Đánh giá ứng dụng
   message: >-
-    Seelen UI là môi trường desktop mã nguồn mở và miễn phí dành cho Windows. Tại
-    đây, bạn có toàn quyền kiểm soát cách thức giao diện máy tính hiển thị và vận
-    hành, cho phép bạn tinh chỉnh từng chi tiết nhỏ nhất để tối ưu cho luồng làm
-    việc và phong cách cá nhân của mình.
+    Seelen UI là môi trường desktop mã nguồn mở và miễn phí dành cho Windows.
+    Tại đây, bạn có toàn quyền kiểm soát cách thức giao diện máy tính hiển thị
+    và vận hành, cho phép bạn tinh chỉnh từng chi tiết nhỏ nhất để tối ưu cho
+    luồng làm việc và phong cách cá nhân của mình.
   ok: Bắt đầu ngay!
   review: >-
     Nếu bạn thấy thích Seelen UI, hãy dành chút thời gian để lại đánh giá trên
-    Microsoft Store — phản hồi của bạn sẽ giúp dự án ngày càng hoàn thiện và phát
-    triển hơn.
+    Microsoft Store — phản hồi của bạn sẽ giúp dự án ngày càng hoàn thiện và
+    phát triển hơn.
   title: Chào mừng bạn đến với Seelen UI!
 widget:
+  add_workspace_override: Ghi đè trên không gian làm việc
   default_instance: Phiên bản mặc định
   default_instance_hint: Luôn hoạt động, sử dụng cấu hình gốc của widget
   enable: Bật tiện ích này
@@ -448,6 +450,11 @@ widget:
   extra_instances: Phiên bản bổ sung
   instance: Phiên bản (Instance)
   instances: Danh sách phiên bản
+  remove_workspace_override: Xóa ghi đè (kế thừa từ màn hình)
+  select_workspace: Chọn không gian làm việc
+  workspace_fallback_name: Máy tính để bàn {{0}}
+  workspace_overrides: Ghi đè không gian làm việc
+  workspace_row: Hàng {{0}}
 wm:
   animations:
     duration: Thời lượng chuyển động (ms)
@@ -477,4 +484,4 @@ wm:
     as_needed: Khi cần thiết (nhiều cửa sổ xếp chồng)
   workspace_offset: Lề ngoài không gian làm việc (Margins)
   workspace_padding: Khoảng đệm không gian làm việc (Padding)
-'yes': 'Có'
+'yes': Có

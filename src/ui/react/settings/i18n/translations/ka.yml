@@ -382,7 +382,6 @@ wall:
   wallpapers: ფონები
   wallpapers_and_collections: ფონები და კოლექციები
   withOverlay: გადახურვით
-  workspace_collections: სამუშაო სივრცის კოლექციები
 weg:
   auto_hide: Ავტომატური დამალვა
   auto_hide_touch_disabled: ავტომატური დამალვა მიუწვდომელია სენსორული ეკრანის მოწყობილობებზე
@@ -448,6 +447,7 @@ welcome:
     თქვენი გამოხმაურება ეხმარება პროექტს ზრდასა და გაუმჯობესებაში.
   title: კეთილი იყოს თქვენი მობრძანება Seelen UI-ში!
 widget:
+  add_workspace_override: გადააჭარბეთ სამუშაო სივრცეს
   default_instance: ნაგულისხმევი ინსტანცია
   default_instance_hint: ყოველთვის აქტიური, იყენებს root ვიჯეტის კონფიგურაციას
   enable: ჩართეთ ეს ვიჯეტი
@@ -455,6 +455,11 @@ widget:
   extra_instances: დამატებითი შემთხვევები
   instance: მაგალითად
   instances: შემთხვევები
+  remove_workspace_override: წაშალეთ უგულებელყოფა (მემკვიდრეობა მონიტორიდან)
+  select_workspace: აირჩიეთ სამუშაო ადგილი
+  workspace_fallback_name: სამუშაო მაგიდა {{0}}
+  workspace_overrides: სამუშაო სივრცე უგულებელყოფს
+  workspace_row: მწკრივი {{0}}
 wm:
   animations:
     duration: ანიმაციის ხანგრძლივობა (MS)

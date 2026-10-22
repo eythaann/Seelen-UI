@@ -391,7 +391,6 @@ wall:
   wallpapers: Izithombe zangemuva
   wallpapers_and_collections: Izithombe zangemuva namaqoqo
   withOverlay: Ngokumbondelana
-  workspace_collections: Amaqoqo wendawo yokusebenza
 weg:
   auto_hide: Fihla okuzenzakalelayo
   auto_hide_touch_disabled: Ukufihla ngokuzenzakalela akutholakali kumadivayisi wesikrini esithintwayo
@@ -457,6 +456,7 @@ welcome:
     impendulo yakho isiza iphrojekthi ukuthi ikhule futhi ithuthuke.
   title: Siyakwamukela ku-Seelen UI!
 widget:
+  add_workspace_override: Khipha endaweni yokusebenza
   default_instance: Isimo Esizenzakalelayo
   default_instance_hint: Ihlala isebenza, isebenzisa ukulungiselelwa kwewijethi yempande
   enable: Nika amandla lewijethi
@@ -464,6 +464,11 @@ widget:
   extra_instances: Izimo Ezengeziwe
   instance: Isibonelo
   instances: Izimo
+  remove_workspace_override: Susa ukukhipha (zuza kumonitha)
+  select_workspace: Khetha indawo yokusebenza
+  workspace_fallback_name: Ideskithophu {{0}}
+  workspace_overrides: Indawo yokusebenza iyakhishwa
+  workspace_row: Umugqa {{0}}
 wm:
   animations:
     duration: Isikhathi se-animation (MS)

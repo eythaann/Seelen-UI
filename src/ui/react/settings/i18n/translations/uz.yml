@@ -390,7 +390,6 @@ wall:
   wallpapers: Fon rasmi
   wallpapers_and_collections: Fon rasmi va kollektsiyalar
   withOverlay: Qopqoq bilan
-  workspace_collections: Ish maydoni to'plamlari
 weg:
   auto_hide: Avtomatik yashirish
   auto_hide_touch_disabled: Avtomatik yashirish sensorli ekranli qurilmalarda mavjud emas
@@ -457,6 +456,7 @@ welcome:
     beradi.
   title: Seelen UI-ga xush kelibsiz!
 widget:
+  add_workspace_override: Ish joyida bekor qilish
   default_instance: Standart misol
   default_instance_hint: Har doim faol, ildiz vidjet konfiguratsiyasidan foydalanadi
   enable: Bu vidjetni yoqing
@@ -464,6 +464,11 @@ widget:
   extra_instances: Qo'shimcha holatlar
   instance: Misol
   instances: Mustaqil holatlar
+  remove_workspace_override: Bekor qilishni olib tashlash (monitordan meros qilib olish)
+  select_workspace: Ish joyini tanlang
+  workspace_fallback_name: Ish stoli {{0}}
+  workspace_overrides: Ish joyini bekor qiladi
+  workspace_row: '{{0}}-qator'
 wm:
   animations:
     duration: Animatsiya muddati (MS)

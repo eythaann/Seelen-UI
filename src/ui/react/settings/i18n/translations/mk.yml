@@ -386,7 +386,6 @@ wall:
   wallpapers: Позадини
   wallpapers_and_collections: Позадини и колекции
   withOverlay: Со преклоп
-  workspace_collections: Колекции на работниот простор
 weg:
   auto_hide: Автоматско скриј
   auto_hide_touch_disabled: Автоматското криење не е достапно на уредите со екран на допир
@@ -451,6 +450,7 @@ welcome:
     подобри.
   title: Добредојдовте во Seelen UI!
 widget:
+  add_workspace_override: Отфрлање на работен простор
   default_instance: Стандардна инстанца
   default_instance_hint: Секогаш активен, ја користи конфигурацијата на root-виџетот
   enable: Овозможете го овој додаток
@@ -458,6 +458,11 @@ widget:
   extra_instances: Дополнителни случаи
   instance: Пример
   instances: Примери
+  remove_workspace_override: Отстранете го отфрлањето (наследи од мониторот)
+  select_workspace: Изберете работен простор
+  workspace_fallback_name: Десктоп {{0}}
+  workspace_overrides: Работниот простор го отфрла
+  workspace_row: Ред {{0}}
 wm:
   animations:
     duration: Времетраење на анимација (МС)

@@ -378,7 +378,6 @@ wall:
   wallpapers: تصاویر پس زمینه
   wallpapers_and_collections: تصاویر پس زمینه و مجموعه ها
   withOverlay: با روکش
-  workspace_collections: مجموعه های فضای کاری
 weg:
   auto_hide: پنهان خودکار
   auto_hide_touch_disabled: پنهان کردن خودکار در دستگاه های صفحه لمسی در دسترس نیست
@@ -441,6 +440,7 @@ welcome:
     بگذارید - بازخورد شما به رشد و بهبود پروژه کمک می کند.
   title: به UI Seelen خوش آمدید!
 widget:
+  add_workspace_override: نادیده گرفتن یک فضای کاری
   default_instance: نمونه پیش فرض
   default_instance_hint: همیشه فعال است، از پیکربندی ویجت ریشه استفاده می کند
   enable: این ویجت را فعال کنید
@@ -448,6 +448,11 @@ widget:
   extra_instances: موارد اضافی
   instance: نمونه
   instances: نمونه
+  remove_workspace_override: حذف نادیده گرفتن (ارث بردن از مانیتور)
+  select_workspace: یک فضای کاری را انتخاب کنید
+  workspace_fallback_name: رومیزی {{0}}
+  workspace_overrides: فضای کاری لغو می شود
+  workspace_row: ردیف {{0}}
 wm:
   animations:
     duration: مدت زمان انیمیشن (MS)

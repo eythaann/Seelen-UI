@@ -353,7 +353,6 @@ wall:
   wallpapers: 壁紙
   wallpapers_and_collections: 壁紙とコレクション
   withOverlay: オーバーレイ付き
-  workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
   auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
@@ -415,6 +414,7 @@ welcome:
     の使用を楽しんでいる場合は、ストアにレビューを残すことを検討してください。あなたのフィードバックはプロジェクトの成長と改善に役立ちます。
   title: Seelen UI へようこそ!
 widget:
+  add_workspace_override: ワークスペースをオーバーライドする
   default_instance: デフォルトのインスタンス
   default_instance_hint: 常にアクティブで、ルート ウィジェット構成を使用します
   enable: このウィジェットを有効にする
@@ -422,6 +422,11 @@ widget:
   extra_instances: 追加のインスタンス
   instance: 実例
   instances: インスタンス
+  remove_workspace_override: オーバーライドを削除 (モニターから継承)
+  select_workspace: ワークスペースを選択してください
+  workspace_fallback_name: デスクトップ {{0}}
+  workspace_overrides: ワークスペースの上書き
+  workspace_row: 行 {{0}}
 wm:
   animations:
     duration: アニメーション期間（MS）

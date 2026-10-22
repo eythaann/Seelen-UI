@@ -367,7 +367,6 @@ wall:
   wallpapers: วอลเปเปอร์
   wallpapers_and_collections: วอลเปเปอร์และคอลเลกชัน
   withOverlay: ด้วยการซ้อนทับ
-  workspace_collections: คอลเลกชันพื้นที่ทำงาน
 weg:
   auto_hide: ซ่อนอัตโนมัติ
   auto_hide_touch_disabled: การซ่อนอัตโนมัติไม่พร้อมใช้งานบนอุปกรณ์หน้าจอสัมผัส
@@ -430,6 +429,7 @@ welcome:
     ความคิดเห็นของคุณจะช่วยให้โปรเจ็กต์เติบโตและปรับปรุงได้
   title: ยินดีต้อนรับสู่ Seelen UI!
 widget:
+  add_workspace_override: แทนที่บนพื้นที่ทำงาน
   default_instance: อินสแตนซ์เริ่มต้น
   default_instance_hint: ใช้งานอยู่เสมอ ใช้การกำหนดค่าวิดเจ็ตรูท
   enable: เปิดใช้งานวิดเจ็ตนี้
@@ -437,6 +437,11 @@ widget:
   extra_instances: อินสแตนซ์พิเศษ
   instance: ตัวอย่าง
   instances: อินสแตนซ์
+  remove_workspace_override: ลบการแทนที่ (สืบทอดจากจอภาพ)
+  select_workspace: เลือกพื้นที่ทำงาน
+  workspace_fallback_name: เดสก์ท็อป {{0}}
+  workspace_overrides: การแทนที่พื้นที่ทำงาน
+  workspace_row: แถว {{0}}
 wm:
   animations:
     duration: ระยะเวลาการเคลื่อนไหว (MS)

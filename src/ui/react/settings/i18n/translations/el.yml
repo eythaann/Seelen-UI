@@ -394,7 +394,6 @@ wall:
   wallpapers: Ταπετσαρίες
   wallpapers_and_collections: Ταπετσαρίες & Συλλογές
   withOverlay: Με επικάλυψη
-  workspace_collections: Συλλογές χώρου εργασίας
 weg:
   auto_hide: Αυτόματη απόκρυψη
   auto_hide_touch_disabled: Η αυτόματη απόκρυψη δεν είναι διαθέσιμη σε συσκευές με οθόνη αφής
@@ -461,6 +460,7 @@ welcome:
     βελτιωθεί.
   title: Καλώς ήρθατε στο Seelen UI!
 widget:
+  add_workspace_override: Παράκαμψη σε χώρο εργασίας
   default_instance: Προεπιλεγμένη περίπτωση
   default_instance_hint: Πάντα ενεργό, χρησιμοποιεί τη διαμόρφωση του γραφικού στοιχείου ρίζας
   enable: Ενεργοποιήστε αυτό το widget
@@ -468,6 +468,11 @@ widget:
   extra_instances: Επιπλέον περιπτώσεις
   instance: Παράδειγμα
   instances: Περιπτώσεις
+  remove_workspace_override: Κατάργηση παράκαμψης (κληρονομιά από την οθόνη)
+  select_workspace: Επιλέξτε έναν χώρο εργασίας
+  workspace_fallback_name: Επιτραπέζιος υπολογιστής {{0}}
+  workspace_overrides: Ο χώρος εργασίας παρακάμπτει
+  workspace_row: Σειρά {{0}}
 wm:
   animations:
     duration: Διάρκεια κινούμενων σχεδίων (MS)

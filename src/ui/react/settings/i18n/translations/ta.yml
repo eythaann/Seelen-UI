@@ -390,7 +390,6 @@ wall:
   wallpapers: வால்பேப்பர்கள்
   wallpapers_and_collections: வால்பேப்பர்கள் & தொகுப்புகள்
   withOverlay: மேலடுக்கு
-  workspace_collections: பணியிட தொகுப்புகள்
 weg:
   auto_hide: தானாக மறை
   auto_hide_touch_disabled: தொடுதிரை சாதனங்களில் தானியங்கு மறை கிடைக்காது
@@ -457,6 +456,7 @@ welcome:
     உதவுகிறது.
   title: Seelen UIக்கு வரவேற்கிறோம்!
 widget:
+  add_workspace_override: பணியிடத்தில் மேலெழுதவும்
   default_instance: இயல்புநிலை நிகழ்வு
   default_instance_hint: எப்போதும் செயலில், ரூட் விட்ஜெட் கட்டமைப்பைப் பயன்படுத்துகிறது
   enable: இந்த விட்ஜெட்டை இயக்கவும்
@@ -464,6 +464,11 @@ widget:
   extra_instances: கூடுதல் நிகழ்வுகள்
   instance: உதாரணம்
   instances: நிகழ்வுகள்
+  remove_workspace_override: மேலெழுதலை அகற்று (மானிட்டரிலிருந்து மரபுரிமை)
+  select_workspace: பணியிடத்தைத் தேர்ந்தெடுக்கவும்
+  workspace_fallback_name: டெஸ்க்டாப் {{0}}
+  workspace_overrides: பணியிடம் மேலெழுகிறது
+  workspace_row: வரிசை {{0}}
 wm:
   animations:
     duration: அனிமேஷன் காலம் (எம்.எஸ்)

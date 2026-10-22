@@ -393,7 +393,6 @@ wall:
   wallpapers: Hintergrundbilder
   wallpapers_and_collections: Hintergrundbilder und Sammlungen
   withOverlay: Mit Overlay
-  workspace_collections: Arbeitsbereichssammlungen
 weg:
   auto_hide: Automatisch ausblenden
   auto_hide_touch_disabled: Das automatische Ausblenden ist auf Touchscreen-Geräten nicht verfügbar
@@ -457,6 +456,7 @@ welcome:
     bei, dass das Projekt wächst und sich verbessert.
   title: Willkommen bei Seelen UI!
 widget:
+  add_workspace_override: Überschreiben Sie einen Arbeitsbereich
   default_instance: Standardinstanz
   default_instance_hint: Immer aktiv, verwendet die Root-Widget-Konfiguration
   enable: Aktivieren Sie dieses Widget
@@ -464,6 +464,11 @@ widget:
   extra_instances: Zusätzliche Instanzen
   instance: Beispiel
   instances: Instanzen
+  remove_workspace_override: Überschreibung entfernen (vom Monitor erben)
+  select_workspace: Wählen Sie einen Arbeitsbereich aus
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Arbeitsbereichsüberschreibungen
+  workspace_row: Zeile {{0}}
 wm:
   animations:
     duration: Animationsdauer (MS)

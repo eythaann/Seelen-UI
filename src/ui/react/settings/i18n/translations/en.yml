@@ -437,6 +437,7 @@ welcome:
     feedback helps the project grow and improve.
   title: Welcome to Seelen UI!
 widget:
+  add_workspace_override: Override on a workspace
   default_instance: Default Instance
   default_instance_hint: Always active, uses the root widget config
   enable: Enable this widget
@@ -444,7 +445,6 @@ widget:
   extra_instances: Extra Instances
   instance: Instance
   instances: Instances
-  add_workspace_override: Override on a workspace
   remove_workspace_override: Remove override (inherit from monitor)
   select_workspace: Select a workspace
   workspace_fallback_name: Desktop {{0}}

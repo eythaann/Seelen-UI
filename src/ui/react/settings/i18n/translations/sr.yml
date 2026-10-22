@@ -385,7 +385,6 @@ wall:
   wallpapers: Позадине
   wallpapers_and_collections: Позадине и колекције
   withOverlay: Са прекривањем
-  workspace_collections: Збирке радног простора
 weg:
   auto_hide: Аутоматска кожа
   auto_hide_touch_disabled: >-
@@ -452,6 +451,7 @@ welcome:
     пројекат расте и унапређује се.
   title: Добродошли у Сеелен УИ!
 widget:
+  add_workspace_override: Заобиђите радни простор
   default_instance: Подразумевана инстанца
   default_instance_hint: Увек активан, користи конфигурацију основног виџета
   enable: Омогућите овај виџет
@@ -459,6 +459,11 @@ widget:
   extra_instances: Ектра Инстанцес
   instance: Инстанце
   instances: Случајеви
+  remove_workspace_override: Уклони заобилажење (наследи са монитора)
+  select_workspace: Изаберите радни простор
+  workspace_fallback_name: Стони рачунар {{0}}
+  workspace_overrides: Радни простор замењује
+  workspace_row: '{{0}}. ред'
 wm:
   animations:
     duration: Трајање анимације (МС)

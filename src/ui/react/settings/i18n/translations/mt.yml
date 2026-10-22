@@ -386,7 +386,6 @@ wall:
   wallpapers: Wallpapers
   wallpapers_and_collections: Wallpapers u Kollezzjonijiet
   withOverlay: Bil-overlay
-  workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:
   auto_hide: Auto Hide
   auto_hide_touch_disabled: Auto hide mhix disponibbli fuq apparati touch screen
@@ -450,6 +449,7 @@ welcome:
     il-maħżen — ir-rispons tiegħek jgħin lill-proġett jikber u jitjieb.
   title: Merħba għal Seelen UI!
 widget:
+  add_workspace_override: Iċċekkja fuq spazju tax-xogħol
   default_instance: Istanza Default
   default_instance_hint: Dejjem attiv, juża l-konfigurazzjoni tal-widget tal-għeruq
   enable: Ippermetti dan il-widget
@@ -457,6 +457,11 @@ widget:
   extra_instances: Każijiet Extra
   instance: Istanza
   instances: Każijiet
+  remove_workspace_override: Neħħi l-override (jiret mill-monitor)
+  select_workspace: Agħżel spazju tax-xogħol
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: L-ispazju tax-xogħol jissupera
+  workspace_row: Ringiela {{0}}
 wm:
   animations:
     duration: Tul tal-Animazzjoni (MS)

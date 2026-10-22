@@ -381,7 +381,6 @@ wall:
   wallpapers: Papur wal
   wallpapers_and_collections: Papur Wal a Chasgliadau
   withOverlay: Gyda throshaen
-  workspace_collections: Casgliadau Gweithle
 weg:
   auto_hide: Cuddio awto
   auto_hide_touch_disabled: Nid yw cuddfan ceir ar gael ar ddyfeisiau sgrin gyffwrdd
@@ -445,6 +444,7 @@ welcome:
     siop - mae eich adborth yn helpu'r prosiect i dyfu a gwella.
   title: Croeso i UI Seelen!
 widget:
+  add_workspace_override: Diystyru ar weithfan
   default_instance: Enghraifft ddiofyn
   default_instance_hint: Bob amser yn weithredol, yn defnyddio'r config widget gwraidd
   enable: Galluogi'r teclyn hwn
@@ -452,6 +452,11 @@ widget:
   extra_instances: Enghreifftiau Ychwanegol
   instance: Er enghraifft
   instances: Achosion
+  remove_workspace_override: Dileu gwrthwneud (etifeddu o'r monitor)
+  select_workspace: Dewiswch fan gwaith
+  workspace_fallback_name: Penbwrdd {{0}}
+  workspace_overrides: Gweithle yn diystyru
+  workspace_row: Rhes {{0}}
 wm:
   animations:
     duration: Hyd animeiddio (MS)

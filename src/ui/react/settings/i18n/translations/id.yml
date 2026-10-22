@@ -386,7 +386,6 @@ wall:
   wallpapers: Wallpaper
   wallpapers_and_collections: Wallpaper & Koleksi
   withOverlay: Dengan Overlay
-  workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Sembunyi otomatis
   auto_hide_touch_disabled: Sembunyikan otomatis tidak tersedia pada perangkat layar sentuh
@@ -450,6 +449,7 @@ welcome:
     ulasan di toko — masukan Anda membantu proyek tumbuh dan meningkat.
   title: Selamat datang di Seelen UI!
 widget:
+  add_workspace_override: Ganti di ruang kerja
   default_instance: Mesin Virtual Bawaan
   default_instance_hint: Selalu aktif, menggunakan konfigurasi widget root
   enable: Aktifkan widget ini
@@ -457,6 +457,11 @@ widget:
   extra_instances: Instans Ekstra
   instance: Contoh
   instances: Contoh
+  remove_workspace_override: Hapus override (mewarisi dari monitor)
+  select_workspace: Pilih ruang kerja
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Penggantian ruang kerja
+  workspace_row: Baris {{0}}
 wm:
   animations:
     duration: Durasi Animasi (MS)

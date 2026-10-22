@@ -381,7 +381,6 @@ wall:
   wallpapers: Divar kağızları
   wallpapers_and_collections: Divar kağızları və kolleksiyalar
   withOverlay: Örtülü ilə
-  workspace_collections: İş sahəsi kolleksiyaları
 weg:
   auto_hide: Avtomatik gizlətmək
   auto_hide_touch_disabled: Avtomatik gizlətmə sensor ekranlı cihazlarda mövcud deyil
@@ -444,6 +443,7 @@ welcome:
     düşünün – rəyiniz layihənin böyüməsinə və təkmilləşdirilməsinə kömək edir.
   title: Seelen UI-ə xoş gəlmisiniz!
 widget:
+  add_workspace_override: İş yerində yalnış yazın
   default_instance: Defolt Nümunə
   default_instance_hint: Həmişə aktivdir, kök vidcet konfiqurasiyasından istifadə edir
   enable: Bu widgetı aktivləşdirin
@@ -451,6 +451,11 @@ widget:
   extra_instances: Əlavə Nümunələr
   instance: Nümunə
   instances: Hal
+  remove_workspace_override: Ləğv etməyi silin (monitordan miras alın)
+  select_workspace: İş yerini seçin
+  workspace_fallback_name: Masaüstü {{0}}
+  workspace_overrides: İş sahəsi üstələyir
+  workspace_row: Sıra {{0}}
 wm:
   animations:
     duration: Animasiya müddəti (MS)

@@ -388,7 +388,6 @@ wall:
   wallpapers: Тапети
   wallpapers_and_collections: Тапети и колекции
   withOverlay: С наслагване
-  workspace_collections: Колекции на работното пространство
 weg:
   auto_hide: Автоматично скриване
   auto_hide_touch_disabled: Автоматичното скриване не е налично на устройства със сензорен екран
@@ -453,6 +452,7 @@ welcome:
     подобрява.
   title: Добре дошли в Seelen UI!
 widget:
+  add_workspace_override: Замяна на работно пространство
   default_instance: Екземпляр по подразбиране
   default_instance_hint: Винаги активен, използва конфигурацията на root widget
   enable: Активиране на тази джаджа
@@ -460,6 +460,11 @@ widget:
   extra_instances: Допълнителни инстанции
   instance: Инстанция
   instances: Инстанции
+  remove_workspace_override: Премахване на замяна (наследяване от монитор)
+  select_workspace: Изберете работно пространство
+  workspace_fallback_name: Настолен компютър {{0}}
+  workspace_overrides: Замени на работното пространство
+  workspace_row: Ред {{0}}
 wm:
   animations:
     duration: Продължителност на анимацията (MS)

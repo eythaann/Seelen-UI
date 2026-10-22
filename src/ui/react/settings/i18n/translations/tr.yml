@@ -384,7 +384,6 @@ wall:
   wallpapers: Duvar Kağıtları
   wallpapers_and_collections: Duvar Kağıtları ve Koleksiyonlar
   withOverlay: Kaplama ile
-  workspace_collections: Çalışma Alanı Koleksiyonları
 weg:
   auto_hide: Otomatik Gizle
   auto_hide_touch_disabled: Otomatik gizleme dokunmatik ekranlı cihazlarda kullanılamaz
@@ -449,6 +448,7 @@ welcome:
     gelişmesine yardımcı olur.
   title: Seelen kullanıcı arayüzüne hoş geldiniz!
 widget:
+  add_workspace_override: Bir çalışma alanını geçersiz kıl
   default_instance: Varsayılan Örnek
   default_instance_hint: Her zaman etkindir, kök widget yapılandırmasını kullanır
   enable: Bu widget'ı etkinleştir
@@ -456,6 +456,11 @@ widget:
   extra_instances: Ekstra Örnekler
   instance: Misal
   instances: Örnekler
+  remove_workspace_override: Geçersiz kılmayı kaldır (monitörden devral)
+  select_workspace: Bir çalışma alanı seçin
+  workspace_fallback_name: Masaüstü {{0}}
+  workspace_overrides: Çalışma alanı geçersiz kılmaları
+  workspace_row: '{{0}}. satır'
 wm:
   animations:
     duration: Animasyon Süresi (MS)

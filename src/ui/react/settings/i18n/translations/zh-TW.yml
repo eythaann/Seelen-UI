@@ -342,7 +342,6 @@ wall:
   wallpapers: 桌布
   wallpapers_and_collections: 桌布和收藏
   withOverlay: 啟用疊加層
-  workspace_collections: 工作區集合
 weg:
   auto_hide: 自動隱藏
   auto_hide_touch_disabled: 自動隱藏在觸控螢幕裝置上不可用
@@ -402,6 +401,7 @@ welcome:
   review: 如果您喜歡使用 Seelen UI，請考慮在商店留下評論，您的回饋有助於專案的發展和改進。
   title: 歡迎來到Seelen UI！
 widget:
+  add_workspace_override: 覆蓋工作區
   default_instance: 預設視窗
   default_instance_hint: 始終處於活動狀態，使用根小工具配置
   enable: 啟用這個小工具
@@ -409,6 +409,11 @@ widget:
   extra_instances: 額外視窗
   instance: 視窗
   instances: 視窗
+  remove_workspace_override: 刪除覆蓋（從監視器繼承）
+  select_workspace: 選擇一個工作區
+  workspace_fallback_name: 桌面版 {{0}}
+  workspace_overrides: 工作區覆蓋
+  workspace_row: 第 {{0}} 行
 wm:
   animations:
     duration: 動畫持續時間（MS）

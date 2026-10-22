@@ -379,7 +379,6 @@ wall:
   wallpapers: Wallpapers
   wallpapers_and_collections: බිතුපත් සහ එකතු කිරීම්
   withOverlay: ආවරණය සමඟ
-  workspace_collections: වැඩ ඉඩ එකතු කිරීම්
 weg:
   auto_hide: ස්වයංක්‍රීය සඟවන්න
   auto_hide_touch_disabled: ස්වයංක්‍රීය සැඟවීම ස්පර්ශ තිර උපාංගවල නොමැත
@@ -443,6 +442,7 @@ welcome:
     ඔබේ ප්‍රතිපෝෂණය ව්‍යාපෘතිය වර්ධනය වීමට සහ වැඩිදියුණු කිරීමට උපකාරී වේ.
   title: Seelen UI වෙත සාදරයෙන් පිළිගනිමු!
 widget:
+  add_workspace_override: වැඩබිමක් මත අභිබවා යන්න
   default_instance: පෙරනිමි අවස්ථාව
   default_instance_hint: සැමවිටම සක්‍රියයි, root widget config භාවිතා කරයි
   enable: මෙම විජට් සක්රීය කරන්න
@@ -450,6 +450,11 @@ widget:
   extra_instances: අමතර අවස්ථා
   instance: උදාහරණය
   instances: අවස්ථා
+  remove_workspace_override: ප්‍රතික්‍රියා ඉවත් කරන්න (මොනිටරයෙන් උරුම වන්න)
+  select_workspace: වැඩබිමක් තෝරන්න
+  workspace_fallback_name: වැඩතලය {{0}}
+  workspace_overrides: වැඩබිම අභිබවා යයි
+  workspace_row: පේළිය {{0}}
 wm:
   animations:
     duration: සජීවිකරණ කාලය (MS)

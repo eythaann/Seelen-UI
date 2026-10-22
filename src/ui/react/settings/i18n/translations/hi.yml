@@ -387,7 +387,6 @@ wall:
   wallpapers: वॉलपेपर
   wallpapers_and_collections: वॉलपेपर और संग्रह
   withOverlay: ओवरले के साथ
-  workspace_collections: कार्यक्षेत्र संग्रह
 weg:
   auto_hide: खुद से छिपना
   auto_hide_touch_disabled: टच स्क्रीन डिवाइस पर ऑटो हाइड उपलब्ध नहीं है
@@ -452,6 +451,7 @@ welcome:
     करती है।
   title: सीलेन यूआई में आपका स्वागत है!
 widget:
+  add_workspace_override: किसी कार्यस्थान पर ओवरराइड करें
   default_instance: डिफ़ॉल्ट उदाहरण
   default_instance_hint: हमेशा सक्रिय, रूट विजेट कॉन्फ़िगरेशन का उपयोग करता है
   enable: इस विजेट को सक्षम करें
@@ -459,6 +459,11 @@ widget:
   extra_instances: अतिरिक्त उदाहरण
   instance: उदाहरण
   instances: उदाहरण
+  remove_workspace_override: ओवरराइड हटाएं (मॉनिटर से इनहेरिट करें)
+  select_workspace: एक कार्यक्षेत्र चुनें
+  workspace_fallback_name: डेस्कटॉप {{0}}
+  workspace_overrides: कार्यस्थान ओवरराइड हो जाता है
+  workspace_row: पंक्ति {{0}}
 wm:
   animations:
     duration: एनीमेशन अवधि (एमएस)

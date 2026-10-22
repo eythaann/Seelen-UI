@@ -383,7 +383,6 @@ wall:
   wallpapers: Tapeten
   wallpapers_and_collections: Tapeten & Sammlungen
   withOverlay: Mat Overlay
-  workspace_collections: Aarbechtsberäich Kollektiounen
 weg:
   auto_hide: Automatesch
   auto_hide_touch_disabled: Auto verstoppen ass net op Touchscreen Geräter verfügbar
@@ -447,6 +446,7 @@ welcome:
     verbesseren.
   title: Wëllkomm op Seelen UI!
 widget:
+  add_workspace_override: Iwwerschreiden op engem Aarbechtsberäich
   default_instance: Standard Instanz
   default_instance_hint: Ëmmer aktiv, benotzt d'Root Widget Configuratioun
   enable: Aktivéiert dëse Widget
@@ -454,6 +454,11 @@ widget:
   extra_instances: Extra Instanzen
   instance: Instanz
   instances: Instanzen
+  remove_workspace_override: Ewechzehuelen iwwerdribblen (ierf vum Monitor)
+  select_workspace: Wielt eng Aarbechtsberäich
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Aarbechtsberäich iwwerschreift
+  workspace_row: Zeil {{0}}
 wm:
   animations:
     duration: Animatioun Dauer (MS)

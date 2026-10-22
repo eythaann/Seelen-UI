@@ -388,7 +388,6 @@ wall:
   wallpapers: Háttérképek
   wallpapers_and_collections: Háttérképek és gyűjtemények
   withOverlay: Overlay-vel
-  workspace_collections: Munkaterület-gyűjtemények
 weg:
   auto_hide: Automatikus elrejtés
   auto_hide_touch_disabled: Az automatikus elrejtés nem érhető el érintőképernyős eszközökön
@@ -452,6 +451,7 @@ welcome:
     áruházban – visszajelzése segíti a projekt növekedését és fejlődését.
   title: Üdvözöljük a Seelen UI-n!
 widget:
+  add_workspace_override: Felülbírálás munkaterületen
   default_instance: Alapértelmezett példány
   default_instance_hint: Mindig aktív, a root widget konfigurációját használja
   enable: Engedélyezze ezt a widgetet
@@ -459,6 +459,11 @@ widget:
   extra_instances: Extra példányok
   instance: Példa
   instances: Instances
+  remove_workspace_override: Felülírás eltávolítása (öröklés a monitorról)
+  select_workspace: Válasszon ki egy munkaterületet
+  workspace_fallback_name: Asztali {{0}}
+  workspace_overrides: Munkaterület felülbírálja
+  workspace_row: '{{0}}. sor'
 wm:
   animations:
     duration: Animációs időtartam (MS)

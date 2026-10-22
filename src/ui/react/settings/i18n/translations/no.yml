@@ -382,7 +382,6 @@ wall:
   wallpapers: Bakgrunnsbilder
   wallpapers_and_collections: Bakgrunnsbilder og samlinger
   withOverlay: Med overlegg
-  workspace_collections: Arbeidsområdesamlinger
 weg:
   auto_hide: Skjul automatisk
   auto_hide_touch_disabled: Skjul automatisk er ikke tilgjengelig på enheter med berøringsskjerm
@@ -447,6 +446,7 @@ welcome:
     seg.
   title: Velkommen til Seelen UI!
 widget:
+  add_workspace_override: Overstyr på et arbeidsområde
   default_instance: Standardforekomst
   default_instance_hint: Alltid aktiv, bruker root-widget-konfigurasjonen
   enable: Aktiver denne widgeten
@@ -454,6 +454,11 @@ widget:
   extra_instances: Ekstra forekomster
   instance: Forekomst
   instances: Forekomster
+  remove_workspace_override: Fjern overstyring (arv fra monitor)
+  select_workspace: Velg et arbeidsområde
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Arbeidsområde overstyrer
+  workspace_row: Rad {{0}}
 wm:
   animations:
     duration: Animasjonsvarighet (MS)

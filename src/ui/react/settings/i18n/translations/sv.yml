@@ -381,7 +381,6 @@ wall:
   wallpapers: Bakgrundsbilder
   wallpapers_and_collections: Tapeter och samlingar
   withOverlay: Med överlägg
-  workspace_collections: Arbetsyta samlingar
 weg:
   auto_hide: Auto Hide
   auto_hide_touch_disabled: Automatisk döljning är inte tillgängligt på enheter med pekskärm
@@ -444,6 +443,7 @@ welcome:
     – din feedback hjälper projektet att växa och förbättras.
   title: Välkommen till Seelen UI!
 widget:
+  add_workspace_override: Åsidosätt på en arbetsyta
   default_instance: Standardinstans
   default_instance_hint: Alltid aktiv, använder root-widgetkonfigurationen
   enable: Aktivera denna widget
@@ -451,6 +451,11 @@ widget:
   extra_instances: Extra instanser
   instance: Exempel
   instances: Instanser
+  remove_workspace_override: Ta bort åsidosättning (ärv från monitor)
+  select_workspace: Välj en arbetsyta
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Arbetsytan åsidosätter
+  workspace_row: Rad {{0}}
 wm:
   animations:
     duration: Animationens varaktighet (MS)

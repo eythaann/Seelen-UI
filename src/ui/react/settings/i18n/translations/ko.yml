@@ -352,7 +352,6 @@ wall:
   wallpapers: 배경화면
   wallpapers_and_collections: 배경화면 및 컬렉션
   withOverlay: 오버레이 사용
-  workspace_collections: 작업공간 컬렉션
 weg:
   auto_hide: 자동 숨기기
   auto_hide_touch_disabled: 터치 스크린 장치에서는 자동 숨기기를 사용할 수 없습니다.
@@ -412,6 +411,7 @@ welcome:
   review: Seelen UI를 즐겨 사용하신다면 스토어에 리뷰를 남겨보세요. 여러분의 피드백은 프로젝트 성장과 개선에 도움이 됩니다.
   title: Seelen UI에 오신 것을 환영합니다!
 widget:
+  add_workspace_override: 작업공간에서 재정의
   default_instance: 기본 인스턴스
   default_instance_hint: 항상 활성 상태이며 루트 위젯 구성을 사용합니다.
   enable: 이 위젯 활성화
@@ -419,6 +419,11 @@ widget:
   extra_instances: 추가 인스턴스
   instance: 사례
   instances: 인스턴스
+  remove_workspace_override: 재정의 제거(모니터에서 상속)
+  select_workspace: 작업공간 선택
+  workspace_fallback_name: 데스크톱 {{0}}
+  workspace_overrides: 작업공간 재정의
+  workspace_row: 행 {{0}}
 wm:
   animations:
     duration: 애니메이션 지속 시간 (MS)

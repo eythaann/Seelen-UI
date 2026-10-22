@@ -383,7 +383,6 @@ wall:
   wallpapers: Tapetes
   wallpapers_and_collections: Tapetes un kolekcijas
   withOverlay: Ar pārklājumu
-  workspace_collections: Darbvietu kolekcijas
 weg:
   auto_hide: Auto paslēpt
   auto_hide_touch_disabled: Automātiskā slēpšana nav pieejama skārienekrāna ierīcēs
@@ -445,6 +444,7 @@ welcome:
   review: "Ja jums patīk izmantot Seelen UI, apsveriet iespēju atstāt atsauksmi par veikalu\_— jūsu atsauksmes palīdz projektam augt un uzlaboties."
   title: Laipni lūdzam Seelen lietotāja saskarnē!
 widget:
+  add_workspace_override: Ignorēšana darbvietā
   default_instance: Noklusējuma instance
   default_instance_hint: Vienmēr aktīvs, izmanto saknes logrīka konfigurāciju
   enable: Ieslēgt šo logrīku
@@ -452,6 +452,11 @@ widget:
   extra_instances: Papildu gadījumi
   instance: Piemērs
   instances: Instances
+  remove_workspace_override: Noņemt ignorēšanu (mantot no monitora)
+  select_workspace: Izvēlieties darbvietu
+  workspace_fallback_name: Darbvirsma {{0}}
+  workspace_overrides: Darbvietas ignorē
+  workspace_row: "{{0}}.\_rinda"
 wm:
   animations:
     duration: Animācijas ilgums (MS)

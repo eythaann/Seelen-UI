@@ -383,7 +383,6 @@ wall:
   wallpapers: Horma-irudiak
   wallpapers_and_collections: Horma-irudiak eta bildumak
   withOverlay: Gainjartzearekin
-  workspace_collections: Lan-esparruko bildumak
 weg:
   auto_hide: Ezkutatu automatikoa
   auto_hide_touch_disabled: Ezkutatze automatikoa ez dago erabilgarri ukipen-pantailako gailuetan
@@ -447,6 +446,7 @@ welcome:
     uztea; zure iritziak proiektua hazten eta hobetzen laguntzen du.
   title: Ongi etorri Seelen UI-ra!
 widget:
+  add_workspace_override: Gainidatzi laneko gune batean
   default_instance: Instantzia lehenetsia
   default_instance_hint: Beti aktibo, root widget-aren konfigurazioa erabiltzen du
   enable: Gaitu widget hau
@@ -454,6 +454,11 @@ widget:
   extra_instances: Instantzia gehigarriak
   instance: Instantzia
   instances: Makineria
+  remove_workspace_override: Kendu gainidaztea (monitoretik heredatu)
+  select_workspace: Hautatu lan-eremu bat
+  workspace_fallback_name: Mahaigaina {{0}}
+  workspace_overrides: Laneko eremuak gainidazten ditu
+  workspace_row: '{{0}} errenkada'
 wm:
   animations:
     duration: Animazioaren iraupena (MS)

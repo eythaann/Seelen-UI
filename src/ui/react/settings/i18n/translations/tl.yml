@@ -393,7 +393,6 @@ wall:
   wallpapers: Mga Wallpaper
   wallpapers_and_collections: Mga Wallpaper at Koleksyon
   withOverlay: Na may overlay
-  workspace_collections: Mga Koleksyon ng Workspace
 weg:
   auto_hide: Auto itago
   auto_hide_touch_disabled: Hindi available ang auto hide sa mga touch screen device
@@ -458,6 +457,7 @@ welcome:
     lumago at umunlad.
   title: Maligayang pagdating sa Seelen UI!
 widget:
+  add_workspace_override: I-override sa isang workspace
   default_instance: Default na Instance
   default_instance_hint: Palaging aktibo, gumagamit ng root widget config
   enable: Paganahin ang widget na ito
@@ -465,6 +465,11 @@ widget:
   extra_instances: Mga Dagdag na Instance
   instance: Halimbawa
   instances: Mga pagkakataon
+  remove_workspace_override: Alisin ang override (manahin mula sa monitor)
+  select_workspace: Pumili ng workspace
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Na-override ang workspace
+  workspace_row: Hilera {{0}}
 wm:
   animations:
     duration: Tagal ng Animation (MS)

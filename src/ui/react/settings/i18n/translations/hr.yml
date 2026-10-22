@@ -385,7 +385,6 @@ wall:
   wallpapers: Pozadine
   wallpapers_and_collections: Pozadine i kolekcije
   withOverlay: S prekrivanjem
-  workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto sakrij
   auto_hide_touch_disabled: Automatsko skrivanje nije dostupno na uređajima s dodirnim zaslonom
@@ -449,6 +448,7 @@ welcome:
     trgovini - vaše povratne informacije pomažu razvoju i poboljšanju projekta.
   title: Dobro došli u Seelen UI!
 widget:
+  add_workspace_override: Nadjačavanje na radnom prostoru
   default_instance: Zadana instanca
   default_instance_hint: Uvijek aktivan, koristi konfiguraciju korijenskog widgeta
   enable: Omogući ovaj widget
@@ -456,6 +456,11 @@ widget:
   extra_instances: Dodatne instance
   instance: Primjer
   instances: Slučajevi
+  remove_workspace_override: Ukloni nadjačavanje (naslijedi od monitora)
+  select_workspace: Odaberite radni prostor
+  workspace_fallback_name: Radna površina {{0}}
+  workspace_overrides: Nadjačavanja radnog prostora
+  workspace_row: Red {{0}}
 wm:
   animations:
     duration: Trajanje animacije (MS)

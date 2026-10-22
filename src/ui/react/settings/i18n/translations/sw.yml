@@ -378,7 +378,6 @@ wall:
   wallpapers: Mandhari
   wallpapers_and_collections: Mandhari na Mikusanyiko
   withOverlay: Na overlay
-  workspace_collections: Mikusanyiko ya Nafasi ya Kazi
 weg:
   auto_hide: Kujificha kiotomatiki
   auto_hide_touch_disabled: Ficha otomatiki haipatikani kwenye vifaa vya skrini ya kugusa
@@ -444,6 +443,7 @@ welcome:
     maoni yako husaidia mradi kukua na kuboreka.
   title: Karibu kwenye Seelen UI!
 widget:
+  add_workspace_override: Batilisha nafasi ya kazi
   default_instance: Tukio Chaguomsingi
   default_instance_hint: Inatumika kila wakati, hutumia usanidi wa wijeti ya mizizi
   enable: Wezesha widget hii
@@ -451,6 +451,11 @@ widget:
   extra_instances: Matukio ya Ziada
   instance: Mfano
   instances: Matukio
+  remove_workspace_override: Ondoa ubatilishaji (urithi kutoka kwa mfuatiliaji)
+  select_workspace: Chagua eneo la kazi
+  workspace_fallback_name: Eneo-kazi {{0}}
+  workspace_overrides: Nafasi ya kazi imebatilisha
+  workspace_row: Safu mlalo {{0}}
 wm:
   animations:
     duration: Muda wa Uhuishaji (MS)

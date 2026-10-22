@@ -384,7 +384,6 @@ wall:
   wallpapers: Papéis de parede
   wallpapers_and_collections: Papéis de parede e coleções
   withOverlay: Com sobreposição
-  workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Ocultar automaticamente
   auto_hide_touch_disabled: >-
@@ -450,6 +449,7 @@ welcome:
     seu feedback ajuda o projeto a crescer e melhorar.
   title: Bem-vindo à UI da Seelen!
 widget:
+  add_workspace_override: Substituir em um espaço de trabalho
   default_instance: Instância padrão
   default_instance_hint: Sempre ativo, usa a configuração do widget raiz
   enable: Ativar esse widget
@@ -457,6 +457,11 @@ widget:
   extra_instances: Instâncias extras
   instance: Exemplo
   instances: Instâncias
+  remove_workspace_override: Remover substituição (herdar do monitor)
+  select_workspace: Selecione um espaço de trabalho
+  workspace_fallback_name: Computador {{0}}
+  workspace_overrides: Substituições do espaço de trabalho
+  workspace_row: Linha {{0}}
 wm:
   animations:
     duration: Duração da animação (MS)

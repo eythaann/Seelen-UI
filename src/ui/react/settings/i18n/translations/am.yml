@@ -363,7 +363,6 @@ wall:
   wallpapers: የግድግዳ ወረቀቶች
   wallpapers_and_collections: የግድግዳ ወረቀቶች እና ስብስቦች
   withOverlay: በተደራቢ
-  workspace_collections: የስራ ቦታ ስብስቦች
 weg:
   auto_hide: ራስ-ሰር መደበቅ
   auto_hide_touch_disabled: ራስ-ደብቅ በንክኪ ስክሪን መሳሪያዎች ላይ አይገኝም
@@ -426,6 +425,7 @@ welcome:
     እና እንዲሻሻል ይረዳል።
   title: ወደ Seelen UI እንኳን በደህና መጡ!
 widget:
+  add_workspace_override: የስራ ቦታን ይሽሩ
   default_instance: ነባሪ ምሳሌ
   default_instance_hint: ሁልጊዜ ንቁ፣ የስር መግብር አወቃቀሩን ይጠቀማል
   enable: ይህን ንዑስ ፕሮግራም ያንቁ
@@ -433,6 +433,11 @@ widget:
   extra_instances: ተጨማሪ ምሳሌዎች
   instance: ምሳሌ
   instances: ሁኔታዎች
+  remove_workspace_override: መሻርን አስወግድ (ከክትትል ውርስ)
+  select_workspace: የስራ ቦታ ይምረጡ
+  workspace_fallback_name: ዴስክቶፕ {0}
+  workspace_overrides: የስራ ቦታ ይሽራል።
+  workspace_row: ረድፍ {{0}}
 wm:
   animations:
     duration: እነማ ቆይታ (MS)

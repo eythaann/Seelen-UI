@@ -376,7 +376,6 @@ wall:
   wallpapers: Veggfóður
   wallpapers_and_collections: Veggfóður og söfn
   withOverlay: Með yfirlagi
-  workspace_collections: Vinnusöfn
 weg:
   auto_hide: Sjálfvirk fela
   auto_hide_touch_disabled: Sjálfvirk fela er ekki í boði á snertiskjátækjum
@@ -440,6 +439,7 @@ welcome:
     umsögn um verslunina - athugasemdir þínar hjálpa verkefninu að vaxa og bæta.
   title: Velkomin í Seelen HÍ!
 widget:
+  add_workspace_override: Hneka á vinnusvæði
   default_instance: Sjálfgefið tilvik
   default_instance_hint: Alltaf virk, notar stillingar rótgræjunnar
   enable: Virkja þennan búnað
@@ -447,6 +447,11 @@ widget:
   extra_instances: Aukatilvik
   instance: Dæmi
   instances: Dæmi
+  remove_workspace_override: Fjarlægja hnekkt (erfa af skjá)
+  select_workspace: Veldu vinnusvæði
+  workspace_fallback_name: Skrifborð {{0}}
+  workspace_overrides: Vinnusvæði hnekkir
+  workspace_row: Röð {{0}}
 wm:
   animations:
     duration: Lengd hreyfimynda (MS)

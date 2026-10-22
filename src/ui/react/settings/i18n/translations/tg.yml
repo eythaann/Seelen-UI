@@ -386,7 +386,6 @@ wall:
   wallpapers: Обои обои
   wallpapers_and_collections: Обои ва коллексияҳо
   withOverlay: Бо overlay
-  workspace_collections: Коллексияҳои фазои корӣ
 weg:
   auto_hide: Худкор Пинҳон кардани
   auto_hide_touch_disabled: Пинҳонкунии худкор дар дастгоҳҳои экрани сенсорӣ мавҷуд нест
@@ -451,6 +450,7 @@ welcome:
     мекунанд.
   title: Хуш омадед ба Seelen UI!
 widget:
+  add_workspace_override: Дар фазои корӣ бекор кунед
   default_instance: Намунаи пешфарз
   default_instance_hint: Ҳамеша фаъол, конфигуратсияи виҷети решаро истифода мебарад
   enable: Ин виджетро фаъол кунед
@@ -458,6 +458,11 @@ widget:
   extra_instances: Ҳолатҳои иловагӣ
   instance: Мисол
   instances: Ҳолатҳо
+  remove_workspace_override: Бекор кардани бекоркунӣ (мерос аз монитор)
+  select_workspace: Фазои корӣ интихоб кунед
+  workspace_fallback_name: Мизи корӣ {{0}}
+  workspace_overrides: Ҷойгиркунии фазои корӣ
+  workspace_row: Сатри {{0}}
 wm:
   animations:
     duration: Давомнокии аниматсия (MS)

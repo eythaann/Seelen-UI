@@ -390,7 +390,6 @@ wall:
   wallpapers: Wallpapers
   wallpapers_and_collections: Warqadaha & Ururinta
   withOverlay: Iyadoo lagu daboolay
-  workspace_collections: Ururinta Goobta Shaqada
 weg:
   auto_hide: Auto qaraha
   auto_hide_touch_disabled: Qarinta tooska ah lagama heli karo aaladaha shaashadda taabashada
@@ -455,6 +454,7 @@ welcome:
     oo horumaro.
   title: Ku soo dhawoow Seelen UI!
 widget:
+  add_workspace_override: Ka gudub goobta shaqada
   default_instance: Tusaale ahaan
   default_instance_hint: Had iyo jeer fir fircoon, isticmaal nidaamka xididka widget-ka
   enable: U oggolow widget-kaan
@@ -462,6 +462,11 @@ widget:
   extra_instances: Tusaalooyinka Dheeraadka ah
   instance: Tusaale
   instances: Tusaca
+  remove_workspace_override: Ka saar xad-gudubka (ka dhaxalka kormeeraha)
+  select_workspace: Dooro goob shaqo
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Goobta shaqadu way dhaaftay
+  workspace_row: Saf {{0}}
 wm:
   animations:
     duration: Duration animation (MS)

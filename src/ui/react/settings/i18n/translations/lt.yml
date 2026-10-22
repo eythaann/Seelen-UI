@@ -382,7 +382,6 @@ wall:
   wallpapers: Užsklandos
   wallpapers_and_collections: Užsklandos ir kolekcijos
   withOverlay: Su perdanga
-  workspace_collections: Darbo vietos kolekcijos
 weg:
   auto_hide: Automatinis slėptuvė
   auto_hide_touch_disabled: Automatinis slėpimas negalimas įrenginiuose su jutikliniu ekranu
@@ -446,6 +445,7 @@ welcome:
     ir tobulėti.
   title: Sveiki atvykę į Seelen vartotojo sąsają!
 widget:
+  add_workspace_override: Nepaisyti darbo srityje
   default_instance: Numatytasis egzempliorius
   default_instance_hint: Visada aktyvus, naudoja šakninio valdiklio konfigūraciją
   enable: Įjungti šį valdiklį
@@ -453,6 +453,11 @@ widget:
   extra_instances: Papildomi atvejai
   instance: Pavyzdys
   instances: Atvejai
+  remove_workspace_override: Pašalinti nepaisymą (paveldėti iš monitoriaus)
+  select_workspace: Pasirinkite darbo sritį
+  workspace_fallback_name: Darbalaukis {{0}}
+  workspace_overrides: Darbo sritis nepaisoma
+  workspace_row: '{{0}} eilutė'
 wm:
   animations:
     duration: Animacijos trukmė (MS)

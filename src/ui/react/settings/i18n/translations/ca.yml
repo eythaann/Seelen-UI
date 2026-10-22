@@ -388,7 +388,6 @@ wall:
   wallpapers: Fons de pantalla
   wallpapers_and_collections: Fons de pantalla i col·leccions
   withOverlay: Amb superposició
-  workspace_collections: Col·leccions d'espais de treball
 weg:
   auto_hide: Amaga automàtic
   auto_hide_touch_disabled: L'ocultació automàtica no està disponible als dispositius de pantalla tàctil
@@ -454,6 +453,7 @@ welcome:
     els vostres comentaris ajuden el projecte a créixer i millorar.
   title: Benvingut a Seelen UI!
 widget:
+  add_workspace_override: Anul·lació en un espai de treball
   default_instance: Instància per defecte
   default_instance_hint: Sempre actiu, utilitza la configuració del widget arrel
   enable: Activa aquest widget
@@ -461,6 +461,11 @@ widget:
   extra_instances: Instàncies addicionals
   instance: Instància
   instances: Instàncies
+  remove_workspace_override: Elimina la substitució (hereta del monitor)
+  select_workspace: Seleccioneu un espai de treball
+  workspace_fallback_name: Escriptori {{0}}
+  workspace_overrides: Anul·lació de l'espai de treball
+  workspace_row: Fila {{0}}
 wm:
   animations:
     duration: Durada de l'animació (MS)

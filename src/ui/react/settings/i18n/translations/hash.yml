@@ -299,7 +299,6 @@ wall.wallpaper_settings: ef077e2d
 wall.wallpapers: '60830054'
 wall.wallpapers_and_collections: aaceb628
 wall.withOverlay: e6e749f8
-wall.workspace_collections: cd1ad7b4
 weg.auto_hide: 976be4fc
 weg.auto_hide_touch_disabled: fe4479c4
 weg.delay_to_hide: 5cd7cf8c
@@ -346,6 +345,7 @@ welcome.message: e3f2198
 welcome.ok: 47f6b83c
 welcome.review: 7bf234a6
 welcome.title: ed1616e8
+widget.add_workspace_override: 93e126fb
 widget.default_instance: 5c19458
 widget.default_instance_hint: 30eb6f5c
 widget.enable: 84d90d68
@@ -353,6 +353,11 @@ widget.enable_for_monitor: 27d7e530
 widget.extra_instances: d8f9db7c
 widget.instance: 59b0d5cc
 widget.instances: f0607bac
+widget.remove_workspace_override: e44dc7e4
+widget.select_workspace: '41839613'
+widget.workspace_fallback_name: 374768b8
+widget.workspace_overrides: 5798a494
+widget.workspace_row: f62db020
 wm.animations.duration: cc3b9684
 wm.animations.ease_function: ad6da672
 wm.animations.enable: 1e3a1731

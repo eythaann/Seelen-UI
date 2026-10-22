@@ -374,7 +374,6 @@ wall:
   wallpapers: Iṣẹṣọ ogiri
   wallpapers_and_collections: Iṣẹṣọ ogiri & Awọn akojọpọ
   withOverlay: Pẹlu apọju
-  workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
   auto_hide_touch_disabled: Ipamọ aifọwọyi ko si lori awọn ẹrọ iboju ifọwọkan
@@ -437,6 +436,7 @@ welcome:
     rẹ ṣe iranlọwọ fun iṣẹ akanṣe lati dagba ati ilọsiwaju.
   title: Kaabọ si Seelen UI!
 widget:
+  add_workspace_override: Pari lori aaye iṣẹ kan
   default_instance: Apeere aiyipada
   default_instance_hint: Ṣiṣẹ nigbagbogbo, nlo atunto ẹrọ ailorukọ root
   enable: Mu ẹrọ ailorukọ yii ṣiṣẹ
@@ -444,6 +444,11 @@ widget:
   extra_instances: Awọn apẹẹrẹ afikun
   instance: Apeere
   instances: Awọn iṣẹlẹ
+  remove_workspace_override: Yọ imukuro kuro (jogun lati ọdọ atẹle)
+  select_workspace: Yan aaye iṣẹ kan
+  workspace_fallback_name: Ojú-iṣẹ {{0}}
+  workspace_overrides: Aaye iṣẹ dojuiwọn
+  workspace_row: Lara {{0}}
 wm:
   animations:
     duration: Akoko Idaraya (MS)

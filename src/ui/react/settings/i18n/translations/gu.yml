@@ -379,7 +379,6 @@ wall:
   wallpapers: વૉલપેપર્સ
   wallpapers_and_collections: વૉલપેપર્સ અને સંગ્રહો
   withOverlay: ઓવરલે સાથે
-  workspace_collections: વર્કસ્પેસ સંગ્રહો
 weg:
   auto_hide: સ્વતઃ છુપાવો
   auto_hide_touch_disabled: ટચ સ્ક્રીન ઉપકરણો પર સ્વતઃ છુપાવો ઉપલબ્ધ નથી
@@ -443,6 +442,7 @@ welcome:
     વિચારો — તમારો પ્રતિસાદ પ્રોજેક્ટને વધવા અને સુધારવામાં મદદ કરે છે.
   title: Seelen UI માં આપનું સ્વાગત છે!
 widget:
+  add_workspace_override: વર્કસ્પેસ પર ઓવરરાઇડ કરો
   default_instance: ડિફૉલ્ટ ઇન્સ્ટન્સ
   default_instance_hint: હંમેશા સક્રિય, રૂટ વિજેટ રૂપરેખાનો ઉપયોગ કરે છે
   enable: આ વિજેટને સક્ષમ કરો
@@ -450,6 +450,11 @@ widget:
   extra_instances: વધારાના દાખલાઓ
   instance: દાખલો
   instances: દાખલા
+  remove_workspace_override: ઓવરરાઇડ દૂર કરો (મોનિટરમાંથી વારસામાં મેળવો)
+  select_workspace: કાર્યસ્થળ પસંદ કરો
+  workspace_fallback_name: ડેસ્કટોપ {{0}}
+  workspace_overrides: વર્કસ્પેસ ઓવરરાઇડ કરે છે
+  workspace_row: પંક્તિ {{0}}
 wm:
   animations:
     duration: એનિમેશન અવધિ (એમએસ)

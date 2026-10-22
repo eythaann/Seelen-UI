@@ -379,7 +379,6 @@ wall:
   wallpapers: Taustapildid
   wallpapers_and_collections: Taustapildid ja kollektsioonid
   withOverlay: Koos kattekihiga
-  workspace_collections: Tööruumi kogud
 weg:
   auto_hide: Automaatne peida
   auto_hide_touch_disabled: Automaatne peitmine pole puuteekraaniga seadmetes saadaval
@@ -443,6 +442,7 @@ welcome:
     jätmist – teie tagasiside aitab projektil kasvada ja täiustada.
   title: Tere tulemast Seeleni kasutajaliidese!
 widget:
+  add_workspace_override: Alistada tööalal
   default_instance: Vaikimisi eksemplar
   default_instance_hint: Alati aktiivne, kasutab juurvidina konfiguratsiooni
   enable: Võta see vidin kasutusele
@@ -450,6 +450,11 @@ widget:
   extra_instances: Lisajuhtumid
   instance: Näide
   instances: Instants
+  remove_workspace_override: Eemalda alistamine (pärib monitorilt)
+  select_workspace: Valige tööala
+  workspace_fallback_name: Töölaud {{0}}
+  workspace_overrides: Tööala alistab
+  workspace_row: Rida {{0}}
 wm:
   animations:
     duration: Animatsiooni kestus (MS)

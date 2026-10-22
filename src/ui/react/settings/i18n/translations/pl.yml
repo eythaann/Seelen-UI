@@ -391,7 +391,6 @@ wall:
   wallpapers: Tapety
   wallpapers_and_collections: Tapety i kolekcje
   withOverlay: Z nakładką
-  workspace_collections: Kolekcje obszaru roboczego
 weg:
   auto_hide: Automatyczne ukrywanie
   auto_hide_touch_disabled: >-
@@ -456,6 +455,7 @@ welcome:
     recenzji w sklepie — Twoja opinia pomoże rozwijać i ulepszać projekt.
   title: Witamy w interfejsie Seelen!
 widget:
+  add_workspace_override: Zastąp w obszarze roboczym
   default_instance: Domyślna instancja
   default_instance_hint: Zawsze aktywny, korzysta z konfiguracji widgetu głównego
   enable: Włącz ten widżet
@@ -463,6 +463,11 @@ widget:
   extra_instances: Dodatkowe instancje
   instance: Przykład
   instances: Wystąpienia
+  remove_workspace_override: Usuń zastąpienie (odziedzicz z monitora)
+  select_workspace: Wybierz obszar roboczy
+  workspace_fallback_name: Komputer stacjonarny {{0}}
+  workspace_overrides: Zastąpienia obszaru roboczego
+  workspace_row: Wiersz {{0}}
 wm:
   animations:
     duration: Czas trwania animacji (MS)

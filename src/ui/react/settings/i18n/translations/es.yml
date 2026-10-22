@@ -392,7 +392,6 @@ wall:
   wallpapers: Fondos de pantalla
   wallpapers_and_collections: Fondos de pantalla y colecciones
   withOverlay: Con superposición
-  workspace_collections: Colecciones de espacios de trabajo
 weg:
   auto_hide: Auto Ocultar
   auto_hide_touch_disabled: >-
@@ -460,6 +459,7 @@ welcome:
     comentarios ayudan a que el proyecto crezca y mejore.
   title: ¡Bienvenido a la interfaz de usuario de Seelen!
 widget:
+  add_workspace_override: Anular en un espacio de trabajo
   default_instance: Instancia predeterminada
   default_instance_hint: Siempre activo, utiliza la configuración del widget raíz
   enable: Activar este widget
@@ -467,6 +467,11 @@ widget:
   extra_instances: Instancias adicionales
   instance: Instancia
   instances: Instancias
+  remove_workspace_override: Eliminar anulación (heredar del monitor)
+  select_workspace: Seleccione un espacio de trabajo
+  workspace_fallback_name: Escritorio {{0}}
+  workspace_overrides: Anulaciones del espacio de trabajo
+  workspace_row: Fila {{0}}
 wm:
   animations:
     duration: Duración de animación (MS)

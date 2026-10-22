@@ -7,10 +7,14 @@ auth:
 cancel: Hủy
 done: Hoàn tất
 elevated:
-  description: |-
+  description: >-
     Seelen UI hiện đang chạy dưới quyền Quản trị viên (Administrator).
-    Điều này không giúp tăng thêm tính năng nào mà có thể tiềm ẩn rủi ro bảo mật.
-    Để đảm bảo an toàn, vui lòng khởi động lại ứng dụng với quyền người dùng thông thường.
+
+    Điều này không giúp tăng thêm tính năng nào mà có thể tiềm ẩn rủi ro bảo
+    mật.
+
+    Để đảm bảo an toàn, vui lòng khởi động lại ứng dụng với quyền người dùng
+    thông thường.
   title: Đang chạy dưới quyền Quản trị viên
 file_explorer: Trình quản lý tệp (File Explorer)
 resource:
@@ -41,11 +45,13 @@ runtime:
     Vui lòng cài đặt lại ứng dụng từ trang chủ chính thức.
   files_integrity_title: Cảnh báo bảo mật - Kiểm tra toàn vẹn tệp thất bại
   not_found: Không tìm thấy WebView2 Runtime
-  not_found_description: Seelen UI yêu cầu Microsoft WebView2 Runtime để hoạt động. Vui lòng cài đặt bổ sung.
+  not_found_description: >-
+    Seelen UI yêu cầu Microsoft WebView2 Runtime để hoạt động. Vui lòng cài đặt
+    bổ sung.
   outdated: WebView2 Runtime đã lỗi thời
   outdated_description: >-
-    Seelen UI yêu cầu WebView2 Runtime phiên bản %{min_version} trở lên. Vui lòng
-    cập nhật phiên bản mới hơn.
+    Seelen UI yêu cầu WebView2 Runtime phiên bản %{min_version} trở lên. Vui
+    lòng cập nhật phiên bản mới hơn.
 service:
   not_running: Dịch vụ Seelen UI Service chưa chạy
   not_running_description: >-
@@ -54,7 +60,9 @@ service:
   not_running_ok: Khởi động dịch vụ
 shortcut:
   conflicts:
-    body: Một số phím tắt đang bị trùng lặp với nhiều hành động, vui lòng thiết lập lại.
+    body: >-
+      Một số phím tắt đang bị trùng lặp với nhiều hành động, vui lòng thiết lập
+      lại.
     dismiss: Bỏ qua
     review: Xem lại
     title: Phát hiện xung đột phím tắt

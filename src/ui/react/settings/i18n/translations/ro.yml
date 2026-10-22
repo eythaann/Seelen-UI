@@ -387,7 +387,6 @@ wall:
   wallpapers: Imagini de fundal
   wallpapers_and_collections: Imagini de fundal și colecții
   withOverlay: Cu suprapunere
-  workspace_collections: Colecții de spațiu de lucru
 weg:
   auto_hide: Ascundere automată
   auto_hide_touch_disabled: Ascunderea automată nu este disponibilă pe dispozitivele cu ecran tactil
@@ -452,6 +451,7 @@ welcome:
     îmbunătățească.
   title: Bun venit la Seelen UI!
 widget:
+  add_workspace_override: Ignorați pe un spațiu de lucru
   default_instance: Instanță implicită
   default_instance_hint: Întotdeauna activ, folosește configurația widget rădăcină
   enable: Activați acest widget
@@ -459,6 +459,11 @@ widget:
   extra_instances: Instanțe suplimentare
   instance: Exemplu
   instances: Instanțe
+  remove_workspace_override: Eliminați anularea (moșteniți de pe monitor)
+  select_workspace: Selectați un spațiu de lucru
+  workspace_fallback_name: Desktop {{0}}
+  workspace_overrides: Suprascrierea spațiului de lucru
+  workspace_row: Rândul {{0}}
 wm:
   animations:
     duration: Durata de animație (MS)

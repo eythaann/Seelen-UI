@@ -390,7 +390,6 @@ wall:
   wallpapers: Fonds d'écran
   wallpapers_and_collections: Fonds d'écran et collections
   withOverlay: Avec recouvrement
-  workspace_collections: Collections d'espaces de travail
 weg:
   auto_hide: Masquage automatique
   auto_hide_touch_disabled: >-
@@ -458,6 +457,7 @@ welcome:
     vos commentaires aident le projet à se développer et à s'améliorer.
   title: "Bienvenue dans l'interface utilisateur de Seelen\_!"
 widget:
+  add_workspace_override: Remplacer sur un espace de travail
   default_instance: Instance par défaut
   default_instance_hint: Toujours actif, utilise la configuration du widget racine
   enable: Activer ce widget
@@ -465,6 +465,11 @@ widget:
   extra_instances: Instances supplémentaires
   instance: Exemple
   instances: Instances
+  remove_workspace_override: Supprimer le remplacement (hériter du moniteur)
+  select_workspace: Sélectionnez un espace de travail
+  workspace_fallback_name: Ordinateur de bureau {{0}}
+  workspace_overrides: Remplacements de l'espace de travail
+  workspace_row: "Ligne\_{{0}}"
 wm:
   animations:
     duration: Durée d'animation (MS)

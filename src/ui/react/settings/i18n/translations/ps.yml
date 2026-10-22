@@ -373,7 +373,6 @@ wall:
   wallpapers: وال پیپرونه
   wallpapers_and_collections: وال پیپرونه او ټولګه
   withOverlay: د
-  workspace_collections: د کار ځای ټولګه
 weg:
   auto_hide: آٹو پټول
   auto_hide_touch_disabled: د ټچ سکرین وسیلو کې اتومات پټول شتون نلري
@@ -436,6 +435,7 @@ welcome:
     ستاسو نظر د پروژې وده او وده کې مرسته کوي.
   title: Seelen UI ته ښه راغلاست!
 widget:
+  add_workspace_override: په یوه کاري ځای کې وګرځئ
   default_instance: ډیفالټ مثال
   default_instance_hint: تل فعال، د روټ ویجټ ترتیب کاروي
   enable: دې ویجیټ وړ کړئ
@@ -443,6 +443,11 @@ widget:
   extra_instances: اضافي مثالونه
   instance: مثال
   instances: مثالونه
+  remove_workspace_override: اووررایډ لرې کړئ (د مانیټر څخه میراث)
+  select_workspace: د کار ځای غوره کړئ
+  workspace_fallback_name: ډیسټاپ {{0}}
+  workspace_overrides: د کار ځای له منځه ځي
+  workspace_row: قطار {{0}}
 wm:
   animations:
     duration: د انیمیشن موده (MS)

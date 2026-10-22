@@ -382,7 +382,6 @@ wall:
   wallpapers: Wallpapers
   wallpapers_and_collections: Agtergronde en versamelings
   withOverlay: Met oorleg
-  workspace_collections: Werkspasie Versamelings
 weg:
   auto_hide: Outo -vel
   auto_hide_touch_disabled: Outo-versteek is nie op raakskermtoestelle beskikbaar nie
@@ -445,6 +444,7 @@ welcome:
     winkel te gee - jou terugvoer help die projek om te groei en te verbeter.
   title: Welkom by Seelen UI!
 widget:
+  add_workspace_override: Ignoreer op 'n werkspasie
   default_instance: Verstek instansie
   default_instance_hint: Altyd aktief, gebruik die wortellegstukopstelling
   enable: Aktiveer hierdie widget
@@ -452,6 +452,11 @@ widget:
   extra_instances: Ekstra gevalle
   instance: Geval
   instances: Instansies
+  remove_workspace_override: Verwyder ignorering (erf van monitor)
+  select_workspace: Kies 'n werkspasie
+  workspace_fallback_name: Werkskerm {{0}}
+  workspace_overrides: Werkspasie ignoreer
+  workspace_row: Ry {{0}}
 wm:
   animations:
     duration: Animasie -duur (MS)
