@@ -3,6 +3,7 @@ import { _invoke, webviewInfo } from "src/ui/vanilla/entry-point/_tauri.ts";
 import { listen } from "@tauri-apps/api/event";
 
 import { hookLocalStorage } from "src/ui/vanilla/entry-point/_LocalStorage";
+import { startNativeBlurController } from "../../../../libs/core/src/state/theme/nativeBlur.ts";
 
 const indexJsCode = fetch("./index.js").then((res) => res.text());
 
@@ -25,6 +26,7 @@ listen<Widget[]>("widgets-changed", ({ payload }) => {
 
 // set document id
 document.documentElement.dataset.widgetId = currentWidgetId;
+startNativeBlurController();
 
 // hook local storage, to avoid collition of keys
 hookLocalStorage(currentWidgetId);
