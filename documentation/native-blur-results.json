@@ -1,0 +1,95 @@
+{
+  "measuredAt": "2026-10-23T03:09:22.6792623Z",
+  "implementation": "Local community prototype before latest-master port and before close-timer correction; not a PR-head GPU benchmark",
+  "baseCommit": "507378aa01190617c18ee2c70ecc66b316169437",
+  "dirtyPrototype": true,
+  "executableSha256": "33B49F318F36AD55FB8998579CD73560B9850713BDF88A12B75EC3825DC95790",
+  "windows": {
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "gpus": [
+    {
+      "Name": "DeskIn Virtual Display Adapter",
+      "DriverVersion": "16.26.19.698",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null,
+      "CurrentRefreshRate": null
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 5070 Ti",
+      "DriverVersion": "32.0.16.1742",
+      "CurrentHorizontalResolution": 2560,
+      "CurrentVerticalResolution": 1440,
+      "CurrentRefreshRate": 210
+    }
+  ],
+  "cpu": {
+    "Name": "AMD Ryzen 5 7500F 6-Core Processor             ",
+    "NumberOfLogicalProcessors": 12
+  },
+  "hardwareAcceleration": true,
+  "trials": [
+    {
+      "pair": 0,
+      "mode": "off",
+      "sampleRounds": 35,
+      "seconds": 61.0480872,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.3552622930654055,
+      "seelenPrivateMeanMiB": 1963.5983258928572
+    },
+    {
+      "pair": 0,
+      "mode": "on",
+      "sampleRounds": 35,
+      "seconds": 60.5418915,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.485357470212139,
+      "seelenPrivateMeanMiB": 2016.8561383928572
+    },
+    {
+      "pair": 1,
+      "mode": "on",
+      "sampleRounds": 35,
+      "seconds": 60.5052239,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.272400844281868,
+      "seelenPrivateMeanMiB": 1994.2736607142858
+    },
+    {
+      "pair": 1,
+      "mode": "off",
+      "sampleRounds": 35,
+      "seconds": 60.6520941,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.3403569725419295,
+      "seelenPrivateMeanMiB": 2006.7301339285714
+    },
+    {
+      "pair": 2,
+      "mode": "off",
+      "sampleRounds": 35,
+      "seconds": 60.3459165,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.0612993301574045,
+      "seelenPrivateMeanMiB": 2020.389174107143
+    },
+    {
+      "pair": 2,
+      "mode": "on",
+      "sampleRounds": 35,
+      "seconds": 60.6115922,
+      "dwm3DMeanPercent": 0,
+      "seelenCpuMeanNormalizedPercent": 6.073004984769123,
+      "seelenPrivateMeanMiB": 2050.544419642857
+    }
+  ],
+  "caveats": [
+    "Single physical machine, debug build, same live desktop; not all GPU vendors.",
+    "WMI engine counters are integer percentage samples; low utilization has limited resolution.",
+    "DWM is shared desktop activity. No engine percentages summed across different engines.",
+    "Attributed GPU memory counters are not physical total VRAM; allocations can be shared.",
+    "No pixel correctness, end-to-end latency, frame-time or long-term leak proof."
+  ]
+}
