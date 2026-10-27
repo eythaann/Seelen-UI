@@ -80,7 +80,7 @@
     "real-react-dom": "npm:react-dom@^19.0.0",
     "svelte": "^5.55.4",
     "svelte-check": "^4.4.6",
-    "toml": "^4.1.1",
+    "toml": "^5.0.1",
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
     "yargs": "^18.0.0",
