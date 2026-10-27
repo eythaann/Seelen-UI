@@ -3,6 +3,31 @@
   flex-direction: column;
   gap: var(--spacing-xs);
 
+  .ethernet-entry {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    padding: var(--spacing-xs);
+    text-align: left;
+
+    .ethernet-entry-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .ethernet-entry-name {
+      font-weight: 500;
+    }
+
+    .ethernet-entry-details {
+      color: var(--slu-std-fg-secondary-color);
+    }
+  }
+
   .network-no-adapter {
     display: flex;
     align-items: center;

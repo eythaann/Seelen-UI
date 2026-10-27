@@ -1,7 +1,7 @@
 <script lang="ts">
   import { globalState } from "./state.svelte";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-  import { RadioDeviceKind, type WlanBssEntry } from "@seelen-ui/lib/types";
+  import { AdapterStatus, RadioDeviceKind, type WlanBssEntry } from "@seelen-ui/lib/types";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { t } from "./i18n";
   import WlanEntry from "./components/WlanEntry.svelte";
@@ -74,6 +74,38 @@
   {#if globalState.view === "hotspot"}
     <HotspotView onBack={() => (globalState.view = "main")} />
   {:else}
+    {#if globalState.ethernetAdapters.length > 0}
+      <div class="network-section">
+        <div class="network-section-title">{$t("ethernet.title")}</div>
+        <div class="network-section-entries">
+          {#each globalState.ethernetAdapters as adapter}
+            <button
+              class="ethernet-entry"
+              data-skin="transparent"
+              onclick={() => invoke(SeelenCommand.OpenFile, { path: "ms-settings:network-ethernet" })}
+            >
+              <Icon iconName="FaComputer" />
+              <span class="ethernet-entry-info">
+                <span class="ethernet-entry-name">{adapter.name}</span>
+                <span class="ethernet-entry-details">
+                  {adapter.status === AdapterStatus.up ? $t("ethernet.connected") : $t("ethernet.disconnected")}
+                </span>
+                {#if adapter.status === AdapterStatus.up}
+                  {#if adapter.ipv4}
+                    <span class="ethernet-entry-details">IPv4: {adapter.ipv4}</span>
+                  {/if}
+                  {#if adapter.ipv6}
+                    <span class="ethernet-entry-details">IPv6: {adapter.ipv6}</span>
+                  {/if}
+                {/if}
+              </span>
+              <Icon iconName="IoChevronForward" />
+            </button>
+          {/each}
+        </div>
+      </div>
+    {/if}
+
     {#if !wifiRadio}
       <div class="network-no-adapter">
         {$t("no_adapter")}
@@ -144,14 +176,12 @@
           {/if}
         </div>
       </div>
-
-      {#if wifiRadio?.isEnabled}
-        <div class="network-footer">
-          <button data-skin="transparent" onclick={openNetworkSettings}>
-            {$t("more")}
-          </button>
-        </div>
-      {/if}
     {/if}
+
+    <div class="network-footer">
+      <button data-skin="transparent" onclick={openNetworkSettings}>
+        {$t("more")}
+      </button>
+    </div>
   {/if}
 </div>
