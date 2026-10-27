@@ -30,6 +30,10 @@ let hotspot = lazyRune(() => invoke(SeelenCommand.GetNetworkHotspot));
 subscribe(SeelenEvent.NetworkHotspotChanged, hotspot.setByPayload);
 await hotspot.init();
 
+let adapters = lazyRune(() => invoke(SeelenCommand.GetNetworkAdapters));
+subscribe(SeelenEvent.NetworkAdapters, adapters.setByPayload);
+await adapters.init();
+
 let isScanning = $state(false);
 let selectedSsid = $state<string | null>(null);
 let scanInterval: ReturnType<typeof setInterval> | null = null;
@@ -65,6 +69,10 @@ $effect.root(() => {
 });
 
 class State {
+  get ethernetAdapters() {
+    return adapters.value.filter((adapter) => adapter.type === "ETHERNET_CSMACD");
+  }
+
   get wifiRadio() {
     return radios.value.find((radio) => radio.kind === RadioDeviceKind.WiFi);
   }
