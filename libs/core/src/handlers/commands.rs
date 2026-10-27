@@ -367,6 +367,10 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         set_self_z_order(z_order: ZOrder),
+    RequestFocus =
+        @webview()
+        @fallible()
+        request_focus(),
     WriteFile =
         @webview()
         @fallible()
@@ -492,10 +496,6 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         set_app_windows_positions(positions: std::collections::HashMap<isize, Rect>),
-    RequestFocus =
-        @webview()
-        @fallible()
-        request_focus(hwnd: isize),
     WmSetStackActiveWindow =
         @webview()
         @fallible()

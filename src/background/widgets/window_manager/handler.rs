@@ -140,15 +140,4 @@ impl crate::tauri_handlers::Handlers {
         WM_STATE.lock().set_stack_active_window(&window)?;
         Ok(())
     }
-
-    /// TODO delete this is used only by webview, but this should use self_focus command.
-    pub fn request_focus(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
-        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        let window = Window::from(hwnd);
-        if !window.is_window() {
-            return Ok(());
-        }
-        window.focus()?;
-        Ok(())
-    }
 }

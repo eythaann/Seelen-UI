@@ -38,6 +38,7 @@ use crate::{
     windows_api::{
         AppBarData, WindowsApi,
         input::{Keyboard, Mouse},
+        window::Window,
     },
 };
 
@@ -302,6 +303,16 @@ impl crate::tauri_handlers::Handlers {
             },
         )?;
 
+        Ok(())
+    }
+
+    pub fn request_focus(webview: tauri::WebviewWindow) -> Result<()> {
+        let hwnd = webview.hwnd()?.0 as isize;
+        let window = Window::from(hwnd);
+        if !window.is_window() {
+            return Ok(());
+        }
+        window.focus()?;
         Ok(())
     }
 
