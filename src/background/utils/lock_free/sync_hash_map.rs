@@ -17,21 +17,25 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn len(&self) -> usize {
         self.0.lock().len()
     }
 
     #[inline]
+    #[track_caller]
     pub fn is_empty(&self) -> bool {
         self.0.lock().is_empty()
     }
 
     #[inline]
+    #[track_caller]
     pub fn upsert(&self, key: K, value: V) -> Option<V> {
         self.0.lock().insert(key, value)
     }
 
     #[inline]
+    #[track_caller]
     pub fn remove<Q: ?Sized>(&self, key: &Q) -> Option<V>
     where
         K: Borrow<Q>,
@@ -41,6 +45,7 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn contains_key<Q: ?Sized>(&self, key: &Q) -> bool
     where
         K: Borrow<Q>,
@@ -50,6 +55,7 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn get<Q: ?Sized, F, R>(&self, key: &Q, f: F) -> Option<R>
     where
         K: Borrow<Q>,
@@ -61,6 +67,7 @@ where
 
     /// If key does not exist, it will be created with default value
     #[inline]
+    #[track_caller]
     pub fn get_or_default<Q, F, R>(&self, key: Q, f: F) -> R
     where
         V: Default,
@@ -72,6 +79,7 @@ where
 
     /// If key does not exist, it will be created using the provided constructor function
     #[inline]
+    #[track_caller]
     pub fn get_or_insert<Q, C, F, R>(&self, key: Q, constructor: C, f: F) -> R
     where
         Q: Into<K>,
@@ -82,6 +90,7 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn for_each<F>(&self, f: F)
     where
         F: FnMut((&K, &mut V)),
@@ -90,11 +99,13 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn map<R>(&self, f: impl FnMut((&K, &V)) -> R) -> Vec<R> {
         self.0.lock().iter().map(f).collect()
     }
 
     #[inline]
+    #[track_caller]
     pub fn retain<F>(&self, mut f: F)
     where
         F: FnMut((&K, &mut V)) -> bool,
@@ -103,11 +114,13 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn clear(&self) {
         self.0.lock().clear();
     }
 
     #[inline]
+    #[track_caller]
     pub fn any<F>(&self, f: F) -> bool
     where
         F: FnMut((&K, &V)) -> bool,
@@ -116,16 +129,19 @@ where
     }
 
     #[inline]
+    #[track_caller]
     pub fn take(&self) -> HashMap<K, V> {
         self.0.lock().drain().collect()
     }
 
     #[inline]
+    #[track_caller]
     pub fn replace(&self, value: HashMap<K, V>) {
         *self.0.lock() = value;
     }
 
     #[inline]
+    #[track_caller]
     pub fn with_lock<F, R>(&self, f: F) -> R
     where
         F: FnOnce(&mut HashMap<K, V>) -> R,
@@ -141,16 +157,19 @@ where
     V: Clone,
 {
     #[inline]
+    #[track_caller]
     pub fn to_hash_map(&self) -> HashMap<K, V> {
         self.0.lock().clone()
     }
 
     #[inline]
+    #[track_caller]
     pub fn keys(&self) -> Vec<K> {
         self.0.lock().keys().cloned().collect()
     }
 
     #[inline]
+    #[track_caller]
     pub fn values(&self) -> Vec<V> {
         self.0.lock().values().cloned().collect()
     }

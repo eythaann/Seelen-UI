@@ -61,15 +61,27 @@ impl UserAppsManager {
                     continue;
                 }
 
-                Self::instance().interactable_windows.retain(|w| {
-                    let window = Window::from(w.hwnd);
-                    if window.is_interactable_and_not_hidden() {
-                        true
-                    } else {
-                        Self::send(UserAppWinEvent::Removed(window.address()));
-                        false
+                // Win32 checks run on a snapshot, outside the lock: one slow window (or our own
+                // UI thread answering WM_GETTEXT) must not stall every contains_win() caller.
+                let stale: Vec<isize> = Self::instance()
+                    .interactable_windows
+                    .map(|w| w.hwnd)
+                    .into_iter()
+                    .filter(|hwnd| !Window::from(*hwnd).is_interactable_and_not_hidden())
+                    .collect();
+                if !stale.is_empty() {
+                    let mut removed = Vec::new();
+                    Self::instance().interactable_windows.retain(|w| {
+                        let keep = !stale.contains(&w.hwnd);
+                        if !keep {
+                            removed.push(w.hwnd);
+                        }
+                        keep
+                    });
+                    for hwnd in removed {
+                        Self::send(UserAppWinEvent::Removed(hwnd));
                     }
-                });
+                }
 
                 // Scan for windows that now qualify but were never tracked (e.g. style/frame
                 // state was not settled at creation time).

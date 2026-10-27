@@ -47,7 +47,13 @@ macro_rules! event_manager {
                         for event in rx {
                             let subscribers = SUBSCRIBERS.load_full();
                             for (_id, callback, _) in subscribers.iter() {
-                                callback(event.clone());
+                                // This thread is never respawned, so a panicking subscriber
+                                // (e.g. a TracedMutex timeout) must cost one event, not all of them.
+                                let event = event.clone();
+                                let _ =
+                                    std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+                                        callback(event)
+                                    }));
                             }
                         }
                     });
@@ -102,4 +108,38 @@ macro_rules! event_manager {
             }
         }
     };
+}
+
+#[cfg(test)]
+mod tests {
+    use std::{sync::mpsc, time::Duration};
+
+    struct PanickingSubscriberProbe;
+    event_manager!(PanickingSubscriberProbe, u32);
+
+    #[test]
+    fn dispatcher_survives_a_panicking_subscriber() {
+        let (tx, rx) = mpsc::channel();
+        PanickingSubscriberProbe::subscribe(|n: u32| {
+            if n == 1 {
+                // resume_unwind skips the panic hook, so this can not interfere with the tests
+                // that install their own hook (see traced_mutex.rs)
+                std::panic::resume_unwind(Box::new("subscriber panicked on purpose"));
+            }
+        });
+        PanickingSubscriberProbe::subscribe(move |n: u32| {
+            let _ = tx.send(n);
+        });
+
+        PanickingSubscriberProbe::send(1);
+        PanickingSubscriberProbe::send(2);
+
+        let timeout = Duration::from_secs(5);
+        assert_eq!(rx.recv_timeout(timeout), Ok(1));
+        assert_eq!(
+            rx.recv_timeout(timeout),
+            Ok(2),
+            "the dispatcher thread must keep delivering events after a subscriber panicked"
+        );
+    }
 }
