@@ -1,6 +1,13 @@
 import { debounce } from "../../../utils/async.ts";
 import { Widget_3 } from "./3_autosize.ts";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { beginNativeBlurClose, finishNativeBlurClose, resumeNativeBlur } from "../../theme/nativeBlur.ts";
+import {
+  captureHideAnimations,
+  collectHideAnimations,
+  hideAnimationBudget,
+  waitHideAnimations,
+} from "./hideAnimations.ts";
 
 /** Max time given to widgets to play their hide animation before the window is really hidden */
 const HIDE_ANIMATION_MAX_MS = 200;
@@ -20,10 +27,12 @@ export class Widget_4 extends Widget_3 {
    * by a newer one after each `await` and bail out.
    */
   private _visibilityToken = 0;
+  private _hideOperation?: { token: number; promise: Promise<void> };
 
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
     debouncedClose.cancel();
+    resumeNativeBlur();
     await this.window.show();
     // a hide() was called while showing, it already owns the attribute.
     if (token === this._visibilityToken) {
@@ -31,39 +40,35 @@ export class Widget_4 extends Widget_3 {
     }
   }
 
-  public async hide(): Promise<void> {
+  public hide(): Promise<void> {
+    if (this._hideOperation?.token === this._visibilityToken) return this._hideOperation.promise;
     const token = ++this._visibilityToken;
-    globalThis.document.documentElement.dataset.widgetHidden = "";
+    const promise = this.performHide(token).finally(() => {
+      if (this._hideOperation?.token === token) this._hideOperation = undefined;
+    });
+    this._hideOperation = { token, promise };
+    return promise;
+  }
 
-    await this.waitHideAnimations();
+  private async performHide(token: number): Promise<void> {
+    const before = captureHideAnimations(globalThis.document.getAnimations());
+    globalThis.document.documentElement.dataset.widgetHidden = "";
+    const animations = collectHideAnimations(before, globalThis.document.getAnimations());
+    const budget = hideAnimationBudget(animations, HIDE_ANIMATION_MAX_MS);
+    // Normal completion follows animation.finished; the native deadline is only the watchdog.
+    // Never use nominal CSS duration as a hard deadline: its timeline may lag wall-clock time.
+    // IPC is never a prerequisite to HWND hide.
+    const close = beginNativeBlurClose(budget);
+    await waitHideAnimations(animations, budget);
     if (token !== this._visibilityToken) {
       return;
     }
-    await this.window.hide();
+    const hidden = this.window.hide();
+    finishNativeBlurClose(close);
+    await hidden;
     // a show() may have been called while the window was hiding, don't schedule the close.
     if (this._destroyOnHide && token === this._visibilityToken) {
       debouncedClose();
     }
-  }
-
-  /**
-   * Resolves once the finite animations/transitions triggered by the visibility change end.
-   * Canceled animations (e.g. a transition reversed by a new show) also resolve it.
-   */
-  private async waitHideAnimations(): Promise<void> {
-    // `getAnimations` forces a style recalc, so it already includes the ones just triggered
-    const animations = globalThis.document
-      .getAnimations()
-      .filter((animation) => animation.effect?.getComputedTiming().iterations !== Infinity);
-    if (animations.length === 0) {
-      return;
-    }
-
-    let timeout: ReturnType<typeof setTimeout>;
-    await Promise.race([
-      Promise.allSettled(animations.map((animation) => animation.finished)),
-      new Promise((resolve) => (timeout = setTimeout(resolve, HIDE_ANIMATION_MAX_MS))),
-    ]);
-    clearTimeout(timeout!);
   }
 }

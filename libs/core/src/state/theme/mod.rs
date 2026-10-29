@@ -2,6 +2,8 @@
 mod tests;
 
 pub mod config;
+mod native_blur;
+pub use native_blur::{NativeBlurOpacityAnimation, NativeBlurRegion, NativeBlurShape};
 
 use std::collections::HashMap;
 
