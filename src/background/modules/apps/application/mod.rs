@@ -60,7 +60,7 @@ impl UserAppsManager {
             |w| w.hwnd == hwnd,
             || {
                 log::trace!("Adding: {window}");
-                let mut serialized = window.to_serializable();
+                let mut serialized = window.snapshot();
                 if is_focused {
                     serialized.last_foreground_at = windows::now_millis();
                 }

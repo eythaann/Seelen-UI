@@ -2,7 +2,7 @@ use std::sync::atomic::Ordering;
 
 pub use slu_ipc::commands::DebuggerCli;
 
-use crate::{error::Result, hook::LOG_WIN_EVENTS};
+use crate::{error::Result, platform::hook::app_windows::LOG_WIN_EVENTS};
 
 use slu_ipc::commands::DebuggerSubCommand;
 

@@ -30,7 +30,7 @@ fn snapshot_physical_monitors() -> Vec<PhysicalMonitor> {
         .map(|monitors| {
             monitors
                 .into_iter()
-                .filter_map(|m| PhysicalMonitor::try_from(m).ok())
+                .filter_map(|m| m.snapshot().ok())
                 .collect()
         })
         .unwrap_or_default();

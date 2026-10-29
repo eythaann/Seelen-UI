@@ -129,7 +129,7 @@ use windows::{
 
 use crate::{
     error::{Result, WindowsResultExt},
-    hook::HookManager,
+    platform::hook::app_windows::HookManager,
     windows_api::window::{Window, event::WinEvent},
 };
 

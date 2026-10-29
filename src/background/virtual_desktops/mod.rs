@@ -14,9 +14,9 @@ use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_
 
 use crate::error::{Result, ResultLogExt};
 use crate::event_manager;
-use crate::hook::HookManager;
 use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
 use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
+use crate::platform::hook::app_windows::HookManager;
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
 use crate::windows_api::window::Window;

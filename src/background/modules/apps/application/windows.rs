@@ -12,11 +12,11 @@ use windows::Win32::UI::WindowsAndMessaging::{
 };
 
 use crate::{
-    hook::HookManager,
     modules::{
         apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager, WindowBadges},
         notifications::wpn_service::WpnService,
     },
+    platform::hook::app_windows::HookManager,
     utils::spawn_named_thread,
     windows_api::{
         WindowEnumerator, WindowsApi,
@@ -37,7 +37,7 @@ impl UserAppsManager {
         let mut initial = Vec::new();
         let _ = WindowEnumerator::new().for_each(|window| {
             if is_interactable_window(&window) {
-                initial.push(window.to_serializable());
+                initial.push(window.snapshot());
             }
         });
 

@@ -44,7 +44,7 @@ impl Window {
         Some((relaunch, self.prevent_pinning()))
     }
 
-    pub fn to_serializable(self: &Window) -> UserAppWindow {
+    pub fn snapshot(&self) -> UserAppWindow {
         let umid = self.app_user_model_id();
         let (relaunch, prevent_pinning) = self.relaunch_info(&umid).unzip();
         let badge = WindowBadges::instance().get(self.address());
@@ -73,7 +73,7 @@ impl Window {
         }
     }
 
-    pub fn as_focused_app_information(&self) -> FocusedApp {
+    pub fn focused_app_snapshot(&self) -> FocusedApp {
         let process = self.process();
 
         FocusedApp {

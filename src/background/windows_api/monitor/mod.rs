@@ -24,7 +24,10 @@ use crate::{
     error::Result, modules::system_settings::application::SystemSettings,
     windows_api::string_utils::WindowsString,
 };
-use seelen_core::{rect::Rect, system_state::MonitorId};
+use seelen_core::{
+    rect::Rect,
+    system_state::{MonitorId, PhysicalMonitor},
+};
 
 use super::WindowsApi;
 
@@ -236,6 +239,20 @@ impl Monitor {
         let monitor_scale_factor = WindowsApi::get_monitor_scale_factor(self.0)?;
         let text_scale_factor = SystemSettings::instance().get_text_scale_factor()?;
         Ok(monitor_scale_factor * text_scale_factor)
+    }
+
+    pub fn snapshot(&self) -> Result<PhysicalMonitor> {
+        let (id, name) = self.get_stable_info()?;
+        Ok(PhysicalMonitor {
+            id,
+            name,
+            rect: self.rect()?,
+            scale_factor: self.scale_factor()?,
+            is_primary: self.is_primary(),
+            hdr: self.hdr_state().unwrap_or(None),
+            // tracked apart by `BrightnessManager`, filled in when exposing the monitors
+            brightness: None,
+        })
     }
 }
 

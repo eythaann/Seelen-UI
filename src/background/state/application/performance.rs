@@ -5,7 +5,7 @@ use tauri::Listener;
 
 use crate::{
     app::{emit_to_webviews, get_app_handle},
-    hook::HookManager,
+    platform::hook::app_windows::HookManager,
     state::application::FULL_STATE,
     tauri_handlers::Handlers,
     windows_api::window::{Window, event::WinEvent},

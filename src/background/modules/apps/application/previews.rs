@@ -9,8 +9,8 @@ use win_screenshot::prelude::capture_window;
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    hook::HookManager,
     modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
+    platform::hook::app_windows::HookManager,
     utils::lock_free::SyncHashMap,
     windows_api::{
         WindowsApi,

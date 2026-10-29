@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::sync::{LazyLock, mpsc};
 use std::time::{Duration, Instant};
 
-use crate::hook::HookManager;
+use crate::platform::hook::app_windows::HookManager;
 use crate::windows_api::window::Window;
 use windows::Win32::UI::WindowsAndMessaging::*;
 

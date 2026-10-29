@@ -23,7 +23,7 @@ use windows::{
     },
 };
 
-use crate::hook::HookManager;
+use crate::platform::hook::app_windows::HookManager;
 use crate::virtual_desktops::VdManager;
 use crate::windows_api::window::event::WinEvent;
 use crate::{

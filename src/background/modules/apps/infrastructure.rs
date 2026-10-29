@@ -49,7 +49,7 @@ fn get_apps_manager() -> &'static UserAppsManager {
 
 impl crate::tauri_handlers::Handlers {
     pub fn get_focused_app() -> FocusedApp {
-        Window::get_foregrounded().as_focused_app_information()
+        Window::get_foregrounded().focused_app_snapshot()
     }
 
     pub fn get_mouse_position() -> [i32; 2] {
