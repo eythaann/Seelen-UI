@@ -1,7 +1,7 @@
 available: Réseaux disponibles
 connect: Connecter
 connected: Connecté à
-connecting: De liaison...
+connecting: Connexion en cours...
 disconnect: Déconnecter
 forget: Oublier
 hidden: Réseau caché
@@ -13,7 +13,7 @@ hotspot:
   password: Mot de passe
   settings: Plus de paramètres de point d'accès
   ssid: Nom du réseau
-  title: Point chaud
+  title: Point d'accès
 more: Plus de paramètres réseau
 no_adapter: Aucun adaptateur Wi-Fi trouvé
 not_found: Aucun réseau Wi-Fi trouvé
