@@ -100,13 +100,15 @@ export class Widget extends WidgetBasics {
   private applyOverlayPreset(): void {}
 
   /** Will apply the recommended settings for a popup widget */
-  private applyPopupPreset(): void {
+  private applyPopupPreset(focusOnTrigger: boolean): void {
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
       if (desiredPosition) {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
       await this.show();
-      await this.focus();
+      if (focusOnTrigger) {
+        await this.focus();
+      }
       // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
       // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
       // can arrive before the trigger fires and roll back the optimistic size to an intermediate
@@ -247,7 +249,11 @@ export class Widget extends WidgetBasics {
         this.applyOverlayPreset();
         break;
       case WidgetPreset.Popup:
-        this.applyPopupPreset();
+        if (options.focusOnTrigger === false) {
+          // On Windows, show() itself activates a focusable window even without focus().
+          await this.window.setFocusable(false);
+        }
+        this.applyPopupPreset(options.focusOnTrigger ?? true);
         break;
     }
 
@@ -388,7 +394,7 @@ export class Widget extends WidgetBasics {
    * No need to focus the webview itself, wry moves the focus into it on the window `WM_SETFOCUS`.
    */
   public async focus(): Promise<void> {
-    await invoke(SeelenCommand.RequestFocus, { hwnd: this.windowId }).catch(() => {});
+    await invoke(SeelenCommand.RequestFocus).catch(() => {});
   }
 }
 

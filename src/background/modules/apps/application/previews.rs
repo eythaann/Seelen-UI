@@ -1,4 +1,8 @@
-use std::{collections::HashMap, sync::LazyLock, time::Duration};
+use std::{
+    collections::{HashMap, HashSet},
+    sync::LazyLock,
+    time::{Duration, Instant},
+};
 
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
@@ -11,7 +15,7 @@ use crate::{
     event_manager,
     hook::HookManager,
     modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
-    utils::lock_free::SyncHashMap,
+    utils::lock_free::{SyncHashMap, TracedMutex},
     windows_api::{
         WindowsApi,
         event_window::IS_INTERACTIVE_SESSION,
@@ -24,6 +28,8 @@ const CAPTURE_WINDOW_INTERVAL: Duration = Duration::from_millis(200);
 const SAMPLING: usize = 7;
 
 static WINDOWS_PREVIEWS: LazyLock<WinPreviewManager> = LazyLock::new(WinPreviewManager::create);
+static CAPTURE_PENDING: LazyLock<TracedMutex<HashSet<isize>>> =
+    LazyLock::new(|| TracedMutex::new(HashSet::new()));
 
 /// One-by-one capture queue: sender side, receiver processes in a dedicated thread.
 static CAPTURE_TX: LazyLock<crossbeam_channel::Sender<isize>> = LazyLock::new(|| {
@@ -32,14 +38,13 @@ static CAPTURE_TX: LazyLock<crossbeam_channel::Sender<isize>> = LazyLock::new(||
         .name("win-capture-queue".into())
         .spawn(move || {
             for addr in rx {
-                if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
-                    continue;
+                if IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                    let window = Window::from(addr);
+                    if window.is_manageable_from_unelevated() {
+                        WINDOWS_PREVIEWS.do_capture(&window).log_error();
+                    }
                 }
-
-                let window = Window::from(addr);
-                if window.is_manageable_from_unelevated() {
-                    WINDOWS_PREVIEWS.do_capture(&window).log_error();
-                }
+                CAPTURE_PENDING.lock().remove(&addr);
             }
         })
         .log_error();
@@ -50,6 +55,7 @@ struct UserAppWindowPreviewWrap {
     preview: Option<UserAppWindowPreview>,
     colors: Option<UserAppWindowColors>,
     capture: Debounce<()>,
+    requested: Option<Instant>,
 }
 
 pub struct WinPreviewManager {
@@ -128,9 +134,7 @@ impl WinPreviewManager {
     fn register_window(&self, addr: isize) {
         let capture = debounce(
             move |_| {
-                if let Err(e) = CAPTURE_TX.send(addr) {
-                    log::error!("Failed to enqueue capture: {e}");
-                }
+                queue_capture(addr);
             },
             CAPTURE_WINDOW_INTERVAL,
         );
@@ -140,6 +144,7 @@ impl WinPreviewManager {
                 preview: None,
                 colors: None,
                 capture,
+                requested: None,
             },
         );
         self.enqueue_capture(addr);
@@ -149,6 +154,23 @@ impl WinPreviewManager {
         self.previews.get(&addr, |wrap| {
             wrap.capture.call(());
         });
+    }
+
+    /// Refresh only a visible fallback, at most four times/sec, with no duplicate queued frames.
+    pub fn refresh_fallback(&self, addr: isize) {
+        let mut requested = false;
+        self.previews.get(&addr, |wrap| {
+            if wrap
+                .requested
+                .is_none_or(|time| time.elapsed() >= Duration::from_millis(250))
+            {
+                wrap.requested = Some(Instant::now());
+                requested = true;
+            }
+        });
+        if requested {
+            queue_capture(addr);
+        }
     }
 
     fn do_capture(&self, window: &Window) -> Result<()> {
@@ -172,6 +194,9 @@ impl WinPreviewManager {
         let crop_h = buf
             .height
             .saturating_sub(shadow.top.unsigned_abs() + shadow.bottom.unsigned_abs());
+        if crop_w == 0 || crop_h == 0 {
+            return Err("The window has no capturable surface".into());
+        }
 
         let cropped: RgbaImage =
             image::imageops::crop_imm(&raw, crop_x, crop_y, crop_w, crop_h).to_image();
@@ -238,6 +263,16 @@ impl WinPreviewManager {
             }
         });
         map
+    }
+}
+
+fn queue_capture(addr: isize) {
+    if !CAPTURE_PENDING.lock().insert(addr) {
+        return;
+    }
+    if let Err(error) = CAPTURE_TX.send(addr) {
+        CAPTURE_PENDING.lock().remove(&addr);
+        log::error!("Failed to enqueue capture: {error}");
     }
 }
 

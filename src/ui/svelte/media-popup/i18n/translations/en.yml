@@ -11,3 +11,11 @@ device:
 input_devices: Input devices
 output_devices: Output devices
 players: Media Players
+media:
+  previous: Previous track
+  play: Play
+  pause: Pause
+  play_pause: Play / pause
+  next: Next track
+  unsupported: This player does not support this action
+  command_failed: Could not confirm the media command. Check the player or its global shortcut settings.

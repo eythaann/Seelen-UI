@@ -60,6 +60,9 @@ export interface InitWidgetOptions {
    */
   hideOnFocusLoss?: boolean;
 
+  /** Focus popup widgets when triggered. When false, call focus() for explicit UI interactions. Defaults to true. */
+  focusOnTrigger?: boolean;
+
   /**
    * Closes the widget after being hidden for a period of time,
    * instead of keeping it in memory.

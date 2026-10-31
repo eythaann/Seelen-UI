@@ -102,6 +102,35 @@ pub struct UserAppWindowPreview {
     pub height: u32,
 }
 
+#[derive(Debug, Default, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+pub struct WindowPeekStatus {
+    pub active: bool,
+    pub committed: bool,
+    pub hwnd: Option<isize>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+pub struct WindowPreviewTarget {
+    pub hwnd: isize,
+    /// Physical pixels relative to the destination window's client area.
+    pub rect: Rect,
+}
+
+#[derive(Debug, Default, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[serde(rename_all = "camelCase")]
+pub struct LiveWindowPreviewState {
+    pub live: Vec<isize>,
+    pub visible: bool,
+    pub pointer_inside: bool,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct UserAppWindowColors {

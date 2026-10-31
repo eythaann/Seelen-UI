@@ -1,13 +1,14 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { FileIcon, Icon, SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
-  import { convertFileSrc, invoke as tauriInvoke } from "@tauri-apps/api/core";
+  import { FileIcon, SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
+  import { convertFileSrc } from "@tauri-apps/api/core";
   import { t } from "../../i18n/index.ts";
   import type { MediaWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { getMenuForItem } from "../../generalMenu.ts";
   import { players } from "../../state/getters.svelte.ts";
   import { calcLuminance } from "../../application.ts";
+  import MediaTransport from "libs/ui/svelte/components/MediaTransport.svelte";
 
   interface Props {
     item: MediaWegItem;
@@ -48,10 +49,10 @@
     });
   }
 
-  function onClickBtn(cmd: string) {
-    if (session) {
-      tauriInvoke(cmd, { id: session.umid }).catch(console.error);
-    }
+  function onAction(action: "previous" | "togglePlayPause" | "next") {
+    if (!session) return Promise.reject(new Error("Media session is no longer available"));
+    const commands = { previous: SeelenCommand.MediaPrev, togglePlayPause: SeelenCommand.MediaTogglePlayPause, next: SeelenCommand.MediaNext } as const;
+    return invoke(commands[action], { id: session.umid });
   }
 
   const tooltip = $derived(session ? `${session.title} - ${session.author}` : $t("media.label"));
@@ -100,15 +101,7 @@
 
       {#if session}
         <div class="media-session-actions" style="color: {textColor}">
-          <button data-skin="transparent" onclick={() => onClickBtn("media_prev")}>
-            <Icon iconName="IoPlaySkipBack" />
-          </button>
-          <button data-skin="transparent" onclick={() => onClickBtn("media_toggle_play_pause")}>
-            <Icon iconName={session?.playing ? "IoPause" : "IoPlay"} />
-          </button>
-          <button data-skin="transparent" onclick={() => onClickBtn("media_next")}>
-            <Icon iconName="IoPlaySkipForward" />
-          </button>
+          <MediaTransport target={session.umid} playing={session.playing} controls={session.controls} onaction={onAction} />
         </div>
       {/if}
     </div>
@@ -209,13 +202,6 @@
         gap: 12px;
       }
 
-      button {
-        font-size: 0.5rem;
-
-        :global(.svg-icon) {
-          height: 12px;
-        }
-      }
     }
   }
 </style>

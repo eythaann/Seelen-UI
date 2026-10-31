@@ -11,6 +11,7 @@
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
   import { getBadge } from "../../state/badge.svelte.ts";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
+  import { onDestroy } from "svelte";
 
   interface Props {
     item: AppOrFileWegItem;
@@ -33,8 +34,21 @@
   );
 
   let itemEl: HTMLDivElement | null = $state(null);
+  let hoverTimer: ReturnType<typeof setTimeout> | undefined;
+  function cancelHover() {
+    clearTimeout(hoverTimer);
+  }
+  function onPointerEnter(e: PointerEvent) {
+    cancelHover();
+    if (e.pointerType !== "mouse" || windows.length === 0 || e.buttons !== 0) return;
+    hoverTimer = setTimeout(() => {
+      if (itemEl && windows.length > 0) triggerPreviewWidget(itemEl, windows, true).catch(console.error);
+    }, 350);
+  }
+  onDestroy(cancelHover);
 
   function onClick() {
+    cancelHover();
     if (windows.length > 1) {
       triggerPreviewWidget(itemEl!, windows);
       return;
@@ -72,12 +86,12 @@
   }
 </script>
 
-<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay">
+<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay" onpointerenter={onPointerEnter} onpointerleave={cancelHover} onpointerdown={cancelHover}>
   <div
     role="menuitem"
     tabindex="0"
     class="weg-item"
-    data-tooltip={item.displayName}
+    data-tooltip={windows.length ? undefined : item.displayName}
     data-tooltip-origin-y={settingsState.tooltipOrigin.y}
     data-tooltip-origin-x={settingsState.tooltipOrigin.x}
     data-tooltip-align-x={settingsState.popupAlignX}

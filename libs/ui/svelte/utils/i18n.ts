@@ -19,13 +19,14 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   }
 
   if (!text) {
-    console.error(`no translation found for ${locale}.${key}`);
     // Try fallback to English
     let fallback = get(_messages)["en"];
     for (const k of keys) {
       fallback = fallback?.[k];
     }
     text = fallback || key;
+    // English-only additions are expected during development. Valid fallback text is not an error.
+    if (!fallback) console.error(`no translation found for ${locale}.${key}`);
   }
 
   if (typeof text !== "string") {

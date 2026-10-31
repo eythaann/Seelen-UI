@@ -1,11 +1,12 @@
 use std::{ffi::OsStr, path::PathBuf, sync::LazyLock, time::Duration};
 
-use seelen_core::system_state::{MediaPlayerOwner, MediaPlayerTimeline};
+use seelen_core::system_state::{MediaPlayerControls, MediaPlayerOwner, MediaPlayerTimeline};
 use windows::{
     Foundation::TypedEventHandler,
     Media::Control::{
         GlobalSystemMediaTransportControlsSession,
         GlobalSystemMediaTransportControlsSessionManager,
+        GlobalSystemMediaTransportControlsSessionPlaybackControls,
         GlobalSystemMediaTransportControlsSessionPlaybackStatus,
         GlobalSystemMediaTransportControlsSessionTimelineProperties,
         MediaPropertiesChangedEventArgs, PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
@@ -59,6 +60,7 @@ pub enum PlayersEvent {
     PlaybackStatusChanged {
         id: String,
         playing: bool,
+        controls: MediaPlayerControls,
     },
     TimelineChanged {
         id: String,
@@ -218,9 +220,14 @@ impl PlayersManager {
                     });
                 }
             }
-            PlayersEvent::PlaybackStatusChanged { id, playing } => {
+            PlayersEvent::PlaybackStatusChanged {
+                id,
+                playing,
+                controls,
+            } => {
                 self.playing.get(id, |player| {
                     player.base.playing = *playing;
+                    player.base.controls = controls.clone();
                 });
             }
             PlayersEvent::TimelineChanged { id, timeline } => {
@@ -313,6 +320,7 @@ impl PlayersManager {
                         == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
                     timeline: timeline_from_raw(timeline)?,
                     default: false,
+                    controls: controls_from_raw(playback_info.Controls()?)?,
                 },
                 removed_at: None,
             },
@@ -427,6 +435,7 @@ impl PlayersManager {
                 id: player_id.to_string(),
                 playing: playback.PlaybackStatus()?
                     == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+                controls: controls_from_raw(playback.Controls()?)?,
             };
             tx.send(event).log_error();
         }
@@ -447,4 +456,15 @@ impl PlayersManager {
         }
         Ok(())
     }
+}
+
+fn controls_from_raw(
+    controls: GlobalSystemMediaTransportControlsSessionPlaybackControls,
+) -> windows_core::Result<MediaPlayerControls> {
+    Ok(MediaPlayerControls {
+        previous: controls.IsPreviousEnabled()?,
+        toggle_play_pause: controls.IsPlayPauseToggleEnabled()?,
+        next: controls.IsNextEnabled()?,
+        seek: controls.IsPlaybackPositionEnabled()?,
+    })
 }

@@ -48,6 +48,85 @@ fn get_apps_manager() -> &'static UserAppsManager {
 }
 
 impl crate::tauri_handlers::Handlers {
+    pub fn update_window_previews(
+        webview: tauri::WebviewWindow,
+        session: String,
+        targets: Vec<seelen_core::system_state::WindowPreviewTarget>,
+        opacity: u8,
+        anchor: Option<seelen_core::rect::Rect>,
+    ) -> Result<seelen_core::system_state::LiveWindowPreviewState> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        if targets
+            .iter()
+            .any(|target| !get_apps_manager().contains_win(&Window::from(target.hwnd)))
+        {
+            return Err("A preview source is no longer tracked".into());
+        }
+        let sources: Vec<_> = targets.iter().map(|target| target.hwnd).collect();
+        let status = super::application::live_previews::LivePreviewManager::instance().update(
+            webview.hwnd()?.0 as isize,
+            session,
+            targets,
+            opacity,
+            anchor,
+        )?;
+        if status.visible {
+            for hwnd in sources {
+                if !status.live.contains(&hwnd) {
+                    WinPreviewManager::instance().refresh_fallback(hwnd);
+                }
+            }
+        }
+        Ok(status)
+    }
+    pub fn clear_window_previews(webview: tauri::WebviewWindow, session: String) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        super::application::live_previews::LivePreviewManager::instance()
+            .clear(webview.hwnd()?.0 as isize, &session);
+        Ok(())
+    }
+    pub fn begin_window_peek(
+        webview: tauri::WebviewWindow,
+        hwnd: isize,
+        session: String,
+        rect: seelen_core::rect::Rect,
+    ) -> Result<seelen_core::system_state::WindowPeekStatus> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        if !get_apps_manager().contains_win(&Window::from(hwnd)) {
+            return Err("This window is no longer available in the dock".into());
+        }
+        super::application::window_peek::WindowPeekManager::instance().begin(
+            webview.hwnd()?.0 as isize,
+            hwnd,
+            session,
+            rect,
+        )
+    }
+    pub fn poll_window_peek(
+        webview: tauri::WebviewWindow,
+        session: String,
+        rect: Option<seelen_core::rect::Rect>,
+    ) -> Result<seelen_core::system_state::WindowPeekStatus> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        Ok(
+            super::application::window_peek::WindowPeekManager::instance().poll(
+                webview.hwnd()?.0 as isize,
+                &session,
+                rect,
+            ),
+        )
+    }
+    pub fn cancel_window_peek(webview: tauri::WebviewWindow, session: String) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        super::application::window_peek::WindowPeekManager::instance()
+            .cancel(webview.hwnd()?.0 as isize, &session);
+        Ok(())
+    }
+    pub fn commit_window_peek(webview: tauri::WebviewWindow, session: String) -> Result<bool> {
+        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
+        super::application::window_peek::WindowPeekManager::instance()
+            .commit(webview.hwnd()?.0 as isize, &session)
+    }
     pub fn get_focused_app() -> FocusedApp {
         Window::get_foregrounded().as_focused_app_information()
     }
