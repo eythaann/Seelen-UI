@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { setImmediate } from "node:timers/promises";
 import {
+  contentViewport,
   LivePreviewController,
   type LivePreviewFrame,
   type LivePreviewStatus,
@@ -14,6 +15,60 @@ const frame: LivePreviewFrame = {
   anchor: { left: -500, top: 100, right: -450, bottom: 150 },
 };
 const status: LivePreviewStatus = { live: [17], visible: true, pointerInside: true };
+
+test("partly scrolled thumbnails keep their full layout and carry an exact visible clip", () => {
+  const rect = { left: 0, top: -50, right: 200, bottom: 50 };
+  const [target] = visiblePreviewTargets([{ hwnd: 17, rect }], { left: 0, top: 0, right: 200, bottom: 100 });
+  assert.deepEqual(target?.rect, rect);
+  assert.deepEqual(target?.clip, { left: 0, top: 0, right: 200, bottom: 50 });
+});
+
+test("clips on the bottom and sides never expand a previously constrained surface", () => {
+  const rect = { left: -10, top: 80, right: 210, bottom: 180 };
+  const viewport = { left: 0, top: 0, right: 200, bottom: 100 };
+  const [target] = visiblePreviewTargets([{ hwnd: 17, rect }], viewport);
+  assert.deepEqual(target?.clip, { left: 0, top: 80, right: 200, bottom: 100 });
+  const [constrained] = visiblePreviewTargets(
+    [{ hwnd: 17, rect, clip: { left: 30, top: 85, right: 150, bottom: 95 } }],
+    viewport,
+  );
+  assert.deepEqual(constrained?.clip, { left: 30, top: 85, right: 150, bottom: 95 });
+});
+
+test("the clip viewport excludes transformed borders and scrollbars", () => {
+  const viewport = contentViewport({ left: 10, top: 20, right: 210, bottom: 120 }, {
+    offsetWidth: 400,
+    offsetHeight: 200,
+    clientLeft: 4,
+    clientTop: 2,
+    clientWidth: 380,
+    clientHeight: 180,
+  });
+  assert.deepEqual(viewport, { left: 12, top: 21, right: 202, bottom: 111 });
+});
+
+test("clip-only changes reach native composition during an animation frame", async () => {
+  const clips: number[] = [];
+  const controller = new LivePreviewController(
+    {
+      update: (_session, value) => {
+        clips.push(value.targets[0]!.clip!.bottom);
+        return Promise.resolve(status);
+      },
+      clear: () => Promise.resolve(),
+    },
+    () => {},
+    () => "clipped-surface",
+  );
+  for (const [now, bottom] of [[0, 100], [16, 75], [32, 50]]) {
+    controller.update({
+      ...frame,
+      targets: [{ ...frame.targets[0]!, clip: { left: 10, top: 40, right: 266, bottom: bottom! } }],
+    }, now!);
+    await setImmediate();
+  }
+  assert.deepEqual(clips, [100, 75, 50]);
+});
 
 test("large groups only register visible unique thumbnails within the native budget", () => {
   const targets = Array.from({ length: 40 }, (_, index) => ({

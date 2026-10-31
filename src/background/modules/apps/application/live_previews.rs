@@ -103,7 +103,10 @@ impl LivePreviewManager {
                 .thumbnails
                 .get_mut(&target.hwnd)
                 .expect("registered thumbnail");
-            if thumbnail.update(&target.rect, opacity).is_ok() {
+            if thumbnail
+                .update(&target.rect, target.clip.as_ref(), opacity)
+                .is_ok()
+            {
                 live.push(target.hwnd);
             } else {
                 entry.thumbnails.remove(&target.hwnd);
@@ -192,13 +195,14 @@ impl LiveThumbnail {
             last: None,
         })
     }
-    fn update(&mut self, destination: &Rect, opacity: u8) -> Result<()> {
+    fn update(&mut self, destination: &Rect, clip: Option<&Rect>, opacity: u8) -> Result<()> {
         if !unsafe { IsWindow(Some(HWND(self.source as _))) }.as_bool() {
             return Err("Preview source has closed".into());
         }
         let size = unsafe { DwmQueryThumbnailSourceSize(self.handle)? };
         let bounds = source_bounds(self.source, size.cx, size.cy);
-        let source = cover_crop(&bounds, destination).ok_or("Empty preview surface")?;
+        let (source, destination) =
+            clipped_thumbnail(&bounds, destination, clip).ok_or("Empty preview surface")?;
         let key = (source.clone(), destination.clone(), opacity);
         if self.last.as_ref() == Some(&key) {
             return Ok(());
@@ -209,7 +213,7 @@ impl LiveThumbnail {
                 | DWM_TNP_OPACITY
                 | DWM_TNP_VISIBLE
                 | DWM_TNP_SOURCECLIENTAREAONLY,
-            rcDestination: native_rect(destination),
+            rcDestination: native_rect(&destination),
             rcSource: native_rect(&source),
             opacity,
             fVisible: (opacity > 0).into(),
@@ -233,7 +237,13 @@ impl Drop for LiveThumbnail {
 fn bounded_targets(targets: Vec<WindowPreviewTarget>) -> Vec<WindowPreviewTarget> {
     let mut selected: Vec<WindowPreviewTarget> = Vec::with_capacity(MAX_TARGETS);
     for target in targets {
-        if !valid_rect(&target.rect) || selected.iter().any(|entry| entry.hwnd == target.hwnd) {
+        if !valid_rect(&target.rect)
+            || target
+                .clip
+                .as_ref()
+                .is_some_and(|clip| intersect_rects(&target.rect, clip).is_none())
+            || selected.iter().any(|entry| entry.hwnd == target.hwnd)
+        {
             continue;
         }
         selected.push(target);
@@ -306,6 +316,51 @@ fn cover_crop(source: &Rect, destination: &Rect) -> Option<Rect> {
         })
     }
 }
+
+fn intersect_rects(a: &Rect, b: &Rect) -> Option<Rect> {
+    if !valid_rect(a) || !valid_rect(b) {
+        return None;
+    }
+    let intersection = Rect {
+        left: a.left.max(b.left),
+        top: a.top.max(b.top),
+        right: a.right.min(b.right),
+        bottom: a.bottom.min(b.bottom),
+    };
+    valid_rect(&intersection).then_some(intersection)
+}
+
+/// Crop the full source first, then map visible destination edges into that crop.
+/// Re-running object-fit on the smaller destination would zoom/recenter the picture while scrolling.
+fn clipped_thumbnail(bounds: &Rect, full: &Rect, clip: Option<&Rect>) -> Option<(Rect, Rect)> {
+    let source = cover_crop(bounds, full)?;
+    let visible = match clip {
+        Some(clip) => intersect_rects(full, clip)?,
+        None => full.clone(),
+    };
+    if visible == *full {
+        return Some((source, visible));
+    }
+    let map =
+        |edge: i32, origin: i32, span: i32, source_origin: i32, source_span: i32, end: bool| {
+            let numerator = (i64::from(edge) - i64::from(origin)) * i64::from(source_span);
+            let denominator = i64::from(span);
+            source_origin
+                + ((numerator + if end { denominator - 1 } else { 0 }) / denominator) as i32
+        };
+    let sw = source.right - source.left;
+    let sh = source.bottom - source.top;
+    let dw = full.right - full.left;
+    let dh = full.bottom - full.top;
+    let clipped = Rect {
+        left: map(visible.left, full.left, dw, source.left, sw, false),
+        top: map(visible.top, full.top, dh, source.top, sh, false),
+        right: map(visible.right, full.left, dw, source.left, sw, true),
+        bottom: map(visible.bottom, full.top, dh, source.top, sh, true),
+    };
+    Some((clipped, visible))
+}
+
 fn pointer_inside_bridge(owner: isize, anchor: Option<&Rect>) -> bool {
     let mut point = Default::default();
     let mut popup = RECT::default();
@@ -363,6 +418,190 @@ mod tests {
     }
 
     #[test]
+    fn clipped_edges_map_into_the_original_source_without_zooming() {
+        let bounds = Rect {
+            left: 0,
+            top: 0,
+            right: 1600,
+            bottom: 900,
+        };
+        let full = Rect {
+            left: 10,
+            top: 20,
+            right: 210,
+            bottom: 120,
+        };
+        for (clip, expected) in [
+            (
+                Rect {
+                    left: 10,
+                    top: 70,
+                    right: 210,
+                    bottom: 120,
+                },
+                Rect {
+                    left: 0,
+                    top: 400,
+                    right: 1600,
+                    bottom: 800,
+                },
+            ),
+            (
+                Rect {
+                    left: 10,
+                    top: 20,
+                    right: 210,
+                    bottom: 70,
+                },
+                Rect {
+                    left: 0,
+                    top: 0,
+                    right: 1600,
+                    bottom: 400,
+                },
+            ),
+            (
+                Rect {
+                    left: 60,
+                    top: 20,
+                    right: 210,
+                    bottom: 120,
+                },
+                Rect {
+                    left: 400,
+                    top: 0,
+                    right: 1600,
+                    bottom: 800,
+                },
+            ),
+            (
+                Rect {
+                    left: 10,
+                    top: 20,
+                    right: 160,
+                    bottom: 120,
+                },
+                Rect {
+                    left: 0,
+                    top: 0,
+                    right: 1200,
+                    bottom: 800,
+                },
+            ),
+        ] {
+            let (source, destination) = clipped_thumbnail(&bounds, &full, Some(&clip)).unwrap();
+            assert_eq!(source, expected);
+            assert_eq!(destination, clip);
+        }
+        let portrait = Rect {
+            left: 0,
+            top: 0,
+            right: 400,
+            bottom: 1200,
+        };
+        let clip = Rect {
+            left: 10,
+            top: 45,
+            right: 210,
+            bottom: 95,
+        };
+        assert_eq!(
+            clipped_thumbnail(&portrait, &full, Some(&clip)).unwrap().0,
+            Rect {
+                left: 0,
+                top: 50,
+                right: 400,
+                bottom: 150
+            }
+        );
+    }
+
+    #[test]
+    fn clipping_preserves_shadow_insets_and_negative_destination_alignment() {
+        let bounds = Rect {
+            left: 8,
+            top: 12,
+            right: 1608,
+            bottom: 912,
+        };
+        let full = Rect {
+            left: -40,
+            top: -20,
+            right: 160,
+            bottom: 80,
+        };
+        let clip = Rect {
+            left: 0,
+            top: 0,
+            right: 100,
+            bottom: 60,
+        };
+        let (source, destination) = clipped_thumbnail(&bounds, &full, Some(&clip)).unwrap();
+        assert_eq!(destination, clip);
+        assert_eq!(
+            source,
+            Rect {
+                left: 328,
+                top: 172,
+                right: 1128,
+                bottom: 652
+            }
+        );
+    }
+
+    #[test]
+    fn unclipped_and_empty_surfaces_keep_legacy_behavior_and_rounding_stays_in_bounds() {
+        let bounds = Rect {
+            left: 0,
+            top: 0,
+            right: 1920,
+            bottom: 1080,
+        };
+        let full = Rect {
+            left: 17,
+            top: 31,
+            right: 274,
+            bottom: 175,
+        };
+        let original = cover_crop(&bounds, &full).unwrap();
+        assert_eq!(
+            clipped_thumbnail(&bounds, &full, None),
+            Some((original.clone(), full.clone()))
+        );
+        assert!(clipped_thumbnail(&bounds, &full, Some(&Rect::default())).is_none());
+        assert!(
+            clipped_thumbnail(
+                &bounds,
+                &full,
+                Some(&Rect {
+                    left: 274,
+                    top: 31,
+                    right: 300,
+                    bottom: 175
+                })
+            )
+            .is_none()
+        );
+        for offset in [0, 1, 100, 256] {
+            let clip = Rect {
+                left: full.left + offset,
+                top: full.top + 1,
+                right: full.left + offset + 1,
+                bottom: full.bottom - 1,
+            };
+            let (source, destination) = clipped_thumbnail(&bounds, &full, Some(&clip)).unwrap();
+            assert_eq!(destination, clip);
+            assert!(valid_rect(&source));
+            assert!(
+                source.left >= original.left
+                    && source.right <= original.right
+                    && source.top >= original.top
+                    && source.bottom <= original.bottom
+            );
+        }
+    }
+
+    #[test]
     fn oversized_and_duplicate_groups_are_bounded_without_rejecting_the_group() {
         let rect = Rect {
             left: 10,
@@ -373,15 +612,18 @@ mod tests {
         let mut targets = vec![WindowPreviewTarget {
             hwnd: 999,
             rect: Rect::default(),
+            clip: None,
         }];
         for hwnd in 1..=40 {
             targets.push(WindowPreviewTarget {
                 hwnd,
                 rect: rect.clone(),
+                clip: None,
             });
             targets.push(WindowPreviewTarget {
                 hwnd,
                 rect: rect.clone(),
+                clip: None,
             });
         }
         let selected = bounded_targets(targets);
@@ -404,6 +646,7 @@ mod tests {
             .iter()
             .map(|window| WindowPreviewTarget {
                 hwnd: window.address(),
+                clip: None,
                 rect: Rect {
                     left: 10,
                     top: 40,
@@ -482,8 +725,15 @@ mod tests {
             right: 266,
             bottom: 184,
         };
-        thumbnail.update(&rect, 255).unwrap();
-        thumbnail.update(&rect, 100).unwrap();
+        thumbnail.update(&rect, None, 255).unwrap();
+        let clip = Rect {
+            left: 20,
+            top: 60,
+            right: 200,
+            bottom: 130,
+        };
+        thumbnail.update(&rect, Some(&clip), 100).unwrap();
+        assert_eq!(thumbnail.last.as_ref().unwrap().1, clip);
         assert_eq!(thumbnail.handle, handle);
         assert_eq!(unsafe { GetForegroundWindow() }, foreground);
         assert!(unsafe { DwmQueryThumbnailSourceSize(handle) }.is_ok());
@@ -501,6 +751,7 @@ mod tests {
         };
         let targets = vec![WindowPreviewTarget {
             hwnd: source.address(),
+            clip: None,
             rect: Rect {
                 left: 10,
                 top: 40,
@@ -539,6 +790,7 @@ mod tests {
         };
         let targets = vec![WindowPreviewTarget {
             hwnd: source.address(),
+            clip: None,
             rect: Rect {
                 left: 10,
                 top: 40,

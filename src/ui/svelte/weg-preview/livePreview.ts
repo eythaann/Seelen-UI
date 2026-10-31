@@ -1,7 +1,7 @@
 import type { PreviewRect } from "./hover.ts";
 
 export interface LivePreviewFrame {
-  targets: { hwnd: number; rect: PreviewRect }[];
+  targets: { hwnd: number; rect: PreviewRect; clip?: PreviewRect }[];
   opacity: number;
   anchor: PreviewRect | null;
 }
@@ -9,6 +9,25 @@ export interface LivePreviewStatus {
   live: number[];
   visible: boolean;
   pointerInside: boolean;
+}
+
+/** The list's scrollable client area, excluding borders and scrollbars, under popup transforms. */
+export function contentViewport(
+  bounds: PreviewRect,
+  box: {
+    offsetWidth: number;
+    offsetHeight: number;
+    clientLeft: number;
+    clientTop: number;
+    clientWidth: number;
+    clientHeight: number;
+  },
+): PreviewRect {
+  const sx = box.offsetWidth > 0 ? (bounds.right - bounds.left) / box.offsetWidth : 0;
+  const sy = box.offsetHeight > 0 ? (bounds.bottom - bounds.top) / box.offsetHeight : 0;
+  const left = bounds.left + box.clientLeft * sx;
+  const top = bounds.top + box.clientTop * sy;
+  return { left, top, right: left + box.clientWidth * sx, bottom: top + box.clientHeight * sy };
 }
 
 /** Only visible cards consume native thumbnail slots; scrolling changes this selection. */
@@ -19,14 +38,19 @@ export function visiblePreviewTargets(
 ): LivePreviewFrame["targets"] {
   if (viewport.right <= viewport.left || viewport.bottom <= viewport.top) return [];
   const seen = new Set<number>();
-  const visible = targets.filter(({ hwnd, rect }) => {
+  const visible = targets.flatMap((target) => {
+    const { hwnd, rect } = target;
+    const clip = {
+      left: Math.max(rect.left, viewport.left, target.clip?.left ?? viewport.left),
+      top: Math.max(rect.top, viewport.top, target.clip?.top ?? viewport.top),
+      right: Math.min(rect.right, viewport.right, target.clip?.right ?? viewport.right),
+      bottom: Math.min(rect.bottom, viewport.bottom, target.clip?.bottom ?? viewport.bottom),
+    };
     if (
-      seen.has(hwnd) || rect.right <= rect.left || rect.bottom <= rect.top ||
-      rect.right <= viewport.left || rect.left >= viewport.right ||
-      rect.bottom <= viewport.top || rect.top >= viewport.bottom
-    ) return false;
+      seen.has(hwnd) || clip.right <= clip.left || clip.bottom <= clip.top
+    ) return [];
     seen.add(hwnd);
-    return true;
+    return [{ ...target, clip }];
   });
   if (preferred !== null) visible.sort((a, b) => Number(b.hwnd === preferred) - Number(a.hwnd === preferred));
   return visible.slice(0, 16);

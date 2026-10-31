@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
   import MediaControls from "./MediaControls.svelte";
   import { WindowPeekController } from "./windowPeek.ts";
-  import { LivePreviewController, visiblePreviewTargets } from "./livePreview.ts";
+  import { contentViewport, LivePreviewController, visiblePreviewTargets } from "./livePreview.ts";
 
   let failed = $state(false);
   let container: HTMLDivElement;
@@ -71,12 +71,15 @@
       // Use the monitor's available height, not this autosized popup's own viewport height.
       const availableHeight = `${Math.max(160, Math.floor(screen.availHeight * 0.75))}px`;
       if (container.style.getPropertyValue("--weg-preview-available-height") !== availableHeight) container.style.setProperty("--weg-preview-available-height", availableHeight);
-      const listRect = container.querySelector(".weg-item-preview-list")!.getBoundingClientRect();
+      const list = container.querySelector<HTMLElement>(".weg-item-preview-list")!;
+      const bounds = list.getBoundingClientRect();
+      const listRect = contentViewport({ left: bounds.left, top: bounds.top, right: bounds.right, bottom: bounds.bottom }, list);
       const candidates = Array.from(container.querySelectorAll<HTMLElement>("[data-preview-hwnd]")).map((element) => {
         const rect = element.getBoundingClientRect();
         return { hwnd: Number(element.dataset.previewHwnd), rect: { left: px(rect.left), top: px(rect.top), right: px(rect.right), bottom: px(rect.bottom) } };
       });
-      const targets = visiblePreviewTargets(candidates, { left: px(listRect.left), top: px(listRect.top), right: px(listRect.right), bottom: px(listRect.bottom) }, hovered?.hwnd ?? null);
+      const clip = { left: Math.ceil(listRect.left * devicePixelRatio), top: Math.ceil(listRect.top * devicePixelRatio), right: Math.floor(listRect.right * devicePixelRatio), bottom: Math.floor(listRect.bottom * devicePixelRatio) };
+      const targets = visiblePreviewTargets(candidates, clip, hovered?.hwnd ?? null);
       live.update({ targets, opacity, anchor: previewState.sourceRect }, now);
     };
     wakeLive = () => { if (!animation) animation = requestAnimationFrame(render); };

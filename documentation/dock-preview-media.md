@@ -100,6 +100,13 @@ receives visibility/pointer state. If a layout request is rejected, a target-fre
 and enables snapshot fallback; retries back off instead of generating per-frame failures. Only visible requested
 thumbnails trigger snapshot fallback.
 
+Each live target keeps its full layout rectangle and an optional visible clip rectangle. The clip comes from the list's
+scrollable client area, excluding borders and scrollbars and accounting for the popup's transform. Physical clip edges
+round inward so native drawing stays within the list. The backend first computes the full cover crop, then maps the
+visible destination edges into that same source crop. Scrolling therefore hides the out-of-bounds portion rather than
+zooming or recentering the remaining picture. Fully hidden targets are released. Callers omitting the optional clip
+retain the previous unclipped behavior.
+
 Temporary-window restoration keeps multiple PID-checked neighbors above and below the source. If an upper neighbor
 closes or changes its topmost band, another survivor restores the old position. A lower survivor can also anchor the
 restore. If all saved anchors vanish, the source is placed behind surviving visible windows in the same band without
@@ -122,6 +129,8 @@ Additional manual acceptance:
 - Test browser, Explorer, NetEase Cloud Music and other apps, including several windows belonging to one app.
 - Group more than 16 independent windows under one dock item, scroll to later windows, and confirm previews remain
   usable and the popup dismisses after leaving. Scroll back and verify that native thumbnails follow the visible cards.
+- Scroll through a partially visible thumbnail at both ends of the list. The frame should stop at the client edges,
+  leave padding/scrollbars unobscured, and keep the visible portion aligned instead of stretching or shifting it.
 - During a temporary peek, close the window that was immediately above the source or toggle its always-on-top state.
   Leave the preview and confirm the source returns behind the other surviving windows without taking focus.
 - Switch Douyin videos repeatedly with the popup visible. The image should follow the actual source window without a
