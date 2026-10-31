@@ -349,4 +349,14 @@
   .media-session {
     overflow: hidden;
   }
+
+  .media-transport .media-session-actions {
+    .vertical & {
+      flex-direction: column;
+    }
+
+    button {
+      font-size: 0.5rem;
+    }
+  }
 }

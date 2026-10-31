@@ -19,6 +19,13 @@ context_menu:
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
 media:
+  previous: Previous track
+  play: Play
+  pause: Pause
+  play_pause: Play / pause
+  next: Next track
+  unsupported: This player does not support this action
+  command_failed: Could not confirm the media command. Check the player or its global shortcut settings.
   label: Media Player
   not_playing: Nothing is playing
 show_desktop:
@@ -34,7 +41,7 @@ taskbar_menu:
   task_manager: Task Manager
 trash_bin:
   empty_bin: Empty Recycle Bin
-  item_count: '{{0}} items'
+  item_count: "{{0}} items"
   label: Recycle Bin
 weg:
   empty: No items to show

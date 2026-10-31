@@ -1,6 +1,9 @@
 use std::sync::Once;
 
-use seelen_core::{handlers::SeelenEvent, system_state::MediaPlayer};
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{MediaPlayer, MediaTransportAction},
+};
 
 use crate::{app::emit_to_webviews, error::Result};
 
@@ -33,7 +36,13 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn media_next(id: String) -> Result<()> {
         let manager = get_players_manager();
-        if let Some(session) = manager.get_media_player(&id) {
+        {
+            let session = manager
+                .get_media_player(&id)
+                .ok_or("Media session is no longer available")?;
+            if !session.GetPlaybackInfo()?.Controls()?.IsNextEnabled()? {
+                return Err("This player does not support next track".into());
+            }
             let success = session.TrySkipNextAsync()?.join()?;
             if !success {
                 return Err("failed to skip next".into());
@@ -44,7 +53,13 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn media_prev(id: String) -> Result<()> {
         let manager = get_players_manager();
-        if let Some(session) = manager.get_media_player(&id) {
+        {
+            let session = manager
+                .get_media_player(&id)
+                .ok_or("Media session is no longer available")?;
+            if !session.GetPlaybackInfo()?.Controls()?.IsPreviousEnabled()? {
+                return Err("This player does not support previous track".into());
+            }
             let success = session.TrySkipPreviousAsync()?.join()?;
             if !success {
                 return Err("failed to skip previous".into());
@@ -55,7 +70,17 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn media_toggle_play_pause(id: String) -> Result<()> {
         let manager = get_players_manager();
-        if let Some(session) = manager.get_media_player(&id) {
+        {
+            let session = manager
+                .get_media_player(&id)
+                .ok_or("Media session is no longer available")?;
+            if !session
+                .GetPlaybackInfo()?
+                .Controls()?
+                .IsPlayPauseToggleEnabled()?
+            {
+                return Err("This player does not support play/pause".into());
+            }
             let success = session.TryTogglePlayPauseAsync()?.join()?;
             if !success {
                 return Err("failed to toggle play".into());
@@ -69,7 +94,17 @@ impl crate::tauri_handlers::Handlers {
     /// itself expects the position in 100ns ticks, so it's converted before the call.
     pub fn media_seek(id: String, position: i64) -> Result<()> {
         let manager = get_players_manager();
-        if let Some(session) = manager.get_media_player(&id) {
+        {
+            let session = manager
+                .get_media_player(&id)
+                .ok_or("Media session is no longer available")?;
+            if !session
+                .GetPlaybackInfo()?
+                .Controls()?
+                .IsPlaybackPositionEnabled()?
+            {
+                return Err("This player does not support seeking".into());
+            }
             let timeline = session.GetTimelineProperties()?;
             let mut min_seek = timeline.MinSeekTime()?.Duration.saturating_mul(100);
             let mut max_seek = timeline.MaxSeekTime()?.Duration.saturating_mul(100);
@@ -94,5 +129,16 @@ impl crate::tauri_handlers::Handlers {
             }
         }
         Ok(())
+    }
+
+    pub fn media_send_app_shortcut(
+        webview: tauri::WebviewWindow,
+        hwnd: isize,
+        exe: String,
+        action: MediaTransportAction,
+    ) -> Result<()> {
+        use crate::widgets::permissions::{WidgetPerm, request_widget_permission};
+        request_widget_permission(&webview, WidgetPerm::Run)?;
+        super::shortcuts::send_app_shortcut(hwnd, &exe, action)
     }
 }

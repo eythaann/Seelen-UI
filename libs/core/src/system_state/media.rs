@@ -36,6 +36,26 @@ pub struct MediaPlayer {
     pub timeline: MediaPlayerTimeline,
     pub playing: bool,
     pub default: bool,
+    pub controls: MediaPlayerControls,
+}
+
+#[derive(Debug, Default, Clone, Serialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(rename_all = "camelCase")]
+pub struct MediaPlayerControls {
+    pub previous: bool,
+    pub toggle_play_pause: bool,
+    pub next: bool,
+    pub seek: bool,
+}
+
+#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum MediaTransportAction {
+    Previous,
+    TogglePlayPause,
+    Next,
 }
 
 #[derive(Debug, Clone, Serialize)]

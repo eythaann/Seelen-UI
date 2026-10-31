@@ -1,6 +1,26 @@
 $itemSize: 256px;
 
 .weg-item-preview-container {
+  --weg-preview-offset-x: 0px;
+  --weg-preview-offset-y: var(--spacing-s);
+  transform: translate(0, 0) scale(1);
+  transform-origin: center bottom;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  &[data-dock-side="Top"] {
+    --weg-preview-offset-y: calc(-1 * var(--spacing-s));
+    transform-origin: center top;
+  }
+  &[data-dock-side="Left"] {
+    --weg-preview-offset-x: calc(-1 * var(--spacing-s));
+    --weg-preview-offset-y: 0px;
+    transform-origin: left center;
+  }
+  &[data-dock-side="Right"] {
+    --weg-preview-offset-x: var(--spacing-s);
+    --weg-preview-offset-y: 0px;
+    transform-origin: right center;
+  }
   width: max-content;
   padding: var(--spacing-xs);
   background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
@@ -12,6 +32,7 @@ $itemSize: 256px;
 
     gap: var(--spacing-xs);
     max-width: calc(#{$itemSize * 4} + var(--spacing-xs) * 3);
+    max-height: min(720px, var(--weg-preview-available-height, 720px));
   }
 
   .weg-item-preview {
@@ -58,8 +79,10 @@ $itemSize: 256px;
       background-color: var(--slu-std-bg-dark-color);
       border-radius: var(--radius-m);
       overflow: hidden;
+      padding: 0;
 
       .weg-item-preview-image {
+        width: 100%;
         max-height: 100%;
         height: 100%;
         object-fit: cover;
@@ -69,6 +92,42 @@ $itemSize: 256px;
       .weg-item-no-preview {
         width: 30px;
       }
+
+      .weg-preview-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-s);
+        color: var(--slu-std-fg-muted-color);
+        text-align: center;
+      }
     }
+  }
+
+  .weg-preview-media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xs);
+
+    select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .weg-preview-media-note {
+      color: var(--slu-std-fg-muted-color);
+    }
+  }
+}
+
+:root[data-widget-hidden] .weg-item-preview-container {
+  transform: translate(var(--weg-preview-offset-x), var(--weg-preview-offset-y)) scale(0.97);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weg-item-preview-container {
+    transition: none;
   }
 }

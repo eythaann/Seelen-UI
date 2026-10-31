@@ -1,8 +1,10 @@
 mod badges;
 mod flashing;
+pub mod live_previews;
 pub mod msix;
 pub mod msix_manifest;
 pub mod previews;
+pub mod window_peek;
 mod windows;
 
 pub use badges::WindowBadges;
