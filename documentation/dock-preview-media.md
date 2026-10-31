@@ -87,12 +87,23 @@ Native relationships are scoped to their requesting webview/session, unregistere
 lease expiry and application exit. Cancelled late requests cannot resurrect an old surface. English translation
 fallbacks no longer log errors for every control rerender, avoiding repeated UI-to-backend log traffic during playback.
 
-The three tests that register actual DWM surfaces are ignored in ordinary headless test runs. Run them on an interactive
+The four tests that register actual DWM surfaces are ignored in ordinary headless test runs. Run them on an interactive
 Windows desktop with:
 
 ```text
 cargo test -p seelen-ui live_previews::tests -- --include-ignored --test-threads=1
 ```
+
+Large groups are scrollable, and only thumbnails intersecting the visible list consume the 16 live slots; the hovered
+thumbnail takes priority. The backend bounds registrations without rejecting an oversized group, so the popup still
+receives visibility/pointer state. If a layout request is rejected, a target-free recovery request retrieves that state
+and enables snapshot fallback; retries back off instead of generating per-frame failures. Only visible requested
+thumbnails trigger snapshot fallback.
+
+Temporary-window restoration keeps multiple PID-checked neighbors above and below the source. If an upper neighbor
+closes or changes its topmost band, another survivor restores the old position. A lower survivor can also anchor the
+restore. If all saved anchors vanish, the source is placed behind surviving visible windows in the same band without
+moving it behind the desktop or clearing its topmost flag.
 
 Hover any running application's thumbnail for 450 ms to temporarily present that exact window without changing keyboard
 focus. The pointer may move from the thumbnail onto the real window. Leaving both regions restores its previous z-order
@@ -109,6 +120,10 @@ monitors. The default theme slides the popup from the relevant dock edge and res
 Additional manual acceptance:
 
 - Test browser, Explorer, NetEase Cloud Music and other apps, including several windows belonging to one app.
+- Group more than 16 independent windows under one dock item, scroll to later windows, and confirm previews remain
+  usable and the popup dismisses after leaving. Scroll back and verify that native thumbnails follow the visible cards.
+- During a temporary peek, close the window that was immediately above the source or toggle its always-on-top state.
+  Leave the preview and confirm the source returns behind the other surviving windows without taking focus.
 - Switch Douyin videos repeatedly with the popup visible. The image should follow the actual source window without a
   title/resize event. Compare animation and video smoothness with the Windows taskbar, without assuming a fixed FPS.
 - Hover a minimized window, leave without clicking, and confirm it is minimized again. Repeat with an already open

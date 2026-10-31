@@ -52,9 +52,11 @@ impl LivePreviewManager {
         opacity: u8,
         anchor: Option<Rect>,
     ) -> Result<LiveWindowPreviewState> {
-        if session.is_empty() || session.len() > 128 || targets.len() > MAX_TARGETS {
+        if session.is_empty() || session.len() > 128 {
             return Err("Invalid live preview request".into());
         }
+        // Limit registrations, not the lifetime/pointer response for an entire group.
+        let targets = bounded_targets(targets);
         let visible = unsafe { IsWindowVisible(HWND(owner as _)) }.as_bool();
         let mut state = self.state.lock();
         state.prune();
@@ -228,6 +230,20 @@ impl Drop for LiveThumbnail {
     }
 }
 
+fn bounded_targets(targets: Vec<WindowPreviewTarget>) -> Vec<WindowPreviewTarget> {
+    let mut selected: Vec<WindowPreviewTarget> = Vec::with_capacity(MAX_TARGETS);
+    for target in targets {
+        if !valid_rect(&target.rect) || selected.iter().any(|entry| entry.hwnd == target.hwnd) {
+            continue;
+        }
+        selected.push(target);
+        if selected.len() == MAX_TARGETS {
+            break;
+        }
+    }
+    selected
+}
+
 fn valid_rect(rect: &Rect) -> bool {
     rect.right > rect.left
         && rect.bottom > rect.top
@@ -344,6 +360,69 @@ mod tests {
                 let _ = DestroyWindow(self.0);
             }
         }
+    }
+
+    #[test]
+    fn oversized_and_duplicate_groups_are_bounded_without_rejecting_the_group() {
+        let rect = Rect {
+            left: 10,
+            top: 40,
+            right: 266,
+            bottom: 184,
+        };
+        let mut targets = vec![WindowPreviewTarget {
+            hwnd: 999,
+            rect: Rect::default(),
+        }];
+        for hwnd in 1..=40 {
+            targets.push(WindowPreviewTarget {
+                hwnd,
+                rect: rect.clone(),
+            });
+            targets.push(WindowPreviewTarget {
+                hwnd,
+                rect: rect.clone(),
+            });
+        }
+        let selected = bounded_targets(targets);
+        assert_eq!(selected.len(), MAX_TARGETS);
+        assert_eq!(
+            selected
+                .iter()
+                .map(|target| target.hwnd)
+                .collect::<Vec<_>>(),
+            (1..=16).collect::<Vec<_>>()
+        );
+    }
+
+    #[test]
+    #[ignore = "requires an interactive Windows desktop with DWM"]
+    fn oversized_group_still_returns_lifetime_and_pointer_state() {
+        let owner = TestWindow::new();
+        let sources: Vec<_> = (0..MAX_TARGETS + 1).map(|_| TestWindow::new()).collect();
+        let targets = sources
+            .iter()
+            .map(|window| WindowPreviewTarget {
+                hwnd: window.address(),
+                rect: Rect {
+                    left: 10,
+                    top: 40,
+                    right: 266,
+                    bottom: 184,
+                },
+            })
+            .collect();
+        let manager = LivePreviewManager {
+            state: TracedMutex::new(LivePreviewState::default()),
+        };
+        let status = manager
+            .update(owner.address(), "seventeen".into(), targets, 255, None)
+            .unwrap();
+        assert!(status.visible);
+        assert_eq!(status.live.len(), MAX_TARGETS);
+        assert!(!status.pointer_inside); // The fixture popup is far offscreen.
+        manager.clear(owner.address(), "seventeen");
+        assert!(manager.state.lock().owners.is_empty());
     }
 
     #[test]

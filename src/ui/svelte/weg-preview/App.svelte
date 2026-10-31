@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
   import MediaControls from "./MediaControls.svelte";
   import { WindowPeekController } from "./windowPeek.ts";
-  import { LivePreviewController } from "./livePreview.ts";
+  import { LivePreviewController, visiblePreviewTargets } from "./livePreview.ts";
 
   let failed = $state(false);
   let container: HTMLDivElement;
@@ -28,7 +28,8 @@
   const live = new LivePreviewController({
     update: (session, frame) => invoke(SeelenCommand.UpdateWindowPreviews, { session, ...frame }),
     clear: (session) => invoke(SeelenCommand.ClearWindowPreviews, { session }),
-  }, (status) => {
+    recover: (session, frame) => invoke(SeelenCommand.UpdateWindowPreviews, { session, ...frame, targets: [] }),
+  }, (status, frame) => {
     liveVisible = status.visible;
     if (!status.visible) {
       if (hadVisible) { armed = false; peek.cancel(); live.clear(); }
@@ -37,7 +38,7 @@
     hadVisible = true;
     previewChecked = true;
     if (status.live.join() !== liveWindows.join()) liveWindows = status.live;
-    if (previewState.currentInteractables.some((window) => !status.live.includes(window.hwnd))) previewState.enableSnapshotFallback();
+    if (frame.targets.some((window) => !status.live.includes(window.hwnd))) previewState.enableSnapshotFallback();
     if (!status.pointerInside && !peek.holding && !dismissed) void dismiss();
   });
 
@@ -67,10 +68,15 @@
       const opacity = Math.round(Number(getComputedStyle(document.documentElement).opacity) * 255);
       if (!opacity && document.documentElement.hasAttribute("data-widget-hidden")) return;
       const px = (value: number) => Math.round(value * devicePixelRatio);
-      const targets = Array.from(container.querySelectorAll<HTMLElement>("[data-preview-hwnd]")).map((element) => {
+      // Use the monitor's available height, not this autosized popup's own viewport height.
+      const availableHeight = `${Math.max(160, Math.floor(screen.availHeight * 0.75))}px`;
+      if (container.style.getPropertyValue("--weg-preview-available-height") !== availableHeight) container.style.setProperty("--weg-preview-available-height", availableHeight);
+      const listRect = container.querySelector(".weg-item-preview-list")!.getBoundingClientRect();
+      const candidates = Array.from(container.querySelectorAll<HTMLElement>("[data-preview-hwnd]")).map((element) => {
         const rect = element.getBoundingClientRect();
         return { hwnd: Number(element.dataset.previewHwnd), rect: { left: px(rect.left), top: px(rect.top), right: px(rect.right), bottom: px(rect.bottom) } };
       });
+      const targets = visiblePreviewTargets(candidates, { left: px(listRect.left), top: px(listRect.top), right: px(listRect.right), bottom: px(listRect.bottom) }, hovered?.hwnd ?? null);
       live.update({ targets, opacity, anchor: previewState.sourceRect }, now);
     };
     wakeLive = () => { if (!animation) animation = requestAnimationFrame(render); };

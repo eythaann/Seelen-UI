@@ -14,10 +14,11 @@ use windows::Win32::{
     },
 };
 
-use crate::{error::Result, utils::lock_free::TracedMutex};
+use crate::{error::Result, utils::lock_free::TracedMutex, windows_api::window::Window};
 
 const POLL_TTL: Duration = Duration::from_secs(2);
 const LEAVE_GRACE: Duration = Duration::from_millis(220);
+const MAX_STACK_REFERENCES: usize = 16;
 const POSITION_FLAGS: SET_WINDOW_POS_FLAGS = SET_WINDOW_POS_FLAGS(
     SWP_NOMOVE.0 | SWP_NOSIZE.0 | SWP_NOACTIVATE.0 | SWP_NOOWNERZORDER.0 | SWP_ASYNCWINDOWPOS.0,
 );
@@ -335,7 +336,7 @@ impl PeekSession {
 struct TemporaryWindow {
     hwnd: isize,
     pid: u32,
-    previous: Option<isize>,
+    order: StackingOrder,
     topmost: bool,
     placement: WINDOWPLACEMENT,
     minimized: bool,
@@ -361,24 +362,11 @@ impl TemporaryWindow {
             GetWindowPlacement(handle, &mut placement)?;
         }
         let topmost = is_topmost(hwnd);
-        let mut previous = unsafe { GetWindow(handle, GW_HWNDPREV) }.ok();
-        for _ in 0..512 {
-            let Some(window) = previous else {
-                break;
-            };
-            let mut process = 0;
-            unsafe {
-                GetWindowThreadProcessId(window, Some(&mut process));
-            }
-            if process != std::process::id() && is_topmost(window.0 as isize) == topmost {
-                break;
-            }
-            previous = unsafe { GetWindow(window, GW_HWNDPREV) }.ok();
-        }
+        let order = StackingOrder::capture(hwnd, topmost, std::process::id());
         Ok(Self {
             hwnd,
             pid,
-            previous: previous.map(|window| window.0 as isize),
+            order,
             topmost,
             placement,
             minimized: unsafe { IsIconic(handle) }.as_bool(),
@@ -448,23 +436,137 @@ impl Drop for TemporaryWindow {
                 let _ = SetWindowPlacement(handle, &restore);
             }
         }
-        if let Some(previous) = self.previous
-            && unsafe { IsWindow(Some(HWND(previous as _))) }.as_bool()
-            && is_topmost(previous) == self.topmost
-        {
-            unsafe {
-                let _ = SetWindowPos(
-                    handle,
-                    Some(HWND(previous as _)),
-                    0,
-                    0,
-                    0,
-                    0,
-                    POSITION_FLAGS,
-                );
+        self.order.restore(self.hwnd);
+    }
+}
+
+/// Keep several nearest neighbors on both sides; any individual window may disappear during a peek.
+struct StackingOrder {
+    above: Vec<WindowReference>,
+    below: Vec<WindowReference>,
+    topmost: bool,
+    ignored_process: u32,
+}
+
+impl StackingOrder {
+    fn capture(source: isize, topmost: bool, ignored_process: u32) -> Self {
+        Self {
+            above: stack_neighbors(source, GW_HWNDPREV, topmost, ignored_process),
+            below: stack_neighbors(source, GW_HWNDNEXT, topmost, ignored_process),
+            topmost,
+            ignored_process,
+        }
+    }
+
+    fn restore(&self, source: isize) {
+        for reference in &self.above {
+            if reference.usable(self.topmost) && position_after(source, HWND(reference.hwnd as _)) {
+                return;
+            }
+        }
+        for reference in &self.below {
+            if !reference.usable(self.topmost) {
+                continue;
+            }
+            // Insert just before the surviving lower neighbor, using its current predecessor.
+            let previous = unsafe { GetWindow(HWND(reference.hwnd as _), GW_HWNDPREV) }.ok();
+            if previous.is_some_and(|window| window.0 as isize == source) {
+                return;
+            }
+            let after = previous
+                .filter(|window| is_topmost(window.0 as isize) == self.topmost)
+                .unwrap_or(if self.topmost { HWND_TOPMOST } else { HWND_TOP });
+            if position_after(source, after) {
+                return;
+            }
+        }
+        // If every saved reference vanished, demote behind surviving visible windows in the same band.
+        // Do not use HWND_BOTTOM, which can put the source behind the desktop or clear its topmost flag.
+        // Walk the source's own desktop/Z-order chain rather than assuming the caller's desktop.
+        let mut current = unsafe { GetWindow(HWND(source as _), GW_HWNDNEXT) }.ok();
+        let mut fallbacks = Vec::new();
+        let desktop = unsafe { GetDesktopWindow() }.0 as isize;
+        for _ in 0..512 {
+            let Some(window) = current else {
+                break;
+            };
+            let address = window.0 as isize;
+            if address != source
+                && is_topmost(address) == self.topmost
+                && unsafe { IsWindowVisible(window) }.as_bool()
+                && let Some(reference) = WindowReference::capture(address)
+                && reference.pid != self.ignored_process
+                && address != desktop
+                && !matches!(
+                    Window::from(address).class().as_str(),
+                    "Progman" | "WorkerW"
+                )
+            {
+                fallbacks.push(reference);
+            }
+            current = unsafe { GetWindow(window, GW_HWNDNEXT) }.ok();
+        }
+        // Some desktop bands reject an insertion reference even when its HWND is valid.
+        for reference in fallbacks.into_iter().rev() {
+            if reference.usable(self.topmost) && position_after(source, HWND(reference.hwnd as _)) {
+                return;
             }
         }
     }
+}
+
+#[derive(Clone, Copy)]
+struct WindowReference {
+    hwnd: isize,
+    pid: u32,
+}
+impl WindowReference {
+    fn capture(hwnd: isize) -> Option<Self> {
+        let mut pid = 0;
+        unsafe {
+            GetWindowThreadProcessId(HWND(hwnd as _), Some(&mut pid));
+        }
+        (pid != 0).then_some(Self { hwnd, pid })
+    }
+    fn usable(&self, topmost: bool) -> bool {
+        unsafe { IsWindow(Some(HWND(self.hwnd as _))) }.as_bool()
+            && Self::capture(self.hwnd).is_some_and(|window| window.pid == self.pid)
+            && is_topmost(self.hwnd) == topmost
+    }
+}
+
+fn stack_neighbors(
+    source: isize,
+    direction: GET_WINDOW_CMD,
+    topmost: bool,
+    ignored_process: u32,
+) -> Vec<WindowReference> {
+    let mut neighbors = Vec::with_capacity(MAX_STACK_REFERENCES);
+    let mut current = unsafe { GetWindow(HWND(source as _), direction) }.ok();
+    for _ in 0..512 {
+        let Some(window) = current else {
+            break;
+        };
+        let address = window.0 as isize;
+        if address == source {
+            break;
+        }
+        if is_topmost(address) == topmost
+            && let Some(reference) = WindowReference::capture(address)
+            && reference.pid != ignored_process
+        {
+            neighbors.push(reference);
+            if neighbors.len() == MAX_STACK_REFERENCES {
+                break;
+            }
+        }
+        current = unsafe { GetWindow(window, direction) }.ok();
+    }
+    neighbors
+}
+
+fn position_after(source: isize, after: HWND) -> bool {
+    unsafe { SetWindowPos(HWND(source as _), Some(after), 0, 0, 0, 0, POSITION_FLAGS) }.is_ok()
 }
 
 fn is_topmost(hwnd: isize) -> bool {
@@ -546,6 +648,132 @@ mod tests {
                 let _ = DestroyWindow(self.0);
             }
         }
+    }
+
+    #[test]
+    fn exhausted_references_demote_within_the_normal_band() {
+        let source = TestWindow::new();
+        let other = TestWindow::new();
+        arrange(&[&source, &other]);
+        let mut view = TemporaryWindow::capture(source.address()).unwrap();
+        view.order = StackingOrder {
+            above: vec![],
+            below: vec![],
+            topmost: false,
+            ignored_process: 0,
+        };
+        view.show().unwrap();
+        source.wait_for_minimized(false);
+        drop(view);
+        source.wait_for_minimized(false);
+        assert!(above_window(other.address(), source.address()));
+        assert!(!is_topmost(source.address()));
+    }
+
+    #[test]
+    fn exhausted_references_preserve_the_topmost_band() {
+        let source = TestWindow::new();
+        let other = TestWindow::new();
+        assert!(position_after(other.address(), HWND_TOPMOST));
+        other.wait_for_minimized(false);
+        assert!(position_after(source.address(), HWND_TOPMOST));
+        source.wait_for_minimized(false);
+        let mut view = TemporaryWindow::capture(source.address()).unwrap();
+        view.order = StackingOrder {
+            above: vec![],
+            below: vec![],
+            topmost: true,
+            ignored_process: 0,
+        };
+        view.show().unwrap();
+        source.wait_for_minimized(false);
+        drop(view);
+        source.wait_for_minimized(false);
+        assert!(above_window(other.address(), source.address()));
+        assert!(is_topmost(source.address()));
+    }
+
+    #[test]
+    fn closed_predecessor_uses_a_surviving_upper_reference() {
+        let above = TestWindow::new();
+        let previous = TestWindow::new();
+        let source = TestWindow::new();
+        let below = TestWindow::new();
+        arrange(&[&above, &previous, &source, &below]);
+        let mut view = TemporaryWindow::capture(source.address()).unwrap();
+        view.order = StackingOrder::capture(source.address(), false, 0);
+        view.show().unwrap();
+        source.wait_for_minimized(false);
+        drop(previous);
+        drop(view);
+        source.wait_for_minimized(false);
+        assert!(above_window(above.address(), source.address()));
+        assert!(above_window(source.address(), below.address()));
+        assert!(!is_topmost(source.address()));
+    }
+
+    #[test]
+    fn predecessor_changing_topmost_band_does_not_leave_the_source_raised() {
+        let above = TestWindow::new();
+        let previous = TestWindow::new();
+        let source = TestWindow::new();
+        let below = TestWindow::new();
+        arrange(&[&above, &previous, &source, &below]);
+        let mut view = TemporaryWindow::capture(source.address()).unwrap();
+        view.order = StackingOrder::capture(source.address(), false, 0);
+        view.show().unwrap();
+        source.wait_for_minimized(false);
+        assert!(position_after(previous.address(), HWND_TOPMOST));
+        previous.wait_for_minimized(false);
+        drop(view);
+        source.wait_for_minimized(false);
+        assert!(above_window(above.address(), source.address()));
+        assert!(above_window(source.address(), below.address()));
+        assert!(is_topmost(previous.address()));
+        assert!(!is_topmost(source.address()));
+    }
+
+    #[test]
+    fn missing_upper_references_restore_before_a_surviving_lower_neighbor() {
+        let above = TestWindow::new();
+        let previous = TestWindow::new();
+        let source = TestWindow::new();
+        let below = TestWindow::new();
+        arrange(&[&above, &previous, &source, &below]);
+        let mut view = TemporaryWindow::capture(source.address()).unwrap();
+        view.order = StackingOrder::capture(source.address(), false, 0);
+        view.show().unwrap();
+        source.wait_for_minimized(false);
+        drop(previous);
+        drop(above);
+        let newcomer = TestWindow::new();
+        assert!(position_after(source.address(), HWND_TOP));
+        source.wait_for_minimized(false);
+        drop(view);
+        source.wait_for_minimized(false);
+        assert!(above_window(newcomer.address(), source.address()));
+        assert!(above_window(source.address(), below.address()));
+    }
+
+    fn arrange(windows: &[&TestWindow]) {
+        for window in windows.iter().rev() {
+            assert!(position_after(window.address(), HWND_TOP));
+            window.wait_for_minimized(false);
+        }
+    }
+
+    fn above_window(upper: isize, lower: isize) -> bool {
+        let mut current = unsafe { GetWindow(HWND(lower as _), GW_HWNDPREV) }.ok();
+        for _ in 0..512 {
+            let Some(window) = current else {
+                return false;
+            };
+            if window.0 as isize == upper {
+                return true;
+            }
+            current = unsafe { GetWindow(window, GW_HWNDPREV) }.ok();
+        }
+        false
     }
 
     #[test]

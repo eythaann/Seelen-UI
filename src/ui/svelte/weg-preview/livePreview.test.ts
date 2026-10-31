@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { setImmediate } from "node:timers/promises";
-import { LivePreviewController, type LivePreviewFrame, type LivePreviewStatus } from "./livePreview.ts";
+import {
+  LivePreviewController,
+  type LivePreviewFrame,
+  type LivePreviewStatus,
+  visiblePreviewTargets,
+} from "./livePreview.ts";
 
 const frame: LivePreviewFrame = {
   targets: [{ hwnd: 17, rect: { left: 10, top: 40, right: 266, bottom: 184 } }],
@@ -9,6 +14,95 @@ const frame: LivePreviewFrame = {
   anchor: { left: -500, top: 100, right: -450, bottom: 150 },
 };
 const status: LivePreviewStatus = { live: [17], visible: true, pointerInside: true };
+
+test("large groups only register visible unique thumbnails within the native budget", () => {
+  const targets = Array.from({ length: 40 }, (_, index) => ({
+    hwnd: index + 1,
+    rect: { left: 0, top: index * 200, right: 256, bottom: index * 200 + 144 },
+  }));
+  const selected = visiblePreviewTargets(targets, { left: 0, top: 0, right: 256, bottom: 400 });
+  assert.deepEqual(selected.map(({ hwnd }) => hwnd), [1, 2]);
+  const crowded = targets.map((target) => ({ ...target, rect: frame.targets[0]!.rect }));
+  const bounded = visiblePreviewTargets(crowded, { left: 0, top: 0, right: 300, bottom: 300 }, 40);
+  assert.equal(bounded.length, 16);
+  assert.equal(bounded[0]!.hwnd, 40);
+});
+
+test("scrolling registers later windows rather than always truncating the first sixteen", () => {
+  const targets = Array.from({ length: 20 }, (_, index) => ({
+    hwnd: index + 1,
+    rect: { left: 0, top: index * 200 - 3200, right: 256, bottom: index * 200 - 3200 + 144 },
+  }));
+  assert.deepEqual(
+    visiblePreviewTargets(targets, { left: 0, top: 0, right: 256, bottom: 400 }).map(({ hwnd }) => hwnd),
+    [17, 18],
+  );
+});
+
+test("visibility handles clipped cards, duplicates, empty viewports and edge contact", () => {
+  const targets = [
+    { hwnd: 1, rect: { left: -20, top: -20, right: 30, bottom: 30 } },
+    { hwnd: 1, rect: { left: 20, top: 20, right: 40, bottom: 40 } },
+    { hwnd: 2, rect: { left: 100, top: 0, right: 200, bottom: 50 } },
+    { hwnd: 3, rect: { left: 0, top: 100, right: 50, bottom: 200 } },
+    { hwnd: 4, rect: { left: 0, top: 0, right: 0, bottom: 0 } },
+  ];
+  assert.deepEqual(
+    visiblePreviewTargets(targets, { left: 0, top: 0, right: 100, bottom: 100 }).map(({ hwnd }) => hwnd),
+    [1],
+  );
+  assert.deepEqual(visiblePreviewTargets(targets, { left: 0, top: 0, right: 0, bottom: 0 }), []);
+});
+
+test("rejected target updates still recover pointer state and back off before retrying", async (t) => {
+  t.mock.method(console, "error", () => {});
+  let requests = 0;
+  const states: LivePreviewStatus[] = [];
+  const controller = new LivePreviewController(
+    {
+      update: () => {
+        requests++;
+        return Promise.reject(new Error("source closed"));
+      },
+      recover: () => Promise.resolve({ live: [], visible: true, pointerInside: false }),
+      clear: () => Promise.resolve(),
+    },
+    (value) => states.push(value),
+    () => "recovery-session",
+  );
+  controller.update(frame, 0);
+  await setImmediate();
+  assert.deepEqual(states, [{ live: [], visible: true, pointerInside: false }]);
+  for (const now of [16, 80, 160, 240]) controller.update(frame, now);
+  assert.equal(requests, 1);
+  controller.update(frame, 250);
+  await setImmediate();
+  assert.equal(requests, 2);
+});
+
+test("late pointer recovery from a cleared session cannot hide a new popup", async (t) => {
+  t.mock.method(console, "error", () => {});
+  let finish!: (value: LivePreviewStatus) => void;
+  const states: LivePreviewStatus[] = [];
+  const controller = new LivePreviewController(
+    {
+      update: () => Promise.reject(new Error("rejected frame")),
+      recover: () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+      clear: () => Promise.resolve(),
+    },
+    (value) => states.push(value),
+    () => "old-session",
+  );
+  controller.update(frame, 0);
+  await setImmediate();
+  controller.clear();
+  finish({ live: [], visible: true, pointerInside: false });
+  await setImmediate();
+  assert.deepEqual(states, []);
+});
 
 test("stable video surfaces only send heartbeats, not per-frame snapshots or registrations", async () => {
   const calls: number[] = [];

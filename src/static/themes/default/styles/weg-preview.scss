@@ -32,6 +32,7 @@ $itemSize: 256px;
 
     gap: var(--spacing-xs);
     max-width: calc(#{$itemSize * 4} + var(--spacing-xs) * 3);
+    max-height: min(720px, var(--weg-preview-available-height, 720px));
   }
 
   .weg-item-preview {
