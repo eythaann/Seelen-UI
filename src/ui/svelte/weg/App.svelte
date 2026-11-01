@@ -27,6 +27,9 @@
   }, 250);
 
   const showWidget = $derived(!topWindowIsFullscreen || focusedIsAppsMenu);
+  // only the focused window identity matters; title or position updates of the same window must not
+  // restart the debounced repair
+  const focusedHwnd = $derived(focused.value?.hwnd);
   const setWidgetVisibility = debounce((value: boolean) => {
     if (value) {
       Widget.self.show();
@@ -44,7 +47,7 @@
 
   $effect(() => {
     // tracked on purpose: any focus change can push the dock out of the topmost band
-    focused.value;
+    focusedHwnd;
     if (settingsState.isReady && showWidget) {
       reassertTopMost();
     }
