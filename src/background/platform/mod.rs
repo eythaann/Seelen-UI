@@ -1,14 +1,19 @@
 //! OS abstraction layer.
 //!
-//! Every submodule exposes an OS-agnostic API in its `mod.rs` and declares there the contract
-//! (a private trait) that each OS has to implement in its own file (`windows.rs`, in the future
-//! `linux.rs`, ...). The rest of the app must only consume the agnostic API.
+//! Each submodule exposes in its `mod.rs` the OS-agnostic API used by the rest of the app, plus
+//! the logic that doesn't depend on the OS. Everything native lives in a per-OS module
+//! (`windows`, in the future `linux`, ...) aliased as `imp`:
+//!
+//! - The public API is the contract: it only forwards to `imp`, so a new OS has to provide the
+//!   same items (`NativeWindow`, `NativeMonitor`, free functions, ...) and the compiler lists
+//!   whatever is missing.
+//! - Concepts that only exist on one OS are exposed through an extension trait
+//!   (`WindowsWindowExt`, ...), only to be used from code specific to that OS.
 
-// Not wired into the app yet: the current code still uses `windows_api` directly.
-#![allow(dead_code, unused_imports)]
-
+pub mod cursor;
 pub mod hook;
 pub mod monitor;
 pub mod paths;
+pub mod process;
 pub mod startup;
 pub mod window;

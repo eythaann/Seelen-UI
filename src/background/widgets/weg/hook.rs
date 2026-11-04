@@ -5,11 +5,7 @@ use windows::Win32::{
     },
 };
 
-use crate::{
-    error::Result,
-    pcstr,
-    windows_api::{WindowsApi, window::Window},
-};
+use crate::{error::Result, pcstr, platform::window::Window, windows_api::WindowsApi};
 
 use super::{SeelenWeg, TASKBAR_CLASS};
 
@@ -23,9 +19,8 @@ impl SeelenWeg {
                 // this will hide native notification center and notifications preview
                 if class == "Windows.UI.Core.CoreWindow"
                     && origin
-                        .process()
-                        .program_exe_name()
-                        .is_ok_and(|n| n == "ShellExperienceHost.exe")
+                        .exe_path()
+                        .is_ok_and(|path| path.ends_with("ShellExperienceHost.exe"))
                 {
                     let _ = WindowsApi::show_window_async(origin_hwnd, SW_HIDE);
                     return Ok(());

@@ -4,14 +4,13 @@ pub use slu_ipc::commands::{Axis, Direction, Sizing, StepWay, WindowManagerCli, 
 use seelen_core::state::twm::TwmReservation;
 
 use crate::error::Result;
+use crate::platform::monitor::Monitor;
+use crate::platform::window::Window;
 use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::VdManager;
 use crate::widgets::window_manager::state_v2::{
     TwmState, TwmStateEvent, WM_STATE, twm_set_rect_to_float_initial_size,
 };
-use crate::windows_api::MonitorEnumerator;
-use crate::windows_api::monitor::Monitor;
-use crate::windows_api::window::Window;
 
 fn to_wm_reservation(side: AllowedReservations) -> TwmReservation {
     match side {
@@ -213,7 +212,7 @@ fn process_move_to_monitor(foreground: &Window, side: Direction) -> Result<()> {
 }
 
 pub fn get_neartest_monitor_at_side(monitor: &Monitor, side: Direction) -> Result<Option<Monitor>> {
-    let monitors = MonitorEnumerator::enumerate_win32()?;
+    let monitors = Monitor::enumerate()?;
     let center = monitor.rect()?.center();
 
     let mut best: Option<(Monitor, i32)> = None;

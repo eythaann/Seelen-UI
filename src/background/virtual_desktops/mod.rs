@@ -10,17 +10,15 @@ use std::sync::atomic::{AtomicU32, Ordering};
 
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
 use seelen_core::system_state::MonitorId;
-use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 
 use crate::error::{Result, ResultLogExt};
 use crate::event_manager;
 use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
 use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
-use crate::platform::hook::app_windows::HookManager;
+use crate::platform::hook::{HookManager, WinEvent};
+use crate::platform::window::{Window, WindowState};
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
-use crate::windows_api::window::Window;
-use crate::windows_api::window::event::WinEvent;
 
 use events::VirtualDesktopEvent;
 
@@ -387,7 +385,7 @@ impl VdManager {
                 // Mark before minimizing, so the SystemMinimizeStart handlers (e.g. TWM)
                 // already see it as hidden by the workspace and not by the user.
                 let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window_id);
-                window.show_window(SW_MINIMIZE).ok();
+                window.set_state(WindowState::Minimized).ok();
             }
 
             Ok(true)
@@ -515,12 +513,16 @@ pub trait DesktopWorkspaceExt {
 
 impl DesktopWorkspaceExt for DesktopWorkspace {
     fn hide(&self, force: bool) {
-        let mode = if force { SW_FORCEMINIMIZE } else { SW_MINIMIZE };
+        let state = if force {
+            WindowState::ForceMinimized
+        } else {
+            WindowState::Minimized
+        };
         for addr in &self.windows {
             let window = Window::from(*addr);
             if window.is_window() && !window.is_minimized() {
                 let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window.address());
-                window.show_window(mode).log_error();
+                window.set_state(state).log_error();
             }
         }
     }
@@ -537,11 +539,11 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             }
 
             if is_minimized {
-                // Push before show_window to avoid a race where SystemMinimizeEnd
+                // Push before set_state to avoid a race where SystemMinimizeEnd
                 // fires on the hook thread before this thread reaches the push.
                 RESTORED_EVENT_QUEUE.push(*addr);
-                // use normal show instead async cuz it will keep the order of restoring
-                window.show_window(SW_RESTORE).log_error();
+                // use the sync variant instead of async cuz it will keep the order of restoring
+                window.set_state(WindowState::Restored).log_error();
             }
             MINIMIZED_BY_WORKSPACES.remove_sync(addr);
 

@@ -1,65 +1,21 @@
-use windows::Win32::{
-    Devices::Display::{
-        DestroyPhysicalMonitor, GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR,
-        SetMonitorBrightness,
-    },
-    Foundation::HANDLE,
-    Storage::FileSystem::{
-        CreateFileW, FILE_GENERIC_READ, FILE_GENERIC_WRITE, FILE_SHARE_READ, FILE_SHARE_WRITE,
-        OPEN_EXISTING,
-    },
+use windows::Win32::Devices::Display::{
+    DestroyPhysicalMonitor, GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR,
+    SetMonitorBrightness,
 };
 
-use windows_core::{BOOL, Owned};
+use windows_core::BOOL;
 
 use crate::{
     error::Result,
-    windows_api::{WindowsApi, monitor::MonitorTarget, string_utils::WindowsString},
+    platform::monitor::{Monitor, WindowsMonitorExt},
+    windows_api::{WindowsApi, string_utils::WindowsString},
 };
-
-use super::Monitor;
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub struct DdcciBrightnessValues {
     pub min: u32,
     pub current: u32,
     pub max: u32,
-}
-
-#[allow(dead_code)]
-impl MonitorTarget {
-    /// Opens and returns a file handle for a display device using its DOS device path.\
-    /// These handles are only used for the `DeviceIoControl` API (for internal displays);
-    /// a handle can still be returned for external displays, but it should not be used.
-    fn get_file_handle(&self) -> Result<Owned<HANDLE>> {
-        let device_id = self.0.TryGetMonitor()?.DeviceId()?.to_os_string();
-        let device_id = WindowsString::from(device_id);
-
-        // This could fail for virtual devices e.g. Remote Desktop sessions - they are not real monitors
-        let handle = unsafe {
-            CreateFileW(
-                device_id.as_pcwstr(),
-                (FILE_GENERIC_READ | FILE_GENERIC_WRITE).0,
-                FILE_SHARE_READ | FILE_SHARE_WRITE,
-                None,
-                OPEN_EXISTING,
-                Default::default(),
-                None,
-            )?
-        };
-        Ok(unsafe { Owned::new(handle) })
-    }
-}
-
-impl Monitor {
-    /// The physical panels behind this logical monitor. Usually one, but a cloned/mirrored
-    /// display group shares a single `HMONITOR` and yields one handle per panel.
-    pub fn physical_monitors(&self) -> Result<Vec<PhysicalMonitorHandle>> {
-        Ok(WindowsApi::get_physical_monitors(self.handle())?
-            .into_iter()
-            .map(PhysicalMonitorHandle)
-            .collect())
-    }
 }
 
 /// Owned `PHYSICAL_MONITOR` handle, released with `DestroyPhysicalMonitor` on drop.
@@ -140,4 +96,13 @@ impl PhysicalMonitorHandle {
         }
         Ok(())
     }
+}
+
+/// The physical panels behind this logical monitor. Usually one, but a cloned/mirrored
+/// display group shares a single `HMONITOR` and yields one handle per panel.
+pub fn physical_monitors(monitor: &Monitor) -> Result<Vec<PhysicalMonitorHandle>> {
+    Ok(WindowsApi::get_physical_monitors(monitor.handle())?
+        .into_iter()
+        .map(PhysicalMonitorHandle)
+        .collect())
 }

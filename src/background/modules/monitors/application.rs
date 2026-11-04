@@ -16,17 +16,16 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     modules::system_settings::application::{SystemSettings, SystemSettingsEvent},
+    platform::monitor::{DisplayView, Monitor},
     utils::lock_free::{SyncHashMap, SyncVec},
-    windows_api::{
-        MonitorEnumerator, event_window::subscribe_to_background_window, monitor::DisplayView,
-    },
+    windows_api::event_window::subscribe_to_background_window,
 };
 
 /// Builds a stable-ordered snapshot of the current physical monitors (rect/scale/primary),
 /// used to detect real changes vs spurious WM_DISPLAYCHANGE/WinRT notifications that carry
 /// no actual diff (e.g. the same set of targets, but re-reported without any property change).
 fn snapshot_physical_monitors() -> Vec<PhysicalMonitor> {
-    let mut monitors: Vec<PhysicalMonitor> = MonitorEnumerator::enumerate_win32()
+    let mut monitors: Vec<PhysicalMonitor> = Monitor::enumerate()
         .map(|monitors| {
             monitors
                 .into_iter()
@@ -172,7 +171,7 @@ impl MonitorManager {
         const RETRY_DELAY: Duration = Duration::from_millis(150);
 
         for attempt in 0..MAX_ATTEMPTS {
-            if let Ok(monitors) = MonitorEnumerator::enumerate_win32() {
+            if let Ok(monitors) = Monitor::enumerate() {
                 let ready = monitors.len() == expected_count
                     && monitors
                         .iter()

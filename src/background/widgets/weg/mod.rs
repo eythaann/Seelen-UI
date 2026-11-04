@@ -6,7 +6,7 @@ pub mod native_taskbar;
 use slu_ipc::messages::SvcAction;
 
 use crate::{
-    cli::ServicePipe, error::Result, state::application::FULL_STATE, windows_api::monitor::Monitor,
+    cli::ServicePipe, error::Result, platform::monitor::Monitor, state::application::FULL_STATE,
 };
 
 pub static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"];

@@ -1,6 +1,9 @@
 #[cfg(windows)]
 mod windows;
 
+#[cfg(windows)]
+use self::windows as imp;
+
 use seelen_core::{
     Point,
     rect::Rect,
@@ -10,27 +13,27 @@ use seelen_core::{
 use crate::error::Result;
 
 #[cfg(windows)]
-pub use windows::WindowsMonitorExt;
-
-#[cfg(windows)]
-type Native = windows::WindowsMonitor;
+pub use self::windows::{DisplayView, WindowsMonitorExt};
 
 /// A screen surface of the virtual desktop. A screen can be shown in multiple display devices
 /// (mirroring), so this is not a physical monitor.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct Monitor(Native);
+pub struct Monitor(imp::NativeMonitor);
 
 impl Monitor {
     pub fn primary() -> Self {
-        Self(Native::primary())
+        Self(imp::NativeMonitor::primary())
     }
 
     pub fn at_point(point: &Point) -> Self {
-        Self(Native::at_point(point))
+        Self(imp::NativeMonitor::at_point(point))
     }
 
     pub fn enumerate() -> Result<Vec<Self>> {
-        Ok(Native::enumerate()?.into_iter().map(Self).collect())
+        Ok(imp::NativeMonitor::enumerate()?
+            .into_iter()
+            .map(Self)
+            .collect())
     }
 
     /// Native handle as a plain number, useful to send it over IPC.
@@ -49,11 +52,11 @@ impl Monitor {
 
     /// Identifier that persists across reboots and reconnections.
     pub fn stable_id(&self) -> Result<MonitorId> {
-        self.0.stable_id()
+        Ok(self.get_stable_info()?.0)
     }
 
     pub fn friendly_name(&self) -> Result<String> {
-        self.0.friendly_name()
+        Ok(self.get_stable_info()?.1)
     }
 
     /// Full area of the monitor on the virtual desktop.
@@ -82,14 +85,23 @@ impl Monitor {
 
     /// Brightness is left empty, it is tracked apart by `BrightnessManager`.
     pub fn snapshot(&self) -> Result<PhysicalMonitor> {
-        self.0.snapshot()
+        let (id, name) = self.get_stable_info()?;
+        Ok(PhysicalMonitor {
+            id,
+            name,
+            rect: self.rect()?,
+            scale_factor: self.scale_factor()?,
+            is_primary: self.is_primary(),
+            hdr: self.hdr_state().unwrap_or(None),
+            brightness: None,
+        })
     }
 }
 
 /// Restores a monitor from a value previously returned by [`Monitor::address`].
 impl From<isize> for Monitor {
     fn from(address: isize) -> Self {
-        Self(Native::from(address))
+        Self(imp::NativeMonitor::from(address))
     }
 }
 
@@ -97,23 +109,4 @@ impl From<&Point> for Monitor {
     fn from(point: &Point) -> Self {
         Self::at_point(point)
     }
-}
-
-/// Contract to be implemented by each OS for its native monitor handle.
-trait NativeMonitor: Sized + Copy + Eq + Send + Sync + From<isize> {
-    fn primary() -> Self;
-    fn at_point(point: &Point) -> Self;
-    fn enumerate() -> Result<Vec<Self>>;
-
-    fn address(&self) -> isize;
-    fn is_primary(&self) -> bool;
-    fn get_stable_info(&self) -> Result<(MonitorId, String)>;
-    fn stable_id(&self) -> Result<MonitorId>;
-    fn friendly_name(&self) -> Result<String>;
-    fn rect(&self) -> Result<Rect>;
-    fn work_area(&self) -> Result<Rect>;
-    fn scale_factor(&self) -> Result<f64>;
-    fn hdr_state(&self) -> Result<Option<bool>>;
-    fn set_hdr_state(&self, enabled: bool) -> Result<()>;
-    fn snapshot(&self) -> Result<PhysicalMonitor>;
 }

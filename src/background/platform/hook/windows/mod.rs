@@ -1,3 +1,7 @@
+mod event;
+
+pub use event::WinEvent;
+
 use std::{collections::HashSet, sync::Arc, sync::atomic::Ordering};
 
 use parking_lot::RwLock;
@@ -16,38 +20,29 @@ use windows::Win32::{
 use crate::{
     app::emit_to_webviews,
     error::ResultLogExt,
+    platform::window::Window,
     state::application::FULL_STATE,
     utils::spawn_named_thread,
     widgets::weg::SeelenWeg,
-    windows_api::{
-        WindowEnumerator,
-        event_window::IS_INTERACTIVE_SESSION,
-        window::{Window, event::WinEvent},
-    },
+    windows_api::{WindowEnumerator, event_window::IS_INTERACTIVE_SESSION},
 };
 
-use super::{AppWindowsHookApi, HookManager};
+use super::HookManager;
 
-pub type AppWindowEvent = (WinEvent, Window);
+pub fn start() {
+    init_zombie_window_killer();
+    start_win_event_hook();
 
-pub struct WindowsAppWindowsHook;
-
-impl AppWindowsHookApi for WindowsAppWindowsHook {
-    fn start() {
-        init_zombie_window_killer();
-        start_win_event_hook();
-
-        let eid = HookManager::subscribe(|(event, origin)| match event {
-            WinEvent::SystemMoveSizeStart => {
-                origin.set_dragging(true);
-            }
-            WinEvent::SystemMoveSizeEnd => {
-                origin.set_dragging(false);
-            }
-            _ => (),
-        });
-        HookManager::set_event_handler_priority(&eid, 3);
-    }
+    let eid = HookManager::subscribe(|(event, origin)| match event {
+        WinEvent::SystemMoveSizeStart => {
+            origin.set_dragging(true);
+        }
+        WinEvent::SystemMoveSizeEnd => {
+            origin.set_dragging(false);
+        }
+        _ => (),
+    });
+    HookManager::set_event_handler_priority(&eid, 3);
 }
 
 /// this will be called without waiting for the event to be processed
@@ -179,8 +174,8 @@ fn init_zombie_window_killer() {
     // and emits the missing destruction events to ensure proper cleanup.
     spawn_named_thread("Zombie Window Exterminator", move || {
         WindowEnumerator::new()
-            .for_each_and_descendants(|window| {
-                existing_windows.write().insert(window.address());
+            .for_each_and_descendants(|hwnd| {
+                existing_windows.write().insert(hwnd.0 as isize);
             })
             .log_error();
 

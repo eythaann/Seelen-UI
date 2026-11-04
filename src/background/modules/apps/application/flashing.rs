@@ -21,11 +21,9 @@ use windows::Win32::UI::WindowsAndMessaging::{HSHELL_HIGHBIT, HSHELL_REDRAW};
 
 use crate::{
     modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
+    platform::window::Window,
     utils::spawn_named_thread,
-    windows_api::{
-        event_window::{WM_SHELLHOOKMESSAGE, subscribe_to_background_window},
-        window::Window,
-    },
+    windows_api::event_window::{WM_SHELLHOOKMESSAGE, subscribe_to_background_window},
 };
 
 const HSHELL_FLASH: u32 = HSHELL_REDRAW | HSHELL_HIGHBIT;

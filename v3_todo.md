@@ -36,6 +36,66 @@ touching `infrastructure` or `domain`. `src/hook_dll` is out of scope (Windows-o
 
 Reference for item order and style: `src/background/modules/notifications/wpn_service.rs` and AGENTS.md.
 
+### Shared OS primitives (`src/background/platform/`)
+
+Two levels of abstraction coexist:
+
+- **`platform/`**: OS primitives used across many modules/widgets (windows of other apps, monitors, well known paths,
+  startup entry, global hooks). Consumed by everyone, owned by no module.
+- **`modules/<module>/application/windows.rs`**: OS code that only one module needs (power, audio, bluetooth, ...),
+  following the per-module pattern above.
+
+Rule of thumb: if two or more modules/widgets need it, it goes to `platform/`; otherwise it stays in the module.
+
+Layout of each `platform/<primitive>/`:
+
+    platform/<primitive>/
+      mod.rs       # OS-agnostic public API (the contract) + logic that doesn't depend on the OS
+      windows.rs   # #[cfg(windows)] native impl, aliased as `imp` (a folder when it needs submodules)
+
+- No contract traits (same approach as `std::sys`): the public API only forwards to `imp`, so a new OS provides the same
+  items (`NativeWindow`, `NativeMonitor`, `NativeProcess`, free functions) and the compiler lists what's missing.
+- Handle-like types are newtypes over the native one (`struct Window(imp::NativeWindow)`), static dispatch. Logic that
+  only composes other methods (snapshots, drag tracking, stable id helpers) lives in `mod.rs`, not in `imp`.
+- Windows-only extras are exposed through an extension trait (`WindowsWindowExt`, `WindowsMonitorExt`,
+  `WindowsProcessExt`) that only Windows specific code may import.
+- Stateless APIs (`paths`, `startup`, `cursor`) are free functions forwarding to `imp`.
+- `platform/*/windows*` may use `windows_api/` as plumbing; nothing outside Windows impls may.
+- Event vocabularies (`AppWindowEvent`) are still the native ones; making them agnostic is pending (see below).
+
+---
+
+## Phase 0.5 — Wire `platform/` into the app
+
+- [x] `hook` — global win event hook (old `src/background/hook.rs`) and cursor tracking moved to `platform/hook` and
+      `platform/cursor`, started from `app.rs`. `AppWindowEvent` carries the `platform::window::Window`.
+- [x] `paths` — consumers migrated (`logger.rs`, `cli/svc_pipe.rs`, `modules/start`, `utils/constants.rs`,
+      `utils/pwsh.rs`). Remaining `WindowsApi::known_folder` calls are Windows impl code
+      (`notifications/wpn_service.rs`, `platform/window/windows` for `APP_FRAME_HOST_PATH`) and move with their owners.
+- [x] `startup` — `SeelenUI::is_auto_start_enabled` and `ServicePipe::start_service` use `platform::startup`; the
+      duplicated Task Scheduler code was removed.
+- [x] `monitor` + `window` — every consumer outside `windows_api/` uses `platform::{monitor::Monitor, window::Window}`
+      (`Window::enumerate`/`Monitor::enumerate` replace `WindowEnumerator`/`MonitorEnumerator`). The
+      `#![allow(dead_code)]` of `platform/mod.rs` was removed.
+  - `get_app_config`/`slu_category` are app-config business logic, not OS: they left the native contract and live in
+    `state/application/apps_config.rs` (via `exe_path()`).
+  - `WindowsWindowExt` is still imported where the code is Win32 by nature (`hwnd()` for styles/z-order/shadow, UMID,
+    UWP frames): `modules/apps/application/{windows,previews}.rs`, `clipboard`, `widgets/weg/handler.rs`,
+    `widgets/window_manager/{mod,hook,handler,state_v2}.rs`. Those get resolved in Phase 1/2 when each owner gets its
+    trait (candidates to promote to `platform::window`: `close`, z-order, frame bounds without shadow).
+  - `widgets/wallpaper_manager` still uses `WindowEnumerator` for the `WorkerW` lookup: Win32 plumbing, moves with it.
+- [x] `windows_api/{window,monitor,process}` removed: their Win32 implementation now lives in
+      `platform/{window,monitor,process}/windows*` (monitor split in `display_config.rs` / `display_view.rs`),
+      `WinEvent` in `platform/hook/windows/event.rs`, and the DDC/CI code (only used by brightness) in
+      `modules/monitors/brightness/ddcci.rs`. `WindowEnumerator`/`MonitorEnumerator` yield native handles.
+  - [x] `process` — `platform::process::Process` (`exe_path`, `exe_name`, `display_name`, `is_frozen`, `is_seelen`,
+        `snapshot`), `Window::process()` is part of the agnostic API; handles/AppX are behind `WindowsProcessExt`.
+  - [x] Flattened: one native layer per primitive, no contract traits nor forwarding wrappers.
+- [ ] `AppWindowEvent`: replace the native (`WinEvent`) vocabulary with an OS-agnostic enum of domain events.
+- [ ] `platform/window/mod.rs` still depends on modules (`is_interactable_window` from `modules/apps`, `VdManager` for
+      `workspace_id`), inherited from the old `windows_api/window`. `platform/` must not depend on its consumers: move
+      `is_interactable_and_not_hidden`/`workspace_id` to their owners (or invert the dependency).
+
 ---
 
 ## Phase 0 — Foundations
@@ -95,8 +155,7 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       positioning/HWND behind traits (windows, monitors, app bar).
 - [ ] `utils/` (10/16) — split generic utilities from Win32 ones (Win32 ones go to `windows_api/`).
 - [ ] `cli/` (1/7) — no direct calls.
-- [ ] `hook.rs` (global win event hook) — it is the source of window events: define `trait WindowEventSource` in domain
-      and move the hook into the Windows impl.
+- [x] ~~`hook.rs` (global win event hook)~~ — moved to `platform/hook/` (see Phase 0.5).
 - [ ] `app.rs`, `main.rs`, `exposed.rs`, `logger.rs`, `telemetry.rs` — isolate Win32 code in `#[cfg(windows)]` functions
       or in a `platform` module.
 

@@ -31,6 +31,7 @@ use windows::Win32::Foundation::{HWND, RECT};
 use crate::{
     app::{emit_to_webviews, get_app_handle},
     error::Result,
+    platform::window::Window,
     resources::RESOURCES,
     state::application::FULL_STATE,
     utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::SyncHashMap},
@@ -38,7 +39,6 @@ use crate::{
     windows_api::{
         AppBarData, WindowsApi,
         input::{Keyboard, Mouse},
-        window::Window,
     },
 };
 

@@ -10,8 +10,9 @@ use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::apps::application::{UserAppsManager, previews::WinPreviewManager},
+    platform::window::Window,
     widgets::permissions::{WidgetPerm, request_widget_permission},
-    windows_api::{Com, input::Mouse, window::Window},
+    windows_api::{Com, input::Mouse},
 };
 
 /// Lazy initialization wrapper that registers Tauri events on first access

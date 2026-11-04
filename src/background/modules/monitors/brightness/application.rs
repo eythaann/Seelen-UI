@@ -6,6 +6,7 @@ use std::{
 use seelen_core::system_state::MonitorId;
 use wmi::WMIConnection;
 
+use super::ddcci::{self, DdcciBrightnessValues, PhysicalMonitorHandle};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
@@ -16,14 +17,8 @@ use crate::{
             WmiSetBrightnessPayload,
         },
     },
+    platform::monitor::{Monitor, WindowsMonitorExt},
     utils::lock_free::{SyncVec, TracedMutex},
-    windows_api::{
-        MonitorEnumerator,
-        monitor::{
-            Monitor,
-            brightness::{DdcciBrightnessValues, PhysicalMonitorHandle},
-        },
-    },
 };
 
 /// `WBEM_E_NOT_SUPPORTED`: the provider has no instances to offer on this hardware.
@@ -157,7 +152,7 @@ impl BrightnessManager {
 
     /// Enumerates the connected monitors and looks for the panels behind each of them.
     fn scan() {
-        let monitors = match MonitorEnumerator::enumerate_win32() {
+        let monitors = match Monitor::enumerate() {
             Ok(monitors) => monitors,
             Err(err) => {
                 log::warn!("Failed to enumerate monitors for brightness: {err}");
@@ -286,7 +281,7 @@ impl BrightnessManager {
         let mut found = Vec::new();
         for target in targets {
             let ScanTarget { monitor, id, name } = target;
-            let Ok(panels) = monitor.physical_monitors() else {
+            let Ok(panels) = ddcci::physical_monitors(monitor) else {
                 continue;
             };
             for handle in panels {

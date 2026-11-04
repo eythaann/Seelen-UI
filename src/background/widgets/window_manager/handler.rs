@@ -1,18 +1,18 @@
 use std::{collections::HashMap, sync::Once};
 
 use slu_ipc::messages::SvcAction;
-use windows::Win32::UI::WindowsAndMessaging::SW_NORMAL;
 
 use crate::{
     app::emit_to_webviews,
     cli::ServicePipe,
     error::Result,
+    platform::window::{Window, WindowState, WindowsWindowExt},
     state::application::{FULL_STATE, performance::PERFORMANCE_MODE},
     widgets::{
         permissions::{WidgetPerm, request_widget_permission},
         window_manager::state_v2::{TwmState, WM_STATE},
     },
-    windows_api::{WindowsApi, window::Window},
+    windows_api::WindowsApi,
 };
 use seelen_core::{
     handlers::SeelenEvent,
@@ -29,7 +29,7 @@ fn desired_rect_for(window: &Window, rect: &Rect) -> Result<Option<Rect>> {
     }
 
     if window.is_maximized() {
-        window.show_window(SW_NORMAL)?; // unmaximize
+        window.set_state(WindowState::Normal)?; // unmaximize
     }
 
     let shadow = WindowsApi::shadow_rect(window.hwnd())?;

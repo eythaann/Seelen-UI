@@ -10,7 +10,6 @@ use notify_debouncer_full::{
 };
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 use seelen_core::system_state::StartMenuItem;
-use windows::Win32::UI::Shell::{FOLDERID_CommonStartMenu, FOLDERID_StartMenu};
 use windows::{
     ApplicationModel::{Core::AppListEntry, Package, PackageCatalog},
     Foundation::TypedEventHandler,
@@ -21,6 +20,7 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    platform::paths,
     utils::lock_free::SyncVec,
     windows_api::{Com, WindowsApi},
 };
@@ -50,14 +50,12 @@ unsafe impl Sync for StartMenuManager {}
 impl StartMenuManager {
     /// programs shared by all users
     fn common_items_path() -> PathBuf {
-        WindowsApi::known_folder(FOLDERID_CommonStartMenu)
-            .expect("Failed to get FOLDERID_CommonStartMenu folder path")
+        paths::system_apps_dir().expect("Failed to get system start menu folder path")
     }
 
     /// programs specific to the current user
     fn user_items_path() -> PathBuf {
-        WindowsApi::known_folder(FOLDERID_StartMenu)
-            .expect("Failed to get FOLDERID_StartMenu folder path")
+        paths::user_apps_dir().expect("Failed to get user start menu folder path")
     }
 
     fn new() -> StartMenuManager {

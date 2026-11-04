@@ -10,13 +10,10 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     modules::apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager},
-    platform::hook::app_windows::HookManager,
+    platform::hook::{HookManager, WinEvent},
+    platform::window::{Window, WindowsWindowExt},
     utils::lock_free::SyncHashMap,
-    windows_api::{
-        WindowsApi,
-        event_window::IS_INTERACTIVE_SESSION,
-        window::{Window, event::WinEvent},
-    },
+    windows_api::{WindowsApi, event_window::IS_INTERACTIVE_SESSION},
 };
 
 const CAPTURE_WINDOW_INTERVAL: Duration = Duration::from_millis(200);

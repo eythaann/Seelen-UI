@@ -37,8 +37,8 @@ impl SeelenWall {
         // 0x00100B8A "" WorkerW       <-- This is the WorkerW we want
         // 0x000100EC "Program Manager" Progman
         WindowEnumerator::new().for_each(|current| unsafe {
-            if FindWindowExA(Some(current.hwnd()), None, pcstr!("SHELLDLL_DefView"), None).is_ok()
-                && let Ok(w) = FindWindowExA(None, Some(current.hwnd()), pcstr!("WorkerW"), None)
+            if FindWindowExA(Some(current), None, pcstr!("SHELLDLL_DefView"), None).is_ok()
+                && let Ok(w) = FindWindowExA(None, Some(current), pcstr!("WorkerW"), None)
             {
                 worker_w = Some(w);
             }

@@ -5,10 +5,10 @@ use tauri::Listener;
 
 use crate::{
     app::{emit_to_webviews, get_app_handle},
-    platform::hook::app_windows::HookManager,
+    platform::hook::{HookManager, WinEvent},
+    platform::window::Window,
     state::application::FULL_STATE,
     tauri_handlers::Handlers,
-    windows_api::window::{Window, event::WinEvent},
 };
 
 pub static PERFORMANCE_MODE: LazyLock<Optimizations> = LazyLock::new(|| {

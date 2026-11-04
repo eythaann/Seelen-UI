@@ -4,8 +4,8 @@ use slu_ipc::commands::{Direction, DirectionOrIndex, VdCommand};
 
 use crate::{
     error::Result,
+    platform::{cursor, monitor::Monitor, window::Window},
     virtual_desktops::VdManager,
-    windows_api::{input::Mouse, monitor::Monitor, window::Window},
 };
 
 pub fn process(cmd: VirtualDesktopCli) -> Result<()> {
@@ -17,8 +17,8 @@ pub fn process(cmd: VirtualDesktopCli) -> Result<()> {
 /// pointer instead of whichever window currently holds Win32 focus, since Windows
 /// can reassign focus to another monitor when the active workspace becomes empty.
 fn cursor_monitor_id() -> Result<MonitorId> {
-    let point = Mouse::get_cursor_pos()?;
-    Monitor::from(&point).stable_id()
+    let point = cursor::position()?;
+    Monitor::at_point(&point).stable_id()
 }
 
 /// Id of the workspace neighboring the given monitor's active workspace in the

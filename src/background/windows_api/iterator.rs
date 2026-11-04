@@ -7,8 +7,6 @@ use windows_core::BOOL;
 
 use crate::{error::Result, windows_api::WindowsApi};
 
-use super::{monitor::Monitor, window::Window};
-
 #[derive(Debug, Clone)]
 pub struct WindowEnumerator {
     parent: Option<HWND>,
@@ -44,15 +42,15 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn for_each<F>(&self, cb: F) -> Result<()>
     where
-        F: FnMut(Window),
+        F: FnMut(HWND),
     {
-        type ForEachCallback<'a> = Box<dyn FnMut(Window) + 'a>;
+        type ForEachCallback<'a> = Box<dyn FnMut(HWND) + 'a>;
         let mut callback: ForEachCallback = Box::new(cb);
 
         unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
             unsafe {
                 if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                    (*boxed)(Window::from(hwnd));
+                    (*boxed)(hwnd);
                 }
                 true.into()
             }
@@ -63,7 +61,7 @@ impl WindowEnumerator {
 
     pub fn for_each_and_descendants<F>(&self, cb: F) -> Result<()>
     where
-        F: FnMut(Window),
+        F: FnMut(HWND),
     {
         let mut cb = cb;
         self.for_each_and_descendants_impl(&mut cb)
@@ -71,13 +69,13 @@ impl WindowEnumerator {
 
     fn for_each_and_descendants_impl<F>(&self, cb: &mut F) -> Result<()>
     where
-        F: FnMut(Window),
+        F: FnMut(HWND),
     {
-        self.for_each(|window| {
-            cb(window);
+        self.for_each(|hwnd| {
+            cb(hwnd);
             // ignore errors on recursive children enums
             let _ = Self::new()
-                .with_parent(window.hwnd())
+                .with_parent(hwnd)
                 .for_each_and_descendants_impl(cb);
         })
     }
@@ -116,7 +114,7 @@ impl WindowEnumerator {
 pub struct MonitorEnumerator;
 
 impl MonitorEnumerator {
-    pub fn enumerate_win32() -> Result<Vec<Monitor>> {
+    pub fn enumerate_win32() -> Result<Vec<HMONITOR>> {
         let mut handles = Vec::new();
 
         unsafe extern "system" fn get_handles_proc(
@@ -126,9 +124,9 @@ impl MonitorEnumerator {
             lparam: LPARAM,
         ) -> BOOL {
             unsafe {
-                let data_ptr = lparam.0 as *mut Vec<Monitor>;
+                let data_ptr = lparam.0 as *mut Vec<HMONITOR>;
                 if let Some(data) = data_ptr.as_mut() {
-                    data.push(Monitor::from(hmonitor));
+                    data.push(hmonitor);
                 }
                 true.into()
             }

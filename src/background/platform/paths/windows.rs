@@ -7,28 +7,22 @@ use windows::Win32::UI::Shell::{
 
 use crate::{error::Result, windows_api::WindowsApi};
 
-use super::PathsApi;
+pub fn local_data_dir() -> Result<PathBuf> {
+    WindowsApi::known_folder(FOLDERID_LocalAppData)
+}
 
-pub struct WindowsPaths;
+pub fn os_root_dir() -> Result<PathBuf> {
+    WindowsApi::known_folder(FOLDERID_Windows)
+}
 
-impl PathsApi for WindowsPaths {
-    fn local_data_dir() -> Result<PathBuf> {
-        WindowsApi::known_folder(FOLDERID_LocalAppData)
-    }
+pub fn os_bin_dir() -> Result<PathBuf> {
+    WindowsApi::known_folder(FOLDERID_System)
+}
 
-    fn os_root_dir() -> Result<PathBuf> {
-        WindowsApi::known_folder(FOLDERID_Windows)
-    }
+pub fn user_apps_dir() -> Result<PathBuf> {
+    WindowsApi::known_folder(FOLDERID_StartMenu)
+}
 
-    fn os_bin_dir() -> Result<PathBuf> {
-        WindowsApi::known_folder(FOLDERID_System)
-    }
-
-    fn user_apps_dir() -> Result<PathBuf> {
-        WindowsApi::known_folder(FOLDERID_StartMenu)
-    }
-
-    fn system_apps_dir() -> Result<PathBuf> {
-        WindowsApi::known_folder(FOLDERID_CommonStartMenu)
-    }
+pub fn system_apps_dir() -> Result<PathBuf> {
+    WindowsApi::known_folder(FOLDERID_CommonStartMenu)
 }

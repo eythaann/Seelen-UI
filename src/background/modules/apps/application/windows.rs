@@ -16,13 +16,13 @@ use crate::{
         apps::application::{USER_APPS_MANAGER, UserAppWinEvent, UserAppsManager, WindowBadges},
         notifications::wpn_service::WpnService,
     },
-    platform::hook::app_windows::HookManager,
-    utils::spawn_named_thread,
-    windows_api::{
-        WindowEnumerator, WindowsApi,
-        event_window::IS_INTERACTIVE_SESSION,
-        window::{Window, event::WinEvent},
+    platform::hook::{HookManager, WinEvent},
+    platform::{
+        process::WindowsProcessExt,
+        window::{Window, WindowsWindowExt},
     },
+    utils::spawn_named_thread,
+    windows_api::{WindowsApi, event_window::IS_INTERACTIVE_SESSION},
 };
 
 pub(super) fn now_millis() -> i64 {
@@ -35,11 +35,14 @@ pub(super) fn now_millis() -> i64 {
 impl UserAppsManager {
     pub(super) fn init_listing_app_windows() -> Vec<UserAppWindow> {
         let mut initial = Vec::new();
-        let _ = WindowEnumerator::new().for_each(|window| {
-            if is_interactable_window(&window) {
-                initial.push(window.snapshot());
-            }
-        });
+        Window::enumerate()
+            .unwrap_or_default()
+            .into_iter()
+            .for_each(|window| {
+                if is_interactable_window(&window) {
+                    initial.push(window.snapshot());
+                }
+            });
 
         // The enumerator yields windows in z-order (top-most first). Stamp
         // last_foreground_at so that clients sorting by that field preserve
@@ -73,11 +76,14 @@ impl UserAppsManager {
 
                 // Scan for windows that now qualify but were never tracked (e.g. style/frame
                 // state was not settled at creation time).
-                let _ = WindowEnumerator::new().for_each(|window| {
-                    if is_interactable_window(&window) && USER_APPS_MANAGER.add_win(&window) {
-                        Self::send(UserAppWinEvent::Added(window.address()));
-                    }
-                });
+                Window::enumerate()
+                    .unwrap_or_default()
+                    .into_iter()
+                    .for_each(|window| {
+                        if is_interactable_window(&window) && USER_APPS_MANAGER.add_win(&window) {
+                            Self::send(UserAppWinEvent::Added(window.address()));
+                        }
+                    });
             }
         });
 

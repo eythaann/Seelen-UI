@@ -75,7 +75,7 @@ impl crate::tauri_handlers::Handlers {
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         let manager = get_vd_manager();
-        let window = crate::windows_api::window::Window::from(hwnd);
+        let window = crate::platform::window::Window::from(hwnd);
         manager.send_to(&window, &workspace_id)
     }
 

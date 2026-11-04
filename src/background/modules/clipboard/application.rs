@@ -30,8 +30,9 @@ use crate::{
         },
         persistence::{self, ClipboardStore},
     },
+    platform::window::{Window, WindowsWindowExt},
     utils::lock_free::SyncHashMap,
-    windows_api::{Com, WindowsApi, event_window::subscribe_to_background_window, window::Window},
+    windows_api::{Com, WindowsApi, event_window::subscribe_to_background_window},
 };
 
 /// Runs `f` on a fresh STA thread and returns its result.
@@ -356,8 +357,7 @@ impl ClipboardManager {
             let name = window.app_display_name().ok().filter(|s| !s.is_empty());
             let umid = window.app_user_model_id().map(|umid| umid.to_string());
             let path = window
-                .process()
-                .program_path()
+                .exe_path()
                 .ok()
                 .map(|p| p.to_string_lossy().to_string());
             (name, umid, path)

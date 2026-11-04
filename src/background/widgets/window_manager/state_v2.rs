@@ -12,14 +12,16 @@ use seelen_core::{
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
 };
-use windows::Win32::UI::WindowsAndMessaging::{HWND_TOP, SW_FORCEMINIMIZE, SW_SHOWNOACTIVATE};
+use windows::Win32::UI::WindowsAndMessaging::HWND_TOP;
 
 use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     event_manager,
     modules::apps::application::UserAppsManager,
-    platform::hook::app_windows::HookManager,
+    platform::hook::HookManager,
+    platform::monitor::Monitor,
+    platform::window::{Window, WindowState, WindowsWindowExt},
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     virtual_desktops::VdManager,
@@ -28,7 +30,7 @@ use crate::{
         cli::{Axis, Direction, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
     },
-    windows_api::{WindowsApi, monitor::Monitor, window::Window},
+    windows_api::WindowsApi,
 };
 
 pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
@@ -81,7 +83,7 @@ impl TwmState {
                     let mut tree = Self::create_tree(&workspace.id);
                     for &hwnd in &workspace.windows {
                         let window = Window::from(hwnd);
-                        if should_be_managed(window.hwnd()) {
+                        if should_be_managed(&window) {
                             let residual = tree.add_to_tiled(window.address());
                             for w in residual {
                                 tree.add_to_floating(w);
@@ -703,7 +705,7 @@ impl TwmState {
                     // only sanitizes visibility, never activates: focus is the caller's job
                     // (see `reveal_stack_window`).
                     if window.is_minimized() {
-                        window.show_window(SW_SHOWNOACTIVATE).log_error();
+                        window.set_state(WindowState::ShownNoActivate).log_error();
                         // a restored window can be drawn above the focused one even without
                         // activation, so keep the focused managed window on top.
                         let foreground = Window::get_foregrounded();
@@ -715,7 +717,9 @@ impl TwmState {
                     for w in &node.windows {
                         if *w != active {
                             let _ = MINIMIZED_BY_STACK.insert_sync(*w);
-                            Window::from(*w).show_window(SW_FORCEMINIMIZE).log_error();
+                            Window::from(*w)
+                                .set_state(WindowState::ForceMinimized)
+                                .log_error();
                         }
                     }
                 }

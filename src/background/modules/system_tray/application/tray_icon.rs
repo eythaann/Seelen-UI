@@ -24,10 +24,11 @@ use crate::{
         PendingIcon, RegistryNotifyIcon, SystemTrayEvent, SystemTrayManager,
         find_registry_notify_icon, util::Util,
     },
+    platform::window::Window,
     utils::{
         constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image, spawn_named_thread,
     },
-    windows_api::{WindowsApi, window::Window},
+    windows_api::WindowsApi,
 };
 use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 
@@ -585,7 +586,7 @@ fn fill_missing_tooltip(icon_data: &mut IconEventData) {
 fn window_program_path(icon_data: &IconEventData) -> Option<PathBuf> {
     icon_data
         .window_handle
-        .and_then(|handle| Window::from(handle).process().program_path().ok_logged())
+        .and_then(|handle| Window::from(handle).exe_path().ok_logged())
 }
 
 /// Saves the icon image as png in the temp dir.

@@ -2,7 +2,6 @@ use std::sync::atomic::Ordering;
 
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
-use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
 
 use seelen_core::state::shortcuts::resolve_shortcuts;
 
@@ -15,7 +14,7 @@ use crate::{
         clipboard::infrastructure::init_clipboard_manager, start::application::StartMenuManager,
         user::infrastructure::reemit_user,
     },
-    platform::hook::register_hooks,
+    platform::{cursor, hook, startup},
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
@@ -24,10 +23,7 @@ use crate::{
         manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,
         weg::SeelenWeg,
     },
-    windows_api::{
-        Com,
-        event_window::{IS_INTERACTIVE_SESSION, create_background_window},
-    },
+    windows_api::event_window::{IS_INTERACTIVE_SESSION, create_background_window},
 };
 
 /// Tauri app handle
@@ -101,7 +97,8 @@ impl SeelenUI {
 
         WIDGET_MANAGER.reconcile()?;
         create_background_window()?;
-        register_hooks()?;
+        hook::start();
+        cursor::start_tracking();
 
         std::thread::spawn(init_clipboard_manager);
 
@@ -147,23 +144,7 @@ impl SeelenUI {
     }
 
     pub fn is_auto_start_enabled() -> Result<bool> {
-        Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-            )?;
-            let is_task_enabled = task_service
-                .GetFolder(&"\\Seelen".into())
-                .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
-                .and_then(|task| task.Definition())
-                .and_then(|definition| definition.Triggers())
-                .and_then(|triggers| triggers.get_Item(1))
-                .is_ok();
-            Ok(is_task_enabled)
-        })
+        startup::is_enabled()
     }
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {

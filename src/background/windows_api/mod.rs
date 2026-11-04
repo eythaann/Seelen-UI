@@ -4,12 +4,9 @@ mod devices;
 pub mod event_window;
 pub mod input;
 mod iterator;
-pub mod monitor;
-pub mod process;
 pub mod string_utils;
 pub mod types;
 pub mod undocumented;
-pub mod window;
 
 pub use app_bar::*;
 pub use com::*;
@@ -17,8 +14,8 @@ pub use devices::*;
 pub use iterator::*;
 
 use itertools::Itertools;
-use process::ProcessInformationFlag;
 use string_utils::WindowsString;
+use types::ProcessInformationFlag;
 use widestring::U16CStr;
 use windows_core::{Interface, Owned, RuntimeType};
 use windows_future::{AsyncStatus, IAsyncOperation};
@@ -129,8 +126,10 @@ use windows::{
 
 use crate::{
     error::{Result, WindowsResultExt},
-    platform::hook::app_windows::HookManager,
-    windows_api::window::{Window, event::WinEvent},
+    platform::{
+        hook::{HookManager, WinEvent},
+        window::Window,
+    },
 };
 
 #[macro_export]
@@ -478,7 +477,7 @@ impl WindowsApi {
         Ok(())
     }
 
-    fn open_process(
+    pub fn open_process(
         access_rights: PROCESS_ACCESS_RIGHTS,
         inherit_handle: bool,
         process_id: u32,
@@ -920,7 +919,7 @@ impl WindowsApi {
         let monitors = MonitorEnumerator::enumerate_win32()?;
         let mut rect = RECT::default();
         for (idx, monitor) in monitors.iter().enumerate() {
-            let m_rect = monitor.rect()?;
+            let m_rect = Self::monitor_rect(*monitor)?;
             if idx == 0 {
                 rect.left = m_rect.left;
                 rect.top = m_rect.top;

@@ -18,9 +18,8 @@ use crate::{
     error::Result,
     event_manager,
     modules::system_tray::application::tray_hook_loader::TrayHookLoader,
-    platform::hook::app_windows::HookManager,
+    platform::hook::{HookManager, WinEvent},
     utils::{lock_free::SyncHashMap, resolve_guid_path},
-    windows_api::window::event::WinEvent,
 };
 
 pub struct SystemTrayManager {

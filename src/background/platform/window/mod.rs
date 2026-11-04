@@ -1,40 +1,55 @@
 #[cfg(windows)]
 mod windows;
 
+#[cfg(windows)]
+use self::windows as imp;
+
 use std::{
     fmt::{Debug, Display},
     hash::{Hash, Hasher},
     path::PathBuf,
+    sync::{
+        LazyLock,
+        atomic::{AtomicIsize, Ordering},
+    },
 };
 
 use seelen_core::{
     rect::Rect,
-    state::{AppConfig, WorkspaceId},
+    state::WorkspaceId,
     system_state::{FocusedApp, MonitorId, UserAppWindow},
 };
 
-use crate::error::Result;
+use crate::{
+    error::Result, modules::apps::application::is_interactable_window,
+    utils::lock_free::TracedMutex, virtual_desktops::VdManager,
+};
 
-use super::monitor::Monitor;
+use super::{monitor::Monitor, process::Process};
 
 #[cfg(windows)]
-pub use windows::WindowsWindowExt;
+pub use self::windows::WindowsWindowExt;
 
-#[cfg(windows)]
-type Native = windows::WindowsWindow;
+static DRAGGING_WINDOW: AtomicIsize = AtomicIsize::new(0);
+static LAST_DRAGGED_WINDOW: AtomicIsize = AtomicIsize::new(0);
+static RECT_BEFORE_DRAG: LazyLock<TracedMutex<Option<Rect>>> =
+    LazyLock::new(|| TracedMutex::new(None));
 
 /// A native top-level or child window of any application.
 #[derive(Clone, Copy, PartialEq, Eq)]
-pub struct Window(Native);
+pub struct Window(imp::NativeWindow);
 
 impl Window {
     pub fn get_foregrounded() -> Self {
-        Self(Native::get_foregrounded())
+        Self(imp::NativeWindow::get_foregrounded())
     }
 
     /// All the top-level windows, in z-order (topmost first).
     pub fn enumerate() -> Result<Vec<Self>> {
-        Ok(Native::enumerate()?.into_iter().map(Self).collect())
+        Ok(imp::NativeWindow::enumerate()?
+            .into_iter()
+            .map(Self)
+            .collect())
     }
 
     /// Native handle as a plain number, useful to send it over IPC.
@@ -59,8 +74,12 @@ impl Window {
         self.0.process_id()
     }
 
+    pub fn process(&self) -> Process {
+        Process::from_id(self.process_id())
+    }
+
     pub fn exe_path(&self) -> Result<PathBuf> {
-        self.0.exe_path()
+        self.process().exe_path()
     }
 
     pub fn app_display_name(&self) -> Result<String> {
@@ -92,19 +111,16 @@ impl Window {
     }
 
     pub fn monitor_id(&self) -> MonitorId {
-        self.0.monitor_id()
-    }
-
-    pub fn slu_category(&self) -> Option<String> {
-        self.0.slu_category()
+        self.monitor()
+            .stable_id()
+            .unwrap_or_else(|_| MonitorId("null".to_string()))
     }
 
     pub fn workspace_id(&self) -> Result<WorkspaceId> {
-        self.0.workspace_id()
-    }
-
-    pub fn get_app_config(&self) -> Result<Option<AppConfig>> {
-        self.0.get_app_config()
+        let workspace_id = VdManager::instance()
+            .get_workspace_of_window(self.address())
+            .ok_or("This window is not binded to a seelen ui workspace")?;
+        Ok(workspace_id)
     }
 
     pub fn snapshot(&self) -> UserAppWindow {
@@ -152,8 +168,9 @@ impl Window {
         self.0.is_desktop()
     }
 
+    /// read inner called doc for more info
     pub fn is_interactable_and_not_hidden(&self) -> bool {
-        self.0.is_interactable_and_not_hidden()
+        is_interactable_window(self)
     }
 
     pub fn set_state(&self, state: WindowState) -> Result<()> {
@@ -171,36 +188,55 @@ impl Window {
     }
 
     pub fn unminimize(&self) -> Result<()> {
-        self.0.unminimize()
+        if self.is_minimized() {
+            self.set_state(WindowState::Restored)?;
+        }
+        Ok(())
     }
 
     pub fn focus(&self) -> Result<()> {
+        if self.is_minimized() {
+            return Ok(());
+        }
         self.0.focus()
     }
 
     pub fn is_dragging(&self) -> bool {
-        self.0.is_dragging()
+        DRAGGING_WINDOW.load(Ordering::SeqCst) == self.address()
     }
 
     pub fn is_last_dragged(&self) -> bool {
-        self.0.is_last_dragged()
+        LAST_DRAGGED_WINDOW.load(Ordering::SeqCst) == self.address()
     }
 
     pub fn set_dragging(&self, dragging: bool) {
-        self.0.set_dragging(dragging)
+        if dragging {
+            DRAGGING_WINDOW.store(self.address(), Ordering::SeqCst);
+            LAST_DRAGGED_WINDOW.store(self.address(), Ordering::SeqCst);
+            *RECT_BEFORE_DRAG.lock() = self.inner_rect().ok();
+        } else {
+            DRAGGING_WINDOW.store(0, Ordering::SeqCst);
+            // the rect is not cleaned up, so it can still be used on drag end
+        }
     }
 
     /// if dragging returns the rect of the window before dragging
     /// otherwise returns the current rect
     pub fn get_rect_before_dragging(&self) -> Result<Rect> {
-        self.0.get_rect_before_dragging()
+        if self.is_dragging() || self.is_last_dragged() {
+            let guard = RECT_BEFORE_DRAG.lock();
+            if let Some(rect) = guard.as_ref() {
+                return Ok(rect.clone());
+            }
+        }
+        self.inner_rect()
     }
 }
 
 /// Restores a window from a value previously returned by [`Window::address`].
 impl From<isize> for Window {
     fn from(address: isize) -> Self {
-        Self(Native::from(address))
+        Self(imp::NativeWindow::from(address))
     }
 }
 
@@ -237,51 +273,4 @@ pub enum WindowState {
     Maximized,
     /// Back to the previous size and position (unminimize/unmaximize).
     Restored,
-}
-
-/// Contract to be implemented by each OS for its native window handle.
-trait NativeWindow: Sized + Copy + Eq + Send + Sync + Debug + Display + From<isize> {
-    fn get_foregrounded() -> Self;
-    fn enumerate() -> Result<Vec<Self>>;
-
-    fn address(&self) -> isize;
-    fn is_electron(&self) -> bool;
-    fn title(&self) -> String;
-    fn class(&self) -> String;
-    fn process_id(&self) -> u32;
-    fn exe_path(&self) -> Result<PathBuf>;
-    fn app_display_name(&self) -> Result<String>;
-    fn outer_rect(&self) -> Result<Rect>;
-    fn inner_rect(&self) -> Result<Rect>;
-    fn parent(&self) -> Option<Self>;
-    fn owner(&self) -> Option<Self>;
-    fn children(&self) -> Result<Vec<Self>>;
-    fn monitor(&self) -> Monitor;
-    fn monitor_id(&self) -> MonitorId;
-    fn slu_category(&self) -> Option<String>;
-    fn workspace_id(&self) -> Result<WorkspaceId>;
-    fn get_app_config(&self) -> Result<Option<AppConfig>>;
-    fn snapshot(&self) -> UserAppWindow;
-    fn focused_app_snapshot(&self) -> FocusedApp;
-
-    fn is_window(&self) -> bool;
-    fn is_visible(&self) -> bool;
-    fn is_minimized(&self) -> bool;
-    fn is_maximized(&self) -> bool;
-    fn is_cloaked(&self) -> bool;
-    fn is_focused(&self) -> bool;
-    fn is_fullscreen(&self) -> bool;
-    fn is_desktop(&self) -> bool;
-    fn is_interactable_and_not_hidden(&self) -> bool;
-
-    fn set_state(&self, state: WindowState) -> Result<()>;
-    fn set_state_async(&self, state: WindowState) -> Result<()>;
-    fn set_rect(&self, rect: &Rect) -> Result<()>;
-    fn unminimize(&self) -> Result<()>;
-    fn focus(&self) -> Result<()>;
-
-    fn is_dragging(&self) -> bool;
-    fn is_last_dragged(&self) -> bool;
-    fn set_dragging(&self, dragging: bool);
-    fn get_rect_before_dragging(&self) -> Result<Rect>;
 }

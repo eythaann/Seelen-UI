@@ -1,9 +1,8 @@
 use std::sync::LazyLock;
 
 use owo_colors::OwoColorize;
-use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
 
-use crate::{error::Result, windows_api::WindowsApi};
+use crate::{error::Result, platform::paths};
 
 pub struct SeelenLogger {}
 
@@ -25,8 +24,7 @@ impl SeelenLogger {
     const MAX_LOG_SIZE: u64 = 5 * 1024 * 1024; // 5MB
 
     pub fn init() -> Result<()> {
-        let logs_folder =
-            WindowsApi::known_folder(FOLDERID_LocalAppData)?.join("com.seelen.seelen-ui/logs");
+        let logs_folder = paths::local_data_dir()?.join("com.seelen.seelen-ui/logs");
         std::fs::create_dir_all(&logs_folder)?;
 
         let log_path = logs_folder.join("Seelen UI.log");

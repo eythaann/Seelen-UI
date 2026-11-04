@@ -5,13 +5,13 @@ use seelen_core::{
     state::{WegItem, WegItemData},
     system_state::UserAppWindow,
 };
-use windows::Win32::UI::WindowsAndMessaging::SW_MINIMIZE;
 
 use crate::{
     error::Result,
     modules::apps::application::USER_APPS_MANAGER,
+    platform::window::{Window, WindowState},
     state::application::WEG_ITEMS_MANAGER,
-    windows_api::{WindowsApi, window::Window},
+    windows_api::WindowsApi,
 };
 
 /// Mirrors `getWindowsForItem` from the frontend (`windows.ts`).
@@ -95,7 +95,7 @@ pub fn process(cmd: WegCli) -> Result<()> {
         } else {
             let focused = windows.iter().find(|w| Window::from(w.hwnd).is_focused());
             if let Some(w) = focused {
-                Window::from(w.hwnd).show_window_async(SW_MINIMIZE)?;
+                Window::from(w.hwnd).set_state_async(WindowState::Minimized)?;
             } else if let Some(w) = windows.first() {
                 let window = Window::from(w.hwnd);
                 if window.is_window() {

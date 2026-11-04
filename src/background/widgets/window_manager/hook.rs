@@ -3,16 +3,17 @@ use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::HWND_TOP};
 
 use crate::{
     error::{Result, ResultLogExt},
+    platform::{
+        hook::WinEvent,
+        window::{Window, WindowsWindowExt},
+    },
     state::application::FULL_STATE,
     virtual_desktops::{MINIMIZED_BY_WORKSPACES, events::VirtualDesktopEvent},
     widgets::{
         manager::WIDGET_MANAGER,
         window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
     },
-    windows_api::{
-        WindowsApi,
-        window::{Window, event::WinEvent},
-    },
+    windows_api::WindowsApi,
 };
 
 use super::{WindowManagerV2, cli::Axis};
@@ -186,7 +187,7 @@ impl WindowManagerV2 {
             }
             VirtualDesktopEvent::WindowAdded { window, desktop } => {
                 let window = &Window::from(window);
-                if !state.is_managed(window) && Self::should_be_managed(window.hwnd()) {
+                if !state.is_managed(window) && Self::should_be_managed(window) {
                     state.add_to_layout(window, &desktop);
                     TwmState::send(TwmStateEvent::Changed);
                 }
@@ -215,7 +216,7 @@ impl WindowManagerV2 {
                 let window = &Window::from(window);
                 if state.is_managed(window) {
                     state.set_stack_active_window(window)?;
-                } else if Self::should_be_managed(window.hwnd()) {
+                } else if Self::should_be_managed(window) {
                     let desktop = window.workspace_id()?;
                     state.add_to_layout(window, &desktop);
                     TwmState::send(TwmStateEvent::Changed);

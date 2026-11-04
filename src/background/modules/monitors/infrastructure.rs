@@ -12,7 +12,7 @@ use crate::{
         MonitorManager,
         brightness::{BrightnessManager, BrightnessManagerEvent},
     },
-    windows_api::MonitorEnumerator,
+    platform::monitor::Monitor,
 };
 
 fn get_monitor_manager() -> &'static MonitorManager {
@@ -55,7 +55,7 @@ impl crate::tauri_handlers::Handlers {
     }
 
     pub fn set_monitor_hdr(id: MonitorId, state: bool) -> Result<()> {
-        let monitor = MonitorEnumerator::enumerate_win32()?
+        let monitor = Monitor::enumerate()?
             .into_iter()
             .find(|m| matches!(m.get_stable_info(), Ok((mid, _)) if mid == id))
             .ok_or("Monitor not found")?;

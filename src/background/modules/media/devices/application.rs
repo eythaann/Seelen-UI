@@ -21,8 +21,9 @@ use windows_core::Interface;
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
+    platform::process::Process,
     utils::lock_free::SyncHashMap,
-    windows_api::{Com, ComThread, process::Process, string_utils::WindowsString},
+    windows_api::{Com, ComThread, string_utils::WindowsString},
 };
 
 use super::domain::{MediaDevice, MediaDeviceSession, MediaDeviceType};
@@ -481,9 +482,9 @@ impl MediaDeviceSession {
                     .to_string(),
                 process_id: proccess.id(),
                 name: proccess
-                    .program_display_name()
+                    .display_name()
                     .unwrap_or_else(|_| "???".to_string()),
-                icon_path: proccess.program_path().ok(),
+                icon_path: proccess.exe_path().ok(),
                 is_system: session.IsSystemSoundsSession().0 == 0,
                 volume: volume.GetMasterVolume()?,
                 muted: volume.GetMute()?.as_bool(),

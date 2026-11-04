@@ -6,14 +6,12 @@ use crate::{
     app::emit_to_webviews,
     error::Result,
     modules::start::application::StartMenuManager,
+    platform::window::{Window, WindowState, WindowsWindowExt},
     state::application::WEG_ITEMS_MANAGER,
     widgets::permissions::{WidgetPerm, request_widget_permission},
-    windows_api::{WindowsApi, window::Window},
+    windows_api::WindowsApi,
 };
-use windows::Win32::{
-    System::Threading::CREATE_NO_WINDOW,
-    UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE},
-};
+use windows::Win32::{System::Threading::CREATE_NO_WINDOW, UI::WindowsAndMessaging::WM_CLOSE};
 
 impl crate::tauri_handlers::Handlers {
     pub fn weg_close_app(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
@@ -27,7 +25,7 @@ impl crate::tauri_handlers::Handlers {
         request_widget_permission(&webview, WidgetPerm::KillProcesses)?;
         let window = Window::from(hwnd);
         std::process::Command::new("taskkill.exe")
-            .args(["/F", "/PID", &window.process().id().to_string()])
+            .args(["/F", "/PID", &window.process_id().to_string()])
             .creation_flags(CREATE_NO_WINDOW.0)
             .spawn()?;
         Ok(())
@@ -43,7 +41,7 @@ impl crate::tauri_handlers::Handlers {
         // was_focused is intented to know if the window was focused before click on the dock item
         // on click the items makes the dock being focused.
         if was_focused {
-            window.show_window_async(SW_MINIMIZE)?;
+            window.set_state_async(WindowState::Minimized)?;
         } else {
             window.unminimize()?;
             window.focus()?;

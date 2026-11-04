@@ -1,13 +1,31 @@
-//! Global hooks to listen to OS level events (windows of other apps, cursor, ...).
+//! Global hook on the windows of all the apps (created, destroyed, focused, moved, ...).
 
-pub mod app_windows;
-pub mod cursor;
+#[cfg(windows)]
+mod windows;
 
-use crate::error::Result;
+#[cfg(windows)]
+use self::windows as imp;
 
-pub fn register_hooks() -> Result<()> {
+use std::sync::atomic::AtomicBool;
+
+use crate::event_manager;
+
+use super::window::Window;
+
+/// The event vocabulary is still the native one of each OS.
+#[cfg(windows)]
+pub use self::windows::WinEvent;
+
+pub type AppWindowEvent = (WinEvent, Window);
+
+pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
+
+pub struct HookManager;
+
+event_manager!(HookManager, AppWindowEvent);
+
+/// Starts listening to the OS events, forwarding them through [`HookManager`].
+pub fn start() {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
-    app_windows::start();
-    cursor::start();
-    Ok(())
+    imp::start();
 }

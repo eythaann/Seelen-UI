@@ -1,7 +1,4 @@
-//! Windows have a lot of api to get information about the window.
-//! Also provides events for theses to be listened, but some events like fullscreen, maximize, etc.
-//! are not standard windows events, so we handle cached windows data to check for these changes, and emit
-//! synthetic events for them.
+//! Serializable snapshots of a window, built from its Win32 data (umid, relaunch info, badges).
 
 use seelen_core::system_state::{
     FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
@@ -16,9 +13,9 @@ use crate::{
     windows_api::types::AppUserModelId,
 };
 
-use super::Window;
+use super::NativeWindow;
 
-impl Window {
+impl NativeWindow {
     /// `Relaunch` info and `prevent_pinning` both only apply to windows with a
     /// property-store assigned umid, so they're derived from it together.
     pub fn relaunch_info(&self, umid: &Option<AppUserModelId>) -> Option<(Relaunch, bool)> {
@@ -61,7 +58,7 @@ impl Window {
             is_zoomed: self.is_maximized(),
             is_fullscreen: self.is_fullscreen(),
             umid: umid.map(|umid| umid.to_string()),
-            process: self.process().to_serializable(),
+            process: self.process().snapshot(),
             prevent_pinning: prevent_pinning.unwrap_or(false),
             relaunch,
             rect: self.inner_rect().ok(),
@@ -85,7 +82,7 @@ impl Window {
             name: self
                 .app_display_name()
                 .unwrap_or(String::from("Error on App Name")),
-            exe: process.program_path().ok(),
+            exe: process.exe_path().ok(),
             umid: self.app_user_model_id().map(|umid| umid.to_string()),
             is_maximized: self.is_maximized(),
             is_fullscreened: self.is_fullscreen(),

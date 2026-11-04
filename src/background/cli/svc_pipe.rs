@@ -2,18 +2,14 @@ use std::path::PathBuf;
 
 use slu_ipc::{IPC, ServiceIpc, messages::SvcAction};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
-use windows::Win32::{
-    System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler},
-    UI::Shell::FOLDERID_LocalAppData,
-};
-use windows_core::Interface;
 
 use crate::{
     app::get_app_handle,
     error::Result,
     get_tokio_handle,
+    platform::{paths, startup},
     utils::was_installed_using_msix,
-    windows_api::{Com, WindowsApi},
+    windows_api::WindowsApi,
 };
 
 pub struct ServicePipe;
@@ -40,53 +36,21 @@ impl ServicePipe {
 
     pub fn service_path() -> Result<PathBuf> {
         let service_path = if was_installed_using_msix() {
-            WindowsApi::known_folder(FOLDERID_LocalAppData)?
-                .join("Microsoft\\WindowsApps\\slu-service.exe")
+            paths::local_data_dir()?.join("Microsoft\\WindowsApps\\slu-service.exe")
         } else {
             std::env::current_exe()?.with_file_name("slu-service.exe")
         };
         Ok(service_path)
     }
 
-    fn try_start_from_task_scheduler() -> Result<()> {
-        Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-            )?;
-            let folder = task_service.GetFolder(&"\\Seelen".into())?;
-            let task = folder.GetTask(&"Seelen UI Service".into())?;
-
-            let actions = task.Definition()?.Actions()?;
-            // ask to microsoft what that hell this start counting from 1 instead 0
-            let action: IExecAction2 = actions.get_Item(1)?.cast()?;
-            let mut action_path = windows_core::BSTR::new();
-            action.Path(&mut action_path)?;
-
-            let service_path = Self::service_path()?.to_string_lossy().to_lowercase();
-            match action_path.to_string().to_lowercase() == service_path {
-                true => {
-                    task.Run(&Default::default())?;
-                    Ok(())
-                }
-                false => {
-                    Err("Service task is not pointing to the correct service executable".into())
-                }
-            }
-        })
-    }
-
     // the service should be running since installer will start it or startup task scheduler
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
-        let Err(err) = Self::try_start_from_task_scheduler() else {
+        let Err(err) = startup::launch_service(&Self::service_path()?) else {
             return Ok(());
         };
 
-        log::debug!("Can not start service via task scheduler: {err}");
+        log::debug!("Can not start service via startup entry: {err}");
 
         let service_path = Self::service_path()?;
         let result =

@@ -5,9 +5,8 @@ use std::{
 
 use seelen_core::resource::{ResourceId, WidgetId};
 use tauri::Manager;
-use windows::Win32::UI::Shell::FOLDERID_Windows;
 
-use crate::{app::get_app_handle, windows_api::WindowsApi};
+use crate::{app::get_app_handle, platform::paths};
 
 pub static SEELEN_COMMON: LazyLock<Arc<SeelenCommon>> =
     LazyLock::new(|| Arc::new(SeelenCommon::new()));
@@ -49,8 +48,7 @@ impl SeelenCommon {
             .expect("Failed to get temp dir")
             .join("com.seelen.seelen-ui");
 
-        let system_dir =
-            WindowsApi::known_folder(FOLDERID_Windows).expect("Failed to get system dir");
+        let system_dir = paths::os_root_dir().expect("Failed to get system dir");
 
         Self {
             settings: data_dir.join("settings.json"),

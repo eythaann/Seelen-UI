@@ -1,9 +1,9 @@
 use std::{env::temp_dir, path::PathBuf, sync::LazyLock};
 
 use itertools::Itertools;
-use windows::Win32::{System::Threading::CREATE_NO_WINDOW, UI::Shell::FOLDERID_System};
+use windows::Win32::System::Threading::CREATE_NO_WINDOW;
 
-use crate::{error::Result, windows_api::WindowsApi};
+use crate::{error::Result, platform::paths, windows_api::WindowsApi};
 
 const PWSH_COMMON_ARGS: [&str; 7] = [
     "-NoLogo",
@@ -27,7 +27,7 @@ pub enum PwshExecutionMode {
 }
 
 static POWERSHELL_PATH: LazyLock<PathBuf> = LazyLock::new(|| {
-    WindowsApi::known_folder(FOLDERID_System)
+    paths::os_bin_dir()
         .expect("Failed to get system folder")
         .join("WindowsPowerShell\\v1.0\\powershell.exe")
 });

@@ -12,7 +12,7 @@ use std::sync::LazyLock;
 
 use seelen_core::system_state::UserAppWindow;
 
-use crate::{event_manager, utils::lock_free::SyncVec, windows_api::window::Window};
+use crate::{event_manager, platform::window::Window, utils::lock_free::SyncVec};
 
 pub static USER_APPS_MANAGER: LazyLock<UserAppsManager> = LazyLock::new(UserAppsManager::init);
 
