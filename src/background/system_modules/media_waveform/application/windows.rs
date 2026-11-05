@@ -1,5 +1,3 @@
-use std::sync::atomic::Ordering;
-
 use windows::Win32::{
     Media::Audio::{
         AUDCLNT_BUFFERFLAGS_SILENT, AUDCLNT_SHAREMODE_SHARED, AUDCLNT_STREAMFLAGS_LOOPBACK,
@@ -12,7 +10,7 @@ use windows::Win32::{
 use crate::{
     error::Result,
     system_modules::media_waveform::domain::{LoopbackCapture, WaveformSystem},
-    windows_api::{Com, event_window::IS_INTERACTIVE_SESSION},
+    windows_api::Com,
 };
 
 /// Stateless: each capture opens its own WASAPI session.
@@ -33,10 +31,6 @@ impl WaveformSystem for WindowsWaveform {
             let mut capture = WasapiLoopback::open()?;
             f(&mut capture)
         })
-    }
-
-    fn is_session_interactive(&self) -> bool {
-        IS_INTERACTIVE_SESSION.load(Ordering::Acquire)
     }
 }
 

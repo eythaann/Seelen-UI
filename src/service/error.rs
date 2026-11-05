@@ -1,8 +1,10 @@
 macro_rules! define_app_errors {
     ($(
+        $(#[$meta:meta])*
         $variant:ident($error_type:ty);
     )*) => {
         $(
+            $(#[$meta])*
             impl From<$error_type> for ServiceError {
                 fn from(err: $error_type) -> Self {
                     let backtrace = backtrace::Backtrace::new();
@@ -35,11 +37,13 @@ pub struct ServiceError {
 define_app_errors!(
     Custom(String);
     Io(std::io::Error);
+    #[cfg(windows)]
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
     Logger(log::SetLoggerError);
     WideStringNull(widestring::error::MissingNulTerminator);
     SluIpc(slu_ipc::error::Error);
+    #[cfg(windows)]
     WinHotkeys(win_hotkeys::error::WHKError);
     TimeFormat(time::error::InvalidFormatDescription);
     TimeOffset(time::error::IndeterminateOffset);
@@ -126,6 +130,7 @@ impl From<std::process::Output> for ServiceError {
     }
 }
 
+#[cfg(windows)]
 pub trait WindowsResultExt {
     /// Call this when convertion a `BOOL` into a result using the win32 crate `BOOL::ok()`
     ///
@@ -136,6 +141,7 @@ pub trait WindowsResultExt {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error>;
 }
 
+#[cfg(windows)]
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {

@@ -100,7 +100,7 @@ impl TwmState {
         });
 
         HookManager::subscribe(|(event, origin)| {
-            WindowManagerV2::process_win_event(event, origin).log_error()
+            WindowManagerV2::process_window_event(event, origin).log_error()
         });
 
         self.recompute_paused_by_monitor();

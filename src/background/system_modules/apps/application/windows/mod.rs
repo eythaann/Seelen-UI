@@ -1,10 +1,6 @@
 mod flashing;
 
-use std::{
-    collections::HashSet,
-    sync::{Arc, atomic::Ordering},
-    time::Duration,
-};
+use std::{collections::HashSet, sync::Arc, time::Duration};
 
 use seelen_core::system_state::{BadgeValue, FocusedApp, UserAppWindow};
 use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
@@ -12,21 +8,20 @@ use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 use crate::{
     error::Result,
     platform::{
-        hook::{HookManager, WinEvent},
+        hook::{HookManager, WindowEvent},
         window::{Window, WindowsWindowExt},
     },
     system_modules::apps::domain::{AppsSysEvent, AppsSystem, WindowChange},
     utils::{lock_free::TracedMutex, spawn_named_thread},
     windows_api::{
         Com,
-        event_window::IS_INTERACTIVE_SESSION,
         input::Mouse,
         window_badges::{WindowBadges, WindowBadgesEvent},
         wpn_service::WpnService,
     },
 };
 
-/// Interval of the revalidation of the known windows, for changes without a WinEvent.
+/// Interval of the revalidation of the known windows, for changes without a hook event.
 const REVALIDATE_INTERVAL: Duration = Duration::from_secs(5);
 
 type EventCallback = Arc<dyn Fn(AppsSysEvent) + Send + Sync>;
@@ -60,14 +55,14 @@ impl AppsSystem for WindowsApps {
         let on_event: EventCallback = Arc::new(on_event);
 
         let (known, cb) = (self.known.clone(), on_event.clone());
-        HookManager::subscribe(move |(event, window)| known.on_win_event(event, window, &cb));
+        HookManager::subscribe(move |(event, window)| known.on_window_event(event, window, &cb));
 
         let (known, cb) = (self.known.clone(), on_event.clone());
         spawn_named_thread("InteractableWindowsRevalidator", move || {
             loop {
                 std::thread::sleep(REVALIDATE_INTERVAL);
                 // Pause when session is not interactive to reduce CPU usage
-                if IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                if crate::platform::session::is_interactive() {
                     known.revalidate(&cb);
                 }
             }
@@ -146,7 +141,7 @@ impl KnownWindows {
     }
 
     /// Returns `true` if it was not known. A single locked check-and-insert avoids the race
-    /// between the WinEvent dispatcher thread and the revalidator thread both reporting it.
+    /// between the hook dispatcher thread and the revalidator thread both reporting it.
     fn insert(&self, window: &Window) -> bool {
         self.hwnds.lock().insert(window.address())
     }
@@ -190,19 +185,19 @@ impl KnownWindows {
         }
     }
 
-    fn on_win_event(&self, event: WinEvent, window: Window, on_event: &EventCallback) {
+    fn on_window_event(&self, event: WindowEvent, window: Window, on_event: &EventCallback) {
         let mut is_interactable = self.contains(&window);
 
         match event {
-            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
+            WindowEvent::Created | WindowEvent::Shown => {
                 if !is_interactable && window.is_interactable_and_not_hidden() {
                     self.add(&window, on_event);
                 }
             }
-            WinEvent::ObjectNameChange
-            | WinEvent::ObjectParentChange
-            | WinEvent::ObjectUncloaked
-            | WinEvent::ObjectStateChange => {
+            WindowEvent::TitleChanged
+            | WindowEvent::ParentChanged
+            | WindowEvent::Uncloaked
+            | WindowEvent::StateChanged => {
                 let was_interactable = is_interactable;
                 is_interactable = window.is_interactable_and_not_hidden();
                 match (was_interactable, is_interactable) {
@@ -212,20 +207,20 @@ impl KnownWindows {
                 }
 
                 // re-check for UWP apps that on creation starts without a parent
-                if event == WinEvent::ObjectParentChange
+                if event == WindowEvent::ParentChanged
                     && let Some(parent) = window.parent()
                     && parent.is_interactable_and_not_hidden()
                 {
                     self.add(&parent, on_event);
                 }
             }
-            WinEvent::ObjectHide => {
+            WindowEvent::Hidden => {
                 // UWP ApplicationFrameHosts are always hidden on minimize
                 if is_interactable && !window.is_frame().unwrap_or(false) {
                     self.drop_window(&window, on_event);
                 }
             }
-            WinEvent::ObjectDestroy => {
+            WindowEvent::Destroyed => {
                 WindowBadges::instance().remove(window.address());
                 if is_interactable {
                     self.drop_window(&window, on_event);
@@ -244,9 +239,9 @@ impl KnownWindows {
 }
 
 /// What the event changed on a known window, if anything relevant.
-fn window_change(event: WinEvent, window: &Window) -> Option<WindowChange> {
+fn window_change(event: WindowEvent, window: &Window) -> Option<WindowChange> {
     match event {
-        WinEvent::ObjectNameChange => {
+        WindowEvent::TitleChanged => {
             // Windows has no event for property-store changes, so we piggyback on the
             // name change event to re-check the umid. Some apps (e.g. Firefox PWAs) only
             // get their AppUserModelId assigned after the window is already created.
@@ -260,15 +255,15 @@ fn window_change(event: WinEvent, window: &Window) -> Option<WindowChange> {
                 prevent_pinning: prevent_pinning.unwrap_or(false),
             })
         }
-        WinEvent::SynDebouncedRectChange => Some(WindowChange::Placement {
+        WindowEvent::RectChanged => Some(WindowChange::Placement {
             is_zoomed: window.is_maximized(),
             is_fullscreen: window.is_fullscreen(),
             rect: window.inner_rect().ok(),
             monitor: window.monitor().stable_id().unwrap_or_default(),
         }),
-        WinEvent::SystemForeground => Some(WindowChange::Foreground),
-        WinEvent::SystemMinimizeStart => Some(WindowChange::Minimized { minimized: true }),
-        WinEvent::SystemMinimizeEnd => Some(WindowChange::Minimized { minimized: false }),
+        WindowEvent::Foregrounded => Some(WindowChange::Foreground),
+        WindowEvent::Minimized => Some(WindowChange::Minimized { minimized: true }),
+        WindowEvent::Unminimized => Some(WindowChange::Minimized { minimized: false }),
         _ => None,
     }
 }

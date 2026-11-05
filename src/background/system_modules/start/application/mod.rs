@@ -8,7 +8,7 @@ use std::{
     time::Duration,
 };
 
-use seelen_core::system_state::StartMenuItem;
+use seelen_core::system_state::{StartMenuItem, StartMenuLayout};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -108,6 +108,10 @@ impl StartMenuManager {
     /// native start menu shows them. The same app can be in both folders, so an item is dropped
     /// if an earlier one has the same umid or is a shortcut launching the same
     /// target/arguments/working dir. This way user items win over the system ones.
+    pub async fn native_layout(&self) -> Result<StartMenuLayout> {
+        self.platform.native_layout().await
+    }
+
     pub fn get_all(&self) -> Vec<Arc<StartMenuItem>> {
         let mut seen_umids = HashSet::new();
         let mut seen_identities = HashSet::new();

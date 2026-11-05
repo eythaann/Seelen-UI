@@ -1,8 +1,8 @@
 mod event;
 
-pub use event::WinEvent;
+use event::WinEvent;
 
-use std::{collections::HashSet, sync::Arc, sync::atomic::Ordering};
+use std::{collections::HashSet, sync::Arc};
 
 use parking_lot::RwLock;
 use seelen_core::handlers::SeelenEvent;
@@ -18,26 +18,22 @@ use windows::Win32::{
 };
 
 use crate::{
-    app::emit_to_webviews,
-    error::ResultLogExt,
-    platform::window::Window,
-    state::application::FULL_STATE,
-    utils::spawn_named_thread,
-    widgets::weg::SeelenWeg,
-    windows_api::{WindowEnumerator, event_window::IS_INTERACTIVE_SESSION},
+    app::emit_to_webviews, error::ResultLogExt, platform::window::Window,
+    state::application::FULL_STATE, utils::spawn_named_thread, widgets::weg::SeelenWeg,
+    windows_api::WindowEnumerator,
 };
 
-use super::HookManager;
+use super::{HookManager, WindowEvent};
 
 pub fn start() {
     init_zombie_window_killer();
     start_win_event_hook();
 
     let eid = HookManager::subscribe(|(event, origin)| match event {
-        WinEvent::SystemMoveSizeStart => {
+        WindowEvent::MoveSizeStarted => {
             origin.set_dragging(true);
         }
-        WinEvent::SystemMoveSizeEnd => {
+        WindowEvent::MoveSizeEnded => {
             origin.set_dragging(false);
         }
         _ => (),
@@ -63,7 +59,7 @@ extern "system" fn raw_win_event_hook_recv(
     // CRITICAL: Skip event processing when session is not interactive (locked/switched)
     // This prevents excessive CPU usage from processing thousands of events per second
     // when the user has locked the screen or switched users
-    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+    if !crate::platform::session::is_interactive() {
         return;
     }
 
@@ -75,24 +71,26 @@ extern "system" fn raw_win_event_hook_recv(
 
     let event = WinEvent::from(event);
     let origin = Window::from(origin);
-    HookManager::send((event, origin));
+    if let Some(window_event) = event.to_window_event() {
+        HookManager::send((window_event, origin));
+    }
     event.debounce_as_needed(&origin);
 }
 
 fn start_win_event_hook() {
-    // The check for IS_INTERACTIVE_SESSION here is not redundant with the one in
+    // The interactive session check here is not redundant with the one in
     // raw_win_event_hook_recv. On a session switch, Windows fires events for ALL
     // session windows simultaneously, flooding the unbounded channel before
     // WM_WTSSESSION_CHANGE can be delivered to BgWindowProc (which runs on a
     // separate thread). The dispatcher thread then drains that backlog calling
     // expensive Win32 APIs (focused_app_snapshot, etc.) for every queued
-    // event even though IS_INTERACTIVE_SESSION is already false. This check makes
+    // event even though the session is already not interactive. This check makes
     // each backlogged event a cheap no-op (atomic load + branch) instead.
     let eid = HookManager::subscribe(|(event, mut origin)| {
-        if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+        if !crate::platform::session::is_interactive() {
             return;
         }
-        if event == WinEvent::SystemForeground {
+        if event == WindowEvent::Foregrounded {
             origin = Window::get_foregrounded(); // sometimes this event is emited with the wrong origin
         }
         legacy_process_event(event, origin);
@@ -119,30 +117,27 @@ fn start_win_event_hook() {
 }
 
 #[allow(dead_code)]
-fn log_event(event: WinEvent, origin: Window) {
+fn log_event(event: WindowEvent, origin: Window) {
     use owo_colors::OwoColorize;
-    if event == WinEvent::ObjectLocationChange {
-        return;
-    }
     let event_value = event.green();
-    if event == WinEvent::ObjectDestroy {
+    if event == WindowEvent::Destroyed {
         return println!("{event_value:?}({:0x})", origin.address());
     }
     println!("{event_value:?} | {origin:?}");
 }
 
-fn legacy_process_event(event: WinEvent, origin: Window) {
+fn legacy_process_event(event: WindowEvent, origin: Window) {
     // log_event(event, origin);
 
     // TODO: optimize this, update independent fields instead of the whole struct
     {
         let shoup_update_focused = matches!(
             event,
-            WinEvent::SystemForeground
-                | WinEvent::SynThrottledForegroundRectChange
-                | WinEvent::ObjectNameChange
-                | WinEvent::SystemMoveSizeStart
-                | WinEvent::SystemMoveSizeEnd
+            WindowEvent::Foregrounded
+                | WindowEvent::ForegroundRectChanged
+                | WindowEvent::TitleChanged
+                | WindowEvent::MoveSizeStarted
+                | WindowEvent::MoveSizeEnded
         );
 
         if shoup_update_focused && origin.is_focused() {
@@ -159,10 +154,10 @@ fn init_zombie_window_killer() {
 
     let dict = existing_windows.clone();
     HookManager::subscribe(move |(event, origin)| match event {
-        WinEvent::ObjectCreate => {
+        WindowEvent::Created => {
             dict.write().insert(origin.address());
         }
-        WinEvent::ObjectDestroy => {
+        WindowEvent::Destroyed => {
             dict.write().remove(&origin.address());
         }
         _ => {}
@@ -183,7 +178,7 @@ fn init_zombie_window_killer() {
             std::thread::sleep(std::time::Duration::from_secs(1));
 
             // Pause when session is not interactive to reduce CPU usage
-            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+            if !crate::platform::session::is_interactive() {
                 continue;
             }
 
@@ -200,7 +195,7 @@ fn init_zombie_window_killer() {
                 existing_windows.write().remove(&addr);
                 let window = Window::from(addr);
                 log::trace!("Reaping window: {:0x}", window.address());
-                HookManager::send((WinEvent::ObjectDestroy, window));
+                HookManager::send((WindowEvent::Destroyed, window));
             }
         }
     });

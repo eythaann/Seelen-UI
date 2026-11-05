@@ -4,7 +4,7 @@ use std::{
     sync::Arc,
 };
 
-use seelen_core::system_state::StartMenuItem;
+use seelen_core::system_state::{StartMenuItem, StartMenuLayout};
 
 use crate::error::Result;
 
@@ -27,6 +27,9 @@ pub trait StartMenuSystem: Sized + Send + Sync {
 
     /// Apps installed as packages (no shortcut file).
     fn packaged_apps(&self) -> Result<Vec<Arc<StartMenuItem>>>;
+
+    /// Layout of the native start menu (pinned items), with paths already expanded.
+    fn native_layout(&self) -> impl Future<Output = Result<StartMenuLayout>> + Send;
 }
 
 /// Raw OS notifications: they only signal what changed, the manager reloads it.

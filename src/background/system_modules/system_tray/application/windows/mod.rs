@@ -16,7 +16,7 @@ use winreg::{
 
 use crate::{
     error::Result,
-    platform::hook::{HookManager, WinEvent},
+    platform::hook::{HookManager, WindowEvent},
     system_modules::system_tray::domain::{SystemTrayEvent, SystemTraySystem},
     utils::{lock_free::SyncHashMap, resolve_guid_path},
 };
@@ -55,7 +55,7 @@ impl SystemTraySystem for WindowsSystemTray {
         // hook, so react to the owner window being destroyed instead.
         let state = self.state.clone();
         HookManager::subscribe(move |(event, window)| {
-            if event == WinEvent::ObjectDestroy {
+            if event == WindowEvent::Destroyed {
                 state.on_window_destroyed(window.address());
             }
         });

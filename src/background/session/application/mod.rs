@@ -1,11 +1,10 @@
+#[cfg(windows)]
+mod windows;
+
 use std::sync::LazyLock;
 
 use seelen_core::system_state::SeelenSession;
 use uuid::Uuid;
-use windows::{
-    Security::Credentials::{PasswordCredential, PasswordVault},
-    core::HSTRING,
-};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -13,7 +12,10 @@ use crate::{
     utils::lock_free::TracedMutex,
 };
 
-use super::domain::{JwtPayload, decode_jwt_payload};
+use super::domain::{CredentialStore, JwtPayload, decode_jwt_payload};
+
+#[cfg(windows)]
+type Platform = windows::WindowsCredentials;
 
 // ─── Shared HTTP client ───────────────────────────────────────────────────────
 
@@ -37,7 +39,7 @@ const WEBSITE_BASE_URL: &str = "https://staging.seelen.io";
 #[cfg(not(dev))]
 const WEBSITE_BASE_URL: &str = "https://seelen.io";
 
-/// Credential Manager resource identifier used for all Seelen auth tokens.
+/// Credential store resource identifier used for all Seelen auth tokens.
 /// Dev and production builds use different keys so their sessions don't collide.
 #[cfg(dev)]
 const CREDENTIAL_RESOURCE: &str = "SeelenUI:auth:dev";
@@ -126,52 +128,19 @@ impl SessionManager {
         Ok((session, payload2))
     }
 
-    // ─── Windows Credential Manager ───────────────────────────────────────────
-
-    fn open_vault() -> Result<PasswordVault> {
-        PasswordVault::new().map_err(|e| {
-            format!(
-                "Windows Credential Manager is unavailable (VaultSvc may be stopped or disabled). \
-                 Enable the 'Credential Manager' service and try again. \
-                 Original error: {e}"
-            )
-            .into()
-        })
-    }
+    // ─── Credential store ─────────────────────────────────────────────────────
 
     fn store_credential(key: &str, value: &str) -> Result<()> {
-        let resource = HSTRING::from(CREDENTIAL_RESOURCE);
-        let user_name = HSTRING::from(key);
-        let password = HSTRING::from(value);
-        let vault = Self::open_vault()?;
-        // Remove stale entry first so Add always succeeds.
-        if let Ok(existing) = vault.Retrieve(&resource, &user_name) {
-            vault.Remove(&existing).ok();
-        }
-        let cred = PasswordCredential::CreatePasswordCredential(&resource, &user_name, &password)?;
-        vault.Add(&cred)?;
-        Ok(())
+        Platform::store(CREDENTIAL_RESOURCE, key, value)
     }
 
-    pub fn read_credential(key: &str) -> Result<String> {
-        let resource = HSTRING::from(CREDENTIAL_RESOURCE);
-        let user_name = HSTRING::from(key);
-        let vault = Self::open_vault()?;
-        let cred = vault.Retrieve(&resource, &user_name)?;
-        cred.RetrievePassword()?;
-        Ok(cred.Password()?.to_string())
+    fn read_credential(key: &str) -> Result<String> {
+        Platform::read(CREDENTIAL_RESOURCE, key)
     }
 
     fn delete_all_credentials() {
-        let Ok(vault) = Self::open_vault() else {
-            return;
-        };
-        let resource = HSTRING::from(CREDENTIAL_RESOURCE);
         for key in [ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY] {
-            let user_name = HSTRING::from(key);
-            if let Ok(cred) = vault.Retrieve(&resource, &user_name) {
-                vault.Remove(&cred).log_error();
-            }
+            Platform::delete(CREDENTIAL_RESOURCE, key).log_error();
         }
     }
 

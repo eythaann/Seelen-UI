@@ -124,7 +124,7 @@ impl WaveformManager {
             }
 
             // Pause when session is not interactive (screen locked / user switched).
-            if !self.platform.is_session_interactive() {
+            if !crate::platform::session::is_interactive() {
                 capture.drain();
                 std::thread::sleep(Duration::from_secs(1));
                 continue;

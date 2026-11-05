@@ -13,9 +13,6 @@ pub trait SystemInfoSystem: Sized + Send + Sync {
 
     /// Usage of the GPUs. Fails if the counters are not available.
     fn gpus(&self) -> Result<Vec<Gpu>>;
-
-    /// False while the screen is locked or another user is active.
-    fn is_session_interactive(&self) -> bool;
 }
 
 #[derive(Debug, Clone)]

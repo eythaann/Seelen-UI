@@ -12,9 +12,11 @@ impl AppError {
 
 macro_rules! define_app_errors {
     ($(
+        $(#[$meta:meta])*
         $variant:ident($error_type:ty);
     )*) => {
         $(
+            $(#[$meta])*
             impl From<$error_type> for AppError {
                 fn from(err: $error_type) -> Self {
                     // symbols are resolved lazily on Debug, resolving here is very expensive
@@ -33,7 +35,9 @@ define_app_errors!(
     Tauri(tauri::Error);
     Logger(log::SetLoggerError);
     Lib(seelen_core::SeelenLibError);
+    #[cfg(windows)]
     Windows(windows::core::Error);
+    #[cfg(windows)]
     WMI(wmi::WMIError);
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
@@ -50,9 +54,11 @@ define_app_errors!(
     WideStringNull(widestring::error::MissingNulTerminator);
     Reqwest(reqwest::Error);
     Updater(tauri_plugin_updater::Error);
+    #[cfg(windows)]
     WinScreenshot(win_screenshot::capture::WSError);
     TryFromSliceError(std::array::TryFromSliceError);
     ParseIntError(std::num::ParseIntError);
+    #[cfg(windows)]
     WinHotkey(win_hotkeys::error::WHKError);
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);
@@ -171,6 +177,7 @@ impl From<reqwest::StatusCode> for AppError {
     }
 }
 
+#[cfg(windows)]
 pub trait WindowsResultExt {
     /// Call this when convertion a `BOOL` into a result using the win32 crate `BOOL::ok()`
     ///
@@ -189,6 +196,7 @@ pub trait ResultLogExt {
     fn ok_logged(self) -> Option<Self::Success>;
 }
 
+#[cfg(windows)]
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {

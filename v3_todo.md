@@ -76,7 +76,7 @@ Layout of each `platform/<primitive>/`:
   `WindowsProcessExt`) that only Windows specific code may import.
 - Stateless APIs (`paths`, `startup`, `cursor`) are free functions forwarding to `imp`.
 - `platform/*/windows*` may use `windows_api/` as plumbing; nothing outside Windows impls may.
-- Event vocabularies (`AppWindowEvent`) are still the native ones; making them agnostic is pending (see below).
+- Event vocabularies are OS-agnostic (`platform::hook::WindowEvent`); each impl translates its native events.
 
 ---
 
@@ -106,26 +106,27 @@ Layout of each `platform/<primitive>/`:
   - [x] `process` — `platform::process::Process` (`exe_path`, `exe_name`, `display_name`, `is_frozen`, `is_seelen`,
         `snapshot`), `Window::process()` is part of the agnostic API; handles/AppX are behind `WindowsProcessExt`.
   - [x] Flattened: one native layer per primitive, no contract traits nor forwarding wrappers.
-- [ ] `AppWindowEvent`: replace the native (`WinEvent`) vocabulary with an OS-agnostic enum of domain events.
-- [ ] `platform/window/mod.rs` still depends on `VdManager` for (`is_interactable_window` moved into
-      `platform/window/windows`) `workspace_id`), inherited from the old `windows_api/window`. `platform/` must not
-      depend on its consumers: move `is_interactable_and_not_hidden`/`workspace_id` to their owners (or invert the
-      dependency).
+- [x] `AppWindowEvent` is `(WindowEvent, Window)`: OS-agnostic vocabulary in `platform/hook/mod.rs`. `WinEvent` is
+      private to `platform/hook/windows`, which translates it (`WinEvent::to_window_event`, unconsumed events are
+      dropped) and emits the debounced/throttled `RectChanged`/`ForegroundRectChanged` itself.
+- [x] `platform/window/mod.rs` no longer depends on `VdManager`: `Window::workspace_id()` was inverted into
+      `VdManager::workspace_of(&Window)`.
+  - Accepted exception: `platform/window/windows/snapshot.rs` uses `system_modules::start::StartMenuManager` because it
+    needs info about the app that only lives in the start menu.
 
 ---
 
 ## Phase 0 — Foundations
 
-- [ ] Document the new pattern in `AGENTS.md` ("Backend: System Modules" section) and replace the current example.
-- [ ] `src/background/error.rs` / `src/service/error.rs`: put the `Windows(windows::core::Error)` variant and
-      `WindowsResultExt` behind `#[cfg(windows)]`.
-- [ ] Make `windows_api/` explicitly Windows-impl plumbing (`#[cfg(windows)] mod windows_api;`). It may only be used
-      from `application/windows.rs` (and equivalents outside `modules/`).
+- [x] Document the new pattern in `AGENTS.md` ("Backend: System Modules" section) and replace the current example.
+- [x] `src/background/error.rs` / `src/service/error.rs`: the conversions from Windows-only crates (`windows`, `wmi`,
+      `win_screenshot`, `win_hotkeys`) and `WindowsResultExt` are behind `#[cfg(windows)]` (`define_app_errors!` accepts
+      attributes per variant).
+- [x] `#[cfg(windows)] mod windows_api;` in both binaries. It may only be used from `application/windows.rs` (and
+      equivalents outside `modules/`).
 - [x] `event_manager!` (now `utils/event_manager.rs`) is OS-agnostic.
-- [ ] `windows_api/event_window.rs::subscribe_to_background_window` is the source of `WM_*` messages; it stays an
-      internal detail of the Windows impls.
-- [ ] Add a CI/lint check (grep) that fails if `infrastructure.rs`, `handlers.rs` or `domain*` import `windows`,
-      `windows_core`, `winreg`, `windows_api`, `win_screenshot`.
+- [x] `windows_api/event_window.rs::subscribe_to_background_window` is the source of `WM_*` messages; it stays an
+      internal detail of the Windows impls (only used from `application/windows*`).
 
 ## Phase 1 — System modules (`src/background/system_modules/`) ✔
 
@@ -151,8 +152,9 @@ Start with the small ones to validate the pattern:
       Fixed on the way: the battery registration was released with `UnregisterPowerSettingNotification` (wrong API, now
       `PowerSettingUnregisterNotification`) and the power mode one was never released. `PowerStatus`
       (`Default, PartialEq, Eq`) and `PowerMode` (`Default`) derives added in core.
-  - Pending: the game mode → suspend widgets logic lives in the infra bridge (`mod.rs`) but is business logic;
-    `PowerStatus` fields are still Win32 shaped (`ac_line_status: u8`, ...).
+  - Done: the game mode → suspend widgets logic moved from the infra bridge to `WidgetManager::create` (subscribes to
+    `PowerManager`, re-exported with `PowerEvent`). It used to be registered only on the first power command.
+  - Pending: `PowerStatus` fields are still Win32 shaped (`ac_line_status: u8`, ...).
 - [x] **fonts** — `FontsSystem { create, init, fonts }`. Stateless (`WindowsFonts` unit struct, DirectWrite factory per
       query, so the old `unsafe impl Send/Sync` is gone); the manager sorts the list. `FontsChanged` was never emitted
       (no OS listener): now wired to `WM_FONTCHANGE` on the background window → `FontsSysEvent::Changed` → the manager
@@ -191,22 +193,34 @@ Start with the small ones to validate the pattern:
 - [x] `modules/` removed; `event_manager!` → `utils/event_manager.rs`.
   - Pending: the "native facade" modules (system_tray, radios, wifi, bluetooth, media_devices) still keep their state in
     the native layer: lift the OS-agnostic parts when a second OS is added.
-  - Pending: `IS_INTERACTIVE_SESSION` is exposed per module (`is_session_interactive`); centralize it (session module).
+  - Done: the interactive OS session flag lives in `platform::session::is_interactive()` (OS user session, not
+    `crate::session`, which is the Seelen UI one); the per-module `is_session_interactive` trait methods were removed.
 
 ## Phase 2 — Rest of the main app (`src/background/`, outside `modules/`)
 
 Same criteria; these areas don't follow the module pattern yet. Inventory (files with Win32 / total):
 
-- [ ] `session/` (1/4) — already layered, clean up.
+- [x] `session/` — module layout (`mod.rs` infra re-exporting `SessionManager`/`SessionManagerEvent` and
+      `reemit_session`). The only OS dependency, the token storage, is the `CredentialStore` trait (domain) implemented
+      by `WindowsCredentials` (`PasswordVault`). `read_credential` is no longer public.
 - [ ] `state/` (3/8) — infra + application.
-- [ ] `virtual_desktops/` (3/6) — move to domain/application/infrastructure layout.
+- [x] `virtual_desktops/` — no OS code left (everything goes through `platform/`), so no `windows.rs`. Module layout:
+      `mod.rs` infra (handlers + webviews bridge, re-exports `VdManager`, `MINIMIZED_BY_WORKSPACES`,
+      `VirtualDesktopEvent`, `WorkspaceWallpapersManager`), `cli.rs`, `domain.rs` (`VirtualDesktopEvent` +
+      `get_indexes`), `application/{mod.rs, storage.rs (old bridge.rs), wallpapers.rs}`.
 - [ ] `widgets/` (17/27) — `window_manager`, `weg`, `toolbar`, `task_switcher`, `popups`, `wallpaper_manager`: put
       positioning/HWND behind traits (windows, monitors, app bar).
 - [ ] `utils/` (10/16) — split generic utilities from Win32 ones (Win32 ones go to `windows_api/`).
-- [ ] `cli/` (1/7) — no direct calls.
+- [x] `cli/` — `svc_pipe.rs` launches the service through the new `platform::shell` primitive (`execute`, `open`), which
+      replaced every `WindowsApi::execute` outside Windows impls (`exposed.rs`, `utils/integrity`, `widgets/webview.rs`,
+      `weg/cli.rs`). `self_pipe.rs`: the `TaskbarButtonChanged` arm (`WindowBadges`, sent by the explorer hook) is
+      `#[cfg(windows)]`.
 - [x] ~~`hook.rs` (global win event hook)~~ — moved to `platform/hook/` (see Phase 0.5).
-- [ ] `app.rs`, `main.rs`, `exposed.rs`, `logger.rs`, `telemetry.rs` — isolate Win32 code in `#[cfg(windows)]` functions
-      or in a `platform` module.
+- [x] `app.rs`, `main.rs`, `exposed.rs`, `logger.rs`, `telemetry.rs` — isolate Win32 code in `#[cfg(windows)]` functions
+      or in a `platform` module. `platform::start()` (background window on Windows + hook + cursor) replaces the 3 calls
+      in `app.rs`; the WebView2 fixed runtime env var in `main.rs` is `#[cfg(windows)]`; `select_file_on_explorer` uses
+      `platform::shell::reveal`; `get_native_start_menu` moved to the `start` module (`StartMenuSystem::native_layout`);
+      the telemetry install id moved to `platform::install_id` (registry on Windows). `logger.rs` needed no changes.
 
 ## Phase 3 — Service (`src/service/`)
 

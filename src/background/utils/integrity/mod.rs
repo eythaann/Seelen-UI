@@ -15,6 +15,7 @@ use windows::Win32::{
 use crate::{
     error::Result,
     is_local_dev,
+    platform::shell,
     utils::{has_fixed_runtime, is_running_as_appx},
     windows_api::{WindowsApi, string_utils::WindowsString},
 };
@@ -65,12 +66,7 @@ pub fn print_initial_information() {
 }
 
 pub fn restart_as_appx() -> Result<!> {
-    WindowsApi::execute(
-        r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App".to_string(),
-        None,
-        None,
-        false,
-    )?;
+    shell::open(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")?;
     std::process::exit(0);
 }
 

@@ -52,7 +52,7 @@ impl AppPreviewsManager {
             .spawn(move || {
                 for hwnd in capture_rx {
                     let manager = Self::instance();
-                    if manager.platform.is_session_interactive() {
+                    if crate::platform::session::is_interactive() {
                         manager.capture(hwnd).log_error();
                     }
                 }

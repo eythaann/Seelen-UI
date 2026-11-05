@@ -1,5 +1,3 @@
-use std::sync::atomic::Ordering;
-
 use slu_ipc::messages::SvcAction;
 use tauri::{AppHandle, Emitter, Wry};
 
@@ -10,9 +8,9 @@ use crate::{
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     migrations::Migrations,
-    platform::{cursor, hook, startup},
+    platform::{self, startup},
     resources::RESOURCES,
-    session::infrastructure::reemit_session,
+    session::reemit_session,
     state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
     system_modules::{
         clipboard::init_clipboard_manager, start::StartMenuManager, user::reemit_user,
@@ -22,7 +20,6 @@ use crate::{
         manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,
         weg::SeelenWeg,
     },
-    windows_api::event_window::{IS_INTERACTIVE_SESSION, create_background_window},
 };
 
 /// Tauri app handle
@@ -36,7 +33,7 @@ pub fn emit_to_webviews<S>(event: &str, payload: S)
 where
     S: serde::Serialize,
 {
-    if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+    if !crate::platform::session::is_interactive() {
         return;
     }
 
@@ -95,9 +92,7 @@ impl SeelenUI {
         }
 
         WIDGET_MANAGER.reconcile()?;
-        create_background_window()?;
-        hook::start();
-        cursor::start_tracking();
+        platform::start()?;
 
         std::thread::spawn(init_clipboard_manager);
 

@@ -8,10 +8,12 @@ use seelen_core::{
 
 use crate::{
     error::Result,
-    platform::window::{Window, WindowState},
+    platform::{
+        shell,
+        window::{Window, WindowState},
+    },
     state::application::WEG_ITEMS_MANAGER,
     system_modules::apps::UserAppsManager,
-    windows_api::WindowsApi,
 };
 
 /// Mirrors `getWindowsForItem` from the frontend (`windows.ts`).
@@ -91,7 +93,7 @@ pub fn process(cmd: WegCli) -> Result<()> {
                 .relaunch
                 .as_ref()
                 .and_then(|r| r.working_dir.clone());
-            WindowsApi::execute(command, args, working_dir, false)?;
+            shell::execute(&command, args.as_deref(), working_dir.as_deref(), false)?;
         } else {
             let focused = windows.iter().find(|w| Window::from(w.hwnd).is_focused());
             if let Some(w) = focused {

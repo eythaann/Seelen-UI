@@ -1,12 +1,10 @@
 mod gpu;
 
-use std::sync::atomic::Ordering;
-
 use seelen_core::system_state::Gpu;
 
 use crate::{
     error::Result, system_modules::system_info::domain::SystemInfoSystem,
-    utils::lock_free::TracedMutex, windows_api::event_window::IS_INTERACTIVE_SESSION,
+    utils::lock_free::TracedMutex,
 };
 
 use self::gpu::GpuMonitor;
@@ -33,9 +31,5 @@ impl SystemInfoSystem for WindowsSystemInfo {
             Some(monitor) => monitor.gpus(),
             None => Err("GPU performance counters are not available".into()),
         }
-    }
-
-    fn is_session_interactive(&self) -> bool {
-        IS_INTERACTIVE_SESSION.load(Ordering::Acquire)
     }
 }

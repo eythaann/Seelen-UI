@@ -11,7 +11,7 @@ use crate::{
     app::emit_to_webviews,
     cli::ServicePipe,
     error::{Result, ResultLogExt},
-    session::application::SessionManager,
+    session::SessionManager,
     state::application::FULL_STATE,
     widgets::manager::WIDGET_MANAGER,
     widgets::permissions::WIDGET_PERMISSIONS,

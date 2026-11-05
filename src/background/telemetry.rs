@@ -1,16 +1,9 @@
-use std::{sync::atomic::Ordering, time::Duration};
+use std::time::Duration;
 
 use serde::Serialize;
 use uuid::Uuid;
-use winreg::{
-    RegKey,
-    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS, KEY_READ},
-};
 
 use crate::get_tokio_handle;
-
-const REGISTRY_SUBKEY: &str = "Software\\Seelen UI\\Analytics";
-const INSTALL_ID_VALUE: &str = "InstallId";
 
 #[cfg(dev)]
 const TELEMETRY_ENDPOINT: &str = "https://telemetry.staging.seelen.io/events";
@@ -27,28 +20,6 @@ pub enum TelemetryEvent {
         os_version: String,
         app_version: String,
     },
-}
-
-/// Returns the persisted install ID from the registry, creating it if absent.
-///
-/// Stored at `HKCU\Software\Seelen\Analytics` → `InstallId` (REG_SZ).
-/// This key is NOT declared in the MSIX package manifest, so it survives
-/// across reinstalls and package updates.
-fn get_or_create_install_id() -> crate::error::Result<Uuid> {
-    let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-
-    if let Ok(key) = hkcu.open_subkey_with_flags(REGISTRY_SUBKEY, KEY_READ)
-        && let Ok(id_str) = key.get_value::<String, _>(INSTALL_ID_VALUE)
-        && let Ok(id) = Uuid::parse_str(&id_str)
-    {
-        return Ok(id);
-    }
-
-    let new_id = Uuid::new_v4();
-    let (key, _) = hkcu.create_subkey_with_flags(REGISTRY_SUBKEY, KEY_ALL_ACCESS)?;
-    key.set_value(INSTALL_ID_VALUE, &new_id.to_string())?;
-    log::debug!("Telemetry: generated new install_id {new_id}");
-    Ok(new_id)
 }
 
 fn os_version_string() -> String {
@@ -99,7 +70,7 @@ async fn send_event(install_id: Uuid) {
 ///
 /// Errors obtaining the install ID are logged but do not affect the rest of the app.
 pub fn start_telemetry() {
-    let install_id = match get_or_create_install_id() {
+    let install_id = match crate::platform::install_id::get_or_create() {
         Ok(id) => id,
         Err(err) => {
             log::warn!("Telemetry: could not obtain install_id, skipping: {err:?}");
@@ -108,11 +79,10 @@ pub fn start_telemetry() {
     };
 
     get_tokio_handle().spawn(async move {
-        use crate::windows_api::event_window::IS_INTERACTIVE_SESSION;
         let mut interval = tokio::time::interval(Duration::from_secs(10 * 60));
         loop {
             interval.tick().await; // first tick fires immediately
-            if IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+            if crate::platform::session::is_interactive() {
                 send_event(install_id).await;
             }
         }

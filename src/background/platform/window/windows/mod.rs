@@ -29,7 +29,7 @@ use crate::{
     cli::ServicePipe,
     error::Result,
     platform::{
-        hook::{HookManager, WinEvent},
+        hook::{HookManager, WindowEvent},
         monitor::Monitor,
         process::{Process, WindowsProcessExt},
     },
@@ -214,7 +214,7 @@ impl NativeWindow {
         }
         ServicePipe::request_sync(SvcAction::SetForeground(self.address()))?;
         if WindowsApi::get_foreground_window() == self.0 {
-            HookManager::send((WinEvent::SystemForeground, Window(*self)));
+            HookManager::send((WindowEvent::Foregrounded, Window(*self)));
             Ok(())
         } else {
             Err("Failed to set foreground window".into())

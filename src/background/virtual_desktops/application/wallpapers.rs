@@ -18,7 +18,7 @@ use crate::error::{Result, ResultLogExt};
 use crate::get_tokio_handle;
 use crate::state::application::FULL_STATE;
 
-use super::events::VirtualDesktopEvent;
+use crate::virtual_desktops::domain::VirtualDesktopEvent;
 
 /// Tracks the current wallpaper index for each collection
 static COLLECTION_INDICES: LazyLock<Arc<RwLock<HashMap<Uuid, usize>>>> =

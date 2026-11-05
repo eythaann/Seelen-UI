@@ -21,7 +21,6 @@ use crate::{
         notify_widget_statuses_change,
         webview::{self, WidgetWebview},
     },
-    windows_api::event_window::IS_INTERACTIVE_SESSION,
 };
 
 pub enum PodSource {
@@ -297,7 +296,7 @@ impl WidgetPod {
 
             loop {
                 tokio::time::sleep(LIVENESS_PROVE_INTERVAL).await;
-                if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                if !crate::platform::session::is_interactive() {
                     was_suspended = true;
                     continue;
                 }

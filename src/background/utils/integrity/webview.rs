@@ -59,7 +59,7 @@ pub fn show_outdated_dialog(app: &tauri::AppHandle) -> Result<()> {
 
 fn open_webview2_download() -> Result<()> {
     let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
-    crate::windows_api::WindowsApi::execute(url.to_string(), None, None, false)
+    crate::platform::shell::open(url)
 }
 
 /// Try creating a webview window, tauri for some reason could panic stopping the setup hook and for some reason

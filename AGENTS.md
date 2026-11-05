@@ -191,52 +191,83 @@ Handler methods are plain functions, not Tauri commands — no `#[tauri::command
 `async`/return-type plumbing. The wrapper that Tauri actually invokes is generated from the declaration in
 `libs/core/src/handlers/commands.rs` (see below) and calls `Handlers::your_command(...)` for you.
 
-Minimal pattern (application side):
+Minimal pattern (domain side, the OS contract):
 
 ```rust
-use std::sync::LazyLock;
+use crate::error::Result;
 
-pub struct YourManager {
-    // fields
+pub trait YourSystem: Sized + Send + Sync {
+    /// Never fails: no OS calls here, resources are acquired in `init`.
+    fn create() -> Self;
+
+    /// Acquires the OS resources and starts listening, reporting changes through `on_event`.
+    fn init<F>(&mut self, on_event: F) -> Result<()>
+    where
+        F: Fn(YourEvent) + Send + Sync + 'static;
+
+    fn get_data(&self) -> Result<Vec<YourType>>;
 }
 
 #[derive(Debug, Clone)]
 pub enum YourEvent {
     DataChanged,
 }
+```
+
+Minimal pattern (application side, the manager):
+
+```rust
+#[cfg(windows)]
+mod windows;
+
+use std::sync::LazyLock;
+
+use crate::{error::{Result, ResultLogExt}, event_manager};
+use super::domain::{YourEvent, YourSystem};
+
+#[cfg(windows)]
+type Platform = windows::WindowsYour;
+
+pub struct YourManager {
+    platform: Platform,
+}
 
 event_manager!(YourManager, YourEvent);
 
 impl YourManager {
-    fn new() -> Self {
-        Self { /* init */ }
-    }
-
     pub fn instance() -> &'static Self {
         static MANAGER: LazyLock<YourManager> = LazyLock::new(|| {
-            let mut m = YourManager::new();
-            m.init().log_error();
+            let mut m = YourManager::create();
+            m.init().log_error(); // never panic: a failed init leaves a degraded manager
             m
         });
         &MANAGER
     }
 
-    fn init(&mut self) -> Result<()> {
-        self.setup_listeners()?;
-        Ok(())
+    fn create() -> Self {
+        Self { platform: Platform::create() }
     }
 
-    fn setup_listeners(&mut self) -> Result<()> {
-        // Listen to OS signals; emit internal YourEvent::* (not webview events)
-        Ok(())
+    fn init(&mut self) -> Result<()> {
+        // The OS layer never knows about the manager: it reports through the callback.
+        self.platform.init(Self::send)
     }
 
     pub fn get_data(&self) -> Vec<YourType> {
-        // return data
-        vec![]
+        self.platform.get_data().unwrap_or_default()
     }
 }
 ```
+
+`application/windows.rs` implements `YourSystem for WindowsYour`: Win32/WinRT/COM calls and Win32 -> domain conversions
+only. Native resources acquired in `init` are stored as `Option<_>` (queries return `Err` while `None`) and released on
+`Drop`, which must handle a partially initialized struct. Mutable manager state goes in fields behind a `TracedMutex`,
+never the whole manager. Only `windows*` files may use `windows`, `windows_api` or `unsafe`.
+
+OS primitives shared by several modules/widgets (windows of other apps, monitors, processes, paths, startup, global
+hook) live in `src/background/platform/<primitive>/`: an OS-agnostic `mod.rs` that forwards to a `#[cfg(windows)]`
+`windows.rs` (no traits, newtypes over the native handle, Windows-only extras through `Windows*Ext` traits). `platform/`
+must not depend on its consumers.
 
 When adding a new backend feature exposed to the UI, update `libs/core`:
 

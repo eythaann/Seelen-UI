@@ -5,7 +5,7 @@ use tauri::Listener;
 
 use crate::{
     app::{emit_to_webviews, get_app_handle},
-    platform::hook::{HookManager, WinEvent},
+    platform::hook::{HookManager, WindowEvent},
     platform::window::Window,
     state::application::FULL_STATE,
     tauri_handlers::Handlers,
@@ -49,10 +49,7 @@ impl Optimizations {
         });
 
         HookManager::subscribe(|(event, _origin)| {
-            if matches!(
-                event,
-                WinEvent::SystemForeground | WinEvent::SynDebouncedRectChange
-            ) {
+            if matches!(event, WindowEvent::Foregrounded | WindowEvent::RectChanged) {
                 Self::check_for_changes();
             }
         });

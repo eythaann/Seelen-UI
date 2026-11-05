@@ -12,8 +12,28 @@
 
 pub mod cursor;
 pub mod hook;
+pub mod install_id;
 pub mod monitor;
 pub mod paths;
 pub mod process;
+pub mod session;
+pub mod shell;
 pub mod startup;
 pub mod window;
+
+#[cfg(windows)]
+mod windows;
+
+#[cfg(windows)]
+use self::windows as imp;
+
+use crate::error::Result;
+
+/// Starts the OS listeners shared by the whole app: the native message sources, the global hook
+/// and the cursor tracking.
+pub fn start() -> Result<()> {
+    imp::start()?;
+    hook::start();
+    cursor::start_tracking();
+    Ok(())
+}

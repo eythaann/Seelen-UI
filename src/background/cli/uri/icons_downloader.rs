@@ -5,7 +5,7 @@ use seelen_core::{
     state::{Icon, IconPack, IconPackEntry},
 };
 
-use crate::{error::Result, session::application::SessionManager, utils::date_based_hex_id};
+use crate::{error::Result, session::SessionManager, utils::date_based_hex_id};
 
 pub async fn download_remote_icons(pack: &mut IconPack) -> Result<()> {
     if pack.remote_entries.is_empty() || pack.downloaded {

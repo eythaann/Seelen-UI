@@ -4,11 +4,11 @@ use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::HWND_TOP};
 use crate::{
     error::{Result, ResultLogExt},
     platform::{
-        hook::WinEvent,
+        hook::WindowEvent,
         window::{Window, WindowsWindowExt},
     },
     state::application::FULL_STATE,
-    virtual_desktops::{MINIMIZED_BY_WORKSPACES, events::VirtualDesktopEvent},
+    virtual_desktops::{MINIMIZED_BY_WORKSPACES, VdManager, VirtualDesktopEvent},
     widgets::{
         manager::WIDGET_MANAGER,
         window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
@@ -128,9 +128,9 @@ impl WindowManagerV2 {
         }
     }
 
-    pub fn process_win_event(event: WinEvent, window: Window) -> Result<()> {
+    pub fn process_window_event(event: WindowEvent, window: Window) -> Result<()> {
         match event {
-            WinEvent::SystemForeground => {
+            WindowEvent::Foregrounded => {
                 let mut state = WM_STATE.lock();
                 if state.pending_reservation.is_some() {
                     state.cancel_reservation();
@@ -152,14 +152,14 @@ impl WindowManagerV2 {
 
                 Self::bring_layout_to_front(&window, &tiled);
             }
-            WinEvent::SynThrottledForegroundRectChange => {
+            WindowEvent::ForegroundRectChanged => {
                 Self::synthetic_foreground_location_change(&window)?;
             }
-            WinEvent::SystemMoveSizeEnd => {
+            WindowEvent::MoveSizeEnded => {
                 Self::system_move_size_end(&window)?;
                 Self::force_retiling()?;
             }
-            WinEvent::SystemMinimizeStart => {
+            WindowEvent::Minimized => {
                 if MINIMIZED_BY_WORKSPACES.contains_sync(&window.address()) {
                     return Ok(());
                 }
@@ -217,7 +217,7 @@ impl WindowManagerV2 {
                 if state.is_managed(window) {
                     state.set_stack_active_window(window)?;
                 } else if Self::should_be_managed(window) {
-                    let desktop = window.workspace_id()?;
+                    let desktop = VdManager::instance().workspace_of(window)?;
                     state.add_to_layout(window, &desktop);
                     TwmState::send(TwmStateEvent::Changed);
                 }

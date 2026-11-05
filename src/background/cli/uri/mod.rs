@@ -22,7 +22,7 @@ use crate::{
     error::ResultLogExt,
     get_tokio_handle,
     resources::RESOURCES,
-    session::application::SessionManager,
+    session::SessionManager,
     state::application::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     widgets::{show_settings_at, trigger_dialog_backend},

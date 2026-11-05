@@ -7,9 +7,8 @@ use crate::{
     app::get_app_handle,
     error::Result,
     get_tokio_handle,
-    platform::{paths, startup},
+    platform::{paths, shell, startup},
     utils::was_installed_using_msix,
-    windows_api::WindowsApi,
 };
 
 pub struct ServicePipe;
@@ -53,8 +52,7 @@ impl ServicePipe {
         log::debug!("Can not start service via startup entry: {err}");
 
         let service_path = Self::service_path()?;
-        let result =
-            WindowsApi::execute(service_path.to_string_lossy().to_string(), None, None, true);
+        let result = shell::execute(&service_path.to_string_lossy(), None, None, true);
 
         if let Err(err) = result {
             log::error!("First attempt to start service failed: {err}");
@@ -69,7 +67,7 @@ impl ServicePipe {
                 .blocking_show();
 
             if try_again {
-                WindowsApi::execute(service_path.to_string_lossy().to_string(), None, None, true)?;
+                shell::execute(&service_path.to_string_lossy(), None, None, true)?;
             }
             return Err(err);
         }

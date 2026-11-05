@@ -19,9 +19,6 @@ pub trait WaveformSystem: Sized + Send + Sync {
     fn with_loopback<F>(&self, f: F) -> Result<()>
     where
         F: FnOnce(&mut Self::Capture) -> Result<()>;
-
-    /// False while the screen is locked or another user is active.
-    fn is_session_interactive(&self) -> bool;
 }
 
 /// An open loopback capture.

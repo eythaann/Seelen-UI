@@ -77,7 +77,7 @@ impl SystemInfo {
         std::thread::spawn(|| {
             loop {
                 let manager = SystemInfo::instance();
-                if !manager.platform.is_session_interactive() {
+                if !crate::platform::session::is_interactive() {
                     std::thread::sleep(IDLE_INTERVAL);
                     continue;
                 }

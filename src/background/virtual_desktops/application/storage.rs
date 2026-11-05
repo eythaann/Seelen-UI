@@ -1,5 +1,4 @@
 use std::{
-    collections::HashMap,
     io::Write,
     sync::{
         LazyLock,
@@ -13,34 +12,12 @@ use crate::{
         constants::SEELEN_COMMON,
         lock_free::{SyncHashMap, SyncVec},
     },
-    virtual_desktops::VdManager,
+    virtual_desktops::domain::get_indexes,
 };
-use seelen_core::{
-    state::{VirtualDesktopMonitor, VirtualDesktops, WorkspaceId},
-    system_state::MonitorId,
-};
+use seelen_core::state::VirtualDesktops;
 use slu_utils::{Debounce, debounce};
 
-pub fn get_indexes(
-    monitors: &HashMap<MonitorId, VirtualDesktopMonitor>,
-) -> (HashMap<WorkspaceId, MonitorId>, HashMap<isize, WorkspaceId>) {
-    let mut workspace_index = HashMap::new();
-    let mut window_index = HashMap::new();
-
-    for (mid, m) in monitors {
-        for row in m.workspaces.rows() {
-            for space in row {
-                workspace_index.insert(space.id.clone(), mid.clone());
-
-                for window in &space.windows {
-                    window_index.insert(*window, space.id.clone());
-                }
-            }
-        }
-    }
-
-    (workspace_index, window_index)
-}
+use super::VdManager;
 
 impl From<VirtualDesktops> for VdManager {
     fn from(value: VirtualDesktops) -> Self {

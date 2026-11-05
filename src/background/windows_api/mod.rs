@@ -132,7 +132,7 @@ use windows::{
 use crate::{
     error::{Result, WindowsResultExt},
     platform::{
-        hook::{HookManager, WinEvent},
+        hook::{HookManager, WindowEvent},
         window::Window,
     },
 };
@@ -478,7 +478,7 @@ impl WindowsApi {
 
         // event sometimes is not emitted, so we manually emit it, this will cause 2 foreground events
         // if original was recieved, btw having it twice is better than nothing
-        HookManager::event_tx().send((WinEvent::SystemForeground, window))?;
+        HookManager::event_tx().send((WindowEvent::Foregrounded, window))?;
         Ok(())
     }
 

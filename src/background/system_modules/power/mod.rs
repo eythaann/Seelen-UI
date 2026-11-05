@@ -11,11 +11,9 @@ use seelen_core::{
 use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
-    state::application::FULL_STATE,
-    widgets::manager::WIDGET_MANAGER,
 };
 
-use self::{application::PowerManager, domain::PowerEvent};
+pub use self::{application::PowerManager, domain::PowerEvent};
 
 /// Manager instance, bridging its events to the webviews on first access.
 fn get_manager() -> &'static PowerManager {
@@ -29,12 +27,6 @@ fn get_manager() -> &'static PowerManager {
                 emit_to_webviews(SeelenEvent::BatteriesStatus, batteries);
             }
             PowerEvent::ModeChanged { mode } => {
-                if FULL_STATE.load().settings.suspend_on_game_mode {
-                    match mode {
-                        PowerMode::GameMode => WIDGET_MANAGER.suspend_all(),
-                        _ => WIDGET_MANAGER.resume_all().log_error(),
-                    }
-                }
                 emit_to_webviews(SeelenEvent::PowerMode, mode);
             }
         });

@@ -22,6 +22,7 @@ mod telemetry;
 mod utils;
 mod virtual_desktops;
 mod widgets;
+#[cfg(windows)]
 mod windows_api;
 
 #[macro_use]
@@ -34,7 +35,7 @@ use app::SeelenUI;
 use cli::{SelfPipe, ServicePipe, handle_console_client};
 use error::Result;
 use logger::SeelenLogger;
-use session::application::SessionManager;
+use session::SessionManager;
 use slu_ipc::messages::SvcAction;
 use tauri_handlers::register_invoke_handler;
 use tauri_plugins::register_plugins;
@@ -96,6 +97,7 @@ async fn main() -> std::process::ExitCode {
     app_builder = register_invoke_handler(app_builder);
 
     // if no custom runtime is present, the app will use the installed with the system
+    #[cfg(windows)]
     if let Some(path) = crate::utils::get_fixed_runtime_path() {
         unsafe { std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path) };
     }

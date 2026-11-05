@@ -23,9 +23,6 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
     /// Captures the content of the window, without its frame shadow. `None` when it can't
     /// be captured now (minimized, or not accessible from this process).
     fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>>;
-
-    /// False while the screen is locked or another user is active.
-    fn is_session_interactive(&self) -> bool;
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -1,4 +1,4 @@
-use std::{sync::atomic::Ordering, time::Duration};
+use std::time::Duration;
 
 use seelen_core::system_state::{ImeState, KeyboardLayout, SystemLanguage};
 use windows::{
@@ -33,9 +33,7 @@ use crate::{
     error::Result,
     system_modules::languages::domain::{LanguagesSysEvent, LanguagesSystem},
     utils::spawn_named_thread,
-    windows_api::{
-        Com, WindowsApi, event_window::IS_INTERACTIVE_SESSION, string_utils::WindowsString,
-    },
+    windows_api::{Com, WindowsApi, string_utils::WindowsString},
 };
 
 /// How often the active input profile and IME state are checked, the OS doesn't notify them.
@@ -69,7 +67,7 @@ impl LanguagesSystem for WindowsLanguages {
 
             loop {
                 std::thread::sleep(POLL_INTERVAL);
-                if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+                if !crate::platform::session::is_interactive() {
                     continue;
                 }
 

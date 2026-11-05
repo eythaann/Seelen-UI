@@ -78,7 +78,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             if !state.is_managed(&foreground) {
                 return Ok(());
             }
-            let workspace_id = foreground.workspace_id()?;
+            let workspace_id = VdManager::instance().workspace_of(&foreground)?;
             if state.is_tiled(&foreground) {
                 state.remove(&foreground);
                 state.add_to_floating(&foreground, &workspace_id);

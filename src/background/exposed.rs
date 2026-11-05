@@ -1,23 +1,21 @@
 use std::{collections::HashMap, path::PathBuf};
 
-use seelen_core::system_state::{RelaunchArguments, StartMenuLayout, StartMenuLayoutItem};
+use seelen_core::system_state::RelaunchArguments;
 
 use slu_ipc::{ServiceIpc, messages::SvcAction};
 
 use crate::{
     app::{SeelenUI, get_app_handle},
     error::Result,
+    platform::shell,
     utils::{
         self,
-        constants::SEELEN_COMMON,
         icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
-        pwsh::PwshScript,
     },
     widgets::{
         permissions::{WidgetPerm, request_widget_permission},
         popups::shortcut_registering::{abort_shortcut_registering, begin_shortcut_registering},
     },
-    windows_api::{WindowsApi, string_utils::WindowsString},
 };
 
 impl crate::tauri_handlers::Handlers {
@@ -34,15 +32,11 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn open_file(webview: tauri::WebviewWindow, path: String) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::OpenFile)?;
-        WindowsApi::execute(path, None, None, false)
+        shell::open(&path)
     }
 
     pub fn select_file_on_explorer(path: PathBuf) -> Result<()> {
-        let path = path.to_string_lossy().to_string();
-        std::process::Command::new(SEELEN_COMMON.system_dir().join("explorer.exe"))
-            .args(["/select,", &path])
-            .spawn()?;
-        Ok(())
+        shell::reveal(&path)
     }
 
     pub fn run(
@@ -54,7 +48,7 @@ impl crate::tauri_handlers::Handlers {
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::Run)?;
         let args = args.map(|args| args.to_string());
-        WindowsApi::execute(program, args, working_dir, elevated)
+        shell::execute(&program, args.as_deref(), working_dir.as_deref(), elevated)
     }
 
     pub fn app_exit() {
@@ -112,28 +106,6 @@ impl crate::tauri_handlers::Handlers {
         get_app_handle().restart();
         #[allow(unreachable_code)]
         Ok(())
-    }
-
-    pub async fn get_native_start_menu() -> Result<StartMenuLayout> {
-        let output_path = SEELEN_COMMON.app_cache_dir().join("start-layout.json");
-        let output_path_str = output_path.to_string_lossy().to_string();
-
-        let script = PwshScript::new(format!("Export-StartLayout -Path '{}'", output_path_str))
-            .inline_command();
-        script.execute().await?;
-
-        let file = std::fs::File::open(&output_path)?;
-        let mut layout: StartMenuLayout = serde_json::from_reader(file)?;
-
-        for item in &mut layout.pinned_list {
-            if let StartMenuLayoutItem::DesktopAppLink(path) = item {
-                let source = WindowsString::from_str(path);
-                let expanded = WindowsApi::resolve_environment_variables(&source)?;
-                *item = StartMenuLayoutItem::DesktopAppLink(expanded.to_string());
-            }
-        }
-
-        Ok(layout)
     }
 
     /// Resolves when the user finishes: the shortcut, or `None` if cancelled, no keys were

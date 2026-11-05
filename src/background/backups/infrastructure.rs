@@ -2,7 +2,7 @@ use std::sync::Once;
 
 use seelen_core::system_state::BackupStatus;
 
-use crate::session::application::{SessionManager, SessionManagerEvent};
+use crate::session::{SessionManager, SessionManagerEvent};
 
 use super::application::run_cloud_sync;
 

@@ -9,7 +9,7 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode},
 };
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
-use seelen_core::system_state::StartMenuItem;
+use seelen_core::system_state::{StartMenuItem, StartMenuLayout, StartMenuLayoutItem};
 use windows::{
     ApplicationModel::{Core::AppListEntry, Package, PackageCatalog},
     Foundation::TypedEventHandler,
@@ -23,7 +23,8 @@ use crate::{
     system_modules::start::domain::{
         ShortcutEntry, ShortcutIdentity, StartMenuSysEvent, StartMenuSystem,
     },
-    windows_api::{Com, WindowsApi},
+    utils::{constants::SEELEN_COMMON, pwsh::PwshScript},
+    windows_api::{Com, WindowsApi, string_utils::WindowsString},
 };
 
 const FILE_WATCHER_DEBOUNCE: Duration = Duration::from_millis(500);
@@ -86,6 +87,30 @@ impl StartMenuSystem for WindowsStartMenu {
             .into_par_iter()
             .flat_map_iter(|package| process_package(&start_screen, &package))
             .collect())
+    }
+
+    /// `Export-StartLayout` writes the pinned items to a json file, with the paths of the
+    /// desktop apps unexpanded (`%APPDATA%\...`).
+    async fn native_layout(&self) -> Result<StartMenuLayout> {
+        let output_path = SEELEN_COMMON.app_cache_dir().join("start-layout.json");
+        let output_path_str = output_path.to_string_lossy().to_string();
+
+        let script = PwshScript::new(format!("Export-StartLayout -Path '{}'", output_path_str))
+            .inline_command();
+        script.execute().await?;
+
+        let file = std::fs::File::open(&output_path)?;
+        let mut layout: StartMenuLayout = serde_json::from_reader(file)?;
+
+        for item in &mut layout.pinned_list {
+            if let StartMenuLayoutItem::DesktopAppLink(path) = item {
+                let source = WindowsString::from_str(path);
+                let expanded = WindowsApi::resolve_environment_variables(&source)?;
+                *item = StartMenuLayoutItem::DesktopAppLink(expanded.to_string());
+            }
+        }
+
+        Ok(layout)
     }
 }
 

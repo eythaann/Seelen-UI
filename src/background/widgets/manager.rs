@@ -6,13 +6,17 @@ use std::sync::{
 use seelen_core::{
     resource::WidgetId,
     state::{WidgetLoader, WidgetStatus},
+    system_state::PowerMode,
 };
 
 use crate::{
     error::{Result, ResultLogExt},
     resources::RESOURCES,
     state::application::FULL_STATE,
-    system_modules::monitors::MonitorManager,
+    system_modules::{
+        monitors::MonitorManager,
+        power::{PowerEvent, PowerManager},
+    },
     utils::lock_free::SyncHashMap,
     widgets::{WidgetWebviewLabel, loader::WidgetDeployment},
 };
@@ -31,6 +35,20 @@ impl WidgetManager {
             WIDGET_MANAGER.reconcile().log_error();
         });
         MonitorManager::set_event_handler_priority(&sub_id, 1);
+
+        PowerManager::subscribe(|event| {
+            if let PowerEvent::ModeChanged { mode } = event
+                && FULL_STATE.load().settings.suspend_on_game_mode
+            {
+                match mode {
+                    PowerMode::GameMode => WIDGET_MANAGER.suspend_all(),
+                    _ => WIDGET_MANAGER.resume_all().log_error(),
+                }
+            }
+        });
+        // events are only emitted once the manager exists
+        PowerManager::instance();
+
         Self {
             deployments: SyncHashMap::new(),
         }

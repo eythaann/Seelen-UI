@@ -13,6 +13,7 @@ use windows::Win32::Foundation::HWND;
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
+    platform::shell,
     state::application::FULL_STATE,
     utils::constants::SEELEN_COMMON,
     windows_api::WindowsApi,
@@ -105,7 +106,7 @@ impl WidgetWebview {
             // External links are opened on the default handler instead.
             .on_new_window(|url, _features| {
                 if matches!(url.scheme(), "http" | "https" | "mailto" | "tel") {
-                    WindowsApi::execute(url.to_string(), None, None, false).log_error();
+                    shell::open(url.as_str()).log_error();
                 }
                 tauri::webview::NewWindowResponse::Deny
             })

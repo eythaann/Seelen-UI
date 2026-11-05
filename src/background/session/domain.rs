@@ -2,6 +2,19 @@ use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD};
 use seelen_core::system_state::SeelenSession;
 use serde::Deserialize;
 
+use crate::error::Result;
+
+/// OS contract: secure storage of the auth tokens (Credential Manager, Keychain, Secret Service...).
+pub trait CredentialStore {
+    /// Stores `value` under `key` inside `resource`, replacing any previous one.
+    fn store(resource: &str, key: &str, value: &str) -> Result<()>;
+
+    fn read(resource: &str, key: &str) -> Result<String>;
+
+    /// Best-effort: missing entries are ignored.
+    fn delete(resource: &str, key: &str) -> Result<()>;
+}
+
 /// Full JWT payload from the Seelen auth service.
 /// Internal only — never serialized to the frontend.
 #[derive(Debug, Deserialize)]
@@ -43,7 +56,7 @@ impl JwtPayload {
 }
 
 /// Decodes the payload segment of a JWT without verifying the signature.
-pub fn decode_jwt_payload(token: &str) -> crate::error::Result<JwtPayload> {
+pub fn decode_jwt_payload(token: &str) -> Result<JwtPayload> {
     let mut parts = token.splitn(3, '.');
     parts.next(); // header
     let payload_b64 = parts.next().ok_or("Invalid JWT: missing payload segment")?;

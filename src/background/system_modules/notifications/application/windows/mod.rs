@@ -26,7 +26,6 @@ use crate::{
     utils::{icon_extractor::request_icon_extraction_from_umid, spawn_named_thread},
     windows_api::{
         WindowsApi,
-        event_window::IS_INTERACTIVE_SESSION,
         types::DateTimeExt,
         undocumented::{
             QUIET_HOURS_PROFILE_ALARMS_ONLY, QUIET_HOURS_PROFILE_PRIORITY_ONLY,
@@ -264,7 +263,7 @@ fn spawn_polling(on_event: EventCallback) -> Result<Arc<AtomicBool>> {
         while flag.load(Ordering::Acquire) {
             std::thread::sleep(POLL_INTERVAL);
             // Pause when session is not interactive to reduce CPU usage
-            if !IS_INTERACTIVE_SESSION.load(Ordering::Acquire) {
+            if !crate::platform::session::is_interactive() {
                 continue;
             }
             let Some(current) = UserNotificationListener::Current()

@@ -16,11 +16,10 @@ use std::{
 
 use seelen_core::{
     rect::Rect,
-    state::WorkspaceId,
     system_state::{FocusedApp, MonitorId, UserAppWindow},
 };
 
-use crate::{error::Result, utils::lock_free::TracedMutex, virtual_desktops::VdManager};
+use crate::{error::Result, utils::lock_free::TracedMutex};
 
 use super::{monitor::Monitor, process::Process};
 
@@ -111,13 +110,6 @@ impl Window {
         self.monitor()
             .stable_id()
             .unwrap_or_else(|_| MonitorId("null".to_string()))
-    }
-
-    pub fn workspace_id(&self) -> Result<WorkspaceId> {
-        let workspace_id = VdManager::instance()
-            .get_workspace_of_window(self.address())
-            .ok_or("This window is not binded to a seelen ui workspace")?;
-        Ok(workspace_id)
     }
 
     pub fn snapshot(&self) -> UserAppWindow {

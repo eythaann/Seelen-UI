@@ -1,7 +1,7 @@
 pub use slu_ipc::commands::WallpaperCli;
 use slu_ipc::commands::WallpaperCommand;
 
-use crate::{error::Result, virtual_desktops::wallpapers::WorkspaceWallpapersManager};
+use crate::{error::Result, virtual_desktops::WorkspaceWallpapersManager};
 
 pub fn process(cmd: WallpaperCli) -> Result<()> {
     match cmd.command {

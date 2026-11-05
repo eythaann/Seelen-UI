@@ -11,6 +11,7 @@ mod power;
 mod shutdown;
 mod string_utils;
 mod task_scheduler;
+#[cfg(windows)]
 mod windows_api;
 
 use cli::handle_console_client;

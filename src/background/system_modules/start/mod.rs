@@ -3,9 +3,12 @@ mod domain;
 
 use std::sync::{Arc, Once};
 
-use seelen_core::{handlers::SeelenEvent, system_state::StartMenuItem};
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{StartMenuItem, StartMenuLayout},
+};
 
-use crate::app::emit_to_webviews;
+use crate::{app::emit_to_webviews, error::Result};
 
 pub use self::{application::StartMenuManager, domain::StartMenuEvent};
 
@@ -28,5 +31,9 @@ fn get_manager() -> &'static StartMenuManager {
 impl crate::tauri_handlers::Handlers {
     pub fn get_start_menu_items() -> Vec<Arc<StartMenuItem>> {
         get_manager().get_all()
+    }
+
+    pub async fn get_native_start_menu() -> Result<StartMenuLayout> {
+        get_manager().native_layout().await
     }
 }

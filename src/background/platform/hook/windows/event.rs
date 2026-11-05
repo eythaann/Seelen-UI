@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::sync::{LazyLock, mpsc};
 use std::time::{Duration, Instant};
 
-use crate::platform::hook::HookManager;
+use crate::platform::hook::{HookManager, WindowEvent};
 use crate::platform::window::Window;
 use windows::Win32::UI::WindowsAndMessaging::*;
 
@@ -96,10 +96,30 @@ pub enum WinEvent {
     UiaPropIdStart = EVENT_UIA_PROPID_START,
     /// Fallback for unknown/missing Win32 events
     Unknown(u32),
-    // ================== Synthetic events ==================
-    /// intended to reduce the amount of events processed by other listeners
-    SynThrottledForegroundRectChange,
-    SynDebouncedRectChange,
+}
+
+impl WinEvent {
+    /// The OS-agnostic event this native one means, if anyone consumes it.
+    pub fn to_window_event(self) -> Option<WindowEvent> {
+        let event = match self {
+            Self::ObjectCreate => WindowEvent::Created,
+            Self::ObjectDestroy => WindowEvent::Destroyed,
+            Self::ObjectShow => WindowEvent::Shown,
+            Self::ObjectHide => WindowEvent::Hidden,
+            Self::ObjectUncloaked => WindowEvent::Uncloaked,
+            Self::SystemForeground => WindowEvent::Foregrounded,
+            Self::ObjectFocus => WindowEvent::Focused,
+            Self::ObjectNameChange => WindowEvent::TitleChanged,
+            Self::ObjectParentChange => WindowEvent::ParentChanged,
+            Self::ObjectStateChange => WindowEvent::StateChanged,
+            Self::SystemMinimizeStart => WindowEvent::Minimized,
+            Self::SystemMinimizeEnd => WindowEvent::Unminimized,
+            Self::SystemMoveSizeStart => WindowEvent::MoveSizeStarted,
+            Self::SystemMoveSizeEnd => WindowEvent::MoveSizeEnded,
+            _ => return None,
+        };
+        Some(event)
+    }
 }
 
 impl From<u32> for WinEvent {
@@ -201,7 +221,7 @@ static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<isize>> = LazyLo
         |addr| {
             let window = Window::from(addr);
             if window.is_focused() {
-                HookManager::send((WinEvent::SynThrottledForegroundRectChange, window));
+                HookManager::send((WindowEvent::ForegroundRectChanged, window));
             }
         },
         std::time::Duration::from_millis(100),
@@ -274,7 +294,7 @@ impl PerWindowDebounce {
 static LAZY_LOCATION_CHANGE_DEBOUNCE: LazyLock<PerWindowDebounce> = LazyLock::new(|| {
     PerWindowDebounce::new(Duration::from_millis(100), |addr| {
         let window = Window::from(addr);
-        HookManager::send((WinEvent::SynDebouncedRectChange, window));
+        HookManager::send((WindowEvent::RectChanged, window));
     })
 });
 

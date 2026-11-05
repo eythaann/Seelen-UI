@@ -1,4 +1,4 @@
-use std::sync::atomic::{AtomicBool, AtomicIsize, AtomicU32, Ordering};
+use std::sync::atomic::{AtomicIsize, AtomicU32, Ordering};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     System::{
@@ -24,6 +24,7 @@ use windows::Win32::{
 use crate::{
     error::{Result, ResultLogExt, WindowsResultExt},
     event_manager,
+    platform::session,
     utils::spawn_named_thread,
     widgets::manager::WIDGET_MANAGER,
 };
@@ -45,11 +46,6 @@ const CSIDL_BITBUCKET: i32 = 0x000a;
 const SHCNRF_SHELL_LEVEL: SHCNRF_SOURCE = SHCNRF_SOURCE(0x0002);
 /// SHCNE_ALLEVENTS
 const SHCNE_ALL_EVENTS: i32 = 0x7FFFFFFF_u32 as i32;
-
-/// Global flag to track if the current session is interactive (not locked/switched).
-/// Used to pause background threads and event processing when the session is not interactive.
-pub static IS_INTERACTIVE_SESSION: AtomicBool = AtomicBool::new(true);
-pub static IS_LOCKED: AtomicBool = AtomicBool::new(false);
 
 pub struct BgWindowProc {}
 
@@ -140,12 +136,12 @@ impl BgWindowProc {
     fn refresh_interactive_state() {
         let Some(active_session) = slu_ipc::app::current_interactive_session_id() else {
             // no active session, assume lock screen
-            IS_INTERACTIVE_SESSION.store(false, Ordering::Release);
+            session::set_interactive(false);
             return;
         };
 
         let my_session = slu_ipc::app::current_session_id().unwrap_or(u32::MAX);
-        let is_interactive = active_session == my_session && !IS_LOCKED.load(Ordering::Acquire);
+        let is_interactive = active_session == my_session && !session::is_locked();
 
         log::info!(
             "Active session: {}, my session: {}, is interactive: {}",
@@ -154,7 +150,7 @@ impl BgWindowProc {
             is_interactive
         );
 
-        let previous = IS_INTERACTIVE_SESSION.swap(is_interactive, Ordering::AcqRel);
+        let previous = session::set_interactive(is_interactive);
         if !previous && is_interactive {
             // reload all pods webviews on session resume
             std::thread::spawn(move || {
@@ -193,14 +189,14 @@ impl BgWindowProc {
                         if l_param.0 as u32
                             == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) =>
                     {
-                        IS_LOCKED.store(true, Ordering::Release);
+                        session::set_locked(true);
                         log::info!("Session locked");
                     }
                     WTS_SESSION_UNLOCK
                         if l_param.0 as u32
                             == slu_ipc::app::current_session_id().unwrap_or(u32::MAX) =>
                     {
-                        IS_LOCKED.store(false, Ordering::Release);
+                        session::set_locked(false);
                         log::info!("Session unlocked");
                     }
                     _ => {}

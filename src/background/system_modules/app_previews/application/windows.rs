@@ -1,16 +1,14 @@
-use std::sync::atomic::Ordering;
-
 use image::RgbaImage;
 use win_screenshot::prelude::capture_window;
 
 use crate::{
     error::Result,
     platform::{
-        hook::{HookManager, WinEvent},
+        hook::{HookManager, WindowEvent},
         window::{Window, WindowsWindowExt},
     },
     system_modules::app_previews::domain::{AppPreviewsSystem, PreviewsSysEvent},
-    windows_api::{WindowsApi, event_window::IS_INTERACTIVE_SESSION},
+    windows_api::WindowsApi,
 };
 
 /// Stateless: the hook subscriptions last for the whole app lifetime.
@@ -28,10 +26,10 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         HookManager::subscribe(move |(event, window)| {
             let hwnd = window.address();
             match event {
-                WinEvent::ObjectNameChange | WinEvent::SynDebouncedRectChange => {
+                WindowEvent::TitleChanged | WindowEvent::RectChanged => {
                     on_event(PreviewsSysEvent::WindowChanged { hwnd })
                 }
-                WinEvent::SystemMinimizeEnd => on_event(PreviewsSysEvent::WindowRestored { hwnd }),
+                WindowEvent::Unminimized => on_event(PreviewsSysEvent::WindowRestored { hwnd }),
                 _ => {}
             }
         });
@@ -61,9 +59,5 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         Ok(Some(
             image::imageops::crop_imm(&raw, crop_x, crop_y, crop_w, crop_h).to_image(),
         ))
-    }
-
-    fn is_session_interactive(&self) -> bool {
-        IS_INTERACTIVE_SESSION.load(Ordering::Acquire)
     }
 }
