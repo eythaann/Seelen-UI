@@ -204,6 +204,7 @@ impl WindowAnimation {
         }
 
         let class = get_class(hwnd)?;
+        let mode = effective_mode(mode, &class);
         let mut data = WinDataForAnimation {
             hwnd,
             from: initial_rect,
@@ -648,4 +649,49 @@ impl Default for AnimationOrchestrator {
 
 fn lock<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
     mutex.lock().unwrap_or_else(PoisonError::into_inner)
+}
+
+/// Mode actually used for a window of `class` when `requested` is asked for.
+///
+/// Firefox is never animated buffered: when its startup session restore completes it checks
+/// whether all of its windows are cloaked and, if they are, assumes they live on another virtual
+/// desktop and opens a new window (Mozilla bug 1812489). The first placement of its restored
+/// window lands right in that check, so the buffered cloak made every launch open a second, blank
+/// window. Realtime never cloaks the window.
+fn effective_mode(requested: AnimationMode, class: &str) -> AnimationMode {
+    if class == "MozillaWindowClass" {
+        AnimationMode::Realtime
+    } else {
+        requested
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn firefox_is_never_buffered() {
+        assert_eq!(
+            effective_mode(AnimationMode::Buffered, "MozillaWindowClass"),
+            AnimationMode::Realtime
+        );
+        assert_eq!(
+            effective_mode(AnimationMode::Realtime, "MozillaWindowClass"),
+            AnimationMode::Realtime
+        );
+    }
+
+    #[test]
+    fn other_windows_keep_the_requested_mode() {
+        for class in [
+            "Chrome_WidgetWin_1",
+            "CabinetWClass",
+            "CASCADIA_HOSTING_WINDOW_CLASS",
+        ] {
+            for mode in [AnimationMode::Buffered, AnimationMode::Realtime] {
+                assert_eq!(effective_mode(mode, class), mode);
+            }
+        }
+    }
 }
