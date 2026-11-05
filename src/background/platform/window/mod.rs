@@ -20,10 +20,7 @@ use seelen_core::{
     system_state::{FocusedApp, MonitorId, UserAppWindow},
 };
 
-use crate::{
-    error::Result, modules::apps::application::is_interactable_window,
-    utils::lock_free::TracedMutex, virtual_desktops::VdManager,
-};
+use crate::{error::Result, utils::lock_free::TracedMutex, virtual_desktops::VdManager};
 
 use super::{monitor::Monitor, process::Process};
 
@@ -170,7 +167,7 @@ impl Window {
 
     /// read inner called doc for more info
     pub fn is_interactable_and_not_hidden(&self) -> bool {
-        is_interactable_window(self)
+        imp::is_interactable_window(self)
     }
 
     pub fn set_state(&self, state: WindowState) -> Result<()> {

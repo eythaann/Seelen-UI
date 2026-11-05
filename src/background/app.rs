@@ -10,14 +10,13 @@ use crate::{
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     migrations::Migrations,
-    modules::{
-        clipboard::infrastructure::init_clipboard_manager, start::application::StartMenuManager,
-        user::infrastructure::reemit_user,
-    },
     platform::{cursor, hook, startup},
     resources::RESOURCES,
     session::infrastructure::reemit_session,
     state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
+    system_modules::{
+        clipboard::init_clipboard_manager, start::StartMenuManager, user::reemit_user,
+    },
     utils::discord::{start_discord_rpc, update_discord_rpc},
     widgets::{
         manager::WIDGET_MANAGER, popups::shortcut_conflicts::show_shortcut_conflict_popup,

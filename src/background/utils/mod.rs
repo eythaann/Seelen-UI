@@ -1,5 +1,7 @@
+pub mod bond;
 pub mod constants;
 pub mod discord;
+pub mod event_manager;
 pub mod icon_extractor;
 pub mod integrity;
 pub mod lock_free;

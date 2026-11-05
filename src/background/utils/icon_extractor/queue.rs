@@ -9,7 +9,7 @@ use slu_utils::{Debounce, debounce};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    modules::start::application::{StartMenuEvent, StartMenuManager},
+    system_modules::start::{StartMenuEvent, StartMenuManager},
     utils::{constants::SEELEN_COMMON, lock_free::SyncVec},
     windows_api::types::AppUserModelId,
 };

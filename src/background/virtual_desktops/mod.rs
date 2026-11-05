@@ -13,10 +13,10 @@ use seelen_core::system_state::MonitorId;
 
 use crate::error::{Result, ResultLogExt};
 use crate::event_manager;
-use crate::modules::apps::application::{UserAppWinEvent, UserAppsManager};
-use crate::modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::platform::hook::{HookManager, WinEvent};
 use crate::platform::window::{Window, WindowState};
+use crate::system_modules::apps::{UserAppWinEvent, UserAppsManager};
+use crate::system_modules::monitors::{MonitorManager, MonitorManagerEvent};
 use crate::utils::lock_free::{SyncHashMap, SyncVec};
 use crate::virtual_desktops::wallpapers::WorkspaceWallpapersManager;
 
@@ -131,14 +131,14 @@ impl VdManager {
         }
 
         MonitorManager::subscribe(|e| match e {
-            MonitorManagerEvent::ViewAdded(monitor_id) => {
+            MonitorManagerEvent::ViewAdded { id: monitor_id } => {
                 Self::instance().monitors.get_or_insert(
                     monitor_id,
                     VirtualDesktopMonitor::create,
                     |_| {},
                 );
             }
-            MonitorManagerEvent::ViewRemoved(_monitor_id) => {
+            MonitorManagerEvent::ViewRemoved { .. } => {
                 // Todo: move windows to another monitor, this is probably already done by windows events btw.
                 // we don't remove the workspaces items to persist monitor workspaces configuration.
                 // Self::instance().monitors.remove(&monitor_id);

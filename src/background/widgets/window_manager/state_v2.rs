@@ -18,11 +18,11 @@ use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     event_manager,
-    modules::apps::application::UserAppsManager,
     platform::hook::HookManager,
     platform::monitor::Monitor,
     platform::window::{Window, WindowState, WindowsWindowExt},
     state::application::FULL_STATE,
+    system_modules::apps::UserAppsManager,
     utils::lock_free::TracedMutex,
     virtual_desktops::VdManager,
     widgets::window_manager::{

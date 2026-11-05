@@ -35,9 +35,10 @@ use windows_core::Owned;
 
 use crate::{
     error::Result,
-    modules::{apps::application::msix::MsixAppsManager, start::application::StartMenuManager},
     resources::RESOURCES,
+    system_modules::start::StartMenuManager,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
+    windows_api::msix::MsixAppsManager,
     windows_api::{WindowsApi, string_utils::WindowsString, types::AppUserModelId},
 };
 

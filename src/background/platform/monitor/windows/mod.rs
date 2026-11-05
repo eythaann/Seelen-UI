@@ -15,7 +15,7 @@ use windows::Win32::{
 
 use crate::{
     error::Result,
-    modules::system_settings::application::SystemSettings,
+    system_modules::system_settings::SystemSettings,
     windows_api::{MonitorEnumerator, WindowsApi, string_utils::WindowsString},
 };
 

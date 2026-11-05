@@ -11,9 +11,9 @@ use uuid::Uuid;
 use crate::{
     app::get_app_handle,
     get_tokio_handle,
-    modules::monitors::MonitorManager,
     resources::RESOURCES,
     state::application::FULL_STATE,
+    system_modules::monitors::MonitorManager,
     utils::lock_free::SyncHashMap,
     widgets::{
         WidgetWebviewLabel,

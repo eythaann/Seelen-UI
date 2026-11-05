@@ -8,7 +8,8 @@ use slu_ipc::{
 use crate::{
     cli::{process_app_command, uri::process_uri},
     error::{Result, ResultLogExt},
-    modules::{apps::application::WindowBadges, system_tray::SystemTrayManager},
+    system_modules::system_tray::SystemTrayManager,
+    windows_api::window_badges::WindowBadges,
 };
 
 pub struct SelfPipe;

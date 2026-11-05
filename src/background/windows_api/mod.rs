@@ -4,9 +4,14 @@ mod devices;
 pub mod event_window;
 pub mod input;
 mod iterator;
+pub mod msix;
 pub mod string_utils;
 pub mod types;
 pub mod undocumented;
+pub mod window_badges;
+// partially consumed (app badges), the rest will be used by a future refactor of toasts
+#[allow(dead_code)]
+pub mod wpn_service;
 
 pub use app_bar::*;
 pub use com::*;

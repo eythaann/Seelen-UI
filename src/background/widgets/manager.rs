@@ -10,9 +10,9 @@ use seelen_core::{
 
 use crate::{
     error::{Result, ResultLogExt},
-    modules::monitors::MonitorManager,
     resources::RESOURCES,
     state::application::FULL_STATE,
+    system_modules::monitors::MonitorManager,
     utils::lock_free::SyncHashMap,
     widgets::{WidgetWebviewLabel, loader::WidgetDeployment},
 };

@@ -1,16 +1,13 @@
 //! Serializable snapshots of a window, built from its Win32 data (umid, relaunch info, badges).
 
+use crate::system_modules::start::StartMenuManager;
 use seelen_core::system_state::{
     FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
 };
 
 use crate::{
-    modules::{
-        apps::application::WindowBadges, notifications::wpn_service::WpnService,
-        start::application::StartMenuManager,
-    },
-    utils::get_parts_of_inline_command,
-    windows_api::types::AppUserModelId,
+    utils::get_parts_of_inline_command, windows_api::types::AppUserModelId,
+    windows_api::window_badges::WindowBadges, windows_api::wpn_service::WpnService,
 };
 
 use super::NativeWindow;

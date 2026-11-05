@@ -1,4 +1,7 @@
+mod interactable;
 mod snapshot;
+
+pub(super) use interactable::is_interactable_window;
 
 use std::{
     fmt::{Debug, Display},
@@ -25,12 +28,12 @@ use windows::{
 use crate::{
     cli::ServicePipe,
     error::Result,
-    modules::start::application::StartMenuManager,
     platform::{
         hook::{HookManager, WinEvent},
         monitor::Monitor,
         process::{Process, WindowsProcessExt},
     },
+    system_modules::start::StartMenuManager,
     windows_api::{WindowEnumerator, WindowsApi, types::AppUserModelId},
 };
 

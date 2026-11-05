@@ -41,7 +41,8 @@ Rust mutexes:
 
 Backend architecture rules:
 
-- System modules in `src/background/modules/` MUST follow the modern pattern (lazy init + lazy tauri registration).
+- System modules in `src/background/system_modules/` MUST follow the OS-agnostic pattern documented in
+  `src/background/system_modules/mod.rs` (lazy init + lazy tauri registration, OS code only behind the module trait).
 - Business logic must NOT call `emit_to_webviews` directly.
 - Never write `#[tauri::command]` by hand. Commands are declared once in `libs/core/src/handlers/commands.rs`
   (`slu_commands_declaration!`) and their Tauri wrappers are generated at compile time; implement the handler body as a
@@ -136,20 +137,25 @@ Internationalization:
 
 ## Backend: System Modules (Modern Pattern)
 
-All modules in `src/background/modules/` follow this pattern:
+All modules in `src/background/system_modules/` follow this pattern (full rules in
+`src/background/system_modules/mod.rs`, reference module: `focus_assist`):
 
-- `application.rs` owns the singleton manager and emits internal events.
-- `infrastructure.rs` (or `handlers.rs`) owns Tauri commands and bridges internal events -> webviews.
+- `mod.rs` is the infrastructure: Tauri handlers + bridge of internal events -> webviews. OS-agnostic.
+- `domain.rs` holds pure types and the `<Module>System` trait (the OS contract).
+- `application/mod.rs` owns the singleton manager and emits internal events; it only talks to the OS through the trait
+  (`type Platform = windows::Windows<Module>`).
+- `application/windows.rs` (or `windows/`) implements the trait; it owns the OS resources and releases them on `Drop`.
 - Tauri event registration happens lazily on first command access (via `Once`).
 
-Suggested layout:
+Layout:
 
 ```
-src/background/modules/<module>/
-  mod.rs
-  application.rs
-  infrastructure.rs  # or handlers.rs
-  domain.rs          # optional
+src/background/system_modules/<module>/
+  mod.rs               # infrastructure
+  domain.rs
+  application/
+    mod.rs             # manager
+    windows.rs         # #[cfg(windows)] native impl
 ```
 
 Minimal pattern (infrastructure side):
@@ -264,8 +270,8 @@ slu_commands_declaration! {
 }
 ```
 
-Then implement each handler as a plain method on `Handlers` in the owning module's `infrastructure.rs` (see the
-"Backend: System Modules" pattern above) — never annotate it with `#[tauri::command]` yourself.
+Then implement each handler as a plain method on `Handlers` in the owning module's `mod.rs` (its infrastructure layer)
+(see the "Backend: System Modules" pattern above) — never annotate it with `#[tauri::command]` yourself.
 
 2. `libs/core/src/handlers/events.rs`
 
@@ -429,7 +435,7 @@ Rust files must always declare their items in this order (after the `use` import
 5. Utility (free) functions
 6. `#[cfg(test)] mod tests`
 
-Reference: `src/background/modules/notifications/wpn_service.rs`.
+Reference: `src/background/windows_api/wpn_service.rs`.
 
 ## Rust Types: Tagged Enums (Serde)
 

@@ -8,9 +8,9 @@ use seelen_core::{
 
 use crate::{
     error::Result,
-    modules::apps::application::USER_APPS_MANAGER,
     platform::window::{Window, WindowState},
     state::application::WEG_ITEMS_MANAGER,
+    system_modules::apps::UserAppsManager,
     windows_api::WindowsApi,
 };
 
@@ -73,7 +73,7 @@ pub fn process(cmd: WegCli) -> Result<()> {
             return Ok(());
         };
 
-        let interactables = USER_APPS_MANAGER.interactable_windows.to_vec();
+        let interactables = UserAppsManager::instance().interactable_windows.to_vec();
         let windows = get_windows_for_item(inner_data, &interactables);
 
         if windows.is_empty() {

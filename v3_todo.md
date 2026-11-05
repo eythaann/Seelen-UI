@@ -5,36 +5,51 @@ touching `infrastructure` or `domain`. `src/hook_dll` is out of scope (Windows-o
 
 ## Architecture rules (end state)
 
-| Layer                               | Can                                                                                    | Cannot                                                                     |
-| ----------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `domain`                            | pure types, pure logic, **system traits** (`trait XxxSystem`)                          | import `windows`, `winreg`, `windows_api`, `HWND`, anything `cfg(windows)` |
-| `application/mod.rs`                | singleton manager, `event_manager!`, state, use the trait via the `Platform` alias     | call OS APIs directly                                                      |
-| `application/windows.rs`            | `impl XxxSystem for WindowsXxx`, Win32/WinRT/COM, registry, Win32 → domain conversions | depend on Tauri                                                            |
-| `infrastructure.rs` / `handlers.rs` | `Handlers::*`, `emit_to_webviews`, internal events → webviews bridge                   | any import of `windows*`, `windows_api`, `unsafe`                          |
+| Layer                              | Can                                                                                    | Cannot                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `domain`                           | pure types, pure logic, **system traits** (`trait XxxSystem`)                          | import `windows`, `winreg`, `windows_api`, `HWND`, anything `cfg(windows)` |
+| `application/mod.rs`               | singleton manager, `event_manager!`, state, use the trait via the `Platform` alias     | call OS APIs directly                                                      |
+| `application/windows.rs`           | `impl XxxSystem for WindowsXxx`, Win32/WinRT/COM, registry, Win32 → domain conversions | depend on Tauri                                                            |
+| `<module>/mod.rs` (infrastructure) | `Handlers::*`, `emit_to_webviews`, internal events → webviews bridge                   | any import of `windows*`, `windows_api`, `unsafe`                          |
 
 ### Per-module pattern
 
-    src/background/modules/<module>/
-      mod.rs
+Migrated modules move from `src/background/modules/` to `src/background/system_modules/`, one at a time (layout
+documented in `system_modules/mod.rs`). Reference implementation: `system_modules/focus_assist`.
+
+    src/background/system_modules/<module>/
+      mod.rs               # infrastructure (OS-agnostic): Handlers + events -> webviews
       domain.rs            # (or domain/) types + <Module>System trait
       application/
         mod.rs             # generic Manager + `type Platform = ...` selected by cfg
         windows.rs         # #[cfg(windows)] impl <Module>System for Windows<Module>
-      infrastructure.rs    # OS-agnostic
 
+- The module's `mod.rs` **is** the infrastructure layer. `application` and `domain` are private (`mod`, never
+  `pub mod`); the only thing that leaves the module is its `impl crate::tauri_handlers::Handlers` block.
 - Static dispatch, no `dyn`: in `application/mod.rs` `#[cfg(windows)] mod windows;` +
   `#[cfg(windows)] type Platform = windows::Windows<Module>;`
-- The trait exposes **queries/actions** (`fn get_status() -> Result<T>`, `fn lock() -> Result<()>`) and a
-  **subscription** method that receives a callback/`Sender` with domain events
-  (`fn listen(on_event: impl Fn(<Module>SysEvent))`). The manager translates those into its internal `event_manager!`;
-  the OS layer never knows about the manager.
+- **Create and init are separate** (managers and native structs alike, they are singletons behind a `LazyLock`):
+  - `create() -> Self` never fails: it only builds the struct, no OS calls.
+  - `init(&mut self) -> Result<()>` acquires the resources and subscribes; it may fail.
+  - The `LazyLock` does `let mut m = Manager::create(); m.init().log_error(); m`. Never `expect`/`unwrap`/panic there: a
+    failed init leaves a degraded but usable manager (queries return `Err`/defaults) instead of poisoning the singleton
+    and crashing every caller.
+  - Native resources acquired in `init` are stored as `Option<_>` and queries return `Err` while they are `None`.
+- The trait exposes `create`, `init` and **queries/actions** (`fn get_status() -> Result<T>`,
+  `fn lock() -> Result<()>`). `init` receives the callback with the domain events
+  (`fn init(&mut self, on_event: impl Fn(<Module>SysEvent))`); the manager passes `Self::send` (or translates them into
+  its internal `event_manager!` event, e.g. `power`: `PowerSysEvent` → `PowerEvent`), the OS layer never knows about the
+  manager. Native C callbacks without closures receive it through their context pointer.
 - Resources with `Drop` (WinRT tokens, `HPOWERNOTIFY`, etc.) live in the `Windows<Module>` struct, which the manager
-  stores as a `platform: Platform` field.
+  stores as a `platform: Platform` field. `Drop` must handle a partially initialized struct.
+- Mutable state goes in fields behind a `TracedMutex` (`info: TracedMutex<T>`), never the whole manager: `instance()`
+  returns `&'static Self`. When the OS callback needs that state (cache, dedupe), the manager passes an associated fn
+  (`Self::on_platform_event`) that reaches the state via `Self::instance()`.
 - If `windows.rs` grows too large it becomes `application/windows/mod.rs` + submodules.
 - Name clash: `modules/apps/application/windows.rs` (user windows) gets renamed to `app_windows.rs` before creating the
   OS `windows.rs`.
 
-Reference for item order and style: `src/background/modules/notifications/wpn_service.rs` and AGENTS.md.
+Reference for item order and style: `src/background/windows_api/wpn_service.rs` and AGENTS.md.
 
 ### Shared OS primitives (`src/background/platform/`)
 
@@ -92,9 +107,10 @@ Layout of each `platform/<primitive>/`:
         `snapshot`), `Window::process()` is part of the agnostic API; handles/AppX are behind `WindowsProcessExt`.
   - [x] Flattened: one native layer per primitive, no contract traits nor forwarding wrappers.
 - [ ] `AppWindowEvent`: replace the native (`WinEvent`) vocabulary with an OS-agnostic enum of domain events.
-- [ ] `platform/window/mod.rs` still depends on modules (`is_interactable_window` from `modules/apps`, `VdManager` for
-      `workspace_id`), inherited from the old `windows_api/window`. `platform/` must not depend on its consumers: move
-      `is_interactable_and_not_hidden`/`workspace_id` to their owners (or invert the dependency).
+- [ ] `platform/window/mod.rs` still depends on `VdManager` for (`is_interactable_window` moved into
+      `platform/window/windows`) `workspace_id`), inherited from the old `windows_api/window`. `platform/` must not
+      depend on its consumers: move `is_interactable_and_not_hidden`/`workspace_id` to their owners (or invert the
+      dependency).
 
 ---
 
@@ -105,44 +121,77 @@ Layout of each `platform/<primitive>/`:
       `WindowsResultExt` behind `#[cfg(windows)]`.
 - [ ] Make `windows_api/` explicitly Windows-impl plumbing (`#[cfg(windows)] mod windows_api;`). It may only be used
       from `application/windows.rs` (and equivalents outside `modules/`).
-- [ ] `modules/mod.rs`: keep `event_manager!` OS-agnostic (verify it has no Windows dependency).
+- [x] `event_manager!` (now `utils/event_manager.rs`) is OS-agnostic.
 - [ ] `windows_api/event_window.rs::subscribe_to_background_window` is the source of `WM_*` messages; it stays an
       internal detail of the Windows impls.
 - [ ] Add a CI/lint check (grep) that fails if `infrastructure.rs`, `handlers.rs` or `domain*` import `windows`,
       `windows_core`, `winreg`, `windows_api`, `win_screenshot`.
 
-## Phase 1 — System modules (`src/background/modules/`)
+## Phase 1 — System modules (`src/background/system_modules/`) ✔
 
 For each module: (1) define the `trait` in domain, (2) move Win32 logic + Win32→domain conversions to
 `application/windows.rs`, (3) leave `application/mod.rs` generic, (4) clean up `infrastructure`.
 
 Start with the small ones to validate the pattern:
 
-- [ ] **power** (pilot)
-  - infra calls `WindowsApi::exit_windows/set_suspend_state/lock_machine/initiate_shutdown` and uses `SHUTDOWN_*` →
-    trait
-    `PowerSystem { log_out, suspend, hibernate, lock, restart(install_updates), shutdown(install_updates),
-    has_pending_os_updates, power_status, power_mode, batteries, listen }`.
-  - `domain.rs` uses `SYSTEM_POWER_STATUS`/`EFFECTIVE_POWER_MODE` → move conversions to `windows.rs`.
-  - registry `PENDING_UPDATES_REGISTRY_KEYS` → `windows.rs`.
-- [ ] **media/devices** — infra: `WindowsApi::set_default_audio_device`; domain: `Win32::Media::Audio` types.
-- [ ] **media/players** — domain uses WinRT types (GSMTC).
-- [ ] **media/waveform** — domain uses `IAudioCaptureClient/IAudioClient`.
-- [ ] **clipboard** — infra uses `windows_api::input::Keyboard` (paste); review `persistence.rs` (DPAPI?).
-- [ ] **monitors** (+ `brightness/`) — infra uses `MonitorEnumerator`; domain has 1 Win32 ref.
-- [ ] **network** — infra uses `NetworkListManager`/`Com` + `unsafe GetConnectivity`; `domain/` uses `IpHelper`.
-- [ ] **notifications** — infra uses `Com`, `AppUserModelId`, `WindowsString`, `WindowsApi::execute`; `wpn_service.rs`
-      moves to `application/windows/`.
-- [ ] **apps** — infra uses `IShellDispatch6::ToggleDesktop`, `Mouse`, `Window`; rename `application/windows.rs` →
-      `app_windows.rs`; `flashing`, `previews`, `msix*`, `badges` are Windows → impl.
-- [ ] **radios** (`bluetooth/`, `wifi/`) — `bluetooth/handlers.rs` uses `DevicePairingResultStatus`; rename
-      `manager.rs`/`handlers.rs` to the standard layout.
-- [ ] **focus_assist**, **fonts**, **trash_bin**, **user** (+ `indexing/`), **start** — only application has Win32:
-      extract trait + `windows.rs`.
-- [ ] **system_settings** (+ `language/`, `nightlight/`) — delete `language/application.rs.old`.
-- [ ] **system_tray** — `tray_hook_loader`, `tray_icon`, `util` are 100% Windows → `application/windows/`.
-- [ ] **system** — `gpu.rs` (PDH/DXGI) to `application/windows.rs`; `tauri.rs` → `infrastructure.rs`;
-      `IS_INTERACTIVE_SESSION` behind the trait.
+- [x] **focus_assist** (pilot) — `FocusAssistSystem { create, init, is_active, set_active }`; `WindowsFocusAssist`
+      acquires `FocusSessionManager` in `init` and owns the WinRT token (`Drop`). The domain event `FocusAssistEvent`
+      doubles as the `event_manager!` event: a separate internal event type is only needed when the manager adds or
+      transforms events.
+- [x] **trash_bin** — `TrashBinSystem { create, init, query, empty }`; `WindowsTrashBin` is stateless (background window
+      subscriptions are app-lifetime, no `Drop`). The manager caches `TrashBinInfo` and drops the shell notifications
+      that leave it unchanged (`TrashBinInfo` now derives `PartialEq, Eq`).
+
+- [x] **power** —
+      `PowerSystem { create, init, power_status, batteries, has_pending_os_updates, log_out, suspend,
+      hibernate, lock, restart, shutdown }`.
+      First module with a separate OS event (`PowerSysEvent`: only signals what changed, plus `Resumed`) and manager
+      event (`PowerEvent`: carries the data); the manager queries, dedupes and handles the post-resume refresh. The
+      native callbacks get the `on_event` closure through their Win32 context pointer (`Arc` kept in `WindowsPower`).
+      Fixed on the way: the battery registration was released with `UnregisterPowerSettingNotification` (wrong API, now
+      `PowerSettingUnregisterNotification`) and the power mode one was never released. `PowerStatus`
+      (`Default, PartialEq, Eq`) and `PowerMode` (`Default`) derives added in core.
+  - Pending: the game mode → suspend widgets logic lives in the infra bridge (`mod.rs`) but is business logic;
+    `PowerStatus` fields are still Win32 shaped (`ac_line_status: u8`, ...).
+- [x] **fonts** — `FontsSystem { create, init, fonts }`. Stateless (`WindowsFonts` unit struct, DirectWrite factory per
+      query, so the old `unsafe impl Send/Sync` is gone); the manager sorts the list. `FontsChanged` was never emitted
+      (no OS listener): now wired to `WM_FONTCHANGE` on the background window → `FontsSysEvent::Changed` → the manager
+      queries and sends `FontsEvent::Changed { fonts }`.
+- [x] **start** — `StartMenuSystem { create, init, user_shortcuts, system_shortcuts, packaged_apps }`; dedup/lookups in
+      the manager. `init` only sets up the listeners (folder watcher + package catalog, now with tokens removed on
+      `Drop`); the heavy load stays in `initialize()` awaited at startup. Re-exports `StartMenuManager`.
+- [x] **user** + **user_folders** (old `user/indexing`, now its own module) — the folder scan and ignore lists are
+      domain/application; only paths + watchers are native. Fixed: `get_user` emitted `UserChanged` unredacted in
+      streaming mode. `User` derives `Default` in core.
+- [x] **media** → **media_devices**, **media_players**, **media_waveform**. Devices: the COM objects stay native
+      (internal `event_manager!` keeps COM calls out of the callbacks); waveform: `LoopbackCapture` trait, ring
+      buffer/FFT in application/domain, restarts on `MediaDevicesEvent::DefaultOutputChanged`; players: the grace
+      period, thumbnail retry and seek clamping (`seek_range`) moved to the manager.
+- [x] **clipboard** — history, limits, dedup and eviction in the manager; WinRT/STA, DPAPI persistence and paste are
+      native (`ClipboardStore` in domain).
+- [x] **monitors** + **brightness** (own module, re-exported for monitors) — the view/monitor diff and debounce are in
+      the manager; `MonitorManagerEvent` now uses struct variants.
+- [x] **network** — `NetworkSysEvent { AdaptersChanged, StatusChanged }` → `NetworkEvent` with data; the IP change
+      callback gets `on_event` through its context pointer.
+- [x] **notifications** — the list lives in the manager; WinRT listener/polling, toast parsing and activation are native
+      (`activation.rs`, `content.rs`). `wpn_service.rs` → `windows_api/wpn_service.rs` (shared with apps).
+- [x] **apps** + **app_previews** (own module) — the windows list and the attention/badge rules live in the manager; the
+      hook handling reports `AppsSysEvent::{Added, Removed, Changed { change: WindowChange }}`. `is_interactable_window`
+      → `platform/window/windows/interactable.rs`; `msix` → `windows_api/msix/`; `WindowBadges` →
+      `windows_api/window_badges.rs` (own event, no longer touches the apps manager).
+- [x] **system_info** (old `system`) — `sysinfo` polling and diffing in the manager, only the GPU (PDH) is native.
+- [x] **system_tray** — all native (hook injection, registry, IPC icon events) behind `TrayState` (`Arc` + `Weak` self
+      ref for the registry lookup threads); the manager only forwards.
+- [x] **system_settings** + **languages** (own module) — accent palette generation in domain; settings index and night
+      light are native. The Bond codec moved to `utils/bond` (generic, referenced by `AppError`).
+      `language/application.rs.old` deleted.
+- [x] **radios**, **wifi**, **bluetooth** (one module each) — "native facade" variant: the old managers became the
+      native singletons (`RadiosState`, `WifiState`, `BluetoothState`) with their internal `event_manager!`; the facades
+      implement the traits. Kicking the WiFi scan / BT discovery when a radio is turned on moved to the radios manager.
+- [x] `modules/` removed; `event_manager!` → `utils/event_manager.rs`.
+  - Pending: the "native facade" modules (system_tray, radios, wifi, bluetooth, media_devices) still keep their state in
+    the native layer: lift the OS-agnostic parts when a second OS is added.
+  - Pending: `IS_INTERACTIVE_SESSION` is exposed per module (`is_session_interactive`); centralize it (session module).
 
 ## Phase 2 — Rest of the main app (`src/background/`, outside `modules/`)
 
@@ -187,8 +236,8 @@ Currently flat (`power.rs`, `shutdown.rs`, `task_scheduler.rs`, `enviroment.rs`,
 
 - `cargo check` (never `--release`).
 - Control grep:
-  `rg "windows::|windows_core|winreg|windows_api|HWND" src/background/modules -g "infrastructure.rs"
-  -g "handlers.rs" -g "domain*"`
+  `rg "windows::|windows_core|winreg|windows_api|HWND|unsafe" src/background/system_modules/*/mod.rs
+  src/background/system_modules/*/domain*`
   → empty.
 - `deno task build:rs` in `libs/core` if any exposed type changes (it shouldn't: this is an internal refactor).
 - Manual testing by the user in the app (power actions, audio devices, notifications, etc.).

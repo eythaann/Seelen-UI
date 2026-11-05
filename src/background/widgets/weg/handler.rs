@@ -5,9 +5,9 @@ use seelen_core::{handlers::SeelenEvent, state::WegItemData};
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    modules::start::application::StartMenuManager,
     platform::window::{Window, WindowState, WindowsWindowExt},
     state::application::WEG_ITEMS_MANAGER,
+    system_modules::start::StartMenuManager,
     widgets::permissions::{WidgetPerm, request_widget_permission},
     windows_api::WindowsApi,
 };

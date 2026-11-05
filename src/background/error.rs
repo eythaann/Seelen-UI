@@ -57,7 +57,7 @@ define_app_errors!(
     SluIpc(slu_ipc::error::Error);
     Tokio(tokio::task::JoinError);
     Time(time::error::Error);
-    Bond(crate::modules::system_settings::nightlight::bond::BondError);
+    Bond(crate::utils::bond::BondError);
 );
 
 impl std::fmt::Debug for AppError {
