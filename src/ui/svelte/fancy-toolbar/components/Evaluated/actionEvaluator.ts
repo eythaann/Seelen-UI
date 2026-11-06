@@ -70,6 +70,7 @@ function triggerWidget(widgetId: WidgetId, itemId: string): void {
       desiredPosition: { x, y },
       alignX: Alignment.Center,
       alignY: isTopPosition ? Alignment.Start : Alignment.End,
+      customArgs: { __seelenToolbarToggle: true },
     },
   });
 }
