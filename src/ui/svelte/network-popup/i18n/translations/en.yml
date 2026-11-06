@@ -3,6 +3,10 @@ connect: Connect
 connected: Connected to
 connecting: Connecting...
 disconnect: Disconnect
+ethernet:
+  connected: Connected
+  disconnected: Disconnected
+  title: Ethernet
 forget: Forget
 hidden: Hidden Network
 hotspot:
