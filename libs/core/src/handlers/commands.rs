@@ -355,6 +355,21 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         get_self_window_handle() -> isize,
+    BeginNativeBlurSession =
+        @webview()
+        @async()
+        @fallible()
+        begin_native_blur_session() -> u32,
+    SyncNativeBlurRegions =
+        @webview()
+        @async()
+        @fallible()
+        sync_native_blur_regions(session: u32, sequence: u32, scale: f32, regions: Vec<NativeBlurRegion>, visibility_epoch: Option<u32>),
+    SetNativeBlurVisibility =
+        @webview()
+        @async()
+        @fallible()
+        set_native_blur_visibility(session: u32, epoch: u32, visible: bool, deadline_ms: f64),
     NormalizeSelfDevicePixelRatio =
         @webview()
         @fallible()

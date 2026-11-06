@@ -23,6 +23,7 @@ Read [resource guidelines](./resource-guidelines) first for concepts shared acro
 6. [Animations and Performance Mode](#6-animations-and-performance-mode)
 7. [Folder Structure](#7-folder-structure)
 8. [Inspecting Widgets with DevTools](#8-inspecting-widgets-with-devtools)
+9. [Native Background Blur](#9-native-background-blur)
 
 ---
 
@@ -411,3 +412,11 @@ From DevTools you can:
 - Use the **Performance** panel to profile rendering and catch expensive animations or layouts.
 
 This works on any widget at any time — no special build or dev mode required.
+
+---
+
+## 9. Native Background Blur
+
+For experimental per-element Gaussian blur, see [Native background blur](native-blur.md). It uses `--slu-native-blur` or
+`data-native-blur`, clips the effect to element geometry, and does not replace the default theme or request a
+full-window Acrylic/Mica effect.
