@@ -24,10 +24,8 @@ use crate::{
     system_modules::system_tray::application::windows::{
         PendingIcon, RegistryNotifyIcon, TrayState, find_registry_notify_icon, util::Util,
     },
-    utils::{
-        constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image, spawn_named_thread,
-    },
-    windows_api::WindowsApi,
+    utils::{constants::SEELEN_COMMON, spawn_named_thread},
+    windows_api::{WindowsApi, icon::convert_hicon_to_rgba_image},
 };
 use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 

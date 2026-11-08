@@ -11,7 +11,7 @@ use crate::{
     platform::{self, startup},
     resources::RESOURCES,
     session::reemit_session,
-    state::application::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
+    state::{AppSettings, FULL_STATE, initialize_user_resources_watcher},
     system_modules::{
         clipboard::init_clipboard_manager, start::StartMenuManager, user::reemit_user,
     },

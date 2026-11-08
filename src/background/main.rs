@@ -35,13 +35,13 @@ use app::SeelenUI;
 use cli::{SelfPipe, ServicePipe, handle_console_client};
 use error::Result;
 use logger::SeelenLogger;
+use platform::info::{is_running_as_appx, was_installed_using_msix};
 use session::SessionManager;
 use slu_ipc::messages::SvcAction;
 use tauri_handlers::register_invoke_handler;
 use tauri_plugins::register_plugins;
-use utils::{
-    integrity::{is_already_running, print_initial_information, restart_as_appx, warn_if_elevated},
-    is_running_as_appx, was_installed_using_msix,
+use utils::integrity::{
+    is_already_running, print_initial_information, restart_as_appx, warn_if_elevated,
 };
 
 use crate::{app::get_app_handle, error::ResultLogExt, utils::constants::SEELEN_COMMON};
@@ -98,7 +98,7 @@ async fn main() -> std::process::ExitCode {
 
     // if no custom runtime is present, the app will use the installed with the system
     #[cfg(windows)]
-    if let Some(path) = crate::utils::get_fixed_runtime_path() {
+    if let Some(path) = crate::platform::info::get_fixed_runtime_path() {
         unsafe { std::env::set_var("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER", path) };
     }
 

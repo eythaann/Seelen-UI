@@ -22,8 +22,9 @@ use windows::{
 
 use crate::{
     error::{Result, ResultLogExt},
+    resources::icon_extractor::request_icon_extraction_from_umid,
     system_modules::notifications::domain::{NotificationsSysEvent, NotificationsSystem},
-    utils::{icon_extractor::request_icon_extraction_from_umid, spawn_named_thread},
+    utils::spawn_named_thread,
     windows_api::{
         WindowsApi,
         types::DateTimeExt,
@@ -160,7 +161,7 @@ impl NotificationsSystem for WindowsNotifications {
         let content = content::toast_content(&notification, toast_notifications, &app_umid)?;
 
         // pre-extraction to avoid flickering on the ui
-        request_icon_extraction_from_umid(&app_umid.clone().into());
+        request_icon_extraction_from_umid(&app_umid);
 
         Ok(Some(AppNotification {
             id,

@@ -5,7 +5,7 @@ use std::sync::Once;
 
 use seelen_core::{handlers::SeelenEvent, system_state::User};
 
-use crate::{app::emit_to_webviews, state::application::FULL_STATE};
+use crate::{app::emit_to_webviews, state::FULL_STATE};
 
 use self::{application::UserManager, domain::UserEvent};
 

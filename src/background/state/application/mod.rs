@@ -1,20 +1,27 @@
 mod apps_config;
-pub mod performance;
+mod performance;
 mod settings;
 mod toolbar_items;
 mod weg_items;
 
+pub use performance::PERFORMANCE_MODE;
 pub use toolbar_items::TOOLBAR_ITEMS_MANAGER;
 pub use weg_items::WEG_ITEMS_MANAGER;
 
 use arc_swap::ArcSwap;
 use notify_debouncer_full::{
-    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap, new_debouncer,
-    notify::{ReadDirectoryChangesWatcher, RecursiveMode},
+    DebounceEventResult, DebouncedEvent, Debouncer, RecommendedCache, new_debouncer,
+    notify::{RecommendedWatcher, RecursiveMode},
 };
 use seelen_core::{
-    resource::ResourceKind,
-    state::{AppsConfigurationList, Settings},
+    resource::{PluginId, ResourceKind, WidgetId},
+    state::{
+        AppsConfigurationList, Settings, WorkspaceId,
+        by_widget::GenericWidgetSettings,
+        twm::TwmPlugin,
+        value::{KnownPlugin, PluginValue},
+    },
+    system_state::MonitorId,
 };
 use std::{
     collections::HashSet,
@@ -22,12 +29,20 @@ use std::{
     sync::{Arc, LazyLock, OnceLock},
     time::Duration,
 };
+use uuid::Uuid;
 
 use crate::{
     error::{Result, ResultLogExt},
+    event_manager,
     resources::{RESOURCES, ResourceManager},
     utils::constants::SEELEN_COMMON,
+    virtual_desktops::VdManager,
 };
+
+use super::domain::StateEvent;
+
+/// Key of the layout setting declared on the window manager widget metadata
+const WM_LAYOUT_SETTING_KEY: &str = "layout";
 
 pub static BUNDLED_SETTINGS_BY_APP: LazyLock<Arc<AppsConfigurationList>> = LazyLock::new(|| {
     Arc::new(match AppSettings::load_bundled_settings_by_app() {
@@ -46,10 +61,18 @@ pub static FULL_STATE: LazyLock<ArcSwap<AppSettings>> = LazyLock::new(|| {
     })
 });
 
+static USER_RESOURCES_WATCHER: OnceLock<Debouncer<RecommendedWatcher, RecommendedCache>> =
+    OnceLock::new();
+
 #[derive(Debug, Clone)]
 pub struct AppSettings {
     pub settings: Settings,
 }
+
+/// Emitter of the state events (`FULL_STATE` is swapped as a whole, so it can't own them).
+pub struct StateManager;
+
+event_manager!(StateManager, StateEvent);
 
 impl AppSettings {
     fn new() -> Self {
@@ -72,10 +95,104 @@ impl AppSettings {
         self.migration_v2_5_0(resources).log_error();
         self.sanitize_wallpaper_collections(resources);
     }
-}
 
-static USER_RESOURCES_WATCHER: OnceLock<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>> =
-    OnceLock::new();
+    pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
+        self.settings.is_widget_enabled(widget_id)
+    }
+
+    pub fn is_widget_enable_on_monitor(
+        &self,
+        widget_id: &WidgetId,
+        monitor_id: &MonitorId,
+    ) -> bool {
+        self.settings
+            .is_widget_enabled_on_monitor(widget_id, monitor_id)
+    }
+
+    pub fn is_weg_enabled(&self) -> bool {
+        self.is_widget_enabled(&WidgetId::known_weg())
+    }
+
+    pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
+        let config = self.settings.by_widget.others.get(widget_id);
+        match config {
+            Some(config) => config
+                .instances
+                .as_ref()
+                .map_or_else(Default::default, |i| i.keys().cloned().collect()),
+            None => Vec::new(),
+        }
+    }
+
+    pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> TwmPlugin {
+        let base = TwmPlugin::default();
+
+        let layout_id = self.get_wm_layout_id(workspace_id);
+
+        let mut plugin_with_layout = None;
+        RESOURCES.plugins.any_sync(|_, p| {
+            if p.id == layout_id {
+                plugin_with_layout = Some(p.clone());
+                true
+            } else {
+                false
+            }
+        });
+
+        let Some(plugin) = plugin_with_layout else {
+            return base;
+        };
+
+        let PluginValue::Known(plugin) = &plugin.plugin else {
+            return base;
+        };
+
+        let KnownPlugin::WManager(layout) = &**plugin else {
+            return base;
+        };
+
+        *layout.clone()
+    }
+
+    /// Priority: workspace layout → monitor layout → global layout → bspwm
+    pub fn get_wm_layout_id(&self, workspace_id: &WorkspaceId) -> PluginId {
+        let wm_id = WidgetId::known_wm();
+        let from_overrides = |settings: Option<&GenericWidgetSettings>| -> Option<PluginId> {
+            let value = settings?.rest.get(WM_LAYOUT_SETTING_KEY)?;
+            let layout_id: PluginId = value.0.as_str()?.into();
+            layout_id.is_valid().then_some(layout_id)
+        };
+
+        let monitor_config = VdManager::instance()
+            .get_monitor_of_workspace(workspace_id)
+            .and_then(|monitor_id| self.settings.monitors_v3.get(&monitor_id));
+
+        if let Some(monitor_config) = monitor_config {
+            let by_workspace = monitor_config
+                .by_workspace
+                .get(workspace_id)
+                .and_then(|config| from_overrides(config.by_widget.get(&wm_id)));
+            if let Some(layout_id) = by_workspace {
+                return layout_id;
+            }
+
+            if let Some(layout_id) = from_overrides(monitor_config.by_widget.get(&wm_id)) {
+                return layout_id;
+            }
+        }
+
+        let default = self.settings.by_widget.wm.layout.clone();
+        if default.is_valid() {
+            default
+        } else {
+            "@default/wm-bspwm".into()
+        }
+    }
+
+    pub fn locale(&self) -> &String {
+        &self.settings.language
+    }
+}
 
 pub fn initialize_user_resources_watcher() -> Result<()> {
     log::trace!("Starting Seelen UI Files Watcher");

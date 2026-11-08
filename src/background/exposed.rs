@@ -8,10 +8,10 @@ use crate::{
     app::{SeelenUI, get_app_handle},
     error::Result,
     platform::shell,
-    utils::{
-        self,
-        icon_extractor::{request_icon_extraction_from_file, request_icon_extraction_from_umid},
+    resources::icon_extractor::{
+        request_icon_extraction_from_file, request_icon_extraction_from_umid,
     },
+    utils,
     widgets::{
         permissions::{WidgetPerm, request_widget_permission},
         popups::shortcut_registering::{abort_shortcut_registering, begin_shortcut_registering},
@@ -64,11 +64,11 @@ impl crate::tauri_handlers::Handlers {
     }
 
     pub fn has_fixed_runtime() -> bool {
-        crate::utils::has_fixed_runtime()
+        crate::platform::info::has_fixed_runtime()
     }
 
     pub fn is_appx_package() -> bool {
-        crate::utils::is_running_as_appx()
+        crate::platform::info::is_running_as_appx()
     }
 
     pub fn get_user_envs() -> HashMap<String, String> {
@@ -86,7 +86,7 @@ impl crate::tauri_handlers::Handlers {
     // used to request icon extraction
     pub fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Result<()> {
         if let Some(umid) = umid {
-            request_icon_extraction_from_umid(&umid.into());
+            request_icon_extraction_from_umid(&umid);
         }
         if let Some(path) = path {
             request_icon_extraction_from_file(&path);

@@ -51,6 +51,17 @@ impl NativeProcess {
     pub fn is_frozen(&self) -> Result<bool> {
         WindowsApi::is_process_frozen(self.0)
     }
+
+    pub fn kill(&self) -> Result<()> {
+        use std::os::windows::process::CommandExt;
+        use windows::Win32::System::Threading::CREATE_NO_WINDOW;
+
+        std::process::Command::new("taskkill.exe")
+            .args(["/F", "/PID", &self.0.to_string()])
+            .creation_flags(CREATE_NO_WINDOW.0)
+            .spawn()?;
+        Ok(())
+    }
 }
 
 /// Windows only concepts of a process, use it only from Windows specific code.

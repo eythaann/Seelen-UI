@@ -1,19 +1,14 @@
-use seelen_core::{resource::WidgetId, state::WmDragBehavior};
-use windows::Win32::{Foundation::HWND, UI::WindowsAndMessaging::HWND_TOP};
+use seelen_core::{resource::WidgetId, state::WmDragBehavior, system_state::ZOrder};
 
 use crate::{
     error::{Result, ResultLogExt},
-    platform::{
-        hook::WindowEvent,
-        window::{Window, WindowsWindowExt},
-    },
-    state::application::FULL_STATE,
+    platform::{hook::WindowEvent, window::Window},
+    state::FULL_STATE,
     virtual_desktops::{MINIMIZED_BY_WORKSPACES, VdManager, VirtualDesktopEvent},
     widgets::{
         manager::WIDGET_MANAGER,
         window_manager::state_v2::{MINIMIZED_BY_STACK, TwmState, TwmStateEvent, WM_STATE},
     },
-    windows_api::WindowsApi,
 };
 
 use super::{WindowManagerV2, cli::Axis};
@@ -108,7 +103,7 @@ impl WindowManagerV2 {
     fn bring_layout_to_front(focused: &Window, tiled: &[isize]) {
         for &hwnd in tiled {
             if hwnd != focused.address() {
-                WindowsApi::set_z_order(HWND(hwnd as _), focused.hwnd()).log_error();
+                Window::from(hwnd).place_below(focused).log_error();
             }
         }
 
@@ -124,7 +119,7 @@ impl WindowManagerV2 {
             });
 
         for hwnd in overlays {
-            WindowsApi::set_z_order(HWND(hwnd as _), HWND_TOP).log_error();
+            Window::from(hwnd).set_z_order(ZOrder::Top).log_error();
         }
     }
 

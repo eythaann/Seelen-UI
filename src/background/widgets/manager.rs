@@ -12,7 +12,7 @@ use seelen_core::{
 use crate::{
     error::{Result, ResultLogExt},
     resources::RESOURCES,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     system_modules::{
         monitors::MonitorManager,
         power::{PowerEvent, PowerManager},

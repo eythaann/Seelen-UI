@@ -3,10 +3,11 @@ use slu_ipc::{IPC, ServiceIpc, messages::SvcAction};
 use tauri_plugin_updater::{Update, UpdaterExt};
 
 use crate::{
-    app::get_app_handle, error::Result, state::application::FULL_STATE, utils::has_fixed_runtime,
+    app::get_app_handle,
+    error::Result,
+    platform::info::{has_fixed_runtime, is_running_as_appx},
+    state::FULL_STATE,
 };
-
-use super::is_running_as_appx;
 
 pub static SIGN_PUB_KEY: &str = "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK";
 

@@ -8,7 +8,7 @@ use seelen_core::system_state::{Core, Disk, Gpu, Memory, NetworkStatistics};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     utils::lock_free::TracedMutex,
 };
 

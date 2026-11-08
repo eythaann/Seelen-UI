@@ -23,8 +23,8 @@ use crate::{
     system_modules::start::domain::{
         ShortcutEntry, ShortcutIdentity, StartMenuSysEvent, StartMenuSystem,
     },
-    utils::{constants::SEELEN_COMMON, pwsh::PwshScript},
-    windows_api::{Com, WindowsApi, string_utils::WindowsString},
+    utils::constants::SEELEN_COMMON,
+    windows_api::{Com, WindowsApi, pwsh::PwshScript, string_utils::WindowsString},
 };
 
 const FILE_WATCHER_DEBOUNCE: Duration = Duration::from_millis(500);

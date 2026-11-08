@@ -7,8 +7,7 @@ use seelen_core::{
 use slu_ipc::messages::SvcAction;
 
 use crate::{
-    app::emit_to_webviews, cli::ServicePipe, error::Result, resources::RESOURCES,
-    state::application::FULL_STATE,
+    app::emit_to_webviews, cli::ServicePipe, error::Result, resources::RESOURCES, state::FULL_STATE,
 };
 
 pub static SHORTCUTS_PAUSED: AtomicBool = AtomicBool::new(false);

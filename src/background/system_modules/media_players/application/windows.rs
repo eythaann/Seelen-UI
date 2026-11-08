@@ -15,11 +15,12 @@ use windows::{
 
 use crate::{
     error::{Result, ResultLogExt},
+    resources::icon_extractor::request_icon_extraction_from_umid,
     system_modules::{
         media_players::domain::{MediaPlayersSysEvent, MediaPlayersSystem, PlayerProperties},
         start::StartMenuManager,
     },
-    utils::{icon_extractor::request_icon_extraction_from_umid, lock_free::SyncHashMap},
+    utils::lock_free::SyncHashMap,
     windows_api::{WindowsApi, types::AppUserModelId},
 };
 

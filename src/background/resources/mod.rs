@@ -1,6 +1,7 @@
 pub mod cli;
 pub mod commands;
 mod emitters;
+pub mod icon_extractor;
 mod system_icon_pack;
 pub mod user_icon_pack;
 
@@ -21,7 +22,7 @@ use uuid::Uuid;
 use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id, lock_free::TracedMutex},
 };
 

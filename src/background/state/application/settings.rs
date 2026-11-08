@@ -1,25 +1,25 @@
 use std::path::Path;
 
-use seelen_core::{
-    handlers::SeelenEvent,
-    state::{CssStyles, Dialog, DialogContent, Settings},
-};
+use seelen_core::state::{CssStyles, Dialog, DialogContent, Settings};
 
 use crate::{
-    app::{SeelenUI, emit_to_webviews},
+    app::SeelenUI,
     error::{Result, ResultLogExt},
     resources::ResourceManager,
+    state::domain::StateEvent,
     utils::constants::SEELEN_COMMON,
     widgets::{
         manager::WIDGET_MANAGER, trigger_dialog_backend, window_manager::state_v2::WM_STATE,
     },
 };
 
-use super::AppSettings;
+use super::{AppSettings, StateManager};
 
 impl AppSettings {
     pub(super) fn emit_settings(&self) -> Result<()> {
-        emit_to_webviews(SeelenEvent::StateSettingsChanged, &self.settings);
+        StateManager::send(StateEvent::SettingsChanged {
+            settings: Box::new(self.settings.clone()),
+        });
         SeelenUI::on_settings_change(self)?;
         WIDGET_MANAGER.reconcile().log_error();
         WM_STATE.lock().on_settings_changed();

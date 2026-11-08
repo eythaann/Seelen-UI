@@ -1,22 +1,27 @@
+#[cfg(windows)]
+mod windows;
+
+#[cfg(windows)]
+use self::windows as imp;
+
 use std::path::PathBuf;
 
 use base64::Engine;
 use seelen_core::{
+    Rect,
     resource::WidgetId,
     state::{Widget, WidgetLoader, WidgetPreset},
-    system_state::MonitorId,
+    system_state::{AppBarEdge, MonitorId},
 };
 
 use tauri::Manager;
-use windows::Win32::Foundation::HWND;
 
 use crate::{
     app::get_app_handle,
     error::{Result, ResultLogExt},
-    platform::shell,
-    state::application::FULL_STATE,
+    platform::{shell, window::Window},
+    state::FULL_STATE,
     utils::constants::SEELEN_COMMON,
-    windows_api::WindowsApi,
 };
 
 pub struct WidgetWebview(pub tauri::WebviewWindow);
@@ -93,11 +98,7 @@ impl WidgetWebview {
         }
 
         if let Some(owner) = owner_hwnd {
-            // SAFETY: HWND in windows 0.61 (tauri) and 0.62 (ours) share the same memory layout
-            #[allow(clippy::missing_transmute_annotations)]
-            {
-                builder = builder.owner_raw(unsafe { std::mem::transmute(owner) });
-            }
+            builder = imp::set_owner(builder, &Window::from(owner));
         }
 
         let window = builder
@@ -115,8 +116,7 @@ impl WidgetWebview {
             .build()?;
 
         // Widgets handle their own show/hide animations, avoid the ones from the system.
-        // SAFETY: HWND in windows 0.61 (tauri) and 0.62 (ours) share the same memory layout
-        WindowsApi::set_system_transitions_disabled(HWND(window.hwnd()?.0), true).log_error();
+        imp::disable_system_transitions(&window).log_error();
         Ok(Self(window))
     }
 
@@ -132,82 +132,38 @@ impl WidgetWebview {
     }
 }
 
-/// Makes the webview render 1 CSS px = 1 physical px (`devicePixelRatio` = 1) on every monitor.
-///
-/// By default WebView2 tracks the monitor DPI itself (`ShouldDetectMonitorScaleChanges`) and
-/// updates its `RasterizationScale` asynchronously after the window crosses monitors, so any
-/// zoom-based compensation done from the webview races against it (and against `WM_DPICHANGED`
-/// not being delivered to hidden windows). Taking ownership of the scale and pinning it to 1.0
-/// removes the race entirely: the scale never changes again, whatever monitor the window is on.
-pub fn lock_rasterization_scale_to_one(webview: &tauri::WebviewWindow) -> Result<()> {
-    use webview2_com::Microsoft::Web::WebView2::Win32::ICoreWebView2Controller3;
-    use windows_core::Interface;
-
-    webview.with_webview(|platform_webview| {
-        let controller = platform_webview.controller();
-        let result = (|| unsafe {
-            // reset any zoom compensation applied before (zoom persists across reloads)
-            controller.SetZoomFactor(1.0)?;
-            let controller = controller.cast::<ICoreWebView2Controller3>()?;
-            controller.SetShouldDetectMonitorScaleChanges(false)?;
-            controller.SetRasterizationScale(1.0)
-        })();
-
-        if let Err(err) = result {
-            log::error!("Failed to lock webview rasterization scale: {err:?}");
-        }
-    })?;
-    Ok(())
+/// Native window of a webview, to use the generic window operations on it.
+pub fn native_window(webview: &tauri::WebviewWindow) -> Result<Window> {
+    imp::native_window(webview)
 }
 
-/// Forces the WebView2 renderer to react as if the OS was under memory pressure,
-/// via the same CDP call DevTools issues internally. Unlike `window.gc()`, this
-/// actually makes V8/Blink release freed pages back to the OS, because real pressure
-/// almost never reaches an individual background widget when the system overall has
-/// plenty of RAM free.
+/// Moves and resizes the webview window, redrawing its content.
+pub fn set_position(webview: &tauri::WebviewWindow, rect: &Rect) -> Result<()> {
+    imp::set_position(webview, rect)
+}
+
+/// Reserves the area of the screen edge occupied by the webview (toolbar, dock), so maximized
+/// windows of other apps don't cover it.
+pub fn register_app_bar(
+    webview: &tauri::WebviewWindow,
+    rect: &Rect,
+    edge: AppBarEdge,
+) -> Result<()> {
+    imp::register_app_bar(webview, rect, edge)
+}
+
+pub fn unregister_app_bar(webview: &tauri::WebviewWindow) -> Result<()> {
+    imp::unregister_app_bar(webview)
+}
+
+/// Makes the webview render 1 CSS px = 1 physical px (`devicePixelRatio` = 1) on every monitor.
+pub fn lock_rasterization_scale_to_one(webview: &tauri::WebviewWindow) -> Result<()> {
+    imp::lock_rasterization_scale_to_one(webview)
+}
+
+/// Makes the webview release the memory it is not using, as if the OS was under memory pressure.
 pub fn simulate_memory_pressure(webview: &tauri::WebviewWindow) {
-    if webview.is_focused().unwrap_or(false) {
-        return;
-    }
-
-    webview
-        .with_webview(|platform_webview| {
-            let controller = platform_webview.controller();
-            let core_webview = match unsafe { controller.CoreWebView2() } {
-                Ok(core_webview) => core_webview,
-                Err(err) => {
-                    log::warn!("Failed to get ICoreWebView2 for memory pressure simulation: {err}");
-                    return;
-                }
-            };
-
-            // Can't use our own `WindowsString` here: webview2-com pins its own `windows`
-            // crate version (0.61) which is semver-incompatible with the one this project
-            // depends on directly (0.62.2), so their `PCWSTR` types don't unify. Must go
-            // through webview2-com's own string helper, built against its own `windows`.
-            let result =
-                webview2_com::CallDevToolsProtocolMethodCompletedHandler::wait_for_async_operation(
-                    Box::new(move |handler| unsafe {
-                        let method = webview2_com::CoTaskMemPWSTR::from(
-                            "Memory.simulatePressureNotification",
-                        );
-                        let params = webview2_com::CoTaskMemPWSTR::from(r#"{"level":"critical"}"#);
-                        core_webview
-                            .CallDevToolsProtocolMethod(
-                                *method.as_ref().as_pcwstr(),
-                                *params.as_ref().as_pcwstr(),
-                                &handler,
-                            )
-                            .map_err(webview2_com::Error::WindowsError)
-                    }),
-                    Box::new(|error_code, _result| error_code),
-                );
-
-            if let Err(err) = result {
-                log::warn!("Memory.simulatePressureNotification failed: {err:?}");
-            }
-        })
-        .log_error();
+    imp::simulate_memory_pressure(webview)
 }
 
 impl Drop for WidgetWebview {

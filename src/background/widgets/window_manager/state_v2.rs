@@ -11,8 +11,8 @@ use seelen_core::{
         NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
+    system_state::ZOrder,
 };
-use windows::Win32::UI::WindowsAndMessaging::HWND_TOP;
 
 use crate::{
     app::emit_to_webviews,
@@ -20,8 +20,8 @@ use crate::{
     event_manager,
     platform::hook::HookManager,
     platform::monitor::Monitor,
-    platform::window::{Window, WindowState, WindowsWindowExt},
-    state::application::FULL_STATE,
+    platform::window::{Window, WindowState},
+    state::FULL_STATE,
     system_modules::apps::UserAppsManager,
     utils::lock_free::TracedMutex,
     virtual_desktops::VdManager,
@@ -30,7 +30,6 @@ use crate::{
         cli::{Axis, Direction, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
     },
-    windows_api::WindowsApi,
 };
 
 pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
@@ -710,7 +709,7 @@ impl TwmState {
                         // activation, so keep the focused managed window on top.
                         let foreground = Window::get_foregrounded();
                         if self.is_managed(&foreground) {
-                            WindowsApi::set_z_order(foreground.hwnd(), HWND_TOP).log_error();
+                            foreground.set_z_order(ZOrder::Top).log_error();
                         }
                     }
 

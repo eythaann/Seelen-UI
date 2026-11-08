@@ -12,7 +12,7 @@ use crate::{
     cli::ServicePipe,
     error::{Result, ResultLogExt},
     session::SessionManager,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     widgets::manager::WIDGET_MANAGER,
     widgets::permissions::WIDGET_PERMISSIONS,
     widgets::popups::shortcut_conflicts::show_shortcut_conflict_popup,

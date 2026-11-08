@@ -2,15 +2,9 @@ pub mod bond;
 pub mod constants;
 pub mod discord;
 pub mod event_manager;
-pub mod icon_extractor;
 pub mod integrity;
 pub mod lock_free;
-pub mod pwsh;
 pub mod updater;
-pub mod virtual_desktop;
-mod winver;
-
-pub use winver::*;
 
 use std::{
     fs::{File, create_dir_all},
@@ -20,12 +14,7 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-use windows::{
-    Win32::UI::Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
-    core::GUID,
-};
-
-use crate::{error::Result, windows_api::string_utils::WindowsString};
+use crate::error::Result;
 
 static ATOMIC_WRITE_COUNTER: AtomicU64 = AtomicU64::new(0);
 
@@ -61,33 +50,6 @@ pub fn atomic_write_file(path: &Path, content: &[u8]) -> Result<()> {
         return Err(err.into());
     }
     Ok(())
-}
-
-/// Resolve paths with folder ids in the form of "{GUID}\path\to\file"
-///
-/// https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
-pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
-    let parts = path.as_ref().split("\\");
-    let mut path_buf = PathBuf::new();
-
-    for (idx, part) in parts.into_iter().enumerate() {
-        if part.starts_with("{") && part.ends_with("}") {
-            let guid = part.trim_start_matches('{').trim_end_matches('}');
-            let rfid = GUID::try_from(guid)?;
-            let string_path = WindowsString::from(unsafe {
-                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, None)?
-            })
-            .to_string();
-
-            path_buf.push(string_path);
-        } else if idx == 0 {
-            return Ok(PathBuf::from(path.as_ref()));
-        } else {
-            path_buf.push(part);
-        }
-    }
-
-    Ok(path_buf)
 }
 
 /// Useful when spawning threads that will allocate a loop or some other blocking operation

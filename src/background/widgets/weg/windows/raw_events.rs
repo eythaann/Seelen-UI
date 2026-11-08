@@ -5,9 +5,12 @@ use windows::Win32::{
     },
 };
 
-use crate::{error::Result, pcstr, platform::window::Window, windows_api::WindowsApi};
+use crate::{
+    error::Result, pcstr, platform::window::Window, widgets::weg::SeelenWeg,
+    windows_api::WindowsApi,
+};
 
-use super::{SeelenWeg, TASKBAR_CLASS};
+static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"];
 
 impl SeelenWeg {
     // move this to independent function as this should work independently if dock is enabled or not

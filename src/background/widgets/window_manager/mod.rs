@@ -6,14 +6,7 @@ pub mod state_v2;
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
 
 pub struct WindowManagerV2;
-use windows::Win32::UI::WindowsAndMessaging::{WS_EX_TOPMOST, WS_SIZEBOX};
-
-use crate::{
-    app::emit_to_webviews,
-    error::Result,
-    platform::window::{Window, WindowsWindowExt},
-    windows_api::WindowsApi,
-};
+use crate::{app::emit_to_webviews, error::Result, platform::window::Window};
 
 impl WindowManagerV2 {
     fn should_be_managed(window: &Window) -> bool {
@@ -30,7 +23,6 @@ impl WindowManagerV2 {
     }
 
     fn should_be_managed_impl(window: &Window, check_minimized: bool) -> bool {
-        let hwnd = window.hwnd();
         if !window.is_interactable_and_not_hidden() || (check_minimized && window.is_minimized()) {
             return false;
         }
@@ -49,15 +41,13 @@ impl WindowManagerV2 {
             }
         }
 
-        let styles = WindowsApi::get_styles(hwnd);
         // Ignore windows that are not resizable
-        if !styles.contains(WS_SIZEBOX) {
+        if !window.is_resizable() {
             return false;
         }
 
-        let ex_styles = WindowsApi::get_ex_styles(hwnd);
         // Top most windows normally are widgets or tools that should not be managed
-        if ex_styles.contains(WS_EX_TOPMOST) {
+        if window.is_always_on_top() {
             return false;
         }
 

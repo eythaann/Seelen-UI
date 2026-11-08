@@ -12,6 +12,7 @@
 
 pub mod cursor;
 pub mod hook;
+pub mod info;
 pub mod install_id;
 pub mod monitor;
 pub mod paths;

@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     session::SessionManager,
-    state::application::{AppSettings, FULL_STATE},
+    state::{AppSettings, FULL_STATE},
     utils::constants::SEELEN_COMMON,
 };
 

@@ -1,119 +1,153 @@
-pub mod application;
-pub mod infrastructure;
+//! Seelen UI user state: settings, per-widget items (toolbar, weg), performance mode and the
+//! watcher of the user resources folder.
 
-use application::AppSettings;
+mod application;
+mod domain;
+
+use std::{path::PathBuf, sync::Once};
+
 use seelen_core::{
-    resource::{PluginId, WidgetId},
+    handlers::SeelenEvent,
     state::{
-        WorkspaceId,
-        by_widget::GenericWidgetSettings,
-        twm::TwmPlugin,
-        value::{KnownPlugin, PluginValue},
+        AppConfig, IconPackEntry, PerformanceMode, Settings, ToolbarState, Wallpaper, WegItems,
+        by_monitor::MonitorConfiguration, by_wallpaper::WallpaperInstanceSettings,
     },
-    system_state::MonitorId,
 };
-use uuid::Uuid;
+use tauri::WebviewWindow;
+use tauri_plugin_dialog::DialogExt;
 
-use crate::{resources::RESOURCES, virtual_desktops::VdManager};
+use crate::{
+    app::{emit_to_webviews, get_app_handle},
+    error::{Result, ResultLogExt},
+    platform::shell,
+    utils::{constants::SEELEN_COMMON, date_based_hex_id},
+    widgets::permissions::{WidgetPerm, request_widget_permission},
+};
 
-/// Key of the layout setting declared on the window manager widget metadata
-const WM_LAYOUT_SETTING_KEY: &str = "layout";
+use self::application::BUNDLED_SETTINGS_BY_APP;
 
-impl AppSettings {
-    pub fn is_widget_enabled(&self, widget_id: &WidgetId) -> bool {
-        self.settings.is_widget_enabled(widget_id)
-    }
+pub use self::{
+    application::{
+        AppSettings, FULL_STATE, PERFORMANCE_MODE, StateManager, TOOLBAR_ITEMS_MANAGER,
+        WEG_ITEMS_MANAGER, initialize_user_resources_watcher,
+    },
+    domain::StateEvent,
+};
 
-    pub fn is_widget_enable_on_monitor(
-        &self,
-        widget_id: &WidgetId,
-        monitor_id: &MonitorId,
-    ) -> bool {
-        self.settings
-            .is_widget_enabled_on_monitor(widget_id, monitor_id)
-    }
-
-    pub fn is_weg_enabled(&self) -> bool {
-        self.is_widget_enabled(&WidgetId::known_weg())
-    }
-
-    pub fn get_widget_instances_ids(&self, widget_id: &WidgetId) -> Vec<Uuid> {
-        let config = self.settings.by_widget.others.get(widget_id);
-        match config {
-            Some(config) => config
-                .instances
-                .as_ref()
-                .map_or_else(Default::default, |i| i.keys().cloned().collect()),
-            None => Vec::new(),
-        }
-    }
-
-    pub fn get_wm_layout(&self, workspace_id: &WorkspaceId) -> TwmPlugin {
-        let base = TwmPlugin::default();
-
-        let layout_id = self.get_wm_layout_id(workspace_id);
-
-        let mut plugin_with_layout = None;
-        RESOURCES.plugins.any_sync(|_, p| {
-            if p.id == layout_id {
-                plugin_with_layout = Some(p.clone());
-                true
-            } else {
-                false
+/// Bridges the state events to the webviews. Registered on the first command access, as the
+/// webviews always fetch the state before listening to its changes.
+fn register_webviews_bridge() {
+    static REGISTER: Once = Once::new();
+    REGISTER.call_once(|| {
+        StateManager::subscribe(|event| match event {
+            StateEvent::SettingsChanged { settings } => {
+                emit_to_webviews(SeelenEvent::StateSettingsChanged, &*settings);
+            }
+            StateEvent::PerformanceModeChanged { mode } => {
+                emit_to_webviews(SeelenEvent::StatePerformanceModeChanged, mode);
             }
         });
+    });
+}
 
-        let Some(plugin) = plugin_with_layout else {
-            return base;
-        };
-
-        let PluginValue::Known(plugin) = &plugin.plugin else {
-            return base;
-        };
-
-        let KnownPlugin::WManager(layout) = &**plugin else {
-            return base;
-        };
-
-        *layout.clone()
+impl crate::tauri_handlers::Handlers {
+    pub fn state_get_toolbar_items() -> ToolbarState {
+        TOOLBAR_ITEMS_MANAGER.get()
     }
 
-    /// Priority: workspace layout → monitor layout → global layout → bspwm
-    pub fn get_wm_layout_id(&self, workspace_id: &WorkspaceId) -> PluginId {
-        let wm_id = WidgetId::known_wm();
-        let from_overrides = |settings: Option<&GenericWidgetSettings>| -> Option<PluginId> {
-            let value = settings?.rest.get(WM_LAYOUT_SETTING_KEY)?;
-            let layout_id: PluginId = value.0.as_str()?.into();
-            layout_id.is_valid().then_some(layout_id)
-        };
+    pub fn state_write_toolbar_items(webview: WebviewWindow, items: ToolbarState) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
+        TOOLBAR_ITEMS_MANAGER.write(items)
+    }
 
-        let monitor_config = VdManager::instance()
-            .get_monitor_of_workspace(workspace_id)
-            .and_then(|monitor_id| self.settings.monitors_v3.get(&monitor_id));
+    pub fn state_get_weg_items() -> WegItems {
+        WEG_ITEMS_MANAGER.get()
+    }
 
-        if let Some(monitor_config) = monitor_config {
-            let by_workspace = monitor_config
-                .by_workspace
-                .get(workspace_id)
-                .and_then(|config| from_overrides(config.by_widget.get(&wm_id)));
-            if let Some(layout_id) = by_workspace {
-                return layout_id;
-            }
+    pub fn state_write_weg_items(webview: WebviewWindow, items: WegItems) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
+        WEG_ITEMS_MANAGER.write(items)
+    }
 
-            if let Some(layout_id) = from_overrides(monitor_config.by_widget.get(&wm_id)) {
-                return layout_id;
-            }
-        }
-
-        let default = self.settings.by_widget.wm.layout.clone();
-        if default.is_valid() {
-            default
+    pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
+        register_webviews_bridge();
+        if let Some(path) = path {
+            Ok(Settings::load(path)?)
         } else {
-            "@default/wm-bspwm".into()
+            Ok(FULL_STATE.load().settings.clone())
         }
     }
 
-    pub fn locale(&self) -> &String {
-        &self.settings.language
+    pub fn state_get_default_settings() -> Result<Settings> {
+        let mut settings = Settings::default();
+        settings.sanitize()?;
+        Ok(settings)
+    }
+
+    pub fn state_get_default_monitor_settings() -> MonitorConfiguration {
+        MonitorConfiguration::default()
+    }
+
+    pub fn state_get_default_wallpaper_settings() -> WallpaperInstanceSettings {
+        WallpaperInstanceSettings::default()
+    }
+
+    pub fn state_write_settings(webview: WebviewWindow, mut settings: Settings) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
+        settings.sanitize()?;
+        FULL_STATE.rcu(move |state| {
+            let mut state = state.cloned();
+            state.settings = settings.clone();
+            state
+        });
+        FULL_STATE.load().write_settings()?;
+        crate::backups::application::on_settings_saved();
+        Ok(())
+    }
+
+    pub fn state_get_settings_by_app() -> Vec<AppConfig> {
+        BUNDLED_SETTINGS_BY_APP.iter().cloned().collect()
+    }
+
+    pub fn get_native_shell_wallpaper() -> Result<PathBuf> {
+        shell::wallpaper()
+    }
+
+    pub fn set_native_shell_wallpaper(webview: WebviewWindow, path: PathBuf) -> Result<()> {
+        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
+        shell::set_wallpaper(&path)
+    }
+
+    pub fn state_request_wallpaper_addition() -> Result<()> {
+        get_app_handle()
+            .dialog()
+            .file()
+            .set_title("Pick Wallpapers")
+            .add_filter("video", &Wallpaper::SUPPORTED_VIDEOS)
+            .add_filter("image", &Wallpaper::SUPPORTED_IMAGES)
+            .pick_files(|picked| {
+                for path in picked.unwrap_or_default() {
+                    if let Ok(path) = path.simplified().into_path() {
+                        let folder_to_store = SEELEN_COMMON
+                            .user_wallpapers_path()
+                            .join(date_based_hex_id());
+                        crate::get_tokio_handle().spawn(async move {
+                            Wallpaper::create_from_file(&path, &folder_to_store, true)
+                                .await
+                                .log_error();
+                        });
+                    }
+                }
+            });
+        Ok(())
+    }
+
+    pub fn state_add_icon_to_custom_icon_pack(_icon: IconPackEntry) -> Result<()> {
+        todo!()
+    }
+
+    pub fn state_get_performance_mode() -> PerformanceMode {
+        register_webviews_bridge();
+        PERFORMANCE_MODE.load()
     }
 }

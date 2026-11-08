@@ -58,7 +58,7 @@ async fn theme_tokens(
     dark: salvo::oapi::extract::QueryParam<bool, false>,
 ) -> Json<seelen_core::state::ThemeTokens> {
     let dark = dark.into_inner().unwrap_or(false);
-    let state = crate::state::application::FULL_STATE.load();
+    let state = crate::state::FULL_STATE.load();
 
     let themes_by_id: std::collections::HashMap<_, _> = RESOURCES
         .themes()
@@ -88,7 +88,7 @@ async fn theme_tokens(
 
 /* #[endpoint]
 async fn settings() -> Json<seelen_core::state::Settings> {
-    let state = crate::state::application::FULL_STATE.load();
+    let state = crate::state::FULL_STATE.load();
     Json(&state.settings)
 } */
 

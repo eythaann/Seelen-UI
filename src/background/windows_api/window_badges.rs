@@ -13,10 +13,8 @@ use windows::Win32::UI::WindowsAndMessaging::HICON;
 use crate::{
     error::Result,
     event_manager,
-    utils::{
-        constants::SEELEN_COMMON, icon_extractor::convert_hicon_to_rgba_image,
-        lock_free::SyncHashMap,
-    },
+    utils::{constants::SEELEN_COMMON, lock_free::SyncHashMap},
+    windows_api::icon::convert_hicon_to_rgba_image,
 };
 
 static WINDOW_BADGES: LazyLock<WindowBadges> = LazyLock::new(|| WindowBadges {

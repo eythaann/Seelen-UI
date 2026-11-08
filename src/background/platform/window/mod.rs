@@ -16,7 +16,7 @@ use std::{
 
 use seelen_core::{
     rect::Rect,
-    system_state::{FocusedApp, MonitorId, UserAppWindow},
+    system_state::{FocusedApp, MonitorId, UserAppWindow, ZOrder},
 };
 
 use crate::{error::Result, utils::lock_free::TracedMutex};
@@ -174,6 +174,31 @@ impl Window {
     /// Moves and resizes the window without changing its z-order nor activating it.
     pub fn set_rect(&self, rect: &Rect) -> Result<()> {
         self.0.set_rect(rect)
+    }
+
+    /// Changes the z-order of the window without moving nor activating it.
+    pub fn set_z_order(&self, order: ZOrder) -> Result<()> {
+        self.0.set_z_order(order)
+    }
+
+    /// Places the window just below `other` in the z-order, without activating it.
+    pub fn place_below(&self, other: &Window) -> Result<()> {
+        self.0.place_below(&other.0)
+    }
+
+    /// Asks the window to close, as if the user clicked its close button.
+    pub fn close(&self) -> Result<()> {
+        self.0.close()
+    }
+
+    /// The user can resize the window by dragging its borders.
+    pub fn is_resizable(&self) -> bool {
+        self.0.is_resizable()
+    }
+
+    /// The window stays above every window that is not always on top.
+    pub fn is_always_on_top(&self) -> bool {
+        self.0.is_always_on_top()
     }
 
     pub fn unminimize(&self) -> Result<()> {

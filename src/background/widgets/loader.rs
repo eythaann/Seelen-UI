@@ -12,7 +12,7 @@ use crate::{
     app::get_app_handle,
     get_tokio_handle,
     resources::RESOURCES,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     system_modules::monitors::MonitorManager,
     utils::lock_free::SyncHashMap,
     widgets::{
@@ -186,7 +186,9 @@ impl WidgetPod {
     }
 
     pub fn hwnd(&self) -> Option<isize> {
-        self.window.as_ref()?.0.hwnd().ok().map(|h| h.0 as isize)
+        webview::native_window(&self.window.as_ref()?.0)
+            .ok()
+            .map(|window| window.address())
     }
 
     pub fn set_status(&mut self, status: WidgetStatus) {

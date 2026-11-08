@@ -4,19 +4,16 @@ use std::time::Duration;
 
 use parking_lot::RwLock;
 use rand::RngExt;
-use seelen_core::handlers::SeelenEvent;
 use seelen_core::resource::WallpaperId;
 use seelen_core::state::{WallpaperCollection, WorkspaceId};
 use seelen_core::system_state::MonitorId;
-use tauri::Listener;
 use tokio::sync::{Notify, mpsc};
 use tokio::time::Instant;
 use uuid::Uuid;
 
-use crate::app::get_app_handle;
 use crate::error::{Result, ResultLogExt};
 use crate::get_tokio_handle;
-use crate::state::application::FULL_STATE;
+use crate::state::{FULL_STATE, StateEvent, StateManager};
 
 use crate::virtual_desktops::domain::VirtualDesktopEvent;
 
@@ -52,8 +49,10 @@ impl WorkspaceWallpapersManager {
         });
 
         // Listen for settings changes
-        get_app_handle().listen(SeelenEvent::StateSettingsChanged, |_| {
-            Self::on_settings_changed();
+        StateManager::subscribe(|event| {
+            if matches!(event, StateEvent::SettingsChanged { .. }) {
+                Self::on_settings_changed();
+            }
         });
     }
 

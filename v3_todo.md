@@ -94,11 +94,9 @@ Layout of each `platform/<primitive>/`:
       `#![allow(dead_code)]` of `platform/mod.rs` was removed.
   - `get_app_config`/`slu_category` are app-config business logic, not OS: they left the native contract and live in
     `state/application/apps_config.rs` (via `exe_path()`).
-  - `WindowsWindowExt` is still imported where the code is Win32 by nature (`hwnd()` for styles/z-order/shadow, UMID,
-    UWP frames): `modules/apps/application/{windows,previews}.rs`, `clipboard`, `widgets/weg/handler.rs`,
-    `widgets/window_manager/{mod,hook,handler,state_v2}.rs`. Those get resolved in Phase 1/2 when each owner gets its
-    trait (candidates to promote to `platform::window`: `close`, z-order, frame bounds without shadow).
-  - `widgets/wallpaper_manager` still uses `WindowEnumerator` for the `WorkerW` lookup: Win32 plumbing, moves with it.
+  - `WindowsWindowExt` is only imported from Windows impls (`apps`, `app_previews`, `clipboard`,
+    `wallpaper_manager/windows.rs`). `close`, `set_z_order`, `place_below`, `is_resizable` and `is_always_on_top` were
+    promoted to `platform::window` (Phase 2, `widgets/`).
 - [x] `windows_api/{window,monitor,process}` removed: their Win32 implementation now lives in
       `platform/{window,monitor,process}/windows*` (monitor split in `display_config.rs` / `display_view.rs`),
       `WinEvent` in `platform/hook/windows/event.rs`, and the DDC/CI code (only used by brightness) in
@@ -203,14 +201,38 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
 - [x] `session/` — module layout (`mod.rs` infra re-exporting `SessionManager`/`SessionManagerEvent` and
       `reemit_session`). The only OS dependency, the token storage, is the `CredentialStore` trait (domain) implemented
       by `WindowsCredentials` (`PasswordVault`). `read_credential` is no longer public.
-- [ ] `state/` (3/8) — infra + application.
+- [x] `state/` — module layout: `mod.rs` infra (handlers + webviews bridge, re-exports `FULL_STATE`, `AppSettings`,
+      `PERFORMANCE_MODE`, `TOOLBAR_ITEMS_MANAGER`, `WEG_ITEMS_MANAGER`, `StateManager`, `StateEvent`; consumers use
+      `crate::state::*`), `domain.rs` (`StateEvent { SettingsChanged, PerformanceModeChanged }`), `application/` private
+      and without Tauri. `StateManager` (unit struct, `FULL_STATE` is swapped as a whole) emits the events; performance
+      mode and workspace wallpapers subscribe to it (and to `PowerManager`) instead of listening to Tauri events. Native
+      wallpaper and AUMID → exe moved to `platform::shell::{wallpaper, set_wallpaper, app_executable}`; the resources
+      watcher uses `RecommendedWatcher`.
+  - Done: the first-run import of the native taskbar pins goes through `SeelenWeg::native_pinned_apps()`.
 - [x] `virtual_desktops/` — no OS code left (everything goes through `platform/`), so no `windows.rs`. Module layout:
       `mod.rs` infra (handlers + webviews bridge, re-exports `VdManager`, `MINIMIZED_BY_WORKSPACES`,
       `VirtualDesktopEvent`, `WorkspaceWallpapersManager`), `cli.rs`, `domain.rs` (`VirtualDesktopEvent` +
       `get_indexes`), `application/{mod.rs, storage.rs (old bridge.rs), wallpapers.rs}`.
-- [ ] `widgets/` (17/27) — `window_manager`, `weg`, `toolbar`, `task_switcher`, `popups`, `wallpaper_manager`: put
-      positioning/HWND behind traits (windows, monitors, app bar).
-- [ ] `utils/` (10/16) — split generic utilities from Win32 ones (Win32 ones go to `windows_api/`).
+- [x] `widgets/` — no Win32 outside `windows*` files. - Own webview windows: `widgets/webview/{mod.rs, windows.rs}`
+      (`native_window`, `set_position`, app bar register/unregister, owner, system transitions, WebView2 rasterization
+      scale and memory pressure). Handlers use `native_window(..).address()` instead of `webview.hwnd()`. - Windows of
+      other apps: `platform::window` gained `set_z_order(ZOrder)`, `place_below`, `close`, `is_resizable`,
+      `is_always_on_top`; the wm shadow offset is `outer_rect - inner_rect`. `Process::kill` (taskkill) and
+      `platform::shell::{file_app_id, file_display_name, open_native_start_menu}`; the cursor goes through
+      `platform::cursor::position`. - `wallpaper_manager`: the `Progman`/`WorkerW` logic is
+      `wallpaper_manager/windows.rs` behind `attach_to_desktop(&Window)`. - `weg`: raw win events (native taskbar /
+      notification center hiding) and the taskbar pins import are `weg/windows/{raw_events,native_taskbar}.rs`. Accepted
+      exception: `platform/hook/windows` still calls `SeelenWeg::process_raw_win_event` (fast path on the raw hook). -
+      `toolbar/hook.rs` (commented out dead code) deleted.
+- [x] `utils/` — only generic utilities left (the `unsafe` of `lock_free/traced_mutex.rs` is not OS code). `winver.rs` →
+      `platform::info` (`has_fixed_runtime`, `is_running_as_appx`, `was_installed_using_msix`; Windows only extras:
+      `is_windows_10`, `get_fixed_runtime_path`). `pwsh.rs` and `virtual_desktop.rs` → `windows_api/`,
+      `resolve_guid_path` → `WindowsApi::resolve_guid_path`. `integrity`: single instance mutex and UAC/elevation check
+      in `integrity/windows.rs`. `icon_extractor` → `resources/icon_extractor/` (it feeds the system icon pack): queue,
+      failure cache and image post-processing are agnostic, the per file type / AUMID extraction is
+      `icon_extractor/windows.rs` and the HICON/HBITMAP → RGBA conversion is `windows_api/icon.rs` (shared with
+      system_tray and window badges). App ids are plain `String`s in the queue (failure cache bumped to
+      `icon_failures3.yml`).
 - [x] `cli/` — `svc_pipe.rs` launches the service through the new `platform::shell` primitive (`execute`, `open`), which
       replaced every `WindowsApi::execute` outside Windows impls (`exposed.rs`, `utils/integrity`, `widgets/webview.rs`,
       `weg/cli.rs`). `self_pipe.rs`: the `TaskbarButtonChanged` arm (`WindowBadges`, sent by the explorer hook) is

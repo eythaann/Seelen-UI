@@ -9,7 +9,7 @@ use seelen_core::{
 use crate::{
     error::Result,
     resources::RESOURCES,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
 };
 

@@ -15,6 +15,7 @@ pub fn has_fixed_runtime() -> bool {
     std::env::var_os("WEBVIEW2_BROWSER_EXECUTABLE_FOLDER").is_some()
 }
 
+/// Fixed WebView2 runtime shipped in the `runtime` folder next to the executable, if any.
 pub fn get_fixed_runtime_path() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
     let install_dir = exe.parent()?;

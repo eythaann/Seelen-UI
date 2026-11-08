@@ -12,7 +12,7 @@ use crate::{
     app::emit_to_webviews,
     error::{Result, ResultLogExt},
     resources::RESOURCES,
-    state::application::FULL_STATE,
+    state::FULL_STATE,
     utils::lock_free::TracedMutex,
 };
 

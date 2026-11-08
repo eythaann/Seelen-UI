@@ -15,7 +15,7 @@ use seelen_core::{state::PerformanceMode, system_state::AudioWaveform};
 use crate::{
     error::Result,
     event_manager,
-    state::application::performance::PERFORMANCE_MODE,
+    state::PERFORMANCE_MODE,
     system_modules::media_devices::{MediaDevicesEvent, MediaDevicesManager},
     utils::{lock_free::TracedMutex, spawn_named_thread},
 };

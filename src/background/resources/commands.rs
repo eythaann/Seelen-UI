@@ -8,7 +8,7 @@ use seelen_core::{
 use crate::{
     error::{Result, ResultLogExt},
     resources::RESOURCES,
-    utils::icon_extractor::queue::IconExtractor,
+    resources::icon_extractor::queue::IconExtractor,
     widgets::permissions::{WidgetPerm, request_widget_permission},
 };
 use std::{path::PathBuf, sync::Arc};

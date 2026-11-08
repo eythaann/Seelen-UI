@@ -7,8 +7,7 @@ use crate::{
     app::get_app_handle,
     error::Result,
     get_tokio_handle,
-    platform::{paths, shell, startup},
-    utils::was_installed_using_msix,
+    platform::{info::was_installed_using_msix, paths, shell, startup},
 };
 
 pub struct ServicePipe;

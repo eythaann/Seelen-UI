@@ -50,6 +50,11 @@ impl Process {
         self.0.is_frozen()
     }
 
+    /// Forcefully terminates the process, without waiting for it.
+    pub fn kill(&self) -> Result<()> {
+        self.0.kill()
+    }
+
     pub fn is_seelen(&self) -> bool {
         if let Ok(exe) = self.exe_path() {
             return exe.ends_with("seelen-ui.exe");

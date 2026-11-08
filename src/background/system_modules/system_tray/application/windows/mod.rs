@@ -18,7 +18,8 @@ use crate::{
     error::Result,
     platform::hook::{HookManager, WindowEvent},
     system_modules::system_tray::domain::{SystemTrayEvent, SystemTraySystem},
-    utils::{lock_free::SyncHashMap, resolve_guid_path},
+    utils::lock_free::SyncHashMap,
+    windows_api::WindowsApi,
 };
 
 use self::tray_hook_loader::TrayHookLoader;
@@ -211,7 +212,7 @@ fn read_registry_notify_icon(settings: &RegKey, key: &str) -> Result<RegistryNot
     let path_with_guid: String = regkey.get_value("ExecutablePath")?;
     Ok(RegistryNotifyIcon {
         key: key.to_string(),
-        executable_path: resolve_guid_path(path_with_guid)?,
+        executable_path: WindowsApi::resolve_guid_path(path_with_guid)?,
         // icon_snapshot: regkey.get_raw_value("IconSnapShot").map(|v| v.bytes).ok(),
         initial_tooltip: regkey.get_value("InitialTooltip").ok(),
         icon_guid: regkey

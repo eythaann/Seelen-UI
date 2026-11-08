@@ -6,7 +6,7 @@ use seelen_core::state::twm::TwmReservation;
 use crate::error::Result;
 use crate::platform::monitor::Monitor;
 use crate::platform::window::Window;
-use crate::state::application::FULL_STATE;
+use crate::state::FULL_STATE;
 use crate::virtual_desktops::VdManager;
 use crate::widgets::window_manager::state_v2::{
     TwmState, TwmStateEvent, WM_STATE, twm_set_rect_to_float_initial_size,

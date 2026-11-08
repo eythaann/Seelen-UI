@@ -11,10 +11,12 @@ use crate::{
     event_manager,
     system_modules::start::{StartMenuEvent, StartMenuManager},
     utils::{constants::SEELEN_COMMON, lock_free::SyncVec},
-    windows_api::types::AppUserModelId,
 };
 
-use super::{_extract_and_save_icon_from_file, _extract_and_save_icon_umid};
+use super::imp;
+
+/// Bumped when the format of [`IconExtractorRequest`] changes.
+const FAILURES_CACHE_FILE: &str = "icon_failures3.yml";
 
 /// File extensions that are per-file (each has its own unique icon).
 /// Everything else is per-extension (all files of that type share the same shell icon).
@@ -45,7 +47,7 @@ pub struct IconExtractor {
 ///   This avoids storing hundreds of individual path failures for non-executable file types.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum IconExtractorRequest {
-    AppUMID(AppUserModelId),
+    AppUMID(String),
     Path(PathBuf),
     /// Glob-like failure record: any file with this extension should be skipped.
     Extension(String),
@@ -67,7 +69,7 @@ impl IconExtractor {
             failures: SyncVec::new(),
             save_failures: debounce(
                 |_| {
-                    let path = SEELEN_COMMON.app_cache_dir().join("icon_failures2.yml");
+                    let path = SEELEN_COMMON.app_cache_dir().join(FAILURES_CACHE_FILE);
                     if let Ok(file) = std::fs::File::create(&path) {
                         serde_yaml::to_writer(file, &Self::instance().failures.to_vec())
                             .log_error();
@@ -104,7 +106,7 @@ impl IconExtractor {
     }
 
     pub fn init(&mut self) -> Result<()> {
-        let cached = SEELEN_COMMON.app_cache_dir().join("icon_failures2.yml");
+        let cached = SEELEN_COMMON.app_cache_dir().join(FAILURES_CACHE_FILE);
         if cached.exists() {
             let buff = std::fs::read(cached)?;
             let failures = serde_yaml::from_slice::<Vec<IconExtractorRequest>>(&buff)?;
@@ -177,7 +179,7 @@ impl IconExtractor {
 
     pub fn clear_failures(&self) {
         self.failures.clear();
-        let path = SEELEN_COMMON.app_cache_dir().join("icon_failures2.yml");
+        let path = SEELEN_COMMON.app_cache_dir().join(FAILURES_CACHE_FILE);
         std::fs::remove_file(path).log_error();
     }
 
@@ -189,7 +191,7 @@ impl IconExtractor {
             .failures
             .to_vec()
             .into_iter()
-            .filter(|r| matches!(r, IconExtractorRequest::AppUMID(id) if id.is_property_store()))
+            .filter(|r| matches!(r, IconExtractorRequest::AppUMID(id) if imp::depends_on_start_menu(id)))
             .collect();
 
         if to_retry.is_empty() {
@@ -214,10 +216,10 @@ impl IconExtractor {
     fn process(request: &IconExtractorRequest) -> Result<()> {
         match request {
             IconExtractorRequest::AppUMID(umid) => {
-                _extract_and_save_icon_umid(umid)?;
+                imp::extract_from_app_id(umid)?;
             }
             IconExtractorRequest::Path(path) => {
-                _extract_and_save_icon_from_file(path)?;
+                imp::extract_from_file(path)?;
             }
             IconExtractorRequest::Extension(_) => {
                 // Extension entries are failure markers, not actionable requests.

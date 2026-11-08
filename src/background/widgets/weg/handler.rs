@@ -1,34 +1,28 @@
-use std::{os::windows::process::CommandExt, path::PathBuf};
+use std::path::PathBuf;
 
 use seelen_core::{handlers::SeelenEvent, state::WegItemData};
 
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    platform::window::{Window, WindowState, WindowsWindowExt},
-    state::application::WEG_ITEMS_MANAGER,
+    platform::{
+        shell,
+        window::{Window, WindowState},
+    },
+    state::WEG_ITEMS_MANAGER,
     system_modules::start::StartMenuManager,
     widgets::permissions::{WidgetPerm, request_widget_permission},
-    windows_api::WindowsApi,
 };
-use windows::Win32::{System::Threading::CREATE_NO_WINDOW, UI::WindowsAndMessaging::WM_CLOSE};
 
 impl crate::tauri_handlers::Handlers {
     pub fn weg_close_app(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        let window = Window::from(hwnd);
-        WindowsApi::post_message(window.hwnd(), WM_CLOSE, 0, 0)?;
-        Ok(())
+        Window::from(hwnd).close()
     }
 
     pub fn weg_kill_app(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::KillProcesses)?;
-        let window = Window::from(hwnd);
-        std::process::Command::new("taskkill.exe")
-            .args(["/F", "/PID", &window.process_id().to_string()])
-            .creation_flags(CREATE_NO_WINDOW.0)
-            .spawn()?;
-        Ok(())
+        Window::from(hwnd).process().kill()
     }
 
     pub fn weg_toggle_window_state(
@@ -68,13 +62,12 @@ impl crate::tauri_handlers::Handlers {
             if !path.exists() || path.is_dir() {
                 return Err("Invalid path".into());
             }
-            let umid = umid.or_else(|| WindowsApi::get_file_umid(&path).ok());
-            let display_name =
-                WindowsApi::get_executable_display_name(&path).unwrap_or_else(|_| {
-                    path.file_stem()
-                        .map(|s| s.to_string_lossy().to_string())
-                        .unwrap_or_else(|| "Unknown".to_string())
-                });
+            let umid = umid.or_else(|| shell::file_app_id(&path).ok());
+            let display_name = shell::file_display_name(&path).unwrap_or_else(|_| {
+                path.file_stem()
+                    .map(|s| s.to_string_lossy().to_string())
+                    .unwrap_or_else(|| "Unknown".to_string())
+            });
             (umid, display_name)
         };
 

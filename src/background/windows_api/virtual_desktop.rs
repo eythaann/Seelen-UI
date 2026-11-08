@@ -3,7 +3,7 @@ use winreg::{RegKey, enums::HKEY_CURRENT_USER};
 
 use crate::{error::Result, windows_api::WindowsApi};
 
-use super::is_windows_10;
+use crate::platform::info::is_windows_10;
 
 pub struct RegistryVirtualDesktopManager {}
 

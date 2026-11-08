@@ -12,7 +12,7 @@ use crate::{
         shell,
         window::{Window, WindowState},
     },
-    state::application::WEG_ITEMS_MANAGER,
+    state::WEG_ITEMS_MANAGER,
     system_modules::apps::UserAppsManager,
 };
 

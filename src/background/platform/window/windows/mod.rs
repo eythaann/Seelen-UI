@@ -9,7 +9,10 @@ use std::{
     sync::LazyLock,
 };
 
-use seelen_core::{rect::Rect, system_state::Relaunch};
+use seelen_core::{
+    rect::Rect,
+    system_state::{Relaunch, ZOrder},
+};
 use slu_ipc::messages::SvcAction;
 use windows::{
     ApplicationModel::AppInfo,
@@ -18,8 +21,9 @@ use windows::{
         UI::{
             Shell::FOLDERID_System,
             WindowsAndMessaging::{
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_FORCEMINIMIZE, SW_HIDE, SW_MAXIMIZE,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SW_SHOW, SW_SHOWNOACTIVATE,
+                HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SW_FORCEMINIMIZE, SW_HIDE, SW_MAXIMIZE, SW_MINIMIZE, SW_NORMAL,
+                SW_RESTORE, SW_SHOW, SW_SHOWNOACTIVATE, WM_CLOSE, WS_EX_TOPMOST, WS_SIZEBOX,
             },
         },
     },
@@ -205,6 +209,33 @@ impl NativeWindow {
                 flags: flags.0,
             })
         }
+    }
+
+    pub fn set_z_order(&self, order: ZOrder) -> Result<()> {
+        let order = match order {
+            ZOrder::TopMost => HWND_TOPMOST,
+            ZOrder::NoTopMost => HWND_NOTOPMOST,
+            ZOrder::Top => HWND_TOP,
+            ZOrder::Bottom => HWND_BOTTOM,
+        };
+        WindowsApi::set_z_order(self.0, order)
+    }
+
+    /// `SetWindowPos` inserts the window after (below) `other`.
+    pub fn place_below(&self, other: &Self) -> Result<()> {
+        WindowsApi::set_z_order(self.0, other.0)
+    }
+
+    pub fn close(&self) -> Result<()> {
+        WindowsApi::post_message(self.0, WM_CLOSE, 0, 0)
+    }
+
+    pub fn is_resizable(&self) -> bool {
+        WindowsApi::get_styles(self.0).contains(WS_SIZEBOX)
+    }
+
+    pub fn is_always_on_top(&self) -> bool {
+        WindowsApi::get_ex_styles(self.0).contains(WS_EX_TOPMOST)
     }
 
     /// The caller already skips minimized windows.

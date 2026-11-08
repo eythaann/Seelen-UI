@@ -1,0 +1,146 @@
+use windows::Win32::{
+    Foundation::{HWND, LPARAM, RECT, WPARAM},
+    Graphics::Gdi::{InvalidateRect, UpdateWindow},
+    UI::WindowsAndMessaging::{
+        FindWindowA, FindWindowExA, GWL_EXSTYLE, GWL_STYLE, PostMessageW, SWP_ASYNCWINDOWPOS,
+        SetParent, SetWindowLongPtrW, WS_CHILDWINDOW, WS_CLIPSIBLINGS, WS_EX_ACCEPTFILES,
+        WS_EX_APPWINDOW, WS_EX_WINDOWEDGE,
+    },
+};
+
+use crate::{
+    error::Result,
+    pcstr,
+    platform::window::{Window, WindowsWindowExt},
+    windows_api::{WindowEnumerator, WindowsApi},
+};
+
+pub fn attach_to_desktop(window: &Window) -> Result<()> {
+    let hwnd = window.hwnd();
+    let rect = WindowsApi::virtual_screen_rect()?;
+
+    match try_set_under_desktop_items(hwnd) {
+        Ok(_) => {
+            let relative_rect = RECT {
+                left: 0,
+                top: 0,
+                right: rect.right - rect.left,
+                bottom: rect.bottom - rect.top,
+            };
+            WindowsApi::move_window(hwnd, &relative_rect)?;
+            WindowsApi::set_position(hwnd, None, &relative_rect, SWP_ASYNCWINDOWPOS)?;
+        }
+        Err(e) => {
+            log::warn!(
+                "Failed to attach to desktop hierarchy: {}, using absolute positioning",
+                e
+            );
+            WindowsApi::move_window(hwnd, &rect)?;
+            WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+        }
+    }
+
+    // Log instead of propagating so positioning already applied above is preserved.
+    if let Err(e) = refresh_desktop() {
+        log::warn!("Failed to refresh desktop after wallpaper attach: {e}");
+    }
+    Ok(())
+}
+
+fn setup_desktop_layer() -> Result<()> {
+    let progman = unsafe { FindWindowA(pcstr!("Progman"), None)? };
+    unsafe { PostMessageW(Some(progman), 0x052C, WPARAM(0xD), LPARAM(0x1))? };
+    Ok(())
+}
+
+fn detect_worker_w() -> Result<Option<HWND>> {
+    let mut worker_w = None;
+
+    // CASE 1: Standard Windows 10/11 layout
+    // WorkerW exists as a sibling to another WorkerW that contains SHELLDLL_DefView
+    // 0x00010190 "" WorkerW
+    //   0x000100EE "" SHELLDLL_DefView
+    //     0x000100F0 "FolderView" SysListView32
+    // 0x00100B8A "" WorkerW       <-- This is the WorkerW we want
+    // 0x000100EC "Program Manager" Progman
+    WindowEnumerator::new().for_each(|current| unsafe {
+        if FindWindowExA(Some(current), None, pcstr!("SHELLDLL_DefView"), None).is_ok()
+            && let Ok(w) = FindWindowExA(None, Some(current), pcstr!("WorkerW"), None)
+        {
+            worker_w = Some(w);
+        }
+    })?;
+
+    // CASE 2: Raised Desktop (Windows 11 with layered shell view)
+    // Progman contains SHELLDLL_DefView and WorkerW as direct children
+    // 0x000100EC "Program Manager" Progman
+    //   0x000100EE "" SHELLDLL_DefView
+    //   0x00100B8A "" WorkerW       <-- This is the WorkerW we want
+    if worker_w.is_none() {
+        let progman = unsafe { FindWindowA(pcstr!("Progman"), None)? };
+        let has_defview =
+            unsafe { FindWindowExA(Some(progman), None, pcstr!("SHELLDLL_DefView"), None) }.is_ok();
+
+        if has_defview {
+            let mut attempts = 0;
+            worker_w = unsafe { FindWindowExA(Some(progman), None, pcstr!("WorkerW"), None).ok() };
+            while worker_w.is_none() && attempts < 10 {
+                attempts += 1;
+                std::thread::sleep(std::time::Duration::from_millis(100));
+                worker_w =
+                    unsafe { FindWindowExA(Some(progman), None, pcstr!("WorkerW"), None).ok() };
+            }
+        }
+    }
+
+    Ok(worker_w)
+}
+
+fn try_set_under_desktop_items(hwnd: HWND) -> Result<()> {
+    // Sending the "spawn worker" message when a raised WorkerW already exists makes
+    // Explorer tear down and recreate it, destroying our webview (SetParent'd into the
+    // old one) as a side effect. That retriggers this same code on remount, causing an
+    // infinite create/destroy loop. Only ask Explorer to create it when it's missing.
+    let mut worker_w = detect_worker_w()?;
+    if worker_w.is_none() {
+        setup_desktop_layer()?;
+        worker_w = detect_worker_w()?;
+    }
+    log::trace!("Setting under desktop, worker_w: {worker_w:?}");
+
+    let worker_w = worker_w.ok_or("WorkerW not found")?;
+
+    unsafe {
+        // tao adds WS_EX_WINDOWEDGE to all windows; See tao#1153.
+        let mut style = WindowsApi::get_styles(hwnd);
+        style |= WS_CHILDWINDOW;
+        style &= !WS_CLIPSIBLINGS;
+        SetWindowLongPtrW(hwnd, GWL_STYLE, style.0 as isize);
+
+        let mut ex_style = WindowsApi::get_ex_styles(hwnd);
+        ex_style &= !WS_EX_ACCEPTFILES;
+        ex_style &= !WS_EX_APPWINDOW;
+        ex_style &= !WS_EX_WINDOWEDGE;
+        SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex_style.0 as isize);
+
+        SetParent(hwnd, Some(worker_w))?;
+    }
+
+    Ok(())
+}
+
+/// Repaints the desktop icons layer only. Never use SPI_SETDESKWALLPAPER here: it makes
+/// Explorer re-apply the native wallpaper, which on some systems tears down and recreates
+/// the WorkerW we are parented to, destroying our webview. The widget is then respawned,
+/// attaches and refreshes again, causing an endless flash-in/fade-out loop (#1704, #1883).
+fn refresh_desktop() -> Result<()> {
+    unsafe {
+        let progman = FindWindowA(pcstr!("Progman"), None)?;
+        if let Ok(shell_view) = FindWindowExA(Some(progman), None, pcstr!("SHELLDLL_DefView"), None)
+        {
+            InvalidateRect(Some(shell_view), None, true).ok()?;
+            UpdateWindow(shell_view).ok()?;
+        }
+    }
+    Ok(())
+}

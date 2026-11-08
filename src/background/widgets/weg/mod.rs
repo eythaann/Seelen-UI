@@ -1,15 +1,15 @@
 pub mod cli;
 pub mod handler;
-pub mod hook;
-pub mod native_taskbar;
+#[cfg(windows)]
+mod windows;
 
+#[cfg(windows)]
+use self::windows as imp;
+
+use seelen_core::state::WegItemData;
 use slu_ipc::messages::SvcAction;
 
-use crate::{
-    cli::ServicePipe, error::Result, platform::monitor::Monitor, state::application::FULL_STATE,
-};
-
-pub static TASKBAR_CLASS: [&str; 2] = ["Shell_TrayWnd", "Shell_SecondaryTrayWnd"];
+use crate::{cli::ServicePipe, error::Result, platform::monitor::Monitor, state::FULL_STATE};
 
 pub struct SeelenWeg {}
 
@@ -37,5 +37,10 @@ impl SeelenWeg {
 
     pub fn restore_native_taskbar() -> Result<()> {
         ServicePipe::request(SvcAction::RestoreNativeTaskbar)
+    }
+
+    /// Apps pinned to the native taskbar of the OS, used to import them on the first run.
+    pub fn native_pinned_apps() -> Result<Vec<WegItemData>> {
+        imp::native_pinned_apps()
     }
 }

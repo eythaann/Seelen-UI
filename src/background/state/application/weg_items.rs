@@ -8,9 +8,9 @@ use uuid::Uuid;
 
 use crate::{
     error::{Result, ResultLogExt},
+    platform::shell,
     utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::TracedMutex},
-    widgets::weg::native_taskbar::get_windows_taskbar_pinned_apps,
-    windows_api::msix::MsixAppsManager,
+    widgets::weg::SeelenWeg,
 };
 
 pub static WEG_ITEMS_MANAGER: LazyLock<WegItemsManager> = LazyLock::new(|| {
@@ -87,7 +87,7 @@ impl WegItemsManager {
     /// Internal method to import from Windows without writing to state
     /// Used during initial load to avoid double-write
     fn import_from_windows_taskbar_internal(&self) -> Result<WegItems> {
-        let windows_pinned_items = get_windows_taskbar_pinned_apps()?;
+        let windows_pinned_items = SeelenWeg::native_pinned_apps()?;
 
         if windows_pinned_items.is_empty() {
             return Ok(initial_items());
@@ -114,7 +114,7 @@ impl WegItemsManager {
     /// This will add missing items without removing existing ones.
     /// Returns the number of items imported.
     pub fn import_from_windows_taskbar(&self) -> Result<usize> {
-        let windows_pinned_items = get_windows_taskbar_pinned_apps()?;
+        let windows_pinned_items = SeelenWeg::native_pinned_apps()?;
 
         if windows_pinned_items.is_empty() {
             return Ok(0);
@@ -182,7 +182,7 @@ fn update_weg_items_paths(items: &mut [WegItem]) {
     for item in items {
         if let WegItem::AppOrFile(data) = item
             && let Some(umid) = &data.umid
-            && let Ok(Some(app_path)) = MsixAppsManager::instance().get_app_path(umid)
+            && let Ok(Some(app_path)) = shell::app_executable(umid)
         {
             data.path = app_path;
         }

@@ -78,7 +78,7 @@ pub async fn check_for_webview_optimal_state() -> bool {
         )
         .visible(false)
         .build()?;
-        window.hwnd()?; // build could not fail so we check for the handle.
+        crate::widgets::webview::native_window(&window)?; // build could not fail so we check for the handle.
         window.destroy()?; // close the fake window
         let _ = tx.send(());
         Result::Ok(())
