@@ -388,7 +388,7 @@ export class Widget extends WidgetBasics {
    * No need to focus the webview itself, wry moves the focus into it on the window `WM_SETFOCUS`.
    */
   public async focus(): Promise<void> {
-    await invoke(SeelenCommand.RequestFocus, { hwnd: this.windowId }).catch(() => {});
+    await invoke(SeelenCommand.RequestFocus).catch(() => {});
   }
 }
 
