@@ -2,7 +2,7 @@ import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
 import type { ContextMenu, ContextMenuItem, UserAppWindow, WidgetId } from "@seelen-ui/lib/types";
 import type { AppOrFileWegItem } from "./types.ts";
 import { dockStateActions } from "./state/items.svelte.ts";
-import { fullSettings } from "./state/settings.svelte.ts";
+import { fullSettings, settingsState } from "./state/settings.svelte.ts";
 import { iconPackManager } from "libs/ui/svelte/components/Icon/index.ts";
 import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
 
@@ -136,8 +136,7 @@ export function getUserApplicationContextMenu(
       danger: true,
     });
 
-    const settings = fullSettings.value.byWidget["@seelen/weg"];
-    if (settings.showEndTask) {
+    if (settingsState.value.showEndTask) {
       items.push({
         type: "Item",
         key: "kill",

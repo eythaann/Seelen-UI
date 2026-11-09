@@ -88,11 +88,16 @@ const widgetRect = $derived.by(() => {
   }
 
   const rect = { ...monitor.rect };
-  const tbConfig = fullSettings.byWidget["@seelen/fancy-toolbar"];
   const tbMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.[
     "@seelen/fancy-toolbar"
   ] ?? {
     enabled: true,
+  };
+  // the toolbar honours per-monitor overrides (hideMode, size, position...), so reserve space the same way
+  const tbConfig = {
+    ...fullSettings.byWidget["@seelen/fancy-toolbar"],
+    ...tbMonitorConfig,
+    enabled: fullSettings.byWidget["@seelen/fancy-toolbar"].enabled,
   };
 
   if (
@@ -113,11 +118,16 @@ const widgetRect = $derived.by(() => {
     }
   }
 
-  const wegConfig = fullSettings.byWidget["@seelen/weg"];
   const wegMonitorConfig = (fullSettings.monitorsV3[monitor.id] as any)?.byWidget?.[
     "@seelen/weg"
   ] ?? {
     enabled: true,
+  };
+  // the dock honours per-monitor overrides (hideMode, size, position...), so reserve space the same way
+  const wegConfig = {
+    ...fullSettings.byWidget["@seelen/weg"],
+    ...wegMonitorConfig,
+    enabled: fullSettings.byWidget["@seelen/weg"].enabled,
   };
 
   if (

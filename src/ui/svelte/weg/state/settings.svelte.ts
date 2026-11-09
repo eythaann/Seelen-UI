@@ -1,5 +1,5 @@
 import { invoke, RuntimeStyleSheet, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { Alignment, FancyToolbarSide, HideMode, SeelenWegSide } from "@seelen-ui/lib/types";
+import { Alignment, FancyToolbarSide, HideMode, type SeelenWegSettings, SeelenWegSide } from "@seelen-ui/lib/types";
 import { isTouchPrimary } from "libs/ui/svelte/utils";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
@@ -9,13 +9,18 @@ import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
 import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 let isWidgetReady = $state(false);
-const settings = $derived(_settings.value.byWidget["@seelen/weg"]);
+// Use the per-monitor aware accessor, as flyouts and the window manager already do.
+// Reading byWidget directly ignores monitorsV3[id].byWidget overrides, so settings
+// such as hideMode could not differ between monitors.
+const settings = $derived(_settings.value.getCurrentWidgetConfig() as unknown as SeelenWegSettings);
 
 const workArea = $derived.by(() => {
   const workArea = systemState.currentMonitor.rect;
-  const tbConfig = _settings.value.byWidget["@seelen/fancy-toolbar"];
   const tbMonitorConfig = (_settings.value.monitorsV3[systemState.currentMonitor.id] as any)
     ?.byWidget?.["@seelen/fancy-toolbar"] || { enabled: true };
+  // the toolbar honours per-monitor overrides too, so use its effective config for this monitor
+  const tbRootConfig = _settings.value.byWidget["@seelen/fancy-toolbar"];
+  const tbConfig = { ...tbRootConfig, ...tbMonitorConfig, enabled: tbRootConfig?.enabled };
 
   if (!tbConfig?.enabled || !tbMonitorConfig?.enabled) {
     return workArea;
