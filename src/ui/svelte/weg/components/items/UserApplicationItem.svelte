@@ -5,7 +5,12 @@
   import { t } from "../../i18n/index.ts";
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
-  import { windowsState, focused } from "../../state/windows.svelte.ts";
+  import {
+    focused,
+    getWindowsForItem,
+    interactables,
+    windowsState,
+  } from "../../state/windows.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
   import { triggerPreviewWidget } from "../../previewWidget.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
@@ -35,12 +40,15 @@
   let itemEl: HTMLDivElement | null = $state(null);
 
   function onClick() {
-    if (windows.length > 1) {
-      triggerPreviewWidget(itemEl!, windows);
+    // with "On Monitor" a pinned item can have no windows on this monitor while the app
+    // is open on another one: act on those windows instead of launching a new instance.
+    const targets = windows.length ? windows : getWindowsForItem(item, interactables.value);
+    if (targets.length > 1) {
+      triggerPreviewWidget(itemEl!, targets);
       return;
     }
 
-    const win = windows[0];
+    const win = targets[0];
     if (!win) {
       launchItem(item, false);
     } else {

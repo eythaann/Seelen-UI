@@ -2,6 +2,11 @@
 
 ## [2.8.11-dev]
 
+### fix
+
+- dock pinned items launching a new instance instead of focusing the app's window on another monitor when unpinned items
+  visibility is set to "On Monitor".
+
 ## [2.8.10]
 
 ### enhancements
