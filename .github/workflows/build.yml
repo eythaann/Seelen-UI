@@ -1,0 +1,105 @@
+name: Build Seelen UI
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target architecture'
+        required: true
+        default: 'x86_64-pc-windows-msvc'
+        type: choice
+        options:
+          - x86_64-pc-windows-msvc
+          - aarch64-pc-windows-msvc
+  push:
+    branches:
+      - 'build-**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Job 1: Build binaries ──────────────────────────────────────────────
+  build-binaries:
+    runs-on: windows-2025
+    outputs:
+      target: ${{ steps.set-target.outputs.target }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set target
+        id: set-target
+        run: echo "target=${{ inputs.target || 'x86_64-pc-windows-msvc' }}" >> $env:GITHUB_OUTPUT
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+        with:
+          rust-targets: ${{ steps.set-target.outputs.target }}
+          cache-key-prefix: rust-build-${{ steps.set-target.outputs.target }}
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Build Hook DLL
+        run: cargo build --release --target ${{ steps.set-target.outputs.target }} -p sluhk
+
+      - name: Build Seelen UI (no bundle)
+        run: npx tauri build --ci --verbose --no-bundle --target ${{ steps.set-target.outputs.target }}
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: seelen-ui-${{ steps.set-target.outputs.target }}
+          path: |
+            target/${{ steps.set-target.outputs.target }}/release/static/**/*
+            target/${{ steps.set-target.outputs.target }}/release/*.exe
+            target/${{ steps.set-target.outputs.target }}/release/*.dll
+            target/${{ steps.set-target.outputs.target }}/release/seelen_ui.pdb
+          compression-level: 6
+
+  # ── Job 2: Bundle NSIS installer ───────────────────────────────────────
+  bundle-installer:
+    needs: build-binaries
+    runs-on: windows-2025
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+        with:
+          deno: false
+          rust-targets: ${{ needs.build-binaries.outputs.target }}
+          cache-key-prefix: rust-bundle-${{ needs.build-binaries.outputs.target }}
+
+      - name: Install frontend dependencies (minimal)
+        run: npm ci --ignore-scripts
+
+      - name: Download binaries
+        uses: actions/download-artifact@v4
+        with:
+          name: seelen-ui-${{ needs.build-binaries.outputs.target }}
+          path: target/${{ needs.build-binaries.outputs.target }}/release
+
+      - name: Clean old bundle folder
+        shell: pwsh
+        run: |
+          $bundlePath = "target/${{ needs.build-binaries.outputs.target }}/release/bundle"
+          if (Test-Path $bundlePath) {
+            Remove-Item -Path $bundlePath -Recurse -Force
+          }
+
+      - name: Bundle NSIS installer (unsigned)
+        run: npx tauri bundle --ci --verbose --target ${{ needs.build-binaries.outputs.target }} --no-sign --no-binary-patching
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: seelen-ui-installer-${{ needs.build-binaries.outputs.target }}
+          path: target/${{ needs.build-binaries.outputs.target }}/release/bundle
+          compression-level: 6
