@@ -1,6 +1,8 @@
 use windows::Win32::{
     Foundation::{HWND, LPARAM},
-    UI::Shell::{ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA, SHAppBarMessage},
+    UI::Shell::{
+        ABM_GETSTATE, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA, SHAppBarMessage,
+    },
 };
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
@@ -44,5 +46,11 @@ impl AppBarData {
         let mut data = self.0;
         data.lParam = state.into();
         unsafe { SHAppBarMessage(ABM_SETSTATE, &mut data) };
+    }
+
+    pub fn is_auto_hide(&self) -> bool {
+        let mut data = self.0;
+        let state = unsafe { SHAppBarMessage(ABM_GETSTATE, &mut data) };
+        state as u32 & ABS_AUTOHIDE != 0
     }
 }

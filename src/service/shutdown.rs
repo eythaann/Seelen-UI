@@ -4,9 +4,9 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
     System::LibraryLoader::GetModuleHandleW,
     UI::WindowsAndMessaging::{
-        CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, MSG, PostQuitMessage,
-        RegisterClassW, SW_HIDE, SW_SHOWNORMAL, TranslateMessage, WINDOW_EX_STYLE, WINDOW_STYLE,
-        WM_DESTROY, WM_ENDSESSION, WM_QUERYENDSESSION, WNDCLASSW,
+        CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, IsWindowVisible, MSG,
+        PostQuitMessage, RegisterClassW, SW_HIDE, SW_SHOWNORMAL, TranslateMessage, WINDOW_EX_STYLE,
+        WINDOW_STYLE, WM_DESTROY, WM_ENDSESSION, WM_QUERYENDSESSION, WNDCLASSW,
     },
 };
 
@@ -37,21 +37,42 @@ pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     Ok(founds)
 }
 
+/// Only one hide pass runs at a time; requests that arrive during a pass are covered by it.
+static HIDE_PASS_RUNNING: AtomicBool = AtomicBool::new(false);
+
 pub fn hide_native_taskbar() {
     NATIVE_TASKBAR_HIDDEN.store(true, Ordering::Release);
-    std::thread::spawn(|| match get_taskbars_handles() {
-        Ok(handles) => {
-            let mut attempts = 0;
-            while attempts < 10 && NATIVE_TASKBAR_HIDDEN.load(Ordering::Acquire) {
-                for hwnd in &handles {
-                    AppBarData::from_handle(*hwnd).set_state(AppBarDataState::AutoHide);
-                    let _ = WindowsApi::show_window_async(hwnd.0 as isize, SW_HIDE.0);
+    if HIDE_PASS_RUNNING.swap(true, Ordering::AcqRel) {
+        return;
+    }
+    std::thread::spawn(|| {
+        match get_taskbars_handles() {
+            Ok(handles) => {
+                for attempt in 0..10 {
+                    if attempt > 0 {
+                        std::thread::sleep(std::time::Duration::from_millis(50));
+                    }
+                    if !NATIVE_TASKBAR_HIDDEN.load(Ordering::Acquire) {
+                        continue;
+                    }
+                    for hwnd in &handles {
+                        let app_bar = AppBarData::from_handle(*hwnd);
+                        // ABM_SETSTATE makes explorer re-run its auto-hide logic and show the
+                        // taskbar again, which fires a new show event and so a new hide request.
+                        // On Windows 10 21H2 that code path can also crash explorer, so only
+                        // send it when the state really has to change.
+                        if !app_bar.is_auto_hide() {
+                            app_bar.set_state(AppBarDataState::AutoHide);
+                        }
+                        if unsafe { IsWindowVisible(*hwnd) }.as_bool() {
+                            let _ = WindowsApi::show_window_async(hwnd.0 as isize, SW_HIDE.0);
+                        }
+                    }
                 }
-                attempts += 1;
-                std::thread::sleep(std::time::Duration::from_millis(50));
             }
+            Err(err) => log::error!("Failed to get taskbars handles: {err:?}"),
         }
-        Err(err) => log::error!("Failed to get taskbars handles: {err:?}"),
+        HIDE_PASS_RUNNING.store(false, Ordering::Release);
     });
 }
 
