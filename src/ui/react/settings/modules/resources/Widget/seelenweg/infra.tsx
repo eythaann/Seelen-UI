@@ -10,6 +10,7 @@ import { getDevTools } from "../../../developer/application.ts";
 
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../../components/SettingsBox/index.tsx";
 import Compact from "antd/es/space/Compact";
+import { MediaShortcuts } from "./MediaShortcuts.tsx";
 
 export const SeelenWegSettings = () => {
   const settings = getWegConfig();
@@ -247,6 +248,8 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
         </SettingsGroup>
       )}
+
+      <MediaShortcuts />
 
       <SettingsGroup>
         <SettingsOption>

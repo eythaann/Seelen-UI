@@ -402,6 +402,30 @@ slu_commands_declaration! {
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> std::collections::HashMap<isize, UserAppWindowPreview>,
     GetUserAppWindowsColors = get_user_app_windows_colors() -> std::collections::HashMap<isize, UserAppWindowColors>,
+    UpdateWindowPreviews =
+        @webview()
+        @fallible()
+        update_window_previews(session: String, targets: Vec<WindowPreviewTarget>, opacity: u8, anchor: Option<Rect>) -> LiveWindowPreviewState,
+    ClearWindowPreviews =
+        @webview()
+        @fallible()
+        clear_window_previews(session: String),
+    BeginWindowPeek =
+        @webview()
+        @fallible()
+        begin_window_peek(hwnd: isize, session: String, rect: Rect) -> WindowPeekStatus,
+    PollWindowPeek =
+        @webview()
+        @fallible()
+        poll_window_peek(session: String, rect: Option<Rect>) -> WindowPeekStatus,
+    CancelWindowPeek =
+        @webview()
+        @fallible()
+        cancel_window_peek(session: String),
+    CommitWindowPeek =
+        @webview()
+        @fallible()
+        commit_window_peek(session: String) -> bool,
 
     // Media
     GetMediaDevices =
@@ -418,6 +442,10 @@ slu_commands_declaration! {
     MediaNext =
         @fallible()
         media_next(id: String),
+    MediaSendAppShortcut =
+        @webview()
+        @fallible()
+        media_send_app_shortcut(hwnd: isize, exe: String, action: MediaTransportAction),
     MediaSeek =
         @fallible()
         media_seek(id: String, position: i64),

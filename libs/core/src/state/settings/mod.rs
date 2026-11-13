@@ -3,6 +3,7 @@ pub mod by_monitor;
 pub mod by_theme;
 pub mod by_wallpaper;
 pub mod by_widget;
+pub mod media_shortcuts;
 pub mod settings_by_app;
 pub mod shortcuts;
 
@@ -207,6 +208,9 @@ pub struct SeelenWegSettings {
     pub show_end_task: bool,
     /// Action to perform when middle-clicking a dock item
     pub middle_click_action: WegMiddleClickAction,
+    /// Optional, explicitly enabled global shortcuts for players without Windows media sessions.
+    /// Keys are executable filenames (case insensitive), not window titles.
+    pub media_shortcuts: HashMap<String, WegMediaShortcutProfile>,
 }
 
 impl Default for SeelenWegSettings {
@@ -231,8 +235,19 @@ impl Default for SeelenWegSettings {
             show_end_task: false,
             split_windows: false,
             middle_click_action: WegMiddleClickAction::OpenNewInstance,
+            media_shortcuts: HashMap::new(),
         }
     }
+}
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(default, rename_all = "camelCase")]
+pub struct WegMediaShortcutProfile {
+    pub enabled: bool,
+    pub previous: String,
+    pub toggle_play_pause: String,
+    pub next: String,
 }
 
 impl SeelenWegSettings {
@@ -807,5 +822,29 @@ impl From<PerformanceMode> for u8 {
             PerformanceMode::Minimal => 1,
             PerformanceMode::Extreme => 2,
         }
+    }
+}
+
+#[cfg(test)]
+mod media_shortcut_tests {
+    use super::SeelenWegSettings;
+
+    #[test]
+    fn existing_dock_settings_do_not_enable_shortcut_input() {
+        let settings: SeelenWegSettings = serde_json::from_str(r#"{"size":48}"#).unwrap();
+        assert_eq!(settings.size, 48);
+        assert!(settings.media_shortcuts.is_empty());
+    }
+
+    #[test]
+    fn media_shortcut_profiles_require_explicit_enabling() {
+        let settings: SeelenWegSettings = serde_json::from_str(
+            r#"{"mediaShortcuts":{"cloudmusic.exe":{"togglePlayPause":"Ctrl+0"}}}"#,
+        )
+        .unwrap();
+        let profile = &settings.media_shortcuts["cloudmusic.exe"];
+        assert!(!profile.enabled);
+        assert_eq!(profile.toggle_play_pause, "Ctrl+0");
+        assert!(profile.previous.is_empty());
     }
 }

@@ -1,0 +1,17 @@
+media:
+  previous: Previous track
+  play: Play
+  pause: Pause
+  play_pause: Play / pause
+  next: Next track
+  unsupported: This player does not support this action
+  command_failed: Could not confirm the media command. Check the player or its global shortcut settings.
+  source: Media source
+  choose_source: Select a media source
+  global_shortcuts: Configured global shortcuts
+  configure_shortcuts: No Windows media session. Configure this player's global shortcuts in Dock settings.
+  shortcut_state_unknown: Shortcut control cannot report playback state. Check the player to confirm.
+  window_failed: Unable to switch to this window. The preview has been kept open.
+  close_window: Close window
+  preview_loading: Opening preview…
+  preview_unavailable: Preview unavailable · click to open window

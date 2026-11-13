@@ -3,7 +3,10 @@ mod domain;
 
 use std::sync::Once;
 
-use seelen_core::{handlers::SeelenEvent, system_state::MediaPlayer};
+use seelen_core::{
+    handlers::SeelenEvent,
+    system_state::{MediaPlayer, MediaTransportAction},
+};
 
 use crate::{app::emit_to_webviews, error::Result};
 
@@ -26,6 +29,17 @@ fn get_manager() -> &'static MediaPlayersManager {
 }
 
 impl crate::tauri_handlers::Handlers {
+    pub fn media_send_app_shortcut(
+        webview: tauri::WebviewWindow,
+        hwnd: isize,
+        exe: String,
+        action: MediaTransportAction,
+    ) -> Result<()> {
+        use crate::widgets::permissions::{WidgetPerm, request_widget_permission};
+        request_widget_permission(&webview, WidgetPerm::Run)?;
+        get_manager().send_app_shortcut(hwnd, &exe, action)
+    }
+
     pub fn get_media_sessions() -> Vec<MediaPlayer> {
         get_manager().players()
     }
