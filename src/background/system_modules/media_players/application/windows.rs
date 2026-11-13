@@ -1,11 +1,16 @@
+mod shortcuts;
+
 use std::{ffi::OsStr, sync::Arc, time::Duration};
 
-use seelen_core::system_state::{MediaPlayer, MediaPlayerOwner, MediaPlayerTimeline};
+use seelen_core::system_state::{
+    MediaPlayer, MediaPlayerControls, MediaPlayerOwner, MediaPlayerTimeline, MediaTransportAction,
+};
 use windows::{
     Foundation::TypedEventHandler,
     Media::Control::{
         GlobalSystemMediaTransportControlsSession as GsmtcSession,
         GlobalSystemMediaTransportControlsSessionManager as GsmtcManager,
+        GlobalSystemMediaTransportControlsSessionPlaybackControls,
         GlobalSystemMediaTransportControlsSessionPlaybackStatus as GsmtcPlaybackStatus,
         GlobalSystemMediaTransportControlsSessionTimelineProperties as GsmtcTimeline,
         MediaPropertiesChangedEventArgs, PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
@@ -108,6 +113,7 @@ impl MediaPlayersSystem for WindowsMediaPlayers {
         // pre-extraction to avoid flickering on the ui
         request_icon_extraction_from_umid(&umid);
 
+        let playback_info = session.GetPlaybackInfo()?;
         let player = MediaPlayer {
             umid: id.to_owned(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
@@ -122,6 +128,7 @@ impl MediaPlayersSystem for WindowsMediaPlayers {
             playing: session.GetPlaybackInfo()?.PlaybackStatus()? == GsmtcPlaybackStatus::Playing,
             timeline: timeline_from_native(session.GetTimelineProperties()?)?,
             default: false,
+            controls: controls_from_native(playback_info.Controls()?)?,
         };
 
         let on_event = self
@@ -164,6 +171,21 @@ impl MediaPlayersSystem for WindowsMediaPlayers {
         Ok(status == GsmtcPlaybackStatus::Playing)
     }
 
+    fn controls(&self, id: &str) -> Result<MediaPlayerControls> {
+        Ok(controls_from_native(
+            self.session(id)?.GetPlaybackInfo()?.Controls()?,
+        )?)
+    }
+
+    fn send_app_shortcut(
+        &self,
+        hwnd: isize,
+        exe: &str,
+        action: MediaTransportAction,
+    ) -> Result<()> {
+        shortcuts::send_app_shortcut(hwnd, exe, action)
+    }
+
     fn timeline(&self, id: &str) -> Result<MediaPlayerTimeline> {
         Ok(timeline_from_native(
             self.session(id)?.GetTimelineProperties()?,
@@ -171,18 +193,30 @@ impl MediaPlayersSystem for WindowsMediaPlayers {
     }
 
     fn skip_next(&self, id: &str) -> Result<()> {
+        if !self.controls(id)?.next {
+            return Err("This player does not support next track".into());
+        }
         self.control(id, "skip next", |s| s.TrySkipNextAsync()?.join())
     }
 
     fn skip_previous(&self, id: &str) -> Result<()> {
+        if !self.controls(id)?.previous {
+            return Err("This player does not support previous track".into());
+        }
         self.control(id, "skip previous", |s| s.TrySkipPreviousAsync()?.join())
     }
 
     fn toggle_play_pause(&self, id: &str) -> Result<()> {
+        if !self.controls(id)?.toggle_play_pause {
+            return Err("This player does not support play/pause".into());
+        }
         self.control(id, "toggle play", |s| s.TryTogglePlayPauseAsync()?.join())
     }
 
     fn seek(&self, id: &str, position: i64) -> Result<()> {
+        if !self.controls(id)?.seek {
+            return Err("This player does not support seeking".into());
+        }
         // Windows expects the position in 100ns ticks
         let ticks = position / 100;
         self.control(id, "seek", |s| {
@@ -206,16 +240,14 @@ impl WindowsMediaPlayers {
             .ok_or_else(|| format!("Media player {id} not loaded"))?)
     }
 
-    /// Runs a media control. Unknown players are ignored.
+    /// Runs a media control; a vanished source is reported to the caller.
     fn control(
         &self,
         id: &str,
         action: &str,
         f: impl FnOnce(&GsmtcSession) -> windows_core::Result<bool>,
     ) -> Result<()> {
-        let Some(session) = self.sessions.get(id, |s| s.session.clone()) else {
-            return Ok(());
-        };
+        let session = self.session(id)?;
         if !f(&session)? {
             return Err(format!("failed to {action}").into());
         }
@@ -338,5 +370,16 @@ fn timeline_from_native(raw: GsmtcTimeline) -> windows_core::Result<MediaPlayerT
         min_seek: raw.MinSeekTime()?.Duration.saturating_mul(100),
         max_seek: raw.MaxSeekTime()?.Duration.saturating_mul(100),
         last_updated_time: raw.LastUpdatedTime()?.UniversalTime,
+    })
+}
+
+fn controls_from_native(
+    controls: GlobalSystemMediaTransportControlsSessionPlaybackControls,
+) -> windows_core::Result<MediaPlayerControls> {
+    Ok(MediaPlayerControls {
+        previous: controls.IsPreviousEnabled()?,
+        toggle_play_pause: controls.IsPlayPauseToggleEnabled()?,
+        next: controls.IsNextEnabled()?,
+        seek: controls.IsPlaybackPositionEnabled()?,
     })
 }

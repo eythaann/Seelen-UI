@@ -203,6 +203,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             None => api.prevent_exit(),
         },
         tauri::RunEvent::Exit => {
+            crate::system_modules::app_previews::clear_native_previews();
             log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
         }
         _ => {}

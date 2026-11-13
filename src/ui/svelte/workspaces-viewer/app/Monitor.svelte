@@ -11,7 +11,7 @@
   import { createDragDropManager } from "libs/ui/dnd";
   import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
 
-  const { monitor } = $props<{ monitor: PhysicalMonitor }>();
+  const { monitor }: { monitor: PhysicalMonitor } = $props();
 
   // Workaround for https://github.com/clauderic/dnd-kit/issues/2112
   const manager = createDragDropManager();

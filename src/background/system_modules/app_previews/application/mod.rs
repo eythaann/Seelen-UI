@@ -1,16 +1,24 @@
 #[cfg(windows)]
-mod windows;
+pub(crate) mod windows;
 
-use std::{collections::HashMap, sync::LazyLock, time::Duration};
+use std::{
+    collections::{HashMap, HashSet},
+    sync::LazyLock,
+    time::{Duration, Instant},
+};
 
-use seelen_core::system_state::{UserAppWindowColors, UserAppWindowPreview};
+use seelen_core::rect::Rect;
+use seelen_core::system_state::{
+    LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPeekStatus,
+    WindowPreviewTarget,
+};
 use slu_utils::{Debounce, debounce};
 
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     system_modules::apps::{UserAppWinEvent, UserAppsManager},
-    utils::lock_free::SyncHashMap,
+    utils::lock_free::{SyncHashMap, TracedMutex},
 };
 
 use super::domain::{
@@ -31,6 +39,7 @@ pub struct AppPreviewsManager {
     previews: SyncHashMap<isize, PreviewEntry>,
     /// One-by-one capture queue, processed by a dedicated thread.
     capture_tx: crossbeam_channel::Sender<isize>,
+    pending: TracedMutex<HashSet<isize>>,
 }
 
 event_manager!(AppPreviewsManager, PreviewsEvent);
@@ -55,6 +64,7 @@ impl AppPreviewsManager {
                     if crate::platform::session::is_interactive() {
                         manager.capture(hwnd).log_error();
                     }
+                    manager.pending.lock().remove(&hwnd);
                 }
             })
             .log_error();
@@ -63,6 +73,7 @@ impl AppPreviewsManager {
             platform: Platform::create(),
             previews: SyncHashMap::new(),
             capture_tx,
+            pending: TracedMutex::new(HashSet::new()),
         }
     }
 
@@ -100,12 +111,9 @@ impl AppPreviewsManager {
     }
 
     fn register_window(&self, hwnd: isize) {
-        let tx = self.capture_tx.clone();
         let capture = debounce(
             move |_| {
-                if let Err(e) = tx.send(hwnd) {
-                    log::error!("Failed to enqueue capture: {e}");
-                }
+                Self::instance().queue_capture(hwnd);
             },
             CAPTURE_DEBOUNCE,
         );
@@ -115,6 +123,7 @@ impl AppPreviewsManager {
                 preview: None,
                 colors: None,
                 capture,
+                requested: None,
             },
         );
         self.request_capture(hwnd);
@@ -123,6 +132,30 @@ impl AppPreviewsManager {
     /// Only the registered (interactable) windows are captured.
     fn request_capture(&self, hwnd: isize) {
         self.previews.get(&hwnd, |entry| entry.capture.call(()));
+    }
+
+    fn queue_capture(&self, hwnd: isize) {
+        let inserted = self.pending.lock().insert(hwnd);
+        if inserted && self.capture_tx.send(hwnd).is_err() {
+            self.pending.lock().remove(&hwnd);
+        }
+    }
+
+    /// Refresh only visible snapshot fallbacks, at most four times per second.
+    pub fn refresh_fallback(&self, hwnd: isize) {
+        let mut requested = false;
+        self.previews.get(&hwnd, |entry| {
+            if entry
+                .requested
+                .is_none_or(|time| time.elapsed() >= Duration::from_millis(250))
+            {
+                entry.requested = Some(Instant::now());
+                requested = true;
+            }
+        });
+        if requested {
+            self.queue_capture(hwnd);
+        }
     }
 
     fn capture(&self, hwnd: isize) -> Result<()> {
@@ -155,6 +188,39 @@ impl AppPreviewsManager {
         Ok(())
     }
 
+    pub fn update_live(
+        &self,
+        owner: isize,
+        session: String,
+        targets: Vec<WindowPreviewTarget>,
+        opacity: u8,
+        anchor: Option<Rect>,
+    ) -> Result<LiveWindowPreviewState> {
+        self.platform
+            .update_live(owner, session, targets, opacity, anchor)
+    }
+    pub fn clear_live(&self, owner: isize, session: &str) {
+        self.platform.clear_live(owner, session);
+    }
+    pub fn begin_peek(
+        &self,
+        owner: isize,
+        hwnd: isize,
+        session: String,
+        rect: Rect,
+    ) -> Result<WindowPeekStatus> {
+        self.platform.begin_peek(owner, hwnd, session, rect)
+    }
+    pub fn poll_peek(&self, owner: isize, session: &str, rect: Option<Rect>) -> WindowPeekStatus {
+        self.platform.poll_peek(owner, session, rect)
+    }
+    pub fn cancel_peek(&self, owner: isize, session: &str) {
+        self.platform.cancel_peek(owner, session);
+    }
+    pub fn commit_peek(&self, owner: isize, session: &str) -> Result<bool> {
+        self.platform.commit_peek(owner, session)
+    }
+
     pub fn previews(&self) -> HashMap<isize, UserAppWindowPreview> {
         let mut map = HashMap::new();
         self.previews.for_each(|(k, v)| {
@@ -180,4 +246,5 @@ struct PreviewEntry {
     preview: Option<UserAppWindowPreview>,
     colors: Option<UserAppWindowColors>,
     capture: Debounce<()>,
+    requested: Option<Instant>,
 }

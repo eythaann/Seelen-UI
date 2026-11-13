@@ -1,6 +1,8 @@
 use std::path::PathBuf;
 
-use seelen_core::system_state::{MediaPlayer, MediaPlayerTimeline};
+use seelen_core::system_state::{
+    MediaPlayer, MediaPlayerControls, MediaPlayerTimeline, MediaTransportAction,
+};
 
 use crate::error::Result;
 
@@ -30,6 +32,9 @@ pub trait MediaPlayersSystem: Sized + Send + Sync {
     fn properties(&self, id: &str) -> Result<PlayerProperties>;
 
     fn is_playing(&self, id: &str) -> Result<bool>;
+    fn controls(&self, id: &str) -> Result<MediaPlayerControls>;
+    fn send_app_shortcut(&self, hwnd: isize, exe: &str, action: MediaTransportAction)
+    -> Result<()>;
 
     fn timeline(&self, id: &str) -> Result<MediaPlayerTimeline>;
 

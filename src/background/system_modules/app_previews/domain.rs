@@ -1,6 +1,10 @@
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
-use seelen_core::system_state::{Color, UserAppWindowColors, UserAppWindowPreview};
+use seelen_core::rect::Rect;
+use seelen_core::system_state::{
+    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPeekStatus,
+    WindowPreviewTarget,
+};
 
 use crate::error::Result;
 
@@ -23,6 +27,26 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
     /// Captures the content of the window, without its frame shadow. `None` when it can't
     /// be captured now (minimized, or not accessible from this process).
     fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>>;
+
+    fn update_live(
+        &self,
+        owner: isize,
+        session: String,
+        targets: Vec<WindowPreviewTarget>,
+        opacity: u8,
+        anchor: Option<Rect>,
+    ) -> Result<LiveWindowPreviewState>;
+    fn clear_live(&self, owner: isize, session: &str);
+    fn begin_peek(
+        &self,
+        owner: isize,
+        hwnd: isize,
+        session: String,
+        rect: Rect,
+    ) -> Result<WindowPeekStatus>;
+    fn poll_peek(&self, owner: isize, session: &str, rect: Option<Rect>) -> WindowPeekStatus;
+    fn cancel_peek(&self, owner: isize, session: &str);
+    fn commit_peek(&self, owner: isize, session: &str) -> Result<bool>;
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
