@@ -9,6 +9,7 @@
     type SearchResult,
   } from "../state/search.svelte";
   import { globalState } from "../state/mod.svelte";
+  import { untrack } from "svelte";
   import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
   let visibleItems: SearchResult[] = $state([]);
@@ -23,35 +24,44 @@
     },
   };
 
-  // Preselect the first item when the menu opens or the results change.
-  $effect(() => {
-    globalState.version;
+  let lastVersion: number | undefined;
+  let lastQuery: string | undefined;
 
-    const firstItem = searchState.searchedItems[0];
-    if (!firstItem) {
-      selectedItemId = null;
-    } else {
-      selectedItemId = isSystemSetting(firstItem)
-        ? getResultKey(firstItem)
-        : globalState.getItemId(firstItem);
+  function selectionId(item: SearchResult): string {
+    return isSystemSetting(item) ? getResultKey(item) : globalState.getItemId(item);
+  }
+
+  $effect(() => {
+    const version = globalState.version;
+    const query = searchState.searchQuery;
+    const items = searchState.searchedItems;
+    const selected = untrack(() => selectedItemId);
+    const selectedIndex = version === lastVersion && query === lastQuery
+      ? items.findIndex((item) => selectionId(item) === selected)
+      : -1;
+    lastVersion = version;
+    lastQuery = query;
+
+    if (selectedIndex === -1) {
+      selectedItemId = items[0] ? selectionId(items[0]) : null;
     }
-  });
 
-  $effect(() => {
-    visibleItems = [];
-
-    let i = 0;
     const chunk = 15;
+    // Keep the selected row mounted if it moves past the first chunk.
+    let end = Math.max(chunk, selectedIndex + 1);
+    let idleCallback = 0;
 
     function process() {
-      visibleItems = searchState.searchedItems.slice(0, (i += chunk));
+      visibleItems = items.slice(0, end);
 
-      if (i < searchState.searchedItems.length) {
-        requestIdleCallback(process);
+      if (end < items.length) {
+        end += chunk;
+        idleCallback = requestIdleCallback(process);
       }
     }
 
     process();
+    return () => cancelIdleCallback(idleCallback);
   });
 </script>
 

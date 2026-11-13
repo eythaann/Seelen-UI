@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { globalState } from "../state/mod.svelte";
+  import { globalState, type FavPinnedItem } from "../state/mod.svelte";
   import { t } from "../i18n";
   import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
-  import { onDestroy } from "svelte";
+  import { onDestroy, untrack } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd";
   import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
@@ -26,12 +26,22 @@
     },
   };
 
-  // Preselect the first rendered item when the menu opens.
+  let lastVersion: number | undefined;
+
+  function isRenderable(item: FavPinnedItem): boolean {
+    return item.type === "folder" || !!globalState.getMenuItem(item.itemId);
+  }
+
   $effect(() => {
-    globalState.version;
-    selectedItemId = globalState.pinnedItems.find((item) =>
-      item.type === "folder" || globalState.getMenuItem(item.itemId)
-    )?.itemId ?? null;
+    const version = globalState.version;
+    const pinnedItems = globalState.pinnedItems;
+    const selected = untrack(() => selectedItemId);
+    if (version === lastVersion && pinnedItems.some((item) => item.itemId === selected && isRenderable(item))) {
+      return;
+    }
+
+    lastVersion = version;
+    selectedItemId = pinnedItems.find(isRenderable)?.itemId ?? null;
   });
 
   // Position-based sorting threshold (20% of item width)
