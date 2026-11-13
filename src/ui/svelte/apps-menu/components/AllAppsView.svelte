@@ -9,16 +9,10 @@
     type SearchResult,
   } from "../state/search.svelte";
   import { globalState } from "../state/mod.svelte";
-  import {
-    navigateInDirection,
-    selectPreselectedOrFirst,
-    type SelectionScope,
-  } from "../keyboard-navigation";
+  import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
   let visibleItems: SearchResult[] = $state([]);
 
-  // Selection is fully local to this view: its own state, its own scope,
-  // its own keydown handling. Nothing outside this component touches it.
   let selectedItemId = $state<string | null>(null);
 
   const scope: SelectionScope = {
@@ -29,13 +23,11 @@
     },
   };
 
-  // Reset selection whenever the menu is (re)opened or the search query changes.
-  // While searching, preselect the first result instead of leaving it empty.
+  // Preselect the first item when the menu opens or the results change.
   $effect(() => {
     globalState.version;
-    searchState.searchQuery;
 
-    const firstItem = searchState.searchQuery ? searchState.searchedItems[0] : undefined;
+    const firstItem = searchState.searchedItems[0];
     if (!firstItem) {
       selectedItemId = null;
     } else {
@@ -44,31 +36,6 @@
         : globalState.getItemId(firstItem);
     }
   });
-
-  function handleWindowKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case "Enter":
-        event.preventDefault();
-        selectPreselectedOrFirst(scope)?.click();
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        navigateInDirection("up", scope);
-        break;
-      case "ArrowDown":
-        event.preventDefault();
-        navigateInDirection("down", scope);
-        break;
-      case "ArrowLeft":
-        event.preventDefault();
-        navigateInDirection("left", scope);
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        navigateInDirection("right", scope);
-        break;
-    }
-  }
 
   $effect(() => {
     visibleItems = [];
@@ -88,7 +55,7 @@
   });
 </script>
 
-<svelte:window onkeydown={handleWindowKeyDown} />
+<svelte:window onkeydown={(event) => handleGridKeyDown(event, scope)} />
 <div class="all-apps-view">
   <ul role="listbox" class="all-apps-view-list">
     {#each visibleItems as item, idx (getResultKey(item))}

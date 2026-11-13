@@ -10,7 +10,7 @@
     "build:ui": "tsx scripts/build.ts",
     "build:lib": "cd ./libs/core && deno task build && cd ../..",
     "dev": "cargo build && tauri dev",
-    "test": "",
+    "test": "node --test src/ui/svelte/apps-menu/keyboard-navigation.test.ts",
     "translate": "tsx ./scripts/translate/mod.ts",
     "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && cd ./libs/core && deno check && cd ../..",
     "version:start": "tsx ./scripts/versionish.ts start",

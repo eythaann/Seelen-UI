@@ -7,11 +7,7 @@
   import SortableAppItem from "./SortableAppItem.svelte";
   import { arrayMove } from "../utils";
   import { createDragDropManager } from "libs/ui/dnd";
-  import {
-    navigateInDirection,
-    selectPreselectedOrFirst,
-    type SelectionScope,
-  } from "../keyboard-navigation";
+  import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
   interface Props {
     folder: FavFolderItem;
@@ -68,29 +64,7 @@
   function handleDialogKeyDown(event: KeyboardEvent) {
     // Contain all keyboard navigation inside the modal.
     event.stopPropagation();
-
-    switch (event.key) {
-      case "Enter":
-        event.preventDefault();
-        selectPreselectedOrFirst(scope)?.click();
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        navigateInDirection("up", scope);
-        break;
-      case "ArrowDown":
-        event.preventDefault();
-        navigateInDirection("down", scope);
-        break;
-      case "ArrowLeft":
-        event.preventDefault();
-        navigateInDirection("left", scope);
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        navigateInDirection("right", scope);
-        break;
-    }
+    handleGridKeyDown(event, scope);
   }
 </script>
 
