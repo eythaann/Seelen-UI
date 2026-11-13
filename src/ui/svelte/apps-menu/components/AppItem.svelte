@@ -75,6 +75,7 @@
   onclick={handleClick}
   oncontextmenu={handleContextMenu}
   onkeydown={handleKeyDown}
+  onfocus={() => scope.setSelected(itemId)}
 >
   <FileIcon class="app-icon" path={item.path} umid={item.umid} {lazy} />
   <div class="app-name" title={item.display_name}>

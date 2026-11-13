@@ -97,6 +97,7 @@
   onclick={(e) => openModal(e.detail === 0)}
   oncontextmenu={handleFolderContextMenu}
   onkeydown={handleKeyDown}
+  onfocus={() => scope.setSelected(folder.itemId)}
 >
   <div class="folder-grid">
     {#each expandedItems.slice(0, 4) as app}

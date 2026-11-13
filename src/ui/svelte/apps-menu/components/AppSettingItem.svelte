@@ -54,6 +54,7 @@
   class="app"
   onclick={handleClick}
   onkeydown={handleKeyDown}
+  onfocus={() => scope.setSelected(itemId)}
 >
   {#if item.glyph}
     <span class="app-icon app-icon-glyph" style:font-family={`"${item.fontFamily}"`}>

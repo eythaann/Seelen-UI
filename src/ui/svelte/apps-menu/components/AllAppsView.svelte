@@ -9,16 +9,11 @@
     type SearchResult,
   } from "../state/search.svelte";
   import { globalState } from "../state/mod.svelte";
-  import {
-    navigateInDirection,
-    selectPreselectedOrFirst,
-    type SelectionScope,
-  } from "../keyboard-navigation";
+  import { untrack } from "svelte";
+  import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
   let visibleItems: SearchResult[] = $state([]);
 
-  // Selection is fully local to this view: its own state, its own scope,
-  // its own keydown handling. Nothing outside this component touches it.
   let selectedItemId = $state<string | null>(null);
 
   const scope: SelectionScope = {
@@ -29,66 +24,48 @@
     },
   };
 
-  // Reset selection whenever the menu is (re)opened or the search query changes.
-  // While searching, preselect the first result instead of leaving it empty.
-  $effect(() => {
-    globalState.version;
-    searchState.searchQuery;
+  let lastVersion: number | undefined;
+  let lastQuery: string | undefined;
 
-    const firstItem = searchState.searchQuery ? searchState.searchedItems[0] : undefined;
-    if (!firstItem) {
-      selectedItemId = null;
-    } else {
-      selectedItemId = isSystemSetting(firstItem)
-        ? getResultKey(firstItem)
-        : globalState.getItemId(firstItem);
-    }
-  });
-
-  function handleWindowKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case "Enter":
-        event.preventDefault();
-        selectPreselectedOrFirst(scope)?.click();
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        navigateInDirection("up", scope);
-        break;
-      case "ArrowDown":
-        event.preventDefault();
-        navigateInDirection("down", scope);
-        break;
-      case "ArrowLeft":
-        event.preventDefault();
-        navigateInDirection("left", scope);
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        navigateInDirection("right", scope);
-        break;
-    }
+  function selectionId(item: SearchResult): string {
+    return isSystemSetting(item) ? getResultKey(item) : globalState.getItemId(item);
   }
 
   $effect(() => {
-    visibleItems = [];
+    const version = globalState.version;
+    const query = searchState.searchQuery;
+    const items = searchState.searchedItems;
+    const selected = untrack(() => selectedItemId);
+    const selectedIndex = version === lastVersion && query === lastQuery
+      ? items.findIndex((item) => selectionId(item) === selected)
+      : -1;
+    lastVersion = version;
+    lastQuery = query;
 
-    let i = 0;
+    if (selectedIndex === -1) {
+      selectedItemId = items[0] ? selectionId(items[0]) : null;
+    }
+
     const chunk = 15;
+    // Keep the selected row mounted if it moves past the first chunk.
+    let end = Math.max(chunk, selectedIndex + 1);
+    let idleCallback = 0;
 
     function process() {
-      visibleItems = searchState.searchedItems.slice(0, (i += chunk));
+      visibleItems = items.slice(0, end);
 
-      if (i < searchState.searchedItems.length) {
-        requestIdleCallback(process);
+      if (end < items.length) {
+        end += chunk;
+        idleCallback = requestIdleCallback(process);
       }
     }
 
     process();
+    return () => cancelIdleCallback(idleCallback);
   });
 </script>
 
-<svelte:window onkeydown={handleWindowKeyDown} />
+<svelte:window onkeydown={(event) => handleGridKeyDown(event, scope)} />
 <div class="all-apps-view">
   <ul role="listbox" class="all-apps-view-list">
     {#each visibleItems as item, idx (getResultKey(item))}

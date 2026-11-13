@@ -1,18 +1,14 @@
 <script lang="ts">
-  import { globalState } from "../state/mod.svelte";
+  import { globalState, type FavPinnedItem } from "../state/mod.svelte";
   import { t } from "../i18n";
   import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
   import { arrayMove } from "../utils";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
-  import { onDestroy } from "svelte";
+  import { onDestroy, untrack } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd";
-  import {
-    navigateInDirection,
-    selectPreselectedOrFirst,
-    type SelectionScope,
-  } from "../keyboard-navigation";
+  import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
 
   type UniqueIdentifier = string | number;
 
@@ -20,8 +16,6 @@
   const manager = createDragDropManager();
   onDestroy(() => manager.destroy());
 
-  // Selection is fully local to this view: its own state, its own scope,
-  // its own keydown handling. Nothing outside this component touches it.
   let selectedItemId = $state<string | null>(null);
 
   const scope: SelectionScope = {
@@ -32,36 +26,23 @@
     },
   };
 
-  // Reset selection whenever the menu is (re)opened
-  $effect(() => {
-    globalState.version;
-    selectedItemId = null;
-  });
+  let lastVersion: number | undefined;
 
-  function handleWindowKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case "Enter":
-        event.preventDefault();
-        selectPreselectedOrFirst(scope)?.click();
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        navigateInDirection("up", scope);
-        break;
-      case "ArrowDown":
-        event.preventDefault();
-        navigateInDirection("down", scope);
-        break;
-      case "ArrowLeft":
-        event.preventDefault();
-        navigateInDirection("left", scope);
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        navigateInDirection("right", scope);
-        break;
-    }
+  function isRenderable(item: FavPinnedItem): boolean {
+    return item.type === "folder" || !!globalState.getMenuItem(item.itemId);
   }
+
+  $effect(() => {
+    const version = globalState.version;
+    const pinnedItems = globalState.pinnedItems;
+    const selected = untrack(() => selectedItemId);
+    if (version === lastVersion && pinnedItems.some((item) => item.itemId === selected && isRenderable(item))) {
+      return;
+    }
+
+    lastVersion = version;
+    selectedItemId = pinnedItems.find(isRenderable)?.itemId ?? null;
+  });
 
   // Position-based sorting threshold (20% of item width)
   const POSITION_THRESHOLD = 0.2;
@@ -79,7 +60,7 @@
   }
 </script>
 
-<svelte:window onkeydown={handleWindowKeyDown} />
+<svelte:window onkeydown={(event) => handleGridKeyDown(event, scope)} />
 <div class="pinned-view">
   <ul class="pinned-view-list" role="listbox" aria-label={$t("applications")}>
     <DragDropProvider

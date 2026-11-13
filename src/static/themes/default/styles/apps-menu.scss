@@ -140,7 +140,8 @@ body {
   }
 
   &:focus-visible,
-  &[aria-selected="true"] {
+  .apps-menu:has(.apps-menu-header input:focus) &[aria-selected="true"],
+  dialog.folder-modal:focus &[aria-selected="true"] {
     background-color: var(--slu-std-ui-selected-overlay);
     outline: 2px solid var(--system-accent-color);
     outline-offset: 2px;
