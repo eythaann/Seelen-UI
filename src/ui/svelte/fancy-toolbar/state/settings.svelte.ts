@@ -1,5 +1,11 @@
 import { invoke, RuntimeStyleSheet, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { Alignment, type AppBarEdge, FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
+import {
+  Alignment,
+  type AppBarEdge,
+  type FancyToolbarSettings,
+  FancyToolbarSide,
+  HideMode,
+} from "@seelen-ui/lib/types";
 import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";
 import { locale } from "../i18n/index.ts";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered.ts";
@@ -9,6 +15,10 @@ import { dateState } from "libs/ui/svelte/runes/date.svelte.ts";
 import { rootEffectAsync } from "libs/ui/svelte/utils/RootEffect.svelte.ts";
 
 let isWidgetReady = $state(false);
+
+// Use the per-monitor aware accessor (defaults < root < instance < monitor), so
+// monitorsV3[id].byWidget["@seelen/fancy-toolbar"] overrides such as hideMode are honoured.
+const config = $derived(_settings.value.getCurrentWidgetConfig() as unknown as FancyToolbarSettings);
 
 const widgetRect = $derived.by(() => {
   const { itemSize, margin, padding } = settingsState;
@@ -47,7 +57,7 @@ class SettingsState {
   }
 
   get value() {
-    return _settings.value.byWidget["@seelen/fancy-toolbar"];
+    return config;
   }
 
   get allByWidget() {
