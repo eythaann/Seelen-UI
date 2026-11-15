@@ -2,6 +2,10 @@
 
 ## [2.8.11-dev]
 
+### features
+
+- cli: `slu quit` and `slu restart` commands to gracefully close or restart Seelen UI.
+
 ### enhancements
 
 - close popup if triggered and already shown.

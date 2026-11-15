@@ -46,6 +46,10 @@ pub enum AppCommand {
     Wallpaper(WallpaperCli),
     /// Toggle the global shortcuts pause state
     ToggleShortcutsPause,
+    /// Gracefully closes Seelen UI.
+    Quit,
+    /// Restarts Seelen UI.
+    Restart,
 }
 
 impl SluCliCommand for AppCommand {
