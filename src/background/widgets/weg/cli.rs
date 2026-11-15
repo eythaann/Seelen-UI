@@ -88,8 +88,11 @@ pub fn process(cmd: WegCli) -> Result<()> {
 
         if windows.is_empty() {
             let packaged_id = inner_data.umid.as_ref().filter(|id| {
-                inner_data.relaunch.is_none()
-                    && (inner_data.path.as_os_str().is_empty() || shell::app_executable(id).is_ok())
+                inner_data.relaunch.as_ref().is_none_or(|relaunch| {
+                    relaunch
+                        .command
+                        .eq_ignore_ascii_case(&format!("shell:AppsFolder\\{id}"))
+                }) && (inner_data.path.as_os_str().is_empty() || shell::app_executable(id).is_ok())
             });
             let command = inner_data
                 .relaunch
