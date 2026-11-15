@@ -14,7 +14,10 @@ pub enum Diff {
 
 /// Calculates SHA-256 hash of data
 pub fn calculate_sha256(data: &[u8]) -> String {
-    format!("{:x}", Sha256::digest(data))
+    Sha256::digest(data)
+        .iter()
+        .map(|b| format!("{b:02x}"))
+        .collect()
 }
 
 /// SHA256SUMS file representation
