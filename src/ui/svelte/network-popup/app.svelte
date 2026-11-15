@@ -7,6 +7,7 @@
   import WlanEntry from "./components/WlanEntry.svelte";
   import HotspotEntry from "./components/HotspotEntry.svelte";
   import HotspotView from "./components/HotspotView.svelte";
+  import AdapterEntry from "./components/AdapterEntry.svelte";
 
   // Group and sort entries
   const { connected, known, unknown, hidden } = $derived.by(() => {
@@ -52,6 +53,8 @@
 
   const wifiRadio = $derived(globalState.wifiRadio);
 
+  let adaptersExpanded = $state(false);
+
   function openNetworkSettings() {
     invoke(SeelenCommand.OpenFile, { path: "ms-settings:network" });
   }
@@ -74,10 +77,40 @@
   {#if globalState.view === "hotspot"}
     <HotspotView onBack={() => (globalState.view = "main")} />
   {:else}
-    {#if !wifiRadio}
-      <div class="network-no-adapter">
-        {$t("no_adapter")}
+    {#if globalState.ethernetAdapters.length > 0}
+      <div class="network-section">
+        <div class="network-section-title">
+          <span>{$t("adapter.title")}</span>
+          {#if globalState.ethernetAdapters.length > 1}
+            <button
+              class="network-section-toggle"
+              class:expanded={adaptersExpanded}
+              data-skin="transparent"
+              title={adaptersExpanded ? $t("adapter.show_less") : $t("adapter.show_all")}
+              onclick={() => (adaptersExpanded = !adaptersExpanded)}
+            >
+              <Icon iconName="IoChevronDown" />
+            </button>
+          {/if}
+        </div>
+        <div class="network-section-entries">
+          <!-- sorted with the default route first, so collapsed shows the one in use -->
+          {#each adaptersExpanded
+            ? globalState.ethernetAdapters
+            : globalState.ethernetAdapters.slice(0, 1) as adapter (adapter.name)}
+            <AdapterEntry {adapter} />
+          {/each}
+        </div>
       </div>
+    {/if}
+
+    {#if !wifiRadio}
+      <!-- on wired-only machines a missing Wi-Fi adapter is expected, not worth a notice -->
+      {#if globalState.ethernetAdapters.length === 0}
+        <div class="network-no-adapter">
+          {$t("no_adapter")}
+        </div>
+      {/if}
     {:else}
       <div class="network-radio-control">
         <div class="network-radio-label">
@@ -144,14 +177,13 @@
           {/if}
         </div>
       </div>
-
-      {#if wifiRadio?.isEnabled}
-        <div class="network-footer">
-          <button data-skin="transparent" onclick={openNetworkSettings}>
-            {$t("more")}
-          </button>
-        </div>
-      {/if}
     {/if}
+
+    <!-- always reachable: it is the only way forward when Wi-Fi is off or missing -->
+    <div class="network-footer">
+      <button data-skin="transparent" onclick={openNetworkSettings}>
+        {$t("more")}
+      </button>
+    </div>
   {/if}
 </div>

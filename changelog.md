@@ -5,6 +5,7 @@
 ### enhancements
 
 - close popup if triggered and already shown.
+- add network adapters to network popup.
 
 ## [2.8.10]
 

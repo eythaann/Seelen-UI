@@ -60,6 +60,9 @@ pub struct NetworkAdapter {
     pub mac: String,
     /// true if this adapter holds the default route (the one used to reach the internet)
     pub is_default: bool,
+    /// true if the adapter is backed by a hardware NIC with a physical connector, false for
+    /// virtual ones (VM switches like Hyper-V/WSL, VPN/TAP adapters, tunnels, Bluetooth PAN...)
+    pub is_physical: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]

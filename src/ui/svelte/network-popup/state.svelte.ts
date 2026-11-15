@@ -1,5 +1,11 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
-import { type Hotspot, RadioDeviceKind, type WlanBssEntry } from "@seelen-ui/lib/types";
+import {
+  AdapterStatus,
+  type Hotspot,
+  type NetworkAdapter,
+  RadioDeviceKind,
+  type WlanBssEntry,
+} from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
@@ -29,6 +35,25 @@ await radios.init();
 let hotspot = lazyRune(() => invoke(SeelenCommand.GetNetworkHotspot));
 subscribe(SeelenEvent.NetworkHotspotChanged, hotspot.setByPayload);
 await hotspot.init();
+
+let adapters = lazyRune(() => invoke(SeelenCommand.GetNetworkAdapters));
+subscribe(SeelenEvent.NetworkAdapters, adapters.setByPayload);
+await adapters.init();
+
+let online = lazyRune(() => invoke(SeelenCommand.GetNetworkInternetConnection));
+subscribe(SeelenEvent.NetworkInternetConnection, online.setByPayload);
+await online.init();
+
+/**
+ * Ethernet interfaces with link, physical or virtual. Unplugged ones are hidden (they would
+ * only add noise on laptops/docks with an unused port). The one holding the default route
+ * goes first.
+ */
+const ethernetAdapters = $derived(
+  adapters.value
+    .filter((a) => /* a.type === "ETHERNET_CSMACD" && */ a.status === AdapterStatus.up)
+    .toSorted((a, b) => Number(b.isDefault) - Number(a.isDefault)),
+);
 
 let isScanning = $state(false);
 let selectedSsid = $state<string | null>(null);
@@ -65,6 +90,14 @@ $effect.root(() => {
 });
 
 class State {
+  get ethernetAdapters(): NetworkAdapter[] {
+    return ethernetAdapters;
+  }
+
+  get online(): boolean {
+    return online.value;
+  }
+
   get wifiRadio() {
     return radios.value.find((radio) => radio.kind === RadioDeviceKind.WiFi);
   }
