@@ -143,7 +143,8 @@ pub fn set_foreground(hwnd: isize) -> Result<(), String> {
         return Ok(());
     }
 
-    if unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
+    let accepted = unsafe { SetForegroundWindow(target_hwnd) }.as_bool();
+    if accepted && wait_until_foreground(target_hwnd, 10) {
         return Ok(());
     }
 

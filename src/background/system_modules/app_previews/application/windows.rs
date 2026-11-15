@@ -26,7 +26,7 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         HookManager::subscribe(move |(event, window)| {
             let hwnd = window.address();
             match event {
-                WindowEvent::TitleChanged | WindowEvent::RectChanged => {
+                WindowEvent::TitleChanged | WindowEvent::RectChanged | WindowEvent::Uncloaked => {
                     on_event(PreviewsSysEvent::WindowChanged { hwnd })
                 }
                 WindowEvent::Unminimized => on_event(PreviewsSysEvent::WindowRestored { hwnd }),
@@ -38,7 +38,12 @@ impl AppPreviewsSystem for WindowsAppPreviews {
 
     fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>> {
         let window = Window::from(hwnd);
-        if !window.is_manageable_from_unelevated() || window.is_minimized() {
+        // A queued capture can outlive the window's visible state.
+        if !window.is_visible()
+            || window.is_minimized()
+            || window.is_cloaked()
+            || !window.is_manageable_from_unelevated()
+        {
             return Ok(None);
         }
 
