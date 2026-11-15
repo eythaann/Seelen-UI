@@ -8,6 +8,7 @@ const root = document.getElementById("root")!;
 
 await Widget.self.init({
   autoSizeByContent: root,
+  toggleOnTrigger: false,
 });
 
 mount(App, {

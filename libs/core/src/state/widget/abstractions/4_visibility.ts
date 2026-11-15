@@ -20,9 +20,19 @@ export class Widget_4 extends Widget_3 {
    * by a newer one after each `await` and bail out.
    */
   private _visibilityToken = 0;
+  protected _visible = false;
+
+  /**
+   * Cached visibility, updated synchronously on `show()`/`hide()` calls (a hide in progress counts as hidden).
+   * Windows shown/hidden directly via `window.show()`/`window.hide()` are not tracked.
+   */
+  public get visible(): boolean {
+    return this._visible;
+  }
 
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
+    this._visible = true;
     debouncedClose.cancel();
     await this.window.show();
     // a hide() was called while showing, it already owns the attribute.
@@ -33,6 +43,7 @@ export class Widget_4 extends Widget_3 {
 
   public async hide(): Promise<void> {
     const token = ++this._visibilityToken;
+    this._visible = false;
     globalThis.document.documentElement.dataset.widgetHidden = "";
 
     await this.waitHideAnimations();

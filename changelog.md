@@ -2,6 +2,10 @@
 
 ## [2.8.11-dev]
 
+### enhancements
+
+- close popup if triggered and already shown.
+
 ## [2.8.10]
 
 ### enhancements
