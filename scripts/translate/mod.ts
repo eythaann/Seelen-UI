@@ -40,7 +40,10 @@ async function completeTranslationsFor(localesDir: string) {
   const { obj, hashTable } = fileTranslator.source();
 
   writeFileSync(enPath, yaml.dump(obj)); // overwrite sorted
-  writeFileSync(`${localesDir}/hash.yml`, yaml.dump(Object.fromEntries(hashTable)));
+  writeFileSync(
+    `${localesDir}/hash.yml`,
+    yaml.dump(Object.fromEntries(hashTable), { forceQuotes: true, quotingType: '"' }),
+  );
 }
 
 await completeTranslationsFor("src/ui/react/settings/i18n/translations");
