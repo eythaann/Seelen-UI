@@ -1,10 +1,15 @@
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::HashMap,
+    sync::{
+        Arc,
+        atomic::{AtomicBool, Ordering},
+    },
+};
 
 use seelen_core::system_state::WlanBssEntry;
 use windows::{
     Devices::WiFi::WiFiAdapter,
     Foundation::TypedEventHandler,
-    Networking::Connectivity::NetworkInformation,
     Win32::{
         Foundation::HANDLE,
         NetworkManagement::WiFi::{
@@ -17,6 +22,7 @@ use windows::{
             DOT11_CIPHER_ALGO_GCMP, DOT11_CIPHER_ALGO_GCMP_256, DOT11_CIPHER_ALGO_NONE,
             DOT11_CIPHER_ALGO_TKIP, DOT11_CIPHER_ALGO_WEP, DOT11_CIPHER_ALGO_WEP40,
             DOT11_CIPHER_ALGO_WEP104, DOT11_CIPHER_ALGORITHM, DOT11_PHY_TYPE, DOT11_SSID,
+            WLAN_AVAILABLE_NETWORK_CONNECTED, WLAN_AVAILABLE_NETWORK_HAS_PROFILE,
             WLAN_AVAILABLE_NETWORK_LIST, WLAN_BSS_ENTRY, WLAN_BSS_LIST, WlanFreeMemory,
             WlanGetAvailableNetworkList, WlanGetNetworkBssList, dot11_BSS_type_any,
             dot11_phy_type_dmg, dot11_phy_type_dsss, dot11_phy_type_eht, dot11_phy_type_erp,
@@ -30,34 +36,6 @@ use windows_core::HSTRING;
 use crate::error::{Result, ResultLogExt};
 
 use super::state::{RawWifiEvent, WifiState};
-
-// ── Known profiles ────────────────────────────────────────────────────────────
-
-pub fn wifi_known_profiles() -> HashSet<String> {
-    let mut known = HashSet::new();
-
-    let Ok(profiles) = NetworkInformation::GetConnectionProfiles() else {
-        return known;
-    };
-
-    for i in 0..profiles.Size().unwrap_or(0) {
-        let Ok(profile) = profiles.GetAt(i) else {
-            continue;
-        };
-        if !profile.IsWlanConnectionProfile().unwrap_or(false) {
-            continue;
-        }
-        let Ok(name) = profile.ProfileName() else {
-            continue;
-        };
-        let ssid = name.to_string();
-        if !ssid.is_empty() {
-            known.insert(ssid);
-        }
-    }
-
-    known
-}
 
 // ── Auth / cipher / PHY labels ──────────────────────────────────────────────
 
@@ -286,17 +264,23 @@ fn dot11_ssid_to_string(ssid: &DOT11_SSID) -> String {
     String::from_utf8_lossy(&ssid.ucSSID[..len]).into_owned()
 }
 
-/// Query the native WLAN BSS list for `iface_guid`, enriching each physical
-/// access point with the security summary reported for its SSID.
-pub fn scan_bss_list(
-    handle: HANDLE,
-    iface_guid: &windows_core::GUID,
-    known: &HashSet<String>,
-    connected: &HashSet<String>,
-) -> Result<Vec<WlanBssEntry>> {
+/// Per-SSID info reported by `WlanGetAvailableNetworkList`. The list holds one entry per saved
+/// profile (plus one without profile) of the same SSID, so the flags are merged.
+#[derive(Default)]
+struct SsidInfo {
+    secured: bool,
+    auth: Option<DOT11_AUTH_ALGORITHM>,
+    cipher: Option<DOT11_CIPHER_ALGORITHM>,
+    known: bool,
+    connected: bool,
+}
+
+/// Query the native WLAN BSS list for `iface_guid` (the OS cache, it never waits for a scan),
+/// enriching each physical access point with the security and known/connected status reported
+/// for its SSID.
+pub fn scan_bss_list(handle: HANDLE, iface_guid: &windows_core::GUID) -> Result<Vec<WlanBssEntry>> {
     unsafe {
-        let mut net_info: HashMap<String, (bool, DOT11_AUTH_ALGORITHM, DOT11_CIPHER_ALGORITHM)> =
-            HashMap::new();
+        let mut net_info: HashMap<String, SsidInfo> = HashMap::new();
         let mut net_list_ptr: *mut WLAN_AVAILABLE_NETWORK_LIST = std::ptr::null_mut();
         let err = WlanGetAvailableNetworkList(handle, iface_guid, 0, None, &mut net_list_ptr);
         if err == 0 && !net_list_ptr.is_null() {
@@ -304,14 +288,16 @@ pub fn scan_bss_list(
             let nets =
                 std::slice::from_raw_parts(list.Network.as_ptr(), list.dwNumberOfItems as usize);
             for n in nets {
-                net_info.insert(
-                    dot11_ssid_to_string(&n.dot11Ssid),
-                    (
-                        n.bSecurityEnabled.as_bool(),
-                        n.dot11DefaultAuthAlgorithm,
-                        n.dot11DefaultCipherAlgorithm,
-                    ),
-                );
+                let info = net_info
+                    .entry(dot11_ssid_to_string(&n.dot11Ssid))
+                    .or_default();
+                if info.auth.is_none() {
+                    info.secured = n.bSecurityEnabled.as_bool();
+                    info.auth = Some(n.dot11DefaultAuthAlgorithm);
+                    info.cipher = Some(n.dot11DefaultCipherAlgorithm);
+                }
+                info.known |= n.dwFlags & WLAN_AVAILABLE_NETWORK_HAS_PROFILE != 0;
+                info.connected |= n.dwFlags & WLAN_AVAILABLE_NETWORK_CONNECTED != 0;
             }
             WlanFreeMemory(net_list_ptr as *const _);
         }
@@ -359,16 +345,13 @@ pub fn scan_bss_list(
                 bss.dot11Bssid[4],
                 bss.dot11Bssid[5],
             );
-            let (secured, auth, cipher) = net_info
-                .get(&ssid_raw)
-                .map(|(s, a, c)| (*s, Some(*a), Some(*c)))
-                .unwrap_or((false, None, None));
+            let info = net_info.get(&ssid_raw);
             let (band, channel) = band_and_channel(bss.ulChCenterFrequency);
             let bandwidth = bss_channel_width(bss, list_start, list_end).map(str::to_string);
 
             out.push(WlanBssEntry {
-                known: ssid.as_deref().is_some_and(|s| known.contains(s)),
-                connected: ssid.as_deref().is_some_and(|s| connected.contains(s)),
+                known: ssid.is_some() && info.is_some_and(|i| i.known),
+                connected: ssid.is_some() && info.is_some_and(|i| i.connected),
                 ssid,
                 bssid,
                 channel_frequency: bss.ulChCenterFrequency,
@@ -378,9 +361,15 @@ pub fn scan_bss_list(
                 rssi: bss.lRssi,
                 phy_type: phy_type_label(bss.dot11BssPhyType).to_string(),
                 bandwidth,
-                secured,
-                auth: auth.map(auth_type_label).unwrap_or("Unknown").to_string(),
-                cipher: cipher.map(|c| cipher_algo_label(c).to_string()),
+                secured: info.is_some_and(|i| i.secured),
+                auth: info
+                    .and_then(|i| i.auth)
+                    .map(auth_type_label)
+                    .unwrap_or("Unknown")
+                    .to_string(),
+                cipher: info
+                    .and_then(|i| i.cipher)
+                    .map(|c| cipher_algo_label(c).to_string()),
             });
         }
         WlanFreeMemory(bss_list_ptr as *const _);
@@ -400,6 +389,9 @@ pub struct SluWifiAdapter {
     pub id: String,
     pub raw: WiFiAdapter,
     token: i64,
+    /// A hardware scan takes seconds: requests arriving meanwhile are dropped instead of
+    /// piling up threads waiting on the radio.
+    scanning: Arc<AtomicBool>,
 }
 
 unsafe impl Send for SluWifiAdapter {}
@@ -418,36 +410,26 @@ impl SluWifiAdapter {
             id: device_id.to_string(),
             raw,
             token,
+            scanning: Arc::new(AtomicBool::new(false)),
         })
     }
 
-    /// Trigger a hardware scan. Rate-limited calls (E_ABORT) are silently ignored.
+    /// Trigger a hardware scan, unless one is already running on this adapter.
+    /// Rate-limited calls (E_ABORT) are silently ignored.
     pub fn scan(&self) {
+        if self.scanning.swap(true, Ordering::AcqRel) {
+            return;
+        }
         let adapter = self.raw.clone();
+        let scanning = self.scanning.clone();
         std::thread::spawn(move || {
             if let Ok(operation) = adapter.ScanAsync()
                 && operation.join().is_ok()
             {
                 WifiState::send(RawWifiEvent::NetworksChanged);
             }
+            scanning.store(false, Ordering::Release);
         });
-    }
-
-    /// SSID of the network this adapter is currently connected to, if any.
-    pub fn get_connected_ssid(&self) -> Option<String> {
-        let profile = self
-            .raw
-            .NetworkAdapter()
-            .ok()?
-            .GetConnectedProfileAsync()
-            .ok()?
-            .join()
-            .ok()?;
-        profile
-            .ProfileName()
-            .ok()
-            .map(|s| s.to_string())
-            .filter(|s| !s.is_empty())
     }
 }
 

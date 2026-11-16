@@ -43,4 +43,5 @@ test multiple simultaneous players, ambiguous browser sources, unsupported contr
 a source during a pending command, switching sources, and single-window context-menu access. Media buttons must not
 activate/minimize the source window.
 
-This feature uses ordinary snapshot previews and does not require DWM thumbnails, full-window peeks or hover leases.
+Media controls remain available with live DWM thumbnails or the performance mode's snapshot fallback. Hover and click
+previews follow the shared widget dismissal/focus behavior; media buttons do not activate the source window.

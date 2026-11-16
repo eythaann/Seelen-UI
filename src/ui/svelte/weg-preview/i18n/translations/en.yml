@@ -1,3 +1,8 @@
+preview:
+  close_window: Close window
+  loading: Opening preview…
+  unavailable: Preview unavailable · click to open window
+
 media:
   previous: Previous track
   play: Play
@@ -11,4 +16,3 @@ media:
   global_shortcuts: Configured global shortcuts
   configure_shortcuts: No Windows media session. Configure this player's global shortcuts in Dock settings.
   shortcut_state_unknown: Shortcut control cannot report playback state. Check the player to confirm.
-  close_window: Close window

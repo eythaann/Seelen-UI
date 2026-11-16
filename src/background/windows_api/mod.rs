@@ -114,15 +114,15 @@ use windows::{
                 ShellExecuteExW, ShellLink, ShellWindows, VirtualDesktopManager,
             },
             WindowsAndMessaging::{
-                DispatchMessageW, FindWindowExW, GW_OWNER, GWL_EXSTYLE, GWL_STYLE, GetClassNameW,
-                GetDesktopWindow, GetForegroundWindow, GetParent, GetPropW, GetWindow,
-                GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
-                HWND_BROADCAST, IsIconic, IsWindow, IsWindowVisible, IsZoomed, MSG, PM_REMOVE,
-                PeekMessageW, PostMessageW, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SW_SHOWNORMAL,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SendMessageW, SendNotifyMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
-                TranslateMessage, WINDOW_EX_STYLE, WINDOW_STYLE, WM_SETTINGCHANGE, WS_SIZEBOX,
-                WS_THICKFRAME,
+                ASFW_ANY, AllowSetForegroundWindow, DispatchMessageW, FindWindowExW, GW_OWNER,
+                GWL_EXSTYLE, GWL_STYLE, GetClassNameW, GetDesktopWindow, GetForegroundWindow,
+                GetParent, GetPropW, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, HWND_BROADCAST, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, MSG, PM_REMOVE, PeekMessageW, PostMessageW, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SW_SHOWNORMAL, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE,
+                SWP_NOSIZE, SWP_NOZORDER, SendMessageW, SendNotifyMessageW, SetWindowPos,
+                ShowWindow, ShowWindowAsync, TranslateMessage, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WM_SETTINGCHANGE, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -1286,6 +1286,11 @@ impl WindowsApi {
         elevated: bool,
     ) -> Result<()> {
         log::trace!("Running: {program:?} with args: {args:?} in working dir: {working_dir:?}");
+        // The app is launched by explorer (or by us as fallback), which doesn't own the
+        // foreground, so Windows' foreground lock would open it behind the focused window.
+        // Hand our foreground rights to whoever claims them next; this only succeeds while we
+        // hold them (e.g. right after a click on the dock or another widget), so failure is fine.
+        let _ = unsafe { AllowSetForegroundWindow(ASFW_ANY) };
         match Self::shell_execute_through_explorer(&program, &args, &working_dir, elevated) {
             Ok(()) => return Ok(()),
             Err(err) => log::error!("Failed to execute through explorer, falling back: {err}"),
