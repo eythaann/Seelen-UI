@@ -55,16 +55,15 @@ const ethernetAdapters = $derived(
     .toSorted((a, b) => Number(b.isDefault) - Number(a.isDefault)),
 );
 
-let isScanning = $state(false);
+// Scans while the popup is visible. Visibility (not focus) is the signal: a popup opened by hover
+// is never focused, and the focus event can be missed when the window is created by the trigger.
+let isScanning = $state(widget.visible);
 let selectedSsid = $state<string | null>(null);
-let scanInterval: ReturnType<typeof setInterval> | null = null;
 let currentView = $state<"main" | "hotspot">("main");
 
-widget.window.onFocusChanged((e) => {
-  if (e.payload) {
-    isScanning = true;
-  } else {
-    isScanning = false;
+widget.onVisibilityChange((visible) => {
+  isScanning = visible;
+  if (!visible) {
     selectedSsid = null;
     currentView = "main";
   }
@@ -75,17 +74,14 @@ $effect.root(() => {
     const wifiEnabled = radios.value.some(
       (radio) => radio.kind === RadioDeviceKind.WiFi && radio.isEnabled,
     );
-
-    if (isScanning && wifiEnabled) {
-      invoke(SeelenCommand.WlanScan);
-      scanInterval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
+    if (!isScanning || !wifiEnabled) {
       return;
     }
 
-    if (scanInterval !== null) {
-      clearInterval(scanInterval);
-      scanInterval = null;
-    }
+    // the backend reports the networks already known by the OS right away, then after the scan
+    invoke(SeelenCommand.WlanScan);
+    const interval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
+    return () => clearInterval(interval);
   });
 });
 

@@ -13,6 +13,7 @@
 - close popup if triggered and already shown.
 - add network adapters to network popup.
 - widgets: popups can be triggered by hover (`TriggerSource`), they don't take focus and hide on cursor out.
+- network popup: Wi-Fi networks already known by the system are shown instantly while the scan runs in background.
 
 ### fix
 
@@ -20,6 +21,7 @@
 - apps spawning behind windows when launched from dock.
 - explorer crashing on Windows 10 when the dock is enabled, caused by the native taskbar being hidden in an endless
   loop.
+- network popup not scanning Wi-Fi networks on first open or when opened by hover.
 
 ## [2.8.10]
 
