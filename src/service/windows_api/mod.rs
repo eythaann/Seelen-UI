@@ -19,8 +19,9 @@ use windows::Win32::{
         HiDpi::{DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2, SetProcessDpiAwarenessContext},
         Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
         WindowsAndMessaging::{
-            FindWindowW, GetClassNameW, GetWindowTextW, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-            SWP_NOACTIVATE, SWP_NOZORDER, SetWindowPos, ShowWindow, ShowWindowAsync,
+            FindWindowW, GetClassNameW, GetForegroundWindow, GetShellWindow, GetWindowTextW,
+            IsWindowVisible, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER,
+            SetWindowPos, ShowWindow, ShowWindowAsync,
         },
     },
 };
@@ -55,6 +56,19 @@ impl WindowsApi {
     pub fn set_foreground(addr: isize) -> Result<()> {
         slu_utils::windows::set_foreground(addr)?;
         Ok(())
+    }
+
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
+    }
+
+    /// The desktop window of the shell (`Progman`), null while explorer is not running.
+    pub fn get_shell_window() -> HWND {
+        unsafe { GetShellWindow() }
+    }
+
+    pub fn is_window_visible(hwnd: HWND) -> bool {
+        unsafe { IsWindowVisible(hwnd) }.as_bool()
     }
 
     pub fn set_position(

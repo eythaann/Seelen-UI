@@ -31,12 +31,14 @@ impl SeelenWeg {
             }
             EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
                 let class = origin.class();
-                let parent_class = origin.parent().map(|p| p.class()).unwrap_or_default();
-                if TASKBAR_CLASS
-                    .iter()
-                    .any(|t| t == &class || t == &parent_class)
-                {
-                    Self::hide_native_taskbar();
+                // Only the taskbar window itself: its child windows show and hide as part of
+                // the taskbar's own layout, and each of them would request another hide.
+                // Wait for the show event too: on create, explorer is still setting the
+                // taskbar up, and changing its app bar state then can crash explorer.
+                if TASKBAR_CLASS.contains(&class.as_str()) {
+                    if event == EVENT_OBJECT_SHOW {
+                        Self::hide_native_taskbar();
+                    }
                     return Ok(());
                 }
 

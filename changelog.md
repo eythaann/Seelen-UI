@@ -15,6 +15,8 @@
 
 - adding several wallpapers at once only keeping one of them.
 - apps spawning behind windows when launched from dock.
+- explorer crashing on Windows 10 when the dock is enabled, caused by the native taskbar being hidden in an endless
+  loop.
 
 ## [2.8.10]
 
