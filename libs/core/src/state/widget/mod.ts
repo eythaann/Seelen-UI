@@ -100,8 +100,13 @@ export class Widget extends WidgetBasics {
   private applyOverlayPreset(): void {}
 
   /** Will apply the recommended settings for a popup widget */
-  private applyPopupPreset(): void {
+  private applyPopupPreset(toggleOnTrigger: boolean): void {
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
+      if (toggleOnTrigger && this.visible) {
+        await this.hide();
+        return;
+      }
+
       if (desiredPosition) {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
@@ -247,7 +252,7 @@ export class Widget extends WidgetBasics {
         this.applyOverlayPreset();
         break;
       case WidgetPreset.Popup:
-        this.applyPopupPreset();
+        this.applyPopupPreset(options.toggleOnTrigger ?? true);
         break;
     }
 
@@ -285,6 +290,7 @@ export class Widget extends WidgetBasics {
     const { show = !this.def.lazy } = options;
 
     const alreadyVisible = await this.window.isVisible();
+    this._visible = alreadyVisible;
     globalThis.document.documentElement.toggleAttribute("data-widget-hidden", !alreadyVisible);
     // pre-compute styles
     globalThis.getComputedStyle(globalThis.document.documentElement).opacity;

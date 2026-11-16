@@ -2,8 +2,19 @@
 
 ## [2.8.11-dev]
 
+### features
+
+- cli: `slu quit` and `slu restart` commands to gracefully close or restart Seelen UI.
+
+### enhancements
+
+- close popup if triggered and already shown.
+- add network adapters to network popup.
+
 ### fix
 
+- adding several wallpapers at once only keeping one of them.
+- apps spawning behind windows when launched from dock.
 - explorer crashing on Windows 10 when the dock is enabled, caused by the native taskbar being hidden in an endless
   loop.
 

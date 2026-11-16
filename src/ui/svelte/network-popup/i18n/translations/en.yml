@@ -3,6 +3,14 @@ connect: Connect
 connected: Connected to
 connecting: Connecting...
 disconnect: Disconnect
+adapter:
+  connected: Connected
+  copy_ip: Copy IP address
+  no_internet: No internet
+  show_all: Show all adapters
+  show_less: Show less
+  title: Network adapters
+  virtual: Virtual
 forget: Forget
 hidden: Hidden Network
 hotspot:

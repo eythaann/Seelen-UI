@@ -61,6 +61,14 @@ export interface InitWidgetOptions {
   hideOnFocusLoss?: boolean;
 
   /**
+   * Popup preset only: triggering the widget while it is visible hides it instead of showing it again.
+   * Disable it for popups that are re-triggered with new content while visible (context menus, previews).
+   *
+   * @default true
+   */
+  toggleOnTrigger?: boolean;
+
+  /**
    * Closes the widget after being hidden for a period of time,
    * instead of keeping it in memory.
    *

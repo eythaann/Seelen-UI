@@ -1,27 +1,37 @@
 export type NavigationDirection = "up" | "down" | "left" | "right";
 
+const arrowDirections = new Map<string, NavigationDirection>([
+  ["ArrowUp", "up"],
+  ["ArrowDown", "down"],
+  ["ArrowLeft", "left"],
+  ["ArrowRight", "right"],
+]);
+
 export interface SelectionScope {
   container: () => ParentNode;
   getSelected: () => string | null;
   setSelected: (id: string | null) => void;
 }
 
+function getItems(scope: SelectionScope): HTMLElement[] {
+  return Array.from(scope.container().querySelectorAll<HTMLElement>(".app, .folder"));
+}
+
 export function navigateInDirection(
   direction: NavigationDirection,
   scope: SelectionScope,
 ): void {
-  const allItems = Array.from(scope.container().querySelectorAll(".app, .folder")) as HTMLElement[];
+  const allItems = getItems(scope);
   if (allItems.length === 0) return;
 
   const selected = scope.getSelected();
 
-  if (!selected) {
+  const focused = allItems.find((item) => item === item.ownerDocument.activeElement);
+  const currentElement = focused ?? allItems.find((item) => item.dataset.itemId === selected);
+  if (!currentElement) {
     scope.setSelected(allItems[0]?.dataset.itemId || null);
     return;
   }
-
-  const currentElement = allItems.find((item) => item.dataset.itemId === selected) || null;
-  if (!currentElement) return;
 
   const currentRect = currentElement.getBoundingClientRect();
   const candidates = allItems
@@ -45,26 +55,39 @@ export function navigateInDirection(
   const toTake = candidates.at(idxToTake);
   if (toTake) {
     scope.setSelected(toTake.dataset.itemId || null);
+    if (focused) {
+      toTake.focus({ preventScroll: true });
+    }
   }
 }
 
-// Resolves the element that Enter should activate: the selected item, or the first one.
-export function selectPreselectedOrFirst(scope: SelectionScope): HTMLElement | null {
-  const selected = scope.getSelected();
-  const root = scope.container();
-
-  if (selected) {
-    const element = root.querySelector<HTMLElement>(`[data-item-id="${selected}"]`);
-    if (element) return element;
+export function handleGridKeyDown(event: KeyboardEvent, scope: SelectionScope): void {
+  const target = event.target;
+  if (
+    event.defaultPrevented || event.isComposing || !(target instanceof HTMLElement) ||
+    !target.matches('input[type="search"], dialog, .app, .folder')
+  ) {
+    return;
   }
 
-  // return root.querySelector<HTMLElement>(".app, .folder");
-  return null;
+  if (event.key === "Enter") {
+    const selected = scope.getSelected();
+    event.preventDefault();
+    if (selected !== null) {
+      getItems(scope).find((item) => item.dataset.itemId === selected)?.click();
+    }
+    return;
+  }
+
+  const direction = arrowDirections.get(event.key);
+  if (direction) {
+    event.preventDefault();
+    navigateInDirection(direction, scope);
+  }
 }
 
 export interface InputKeyDownOptions {
-  // return true to fully handle Enter here and skip the default "click
-  // preselected or first item" behavior of whichever view is listening
+  // Return true to handle Enter here instead of activating the selected item.
   onEnter?: (event: KeyboardEvent, input: HTMLInputElement) => boolean | void;
 }
 
