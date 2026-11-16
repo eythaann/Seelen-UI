@@ -1,0 +1,5 @@
+preview:
+  window_failed: Unable to switch to this window. The preview has been kept open.
+  close_window: Close window
+  loading: Opening preview…
+  unavailable: Preview unavailable · click to open window

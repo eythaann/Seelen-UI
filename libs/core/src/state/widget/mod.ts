@@ -100,7 +100,7 @@ export class Widget extends WidgetBasics {
   private applyOverlayPreset(): void {}
 
   /** Will apply the recommended settings for a popup widget */
-  private applyPopupPreset(toggleOnTrigger: boolean): void {
+  private applyPopupPreset(toggleOnTrigger: boolean, focusOnTrigger: boolean): void {
     this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
       if (toggleOnTrigger && this.visible) {
         await this.hide();
@@ -111,7 +111,9 @@ export class Widget extends WidgetBasics {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
       await this.show();
-      await this.focus();
+      if (focusOnTrigger) {
+        await this.focus();
+      }
       // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
       // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
       // can arrive before the trigger fires and roll back the optimistic size to an intermediate
@@ -252,7 +254,11 @@ export class Widget extends WidgetBasics {
         this.applyOverlayPreset();
         break;
       case WidgetPreset.Popup:
-        this.applyPopupPreset(options.toggleOnTrigger ?? true);
+        if (options.focusOnTrigger === false) {
+          // Windows show() also activates a focusable window.
+          await this.window.setFocusable(false);
+        }
+        this.applyPopupPreset(options.toggleOnTrigger ?? true, options.focusOnTrigger ?? true);
         break;
     }
 

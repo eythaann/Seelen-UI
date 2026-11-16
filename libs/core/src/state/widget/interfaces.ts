@@ -60,6 +60,9 @@ export interface InitWidgetOptions {
    */
   hideOnFocusLoss?: boolean;
 
+  /** Focus popup widgets when triggered. When false, call focus() for explicit UI interactions. Defaults to true. */
+  focusOnTrigger?: boolean;
+
   /**
    * Popup preset only: triggering the widget while it is visible hides it instead of showing it again.
    * Disable it for popups that are re-triggered with new content while visible (context menus, previews).
