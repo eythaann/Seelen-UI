@@ -102,16 +102,6 @@ pub struct UserAppWindowPreview {
     pub height: u32,
 }
 
-#[derive(Debug, Default, Clone, Serialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-#[serde(rename_all = "camelCase")]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
-pub struct WindowPeekStatus {
-    pub active: bool,
-    pub committed: bool,
-    pub hwnd: Option<isize>,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]

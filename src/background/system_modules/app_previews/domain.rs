@@ -2,8 +2,7 @@ use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
 use seelen_core::rect::Rect;
 use seelen_core::system_state::{
-    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPeekStatus,
-    WindowPreviewTarget,
+    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
 };
 
 use crate::error::Result;
@@ -40,16 +39,6 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
         anchor: Option<Rect>,
     ) -> Result<LiveWindowPreviewState>;
     fn clear_live(&self, owner: isize, session: &str);
-    fn begin_peek(
-        &self,
-        owner: isize,
-        hwnd: isize,
-        session: String,
-        rect: Rect,
-    ) -> Result<WindowPeekStatus>;
-    fn poll_peek(&self, owner: isize, session: &str, rect: Option<Rect>) -> WindowPeekStatus;
-    fn cancel_peek(&self, owner: isize, session: &str);
-    fn commit_peek(&self, owner: isize, session: &str) -> Result<bool>;
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

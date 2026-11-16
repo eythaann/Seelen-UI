@@ -78,9 +78,8 @@ test("large groups preserve all visible unique thumbnails for native selection a
   const selected = visiblePreviewTargets(targets, { left: 0, top: 0, right: 256, bottom: 400 });
   assert.deepEqual(selected.map(({ hwnd }) => hwnd), [1, 2]);
   const crowded = targets.map((target) => ({ ...target, rect: frame.targets[0]!.rect }));
-  const bounded = visiblePreviewTargets(crowded, { left: 0, top: 0, right: 300, bottom: 300 }, 40);
+  const bounded = visiblePreviewTargets(crowded, { left: 0, top: 0, right: 300, bottom: 300 });
   assert.equal(bounded.length, 40);
-  assert.equal(bounded[0]!.hwnd, 40);
 });
 
 test("a seventeenth visible card reaches snapshot fallback when sixteen native surfaces succeed", async () => {

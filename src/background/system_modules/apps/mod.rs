@@ -88,44 +88,6 @@ impl crate::tauri_handlers::Handlers {
         AppPreviewsManager::instance().clear_live(native_window(&webview)?.address(), &session);
         Ok(())
     }
-    pub fn begin_window_peek(
-        webview: tauri::WebviewWindow,
-        hwnd: isize,
-        session: String,
-        rect: seelen_core::rect::Rect,
-    ) -> Result<seelen_core::system_state::WindowPeekStatus> {
-        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        if !get_manager().contains_win(&Window::from(hwnd)) {
-            return Err("This window is no longer available in the dock".into());
-        }
-        AppPreviewsManager::instance().begin_peek(
-            native_window(&webview)?.address(),
-            hwnd,
-            session,
-            rect,
-        )
-    }
-    pub fn poll_window_peek(
-        webview: tauri::WebviewWindow,
-        session: String,
-        rect: Option<seelen_core::rect::Rect>,
-    ) -> Result<seelen_core::system_state::WindowPeekStatus> {
-        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        Ok(AppPreviewsManager::instance().poll_peek(
-            native_window(&webview)?.address(),
-            &session,
-            rect,
-        ))
-    }
-    pub fn cancel_window_peek(webview: tauri::WebviewWindow, session: String) -> Result<()> {
-        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        AppPreviewsManager::instance().cancel_peek(native_window(&webview)?.address(), &session);
-        Ok(())
-    }
-    pub fn commit_window_peek(webview: tauri::WebviewWindow, session: String) -> Result<bool> {
-        request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        AppPreviewsManager::instance().commit_peek(native_window(&webview)?.address(), &session)
-    }
 
     pub fn get_focused_app() -> FocusedApp {
         UserAppsManager::instance().focused_app()

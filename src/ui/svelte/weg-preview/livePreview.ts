@@ -35,7 +35,6 @@ export function contentViewport(
 export function visiblePreviewTargets(
   targets: LivePreviewFrame["targets"],
   viewport: PreviewRect,
-  preferred: number | null = null,
 ): LivePreviewFrame["targets"] {
   if (viewport.right <= viewport.left || viewport.bottom <= viewport.top) return [];
   const seen = new Set<number>();
@@ -53,13 +52,7 @@ export function visiblePreviewTargets(
     seen.add(hwnd);
     return [{ ...target, clip }];
   });
-  if (preferred !== null) visible.sort((a, b) => Number(b.hwnd === preferred) - Number(a.hwnd === preferred));
   return visible;
-}
-
-/** Peek hit-testing uses only the visible part of a scrolled thumbnail. */
-export function visiblePeekRect(targets: LivePreviewFrame["targets"], hwnd: number): PreviewRect | null {
-  return targets.find((target) => target.hwnd === hwnd)?.clip ?? null;
 }
 
 interface LivePreviewBridge {

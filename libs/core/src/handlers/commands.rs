@@ -410,22 +410,6 @@ slu_commands_declaration! {
         @webview()
         @fallible()
         clear_window_previews(session: String),
-    BeginWindowPeek =
-        @webview()
-        @fallible()
-        begin_window_peek(hwnd: isize, session: String, rect: Rect) -> WindowPeekStatus,
-    PollWindowPeek =
-        @webview()
-        @fallible()
-        poll_window_peek(session: String, rect: Option<Rect>) -> WindowPeekStatus,
-    CancelWindowPeek =
-        @webview()
-        @fallible()
-        cancel_window_peek(session: String),
-    CommitWindowPeek =
-        @webview()
-        @fallible()
-        commit_window_peek(session: String) -> bool,
 
     // Media
     GetMediaDevices =

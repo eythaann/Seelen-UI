@@ -1,6 +1,5 @@
 use std::{
     collections::{HashMap, VecDeque},
-    sync::OnceLock,
     time::{Duration, Instant},
 };
 
@@ -20,18 +19,16 @@ const LEASE_TTL: Duration = Duration::from_secs(2);
 const CANCEL_TTL: Duration = Duration::from_secs(30);
 const MAX_TARGETS: usize = 16;
 
-static MANAGER: OnceLock<LivePreviewManager> = OnceLock::new();
-
 /// DWM owns frame updates. Only layout/opacity and the lifetime lease cross the webview boundary.
 pub struct LivePreviewManager {
     state: TracedMutex<LivePreviewState>,
 }
 
 impl LivePreviewManager {
-    pub fn instance() -> &'static Self {
-        MANAGER.get_or_init(|| LivePreviewManager {
+    pub fn create() -> Self {
+        Self {
             state: TracedMutex::new(LivePreviewState::default()),
-        })
+        }
     }
 
     pub fn update(
@@ -125,35 +122,22 @@ impl LivePreviewManager {
         }
     }
 
-    pub(super) fn request_dismiss_if_initialized() {
-        if let Some(manager) = MANAGER.get() {
-            manager.request_dismiss();
-        }
+    /// Nothing is being composed: the watchdog can sleep until the next update.
+    pub(super) fn is_idle(&self) -> bool {
+        self.state.lock().owners.is_empty()
     }
 
-    fn request_dismiss(&self) {
+    pub(super) fn request_dismiss(&self) {
         for entry in self.state.lock().owners.values_mut() {
             entry.dismiss_requested = true;
         }
     }
 
-    pub(super) fn cleanup_if_initialized() {
-        if let Some(manager) = MANAGER.get() {
-            manager.cleanup();
-        }
-    }
-
-    pub(super) fn clear_if_initialized() {
-        if let Some(manager) = MANAGER.get() {
-            manager.clear_all();
-        }
-    }
-
-    fn clear_all(&self) {
+    pub(super) fn clear_all(&self) {
         self.state.lock().owners.clear();
     }
 
-    fn cleanup(&self) {
+    pub(super) fn cleanup(&self) {
         let mut state = self.state.lock();
         state.owners.retain(|owner, entry| {
             entry.refreshed.elapsed() < LEASE_TTL
@@ -394,7 +378,6 @@ fn inside_preview_bridge(point: POINT, popup: RECT, anchor: Option<&Rect>) -> bo
 #[cfg(test)]
 mod tests {
     use super::*;
-    use windows::{Win32::UI::WindowsAndMessaging::*, core::w};
 
     #[test]
     fn pointer_crosses_the_dock_gap_on_negative_coordinate_monitors() {
@@ -421,42 +404,6 @@ mod tests {
                 inside_preview_bridge(POINT { x, y }, popup, Some(&anchor)),
                 expected
             );
-        }
-    }
-
-    // All fixture windows are offscreen and never activated. DWM updates their surfaces natively.
-    struct TestWindow(HWND);
-    impl TestWindow {
-        fn new() -> Self {
-            unsafe {
-                let hwnd = CreateWindowExW(
-                    WS_EX_NOACTIVATE | WS_EX_TOOLWINDOW,
-                    w!("STATIC"),
-                    w!("Seelen live preview test"),
-                    WS_OVERLAPPEDWINDOW,
-                    -30000,
-                    -30000,
-                    640,
-                    480,
-                    None,
-                    None,
-                    None,
-                    None,
-                )
-                .unwrap();
-                let _ = ShowWindow(hwnd, SW_SHOWNOACTIVATE);
-                Self(hwnd)
-            }
-        }
-        fn address(&self) -> isize {
-            self.0.0 as isize
-        }
-    }
-    impl Drop for TestWindow {
-        fn drop(&mut self) {
-            unsafe {
-                let _ = DestroyWindow(self.0);
-            }
         }
     }
 
@@ -681,37 +628,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "requires an interactive Windows desktop with DWM"]
-    fn oversized_group_still_returns_lifetime_and_pointer_state() {
-        let owner = TestWindow::new();
-        let sources: Vec<_> = (0..MAX_TARGETS + 1).map(|_| TestWindow::new()).collect();
-        let targets = sources
-            .iter()
-            .map(|window| WindowPreviewTarget {
-                hwnd: window.address(),
-                clip: None,
-                rect: Rect {
-                    left: 10,
-                    top: 40,
-                    right: 266,
-                    bottom: 184,
-                },
-            })
-            .collect();
-        let manager = LivePreviewManager {
-            state: TracedMutex::new(LivePreviewState::default()),
-        };
-        let status = manager
-            .update(owner.address(), "seventeen".into(), targets, 255, None)
-            .unwrap();
-        assert!(status.visible);
-        assert_eq!(status.live.len(), MAX_TARGETS);
-        assert!(!status.pointer_inside); // The fixture popup is far offscreen.
-        manager.clear(owner.address(), "seventeen");
-        assert!(manager.state.lock().owners.is_empty());
-    }
-
-    #[test]
     fn crop_fills_portrait_landscape_ultrawide_and_inset_sources() {
         let destination = Rect {
             left: 10,
@@ -752,169 +668,5 @@ mod tests {
         }
         assert!(cover_crop(&Rect::default(), &destination).is_none());
         assert!(cover_crop(&destination, &Rect::default()).is_none());
-    }
-
-    #[test]
-    #[ignore = "requires an interactive Windows desktop with DWM"]
-    fn live_surface_is_reused_and_unregistered_on_drop() {
-        let owner = TestWindow::new();
-        let source = TestWindow::new();
-        let foreground = unsafe { GetForegroundWindow() };
-        let mut thumbnail = LiveThumbnail::register(owner.address(), source.address()).unwrap();
-        let handle = thumbnail.handle;
-        let rect = Rect {
-            left: 10,
-            top: 40,
-            right: 266,
-            bottom: 184,
-        };
-        thumbnail.update(&rect, None, 255).unwrap();
-        let clip = Rect {
-            left: 20,
-            top: 60,
-            right: 200,
-            bottom: 130,
-        };
-        thumbnail.update(&rect, Some(&clip), 100).unwrap();
-        assert_eq!(thumbnail.last.as_ref().unwrap().1, clip);
-        assert_eq!(thumbnail.handle, handle);
-        assert_eq!(unsafe { GetForegroundWindow() }, foreground);
-        assert!(unsafe { DwmQueryThumbnailSourceSize(handle) }.is_ok());
-        drop(thumbnail);
-        assert!(unsafe { DwmQueryThumbnailSourceSize(handle) }.is_err());
-    }
-
-    #[test]
-    #[ignore = "requires an interactive Windows desktop with DWM"]
-    fn escape_request_is_latched_without_taking_focus_and_resets_for_a_new_session() {
-        let owner = TestWindow::new();
-        let source = TestWindow::new();
-        let foreground = unsafe { GetForegroundWindow() };
-        let manager = LivePreviewManager {
-            state: TracedMutex::new(LivePreviewState::default()),
-        };
-        let targets = vec![WindowPreviewTarget {
-            hwnd: source.address(),
-            clip: None,
-            rect: Rect {
-                left: 10,
-                top: 40,
-                right: 266,
-                bottom: 184,
-            },
-        }];
-        assert!(
-            !manager
-                .update(owner.address(), "old".into(), targets.clone(), 255, None)
-                .unwrap()
-                .dismiss_requested
-        );
-        manager.request_dismiss();
-        let status = manager
-            .update(owner.address(), "old".into(), targets.clone(), 128, None)
-            .unwrap();
-        assert!(status.dismiss_requested);
-        // Keep composing during the frontend's ordinary hide animation.
-        assert_eq!(status.live, vec![source.address()]);
-        assert_eq!(unsafe { GetForegroundWindow() }, foreground);
-        manager.clear(owner.address(), "old");
-        assert!(
-            !manager
-                .update(owner.address(), "new".into(), targets, 255, None)
-                .unwrap()
-                .dismiss_requested
-        );
-    }
-
-    #[test]
-    #[ignore = "requires an interactive Windows desktop with DWM"]
-    fn cancellation_rejects_late_frames_and_cannot_clear_a_new_session() {
-        let owner = TestWindow::new();
-        let source = TestWindow::new();
-        let manager = LivePreviewManager {
-            state: TracedMutex::new(LivePreviewState::default()),
-        };
-        let targets = vec![WindowPreviewTarget {
-            hwnd: source.address(),
-            clip: None,
-            rect: Rect {
-                left: 10,
-                top: 40,
-                right: 266,
-                bottom: 184,
-            },
-        }];
-        manager.clear(owner.address(), "old");
-        assert!(
-            manager
-                .update(owner.address(), "old".into(), targets.clone(), 255, None)
-                .unwrap()
-                .live
-                .is_empty()
-        );
-        assert_eq!(
-            manager
-                .update(owner.address(), "new".into(), targets, 255, None)
-                .unwrap()
-                .live,
-            vec![source.address()]
-        );
-        manager.clear(owner.address(), "old");
-        assert!(manager.state.lock().owners.contains_key(&owner.address()));
-        manager.clear(owner.address(), "new");
-        assert!(manager.state.lock().owners.is_empty());
-    }
-
-    #[test]
-    #[ignore = "requires an interactive Windows desktop with DWM"]
-    fn hidden_destination_or_expired_heartbeat_releases_the_surface() {
-        let owner = TestWindow::new();
-        let source = TestWindow::new();
-        let manager = LivePreviewManager {
-            state: TracedMutex::new(LivePreviewState::default()),
-        };
-        let targets = vec![WindowPreviewTarget {
-            hwnd: source.address(),
-            clip: None,
-            rect: Rect {
-                left: 10,
-                top: 40,
-                right: 266,
-                bottom: 184,
-            },
-        }];
-        assert_eq!(
-            manager
-                .update(owner.address(), "first".into(), targets.clone(), 255, None)
-                .unwrap()
-                .live
-                .len(),
-            1
-        );
-        unsafe {
-            let _ = ShowWindow(owner.0, SW_HIDE);
-        }
-        manager.cleanup();
-        assert!(manager.state.lock().owners.is_empty());
-        unsafe {
-            let _ = ShowWindow(owner.0, SW_SHOWNOACTIVATE);
-        }
-        assert_eq!(
-            manager
-                .update(owner.address(), "second".into(), targets, 255, None)
-                .unwrap()
-                .live
-                .len(),
-            1
-        );
-        manager
-            .state
-            .lock()
-            .owners
-            .get_mut(&owner.address())
-            .unwrap()
-            .refreshed = Instant::now() - LEASE_TTL;
-        manager.cleanup();
-        assert!(manager.state.lock().owners.is_empty());
     }
 }

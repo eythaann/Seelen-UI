@@ -3,14 +3,13 @@ mod windows;
 
 use std::{
     collections::{HashMap, HashSet},
-    sync::LazyLock,
+    sync::OnceLock,
     time::{Duration, Instant},
 };
 
 use seelen_core::rect::Rect;
 use seelen_core::system_state::{
-    LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPeekStatus,
-    WindowPreviewTarget,
+    LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
 };
 use slu_utils::{Debounce, debounce};
 
@@ -33,6 +32,11 @@ type Platform = windows::WindowsAppPreviews;
 const CAPTURE_DEBOUNCE: Duration = Duration::from_millis(200);
 /// A restored window takes a moment to draw its content.
 const RESTORED_CAPTURE_DELAY: Duration = Duration::from_millis(300);
+/// Snapshot fallbacks (windows DWM could not compose live) are refreshed at most this often:
+/// each capture is encoded and broadcast to every webview.
+const FALLBACK_REFRESH: Duration = Duration::from_secs(1);
+
+static MANAGER: OnceLock<AppPreviewsManager> = OnceLock::new();
 
 pub struct AppPreviewsManager {
     platform: Platform,
@@ -46,12 +50,16 @@ event_manager!(AppPreviewsManager, PreviewsEvent);
 
 impl AppPreviewsManager {
     pub fn instance() -> &'static Self {
-        static MANAGER: LazyLock<AppPreviewsManager> = LazyLock::new(|| {
+        MANAGER.get_or_init(|| {
             let mut m = AppPreviewsManager::create();
             m.init().log_error();
             m
-        });
-        &MANAGER
+        })
+    }
+
+    /// `None` until something requested previews: shutdown must not spin the manager up.
+    pub fn get_if_initialized() -> Option<&'static Self> {
+        MANAGER.get()
     }
 
     fn create() -> Self {
@@ -141,13 +149,13 @@ impl AppPreviewsManager {
         }
     }
 
-    /// Refresh only visible snapshot fallbacks, at most four times per second.
+    /// Refresh only visible snapshot fallbacks, at most once per [`FALLBACK_REFRESH`].
     pub fn refresh_fallback(&self, hwnd: isize) {
         let mut requested = false;
         self.previews.get(&hwnd, |entry| {
             if entry
                 .requested
-                .is_none_or(|time| time.elapsed() >= Duration::from_millis(250))
+                .is_none_or(|time| time.elapsed() >= FALLBACK_REFRESH)
             {
                 entry.requested = Some(Instant::now());
                 requested = true;
@@ -205,24 +213,6 @@ impl AppPreviewsManager {
     }
     pub fn clear_live(&self, owner: isize, session: &str) {
         self.platform.clear_live(owner, session);
-    }
-    pub fn begin_peek(
-        &self,
-        owner: isize,
-        hwnd: isize,
-        session: String,
-        rect: Rect,
-    ) -> Result<WindowPeekStatus> {
-        self.platform.begin_peek(owner, hwnd, session, rect)
-    }
-    pub fn poll_peek(&self, owner: isize, session: &str, rect: Option<Rect>) -> WindowPeekStatus {
-        self.platform.poll_peek(owner, session, rect)
-    }
-    pub fn cancel_peek(&self, owner: isize, session: &str) {
-        self.platform.cancel_peek(owner, session);
-    }
-    pub fn commit_peek(&self, owner: isize, session: &str) -> Result<bool> {
-        self.platform.commit_peek(owner, session)
     }
 
     pub fn previews(&self) -> HashMap<isize, UserAppWindowPreview> {
