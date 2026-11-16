@@ -11,6 +11,10 @@
 - close popup if triggered and already shown.
 - add network adapters to network popup.
 
+### fix
+
+- adding several wallpapers at once only keeping one of them.
+
 ## [2.8.10]
 
 ### enhancements

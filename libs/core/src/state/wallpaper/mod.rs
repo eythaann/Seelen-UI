@@ -111,6 +111,11 @@ impl Wallpaper {
         let filename = filename.to_string_lossy().to_string();
         let ext = ext.to_string_lossy().to_string();
 
+        // never overwrite an existing wallpaper: each one must live in its own folder
+        if folder_to_store.join("metadata.yml").exists() {
+            return Err(format!("Wallpaper folder already in use: {folder_to_store:?}").into());
+        }
+
         // as uuids can start with numbers and resources names can't start with numbers
         // we prefix the uuid with an 'x'
         let resource_name = uuid::Uuid::new_v4();
