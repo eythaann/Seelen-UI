@@ -251,7 +251,7 @@ pub enum TriggerSource {
     /// Takes focus and hides on focus loss (default).
     Click,
     /// Never takes focus. Hides when the cursor leaves the popup and the `anchor_rect`
-    /// (including the gap between them), or on Escape.
+    /// (including the gap between them).
     Hover,
 }
 

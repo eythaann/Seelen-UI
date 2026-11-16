@@ -47,6 +47,40 @@ await widget.ready(); // show: !widget.lazy by default
 plugin calling `trigger(widgetId)`) before the widget finished loading, that trigger is queued and delivered once
 `ready()` runs.
 
+### Triggers and popups
+
+Other widgets open yours by invoking `SeelenCommand.TriggerWidget` with a `WidgetTriggerPayload`; your widget receives
+it with `widget.onTrigger(cb)`. Besides `desiredPosition`/`alignX`/`alignY` (where to show it) and `customArgs` (any
+data you want to pass), the payload says **how** the user opened it:
+
+- `source`: `TriggerSource.Click` (default when omitted) or `TriggerSource.Hover`.
+- `anchorRect`: screen rect, in physical pixels, of the element that triggered the widget.
+
+With the `Popup` preset the trigger decides the behavior, so the same popup works with a mouse and on touch screens:
+
+| `source`          | Focus                                  | Hides when                                                                        |
+| ----------------- | -------------------------------------- | --------------------------------------------------------------------------------- |
+| `Click` (or none) | Takes focus.                           | It loses focus, or it is triggered again (unless `toggleOnTrigger: false`).       |
+| `Hover`           | Never takes it: the user keeps typing. | The cursor leaves the popup and `anchorRect` (the gap between them is crossable). |
+
+Only send `Hover` from real mouse hovers (`pointerType === "mouse"`); taps and clicks should send `Click`.
+
+```ts
+await invoke(SeelenCommand.TriggerWidget, {
+  payload: {
+    id: "@me/my-popup" as WidgetId,
+    desiredPosition: { x, y },
+    alignX: Alignment.Center,
+    alignY: Alignment.End,
+    source: event.pointerType === "mouse" ? TriggerSource.Hover : TriggerSource.Click,
+    anchorRect, // physical px of the hovered element
+  },
+});
+```
+
+`widget.onVisibilityChange((visible) => ...)` notifies when the widget is shown or hidden (also when a popup hides
+itself), before the hide animation plays — useful to pause work or release resources while hidden.
+
 ### Typical bootstrap
 
 ```ts

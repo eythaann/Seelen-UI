@@ -56,7 +56,7 @@ export interface InitWidgetOptions {
    *
    * Commonly used for popup-style widgets.
    *
-   * Popups opened by a `Hover` trigger never take focus, they hide on cursor out / Escape instead
+   * Popups opened by a `Hover` trigger never take focus, they hide on cursor out instead
    * (see `WidgetTriggerPayload.source`).
    *
    * @default widget.preset === "Popup"

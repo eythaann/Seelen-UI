@@ -1,30 +1,29 @@
 import type { Rect } from "@seelen-ui/types";
-import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
+import { SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
 import { debounce, type DebouncedFunction } from "../../utils/async.ts";
 
 /** A hover popup hides after the cursor stays out of it (and its anchor) this long. */
 const HOVER_OUT_GRACE_MS = 150;
-/** Escape polling cadence: a hover popup never has keyboard focus, so it can't get key events. */
-const ESCAPE_POLL_MS = 100;
 
 /**
  * Dismissal of a popup opened by a `Hover` trigger: hides it once the cursor leaves the popup,
- * its anchor and the gap between them, or on Escape.
+ * its anchor and the gap between them.
  *
- * Listeners only exist while armed (a hover-triggered popup is visible), so idle popups cost nothing.
+ * The listener only exists while armed (a hover-triggered popup is visible), so idle popups cost nothing.
  */
 export class HoverDismissal {
   private anchor: Rect | null = null;
   private unlisten: Promise<UnSubscriber> | null = null;
-  private escapePoll: ReturnType<typeof setInterval> | undefined;
-  private polling = false;
   private readonly hideDelayed: DebouncedFunction<() => void>;
 
   constructor(
     private readonly popupRect: () => Rect,
     private readonly hide: () => Promise<void>,
   ) {
-    this.hideDelayed = debounce(() => this.dismiss(), HOVER_OUT_GRACE_MS);
+    this.hideDelayed = debounce(() => {
+      this.stop();
+      this.hide().catch(console.error);
+    }, HOVER_OUT_GRACE_MS);
   }
 
   /** Arms (or re-anchors) the dismissal. */
@@ -40,36 +39,14 @@ export class HoverDismissal {
         this.hideDelayed();
       }
     });
-    this.escapePoll = setInterval(() => this.pollEscape(), ESCAPE_POLL_MS);
   }
 
-  /** Releases every listener. */
+  /** Releases the listener. */
   stop(): void {
     this.hideDelayed.cancel();
-    clearInterval(this.escapePoll);
-    this.escapePoll = undefined;
     const unlisten = this.unlisten;
     this.unlisten = null;
     unlisten?.then((unsubscribe) => unsubscribe()).catch(console.error);
-  }
-
-  private dismiss(): void {
-    this.stop();
-    this.hide().catch(console.error);
-  }
-
-  private async pollEscape(): Promise<void> {
-    if (this.polling) return;
-    this.polling = true;
-    try {
-      if (this.escapePoll !== undefined && await invoke(SeelenCommand.GetKeyState, { key: "Escape" })) {
-        this.dismiss();
-      }
-    } catch (error) {
-      console.error("Failed to read the Escape key state", error);
-    } finally {
-      this.polling = false;
-    }
   }
 }
 

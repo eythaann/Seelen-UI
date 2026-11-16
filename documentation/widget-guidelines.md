@@ -115,12 +115,12 @@ on focus loss, etc.).
 Using a preset is **not mandatory**. If none of the built-in presets fit your needs you can set `preset: None` and
 configure the window yourself through the SLU library API.
 
-| Value     | What `init()` applies                                                                 |
-| --------- | ------------------------------------------------------------------------------------- |
-| `None`    | Nothing — full manual control.                                                        |
-| `Desktop` | Always behind other windows. No title bar. Saves and restores last position and size. |
-| `Overlay` | Always on top of other windows. No title bar.                                         |
-| `Popup`   | Always on top. No title bar. Auto-hides on focus loss. Shown/hidden by triggers only. |
+| Value     | What `init()` applies                                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------------------------------- |
+| `None`    | Nothing — full manual control.                                                                                        |
+| `Desktop` | Always behind other windows. No title bar. Saves and restores last position and size.                                 |
+| `Overlay` | Always on top of other windows. No title bar.                                                                         |
+| `Popup`   | Always on top. No title bar. Auto-hides on focus loss (or on cursor out when hovered). Shown/hidden by triggers only. |
 
 `Popup` widgets are not toggleable by the user from the settings panel — they only appear when explicitly triggered by
 another widget or plugin.

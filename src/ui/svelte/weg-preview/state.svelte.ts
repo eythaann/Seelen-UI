@@ -6,6 +6,11 @@ import { locale } from "./i18n/index.ts";
 const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
 
+// Same rule as the wallpapers: any performance mode other than "Disabled" pauses live rendering
+// (static snapshots are shown instead).
+const performanceMode = lazyRune(() => invoke(SeelenCommand.StateGetPerformanceMode));
+await subscribe(SeelenEvent.StatePerformanceModeChanged, performanceMode.setByPayload);
+
 const interactables = lazyRune<UserAppWindow[]>(() => invoke(SeelenCommand.GetUserAppWindows));
 await subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 
@@ -31,7 +36,7 @@ Widget.self.onTrigger(({ customArgs }) => {
   triggerCount++;
 });
 
-await Promise.all([interactables.init(), settings.init()]);
+await Promise.all([interactables.init(), settings.init(), performanceMode.init()]);
 
 $effect.root(() => {
   $effect(() => {
@@ -40,6 +45,7 @@ $effect.root(() => {
 });
 
 const currentInteractables = $derived(interactables.value?.filter((w) => hwnds.includes(w.hwnd)) ?? []);
+const liveEnabled = $derived(performanceMode.value === "Disabled");
 
 class PreviewState {
   enableSnapshotFallback(): void {
@@ -49,6 +55,10 @@ class PreviewState {
     invoke(SeelenCommand.GetUserAppWindowsPreviews).then((value) => {
       if (revision === snapshotRevision) previews.value = value;
     }).catch(console.error);
+  }
+
+  get liveEnabled(): boolean {
+    return liveEnabled;
   }
 
   get triggerCount(): number {

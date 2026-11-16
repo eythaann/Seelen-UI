@@ -91,6 +91,14 @@
       release();
       return;
     }
+    if (!previewState.liveEnabled) {
+      // Performance mode: static snapshots only.
+      release();
+      liveWindows = [];
+      previewChecked = true;
+      previewState.enableSnapshotFallback();
+      return;
+    }
     if (layoutDirty) measure();
     live.update({ targets: visiblePreviewTargets(candidates, viewport), opacity });
     // Follow show/hide fades frame by frame so the native surfaces fade with the popup.
@@ -147,6 +155,12 @@
     invalidate();
   });
 
+  // Performance mode changed while shown: switch between live surfaces and snapshots.
+  $effect(() => {
+    void previewState.liveEnabled;
+    invalidate();
+  });
+
   // Cards were added, removed or replaced: their rectangles moved.
   $effect(() => {
     if (previewState.currentInteractables.length === 0) {
@@ -184,9 +198,8 @@
           onclick={() => onClickPreview(win.hwnd)}
           onauxclick={(e) => onAuxClickPreview(e, win.hwnd)}
         >
-          {#if liveWindows.includes(win.hwnd)}
-            <span class="weg-preview-live-surface" aria-hidden="true"></span>
-          {:else if preview}
+          <!-- Live windows are composed natively by DWM over this area, which stays empty. -->
+          {#if liveWindows.includes(win.hwnd)}{:else if preview}
             <img class="weg-item-preview-image" src="data:image/webp;base64,{preview.data}" alt={win.title} />
           {:else}
             <div class="weg-preview-placeholder">
