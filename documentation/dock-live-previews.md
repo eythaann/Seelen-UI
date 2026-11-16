@@ -11,9 +11,11 @@ capture requests limited to four per second for visible fallbacks.
 
 Hover a thumbnail for 450 ms to temporarily present its source without keyboard focus. Move onto the real window to
 inspect it, or click either surface to keep it. Leaving both regions restores the previous stacking/minimized state.
-PID-checked neighboring windows anchor restoration even if a neighbor closes. Leases reject cancelled late requests and
-restore temporary state when the popup hides, the heartbeat expires, another app gains focus, or Seelen exits. Cleanup
-stays behind the platform contract and does not initialize unused native preview managers.
+Escape is sampled by the native watchdog so it also dismisses an unfocused hover popup and cancels its peek. The popup
+keeps its normal hide animation. PID-checked neighboring windows anchor restoration even if a neighbor closes. Leases
+reject cancelled late requests and restore temporary state when the popup hides, the heartbeat expires, another app
+gains focus, or Seelen exits. Cleanup stays behind the platform contract and does not initialize unused native preview
+managers.
 
 ## Checks
 

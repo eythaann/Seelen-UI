@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { type PeekBridge, type PeekStatus, WindowPeekController } from "./windowPeek.ts";
+import { visiblePeekRect, visiblePreviewTargets } from "./livePreview.ts";
 
 const rect = { left: 10, top: 10, right: 200, bottom: 150 };
 const active: PeekStatus = { active: true, committed: false, hwnd: 17 };
@@ -44,6 +45,25 @@ test("hover must dwell; leaving early never shows the real window", async () => 
   controller.hover(null, 450);
   await controller.tick(null, 900);
   assert.deepEqual(calls, []);
+});
+
+test("a partially scrolled thumbnail sends only its visible bounds to begin and poll", async () => {
+  const targets = visiblePreviewTargets(
+    [{ hwnd: 17, rect: { left: -20, top: -100, right: 200, bottom: 80 } }],
+    { left: 10, top: 40, right: 180, bottom: 180 },
+  );
+  const visible = visiblePeekRect(targets, 17);
+  assert.deepEqual(visible, { left: 10, top: 40, right: 180, bottom: 80 });
+  assert.equal(visiblePeekRect(targets, 99), null);
+  const { controller, bridge, calls } = fixture();
+  bridge.begin = (_hwnd, _token, bounds) => {
+    assert.deepEqual(bounds, visible);
+    return Promise.resolve(active);
+  };
+  controller.hover(17, 0);
+  await controller.tick(visible, 450);
+  await controller.tick(visible, 530);
+  assert.deepEqual(calls, [["poll", "session-1", visible]]);
 });
 
 test("pointer transfer keeps native lease alive, then native leave restores it", async () => {

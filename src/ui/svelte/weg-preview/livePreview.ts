@@ -9,6 +9,7 @@ export interface LivePreviewStatus {
   live: number[];
   visible: boolean;
   pointerInside: boolean;
+  dismissRequested?: boolean;
 }
 
 /** The list's scrollable client area, excluding borders and scrollbars, under popup transforms. */
@@ -30,7 +31,7 @@ export function contentViewport(
   return { left, top, right: left + box.clientWidth * sx, bottom: top + box.clientHeight * sy };
 }
 
-/** Only visible cards consume native thumbnail slots; scrolling changes this selection. */
+/** Preserve every visible card for snapshot fallback; only the backend caps native registrations. */
 export function visiblePreviewTargets(
   targets: LivePreviewFrame["targets"],
   viewport: PreviewRect,
@@ -53,7 +54,12 @@ export function visiblePreviewTargets(
     return [{ ...target, clip }];
   });
   if (preferred !== null) visible.sort((a, b) => Number(b.hwnd === preferred) - Number(a.hwnd === preferred));
-  return visible.slice(0, 16);
+  return visible;
+}
+
+/** Peek hit-testing uses only the visible part of a scrolled thumbnail. */
+export function visiblePeekRect(targets: LivePreviewFrame["targets"], hwnd: number): PreviewRect | null {
+  return targets.find((target) => target.hwnd === hwnd)?.clip ?? null;
 }
 
 interface LivePreviewBridge {

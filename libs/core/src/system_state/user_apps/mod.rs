@@ -133,6 +133,8 @@ pub struct LiveWindowPreviewState {
     pub live: Vec<isize>,
     pub visible: bool,
     pub pointer_inside: bool,
+    /// A native dismissal key was pressed while the popup did not have focus.
+    pub dismiss_requested: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

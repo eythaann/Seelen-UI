@@ -106,6 +106,7 @@ impl LivePreviewManager {
             live,
             visible,
             pointer_inside: pointer_inside_bridge(owner, anchor.as_ref()),
+            dismiss_requested: entry.dismiss_requested,
         })
     }
 
@@ -121,6 +122,18 @@ impl LivePreviewManager {
             .is_some_and(|entry| entry.session == session)
         {
             state.owners.remove(&owner);
+        }
+    }
+
+    pub(super) fn request_dismiss_if_initialized() {
+        if let Some(manager) = MANAGER.get() {
+            manager.request_dismiss();
+        }
+    }
+
+    fn request_dismiss(&self) {
+        for entry in self.state.lock().owners.values_mut() {
+            entry.dismiss_requested = true;
         }
     }
 
@@ -172,6 +185,7 @@ struct PreviewOwner {
     session: String,
     refreshed: Instant,
     thumbnails: HashMap<isize, LiveThumbnail>,
+    dismiss_requested: bool,
 }
 impl PreviewOwner {
     fn new(session: String) -> Self {
@@ -179,6 +193,7 @@ impl PreviewOwner {
             session,
             refreshed: Instant::now(),
             thumbnails: HashMap::new(),
+            dismiss_requested: false,
         }
     }
 }
@@ -767,6 +782,48 @@ mod tests {
         assert!(unsafe { DwmQueryThumbnailSourceSize(handle) }.is_ok());
         drop(thumbnail);
         assert!(unsafe { DwmQueryThumbnailSourceSize(handle) }.is_err());
+    }
+
+    #[test]
+    #[ignore = "requires an interactive Windows desktop with DWM"]
+    fn escape_request_is_latched_without_taking_focus_and_resets_for_a_new_session() {
+        let owner = TestWindow::new();
+        let source = TestWindow::new();
+        let foreground = unsafe { GetForegroundWindow() };
+        let manager = LivePreviewManager {
+            state: TracedMutex::new(LivePreviewState::default()),
+        };
+        let targets = vec![WindowPreviewTarget {
+            hwnd: source.address(),
+            clip: None,
+            rect: Rect {
+                left: 10,
+                top: 40,
+                right: 266,
+                bottom: 184,
+            },
+        }];
+        assert!(
+            !manager
+                .update(owner.address(), "old".into(), targets.clone(), 255, None)
+                .unwrap()
+                .dismiss_requested
+        );
+        manager.request_dismiss();
+        let status = manager
+            .update(owner.address(), "old".into(), targets.clone(), 128, None)
+            .unwrap();
+        assert!(status.dismiss_requested);
+        // Keep composing during the frontend's ordinary hide animation.
+        assert_eq!(status.live, vec![source.address()]);
+        assert_eq!(unsafe { GetForegroundWindow() }, foreground);
+        manager.clear(owner.address(), "old");
+        assert!(
+            !manager
+                .update(owner.address(), "new".into(), targets, 255, None)
+                .unwrap()
+                .dismiss_requested
+        );
     }
 
     #[test]

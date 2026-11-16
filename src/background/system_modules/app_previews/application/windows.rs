@@ -12,6 +12,7 @@ use seelen_core::{
     system_state::{LiveWindowPreviewState, WindowPeekStatus, WindowPreviewTarget},
 };
 use win_screenshot::prelude::capture_window;
+use windows::Win32::UI::Input::KeyboardAndMouse::{GetAsyncKeyState, VK_ESCAPE};
 
 use crate::{
     error::Result,
@@ -126,8 +127,15 @@ fn start_preview_watchdog() {
             .name("AppPreviewWatchdog".into())
             .spawn(|| {
                 let mut last_cleanup = Instant::now();
+                let mut escape_was_down = false;
                 loop {
                     std::thread::sleep(Duration::from_millis(32));
+                    // Hover popups deliberately keep focus in the user's application.
+                    let escape_down = unsafe { GetAsyncKeyState(VK_ESCAPE.0 as i32) } < 0;
+                    if escape_down && !escape_was_down {
+                        live_previews::LivePreviewManager::request_dismiss_if_initialized();
+                    }
+                    escape_was_down = escape_down;
                     window_peek::WindowPeekManager::tick_if_initialized();
                     if last_cleanup.elapsed() >= Duration::from_millis(150) {
                         live_previews::LivePreviewManager::cleanup_if_initialized();

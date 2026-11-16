@@ -70,7 +70,7 @@ test("clip-only changes reach native composition during an animation frame", asy
   assert.deepEqual(clips, [100, 75, 50]);
 });
 
-test("large groups only register visible unique thumbnails within the native budget", () => {
+test("large groups preserve all visible unique thumbnails for native selection and snapshot fallback", () => {
   const targets = Array.from({ length: 40 }, (_, index) => ({
     hwnd: index + 1,
     rect: { left: 0, top: index * 200, right: 256, bottom: index * 200 + 144 },
@@ -79,8 +79,25 @@ test("large groups only register visible unique thumbnails within the native bud
   assert.deepEqual(selected.map(({ hwnd }) => hwnd), [1, 2]);
   const crowded = targets.map((target) => ({ ...target, rect: frame.targets[0]!.rect }));
   const bounded = visiblePreviewTargets(crowded, { left: 0, top: 0, right: 300, bottom: 300 }, 40);
-  assert.equal(bounded.length, 16);
+  assert.equal(bounded.length, 40);
   assert.equal(bounded[0]!.hwnd, 40);
+});
+
+test("a seventeenth visible card reaches snapshot fallback when sixteen native surfaces succeed", async () => {
+  const targets = visiblePreviewTargets(
+    Array.from({ length: 17 }, (_, index) => ({ hwnd: index + 1, rect: frame.targets[0]!.rect })),
+    { left: 0, top: 0, right: 300, bottom: 300 },
+  );
+  const fallback: number[] = [];
+  const controller = new LivePreviewController({
+    update: (_session, value) => Promise.resolve({ ...status, live: value.targets.slice(0, 16).map((t) => t.hwnd) }),
+    clear: () => Promise.resolve(),
+  }, (state, value) => {
+    fallback.push(...value.targets.filter((target) => !state.live.includes(target.hwnd)).map((target) => target.hwnd));
+  });
+  controller.update({ ...frame, targets }, 0);
+  await setImmediate();
+  assert.deepEqual(fallback, [17]);
 });
 
 test("scrolling registers later windows rather than always truncating the first sixteen", () => {
@@ -226,7 +243,7 @@ test("late state from a cancelled surface cannot mark a different app live", asy
   );
   controller.update(frame, 0);
   controller.clear();
-  finish(status);
+  finish({ ...status, dismissRequested: true });
   await setImmediate();
   assert.deepEqual(seen, []);
   assert.deepEqual(cleared, ["session-1"]);

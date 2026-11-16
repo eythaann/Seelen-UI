@@ -5,7 +5,7 @@
   import { t } from "libs/ui/svelte/utils/i18n.ts";
   import { onMount } from "svelte";
   import { WindowPeekController } from "./windowPeek.ts";
-  import { contentViewport, LivePreviewController, visiblePreviewTargets } from "./livePreview.ts";
+  import { contentViewport, LivePreviewController, visiblePeekRect, visiblePreviewTargets } from "./livePreview.ts";
 
   let failed = $state(false);
   let container: HTMLDivElement;
@@ -29,6 +29,7 @@
     clear: (session) => invoke(SeelenCommand.ClearWindowPreviews, { session }),
     recover: (session, frame) => invoke(SeelenCommand.UpdateWindowPreviews, { session, ...frame, targets: [] }),
   }, (status, frame) => {
+    if (status.dismissRequested) { void dismiss(); return; }
     liveVisible = status.visible;
     if (!status.visible) {
       if (hadVisible) { armed = false; peek.cancel(); live.clear(); }
@@ -82,8 +83,8 @@
       live.update({ targets, opacity, anchor: previewState.sourceRect }, now);
       if (!dismissed && liveVisible && now - lastPeek >= 80) {
         lastPeek = now;
-        const rect = hovered?.element.isConnected ? hovered.element.getBoundingClientRect() : null;
-        void peek.tick(rect ? { left: px(rect.left), top: px(rect.top), right: px(rect.right), bottom: px(rect.bottom) } : null, now)
+        const rect = hovered?.element.isConnected ? visiblePeekRect(targets, hovered.hwnd) : null;
+        void peek.tick(rect, now)
           .catch((error) => console.error("Unable to track preview pointer", error));
       }
     };
