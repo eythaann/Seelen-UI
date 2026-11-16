@@ -1,4 +1,7 @@
+mod live_previews;
+
 use image::RgbaImage;
+use seelen_core::system_state::{LiveWindowPreviewState, WindowPreviewTarget};
 use win_screenshot::prelude::capture_window;
 
 use crate::{
@@ -11,12 +14,17 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-/// Stateless: the hook subscriptions last for the whole app lifetime.
-pub struct WindowsAppPreviews;
+/// The hook subscriptions last for the whole app lifetime. Live surfaces are owned here and
+/// released through `clear_native_previews` on exit.
+pub struct WindowsAppPreviews {
+    live: live_previews::LivePreviewManager,
+}
 
 impl AppPreviewsSystem for WindowsAppPreviews {
     fn create() -> Self {
-        Self
+        Self {
+            live: live_previews::LivePreviewManager::create(),
+        }
     }
 
     fn init<F>(&mut self, on_event: F) -> Result<()>
@@ -34,6 +42,24 @@ impl AppPreviewsSystem for WindowsAppPreviews {
             }
         });
         Ok(())
+    }
+
+    fn clear_native_previews(&self) {
+        self.live.clear_all();
+    }
+
+    fn update_live(
+        &self,
+        owner: isize,
+        session: String,
+        targets: Vec<WindowPreviewTarget>,
+        opacity: u8,
+    ) -> Result<LiveWindowPreviewState> {
+        self.live.update(owner, session, targets, opacity)
+    }
+
+    fn clear_live(&self, owner: isize, session: &str) {
+        self.live.clear(owner, session);
     }
 
     fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>> {
@@ -55,6 +81,10 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         let crop_h = buf
             .height
             .saturating_sub(shadow.top.unsigned_abs() + shadow.bottom.unsigned_abs());
+
+        if crop_w == 0 || crop_h == 0 {
+            return Ok(None);
+        }
 
         Ok(Some(
             image::imageops::crop_imm(&raw, crop_x, crop_y, crop_w, crop_h).to_image(),

@@ -2,6 +2,7 @@ import {
   type Alignment,
   type GenericWidgetSettings,
   type Rect,
+  TriggerSource,
   type Widget as IWidget,
   type WidgetConfigDefinition,
   type WidgetId,
@@ -20,6 +21,7 @@ import { subscribe } from "../../handlers/mod.ts";
 import { WidgetBasics } from "./abstractions/mod.ts";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 import { OPTIMISTIC_FRAME } from "./abstractions/3_autosize.ts";
+import { HoverDismissal } from "./hover.ts";
 
 interface WidgetInternalState {
   initialized: boolean;
@@ -101,8 +103,21 @@ export class Widget extends WidgetBasics {
 
   /** Will apply the recommended settings for a popup widget */
   private applyPopupPreset(toggleOnTrigger: boolean): void {
-    this.onTrigger(async ({ desiredPosition, alignX, alignY }) => {
-      if (toggleOnTrigger && this.visible) {
+    // The trigger decides the mode: the same popup can be hovered with a mouse and tapped on touch.
+    const hoverDismissal = new HoverDismissal(
+      () => this.rect,
+      () => this.hide(),
+    );
+    let focusable = true;
+
+    this.onVisibilityChange((visible) => {
+      if (!visible) hoverDismissal.stop();
+    });
+
+    this.onTrigger(async ({ desiredPosition, alignX, alignY, source, anchorRect }) => {
+      const hover = source === TriggerSource.Hover;
+      // Hovering again (e.g. another anchor) updates the popup instead of closing it.
+      if (toggleOnTrigger && !hover && this.visible) {
         await this.hide();
         return;
       }
@@ -110,8 +125,22 @@ export class Widget extends WidgetBasics {
       if (desiredPosition) {
         await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
       }
+
+      // On Windows `show()` also activates a focusable window: a hovered popup must leave the focus
+      // where it is, so the user can keep typing in their app.
+      if (focusable === hover) {
+        focusable = !hover;
+        await this.window.setFocusable(focusable);
+      }
       await this.show();
-      await this.focus();
+
+      if (hover) {
+        hoverDismissal.start(anchorRect ?? null);
+      } else {
+        hoverDismissal.stop();
+        await this.focus();
+      }
+
       // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
       // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
       // can arrive before the trigger fires and roll back the optimistic size to an intermediate

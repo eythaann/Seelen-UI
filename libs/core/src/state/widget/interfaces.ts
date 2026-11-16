@@ -56,6 +56,9 @@ export interface InitWidgetOptions {
    *
    * Commonly used for popup-style widgets.
    *
+   * Popups opened by a `Hover` trigger never take focus, they hide on cursor out instead
+   * (see `WidgetTriggerPayload.source`).
+   *
    * @default widget.preset === "Popup"
    */
   hideOnFocusLoss?: boolean;
@@ -63,6 +66,7 @@ export interface InitWidgetOptions {
   /**
    * Popup preset only: triggering the widget while it is visible hides it instead of showing it again.
    * Disable it for popups that are re-triggered with new content while visible (context menus, previews).
+   * `Hover` triggers never toggle.
    *
    * @default true
    */

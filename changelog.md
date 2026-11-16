@@ -5,11 +5,14 @@
 ### features
 
 - cli: `slu quit` and `slu restart` commands to gracefully close or restart Seelen UI.
+- dock: live window previews (paused on performance mode, static snapshots are shown instead).
+- dock: hovering an open app shows its window previews without stealing the focus.
 
 ### enhancements
 
 - close popup if triggered and already shown.
 - add network adapters to network popup.
+- widgets: popups can be triggered by hover (`TriggerSource`), they don't take focus and hide on cursor out.
 
 ### fix
 
