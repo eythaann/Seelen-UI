@@ -14,6 +14,7 @@
 ### fix
 
 - adding several wallpapers at once only keeping one of them.
+- apps spawning behind windows when launched from dock.
 
 ## [2.8.10]
 
