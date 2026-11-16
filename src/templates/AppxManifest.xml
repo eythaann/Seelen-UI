@@ -23,7 +23,7 @@
     <DisplayName>Seelen UI</DisplayName>
     <PublisherDisplayName>Seelen</PublisherDisplayName>
     <Description>Fully Customizable Desktop Enviroment for Windows.</Description>
-    <Logo>static\icons\256x256.png</Logo>
+    <Logo>static\icons\app\256x256.png</Logo>
 
     <uap10:PackageIntegrity>
       <uap10:Content Enforcement="on" />
@@ -69,8 +69,8 @@
       <uap3:VisualElements
         DisplayName="Seelen UI"
         Description="Fully Customizable Desktop Enviroment for Windows."
-        Square150x150Logo="static\icons\128x128.png"
-        Square44x44Logo="static\icons\48x48.png"
+        Square150x150Logo="static\icons\app\128x128.png"
+        Square44x44Logo="static\icons\app\48x48.png"
         BackgroundColor="transparent"
         AppListEntry="default"
         VisualGroup="Seelen"
@@ -79,7 +79,7 @@
       <Extensions>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="seelen-ui.file">
-            <uap:Logo>static\icons\128x128.png</uap:Logo>
+            <uap:Logo>static\icons\app\128x128.png</uap:Logo>
             <uap:DisplayName>Seelen UI</uap:DisplayName>
             <uap:SupportedFileTypes>
               <uap:FileType>.slu</uap:FileType>
@@ -89,7 +89,7 @@
 
         <uap10:Extension Category="windows.protocol">
           <uap10:Protocol Name="seelen-ui.uri">
-            <uap10:Logo>static\icons\128x128.png</uap10:Logo>
+            <uap10:Logo>static\icons\app\128x128.png</uap10:Logo>
             <uap10:DisplayName>Seelen UI</uap10:DisplayName>
           </uap10:Protocol>
         </uap10:Extension>
@@ -104,8 +104,8 @@
       <uap3:VisualElements
         DisplayName="SLU Terminal Tools"
         Description="Command-line client for Seelen UI"
-        Square150x150Logo="static\icons\128x128.png"
-        Square44x44Logo="static\icons\48x48.png"
+        Square150x150Logo="static\icons\app\128x128.png"
+        Square44x44Logo="static\icons\app\48x48.png"
         BackgroundColor="transparent"
         AppListEntry="default"
         VisualGroup="Seelen"
@@ -128,8 +128,8 @@
       <uap3:VisualElements
         DisplayName="SLU Service"
         Description="Service Helper for Seelen UI"
-        Square150x150Logo="static\icons\128x128.png"
-        Square44x44Logo="static\icons\48x48.png"
+        Square150x150Logo="static\icons\app\128x128.png"
+        Square44x44Logo="static\icons\app\48x48.png"
         BackgroundColor="transparent"
         AppListEntry="default"
         VisualGroup="Seelen"

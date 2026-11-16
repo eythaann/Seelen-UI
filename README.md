@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="documentation/images/logo.svg" width="44" align="top" alt="Seelen UI Logo" />
+  <img src="src/static/icons/app/icon.svg" width="44" align="top" alt="Seelen UI Logo" />
   Seelen UI
 </h1>
 

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/eythaann/Seelen-UI/812f64d29162fe49da6f621d5e2a3e4852b8b8b1/documentation/images/logo.svg" width="44" align="top" alt="Seelen UI Logo" />
+  <img src="https://raw.githubusercontent.com/eythaann/Seelen-UI/master/src/static/icons/app/icon.svg" width="44" align="top" alt="Seelen UI Logo" />
   Seelen UI Library
 </h1>
 
