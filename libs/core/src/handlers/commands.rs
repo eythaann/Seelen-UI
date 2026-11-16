@@ -405,7 +405,7 @@ slu_commands_declaration! {
     UpdateWindowPreviews =
         @webview()
         @fallible()
-        update_window_previews(session: String, targets: Vec<WindowPreviewTarget>, opacity: u8, anchor: Option<Rect>) -> LiveWindowPreviewState,
+        update_window_previews(session: String, targets: Vec<WindowPreviewTarget>, opacity: u8) -> LiveWindowPreviewState,
     ClearWindowPreviews =
         @webview()
         @fallible()

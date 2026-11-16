@@ -13,77 +13,55 @@
     visiblePreviewTargets,
   } from "./livePreview.ts";
 
-  /** Stable layout only needs a lease refresh + pointer check; DWM renders the frames itself. */
-  const HEARTBEAT_MS = 100;
+  /** Surfaces are released if the hide fade did not reach opacity 0 by then (no animation). */
+  const HIDE_RELEASE_MS = 250;
+
+  const widget = Widget.getCurrent();
 
   let container: HTMLDivElement;
   let list: HTMLDivElement;
   let liveWindows = $state<number[]>([]);
   let previewChecked = $state(false);
 
-  let hadVisible = false;
-  let dismissed = false;
-  let armed = false;
-
   // Layout is measured only when something invalidates it (scroll, resize, new cards, trigger).
   let layoutDirty = true;
   let candidates: LivePreviewFrame["targets"] = [];
   let viewport: PreviewRect = { left: 0, top: 0, right: 0, bottom: 0 };
   let frame = 0;
-  let timer: ReturnType<typeof setTimeout> | undefined;
+  let releaseTimer: ReturnType<typeof setTimeout> | undefined;
 
   const live = new LivePreviewController({
     update: (session, frame) => invoke(SeelenCommand.UpdateWindowPreviews, { session, ...frame }),
     clear: (session) => invoke(SeelenCommand.ClearWindowPreviews, { session }),
-    recover: (session, frame) => invoke(SeelenCommand.UpdateWindowPreviews, { session, ...frame, targets: [] }),
   }, onLiveStatus);
 
   function onLiveStatus(status: LivePreviewStatus, sent: LivePreviewFrame): void {
-    if (status.dismissRequested) {
-      void dismiss();
-      return;
-    }
     if (!status.visible) {
-      if (hadVisible) {
-        stop();
-        live.clear();
-      }
+      // Shown by the lib but the native window is not visible yet: retry on the next frame.
+      if (widget.visible) schedule();
       return;
     }
-    hadVisible = true;
     previewChecked = true;
     if (status.live.join() !== liveWindows.join()) liveWindows = status.live;
     if (sent.targets.some((target) => !status.live.includes(target.hwnd))) {
       previewState.enableSnapshotFallback();
     }
-    if (!status.pointerInside && !dismissed) void dismiss();
   }
 
-  function schedule(fast: boolean): void {
-    if (!armed || frame) return;
-    if (fast) {
-      clearTimeout(timer);
-      timer = undefined;
-      frame = requestAnimationFrame(render);
-    } else if (timer === undefined) {
-      timer = setTimeout(() => {
-        timer = undefined;
-        render();
-      }, HEARTBEAT_MS);
-    }
+  function schedule(): void {
+    if (!frame) frame = requestAnimationFrame(render);
   }
 
   function invalidate(): void {
     layoutDirty = true;
-    schedule(true);
+    if (widget.visible) schedule();
   }
 
-  function stop(): void {
-    armed = false;
+  function release(): void {
     cancelAnimationFrame(frame);
-    clearTimeout(timer);
     frame = 0;
-    timer = undefined;
+    clearTimeout(releaseTimer);
+    live.clear();
   }
 
   function measure(): void {
@@ -107,36 +85,21 @@
 
   function render(): void {
     frame = 0;
-    const anchor = previewState.sourceRect;
-    if (!armed || !container || !anchor) return;
-
+    if (!container) return;
     const opacity = Math.round(Number(getComputedStyle(document.documentElement).opacity) * 255);
-    if (!opacity && document.documentElement.hasAttribute("data-widget-hidden")) {
-      schedule(false);
+    if (!widget.visible && opacity === 0) {
+      release();
       return;
     }
-
     if (layoutDirty) measure();
-    live.update({ targets: visiblePreviewTargets(candidates, viewport), opacity, anchor }, performance.now());
-
+    live.update({ targets: visiblePreviewTargets(candidates, viewport), opacity });
     // Follow show/hide fades frame by frame so the native surfaces fade with the popup.
-    schedule(opacity < 255);
-  }
-
-  async function dismiss(): Promise<void> {
-    if (dismissed) return;
-    dismissed = true;
-    await Widget.self.hide();
-    // A new trigger can supersede the hide animation.
-    if (dismissed) {
-      stop();
-      live.clear();
-    }
+    if (opacity < 255) schedule();
   }
 
   function onClickPreview(hwnd: number): void {
     invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
-    void dismiss();
+    widget.hide();
   }
 
   function onClosePreview(e: MouseEvent, hwnd: number): void {
@@ -152,16 +115,27 @@
     const observer = new ResizeObserver(invalidate);
     observer.observe(container);
     observer.observe(list);
+    const unsubscribe = widget.onVisibilityChange((visible) => {
+      clearTimeout(releaseTimer);
+      if (visible) {
+        invalidate();
+        return;
+      }
+      schedule();
+      releaseTimer = setTimeout(() => {
+        if (!widget.visible) release();
+      }, HIDE_RELEASE_MS);
+    });
     return () => {
       observer.disconnect();
-      stop();
-      live.clear();
+      unsubscribe();
+      release();
     };
   });
 
   // A persistent popup can be triggered for a different dock item without remounting.
   $effect(() => {
-    if (!previewState.sourceRect) return;
+    if (!previewState.triggerCount) return;
     // Use the monitor's available height, not this autosized popup's own viewport height.
     container.style.setProperty(
       "--weg-preview-available-height",
@@ -170,23 +144,20 @@
     live.clear();
     liveWindows = [];
     previewChecked = false;
-    hadVisible = false;
-    dismissed = false;
-    armed = true;
     invalidate();
   });
 
   // Cards were added, removed or replaced: their rectangles moved.
   $effect(() => {
     if (previewState.currentInteractables.length === 0) {
-      void dismiss();
+      widget.hide();
       return;
     }
     invalidate();
   });
 
   $effect(() => {
-    Widget.getCurrent().ready();
+    widget.ready();
   });
 </script>
 

@@ -57,7 +57,6 @@ impl crate::tauri_handlers::Handlers {
         session: String,
         targets: Vec<seelen_core::system_state::WindowPreviewTarget>,
         opacity: u8,
-        anchor: Option<seelen_core::rect::Rect>,
     ) -> Result<seelen_core::system_state::LiveWindowPreviewState> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         if targets
@@ -72,7 +71,6 @@ impl crate::tauri_handlers::Handlers {
             session,
             targets,
             opacity,
-            anchor,
         )?;
         if status.visible {
             for hwnd in sources {

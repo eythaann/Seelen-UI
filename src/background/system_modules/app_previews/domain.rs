@@ -1,6 +1,5 @@
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
-use seelen_core::rect::Rect;
 use seelen_core::system_state::{
     Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
 };
@@ -36,7 +35,6 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
-        anchor: Option<Rect>,
     ) -> Result<LiveWindowPreviewState>;
     fn clear_live(&self, owner: isize, session: &str);
 }

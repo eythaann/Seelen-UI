@@ -3,13 +3,10 @@ import type { Rect as PreviewRect } from "@seelen-ui/lib/types";
 export interface LivePreviewFrame {
   targets: { hwnd: number; rect: PreviewRect; clip?: PreviewRect }[];
   opacity: number;
-  anchor: PreviewRect | null;
 }
 export interface LivePreviewStatus {
   live: number[];
   visible: boolean;
-  pointerInside: boolean;
-  dismissRequested?: boolean;
 }
 
 /** The list's scrollable client area, excluding borders and scrollbars, under popup transforms. */
@@ -58,17 +55,17 @@ export function visiblePreviewTargets(
 interface LivePreviewBridge {
   update(session: string, frame: LivePreviewFrame): Promise<LivePreviewStatus>;
   clear(session: string): Promise<unknown>;
-  recover?(session: string, frame: LivePreviewFrame): Promise<LivePreviewStatus>;
 }
 
-/** Layout follows animation frames; the video itself stays in DWM, with no screenshot traffic. */
+/**
+ * Sends the layout only when it changes: DWM renders the video itself, so a stable popup costs
+ * no IPC. One request is in flight at a time; layouts produced meanwhile collapse into the newest.
+ */
 export class LivePreviewController {
   private token: string | null = null;
   private pending = false;
-  private latest: { frame: LivePreviewFrame; now: number } | null = null;
+  private latest: LivePreviewFrame | null = null;
   private lastKey = "";
-  private lastSent = -Infinity;
-  private retryAfter = -Infinity;
 
   constructor(
     private readonly bridge: LivePreviewBridge,
@@ -76,39 +73,30 @@ export class LivePreviewController {
     private readonly newToken: () => string = () => crypto.randomUUID(),
   ) {}
 
-  update(frame: LivePreviewFrame, now: number): void {
-    this.latest = { frame, now };
-    if (this.pending || now < this.retryAfter) return;
+  update(frame: LivePreviewFrame): void {
+    if (this.pending) {
+      this.latest = frame;
+      return;
+    }
     const key = JSON.stringify(frame);
-    // Stable geometry only needs a light heartbeat / pointer check, not per-video-frame IPC.
-    if (key === this.lastKey && now - this.lastSent < 80) return;
-    this.latest = null;
+    if (key === this.lastKey) return;
     const token = this.token ??= this.newToken();
     this.lastKey = key;
-    this.lastSent = now;
     this.pending = true;
-    void this.bridge.update(token, frame).then((status) => {
-      if (this.token === token) this.onStatus(status, frame);
-    }).catch(async (error: unknown) => {
-      if (this.token === token) {
-        this.lastKey = "";
-        this.retryAfter = this.lastSent + 250;
-        console.error("Live preview update failed", error);
-        // A rejected target must not strand the popup without pointer/lifetime state.
-        if (this.bridge.recover) {
-          try {
-            const status = await this.bridge.recover(token, frame);
-            if (this.token === token) this.onStatus(status, frame);
-          } catch (recoveryError) {
-            console.error("Live preview recovery failed", recoveryError);
-          }
-        }
-      }
+    this.bridge.update(token, frame).then((status) => {
+      if (this.token !== token) return;
+      // The window was not shown yet: nothing was composed, so the same layout must be resent.
+      if (!status.visible) this.lastKey = "";
+      this.onStatus(status, frame);
+    }).catch((error: unknown) => {
+      // Resend this layout on the next update instead of treating it as applied.
+      if (this.token === token) this.lastKey = "";
+      console.error("Live preview update failed", error);
     }).finally(() => {
       this.pending = false;
       const next = this.latest;
       this.latest = null;
-      if (next) this.update(next.frame, next.now);
+      if (next) this.update(next);
     });
   }
 
@@ -117,8 +105,6 @@ export class LivePreviewController {
     this.token = null;
     this.latest = null;
     this.lastKey = "";
-    this.lastSent = -Infinity;
-    this.retryAfter = -Infinity;
-    if (token) void this.bridge.clear(token).catch(console.error);
+    if (token) this.bridge.clear(token).catch(console.error);
   }
 }

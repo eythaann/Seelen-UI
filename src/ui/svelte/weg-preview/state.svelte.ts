@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
-import type { Rect as PreviewRect, UserAppWindow } from "@seelen-ui/lib/types";
+import type { UserAppWindow } from "@seelen-ui/lib/types";
 import { type LazyRune, lazyRune } from "libs/ui/svelte/utils";
 import { locale } from "./i18n/index.ts";
 
@@ -23,11 +23,12 @@ await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, (event) => {
 });
 
 let hwnds = $state<number[]>([]);
-let sourceRect = $state<PreviewRect | null>(null);
+// Bumped on every trigger: the popup may be re-triggered for another dock item while visible.
+let triggerCount = $state(0);
 
 Widget.self.onTrigger(({ customArgs }) => {
   hwnds = (customArgs?.hwnds as number[]) ?? [];
-  sourceRect = (customArgs?.sourceRect as PreviewRect | undefined) ?? null;
+  triggerCount++;
 });
 
 await Promise.all([interactables.init(), settings.init()]);
@@ -50,8 +51,8 @@ class PreviewState {
     }).catch(console.error);
   }
 
-  get sourceRect(): PreviewRect | null {
-    return sourceRect;
+  get triggerCount(): number {
+    return triggerCount;
   }
 
   get currentInteractables(): UserAppWindow[] {

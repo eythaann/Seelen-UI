@@ -1,5 +1,5 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import { Alignment, SeelenWegSide, type UserAppWindow, type WidgetId } from "@seelen-ui/lib/types";
+import { Alignment, SeelenWegSide, TriggerSource, type UserAppWindow, type WidgetId } from "@seelen-ui/lib/types";
 import { settingsState } from "./state/settings.svelte.ts";
 
 export async function triggerPreviewWidget(
@@ -59,10 +59,10 @@ export async function triggerPreviewWidget(
       desiredPosition: { x, y },
       alignX,
       alignY,
+      source: hover ? TriggerSource.Hover : TriggerSource.Click,
+      anchorRect: viewRect,
       customArgs: {
         hwnds: windows.map((w) => w.hwnd),
-        position: dockSide,
-        sourceRect: viewRect,
       },
     },
   });

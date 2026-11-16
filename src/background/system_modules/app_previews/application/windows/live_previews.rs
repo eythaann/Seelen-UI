@@ -8,18 +8,20 @@ use seelen_core::{
     system_state::{LiveWindowPreviewState, WindowPreviewTarget},
 };
 use windows::Win32::{
-    Foundation::{HWND, POINT, RECT},
+    Foundation::{HWND, RECT},
     Graphics::Dwm::*,
-    UI::WindowsAndMessaging::{GetCursorPos, GetWindowRect, IsWindow, IsWindowVisible},
+    UI::WindowsAndMessaging::{IsWindow, IsWindowVisible},
 };
 
 use crate::{error::Result, utils::lock_free::TracedMutex, windows_api::WindowsApi};
 
-const LEASE_TTL: Duration = Duration::from_secs(2);
 const CANCEL_TTL: Duration = Duration::from_secs(30);
+const MAX_CANCELLED: usize = 128;
 const MAX_TARGETS: usize = 16;
 
-/// DWM owns frame updates. Only layout/opacity and the lifetime lease cross the webview boundary.
+/// DWM owns frame updates: only layout/opacity cross the webview boundary, and only when they
+/// change. Surfaces live while their destination window is visible; DWM also releases them
+/// when that window is destroyed.
 pub struct LivePreviewManager {
     state: TracedMutex<LivePreviewState>,
 }
@@ -37,27 +39,22 @@ impl LivePreviewManager {
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
-        anchor: Option<Rect>,
     ) -> Result<LiveWindowPreviewState> {
         if session.is_empty() || session.len() > 128 {
             return Err("Invalid live preview request".into());
         }
-        // Limit registrations, not the lifetime/pointer response for an entire group.
         let targets = bounded_targets(targets);
-        let visible = unsafe { IsWindowVisible(HWND(owner as _)) }.as_bool();
         let mut state = self.state.lock();
         state.prune();
-        if state
-            .cancelled
-            .iter()
-            .any(|(window, token, _)| *window == owner && token == &session)
-        {
+        if state.is_cancelled(owner, &session) {
             return Ok(LiveWindowPreviewState::default());
         }
-        if !visible {
-            state.owners.remove(&owner);
+        // Covers this owner too: a hidden destination keeps no surfaces.
+        state.owners.retain(|window, _| is_visible(*window));
+        if !is_visible(owner) {
             return Ok(LiveWindowPreviewState::default());
         }
+
         let entry = state
             .owners
             .entry(owner)
@@ -65,31 +62,24 @@ impl LivePreviewManager {
         if entry.session != session {
             *entry = PreviewOwner::new(session);
         }
-        entry.refreshed = Instant::now();
         entry
             .thumbnails
             .retain(|hwnd, _| targets.iter().any(|target| target.hwnd == *hwnd));
+
         let mut live = Vec::new();
         for target in targets {
             if !valid_rect(&target.rect) || target.hwnd == owner {
                 continue;
             }
-            if let std::collections::hash_map::Entry::Vacant(slot) =
-                entry.thumbnails.entry(target.hwnd)
-            {
-                match LiveThumbnail::register(owner, target.hwnd) {
-                    Ok(thumbnail) => {
-                        slot.insert(thumbnail);
-                    }
-                    Err(_) => {
-                        continue;
+            let thumbnail = match entry.thumbnails.entry(target.hwnd) {
+                std::collections::hash_map::Entry::Occupied(slot) => slot.into_mut(),
+                std::collections::hash_map::Entry::Vacant(slot) => {
+                    match LiveThumbnail::register(owner, target.hwnd) {
+                        Ok(thumbnail) => slot.insert(thumbnail),
+                        Err(_) => continue,
                     }
                 }
-            }
-            let thumbnail = entry
-                .thumbnails
-                .get_mut(&target.hwnd)
-                .expect("registered thumbnail");
+            };
             if thumbnail
                 .update(&target.rect, target.clip.as_ref(), opacity)
                 .is_ok()
@@ -101,9 +91,7 @@ impl LivePreviewManager {
         }
         Ok(LiveWindowPreviewState {
             live,
-            visible,
-            pointer_inside: pointer_inside_bridge(owner, anchor.as_ref()),
-            dismiss_requested: entry.dismiss_requested,
+            visible: true,
         })
     }
 
@@ -122,28 +110,8 @@ impl LivePreviewManager {
         }
     }
 
-    /// Nothing is being composed: the watchdog can sleep until the next update.
-    pub(super) fn is_idle(&self) -> bool {
-        self.state.lock().owners.is_empty()
-    }
-
-    pub(super) fn request_dismiss(&self) {
-        for entry in self.state.lock().owners.values_mut() {
-            entry.dismiss_requested = true;
-        }
-    }
-
-    pub(super) fn clear_all(&self) {
+    pub fn clear_all(&self) {
         self.state.lock().owners.clear();
-    }
-
-    pub(super) fn cleanup(&self) {
-        let mut state = self.state.lock();
-        state.owners.retain(|owner, entry| {
-            entry.refreshed.elapsed() < LEASE_TTL
-                && unsafe { IsWindowVisible(HWND(*owner as _)) }.as_bool()
-        });
-        state.prune();
     }
 }
 
@@ -152,13 +120,20 @@ struct LivePreviewState {
     owners: HashMap<isize, PreviewOwner>,
     cancelled: VecDeque<(isize, String, Instant)>,
 }
+
 impl LivePreviewState {
+    fn is_cancelled(&self, owner: isize, session: &str) -> bool {
+        self.cancelled
+            .iter()
+            .any(|(window, token, _)| *window == owner && token == session)
+    }
+
     fn prune(&mut self) {
         while self
             .cancelled
             .front()
             .is_some_and(|(_, _, time)| time.elapsed() > CANCEL_TTL)
-            || self.cancelled.len() >= 128
+            || self.cancelled.len() >= MAX_CANCELLED
         {
             self.cancelled.pop_front();
         }
@@ -167,17 +142,14 @@ impl LivePreviewState {
 
 struct PreviewOwner {
     session: String,
-    refreshed: Instant,
     thumbnails: HashMap<isize, LiveThumbnail>,
-    dismiss_requested: bool,
 }
+
 impl PreviewOwner {
     fn new(session: String) -> Self {
         Self {
             session,
-            refreshed: Instant::now(),
             thumbnails: HashMap::new(),
-            dismiss_requested: false,
         }
     }
 }
@@ -253,6 +225,10 @@ fn bounded_targets(targets: Vec<WindowPreviewTarget>) -> Vec<WindowPreviewTarget
         }
     }
     selected
+}
+
+fn is_visible(window: isize) -> bool {
+    unsafe { IsWindowVisible(HWND(window as _)) }.as_bool()
 }
 
 fn valid_rect(rect: &Rect) -> bool {
@@ -356,56 +332,9 @@ fn clipped_thumbnail(bounds: &Rect, full: &Rect, clip: Option<&Rect>) -> Option<
     Some((clipped, visible))
 }
 
-fn pointer_inside_bridge(owner: isize, anchor: Option<&Rect>) -> bool {
-    let mut point = Default::default();
-    let mut popup = RECT::default();
-    if unsafe { GetCursorPos(&mut point) }.is_err()
-        || unsafe { GetWindowRect(HWND(owner as _), &mut popup) }.is_err()
-    {
-        return false;
-    }
-    inside_preview_bridge(point, popup, anchor)
-}
-
-fn inside_preview_bridge(point: POINT, popup: RECT, anchor: Option<&Rect>) -> bool {
-    let left = anchor.map_or(popup.left, |rect| popup.left.min(rect.left));
-    let top = anchor.map_or(popup.top, |rect| popup.top.min(rect.top));
-    let right = anchor.map_or(popup.right, |rect| popup.right.max(rect.right));
-    let bottom = anchor.map_or(popup.bottom, |rect| popup.bottom.max(rect.bottom));
-    point.x >= left && point.x <= right && point.y >= top && point.y <= bottom
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn pointer_crosses_the_dock_gap_on_negative_coordinate_monitors() {
-        let popup = RECT {
-            left: -620,
-            top: 650,
-            right: -350,
-            bottom: 890,
-        };
-        let anchor = Rect {
-            left: -500,
-            top: 900,
-            right: -450,
-            bottom: 950,
-        };
-        for ((x, y), expected) in [
-            ((-470, 895), true),
-            ((-460, 925), true),
-            ((-400, 700), true),
-            ((-700, 895), false),
-            ((-470, 960), false),
-        ] {
-            assert_eq!(
-                inside_preview_bridge(POINT { x, y }, popup, Some(&anchor)),
-                expected
-            );
-        }
-    }
 
     #[test]
     fn clipped_edges_map_into_the_original_source_without_zooming() {

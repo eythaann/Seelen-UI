@@ -7,7 +7,6 @@ use std::{
     time::{Duration, Instant},
 };
 
-use seelen_core::rect::Rect;
 use seelen_core::system_state::{
     LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
 };
@@ -206,10 +205,8 @@ impl AppPreviewsManager {
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
-        anchor: Option<Rect>,
     ) -> Result<LiveWindowPreviewState> {
-        self.platform
-            .update_live(owner, session, targets, opacity, anchor)
+        self.platform.update_live(owner, session, targets, opacity)
     }
     pub fn clear_live(&self, owner: isize, session: &str) {
         self.platform.clear_live(owner, session);

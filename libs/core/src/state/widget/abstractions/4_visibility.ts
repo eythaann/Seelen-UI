@@ -30,9 +30,27 @@ export class Widget_4 extends Widget_3 {
     return this._visible;
   }
 
+  private _visibilitySubs = new Set<(visible: boolean) => void>();
+  /**
+   * Called synchronously when `show()`/`hide()` change the cached visibility, before the hide
+   * animation plays (so the widget can follow it).
+   */
+  public onVisibilityChange(cb: (visible: boolean) => void): () => void {
+    this._visibilitySubs.add(cb);
+    return () => {
+      this._visibilitySubs.delete(cb);
+    };
+  }
+
+  private setVisible(visible: boolean): void {
+    if (this._visible === visible) return;
+    this._visible = visible;
+    this._visibilitySubs.forEach((cb) => cb(visible));
+  }
+
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
-    this._visible = true;
+    this.setVisible(true);
     debouncedClose.cancel();
     await this.window.show();
     // a hide() was called while showing, it already owns the attribute.
@@ -43,8 +61,8 @@ export class Widget_4 extends Widget_3 {
 
   public async hide(): Promise<void> {
     const token = ++this._visibilityToken;
-    this._visible = false;
     globalThis.document.documentElement.dataset.widgetHidden = "";
+    this.setVisible(false);
 
     await this.waitHideAnimations();
     if (token !== this._visibilityToken) {
