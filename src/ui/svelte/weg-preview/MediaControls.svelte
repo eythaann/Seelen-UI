@@ -4,7 +4,7 @@
   import MediaTransport from "libs/ui/svelte/components/MediaTransport.svelte";
   import { t } from "libs/ui/svelte/utils/i18n.ts";
   import { mediaState } from "./mediaState.svelte.ts";
-  import { browsers, executableName, isMediaShortcut, knownPlayers, matchingSessions, mediaShortcutProfile } from "libs/ui/utils/media.ts";
+  import { browsers, executableName, isMediaShortcut, knownPlayers, matchingSessions, mediaShortcutProfile, retainMatchingSession } from "libs/ui/utils/media.ts";
 
   let { window }: { window: UserAppWindow } = $props();
   const exe = $derived(executableName(window.process.path));
@@ -13,7 +13,9 @@
   const profile = $derived(mediaShortcutProfile(mediaState.shortcuts, exe));
   const fallback = $derived(profile?.enabled === true);
   let selection = $state<string | null>(null);
-  const selected = $derived(selection ?? matches[0]?.umid ?? (fallback ? "shortcut" : ""));
+  let automaticSelection = $state<string | null>(null);
+  $effect(() => { automaticSelection = retainMatchingSession(automaticSelection, matches); });
+  const selected = $derived(selection ?? automaticSelection ?? (fallback ? "shortcut" : ""));
   const session = $derived(sessions.find((session) => session.umid === selected));
   const usingShortcut = $derived(selected === "shortcut" && fallback);
   const visible = $derived(matches.length > 0 || fallback || knownPlayers.has(exe) || browsers.has(exe) && sessions.length > 0);

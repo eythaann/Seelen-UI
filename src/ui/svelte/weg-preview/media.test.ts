@@ -1,6 +1,12 @@
 import { deepStrictEqual as assertEquals } from "node:assert/strict";
 import { test } from "node:test";
-import { executableName, isMediaShortcut, matchingSessions, mediaShortcutProfile } from "libs/ui/utils/media.ts";
+import {
+  executableName,
+  isMediaShortcut,
+  matchingSessions,
+  mediaShortcutProfile,
+  retainMatchingSession,
+} from "libs/ui/utils/media.ts";
 
 test("prefer exact app identity, not the system's default session", () => {
   const music = { umid: "NetEaseMusic" };
@@ -25,6 +31,20 @@ test("unmatched app never inherits another app's media controls", () => {
 test("keep all matching sources for an explicit source choice", () => {
   const sessions = [{ umid: "C:/A/msedge.exe" }, { umid: "C:/B/msedge.exe" }];
   assertEquals(matchingSessions({ umid: null, process: { path: "D:/msedge.exe" } }, sessions), sessions);
+});
+
+test("automatic media source stays fixed when session enumeration order changes", () => {
+  const first = { umid: "C:/A/msedge.exe" };
+  const second = { umid: "C:/B/msedge.exe" };
+  let selected = retainMatchingSession(null, [first, second]);
+  assertEquals(selected, first.umid);
+  selected = retainMatchingSession(selected, [second, first]);
+  assertEquals(selected, first.umid);
+});
+
+test("automatic media source changes only after its matching session disappears", () => {
+  assertEquals(retainMatchingSession("closed", [{ umid: "remaining" }]), "remaining");
+  assertEquals(retainMatchingSession("remaining", []), null);
 });
 
 test("shortcut profile lookup ignores case and prefers the canonical edited profile", () => {

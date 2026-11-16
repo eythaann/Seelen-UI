@@ -23,6 +23,11 @@ export function matchingSessions<T extends { umid: string }>(window: WindowIdent
   return sessions.filter((session) => executableName(session.umid) === exe);
 }
 
+/** Retain an automatic choice while it still matches, regardless of session enumeration order. */
+export function retainMatchingSession(current: string | null, matches: { umid: string }[]): string | null {
+  return matches.some((session) => session.umid === current) ? current : matches[0]?.umid ?? null;
+}
+
 /** Keep in sync with the backend's deliberately small virtual-key chord grammar. */
 export function isMediaShortcut(value: string): boolean {
   const parts = value.toUpperCase().split("+").map((part) => part.trim());

@@ -240,6 +240,13 @@ impl Default for SeelenWegSettings {
     }
 }
 
+impl SeelenWegSettings {
+    /// total height or width of the dock, depending on the Position
+    pub fn total_size(&self) -> u32 {
+        self.size + (self.padding * 2) + (self.margin * 2)
+    }
+}
+
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
@@ -248,13 +255,6 @@ pub struct WegMediaShortcutProfile {
     pub previous: String,
     pub toggle_play_pause: String,
     pub next: String,
-}
-
-impl SeelenWegSettings {
-    /// total height or width of the dock, depending on the Position
-    pub fn total_size(&self) -> u32 {
-        self.size + (self.padding * 2) + (self.margin * 2)
-    }
 }
 
 // ============== Window Manager Settings ==============
