@@ -1,9 +1,9 @@
 <script lang="ts">
   import type { MediaPlayer } from "@seelen-ui/lib/types";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { Icon, FileIcon, iconPackManager } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, iconPackManager } from "libs/ui/svelte/components/Icon";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import MediaProgress from "./MediaProgress.svelte";
+  import MediaTransport from "libs/ui/svelte/components/MediaTransport.svelte";
 
   interface Props {
     session: MediaPlayer;
@@ -101,24 +101,5 @@
 
   <MediaProgress {session} />
 
-  <div class="media-session-actions">
-    <button
-      data-skin="transparent"
-      onclick={() => invoke(SeelenCommand.MediaPrev, { id: session.umid })}
-    >
-      <Icon iconName="IoPlaySkipBack" />
-    </button>
-    <button
-      data-skin="transparent"
-      onclick={() => invoke(SeelenCommand.MediaTogglePlayPause, { id: session.umid })}
-    >
-      <Icon iconName={session.playing ? "IoPause" : "IoPlay"} />
-    </button>
-    <button
-      data-skin="transparent"
-      onclick={() => invoke(SeelenCommand.MediaNext, { id: session.umid })}
-    >
-      <Icon iconName="IoPlaySkipForward" />
-    </button>
-  </div>
+  <MediaTransport target={session.umid} playing={session.playing} controls={session.controls} sessionId={session.umid} />
 </div>

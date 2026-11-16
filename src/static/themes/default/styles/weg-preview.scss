@@ -72,3 +72,26 @@ $itemSize: 256px;
     }
   }
 }
+
+.weg-item-preview-container {
+  .weg-preview-media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xs);
+
+    select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .weg-preview-media-note {
+      color: var(--slu-std-fg-muted-color);
+    }
+  }
+  .weg-item-preview-image-container {
+    padding: 0;
+    .weg-item-preview-image {
+      width: 100%;
+    }
+  }
+}

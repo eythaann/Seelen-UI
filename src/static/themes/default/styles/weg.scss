@@ -342,11 +342,34 @@
   overflow: hidden;
   padding: 0;
 
+  .media-session-open {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .media-session-actions {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+  }
+
   &:active {
     transform: none;
   }
 
   .media-session {
     overflow: hidden;
+    pointer-events: none;
+  }
+
+  .media-transport .media-session-actions {
+    .vertical & {
+      flex-direction: column;
+    }
+
+    button {
+      font-size: 0.5rem;
+    }
   }
 }

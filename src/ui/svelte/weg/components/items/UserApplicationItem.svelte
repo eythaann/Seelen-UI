@@ -66,7 +66,7 @@
     const alignX = settingsState.popupAlignX;
     const alignY = settingsState.popupAlignY;
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu: { ...getUserApplicationContextMenu($t, item, windows), alignX, alignY },
+      menu: { ...getUserApplicationContextMenu($t, item, windows, itemEl!), alignX, alignY },
       forwardTo: null,
     });
   }

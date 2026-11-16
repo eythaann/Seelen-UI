@@ -4,6 +4,7 @@ import type { AppOrFileWegItem } from "./types.ts";
 import { dockStateActions } from "./state/items.svelte.ts";
 import { fullSettings } from "./state/settings.svelte.ts";
 import { iconPackManager } from "libs/ui/svelte/components/Icon/index.ts";
+import { triggerPreviewWidget } from "./previewWidget.ts";
 import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
 
 const identifier = crypto.randomUUID();
@@ -11,6 +12,7 @@ const onAppMenuClick = "weg::app_menu_click";
 
 let pendingAppItem: AppOrFileWegItem | null = null;
 let pendingAppWindows: UserAppWindow[] = [];
+let pendingAppElement: HTMLElement | null = null;
 
 Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
@@ -34,6 +36,8 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
     launchItem(item, true);
   } else if (key === "copy_hwnd") {
     navigator.clipboard.writeText(JSON.stringify(windows.map((w) => w.hwnd.toString(16))));
+  } else if (key === "preview" && pendingAppElement?.isConnected) {
+    triggerPreviewWidget(pendingAppElement, windows);
   } else if (key === "close") {
     windows.forEach((w) => invoke(SeelenCommand.WegCloseApp, { hwnd: w.hwnd }));
   } else if (key === "kill") {
@@ -53,9 +57,11 @@ export function getUserApplicationContextMenu(
   t: (key: string) => string,
   item: AppOrFileWegItem,
   windows: UserAppWindow[],
+  element: HTMLElement,
 ): ContextMenu {
   pendingAppItem = item;
   pendingAppWindows = windows;
+  pendingAppElement = element;
 
   const items: ContextMenuItem[] = [];
 
@@ -116,6 +122,14 @@ export function getUserApplicationContextMenu(
 
   if (windows.length) {
     items.push({ type: "Separator" });
+
+    items.push({
+      type: "Item",
+      key: "preview",
+      icon: "MdOutlinePreview",
+      label: t("app_menu.preview"),
+      callbackEvent: onAppMenuClick,
+    });
 
     if (fullSettings.value.devTools) {
       items.push({

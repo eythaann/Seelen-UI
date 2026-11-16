@@ -418,6 +418,10 @@ slu_commands_declaration! {
     MediaNext =
         @fallible()
         media_next(id: String),
+    MediaSendAppShortcut =
+        @webview()
+        @fallible()
+        media_send_app_shortcut(hwnd: isize, exe: String, action: MediaTransportAction),
     MediaSeek =
         @fallible()
         media_seek(id: String, position: i64),
