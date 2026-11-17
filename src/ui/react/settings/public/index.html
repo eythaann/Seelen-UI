@@ -9,21 +9,31 @@
     <div id="root"></div>
 
     <div id="splashscreen">
-      <img class="splashscreen-image" src="./splashscreen.png" />
+      <svg class="splashscreen-logo" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="splashscreen-gradient" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #fa2317; stop-opacity: 1" />
+            <stop offset="50%" style="stop-color: #ac4ef4; stop-opacity: 1" />
+            <stop offset="100%" style="stop-color: #006cfa; stop-opacity: 1" />
+          </linearGradient>
+        </defs>
+        <rect width="100%" height="100%" rx="16%" ry="16%" fill="url(#splashscreen-gradient)" />
+        <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="#fafafa" stroke-width="4%" stroke-dasharray="10.9% 3.95%" />
+        <line x1="50%" y1="50%" x2="100%" y2="50%" stroke="#fafafa" stroke-width="4%" stroke-dasharray="9.5% 4%" />
+      </svg>
     </div>
     <style>
+    /* Shown before the theme tokens are injected, so the colors can't depend on them. */
     #splashscreen {
       position: fixed;
-      top: 0;
-      left: 0;
-
-      width: 100vw;
-      height: 100vh;
+      inset: 0;
       z-index: 1000;
 
-      will-change: contents;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      background-color: var(--color-gray-50);
+      background-color: #f3f3f3;
       transition: opacity 300ms linear;
       opacity: 1;
 
@@ -35,10 +45,15 @@
         opacity: 0;
       }
 
-      .splashscreen-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      .splashscreen-logo {
+        width: 128px;
+        height: 128px;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #splashscreen {
+        background-color: #202020;
       }
     }
     </style>
