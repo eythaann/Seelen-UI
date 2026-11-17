@@ -176,9 +176,12 @@ impl TrayState {
             .ok_or("Icon not found")?
             .ok_or("Icon has no registry entry")?;
         set_registry_notify_icon_promoted(&registry_key, promoted)?;
+        // the entry is shared by every icon registered by the same app (see `store_new_icon`)
         self.icons.with_lock(|icons| {
-            if let Some(icon) = icons.get_mut(session_id) {
-                icon.is_promoted = promoted;
+            for icon in icons.values_mut() {
+                if icon.registry_key.as_ref() == Some(&registry_key) {
+                    icon.is_promoted = promoted;
+                }
             }
         });
         self.notify_changed();

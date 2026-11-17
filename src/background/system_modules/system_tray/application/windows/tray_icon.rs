@@ -250,7 +250,7 @@ impl TrayState {
     ///
     /// The entry may already be held by a visible icon that adopted it (see
     /// `adopt_hidden_sibling_entry`), a hidden icon never takes it back, while a
-    /// visible icon replaces the one holding it.
+    /// visible icon replaces the stale holders of it (see `replaces_entry_holder`).
     fn store_new_icon(
         &self,
         icon_data: &IconEventData,
@@ -272,11 +272,22 @@ impl TrayState {
             } else {
                 let mut replaced = Vec::new();
                 self.icons.retain(|(id, icon)| {
-                    let holds = holds_entry(icon);
-                    if holds {
+                    // Several live windows can legitimately share an entry (e.g. many
+                    // instances of the same app), only the stale holders are replaced.
+                    let replace = holds_entry(icon) && {
+                        let holder_alive = icon
+                            .window_handle
+                            .is_none_or(|handle| self.is_owner_alive(id, handle));
+                        replaces_entry_holder(
+                            icon.window_handle,
+                            icon_data.window_handle,
+                            holder_alive,
+                        )
+                    };
+                    if replace {
                         replaced.push(id.clone());
                     }
-                    !holds
+                    !replace
                 });
                 for id in &replaced {
                     self.owners.remove(id);
@@ -651,6 +662,19 @@ fn session_identity(data: &IconEventData) -> Option<String> {
     }
 }
 
+/// Whether a new visible icon replaces the stored icon holding the same registry entry.
+///
+/// Windows keeps a single entry per executable path and uid, so icons of different live
+/// windows (e.g. several instances of the same app) share it and must coexist. The holder is
+/// only replaced when it belongs to the same window as the new icon, or when its window is gone.
+fn replaces_entry_holder(
+    holder_window: Option<isize>,
+    new_window: Option<isize>,
+    holder_alive: bool,
+) -> bool {
+    holder_window == new_window || !holder_alive
+}
+
 /// Applies the fields set in `newer` over `held`.
 fn merge_icon_data(held: &mut IconEventData, newer: &IconEventData) {
     held.uid = newer.uid.or(held.uid);
@@ -662,4 +686,28 @@ fn merge_icon_data(held: &mut IconEventData, newer: &IconEventData) {
     held.version = newer.version.or(held.version);
     held.is_visible = newer.is_visible.or(held.is_visible);
     held.shared_icon = newer.shared_icon.or(held.shared_icon);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::replaces_entry_holder;
+
+    #[test]
+    fn replaces_holder_of_the_same_window() {
+        assert!(replaces_entry_holder(Some(10), Some(10), true));
+        assert!(replaces_entry_holder(None, None, true));
+    }
+
+    #[test]
+    fn keeps_holders_of_other_live_windows() {
+        // three instances of the same app sharing one registry entry
+        assert!(!replaces_entry_holder(Some(10), Some(20), true));
+        assert!(!replaces_entry_holder(Some(10), None, true));
+        assert!(!replaces_entry_holder(None, Some(20), true));
+    }
+
+    #[test]
+    fn replaces_holder_whose_window_is_gone() {
+        assert!(replaces_entry_holder(Some(10), Some(20), false));
+    }
 }
