@@ -110,6 +110,7 @@ slu_events_declaration! {
     StateWidgetsChanged(Vec<Widget>) as "widgets-changed",
     WidgetPermissionsChanged(HashMap<WidgetId, HashMap<WidgetPerm, WidgetPermState>>) as "widget::permissions-changed",
     StateWallpapersChanged(Vec<Wallpaper>) as "UserResources::wallpapers-changed",
+    NativeShellWallpaperChanged(NativeWallpaperSnapshot) as "shell::native-wallpaper-changed",
 
     // system tray
     SystemTrayChanged(Vec<SysTrayIcon>) as "system-tray::changed",
