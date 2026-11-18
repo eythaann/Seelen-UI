@@ -13,9 +13,10 @@ use std::{
 use seelen_core::{
     handlers::SeelenEvent,
     resource::{
-        IconPackId, PluginId, ResourceId, ResourceKind, SluResource, ThemeId, WallpaperId, WidgetId,
+        IconPackId, InternalResourceMetadata, PluginId, ResourceId, ResourceKind, ResourceMetadata,
+        ResourceText, SluResource, ThemeId, WallpaperId, WidgetId,
     },
-    state::{IconPack, Plugin, Theme, Wallpaper, WallpaperCollection, Widget},
+    state::{IconPack, Plugin, Theme, Wallpaper, WallpaperCollection, WallpaperKind, Widget},
 };
 use uuid::Uuid;
 
@@ -28,6 +29,8 @@ use crate::{
 
 pub static RESOURCES: LazyLock<Arc<ResourceManager>> =
     LazyLock::new(|| Arc::new(ResourceManager::default()));
+
+pub(crate) const NATIVE_WALLPAPER_ID: &str = "@seelen/current-windows-wallpaper";
 
 #[derive(Default)]
 pub struct ResourceManager {
@@ -209,8 +212,9 @@ impl ResourceManager {
                     .retain_sync(|_, v| v.metadata.internal.path != path);
             }
             ResourceKind::Wallpaper => {
-                self.wallpapers
-                    .retain_sync(|_, v| v.metadata.internal.path != path);
+                self.wallpapers.retain_sync(|id, v| {
+                    id.as_str() == NATIVE_WALLPAPER_ID || v.metadata.internal.path != path
+                });
             }
             ResourceKind::IconPack => {
                 self.icon_packs
@@ -236,9 +240,10 @@ impl ResourceManager {
             ResourceKind::IconPack => self
                 .icon_packs
                 .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
-            ResourceKind::Wallpaper => self
-                .wallpapers
-                .retain_sync(|_, v| self.manual.contains_sync(&v.metadata.internal.path)),
+            ResourceKind::Wallpaper => self.wallpapers.retain_sync(|id, v| {
+                id.as_str() == NATIVE_WALLPAPER_ID
+                    || self.manual.contains_sync(&v.metadata.internal.path)
+            }),
             ResourceKind::SoundPack => {
                 // feature not implemented
             }
@@ -290,6 +295,12 @@ impl ResourceManager {
     pub async fn load_all_of_type(&self, kind: ResourceKind, on_mount: bool) -> Result<()> {
         log::trace!("Loading {kind:?}s");
 
+        // This virtual built-in is independent of disk scanning. Keep it available
+        // even if a wallpaper directory cannot be read, and throughout reloads.
+        if kind == ResourceKind::Wallpaper {
+            self.ensure_native_wallpaper();
+        }
+
         let paths = Self::get_entries_for_type(&kind).await?;
         self.unload_all(&kind);
 
@@ -311,6 +322,27 @@ impl ResourceManager {
             std::thread::spawn(move || RESOURCES.ensure_system_icon_pack(on_mount).log_error());
         }
         Ok(())
+    }
+
+    fn ensure_native_wallpaper(&self) {
+        let id = WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
+        let wallpaper = Wallpaper {
+            id: id.clone(),
+            r#type: WallpaperKind::Native,
+            metadata: ResourceMetadata {
+                display_name: ResourceText::En("Current Windows wallpaper".to_owned()),
+                description: ResourceText::En(
+                    "Follows the static wallpaper image currently selected in Windows.".to_owned(),
+                ),
+                internal: InternalResourceMetadata {
+                    bundled: true,
+                    ..Default::default()
+                },
+                ..Default::default()
+            },
+            ..Default::default()
+        };
+        let _ = self.wallpapers.insert_sync(id, Arc::new(wallpaper));
     }
 
     /// Activates a loaded resource the same way the "Enable" button does after installing
@@ -384,3 +416,30 @@ impl ResourceManager {
 
 unsafe impl Send for ResourceManager {}
 unsafe impl Sync for ResourceManager {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn native_wallpaper_remains_registered_through_resource_reload_and_unload() {
+        let resources = ResourceManager::default();
+        let native = WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
+        resources.ensure_native_wallpaper();
+        resources.unload_all(&ResourceKind::Wallpaper);
+        assert!(resources.wallpapers.contains_sync(&native));
+        resources.unload(&ResourceKind::Wallpaper, Path::new(""));
+        assert!(resources.wallpapers.contains_sync(&native));
+        resources.ensure_native_wallpaper();
+        assert_eq!(resources.wallpapers.len(), 1);
+        assert!(
+            resources
+                .wallpapers
+                .read_sync(&native, |_, wallpaper| matches!(
+                    wallpaper.r#type,
+                    WallpaperKind::Native
+                ))
+                .unwrap()
+        );
+    }
+}

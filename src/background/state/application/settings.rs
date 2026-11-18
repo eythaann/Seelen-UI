@@ -5,7 +5,7 @@ use seelen_core::state::{CssStyles, Dialog, DialogContent, Settings};
 use crate::{
     app::SeelenUI,
     error::{Result, ResultLogExt},
-    resources::ResourceManager,
+    resources::{NATIVE_WALLPAPER_ID, ResourceManager},
     state::domain::StateEvent,
     utils::constants::SEELEN_COMMON,
     widgets::{
@@ -116,11 +116,15 @@ impl AppSettings {
     /// Sanitize wallpaper collections to remove non-existent wallpaper IDs
     pub(super) fn sanitize_wallpaper_collections(&mut self, resources: &ResourceManager) -> bool {
         let mut changed = false;
+        let native = seelen_core::resource::WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
         for collection in &mut self.settings.wallpaper_collections {
             let original_len = collection.wallpapers.len();
             collection
                 .wallpapers
-                .retain(|wallpaper_id| resources.wallpapers.contains_sync(wallpaper_id));
+                // The virtual Windows wallpaper never depends on a file-backed entry.
+                .retain(|wallpaper_id| {
+                    wallpaper_id == &native || resources.wallpapers.contains_sync(wallpaper_id)
+                });
             if collection.wallpapers.len() != original_len {
                 changed = true;
             }
@@ -171,4 +175,85 @@ fn show_corrupted_state_to_user(path: &Path) {
 
         trigger_dialog_backend(dialog).log_error();
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use seelen_core::{
+        resource::WallpaperId,
+        state::{Wallpaper, WallpaperCollection},
+    };
+    use std::sync::Arc;
+    use uuid::Uuid;
+
+    #[test]
+    fn native_wallpaper_selection_survives_repeated_serialization_and_startup_cleanup() {
+        let resources = ResourceManager::default(); // Built-ins may not be registered yet.
+        let native = WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
+        let collection_id = Uuid::new_v4();
+        let mut state = AppSettings {
+            settings: Settings::default(),
+        };
+        state.settings.by_widget.wall.default_collection = Some(collection_id);
+        state
+            .settings
+            .wallpaper_collections
+            .push(WallpaperCollection {
+                id: collection_id,
+                name: "Current Windows wallpaper".into(),
+                wallpapers: vec![native.clone()],
+                hidden: true,
+            });
+        for _ in 0..3 {
+            let saved = serde_json::to_string(&state.settings).unwrap();
+            state.settings = serde_json::from_str(&saved).unwrap();
+            assert!(!state.sanitize_wallpaper_collections(&resources));
+            assert_eq!(
+                state.settings.by_widget.wall.default_collection,
+                Some(collection_id)
+            );
+            assert_eq!(state.settings.wallpaper_collections[0].id, collection_id);
+            assert_eq!(
+                state.settings.wallpaper_collections[0].wallpapers,
+                vec![native.clone()]
+            );
+        }
+    }
+
+    #[test]
+    fn native_wallpaper_protection_still_removes_missing_file_backed_wallpapers() {
+        let resources = ResourceManager::default();
+        let native = WallpaperId::from(NATIVE_WALLPAPER_ID.to_owned());
+        let existing = WallpaperId::from("@test/existing".to_owned());
+        let missing = WallpaperId::from("@test/missing".to_owned());
+        resources
+            .wallpapers
+            .insert_sync(
+                existing.clone(),
+                Arc::new(Wallpaper {
+                    id: existing.clone(),
+                    ..Default::default()
+                }),
+            )
+            .unwrap();
+        let mut state = AppSettings {
+            settings: Settings::default(),
+        };
+        state
+            .settings
+            .wallpaper_collections
+            .push(WallpaperCollection {
+                id: Uuid::new_v4(),
+                name: "Mixed collection".into(),
+                wallpapers: vec![native.clone(), existing.clone(), missing],
+                hidden: false,
+            });
+        assert!(state.sanitize_wallpaper_collections(&resources));
+        assert_eq!(
+            state.settings.wallpaper_collections[0].wallpapers,
+            vec![native, existing]
+        );
+        assert!(!state.sanitize_wallpaper_collections(&resources));
+    }
 }

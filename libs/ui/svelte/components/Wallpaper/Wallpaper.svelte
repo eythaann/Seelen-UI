@@ -3,6 +3,7 @@
 
   import ThemedWallpaper from "./components/ThemedWallpaper.svelte";
   import ImageWallpaper from "./components/ImageWallpaper.svelte";
+  import NativeWallpaper from "./components/NativeWallpaper.svelte";
   import VideoWallpaper from "./components/VideoWallpaper.svelte";
   import type { BaseProps } from "./types";
   import { defaultWallpaperConfig } from "./utils";
@@ -40,6 +41,8 @@
   {#if definition}
     {#if definition.type === WallpaperKind.Image}
       <ImageWallpaper {definition} {config} onLoad={handleLoad} />
+    {:else if definition.type === WallpaperKind.Native}
+      <NativeWallpaper {definition} {config} onLoad={handleLoad} />
     {:else if definition.type === WallpaperKind.Video}
       {#if staticProp && definition.thumbnailFilename}
         <ImageWallpaper

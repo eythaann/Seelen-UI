@@ -40,6 +40,9 @@ pub struct Wallpaper {
 pub enum WallpaperKind {
     #[serde(alias = "image")]
     Image,
+    /// Follows the static wallpaper image currently selected in Windows.
+    #[serde(alias = "native")]
+    Native,
     #[serde(alias = "video")]
     Video,
     #[serde(alias = "layered")]
@@ -171,4 +174,16 @@ pub struct WallpaperCollection {
     pub name: String,
     pub wallpapers: Vec<WallpaperId>,
     pub hidden: bool,
+}
+
+/// Static wallpaper image currently selected in Windows.
+#[derive(Debug, Default, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+#[serde(rename_all = "camelCase")]
+pub struct NativeWallpaperSnapshot {
+    /// Empty when Windows has no wallpaper image (e.g. a solid color background).
+    pub path: std::path::PathBuf,
+    /// File modification time in ms, changes when the same file is overwritten in place.
+    pub revision: u64,
 }

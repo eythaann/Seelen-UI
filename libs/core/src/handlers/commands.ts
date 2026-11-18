@@ -88,6 +88,7 @@ export enum SeelenCommand {
   GetWidgetPermissions = "get_widget_permissions",
   SetWidgetPermissions = "set_widget_permissions",
   GetNativeShellWallpaper = "get_native_shell_wallpaper",
+  GetNativeShellWallpaperSnapshot = "get_native_shell_wallpaper_snapshot",
   SetNativeShellWallpaper = "set_native_shell_wallpaper",
   GetUser = "get_user",
   GetUserFolderContent = "get_user_folder_content",

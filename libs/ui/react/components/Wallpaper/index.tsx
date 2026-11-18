@@ -6,6 +6,7 @@ import type { ComponentChildren } from "preact";
 
 import { ThemedWallpaper } from "./components/ThemedWallpaper";
 import { ImageWallpaper } from "./components/ImageWallpaper";
+import { NativeWallpaper } from "./components/NativeWallpaper";
 import { VideoWallpaper } from "./components/VideoWallpaper";
 import type { BaseProps } from "./types";
 import cs from "./index.module.css";
@@ -27,6 +28,9 @@ export function Wallpaper(props: BaseProps) {
   switch (definition?.type) {
     case WallpaperKind.Image:
       element = <ImageWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
+      break;
+    case WallpaperKind.Native:
+      element = <NativeWallpaper {...props} onLoad={onLoad} definition={definition} config={config} />;
       break;
     case WallpaperKind.Video:
       // Use thumbnail as static image for optimization when static prop is true
