@@ -7,7 +7,7 @@ mod windows;
 use self::windows as imp;
 
 #[cfg(windows)]
-pub use self::windows::{get_fixed_runtime_path, is_windows_10};
+pub use self::windows::{get_fixed_runtime_path, is_windows_10, is_windows_11};
 
 /// The webview runtime is a fixed version bundled with the app instead of the one installed on
 /// the system.

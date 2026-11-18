@@ -60,6 +60,11 @@ pub struct Widget {
     pub preset: WidgetPreset,
     /// If true, the widget webview won't be created until it is requested via trigger action.
     pub lazy: bool,
+    /// Participate in toolbar cold-switch coordination. The widget must handle
+    /// `widget::native-blur-close` and submit an opted-in native blur exit animation.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional))]
+    pub native_blur_switch: Option<bool>,
     /// How many instances are allowed of this widget.
     pub instances: WidgetInstanceMode,
     /// If true, the widget will not be shown on the Settings Navigation as a Tab, but it will
