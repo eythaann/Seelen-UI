@@ -102,6 +102,11 @@ impl WidgetWebview {
         }
 
         let window = builder
+            .on_page_load(|window, payload| {
+                if matches!(payload.event(), tauri::webview::PageLoadEvent::Started) {
+                    super::native_blur::reset_window(&window);
+                }
+            })
             // wry silently denies new windows if no handler is set, so `target="_blank"` links
             // and `window.open` did nothing (tauri-plugin-shell used to intercept these clicks).
             // External links are opened on the default handler instead.
@@ -117,6 +122,7 @@ impl WidgetWebview {
 
         // Widgets handle their own show/hide animations, avoid the ones from the system.
         imp::disable_system_transitions(&window).log_error();
+        super::native_blur::register_window(&window)?;
         Ok(Self(window))
     }
 

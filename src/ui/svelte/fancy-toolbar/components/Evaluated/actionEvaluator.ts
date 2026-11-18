@@ -70,6 +70,9 @@ function triggerWidget(widgetId: WidgetId, itemId: string): void {
       desiredPosition: { x, y },
       alignX: Alignment.Center,
       alignY: isTopPosition ? Alignment.Start : Alignment.End,
+      // Tells the backend this is a toolbar popup switch, so it clears the previous popup's native
+      // blur before opening this one. Closing on a repeated click is handled by `toggleOnTrigger`.
+      customArgs: { __seelenToolbarToggle: true },
     },
   });
 }

@@ -103,6 +103,14 @@ export class Widget extends WidgetBasics {
 
   /** Will apply the recommended settings for a popup widget */
   private applyPopupPreset(toggleOnTrigger: boolean): void {
+    if (!this.def.nativeBlurSwitch) {
+      this.preReadyTasks.push(
+        getCurrentWebview().listen(SeelenEvent.WidgetNativeBlurClose, () => {
+          void this.hide();
+        }).then(() => {}),
+      );
+    }
+
     // The trigger decides the mode: the same popup can be hovered with a mouse and tapped on touch.
     const hoverDismissal = new HoverDismissal(
       () => this.rect,
