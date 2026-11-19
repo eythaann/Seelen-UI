@@ -69,6 +69,7 @@
   <span class="media-session-time">{nanosecondsToPlayingTime(position)}</span>
   <input
     type="range"
+    disabled={!session.controls.seek || session.timeline.end <= session.timeline.start}
     class="media-session-progress-bar"
     min={Math.floor(session.timeline.start / NS_PER_SECOND)}
     max={Math.ceil(session.timeline.end / NS_PER_SECOND)}

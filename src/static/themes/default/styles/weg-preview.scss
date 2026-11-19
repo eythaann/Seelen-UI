@@ -82,6 +82,23 @@ $itemSize: 256px;
   }
 }
 
+.weg-item-preview-container {
+  .weg-preview-media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xs);
+
+    select {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .weg-preview-media-note {
+      color: var(--slu-std-fg-muted-color);
+    }
+  }
+}
+
 // No clicks on a popup that is fading out (its live surfaces may already be released).
 :root[data-widget-hidden] .weg-item-preview-container {
   pointer-events: none;

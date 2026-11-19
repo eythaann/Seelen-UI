@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
   import { t } from "./i18n/index.ts";
   import { previewState } from "./state.svelte.ts";
+  import MediaControls from "./MediaControls.svelte";
   import {
     contentViewport,
     type LivePreviewFrame,
@@ -208,6 +209,7 @@
             </div>
           {/if}
         </button>
+        <MediaControls window={win} />
       </div>
     {/each}
   </div>

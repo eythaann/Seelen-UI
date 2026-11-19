@@ -6,7 +6,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-use seelen_core::system_state::MediaPlayer;
+use seelen_core::system_state::{MediaPlayer, MediaTransportAction};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -69,6 +69,9 @@ impl MediaPlayersManager {
             MediaPlayersSysEvent::PlaybackChanged { id } => {
                 if let Some(playing) = manager.platform.is_playing(&id).ok_logged() {
                     manager.update_player(&id, |player| player.playing = playing);
+                }
+                if let Some(controls) = manager.platform.controls(&id).ok_logged() {
+                    manager.update_player(&id, |player| player.controls = controls);
                 }
                 manager.update_recommended_player();
             }
@@ -209,6 +212,15 @@ impl MediaPlayersManager {
                 entry.player.default = entry.player.umid == recommended;
             });
         }
+    }
+
+    pub fn send_app_shortcut(
+        &self,
+        hwnd: isize,
+        exe: &str,
+        action: MediaTransportAction,
+    ) -> Result<()> {
+        self.platform.send_app_shortcut(hwnd, exe, action)
     }
 
     pub fn skip_next(&self, id: &str) -> Result<()> {

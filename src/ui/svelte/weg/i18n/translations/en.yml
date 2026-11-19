@@ -1,4 +1,5 @@
 app_menu:
+  preview: Window preview and media controls
   close: Close
   close_multiple: Close All
   copy_handles: Copy Handles
@@ -19,6 +20,14 @@ context_menu:
   reorder_disable: Lock taskbar
   reorder_enable: Unlock taskbar
 media:
+  open_controls: Open media controls
+  previous: Previous track
+  play: Play
+  pause: Pause
+  play_pause: Play / pause
+  next: Next track
+  unsupported: This player does not support this action
+  command_failed: Could not confirm the media command. Check the player or its global shortcut settings.
   label: Media Player
   not_playing: Nothing is playing
 show_desktop:
