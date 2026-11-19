@@ -2,6 +2,13 @@ import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from 
 import type { MediaDevice, MediaPlayer } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
+import {
+  DEFAULT_VIEW,
+  ensureDeviceAvailable,
+  type MediaPopupView,
+  resolveLastView,
+  serializeLastView,
+} from "./lastView.ts";
 
 let widget = Widget.getCurrent();
 
@@ -23,14 +30,65 @@ subscribe(SeelenEvent.MediaSessions, mediaSessions.setByPayload);
 
 await Promise.all([mediaDevices.init(), mediaSessions.init()]);
 
-let currentView = $state<"main" | "mixer">("main");
-let selectedDeviceId = $state<string | null>(null);
+const LAST_VIEW_STORAGE_KEY = "lastView";
+
+/** Widget setting `rememberLastView`: reopen on the last view instead of the device overview. */
+function isRememberLastViewEnabled(): boolean {
+  return settings.value.getCurrentWidgetConfig().rememberLastView === true;
+}
+
+function readStoredLastView(): string | null {
+  try {
+    return localStorage.getItem(LAST_VIEW_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function availableDeviceIds(): string[] {
+  return [...mediaDevices.value[0], ...mediaDevices.value[1]].map((d) => d.id);
+}
+
+const initialView = isRememberLastViewEnabled()
+  ? resolveLastView(readStoredLastView(), availableDeviceIds())
+  : DEFAULT_VIEW;
+
+let currentView = $state<MediaPopupView>(initialView.view);
+let selectedDeviceId = $state<string | null>(initialView.deviceId);
+
+function storeLastView(): void {
+  if (!isRememberLastViewEnabled()) return;
+  try {
+    localStorage.setItem(
+      LAST_VIEW_STORAGE_KEY,
+      serializeLastView({ view: currentView, deviceId: selectedDeviceId }),
+    );
+  } catch (e) {
+    console.error("Failed to store media popup last view", e);
+  }
+}
 
 widget.window.onFocusChanged((e) => {
-  if (!e.payload) {
-    // Reset state when popup loses focus
+  // Reset state when popup loses focus, unless the user wants the last view remembered
+  if (!e.payload && !isRememberLastViewEnabled()) {
     currentView = "main";
     selectedDeviceId = null;
+  }
+});
+
+// A hidden popup stays loaded for a while before it's closed, so the remembered device must also
+// be rechecked on every reopen, not only on load. A device that disappears while the popup is
+// visible keeps the "Missing Device" view.
+widget.onVisibilityChange((visible) => {
+  if (!visible || !isRememberLastViewEnabled()) return;
+  const checked = ensureDeviceAvailable(
+    { view: currentView, deviceId: selectedDeviceId },
+    availableDeviceIds(),
+  );
+  if (checked.view !== currentView || checked.deviceId !== selectedDeviceId) {
+    currentView = checked.view;
+    selectedDeviceId = checked.deviceId;
+    storeLastView();
   }
 });
 
@@ -59,8 +117,9 @@ class State {
     return currentView;
   }
 
-  set view(value: "main" | "mixer") {
+  set view(value: MediaPopupView) {
     currentView = value;
+    storeLastView();
   }
 
   get selectedDeviceId() {
@@ -69,6 +128,7 @@ class State {
 
   set selectedDeviceId(value: string | null) {
     selectedDeviceId = value;
+    storeLastView();
   }
 
   get selectedDevice(): MediaDevice | undefined {

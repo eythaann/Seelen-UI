@@ -1,0 +1,1 @@
+en: Reopen the popup on the last screen you used (the device list or a device's volume mixer), also after restarting. Falls back to the device list if that device is no longer available.

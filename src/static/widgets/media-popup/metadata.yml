@@ -8,6 +8,12 @@ loader: Internal
 preset: Popup
 hidden: true
 lazy: true
+settings:
+  - type: switch
+    key: rememberLastView
+    label: !extend i18n/settings/remember-last-view.yml
+    description: !extend i18n/settings/remember-last-view-description.yml
+    defaultValue: false
 plugins:
   - !extend ./toolbar-plugin.yml
   - !extend ./dock-plugin.yml
