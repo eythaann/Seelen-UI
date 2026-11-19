@@ -25,9 +25,15 @@ export function resolveLastView(stored: string | null, availableDeviceIds: Itera
   const { view, deviceId } = parsed as Record<string, unknown>;
 
   if (view !== "mixer" || typeof deviceId !== "string") return DEFAULT_VIEW;
-  if (!new Set(availableDeviceIds).has(deviceId)) return DEFAULT_VIEW;
 
-  return { view: "mixer", deviceId };
+  return ensureDeviceAvailable({ view: "mixer", deviceId }, availableDeviceIds);
+}
+
+/** Falls back to the overview when a mixer view points at a device that is no longer available. */
+export function ensureDeviceAvailable(value: LastView, availableDeviceIds: Iterable<string>): LastView {
+  if (value.view !== "mixer") return value;
+  if (!value.deviceId || !new Set(availableDeviceIds).has(value.deviceId)) return DEFAULT_VIEW;
+  return value;
 }
 
 export function serializeLastView(value: LastView): string {

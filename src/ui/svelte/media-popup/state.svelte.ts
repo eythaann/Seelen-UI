@@ -2,7 +2,13 @@ import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from 
 import type { MediaDevice, MediaPlayer } from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
-import { DEFAULT_VIEW, type MediaPopupView, resolveLastView, serializeLastView } from "./lastView.ts";
+import {
+  DEFAULT_VIEW,
+  ensureDeviceAvailable,
+  type MediaPopupView,
+  resolveLastView,
+  serializeLastView,
+} from "./lastView.ts";
 
 let widget = Widget.getCurrent();
 
@@ -39,11 +45,12 @@ function readStoredLastView(): string | null {
   }
 }
 
+function availableDeviceIds(): string[] {
+  return [...mediaDevices.value[0], ...mediaDevices.value[1]].map((d) => d.id);
+}
+
 const initialView = isRememberLastViewEnabled()
-  ? resolveLastView(
-    readStoredLastView(),
-    [...mediaDevices.value[0], ...mediaDevices.value[1]].map((d) => d.id),
-  )
+  ? resolveLastView(readStoredLastView(), availableDeviceIds())
   : DEFAULT_VIEW;
 
 let currentView = $state<MediaPopupView>(initialView.view);
@@ -66,6 +73,22 @@ widget.window.onFocusChanged((e) => {
   if (!e.payload && !isRememberLastViewEnabled()) {
     currentView = "main";
     selectedDeviceId = null;
+  }
+});
+
+// A hidden popup stays loaded for a while before it's closed, so the remembered device must also
+// be rechecked on every reopen, not only on load. A device that disappears while the popup is
+// visible keeps the "Missing Device" view.
+widget.onVisibilityChange((visible) => {
+  if (!visible || !isRememberLastViewEnabled()) return;
+  const checked = ensureDeviceAvailable(
+    { view: currentView, deviceId: selectedDeviceId },
+    availableDeviceIds(),
+  );
+  if (checked.view !== currentView || checked.deviceId !== selectedDeviceId) {
+    currentView = checked.view;
+    selectedDeviceId = checked.deviceId;
+    storeLastView();
   }
 });
 
