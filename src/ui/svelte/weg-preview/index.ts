@@ -8,7 +8,9 @@ const root = document.getElementById("root")!;
 
 await Widget.self.init({
   autoSizeByContent: root,
-  hideOnFocusLoss: true,
+  // Re-triggered with new content (another dock item) while visible.
+  toggleOnTrigger: false,
+  // closeOnHide: false,
 });
 
 mount(App, {

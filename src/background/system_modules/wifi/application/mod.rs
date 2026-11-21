@@ -42,7 +42,10 @@ impl WifiManager {
         self.platform.init(Self::send)
     }
 
+    /// Reports the networks already known by the OS right away, a hardware scan takes seconds,
+    /// then reports again when the scan finishes.
     pub fn scan(&self) {
+        Self::send(WifiEvent::NetworksChanged);
         self.platform.scan();
     }
 

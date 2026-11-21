@@ -1,6 +1,8 @@
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
-use seelen_core::system_state::{Color, UserAppWindowColors, UserAppWindowPreview};
+use seelen_core::system_state::{
+    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
+};
 
 use crate::error::Result;
 
@@ -23,6 +25,18 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
     /// Captures the content of the window, without its frame shadow. `None` when it can't
     /// be captured now (minimized, or not accessible from this process).
     fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>>;
+
+    /// Releases live surfaces and restores any temporary window during shutdown.
+    fn clear_native_previews(&self);
+
+    fn update_live(
+        &self,
+        owner: isize,
+        session: String,
+        targets: Vec<WindowPreviewTarget>,
+        opacity: u8,
+    ) -> Result<LiveWindowPreviewState>;
+    fn clear_live(&self, owner: isize, session: &str);
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

@@ -1,5 +1,11 @@
 import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
-import { type Hotspot, RadioDeviceKind, type WlanBssEntry } from "@seelen-ui/lib/types";
+import {
+  AdapterStatus,
+  type Hotspot,
+  type NetworkAdapter,
+  RadioDeviceKind,
+  type WlanBssEntry,
+} from "@seelen-ui/lib/types";
 import { locale } from "./i18n/index.ts";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
@@ -30,16 +36,34 @@ let hotspot = lazyRune(() => invoke(SeelenCommand.GetNetworkHotspot));
 subscribe(SeelenEvent.NetworkHotspotChanged, hotspot.setByPayload);
 await hotspot.init();
 
-let isScanning = $state(false);
+let adapters = lazyRune(() => invoke(SeelenCommand.GetNetworkAdapters));
+subscribe(SeelenEvent.NetworkAdapters, adapters.setByPayload);
+await adapters.init();
+
+let online = lazyRune(() => invoke(SeelenCommand.GetNetworkInternetConnection));
+subscribe(SeelenEvent.NetworkInternetConnection, online.setByPayload);
+await online.init();
+
+/**
+ * Ethernet interfaces with link, physical or virtual. Unplugged ones are hidden (they would
+ * only add noise on laptops/docks with an unused port). The one holding the default route
+ * goes first.
+ */
+const ethernetAdapters = $derived(
+  adapters.value
+    .filter((a) => /* a.type === "ETHERNET_CSMACD" && */ a.status === AdapterStatus.up)
+    .toSorted((a, b) => Number(b.isDefault) - Number(a.isDefault)),
+);
+
+// Scans while the popup is visible. Visibility (not focus) is the signal: a popup opened by hover
+// is never focused, and the focus event can be missed when the window is created by the trigger.
+let isScanning = $state(widget.visible);
 let selectedSsid = $state<string | null>(null);
-let scanInterval: ReturnType<typeof setInterval> | null = null;
 let currentView = $state<"main" | "hotspot">("main");
 
-widget.window.onFocusChanged((e) => {
-  if (e.payload) {
-    isScanning = true;
-  } else {
-    isScanning = false;
+widget.onVisibilityChange((visible) => {
+  isScanning = visible;
+  if (!visible) {
     selectedSsid = null;
     currentView = "main";
   }
@@ -50,21 +74,26 @@ $effect.root(() => {
     const wifiEnabled = radios.value.some(
       (radio) => radio.kind === RadioDeviceKind.WiFi && radio.isEnabled,
     );
-
-    if (isScanning && wifiEnabled) {
-      invoke(SeelenCommand.WlanScan);
-      scanInterval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
+    if (!isScanning || !wifiEnabled) {
       return;
     }
 
-    if (scanInterval !== null) {
-      clearInterval(scanInterval);
-      scanInterval = null;
-    }
+    // the backend reports the networks already known by the OS right away, then after the scan
+    invoke(SeelenCommand.WlanScan);
+    const interval = setInterval(() => invoke(SeelenCommand.WlanScan), 2000);
+    return () => clearInterval(interval);
   });
 });
 
 class State {
+  get ethernetAdapters(): NetworkAdapter[] {
+    return ethernetAdapters;
+  }
+
+  get online(): boolean {
+    return online.value;
+  }
+
   get wifiRadio() {
     return radios.value.find((radio) => radio.kind === RadioDeviceKind.WiFi);
   }

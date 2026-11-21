@@ -1,6 +1,6 @@
 [package]
 name = "slu-ipc"
-version = "2.8.11"
+version = "2.8.12"
 edition = "2024"
 
 [lints]

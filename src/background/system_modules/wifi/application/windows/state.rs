@@ -1,4 +1,4 @@
-use std::{collections::HashSet, sync::LazyLock, time::Duration};
+use std::{sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::WlanBssEntry;
 use windows::{
@@ -22,7 +22,7 @@ use crate::{
     windows_api::{DeviceEnumerator, DeviceEvent, DeviceId, string_utils::WindowsString},
 };
 
-use super::adapter::{self, SluWifiAdapter, wifi_known_profiles};
+use super::adapter::{self, SluWifiAdapter};
 
 // ── Win32 WLAN handle (native scans, directed probe on hidden networks) ──────
 
@@ -99,6 +99,9 @@ pub enum RawWifiEvent {
 pub struct WifiState {
     pub adapters: SyncHashMap<DeviceId, SluWifiAdapter>,
     device_enumerator: Option<DeviceEnumerator>,
+    /// Opening a WLAN client handle is an RPC to the WLAN service: it is kept open for the
+    /// whole session instead of being reopened on every read.
+    wlan: Option<WlanHandle>,
 }
 
 unsafe impl Send for WifiState {}
@@ -111,10 +114,13 @@ impl WifiState {
         Self {
             adapters: SyncHashMap::new(),
             device_enumerator: None,
+            wlan: None,
         }
     }
 
     fn init(&mut self) -> Result<()> {
+        self.wlan = open_wlan().map_err(|e| log::error!("{e}")).ok();
+
         let selector = WiFiAdapter::GetDeviceSelector()?.to_string();
 
         let enumerator = DeviceEnumerator::new(selector, |event| {
@@ -168,24 +174,23 @@ impl WifiState {
         self.adapters.for_each(|(_, adapter)| adapter.scan());
     }
 
-    /// Read the current WLAN BSS list (one entry per physical access point)
-    /// across every native WLAN interface, enriched with per-SSID security
-    /// info and known/connected status derived from the cached adapters.
-    pub fn get_available_networks(&self) -> Result<Vec<WlanBssEntry>> {
-        let known = wifi_known_profiles();
-        let mut connected = HashSet::new();
-        self.adapters.for_each(|(_, adapter)| {
-            if let Some(ssid) = adapter.get_connected_ssid() {
-                connected.insert(ssid);
-            }
-        });
+    fn wlan(&self) -> Result<HANDLE> {
+        self.wlan
+            .as_deref()
+            .copied()
+            .ok_or_else(|| "WLAN client handle is not available".into())
+    }
 
-        let handle = open_wlan()?;
-        let ifaces = get_wlan_interfaces(*handle)?;
+    /// Read the WLAN BSS list cached by the OS (one entry per physical access point) across
+    /// every native WLAN interface, enriched with per-SSID security info and known/connected
+    /// status. It never waits for a hardware scan, so it is cheap to call at any time.
+    pub fn get_available_networks(&self) -> Result<Vec<WlanBssEntry>> {
+        let handle = self.wlan()?;
+        let ifaces = get_wlan_interfaces(handle)?;
 
         let mut entries = Vec::new();
         for iface in &ifaces {
-            match adapter::scan_bss_list(*handle, &iface.InterfaceGuid, &known, &connected) {
+            match adapter::scan_bss_list(handle, &iface.InterfaceGuid) {
                 Ok(mut list) => entries.append(&mut list),
                 Err(e) => log::error!("scan_bss_list error: {e}"),
             }
@@ -195,8 +200,8 @@ impl WifiState {
 
     /// Send a directed 802.11 probe for a specific SSID so a hidden AP responds.
     fn directed_probe(&self, ssid: &str) -> Result<()> {
-        let handle = open_wlan()?;
-        let ifaces = get_wlan_interfaces(*handle)?;
+        let handle = self.wlan()?;
+        let ifaces = get_wlan_interfaces(handle)?;
 
         let bytes = ssid.as_bytes();
         let len = bytes.len().min(32);
@@ -207,7 +212,7 @@ impl WifiState {
         dot11.ucSSID[..len].copy_from_slice(&bytes[..len]);
 
         for iface in &ifaces {
-            unsafe { WlanScan(*handle, &iface.InterfaceGuid, Some(&dot11), None, None) };
+            unsafe { WlanScan(handle, &iface.InterfaceGuid, Some(&dot11), None, None) };
         }
         Ok(())
     }
@@ -298,8 +303,8 @@ impl WifiState {
 
     /// Delete the saved WLAN profile named `ssid` from every interface that has it.
     pub fn forget(&self, ssid: &str) -> Result<()> {
-        let handle = open_wlan()?;
-        let ifaces = get_wlan_interfaces(*handle)?;
+        let handle = self.wlan()?;
+        let ifaces = get_wlan_interfaces(handle)?;
 
         let profile_name = WindowsString::from_str(ssid);
 
@@ -307,12 +312,7 @@ impl WifiState {
         let mut deleted_any = false;
         for iface in &ifaces {
             let err = unsafe {
-                WlanDeleteProfile(
-                    *handle,
-                    &iface.InterfaceGuid,
-                    profile_name.as_pcwstr(),
-                    None,
-                )
+                WlanDeleteProfile(handle, &iface.InterfaceGuid, profile_name.as_pcwstr(), None)
             };
             if err == 0 {
                 deleted_any = true;

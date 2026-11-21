@@ -100,6 +100,19 @@ pub async fn process_app_command(cmd: AppCommand) -> Result<()> {
         AppCommand::ToggleShortcutsPause => {
             shortcuts::toggle_pause()?;
         }
+        // deferred so the IPC response reaches the client before the process goes down
+        AppCommand::Quit => {
+            tokio::spawn(async {
+                tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+                crate::tauri_handlers::Handlers::app_exit();
+            });
+        }
+        AppCommand::Restart => {
+            tokio::spawn(async {
+                tokio::time::sleep(std::time::Duration::from_millis(100)).await;
+                crate::tauri_handlers::Handlers::app_restart();
+            });
+        }
         _ => {
             return Err("Command does not support instance execution".into());
         }

@@ -402,6 +402,14 @@ slu_commands_declaration! {
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
     GetUserAppWindowsPreviews = get_user_app_windows_previews() -> std::collections::HashMap<isize, UserAppWindowPreview>,
     GetUserAppWindowsColors = get_user_app_windows_colors() -> std::collections::HashMap<isize, UserAppWindowColors>,
+    UpdateWindowPreviews =
+        @webview()
+        @fallible()
+        update_window_previews(session: String, targets: Vec<WindowPreviewTarget>, opacity: u8) -> LiveWindowPreviewState,
+    ClearWindowPreviews =
+        @webview()
+        @fallible()
+        clear_window_previews(session: String),
 
     // Media
     GetMediaDevices =

@@ -20,9 +20,37 @@ export class Widget_4 extends Widget_3 {
    * by a newer one after each `await` and bail out.
    */
   private _visibilityToken = 0;
+  protected _visible = false;
+
+  /**
+   * Cached visibility, updated synchronously on `show()`/`hide()` calls (a hide in progress counts as hidden).
+   * Windows shown/hidden directly via `window.show()`/`window.hide()` are not tracked.
+   */
+  public get visible(): boolean {
+    return this._visible;
+  }
+
+  private _visibilitySubs = new Set<(visible: boolean) => void>();
+  /**
+   * Called synchronously when `show()`/`hide()` change the cached visibility, before the hide
+   * animation plays (so the widget can follow it).
+   */
+  public onVisibilityChange(cb: (visible: boolean) => void): () => void {
+    this._visibilitySubs.add(cb);
+    return () => {
+      this._visibilitySubs.delete(cb);
+    };
+  }
+
+  private setVisible(visible: boolean): void {
+    if (this._visible === visible) return;
+    this._visible = visible;
+    this._visibilitySubs.forEach((cb) => cb(visible));
+  }
 
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
+    this.setVisible(true);
     debouncedClose.cancel();
     await this.window.show();
     // a hide() was called while showing, it already owns the attribute.
@@ -34,6 +62,7 @@ export class Widget_4 extends Widget_3 {
   public async hide(): Promise<void> {
     const token = ++this._visibilityToken;
     globalThis.document.documentElement.dataset.widgetHidden = "";
+    this.setVisible(false);
 
     await this.waitHideAnimations();
     if (token !== this._visibilityToken) {

@@ -1,6 +1,6 @@
 [package]
 name = "slu-macros"
-version = "2.8.11"
+version = "2.8.12"
 edition = "2024"
 rust-version = "1.97"
 
@@ -11,6 +11,6 @@ workspace = true
 proc-macro = true
 
 [dependencies]
-syn = { version = "2.0", features = ["full"] }
+syn = { version = "3.0", features = ["full"] }
 quote = "1.0"
 proc-macro2 = "1.0"

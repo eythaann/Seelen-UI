@@ -12,6 +12,7 @@ use serde::{Deserialize, Serialize};
 use crate::{
     Point,
     error::Result,
+    rect::Rect,
     resource::{ResourceKind, ResourceMetadata, ResourceText, SluResource, WidgetId},
     state::Plugin,
     system_state::MonitorId,
@@ -195,6 +196,12 @@ pub struct WidgetTriggerPayload {
     /// - center will set the widget at the center of point,
     /// - end will set the widget at the bottom of point
     pub align_y: Option<Alignment>,
+    /// How the widget was opened. `None` is the same as [`TriggerSource::Click`].
+    pub source: Option<TriggerSource>,
+    /// Screen rect (physical pixels) of the element that triggered the widget.
+    /// Popups triggered on [`TriggerSource::Hover`] stay open while the cursor is over it,
+    /// the popup, or the gap between them.
+    pub anchor_rect: Option<Rect>,
     /// Custom arguments to be used by the widget recieving the trigger.
     /// this can be anything, and depends on the widget to evaluate them.
     pub custom_args: Option<HashMap<String, TsUnknown>>,
@@ -209,6 +216,8 @@ impl WidgetTriggerPayload {
             desired_position: None,
             align_x: None,
             align_y: None,
+            source: None,
+            anchor_rect: None,
             custom_args: None,
         }
     }
@@ -231,6 +240,19 @@ pub enum Alignment {
     Start,
     Center,
     End,
+}
+
+/// How the user opened a popup widget. The trigger decides the popup behavior, so the same popup
+/// can be hovered with a mouse and tapped on touch screens.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(repr(enum = name)))]
+pub enum TriggerSource {
+    /// Takes focus and hides on focus loss (default).
+    Click,
+    /// Never takes focus. Hides when the cursor leaves the popup and the `anchor_rect`
+    /// (including the gap between them).
+    Hover,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

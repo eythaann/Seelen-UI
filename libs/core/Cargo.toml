@@ -1,6 +1,6 @@
 [package]
 name = "seelen-core"
-version = "2.8.11"
+version = "2.8.12"
 edition = "2024"
 rust-version = "1.97"
 

@@ -47,15 +47,15 @@
       "nsis"
     ],
     "icon": [
-      "static/icons/icon.ico"
+      "static/icons/app/icon.ico"
     ],
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",
       "nsis": {
-        "installerIcon": "static/icons/installer.ico",
-        "uninstallerIcon": "static/icons/uninstaller.ico",
-        "sidebarImage": "static/icons/banner.bmp",
+        "installerIcon": "static/icons/setup/installer.ico",
+        "uninstallerIcon": "static/icons/setup/uninstaller.ico",
+        "sidebarImage": "static/icons/setup/banner.bmp",
         "template": "templates/installer.nsi",
         "installerHooks": "templates/installer-hooks.nsh",
         "installMode": "perMachine",

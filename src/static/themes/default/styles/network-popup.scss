@@ -52,6 +52,19 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
 
+      .network-section-toggle {
+        display: flex;
+        padding: var(--spacing-2xs);
+
+        .slu-icon {
+          transition: transform 0.2s ease;
+        }
+
+        &.expanded .slu-icon {
+          transform: rotate(180deg);
+        }
+      }
+
       .network-scanning {
         display: flex;
         align-items: center;
@@ -137,6 +150,63 @@
           display: flex;
           justify-content: flex-end;
           gap: var(--spacing-xs);
+        }
+      }
+
+      .adapter-entry {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs);
+        border-radius: var(--radius-s);
+
+        > .slu-icon {
+          height: 20px;
+        }
+
+        .adapter-entry-info {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          min-width: 0;
+
+          .adapter-entry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-xs);
+            min-width: 0;
+          }
+
+          .adapter-entry-name {
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .adapter-entry-details {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--slu-std-fg-secondary-color);
+
+            .adapter-entry-no-access {
+              color: var(--color-yellow-800);
+            }
+
+            .adapter-entry-ip {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              user-select: text;
+            }
+
+            .adapter-entry-copy {
+              flex-shrink: 0;
+              padding: var(--spacing-2xs);
+            }
+          }
         }
       }
 
