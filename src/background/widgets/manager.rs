@@ -108,28 +108,16 @@ impl WidgetManager {
             return;
         };
 
-        let mut found = 0;
-        let mut below_normal_window = false;
-        for window in windows {
-            if bars.contains(&window.address()) {
-                if below_normal_window {
-                    log::debug!("Restoring {window:?} above normal windows");
-                    window.set_z_order(ZOrder::TopMost).log_error();
-                }
-                found += 1;
-                if found == bars.len() {
-                    break;
-                }
-                continue;
-            }
+        let to_restore =
+            bars_below_normal_windows(windows.iter().map(Window::address), &bars, |address| {
+                let window = Window::from(address);
+                window.is_visible() && !window.is_cloaked() && !window.is_always_on_top()
+            });
 
-            if !below_normal_window
-                && window.is_visible()
-                && !window.is_cloaked()
-                && !window.is_always_on_top()
-            {
-                below_normal_window = true;
-            }
+        for address in to_restore {
+            let window = Window::from(address);
+            log::debug!("Restoring {window:?} above normal windows");
+            window.set_z_order(ZOrder::TopMost).log_error();
         }
     }
 
@@ -198,5 +186,116 @@ impl WidgetManager {
         });
 
         Ok(())
+    }
+}
+
+/// Returns the `bars` that are stacked below a normal window.
+///
+/// `z_order` lists the windows from the top of the stack to the bottom. `is_normal_window` tells
+/// whether a window is visible and not always on top; it is only called for windows above the
+/// lowest bar, and not anymore once a normal window was found.
+fn bars_below_normal_windows(
+    z_order: impl IntoIterator<Item = isize>,
+    bars: &[isize],
+    is_normal_window: impl Fn(isize) -> bool,
+) -> Vec<isize> {
+    let mut below = Vec::new();
+    let mut found = 0;
+    let mut covered = false;
+
+    for address in z_order {
+        if found == bars.len() {
+            break;
+        }
+
+        if bars.contains(&address) {
+            found += 1;
+            if covered {
+                below.push(address);
+            }
+            continue;
+        }
+
+        if !covered && is_normal_window(address) {
+            covered = true;
+        }
+    }
+
+    below
+}
+
+#[cfg(test)]
+mod tests {
+    use std::cell::Cell;
+
+    use super::bars_below_normal_windows;
+
+    const DOCK: isize = 1;
+    const TOOLBAR: isize = 2;
+    const NORMAL: isize = 10;
+    const TOPMOST: isize = 20;
+    const HIDDEN_OR_CLOAKED: isize = 30;
+
+    /// Only `NORMAL` counts as a visible window that is not always on top.
+    fn is_normal(address: isize) -> bool {
+        address == NORMAL
+    }
+
+    #[test]
+    fn bars_above_normal_windows_are_left_alone() {
+        let z_order = [DOCK, TOOLBAR, NORMAL];
+        assert!(bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], is_normal).is_empty());
+    }
+
+    #[test]
+    fn bars_below_a_normal_window_are_restored() {
+        let z_order = [NORMAL, DOCK, TOOLBAR];
+        assert_eq!(
+            bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], is_normal),
+            vec![DOCK, TOOLBAR]
+        );
+    }
+
+    #[test]
+    fn only_the_bars_below_a_normal_window_are_restored() {
+        let z_order = [DOCK, NORMAL, TOOLBAR];
+        assert_eq!(
+            bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], is_normal),
+            vec![TOOLBAR]
+        );
+    }
+
+    #[test]
+    fn bars_below_always_on_top_windows_are_left_alone() {
+        let z_order = [TOPMOST, DOCK, TOPMOST, TOOLBAR, NORMAL];
+        assert!(bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], is_normal).is_empty());
+    }
+
+    #[test]
+    fn hidden_or_cloaked_windows_do_not_cover_the_bars() {
+        let z_order = [HIDDEN_OR_CLOAKED, DOCK, TOOLBAR, NORMAL];
+        assert!(bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], is_normal).is_empty());
+    }
+
+    #[test]
+    fn no_bars_means_nothing_to_restore() {
+        let z_order = [NORMAL, DOCK];
+        assert!(bars_below_normal_windows(z_order, &[], is_normal).is_empty());
+    }
+
+    #[test]
+    fn stops_checking_windows_once_every_bar_was_found() {
+        let checked = Cell::new(0);
+        let z_order = [TOPMOST, DOCK, TOOLBAR, NORMAL, NORMAL, NORMAL];
+        let result = bars_below_normal_windows(z_order, &[DOCK, TOOLBAR], |address| {
+            checked.set(checked.get() + 1);
+            is_normal(address)
+        });
+        assert!(result.is_empty());
+        assert_eq!(
+            checked.get(),
+            1,
+            "only the window above the bars should be checked"
+        );
     }
 }
