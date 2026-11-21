@@ -2,6 +2,11 @@
 
 ## [2.8.12-dev]
 
+### fix
+
+- dock and toolbar getting stuck behind normal windows after a WinUI 3 window opens (e.g. Proton VPN, PowerToys
+  Settings), until Seelen was restarted.
+
 ## [2.8.11]
 
 ### features
