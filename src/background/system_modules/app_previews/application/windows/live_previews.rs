@@ -13,15 +13,20 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{IsWindow, IsWindowVisible},
 };
 
-use crate::{error::Result, utils::lock_free::TracedMutex, windows_api::WindowsApi};
+use crate::{
+    error::{Result, ResultLogExt},
+    utils::lock_free::TracedMutex,
+    windows_api::WindowsApi,
+};
 
 const CANCEL_TTL: Duration = Duration::from_secs(30);
 const MAX_CANCELLED: usize = 128;
 const MAX_TARGETS: usize = 16;
 
 /// DWM owns frame updates: only layout/opacity cross the webview boundary, and only when they
-/// change. Surfaces live while their destination window is visible; DWM also releases them
-/// when that window is destroyed.
+/// change. Source resize events refresh the crop natively without another layout IPC.
+/// Surfaces live while their destination window is visible; DWM also releases them when
+/// that window is destroyed.
 pub struct LivePreviewManager {
     state: TracedMutex<LivePreviewState>,
 }
@@ -95,6 +100,17 @@ impl LivePreviewManager {
         })
     }
 
+    /// The card can stay fixed while its source is resized, maximized or restored.
+    pub fn refresh_source(&self, source: isize) {
+        let mut state = self.state.lock();
+        state.owners.retain(|owner, _| is_visible(*owner));
+        for owner in state.owners.values_mut() {
+            if let Some(thumbnail) = owner.thumbnails.get_mut(&source) {
+                thumbnail.refresh().log_error();
+            }
+        }
+    }
+
     pub fn clear(&self, owner: isize, session: &str) {
         let mut state = self.state.lock();
         state.prune();
@@ -157,6 +173,7 @@ impl PreviewOwner {
 struct LiveThumbnail {
     handle: isize,
     source: isize,
+    layout: Option<ThumbnailLayout>,
     last: Option<(Rect, Rect, u8)>,
 }
 impl LiveThumbnail {
@@ -165,31 +182,40 @@ impl LiveThumbnail {
         Ok(Self {
             handle,
             source,
+            layout: None,
             last: None,
         })
     }
     fn update(&mut self, destination: &Rect, clip: Option<&Rect>, opacity: u8) -> Result<()> {
+        self.layout = Some(ThumbnailLayout {
+            destination: destination.clone(),
+            clip: clip.cloned(),
+            opacity,
+        });
+        self.refresh()
+    }
+    fn refresh(&mut self) -> Result<()> {
         if !unsafe { IsWindow(Some(HWND(self.source as _))) }.as_bool() {
             return Err("Preview source has closed".into());
         }
+        let layout = self.layout.as_ref().ok_or("Missing preview layout")?;
         let size = unsafe { DwmQueryThumbnailSourceSize(self.handle)? };
         let bounds = source_bounds(self.source, size.cx, size.cy);
-        let (source, destination) =
-            clipped_thumbnail(&bounds, destination, clip).ok_or("Empty preview surface")?;
-        let key = (source.clone(), destination.clone(), opacity);
+        let key = layout.resolve(&bounds).ok_or("Empty preview surface")?;
         if self.last.as_ref() == Some(&key) {
             return Ok(());
         }
+        let (source, destination, opacity) = &key;
         let properties = DWM_THUMBNAIL_PROPERTIES {
             dwFlags: DWM_TNP_RECTDESTINATION
                 | DWM_TNP_RECTSOURCE
                 | DWM_TNP_OPACITY
                 | DWM_TNP_VISIBLE
                 | DWM_TNP_SOURCECLIENTAREAONLY,
-            rcDestination: native_rect(&destination),
-            rcSource: native_rect(&source),
-            opacity,
-            fVisible: (opacity > 0).into(),
+            rcDestination: native_rect(destination),
+            rcSource: native_rect(source),
+            opacity: *opacity,
+            fVisible: (*opacity > 0).into(),
             fSourceClientAreaOnly: false.into(),
         };
         unsafe {
@@ -204,6 +230,21 @@ impl Drop for LiveThumbnail {
         unsafe {
             let _ = DwmUnregisterThumbnail(self.handle);
         }
+    }
+}
+
+/// Keep the full card geometry, not its already clipped destination, for later source resizes.
+struct ThumbnailLayout {
+    destination: Rect,
+    clip: Option<Rect>,
+    opacity: u8,
+}
+
+impl ThumbnailLayout {
+    fn resolve(&self, bounds: &Rect) -> Option<(Rect, Rect, u8)> {
+        let (source, destination) =
+            clipped_thumbnail(bounds, &self.destination, self.clip.as_ref())?;
+        Some((source, destination, self.opacity))
     }
 }
 
@@ -335,6 +376,67 @@ fn clipped_thumbnail(bounds: &Rect, full: &Rect, clip: Option<&Rect>) -> Option<
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn source_resize_refreshes_crop_without_changing_the_clipped_card_or_opacity() {
+        let destination = Rect {
+            left: 10,
+            top: 20,
+            right: 210,
+            bottom: 120,
+        };
+        let clip = Rect {
+            left: 60,
+            top: 45,
+            right: 210,
+            bottom: 120,
+        };
+        let layout = ThumbnailLayout {
+            destination,
+            clip: Some(clip.clone()),
+            opacity: 160,
+        };
+        let portrait = Rect {
+            left: 8,
+            top: 12,
+            right: 408,
+            bottom: 1212,
+        };
+        let maximized = Rect {
+            left: 0,
+            top: 0,
+            right: 1600,
+            bottom: 900,
+        };
+        let original = layout.resolve(&portrait).unwrap();
+        assert_eq!(
+            original,
+            (
+                Rect {
+                    left: 108,
+                    top: 62,
+                    right: 408,
+                    bottom: 212,
+                },
+                clip.clone(),
+                160,
+            )
+        );
+        assert_eq!(
+            layout.resolve(&maximized),
+            Some((
+                Rect {
+                    left: 400,
+                    top: 200,
+                    right: 1600,
+                    bottom: 800,
+                },
+                clip,
+                160,
+            ))
+        );
+        assert_eq!(layout.resolve(&portrait), Some(original));
+    }
 
     #[test]
     fn clipped_edges_map_into_the_original_source_without_zooming() {

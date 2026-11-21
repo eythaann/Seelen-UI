@@ -1,9 +1,13 @@
 import type { Rect } from "@seelen-ui/types";
-import { SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
 import { debounce, type DebouncedFunction } from "../../utils/async.ts";
 
 /** A hover popup hides after the cursor stays out of it (and its anchor) this long. */
 const HOVER_OUT_GRACE_MS = 150;
+
+interface HoverPointer {
+  subscribe(onMove: (x: number, y: number) => void): Promise<() => void>;
+  position(): Promise<{ x: number; y: number }>;
+}
 
 /**
  * Dismissal of a popup opened by a `Hover` trigger: hides it once the cursor leaves the popup,
@@ -13,12 +17,14 @@ const HOVER_OUT_GRACE_MS = 150;
  */
 export class HoverDismissal {
   private anchor: Rect | null = null;
-  private unlisten: Promise<UnSubscriber> | null = null;
+  private unlisten: Promise<() => void> | null = null;
+  private session: object | null = null;
   private readonly hideDelayed: DebouncedFunction<() => void>;
 
   constructor(
     private readonly popupRect: () => Rect,
     private readonly hide: () => Promise<void>,
+    private readonly pointer: HoverPointer,
   ) {
     this.hideDelayed = debounce(() => {
       this.stop();
@@ -28,21 +34,37 @@ export class HoverDismissal {
 
   /** Arms (or re-anchors) the dismissal. */
   start(anchor: Rect | null): void {
+    this.stop();
     this.anchor = anchor;
-    this.hideDelayed.cancel();
-    if (this.unlisten) return;
+    const session = this.session = {};
+    let moves = 0;
     // Already broadcasted by the backend at ~10fps, in physical pixels.
-    this.unlisten = subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
-      if (isInsideHoverBridge(x, y, this.popupRect(), this.anchor)) {
-        this.hideDelayed.cancel();
-      } else {
-        this.hideDelayed();
-      }
+    this.unlisten = this.pointer.subscribe((x, y) => {
+      if (this.session !== session) return;
+      moves++;
+      this.checkPosition(x, y);
     });
+    // Listen first, then sample: the cursor may already be stationary outside a slow-opening popup.
+    this.unlisten.then(async () => {
+      if (this.session !== session) return;
+      const revision = moves;
+      const { x, y } = await this.pointer.position();
+      // A later move or another trigger takes precedence over this asynchronous sample.
+      if (this.session === session && moves === revision) this.checkPosition(x, y);
+    }).catch(console.error);
+  }
+
+  private checkPosition(x: number, y: number): void {
+    if (isInsideHoverBridge(x, y, this.popupRect(), this.anchor)) {
+      this.hideDelayed.cancel();
+    } else if (!this.hideDelayed.pending()) {
+      this.hideDelayed();
+    }
   }
 
   /** Releases the listener. */
   stop(): void {
+    this.session = null;
     this.hideDelayed.cancel();
     const unlisten = this.unlisten;
     this.unlisten = null;

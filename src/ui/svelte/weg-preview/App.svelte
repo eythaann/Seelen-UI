@@ -101,8 +101,8 @@
     }
     if (layoutDirty) measure();
     live.update({ targets: visiblePreviewTargets(candidates, viewport), opacity });
-    // Follow show/hide fades frame by frame so the native surfaces fade with the popup.
-    if (opacity < 255) schedule();
+    // The first hide frame can still be fully opaque; keep following until it reaches zero.
+    if (!widget.visible || opacity < 255) schedule();
   }
 
   function onClickPreview(hwnd: number): void {
