@@ -1,5 +1,7 @@
 mod live_previews;
 
+use std::sync::Arc;
+
 use image::RgbaImage;
 use seelen_core::system_state::{LiveWindowPreviewState, WindowPreviewTarget};
 use win_screenshot::prelude::capture_window;
@@ -17,13 +19,13 @@ use crate::{
 /// The hook subscriptions last for the whole app lifetime. Live surfaces are owned here and
 /// released through `clear_native_previews` on exit.
 pub struct WindowsAppPreviews {
-    live: live_previews::LivePreviewManager,
+    live: Arc<live_previews::LivePreviewManager>,
 }
 
 impl AppPreviewsSystem for WindowsAppPreviews {
     fn create() -> Self {
         Self {
-            live: live_previews::LivePreviewManager::create(),
+            live: Arc::new(live_previews::LivePreviewManager::create()),
         }
     }
 
@@ -31,8 +33,17 @@ impl AppPreviewsSystem for WindowsAppPreviews {
     where
         F: Fn(PreviewsSysEvent) + Send + Sync + 'static,
     {
+        let live = Arc::clone(&self.live);
         HookManager::subscribe(move |(event, window)| {
             let hwnd = window.address();
+            if matches!(
+                event,
+                WindowEvent::RectChanged
+                    | WindowEvent::ForegroundRectChanged
+                    | WindowEvent::Unminimized
+            ) {
+                live.refresh_source(hwnd);
+            }
             match event {
                 WindowEvent::TitleChanged | WindowEvent::RectChanged => {
                     on_event(PreviewsSysEvent::WindowChanged { hwnd })

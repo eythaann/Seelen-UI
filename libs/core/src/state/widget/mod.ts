@@ -20,6 +20,7 @@ import { disableAnimationsOnPerformanceMode } from "./performance.ts";
 import { subscribe } from "../../handlers/mod.ts";
 import { WidgetBasics } from "./abstractions/mod.ts";
 import { getCurrentWebview } from "@tauri-apps/api/webview";
+import { cursorPosition } from "@tauri-apps/api/window";
 import { OPTIMISTIC_FRAME } from "./abstractions/3_autosize.ts";
 import { HoverDismissal } from "./hover.ts";
 
@@ -107,6 +108,10 @@ export class Widget extends WidgetBasics {
     const hoverDismissal = new HoverDismissal(
       () => this.rect,
       () => this.hide(),
+      {
+        subscribe: (onMove) => subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => onMove(x, y)),
+        position: cursorPosition,
+      },
     );
     let focusable = true;
 
