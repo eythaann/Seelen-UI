@@ -2,6 +2,10 @@
 
 ## [2.8.12-dev]
 
+### fix
+
+- media popup: mixer only controlling one of the audio sessions of apps playing from several processes (e.g. Discord).
+
 ## [2.8.11]
 
 ### features

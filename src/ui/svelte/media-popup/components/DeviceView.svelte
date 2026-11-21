@@ -4,6 +4,7 @@
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
   import VolumeControl from "./VolumeControl.svelte";
+  import { groupSessionsByApp } from "../mixer";
 
   interface Props {
     onBack: () => void;
@@ -13,18 +14,7 @@
 
   const device = $derived(globalState.selectedDevice);
 
-  const sessions = $derived.by(() => {
-    if (!device || !device.sessions) return [];
-
-    const sessionsIds = new Set();
-    return device.sessions
-      .toSorted((a, b) => a.name.localeCompare(b.name))
-      .filter((s) => {
-        const previousContains = sessionsIds.has(s.id);
-        sessionsIds.add(s.id);
-        return !previousContains;
-      });
-  });
+  const sessions = $derived(groupSessionsByApp(device?.sessions ?? []));
 
   const iconName = $derived(device?.type === "input" ? "IoMicOutline" : "IoVolumeHighOutline");
   const mutedIconName = $derived(
@@ -61,7 +51,7 @@
     {#if device.type !== "input" && sessions.length > 0}
       <span class="media-control-label">{$t("device.mixer")}</span>
       <div class="media-device-mixer">
-        {#each sessions as channel (channel.id)}
+        {#each sessions as channel (channel.appId)}
           <div class="media-device-mixer-entry">
             <div class="media-device-mixer-entry-icon">
               {#if channel.isSystem}
@@ -74,7 +64,7 @@
               value={channel.volume}
               deviceId={device.id}
               sessionName={channel.isSystem ? $t("device.channel.system") : channel.name}
-              sessionId={channel.id}
+              sessionId={channel.sessionId}
               icon={channel.muted ? mutedIconName : iconName}
               mutedIcon={mutedIconName}
               muted={channel.muted}
