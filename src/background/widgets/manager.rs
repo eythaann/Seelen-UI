@@ -6,11 +6,15 @@ use std::sync::{
 use seelen_core::{
     resource::WidgetId,
     state::{WidgetLoader, WidgetStatus},
-    system_state::PowerMode,
+    system_state::{PowerMode, ZOrder},
 };
 
 use crate::{
     error::{Result, ResultLogExt},
+    platform::{
+        hook::{HookManager, WindowEvent},
+        window::Window,
+    },
     resources::RESOURCES,
     state::FULL_STATE,
     system_modules::{
@@ -49,6 +53,12 @@ impl WidgetManager {
         // events are only emitted once the manager exists
         PowerManager::instance();
 
+        HookManager::subscribe(|(event, _origin)| {
+            if event == WindowEvent::Foregrounded {
+                WIDGET_MANAGER.restore_bars_above_normal_windows();
+            }
+        });
+
         Self {
             deployments: SyncHashMap::new(),
         }
@@ -68,6 +78,59 @@ impl WidgetManager {
                 instance.set_status(status);
             });
         });
+    }
+
+    /// The dock and the toolbar are always-on-top windows that are never activated. Opening a
+    /// WinUI 3 window (e.g. Proton VPN or PowerToys Settings) can leave them stacked below that
+    /// window while they keep the always-on-top style, so every window opened afterwards also
+    /// covers them until Seelen is restarted. Other always-on-top windows are not affected.
+    ///
+    /// When a bar ends up below a window that is not always on top, put it back on top. Bars
+    /// that are only below other always-on-top windows are left alone, so this doesn't fight
+    /// with them.
+    fn restore_bars_above_normal_windows(&self) {
+        let mut bars = Vec::new();
+        for id in [WidgetId::known_weg(), WidgetId::known_toolbar()] {
+            self.deployments.get(&id, |deploy| {
+                deploy.pods.for_each(|(_, pod)| {
+                    if let Some(hwnd) = pod.hwnd() {
+                        bars.push(hwnd);
+                    }
+                });
+            });
+        }
+
+        if bars.is_empty() {
+            return;
+        }
+
+        let Ok(windows) = Window::enumerate() else {
+            return;
+        };
+
+        let mut found = 0;
+        let mut below_normal_window = false;
+        for window in windows {
+            if bars.contains(&window.address()) {
+                if below_normal_window {
+                    log::debug!("Restoring {window:?} above normal windows");
+                    window.set_z_order(ZOrder::TopMost).log_error();
+                }
+                found += 1;
+                if found == bars.len() {
+                    break;
+                }
+                continue;
+            }
+
+            if !below_normal_window
+                && window.is_visible()
+                && !window.is_cloaked()
+                && !window.is_always_on_top()
+            {
+                below_normal_window = true;
+            }
+        }
     }
 
     pub fn suspend_all(&self) {
