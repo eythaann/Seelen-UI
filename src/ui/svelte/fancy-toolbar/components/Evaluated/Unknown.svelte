@@ -23,6 +23,14 @@
     }
     return `${src}${src.includes("?") ? "&" : "?"}v=${encodeURIComponent(props.version)}`;
   }
+
+  // the icon is 1em tall, so font-size scales it
+  function iconSizeStyle(size: number | string | null | undefined): string | undefined {
+    if (size == null || size === "") {
+      return undefined;
+    }
+    return `font-size: ${typeof size === "number" ? `${size}px` : size};`;
+  }
 </script>
 
 {#if parsed}
@@ -37,7 +45,7 @@
       <Unknown {parentId} content={parsed.props.content} />
     </div>
   {:else if parsed.kind === ObjectComponentKind.Icon}
-    <Icon iconName={parsed.props.name as IconName} />
+    <Icon iconName={parsed.props.name as IconName} style={iconSizeStyle(parsed.props.size)} />
   {:else if parsed.kind === ObjectComponentKind.AppIcon}
     <FileIcon path={parsed.props.path} umid={parsed.props.umid} />
   {:else if parsed.kind === ObjectComponentKind.Image}

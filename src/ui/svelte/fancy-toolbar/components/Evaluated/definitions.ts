@@ -17,6 +17,8 @@ export enum ObjectComponentKind {
 export type EvaluatedReactIconProps = z.infer<typeof EvaluatedReactIconPropsSchema>;
 const EvaluatedReactIconPropsSchema = z.object({
   name: z.string(),
+  /** a number is treated as pixels, a string as any CSS length (e.g. "2em") */
+  size: z.union([z.number(), z.string()]).nullish(),
 });
 
 export type EvaluatedAppIconProps = z.infer<typeof EvaluatedAppIconPropsSchema>;
