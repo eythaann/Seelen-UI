@@ -144,6 +144,10 @@ export const SeelenWegSettings = () => {
                   value: "OnMonitor",
                   label: t("weg.items.temporal_visibility.on_monitor"),
                 },
+                {
+                  value: "OnWorkspace",
+                  label: t("weg.items.temporal_visibility.on_workspace"),
+                },
               ]}
               onChange={(value) => patchWegConfig({ temporalItemsVisibility: value })}
             />

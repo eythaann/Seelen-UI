@@ -2,6 +2,11 @@
 
 ## [2.8.12-dev]
 
+### features
+
+- dock: new "On Workspace" unpinned items visibility, showing only the windows of the active workspaces.
+- task switcher: option to show only the apps of the active workspace.
+
 ## [2.8.11]
 
 ### features
