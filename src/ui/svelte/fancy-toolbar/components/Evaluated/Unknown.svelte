@@ -24,12 +24,13 @@
     return `${src}${src.includes("?") ? "&" : "?"}v=${encodeURIComponent(props.version)}`;
   }
 
-  // the icon is 1em tall, so font-size scales it
+  // set height inline: the toolbar's `.svg-icon { height: var(--config-item-size) }` overrides
+  // the icon's own `1em` height, so changing font-size would have no effect here
   function iconSizeStyle(size: number | string | null | undefined): string | undefined {
     if (size == null || size === "") {
       return undefined;
     }
-    return `font-size: ${typeof size === "number" ? `${size}px` : size};`;
+    return `height: ${typeof size === "number" ? `${size}px` : size};`;
   }
 </script>
 
