@@ -1,11 +1,17 @@
-import { invoke, SeelenCommand } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import { debounce } from "lodash";
 import z from "zod";
-import { focusedWinId, previews, settings, virtualDesktops, widget, windows } from "./getters.svelte.ts";
+import { focusedWinId, previews, settings, widget, windows } from "./getters.svelte.ts";
 import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
+import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 import { filterSwitcherWindows } from "./filterWindows.ts";
 
 export { focusedWinId, previews, settings, widget, windows };
+
+// only used by the workspace filter below, so it stays private to this module
+const virtualDesktops = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, virtualDesktops.setByPayload);
+await virtualDesktops.init();
 
 const WidgetConfigSchema = z.object({
   onlyOnActiveMonitor: z.boolean(),
