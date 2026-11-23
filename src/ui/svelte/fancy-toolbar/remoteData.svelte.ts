@@ -18,13 +18,13 @@ export function createRemoteDataResolver(
           ? await response.json()
           : await response.text();
         if (mounted) {
-          // Item components (and this resolver) are created inside ItemsGroup's
-          // derived `entries`, and the toolbar flushes constantly (clock ticks,
-          // scope updates). When a fetch completion lands while such a flush is
-          // in progress, the current reaction is a derived and this write gets
-          // rejected with `state_unsafe_mutation`, so the payload never reaches
-          // the script scope and the item renders `undefined` forever. The write
-          // is intentionally untracked: it reads no reactive state.
+          // `set()` rejects `$state` writes made while the active reaction is a
+          // derived/block/eager reaction (see `set()` in Svelte's `sources.js`),
+          // and the toolbar flushes those constantly. A fetch completion is a
+          // microtask that can land inside such a context — the write then
+          // throws `state_unsafe_mutation` and the payload never reaches the
+          // script scope. This write reads no reactive state, so run it
+          // untracked to escape that context.
           untrack(() => {
             fetchedData[key] = data;
           });
