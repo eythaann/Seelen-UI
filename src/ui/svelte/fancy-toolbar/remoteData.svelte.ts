@@ -1,3 +1,4 @@
+import { untrack } from "svelte";
 import type { ToolbarItem } from "@seelen-ui/lib/types";
 
 export function createRemoteDataResolver(
@@ -17,7 +18,16 @@ export function createRemoteDataResolver(
           ? await response.json()
           : await response.text();
         if (mounted) {
-          fetchedData[key] = data;
+          // Item components (and this resolver) are created inside ItemsGroup's
+          // derived `entries`, and the toolbar flushes constantly (clock ticks,
+          // scope updates). When a fetch completion lands while such a flush is
+          // in progress, the current reaction is a derived and this write gets
+          // rejected with `state_unsafe_mutation`, so the payload never reaches
+          // the script scope and the item renders `undefined` forever. The write
+          // is intentionally untracked: it reads no reactive state.
+          untrack(() => {
+            fetchedData[key] = data;
+          });
         }
       } catch (err) {
         console.error(`Error fetching ${key}:`, err);
