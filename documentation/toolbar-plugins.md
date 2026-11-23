@@ -53,6 +53,7 @@ as top-level variables — no `scope.` prefix needed.
 | `Bluetooth`         | `devices`, `getIconNameForBTDevice(device)`                                                                     | `GetBluetoothDevices`                                |
 | `Power`             | `power` (`PowerStatus`), `powerMode`, `batteries` (`Battery[]`)                                                 | `GetPowerStatus`, `GetPowerMode`, `GetBatteries`     |
 | `FocusedApp`        | `focusedApp`                                                                                                    | `GetFocusedApp`                                      |
+| `Windows`           | `windows` (`UserAppWindow[]`: `hwnd`, `title`, `umid`, `process.path`, …)                                       | `GetUserAppWindows`                                  |
 | `Workspaces`        | `workspaces`, `activeWorkspace`                                                                                 | `StateGetVirtualDesktops`                            |
 | `Disk`              | `disks` (`Disk[]`)                                                                                              | `GetSystemDisks`                                     |
 | `NetworkStatistics` | `networkStatistics`                                                                                             | `GetSystemNetwork`                                   |
