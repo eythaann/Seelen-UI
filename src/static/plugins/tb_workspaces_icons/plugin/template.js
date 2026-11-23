@@ -9,6 +9,10 @@
 // through the icon pack system, so UWP apps (umid) are supported too.
 //
 // The pill tooltip lists the workspace name plus the titles of its windows.
+//
+// Static pill styling lives in the default theme
+// (`themes/default/styles/fancy-toolbar.scss`); templates only carry state
+// feedback styles (active workspace overlay, dotted empty fallback).
 const MAX_ICONS = 5;
 const MAX_TOOLTIP_TITLES = 5;
 
@@ -19,8 +23,7 @@ for (const win of windows) {
 
 const iconFor = (win) => {
   const path = win.process && win.process.path ? win.process.path : null;
-  const umid = win.umid || null;
-  return AppIcon({ path, umid });
+  return AppIcon({ path, umid: win.umid || null });
 };
 
 const activeRow = workspaces.find((row) => row.some((w) => w.id === activeWorkspace));
@@ -32,7 +35,7 @@ if (!activeRow) {
 return Group({
   content: activeRow.map((w, idx) => {
     const isActive = w.id === activeWorkspace;
-    const label = w.name || `Workspace ${idx + 1}`;
+    const label = w.name || `${t("workspaces_icons.workspace")} ${idx + 1}`;
     const switchWs = `invoke(SeelenCommand.SwitchWorkspace, { workspaceId: '${w.id}' })`;
 
     const allWins = (w.windows || [])
@@ -41,6 +44,7 @@ return Group({
     const wins = allWins.slice(0, MAX_ICONS);
 
     if (!allWins.length) {
+      // dotted-style fallback for empty workspaces (same as tb_workspaces_dotted)
       return Button({
         tooltip: `${label} (0)`,
         content: "",
@@ -48,9 +52,8 @@ return Group({
           padding: 0,
           width: "0.5rem",
           height: "0.5rem",
-          borderRadius: "0.25rem",
+          borderRadius: "var(--radius-full)",
           backgroundColor: isActive ? "var(--system-accent-color)" : "currentColor",
-          opacity: isActive ? 1 : 0.5,
           transition: "backgroundColor 0.2s ease-in-out",
         },
         onClick: switchWs,
@@ -63,35 +66,17 @@ return Group({
       tooltip += "\n" + titles.slice(0, MAX_TOOLTIP_TITLES).join("\n");
       const rest = titles.length - MAX_TOOLTIP_TITLES;
       if (rest > 0) {
-        tooltip += `\n+${rest} more`;
+        tooltip += `\n${t("workspaces_icons.more", { 0: rest })}`;
       }
-    }
-
-    const pillStyle = {
-      display: "flex",
-      alignItems: "center",
-      gap: "0.15rem",
-      padding: "0 0.35rem",
-      height: "1.35rem",
-      borderRadius: "0.7rem",
-      transition: "backgroundColor 0.2s ease-in-out, boxShadow 0.2s ease-in-out",
-    };
-    if (isActive) {
-      pillStyle.backgroundColor = "color-mix(in srgb, var(--system-accent-color) 22%, transparent)";
-      pillStyle.boxShadow = "0 0 0 1.5px var(--system-accent-color)";
     }
 
     return Button({
       tooltip,
       content: wins.map(iconFor),
-      style: pillStyle,
+      // state feedback only, static decoration lives in the default theme
+      style: isActive ? { backgroundColor: "var(--slu-std-ui-selected-overlay)" } : {},
       onClick: switchWs,
     });
   }),
-  style: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.45rem",
-    padding: "0 var(--item-padding)",
-  },
+  style: {},
 });

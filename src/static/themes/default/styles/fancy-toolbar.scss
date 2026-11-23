@@ -76,3 +76,34 @@
     background-color: var(--slu-std-ui-pressed-overlay);
   }
 }
+
+// @default/workspaces-icons: workspace pills with their window icons.
+// The plugin template only carries state styles (active overlay token and the
+// dotted fallback for empty workspaces); the static structure lives here.
+[data-plugin-id="@default/workspaces-icons"] {
+  .ft-bar-item-content > div {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 0 var(--spacing-xs);
+  }
+
+  button[data-skin="transparent"] {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xs);
+    height: calc(var(--config-item-size) * 1.35);
+    padding: 0 var(--spacing-s);
+    border-radius: var(--radius-full);
+    transition: background-color 200ms ease;
+
+    &:hover {
+      background-color: var(--slu-std-ui-hover-overlay);
+    }
+
+    img {
+      width: calc(var(--config-item-size) * 0.85);
+      height: calc(var(--config-item-size) * 0.85);
+    }
+  }
+}

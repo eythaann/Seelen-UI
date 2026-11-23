@@ -57,3 +57,6 @@ settings:
   restart: Restart
   title: Settings
 show_desktop: Show Desktop
+workspaces_icons:
+  more: "+{{0}} more"
+  workspace: Workspace
