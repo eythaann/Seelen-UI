@@ -1,12 +1,14 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { WegMiddleClickAction, WindowAttention, type UserAppWindow } from "@seelen-ui/lib/types";
+  import { SystrayIconAction, WegMiddleClickAction, WindowAttention, type UserAppWindow } from "@seelen-ui/lib/types";
   import { FileIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { t } from "../../i18n/index.ts";
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
   import { windowsState, focused } from "../../state/windows.svelte.ts";
+  import { trayState } from "../../state/getters.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
+  import { activateOrLaunch, getMatchingTrayIcons } from "../../activateOrLaunch.ts";
   import { hoverPreviewDelay, onHoverPreviewItemLeave, triggerPreviewWidget } from "../../previewWidget.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
   import { getBadge } from "../../state/badge.svelte.ts";
@@ -28,6 +30,7 @@
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,
   );
   const isFocused = $derived(windows.some((w) => w.hwnd === focused.value?.hwnd));
+  const isRunning = $derived(windows.length > 0 || getMatchingTrayIcons(item, trayState.icons).length > 0);
   const isFlashing = $derived(windows.some((w) => w.attention === WindowAttention.Flashing));
   const needsAttention = $derived(
     isFlashing || windows.some((w) => w.attention === WindowAttention.Highlighted),
@@ -60,7 +63,13 @@
 
     const win = windows[0];
     if (!win) {
-      launchItem(item, false);
+      const clickedItem = item;
+      activateOrLaunch(
+        clickedItem,
+        () => invoke(SeelenCommand.GetSystemTrayIcons),
+        (id) => invoke(SeelenCommand.SendSystemTrayIconAction, { id, action: SystrayIconAction.LeftClick }),
+        () => launchItem(clickedItem, false),
+      ).catch(console.error);
     } else {
       invoke(SeelenCommand.WegToggleWindowState, {
         hwnd: win.hwnd,
@@ -141,7 +150,7 @@
   {#if !settings?.showWindowTitle}
     <div
       class="weg-item-open-sign"
-      class:weg-item-open-sign-active={windows.length > 0}
+      class:weg-item-open-sign-active={isRunning}
       class:weg-item-open-sign-focused={isFocused}
       class:weg-item-open-sign-attention={needsAttention}
     ></div>

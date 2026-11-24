@@ -32,6 +32,22 @@ export const selfWinId = lazyRune(() => invoke(SeelenCommand.GetSelfWindowId));
 export const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 
+const trayIcons = lazyRune(() =>
+  invoke(SeelenCommand.GetSystemTrayIcons).catch((error) => {
+    console.error(error);
+    return [];
+  })
+);
+const traySubscription = subscribe(SeelenEvent.SystemTrayChanged, trayIcons.setByPayload);
+
+class TrayState {
+  get icons() {
+    return trayIcons.value;
+  }
+}
+
+export const trayState = new TrayState();
+
 export const previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
 
@@ -61,6 +77,7 @@ await Promise.all([
   settings.init(),
   selfWinId.init(),
   interactables.init(),
+  traySubscription.then(() => trayIcons.init()),
   previews.init(),
   windowsColors.init(),
   focused.init(),
