@@ -1,16 +1,19 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuItem, UserAppWindow, WidgetId } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuItem, UserAppWindow, WidgetId, WindowIdentity } from "@seelen-ui/lib/types";
 import type { AppOrFileWegItem } from "./types.ts";
 import { dockStateActions } from "./state/items.svelte.ts";
 import { fullSettings } from "./state/settings.svelte.ts";
 import { iconPackManager } from "libs/ui/svelte/components/Icon/index.ts";
 import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
+import { trayState } from "./state/getters.svelte.ts";
+import { getEndTaskTargets } from "./endTask.ts";
 
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
 
 let pendingAppItem: AppOrFileWegItem | null = null;
 let pendingAppWindows: UserAppWindow[] = [];
+let pendingEndTaskTargets: WindowIdentity[] = [];
 
 Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
@@ -37,7 +40,9 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   } else if (key === "close") {
     windows.forEach((w) => invoke(SeelenCommand.WegCloseApp, { hwnd: w.hwnd }));
   } else if (key === "kill") {
-    windows.forEach((w) => invoke(SeelenCommand.WegKillApp, { hwnd: w.hwnd }));
+    for (const hwnd of pendingEndTaskTargets) {
+      invoke(SeelenCommand.WegKillApp, { hwnd }).catch(console.error);
+    }
   } else if (key === "edit_app_icon") {
     const entry = iconPackManager.value.getIconEntry({ path: item.path, umid: item.umid });
     invoke(SeelenCommand.TriggerWidget, {
@@ -56,6 +61,9 @@ export function getUserApplicationContextMenu(
 ): ContextMenu {
   pendingAppItem = item;
   pendingAppWindows = windows;
+  pendingEndTaskTargets = fullSettings.value.byWidget["@seelen/weg"].showEndTask
+    ? getEndTaskTargets(item, windows, trayState.icons)
+    : [];
 
   const items: ContextMenuItem[] = [];
 
@@ -135,18 +143,18 @@ export function getUserApplicationContextMenu(
       callbackEvent: onAppMenuClick,
       danger: true,
     });
+  }
 
-    const settings = fullSettings.value.byWidget["@seelen/weg"];
-    if (settings.showEndTask) {
-      items.push({
-        type: "Item",
-        key: "kill",
-        icon: "MdOutlineDangerous",
-        label: windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
-        callbackEvent: onAppMenuClick,
-        danger: true,
-      });
-    }
+  if (pendingEndTaskTargets.length) {
+    if (!windows.length) items.push({ type: "Separator" });
+    items.push({
+      type: "Item",
+      key: "kill",
+      icon: "MdOutlineDangerous",
+      label: pendingEndTaskTargets.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
+      callbackEvent: onAppMenuClick,
+      danger: true,
+    });
   }
 
   return { identifier, items };
