@@ -6,10 +6,16 @@
 
 - all window identifiers (window handles) are now strings instead of numbers. As they are ids, no operations should be
   done with them, so few consumers should be affected.
+- removed the `get_native_shell_wallpaper` and `set_native_shell_wallpaper` commands, the native wallpaper is now
+  managed internally (see below).
 
 ### features
 
 - window manager: the tiling layout is kept across app restarts within the same user session.
+- wallpaper manager: the native Windows wallpaper mirrors the wallpaper shown on the primary monitor (the image itself,
+  or its thumbnail for videos/themed wallpapers, black if none), so system screens like the admin (UAC) prompt match
+  Seelen UI. The user's own wallpaper (or slideshow) is restored when Seelen UI is closed or the wallpaper manager is
+  disabled.
 
 ## [2.8.11]
 

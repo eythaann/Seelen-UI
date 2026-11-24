@@ -111,6 +111,14 @@ pub enum SvcAction {
     StopShortcutRegistration,
     HideNativeTaskbar,
     RestoreNativeTaskbar,
+    /// Mirrors the Seelen UI wallpaper on the native desktop wallpaper, so system surfaces that
+    /// show it (UAC prompt, lock/logon transitions, etc.) match what the user sees.
+    /// `path: None` sets a black wallpaper. The user's original wallpaper is saved on the first
+    /// call and restored by `RestoreNativeWallpaper` or when the service stops.
+    SetNativeWallpaper {
+        path: Option<std::path::PathBuf>,
+    },
+    RestoreNativeWallpaper,
 }
 
 impl SvcAction {

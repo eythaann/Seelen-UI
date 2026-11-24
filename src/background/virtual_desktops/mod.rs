@@ -23,7 +23,9 @@ use crate::{
 };
 
 pub use self::{
-    application::{MINIMIZED_BY_WORKSPACES, VdManager, WorkspaceWallpapersManager},
+    application::{
+        MINIMIZED_BY_WORKSPACES, VdManager, WorkspaceWallpapersManager, native_wallpaper,
+    },
     domain::VirtualDesktopEvent,
 };
 

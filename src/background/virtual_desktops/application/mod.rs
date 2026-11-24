@@ -1,3 +1,4 @@
+pub mod native_wallpaper;
 mod storage;
 mod wallpapers;
 

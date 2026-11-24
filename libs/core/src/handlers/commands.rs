@@ -387,15 +387,6 @@ slu_commands_declaration! {
         @fallible()
         set_widget_permissions(permissions: std::collections::HashMap<WidgetId, std::collections::HashMap<WidgetPerm, WidgetPermState>>),
 
-    // Shell
-    GetNativeShellWallpaper =
-        @fallible()
-        get_native_shell_wallpaper() -> std::path::PathBuf,
-    SetNativeShellWallpaper =
-        @webview()
-        @fallible()
-        set_native_shell_wallpaper(path: std::path::PathBuf),
-
     // User
     GetUser = get_user() -> User,
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<std::path::PathBuf>,
