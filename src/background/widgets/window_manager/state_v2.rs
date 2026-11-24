@@ -11,7 +11,7 @@ use seelen_core::{
         NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
-    system_state::{WindowHandle, ZOrder},
+    system_state::{WindowHandle, WindowIdentity, ZOrder},
 };
 
 use crate::{
@@ -29,6 +29,7 @@ use crate::{
         WindowManagerV2,
         cli::{Axis, Direction, StepWay},
         handler::{set_app_window_position, set_app_windows_positions},
+        storage::{self, TwmStoredState, TwmStoredWorkspace},
     },
 };
 
@@ -66,6 +67,13 @@ event_manager!(TwmState, TwmStateEvent);
 
 impl TwmState {
     fn initialize(&mut self) {
+        // layout of the last app run in this same user session
+        let mut stored = storage::load_stored().unwrap_or_else(|e| {
+            log::debug!("No stored tiling layout to restore: {e}");
+            TwmStoredState::default()
+        });
+        let settings = FULL_STATE.load();
+
         let vd = VdManager::instance();
         vd.monitors.for_each(|(_, monitor)| {
             let active_workspace_id = monitor.active_workspace_id().clone();
@@ -80,8 +88,30 @@ impl TwmState {
                     } else {
                         WindowManagerV2::should_be_managed_ignoring_minimized
                     };
-                    let mut tree = Self::create_tree(&workspace.id);
+                    // workspaces removed while the app was down are never visited, so dropped.
+                    let is_monocle = stored.monocle.get(&workspace.id).copied().unwrap_or(false);
+                    let layout_id = settings.get_wm_layout_id(&workspace.id);
+                    let restored = stored
+                        .workspaces
+                        .remove(&workspace.id)
+                        // the layout changed while the app was down
+                        .filter(|s| is_monocle || s.layout == layout_id)
+                        .and_then(|s| Self::restore_tree(s, &workspace.windows, should_be_managed));
+
+                    let mut tree = match restored {
+                        Some(tree) => {
+                            if is_monocle {
+                                self.monocle.insert(workspace.id.clone(), true);
+                            }
+                            tree
+                        }
+                        None => Self::create_tree(&workspace.id),
+                    };
+
                     for id in &workspace.windows {
+                        if tree.contains(id.hwnd) {
+                            continue;
+                        }
                         let window = Window::from(id.hwnd);
                         if should_be_managed(&window) {
                             let residual = tree.add_to_tiled(*id);
@@ -94,6 +124,7 @@ impl TwmState {
                 }
             }
         });
+        self.state.paused = stored.paused;
 
         VdManager::subscribe(|event| {
             WindowManagerV2::process_vd_event(event).log_error();
@@ -111,12 +142,83 @@ impl TwmState {
             }
         });
 
-        let settings = FULL_STATE.load();
         for workspace_id in self.state.workspaces.keys() {
             self.layout_cache.insert(
                 workspace_id.clone(),
                 settings.get_wm_layout_id(workspace_id),
             );
+        }
+
+        TwmState::subscribe(|_event| storage::request_save());
+        // persist the sanitized state
+        storage::request_save();
+    }
+
+    /// Restores a tree stored by a previous app run, keeping only the windows that are still
+    /// alive (same identity, so handles reused by the OS are discarded) and in its workspace.
+    fn restore_tree(
+        stored: TwmStoredWorkspace,
+        workspace_windows: &[WindowIdentity],
+        should_be_managed: fn(&Window) -> bool,
+    ) -> Option<TwmRuntimeTree> {
+        let mut tree = stored.tree;
+        if !tree.sanitize_structure() {
+            return None;
+        }
+        tree.restore_runtime_indexes();
+
+        let residual = tree.retain_windows(|id| {
+            workspace_windows.contains(id) && should_be_managed(&Window::from(id.hwnd))
+        });
+        for w in residual {
+            tree.add_to_floating(w.hwnd);
+        }
+
+        for id in stored.floating {
+            if workspace_windows.contains(&id) && !tree.contains(id.hwnd) {
+                tree.add_to_floating(id.hwnd);
+            }
+        }
+        Some(tree)
+    }
+
+    /// Snapshot of the state to be persisted, see [`storage`].
+    pub fn to_stored(&self) -> TwmStoredState {
+        let settings = FULL_STATE.load();
+        let workspaces = self
+            .state
+            .workspaces
+            .iter()
+            .map(|(id, tree)| {
+                let floating = tree
+                    .window_map
+                    .iter()
+                    .filter(|(_, location)| matches!(location, WindowLocation::Floating))
+                    .map(|(&hwnd, _)| Window::from(hwnd).id())
+                    .collect();
+                let layout = self
+                    .layout_cache
+                    .get(id)
+                    .cloned()
+                    .unwrap_or_else(|| settings.get_wm_layout_id(id));
+                let stored = TwmStoredWorkspace {
+                    layout,
+                    tree: tree.clone(),
+                    floating,
+                };
+                (id.clone(), stored)
+            })
+            .collect();
+
+        TwmStoredState {
+            workspaces,
+            monocle: self
+                .monocle
+                .iter()
+                .filter(|(id, enabled)| **enabled && self.state.workspaces.contains_key(*id))
+                .map(|(id, enabled)| (id.clone(), *enabled))
+                .collect(),
+            paused: self.state.paused,
         }
     }
 

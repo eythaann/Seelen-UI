@@ -1,7 +1,18 @@
 //! State of the OS user session the app runs in (not to be confused with `crate::session`,
 //! which is the Seelen UI session).
 
-use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(windows)]
+mod windows;
+
+#[cfg(windows)]
+use self::windows as imp;
+
+use std::sync::{
+    LazyLock,
+    atomic::{AtomicBool, Ordering},
+};
+
+use crate::error::Result;
 
 /// Whether the session is interactive (not locked nor switched to another user).
 static IS_INTERACTIVE: AtomicBool = AtomicBool::new(true);
@@ -33,4 +44,13 @@ pub fn is_locked() -> bool {
 #[inline]
 pub fn set_locked(locked: bool) {
     IS_LOCKED.store(locked, Ordering::Release);
+}
+
+/// Identifier of the current OS logon session. Stable while the user stays logged in (app
+/// restarts included) and different after a log off or a reboot, so it scopes the data that
+/// must only survive app restarts.
+pub fn logon_key() -> Result<String> {
+    static KEY: LazyLock<std::result::Result<String, String>> =
+        LazyLock::new(|| imp::logon_key().map_err(|e| e.to_string()));
+    Ok(KEY.clone()?)
 }

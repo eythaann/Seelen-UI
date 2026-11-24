@@ -553,6 +553,109 @@ impl TwmRuntimeTree {
         );
         true
     }
+
+    /// Repairs the structure of a tree that was deserialized (e.g. restored from disk): drops the
+    /// nodes unreachable from the root, fixes parent links, removes dangling or repeated children,
+    /// keeps each window only once in the whole tree and fixes invalid active windows.
+    ///
+    /// Returns `false` if the tree has no valid root, so it can't be used.
+    pub fn sanitize_structure(&mut self) -> bool {
+        if !self.nodes.contains_key(&self.root) {
+            return false;
+        }
+
+        let mut reachable = std::collections::HashSet::from([self.root]);
+        let mut stack = vec![(self.root, None)];
+        while let Some((id, parent)) = stack.pop() {
+            let mut children = {
+                let Some(node) = self.nodes.get_mut(&id) else {
+                    continue;
+                };
+                node.id = id;
+                node.parent = parent;
+
+                let mut children = std::mem::take(&mut node.children);
+                match node.kind {
+                    TwmNodeKind::Leaf | TwmNodeKind::Stack => children.clear(),
+                    TwmNodeKind::Horizontal | TwmNodeKind::Vertical => {
+                        node.windows.clear();
+                        node.active_window = None;
+                    }
+                }
+                children
+            };
+
+            children.retain(|c| self.nodes.contains_key(c) && reachable.insert(*c));
+            for &child in &children {
+                stack.push((child, Some(id)));
+            }
+            self.nodes.get_mut(&id).unwrap().children = children;
+        }
+        self.nodes.retain(|id, _| reachable.contains(id));
+
+        let mut seen = std::collections::HashSet::new();
+        for node in self.iter_mut() {
+            node.windows.retain(|w| seen.insert(w.hwnd));
+            if node
+                .active_window
+                .is_some_and(|active| !node.windows.contains(&active))
+            {
+                node.active_window = node.windows.first().copied();
+            }
+        }
+        true
+    }
+
+    /// Rebuilds the runtime only data (not serialized) of a deserialized tree: the id generator
+    /// and the window map. Windows are indexed in tree order, so a later reindex keeps their order.
+    /// Floating windows are not part of the nodes, they have to be added back by the caller.
+    pub fn restore_runtime_indexes(&mut self) {
+        self.next_id = self.nodes.keys().max().map_or(1, |max| max + 1);
+
+        let tiled: Vec<(WindowHandle, NodeId)> = self
+            .iter()
+            .flat_map(|node| node.windows.iter().map(|w| (w.hwnd, node.id)))
+            .collect();
+
+        self.window_map.clear();
+        for (idx, (hwnd, node_id)) in tiled.into_iter().enumerate() {
+            let time =
+                std::time::SystemTime::UNIX_EPOCH + std::time::Duration::from_nanos(idx as u64 + 1);
+            self.window_map
+                .insert(hwnd, WindowLocation::Tiled(node_id, time));
+        }
+    }
+
+    /// Removes the tiled windows for which `keep` returns `false`, then normalizes the tree.
+    /// Returns the residual windows that no longer fit in the layout (should go to floating).
+    pub fn retain_windows(
+        &mut self,
+        mut keep: impl FnMut(&WindowIdentity) -> bool,
+    ) -> Vec<WindowIdentity> {
+        let mut removed = Vec::new();
+        for node in self.nodes.values_mut() {
+            node.windows.retain(|w| {
+                let kept = keep(w);
+                if !kept {
+                    removed.push(w.hwnd);
+                }
+                kept
+            });
+            if node
+                .active_window
+                .is_some_and(|active| !node.windows.contains(&active))
+            {
+                node.active_window = node.windows.first().copied();
+            }
+        }
+
+        for hwnd in removed {
+            self.window_map.remove(&hwnd);
+        }
+
+        self.normalize();
+        self.reindex_windows()
+    }
 }
 
 impl Default for TwmRuntimeTree {
@@ -726,5 +829,143 @@ impl TwmRuntimeNode {
             }
             _ => false,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn win(hwnd: WindowHandle) -> WindowIdentity {
+        WindowIdentity {
+            hwnd,
+            pid: 1,
+            process_created_at: 1,
+        }
+    }
+
+    fn node(id: NodeId, kind: TwmNodeKind, children: Vec<NodeId>) -> TwmRuntimeNode {
+        TwmRuntimeNode {
+            id,
+            parent: None,
+            children,
+            kind,
+            lifetime: TwmNodeLifetime::Permanent,
+            priority: 0,
+            initial_grow_factor: 1.0,
+            condition: None,
+            max_stack_size: None,
+            stack_policy: TwmStackPolicy::Manual,
+            grow_factor: 1.0,
+            windows: Vec::new(),
+            active_window: None,
+            rect: None,
+        }
+    }
+
+    fn leaf(id: NodeId, windows: &[WindowHandle], lifetime: TwmNodeLifetime) -> TwmRuntimeNode {
+        let mut node = node(id, TwmNodeKind::Leaf, vec![]);
+        node.lifetime = lifetime;
+        node.windows = windows.iter().map(|&h| win(h)).collect();
+        node.active_window = node.windows.first().copied();
+        node
+    }
+
+    /// Simulates a tree read from disk: runtime only fields are lost on serialization.
+    fn roundtrip(tree: &TwmRuntimeTree) -> TwmRuntimeTree {
+        serde_json::from_str(&serde_json::to_string(tree).unwrap()).unwrap()
+    }
+
+    fn tree(root: NodeId, nodes: Vec<TwmRuntimeNode>) -> TwmRuntimeTree {
+        let mut tree = TwmRuntimeTree::new();
+        tree.root = root;
+        tree.nodes = nodes.into_iter().map(|n| (n.id, n)).collect();
+        tree
+    }
+
+    #[test]
+    fn restores_runtime_indexes_in_tree_order() {
+        let stored = tree(
+            1,
+            vec![
+                node(1, TwmNodeKind::Horizontal, vec![2, 3]),
+                leaf(2, &[10], TwmNodeLifetime::Permanent),
+                leaf(3, &[20], TwmNodeLifetime::Permanent),
+            ],
+        );
+        let mut restored = roundtrip(&stored);
+        assert!(restored.window_map.is_empty());
+
+        assert!(restored.sanitize_structure());
+        restored.restore_runtime_indexes();
+
+        assert_eq!(restored.next_id, 4);
+        assert_eq!(restored.node_of_window(10), Some(2));
+        assert_eq!(restored.node_of_window(20), Some(3));
+
+        // a reindex must keep the stored order
+        let residual = restored.reindex_windows();
+        assert!(residual.is_empty());
+        assert_eq!(restored.node_of_window(10), Some(2));
+        assert_eq!(restored.node_of_window(20), Some(3));
+    }
+
+    #[test]
+    fn sanitize_structure_repairs_tree() {
+        let mut root = node(1, TwmNodeKind::Horizontal, vec![2, 3, 99, 2]);
+        root.windows = vec![win(1)]; // containers can't hold windows
+        let mut duplicated = leaf(3, &[10, 30], TwmNodeLifetime::Permanent);
+        duplicated.active_window = Some(win(77)); // not in the node
+        let mut wrong_parent = leaf(2, &[10], TwmNodeLifetime::Permanent);
+        wrong_parent.parent = Some(42);
+
+        let mut t = tree(
+            1,
+            vec![
+                root,
+                wrong_parent,
+                duplicated,
+                leaf(50, &[500], TwmNodeLifetime::Permanent), // orphan
+            ],
+        );
+
+        assert!(t.sanitize_structure());
+        assert_eq!(t.nodes[&1].children, vec![2, 3]);
+        assert!(t.nodes[&1].windows.is_empty());
+        assert_eq!(t.nodes[&2].parent, Some(1));
+        assert!(!t.nodes.contains_key(&50));
+        assert_eq!(t.nodes[&2].windows, vec![win(10)]);
+        assert_eq!(t.nodes[&3].windows, vec![win(30)]);
+        assert_eq!(t.nodes[&3].active_window, Some(win(30)));
+    }
+
+    #[test]
+    fn sanitize_structure_rejects_missing_root() {
+        let mut t = tree(7, vec![leaf(1, &[10], TwmNodeLifetime::Permanent)]);
+        assert!(!t.sanitize_structure());
+        assert!(!TwmRuntimeTree::new().sanitize_structure());
+    }
+
+    #[test]
+    fn retain_windows_drops_dead_windows_and_collapses() {
+        let mut t = tree(
+            1,
+            vec![
+                node(1, TwmNodeKind::Horizontal, vec![2, 3]),
+                leaf(2, &[10], TwmNodeLifetime::Permanent),
+                leaf(3, &[20], TwmNodeLifetime::Temporal),
+            ],
+        );
+        t.sanitize_structure();
+        t.restore_runtime_indexes();
+
+        let residual = t.retain_windows(|w| w.hwnd != 20);
+        assert!(residual.is_empty());
+        assert!(!t.contains(20));
+        assert!(t.contains(10));
+        // the temporal leaf was drained and the single child container collapsed
+        assert!(!t.nodes.contains_key(&3));
+        assert_eq!(t.nodes[&t.root].kind, TwmNodeKind::Leaf);
+        assert_eq!(t.node_of_window(10), Some(t.root));
     }
 }
