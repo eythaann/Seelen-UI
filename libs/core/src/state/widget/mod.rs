@@ -265,7 +265,7 @@ pub struct WidgetDebugInfo {
     pub monitor_id: Option<String>,
     pub instance_id: Option<String>,
     pub status: WidgetStatus,
-    pub webview_window_id: Option<isize>,
+    pub webview_window_id: Option<crate::system_state::WindowIdentity>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]

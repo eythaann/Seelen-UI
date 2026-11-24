@@ -62,7 +62,12 @@ impl Util {
             .for_each(|w| {
                 // notify (non-blocking) to avoid hanging on unresponsive windows
                 let _ = unsafe {
-                    SendNotifyMessageW(HWND(w.hwnd as _), msg, WPARAM::default(), LPARAM::default())
+                    SendNotifyMessageW(
+                        HWND(w.hwnd.hwnd as _),
+                        msg,
+                        WPARAM::default(),
+                        LPARAM::default(),
+                    )
                 };
             });
         Ok(())

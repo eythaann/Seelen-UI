@@ -35,7 +35,7 @@ subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 export const previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
 
-export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
+export const windowsColors = lazyRune<Record<string, UserAppWindowColors>>(
   () => invoke(SeelenCommand.GetUserAppWindowsColors),
 );
 subscribe(SeelenEvent.UserAppWindowsColorsChanged, windowsColors.setByPayload);

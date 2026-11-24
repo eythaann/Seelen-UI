@@ -10,10 +10,10 @@ import {
 } from "./livePreview.ts";
 
 const frame: LivePreviewFrame = {
-  targets: [{ hwnd: 17, rect: { left: 10, top: 40, right: 266, bottom: 184 } }],
+  targets: [{ hwnd: "17", rect: { left: 10, top: 40, right: 266, bottom: 184 } }],
   opacity: 255,
 };
-const status: LivePreviewStatus = { live: [17], visible: true };
+const status: LivePreviewStatus = { live: ["17"], visible: true };
 
 function recorder(calls: LivePreviewFrame[], result: () => Promise<LivePreviewStatus> = () => Promise.resolve(status)) {
   return {
@@ -27,7 +27,7 @@ function recorder(calls: LivePreviewFrame[], result: () => Promise<LivePreviewSt
 
 test("partly scrolled thumbnails keep their full layout and carry an exact visible clip", () => {
   const rect = { left: 0, top: -50, right: 200, bottom: 50 };
-  const [target] = visiblePreviewTargets([{ hwnd: 17, rect }], { left: 0, top: 0, right: 200, bottom: 100 });
+  const [target] = visiblePreviewTargets([{ hwnd: "17", rect }], { left: 0, top: 0, right: 200, bottom: 100 });
   assert.deepEqual(target?.rect, rect);
   assert.deepEqual(target?.clip, { left: 0, top: 0, right: 200, bottom: 50 });
 });
@@ -35,10 +35,10 @@ test("partly scrolled thumbnails keep their full layout and carry an exact visib
 test("clips on the bottom and sides never expand a previously constrained surface", () => {
   const rect = { left: -10, top: 80, right: 210, bottom: 180 };
   const viewport = { left: 0, top: 0, right: 200, bottom: 100 };
-  const [target] = visiblePreviewTargets([{ hwnd: 17, rect }], viewport);
+  const [target] = visiblePreviewTargets([{ hwnd: "17", rect }], viewport);
   assert.deepEqual(target?.clip, { left: 0, top: 80, right: 200, bottom: 100 });
   const [constrained] = visiblePreviewTargets(
-    [{ hwnd: 17, rect, clip: { left: 30, top: 85, right: 150, bottom: 95 } }],
+    [{ hwnd: "17", rect, clip: { left: 30, top: 85, right: 150, bottom: 95 } }],
     viewport,
   );
   assert.deepEqual(constrained?.clip, { left: 30, top: 85, right: 150, bottom: 95 });
@@ -58,11 +58,11 @@ test("the clip viewport excludes transformed borders and scrollbars", () => {
 
 test("large groups preserve all visible unique thumbnails for native selection and snapshot fallback", () => {
   const targets = Array.from({ length: 40 }, (_, index) => ({
-    hwnd: index + 1,
+    hwnd: String(index + 1),
     rect: { left: 0, top: index * 200, right: 256, bottom: index * 200 + 144 },
   }));
   const selected = visiblePreviewTargets(targets, { left: 0, top: 0, right: 256, bottom: 400 });
-  assert.deepEqual(selected.map(({ hwnd }) => hwnd), [1, 2]);
+  assert.deepEqual(selected.map(({ hwnd }) => hwnd), ["1", "2"]);
   const crowded = targets.map((target) => ({ ...target, rect: frame.targets[0]!.rect }));
   const bounded = visiblePreviewTargets(crowded, { left: 0, top: 0, right: 300, bottom: 300 });
   assert.equal(bounded.length, 40);
@@ -70,26 +70,26 @@ test("large groups preserve all visible unique thumbnails for native selection a
 
 test("scrolling registers later windows rather than always truncating the first sixteen", () => {
   const targets = Array.from({ length: 20 }, (_, index) => ({
-    hwnd: index + 1,
+    hwnd: String(index + 1),
     rect: { left: 0, top: index * 200 - 3200, right: 256, bottom: index * 200 - 3200 + 144 },
   }));
   assert.deepEqual(
     visiblePreviewTargets(targets, { left: 0, top: 0, right: 256, bottom: 400 }).map(({ hwnd }) => hwnd),
-    [17, 18],
+    ["17", "18"],
   );
 });
 
 test("visibility handles clipped cards, duplicates, empty viewports and edge contact", () => {
   const targets = [
-    { hwnd: 1, rect: { left: -20, top: -20, right: 30, bottom: 30 } },
-    { hwnd: 1, rect: { left: 20, top: 20, right: 40, bottom: 40 } },
-    { hwnd: 2, rect: { left: 100, top: 0, right: 200, bottom: 50 } },
-    { hwnd: 3, rect: { left: 0, top: 100, right: 50, bottom: 200 } },
-    { hwnd: 4, rect: { left: 0, top: 0, right: 0, bottom: 0 } },
+    { hwnd: "1", rect: { left: -20, top: -20, right: 30, bottom: 30 } },
+    { hwnd: "1", rect: { left: 20, top: 20, right: 40, bottom: 40 } },
+    { hwnd: "2", rect: { left: 100, top: 0, right: 200, bottom: 50 } },
+    { hwnd: "3", rect: { left: 0, top: 100, right: 50, bottom: 200 } },
+    { hwnd: "4", rect: { left: 0, top: 0, right: 0, bottom: 0 } },
   ];
   assert.deepEqual(
     visiblePreviewTargets(targets, { left: 0, top: 0, right: 100, bottom: 100 }).map(({ hwnd }) => hwnd),
-    [1],
+    ["1"],
   );
   assert.deepEqual(visiblePreviewTargets(targets, { left: 0, top: 0, right: 0, bottom: 0 }), []);
 });
@@ -109,10 +109,10 @@ test("clip-only changes reach native composition", async () => {
 
 test("a seventeenth visible card reaches snapshot fallback when sixteen native surfaces succeed", async () => {
   const targets = visiblePreviewTargets(
-    Array.from({ length: 17 }, (_, index) => ({ hwnd: index + 1, rect: frame.targets[0]!.rect })),
+    Array.from({ length: 17 }, (_, index) => ({ hwnd: String(index + 1), rect: frame.targets[0]!.rect })),
     { left: 0, top: 0, right: 300, bottom: 300 },
   );
-  const fallback: number[] = [];
+  const fallback: string[] = [];
   const controller = new LivePreviewController({
     update: (_session, value) => Promise.resolve({ ...status, live: value.targets.slice(0, 16).map((t) => t.hwnd) }),
     clear: () => Promise.resolve(),
@@ -121,7 +121,7 @@ test("a seventeenth visible card reaches snapshot fallback when sixteen native s
   });
   controller.update({ ...frame, targets });
   await setImmediate();
-  assert.deepEqual(fallback, [17]);
+  assert.deepEqual(fallback, ["17"]);
 });
 
 test("a stable layout is sent once: video frames never cross the webview boundary", async () => {

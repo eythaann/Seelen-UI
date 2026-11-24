@@ -81,12 +81,12 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn move_window_to_workspace(
         webview: tauri::WebviewWindow,
-        hwnd: isize,
+        hwnd: seelen_core::system_state::WindowIdentity,
         workspace_id: seelen_core::state::WorkspaceId,
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         let manager = get_vd_manager();
-        let window = crate::platform::window::Window::from(hwnd);
+        let window = crate::platform::window::Window::try_from(&hwnd)?;
         manager.send_to(&window, &workspace_id)
     }
 

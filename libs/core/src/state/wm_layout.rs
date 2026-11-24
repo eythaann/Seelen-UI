@@ -9,11 +9,10 @@ use crate::{
             TwmPluginNode, TwmReservation, TwmStackPolicy,
         },
     },
-    system_state::MonitorId,
+    system_state::{MonitorId, WindowHandle, WindowIdentity},
 };
 
 pub type NodeId = u64;
-pub type WindowId = isize;
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
@@ -25,22 +24,18 @@ pub struct TwmGlobalRuntimeTree {
 }
 
 impl TwmGlobalRuntimeTree {
-    pub fn contains(&self, window_id: &WindowId) -> bool {
-        self.workspaces
-            .iter()
-            .any(|(_, tree)| tree.contains(window_id))
+    pub fn contains(&self, hwnd: WindowHandle) -> bool {
+        self.workspaces.iter().any(|(_, tree)| tree.contains(hwnd))
     }
 
-    pub fn is_tiled(&self, window_id: &WindowId) -> bool {
-        self.workspaces
-            .iter()
-            .any(|(_, tree)| tree.is_tiled(window_id))
+    pub fn is_tiled(&self, hwnd: WindowHandle) -> bool {
+        self.workspaces.iter().any(|(_, tree)| tree.is_tiled(hwnd))
     }
 
-    pub fn is_floating(&self, window_id: &WindowId) -> bool {
+    pub fn is_floating(&self, hwnd: WindowHandle) -> bool {
         self.workspaces
             .iter()
-            .any(|(_, tree)| tree.is_floating(window_id))
+            .any(|(_, tree)| tree.is_floating(hwnd))
     }
 }
 
@@ -53,7 +48,8 @@ pub struct TwmRuntimeTree {
     pub root: NodeId,
     pub nodes: HashMap<NodeId, TwmRuntimeNode>,
     #[serde(skip)]
-    pub window_map: HashMap<WindowId, WindowLocation>,
+    /// Runtime only, so windows are tracked by handle.
+    pub window_map: HashMap<WindowHandle, WindowLocation>,
 }
 
 #[derive(Debug, Clone)]
@@ -113,16 +109,16 @@ impl TwmRuntimeTree {
         id
     }
 
-    pub fn contains(&self, window_id: &WindowId) -> bool {
-        self.window_map.contains_key(window_id)
+    pub fn contains(&self, hwnd: WindowHandle) -> bool {
+        self.window_map.contains_key(&hwnd)
     }
 
-    pub fn is_tiled(&self, id: &WindowId) -> bool {
-        matches!(self.window_map.get(id), Some(WindowLocation::Tiled(..)))
+    pub fn is_tiled(&self, hwnd: WindowHandle) -> bool {
+        matches!(self.window_map.get(&hwnd), Some(WindowLocation::Tiled(..)))
     }
 
-    pub fn is_floating(&self, id: &WindowId) -> bool {
-        matches!(self.window_map.get(id), Some(WindowLocation::Floating))
+    pub fn is_floating(&self, hwnd: WindowHandle) -> bool {
+        matches!(self.window_map.get(&hwnd), Some(WindowLocation::Floating))
     }
 
     pub fn reset_sizes(&mut self) {
@@ -147,13 +143,13 @@ impl TwmRuntimeTree {
     }
 
     /// returns true if the window was added, false in case of overflow
-    fn try_add_window(&mut self, window_id: WindowId, ctx: &TwmConditionContext) -> bool {
+    fn try_add_window(&mut self, window_id: WindowIdentity, ctx: &TwmConditionContext) -> bool {
         if let Some(node_id) = self.iter().find(|n| n.accepts_windows(ctx)).map(|n| n.id) {
             let node = self.nodes.get_mut(&node_id).unwrap();
             node.windows.push(window_id);
             node.active_window = Some(window_id);
             self.window_map.insert(
-                window_id,
+                window_id.hwnd,
                 WindowLocation::Tiled(node_id, std::time::SystemTime::now()),
             );
             return true;
@@ -168,7 +164,7 @@ impl TwmRuntimeTree {
             node.windows.push(window_id);
             node.active_window = Some(window_id);
             self.window_map.insert(
-                window_id,
+                window_id.hwnd,
                 WindowLocation::Tiled(node_id, std::time::SystemTime::now()),
             );
             return true;
@@ -177,7 +173,7 @@ impl TwmRuntimeTree {
         false
     }
 
-    pub fn drain_tiled(&mut self) -> Vec<WindowId> {
+    pub fn drain_tiled(&mut self) -> Vec<WindowIdentity> {
         let mut drained = Vec::new();
         for node in self.iter_mut() {
             drained.append(&mut node.windows);
@@ -287,7 +283,7 @@ impl TwmRuntimeTree {
 
                     for &window in &windows {
                         if let Some(WindowLocation::Tiled(nid, _)) =
-                            self.window_map.get_mut(&window)
+                            self.window_map.get_mut(&window.hwnd)
                         {
                             *nid = parent_id;
                         }
@@ -302,10 +298,10 @@ impl TwmRuntimeTree {
     }
 
     /// reindexes windows to handle logical condition like `managed < 4` and returns residual windows
-    pub fn reindex_windows(&mut self) -> Vec<WindowId> {
+    pub fn reindex_windows(&mut self) -> Vec<WindowIdentity> {
         // Drain only Leaf nodes and single-window stacks.
         // Multi-window stacks (≥2 windows) are skipped — they stay where they are.
-        let mut drained: Vec<isize> = Vec::new();
+        let mut drained: Vec<WindowIdentity> = Vec::new();
         for node in self.iter_mut() {
             if node.kind == TwmNodeKind::Stack
                 && node.stack_policy == TwmStackPolicy::Manual
@@ -317,10 +313,10 @@ impl TwmRuntimeTree {
             node.active_window = None;
         }
 
-        let mut drained: Vec<(isize, std::time::SystemTime)> = drained
+        let mut drained: Vec<(WindowIdentity, std::time::SystemTime)> = drained
             .into_iter()
             .map(|w| {
-                let time = match self.window_map.remove(&w) {
+                let time = match self.window_map.remove(&w.hwnd) {
                     Some(WindowLocation::Tiled(_, t)) => t,
                     _ => std::time::SystemTime::UNIX_EPOCH,
                 };
@@ -346,7 +342,7 @@ impl TwmRuntimeTree {
     }
 
     /// returns residual windows that should be added to floating
-    pub fn add_to_tiled(&mut self, window_id: WindowId) -> Vec<WindowId> {
+    pub fn add_to_tiled(&mut self, window_id: WindowIdentity) -> Vec<WindowIdentity> {
         let ctx = self.get_context();
         if !self.try_add_window(window_id, &ctx) {
             return vec![window_id];
@@ -354,33 +350,33 @@ impl TwmRuntimeTree {
         self.reindex_windows()
     }
 
-    pub fn add_to_floating(&mut self, window_id: WindowId) {
-        self.window_map.insert(window_id, WindowLocation::Floating);
+    pub fn add_to_floating(&mut self, hwnd: WindowHandle) {
+        self.window_map.insert(hwnd, WindowLocation::Floating);
     }
 
-    pub fn remove_window(&mut self, window_id: &WindowId) -> Vec<isize> {
-        let Some(location) = self.window_map.remove(window_id) else {
+    pub fn remove_window(&mut self, hwnd: WindowHandle) -> Vec<WindowIdentity> {
+        let Some(location) = self.window_map.remove(&hwnd) else {
             return Vec::new();
         };
 
         match location {
             WindowLocation::Tiled(node_id, _) => {
                 let node = self.nodes.get_mut(&node_id).unwrap();
-                if node.active_window == Some(*window_id) {
+                if node.active_window.is_some_and(|w| w.hwnd == hwnd) {
                     let next = node
                         .windows
                         .iter()
-                        .position(|w| w == window_id)
+                        .position(|w| w.hwnd == hwnd)
                         .and_then(|i| {
                             node.windows
                                 .get(i + 1)
                                 .or_else(|| i.checked_sub(1).and_then(|p| node.windows.get(p)))
                         })
                         .copied();
-                    node.windows.retain(|w| w != window_id);
+                    node.windows.retain(|w| w.hwnd != hwnd);
                     node.active_window = next;
                 } else {
-                    node.windows.retain(|w| w != window_id);
+                    node.windows.retain(|w| w.hwnd != hwnd);
                 }
             }
             WindowLocation::Floating => {}
@@ -398,14 +394,14 @@ impl TwmRuntimeTree {
         node.children.iter().any(|&c| self.has_any_windows(c))
     }
 
-    pub fn node_of_window(&self, window_id: &WindowId) -> Option<NodeId> {
-        match self.window_map.get(window_id)? {
+    pub fn node_of_window(&self, hwnd: WindowHandle) -> Option<NodeId> {
+        match self.window_map.get(&hwnd)? {
             WindowLocation::Tiled(node_id, _) => Some(*node_id),
             WindowLocation::Floating => None,
         }
     }
 
-    pub fn face_of_node(&self, node_id: NodeId) -> Option<WindowId> {
+    pub fn face_of_node(&self, node_id: NodeId) -> Option<WindowIdentity> {
         let node = self.nodes.get(&node_id)?;
         match node.kind {
             TwmNodeKind::Leaf | TwmNodeKind::Stack => {
@@ -419,14 +415,14 @@ impl TwmRuntimeTree {
         }
     }
 
-    pub fn node_is_stack(&self, window_id: &WindowId) -> bool {
-        self.node_of_window(window_id)
+    pub fn node_is_stack(&self, hwnd: WindowHandle) -> bool {
+        self.node_of_window(hwnd)
             .and_then(|id| self.nodes.get(&id))
             .map(|n| n.kind == TwmNodeKind::Stack)
             .unwrap_or(false)
     }
 
-    pub fn swap_nodes_by_windows(&mut self, a: WindowId, b: WindowId) {
+    pub fn swap_nodes_by_windows(&mut self, a: WindowHandle, b: WindowHandle) {
         let (node_a, time_a) = match self.window_map.get(&a) {
             Some(WindowLocation::Tiled(id, time)) => (*id, *time),
             _ => return,
@@ -448,15 +444,15 @@ impl TwmRuntimeTree {
         std::mem::swap(&mut na.windows, &mut nb.windows);
         std::mem::swap(&mut na.active_window, &mut nb.active_window);
 
-        let windows_a: Vec<WindowId> = self.nodes[&node_a].windows.clone();
-        let windows_b: Vec<WindowId> = self.nodes[&node_b].windows.clone();
+        let windows_a: Vec<WindowIdentity> = self.nodes[&node_a].windows.clone();
+        let windows_b: Vec<WindowIdentity> = self.nodes[&node_b].windows.clone();
         for w in windows_a {
             self.window_map
-                .insert(w, WindowLocation::Tiled(node_a, time_a));
+                .insert(w.hwnd, WindowLocation::Tiled(node_a, time_a));
         }
         for w in windows_b {
             self.window_map
-                .insert(w, WindowLocation::Tiled(node_b, time_b));
+                .insert(w.hwnd, WindowLocation::Tiled(node_b, time_b));
         }
     }
 
@@ -481,7 +477,7 @@ impl TwmRuntimeTree {
         &mut self,
         node_id: NodeId,
         side: TwmReservation,
-        new_window: WindowId,
+        new_window: WindowIdentity,
     ) -> bool {
         if !self.nodes.contains_key(&node_id) {
             return false;
@@ -552,7 +548,7 @@ impl TwmRuntimeTree {
         self.nodes.insert(new_leaf_id, new_leaf);
         self.nodes.insert(container_id, container);
         self.window_map.insert(
-            new_window,
+            new_window.hwnd,
             WindowLocation::Tiled(new_leaf_id, std::time::SystemTime::now()),
         );
         true
@@ -664,8 +660,8 @@ pub struct TwmRuntimeNode {
 
     // Runtime-only
     pub grow_factor: f32,
-    pub windows: Vec<WindowId>,
-    pub active_window: Option<WindowId>,
+    pub windows: Vec<WindowIdentity>,
+    pub active_window: Option<WindowIdentity>,
     /// Inner rect (DWM visible bounds, no shadow). Must match `Window::inner_rect()` at all callsites.
     pub rect: Option<Rect>,
 }

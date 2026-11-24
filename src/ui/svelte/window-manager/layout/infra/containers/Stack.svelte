@@ -13,7 +13,7 @@
 
   let { node, overlayVisible }: Props = $props();
 
-  function onTabClick(winId: number) {
+  function onTabClick(winId: string) {
     invoke(SeelenCommand.WmSetStackActiveWindow, { hwnd: winId });
   }
 
@@ -42,7 +42,7 @@
             data-allow-mouse-events={overlayVisible}
           />
           <span class="wm-stack-bar-item-title" data-allow-mouse-events={overlayVisible}>
-            {info?.title || `0x${winId.toString(16)}`}
+            {info?.title || `0x${winId.split("_")[0]}`}
           </span>
         </button>
       {/each}

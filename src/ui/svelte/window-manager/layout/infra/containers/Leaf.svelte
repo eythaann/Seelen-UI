@@ -3,7 +3,7 @@
   import ReservedContainer from './Reserved.svelte';
 
   interface Props {
-    hwnd: number;
+    hwnd: string;
     growFactor?: number;
   }
 

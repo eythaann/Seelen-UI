@@ -11,7 +11,7 @@ use seelen_core::{
         NodeId, TwmGlobalRuntimeTree, TwmRuntimeTree, WindowLocation, WorkspaceId,
         twm::{TwmNodeKind, TwmPlugin, TwmReservation, TwmStackPolicy},
     },
-    system_state::ZOrder,
+    system_state::{WindowHandle, ZOrder},
 };
 
 use crate::{
@@ -32,7 +32,8 @@ use crate::{
     },
 };
 
-pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<isize>> = LazyLock::new(scc::HashSet::new);
+pub static MINIMIZED_BY_STACK: LazyLock<scc::HashSet<WindowHandle>> =
+    LazyLock::new(scc::HashSet::new);
 
 pub static WM_STATE: LazyLock<Arc<TracedMutex<TwmState>>> = LazyLock::new(|| {
     Arc::new(TracedMutex::new({
@@ -80,12 +81,12 @@ impl TwmState {
                         WindowManagerV2::should_be_managed_ignoring_minimized
                     };
                     let mut tree = Self::create_tree(&workspace.id);
-                    for &hwnd in &workspace.windows {
-                        let window = Window::from(hwnd);
+                    for id in &workspace.windows {
+                        let window = Window::from(id.hwnd);
                         if should_be_managed(&window) {
-                            let residual = tree.add_to_tiled(window.address());
+                            let residual = tree.add_to_tiled(*id);
                             for w in residual {
-                                tree.add_to_floating(w);
+                                tree.add_to_floating(w.hwnd);
                             }
                         }
                     }
@@ -171,7 +172,7 @@ impl TwmState {
             .find(|node| {
                 matches!(node.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack)
                     && node.windows.iter().any(|w| {
-                        Window::from(*w)
+                        Window::from(w.hwnd)
                             .slu_category()
                             .is_some_and(|c| c == searching)
                     })
@@ -188,10 +189,11 @@ impl TwmState {
             node.stack_policy = TwmStackPolicy::Manual;
         }
 
-        node.windows.push(window.address());
-        node.active_window = Some(window.address());
+        let identity = window.id();
+        node.windows.push(identity);
+        node.active_window = Some(identity);
         tree.window_map.insert(
-            window.address(),
+            window.handle(),
             WindowLocation::Tiled(found_node_id, std::time::SystemTime::now()),
         );
 
@@ -199,18 +201,16 @@ impl TwmState {
     }
 
     pub fn is_managed(&self, window: &Window) -> bool {
-        let id = window.address();
-        self.state.workspaces.values().any(|t| t.contains(&id))
+        self.state.contains(window.handle())
     }
 
     pub fn is_tiled(&self, window: &Window) -> bool {
-        let id = window.address();
-        self.state.workspaces.values().any(|t| t.is_tiled(&id))
+        self.state.is_tiled(window.handle())
     }
 
     pub fn add_to_floating(&mut self, window: &Window, workspace_id: &WorkspaceId) {
         let tree = self.get_or_insert_tree_mut(workspace_id);
-        tree.add_to_floating(window.address());
+        tree.add_to_floating(window.handle());
     }
 
     pub fn reserve(&mut self, side: TwmReservation) {
@@ -219,9 +219,9 @@ impl TwmState {
             return;
         }
 
-        let window_id = foreground.address();
+        let hwnd = foreground.handle();
         for (ws_id, tree) in &self.state.workspaces {
-            if let Some(node_id) = tree.node_of_window(&window_id) {
+            if let Some(node_id) = tree.node_of_window(hwnd) {
                 self.pending_reservation = Some(PendingReservation {
                     workspace_id: ws_id.clone(),
                     node_id,
@@ -257,26 +257,28 @@ impl TwmState {
                         node.kind = TwmNodeKind::Stack;
                         node.stack_policy = TwmStackPolicy::Manual;
                     }
-                    node.windows.push(window.address());
-                    node.active_window = Some(window.address());
+                    let identity = window.id();
+                    node.windows.push(identity);
+                    node.active_window = Some(identity);
                     tree.window_map.insert(
-                        window.address(),
+                        window.handle(),
                         WindowLocation::Tiled(node_id, std::time::SystemTime::now()),
                     );
                 } else {
-                    let residual = tree.add_to_tiled(window.address());
+                    let residual = tree.add_to_tiled(window.id());
                     for w in residual {
-                        tree.add_to_floating(w);
+                        tree.add_to_floating(w.hwnd);
                     }
                 }
             }
             side => {
                 let tree = self.get_or_insert_tree_mut(workspace_id);
-                let placed = tree.split_node_for_reservation(node_id, side, window.address());
+                let identity = window.id();
+                let placed = tree.split_node_for_reservation(node_id, side, identity);
                 if !placed {
-                    let residual = tree.add_to_tiled(window.address());
+                    let residual = tree.add_to_tiled(identity);
                     for w in residual {
-                        tree.add_to_floating(w);
+                        tree.add_to_floating(w.hwnd);
                     }
                 }
             }
@@ -299,21 +301,29 @@ impl TwmState {
             return;
         }
 
-        let residual = tree.add_to_tiled(window.address());
+        let residual = tree.add_to_tiled(window.id());
         for w in residual {
-            tree.add_to_floating(w);
-            twm_set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+            tree.add_to_floating(w.hwnd);
+            let residual_window = Window::from(w.hwnd);
+            twm_set_rect_to_float_initial_size(&residual_window, &residual_window.monitor())
+                .log_error();
         }
     }
 
+    /// The window could be already destroyed, so it is only used by handle here.
     pub fn remove(&mut self, window: &Window) {
-        let window_id = window.address();
+        let hwnd = window.handle();
         for tree in self.state.workspaces.values_mut() {
-            if tree.contains(&window_id) {
-                let residual = tree.remove_window(&window_id);
+            if tree.contains(hwnd) {
+                let residual = tree.remove_window(hwnd);
                 for w in residual {
-                    tree.add_to_floating(w);
-                    twm_set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+                    tree.add_to_floating(w.hwnd);
+                    let residual_window = Window::from(w.hwnd);
+                    twm_set_rect_to_float_initial_size(
+                        &residual_window,
+                        &residual_window.monitor(),
+                    )
+                    .log_error();
                 }
                 break;
             }
@@ -338,12 +348,12 @@ impl TwmState {
         &mut self,
         window: &Window,
     ) -> Option<(WorkspaceId, &mut TwmRuntimeTree)> {
-        let window_id = window.address();
+        let hwnd = window.handle();
         let workspace_id = self
             .state
             .workspaces
             .iter()
-            .find(|(_, t)| t.contains(&window_id))
+            .find(|(_, t)| t.contains(hwnd))
             .map(|(id, _)| id.clone())?;
         let tree = self.state.workspaces.get_mut(&workspace_id)?;
         Some((workspace_id, tree))
@@ -351,9 +361,9 @@ impl TwmState {
 
     /// Updates cached `node.rect` for a window when layout positions are applied.
     /// Uses `try_lock` internally; call this from non-lock-holding contexts.
-    pub fn set_cached_node_rect(&mut self, window_id: isize, rect: Rect) {
+    pub fn set_cached_node_rect(&mut self, hwnd: WindowHandle, rect: Rect) {
         for tree in self.state.workspaces.values_mut() {
-            if let Some(node_id) = tree.node_of_window(&window_id)
+            if let Some(node_id) = tree.node_of_window(hwnd)
                 && let Some(node) = tree.nodes.get_mut(&node_id)
             {
                 node.rect = Some(rect);
@@ -369,13 +379,13 @@ impl TwmState {
         percentage: f32,
         relative: bool,
     ) -> Result<()> {
-        let window_id = window.address();
+        let hwnd = window.handle();
 
         let workspace_id = self
             .state
             .workspaces
             .iter()
-            .find(|(_, t)| t.contains(&window_id))
+            .find(|(_, t)| t.contains(hwnd))
             .map(|(id, _)| id.clone());
 
         let Some(workspace_id) = workspace_id else {
@@ -384,7 +394,7 @@ impl TwmState {
 
         let tree = self.state.workspaces.get(&workspace_id).unwrap();
 
-        if tree.is_floating(&window_id) {
+        if tree.is_floating(hwnd) {
             let mut rect = window.inner_rect()?;
             match axis {
                 Axis::Horizontal | Axis::Left | Axis::Right => {
@@ -403,11 +413,11 @@ impl TwmState {
                 }
             }
             let mut positions = HashMap::new();
-            positions.insert(window_id, rect);
+            positions.insert(hwnd, rect);
             return set_app_windows_positions(positions);
         }
 
-        let Some(leaf_node_id) = tree.node_of_window(&window_id) else {
+        let Some(leaf_node_id) = tree.node_of_window(hwnd) else {
             return Err("Trying to change size of an unmanaged window".into());
         };
 
@@ -501,7 +511,7 @@ impl TwmState {
         for w in windows {
             let residuals = new_layout.add_to_tiled(w);
             for r in residuals {
-                new_layout.add_to_floating(r);
+                new_layout.add_to_floating(r.hwnd);
             }
         }
 
@@ -553,13 +563,13 @@ impl TwmState {
         if a == b {
             return Ok(());
         }
-        log::trace!("swapping windows ({:x}, {:x})", a.address(), b.address());
+        log::trace!("swapping windows ({:x}, {:x})", a.handle(), b.handle());
         let tree = self
             .state
             .workspaces
             .get_mut(workspace_id)
             .ok_or("Workspace not found")?;
-        tree.swap_nodes_by_windows(a.address(), b.address());
+        tree.swap_nodes_by_windows(a.handle(), b.handle());
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
@@ -568,19 +578,19 @@ impl TwmState {
         &self,
         rect: &Rect,
         workspace_id: &WorkspaceId,
-    ) -> Option<isize> {
+    ) -> Option<WindowHandle> {
         let tree = self.state.workspaces.get(workspace_id)?;
         let node_id = tree.get_nearest_leaf_to_rect(rect)?;
-        tree.face_of_node(node_id)
+        tree.face_of_node(node_id).map(|face| face.hwnd)
     }
 
     pub fn get_nearest_tiled_window_at_side(
         &self,
-        source_id: isize,
+        source_id: WindowHandle,
         source_rect: &Rect,
         workspace_id: &WorkspaceId,
         side: Direction,
-    ) -> Option<isize> {
+    ) -> Option<WindowHandle> {
         fn horizontal_overlap(a: &Rect, b: &Rect) -> i32 {
             let left = a.left.max(b.left);
             let right = a.right.min(b.right);
@@ -679,7 +689,8 @@ impl TwmState {
             })
             .min_by_key(|&(_, score)| score)
             .and_then(|(node_id, _)| tree.face_of_node(node_id))
-            .filter(|&face_id| face_id != source_id)
+            .map(|face| face.hwnd)
+            .filter(|&face| face != source_id)
     }
 
     pub fn restore_stacks(&self) {
@@ -699,8 +710,8 @@ impl TwmState {
                 }
 
                 if let Some(active) = node.active_window {
-                    MINIMIZED_BY_STACK.remove_sync(&active);
-                    let window = Window::from(active);
+                    MINIMIZED_BY_STACK.remove_sync(&active.hwnd);
+                    let window = Window::from(active.hwnd);
                     // only sanitizes visibility, never activates: focus is the caller's job
                     // (see `reveal_stack_window`).
                     if window.is_minimized() {
@@ -715,8 +726,8 @@ impl TwmState {
 
                     for w in &node.windows {
                         if *w != active {
-                            let _ = MINIMIZED_BY_STACK.insert_sync(*w);
-                            Window::from(*w)
+                            let _ = MINIMIZED_BY_STACK.insert_sync(w.hwnd);
+                            Window::from(w.hwnd)
                                 .set_state(WindowState::ForceMinimized)
                                 .log_error();
                         }
@@ -727,33 +738,39 @@ impl TwmState {
     }
 
     pub fn set_stack_active_window(&mut self, window: &Window) -> Result<()> {
-        let window_id = window.address();
+        let hwnd = window.handle();
         let Some((_ws_id, tree)) = self.get_tree_for_window_mut(window) else {
             return Ok(());
         };
-        let Some(node_id) = tree.node_of_window(&window_id) else {
+        let Some(node_id) = tree.node_of_window(hwnd) else {
             return Ok(());
         };
         let node = tree.nodes.get_mut(&node_id).ok_or("Node not found")?;
 
         // Already active: also covers the `WindowUnminimizedByUser` echo of `restore_stacks`
         // restoring it, which must not steal the focus.
-        if node.kind != TwmNodeKind::Stack || node.active_window == Some(window_id) {
+        if node.kind != TwmNodeKind::Stack || node.active_window.is_some_and(|w| w.hwnd == hwnd) {
             return Ok(());
         }
 
-        node.active_window = Some(window_id);
+        let identity = node
+            .windows
+            .iter()
+            .find(|w| w.hwnd == hwnd)
+            .copied()
+            .ok_or("Window not in its node")?;
+        node.active_window = Some(identity);
         Self::reveal_stack_window(window);
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
 
     pub fn cycle_stack(&mut self, window: &Window, way: StepWay) -> Result<()> {
-        let window_id = window.address();
+        let hwnd = window.handle();
         let Some((_ws_id, tree)) = self.get_tree_for_window_mut(window) else {
             return Ok(());
         };
-        let Some(node_id) = tree.node_of_window(&window_id) else {
+        let Some(node_id) = tree.node_of_window(hwnd) else {
             return Ok(());
         };
         let node = tree.nodes.get_mut(&node_id).ok_or("Node not found")?;
@@ -777,7 +794,7 @@ impl TwmState {
         let next = node.windows[next_idx];
         node.active_window = Some(next);
 
-        Self::reveal_stack_window(&Window::from(next));
+        Self::reveal_stack_window(&Window::from(next.hwnd));
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }
@@ -785,7 +802,7 @@ impl TwmState {
     /// Restores and focuses the new active window of a stack. The siblings are minimized
     /// afterwards by [`Self::restore_stacks`] on the `Changed` event.
     fn reveal_stack_window(window: &Window) {
-        MINIMIZED_BY_STACK.remove_sync(&window.address());
+        MINIMIZED_BY_STACK.remove_sync(&window.handle());
         window.unminimize().log_error();
         window.focus().log_error();
     }

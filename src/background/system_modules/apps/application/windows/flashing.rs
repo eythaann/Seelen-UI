@@ -16,7 +16,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-use seelen_core::system_state::WindowAttention;
+use seelen_core::system_state::{WindowAttention, WindowHandle};
 use windows::Win32::UI::WindowsAndMessaging::{HSHELL_HIGHBIT, HSHELL_REDRAW};
 
 use crate::{
@@ -34,8 +34,8 @@ const HSHELL_FLASH: u32 = HSHELL_REDRAW | HSHELL_HIGHBIT;
 const FLASH_END_GRACE: Duration = Duration::from_millis(1200);
 
 enum FlashMsg {
-    On(isize),
-    Redraw(isize),
+    On(WindowHandle),
+    Redraw(WindowHandle),
 }
 
 struct ActiveFlash {
@@ -53,11 +53,15 @@ impl ActiveFlash {
 /// Pure state machine over the shell messages, returns the attention changes to apply.
 #[derive(Default)]
 struct FlashTracker {
-    active: HashMap<isize, ActiveFlash>,
+    active: HashMap<WindowHandle, ActiveFlash>,
 }
 
 impl FlashTracker {
-    fn on_flash(&mut self, hwnd: isize, now: Instant) -> Option<(isize, WindowAttention)> {
+    fn on_flash(
+        &mut self,
+        hwnd: WindowHandle,
+        now: Instant,
+    ) -> Option<(WindowHandle, WindowAttention)> {
         match self.active.get_mut(&hwnd) {
             Some(flash) => {
                 flash.last_toggle = now;
@@ -77,7 +81,7 @@ impl FlashTracker {
         }
     }
 
-    fn on_redraw(&mut self, hwnd: isize, now: Instant) {
+    fn on_redraw(&mut self, hwnd: WindowHandle, now: Instant) {
         // a redraw of a window that is not flashing is not related to attention
         if let Some(flash) = self.active.get_mut(&hwnd) {
             flash.last_toggle = now;
@@ -89,7 +93,7 @@ impl FlashTracker {
         self.active.values().map(ActiveFlash::ends_at).min()
     }
 
-    fn on_timeout(&mut self, now: Instant) -> Vec<(isize, WindowAttention)> {
+    fn on_timeout(&mut self, now: Instant) -> Vec<(WindowHandle, WindowAttention)> {
         let mut changes = Vec::new();
         self.active.retain(|hwnd, flash| {
             if flash.ends_at() > now {
@@ -124,7 +128,7 @@ pub fn spawn_flash_tracking(on_event: EventCallback) {
         Ok(())
     });
 
-    let set_attention = move |hwnd: isize, attention: WindowAttention| {
+    let set_attention = move |hwnd: WindowHandle, attention: WindowAttention| {
         on_event(AppsSysEvent::Changed {
             hwnd,
             change: WindowChange::Attention { attention },
@@ -161,7 +165,7 @@ pub fn spawn_flash_tracking(on_event: EventCallback) {
 mod tests {
     use super::*;
 
-    const HWND: isize = 0x1234;
+    const HWND: WindowHandle = 0x1234;
     const TOGGLE: Duration = Duration::from_millis(530);
 
     /// feeds a flash of `toggles` messages starting with `HSHELL_FLASH`, returns the time of the last one

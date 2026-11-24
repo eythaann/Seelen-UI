@@ -4,7 +4,7 @@ use std::{
     time::Duration,
 };
 
-use seelen_core::system_state::{SysTrayIcon, SystrayIconAction};
+use seelen_core::system_state::{SysTrayIcon, SystrayIconAction, WindowHandle};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     UI::{
@@ -56,7 +56,7 @@ impl TrayState {
                     None => {
                         icon_data.window_handle.is_some()
                             && icon_data.uid.is_some()
-                            && icon.window_handle == icon_data.window_handle
+                            && icon.window_handle.map(|w| w.hwnd) == icon_data.window_handle
                             && icon.uid == icon_data.uid
                     }
                 })
@@ -76,7 +76,7 @@ impl TrayState {
         self.icons.retain(|(id, icon)| {
             let alive = icon
                 .window_handle
-                .is_none_or(|handle| self.is_owner_alive(id, handle));
+                .is_none_or(|handle| self.is_owner_alive(id, handle.hwnd));
             if !alive {
                 log::trace!("Tray icon removed, its window no longer exists: {}", id);
                 removed.push(id.clone());
@@ -91,7 +91,7 @@ impl TrayState {
 
     /// Whether the icon's window still exists and still belongs to the process
     /// that registered the icon (window handles can be recycled).
-    fn is_owner_alive(&self, session_id: &str, handle: isize) -> bool {
+    fn is_owner_alive(&self, session_id: &str, handle: WindowHandle) -> bool {
         if !WindowsApi::is_window(HWND(handle as _)) {
             return false;
         }
@@ -102,7 +102,7 @@ impl TrayState {
     }
 
     /// Remembers which process owns the icon's window.
-    fn track_owner(&self, session_id: &str, handle: isize) {
+    fn track_owner(&self, session_id: &str, handle: WindowHandle) {
         match window_pid(handle) {
             Some(pid) => {
                 self.owners.upsert(session_id.to_string(), pid);
@@ -205,9 +205,9 @@ impl TrayState {
         }
 
         if let Some(window_handle) = icon_data.window_handle
-            && icon.window_handle != Some(window_handle)
+            && icon.window_handle.map(|w| w.hwnd) != Some(window_handle)
         {
-            icon.window_handle = Some(window_handle);
+            icon.window_handle = Some(Window::from(window_handle).id());
             self.track_owner(&icon.session_id, window_handle);
         }
 
@@ -303,7 +303,7 @@ impl TrayState {
             registry_key,
             executable_path,
             uid: icon_data.uid,
-            window_handle: icon_data.window_handle,
+            window_handle: icon_data.window_handle.map(|h| Window::from(h).id()),
             guid: icon_data.guid,
             tooltip: icon_data.tooltip.clone().unwrap_or_default(),
             icon_handle: icon_data.icon_handle,
@@ -318,7 +318,7 @@ impl TrayState {
         };
 
         if let Some(window_handle) = icon.window_handle {
-            self.track_owner(&icon.session_id, window_handle);
+            self.track_owner(&icon.session_id, window_handle.hwnd);
         }
         self.icons.upsert(icon.session_id.clone(), icon.clone());
         Some(SystrayEvent::IconAdd(icon))
@@ -343,7 +343,7 @@ impl TrayState {
             icons
                 .values()
                 .filter(|icon| {
-                    icon.window_handle == Some(window_handle)
+                    icon.window_handle.map(|w| w.hwnd) == Some(window_handle)
                         && icon.guid.is_none()
                         && !icon.is_visible
                 })
@@ -448,7 +448,8 @@ impl TrayState {
         // Early return if we don't have the required fields.
         let window_handle = icon
             .window_handle
-            .ok_or("Inoperable icon, missing window handle")?;
+            .ok_or("Inoperable icon, missing window handle")?
+            .hwnd;
         let uid = icon.uid.ok_or("Inoperable icon, missing uid")?;
         let callback = icon
             .callback_message
@@ -517,7 +518,7 @@ impl TrayState {
 
     /// Sends a message to the systray icon window.
     fn notify_icon(
-        window_handle: isize,
+        window_handle: WindowHandle,
         callback: u32,
         uid: u32,
         version: Option<u32>,
@@ -562,7 +563,7 @@ struct SavedIconImage {
 }
 
 /// Returns the id of the process that owns the window, if it exists.
-fn window_pid(handle: isize) -> Option<u32> {
+fn window_pid(handle: WindowHandle) -> Option<u32> {
     let mut pid = 0;
     unsafe { GetWindowThreadProcessId(HWND(handle as _), Some(&mut pid)) };
     (pid != 0).then_some(pid)
@@ -626,7 +627,7 @@ fn has_change(icon: &SysTrayIcon, data: &IconEventData) -> bool {
     data.uid.is_some_and(|uid| icon.uid != Some(uid))
         || data
             .window_handle
-            .is_some_and(|handle| icon.window_handle != Some(handle))
+            .is_some_and(|handle| icon.window_handle.map(|w| w.hwnd) != Some(handle))
         || data.guid.is_some_and(|guid| icon.guid != Some(guid))
         || data.tooltip.as_ref().is_some_and(|t| &icon.tooltip != t)
         || data

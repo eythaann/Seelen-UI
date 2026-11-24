@@ -1,4 +1,8 @@
-use seelen_core::{resource::WidgetId, state::WmDragBehavior, system_state::ZOrder};
+use seelen_core::{
+    resource::WidgetId,
+    state::WmDragBehavior,
+    system_state::{WindowHandle, ZOrder},
+};
 
 use crate::{
     error::{Result, ResultLogExt},
@@ -100,9 +104,9 @@ impl WindowManagerV2 {
 
     /// Moves the visible tiled windows of the workspace just below the focused one,
     /// and then the overlay webviews to the top so they are drawn above the layout.
-    fn bring_layout_to_front(focused: &Window, tiled: &[isize]) {
+    fn bring_layout_to_front(focused: &Window, tiled: &[WindowHandle]) {
         for &hwnd in tiled {
-            if hwnd != focused.address() {
+            if hwnd != focused.handle() {
                 Window::from(hwnd).place_below(focused).log_error();
             }
         }
@@ -138,7 +142,11 @@ impl WindowManagerV2 {
                 let tiled = if state.is_tiled(&window) {
                     state
                         .get_tree_for_window_mut(&window)
-                        .map(|(_, tree)| tree.iter().filter_map(|n| n.active_window).collect())
+                        .map(|(_, tree)| {
+                            tree.iter()
+                                .filter_map(|n| n.active_window.map(|w| w.hwnd))
+                                .collect()
+                        })
                         .unwrap_or_default()
                 } else {
                     Vec::new()
@@ -155,11 +163,11 @@ impl WindowManagerV2 {
                 Self::force_retiling()?;
             }
             WindowEvent::Minimized => {
-                if MINIMIZED_BY_WORKSPACES.contains_sync(&window.address()) {
+                if MINIMIZED_BY_WORKSPACES.contains_sync(&window.handle()) {
                     return Ok(());
                 }
 
-                if MINIMIZED_BY_STACK.contains_sync(&window.address()) {
+                if MINIMIZED_BY_STACK.contains_sync(&window.handle()) {
                     return Ok(());
                 }
 

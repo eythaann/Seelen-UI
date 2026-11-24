@@ -11,7 +11,7 @@ use std::{
 
 use seelen_core::{
     rect::Rect,
-    system_state::{Relaunch, ZOrder},
+    system_state::{Relaunch, WindowHandle, ZOrder},
 };
 use slu_ipc::messages::SvcAction;
 use windows::{
@@ -64,8 +64,8 @@ impl NativeWindow {
         WindowEnumerator::new().map(Self)
     }
 
-    pub fn address(&self) -> isize {
-        self.0.0 as isize
+    pub fn handle(&self) -> WindowHandle {
+        self.0.0 as WindowHandle
     }
 
     pub fn is_electron(&self) -> bool {
@@ -180,7 +180,7 @@ impl NativeWindow {
             WindowsApi::show_window(self.0, command)
         } else {
             ServicePipe::request(SvcAction::ShowWindow {
-                hwnd: self.address(),
+                hwnd: self.handle(),
                 command: command.0,
             })
         }
@@ -192,7 +192,7 @@ impl NativeWindow {
             WindowsApi::show_window_async(self.0, command)
         } else {
             ServicePipe::request(SvcAction::ShowWindowAsync {
-                hwnd: self.address(),
+                hwnd: self.handle(),
                 command: command.0,
             })
         }
@@ -204,7 +204,7 @@ impl NativeWindow {
             WindowsApi::set_position(self.0, None, &to_win32_rect(rect), flags)
         } else {
             ServicePipe::request(SvcAction::SetWindowPosition {
-                hwnd: self.address(),
+                hwnd: self.handle(),
                 rect: rect.clone(),
                 flags: flags.0,
             })
@@ -243,7 +243,7 @@ impl NativeWindow {
         if Self::get_foregrounded().is_manageable_from_unelevated() {
             return WindowsApi::set_foreground(self.0);
         }
-        ServicePipe::request_sync(SvcAction::SetForeground(self.address()))?;
+        ServicePipe::request_sync(SvcAction::SetForeground(self.handle()))?;
         if WindowsApi::get_foreground_window() == self.0 {
             HookManager::send((WindowEvent::Foregrounded, Window(*self)));
             Ok(())
@@ -368,8 +368,8 @@ impl NativeWindow {
     }
 }
 
-impl From<isize> for NativeWindow {
-    fn from(address: isize) -> Self {
+impl From<WindowHandle> for NativeWindow {
+    fn from(address: WindowHandle) -> Self {
         Self(HWND(address as _))
     }
 }

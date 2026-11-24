@@ -144,7 +144,7 @@ slu_commands_declaration! {
     MoveWindowToWorkspace =
         @webview()
         @fallible()
-        move_window_to_workspace(hwnd: isize, workspace_id: WorkspaceId),
+        move_window_to_workspace(hwnd: WindowIdentity, workspace_id: WorkspaceId),
 
     // wallpaper
     WallpaperNext = wallpaper_next(),
@@ -354,7 +354,7 @@ slu_commands_declaration! {
     GetSelfWindowId =
         @webview()
         @fallible()
-        get_self_window_handle() -> isize,
+        get_self_window_handle() -> WindowIdentity,
     NormalizeSelfDevicePixelRatio =
         @webview()
         @fallible()
@@ -400,8 +400,8 @@ slu_commands_declaration! {
     GetUser = get_user() -> User,
     GetUserFolderContent = get_user_folder_content(folder_type: FolderType) -> Vec<std::path::PathBuf>,
     GetUserAppWindows = get_user_app_windows() -> Vec<UserAppWindow>,
-    GetUserAppWindowsPreviews = get_user_app_windows_previews() -> std::collections::HashMap<isize, UserAppWindowPreview>,
-    GetUserAppWindowsColors = get_user_app_windows_colors() -> std::collections::HashMap<isize, UserAppWindowColors>,
+    GetUserAppWindowsPreviews = get_user_app_windows_previews() -> std::collections::HashMap<WindowIdentity, UserAppWindowPreview>,
+    GetUserAppWindowsColors = get_user_app_windows_colors() -> std::collections::HashMap<WindowIdentity, UserAppWindowColors>,
     UpdateWindowPreviews =
         @webview()
         @fallible()
@@ -475,15 +475,15 @@ slu_commands_declaration! {
     WegCloseApp =
         @webview()
         @fallible()
-        weg_close_app(hwnd: isize),
+        weg_close_app(hwnd: WindowIdentity),
     WegKillApp =
         @webview()
         @fallible()
-        weg_kill_app(hwnd: isize),
+        weg_kill_app(hwnd: WindowIdentity),
     WegToggleWindowState =
         @webview()
         @fallible()
-        weg_toggle_window_state(hwnd: isize, was_focused: bool),
+        weg_toggle_window_state(hwnd: WindowIdentity, was_focused: bool),
     WegPinItem =
         @webview()
         @fallible()
@@ -503,11 +503,11 @@ slu_commands_declaration! {
     SetAppWindowsPositions =
         @webview()
         @fallible()
-        set_app_windows_positions(positions: std::collections::HashMap<isize, Rect>),
+        set_app_windows_positions(positions: std::collections::HashMap<WindowIdentity, Rect>),
     WmSetStackActiveWindow =
         @webview()
         @fallible()
-        wm_set_stack_active_window(hwnd: isize),
+        wm_set_stack_active_window(hwnd: WindowIdentity),
 
     // Network
     WlanScan = wlan_scan(),

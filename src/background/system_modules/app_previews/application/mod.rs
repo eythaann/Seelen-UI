@@ -8,7 +8,8 @@ use std::{
 };
 
 use seelen_core::system_state::{
-    LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
+    LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowHandle,
+    WindowIdentity, WindowPreviewTarget,
 };
 use slu_utils::{Debounce, debounce};
 
@@ -39,10 +40,10 @@ static MANAGER: OnceLock<AppPreviewsManager> = OnceLock::new();
 
 pub struct AppPreviewsManager {
     platform: Platform,
-    previews: SyncHashMap<isize, PreviewEntry>,
+    previews: SyncHashMap<WindowHandle, PreviewEntry>,
     /// One-by-one capture queue, processed by a dedicated thread.
-    capture_tx: crossbeam_channel::Sender<isize>,
-    pending: TracedMutex<HashSet<isize>>,
+    capture_tx: crossbeam_channel::Sender<WindowHandle>,
+    pending: TracedMutex<HashSet<WindowHandle>>,
 }
 
 event_manager!(AppPreviewsManager, PreviewsEvent);
@@ -62,7 +63,7 @@ impl AppPreviewsManager {
     }
 
     fn create() -> Self {
-        let (capture_tx, capture_rx) = crossbeam_channel::unbounded::<isize>();
+        let (capture_tx, capture_rx) = crossbeam_channel::unbounded::<WindowHandle>();
         std::thread::Builder::new()
             .name("win-capture-queue".into())
             .spawn(move || {
@@ -86,7 +87,7 @@ impl AppPreviewsManager {
 
     fn init(&mut self) -> Result<()> {
         let apps = UserAppsManager::instance();
-        for hwnd in apps.interactable_windows.map(|w| w.hwnd) {
+        for hwnd in apps.interactable_windows.map(|w| w.hwnd.hwnd) {
             self.register_window(hwnd);
         }
 
@@ -117,7 +118,7 @@ impl AppPreviewsManager {
         })
     }
 
-    fn register_window(&self, hwnd: isize) {
+    fn register_window(&self, hwnd: WindowHandle) {
         let capture = debounce(
             move |_| {
                 Self::instance().queue_capture(hwnd);
@@ -137,11 +138,11 @@ impl AppPreviewsManager {
     }
 
     /// Only the registered (interactable) windows are captured.
-    fn request_capture(&self, hwnd: isize) {
+    fn request_capture(&self, hwnd: WindowHandle) {
         self.previews.get(&hwnd, |entry| entry.capture.call(()));
     }
 
-    fn queue_capture(&self, hwnd: isize) {
+    fn queue_capture(&self, hwnd: WindowHandle) {
         let inserted = self.pending.lock().insert(hwnd);
         if inserted && self.capture_tx.send(hwnd).is_err() {
             self.pending.lock().remove(&hwnd);
@@ -149,7 +150,7 @@ impl AppPreviewsManager {
     }
 
     /// Refresh only visible snapshot fallbacks, at most once per [`FALLBACK_REFRESH`].
-    pub fn refresh_fallback(&self, hwnd: isize) {
+    pub fn refresh_fallback(&self, hwnd: WindowHandle) {
         let mut requested = false;
         self.previews.get(&hwnd, |entry| {
             if entry
@@ -165,7 +166,7 @@ impl AppPreviewsManager {
         }
     }
 
-    fn capture(&self, hwnd: isize) -> Result<()> {
+    fn capture(&self, hwnd: WindowHandle) -> Result<()> {
         let Some(image) = self.platform.capture(hwnd)? else {
             return Ok(());
         };
@@ -201,32 +202,34 @@ impl AppPreviewsManager {
 
     pub fn update_live(
         &self,
-        owner: isize,
+        owner: WindowHandle,
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
     ) -> Result<LiveWindowPreviewState> {
         self.platform.update_live(owner, session, targets, opacity)
     }
-    pub fn clear_live(&self, owner: isize, session: &str) {
+    pub fn clear_live(&self, owner: WindowHandle, session: &str) {
         self.platform.clear_live(owner, session);
     }
 
-    pub fn previews(&self) -> HashMap<isize, UserAppWindowPreview> {
+    pub fn previews(&self) -> HashMap<WindowIdentity, UserAppWindowPreview> {
+        let identities = interactable_identities();
         let mut map = HashMap::new();
         self.previews.for_each(|(k, v)| {
-            if let Some(preview) = &v.preview {
-                map.insert(*k, preview.clone());
+            if let (Some(id), Some(preview)) = (identities.get(k), &v.preview) {
+                map.insert(*id, preview.clone());
             }
         });
         map
     }
 
-    pub fn colors(&self) -> HashMap<isize, UserAppWindowColors> {
+    pub fn colors(&self) -> HashMap<WindowIdentity, UserAppWindowColors> {
+        let identities = interactable_identities();
         let mut map = HashMap::new();
         self.previews.for_each(|(k, v)| {
-            if let Some(colors) = &v.colors {
-                map.insert(*k, colors.clone());
+            if let (Some(id), Some(colors)) = (identities.get(k), &v.colors) {
+                map.insert(*id, colors.clone());
             }
         });
         map
@@ -238,4 +241,14 @@ struct PreviewEntry {
     colors: Option<UserAppWindowColors>,
     capture: Debounce<()>,
     requested: Option<Instant>,
+}
+
+/// Identities of the tracked app windows by handle, taken while they were alive: a preview can
+/// outlive its window until it is cleaned, and a destroyed window can't be queried anymore.
+fn interactable_identities() -> HashMap<WindowHandle, WindowIdentity> {
+    UserAppsManager::instance()
+        .interactable_windows
+        .map(|w| (w.hwnd.hwnd, w.hwnd))
+        .into_iter()
+        .collect()
 }

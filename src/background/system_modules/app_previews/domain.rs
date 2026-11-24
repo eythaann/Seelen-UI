@@ -1,7 +1,8 @@
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
 use seelen_core::system_state::{
-    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowPreviewTarget,
+    Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowHandle,
+    WindowPreviewTarget,
 };
 
 use crate::error::Result;
@@ -24,34 +25,34 @@ pub trait AppPreviewsSystem: Sized + Send + Sync {
 
     /// Captures the content of the window, without its frame shadow. `None` when it can't
     /// be captured now (minimized, or not accessible from this process).
-    fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>>;
+    fn capture(&self, hwnd: WindowHandle) -> Result<Option<RgbaImage>>;
 
     /// Releases live surfaces and restores any temporary window during shutdown.
     fn clear_native_previews(&self);
 
     fn update_live(
         &self,
-        owner: isize,
+        owner: WindowHandle,
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
     ) -> Result<LiveWindowPreviewState>;
-    fn clear_live(&self, owner: isize, session: &str);
+    fn clear_live(&self, owner: WindowHandle, session: &str);
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PreviewsSysEvent {
     /// The title or placement changed, so probably its content too.
-    WindowChanged { hwnd: isize },
+    WindowChanged { hwnd: WindowHandle },
     /// The window was restored, its content is drawn a bit later.
-    WindowRestored { hwnd: isize },
+    WindowRestored { hwnd: WindowHandle },
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PreviewsEvent {
-    Captured { hwnd: isize },
-    ColorsUpdated { hwnd: isize },
-    Cleaned { hwnd: isize },
+    Captured { hwnd: WindowHandle },
+    ColorsUpdated { hwnd: WindowHandle },
+    Cleaned { hwnd: WindowHandle },
 }
 
 /// Scales down big captures, as they are only shown as thumbnails.

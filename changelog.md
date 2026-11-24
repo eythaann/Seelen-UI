@@ -2,6 +2,11 @@
 
 ## [2.8.12-dev]
 
+### breaking changes
+
+- all window identifiers (window handles) are now strings instead of numbers. As they are ids, no operations should be
+  done with them, so few consumers should be affected.
+
 ## [2.8.11]
 
 ### features

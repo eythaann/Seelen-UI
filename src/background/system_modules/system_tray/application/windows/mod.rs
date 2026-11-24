@@ -7,7 +7,7 @@ use std::{
     sync::{Arc, OnceLock, Weak},
 };
 
-use seelen_core::system_state::{SysTrayIcon, SystrayIconAction};
+use seelen_core::system_state::{SysTrayIcon, SystrayIconAction, WindowHandle};
 use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 use winreg::{
     RegKey, RegValue,
@@ -57,7 +57,7 @@ impl SystemTraySystem for WindowsSystemTray {
         let state = self.state.clone();
         HookManager::subscribe(move |(event, window)| {
             if event == WindowEvent::Destroyed {
-                state.on_window_destroyed(window.address());
+                state.on_window_destroyed(window.handle());
             }
         });
 
@@ -113,12 +113,12 @@ impl TrayState {
     }
 
     /// Drops the icons owned by a window that was just destroyed.
-    fn on_window_destroyed(&self, address: isize) {
+    fn on_window_destroyed(&self, address: WindowHandle) {
         self.pending
             .retain(|(_, pending)| pending.data.window_handle != Some(address));
         let owns_icon = self
             .icons
-            .any(|(_, icon)| icon.window_handle == Some(address));
+            .any(|(_, icon)| icon.window_handle.is_some_and(|w| w.hwnd == address));
         if owns_icon && self.prune_dead_icons() {
             self.notify_changed();
         }

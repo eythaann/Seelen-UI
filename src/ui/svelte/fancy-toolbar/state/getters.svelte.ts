@@ -27,7 +27,7 @@ Settings.onChange((s) => (settings.value = s));
 export const interactables = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 
-export const windowsColors = lazyRune<Record<number, UserAppWindowColors>>(
+export const windowsColors = lazyRune<Record<string, UserAppWindowColors>>(
   () => invoke(SeelenCommand.GetUserAppWindowsColors),
 );
 subscribe(SeelenEvent.UserAppWindowsColorsChanged, windowsColors.setByPayload);

@@ -6,7 +6,7 @@ use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU32, Ordering};
 
 use seelen_core::state::{DesktopWorkspace, VirtualDesktopMonitor, VirtualDesktops, WorkspaceId};
-use seelen_core::system_state::MonitorId;
+use seelen_core::system_state::{MonitorId, WindowHandle, WindowIdentity};
 
 use crate::error::{Result, ResultLogExt};
 use crate::event_manager;
@@ -29,7 +29,7 @@ static WORKSPACES_MANAGER: LazyLock<VdManager> = LazyLock::new(VdManager::create
 /// reason (manually by the user, or by the WM as an inactive stack member) are
 /// left out, so `restore()` knows not to touch them when their workspace comes
 /// back — it only auto-`SW_RESTORE`s windows found in this set.
-pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<isize>> =
+pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<WindowHandle>> =
     LazyLock::new(scc::HashSet::new);
 
 /// Addresses of windows that `restore()` is about to (or just did) `SW_RESTORE`
@@ -37,7 +37,7 @@ pub static MINIMIZED_BY_WORKSPACES: LazyLock<scc::HashSet<isize>> =
 /// to recognize "this unminimize was caused by our own workspace restore" and
 /// ignore it, instead of misreading it as the user unminimizing the window
 /// (which would otherwise re-trigger another `switch_to_id` in a loop).
-static RESTORED_EVENT_QUEUE: LazyLock<SyncVec<isize>> = LazyLock::new(SyncVec::new);
+static RESTORED_EVENT_QUEUE: LazyLock<SyncVec<WindowHandle>> = LazyLock::new(SyncVec::new);
 
 /// Lock order: `monitors` -> (`pinned` | `workspace_index` | `window_index`) -> UserApps
 /// `interactable_windows`. Never take `monitors` while holding any of the others.
@@ -46,9 +46,9 @@ pub struct VdManager {
 
     /// Only mutated while holding the `monitors` lock, so they never diverge from it.
     pub workspace_index: SyncHashMap<WorkspaceId, MonitorId>,
-    pub window_index: SyncHashMap<isize, WorkspaceId>,
+    pub window_index: SyncHashMap<WindowHandle, WorkspaceId>,
 
-    pub pinned: SyncVec<isize>,
+    pub pinned: SyncVec<WindowIdentity>,
     /// Count of in-flight `switch_to_id` calls. Used instead of a bool so that
     /// concurrent switches (e.g. on different monitors) don't race: the last
     /// one to finish is the only one allowed to clear the "switching" state.
@@ -80,15 +80,22 @@ impl VdManager {
     /// TODO: try to move windows on others native virtual desktops to only one,
     /// or add a warning message to users.
     fn initialize(&mut self) -> Result<()> {
-        // ensure saved windows are still valid.
+        // ensure saved windows are still the same ones (handles can be reused by the OS).
         // todo: check if they are on correct monitor
         self.for_each_workspace(|workspace| {
-            workspace
+            workspace.windows = workspace
                 .windows
-                .retain(|w| Window::from(*w).is_interactable_and_not_hidden());
+                .iter()
+                .filter_map(refresh_stored_identity)
+                .collect();
         });
-        self.pinned
-            .retain(|w| Window::from(*w).is_interactable_and_not_hidden());
+        self.pinned.replace(
+            self.pinned
+                .to_vec()
+                .iter()
+                .filter_map(refresh_stored_identity)
+                .collect(),
+        );
         self.rebuild_indexes();
 
         // restore workspaces state
@@ -99,8 +106,8 @@ impl VdManager {
                         workspace.restore();
                     } else {
                         // allow resume workspaces correctly on change
-                        for addr in &workspace.windows {
-                            let _ = MINIMIZED_BY_WORKSPACES.insert_sync(*addr);
+                        for id in &workspace.windows {
+                            let _ = MINIMIZED_BY_WORKSPACES.insert_sync(id.hwnd);
                         }
                         workspace.hide(true);
                     }
@@ -120,7 +127,7 @@ impl VdManager {
         // Collected first to not hold the interactables lock while taking the monitors lock (see lock order).
         let interactables = UserAppsManager::instance()
             .interactable_windows
-            .map(|data| data.hwnd);
+            .map(|data| data.hwnd.hwnd);
         for hwnd in interactables {
             let window = Window::from(hwnd);
             if !window.is_minimized() {
@@ -176,13 +183,13 @@ impl VdManager {
         });
     }
 
-    pub fn get_workspace_of_window(&self, window_id: isize) -> Option<WorkspaceId> {
+    pub fn get_workspace_of_window(&self, window_id: WindowHandle) -> Option<WorkspaceId> {
         self.window_index.get(&window_id, |x| x.clone())
     }
 
     pub fn workspace_of(&self, window: &Window) -> Result<WorkspaceId> {
         Ok(self
-            .get_workspace_of_window(window.address())
+            .get_workspace_of_window(window.handle())
             .ok_or("This window is not binded to a seelen ui workspace")?)
     }
 
@@ -190,8 +197,8 @@ impl VdManager {
         self.workspace_index.get(workspace_id, |x| x.clone())
     }
 
-    pub fn is_pinned(&self, window_id: &isize) -> bool {
-        self.pinned.contains(window_id)
+    pub fn is_pinned(&self, window_id: &WindowHandle) -> bool {
+        self.pinned.any(|id| &id.hwnd == window_id)
     }
 
     /// Must be called while holding the monitors lock, so indexes never diverge from it.
@@ -207,15 +214,19 @@ impl VdManager {
     }
 
     fn add_to_current_workspace(&self, window: &Window) {
-        let window_id = window.address();
+        let window_id = window.handle();
         // Win32 calls are done before taking the lock
+        if !window.is_window() {
+            return; // already destroyed
+        }
+        let identity = window.id();
         let monitor_id = window.monitor().stable_id();
 
         // Checks and insertion are done under the monitors lock, so this can't interleave
         // with other add/remove/send_to/switch and track the window twice or as a ghost.
         let added = self.monitors.with_lock(|monitors| {
             // A window belongs to one workspace only, don't track it twice.
-            if self.pinned.contains(&window_id) || self.window_index.contains_key(&window_id) {
+            if self.is_pinned(&window_id) || self.window_index.contains_key(&window_id) {
                 return None;
             }
 
@@ -228,7 +239,7 @@ impl VdManager {
             let Ok(monitor_id) = monitor_id else {
                 // As fallback we gonna add the window to the pinned list.
                 // If getting monitor id continues to fail, this won't be able to be unpinned.
-                self.pinned.push(window_id);
+                self.pinned.push(identity);
                 return None;
             };
 
@@ -237,7 +248,7 @@ impl VdManager {
                     .entry(monitor_id.clone())
                     .or_insert_with(VirtualDesktopMonitor::create)
                     .active_workspace_mut();
-                active_workspace.windows.push(window_id);
+                active_workspace.windows.push(identity);
                 active_workspace.id.clone()
             };
 
@@ -257,19 +268,19 @@ impl VdManager {
     }
 
     fn remove(&self, window: &Window) {
-        let window_id = window.address();
+        let window_id = window.handle();
 
         let was_tracked = self.monitors.with_lock(|monitors| {
             let mut was_tracked = self.window_index.remove(&window_id).is_some();
             self.pinned.retain(|w| {
-                let is_it = w == &window_id;
+                let is_it = w.hwnd == window_id;
                 was_tracked |= is_it;
                 !is_it
             });
             for monitor in monitors.values_mut() {
                 for row in monitor.workspaces.rows_mut() {
                     for workspace in row {
-                        workspace.windows.retain(|w| w != &window_id);
+                        workspace.remove(window_id);
                     }
                 }
             }
@@ -341,7 +352,7 @@ impl VdManager {
 
     /// Send a window to a specific workspace
     pub fn send_to(&self, window: &Window, workspace_id: &WorkspaceId) -> Result<()> {
-        let window_id = window.address();
+        let window_id = window.handle();
         let Some(monitor_id) = self.get_monitor_of_workspace(workspace_id) else {
             return Ok(());
         };
@@ -367,20 +378,23 @@ impl VdManager {
             let is_target_active = target_monitor.active_workspace_id() == workspace_id;
 
             // Remove window from current workspace
+            let mut identity = None;
             for monitor in monitors.values_mut() {
                 for row in monitor.workspaces.rows_mut() {
                     for workspace in row {
-                        workspace.windows.retain(|w| w != &window_id);
+                        identity = workspace.remove(window_id).or(identity);
                     }
                 }
             }
+            // not expected, but as before the window still ends on the target workspace
+            let identity = identity.unwrap_or_else(|| window.id());
 
             // Add window to target workspace, existence validated above
             if let Some(target_workspace) = monitors
                 .get_mut(&monitor_id)
                 .and_then(|m| m.workspaces.get_by_id_mut(workspace_id))
             {
-                target_workspace.windows.push(window_id);
+                target_workspace.windows.push(identity);
             }
             self.window_index.upsert(window_id, workspace_id.clone());
 
@@ -439,7 +453,7 @@ impl VdManager {
             self.monitors.with_lock(|monitors| -> Result<_> {
                 let monitor = monitors.get_mut(&monitor_id).ok_or("Monitor not found")?;
                 let previous_active = monitor.active_workspace_id().clone();
-                let before: Vec<(WorkspaceId, Vec<isize>)> = monitor
+                let before: Vec<(WorkspaceId, Vec<WindowIdentity>)> = monitor
                     .workspaces
                     .rows()
                     .iter()
@@ -459,8 +473,8 @@ impl VdManager {
                         continue;
                     }
                     for window in windows {
-                        if let Some(target) = monitor.workspaces.get_by_window_id(window) {
-                            moved_windows.push((window, target.id.clone()));
+                        if let Some(target) = monitor.workspaces.get_by_window_id(window.hwnd) {
+                            moved_windows.push((window.hwnd, target.id.clone()));
                         }
                     }
                     removed_ids.push(id);
@@ -522,10 +536,10 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
         } else {
             WindowState::Minimized
         };
-        for addr in &self.windows {
-            let window = Window::from(*addr);
+        for id in &self.windows {
+            let window = Window::from(id.hwnd);
             if window.is_window() && !window.is_minimized() {
-                let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window.address());
+                let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window.handle());
                 window.set_state(state).log_error();
             }
         }
@@ -533,7 +547,8 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
 
     fn restore(&self) {
         let len = self.windows.len();
-        for (idx, addr) in self.windows.iter().enumerate() {
+        for (idx, id) in self.windows.iter().enumerate() {
+            let addr = &id.hwnd;
             let window = Window::from(*addr);
             let is_minimized = window.is_minimized();
 
@@ -562,12 +577,13 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
 impl VdManager {
     /// Update z-order: move the window to the end of its workspace's list,
     /// so it is the last restored (and focused) when the workspace is restored.
-    fn move_to_top(&self, window_id: isize) {
+    fn move_to_top(&self, window_id: WindowHandle) {
         let mut updated = false;
         self.monitors.for_each(|(_, monitor)| {
-            if let Some(workspace) = monitor.workspaces.get_by_window_id_mut(window_id) {
-                workspace.windows.retain(|w| w != &window_id);
-                workspace.windows.push(window_id);
+            if let Some(workspace) = monitor.workspaces.get_by_window_id_mut(window_id)
+                && let Some(identity) = workspace.remove(window_id)
+            {
+                workspace.windows.push(identity);
                 updated = true;
             }
         });
@@ -578,7 +594,7 @@ impl VdManager {
 
     /// Handles a window unminimized by the user (not by our workspace restore).
     fn on_user_unminimize(window: &Window) -> Result<()> {
-        let window_id = window.address();
+        let window_id = window.handle();
         let manager = Self::instance();
 
         let Ok(workspace_id) = manager.workspace_of(window) else {
@@ -618,7 +634,7 @@ impl VdManager {
     }
 
     fn on_window_event(event: WindowEvent, window: Window) -> Result<()> {
-        let window_id = window.address();
+        let window_id = window.handle();
         match event {
             WindowEvent::Unminimized => {
                 // Check if the window was restored by our workspace system
@@ -701,7 +717,7 @@ impl VdManager {
                 let already_there = manager
                     .monitors
                     .get(&current_monitor_id, |m| {
-                        m.active_workspace().windows.contains(&window_id)
+                        m.active_workspace().contains(window_id)
                     })
                     .unwrap_or(false);
 
@@ -713,4 +729,20 @@ impl VdManager {
         }
         Ok(())
     }
+}
+
+/// Returns the current identity of a stored window, or `None` if it no longer points to the same
+/// window (its handle could have been reused by another one) or the window can no longer be
+/// managed by the workspaces.
+///
+/// Handle-only identities (stored by older versions as plain numbers) can't be validated, so they
+/// are trusted as before and upgraded to the full identity, to be validated on the next runs.
+fn refresh_stored_identity(stored: &WindowIdentity) -> Option<WindowIdentity> {
+    let window = Window::from(stored.hwnd);
+    if !window.is_window() {
+        return None;
+    }
+    let current = window.id();
+    let is_same = stored.is_handle_only() || &current == stored;
+    (is_same && window.is_interactable_and_not_hidden()).then_some(current)
 }

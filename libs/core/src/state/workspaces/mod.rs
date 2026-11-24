@@ -2,7 +2,12 @@ use std::collections::{HashMap, HashSet};
 
 use uuid::Uuid;
 
-use crate::{error::Result, identifier_impl, resource::WallpaperId, system_state::MonitorId};
+use crate::{
+    error::Result,
+    identifier_impl,
+    resource::WallpaperId,
+    system_state::{MonitorId, WindowHandle, WindowIdentity},
+};
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
@@ -11,8 +16,8 @@ use crate::{error::Result, identifier_impl, resource::WallpaperId, system_state:
 pub struct VirtualDesktops {
     /// Workspaces per monitor
     pub monitors: HashMap<MonitorId, VirtualDesktopMonitor>,
-    /// pinned windows will be not affected by switching workspaces
-    pub pinned: Vec<isize>,
+    /// Pinned windows are not affected by switching workspaces.
+    pub pinned: Vec<WindowIdentity>,
     /// true if the system is currently switching workspaces
     pub switching: bool,
 }
@@ -24,9 +29,6 @@ impl VirtualDesktops {
 
         for monitor in self.monitors.values_mut() {
             monitor.sanitize();
-            /* for workspace in &mut monitor.workspaces {
-                workspace.windows.retain(|x| seen.insert(*x));
-            } */
             for row in &mut monitor.workspaces.0 {
                 for workspace in row {
                     workspace.windows.retain(|x| seen.insert(*x));
@@ -295,10 +297,11 @@ impl WorkspaceGrid {
         self.0.get(row)?.get(col)
     }
 
-    pub fn get_by_window_id(&self, window_id: isize) -> Option<&DesktopWorkspace> {
+    /// Finds the workspace containing the window with the given handle.
+    pub fn get_by_window_id(&self, hwnd: WindowHandle) -> Option<&DesktopWorkspace> {
         for row in &self.0 {
             for workspace in row {
-                if workspace.windows.contains(&window_id) {
+                if workspace.contains(hwnd) {
                     return Some(workspace);
                 }
             }
@@ -306,10 +309,10 @@ impl WorkspaceGrid {
         None
     }
 
-    pub fn get_by_window_id_mut(&mut self, window_id: isize) -> Option<&mut DesktopWorkspace> {
+    pub fn get_by_window_id_mut(&mut self, hwnd: WindowHandle) -> Option<&mut DesktopWorkspace> {
         for row in &mut self.0 {
             for workspace in row {
-                if workspace.windows.contains(&window_id) {
+                if workspace.contains(hwnd) {
                     return Some(workspace);
                 }
             }
@@ -348,8 +351,9 @@ pub struct DesktopWorkspace {
     /// react-icon icon name
     pub icon: Option<String>,
     pub wallpaper: Option<WallpaperId>,
+    /// Ordered by last focus (the last one is the most recently focused).
     #[serde(default)]
-    pub windows: Vec<isize>,
+    pub windows: Vec<WindowIdentity>,
 }
 
 impl DesktopWorkspace {
@@ -361,6 +365,17 @@ impl DesktopWorkspace {
             wallpaper: None,
             windows: Vec::new(),
         }
+    }
+
+    /// Whether the window with the given handle belongs to this workspace.
+    pub fn contains(&self, hwnd: WindowHandle) -> bool {
+        self.windows.iter().any(|id| id.hwnd == hwnd)
+    }
+
+    /// Removes the window with the given handle, returning its identity if it was here.
+    pub fn remove(&mut self, hwnd: WindowHandle) -> Option<WindowIdentity> {
+        let idx = self.windows.iter().position(|id| id.hwnd == hwnd)?;
+        Some(self.windows.remove(idx))
     }
 }
 

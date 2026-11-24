@@ -14,7 +14,7 @@ export class NodeUtils {
     }
   }
 
-  static contains(tree: TwmRuntimeTree, nodeId: number, searchingWindow: number): boolean {
+  static contains(tree: TwmRuntimeTree, nodeId: number, searchingWindow: string): boolean {
     const node = tree.nodes[nodeId];
     if (!node) return false;
     switch (node.kind) {
@@ -30,7 +30,7 @@ export class NodeUtils {
   static some(
     tree: TwmRuntimeTree,
     nodeId: number,
-    predicate: (window: number) => boolean,
+    predicate: (window: string) => boolean,
   ): boolean {
     const node = tree.nodes[nodeId];
     if (!node) return false;

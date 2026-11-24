@@ -20,7 +20,7 @@
 
   let container: HTMLDivElement;
   let list: HTMLDivElement;
-  let liveWindows = $state<number[]>([]);
+  let liveWindows = $state<string[]>([]);
   let previewChecked = $state(false);
 
   // Layout is measured only when something invalidates it (scroll, resize, new cards, trigger).
@@ -77,7 +77,7 @@
     candidates = Array.from(list.querySelectorAll<HTMLElement>("[data-preview-hwnd]"), (element) => {
       const rect = element.getBoundingClientRect();
       return {
-        hwnd: Number(element.dataset.previewHwnd),
+        hwnd: element.dataset.previewHwnd!,
         rect: { left: px(rect.left), top: px(rect.top), right: px(rect.right), bottom: px(rect.bottom) },
       };
     });
@@ -105,17 +105,17 @@
     if (opacity < 255) schedule();
   }
 
-  function onClickPreview(hwnd: number): void {
+  function onClickPreview(hwnd: string): void {
     invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
     widget.hide();
   }
 
-  function onClosePreview(e: MouseEvent, hwnd: number): void {
+  function onClosePreview(e: MouseEvent, hwnd: string): void {
     e.stopPropagation();
     invoke(SeelenCommand.WegCloseApp, { hwnd });
   }
 
-  function onAuxClickPreview(e: MouseEvent, hwnd: number): void {
+  function onAuxClickPreview(e: MouseEvent, hwnd: string): void {
     if (e.button === 1) invoke(SeelenCommand.WegCloseApp, { hwnd });
   }
 

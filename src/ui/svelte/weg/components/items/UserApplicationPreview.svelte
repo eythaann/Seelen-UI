@@ -5,7 +5,7 @@
 
   interface Props {
     title: string;
-    hwnd: number;
+    hwnd: string;
   }
 
   let { title, hwnd }: Props = $props();

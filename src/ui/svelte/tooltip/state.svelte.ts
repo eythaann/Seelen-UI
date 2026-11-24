@@ -24,7 +24,7 @@ Widget.self.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) =>
 // As a safety net, close the tooltip whenever the focused app/window changes —
 // that always means the user has moved on, regardless of which window (if any)
 // held OS focus before.
-let focusedAppHwnd = $state<number | null>(null);
+let focusedAppHwnd = $state<string | null>(null);
 subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: focused }) => {
   focusedAppHwnd = focused.hwnd;
 });

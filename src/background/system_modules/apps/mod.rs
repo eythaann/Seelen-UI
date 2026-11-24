@@ -5,7 +5,9 @@ use std::{collections::HashMap, sync::Once};
 
 use seelen_core::{
     handlers::SeelenEvent,
-    system_state::{FocusedApp, UserAppWindow, UserAppWindowColors, UserAppWindowPreview},
+    system_state::{
+        FocusedApp, UserAppWindow, UserAppWindowColors, UserAppWindowPreview, WindowIdentity,
+    },
 };
 
 use crate::{
@@ -61,13 +63,13 @@ impl crate::tauri_handlers::Handlers {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         if targets
             .iter()
-            .any(|target| !get_manager().contains_win(&Window::from(target.hwnd)))
+            .any(|target| !get_manager().contains_win(&Window::from(target.hwnd.hwnd)))
         {
             return Err("A preview source is no longer tracked".into());
         }
         let sources: Vec<_> = targets.iter().map(|target| target.hwnd).collect();
         let status = AppPreviewsManager::instance().update_live(
-            native_window(&webview)?.address(),
+            native_window(&webview)?.handle(),
             session,
             targets,
             opacity,
@@ -75,7 +77,7 @@ impl crate::tauri_handlers::Handlers {
         if status.visible {
             for hwnd in sources {
                 if !status.live.contains(&hwnd) {
-                    AppPreviewsManager::instance().refresh_fallback(hwnd);
+                    AppPreviewsManager::instance().refresh_fallback(hwnd.hwnd);
                 }
             }
         }
@@ -83,7 +85,7 @@ impl crate::tauri_handlers::Handlers {
     }
     pub fn clear_window_previews(webview: tauri::WebviewWindow, session: String) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        AppPreviewsManager::instance().clear_live(native_window(&webview)?.address(), &session);
+        AppPreviewsManager::instance().clear_live(native_window(&webview)?.handle(), &session);
         Ok(())
     }
 
@@ -103,12 +105,12 @@ impl crate::tauri_handlers::Handlers {
         get_manager().interactable_windows.to_vec()
     }
 
-    pub fn get_user_app_windows_previews() -> HashMap<isize, UserAppWindowPreview> {
+    pub fn get_user_app_windows_previews() -> HashMap<WindowIdentity, UserAppWindowPreview> {
         get_manager();
         AppPreviewsManager::instance().previews()
     }
 
-    pub fn get_user_app_windows_colors() -> HashMap<isize, UserAppWindowColors> {
+    pub fn get_user_app_windows_colors() -> HashMap<WindowIdentity, UserAppWindowColors> {
         get_manager();
         AppPreviewsManager::instance().colors()
     }

@@ -5,7 +5,7 @@ use std::{
 
 use seelen_core::{
     rect::Rect,
-    system_state::{LiveWindowPreviewState, WindowPreviewTarget},
+    system_state::{LiveWindowPreviewState, WindowHandle, WindowPreviewTarget},
 };
 use windows::Win32::{
     Foundation::{HWND, RECT},
@@ -35,7 +35,7 @@ impl LivePreviewManager {
 
     pub fn update(
         &self,
-        owner: isize,
+        owner: WindowHandle,
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
@@ -64,17 +64,17 @@ impl LivePreviewManager {
         }
         entry
             .thumbnails
-            .retain(|hwnd, _| targets.iter().any(|target| target.hwnd == *hwnd));
+            .retain(|hwnd, _| targets.iter().any(|target| target.hwnd.hwnd == *hwnd));
 
         let mut live = Vec::new();
         for target in targets {
-            if !valid_rect(&target.rect) || target.hwnd == owner {
+            if !valid_rect(&target.rect) || target.hwnd.hwnd == owner {
                 continue;
             }
-            let thumbnail = match entry.thumbnails.entry(target.hwnd) {
+            let thumbnail = match entry.thumbnails.entry(target.hwnd.hwnd) {
                 std::collections::hash_map::Entry::Occupied(slot) => slot.into_mut(),
                 std::collections::hash_map::Entry::Vacant(slot) => {
-                    match LiveThumbnail::register(owner, target.hwnd) {
+                    match LiveThumbnail::register(owner, target.hwnd.hwnd) {
                         Ok(thumbnail) => slot.insert(thumbnail),
                         Err(_) => continue,
                     }
@@ -86,7 +86,7 @@ impl LivePreviewManager {
             {
                 live.push(target.hwnd);
             } else {
-                entry.thumbnails.remove(&target.hwnd);
+                entry.thumbnails.remove(&target.hwnd.hwnd);
             }
         }
         Ok(LiveWindowPreviewState {
@@ -95,7 +95,7 @@ impl LivePreviewManager {
         })
     }
 
-    pub fn clear(&self, owner: isize, session: &str) {
+    pub fn clear(&self, owner: WindowHandle, session: &str) {
         let mut state = self.state.lock();
         state.prune();
         state
@@ -117,12 +117,12 @@ impl LivePreviewManager {
 
 #[derive(Default)]
 struct LivePreviewState {
-    owners: HashMap<isize, PreviewOwner>,
-    cancelled: VecDeque<(isize, String, Instant)>,
+    owners: HashMap<WindowHandle, PreviewOwner>,
+    cancelled: VecDeque<(WindowHandle, String, Instant)>,
 }
 
 impl LivePreviewState {
-    fn is_cancelled(&self, owner: isize, session: &str) -> bool {
+    fn is_cancelled(&self, owner: WindowHandle, session: &str) -> bool {
         self.cancelled
             .iter()
             .any(|(window, token, _)| *window == owner && token == session)
@@ -142,7 +142,7 @@ impl LivePreviewState {
 
 struct PreviewOwner {
     session: String,
-    thumbnails: HashMap<isize, LiveThumbnail>,
+    thumbnails: HashMap<WindowHandle, LiveThumbnail>,
 }
 
 impl PreviewOwner {
@@ -156,11 +156,11 @@ impl PreviewOwner {
 
 struct LiveThumbnail {
     handle: isize,
-    source: isize,
+    source: WindowHandle,
     last: Option<(Rect, Rect, u8)>,
 }
 impl LiveThumbnail {
-    fn register(owner: isize, source: isize) -> Result<Self> {
+    fn register(owner: WindowHandle, source: WindowHandle) -> Result<Self> {
         let handle = unsafe { DwmRegisterThumbnail(HWND(owner as _), HWND(source as _))? };
         Ok(Self {
             handle,
@@ -227,7 +227,7 @@ fn bounded_targets(targets: Vec<WindowPreviewTarget>) -> Vec<WindowPreviewTarget
     selected
 }
 
-fn is_visible(window: isize) -> bool {
+fn is_visible(window: WindowHandle) -> bool {
     unsafe { IsWindowVisible(HWND(window as _)) }.as_bool()
 }
 
@@ -246,7 +246,7 @@ fn native_rect(rect: &Rect) -> RECT {
         bottom: rect.bottom,
     }
 }
-fn source_bounds(source: isize, width: i32, height: i32) -> Rect {
+fn source_bounds(source: WindowHandle, width: i32, height: i32) -> Rect {
     let full = Rect {
         left: 0,
         top: 0,
@@ -335,6 +335,7 @@ fn clipped_thumbnail(bounds: &Rect, full: &Rect, clip: Option<&Rect>) -> Option<
 #[cfg(test)]
 mod tests {
     use super::*;
+    use seelen_core::system_state::WindowIdentity;
 
     #[test]
     fn clipped_edges_map_into_the_original_source_without_zooming() {
@@ -529,18 +530,18 @@ mod tests {
             bottom: 184,
         };
         let mut targets = vec![WindowPreviewTarget {
-            hwnd: 999,
+            hwnd: WindowIdentity::from_handle(999),
             rect: Rect::default(),
             clip: None,
         }];
         for hwnd in 1..=40 {
             targets.push(WindowPreviewTarget {
-                hwnd,
+                hwnd: WindowIdentity::from_handle(hwnd),
                 rect: rect.clone(),
                 clip: None,
             });
             targets.push(WindowPreviewTarget {
-                hwnd,
+                hwnd: WindowIdentity::from_handle(hwnd),
                 rect: rect.clone(),
                 clip: None,
             });
@@ -550,7 +551,7 @@ mod tests {
         assert_eq!(
             selected
                 .iter()
-                .map(|target| target.hwnd)
+                .map(|target| target.hwnd.hwnd)
                 .collect::<Vec<_>>(),
             (1..=16).collect::<Vec<_>>()
         );

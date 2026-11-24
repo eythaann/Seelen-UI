@@ -1,7 +1,7 @@
 mod live_previews;
 
 use image::RgbaImage;
-use seelen_core::system_state::{LiveWindowPreviewState, WindowPreviewTarget};
+use seelen_core::system_state::{LiveWindowPreviewState, WindowHandle, WindowPreviewTarget};
 use win_screenshot::prelude::capture_window;
 
 use crate::{
@@ -32,7 +32,7 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         F: Fn(PreviewsSysEvent) + Send + Sync + 'static,
     {
         HookManager::subscribe(move |(event, window)| {
-            let hwnd = window.address();
+            let hwnd = window.handle();
             match event {
                 WindowEvent::TitleChanged | WindowEvent::RectChanged => {
                     on_event(PreviewsSysEvent::WindowChanged { hwnd })
@@ -50,7 +50,7 @@ impl AppPreviewsSystem for WindowsAppPreviews {
 
     fn update_live(
         &self,
-        owner: isize,
+        owner: WindowHandle,
         session: String,
         targets: Vec<WindowPreviewTarget>,
         opacity: u8,
@@ -58,11 +58,11 @@ impl AppPreviewsSystem for WindowsAppPreviews {
         self.live.update(owner, session, targets, opacity)
     }
 
-    fn clear_live(&self, owner: isize, session: &str) {
+    fn clear_live(&self, owner: WindowHandle, session: &str) {
         self.live.clear(owner, session);
     }
 
-    fn capture(&self, hwnd: isize) -> Result<Option<RgbaImage>> {
+    fn capture(&self, hwnd: WindowHandle) -> Result<Option<RgbaImage>> {
         let window = Window::from(hwnd);
         if !window.is_manageable_from_unelevated() || window.is_minimized() {
             return Ok(None);

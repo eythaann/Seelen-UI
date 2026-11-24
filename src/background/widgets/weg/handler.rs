@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use seelen_core::{handlers::SeelenEvent, state::WegItemData};
+use seelen_core::{handlers::SeelenEvent, state::WegItemData, system_state::WindowIdentity};
 
 use crate::{
     app::emit_to_webviews,
@@ -15,23 +15,24 @@ use crate::{
 };
 
 impl crate::tauri_handlers::Handlers {
-    pub fn weg_close_app(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
+    pub fn weg_close_app(webview: tauri::WebviewWindow, hwnd: WindowIdentity) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        Window::from(hwnd).close()
+        Window::try_from(&hwnd)?.close()
     }
 
-    pub fn weg_kill_app(webview: tauri::WebviewWindow, hwnd: isize) -> Result<()> {
+    pub fn weg_kill_app(webview: tauri::WebviewWindow, hwnd: WindowIdentity) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::KillProcesses)?;
-        Window::from(hwnd).process().kill()
+        // validated so a reused handle can't make it kill another process
+        Window::try_from(&hwnd)?.process().kill()
     }
 
     pub fn weg_toggle_window_state(
         webview: tauri::WebviewWindow,
-        hwnd: isize,
+        hwnd: WindowIdentity,
         was_focused: bool,
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        let window = Window::from(hwnd);
+        let window = Window::try_from(&hwnd)?;
         // was_focused is intented to know if the window was focused before click on the dock item
         // on click the items makes the dock being focused.
         if was_focused {
