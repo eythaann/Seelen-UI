@@ -292,10 +292,6 @@
     transform: translateY(2px);
   }
 
-  &:has(.weg-item-icon[data-shape="square"]) {
-    padding: 0;
-  }
-
   .weg-item-attention-indicator {
     position: absolute;
     inset: 0;
