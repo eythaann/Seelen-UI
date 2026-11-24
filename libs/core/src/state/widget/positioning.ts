@@ -1,4 +1,4 @@
-import { Alignment, type Frame, type PhysicalMonitor } from "@seelen-ui/types";
+import { Alignment, type Frame, type PhysicalMonitor, type Point } from "@seelen-ui/types";
 import { invoke, subscribe } from "../../handlers/mod.ts";
 import { SeelenCommand } from "../../handlers/commands.ts";
 import { SeelenEvent } from "../../handlers/events.ts";
@@ -7,7 +7,10 @@ interface args {
   frame: Frame;
   originX?: Alignment | null;
   originY?: Alignment | null;
+  monitorPoint?: Point;
 }
+
+type MonitorBounds = Pick<PhysicalMonitor, "rect" | "isPrimary">;
 
 const monitors = {
   value: [] as PhysicalMonitor[],
@@ -20,21 +23,12 @@ export async function initMonitorsState(): Promise<void> {
   });
 }
 
-function monitorFromPoint(x: number, y: number): PhysicalMonitor | undefined {
-  return monitors.value.find(
-    (m) => m.rect.left <= x && x < m.rect.right && m.rect.top <= y && y < m.rect.bottom,
-  );
-}
-
-function primaryMonitor(): PhysicalMonitor | undefined {
-  return monitors.value.find((m) => m.isPrimary);
-}
-
 export function adjustPositionByPlacement({
   frame: { x, y, width, height },
   originX,
   originY,
-}: args): Frame {
+  monitorPoint = { x, y },
+}: args, displays: readonly MonitorBounds[] = monitors.value): Frame {
   if (originX === Alignment.Center) {
     x -= width / 2;
   } else if (originX === Alignment.End) {
@@ -47,7 +41,7 @@ export function adjustPositionByPlacement({
     y -= height;
   }
 
-  const newFrame = fitIntoMonitor({ x, y, width, height });
+  const newFrame = fitIntoMonitor({ x, y, width, height }, monitorPoint, displays);
   return {
     x: Math.round(newFrame.x),
     y: Math.round(newFrame.y),
@@ -56,8 +50,15 @@ export function adjustPositionByPlacement({
   };
 }
 
-export function fitIntoMonitor({ x, y, width, height }: Frame): Frame {
-  const monitor = monitorFromPoint(Math.round(x), Math.round(y)) || primaryMonitor();
+export function fitIntoMonitor(
+  { x, y, width, height }: Frame,
+  monitorPoint = { x, y },
+  displays: readonly MonitorBounds[] = monitors.value,
+): Frame {
+  const monitor = displays.find(({ rect }) =>
+    rect.left <= monitorPoint.x && monitorPoint.x < rect.right &&
+    rect.top <= monitorPoint.y && monitorPoint.y < rect.bottom
+  ) ?? displays.find((display) => display.isPrimary);
   if (monitor) {
     width = Math.min(width, monitor.rect.right - monitor.rect.left);
     height = Math.min(height, monitor.rect.bottom - monitor.rect.top);

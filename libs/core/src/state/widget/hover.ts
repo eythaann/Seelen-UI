@@ -1,5 +1,5 @@
 import type { Rect } from "@seelen-ui/types";
-import { SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
+import { invoke, SeelenCommand, SeelenEvent, subscribe, type UnSubscriber } from "../../handlers/mod.ts";
 import { debounce, type DebouncedFunction } from "../../utils/async.ts";
 
 /** A hover popup hides after the cursor stays out of it (and its anchor) this long. */
@@ -14,11 +14,17 @@ const HOVER_OUT_GRACE_MS = 150;
 export class HoverDismissal {
   private anchor: Rect | null = null;
   private unlisten: Promise<UnSubscriber> | null = null;
+  private pointerRevision = 0;
   private readonly hideDelayed: DebouncedFunction<() => void>;
 
   constructor(
     private readonly popupRect: () => Rect,
     private readonly hide: () => Promise<void>,
+    private readonly mouse = {
+      position: () => invoke(SeelenCommand.GetMousePosition),
+      listen: (onMove: (x: number, y: number) => void) =>
+        subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => onMove(x, y)),
+    },
   ) {
     this.hideDelayed = debounce(() => {
       this.stop();
@@ -30,23 +36,36 @@ export class HoverDismissal {
   start(anchor: Rect | null): void {
     this.anchor = anchor;
     this.hideDelayed.cancel();
-    if (this.unlisten) return;
-    // Already broadcasted by the backend at ~10fps, in physical pixels.
-    this.unlisten = subscribe(SeelenEvent.GlobalMouseMove, ({ payload: [x, y] }) => {
-      if (isInsideHoverBridge(x, y, this.popupRect(), this.anchor)) {
-        this.hideDelayed.cancel();
-      } else {
-        this.hideDelayed();
-      }
-    });
+    if (!this.unlisten) {
+      const listener = this.mouse.listen((x, y) => {
+        if (this.unlisten === listener) this.checkPointer(x, y);
+      });
+      this.unlisten = listener;
+    }
+
+    // Movement events only report changes. The pointer can already be outside when a slow popup opens.
+    const revision = ++this.pointerRevision;
+    this.unlisten.then(() => this.mouse.position()).then(([x, y]) => {
+      if (this.pointerRevision === revision) this.checkPointer(x, y);
+    }).catch(console.error);
   }
 
   /** Releases the listener. */
   stop(): void {
+    this.pointerRevision++;
     this.hideDelayed.cancel();
     const unlisten = this.unlisten;
     this.unlisten = null;
     unlisten?.then((unsubscribe) => unsubscribe()).catch(console.error);
+  }
+
+  private checkPointer(x: number, y: number): void {
+    this.pointerRevision++;
+    if (isInsideHoverBridge(x, y, this.popupRect(), this.anchor)) {
+      this.hideDelayed.cancel();
+    } else if (!this.hideDelayed.pending()) {
+      this.hideDelayed();
+    }
   }
 }
 

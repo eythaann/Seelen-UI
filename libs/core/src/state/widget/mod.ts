@@ -1,6 +1,7 @@
 import {
   type Alignment,
   type GenericWidgetSettings,
+  type Point,
   type Rect,
   TriggerSource,
   type Widget as IWidget,
@@ -123,7 +124,13 @@ export class Widget extends WidgetBasics {
       }
 
       if (desiredPosition) {
-        await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY);
+        const monitorPoint = anchorRect
+          ? {
+            x: (anchorRect.left + anchorRect.right) / 2,
+            y: (anchorRect.top + anchorRect.bottom) / 2,
+          }
+          : undefined;
+        await this.adjustAndSetPosition(desiredPosition.x, desiredPosition.y, alignX, alignY, monitorPoint);
       }
 
       // On Windows `show()` also activates a focusable window: a hovered popup must leave the focus
@@ -383,6 +390,7 @@ export class Widget extends WidgetBasics {
     y: number,
     alignX?: Alignment | null,
     alignY?: Alignment | null,
+    monitorPoint?: Point,
   ): Promise<void> {
     await OPTIMISTIC_FRAME.runExclusive(async (ref) => {
       const adjusted = adjustPositionByPlacement({
@@ -394,6 +402,7 @@ export class Widget extends WidgetBasics {
         },
         originX: alignX,
         originY: alignY,
+        monitorPoint,
       });
 
       const newRect = {

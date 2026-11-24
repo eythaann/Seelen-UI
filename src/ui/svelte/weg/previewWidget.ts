@@ -12,6 +12,7 @@ const HOVER_SWITCH_MS = 300;
 
 let hoverPreviewItem: HTMLElement | null = null;
 let hoverPreviewLeftAt = -Infinity;
+let previewRequest = 0;
 
 /** Delay before a hovered item opens its preview. */
 export function hoverPreviewDelay(): number {
@@ -30,12 +31,13 @@ export async function triggerPreviewWidget(
   windows: UserAppWindow[],
   hover = false,
 ): Promise<void> {
+  const request = ++previewRequest;
   hoverPreviewItem = hover ? itemEl : null;
   hoverPreviewLeftAt = -Infinity;
   const dockSide = settingsState.position;
 
-  const origin = await Widget.self.window.outerPosition();
-  if (!itemEl.isConnected || (hover && !itemEl.matches(":hover"))) return;
+  const origin = await Widget.self.window.innerPosition();
+  if (request !== previewRequest || !itemEl.isConnected || (hover && !itemEl.matches(":hover"))) return;
   const elRect = itemEl.getBoundingClientRect();
 
   const toPhysical = (n: number) => Math.round(n * globalThis.devicePixelRatio);
