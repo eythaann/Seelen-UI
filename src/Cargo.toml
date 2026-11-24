@@ -51,6 +51,7 @@ sysinfo = { workspace = true }
 battery = { workspace = true }
 winreg = { workspace = true }
 windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-numerics = { workspace = true }
 windows-collections = { workspace = true }
 windows-future = { workspace = true }
 win-screenshot = { workspace = true }
@@ -85,6 +86,10 @@ windows = { workspace = true, features = [
     "ApplicationModel_DataTransfer",
     "Foundation_Collections",
     "Foundation_Numerics",
+    "Graphics_Effects",
+    "UI_Composition",
+    "UI_Composition_Desktop",
+    "System",
     "Management_Deployment",
     "Win32_Globalization",
     "Win32_UI_Input_KeyboardAndMouse",
@@ -98,6 +103,8 @@ windows = { workspace = true, features = [
     "Win32_UI_Controls",
     "Win32_UI_Notifications",
     "Win32_Graphics_DirectWrite",
+    "Win32_Graphics_Direct2D",
+    "Win32_Graphics_Direct2D_Common",
     "Win32_Graphics_Dwm",
     "Win32_Graphics_Gdi",
     "Win32_Graphics_Dxgi",
@@ -122,6 +129,8 @@ windows = { workspace = true, features = [
     "Win32_System_TaskScheduler",
     "Win32_System_Threading",
     "Win32_System_WinRT",
+    "Win32_System_WinRT_Composition",
+    "Win32_System_WinRT_Graphics_Direct2D",
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",

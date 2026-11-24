@@ -140,10 +140,11 @@ fn legacy_process_event(event: WindowEvent, origin: Window) {
         );
 
         if shoup_update_focused && origin.is_focused() {
-            emit_to_webviews(
-                SeelenEvent::GlobalFocusChanged,
-                origin.focused_app_snapshot(),
-            );
+            let focused = origin.focused_app_snapshot();
+            if event == WindowEvent::Foregrounded {
+                crate::widgets::native_blur_focus_changed(focused.hwnd, focused.owner_hwnd);
+            }
+            emit_to_webviews(SeelenEvent::GlobalFocusChanged, focused);
         }
     }
 }

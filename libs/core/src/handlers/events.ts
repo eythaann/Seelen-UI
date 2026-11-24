@@ -39,6 +39,7 @@ export enum SeelenEvent {
   SystemTrayChanged = "system-tray::changed",
   StatePerformanceModeChanged = "state::performance-mode-changed",
   WidgetTriggered = "widget::triggered",
+  WidgetNativeBlurClose = "widget::native-blur-close",
   RadiosChanged = "radio::changed",
   SystemDisksChanged = "system::disks-changed",
   SystemNetworkChanged = "system::network-changed",

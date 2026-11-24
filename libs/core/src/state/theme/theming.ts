@@ -3,6 +3,7 @@ import { RuntimeStyleSheet } from "../../utils/DOM.ts";
 import { Settings } from "../settings/mod.ts";
 import { ThemeList } from "./mod.ts";
 import { registerPerformanceStyles } from "../widget/performance.ts";
+import { startNativeBlurController } from "./nativeBlur.ts";
 
 /**
  * This will apply the active themes for this widget, and automatically update
@@ -11,15 +12,21 @@ import { registerPerformanceStyles } from "../widget/performance.ts";
 export async function startThemingTool(): Promise<void> {
   let settings = await Settings.getAsync();
   let themes = await ThemeList.getAsync();
+  const nativeBlur = startNativeBlurController();
+
+  function applyThemes(): void {
+    themes.applyToDocument(settings.activeThemes, settings.byTheme);
+    nativeBlur.refresh();
+  }
 
   await ThemeList.onChange((newThemes) => {
     themes = newThemes;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
+    applyThemes();
   });
 
   await Settings.onChange((newSettings) => {
     settings = newSettings;
-    themes.applyToDocument(settings.activeThemes, settings.byTheme);
+    applyThemes();
   });
 
   registerPerformanceStyles();
@@ -28,7 +35,7 @@ export async function startThemingTool(): Promise<void> {
   (await UIColors.getAsync()).setAsCssVariables();
   await UIColors.onChange((colors) => colors.setAsCssVariables());
 
-  themes.applyToDocument(settings.activeThemes, settings.byTheme);
+  applyThemes();
 }
 
 function startDateCssVariables(): void {

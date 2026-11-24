@@ -118,6 +118,7 @@ slu_events_declaration! {
 
     @queued()
     WidgetTriggered(WidgetTriggerPayload) as "widget::triggered",
+    WidgetNativeBlurClose(()) as "widget::native-blur-close",
 
     // Radios
     RadiosChanged(Vec<RadioDevice>) as "radio::changed",
