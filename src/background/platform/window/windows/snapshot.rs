@@ -2,7 +2,7 @@
 
 use crate::system_modules::start::StartMenuManager;
 use seelen_core::system_state::{
-    FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
+    FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention, WindowIdentity,
 };
 
 use crate::{
@@ -10,7 +10,7 @@ use crate::{
     windows_api::window_badges::WindowBadges, windows_api::wpn_service::WpnService,
 };
 
-use super::NativeWindow;
+use super::{super::Window, NativeWindow};
 
 impl NativeWindow {
     /// `Relaunch` info and `prevent_pinning` both only apply to windows with a
@@ -41,13 +41,13 @@ impl NativeWindow {
     pub fn snapshot(&self) -> UserAppWindow {
         let umid = self.app_user_model_id();
         let (relaunch, prevent_pinning) = self.relaunch_info(&umid).unzip();
-        let badge = WindowBadges::instance().get(self.address());
+        let badge = WindowBadges::instance().get(self.handle());
         let badge_value = umid
             .as_ref()
             .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));
 
         UserAppWindow {
-            hwnd: self.address(),
+            hwnd: Window::from(self.handle()).id(),
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             app_name: self.app_display_name().unwrap_or_default(),
@@ -71,8 +71,10 @@ impl NativeWindow {
         let process = self.process();
 
         FocusedApp {
-            hwnd: self.address(),
-            owner_hwnd: self.owner().map(|w| w.address()).unwrap_or(0),
+            hwnd: Window::from(self.handle()).id(),
+            owner_hwnd: self.owner().map_or(WindowIdentity::from_handle(0), |w| {
+                Window::from(w.handle()).id()
+            }),
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             class: self.class(),

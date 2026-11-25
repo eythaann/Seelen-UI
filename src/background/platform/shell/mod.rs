@@ -1,5 +1,4 @@
-//! OS shell integration: launching programs, documents and URLs, installed apps and the native
-//! desktop wallpaper.
+//! OS shell integration: launching programs, documents and URLs and installed apps.
 
 #[cfg(windows)]
 mod windows;
@@ -51,17 +50,4 @@ pub fn file_display_name(path: &Path) -> Result<String> {
 /// Opens the start menu of the OS shell.
 pub fn open_native_start_menu() -> Result<()> {
     imp::open_native_start_menu()
-}
-
-/// Image currently set as the OS desktop wallpaper.
-pub fn wallpaper() -> Result<PathBuf> {
-    imp::wallpaper()
-}
-
-/// Sets the OS desktop wallpaper.
-pub fn set_wallpaper(path: &Path) -> Result<()> {
-    if !path.exists() {
-        return Err("File not found".into());
-    }
-    imp::set_wallpaper(path)
 }

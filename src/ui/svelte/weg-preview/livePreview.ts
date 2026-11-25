@@ -1,11 +1,11 @@
-import type { Rect as PreviewRect } from "@seelen-ui/lib/types";
+import type { Rect as PreviewRect, WindowIdentity } from "@seelen-ui/lib/types";
 
 export interface LivePreviewFrame {
-  targets: { hwnd: number; rect: PreviewRect; clip?: PreviewRect }[];
+  targets: { hwnd: WindowIdentity; rect: PreviewRect; clip?: PreviewRect }[];
   opacity: number;
 }
 export interface LivePreviewStatus {
-  live: number[];
+  live: WindowIdentity[];
   visible: boolean;
 }
 
@@ -34,7 +34,7 @@ export function visiblePreviewTargets(
   viewport: PreviewRect,
 ): LivePreviewFrame["targets"] {
   if (viewport.right <= viewport.left || viewport.bottom <= viewport.top) return [];
-  const seen = new Set<number>();
+  const seen = new Set<WindowIdentity>();
   const visible = targets.flatMap((target) => {
     const { hwnd, rect } = target;
     const clip = {

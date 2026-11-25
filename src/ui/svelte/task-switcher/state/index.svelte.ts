@@ -23,7 +23,7 @@ let autoConfirm = $state(false);
 
 let desiredPosition = $state<{ x: number; y: number } | null>(null);
 
-let selectedWindow = $state<number | null>(focusedWinId.value ?? null);
+let selectedWindow = $state<string | null>(focusedWinId.value ?? null);
 
 // Sync selectedWindow with focused window when the switcher is not visible
 $effect.root(() => {
@@ -88,7 +88,7 @@ class State {
     return selectedWindow;
   }
 
-  set selectedWindow(value: number | null) {
+  set selectedWindow(value: string | null) {
     selectedWindow = value;
   }
 

@@ -6,7 +6,7 @@
   import { createDraggable } from "@dnd-kit/svelte";
 
   interface Props {
-    hwnd: number;
+    hwnd: string;
     overlay?: boolean;
   }
 
@@ -52,7 +52,7 @@
       path={windowData?.relaunch?.icon || windowData?.process?.path}
     />
     <div class="window-title">
-      {windowData?.title || hwnd.toString(16)}
+      {windowData?.title || hwnd.split("_")[0]}
     </div>
     <button
       data-skin="transparent"

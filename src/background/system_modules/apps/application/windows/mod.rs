@@ -2,7 +2,7 @@ mod flashing;
 
 use std::{collections::HashSet, sync::Arc, time::Duration};
 
-use seelen_core::system_state::{BadgeValue, FocusedApp, UserAppWindow};
+use seelen_core::system_state::{BadgeValue, FocusedApp, UserAppWindow, WindowHandle};
 use windows::Win32::UI::Shell::{IShellDispatch6, Shell};
 
 use crate::{
@@ -92,7 +92,7 @@ impl AppsSystem for WindowsApps {
         Ok(())
     }
 
-    fn is_focused(&self, hwnd: isize) -> bool {
+    fn is_focused(&self, hwnd: WindowHandle) -> bool {
         Window::from(hwnd).is_focused()
     }
 
@@ -132,22 +132,22 @@ impl AppsSystem for WindowsApps {
 
 #[derive(Default)]
 struct KnownWindows {
-    hwnds: TracedMutex<HashSet<isize>>,
+    hwnds: TracedMutex<HashSet<WindowHandle>>,
 }
 
 impl KnownWindows {
     fn contains(&self, window: &Window) -> bool {
-        self.hwnds.lock().contains(&window.address())
+        self.hwnds.lock().contains(&window.handle())
     }
 
     /// Returns `true` if it was not known. A single locked check-and-insert avoids the race
     /// between the hook dispatcher thread and the revalidator thread both reporting it.
     fn insert(&self, window: &Window) -> bool {
-        self.hwnds.lock().insert(window.address())
+        self.hwnds.lock().insert(window.handle())
     }
 
     fn remove(&self, window: &Window) -> bool {
-        self.hwnds.lock().remove(&window.address())
+        self.hwnds.lock().remove(&window.handle())
     }
 
     fn add(&self, window: &Window, on_event: &EventCallback) {
@@ -163,7 +163,7 @@ impl KnownWindows {
         if self.remove(window) {
             log::trace!("Removing: {window}");
             on_event(AppsSysEvent::Removed {
-                hwnd: window.address(),
+                hwnd: window.handle(),
             });
         }
     }
@@ -171,7 +171,7 @@ impl KnownWindows {
     /// Drops the windows that are no longer interactable, and adds the ones that now qualify
     /// but were never tracked (e.g. style/frame state was not settled at creation time).
     fn revalidate(&self, on_event: &EventCallback) {
-        let known: Vec<isize> = self.hwnds.lock().iter().copied().collect();
+        let known: Vec<WindowHandle> = self.hwnds.lock().iter().copied().collect();
         for hwnd in known {
             let window = Window::from(hwnd);
             if !window.is_interactable_and_not_hidden() {
@@ -221,7 +221,7 @@ impl KnownWindows {
                 }
             }
             WindowEvent::Destroyed => {
-                WindowBadges::instance().remove(window.address());
+                WindowBadges::instance().remove(window.handle());
                 if is_interactable {
                     self.drop_window(&window, on_event);
                 }
@@ -231,7 +231,7 @@ impl KnownWindows {
 
         if is_interactable && let Some(change) = window_change(event, &window) {
             on_event(AppsSysEvent::Changed {
-                hwnd: window.address(),
+                hwnd: window.handle(),
                 change,
             });
         }

@@ -2,7 +2,9 @@ use std::path::PathBuf;
 
 use seelen_core::{
     rect::Rect,
-    system_state::{BadgeValue, FocusedApp, MonitorId, Relaunch, UserAppWindow, WindowAttention},
+    system_state::{
+        BadgeValue, FocusedApp, MonitorId, Relaunch, UserAppWindow, WindowAttention, WindowHandle,
+    },
 };
 
 use crate::error::Result;
@@ -23,7 +25,7 @@ pub trait AppsSystem: Sized + Send + Sync {
     where
         F: Fn(AppsSysEvent) + Send + Sync + 'static;
 
-    fn is_focused(&self, hwnd: isize) -> bool;
+    fn is_focused(&self, hwnd: WindowHandle) -> bool;
 
     /// Badge (count/glyph) the app has published through its notifications.
     fn badge_value(&self, umid: &str) -> Option<BadgeValue>;
@@ -45,10 +47,10 @@ pub enum AppsSysEvent {
         window: Box<UserAppWindow>,
     },
     Removed {
-        hwnd: isize,
+        hwnd: WindowHandle,
     },
     Changed {
-        hwnd: isize,
+        hwnd: WindowHandle,
         change: WindowChange,
     },
     /// The badges published by the apps changed.
@@ -89,7 +91,7 @@ pub enum WindowChange {
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UserAppWinEvent {
-    Added(isize),
-    Updated(isize),
-    Removed(isize),
+    Added(WindowHandle),
+    Updated(WindowHandle),
+    Removed(WindowHandle),
 }

@@ -52,8 +52,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, POINT, RECT, STATUS_SUCCESS,
-            SetLastError, WIN32_ERROR, WPARAM,
+            FILETIME, GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, POINT, RECT,
+            STATUS_SUCCESS, SetLastError, WIN32_ERROR, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -96,8 +96,8 @@ use windows::{
             SystemInformation::{COMPUTER_NAME_FORMAT, GetComputerNameExW},
             Threading::{
                 AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
-                OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
+                GetProcessTimes, OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS,
+                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
             },
             Variant::VARIANT,
         },
@@ -580,6 +580,17 @@ impl WindowsApi {
             QueryFullProcessImageNameW(*handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
         }
         Ok(path.to_os_string())
+    }
+
+    /// Creation time of the process as a FILETIME (100ns intervals since 1601-01-01 UTC).
+    pub fn process_creation_time(process_id: u32) -> Result<u64> {
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
+        let mut creation = FILETIME::default();
+        let mut exit = FILETIME::default();
+        let mut kernel = FILETIME::default();
+        let mut user = FILETIME::default();
+        unsafe { GetProcessTimes(*handle, &mut creation, &mut exit, &mut kernel, &mut user)? };
+        Ok(((creation.dwHighDateTime as u64) << 32) | creation.dwLowDateTime as u64)
     }
 
     pub fn get_class(hwnd: HWND) -> Result<String> {

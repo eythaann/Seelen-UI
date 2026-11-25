@@ -60,10 +60,10 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             WM_STATE.lock().cancel_reservation();
         }
         WmCommand::ResetWorkspaceSize => {
-            let window_id = foreground.address();
+            let hwnd = foreground.handle();
             let mut guard = WM_STATE.lock();
-            if guard.state.contains(&window_id) {
-                if guard.state.is_tiled(&window_id) {
+            if guard.state.contains(hwnd) {
+                if guard.state.is_tiled(hwnd) {
                     if let Some((_, tree)) = guard.get_tree_for_window_mut(&foreground) {
                         tree.reset_sizes();
                         TwmState::send(TwmStateEvent::Changed);
@@ -98,7 +98,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             WM_STATE.lock().toggle_monocle(&workspace_id);
         }
         WmCommand::Focus { side } | WmCommand::Move { side } => {
-            let window_id = foreground.address();
+            let window_id = foreground.handle();
             let fg_rect = foreground.inner_rect()?;
 
             let mut guard = WM_STATE.lock();

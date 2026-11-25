@@ -23,7 +23,7 @@ pub fn set_owner<'a, R: tauri::Runtime, M: tauri::Manager<R>>(
 ) -> tauri::WebviewWindowBuilder<'a, R, M> {
     // SAFETY: HWND in windows 0.61 (tauri) and 0.62 (ours) share the same memory layout
     #[allow(clippy::missing_transmute_annotations)]
-    builder.owner_raw(unsafe { std::mem::transmute(owner.address()) })
+    builder.owner_raw(unsafe { std::mem::transmute(owner.handle()) })
 }
 
 pub fn disable_system_transitions(webview: &tauri::WebviewWindow) -> Result<()> {

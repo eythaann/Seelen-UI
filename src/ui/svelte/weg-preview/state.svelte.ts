@@ -16,7 +16,7 @@ await subscribe(SeelenEvent.UserAppWindowsChanged, interactables.setByPayload);
 
 // The base64 snapshot cache is large: it is only fetched/followed once DWM could not provide
 // a live surface for some window.
-const previews = lazyRune<Record<number, { data: string }>>(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
+const previews = lazyRune<Record<string, { data: string }>>(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 previews.value = {};
 let fallbackEnabled = false;
 let snapshotRevision = 0;
@@ -27,12 +27,12 @@ await subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, (event) => {
   }
 });
 
-let hwnds = $state<number[]>([]);
+let hwnds = $state<string[]>([]);
 // Bumped on every trigger: the popup may be re-triggered for another dock item while visible.
 let triggerCount = $state(0);
 
 Widget.self.onTrigger(({ customArgs }) => {
-  hwnds = (customArgs?.hwnds as number[]) ?? [];
+  hwnds = (customArgs?.hwnds as string[]) ?? [];
   triggerCount++;
 });
 
@@ -69,7 +69,7 @@ class PreviewState {
     return currentInteractables;
   }
 
-  get previews(): LazyRune<Record<number, { data: string }>> {
+  get previews(): LazyRune<Record<string, { data: string }>> {
     return previews;
   }
 }

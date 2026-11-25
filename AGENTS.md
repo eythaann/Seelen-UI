@@ -23,6 +23,15 @@ Translations:
 - NEVER touch non-English i18n files (no adding, editing, translating or deleting keys). Only edit `en` entries /
   `en.yml`; every other language is handled exclusively by `npm run translate`.
 
+Backward compatibility:
+
+- NEVER introduce nor recommend breaking changes to the app's API: serialized types (`libs/core` types, TS bindings),
+  commands, events, settings/resource files and stored state (e.g. renaming or removing fields, changing a field type in
+  an incompatible way). Prefer compatible alternatives: keep the field name, `#[serde(alias)]`, or accept the old format
+  on deserialization and upgrade it on the next save.
+- If a breaking change is truly unavoidable, keep it minimal and document it under `### breaking changes` in
+  `changelog.md`.
+
 Rust locking order (avoid deadlocks):
 
 1. CLI locks

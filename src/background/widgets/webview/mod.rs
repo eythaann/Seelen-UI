@@ -11,7 +11,7 @@ use seelen_core::{
     Rect,
     resource::WidgetId,
     state::{Widget, WidgetLoader, WidgetPreset},
-    system_state::{AppBarEdge, MonitorId},
+    system_state::{AppBarEdge, MonitorId, WindowHandle},
 };
 
 use tauri::Manager;
@@ -30,7 +30,7 @@ impl WidgetWebview {
     pub fn create(
         widget: &Widget,
         label: &WidgetWebviewLabel,
-        owner_hwnd: Option<isize>,
+        owner_hwnd: Option<WindowHandle>,
     ) -> Result<Self> {
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());

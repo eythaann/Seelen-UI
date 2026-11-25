@@ -95,11 +95,13 @@ pub fn process(cmd: WegCli) -> Result<()> {
                 .and_then(|r| r.working_dir.clone());
             shell::execute(&command, args.as_deref(), working_dir.as_deref(), false)?;
         } else {
-            let focused = windows.iter().find(|w| Window::from(w.hwnd).is_focused());
+            let focused = windows
+                .iter()
+                .find(|w| Window::from(w.hwnd.hwnd).is_focused());
             if let Some(w) = focused {
-                Window::from(w.hwnd).set_state_async(WindowState::Minimized)?;
+                Window::from(w.hwnd.hwnd).set_state_async(WindowState::Minimized)?;
             } else if let Some(w) = windows.first() {
-                let window = Window::from(w.hwnd);
+                let window = Window::from(w.hwnd.hwnd);
                 if window.is_window() {
                     window.unminimize()?;
                     window.focus()?;

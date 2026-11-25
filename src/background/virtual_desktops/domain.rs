@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use seelen_core::{
     state::{VirtualDesktopMonitor, VirtualDesktops, WorkspaceId},
-    system_state::MonitorId,
+    system_state::{MonitorId, WindowHandle},
 };
 
 #[derive(Debug, Clone)]
@@ -26,16 +26,16 @@ pub enum VirtualDesktopEvent {
         new_index: usize,
     }, */
     WindowAdded {
-        window: isize,
+        window: WindowHandle,
         desktop: WorkspaceId,
     },
     /// Emitted when a window is or moved of virtual desktop.
     WindowMoved {
-        window: isize,
+        window: WindowHandle,
         desktop: WorkspaceId,
     },
     WindowRemoved {
-        window: isize,
+        window: WindowHandle,
     },
     /// A window's `Unminimized` that was a genuine user action (e.g. clicking a taskbar
     /// thumbnail or alt-tabbing to it), as opposed to an echo of `restore()` unminimizing the
@@ -43,14 +43,17 @@ pub enum VirtualDesktopEvent {
     /// back" (e.g. the TWM reactivating a stack tab) should listen for this instead of the raw
     /// `Unminimized` hook event, which fires for both cases indiscriminately.
     WindowUnminimizedByUser {
-        window: isize,
+        window: WindowHandle,
     },
 }
 
 /// Builds the lookup indexes (workspace -> monitor, window -> workspace) of the given monitors.
 pub fn get_indexes(
     monitors: &HashMap<MonitorId, VirtualDesktopMonitor>,
-) -> (HashMap<WorkspaceId, MonitorId>, HashMap<isize, WorkspaceId>) {
+) -> (
+    HashMap<WorkspaceId, MonitorId>,
+    HashMap<WindowHandle, WorkspaceId>,
+) {
     let mut workspace_index = HashMap::new();
     let mut window_index = HashMap::new();
 
@@ -60,7 +63,7 @@ pub fn get_indexes(
                 workspace_index.insert(space.id.clone(), mid.clone());
 
                 for window in &space.windows {
-                    window_index.insert(*window, space.id.clone());
+                    window_index.insert(window.hwnd, space.id.clone());
                 }
             }
         }

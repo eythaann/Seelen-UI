@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use super::Color;
 use crate::{
     rect::Rect,
-    system_state::{BadgeValue, MonitorId},
+    system_state::{BadgeValue, MonitorId, WindowIdentity},
 };
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -20,8 +20,8 @@ pub enum ZOrder {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
-    pub hwnd: isize,
-    pub owner_hwnd: isize,
+    pub hwnd: WindowIdentity,
+    pub owner_hwnd: WindowIdentity,
     pub monitor: MonitorId,
     pub title: String,
     pub class: String,
@@ -38,7 +38,7 @@ pub struct FocusedApp {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct UserAppWindow {
-    pub hwnd: isize,
+    pub hwnd: WindowIdentity,
     pub monitor: MonitorId,
     pub title: String,
     pub app_name: String,
@@ -106,7 +106,7 @@ pub struct UserAppWindowPreview {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct WindowPreviewTarget {
-    pub hwnd: isize,
+    pub hwnd: WindowIdentity,
     /// Full layout rectangle, in physical pixels relative to the destination client area.
     pub rect: Rect,
     /// Visible destination bounds. Keep `rect` intact so clipping preserves source alignment.
@@ -120,7 +120,7 @@ pub struct WindowPreviewTarget {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct LiveWindowPreviewState {
-    pub live: Vec<isize>,
+    pub live: Vec<WindowIdentity>,
     /// `false` when the destination popup is hidden: no surface is kept for it.
     pub visible: bool,
 }
@@ -172,7 +172,7 @@ mod preview_target_tests {
 
     #[test]
     fn clipping_is_optional_and_preserves_the_full_layout_rectangle() {
-        let legacy = serde_json::json!({"hwnd": 17, "rect": {"left": 0, "top": -50, "right": 200, "bottom": 50}});
+        let legacy = serde_json::json!({"hwnd": "11_0_0", "rect": {"left": 0, "top": -50, "right": 200, "bottom": 50}});
         let mut target: WindowPreviewTarget = serde_json::from_value(legacy.clone()).unwrap();
         assert!(target.clip.is_none());
         assert_eq!(serde_json::to_value(&target).unwrap(), legacy);

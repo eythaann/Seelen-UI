@@ -16,7 +16,7 @@ use std::{
 
 use seelen_core::{
     rect::Rect,
-    system_state::{FocusedApp, MonitorId, UserAppWindow, ZOrder},
+    system_state::{FocusedApp, MonitorId, UserAppWindow, WindowHandle, WindowIdentity, ZOrder},
 };
 
 use crate::{error::Result, utils::lock_free::TracedMutex};
@@ -48,10 +48,30 @@ impl Window {
             .collect())
     }
 
-    /// Native handle as a plain number, useful to send it over IPC.
+    /// Native handle, enough to identify the window at runtime. Never persist it nor keep it for
+    /// async/security sensitive work, use [`Window::id`] for those (see [`WindowHandle`]).
     #[inline]
-    pub fn address(&self) -> isize {
-        self.0.address()
+    pub fn handle(&self) -> WindowHandle {
+        self.0.handle()
+    }
+
+    /// Identity that stays unique across Seelen restarts and reboots, unlike [`Window::handle`]
+    /// whose value can be reused by the OS once the window is destroyed. Use it for persisted,
+    /// async or security sensitive data; at runtime prefer the cheaper [`Window::handle`].
+    ///
+    /// Only meaningful for live windows: a destroyed window has no process to identify it with, so
+    /// only its handle is returned.
+    pub fn id(&self) -> WindowIdentity {
+        let hwnd = self.handle();
+        let pid = self.process_id();
+        if pid == 0 {
+            return WindowIdentity::from_handle(hwnd);
+        }
+        WindowIdentity {
+            hwnd,
+            pid,
+            process_created_at: self.process().created_at().unwrap_or(0),
+        }
     }
 
     pub fn is_electron(&self) -> bool {
@@ -216,17 +236,17 @@ impl Window {
     }
 
     pub fn is_dragging(&self) -> bool {
-        DRAGGING_WINDOW.load(Ordering::SeqCst) == self.address()
+        DRAGGING_WINDOW.load(Ordering::SeqCst) == self.handle()
     }
 
     pub fn is_last_dragged(&self) -> bool {
-        LAST_DRAGGED_WINDOW.load(Ordering::SeqCst) == self.address()
+        LAST_DRAGGED_WINDOW.load(Ordering::SeqCst) == self.handle()
     }
 
     pub fn set_dragging(&self, dragging: bool) {
         if dragging {
-            DRAGGING_WINDOW.store(self.address(), Ordering::SeqCst);
-            LAST_DRAGGED_WINDOW.store(self.address(), Ordering::SeqCst);
+            DRAGGING_WINDOW.store(self.handle(), Ordering::SeqCst);
+            LAST_DRAGGED_WINDOW.store(self.handle(), Ordering::SeqCst);
             *RECT_BEFORE_DRAG.lock() = self.inner_rect().ok();
         } else {
             DRAGGING_WINDOW.store(0, Ordering::SeqCst);
@@ -247,16 +267,37 @@ impl Window {
     }
 }
 
-/// Restores a window from a value previously returned by [`Window::address`].
-impl From<isize> for Window {
-    fn from(address: isize) -> Self {
-        Self(imp::NativeWindow::from(address))
+/// Restores a window from a value previously returned by [`Window::handle`].
+impl From<WindowHandle> for Window {
+    fn from(handle: WindowHandle) -> Self {
+        Self(imp::NativeWindow::from(handle))
+    }
+}
+
+/// Resolves an identity (e.g. received from a widget or loaded from disk), failing if the window
+/// was destroyed or its handle now belongs to another window. Handle-only identities (sent or
+/// stored by older versions) can't be validated and are trusted.
+///
+/// There is no infallible conversion on purpose: for a trusted identity of a live window (e.g. one
+/// tracked by Seelen) use its handle instead, `Window::from(identity.hwnd)`.
+impl TryFrom<&WindowIdentity> for Window {
+    type Error = crate::error::AppError;
+
+    fn try_from(identity: &WindowIdentity) -> Result<Self> {
+        let window = Self::from(identity.hwnd);
+        if !window.is_window() {
+            return Err("the window no longer exists".into());
+        }
+        if !identity.is_handle_only() && window.id() != *identity {
+            return Err("the window handle now belongs to another window".into());
+        }
+        Ok(window)
     }
 }
 
 impl Hash for Window {
     fn hash<H: Hasher>(&self, state: &mut H) {
-        self.address().hash(state);
+        self.handle().hash(state);
     }
 }
 

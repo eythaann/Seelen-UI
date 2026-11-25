@@ -50,6 +50,12 @@ impl Process {
         self.0.is_frozen()
     }
 
+    /// Absolute creation time of the process (FILETIME, 100ns ticks since 1601 UTC).
+    /// Together with the id it uniquely identifies a process, even across reboots.
+    pub fn created_at(&self) -> Result<u64> {
+        self.0.created_at()
+    }
+
     /// Forcefully terminates the process, without waiting for it.
     pub fn kill(&self) -> Result<()> {
         self.0.kill()

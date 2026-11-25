@@ -2,6 +2,7 @@ pub mod cli;
 pub mod handler;
 pub mod hook;
 pub mod state_v2;
+mod storage;
 
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
 

@@ -7,6 +7,7 @@ mod enviroment;
 mod error;
 mod hotkeys;
 mod logger;
+mod native_wallpaper;
 mod power;
 mod shutdown;
 mod string_utils;
@@ -165,8 +166,9 @@ async fn main() {
 
     if let Err(err) = setup() {
         log::error!("Service setup failed: {:?}", err);
-        // Run cleanup even on setup failure so the taskbar/hotkeys are restored
+        // Run cleanup even on setup failure so the taskbar/wallpaper/hotkeys are restored
         log_error!(restore_native_taskbar());
+        log_error!(native_wallpaper::restore());
         stop_app_shortcuts();
         std::process::exit(1);
     };
@@ -176,6 +178,7 @@ async fn main() {
 
     // shutdown tasks:
     log_error!(restore_native_taskbar());
+    log_error!(native_wallpaper::restore());
     stop_app_shortcuts();
     log::info!("Seelen UI Service exited with code {exit_code}");
     std::process::exit(exit_code as i32);

@@ -107,7 +107,7 @@
     </div>
 
     <span class="system-tray-item-label">
-      {item.tooltip || item.guid || `${item.windowHandle?.toString(16)}::${item.uid}`}
+      {item.tooltip || item.guid || `${item.windowHandle?.split("_")[0]}::${item.uid}`}
     </span>
   </button>
 
