@@ -88,6 +88,7 @@ const _memory = new LazyScope(SeelenCommand.GetSystemMemory, SeelenEvent.SystemM
 const _cores = new LazyScope(SeelenCommand.GetSystemCores, SeelenEvent.SystemCoresChanged);
 const _gpus = new LazyScope(SeelenCommand.GetSystemGpus, SeelenEvent.SystemGpusChanged);
 const _focusedApp = new LazyScope(SeelenCommand.GetFocusedApp, SeelenEvent.GlobalFocusChanged);
+const _windows = new LazyScope(SeelenCommand.GetUserAppWindows, SeelenEvent.UserAppWindowsChanged);
 const _virtualDesktops = new LazyScope(
   SeelenCommand.StateGetVirtualDesktops,
   SeelenEvent.VirtualDesktopsChanged,
@@ -146,6 +147,10 @@ export function resolveScopes(scopes: string[], { userSourceName }: ScopeMofidie
 
   if (scopesSet.has("focusedapp")) {
     fetching ||= focusedAppStep(data);
+  }
+
+  if (scopesSet.has("windows")) {
+    fetching ||= windowsStep(data);
   }
 
   if (scopesSet.has("workspaces")) {
@@ -345,6 +350,18 @@ function focusedAppStep(data: Data): boolean {
   }
 
   data.focusedApp = _focusedApp.data;
+
+  return false;
+}
+
+function windowsStep(data: Data): boolean {
+  _windows.lazyInit();
+
+  if (_windows.fetching) {
+    return true;
+  }
+
+  data.windows = _windows.data || [];
 
   return false;
 }
