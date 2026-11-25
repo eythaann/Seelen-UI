@@ -3,7 +3,7 @@ import type { MediaDeviceSession } from "@seelen-ui/lib/types";
 /** One mixer row: all the audio sessions of a same app. */
 export interface MixerApp {
   appId: string;
-  /** Any session of the app; volume and mute commands apply to the whole app. */
+  /** Instance id of any session of the app; volume and mute commands apply to the whole app. */
   sessionId: string;
   name: string;
   iconPath: string | null;
@@ -22,7 +22,7 @@ export function groupSessionsByApp(sessions: MediaDeviceSession[]): MixerApp[] {
     if (!app) {
       apps.set(session.appId, {
         appId: session.appId,
-        sessionId: session.id,
+        sessionId: session.instanceId,
         name: session.name,
         iconPath: session.iconPath,
         isSystem: session.isSystem,

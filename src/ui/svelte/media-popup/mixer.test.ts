@@ -25,7 +25,7 @@ test("sessions of a same app become one row, even with different session ids", (
     session({ id: "c", instanceId: "c1", appId: "exe:spotify.exe", name: "Spotify" }),
   ]);
   assert.deepEqual(apps.map((app) => app.appId), ["exe:discord.exe", "exe:spotify.exe"]);
-  assert.equal(apps[0]!.sessionId, "a");
+  assert.equal(apps[0]!.sessionId, "a1");
   assert.equal(apps[0]!.volume, 0.8);
 });
 
