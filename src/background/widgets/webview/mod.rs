@@ -132,6 +132,12 @@ impl WidgetWebview {
     }
 }
 
+/// Starts the OS workarounds that keep the widgets z-order healthy (e.g. always-on-top widgets
+/// losing their topmost effect because of third-party apps).
+pub fn start_z_order_guard() {
+    imp::start_topmost_guard();
+}
+
 /// Native window of a webview, to use the generic window operations on it.
 pub fn native_window(webview: &tauri::WebviewWindow) -> Result<Window> {
     imp::native_window(webview)

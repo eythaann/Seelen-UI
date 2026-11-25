@@ -20,6 +20,8 @@
 ### fix
 
 - media popup: mixer only controlling one of the audio sessions of apps playing from several processes (e.g. Discord).
+- toolbar, dock and other always-on-top widgets going behind other windows after opening WinUI 3 apps (e.g. WhatsApp),
+  caused by a Windows App SDK bug, they are now put back on top automatically (#2020).
 
 ## [2.8.11]
 

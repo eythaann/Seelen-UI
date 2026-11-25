@@ -1,17 +1,89 @@
-use seelen_core::{Rect, system_state::AppBarEdge};
+use seelen_core::{
+    Rect,
+    system_state::{AppBarEdge, ZOrder},
+};
+use tauri::Manager;
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::{
         RDW_ALLCHILDREN, RDW_ERASE, RDW_FRAME, RDW_INVALIDATE, RDW_UPDATENOW, RedrawWindow,
     },
-    UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
+    UI::WindowsAndMessaging::{GW_HWNDNEXT, GetTopWindow, GetWindow, SWP_ASYNCWINDOWPOS},
 };
 
 use crate::{
+    app::get_app_handle,
     error::{Result, ResultLogExt},
-    platform::window::Window,
+    platform::{
+        hook::{HookManager, WindowEvent},
+        window::Window,
+    },
     windows_api::{AppBarData, WindowsApi},
 };
+
+const WINUI_WINDOW_CLASS: &str = "WinUIDesktopWin32WindowClass";
+
+/// Workaround for microsoft/microsoft-ui-xaml#9990 (Seelen UI #2020).
+///
+/// Since Windows App SDK 1.6, creating a WinUI 3 window (`WinUIDesktopWin32WindowClass`, e.g.
+/// WhatsApp) corrupts the z-order of every always-on-top window of any process: they keep
+/// `WS_EX_TOPMOST` but end up below normal windows until they are activated again. Per the
+/// WinUI team, it comes from WinUI attaching its `DesktopWindowXamlSource` to the host window
+/// during `WM_NCCREATE` instead of `WM_CREATE`. The fix is on its way upstream, but each affected
+/// app has to ship the updated runtime.
+///
+/// The z-order only breaks on the creation of a WinUI 3 window, so on each one this re-asserts
+/// topmost on all our visible topmost widgets, keeping their relative order. No detection is done:
+/// at creation time the WinUI window is still hidden, so a "normal window above a topmost one"
+/// check would miss it.
+pub fn start_topmost_guard() {
+    HookManager::subscribe(|(event, origin)| {
+        if event == WindowEvent::Created && origin.class() == WINUI_WINDOW_CLASS {
+            restore_broken_topmost();
+        }
+    });
+}
+
+fn restore_broken_topmost() {
+    let mut pending: Vec<HWND> = get_app_handle()
+        .webview_windows()
+        .values()
+        .filter_map(|webview| hwnd(webview).ok())
+        .filter(|hwnd| {
+            let window = Window::from(*hwnd);
+            window.is_visible() && window.is_always_on_top()
+        })
+        .collect();
+
+    if pending.is_empty() {
+        return;
+    }
+
+    // Single walk of the z-order from top to bottom, until all our topmost widgets are found.
+    let mut ordered = Vec::with_capacity(pending.len());
+    let mut current = unsafe { GetTopWindow(None) }.ok();
+    while let Some(hwnd) = current {
+        if hwnd.is_invalid() {
+            break;
+        }
+
+        if let Some(idx) = pending.iter().position(|w| *w == hwnd) {
+            pending.swap_remove(idx);
+            ordered.push(hwnd);
+            if pending.is_empty() {
+                break;
+            }
+        }
+
+        current = unsafe { GetWindow(hwnd, GW_HWNDNEXT) }.ok();
+    }
+
+    log::debug!("WinUI 3 window created, restoring the topmost widgets");
+    // bottom to top, so the originally highest one ends on top again
+    for hwnd in ordered.into_iter().rev() {
+        Window::from(hwnd).set_z_order(ZOrder::TopMost).log_error();
+    }
+}
 
 pub fn native_window(webview: &tauri::WebviewWindow) -> Result<Window> {
     Ok(Window::from(hwnd(webview)?))
