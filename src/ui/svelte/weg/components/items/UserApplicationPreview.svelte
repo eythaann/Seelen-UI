@@ -14,20 +14,20 @@
 
   function onClick() {
     invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd,
-      wasFocused: windowsState.delayedFocused?.hwnd === hwnd,
+      id: hwnd,
+      wasFocused: windowsState.delayedFocused?.id === hwnd,
     });
   }
 
   function onAuxClick(e: MouseEvent) {
     if (e.button === 1) {
-      invoke(SeelenCommand.WegCloseApp, { hwnd });
+      invoke(SeelenCommand.WegCloseApp, { id: hwnd });
     }
   }
 
   function onClose(e: MouseEvent) {
     e.stopPropagation();
-    invoke(SeelenCommand.WegCloseApp, { hwnd });
+    invoke(SeelenCommand.WegCloseApp, { id: hwnd });
   }
 </script>
 

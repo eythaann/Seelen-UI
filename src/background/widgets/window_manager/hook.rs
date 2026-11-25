@@ -144,7 +144,7 @@ impl WindowManagerV2 {
                         .get_tree_for_window_mut(&window)
                         .map(|(_, tree)| {
                             tree.iter()
-                                .filter_map(|n| n.active_window.map(|w| w.hwnd))
+                                .filter_map(|n| n.active_window.map(|w| w.handle))
                                 .collect()
                         })
                         .unwrap_or_default()

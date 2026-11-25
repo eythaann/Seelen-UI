@@ -27,7 +27,7 @@
   const itemLabel = $derived(
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,
   );
-  const isFocused = $derived(windows.some((w) => w.hwnd === focused.value?.hwnd));
+  const isFocused = $derived(windows.some((w) => w.id === focused.value?.id));
   const isFlashing = $derived(windows.some((w) => w.attention === WindowAttention.Flashing));
   const needsAttention = $derived(
     isFlashing || windows.some((w) => w.attention === WindowAttention.Highlighted),
@@ -63,8 +63,8 @@
       launchItem(item, false);
     } else {
       invoke(SeelenCommand.WegToggleWindowState, {
-        hwnd: win.hwnd,
-        wasFocused: windowsState.delayedFocused?.hwnd === win.hwnd,
+        id: win.id,
+        wasFocused: windowsState.delayedFocused?.id === win.id,
       });
     }
   }
@@ -75,7 +75,7 @@
       launchItem(item, false);
     } else {
       const win = windows[0];
-      if (win) invoke(SeelenCommand.WegCloseApp, { hwnd: win.hwnd });
+      if (win) invoke(SeelenCommand.WegCloseApp, { id: win.id });
     }
   }
 

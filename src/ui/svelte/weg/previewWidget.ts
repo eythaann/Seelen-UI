@@ -87,7 +87,7 @@ export async function triggerPreviewWidget(
       source: hover ? TriggerSource.Hover : TriggerSource.Click,
       anchorRect: viewRect,
       customArgs: {
-        hwnds: windows.map((w) => w.hwnd),
+        hwnds: windows.map((w) => w.id),
       },
     },
   });

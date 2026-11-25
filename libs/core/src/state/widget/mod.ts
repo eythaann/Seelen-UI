@@ -161,7 +161,7 @@ export class Widget extends WidgetBasics {
     }, 100);
 
     subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: focused }) => {
-      if (focused.hwnd !== this.windowId && focused.ownerHwnd !== this.windowId) {
+      if (focused.id !== this.windowId && focused.ownerId !== this.windowId) {
         if (wasFocused) {
           hideDelayed();
         }

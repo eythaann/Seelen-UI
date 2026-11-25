@@ -2,8 +2,8 @@ import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { signal } from "@preact/signals";
 
 export const $is_this_webview_focused = signal(false);
-subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: { hwnd, ownerHwnd } }) => {
-  $is_this_webview_focused.value = Widget.self.windowId === hwnd || Widget.self.windowId === ownerHwnd;
+subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: { id, ownerId } }) => {
+  $is_this_webview_focused.value = Widget.self.windowId === id || Widget.self.windowId === ownerId;
 });
 
 const _pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");

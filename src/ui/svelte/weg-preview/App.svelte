@@ -43,7 +43,7 @@
     }
     previewChecked = true;
     if (status.live.join() !== liveWindows.join()) liveWindows = status.live;
-    if (sent.targets.some((target) => !status.live.includes(target.hwnd))) {
+    if (sent.targets.some((target) => !status.live.includes(target.id))) {
       previewState.enableSnapshotFallback();
     }
   }
@@ -77,7 +77,7 @@
     candidates = Array.from(list.querySelectorAll<HTMLElement>("[data-preview-hwnd]"), (element) => {
       const rect = element.getBoundingClientRect();
       return {
-        hwnd: element.dataset.previewHwnd!,
+        id: element.dataset.previewHwnd!,
         rect: { left: px(rect.left), top: px(rect.top), right: px(rect.right), bottom: px(rect.bottom) },
       };
     });
@@ -106,17 +106,17 @@
   }
 
   function onClickPreview(hwnd: string): void {
-    invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
+    invoke(SeelenCommand.WegToggleWindowState, { id: hwnd, wasFocused: false });
     widget.hide();
   }
 
   function onClosePreview(e: MouseEvent, hwnd: string): void {
     e.stopPropagation();
-    invoke(SeelenCommand.WegCloseApp, { hwnd });
+    invoke(SeelenCommand.WegCloseApp, { id: hwnd });
   }
 
   function onAuxClickPreview(e: MouseEvent, hwnd: string): void {
-    if (e.button === 1) invoke(SeelenCommand.WegCloseApp, { hwnd });
+    if (e.button === 1) invoke(SeelenCommand.WegCloseApp, { id: hwnd });
   }
 
   onMount(() => {
@@ -177,15 +177,15 @@
 
 <div bind:this={container} class="weg-item-preview-container slu-std-popover">
   <div bind:this={list} class="weg-item-preview-list" onscroll={invalidate}>
-    {#each previewState.currentInteractables as win (win.hwnd)}
-      {@const preview = previewState.previews.value[win.hwnd]}
+    {#each previewState.currentInteractables as win (win.id)}
+      {@const preview = previewState.previews.value[win.id]}
       <div class="weg-item-preview">
         <div class="weg-item-preview-topbar">
           <div class="weg-item-preview-title">{win.title}</div>
           <button
             data-skin="transparent"
             aria-label={$t("preview.close_window")}
-            onclick={(e) => onClosePreview(e, win.hwnd)}
+            onclick={(e) => onClosePreview(e, win.id)}
           >
             <Icon iconName="IoClose" />
           </button>
@@ -193,13 +193,13 @@
         <button
           data-skin="transparent"
           class="weg-item-preview-image-container"
-          data-preview-hwnd={win.hwnd}
+          data-preview-hwnd={win.id}
           aria-label={win.title}
-          onclick={() => onClickPreview(win.hwnd)}
-          onauxclick={(e) => onAuxClickPreview(e, win.hwnd)}
+          onclick={() => onClickPreview(win.id)}
+          onauxclick={(e) => onAuxClickPreview(e, win.id)}
         >
           <!-- Live windows are composed natively by DWM over this area, which stays empty. -->
-          {#if liveWindows.includes(win.hwnd)}{:else if preview}
+          {#if liveWindows.includes(win.id)}{:else if preview}
             <img class="weg-item-preview-image" src="data:image/webp;base64,{preview.data}" alt={win.title} />
           {:else}
             <div class="weg-preview-placeholder">

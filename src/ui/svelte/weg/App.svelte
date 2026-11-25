@@ -13,7 +13,7 @@
   const focusedIsAppsMenu = $derived(
     startMenuExes.some((program) => (focused.value?.exe || "").endsWith(program)) ||
       widgetStatuses.value.some(
-        (w) => w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === focused.value?.hwnd,
+        (w) => w.widgetId === "@seelen/apps-menu" && w.webviewWindowId === focused.value?.id,
       ),
   );
 

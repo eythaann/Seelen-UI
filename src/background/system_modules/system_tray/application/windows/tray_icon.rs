@@ -56,7 +56,7 @@ impl TrayState {
                     None => {
                         icon_data.window_handle.is_some()
                             && icon_data.uid.is_some()
-                            && icon.window_handle.map(|w| w.hwnd) == icon_data.window_handle
+                            && icon.window_handle.map(|w| w.handle) == icon_data.window_handle
                             && icon.uid == icon_data.uid
                     }
                 })
@@ -76,7 +76,7 @@ impl TrayState {
         self.icons.retain(|(id, icon)| {
             let alive = icon
                 .window_handle
-                .is_none_or(|handle| self.is_owner_alive(id, handle.hwnd));
+                .is_none_or(|handle| self.is_owner_alive(id, handle.handle));
             if !alive {
                 log::trace!("Tray icon removed, its window no longer exists: {}", id);
                 removed.push(id.clone());
@@ -205,7 +205,7 @@ impl TrayState {
         }
 
         if let Some(window_handle) = icon_data.window_handle
-            && icon.window_handle.map(|w| w.hwnd) != Some(window_handle)
+            && icon.window_handle.map(|w| w.handle) != Some(window_handle)
         {
             icon.window_handle = Some(Window::from(window_handle).id());
             self.track_owner(&icon.session_id, window_handle);
@@ -318,7 +318,7 @@ impl TrayState {
         };
 
         if let Some(window_handle) = icon.window_handle {
-            self.track_owner(&icon.session_id, window_handle.hwnd);
+            self.track_owner(&icon.session_id, window_handle.handle);
         }
         self.icons.upsert(icon.session_id.clone(), icon.clone());
         Some(SystrayEvent::IconAdd(icon))
@@ -343,7 +343,7 @@ impl TrayState {
             icons
                 .values()
                 .filter(|icon| {
-                    icon.window_handle.map(|w| w.hwnd) == Some(window_handle)
+                    icon.window_handle.map(|w| w.handle) == Some(window_handle)
                         && icon.guid.is_none()
                         && !icon.is_visible
                 })
@@ -449,7 +449,7 @@ impl TrayState {
         let window_handle = icon
             .window_handle
             .ok_or("Inoperable icon, missing window handle")?
-            .hwnd;
+            .handle;
         let uid = icon.uid.ok_or("Inoperable icon, missing uid")?;
         let callback = icon
             .callback_message
@@ -627,7 +627,7 @@ fn has_change(icon: &SysTrayIcon, data: &IconEventData) -> bool {
     data.uid.is_some_and(|uid| icon.uid != Some(uid))
         || data
             .window_handle
-            .is_some_and(|handle| icon.window_handle.map(|w| w.hwnd) != Some(handle))
+            .is_some_and(|handle| icon.window_handle.map(|w| w.handle) != Some(handle))
         || data.guid.is_some_and(|guid| icon.guid != Some(guid))
         || data.tooltip.as_ref().is_some_and(|t| &icon.tooltip != t)
         || data

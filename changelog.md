@@ -23,6 +23,11 @@
 - toolbar, dock and other always-on-top widgets going behind other windows after opening WinUI 3 apps (e.g. WhatsApp),
   caused by a Windows App SDK bug, they are now put back on top automatically (#2020).
 
+### refactors
+
+- api: the window identifiers are now named `id` instead of `hwnd` (`UserAppWindow.id`, `FocusedApp.id`/`ownerId`,
+  `WindowPreviewTarget.id` and the window argument of commands). The old `hwnd` names are deprecated but still work.
+
 ## [2.8.11]
 
 ### features

@@ -63,7 +63,7 @@ pub fn get_indexes(
                 workspace_index.insert(space.id.clone(), mid.clone());
 
                 for window in &space.windows {
-                    window_index.insert(window.hwnd, space.id.clone());
+                    window_index.insert(window.handle, space.id.clone());
                 }
             }
         }

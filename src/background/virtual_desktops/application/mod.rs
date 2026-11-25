@@ -108,7 +108,7 @@ impl VdManager {
                     } else {
                         // allow resume workspaces correctly on change
                         for id in &workspace.windows {
-                            let _ = MINIMIZED_BY_WORKSPACES.insert_sync(id.hwnd);
+                            let _ = MINIMIZED_BY_WORKSPACES.insert_sync(id.handle);
                         }
                         workspace.hide(true);
                     }
@@ -128,7 +128,7 @@ impl VdManager {
         // Collected first to not hold the interactables lock while taking the monitors lock (see lock order).
         let interactables = UserAppsManager::instance()
             .interactable_windows
-            .map(|data| data.hwnd.hwnd);
+            .map(|data| data.id.handle);
         for hwnd in interactables {
             let window = Window::from(hwnd);
             if !window.is_minimized() {
@@ -199,7 +199,7 @@ impl VdManager {
     }
 
     pub fn is_pinned(&self, window_id: &WindowHandle) -> bool {
-        self.pinned.any(|id| &id.hwnd == window_id)
+        self.pinned.any(|id| &id.handle == window_id)
     }
 
     /// Must be called while holding the monitors lock, so indexes never diverge from it.
@@ -274,7 +274,7 @@ impl VdManager {
         let was_tracked = self.monitors.with_lock(|monitors| {
             let mut was_tracked = self.window_index.remove(&window_id).is_some();
             self.pinned.retain(|w| {
-                let is_it = w.hwnd == window_id;
+                let is_it = w.handle == window_id;
                 was_tracked |= is_it;
                 !is_it
             });
@@ -474,8 +474,8 @@ impl VdManager {
                         continue;
                     }
                     for window in windows {
-                        if let Some(target) = monitor.workspaces.get_by_window_id(window.hwnd) {
-                            moved_windows.push((window.hwnd, target.id.clone()));
+                        if let Some(target) = monitor.workspaces.get_by_window_id(window.handle) {
+                            moved_windows.push((window.handle, target.id.clone()));
                         }
                     }
                     removed_ids.push(id);
@@ -538,7 +538,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
             WindowState::Minimized
         };
         for id in &self.windows {
-            let window = Window::from(id.hwnd);
+            let window = Window::from(id.handle);
             if window.is_window() && !window.is_minimized() {
                 let _ = MINIMIZED_BY_WORKSPACES.insert_sync(window.handle());
                 window.set_state(state).log_error();
@@ -549,7 +549,7 @@ impl DesktopWorkspaceExt for DesktopWorkspace {
     fn restore(&self) {
         let len = self.windows.len();
         for (idx, id) in self.windows.iter().enumerate() {
-            let addr = &id.hwnd;
+            let addr = &id.handle;
             let window = Window::from(*addr);
             let is_minimized = window.is_minimized();
 
@@ -739,7 +739,7 @@ impl VdManager {
 /// Handle-only identities (stored by older versions as plain numbers) can't be validated, so they
 /// are trusted as before and upgraded to the full identity, to be validated on the next runs.
 fn refresh_stored_identity(stored: &WindowIdentity) -> Option<WindowIdentity> {
-    let window = Window::from(stored.hwnd);
+    let window = Window::from(stored.handle);
     if !window.is_window() {
         return None;
     }

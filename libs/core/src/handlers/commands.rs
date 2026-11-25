@@ -31,7 +31,9 @@ macro_rules! __slu_command_result {
     };
 }
 
-macro_rules! slu_commands_declaration {
+/// Generates the TS bindings of the declared commands, only expanded with `gen-binds`.
+#[cfg(feature = "gen-binds")]
+macro_rules! __gen_binds {
     ($(
         $key:ident =
             $(@webview($($with_webview:tt)?))?
@@ -44,11 +46,10 @@ macro_rules! slu_commands_declaration {
             ),*
         ) $(-> $return_type:ty)?,
     )*) => {
-        #[cfg(feature = "gen-binds")]
         pub struct SeelenCommand;
 
-        #[cfg(feature = "gen-binds")]
         impl SeelenCommand {
+            #[allow(dead_code)]
             pub(crate) fn generate_ts_file(path: &str) {
                 let mut content: Vec<String> = std::vec::Vec::new();
 
@@ -64,7 +65,6 @@ macro_rules! slu_commands_declaration {
         }
 
         /// Internal used as mapping of commands to their arguments
-        #[cfg(feature = "gen-binds")]
         #[allow(non_camel_case_types, dead_code)]
         #[derive(Deserialize, ts_rs::TS)]
         #[serde(rename_all_fields = "camelCase")]
@@ -81,7 +81,6 @@ macro_rules! slu_commands_declaration {
         }
 
         /// Internal used as mapping of commands to their return types
-        #[cfg(feature = "gen-binds")]
         #[allow(non_camel_case_types, dead_code)]
         #[derive(Serialize, ts_rs::TS)]
         #[ts(export)]
@@ -90,17 +89,67 @@ macro_rules! slu_commands_declaration {
                 $fn_name(type_or_void!($($return_type)?)),
             )*
         }
+    };
+}
 
+/// Generates the exported macros used by the app to register the commands in tauri:
+/// `gen_tauri_wrappers!` (the `#[tauri::command]` wrappers) and `gen_tauri_invoke_handler!`.
+macro_rules! __gen_tauri_macros {
+    ($(
+        $key:ident =
+            $(@webview($($with_webview:tt)?))?
+            $(@async($($with_async:tt)?))?
+            $(@fallible($($is_fallible:tt)?))?
+            $fn_name:ident(
+            $(
+                $(#[$attr:meta])*
+                $arg:ident: $arg_type:ty
+            ),*
+        ) $(-> $return_type:ty)?,
+    )*) => {
         #[macro_export]
         #[allow(clippy::crate_in_macro_def)]
         macro_rules! gen_tauri_wrappers {
             () => {
+                /// Deserializes all the arguments of a command at once (instead of one by one by tauri), so the
+                /// serde attributes of the declaration (e.g. `alias` for backward compatibility) are also applied
+                /// at runtime, matching the generated TS bindings.
+                fn parse_command_args<T: serde::de::DeserializeOwned>(
+                    request: &tauri::ipc::Request<'_>,
+                ) -> crate::Result<T> {
+                    match request.body() {
+                        tauri::ipc::InvokeBody::Json(value) => {
+                            if value.is_object() {
+                                Ok(T::deserialize(value)?)
+                            } else {
+                                // e.g. `invoke(cmd, null)`, accepted by commands without (required) arguments
+                                Ok(T::deserialize(&serde_json::Value::Object(Default::default()))?)
+                            }
+                        },
+                        tauri::ipc::InvokeBody::Raw(_) => {
+                            Err("invalid arguments for command: expected a JSON object".into())
+                        }
+                    }
+                }
+
                 $(
                     #[tauri::command(async)]
+                    #[allow(unexpected_cfgs)]
                     async fn $fn_name(
                         $(webview: tauri::WebviewWindow, $($with_webview)?)?
-                        $($arg:$arg_type),*
+                        request: tauri::ipc::Request<'_>,
                     ) -> crate::Result<$($return_type)?> {
+                        #[derive(serde::Deserialize)]
+                        #[serde(rename_all = "camelCase")]
+                        struct Args {
+                            $(
+                                $(#[$attr])*
+                                $arg: $arg_type
+                            ),*
+                        }
+
+                        let Args { $($arg),* } = parse_command_args(&request)?;
+
                         $crate::__slu_command_result!(
                             $(@fallible $($is_fallible)?)?
                             Handlers::$fn_name($(webview, $($with_webview)?)? $($arg),*) $($($with_async)? .await)?
@@ -120,6 +169,21 @@ macro_rules! slu_commands_declaration {
                 ]
             };
         }
+    };
+}
+
+#[cfg(feature = "gen-binds")]
+macro_rules! slu_commands_declaration {
+    ($($declaration:tt)*) => {
+        __gen_binds! { $($declaration)* }
+        __gen_tauri_macros! { $($declaration)* }
+    };
+}
+
+#[cfg(not(feature = "gen-binds"))]
+macro_rules! slu_commands_declaration {
+    ($($declaration:tt)*) => {
+        __gen_tauri_macros! { $($declaration)* }
     };
 }
 
@@ -144,7 +208,11 @@ slu_commands_declaration! {
     MoveWindowToWorkspace =
         @webview()
         @fallible()
-        move_window_to_workspace(hwnd: WindowIdentity, workspace_id: WorkspaceId),
+        move_window_to_workspace(
+            #[serde(alias = "hwnd")]
+            id: WindowIdentity,
+            workspace_id: WorkspaceId
+        ),
 
     // wallpaper
     WallpaperNext = wallpaper_next(),
@@ -194,9 +262,9 @@ slu_commands_declaration! {
     GetIcon =
         @fallible()
         get_icon(
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        #[cfg_attr(feature = "gen-binds", ts(optional = nullable))]
         path: Option<std::path::PathBuf>,
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        #[cfg_attr(feature = "gen-binds", ts(optional = nullable))]
         umid: Option<String>
     ),
     ShowDesktop =
@@ -449,13 +517,13 @@ slu_commands_declaration! {
     Restart =
         @fallible()
         restart(
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        #[cfg_attr(feature = "gen-binds", ts(optional = nullable))]
         install_updates: Option<bool>
     ),
     Shutdown =
         @fallible()
         shutdown(
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        #[cfg_attr(feature = "gen-binds", ts(optional = nullable))]
         install_updates: Option<bool>
     ),
     Lock =
@@ -466,22 +534,32 @@ slu_commands_declaration! {
     WegCloseApp =
         @webview()
         @fallible()
-        weg_close_app(hwnd: WindowIdentity),
+        weg_close_app(
+            #[serde(alias = "hwnd")]
+            id: WindowIdentity
+        ),
     WegKillApp =
         @webview()
         @fallible()
-        weg_kill_app(hwnd: WindowIdentity),
+        weg_kill_app(
+            #[serde(alias = "hwnd")]
+            id: WindowIdentity
+        ),
     WegToggleWindowState =
         @webview()
         @fallible()
-        weg_toggle_window_state(hwnd: WindowIdentity, was_focused: bool),
+        weg_toggle_window_state(
+            #[serde(alias = "hwnd")]
+            id: WindowIdentity,
+            was_focused: bool
+        ),
     WegPinItem =
         @webview()
         @fallible()
         weg_pin_item(
         path: std::path::PathBuf,
         /// packaged apps have no path, so they are pinned by umid
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(optional = nullable))]
+        #[cfg_attr(feature = "gen-binds", ts(optional = nullable))]
         umid: Option<String>
     ),
     WegImportPinnedTaskbarItems =
@@ -498,7 +576,10 @@ slu_commands_declaration! {
     WmSetStackActiveWindow =
         @webview()
         @fallible()
-        wm_set_stack_active_window(hwnd: WindowIdentity),
+        wm_set_stack_active_window(
+            #[serde(alias = "hwnd")]
+            id: WindowIdentity
+        ),
 
     // Network
     WlanScan = wlan_scan(),

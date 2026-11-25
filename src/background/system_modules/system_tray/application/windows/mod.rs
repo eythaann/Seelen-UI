@@ -118,7 +118,7 @@ impl TrayState {
             .retain(|(_, pending)| pending.data.window_handle != Some(address));
         let owns_icon = self
             .icons
-            .any(|(_, icon)| icon.window_handle.is_some_and(|w| w.hwnd == address));
+            .any(|(_, icon)| icon.window_handle.is_some_and(|w| w.handle == address));
         if owns_icon && self.prune_dead_icons() {
             self.notify_changed();
         }

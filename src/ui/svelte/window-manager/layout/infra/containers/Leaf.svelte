@@ -9,7 +9,7 @@
 
   let { hwnd, growFactor }: Props = $props();
 
-  let isFocused = $derived(state.focusedApp.hwnd === hwnd);
+  let isFocused = $derived(state.focusedApp.id === hwnd);
 </script>
 
 <div

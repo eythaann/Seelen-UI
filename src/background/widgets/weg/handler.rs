@@ -15,24 +15,24 @@ use crate::{
 };
 
 impl crate::tauri_handlers::Handlers {
-    pub fn weg_close_app(webview: tauri::WebviewWindow, hwnd: WindowIdentity) -> Result<()> {
+    pub fn weg_close_app(webview: tauri::WebviewWindow, id: WindowIdentity) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        Window::try_from(&hwnd)?.close()
+        Window::try_from(&id)?.close()
     }
 
-    pub fn weg_kill_app(webview: tauri::WebviewWindow, hwnd: WindowIdentity) -> Result<()> {
+    pub fn weg_kill_app(webview: tauri::WebviewWindow, id: WindowIdentity) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::KillProcesses)?;
         // validated so a reused handle can't make it kill another process
-        Window::try_from(&hwnd)?.process().kill()
+        Window::try_from(&id)?.process().kill()
     }
 
     pub fn weg_toggle_window_state(
         webview: tauri::WebviewWindow,
-        hwnd: WindowIdentity,
+        id: WindowIdentity,
         was_focused: bool,
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
-        let window = Window::try_from(&hwnd)?;
+        let window = Window::try_from(&id)?;
         // was_focused is intented to know if the window was focused before click on the dock item
         // on click the items makes the dock being focused.
         if was_focused {

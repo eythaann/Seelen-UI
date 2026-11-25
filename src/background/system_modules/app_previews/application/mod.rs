@@ -87,7 +87,7 @@ impl AppPreviewsManager {
 
     fn init(&mut self) -> Result<()> {
         let apps = UserAppsManager::instance();
-        for hwnd in apps.interactable_windows.map(|w| w.hwnd.hwnd) {
+        for hwnd in apps.interactable_windows.map(|w| w.id.handle) {
             self.register_window(hwnd);
         }
 
@@ -248,7 +248,7 @@ struct PreviewEntry {
 fn interactable_identities() -> HashMap<WindowHandle, WindowIdentity> {
     UserAppsManager::instance()
         .interactable_windows
-        .map(|w| (w.hwnd.hwnd, w.hwnd))
+        .map(|w| (w.id.handle, w.id))
         .into_iter()
         .collect()
 }

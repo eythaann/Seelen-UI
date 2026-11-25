@@ -28,7 +28,7 @@ pub type WindowHandle = isize;
 )]
 #[serde(into = "String")]
 pub struct WindowIdentity {
-    pub hwnd: WindowHandle,
+    pub handle: WindowHandle,
     pub pid: u32,
     /// FILETIME (100ns ticks since 1601-01-01 UTC)
     pub process_created_at: u64,
@@ -36,9 +36,9 @@ pub struct WindowIdentity {
 
 impl WindowIdentity {
     /// Identity with only the window handle known, the process data is left as 0.
-    pub fn from_handle(hwnd: WindowHandle) -> Self {
+    pub fn from_handle(handle: WindowHandle) -> Self {
         Self {
-            hwnd,
+            handle,
             pid: 0,
             process_created_at: 0,
         }
@@ -57,7 +57,7 @@ impl Display for WindowIdentity {
         write!(
             f,
             "{:x}_{:x}_{:x}",
-            self.hwnd as usize, self.pid, self.process_created_at
+            self.handle as usize, self.pid, self.process_created_at
         )
     }
 }
@@ -70,7 +70,7 @@ impl FromStr for WindowIdentity {
         let mut parts = s.split('_');
         let mut next = || parts.next().ok_or_else(invalid);
         let identity = Self {
-            hwnd: usize::from_str_radix(next()?, 16).map_err(|_| invalid())? as WindowHandle,
+            handle: usize::from_str_radix(next()?, 16).map_err(|_| invalid())? as WindowHandle,
             pid: u32::from_str_radix(next()?, 16).map_err(|_| invalid())?,
             process_created_at: u64::from_str_radix(next()?, 16).map_err(|_| invalid())?,
         };
@@ -139,7 +139,7 @@ mod tests {
     use super::WindowIdentity;
 
     const IDENTITY: WindowIdentity = WindowIdentity {
-        hwnd: 132456,
+        handle: 132456,
         pid: 1234,
         process_created_at: 133_456_789_012_345_678,
     };

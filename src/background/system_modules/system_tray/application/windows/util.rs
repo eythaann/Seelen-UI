@@ -63,7 +63,7 @@ impl Util {
                 // notify (non-blocking) to avoid hanging on unresponsive windows
                 let _ = unsafe {
                     SendNotifyMessageW(
-                        HWND(w.hwnd.hwnd as _),
+                        HWND(w.id.handle as _),
                         msg,
                         WPARAM::default(),
                         LPARAM::default(),

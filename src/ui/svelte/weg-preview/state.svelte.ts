@@ -44,7 +44,7 @@ $effect.root(() => {
   });
 });
 
-const currentInteractables = $derived(interactables.value?.filter((w) => hwnds.includes(w.hwnd)) ?? []);
+const currentInteractables = $derived(interactables.value?.filter((w) => hwnds.includes(w.id)) ?? []);
 const liveEnabled = $derived(performanceMode.value === "Disabled");
 
 class PreviewState {

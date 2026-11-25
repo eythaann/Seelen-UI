@@ -46,8 +46,11 @@ impl NativeWindow {
             .as_ref()
             .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));
 
+        let id = Window::from(self.handle()).id();
         UserAppWindow {
-            hwnd: Window::from(self.handle()).id(),
+            id,
+            #[allow(deprecated)]
+            hwnd: id,
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             app_name: self.app_display_name().unwrap_or_default(),
@@ -70,11 +73,18 @@ impl NativeWindow {
     pub fn focused_app_snapshot(&self) -> FocusedApp {
         let process = self.process();
 
+        let id = Window::from(self.handle()).id();
+        let owner_id = self.owner().map_or(WindowIdentity::from_handle(0), |w| {
+            Window::from(w.handle()).id()
+        });
+
         FocusedApp {
-            hwnd: Window::from(self.handle()).id(),
-            owner_hwnd: self.owner().map_or(WindowIdentity::from_handle(0), |w| {
-                Window::from(w.handle()).id()
-            }),
+            id,
+            owner_id,
+            #[allow(deprecated)]
+            hwnd: id,
+            #[allow(deprecated)]
+            owner_hwnd: owner_id,
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             class: self.class(),

@@ -64,17 +64,17 @@ impl LivePreviewManager {
         }
         entry
             .thumbnails
-            .retain(|hwnd, _| targets.iter().any(|target| target.hwnd.hwnd == *hwnd));
+            .retain(|hwnd, _| targets.iter().any(|target| target.id.handle == *hwnd));
 
         let mut live = Vec::new();
         for target in targets {
-            if !valid_rect(&target.rect) || target.hwnd.hwnd == owner {
+            if !valid_rect(&target.rect) || target.id.handle == owner {
                 continue;
             }
-            let thumbnail = match entry.thumbnails.entry(target.hwnd.hwnd) {
+            let thumbnail = match entry.thumbnails.entry(target.id.handle) {
                 std::collections::hash_map::Entry::Occupied(slot) => slot.into_mut(),
                 std::collections::hash_map::Entry::Vacant(slot) => {
-                    match LiveThumbnail::register(owner, target.hwnd.hwnd) {
+                    match LiveThumbnail::register(owner, target.id.handle) {
                         Ok(thumbnail) => slot.insert(thumbnail),
                         Err(_) => continue,
                     }
@@ -84,9 +84,9 @@ impl LivePreviewManager {
                 .update(&target.rect, target.clip.as_ref(), opacity)
                 .is_ok()
             {
-                live.push(target.hwnd);
+                live.push(target.id);
             } else {
-                entry.thumbnails.remove(&target.hwnd.hwnd);
+                entry.thumbnails.remove(&target.id.handle);
             }
         }
         Ok(LiveWindowPreviewState {
@@ -215,7 +215,7 @@ fn bounded_targets(targets: Vec<WindowPreviewTarget>) -> Vec<WindowPreviewTarget
                 .clip
                 .as_ref()
                 .is_some_and(|clip| intersect_rects(&target.rect, clip).is_none())
-            || selected.iter().any(|entry| entry.hwnd == target.hwnd)
+            || selected.iter().any(|entry| entry.id == target.id)
         {
             continue;
         }
@@ -530,18 +530,18 @@ mod tests {
             bottom: 184,
         };
         let mut targets = vec![WindowPreviewTarget {
-            hwnd: WindowIdentity::from_handle(999),
+            id: WindowIdentity::from_handle(999),
             rect: Rect::default(),
             clip: None,
         }];
         for hwnd in 1..=40 {
             targets.push(WindowPreviewTarget {
-                hwnd: WindowIdentity::from_handle(hwnd),
+                id: WindowIdentity::from_handle(hwnd),
                 rect: rect.clone(),
                 clip: None,
             });
             targets.push(WindowPreviewTarget {
-                hwnd: WindowIdentity::from_handle(hwnd),
+                id: WindowIdentity::from_handle(hwnd),
                 rect: rect.clone(),
                 clip: None,
             });
@@ -551,7 +551,7 @@ mod tests {
         assert_eq!(
             selected
                 .iter()
-                .map(|target| target.hwnd.hwnd)
+                .map(|target| target.id.handle)
                 .collect::<Vec<_>>(),
             (1..=16).collect::<Vec<_>>()
         );

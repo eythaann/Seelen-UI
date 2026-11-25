@@ -63,11 +63,11 @@ impl crate::tauri_handlers::Handlers {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         if targets
             .iter()
-            .any(|target| !get_manager().contains_win(&Window::from(target.hwnd.hwnd)))
+            .any(|target| !get_manager().contains_win(&Window::from(target.id.handle)))
         {
             return Err("A preview source is no longer tracked".into());
         }
-        let sources: Vec<_> = targets.iter().map(|target| target.hwnd).collect();
+        let sources: Vec<_> = targets.iter().map(|target| target.id).collect();
         let status = AppPreviewsManager::instance().update_live(
             native_window(&webview)?.handle(),
             session,
@@ -77,7 +77,7 @@ impl crate::tauri_handlers::Handlers {
         if status.visible {
             for hwnd in sources {
                 if !status.live.contains(&hwnd) {
-                    AppPreviewsManager::instance().refresh_fallback(hwnd.hwnd);
+                    AppPreviewsManager::instance().refresh_fallback(hwnd.handle);
                 }
             }
         }

@@ -12,7 +12,7 @@
 
   let { hwnd, overlay }: Props = $props();
 
-  const windowData = $derived(state.windows.find((w: UserAppWindow) => w.hwnd === hwnd));
+  const windowData = $derived(state.windows.find((w: UserAppWindow) => w.id === hwnd));
   const preview = $derived(state.previews[hwnd]);
 
   const aspectRatio = $derived(preview ? preview.width / preview.height : 16 / 9);
@@ -37,7 +37,7 @@
   tabindex="0"
   onclick={(e) => {
     e.stopPropagation();
-    invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
+    invoke(SeelenCommand.WegToggleWindowState, { id: hwnd, wasFocused: false });
     Widget.self.hide();
   }}
   onkeydown={(e) => {
@@ -58,7 +58,7 @@
       data-skin="transparent"
       onclick={(e) => {
         e.stopPropagation();
-        invoke(SeelenCommand.WegCloseApp, { hwnd });
+        invoke(SeelenCommand.WegCloseApp, { id: hwnd });
       }}
     >
       <Icon iconName="TbX" />
