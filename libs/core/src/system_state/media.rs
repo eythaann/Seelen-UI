@@ -42,8 +42,14 @@ pub struct MediaPlayer {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaDeviceSession {
+    /// Windows session identifier. Not unique: the sessions of the processes of a same
+    /// app usually share it (e.g. Discord).
     pub id: String,
+    /// Unique per session.
     pub instance_id: String,
+    /// The app owning the session: shared by all the sessions of a same app, even when
+    /// their `id` differs. Volume and mute commands apply to every session of the app.
+    pub app_id: String,
     pub process_id: u32,
     pub name: String,
     pub icon_path: Option<PathBuf>,

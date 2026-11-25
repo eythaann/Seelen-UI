@@ -542,8 +542,20 @@ impl WindowsApi {
     }
 
     pub fn is_process_frozen(process_id: u32) -> Result<bool> {
+        let data = Self::process_basic_information(process_id)?;
+        Ok(unsafe { data.Anonymous.Flags } & ProcessInformationFlag::IsFrozen as u32 != 0)
+    }
+
+    /// Id of the process that created `process_id`. It may have exited since, and its id
+    /// may have been reused by another process: compare the creation times to be sure.
+    pub fn parent_process_id(process_id: u32) -> Result<u32> {
+        let data = Self::process_basic_information(process_id)?;
+        Ok(u32::try_from(data.BasicInfo.InheritedFromUniqueProcessId)?)
+    }
+
+    fn process_basic_information(process_id: u32) -> Result<PROCESS_EXTENDED_BASIC_INFORMATION> {
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
-        let is_frozen = unsafe {
+        unsafe {
             let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
             let status = NtQueryInformationProcess(
                 *handle,
@@ -561,10 +573,8 @@ impl WindowsApi {
                 .into());
             }
 
-            let data = buffer[0];
-            data.Anonymous.Flags & ProcessInformationFlag::IsFrozen as u32 != 0
-        };
-        Ok(is_frozen)
+            Ok(buffer[0])
+        }
     }
 
     /// Falls back to `get_process_path_by_pid` for processes we are not allowed to open.

@@ -56,6 +56,10 @@ impl NativeProcess {
         WindowsApi::process_creation_time(self.0)
     }
 
+    pub fn parent_id(&self) -> Result<u32> {
+        WindowsApi::parent_process_id(self.0)
+    }
+
     pub fn kill(&self) -> Result<()> {
         use std::os::windows::process::CommandExt;
         use windows::Win32::System::Threading::CREATE_NO_WINDOW;

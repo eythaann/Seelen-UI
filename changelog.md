@@ -17,6 +17,10 @@
   Seelen UI. The user's own wallpaper (or slideshow) is restored when Seelen UI is closed or the wallpaper manager is
   disabled.
 
+### fix
+
+- media popup: mixer only controlling one of the audio sessions of apps playing from several processes (e.g. Discord).
+
 ## [2.8.11]
 
 ### features

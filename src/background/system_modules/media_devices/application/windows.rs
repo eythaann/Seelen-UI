@@ -1,4 +1,7 @@
-use std::{path::PathBuf, sync::Arc};
+use std::{
+    path::{Path, PathBuf},
+    sync::Arc,
+};
 
 use seelen_core::system_state::{MediaDevice, MediaDeviceSession, MediaDeviceType};
 use windows::Win32::{
@@ -6,7 +9,7 @@ use windows::Win32::{
     Foundation::PROPERTYKEY,
     Media::Audio::{
         AUDIO_VOLUME_NOTIFICATION_DATA, AudioSessionDisconnectReason, AudioSessionState,
-        DEVICE_STATE, DEVICE_STATE_ACTIVE, EDataFlow, ERole,
+        AudioSessionStateExpired, DEVICE_STATE, DEVICE_STATE_ACTIVE, EDataFlow, ERole,
         Endpoints::{
             IAudioEndpointVolume, IAudioEndpointVolumeCallback, IAudioEndpointVolumeCallback_Impl,
         },
@@ -23,7 +26,7 @@ use windows_core::{BOOL, GUID, Interface, PCWSTR};
 use crate::{
     error::{Result, ResultLogExt},
     event_manager,
-    platform::process::Process,
+    platform::process::{Process, WindowsProcessExt},
     system_modules::media_devices::domain::{MediaDevicesSysEvent, MediaDevicesSystem},
     utils::lock_free::SyncHashMap,
     windows_api::{Com, ComThread, WindowsApi, string_utils::WindowsString},
@@ -90,9 +93,13 @@ impl MediaDevicesSystem for WindowsMediaDevices {
         self.with_device(device_id, |device| unsafe {
             match session_id {
                 Some(session_id) => {
-                    if let Some(session) = device.session(session_id) {
-                        let volume: ISimpleAudioVolume = session.controls.cast()?;
-                        volume.SetMute(!volume.GetMute()?.as_bool(), &GUID::zeroed())?;
+                    let volumes = device.app_volumes(session_id);
+                    // mute the whole app unless all its sessions are already muted
+                    let mute = volumes
+                        .iter()
+                        .any(|volume| volume.GetMute().is_ok_and(|muted| !muted.as_bool()));
+                    for volume in volumes {
+                        volume.SetMute(mute, &GUID::zeroed()).log_error();
                     }
                 }
                 None => {
@@ -113,9 +120,8 @@ impl MediaDevicesSystem for WindowsMediaDevices {
         self.with_device(device_id, |device| unsafe {
             match session_id {
                 Some(session_id) => {
-                    if let Some(session) = device.session(session_id) {
-                        let volume: ISimpleAudioVolume = session.controls.cast()?;
-                        volume.SetMasterVolume(level, &GUID::zeroed())?;
+                    for volume in device.app_volumes(session_id) {
+                        volume.SetMasterVolume(level, &GUID::zeroed()).log_error();
                     }
                 }
                 None => {
@@ -205,11 +211,11 @@ enum RawDevicesEvent {
     },
     SessionRemoved {
         device_id: String,
-        session_id: String,
+        instance_id: String,
     },
     SessionVolumeChanged {
         device_id: String,
-        session_id: String,
+        instance_id: String,
         volume: f32,
         muted: bool,
     },
@@ -391,25 +397,27 @@ impl DevicesState {
             }
             RawDevicesEvent::SessionAdded { device_id, session } => {
                 self.update_device(device_id, |device| {
+                    // a session can be reported twice when it is created while loading
+                    device.remove_session(&session.instance_id);
                     device.sessions.push(session.clone());
                 });
             }
             RawDevicesEvent::SessionRemoved {
                 device_id,
-                session_id,
+                instance_id,
             } => {
                 self.update_device(device_id, |device| {
-                    device.remove_session(session_id);
+                    device.remove_session(instance_id);
                 });
             }
             RawDevicesEvent::SessionVolumeChanged {
                 device_id,
-                session_id,
+                instance_id,
                 volume,
                 muted,
             } => {
                 self.update_device(device_id, |device| {
-                    if let Some(session) = device.session_mut(session_id) {
+                    if let Some(session) = device.session_mut(instance_id) {
                         session.volume = *volume;
                         session.muted = *muted;
                     }
@@ -511,6 +519,12 @@ impl NativeDevice {
             let enumerator = sm.GetSessionEnumerator()?;
             for session_idx in 0..enumerator.GetCount()? {
                 let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
+                if session
+                    .GetState()
+                    .is_ok_and(|state| state == AudioSessionStateExpired)
+                {
+                    continue;
+                }
                 match NativeSession::load(session, device_id) {
                     Ok(s) => sessions.push(s),
                     Err(e) => log::error!("Failed to load session: {e:?}"),
@@ -537,17 +551,33 @@ impl NativeDevice {
         }
     }
 
-    fn session(&self, session_id: &str) -> Option<&NativeSession> {
-        self.sessions.iter().find(|s| s.id == session_id)
+    /// Volume controls of every session of the app owning the session `session_id`
+    /// (its `instance_id`, or its `id` for callers that still send it).
+    fn app_volumes(&self, session_id: &str) -> Vec<ISimpleAudioVolume> {
+        let Some(target) = self
+            .sessions
+            .iter()
+            .find(|s| s.instance_id == session_id)
+            .or_else(|| self.sessions.iter().find(|s| s.id == session_id))
+        else {
+            return Vec::new();
+        };
+        self.sessions
+            .iter()
+            .filter(|s| s.app_id == target.app_id)
+            .filter_map(|s| s.controls.cast().ok())
+            .collect()
     }
 
-    fn session_mut(&mut self, session_id: &str) -> Option<&mut NativeSession> {
-        self.sessions.iter_mut().find(|s| s.id == session_id)
+    fn session_mut(&mut self, instance_id: &str) -> Option<&mut NativeSession> {
+        self.sessions
+            .iter_mut()
+            .find(|s| s.instance_id == instance_id)
     }
 
-    fn remove_session(&mut self, session_id: &str) {
+    fn remove_session(&mut self, instance_id: &str) {
         for session in std::mem::take(&mut self.sessions) {
-            if session.id == session_id {
+            if session.instance_id == instance_id {
                 session.release();
                 continue;
             }
@@ -575,6 +605,7 @@ struct NativeSession {
     // ---
     id: String,
     instance_id: String,
+    app_id: String,
     process_id: u32,
     name: String,
     icon_path: Option<PathBuf>,
@@ -587,22 +618,25 @@ impl NativeSession {
     unsafe fn load(session: IAudioSessionControl2, device_id: &str) -> Result<Self> {
         unsafe {
             let session_id = WindowsString::from(session.GetSessionIdentifier()?).to_string();
+            let instance_id =
+                WindowsString::from(session.GetSessionInstanceIdentifier()?).to_string();
             let volume: ISimpleAudioVolume = session.cast()?;
             let process = Process::from_id(session.GetProcessId()?);
+            let is_system = session.IsSystemSoundsSession().0 == 0;
 
             let events_callback = IAudioSessionEvents::from(SessionEventHandler {
                 device_id: device_id.to_owned(),
-                session_id: session_id.clone(),
+                instance_id: instance_id.clone(),
             });
 
             let session = NativeSession {
+                app_id: Self::app_id(&process, is_system, &session_id),
                 id: session_id,
-                instance_id: WindowsString::from(session.GetSessionInstanceIdentifier()?)
-                    .to_string(),
+                instance_id,
                 process_id: process.id(),
                 name: process.display_name().unwrap_or_else(|_| "???".to_string()),
                 icon_path: process.exe_path().ok(),
-                is_system: session.IsSystemSoundsSession().0 == 0,
+                is_system,
                 volume: volume.GetMasterVolume()?,
                 muted: volume.GetMute()?.as_bool(),
                 controls: session,
@@ -616,10 +650,51 @@ impl NativeSession {
         }
     }
 
+    /// Groups the sessions by app: all processes of a packaged app share their package, the
+    /// others their executable and the process that launched that executable (e.g. Discord's
+    /// voice process is a child of its main process). The root process keeps apart unrelated
+    /// apps sharing a host executable (WebView2 apps, `java.exe`, `python.exe`...). Windows'
+    /// own session identifier is not enough, as the processes of a same app can get different
+    /// ones.
+    fn app_id(process: &Process, is_system: bool, session_id: &str) -> String {
+        if is_system {
+            return "system".to_owned();
+        }
+        if let Ok(aumid) = process.package_app_user_model_id() {
+            // "PackageFamilyName!AppId"
+            let family = aumid.split('!').next().unwrap_or(&aumid);
+            return format!("package:{}", family.to_lowercase());
+        }
+        if let Ok(path) = process.exe_path() {
+            let root = Self::root_process_id(process, &path);
+            return format!("exe:{}|{root}", path.to_string_lossy().to_lowercase());
+        }
+        // the process can't be inspected (e.g. elevated): Windows' identifier still names its
+        // executable, which is at least shared by all its processes
+        match exe_from_session_identifier(session_id) {
+            Some(exe) => format!("exe:{}", exe.to_lowercase()),
+            None => session_id.to_owned(),
+        }
+    }
+
+    /// Id of the first process of the tree of processes running the executable `exe`.
+    fn root_process_id(process: &Process, exe: &Path) -> u32 {
+        let mut root = Process::from_id(process.id());
+        // bounded, in case of a cycle caused by reused ids
+        for _ in 0..32 {
+            match root.parent() {
+                Ok(parent) if parent.exe_path().is_ok_and(|path| path == exe) => root = parent,
+                _ => break,
+            }
+        }
+        root.id()
+    }
+
     fn to_core(&self) -> MediaDeviceSession {
         MediaDeviceSession {
             id: self.id.clone(),
             instance_id: self.instance_id.clone(),
+            app_id: self.app_id.clone(),
             process_id: self.process_id,
             name: self.name.clone(),
             icon_path: self.icon_path.clone(),
@@ -732,7 +807,7 @@ impl IAudioSessionNotification_Impl for DeviceEventHandler_Impl {
 #[windows_core::implement(IAudioSessionEvents)]
 struct SessionEventHandler {
     device_id: String,
-    session_id: String,
+    instance_id: String,
 }
 
 impl IAudioSessionEvents_Impl for SessionEventHandler_Impl {
@@ -776,7 +851,7 @@ impl IAudioSessionEvents_Impl for SessionEventHandler_Impl {
     ) -> windows_core::Result<()> {
         DevicesState::send(RawDevicesEvent::SessionRemoved {
             device_id: self.device_id.clone(),
-            session_id: self.session_id.clone(),
+            instance_id: self.instance_id.clone(),
         });
         Ok(())
     }
@@ -789,14 +864,58 @@ impl IAudioSessionEvents_Impl for SessionEventHandler_Impl {
     ) -> windows_core::Result<()> {
         DevicesState::send(RawDevicesEvent::SessionVolumeChanged {
             device_id: self.device_id.clone(),
-            session_id: self.session_id.clone(),
+            instance_id: self.instance_id.clone(),
             volume: new_volume,
             muted: new_mute.as_bool(),
         });
         Ok(())
     }
 
-    fn OnStateChanged(&self, _new_state: AudioSessionState) -> windows_core::Result<()> {
+    fn OnStateChanged(&self, new_state: AudioSessionState) -> windows_core::Result<()> {
+        // an expired session will never play again (its process released it or exited), but
+        // it is not always disconnected: keeping it would distort its app's row in the mixer
+        if new_state == AudioSessionStateExpired {
+            DevicesState::send(RawDevicesEvent::SessionRemoved {
+                device_id: self.device_id.clone(),
+                instance_id: self.instance_id.clone(),
+            });
+        }
         Ok(())
+    }
+}
+
+/// Executable part of a session identifier, e.g.
+/// `{0.0.0.00000000}.{guid}|\Device\HarddiskVolume3\Program Files\App\app.exe%b{guid}`.
+fn exe_from_session_identifier(session_id: &str) -> Option<&str> {
+    let (_, rest) = session_id.split_once('|')?;
+    let exe = rest.split_once("%b").map_or(rest, |(exe, _)| exe);
+    (!exe.is_empty()).then_some(exe)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::exe_from_session_identifier;
+
+    #[test]
+    fn exe_is_read_from_session_identifier() {
+        assert_eq!(
+            exe_from_session_identifier(
+                r"{0.0.0.00000000}.{a1b2}|\Device\HarddiskVolume3\Apps\Discord.exe%b{00000000-0000-0000-0000-000000000000}"
+            ),
+            Some(r"\Device\HarddiskVolume3\Apps\Discord.exe")
+        );
+        assert_eq!(
+            exe_from_session_identifier(r"{0.0.0.00000000}.{a1b2}|\Device\app.exe"),
+            Some(r"\Device\app.exe")
+        );
+    }
+
+    #[test]
+    fn identifier_without_exe() {
+        assert_eq!(
+            exe_from_session_identifier("{0.0.0.00000000}.{a1b2}|%b{guid}"),
+            None
+        );
+        assert_eq!(exe_from_session_identifier("no-separator"), None);
     }
 }
