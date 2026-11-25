@@ -1,5 +1,5 @@
 if (!batteries.length) {
-  return icon("TbPlugConnected");
+  return Icon({ name: "TbPlugConnected" });
 }
 
 const averagePercentage = batteries.reduce((total, battery) => total + battery.percentage, 0) / batteries.length;
@@ -13,37 +13,37 @@ const isSmartChargeActive = batteries.some((battery) => battery.smartCharging);
 let group = [];
 
 if (isCharging) {
-  group.push(icon("BsLightningChargeFill"));
+  group.push(Icon({ name: "BsLightningChargeFill" }));
   if (isSmartChargeActive) {
-    group.push(icon("IoHeart"));
+    group.push(Icon({ name: "IoHeart" }));
   }
   group.push(" ");
 }
 
 if (powerMode === "BetterBattery" || powerMode === "BatterySaver") {
-  group.push(icon("IoLeaf"));
+  group.push(Icon({ name: "IoLeaf" }));
   group.push(" ");
 } else if (powerMode === "HighPerformance" || powerMode === "MaxPerformance") {
-  group.push(icon("IoSpeedometer"));
+  group.push(Icon({ name: "IoSpeedometer" }));
   group.push(" ");
 } else if (powerMode === "GameMode") {
-  group.push(icon("IoGameController"));
+  group.push(Icon({ name: "IoGameController" }));
   group.push(" ");
 } else if (powerMode === "MixedReality") {
-  group.push(icon("TbCardboardsFilled"));
+  group.push(Icon({ name: "TbCardboardsFilled" }));
   group.push(" ");
 }
 
 group.push(
   averagePercentage > 90
-    ? icon("PiBatteryFullFill")
+    ? Icon({ name: "PiBatteryFullFill" })
     : averagePercentage > 66
-    ? icon("PiBatteryHighFill")
+    ? Icon({ name: "PiBatteryHighFill" })
     : averagePercentage > 33
-    ? icon("PiBatteryMediumFill")
+    ? Icon({ name: "PiBatteryMediumFill" })
     : averagePercentage > 5
-    ? icon("PiBatteryLowFill")
-    : icon("PiBatteryWarning"),
+    ? Icon({ name: "PiBatteryLowFill" })
+    : Icon({ name: "PiBatteryWarning" }),
 );
 
 group.push(" ");

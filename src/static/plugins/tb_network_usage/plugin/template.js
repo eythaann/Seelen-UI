@@ -17,4 +17,4 @@ units.forEach((unitSize) => {
 const recieved = totalRecieved === 0 ? "-" : totalRecieved.toFixed(0) + unit + "ps";
 const transmitted = totalTransmitted === 0 ? "-" : totalTransmitted.toFixed(0) + unit + "ps";
 
-return [icon("PiArrowsDownUpBold"), " ", recieved + " | " + transmitted];
+return [Icon({ name: "PiArrowsDownUpBold" }), " ", recieved + " | " + transmitted];
