@@ -14,11 +14,5 @@
         "no-sloppy-imports"
       ]
     }
-  },
-  "fmt": {
-    "lineWidth": 120,
-    "exclude": [
-      "**/i18n/translations/**"
-    ]
   }
 }
