@@ -3,7 +3,7 @@
   import { convertFileSrc } from "@tauri-apps/api/core";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { createSortable } from "@dnd-kit/svelte/sortable";
-  import { MissingIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon } from "libs/ui/svelte/components/Icon";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
 
   interface Props {
@@ -102,7 +102,7 @@
           />
         {/if}
       {:else}
-        <MissingIcon class="system-tray-item-icon" />
+        <FileIcon path={item.executablePath || undefined} class="system-tray-item-icon" />
       {/if}
     </div>
 

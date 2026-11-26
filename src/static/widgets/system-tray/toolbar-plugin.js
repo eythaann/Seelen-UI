@@ -27,10 +27,9 @@ const items = trayIcons
       onClick,
       onAuxClick,
       onContextMenu,
-      content: Image({
-        path: icon.iconPath,
-        version: icon.iconImageHash,
-      }),
+      content: icon.iconPath
+        ? Image({ path: icon.iconPath, version: icon.iconImageHash })
+        : AppIcon({ path: icon.executablePath || undefined }),
     });
   });
 
