@@ -1,6 +1,4 @@
-import type { AppOrFileWegItem } from "../types";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { notifications } from "./getters.svelte";
 import { BadgeGlyph, type UserAppWindow } from "@seelen-ui/lib/types";
 import type { IconName } from "libs/ui/icons";
 
@@ -41,7 +39,9 @@ type Badge =
   | { type: "icon"; name: IconName }
   | { type: "image"; src: string };
 
-export function getBadge(item: AppOrFileWegItem, windows: UserAppWindow[]): Badge | null {
+export function getBadge(
+  windows: readonly Pick<UserAppWindow, "badgeValue" | "badgeIconPath" | "badgeUpdatedAt">[],
+): Badge | null {
   const badgeValue = windows.find((w) => w.badgeValue)?.badgeValue;
   if (badgeValue) {
     if (typeof badgeValue === "number") {
@@ -65,11 +65,6 @@ export function getBadge(item: AppOrFileWegItem, windows: UserAppWindow[]): Badg
       type: "image",
       src: convertFileSrc(winWithBadge.badgeIconPath) + `?v=${winWithBadge.badgeUpdatedAt}`,
     };
-  }
-
-  const notificationsCount = notifications.value.filter((n) => n.appUmid === item.umid).length;
-  if (notificationsCount) {
-    return { type: "count", count: Math.min(notificationsCount, 99) };
   }
 
   return null;

@@ -36,9 +36,8 @@ const LIVENESS_PROVE_WAIT_TIMEOUT: Duration = Duration::from_secs(3);
 const LIVENESS_PROVE_MAX_RETRIES: u8 = 5;
 // Grace period after session resume or soft_restart to let the webview finish reloading.
 const LIVENESS_RELOAD_GRACE_PERIOD: Duration = Duration::from_secs(10);
-// Widgets sit occluded/background almost all the time, so the OS never signals real
-// memory pressure to their renderer and the JS heap balloons unchecked. Simulating it
-// periodically forces WebView2 to actually release freed pages back to the OS.
+// Hidden widgets may remain loaded for quick reopening. Periodically reclaim
+// their unused memory without interrupting visible widgets.
 const MEMORY_PRESSURE_INTERVAL: Duration = Duration::from_secs(30);
 
 pub struct WidgetDeployment {

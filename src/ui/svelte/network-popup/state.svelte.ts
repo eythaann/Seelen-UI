@@ -13,15 +13,8 @@ let widget = Widget.getCurrent();
 
 const settings = lazyRune(() => Settings.getAsync());
 Settings.onChange((s) => (settings.value = s));
-await settings.init();
 
 const isDevtoolsEnabled = $derived(settings.value.devTools);
-
-$effect.root(() => {
-  $effect(() => {
-    locale.set(settings.value.language);
-  });
-});
 
 let wlanBssEntries = $state<WlanBssEntry[]>([]);
 subscribe(SeelenEvent.NetworkWlanScanned, ({ payload }) => {
@@ -30,19 +23,23 @@ subscribe(SeelenEvent.NetworkWlanScanned, ({ payload }) => {
 
 let radios = lazyRune(() => invoke(SeelenCommand.GetRadios));
 subscribe(SeelenEvent.RadiosChanged, radios.setByPayload);
-await radios.init();
 
 let hotspot = lazyRune(() => invoke(SeelenCommand.GetNetworkHotspot));
 subscribe(SeelenEvent.NetworkHotspotChanged, hotspot.setByPayload);
-await hotspot.init();
 
 let adapters = lazyRune(() => invoke(SeelenCommand.GetNetworkAdapters));
 subscribe(SeelenEvent.NetworkAdapters, adapters.setByPayload);
-await adapters.init();
 
 let online = lazyRune(() => invoke(SeelenCommand.GetNetworkInternetConnection));
 subscribe(SeelenEvent.NetworkInternetConnection, online.setByPayload);
-await online.init();
+
+await Promise.all([settings.init(), radios.init(), hotspot.init(), adapters.init(), online.init()]);
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language);
+  });
+});
 
 /**
  * Ethernet interfaces with link, physical or virtual. Unplugged ones are hidden (they would

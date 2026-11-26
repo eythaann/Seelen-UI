@@ -178,7 +178,7 @@
 <div bind:this={container} class="weg-item-preview-container slu-std-popover">
   <div bind:this={list} class="weg-item-preview-list" onscroll={invalidate}>
     {#each previewState.currentInteractables as win (win.hwnd)}
-      {@const preview = previewState.previews.value[win.hwnd]}
+      {@const preview = previewState.previews[win.hwnd]}
       <div class="weg-item-preview">
         <div class="weg-item-preview-topbar">
           <div class="weg-item-preview-title">{win.title}</div>

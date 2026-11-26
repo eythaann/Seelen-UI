@@ -9,7 +9,7 @@
   import { dockState, listToGroups } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
-  import { getWindowsForItem, windowsState } from "../state/windows.svelte.ts";
+  import { windowsState } from "../state/windows.svelte.ts";
   import { dockShouldBeHidden, setDockIsDraggingItem } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
   import { createDragDropManager } from "libs/ui/dnd.ts";
@@ -35,7 +35,7 @@
     if (item.pinned && showPinned) {
       return true;
     }
-    return getWindowsForItem(item as any, windowsState.dockWindows).length > 0;
+    return windowsState.windowsFor(item).length > 0;
   }
 
   // splits the flat items array (left..., left-separator, center..., right-separator, ...right)

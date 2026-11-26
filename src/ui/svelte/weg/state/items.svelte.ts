@@ -3,7 +3,7 @@ import type { PluginId, WegItem, WegItems } from "@seelen-ui/lib/types";
 import { debounce } from "lodash";
 import { emit, listen } from "@tauri-apps/api/event";
 import type { AppOrFileWegItem, SeparatorWegItem } from "../types.ts";
-import { getWindowsForItem, interactables } from "./windows.svelte.ts";
+import { interactables, windowsState } from "./windows.svelte.ts";
 import { plugins, wegItems } from "./getters.svelte.ts";
 import { isHorizontalDock } from "./settings.svelte.ts";
 import { stableUUID } from "libs/ui/utils.ts";
@@ -286,13 +286,16 @@ $effect.root(() => {
 
     const itemsToRemove = new Set(
       appOrFileItems
-        .filter((item) => !item.pinned && getWindowsForItem(item, windows).length === 0)
+        .filter((item) => !item.pinned && windowsState.allWindowsFor(item).length === 0)
         .map((item) => item.id),
     );
 
     const remainingItems = appOrFileItems.filter((item) => !itemsToRemove.has(item.id));
+    const coveredWindows = new Set(
+      remainingItems.flatMap((item) => windowsState.allWindowsFor(item).map((window) => window.hwnd)),
+    );
     const uncoveredWindows = windows.filter(
-      (w) => !remainingItems.some((item) => getWindowsForItem(item, [w]).length > 0),
+      (window) => !coveredWindows.has(window.hwnd),
     );
 
     const seen = new Set<string>();

@@ -2,6 +2,7 @@ import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-u
 import type { Wallpaper } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
+import { PreviewSnapshots } from "libs/ui/svelte/utils/PreviewSnapshots.svelte.ts";
 
 let wallpapers = lazyRune(() => invoke(SeelenCommand.StateGetWallpapers));
 subscribe(SeelenEvent.StateWallpapersChanged, wallpapers.setByPayload);
@@ -12,15 +13,17 @@ subscribe(SeelenEvent.VirtualDesktopsChanged, workspaces.setByPayload);
 let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
 
-let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
+const previews = new PreviewSnapshots();
+Widget.self.onVisibilityChange((visible) => {
+  if (visible) previews.start();
+  else previews.stop();
+});
 
 await Promise.all([
   monitors.init(),
   wallpapers.init(),
   workspaces.init(),
   windows.init(),
-  previews.init(),
 ]);
 
 $effect.root(() => {

@@ -45,23 +45,30 @@ const widgetRect = $derived.by(() => {
     (settings.size + settings.padding * 2 + settings.margin * 2) *
       systemState.currentMonitor.scaleFactor,
   );
+  // The built-in theme only needs space beyond the hitbox for shadows and
+  // badges. Third-party themes may draw farther into the transparent window.
+  const compact = _settings.value.activeThemes.every((id) => id === "@default/theme");
+  const extent = (available: number) =>
+    isTouchPrimary.value ? size : Math.min(available, compact ? size * 2 : Math.round(available / 4));
+  const width = extent(wa.right - wa.left);
+  const height = extent(wa.bottom - wa.top);
 
   switch (settings.position) {
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = isTouchPrimary.value ? hitboxRect.right : wa.right - Math.round((wa.right - wa.left) / 4);
+      webviewRect.right = wa.left + width;
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = isTouchPrimary.value ? hitboxRect.left : wa.left + Math.round((wa.right - wa.left) / 4);
+      webviewRect.left = wa.right - width;
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = isTouchPrimary.value ? hitboxRect.bottom : wa.top + Math.round((wa.bottom - wa.top) / 4);
+      webviewRect.bottom = wa.top + height;
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = isTouchPrimary.value ? hitboxRect.top : wa.bottom - Math.round((wa.bottom - wa.top) / 4);
+      webviewRect.top = wa.bottom - height;
       break;
   }
 

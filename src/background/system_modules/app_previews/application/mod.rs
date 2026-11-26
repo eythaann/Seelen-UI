@@ -32,8 +32,7 @@ type Platform = windows::WindowsAppPreviews;
 const CAPTURE_DEBOUNCE: Duration = Duration::from_millis(200);
 /// A restored window takes a moment to draw its content.
 const RESTORED_CAPTURE_DELAY: Duration = Duration::from_millis(300);
-/// Snapshot fallbacks (windows DWM could not compose live) are refreshed at most this often:
-/// each capture is encoded and broadcast to every webview.
+/// Snapshot fallbacks (windows DWM could not compose live) are refreshed at most this often.
 const FALLBACK_REFRESH: Duration = Duration::from_secs(1);
 
 static MANAGER: OnceLock<AppPreviewsManager> = OnceLock::new();
@@ -87,18 +86,26 @@ impl AppPreviewsManager {
 
     fn init(&mut self) -> Result<()> {
         let apps = UserAppsManager::instance();
-        for hwnd in apps.interactable_windows.map(|w| w.hwnd.hwnd) {
+        for hwnd in apps.interactable_windows.map(|window| window.hwnd) {
             self.register_window(hwnd);
         }
 
         UserAppsManager::subscribe(|event| {
             let manager = Self::instance();
             match event {
-                UserAppWinEvent::Added(hwnd) => manager.register_window(hwnd),
+                UserAppWinEvent::Added(hwnd) => {
+                    let identity = UserAppsManager::instance()
+                        .interactable_windows
+                        .find_and_clone(|window| window.hwnd.hwnd == hwnd)
+                        .map(|window| window.hwnd);
+                    if let Some(hwnd) = identity {
+                        manager.register_window(hwnd);
+                    }
+                }
                 UserAppWinEvent::Updated(_) => {}
                 UserAppWinEvent::Removed(hwnd) => {
-                    if manager.previews.remove(&hwnd).is_some() {
-                        Self::send(PreviewsEvent::Cleaned { hwnd });
+                    if let Some(entry) = manager.previews.remove(&hwnd) {
+                        Self::send(PreviewsEvent::Cleaned { hwnd: entry.hwnd });
                     }
                 }
             }
@@ -118,7 +125,8 @@ impl AppPreviewsManager {
         })
     }
 
-    fn register_window(&self, hwnd: WindowHandle) {
+    fn register_window(&self, identity: WindowIdentity) {
+        let hwnd = identity.hwnd;
         let capture = debounce(
             move |_| {
                 Self::instance().queue_capture(hwnd);
@@ -128,6 +136,7 @@ impl AppPreviewsManager {
         self.previews.upsert(
             hwnd,
             PreviewEntry {
+                hwnd: identity,
                 preview: None,
                 colors: None,
                 capture,
@@ -167,6 +176,14 @@ impl AppPreviewsManager {
     }
 
     fn capture(&self, hwnd: WindowHandle) -> Result<()> {
+        let Some((identity, previous_hash)) = self.previews.get(&hwnd, |entry| {
+            (
+                entry.hwnd,
+                entry.preview.as_ref().map(|preview| preview.hash.clone()),
+            )
+        }) else {
+            return Ok(());
+        };
         let Some(image) = self.platform.capture(hwnd)? else {
             return Ok(());
         };
@@ -176,22 +193,29 @@ impl AppPreviewsManager {
         let colors = sample_edge_colors(&image);
         let hash = image_hash(&image);
 
-        let unchanged = self
-            .previews
-            .get(&hwnd, |entry| {
-                entry.preview.as_ref().is_some_and(|p| p.hash == hash)
-            })
-            .unwrap_or(false);
-
-        if !unchanged {
-            let preview = encode_preview(image, hash)?;
-            self.previews
-                .get(&hwnd, |entry| entry.preview = Some(preview));
-            Self::send(PreviewsEvent::Captured { hwnd });
+        let preview = if previous_hash.as_deref() == Some(hash.as_str()) {
+            None
+        } else {
+            Some(encode_preview(image, hash)?)
+        };
+        let changed = preview.is_some();
+        let stored = self.previews.get(&hwnd, |entry| {
+            if entry.hwnd != identity {
+                return false;
+            }
+            if let Some(preview) = preview {
+                entry.preview = Some(preview);
+            }
+            entry.colors = Some(colors);
+            true
+        });
+        if stored != Some(true) {
+            return Ok(());
         }
 
-        self.previews
-            .get(&hwnd, |entry| entry.colors = Some(colors));
+        if changed {
+            Self::send(PreviewsEvent::Captured { hwnd: identity });
+        }
         Self::send(PreviewsEvent::ColorsUpdated { hwnd });
         Ok(())
     }
@@ -213,12 +237,26 @@ impl AppPreviewsManager {
         self.platform.clear_live(owner, session);
     }
 
+    pub fn preview(&self, identity: WindowIdentity) -> Option<UserAppWindowPreview> {
+        self.previews
+            .get(&identity.hwnd, |entry| {
+                if entry.hwnd == identity {
+                    entry.preview.clone()
+                } else {
+                    None
+                }
+            })
+            .flatten()
+    }
+
     pub fn previews(&self) -> HashMap<WindowIdentity, UserAppWindowPreview> {
         let identities = interactable_identities();
         let mut map = HashMap::new();
         self.previews.for_each(|(k, v)| {
-            if let (Some(id), Some(preview)) = (identities.get(k), &v.preview) {
-                map.insert(*id, preview.clone());
+            if identities.get(k) == Some(&v.hwnd)
+                && let Some(preview) = &v.preview
+            {
+                map.insert(v.hwnd, preview.clone());
             }
         });
         map
@@ -228,8 +266,10 @@ impl AppPreviewsManager {
         let identities = interactable_identities();
         let mut map = HashMap::new();
         self.previews.for_each(|(k, v)| {
-            if let (Some(id), Some(colors)) = (identities.get(k), &v.colors) {
-                map.insert(*id, colors.clone());
+            if identities.get(k) == Some(&v.hwnd)
+                && let Some(colors) = &v.colors
+            {
+                map.insert(v.hwnd, colors.clone());
             }
         });
         map
@@ -237,6 +277,7 @@ impl AppPreviewsManager {
 }
 
 struct PreviewEntry {
+    hwnd: WindowIdentity,
     preview: Option<UserAppWindowPreview>,
     colors: Option<UserAppWindowColors>,
     capture: Debounce<()>,

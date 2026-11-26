@@ -99,6 +99,17 @@ body {
   gap: var(--spacing-xs);
 }
 
+.pinned-view-slot {
+  aspect-ratio: 1;
+
+  &.is-drop-target {
+    background-color: var(--slu-std-ui-selected-overlay);
+    outline: 2px dashed var(--system-accent-color);
+    outline-offset: -2px;
+    border-radius: var(--radius-m);
+  }
+}
+
 .pinned-view-empty,
 .all-apps-view-empty {
   width: 100%;

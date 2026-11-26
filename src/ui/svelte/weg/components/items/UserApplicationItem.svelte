@@ -11,7 +11,7 @@
   import { activateOrLaunch, getMatchingTrayIcons } from "../../activateOrLaunch.ts";
   import { hoverPreviewDelay, onHoverPreviewItemLeave, triggerPreviewWidget } from "../../previewWidget.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
-  import { getBadge } from "../../state/badge.svelte.ts";
+  import { getBadge } from "../../state/badge.ts";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import { onDestroy } from "svelte";
 
@@ -24,7 +24,7 @@
 
   const settings = $derived(settingsState.value as any);
 
-  const badge = $derived(getBadge(item, windows));
+  const badge = $derived(getBadge(windows));
 
   const itemLabel = $derived(
     settings?.showWindowTitle && windows.length ? windows[0]!.title : null,

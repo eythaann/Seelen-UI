@@ -34,7 +34,10 @@ use crate::{
     resources::RESOURCES,
     state::FULL_STATE,
     utils::{atomic_write_file, constants::SEELEN_COMMON, lock_free::SyncHashMap},
-    widgets::{manager::WIDGET_MANAGER, webview::WidgetWebviewLabel},
+    widgets::{
+        manager::{WIDGET_MANAGER, schedule_taskbar_popup_prewarm},
+        webview::WidgetWebviewLabel,
+    },
 };
 
 static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerPayload>> =
@@ -101,6 +104,12 @@ fn trigger_widget_inner(
         log::trace!("Trigger postponed, because widget instance is not ready: {label}");
         PENDING_TRIGGERS.upsert(label.clone(), payload);
 
+        // A prewarming webview can become ready between the first check and the insert.
+        // Either thread can claim the queued trigger, so the click is delivered once.
+        if WIDGET_MANAGER.is_ready(&label) {
+            return emit_pending_trigger(label);
+        }
+
         WIDGET_MANAGER.deployments.get(&label.widget_id, |c| {
             c.start_webview(&label);
         });
@@ -108,6 +117,14 @@ fn trigger_widget_inner(
     }
 
     get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &payload)?;
+    Ok(())
+}
+
+fn emit_pending_trigger(label: WidgetWebviewLabel) -> Result<()> {
+    if let Some(pending) = PENDING_TRIGGERS.remove(&label) {
+        log::info!("Emitting pending trigger for {label}");
+        get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
+    }
     Ok(())
 }
 
@@ -201,10 +218,9 @@ impl crate::tauri_handlers::Handlers {
     ) -> Result<()> {
         let label = WidgetWebviewLabel::try_from_raw(webview.label())?;
         WIDGET_MANAGER.set_status(&label, status);
-
-        if let Some(pending) = PENDING_TRIGGERS.remove(&label) {
-            log::info!("Emitting pending trigger for {label}");
-            get_app_handle().emit_to(label.raw, SeelenEvent::WidgetTriggered, &pending)?;
+        if status == WidgetStatus::Ready {
+            schedule_taskbar_popup_prewarm(&label.widget_id);
+            return emit_pending_trigger(label);
         }
         Ok(())
     }

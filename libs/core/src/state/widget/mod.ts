@@ -139,14 +139,6 @@ export class Widget extends WidgetBasics {
         focusable = !hover;
         await this.window.setFocusable(focusable);
       }
-      await this.show();
-
-      if (hover) {
-        hoverDismissal.start(anchorRect ?? null);
-      } else {
-        hoverDismissal.stop();
-        await this.focus();
-      }
 
       // After positioning, re-run the autosizer to correct any size discrepancy. The trigger
       // reads OPTIMISTIC_FRAME which may be stale: onResized events from prior async resizes
@@ -156,6 +148,14 @@ export class Widget extends WidgetBasics {
       // here detects the remaining diff and issues a corrective resize + position adjustment.
       if (this.autoSize.enabled) {
         await this.executeAutoSize();
+      }
+      await this.show();
+
+      if (hover) {
+        hoverDismissal.start(anchorRect ?? null);
+      } else {
+        hoverDismissal.stop();
+        await this.focus();
       }
     });
   }

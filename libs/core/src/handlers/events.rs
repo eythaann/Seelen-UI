@@ -78,6 +78,8 @@ slu_events_declaration! {
     UserFolderChanged(FolderChangedArgs) as "user::known-folder-changed",
     UserAppWindowsChanged(Vec<UserAppWindow>) as "user::windows-changed",
     UserAppWindowsPreviewsChanged(HashMap<WindowIdentity, UserAppWindowPreview>) as "user::windows-previews-changed",
+    @queued()
+    UserAppWindowPreviewDelta(UserAppWindowPreviewDelta) as "user::window-preview-delta",
     UserAppWindowsColorsChanged(HashMap<WindowIdentity, UserAppWindowColors>) as "user::windows-colors-changed",
 
     MediaSessions(Vec<MediaPlayer>) as "media-sessions",

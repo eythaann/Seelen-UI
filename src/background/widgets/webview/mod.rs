@@ -289,7 +289,6 @@ impl WebviewArgs {
         "--disable-crash-reporter",
         "--disable-background-networking",
         "--disable-component-update",
-        "--disable-background-timer-throttling",
         "--disable-backgrounding-occluded-windows",
         // prevents the browser from lowering the CPU priority of invisible windows, oposite of what we want
         // "--disable-renderer-backgrounding"

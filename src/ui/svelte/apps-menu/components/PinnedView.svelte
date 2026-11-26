@@ -3,12 +3,13 @@
   import { t } from "../i18n";
   import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
-  import { arrayMove } from "../utils";
-  import { DragDropProvider } from "@dnd-kit/svelte";
+  import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { debounce } from "lodash";
   import { onDestroy, untrack } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd";
   import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";
+  import { createItemIndex, getPinnedDragAction, type PinnedDragMove } from "../pinned-drag";
+  import { getPinnedGrid, movePinnedItemToEmptySlot, reorderPinnedItems } from "../pinned-grid";
 
   type UniqueIdentifier = string | number;
 
@@ -44,120 +45,245 @@
     selectedItemId = pinnedItems.find(isRenderable)?.itemId ?? null;
   });
 
-  // Position-based sorting threshold (20% of item width)
+  // Reorder along the outer edges, leaving the middle available for folder creation.
   const POSITION_THRESHOLD = 0.2;
-  let activeDropzoneId: UniqueIdentifier | null = $state(null);
+  let list: HTMLUListElement;
+  let activeDropzoneId: string | null = $state(null);
+  let pendingDropzoneId: string | null = null;
+  let dragItems: FavPinnedItem[] | null = $state.raw(null);
+  let dragBaseline: FavPinnedItem[] | null = null;
+  let dropSlot: number | null = $state(null);
+  let dragPreview: HTMLDivElement | null = $state.raw(null);
+  let dragCapacity = $state(0);
+  let dragIndex: ReadonlyMap<string, number> = new Map();
+  let reorderFrame: number | null = null;
+
+  const cells = $derived.by(() => {
+    const grid = getPinnedGrid(dragItems ?? globalState.pinnedItems);
+    while (grid.length < dragCapacity) grid.push(null);
+    return grid;
+  });
 
   // Debounced folder creation activation
   const FOLDER_CREATION_DELAY_MS = 200;
-  const activateDropzone = debounce((targetId: UniqueIdentifier) => {
+  const activateDropzone = debounce((targetId: string) => {
+    pendingDropzoneId = null;
     activeDropzoneId = targetId;
   }, FOLDER_CREATION_DELAY_MS);
 
   function cancelDropzone() {
     activateDropzone.cancel();
+    pendingDropzoneId = null;
     activeDropzoneId = null;
   }
+
+  function cancelScheduledMove() {
+    if (reorderFrame !== null) {
+      cancelAnimationFrame(reorderFrame);
+      reorderFrame = null;
+    }
+  }
+
+  function resetDrag() {
+    cancelScheduledMove();
+    cancelDropzone();
+    dragItems = null;
+    dragBaseline = null;
+    dropSlot = null;
+    dragPreview = null;
+    dragCapacity = 0;
+    dragIndex = new Map();
+  }
+
+  function updateDragPreview(move: PinnedDragMove) {
+    if (!dragItems) return;
+    const action = getPinnedDragAction(move, dragIndex, POSITION_THRESHOLD);
+    if (action.type === "reorder") {
+      cancelDropzone();
+      setDragItems(reorderPinnedItems(dragItems, action.sourceIndex, action.targetIndex));
+    } else if (action.type === "dropzone") {
+      if (pendingDropzoneId !== action.targetId && activeDropzoneId !== action.targetId) {
+        activeDropzoneId = null;
+        pendingDropzoneId = action.targetId;
+        activateDropzone(action.targetId);
+      }
+    } else {
+      cancelDropzone();
+    }
+  }
+
+  function setDragItems(items: FavPinnedItem[]) {
+    dragItems = items;
+    dragIndex = createItemIndex(items.map((item) => item.itemId));
+  }
+
+  function captureDragPreview(source: Element | undefined): HTMLDivElement | null {
+    if (!source?.childElementCount) return null;
+    const preview = document.createElement("div");
+    preview.className = source.classList.contains("folder") ? "folder" : "app";
+    // Reuse the rendered icon and label without mounting another icon loader while dragging.
+    preview.append(...Array.from(source.children, (child) => child.cloneNode(true)));
+    return preview;
+  }
+
+  function attachSlotPreview(host: HTMLElement) {
+    const preview = dragPreview;
+    if (!preview) return;
+    host.append(preview);
+    return () => {
+      if (preview.parentElement === host) preview.remove();
+    };
+  }
+
+  function attachFloatingPreview(host: HTMLElement) {
+    const preview = dragPreview?.cloneNode(true);
+    if (!preview) return;
+    host.append(preview);
+    return () => host.replaceChildren();
+  }
+
+  function getVisibleGridCapacity(): number {
+    const tile = list.querySelector<HTMLElement>(":scope > [data-item-id]");
+    if (!tile?.offsetHeight) return 0;
+    const gridStyle = getComputedStyle(list);
+    const columns = gridStyle.gridTemplateColumns.split(/\s+/).filter((track) => track.endsWith("px")).length;
+    const rowGap = Number.parseFloat(gridStyle.rowGap) || 0;
+    const view = list.parentElement!;
+    const viewStyle = getComputedStyle(view);
+    const height = view.clientHeight - Number.parseFloat(viewStyle.paddingTop) - Number.parseFloat(viewStyle.paddingBottom);
+    return columns * Math.ceil((height + rowGap) / (tile.offsetHeight + rowGap));
+  }
+
+  function queueDragMove() {
+    if (reorderFrame !== null) return;
+
+    reorderFrame = requestAnimationFrame(() => {
+      reorderFrame = null;
+      if (!dragItems || globalState.pinnedItems !== dragBaseline) {
+        resetDrag();
+        return;
+      }
+
+      // dnd-kit updates the position and collision after dispatching dragmove.
+      const { source, target, position } = manager.dragOperation;
+      const hit = getGridHit(position.current.x, position.current.y);
+      dropSlot = hit?.kind === "slot" ? hit.slot : null;
+      if (dropSlot !== null) {
+        cancelDropzone();
+        return;
+      }
+      const targetRect = target?.shape?.boundingRectangle;
+      if (!source || !target || !targetRect) {
+        cancelDropzone();
+        return;
+      }
+      updateDragPreview({
+        sourceId: String(source.id),
+        targetId: String(target.id),
+        sourceType: source.type?.toString(),
+        targetType: target.type?.toString(),
+        pointer: position.current,
+        targetRect,
+      });
+    });
+  }
+
+  function getGridHit(x: number, y: number) {
+    const cell = document.elementFromPoint(x, y)?.closest<HTMLElement>("[data-item-id], [data-empty-slot]");
+    if (cell?.parentElement !== list) return;
+    if (cell.dataset.emptySlot !== undefined) return { kind: "slot", slot: Number(cell.dataset.emptySlot) } as const;
+    return { kind: "item", id: cell.dataset.itemId } as const;
+  }
+
+  function getDropTarget(event: Event | undefined, fallback: UniqueIdentifier | undefined) {
+    // Read the release point even if it came in before the last scheduled drag move.
+    return event instanceof PointerEvent
+      ? getGridHit(event.clientX, event.clientY)
+      : { kind: "item", id: fallback?.toString() } as const;
+  }
+
+  onDestroy(resetDrag);
 </script>
 
 <svelte:window onkeydown={(event) => handleGridKeyDown(event, scope)} />
-<div class="pinned-view">
-  <ul class="pinned-view-list" role="listbox" aria-label={$t("applications")}>
-    <DragDropProvider
-      {manager}
-      onDragMove={(event) => {
-        const { source, target } = event.operation;
+<div
+  class="pinned-view"
+  class:has-slot-preview={dropSlot !== null && dragPreview !== null}
+  class:has-drag-preview={dragPreview !== null}
+>
+  <DragDropProvider
+    {manager}
+    onDragStart={({ operation }) => {
+      resetDrag();
+      dragBaseline = globalState.pinnedItems;
+      setDragItems(dragBaseline);
+      dragCapacity = getVisibleGridCapacity();
+      dragPreview = captureDragPreview(operation.source?.element);
+    }}
+    onDragMove={queueDragMove}
+    onDragOver={(event) => {
+      event.preventDefault();
+    }}
+    onDragEnd={(event) => {
+      const { source, target } = event.operation;
 
-        // No collision - cancel dropzone
-        if (!source || !target || source.id === target.id) {
-          cancelDropzone();
-          return;
-        }
+      const items = dragItems;
+      if (event.canceled || !items || !source || globalState.pinnedItems !== dragBaseline) {
+        resetDrag();
+        return;
+      }
+      cancelScheduledMove();
 
-        const sourceIndex = globalState.pinnedItems.findIndex((item) => item.itemId === source.id);
-        const targetIndex = globalState.pinnedItems.findIndex((item) => item.itemId === target.id);
+      const sourceId = String(source.id);
+      const hit = getDropTarget(event.nativeEvent, target?.id);
+      const sourceIndex = dragIndex.get(sourceId);
+      if (hit?.kind === "slot" && sourceIndex !== undefined) {
+        const updated = movePinnedItemToEmptySlot(items, sourceIndex, hit.slot);
+        if (updated !== dragBaseline) globalState.pinnedItems = updated;
+        resetDrag();
+        return;
+      }
+      const targetId = hit?.kind === "item" ? hit.id : undefined;
+      const targetIndex = targetId === undefined ? undefined : dragIndex.get(targetId);
+      if (
+        targetId !== undefined && sourceIndex !== undefined && targetIndex !== undefined && sourceIndex !== targetIndex
+      ) {
+        if (activeDropzoneId === targetId) {
+          const sourceItem = items[sourceIndex]!;
+          const targetItem = items[targetIndex]!;
 
-        if (sourceIndex === -1 || targetIndex === -1) {
-          return;
-        }
-
-        const sourceElement = source.element;
-        const targetElement = target.element;
-        if (!sourceElement || !targetElement) {
-          return;
-        }
-
-        const targetRect = targetElement.getBoundingClientRect();
-        const sourceRect = sourceElement.getBoundingClientRect();
-
-        // Calculate relative position (0 = left edge, 1 = right edge)
-        const sourceCenterX = sourceRect.left + sourceRect.width / 2;
-        const targetLeft = targetRect.left;
-        const targetWidth = targetRect.width;
-        const relativePosition = (sourceCenterX - targetLeft) / targetWidth;
-
-        let shouldSort = false;
-        if (sourceIndex > targetIndex) {
-          shouldSort = relativePosition < POSITION_THRESHOLD;
-        } else if (sourceIndex < targetIndex) {
-          shouldSort = relativePosition > 1 - POSITION_THRESHOLD;
-        }
-
-        if (shouldSort && sourceIndex !== targetIndex) {
-          cancelDropzone();
-          globalState.pinnedItems = arrayMove(globalState.pinnedItems, sourceIndex, targetIndex);
-          return;
-        }
-
-        if (source.type === "folder" && target.type === "app") {
-          return;
-        }
-        activateDropzone(target.id);
-      }}
-      onDragOver={(event) => {
-        event.preventDefault();
-      }}
-      onDragEnd={(event) => {
-        const { source, target } = event.operation;
-        activateDropzone.cancel();
-
-        // Create folder if dropzone was active
-        if (activeDropzoneId && source && target) {
-          const sourceId = source.id.toString();
-          const targetId = activeDropzoneId.toString();
-
-          // Find source and target items
-          const sourceItem = globalState.pinnedItems.find((item) => item.itemId === sourceId);
-          const targetIndex = globalState.pinnedItems.findIndex((item) => item.itemId === targetId);
-          const targetItem = globalState.pinnedItems[targetIndex];
-
-          if (!targetItem || !sourceItem) {
-            cancelDropzone();
-            return;
+          // Folder operations use the preview order to locate the result.
+          if (items !== dragBaseline) globalState.pinnedItems = items;
+          if (targetItem.type === "folder") {
+            if (sourceItem.type === "folder") globalState.mergeFolders(sourceId, targetId);
+            else globalState.addItemToFolder(targetId, sourceId);
+          } else if (sourceItem.type === "app") {
+            globalState.createFolder(sourceId, targetId, targetIndex);
           }
-
-          // Case 1: Source is folder + Target is folder - merge folders
-          if (sourceItem.type === "folder" && targetItem.type === "folder") {
-            globalState.mergeFolders(sourceItem.itemId, targetItem.itemId);
-          }
-          // Case 2: Source is app + Target is folder - add app to existing folder
-          else if (sourceItem.type === "app" && targetItem.type === "folder") {
-            globalState.addItemToFolder(targetItem.itemId, sourceId);
-          }
-          // Case 3: Source is app + Target is app - create new folder with both items
-          else if (sourceItem.type === "app" && targetItem.type === "app") {
-            // Don't create folder if dragging onto self
-            if (sourceId !== targetId) {
-              globalState.createFolder(sourceId, targetId, targetIndex);
-            }
-          }
+        } else {
+          globalState.pinnedItems = reorderPinnedItems(items, sourceIndex, targetIndex);
         }
+      } else if (items !== dragBaseline) {
+        globalState.pinnedItems = items;
+      }
 
-        cancelDropzone();
-      }}
-    >
-      {#each globalState.pinnedItems as pinnedItem, idx (pinnedItem.itemId)}
-        {#if pinnedItem.type === "app"}
+      resetDrag();
+    }}
+  >
+    <ul bind:this={list} class="pinned-view-list" role="listbox" aria-label={$t("applications")}>
+      {#each cells as pinnedItem, idx (pinnedItem ? `item:${pinnedItem.itemId}` : `slot:${idx}`)}
+        {#if pinnedItem === null}
+          <li
+            aria-hidden="true"
+            class="pinned-view-slot"
+            class:is-drop-target={dropSlot === idx}
+            data-empty-slot={idx}
+          >
+            {#if dropSlot === idx && dragPreview}
+              <div class="pinned-slot-preview" {@attach attachSlotPreview}></div>
+            {/if}
+          </li>
+        {:else if pinnedItem.type === "app"}
           {@const item = globalState.getMenuItem(pinnedItem.itemId)}
           {#if item}
             <SortableAppItem
@@ -177,8 +303,15 @@
           />
         {/if}
       {/each}
-    </DragDropProvider>
-  </ul>
+    </ul>
+    <div class="pinned-drag-overlay" aria-hidden="true">
+      <DragOverlay dropAnimation={null}>
+        {#if dragPreview}
+          <div {@attach attachFloatingPreview}></div>
+        {/if}
+      </DragOverlay>
+    </div>
+  </DragDropProvider>
 
   {#if globalState.pinnedItems.length === 0}
     <div class="pinned-view-empty">
@@ -187,3 +320,25 @@
     </div>
   {/if}
 </div>
+
+<style>
+  .pinned-view-slot {
+    position: relative;
+  }
+
+  .pinned-slot-preview {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .pinned-drag-overlay {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .has-drag-preview .pinned-view-list > :global(.is-dragging),
+  .has-slot-preview .pinned-drag-overlay :global([data-dnd-dragging]) {
+    visibility: hidden;
+  }
+</style>

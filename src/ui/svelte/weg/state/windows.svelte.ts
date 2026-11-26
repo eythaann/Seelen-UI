@@ -2,16 +2,16 @@ import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import {
   type FocusedApp,
   SeelenWegSide,
-  type UserAppWindow,
   type UserAppWindowColors,
   WegTemporalItemsVisibility,
 } from "@seelen-ui/lib/types";
 import { settingsState } from "./settings.svelte.ts";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types.ts";
-import { focused, interactables, previews, selfWinId, widgetStatuses, windowsColors } from "./getters.svelte.ts";
+import { focused, interactables, selfWinId, widgetStatuses, windowsColors } from "./getters.svelte.ts";
+import { AppWindowsIndex } from "./appWindowsIndex.ts";
 
-export { focused, interactables, previews, widgetStatuses, windowsColors };
+export { focused, interactables, widgetStatuses, windowsColors };
 
 const widget = Widget.getCurrent();
 
@@ -35,6 +35,9 @@ const _dockWindows = $derived.by(() => {
   }
   return interactables.value.filter((w) => w.monitor === widget.decoded.monitorId);
 });
+
+const _allWindowsIndex = $derived(new AppWindowsIndex(interactables.value));
+const _dockWindowsIndex = $derived(new AppWindowsIndex(_dockWindows));
 
 const _topInteractableWindow = $derived(
   interactables.value
@@ -77,6 +80,14 @@ class WindowsState {
     return _dockWindows;
   }
 
+  windowsFor(item: AppOrFileWegItem) {
+    return _dockWindowsIndex.get(item);
+  }
+
+  allWindowsFor(item: AppOrFileWegItem) {
+    return _allWindowsIndex.get(item);
+  }
+
   get topInteractableWindow() {
     return _topInteractableWindow;
   }
@@ -91,23 +102,6 @@ class WindowsState {
 }
 
 export const windowsState = new WindowsState();
-
-// on change of this function update src\background\widgets\weg\cli.rs too.
-export function getWindowsForItem(
-  item: AppOrFileWegItem,
-  windows: UserAppWindow[],
-): UserAppWindow[] {
-  const itemCommand = item.relaunch?.command.toLowerCase();
-  const itemPath = item.path.toLowerCase();
-
-  return windows.filter((w) => {
-    if (w.umid) {
-      return item.umid === w.umid;
-    }
-    const winPath = w.process.path?.toLowerCase() ?? "";
-    return winPath !== "" && (itemCommand === winPath || itemPath === winPath);
-  });
-}
 
 $effect.root(() => {
   $effect(() => {

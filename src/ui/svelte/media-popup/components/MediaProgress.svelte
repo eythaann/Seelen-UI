@@ -1,8 +1,9 @@
 <script lang="ts">
   import type { MediaPlayer } from "@seelen-ui/lib/types";
-  import { invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { nanosecondsToPlayingTime } from "libs/ui/utils";
   import { throttle } from "lodash";
+  import { onMount } from "svelte";
 
   interface Props {
     session: MediaPlayer;
@@ -22,6 +23,10 @@
   let basePosition = $state(0);
   let baseTimestamp = $state(Date.now());
   let now = $state(Date.now());
+  const widget = Widget.getCurrent();
+  let visible = $state(widget.visible);
+
+  onMount(() => widget.onVisibilityChange((value) => (visible = value)));
 
   // reset state
   $effect(() => {
@@ -32,7 +37,8 @@
   });
 
   $effect(() => {
-    if (!session.playing) return;
+    if (!visible || !session.playing) return;
+    now = Date.now();
     const interval = setInterval(() => {
       now = Date.now();
     }, 250);

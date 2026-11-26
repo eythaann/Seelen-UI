@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
-  import { getWindowsForItem, windowsState } from "../../state/windows.svelte.ts";
+  import { windowsState } from "../../state/windows.svelte.ts";
   import UserApplicationItem from "./UserApplicationItem.svelte";
 
   interface Props {
@@ -11,7 +11,7 @@
 
   let { item, isOverlay = false }: Props = $props();
 
-  const windows = $derived(getWindowsForItem(item, windowsState.dockWindows));
+  const windows = $derived(windowsState.windowsFor(item));
   const settings = $derived(settingsState.value as any);
   const showAsSeparatedItems = $derived(settings?.splitWindows);
 </script>

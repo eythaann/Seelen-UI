@@ -20,9 +20,8 @@
   import { settingsState } from "../../state/settings.svelte.ts";
   import {
     compileSandboxed,
+    drawPluginCanvas,
     evalSanboxed,
-    getSystemTokens,
-    getThemeTokens,
     evalToStr,
   } from "libs/ui/svelte/utils/sandbox.ts";
 
@@ -36,7 +35,6 @@
   let canvas = $state<HTMLCanvasElement | null>(null);
   let canvasWidth = $state(0);
   let canvasHeight = $state(0);
-  const canDraw = $derived(canvasWidth > 0 && canvasHeight > 0);
 
   let userSourceName = $derived.by(() => {
     const allByWidget = settingsState.allByWidget;
@@ -93,43 +91,19 @@
     });
   }
 
-  // during mount (e.g. inside the drag overlay portal) layout may not be
-  // flushed yet, leaving clientWidth/clientHeight at 0; wait for the
-  // ResizeObserver above to report the real size before drawing.
   $effect(() => {
-    if (!canvas) return;
-    const el = canvas;
-    const observer = new ResizeObserver(() => {
-      canvasWidth = el.clientWidth;
-      canvasHeight = el.clientHeight;
-    });
-    observer.observe(canvas);
-    return () => observer.disconnect();
-  });
+    const target = canvas;
+    const executor = renderExec;
+    if (payload.noCanvas || !target || !executor) return;
 
-  $effect(() => {
-    if (payload.noCanvas || !renderExec || !canvas || !canDraw) {
-      return;
-    }
-
-    // sub to all settings changes, like theme changes, etc.
-    let _sub = settingsState.all;
-
-    canvas.width = canvasWidth * window.devicePixelRatio;
-    canvas.height = canvasHeight * window.devicePixelRatio;
-
-    const computed = getComputedStyle(canvas);
-    evalSanboxed(renderExec, {
-      ...scope,
-      isDarkMode: prefersDarkColorScheme.value,
-      systemTokens: getSystemTokens(computed),
-      themeTokens: getThemeTokens(computed),
-      canvas: {
-        getContext: (contextId: string) => canvas!.getContext(contextId),
-        width: canvas.width,
-        height: canvas.height,
-      },
-    });
+    // Theme settings can change the tokens even when the scope data is unchanged.
+    void settingsState.all;
+    const width = canvasWidth;
+    const height = canvasHeight;
+    const renderScope = scope;
+    const isDarkMode = prefersDarkColorScheme.value;
+    const frame = requestAnimationFrame(() => drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode));
+    return () => cancelAnimationFrame(frame);
   });
 </script>
 
@@ -155,7 +129,12 @@
       {#if payload.noCanvas}
         <SpecificIcon class="weg-item-icon" name={customIconKey || ""} />
       {:else}
-        <canvas bind:this={canvas} class="weg-item-canvas"></canvas>
+        <canvas
+          bind:this={canvas}
+          bind:clientWidth={canvasWidth}
+          bind:clientHeight={canvasHeight}
+          class="weg-item-canvas"
+        ></canvas>
       {/if}
     </div>
 

@@ -240,25 +240,19 @@
   height: var(--config-item-size);
   width: var(--config-item-size);
   transition:
-    width 200ms ease,
-    height 200ms ease,
-    padding 200ms ease,
-    border-radius 200ms ease;
+    opacity 200ms ease,
+    scale 200ms ease;
 
   .weg-item-drag-container[data-mounting] & {
     @starting-style {
-      width: 0;
-      height: 0;
-      padding: 0;
-      border-radius: 0;
+      opacity: 0;
+      scale: 0.4;
     }
   }
 
   .weg-item-drag-container[data-unmounting] & {
-    width: 0;
-    height: 0;
-    padding: 0;
-    border-radius: 0;
+    opacity: 0;
+    scale: 0.4;
   }
 
   &.weg-item-medium {

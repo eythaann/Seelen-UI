@@ -2,7 +2,7 @@ use base64::{Engine as _, engine::general_purpose::STANDARD};
 use image::{DynamicImage, RgbaImage};
 use seelen_core::system_state::{
     Color, LiveWindowPreviewState, UserAppWindowColors, UserAppWindowPreview, WindowHandle,
-    WindowPreviewTarget,
+    WindowIdentity, WindowPreviewTarget,
 };
 
 use crate::error::Result;
@@ -50,9 +50,9 @@ pub enum PreviewsSysEvent {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PreviewsEvent {
-    Captured { hwnd: WindowHandle },
+    Captured { hwnd: WindowIdentity },
     ColorsUpdated { hwnd: WindowHandle },
-    Cleaned { hwnd: WindowHandle },
+    Cleaned { hwnd: WindowIdentity },
 }
 
 /// Scales down big captures, as they are only shown as thumbnails.

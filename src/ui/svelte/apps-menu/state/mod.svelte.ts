@@ -62,49 +62,74 @@ export interface FavFolderItem {
   itemId: string;
   name: string;
   itemIds: string[];
+  slot?: number;
 }
 
 export interface FavAppItem {
   type: "app";
   itemId: string;
+  slot?: number;
 }
 
 export type FavPinnedItem = FavAppItem | FavFolderItem;
 
-const initialState: FavPinnedItem[] = [];
+async function getInitialPins(): Promise<FavPinnedItem[]> {
+  const pins: FavPinnedItem[] = [];
+  let timeout: number | undefined;
+  try {
+    const layout = await Promise.race([
+      invoke(SeelenCommand.GetNativeStartMenu),
+      new Promise<undefined>((resolve) => {
+        timeout = window.setTimeout(resolve, 2500);
+      }),
+    ]);
+    if (!layout) return pins;
 
-try {
-  const layout = await invoke(SeelenCommand.GetNativeStartMenu);
-  for (const _item of layout.pinnedList) {
-    const item = _item as StartMenuLayoutItem as any;
-    if (item.desktopAppLink) {
-      let path = item.desktopAppLink.toLowerCase();
-      const found = startMenuItems.value.find((i) => i.path.toLowerCase() === path);
+    for (const _item of layout.pinnedList) {
+      const item = _item as StartMenuLayoutItem as any;
+      if (item.desktopAppLink) {
+        const path = item.desktopAppLink.toLowerCase();
+        const found = startMenuItems.value.find((i) => i.path.toLowerCase() === path);
 
-      if (found) {
-        initialState.push({
-          type: "app",
-          itemId: getItemId(found),
-        });
-        continue;
+        if (found) {
+          pins.push({
+            type: "app",
+            itemId: getItemId(found),
+          });
+          continue;
+        }
       }
-    }
 
-    initialState.push({
-      type: "app",
-      itemId: item.packagedAppId || item.destopAppId || item.desktopAppLink,
-    });
+      pins.push({
+        type: "app",
+        itemId: item.packagedAppId || item.destopAppId || item.desktopAppLink,
+      });
+    }
+  } catch (error) {
+    console.error("Failed to get native pinned items:", error);
+  } finally {
+    window.clearTimeout(timeout);
   }
-} catch (error) {
-  console.error("Failed to get native pinned items:", error);
+  return pins;
 }
 
-const pinnedItems = await persistentRune<FavPinnedItem[]>("favorites", initialState);
+const pinnedItems = await persistentRune<FavPinnedItem[]>("favorites", [], undefined, getInitialPins);
 
 // Get unique identifier for an item
 function getItemId(item: StartMenuItem): string {
   return item.umid || item.path.toLowerCase();
 }
+
+const menuItemsById = $derived.by(() => {
+  const index = new Map<string, StartMenuItem>();
+  for (const list of [startMenuItems.value, foldersAsStartMenuItems.value]) {
+    for (const item of list) {
+      const id = getItemId(item);
+      if (!index.has(id)) index.set(id, item);
+    }
+  }
+  return index;
+});
 
 // Check if an item is pinned
 function isPinned(item: StartMenuItem): boolean {
@@ -158,6 +183,15 @@ function createFolder(itemId1: string, itemId2: string, targetIdx?: number): Fav
     name: "",
     itemIds: [itemId1, itemId2],
   };
+
+  const target = pinnedItems.value.find((item) => item.type === "app" && item.itemId === itemId2);
+  if (target?.slot !== undefined) {
+    newFolder.slot = target.slot;
+    pinnedItems.value = pinnedItems.value
+      .filter((item) => item.type !== "app" || item.itemId !== itemId1)
+      .map((item) => item === target ? newFolder : item);
+    return newFolder;
+  }
 
   // Remove both items if they exist as standalone apps
   const filtered = pinnedItems.value.filter(
@@ -249,6 +283,7 @@ function disbandFolder(folderId: string): void {
     type: "app",
     itemId,
   }));
+  if (folder.slot !== undefined && newApps[0]) newApps[0].slot = folder.slot;
 
   pinnedItems.value = [
     ...withoutFolder.slice(0, folderIndex),
@@ -347,11 +382,8 @@ class State {
 
   // Get StartMenuItem by ID
   getMenuItem(id: string): StartMenuItem | undefined {
-    const fromStart = this.allItems.find((item) => getItemId(item) === id);
-    if (fromStart) return fromStart;
-
-    const fromFolders = foldersAsStartMenuItems.value.find((item) => getItemId(item) === id);
-    if (fromFolders) return fromFolders;
+    const indexedItem = menuItemsById.get(id);
+    if (indexedItem) return indexedItem;
 
     // Synthesize an item for arbitrary path-based pins (e.g. pinned from dock)
     if (id.includes("\\") || id.includes("/")) {

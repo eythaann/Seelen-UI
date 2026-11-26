@@ -3,8 +3,9 @@
   import { Widget } from "@seelen-ui/lib";
   import Icon from "libs/ui/svelte/components/Icon/Icon.svelte";
   import moment from "moment";
+  import { onMount } from "svelte";
 
-  const today = moment();
+  let today = $state.raw(moment());
 
   const momentLang = $derived(globalState.momentLang);
 
@@ -33,8 +34,9 @@
   }
 
   function handleToday() {
-    date = moment().locale(momentLang);
-    selectedDate = moment().locale(momentLang);
+    today = moment();
+    date = today.clone().locale(momentLang);
+    selectedDate = today.clone().locale(momentLang);
   }
 
   function toggleViewMode() {
@@ -96,6 +98,14 @@
   $effect(() => {
     Widget.getCurrent().ready();
   });
+
+  onMount(() =>
+    Widget.self.onVisibilityChange((visible) => {
+      if (!visible) return;
+      handleToday();
+      globalState.viewMode = "month";
+    })
+  );
 </script>
 
 <div class="slu-std-popover calendar-popup">

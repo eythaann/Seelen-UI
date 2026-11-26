@@ -1,12 +1,17 @@
 mod application;
 mod domain;
 
-use std::{collections::HashMap, sync::Once};
+use std::{
+    collections::HashMap,
+    sync::{Once, OnceLock},
+    time::Duration,
+};
 
 use seelen_core::{
     handlers::SeelenEvent,
     system_state::{
-        FocusedApp, UserAppWindow, UserAppWindowColors, UserAppWindowPreview, WindowIdentity,
+        FocusedApp, UserAppWindow, UserAppWindowColors, UserAppWindowPreview,
+        UserAppWindowPreviewDelta, WindowIdentity,
     },
 };
 
@@ -23,6 +28,28 @@ use crate::{
 
 pub use self::{application::UserAppsManager, domain::UserAppWinEvent};
 
+const LEGACY_PREVIEW_SNAPSHOT_INTERVAL: Duration = Duration::from_millis(500);
+
+/// Retained for existing subscribers. Updated widgets use the queued delta instead.
+fn schedule_legacy_preview_snapshot() {
+    static SENDER: OnceLock<crossbeam_channel::Sender<()>> = OnceLock::new();
+    let sender = SENDER.get_or_init(|| {
+        let (sender, receiver) = crossbeam_channel::bounded::<()>(1);
+        std::thread::spawn(move || {
+            while receiver.recv().is_ok() {
+                std::thread::sleep(LEGACY_PREVIEW_SNAPSHOT_INTERVAL);
+                while receiver.try_recv().is_ok() {}
+                emit_to_webviews(
+                    SeelenEvent::UserAppWindowsPreviewsChanged,
+                    AppPreviewsManager::instance().previews(),
+                );
+            }
+        });
+        sender
+    });
+    let _ = sender.try_send(());
+}
+
 /// Manager instance, bridging its events (and the previews ones) to the webviews on first
 /// access.
 fn get_manager() -> &'static UserAppsManager {
@@ -36,11 +63,22 @@ fn get_manager() -> &'static UserAppsManager {
         });
 
         AppPreviewsManager::subscribe(|event| match event {
-            PreviewsEvent::Captured { .. } | PreviewsEvent::Cleaned { .. } => {
+            PreviewsEvent::Captured { hwnd } => {
+                let manager = AppPreviewsManager::instance();
+                if let Some(preview) = manager.preview(hwnd) {
+                    emit_to_webviews(
+                        SeelenEvent::UserAppWindowPreviewDelta,
+                        UserAppWindowPreviewDelta::Updated { hwnd, preview },
+                    );
+                }
+                schedule_legacy_preview_snapshot();
+            }
+            PreviewsEvent::Cleaned { hwnd } => {
                 emit_to_webviews(
-                    SeelenEvent::UserAppWindowsPreviewsChanged,
-                    AppPreviewsManager::instance().previews(),
+                    SeelenEvent::UserAppWindowPreviewDelta,
+                    UserAppWindowPreviewDelta::Removed { hwnd },
                 );
+                schedule_legacy_preview_snapshot();
             }
             PreviewsEvent::ColorsUpdated { .. } => {
                 emit_to_webviews(

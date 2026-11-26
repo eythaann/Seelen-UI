@@ -13,9 +13,6 @@ subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 export const players = lazyRune(() => invoke(SeelenCommand.GetMediaSessions));
 subscribe(SeelenEvent.MediaSessions, players.setByPayload);
 
-export const notifications = lazyRune(() => invoke(SeelenCommand.GetNotifications));
-subscribe(SeelenEvent.Notifications, notifications.setByPayload);
-
 export const mousePos = lazyRune(async () => {
   const [x, y] = await invoke(SeelenCommand.GetMousePosition);
   return { x, y };
@@ -48,9 +45,6 @@ class TrayState {
 
 export const trayState = new TrayState();
 
-export const previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
-subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
-
 export const windowsColors = lazyRune<Record<string, UserAppWindowColors>>(
   () => invoke(SeelenCommand.GetUserAppWindowsColors),
 );
@@ -72,13 +66,11 @@ await Promise.all([
   virtualDesktops.init(),
   monitors.init(),
   players.init(),
-  notifications.init(),
   mousePos.init(),
   settings.init(),
   selfWinId.init(),
   interactables.init(),
   traySubscription.then(() => trayIcons.init()),
-  previews.init(),
   windowsColors.init(),
   focused.init(),
   widgetStatuses.init(),

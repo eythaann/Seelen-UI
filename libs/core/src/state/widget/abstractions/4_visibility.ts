@@ -50,6 +50,8 @@ export class Widget_4 extends Widget_3 {
 
   public async show(): Promise<void> {
     const token = ++this._visibilityToken;
+    // Start the CSS transition before the native window becomes visible.
+    delete globalThis.document.documentElement.dataset.widgetHidden;
     this.setVisible(true);
     debouncedClose.cancel();
     await this.window.show();

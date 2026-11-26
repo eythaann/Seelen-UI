@@ -30,6 +30,54 @@ export function evalSanboxed(executor: SanboxedEval | null, scope: Record<string
   }
 }
 
+const canvasContexts = new WeakMap<HTMLCanvasElement, RenderingContext>();
+
+/** Preserve the drawing-state reset expected by plugins without resizing a 2D canvas every draw. */
+export function drawPluginCanvas(
+  canvas: HTMLCanvasElement,
+  cssWidth: number,
+  cssHeight: number,
+  executor: SanboxedEval,
+  scope: Record<string, unknown>,
+  isDarkMode: boolean,
+): void {
+  const width = Math.floor(cssWidth * window.devicePixelRatio);
+  const height = Math.floor(cssHeight * window.devicePixelRatio);
+  if (width < 1 || height < 1) return;
+
+  const computed = getComputedStyle(canvas);
+  const systemTokens = getSystemTokens(computed);
+  const themeTokens = getThemeTokens(computed);
+  const context = canvasContexts.get(canvas);
+  const resized = canvas.width !== width || canvas.height !== height;
+  if (canvas.width !== width) canvas.width = width;
+  if (canvas.height !== height) canvas.height = height;
+  if (!resized && context) {
+    if (context instanceof CanvasRenderingContext2D && typeof context.reset === "function") {
+      context.reset();
+    } else {
+      // Preserve the previous reset behavior for other context types.
+      canvas.width = width;
+    }
+  }
+
+  evalSanboxed(executor, {
+    ...scope,
+    isDarkMode,
+    systemTokens,
+    themeTokens,
+    canvas: {
+      getContext(contextId: string) {
+        const context = canvas.getContext(contextId);
+        if (context) canvasContexts.set(canvas, context);
+        return context;
+      },
+      width,
+      height,
+    },
+  });
+}
+
 export function evalToStr(content: unknown): string {
   switch (typeof content) {
     case "string":

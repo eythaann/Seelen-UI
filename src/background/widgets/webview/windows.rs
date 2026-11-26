@@ -2,7 +2,8 @@ use seelen_core::{Rect, system_state::AppBarEdge};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::{
-        RDW_ALLCHILDREN, RDW_ERASE, RDW_FRAME, RDW_INVALIDATE, RDW_UPDATENOW, RedrawWindow,
+        MONITOR_DEFAULTTOPRIMARY, MonitorFromRect, MonitorFromWindow, RDW_ALLCHILDREN, RDW_ERASE,
+        RDW_FRAME, RDW_INVALIDATE, RDW_UPDATENOW, RedrawWindow,
     },
     UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS,
 };
@@ -33,18 +34,44 @@ pub fn disable_system_transitions(webview: &tauri::WebviewWindow) -> Result<()> 
 pub fn set_position(webview: &tauri::WebviewWindow, rect: &Rect) -> Result<()> {
     let hwnd = hwnd(webview)?;
     let rect = to_win32_rect(rect);
+    let current = WindowsApi::get_outer_window_rect(hwnd)?;
+    if current == rect {
+        return Ok(());
+    }
 
     // pre set position for resize in case of multiples dpi
-    WindowsApi::move_window(hwnd, &rect)?;
+    let current_monitor = unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) };
+    let target_monitor = unsafe { MonitorFromRect(&rect, MONITOR_DEFAULTTOPRIMARY) };
+    let different_dpi = if current_monitor == target_monitor {
+        false
+    } else {
+        match (
+            WindowsApi::get_monitor_scale_factor(current_monitor),
+            WindowsApi::get_monitor_scale_factor(target_monitor),
+        ) {
+            (Ok(current), Ok(target)) => current != target,
+            _ => true,
+        }
+    };
+    if different_dpi {
+        WindowsApi::move_window(hwnd, &rect)?;
+    }
     WindowsApi::set_position(hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
-    // ensure child windows are redrawn
-    unsafe {
-        let _ = RedrawWindow(
-            Some(hwnd),
-            None,
-            None,
-            RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_FRAME | RDW_ERASE,
-        );
+    if different_dpi {
+        unsafe {
+            let _ = RedrawWindow(
+                Some(hwnd),
+                None,
+                None,
+                RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_FRAME | RDW_ERASE,
+            );
+        }
+    } else if current.right - current.left != rect.right - rect.left
+        || current.bottom - current.top != rect.bottom - rect.top
+    {
+        unsafe {
+            let _ = RedrawWindow(Some(hwnd), None, None, RDW_INVALIDATE | RDW_ALLCHILDREN);
+        }
     }
     Ok(())
 }
@@ -99,12 +126,19 @@ pub fn lock_rasterization_scale_to_one(webview: &tauri::WebviewWindow) -> Result
 /// almost never reaches an individual background widget when the system overall has
 /// plenty of RAM free.
 pub fn simulate_memory_pressure(webview: &tauri::WebviewWindow) {
-    if webview.is_focused().unwrap_or(false) {
+    let Ok(window) = native_window(webview) else {
+        return;
+    };
+    if window.is_visible() {
         return;
     }
 
     webview
-        .with_webview(|platform_webview| {
+        .with_webview(move |platform_webview| {
+            // The window can become visible while the callback is queued on the UI thread.
+            if window.is_visible() {
+                return;
+            }
             let controller = platform_webview.controller();
             let core_webview = match unsafe { controller.CoreWebView2() } {
                 Ok(core_webview) => core_webview,
@@ -114,27 +148,23 @@ pub fn simulate_memory_pressure(webview: &tauri::WebviewWindow) {
                 }
             };
 
-            // Can't use our own `WindowsString` here: webview2-com pins its own `windows`
-            // crate version (0.61) which is semver-incompatible with the one this project
-            // depends on directly (0.62.2), so their `PCWSTR` types don't unify. Must go
-            // through webview2-com's own string helper, built against its own `windows`.
-            let result =
-                webview2_com::CallDevToolsProtocolMethodCompletedHandler::wait_for_async_operation(
-                    Box::new(move |handler| unsafe {
-                        let method = webview2_com::CoTaskMemPWSTR::from(
-                            "Memory.simulatePressureNotification",
-                        );
-                        let params = webview2_com::CoTaskMemPWSTR::from(r#"{"level":"critical"}"#);
-                        core_webview
-                            .CallDevToolsProtocolMethod(
-                                *method.as_ref().as_pcwstr(),
-                                *params.as_ref().as_pcwstr(),
-                                &handler,
-                            )
-                            .map_err(webview2_com::Error::WindowsError)
-                    }),
-                    Box::new(|error_code, _result| error_code),
-                );
+            let handler = webview2_com::CallDevToolsProtocolMethodCompletedHandler::create(
+                Box::new(|result, _| {
+                    if let Err(err) = result {
+                        log::warn!("Memory.simulatePressureNotification failed: {err:?}");
+                    }
+                    Ok(())
+                }),
+            );
+            let method = webview2_com::CoTaskMemPWSTR::from("Memory.simulatePressureNotification");
+            let params = webview2_com::CoTaskMemPWSTR::from(r#"{"level":"critical"}"#);
+            let result = unsafe {
+                core_webview.CallDevToolsProtocolMethod(
+                    *method.as_ref().as_pcwstr(),
+                    *params.as_ref().as_pcwstr(),
+                    &handler,
+                )
+            };
 
             if let Err(err) = result {
                 log::warn!("Memory.simulatePressureNotification failed: {err:?}");

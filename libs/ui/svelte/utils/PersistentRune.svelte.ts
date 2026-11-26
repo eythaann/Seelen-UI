@@ -20,10 +20,12 @@ export class PersistentRune<T> {
     storeKey: string,
     initial: T,
     schema?: ZodSchema<T>,
+    loadInitial?: () => Promise<T>,
   ): Promise<PersistentRune<T>> {
     const rune = new PersistentRune(storeKey, initial, schema);
     const stored = await rune.loadFromFile();
     if (stored !== null) rune._value = stored; // _ready=false → no save triggered
+    else if (loadInitial) rune._value = await loadInitial();
     rune._ready = true;
     return rune;
   }
@@ -86,6 +88,7 @@ export function persistentRune<T>(
   storeKey: string,
   initial: T,
   schema?: ZodSchema<T>,
+  loadInitial?: () => Promise<T>,
 ): Promise<PersistentRune<T>> {
-  return PersistentRune.create(storeKey, initial, schema);
+  return PersistentRune.create(storeKey, initial, schema, loadInitial);
 }

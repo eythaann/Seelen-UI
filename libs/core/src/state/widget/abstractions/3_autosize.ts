@@ -46,6 +46,10 @@ interface AutoSizerState {
 }
 
 export class Widget_3 extends Widget_2 {
+  private autoSizeFrame: number | null = null;
+  private autoSizePending = false;
+  private autoSizeTask: Promise<void> | null = null;
+
   protected autoSize: AutoSizerState = {
     enabled: false,
     element: document.body,
@@ -55,6 +59,7 @@ export class Widget_3 extends Widget_2 {
   constructor() {
     super();
     this.executeAutoSize = this.executeAutoSize.bind(this);
+    this.scheduleAutoSize = this.scheduleAutoSize.bind(this);
   }
 
   protected setupAutoSizer(element: HTMLElement, fitOnScreen: boolean): void {
@@ -70,13 +75,45 @@ export class Widget_3 extends Widget_2 {
       });
     });
 
-    const observer = new ResizeObserver(this.executeAutoSize);
+    const observer = new ResizeObserver(this.scheduleAutoSize);
     observer.observe(element, {
       box: "border-box",
     });
   }
 
-  protected async executeAutoSize(): Promise<void> {
+  private scheduleAutoSize(): void {
+    if (globalThis.document.visibilityState === "hidden") {
+      if (this.autoSizeFrame !== null) globalThis.cancelAnimationFrame(this.autoSizeFrame);
+      this.autoSizeFrame = null;
+      this.executeAutoSize().catch(console.error);
+      return;
+    }
+
+    if (this.autoSizeFrame !== null) return;
+    this.autoSizeFrame = globalThis.requestAnimationFrame(() => {
+      this.autoSizeFrame = null;
+      this.executeAutoSize().catch(console.error);
+    });
+  }
+
+  protected executeAutoSize(): Promise<void> {
+    this.autoSizePending = true;
+    if (!this.autoSizeTask) {
+      this.autoSizeTask = this.flushAutoSize().finally(() => {
+        this.autoSizeTask = null;
+      });
+    }
+    return this.autoSizeTask;
+  }
+
+  private async flushAutoSize(): Promise<void> {
+    while (this.autoSizePending) {
+      this.autoSizePending = false;
+      await this.applyAutoSize();
+    }
+  }
+
+  private async applyAutoSize(): Promise<void> {
     const guard = await OPTIMISTIC_FRAME.acquire();
     const { x, y, width, height } = guard.value;
 

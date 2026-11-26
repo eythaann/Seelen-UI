@@ -104,6 +104,19 @@ pub struct UserAppWindowPreview {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[serde(tag = "type")]
+pub enum UserAppWindowPreviewDelta {
+    Updated {
+        hwnd: WindowIdentity,
+        preview: UserAppWindowPreview,
+    },
+    Removed {
+        hwnd: WindowIdentity,
+    },
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct WindowPreviewTarget {
     pub hwnd: WindowIdentity,

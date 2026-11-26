@@ -11,10 +11,8 @@
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import {
     compileSandboxed,
-    evalSanboxed,
+    drawPluginCanvas,
     evalToStr,
-    getSystemTokens,
-    getThemeTokens,
   } from "libs/ui/svelte/utils/sandbox.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
@@ -56,6 +54,8 @@
   // ── Sandboxed code evaluation ────────────────────────────────────────────
 
   let canvas = $state<HTMLCanvasElement | null>(null);
+  let canvasClientWidth = $state(0);
+  let canvasClientHeight = $state(0);
 
   const contentExec = $derived(compileSandboxed(self.template));
   const renderExec = $derived(compileSandboxed(self.render));
@@ -102,23 +102,16 @@
   }
 
   $effect(() => {
-    if (!self.render || !renderExec || !canvas) return;
+    const target = canvas;
+    const executor = renderExec;
+    if (!self.render || !target || !executor) return;
 
-    canvas.width = canvas.clientWidth * window.devicePixelRatio;
-    canvas.height = canvas.clientHeight * window.devicePixelRatio;
-
-    const computed = getComputedStyle(canvas);
-    evalSanboxed(renderExec, {
-      ...scope,
-      isDarkMode: prefersDarkColorScheme.value,
-      systemTokens: getSystemTokens(computed),
-      themeTokens: getThemeTokens(computed),
-      canvas: {
-        getContext: (contextId: string) => canvas!.getContext(contextId),
-        width: canvas.width,
-        height: canvas.height,
-      },
-    });
+    const width = canvasClientWidth;
+    const height = canvasClientHeight;
+    const renderScope = scope;
+    const isDarkMode = prefersDarkColorScheme.value;
+    const frame = requestAnimationFrame(() => drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode));
+    return () => cancelAnimationFrame(frame);
   });
 </script>
 
@@ -152,7 +145,13 @@
     >
       <div class="ft-bar-item-content">
         {#if self.render}
-          <canvas bind:this={canvas} class="ft-bar-item-canvas" style:width={canvasWidth}></canvas>
+          <canvas
+            bind:this={canvas}
+            bind:clientWidth={canvasClientWidth}
+            bind:clientHeight={canvasClientHeight}
+            class="ft-bar-item-canvas"
+            style:width={canvasWidth}
+          ></canvas>
         {:else}
           <UnknownEvaluatedComponent parentId={self.id} {content} />
         {/if}

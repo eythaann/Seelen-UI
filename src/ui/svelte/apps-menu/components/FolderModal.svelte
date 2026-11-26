@@ -109,7 +109,7 @@
         }}
         onDragEnd={(event) => {
           const { source } = event.operation;
-          if (!dialog || !source || !source.element) {
+          if (event.canceled || !dialog || !source || !source.element) {
             return;
           }
 
@@ -137,8 +137,9 @@
           else if (newItemIds.length === 1) {
             const remainingItemId = newItemIds[0]!;
             globalState.pinnedItems = globalState.pinnedItems
-              .filter((item) => !(item.type === "folder" && item.itemId === folder.itemId))
-              .concat({ type: "app", itemId: remainingItemId });
+              .map((item) =>
+                item.itemId === folder.itemId ? { type: "app", itemId: remainingItemId, slot: folder.slot } : item
+              );
           }
           // Folder is empty, just remove it
           else {
