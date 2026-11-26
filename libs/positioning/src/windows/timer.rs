@@ -8,14 +8,14 @@ use windows::Win32::{
     },
 };
 
-use crate::error::Result;
+use crate::{domain::FrameTimer, error::Result};
 
 /// High-resolution waitable timer (~100ns precision vs ~15.6ms for thread::sleep).
-pub struct FrameTimer {
+pub struct WaitableFrameTimer {
     handle: HANDLE,
 }
 
-impl FrameTimer {
+impl WaitableFrameTimer {
     pub fn new() -> Result<Self> {
         let handle = unsafe {
             CreateWaitableTimerExW(
@@ -27,9 +27,10 @@ impl FrameTimer {
         };
         Ok(Self { handle })
     }
+}
 
-    /// Blocks until `target`. Returns immediately if it is already in the past.
-    pub fn sleep_until(&self, target: Instant) {
+impl FrameTimer for WaitableFrameTimer {
+    fn sleep_until(&self, target: Instant) {
         let Some(remaining) = target.checked_duration_since(Instant::now()) else {
             return;
         };
@@ -42,7 +43,7 @@ impl FrameTimer {
     }
 }
 
-impl Drop for FrameTimer {
+impl Drop for WaitableFrameTimer {
     fn drop(&mut self) {
         unsafe {
             let _ = CloseHandle(self.handle);

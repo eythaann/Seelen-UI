@@ -14,6 +14,28 @@ use windows::Win32::{
 
 use crate::{error::Result, rect::Rect};
 
+impl From<RECT> for Rect {
+    fn from(rect: RECT) -> Self {
+        Self {
+            x: rect.left,
+            y: rect.top,
+            width: rect.right - rect.left,
+            height: rect.bottom - rect.top,
+        }
+    }
+}
+
+impl From<Rect> for RECT {
+    fn from(rect: Rect) -> Self {
+        Self {
+            left: rect.x,
+            top: rect.y,
+            right: rect.x + rect.width,
+            bottom: rect.y + rect.height,
+        }
+    }
+}
+
 pub fn get_window_rect(window_id: isize) -> Result<Rect> {
     let mut rect = RECT::default();
     unsafe { GetWindowRect(HWND(window_id as _), &mut rect)? };
@@ -44,18 +66,11 @@ pub fn move_window(hwnd: isize, rect: &Rect, redraw: bool) -> Result<()> {
 // SWP_NOSENDCHANGING is required: without it, Explorer.exe reacts to every animation frame via
 // WM_WINDOWPOSCHANGING and causes severe visual artifacts. DeferWindowPos does not support this
 // flag (crashes), which is why the defer API below is unused.
-pub fn position_window(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) -> Result<()> {
-    set_window_pos(hwnd, rect, redraw, no_size, false)
-}
-
-/// Same as [`position_window`] but posts the request to the window's thread instead of waiting
-/// for it to be processed. Requests are applied in posting order, but after any synchronous
-/// (sent) SetWindowPos issued meanwhile.
-pub fn position_window_async(hwnd: isize, rect: &Rect, redraw: bool, no_size: bool) -> Result<()> {
-    set_window_pos(hwnd, rect, redraw, no_size, true)
-}
-
-fn set_window_pos(
+//
+// With `r#async` the request is posted to the window's thread instead of waiting for it to be
+// processed. Requests are applied in posting order, but after any synchronous (sent)
+// SetWindowPos issued meanwhile.
+pub fn set_window_pos(
     hwnd: isize,
     rect: &Rect,
     redraw: bool,

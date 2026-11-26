@@ -17,6 +17,10 @@ use windows::{
 
 use crate::error::{Error, Result};
 
+/// Window prop (boolean, present = true) set on windows cloaked by a buffered animation, so
+/// window trackers can ignore this transient cloak. Mirrored as a literal by the background
+/// (`Window::is_cloaked_by_seelen`), which does not depend on this crate.
+const CLOAKED_PROP: PCWSTR = windows::core::w!("SluCloaked");
 const CLSID_IMMERSIVE_SHELL: GUID = GUID::from_u128(0xC2F03A33_21F5_47FA_B4BB_156362A2F239);
 const CLOAK_TYPE: u32 = 1;
 const CLOAK_FLAG_HIDE: i32 = 2;
@@ -29,7 +33,7 @@ static VIEW_COLLECTION: Mutex<Option<SharedViewCollection>> = Mutex::new(None);
 
 /// Cloaks a window while alive, uncloaking it on drop (including on errors/early returns).
 ///
-/// While cloaked, the window carries the [`crate::CLOAKED_PROP`] prop so window trackers can
+/// While cloaked, the window carries the [`CLOAKED_PROP`] prop so window trackers can
 /// tell this transient cloak apart from app/shell cloaking (UWP suspension, virtual desktops).
 /// The prop is set before cloaking and removed after uncloaking, so it covers the whole span.
 pub struct CloakGuard {
@@ -158,9 +162,9 @@ fn set_cloaked_prop(hwnd: isize, cloaked: bool) {
     let hwnd = HWND(hwnd as _);
     let result = unsafe {
         if cloaked {
-            SetPropW(hwnd, crate::CLOAKED_PROP, Some(HANDLE(1 as _)))
+            SetPropW(hwnd, CLOAKED_PROP, Some(HANDLE(1 as _)))
         } else {
-            RemovePropW(hwnd, crate::CLOAKED_PROP).map(|_| ())
+            RemovePropW(hwnd, CLOAKED_PROP).map(|_| ())
         }
     };
     if let Err(err) = result {

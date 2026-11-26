@@ -281,15 +281,27 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
 
 - [ ] `src/Cargo.toml`: move `windows`, `windows-core`, `windows-collections`, `windows-future`, `winreg`,
       `win-screenshot`, `win-hotkeys` to `[target.'cfg(windows)'.dependencies]`.
-- [ ] `libs/positioning` (9 Win32 files) and `libs/slu-ipc` (5): same trait + Windows impl pattern, or gate them.
+- [x] `libs/positioning` — the animation engine (`lib.rs`: builder, orchestrator, realtime/buffered loops, retargeting)
+      is OS-agnostic and talks to the OS through `domain::PositioningSystem` (stateless associated fns: `window_rect`,
+      `window_quirks`, `place_window(PlaceOptions)`, `redraw_window`, `boost_current_thread_priority`,
+      `create_frame_timer`, `create_overlay`, `cloak`, plus the `FrameTimer`/`ThumbnailOverlay` traits and the `Cloak`
+      `Drop` guard as associated types), selected with `#[cfg(windows)] type Platform = windows::WindowsPositioning`.
+      The window class checks (Explorer, Chromium, Firefox) became
+      `WindowQuirks { redraw_each_frame,
+      pauses_rendering_while_cloaked, breaks_when_cloaked }` built natively
+      (`quirks_for_class`, tested). Win32 lives in `windows/{mod, window, overlay, shell_view, timer}.rs` (`SluCloaked`
+      prop and `RECT` conversions included); `windows`/`windows-core` are `cfg(windows)` dependencies and
+      `Error::Windows` is `#[cfg(windows)]`. Public API unchanged. On `x86_64-unknown-linux-gnu` the only error is the
+      missing `Platform`.
+- [ ] `libs/slu-ipc` (5 Win32 files): same trait + Windows impl pattern, or gate them.
 - [ ] `libs/slu-ipc` `SvcAction` uses `hwnd`: introduce an opaque OS-agnostic `WindowId`.
-- [ ] `libs/utils` review. In progress: `slu_utils::windows` (`#[cfg(windows)]`, `windows` crate is a `cfg(windows)`
-      dependency) is the home of stateless Windows API helpers shared by several binaries (`set_foreground`,
-      `AppBarData`, `Com`/`ComThread`, `WindowsString`, `WindowEnumerator`/`MonitorEnumerator`). The duplicated
-      `app_bar`, `com`, `iterator` and `string_utils` of the background and the service moved there; errors are
-      `windows::core::Result` or generic over the binary error (`Com::run_with_context`, `ComThread<S, E>`). The
-      registered bars tracking stays in the background (`widgets/webview/windows.rs`).
-  - Pending: verify `cargo check -p slu-utils --target x86_64-unknown-linux-gnu`.
+- [x] `libs/utils` — `slu_utils::windows` (`#[cfg(windows)]`, `windows` crate is a `cfg(windows)` dependency) is the
+      home of stateless Windows API helpers shared by several binaries (`set_foreground`, `AppBarData`,
+      `Com`/`ComThread`, `WindowsString`, `WindowEnumerator`/`MonitorEnumerator`). The duplicated `app_bar`, `com`,
+      `iterator` and `string_utils` of the background and the service moved there; errors are `windows::core::Result` or
+      generic over the binary error (`Com::run_with_context`, `ComThread<S, E>`). The registered bars tracking stays in
+      the background (`widgets/webview/windows.rs`). `cargo check -p slu-utils --target x86_64-unknown-linux-gnu`
+      passes.
 - [ ] Verify `cargo check` still passes on Windows and, as a goal, that
       `cargo check --target
       x86_64-unknown-linux-gnu -p seelen-ui` fails only with "trait not implemented" errors

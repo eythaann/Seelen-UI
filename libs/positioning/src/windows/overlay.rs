@@ -23,7 +23,8 @@ use windows::{
     core::{PCWSTR, w},
 };
 
-use crate::{api::get_window_rect, error::Result, rect::Rect};
+use super::window::get_window_rect;
+use crate::{domain::ThumbnailOverlay, error::Result, rect::Rect};
 
 const OVERLAY_CLASS: PCWSTR = w!("SeelenPositioningThumbnailOverlay");
 
@@ -33,7 +34,7 @@ const OVERLAY_CLASS: PCWSTR = w!("SeelenPositioningThumbnailOverlay");
 /// bounds) keeps overshooting easings (back, elastic) from being clipped, at no memory cost.
 ///
 /// Must be created, used and dropped on the same thread.
-pub struct ThumbnailOverlay {
+pub struct DwmThumbnailOverlay {
     hwnd: HWND,
     thumbnail: isize,
     origin_x: i32,
@@ -44,7 +45,7 @@ pub struct ThumbnailOverlay {
     insets: RECT,
 }
 
-impl ThumbnailOverlay {
+impl DwmThumbnailOverlay {
     pub fn create(source: isize, initial: &Rect) -> Result<Self> {
         let instance = register_class()?;
         // Physical pixels everywhere, regardless of the host process manifest: a window's DPI
@@ -113,10 +114,12 @@ impl ThumbnailOverlay {
 
         Ok(overlay)
     }
+}
 
+impl ThumbnailOverlay for DwmThumbnailOverlay {
     /// Places the thumbnail where a window with outer rect `rect` (screen coordinates) would show
     /// its visible frame, stretching it to fit.
-    pub fn set_destination(&self, rect: &Rect) -> Result<()> {
+    fn set_destination(&self, rect: &Rect) -> Result<()> {
         let left = rect.x - self.origin_x;
         let top = rect.y - self.origin_y;
         let props = DWM_THUMBNAIL_PROPERTIES {
@@ -138,7 +141,7 @@ impl ThumbnailOverlay {
 
     /// The animation thread has no message loop; drain the queue so the overlay never looks hung
     /// to apps that broadcast or send messages to every top-level window.
-    pub fn pump_messages(&self) {
+    fn pump_messages(&self) {
         let mut msg = MSG::default();
         unsafe {
             while PeekMessageW(&mut msg, None, 0, 0, PM_REMOVE).as_bool() {
@@ -149,7 +152,7 @@ impl ThumbnailOverlay {
     }
 }
 
-impl Drop for ThumbnailOverlay {
+impl Drop for DwmThumbnailOverlay {
     fn drop(&mut self) {
         unsafe {
             // Let DWM present whatever changed before (e.g. the real window being uncloaked)
