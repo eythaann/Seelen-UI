@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { ContextMenuItem, ContextMenuCallbackPayload } from "@seelen-ui/lib/types";
+  import type { ContextMenuCallbackPayload, ContextMenuItem } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { emitTo } from "@tauri-apps/api/event";
-  import { state as gState, closeContextMenuChain } from "./state.svelte";
+  import { closeContextMenuChain, state as gState } from "./state.svelte";
 
   interface MenuItemProps {
     item: Extract<ContextMenuItem, { type: "Item" }>;
@@ -47,7 +47,13 @@
   }
 </script>
 
-<button class="menu-item" class:danger={item.danger} disabled={item.disabled} data-skin="transparent" onclick={handleClick}>
+<button
+  class="menu-item"
+  class:danger={item.danger}
+  disabled={item.disabled}
+  data-skin="transparent"
+  onclick={handleClick}
+>
   {#if item.checked !== null}
     <input type="checkbox" data-skin="default" checked={internalChecked} />
   {/if}

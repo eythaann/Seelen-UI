@@ -1,7 +1,7 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, MissingIcon } from "libs/ui/svelte/components/Icon/index.ts";
-  import { windowsState, previews } from "../../state/windows.svelte.ts";
+  import { previews, windowsState } from "../../state/windows.svelte.ts";
 
   interface Props {
     title: string;

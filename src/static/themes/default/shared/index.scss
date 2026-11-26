@@ -85,7 +85,7 @@ body:has(> div > .slu-std-popover) {
   overflow: hidden;
 
   > #root,
-   > #app {
+  > #app {
     width: min-content;
     height: min-content;
     overflow: hidden; // disable margin collapse

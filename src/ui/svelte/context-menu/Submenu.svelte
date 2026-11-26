@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { type ContextMenuItem, Alignment } from "@seelen-ui/lib/types";
+  import { Alignment, type ContextMenuItem } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "./state.svelte";
 

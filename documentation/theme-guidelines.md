@@ -270,7 +270,8 @@ Use in CSS:
 ```css
 * {
   font-family:
-    var(--custom-font), sans-serif;
+    var(--custom-font),
+    sans-serif;
 }
 ```
 

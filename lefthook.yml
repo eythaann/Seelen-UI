@@ -7,7 +7,7 @@ pre-commit:
   commands:
     file-format:
       priority: 1
-      run: deno fmt --check
+      run: npx dprint check
     rust-format:
       priority: 2
       glob: "**/*.rs"

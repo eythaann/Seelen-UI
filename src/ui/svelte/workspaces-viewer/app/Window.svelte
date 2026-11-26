@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { UserAppWindow } from "@seelen-ui/lib/types";
   import { state } from "../state.svelte";
-  import { Icon, MissingIcon, FileIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon, MissingIcon } from "libs/ui/svelte/components/Icon";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { createDraggable } from "@dnd-kit/svelte";
 
@@ -18,13 +18,11 @@
   const aspectRatio = $derived(preview ? preview.width / preview.height : 16 / 9);
 
   // svelte-ignore state_referenced_locally
-  const draggable = overlay
-    ? null
-    : createDraggable({
-        get id() {
-          return hwnd;
-        },
-      });
+  const draggable = overlay ? null : createDraggable({
+    get id() {
+      return hwnd;
+    },
+  });
 </script>
 
 <div

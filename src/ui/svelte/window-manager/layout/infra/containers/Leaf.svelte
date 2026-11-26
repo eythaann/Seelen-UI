@@ -1,6 +1,6 @@
 <script lang="ts">
   import { state } from "../../../state.svelte.ts";
-  import ReservedContainer from './Reserved.svelte';
+  import ReservedContainer from "./Reserved.svelte";
 
   interface Props {
     hwnd: string;

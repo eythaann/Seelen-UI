@@ -121,9 +121,7 @@ input[type="radio"][data-skin="default"] {
   border: 2px solid var(--color-gray-400);
   background-color: transparent;
   flex-shrink: 0;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   cursor: pointer;
 
   &::before {
@@ -167,9 +165,7 @@ input[type="checkbox"][data-skin="default"] {
   border: 2px solid var(--color-gray-400);
   background-color: transparent;
   flex-shrink: 0;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
   cursor: pointer;
 
   &::before {

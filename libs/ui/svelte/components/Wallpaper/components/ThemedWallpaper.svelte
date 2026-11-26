@@ -6,8 +6,7 @@
   import Default from "./Default.svelte";
   import DOMPurify from "dompurify";
 
-  let { definition, config, onLoad }: Pick<BaseProps, "definition" | "config" | "onLoad"> =
-    $props();
+  let { definition, config, onLoad }: Pick<BaseProps, "definition" | "config" | "onLoad"> = $props();
 
   let styleEl = $state<HTMLStyleElement>();
 

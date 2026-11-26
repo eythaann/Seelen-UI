@@ -1,9 +1,7 @@
 @mixin fade {
   opacity: 1;
   scale: 1;
-  transition:
-    opacity 200ms ease,
-    scale 200ms ease;
+  transition: opacity 200ms ease, scale 200ms ease;
 
   @starting-style {
     opacity: 0;
@@ -239,11 +237,7 @@
 
   height: var(--config-item-size);
   width: var(--config-item-size);
-  transition:
-    width 200ms ease,
-    height 200ms ease,
-    padding 200ms ease,
-    border-radius 200ms ease;
+  transition: width 200ms ease, height 200ms ease, padding 200ms ease, border-radius 200ms ease;
 
   .weg-item-drag-container[data-mounting] & {
     @starting-style {

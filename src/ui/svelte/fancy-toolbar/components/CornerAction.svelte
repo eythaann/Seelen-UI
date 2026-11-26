@@ -7,4 +7,5 @@
   class="ft-corner-button"
   onclick={() => invoke(SeelenCommand.ShowDesktop)}
   title={$t("show_desktop")}
-></button>
+>
+</button>

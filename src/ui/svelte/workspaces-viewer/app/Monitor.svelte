@@ -40,7 +40,7 @@
     e.stopPropagation();
     invoke(SeelenCommand.CreateWorkspace, { monitorId: monitor.id });
   }
-  
+
   function createWorkspaceRow(e: MouseEvent) {
     e.stopPropagation();
     invoke(SeelenCommand.CreateWorkspaceRow, { monitorId: monitor.id });

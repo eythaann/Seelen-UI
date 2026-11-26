@@ -27,9 +27,9 @@ libs/core/src/constants/mod.ts
 
 ## Why this matters for resources
 
-Anything that consumes "which languages does Seelen UI support" — the Settings language dropdown, and the
-`slu resource translate` command described in [ResourceText](./resource-text) — reads from this list. Adding a language
-here automatically:
+Anything that consumes "which languages does Seelen UI support" — the Settings language dropdown, and the `slu resource
+translate` command described in [ResourceText](./resource-text) — reads from this list. Adding a language here
+automatically:
 
 - Makes it selectable in the Settings language picker (once a matching locale file exists under `i18n/translations/`).
 - Makes `slu resource translate` fill it in for every `ResourceText` field in a resource, with no changes needed on the

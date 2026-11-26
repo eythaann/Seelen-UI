@@ -238,8 +238,8 @@ plugin:
 
 ## 5. `style`
 
-A plain object merged onto the item's container as inline styles, keyed like a React `style` prop
-(`{ "margin-left": "4px" }`, numbers allowed for unitless properties).
+A plain object merged onto the item's container as inline styles, keyed like a React `style` prop (`{ "margin-left":
+"4px" }`, numbers allowed for unitless properties).
 
 ---
 

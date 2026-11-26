@@ -55,17 +55,12 @@
     <button
       data-skin="transparent"
       onclick={() => {
-        globalState.displayMode =
-          globalState.displayMode === StartDisplayMode.Normal
-            ? StartDisplayMode.Fullscreen
-            : StartDisplayMode.Normal;
+        globalState.displayMode = globalState.displayMode === StartDisplayMode.Normal
+          ? StartDisplayMode.Fullscreen
+          : StartDisplayMode.Normal;
       }}
     >
-      <Icon
-        iconName={globalState.displayMode === StartDisplayMode.Fullscreen
-          ? "IoContract"
-          : "IoExpand"}
-      />
+      <Icon iconName={globalState.displayMode === StartDisplayMode.Fullscreen ? "IoContract" : "IoExpand"} />
     </button>
   </div>
 </div>

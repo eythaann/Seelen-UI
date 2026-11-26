@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { SystemSettingKind, type SystemSettingEntry } from "@seelen-ui/lib/types";
-  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { type SystemSettingEntry, SystemSettingKind } from "@seelen-ui/lib/types";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { getResultKey } from "../state/search.svelte";
   import type { SelectionScope } from "../keyboard-navigation";
 
-  const SETTINGS_APP_UMID =
-    "windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel";
+  const SETTINGS_APP_UMID = "windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel";
   const CONTROL_PANEL_UMID = "Microsoft.Windows.ControlPanel";
 
   interface Props {

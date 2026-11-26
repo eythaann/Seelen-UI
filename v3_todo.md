@@ -24,10 +24,10 @@ documented in `system_modules/mod.rs`). Reference implementation: `system_module
         mod.rs             # generic Manager + `type Platform = ...` selected by cfg
         windows.rs         # #[cfg(windows)] impl <Module>System for Windows<Module>
 
-- The module's `mod.rs` **is** the infrastructure layer. `application` and `domain` are private (`mod`, never
-  `pub mod`); the only thing that leaves the module is its `impl crate::tauri_handlers::Handlers` block.
-- Static dispatch, no `dyn`: in `application/mod.rs` `#[cfg(windows)] mod windows;` +
-  `#[cfg(windows)] type Platform = windows::Windows<Module>;`
+- The module's `mod.rs` **is** the infrastructure layer. `application` and `domain` are private (`mod`, never `pub
+  mod`); the only thing that leaves the module is its `impl crate::tauri_handlers::Handlers` block.
+- Static dispatch, no `dyn`: in `application/mod.rs` `#[cfg(windows)] mod windows;` + `#[cfg(windows)] type Platform =
+  windows::Windows<Module>;`
 - **Create and init are separate** (managers and native structs alike, they are singletons behind a `LazyLock`):
   - `create() -> Self` never fails: it only builds the struct, no OS calls.
   - `init(&mut self) -> Result<()>` acquires the resources and subscribes; it may fail.
@@ -35,11 +35,11 @@ documented in `system_modules/mod.rs`). Reference implementation: `system_module
     failed init leaves a degraded but usable manager (queries return `Err`/defaults) instead of poisoning the singleton
     and crashing every caller.
   - Native resources acquired in `init` are stored as `Option<_>` and queries return `Err` while they are `None`.
-- The trait exposes `create`, `init` and **queries/actions** (`fn get_status() -> Result<T>`,
-  `fn lock() -> Result<()>`). `init` receives the callback with the domain events
-  (`fn init(&mut self, on_event: impl Fn(<Module>SysEvent))`); the manager passes `Self::send` (or translates them into
-  its internal `event_manager!` event, e.g. `power`: `PowerSysEvent` → `PowerEvent`), the OS layer never knows about the
-  manager. Native C callbacks without closures receive it through their context pointer.
+- The trait exposes `create`, `init` and **queries/actions** (`fn get_status() -> Result<T>`, `fn lock() ->
+  Result<()>`). `init` receives the callback with the domain events (`fn init(&mut self, on_event: impl
+  Fn(<Module>SysEvent))`); the manager passes `Self::send` (or translates them into its internal `event_manager!` event,
+  e.g. `power`: `PowerSysEvent` → `PowerEvent`), the OS layer never knows about the manager. Native C callbacks without
+  closures receive it through their context pointer.
 - Resources with `Drop` (WinRT tokens, `HPOWERNOTIFY`, etc.) live in the `Windows<Module>` struct, which the manager
   stores as a `platform: Platform` field. `Drop` must handle a partially initialized struct.
 - Mutable state goes in fields behind a `TracedMutex` (`info: TracedMutex<T>`), never the whole manager: `instance()`
@@ -141,15 +141,13 @@ Start with the small ones to validate the pattern:
       subscriptions are app-lifetime, no `Drop`). The manager caches `TrashBinInfo` and drops the shell notifications
       that leave it unchanged (`TrashBinInfo` now derives `PartialEq, Eq`).
 
-- [x] **power** —
-      `PowerSystem { create, init, power_status, batteries, has_pending_os_updates, log_out, suspend,
-      hibernate, lock, restart, shutdown }`.
-      First module with a separate OS event (`PowerSysEvent`: only signals what changed, plus `Resumed`) and manager
-      event (`PowerEvent`: carries the data); the manager queries, dedupes and handles the post-resume refresh. The
-      native callbacks get the `on_event` closure through their Win32 context pointer (`Arc` kept in `WindowsPower`).
-      Fixed on the way: the battery registration was released with `UnregisterPowerSettingNotification` (wrong API, now
-      `PowerSettingUnregisterNotification`) and the power mode one was never released. `PowerStatus`
-      (`Default, PartialEq, Eq`) and `PowerMode` (`Default`) derives added in core.
+- [x] **power** — `PowerSystem { create, init, power_status, batteries, has_pending_os_updates, log_out, suspend,
+      hibernate, lock, restart, shutdown }`. First module with a separate OS event (`PowerSysEvent`: only signals what
+      changed, plus `Resumed`) and manager event (`PowerEvent`: carries the data); the manager queries, dedupes and
+      handles the post-resume refresh. The native callbacks get the `on_event` closure through their Win32 context
+      pointer (`Arc` kept in `WindowsPower`). Fixed on the way: the battery registration was released with
+      `UnregisterPowerSettingNotification` (wrong API, now `PowerSettingUnregisterNotification`) and the power mode one
+      was never released. `PowerStatus` (`Default, PartialEq, Eq`) and `PowerMode` (`Default`) derives added in core.
   - Done: the game mode → suspend widgets logic moved from the infra bridge to `WidgetManager::create` (subscribes to
     `PowerManager`, re-exported with `PowerEvent`). It used to be registered only on the first power command.
   - Pending: `PowerStatus` fields are still Win32 shaped (`ac_line_status: u8`, ...).
@@ -261,9 +259,8 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
     `REG_EXPAND_SZ`).
   - `taskbar` — the hide worker/request coalescing and pass delays are in the manager; one check of a pass
     (`TaskbarSystem::hide`, app bar state + focus move + hide) and `restore` are native.
-  - `hotkeys` — command dispatch (`ShortcutAction`, tested) and the app notifications in the manager;
-    `HotkeysSystem { register, stop, start_recording, stop_recording }` wraps `win_hotkeys`
-    (`RecordingEvent { Pressed, Finished }`).
+  - `hotkeys` — command dispatch (`ShortcutAction`, tested) and the app notifications in the manager; `HotkeysSystem {
+    register, stop, start_recording, stop_recording }` wraps `win_hotkeys` (`RecordingEvent { Pressed, Finished }`).
   - `window_positioning` — show/position/foreground native; the batch placement and the `AnimationOrchestrator` are in
     the manager (`libs/positioning` itself is Phase 4).
   - `native_wallpaper` — the worker, saved state, external change detection and restore plan are agnostic (types and
@@ -287,13 +284,11 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       `window_quirks`, `place_window(PlaceOptions)`, `redraw_window`, `boost_current_thread_priority`,
       `create_frame_timer`, `create_overlay`, `cloak`, plus the `FrameTimer`/`ThumbnailOverlay` traits and the `Cloak`
       `Drop` guard as associated types), selected with `#[cfg(windows)] type Platform = windows::WindowsPositioning`.
-      The window class checks (Explorer, Chromium, Firefox) became
-      `WindowQuirks { redraw_each_frame,
-      pauses_rendering_while_cloaked, breaks_when_cloaked }` built natively
-      (`quirks_for_class`, tested). Win32 lives in `windows/{mod, window, overlay, shell_view, timer}.rs` (`SluCloaked`
-      prop and `RECT` conversions included); `windows`/`windows-core` are `cfg(windows)` dependencies and
-      `Error::Windows` is `#[cfg(windows)]`. Public API unchanged. On `x86_64-unknown-linux-gnu` the only error is the
-      missing `Platform`.
+      The window class checks (Explorer, Chromium, Firefox) became `WindowQuirks { redraw_each_frame,
+      pauses_rendering_while_cloaked, breaks_when_cloaked }` built natively (`quirks_for_class`, tested). Win32 lives in
+      `windows/{mod, window, overlay, shell_view, timer}.rs` (`SluCloaked` prop and `RECT` conversions included);
+      `windows`/`windows-core` are `cfg(windows)` dependencies and `Error::Windows` is `#[cfg(windows)]`. Public API
+      unchanged. On `x86_64-unknown-linux-gnu` the only error is the missing `Platform`.
 - [x] `libs/slu-ipc` — the transport is the portable `interprocess::local_socket` API (`IpcStream`/`AsyncIpcStream` are
       `local_socket::{Stream, tokio::Stream}`; `common::{connect, connect_async, listen}` with `GenericFilePath` names;
       the server pid comes from `peer_creds()`), so the protocol (framing, timeouts, retries, app/service listeners) and
@@ -323,10 +318,9 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       generic over the binary error (`Com::run_with_context`, `ComThread<S, E>`). The registered bars tracking stays in
       the background (`widgets/webview/windows.rs`). `cargo check -p slu-utils --target x86_64-unknown-linux-gnu`
       passes.
-- [ ] Verify `cargo check` still passes on Windows and, as a goal, that
-      `cargo check --target
-      x86_64-unknown-linux-gnu -p seelen-ui` fails only with "trait not implemented" errors
-      (optional empty `application/linux.rs` / `unimplemented!()` stub).
+- [ ] Verify `cargo check` still passes on Windows and, as a goal, that `cargo check --target x86_64-unknown-linux-gnu
+      -p seelen-ui` fails only with "trait not implemented" errors (optional empty `application/linux.rs` /
+      `unimplemented!()` stub).
   - Done: `cargo clippy --workspace --tests` passes on Windows with no warnings.
   - Pending: it can't be cross-checked from Windows: Tauri's GTK `*-sys` crates (`glib-sys`, `gdk-sys`, ...) need
     `pkg-config` and the Linux system libraries. Run it from WSL / a Linux machine.
@@ -334,9 +328,7 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
 ## Per-module verification
 
 - `cargo check` (never `--release`).
-- Control grep:
-  `rg "windows::|windows_core|winreg|windows_api|HWND|unsafe" src/background/system_modules/*/mod.rs
-  src/background/system_modules/*/domain*`
-  → empty.
+- Control grep: `rg "windows::|windows_core|winreg|windows_api|HWND|unsafe" src/background/system_modules/*/mod.rs
+  src/background/system_modules/*/domain*` → empty.
 - `deno task build:rs` in `libs/core` if any exposed type changes (it shouldn't: this is an internal refactor).
 - Manual testing by the user in the app (power actions, audio devices, notifications, etc.).

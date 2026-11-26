@@ -91,8 +91,9 @@
   }
 
   async function save() {
-    if (!bgCanvas || !imageCanvas || !drawCanvas || !editorState.entry || editorState.saving)
+    if (!bgCanvas || !imageCanvas || !drawCanvas || !editorState.entry || editorState.saving) {
       return;
+    }
     editorState.saving = true;
     try {
       const temp = document.createElement("canvas");
@@ -167,16 +168,14 @@
           bind:this={fileInput}
           type="file"
           accept="image/*"
-          style="display:none"
+          style="display: none"
           onchange={onFileChange}
         />
       </section>
 
       {#if editorState.overlayImage}
         <section class="control-section">
-          <label for="range-x" class="section-label"
-            >{$t("position_x")}: {Math.round(editorState.overlayX)}</label
-          >
+          <label for="range-x" class="section-label">{$t("position_x")}: {Math.round(editorState.overlayX)}</label>
           <input
             id="range-x"
             data-skin="flat"
@@ -186,9 +185,7 @@
             bind:value={editorState.overlayX}
           />
 
-          <label for="range-y" class="section-label"
-            >{$t("position_y")}: {Math.round(editorState.overlayY)}</label
-          >
+          <label for="range-y" class="section-label">{$t("position_y")}: {Math.round(editorState.overlayY)}</label>
           <input
             id="range-y"
             data-skin="flat"
@@ -198,9 +195,7 @@
             bind:value={editorState.overlayY}
           />
 
-          <label for="range-scale" class="section-label"
-            >{$t("scale")}: {editorState.overlayScale.toFixed(2)}</label
-          >
+          <label for="range-scale" class="section-label">{$t("scale")}: {editorState.overlayScale.toFixed(2)}</label>
           <input
             id="range-scale"
             data-skin="flat"

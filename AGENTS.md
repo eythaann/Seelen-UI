@@ -99,10 +99,10 @@ Dev / build:
 - `cargo check` - Fast Rust type check
 - `cargo build` - Debug build
 
-Quality (Deno-based):
+Quality:
 
 - `deno lint`
-- `deno fmt`
+- `npx dprint fmt` - Format (config in `dprint.json`; `npx dprint check` to verify)
 - `npm run type-check`
 - `npm test`
 
@@ -507,9 +507,8 @@ pub enum Action {
   an interactive desktop (no `CreateWindowExW` fixtures, no `#[ignore]`d "interactive desktop" tests). Test only the
   pure logic (extract it from the OS calls if needed). Anything that needs the system GUI is verified manually by
   QA/testers: list those scenarios in the PR description instead of writing a test.
-- Runtime logs can be read directly (no need to ask the user for them):
-  `%LOCALAPPDATA%\com.seelen.seelen-ui\logs\Seelen UI.log` (service: `SLU Service.log` in the same folder; previous
-  session in `*.log.bak`).
+- Runtime logs can be read directly (no need to ask the user for them): `%LOCALAPPDATA%\com.seelen.seelen-ui\logs\Seelen
+  UI.log` (service: `SLU Service.log` in the same folder; previous session in `*.log.bak`).
 
 ## Documentation & Custom Resources
 

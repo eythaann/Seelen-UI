@@ -7,8 +7,8 @@
   import { previewState } from "./state.svelte.ts";
   import {
     contentViewport,
-    type LivePreviewFrame,
     LivePreviewController,
+    type LivePreviewFrame,
     type LivePreviewStatus,
     visiblePreviewTargets,
   } from "./livePreview.ts";
