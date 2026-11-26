@@ -40,6 +40,7 @@ export function LayoutSelector() {
   );
 }
 
+// oxlint-disable-next-line no-unused-vars -- kept for the commented-out layout preview above
 function TwmNode({ node }: { node: TwmPluginNode | null }) {
   if (!node) {
     return <div className={cs.float}></div>;

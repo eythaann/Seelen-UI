@@ -6,7 +6,6 @@ export class Rect {
 }
 
 export function isSeelenUIRuntime(): boolean {
-  // deno-lint-ignore no-explicit-any
   return !!(globalThis.window as any).__SLU_WIDGET;
 }
 

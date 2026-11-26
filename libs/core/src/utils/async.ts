@@ -1,4 +1,3 @@
-// deno-lint-ignore no-explicit-any
 export interface DebouncedFunction<T extends (...args: any[]) => any> {
   (...args: Parameters<T>): void;
   cancel(): void;
@@ -6,7 +5,6 @@ export interface DebouncedFunction<T extends (...args: any[]) => any> {
   pending(): boolean;
 }
 
-// deno-lint-ignore no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   fn: T,
   delay: number,
@@ -14,7 +12,7 @@ export function debounce<T extends (...args: any[]) => any>(
   let timeout: ReturnType<typeof setTimeout> | null = null;
   let lastArgs: Parameters<T> | null = null;
 
-  const debounced = (...args: Parameters<T>) => {
+  const debounced = (...args: Parameters<T>): void => {
     lastArgs = args;
 
     if (timeout) {
@@ -30,7 +28,7 @@ export function debounce<T extends (...args: any[]) => any>(
     }, delay);
   };
 
-  debounced.cancel = () => {
+  debounced.cancel = (): void => {
     if (timeout) {
       clearTimeout(timeout);
       timeout = null;
@@ -38,7 +36,7 @@ export function debounce<T extends (...args: any[]) => any>(
     lastArgs = null;
   };
 
-  debounced.flush = () => {
+  debounced.flush = (): void => {
     if (timeout) {
       clearTimeout(timeout);
       timeout = null;
@@ -50,7 +48,7 @@ export function debounce<T extends (...args: any[]) => any>(
     }
   };
 
-  debounced.pending = () => {
+  debounced.pending = (): boolean => {
     return timeout !== null;
   };
 
@@ -71,9 +69,7 @@ export class Mutex<T> {
       await this.lock.__promise;
     }
 
-    // deno-lint-ignore no-explicit-any
     let __resolve: any;
-    // deno-lint-ignore no-explicit-any
     let __reject: any;
     const __promise = new Promise<() => void>((resolve, reject) => {
       __resolve = resolve;

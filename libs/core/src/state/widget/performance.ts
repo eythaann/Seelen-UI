@@ -15,7 +15,7 @@ function setDisableAnimations(mode: PerformanceMode): void {
 }
 
 /** Matches the root itself and everything under it (a nested `*` would skip the root). */
-const withDescendants = (root: string) => `${root}, ${root} *, ${root} *::before, ${root} *::after`;
+const withDescendants = (root: string): string => `${root}, ${root} *, ${root} *::before, ${root} *::after`;
 
 const DISABLED_ANIMATIONS_CSS = `
   animation-duration: 0.001ms !important;

@@ -59,7 +59,7 @@
     }, 0);
   });
 
-  async function onConnection() {
+  function onConnection() {
     transition.start(async () => {
       if (entry.connected) {
         await invoke(SeelenCommand.WlanDisconnect);
@@ -91,7 +91,7 @@
     if (e.key === "Enter") onConnection();
   }
 
-  async function onForget() {
+  function onForget() {
     if (!entry.ssid) return;
     const ssid = entry.ssid;
     transition.start(async () => {

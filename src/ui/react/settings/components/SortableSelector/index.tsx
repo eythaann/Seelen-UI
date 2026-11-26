@@ -63,9 +63,9 @@ export function VerticalSortableSelect<T extends string>({
     <DragDropProvider manager={manager} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
       <div className={cs.container}>
         {containers.map(({ id, items }) => (
-          <div className={cs.box}>
+          <div key={id} className={cs.box}>
             <div className={cs.header}>{id === "enabled" ? "Enabled" : "Disabled"}</div>
-            <DndDropableAndSortableContainer key={id} id={id} items={items} className={cs.list}>
+            <DndDropableAndSortableContainer id={id} items={items} className={cs.list}>
               {items.map((id, index) => (
                 <Entry key={id} value={id} disabled={disabled} index={index}>
                   <div className={cs.item}>{options.find(({ value }) => value === id)?.label}</div>

@@ -64,7 +64,7 @@
     await invoke(SeelenCommand.SystemSetDarkMode, { enabled: !state.darkMode });
   }
 
-  async function toggleNightLight() {
+  function toggleNightLight() {
     const enabled = !state.nightLightEnabled;
     invoke(SeelenCommand.SystemSetNightLightEnabled, { enabled }).then(() => {
       state.nightLightEnabled = enabled;

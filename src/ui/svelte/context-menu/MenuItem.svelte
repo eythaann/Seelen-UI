@@ -14,7 +14,7 @@
   let internalChecked = $state(false);
 
   $effect.pre(() => {
-    internalChecked = item.checked!!;
+    internalChecked = !!item.checked;
   });
 
   function handleClick() {

@@ -33,16 +33,6 @@
       "ES2023"
     ]
   },
-  "lint": {
-    "rules": {
-      "include": [
-        "explicit-function-return-type"
-      ],
-      "exclude": [
-        "no-slow-types"
-      ]
-    }
-  },
   "publish": {
     "include": [
       "src",

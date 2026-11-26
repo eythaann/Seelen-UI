@@ -17,7 +17,7 @@ jobs:
 
       - run: npm install
       - run: npx dprint check
-      - run: deno lint
+      - run: npx oxlint
       - run: npm run type-check
       - run: npm run test
 

@@ -10,9 +10,7 @@ import type {
   UnSubscriber,
 } from "../handlers/mod.ts";
 
-// deno-lint-ignore no-explicit-any
 interface ConstructorWithSingleArg<T = any> {
-  // deno-lint-ignore no-explicit-any
   new (arg0: T): any;
 }
 

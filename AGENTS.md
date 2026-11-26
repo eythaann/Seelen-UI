@@ -101,7 +101,7 @@ Dev / build:
 
 Quality:
 
-- `deno lint`
+- `npx oxlint` - Lint JS/TS (config in `.oxlintrc.json`)
 - `npx dprint fmt` - Format (config in `dprint.json`; `npx dprint check` to verify)
 - `npm run type-check`
 - `npm test`
@@ -501,7 +501,7 @@ pub enum Action {
 
 ## Testing Expectations
 
-- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `deno lint`).
+- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `npx oxlint`).
 - Keep changes scoped; add tests when behavior changes.
 - Automated tests must never require the system GUI: no real windows, DWM, focus/foreground, Z-order, input, monitors or
   an interactive desktop (no `CreateWindowExW` fixtures, no `#[ignore]`d "interactive desktop" tests). Test only the
