@@ -16,8 +16,8 @@ use windows::Win32::{
         Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
         WindowsAndMessaging::{
             FindWindowW, GetClassNameW, GetForegroundWindow, GetShellWindow, GetWindowTextW,
-            IsWindowVisible, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER,
-            SetWindowPos, ShowWindow, ShowWindowAsync,
+            IsWindowVisible, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SetWindowPos,
+            ShowWindow, ShowWindowAsync,
         },
     },
 };
@@ -73,14 +73,7 @@ impl WindowsApi {
         unsafe { IsWindowVisible(hwnd) }.as_bool()
     }
 
-    pub fn set_position(
-        hwnd: isize,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-        flags: u32,
-    ) -> Result<()> {
+    pub fn set_position(hwnd: isize, x: i32, y: i32, width: i32, height: i32) -> Result<()> {
         unsafe {
             SetWindowPos(
                 HWND(hwnd as _),
@@ -89,7 +82,7 @@ impl WindowsApi {
                 y,
                 width,
                 height,
-                SET_WINDOW_POS_FLAGS(flags) | SWP_NOACTIVATE | SWP_NOZORDER,
+                SWP_NOACTIVATE | SWP_NOZORDER,
             )
             .filter_fake_error()?;
         }

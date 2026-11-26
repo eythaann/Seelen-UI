@@ -176,38 +176,40 @@ impl NativeWindow {
     }
 
     pub fn set_state(&self, state: WindowState) -> Result<()> {
-        let command = to_show_command(state);
         if self.is_manageable_from_unelevated() {
-            WindowsApi::show_window(self.0, command)
+            WindowsApi::show_window(self.0, to_show_command(state))
         } else {
             ServicePipe::request(SvcAction::ShowWindow {
-                hwnd: self.handle(),
-                command: command.0,
+                window: self.handle(),
+                state,
             })
         }
     }
 
     pub fn set_state_async(&self, state: WindowState) -> Result<()> {
-        let command = to_show_command(state);
         if self.is_manageable_from_unelevated() {
-            WindowsApi::show_window_async(self.0, command)
+            WindowsApi::show_window_async(self.0, to_show_command(state))
         } else {
             ServicePipe::request(SvcAction::ShowWindowAsync {
-                hwnd: self.handle(),
-                command: command.0,
+                window: self.handle(),
+                state,
             })
         }
     }
 
     pub fn set_rect(&self, rect: &Rect) -> Result<()> {
-        let flags = SET_WINDOW_POS_FLAGS::default();
         if self.is_manageable_from_unelevated() {
-            WindowsApi::set_position(self.0, None, &to_win32_rect(rect), flags)
+            WindowsApi::set_position(
+                self.0,
+                None,
+                &to_win32_rect(rect),
+                SET_WINDOW_POS_FLAGS::default(),
+            )
         } else {
             ServicePipe::request(SvcAction::SetWindowPosition {
-                hwnd: self.handle(),
+                window: self.handle(),
                 rect: rect.clone(),
-                flags: flags.0,
+                flags: 0,
             })
         }
     }

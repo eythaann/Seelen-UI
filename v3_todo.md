@@ -274,13 +274,14 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       `windows.rs` files. Process-level primitives (DPI/privileges, single instance mutex, wait for the shell, console,
       local data dir) are in `service/platform/{mod.rs, windows.rs}`. `SERVICE_NAME` (unused) removed,
       `SERVICE_DISPLAY_NAME` is a `&str`.
-  - Pending: `SvcAction` still carries Win32 shaped values (`hwnd`, show `command`, `SWP_*` flags); they are passed
-    through untouched to the native layer (see Phase 4 `WindowId`).
+  - Done: `SvcAction` no longer carries Win32 shaped values (see Phase 4 `SvcAction`).
 
 ## Phase 4 — Crates and conditional compilation
 
-- [ ] `src/Cargo.toml`: move `windows`, `windows-core`, `windows-collections`, `windows-future`, `winreg`,
-      `win-screenshot`, `win-hotkeys` to `[target.'cfg(windows)'.dependencies]`.
+- [x] `src/Cargo.toml` (background, service and `slu` CLI): `windows`, `windows-core`, `windows-collections`,
+      `windows-future`, `winreg`, `win-screenshot`, `win-hotkeys`, `webview2-com` and `wmi` are
+      `[target.'cfg(windows)'.dependencies]`. `widestring`, `battery` and `discord-rich-presence` are cross-platform and
+      stay common.
 - [x] `libs/positioning` — the animation engine (`lib.rs`: builder, orchestrator, realtime/buffered loops, retargeting)
       is OS-agnostic and talks to the OS through `domain::PositioningSystem` (stateless associated fns: `window_rect`,
       `window_quirks`, `place_window(PlaceOptions)`, `redraw_window`, `boost_current_thread_priority`,
@@ -293,8 +294,28 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       prop and `RECT` conversions included); `windows`/`windows-core` are `cfg(windows)` dependencies and
       `Error::Windows` is `#[cfg(windows)]`. Public API unchanged. On `x86_64-unknown-linux-gnu` the only error is the
       missing `Platform`.
-- [ ] `libs/slu-ipc` (5 Win32 files): same trait + Windows impl pattern, or gate them.
-- [ ] `libs/slu-ipc` `SvcAction` uses `hwnd`: introduce an opaque OS-agnostic `WindowId`.
+- [x] `libs/slu-ipc` — the transport is the portable `interprocess::local_socket` API (`IpcStream`/`AsyncIpcStream` are
+      `local_socket::{Stream, tokio::Stream}`; `common::{connect, connect_async, listen}` with `GenericFilePath` names;
+      the server pid comes from `peer_creds()`), so the protocol (framing, timeouts, retries, app/service listeners) and
+      the transport are OS-agnostic. On Windows local sockets are the same byte mode duplex named pipes as before, with
+      the same `\\.\pipe\seelen-ui[-service]-{session}` paths and security descriptor, so the wire is unchanged.
+      `domain::IpcSystem` only covers what local sockets leave to each OS: `current_session_id`,
+      `interactive_session_id`, `endpoint(name, session)` (path), `secure_listener` (Windows: the SDDL of
+      `windows/security.rs`, no longer public, it had no external users) and `with_io_timeout` (Windows:
+      `CancelSynchronousIo` watchdog, as named pipe local sockets have no read/write timeouts). `windows`/`widestring`
+      are `cfg(windows)` dependencies and `Error::Windows` is `#[cfg(windows)]`. On `x86_64-unknown-linux-gnu` the only
+      error is the missing `Platform`.
+  - For a Linux impl: `endpoint` → socket file under `$XDG_RUNTIME_DIR` (not `GenericNamespaced`: the abstract namespace
+    has no permissions, any local user could connect), `secure_listener` → `ListenerOptionsExt::mode(0o600)` (optionally
+    check `peer_creds().euid()`), `with_io_timeout` → `set_recv_timeout`/`set_send_timeout`, session → the user's uid.
+- [x] `libs/slu-ipc` `SvcAction` — the window variants carry domain types: `WindowHandle` (core's existing opaque
+      runtime id, no new `WindowId` needed) instead of `isize`, and `WindowState` (moved from `platform::window` to
+      `seelen_core::system_state`, re-exported there) instead of the raw `SW_*` command. The wire format is unchanged
+      for compatibility between versions: Rust fields `window`/`state` keep the serialized names `hwnd`/`command`, and
+      `WindowState` is serialized as the same numbers (`WindowState::code`, frozen, equal to `SW_*`; tested on both
+      sides). `SetWindowPosition.flags` was always `0`: it is still sent (previous services require it) but ignored. The
+      service's `WindowPositioningSystem` takes `WindowHandle`/`WindowState` (`set_state`, `set_position(rect)`), the
+      `WindowState` → `SW_*` mapping lives in its `windows.rs`.
 - [x] `libs/utils` — `slu_utils::windows` (`#[cfg(windows)]`, `windows` crate is a `cfg(windows)` dependency) is the
       home of stateless Windows API helpers shared by several binaries (`set_foreground`, `AppBarData`,
       `Com`/`ComThread`, `WindowsString`, `WindowEnumerator`/`MonitorEnumerator`). The duplicated `app_bar`, `com`,
@@ -306,6 +327,9 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       `cargo check --target
       x86_64-unknown-linux-gnu -p seelen-ui` fails only with "trait not implemented" errors
       (optional empty `application/linux.rs` / `unimplemented!()` stub).
+  - Done: `cargo clippy --workspace --tests` passes on Windows with no warnings.
+  - Pending: it can't be cross-checked from Windows: Tauri's GTK `*-sys` crates (`glib-sys`, `gdk-sys`, ...) need
+    `pkg-config` and the Linux system libraries. Run it from WSL / a Linux machine.
 
 ## Per-module verification
 

@@ -18,7 +18,8 @@ use windows::{
     core::{PCWSTR, PWSTR},
 };
 
-use crate::{app::current_session_id, error::Result};
+use super::WindowsIpc;
+use crate::{domain::IpcSystem, error::Result};
 
 /// Max size of a SID in bytes (`SECURITY_MAX_SID_SIZE`)
 const MAX_SID_SIZE: usize = 68;
@@ -41,7 +42,7 @@ pub fn create_security_descriptor() -> Result<SecurityDescriptor> {
 
 /// SID of the user logged in the session of this process, as string.
 fn session_user_sid() -> Result<String> {
-    let session_id = current_session_id()?;
+    let session_id = WindowsIpc::current_session_id()?;
     let user = wts_session_string(session_id, WTSUserName)?;
     let domain = wts_session_string(session_id, WTSDomainName)?;
     if user.is_empty() {

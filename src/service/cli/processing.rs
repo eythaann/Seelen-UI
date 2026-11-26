@@ -13,14 +13,14 @@ async fn _process_action(command: SvcAction) -> Result<()> {
         SvcAction::Stop => crate::exit(0),
         // -----------------------------------------------------------------------
         SvcAction::SetStartup(enabled) => StartupManager::instance().set_run_on_logon(enabled)?,
-        SvcAction::ShowWindow { hwnd, command } => {
-            WindowPositioningManager::instance().show_window(hwnd, command, false)?
+        SvcAction::ShowWindow { window, state } => {
+            WindowPositioningManager::instance().set_state(window, state, false)?
         }
-        SvcAction::ShowWindowAsync { hwnd, command } => {
-            WindowPositioningManager::instance().show_window(hwnd, command, true)?
+        SvcAction::ShowWindowAsync { window, state } => {
+            WindowPositioningManager::instance().set_state(window, state, true)?
         }
-        SvcAction::SetWindowPosition { hwnd, rect, flags } => {
-            WindowPositioningManager::instance().set_position(hwnd, &rect, flags)?
+        SvcAction::SetWindowPosition { window, rect, .. } => {
+            WindowPositioningManager::instance().set_position(window, &rect)?
         }
         SvcAction::DeferWindowPositions {
             list,
@@ -33,12 +33,8 @@ async fn _process_action(command: SvcAction) -> Result<()> {
             animation_duration,
             &easing,
         )?,
-        SvcAction::SetForeground(hwnd) => {
-            WindowPositioningManager::instance().set_foreground(hwnd)?
-        }
-        SvcAction::SetSettings(_settings) => {
-            // Full settings are no longer used by the service for shortcut registration.
-            // The background sends a pre-resolved SetShortcuts action instead.
+        SvcAction::SetForeground(window) => {
+            WindowPositioningManager::instance().set_foreground(window)?
         }
         SvcAction::SetShortcuts(shortcuts) => {
             HotkeysManager::instance().set_shortcuts(shortcuts)?

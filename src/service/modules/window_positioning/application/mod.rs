@@ -4,7 +4,10 @@ mod windows;
 use std::{collections::HashMap, sync::LazyLock};
 
 use positioning::{AnimationMode, AnimationOrchestrator, PositionerBuilder, easings::Easing};
-use seelen_core::rect::Rect;
+use seelen_core::{
+    rect::Rect,
+    system_state::{WindowHandle, WindowState},
+};
 
 use crate::error::Result;
 
@@ -32,22 +35,27 @@ impl WindowPositioningManager {
         }
     }
 
-    pub fn show_window(&self, window: isize, command: i32, asynchronous: bool) -> Result<()> {
-        self.platform.show_window(window, command, asynchronous)
+    pub fn set_state(
+        &self,
+        window: WindowHandle,
+        state: WindowState,
+        asynchronous: bool,
+    ) -> Result<()> {
+        self.platform.set_state(window, state, asynchronous)
     }
 
-    pub fn set_position(&self, window: isize, rect: &Rect, flags: u32) -> Result<()> {
-        self.platform.set_position(window, rect, flags)
+    pub fn set_position(&self, window: WindowHandle, rect: &Rect) -> Result<()> {
+        self.platform.set_position(window, rect)
     }
 
-    pub fn set_foreground(&self, window: isize) -> Result<()> {
+    pub fn set_foreground(&self, window: WindowHandle) -> Result<()> {
         self.platform.set_foreground(window)
     }
 
     /// Places all the windows at once, animated or not.
     pub fn place_batch(
         &self,
-        list: HashMap<isize, Rect>,
+        list: HashMap<WindowHandle, Rect>,
         animated: bool,
         animation_duration: u64,
         easing: &str,

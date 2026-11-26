@@ -1,19 +1,17 @@
 use std::{future::Future, sync::Arc};
 
-use interprocess::os::windows::named_pipe::{
-    DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
-    tokio::DuplexPipeStream as AsyncDuplexPipeStream,
-};
+use interprocess::local_socket::traits::tokio::Listener as _;
 
 use crate::{
+    AsyncIpcStream, Platform,
     app::current_session_id,
     common::{
-        IPC, read_from_ipc_stream, send_to_ipc_stream, send_to_ipc_stream_blocking,
-        send_with_retry, write_to_ipc_stream,
+        IPC, connect, connect_async, listen, read_from_ipc_stream, send_to_ipc_stream,
+        send_to_ipc_stream_blocking, send_with_retry, write_to_ipc_stream,
     },
+    domain::IpcSystem,
     error::Result,
     messages::{IpcResponse, SvcAction},
-    security::create_security_descriptor,
 };
 
 pub struct ServiceIpc {
@@ -28,9 +26,9 @@ impl IPC for ServiceIpc {
 }
 
 impl ServiceIpc {
-    /// Constructs the pipe path for a specific session ID
+    /// Constructs the endpoint path for a specific session ID
     pub fn path_with_session(session_id: u32) -> String {
-        format!(r"\\.\pipe\seelen-ui-service-{}", session_id)
+        Platform::endpoint("seelen-ui-service", session_id)
     }
 }
 
@@ -40,12 +38,7 @@ impl ServiceIpc {
         R: Future<Output = IpcResponse> + Send + Sync,
         F: Fn(SvcAction) -> R + Send + Sync + 'static,
     {
-        let sd = create_security_descriptor()?;
-
-        let listener = PipeListenerOptions::new()
-            .path(Self::path())
-            .security_descriptor(Some(sd))
-            .create_tokio_duplex::<Bytes>()?;
+        let listener = listen(&Self::path())?;
 
         tokio::spawn(async move {
             let callback = Arc::new(cb);
@@ -67,10 +60,7 @@ impl ServiceIpc {
         Ok(())
     }
 
-    async fn process_connection<F, R>(
-        stream: &AsyncDuplexPipeStream<Bytes>,
-        cb: Arc<F>,
-    ) -> Result<()>
+    async fn process_connection<F, R>(stream: &AsyncIpcStream, cb: Arc<F>) -> Result<()>
     where
         R: Future<Output = IpcResponse> + Send + Sync,
         F: Fn(SvcAction) -> R + Send + Sync + 'static,
@@ -86,10 +76,7 @@ impl ServiceIpc {
         Ok(())
     }
 
-    async fn response_to_client(
-        stream: &AsyncDuplexPipeStream<Bytes>,
-        res: IpcResponse,
-    ) -> Result<()> {
+    async fn response_to_client(stream: &AsyncIpcStream, res: IpcResponse) -> Result<()> {
         write_to_ipc_stream(stream, &res.to_bytes()?).await
     }
 
@@ -100,12 +87,12 @@ impl ServiceIpc {
 
     pub fn send_blocking(message: SvcAction) -> Result<IpcResponse> {
         let data = message.to_bytes()?;
-        let stream = DuplexPipeStream::connect_by_path(Self::path())?;
+        let stream = connect(&Self::path())?;
         send_to_ipc_stream_blocking(&stream, &data)
     }
 
     async fn try_send(data: &[u8]) -> Result<IpcResponse> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
+        let stream = connect_async(&Self::path()).await?;
         send_to_ipc_stream(&stream, data).await
     }
 }

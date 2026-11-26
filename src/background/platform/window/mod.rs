@@ -23,6 +23,9 @@ use crate::{error::Result, utils::lock_free::TracedMutex};
 
 use super::{monitor::Monitor, process::Process};
 
+/// Shared with the service (`SvcAction`), so it lives in core.
+pub use seelen_core::system_state::WindowState;
+
 #[cfg(windows)]
 pub use self::windows::WindowsWindowExt;
 
@@ -311,21 +314,4 @@ impl Display for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         Display::fmt(&self.0, f)
     }
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum WindowState {
-    /// Activates and shows the window.
-    Shown,
-    /// Shows the window without activating it.
-    ShownNoActivate,
-    Hidden,
-    /// Activates and shows the window in its normal (not minimized nor maximized) state.
-    Normal,
-    Minimized,
-    /// Minimizes even if the thread owning the window is not responding.
-    ForceMinimized,
-    Maximized,
-    /// Back to the previous size and position (unminimize/unmaximize).
-    Restored,
 }
