@@ -35,7 +35,7 @@ const EvaluatedImagePropsSchema = z.object({
 
 export type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
 const EvaluatedButtonPropsSchema = z.object({
-  style: z.record(z.any()).default({}),
+  style: z.record(z.string(), z.any()).default({}),
   content: z.unknown().nullish(),
   tooltip: z.string().nullish(),
   onClick: z.string().nullish(),
@@ -45,7 +45,7 @@ const EvaluatedButtonPropsSchema = z.object({
 
 export type EvaluatedGroupProps = z.infer<typeof EvaluatedGroupPropsSchema>;
 const EvaluatedGroupPropsSchema = z.object({
-  style: z.record(z.any()).default({}),
+  style: z.record(z.string(), z.any()).default({}),
   content: z.unknown().nullish(),
 });
 

@@ -1,4 +1,4 @@
-import type { ZodSchema } from "zod";
+import type { ZodType } from "zod";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { Signal } from "@preact/signals";
 import { debounce } from "lodash";
@@ -6,10 +6,10 @@ import { debounce } from "lodash";
 export class PersistentSignal<T> extends Signal<T> {
   private _ready = false;
   private storeKey: string;
-  private schema?: ZodSchema<T>;
+  private schema?: ZodType<T>;
   private debouncedSave: ReturnType<typeof debounce>;
 
-  private constructor(storeKey: string, initial: T, schema?: ZodSchema<T>) {
+  private constructor(storeKey: string, initial: T, schema?: ZodType<T>) {
     super(initial);
     this.storeKey = storeKey;
     this.schema = schema;
@@ -19,7 +19,7 @@ export class PersistentSignal<T> extends Signal<T> {
   static async create<T>(
     storeKey: string,
     initial: T,
-    schema?: ZodSchema<T>,
+    schema?: ZodType<T>,
   ): Promise<PersistentSignal<T>> {
     const s = new PersistentSignal(storeKey, initial, schema);
     const stored = await s.loadFromFile();
@@ -79,7 +79,7 @@ export class PersistentSignal<T> extends Signal<T> {
  * const count = await persistentSignal('counter', 0, schema);
  * count.value++; // Validated and saved to file
  */
-export function persistentSignal<T, Z extends ZodSchema<T, any, any>>(
+export function persistentSignal<T, Z extends ZodType<T, any, any>>(
   storeKey: string,
   initial: T,
   schema?: Z,
