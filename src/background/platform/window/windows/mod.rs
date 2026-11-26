@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowEnumerator;
 mod interactable;
 mod snapshot;
 
@@ -38,7 +39,7 @@ use crate::{
         process::{Process, WindowsProcessExt},
     },
     system_modules::start::StartMenuManager,
-    windows_api::{WindowEnumerator, WindowsApi, types::AppUserModelId},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 use super::{Window, WindowState};
@@ -61,7 +62,7 @@ impl NativeWindow {
     }
 
     pub fn enumerate() -> Result<Vec<Self>> {
-        WindowEnumerator::new().map(Self)
+        Ok(WindowEnumerator::new().map(Self)?)
     }
 
     pub fn handle(&self) -> WindowHandle {
@@ -122,7 +123,7 @@ impl NativeWindow {
     }
 
     pub fn children(&self) -> Result<Vec<Self>> {
-        WindowEnumerator::new().with_parent(self.0).map(Self)
+        Ok(WindowEnumerator::new().with_parent(self.0).map(Self)?)
     }
 
     pub fn monitor(&self) -> Monitor {
@@ -175,38 +176,40 @@ impl NativeWindow {
     }
 
     pub fn set_state(&self, state: WindowState) -> Result<()> {
-        let command = to_show_command(state);
         if self.is_manageable_from_unelevated() {
-            WindowsApi::show_window(self.0, command)
+            WindowsApi::show_window(self.0, to_show_command(state))
         } else {
             ServicePipe::request(SvcAction::ShowWindow {
-                hwnd: self.handle(),
-                command: command.0,
+                window: self.handle(),
+                state,
             })
         }
     }
 
     pub fn set_state_async(&self, state: WindowState) -> Result<()> {
-        let command = to_show_command(state);
         if self.is_manageable_from_unelevated() {
-            WindowsApi::show_window_async(self.0, command)
+            WindowsApi::show_window_async(self.0, to_show_command(state))
         } else {
             ServicePipe::request(SvcAction::ShowWindowAsync {
-                hwnd: self.handle(),
-                command: command.0,
+                window: self.handle(),
+                state,
             })
         }
     }
 
     pub fn set_rect(&self, rect: &Rect) -> Result<()> {
-        let flags = SET_WINDOW_POS_FLAGS::default();
         if self.is_manageable_from_unelevated() {
-            WindowsApi::set_position(self.0, None, &to_win32_rect(rect), flags)
+            WindowsApi::set_position(
+                self.0,
+                None,
+                &to_win32_rect(rect),
+                SET_WINDOW_POS_FLAGS::default(),
+            )
         } else {
             ServicePipe::request(SvcAction::SetWindowPosition {
-                hwnd: self.handle(),
+                window: self.handle(),
                 rect: rect.clone(),
-                flags: flags.0,
+                flags: 0,
             })
         }
     }

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { SystrayIconAction, WegMiddleClickAction, WindowAttention, type UserAppWindow } from "@seelen-ui/lib/types";
+  import { SystrayIconAction, type UserAppWindow, WegMiddleClickAction, WindowAttention } from "@seelen-ui/lib/types";
   import { FileIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { t } from "../../i18n/index.ts";
   import type { AppOrFileWegItem } from "../../types.ts";
   import { settingsState } from "../../state/settings.svelte.ts";
-  import { windowsState, focused } from "../../state/windows.svelte.ts";
+  import { focused, windowsState } from "../../state/windows.svelte.ts";
   import { trayState } from "../../state/getters.svelte.ts";
   import { getUserApplicationContextMenu, launchItem } from "../../appMenu.ts";
   import { activateOrLaunch, getMatchingTrayIcons } from "../../activateOrLaunch.ts";
@@ -99,7 +99,15 @@
   }
 </script>
 
-<div bind:this={itemEl} role="menu" tabindex="0" class="weg-item-overlay" onpointerenter={onPointerEnter} onpointerleave={onPointerLeave} onpointerdown={cancelHover}>
+<div
+  bind:this={itemEl}
+  role="menu"
+  tabindex="0"
+  class="weg-item-overlay"
+  onpointerenter={onPointerEnter}
+  onpointerleave={onPointerLeave}
+  onpointerdown={cancelHover}
+>
   <div
     role="menuitem"
     tabindex="0"
@@ -123,7 +131,8 @@
       <div
         class="weg-item-attention-indicator"
         class:weg-item-attention-indicator-flashing={isFlashing}
-      ></div>
+      >
+      </div>
     {/if}
   </div>
 
@@ -153,7 +162,8 @@
       class:weg-item-open-sign-active={isRunning}
       class:weg-item-open-sign-focused={isFocused}
       class:weg-item-open-sign-attention={needsAttention}
-    ></div>
+    >
+    </div>
   {/if}
 </div>
 

@@ -222,12 +222,10 @@ export function AppsConfiguration() {
         }}
       />
       <div className={cs.footer}>
-        {
-          /* <Button onClick={importApps}>{t("apps_configurations.import")}</Button>
+        {/* <Button onClick={importApps}>{t("apps_configurations.import")}</Button>
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
           {t("apps_configurations.export")}
-        </Button> */
-        }
+        </Button> */}
         <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
           {t("apps_configurations.delete")}
         </Button>

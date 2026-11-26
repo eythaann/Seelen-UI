@@ -1,3 +1,4 @@
+use slu_utils::windows::{Com, ComThread, WindowsString};
 use std::{
     path::{Path, PathBuf},
     sync::Arc,
@@ -29,7 +30,7 @@ use crate::{
     platform::process::{Process, WindowsProcessExt},
     system_modules::media_devices::domain::{MediaDevicesSysEvent, MediaDevicesSystem},
     utils::lock_free::SyncHashMap,
-    windows_api::{Com, ComThread, WindowsApi, string_utils::WindowsString},
+    windows_api::WindowsApi,
 };
 
 pub struct WindowsMediaDevices {
@@ -183,7 +184,7 @@ struct DevicesComState {
 struct DevicesState {
     inputs: SyncHashMap<String, NativeDevice>,
     outputs: SyncHashMap<String, NativeDevice>,
-    com: ComThread<DevicesComState>,
+    com: ComThread<DevicesComState, crate::error::AppError>,
 }
 
 /// Raw notifications of the COM callbacks, applied to [`DevicesState`] out of the callbacks.

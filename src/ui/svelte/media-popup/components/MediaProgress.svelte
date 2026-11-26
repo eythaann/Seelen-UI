@@ -50,9 +50,7 @@
   );
 
   const position = $derived(
-    isSeeking
-      ? seekingPositionSeconds * NS_PER_SECOND
-      : Math.min(livePosition, session.timeline.end),
+    isSeeking ? seekingPositionSeconds * NS_PER_SECOND : Math.min(livePosition, session.timeline.end),
   );
 
   const onSeek = throttle((positionSeconds: number) => {

@@ -1,5 +1,6 @@
 //! WinRT display views and targets (`Windows.Devices.Display.Core`).
 
+use slu_utils::windows::WindowsString;
 use windows::{
     Devices::Display::Core::{
         DisplayTarget as WinRTDisplayTarget, DisplayView as WinRTDisplayView,
@@ -17,7 +18,7 @@ use windows_core::Owned;
 
 use seelen_core::system_state::MonitorId;
 
-use crate::{error::Result, platform::monitor::Monitor, windows_api::string_utils::WindowsString};
+use crate::{error::Result, platform::monitor::Monitor};
 
 use super::display_config::DisplayConfigAndModes;
 

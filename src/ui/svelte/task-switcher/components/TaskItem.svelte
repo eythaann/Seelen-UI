@@ -37,8 +37,7 @@
     if (isNavigationKey) {
       e.preventDefault();
 
-      const direction =
-        e.key === "ArrowLeft" || (e.key === "Tab" && e.shiftKey) ? "previous" : "next";
+      const direction = e.key === "ArrowLeft" || (e.key === "Tab" && e.shiftKey) ? "previous" : "next";
 
       navigateToItem(direction, index);
     }
@@ -71,10 +70,9 @@
 
     if (totalItems === 0) return;
 
-    const nextIndex =
-      direction === "next"
-        ? getNextIndex(currentIndex, totalItems)
-        : getPreviousIndex(currentIndex, totalItems);
+    const nextIndex = direction === "next"
+      ? getNextIndex(currentIndex, totalItems)
+      : getPreviousIndex(currentIndex, totalItems);
 
     globalState.selectedWindow = windows[nextIndex]?.id || null;
   }

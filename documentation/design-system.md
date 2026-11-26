@@ -99,9 +99,9 @@ opaque.
 | Widget component CSS       | `<style>` in `.svelte` / CSS Modules in React                   | **Functional/structural only** (layout mechanics, visibility states). Never colors or decoration.                |
 
 Key consequence: **the visual identity of built-in widgets lives in the default theme**, not in the components. This is
-what lets a user theme replace it completely. The default theme is loaded through CSS cascade layers
-(`@layer theme-<id>-shared` and `@layer theme-<id>`, see `libs/core/src/state/theme/mod.ts`), so user themes stacked on
-top win without `!important` battles.
+what lets a user theme replace it completely. The default theme is loaded through CSS cascade layers (`@layer
+theme-<id>-shared` and `@layer theme-<id>`, see `libs/core/src/state/theme/mod.ts`), so user themes stacked on top win
+without `!important` battles.
 
 ---
 
@@ -178,8 +178,8 @@ accent backgrounds (solid buttons, selected items, checked controls); never `whi
 mixes it with whatever is behind it and breaks recolor themes. The only allowed `opacity` de-emphasis is the disabled
 state (`opacity: 0.5`). `opacity` for show/hide transitions is fine.
 
-**No free alphas.** Never derive ad-hoc transparent variants of a color (`oklch(from var(--x) l c h / 0.2)`,
-`rgb(from …)`, `color-mix(…)`) in widget or theme styles. Accent tints come only from the overlay variables:
+**No free alphas.** Never derive ad-hoc transparent variants of a color (`oklch(from var(--x) l c h / 0.2)`, `rgb(from
+…)`, `color-mix(…)`) in widget or theme styles. Accent tints come only from the overlay variables:
 
 - `--slu-std-ui-hover-overlay` — hover.
 - `--slu-std-ui-pressed-overlay` — pressed.
@@ -440,8 +440,8 @@ Reject these in review, regardless of who (person or AI) wrote them:
 - Translucent surfaces outside the toolbar / dock / window manager stack bar exception.
 - Decorative animations (animated backgrounds, idle effects, showy hover animations).
 - "Exceptions" justified by looks instead of a functional UX need (see [UX exceptions](#ux-exceptions)).
-- UI colors chosen in JS/TS (content-derived colors are fine, see [Light / Dark Mode](#4-light--dark-mode)), or
-  `@media (prefers-color-scheme)` blocks instead of tokens/`light-dark()`.
+- UI colors chosen in JS/TS (content-derived colors are fine, see [Light / Dark Mode](#4-light--dark-mode)), or `@media
+  (prefers-color-scheme)` blocks instead of tokens/`light-dark()`.
 - A fixed brand color or a scale hue (`--color-blue-*`, etc.) used where the user's accent belongs.
 - Scale hues used for decoration instead of conveying a status/meaning to the user.
 - New one-off button/input styles inside a widget instead of `data-skin`.

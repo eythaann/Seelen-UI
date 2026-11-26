@@ -10,6 +10,7 @@ pub enum Error {
     SerdeJson(#[from] serde_json::Error),
     #[error("IPC Timeout: {0}")]
     Timeout(String),
+    #[cfg(windows)]
     #[error("Windows Error: {0}")]
     Windows(#[from] windows::core::Error),
 }

@@ -1,25 +1,18 @@
 use std::{
     io::{BufRead, Write},
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        mpsc::RecvTimeoutError,
-    },
     time::Duration,
 };
 
-use interprocess::os::windows::named_pipe::{
-    DuplexPipeStream, pipe_mode::Bytes, tokio::DuplexPipeStream as AsyncDuplexPipeStream,
+use interprocess::local_socket::{
+    GenericFilePath, ListenerOptions, Name, ToFsName,
+    traits::{Stream as _, StreamCommon as _, tokio::Stream as _},
 };
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
-use windows::Win32::{
-    Foundation::{CloseHandle, HANDLE},
-    System::{
-        IO::CancelSynchronousIo,
-        Threading::{GetCurrentThreadId, OpenThread, THREAD_TERMINATE},
-    },
-};
 
-use crate::{error::Result, messages::IpcResponse};
+use crate::{
+    AsyncIpcListener, AsyncIpcStream, IpcStream, Platform, domain::IpcSystem, error::Result,
+    messages::IpcResponse,
+};
 
 /// End of transmission block marker for IPC messages
 pub const END_OF_TRANSMISSION_BLOCK: u8 = 0x17;
@@ -36,10 +29,13 @@ pub trait IPC {
 
     #[allow(async_fn_in_trait)]
     async fn server_process_id() -> Result<u32> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
-        let pid = stream.server_process_id()?;
+        let stream = connect_async(&Self::path()).await?;
+        let pid = stream
+            .peer_creds()?
+            .pid()
+            .ok_or_else(|| std::io::Error::other("The OS did not report the server process id"))?;
         write_to_ipc_stream(&stream, &[]).await?;
-        Ok(pid)
+        Ok(pid as u32)
     }
 
     fn can_stablish_connection() -> bool {
@@ -50,7 +46,7 @@ pub trait IPC {
         let (tx, rx) = std::sync::mpsc::channel();
         std::thread::spawn(move || {
             let ok = (|| -> crate::error::Result<()> {
-                let stream = DuplexPipeStream::<Bytes>::connect_by_path(path)?;
+                let stream = connect(&path)?;
                 send_to_ipc_stream_blocking(&stream, &[])?.ok()
             })()
             .is_ok();
@@ -60,8 +56,29 @@ pub trait IPC {
     }
 }
 
+/// Connects to the endpoint at `path` (see [`IPC::path`]).
+pub fn connect(path: &str) -> Result<IpcStream> {
+    Ok(IpcStream::connect(endpoint_name(path)?)?)
+}
+
+/// Async version of [`connect`].
+pub async fn connect_async(path: &str) -> Result<AsyncIpcStream> {
+    Ok(AsyncIpcStream::connect(endpoint_name(path)?).await?)
+}
+
+/// Listens on the endpoint at `path`, restricted to the users allowed by the OS layer.
+/// Must be called inside the tokio runtime that will drive it.
+pub(crate) fn listen(path: &str) -> Result<AsyncIpcListener> {
+    let options = ListenerOptions::new().name(endpoint_name(path)?);
+    Ok(Platform::secure_listener(options)?.create_tokio()?)
+}
+
+fn endpoint_name(path: &str) -> Result<Name<'_>> {
+    Ok(path.to_fs_name::<GenericFilePath>()?)
+}
+
 /// Reads data from an async IPC stream with timeout
-pub async fn read_from_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>) -> Result<Vec<u8>> {
+pub async fn read_from_ipc_stream(stream: &AsyncIpcStream) -> Result<Vec<u8>> {
     let mut reader = BufReader::new(stream);
     let mut buf = Vec::new();
 
@@ -76,7 +93,7 @@ pub async fn read_from_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>) -> Resu
 }
 
 /// Writes data to an async IPC stream with timeout
-pub async fn write_to_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>, buf: &[u8]) -> Result<()> {
+pub async fn write_to_ipc_stream(stream: &AsyncIpcStream, buf: &[u8]) -> Result<()> {
     let mut writter = BufWriter::new(stream);
 
     tokio::time::timeout(IPC_TIMEOUT, async {
@@ -92,10 +109,7 @@ pub async fn write_to_ipc_stream(stream: &AsyncDuplexPipeStream<Bytes>, buf: &[u
 }
 
 /// Sends data and receives response from an async IPC stream
-pub async fn send_to_ipc_stream(
-    stream: &AsyncDuplexPipeStream<Bytes>,
-    buf: &[u8],
-) -> Result<IpcResponse> {
+pub async fn send_to_ipc_stream(stream: &AsyncIpcStream, buf: &[u8]) -> Result<IpcResponse> {
     write_to_ipc_stream(stream, buf).await?;
     let buf = read_from_ipc_stream(stream).await?;
     IpcResponse::from_bytes(&buf)
@@ -104,44 +118,11 @@ pub async fn send_to_ipc_stream(
 /// Blocking version to test connections without needed of tokio runtime.
 /// The exchange is cancelled after `IPC_TIMEOUT`, as callers like the hook dll run on threads
 /// of other processes (explorer.exe tray thread) that must never hang waiting for us.
-pub fn send_to_ipc_stream_blocking(
-    stream: &DuplexPipeStream<Bytes>,
-    buf: &[u8],
-) -> Result<IpcResponse> {
-    // CancelSynchronousIo needs a real handle with THREAD_TERMINATE access, not the pseudo one
-    let thread = unsafe { OpenThread(THREAD_TERMINATE, false, GetCurrentThreadId())? };
-    let thread_addr = thread.0 as isize; // HANDLE is not Send
-    let timed_out = AtomicBool::new(false);
-
-    let result = std::thread::scope(|scope| {
-        let (done_tx, done_rx) = std::sync::mpsc::channel::<()>();
-        let timed_out = &timed_out;
-        scope.spawn(move || {
-            if let Err(RecvTimeoutError::Timeout) = done_rx.recv_timeout(IPC_TIMEOUT) {
-                timed_out.store(true, Ordering::Release);
-                // retry until the exchange finishes, the I/O could start right after a cancel
-                while let Err(RecvTimeoutError::Timeout) =
-                    done_rx.recv_timeout(Duration::from_millis(10))
-                {
-                    let _ = unsafe { CancelSynchronousIo(HANDLE(thread_addr as _)) };
-                }
-            }
-        });
-        let result = exchange_blocking(stream, buf);
-        drop(done_tx);
-        result
-    });
-
-    let _ = unsafe { CloseHandle(thread) };
-    if timed_out.load(Ordering::Acquire) && result.is_err() {
-        return Err(crate::error::Error::Timeout(
-            "No response from IPC stream".to_string(),
-        ));
-    }
-    result
+pub fn send_to_ipc_stream_blocking(stream: &IpcStream, buf: &[u8]) -> Result<IpcResponse> {
+    Platform::with_io_timeout(stream, IPC_TIMEOUT, || exchange_blocking(stream, buf))
 }
 
-fn exchange_blocking(stream: &DuplexPipeStream<Bytes>, buf: &[u8]) -> Result<IpcResponse> {
+fn exchange_blocking(stream: &IpcStream, buf: &[u8]) -> Result<IpcResponse> {
     let mut writter = std::io::BufWriter::new(stream);
     writter.write_all(buf)?;
     writter.write_all(&[END_OF_TRANSMISSION_BLOCK])?;

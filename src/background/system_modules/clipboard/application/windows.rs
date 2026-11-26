@@ -1,3 +1,4 @@
+use slu_utils::windows::Com;
 use std::sync::{
     Arc,
     atomic::{AtomicU32, Ordering},
@@ -28,7 +29,7 @@ use crate::{
         CapturedContent, ClipboardStore, ClipboardSysEvent, ClipboardSystem,
     },
     utils::constants::SEELEN_COMMON,
-    windows_api::{Com, WindowsApi, event_window::subscribe_to_background_window, input::Keyboard},
+    windows_api::{WindowsApi, event_window::subscribe_to_background_window, input::Keyboard},
 };
 
 /// Descriptor scoping protected data to the current Windows user account,
@@ -151,7 +152,7 @@ impl Drop for WindowsClipboard {
 fn spawn_history_listener(on_event: EventCallback) -> Result<i64> {
     let (ready_tx, ready_rx) = std::sync::mpsc::channel::<Result<i64>>();
     std::thread::spawn(move || {
-        let _ = Com::run_with_context(|| {
+        let _ = Com::run_with_context(|| -> Result<()> {
             let token = Clipboard::HistoryEnabledChanged(&EventHandler::new(move |_, _| {
                 if let Ok(enabled) = Clipboard::IsHistoryEnabled() {
                     log::debug!("[clipboard] native IsHistoryEnabled changed -> {enabled}");

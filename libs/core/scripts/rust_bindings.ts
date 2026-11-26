@@ -102,8 +102,8 @@ await new Deno.Command("cargo", {
   stderr: "inherit",
   stdout: "inherit",
 }).output();
-await new Deno.Command("deno", {
-  args: ["fmt", "--quiet"],
+await new Deno.Command(Deno.build.os === "windows" ? "npx.cmd" : "npx", {
+  args: ["--yes", "dprint", "fmt"],
   stderr: "inherit",
   stdout: "inherit",
 }).output();

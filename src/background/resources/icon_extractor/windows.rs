@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::{
     io::BufRead,
     path::{Path, PathBuf},
@@ -24,8 +25,7 @@ use crate::{
     system_modules::start::StartMenuManager,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     windows_api::{
-        WindowsApi, icon::convert_hicon_to_rgba_image, msix::MsixAppsManager,
-        string_utils::WindowsString, types::AppUserModelId,
+        WindowsApi, icon::convert_hicon_to_rgba_image, msix::MsixAppsManager, types::AppUserModelId,
     },
 };
 

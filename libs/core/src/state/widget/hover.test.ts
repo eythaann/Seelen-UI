@@ -7,8 +7,9 @@ const popup = { left: 10, top: 10, right: 100, bottom: 100 };
 
 Deno.test("a hover popup closes when the pointer already left and stopped before it opened", async () => {
   let hides = 0;
-  const dismiss = new HoverDismissal(() => popup, async () => {
+  const dismiss = new HoverDismissal(() => popup, () => {
     hides++;
+    return Promise.resolve();
   }, {
     position: () => Promise.resolve([200, 200]),
     listen: () => Promise.resolve(() => {}),

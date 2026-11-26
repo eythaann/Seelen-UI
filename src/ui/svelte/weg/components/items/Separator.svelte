@@ -34,7 +34,8 @@
   class:visible={!isSeparator1 && !isSeparator2}
   oncontextmenu={onContextMenu}
   onkeypress={() => {}}
-></div>
+>
+</div>
 
 <style>
   .weg-separator {

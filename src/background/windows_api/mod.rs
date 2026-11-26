@@ -1,13 +1,9 @@
-mod app_bar;
-mod com;
 mod devices;
 pub mod event_window;
 pub mod icon;
 pub mod input;
-mod iterator;
 pub mod msix;
 pub mod pwsh;
-pub mod string_utils;
 pub mod types;
 pub mod undocumented;
 pub mod virtual_desktop;
@@ -16,13 +12,10 @@ pub mod window_badges;
 #[allow(dead_code)]
 pub mod wpn_service;
 
-pub use app_bar::*;
-pub use com::*;
 pub use devices::*;
-pub use iterator::*;
 
 use itertools::Itertools;
-use string_utils::WindowsString;
+use slu_utils::windows::{Com, MonitorEnumerator, WindowsString};
 use types::ProcessInformationFlag;
 use windows_core::{Interface, Owned, RuntimeType};
 use windows_future::{AsyncStatus, IAsyncOperation};
@@ -63,8 +56,8 @@ use windows::{
                 DwmSetWindowAttribute,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY,
-                MONITORENUMPROC, MONITORINFOEXW, MonitorFromPoint, MonitorFromWindow,
+                GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY, MONITORINFOEXW,
+                MonitorFromPoint, MonitorFromWindow,
             },
         },
         Security::{
@@ -130,7 +123,7 @@ use windows::{
 };
 
 use crate::{
-    error::{Result, WindowsResultExt},
+    error::{AppError, Result, WindowsResultExt},
     platform::{
         hook::{HookManager, WindowEvent},
         window::Window,
@@ -195,18 +188,6 @@ impl WindowsApi {
 
     pub fn module_handle_w() -> Result<HMODULE> {
         Ok(unsafe { GetModuleHandleW(None) }?)
-    }
-
-    pub fn enum_display_monitors(
-        callback: MONITORENUMPROC,
-        callback_data_address: isize,
-    ) -> Result<()> {
-        unsafe {
-            EnumDisplayMonitors(None, None, callback, LPARAM(callback_data_address))
-                .ok()
-                .filter_fake_error()?;
-        }
-        Ok(())
     }
 
     pub fn send_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<isize> {
@@ -796,7 +777,7 @@ impl WindowsApi {
     /// Same as [`Self::get_file_umid`] + [`Self::get_file_toast_activator`], but creating the
     /// shell item and its property store only once.
     pub fn get_file_umid_and_toast_activator(path: &Path) -> (Option<String>, Option<String>) {
-        Com::run_with_context(|| unsafe {
+        Com::run_with_context::<_, _, AppError>(|| unsafe {
             let shell_item = Self::get_shell_item(path)?;
             let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
             let umid = store
@@ -985,7 +966,7 @@ impl WindowsApi {
     }
 
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
-        Com::create_instance(&VirtualDesktopManager)
+        Ok(Com::create_instance(&VirtualDesktopManager)?)
     }
 
     pub fn _get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {

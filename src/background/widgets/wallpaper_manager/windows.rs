@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowEnumerator;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
     Graphics::Gdi::{InvalidateRect, UpdateWindow},
@@ -12,7 +13,7 @@ use crate::{
     error::Result,
     pcstr,
     platform::window::{Window, WindowsWindowExt},
-    windows_api::{WindowEnumerator, WindowsApi},
+    windows_api::WindowsApi,
 };
 
 pub fn attach_to_desktop(window: &Window) -> Result<()> {

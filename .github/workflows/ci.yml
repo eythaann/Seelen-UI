@@ -16,7 +16,7 @@ jobs:
           rust-components: rustfmt
 
       - run: npm install
-      - run: deno fmt --check
+      - run: npx dprint check
       - run: deno lint
       - run: npm run type-check
       - run: npm run test

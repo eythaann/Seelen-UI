@@ -25,10 +25,12 @@ test("File Explorer launches a folder window instead of activating a Windows she
   const shellIcon = { ...icon, executablePath: path };
   const calls: string[] = [];
   assert.deepEqual(getMatchingTrayIcons(explorer, [shellIcon]), []);
-  await activateOrLaunch(explorer, async () => [shellIcon], async () => {
+  await activateOrLaunch(explorer, () => Promise.resolve([shellIcon]), () => {
     calls.push("tray");
-  }, async () => {
+    return Promise.resolve();
+  }, () => {
     calls.push("launch");
+    return Promise.resolve();
   });
   assert.deepEqual(calls, ["launch"]);
 });
@@ -52,10 +54,12 @@ for (
 ) {
   test(name, async () => {
     const calls: string[] = [];
-    await activateOrLaunch(item, async () => icons, async (id) => {
+    await activateOrLaunch(item, () => Promise.resolve(icons), (id) => {
       calls.push(id);
-    }, async () => {
+      return Promise.resolve();
+    }, () => {
       calls.push("launch");
+      return Promise.resolve();
     });
     assert.deepEqual(calls, expected);
   });

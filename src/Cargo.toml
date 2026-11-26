@@ -49,14 +49,8 @@ regex = { workspace = true }
 phf = { workspace = true }
 sysinfo = { workspace = true }
 battery = { workspace = true }
-winreg = { workspace = true }
-windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
-windows-collections = { workspace = true }
-windows-future = { workspace = true }
-win-screenshot = { workspace = true }
 base64 = { workspace = true }
 webp = { workspace = true }
-webview2-com = { workspace = true }
 arc-swap = { workspace = true }
 notify-debouncer-full = { workspace = true }
 encoding_rs = { workspace = true }
@@ -72,10 +66,23 @@ reqwest = { workspace = true }
 rand = { workspace = true }
 rustfft = { workspace = true }
 discord-rich-presence = { workspace = true }
-win-hotkeys = { workspace = true }
 walkdir = { workspace = true }
 tokio = { workspace = true, features = ["process"] }
 seelen-core = { workspace = true, features = ["salvo"] }
+time = { workspace = true, features = ["formatting", "local-offset"] }
+scc = { workspace = true }
+open = "5.3.3"
+futures = { workspace = true }
+salvo = { workspace = true, features = ["oapi", "websocket"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = { workspace = true }
+windows-core = { workspace = true } # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-collections = { workspace = true }
+windows-future = { workspace = true }
+win-screenshot = { workspace = true }
+webview2-com = { workspace = true }
+win-hotkeys = { workspace = true }
 wmi = { workspace = true }
 windows = { workspace = true, features = [
     "Win32_Foundation",
@@ -185,11 +192,6 @@ windows = { workspace = true, features = [
     "Devices_Display_Core",
     "Data_Xml_Dom",
 ] }
-time = { workspace = true, features = ["formatting", "local-offset"] }
-scc = { workspace = true }
-open = "5.3.3"
-futures = { workspace = true }
-salvo = { workspace = true, features = ["oapi", "websocket"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

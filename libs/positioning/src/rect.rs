@@ -27,25 +27,3 @@ impl CanTween for Rect {
         }
     }
 }
-
-impl From<windows::Win32::Foundation::RECT> for Rect {
-    fn from(rect: windows::Win32::Foundation::RECT) -> Self {
-        Self {
-            x: rect.left,
-            y: rect.top,
-            width: rect.right - rect.left,
-            height: rect.bottom - rect.top,
-        }
-    }
-}
-
-impl From<Rect> for windows::Win32::Foundation::RECT {
-    fn from(rect: Rect) -> Self {
-        Self {
-            left: rect.x,
-            top: rect.y,
-            right: rect.x + rect.width,
-            bottom: rect.y + rect.height,
-        }
-    }
-}

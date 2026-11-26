@@ -1,4 +1,4 @@
-import type { ZodSchema } from "zod";
+import type { ZodType } from "zod";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { debounce } from "lodash";
 
@@ -6,10 +6,10 @@ export class PersistentRune<T> {
   private _ready = false;
   private _value: T;
   private storeKey: string;
-  private schema?: ZodSchema<T>;
+  private schema?: ZodType<T>;
   private debouncedSave: ReturnType<typeof debounce>;
 
-  private constructor(storeKey: string, initial: T, schema?: ZodSchema<T>) {
+  private constructor(storeKey: string, initial: T, schema?: ZodType<T>) {
     this.storeKey = storeKey;
     this.schema = schema;
     this._value = $state(initial);
@@ -19,7 +19,7 @@ export class PersistentRune<T> {
   static async create<T>(
     storeKey: string,
     initial: T,
-    schema?: ZodSchema<T>,
+    schema?: ZodType<T>,
     loadInitial?: () => Promise<T>,
   ): Promise<PersistentRune<T>> {
     const rune = new PersistentRune(storeKey, initial, schema);
@@ -87,7 +87,7 @@ export class PersistentRune<T> {
 export function persistentRune<T>(
   storeKey: string,
   initial: T,
-  schema?: ZodSchema<T>,
+  schema?: ZodType<T>,
   loadInitial?: () => Promise<T>,
 ): Promise<PersistentRune<T>> {
   return PersistentRune.create(storeKey, initial, schema, loadInitial);

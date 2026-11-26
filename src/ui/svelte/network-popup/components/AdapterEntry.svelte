@@ -33,9 +33,7 @@
 <div class="adapter-entry">
   <Icon
     iconName={hasAccess ? "TbNetwork" : "TbNetworkOff"}
-    title={adapter.isPhysical
-      ? adapter.name
-      : `${$t("adapter.virtual")} · ${adapter.name}`}
+    title={adapter.isPhysical ? adapter.name : `${$t("adapter.virtual")} · ${adapter.name}`}
   />
 
   <div class="adapter-entry-info">

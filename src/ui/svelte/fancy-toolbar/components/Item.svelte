@@ -9,11 +9,7 @@
   import { styleToString } from "../utils.ts";
   import { createRemoteDataResolver } from "../remoteData.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
-  import {
-    compileSandboxed,
-    drawPluginCanvas,
-    evalToStr,
-  } from "libs/ui/svelte/utils/sandbox.ts";
+  import { compileSandboxed, drawPluginCanvas, evalToStr } from "libs/ui/svelte/utils/sandbox.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
   import { CssHandled } from "libs/ui/svelte/utils/animations.ts";
   import { evalComponentSandboxed } from "./Evaluated/definitions.ts";
@@ -110,7 +106,9 @@
     const height = canvasClientHeight;
     const renderScope = scope;
     const isDarkMode = prefersDarkColorScheme.value;
-    const frame = requestAnimationFrame(() => drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode));
+    const frame = requestAnimationFrame(() =>
+      drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode)
+    );
     return () => cancelAnimationFrame(frame);
   });
 </script>

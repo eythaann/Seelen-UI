@@ -1,29 +1,16 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import {
-    type WegPluginItem as WegPluginPayload,
-    type WidgetId,
-    CanvasSize,
-  } from "@seelen-ui/lib/types";
+  import { CanvasSize, type WegPluginItem as WegPluginPayload, type WidgetId } from "@seelen-ui/lib/types";
   import type { PluginWegItem } from "../../types.ts";
   import { t } from "../../i18n/index.ts";
-  import {
-    getEditCustomIconEntry,
-    getEmptyTrashBinEntry,
-    getMenuForItem,
-  } from "../../generalMenu.ts";
+  import { getEditCustomIconEntry, getEmptyTrashBinEntry, getMenuForItem } from "../../generalMenu.ts";
   import { evalActionSanboxed, triggerWidget } from "../../pluginEval.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
   import { SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
 
   import { settingsState } from "../../state/settings.svelte.ts";
-  import {
-    compileSandboxed,
-    drawPluginCanvas,
-    evalSanboxed,
-    evalToStr,
-  } from "libs/ui/svelte/utils/sandbox.ts";
+  import { compileSandboxed, drawPluginCanvas, evalSanboxed, evalToStr } from "libs/ui/svelte/utils/sandbox.ts";
 
   interface Props {
     item: PluginWegItem;
@@ -102,7 +89,9 @@
     const height = canvasHeight;
     const renderScope = scope;
     const isDarkMode = prefersDarkColorScheme.value;
-    const frame = requestAnimationFrame(() => drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode));
+    const frame = requestAnimationFrame(() =>
+      drawPluginCanvas(target, width, height, executor, renderScope, isDarkMode)
+    );
     return () => cancelAnimationFrame(frame);
   });
 </script>

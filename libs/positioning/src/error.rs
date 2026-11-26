@@ -1,5 +1,6 @@
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    #[cfg(windows)]
     #[error("Windows: {0}")]
     Windows(#[from] windows::core::Error),
     #[error("Starting positioning failed")]

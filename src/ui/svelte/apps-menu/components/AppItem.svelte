@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { StartMenuItem } from "@seelen-ui/lib/types";
-  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { FileIcon } from "libs/ui/svelte/components/Icon";
   import { t } from "../i18n";
   import type { createSortable } from "@dnd-kit/svelte/sortable";

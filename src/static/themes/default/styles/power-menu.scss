@@ -95,10 +95,7 @@ body {
         align-items: center;
         justify-content: center;
 
-        transition:
-          background-color 150ms ease,
-          transform 120ms cubic-bezier(0.2, 0, 0, 1),
-          box-shadow 150ms ease;
+        transition: background-color 150ms ease, transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 150ms ease;
 
         .power-menu-item-icon-wrapper {
           position: relative;

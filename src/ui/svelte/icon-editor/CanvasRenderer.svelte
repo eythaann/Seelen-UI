@@ -130,7 +130,8 @@
     width: 256px;
     height: 256px;
     flex-shrink: 0;
-    background: repeating-conic-gradient(var(--color-fixed-gray-600) 0% 25%, var(--color-fixed-gray-700) 0% 50%) 0 0 / 16px 16px;
+    background: repeating-conic-gradient(var(--color-fixed-gray-600) 0% 25%, var(--color-fixed-gray-700) 0% 50%) 0 0 /
+      16px 16px;
   }
 
   .layer {

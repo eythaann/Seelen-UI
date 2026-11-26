@@ -1,33 +1,25 @@
-mod api;
+mod domain;
 pub mod easings;
 pub mod error;
 pub mod minimization;
-mod overlay;
 pub mod rect;
-mod shell_view;
-mod timer;
+#[cfg(windows)]
+mod windows;
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, MutexGuard, PoisonError};
 
 use crate::{
-    api::{
-        force_redraw_window, get_class, get_window_rect, position_window, position_window_async,
-    },
+    domain::{FrameTimer, PlaceOptions, PositioningSystem, ThumbnailOverlay, WindowQuirks},
     easings::Easing,
     error::Result,
-    overlay::ThumbnailOverlay,
     rect::Rect,
-    shell_view::CloakGuard,
-    timer::{FrameTimer, boost_current_thread_priority},
 };
 
-const FRAME_DURATION: std::time::Duration = std::time::Duration::from_millis(8); // ~120 fps cap
+#[cfg(windows)]
+type Platform = windows::WindowsPositioning;
 
-/// Window prop (boolean, present = true) set on windows cloaked by a buffered animation, so
-/// window trackers can ignore this transient cloak. Mirrored as a literal by the background
-/// (`Window::is_cloaked_by_seelen`), which does not depend on this crate.
-const CLOAKED_PROP: windows::core::PCWSTR = windows::core::w!("SluCloaked");
+const FRAME_DURATION: std::time::Duration = std::time::Duration::from_millis(8); // ~120 fps cap
 
 /// How a window animation is rendered.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
@@ -63,8 +55,7 @@ struct WinDataForAnimation {
     from: Rect,
     to: Rect,
     is_size_changing: bool,
-    is_explorer: bool,
-    is_chromium: bool,
+    quirks: WindowQuirks,
 }
 
 /// Message sent to a running animation thread.
@@ -132,8 +123,15 @@ impl PositionerBuilder {
     /// Place all windows to their desired position
     pub fn place(&self) -> Result<()> {
         for (window_id, rect) in self.to_positioning.iter() {
-            position_window(*window_id, rect, true, false)?;
-            let _ = force_redraw_window(*window_id);
+            Platform::place_window(
+                *window_id,
+                rect,
+                PlaceOptions {
+                    redraw: true,
+                    ..Default::default()
+                },
+            )?;
+            let _ = Platform::redraw_window(*window_id);
         }
         Ok(())
     }
@@ -192,7 +190,7 @@ impl WindowAnimation {
         self.hwnd = hwnd;
 
         // Get initial rect
-        let initial_rect = get_window_rect(hwnd)?;
+        let initial_rect = Platform::window_rect(hwnd)?;
         let is_size_changing =
             initial_rect.width != target_rect.width || initial_rect.height != target_rect.height;
         let is_position_changing =
@@ -203,15 +201,14 @@ impl WindowAnimation {
             return Ok(());
         }
 
-        let class = get_class(hwnd)?;
-        let mode = effective_mode(mode, &class);
+        let quirks = Platform::window_quirks(hwnd)?;
+        let mode = effective_mode(mode, &quirks);
         let mut data = WinDataForAnimation {
             hwnd,
             from: initial_rect,
             to: target_rect,
             is_size_changing,
-            is_explorer: class == "CabinetWClass" || class == "ExplorerWClass",
-            is_chromium: class.starts_with("Chrome_WidgetWin_"),
+            quirks,
         };
 
         let (tx, rx) = std::sync::mpsc::channel::<AnimationSignal>();
@@ -281,8 +278,8 @@ impl WindowAnimation {
         animation_duration: std::time::Duration,
         interrupt_rx: &std::sync::mpsc::Receiver<AnimationSignal>,
     ) -> Result<bool> {
-        boost_current_thread_priority();
-        let timer = FrameTimer::new()?;
+        Platform::boost_current_thread_priority();
+        let timer = Platform::create_frame_timer()?;
 
         let animation_secs = animation_duration.as_secs_f64();
         let start_time = std::time::Instant::now();
@@ -310,7 +307,7 @@ impl WindowAnimation {
             let overall_progress = (elapsed.as_secs_f64() / animation_secs).min(1.0);
 
             if overall_progress < 1.0
-                && let Ok(actual_rect) = get_window_rect(data.hwnd)
+                && let Ok(actual_rect) = Platform::window_rect(data.hwnd)
                 && rect_diff_exceeds(&actual_rect, &last_rect, 10)
             {
                 segment_from = actual_rect;
@@ -346,10 +343,18 @@ impl WindowAnimation {
                 }
             };
 
-            // Skip SetWindowPos when the interpolated pixel position didn't change —
+            // Skip the placement when the interpolated pixel position didn't change —
             // common at easing tails where speed < 1px per frame.
             if rect != last_rect {
-                position_window(data.hwnd, &rect, data.is_explorer, !apply_size)?;
+                Platform::place_window(
+                    data.hwnd,
+                    &rect,
+                    PlaceOptions {
+                        redraw: data.quirks.redraw_each_frame,
+                        keep_size: !apply_size,
+                        asynchronous: false,
+                    },
+                )?;
                 last_rect = rect;
                 frames += 1;
             }
@@ -376,7 +381,7 @@ impl WindowAnimation {
                 frame_i,
                 frames
             );
-            let _ = force_redraw_window(data.hwnd);
+            let _ = Platform::redraw_window(data.hwnd);
         }
 
         Ok(interrupted)
@@ -397,22 +402,22 @@ impl WindowAnimation {
         signals: &std::sync::mpsc::Receiver<AnimationSignal>,
         accepts_retarget: &Mutex<bool>,
     ) -> Result<bool> {
-        boost_current_thread_priority();
-        let timer = FrameTimer::new()?;
+        Platform::boost_current_thread_priority();
+        let timer = Platform::create_frame_timer()?;
 
         // Declaration order matters: guards drop in reverse, so the real window is uncloaked
         // before the overlay flushes and removes the thumbnail.
-        let overlay = ThumbnailOverlay::create(data.hwnd, &data.from)?;
-        // No DwmFlush in between: the thumbnail reaches DWM before the cloak request does (the
-        // calls are sequential), so it is never composed after the cloak. Saves up to a vsync.
-        let cloak = CloakGuard::cloak(data.hwnd)?;
+        let overlay = Platform::create_overlay(data.hwnd, &data.from)?;
+        // No flush in between: the thumbnail reaches the compositor before the cloak request does
+        // (the calls are sequential), so it is never composed after the cloak. Saves up to a vsync.
+        let cloak = Platform::cloak(data.hwnd)?;
 
-        // Chromium/Electron suspend rendering while their HWND reports any cloak state, so a
-        // resize done now would leave a stale/black surface. For them the thumbnail stretches the
-        // start-size content and the real resize happens at the end, right before uncloaking.
-        // Everyone else is resized upfront, so the thumbnail shows target-size content that lands
-        // 1:1 (crisp) on the last frame.
-        let pre_resize = !data.is_chromium;
+        // Apps that suspend rendering while cloaked (Chromium/Electron) would show a stale/black
+        // surface if resized now. For them the thumbnail stretches the start-size content and the
+        // real resize happens at the end, right before uncloaking. Everyone else is resized
+        // upfront, so the thumbnail shows target-size content that lands 1:1 (crisp) on the last
+        // frame.
+        let pre_resize = !data.quirks.pauses_rendering_while_cloaked;
         // Last rect requested to the real window; posted requests may still be queued.
         let mut placed = data.from;
         let mut segment = Segment::new(data.from, data.to, easing, animation_duration);
@@ -484,7 +489,7 @@ impl WindowAnimation {
         // From here placements are synchronous when possible: the window is about to be shown,
         // and the next animation reads its rect as starting point. A sent (sync) SetWindowPos is
         // processed before already posted ones, so it is only safe once those landed.
-        let actual = get_window_rect(data.hwnd)?;
+        let actual = Platform::window_rect(data.hwnd)?;
         if interrupted {
             *lock(accepts_retarget) = false;
             // Leave the real window where the user last saw it so the next animation starts from
@@ -544,21 +549,32 @@ impl WindowAnimation {
     /// Places the window currently at `current` on `rect` with a single redrawn resize, returning
     /// `rect`. Moves first and sizes after: if the move lands on a monitor with another DPI, the
     /// app applies its WM_DPICHANGED suggested size during the move, and our resize then
-    /// overrides it with the real target. With `r#async` both requests are posted (applied in
-    /// order) instead of awaited.
-    fn place(hwnd: isize, current: &Rect, rect: &Rect, r#async: bool) -> Result<Rect> {
+    /// overrides it with the real target. With `asynchronous` both requests are posted (applied
+    /// in order) instead of awaited.
+    fn place(hwnd: isize, current: &Rect, rect: &Rect, asynchronous: bool) -> Result<Rect> {
         if current == rect {
             return Ok(*rect);
         }
-        let place = if r#async {
-            position_window_async
-        } else {
-            position_window
-        };
         if current.x != rect.x || current.y != rect.y {
-            place(hwnd, rect, false, true)?;
+            Platform::place_window(
+                hwnd,
+                rect,
+                PlaceOptions {
+                    redraw: false,
+                    keep_size: true,
+                    asynchronous,
+                },
+            )?;
         }
-        place(hwnd, rect, true, false)?;
+        Platform::place_window(
+            hwnd,
+            rect,
+            PlaceOptions {
+                redraw: true,
+                keep_size: false,
+                asynchronous,
+            },
+        )?;
         Ok(*rect)
     }
 
@@ -651,15 +667,10 @@ fn lock<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
     mutex.lock().unwrap_or_else(PoisonError::into_inner)
 }
 
-/// Mode actually used for a window of `class` when `requested` is asked for.
-///
-/// Firefox is never animated buffered: when its startup session restore completes it checks
-/// whether all of its windows are cloaked and, if they are, assumes they live on another virtual
-/// desktop and opens a new window (Mozilla bug 1812489). The first placement of its restored
-/// window lands right in that check, so the buffered cloak made every launch open a second, blank
-/// window. Realtime never cloaks the window.
-fn effective_mode(requested: AnimationMode, class: &str) -> AnimationMode {
-    if class == "MozillaWindowClass" {
+/// Mode actually used for a window with `quirks` when `requested` is asked for: windows of apps
+/// that break when cloaked are never animated buffered (realtime never cloaks the window).
+fn effective_mode(requested: AnimationMode, quirks: &WindowQuirks) -> AnimationMode {
+    if quirks.breaks_when_cloaked {
         AnimationMode::Realtime
     } else {
         requested
@@ -671,26 +682,28 @@ mod tests {
     use super::*;
 
     #[test]
-    fn firefox_is_never_buffered() {
-        assert_eq!(
-            effective_mode(AnimationMode::Buffered, "MozillaWindowClass"),
-            AnimationMode::Realtime
-        );
-        assert_eq!(
-            effective_mode(AnimationMode::Realtime, "MozillaWindowClass"),
-            AnimationMode::Realtime
-        );
+    fn windows_that_break_when_cloaked_are_never_buffered() {
+        let quirks = WindowQuirks {
+            breaks_when_cloaked: true,
+            ..Default::default()
+        };
+        for mode in [AnimationMode::Buffered, AnimationMode::Realtime] {
+            assert_eq!(effective_mode(mode, &quirks), AnimationMode::Realtime);
+        }
     }
 
     #[test]
     fn other_windows_keep_the_requested_mode() {
-        for class in [
-            "Chrome_WidgetWin_1",
-            "CabinetWClass",
-            "CASCADIA_HOSTING_WINDOW_CLASS",
+        for quirks in [
+            WindowQuirks::default(),
+            WindowQuirks {
+                redraw_each_frame: true,
+                pauses_rendering_while_cloaked: true,
+                breaks_when_cloaked: false,
+            },
         ] {
             for mode in [AnimationMode::Buffered, AnimationMode::Realtime] {
-                assert_eq!(effective_mode(mode, class), mode);
+                assert_eq!(effective_mode(mode, &quirks), mode);
             }
         }
     }

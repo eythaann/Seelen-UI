@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalState, type FavPinnedItem } from "../state/mod.svelte";
+  import { type FavPinnedItem, globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
@@ -150,7 +150,8 @@
     const rowGap = Number.parseFloat(gridStyle.rowGap) || 0;
     const view = list.parentElement!;
     const viewStyle = getComputedStyle(view);
-    const height = view.clientHeight - Number.parseFloat(viewStyle.paddingTop) - Number.parseFloat(viewStyle.paddingBottom);
+    const height = view.clientHeight - Number.parseFloat(viewStyle.paddingTop) -
+      Number.parseFloat(viewStyle.paddingBottom);
     return columns * Math.ceil((height + rowGap) / (tile.offsetHeight + rowGap));
   }
 

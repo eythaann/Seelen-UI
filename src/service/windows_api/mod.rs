@@ -1,7 +1,3 @@
-pub mod app_bar;
-pub mod com;
-pub mod iterator;
-
 use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
 use windows::Win32::{
@@ -20,21 +16,27 @@ use windows::Win32::{
         Shell::{KF_FLAG_DEFAULT, SHGetKnownFolderPath},
         WindowsAndMessaging::{
             FindWindowW, GetClassNameW, GetForegroundWindow, GetShellWindow, GetWindowTextW,
-            IsWindowVisible, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER,
-            SetWindowPos, ShowWindow, ShowWindowAsync,
+            IsWindowVisible, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SWP_NOZORDER, SetWindowPos,
+            ShowWindow, ShowWindowAsync,
         },
     },
 };
 use windows_core::{Owned, PCWSTR};
 
-use crate::{
-    error::{Result, WindowsResultExt},
-    string_utils::WindowsString,
-};
+use crate::error::{Result, WindowsResultExt};
+
+use slu_utils::windows::WindowsString;
 
 pub struct WindowsApi;
 
 impl WindowsApi {
+    pub fn was_installed_using_msix() -> bool {
+        static CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+        *CACHE.get_or_init(|| {
+            std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+        })
+    }
+
     pub fn show_window(addr: isize, command: i32) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -71,14 +73,7 @@ impl WindowsApi {
         unsafe { IsWindowVisible(hwnd) }.as_bool()
     }
 
-    pub fn set_position(
-        hwnd: isize,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-        flags: u32,
-    ) -> Result<()> {
+    pub fn set_position(hwnd: isize, x: i32, y: i32, width: i32, height: i32) -> Result<()> {
         unsafe {
             SetWindowPos(
                 HWND(hwnd as _),
@@ -87,7 +82,7 @@ impl WindowsApi {
                 y,
                 width,
                 height,
-                SET_WINDOW_POS_FLAGS(flags) | SWP_NOACTIVATE | SWP_NOZORDER,
+                SWP_NOACTIVATE | SWP_NOZORDER,
             )
             .filter_fake_error()?;
         }

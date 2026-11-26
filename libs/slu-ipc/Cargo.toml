@@ -16,8 +16,10 @@ seelen-core = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 uuid = { workspace = true, features = ["serde"] }
+
+[target.'cfg(windows)'.dependencies]
 widestring = { workspace = true }
-windows = { workspace = true, features = [
+windows ={ workspace = true, features = [
     "Win32_Foundation",
     "Win32_Security",
     "Win32_Security_Authorization",

@@ -1,3 +1,4 @@
+use slu_utils::windows::{MonitorEnumerator, WindowsString};
 mod display_config;
 mod display_view;
 
@@ -14,9 +15,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error::Result,
-    system_modules::system_settings::SystemSettings,
-    windows_api::{MonitorEnumerator, WindowsApi, string_utils::WindowsString},
+    error::Result, system_modules::system_settings::SystemSettings, windows_api::WindowsApi,
 };
 
 use self::display_config::{matching_paths, target_device_name, winrt_stable_id_for_target};

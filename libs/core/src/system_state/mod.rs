@@ -19,6 +19,7 @@ mod user;
 mod user_apps;
 mod win_explorer;
 mod window_identity;
+mod window_state;
 
 pub use bluetooth::*;
 pub use clipboard::*;
@@ -41,3 +42,4 @@ pub use user::*;
 pub use user_apps::*;
 pub use win_explorer::*;
 pub use window_identity::*;
+pub use window_state::*;

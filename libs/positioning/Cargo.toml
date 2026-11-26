@@ -10,6 +10,8 @@ thiserror = { workspace = true }
 log = { workspace = true }
 keyframe = "1.1.1"
 scc = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
 windows-core = { workspace = true } # needed by the `interface` macro
 windows = { workspace = true, features = [
   "Win32_Foundation",

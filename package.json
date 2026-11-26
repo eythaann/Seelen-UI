@@ -66,11 +66,12 @@
     "@types/react-dom": "^19.0.0",
     "@types/yargs": "^17.0.33",
     "antd": "^6.3.6",
+    "dprint": "^0.65.0",
     "esbuild": "^0.28.0",
     "esbuild-css-modules-plugin": "^3.1.4",
     "express": "^5.2.1",
     "framer-motion": "^12.38.0",
-    "i18next": "^26.0.6",
+    "i18next": "^27.2.4",
     "js-yaml": "^4.1.0",
     "lefthook": "^2.1.6",
     "lodash": "^4.18.1",
@@ -84,6 +85,6 @@
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
     "yargs": "^18.0.0",
-    "zod": "^3.24.3"
+    "zod": "^4.6.7"
   }
 }

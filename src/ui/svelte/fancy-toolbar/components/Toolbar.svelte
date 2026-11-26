@@ -8,14 +8,8 @@
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { getResourceText } from "libs/ui/react/utils/index.ts";
   import { createDragDropManager } from "libs/ui/dnd.ts";
-  import { t, locale } from "../i18n/index.ts";
-  import {
-    toolbarState,
-    toolbarActions,
-    plugins,
-    restoreStateToDefault,
-    listToGroups,
-  } from "../state/items.svelte.ts";
+  import { locale, t } from "../i18n/index.ts";
+  import { listToGroups, plugins, restoreStateToDefault, toolbarActions, toolbarState } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { hiddenByAutohide, setToolbarIsDraggingItem } from "../state/hidden.svelte.ts";
   import { windowsState } from "../state/windows.svelte.ts";
@@ -140,9 +134,7 @@
           key: "reoder",
           icon: toolbarState.isReorderDisabled ? "VscUnlock" : "VscLock",
           label: $t(
-            toolbarState.isReorderDisabled
-              ? "context_menu.reorder_enable"
-              : "context_menu.reorder_disable",
+            toolbarState.isReorderDisabled ? "context_menu.reorder_enable" : "context_menu.reorder_disable",
           ),
           callbackEvent: onContextMenuClickEvent,
         },
@@ -167,8 +159,7 @@
   }
 
   function handleContextMenu() {
-    const alignY =
-      settingsState.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
+    const alignY = settingsState.position === FancyToolbarSide.Bottom ? Alignment.End : Alignment.Start;
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: { ...buildContextMenu(), alignX: Alignment.Center, alignY },
       forwardTo: null,

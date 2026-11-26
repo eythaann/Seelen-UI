@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SystrayIconAction, type SysTrayIcon } from "@seelen-ui/lib/types";
+  import { type SysTrayIcon, SystrayIconAction } from "@seelen-ui/lib/types";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { createSortable } from "@dnd-kit/svelte/sortable";
@@ -68,22 +68,22 @@
     onauxclick={(e) => onClick(e, item.sessionId)}
     oncontextmenu={(e) => onClick(e, item.sessionId)}
     onmouseenter={() => {
-      /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.sessionId,
-        action: SystrayIconAction.HoverEnter,
-      }); */
+      // invoke(SeelenCommand.SendSystemTrayIconAction, {
+      //   id: item.sessionId,
+      //   action: SystrayIconAction.HoverEnter,
+      // });
     }}
     onmousemove={() => {
-      /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.sessionId,
-        action: SystrayIconAction.HoverMove,
-      }); */
+      // invoke(SeelenCommand.SendSystemTrayIconAction, {
+      //   id: item.sessionId,
+      //   action: SystrayIconAction.HoverMove,
+      // });
     }}
     onmouseleave={() => {
-      /* invoke(SeelenCommand.SendSystemTrayIconAction, {
-        id: item.sessionId,
-        action: SystrayIconAction.HoverLeave,
-      }); */
+      // invoke(SeelenCommand.SendSystemTrayIconAction, {
+      //   id: item.sessionId,
+      //   action: SystrayIconAction.HoverLeave,
+      // });
     }}
   >
     <div class="system-tray-item-icon-box">

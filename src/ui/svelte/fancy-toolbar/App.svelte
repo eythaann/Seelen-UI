@@ -3,7 +3,7 @@
   import { onMount } from "svelte";
   import { debounce } from "lodash";
   import Toolbar from "./components/Toolbar.svelte";
-  import { windowsState, focused, widgetStatuses } from "./state/windows.svelte.ts";
+  import { focused, widgetStatuses, windowsState } from "./state/windows.svelte.ts";
   import { settingsState } from "./state/settings.svelte.ts";
 
   const startMenuExes = ["SearchHost.exe", "StartMenuExperienceHost.exe"];

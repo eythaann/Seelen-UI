@@ -1,6 +1,6 @@
 <script lang="ts">
   import { globalState } from "./state.svelte";
-  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { NotificationsMode } from "@seelen-ui/lib/types";
   import { t } from "./i18n/index.ts";
   import Notification from "./components/Notification.svelte";

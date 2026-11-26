@@ -33,9 +33,6 @@
       "ES2023"
     ]
   },
-  "fmt": {
-    "lineWidth": 120
-  },
   "lint": {
     "rules": {
       "include": [

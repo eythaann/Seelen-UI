@@ -6,10 +6,9 @@ use clap::{Arg, ArgAction, Command};
 
 use crate::{
     SERVICE_DISPLAY_NAME,
-    enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
     error::Result,
     logger::SluServiceLogger,
-    task_scheduler::TaskSchedulerHelper,
+    modules::{environment::EnvironmentManager, startup::StartupManager},
 };
 
 pub struct ServiceSubcommands;
@@ -20,7 +19,7 @@ impl ServiceSubcommands {
 }
 
 pub fn get_cli() -> Command {
-    Command::new(SERVICE_DISPLAY_NAME.to_string())
+    Command::new(SERVICE_DISPLAY_NAME)
         .author("eythaann")
         .about("Seelen Command Line Interface.")
         .long_about("Seelen Command Line Interface.")
@@ -47,13 +46,13 @@ pub async fn handle_console_client() -> Result<()> {
 
     match subcommand {
         Some((ServiceSubcommands::INSTALL, _)) => {
-            add_installation_dir_to_path()?;
-            TaskSchedulerHelper::create_service_task()?;
+            EnvironmentManager::instance().add_installation_dir_to_path()?;
+            StartupManager::instance().register_service()?;
         }
         Some((ServiceSubcommands::UNINSTALL, _)) => {
             SluServiceLogger::uninstall_old_logging()?;
-            remove_installation_dir_from_path()?;
-            TaskSchedulerHelper::remove_service_task()?;
+            EnvironmentManager::instance().remove_installation_dir_from_path()?;
+            StartupManager::instance().unregister_service()?;
         }
         Some((ServiceSubcommands::STOP, _)) => {
             ServiceIpc::send(SvcAction::Stop).await?;
