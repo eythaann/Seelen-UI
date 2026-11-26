@@ -244,17 +244,38 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       `platform::shell::reveal`; `get_native_start_menu` moved to the `start` module (`StartMenuSystem::native_layout`);
       the telemetry install id moved to `platform::install_id` (registry on Windows). `logger.rs` needed no changes.
 
-## Phase 3 — Service (`src/service/`)
+## Phase 3 — Service (`src/service/`) ✔
 
-Currently flat (`power.rs`, `shutdown.rs`, `task_scheduler.rs`, `enviroment.rs`, `hotkeys.rs`, `app_management.rs`) and
-`cli/processing.rs` (the infrastructure equivalent) calls `WindowsApi::*` and `TaskSchedulerHelper` directly.
-
-- [ ] Reorganize into `src/service/modules/<module>/{domain.rs, application/{mod.rs,windows.rs}, infrastructure.rs}`:
-  - `power` (suspend/resume listener), `startup` (task_scheduler), `environment` (PATH via registry, fix the
-    `enviroment` typo), `taskbar` (shutdown.rs: hide/restore native taskbar + shutdown listener), `hotkeys`,
-    `windows_positioning` (ShowWindow/SetPosition/SetForeground/DeferWindowPositions), `app_management`.
-- [ ] `cli/processing.rs` becomes OS-agnostic infrastructure: it only dispatches `SvcAction` to managers/traits.
-- [ ] `string_utils.rs` (`WindowsString`) and `windows_api/` → `#[cfg(windows)]`, only used from Windows impls.
+- [x] Reorganized into `src/service/modules/<module>/{mod.rs, domain.rs, application/{mod.rs, windows.rs}}` (same layout
+      as `system_modules`, documented in `service/modules/mod.rs`; `mod.rs` only re-exports the manager, the
+      infrastructure is `cli/processing.rs` + `main.rs`):
+  - `lifecycle` — `LifecycleSystem { create, init }`, `LifecycleEvent { Suspending, Resumed, EndSession }`: the old
+    `power.rs` suspend/resume listener and the shutdown window of `shutdown.rs`. The manager forwards suspend/resume to
+    `AppManager` and calls `exit(0)` on end session. The suspend/resume registration is now kept in the native struct
+    (released on `Drop`) instead of a thread sleeping in a loop to keep it alive.
+  - `app_management` — the crash/suspend aware watchdog is in the manager (`SYSTEM_SUSPENDED` → manager field);
+    `AppManagementSystem { launch_app, kill_app_instances }` (explorer de-elevation, session filter) is native.
+  - `startup` — `StartupSystem { register_service, set_run_on_logon, unregister_service }` (Task Scheduler).
+  - `environment` (typo fixed) — PATH entry add/remove is pure domain logic (`path_with_entry`/`path_without_entry`,
+    tested); `EnvironmentSystem { PATH_SEPARATOR, is_path_managed_by_os, system_path, set_system_path }` (registry,
+    `REG_EXPAND_SZ`).
+  - `taskbar` — the hide worker/request coalescing and pass delays are in the manager; one check of a pass
+    (`TaskbarSystem::hide`, app bar state + focus move + hide) and `restore` are native.
+  - `hotkeys` — command dispatch (`ShortcutAction`, tested) and the app notifications in the manager;
+    `HotkeysSystem { register, stop, start_recording, stop_recording }` wraps `win_hotkeys`
+    (`RecordingEvent { Pressed, Finished }`).
+  - `window_positioning` — show/position/foreground native; the batch placement and the `AnimationOrchestrator` are in
+    the manager (`libs/positioning` itself is Phase 4).
+  - `native_wallpaper` — the worker, saved state, external change detection and restore plan are agnostic (types and
+    helpers in domain); `NativeWallpaperSystem` wraps `IDesktopWallpaper` (instance per call, COM init in `init` on the
+    worker thread). The persisted `state.json` format is unchanged.
+- [x] `cli/processing.rs` is OS-agnostic infrastructure: it only dispatches `SvcAction` to the managers.
+- [x] `string_utils.rs` → `windows_api/string_utils.rs` (unused helpers removed); `windows_api/` is only used from
+      `windows.rs` files. Process-level primitives (DPI/privileges, single instance mutex, wait for the shell, console,
+      local data dir) are in `service/platform/{mod.rs, windows.rs}`. `SERVICE_NAME` (unused) removed,
+      `SERVICE_DISPLAY_NAME` is a `&str`.
+  - Pending: `SvcAction` still carries Win32 shaped values (`hwnd`, show `command`, `SWP_*` flags); they are passed
+    through untouched to the native layer (see Phase 4 `WindowId`).
 
 ## Phase 4 — Crates and conditional compilation
 

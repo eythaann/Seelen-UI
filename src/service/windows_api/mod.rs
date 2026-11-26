@@ -1,6 +1,7 @@
 pub mod app_bar;
 pub mod com;
 pub mod iterator;
+pub mod string_utils;
 
 use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
@@ -27,14 +28,20 @@ use windows::Win32::{
 };
 use windows_core::{Owned, PCWSTR};
 
-use crate::{
-    error::{Result, WindowsResultExt},
-    string_utils::WindowsString,
-};
+use crate::error::{Result, WindowsResultExt};
+
+use self::string_utils::WindowsString;
 
 pub struct WindowsApi;
 
 impl WindowsApi {
+    pub fn was_installed_using_msix() -> bool {
+        static CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+        *CACHE.get_or_init(|| {
+            std::env::current_exe().is_ok_and(|p| p.with_file_name("AppxManifest.xml").exists())
+        })
+    }
+
     pub fn show_window(addr: isize, command: i32) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow

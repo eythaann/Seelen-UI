@@ -1,44 +1,31 @@
 // Prevents additional console window on Windows in release
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod app_management;
 mod cli;
-mod enviroment;
 mod error;
-mod hotkeys;
 mod logger;
-mod native_wallpaper;
-mod power;
-mod shutdown;
-mod string_utils;
-mod task_scheduler;
+mod modules;
+mod platform;
 #[cfg(windows)]
 mod windows_api;
 
-use cli::handle_console_client;
-use error::Result;
+use std::sync::{OnceLock, atomic::AtomicBool};
+
 use itertools::Itertools;
-use logger::SluServiceLogger;
-use shutdown::{restore_native_taskbar, start_shutdown_listener};
 use slu_ipc::{AppIpc, IPC, ServiceIpc};
-use std::sync::{LazyLock, OnceLock, atomic::AtomicBool};
-use string_utils::WindowsString;
-use task_scheduler::TaskSchedulerHelper;
 use tokio::sync::mpsc::Sender;
-use windows::Win32::{
-    Foundation::{ERROR_ALREADY_EXISTS, GetLastError},
-    Security::SE_TCB_NAME,
-    System::Threading::CreateMutexW,
-    UI::WindowsAndMessaging::SW_MINIMIZE,
+
+use crate::{
+    cli::handle_console_client,
+    error::Result,
+    logger::SluServiceLogger,
+    modules::{
+        app_management::AppManager, hotkeys::HotkeysManager, lifecycle::LifecycleManager,
+        native_wallpaper::NativeWallpaperManager, startup::StartupManager, taskbar::TaskbarManager,
+    },
 };
-use windows_api::WindowsApi;
 
-use crate::{app_management::launch_seelen_ui, hotkeys::stop_app_shortcuts};
-
-pub static SERVICE_NAME: LazyLock<WindowsString> =
-    LazyLock::new(|| WindowsString::from_str("slu-service"));
-pub static SERVICE_DISPLAY_NAME: LazyLock<WindowsString> =
-    LazyLock::new(|| WindowsString::from_str("Seelen UI Service"));
+pub const SERVICE_DISPLAY_NAME: &str = "Seelen UI Service";
 
 static ASYNC_RUNTIME_HANDLE: OnceLock<tokio::runtime::Handle> = OnceLock::new();
 
@@ -77,56 +64,34 @@ pub fn exit(code: u32) {
 }
 
 pub fn setup() -> Result<()> {
-    WindowsApi::set_process_dpi_aware()?;
-    WindowsApi::enable_privilege(SE_TCB_NAME)?;
+    platform::prepare_process()?;
     ServiceIpc::start(crate::cli::processing::process_action)?;
-    start_shutdown_listener()?;
+    // suspend/resume and end of session (shutdown, logoff, package update) listeners
+    LifecycleManager::instance();
 
     let app_just_launched = if !AppIpc::can_stablish_connection() {
-        WindowsApi::wait_for_native_shell();
-        log_error!(launch_seelen_ui());
+        platform::wait_for_native_shell();
+        log_error!(AppManager::instance().launch_app());
         true
     } else {
         false
     };
 
-    crate::power::start_power_monitoring();
-    crate::app_management::start_app_monitoring(app_just_launched);
+    AppManager::instance().start_monitoring(app_just_launched);
     Ok(())
 }
 
-// https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-createmutexw
-fn is_svc_already_running() -> bool {
-    unsafe {
-        let session_id = WindowsApi::current_session_id();
-        let mutex_name = format!("Local\\Seelen-UI-Service-Instance-{}", session_id);
-        let mutex_name_wide = WindowsString::from_str(&mutex_name);
-
-        // Try to create a named mutex specific to the current session
-        let Ok(handle) = CreateMutexW(None, true, mutex_name_wide.as_pcwstr()) else {
-            // Failed to create mutex, assume not running to be safe
-            log::warn!("Failed to create service instance mutex, proceeding anyway");
-            return false;
-        };
-
-        // if mutex existed before, another instance is already running for this session
-        let last_error = GetLastError();
-        if last_error == ERROR_ALREADY_EXISTS {
-            return true;
-        }
-
-        // This is the first instance for this session
-        // Keep the handle alive by leaking it (will be released when process exits)
-        Box::leak(Box::new(handle));
-        false
-    }
+/// Restores what the service changed on the system: native taskbar, wallpaper and shortcuts.
+fn cleanup() {
+    log_error!(TaskbarManager::instance().restore());
+    log_error!(NativeWallpaperManager::instance().restore());
+    HotkeysManager::instance().stop();
 }
 
 #[tokio::main]
 async fn main() {
     if is_local_dev() {
-        let window = WindowsApi::get_console_window();
-        let _ = WindowsApi::show_window(window.0 as _, SW_MINIMIZE.0);
+        platform::minimize_console();
     }
 
     if let Err(err) = SluServiceLogger::init() {
@@ -140,7 +105,7 @@ async fn main() {
         std::process::exit(1);
     }
 
-    if is_svc_already_running() {
+    if platform::is_already_running() {
         println!("Seelen UI Service is already running");
         return;
     }
@@ -152,7 +117,7 @@ async fn main() {
     let (tx, mut rx) = tokio::sync::mpsc::channel(1);
     EXIT_CHANNEL.set(tx).unwrap();
 
-    if let Err(err) = TaskSchedulerHelper::create_service_task() {
+    if let Err(err) = StartupManager::instance().register_service() {
         log::error!("Failed to create service task: {err:?}");
         std::process::exit(1);
     }
@@ -167,9 +132,7 @@ async fn main() {
     if let Err(err) = setup() {
         log::error!("Service setup failed: {:?}", err);
         // Run cleanup even on setup failure so the taskbar/wallpaper/hotkeys are restored
-        log_error!(restore_native_taskbar());
-        log_error!(native_wallpaper::restore());
-        stop_app_shortcuts();
+        cleanup();
         std::process::exit(1);
     };
 
@@ -177,9 +140,7 @@ async fn main() {
     let exit_code = rx.recv().await.unwrap_or_default();
 
     // shutdown tasks:
-    log_error!(restore_native_taskbar());
-    log_error!(native_wallpaper::restore());
-    stop_app_shortcuts();
+    cleanup();
     log::info!("Seelen UI Service exited with code {exit_code}");
     std::process::exit(exit_code as i32);
 }

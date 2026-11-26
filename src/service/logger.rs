@@ -1,9 +1,7 @@
 use std::sync::LazyLock;
 
+use crate::{error::Result, platform};
 use owo_colors::OwoColorize;
-use windows::Win32::UI::Shell::FOLDERID_LocalAppData;
-
-use crate::{error::Result, windows_api::WindowsApi};
 
 pub struct SluServiceLogger {}
 
@@ -60,8 +58,7 @@ impl SluServiceLogger {
     }
 
     pub fn init() -> Result<()> {
-        let logs_folder =
-            WindowsApi::known_folder(FOLDERID_LocalAppData)?.join("com.seelen.seelen-ui/logs");
+        let logs_folder = platform::local_data_dir()?.join("logs");
         std::fs::create_dir_all(&logs_folder)?;
 
         let log_path = logs_folder.join("SLU Service.log");

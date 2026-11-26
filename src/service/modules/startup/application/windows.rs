@@ -9,18 +9,19 @@ use windows::Win32::{
 use windows_core::{BSTR, Interface};
 
 use crate::{
-    enviroment::was_installed_using_msix,
     error::Result,
+    modules::startup::domain::StartupSystem,
     windows_api::{WindowsApi, com::Com},
 };
 
-pub struct TaskSchedulerHelper {}
+const GROUP_FOLDER: &str = "\\Seelen";
+const OLD_APP_TASK_NAME: &str = "Seelen-UI";
+const SERVICE_TASK_NAME: &str = "Seelen UI Service";
 
-static GROUP_FOLDER: &str = "\\Seelen";
-static OLD_APP_TASK_NAME: &str = "Seelen-UI";
-static SERVICE_TASK_NAME: &str = "Seelen UI Service";
+/// Startup through a Task Scheduler task, so the service runs elevated without a UAC prompt.
+pub struct WindowsStartup;
 
-impl TaskSchedulerHelper {
+impl WindowsStartup {
     unsafe fn get_task_service() -> Result<ITaskService> {
         unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
@@ -45,15 +46,19 @@ impl TaskSchedulerHelper {
                 TASK_LOGON_INTERACTIVE_TOKEN,
                 &Default::default(),
             )?;
-            log::debug!("Registered task {}", task_name);
+            log::debug!("Registered task {task_name}");
             Ok(())
         }
     }
+}
 
-    /// this task handles the startup of the service and the app on login
-    pub fn create_service_task() -> Result<()> {
-        log::debug!("Creating service task...");
-        let service_path = if was_installed_using_msix() {
+impl StartupSystem for WindowsStartup {
+    fn create() -> Self {
+        Self
+    }
+
+    fn register_service(&self) -> Result<()> {
+        let service_path = if WindowsApi::was_installed_using_msix() {
             WindowsApi::known_folder(FOLDERID_LocalAppData)?
                 .join("Microsoft\\WindowsApps\\slu-service.exe")
         } else {
@@ -103,7 +108,7 @@ impl TaskSchedulerHelper {
         })
     }
 
-    pub fn set_run_on_logon(enabled: bool) -> Result<()> {
+    fn set_run_on_logon(&self, enabled: bool) -> Result<()> {
         Com::run_with_context(|| unsafe {
             let task_service = Self::get_task_service()?;
             let seelen_folder = task_service.GetFolder(&GROUP_FOLDER.into())?;
@@ -121,15 +126,9 @@ impl TaskSchedulerHelper {
         })
     }
 
-    pub fn remove_service_task() -> Result<()> {
+    fn unregister_service(&self) -> Result<()> {
         Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-                &Default::default(),
-            )?;
+            let task_service = Self::get_task_service()?;
             if let Ok(seelen_folder) = task_service.GetFolder(&GROUP_FOLDER.into()) {
                 let _ = seelen_folder.DeleteTask(&SERVICE_TASK_NAME.into(), 0);
             }

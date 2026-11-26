@@ -1,10 +1,22 @@
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::time::{Duration, Instant};
+#[cfg(windows)]
+mod windows;
+
+use std::{
+    sync::{
+        LazyLock,
+        atomic::{AtomicBool, Ordering},
+    },
+    time::{Duration, Instant},
+};
 
 use slu_ipc::{AppIpc, IPC};
-use sysinfo::ProcessesToUpdate;
 
-use crate::{enviroment::was_installed_using_msix, error::Result, exit};
+use crate::{error::Result, exit, log_error};
+
+use super::domain::AppManagementSystem;
+
+#[cfg(windows)]
+type Platform = windows::WindowsAppManagement;
 
 /// How long to wait for the app to establish its IPC connection after each launch attempt.
 const STARTUP_TIMEOUT: Duration = Duration::from_secs(2);
@@ -17,27 +29,56 @@ const RESUME_GRACE: Duration = Duration::from_secs(10);
 /// In debug builds we stop immediately after the first failure.
 const MAX_CRASHES: u32 = if cfg!(debug_assertions) { 0 } else { 5 };
 
-/// Set to `true` while the system is suspended; cleared on resume.
-/// Written by the power monitor thread, read by the app monitoring thread.
-pub static SYSTEM_SUSPENDED: AtomicBool = AtomicBool::new(false);
-
-pub fn on_system_suspend() {
-    log::info!("System suspending — pausing app health checks.");
-    SYSTEM_SUSPENDED.store(true, Ordering::SeqCst);
+pub struct AppManager {
+    platform: Platform,
+    /// Set to `true` while the system is suspended; cleared on resume.
+    /// Written by the lifecycle listener, read by the app monitoring thread.
+    system_suspended: AtomicBool,
 }
 
-pub fn on_system_resume() {
-    log::info!("System resuming — will restore app health checks after grace window.");
-    SYSTEM_SUSPENDED.store(false, Ordering::SeqCst);
-}
+impl AppManager {
+    pub fn instance() -> &'static Self {
+        static MANAGER: LazyLock<AppManager> = LazyLock::new(AppManager::create);
+        &MANAGER
+    }
 
-/// Starts monitoring the Seelen UI app for the current session and restarts it automatically
-/// when it crashes or fails to start.
-///
-/// `app_just_launched` should be `true` when the caller already launched the app so that the
-/// monitor gives it a startup grace window before counting a failure.
-pub fn start_app_monitoring(app_just_launched: bool) {
-    std::thread::spawn(move || {
+    fn create() -> Self {
+        Self {
+            platform: Platform::create(),
+            system_suspended: AtomicBool::new(false),
+        }
+    }
+
+    /// will start the app on the interactive session
+    pub fn launch_app(&self) -> Result<()> {
+        self.platform.launch_app()
+    }
+
+    pub fn kill_app_instances(&self) -> Result<()> {
+        log::info!("Killing all Seelen UI processes in current session");
+        self.platform.kill_app_instances()
+    }
+
+    pub fn on_system_suspend(&self) {
+        log::info!("System suspending — pausing app health checks.");
+        self.system_suspended.store(true, Ordering::SeqCst);
+    }
+
+    pub fn on_system_resume(&self) {
+        log::info!("System resuming — will restore app health checks after grace window.");
+        self.system_suspended.store(false, Ordering::SeqCst);
+    }
+
+    /// Starts monitoring the Seelen UI app for the current session and restarts it automatically
+    /// when it crashes or fails to start.
+    ///
+    /// `app_just_launched` should be `true` when the caller already launched the app so that the
+    /// monitor gives it a startup grace window before counting a failure.
+    pub fn start_monitoring(&'static self, app_just_launched: bool) {
+        std::thread::spawn(move || self.monitoring_loop(app_just_launched));
+    }
+
+    fn monitoring_loop(&self, app_just_launched: bool) {
         let mut crash_count = 0u32;
         let mut app_was_connected = true;
         // Absolute deadline until which IPC failures are ignored (startup / resume grace).
@@ -54,7 +95,7 @@ pub fn start_app_monitoring(app_just_launched: bool) {
 
             // ── Suspend / resume handling ─────────────────────────────────────────────
 
-            if SYSTEM_SUSPENDED.load(Ordering::SeqCst) {
+            if self.system_suspended.load(Ordering::SeqCst) {
                 was_suspended = true;
                 continue;
             }
@@ -104,66 +145,17 @@ pub fn start_app_monitoring(app_just_launched: bool) {
                 break;
             }
 
-            crate::log_error!(kill_all_seelen_ui_processes());
+            log_error!(self.kill_app_instances());
 
             // Linear back-off: 500 ms, 1000 ms, 1500 ms, …
             let backoff = Duration::from_millis(500 * crash_count as u64);
             log::info!("Restarting Seelen UI in {}ms…", backoff.as_millis());
             std::thread::sleep(backoff);
-            crate::log_error!(launch_seelen_ui());
+            log_error!(self.launch_app());
             grace_until = Some(Instant::now() + STARTUP_TIMEOUT);
         }
 
         log::error!("Seelen UI monitoring stopped after repeated failures.");
         exit(1);
-    });
-}
-
-/// will start the app on the interactive session
-pub fn launch_seelen_ui() -> Result<()> {
-    let path = if was_installed_using_msix() {
-        "shell:AppsFolder\\Seelen.SeelenUI_p6yyn03m1894e!App".to_string()
-    } else {
-        std::env::current_exe()?
-            .with_file_name("seelen-ui.exe")
-            .to_string_lossy()
-            .to_string()
-    };
-    // Use explorer.exe to spawn the app de-elevated (with the interactive user's token),
-    // since the service runs elevated (TASK_RUNLEVEL_HIGHEST). ShellExecuteExW called
-    // from an elevated process inherits the elevated token, causing an infinite restart loop.
-    std::process::Command::new("explorer.exe")
-        .arg(&path)
-        .spawn()?;
-    Ok(())
-}
-
-pub fn kill_all_seelen_ui_processes() -> Result<()> {
-    log::info!("Killing all Seelen UI processes in current session");
-    let current_session = crate::windows_api::WindowsApi::current_session_id();
-
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes(ProcessesToUpdate::All, true);
-    let instances: Vec<_> = sys
-        .processes()
-        .values()
-        .filter(|p| {
-            if !p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")) {
-                return false;
-            }
-            let mut session_id = 0u32;
-            let in_session = unsafe {
-                windows::Win32::System::RemoteDesktop::ProcessIdToSessionId(
-                    p.pid().as_u32(),
-                    &mut session_id,
-                )
-                .is_ok()
-            };
-            in_session && session_id == current_session
-        })
-        .collect();
-    for instance in instances {
-        instance.kill();
     }
-    Ok(())
 }
