@@ -1,3 +1,5 @@
+mod taskbar_guard;
+
 use slu_ipc::{
     AppIpc,
     messages::{AppMessage, IconEventData, Win32TaskbarButtonEvent, Win32TrayEvent},

@@ -126,16 +126,17 @@ impl SeelenUI {
             ServicePipe::request(SvcAction::SetShortcuts(resolved))?;
         }
 
-        if state.is_weg_enabled() {
+        let restore_result = if state.is_weg_enabled() {
             SeelenWeg::hide_native_taskbar();
+            Ok(())
         } else {
-            SeelenWeg::restore_native_taskbar()?;
-        }
+            SeelenWeg::restore_native_taskbar()
+        };
 
         // Re-emit user and session so streaming mode redaction takes effect immediately.
         reemit_user();
         reemit_session();
-        Ok(())
+        restore_result
     }
 
     pub fn is_auto_start_enabled() -> Result<bool> {

@@ -20,10 +20,10 @@ impl AppSettings {
         StateManager::send(StateEvent::SettingsChanged {
             settings: Box::new(self.settings.clone()),
         });
-        SeelenUI::on_settings_change(self)?;
+        let change_result = SeelenUI::on_settings_change(self);
         WIDGET_MANAGER.reconcile().log_error();
         WM_STATE.lock().on_settings_changed();
-        Ok(())
+        change_result
     }
 
     pub(super) fn read_settings() -> Settings {

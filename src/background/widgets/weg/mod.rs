@@ -32,10 +32,14 @@ impl SeelenWeg {
     // requests the action via IPC.
 
     pub fn hide_native_taskbar() {
+        #[cfg(windows)]
+        imp::attach_taskbar_guard();
         let _ = ServicePipe::request(SvcAction::HideNativeTaskbar);
     }
 
     pub fn restore_native_taskbar() -> Result<()> {
+        #[cfg(windows)]
+        imp::detach_taskbar_guard()?;
         ServicePipe::request(SvcAction::RestoreNativeTaskbar)
     }
 

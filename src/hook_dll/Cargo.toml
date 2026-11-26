@@ -9,7 +9,9 @@ crate-type = ["cdylib"]
 [dependencies]
 windows = { workspace = true, features = [
     "Win32_Foundation",
+    "Win32_Graphics_Dwm",
     "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
     "Win32_UI_WindowsAndMessaging",
     "Win32_UI_Shell",
     "Win32_System_DataExchange",
