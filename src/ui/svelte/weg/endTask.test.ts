@@ -19,6 +19,6 @@ test("ends the tray process when the application has no open windows", () => {
 });
 
 test("targets each verified process once even when it owns several windows", () => {
-  const windows = [{ hwnd: "4_2_3" }, { hwnd: "5_6_7" }, { hwnd: "8_6_7" }, { hwnd: "9_0_0" }];
+  const windows = [{ id: "4_2_3" }, { id: "5_6_7" }, { id: "8_6_7" }, { id: "9_0_0" }];
   assert.deepEqual(getEndTaskTargets(item, windows, [icon]), ["1_2_3", "5_6_7"]);
 });

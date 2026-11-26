@@ -1,7 +1,7 @@
 import type { Rect as PreviewRect, WindowIdentity } from "@seelen-ui/lib/types";
 
 export interface LivePreviewFrame {
-  targets: { hwnd: WindowIdentity; rect: PreviewRect; clip?: PreviewRect }[];
+  targets: { id: WindowIdentity; rect: PreviewRect; clip?: PreviewRect }[];
   opacity: number;
 }
 export interface LivePreviewStatus {
@@ -36,7 +36,7 @@ export function visiblePreviewTargets(
   if (viewport.right <= viewport.left || viewport.bottom <= viewport.top) return [];
   const seen = new Set<WindowIdentity>();
   const visible = targets.flatMap((target) => {
-    const { hwnd, rect } = target;
+    const { id, rect } = target;
     const clip = {
       left: Math.max(rect.left, viewport.left, target.clip?.left ?? viewport.left),
       top: Math.max(rect.top, viewport.top, target.clip?.top ?? viewport.top),
@@ -44,9 +44,9 @@ export function visiblePreviewTargets(
       bottom: Math.min(rect.bottom, viewport.bottom, target.clip?.bottom ?? viewport.bottom),
     };
     if (
-      seen.has(hwnd) || clip.right <= clip.left || clip.bottom <= clip.top
+      seen.has(id) || clip.right <= clip.left || clip.bottom <= clip.top
     ) return [];
-    seen.add(hwnd);
+    seen.add(id);
     return [{ ...target, clip }];
   });
   return visible;

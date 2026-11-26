@@ -68,7 +68,7 @@ impl Window {
             return WindowIdentity::from_handle(hwnd);
         }
         WindowIdentity {
-            hwnd,
+            handle: hwnd,
             pid,
             process_created_at: self.process().created_at().unwrap_or(0),
         }
@@ -284,7 +284,7 @@ impl TryFrom<&WindowIdentity> for Window {
     type Error = crate::error::AppError;
 
     fn try_from(identity: &WindowIdentity) -> Result<Self> {
-        let window = Self::from(identity.hwnd);
+        let window = Self::from(identity.handle);
         if !window.is_window() {
             return Err("the window no longer exists".into());
         }

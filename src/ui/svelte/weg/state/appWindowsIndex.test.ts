@@ -4,8 +4,8 @@ import type { UserAppWindow } from "@seelen-ui/lib/types";
 import type { AppOrFileWegItem } from "../types.ts";
 import { AppWindowsIndex } from "./appWindowsIndex.ts";
 
-function window(hwnd: string, umid: string | null, path: string): UserAppWindow {
-  return { hwnd, umid, process: { path } } as UserAppWindow;
+function window(id: string, umid: string | null, path: string): UserAppWindow {
+  return { id, umid, process: { path } } as UserAppWindow;
 }
 
 const item = {
@@ -23,9 +23,9 @@ test("merges AUMID and both path matches in source order without duplicates", ()
   ];
   const index = new AppWindowsIndex(windows);
   const matches = index.get(item);
-  assert.deepEqual(matches.map((match) => match.hwnd), ["path-first", "umid", "relaunch"]);
+  assert.deepEqual(matches.map((match) => match.id), ["path-first", "umid", "relaunch"]);
   assert.equal(index.get(item), matches);
-  assert.deepEqual(index.get({ ...item, umid: "other" }).map((match) => match.hwnd), [
+  assert.deepEqual(index.get({ ...item, umid: "other" }).map((match) => match.id), [
     "path-first",
     "relaunch",
     "unrelated",

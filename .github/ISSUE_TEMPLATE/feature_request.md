@@ -1,8 +1,8 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[FEAT] Include a pandora box"
-labels: enhancement, feature request
+title: "Include a pandora box"
+type: Feature
 assignees: ""
 ---
 

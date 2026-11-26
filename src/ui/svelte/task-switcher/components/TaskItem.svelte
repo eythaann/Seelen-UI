@@ -13,8 +13,8 @@
   let { task, index }: Props = $props();
 
   let boxRef: HTMLDivElement | undefined = $state();
-  const isSelected = $derived(task.hwnd === globalState.selectedWindow);
-  const preview = $derived(globalState.previews[task.hwnd]);
+  const isSelected = $derived(task.id === globalState.selectedWindow);
+  const preview = $derived(globalState.previews[task.id]);
 
   // Focus button when selected
   $effect(() => {
@@ -47,13 +47,13 @@
   function handleClick() {
     globalState.showing = false;
     invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: task.hwnd,
+      id: task.id,
       wasFocused: false,
     });
   }
 
   function handleFocus() {
-    globalState.selectedWindow = task.hwnd;
+    globalState.selectedWindow = task.id;
   }
 
   // Navigation helper functions
@@ -76,7 +76,7 @@
         ? getNextIndex(currentIndex, totalItems)
         : getPreviousIndex(currentIndex, totalItems);
 
-    globalState.selectedWindow = windows[nextIndex]?.hwnd || null;
+    globalState.selectedWindow = windows[nextIndex]?.id || null;
   }
 </script>
 
@@ -96,7 +96,7 @@
       data-skin="transparent"
       onclick={(e) => {
         e.stopPropagation();
-        invoke(SeelenCommand.WegCloseApp, { hwnd: task.hwnd });
+        invoke(SeelenCommand.WegCloseApp, { id: task.id });
       }}
     >
       <Icon iconName="TbX" />

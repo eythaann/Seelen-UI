@@ -292,10 +292,10 @@ $effect.root(() => {
 
     const remainingItems = appOrFileItems.filter((item) => !itemsToRemove.has(item.id));
     const coveredWindows = new Set(
-      remainingItems.flatMap((item) => windowsState.allWindowsFor(item).map((window) => window.hwnd)),
+      remainingItems.flatMap((item) => windowsState.allWindowsFor(item).map((window) => window.id)),
     );
     const uncoveredWindows = windows.filter(
-      (window) => !coveredWindows.has(window.hwnd),
+      (window) => !coveredWindows.has(window.id),
     );
 
     const seen = new Set<string>();

@@ -36,12 +36,12 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   } else if (key === "run_as") {
     launchItem(item, true);
   } else if (key === "copy_hwnd") {
-    navigator.clipboard.writeText(JSON.stringify(windows.map((w) => w.hwnd.split("_")[0])));
+    navigator.clipboard.writeText(JSON.stringify(windows.map((w) => w.id.split("_")[0])));
   } else if (key === "close") {
-    windows.forEach((w) => invoke(SeelenCommand.WegCloseApp, { hwnd: w.hwnd }));
+    windows.forEach((w) => invoke(SeelenCommand.WegCloseApp, { id: w.id }));
   } else if (key === "kill") {
-    for (const hwnd of pendingEndTaskTargets) {
-      invoke(SeelenCommand.WegKillApp, { hwnd }).catch(console.error);
+    for (const id of pendingEndTaskTargets) {
+      invoke(SeelenCommand.WegKillApp, { id }).catch(console.error);
     }
   } else if (key === "edit_app_icon") {
     const entry = iconPackManager.value.getIconEntry({ path: item.path, umid: item.umid });

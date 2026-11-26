@@ -20,7 +20,19 @@ pub enum ZOrder {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct FocusedApp {
+    pub id: WindowIdentity,
+    pub owner_id: WindowIdentity,
+    /// @deprecated use `id` instead, kept for backward compatibility.
+    #[deprecated(
+        since = "2.8.12",
+        note = "Use the system-agnostic identification field"
+    )]
     pub hwnd: WindowIdentity,
+    /// @deprecated use `ownerId` instead, kept for backward compatibility.
+    #[deprecated(
+        since = "2.8.12",
+        note = "Use the system-agnostic identification field"
+    )]
     pub owner_hwnd: WindowIdentity,
     pub monitor: MonitorId,
     pub title: String,
@@ -38,6 +50,12 @@ pub struct FocusedApp {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct UserAppWindow {
+    pub id: WindowIdentity,
+    /// @deprecated use `id` instead, kept for backward compatibility.
+    #[deprecated(
+        since = "2.8.12",
+        note = "Use the system-agnostic identification field"
+    )]
     pub hwnd: WindowIdentity,
     pub monitor: MonitorId,
     pub title: String,
@@ -119,7 +137,8 @@ pub enum UserAppWindowPreviewDelta {
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct WindowPreviewTarget {
-    pub hwnd: WindowIdentity,
+    #[serde(alias = "hwnd")]
+    pub id: WindowIdentity,
     /// Full layout rectangle, in physical pixels relative to the destination client area.
     pub rect: Rect,
     /// Visible destination bounds. Keep `rect` intact so clipping preserves source alignment.
@@ -186,9 +205,12 @@ mod preview_target_tests {
     #[test]
     fn clipping_is_optional_and_preserves_the_full_layout_rectangle() {
         let legacy = serde_json::json!({"hwnd": "11_0_0", "rect": {"left": 0, "top": -50, "right": 200, "bottom": 50}});
+        let current = serde_json::json!({"id": "11_0_0", "rect": {"left": 0, "top": -50, "right": 200, "bottom": 50}});
         let mut target: WindowPreviewTarget = serde_json::from_value(legacy.clone()).unwrap();
         assert!(target.clip.is_none());
-        assert_eq!(serde_json::to_value(&target).unwrap(), legacy);
+        assert_eq!(serde_json::to_value(&target).unwrap(), current);
+        let from_current: WindowPreviewTarget = serde_json::from_value(current).unwrap();
+        assert_eq!(from_current.id, target.id);
         target.clip = Some(Rect {
             left: 0,
             top: 0,

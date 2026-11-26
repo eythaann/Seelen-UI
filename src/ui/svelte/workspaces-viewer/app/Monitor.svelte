@@ -55,7 +55,7 @@
     const hwnd = source.id as string;
     const workspaceId = target.id as string;
     if (viewingWorkspaceId === workspaceId) return;
-    invoke(SeelenCommand.MoveWindowToWorkspace, { hwnd, workspaceId });
+    invoke(SeelenCommand.MoveWindowToWorkspace, { id: hwnd, workspaceId });
   }}
 >
   <div

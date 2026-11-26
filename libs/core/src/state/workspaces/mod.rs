@@ -298,10 +298,10 @@ impl WorkspaceGrid {
     }
 
     /// Finds the workspace containing the window with the given handle.
-    pub fn get_by_window_id(&self, hwnd: WindowHandle) -> Option<&DesktopWorkspace> {
+    pub fn get_by_window_id(&self, handle: WindowHandle) -> Option<&DesktopWorkspace> {
         for row in &self.0 {
             for workspace in row {
-                if workspace.contains(hwnd) {
+                if workspace.contains(handle) {
                     return Some(workspace);
                 }
             }
@@ -309,10 +309,10 @@ impl WorkspaceGrid {
         None
     }
 
-    pub fn get_by_window_id_mut(&mut self, hwnd: WindowHandle) -> Option<&mut DesktopWorkspace> {
+    pub fn get_by_window_id_mut(&mut self, handle: WindowHandle) -> Option<&mut DesktopWorkspace> {
         for row in &mut self.0 {
             for workspace in row {
-                if workspace.contains(hwnd) {
+                if workspace.contains(handle) {
                     return Some(workspace);
                 }
             }
@@ -368,13 +368,13 @@ impl DesktopWorkspace {
     }
 
     /// Whether the window with the given handle belongs to this workspace.
-    pub fn contains(&self, hwnd: WindowHandle) -> bool {
-        self.windows.iter().any(|id| id.hwnd == hwnd)
+    pub fn contains(&self, handle: WindowHandle) -> bool {
+        self.windows.iter().any(|id| id.handle == handle)
     }
 
     /// Removes the window with the given handle, returning its identity if it was here.
-    pub fn remove(&mut self, hwnd: WindowHandle) -> Option<WindowIdentity> {
-        let idx = self.windows.iter().position(|id| id.hwnd == hwnd)?;
+    pub fn remove(&mut self, handle: WindowHandle) -> Option<WindowIdentity> {
+        let idx = self.windows.iter().position(|id| id.handle == handle)?;
         Some(self.windows.remove(idx))
     }
 }

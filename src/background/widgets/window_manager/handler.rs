@@ -133,18 +133,18 @@ impl crate::tauri_handlers::Handlers {
         set_app_windows_positions(
             positions
                 .into_iter()
-                .map(|(id, rect)| (id.hwnd, rect))
+                .map(|(id, rect)| (id.handle, rect))
                 .collect(),
         )
     }
 
     pub fn wm_set_stack_active_window(
         webview: tauri::WebviewWindow,
-        hwnd: WindowIdentity,
+        id: WindowIdentity,
     ) -> Result<()> {
         request_widget_permission(&webview, WidgetPerm::ManageAppWindows)?;
         // destroyed or its handle reused by another window: nothing to activate
-        let Ok(window) = Window::try_from(&hwnd) else {
+        let Ok(window) = Window::try_from(&id) else {
             return Ok(());
         };
         WM_STATE.lock().set_stack_active_window(&window)?;

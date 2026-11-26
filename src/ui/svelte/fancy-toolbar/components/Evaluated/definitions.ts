@@ -110,9 +110,10 @@ export function parseComponent(value: unknown): ParsedComponent | null {
 }
 
 const ComponentCreatorScope = {
-  icon: (arg1?: unknown, arg2?: unknown) => ({
+  // legacy function, was not removed for backguard compatibility
+  icon: (arg1?: unknown) => ({
     [COMPONENT_KEY]: ObjectComponentKind.Icon,
-    props: EvaluatedReactIconPropsSchema.parse({ name: arg1, size: arg2 }),
+    props: EvaluatedReactIconPropsSchema.parse({ name: arg1 }),
   }),
   Icon: (arg: unknown) => ({
     [COMPONENT_KEY]: ObjectComponentKind.Icon,

@@ -109,14 +109,14 @@ impl TwmState {
                     };
 
                     for id in &workspace.windows {
-                        if tree.contains(id.hwnd) {
+                        if tree.contains(id.handle) {
                             continue;
                         }
-                        let window = Window::from(id.hwnd);
+                        let window = Window::from(id.handle);
                         if should_be_managed(&window) {
                             let residual = tree.add_to_tiled(*id);
                             for w in residual {
-                                tree.add_to_floating(w.hwnd);
+                                tree.add_to_floating(w.handle);
                             }
                         }
                     }
@@ -168,15 +168,15 @@ impl TwmState {
         tree.restore_runtime_indexes();
 
         let residual = tree.retain_windows(|id| {
-            workspace_windows.contains(id) && should_be_managed(&Window::from(id.hwnd))
+            workspace_windows.contains(id) && should_be_managed(&Window::from(id.handle))
         });
         for w in residual {
-            tree.add_to_floating(w.hwnd);
+            tree.add_to_floating(w.handle);
         }
 
         for id in stored.floating {
-            if workspace_windows.contains(&id) && !tree.contains(id.hwnd) {
-                tree.add_to_floating(id.hwnd);
+            if workspace_windows.contains(&id) && !tree.contains(id.handle) {
+                tree.add_to_floating(id.handle);
             }
         }
         Some(tree)
@@ -274,7 +274,7 @@ impl TwmState {
             .find(|node| {
                 matches!(node.kind, TwmNodeKind::Leaf | TwmNodeKind::Stack)
                     && node.windows.iter().any(|w| {
-                        Window::from(w.hwnd)
+                        Window::from(w.handle)
                             .slu_category()
                             .is_some_and(|c| c == searching)
                     })
@@ -369,7 +369,7 @@ impl TwmState {
                 } else {
                     let residual = tree.add_to_tiled(window.id());
                     for w in residual {
-                        tree.add_to_floating(w.hwnd);
+                        tree.add_to_floating(w.handle);
                     }
                 }
             }
@@ -380,7 +380,7 @@ impl TwmState {
                 if !placed {
                     let residual = tree.add_to_tiled(identity);
                     for w in residual {
-                        tree.add_to_floating(w.hwnd);
+                        tree.add_to_floating(w.handle);
                     }
                 }
             }
@@ -405,8 +405,8 @@ impl TwmState {
 
         let residual = tree.add_to_tiled(window.id());
         for w in residual {
-            tree.add_to_floating(w.hwnd);
-            let residual_window = Window::from(w.hwnd);
+            tree.add_to_floating(w.handle);
+            let residual_window = Window::from(w.handle);
             twm_set_rect_to_float_initial_size(&residual_window, &residual_window.monitor())
                 .log_error();
         }
@@ -419,8 +419,8 @@ impl TwmState {
             if tree.contains(hwnd) {
                 let residual = tree.remove_window(hwnd);
                 for w in residual {
-                    tree.add_to_floating(w.hwnd);
-                    let residual_window = Window::from(w.hwnd);
+                    tree.add_to_floating(w.handle);
+                    let residual_window = Window::from(w.handle);
                     twm_set_rect_to_float_initial_size(
                         &residual_window,
                         &residual_window.monitor(),
@@ -613,7 +613,7 @@ impl TwmState {
         for w in windows {
             let residuals = new_layout.add_to_tiled(w);
             for r in residuals {
-                new_layout.add_to_floating(r.hwnd);
+                new_layout.add_to_floating(r.handle);
             }
         }
 
@@ -683,7 +683,7 @@ impl TwmState {
     ) -> Option<WindowHandle> {
         let tree = self.state.workspaces.get(workspace_id)?;
         let node_id = tree.get_nearest_leaf_to_rect(rect)?;
-        tree.face_of_node(node_id).map(|face| face.hwnd)
+        tree.face_of_node(node_id).map(|face| face.handle)
     }
 
     pub fn get_nearest_tiled_window_at_side(
@@ -791,7 +791,7 @@ impl TwmState {
             })
             .min_by_key(|&(_, score)| score)
             .and_then(|(node_id, _)| tree.face_of_node(node_id))
-            .map(|face| face.hwnd)
+            .map(|face| face.handle)
             .filter(|&face| face != source_id)
     }
 
@@ -812,8 +812,8 @@ impl TwmState {
                 }
 
                 if let Some(active) = node.active_window {
-                    MINIMIZED_BY_STACK.remove_sync(&active.hwnd);
-                    let window = Window::from(active.hwnd);
+                    MINIMIZED_BY_STACK.remove_sync(&active.handle);
+                    let window = Window::from(active.handle);
                     // only sanitizes visibility, never activates: focus is the caller's job
                     // (see `reveal_stack_window`).
                     if window.is_minimized() {
@@ -828,8 +828,8 @@ impl TwmState {
 
                     for w in &node.windows {
                         if *w != active {
-                            let _ = MINIMIZED_BY_STACK.insert_sync(w.hwnd);
-                            Window::from(w.hwnd)
+                            let _ = MINIMIZED_BY_STACK.insert_sync(w.handle);
+                            Window::from(w.handle)
                                 .set_state(WindowState::ForceMinimized)
                                 .log_error();
                         }
@@ -851,14 +851,14 @@ impl TwmState {
 
         // Already active: also covers the `WindowUnminimizedByUser` echo of `restore_stacks`
         // restoring it, which must not steal the focus.
-        if node.kind != TwmNodeKind::Stack || node.active_window.is_some_and(|w| w.hwnd == hwnd) {
+        if node.kind != TwmNodeKind::Stack || node.active_window.is_some_and(|w| w.handle == hwnd) {
             return Ok(());
         }
 
         let identity = node
             .windows
             .iter()
-            .find(|w| w.hwnd == hwnd)
+            .find(|w| w.handle == hwnd)
             .copied()
             .ok_or("Window not in its node")?;
         node.active_window = Some(identity);
@@ -896,7 +896,7 @@ impl TwmState {
         let next = node.windows[next_idx];
         node.active_window = Some(next);
 
-        Self::reveal_stack_window(&Window::from(next.hwnd));
+        Self::reveal_stack_window(&Window::from(next.handle));
         Self::send(TwmStateEvent::Changed);
         Ok(())
     }

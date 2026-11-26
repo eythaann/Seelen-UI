@@ -49,7 +49,7 @@
       style:transform-origin="left top"
     >
       <div class="task-switcher">
-        {#each globalState.windows as window, index (window.hwnd)}
+        {#each globalState.windows as window, index (window.id)}
           <TaskItem task={window} {index} />
         {/each}
       </div>

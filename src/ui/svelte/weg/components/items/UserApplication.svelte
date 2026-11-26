@@ -21,7 +21,7 @@
     class="weg-split-items"
     style="display: flex; align-items: center; gap: {settings?.spaceBetweenItems ?? 0}px;"
   >
-    {#each windows as win (win.hwnd)}
+    {#each windows as win (win.id)}
       <UserApplicationItem {item} windows={[win]} />
     {/each}
   </div>

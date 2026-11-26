@@ -86,8 +86,8 @@ impl AppPreviewsManager {
 
     fn init(&mut self) -> Result<()> {
         let apps = UserAppsManager::instance();
-        for hwnd in apps.interactable_windows.map(|window| window.hwnd) {
-            self.register_window(hwnd);
+        for identity in apps.interactable_windows.map(|window| window.id) {
+            self.register_window(identity);
         }
 
         UserAppsManager::subscribe(|event| {
@@ -96,8 +96,8 @@ impl AppPreviewsManager {
                 UserAppWinEvent::Added(hwnd) => {
                     let identity = UserAppsManager::instance()
                         .interactable_windows
-                        .find_and_clone(|window| window.hwnd.hwnd == hwnd)
-                        .map(|window| window.hwnd);
+                        .find_and_clone(|window| window.id.handle == hwnd)
+                        .map(|window| window.id);
                     if let Some(hwnd) = identity {
                         manager.register_window(hwnd);
                     }
@@ -126,7 +126,7 @@ impl AppPreviewsManager {
     }
 
     fn register_window(&self, identity: WindowIdentity) {
-        let hwnd = identity.hwnd;
+        let hwnd = identity.handle;
         let capture = debounce(
             move |_| {
                 Self::instance().queue_capture(hwnd);
@@ -239,7 +239,7 @@ impl AppPreviewsManager {
 
     pub fn preview(&self, identity: WindowIdentity) -> Option<UserAppWindowPreview> {
         self.previews
-            .get(&identity.hwnd, |entry| {
+            .get(&identity.handle, |entry| {
                 if entry.hwnd == identity {
                     entry.preview.clone()
                 } else {
@@ -289,7 +289,7 @@ struct PreviewEntry {
 fn interactable_identities() -> HashMap<WindowHandle, WindowIdentity> {
     UserAppsManager::instance()
         .interactable_windows
-        .map(|w| (w.hwnd.hwnd, w.hwnd))
+        .map(|w| (w.id.handle, w.id))
         .into_iter()
         .collect()
 }

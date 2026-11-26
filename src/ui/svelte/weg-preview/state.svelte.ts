@@ -44,7 +44,7 @@ $effect.root(() => {
 
 const currentInteractables = $derived.by(() => {
   const selected = new Set(hwnds);
-  return interactables.value?.filter((window) => selected.has(window.hwnd)) ?? [];
+  return interactables.value?.filter((window) => selected.has(window.id)) ?? [];
 });
 const liveEnabled = $derived(performanceMode.value === "Disabled");
 const visiblePreviews = $derived.by(() => {

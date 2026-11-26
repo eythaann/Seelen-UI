@@ -26,7 +26,7 @@ Widget.self.onTrigger(async ({ desiredPosition, alignX, alignY, customArgs }) =>
 // held OS focus before.
 let focusedAppHwnd = $state<string | null>(null);
 subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: focused }) => {
-  focusedAppHwnd = focused.hwnd;
+  focusedAppHwnd = focused.id;
 });
 
 $effect.root(() => {

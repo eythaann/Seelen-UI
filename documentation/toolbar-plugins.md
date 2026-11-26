@@ -16,8 +16,8 @@ plugin:
     - Notifications
   template: >-
     return [
-      dndActive ? icon("TbZzz") : null,
-      count > 0 ? icon("MdNotificationsActive") : icon("MdOutlineNotifications"),
+      dndActive ? Icon({ name: "TbZzz" }) : null,
+      Icon({ name: count > 0 ? "MdNotificationsActive" : "MdOutlineNotifications" }),
     ]
   badge: "return count > 0 ? count : null"
   tooltip: 'return [t("placeholder.notifications"), ": ", count]'
@@ -53,6 +53,7 @@ as top-level variables — no `scope.` prefix needed.
 | `Bluetooth`         | `devices`, `getIconNameForBTDevice(device)`                                                                     | `GetBluetoothDevices`                                |
 | `Power`             | `power` (`PowerStatus`), `powerMode`, `batteries` (`Battery[]`)                                                 | `GetPowerStatus`, `GetPowerMode`, `GetBatteries`     |
 | `FocusedApp`        | `focusedApp`                                                                                                    | `GetFocusedApp`                                      |
+| `Windows`           | `windows` (`UserAppWindow[]`: `id`, `title`, `umid`, `process.path`, …)                                         | `GetUserAppWindows`                                  |
 | `Workspaces`        | `workspaces`, `activeWorkspace`                                                                                 | `StateGetVirtualDesktops`                            |
 | `Disk`              | `disks` (`Disk[]`)                                                                                              | `GetSystemDisks`                                     |
 | `NetworkStatistics` | `networkStatistics`                                                                                             | `GetSystemNetwork`                                   |
@@ -159,7 +160,8 @@ Run with `{ ...resolvedScopes, ...resolvedRemoteData, t }`, where `t(key, args)`
 - Strings, numbers, and booleans are stringified directly.
 - Arrays are flattened and each item rendered in sequence.
 - Special tagged objects render as real UI elements, produced by helper functions available in scope:
-  - `icon(name, size)` / `Icon(...)` — an icon from the bundled icon set
+  - `Icon({ name })` — an icon from the bundled icon set. `icon(name)` is a legacy alias of `Icon({ name })`, kept only
+    for backward compatibility
   - `AppIcon(...)` — an application icon
   - `Image({ path | url, version? })` — an image element; pass `version` (any string or number that changes with the
     file contents) to force a reload when the file is overwritten in place
@@ -169,13 +171,13 @@ Run with `{ ...resolvedScopes, ...resolvedRemoteData, t }`, where `t(key, args)`
 ```js title="src/static/plugins/tb_cpu_usage/plugin/template.js"
 const totalUsage = cores.reduce((total, core) => total + core.usage, 0);
 const used = totalUsage / cores.length;
-return [icon("LuCpu"), " ", used.toFixed(0) + "%"];
+return [Icon({ name: "LuCpu" }), " ", used.toFixed(0) + "%"];
 ```
 
 ### Canvas script — `render`
 
 `render` is an alternative to `template` for cases where a plugin needs pixel-level control (custom icons, waveforms,
-sparklines, etc.) instead of composing `icon()`/`Image()`/`Button()`/`Group()` elements. If a plugin sets `render`, it
+sparklines, etc.) instead of composing `Icon()`/`Image()`/`Button()`/`Group()` elements. If a plugin sets `render`, it
 takes priority over `template` for the item's main content — `template` is ignored in that case. `tooltip`, `badge`, and
 the action scripts are unaffected and keep working exactly as described elsewhere on this page.
 

@@ -138,7 +138,11 @@ impl ResourceManager {
             }
             ResourceKind::Plugin => self.emit_plugins(),
             ResourceKind::IconPack => self.emit_icon_packs(),
-            ResourceKind::Wallpaper => self.emit_wallpapers(),
+            ResourceKind::Wallpaper => {
+                self.emit_wallpapers();
+                // e.g. a thumbnail was just generated for the current wallpaper
+                crate::virtual_desktops::native_wallpaper::sync();
+            }
             ResourceKind::SoundPack => {
                 // feature not implemented
             }

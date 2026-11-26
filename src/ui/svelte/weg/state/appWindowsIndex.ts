@@ -9,7 +9,7 @@ export class AppWindowsIndex {
 
   constructor(windows: UserAppWindow[]) {
     for (const [index, window] of windows.entries()) {
-      this.sourceOrder.set(window.hwnd, index);
+      this.sourceOrder.set(window.id, index);
       if (window.umid) {
         AppWindowsIndex.add(this.byUmid, window.umid, window);
         continue;
@@ -27,8 +27,8 @@ export class AppWindowsIndex {
     for (const path of [item.relaunch?.command, item.path]) {
       if (path) windows.push(...(this.byPath.get(path.toLowerCase()) ?? []));
     }
-    const uniqueWindows = [...new Map(windows.map((window) => [window.hwnd, window])).values()]
-      .sort((a, b) => this.sourceOrder.get(a.hwnd)! - this.sourceOrder.get(b.hwnd)!);
+    const uniqueWindows = [...new Map(windows.map((window) => [window.id, window])).values()]
+      .sort((a, b) => this.sourceOrder.get(a.id)! - this.sourceOrder.get(b.id)!);
     this.matches.set(item, uniqueWindows);
     return uniqueWindows;
   }

@@ -14,6 +14,7 @@ use uuid::Uuid;
 use crate::error::{Result, ResultLogExt};
 use crate::get_tokio_handle;
 use crate::state::{FULL_STATE, StateEvent, StateManager};
+use crate::system_modules::monitors::MonitorManager;
 
 use crate::virtual_desktops::domain::VirtualDesktopEvent;
 
@@ -54,6 +55,19 @@ impl WorkspaceWallpapersManager {
                 Self::on_settings_changed();
             }
         });
+
+        // Keep the native wallpaper in sync with the primary monitor's active workspace
+        super::VdManager::subscribe(|event| match event {
+            VirtualDesktopEvent::DesktopChanged { .. }
+            | VirtualDesktopEvent::SwitchingFinished
+            | VirtualDesktopEvent::StateChanged
+            | VirtualDesktopEvent::DesktopCreated(_)
+            | VirtualDesktopEvent::DesktopDestroyed(_) => super::native_wallpaper::sync(),
+            _ => {}
+        });
+        MonitorManager::subscribe(|_| super::native_wallpaper::sync());
+        // the manager is still being created, so the first sync is deferred
+        get_tokio_handle().spawn(async { super::native_wallpaper::sync() });
     }
 
     /// Handle settings changes

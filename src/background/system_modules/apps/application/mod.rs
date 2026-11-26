@@ -70,18 +70,18 @@ impl UserAppsManager {
 
     pub fn contains_win(&self, window: &Window) -> bool {
         let hwnd = window.handle();
-        self.interactable_windows.any(|w| w.hwnd.hwnd == hwnd)
+        self.interactable_windows.any(|w| w.id.handle == hwnd)
     }
 
     /// Single locked check-and-insert, so a window reported twice is not duplicated.
     fn add_window(&self, mut window: UserAppWindow) {
-        let hwnd = window.hwnd.hwnd;
+        let hwnd = window.id.handle;
         if self.platform.is_focused(hwnd) {
             window.last_foreground_at = now_millis();
         }
         let inserted = self
             .interactable_windows
-            .get_or_insert_with(|w| w.hwnd.hwnd == hwnd, || window);
+            .get_or_insert_with(|w| w.id.handle == hwnd, || window);
         if inserted {
             Self::send(UserAppWinEvent::Added(hwnd));
         }
@@ -90,7 +90,7 @@ impl UserAppsManager {
     fn remove_window(&self, hwnd: WindowHandle) {
         let mut removed = false;
         self.interactable_windows.retain(|w| {
-            let keep = w.hwnd.hwnd != hwnd;
+            let keep = w.id.handle != hwnd;
             removed |= !keep;
             keep
         });
@@ -104,7 +104,7 @@ impl UserAppsManager {
         // The foreground change clears the attention while holding this same lock, so the
         // attention checks below can not race with the window being activated.
         self.interactable_windows.for_each(|data| {
-            if data.hwnd.hwnd == hwnd {
+            if data.id.handle == hwnd {
                 changed = self.update_window_data(data, change.clone());
             }
         });
@@ -156,7 +156,7 @@ impl UserAppsManager {
                 }
                 let allowed = match attention {
                     // the active window is already in front of the user
-                    WindowAttention::Flashing => !self.platform.is_focused(data.hwnd.hwnd),
+                    WindowAttention::Flashing => !self.platform.is_focused(data.id.handle),
                     // only a flash still in progress can end highlighted, not an activated window
                     WindowAttention::Highlighted => data.attention == WindowAttention::Flashing,
                     WindowAttention::None => true,
@@ -186,7 +186,7 @@ impl UserAppsManager {
                 .and_then(|umid| self.platform.badge_value(umid));
             if w.badge_value != value {
                 w.badge_value = value;
-                updated.push(w.hwnd.hwnd);
+                updated.push(w.id.handle);
             }
         });
         for hwnd in updated {

@@ -84,6 +84,16 @@ async fn _process_action(command: SvcAction) -> Result<()> {
         }
         SvcAction::HideNativeTaskbar => crate::shutdown::hide_native_taskbar(),
         SvcAction::RestoreNativeTaskbar => crate::shutdown::restore_native_taskbar()?,
+        SvcAction::SetNativeWallpaper { path } => {
+            tokio::task::spawn_blocking(move || crate::native_wallpaper::set(path))
+                .await
+                .map_err(|err| err.to_string())??
+        }
+        SvcAction::RestoreNativeWallpaper => {
+            tokio::task::spawn_blocking(crate::native_wallpaper::restore)
+                .await
+                .map_err(|err| err.to_string())??
+        }
     }
     Ok(())
 }

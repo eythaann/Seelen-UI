@@ -48,8 +48,7 @@ macro_rules! slu_events_declaration {
         }
 
         #[derive(Serialize)]
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
-        #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
+        #[cfg_attr(feature = "gen-binds", derive(ts_rs::TS), ts(export))]
         pub enum SeelenEventPayload {
             $(
                 #[serde(rename = $value)]
@@ -171,7 +170,7 @@ slu_events_declaration! {
 
 /// Credentials of a webview to connect to the global events websocket.
 #[derive(Debug, Clone, Serialize)]
-#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
+#[cfg_attr(feature = "gen-binds", derive(ts_rs::TS), ts(export))]
 #[serde(rename_all = "camelCase")]
 pub struct SelfEventsToken {
     /// Identifies the webview, sent as the `token` query param.

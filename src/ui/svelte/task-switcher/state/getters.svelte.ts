@@ -23,9 +23,9 @@ widget.onVisibilityChange((visible) => {
   else previews.stop();
 });
 
-export const focusedWinId = lazyRune(async () => (await invoke(SeelenCommand.GetFocusedApp)).hwnd);
+export const focusedWinId = lazyRune(async () => (await invoke(SeelenCommand.GetFocusedApp)).id);
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
-  focusedWinId.value = e.payload.hwnd;
+  focusedWinId.value = e.payload.id;
 });
 
 await Promise.all([
