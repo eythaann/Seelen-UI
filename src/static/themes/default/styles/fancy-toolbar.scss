@@ -1,9 +1,7 @@
 @mixin fade {
   opacity: 1;
   scale: 1;
-  transition:
-    opacity 200ms ease,
-    scale 200ms ease;
+  transition: opacity 200ms ease, scale 200ms ease;
 
   &[data-mounting] {
     @starting-style {

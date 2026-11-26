@@ -56,7 +56,7 @@
       onclick={onClickCommunications}
       title={$t("device.comunications")}
     >
-      <Icon iconName="IoCall" style="transform: scaleX(-1);" />
+      <Icon iconName="IoCall" style="transform: scaleX(-1)" />
     </button>
   </div>
   <span class="media-device-name">{device.name}</span>

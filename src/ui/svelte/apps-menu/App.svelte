@@ -1,6 +1,6 @@
 <script lang="ts">
   import { t } from "./i18n";
-  import { Widget, invoke, SeelenCommand } from "@seelen-ui/lib";
+  import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import StartMenuBody from "./components/layout/StartMenuBody.svelte";
   import StartMenuFooter from "./components/layout/StartMenuFooter.svelte";
   import { globalState } from "./state/mod.svelte";
@@ -107,8 +107,7 @@
     <button
       data-skin="default"
       onclick={() => {
-        globalState.view =
-          globalState.view === StartView.Favorites ? StartView.All : StartView.Favorites;
+        globalState.view = globalState.view === StartView.Favorites ? StartView.All : StartView.Favorites;
         searchState.searchQuery = "";
       }}
     >

@@ -95,9 +95,7 @@
         </div>
         <div class="network-section-entries">
           <!-- sorted with the default route first, so collapsed shows the one in use -->
-          {#each adaptersExpanded
-            ? globalState.ethernetAdapters
-            : globalState.ethernetAdapters.slice(0, 1) as adapter (adapter.name)}
+          {#each adaptersExpanded ? globalState.ethernetAdapters : globalState.ethernetAdapters.slice(0, 1) as adapter (adapter.name)}
             <AdapterEntry {adapter} />
           {/each}
         </div>

@@ -1,17 +1,9 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import {
-    type WegPluginItem as WegPluginPayload,
-    type WidgetId,
-    CanvasSize,
-  } from "@seelen-ui/lib/types";
+  import { CanvasSize, type WegPluginItem as WegPluginPayload, type WidgetId } from "@seelen-ui/lib/types";
   import type { PluginWegItem } from "../../types.ts";
   import { t } from "../../i18n/index.ts";
-  import {
-    getEditCustomIconEntry,
-    getEmptyTrashBinEntry,
-    getMenuForItem,
-  } from "../../generalMenu.ts";
+  import { getEditCustomIconEntry, getEmptyTrashBinEntry, getMenuForItem } from "../../generalMenu.ts";
   import { evalActionSanboxed, triggerWidget } from "../../pluginEval.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
@@ -21,9 +13,9 @@
   import {
     compileSandboxed,
     evalSanboxed,
+    evalToStr,
     getSystemTokens,
     getThemeTokens,
-    evalToStr,
   } from "libs/ui/svelte/utils/sandbox.ts";
 
   interface Props {

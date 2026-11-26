@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { WallpaperKind, type PhysicalMonitor } from "@seelen-ui/lib/types";
+  import { type PhysicalMonitor, WallpaperKind } from "@seelen-ui/lib/types";
   import { Wallpaper } from "libs/ui/svelte/components/Wallpaper";
   import { gState } from "../../state.svelte.ts";
   import { t } from "../../i18n/index.ts";

@@ -45,14 +45,10 @@ test("clips on the bottom and sides never expand a previously constrained surfac
 });
 
 test("the clip viewport excludes transformed borders and scrollbars", () => {
-  const viewport = contentViewport({ left: 10, top: 20, right: 210, bottom: 120 }, {
-    offsetWidth: 400,
-    offsetHeight: 200,
-    clientLeft: 4,
-    clientTop: 2,
-    clientWidth: 380,
-    clientHeight: 180,
-  });
+  const viewport = contentViewport(
+    { left: 10, top: 20, right: 210, bottom: 120 },
+    { offsetWidth: 400, offsetHeight: 200, clientLeft: 4, clientTop: 2, clientWidth: 380, clientHeight: 180 },
+  );
   assert.deepEqual(viewport, { left: 12, top: 21, right: 202, bottom: 111 });
 });
 

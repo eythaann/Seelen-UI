@@ -307,8 +307,7 @@ function InputRenderer({ widgetId, def, values, onConfigChange }: InputRenderer)
                 <Button
                   key={value}
                   type={value === (values[def.key] ?? def.defaultValue) ? "primary" : "default"}
-                  onClick={() =>
-                    onConfigChange(def.key, value)}
+                  onClick={() => onConfigChange(def.key, value)}
                 >
                   {icon ? <Icon iconName={icon as any} /> : value}
                 </Button>

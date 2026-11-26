@@ -1,7 +1,7 @@
 <script lang="ts">
   import { convertFileSrc } from "@tauri-apps/api/core";
   import type { IconName } from "libs/ui/icons";
-  import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon } from "libs/ui/svelte/components/Icon";
   import { styleToString } from "../../utils.ts";
   import Unknown from "./Unknown.svelte";
   import { ObjectComponentKind, parseComponent } from "./definitions.ts";

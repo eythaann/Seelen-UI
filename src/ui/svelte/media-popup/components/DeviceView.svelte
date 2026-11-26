@@ -2,7 +2,7 @@
   import { globalState } from "../state.svelte";
   import { t } from "../i18n";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { Icon, FileIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon } from "libs/ui/svelte/components/Icon";
   import VolumeControl from "./VolumeControl.svelte";
   import { groupSessionsByApp } from "../mixer";
 

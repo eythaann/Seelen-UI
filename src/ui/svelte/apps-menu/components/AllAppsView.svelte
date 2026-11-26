@@ -2,12 +2,7 @@
   import { t } from "../i18n";
   import AppItem from "./AppItem.svelte";
   import AppSettingItem from "./AppSettingItem.svelte";
-  import {
-    searchState,
-    getResultKey,
-    isSystemSetting,
-    type SearchResult,
-  } from "../state/search.svelte";
+  import { getResultKey, isSystemSetting, type SearchResult, searchState } from "../state/search.svelte";
   import { globalState } from "../state/mod.svelte";
   import { untrack } from "svelte";
   import { handleGridKeyDown, type SelectionScope } from "../keyboard-navigation";

@@ -31,13 +31,11 @@ export function LayoutSelector() {
         }
         description={usingLayout ? <ResourceText text={usingLayout.metadata.description} /> : undefined}
       />
-      {
-        /* <div class={cs.monitor}>
+      {/* <div class={cs.monitor}>
         <div class={cs.screen}>
           {usingLayout && <TwmNode node={(usingLayout.plugin as TwmPlugin).structure} />}
         </div>
-      </div> */
-      }
+      </div> */}
     </SettingsGroup>
   );
 }
