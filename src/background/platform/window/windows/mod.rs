@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowEnumerator;
 mod interactable;
 mod snapshot;
 
@@ -38,7 +39,7 @@ use crate::{
         process::{Process, WindowsProcessExt},
     },
     system_modules::start::StartMenuManager,
-    windows_api::{WindowEnumerator, WindowsApi, types::AppUserModelId},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 use super::{Window, WindowState};
@@ -61,7 +62,7 @@ impl NativeWindow {
     }
 
     pub fn enumerate() -> Result<Vec<Self>> {
-        WindowEnumerator::new().map(Self)
+        Ok(WindowEnumerator::new().map(Self)?)
     }
 
     pub fn handle(&self) -> WindowHandle {
@@ -122,7 +123,7 @@ impl NativeWindow {
     }
 
     pub fn children(&self) -> Result<Vec<Self>> {
-        WindowEnumerator::new().with_parent(self.0).map(Self)
+        Ok(WindowEnumerator::new().with_parent(self.0).map(Self)?)
     }
 
     pub fn monitor(&self) -> Monitor {

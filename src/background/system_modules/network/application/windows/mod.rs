@@ -1,3 +1,4 @@
+use slu_utils::windows::Com;
 mod adapters;
 mod interface_type;
 
@@ -33,7 +34,6 @@ use windows::{
 use crate::{
     error::{Result, ResultLogExt},
     system_modules::network::domain::{NetworkSysEvent, NetworkSystem},
-    windows_api::Com,
 };
 
 use self::adapters::adapter_to_slu_net_adapter;

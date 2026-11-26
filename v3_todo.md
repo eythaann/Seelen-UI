@@ -283,7 +283,13 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
       `win-screenshot`, `win-hotkeys` to `[target.'cfg(windows)'.dependencies]`.
 - [ ] `libs/positioning` (9 Win32 files) and `libs/slu-ipc` (5): same trait + Windows impl pattern, or gate them.
 - [ ] `libs/slu-ipc` `SvcAction` uses `hwnd`: introduce an opaque OS-agnostic `WindowId`.
-- [ ] `libs/utils` (1 ref) review.
+- [ ] `libs/utils` review. In progress: `slu_utils::windows` (`#[cfg(windows)]`, `windows` crate is a `cfg(windows)`
+      dependency) is the home of stateless Windows API helpers shared by several binaries (`set_foreground`,
+      `AppBarData`, `Com`/`ComThread`, `WindowsString`, `WindowEnumerator`/`MonitorEnumerator`). The duplicated
+      `app_bar`, `com`, `iterator` and `string_utils` of the background and the service moved there; errors are
+      `windows::core::Result` or generic over the binary error (`Com::run_with_context`, `ComThread<S, E>`). The
+      registered bars tracking stays in the background (`widgets/webview/windows.rs`).
+  - Pending: verify `cargo check -p slu-utils --target x86_64-unknown-linux-gnu`.
 - [ ] Verify `cargo check` still passes on Windows and, as a goal, that
       `cargo check --target
       x86_64-unknown-linux-gnu -p seelen-ui` fails only with "trait not implemented" errors

@@ -1,8 +1,3 @@
-pub mod app_bar;
-pub mod com;
-pub mod iterator;
-pub mod string_utils;
-
 use std::{ffi::OsString, os::windows::ffi::OsStringExt, path::PathBuf};
 
 use windows::Win32::{
@@ -30,7 +25,7 @@ use windows_core::{Owned, PCWSTR};
 
 use crate::error::{Result, WindowsResultExt};
 
-use self::string_utils::WindowsString;
+use slu_utils::windows::WindowsString;
 
 pub struct WindowsApi;
 

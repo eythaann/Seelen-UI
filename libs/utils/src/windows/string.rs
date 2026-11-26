@@ -5,12 +5,12 @@ use std::{
 
 use windows::core::{HSTRING, PCWSTR, PWSTR};
 
+/// Null terminated UTF-16 string, to pass strings to and read them from Win32.
 #[derive(Debug, Clone)]
 pub struct WindowsString {
     pub inner: Vec<u16>,
 }
 
-#[allow(dead_code)]
 impl WindowsString {
     pub fn new_to_fill(capacity: usize) -> Self {
         Self {
@@ -18,6 +18,7 @@ impl WindowsString {
         }
     }
 
+    #[allow(clippy::should_implement_trait)]
     pub fn from_str(s: &str) -> Self {
         Self {
             inner: s.encode_utf16().chain(Some(0)).collect(),

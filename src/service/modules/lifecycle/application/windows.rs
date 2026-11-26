@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::{
     ffi::c_void,
     sync::{Arc, OnceLock},
@@ -24,7 +25,6 @@ use crate::{
     error::Result,
     log_error,
     modules::lifecycle::domain::{LifecycleEvent, LifecycleSystem},
-    windows_api::string_utils::WindowsString,
 };
 
 type EventCallback = Box<dyn Fn(LifecycleEvent) + Send + Sync>;

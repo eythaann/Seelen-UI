@@ -1,3 +1,4 @@
+use slu_utils::windows::Com;
 use windows::Win32::{
     Foundation::{VARIANT_FALSE, VARIANT_TRUE},
     System::TaskScheduler::{
@@ -8,11 +9,7 @@ use windows::Win32::{
 };
 use windows_core::{BSTR, Interface};
 
-use crate::{
-    error::Result,
-    modules::startup::domain::StartupSystem,
-    windows_api::{WindowsApi, com::Com},
-};
+use crate::{error::Result, modules::startup::domain::StartupSystem, windows_api::WindowsApi};
 
 const GROUP_FOLDER: &str = "\\Seelen";
 const OLD_APP_TASK_NAME: &str = "Seelen-UI";

@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowEnumerator;
 mod event;
 
 use event::WinEvent;
@@ -19,7 +20,7 @@ use windows::Win32::{
 
 use crate::{
     app::emit_to_webviews, error::ResultLogExt, platform::window::Window, state::FULL_STATE,
-    utils::spawn_named_thread, widgets::weg::SeelenWeg, windows_api::WindowEnumerator,
+    utils::spawn_named_thread, widgets::weg::SeelenWeg,
 };
 
 use super::{HookManager, WindowEvent};

@@ -1,17 +1,10 @@
+use slu_utils::windows::{AppBarData, AppBarDataState, WindowEnumerator};
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{SW_HIDE, SW_SHOWNORMAL},
 };
 
-use crate::{
-    error::Result,
-    modules::taskbar::domain::TaskbarSystem,
-    windows_api::{
-        WindowsApi,
-        app_bar::{AppBarData, AppBarDataState},
-        iterator::WindowEnumerator,
-    },
-};
+use crate::{error::Result, modules::taskbar::domain::TaskbarSystem, windows_api::WindowsApi};
 
 const PRIMARY_TASKBAR_CLASS: &str = "Shell_TrayWnd";
 const SECONDARY_TASKBAR_CLASS: &str = "Shell_SecondaryTrayWnd";

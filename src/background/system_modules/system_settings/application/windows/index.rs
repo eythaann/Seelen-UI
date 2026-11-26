@@ -1,6 +1,7 @@
 //! Searchable index of the Settings app pages and Control Panel applets, built from the
 //! Windows own indexes (already localized to the user's display language).
 
+use slu_utils::windows::Com;
 use std::{
     collections::{HashMap, HashSet},
     path::{Path, PathBuf},
@@ -16,11 +17,7 @@ use windows::Win32::{
 };
 use windows_core::Interface;
 
-use crate::{
-    error::Result,
-    utils::constants::SEELEN_COMMON,
-    windows_api::{Com, WindowsApi},
-};
+use crate::{error::Result, utils::constants::SEELEN_COMMON, windows_api::WindowsApi};
 
 use super::index_schema::{ApplicationInformation, PcSettingsIndex};
 

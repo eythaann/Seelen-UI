@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::path::PathBuf;
 
 use windows::{
@@ -12,7 +13,7 @@ use windows_core::Owned;
 
 use crate::{
     error::Result,
-    windows_api::{WindowsApi, string_utils::WindowsString, types::AppUserModelId},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 use super::Process;

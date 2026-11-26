@@ -1,3 +1,4 @@
+use slu_utils::windows::{Com, WindowsString};
 use std::time::Duration;
 
 use seelen_core::system_state::{ImeState, KeyboardLayout, SystemLanguage};
@@ -30,10 +31,10 @@ use windows::{
 use winreg::{RegKey, enums::HKEY_LOCAL_MACHINE};
 
 use crate::{
-    error::Result,
+    error::{AppError, Result},
     system_modules::languages::domain::{LanguagesSysEvent, LanguagesSystem},
     utils::spawn_named_thread,
-    windows_api::{Com, WindowsApi, string_utils::WindowsString},
+    windows_api::WindowsApi,
 };
 
 /// How often the active input profile and IME state are checked, the OS doesn't notify them.
@@ -111,11 +112,11 @@ struct Tsf;
 
 impl Tsf {
     fn tsf_profiles() -> Result<ITfInputProcessorProfiles> {
-        Com::create_instance(&CLSID_TF_InputProcessorProfiles)
+        Ok(Com::create_instance(&CLSID_TF_InputProcessorProfiles)?)
     }
 
     fn tsf_profile_mgr() -> Result<ITfInputProcessorProfileMgr> {
-        Com::create_instance(&CLSID_TF_InputProcessorProfiles)
+        Ok(Com::create_instance(&CLSID_TF_InputProcessorProfiles)?)
     }
 
     // active keyboard layout is set per thread, so we show the active layout for the foregrounded one.
@@ -330,7 +331,7 @@ impl Tsf {
     // ── Layout activation ────────────────────────────────────────────────────
 
     fn set_keyboard_layout(id: &str, handle: &str) -> Result<()> {
-        Com::run_with_context(|| unsafe {
+        Com::run_with_context::<_, _, AppError>(|| unsafe {
             let colon = handle.find(':').ok_or("invalid TSF tip: missing colon")?;
             let lang_id = u16::from_str_radix(&handle[..colon], 16)?;
             let rest = &handle[colon + 1..];

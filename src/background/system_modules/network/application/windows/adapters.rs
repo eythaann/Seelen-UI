@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::net::{Ipv4Addr, Ipv6Addr};
 
 use super::interface_type::InterfaceType;
@@ -14,7 +15,7 @@ use windows::Win32::{
     },
 };
 
-use crate::{error::Result, windows_api::string_utils::WindowsString};
+use crate::error::Result;
 
 /// `MIB_IF_ROW2.InterfaceAndOperStatusFlags` bits.
 const IF_FLAG_HARDWARE_INTERFACE: u8 = 1 << 0;

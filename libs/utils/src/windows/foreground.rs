@@ -1,6 +1,3 @@
-//! Windows-specific helpers shared between the background process and the service,
-//! for behavior that both need but that doesn't belong in either's own error/type system.
-
 use std::mem;
 
 use windows::Win32::{

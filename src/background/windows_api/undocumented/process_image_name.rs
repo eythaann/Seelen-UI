@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::ffi::OsString;
 
 use windows::Wdk::System::SystemInformation::{NtQuerySystemInformation, SYSTEM_INFORMATION_CLASS};
@@ -6,7 +7,7 @@ use windows::Win32::{
     Storage::FileSystem::QueryDosDeviceW,
 };
 
-use crate::{error::Result, windows_api::string_utils::WindowsString};
+use crate::error::Result;
 
 use super::WindowsApi;
 

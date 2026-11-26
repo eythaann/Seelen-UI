@@ -1,3 +1,4 @@
+use slu_utils::windows::{Com, WindowsString};
 mod audio_policy_config;
 mod process_image_name;
 mod quiet_hours_settings;
@@ -9,9 +10,9 @@ use windows::Win32::{
     Security::SE_DEBUG_NAME,
 };
 
-use crate::{error::Result, windows_api::string_utils::WindowsString};
+use crate::error::Result;
 
-use super::{Com, WindowsApi};
+use super::WindowsApi;
 
 impl WindowsApi {
     /// this function will only work on win32 platform, if using UWP/MSIX

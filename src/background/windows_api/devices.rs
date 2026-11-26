@@ -1,4 +1,5 @@
 use crossbeam_channel::{Receiver, Sender, bounded};
+use slu_utils::windows::WindowsString;
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
@@ -235,8 +236,6 @@ use windows::{
     },
     Win32::Foundation::{DEVPROPKEY, ERROR_GEN_FAILURE},
 };
-
-use super::string_utils::WindowsString;
 
 fn cr_to_error(cr: CONFIGRET) -> windows::core::Error {
     let win32_err = unsafe { CM_MapCrToWin32Err(cr, ERROR_GEN_FAILURE.0) };

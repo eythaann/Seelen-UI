@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::path::PathBuf;
 
 use windows::Win32::{
@@ -7,10 +8,7 @@ use windows::Win32::{
     UI::{Shell::FOLDERID_LocalAppData, WindowsAndMessaging::SW_MINIMIZE},
 };
 
-use crate::{
-    error::Result,
-    windows_api::{WindowsApi, string_utils::WindowsString},
-};
+use crate::{error::Result, windows_api::WindowsApi};
 
 pub fn prepare_process() -> Result<()> {
     WindowsApi::set_process_dpi_aware()?;

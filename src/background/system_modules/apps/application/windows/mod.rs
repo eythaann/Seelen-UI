@@ -1,3 +1,4 @@
+use slu_utils::windows::Com;
 mod flashing;
 
 use std::{collections::HashSet, sync::Arc, time::Duration};
@@ -14,7 +15,6 @@ use crate::{
     system_modules::apps::domain::{AppsSysEvent, AppsSystem, WindowChange},
     utils::{lock_free::TracedMutex, spawn_named_thread},
     windows_api::{
-        Com,
         input::Mouse,
         window_badges::{WindowBadges, WindowBadgesEvent},
         wpn_service::WpnService,

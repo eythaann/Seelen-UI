@@ -1,3 +1,4 @@
+use slu_utils::windows::{Com, WindowsString};
 use windows::{
     Win32::{
         Foundation::COLORREF,
@@ -14,7 +15,6 @@ use windows::{
 use crate::{
     error::Result,
     modules::native_wallpaper::domain::{NativeWallpaperSystem, OriginalWallpaper, Slideshow},
-    windows_api::{com::Com, string_utils::WindowsString},
 };
 
 /// `IDesktopWallpaper` lives in explorer, so a new instance is created on each call: a cached one
@@ -23,7 +23,7 @@ pub struct WindowsNativeWallpaper;
 
 impl WindowsNativeWallpaper {
     fn api(&self) -> Result<IDesktopWallpaper> {
-        Com::create_instance(&DesktopWallpaper)
+        Ok(Com::create_instance(&DesktopWallpaper)?)
     }
 
     /// `None` if no slideshow is running.

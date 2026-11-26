@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::sync::atomic::{AtomicIsize, AtomicU32, Ordering};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, LRESULT, WPARAM},
@@ -29,7 +30,7 @@ use crate::{
     widgets::manager::WIDGET_MANAGER,
 };
 
-use super::{WindowsApi, string_utils::WindowsString};
+use super::WindowsApi;
 
 pub static WM_SHELLHOOKMESSAGE: AtomicU32 = AtomicU32::new(u32::MAX);
 // pub const HSHELL_FULLSCREEN_ENTER: u32 = 53;

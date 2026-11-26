@@ -8,10 +8,17 @@ rust-version = "1.97"
 minisign = { workspace = true }
 sha2 = { workspace = true }
 base64 = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+log = { workspace = true }
+crossbeam-channel = { workspace = true }
 windows = { workspace = true, features = [
   "Win32_Foundation",
   "Win32_UI_WindowsAndMessaging",
   "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_Graphics_Gdi",
+  "Win32_System_Com",
+  "Win32_UI_Shell",
   "Win32_System_Threading",
 ] }
 

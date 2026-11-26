@@ -1,13 +1,15 @@
-use windows::Win32::{
-    Foundation::{HWND, LPARAM, RECT},
-    Graphics::Gdi::{HDC, HMONITOR},
-    UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
+use windows::{
+    Win32::{
+        Foundation::{HWND, LPARAM, RECT},
+        Graphics::Gdi::{EnumDisplayMonitors, HDC, HMONITOR},
+        UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
+    },
+    core::BOOL,
 };
-use windows_core::BOOL;
 
-use crate::{error::Result, windows_api::WindowsApi};
+type Result<T> = windows::core::Result<T>;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct WindowEnumerator {
     parent: Option<HWND>,
 }
@@ -132,7 +134,15 @@ impl MonitorEnumerator {
             }
         }
 
-        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
+        let lparam = LPARAM(&mut handles as *mut _ as isize);
+        let result =
+            unsafe { EnumDisplayMonitors(None, None, Some(get_handles_proc), lparam) }.ok();
+        // it can fail with a "fake" error (success code), see `filter_fake_error`
+        if let Err(err) = result
+            && err.code().is_err()
+        {
+            return Err(err);
+        }
         Ok(handles)
     }
 }
