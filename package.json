@@ -82,7 +82,7 @@
     "svelte-check": "^4.4.6",
     "toml": "^5.0.1",
     "tsx": "^4.19.3",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "yargs": "^18.0.0",
     "zod": "^4.6.7"
   }
