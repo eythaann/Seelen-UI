@@ -5,6 +5,7 @@ mod domain;
 pub mod error;
 pub mod messages;
 pub mod service;
+pub mod taskbar_guard;
 #[cfg(windows)]
 mod windows;
 

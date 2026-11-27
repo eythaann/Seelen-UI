@@ -1,9 +1,12 @@
 #[cfg(windows)]
 mod windows;
 
-use std::sync::{
-    LazyLock,
-    atomic::{AtomicBool, Ordering},
+use std::{
+    sync::{
+        Condvar, LazyLock, Mutex,
+        atomic::{AtomicBool, Ordering},
+    },
+    time::Duration,
 };
 
 use crate::error::Result;
@@ -25,11 +28,8 @@ pub struct TaskbarManager {
     /// Tracks whether we actually hid the native taskbar, so we only restore it
     /// when it was hidden by us (avoids unnecessary restores on settings changes/shutdown).
     hidden: AtomicBool,
-    /// Set by every hide request and consumed by the worker before each pass, so a request
-    /// that arrives while a pass is running is never lost: it schedules one more pass.
-    hide_requested: AtomicBool,
-    /// Only one worker thread runs hide passes at a time.
-    hide_worker_running: AtomicBool,
+    /// Signals the hide worker to wake immediately on a new hide or restore request.
+    hide_signal: (Mutex<HideWorkerState>, Condvar),
 }
 
 impl TaskbarManager {
@@ -42,34 +42,22 @@ impl TaskbarManager {
         Self {
             platform: Platform::create(),
             hidden: AtomicBool::new(false),
-            hide_requested: AtomicBool::new(false),
-            hide_worker_running: AtomicBool::new(false),
+            hide_signal: (Mutex::new(HideWorkerState::default()), Condvar::new()),
         }
     }
 
     pub fn hide(&'static self) {
         self.hidden.store(true, Ordering::SeqCst);
-        self.hide_requested.store(true, Ordering::SeqCst);
-        if self.hide_worker_running.swap(true, Ordering::SeqCst) {
-            // the running worker will see `hide_requested` and run another pass
+        let (lock, cvar) = &self.hide_signal;
+        let mut state = lock.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
+        state.requested = true;
+        cvar.notify_one();
+        if state.running {
             return;
         }
-        std::thread::spawn(move || {
-            loop {
-                while self.hide_requested.swap(false, Ordering::SeqCst) {
-                    self.run_hide_pass();
-                }
-                self.hide_worker_running.store(false, Ordering::SeqCst);
-                // A request may have arrived after the last swap but before releasing the worker
-                // flag; its caller saw the worker as running and returned, so pick it up here
-                // unless another worker already did.
-                if !self.hide_requested.load(Ordering::SeqCst)
-                    || self.hide_worker_running.swap(true, Ordering::SeqCst)
-                {
-                    break;
-                }
-            }
-        });
+        state.running = true;
+        drop(state);
+        std::thread::spawn(move || self.run_hide_worker());
     }
 
     pub fn restore(&self) -> Result<()> {
@@ -80,6 +68,14 @@ impl TaskbarManager {
         {
             return Ok(());
         }
+        {
+            let _guard = self
+                .hide_signal
+                .0
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            self.hide_signal.1.notify_one();
+        }
         self.platform.restore()
     }
 
@@ -87,20 +83,61 @@ impl TaskbarManager {
         self.hidden.load(Ordering::SeqCst)
     }
 
+    fn run_hide_worker(&self) {
+        let (lock, _) = &self.hide_signal;
+        loop {
+            {
+                let mut state = lock.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
+                if !state.requested || !self.is_hidden() {
+                    state.requested = false;
+                    state.running = false;
+                    return;
+                }
+                state.requested = false;
+            }
+            self.run_hide_pass();
+        }
+    }
+
     fn run_hide_pass(&self) {
+        let (lock, cvar) = &self.hide_signal;
         let mut focus_moved = false;
-        for delay in HIDE_PASS_DELAYS_MS {
+        let mut idx = 0;
+        while idx < HIDE_PASS_DELAYS_MS.len() {
+            let delay = HIDE_PASS_DELAYS_MS[idx];
             if delay > 0 {
-                std::thread::sleep(std::time::Duration::from_millis(delay));
+                let state = lock.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
+                let (mut state, _) = cvar
+                    .wait_timeout_while(state, Duration::from_millis(delay), |s| {
+                        !s.requested && self.is_hidden()
+                    })
+                    .unwrap_or_else(|poisoned| poisoned.into_inner());
+                if !self.is_hidden() {
+                    // restored meanwhile; a later hide request schedules a new pass
+                    return;
+                }
+                if state.requested {
+                    state.requested = false;
+                    drop(state);
+                    idx = 0;
+                    focus_moved = false;
+                    continue;
+                }
             }
             if !self.is_hidden() {
-                // restored meanwhile; a later hide request schedules a new pass
                 return;
             }
             match self.platform.hide(!focus_moved, || self.is_hidden()) {
                 Ok(moved) => focus_moved |= moved,
                 Err(err) => log::error!("Failed to hide the native taskbar: {err:?}"),
             }
+            idx += 1;
         }
     }
+}
+
+#[derive(Debug, Default)]
+struct HideWorkerState {
+    requested: bool,
+    running: bool,
 }
