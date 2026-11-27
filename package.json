@@ -9,15 +9,10 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "tauri": "tauri",
-    "tauri:update": "tsx scripts/UpdateTauri.ts",
     "build:ui": "tsx scripts/build.ts",
     "build:lib": "npm run build -w @seelen-ui/lib",
-    "dev": "cargo build && tauri dev",
     "test": "tsx --test \"src/ui/svelte/**/*.test.ts\" && npm test -w @seelen-ui/lib",
-    "translate": "tsx ./scripts/translate/mod.ts",
     "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && npm run type-check -w @seelen-ui/lib",
-    "version:start": "tsx ./scripts/versionish.ts start",
-    "version:finish": "tsx ./scripts/versionish.ts finish",
     "postinstall": "lefthook install && npm run build:lib"
   },
   "keywords": [],

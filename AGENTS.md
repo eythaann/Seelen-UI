@@ -18,10 +18,10 @@ Build speed / safety:
 
 Translations:
 
-- DO NOT run `npm run translate` during active development.
+- DO NOT run `just translate` during active development.
 - Add translations manually while iterating; run the translate command only right before a final commit.
 - NEVER touch non-English i18n files (no adding, editing, translating or deleting keys). Only edit `en` entries /
-  `en.yml`; every other language is handled exclusively by `npm run translate`.
+  `en.yml`; every other language is handled exclusively by `just translate`.
 
 Backward compatibility:
 
@@ -85,26 +85,34 @@ Design (see `documentation/design-system.md` before touching any UI/styles):
 
 ## Common Commands
 
+Project commands are run with [just](https://github.com/casey/just) (`justfile`, `just` lists every recipe).
+`package.json` only keeps the JS-specific scripts (`build:ui`, `build:lib`, `test`, `type-check`).
+
 Initial setup:
 
 ```bash
-npm install && npm run dev
+npm install && just dev
 ```
 
 Dev / build:
 
-- `npm run dev` - Frontend dev workflow
+- `just dev` - Build the background and run the app in dev mode (UI with hot reload)
 - `npm run build:ui` - Build UI bundles
-- `npm run tauri dev` - Run Tauri in dev mode
 - `cargo check` - Fast Rust type check
 - `cargo build` - Debug build
 
 Quality:
 
-- `npx oxlint` - Lint JS/TS (config in `.oxlintrc.json`)
-- `npx dprint fmt` - Format (config in `dprint.json`; `npx dprint check` to verify)
-- `npm run type-check`
-- `npm test`
+- `just fmt` - Format with dprint (`dprint.json`) + rustfmt (`just fmt-check` to verify)
+- `just lint` - oxlint (`.oxlintrc.json`) + clippy
+- `just check` - TS/Svelte type check (`npm run type-check`) + `cargo check`
+- `just test` - JS tests (`npm test`) + `cargo test`
+
+Other:
+
+- `just translate` - Translate i18n files (see Translations above)
+- `just version-start <version>` / `just version-finish` - Release flow
+- `just tauri-update` - Update the tauri dependencies (npm + cargo)
 
 Core library (`libs/core`):
 
@@ -322,7 +330,7 @@ slu_events_declaration! {
 }
 ```
 
-3. Regenerate bindings: `cd libs/core && npm run build:rs`
+3. Regenerate bindings + rebuild the lib: `npm install` (its `postinstall` runs `build:lib`)
 
 ## WinRT Wrapper Pattern (Automatic Cleanup)
 
@@ -502,7 +510,7 @@ pub enum Action {
 
 ## Testing Expectations
 
-- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `npx oxlint`).
+- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `just lint`).
 - Keep changes scoped; add tests when behavior changes.
 - Automated tests must never require the system GUI: no real windows, DWM, focus/foreground, Z-order, input, monitors or
   an interactive desktop (no `CreateWindowExW` fixtures, no `#[ignore]`d "interactive desktop" tests). Test only the
