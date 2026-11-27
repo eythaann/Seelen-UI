@@ -1,13 +1,16 @@
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { debounce } from "lodash";
 import z from "zod";
-import { focusedWinId, previews, settings, widget, windows } from "./getters.svelte.ts";
+import { focusedWinId, previews, settings, virtualDesktops, widget, windows } from "./getters.svelte.ts";
 import { monitors } from "libs/ui/svelte/runes/monitors.svelte.ts";
+import { filterSwitcherWindows } from "./filterWindows.ts";
 
 export { focusedWinId, previews, settings, widget, windows };
 
 const WidgetConfigSchema = z.object({
   onlyOnActiveMonitor: z.boolean(),
+  // optional so configs saved before this setting existed still parse
+  onlyOnActiveWorkspace: z.boolean().optional(),
 });
 
 const widgetConfig = $derived.by(
@@ -49,14 +52,15 @@ let activeMonitor = $derived.by(() => {
   return found || monitors.primaryMonitor;
 });
 
-// Windows shown in the switcher, optionally restricted to the active monitor
-let filteredWindows = $derived.by(() => {
-  const monitor = activeMonitor;
-  if (!widgetConfig.onlyOnActiveMonitor || !monitor) {
-    return windows.value;
-  }
-  return windows.value.filter((w) => w.monitor === monitor.id);
-});
+// Windows shown in the switcher, optionally restricted to the active monitor and/or workspace
+let filteredWindows = $derived(
+  filterSwitcherWindows(windows.value, {
+    onlyOnActiveMonitor: widgetConfig.onlyOnActiveMonitor,
+    onlyOnActiveWorkspace: widgetConfig.onlyOnActiveWorkspace,
+    activeMonitorId: activeMonitor?.id ?? null,
+    virtualDesktops: virtualDesktops.value,
+  }),
+);
 
 $effect.root(() => {
   widget.attachPosition();

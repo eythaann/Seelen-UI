@@ -1,15 +1,18 @@
 import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import {
-  type FocusedApp,
-  SeelenWegSide,
-  type UserAppWindow,
-  type UserAppWindowColors,
-  WegTemporalItemsVisibility,
-} from "@seelen-ui/lib/types";
+import { type FocusedApp, SeelenWegSide, type UserAppWindow, type UserAppWindowColors } from "@seelen-ui/lib/types";
 import { settingsState } from "./settings.svelte.ts";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types.ts";
-import { focused, interactables, previews, selfWinId, widgetStatuses, windowsColors } from "./getters.svelte.ts";
+import {
+  focused,
+  interactables,
+  previews,
+  selfWinId,
+  virtualDesktops,
+  widgetStatuses,
+  windowsColors,
+} from "./getters.svelte.ts";
+import { selectDockWindows } from "./dockWindows.ts";
 
 export { focused, interactables, previews, widgetStatuses, windowsColors };
 
@@ -28,13 +31,15 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   }
 });
 
-/** windows that belong to this dock, honoring the "On Monitor" temporal items visibility */
-const _dockWindows = $derived.by(() => {
-  if (settingsState.value.temporalItemsVisibility !== WegTemporalItemsVisibility.OnMonitor) {
-    return interactables.value;
-  }
-  return interactables.value.filter((w) => w.monitor === widget.decoded.monitorId);
-});
+/** windows that belong to this dock, honoring the temporal items visibility setting */
+const _dockWindows = $derived(
+  selectDockWindows(
+    interactables.value,
+    settingsState.value.temporalItemsVisibility,
+    widget.decoded.monitorId,
+    virtualDesktops.value,
+  ),
+);
 
 const _topInteractableWindow = $derived(
   interactables.value

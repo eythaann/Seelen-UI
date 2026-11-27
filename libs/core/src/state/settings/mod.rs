@@ -108,6 +108,8 @@ pub enum SeelenWegMode {
 pub enum WegTemporalItemsVisibility {
     All,
     OnMonitor,
+    /// only windows on the active workspace of the dock's monitor (plus pinned windows)
+    OnWorkspace,
 }
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -807,5 +809,37 @@ impl From<PerformanceMode> for u8 {
             PerformanceMode::Minimal => 1,
             PerformanceMode::Extreme => 2,
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn temporal_items_visibility_on_workspace_round_trips() {
+        let json = serde_json::to_string(&WegTemporalItemsVisibility::OnWorkspace).unwrap();
+        assert_eq!(json, "\"OnWorkspace\"");
+
+        let parsed: WegTemporalItemsVisibility = serde_json::from_str(&json).unwrap();
+        assert_eq!(parsed, WegTemporalItemsVisibility::OnWorkspace);
+    }
+
+    #[test]
+    fn weg_settings_accept_on_workspace() {
+        let settings: SeelenWegSettings =
+            serde_json::from_str(r#"{ "temporalItemsVisibility": "OnWorkspace" }"#).unwrap();
+        assert_eq!(
+            settings.temporal_items_visibility,
+            WegTemporalItemsVisibility::OnWorkspace
+        );
+    }
+
+    #[test]
+    fn weg_temporal_items_visibility_default_is_unchanged() {
+        assert_eq!(
+            SeelenWegSettings::default().temporal_items_visibility,
+            WegTemporalItemsVisibility::All
+        );
     }
 }

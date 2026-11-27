@@ -11,7 +11,7 @@
     "tauri": "tauri",
     "build:ui": "tsx scripts/build.ts",
     "build:lib": "npm run build -w @seelen-ui/lib",
-    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\" && npm test -w @seelen-ui/lib",
+    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\" \"libs/ui/**/*.test.ts\" && npm test -w @seelen-ui/lib",
     "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && npm run type-check -w @seelen-ui/lib",
     "postinstall": "lefthook install && npm run build:lib"
   },
