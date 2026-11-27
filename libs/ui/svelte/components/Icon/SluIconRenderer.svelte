@@ -19,7 +19,7 @@
 >
   <img src={state.src || ""} alt="" loading={lazy ? "lazy" : "eager"} draggable="false" />
   {#if state.mask}
-    <div class="slu-icon-mask" style="mask-image: url('{state.mask}')"></div>
+    <div class="slu-icon-mask" style='mask-image: url("{state.mask}")'></div>
   {/if}
 </figure>
 

@@ -1,0 +1,43 @@
+{
+  "lineWidth": 120,
+  "typescript": {
+    "deno": true,
+    "lineWidth": 120
+  },
+  "json": {
+    "deno": true,
+    "lineWidth": 120,
+    "packageJson.applyConventions": false
+  },
+  "markdown": {
+    "deno": true,
+    "lineWidth": 120,
+    "html.skipFormat": true
+  },
+  "malva": {
+    "operatorLinebreak": "before",
+    "linebreakInPseudoParens": true
+  },
+  "markup": {
+    "doctypeKeywordCase": "ignore",
+    "scriptIndent": true,
+    "styleIndent": true,
+    "html.scriptIndent": false,
+    "html.styleIndent": false
+  },
+  "excludes": [
+    "**/node_modules",
+    "**/i18n/translations/**",
+    "libs/core/dist",
+    "**/*.svg",
+    "**/*.xml"
+  ],
+  "plugins": [
+    "npm:@dprint/typescript@0.101.0",
+    "npm:@dprint/json@0.26.0",
+    "npm:@dprint/markdown@0.29.0",
+    "npm:dprint-plugin-malva@0.16.1",
+    "npm:dprint-plugin-markup@0.28.0",
+    "npm:dprint-plugin-yaml@0.6.0"
+  ]
+}

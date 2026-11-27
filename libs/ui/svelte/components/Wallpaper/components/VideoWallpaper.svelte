@@ -212,7 +212,8 @@
   oncanplay={handleCanPlay}
   onerror={handleError}
   ontimeupdate={handleTimeUpdate}
-></video>
+>
+</video>
 
 <style>
   .wallpaper {

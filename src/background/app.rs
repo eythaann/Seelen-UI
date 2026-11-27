@@ -93,6 +93,7 @@ impl SeelenUI {
 
         WIDGET_MANAGER.reconcile()?;
         platform::start()?;
+        crate::widgets::webview::start_z_order_guard();
 
         std::thread::spawn(init_clipboard_manager);
 

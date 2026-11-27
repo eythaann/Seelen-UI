@@ -31,17 +31,16 @@ export function LayoutSelector() {
         }
         description={usingLayout ? <ResourceText text={usingLayout.metadata.description} /> : undefined}
       />
-      {
-        /* <div class={cs.monitor}>
+      {/* <div class={cs.monitor}>
         <div class={cs.screen}>
           {usingLayout && <TwmNode node={(usingLayout.plugin as TwmPlugin).structure} />}
         </div>
-      </div> */
-      }
+      </div> */}
     </SettingsGroup>
   );
 }
 
+// oxlint-disable-next-line no-unused-vars -- kept for the commented-out layout preview above
 function TwmNode({ node }: { node: TwmPluginNode | null }) {
   if (!node) {
     return <div className={cs.float}></div>;

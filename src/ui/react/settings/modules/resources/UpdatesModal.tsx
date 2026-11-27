@@ -40,8 +40,7 @@ export function ResourceUpdatesModal() {
               type="primary"
               href={`https://seelen.io/resources/${compressUuid(resource.id)}?update`}
               target="_blank"
-              onClick={() =>
-                setDismissed(true)}
+              onClick={() => setDismissed(true)}
             >
               <Icon iconName="MdUpdate" />
               {t("resources.update_now")}

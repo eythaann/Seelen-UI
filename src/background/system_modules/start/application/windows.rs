@@ -1,3 +1,4 @@
+use slu_utils::windows::{Com, WindowsString};
 use std::{
     path::{Path, PathBuf},
     sync::Arc,
@@ -24,7 +25,7 @@ use crate::{
         ShortcutEntry, ShortcutIdentity, StartMenuSysEvent, StartMenuSystem,
     },
     utils::constants::SEELEN_COMMON,
-    windows_api::{Com, WindowsApi, pwsh::PwshScript, string_utils::WindowsString},
+    windows_api::{WindowsApi, pwsh::PwshScript},
 };
 
 const FILE_WATCHER_DEBOUNCE: Duration = Duration::from_millis(500);
@@ -213,7 +214,7 @@ fn process_file(path: PathBuf) -> ShortcutEntry {
 
     // one COM context for all the shell calls, instead of tearing it down after each one
     let (resolved, umid, toast_activator) = if is_lnk {
-        Com::run_with_context(|| {
+        Com::run_with_context(|| -> Result<_> {
             let resolved = WindowsApi::resolve_lnk_target(&path).ok();
             let (umid, toast_activator) = WindowsApi::get_file_umid_and_toast_activator(&path);
             Ok((resolved, umid, toast_activator))

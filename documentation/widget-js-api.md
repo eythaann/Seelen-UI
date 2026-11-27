@@ -121,7 +121,7 @@ libs/core/src/handlers/commands.rs
 ```
 
 Read the `slu_commands_declaration! { ... }` block there. After a change to that file, `SeelenCommand` and its typed
-argument/return maps are regenerated into `libs/core/src/handlers/commands.ts` — never edit that generated file by hand.
+argument/return maps are regenerated into `libs/core/gen/handlers/commands.ts` — never edit that generated file by hand.
 
 ---
 
@@ -148,7 +148,7 @@ libs/core/src/handlers/events.rs
 ```
 
 Read the `slu_events_declaration! { ... }` block there (`EventName(PayloadType) as "wire-event-name"`). The
-`SeelenEvent` enum and its typed payload map are regenerated from this file into `libs/core/src/handlers/events.ts` —
+`SeelenEvent` enum and its typed payload map are regenerated from this file into `libs/core/gen/handlers/events.ts` —
 never edit that generated file by hand.
 
 ---
@@ -159,7 +159,7 @@ If you add or change a command or event in the Rust files above, regenerate the 
 from a widget:
 
 ```bash
-cd libs/core && deno task build:rs
+npm install
 ```
 
 Both `invoke` and `subscribe` themselves — the wrapper functions shown in sections 2 and 3 — are defined in

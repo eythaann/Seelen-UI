@@ -9,14 +9,14 @@ plugin:
     - Media
   template: |-
     return isMuted
-      ? icon("IoVolumeMuteOutline")
+      ? Icon({ name: "IoVolumeMuteOutline" })
       : volume >= 0.66
-        ? icon("IoVolumeHighOutline")
+        ? Icon({ name: "IoVolumeHighOutline" })
         : volume >= 0.33
-          ? icon("IoVolumeMediumOutline")
+          ? Icon({ name: "IoVolumeMediumOutline" })
           : volume != 0
-            ? icon("IoVolumeLowOutline")
-            : icon("IoVolumeOffOutline")
+            ? Icon({ name: "IoVolumeLowOutline" })
+            : Icon({ name: "IoVolumeOffOutline" })
   tooltip: 'return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]'
   onClick: |-
     trigger("@seelen/media-popup");

@@ -23,7 +23,7 @@ use seelen_core::{
         Alignment, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus, WidgetTriggerPayload,
         context_menu::ContextMenu, dialog::Dialog,
     },
-    system_state::{AppBarEdge, ZOrder},
+    system_state::{AppBarEdge, WindowHandle, WindowIdentity, ZOrder},
 };
 use tauri::{Emitter, Manager};
 
@@ -42,7 +42,7 @@ static PENDING_TRIGGERS: LazyLock<SyncHashMap<WidgetWebviewLabel, WidgetTriggerP
 
 fn trigger_widget_inner(
     mut payload: WidgetTriggerPayload,
-    owner_hwnd: Option<isize>,
+    owner_hwnd: Option<WindowHandle>,
 ) -> Result<()> {
     let state = FULL_STATE.load();
     if !state.is_widget_enabled(&payload.id) {
@@ -160,7 +160,9 @@ pub fn notify_widget_statuses_change() {
                     monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
                     instance_id: pod.label.instance_id.map(|id| id.to_string()),
                     status: *pod.status(),
-                    webview_window_id: pod.hwnd(),
+                    webview_window_id: pod
+                        .hwnd()
+                        .map(|h| crate::platform::window::Window::from(h).id()),
                 });
             });
         });
@@ -217,7 +219,7 @@ impl crate::tauri_handlers::Handlers {
         forward_to: Option<String>,
     ) -> Result<()> {
         let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
-        let owner_hwnd = webview::native_window(&webview)?.address();
+        let owner_hwnd = webview::native_window(&webview)?.handle();
 
         let mut payload = WidgetTriggerPayload::new("@seelen/context-menu".into());
         payload.instance_id = Some(menu.identifier);
@@ -236,7 +238,7 @@ impl crate::tauri_handlers::Handlers {
     /// Trigger a dialog from within a widget (the owner webview is used for event routing).
     pub fn trigger_dialog(webview: tauri::WebviewWindow, dialog: Dialog) -> Result<()> {
         let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
-        let owner_hwnd = webview::native_window(&webview)?.address();
+        let owner_hwnd = webview::native_window(&webview)?.handle();
 
         let mut payload = WidgetTriggerPayload::new("@seelen/dialog".into());
         payload.instance_id = Some(dialog.identifier);
@@ -247,8 +249,8 @@ impl crate::tauri_handlers::Handlers {
         trigger_widget_inner(payload, Some(owner_hwnd))
     }
 
-    pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
-        Ok(webview::native_window(&webview)?.address())
+    pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<WindowIdentity> {
+        Ok(webview::native_window(&webview)?.id())
     }
 
     pub fn normalize_self_device_pixel_ratio(webview: tauri::WebviewWindow) -> Result<()> {
@@ -308,7 +310,9 @@ impl crate::tauri_handlers::Handlers {
                     monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
                     instance_id: pod.label.instance_id.map(|id| id.to_string()),
                     status: *pod.status(),
-                    webview_window_id: pod.hwnd(),
+                    webview_window_id: pod
+                        .hwnd()
+                        .map(|h| crate::platform::window::Window::from(h).id()),
                 });
             });
         });

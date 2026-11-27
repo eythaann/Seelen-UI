@@ -18,10 +18,19 @@ Build speed / safety:
 
 Translations:
 
-- DO NOT run `npm run translate` during active development.
+- DO NOT run `just translate` during active development.
 - Add translations manually while iterating; run the translate command only right before a final commit.
 - NEVER touch non-English i18n files (no adding, editing, translating or deleting keys). Only edit `en` entries /
-  `en.yml`; every other language is handled exclusively by `npm run translate`.
+  `en.yml`; every other language is handled exclusively by `just translate`.
+
+Backward compatibility:
+
+- NEVER introduce nor recommend breaking changes to the app's API: serialized types (`libs/core` types, TS bindings),
+  commands, events, settings/resource files and stored state (e.g. renaming or removing fields, changing a field type in
+  an incompatible way). Prefer compatible alternatives: keep the field name, `#[serde(alias)]`, or accept the old format
+  on deserialization and upgrade it on the next save.
+- If a breaking change is truly unavoidable, keep it minimal and document it under `### breaking changes` in
+  `changelog.md`.
 
 Rust locking order (avoid deadlocks):
 
@@ -76,32 +85,41 @@ Design (see `documentation/design-system.md` before touching any UI/styles):
 
 ## Common Commands
 
+Project commands are run with [just](https://github.com/casey/just) (`justfile`, `just` lists every recipe).
+`package.json` only keeps the JS-specific scripts (`build:ui`, `build:lib`, `test`, `type-check`).
+
 Initial setup:
 
 ```bash
-npm install && npm run dev
+npm install && just dev
 ```
 
 Dev / build:
 
-- `npm run dev` - Frontend dev workflow
+- `just dev` - Build the background and run the app in dev mode (UI with hot reload)
 - `npm run build:ui` - Build UI bundles
-- `npm run tauri dev` - Run Tauri in dev mode
 - `cargo check` - Fast Rust type check
 - `cargo build` - Debug build
 
-Quality (Deno-based):
+Quality:
 
-- `deno lint`
-- `deno fmt`
-- `npm run type-check`
-- `npm test`
+- `just fmt` - Format with dprint (`dprint.json`) + rustfmt (`just fmt-check` to verify)
+- `just lint` - oxlint (`.oxlintrc.json`) + clippy
+- `just check` - TS/Svelte type check (`npm run type-check`) + `cargo check`
+- `just test` - JS tests (`npm test`) + `cargo test`
+
+Other:
+
+- `just translate` - Translate i18n files (see Translations above)
+- `just version-start <version>` / `just version-finish` - Release flow
+- `just tauri-update` - Update the tauri dependencies (npm + cargo)
 
 Core library (`libs/core`):
 
-- `deno task build`
-- `deno task build:rs` - Regenerate Rust -> TypeScript bindings
-- `deno task build:npm`
+- `npm run build` - Regenerate bindings + build the JS package (`dist/`)
+- `npm run build:rs` - Regenerate Rust -> TypeScript bindings
+- `npm run build:js` - Build the JS package (ESM + CJS + declarations into `dist/`)
+- `npm test` / `npm run type-check`
 
 ## Repo Map (Where Things Live)
 
@@ -312,7 +330,7 @@ slu_events_declaration! {
 }
 ```
 
-3. Regenerate bindings: `cd libs/core && deno task build:rs`
+3. Regenerate bindings + rebuild the lib: `npm install` (its `postinstall` runs `build:lib`)
 
 ## WinRT Wrapper Pattern (Automatic Cleanup)
 
@@ -492,15 +510,14 @@ pub enum Action {
 
 ## Testing Expectations
 
-- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `deno lint`).
+- Prefer quick feedback loops (`cargo check`, `npm run type-check`, `just lint`).
 - Keep changes scoped; add tests when behavior changes.
 - Automated tests must never require the system GUI: no real windows, DWM, focus/foreground, Z-order, input, monitors or
   an interactive desktop (no `CreateWindowExW` fixtures, no `#[ignore]`d "interactive desktop" tests). Test only the
   pure logic (extract it from the OS calls if needed). Anything that needs the system GUI is verified manually by
   QA/testers: list those scenarios in the PR description instead of writing a test.
-- Runtime logs can be read directly (no need to ask the user for them):
-  `%LOCALAPPDATA%\com.seelen.seelen-ui\logs\Seelen UI.log` (service: `SLU Service.log` in the same folder; previous
-  session in `*.log.bak`).
+- Runtime logs can be read directly (no need to ask the user for them): `%LOCALAPPDATA%\com.seelen.seelen-ui\logs\Seelen
+  UI.log` (service: `SLU Service.log` in the same folder; previous session in `*.log.bak`).
 
 ## Documentation & Custom Resources
 

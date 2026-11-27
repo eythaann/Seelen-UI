@@ -35,7 +35,7 @@ const EvaluatedImagePropsSchema = z.object({
 
 export type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
 const EvaluatedButtonPropsSchema = z.object({
-  style: z.record(z.any()).default({}),
+  style: z.record(z.string(), z.any()).default({}),
   content: z.unknown().nullish(),
   tooltip: z.string().nullish(),
   onClick: z.string().nullish(),
@@ -45,7 +45,7 @@ const EvaluatedButtonPropsSchema = z.object({
 
 export type EvaluatedGroupProps = z.infer<typeof EvaluatedGroupPropsSchema>;
 const EvaluatedGroupPropsSchema = z.object({
-  style: z.record(z.any()).default({}),
+  style: z.record(z.string(), z.any()).default({}),
   content: z.unknown().nullish(),
 });
 
@@ -110,9 +110,10 @@ export function parseComponent(value: unknown): ParsedComponent | null {
 }
 
 const ComponentCreatorScope = {
-  icon: (arg1?: unknown, arg2?: unknown) => ({
+  // legacy function, was not removed for backguard compatibility
+  icon: (arg1?: unknown) => ({
     [COMPONENT_KEY]: ObjectComponentKind.Icon,
-    props: EvaluatedReactIconPropsSchema.parse({ name: arg1, size: arg2 }),
+    props: EvaluatedReactIconPropsSchema.parse({ name: arg1 }),
   }),
   Icon: (arg: unknown) => ({
     [COMPONENT_KEY]: ObjectComponentKind.Icon,

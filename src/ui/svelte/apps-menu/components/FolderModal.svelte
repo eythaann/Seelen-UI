@@ -116,8 +116,7 @@
           let rect = source.element.getBoundingClientRect();
           let dialogRect = dialog.getBoundingClientRect();
 
-          const hasIntersection =
-            rect.right > dialogRect.left &&
+          const hasIntersection = rect.right > dialogRect.left &&
             rect.left < dialogRect.right &&
             rect.bottom > dialogRect.top &&
             rect.top < dialogRect.bottom;
@@ -132,15 +131,13 @@
           // Update folder with new items or handle folder removal
           if (newItemIds.length >= 2) {
             globalState.updateFolder(folder.itemId, { itemIds: newItemIds });
-          }
-          // Folder has only 1 item left, convert to app and remove folder
+          } // Folder has only 1 item left, convert to app and remove folder
           else if (newItemIds.length === 1) {
             const remainingItemId = newItemIds[0]!;
             globalState.pinnedItems = globalState.pinnedItems
               .filter((item) => !(item.type === "folder" && item.itemId === folder.itemId))
               .concat({ type: "app", itemId: remainingItemId });
-          }
-          // Folder is empty, just remove it
+          } // Folder is empty, just remove it
           else {
             globalState.pinnedItems = globalState.pinnedItems.filter(
               (item) => !(item.type === "folder" && item.itemId === folder.itemId),

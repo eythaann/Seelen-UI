@@ -1,15 +1,15 @@
 <script lang="ts">
   import { state } from "../../../state.svelte.ts";
-  import ReservedContainer from './Reserved.svelte';
+  import ReservedContainer from "./Reserved.svelte";
 
   interface Props {
-    hwnd: number;
+    hwnd: string;
     growFactor?: number;
   }
 
   let { hwnd, growFactor }: Props = $props();
 
-  let isFocused = $derived(state.focusedApp.hwnd === hwnd);
+  let isFocused = $derived(state.focusedApp.id === hwnd);
 </script>
 
 <div

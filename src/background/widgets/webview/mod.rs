@@ -11,7 +11,7 @@ use seelen_core::{
     Rect,
     resource::WidgetId,
     state::{Widget, WidgetLoader, WidgetPreset},
-    system_state::{AppBarEdge, MonitorId},
+    system_state::{AppBarEdge, MonitorId, WindowHandle},
 };
 
 use tauri::Manager;
@@ -30,7 +30,7 @@ impl WidgetWebview {
     pub fn create(
         widget: &Widget,
         label: &WidgetWebviewLabel,
-        owner_hwnd: Option<isize>,
+        owner_hwnd: Option<WindowHandle>,
     ) -> Result<Self> {
         let state = FULL_STATE.load();
         let title = widget.metadata.display_name.get(state.locale());
@@ -130,6 +130,12 @@ impl WidgetWebview {
     pub fn handle(&self) -> tauri::WebviewWindow {
         self.0.clone()
     }
+}
+
+/// Starts the OS workarounds that keep the widgets z-order healthy (e.g. always-on-top widgets
+/// losing their topmost effect because of third-party apps).
+pub fn start_z_order_guard() {
+    imp::start_topmost_guard();
 }
 
 /// Native window of a webview, to use the generic window operations on it.

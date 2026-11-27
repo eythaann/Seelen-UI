@@ -1,9 +1,10 @@
+use slu_utils::windows::Com;
 use std::sync::{
     Arc,
     atomic::{AtomicU32, Ordering},
 };
 
-use seelen_core::system_state::ClipboardEntryContent;
+use seelen_core::system_state::{ClipboardEntryContent, WindowHandle};
 use windows::{
     ApplicationModel::DataTransfer::{
         Clipboard, DataPackage, DataPackageOperation, DataPackageView, StandardDataFormats,
@@ -28,7 +29,7 @@ use crate::{
         CapturedContent, ClipboardStore, ClipboardSysEvent, ClipboardSystem,
     },
     utils::constants::SEELEN_COMMON,
-    windows_api::{Com, WindowsApi, event_window::subscribe_to_background_window, input::Keyboard},
+    windows_api::{WindowsApi, event_window::subscribe_to_background_window, input::Keyboard},
 };
 
 /// Descriptor scoping protected data to the current Windows user account,
@@ -151,7 +152,7 @@ impl Drop for WindowsClipboard {
 fn spawn_history_listener(on_event: EventCallback) -> Result<i64> {
     let (ready_tx, ready_rx) = std::sync::mpsc::channel::<Result<i64>>();
     std::thread::spawn(move || {
-        let _ = Com::run_with_context(|| {
+        let _ = Com::run_with_context(|| -> Result<()> {
             let token = Clipboard::HistoryEnabledChanged(&EventHandler::new(move |_, _| {
                 if let Ok(enabled) = Clipboard::IsHistoryEnabled() {
                     log::debug!("[clipboard] native IsHistoryEnabled changed -> {enabled}");
@@ -199,7 +200,7 @@ fn on_clipboard_update(on_event: EventCallback) {
     // just changed the clipboard content, rather than inside the spawned
     // thread where it could already have changed again.
     let owner_hwnd = unsafe { GetClipboardOwner() }
-        .map(|hwnd| hwnd.0 as isize)
+        .map(|hwnd| hwnd.0 as WindowHandle)
         .unwrap_or(0);
 
     // Handle on a dedicated, throwaway thread instead of `sta_call`'s
@@ -314,7 +315,7 @@ fn storage_item_from_path(path: &str) -> Result<IStorageItem> {
 /// Reads the clipboard view and the app it came from. `owner_hwnd` is the clipboard owner
 /// window (via `GetClipboardOwner`) captured at the time of the clipboard change.
 /// Must be called from an STA-initialised thread.
-fn capture_view(view: &DataPackageView, owner_hwnd: isize) -> Result<CapturedContent> {
+fn capture_view(view: &DataPackageView, owner_hwnd: WindowHandle) -> Result<CapturedContent> {
     let (source_app_name, source_app_umid, source_app_path) = if owner_hwnd != 0 {
         let window = Window::from(owner_hwnd);
         let name = window.app_display_name().ok().filter(|s| !s.is_empty());

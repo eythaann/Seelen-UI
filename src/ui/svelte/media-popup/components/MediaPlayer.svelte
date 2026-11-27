@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MediaPlayer } from "@seelen-ui/lib/types";
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { Icon, FileIcon, iconPackManager } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon, iconPackManager } from "libs/ui/svelte/components/Icon";
   import { convertFileSrc } from "@tauri-apps/api/core";
   import MediaProgress from "./MediaProgress.svelte";
 

@@ -1,6 +1,6 @@
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import type { Frame, Point, Rect, Size } from "@seelen-ui/types";
-import { invoke, SeelenCommand } from "../../../../mod.ts";
+import { invoke, SeelenCommand } from "../../../handlers/mod.ts";
 
 import { Widget_0 } from "./0_core.ts";
 

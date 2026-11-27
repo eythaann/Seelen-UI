@@ -1,20 +1,18 @@
 use std::{future::Future, sync::Arc};
 
-use interprocess::os::windows::named_pipe::{
-    DuplexPipeStream, PipeListenerOptions, pipe_mode::Bytes,
-    tokio::DuplexPipeStream as AsyncDuplexPipeStream,
-};
 use tokio::sync::mpsc;
-use windows::Win32::System::RemoteDesktop::{ProcessIdToSessionId, WTSGetActiveConsoleSessionId};
+
+use interprocess::local_socket::traits::tokio::Listener as _;
 
 use crate::{
+    AsyncIpcStream, Platform,
     common::{
-        IPC, read_from_ipc_stream, send_to_ipc_stream, send_to_ipc_stream_blocking,
-        write_to_ipc_stream,
+        IPC, connect, connect_async, listen, read_from_ipc_stream, send_to_ipc_stream,
+        send_to_ipc_stream_blocking, write_to_ipc_stream,
     },
+    domain::IpcSystem,
     error::Result,
     messages::{AppMessage, IpcResponse},
-    security::create_security_descriptor,
 };
 
 pub struct AppIpc {
@@ -29,9 +27,9 @@ impl IPC for AppIpc {
 }
 
 impl AppIpc {
-    /// Constructs the pipe path for a specific session ID
+    /// Constructs the endpoint path for a specific session ID
     pub fn path_with_session(session_id: u32) -> String {
-        format!(r"\\.\pipe\seelen-ui-{}", session_id)
+        Platform::endpoint("seelen-ui", session_id)
     }
 
     /// Starts the IPC listener on its own thread and runtime, fully independent from the caller's
@@ -79,13 +77,7 @@ impl AppIpc {
 
                 runtime.block_on(async move {
                     // the listener has to be created inside the runtime that will drive it
-                    let listener = create_security_descriptor().and_then(|sd| {
-                        Ok(PipeListenerOptions::new()
-                            .path(path)
-                            .security_descriptor(Some(sd))
-                            .create_tokio_duplex::<Bytes>()?)
-                    });
-                    let listener = match listener {
+                    let listener = match listen(&path) {
                         Ok(listener) => listener,
                         Err(err) => {
                             let _ = ready_tx.send(Err(err));
@@ -128,7 +120,7 @@ impl AppIpc {
     }
 
     async fn process_connection<R, F>(
-        stream: &AsyncDuplexPipeStream<Bytes>,
+        stream: &AsyncIpcStream,
         cb: Arc<F>,
         main_runtime: &tokio::runtime::Handle,
         notifications: &mpsc::UnboundedSender<AppMessage>,
@@ -160,16 +152,13 @@ impl AppIpc {
         Ok(())
     }
 
-    async fn response_to_client(
-        stream: &AsyncDuplexPipeStream<Bytes>,
-        res: IpcResponse,
-    ) -> Result<()> {
+    async fn response_to_client(stream: &AsyncIpcStream, res: IpcResponse) -> Result<()> {
         write_to_ipc_stream(stream, &res.to_bytes()?).await
     }
 
     /// Sends a message to the current session asynchronously
     pub async fn send(message: AppMessage) -> Result<()> {
-        let stream = AsyncDuplexPipeStream::connect_by_path(Self::path()).await?;
+        let stream = connect_async(&Self::path()).await?;
         send_to_ipc_stream(&stream, &message.to_bytes()?)
             .await?
             .ok()
@@ -177,7 +166,7 @@ impl AppIpc {
 
     /// Sends a message to the current session synchronously
     pub fn send_sync(message: &AppMessage) -> Result<()> {
-        let stream = DuplexPipeStream::connect_by_path(Self::path())?;
+        let stream = connect(&Self::path())?;
         let data = message.to_bytes()?;
         send_to_ipc_stream_blocking(&stream, &data)?;
         Ok(())
@@ -186,18 +175,10 @@ impl AppIpc {
 
 /// Gets the current session ID of the process
 pub fn current_session_id() -> Result<u32> {
-    let process_id = std::process::id();
-    let mut session_id = 0;
-    unsafe { ProcessIdToSessionId(process_id, &mut session_id)? };
-    Ok(session_id)
+    Platform::current_session_id()
 }
 
 /// Gets the current interactive session, if any
 pub fn current_interactive_session_id() -> Option<u32> {
-    let session_id = unsafe { WTSGetActiveConsoleSessionId() };
-    if session_id == u32::MAX {
-        None
-    } else {
-        Some(session_id)
-    }
+    Platform::interactive_session_id()
 }

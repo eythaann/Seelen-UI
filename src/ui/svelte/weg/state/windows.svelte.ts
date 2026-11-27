@@ -26,7 +26,7 @@ const setDelayedFocused = debounce((v: FocusedApp) => {
 subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focused.value = e.payload;
   setDelayedFocused(e.payload);
-  if (e.payload.hwnd !== selfWinId.value) {
+  if (e.payload.id !== selfWinId.value) {
     setDelayedFocused.flush();
   }
 });
@@ -53,13 +53,13 @@ const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | nul
     .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
     .find((w) => !w.isIconic && w.isZoomed && w.monitor === monitorId);
   if (!maximized) return null;
-  return windowsColors.value[maximized.hwnd] ?? null;
+  return windowsColors.value[maximized.id] ?? null;
 });
 
 const _isDockOverlapped = $derived.by(() => {
   // If foreground is not in interactable windows, return false directly, this handled start menu or desktop focus cases.
   const foreground = focused.value;
-  if (!interactables.value.some((w) => w.hwnd === foreground.hwnd)) {
+  if (!interactables.value.some((w) => w.id === foreground.id)) {
     return false;
   }
 

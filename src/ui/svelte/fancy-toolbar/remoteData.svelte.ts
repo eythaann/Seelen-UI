@@ -1,3 +1,4 @@
+import { untrack } from "svelte";
 import type { ToolbarItem } from "@seelen-ui/lib/types";
 
 export function createRemoteDataResolver(
@@ -17,7 +18,16 @@ export function createRemoteDataResolver(
           ? await response.json()
           : await response.text();
         if (mounted) {
-          fetchedData[key] = data;
+          // `set()` rejects `$state` writes made while the active reaction is a
+          // derived/block/eager reaction (see `set()` in Svelte's `sources.js`),
+          // and the toolbar flushes those constantly. A fetch completion is a
+          // microtask that can land inside such a context — the write then
+          // throws `state_unsafe_mutation` and the payload never reaches the
+          // script scope. This write reads no reactive state, so run it
+          // untracked to escape that context.
+          untrack(() => {
+            fetchedData[key] = data;
+          });
         }
       } catch (err) {
         console.error(`Error fetching ${key}:`, err);

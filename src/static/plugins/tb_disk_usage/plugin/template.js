@@ -17,4 +17,4 @@ units.forEach((unitSize) => {
 const read = totalRead === 0 ? "-" : totalRead.toFixed(0) + unit + "/s";
 const written = totalWritten === 0 ? "-" : totalWritten.toFixed(0) + unit + "/s";
 
-return [icon("BsDeviceHdd"), " ", read + " | " + written];
+return [Icon({ name: "BsDeviceHdd" }), " ", read + " | " + written];

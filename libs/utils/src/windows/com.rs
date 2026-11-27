@@ -1,0 +1,252 @@
+use windows::{
+    Win32::{
+        Foundation::{LPARAM, RPC_E_CHANGED_MODE, WPARAM},
+        System::{
+            Com::{
+                CLSCTX_ALL, COINIT, COINIT_APARTMENTTHREADED, CoCreateInstance, CoInitializeEx,
+                CoTaskMemFree, CoUninitialize,
+            },
+            Threading::GetCurrentThreadId,
+        },
+        UI::WindowsAndMessaging::{
+            DispatchMessageW, GetMessageW, MSG, PM_NOREMOVE, PeekMessageW, PostThreadMessageW,
+            TranslateMessage, WM_APP, WM_QUIT,
+        },
+    },
+    core::{GUID, Interface},
+};
+
+/// custom message used to wake the COM thread up and make it drain pending commands
+const WM_COM_EXECUTE: u32 = WM_APP + 1;
+
+pub struct Com {}
+
+impl Com {
+    fn initialize(flags: COINIT) -> windows::core::Result<ComGuard> {
+        let hresult = unsafe { CoInitializeEx(None, flags) };
+        if hresult.is_err() {
+            // already initialized on this thread with another concurrency model, COM is
+            // usable anyway, we just must not call `CoUninitialize` for it
+            if hresult == RPC_E_CHANGED_MODE {
+                return Ok(ComGuard { initialized: false });
+            }
+            return Err(windows::core::Error::from_hresult(hresult));
+        }
+        Ok(ComGuard { initialized: true })
+    }
+
+    pub fn create_instance<T>(class_id: &GUID) -> windows::core::Result<T>
+    where
+        T: Interface,
+    {
+        unsafe { CoCreateInstance(class_id, None, CLSCTX_ALL) }
+    }
+
+    /// Will execute init and drop in a safe way, ensuring that all instances created between init and drop are dropped
+    pub fn run_with_context<F, T, E>(f: F) -> Result<T, E>
+    where
+        F: FnOnce() -> Result<T, E>,
+        E: From<windows::core::Error>,
+    {
+        let _guard = Self::initialize(COINIT_APARTMENTTHREADED)?;
+        f()
+    }
+
+    pub fn task_mem_free(ptr: *mut core::ffi::c_void) {
+        unsafe { CoTaskMemFree(Some(ptr)) }
+    }
+}
+
+struct ComGuard {
+    initialized: bool,
+}
+
+impl Drop for ComGuard {
+    fn drop(&mut self) {
+        if self.initialized {
+            unsafe { CoUninitialize() };
+        }
+    }
+}
+
+type Command<S> = Box<dyn FnOnce(&mut S) + Send>;
+
+/// A dedicated STA thread with a real Win32 message pump, that owns a piece of state `S`
+/// created on (and never leaving) that thread.
+///
+/// COM objects (and specially the callbacks/events they register) are bound to the
+/// apartment/thread that created them. Creating them lazily on whatever thread happens to
+/// touch them first (e.g. from a plain `LazyLock`) leaves them owned by a thread we don't
+/// fully control: it may never pump a message loop, may be a short-lived worker, or may
+/// panic, silently breaking event delivery for the rest of the app's life. `ComThread`
+/// instead runs forever, so any COM object stored in its state (and any callback it fires)
+/// stays valid and responsive for as long as the app is running.
+///
+/// `E` is the error type of the owning binary: it only has to be buildable from a [`windows::core::Error`] and from a `&'static str`.
+///
+/// Typical usage is one `ComThread<S, E>` per module, held behind a `static LazyLock`:
+///
+/// ```ignore
+/// struct DevicesState {
+///     enumerator: IMMDeviceEnumerator,
+///     notification_client: IMMNotificationClient,
+/// }
+///
+/// static COM: LazyLock<ComThread<DevicesState, AppError>> = LazyLock::new(|| {
+///     ComThread::spawn("Devices COM", || unsafe {
+///         let enumerator: IMMDeviceEnumerator = Com::create_instance(&MMDeviceEnumerator)?;
+///         let notification_client = DevicesManagerEvents.into();
+///         enumerator.RegisterEndpointNotificationCallback(&notification_client)?;
+///         // state belongs exclusively to this thread from here on
+///         Ok(DevicesState { enumerator, notification_client })
+///     })
+///     .expect("failed to start devices COM thread")
+/// });
+///
+/// let collection = COM.call(|state| unsafe {
+///     Ok(state.enumerator.EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?)
+/// })?;
+/// ```
+pub struct ComThread<S, E> {
+    thread_id: u32,
+    sender: crossbeam_channel::Sender<Command<S>>,
+    thread: Option<std::thread::JoinHandle<()>>,
+    _error: std::marker::PhantomData<fn() -> E>,
+}
+
+impl<S, E> ComThread<S, E>
+where
+    E: From<windows::core::Error> + From<&'static str> + Send + 'static,
+{
+    /// Spawns the COM thread, runs `init` on it to build its state, then starts pumping
+    /// messages. Blocks the calling thread until `init` has finished.
+    ///
+    /// `name` identifies the thread (shows up in debuggers/logs); since `ComThread` is meant
+    /// to be reused across modules, give each instance its own distinct name.
+    pub fn spawn<F>(name: &str, init: F) -> Result<Self, E>
+    where
+        F: FnOnce() -> Result<S, E> + Send + 'static,
+        S: 'static,
+    {
+        let (sender, receiver) = crossbeam_channel::unbounded::<Command<S>>();
+        let (ready_tx, ready_rx) = crossbeam_channel::bounded::<Result<u32, E>>(1);
+
+        let thread = std::thread::Builder::new()
+            .name(format!("SLU - {name}"))
+            .spawn(move || {
+                let thread_id = unsafe { GetCurrentThreadId() };
+
+                // a thread's message queue is created lazily on its first message-related
+                // call; force it to exist now so `PostThreadMessageW` can't be called by a
+                // caller (right after `spawn` returns) before the queue exists, which would
+                // fail with "invalid thread id"
+                unsafe {
+                    let mut msg = MSG::default();
+                    let _ = PeekMessageW(&mut msg, None, 0, 0, PM_NOREMOVE);
+                }
+
+                // held for the whole thread lifetime: dropping it (which calls
+                // `CoUninitialize`) must happen after the message loop returns, not right
+                // after `init` runs
+                let _guard = match Com::initialize(COINIT_APARTMENTTHREADED) {
+                    Ok(guard) => guard,
+                    Err(err) => {
+                        ready_tx.send(Err(err.into())).ok();
+                        return;
+                    }
+                };
+
+                let mut state = match init() {
+                    Ok(state) => state,
+                    Err(err) => {
+                        ready_tx.send(Err(err)).ok();
+                        return;
+                    }
+                };
+
+                ready_tx.send(Ok(thread_id)).ok();
+                Self::message_loop(&mut state, &receiver);
+            })
+            .map_err(|_| E::from("Failed to spawn the COM thread"))?;
+
+        let thread_id = ready_rx
+            .recv()
+            .map_err(|_| E::from("COM thread failed to start"))??;
+
+        Ok(Self {
+            thread_id,
+            sender,
+            thread: Some(thread),
+            _error: std::marker::PhantomData,
+        })
+    }
+
+    fn message_loop(state: &mut S, receiver: &crossbeam_channel::Receiver<Command<S>>) {
+        let mut msg = MSG::default();
+        while unsafe { GetMessageW(&mut msg, None, 0, 0) }.into() {
+            if msg.message == WM_COM_EXECUTE {
+                while let Ok(command) = receiver.try_recv() {
+                    // a panicking command must not take the whole COM thread down with
+                    // it: every other pending/future `call()` would then block on
+                    // `rx.recv()` forever, since nothing would ever be left to answer
+                    // them. We accept that `state` may be left in a partially-updated
+                    // shape by the unwind.
+                    let result =
+                        std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| command(state)));
+                    if let Err(payload) = result {
+                        let cause = payload
+                            .downcast_ref::<&str>()
+                            .map(|s| s.to_string())
+                            .or_else(|| payload.downcast_ref::<String>().cloned())
+                            .unwrap_or_else(|| "<cause unknown>".to_string());
+                        log::error!("COM thread command panicked: {cause}");
+                    }
+                }
+                continue;
+            }
+            unsafe {
+                let _ = TranslateMessage(&msg);
+                DispatchMessageW(&msg);
+            }
+        }
+    }
+
+    /// Queues `f` to run on the COM thread, with mutable access to its state, without
+    /// waiting for it to finish.
+    pub fn execute<F>(&self, f: F) -> Result<(), E>
+    where
+        F: FnOnce(&mut S) + Send + 'static,
+    {
+        self.sender
+            .send(Box::new(f))
+            .map_err(|_| E::from("COM thread is not running"))?;
+        unsafe { PostThreadMessageW(self.thread_id, WM_COM_EXECUTE, WPARAM(0), LPARAM(0))? };
+        Ok(())
+    }
+
+    /// Runs `f` on the COM thread, with mutable access to its state, and blocks the caller
+    /// until it finishes, returning its result.
+    pub fn call<F, T>(&self, f: F) -> Result<T, E>
+    where
+        F: FnOnce(&mut S) -> Result<T, E> + Send + 'static,
+        T: Send + 'static,
+    {
+        let (tx, rx) = crossbeam_channel::bounded(1);
+        self.execute(move |state| {
+            tx.send(f(state)).ok();
+        })?;
+        rx.recv()
+            .map_err(|_| E::from("COM thread dropped the response channel"))?
+    }
+}
+
+impl<S, E> Drop for ComThread<S, E> {
+    fn drop(&mut self) {
+        unsafe {
+            let _ = PostThreadMessageW(self.thread_id, WM_QUIT, WPARAM(0), LPARAM(0));
+        }
+        if let Some(thread) = self.thread.take() {
+            let _ = thread.join();
+        }
+    }
+}

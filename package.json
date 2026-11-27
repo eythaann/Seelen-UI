@@ -3,20 +3,17 @@
   "version": "2.8.12",
   "description": "Seelen UI Project",
   "type": "module",
+  "workspaces": [
+    "libs/core"
+  ],
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "tauri": "tauri",
-    "tauri:update": "tsx scripts/UpdateTauri.ts",
     "build:ui": "tsx scripts/build.ts",
-    "build:lib": "cd ./libs/core && deno task build && cd ../..",
-    "dev": "cargo build && tauri dev",
-    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\"",
-    "translate": "tsx ./scripts/translate/mod.ts",
-    "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && cd ./libs/core && deno check && cd ../..",
-    "version:start": "tsx ./scripts/versionish.ts start",
-    "version:finish": "tsx ./scripts/versionish.ts finish",
-    "preinstall": "npm run build:lib",
-    "postinstall": "lefthook install"
+    "build:lib": "npm run build -w @seelen-ui/lib",
+    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\" && npm test -w @seelen-ui/lib",
+    "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && npm run type-check -w @seelen-ui/lib",
+    "postinstall": "lefthook install && npm run build:lib"
   },
   "keywords": [],
   "author": {
@@ -56,7 +53,7 @@
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@nyariv/sandboxjs": "^0.9.4",
-    "@seelen-ui/lib": "file:./libs/core/npm",
+    "@seelen-ui/lib": "file:./libs/core",
     "@seelen/translation-toolkit": "^1.2.4",
     "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",
@@ -66,15 +63,17 @@
     "@types/react-dom": "^19.0.0",
     "@types/yargs": "^17.0.33",
     "antd": "^6.3.6",
+    "dprint": "^0.65.0",
     "esbuild": "^0.28.0",
     "esbuild-css-modules-plugin": "^3.1.4",
     "express": "^5.2.1",
     "framer-motion": "^12.38.0",
-    "i18next": "^26.0.6",
+    "i18next": "^27.2.4",
     "js-yaml": "^4.1.0",
     "lefthook": "^2.1.6",
     "lodash": "^4.18.1",
     "moment": "^2.30.1",
+    "oxlint": "^1.95.0",
     "react-i18next": "^17.0.4",
     "react-icons": "^5.6.0",
     "real-react-dom": "npm:react-dom@^19.0.0",
@@ -84,6 +83,6 @@
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
     "yargs": "^18.0.0",
-    "zod": "^3.24.3"
+    "zod": "^4.6.7"
   }
 }

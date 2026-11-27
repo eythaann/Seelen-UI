@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowEnumerator;
 mod event;
 
 use event::WinEvent;
@@ -5,7 +6,7 @@ use event::WinEvent;
 use std::{collections::HashSet, sync::Arc};
 
 use parking_lot::RwLock;
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, system_state::WindowHandle};
 use windows::Win32::{
     Foundation::HWND,
     UI::{
@@ -19,7 +20,7 @@ use windows::Win32::{
 
 use crate::{
     app::emit_to_webviews, error::ResultLogExt, platform::window::Window, state::FULL_STATE,
-    utils::spawn_named_thread, widgets::weg::SeelenWeg, windows_api::WindowEnumerator,
+    utils::spawn_named_thread, widgets::weg::SeelenWeg,
 };
 
 use super::{HookManager, WindowEvent};
@@ -120,7 +121,7 @@ fn log_event(event: WindowEvent, origin: Window) {
     use owo_colors::OwoColorize;
     let event_value = event.green();
     if event == WindowEvent::Destroyed {
-        return println!("{event_value:?}({:0x})", origin.address());
+        return println!("{event_value:?}({:0x})", origin.handle());
     }
     println!("{event_value:?} | {origin:?}");
 }
@@ -154,10 +155,10 @@ fn init_zombie_window_killer() {
     let dict = existing_windows.clone();
     HookManager::subscribe(move |(event, origin)| match event {
         WindowEvent::Created => {
-            dict.write().insert(origin.address());
+            dict.write().insert(origin.handle());
         }
         WindowEvent::Destroyed => {
-            dict.write().remove(&origin.address());
+            dict.write().remove(&origin.handle());
         }
         _ => {}
     });
@@ -169,7 +170,7 @@ fn init_zombie_window_killer() {
     spawn_named_thread("Zombie Window Exterminator", move || {
         WindowEnumerator::new()
             .for_each_and_descendants(|hwnd| {
-                existing_windows.write().insert(hwnd.0 as isize);
+                existing_windows.write().insert(hwnd.0 as WindowHandle);
             })
             .log_error();
 
@@ -181,7 +182,7 @@ fn init_zombie_window_killer() {
                 continue;
             }
 
-            let dead: Vec<isize> = {
+            let dead: Vec<WindowHandle> = {
                 let guard = existing_windows.read();
                 guard
                     .iter()
@@ -193,7 +194,7 @@ fn init_zombie_window_killer() {
             for addr in dead {
                 existing_windows.write().remove(&addr);
                 let window = Window::from(addr);
-                log::trace!("Reaping window: {:0x}", window.address());
+                log::trace!("Reaping window: {:0x}", window.handle());
                 HookManager::send((WindowEvent::Destroyed, window));
             }
         }

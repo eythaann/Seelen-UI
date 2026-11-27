@@ -22,7 +22,7 @@ const _thereIsMaximizedOnBg = $derived(
 const _isTbOverlapped = $derived.by(() => {
   // If foreground is not in interactable windows, return false directly, this handled start menu or desktop focus cases.
   const foreground = focused.value;
-  if (!interactables.value.some((w) => w.hwnd === foreground.hwnd)) {
+  if (!interactables.value.some((w) => w.id === foreground.id)) {
     return false;
   }
 
@@ -46,7 +46,7 @@ const _currentMonitorMaximizedColors = $derived.by((): UserAppWindowColors | nul
     .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
     .find((w) => !w.isIconic && w.isZoomed && w.monitor === monitorId);
   if (!maximized) return null;
-  return windowsColors.value[maximized.hwnd] ?? null;
+  return windowsColors.value[maximized.id] ?? null;
 });
 
 class WindowsState {

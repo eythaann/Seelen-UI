@@ -4,6 +4,7 @@ use std::time::{Duration, Instant};
 
 use crate::platform::hook::{HookManager, WindowEvent};
 use crate::platform::window::Window;
+use seelen_core::system_state::WindowHandle;
 use windows::Win32::UI::WindowsAndMessaging::*;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -216,20 +217,21 @@ impl From<u32> for WinEvent {
     }
 }
 
-static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<isize>> = LazyLock::new(|| {
-    slu_utils::throttle(
-        |addr| {
-            let window = Window::from(addr);
-            if window.is_focused() {
-                HookManager::send((WindowEvent::ForegroundRectChanged, window));
-            }
-        },
-        std::time::Duration::from_millis(100),
-    )
-});
+static LAZY_LOCATION_CHANGE_EVENT: LazyLock<slu_utils::Throttle<WindowHandle>> =
+    LazyLock::new(|| {
+        slu_utils::throttle(
+            |addr| {
+                let window = Window::from(addr);
+                if window.is_focused() {
+                    HookManager::send((WindowEvent::ForegroundRectChanged, window));
+                }
+            },
+            std::time::Duration::from_millis(100),
+        )
+    });
 
 enum PerWindowMsg {
-    Update(isize),
+    Update(WindowHandle),
     TerminateAll,
 }
 
@@ -238,10 +240,10 @@ struct PerWindowDebounce {
 }
 
 impl PerWindowDebounce {
-    fn new(delay: Duration, callback: impl Fn(isize) + Send + 'static) -> Self {
+    fn new(delay: Duration, callback: impl Fn(WindowHandle) + Send + 'static) -> Self {
         let (tx, rx) = mpsc::channel::<PerWindowMsg>();
         std::thread::spawn(move || {
-            let mut pending: HashMap<isize, Instant> = HashMap::new();
+            let mut pending: HashMap<WindowHandle, Instant> = HashMap::new();
             loop {
                 let result = if pending.is_empty() {
                     rx.recv().map_err(|_| mpsc::RecvTimeoutError::Disconnected)
@@ -265,7 +267,7 @@ impl PerWindowDebounce {
                     }
                     Err(mpsc::RecvTimeoutError::Timeout) => {
                         let now = Instant::now();
-                        let fired: Vec<isize> = pending
+                        let fired: Vec<WindowHandle> = pending
                             .iter()
                             .filter(|(_, t)| now.duration_since(**t) >= delay)
                             .map(|(addr, _)| *addr)
@@ -282,7 +284,7 @@ impl PerWindowDebounce {
         Self { sender: tx }
     }
 
-    fn call(&self, addr: isize) {
+    fn call(&self, addr: WindowHandle) {
         let _ = self.sender.send(PerWindowMsg::Update(addr));
     }
 
@@ -303,9 +305,9 @@ impl WinEvent {
         match self {
             Self::ObjectLocationChange => {
                 if origin.is_focused() {
-                    LAZY_LOCATION_CHANGE_EVENT.call(origin.address());
+                    LAZY_LOCATION_CHANGE_EVENT.call(origin.handle());
                 }
-                LAZY_LOCATION_CHANGE_DEBOUNCE.call(origin.address());
+                LAZY_LOCATION_CHANGE_DEBOUNCE.call(origin.handle());
             }
             Self::SystemMoveSizeEnd => {
                 LAZY_LOCATION_CHANGE_EVENT.terminate();

@@ -50,6 +50,22 @@ impl Process {
         self.0.is_frozen()
     }
 
+    /// Absolute creation time of the process (FILETIME, 100ns ticks since 1601 UTC).
+    /// Together with the id it uniquely identifies a process, even across reboots.
+    pub fn created_at(&self) -> Result<u64> {
+        self.0.created_at()
+    }
+
+    /// The process that created this one, while it is still running.
+    pub fn parent(&self) -> Result<Process> {
+        let parent = Process::from_id(self.0.parent_id()?);
+        // the parent may have exited and its id been reused by a newer process
+        if parent.created_at()? > self.created_at()? {
+            return Err("the parent process is no longer running".into());
+        }
+        Ok(parent)
+    }
+
     /// Forcefully terminates the process, without waiting for it.
     pub fn kill(&self) -> Result<()> {
         self.0.kill()

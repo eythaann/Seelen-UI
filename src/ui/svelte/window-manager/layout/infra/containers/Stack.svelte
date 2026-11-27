@@ -13,8 +13,8 @@
 
   let { node, overlayVisible }: Props = $props();
 
-  function onTabClick(winId: number) {
-    invoke(SeelenCommand.WmSetStackActiveWindow, { hwnd: winId });
+  function onTabClick(winId: string) {
+    invoke(SeelenCommand.WmSetStackActiveWindow, { id: winId });
   }
 
   const shouldShowStackBar = $derived(
@@ -28,7 +28,7 @@
   {#if shouldShowStackBar}
     <div class="wm-stack-bar" data-allow-mouse-events={overlayVisible}>
       {#each node.windows as winId (winId)}
-        {@const info = state.interactables.find((app) => app.hwnd === winId)}
+        {@const info = state.interactables.find((app) => app.id === winId)}
         <button
           class="wm-stack-bar-item"
           data-skin={winId === node.activeWindow ? "solid" : "default"}
@@ -42,7 +42,7 @@
             data-allow-mouse-events={overlayVisible}
           />
           <span class="wm-stack-bar-item-title" data-allow-mouse-events={overlayVisible}>
-            {info?.title || `0x${winId.toString(16)}`}
+            {info?.title || `0x${winId.split("_")[0]}`}
           </span>
         </button>
       {/each}

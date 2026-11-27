@@ -3,6 +3,7 @@
 //! https://learn.microsoft.com/en-us/windows/win32/api/notificationactivationcallback/nf-notificationactivationcallback-inotificationactivationcallback-activate
 //! https://github.com/CommunityToolkit/WindowsCommunityToolkit/blob/c8f76d072df53d3622fb5440d63afb06cb9e7a10/Microsoft.Toolkit.Uwp.Notifications/Toasts/Compat/Desktop/DesktopNotificationManagerCompat.cs#L19
 
+use slu_utils::windows::{Com, WindowsString};
 use std::collections::HashMap;
 
 use seelen_core::system_state::ToastActionActivationType;
@@ -24,7 +25,7 @@ use crate::{
     error::Result,
     system_modules::start::StartMenuManager,
     windows_api::msix::PackageManifest,
-    windows_api::{Com, WindowsApi, string_utils::WindowsString, types::AppUserModelId},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 pub fn activate(
@@ -84,7 +85,7 @@ pub fn activate(
     // accept this limitation — opening the app is still better than nothing.
     if app_umid.is_appx() {
         log::trace!("Activating with IApplicationActivationManager");
-        let result = Com::run_with_context(|| unsafe {
+        let result: Result<()> = Com::run_with_context(|| unsafe {
             let activator: IApplicationActivationManager =
                 Com::create_instance(&ApplicationActivationManager)?;
             let aumid = WindowsString::from_str(&app_umid);

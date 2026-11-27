@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
+    "noCheck": true,
+    "rootDir": ".",
+    "types": []
+  },
+  "include": ["src", "gen/types", "gen/handlers"],
+  "exclude": ["src/**/*.test.ts"]
+}

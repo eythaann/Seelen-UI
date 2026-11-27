@@ -1,13 +1,9 @@
-mod app_bar;
-mod com;
 mod devices;
 pub mod event_window;
 pub mod icon;
 pub mod input;
-mod iterator;
 pub mod msix;
 pub mod pwsh;
-pub mod string_utils;
 pub mod types;
 pub mod undocumented;
 pub mod virtual_desktop;
@@ -16,13 +12,10 @@ pub mod window_badges;
 #[allow(dead_code)]
 pub mod wpn_service;
 
-pub use app_bar::*;
-pub use com::*;
 pub use devices::*;
-pub use iterator::*;
 
 use itertools::Itertools;
-use string_utils::WindowsString;
+use slu_utils::windows::{Com, MonitorEnumerator, WindowsString};
 use types::ProcessInformationFlag;
 use windows_core::{Interface, Owned, RuntimeType};
 use windows_future::{AsyncStatus, IAsyncOperation};
@@ -52,8 +45,8 @@ use windows::{
             PHYSICAL_MONITOR,
         },
         Foundation::{
-            GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, POINT, RECT, STATUS_SUCCESS,
-            SetLastError, WIN32_ERROR, WPARAM,
+            FILETIME, GetLastError, HANDLE, HMODULE, HWND, LPARAM, LUID, POINT, RECT,
+            STATUS_SUCCESS, SetLastError, WIN32_ERROR, WPARAM,
         },
         Graphics::{
             Dwm::{
@@ -63,8 +56,8 @@ use windows::{
                 DwmSetWindowAttribute,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY,
-                MONITORENUMPROC, MONITORINFOEXW, MonitorFromPoint, MonitorFromWindow,
+                GetMonitorInfoW, HMONITOR, MONITOR_DEFAULTTOPRIMARY, MONITORINFOEXW,
+                MonitorFromPoint, MonitorFromWindow,
             },
         },
         Security::{
@@ -96,8 +89,8 @@ use windows::{
             SystemInformation::{COMPUTER_NAME_FORMAT, GetComputerNameExW},
             Threading::{
                 AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
-                OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
+                GetProcessTimes, OpenProcess, OpenProcessToken, PROCESS_ACCESS_RIGHTS,
+                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION, QueryFullProcessImageNameW,
             },
             Variant::VARIANT,
         },
@@ -130,7 +123,7 @@ use windows::{
 };
 
 use crate::{
-    error::{Result, WindowsResultExt},
+    error::{AppError, Result, WindowsResultExt},
     platform::{
         hook::{HookManager, WindowEvent},
         window::Window,
@@ -195,18 +188,6 @@ impl WindowsApi {
 
     pub fn module_handle_w() -> Result<HMODULE> {
         Ok(unsafe { GetModuleHandleW(None) }?)
-    }
-
-    pub fn enum_display_monitors(
-        callback: MONITORENUMPROC,
-        callback_data_address: isize,
-    ) -> Result<()> {
-        unsafe {
-            EnumDisplayMonitors(None, None, callback, LPARAM(callback_data_address))
-                .ok()
-                .filter_fake_error()?;
-        }
-        Ok(())
     }
 
     pub fn send_message(hwnd: HWND, message: u32, wparam: usize, lparam: isize) -> Result<isize> {
@@ -542,8 +523,20 @@ impl WindowsApi {
     }
 
     pub fn is_process_frozen(process_id: u32) -> Result<bool> {
+        let data = Self::process_basic_information(process_id)?;
+        Ok(unsafe { data.Anonymous.Flags } & ProcessInformationFlag::IsFrozen as u32 != 0)
+    }
+
+    /// Id of the process that created `process_id`. It may have exited since, and its id
+    /// may have been reused by another process: compare the creation times to be sure.
+    pub fn parent_process_id(process_id: u32) -> Result<u32> {
+        let data = Self::process_basic_information(process_id)?;
+        Ok(u32::try_from(data.BasicInfo.InheritedFromUniqueProcessId)?)
+    }
+
+    fn process_basic_information(process_id: u32) -> Result<PROCESS_EXTENDED_BASIC_INFORMATION> {
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
-        let is_frozen = unsafe {
+        unsafe {
             let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
             let status = NtQueryInformationProcess(
                 *handle,
@@ -561,10 +554,8 @@ impl WindowsApi {
                 .into());
             }
 
-            let data = buffer[0];
-            data.Anonymous.Flags & ProcessInformationFlag::IsFrozen as u32 != 0
-        };
-        Ok(is_frozen)
+            Ok(buffer[0])
+        }
     }
 
     /// Falls back to `get_process_path_by_pid` for processes we are not allowed to open.
@@ -580,6 +571,17 @@ impl WindowsApi {
             QueryFullProcessImageNameW(*handle, PROCESS_NAME_WIN32, path.as_pwstr(), &mut 1024)?;
         }
         Ok(path.to_os_string())
+    }
+
+    /// Creation time of the process as a FILETIME (100ns intervals since 1601-01-01 UTC).
+    pub fn process_creation_time(process_id: u32) -> Result<u64> {
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
+        let mut creation = FILETIME::default();
+        let mut exit = FILETIME::default();
+        let mut kernel = FILETIME::default();
+        let mut user = FILETIME::default();
+        unsafe { GetProcessTimes(*handle, &mut creation, &mut exit, &mut kernel, &mut user)? };
+        Ok(((creation.dwHighDateTime as u64) << 32) | creation.dwLowDateTime as u64)
     }
 
     pub fn get_class(hwnd: HWND) -> Result<String> {
@@ -775,7 +777,7 @@ impl WindowsApi {
     /// Same as [`Self::get_file_umid`] + [`Self::get_file_toast_activator`], but creating the
     /// shell item and its property store only once.
     pub fn get_file_umid_and_toast_activator(path: &Path) -> (Option<String>, Option<String>) {
-        Com::run_with_context(|| unsafe {
+        Com::run_with_context::<_, _, AppError>(|| unsafe {
             let shell_item = Self::get_shell_item(path)?;
             let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
             let umid = store
@@ -964,7 +966,7 @@ impl WindowsApi {
     }
 
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
-        Com::create_instance(&VirtualDesktopManager)
+        Ok(Com::create_instance(&VirtualDesktopManager)?)
     }
 
     pub fn _get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {

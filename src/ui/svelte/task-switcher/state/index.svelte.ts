@@ -32,14 +32,14 @@ let autoConfirm = $state(false);
 
 let desiredPosition = $state<{ x: number; y: number } | null>(null);
 
-let selectedWindow = $state<number | null>(focusedWinId.value ?? null);
+let selectedWindow = $state<string | null>(focusedWinId.value ?? null);
 
 // Sync selectedWindow with focused window when the switcher is not visible
 $effect.root(() => {
   $effect(() => {
     if (!showing) {
-      const win = filteredWindows.find((w) => w.hwnd === focusedWinId.value);
-      selectedWindow = win?.hwnd ?? null;
+      const win = filteredWindows.find((w) => w.id === focusedWinId.value);
+      selectedWindow = win?.id ?? null;
     }
   });
 });
@@ -98,7 +98,7 @@ class State {
     return selectedWindow;
   }
 
-  set selectedWindow(value: number | null) {
+  set selectedWindow(value: string | null) {
     selectedWindow = value;
   }
 
@@ -175,7 +175,7 @@ function onAltKeyUp() {
   if (showing && selectedWindow && autoConfirm) {
     showing = false;
     invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: selectedWindow,
+      id: selectedWindow,
       wasFocused: false,
     });
   }
@@ -202,13 +202,13 @@ widget.onTrigger((payload) => {
   // Use the currently selected window when already showing, otherwise start from focused
   const currentHwnd = showing ? selectedWindow : focusedWinId.value;
 
-  let index = targetWindows.findIndex((w) => w.hwnd === currentHwnd);
+  let index = targetWindows.findIndex((w) => w.id === currentHwnd);
   if (direction === "next") {
     if (index === -1) index = targetWindows.length - 1;
-    selectedWindow = targetWindows[(index + 1) % targetWindows.length]?.hwnd ?? null;
+    selectedWindow = targetWindows[(index + 1) % targetWindows.length]?.id ?? null;
   } else if (direction === "previous") {
     if (index === -1) index = 0;
-    selectedWindow = targetWindows[(index - 1 + targetWindows.length) % targetWindows.length]?.hwnd ?? null;
+    selectedWindow = targetWindows[(index - 1 + targetWindows.length) % targetWindows.length]?.id ?? null;
   }
 
   showing = true;

@@ -1,8 +1,7 @@
 import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
 import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
-import { FancyToolbarSide, HideMode } from "@seelen-ui/lib/types";
-import { SeelenWegSide } from "node_modules/@seelen-ui/lib/esm/gen/types/SeelenWegSide";
+import { FancyToolbarSide, HideMode, SeelenWegSide } from "@seelen-ui/lib/types";
 
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 import { isTouchPrimary } from "libs/ui/svelte/utils/signals.svelte.ts";

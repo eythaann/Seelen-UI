@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use windows::Win32::Devices::Display::{
     DestroyPhysicalMonitor, GetMonitorBrightness, GetMonitorCapabilities, PHYSICAL_MONITOR,
     SetMonitorBrightness,
@@ -8,7 +9,7 @@ use windows_core::BOOL;
 use crate::{
     error::Result,
     platform::monitor::{Monitor, WindowsMonitorExt},
-    windows_api::{WindowsApi, string_utils::WindowsString},
+    windows_api::WindowsApi,
 };
 
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]

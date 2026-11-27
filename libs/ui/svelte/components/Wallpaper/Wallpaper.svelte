@@ -61,7 +61,8 @@
     <div
       class="wallpaper-overlay"
       style={`mix-blend-mode: ${config.overlayMixBlendMode}; background-color: ${config.overlayColor};`}
-    ></div>
+    >
+    </div>
   {/if}
 
   {#if pausedMessage && paused && loaded && definition?.type === "Video"}

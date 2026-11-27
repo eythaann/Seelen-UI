@@ -1,8 +1,8 @@
 import { SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 
 let _isThisWebviewFocused = $state(false);
-subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: { hwnd, ownerHwnd } }) => {
-  _isThisWebviewFocused = Widget.self.windowId === hwnd || Widget.self.windowId === ownerHwnd;
+subscribe(SeelenEvent.GlobalFocusChanged, ({ payload: { id, ownerId } }) => {
+  _isThisWebviewFocused = Widget.self.windowId === id || Widget.self.windowId === ownerId;
 });
 
 export const isThisWebviewFocused = {

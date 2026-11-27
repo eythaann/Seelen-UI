@@ -1,30 +1,28 @@
 <script lang="ts">
   import type { UserAppWindow } from "@seelen-ui/lib/types";
   import { state } from "../state.svelte";
-  import { Icon, MissingIcon, FileIcon } from "libs/ui/svelte/components/Icon";
+  import { FileIcon, Icon, MissingIcon } from "libs/ui/svelte/components/Icon";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { createDraggable } from "@dnd-kit/svelte";
 
   interface Props {
-    hwnd: number;
+    hwnd: string;
     overlay?: boolean;
   }
 
   let { hwnd, overlay }: Props = $props();
 
-  const windowData = $derived(state.windows.find((w: UserAppWindow) => w.hwnd === hwnd));
+  const windowData = $derived(state.windows.find((w: UserAppWindow) => w.id === hwnd));
   const preview = $derived(state.previews[hwnd]);
 
   const aspectRatio = $derived(preview ? preview.width / preview.height : 16 / 9);
 
   // svelte-ignore state_referenced_locally
-  const draggable = overlay
-    ? null
-    : createDraggable({
-        get id() {
-          return hwnd;
-        },
-      });
+  const draggable = overlay ? null : createDraggable({
+    get id() {
+      return hwnd;
+    },
+  });
 </script>
 
 <div
@@ -37,7 +35,7 @@
   tabindex="0"
   onclick={(e) => {
     e.stopPropagation();
-    invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: false });
+    invoke(SeelenCommand.WegToggleWindowState, { id: hwnd, wasFocused: false });
     Widget.self.hide();
   }}
   onkeydown={(e) => {
@@ -52,13 +50,13 @@
       path={windowData?.relaunch?.icon || windowData?.process?.path}
     />
     <div class="window-title">
-      {windowData?.title || hwnd.toString(16)}
+      {windowData?.title || hwnd.split("_")[0]}
     </div>
     <button
       data-skin="transparent"
       onclick={(e) => {
         e.stopPropagation();
-        invoke(SeelenCommand.WegCloseApp, { hwnd });
+        invoke(SeelenCommand.WegCloseApp, { id: hwnd });
       }}
     >
       <Icon iconName="TbX" />

@@ -1,3 +1,4 @@
+use slu_utils::windows::Com;
 use windows::Win32::{
     Media::Audio::{
         AUDCLNT_BUFFERFLAGS_SILENT, AUDCLNT_SHAREMODE_SHARED, AUDCLNT_STREAMFLAGS_LOOPBACK,
@@ -10,7 +11,6 @@ use windows::Win32::{
 use crate::{
     error::Result,
     system_modules::media_waveform::domain::{LoopbackCapture, WaveformSystem},
-    windows_api::Com,
 };
 
 /// Stateless: each capture opens its own WASAPI session.

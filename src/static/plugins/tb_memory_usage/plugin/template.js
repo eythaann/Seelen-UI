@@ -14,4 +14,4 @@ units.forEach((unitSize) => {
   }
 });
 
-return [icon("FaMemory"), " ", used.toFixed(0) + unit + " / " + total.toFixed(0) + unit];
+return [Icon({ name: "FaMemory" }), " ", used.toFixed(0) + unit + " / " + total.toFixed(0) + unit];

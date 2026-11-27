@@ -1,4 +1,5 @@
 use seelen_core::system_state::SeelenFont;
+use slu_utils::windows::WindowsString;
 use windows::Win32::{
     Graphics::DirectWrite::{
         DWRITE_FACTORY_TYPE_SHARED, DWriteCreateFactory, IDWriteFactory, IDWriteFontFamily,
@@ -10,7 +11,7 @@ use windows_core::{BOOL, HSTRING};
 use crate::{
     error::Result,
     system_modules::fonts::domain::{FontsSysEvent, FontsSystem},
-    windows_api::{event_window::subscribe_to_background_window, string_utils::WindowsString},
+    windows_api::event_window::subscribe_to_background_window,
 };
 
 /// Stateless: `WM_FONTCHANGE` is broadcast to the background window, whose subscriptions live

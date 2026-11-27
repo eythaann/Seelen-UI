@@ -1,9 +1,10 @@
+use slu_utils::windows::Com;
 use std::path::Path;
 
 use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
 use windows_core::{BSTR, Interface};
 
-use crate::{error::Result, windows_api::Com};
+use crate::error::Result;
 
 const TASK_FOLDER: &str = r"\Seelen";
 const TASK_NAME: &str = "Seelen UI Service";

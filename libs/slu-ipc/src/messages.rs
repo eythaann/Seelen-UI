@@ -2,7 +2,8 @@ use std::collections::HashMap;
 
 use seelen_core::{
     rect::Rect,
-    state::{Settings, shortcuts::ResolvedShortcut},
+    state::shortcuts::ResolvedShortcut,
+    system_state::{WindowHandle, WindowState},
 };
 use serde::{Deserialize, Serialize};
 
@@ -83,34 +84,52 @@ impl AppMessage {
 pub enum SvcAction {
     Stop,
     SetStartup(bool),
-    SetSettings(Box<Settings>),
     /// Sends the resolved shortcuts list to the service for hotkey registration.
     /// Pass an empty `Vec` to unregister all hotkeys (e.g. when shortcuts are disabled).
     SetShortcuts(Vec<ResolvedShortcut>),
+    // The serialized names of the window variants (`hwnd`, `command`, `flags`) are kept from when
+    // they carried raw Win32 values, so the app and the service stay compatible across versions.
     ShowWindow {
-        hwnd: isize,
-        command: i32,
+        #[serde(rename = "hwnd")]
+        window: WindowHandle,
+        #[serde(rename = "command")]
+        state: WindowState,
     },
+    /// Same as [`SvcAction::ShowWindow`] but without waiting for the window to process it.
     ShowWindowAsync {
-        hwnd: isize,
-        command: i32,
+        #[serde(rename = "hwnd")]
+        window: WindowHandle,
+        #[serde(rename = "command")]
+        state: WindowState,
     },
+    /// Moves and resizes the window, without activating it nor changing its z-order.
     SetWindowPosition {
-        hwnd: isize,
+        #[serde(rename = "hwnd")]
+        window: WindowHandle,
         rect: Rect,
+        /// Deprecated, ignored: only sent (always `0`) because previous versions require it.
+        #[serde(default)]
         flags: u32,
     },
     DeferWindowPositions {
-        list: HashMap<isize, Rect>,
+        list: HashMap<WindowHandle, Rect>,
         animated: bool,
         animation_duration: u64,
         easing: String,
     },
-    SetForeground(isize),
+    SetForeground(WindowHandle),
     StartShortcutRegistration,
     StopShortcutRegistration,
     HideNativeTaskbar,
     RestoreNativeTaskbar,
+    /// Mirrors the Seelen UI wallpaper on the native desktop wallpaper, so system surfaces that
+    /// show it (UAC prompt, lock/logon transitions, etc.) match what the user sees.
+    /// `path: None` sets a black wallpaper. The user's original wallpaper is saved on the first
+    /// call and restored by `RestoreNativeWallpaper` or when the service stops.
+    SetNativeWallpaper {
+        path: Option<std::path::PathBuf>,
+    },
+    RestoreNativeWallpaper,
 }
 
 impl SvcAction {
@@ -185,4 +204,63 @@ pub enum Win32TaskbarButtonEvent {
         hwnd: isize,
         description: Option<String>,
     },
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// JSON as sent by previous versions, when these variants carried raw Win32 values.
+    #[test]
+    fn reads_window_actions_of_previous_versions() -> Result<()> {
+        let action = SvcAction::from_bytes(br#"{"ShowWindowAsync":{"hwnd":1234,"command":6}}"#)?;
+        assert!(matches!(
+            action,
+            SvcAction::ShowWindowAsync {
+                window: 1234,
+                state: WindowState::Minimized
+            }
+        ));
+
+        let action = SvcAction::from_bytes(
+            br#"{"SetWindowPosition":{"hwnd":-5,"rect":{"left":1,"top":2,"right":3,"bottom":4},"flags":0}}"#,
+        )?;
+        assert!(matches!(
+            action,
+            SvcAction::SetWindowPosition { window: -5, rect, .. } if rect.right == 3
+        ));
+
+        let action = SvcAction::from_bytes(
+            br#"{"DeferWindowPositions":{"list":{"42":{"left":0,"top":0,"right":10,"bottom":10}},"animated":true,"animation_duration":200,"easing":"Linear"}}"#,
+        )?;
+        assert!(
+            matches!(action, SvcAction::DeferWindowPositions { list, .. } if list.contains_key(&42))
+        );
+
+        let action = SvcAction::from_bytes(br#"{"SetForeground":99}"#)?;
+        assert!(matches!(action, SvcAction::SetForeground(99)));
+        Ok(())
+    }
+
+    /// Previous versions must be able to read what this one sends.
+    #[test]
+    fn writes_window_actions_as_previous_versions() -> Result<()> {
+        let bytes = SvcAction::ShowWindow {
+            window: 1234,
+            state: WindowState::Restored,
+        }
+        .to_bytes()?;
+        assert_eq!(bytes, br#"{"ShowWindow":{"hwnd":1234,"command":9}}"#);
+
+        let bytes = SvcAction::SetWindowPosition {
+            window: 7,
+            rect: Rect::default(),
+            flags: 0,
+        }
+        .to_bytes()?;
+        let json: serde_json::Value = serde_json::from_slice(&bytes)?;
+        assert_eq!(json["SetWindowPosition"]["hwnd"], 7);
+        assert_eq!(json["SetWindowPosition"]["flags"], 0);
+        Ok(())
+    }
 }

@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::{sync::LazyLock, time::Duration};
 
 use seelen_core::system_state::WlanBssEntry;
@@ -19,7 +20,7 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     utils::lock_free::SyncHashMap,
-    windows_api::{DeviceEnumerator, DeviceEvent, DeviceId, string_utils::WindowsString},
+    windows_api::{DeviceEnumerator, DeviceEvent, DeviceId},
 };
 
 use super::adapter::{self, SluWifiAdapter};

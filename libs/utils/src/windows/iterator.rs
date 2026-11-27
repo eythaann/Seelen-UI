@@ -1,0 +1,148 @@
+use windows::{
+    Win32::{
+        Foundation::{HWND, LPARAM, RECT},
+        Graphics::Gdi::{EnumDisplayMonitors, HDC, HMONITOR},
+        UI::WindowsAndMessaging::{EnumChildWindows, EnumWindows},
+    },
+    core::BOOL,
+};
+
+type Result<T> = windows::core::Result<T>;
+
+#[derive(Debug, Clone, Default)]
+pub struct WindowEnumerator {
+    parent: Option<HWND>,
+}
+
+unsafe impl Send for WindowEnumerator {}
+unsafe impl Sync for WindowEnumerator {}
+
+impl WindowEnumerator {
+    pub fn new() -> Self {
+        Self { parent: None }
+    }
+
+    pub fn with_parent(mut self, parent: HWND) -> Self {
+        self.parent = Some(parent);
+        self
+    }
+
+    fn enumerate(
+        &self,
+        enum_proc: unsafe extern "system" fn(HWND, LPARAM) -> BOOL,
+        ptr: LPARAM,
+    ) -> Result<()> {
+        if let Some(parent) = self.parent {
+            unsafe { EnumChildWindows(Some(parent), Some(enum_proc), ptr).ok()? };
+        } else {
+            unsafe { EnumWindows(Some(enum_proc), ptr)? };
+        }
+        Ok(())
+    }
+
+    /// Will call the callback for each window while enumerating.
+    /// If enumeration fails it will return error.
+    pub fn for_each<F>(&self, cb: F) -> Result<()>
+    where
+        F: FnMut(HWND),
+    {
+        type ForEachCallback<'a> = Box<dyn FnMut(HWND) + 'a>;
+        let mut callback: ForEachCallback = Box::new(cb);
+
+        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
+            unsafe {
+                if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
+                    (*boxed)(hwnd);
+                }
+                true.into()
+            }
+        }
+
+        self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
+    }
+
+    pub fn for_each_and_descendants<F>(&self, cb: F) -> Result<()>
+    where
+        F: FnMut(HWND),
+    {
+        let mut cb = cb;
+        self.for_each_and_descendants_impl(&mut cb)
+    }
+
+    fn for_each_and_descendants_impl<F>(&self, cb: &mut F) -> Result<()>
+    where
+        F: FnMut(HWND),
+    {
+        self.for_each(|hwnd| {
+            cb(hwnd);
+            // ignore errors on recursive children enums
+            let _ = Self::new()
+                .with_parent(hwnd)
+                .for_each_and_descendants_impl(cb);
+        })
+    }
+
+    /// Will call the callback for each window while enumerating.
+    /// If enumeration fails it will return error.
+    pub fn map<F, T>(&self, cb: F) -> Result<Vec<T>>
+    where
+        F: FnMut(HWND) -> T,
+    {
+        struct MapCallbackWrapper<'a, T> {
+            cb: Box<dyn FnMut(HWND) -> T + 'a>,
+            processed: Vec<T>,
+        }
+
+        unsafe extern "system" fn enum_proc<T>(hwnd: HWND, lparam: LPARAM) -> BOOL {
+            unsafe {
+                if let Some(wrapper) = (lparam.0 as *mut MapCallbackWrapper<T>).as_mut() {
+                    wrapper.processed.push((wrapper.cb)(hwnd));
+                }
+                true.into()
+            }
+        }
+
+        let mut wrapper = MapCallbackWrapper {
+            cb: Box::new(cb),
+            processed: Vec::new(),
+        };
+
+        self.enumerate(enum_proc::<T>, LPARAM(&mut wrapper as *mut _ as isize))?;
+        Ok(wrapper.processed)
+    }
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct MonitorEnumerator;
+
+impl MonitorEnumerator {
+    pub fn enumerate_win32() -> Result<Vec<HMONITOR>> {
+        let mut handles = Vec::new();
+
+        unsafe extern "system" fn get_handles_proc(
+            hmonitor: HMONITOR,
+            _hdc: HDC,
+            _rect_clip: *mut RECT,
+            lparam: LPARAM,
+        ) -> BOOL {
+            unsafe {
+                let data_ptr = lparam.0 as *mut Vec<HMONITOR>;
+                if let Some(data) = data_ptr.as_mut() {
+                    data.push(hmonitor);
+                }
+                true.into()
+            }
+        }
+
+        let lparam = LPARAM(&mut handles as *mut _ as isize);
+        let result =
+            unsafe { EnumDisplayMonitors(None, None, Some(get_handles_proc), lparam) }.ok();
+        // it can fail with a "fake" error (success code), see `filter_fake_error`
+        if let Err(err) = result
+            && err.code().is_err()
+        {
+            return Err(err);
+        }
+        Ok(handles)
+    }
+}

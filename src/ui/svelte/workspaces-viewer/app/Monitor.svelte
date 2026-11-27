@@ -40,7 +40,7 @@
     e.stopPropagation();
     invoke(SeelenCommand.CreateWorkspace, { monitorId: monitor.id });
   }
-  
+
   function createWorkspaceRow(e: MouseEvent) {
     e.stopPropagation();
     invoke(SeelenCommand.CreateWorkspaceRow, { monitorId: monitor.id });
@@ -52,10 +52,10 @@
   onDragEnd={(event) => {
     const { source, target } = event.operation;
     if (!source || !target) return;
-    const hwnd = source.id as number;
+    const hwnd = source.id as string;
     const workspaceId = target.id as string;
     if (viewingWorkspaceId === workspaceId) return;
-    invoke(SeelenCommand.MoveWindowToWorkspace, { hwnd, workspaceId });
+    invoke(SeelenCommand.MoveWindowToWorkspace, { id: hwnd, workspaceId });
   }}
 >
   <div
@@ -114,7 +114,7 @@
 
     <DragOverlay dropAnimation={null}>
       {#snippet children(source)}
-        <Window hwnd={source.id as number} overlay />
+        <Window hwnd={source.id as string} overlay />
       {/snippet}
     </DragOverlay>
   </div>

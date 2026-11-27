@@ -19,7 +19,6 @@ use tauri_plugin_dialog::DialogExt;
 use crate::{
     app::{emit_to_webviews, get_app_handle},
     error::{Result, ResultLogExt},
-    platform::shell,
     utils::{constants::SEELEN_COMMON, date_based_hex_id},
     widgets::permissions::{WidgetPerm, request_widget_permission},
 };
@@ -107,15 +106,6 @@ impl crate::tauri_handlers::Handlers {
 
     pub fn state_get_settings_by_app() -> Vec<AppConfig> {
         BUNDLED_SETTINGS_BY_APP.iter().cloned().collect()
-    }
-
-    pub fn get_native_shell_wallpaper() -> Result<PathBuf> {
-        shell::wallpaper()
-    }
-
-    pub fn set_native_shell_wallpaper(webview: WebviewWindow, path: PathBuf) -> Result<()> {
-        request_widget_permission(&webview, WidgetPerm::ModifyConfiguration)?;
-        shell::set_wallpaper(&path)
     }
 
     pub fn state_request_wallpaper_addition() -> Result<()> {

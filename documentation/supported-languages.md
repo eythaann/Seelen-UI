@@ -23,13 +23,13 @@ libs/core/src/constants/mod.ts
 ```
 
 **Never hand-edit `mod.ts`** — it is generated. To add, remove, or rename a supported language, edit
-`SUPPORTED_LANGUAGES` in `mod.rs` and regenerate bindings with `cd libs/core && deno task build:rs`.
+`SUPPORTED_LANGUAGES` in `mod.rs` and regenerate bindings with `npm install`.
 
 ## Why this matters for resources
 
-Anything that consumes "which languages does Seelen UI support" — the Settings language dropdown, and the
-`slu resource translate` command described in [ResourceText](./resource-text) — reads from this list. Adding a language
-here automatically:
+Anything that consumes "which languages does Seelen UI support" — the Settings language dropdown, and the `slu resource
+translate` command described in [ResourceText](./resource-text) — reads from this list. Adding a language here
+automatically:
 
 - Makes it selectable in the Settings language picker (once a matching locale file exists under `i18n/translations/`).
 - Makes `slu resource translate` fill it in for every `ResourceText` field in a resource, with no changes needed on the

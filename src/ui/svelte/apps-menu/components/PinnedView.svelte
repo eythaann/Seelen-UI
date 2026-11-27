@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { globalState, type FavPinnedItem } from "../state/mod.svelte";
+  import { type FavPinnedItem, globalState } from "../state/mod.svelte";
   import { t } from "../i18n";
   import SortableAppItem from "./SortableAppItem.svelte";
   import FolderItem from "./FolderItem.svelte";
@@ -139,14 +139,12 @@
           // Case 1: Source is folder + Target is folder - merge folders
           if (sourceItem.type === "folder" && targetItem.type === "folder") {
             globalState.mergeFolders(sourceItem.itemId, targetItem.itemId);
-          }
-          // Case 2: Source is app + Target is folder - add app to existing folder
+          } // Case 2: Source is app + Target is folder - add app to existing folder
           else if (sourceItem.type === "app" && targetItem.type === "folder") {
             globalState.addItemToFolder(targetItem.itemId, sourceId);
-          }
-          // Case 3: Source is app + Target is app - create new folder with both items
+          } // Case 3: Source is app + Target is app - create new folder with both items
           else if (sourceItem.type === "app" && targetItem.type === "app") {
-            // Don't create folder if dragging onto self
+            // Do not create a folder when dragging onto self
             if (sourceId !== targetId) {
               globalState.createFolder(sourceId, targetId, targetIndex);
             }

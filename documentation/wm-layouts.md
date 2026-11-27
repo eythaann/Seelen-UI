@@ -115,13 +115,12 @@ converts that declarative tree into a runtime tree (`TwmRuntimeNode`) — copyin
 `growFactor` (used as both the initial and the live, user-resizable grow factor), `condition`, `maxStackSize`, and
 `stackPolicy` as-is, and initializing runtime-only state (assigned windows, active window, screen rect) empty. From then
 on, whenever a window needs a slot, the WM walks the tree in `priority` order and asks each node `accepts_windows?` —
-which checks the node's `condition` (if any) against the current `{ tiling-windows,
-is-reindexing }` context, and then
+which checks the node's `condition` (if any) against the current `{ tiling-windows, is-reindexing }` context, and then
 applies kind-specific rules (`Leaf` only if empty; `Stack` only per its `stackPolicy`/`maxStackSize`; containers never
 accept directly, only their children do).
 
-Monocle mode (`Win + M`) is not a separate mechanism — it's implemented as the exact same schema, swapped in as
-`{ kind: Stack, maxStackSize: null }` (unlimited stack, one slot).
+Monocle mode (`Win + M`) is not a separate mechanism — it's implemented as the exact same schema, swapped in as `{ kind:
+Stack, maxStackSize: null }` (unlimited stack, one slot).
 
 ---
 

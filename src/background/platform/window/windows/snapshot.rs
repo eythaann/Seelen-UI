@@ -2,7 +2,7 @@
 
 use crate::system_modules::start::StartMenuManager;
 use seelen_core::system_state::{
-    FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention,
+    FocusedApp, Relaunch, RelaunchArguments, UserAppWindow, WindowAttention, WindowIdentity,
 };
 
 use crate::{
@@ -10,7 +10,7 @@ use crate::{
     windows_api::window_badges::WindowBadges, windows_api::wpn_service::WpnService,
 };
 
-use super::NativeWindow;
+use super::{super::Window, NativeWindow};
 
 impl NativeWindow {
     /// `Relaunch` info and `prevent_pinning` both only apply to windows with a
@@ -41,13 +41,16 @@ impl NativeWindow {
     pub fn snapshot(&self) -> UserAppWindow {
         let umid = self.app_user_model_id();
         let (relaunch, prevent_pinning) = self.relaunch_info(&umid).unzip();
-        let badge = WindowBadges::instance().get(self.address());
+        let badge = WindowBadges::instance().get(self.handle());
         let badge_value = umid
             .as_ref()
             .and_then(|umid| WpnService::instance().ok()?.get_badge_value(umid.as_str()));
 
+        let id = Window::from(self.handle()).id();
         UserAppWindow {
-            hwnd: self.address(),
+            id,
+            #[allow(deprecated)]
+            hwnd: id,
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             app_name: self.app_display_name().unwrap_or_default(),
@@ -70,9 +73,18 @@ impl NativeWindow {
     pub fn focused_app_snapshot(&self) -> FocusedApp {
         let process = self.process();
 
+        let id = Window::from(self.handle()).id();
+        let owner_id = self.owner().map_or(WindowIdentity::from_handle(0), |w| {
+            Window::from(w.handle()).id()
+        });
+
         FocusedApp {
-            hwnd: self.address(),
-            owner_hwnd: self.owner().map(|w| w.address()).unwrap_or(0),
+            id,
+            owner_id,
+            #[allow(deprecated)]
+            hwnd: id,
+            #[allow(deprecated)]
+            owner_hwnd: owner_id,
             monitor: self.monitor().stable_id().unwrap_or_default(),
             title: self.title(),
             class: self.class(),

@@ -118,7 +118,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
         with:
-          deno: false
           rust-targets: ${{ matrix.target }}
           cache-key-prefix: rust-bundle-${{ matrix.target }}
 

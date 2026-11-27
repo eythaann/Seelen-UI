@@ -1,11 +1,11 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
   import { Icon, MissingIcon } from "libs/ui/svelte/components/Icon/index.ts";
-  import { windowsState, previews } from "../../state/windows.svelte.ts";
+  import { previews, windowsState } from "../../state/windows.svelte.ts";
 
   interface Props {
     title: string;
-    hwnd: number;
+    hwnd: string;
   }
 
   let { title, hwnd }: Props = $props();
@@ -14,20 +14,20 @@
 
   function onClick() {
     invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd,
-      wasFocused: windowsState.delayedFocused?.hwnd === hwnd,
+      id: hwnd,
+      wasFocused: windowsState.delayedFocused?.id === hwnd,
     });
   }
 
   function onAuxClick(e: MouseEvent) {
     if (e.button === 1) {
-      invoke(SeelenCommand.WegCloseApp, { hwnd });
+      invoke(SeelenCommand.WegCloseApp, { id: hwnd });
     }
   }
 
   function onClose(e: MouseEvent) {
     e.stopPropagation();
-    invoke(SeelenCommand.WegCloseApp, { hwnd });
+    invoke(SeelenCommand.WegCloseApp, { id: hwnd });
   }
 </script>
 

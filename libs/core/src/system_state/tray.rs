@@ -1,5 +1,7 @@
 use std::path::PathBuf;
 
+use super::WindowIdentity;
+
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
@@ -32,7 +34,7 @@ pub struct SysTrayIcon {
     /// with a uid.
     ///
     /// Note that multiple icons can have the same window handle.
-    pub window_handle: Option<isize>,
+    pub window_handle: Option<WindowIdentity>,
 
     /// GUID for the icon.
     ///

@@ -1,10 +1,11 @@
+use slu_utils::windows::WindowsString;
 use windows::Win32::{
     Foundation::{ERROR_ALREADY_EXISTS, GetLastError},
     System::Threading::CreateMutexW,
 };
 use winreg::{RegKey, enums::HKEY_LOCAL_MACHINE};
 
-use crate::windows_api::{WindowsApi, string_utils::WindowsString};
+use crate::windows_api::WindowsApi;
 
 /// Elevated while UAC is enabled: the app was explicitly started as administrator.
 pub fn is_elevated() -> bool {

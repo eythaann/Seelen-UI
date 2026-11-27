@@ -1,6 +1,6 @@
 import { getCurrentWebview } from "@tauri-apps/api/webview";
 import type { WidgetTriggerPayload } from "@seelen-ui/types";
-import { SeelenEvent } from "../../../../mod.ts";
+import { SeelenEvent } from "../../../handlers/mod.ts";
 
 import { Widget_1 } from "./1_rect.ts";
 

@@ -1,3 +1,4 @@
+use slu_utils::windows::WindowsString;
 use std::path::PathBuf;
 
 use windows::{
@@ -12,7 +13,7 @@ use windows_core::Owned;
 
 use crate::{
     error::Result,
-    windows_api::{WindowsApi, string_utils::WindowsString, types::AppUserModelId},
+    windows_api::{WindowsApi, types::AppUserModelId},
 };
 
 use super::Process;
@@ -50,6 +51,14 @@ impl NativeProcess {
 
     pub fn is_frozen(&self) -> Result<bool> {
         WindowsApi::is_process_frozen(self.0)
+    }
+
+    pub fn created_at(&self) -> Result<u64> {
+        WindowsApi::process_creation_time(self.0)
+    }
+
+    pub fn parent_id(&self) -> Result<u32> {
+        WindowsApi::parent_process_id(self.0)
     }
 
     pub fn kill(&self) -> Result<()> {

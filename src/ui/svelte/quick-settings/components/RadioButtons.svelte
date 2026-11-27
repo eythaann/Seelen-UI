@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke, SeelenCommand } from "@seelen-ui/lib";
-  import { HotspotState, RadioDeviceKind, type RadioDevice } from "@seelen-ui/lib/types";
+  import { HotspotState, type RadioDevice, RadioDeviceKind } from "@seelen-ui/lib/types";
   import { Icon } from "libs/ui/svelte/components/Icon";
   import { state } from "../state.svelte";
   import type { IconName } from "libs/ui/icons";
@@ -56,9 +56,7 @@
   async function toggleHdr() {
     const newState = !hdrEnabled;
     await Promise.all(
-      hdrMonitors.map((monitor) =>
-        invoke(SeelenCommand.SetMonitorHdr, { id: monitor.id, state: newState }),
-      ),
+      hdrMonitors.map((monitor) => invoke(SeelenCommand.SetMonitorHdr, { id: monitor.id, state: newState })),
     );
   }
 
@@ -66,7 +64,7 @@
     await invoke(SeelenCommand.SystemSetDarkMode, { enabled: !state.darkMode });
   }
 
-  async function toggleNightLight() {
+  function toggleNightLight() {
     const enabled = !state.nightLightEnabled;
     invoke(SeelenCommand.SystemSetNightLightEnabled, { enabled }).then(() => {
       state.nightLightEnabled = enabled;
