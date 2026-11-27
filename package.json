@@ -3,20 +3,22 @@
   "version": "2.8.12",
   "description": "Seelen UI Project",
   "type": "module",
+  "workspaces": [
+    "libs/core"
+  ],
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "tauri": "tauri",
     "tauri:update": "tsx scripts/UpdateTauri.ts",
     "build:ui": "tsx scripts/build.ts",
-    "build:lib": "cd ./libs/core && deno task build && cd ../..",
+    "build:lib": "npm run build -w @seelen-ui/lib",
     "dev": "cargo build && tauri dev",
-    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\"",
+    "test": "tsx --test \"src/ui/svelte/**/*.test.ts\" && npm test -w @seelen-ui/lib",
     "translate": "tsx ./scripts/translate/mod.ts",
-    "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && cd ./libs/core && deno check && cd ../..",
+    "type-check": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json && npm run type-check -w @seelen-ui/lib",
     "version:start": "tsx ./scripts/versionish.ts start",
     "version:finish": "tsx ./scripts/versionish.ts finish",
-    "preinstall": "npm run build:lib",
-    "postinstall": "lefthook install"
+    "postinstall": "lefthook install && npm run build:lib"
   },
   "keywords": [],
   "author": {
@@ -56,7 +58,7 @@
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@nyariv/sandboxjs": "^0.9.4",
-    "@seelen-ui/lib": "file:./libs/core/npm",
+    "@seelen-ui/lib": "file:./libs/core",
     "@seelen/translation-toolkit": "^1.2.4",
     "@types/express": "^5.0.0",
     "@types/js-yaml": "^4.0.9",

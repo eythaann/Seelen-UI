@@ -76,7 +76,7 @@ function updateAllVersions(version: string, skipLockfiles = false): void {
   // Update all crate versions (workspace root + every member Cargo.toml)
   console.log("Updating Cargo.toml versions...");
   updateAllCargoVersions(version);
-  updateJsonVersion("./libs/core/deno.json", version);
+  updateJsonVersion("./libs/core/package.json", version);
   console.log("✓ Cargo.toml versions updated");
 
   // Update app versions

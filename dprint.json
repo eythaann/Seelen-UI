@@ -28,7 +28,7 @@
   "excludes": [
     "**/node_modules",
     "**/i18n/translations/**",
-    "libs/core/npm",
+    "libs/core/dist",
     "**/*.svg",
     "**/*.xml"
   ],

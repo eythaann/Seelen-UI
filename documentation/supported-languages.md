@@ -23,7 +23,7 @@ libs/core/src/constants/mod.ts
 ```
 
 **Never hand-edit `mod.ts`** — it is generated. To add, remove, or rename a supported language, edit
-`SUPPORTED_LANGUAGES` in `mod.rs` and regenerate bindings with `cd libs/core && deno task build:rs`.
+`SUPPORTED_LANGUAGES` in `mod.rs` and regenerate bindings with `cd libs/core && npm run build:rs`.
 
 ## Why this matters for resources
 

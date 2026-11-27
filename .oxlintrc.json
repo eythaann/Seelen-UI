@@ -15,7 +15,6 @@
     "**/node_modules/**",
     "**/dist/**",
     "**/target/**",
-    "libs/core/npm/**",
     "libs/core/vendor/**"
   ],
   "rules": {

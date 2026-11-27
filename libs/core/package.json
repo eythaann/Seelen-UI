@@ -1,0 +1,53 @@
+{
+  "name": "@seelen-ui/lib",
+  "version": "2.8.12",
+  "description": "Seelen UI Library for Widgets",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eythaann/Seelen-UI.git",
+    "directory": "libs/core"
+  },
+  "bugs": {
+    "url": "https://github.com/eythaann/Seelen-UI/issues"
+  },
+  "type": "module",
+  "main": "./dist/script/src/lib.js",
+  "module": "./dist/esm/src/lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/src/lib.js",
+      "require": "./dist/script/src/lib.js"
+    },
+    "./types": {
+      "import": "./dist/esm/gen/types/mod.js",
+      "require": "./dist/script/gen/types/mod.js"
+    },
+    "./tauri": {
+      "import": "./dist/esm/src/re-exports/tauri.js",
+      "require": "./dist/script/src/re-exports/tauri.js"
+    },
+    "./styles/*": "./styles/*"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:rs": "node ./scripts/rust_bindings.ts",
+    "build:js": "node ./scripts/build.ts",
+    "build": "npm run build:rs && npm run build:js",
+    "type-check": "tsc --noEmit",
+    "test": "tsx --test \"src/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.0",
+    "@tauri-apps/plugin-dialog": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.9.3"
+  }
+}

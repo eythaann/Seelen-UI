@@ -22,17 +22,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
+          cache: npm
 
       - name: Setup Rust
         run: rustup --version
+
+      - name: Install dependencies
+        working-directory: .
+        run: npm ci --ignore-scripts
 
       - name: Set next version
         if: ${{ inputs.next }}
@@ -40,29 +41,27 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const path = 'libs/core/deno.json';
+            const path = 'libs/core/package.json';
 
-            const denoJson = JSON.parse(fs.readFileSync(path, 'utf8'));
-            const currentVersion = denoJson.version;
+            const packageJson = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const currentVersion = packageJson.version;
 
             const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(2, 12);
             const nextVersion = `${currentVersion}-next.${timestamp}`;
 
-            denoJson.version = nextVersion;
-            fs.writeFileSync(path, JSON.stringify(denoJson, null, 2) + '\n');
+            packageJson.version = nextVersion;
+            fs.writeFileSync(path, JSON.stringify(packageJson, null, 2) + '\n');
 
             core.info(`Version set to ${nextVersion}`);
 
       - name: Build Rust Bindings (ts-rs)
-        run: deno task build:rs
+        run: npm run build:rs
 
-      - name: Publish to JSR
-        run: deno publish --allow-dirty
+      - name: Type check
+        run: npm run type-check
 
       - name: Build NPM package
-        run: deno task build:npm
+        run: npm run build:js
 
       - name: Publish to NPM
-        run: |
-          cd ./npm
-          npm --verbose publish --tag ${{ inputs.next && 'next' || 'latest' }}
+        run: npm --verbose publish --tag ${{ inputs.next && 'next' || 'latest' }}

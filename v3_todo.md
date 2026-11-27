@@ -330,5 +330,5 @@ Same criteria; these areas don't follow the module pattern yet. Inventory (files
 - `cargo check` (never `--release`).
 - Control grep: `rg "windows::|windows_core|winreg|windows_api|HWND|unsafe" src/background/system_modules/*/mod.rs
   src/background/system_modules/*/domain*` → empty.
-- `deno task build:rs` in `libs/core` if any exposed type changes (it shouldn't: this is an internal refactor).
+- `npm run build:rs` in `libs/core` if any exposed type changes (it shouldn't: this is an internal refactor).
 - Manual testing by the user in the app (power actions, audio devices, notifications, etc.).

@@ -1,6 +1,7 @@
-import { assert } from "@std/assert/assert";
+import { test } from "node:test";
+import { ok as assert } from "node:assert/strict";
 import * as SluLib from "./lib.ts";
 
-Deno.test("Library is importable on background (no window)", () => {
+test("Library is importable on background (no window)", () => {
   assert(!!SluLib);
 });

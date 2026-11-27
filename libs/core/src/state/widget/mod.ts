@@ -11,7 +11,6 @@ import {
   WidgetStatus,
 } from "@seelen-ui/types";
 import { invoke, SeelenCommand, SeelenEvent } from "../../handlers/mod.ts";
-import { decodeBase64Url } from "@std/encoding";
 import { debounce } from "../../utils/async.ts";
 import { adjustPositionByPlacement, fitIntoMonitor, initMonitorsState } from "./positioning.ts";
 import { startThemingTool } from "../theme/theming.ts";
@@ -467,4 +466,9 @@ function getDefinitionDefaultValues(definition: WidgetConfigDefinition): Record<
   }
 
   return config;
+}
+
+function decodeBase64Url(input: string): Uint8Array {
+  const binary = atob(input.replaceAll("-", "+").replaceAll("_", "/"));
+  return Uint8Array.from(binary, (char) => char.charCodeAt(0));
 }

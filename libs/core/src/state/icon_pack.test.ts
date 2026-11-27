@@ -1,6 +1,7 @@
 import type { Icon, IconPack, IconPackId, ResourceMetadata } from "@seelen-ui/types";
 import { IconPackManager } from "./icon_pack.ts";
-import { assertEquals } from "@std/assert";
+import { test } from "node:test";
+import { deepStrictEqual as assertEquals } from "node:assert/strict";
 
 // Custom assertion for null values
 function assertNull(value: unknown): void {
@@ -186,9 +187,9 @@ class IconPackManagerMock extends IconPackManager {
   }
 }
 
-Deno.test("IconPackManager", async (t) => {
-  await t.step("Icon lookup functionality", async (t) => {
-    await t.step("should return null for non-existent paths or UMIDs", () => {
+test("IconPackManager", async (t) => {
+  await t.test("Icon lookup functionality", async (t) => {
+    await t.test("should return null for non-existent paths or UMIDs", () => {
       const ctx = new IconPackManagerTestContext();
       // Non-existent path
       assertNull(
@@ -198,14 +199,14 @@ Deno.test("IconPackManager", async (t) => {
       assertNull(ctx.instance.getIconPath({ umid: "NonexistentUMID" }));
     });
 
-    await t.step("should ignore inactive icon packs", () => {
+    await t.test("should ignore inactive icon packs", () => {
       // Only 'a' and 'b' are active by default
       const ctx = new IconPackManagerTestContext();
       // This path only exists in packC which is inactive
       assertNull(ctx.instance.getIconPath({ path: "C:\\folder\\app1.exe" }));
     });
 
-    await t.step(
+    await t.test(
       "should respect cascading priority order (last has highest priority)",
       () => {
         // Default order is ['b', 'a'] so 'a' has higher priority
@@ -227,7 +228,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step("should prioritize UMID over path matching", () => {
+    await t.test("should prioritize UMID over path matching", () => {
       const ctx = new IconPackManagerTestContext(["b", "a"]); // 'a' has priority
       // Should match UMID in packA even though path exists in both packs
       assertEquals(
@@ -239,7 +240,7 @@ Deno.test("IconPackManager", async (t) => {
       );
     });
 
-    await t.step(
+    await t.test(
       "should match by filename when higher priority pack has filename match",
       () => {
         // With ['b', 'a'] order, packB has filename match that should take priority
@@ -253,7 +254,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step("should match files by extension with priority order", () => {
+    await t.test("should match files by extension with priority order", () => {
       const ctx = new IconPackManagerTestContext(["b", "a"]); // 'a' has priority
 
       // .txt exists in both packs - should use 'a' (higher priority)
@@ -278,8 +279,8 @@ Deno.test("IconPackManager", async (t) => {
     });
   });
 
-  await t.step("Missing icon functionality", async (t) => {
-    await t.step(
+  await t.test("Missing icon functionality", async (t) => {
+    await t.test(
       "should return missing icon from highest priority pack (last in active list)",
       () => {
         // With ['b', 'a'], 'a' has priority
@@ -291,7 +292,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should fallback when higher priority pack has no missing icon",
       () => {
         // packC has no missing icon, should fallback to packB
@@ -303,7 +304,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should return null when no active packs have missing icons",
       () => {
         const ctx = new IconPackManagerTestContext(["c"]); // packC has no missing icon
@@ -312,8 +313,8 @@ Deno.test("IconPackManager", async (t) => {
     );
   });
 
-  await t.step("Custom icon functionality", async (t) => {
-    await t.step("should return custom icon from highest priority pack", () => {
+  await t.test("Custom icon functionality", async (t) => {
+    await t.test("should return custom icon from highest priority pack", () => {
       // With ['b', 'a'], 'a' has priority
       const ctx = new IconPackManagerTestContext(["b", "a"]);
       assertEquals(
@@ -322,7 +323,7 @@ Deno.test("IconPackManager", async (t) => {
       );
     });
 
-    await t.step(
+    await t.test(
       "should fallback when custom icon not found in higher priority pack",
       () => {
         // packC has no custom icons, should fallback to packA
@@ -334,7 +335,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should return null when custom icon not found in any active pack",
       () => {
         const ctx = new IconPackManagerTestContext(["c"]);
@@ -343,8 +344,8 @@ Deno.test("IconPackManager", async (t) => {
     );
   });
 
-  await t.step("Redirect functionality", async (t) => {
-    await t.step(
+  await t.test("Redirect functionality", async (t) => {
+    await t.test(
       "should follow redirect and ignore icon when redirect is present",
       () => {
         const ctx = new IconPackManagerTestContext(["a", "b"]);
@@ -372,7 +373,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should not use icon when redirect points to non-existent path",
       () => {
         const ctx = new IconPackManagerTestContext(["a"]);
@@ -389,7 +390,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should follow redirect chain until icon is found or no more redirects",
       () => {
         const ctx = new IconPackManagerTestContext(["a", "b", "c"]);
@@ -425,7 +426,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step(
+    await t.test(
       "should return null if redirect chain ends without finding an icon",
       () => {
         const ctx = new IconPackManagerTestContext(["a", "b"]);
@@ -443,7 +444,7 @@ Deno.test("IconPackManager", async (t) => {
       },
     );
 
-    await t.step("should handle redirect to extension match", () => {
+    await t.test("should handle redirect to extension match", () => {
       const ctx = new IconPackManagerTestContext(["a", "b"]);
       // Redirect to a file with specific extension
       ctx.instance.iconPacks[0].entries.push({
@@ -461,7 +462,7 @@ Deno.test("IconPackManager", async (t) => {
     });
   });
 
-  await t.step("should handle circular references and return null", () => {
+  await t.test("should handle circular references and return null", () => {
     const ctx = new IconPackManagerTestContext(["a", "b"]);
 
     ctx.instance.iconPacks[0].entries.push({
@@ -485,7 +486,7 @@ Deno.test("IconPackManager", async (t) => {
     assertNull(ctx.instance.getIconPath({ path: "C:\\circle\\app2.exe" }));
   });
 
-  await t.step("should detect self-references and return null", () => {
+  await t.test("should detect self-references and return null", () => {
     const ctx = new IconPackManagerTestContext(["a"]);
 
     // Configurar autorreferencia
@@ -500,7 +501,7 @@ Deno.test("IconPackManager", async (t) => {
     assertNull(ctx.instance.getIconPath({ umid: "SelfRef" }));
   });
 
-  await t.step(
+  await t.test(
     "should detect longer circular references and return null",
     () => {
       const ctx = new IconPackManagerTestContext(["a", "b", "c"]);

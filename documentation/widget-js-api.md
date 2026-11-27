@@ -159,7 +159,7 @@ If you add or change a command or event in the Rust files above, regenerate the 
 from a widget:
 
 ```bash
-cd libs/core && deno task build:rs
+cd libs/core && npm run build:rs
 ```
 
 Both `invoke` and `subscribe` themselves — the wrapper functions shown in sections 2 and 3 — are defined in

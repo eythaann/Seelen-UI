@@ -25,6 +25,8 @@
 
 ### refactors
 
+- core library (`@seelen-ui/lib`): dropped Deno, it is now built with Node + TypeScript (same ESM/CJS entry points) and
+  only published to npm, JSR is no longer updated.
 - api: the window identifiers are now named `id` instead of `hwnd` (`UserAppWindow.id`, `FocusedApp.id`/`ownerId`,
   `WindowPreviewTarget.id` and the window argument of commands). The old `hwnd` names are deprecated but still work.
 

@@ -108,9 +108,10 @@ Quality:
 
 Core library (`libs/core`):
 
-- `deno task build`
-- `deno task build:rs` - Regenerate Rust -> TypeScript bindings
-- `deno task build:npm`
+- `npm run build` - Regenerate bindings + build the JS package (`dist/`)
+- `npm run build:rs` - Regenerate Rust -> TypeScript bindings
+- `npm run build:js` - Build the JS package (ESM + CJS + declarations into `dist/`)
+- `npm test` / `npm run type-check`
 
 ## Repo Map (Where Things Live)
 
@@ -321,7 +322,7 @@ slu_events_declaration! {
 }
 ```
 
-3. Regenerate bindings: `cd libs/core && deno task build:rs`
+3. Regenerate bindings: `cd libs/core && npm run build:rs`
 
 ## WinRT Wrapper Pattern (Automatic Cleanup)
 

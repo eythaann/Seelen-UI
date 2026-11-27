@@ -28,7 +28,6 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node: false
-          deno: false
 
       - name: Format
         run: |-
@@ -47,7 +46,6 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node: false
-          deno: false
           cache-key-prefix: rust-test
 
       - run: cargo test --locked --verbose

@@ -1,6 +1,6 @@
 import { getCurrentWebview, type Webview } from "@tauri-apps/api/webview";
 import { getCurrentWindow, type Window } from "@tauri-apps/api/window";
-import { invoke, SeelenCommand } from "../../../../mod.ts";
+import { invoke, SeelenCommand } from "../../../handlers/mod.ts";
 
 export abstract class Widget_0 {
   private _windowId: string = "";
