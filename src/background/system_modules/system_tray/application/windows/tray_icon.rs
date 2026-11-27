@@ -1,10 +1,11 @@
 use std::{
+    collections::HashSet,
     hash::{DefaultHasher, Hash, Hasher},
     path::PathBuf,
     time::Duration,
 };
 
-use seelen_core::system_state::{SysTrayIcon, SystrayIconAction, WindowHandle};
+use seelen_core::system_state::{SysTrayIcon, SystrayIconAction, WindowHandle, WindowIdentity};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     UI::{
@@ -33,7 +34,6 @@ use slu_ipc::messages::{IconEventData, Win32TrayEvent};
 /// Explorer writes it after the hook has already reported the icon.
 const REGISTRY_LOOKUP_ATTEMPTS: u32 = 10;
 const REGISTRY_LOOKUP_INTERVAL: Duration = Duration::from_millis(200);
-
 /// Events that can be emitted by `Systray`.
 #[derive(Clone, Debug, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -86,7 +86,52 @@ impl TrayState {
         for id in &removed {
             self.owners.remove(id);
         }
-        !removed.is_empty()
+        if removed.is_empty() {
+            return false;
+        }
+        self.release_unused_images();
+        true
+    }
+
+    /// Image of the icon handle, converted and written to disk only the first time
+    /// it is seen for the owner.
+    fn icon_image(&self, owner_key: &str, icon_handle: isize) -> Option<SavedIconImage> {
+        if let Some(image) = self
+            .images
+            .get(owner_key, |images| images.get(&icon_handle).cloned())
+            .flatten()
+        {
+            return Some(image);
+        }
+
+        let image = save_icon_image(owner_key, icon_handle)?;
+        self.images.with_lock(|images| {
+            images
+                .entry(owner_key.to_string())
+                .or_default()
+                .insert(icon_handle, image.clone());
+        });
+        Some(image)
+    }
+
+    /// Drops (and deletes from disk) the cached images of owners that no longer have icons.
+    fn release_unused_images(&self) {
+        let owners: HashSet<String> = self
+            .icons
+            .map(|(id, icon)| image_owner_key(icon.window_handle, id))
+            .into_iter()
+            .collect();
+        let mut released = Vec::new();
+        self.images.retain(|(owner, images)| {
+            let keep = owners.contains(owner);
+            if !keep {
+                released.extend(images.drain().map(|(_, image)| image.path));
+            }
+            keep
+        });
+        for path in released {
+            let _ = std::fs::remove_file(path);
+        }
     }
 
     /// Whether the icon's window still exists and still belongs to the process
@@ -186,6 +231,7 @@ impl TrayState {
         log::trace!("Tray icon removed: {}", session_id);
         self.icons.remove(&session_id);
         self.owners.remove(&session_id);
+        self.release_unused_images();
         Some(SystrayEvent::IconRemove(session_id))
     }
 
@@ -222,7 +268,10 @@ impl TrayState {
         // Avoid re-reading the icon image if it's the same as the existing icon.
         if let Some(icon_handle) = icon_data.icon_handle
             && icon.icon_handle != Some(icon_handle)
-            && let Some(image) = save_icon_image(icon_handle, &icon.session_id)
+            && let Some(image) = self.icon_image(
+                &image_owner_key(icon.window_handle, &icon.session_id),
+                icon_handle,
+            )
         {
             icon.icon_handle = Some(icon_handle);
             icon.icon_image_hash = Some(image.hash);
@@ -294,16 +343,17 @@ impl TrayState {
         };
         log::trace!("Tray icon added: {session_id} {registry_key:?} ({executable_path:?})");
 
-        let image = icon_data
-            .icon_handle
-            .and_then(|handle| save_icon_image(handle, &session_id));
+        let window_handle = icon_data.window_handle.map(|h| Window::from(h).id());
+        let image = icon_data.icon_handle.and_then(|handle| {
+            self.icon_image(&image_owner_key(window_handle, &session_id), handle)
+        });
 
         let icon = SysTrayIcon {
             session_id,
             registry_key,
             executable_path,
             uid: icon_data.uid,
-            window_handle: icon_data.window_handle.map(|h| Window::from(h).id()),
+            window_handle,
             guid: icon_data.guid,
             tooltip: icon_data.tooltip.clone().unwrap_or_default(),
             icon_handle: icon_data.icon_handle,
@@ -556,7 +606,8 @@ impl TrayState {
 }
 
 /// Icon image written to disk by `save_icon_image`.
-struct SavedIconImage {
+#[derive(Clone)]
+pub(super) struct SavedIconImage {
     hash: String,
     path: PathBuf,
     is_glyph: bool,
@@ -588,13 +639,25 @@ fn window_program_path(icon_data: &IconEventData) -> Option<PathBuf> {
         .and_then(|handle| Window::from(handle).exe_path().ok_logged())
 }
 
-/// Saves the icon image as png in the temp dir.
-fn save_icon_image(icon_handle: isize, session_id: &str) -> Option<SavedIconImage> {
+/// Key the icon images are cached and named by: the owner window identity, as
+/// `HICON` handles are only unique per process lifetime, or the session id for
+/// icons without window.
+fn image_owner_key(window: Option<WindowIdentity>, session_id: &str) -> String {
+    match window {
+        Some(window) => window.to_string(),
+        None => session_id.to_string(),
+    }
+}
+
+/// Saves the icon image as png in the temp dir, unless it is already there.
+fn save_icon_image(owner_key: &str, icon_handle: isize) -> Option<SavedIconImage> {
     let img = convert_hicon_to_rgba_image(&HICON(icon_handle as _)).ok()?;
     let path = SEELEN_COMMON
         .app_temp_dir()
-        .join(format!("{session_id}.png"));
-    img.save(&path).unwrap();
+        .join(format!("{owner_key}__{:x}.png", icon_handle as usize));
+    if !path.exists() {
+        img.save(&path).ok_logged()?;
+    }
     Some(SavedIconImage {
         hash: image_to_hash(&img),
         path,

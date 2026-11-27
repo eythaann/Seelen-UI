@@ -3,6 +3,7 @@ mod tray_icon;
 mod util;
 
 use std::{
+    collections::HashMap,
     path::{Path, PathBuf},
     sync::{Arc, OnceLock, Weak},
 };
@@ -22,7 +23,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use self::tray_hook_loader::TrayHookLoader;
+use self::{tray_hook_loader::TrayHookLoader, tray_icon::SavedIconImage};
 
 type EventCallback = Box<dyn Fn(SystemTrayEvent) + Send + Sync>;
 
@@ -40,6 +41,7 @@ impl SystemTraySystem for WindowsSystemTray {
                 icons: SyncHashMap::new(),
                 owners: SyncHashMap::new(),
                 pending: SyncHashMap::new(),
+                images: SyncHashMap::new(),
                 on_event: OnceLock::new(),
             }),
             _loader: None,
@@ -102,6 +104,10 @@ pub(super) struct TrayState {
     /// Icons reported by the hook whose registry entry wasn't written yet, by
     /// their session identity (see `session_identity`).
     pending: SyncHashMap<String, PendingIcon>,
+    /// Icon images already written to disk, by owner (see `image_owner_key`) and `HICON`.
+    /// Apps like Task Manager switch between a few hidden icons on every update, so
+    /// each `HICON` is converted and written only once.
+    images: SyncHashMap<String, HashMap<isize, SavedIconImage>>,
     on_event: OnceLock<EventCallback>,
 }
 
