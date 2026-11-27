@@ -21,8 +21,4 @@ for (const entry of readdirSync(GenTypesPath, { withFileTypes: true })) {
   }
 }
 
-console.log("[Task] Formatting...");
-execSync("cargo fmt", { stdio: "inherit" });
-execSync("npx --yes dprint fmt", { stdio: "inherit" });
-
 console.log("[Task] Done!");
