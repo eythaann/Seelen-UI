@@ -43,7 +43,7 @@
     "esbuild-svelte": "^0.9.3",
     "flexsearch": "^0.8.212",
     "object-inspect": "^1.13.4",
-    "preact": "^10.29.1",
+    "preact": "^11.2.0",
     "preact-render-to-string": "^6.6.7",
     "qrcode": "^1.5.4",
     "react-router": "^8.3.0",
