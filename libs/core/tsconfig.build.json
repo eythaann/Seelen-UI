@@ -8,6 +8,6 @@
     "rootDir": ".",
     "types": []
   },
-  "include": ["src", "gen/types"],
+  "include": ["src", "gen/types", "gen/handlers"],
   "exclude": ["src/**/*.test.ts"]
 }
