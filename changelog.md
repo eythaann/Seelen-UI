@@ -11,7 +11,8 @@
 
 ### features
 
-- dock: new "On Workspace" unpinned items visibility, showing only the windows of the active workspaces.
+- dock: new "On Workspace" unpinned items visibility, showing only the windows of the active workspace of the dock's
+  monitor.
 - task switcher: option to show only the apps of the active workspace.
 - window manager: the tiling layout is kept across app restarts within the same user session.
 - wallpaper manager: the native Windows wallpaper mirrors the wallpaper shown on the primary monitor (the image itself,

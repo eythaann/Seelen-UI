@@ -1,4 +1,4 @@
-import type { VirtualDesktops } from "@seelen-ui/lib/types";
+import type { VirtualDesktops, WindowIdentity } from "@seelen-ui/lib/types";
 import { windowsOnActiveWorkspaces } from "libs/ui/svelte/utils/workspaceFilter.ts";
 
 export interface SwitcherFilter {
@@ -10,7 +10,7 @@ export interface SwitcherFilter {
 }
 
 /** Windows shown in the task switcher, optionally restricted to the active monitor and/or workspace. */
-export function filterSwitcherWindows<W extends { hwnd: number; monitor: string }>(
+export function filterSwitcherWindows<W extends { id: WindowIdentity; monitor: string }>(
   windows: W[],
   filter: SwitcherFilter,
 ): W[] {

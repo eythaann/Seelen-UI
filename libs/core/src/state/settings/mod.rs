@@ -108,7 +108,7 @@ pub enum SeelenWegMode {
 pub enum WegTemporalItemsVisibility {
     All,
     OnMonitor,
-    /// only windows on the workspace currently shown on their monitor (plus pinned windows)
+    /// only windows on the active workspace of the dock's monitor (plus pinned windows)
     OnWorkspace,
 }
 

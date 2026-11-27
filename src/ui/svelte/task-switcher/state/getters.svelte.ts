@@ -24,8 +24,12 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   focusedWinId.value = e.payload.id;
 });
 
+export const virtualDesktops = lazyRune(() => invoke(SeelenCommand.StateGetVirtualDesktops));
+subscribe(SeelenEvent.VirtualDesktopsChanged, virtualDesktops.setByPayload);
+
 await Promise.all([
   settings.init(),
+  virtualDesktops.init(),
   windows.init(),
   previews.init(),
   focusedWinId.init(),

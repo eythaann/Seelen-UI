@@ -3,7 +3,7 @@ import { test } from "node:test";
 import type { VirtualDesktops } from "@seelen-ui/lib/types";
 import { filterSwitcherWindows } from "./filterWindows.ts";
 
-function workspace(id: string, windows: number[]) {
+function workspace(id: string, windows: string[]) {
   return { id, name: null, icon: null, wallpaper: null, windows };
 }
 
@@ -12,11 +12,11 @@ function workspace(id: string, windows: number[]) {
 const virtualDesktops = {
   monitors: {
     "monitor-a": {
-      workspaces: [[workspace("ws-a1", [1]), workspace("ws-a2", [2])]],
+      workspaces: [[workspace("ws-a1", ["1"]), workspace("ws-a2", ["2"])]],
       active_workspace: "ws-a1",
     },
     "monitor-b": {
-      workspaces: [[workspace("ws-b1", [3]), workspace("ws-b2", [4])]],
+      workspaces: [[workspace("ws-b1", ["3"]), workspace("ws-b2", ["4"])]],
       active_workspace: "ws-b1",
     },
   },
@@ -26,13 +26,13 @@ const virtualDesktops = {
 
 // already sorted by last focus, as the switcher receives them
 const windows = [
-  { hwnd: 4, monitor: "monitor-b" },
-  { hwnd: 1, monitor: "monitor-a" },
-  { hwnd: 3, monitor: "monitor-b" },
-  { hwnd: 2, monitor: "monitor-a" },
+  { id: "4", monitor: "monitor-b" },
+  { id: "1", monitor: "monitor-a" },
+  { id: "3", monitor: "monitor-b" },
+  { id: "2", monitor: "monitor-a" },
 ];
 
-const hwnds = (list: { hwnd: number }[]) => list.map((w) => w.hwnd);
+const ids = (list: { id: string }[]) => list.map((w) => w.id);
 
 test("no filter shows every window", () => {
   const result = filterSwitcherWindows(windows, {
@@ -41,7 +41,7 @@ test("no filter shows every window", () => {
     activeMonitorId: "monitor-a",
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [4, 1, 3, 2]);
+  assert.deepEqual(ids(result), ["4", "1", "3", "2"]);
 });
 
 test("a config saved before the workspace option existed shows every window", () => {
@@ -50,7 +50,7 @@ test("a config saved before the workspace option existed shows every window", ()
     activeMonitorId: "monitor-a",
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [4, 1, 3, 2]);
+  assert.deepEqual(ids(result), ["4", "1", "3", "2"]);
 });
 
 test("only on active monitor keeps the windows of that monitor", () => {
@@ -60,7 +60,7 @@ test("only on active monitor keeps the windows of that monitor", () => {
     activeMonitorId: "monitor-a",
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [1, 2]);
+  assert.deepEqual(ids(result), ["1", "2"]);
 });
 
 test("only on active monitor is ignored when the monitor is unknown", () => {
@@ -70,7 +70,7 @@ test("only on active monitor is ignored when the monitor is unknown", () => {
     activeMonitorId: null,
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [4, 1, 3, 2]);
+  assert.deepEqual(ids(result), ["4", "1", "3", "2"]);
 });
 
 test("only on active workspace hides windows on hidden workspaces", () => {
@@ -80,7 +80,7 @@ test("only on active workspace hides windows on hidden workspaces", () => {
     activeMonitorId: "monitor-a",
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [1, 3]);
+  assert.deepEqual(ids(result), ["1", "3"]);
 });
 
 test("both filters keep only the active workspace of the active monitor", () => {
@@ -90,7 +90,7 @@ test("both filters keep only the active workspace of the active monitor", () => 
     activeMonitorId: "monitor-b",
     virtualDesktops,
   });
-  assert.deepEqual(hwnds(result), [3]);
+  assert.deepEqual(ids(result), ["3"]);
 });
 
 test("pinned windows stay in the switcher on every workspace", () => {
@@ -98,9 +98,9 @@ test("pinned windows stay in the switcher on every workspace", () => {
     onlyOnActiveMonitor: false,
     onlyOnActiveWorkspace: true,
     activeMonitorId: "monitor-a",
-    virtualDesktops: { ...virtualDesktops, pinned: [2] },
+    virtualDesktops: { ...virtualDesktops, pinned: ["2"] },
   });
-  assert.deepEqual(hwnds(result), [1, 3, 2]);
+  assert.deepEqual(ids(result), ["1", "3", "2"]);
 });
 
 test("focus order is preserved", () => {
@@ -108,7 +108,7 @@ test("focus order is preserved", () => {
     onlyOnActiveMonitor: false,
     onlyOnActiveWorkspace: true,
     activeMonitorId: "monitor-a",
-    virtualDesktops: { ...virtualDesktops, pinned: [4] },
+    virtualDesktops: { ...virtualDesktops, pinned: ["4"] },
   });
-  assert.deepEqual(hwnds(result), [4, 1, 3]);
+  assert.deepEqual(ids(result), ["4", "1", "3"]);
 });
