@@ -10,15 +10,14 @@ pub struct SysTrayIcon {
     /// its (window handle + uid). Will not change for the lifetime of the icon.
     pub session_id: String,
 
-    /// Persistent identifier assigned by Windows to the icon: the name of its subkey under
-    /// `HKCU\Control Panel\NotifyIconSettings`, bound to the executable that registered the
-    /// icon plus its uid or guid. Unlike the session id it survives sessions.
+    /// Persistent identifier of the icon: its guid, or the executable that registered it plus
+    /// its uid. Unlike the session id it survives sessions, and it is shared by every instance
+    /// of a multi-instance app.
     ///
-    /// Only used to access the icon settings (pinned state and order). It doesn't exist on
-    /// Windows 10 or when Explorer never persisted the icon.
-    ///
-    /// It is a u64 on Windows, exposed as string because it exceeds the JS safe integer range.
-    pub registry_key: Option<String>,
+    /// Identifies the icon settings stored by Seelen (pinned state and order), `None` when the
+    /// executable of the icon is unknown, in that case the icon can't be pinned nor sorted.
+    #[serde(default)]
+    pub key: Option<String>,
 
     /// Path of the executable that registered the icon.
     pub executable_path: PathBuf,
@@ -75,9 +74,8 @@ pub struct SysTrayIcon {
     /// This is determined by the `NIS_HIDDEN` flag in the icon's state.
     pub is_visible: bool,
 
-    /// Whether the icon is shown directly on the taskbar, otherwise it is only
-    /// shown in the tray overflow. Stored by Windows as `IsPromoted` on the icon's
-    /// registry entry, always `false` for icons without registry entry.
+    /// Whether the icon is shown directly on the toolbar, otherwise it is only shown in
+    /// the tray popup. Stored by Seelen per `key`, always `false` for icons without key.
     pub is_promoted: bool,
 }
 

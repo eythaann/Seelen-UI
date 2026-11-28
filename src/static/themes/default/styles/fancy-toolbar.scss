@@ -47,6 +47,10 @@
   img {
     border-radius: calc(var(--config-item-size) * 0.3);
   }
+
+  .ft-image-mask {
+    background-color: var(--slu-std-fg-color);
+  }
 }
 
 .ft-bar-item-badge {

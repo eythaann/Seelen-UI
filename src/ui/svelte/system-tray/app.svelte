@@ -3,7 +3,7 @@
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { DragDropProvider } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
-  import { onDestroy } from "svelte";
+  import { onDestroy, untrack } from "svelte";
   import { createDragDropManager } from "libs/ui/dnd.ts";
   import TrayEntry from "./TrayEntry.svelte";
 
@@ -29,7 +29,21 @@
 
   // svelte-ignore state_referenced_locally
   let itemsSnapshop = $state.raw(items);
+  // svelte-ignore state_referenced_locally
+  let snapshotIds = items.map((item) => item.sessionId);
   $effect(() => {
+    const ids = items.map((item) => item.sessionId);
+    const sameIcons = ids.length === snapshotIds.length && ids.every((id, i) => id === snapshotIds[i]);
+    snapshotIds = ids;
+
+    if (sameIcons) {
+      // only the data of the icons changed (tooltip, image...), refresh them keeping the
+      // order of the drag in progress instead of cancelling it
+      const byId = new Map(items.map((item) => [item.sessionId, item]));
+      itemsSnapshop = untrack(() => itemsSnapshop).map((item) => byId.get(item.sessionId) ?? item);
+      return;
+    }
+
     manager.actions.stop({ canceled: true });
     itemsSnapshop = items;
   });

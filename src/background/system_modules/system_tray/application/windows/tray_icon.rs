@@ -2,7 +2,6 @@ use std::{
     collections::HashSet,
     hash::{DefaultHasher, Hash, Hasher},
     path::PathBuf,
-    time::Duration,
 };
 
 use seelen_core::system_state::{SysTrayIcon, SystrayIconAction, WindowHandle, WindowIdentity};
@@ -22,18 +21,12 @@ use windows::Win32::{
 use crate::{
     error::ResultLogExt,
     platform::window::Window,
-    system_modules::system_tray::application::windows::{
-        PendingIcon, RegistryNotifyIcon, TrayState, find_registry_notify_icon, util::Util,
-    },
-    utils::{constants::SEELEN_COMMON, spawn_named_thread},
+    system_modules::system_tray::application::windows::{TrayState, util::Util},
+    utils::constants::SEELEN_COMMON,
     windows_api::{WindowsApi, icon::convert_hicon_to_rgba_image},
 };
-use slu_ipc::messages::{IconEventData, Win32TrayEvent};
+use slu_ipc::messages::{IconEventData, TrayIconPatch, Win32TrayEvent};
 
-/// How many times (and how often) to look for the registry entry of a new icon,
-/// Explorer writes it after the hook has already reported the icon.
-const REGISTRY_LOOKUP_ATTEMPTS: u32 = 10;
-const REGISTRY_LOOKUP_INTERVAL: Duration = Duration::from_millis(200);
 /// Events that can be emitted by `Systray`.
 #[derive(Clone, Debug, Eq, PartialEq)]
 #[allow(clippy::enum_variant_names)]
@@ -164,14 +157,8 @@ impl TrayState {
     /// doesn't exist was removed).
     pub(super) fn process_event(&self, event: Win32TrayEvent) -> Option<SystrayEvent> {
         match event {
-            Win32TrayEvent::IconAdd { mut data } => {
-                fill_missing_tooltip(&mut data);
-                self.process_nim_add(&data)
-            }
-            Win32TrayEvent::IconUpdate { mut data } => {
-                fill_missing_tooltip(&mut data);
-                self.process_nim_update(&data)
-            }
+            Win32TrayEvent::IconAdd { data } => self.process_nim_add(&data),
+            Win32TrayEvent::IconUpdate { patch } => self.process_nim_update(&patch),
             Win32TrayEvent::IconRemove { data } => self.process_nim_delete(&data),
         }
     }
@@ -180,53 +167,23 @@ impl TrayState {
     /// `TaskbarCreated`, so an already stored icon is updated instead.
     fn process_nim_add(&self, icon_data: &IconEventData) -> Option<SystrayEvent> {
         if let Some(stored) = self.find_stored_icon(icon_data) {
-            return self.update_stored_icon(stored, icon_data);
+            return self.update_stored_icon(stored, &TrayIconPatch::from(icon_data.clone()));
         }
-
-        // Skip icons that cannot be identified.
-        let identity = session_identity(icon_data)?;
-        let window_path = window_program_path(icon_data);
-
-        let Some(entry) =
-            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)
-        else {
-            self.defer_until_registered(identity, icon_data.clone(), window_path);
-            return None;
-        };
-
-        self.pending.remove(&identity);
-        self.store_new_icon(icon_data, Some(entry), window_path)
+        self.store_new_icon(icon_data)
     }
 
-    /// `NIM_MODIFY`: updates a known icon. An unknown icon was added before the hook
-    /// was installed (e.g. shell icons), so it is added as on `NIM_ADD`.
-    fn process_nim_update(&self, icon_data: &IconEventData) -> Option<SystrayEvent> {
+    /// `NIM_MODIFY` / `NIM_SETVERSION`: patches a known icon. An unknown icon was added
+    /// before the hook was installed (e.g. shell icons), so it is added as on `NIM_ADD`.
+    fn process_nim_update(&self, patch: &TrayIconPatch) -> Option<SystrayEvent> {
+        let icon_data = &IconEventData::from(patch.clone());
         if let Some(stored) = self.find_stored_icon(icon_data) {
-            return self.update_stored_icon(stored, icon_data);
+            return self.update_stored_icon(stored, patch);
         }
-
-        let identity = session_identity(icon_data)?;
-        let window_path = window_program_path(icon_data);
-
-        if self.pending.contains_key(&identity) {
-            self.defer_until_registered(identity, icon_data.clone(), window_path);
-            return None;
-        }
-
-        let Some(entry) =
-            find_registry_notify_icon(window_path.as_deref(), icon_data.guid, icon_data.uid)
-        else {
-            self.defer_until_registered(identity, icon_data.clone(), window_path);
-            return None;
-        };
-        self.store_new_icon(icon_data, Some(entry), window_path)
+        self.store_new_icon(icon_data)
     }
 
-    /// `NIM_DELETE`: removes the icon, or stops waiting for it if still pending.
+    /// `NIM_DELETE`: removes the icon.
     fn process_nim_delete(&self, icon_data: &IconEventData) -> Option<SystrayEvent> {
-        if let Some(identity) = session_identity(icon_data) {
-            self.pending.remove(&identity);
-        }
         let session_id = self.find_stored_icon(icon_data)?.session_id;
         log::trace!("Tray icon removed: {}", session_id);
         self.icons.remove(&session_id);
@@ -235,13 +192,23 @@ impl TrayState {
         Some(SystrayEvent::IconRemove(session_id))
     }
 
-    /// Applies the fields set in `icon_data` over the stored icon.
+    /// Applies the fields declared by the patch over the stored icon, the others are kept.
     /// Returns `None` if nothing changed.
     fn update_stored_icon(
         &self,
         mut icon: SysTrayIcon,
-        icon_data: &IconEventData,
+        patch: &TrayIconPatch,
     ) -> Option<SystrayEvent> {
+        let mut icon_data = patch.clone();
+        // a cleared tooltip falls back to the app name, as on creation
+        if icon_data.tooltip.as_ref().is_some_and(|t| t.is_empty()) {
+            let window_handle = icon_data
+                .window_handle
+                .or(icon.window_handle.map(|w| w.handle));
+            icon_data.tooltip = Some(app_name(window_handle).unwrap_or_default());
+        }
+        let icon_data = &icon_data;
+
         if !has_change(&icon, icon_data) {
             return None;
         }
@@ -295,53 +262,12 @@ impl TrayState {
         Some(SystrayEvent::IconUpdate(icon))
     }
 
-    /// Stores an icon seen for the first time, linked to its registry entry if any.
-    ///
-    /// The entry may already be held by a visible icon that adopted it (see
-    /// `adopt_hidden_sibling_entry`), a hidden icon never takes it back, while a
-    /// visible icon replaces the one holding it.
-    fn store_new_icon(
-        &self,
-        icon_data: &IconEventData,
-        entry: Option<RegistryNotifyIcon>,
-        window_path: Option<PathBuf>,
-    ) -> Option<SystrayEvent> {
+    /// Stores an icon seen for the first time.
+    fn store_new_icon(&self, icon_data: &IconEventData) -> Option<SystrayEvent> {
+        // Skip icons that cannot be identified.
         let session_id = session_identity(icon_data)?;
-
-        if let Some(entry) = &entry {
-            let holds_entry = |icon: &SysTrayIcon| icon.registry_key.as_ref() == Some(&entry.key);
-            if icon_data.is_visible == Some(false) {
-                if self.icons.any(|(_, icon)| holds_entry(icon)) {
-                    log::trace!(
-                        "Hidden tray icon ignored, its registry entry is taken: {}",
-                        entry.key
-                    );
-                    return None;
-                }
-            } else {
-                let mut replaced = Vec::new();
-                self.icons.retain(|(id, icon)| {
-                    let holds = holds_entry(icon);
-                    if holds {
-                        replaced.push(id.clone());
-                    }
-                    !holds
-                });
-                for id in &replaced {
-                    self.owners.remove(id);
-                }
-            }
-        }
-
-        let (registry_key, is_promoted, executable_path) = match entry {
-            Some(entry) => (
-                Some(entry.key),
-                entry.is_promoted,
-                window_path.unwrap_or(entry.executable_path),
-            ),
-            None => (None, false, window_path.unwrap_or_default()),
-        };
-        log::trace!("Tray icon added: {session_id} {registry_key:?} ({executable_path:?})");
+        let executable_path = window_program_path(icon_data).unwrap_or_default();
+        log::trace!("Tray icon added: {session_id} ({executable_path:?})");
 
         let window_handle = icon_data.window_handle.map(|h| Window::from(h).id());
         let image = icon_data.icon_handle.and_then(|handle| {
@@ -350,12 +276,19 @@ impl TrayState {
 
         let icon = SysTrayIcon {
             session_id,
-            registry_key,
+            // the user settings are applied by the manager
+            key: None,
             executable_path,
             uid: icon_data.uid,
             window_handle,
             guid: icon_data.guid,
-            tooltip: icon_data.tooltip.clone().unwrap_or_default(),
+            // icons without tooltip are named after their app
+            tooltip: icon_data
+                .tooltip
+                .clone()
+                .filter(|tooltip| !tooltip.is_empty())
+                .or_else(|| app_name(icon_data.window_handle))
+                .unwrap_or_default(),
             icon_handle: icon_data.icon_handle,
             icon_image_hash: image.as_ref().map(|image| image.hash.clone()),
             icon_path: image.as_ref().map(|image| image.path.clone()),
@@ -364,7 +297,7 @@ impl TrayState {
             version: icon_data.version,
             // an icon added without state is visible
             is_visible: icon_data.is_visible.unwrap_or(true),
-            is_promoted,
+            is_promoted: false,
         };
 
         if let Some(window_handle) = icon.window_handle {
@@ -372,119 +305,6 @@ impl TrayState {
         }
         self.icons.upsert(icon.session_id.clone(), icon.clone());
         Some(SystrayEvent::IconAdd(icon))
-    }
-
-    /// Explorer may persist an app's entry under a hidden icon of the same window
-    /// instead of the visible one (e.g. Task Manager keeps it under one of its
-    /// hidden icons, used as `NIS_SHAREDICON` image sources, while the visible
-    /// icon has no entry). So a visible icon without entry takes over the entry
-    /// of a hidden sibling, replacing it.
-    fn adopt_hidden_sibling_entry(
-        &self,
-        icon_data: &IconEventData,
-        window_path: Option<PathBuf>,
-    ) -> Option<SystrayEvent> {
-        if icon_data.guid.is_some() || icon_data.is_visible == Some(false) {
-            return None;
-        }
-        let window_handle = icon_data.window_handle?;
-
-        let hidden_siblings: Vec<SysTrayIcon> = self.icons.with_lock(|icons| {
-            icons
-                .values()
-                .filter(|icon| {
-                    icon.window_handle.map(|w| w.handle) == Some(window_handle)
-                        && icon.guid.is_none()
-                        && !icon.is_visible
-                })
-                .cloned()
-                .collect()
-        });
-
-        let (sibling, entry) = hidden_siblings.into_iter().find_map(|sibling| {
-            let entry = find_registry_notify_icon(window_path.as_deref(), None, sibling.uid)?;
-            Some((sibling, entry))
-        })?;
-
-        log::trace!(
-            "Tray icon {:?} adopted the registry entry of its hidden sibling {:?}: {}",
-            icon_data.uid,
-            sibling.uid,
-            entry.key
-        );
-        self.store_new_icon(icon_data, Some(entry), window_path)
-    }
-
-    /// Holds an icon whose registry entry doesn't exist yet and re-dispatches it
-    /// once Explorer writes the entry. Later updates are merged into the held data.
-    ///
-    /// Hidden icons without entry (e.g. Task Manager's `NIS_SHAREDICON` image
-    /// sources) are held until they become visible. If the entry never shows up,
-    /// the icon falls back to the entry of a hidden sibling, or is added without
-    /// entry (always the case on Windows 10, where `NotifyIconSettings` doesn't exist).
-    fn defer_until_registered(
-        &self,
-        identity: String,
-        icon_data: IconEventData,
-        window_path: Option<PathBuf>,
-    ) {
-        let start_lookup = self.pending.with_lock(|pending| {
-            let held = pending
-                .entry(identity.clone())
-                .or_insert_with(|| PendingIcon {
-                    data: icon_data.clone(),
-                    lookup_running: false,
-                });
-            merge_icon_data(&mut held.data, &icon_data);
-            let start = held.data.is_visible != Some(false) && !held.lookup_running;
-            held.lookup_running |= start;
-            start
-        });
-        if !start_lookup {
-            return;
-        }
-
-        let Some(state) = self.me.upgrade() else {
-            return;
-        };
-        log::trace!("Tray icon {identity} not registered yet, waiting for its registry entry");
-        spawn_named_thread("Tray Registry Lookup", move || {
-            for _ in 0..REGISTRY_LOOKUP_ATTEMPTS {
-                std::thread::sleep(REGISTRY_LOOKUP_INTERVAL);
-                let registered = find_registry_notify_icon(
-                    window_path.as_deref(),
-                    icon_data.guid,
-                    icon_data.uid,
-                );
-                if registered.is_none() {
-                    continue;
-                }
-                // None means it was removed meanwhile
-                if let Some(held) = state.pending.remove(&identity) {
-                    state.handle_event(Win32TrayEvent::IconAdd { data: held.data });
-                }
-                return;
-            }
-            let manager = &state;
-            // None means it was removed meanwhile
-            let Some(held) = manager.pending.remove(&identity) else {
-                return;
-            };
-            if manager
-                .adopt_hidden_sibling_entry(&held.data, window_path.clone())
-                .is_some()
-            {
-                manager.notify_changed();
-                return;
-            }
-            log::warn!("Tray icon {identity} ({window_path:?}) added without registry entry");
-            if manager
-                .store_new_icon(&held.data, None, window_path)
-                .is_some()
-            {
-                manager.notify_changed();
-            }
-        });
     }
 
     /// Sends an action to the systray icon.
@@ -517,6 +337,7 @@ impl TrayState {
         let is_mouse_click = matches!(
             action,
             SystrayIconAction::LeftClick
+                | SystrayIconAction::LeftDoubleClick
                 | SystrayIconAction::RightClick
                 | SystrayIconAction::MiddleClick
         );
@@ -620,16 +441,9 @@ fn window_pid(handle: WindowHandle) -> Option<u32> {
     (pid != 0).then_some(pid)
 }
 
-/// Uses the app name as tooltip when the icon doesn't set one.
-fn fill_missing_tooltip(icon_data: &mut IconEventData) {
-    if icon_data.tooltip.is_some() {
-        return;
-    }
-    if let Some(window_handle) = icon_data.window_handle
-        && let Ok(name) = Window::from(window_handle).app_display_name()
-    {
-        icon_data.tooltip = Some(name);
-    }
+/// Display name of the app owning the window, used as tooltip of icons without one.
+fn app_name(window_handle: Option<WindowHandle>) -> Option<String> {
+    Window::from(window_handle?).app_display_name().ok()
 }
 
 /// Executable of the process that owns the icon's window.
@@ -685,8 +499,8 @@ fn is_glyph_image(icon_image: &image::RgbaImage) -> bool {
     visible.all(|rgb| rgb == base)
 }
 
-/// Checks if the icon would change from the given icon data.
-fn has_change(icon: &SysTrayIcon, data: &IconEventData) -> bool {
+/// Checks if the icon would change from the given patch.
+fn has_change(icon: &SysTrayIcon, data: &TrayIconPatch) -> bool {
     data.uid.is_some_and(|uid| icon.uid != Some(uid))
         || data
             .window_handle
@@ -713,17 +527,4 @@ fn session_identity(data: &IconEventData) -> Option<String> {
         (None, Some(handle), Some(uid)) => Some(format!("{handle:x}_{uid}")),
         _ => None,
     }
-}
-
-/// Applies the fields set in `newer` over `held`.
-fn merge_icon_data(held: &mut IconEventData, newer: &IconEventData) {
-    held.uid = newer.uid.or(held.uid);
-    held.window_handle = newer.window_handle.or(held.window_handle);
-    held.guid = newer.guid.or(held.guid);
-    held.tooltip = newer.tooltip.clone().or(held.tooltip.take());
-    held.icon_handle = newer.icon_handle.or(held.icon_handle);
-    held.callback_message = newer.callback_message.or(held.callback_message);
-    held.version = newer.version.or(held.version);
-    held.is_visible = newer.is_visible.or(held.is_visible);
-    held.shared_icon = newer.shared_icon.or(held.shared_icon);
 }

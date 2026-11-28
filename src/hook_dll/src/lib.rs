@@ -1,6 +1,6 @@
 use slu_ipc::{
     AppIpc,
-    messages::{AppMessage, IconEventData, Win32TaskbarButtonEvent, Win32TrayEvent},
+    messages::{AppMessage, IconEventData, TrayIconPatch, Win32TaskbarButtonEvent, Win32TrayEvent},
 };
 use windows::Win32::{
     Foundation::{HANDLE, HWND, LPARAM, LRESULT, WPARAM},
@@ -72,68 +72,99 @@ struct NotifyIconData {
     balloon_icon_handle: u32,
 }
 
-impl From<NotifyIconData> for IconEventData {
-    fn from(icon_data: NotifyIconData) -> Self {
-        let icon_handle = if icon_data.flags.contains(NIF_ICON) && icon_data.icon_handle != 0 {
-            Some(icon_data.icon_handle as isize)
-        } else {
-            None
-        };
-
-        let guid = if icon_data.flags.contains(NIF_GUID) && icon_data.guid_item != GUID::default() {
-            Some(uuid::Uuid::from_u128(icon_data.guid_item.to_u128()))
-        } else {
-            None
-        };
-
-        let tooltip = if icon_data.flags.contains(NIF_TIP) {
-            let tooltip_len = icon_data.tooltip.iter().position(|&c| c == 0).unwrap_or(0);
-            let tooltip_str = String::from_utf16_lossy(&icon_data.tooltip[..tooltip_len])
-                .replace('\r', "")
-                .to_string();
-            (!tooltip_str.is_empty()).then_some(tooltip_str)
-        } else {
-            None
-        };
-
-        let (window_handle, uid) = if icon_data.window_handle != 0 {
-            (Some(icon_data.window_handle as isize), Some(icon_data.uid))
+impl NotifyIconData {
+    /// Identity of the icon: its guid (`NIF_GUID`), and its window handle + uid.
+    fn identity(&self) -> (Option<uuid::Uuid>, Option<isize>, Option<u32>) {
+        let guid = (self.flags.contains(NIF_GUID) && self.guid_item != GUID::default())
+            .then(|| uuid::Uuid::from_u128(self.guid_item.to_u128()));
+        let (window_handle, uid) = if self.window_handle != 0 {
+            (Some(self.window_handle as isize), Some(self.uid))
         } else {
             (None, None)
         };
+        (guid, window_handle, uid)
+    }
 
-        let callback_message = if icon_data.flags.contains(NIF_MESSAGE) {
-            Some(icon_data.callback_message)
-        } else {
-            None
-        };
+    /// `NIF_TIP`: the tooltip as declared, may be empty (cleared).
+    fn tooltip(&self) -> Option<String> {
+        if !self.flags.contains(NIF_TIP) {
+            return None;
+        }
+        let len = self
+            .tooltip
+            .iter()
+            .position(|&c| c == 0)
+            .unwrap_or(self.tooltip.len());
+        Some(String::from_utf16_lossy(&self.tooltip[..len]).replace('\r', ""))
+    }
 
-        let version = if unsafe { icon_data.anonymous.uVersion } > 0
-            && unsafe { icon_data.anonymous.uVersion } <= 4
-        {
-            Some(unsafe { icon_data.anonymous.uVersion })
-        } else {
-            None
-        };
+    /// `NIF_ICON` with a non null `HICON`.
+    fn icon_handle(&self) -> Option<isize> {
+        (self.flags.contains(NIF_ICON) && self.icon_handle != 0)
+            .then_some(self.icon_handle as isize)
+    }
 
-        // Only the state bits included in the mask are applied.
-        let state_bit = |bit: NOTIFY_ICON_STATE| {
-            (icon_data.flags.contains(NIF_STATE) && icon_data.state_mask.contains(bit))
-                .then(|| icon_data.state.contains(bit))
-        };
-        let is_visible = state_bit(NIS_HIDDEN).map(|hidden| !hidden);
-        let shared_icon = state_bit(NIS_SHAREDICON);
+    /// `NIF_MESSAGE`
+    fn callback_message(&self) -> Option<u32> {
+        self.flags
+            .contains(NIF_MESSAGE)
+            .then_some(self.callback_message)
+    }
 
+    /// `uVersion`, it shares its memory with `uTimeout` (`NIF_INFO`).
+    fn version(&self) -> Option<u32> {
+        let version = unsafe { self.anonymous.uVersion };
+        (version > 0 && version <= 4).then_some(version)
+    }
+
+    /// Only the state bits included in the mask are applied.
+    fn state_bit(&self, bit: NOTIFY_ICON_STATE) -> Option<bool> {
+        (self.flags.contains(NIF_STATE) && self.state_mask.contains(bit))
+            .then(|| self.state.contains(bit))
+    }
+
+    /// Changes declared by an `NIM_MODIFY` call.
+    fn modify_patch(&self) -> TrayIconPatch {
+        let (guid, window_handle, uid) = self.identity();
+        TrayIconPatch {
+            uid,
+            window_handle,
+            guid,
+            tooltip: self.tooltip(),
+            icon_handle: self.icon_handle(),
+            callback_message: self.callback_message(),
+            version: None,
+            is_visible: self.state_bit(NIS_HIDDEN).map(|hidden| !hidden),
+            shared_icon: self.state_bit(NIS_SHAREDICON),
+        }
+    }
+
+    /// `NIM_SETVERSION` only changes the version, the other fields are ignored by the shell.
+    fn set_version_patch(&self) -> TrayIconPatch {
+        let (guid, window_handle, uid) = self.identity();
+        TrayIconPatch {
+            uid,
+            window_handle,
+            guid,
+            version: self.version(),
+            ..Default::default()
+        }
+    }
+}
+
+impl From<NotifyIconData> for IconEventData {
+    fn from(icon_data: NotifyIconData) -> Self {
+        let (guid, window_handle, uid) = icon_data.identity();
         IconEventData {
             uid,
             window_handle,
             guid,
-            tooltip,
-            icon_handle,
-            callback_message,
-            version,
-            is_visible,
-            shared_icon,
+            tooltip: icon_data.tooltip().filter(|tooltip| !tooltip.is_empty()),
+            icon_handle: icon_data.icon_handle(),
+            callback_message: icon_data.callback_message(),
+            version: icon_data.version(),
+            is_visible: icon_data.state_bit(NIS_HIDDEN).map(|hidden| !hidden),
+            shared_icon: icon_data.state_bit(NIS_SHAREDICON),
         }
     }
 }
@@ -219,12 +250,21 @@ unsafe fn process_tray_message(msg: &CWPSTRUCT) -> Option<Win32TrayEvent> {
         }
 
         let tray_message = &*copy_data.lpData.cast::<ShellTrayMessage>();
-        let icon_data: IconEventData = tray_message.icon_data.into();
+        let icon_data = tray_message.icon_data;
 
         match NOTIFY_ICON_MESSAGE(tray_message.message_type) {
-            NIM_ADD => Some(Win32TrayEvent::IconAdd { data: icon_data }),
-            NIM_MODIFY | NIM_SETVERSION => Some(Win32TrayEvent::IconUpdate { data: icon_data }),
-            NIM_DELETE => Some(Win32TrayEvent::IconRemove { data: icon_data }),
+            NIM_ADD => Some(Win32TrayEvent::IconAdd {
+                data: icon_data.into(),
+            }),
+            NIM_MODIFY => Some(Win32TrayEvent::IconUpdate {
+                patch: icon_data.modify_patch(),
+            }),
+            NIM_SETVERSION => Some(Win32TrayEvent::IconUpdate {
+                patch: icon_data.set_version_patch(),
+            }),
+            NIM_DELETE => Some(Win32TrayEvent::IconRemove {
+                data: icon_data.into(),
+            }),
             _ => None,
         }
     }

@@ -12,6 +12,7 @@
     content,
     tooltip,
     onClick,
+    onDoubleClick,
     onAuxClick,
     onContextMenu,
   }: EvaluatedButtonProps & { parentId: string } = $props();
@@ -19,6 +20,7 @@
   let styleString = $derived(styleToString(style));
 
   const onClickExec = $derived(compileSandboxed(onClick));
+  const onDoubleClickExec = $derived(compileSandboxed(onDoubleClick));
   const onAuxClickExec = $derived(compileSandboxed(onAuxClick));
   const onContextMenuExec = $derived(compileSandboxed(onContextMenu));
 </script>
@@ -31,11 +33,23 @@
   data-tooltip-origin-y={settingsState.tooltipY}
   style={styleString}
   onclick={(e) => {
+    // the second click of a double click is handled by `onDoubleClick`
+    if (onDoubleClickExec && e.detail === 2) {
+      return;
+    }
     if (onClickExec) {
       evalActionSanboxed(parentId, onClickExec, {});
     }
   }}
+  ondblclick={() => {
+    if (onDoubleClickExec) {
+      evalActionSanboxed(parentId, onDoubleClickExec, {});
+    }
+  }}
   onauxclick={(e) => {
+    if (e.button !== 1) {
+      return;
+    }
     if (onAuxClickExec) {
       evalActionSanboxed(parentId, onAuxClickExec, {});
     }

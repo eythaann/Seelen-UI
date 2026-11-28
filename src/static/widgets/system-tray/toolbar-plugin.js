@@ -12,6 +12,11 @@ const items = trayIcons
         action: "LeftClick",
       })`;
 
+    const onDoubleClick = `invoke(SeelenCommand.SendSystemTrayIconAction, {
+        id: "${icon.sessionId}",
+        action: "LeftDoubleClick",
+      })`;
+
     const onAuxClick = `invoke(SeelenCommand.SendSystemTrayIconAction, {
         id: "${icon.sessionId}",
         action: "MiddleClick",
@@ -25,11 +30,14 @@ const items = trayIcons
     return Button({
       tooltip: icon.tooltip,
       onClick,
+      onDoubleClick,
       onAuxClick,
       onContextMenu,
       content: Image({
         path: icon.iconPath,
         version: icon.iconImageHash,
+        // single color glyphs drawn for the taskbar theme, tinted by the theme instead
+        isMask: icon.isGlyph,
       }),
     });
   });

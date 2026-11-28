@@ -179,12 +179,67 @@ pub struct IconEventData {
     pub shared_icon: Option<bool>,
 }
 
+impl From<TrayIconPatch> for IconEventData {
+    fn from(patch: TrayIconPatch) -> Self {
+        Self {
+            uid: patch.uid,
+            window_handle: patch.window_handle,
+            guid: patch.guid,
+            tooltip: patch.tooltip,
+            icon_handle: patch.icon_handle,
+            callback_message: patch.callback_message,
+            version: patch.version,
+            is_visible: patch.is_visible,
+            shared_icon: patch.shared_icon,
+        }
+    }
+}
+
+/// Changes of an `NIM_MODIFY` / `NIM_SETVERSION` call over an existing icon. Besides the
+/// identity of the icon (guid, or window handle + uid), a field is `Some` only when the call
+/// declares it (`NIF_TIP`, `NIF_ICON`, `NIF_MESSAGE`, `NIF_STATE` + state mask, `NIM_SETVERSION`),
+/// every other field keeps its current value.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq, Eq)]
+pub struct TrayIconPatch {
+    pub uid: Option<u32>,
+    pub window_handle: Option<isize>,
+    pub guid: Option<uuid::Uuid>,
+    /// `NIF_TIP`, an empty string clears the tooltip.
+    pub tooltip: Option<String>,
+    /// `NIF_ICON` with a non null `HICON`.
+    pub icon_handle: Option<isize>,
+    /// `NIF_MESSAGE`
+    pub callback_message: Option<u32>,
+    /// Only set by `NIM_SETVERSION`.
+    pub version: Option<u32>,
+    /// `NIS_HIDDEN` inverted, only when included in the state mask.
+    pub is_visible: Option<bool>,
+    /// `NIS_SHAREDICON`, only when included in the state mask.
+    pub shared_icon: Option<bool>,
+}
+
+impl From<IconEventData> for TrayIconPatch {
+    fn from(data: IconEventData) -> Self {
+        Self {
+            uid: data.uid,
+            window_handle: data.window_handle,
+            guid: data.guid,
+            tooltip: data.tooltip,
+            icon_handle: data.icon_handle,
+            callback_message: data.callback_message,
+            version: data.version,
+            is_visible: data.is_visible,
+            shared_icon: data.shared_icon,
+        }
+    }
+}
+
 /// System tray events captured by the hook
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(tag = "type")]
 pub enum Win32TrayEvent {
     IconAdd { data: IconEventData },
-    IconUpdate { data: IconEventData },
+    IconUpdate { patch: TrayIconPatch },
     IconRemove { data: IconEventData },
 }
 

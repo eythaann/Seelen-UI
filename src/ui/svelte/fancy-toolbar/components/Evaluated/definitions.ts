@@ -31,6 +31,8 @@ const EvaluatedImagePropsSchema = z.object({
   path: z.string().nullish(),
   /** change it to force the image to be reloaded (e.g. when the file is overwritten in place) */
   version: z.union([z.string(), z.number()]).nullish(),
+  /** use the image as alpha mask tinted with the text color (single color glyphs) */
+  isMask: z.boolean().nullish(),
 });
 
 export type EvaluatedButtonProps = z.infer<typeof EvaluatedButtonPropsSchema>;
@@ -39,6 +41,7 @@ const EvaluatedButtonPropsSchema = z.object({
   content: z.unknown().nullish(),
   tooltip: z.string().nullish(),
   onClick: z.string().nullish(),
+  onDoubleClick: z.string().nullish(),
   onAuxClick: z.string().nullish(),
   onContextMenu: z.string().nullish(),
 });

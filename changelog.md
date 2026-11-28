@@ -19,8 +19,16 @@
   or its thumbnail for videos/themed wallpapers, black if none), so system screens like the admin (UAC) prompt match
   Seelen UI. The user's own wallpaper (or slideshow) is restored when Seelen UI is closed or the wallpaper manager is
   disabled.
+- system tray: the pinned state and order of the icons are now stored by Seelen UI instead of the Windows registry, so
+  they also work on Windows 10. The current Windows settings are imported once.
+- toolbar plugins: `Image()` accepts `isMask` and `Button()` accepts `onDoubleClick`.
 
 ### fix
+
+- system tray: only one icon was shown for apps running several instances (e.g. QQ with several accounts) (#1989).
+- system tray: icon updates replacing the tooltip of the app with its name.
+- system tray: right click sent twice (and as middle click on the toolbar), double click not available on the toolbar,
+  and glyph icons invisible on the toolbar with light themes.
 
 - media popup: mixer only controlling one of the audio sessions of apps playing from several processes (e.g. Discord).
 - toolbar, dock and other always-on-top widgets going behind other windows after opening WinUI 3 apps (e.g. WhatsApp),

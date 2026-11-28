@@ -163,9 +163,12 @@ Run with `{ ...resolvedScopes, ...resolvedRemoteData, t }`, where `t(key, args)`
   - `Icon({ name })` — an icon from the bundled icon set. `icon(name)` is a legacy alias of `Icon({ name })`, kept only
     for backward compatibility
   - `AppIcon(...)` — an application icon
-  - `Image({ path | url, version? })` — an image element; pass `version` (any string or number that changes with the
-    file contents) to force a reload when the file is overwritten in place
-  - `Button(...)` — a clickable button element
+  - `Image({ path | url, version?, isMask? })` — an image element; pass `version` (any string or number that changes
+    with the file contents) to force a reload when the file is overwritten in place, and `isMask: true` to draw a single
+    color image (a glyph) as a shape tinted with the text color, so it stays visible on light and dark themes
+  - `Button({ content, tooltip?, onClick?, onDoubleClick?, onAuxClick?, onContextMenu? })` — a clickable button element;
+    each action is a script run on that event. When `onDoubleClick` is set, the second click of a double click doesn't
+    run `onClick`, and `onAuxClick` doesn't run for the right button when `onContextMenu` is set
   - `Group(...)` — a container grouping other elements
 
 ```js title="src/static/plugins/tb_cpu_usage/plugin/template.js"

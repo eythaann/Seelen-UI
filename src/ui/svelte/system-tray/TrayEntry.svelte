@@ -65,7 +65,12 @@
     data-skin="transparent"
     onclick={(e) => onClick(e, item.sessionId)}
     ondblclick={(e) => onDoubleClick(e, item.sessionId)}
-    onauxclick={(e) => onClick(e, item.sessionId)}
+    onauxclick={(e) => {
+      // `auxclick` is also fired for the right button, already handled by `oncontextmenu`
+      if (e.button === 1) {
+        onClick(e, item.sessionId);
+      }
+    }}
     oncontextmenu={(e) => onClick(e, item.sessionId)}
     onmouseenter={() => {
       // invoke(SeelenCommand.SendSystemTrayIconAction, {
@@ -114,7 +119,7 @@
   <button
     data-skin="transparent"
     class="system-tray-item-pin"
-    disabled={!item.registryKey}
+    disabled={!item.key}
     onclick={() => setPinned(item.sessionId, !item.isPromoted)}
   >
     <Icon name={item.isPromoted ? "TbPinnedOff" : "TbPin"} />
